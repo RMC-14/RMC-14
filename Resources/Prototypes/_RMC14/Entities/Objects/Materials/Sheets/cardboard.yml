@@ -6,7 +6,7 @@
   name: materials-cardboard
   icon: { sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi, state: icon }
   color: "#70736C"
-  price: 0.01
+  price: 0.00026
 
 - type: stack
   id: RMCSheetCardboard
@@ -46,7 +46,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RMCSheetCardboard: 100
+      RMCSheetCardboard: 3750
   - type: Stack
     stackType: RMCSheetCardboard
     count: 50

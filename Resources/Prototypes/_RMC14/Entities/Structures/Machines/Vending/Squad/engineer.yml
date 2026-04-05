@@ -81,8 +81,8 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 13
-    # - id: CMM20MineBox4
-    #   points: 18
+      - id: RMCBoxClaymoreMineFilled
+        points: 18
     # - id: CMM40MFHSMetalFoamGrenade
     #   points: 5
     # - id: RMCElectroshockGrenadex3
@@ -137,8 +137,8 @@
         points: 12
       - id: RMCM85A1Case
         points: 24
-    #- id: CMM56DHeavyMachineGun
-    #  points: 24
+      - id: RMCML66DCase
+        points: 24
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
@@ -152,8 +152,8 @@
         points: 15
       - id: RMCPouchFuelTank
         points: 4
-    #- id: CMSlingPouch
-    #  points: 6
+      - id: RMCPouchSling
+        points: 6
       - id: RMCPouchGeneralLarge
         points: 6
       - id: CMBeltUtilityCombat
@@ -263,6 +263,11 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
+      - id: RMCBeltConstruction
+        recommended: true
+      - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
+        # mandatory: true, TODO allow vendors to mark entries as mandatory
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
       - id: RMCBeltHolsterPistol
@@ -271,12 +276,7 @@
       - id: RMCBeltHolsterSMGPouch
       - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
-      - id: CMBeltUtilityFilled
-        name: M276 pattern toolbelt rig (Full)
-        # mandatory: true, TODO allow vendors to mark entries as mandatory
       - id: RMCBeltGrenade
-      - id: RMCBeltConstruction
-        recommended: true
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -307,9 +307,11 @@
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
+      - id: RMCToolWebbingSmallFilled
+        name: small tool webbing (Full)
+        recommended: true
       - id: CMWebbingBlack
       - id: CMWebbingBrown
-        recommended: true
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
@@ -318,8 +320,6 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
-      - id: RMCToolWebbingSmallFilled
-        name: small tool webbing (Full)
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -379,9 +379,10 @@
         amount: 2
       - id: RMCLightReplacer
         amount: 4
-    # - name: Utility
-    #   entries:
-    #   - id: Sentry Gun Network Laptop
-    #     amount: 4
+    - name: Utility
+      entries:
+      - id: RMCSentryLaptop
+        name: sentry gun network laptop
+        amount: 4
     #   - id: Sentry Gun Network Encryption KEy
     #     amount: 4

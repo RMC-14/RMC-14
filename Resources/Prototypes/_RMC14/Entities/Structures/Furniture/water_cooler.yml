@@ -31,16 +31,16 @@
       bin-container: !type:Container
   - type: Bin
     initialContents:
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
     whitelist:
       requireAll: true
       components:
@@ -52,6 +52,10 @@
   - type: StaticPrice
     price: 500
   - type: RMCMesonsNonviewable
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCWaterCooler

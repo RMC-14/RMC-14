@@ -1,7 +1,7 @@
 # Commanding Officer
 - type: loadout
   id: ColBeretRMC
-  cost: 3 # same price as headwear
+  cost: 0 # Shouldn't cost anything as it is a rank reward.
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -14,7 +14,7 @@
 
 - type: loadout
   id: LtColBeretRMC
-  cost: 3
+  cost: 0 # Shouldn't cost anything as it is a rank reward.
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:

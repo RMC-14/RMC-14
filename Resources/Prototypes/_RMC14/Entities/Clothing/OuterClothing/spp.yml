@@ -21,6 +21,12 @@
     - 0,0,1,1 # 1 slot
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-spp-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformSPP
 
 - type: entity
   parent: RMCArmorSPP
@@ -54,7 +60,7 @@
   parent: RMCArmorSPPSupport
   id: RMCArmorSPPSupportSynth
   name: SPP UL6 synthetic personal armor
-  description: Modified variant of the UL6 personel armor system intended to be useable by Synthetic units. Offers no protection but very little movement impairment.
+  description: Modified variant of the UL6 personal armor system intended to be usable by Synthetic units. Offers no protection but very little movement impairment.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/support.rsi
@@ -152,6 +158,93 @@
     #internal: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-spp-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformSPP
+
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPSOF
+  name: SPP CCC5-L tactical vest
+  description: A lightweight SPP-issued armor vest designed for space operations forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_vest.rsi
+  - type: CMArmor # Covers arms
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 10
+  - type: CMHardArmor
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: Storage
+    grid:
+    - 0,0,7,1 # 4 slots
+
+- type: entity
+  parent: RMCArmorSPPSOF
+  id: RMCArmorSPPSOFFilled
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTacticalPrybar
+    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleAK4047
+    - id: RMCRadioHandheldColony
+
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPSOFHeavy
+  name: SPP CCC5-L heavy tactical vest
+  description: A heavily reinforced SPP-issued tactical vest designed for space operations forces operating in high-risk environments. The CCC5-L Heavy-Plated Tactical Vest features additional polymer-ceramic composite plating across the chest and torso, providing superior protection against ballistic and explosive threats. Despite its bulk, the vest maintains a balance between protection and mobility, with modular pouches for quick access to essential gear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_heavy.rsi
+  - type: CMArmor # Covers arms and groin
+    melee: 20
+    bullet: 25
+    bio: 20
+    explosionArmor: 15
+  - type: CMHardArmor
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: Storage
+    grid:
+    - 0,0,7,1 # 4 slots
+
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPSOFPlated
+  name: SPP CCC5-L plated tactical vest
+  description: A lightweight SPP-issued armor vest designed for space operations forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_plated.rsi
+  - type: CMArmor # Covers arms
+    melee: 15
+    bullet: 25
+    bio: 20
+    explosionArmor: 15
+  - type: CMHardArmor
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: Storage
+    grid:
+    - 0,0,7,1 # 4 slots
 
 # SPP coats
 - type: entity
@@ -211,3 +304,65 @@
     bullet: 10
     bio: 10
     explosionArmor: 10
+
+- type: entity
+  parent: RMCCoatSPPSenior
+  id: RMCCoatSPPSeniorFilled
+  suffix: Filled, Command
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRangefinder
+    - id: CMGauze10
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatOfficerShortWhite
+  name: SPP UL5-W
+  description: A somewhat armored jacket that is primarily utilised by Naval or Marine Infantry COs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarwhitecoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarwhitecoat.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 10
+    explosionArmor: 10
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+
+- type: entity
+  parent: RMCCoatOfficerShortWhite
+  id: RMCCoatOfficerLongWhite
+  name:  SPP UL5-W Shinel
+  description: A longer variant of the Naval UL5-W jacket found mainly during ceremonial functions and the winter months. Primarily used by COs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarwhiteshinel.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarwhiteshinel.rsi
+
+- type: entity
+  parent: RMCCoatOfficerShortWhite
+  id: RMCCoatKommissarShortBlack
+  name: SPP UL5-B
+  description: A somewhat armored jacket that is primarily utilised by Political Kommisars, reminds you of october.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarblackcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarblackcoat.rsi
+
+- type: entity
+  parent: RMCCoatOfficerShortWhite
+  id: RMCCoatKommissarLongBlack
+  name:  SPP UL5-B Shinel
+  description: A longer variant of the Naval UPL5-B jacket found mainly during ceremonial functions and the winter months, this black variant is most common during celebrations of the founding of the SPP, it reminds you of october.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarblackshinel.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarblackshinel.rsi

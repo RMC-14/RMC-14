@@ -106,6 +106,14 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
+  parent: CMMagazinePistolMK80
+  id: RMCMagazinePistolMK80Empty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
   id: RMCCartridgePistol9mmSquashHead
   name: cartridge (9mm Squash-Head)
   parent: CMCartridgePistolBase

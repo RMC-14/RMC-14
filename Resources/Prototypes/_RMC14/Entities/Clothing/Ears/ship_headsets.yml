@@ -244,6 +244,7 @@
     trackerModes:
     - ChiefMilitaryPolice
     - MilitaryWarden
+    - ProvostInspector
 
 - type: entity
   parent: CMHeadsetMPO
@@ -291,12 +292,13 @@
     - ExecutiveOfficer
     - AuxiliarySupportOfficer
     - MilitaryWarden
+    - ProvostInspector
 
 - type: entity
   parent: CMHeadsetCMP
   id: RMCHeadsetMW
   name: marine military warden radio headset
-  description: It seems oddly similar to the CMPs'... Smells like donuts too.
+  description: It seems oddly similar to the CMP's... Smells like donuts too.
   components:
   - type: GrantSquadLeaderTracker
     defaultMode: ChiefMilitaryPolice
@@ -305,6 +307,7 @@
     - ExecutiveOfficer
     - AuxiliarySupportOfficer
     - ChiefMilitaryPolice
+    - ProvostInspector
 
 - type: entity
   parent: RMCHeadsetShip
@@ -470,23 +473,6 @@
     - ProvostDeputyMarshal
     - ProvostChiefInspector
     - ProvostInspector
-
-- type: entity
-  parent: CMHeadsetHighCommand
-  id: RMCHeadsetHighCommandProvostLead
-  suffix: SL Tracker
-  components:
-  - type: GrantSquadLeaderTracker
-    defaultMode: ProvostTeamLeader
-    trackerModes:
-    - ProvostMarshal
-    - ProvostDeputyMarshal
-    - ProvostChiefInspector
-    - ProvostInspector
-    - ProvostTeamLeader
-    - ProvostAdvisor
-    - CommandingOfficer
-    - ExecutiveOfficer
 
 - type: entity
   parent: CMHeadsetSeniorCommand

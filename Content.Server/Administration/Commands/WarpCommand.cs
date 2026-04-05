@@ -13,7 +13,7 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Server.Administration.Commands
 {
-    [AdminCommand(AdminFlags.Admin)]
+    [AdminCommand(AdminFlags.AdminGhost)] //RMC14
     public sealed class WarpCommand : IConsoleCommand
     {
         [Dependency] private readonly IEntityManager _entManager = default!;

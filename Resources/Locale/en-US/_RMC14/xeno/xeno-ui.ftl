@@ -24,6 +24,6 @@ rmc-xeno-tracker-target-HiveLeader = Hive Leader
 rmc-xeno-tracker-target-Tunnel = Tunnel
 rmc-xeno-tracker-target-HiveCore = Hive Core
 
-rmc-xeno-ui-ovi-needed-label = [bold][color=red]The Queen must be in their ovipositor for you to gain points![/color][/bold]
+rmc-xeno-ui-ovi-needed-label = [bold][color=red]The Queen must be in their\novipositor for you to gain points![/color][/bold]
 rmc-xeno-ui-evolution-points = Evolution points: { $points } / { $maxPoints }
 rmc-ui-xeno-strain-confirm = Confirm

@@ -8,7 +8,6 @@ using Content.Server.GameTicking.Events;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Suicide;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.TacticalMap;
@@ -117,6 +116,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, HiveLeaderStatusChangedEvent>(OnHiveLeaderStatusChanged);
 
         SubscribeLocalEvent<MapBlipIconOverrideComponent, MapInitEvent>(OnMapBlipOverrideMapInit);
+
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
@@ -364,7 +364,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
     {
         var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
-        var state = new TacticalMapBuiState(mapName);
+
+        // Get squad objectives if player is in a squad
+        Dictionary<SquadObjectiveType, string>? squadObjectives = null;
+        if (TryComp<SquadMemberComponent>(ent, out var squadMember) &&
+            _squad.TryGetMemberSquad((ent, squadMember), out var squad))
+        {
+            squadObjectives = _squad.GetSquadObjectives((squad.Owner, squad.Comp));
+        }
+
+        var state = new TacticalMapBuiState(mapName, squadObjectives);
         _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
     }
 
@@ -837,11 +846,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (_mobState.IsDead(ent))
         {
             var stage = _unrevivableSystem.GetUnrevivableStage(ent.Owner, 5);
-            if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent) ||
-                HasComp<RMCHasSuicidedComponent>(ent))
-            {
+            if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent))
                 status = TacticalMapBlipStatus.Undefibabble;
-            }
             else if (stage <= 1)
                 status = TacticalMapBlipStatus.Defibabble;
             else if (stage == 2)

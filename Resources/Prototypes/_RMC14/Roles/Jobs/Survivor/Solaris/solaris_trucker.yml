@@ -9,13 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillFireman: 1
-        RMCSkillEngineer: 1
-        RMCSkillConstruction: 2
-        RMCSkillVehicles: 3
-        RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -25,7 +19,6 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetTrucker
-  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorTrucker

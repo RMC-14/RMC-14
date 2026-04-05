@@ -15,6 +15,7 @@
     vaporAmount: 3
     sprayDistance: 5
     sprayVelocity: 5
+    pushbackAmount: 0
   - type: SolutionContainerManager
     solutions:
       spray:
@@ -42,6 +43,9 @@
     quickEquip: false
     slots:
     - Belt
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 90
 
 - type: entity
   parent: CMFireExtinguisher

@@ -7,7 +7,8 @@
   ranks:
     RMCRankCMBMarshal: []
   startingGear: RMCGearSurvivorSolarisCMBMarshal
-  supervisors: cm-job-supervisors-marine-high-command
+  accessGroups:
+  - ColonistCMBSurvivor
   roleWeight: 0.25
   icon: "RMCJobIconBureauMarshal"
   hasIcon: true
@@ -42,6 +43,13 @@
       - Civilian
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetNoGun
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-cmb-marshal
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
@@ -49,7 +57,7 @@
 - type: startingGear
   id: RMCGearSurvivorSolarisCMBMarshal
   equipment:
-    id: RMCIDCardDeputySurvivor
+    id: RMCIDCardCMBMarshalSurvivor
     jumpsuit: RMCMarshalCMBUniformSurvivorMarshal
     outerClothing: RMCArmorM4RLight
     eyes: CMGlassesSecurity
@@ -81,19 +89,6 @@
     - id: RMCWeaponRevolverSpearheadTactitcal
     - id: RMCSpeedLoader357
     - id: RMCSpeedLoader357
-
-- type: entity
-  parent: RMCWeaponRevolverSpearhead
-  id: RMCWeaponRevolverSpearheadTactitcal
-  components:
-  - type: AttachableHolder
-    slots:
-      rmc-aslot-barrel:
-        startingAttachable: RMCAttachmentExtendedBarrel
-      rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS6ReflexSight
-      rmc-aslot-underbarrel:
-        startingAttachable: RMCAttachmentLaserSight
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared._RMC14.Xenonids.Designer;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -63,7 +64,10 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly WeedboundWallSystem _weedboundWall = default!;
+    [Dependency] private readonly DesignerNodeBindingSystem _designerBinding = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
     private readonly HashSet<EntityUid> _intersecting = new();
@@ -89,6 +93,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
         SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnModifierShutdown);
+        SubscribeLocalEvent<XenoWeedsComponent, ComponentRemove>(OnWeedsRemove);
         SubscribeLocalEvent<XenoWeedsComponent, EntityTerminatingEvent>(OnWeedsTerminating);
         SubscribeLocalEvent<XenoWeedsComponent, MapInitEvent>(OnWeedsMapInit);
         SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
@@ -130,7 +135,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         using (args.PushGroup(nameof(XenoWeedsComponent)))
         {
-            args.PushMarkup(Loc.GetString("rmc-xeno-fruit-weed-boost", ("percent", (int) (weeds.Comp.FruitGrowthMultiplier * 100))));
+            args.PushMarkup(Loc.GetString("rmc-xeno-fruit-weed-boost", ("percent", (int)(weeds.Comp.FruitGrowthMultiplier * 100))));
         }
     }
 
@@ -150,6 +155,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private void OnWeedsTerminating(Entity<XenoWeedsComponent> ent, ref EntityTerminatingEvent args)
     {
+        _designerBinding.CleanupWeeds(ent.Owner);
+        _weedboundWall.HandleWeedsTerminating(ent.Owner, ent.Comp);
+
         if (!ent.Comp.IsSource)
         {
             if (_weedsQuery.TryComp(ent.Comp.Source, out var weeds))
@@ -180,16 +188,33 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
             var timed = EnsureComp<TimedDespawnComponent>(spread);
             var offset = _random.Next(ent.Comp.MinRandomDelete, ent.Comp.MaxRandomDelete);
-            timed.Lifetime = (float) offset.TotalSeconds;
+            timed.Lifetime = (float)offset.TotalSeconds;
         }
 
         ent.Comp.Spread.Clear();
         Dirty(ent);
     }
 
+    private void OnWeedsRemove(Entity<XenoWeedsComponent> ent, ref ComponentRemove args)
+    {
+        // ComponentRemove can happen without the entity being deleted (e.g. prototype swaps / admin actions).
+        // Only clear associations in that case; entity deletion should be handled by EntityTerminating to
+        // ensure weedbound structures collapse correctly.
+        if (TerminatingOrDeleted(ent.Owner))
+            return;
+
+        _designerBinding.CleanupWeeds(ent.Owner);
+        _weedboundWall.HandleWeedsShutdown(ent.Owner, ent.Comp);
+    }
+
     private void OnWeedsMapInit(Entity<XenoWeedsComponent> ent, ref MapInitEvent args)
     {
-        foreach (var intersecting in _physics.GetEntitiesIntersectingBody(ent, (int) CollisionGroup.MobLayer))
+        // Weedbound structures register themselves on their own MapInit/Startup.
+        // Only do the expensive rebuild pass if we have serialized runtime bookkeeping to clear.
+        if (ent.Comp.WeedboundStructures.Count > 0)
+            _weedboundWall.RebuildWeedboundForWeeds(ent.Owner);
+
+        foreach (var intersecting in _physics.GetEntitiesIntersectingBody(ent, (int)CollisionGroup.MobLayer))
         {
             if (_affectedQuery.TryComp(intersecting, out var affected) && !affected.OnXenoWeeds)
                 _toUpdate.Add(intersecting);
@@ -273,8 +298,6 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         foreach (var contacting in _intersecting)
         {
-            var isWhitelisted = _entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, contacting);
-
             if (_slowResinQuery.TryComp(contacting, out var slowResin))
             {
                 if (hive == null || !_hive.IsMember(contacting, hive.Hive))
@@ -292,13 +315,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
             if (_fastResinQuery.TryComp(contacting, out var fastResin))
             {
-                // If whitelisted, apply speedup
-                if (isWhitelisted)
-                {
-                    speedResin += fastResin.HiveSpeedModifier;
-                    entriesResin++;
-                }
-                else if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+                if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
                 {
                     speedResin += fastResin.HiveSpeedModifier;
                     entriesResin++;
@@ -312,14 +329,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
             anyWeeds = true;
 
-            // If whitelisted, apply speedup, no slowdown
-            if (isWhitelisted)
-            {
-                    speedWeeds += weeds.SpeedMultiplierXeno;
-                    friendlyWeeds = true;
-                    entriesWeeds++;
-            }
-            else if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+            if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
             {
                 speedWeeds += weeds.SpeedMultiplierXeno;
                 friendlyWeeds = true;
@@ -350,7 +360,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (entriesResin > 0)
             speedResin /= entriesResin;
 
-        //If Weeds is a speedup, let them stack, otherwise treat them as slowdowns
+        //If Weeds is a speedup, let them stack, otherwise treat them as slowdownss
         if ((speedWeeds > 1 || speedResin > 1) && entriesResin > 0 && entriesWeeds > 0)
             finalSpeed = speedWeeds * speedResin;
         else if (entriesResin > 0)
@@ -511,7 +521,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             !_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) ||
             tileDef.ID == ContentTileDefinition.SpaceID ||
             tileDef is ContentTileDefinition { WeedsSpreadable: false } &&
-            !(tileDef is ContentTileDefinition { SemiWeedable: true } &&semiWeedable)
+            !(tileDef is ContentTileDefinition { SemiWeedable: true } && semiWeedable)
             )
         {
             GenericPopup();
@@ -594,6 +604,22 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     public void UpdateQueued(EntityUid update)
     {
         _movementSpeed.RefreshMovementSpeedModifiers(update);
+    }
+
+    public Entity<XenoWeedsComponent> AssignSource(Entity<XenoWeedsComponent?> weeds, Entity<XenoWeedsComponent?> source)
+    {
+        weeds.Comp ??= EnsureComp<XenoWeedsComponent>(weeds);
+        weeds.Comp.IsSource = false;
+        weeds.Comp.Source = source;
+        Dirty(weeds);
+
+        if (Resolve(source, ref source.Comp, false))
+        {
+            source.Comp.Spread.Add(weeds);
+            Dirty(source);
+        }
+
+        return (weeds, weeds.Comp);
     }
 
     public override void Update(float frameTime)

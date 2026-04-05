@@ -20,6 +20,10 @@
     allowedStates:
     - Alive
     - Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -74,6 +78,10 @@
         Heat: 15
   - type: RMCGibOnDeath
     gibChance: 1.0
+  - type: RMCSpawnEntitiesOnGib
+    entities:
+    - RMCDecalSpawnerGibsLesserDrone
+    - RMCGibEffectXenoLesserDrone
   - type: WhitelistPickup
     whitelist:
       components:

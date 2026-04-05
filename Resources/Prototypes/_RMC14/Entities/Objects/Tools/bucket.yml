@@ -63,7 +63,7 @@
     - ChemDispensable
   - type: PhysicalComposition
     materialComposition:
-      RMCPlastic: 50
+      CMSteel: 2000
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -91,6 +91,9 @@
     solutions:
       bucket:
         maxVol: 240
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 4000
 
 - type: entity
   parent: RMCBucket
@@ -135,6 +138,9 @@
     - 240
     - 300
     - 500
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 8000
 
 - type: entity
   parent: RMCBucketJanitorial

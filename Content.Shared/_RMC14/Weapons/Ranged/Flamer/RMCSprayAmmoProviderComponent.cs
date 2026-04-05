@@ -17,4 +17,7 @@ public sealed partial class RMCSprayAmmoProviderComponent : Component, IShootabl
 
     [DataField, AutoNetworkedField]
     public EntProtoId Spawn = "RMCExtinguisherSpray";
+
+    [DataField, AutoNetworkedField]
+    public bool HitUser = true;
 }

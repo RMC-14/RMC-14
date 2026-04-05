@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/edd9c65b095cb55b6739d94587a353a5b3049536/icons/obj/structures/machinery/geothermal.dmi",
+  "size": {
+    "x": 36,
+    "y": 36
+  },
+  "states": [
+    {
+      "name": "off"
+    },
+    {
+      "name": "weld",
+      "delays": [
+        [
+          2,
+          0.1,
+          0.1,
+          0.1,
+          0.05,
+          0.05,
+          0.05
+        ]
+      ]
+    },
+    {
+      "name": "wire",
+      "delays": [
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.7,
+          0.15,
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "wrench",
+      "delays": [
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "on-10",
+      "delays": [
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "on-25",
+      "delays": [
+        [
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125
+        ]
+      ]
+    },
+    {
+      "name": "on-50",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "on-75",
+      "delays": [
+        [
+          0.075,
+          0.075,
+          0.075,
+          0.075,
+          0.075
+        ]
+      ]
+    },
+    {
+      "name": "on-100",
+      "delays": [
+        [
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ]
+      ]
+    },
+    {
+      "name": "cell_missing",
+      "delays": [
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "overlay_left_charged"
+    },
+    {
+      "name": "overlay_right_charged"
+    },
+    {
+      "name": "overlay_left_charging"
+    },
+    {
+      "name": "overlay_right_charging"
+    },
+    {
+      "name": "overlay_left_cell"
+    },
+    {
+      "name": "overlay_right_cell"
+    }
+  ]
+}

@@ -5,7 +5,7 @@
   stackEntity: RMCSheetPlastic
   name: materials-plastic
   icon: { sprite: _RMC14/Objects/Materials/Sheets/plastic.rsi, state: plastic }
-  price: 0.2
+  price: 0.01
 
 - type: stack
   id: RMCPlastic
@@ -39,7 +39,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RMCPlastic: 100
+      RMCPlastic: 2000
   - type: Stack
     stackType: RMCPlastic
     count: 50

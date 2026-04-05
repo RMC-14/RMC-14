@@ -144,7 +144,6 @@ namespace Content.Client.Ghost
 
         private void OnGhostRemove(EntityUid uid, GhostComponent component, ComponentRemove args)
         {
-            _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>(); //RMC14
             _actions.RemoveAction(uid, component.ToggleLightingActionEntity);
             _actions.RemoveAction(uid, component.ToggleFoVActionEntity);
             _actions.RemoveAction(uid, component.ToggleGhostsActionEntity);
@@ -152,6 +151,8 @@ namespace Content.Client.Ghost
 
             if (uid != _playerManager.LocalEntity)
                 return;
+
+            _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>(); //RMC14
 
             GhostVisibility = false;
             PlayerRemoved?.Invoke(component);
@@ -178,6 +179,7 @@ namespace Content.Client.Ghost
         {
             GhostVisibility = false;
             PlayerDetached?.Invoke();
+            _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>(); //RMC14
         }
 
         private void OnGhostWarpsResponse(GhostWarpsResponseEvent msg)

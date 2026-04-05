@@ -351,9 +351,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         if (nearestResinDoor is not null)
         {
-            PreventCollideComponent collisionPreventComp = new();
+            var collisionPreventComp = EnsureComp<PreventCollideComponent>(ent);
             collisionPreventComp.Uid = nearestResinDoor.Value;
-            AddComp(ent, collisionPreventComp);
+            Dirty(ent, collisionPreventComp);
         }
 
         if (TryComp(ent, out FixturesComponent? fixtures))
@@ -365,7 +365,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnParasiteLeapStopped(Entity<XenoParasiteComponent> ent, ref XenoLeapStoppedEvent args)
     {
-        RemCompDeferred<PreventCollideComponent>(ent);
+        RemComp<PreventCollideComponent>(ent);
 
         if (TryComp(ent, out FixturesComponent? fixtures))
         {
@@ -695,8 +695,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 EnsureComp<ParasiteSpentComponent>(uid);
 
                 infectable.BeingInfected = false;
-
-                SetBurstSpawn((infectedVictim, victimComp), para.BurstProto);
                 Dirty(infectedVictim, infectable);
             }
         }
@@ -714,7 +712,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             }
             else
             {
-                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid) || _unrevivable.IsUnrevivable(uid)))
+                if (_mobState.IsDead(uid)
+                    && (HasComp<InfectStopOnDeathComponent>(uid)
+                    || _rotting.IsRotten(uid)
+                    || _unrevivable.IsUnrevivable(uid)
+                    && _unrevivable.DoesKillLarvaOnUnrevivable(uid)))
                 {
                     if (infected.SpawnedLarva != null)
                         TryBurst((uid, infected));

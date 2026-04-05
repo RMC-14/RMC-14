@@ -69,6 +69,13 @@ rmc-iron-container-label-text = Fe
 
 rmc-custom-container-label-text = {$customLabel}
 
+# Set Icon Label Verb
+rmc-set-icon-label-verb = Set icon label
+rmc-set-icon-label-dialog-title = Set On-Sprite Label
+rmc-set-icon-label-dialog-prompt = Label text? ({$max} characters maximum)
+rmc-set-icon-label-cleared = You clear the label off {THE($item)}.
+rmc-set-icon-label-set = You label {THE($item)} with '{$label}' in big, blocky letters.
+
 # Antidepressants
 reagent-name-rmcmethylphenidate = Methylphenidate
 reagent-desc-rmcmethylphenidate = A commonly prescribed psychostimulant that increases activity of the central nervous system. Often used to treat attention deficit hyperactivity disorder (ADHD) and narcolepsy. This drug improves performance primarily in the executive function in the prefrontal cortex (reasoning, inhibiting behaviors, organizing, problem solving, planning ect.)

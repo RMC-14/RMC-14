@@ -1,0 +1,36 @@
+﻿- type: entity
+  abstract: true
+  parent: RMCMapInsertBase
+  id: RMCMapInsertHybrisaBase
+  suffix: Insert Hybrisa
+  components:
+  - type: MapInsert
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: true
+
+- type: entity
+  parent: RMCMapInsertHybrisaBase
+  id: RMCMapInsertHybrisaCLFSpaceport
+  name: CLF Spaceport
+  suffix: Insert Hybrisa
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Hybrisa/clf_spaceport.yml"
+      probability: 1
+      nightmareScenario: clfspaceport
+
+- type: entity
+  parent: RMCMapInsertHybrisaBase
+  id: RMCMapInsertHybrisaTSEAirbase
+  name: TSE Airbase
+  suffix: Insert Hybrisa
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Hybrisa/tse_airbase_survivors.yml"
+      probability: 1
+      nightmareScenario: tse_airbase
+
+# todo: fix the TSE non-surv airbase map insert (armoury is wrong) and make it work with the surv spawn together system

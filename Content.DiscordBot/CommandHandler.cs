@@ -228,38 +228,46 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
 
                 foreach (var linked in patrons)
                 {
-                    var user = await client.Rest.GetGuildUserAsync(Guild, linked.DiscordId);
-                    if (user == null)
+                    try
                     {
-                        if (linked.Player.Patron != null)
+                        var user = await client.Rest.GetGuildUserAsync(Guild, linked.DiscordId);
+                        if (user == null)
+                        {
+                            if (linked.Player.Patron != null)
+                            {
+                                linked.Player.Patron = null;
+                                await Logger.Info($"Removed patron {linked.DiscordId}:{linked.Player.LastSeenUserName}");
+                            }
+
+                            continue;
+                        }
+
+                        var isPatron = false;
+                        foreach (var tier in _tierPriority)
+                        {
+                            if (user.RoleIds.Contains(tier.DiscordRole))
+                            {
+                                isPatron = true;
+                                if (linked.Player.Patron?.Tier.DiscordRole == tier.DiscordRole)
+                                    break;
+
+                                linked.Player.Patron ??= db.RMCPatrons.Add(new RMCPatron { PlayerId = linked.PlayerId })
+                                    .Entity;
+                                linked.Player.Patron.TierId = tier.Id;
+                                await Logger.Info($"Updated patron {user.Username}:{linked.DiscordId}:{linked.Player.LastSeenUserName} with tier {tier.Name}");
+                                break;
+                            }
+                        }
+
+                        if (!isPatron && linked.Player.Patron != null)
                         {
                             linked.Player.Patron = null;
-                            await Logger.Info($"Removed patron :{linked.DiscordId}:{linked.Player.LastSeenUserName}");
-                        }
-
-                        continue;
-                    }
-
-                    var isPatron = false;
-                    foreach (var tier in _tierPriority)
-                    {
-                        if (user.RoleIds.Contains(tier.DiscordRole))
-                        {
-                            isPatron = true;
-                            if (linked.Player.Patron?.Tier.DiscordRole == tier.DiscordRole)
-                                break;
-
-                            linked.Player.Patron ??= db.RMCPatrons.Add(new RMCPatron { PlayerId = linked.PlayerId }).Entity;
-                            linked.Player.Patron.TierId = tier.Id;
-                            await Logger.Info($"Updated patron {user.Username}:{linked.DiscordId}:{linked.Player.LastSeenUserName} with tier {tier.Name}");
-                            break;
+                            await Logger.Info($"Removed patron {user.Username}:{linked.DiscordId}:{linked.Player.LastSeenUserName}");
                         }
                     }
-
-                    if (!isPatron && linked.Player.Patron != null)
+                    catch (Exception e)
                     {
-                        linked.Player.Patron = null;
-                        await Logger.Info($"Removed patron {user.Username}:{linked.DiscordId}:{linked.Player.LastSeenUserName}");
+                        await Logger.Error($"Error updating patron with discord id {linked.DiscordId} and player id {linked.PlayerId}", e);
                     }
                 }
 

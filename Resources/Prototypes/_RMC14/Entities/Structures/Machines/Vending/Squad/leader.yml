@@ -27,8 +27,8 @@
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
       - id: RMCKitPyroMini
-    #- id: CMM2CHeavyMachineGun
-    #- id: CMM56DHeavyMachineGun
+      - id: RMCM2CCase
+      - id: RMCML66DCase
       - id: RMCM85A1Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
@@ -118,8 +118,8 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 13
-    # - id: CMM20MineBoxx4mines
-    #   points: 20
+      - id: RMCBoxClaymoreMineFilled
+        points: 20
     # - id: CMM40MFHSMetalFoamGrenade
     #   points: 5
     # - id: RMCElectroshockGrenadex3
@@ -292,7 +292,7 @@
       - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
         recommended: true
-      #- id: CMSlingPouch
+      - id: RMCPouchSling
       - id: RMCPouchMagazineLarge
       - id: RMCPouchShotgunLarge
       - id: RMCPouchMagazinePistolLarge

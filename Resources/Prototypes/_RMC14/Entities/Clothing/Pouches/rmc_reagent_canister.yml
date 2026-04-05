@@ -60,6 +60,12 @@
   - type: CMStorageVisualizer
     storageClosed: closedLayer
     storageOpen: openLayer
+  - type: PhysicalComposition
+    materialComposition: # Generates glass if canister is ejected and recycled. Parity behavior btw.
+      CMGlass: 2000 # +0.4 glass -0.25 plastic sheets.
+      RMCPlastic: 2000
+  - type: StaticPrice
+    price: 24
 
 - type: entity
   parent: RMCPouchReagentCanister

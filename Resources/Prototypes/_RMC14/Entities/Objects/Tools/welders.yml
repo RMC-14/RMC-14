@@ -118,6 +118,10 @@
     quickEquip: false
     slots:
     - Suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 70
+      CMGlass: 30
 
 - type: entity
   parent: RMCWelderBase
@@ -130,6 +134,18 @@
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 100
+        maxVol: 100 # TODO RMC14 40 when welders are fixed
+
+- type: entity
+  parent: CMWelder
+  id: RMCWelderEmpty # for autolathe
+  suffix: Empty
+  components:
+  - type: RequiresEyeProtection
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents: []
         maxVol: 100 # TODO RMC14 40 when welders are fixed
 
 - type: entity
@@ -189,6 +205,10 @@
         - ReagentId: WeldingFuel
           Quantity: 150
         maxVol: 150 # TODO RMC14 60 when welders are fixed
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 70
+      CMGlass: 60
 
 - type: entity
   parent: RMCWelderBase

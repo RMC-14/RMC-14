@@ -1,0 +1,46 @@
+- type: entity
+  id: RMCGlowingGoo
+  name: glowing goo
+  description: You don't think you should be near this.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        density: 100
+        layer:
+        - MobMask
+        hard: false
+  - type: Sprite
+    sprite: _RMC14/Effects/green_glow.rsi
+    noRot: true
+    drawdepth: WallTops
+    layers:
+    - map: [ "base" ]
+      state: green_glow
+  - type: Clickable
+  - type: InteractionOutline
+  - type: PointLight
+    radius: 2
+    color: "#1b4506"
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: DamageOverTime
+    affectsDead: false
+    armorPiercingDamage:
+      groups:
+        Burn: 3
+    emotes:
+    popup: "You feel your skin tingling!"
+  - type: Appearance
+  - type: IgnorePredictionHit

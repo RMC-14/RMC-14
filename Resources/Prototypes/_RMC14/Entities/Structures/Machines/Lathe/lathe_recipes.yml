@@ -1,251 +1,251 @@
-# Divide original costs by 37.5 each - except plastic which is 20
-# For all non-stackable/sheet items, multiply original costs by 1.25 rounded down
-# Example: Bucket is 2000 x 1.25 = 2500 / 37.5 = 67 CMSteel
+# Items are more expensive to produce than they are to recycle.
+# For all non-sheet items, multiply original costs by 1.25 rounded down. Sheets are all under /obj/item/stack/sheet
+# Example: Bucket is 2000 x 1.25 = 2500
 - type: latheRecipe
   id: RMCBucket
   result: RMCBucket
   completetime: 4
   materials:
-    CMSteel: 67 # 2500
+    CMSteel: 2500 # 2000
 
 - type: latheRecipe
   id: CMBucketMop
   result: CMBucketMop
   completetime: 4
   materials:
-    CMSteel: 133 # 5000
+    CMSteel: 5000 # 4000
 
 - type: latheRecipe
   id: RMCBucketJanitorial
   result: RMCBucketJanitorial
   completetime: 4
   materials:
-    CMSteel: 267 # 10000
+    CMSteel: 10000 # 8000
 
 - type: latheRecipe
   id: RMCReagentJug
   result: RMCReagentJug
   completetime: 4
   materials:
-    CMSteel: 267 # 10000
+    CMSteel: 10000 # 8000
 
 - type: latheRecipe
   id: RMCLightTube
   result: RMCLightTube
   completetime: 4
   materials:
-    CMGlass: 3 # 125
+    CMGlass: 125 # 100
 
 - type: latheRecipe
   id: RMCLightBulb
   result: RMCLightBulb
   completetime: 4
   materials:
-    CMGlass: 3 # 125
+    CMGlass: 125 # 100
 
 - type: latheRecipe
   id: CMHandLabeler
   result: CMHandLabeler
   completetime: 4
   materials:
-    CMSteel: 4 # 156
+    CMSteel: 156 # 125
 
 - type: latheRecipe
   id: CMFireExtinguisher
   result: CMFireExtinguisher
   completetime: 4
   materials:
-    CMSteel: 3 # 112
+    CMSteel: 112 # 90
 
 - type: latheRecipe
   id: CMCrowbar
   result: CMCrowbar
   completetime: 4
   materials:
-    CMSteel: 2 # 62
+    CMSteel: 62 # 50
 
 - type: latheRecipe
   id: CMMultitool
   result: CMMultitool
   completetime: 4
   materials:
-    CMSteel: 2 # 62
-    CMGlass: 1 # 25
+    CMSteel: 62 # 50
+    CMGlass: 25 # 20
 
 - type: latheRecipe
   id: CMTRayScanner
   result: CMTRayScanner
   completetime: 4
   materials:
-    CMSteel: 5 # 187
+    CMSteel: 187 # 150
 
 - type: latheRecipe
-  id: CMWelderSmall
-  result: CMWelderSmall
+  id: RMCWelderEmpty
+  result: RMCWelderEmpty
   completetime: 4
   materials:
-    CMSteel: 2 # 87
-    CMGlass: 1 # 37
+    CMSteel: 87 # 70
+    CMGlass: 37 # 30
 
 - type: latheRecipe
   id: CMScrewdriver
   result: CMScrewdriver
   completetime: 4
   materials:
-    CMSteel: 3 # 93
+    CMSteel: 93 # 75
 
 - type: latheRecipe
   id: CMWirecutter
   result: CMWirecutter
   completetime: 4
   materials:
-    CMSteel: 3 # 100
+    CMSteel: 100 # 80
 
 - type: latheRecipe
   id: CMWrench
   result: CMWrench
   completetime: 4
   materials:
-    CMSteel: 5 # 187
+    CMSteel: 187 # 150
 
 - type: latheRecipe
   id: CMRadioHandheld
   result: CMRadioHandheld
   completetime: 4
   materials:
-    CMSteel: 3 # 93
-    CMGlass: 1 # 31
+    CMSteel: 93 # 75
+    CMGlass: 31 # 25
 
 - type: latheRecipe
   id: CMHeadset
   result: CMHeadset
   completetime: 4
   materials:
-    CMSteel: 3 # 93
+    CMSteel: 93 # 75
 
 - type: latheRecipe
   id: RMCFlashlight
   result: RMCFlashlight
   completetime: 4
   materials:
-    CMSteel: 2 # 62
-    CMGlass: 1 # 25
+    CMSteel: 62 # 50
+    CMGlass: 25 # 20
 
 - type: latheRecipe
   id: CMSheetGlassReinforced
   result: CMSheetGlassReinforced1
   completetime: 4
-  materials:
-    CMSteel: 50 # 1875
-    CMGlass: 100 # 3750
+  materials: # sheet items keep their original cost
+    CMSteel: 1875 # 1875
+    CMGlass: 3750 # 3750
 
 - type: latheRecipe
   id: CMRodMetal
   result: CMRodMetal1
   completetime: 4
   materials:
-    CMSteel: 50 # 1875
+    CMSteel: 2343 # 1875
 
 - type: latheRecipe
   id: CMScalpel
   result: CMScalpel
   completetime: 4
   materials:
-    CMSteel: 333 # 12500
-    CMGlass: 167 # 6250
+    CMSteel: 12500 # 10000
+    CMGlass: 6250 # 5000
 
 - type: latheRecipe
   id: CMCircularSaw
   result: CMCircularSaw
   completetime: 4
   materials:
-    CMSteel: 667 # 25000
-    CMGlass: 333 # 12500
+    CMSteel: 25000 # 20000
+    CMGlass: 12500 # 10000
 
 - type: latheRecipe
   id: CMSurgicalDrill
   result: CMSurgicalDrill
   completetime: 4
   materials:
-    CMSteel: 500 # 18750
-    CMGlass: 333 # 12500
+    CMSteel: 18750 # 15000
+    CMGlass: 12500 # 10000
 
 - type: latheRecipe
   id: CMRetractor
   result: CMRetractor
   completetime: 4
   materials:
-    CMSteel: 333 # 12500
-    CMGlass: 167 # 6250
+    CMSteel: 12500 # 10000
+    CMGlass: 6250 # 5000
 
 - type: latheRecipe
   id: CMCautery
   result: CMCautery
   completetime: 4
   materials:
-    CMSteel: 167 # 6250
-    CMGlass: 83 # 3125
+    CMSteel: 6250 # 5000
+    CMGlass: 3125 # 2500
 
 - type: latheRecipe
   id: CMHemostat
   result: CMHemostat
   completetime: 4
   materials:
-    CMSteel: 167 # 6250
-    CMGlass: 83 # 3125
+    CMSteel: 6250 # 5000
+    CMGlass: 3125 # 2500
 
 - type: latheRecipe
   id: CMBeaker
   result: CMBeaker
   completetime: 4
   materials:
-    CMGlass: 17 # 625
+    CMGlass: 625 # 500
 
 - type: latheRecipe
   id: CMBeakerLarge
   result: CMBeakerLarge
   completetime: 4
   materials:
-    CMGlass: 167 # 6250
+    CMGlass: 6250 # 5000
 
 #- type: latheRecipe
 #  id: CMDrinkingGlass
 #  result: DrinkGlass <- todo RMC14, rest is already complete
 #  completetime: 4
 #  materials:
-#  CMGlass: 17 # 625
+#  CMGlass: 625 # 500
 
 - type: latheRecipe
   id: RMCTablePartTan
   result: RMCTablePartTan
   completetime: 4
   materials:
-    CMSteel: 200 # 7500
+    CMSteel: 9375 # 7500
 
 - type: latheRecipe
   id: RMCTablePartAlmayer
   result: RMCTablePartAlmayer
   completetime: 4
   materials:
-    CMSteel: 200 # 7500
+    CMSteel: 9375 # 7500
 
 - type: latheRecipe
   id: RMCTablePartReinforced
   result: RMCTablePartReinforced
   completetime: 4
   materials:
-    CMSteel: 500 # 18750
+    CMSteel: 18750 # 15000
 
 - type: latheRecipe
   id: RMCRackParts
   result: RMCRackParts
   completetime: 4
   materials:
-    CMSteel: 125 # 4687
+    CMSteel: 4687 # 3750
 
 - type: latheRecipe
   id: RMCKitchenKnife
   result: RMCKitchenKnife
   completetime: 4
   materials:
-    CMSteel: 400 # 15000
+    CMSteel: 15000 # 12000

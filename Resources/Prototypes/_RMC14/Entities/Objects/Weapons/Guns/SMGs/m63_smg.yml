@@ -221,6 +221,14 @@
     bulletType: null
 
 - type: entity
+  parent: RMCMagazineSMGM63HEAP
+  id: RMCMagazineSMGM63HEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
   parent: CMMagazineSMGM63
   id: RMCMagazineSMGM63WP
   name: "M63 WP magazine (10x20mm)"

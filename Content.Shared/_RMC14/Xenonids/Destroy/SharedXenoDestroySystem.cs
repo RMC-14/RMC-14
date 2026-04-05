@@ -1,11 +1,20 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Devour;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -18,12 +27,13 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Jittering;
 using Content.Shared.Maps;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -41,7 +51,6 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
@@ -54,7 +63,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly RMCGibSystem _rmcGib = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
@@ -63,6 +72,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPull = default!;
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
 
@@ -84,6 +94,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         SubscribeLocalEvent<XenoDestroyLeapingComponent, ChangeDirectionAttemptEvent>(OnLeapingCancel);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, InteractionAttemptEvent>(OnLeapingCancelInteract);
         SubscribeLocalEvent<XenoDestroyLeapingComponent, PullAttemptEvent>(OnLeapingCancelPull);
+        SubscribeLocalEvent<XenoDestroyLeapingComponent, UpdateCanMoveEvent>(OnLeapingCancel);
     }
 
     private void OnXenoDestroyAction(Entity<XenoDestroyComponent> xeno, ref XenoDestroyActionEvent args)
@@ -138,8 +149,6 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         _rotateToFace.TryFaceCoordinates(xeno, _transform.ToMapCoordinates(args.TargetCoords).Position);
         _rmcPull.TryStopAllPullsFromAndOn(xeno);
 
-        //Root
-        _stun.TrySlowdown(xeno, xeno.Comp.CrashTime, true, 0f, 0f);
         if (_net.IsServer)
         {
             var leaping = EnsureComp<XenoDestroyLeapingComponent>(xeno);
@@ -201,7 +210,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
             //Gib mobs, knockback items, also kill structures
             foreach (var ent in _entityLookup.GetEntitiesInTile(tile, LookupFlags.All))
             {
-                if (HasComp<MobStateComponent>(ent) && _xeno.CanAbilityAttackTarget(xeno, ent))
+                if (CanGib(xeno, ent))
                 {
                     if (!xeno.Comp.Gibs || !TryComp<BodyComponent>(ent, out var body))
                     {
@@ -256,6 +265,24 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         SetCooldown(xeno);
     }
 
+    private bool CanGib(EntityUid king, EntityUid target)
+    {
+        if (king == target)
+            return false;
+
+        // hiveless xenos can attack eachother
+        if (_hive.FromSameHive(king, target))
+            return false;
+
+        if (HasComp<DevouredComponent>(target))
+            return false;
+
+        if (HasComp<XenoNestedComponent>(target))
+            return false;
+
+        return HasComp<MobStateComponent>(target);
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -305,8 +332,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
             _actions.SetEnabled(action.AsNullable(), false);
         }
 
-        if (xeno.Comp.Target == null || !TryComp<XenoDestroyComponent>(xeno, out var destroy))
-            return;
+        _blocker.UpdateCanMove(xeno);
     }
 
     protected virtual void OnLeapingRemove(Entity<XenoDestroyLeapingComponent> xeno, ref ComponentRemove args)
@@ -316,5 +342,7 @@ public abstract class SharedXenoDestroySystem : EntitySystem
         {
             _actions.SetEnabled(action.AsNullable(), true);
         }
+
+        _blocker.UpdateCanMove(xeno);
     }
 }

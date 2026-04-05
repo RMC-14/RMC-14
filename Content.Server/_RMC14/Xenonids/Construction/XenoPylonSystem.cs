@@ -13,11 +13,14 @@ using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Tag;
+using Content.Shared.IdentityManagement;
 
 namespace Content.Server._RMC14.Xenonids.Construction;
 
@@ -28,6 +31,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
     [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
@@ -81,11 +85,6 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
     private void UpdateGhostRoles(Entity<HiveLesserSpawnerComponent, GhostRoleMobSpawnerComponent> coreEnt)
     {
         var (uid, core, spawner) = coreEnt;
-
-        EntityUid? hiveUid = null;
-        if (TryComp<HiveMemberComponent>(uid, out var pylonMember))
-            hiveUid = pylonMember.Hive;
-
         for (var i = core.LiveLesserDrones.Count - 1; i >= 0; i--)
         {
             var drone = core.LiveLesserDrones[i];
@@ -100,21 +99,21 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
 
         _ghostRole.SetCurrent((uid, spawner), core.LiveLesserDrones.Count);
 
-        if (!_evolution.HasLiving<XenoComponent>(1, hiveUid) && 
-            !_evolution.HasLiving<XenoEvolutionGranterComponent>(1, hiveUid))
+        if (!_evolution.HasLiving<XenoComponent>(1) &&
+            !_evolution.HasLiving<XenoEvolutionGranterComponent>(1))
         {
             _ghostRole.SetAvailable((uid, spawner), 0);
             return;
         }
 
-        var living = _evolution.GetLiving<XenoComponent>(hiveUid, x => x.Comp.CountedInSlots);
+        var living = _evolution.GetLiving<XenoComponent>(x => x.Comp.CountedInSlots);
         var available = Math.Max(core.MinimumLesserDrones, living / core.XenosPerLesserDrone);
         core.MaxLesserDrones = available;
 
         var time = _timing.CurTime;
         if (time > core.NextLesserDroneAt)
         {
-            var hasOvipositor = _evolution.HasLiving<XenoAttachedOvipositorComponent>(1, hiveUid);
+            var hasOvipositor = _evolution.HasLiving<XenoAttachedOvipositorComponent>(1);
             core.NextLesserDroneAt = time + (hasOvipositor ? core.NextLesserDroneOviCooldown : core.NextLesserDroneCooldown * 2);
             core.CurrentLesserDrones = Math.Min(core.MaxLesserDrones, core.CurrentLesserDrones + 1);
         }
@@ -131,6 +130,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
 
         // TODO RMC14 lesser drone job bans
         // TODO RMC14 30 second delay to grabbing the next lesser drone role
+        // TODO RMC14 hive specific
         var time = _timing.CurTime;
         var query = EntityQueryEnumerator<HiveLesserSpawnerComponent>();
         while (query.MoveNext(out var uid, out var core))
@@ -165,6 +165,15 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         var tripper = args.Tripper;
         if (CanTrigger(tripper))
         {
+            var othersFilter = Filter.Pvs(core);
+                foreach (var other in othersFilter.Recipients)
+                {
+                    if (other.AttachedEntity is not { } otherEnt)
+                        continue;
+
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-larva-recovered", ("larva", Identity.Name(tripper, EntityManager, otherEnt))),
+                    core, othersFilter, true, PopupType.Medium);
+                }
             _hive.IncreaseBurrowedLarva(1);
             QueueDel(tripper);
         }

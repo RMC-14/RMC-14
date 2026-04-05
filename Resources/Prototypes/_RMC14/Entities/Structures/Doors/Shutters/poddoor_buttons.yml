@@ -148,6 +148,16 @@
 
 - type: entity
   parent: RMCPodDoorButtonShip
+  id: RMCPodDoorButtonMorgue
+  name: button
+  description: A basic button locked to medical staff.
+  suffix: Locked, Morgue
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessMorgue" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonShip
   id: RMCPodDoorButtonChemistry
   name: button
   description: A basic button locked to chemistry.

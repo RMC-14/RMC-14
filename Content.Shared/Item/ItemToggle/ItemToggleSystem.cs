@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item.ItemToggle.Components;
@@ -64,6 +65,11 @@ public sealed class ItemToggleSystem : EntitySystem
         if (args.Handled || !ent.Comp.OnUse)
             return;
 
+        // Prevent toggling if item is an attachment that requires being attached to a holder
+        if (TryComp(ent.Owner, out AttachableToggleableComponent? attachable) &&
+            attachable.AttachedOnly && !attachable.Attached)
+            return;
+
         args.Handled = true;
 
         Toggle((ent, ent.Comp), args.User, predicted: ent.Comp.Predictable);
@@ -107,6 +113,14 @@ public sealed class ItemToggleSystem : EntitySystem
     {
         if (args.Handled || !ent.Comp.OnActivate)
             return;
+
+        // Prevent toggling if item is an attachment that requires being attached to a holder
+        if (TryComp(ent.Owner, out AttachableToggleableComponent? attachable) &&
+            attachable.AttachedOnly && !attachable.Attached)
+        {
+            args.Handled = true;
+            return;
+        }
 
         args.Handled = true;
         Toggle((ent.Owner, ent.Comp), args.User, predicted: ent.Comp.Predictable);

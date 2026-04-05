@@ -23,6 +23,8 @@ public enum DropshipTerminalWeaponsScreen
     Paradrop,
     Spotlight,
     TacMap,
+    EquipmentDeployer,
+    Launch,
 }
 
 [Serializable, NetSerializable]
@@ -59,6 +61,20 @@ public sealed class DropshipTerminalWeaponsChooseParaDropMsg(bool first) : Bound
 
 [Serializable, NetSerializable]
 public sealed class DropshipTerminalWeaponsChooseSpotlightMsg(bool first, NetEntity slot) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly NetEntity Slot = slot;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsChooseLaunchBayMsg(bool first, NetEntity slot) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly NetEntity Slot = slot;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsChooseEquipmentDeployerMsg(bool first, NetEntity slot) : BoundUserInterfaceMessage
 {
     public readonly bool First = first;
     public readonly NetEntity Slot = slot;
@@ -140,7 +156,28 @@ public sealed class DropShipTerminalWeaponsParaDropTargetSelectMsg(bool on) : Bo
 }
 
 [Serializable, NetSerializable]
-public sealed class DropShipTerminalWeaponsSpotlightToggleMsg(bool on) : BoundUserInterfaceMessage
+public sealed class DropShipTerminalWeaponsSpotlightToggleMsg(bool first, bool on) : BoundUserInterfaceMessage
 {
+    public readonly bool First = first;
     public readonly bool On = on;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropShipTerminalWeaponsEquipmentDeployToggleMsg(bool first, bool deploy) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly bool Deploy = deploy;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(bool first, bool autoDeploy) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly bool AutoDeploy = autoDeploy;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropShipTerminalWeaponsLaunchOrdnanceMsg(bool first) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
 }

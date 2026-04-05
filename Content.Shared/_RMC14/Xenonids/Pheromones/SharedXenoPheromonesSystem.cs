@@ -7,7 +7,6 @@ using Content.Shared._RMC14.Xenonids.CriticalGrace;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared._RMC14.Xenonids.Weeds;
-using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -45,7 +44,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
@@ -380,7 +378,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         for (var i = 0; i < _pheromonesJob.Pheromones.Count; i++)
         {
-            var (sourceUid, active, pheromones, _) = _pheromonesJob.Pheromones[i];
+            var (_, active, pheromones, _) = _pheromonesJob.Pheromones[i];
             var receivers = _pheromonesJob.Receivers[i].Receivers;
 
             switch (active.Pheromones)
@@ -389,9 +387,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                     foreach (var receiver in receivers)
                     {
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
-                            continue;
-
-                        if (!_xenoHive.FromSameHive(sourceUid, receiver.Owner))
                             continue;
 
                         if (receiver.Comp.IgnorePheromones == XenoPheromones.Recovery)
@@ -409,9 +404,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
                             continue;
 
-                        if (!_xenoHive.FromSameHive(sourceUid, receiver.Owner))
-                            continue;
-
                         if (receiver.Comp.IgnorePheromones == XenoPheromones.Warding)
                             continue;
 
@@ -425,9 +417,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                     foreach (var receiver in active.Receivers)
                     {
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
-                            continue;
-
-                        if (!_xenoHive.FromSameHive(sourceUid, receiver.Owner))
                             continue;
 
                         if (receiver.Comp.IgnorePheromones == XenoPheromones.Frenzy)

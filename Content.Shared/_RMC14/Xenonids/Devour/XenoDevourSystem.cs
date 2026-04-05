@@ -4,9 +4,9 @@ using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.TrainingDummy;
-using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Vents;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -58,11 +58,11 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly EntityManager _entManager = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
@@ -315,6 +315,8 @@ public sealed class XenoDevourSystem : EntitySystem
             }
         }
 
+        totalDamage *= usuable.DamageMult;
+
         //Reset attack cooldown so we don't like, go crazy
         melee.NextAttack = devoured.Comp.NextDevouredAttackTimeAllowed;
         Dirty(weapon.Value, melee);
@@ -500,6 +502,7 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private bool CanDevour(EntityUid xeno, EntityUid victim, [NotNullWhen(true)] out XenoDevourComponent? devour, bool popup = false)
     {
+        var targetName = Identity.Name(victim, EntityManager, xeno);
         devour = default;
         if (xeno == victim ||
             !TryComp(xeno, out devour) ||
@@ -538,7 +541,7 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             if (popup)
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-roting", ("target", victim)), victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-roting", ("target", targetName)), victim, xeno);
             }
 
             return false;
@@ -559,8 +562,17 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             if (popup)
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-buckled", ("strap", strap), ("target", victim)), victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-buckled", ("strap", strap), ("target", targetName)), victim, xeno);
             }
+        }
+
+        if (!_rmcPulling.IsPulling(xeno, victim))
+        {
+            if (popup)
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-not-grabbed", ("target", targetName)), victim, xeno);
+            }
+            return false;
         }
 
         return true;
