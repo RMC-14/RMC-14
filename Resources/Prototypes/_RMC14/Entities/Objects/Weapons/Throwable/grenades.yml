@@ -210,8 +210,6 @@
   - type: ClusterLimitHits
   - type: CMExplosionEffect
     maxShrapnel: 0
-  - type: CMVocalizeTrigger
-  - type: RMCScorchEffect
   - type: Tag
     tags:
     - Grenade
@@ -247,11 +245,9 @@
   - type: ClusterLimitHits
   - type: CMExplosionEffect
     maxShrapnel: 0
-  - type: CMVocalizeTrigger
-  - type: RMCScorchEffect
 
 - type: entity
-  parent: CMGrenadeFragOld
+  parent: CMGrenadeHighExplosive
   id: RMCGrenadeBlastM12
   name: M12 blast grenade
   description: A high-explosive grenade produced for private security firms. It explodes around 3 seconds after the pin has been pulled.
@@ -259,25 +255,13 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m12blast.rsi
   - type: Explosive
-    maxIntensity: 20
-    intensitySlope: 8
+    maxIntensity: 35 # max 175 brute, 175 burn
+    intensitySlope: 5
     totalIntensity: 280
-    deleteAfterExplosion: false
-  - type: ProjectileGrenade
-    fillPrototype: CMProjectileShrapnel
-    capacity: 48 #same as HEFA
-    directHit: false
-  - type: ContainerContainer
-    containers:
-      cluster-payload: !type:Container
   - type: Tag
     tags:
     - Grenade
-  - type: Ammo
-  - type: ClusterLimitHits
-  - type: CMExplosionEffect
-    maxShrapnel: 0
-  - type: RMCScorchEffect
+    - LauncherCompatibleGrenade
 
 - type: entity
   parent: CMGrenadeBase
