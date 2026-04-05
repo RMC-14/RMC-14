@@ -58,6 +58,7 @@ public sealed class XenoAcidMineSystem : EntitySystem
 
         var protoId = xeno.Comp.BlastProto;
         var center = args.Target.Position.Floored() + Vector2.One / 2;
+        var alreadyHit = new HashSet<EntityUid>();
 
         for (var x = -1; x <= 1; x++)
         {
@@ -67,6 +68,7 @@ public sealed class XenoAcidMineSystem : EntitySystem
                 var blast = EnsureComp<XenoAcidBlastComponent>(blastUid);
                 blast.Attached = xeno.Owner;
                 blast.Empowered = xeno.Comp.Empowered;
+                blast.AlreadyHit = alreadyHit;
                 Dirty(blastUid, blast);
                 _hive.SetSameHive(xeno.Owner, blastUid);
             }

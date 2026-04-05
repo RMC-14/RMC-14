@@ -23,6 +23,9 @@ public sealed partial class XenoAcidBlastComponent : Component
     public bool Activated;
 
     [DataField, AutoNetworkedField]
+    public float BlastRadius = 0.5f;
+
+    [DataField, AutoNetworkedField]
     public DamageSpecifier BaseDamage = new();
 
     [DataField, AutoNetworkedField]
@@ -36,6 +39,9 @@ public sealed partial class XenoAcidBlastComponent : Component
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier AcidDamage = new();
+
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> AlreadyHit = new();
 
     [DataField, AutoNetworkedField]
     public int AcidArmorPiercing = 40;

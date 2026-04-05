@@ -115,10 +115,14 @@ public sealed class XenoAcidBlastSystem : EntitySystem
     private int ProcessBlastHits(Entity<XenoAcidBlastComponent> ent)
     {
         var hits = 0;
+        var position = _transform.GetMapCoordinates(ent);
 
-        foreach (var target in _lookup.GetEntitiesIntersecting(ent))
+        foreach (var target in _lookup.GetEntitiesInRange(position, ent.Comp.BlastRadius))
         {
             if (target == ent.Comp.Attached)
+                continue;
+
+            if (!ent.Comp.AlreadyHit.Add(target))
                 continue;
 
             if (!CanHit(ent, target))
