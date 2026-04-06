@@ -24,9 +24,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-rifleman-pve
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadSPP
+      squad: SquadSPP
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
