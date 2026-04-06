@@ -185,7 +185,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCCommandingOfficerEssentialsBundle
   name: Commanding Officer Essentials kit
-  description: Contains a laser designator, whistle, telescopic baton and a disabler.
+  description: Contains a laser designator, whistle and a disabler.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
@@ -196,7 +196,6 @@
     - RMCWhistle
     - RMCWeaponTaser
     - RMCMegaphone
-    - RMCTelescopicBaton   #TODO RMC14 remove TeleBaton from vendor and put it into the CO locked safe
     #TODO RMC14 Paper Map.
 
 - type: entity

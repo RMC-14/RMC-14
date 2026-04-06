@@ -120,13 +120,28 @@
     - id: RMCSynthResetKeySMART
     - id: RMCMREWeYa
     - id: RMCMREWeYa
-      # ToDo: RMC14 Platinum Coin
+    - id: RMCCoinPlatinum
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000
     - id: CMWebbingHolster
     - id: RMCWeaponPistolPK7
     - id: RMCMagazinePistolPK7
     - id: RMCMagazinePistolPK7
+
+- type: entity
+  parent: RMCLockerSecureSafeCO
+  id: RMCLockerSecureSafeCOFilled
+  suffix: Commanding Officer, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMoneybag
+    - id: RMCCoinChallenge
+    - id: RMCGlassesMonocle
+    - id: RMCZippoGold
+      # ToDo: RMC14 Almayer code book
+    - id: RMCHollowCane
+    - id: RMCTelescopicBaton
 
 - type: entity
   parent: CMLockerBase
