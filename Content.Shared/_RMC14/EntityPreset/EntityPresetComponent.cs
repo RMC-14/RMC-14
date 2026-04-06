@@ -1,47 +1,45 @@
-using Content.Shared._RMC14.EntityPreset;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Survivor;
+namespace Content.Shared._RMC14.EntityPreset;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SurvivorSystem))]
-public sealed partial class SurvivorPresetComponent : Component, IRMCRandomizedPreset
+[RegisterComponent]
+[Access(typeof(EntityPresetSystem))]
+public sealed partial class EntityPresetComponent : Component, IRMCRandomizedPreset
 {
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Dictionary<string, List<EntProtoId>> RandomStartingGear = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<List<EntProtoId>> RandomOutfits = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<List<EntProtoId>> RandomGear = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<List<EntProtoId>> RandomWeapon = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<List<EntProtoId>> PrimaryWeapons = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<List<List<EntProtoId>>> RandomGearOther = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool TryEquipRandomOtherGear = true;
 
-    [DataField, AutoNetworkedField]
-    public bool TryRandomOutfitsInhand = false;
+    [DataField]
+    public bool TryRandomOutfitsInhand;
 
-    [DataField, AutoNetworkedField]
-    public bool TryEquipRandomWeapon = false;
+    [DataField]
+    public bool TryEquipRandomWeapon;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Dictionary<EntProtoId, (int, int)> RareItems = new();
 
-    [DataField, AutoNetworkedField]
-    public int RareItemCoefficent = 100;
+    [DataField]
+    public int RareItemCoefficient = 100;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float PrimaryWeaponChance = 0.6f;
 
     Dictionary<string, List<EntProtoId>> IRMCRandomizedPreset.RandomStartingGear => RandomStartingGear;
@@ -54,6 +52,6 @@ public sealed partial class SurvivorPresetComponent : Component, IRMCRandomizedP
     bool IRMCRandomizedPreset.TryRandomOutfitsInhand => TryRandomOutfitsInhand;
     bool IRMCRandomizedPreset.TryEquipRandomWeapon => TryEquipRandomWeapon;
     Dictionary<EntProtoId, (int, int)> IRMCRandomizedPreset.RareItems => RareItems;
-    int IRMCRandomizedPreset.RareItemCoefficient => RareItemCoefficent;
+    int IRMCRandomizedPreset.RareItemCoefficient => RareItemCoefficient;
     float IRMCRandomizedPreset.PrimaryWeaponChance => PrimaryWeaponChance;
 }
