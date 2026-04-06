@@ -129,6 +129,7 @@
   - type: RequireProjectileTarget
   - type: RMCWeaponAccuracy
   - type: HomingShots
+  - type: Turret
 
 - type: entity
   parent: RMCBaseTurret
@@ -149,7 +150,7 @@
   - type: BallisticAmmoProvider
     cycleable: false
     proto: RMCCartridgeSentry
-    capacity: 500
+    capacity: 600
   - type: HTN
     rootTask:
       task: RMCTurretCompound
@@ -184,3 +185,5 @@
     angleTolerance: 5
     rotationSpeed: 180
     simple4DirMode: false
+  - type: SleepNPC
+  - type: Turret
