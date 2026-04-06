@@ -3,6 +3,7 @@
   id: CMStaffOfficer
   name: cm-job-name-staff-officer
   description: cm-job-description-staff-officer
+  newToJobInfo: rmc-new-to-job-staff-officer
   playTimeTracker: CMJobStaffOfficer
   requirements:
   - !type:RoleTimeRequirement
@@ -63,6 +64,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: MutinyEligible
+    - type: RMCAwardRecommendation
 
 - type: startingGear
   id: CMGearStaffOfficer

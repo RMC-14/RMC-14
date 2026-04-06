@@ -181,7 +181,7 @@
   - type: StorageFill
     contents:
     - id: CMGrenadeFrag
-      amount: 17
+      amount: 18
 
 - type: entity
   parent: CMBeltSmartGunOperator
@@ -429,17 +429,6 @@
     - id: CMMagazinePistolM77AP
       amount: 3
     - id: RMCWeaponPistolM77
-
-- type: entity
-  parent: RMCBeltHolsterPistol
-  id: RMCMK80BeltFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolMK80
-      amount: 6
-    - id: RMCMK80
 
 - type: entity
   parent: RMCBeltHolsterPistolPMC

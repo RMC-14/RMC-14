@@ -41,6 +41,8 @@
       - cost: 3000
         crate: RMCCrateBoxMagazinePistolM1984AP
       - cost: 3000
+        crate: RMCCrateBoxMagazinePistolM1984HP
+      - cost: 3000
         crate: RMCCrateBoxShellsShotgunSlugs
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunBuckshot
@@ -82,6 +84,10 @@
         crate: RMCCrateBoxMagazineSentryFireBlue
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFireSmoke
+      - cost: 2500
+        crate: RMCCrateMagazineML66DDrum
+      - cost: 2500
+        crate: RMCCrateMagazineM2C
     - name: Attachments
       entries:
       - cost: 3000
@@ -221,6 +227,8 @@
         crate: RMCCrateGrenadesAirburstStarShell
       - cost: 1000
         crate: RMCCrateGrenadesBatonSlug
+      - cost: 3000
+        crate: RMCCrateExplosiveClaymoreMine
     - name: Food
       entries:
       - cost: 1000
@@ -327,6 +335,10 @@
         crate: RMCCrateXM51
       - cost: 4000
         crate: RMCCrateM85A1
+      - cost: 6000
+        crate: RMCCrateML66D
+      - cost: 6000
+        crate: RMCCrateM2C
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000

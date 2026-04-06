@@ -261,7 +261,38 @@
       state: plant_weeds
     useDelay: 0.5
   - type: TargetAction
+    checkCanAccess: false
+    range: -1
+    deselectOnMiss: false
   - type: WorldTargetAction
     event: !type:XenoExpandWeedsActionEvent
-  - type: XenoActionPlasma
-    cost: 50
+
+- type: entity
+  id: ActionXenoDesignerSelectedDesign
+  parent: ActionXenoBase
+  name: Selected Design
+  description: Toggle whether newly placed design nodes are wall or door nodes.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon: { sprite: _RMC14/Actions/designer_actions.rsi, state: design_mark_wall }
+    iconOn: { sprite: _RMC14/Actions/designer_actions.rsi, state: design_mark_door }
+    useDelay: 0.2
+  - type: InstantAction
+    event: !type:Content.Shared._RMC14.Xenonids.Designer.DesignerSelectedDesignToggleActionEvent
+  - type: RMCDazeableAction
+
+# TODO: Make this greater surge weak reflective resin wall
+- type: entity
+  id: ActionXenoDesignerGreaterResinSurge
+  parent: ActionXenoBase
+  name: Greater Resin Surge (250)
+  description: Consumes nearby design nodes to create temporary thick resin walls.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon: { sprite: _RMC14/Actions/designer_actions.rsi, state: greater_resin_surge }
+    useDelay: 30
+  - type: InstantAction
+    event: !type:Content.Shared._RMC14.Xenonids.Designer.DesignerGreaterResinSurgeActionEvent
+  - type: RMCDazeableAction

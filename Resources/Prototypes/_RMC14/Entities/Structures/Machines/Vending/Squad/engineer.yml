@@ -81,8 +81,8 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 13
-    # - id: CMM20MineBox4
-    #   points: 18
+      - id: RMCBoxClaymoreMineFilled
+        points: 18
     # - id: CMM40MFHSMetalFoamGrenade
     #   points: 5
     # - id: RMCElectroshockGrenadex3
@@ -137,8 +137,8 @@
         points: 12
       - id: RMCM85A1Case
         points: 24
-    #- id: CMM56DHeavyMachineGun
-    #  points: 24
+      - id: RMCML66DCase
+        points: 24
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
@@ -379,9 +379,10 @@
         amount: 2
       - id: RMCLightReplacer
         amount: 4
-    # - name: Utility
-    #   entries:
-    #   - id: Sentry Gun Network Laptop
-    #     amount: 4
+    - name: Utility
+      entries:
+      - id: RMCSentryLaptop
+        name: sentry gun network laptop
+        amount: 4
     #   - id: Sentry Gun Network Encryption KEy
     #     amount: 4

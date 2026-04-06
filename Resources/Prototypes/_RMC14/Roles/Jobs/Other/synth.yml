@@ -113,6 +113,10 @@
   - type: RMCLeapProtection
     inherentStunDuration: 3
   - type: ZombieImmune
+  - type: ParalyzeImmuneFrom
+    whitelist:
+      tags:
+      - RMCSynthGrabbable
 
 - type: entity
   id: RMCSynthRemoveComponents

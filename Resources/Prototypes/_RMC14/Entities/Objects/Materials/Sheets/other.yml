@@ -42,7 +42,7 @@
       phoron:
         reagents:
         - ReagentId: RMCPhoron
-          Quantity: 10
+          Quantity: 20
   - type: Tag
     tags:
     - Sheet
@@ -147,6 +147,8 @@
     interfaces:
       enum.RMCConstructionUiKey.Key:
         type: RMCConstructionBui
+  - type: CampfireFuel
+    fuelAmount: 1
 
 - type: entity
   parent: RMCPlankWood

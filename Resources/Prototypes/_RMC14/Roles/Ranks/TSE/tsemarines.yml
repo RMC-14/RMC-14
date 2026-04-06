@@ -99,107 +99,106 @@
   name: General
   prefix: Gen.
   paygrade: O10
+  
+- type: rank
+  id: RMCRankTSEEmpress
+  name: Empress # This needs to be changed to allow it to change dynamically for genders
+  prefix: HRM.
 
-# The below ranks are for the JAPANESE TSE marines. What does that mean? Why do they have two sets of ranks? Why does this exist? Why must we suffer like this?
+# The below ranks are for the Para insert on Hybrisa
 
 - type: rank
-  id: RMCRankEIAFNitoRikushi
-  name: Nito Rikushi
-  prefix: Nt-Shi.
+  id: RMCRankParaPrivate
+  name: Private
+  prefix: Pte.
+  paygrade: E1
+
+- type: rank
+  id: RMCRankParaPrivateSecondClass
+  name: Private Second Class
+  prefix: Pte2.
   paygrade: E2
 
 - type: rank
-  id: RMCRankEIAFIttoRikushi
-  name: Itto Rikushi
-  prefix: It-Shi.
+  id: RMCRankParaLanceCorporal
+  name: Lance Corporal
+  prefix: LCpl.
   paygrade: E3
 
 - type: rank
-  id: RMCRankEIAFRikushicho
-  name: Rikushicho
-  prefix: Shi.
+  id: RMCRankParaCorporal
+  name: Corporal
+  prefix: Cpl.
   paygrade: E4
 
 - type: rank
-  id: RMCRankEIAFSantoRikuso
-  name: Santo Rikuso
-  prefix: St-Rik.
+  id: RMCRankParaSergeant
+  name: Sergeant
+  prefix: Sgt.
   paygrade: E5
 
 - type: rank
-  id: RMCRankEIAFNitoRikuso
-  name: Nito Rikuso
-  prefix: Nt-Rik.
+  id: RMCRankParaStaffSergeant
+  name: Staff Sergeant
+  prefix: SSgt.
   paygrade: E6
 
 - type: rank
-  id: RMCRankEIAFIttoRikuso
-  name: Itto Rikuso
-  prefix: It-Rik.
+  id: RMCRankParaWarrantOfficerClass2
+  name: Warrant Officer Class 2
+  prefix: WO2.
   paygrade: E7
 
 - type: rank
-  id: RMCRankEIAFRikusocho
-  name: Rikusocho
-  prefix: Rik.
-  paygrade: E8
-
-- type: rank
-  id: RMCRankEIAFSantoKaii
-  name: Santo Kaii
-  prefix: St-Wei.
+  id: RMCRankParaSecondLieutenant
+  name: Second Lieutenant.
+  prefix: 2Lt.
   paygrade: O1
 
 - type: rank
-  id: RMCRankEIAFNitoKaii
-  name: Nito Kaii
-  prefix: Nt-Wei.
+  id: RMCRankParaLieutenant
+  name: Lieutenant
+  prefix: Lt.
   paygrade: O2
 
 - type: rank
-  id: RMCRankEIAFIttoKaii
-  name: Itto Kaii
-  prefix: It-Wei.
+  id: RMCRankParaCaptain
+  name: Captain
+  prefix: Capt.
   paygrade: O3
 
 - type: rank
-  id: RMCRankEIAFSantoKaisa
-  name: Santo Kaisa
-  prefix: St-Sa.
+  id: RMCRankParaMajor
+  name: Major
+  prefix: Maj.
   paygrade: O4
 
 - type: rank
-  id: RMCRankEIAFNitoKaisa
-  name: Nito Kaisa
-  prefix: Nt-Sa.
+  id: RMCRankParaLieutenantColonel
+  name: Lieutenant Colonel
+  prefix: LtCol.
   paygrade: O5
 
 - type: rank
-  id: RMCRankEIAFIttoKaisa
-  name: Itto Kaisa
-  prefix: It-Sa.
+  id: RMCRankParaColonel
+  name: Colonel
+  prefix: Col.
   paygrade: O6
 
 - type: rank
-  id: RMCRankEIAFKaishoHo
-  name: Kaisho-ho
-  prefix: It-Sho.
+  id: RMCRankParaBrigadier
+  name: Brigadier
+  prefix: Brig.
   paygrade: O7
 
 - type: rank
-  id: RMCRankEIAFKaisho
-  name: Kaisho
-  prefix: Sho.
+  id: RMCRankParaMajorGeneral
+  name: Major General
+  prefix: MajGen.
   paygrade: O8
 
 - type: rank
-  id: RMCRankEIAFBakuryochotarusho
-  name: Bakuryōchō-taru-shō
-  prefix: Bt-Sho.
+  id: RMCRankParaGeneralBrigade
+  name: General of the Brigade
+  prefix: GenBrig.
   paygrade: O9
-
-- type: rank
-  id: RMCRankTSEEmpress
-  name: Empress
-  prefix: HRM.
-# This needs to be changed to allow it to change dynamically for genders

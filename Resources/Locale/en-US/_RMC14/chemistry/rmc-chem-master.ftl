@@ -3,6 +3,7 @@ rmc-chem-master-full-pill-bottles = Machine is fully loaded by pill bottles.
 rmc-chem-master-status = [bold]Status[/bold]
 rmc-chem-master-select-all = Select All
 rmc-chem-master-deselect-all = Deselect All
+rmc-chem-master-auto-select = Auto-Select
 rmc-chem-master-reagent-amount = {$name}, {$amount} units
 rmc-chem-master-all = All
 rmc-chem-master-custom = Custom

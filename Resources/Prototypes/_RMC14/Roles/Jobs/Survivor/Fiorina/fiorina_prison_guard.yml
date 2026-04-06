@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorFiorinaPrisonGuard
-  name: rmc-job-name-pmc-corporate-goon
+  name: rmc-job-name-pmc-corporate-goon-secguard
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorFiorinaPrisonGuard
@@ -26,6 +26,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cmp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
 
 - type: startingGear
   parent: RMCGearSurvivorBase
