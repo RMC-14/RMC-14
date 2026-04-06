@@ -97,6 +97,10 @@ rmc-ui-xeno-night-vision-default = Xeno night vision default
 rmc-ui-xeno-night-vision-default-off = Off
 rmc-ui-xeno-night-vision-default-half = Half light
 rmc-ui-xeno-night-vision-default-full = Full
+rmc-ui-akimbo-mode = Akimbo firing mode
+rmc-ui-akimbo-mode-both = Fire both
+rmc-ui-akimbo-mode-alternate = Alternate hands
+rmc-ui-akimbo-mode-keep = Keep active hand
 rmc-night-vision-mode-verb = Set night vision: {$mode}
 
 rmc-area-info = {$area}{$restrictions}

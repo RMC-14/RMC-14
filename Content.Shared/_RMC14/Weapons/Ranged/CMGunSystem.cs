@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Projectiles;
+using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -156,7 +157,6 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunDualWieldingComponent, GotEquippedHandEvent>(OnDualWieldingEquippedHand);
         SubscribeLocalEvent<GunDualWieldingComponent, GotUnequippedHandEvent>(OnDualWieldingUnequippedHand);
         SubscribeLocalEvent<GunDualWieldingComponent, GunRefreshModifiersEvent>(OnDualWieldingRefreshModifiers);
-        SubscribeLocalEvent<GunDualWieldingComponent, GetWeaponAccuracyEvent>(OnDualWieldingGetWeaponAccuracy);
 
         SubscribeLocalEvent<UnremoveableComponent, RMCItemDropAttemptEvent>(OnUnremoveableDropAttempt);
     }
@@ -335,7 +335,19 @@ public sealed class CMGunSystem : EntitySystem
             if (!TryComp(args.FiredProjectiles[t], out RMCProjectileAccuracyComponent? accuracyComponent))
                 continue;
 
-            accuracyComponent.Accuracy *= weapon.Comp.ModifiedAccuracyMultiplier;
+            var accuracyMultiplier = weapon.Comp.ModifiedAccuracyMultiplier;
+            if (TryComp(weapon.Owner, out GunDualWieldingComponent? dualWielding) &&
+                dualWielding.WeaponGroup != GunDualWieldingGroup.None &&
+                TryGetGunUser(weapon.Owner, out var user) &&
+                TryGetOtherDualWieldedGun(user, (weapon.Owner, dualWielding), out _))
+            {
+                var seed = (long) t << 32 | (uint) netId;
+                var akimboRandom = new Xoroshiro64S(seed);
+                var penalty = FixedPoint2.New(0.1f * (5 + akimboRandom.Next() % 3));
+                accuracyMultiplier = FixedPoint2.Max(0.1f, accuracyMultiplier - penalty);
+            }
+
+            accuracyComponent.Accuracy *= accuracyMultiplier;
             accuracyComponent.Accuracy += orderAccuracy;
 
             var count = 0;
@@ -746,17 +758,6 @@ public sealed class CMGunSystem : EntitySystem
         args.MaxAngle += gun.Comp.ScatterModifier;
     }
 
-    private void OnDualWieldingGetWeaponAccuracy(Entity<GunDualWieldingComponent> gun, ref GetWeaponAccuracyEvent args)
-    {
-        if (gun.Comp.WeaponGroup == GunDualWieldingGroup.None || !TryGetGunUser(gun, out var user))
-            return;
-
-        if (!TryGetOtherDualWieldedGun(user, gun, out _))
-            return;
-
-        args.AccuracyMultiplier += gun.Comp.AccuracyAddMult;
-    }
-
     private void OnUnremoveableDropAttempt(Entity<UnremoveableComponent> ent, ref RMCItemDropAttemptEvent args)
     {
         args.Cancelled = true;
@@ -774,7 +775,7 @@ public sealed class CMGunSystem : EntitySystem
             if (_hands.GetHeldItem(user, hand) is { } held &&
                 held != gun.Owner &&
                 TryComp(held, out GunDualWieldingComponent? dualWieldingComp) &&
-                dualWieldingComp.WeaponGroup == gun.Comp.WeaponGroup)
+                dualWieldingComp.WeaponGroup != GunDualWieldingGroup.None)
             {
                 otherGun = (held, dualWieldingComp);
                 return true;
