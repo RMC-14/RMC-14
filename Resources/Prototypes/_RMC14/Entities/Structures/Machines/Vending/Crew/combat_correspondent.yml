@@ -40,12 +40,9 @@
         name: Orange Uniform
       - id: RMCJumpsuitCorrespondentRed
         name: Red Uniform
-    - name: Armor
+    - name: Clothes
       choices: { CMArmor: 1 }
       entries:
-      - id: CMArmorPress
-        name: Combat Correspondent's Armor
-        recommended: true
       - id: RMCCoatCorrespondentBlue
         name: Blue Vest
       - id: RMCHazardVestBlack
@@ -54,16 +51,40 @@
         name: Black Coat
       - id: RMCCoatCorrespondentGreen
         name: Green Coat
+    - name: Hats
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: RMCHeadCapCorrespondent
+        name: Combat Correspondent's Cap
+      - id: RMCHeadCapFedoraGrey
+        name: Fedora
+    - name: Armor
+      choices: { CMArmor: 1 }
+      entries:
+      - id: CMArmorPress
+        name: Combat Correspondent's Armor
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
       - id: CMArmorHelmetPress
         name: Combat Correspondent's Helmet
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
         recommended: true
-      - id: RMCHeadCapCorrespondent
-        name: Combat Correspondent's Cap
-      - id: RMCHeadCapFedoraGrey
-        name: Fedora
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        recommended: true
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
+        recommended: true
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
+        recommended: true
+      - id: RMCPouchGeneralLarge
+      - id: RMCPouchPistol
     - name: Refills
       entries:
       #- id: /obj/item/device/camera
@@ -81,6 +102,12 @@
       - id: CMPaperBin30
         name: Paper Bin
         points: 10
+      - id: RMCCameraBroadcasting
+        name: Spare Camera
+        points: 30
+      - id: RMCCorrespondentMicrophone
+        name: Spare Microphone
+        points: 5
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
