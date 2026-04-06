@@ -5,6 +5,7 @@ using Content.Server.Roles;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared._RMC14.Xenonids.Rank;
@@ -31,6 +32,7 @@ public sealed class XenoRoleSystem : EntitySystem
     [Dependency] private readonly PlayTimeTrackingManager _playTimeManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private readonly QueenEyeSystem _queenEye = default!;
     [Dependency] private readonly RoleSystem _role = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -105,6 +107,8 @@ public sealed class XenoRoleSystem : EntitySystem
 
         if (args.Hive is {} newHive)
             _pvsOverride.AddForceSend(newHive, session);
+
+        _queenEye.ReconcileViewerToActiveEyes(ent.Owner);
     }
 
     private void OnRankRefreshName(Entity<XenoRankComponent> ent, ref RefreshNameModifiersEvent args)

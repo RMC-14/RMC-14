@@ -67,9 +67,11 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, XenoWatchEvent>(OnQueenEyeActionWatch);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoUnwatchEvent>(OnQueenEyeActionUnwatch);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoOvipositorChangedEvent>(OnQueenEyeOvipositorChanged);
+        SubscribeLocalEvent<QueenEyeActionComponent, HiveChangedEvent>(OnQueenHiveChanged);
 
         SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
     }
 
     private void OnQueenEyeActionMapInit(Entity<QueenEyeActionComponent> ent, ref MapInitEvent args)
@@ -106,7 +108,7 @@ public sealed class QueenEyeSystem : EntitySystem
         Dirty(ent.Comp.Eye.Value, eyeComp);
         _hive.SetSameHive(ent.Owner, ent.Comp.Eye.Value);
         _visibility.SetLayer(ent.Comp.Eye.Value, (ushort) (ent.Comp.Visibility | VisibilityFlags.Ghost));
-        SubscribeVisibleSessions(ent.Owner, ent.Comp.Eye.Value);
+        ReconcileAllViewersToActiveEyes();
 
         _eye.SetPvsScale((ent, eye), ent.Comp.EyePvsScale);
         _eye.SetTarget(ent, ent.Comp.Eye, eye);
@@ -152,6 +154,15 @@ public sealed class QueenEyeSystem : EntitySystem
         RemoveQueenEye(ent);
     }
 
+    private void OnQueenHiveChanged(Entity<QueenEyeActionComponent> ent, ref HiveChangedEvent args)
+    {
+        if (!_net.IsServer || ent.Comp.Eye is not { } queenEye)
+            return;
+
+        _hive.SetHive(queenEye, args.Hive?.Owner);
+        ReconcileAllViewersToActiveEyes();
+    }
+
     private void OnQueenEyeUnwatch(Entity<QueenEyeComponent> ent, ref XenoUnwatchEvent args)
     {
         if (ent.Comp.Queen is not { } queen)
@@ -165,31 +176,24 @@ public sealed class QueenEyeSystem : EntitySystem
         ReconcileViewerToActiveEyes(args.Entity);
     }
 
-    private void SubscribeVisibleSessions(EntityUid queen, EntityUid queenEye)
+    private void OnPlayerDetached(PlayerDetachedEvent args)
+    {
+        RemoveViewerFromActiveEyes(args.Player);
+    }
+
+    private void ReconcileAllViewersToActiveEyes()
     {
         if (!_net.IsServer)
             return;
 
-        if (_hive.GetHive(queen) is not { } hive)
-            return;
-
-        var xenos = EntityQueryEnumerator<ActorComponent, XenoComponent, HiveMemberComponent>();
-        while (xenos.MoveNext(out _, out var actor, out _, out var member))
+        var actors = EntityQueryEnumerator<ActorComponent>();
+        while (actors.MoveNext(out var uid, out _))
         {
-            if (member.Hive != hive.Owner)
-                continue;
-
-            _viewSubscriber.AddViewSubscriber(queenEye, actor.PlayerSession);
-        }
-
-        var ghosts = EntityQueryEnumerator<ActorComponent, GhostComponent>();
-        while (ghosts.MoveNext(out _, out var actor, out _))
-        {
-            _viewSubscriber.AddViewSubscriber(queenEye, actor.PlayerSession);
+            ReconcileViewerToActiveEyes(uid);
         }
     }
 
-    private void ReconcileViewerToActiveEyes(EntityUid viewer)
+    public void ReconcileViewerToActiveEyes(EntityUid viewer)
     {
         if (!_net.IsServer)
             return;
@@ -227,6 +231,18 @@ public sealed class QueenEyeSystem : EntitySystem
                 _viewSubscriber.AddViewSubscriber(queenEye, actor.PlayerSession);
             else
                 _viewSubscriber.RemoveViewSubscriber(queenEye, actor.PlayerSession);
+        }
+    }
+
+    private void RemoveViewerFromActiveEyes(ICommonSession player)
+    {
+        if (!_net.IsServer)
+            return;
+
+        var eyes = EntityQueryEnumerator<QueenEyeComponent>();
+        while (eyes.MoveNext(out var queenEye, out _))
+        {
+            _viewSubscriber.RemoveViewSubscriber(queenEye, player);
         }
     }
 
