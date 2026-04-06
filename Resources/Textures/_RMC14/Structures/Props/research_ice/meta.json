@@ -1,20 +1,17 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0 & 4.0",
-  "copyright": "Ice taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8d0e113dfafcc590812ff4d55bc002b9b93ece67/icons/turf/ice.dmi modified by Drazamuffin, Parasite taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/65b6faf5d824cf41b4a0053f45869348694ee61b/icons/mob/xenonids/facehugger.dmi modified by Drazamuffin, Drone, Burrower, and King sprites by @aleksh and @.sigma_draconis modified by Drazamuffin",
+  "copyright": "Ice based off of https://github.com/cmss13-devs/cmss13/blob/8d0e113dfafcc590812ff4d55bc002b9b93ece67/icons/turf/ice.dmi modified by Drazamuffin, Queen and pellet sprites by Drazamuffin",
   "size": {
     "x": 96,
     "y": 128
   },
   "states": [
     {
-      "name": "R_iceD"
+      "name": "icechunk"
     },
     {
-      "name": "R_iceK"
-    },
-    {
-      "name": "R_iceP"
+      "name": "icechunk_elsa"
     }
   ]
 }
