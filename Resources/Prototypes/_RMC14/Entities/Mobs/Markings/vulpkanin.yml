@@ -210,6 +210,8 @@
   sprites:
     - sprite: _RMC14/Mobs/Vulpkanin/head_markings.rsi
       state: blaze
+    - sprite: _RMC14/Mobs/Vulpkanin/head_markings.rsi
+      state: nose_blaze
 
 - type: marking
   id: VulpSnoutPatch

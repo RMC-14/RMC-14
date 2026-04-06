@@ -238,7 +238,6 @@
   - type: Corrodible
     isCorrodible: false
 
-# TODO RMC14: Do we not have something for fire resistance?
 - type: entity
   parent: RMCArmorM4PMCNoLight
   id: RMCArmorM4PMCEngineer
@@ -248,13 +247,14 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/engineer.rsi
   - type: CMArmor
-    melee: 15
     bullet: 15 # CLOTHING_ARMOR_MEDIUMLOW
-    bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.725
-    sprintModifier: 0.725
+    # TODO 20 internal damage protection
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.3
+  - type: RMCImmuneToIgnition
+    immuneToDirectHits: false
 
 - type: entity
   parent: RMCBaseJacket

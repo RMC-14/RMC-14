@@ -667,3 +667,14 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillVehicles: 3
+
+# Vulture
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminVulture1
+  name: vulture 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillVulture: 1

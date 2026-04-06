@@ -70,6 +70,10 @@
         Blunt: 80
   - type: XenoCrusherChargable
   - type: RMCMesonsNonviewable
+  - type: Tag
+    tags:
+    - Structure
+    - WindowFrame
 
 - type: entity
   parent: RMCBaseWindowFrame
@@ -217,3 +221,6 @@
     node: windowFrameWood
   - type: XenoLeapDestroyOnPass
     spawnPrototype: RMCPlankWood
+
+- type: Tag
+  id: WindowFrame
