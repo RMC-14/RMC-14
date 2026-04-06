@@ -108,6 +108,7 @@
 - type: entity
   parent: RMCCoin
   id: RMCMoneybag
+  name: money bag
   components:
   - type: Sprite
     state: moneybag
