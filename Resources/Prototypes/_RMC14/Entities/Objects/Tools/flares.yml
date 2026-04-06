@@ -22,8 +22,13 @@
   - type: ExpendableLight
     spentName: expendable-light-spent-flare-name
     spentDesc: expendable-light-spent-flare-desc
-    glowDuration: 600
-    fadeOutDuration: 30
+    glowDuration: 5
+    phaseOneDuration: 45
+    phaseTwoDuration: 525
+    phaseThreeDuration: 90
+    phaseFourDuration: 90
+    phaseFiveDuration: 90
+    fadeOutDuration: 120
     iconStateSpent: flare_spent
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
@@ -58,16 +63,41 @@
     netsync: false
   - type: LightBehaviour
     behaviours:
-      - !type:FadeBehaviour # faster then base flares
+      - !type:FadeBehaviour
         id: turn_on
-        maxDuration: 5.0
+        maxDuration: 5
         startValue: 2.5
-        endValue: 7.0
-      - !type:FadeBehaviour # burns out slower
+        endValue: 7
+      - !type:FadeBehaviour
+        id: phase_1
+        maxDuration: 45
+        startValue: 7
+        endValue: 6
+      - !type:FadeBehaviour
+        id: phase_2
+        maxDuration: 525
+        startValue: 6
+        endValue: 5
+      - !type:FadeBehaviour
+        id: phase_3
+        maxDuration: 90
+        startValue: 5
+        endValue: 4
+      - !type:FadeBehaviour
+        id: phase_4
+        maxDuration: 90
+        startValue: 4
+        endValue: 3
+      - !type:FadeBehaviour
+        id: phase_5
+        maxDuration: 90
+        startValue: 3
+        endValue: 2
+      - !type:FadeBehaviour
         id: fade_out
-        maxDuration: 570
-        startValue: 7.0
-        endValue: 1.0
+        maxDuration: 120
+        startValue: 2
+        endValue: 1
   - type: RMCNightVisionVisibleOnIgnite
   - type: CartridgeAmmo
     deleteOnSpawn: true
@@ -104,19 +134,51 @@
     color: "#AACCAA"
   - type: FlareSignal
   - type: ExpendableLight
-    glowDuration: 180
+    glowDuration: 5
+    phaseOneDuration: 150
+    phaseTwoDuration: 0
+    phaseThreeDuration: 0
+    phaseFourDuration: 0
+    phaseFiveDuration: 0
+    fadeOutDuration: 25
+    acidDamageMultiplier: 2
   - type: LightBehaviour
     behaviours:
-    - !type:FadeBehaviour # faster then base flares
+    - !type:FadeBehaviour
       id: turn_on
-      maxDuration: 5.0
+      maxDuration: 5
       startValue: 2.5
-      endValue: 7.0
-    - !type:FadeBehaviour # burns out slower
-      id: fade_out
+      endValue: 5
+    - !type:FadeBehaviour
+      id: phase_1
       maxDuration: 150
-      startValue: 7.0
-      endValue: 1.0
+      startValue: 5
+      endValue: 5
+    - !type:FadeBehaviour
+      id: phase_2
+      maxDuration: 0
+      startValue: 5
+      endValue: 5
+    - !type:FadeBehaviour
+      id: phase_3
+      maxDuration: 0
+      startValue: 5
+      endValue: 5
+    - !type:FadeBehaviour
+      id: phase_4
+      maxDuration: 0
+      startValue: 5
+      endValue: 5
+    - !type:FadeBehaviour
+      id: phase_5
+      maxDuration: 0
+      startValue: 5
+      endValue: 5
+    - !type:FadeBehaviour
+      id: fade_out
+      maxDuration: 25
+      startValue: 5
+      endValue: 1
   - type: CartridgeAmmo
     proto: RMCFlareCASBullet
   - type: RMCAirProjectile
@@ -147,7 +209,12 @@
     energy: 1.5
   - type: ExpendableLight
     pickupWhileOn: false
-    glowDuration: 375
+    glowDuration: 5
+    phaseOneDuration: 30
+    phaseTwoDuration: 240
+    phaseThreeDuration: 30
+    phaseFourDuration: 30
+    phaseFiveDuration: 30
     fadeOutDuration: 30
     spentName: expendable-light-starshell-ash-empty-name
     spentDesc: expendable-light-starshell-ash-empty-desc
@@ -157,14 +224,39 @@
     behaviours:
     - !type:FadeBehaviour
       id: turn_on
-      maxDuration: 5.0
+      maxDuration: 5
       startValue: 2.5
-      endValue: 7.0
+      endValue: 6
+    - !type:FadeBehaviour
+      id: phase_1
+      maxDuration: 30
+      startValue: 6
+      endValue: 5
+    - !type:FadeBehaviour
+      id: phase_2
+      maxDuration: 240
+      startValue: 5
+      endValue: 4
+    - !type:FadeBehaviour
+      id: phase_3
+      maxDuration: 30
+      startValue: 4
+      endValue: 3
+    - !type:FadeBehaviour
+      id: phase_4
+      maxDuration: 30
+      startValue: 3
+      endValue: 2
+    - !type:FadeBehaviour
+      id: phase_5
+      maxDuration: 30
+      startValue: 2
+      endValue: 1.5
     - !type:FadeBehaviour
       id: fade_out
-      maxDuration: 375
-      startValue: 7.0
-      endValue: 1.0
+      maxDuration: 30
+      startValue: 1.5
+      endValue: 1
 
 - type: entity
   parent: RMCBoxMagazineSupplySmallBase
@@ -405,7 +497,12 @@
   components:
   - type: ExpendableLight
     startsActivated: true
-    glowDuration: 150
+    glowDuration: 5
+    phaseOneDuration: 295
+    phaseTwoDuration: 0
+    phaseThreeDuration: 0
+    phaseFourDuration: 0
+    phaseFiveDuration: 0
     fadeOutDuration: 30
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
@@ -416,6 +513,11 @@
         maxDuration: 5.0
         startValue: 2.5
         endValue: 7.0
+      - !type:FadeBehaviour
+        id: phase_1
+        maxDuration: 295
+        startValue: 7
+        endValue: 7
       - !type:FadeBehaviour
         id: fade_out
         maxDuration: 30
@@ -429,7 +531,7 @@
     radius: 8.0
     energy: 0.6
   - type: TimedDespawn
-    lifetime: 180
+    lifetime: 330
 
 - type: entity
   parent: RMCAirFlare
@@ -442,7 +544,12 @@
     - RMCFlareCAS
   - type: ExpendableLight
     startsActivated: true
-    glowDuration: 150
+    glowDuration: 5
+    phaseOneDuration: 145
+    phaseTwoDuration: 0
+    phaseThreeDuration: 0
+    phaseFourDuration: 0
+    phaseFiveDuration: 0
   - type: Sprite
     sprite: _RMC14/Objects/Misc/air_flare.rsi
     layers:
@@ -453,14 +560,19 @@
     behaviours:
       - !type:FadeBehaviour
        id: turn_on
-       maxDuration: 5.0
+       maxDuration: 5
        startValue: 2.5
-       endValue: 7.0
+       endValue: 5
+      - !type:FadeBehaviour
+        id: phase_1
+        maxDuration: 145
+        startValue: 5
+        endValue: 5
       - !type:FadeBehaviour
        id: fade_out
        maxDuration: 30
-       startValue: 7.0
-       endValue: 1.0
+       startValue: 5
+       endValue: 1
   - type: PointLight
     color: "#A7FFA7"
     radius: 8.0
@@ -472,26 +584,13 @@
 
 - type: entity
   name: flare
-  parent: BaseItem
+  parent: CMFlare
   id: RMCFlareL96
   description: A vibrant purple Royal Crown Marines issued flare. There are instructions on the side, it reads 'To light, pull cord'.
   components:
   - type: Tag
     tags:
     - RMCFlareL96
-  - type: ExpendableLight
-    spentName: expendable-light-spent-flare-name
-    spentDesc: expendable-light-spent-flare-desc
-    glowDuration: 600
-    fadeOutDuration: 30
-    iconStateSpent: flare_spent
-    turnOnBehaviourID: turn_on
-    fadeOutBehaviourID: fade_out
-    litSound:
-      path: /Audio/_RMC14/Machines/flare_activate_2.ogg
-      params:
-        variation: 0.08
-    loopedSound: /Audio/Items/Flare/flare_burn.ogg
   - type: Sprite
     sprite: _RMC14/Objects/Misc/flares.rsi
     layers:
@@ -506,29 +605,12 @@
   - type: Icon
     sprite: _RMC14/Objects/Misc/flares.rsi
     state: icon
-  - type: Item
-    size: Small
-    heldPrefix: unlit
-  - type: Appearance
   - type: PointLight
     enabled: false
     color: "#C8BFE7"
     radius: 1
     energy: 5.0
     netsync: false
-  - type: LightBehaviour
-    behaviours:
-      - !type:FadeBehaviour
-        id: turn_on
-        maxDuration: 5.0
-        startValue: 2.5
-        endValue: 7.0
-      - !type:FadeBehaviour
-        id: fade_out
-        maxDuration: 570
-        startValue: 7.0
-        endValue: 1.0
-  - type: RMCNightVisionVisibleOnIgnite
   - type: CartridgeAmmo
     deleteOnSpawn: true
     proto: RMCFlareL96Bullet
@@ -578,31 +660,17 @@
     energy: 7.0
 
 - type: entity
+  parent: RMCAirFlare
   id: RMCAirFlareL96
   name: air flare
   categories: [ HideSpawnMenu ]
   components:
-  - type: ExpendableLight
-    startsActivated: true
-    glowDuration: 150
   - type: Sprite
     sprite: _RMC14/Objects/Misc/air_flare.rsi
     layers:
     - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
       state: air_flame
       color: "#C8BFE7"
-  - type: LightBehaviour
-    behaviours:
-      - !type:FadeBehaviour
-       id: turn_on
-       maxDuration: 5.0
-       startValue: 2.5
-       endValue: 7.0
-      - !type:FadeBehaviour
-       id: fade_out
-       maxDuration: 30
-       startValue: 7.0
-       endValue: 1.0
   - type: PointLight
     enabled: true
     color: "#C8BFE7"

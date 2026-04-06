@@ -31,6 +31,7 @@ public sealed class LineSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly ProtoId<TagPrototype> WindowFrameTag = "WindowFrame";
     private static readonly float MaxBeamDistance = 500;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
@@ -170,8 +171,11 @@ public sealed class LineSystem : EntitySystem
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid.Value, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
-            if (!ignoreBarricades && _barricadeQuery.HasComp(uid))
+            if (_barricadeQuery.HasComp(uid))
             {
+                if (ignoreBarricades)
+                    continue;
+
                 if (_doorQuery.TryComp(uid, out var door) && door.State != DoorState.Closed)
                     continue;
 
@@ -197,6 +201,9 @@ public sealed class LineSystem : EntitySystem
             }
             else if (_tag.HasAnyTag(uid.Value, StructureTag, WallTag))
             {
+                if (ignoreBarricades && _tag.HasTag(uid.Value, WindowFrameTag))
+                    continue;
+
                 blocker = uid.Value;
                 return true;
             }
