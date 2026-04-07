@@ -399,7 +399,7 @@
 
 #Avali
 - type: emote
-  id: RMCAvaliChirps
+  id: RMCAvaliChirp
   name: rmc-emote-name-avali-chirp
   category: Vocal
   available: false

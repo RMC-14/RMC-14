@@ -385,9 +385,9 @@
   chatMessages: ["chat-emote-msg-chirp"]
   chatTriggers:
     - chirp
-    - chirps
+    #- chirps //RMC14 conflicts with RMCAvaliChirp
     - chirped
-    - chirping
+    #- chirping //RMC14
 
 # Machine Emotes
 - type: emote
