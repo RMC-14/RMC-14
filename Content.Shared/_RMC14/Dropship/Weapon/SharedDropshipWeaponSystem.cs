@@ -1258,7 +1258,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         _physics.SetBodyType(ent, BodyType.Static);
 
         var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _mapManager);
-        if (CasDebug && _area.CanCAS(coordinates))
+
+        if (CasDebug || _area.CanCAS(coordinates))
         {
             if (TryComp<AppearanceComponent>(ent, out var appearance))
                 _appearance.SetData(ent, SignalFlareVisuals.BeaconState, true, appearance);
