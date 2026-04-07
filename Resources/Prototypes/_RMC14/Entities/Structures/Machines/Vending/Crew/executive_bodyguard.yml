@@ -309,7 +309,7 @@
         entries:
         # id: Shock Shotgun 15p
         - id: RMCWeaponRifleM54CWhite
-        - id: WeaponSMGM63
+        - id: RMCWeaponSMGM63WhiteNoLock
         - id: RMCWeaponRifleSSG45Stripped
       - name: Sidearm
         ranks:
