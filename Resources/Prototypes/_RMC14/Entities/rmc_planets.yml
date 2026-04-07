@@ -14,6 +14,8 @@
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: 1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
       - CMSurvivorLV624CorporateLiaison: 2
@@ -90,6 +92,7 @@
       - CMSurvivorSolarisCMBMarshal: 1
       CMSurvivor:
       - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorSolarisChaplain: -1
       - CMSurvivorUNMCRecruiter: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
@@ -186,16 +189,16 @@
       - CMSurvivorScientist: 2
     survivorJobVariantScenarios:
       panic_room_hold:
-        CMSurvivorEngineer:
-        - RMCSurvivorShivasPanicRoomEngineer: 2
-        CMSurvivorScientist:
-        - RMCSurvivorShivasPanicRoomResearcher: 2
-        CMSurvivorDoctor:
-        - RMCSurvivorShivasPanicRoomDoctor: 2
         CMSurvivorSecurity:
         - RMCSurvivorPMCCommandoShivas: 1
         CMSurvivorCorporate:
         - RMCSurvivorAssistantManager: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorShivasPanicRoomDoctor: 2
+        CMSurvivorEngineer:
+        - RMCSurvivorShivasPanicRoomEngineer: 2
+        CMSurvivorScientist:
+        - RMCSurvivorShivasPanicRoomResearcher: 2
         CMSurvivor:
         - RMCSurvivorShivasPanicRoomCivilian: 2
 
@@ -266,7 +269,8 @@
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
-      - CMSurvivorMiner: -1
+      - RMCSurvivorCivilianUnique: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorTrijentChaplain: 1
       - RMCSurvivorHybrisaFireProtectionSpecialist: 1
       CMSurvivorCorporate:
@@ -350,8 +354,10 @@
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorCommanderNewVaradero: 1
       CMSurvivor:
+      - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorBeachBum: -1
-      - CMSurvivorMiner: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
       - CMSurvivorVaraderoICB: 2
@@ -463,7 +469,7 @@
     survivorJobScenarios:
       tse_airbase: # Order of job priority for paramarines. Scientist is overriden into doctor, Corporate into survivor
       - RMCSurvivorCommandingOfficer: 1
-      - RMCJobSyntheticColony: 1
+      - RMCSyntheticColony: 1
       - CMSurvivorDoctor: 1
       - CMSurvivorEngineer: 1
       - CMSurvivorSecurity: 2
@@ -472,7 +478,7 @@
       tse_airbase: # RCM Paramarines
         RMCSurvivorCommandingOfficer:
         - RMCSurvivorParaCommander: 1
-        RMCJobSyntheticColony:
+        RMCSyntheticColony:
         - RMCSurvivorParaSupportSynthetic: 1
         CMSurvivorDoctor:
         - RMCSurvivorParaMedicalTechnician: 1

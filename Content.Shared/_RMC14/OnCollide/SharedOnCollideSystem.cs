@@ -41,11 +41,21 @@ public abstract class SharedOnCollideSystem : EntitySystem
         _damageOnCollideQuery = GetEntityQuery<DamageOnCollideComponent>();
 
         SubscribeLocalEvent<DamageOnCollideComponent, StartCollideEvent>(OnStartCollide);
+        SubscribeLocalEvent<DamageOnCollideComponent, EndCollideEvent>(OnEndCollide);
     }
 
     private void OnStartCollide(Entity<DamageOnCollideComponent> ent, ref StartCollideEvent args)
     {
         OnCollide(ent, args.OtherEntity);
+    }
+
+    private void OnEndCollide(Entity<DamageOnCollideComponent> ent, ref EndCollideEvent args)
+    {
+        if (!ent.Comp.CanRehit)
+            return;
+
+        if (ent.Comp.Damaged.Remove(args.OtherEntity))
+            Dirty(ent);
     }
 
     private void OnCollide(Entity<DamageOnCollideComponent> ent, EntityUid other)
@@ -77,7 +87,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
             var damage = ent.Comp.Damage;
             if (ent.Comp.Acidic)
                 damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
-            _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
+            _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances, armorPiercing: ent.Comp.ArmorPenetration);
             DoEmote(ent, other);
             didEmote = true;
         }

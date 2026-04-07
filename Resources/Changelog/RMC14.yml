@@ -1,509 +1,4 @@
 ﻿Entries:
-- author: 0awful
-  changes:
-  - message: Req can now give you the fancy new xl armor vests.
-    type: Add
-  id: 2515
-  time: '2025-11-17T10:20:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8255
-- author: x5tink
-  changes:
-  - message: Fixed Rollerbeds not appearing in hand.
-    type: Fix
-  id: 2516
-  time: '2025-11-17T10:24:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8393
-- author: monomethylhydrazine
-  changes:
-  - message: Fixed Basira-Armstrong magazines being medium instead of small sized.
-    type: Fix
-  id: 2517
-  time: '2025-11-17T10:25:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8389
-- author: PursuitInAshes
-  changes:
-  - message: The FORECON CO no longer has all access by default.
-    type: Tweak
-  id: 2518
-  time: '2025-11-17T11:45:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8224
-- author: Arykh
-  changes:
-  - message: You can now examine reagents inside a pressurized reagent canister pouch!
-      This requires medical skill 1 just like examining pills.
-    type: Add
-  - message: Fixed multiple reagent names in pills not properly seperated.
-    type: Fix
-  id: 2519
-  time: '2025-11-17T11:47:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8248
-- author: Ian321
-  changes:
-  - message: The logistics officer can now vend filled boxes from weapons racks.
-    type: Add
-  id: 2520
-  time: '2025-11-17T11:50:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8398
-- author: x5tink
-  changes:
-  - message: Added SMO Admeme Plushie
-    type: Add
-  - message: Liliana Patron Figurine
-    type: Tweak
-  id: 2521
-  time: '2025-11-17T12:12:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8394
-- author: OmerF-afk
-  changes:
-  - message: Added lanterns to survivor pouches
-    type: Add
-  id: 2522
-  time: '2025-11-18T11:02:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8426
-- author: OmerF-afk
-  changes:
-  - message: Added extra functionality and sovl to welding masks
-    type: Add
-  id: 2523
-  time: '2025-11-18T11:04:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8411
-- author: Aurallianz
-  changes:
-  - message: improved Mutiny text
-    type: Add
-  id: 2524
-  time: '2025-11-19T02:17:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8432
-- author: monomethylhydrazine
-  changes:
-  - message: Added the cassette pouch, which can store up to 3 cassettes. Available
-      in Rec-Vends.
-    type: Add
-  id: 2525
-  time: '2025-11-19T02:20:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8387
-- author: Ian321
-  changes:
-  - message: Synthetics can now toggle their nightvision.
-    type: Tweak
-  - message: Synthetics should now always have oil for blood.
-    type: Fix
-  id: 2526
-  time: '2025-11-19T02:23:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8280
-- author: noctyrnal
-  changes:
-  - message: Added Bosenmori Basho, a large version of LV designed for PVE.
-    type: Add
-  - message: Fixed RCM, Corporate Security and UN Riot armor having PMC lights.
-    type: Fix
-  id: 2527
-  time: '2025-11-19T02:25:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8391
-- author: CatAndHats
-  changes:
-  - message: Fixed the LV-624 corporate goon medic special survivor to have the proper
-      hud icon
-    type: Fix
-  id: 2528
-  time: '2025-11-19T02:47:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8413
-- author: PursuitInAshes
-  changes:
-  - message: The LV-624 Goon Leader survivor variant will now spawn with the correct
-      uniform.
-    type: Fix
-  id: 2529
-  time: '2025-11-19T02:48:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8285
-- author: ExponentialWizard
-  changes:
-  - message: Oppressor abduct and Boiler bombard can now be targetted further than
-      their range, automatically capping at the max range.
-    type: Add
-  - message: Fixed some abduct and bombard issues.
-    type: Fix
-  id: 2530
-  time: '2025-11-19T02:52:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8368
-- author: breeplayx3
-  changes:
-  - message: Added new lobby art by breeplayx3
-    type: Add
-  id: 2531
-  time: '2025-11-19T02:57:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8311
-- author: Ian321
-  changes:
-  - message: Syringes now toggle correctly between drawing and injecting when used
-      on a hypospray.
-    type: Fix
-  id: 2532
-  time: '2025-11-19T02:58:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8372
-- author: PursuitInAshes
-  changes:
-  - message: The 'High Command' job now spawns with more equipment.
-    type: Tweak
-  - message: The 'High Command' headset now has access to the provost radio channel.
-    type: Tweak
-  id: 2533
-  time: '2025-11-19T02:59:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8286
-- author: CyberTropic
-  changes:
-  - message: Added exclamation to primed grenades.
-    type: Add
-  id: 2534
-  time: '2025-11-19T03:00:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8317
-- author: Ian321
-  changes:
-  - message: Added the automated personal uniform closet, north of CIC and in the
-      gym.
-    type: Add
-  id: 2536
-  time: '2025-11-19T03:01:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8384
-- author: CatAndHats
-  changes:
-  - message: Added new survival pouch sprites; grey for synthetics, black for SPP
-      military and PMCs, and brown for everyone else.
-    type: Add
-  id: 2537
-  time: '2025-11-19T03:03:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8433
-- author: Vixting
-  changes:
-  - message: Sentry respects faction IFF
-    type: Add
-  id: 2538
-  time: '2025-11-19T03:06:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8367
-- author: CatAndHats
-  changes:
-  - message: The 571-C sentry gun is now highlighted as a recommended option in the
-      combat technician vendor.
-    type: Tweak
-  id: 2539
-  time: '2025-11-19T03:06:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8023
-- author: CatAndHats
-  changes:
-  - message: Fixed xenos being able to examine humanoid's skills.
-    type: Fix
-  id: 2540
-  time: '2025-11-19T03:07:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8209
-- author: ExponentialWizard
-  changes:
-  - message: Air-fired CAS flares now have a sprite.
-    type: Add
-  - message: Fixed air flares lasting longer than 3 minutes.
-    type: Fix
-  id: 2541
-  time: '2025-11-19T03:11:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8331
-- author: Vermidia
-  changes:
-  - message: Fixed Valk Tantrum being usuable past it's max range sometimes
-    type: Fix
-  id: 2542
-  time: '2025-11-29T02:51:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8492
-- author: PursuitInAshes
-  changes:
-  - message: UNMC Synthetics now have the correct points for the experimental tools
-      vendor.
-    type: Fix
-  id: 2543
-  time: '2025-11-29T02:52:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8269
-- author: JustMyselfUwU
-  changes:
-  - message: Added storage draw/open methods to tool webbings
-    type: Add
-  id: 2544
-  time: '2025-11-29T02:54:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8446
-- author: JustMyselfUwU
-  changes:
-  - message: Fixed MOU53 not receiving the correct accuracy bonus from the gyroscopic
-      stabilizer.
-    type: Fix
-  id: 2545
-  time: '2025-11-29T02:57:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8483
-- author: Vermidia
-  changes:
-  - message: Added even more avali names
-    type: Add
-  id: 2546
-  time: '2025-11-29T02:58:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8475
-- author: noctyrnal
-  changes:
-  - message: Added basketball hoops!
-    type: Add
-  - message: The Large Tree on LV has been resprited.
-    type: Add
-  id: 2547
-  time: '2025-11-29T03:03:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8466
-- author: BramvanZijp
-  changes:
-  - message: Ziptie boxes will now fit in armor and armor vests again.
-    type: Fix
-  id: 2548
-  time: '2025-11-29T03:04:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8444
-- author: noctyrnal
-  changes:
-  - message: The Civilian Binoculars have received new sprites.
-    type: Tweak
-  id: 2549
-  time: '2025-11-29T03:07:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8468
-- author: Majkl-J
-  changes:
-  - message: Fixed mag to mag repacking leaving floating ammo around unfortunate marines.
-    type: Fix
-  id: 2550
-  time: '2025-11-29T03:16:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8271
-- author: Vermidia
-  changes:
-  - message: Fixed bloodpacks refilling blood off of non-blood reagents contained
-      within them.
-    type: Fix
-  id: 2551
-  time: '2025-11-29T03:18:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8260
-- author: Arykh
-  changes:
-  - message: You can now transfer pill bottles into the chemmaster using via pill
-      box!
-    type: Add
-  - message: You can now collect pill bottles from the floor using the pill box!
-    type: Add
-  id: 2552
-  time: '2025-11-29T03:24:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8402
-- author: Tunguso4ka
-  changes:
-  - message: Replaced most of reinforced walls on Sorokyne with standard walls.
-    type: Fix
-  id: 2553
-  time: '2025-11-29T03:28:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8453
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Modified the virology open nightmare insert on solaris ridge. It now
-      spawns with a flamethrower, syringe case, and has some new props.
-    type: Add
-  id: 2554
-  time: '2025-11-29T03:30:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8467
-- author: 0awful
-  changes:
-  - message: Rifleman's armor vest option now renders like the other armor options.
-    type: Tweak
-  id: 2555
-  time: '2025-11-29T03:37:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8419
-- author: Vermidia
-  changes:
-  - message: Fixed some heals not healing enough.
-    type: Fix
-  id: 2556
-  time: '2025-11-29T04:24:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8486
-- author: CatAndHats
-  changes:
-  - message: Pizza boxes now fit into storages like any other normal-sized item.
-    type: Fix
-  id: 2557
-  time: '2025-11-29T04:36:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8451
-- author: Gallagin
-  changes:
-  - message: Added a PvE visor helmet garb to the PvP loadout
-    type: Add
-  id: 2558
-  time: '2025-11-29T04:41:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8484
-- author: monomethylhydrazine
-  changes:
-  - message: Added more order callouts, ported from CM13.
-    type: Add
-  id: 2559
-  time: '2025-11-29T04:45:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8479
-- author: noctyrnaled
-  changes:
-  - message: Fixed IDs layering over armour and jackets.
-    type: Fix
-  id: 2560
-  time: '2025-11-29T04:48:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8460
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the dead examine text for xenos appearing twice.
-    type: Fix
-  id: 2561
-  time: '2025-11-29T04:51:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8450
-- author: Vermidia
-  changes:
-  - message: Fixed hedgehog ravager having slightly too much base armor and not enough
-      explosion armor.
-    type: Fix
-  id: 2562
-  time: '2025-11-29T05:00:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8495
-- author: PursuitInAshes
-  changes:
-  - message: '[PvE] Three new sound markers have been added for GM use. (Vent Crawl/Pass,
-      Xeno Door Prying)'
-    type: Add
-  id: 2563
-  time: '2025-11-29T05:03:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8441
-- author: CatAndHats
-  changes:
-  - message: Fixed the Chief Engineer and Maintenance Technician vendors to now have
-      points and gave them some items they were missing.
-    type: Fix
-  id: 2564
-  time: '2025-11-29T05:16:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8124
-- author: Vermidia
-  changes:
-  - message: Fixed Queen gut ability sometimes being able to gib multiple marines
-    type: Fix
-  id: 2565
-  time: '2025-11-29T05:26:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8281
-- author: CatAndHats
-  changes:
-  - message: Fixed maintenance semiotic name
-    type: Fix
-  id: 2566
-  time: '2025-11-29T05:47:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8464
-- author: CatAndHats
-  changes:
-  - message: Fixed being able to put multiple nailguns in the customised nailgun holster
-    type: Fix
-  id: 2567
-  time: '2025-11-29T05:52:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8448
-- author: Vinny-Shick
-  changes:
-  - message: Avali base tail wag animation.
-    type: Add
-  id: 2568
-  time: '2025-11-29T05:55:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8430
-- author: CyberTropic
-  changes:
-  - message: Added half-bright mode for ghosts.
-    type: Add
-  id: 2569
-  time: '2025-11-29T06:08:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8469
-- author: Whisper
-  changes:
-  - message: Added the Provost Inspector, an SEA style role for the military police
-      to ensure the intents of Provost are followed.
-    type: Add
-  id: 2570
-  time: '2025-11-29T09:08:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8494
-- author: Arykh
-  changes:
-  - message: Water now costs 0 energy in the Chem Dispenser!
-    type: Tweak
-  - message: Sinks now give infinite water!
-    type: Tweak
-  id: 2571
-  time: '2025-11-29T09:12:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8447
-- author: CatAndHats
-  changes:
-  - message: Added the honor guard pamphlet which is found in the honor guard kit,
-      which grants them their hud icon and job title.
-    type: Add
-  id: 2572
-  time: '2025-11-29T09:44:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8195
-- author: noctyrnal
-  changes:
-  - message: COs with 450+ Hours can now get golden versions of their sidearms in
-      their loadouts.
-    type: Add
-  id: 2573
-  time: '2025-11-29T09:46:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8162
-- author: BramvanZijp
-  changes:
-  - message: The Commanding Officer's M59a Prototype Rifle now comes in a case alongside
-      3 MK1 AP Magazines instead of one regular MK1 Magazine.
-    type: Tweak
-  id: 2574
-  time: '2025-11-29T10:12:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8158
-- author: ayou331
-  changes:
-  - message: Added xeno chevron for playtime over 350h
-    type: Add
-  id: 2575
-  time: '2025-11-29T10:17:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7896
-- author: CatAndHats
-  changes:
-  - message: Fixed squad prep and requisitions vendors missing the micro laser sight
-      attachment.
-    type: Fix
-  id: 2576
-  time: '2025-11-29T10:58:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8216
-- author: noctyrnal
-  changes:
-  - message: Added Flight Visors, visors that JTAC crew can get from their vendors,
-      and pre-installed in their helmets. Purely cosmetic, but they look pretty cool.
-    type: Add
-  id: 2577
-  time: '2025-11-30T06:25:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8502
-- author: KompaniLinge
-  changes:
-  - message: Added CO service jackets, enjoy!
-    type: Add
-  id: 2578
-  time: '2025-11-30T09:26:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8173
-- author: noctyrnal
-  changes:
-  - message: Fixed indestructible podlocks being corrodible.
-    type: Fix
-  id: 2579
-  time: '2025-11-30T09:27:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8505
-- author: Vermidia
-  changes:
-  - message: Fixed Queens not maturing instantly on hijack start.
-    type: Fix
-  id: 2580
-  time: '2025-11-30T09:40:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8268
-- author: Whisper
-  changes:
-  - message: Fixed Xenonids fitting in storage containers.
-    type: Fix
-  id: 2581
-  time: '2025-12-01T00:24:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8511
 - author: Vixting
   changes:
   - message: Fixed queen building speed boost being too fast.
@@ -4505,5 +4000,562 @@
   id: 3016
   time: '2026-03-26T10:50:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9435
+- author: kleinerstation13
+  changes:
+  - message: Fixed SPP SOF not being able to open their own dropship doors
+    type: Fix
+  - message: Fixed SPP SOF not spawning with shortwave radios
+    type: Fix
+  - message: Fixed SPP SOF hearing marine announcements
+    type: Fix
+  id: 3017
+  time: '2026-03-28T11:05:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9410
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the SPP SOF sorokyne survivors insert having the wrong skills.
+    type: Fix
+  - message: Fixed the SPP SOF sorokyne survivors not all spawning with 20 metal sheets.
+    type: Fix
+  id: 3018
+  time: '2026-03-28T11:07:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9408
+- author: GNUtopia
+  changes:
+  - message: Improvised firebombs and AGM-I grenades now burn for the proper time
+    type: Fix
+  id: 3019
+  time: '2026-03-28T11:06:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9409
+- author: Arykh
+  changes:
+  - message: Added the Body Scanner! Its scan is more detailed than the Health Analyzer,
+      but it's not continuous.
+    type: Add
+  id: 3020
+  time: '2026-03-28T11:09:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9398
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] added large magazine boxes for most PVE weapons.'
+    type: Add
+  id: 3021
+  time: '2026-03-28T11:15:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9293
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Mess Techs not being mutiny eligible
+    type: Fix
+  id: 3022
+  time: '2026-03-28T11:13:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9321
+- author: Arykh
+  changes:
+  - message: Added a heart rate monitor to the health analyzer.
+    type: Add
+  id: 3023
+  time: '2026-03-28T22:37:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9327
+- author: Arykh
+  changes:
+  - message: Added the Autodoc medical pod!
+    type: Add
+  id: 3024
+  time: '2026-03-28T22:38:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9363
+- author: Arykh
+  changes:
+  - message: Added the sleeper medical pod! Removes chemicals from the occupant and
+      can inject stabilizing chemicals, with more becoming available as injuries worsen.
+    type: Add
+  id: 3025
+  time: '2026-03-28T22:39:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9130
+- author: BreakpointDebug1234
+  changes:
+  - message: M1984 hollow point magazine box. Can be crafted, purchased or received
+      as a random crate from ASRS.
+    type: Add
+  id: 3026
+  time: '2026-03-30T04:48:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8947
+- author: Ian321
+  changes:
+  - message: XO and others now keep their pointer when no longer SL
+    type: Fix
+  id: 3027
+  time: '2026-03-30T04:52:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9279
+- author: SharkSnake98
+  changes:
+  - message: Added the option for all non-suit liaison uniforms to fold their sleeves
+      and jackets
+    type: Add
+  - message: Added a closed state to the WEYA rain jacket
+    type: Add
+  - message: Fixed Windbreakers being unable to have patches and accessories on them
+    type: Fix
+  id: 3028
+  time: '2026-03-30T04:53:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9297
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the CLF armor vests having no bio protection and sentinel resistance.
+      They now have sentinel resistance and 15 biohazard protection.
+    type: Fix
+  id: 3029
+  time: '2026-03-30T04:51:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9269
+- author: Arykh
+  changes:
+  - message: Fixed the Power Loader being able to load the orbital cannon from across
+      the room.
+    type: Fix
+  id: 3030
+  time: '2026-03-30T04:53:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9282
+- author: Vixting
+  changes:
+  - message: Xeno apply acid is now a repeat action & has outline around items
+    type: Tweak
+  id: 3031
+  time: '2026-03-31T01:57:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9535
+- author: Bakeun0
+  changes:
+  - message: Fixed burrow-down sound being played when selecting a tile to burrow
+      to, or cancelling a burrow. It will now only be played upon entering the burrowed
+      state.
+    type: Fix
+  id: 3032
+  time: '2026-03-31T01:57:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9523
+- author: Aurallianz
+  changes:
+  - message: Paper is cooler now
+    type: Tweak
+  id: 3033
+  time: '2026-03-31T01:58:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9403
+- author: Ian321
+  changes:
+  - message: Fixed dropship weapon targeting systems stacking if multiple are used
+      at the same time.
+    type: Fix
+  id: 3034
+  time: '2026-03-31T02:00:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9484
+- author: BreakpointDebug1234
+  changes:
+  - message: M54C MK2 rubber mags now use the correct sprite
+    type: Fix
+  - message: M54C MK1 rubber mags, available in the MP riot vend
+    type: Add
+  id: 3035
+  time: '2026-03-31T08:37:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9157
+- author: Dygon
+  changes:
+  - message: "The dropship part fabricator can now print the LAG-14 internal sentry\
+      \ launcher (200 points), this system can be used to deploy the newly added A/C-49-P\
+      \ Air Deployable Sentry (200 points) at the target location. It can be installed\
+      \ in a dropship\u2019s utility slot."
+    type: Add
+  - message: Supply drops now have a falling animation.
+    type: Add
+  - message: LZ sentries now light up the nearby area.
+    type: Fix
+  id: 3036
+  time: '2026-03-31T08:58:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9089
+- author: Thereisabear
+  changes:
+  - message: Xenos now do appropriate damage and to Lathes and Vending Machines.
+    type: Fix
+  - message: Fixed Vendors not having corrodible components.
+    type: Fix
+  id: 3037
+  time: '2026-03-31T08:59:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9167
+- author: Arykh
+  changes:
+  - message: Fixed the CPR Dummy not properly tracking successful and failed CPR attempts.
+    type: Fix
+  id: 3038
+  time: '2026-03-31T10:09:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9423
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the M12 Blast Grenade not fitting inside of the M85A1 launcher,
+      fixed it being weaker than intended, and fixed it having shrapnel.
+    type: Fix
+  id: 3039
+  time: '2026-04-01T06:59:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9295
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the pyro specialist helmet with urban camo having mismatched colors.
+    type: Fix
+  - message: Fixed helmets with toggleable markings hiders permanently hiding markings
+      once you enable them.
+    type: Fix
+  id: 3040
+  time: '2026-04-01T06:58:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9427
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Survivor Cargo Techs, Heavy Vehicle Operators, and truckers having
+      civilian access instead of engineering access.
+    type: Fix
+  id: 3041
+  time: '2026-04-01T06:58:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9133
+- author: Thereisabear
+  changes:
+  - message: Fixed Defenders Headbutt having a plasma cost, Headbutt cooldown reduced
+      from 6s to 4s. Tail Sweep cooldown 15s to 11s
+    type: Fix
+  - message: Fixed Headbutt unintentionally targeting windows and activating.
+    type: Fix
+  id: 3042
+  time: '2026-04-01T07:00:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9102
+- author: c0rigin
+  changes:
+  - message: Vulpkanin blaze marking can now have it's nose color independently changed.
+    type: Tweak
+  id: 3043
+  time: '2026-04-01T06:57:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9384
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Changed the sprite of the snow camo ghillie suit
+    type: Tweak
+  id: 3044
+  time: '2026-04-01T06:59:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9428
+- author: MoonlightHollow
+  changes:
+  - message: All Paramarines get armor chances redone and now don't hear announcments.
+    type: Tweak
+  - message: L88 now gets proper underbarrel support and mags can refill from spam
+      cans.
+    type: Tweak
+  id: 3045
+  time: '2026-04-01T07:02:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9375
+- author: Whisper
+  changes:
+  - message: LZ sentries have a rotating warning light.
+    type: Add
+  id: 3046
+  time: '2026-04-02T05:02:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9461
+- author: c0rigin
+  changes:
+  - message: Non-wagging vulp tails are now properly labeled as such
+    type: Fix
+  id: 3047
+  time: '2026-04-02T05:02:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9422
+- author: CatAndHats
+  changes:
+  - message: The xenonid mechanic of bringing dead larva to the hivecore, which opens
+      up a new burrowed larva slot, is now explained in a gameplay tip and has a popup
+      when it happens.
+    type: Add
+  id: 3048
+  time: '2026-04-02T05:04:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9034
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed PMC and Paramarine survivors not spawning with their squad.
+    type: Fix
+  id: 3049
+  time: '2026-04-02T05:04:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9450
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the engi PMC armor having the incorrect stats. It now has fire
+      resistance and 20 melee protection as intended.
+    type: Fix
+  id: 3050
+  time: '2026-04-02T05:05:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9437
+- author: keegaroo65
+  changes:
+  - message: Fixed pheromones not relaying instantly to newly selected Xeno leaders
+    type: Fix
+  id: 3051
+  time: '2026-04-02T05:06:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9447
+- author: Arykh
+  changes:
+  - message: The HEFA helmet now acts like a HEFA grenade!
+    type: Add
+  - message: Added the ability to prime the HEFA sword so it detonates on hitting
+      a mob! This will destroy the sword.
+    type: Add
+  id: 3052
+  time: '2026-04-02T09:08:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8985
+- author: kleinerstation13
+  changes:
+  - message: RCM Paramarines Commander now has big text
+    type: Tweak
+  id: 3053
+  time: '2026-04-03T00:29:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9458
+- author: RerBreab
+  changes:
+  - message: Fixed direct hit of the incinerator's stream dealing damage multiple
+      times.
+    type: Fix
+  id: 3054
+  time: '2026-04-03T09:14:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9056
+- author: kleinerstation13
+  changes:
+  - message: Added a green band to PDW90 AP magazines
+    type: Tweak
+  id: 3055
+  time: '2026-04-03T09:17:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9500
+- author: wheelwrightt
+  changes:
+  - message: Intel officer's uniform now properly changes with map.
+    type: Fix
+  id: 3056
+  time: '2026-04-03T09:18:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9475
+- author: Dygon
+  changes:
+  - message: Floodlights no longer provide light while turned off.
+    type: Fix
+  id: 3057
+  time: '2026-04-03T09:19:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9439
+- author: Dygon
+  changes:
+  - message: Being mounted to a door gun HMG while the dropship lifts off no longer
+      makes you fall to the planet.
+    type: Fix
+  id: 3058
+  time: '2026-04-03T09:20:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9452
+- author: Dygon
+  changes:
+  - message: Increased the initial item size of the ML66D mount component from small
+      to normal.
+    type: Fix
+  id: 3059
+  time: '2026-04-03T09:19:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9436
+- author: Dygon
+  changes:
+  - message: Weather effects no longer show inside tents.
+    type: Fix
+  - message: Weather sound effects can no longer be heard while in the lobby.
+    type: Fix
+  id: 3060
+  time: '2026-04-03T09:22:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9460
+- author: Dygon
+  changes:
+  - message: Fixed the aimed shot/spotting visuals not always appearing in the correct
+      location.
+    type: Fix
+  id: 3061
+  time: '2026-04-03T09:23:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9472
+- author: monomethylhydrazine
+  changes:
+  - message: Added a new lobby art, Covering Private Vuloss by SampleTex.
+    type: Add
+  id: 3062
+  time: '2026-04-04T10:23:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9266
+- author: Dygon
+  changes:
+  - message: The Vanguard Praetorian's Pierce ability can now also hit over folded
+      barricades, sandbags and window frames.
+    type: Fix
+  id: 3063
+  time: '2026-04-04T10:25:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9440
+- author: Ian321
+  changes:
+  - message: The M44 Combat Revolver case no longer fits inside pockets or backpacks.
+    type: Fix
+  id: 3064
+  time: '2026-04-04T10:24:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9485
+- author: Dygon
+  changes:
+  - message: Acid's total damage to barricades has been increased by 12.5%.
+    type: Fix
+  - message: 'Flares now get melted faster by acid: weak acid 27.5% faster, normal
+      acid 49% faster, strong acid 71.4% faster.'
+    type: Fix
+  - message: Extended the burn duration of M94 flares from 10 to 16 minutes and adjusted
+      their fade-out timing.
+    type: Fix
+  - message: M94 flares fired into the air with a flare gun now last twice as long.
+    type: Fix
+  - message: A signal flare now becomes a valid dropship target 5 seconds after landing
+      instead of instantly.
+    type: Fix
+  - message: Flares no longer ramp up their range as if newly spawned each time they
+      enter your view.
+    type: Fix
+  - message: Flares now gradually fade out instead of maintaining maximum brightness
+      for their entire burn duration.
+    type: Fix
+  - message: Fixed signal flares lasting 30 seconds longer than intended and appearing
+      unlit during this extra duration.
+    type: Fix
+  id: 3065
+  time: '2026-04-04T10:26:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9465
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed PMC Engineers spawning with the wrong backpack.
+    type: Fix
+  id: 3066
+  time: '2026-04-04T10:31:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9456
+- author: Ian321
+  changes:
+  - message: Pamphlets can now also be used to increase your skills even further.
+    type: Tweak
+  id: 3067
+  time: '2026-04-06T03:26:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9413
+- author: CatAndHats
+  changes:
+  - message: Added the handshake as an interactive emote, right-click another player
+      to seal the deal.
+    type: Add
+  id: 3068
+  time: '2026-04-06T03:28:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8210
+- author: Dygon
+  changes:
+  - message: Drones, Hivelords and the Queen can now construct resin spikes, every
+      individual can have up to 15 built at once.
+    type: Add
+  id: 3069
+  time: '2026-04-06T03:27:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9396
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Civilian survivors now have 17 new unique variants on some maps! Find
+      out ingame!
+    type: Add
+  - message: Civilian survivors spawn with random clothing now
+    type: Tweak
+  - message: Civilian survivors no longer roll last in survivor job rolling and will
+      roll together with every other job.
+    type: Tweak
+  id: 3070
+  time: '2026-04-06T03:33:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8988
+- author: Vixting
+  changes:
+  - message: Added fun!
+    type: Add
+  - message: Removed fun!
+    type: Remove
+  - message: Changed fun!
+    type: Tweak
+  - message: Fixed fun!
+    type: Fix
+  id: 3071
+  time: '2026-04-06T11:12:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9613
+- author: kleinerstation13
+  changes:
+  - message: Added Corporate M63 variant
+    type: Add
+  - message: Fixed Solaris PMC crashlanding survivors starting with an empty M63 instead
+      of a loaded corporate variant
+    type: Fix
+  id: 3072
+  time: '2026-04-07T01:19:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9216
+- author: Vixting
+  changes:
+  - message: Fixed being able to stack multiple xenonid structures on the same tile
+    type: Fix
+  id: 3073
+  time: '2026-04-07T03:10:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9615
+- author: CatAndHats
+  changes:
+  - message: Fixed plastic Road Barriers giving two metal sheets when deconstructed
+    type: Fix
+  id: 3074
+  time: '2026-04-07T03:11:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9469
+- author: CatAndHats
+  changes:
+  - message: Xenonid spit actions remain toggled until deactivated or another ability
+      is used
+    type: Tweak
+  id: 3075
+  time: '2026-04-07T03:17:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9538
+- author: Dygon
+  changes:
+  - message: Fixed resting resetting tackle stacks.
+    type: Fix
+  id: 3076
+  time: '2026-04-07T03:16:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9526
+- author: CatAndHats
+  changes:
+  - message: Fixed sentinel resting sprites while they are injured to not have the
+      blood floating in mid-air
+    type: Fix
+  id: 3077
+  time: '2026-04-07T03:16:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9332
+- author: CatAndHats
+  changes:
+  - message: Watcher Parasite now has a slightly distinct sprite from base Parasite
+    type: Tweak
+  id: 3078
+  time: '2026-04-07T03:19:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9512
+- author: CatAndHats
+  changes:
+  - message: Praetorian Oppressor's Abduct and Vanguard's Pierce abilities now have
+      a tile preview overlay
+    type: Add
+  id: 3079
+  time: '2026-04-07T03:18:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9468
+- author: Arykh
+  changes:
+  - message: Fixed Nutritious Property restoring less nutrition than intended. (again)
+    type: Fix
+  id: 3080
+  time: '2026-04-07T03:21:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9532
+- author: monomethylhydrazine
+  changes:
+  - message: Added the SPP Support Synthetic.
+    type: Add
+  id: 3081
+  time: '2026-04-07T03:20:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8388
+- author: monomethylhydrazine
+  changes:
+  - message: Added jobs for survivors of 173/RECON, an SPP special forces unit crashlanded
+      on Trijent Dam.
+    type: Add
+  id: 3082
+  time: '2026-04-07T03:23:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8602
 Name: RMC14
 Order: -1
