@@ -107,6 +107,12 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
+
+- type: entity
+  parent: RMCJumpsuitMercenaryEngineer
+  id: RMCJumpsuitMercenaryEngineerWebbing
+  suffix: Webbing, PMC
+  components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingPMCEngineer
 
@@ -341,6 +347,17 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/orange.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/orange.rsi
+
+- type: entity
+  parent: RMCJumpsuitOrange
+  id: RMCJumpsuitOrangeEscapedPrisoner
+  name: battle-worn prisoner jumpsuit
+  description: "A torn prison jumpsuit caked with dried blood and grime. Makeshift bandages wrap around the left arm and leg—soaked and dirty, barely holding together. The fabric is ripped at the seams and scorched in places, but the suit sensors still blink stubbornly, stuck on \"Fully On\"."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/orange_escaped_prisoner.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/orange_escaped_prisoner.rsi
 
 - type: entity
   parent: RMCJumpsuitCivilian

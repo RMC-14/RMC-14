@@ -116,7 +116,7 @@
   suffix: Folded
   components:
   - type: Item
-    size: Small
+    size: Normal
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/HMGs/ML66D/mount.rsi
     state: folded_mount
