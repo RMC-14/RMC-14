@@ -33,9 +33,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-rifleman
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadRoyalMarinesPVE
+      squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
