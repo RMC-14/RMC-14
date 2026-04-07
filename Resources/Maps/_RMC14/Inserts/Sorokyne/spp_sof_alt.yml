@@ -1470,7 +1470,7 @@ entities:
     - type: Transform
       pos: 4.5,12.5
       parent: 1
-- proto: RMCWeaponRifleAK4047
+- proto: RMCWeaponRifleType77
   entities:
   - uid: 102
     components:
