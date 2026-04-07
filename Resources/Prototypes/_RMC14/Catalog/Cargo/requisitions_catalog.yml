@@ -41,6 +41,8 @@
       - cost: 3000
         crate: RMCCrateBoxMagazinePistolM1984AP
       - cost: 3000
+        crate: RMCCrateBoxMagazinePistolM1984HP
+      - cost: 3000
         crate: RMCCrateBoxShellsShotgunSlugs
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunBuckshot
@@ -225,6 +227,8 @@
         crate: RMCCrateGrenadesAirburstStarShell
       - cost: 1000
         crate: RMCCrateGrenadesBatonSlug
+      - cost: 3000
+        crate: RMCCrateExplosiveClaymoreMine
     - name: Food
       entries:
       - cost: 1000

@@ -6,6 +6,8 @@ using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -121,12 +123,18 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (!CanRepairPopup(user, repairable))
             return;
 
+        if (repairable.Comp.RequireWeldingEyeProtection &&
+            !HasWeldingProtection(user, used))
+        {
+            return;
+        }
+
         if (!UseFuel(args.Used, args.User, repairable.Comp.FuelUsed, true))
             return;
 
         var delay = hasReplace ? (float) repairable.Comp.Delay.TotalSeconds : GetWeldRepairDelaySeconds(user, damageable.TotalDamage);
         var ev = new RMCRepairableDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(delay), ev, repairable, used: args.Used)
+        var doAfter = new DoAfterArgs(EntityManager, user, repairable.Comp.Delay, ev, repairable, repairable, used: args.Used)
         {
             NeedHand = true,
             BreakOnMove = true,
@@ -294,6 +302,20 @@ public sealed class RMCRepairableSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public bool HasWeldingProtection(EntityUid user, EntityUid tool)
+    {
+        if (!TryComp<RequiresEyeProtectionComponent>(tool, out var protection) || !protection.Toggled)
+            return true;
+
+        var ev = new GetEyeProtectionEvent();
+        RaiseLocalEvent(user, ev);
+
+        if (ev.Protection > TimeSpan.Zero)
+            return true;
+
+        return false;
     }
 
     private void OnNailgunRepairableInteractUsing(Entity<NailgunRepairableComponent> repairable,

@@ -62,6 +62,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     // #RMC Fixture used to detect extinguisher vapor hits on items.
     private const string AcidVaporFixtureId = "rmc-acid-vapor";
 
+    // If a damage tick would happen within this amount of time after expiration, it will still be applied when the acid is removed.
+    private const float ExpirationGracePeriodSeconds = 0.5f;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -380,14 +383,19 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         var damageableCorrodingQuery = EntityQueryEnumerator<DamageableCorrodingComponent>();
         while (damageableCorrodingQuery.MoveNext(out var uid, out var damageableCorrodingComponent))
         {
-            if (time > damageableCorrodingComponent.NextDamageAt)
+            if (time >= damageableCorrodingComponent.NextDamageAt)
             {
                 _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage);
                 damageableCorrodingComponent.NextDamageAt = time.Add(TimeSpan.FromSeconds(CorrosiveAcidTickDelaySeconds));
             }
 
-            if (time > damageableCorrodingComponent.AcidExpiresAt)
+            if (time >= damageableCorrodingComponent.AcidExpiresAt)
             {
+                // Apply damage if the component is removed right before it would've applied a damage tick.
+                var timeUntilDamageAfterExpire = damageableCorrodingComponent.NextDamageAt - damageableCorrodingComponent.AcidExpiresAt;
+                if (timeUntilDamageAfterExpire >= TimeSpan.Zero && timeUntilDamageAfterExpire < TimeSpan.FromSeconds(ExpirationGracePeriodSeconds))
+                    _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage);
+
                 var ev = new BeforeMeltedEvent();
                 RaiseLocalEvent(uid, ref ev);
 
@@ -571,8 +579,15 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         _fixtures.DestroyFixture(uid, AcidVaporFixtureId, manager: fixtures);
     }
 
-    public void SetCorrodible(CorrodibleComponent component, bool isCorrodible)
+    /// <summary>
+    ///     Set the entity's corrodible status.
+    /// </summary>
+    /// <param name="entity">The entity whose corrodible state is being changed</param>
+    /// <param name="isCorrodible">The new corrodible value</param>
+    public void SetCorrodible(EntityUid entity, bool isCorrodible)
     {
-        component.IsCorrodible = isCorrodible;
+        var corrodible = EnsureComp<CorrodibleComponent>(entity);
+        corrodible.IsCorrodible = isCorrodible;
+        Dirty(entity, corrodible);
     }
 }

@@ -32,6 +32,8 @@ namespace Content.Shared._RMC14.Power;
 
 public abstract class SharedRMCPowerSystem : EntitySystem
 {
+    [Dependency] protected readonly SharedPointLightSystem Pointlight = default!;
+
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -40,7 +42,6 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -890,12 +891,14 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             {
                 var powered = AnyReactorsOn(map);
                 var lights = EntityQueryEnumerator<RMCReactorPoweredLightComponent, TransformComponent>();
-                while (lights.MoveNext(out var uid, out _, out var xform))
+                while (lights.MoveNext(out var uid, out var poweredLight, out var xform))
                 {
                     if (xform.MapID == map)
                     {
+                        poweredLight.Enabled = powered;
+                        Dirty(uid, poweredLight);
                         _appearance.SetData(uid, ToggleableVisuals.Enabled, powered);
-                        _pointLight.SetEnabled(uid, powered);
+                        Pointlight.SetEnabled(uid, powered);
                     }
                 }
             }

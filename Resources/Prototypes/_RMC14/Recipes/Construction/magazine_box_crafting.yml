@@ -159,6 +159,19 @@
   iconColor: "#695d42"
   objectType: Item
 
+# SOCOM
+- type: construction
+  parent: RMC
+  name: .458 SOCOM bullet bundle box
+  id: RMCBoxBullets458
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxBullets458Empty
+  category: construction-category-cm-box-magazine
+  description: A box of bundled .458 SOCOM rounds.
+  iconColor: "#695d42"
+  objectType: Item
+
 # M1984
 - type: construction
   parent: RMC
@@ -181,6 +194,18 @@
   targetNode: RMCBoxMagazinePistolM1984APEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M1984 mags.
+  iconColor: "#b2976e"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Magazine Box (M1984 HP)
+  id: RMCBoxMagazinePistolM1984HP
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM1984HPEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain hollow point M1984 mags.
   iconColor: "#b2976e"
   objectType: Item
 
@@ -620,6 +645,13 @@
         amount: 1
         doAfter: 0.25
 
+    # SOCOM
+    - to: RMCBoxBullets458Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # M13 Auto Pistol
     - to: RMCBoxMagazinePistolM13Empty
       steps:
@@ -684,6 +716,12 @@
         doAfter: 0.25
 
     - to: RMCBoxMagazinePistolM1984APEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazinePistolM1984HPEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -851,6 +889,10 @@
   - node: RMCBoxMagazineRifleM4SPRExtEmpty
     entity: RMCBoxMagazineRifleM4SPRExtEmpty
 
+  # SOCOM
+  - node: RMCBoxBullets458Empty
+    entity: RMCBoxBullets458Empty
+
   # M13
   - node: RMCBoxMagazinePistolM13Empty
     entity: RMCBoxMagazinePistolM13Empty
@@ -878,6 +920,8 @@
     entity: RMCBoxMagazinePistolM1984Empty
   - node: RMCBoxMagazinePistolM1984APEmpty
     entity: RMCBoxMagazinePistolM1984APEmpty
+  - node: RMCBoxMagazinePistolM1984HPEmpty
+    entity: RMCBoxMagazinePistolM1984HPEmpty
 
   # M77AP
   - node: RMCBoxMagazinePistolM77APEmpty

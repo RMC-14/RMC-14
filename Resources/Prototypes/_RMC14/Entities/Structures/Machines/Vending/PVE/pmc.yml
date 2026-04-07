@@ -206,7 +206,7 @@
       - id: CMFireExtinguisherPortable
         name: Fire Extinguisher (Portable)
         amount: 1
-      - id: CMRollerBed
+      - id: CMRollerBedSpawnFolded
         amount: 2
       - id: RMCScabbardMacheteFilled
         name: Machete Scabbard (Full)
