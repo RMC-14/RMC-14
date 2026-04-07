@@ -258,10 +258,17 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!TryComp(args.Source, out ProjectileComponent? projectile))
             return;
 
+        if (EnsureComp(ent, out ActiveFlareSignalComponent active))
+            return;
+
         var id = ComputeNextId();
         var abbreviation = Loc.GetString("rmc-laser-designator-target-abbreviation", ("id", id));
         if (projectile.Shooter != null)
             abbreviation = GetUserAbbreviation(projectile.Shooter.Value, id);
+
+        active.Abbreviation = abbreviation;
+        active.StartTrackingFrom = _timing.CurTime + ent.Comp.ActivationDelay;
+        Dirty(ent, active);
 
         if (projectile.Weapon != null)
         {
@@ -272,7 +279,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
         }
 
-        MakeDropshipTarget(ent, abbreviation);
         _physics.SetBodyType(ent, BodyType.Static);
     }
 
@@ -1215,6 +1221,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (EnsureComp(ent, out ActiveFlareSignalComponent active))
             return;
 
+        active.StartTrackingFrom = _timing.CurTime + ent.Comp.ActivationDelay;
+        Dirty(ent, active);
+
         if (_net.IsClient)
             return;
 
@@ -1268,6 +1277,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         var activeFlares = EntityQueryEnumerator<ActiveFlareSignalComponent, TransformComponent>();
         while (activeFlares.MoveNext(out var uid, out var active, out var xform))
         {
+            if (active.StartTrackingFrom > _timing.CurTime)
+                continue;
+
             active.LastCoordinates.Enqueue(GetNetCoordinates(xform.Coordinates));
             Dirty(uid, active);
             if (active.LastCoordinates.Count < 10)

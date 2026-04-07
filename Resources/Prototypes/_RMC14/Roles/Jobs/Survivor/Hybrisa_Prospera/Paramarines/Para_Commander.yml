@@ -24,6 +24,7 @@
         - type: MotionDetectorTracked
         - type: MarineOrders
         - type: RMCPointing
+        - type: InnateCommandSpeech
         - type: CommandAccent
         - type: RMCTrackable
         - type: TacticalMapIcon
