@@ -15,9 +15,7 @@
 
 - type: entity
   parent: RMCClothingHeadHelmetBombSuit
-  id: ClothingHeadHelmetBombSuitSecurity
-  name: bomb hood
-  description: Use in case of bomb.
+  id: RMCClothingHeadHelmetBombSuitSecurity
   suffix: Security, RMC
   components:
   - type: Sprite

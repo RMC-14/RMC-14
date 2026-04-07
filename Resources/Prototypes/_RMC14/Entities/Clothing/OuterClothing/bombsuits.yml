@@ -21,8 +21,6 @@
 - type: entity
   parent: RMCSuitBombSuit
   id: RMCSuitBombSuitSecurity
-  name: bomb suit
-  description: A suit designed for safety when handling explosives.
   suffix: Security, RMC
   components:
   - type: Sprite

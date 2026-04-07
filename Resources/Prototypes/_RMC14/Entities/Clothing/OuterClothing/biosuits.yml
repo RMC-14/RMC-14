@@ -31,8 +31,6 @@
 - type: entity
   parent: RMCSuitBioGeneral
   id: RMCSuitBioMedical
-  name: bio suit
-  description: A suit that protects against biological contamination.
   suffix: Medical, RMC
   components:
   - type: Sprite
@@ -43,8 +41,6 @@
 - type: entity
   parent: RMCSuitBioGeneral
   id: RMCSuitBioScientist
-  name: bio suit
-  description: A suit that protects against biological contamination.
   suffix: Scientist, RMC
   components:
   - type: Sprite
@@ -55,8 +51,6 @@
 - type: entity
   parent: RMCSuitBioGeneral
   id: RMCSuitBioSecurity
-  name: bio suit
-  description: A suit that protects against biological contamination.
   suffix: Security, RMC
   components:
   - type: Sprite
@@ -67,8 +61,6 @@
 - type: entity
   parent: RMCSuitBioGeneral
   id: RMCSuitBioVirology
-  name: bio suit
-  description: A suit that protects against biological contamination.
   suffix: Virology, RMC
   components:
   - type: Sprite

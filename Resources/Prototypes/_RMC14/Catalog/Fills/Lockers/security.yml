@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingHeadHelmetBombSuitSecurity
+      - id: RMCClothingHeadHelmetBombSuitSecurity
       - id: RMCSuitBombSuitSecurity
       - id: RMCShoesBrown
         prob: 0.9
