@@ -369,26 +369,26 @@
   icon: Interface/Emotes/hew.png
   chatMessages: ["chat-emote-msg-hew"]
 
-#- type: emote  //RMC14  chat triggers conflict with RMCAvaliChirp
-#  id: Chirp
-#  name: chat-emote-name-chirp
-#  category: Vocal
-#  available: false
-#  icon: Interface/Emotes/chirp.png
-#  whitelist:
-#    components:
-#    - Nymph
-#    - Vocal
-#  blacklist:
-#    tags:
-#    - SiliconEmotes
-#  chatMessages: ["chat-emote-msg-chirp"]
-#  chatTriggers:
+- type: emote
+  id: Chirp
+  name: chat-emote-name-chirp
+  category: Vocal
+  available: false
+  icon: Interface/Emotes/chirp.png
+  whitelist:
+    components:
+    - Nymph
+    - Vocal
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-chirp"]
+  chatTriggers:
+    - placeholderEmoteTrigger #RMC14  chat triggers conflict with RMCAvaliChirp
     #- chirp
     #- chirps
     #- chirped
     #- chirping
-
 
 # Machine Emotes
 - type: emote
