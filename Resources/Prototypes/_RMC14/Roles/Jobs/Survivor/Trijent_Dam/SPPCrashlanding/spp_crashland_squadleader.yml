@@ -48,6 +48,7 @@
     - type: SniperWhitelist
     - type: PyroWhitelist
     - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
   hidden: true
 
 - type: startingGear

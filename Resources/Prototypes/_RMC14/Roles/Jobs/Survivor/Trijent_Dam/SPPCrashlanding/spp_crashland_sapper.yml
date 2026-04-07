@@ -34,6 +34,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSPPCrashlandNoBelt
     - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
   hidden: true
 
 - type: startingGear
