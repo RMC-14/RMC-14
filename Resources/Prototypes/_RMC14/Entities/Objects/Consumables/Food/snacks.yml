@@ -603,7 +603,7 @@
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketSamosaTrash
   name: samosa wrapper
-  description: A greasy plastic film that once held a Samosa. Packaged by We-Ya.
+  description: A greasy plastic film that once held a samosa. Packaged by We-Ya.
   components:
   - type: Sprite
     state: samosa_trash
