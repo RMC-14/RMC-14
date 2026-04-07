@@ -79,6 +79,17 @@
     sprintModifier: 0.897
 
 - type: entity
+  parent: RMCArmorSPPSupportSynth
+  id: RMCArmorSPPSupportSynthFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    #- id: RMCTelebaton // TODO RMC14 should be telebaton
+    - id: RMCHandcuffs
+    - id: RMCHandcuffs
+
+- type: entity
   parent: RMCArmorSPP
   id: RMCArmorSPPCommando
   name: SPP UM5CU personal armor
@@ -198,6 +209,7 @@
     - id: RMCTacticalPrybar
     - id: RMCMagazineRifleAK4047
     - id: RMCMagazineRifleAK4047
+    - id: RMCRadioHandheldColony
 
 - type: entity
   parent: RMCArmorSPP
@@ -303,7 +315,6 @@
     bullet: 10
     bio: 10
     explosionArmor: 10
-
 - type: entity
   parent: RMCCoatSPPSenior
   id: RMCCoatSPPSeniorFilled
@@ -365,3 +376,42 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarblackshinel.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/kommisarblackshinel.rsi
+
+# Survivor fills
+
+- type: entity
+  parent: RMCArmorSPPSupport
+  id: RMCArmorSPPSupportSurvivorFill
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+    - id: RMCMRESPP
+
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPSurvivorFill
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+
+- type: entity
+  parent: RMCArmorSPPHeavy
+  id: RMCArmorSPPHeavySurvivorFill
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
+
+- type: entity
+  parent: RMCCoatSPP
+  id: RMCCoatSPPSurvivorFill
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMCrowbar
