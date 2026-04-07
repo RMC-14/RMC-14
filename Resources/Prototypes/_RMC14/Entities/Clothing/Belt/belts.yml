@@ -840,17 +840,6 @@
 
 - type: entity
   parent: RMCBeltHolsterPistolSPP
-  id: RMCBeltHolsterPistolSPPT73
-  suffix: Filled, Type 73
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCMagazinePistolT73
-      amount: 6
-    - id: RMCWeaponPistolT73
-
-- type: entity
-  parent: RMCBeltHolsterPistolSPP
   id: RMCBeltHolsterPistolSPPNPZ92
   suffix: Filled, NPZ92
   components:
