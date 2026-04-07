@@ -342,6 +342,7 @@
       state: xeno_spit
     useDelay: 2
   - type: TargetAction
+    repeat: true
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
@@ -362,6 +363,7 @@
       state: acid_shotgun
     useDelay: 7
   - type: TargetAction
+    repeat: true
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
@@ -390,6 +392,7 @@
       state: xeno_spit
     useDelay: 2.5
   - type: TargetAction
+    repeat: true
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction

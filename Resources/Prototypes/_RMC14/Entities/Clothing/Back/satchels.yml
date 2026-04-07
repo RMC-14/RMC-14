@@ -79,6 +79,15 @@
 
 - type: entity
   parent: CMSatchel
+  id: RMCSatchelHydro
+  name: hydroponics satchel
+  description: A green satchel for plant-related work.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/hydro.rsi
+
+- type: entity
+  parent: CMSatchel
   id: CMBackpackSniper
   name: M3 sniper's waist-rig
   description: A specially-designed rig attached to the waist with a pocket, designed for marksmen.
@@ -899,7 +908,7 @@
         - id: CMSheetMetal20
         - id: RMCRadioHandheldColony
         - id: RMCHeadRoyalL1HelmetBallistic
-          
+
 - type: entity
   parent: RMCSatchelLightpack5Slot
   id: RMCSatchelLightpackFilledParaSynth
@@ -1018,6 +1027,53 @@
     - id: CMDefibrillator
     - id: CMAdvFirstAidKitFilled
     - id: CMRollerBedSpawnFolded
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPSurvivor
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPSurvivorSpec
+  suffix: Filled, Survivor Specialist
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCMagazineRifleType71
+    - id: RMCMagazineRifleType71
+
+- type: entity
+  parent: RMCSatchelSPPMedic
+  id: RMCSatchelSPPMedicSurvivor
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMDefibrillator
+    - id: CMFireExtinguisherPortable
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPSynth
+  suffix: Filled, Synthetic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMDefibrillator
+    - id: CMAdvFirstAidKitFilled
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: CMBloodPackFull
+    - id: CMBloodPackFull
+    - id: RMCSynthResetKeyNovaris
 
 - type: entity
   parent: RMCSatchelWelder
