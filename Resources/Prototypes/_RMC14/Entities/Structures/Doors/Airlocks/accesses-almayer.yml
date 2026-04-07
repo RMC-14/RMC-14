@@ -114,6 +114,14 @@
 
 - type: entity
   parent: CMAirlockMedical
+  id: CMAirlockMorgueLocked
+  suffix: Morgue, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessMorgue" ] ]
+
+- type: entity
+  parent: CMAirlockMedical
   id: CMAirlockChemistryLocked
   suffix: Chemistry, Locked
   components:

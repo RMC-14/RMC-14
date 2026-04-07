@@ -35,7 +35,7 @@
     delay: 1
   - type: PhysicalComposition
     materialComposition:
-      RMCPlastic: 50
+      CMSteel: 110
   - type: Tag
     tags:
       - Mop
@@ -55,7 +55,7 @@
     size: Small
   - type: PhysicalComposition
     materialComposition:
-      RMCPlastic: 50
+      RMCPlastic: 110
   - type: Tag
     tags:
       - WetFloorSign
@@ -79,7 +79,7 @@
     sprite: _RMC14/Objects/Misc/Janitorial/cone.rsi
   - type: PhysicalComposition
     materialComposition:
-      RMCPlastic: 50
+      RMCPlastic: 110
 
 - type: entity
   parent: BaseItem

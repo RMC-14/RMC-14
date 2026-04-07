@@ -15,7 +15,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMSteel: 200
+      CMSteel: 7500
   - type: Tag
     tags:
     - RMCTablePartMetal
@@ -53,7 +53,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMSteel: 400
+      CMSteel: 15000
 
 - type: Tag
   id: RMCTablePartReinforced

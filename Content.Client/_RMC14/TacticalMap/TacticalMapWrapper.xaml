@@ -4,9 +4,14 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface">
 
     <PanelContainer StyleClasses="BorderedWindowPanel">
-        <TabContainer Name="Tabs" Access="Public">
-            <BoxContainer Name="MapTab" Access="Public" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-                <!-- main controls -->
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+            <!-- squad objectives -->
+            <PanelContainer Name="SquadObjectivesContainer" Access="Public" StyleClasses="PanelBackgroundBaseDark" Margin="2" Visible="False">
+                <BoxContainer Name="SquadObjectivesBox" Access="Public" Orientation="Vertical" Margin="3" />
+            </PanelContainer>
+            <TabContainer Name="Tabs" Access="Public" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Name="MapTab" Access="Public" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                    <!-- main controls -->
                 <BoxContainer Orientation="Horizontal" Margin="2" HorizontalExpand="True">
                     <Button Name="LabelsButton" Access="Public" Text="{Loc ui-tactical-map-labels-button}" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="60" />
                     <Button Name="FollowPlayerButton" Access="Public" Text="{Loc ui-tactical-map-centre-button}" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="50" />
@@ -77,6 +82,7 @@
                                              HorizontalExpand="True" VerticalExpand="True" Margin="2" />
             </BoxContainer>
         </TabContainer>
+        </BoxContainer>
     </PanelContainer>
 
 </controls:TacticalMapWrapper>

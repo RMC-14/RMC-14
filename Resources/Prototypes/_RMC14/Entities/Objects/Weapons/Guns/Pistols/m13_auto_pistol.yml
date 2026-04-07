@@ -47,7 +47,7 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
   - type: GunDamageModifier
-    multiplier: .65
+    multiplier: .75
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -144,7 +144,7 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsSMG
+    bulletType: RMCBoxBulletsPistol
 
 - type: entity
   parent: RMCMagazinePistolM13
@@ -172,7 +172,7 @@
     - state: ammo_band
       color: "#1F951F"
   - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsSMGAP
+    bulletType: RMCBoxBulletsPistolAP
 
 #Missing Jam mod medium "the blicky"
 - type: entity
@@ -199,7 +199,7 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsSMG
+    bulletType: RMCBoxBulletsPistol
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -227,7 +227,7 @@
     - state: ammo_band
       color: "#1F951F"
   - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsSMGAP
+    bulletType: RMCBoxBulletsPistolAP
 
 #missing Jam mod critical "cant handle this shit brap brap brap"
 - type: entity
@@ -254,7 +254,7 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsSMG
+    bulletType: RMCBoxBulletsPistol
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -282,7 +282,7 @@
     - state: ammo_band
       color: "#1F951F"
   - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsSMGAP
+    bulletType: RMCBoxBulletsPistolAP
 
 - type: entity
   parent: CMCartridgeSMGBase
@@ -322,14 +322,14 @@
     - range: 22
       falloff: 9999
       ignoreModifiers: true
-    - range: 4
+    - range: 3
       falloff: 7
   - type: CMArmorPiercing
     amount: 5
   - type: RMCProjectileAccuracy
     accuracy: 115
     thresholds:
-    - range: 4
+    - range: 2
       falloff: 10
 
 - type: entity

@@ -34,6 +34,13 @@
         RMCSkillLeadership: 1
         RMCSkillFirearms: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_leader
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
 
 - type: playTimeTracker
   id: RMCJobWeYaGoonLead

@@ -85,6 +85,18 @@
   - RMCAccessWeYa # TODO RMC14 weya colonial, weya exec
 
 - type: accessGroup
+  id: ColonistPMC
+  tags:
+  - RMCAccessWeYa # TODO RMC14 weya general, colonial, medical, security, research, armory
+  - CMAccessColonyPublic
+  - CMAccessColonyResearch
+  - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
+  - CMAccessColonyBrig
+  - CMAccessColonyMedbay
+  - CMAccessColonyCommand
+
+- type: accessGroup
   id: ColonistAllAccessNoArmory
   tags:
   - CMAccessColonyPublic

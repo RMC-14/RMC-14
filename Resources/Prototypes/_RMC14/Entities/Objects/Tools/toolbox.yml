@@ -23,6 +23,10 @@
       path: /Audio/Items/toolbox_drop.ogg
       params:
         volume: -4
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   name: emergency toolbox
@@ -43,7 +47,6 @@
   - type: StorageFill
     contents:
       - id: CMCrowbar
-      - id: CMWelderSmall
       - id: CMRadioHandheld
       - id: CMFireExtinguisherPortable
       # Random lighting item orGroup

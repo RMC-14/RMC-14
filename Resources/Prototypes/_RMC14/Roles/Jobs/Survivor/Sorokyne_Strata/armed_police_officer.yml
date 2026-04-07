@@ -22,7 +22,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorMarshal
+      preset: RMCSkillPresetSurvivorMarshal
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetArmedPoliceOfficer
     - type: RMCSurvivor

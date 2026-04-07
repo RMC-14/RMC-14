@@ -341,3 +341,58 @@
     - rattles her tail
     - rattles his tail
     - rattles its tail
+
+# Slime
+
+- type: emote
+  id: RMCSlimeBubble
+  name: rmc-emote-name-slime-bubble
+  category: Vocal
+  available: false
+  icon: Interface/Emotes/squish.png # todo: new icons?
+  whitelist:
+    components: 
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-slime-bubble"]
+  chatTriggers:
+  - bubbles
+  - bubbling
+
+- type: emote
+  id: RMCSlimePop
+  name: rmc-emote-name-slime-pop
+  category: Vocal
+  available: false
+  icon: Interface/Emotes/squish.png # todo: new icons?
+  whitelist:
+    components: 
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-slime-pop"]
+  chatTriggers:
+  - pops
+  - popping
+
+- type: emote
+  id: RMCSlimeWobble
+  name: rmc-emote-name-slime-wobble
+  category: Vocal
+  available: false
+  icon: Interface/Emotes/squish.png # todo: new icons?
+  whitelist:
+    components: 
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-slime-wobble"]
+  chatTriggers:
+  - wobbles
+  - wobbling
+  - wibbles 
+  - wibbling

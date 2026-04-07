@@ -142,6 +142,9 @@
       rmc_flamer_tank:
         maxVol: 250
         reagents: [ ]
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 3750
 
 - type: Tag
   id: RMCTankFlamerLarge

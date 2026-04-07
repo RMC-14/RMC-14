@@ -21,6 +21,7 @@ id-card-access-level-research = Research
 
 id-card-access-level-chief-medical-officer = Chief Medical Officer
 id-card-access-level-medical = Medical
+id-card-access-level-morgue = Morgue
 id-card-access-level-chemistry = Chemistry
 id-card-access-level-paramedic = Paramedic
 

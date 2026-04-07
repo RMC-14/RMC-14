@@ -48,6 +48,7 @@
       - Flare
       - RMCFlare
       - RMCFlareCAS
+      - RMCFlareL96
     capacity: 1
     proto: CMFlare
     soundInsert:
@@ -81,3 +82,11 @@
 
 - type: Tag
   id: RMCFlareGun
+
+- type: entity
+  parent: RMCWeaponPistolM82F
+  id: RMCWeaponPistolM82FEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null

@@ -21,6 +21,9 @@
     allowedStates:
     - Alive
     - Dead
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -169,6 +172,8 @@
     name: rmc-xeno-watcher-name
     description: rmc-xeno-watcher-description
     popup: rmc-xeno-watcher-popup
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Parasite/watcher_parasite.rsi
   - type: XenoZoom
     zoom: 1.3, 1.3
     blockLeaps: true
@@ -176,3 +181,10 @@
   - type: XenoHidden
   - type: RMCActionOrder
     id: RMCXenoParasiteWatcher
+
+- type: entity
+  parent: CMXenoParasite
+  id: RMCXenoParasitePrimeHiveAssign
+  suffix: Auto-Assign, Prime Hive
+  components:
+  - type: AutoAssignHive

@@ -41,6 +41,14 @@
   loadouts:
   - MarineSecuritySatchel
 
+- type: loadoutGroup
+  id: ProvostSecurityBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - ProvostSecuritySatchel
+
 # Eyewear
 - type: loadoutGroup
   id: EyewearRMC
@@ -147,7 +155,7 @@
   - NeckerchiefGrayRMC
   - NeckerchiefTanRMC
   - NeckerchiefWhiteRMC
-  
+
 - type: loadoutGroup
   id: MasksRMCPVE
   name: rmc-loadout-group-masks
@@ -179,6 +187,7 @@
   - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
+  - CamoBeretRMC
   - BoonieRMC
   - BoonieTanRMC
   - CapRMC
@@ -671,6 +680,7 @@
   - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
+  - CamoBeretRMC
   - BoonieRMC
   - BoonieTanRMC
   - CapRMC
@@ -771,7 +781,7 @@
   - PatchWeYaRMCBlack
   - PatchWeYaRMCFury161
   - PatchTSERMC
-  - PatchCECRMC
+  - PatchMSCRMC
   - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch

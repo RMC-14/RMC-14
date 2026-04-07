@@ -1,0 +1,91 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesTroopCommanderPVE
+  name: rmc-job-name-rcm-pve-troop-commander
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalTroopCommanderPVE
+  requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobExecutiveOfficer
+      time: 10800 # 3 hours
+  ranks:
+    RMCRankTSESecondLieutenant: [ ]
+  startingGear: RMCGearRoyalTroopCommanderPVE
+  icon: "RMCJobIconRoyalTroopCommanderPVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-squadron-command
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: RCM Troop Commander (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPilot: 1
+        RMCSkillSurgery: 2
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: RMCTrackable
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-pve-troop-commander
+    - type: AssignSquad
+      squad: SquadRoyalMarinesPVE
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_lieutenant_pve
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
+  hidden: true
+
+- type: startingGear
+  id: RMCGearRoyalTroopCommanderPVE
+  equipment:
+    head: RMCHeadRoyalBeretLead
+    ears: RMCHeadsetRoyalMarineLeaderPVE
+    jumpsuit: RMCJumpsuitMarineRoyalPVE
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    id: RMCIDRoyalMarinesTroopCommanderPVE
+    pocket1: RMCPouchToolsFilledRCM
+    pocket2: RMCPouchMedkitFillRoyal
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVETroopCommander
+  name: RCM troop commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesTroopCommanderPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
+- type: playTimeTracker
+  id: RMCJobRoyalTroopCommanderPVE
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalTroopCommanderPVE
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_lieutenant_pve
