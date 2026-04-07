@@ -412,5 +412,15 @@
     - BorgChassis
   chatMessages: ["rmc-emote-avali-chirp"]
   chatTriggers:
+  - chirp
   - chirps
   - chirping
+  - chirped
+  - tweet
+  - tweets
+  - tweeting
+  - tweeted
+  - cheep
+  - cheeps
+  - cheeping
+  - cheeped
