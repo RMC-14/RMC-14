@@ -116,6 +116,47 @@
 
 - type: entity
   parent: WeaponSMGM63
+  id: RMCWeaponSMGM63WhiteNoLock
+  suffix: Corporate, No ID lock
+  description: A Weston-Yamada creation, this M63 comes equipped in corporate white. Uses 10x20mm caseless ammunition. This one had its IFF electronics removed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        startingItem: CMMagazineSMGM63
+        whitelist:
+          tags:
+          - CMMagazineSMGM63
+          - CMMagazineSMGM63AP
+          - CMMagazineSMGM63Ext
+          - RMCMagazineSMGM63Rubber
+          - RMCMagazineSMGM63HEAP
+
+- type: entity
+  parent: RMCWeaponSMGM63WhiteNoLock
+  id: RMCWeaponSMGM63White
+  suffix: ID Lock
+  description: A Weston-Yamada creation, this M63 comes equipped in corporate white. Uses 10x20mm caseless ammunition.
+  components:
+  - type: GunIDLock
+
+- type: entity
+  parent: WeaponSMGM63
   id: RMCWeaponSMGM63ExtendedFilled
   suffix: Filled, Extended
   components:
