@@ -1060,7 +1060,9 @@
     - id: CMDefibrillator
     - id: CMFireExtinguisherPortable
     - id: CMHealthAnalyzer
+
 - type: entity
+  parent: RMCSatchelSPP
   id: RMCSatchelSPPSynth
   suffix: Filled, Synthetic
   components:
