@@ -150,6 +150,7 @@
       types:
         Blunt: 15
     maxFixedRange: 6 # 7 tiles
+    queueDeletion: true
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
     layers:
