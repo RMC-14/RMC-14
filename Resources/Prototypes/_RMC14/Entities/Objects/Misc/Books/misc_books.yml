@@ -32,7 +32,7 @@
   parent: RMCBookBase
   id: RMCBookWEYA
   name: "Weston & Yamada: The Future is Now."
-  description: This sizeable autobiographical book covers the history of the Weston & Yamada Corporations, their merger, and eventual dominance over the Corporate world. Written by Alexander Weston and Ryucihi Yamada.
+  description: This sizeable autobiographical book covers the history of the Weston & Yamada corporations, their merger, and eventual dominance over the corporate world. Written by Alexander Weston and Ryucihi Yamada.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/WEYA.rsi
@@ -54,7 +54,7 @@
   parent: RMCBookIllandalBridge
   id: RMCBookIllandalNecromancer
   name: "Warrior of Illandal: The Necromancer of Tethar."
-  description: The Warrior returns in this thrilling new entry into the Warrior of Illandal. This time, the Warrior must team up with his previous enemy, the Orc Bazaak to stop the schemes of an evil necromancer. It's pretty standard for the Warrior of Illandal series, except for the portion where the pair of protaganists debate the difference between Absurdism and Existentialism. Written by John Desierder.
+  description: The Warrior returns in this thrilling new entry into the Warrior of Illandal. This time, the Warrior must team up with his previous enemy, the Orc Bazaak, to stop the schemes of an evil necromancer. It's pretty standard for the Warrior of Illandal series, except for the portion where the pair of protaganists debate the difference between absurdism and existentialism. Written by John Desierder.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Colored/purple.rsi
@@ -74,7 +74,7 @@
   parent: RMCBookBase
   id: RMCBookStarHunter
   name: "THE STAR-HUNTER."
-  description: This novel's a strange one. It seems to be a fictional biography around the author's encounter with some form of horrible creature, which killed and maimed and slaughtered. Despite the publisher's warning that this novel is clearly fiction, there's something in the terrified, frantic prose which makes it seem more real. The Author is unknown.
+  description: This novel's a strange one. It seems to be a fictional biography around the author's encounter with some form of horrible creature, which killed and maimed and slaughtered. Despite the publisher's warning that this novel is clearly fiction, there's something in the terrified, frantic prose which makes it seem more real. The author is unknown.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Colored/black.rsi
@@ -146,7 +146,7 @@
   parent: RMCBookBase
   id: RMCBookPrendergastShuttle
   name: "Ian Prendergast and the Missing Shuttle"
-  description: Another entry into the "Prendergast" series of detective novels, popular in the TSE and read across the galaxy. In this one, the Detective must find out who stole the shuttle of an important SPP Diplomat before an important Summit between the interstellar superpowers. Written by Jiya Patel.
+  description: Another entry into the "Prendergast" series of detective novels, popular in the TSE and read across the galaxy. In this one, the Detective must find out who stole the shuttle of an important SPP diplomat before an important summit between the interstellar superpowers. Written by Jiya Patel.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Colored/red.rsi

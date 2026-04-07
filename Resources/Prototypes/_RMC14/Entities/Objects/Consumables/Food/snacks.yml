@@ -415,7 +415,7 @@
   parent: RMCFoodSnackBase
   id: RMCFoodSnackSamosaPackaged
   name: packaged samosa
-  description: A singular, dry, room temperature samosa. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by We-Ya.
+  description: A singular, dry, room temperature samosa. There's no time given for how long to cook it, so you assume it's probably good to go. Packaged by We-Ya.
   components:
   - type: Sprite
     state: samosa
@@ -431,7 +431,7 @@
   parent: RMCFoodSnackBase
   id: RMCFoodSnackSamosa
   name: packaged samosa
-  description: A singular, dry, room temperature samosa. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by We-Ya.
+  description: A singular, dry, room temperature samosa. There's no time given for how long to cook it, so you assume it's probably good to go. Packaged by We-Ya.
   components:
   - type: FlavorProfile
     flavors:
