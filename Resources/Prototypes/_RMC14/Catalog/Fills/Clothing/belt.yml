@@ -1063,7 +1063,7 @@
 - type: entity
   parent: RMCMkXBelt
   id: RMCMkXBeltFilled
-  suffix: PVE, Filled
+  suffix: PVE, CO, Filled
   components:
   - type: StorageFill
     contents:
