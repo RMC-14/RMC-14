@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Shuttles;
 using Content.Server.Doors.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
@@ -93,6 +94,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnFTLStarted);
         SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnFTLCompleted);
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnFTLUpdated);
+        SubscribeLocalEvent<DropshipComponent, BeforeFTLStartedEvent>(OnBeforeFTLStarted);
 
         SubscribeLocalEvent<DropshipInFlyByComponent, FTLCompletedEvent>(OnInFlyByFTLCompleted);
 
@@ -189,6 +191,11 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         RefreshUI();
+    }
+
+    private void OnBeforeFTLStarted(Entity<DropshipComponent> ent, ref BeforeFTLStartedEvent args)
+    {
+        RelayToMountedEntities(ent, args);
     }
 
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
