@@ -43,6 +43,9 @@ public sealed class RMCRepairableSystem : EntitySystem
     [Dependency] private readonly SharedStackSystem _stack = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly ProtoId<StackPrototype> SteelStack = "CMSteel";
+    private static readonly ProtoId<StackPrototype> PlasteelStack = "CMPlasteel";
+    private static readonly ProtoId<StackPrototype> WoodStack = "RMCWood";
     private static readonly EntProtoId<SkillDefinitionComponent> ConstructionSkill = "RMCSkillConstruction";
 
     const string SOLUTION_WELDER = "Welder";
@@ -449,25 +452,28 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         heldStack = stackUid;
 
-        var stackType = stackComponent.StackTypeId;
+        var stackType = new ProtoId<StackPrototype>(stackComponent.StackTypeId);
         if (_tags.HasTag(repairable.Owner, WallTag))
         {
-            if (!TryComp(repairable.Owner, out ReceiverXenoClawsComponent? receiver))
-                return 0;
-
-            return GetWallNailgunRepairValue(stackType, receiver.MaxHealth);
+            return GetWallNailgunRepairValue(repairable, stackType);
         }
 
-        if (stackType == "CMSteel")
-            return repairable.Comp.RepairMetal;
+        return repairable.Comp.RepairValues.GetValueOrDefault(stackType);
+    }
 
-        if (stackType == "CMPlasteel")
-            return repairable.Comp.RepairPlasteel;
+    public float GetNailgunRepairValue(EntityUid repairable, ProtoId<StackPrototype> stackType)
+    {
+        if (_tags.HasTag(repairable, WallTag))
+        {
+            if (!TryComp(repairable, out NailgunRepairableComponent? nailgunRepairable))
+                return 0;
 
-        if (stackType == "RMCWood")
-            return repairable.Comp.RepairWood;
+            return GetWallNailgunRepairValue((repairable, nailgunRepairable), stackType);
+        }
 
-        return 0;
+        return TryComp(repairable, out NailgunRepairableComponent? repairComp)
+            ? repairComp.RepairValues.GetValueOrDefault(stackType)
+            : 0;
     }
 
     private float GetWeldRepairDelaySeconds(EntityUid user, FixedPoint2 totalDamage)
@@ -478,24 +484,23 @@ public sealed class RMCRepairableSystem : EntitySystem
         return MathF.Max(2f, scaled);
     }
 
-    private float GetWallNailgunRepairValue(string stackType, float damageCap)
+    private float GetWallNailgunRepairValue(Entity<NailgunRepairableComponent> repairable, ProtoId<StackPrototype> stackType)
     {
+        if (!TryComp(repairable.Owner, out ReceiverXenoClawsComponent? receiver))
+            return 0;
+
+        var damageCap = receiver.MaxHealth;
         if (damageCap <= 0)
             return 0;
 
-        if (stackType == "RMCWood")
-            return damageCap * 0.075f;
-
-        if (stackType == "CMSteel")
-            return damageCap * 0.15f;
-
-        if (stackType == "CMPlasteel")
-            return damageCap * 0.3f;
-
-        return 0;
+        return damageCap * repairable.Comp.WallRepairFractions.GetValueOrDefault(stackType);
     }
 
-    public bool TryGetNailgunRepairStack(Entity<HandsComponent?> hands, int required, out EntityUid stackUid, out StackComponent stack)
+    public bool TryGetNailgunRepairStack(Entity<HandsComponent?> hands,
+        int required,
+        out EntityUid stackUid,
+        out StackComponent stack,
+        ProtoId<StackPrototype>? requiredStack = null)
     {
         stackUid = default;
         stack = default!;
@@ -507,6 +512,12 @@ public sealed class RMCRepairableSystem : EntitySystem
 
             if (!IsValidNailgunStack(stackComponent))
                 continue;
+
+            if (requiredStack != null &&
+                stackComponent.StackTypeId != requiredStack.Value)
+            {
+                continue;
+            }
 
             if (stackComponent.Count < required)
                 continue;
@@ -521,9 +532,10 @@ public sealed class RMCRepairableSystem : EntitySystem
 
     private static bool IsValidNailgunStack(StackComponent stackComponent)
     {
-        return stackComponent.StackTypeId == "CMSteel" ||
-               stackComponent.StackTypeId == "CMPlasteel" ||
-               stackComponent.StackTypeId == "RMCWood";
+        var stackType = new ProtoId<StackPrototype>(stackComponent.StackTypeId);
+        return stackType == SteelStack ||
+               stackType == PlasteelStack ||
+               stackType == WoodStack;
     }
 
     private void OnWelderInteractUsing(Entity<ReagentTankComponent> ent, ref InteractUsingEvent args)

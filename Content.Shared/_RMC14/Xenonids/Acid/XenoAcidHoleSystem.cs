@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Repairable;
@@ -37,6 +38,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     [Dependency] private readonly OccluderSystem _occluder = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCRepairableSystem _repairable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly RMCPullingSystem _pulling = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
@@ -54,6 +56,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private EntityQuery<XenoAcidHoleWallComponent> _holeWallQuery;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteDamageGroup = "Brute";
+    private static readonly ProtoId<StackPrototype> PlasteelStack = "CMPlasteel";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
     public override void Initialize()
@@ -284,7 +287,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (!TryComp(args.User, out HandsComponent? hands))
             return;
 
-        if (!_repairable.TryGetNailgunRepairStack((args.User, hands), hole.Comp.RepairMaterialCost, out var stackUid, out var stack))
+        if (!_repairable.TryGetNailgunRepairStack((args.User, hands), hole.Comp.RepairMaterialCost, out var stackUid, out var stack, PlasteelStack))
         {
             _popup.PopupEntity(Loc.GetString("rmc-nailgun-lost-stack"), args.User, args.User, PopupType.SmallCaution);
             return;
@@ -299,6 +302,10 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         }
 
         if (!TryGetHoleWall(hole, out var wall))
+            return;
+
+        var repairValue = _repairable.GetNailgunRepairValue(wall.Owner, PlasteelStack);
+        if (repairValue <= 0)
             return;
 
         args.Handled = true;
@@ -317,7 +324,10 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         }
 
         if (_damageableQuery.TryComp(wall, out var damageable))
-            _damageable.SetAllDamage(wall, damageable, 0);
+        {
+            var heal = -_rmcDamageable.DistributeTypesTotal(wall.Owner, FixedPoint2.New(repairValue));
+            _damageable.TryChangeDamage(wall, heal, true, damageable: damageable);
+        }
 
         ClearHole(wall, deleteHole: true);
 
@@ -716,7 +726,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (!TryComp(user, out HandsComponent? hands))
             return;
 
-        if (!_repairable.TryGetNailgunRepairStack((user, hands), hole.Comp.RepairMaterialCost, out _, out _))
+        if (!_repairable.TryGetNailgunRepairStack((user, hands), hole.Comp.RepairMaterialCost, out _, out _, PlasteelStack))
         {
             _popup.PopupEntity(Loc.GetString("rmc-nailgun-no-material-message", ("target", hole.Owner)), user, user, PopupType.SmallCaution);
             return;

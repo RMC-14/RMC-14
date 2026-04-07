@@ -144,6 +144,10 @@
     heal: 1000
     delay: 1
   - type: NailgunRepairable
+    wallRepairFractions:
+      RMCWood: 0.075
+      CMSteel: 0.15
+      CMPlasteel: 0.3
   - type: RMCGenericExamine
     message: rmc-structure-wall-repair-examine-tip
     whitelist:
