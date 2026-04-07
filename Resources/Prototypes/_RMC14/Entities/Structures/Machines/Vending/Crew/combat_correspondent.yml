@@ -58,33 +58,23 @@
         name: Combat Correspondent's Cap
       - id: RMCHeadCapFedoraGrey
         name: Fedora
-    - name: Armor
-      choices: { CMArmor: 1 }
-      entries:
-      - id: CMArmorPress
-        name: Combat Correspondent's Armor
-    - name: Helmet
-      choices: { CMHelmet: 1 }
+    - name: Protective Equipment
+      takeAll: CMStandard
       entries:
       - id: CMArmorHelmetPress
         name: Combat Correspondent's Helmet
+      - id: CMArmorPress
+        name: Combat Correspondent's Armor
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
-      - id: RMCPouchFirstAidInjectors
+      - id: RMCPouchFirstAidPMCFill
         name: first-aid pouch (refillable injectors)
-        recommended: true
-      - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-        recommended: true
-      - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
         recommended: true
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
         recommended: true
       - id: RMCPouchGeneralLarge
-      - id: RMCPouchPistol
     - name: Refills
       entries:
       #- id: /obj/item/device/camera
