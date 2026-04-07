@@ -12,6 +12,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Projectiles;
@@ -230,6 +231,12 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         if (ent.Comp.Popup is { } popup)
             _popup.PopupCoordinates(Loc.GetString(popup), coordinates, ent.Comp.PopupType ?? PopupType.Small);
+    }
+
+    public void SetSpawn(Entity<SpawnOnTerminateComponent> ent, EntProtoId spawn)
+    {
+        ent.Comp.Spawn = spawn;
+        Dirty(ent);
     }
 
     private void OnPreventCollideWithDead(Entity<PreventCollideWithDeadComponent> ent, ref PreventCollideEvent args)
