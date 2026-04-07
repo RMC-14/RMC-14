@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/05/2026 04:24:19
-  entityCount: 17433
+  time: 04/07/2026 04:35:54
+  entityCount: 17438
 maps:
 - 1
 grids:
@@ -107064,10 +107064,10 @@ entities:
     - type: Transform
       pos: 164.6875,152.375
       parent: 1
-  - uid: 13322
+  - uid: 14138
     components:
     - type: Transform
-      pos: 195.6875,92.375
+      pos: 126.5,21.5
       parent: 1
 - proto: RMCBoxSterileMask
   entities:
@@ -108426,10 +108426,10 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 293.14673
+        temperature: 147.92336
         moles:
-        - 1.7459903
-        - 6.568249
+        - 0
+        - 0
         - 0
         - 0
         - 0
@@ -108460,10 +108460,10 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 293.14673
+        temperature: 147.92336
         moles:
-        - 1.7459903
-        - 6.568249
+        - 0
+        - 0
         - 0
         - 0
         - 0
@@ -112113,11 +112113,6 @@ entities:
     - type: Transform
       pos: 126.5,12.5
       parent: 1
-  - uid: 14125
-    components:
-    - type: Transform
-      pos: 194.5,87.5
-      parent: 1
   - uid: 14126
     components:
     - type: Transform
@@ -112133,16 +112128,6 @@ entities:
     - type: Transform
       pos: 177.5,120.5
       parent: 1
-  - uid: 14129
-    components:
-    - type: Transform
-      pos: 199.5,87.5
-      parent: 1
-  - uid: 14130
-    components:
-    - type: Transform
-      pos: 198.5,87.5
-      parent: 1
   - uid: 14131
     components:
     - type: Transform
@@ -112152,11 +112137,6 @@ entities:
     components:
     - type: Transform
       pos: 163.5,137.5
-      parent: 1
-  - uid: 14133
-    components:
-    - type: Transform
-      pos: 195.5,87.5
       parent: 1
   - uid: 14134
     components:
@@ -112171,17 +112151,12 @@ entities:
   - uid: 14136
     components:
     - type: Transform
-      pos: 194.5,88.5
+      pos: 125.5,21.5
       parent: 1
   - uid: 14137
     components:
     - type: Transform
       pos: 163.5,138.5
-      parent: 1
-  - uid: 14138
-    components:
-    - type: Transform
-      pos: 194.5,87.5
       parent: 1
   - uid: 14139
     components:
@@ -112362,6 +112337,26 @@ entities:
     components:
     - type: Transform
       pos: 99.5,112.5
+      parent: 1
+  - uid: 17435
+    components:
+    - type: Transform
+      pos: 123.5,20.5
+      parent: 1
+  - uid: 17436
+    components:
+    - type: Transform
+      pos: 123.5,20.5
+      parent: 1
+  - uid: 17437
+    components:
+    - type: Transform
+      pos: 131.5,21.5
+      parent: 1
+  - uid: 17438
+    components:
+    - type: Transform
+      pos: 132.5,23.5
       parent: 1
 - proto: RMCJumpsuitMarsoc
   entities:
@@ -116731,6 +116726,28 @@ entities:
     components:
     - type: Transform
       pos: 123.5,21.5
+      parent: 1
+- proto: RMCMagazineSMGType19
+  entities:
+  - uid: 14129
+    components:
+    - type: Transform
+      pos: 133.5,20.5
+      parent: 1
+  - uid: 14130
+    components:
+    - type: Transform
+      pos: 132.5,21.5
+      parent: 1
+  - uid: 14133
+    components:
+    - type: Transform
+      pos: 121.5,13.5
+      parent: 1
+  - uid: 17012
+    components:
+    - type: Transform
+      pos: 121.5,13.5
       parent: 1
 - proto: RMCMapInsertShivaCLFRaid
   entities:
@@ -129625,10 +129642,22 @@ entities:
       parent: 1
 - proto: RMCWeaponShotgunType23
   entities:
-  - uid: 17012
+  - uid: 17434
     components:
     - type: Transform
-      pos: 198.5,93.5
+      pos: 127.5,21.5
+      parent: 1
+- proto: RMCWeaponSMGType19
+  entities:
+  - uid: 13322
+    components:
+    - type: Transform
+      pos: 132.5,21.5
+      parent: 1
+  - uid: 14125
+    components:
+    - type: Transform
+      pos: 121.5,13.5
       parent: 1
 - proto: RMCWeaponTaser
   entities:
