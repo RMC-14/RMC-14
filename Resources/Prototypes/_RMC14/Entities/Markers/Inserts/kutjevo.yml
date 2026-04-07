@@ -171,6 +171,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_spec_holdout.yml"
       probability: 1
+      offset: 1,0
       nightmareScenario: sunriders
     clearEntities: true
     clearDecals: true

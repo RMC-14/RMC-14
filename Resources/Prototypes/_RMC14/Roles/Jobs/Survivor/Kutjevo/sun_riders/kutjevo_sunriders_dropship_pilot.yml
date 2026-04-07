@@ -41,7 +41,6 @@
     ears: RMCHeadsetSunRidersPVP
     pocket1: RMCPouchFlareM94BPFilled
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
-    suitstorage: RMCFlashlight
 
 - type: entity
   id: RMCSurvivorPresetSunRidersPilot
@@ -50,11 +49,11 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ CMArmorHelmetM30, RMCMaskScarfTanDown ]
-    - [ CMArmorHelmetM30, RMCMaskTornScarfDesert ]
+    - [ CMArmorHelmetM30PSP, RMCMaskScarfTanDown ]
+    - [ CMArmorHelmetM30PSP, RMCMaskTornScarfDesert ]
     randomWeapon:
-    - [ RMCM1984BeltFilledSurvivorSunRiders ]
-    - [ RMCM1984BeltFilledSurvivorSunRiders ]
+    - [ RMCHolsterSMGPouchFilledExtended ]
+    - [ RMCHolsterSMGPouchFilledExtended ]
     - [ RMCHolsterSMGPouchFilledExtendedAlt ]
     - [ RMCHolsterSMGPouchFilledExtendedAlt ]
     - [ RMCHolsterSMGPouchFilledExtendedAlt ]
