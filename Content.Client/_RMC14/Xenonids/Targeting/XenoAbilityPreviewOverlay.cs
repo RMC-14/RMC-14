@@ -170,6 +170,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                 if (!_deployTrapsQ.TryComp(player.Value, out var deployTraps))
                     return;
                 DrawDeployTraps(args, originMap, mousePos, deployTraps, DeployTrapsOutlineColor.WithAlpha(OutlineAlpha));
+                break;
 
             case XenoAbductActionEvent:
                 if (!_abductQ.TryComp(player.Value, out var abduct))
@@ -246,11 +247,11 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         direction = direction.Normalized();
         var ortho = new Vector2(-direction.Y, direction.X);
 
-        var startWorld = new MapCoordinates(snappedPos + ortho * (deployTraps.DeployTrapsRadius +  1), mousePos.MapId);
-        var endWorld   = new MapCoordinates(snappedPos - ortho * deployTraps.DeployTrapsRadius, mousePos.MapId);
+        var startWorld = new MapCoordinates(snappedPos + ortho * (deployTraps.DeployTrapsRadius + 1), mousePos.MapId);
+        var endWorld = new MapCoordinates(snappedPos - ortho * deployTraps.DeployTrapsRadius, mousePos.MapId);
 
         var startCoords = _mapSystem.MapToGrid(gridUid, startWorld);
-        var endCoords   = _mapSystem.MapToGrid(gridUid, endWorld);
+        var endCoords = _mapSystem.MapToGrid(gridUid, endWorld);
 
         var trapTiles = _line.DrawLine(startCoords, endCoords, TimeSpan.Zero, deployTraps.Range, out _);
 
@@ -259,6 +260,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             .ToHashSet();
 
         DrawTileBorder(args.WorldHandle, gridUid, grid, tiles, color);
+    }
+
     private void DrawAbduct(
         in OverlayDrawArgs args,
         EntityUid player,
