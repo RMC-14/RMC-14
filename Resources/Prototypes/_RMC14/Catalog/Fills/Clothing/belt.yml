@@ -637,7 +637,7 @@
   - type: StorageFill
     contents:
     - id: RMCMagazinePistolT73
-      amount: 5
+      amount: 6
     - id: RMCWeaponPistolT73
 
 - type: entity
