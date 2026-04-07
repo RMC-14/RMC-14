@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaExecBodyguard
   startingGear: RMCGearSyntheticColonistHybrisaExecBodyguard
   spawnMenuRoleName: Executive Bodyguard Synth (Hybrisa Survivor)
@@ -56,7 +56,7 @@
       preset: RMCSurvivorPresetHybrisaSynthExecBodyguard
     - type: Synth
       generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
