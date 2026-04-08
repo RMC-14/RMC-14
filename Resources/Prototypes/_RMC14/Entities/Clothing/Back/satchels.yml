@@ -50,7 +50,7 @@
     contents:
     - id: CMSheetMetal20
     - id: RMCHandcuffs
-      
+
 - type: entity
   parent: RMCSatchelBlack
   id: RMCSatchelBlackFillParaCO
@@ -79,6 +79,15 @@
 
 - type: entity
   parent: CMSatchel
+  id: RMCSatchelHydro
+  name: hydroponics satchel
+  description: A green satchel for plant-related work.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/hydro.rsi
+
+- type: entity
+  parent: CMSatchel
   id: CMBackpackSniper
   name: M3 sniper's waist-rig
   description: A specially-designed rig attached to the waist with a pocket, designed for marksmen.
@@ -91,10 +100,14 @@
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
-      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
-      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/urban-desert.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow.rsi
       Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
-      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/urban-desert.rsi
+    camoNames:
+      Snow: "M3 sniper's smock"
+    camoDescriptions:
+      Snow: "A specially-designed smock with pockets for all your sniper needs."
 
 - type: entity
   parent: CMSatchel
@@ -884,7 +897,18 @@
       contents:
         - id: CMSheetMetal20
         - id: RMCRadioHandheldColony
-          
+
+- type: entity
+  parent: RMCSatchelLightpack5Slot
+  id: RMCSatchelLightpackFilledParaHelmet
+  suffix: Paramarine, Helmet, Survivor, Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
+        - id: RMCHeadRoyalL1HelmetBallistic
+
 - type: entity
   parent: RMCSatchelLightpack5Slot
   id: RMCSatchelLightpackFilledParaSynth
@@ -947,9 +971,9 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/standard.rsi
 
 - type: entity
-  parent: [RMCSatchelPMC, RMCSatchelWelder]
+  parent: RMCSatchelLightpackWelder
   id: RMCSatchelWelderPMC
-  name: pmc technician welderpack
+  name: PMC technician welderpack
   description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada PMCs. Features a small fueltank for quick blowtorch refueling.
   components:
   - type: Sprite
@@ -963,6 +987,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder.rsi
+
+- type: entity
+  parent: RMCSatchelLightpackWelder
+  id: RMCSatchelLightpackWelderBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder_black.rsi
 
 - type: entity
   parent: CMSatchel
@@ -996,6 +1027,53 @@
     - id: CMDefibrillator
     - id: CMAdvFirstAidKitFilled
     - id: CMRollerBedSpawnFolded
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPSurvivor
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPSurvivorSpec
+  suffix: Filled, Survivor Specialist
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCMagazineRifleType71
+    - id: RMCMagazineRifleType71
+
+- type: entity
+  parent: RMCSatchelSPPMedic
+  id: RMCSatchelSPPMedicSurvivor
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMDefibrillator
+    - id: CMFireExtinguisherPortable
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPSynth
+  suffix: Filled, Synthetic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMDefibrillator
+    - id: CMAdvFirstAidKitFilled
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: CMBloodPackFull
+    - id: CMBloodPackFull
+    - id: RMCSynthResetKeyNovaris
 
 - type: entity
   parent: RMCSatchelWelder
