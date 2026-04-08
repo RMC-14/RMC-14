@@ -80,7 +80,8 @@ public sealed class MapInsertSystem : EntitySystem
         {
             cumulativeProbability += variation.Probability;
             if (!forceSpawn &&
-                ((variation.NightmareScenario != _distressSignal.ActiveNightmareScenario) ||
+                ((variation.NightmareScenario != _distressSignal.ActiveNightmareScenario) &&
+                 !string.IsNullOrEmpty(variation.NightmareScenario) || //only allows either inserts with the correct scenario or no scenario to spawn
                  cumulativeProbability < randomProbability))
                 continue;
             spawn = variation.Spawn;
