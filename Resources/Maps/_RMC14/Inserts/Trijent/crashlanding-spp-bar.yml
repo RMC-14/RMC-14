@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 03/17/2026 14:09:45
-  entityCount: 625
+  time: 04/08/2026 16:27:33
+  entityCount: 671
 maps: []
 grids:
 - 1
@@ -328,6 +328,8 @@ entities:
     - type: Transform
       pos: 7.4954777,-20.897343
       parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: BarbedWire15
   entities:
   - uid: 293
@@ -427,6 +429,14 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: -0.7,-0.4
+  - uid: 671
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 7.5,1.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
 - proto: CMAutolathe
   entities:
   - uid: 321
@@ -710,6 +720,28 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 14.5,-6.5
       parent: 1
+- proto: CMDispenserSoda
+  entities:
+  - uid: 640
+    components:
+    - type: Transform
+      pos: 9.5,2.5
+      parent: 1
+  - uid: 641
+    components:
+    - type: Transform
+      pos: 10.5,2.5
+      parent: 1
+  - uid: 642
+    components:
+    - type: Transform
+      pos: 15.5,2.5
+      parent: 1
+  - uid: 643
+    components:
+    - type: Transform
+      pos: 16.5,2.5
+      parent: 1
 - proto: CMDoubleDoorGenericGlass
   entities:
   - uid: 378
@@ -744,6 +776,13 @@ entities:
     components:
     - type: Transform
       pos: 36.5,1.5
+      parent: 1
+- proto: CMFlare
+  entities:
+  - uid: 652
+    components:
+    - type: Transform
+      pos: 16.260363,-0.4223858
       parent: 1
 - proto: CMGirder
   entities:
@@ -782,6 +821,11 @@ entities:
     - type: Transform
       pos: 2.5,-4.5
       parent: 1
+  - uid: 623
+    components:
+    - type: Transform
+      pos: 1.5,-13.5
+      parent: 1
 - proto: CMIV
   entities:
   - uid: 387
@@ -795,6 +839,13 @@ entities:
     components:
     - type: Transform
       pos: 8.495478,-21.84796
+      parent: 1
+- proto: CMPosterRocker1
+  entities:
+  - uid: 638
+    components:
+    - type: Transform
+      pos: 12.5,2.5
       parent: 1
 - proto: CMRodMetal10
   entities:
@@ -915,6 +966,48 @@ entities:
       rot: 3.141592653589793 rad
       pos: 8.5,-1.5
       parent: 1
+- proto: CMShardGlass
+  entities:
+  - uid: 647
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 13.604113,-0.80293584
+      parent: 1
+  - uid: 648
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.437446,-1.9912617
+      parent: 1
+  - uid: 654
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.635363,-8.667928
+      parent: 1
+  - uid: 655
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 16.583279,-10.429568
+      parent: 1
+  - uid: 656
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.291613,-10.502536
+      parent: 1
+  - uid: 657
+    components:
+    - type: Transform
+      pos: 16.520779,-11.41984
+      parent: 1
+  - uid: 659
+    components:
+    - type: Transform
+      pos: 15.416613,-13.469326
+      parent: 1
 - proto: CMSheetMetal20
   entities:
   - uid: 64
@@ -951,6 +1044,73 @@ entities:
     components:
     - type: Transform
       pos: 7.5,1.5
+      parent: 1
+- proto: CMSink
+  entities:
+  - uid: 646
+    components:
+    - type: Transform
+      pos: 0.5023465,-8.945605
+      parent: 1
+- proto: CMSpawnPointSPPCrashlandMedic
+  entities:
+  - uid: 634
+    components:
+    - type: Transform
+      pos: 7.5,-6.5
+      parent: 1
+- proto: CMSpawnPointSPPCrashlandRifleman
+  entities:
+  - uid: 627
+    components:
+    - type: Transform
+      pos: 7.5,-8.5
+      parent: 1
+  - uid: 630
+    components:
+    - type: Transform
+      pos: 10.5,-7.5
+      parent: 1
+  - uid: 631
+    components:
+    - type: Transform
+      pos: 10.5,-8.5
+      parent: 1
+  - uid: 632
+    components:
+    - type: Transform
+      pos: 9.5,-9.5
+      parent: 1
+  - uid: 633
+    components:
+    - type: Transform
+      pos: 8.5,-9.5
+      parent: 1
+  - uid: 635
+    components:
+    - type: Transform
+      pos: 7.5,-7.5
+      parent: 1
+- proto: CMSpawnPointSPPCrashlandSapper
+  entities:
+  - uid: 629
+    components:
+    - type: Transform
+      pos: 10.5,-6.5
+      parent: 1
+- proto: CMSpawnPointSPPCrashlandSL
+  entities:
+  - uid: 628
+    components:
+    - type: Transform
+      pos: 8.5,-5.5
+      parent: 1
+- proto: CMSpawnPointSPPCrashlandSpec
+  entities:
+  - uid: 626
+    components:
+    - type: Transform
+      pos: 9.5,-5.5
       parent: 1
 - proto: CMTableAlmayer
   entities:
@@ -1620,6 +1780,34 @@ entities:
     - type: Transform
       pos: 31.5,1.5
       parent: 1
+- proto: DrinkShaker
+  entities:
+  - uid: 644
+    components:
+    - type: Transform
+      pos: 9.547575,1.4889994
+      parent: 1
+- proto: DrinkShotGlass
+  entities:
+  - uid: 650
+    components:
+    - type: Transform
+      pos: 14.437447,-1.3396895
+      parent: 1
+- proto: DrinkWineBottleFull
+  entities:
+  - uid: 636
+    components:
+    - type: Transform
+      pos: 15.267014,1.8017164
+      parent: 1
+- proto: RMCAshtrayGlass
+  entities:
+  - uid: 651
+    components:
+    - type: Transform
+      pos: 15.499947,-1.5064719
+      parent: 1
 - proto: RMCBannerSPP
   entities:
   - uid: 499
@@ -1799,6 +1987,26 @@ entities:
     - type: Transform
       pos: 10.5,-22.5
       parent: 1
+  - uid: 666
+    components:
+    - type: Transform
+      pos: 28.412033,-15.310161
+      parent: 1
+  - uid: 667
+    components:
+    - type: Transform
+      pos: 29.214115,-13.944629
+      parent: 1
+  - uid: 668
+    components:
+    - type: Transform
+      pos: 31.120365,-14.361585
+      parent: 1
+  - uid: 669
+    components:
+    - type: Transform
+      pos: 31.182865,-15.226769
+      parent: 1
 - proto: RMCBeltMedicBagSPP
   entities:
   - uid: 577
@@ -1873,9 +2081,9 @@ entities:
     - type: Transform
       pos: 17.5,-19.5
       parent: 1
-- proto: RMCBoxBulletsRifleType71
+- proto: RMCBoxBulletsRifleType71HalfEmpty
   entities:
-  - uid: 575
+  - uid: 391
     components:
     - type: Transform
       pos: 8.5,-7.5
@@ -1981,16 +2189,16 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 279
-          - 272
-          - 274
-          - 275
-          - 276
-          - 277
-          - 278
-          - 273
           - 281
           - 280
+          - 272
+          - 273
+          - 278
+          - 277
+          - 276
+          - 275
+          - 274
+          - 279
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -2017,11 +2225,6 @@ entities:
     - type: Transform
       pos: 9.5,-2.5
       parent: 1
-  - uid: 391
-    components:
-    - type: Transform
-      pos: 9.5,-3.5
-      parent: 1
   - uid: 392
     components:
     - type: Transform
@@ -2036,6 +2239,16 @@ entities:
     components:
     - type: Transform
       pos: 10.5,-9.5
+      parent: 1
+  - uid: 575
+    components:
+    - type: Transform
+      pos: 9.5,-3.5
+      parent: 1
+  - uid: 658
+    components:
+    - type: Transform
+      pos: 14.5,-12.5
       parent: 1
 - proto: RMCDecalSpawnerOilSplatters
   entities:
@@ -2186,6 +2399,25 @@ entities:
     - type: Transform
       pos: 29.5,-9.5
       parent: 1
+  - uid: 670
+    components:
+    - type: Transform
+      pos: 28.5,-19.5
+      parent: 1
+- proto: RMCDirtBandageProp
+  entities:
+  - uid: 665
+    components:
+    - type: Transform
+      pos: 17.385942,-20.619503
+      parent: 1
+- proto: RMCDirtBandageProp2
+  entities:
+  - uid: 662
+    components:
+    - type: Transform
+      pos: 6.621917,-18.924934
+      parent: 1
 - proto: RMCDirtBandageProp7
   entities:
   - uid: 578
@@ -2197,6 +2429,18 @@ entities:
     components:
     - type: Transform
       pos: 9.621366,-5.5769343
+      parent: 1
+  - uid: 664
+    components:
+    - type: Transform
+      pos: 11.55493,-22.658415
+      parent: 1
+- proto: RMCDrinkAlcoholRum
+  entities:
+  - uid: 649
+    components:
+    - type: Transform
+      pos: 14.854113,-1.485624
       parent: 1
 - proto: RMCDrinkAlcoholVodka
   entities:
@@ -2225,7 +2469,7 @@ entities:
   - uid: 582
     components:
     - type: Transform
-      pos: 9.5,-3.5
+      pos: 9.403143,-3.4990668
       parent: 1
 - proto: RMCERTShuttleEngineLeft01
   entities:
@@ -3647,6 +3891,13 @@ entities:
     - type: Transform
       pos: 11.5,-7.5
       parent: 1
+- proto: RMCMirror
+  entities:
+  - uid: 645
+    components:
+    - type: Transform
+      pos: 0.5,-8.5
+      parent: 1
 - proto: RMCMRESPP
   entities:
   - uid: 496
@@ -3677,6 +3928,18 @@ entities:
     components:
     - type: Transform
       pos: 9.194283,-7.661716
+      parent: 1
+  - uid: 663
+    components:
+    - type: Transform
+      pos: 6.4902973,-19.861464
+      parent: 1
+- proto: RMCPlankWood1
+  entities:
+  - uid: 653
+    components:
+    - type: Transform
+      pos: 15.468697,-3.4650867
       parent: 1
 - proto: RMCPlankWood10
   entities:
@@ -3891,11 +4154,6 @@ entities:
     - type: Transform
       pos: 10.5,1.5
       parent: 1
-  - uid: 623
-    components:
-    - type: Transform
-      pos: 0.5,-9.5
-      parent: 1
 - proto: RMCStool
   entities:
   - uid: 350
@@ -3949,6 +4207,25 @@ entities:
     components:
     - type: Transform
       pos: 2.5,-5.5
+      parent: 1
+- proto: RMCTrayEmpty
+  entities:
+  - uid: 637
+    components:
+    - type: Transform
+      pos: 15.548264,1.7079014
+      parent: 1
+- proto: RMCTreeJoshua
+  entities:
+  - uid: 660
+    components:
+    - type: Transform
+      pos: 20,-2
+      parent: 1
+  - uid: 661
+    components:
+    - type: Transform
+      pos: 3,-17
       parent: 1
 - proto: RMCWallBunker
   entities:
@@ -4019,4 +4296,13 @@ entities:
     - type: Transform
       pos: 17.5,-8.5
       parent: 1
+- proto: RMCWoodClock
+  entities:
+  - uid: 639
+    components:
+    - type: Transform
+      pos: 13.548264,2.656477
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
 ...

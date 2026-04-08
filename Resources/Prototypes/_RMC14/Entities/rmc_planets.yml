@@ -290,6 +290,27 @@
       - CMSurvivorCMBDeputy: 1
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
+    survivorJobScenarios:
+      spp_bar:
+      - CMSurvivorDoctor: 1
+      - CMSurvivorEngineer: 1
+      - CMSurvivorSecurity: 2
+      - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      spp_bar:
+        CMSurvivorDoctor:
+        - RMCSurvivorSPPCrashlandMedic: 1
+        CMSurvivorEngineer:
+        - RMCSurvivorSPPCrashlandSapper: 1
+        CMSurvivorSecurity:
+        - RMCSurvivorSPPCrashlandSL: 1
+        - RMCSurvivorSPPCrashlandSpec: 1
+        CMSurvivor:
+        - RMCSurvivorSPPCrashlandSoldier: -1
+    survivorJobOverrideScenarios:
+      spp_bar:
+        CMSurvivorScientist: CMSurvivorDoctor
+        CMSurvivorCorporate: CMSurvivor
 #    survivorJobVariantScenarios:
 #      clf_pods:
 #        CMSurvivor:
@@ -326,7 +347,6 @@
 #        - : -1
 #        CMSurvivorScientist:
 #        - : -1
-
 
 - type: entity
   id: RMCPlanetVaradero

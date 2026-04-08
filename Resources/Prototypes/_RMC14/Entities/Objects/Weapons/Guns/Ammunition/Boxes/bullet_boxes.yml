@@ -101,6 +101,15 @@
     bulletType: RMCBoxBulletsRifleType71
 
 - type: entity
+  parent: RMCBoxBulletsRifleType71
+  id: RMCBoxBulletsRifleType71HalfEmpty
+  suffix: Half Empty
+  components:
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleType71
+    amount: 300
+
+- type: entity
   parent: RMCBoxBulletsRifle
   id: RMCBoxBulletsRifleEmpty
   suffix: Empty

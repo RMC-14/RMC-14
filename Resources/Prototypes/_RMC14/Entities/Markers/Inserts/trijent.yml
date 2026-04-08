@@ -109,7 +109,6 @@
       nightmareScenario: spp_bar
     replaceAreas: false
 
-
 - type: entity
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentMiniEvacWestResearch
