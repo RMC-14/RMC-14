@@ -16,6 +16,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
       preset: RMCSkillPresetCommander
     - type: MarineOrders

@@ -7,6 +7,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: RMCAllowSuitStorage
     - type: RMCSurvivor
     - type: NpcFactionMember
       factions:

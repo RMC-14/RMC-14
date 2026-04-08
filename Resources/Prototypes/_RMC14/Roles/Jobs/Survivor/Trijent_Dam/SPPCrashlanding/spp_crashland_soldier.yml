@@ -23,9 +23,7 @@
         RMCSkillEndurance: 2
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadSPP
+      squad: SquadSPP
     - type: JobPrefix
       prefix: rmc-job-prefix-crashland-soldier
     - type: EquipSurvivorPreset
