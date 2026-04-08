@@ -99,8 +99,6 @@
   name: M44 Combat Revolver case
   description: A gun case containing an M44 Combat Revolver loaded with marksman ammo.
   components:
-  - type: Item
-    size: Small
   - type: Storage
     maxItemSize: Huge
     grid:

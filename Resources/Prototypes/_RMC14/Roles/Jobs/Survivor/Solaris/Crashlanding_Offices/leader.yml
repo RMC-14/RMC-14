@@ -36,9 +36,7 @@
       - WeYa
       - Civilian
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadPMC
+      squad: SquadPMC
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-leader
     - type: TacticalMapIcon

@@ -758,16 +758,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 // Shuffle survivor jobs if there is no active nightmare scenario
                 if (ActiveNightmareScenario == null)
                 {
-                    var compCopy = comp;
-                    IEnumerable<(ProtoId<JobPrototype> Job, int Amount)> jobs = comp.SurvivorJobs
-                        .Where(entry => entry.Job != compCopy.CivilianSurvivorJob)
-                        .OrderBy(_ => _random.Next());
-
-                    if (comp.SurvivorJobs.TryFirstOrNull(entry => entry.Job == compCopy.CivilianSurvivorJob, out var civJob))
-                    {
-                        jobs = jobs.Append(civJob.Value);
-                    }
-
+                    IEnumerable<(ProtoId<JobPrototype> Job, int Amount)> jobs = comp.SurvivorJobs.OrderBy(_ => _random.Next());
                     comp.SurvivorJobs = jobs.ToList();
                 }
 
@@ -1464,6 +1455,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (Timing.CurTime >= distress.QueenDiedCheck)
             {
+                if (distress.Hijack)
+                {
+                    EndRound(distress, DistressSignalRuleResult.MinorXenoVictory);
+                    continue;
+                }
+
                 if (_xenoEvolution.HasLiving<XenoComponent>(4))
                     EndRound(distress, DistressSignalRuleResult.MinorMarineVictory);
                 else
@@ -1834,7 +1831,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         if (time >= component.QueenDiedCheck)
         {
-            if (_xenoEvolution.HasLiving<XenoComponent>(4))
+            if (component.Hijack)
+                EndRound(component, DistressSignalRuleResult.MinorXenoVictory);
+            else if (_xenoEvolution.HasLiving<XenoComponent>(4))
                 EndRound(component, DistressSignalRuleResult.MinorMarineVictory);
             else
                 EndRound(component, DistressSignalRuleResult.MajorMarineVictory, "rmc-distress-signal-majormarinevictory-timeout");
