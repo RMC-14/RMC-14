@@ -1,15 +1,15 @@
 - type: job
-  parent: CMSurvivorCMBDeputy
+  parent: CMSurvivorSecurity
   id: CMSurvivorFiorinaRiotOfficer
   name: cm-job-name-survivor-riot-officer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
-  ranks:
-    RMCRankCivilianOfficer: []
   startingGear: RMCGearSurvivorFiorinaRiotOfficer
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: Fiorina Riot Officer (Survivor)
+  icon: "RMCJobIconBureauRCO"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -27,6 +27,13 @@
       preset: RMCGearSurvivorPresetCMBDeputy
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-riot-officer
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
@@ -34,12 +41,12 @@
   id: RMCGearSurvivorFiorinaRiotOfficer
   equipment:
     jumpsuit: RMCJumpsuitRiotControl
-    back: CMSatchelSecuritySurvivorFillRiotOfficer
     outerClothing: RMCArmorPMCRiot
-    head: ArmorHelmetPMCRiot
+    head: ArmorHelmetPMCRiotShield
     gloves: CMHandsBlackMarine
     shoes: RMCBootsPMCFilled
     pocket2: RMCPouchMagazineLarge
+    eyes: RMCGlassesSecurityBlue
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -52,3 +59,10 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconBureauRCO
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: cmb_rco

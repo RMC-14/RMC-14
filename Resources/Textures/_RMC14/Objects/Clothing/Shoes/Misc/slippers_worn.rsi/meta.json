@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/36ab9674a311463bb056f7fab5fe3f3079305569/icons/obj/items/clothing/shoes.dmi, https://github.com/cmss13-devs/cmss13/blob/a15efa985114bf92a98cda275aa8319636ae5abe/icons/mob/humans/onmob/feet.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-FEET",
+      "directions": 4
+    }
+  ]
+}

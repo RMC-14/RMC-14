@@ -1,0 +1,103 @@
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCBodyScanner
+  name: body scanner
+  description: An advanced full-body scanner capable of providing a detailed health readout of the occupant.
+  suffix: Spawns with Console
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/body_scanner.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - state: body_scanner_open
+      map: ["enum.BodyScannerVisualLayers.Base"]
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: BodyScanner
+  - type: ApcPowerReceiver
+    powerLoad: 10000 # 60 idle, 10000 active
+    needsPower: false # TODO RMC14 power
+  - type: DragInsertContainer
+    containerId: body_scanner
+  - type: NoStunOnExit # Custom stun exit behavior + sound in SharedBodyScannerSystem
+  - type: ContainerContainer
+    containers:
+      body_scanner: !type:ContainerSlot {}
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BodyScannerVisuals.Occupied:
+        enum.BodyScannerVisualLayers.Base:
+          True: { state: body_scanner_closed }
+          False: { state: body_scanner_open }
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCBodyScanner
+  id: RMCBodyScannerNoConsole
+  suffix: No Console
+  components:
+  - type: BodyScanner
+    spawnConsolePrototype: null
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCBodyScannerConsole
+  name: body scanner console
+  description: A console used to view the detailed health scan results of the occupant in the connected body scanner.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/body_scanner.rsi
+    noRot: true
+    layers:
+    - state: body_scannerconsole-p
+    - state: body_scannerconsole
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        hard: false
+  - type: BodyScannerConsole
+  - type: ApcPowerReceiver
+    powerLoad: 0 # No power usage WOT THA SOD
+    needsPower: false # TODO RMC14 power
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: RMCMesonsNonviewable
