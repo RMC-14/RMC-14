@@ -124,6 +124,12 @@
     grid:
     - 0,0,3,1 # 2 slots
     maxItemSize: Small
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-freelancer-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformFreelancer
 
 # Colonial militia
 - type: entity

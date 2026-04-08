@@ -149,6 +149,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+  - type: Tag
+    tags:
+    - RMCUniformFreelancer
 
 # "Civilian"
 - type: entity
