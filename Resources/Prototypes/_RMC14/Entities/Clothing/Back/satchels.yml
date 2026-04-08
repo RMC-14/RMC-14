@@ -908,7 +908,7 @@
         - id: CMSheetMetal20
         - id: RMCRadioHandheldColony
         - id: RMCHeadRoyalL1HelmetBallistic
-          
+
 - type: entity
   parent: RMCSatchelLightpack5Slot
   id: RMCSatchelLightpackFilledParaSynth
@@ -1061,6 +1061,8 @@
     - id: CMFireExtinguisherPortable
     - id: CMHealthAnalyzer
 
+- type: entity
+  parent: RMCSatchelSPP
   id: RMCSatchelSPPSynth
   suffix: Filled, Synthetic
   components:

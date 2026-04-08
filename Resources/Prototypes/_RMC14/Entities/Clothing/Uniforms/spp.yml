@@ -126,7 +126,7 @@
   id: RMCJumpsuitSPPMedicSurgicalWebbing
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingSurgicalGreen 
+    startingWebbing: RMCWebbingSurgicalGreen
 
 - type: entity
   parent: CMJumpsuitSPP
@@ -169,7 +169,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officershirtspp.rsi
-    
+
 - type: entity
   parent: CMJumpsuitSPPOfficer
   id: RMCJumpsuitSPPOfficerAmmoFilled
