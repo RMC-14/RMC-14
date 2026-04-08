@@ -1,31 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fixed queen building speed boost being too fast.
-    type: Tweak
-  id: 2582
-  time: '2025-12-01T00:36:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8334
-- author: Shromply
-  changes:
-  - message: Added a trio of soft first-aid packs for PVE.
-    type: Add
-  id: 2583
-  time: '2025-12-01T00:40:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8261
-- author: OmerF-afk
-  changes:
-  - message: Added L42A incendiary and wall piercing ammo, M4SPR incendiary, HEAP,
-      and wall piercing ammo, M54CE2 incendiary, HEAP, and wall piercing ammo, and
-      M54CMK1 wall piercing ammo, and M63 incendiary and wall piercing ammo, only
-      obtainable through admin events and some available in a future random Requisitions
-      ammo purchase.
-    type: Add
-  - message: Missing bipod pre-attachable and missing ExtRecoilComp Whitelist to m54ce2
-    type: Add
-  id: 2584
-  time: '2025-12-01T01:10:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8392
 - author: noctyrnal
   changes:
   - message: The XL Vests have been resprited, along with having camo now.
@@ -4557,5 +4530,28 @@
   id: 3082
   time: '2026-04-07T03:23:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8602
+- author: SharkSnake98
+  changes:
+  - message: Added a 4x2 WEYA floor decal for mapping use
+    type: Add
+  id: 3083
+  time: '2026-04-08T04:27:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9488
+- author: Ian321
+  changes:
+  - message: Requisitions now also stocks replacement squad headsets with built in
+      tracking.
+    type: Add
+  id: 3084
+  time: '2026-04-08T04:30:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9502
+- author: Dygon
+  changes:
+  - message: Pilots can now play a far reaching sound using the dropship navigation
+      computer to announce that they are about to take off.
+    type: Add
+  id: 3085
+  time: '2026-04-08T04:37:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9448
 Name: RMC14
 Order: -1
