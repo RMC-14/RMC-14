@@ -360,7 +360,7 @@
       - state: centerroadbarrier1
       - map: [ "acided" ]
 
-
+# Plastic Handrails
 - type: entity
   parent: RMCBarricadeHandrail
   id: RMCBarricadeHybrisaPlasticRoadBarrier
@@ -371,7 +371,7 @@
       - state: plasticroadbarrierred
       - map: [ "acided" ]
     - type: Construction
-      graph: BarricadeHandrailGraph
+      graph: RMCBarricadeHandrailPlasticGraph
       node: nodeHandrail
 
 - type: entity

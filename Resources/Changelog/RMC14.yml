@@ -1,123 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added the Provost Inspector, an SEA style role for the military police
-      to ensure the intents of Provost are followed.
-    type: Add
-  id: 2570
-  time: '2025-11-29T09:08:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8494
-- author: Arykh
-  changes:
-  - message: Water now costs 0 energy in the Chem Dispenser!
-    type: Tweak
-  - message: Sinks now give infinite water!
-    type: Tweak
-  id: 2571
-  time: '2025-11-29T09:12:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8447
-- author: CatAndHats
-  changes:
-  - message: Added the honor guard pamphlet which is found in the honor guard kit,
-      which grants them their hud icon and job title.
-    type: Add
-  id: 2572
-  time: '2025-11-29T09:44:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8195
-- author: noctyrnal
-  changes:
-  - message: COs with 450+ Hours can now get golden versions of their sidearms in
-      their loadouts.
-    type: Add
-  id: 2573
-  time: '2025-11-29T09:46:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8162
-- author: BramvanZijp
-  changes:
-  - message: The Commanding Officer's M59a Prototype Rifle now comes in a case alongside
-      3 MK1 AP Magazines instead of one regular MK1 Magazine.
-    type: Tweak
-  id: 2574
-  time: '2025-11-29T10:12:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8158
-- author: ayou331
-  changes:
-  - message: Added xeno chevron for playtime over 350h
-    type: Add
-  id: 2575
-  time: '2025-11-29T10:17:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7896
-- author: CatAndHats
-  changes:
-  - message: Fixed squad prep and requisitions vendors missing the micro laser sight
-      attachment.
-    type: Fix
-  id: 2576
-  time: '2025-11-29T10:58:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8216
-- author: noctyrnal
-  changes:
-  - message: Added Flight Visors, visors that JTAC crew can get from their vendors,
-      and pre-installed in their helmets. Purely cosmetic, but they look pretty cool.
-    type: Add
-  id: 2577
-  time: '2025-11-30T06:25:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8502
-- author: KompaniLinge
-  changes:
-  - message: Added CO service jackets, enjoy!
-    type: Add
-  id: 2578
-  time: '2025-11-30T09:26:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8173
-- author: noctyrnal
-  changes:
-  - message: Fixed indestructible podlocks being corrodible.
-    type: Fix
-  id: 2579
-  time: '2025-11-30T09:27:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8505
-- author: Vermidia
-  changes:
-  - message: Fixed Queens not maturing instantly on hijack start.
-    type: Fix
-  id: 2580
-  time: '2025-11-30T09:40:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8268
-- author: Whisper
-  changes:
-  - message: Fixed Xenonids fitting in storage containers.
-    type: Fix
-  id: 2581
-  time: '2025-12-01T00:24:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8511
-- author: Vixting
-  changes:
-  - message: Fixed queen building speed boost being too fast.
-    type: Tweak
-  id: 2582
-  time: '2025-12-01T00:36:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8334
-- author: Shromply
-  changes:
-  - message: Added a trio of soft first-aid packs for PVE.
-    type: Add
-  id: 2583
-  time: '2025-12-01T00:40:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8261
-- author: OmerF-afk
-  changes:
-  - message: Added L42A incendiary and wall piercing ammo, M4SPR incendiary, HEAP,
-      and wall piercing ammo, M54CE2 incendiary, HEAP, and wall piercing ammo, and
-      M54CMK1 wall piercing ammo, and M63 incendiary and wall piercing ammo, only
-      obtainable through admin events and some available in a future random Requisitions
-      ammo purchase.
-    type: Add
-  - message: Missing bipod pre-attachable and missing ExtRecoilComp Whitelist to m54ce2
-    type: Add
-  id: 2584
-  time: '2025-12-01T01:10:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8392
 - author: noctyrnal
   changes:
   - message: The XL Vests have been resprited, along with having camo now.
@@ -4552,5 +4433,125 @@
   id: 3070
   time: '2026-04-06T03:33:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8988
+- author: Vixting
+  changes:
+  - message: Added fun!
+    type: Add
+  - message: Removed fun!
+    type: Remove
+  - message: Changed fun!
+    type: Tweak
+  - message: Fixed fun!
+    type: Fix
+  id: 3071
+  time: '2026-04-06T11:12:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9613
+- author: kleinerstation13
+  changes:
+  - message: Added Corporate M63 variant
+    type: Add
+  - message: Fixed Solaris PMC crashlanding survivors starting with an empty M63 instead
+      of a loaded corporate variant
+    type: Fix
+  id: 3072
+  time: '2026-04-07T01:19:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9216
+- author: Vixting
+  changes:
+  - message: Fixed being able to stack multiple xenonid structures on the same tile
+    type: Fix
+  id: 3073
+  time: '2026-04-07T03:10:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9615
+- author: CatAndHats
+  changes:
+  - message: Fixed plastic Road Barriers giving two metal sheets when deconstructed
+    type: Fix
+  id: 3074
+  time: '2026-04-07T03:11:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9469
+- author: CatAndHats
+  changes:
+  - message: Xenonid spit actions remain toggled until deactivated or another ability
+      is used
+    type: Tweak
+  id: 3075
+  time: '2026-04-07T03:17:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9538
+- author: Dygon
+  changes:
+  - message: Fixed resting resetting tackle stacks.
+    type: Fix
+  id: 3076
+  time: '2026-04-07T03:16:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9526
+- author: CatAndHats
+  changes:
+  - message: Fixed sentinel resting sprites while they are injured to not have the
+      blood floating in mid-air
+    type: Fix
+  id: 3077
+  time: '2026-04-07T03:16:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9332
+- author: CatAndHats
+  changes:
+  - message: Watcher Parasite now has a slightly distinct sprite from base Parasite
+    type: Tweak
+  id: 3078
+  time: '2026-04-07T03:19:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9512
+- author: CatAndHats
+  changes:
+  - message: Praetorian Oppressor's Abduct and Vanguard's Pierce abilities now have
+      a tile preview overlay
+    type: Add
+  id: 3079
+  time: '2026-04-07T03:18:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9468
+- author: Arykh
+  changes:
+  - message: Fixed Nutritious Property restoring less nutrition than intended. (again)
+    type: Fix
+  id: 3080
+  time: '2026-04-07T03:21:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9532
+- author: monomethylhydrazine
+  changes:
+  - message: Added the SPP Support Synthetic.
+    type: Add
+  id: 3081
+  time: '2026-04-07T03:20:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8388
+- author: monomethylhydrazine
+  changes:
+  - message: Added jobs for survivors of 173/RECON, an SPP special forces unit crashlanded
+      on Trijent Dam.
+    type: Add
+  id: 3082
+  time: '2026-04-07T03:23:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8602
+- author: SharkSnake98
+  changes:
+  - message: Added a 4x2 WEYA floor decal for mapping use
+    type: Add
+  id: 3083
+  time: '2026-04-08T04:27:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9488
+- author: Ian321
+  changes:
+  - message: Requisitions now also stocks replacement squad headsets with built in
+      tracking.
+    type: Add
+  id: 3084
+  time: '2026-04-08T04:30:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9502
+- author: Dygon
+  changes:
+  - message: Pilots can now play a far reaching sound using the dropship navigation
+      computer to announce that they are about to take off.
+    type: Add
+  id: 3085
+  time: '2026-04-08T04:37:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9448
 Name: RMC14
 Order: -1
