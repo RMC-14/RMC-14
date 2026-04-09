@@ -563,20 +563,20 @@
   - type: LightBehaviour
     behaviours:
       - !type:FadeBehaviour
-       id: turn_on
-       maxDuration: 5
-       startValue: 2.5
-       endValue: 5
+        id: turn_on
+        maxDuration: 5
+        startValue: 2.5
+        endValue: 5
       - !type:FadeBehaviour
         id: phase_1
         maxDuration: 145
         startValue: 5
         endValue: 5
       - !type:FadeBehaviour
-       id: fade_out
-       maxDuration: 30
-       startValue: 5
-       endValue: 1
+        id: fade_out
+        maxDuration: 30
+        startValue: 5
+        endValue: 1
   - type: PointLight
     color: "#A7FFA7"
     radius: 8.0
@@ -587,9 +587,6 @@
     lifetime: 180
 
 - type: entity
-  parent: BaseItem
-  id: RMCFlarePackAmmo
-  name: flare
   parent: CMFlare
   id: RMCFlareL96
   name: flare

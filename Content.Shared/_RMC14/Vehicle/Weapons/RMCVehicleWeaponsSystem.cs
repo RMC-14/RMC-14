@@ -176,8 +176,18 @@ public sealed partial class RMCVehicleWeaponsSystem : EntitySystem
         if (args.User != ent.Owner)
             return;
 
-        if (ent.Comp.Vehicle is not { } vehicle ||
-            !TryComp(vehicle, out RMCVehicleWeaponsComponent? weapons) ||
+        if (ent.Comp.Vehicle is not { } vehicle)
+            return;
+
+        if (TryComp(vehicle, out RMCHardpointIntegrityComponent? frameIntegrity) &&
+            frameIntegrity.Integrity <= 0f)
+        {
+            args.Cancel();
+            _popup.PopupEntity(Loc.GetString("rmc-vehicle-hull-destroyed"), ent.Owner, ent.Owner, PopupType.SmallCaution);
+            return;
+        }
+
+        if (!TryComp(vehicle, out RMCVehicleWeaponsComponent? weapons) ||
             !TryComp(vehicle, out ItemSlotsComponent? itemSlots) ||
             !CanUseHardpointActions(ent.Owner) ||
             !weapons.OperatorSelections.TryGetValue(ent.Owner, out var selectedWeapon) ||
