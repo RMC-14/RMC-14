@@ -21,7 +21,7 @@
       - id: RMCVendorBundleRCMPVEAssaultEngi
       - id: RMCPVEArmorCaseRoyalPointman
       - id: CMHandsBlackInsulated
-    - name: Breaching Equipment (Mandatory) # TODO RMC royal marines breaching hammer, XM51 is placeholder
+    - name: Breaching Equipment (Mandatory) # TODO RMC royal marines breaching hammer
       choices: { CMPrimary: 1 }
       takeOne: CMAccessories
       entries:

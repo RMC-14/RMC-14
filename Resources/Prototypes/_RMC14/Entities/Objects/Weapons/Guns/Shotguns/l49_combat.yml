@@ -1,11 +1,10 @@
 ﻿- type: entity
-  parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: L49 assault shotgun
+  suffix: PVE, RCM
   id: RMCWeaponShotgunL49
   description: L49 is the official designation for the semi-automatic 12ga shotgun issued to Royal Crown Marine assault engineers and breachers. Designed in tandem with L49B breaching shells, it's a brutally effective, compact, and reliable combined weapon and breaching tool.
   components:
-  - type: Item
-    size: Large
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/l49.rsi
     layers:
@@ -16,27 +15,6 @@
     slots:
     - Back
     - SuitStorage
-  - type: Wieldable
-  - type: WieldDelay
-    baseDelay: 0.6
-  - type: WieldableSpeedModifiers
-    base: 0.666
-    light: 0.921
-    medium: 0.865
-    heavy: 0.865
-  - type: EmitSoundOnLand
-    sound:
-      collection: RMCRustleGun
-      params:
-        volume: -4
-  - type: Gun
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
-    soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun.ogg
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -59,35 +37,11 @@
     proto: null
     soundInsert:
       collection: CMShotgunLoad
-  - type: AmmoCounter
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
-  - type: RMCAmmoEject
-    containerID: ballistic-ammo
-    ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
-  - type: StaticPrice
-    price: 500
-  - type: RMCNameItemOnVend
-    item: PrimaryGun
-  - type: RMCFireGroup
-    group: Shotgun
-    delay: 4
-  - type: GunDualWielding
-    weaponGroup: Shotgun
-  - type: GunPointBlank
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.5
     accuracyMultiplierUnwielded: 0.75
   - type: GunDamageModifier
     multiplier: 0.66
-  - type: WieldedCrosshair
-    rsi:
-      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
-      state: all
-  - type: RMCGunChamber
-    enabled: false
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
