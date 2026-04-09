@@ -932,9 +932,6 @@
       - RMCShellShotgunBuckshot
       - RMCShellShotgunSlugs
       - RMCShellShotgunFlechette
-      - RMCShellShotgunIncendiaryBuckshot
-      - RMCShellShotgunIncendiary
-      - RMCShellShotgunBeanbag
       - RMCShellShotgunL49B
     capacity: 5
     soundInsert:

@@ -454,6 +454,8 @@
   name: L49 standoff device
   description: How are you even seeing this?
   components:
+  - type: Sprite
+    state: choke
   - type: Tag
     tags:
     - RMCAttachmentBarrel
