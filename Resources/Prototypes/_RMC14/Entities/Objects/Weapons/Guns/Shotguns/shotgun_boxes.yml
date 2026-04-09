@@ -434,6 +434,7 @@
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunL49B
   name: box of L49B shells
+  suffix: PVE, RCM
   description: A box filled with breaching shells, compatible with the L49 assault shotgun. 12 Gauge.
   components:
   - type: Storage
