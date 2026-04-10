@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/51a4715ae0dab73c6a39fb62fe424af2139dbe59/icons/mob/humans/onmob/clothing/uniforms/misc_ert_colony.dmi, https://github.com/cmss13-devs/cmss13/blob/51a4715ae0dab73c6a39fb62fe424af2139dbe59/icons/obj/items/clothing/uniforms/misc_ert_colony.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    }
+  ]
+}

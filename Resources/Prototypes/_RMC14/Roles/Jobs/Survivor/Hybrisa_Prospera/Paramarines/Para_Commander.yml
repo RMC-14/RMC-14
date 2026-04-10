@@ -17,6 +17,7 @@
           factions:
             - RoyalMarines
             - TSE
+        - type: RMCSurvivor
         - type: Skills
           preset: RMCSkillPresetCommander
         - type: RMCAllowSuitStorage
@@ -24,6 +25,7 @@
         - type: MotionDetectorTracked
         - type: MarineOrders
         - type: RMCPointing
+        - type: InnateCommandSpeech
         - type: CommandAccent
         - type: RMCTrackable
         - type: TacticalMapIcon
@@ -34,9 +36,7 @@
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
             state: background_para
         - type: AssignSquad
-          whitelist:
-            tags:
-              - SquadPara
+          squad: SquadPara
         - type: JobPrefix
           prefix: rmc-job-prefix-para-commander
   useLoadoutOfJob: RMCSurvivorCommandingOfficer
@@ -44,7 +44,7 @@
 - type: startingGear
   id: RMCGearParaCommander
   equipment:
-    id: CMIDCardGold
+    id: RMCIDRoyalParamarinesCommander
     jumpsuit: RMCJumpsuitMarineParaService
     shoes: RMCBootsRoyalFilled
     head: RMCHeadCapPeakedPara
