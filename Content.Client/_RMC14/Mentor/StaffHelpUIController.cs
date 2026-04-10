@@ -64,6 +64,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _net.RegisterNetMessage<MentorClientUnclaimMsg>();
         _net.RegisterNetMessage<MentorClaimMsg>(OnMentorClaim);
         _net.RegisterNetMessage<MentorUnclaimMsg>(OnMentorUnclaim);
+        _net.RegisterNetMessage<MentorClientTeleportMsg>();
 
         _config.OnValueChanged(RMCCVars.RMCMentorHelpSound, v => _mHelpSound = new SoundPathSpecifier(v), true);
     }
@@ -353,6 +354,14 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             _net.ClientSendMessage(message);
         };
 
+        window.TeleportButton.OnPressed += _ =>
+        {
+            _net.ClientSendMessage(new MentorClientTeleportMsg
+            {
+                Destination = window.SelectedPlayer,
+            });
+        };
+
         return window;
     }
 
@@ -384,6 +393,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             _mentorWindow.SelectedPlayer = player;
             _mentorWindow.Messages.Clear();
             _mentorWindow.Chat.Editable = true;
+            _mentorWindow.TeleportButton.Visible = _mentorWindow.SelectedPlayer != default;
             UpdateClaimIndicator(player);
             UpdateTypingIndicator();
             if (!_messages.TryGetValue(player, out var authorMessages))

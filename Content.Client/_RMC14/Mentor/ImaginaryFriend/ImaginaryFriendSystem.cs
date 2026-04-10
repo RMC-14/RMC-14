@@ -1,5 +1,6 @@
 using Content.Client.Ghost;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
+using Content.Shared.Ghost;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 
@@ -9,6 +10,8 @@ public sealed partial class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+
+    private const float AlphaWhileHidden = 0;
 
     public override void Initialize()
     {
@@ -33,20 +36,21 @@ public sealed partial class ImaginaryFriendSystem : SharedImaginaryFriendSystem
             return;
 
         var spriteEnt = (ent, sprite);
-        var clientIsFriend = _player.LocalEntity == ent;
-        var clientHasFriend = _player.LocalEntity == ent.Comp.Imaginer;
+        var localEntity = _player.LocalEntity;
+        var clientIsFriend = localEntity== ent;
+        var clientHasFriend = localEntity == ent.Comp.Imaginer;
 
-        var alpha = 1f;
+        var alpha = ent.Comp.DefaultAlpha;
         if (!ent.Comp.Visible)
         {
             if (clientIsFriend)
-                alpha = 0.5f;
+                alpha = ent.Comp.OwnAlphaWhileHidden;
 
             if (clientHasFriend)
-                alpha = 0;
+                alpha = AlphaWhileHidden;
         }
 
         _sprite.SetColor(spriteEnt, Color.White.WithAlpha(alpha));
-        _sprite.SetVisible(spriteEnt, clientIsFriend || clientHasFriend);
+        _sprite.SetVisible(spriteEnt, clientIsFriend || clientHasFriend || HasComp<GhostComponent>(localEntity));
     }
 }

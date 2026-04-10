@@ -81,8 +81,9 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         if (EnsureComp<HasImaginaryFriendComponent>(imaginer, out var hasFriend))
             return;
 
+        var targetIsXeno = HasComp<XenoComponent>(imaginer);
         var coordinates = _transform.GetMoverCoordinates(imaginer);
-        var prototype = HasComp<XenoComponent>(imaginer) ? XenoImaginaryFriendPrototype : ImaginaryFriendPrototype;
+        var prototype = targetIsXeno ? XenoImaginaryFriendPrototype : ImaginaryFriendPrototype;
 
         var friend = EntityManager.SpawnEntity(prototype, coordinates);
         _transform.AttachToGridOrMap(friend, Transform(friend));
@@ -103,10 +104,14 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 
         _eye.RefreshVisibilityMask(imaginer);
 
-        if (!string.IsNullOrWhiteSpace(friendMind.CharacterName))
+        var defaultName = Loc.GetString(imaginaryFriend.DefaultName);
+
+        if (targetIsXeno)
+            _metaData.SetEntityName(friend, imaginaryFriend.DefaultXenoName);
+        else if (!string.IsNullOrWhiteSpace(friendMind.CharacterName))
             _metaData.SetEntityName(friend, friendMind.CharacterName);
-        else if (!string.IsNullOrWhiteSpace(imaginaryFriend.DefaultName))
-            _metaData.SetEntityName(friend, imaginaryFriend.DefaultName);
+        else
+            _metaData.SetEntityName(friend, defaultName);
     }
 
     private void RemoveImaginaryFriend(HasImaginaryFriendComponent hasImaginaryFriend)
