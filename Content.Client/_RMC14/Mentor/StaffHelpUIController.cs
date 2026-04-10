@@ -295,7 +295,11 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
                     window => window.Chat,
                     window => window.SelectedPlayer))
             {
-                foreach (var destination in _messages.Keys)
+                var ordered = _messages.Keys
+                    .OrderByDescending(player => _lastMessageTime.GetValueOrDefault(player))
+                    .ToList();
+
+                foreach (var destination in ordered)
                 {
                     MentorAddPlayerButton(destination);
                 }

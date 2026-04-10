@@ -47,7 +47,7 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
     public IAHelpUIHandler? UIHelper;
     private bool _discordRelayActive;
     private bool _hasUnreadAHelp;
-    private bool _hasUnreadMHelp;
+    private bool _hasUnreadMHelp; // RMC14
     private bool _bwoinkSoundEnabled;
     private string? _aHelpSound;
 
@@ -254,10 +254,11 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
 
     public void UnreadAHelpReceived()
     {
-        _hasUnreadAHelp = true;
+        _hasUnreadAHelp = true; //RMC14
         UpdateUnreadState();
     }
 
+    //RMC14
     public void UnreadMHelpReceived()
     {
         _hasUnreadMHelp = true;
@@ -266,16 +267,18 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
 
     public void UnreadAHelpRead()
     {
-        _hasUnreadAHelp = false;
+        _hasUnreadAHelp = false; // RMC14
         UpdateUnreadState();
     }
 
+    //RMC14
     public void UnreadMHelpRead()
     {
         _hasUnreadMHelp = false;
         UpdateUnreadState();
     }
 
+    // RMC14
     private void UpdateUnreadState()
     {
         var isAdmin = _adminManager.HasFlag(AdminFlags.Adminhelp);
@@ -311,6 +314,7 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
                 UnreadAHelpRead();
             }
 
+            //RMC14
             if (_hasUnreadMHelp)
             {
                 UnreadMHelpReceived();
@@ -345,6 +349,7 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
                 UnreadAHelpRead();
             }
 
+            //RMC14
             if (_hasUnreadMHelp)
             {
                 UnreadMHelpReceived();
