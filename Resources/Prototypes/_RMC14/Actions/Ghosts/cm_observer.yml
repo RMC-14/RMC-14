@@ -56,3 +56,32 @@
     useDelay: 0.5
   - type: InstantAction
     event: !type:JoinXenoActionEvent
+
+- type: entity
+  id: ActionToggleVisibility
+  name: Toggle Visibility
+  description: Toggles your visibility, while you're invisible your friend can still hear what you say.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon:
+      sprite: Mobs/Ghosts/ghost_human.rsi #TODO Find a better icon
+      state: icon
+    iconOn:
+      sprite: Mobs/Ghosts/ghost_human.rsi #TODO Find a better icon
+      state: icon
+  - type: InstantAction
+    event: !type:ImaginaryFriendToggleVisibilityActionEvent
+
+- type: entity
+  id: ActionStopBeingFriends
+  name: Leave Friend
+  description: Stop being an imaginary friend.
+  components:
+  - type: Action
+    checkCanInteract: false
+    icon:
+      sprite: _RMC14/Actions/marine_emplacement_actions.rsi #TODO Find a better icon
+      state: cancel_view
+  - type: InstantAction
+    event: !type:ImaginaryFriendStopBeingFriendsActionEvent

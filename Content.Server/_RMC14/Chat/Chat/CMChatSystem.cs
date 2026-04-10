@@ -5,6 +5,7 @@ using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Inventory;
@@ -38,6 +39,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
         base.Initialize();
         SubscribeLocalEvent<MarineComponent, ChatMessageAfterGetRecipients>(OnMarineAfterGetRecipients);
         SubscribeLocalEvent<XenoComponent, ChatMessageAfterGetRecipients>(OnXenoAfterGetRecipients);
+        SubscribeLocalEvent<ImaginaryFriendComponent, ChatMessageAfterGetRecipients>(OnImaginaryFriendGetRecipients);
     }
 
     private void OnMarineAfterGetRecipients(Entity<MarineComponent> ent, ref ChatMessageAfterGetRecipients args)
@@ -69,6 +71,25 @@ public sealed class CMChatSystem : SharedCMChatSystem
                 continue;
 
             if (!HasComp<XenoComponent>(session.AttachedEntity))
+                _toRemove.Add(session);
+        }
+
+        foreach (var session in _toRemove)
+        {
+            args.Recipients.Remove(session);
+        }
+    }
+
+    private void OnImaginaryFriendGetRecipients(Entity<ImaginaryFriendComponent> ent, ref ChatMessageAfterGetRecipients args)
+    {
+        _toRemove.Clear();
+
+        foreach (var (session, data) in args.Recipients)
+        {
+            if (data.Observer)
+                continue;
+
+            if (ent.Comp.Imaginer != session.AttachedEntity)
                 _toRemove.Add(session);
         }
 

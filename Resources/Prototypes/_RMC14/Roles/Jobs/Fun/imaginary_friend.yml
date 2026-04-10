@@ -1,0 +1,30 @@
+- type: entity
+  parent: MobObserver
+  id: RMCImaginaryFriend
+  description: A wonderful yet fake friend.
+  components:
+  - type: Sprite
+    sprite: Mobs/Ghosts/ghost_human.rsi
+    color: "#fff8"
+    layers:
+    - state: animated
+      shader: unshaded
+  - type: Inventory
+    templateId: human
+  - type: ImaginaryFriend
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 6
+    baseWalkSpeed: 2.7
+  - type: Speech
+    speechSounds: Alto
+
+- type: entity
+  parent: RMCImaginaryFriend
+  id: RMCImaginaryFriendXeno
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/LesserDrone/lesser_drone.rsi
+    color: "#FFFFFF"
+    layers:
+    - state: alive
+      shader: ""
