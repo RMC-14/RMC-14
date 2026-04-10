@@ -522,3 +522,26 @@
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSoldier
     pocket1: RMCFlashlight
+
+# Russian
+
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseRussian
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseRussian ]
+
+- type: startingGear
+  id: RMCGearCorpseRussian
+  equipment:
+    jumpsuit: CMJumpsuitSPP # TODO RMC14 Soviet jumpsuit
+    back: CMSatchelSecurity
+    belt: CMBeltMarine
+    head: RMCHeadUshanka
+    shoes: RMCBootsSPPBlackFilled
+    gloves: CMHandsBlackMarine
+    ears: CMHeadsetColony
+    mask: RMCMaskRebreather
+    outerClothing: RMCCoatSnowSoviet
+    id: CMIDCardColonist
