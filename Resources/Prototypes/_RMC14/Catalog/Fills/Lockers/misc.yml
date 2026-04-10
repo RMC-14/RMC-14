@@ -153,4 +153,4 @@
     - id: RMCFlashlightLantern
     - id: RMCShovel
     - id: RMCPickaxe
-    # toadd: meson goggles, analyzer, orebag
+    # TODO: Add Meson Goggles, Analyzer, Orebag
