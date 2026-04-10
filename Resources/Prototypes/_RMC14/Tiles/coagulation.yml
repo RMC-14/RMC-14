@@ -11,6 +11,33 @@
   parent: RMCFloorCoagulationBase
   id: RMCFloorCoagulationPlating
 
+# Marked
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationCornerLogo
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/1_1.png
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationCornerBox
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/1_7.png
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationCornerMarkedSE
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/7_1.png
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationCorner01
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/7_7.png
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationCorner02
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/7_7-2.png
+
 # Corners
 
 - type: tile
