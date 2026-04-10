@@ -3,7 +3,7 @@
   id: RMCAreaBarley
   name: CSS Barley
   components:
-  - type: sprite
+  - type: Sprite
     sprite: _RMC14/Areas/areas_barley.rsi
     state: base
   - type: Area
@@ -30,7 +30,7 @@
   id: RMCAreaBarleyAI
   name: AI Core
   components:
-  - type: sprite
+  - type: Sprite
     state: ai
 
 - type: entity
@@ -38,7 +38,7 @@
   id: RMCAreaBarleyCafeteria
   name: Cafeteria
   components:
-  - type: sprite
+  - type: Sprite
     state: cafeteria
 
 - type: entity
@@ -46,7 +46,7 @@
   id: RMCAreaBarleyCaptain
   name: Captain's Quarters
   components:
-  - type: sprite
+  - type: Sprite
     state: captain
 
 - type: entity
@@ -54,7 +54,7 @@
   id: RMCAreaBarleyCargo
   name: Cargo Bay
   components:
-  - type: sprite
+  - type: Sprite
     state: cargo
 
 - type: entity
@@ -62,7 +62,7 @@
   id: RMCAreaBarleyCentralDeck
   name: Central Deck
   components:
-  - type: sprite
+  - type: Sprite
     state: central_deck
 
 - type: entity
@@ -70,7 +70,7 @@
   id: RMCAreaBarleyDorms
   name: Dorms
   components:
-  - type: sprite
+  - type: Sprite
     state: dorms
 
 - type: entity
@@ -78,7 +78,7 @@
   id: RMCAreaBarleyEngineering
   name: Engineering Bay
   components:
-  - type: sprite
+  - type: Sprite
     state: engineering
 
 - type: entity
@@ -86,7 +86,7 @@
   id: RMCAreaBarleyHypersleep
   name: Hypersleep Bay
   components:
-  - type: sprite
+  - type: Sprite
     state: hypersleep
 
 - type: entity
@@ -94,7 +94,7 @@
   id: RMCAreaBarleyLowerDeck
   name: Lower Deck
   components:
-  - type: sprite
+  - type: Sprite
     state: lower_deck
 
 - type: entity
@@ -102,7 +102,7 @@
   id: RMCAreaBarleyLowerHangar
   name: Lower Hangar
   components:
-  - type: sprite
+  - type: Sprite
     state: lower_hangar
 
 - type: entity
@@ -110,7 +110,7 @@
   id: RMCAreaBarleyMaintenance
   name: Maintenance
   components:
-  - type: sprite
+  - type: Sprite
     state: maints
 
 - type: entity
@@ -118,7 +118,7 @@
   id: RMCAreaBarleyMedbay
   name: Medical Bay
   components:
-  - type: sprite
+  - type: Sprite
     state: medbay
 
 - type: entity
@@ -126,7 +126,7 @@
   id: RMCAreaBarleyOffice
   name: Public Office
   components:
-  - type: sprite
+  - type: Sprite
     state: office
 
 - type: entity
@@ -134,7 +134,7 @@
   id: RMCAreaBarleyRecreation
   name: Rec. Room
   components:
-  - type: sprite
+  - type: Sprite
     state: recreation
 
 - type: entity
@@ -142,7 +142,7 @@
   id: RMCAreaBarleySecureStorage
   name: Secure Storage
   components:
-  - type: sprite
+  - type: Sprite
     state: secure_storage
 
 - type: entity
@@ -150,7 +150,7 @@
   id: RMCAreaBarleySyntheticStorage
   name: Synthetic Storage
   components:
-  - type: sprite
+  - type: Sprite
     state: synth
 
 - type: entity
@@ -158,7 +158,7 @@
   id: RMCAreaBarleyUpperDeck
   name: Upper Deck
   components:
-  - type: sprite
+  - type: Sprite
     state: upper_deck
 
 - type: entity
@@ -166,7 +166,7 @@
   id: RMCAreaBarleyUpperHangar
   name: Upper Hangar
   components:
-  - type: sprite
+  - type: Sprite
     state: upper_hangar
 
 - type: entity
@@ -174,7 +174,7 @@
   id: RMCAreaBarleyOOB
   name: Out of Bounds
   components:
-  - type: sprite
+  - type: Sprite
     state: oob
   - type: area
     alwaysPowered: true
