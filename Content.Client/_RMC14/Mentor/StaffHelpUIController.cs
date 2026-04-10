@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 using Content.Client.Administration.Systems;
 using Content.Client.Stylesheets;
@@ -38,6 +39,8 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private readonly Dictionary<NetUserId, string> _destinationNames = new();
     private readonly Dictionary<NetUserId, (List<string> People, CancellationTokenSource Cancel)> _peopleTyping = new();
     private readonly Dictionary<NetUserId, List<string>> _claims = new();
+    private readonly Dictionary<NetUserId, bool> _unreadByPlayer = new();
+    private readonly Dictionary<NetUserId, DateTime> _lastMessageTime = new();
 
     public bool IsMentor { get; private set; }
     private bool _canReMentor;
@@ -47,7 +50,6 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private SoundSpecifier? _mHelpSound;
     private bool _unread;
     private (TimeSpan Timestamp, bool Typing) _lastTypingUpdateSent;
-    private readonly Dictionary<NetUserId, bool> _unreadByPlayer = new();
 
     public event Action? MentorStatusUpdated;
 
@@ -118,6 +120,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
 
             _destinationNames.TryAdd(message.Destination, message.DestinationName);
             _messages.GetOrNew(message.Destination).Add(message);
+            _lastMessageTime[message.Destination] = message.Time;
 
             if (_mentorWindow?.SelectedPlayer != message.Destination)
                 _unreadByPlayer[message.Destination] = true;
@@ -144,6 +147,8 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
                 _mentorHelpWindow.Messages.ScrollToBottom();
             }
         }
+
+        SortPlayerButtons();
 
         if (other)
         {
@@ -375,7 +380,6 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
 
         if (_mentorWindow.PlayerDict.TryGetValue(player, out var button))
         {
-            button.SetPositionFirst();
             UpdatePlayerButton(player);
             return;
         }
@@ -412,7 +416,6 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         };
 
         _mentorWindow.Players.AddChild(playerButton);
-        playerButton.SetPositionFirst();
         _mentorWindow.PlayerDict[player] = playerButton;
         UpdatePlayerButton(player);
     }
@@ -558,9 +561,26 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         if (unread)
         {
             button.AddStyleClass(StyleNano.StyleClassButtonColorRed);
-            button.SetPositionFirst();
         }
         else
             button.RemoveStyleClass(StyleNano.StyleClassButtonColorRed);
+    }
+
+    private void SortPlayerButtons()
+    {
+        if (_mentorWindow == null)
+            return;
+
+        var ordered = _messages.Keys
+            .OrderByDescending(player => _lastMessageTime.GetValueOrDefault(player))
+            .ToList();
+
+        _mentorWindow.Players.RemoveAllChildren();
+
+        foreach (var player in ordered)
+        {
+            if (_mentorWindow.PlayerDict.TryGetValue(player, out var button))
+                _mentorWindow.Players.AddChild(button);
+        }
     }
 }
