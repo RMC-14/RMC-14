@@ -47,6 +47,7 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
     public IAHelpUIHandler? UIHelper;
     private bool _discordRelayActive;
     private bool _hasUnreadAHelp;
+    private bool _hasUnreadMHelp;
     private bool _bwoinkSoundEnabled;
     private string? _aHelpSound;
 
@@ -253,16 +254,44 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
 
     public void UnreadAHelpReceived()
     {
-        GameAHelpButton?.StyleClasses.Add(MenuButton.StyleClassRedTopButton);
-        LobbyAHelpButton?.StyleClasses.Add(StyleNano.StyleClassButtonColorRed);
         _hasUnreadAHelp = true;
+        UpdateUnreadState();
     }
 
-    private void UnreadAHelpRead()
+    public void UnreadMHelpReceived()
     {
-        GameAHelpButton?.StyleClasses.Remove(MenuButton.StyleClassRedTopButton);
-        LobbyAHelpButton?.StyleClasses.Remove(StyleNano.StyleClassButtonColorRed);
+        _hasUnreadMHelp = true;
+        UpdateUnreadState();
+    }
+
+    public void UnreadAHelpRead()
+    {
         _hasUnreadAHelp = false;
+        UpdateUnreadState();
+    }
+
+    public void UnreadMHelpRead()
+    {
+        _hasUnreadMHelp = false;
+        UpdateUnreadState();
+    }
+
+    private void UpdateUnreadState()
+    {
+        var isAdmin = _adminManager.HasFlag(AdminFlags.Adminhelp);
+        var isMentor = _staffHelp.IsMentor;
+        var red = isAdmin && _hasUnreadAHelp || isMentor && _hasUnreadMHelp;
+
+        if (red)
+        {
+            GameAHelpButton?.StyleClasses.Add(MenuButton.StyleClassRedTopButton);
+            LobbyAHelpButton?.StyleClasses.Add(StyleNano.StyleClassButtonColorRed);
+        }
+        else
+        {
+            GameAHelpButton?.StyleClasses.Remove(MenuButton.StyleClassRedTopButton);
+            LobbyAHelpButton?.StyleClasses.Remove(StyleNano.StyleClassButtonColorRed);
+        }
     }
 
     public void OnStateEntered(GameplayState state)
@@ -280,6 +309,15 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
             else
             {
                 UnreadAHelpRead();
+            }
+
+            if (_hasUnreadMHelp)
+            {
+                UnreadMHelpReceived();
+            }
+            else
+            {
+                UnreadMHelpRead();
             }
         }
     }
@@ -305,6 +343,15 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
             else
             {
                 UnreadAHelpRead();
+            }
+
+            if (_hasUnreadMHelp)
+            {
+                UnreadMHelpReceived();
+            }
+            else
+            {
+                UnreadMHelpRead();
             }
         }
     }

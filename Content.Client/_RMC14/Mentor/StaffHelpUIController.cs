@@ -47,6 +47,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private SoundSpecifier? _mHelpSound;
     private bool _unread;
     private (TimeSpan Timestamp, bool Typing) _lastTypingUpdateSent;
+    private readonly Dictionary<NetUserId, bool> _unreadByPlayer = new();
 
     public event Action? MentorStatusUpdated;
 
@@ -112,11 +113,17 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
                 _mentorWindow is not { IsOpen: true })
             {
                 _unread = true;
-                _aHelp.UnreadAHelpReceived();
+                _aHelp.UnreadMHelpReceived();
             }
 
             _destinationNames.TryAdd(message.Destination, message.DestinationName);
             _messages.GetOrNew(message.Destination).Add(message);
+
+            if (_mentorWindow?.SelectedPlayer != message.Destination)
+                _unreadByPlayer[message.Destination] = true;
+
+            UpdatePlayerButton(message.Destination);
+
             if (_mentorWindow is { IsOpen: true })
             {
                 MentorAddPlayerButton(message.Destination);
@@ -245,7 +252,11 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
 
         SetAHelpButtonPressed(true);
         _staffHelpWindow = new StaffHelpWindow();
-        _staffHelpWindow.OnClose += () => _staffHelpWindow = null;
+        _staffHelpWindow.OnClose += () =>
+        {
+            _staffHelpWindow = null;
+            SetAHelpButtonPressed(false);
+        };
         _staffHelpWindow.OpenCentered();
         UIManager.ClickSound();
 
@@ -270,6 +281,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     {
         SetAHelpButtonPressed(false);
         _unread = false;
+        _aHelp.UnreadMHelpRead();
         if (IsMentor)
         {
             if (OpenWindow(ref _mentorWindow,
@@ -364,6 +376,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         if (_mentorWindow.PlayerDict.TryGetValue(player, out var button))
         {
             button.SetPositionFirst();
+            UpdatePlayerButton(player);
             return;
         }
 
@@ -382,6 +395,8 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
                 return;
 
             _mentorWindow.SelectedPlayer = player;
+            _unreadByPlayer.Remove(player);
+            UpdatePlayerButton(player);
             _mentorWindow.Messages.Clear();
             _mentorWindow.Chat.Editable = true;
             UpdateClaimIndicator(player);
@@ -399,6 +414,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _mentorWindow.Players.AddChild(playerButton);
         playerButton.SetPositionFirst();
         _mentorWindow.PlayerDict[player] = playerButton;
+        UpdatePlayerButton(player);
     }
 
     private bool OpenWindow<T>(
@@ -451,9 +467,9 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         else if (message.Author.Value != message.Destination)
         {
             if (message.IsAdmin)
-                author = $"[bold][color=red]{author}[/color][/bold]";
+                author = $"[bold][color=red](Admin) {author}[/color][/bold]";
             else if (message.IsMentor)
-                author = $"[bold][color=orange]{author}[/color][/bold]";
+                author = $"[bold][color=orange](Mentor) {author}[/color][/bold]";
 
             text = $"{message.Time:HH:mm} {author}: {FormattedMessage.EscapeText(message.Text)}";
         }
@@ -470,8 +486,8 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         if (_aHelp.GameAHelpButton != null)
             _aHelp.GameAHelpButton.Pressed = pressed;
 
-        if (_aHelp.GameAHelpButton != null)
-            _aHelp.GameAHelpButton.Pressed = pressed;
+        if (_aHelp.LobbyAHelpButton != null)
+            _aHelp.LobbyAHelpButton.Pressed = pressed;
     }
 
     private void UpdateTypingIndicator()
@@ -527,5 +543,24 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         }
 
         _mentorWindow.ClaimIndicator.Text = $"Claimed by {string.Join(", ", claims)}";
+    }
+
+    private void UpdatePlayerButton(NetUserId player)
+    {
+        if (_mentorWindow is null)
+            return;
+
+        if (!_mentorWindow.PlayerDict.TryGetValue(player, out var button))
+            return;
+
+        var unread = _unreadByPlayer.TryGetValue(player, out var isUnread) && isUnread;
+
+        if (unread)
+        {
+            button.AddStyleClass(StyleNano.StyleClassButtonColorRed);
+            button.SetPositionFirst();
+        }
+        else
+            button.RemoveStyleClass(StyleNano.StyleClassButtonColorRed);
     }
 }
