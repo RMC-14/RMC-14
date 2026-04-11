@@ -13,6 +13,7 @@
     state: binoculars
   - type: Scope
     useInHand: true
+    scopedHeldSuffix: _eyes
     zoomLevels:
     - zoom: 1.6
       offset: 14

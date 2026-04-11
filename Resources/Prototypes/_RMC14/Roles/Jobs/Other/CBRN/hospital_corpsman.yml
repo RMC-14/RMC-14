@@ -1,0 +1,146 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCBRNMedic
+  name: cm-job-name-hospital-corpsman
+  description: rmc-job-description-cbrn-medic
+  playTimeTracker: CMJobCBRNMedic
+  ranks:
+    RMCRankCorporal: [] 
+  startingGear: RMCGearCBRNMedic
+  icon: "CMJobIconHospitalCorpsman"
+  joinNotifyCrew: false
+  marineAuthorityLevel: 1
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - ShipMasterAccess
+  overwatchSortPriority: -2
+  overwatchRoleName: Hospital Corpsmen
+  spawnMenuRoleName: CBRN Hospital Corpsman
+  roleWeight: 1
+  displayWeight: 2
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillEndurance: 3
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-hospital-corpsman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: medic
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCBRNMedic
+  name: cbrn ghost role hospital corpsman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCBRNMedic
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCBRNMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-cbrn-medic
+    description: rmc-job-description-cbrn-medic
+    rules: rmc-ghost-role-information-cbrn-rules
+    reregister: false
+    job: RMCCBRNMedic
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadCBRN
+
+- type: startingGear
+  id: RMCGearCBRNMedic
+  equipment:
+    head: RMCArmorHelmetCBRN
+    ears: CMHeadsetCBRN
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCCBRNSuitMedic
+    outerClothing: RMCArmorCBRN
+    gloves: RMCHandsVeteranCBRN
+    shoes: RMCBootsCBRN
+    suitstorage: RMCM77BeltFilled
+    id: CMDogtagCBRNMedic
+    belt: CMBeltMedicBag
+    back: CMBackpackMarineMedic
+    pocket1: RMCPouchMedkit
+    pocket2: RMCPouchMedkit
+  storage:
+    back:
+    # RMC TODO: synthetic repair kit  
+    - RMCRadiationAidKitFilled
+    - CMFirstAidO2KitFilled
+    - CMToxinAidKitFilled
+    - CMToxinAidKitFilled
+    - CMRollerBedSpawnFolded
+    - CMDefibrillator # RMC TODO: upgraded emergency defibrillator
+    outerClothing:
+    - CMMRE
+    - CMMRE
+    - CMMRE
+    pocket1:
+    - CMTricordrazineAutoInjector
+    - CMTraumaKit10
+    - CMTraumaKit10
+    - CMTraumaKit10
+    - CMBurnKit10
+    - CMBurnKit10
+    # RMC TODO: medical splints
+    pocket2:
+    - CMHealthAnalyzer
+    - CMPillCanisterDylovene
+    - CMPillCanisterDylovene
+    - CMRollerBedSpawnFolded
+    # RMC TODO: medical splints
+    - CMTraumaKit10
+    - CMBurnKit10
+    belt:
+    - CMUpgradedTraumaKit10
+    - CMUpgradedTraumaKit10
+    - CMUpgradedBurnKit10
+    - CMUpgradedBurnKit10
+    - CMEpinephrineAutoInjector
+    - CMDexalinPlusAutoInjector
+    # RMC TODO: oxycodone autoinjector
+    - CMPillCanisterBicaridine
+    - CMPillCanisterDexalin
+    - CMPillCanisterDylovene
+    - CMPillCanisterKelotane
+    - CMPillCanisterInaprovaline
+    # RMC TODO: Tramadol pill bottle
+    # RMC TODO: Oxycodone pill bottle
+    # RMC TODO: Peridaxon pill bottle
+    # RMC TODO: nano splints
+    - CMHealthAnalyzer
+    - RMCPillCanisterImidazoline
+    # RMC TODO: Alkysine pill bottle
+    - RMCPillCanisterRussianRed
+    - RMCPillCanisterRussianRed
+
+- type: playTimeTracker
+  id: CMJobCBRNMedic
