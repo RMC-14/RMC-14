@@ -263,3 +263,21 @@
     - id: RMCTankFlamer
       amount: 2
     - id: RMCAttachmentUnderbarrelExtinguisher
+
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerExt
+  suffix: with extinguisher
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentUnderbarrelExtinguisher
+        whitelist:
+          tags:
+          - RMCAttachmentExtinguisher

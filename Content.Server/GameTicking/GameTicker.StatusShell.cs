@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Text.Json.Nodes;
-using Content.Server._RMC14.Rules;
+using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Robust.Server.ServerStatus;
