@@ -20,7 +20,6 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Popups;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
-using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
@@ -1737,40 +1736,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void HandleQueenEyeMove(Entity<TacticalMapUserComponent> user, EntityUid actor, Vector2i position)
     {
-        if (HasComp<GhostComponent>(actor))
-        {
-            if (!TryResolveUserMap(user, out var ghostMap) ||
-                !_mapGridQuery.TryComp(ghostMap.Owner, out var ghostGrid))
-            {
-                return;
-            }
+        if (!HasComp<GhostComponent>(actor))
+            return;
 
-            TeleportGhostToMapPosition(actor, ghostMap.Owner, ghostGrid.TileSize, position);
+        if (!TryResolveUserMap(user, out var ghostMap) ||
+            !_mapGridQuery.TryComp(ghostMap.Owner, out var ghostGrid))
+        {
             return;
         }
 
-        if (!TryComp<QueenEyeActionComponent>(actor, out var queenEyeComp) ||
-            queenEyeComp.Eye == null)
-            return;
-
-        var eye = queenEyeComp.Eye.Value;
-
-        if (!TryResolveUserMap(user, out var map) ||
-            !TryComp<MapGridComponent>(map.Owner, out var grid))
-            return;
-
-        // queen eye moves within the selected tacmap grid.
-        var queenTransform = Transform(actor);
-        var eyeTransform = Transform(eye);
-        var mapTransform = Transform(map.Owner);
-
-        if (queenTransform.MapID != mapTransform.MapID)
-            return;
-
-        var tileCoords = new Vector2(position.X, position.Y);
-        var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
-
-        _transform.SetWorldPosition(eye, worldPos.Position);
+        TeleportGhostToMapPosition(actor, ghostMap.Owner, ghostGrid.TileSize, position);
     }
 
     private void TeleportGhostToMapPosition(EntityUid actor, EntityUid mapUid, float tileSize, Vector2i position)

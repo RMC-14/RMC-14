@@ -8,7 +8,6 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.OrbitalCannon;
 using Content.Shared._RMC14.Mortar;
 using Content.Shared._RMC14.TacticalMap;
-using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared.Ghost;
 using Content.Shared.Administration;
 using Content.Shared.Explosion.Components;
@@ -2354,19 +2353,13 @@ public sealed partial class TacticalMapWrapper : Control
 
     private bool IsInQueenEyeMode()
     {
-        IEntityManager entMan = IoCManager.Resolve<IEntityManager>();
         EntityUid? player = _player.LocalEntity;
 
         if (player == null)
             return false;
 
-        if (entMan.HasComponent<GhostComponent>(player.Value))
-            return true;
-
-        if (!entMan.TryGetComponent<QueenEyeActionComponent>(player.Value, out QueenEyeActionComponent? queenEyeComp))
-            return false;
-
-        return queenEyeComp.Eye != null;
+        IEntityManager entMan = IoCManager.Resolve<IEntityManager>();
+        return entMan.HasComponent<GhostComponent>(player.Value);
     }
 
     private void InvalidatePlayerCache()
