@@ -1047,10 +1047,8 @@
       amount: 3
 
 - type: entity
-  parent: RMCBeltHolsterPistolTSE
-  id: RMCBeltHolsterPistolRCML29Filled
-  name: L29 sidearm rig
-  description: A dark brown leather pistol belt commonly issued to RCM officers. Although designed for the L14 service pistol, it accommodates most sidearms along with spare magazines. Standard issue across TSE law enforcement, military, and security forces.
+  parent: RMCBeltHolsterPistolRCM
+  id: RMCBeltHolsterPistolRCMFilled
   suffix: PVE, RCM, Filled
   components:
   - type: StorageFill

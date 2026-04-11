@@ -98,32 +98,6 @@
     walkModifier: 0.725
     sprintModifier: 0.725
 
-# Freelancer
-- type: entity
-  parent: RMCArmorSPP
-  id: CMArmorFreelancer
-  name: freelancer cuirass
-  description: An armored protective chestplate scrapped together from various plates. It keeps up remarkably well, as the craftsmanship is solid, and the design mirrors such armors in the SPP and the UNMC. The many skilled craftsmen in the freelancers ranks produce these vests at a rate about one a month.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/freelancer.rsi
-  - type: CMArmor
-    melee: 25 # CLOTHING_ARMOR_MEDIUMHIGH
-    bullet: 25
-    bio: 15
-    explosionArmor: 20
-  - type: RMCArmorSpeedTier
-    speedTier: light
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.725
-    sprintModifier: 0.725
-  - type: ExplosionResistance
-    damageCoefficient: 0
-    worn: false
-  - type: Storage
-    grid:
-    - 0,0,3,1 # 2 slots
-    maxItemSize: Small
 
 # Colonial militia
 - type: entity

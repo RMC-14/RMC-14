@@ -8565,13 +8565,15 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 24.5,-11.5
       parent: 1
-- proto: CMDropshipDestination
+- proto: CMDropshipDestinationNormandy
   entities:
   - uid: 3441
     components:
     - type: Transform
       pos: -8.5,12.5
       parent: 1
+- proto: CMDropshipDestinationAlamo
+  entities:
   - uid: 3447
     components:
     - type: Transform

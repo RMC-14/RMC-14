@@ -13,6 +13,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - HEFA
     - type: Skills
       skills:
         RMCSkillFireman: 1

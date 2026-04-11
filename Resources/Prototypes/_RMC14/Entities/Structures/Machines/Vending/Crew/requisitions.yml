@@ -793,6 +793,8 @@
       entries:
       - id: RMCHeadsetShip
         amount: 5
+      - id: RMCHeadsetMarine
+        amount: 5
       - id: CMEncryptionKeyAlpha
         amount: 5
       - id: CMEncryptionKeyBravo
