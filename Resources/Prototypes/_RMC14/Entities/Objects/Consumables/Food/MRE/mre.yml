@@ -267,8 +267,21 @@
 # TSE Rations
 - type: entity
   parent: RMCBoxMREEmpty
+  id: RMCBoxMRETSEEmpty
   name: box of ORPs (x12)
-  description: A box of ORPs. Nutritious, but not delicious.
+  suffix: TSE
+  description: A box of ORPs. Scrummy!
+  components:
+  - type: CMItemSlots
+    count: 12
+    slot:
+      name: ORP
+      whitelist:
+        tags:
+        - MRE
+
+- type: entity
+  parent: RMCBoxMRETSEEmpty
   id: RMCBoxMRETSE
   suffix: Filled, TSE
   components:

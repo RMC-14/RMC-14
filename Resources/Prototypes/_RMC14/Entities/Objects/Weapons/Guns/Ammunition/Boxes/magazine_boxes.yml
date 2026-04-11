@@ -855,51 +855,6 @@
         tags:
         - RMCMagazineRifleL24Incendiary
 
-# L7A3
-- type: entity
-  parent: RMCBoxMagazineSMGBase
-  id: RMCBoxMagazineSMGL7A3SquashHeadEmpty
-  name: magazine box (L7A3 x 12)
-  components:
-  - type: Sprite
-    layers:
-    - state: smg_box
-      color: "#4a4a4a"
-    - state: rifle_ammo_full_mags_base
-      map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_mags_color
-      map: [ "enum.CMItemSlotsLayers2.Fill" ]
-      color: "#ffc000"
-    - state: smg_box_7A3
-      color: "#ffcb26"
-    - state: smg_box_marking
-      color: "#7c4c1b"
-    - state: smg_lid
-      map: [ "lid" ]
-      color: "#4a4a4a"
-    - state: smg_lid_marking
-      map: [ "lid_marking" ]
-      color: "#7c4c1b"
-  - type: CMItemSlots
-    count: 12
-    slot:
-      whitelist:
-        tags:
-        - RMCMagazineSMGL7A3SquashHead
-
-- type: entity
-  parent: RMCBoxMagazineSMGL7A3SquashHeadEmpty
-  id: RMCBoxMagazineSMGL7A3SquashHead
-  suffix: Full
-  components:
-  - type: CMItemSlots
-    startingItem: RMCMagazineSMGL7A3SquashHead
-    count: 12
-    slot:
-      whitelist:
-        tags:
-        - RMCMagazineSMGL7A3SquashHead
-
 # L42A REG
 - type: entity
   parent: RMCBoxMagazineRifleBase
@@ -1837,6 +1792,98 @@
         tags:
         - RMCMagazineRifleL90DrumHEAP
 
+# L112 REG
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleL112Empty
+  name: magazine box (L112 x 12)
+  suffix: Royal, PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#3a3a4b"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_112
+      color: "#ffa126"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSniperL112
+
+- type: entity
+  parent: RMCBoxMagazineRifleL112Empty
+  id: RMCBoxMagazineRifleL112
+  suffix: Filled, Royal, PVE
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSniperL112
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSniperL112
+
+# L112 HESH
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleL112SHEmpty
+  name: magazine box (HESH L112 x 12)
+  suffix: Royal, PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#3a3a4b"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#DD4242"
+    - state: rifle_box_112
+      color: "#ffa126"
+    - state: rifle_box_marking
+      color: "#DD4242"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#DD4242"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSniperL112SH
+
+- type: entity
+  parent: RMCBoxMagazineRifleL112SHEmpty
+  id: RMCBoxMagazineRifleL112SH
+  suffix: Filled, Royal, PVE
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSniperL112SH
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSniperL112SH
+
 # -- SMG BOXES --
 
 # M63 REG
@@ -2073,6 +2120,52 @@
       whitelist:
         tags:
         - RMCMagazineSMGType64
+
+# L7A3 HESH
+
+- type: entity
+  parent: RMCBoxMagazineSMGBase
+  id: RMCBoxMagazineSMGL7A3SquashHeadEmpty
+  name: magazine box (HESH L7A3 x 12)
+  components:
+  - type: Sprite
+    layers:
+    - state: smg_box
+      color: "#3a3a4b"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#DD4242"
+    - state: smg_box_7A3
+      color: "#ffa126"
+    - state: smg_box_marking
+      color: "#DD4242"
+    - state: smg_lid
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: smg_lid_marking
+      map: [ "lid_marking" ]
+      color: "#DD4242"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGL7A3SquashHead
+
+- type: entity
+  parent: RMCBoxMagazineSMGL7A3SquashHeadEmpty
+  id: RMCBoxMagazineSMGL7A3SquashHead
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGL7A3SquashHead
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGL7A3SquashHead
 
 # -- PISTOL BOXES --
 
@@ -2563,7 +2656,7 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolL14AP
+        - RMCMagazinePistolL14
 
 # L14 AP
 - type: entity

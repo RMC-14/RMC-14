@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Scoping;
 public sealed partial class ScopeComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int CurrentZoomLevel = 0;
+    public int CurrentZoomLevel;
 
     [DataField, AutoNetworkedField]
     public List<ScopeZoomLevel> ZoomLevels = new()
@@ -61,36 +61,29 @@ public sealed partial class ScopeComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool CanUseNightVision;
+
+    [DataField, AutoNetworkedField]
+    public string? ScopedHeldSuffix;
+
+    [ViewVariables, AutoNetworkedField]
+    public string? UnscopedHeldPrefix;
 }
 
+/// <param name="Name">This is used in the popup when cycling through zoom levels.</param>
+/// <param name="Zoom">Value to which zoom will be set when scoped in.</param>
+/// <param name="Offset">How much to offset the user's view by when scoping.</param>
+/// <param name="AllowMovement">If set to true, the user's movement won't interrupt the scoping action.</param>
+/// <param name="DoAfter">The length of the doafter to zoom in.</param>
 [DataRecord, Serializable, NetSerializable]
 public record struct ScopeZoomLevel(
-    /// <summary>
-    /// This is used in the popup when cycling through zoom levels.
-    /// </summary>
     string? Name,
-
-    /// <summary>
-    /// Value to which zoom will be set when scoped in.
-    /// </summary>
     float Zoom,
 
     // TODO RMC14 scoping making this too high causes pop-in
     // wait until https://github.com/space-wizards/RobustToolbox/pull/5228 is fixed to increase it
     // cm13 values: 11 tile offset, 24x24 view in 4x | 6 tile offset, normal view in 2x.
     // right now we are doing a mix of both and only one setting.
-    /// <summary>
-    ///     How much to offset the user's view by when scoping.
-    /// </summary>
     float Offset,
-
-    /// <summary>
-    /// If set to true, the user's movement won't interrupt the scoping action.
-    /// </summary>
     bool AllowMovement,
-
-    /// <summary>
-    /// The length of the doafter to zoom in.
-    /// </summary>
     TimeSpan DoAfter
 );
