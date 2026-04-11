@@ -27,10 +27,10 @@
 
 - type: reagent
   id: RMCChocolateDrink
-  name: chocolate drink
+  name: rmc-reagent-name-chocolate-drink
   color: "#61450e"
   flavor: chocolate
-  desc: Smooth and creamy chocolate drink.
+  desc: rmc-reagent-desc-chocolate-drink
   physicalDesc: reagent-physical-desc-creamy
   metabolisms:
     Drink:
