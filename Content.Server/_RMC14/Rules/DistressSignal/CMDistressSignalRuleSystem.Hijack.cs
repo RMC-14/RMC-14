@@ -170,14 +170,14 @@ public sealed partial class CMDistressSignalRuleSystem
                 didCameraShake = true;
             }
 
-            StunAllMarinesOnAlmayer(xform);
+            StunAllEntitiesOnAlmayer(xform);
         }
     }
 
-    private void StunAllMarinesOnAlmayer(TransformComponent xform)
+    private void StunAllEntitiesOnAlmayer(TransformComponent xform)
     {
         var toKnock = new ValueList<EntityUid>();
-        GetMarinesOnAlmayer(xform, ref toKnock);
+        GetAllEntitiesOnAlmayer(xform, ref toKnock);
 
         foreach (var child in toKnock)
         {
@@ -188,7 +188,7 @@ public sealed partial class CMDistressSignalRuleSystem
         }
     }
 
-    private void GetMarinesOnAlmayer(TransformComponent xform, ref ValueList<EntityUid> reference)
+    private void GetAllEntitiesOnAlmayer(TransformComponent xform, ref ValueList<EntityUid> reference)
     {
         var childEnumerator = xform.ChildEnumerator;
         while (childEnumerator.MoveNext(out var child))

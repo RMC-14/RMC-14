@@ -303,7 +303,8 @@ public sealed partial class CMDistressSignalRuleSystem
             if (_mapSystem.TryGetMap(destTransform.MapID, out var destinationMapId) && comp.XenoMap == destinationMapId)
                 continue;
 
-            if (destination.Spawn == null) continue;
+            if (destination.Spawn == null)
+                continue;
 
             var gridOffset = new Vector2(shipIndex * 100, shipIndex * 100);
             shipIndex++;
