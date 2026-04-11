@@ -19,6 +19,8 @@
     - type: IntelRescueSurvivorObjective # TODO RMC14 assign squad
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-medic
+    - type: AssignSquad
+      squad: SquadSPP
   hidden: true
 
 - type: startingGear
