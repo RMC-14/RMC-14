@@ -37,6 +37,7 @@ public sealed class TacticalMapLayerAccessSystem : EntitySystem
 
     private void OnHandsLayerAccessGet(Entity<HandsComponent> ent, ref GetTacticalMapLayerAccessEvent args)
     {
+        // held items can grant layer access
         foreach (var held in _hands.EnumerateHeld((ent, ent)))
         {
             RaiseLocalEvent(held, ref args);
@@ -57,7 +58,6 @@ public sealed class TacticalMapLayerAccessSystem : EntitySystem
         SlotFlags slots = SlotFlags.IDCARD | SlotFlags.BELT | SlotFlags.POCKET)
     {
         layers.Clear();
-        Logger.InfoS(LogTag, $"TryGetLayers for {ToPrettyString(user)} (slots={slots})");
         var ev = new GetTacticalMapLayerAccessEvent(slots, new HashSet<ProtoId<TacticalMapLayerPrototype>>());
         RaiseLocalEvent(user, ref ev);
         if (ev.Layers.Count == 0)

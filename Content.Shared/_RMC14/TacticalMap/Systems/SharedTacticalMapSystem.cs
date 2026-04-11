@@ -68,6 +68,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         EntityUid? viewer,
         IEnumerable<ProtoId<TacticalMapLayerPrototype>> layers)
     {
+        // other systems can remove layers before state is sent
         var visible = new HashSet<ProtoId<TacticalMapLayerPrototype>>(layers);
         var ev = new TacticalMapModifyVisibleLayersEvent(viewer, visible);
         RaiseLocalEvent(ref ev);
@@ -102,6 +103,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     public bool TryGetTacticalMap(EntityUid? mapId, out Entity<TacticalMapComponent> map)
     {
+        // callers may pass a saved map, otherwise use the first tacmap
         if (mapId != null && TryComp(mapId.Value, out TacticalMapComponent? mapComp))
         {
             map = (mapId.Value, mapComp);
@@ -129,6 +131,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     protected virtual void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
     {
+        // shared fallback combines visible layers for simple map users
         var layers = ApplyLayerVisibilityRules(computer.Owner, GetVisibleLayers(computer.Comp.VisibleLayers));
 
         var blips = new Dictionary<int, TacticalMapBlip>();
@@ -191,6 +194,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     private void ToggleMapUI(Entity<TacticalMapUserComponent> user)
     {
+        // actions & alerts both use same path
         if (_ui.IsUiOpen(user.Owner, TacticalMapUserUi.Key, user))
         {
             _ui.CloseUi(user.Owner, TacticalMapUserUi.Key, user);

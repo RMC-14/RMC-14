@@ -420,6 +420,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     public void UpdateMapList(IReadOnlyList<TacticalMapMapInfo> maps, NetEntity activeMap)
     {
+        // rebuild server-owned map options without echoing selection events.
         _suppressMapSelection = true;
         MapSelectButton.Clear();
 
@@ -503,7 +504,10 @@ public sealed partial class TacticalMapWrapper : Control
         var activeChanged = _lastActiveLayer != activeLayer;
         _lastActiveLayer = activeLayer;
         if (activeChanged)
+        {
+            // active layer changes replace the editable canvas snapshot.
             MarkCanvasSynced();
+        }
 
         _suppressLayerSelection = true;
         LayerSelectButton.Clear();
@@ -576,6 +580,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     public void UpdateLayerVisibilityList(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> visibleLayers)
     {
+        // layer visibility is server-owned, local clicks request changes.
         var incomingLayers = layers.ToList();
         var wasExpanded = _layerVisibilityExpanded || LayerVisibilityGrid.Visible;
         var sameLayerList = _availableLayers.Count == incomingLayers.Count;
@@ -718,6 +723,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     public void UpdateCanvasBackground()
     {
+        // canvas background shows visible-layer context behind the active layer.
         Canvas.BackgroundLines.Clear();
         if (Map.Lines.Count > 0)
         {
@@ -1069,6 +1075,7 @@ public sealed partial class TacticalMapWrapper : Control
         if (!_canDraw)
             return;
 
+        // dirty canvas is protected from server snapshots until submitted.
         if (_canvasDirty)
             return;
 
@@ -1087,6 +1094,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     public bool CanApplyCanvasSnapshot()
     {
+        // open edits win over replicated active-layer snapshots.
         return !_canvasDirty;
     }
 
@@ -2282,6 +2290,7 @@ public sealed partial class TacticalMapWrapper : Control
         if (_blipStaleEnabled)
         {
             IGameTiming time = IoCManager.Resolve<IGameTiming>();
+            // older snapshots fade down slowly.
             var ageSeconds = MathF.Max(0f, (float)(time.CurTime - _blipStaleSince).TotalSeconds);
 
             if (ageSeconds <= BlipStaleFadeStartSeconds)

@@ -43,6 +43,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         try
         {
+            // computer state can feed tacmap and dropship weapon uis
             if (!TryComp(ent, out UserInterfaceComponent? ui))
                 return;
 
@@ -62,6 +63,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnUserState(Entity<TacticalMapUserComponent> ent, ref AfterAutoHandleStateEvent args)
     {
+        // only the local player's action map should refresh from user state
         if (_player.LocalEntity == ent)
             RefreshUser(ent);
     }

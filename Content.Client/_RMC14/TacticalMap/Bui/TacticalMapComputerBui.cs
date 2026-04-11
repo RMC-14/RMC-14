@@ -200,6 +200,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         if (Window == null)
             return;
 
+        // cache layer lists
         if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
         {
             var options = computer.LayerOptions.Count > 0 ? computer.LayerOptions : computer.VisibleLayers;
@@ -207,6 +208,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             if (EntMan.HasComponent<OverwatchConsoleComponent>(Owner) &&
                 !EntMan.HasComponent<MarineCommunicationsComputerComponent>(Owner))
             {
+                // overwatch can see more layers than it is allowed to draw on
                 drawOptions = computer.ActiveLayer != null
                     ? new List<ProtoId<TacticalMapLayerPrototype>> { computer.ActiveLayer.Value }
                     : new List<ProtoId<TacticalMapLayerPrototype>>();
@@ -310,6 +312,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         if (Window == null)
             return;
 
+        // the map shows visible layers, the canvas shows only the active layer
         UpdateLayerSelector();
 
         var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
@@ -319,6 +322,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
         if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
         {
+            // computers receive live blips, so stale fading stays disabled
             Window.Wrapper.LastUpdateAt = computer.LastAnnounceAt;
             Window.Wrapper.NextUpdateAt = computer.NextAnnounceAt;
             Window.Wrapper.SetBlipStaleState(false, computer.LastAnnounceAt);
