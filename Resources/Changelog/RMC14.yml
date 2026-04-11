@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: august-sun
-  changes:
-  - message: Added new combat knife variants, available in loadouts.
-    type: Add
-  id: 2601
-  time: '2025-12-01T07:52:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8476
 - author: CatAndHats
   changes:
   - message: Added Glass, Reinforced Glass, and Plastic construction menus; press
@@ -4481,5 +4474,13 @@
   id: 3101
   time: '2026-04-11T04:10:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9514
+- author: CatAndHats
+  changes:
+  - message: Fixed an error where map inserts wouldn't spawn when a survivor scenario
+      would roll, Solaris is saved
+    type: Fix
+  id: 3102
+  time: '2026-04-11T09:09:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9625
 Name: RMC14
 Order: -1
