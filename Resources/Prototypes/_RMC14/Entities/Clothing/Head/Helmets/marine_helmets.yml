@@ -352,7 +352,7 @@
   parent: [ArmorHelmetM10, RMCMarineHelmetWithLightBase]
   id: CMArmorHelmetM30PSP
   name: M30PSP tactical helmet
-  description: The M30PSP (Pilot Survivability Platform) is an advanced version of the M30 helmet currently undergoing field testing by select UNMC pilots. Only comes painted tan, for some reason.
+  description: The M30PSP (Pilot Survivability Platform) is an advanced version of the M30 helmet currently undergoing field testing by select UNMC pilots. The visor of this helmet seems to have been violently torn off.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m30psp.rsi
@@ -367,16 +367,6 @@
     melee: 20
     explosionArmor: 15
 #   internalDamage: 15
-  - type: CycleableVisor
-    containers:
-    - rmc_visor_one
-    - rmc_visor_two
-    - rmc_visor_three
-  - type: IntegratedVisors
-    visorsToAdd:
-    - RMCVisorMedicalAdvancedIntegrated
-    - RMCVisorSquadIntegrated
-    - RMCVisorPilotLightblue
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-m30psp
   - type: PointLight
