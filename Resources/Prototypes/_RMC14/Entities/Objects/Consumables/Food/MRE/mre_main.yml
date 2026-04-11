@@ -15,7 +15,7 @@
   description: An MRE entree component. Contains the main course for nutrients.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/mre_colony.rsi
+    sprite: _RMC14/Objects/Consumable/Food/mre_weya.rsi
     state: colonymre_pack
 
 - type: entity
