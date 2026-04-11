@@ -74,9 +74,9 @@ public sealed partial class TacticalMapWrapper : Control
     private const int DefaultMortarMaxRange = 65;
     private const float DefaultHiveCoreRangeTiles = 11.848f;
     private const float DefaultHivePylonRangeTiles = 8.463f;
-    private const float BlipStaleFadeStartSeconds = 60f;
-    private const float BlipStaleFadeEndSeconds = 300f;
-    private const float BlipStaleMinAlpha = 0.35f;
+    private const float BlipStaleFadeStartSeconds = 300f;
+    private const float BlipStaleFadeEndSeconds = 1200f;
+    private const float BlipStaleMinAlpha = 0.5f;
     private const float UpdateFeedbackSeconds = 1.2f;
     private const float LayerVisibilityButtonMinWidth = 80f;
     private const float CompactTopButtonThreshold = 500f;
@@ -756,6 +756,8 @@ public sealed partial class TacticalMapWrapper : Control
     {
         _blipStaleEnabled = enabled;
         _blipStaleSince = lastUpdateAt;
+        _blipStaleAlpha = -1f;
+        UpdateBlipStaleAlpha();
     }
 
     public void SetCanvasAccess(bool canDraw)

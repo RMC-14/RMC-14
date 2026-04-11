@@ -16,6 +16,9 @@ public sealed partial class TacticalMapLayerData
    [DataField]
    public Dictionary<int, TacticalMapBlip> LastUpdateBlips = new();
 
+   [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+   public TimeSpan LastUpdateBlipsAt;
+
    [DataField]
    public List<TacticalMapLine> Lines = new();
 

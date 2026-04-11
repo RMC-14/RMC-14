@@ -189,6 +189,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         if (Window == null)
             return;
 
+        // cache layer lists
         if (EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user))
         {
             var options = user.LayerOptions.Count > 0 ? user.LayerOptions : user.VisibleLayers;
@@ -287,6 +288,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         if (Window == null)
             return;
 
+        // the map shows visible layers, the canvas shows only the active layer
         UpdateLayerSelector();
 
         var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
@@ -380,8 +382,9 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         if (!EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user))
             return;
 
+        // stale fading follows blip snapshot time, not the draw cooldow
         Window.Wrapper.LastUpdateAt = user.LastAnnounceAt;
         Window.Wrapper.NextUpdateAt = user.NextAnnounceAt;
-        Window.Wrapper.SetBlipStaleState(!user.LiveUpdate, user.LastAnnounceAt);
+        Window.Wrapper.SetBlipStaleState(!user.LiveUpdate, user.LastBlipUpdateAt);
     }
 }

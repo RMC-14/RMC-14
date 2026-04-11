@@ -11,8 +11,36 @@ public sealed class TacMapLiveUpdateSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<TacticalMapUserComponent, ComponentStartup>(OnTacticalMapUserStartup);
+        SubscribeLocalEvent<TacticalMapUserComponent, MapInitEvent>(OnTacticalMapUserMapInit);
         SubscribeLocalEvent<GrantTacMapLiveUpdateComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantTacMapLiveUpdateComponent, GotUnequippedEvent>(OnGotUnequipped);
+    }
+
+    private void OnTacticalMapUserStartup(Entity<TacticalMapUserComponent> ent, ref ComponentStartup args)
+    {
+        RefreshLiveUpdate(ent);
+    }
+
+    private void OnTacticalMapUserMapInit(Entity<TacticalMapUserComponent> ent, ref MapInitEvent args)
+    {
+        RefreshLiveUpdate(ent);
+    }
+
+    private void RefreshLiveUpdate(Entity<TacticalMapUserComponent> ent)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        // before user component exists maybe
+        if (!_inv.TryGetInventoryEntity<GrantTacMapLiveUpdateComponent>(ent.Owner, out _))
+            return;
+
+        if (ent.Comp.LiveUpdate)
+            return;
+
+        ent.Comp.LiveUpdate = true;
+        Dirty(ent);
     }
 
     private void OnGotEquipped(Entity<GrantTacMapLiveUpdateComponent> ent, ref GotEquippedEvent args)
@@ -42,6 +70,7 @@ public sealed class TacMapLiveUpdateSystem : EntitySystem
         if (_inv.TryGetInventoryEntity<GrantTacMapLiveUpdateComponent>(args.Equipee, out _))
             return;
 
+        // ovi live update has own system
         if (HasComp<TacticalMapLiveUpdateOnOviComponent>(args.Equipee))
             return;
 
