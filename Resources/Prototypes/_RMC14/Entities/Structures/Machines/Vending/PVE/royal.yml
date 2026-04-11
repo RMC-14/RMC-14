@@ -21,8 +21,8 @@
       entries:
       # - id: RMCBreachingHammerD2
       #   name: Breaching Hammer
-      - id: RMCXM51Case
-        name: Breaching Shotgun
+      - id: RMCL49Case
+        name: assault shotgun case
     - name: Specialist Equipment (Mandatory)
       takeAll: CMStandard
       entries:
