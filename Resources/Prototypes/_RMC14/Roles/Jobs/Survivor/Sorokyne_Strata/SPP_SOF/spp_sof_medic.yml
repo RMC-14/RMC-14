@@ -29,6 +29,7 @@
   equipment:
     eyes: RMCGlassesMedicalHUDGlasses
     belt: RMCBeltMedicBagSPP
+    back: RMCSatchelMedicpack
   storage:
     back:
     - CMDefibrillator

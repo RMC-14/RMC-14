@@ -754,6 +754,24 @@
 
 - type: entity
   parent: RMCSatchelLightpack
+  id: RMCSatchelMedicpack
+  name: lightweight medic combat pack
+  description: A small, lightweight medic pack for expeditions and short-range operations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_medic.rsi
+
+- type: entity
+  parent: RMCSatchelMedicpack
+  id: RMCSatchelMedicpack5Slot
+  suffix: 15 Slot
+  components:
+  - type: Storage
+    grid:
+    - 0,0,14,1
+
+- type: entity
+  parent: RMCSatchelLightpack
   id: RMCSatchelLightpackFreelancerMedic
   suffix: Filled, Freelancer
   components:
