@@ -31,3 +31,31 @@ cm-distress-signal-jellies = Royal Jelly Awards:
 rmc-distress-signal-got-medal = {$receiver} is awarded the {$award}: '{$awardDescription}' by {$giver}
 
 rmc-distress-signal-got-jelly = {$receiver} is awarded the {$award}: '{$awardDescription}' by {$giver}
+
+rmc-round-end-stats-tab-title = Round Stats
+
+# Marine Stats
+rmc-distress-signal-round-stat-marine-header = [color=green]Marine Statistics[/color]
+
+rmc-distress-signal-round-stat-total-marines = Total Marines: {$count}
+rmc-distress-signal-round-stat-marine-deaths = Marine Deaths: {$count}
+rmc-distress-signal-round-stat-marine-perma-deaths = Marine Permanent Deaths: {$count}
+rmc-distress-signal-round-stat-marine-projectiles-fired = Marine Projectiles Fired: {$count}
+rmc-distress-signal-round-stat-marine-projectile-hits = Marine Projectile Hits: {$count}
+rmc-distress-signal-round-stat-friendly-fire-incidents = Friendly Fire Incidents: {$count}
+rmc-distress-signal-round-stat-larva-extractions = Larva Extractions: {$count}
+rmc-distress-signal-round-stat-used-requisitions-budget = Requisitions Budget Used: {$count}
+rmc-distress-signal-round-stat-supply-drops = Supply Drops: {$count}
+
+# Xeno Stats
+rmc-distress-signal-round-stat-xeno-header = [color=purple]Xenonid Statistics[/color]
+
+rmc-distress-signal-round-stat-total-xenos = Total Xenonids: {$count}
+rmc-distress-signal-round-stat-xeno-deaths = Xeno Deaths: {$count}
+rmc-distress-signal-round-stat-lesser-drones = Lesser Drones Spawned: {$count}
+rmc-distress-signal-round-stat-player-parasites = Player Parasites Spawned: {$count}
+rmc-distress-signal-round-stat-xeno-projectiles-fired = Xeno Projectiles Fired: {$count}
+rmc-distress-signal-round-stat-xeno-projectile-hits = Xeno Projectile Hits: {$count}
+rmc-distress-signal-round-stat-xeno-melee-hits = Xeno Melee Hits: {$count}
+rmc-distress-signal-round-stat-infected = Total Infections: {$count}
+rmc-distress-signal-round-stat-bursts = Larva Bursts: {$count}

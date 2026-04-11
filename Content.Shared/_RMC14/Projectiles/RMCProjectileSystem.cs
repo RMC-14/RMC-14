@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Random;
+using Content.Shared._RMC14.Stats;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
@@ -8,6 +9,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -25,6 +27,7 @@ public sealed class RMCProjectileSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedStatTrackingSystem _stats = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -46,6 +49,9 @@ public sealed class RMCProjectileSystem : EntitySystem
         SubscribeLocalEvent<SpawnOnTerminateComponent, EntityTerminatingEvent>(OnSpawnOnTerminatingTerminate);
 
         SubscribeLocalEvent<PreventCollideWithDeadComponent, PreventCollideEvent>(OnPreventCollideWithDead);
+
+        SubscribeLocalEvent<ProjectileComponent, AmmoShotEvent>(OnAmmoShot);
+        SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
     }
 
     private void OnDeleteOnCollideStartCollide(Entity<DeleteOnCollideComponent> ent, ref StartCollideEvent args)
@@ -239,6 +245,16 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         if (_mobState.IsDead(args.OtherEntity))
             args.Cancelled = true;
+    }
+
+    private void OnAmmoShot(Entity<ProjectileComponent> ent, ref AmmoShotEvent args)
+    {
+        _stats.UpdateProjectileCount(ent.Owner);
+    }
+
+    private void OnProjectileHit(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)
+    {
+        _stats.UpdateProjectileHits(false, args.Target, args.Shooter);
     }
 
     public void SetMaxRange(Entity<ProjectileMaxRangeComponent> ent, float max)

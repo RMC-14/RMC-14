@@ -7,6 +7,7 @@ using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Power;
 using Content.Server._RMC14.Stations;
+using Content.Server._RMC14.Stats;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -141,6 +142,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
+    [Dependency] private readonly StatTrackingSystem _stats = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly IVoteManager _voteManager = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -1220,6 +1222,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         if (args.NewMobState == MobState.Dead)
         {
+            _stats.UpdateDeathCount(ent);
             RemCompDeferred<GhostRoleComponent>(ent);
             CheckRoundShouldEnd();
         }
@@ -1763,6 +1766,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             args.AddLine(string.Empty);
 
         _gameRulesExtras.XenoAwards(ref args);
+
+        _stats.AppendRoundEndText(ref args);
     }
 
     protected override void ActiveTick(EntityUid uid, CMDistressSignalRuleComponent component, GameRuleComponent gameRule, float frameTime)

@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Random;
+using Content.Shared._RMC14.Stats;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -44,6 +45,7 @@ public sealed class XenoProjectileSystem : EntitySystem
     [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
     [Dependency] private readonly CMPoweredLightSystem _rmcPoweredLight = default!;
     [Dependency] private readonly RMCPseudoRandomSystem _rmcPseudoRandom = default!;
+    [Dependency] private readonly SharedStatTrackingSystem _stats = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -201,6 +203,8 @@ public sealed class XenoProjectileSystem : EntitySystem
             var ev = new XenoProjectileHitUserEvent(args.Target);
             RaiseLocalEvent(shooter, ref ev);
         }
+
+        _stats.UpdateProjectileHits(true, args.Target, args.Shooter);
     }
 
     private void OnClusterSpawned(Entity<XenoProjectileComponent> ent, ref CMClusterSpawnedEvent args)

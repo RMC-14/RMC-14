@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Stats;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Weapons.Melee;
@@ -76,6 +77,7 @@ public sealed partial class XenoSystem : EntitySystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly SharedStatTrackingSystem _stats = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -117,7 +119,7 @@ public sealed partial class XenoSystem : EntitySystem
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
-        SubscribeLocalEvent<XenoComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
+        SubscribeLocalEvent<XenoComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved); //
         SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
@@ -307,6 +309,8 @@ public sealed partial class XenoSystem : EntitySystem
                 _weldable.SetWeldedState(hit, false);
 
             _entityStorage.TryOpenStorage(xeno, hit);
+
+            _stats.UpdateXenoMeleeHitTotal();
         }
     }
 
