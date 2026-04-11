@@ -422,7 +422,7 @@
   suffix: NW, End
   components:
   - type: Sprite
-    state: mw3
+    state: nw3
 
 - type: entity
   parent: RMCCoagulationCatwalkNW1
@@ -430,7 +430,7 @@
   suffix: NW, End, alt
   components:
   - type: Sprite
-    state: mw4
+    state: nw4
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
