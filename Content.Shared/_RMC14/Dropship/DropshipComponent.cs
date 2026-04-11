@@ -86,6 +86,15 @@ public sealed partial class DropshipComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan CancelFlightTime = TimeSpan.FromSeconds(10);
 
+    [DataField, AutoNetworkedField]
+    public EntityUid? LaunchAlarmEntity;
+
     [DataField]
     public SoundSpecifier ArrivalSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/engine_landing.ogg");
+
+    [DataField]
+    public SoundSpecifier? LaunchAlarmSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/dropship_launch_alarm.ogg")
+        {
+            Params = AudioParams.Default.WithVolume(2f).WithReferenceDistance(10).WithMaxDistance(30).WithLoop(true),
+        };
 }

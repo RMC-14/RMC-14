@@ -81,6 +81,24 @@
     state: syringe
 
 - type: entity
+  name: box of syringes
+  parent: RMCBoxCardboard
+  id: RMCBoxSyringeCBRN
+  description: A biohazard alert warning is printed on the box
+  suffix: CBRN, Small
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMSyringe
+        amount: 7
+  - type: Storage
+    maxItemSize: Tiny
+  - type: Item
+    size: Small
+  - type: Sprite
+    state: syringe
+
+- type: entity
   name: box of beakers
   parent: RMCBoxCardboard
   id: RMCBoxBeaker

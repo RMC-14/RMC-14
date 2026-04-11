@@ -263,16 +263,13 @@
     minimapColor: '#0603C4EE'
 
 - type: entity
-  parent: RMCAreaVaraderoExterior
+  parent: RMCAreaVaraderoInteriorOob
   id: RMCAreaVaraderoExteriorFarocean
   name: New Varadero - Far Ocean
   components:
   - type: Sprite
     state: varadero3
   - type: Area
-    avoidBioscan: false
-    noTunnel: true
-    unweedable: false
     minimapColor: '#0603C4EE'
 
 - type: entity
@@ -492,6 +489,18 @@
   components:
   - type: Sprite
     state: offices0
+  - type: Area
+    linkedLz: dropship_lz1
+    minimapColor: '#132242EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorRestaurant
+  name: New Varadero - Restaurant
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: pizza
   - type: Area
     linkedLz: dropship_lz1
     minimapColor: '#132242EE'

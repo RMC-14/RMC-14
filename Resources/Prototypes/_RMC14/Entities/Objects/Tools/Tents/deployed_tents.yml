@@ -99,6 +99,7 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RMCBlockWeather
 
 # Standard Tents
 - type: entity

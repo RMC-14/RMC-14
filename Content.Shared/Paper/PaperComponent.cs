@@ -7,6 +7,14 @@ namespace Content.Shared.Paper;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class PaperComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public Color TextColor = new(25, 25, 25);
+    [DataField, AutoNetworkedField]
+    public Color Color = Color.White;
+
+    [DataField, AutoNetworkedField]
+    public int Thickness = 20;
+
     public PaperAction Mode;
     [DataField("content"), AutoNetworkedField]
     public string Content { get; set; } = "";
