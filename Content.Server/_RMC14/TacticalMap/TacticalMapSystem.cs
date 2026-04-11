@@ -117,6 +117,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         SubscribeLocalEvent<MapBlipIconOverrideComponent, MapInitEvent>(OnMapBlipOverrideMapInit);
 
+
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
 
@@ -363,7 +364,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
     {
         var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
-        var state = new TacticalMapBuiState(mapName);
+
+        // Get squad objectives if player is in a squad
+        Dictionary<SquadObjectiveType, string>? squadObjectives = null;
+        if (TryComp<SquadMemberComponent>(ent, out var squadMember) &&
+            _squad.TryGetMemberSquad((ent, squadMember), out var squad))
+        {
+            squadObjectives = _squad.GetSquadObjectives((squad.Owner, squad.Comp));
+        }
+
+        var state = new TacticalMapBuiState(mapName, squadObjectives);
         _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
     }
 
@@ -872,11 +882,20 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         var lines = EnsureComp<TacticalMapLinesComponent>(user);
         var labels = EnsureComp<TacticalMapLabelsComponent>(user);
+        var playerId = user.Owner.Id;
 
         if (user.Comp.Xenos)
         {
-            user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips;
-            user.Comp.XenoStructureBlips = user.Comp.LiveUpdate ? map.XenoStructureBlips : map.LastUpdateXenoStructureBlips;
+            user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips.ToDictionary();
+            user.Comp.XenoStructureBlips = user.Comp.LiveUpdate ? map.XenoStructureBlips : map.LastUpdateXenoStructureBlips.ToDictionary();
+
+            if (!user.Comp.LiveUpdate)
+            {
+                if (map.XenoBlips.TryGetValue(playerId, out var playerXenoBlip))
+                    user.Comp.XenoBlips[playerId] = playerXenoBlip;
+                else if (map.XenoStructureBlips.TryGetValue(playerId, out var playerXenoStructureBlip)) // Shouldn't happen but just in case
+                    user.Comp.XenoStructureBlips[playerId] = playerXenoStructureBlip;
+            }
 
             var alwaysVisible = EntityQueryEnumerator<TacticalMapAlwaysVisibleComponent>();
             while (alwaysVisible.MoveNext(out var uid, out var comp))
@@ -905,7 +924,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         if (user.Comp.Marines)
         {
-            user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips;
+            user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips.ToDictionary();
+
+            if (!user.Comp.LiveUpdate && map.MarineBlips.TryGetValue(playerId, out var playerMarineBlip))
+                user.Comp.MarineBlips[playerId] = playerMarineBlip;
 
             var alwaysVisible = EntityQueryEnumerator<TacticalMapAlwaysVisibleComponent>();
             while (alwaysVisible.MoveNext(out var uid, out var comp))

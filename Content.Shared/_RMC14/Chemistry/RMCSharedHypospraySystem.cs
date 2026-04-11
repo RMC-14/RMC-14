@@ -245,14 +245,13 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
         if (_slots.CanInsert(ent, args.Used, args.User, slots.Slots[ent.Comp.SlotId], true))
             return;
 
-        var vial = container.ContainedEntities[0];
-
         if (container.ContainedEntities.Count == 0)
         {
             _popup.PopupEntity(Loc.GetString("rmc-hypospray-no-vial"), ent, args.User);
             return;
         }
 
+        var vial = container.ContainedEntities[0];
         if (!_solution.TryGetRefillableSolution(vial, out var solm, out var soli))
             return;
 

@@ -160,12 +160,13 @@
 
 - type: reaction
   id: CMImidazoline
+  priority: 10
   reactants:
+    CMDylovene:
+      amount: 1
     RMCCarbon:
       amount: 1
     RMCHydrogen:
-      amount: 1
-    CMDylovene:
       amount: 1
   products:
     CMImidazoline: 2
@@ -220,3 +221,15 @@
       amount: 1
   products:
     RMCParoxetine: 3
+
+- type: reaction
+  id: RMCLipozine
+  reactants:
+    TableSalt:
+      amount: 1
+    RMCEthanol:
+      amount: 1
+    RMCRadium:
+      amount: 1
+  products:
+    RMCLipozine: 3

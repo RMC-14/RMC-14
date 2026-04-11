@@ -1,0 +1,763 @@
+﻿- type: entity
+  abstract: true
+  parent: CMBaseWallInvincible
+  id: RMCBaseTSEDropshipWall
+  name: UD4-UK wall
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/tse.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Dropships/tse.rsi
+  - type: Clickable
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall1
+  components:
+  - type: Sprite
+    state: 1
+  - type: Icon
+    state: 1
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall2
+  components:
+  - type: Sprite
+    state: 2
+  - type: Icon
+    state: 2
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall3
+  components:
+  - type: Sprite
+    state: 3
+  - type: Icon
+    state: 3
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall4
+  components:
+  - type: Sprite
+    state: 4
+  - type: Icon
+    state: 4
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall5
+  components:
+  - type: Sprite
+    state: 5
+  - type: Icon
+    state: 5
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall6
+  components:
+  - type: Sprite
+    state: 6
+  - type: Icon
+    state: 6
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall7
+  components:
+  - type: Sprite
+    state: 7
+  - type: Icon
+    state: 7
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall8
+  components:
+  - type: Sprite
+    state: 8
+  - type: Icon
+    state: 8
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall9
+  components:
+  - type: Sprite
+    state: 9
+  - type: Icon
+    state: 9
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall10
+  components:
+  - type: Sprite
+    state: 10
+  - type: Icon
+    state: 10
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall11
+  components:
+  - type: Sprite
+    state: 11
+  - type: Icon
+    state: 11
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall12
+  components:
+  - type: Sprite
+    state: 12
+  - type: Icon
+    state: 12
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall13
+  components:
+  - type: Sprite
+    state: 13
+  - type: Icon
+    state: 13
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall14
+  components:
+  - type: Sprite
+    state: 14
+  - type: Icon
+    state: 14
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall15
+  components:
+  - type: Sprite
+    state: 15
+  - type: Icon
+    state: 15
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall16
+  components:
+  - type: Sprite
+    state: 16
+  - type: Icon
+    state: 16
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall17
+  components:
+  - type: Sprite
+    state: 17
+  - type: Icon
+    state: 17
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall18
+  components:
+  - type: Sprite
+    state: 18
+  - type: Icon
+    state: 18
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall19
+  components:
+  - type: Sprite
+    state: 19
+  - type: Icon
+    state: 19
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall20
+  components:
+  - type: Sprite
+    state: 20
+  - type: Icon
+    state: 20
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall21
+  components:
+  - type: Sprite
+    state: 21
+  - type: Icon
+    state: 21
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall22
+  components:
+  - type: Sprite
+    state: 22
+  - type: Icon
+    state: 22
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall23
+  components:
+  - type: Sprite
+    state: 23
+  - type: Icon
+    state: 23
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall24
+  components:
+    - type: Sprite
+      state: 24
+    - type: Icon
+      state: 24
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall25
+  components:
+    - type: Sprite
+      state: 25
+    - type: Icon
+      state: 25
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall26
+  components:
+    - type: Sprite
+      state: 26
+    - type: Icon
+      state: 26
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall27
+  components:
+    - type: Sprite
+      state: 27
+    - type: Icon
+      state: 27
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall28
+  components:
+    - type: Sprite
+      state: 28
+    - type: Icon
+      state: 28
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall29
+  components:
+    - type: Sprite
+      state: 29
+    - type: Icon
+      state: 29
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall30
+  components:
+    - type: Sprite
+      state: 30
+    - type: Icon
+      state: 30
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall31
+  components:
+    - type: Sprite
+      state: 31
+    - type: Icon
+      state: 31
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall32
+  components:
+    - type: Sprite
+      state: 32
+    - type: Icon
+      state: 32
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall33
+  components:
+    - type: Sprite
+      state: 33
+    - type: Icon
+      state: 33
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall34
+  components:
+    - type: Sprite
+      state: 34
+    - type: Icon
+      state: 34
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall35
+  components:
+    - type: Sprite
+      state: 35
+    - type: Icon
+      state: 35
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall36
+  components:
+    - type: Sprite
+      state: 36
+    - type: Icon
+      state: 36
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall37
+  components:
+    - type: Sprite
+      state: 37
+    - type: Icon
+      state: 37
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall38
+  components:
+    - type: Sprite
+      state: 38
+    - type: Icon
+      state: 38
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall39
+  components:
+    - type: Sprite
+      state: 39
+    - type: Icon
+      state: 39
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall40
+  components:
+    - type: Sprite
+      state: 40
+    - type: Icon
+      state: 40
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall41
+  components:
+    - type: Sprite
+      state: 41
+    - type: Icon
+      state: 41
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall42
+  components:
+    - type: Sprite
+      state: 42
+    - type: Icon
+      state: 42
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall43
+  components:
+    - type: Sprite
+      state: 43
+    - type: Icon
+      state: 43
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall44
+  components:
+    - type: Sprite
+      state: 44
+    - type: Icon
+      state: 44
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall45
+  components:
+    - type: Sprite
+      state: 45
+    - type: Icon
+      state: 45
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall46
+  components:
+    - type: Sprite
+      state: 46
+    - type: Icon
+      state: 46
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall47
+  components:
+    - type: Sprite
+      state: 47
+    - type: Icon
+      state: 47
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall48
+  components:
+    - type: Sprite
+      state: 48
+    - type: Icon
+      state: 48
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall49
+  components:
+    - type: Sprite
+      state: 49
+    - type: Icon
+      state: 49
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall50
+  components:
+    - type: Sprite
+      state: 50
+    - type: Icon
+      state: 50
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall51
+  components:
+    - type: Sprite
+      state: 51
+    - type: Icon
+      state: 51
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall52
+  components:
+    - type: Sprite
+      state: 52
+    - type: Icon
+      state: 52
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall53
+  components:
+    - type: Sprite
+      state: 53
+    - type: Icon
+      state: 53
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall54
+  components:
+    - type: Sprite
+      state: 54
+    - type: Icon
+      state: 54
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall55
+  components:
+    - type: Sprite
+      state: 55
+    - type: Icon
+      state: 55
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall56
+  components:
+    - type: Sprite
+      state: 56
+    - type: Icon
+      state: 56
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall57
+  components:
+    - type: Sprite
+      state: 57
+    - type: Icon
+      state: 57
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall58
+  components:
+    - type: Sprite
+      state: 58
+    - type: Icon
+      state: 58
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall59
+  components:
+    - type: Sprite
+      state: 59
+    - type: Icon
+      state: 59
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall60
+  components:
+    - type: Sprite
+      state: 60
+    - type: Icon
+      state: 60
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall61
+  components:
+    - type: Sprite
+      state: 61
+    - type: Icon
+      state: 61
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall62
+  components:
+    - type: Sprite
+      state: 62
+    - type: Icon
+      state: 62
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall63
+  components:
+    - type: Sprite
+      state: 63
+    - type: Icon
+      state: 63
+    - type: Occluder
+      enabled: false
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall64
+  components:
+    - type: Sprite
+      state: 64
+    - type: Icon
+      state: 64
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall65
+  components:
+    - type: Sprite
+      state: 65
+    - type: Icon
+      state: 65
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall66
+  components:
+    - type: Sprite
+      state: 66
+    - type: Icon
+      state: 66
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall67
+  components:
+    - type: Sprite
+      state: 67
+    - type: Icon
+      state: 67
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall68
+  components:
+    - type: Sprite
+      state: 68
+    - type: Icon
+      state: 68
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall69
+  components:
+    - type: Sprite
+      state: 69
+    - type: Icon
+      state: 69
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall70
+  components:
+    - type: Sprite
+      state: 70
+    - type: Icon
+      state: 70
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall71
+  components:
+    - type: Sprite
+      state: 71
+    - type: Icon
+      state: 71
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall72
+  components:
+    - type: Sprite
+      state: 72
+    - type: Icon
+      state: 72
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall73
+  components:
+    - type: Sprite
+      state: 73
+    - type: Icon
+      state: 73
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall74
+  components:
+    - type: Sprite
+      state: 74
+    - type: Icon
+      state: 74
+    - type: Occluder
+      enabled: false
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall75
+  components:
+    - type: Sprite
+      state: 75
+    - type: Icon
+      state: 75
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall76
+  components:
+    - type: Sprite
+      state: 76
+    - type: Icon
+      state: 76
+    - type: Occluder
+      enabled: false
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall77
+  components:
+    - type: Sprite
+      state: 77
+    - type: Icon
+      state: 77
+    - type: Occluder
+      enabled: false
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall78
+  components:
+    - type: Sprite
+      state: 78
+    - type: Icon
+      state: 78
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall79
+  components:
+    - type: Sprite
+      state: 79
+    - type: Icon
+      state: 79
+    - type: Occluder
+      enabled: false
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall80
+  components:
+    - type: Sprite
+      state: 80
+    - type: Icon
+      state: 80
+    - type: Occluder
+      enabled: false
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall81
+  components:
+    - type: Sprite
+      state: 81
+    - type: Icon
+      state: 81
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWall82
+  components:
+    - type: Sprite
+      state: 82
+    - type: Icon
+      state: 82

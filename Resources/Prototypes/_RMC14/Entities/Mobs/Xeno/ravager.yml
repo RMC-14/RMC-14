@@ -23,21 +23,12 @@
       state: alive
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
+      visible: false
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
-      visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
       visible: false
   - type: MobState
     allowedStates:
@@ -93,10 +84,6 @@
     chance: 0.35
     stunMin: 4
     stunMax: 5
-  - type: Flammable
-    damage:
-      types:
-        Heat: 1
   - type: Fixtures
     fixtures:
       fix1:
@@ -285,8 +272,8 @@
       650: Critical
       750: Dead
   - type: CMArmor
-    xenoArmor: 30
-    explosionArmor: 80
+    xenoArmor: 25
+    explosionArmor: 100
   - type: XenoStrain
     name: rmc-xeno-hedgehog-name
     description: rmc-xeno-hedgehog-description

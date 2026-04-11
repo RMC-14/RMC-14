@@ -75,9 +75,15 @@ public sealed class ThermalCloakSystem : EntitySystem
         if (args.Handled)
             return;
 
+        var invisibilityAttemptEvent = new ToggleInvisibilityAttemptEvent();
+        RaiseLocalEvent(args.Performer, ref invisibilityAttemptEvent);
+
+        if (invisibilityAttemptEvent.Cancelled)
+            return;
+
         args.Handled = true;
 
-        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Performer))
+        if (!_whitelist.IsWhitelistPass(ent.Comp.Whitelist, args.Performer))
         {
             var popup = Loc.GetString("cm-gun-unskilled", ("gun", ent.Owner));
             _popup.PopupClient(popup, args.Performer, args.Performer, PopupType.SmallCaution);
@@ -126,6 +132,8 @@ public sealed class ThermalCloakSystem : EntitySystem
 
             ent.Comp.Enabled = true;
             turnInvisible.Enabled = true;
+            Dirty(ent.Owner, ent.Comp);
+            Dirty(user, turnInvisible);
             if (HasComp<InstantActionComponent>(ent.Comp.Action) &&
                 TryComp(ent.Comp.Action, out ActionComponent? action))
             {
@@ -160,6 +168,8 @@ public sealed class ThermalCloakSystem : EntitySystem
             ent.Comp.Enabled = false;
             turnInvisible.Enabled = false;
 
+            Dirty(ent.Owner, ent.Comp);
+            Dirty(user, turnInvisible);
             if (forced)
             {
                 if (HasComp<InstantActionComponent>(ent.Comp.Action) &&
@@ -298,3 +308,6 @@ public sealed class ThermalCloakSystem : EntitySystem
         Spawn(cloakProtoId, coordinates, rotation: rotation);
     }
 }
+
+[ByRefEvent]
+public record struct ToggleInvisibilityAttemptEvent(bool Cancelled = false);

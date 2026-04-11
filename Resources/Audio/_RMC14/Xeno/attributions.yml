@@ -422,3 +422,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8a583493f634e4fa9e983ac78c8f2306f31d6159/sound/effects/spike_spray.ogg"
+
+- files: ["deep_alien_screech.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/085faa829b8e86366f180a5cc9d45dda0d9e4e0b/sound/effects/deep_alien_screech.ogg"
+
+- files: ["deep_alien_screech2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/085faa829b8e86366f180a5cc9d45dda0d9e4e0b/sound/effects/deep_alien_screech2.ogg"

@@ -27,11 +27,18 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-observer
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: obs
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
   hidden: true
 
 - type: entity
   id: RMCRandomHumanoidBureauObserver
-  name: bureau ghost role interstellar sapient-life rights observer
+  name: bureau ghost role interstellar life rights observer
   suffix: Spawner, Player, Friendly
   components:
   - type: Sprite

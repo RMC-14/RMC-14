@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/icons/obj/items/drinks.dmi, https://github.com/cmss13-devs/cmss13/blob/99b0ad8ee1a07006991300f4b2728dcea7392624/icons/mob/humans/onmob/inhands/items/bottles_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/99b0ad8ee1a07006991300f4b2728dcea7392624/icons/mob/humans/onmob/inhands/items/bottles_lefthand.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/icons/obj/items/drinks.dmi, https://github.com/cmss13-devs/cmss13/blob/99b0ad8ee1a07006991300f4b2728dcea7392624/icons/mob/humans/onmob/inhands/items/bottles_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/99b0ad8ee1a07006991300f4b2728dcea7392624/icons/mob/humans/onmob/inhands/items/bottles_lefthand.dmi, tea_spp taken and renamed from tea_upp at https://github.com/cmss13-devs/cmss13-pve/blob/c4f882d5993d839696096c8d824d774b07d211ac/icons/obj/items/drinks.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -18,6 +18,9 @@
     },
     {
       "name": "icon_open"
+    },
+    {
+      "name": "tea_spp"
     },
     {
       "name": "inhand-left",

@@ -27,7 +27,7 @@
         RMCSkillFirearms: 2
         RMCSkillFireman: 2
         RMCSkillJtac: 1
-        RMCSkillMedical: 1
+        RMCSkillMedical: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 1
     - type: DemoSpecWhitelist
@@ -96,7 +96,7 @@
     - CMAdvFirstAidKit
     - CMRollerBedSpawnFolded
     - CMCrowbar
-    - CMMRE # TODO RMC14 - SPP MRE
+    - RMCMRESPP
     outerClothing:
     - RMCHandcuffs
     - RMCHandcuffs

@@ -1,0 +1,80 @@
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorFlightOperator
+  name: cm-job-name-survivor-flight-control-operator
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorFlightOperator
+  spawnMenuRoleName: Flight Control Operator (Survivor)
+  access:
+  - CMAccessColonyPublic
+  - RMCAccessWeYaFlight
+  - CMAccessColonyLogistics
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 2
+        RMCSkillVehicles: 3
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetFlightOperator
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorFlightOperator
+  equipment:
+    id: CMIDCardColonist # TODO RMC14: /obj/item/card/id/data
+    jumpsuit: RMCJumpsuitKhakiWorkwear
+    outerClothing: RMCJacketWindbreakerBrown
+    eyes: RMCGlassesAviators
+    back: RMCSatchelFlightOperatorFill
+    head: RMCHeadUNMCHeadset
+    shoes: RMCShoesLaceup
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFlightOperator
+  name: survivor flight operator spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorFlightOperator
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorFlightOperator
+  name: flight operator colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorFlightOperator
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorFlightOperator
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorFlightOperator
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
+  id: RMCGearSurvivorPresetFlightOperator
+  name: flight operator colonist preset
+  categories: [ HideSpawnMenu ]

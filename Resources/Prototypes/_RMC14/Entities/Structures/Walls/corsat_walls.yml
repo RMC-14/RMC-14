@@ -18,7 +18,7 @@
     base: dome
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: RMCWallCorsatReinforced
   name: reinforced metal wall
   description: A huge chunk of ultra-reinforced metal used to separate rooms.

@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -95,8 +96,10 @@ public abstract class RMCHandsSystem : EntitySystem
             return;
 
         var user = args.User;
-
         if (!ent.Comp.CanToggleStorage)
+            return;
+
+        if (_container.GetContainingContainers(ent.Owner).All(c => c.Owner != user))
             return;
 
         AlternativeVerb switchStorageVerb = new()

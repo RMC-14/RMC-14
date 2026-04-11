@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchMedical
   name: medical pouch
@@ -71,3 +71,15 @@
     - id: CMSynthGraft
     - id: CMHealthAnalyzer
     - id: CMHyposprayFilledTricord
+
+- type: entity
+  parent: RMCPouchMedical
+  id: RMCPouchMedicalSPPSynth
+  suffix: ERT
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
+    - id: RMCHyposprayFilledEpi
+    - id: RMCBottleEpinephrine

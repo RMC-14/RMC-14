@@ -39,6 +39,14 @@
     color: "#FA8E2A"
 
 - type: entity
+  parent: RMCLightTube
+  id: RMCLightTubeRed
+  suffix: Red
+  components:
+  - type: LightBulb
+    color: "#C02526"
+
+- type: entity
   parent: RMCLightTubeBase
   id: RMCLightTubeBroken
   name: light tube

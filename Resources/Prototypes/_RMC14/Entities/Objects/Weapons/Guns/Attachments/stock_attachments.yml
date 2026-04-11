@@ -628,9 +628,6 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
       state: stock-on
     actionName: Toggle M13 Folding Stock
-  - type: AttachableSizeMods
-    modifiers:
-      - size: 1
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -656,6 +653,10 @@
         activeOnly: true
       accuracyAddMult: -0.15
       recoilFlat: 2
+      scatterFlat: 1
+  - type: AttachableSizeMods
+    modifiers:
+    - size: 0
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/jungle.rsi
@@ -698,6 +699,9 @@
       accuracyAddMult: -0.25
       recoilFlat: 1
       scatterFlat: 5
+  - type: AttachableSizeMods
+    modifiers:
+    - size: 0
   - type: Appearance
   - type: ItemCamouflage
     states:
@@ -706,6 +710,21 @@
       Snow: s_m10_stock
       Classic: c_m10_stock
       Urban: u_m10_stock
+
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentLPO80Stock
+  name: LPO80 stock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+    state: lpo80-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentLPO80Stock
 
 - type: entity
   parent: RMCAttachableBase
@@ -768,9 +787,24 @@
       scatterFlat: -4
 
 - type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentM16A5Stock
+  name: M16A5 bump stock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+    state: m16a5-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM16A5Stock
+
+- type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentM63Stock
-  name: submachinegun stock
+  name: submachinegun solid stock
   description: A rare AEGIS stock distributed in small numbers to UNMC forces. Compatible with the M63, this stock reduces recoil and scatter, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
   components:
   - type: Sprite
@@ -1260,6 +1294,9 @@
   id: RMCAttachmentM16StockCollapsible
 
 - type: Tag
+  id: RMCAttachmentM16A5Stock
+
+- type: Tag
   id: RMCAttachmentM63Stock
 
 - type: Tag
@@ -1321,3 +1358,6 @@
 
 - type: Tag
   id: RMCAttachmentM13StockCollapsible
+
+- type: Tag
+  id: RMCAttachmentLPO80Stock

@@ -5,6 +5,8 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseFORECONSpotter ]
+  - type: Rank
+    rank: RMCRankSergeant
 
 - type: startingGear
   id: RMCGearCorpseFORECONSpotter

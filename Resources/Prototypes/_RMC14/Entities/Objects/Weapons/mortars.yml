@@ -180,17 +180,37 @@
   name: illumination flare
   description: It's really bright, and unreachable.
   components:
+  - type: ExpendableLight
+    startsActivated: true
+    glowDuration: 150
+    fadeOutDuration: 30
+    turnOnBehaviourID: turn_on
+    fadeOutBehaviourID: fade_out
+    iconStateSpent: overlay
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: turn_on
+        maxDuration: 5.0
+        startValue: 2.5
+        endValue: 7.0
+      - !type:FadeBehaviour
+        id: fade_out
+        maxDuration: 30
+        startValue: 7.0
+        endValue: 3.0
+  - type: Appearance
   - type: Transform
     anchored: true
   - type: Physics
     bodyType: Static
     canCollide: false
   - type: PointLight
-    enabled: true
+    enabled: false
+    netsync: false
     radius: 5
-  - type: RandomTimedDespawn
-    min: 270
-    max: 330
+  - type: TimedDespawn
+    lifetime: 180
 
 - type: entity
   id: RMCMortarCamera

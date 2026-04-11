@@ -2,8 +2,12 @@
   parent: CMJobBase
   id: RMCSPPPlatCoPVE
   name: rmc-job-name-spp-overwatch
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-overwatch
   playTimeTracker: RMCJobSPPPlatCoPVE
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobExecutiveOfficer
+    time: 10800 # 3 hours
   ranks:
     RMCRankSPPMladshiyLeytenant: []
   startingGear: RMCSPPPlatCoPVEGear
@@ -19,23 +23,7 @@
       factions:
       - SPP
     - type: Skills
-      skills:
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
-        RMCSkillCqc: 1
-        RMCSkillLeadership: 3
-        RMCSkillOverwatch: 1
-        RMCSkillEndurance: 1
-        RMCSkillJtac: 4
-        RMCSkillExecution: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillSmartGun: 1
+      preset: RMCSkillPresetPVEPlatoonCommander
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-overwatch
@@ -70,7 +58,6 @@
     outerClothing: RMCCoatSPP
     head: CMHeadCapSPPBeret
     shoes: CMBootsBlackFilled
-
 
 - type: playTimeTracker
   id: RMCJobSPPPlatCoPVE

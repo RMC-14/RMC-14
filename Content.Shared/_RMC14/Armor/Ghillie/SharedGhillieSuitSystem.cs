@@ -71,6 +71,12 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
             return;
         }
 
+        var invisibilityAttemptEvent = new ToggleInvisibilityAttemptEvent();
+        RaiseLocalEvent(args.Performer, ref invisibilityAttemptEvent);
+
+        if (invisibilityAttemptEvent.Cancelled)
+            return;
+
         args.Handled = true;
 
         if (!comp.Enabled)
@@ -164,8 +170,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
 
             turnInvisible.UncloakTime = _timing.CurTime;
             Dirty(user, turnInvisible);
-
-            EnsureComp<EntityIFFComponent>(user);
+            if (ent.Comp.BlockFriendlyFire)
+                EnsureComp<EntityIFFComponent>(user);
             RemCompDeferred<RMCNightVisionVisibleComponent>(user);
 
             _thermalCloak.SpawnCloakEffects(user, comp.CloakEffect);
@@ -191,7 +197,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
 
             RemComp<RMCPassiveStealthComponent>(user);
             RemComp<EntityActiveInvisibleComponent>(user);
-            RemCompDeferred<EntityIFFComponent>(user);
+            if (ent.Comp.BlockFriendlyFire)
+                RemCompDeferred<EntityIFFComponent>(user);
         }
     }
 

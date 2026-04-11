@@ -1,6 +1,17 @@
 meta:
-  format: 6
-  postmapinit: false
+  format: 7
+  category: Grid
+  engineVersion: 264.0.2
+  forkId: ""
+  forkVersion: ""
+  time: 01/03/2026 18:39:52
+  entityCount: 150
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
 tilemap:
   0: Space
   200: CMFloorPlating
@@ -20,13 +31,13 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      pos: -0.42866832,-0.48574194
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
           ind: 0,0
-          tiles: pgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAbwEAAAAAPwMAAAAAVgYAAAAAVgYAAAAAVgYAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAyAAAAAAAPwMAAAAAVgYAAAAAVgYAAAAAVgYAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAPwMAAAAAVgYAAAAAVgYAAAAAVgYAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAyAAAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAyAAAAAAAyAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-          version: 6
+          tiles: pgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAAAAAAAAAAAAAAAAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAAAAAAAAAAAAAAAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAAAAAAAAAAAAAAAAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAADIAAAAAAAAyAAAAAAAAMgAAAAAAADIAAAAAAAAyAAAAAAAAMgAAAAAAADIAAAAAAAAAAAAAAAAAAAAAAAAAADIAAAAAAAAyAAAAAAAAMgAAAAAAADIAAAAAAAAyAAAAAAAAMgAAAAAAADIAAAAAAAAyAAAAAAAAD8DAAAAAAA/AwAAAAAAPwMAAAAAAD8DAAAAAAA/AwAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAVAEAAAAAAFQBAAAAAABUAQAAAAAAVAEAAAAAAFQBAAAAAABUAQAAAAAAVAEAAAAAAG8BAAAAAAA/AwAAAAAAVgYAAAAAAFYGAAAAAABWBgAAAAAAPwMAAAAAAMgAAAAAAAAAAAAAAAAAAAAAAAAAAFIBAAAAAABSAQAAAAAAUgEAAAAAAFIBAAAAAABSAQAAAAAAUgEAAAAAAFIBAAAAAADIAAAAAAAAPwMAAAAAAFYGAAAAAABWBgAAAAAAVgYAAAAAAD8DAAAAAADIAAAAAAAAAAAAAAAAAAAAAAAAAADIAAAAAAAAyAAAAAAAAMgAAAAAAADIAAAAAAAAyAAAAAAAAMgAAAAAAADIAAAAAAAAyAAAAAAAAD8DAAAAAABWBgAAAAAAVgYAAAAAAFYGAAAAAAA/AwAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAMgAAAAAAAA/AwAAAAAAPwMAAAAAAD8DAAAAAAA/AwAAAAAAPwMAAAAAAMgAAAAAAAAAAAAAAAAAAAAAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAADIAAAAAAAAyAAAAAAAAMgAAAAAAADIAAAAAAAAyAAAAAAAAMgAAAAAAADIAAAAAAAAAAAAAAAAAAAAAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAyAAAAAAAAMgAAAAAAADIAAAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAACAAAAAAAAyAAAAAAAAMgAAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAApgMAAAAAAKYDAAAAAACmAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
     - type: Broadphase
     - type: Physics
       bodyStatus: InAir
@@ -39,6 +50,7 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
+      dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
@@ -228,12 +240,23 @@ entities:
         0,5: RMCAreaBigredv2CavesLambdaBreakroom
         0,6: RMCAreaBigredv2CavesLambdaBreakroom
         0,7: RMCAreaBigredv2CavesLambdaBreakroom
+    - type: ImplicitRoof
 - proto: ClothingNeckCargomedal
   entities:
   - uid: 74
     components:
     - type: Transform
       pos: 10.5,9.5
+      parent: 1
+- proto: CMAirlockSecureLockedColony
+  entities:
+  - uid: 72
+    components:
+    - type: MetaData
+      name: Vault
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,6.5
       parent: 1
 - proto: CMFilingCabinet
   entities:
@@ -289,29 +312,31 @@ entities:
     - type: Transform
       pos: 0.5,13.5
       parent: 1
-- proto: RMCLightFixture
+- proto: CMSemioticBulkhead_door
   entities:
-  - uid: 39
+  - uid: 148
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.5,7.5
+      pos: 6.5,5.5
       parent: 1
-  - uid: 40
+- proto: CMSemioticRestrictedarea
+  entities:
+  - uid: 149
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 10.5,9.5
+      pos: 0.5,5.5
       parent: 1
-  - uid: 41
+- proto: CMShardGlass
+  entities:
+  - uid: 138
     components:
     - type: Transform
-      pos: 10.5,5.5
+      pos: 5.5,5.5
       parent: 1
-  - uid: 42
+  - uid: 139
     components:
     - type: Transform
-      pos: 3.5,6.5
+      pos: 4.5,5.5
       parent: 1
 - proto: CMVendorNutri
   entities:
@@ -712,6 +737,38 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 10.5,9.5
       parent: 1
+- proto: CMWindowSolarisReinforced
+  entities:
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 1.5,8.5
+      parent: 1
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 2.5,8.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      pos: 4.5,8.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 2.5,5.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      pos: 5.5,8.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 1.5,5.5
+      parent: 1
 - proto: RMCBarricadeWood
   entities:
   - uid: 37
@@ -725,6 +782,76 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,7.5
       parent: 1
+- proto: RMCDecalSpawnerBloodSplatters
+  entities:
+  - uid: 144
+    components:
+    - type: Transform
+      pos: 6.5,7.5
+      parent: 1
+  - uid: 146
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
+- proto: RMCDecalSpawnerXenoSplatters
+  entities:
+  - uid: 147
+    components:
+    - type: Transform
+      pos: 0.5,7.5
+      parent: 1
+- proto: RMCGlowshroom
+  entities:
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 4.5,10.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 1.5,9.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 129
+    components:
+    - type: Transform
+      pos: 5.5,2.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 130
+    components:
+    - type: Transform
+      pos: 6.5,1.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 143
+    components:
+    - type: Transform
+      pos: 2.5,11.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 145
+    components:
+    - type: Transform
+      pos: 3.5,12.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCInflatableDoorBroken
   entities:
   - uid: 33
@@ -747,6 +874,30 @@ entities:
     - type: Transform
       pos: 1.5,6.5
       parent: 1
+- proto: RMCLightFixtureOffset
+  entities:
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 3.5,6.5
+      parent: 1
+  - uid: 140
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,7.5
+      parent: 1
+  - uid: 141
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 10.5,9.5
+      parent: 1
+  - uid: 142
+    components:
+    - type: Transform
+      pos: 10.5,5.5
+      parent: 1
 - proto: RMCMedalBronze
   entities:
   - uid: 76
@@ -759,72 +910,90 @@ entities:
       parent: 1
 - proto: RMCPodDoorAlmayer
   entities:
-  - uid: 65
+  - uid: 2
     components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 5.5,8.5
-      parent: 1
-    - type: RMCPodDoor
-      id: sci_br
-  - uid: 66
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 4.5,8.5
-      parent: 1
-    - type: RMCPodDoor
-      id: sci_br
-  - uid: 67
-    components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 5.5,5.5
       parent: 1
     - type: RMCPodDoor
       id: sci_br
-  - uid: 68
+  - uid: 41
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 4.5,5.5
       parent: 1
     - type: RMCPodDoor
       id: sci_br
-  - uid: 69
+  - uid: 132
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 1.5,5.5
+      pos: 5.5,8.5
       parent: 1
     - type: RMCPodDoor
       id: sci_br
-  - uid: 70
+  - uid: 133
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 2.5,5.5
+      pos: 4.5,8.5
       parent: 1
     - type: RMCPodDoor
       id: sci_br
-  - uid: 71
+  - uid: 134
     components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 1.5,8.5
-      parent: 1
-    - type: RMCPodDoor
-      id: sci_br
-  - uid: 72
-    components:
+    - type: MetaData
+      name: Lambda Observation Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.5,8.5
       parent: 1
     - type: RMCPodDoor
       id: sci_br
-  - uid: 73
+  - uid: 135
     components:
+    - type: MetaData
+      name: Lambda Observation Shutters
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,8.5
+      parent: 1
+    - type: RMCPodDoor
+      id: sci_br
+  - uid: 136
+    components:
+    - type: MetaData
+      name: Lambda Observation Shutters
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,5.5
+      parent: 1
+    - type: RMCPodDoor
+      id: sci_br
+  - uid: 137
+    components:
+    - type: MetaData
+      name: Lambda Observation Shutters
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,5.5
+      parent: 1
+    - type: RMCPodDoor
+      id: sci_br
+  - uid: 150
+    components:
+    - type: MetaData
+      name: Vault Lockdown
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 7.5,6.5
@@ -835,6 +1004,8 @@ entities:
   entities:
   - uid: 62
     components:
+    - type: MetaData
+      name: Vault Lockdown
     - type: Transform
       pos: 8.5,5.5
       parent: 1
@@ -844,6 +1015,8 @@ entities:
       fixtures: {}
   - uid: 63
     components:
+    - type: MetaData
+      name: Observation Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 6.5,8.5
@@ -854,6 +1027,8 @@ entities:
       fixtures: {}
   - uid: 64
     components:
+    - type: MetaData
+      name: Observation Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,8.5
@@ -922,6 +1097,18 @@ entities:
     components:
     - type: Transform
       pos: 12.5,7.5
+      parent: 1
+- proto: RMCWindowFrameSolaris
+  entities:
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 5.5,5.5
+      parent: 1
+  - uid: 131
+    components:
+    - type: Transform
+      pos: 4.5,5.5
       parent: 1
 - proto: XenoWeedsSource
   entities:

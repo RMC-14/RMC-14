@@ -39,6 +39,9 @@
     blacklist:
       components:
       - Xeno
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 5
 
 - type: entity
   parent: CMDrinkWEYAWaterBottle30

@@ -344,7 +344,7 @@ namespace Content.Client.Construction
         private bool CheckConstructionConditions(ConstructionPrototype prototype, EntityCoordinates loc, Direction dir,
             EntityUid user, bool showPopup = false)
         {
-            var attempt = new RMCConstructionAttemptEvent(loc, prototype.Name);
+            var attempt = new RMCConstructionAttemptEvent(loc, prototype);
             RaiseLocalEvent(ref attempt);
 
             if (attempt.Cancelled)

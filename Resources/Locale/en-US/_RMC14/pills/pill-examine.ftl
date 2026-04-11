@@ -1,4 +1,4 @@
-﻿cm-pill-contains = The pill contains:
+﻿cm-pill-contains = The pill contains: {$reagents}
 cm-pill-contains-none = The pill contains: No reagents.
 
 cm-pill-contents-unknown = You don't know what's in it.
@@ -14,3 +14,5 @@ rmc-pill-contents-kelotane-dermaline = A Kelotane-Dermaline pill. Rapidly heals 
 rmc-pill-contents-russianred = A Russian Red pill. A very dangerous radiation-countering substance.
 rmc-pill-contents-antized = A pill of some unique medicine. You believe it can treat necrotic infections.
 rmc-pill-contents-imidazoline = An Imidazoline pill. Used to restore vision from non-congenital eye damage.
+rmc-pill-contents-dexalin-plus = A Dexalin Plus pill. Used to instantly treat oxygen deprivation.
+rmc-pill-contents-iron = A Iron pill. Used to quickly restore blood.

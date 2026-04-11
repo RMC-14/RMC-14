@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
@@ -45,6 +46,9 @@ public sealed class RMCClothingSystem : EntitySystem
         SubscribeLocalEvent<NoClothingSlowdownComponent, RefreshMovementSpeedModifiersEvent>(OnNoClothingSlowRefresh);
 
         SubscribeLocalEvent<RMCClothingFoldableComponent, GetVerbsEvent<AlternativeVerb>>(AddFoldVerb);
+
+        SubscribeLocalEvent<ClothingPrefixOnTimerTriggerComponent, RMCActiveTimerTriggerEvent>(OnClothingPrefixActiveTimerTrigger);
+        SubscribeLocalEvent<ClothingPrefixOnTimerTriggerComponent, RMCTriggerEvent>(OnClothingPrefixTrigger);
     }
 
     private void OnClothingLimitBeingEquippedAttempt(Entity<ClothingLimitComponent> ent, ref BeingEquippedAttemptEvent args)
@@ -88,7 +92,9 @@ public sealed class RMCClothingSystem : EntitySystem
             return;
 
         args.Cancel();
-        args.Reason = ent.Comp.DenyReason;
+
+        var denyReason = Loc.GetString(ent.Comp.DenyReason);
+        _popup.PopupClient(denyReason, args.EquipTarget, args.EquipTarget, PopupType.SmallCaution);
     }
 
     private void OnDropped(Entity<ClothingComponent> ent, ref DroppedEvent args)
@@ -99,7 +105,7 @@ public sealed class RMCClothingSystem : EntitySystem
             if (slot.ContainedEntity is not { } contained)
                 continue;
 
-            if (TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) && requiresEquipped.AutoUnequip && _whitelist.IsValid(requiresEquipped.Whitelist, ent.Owner))
+            if (TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) && requiresEquipped.AutoUnequip && _whitelist.IsWhitelistPassOrNull(requiresEquipped.Whitelist, ent.Owner))
             {
                 if (HasEquippedItemsWithinWhitelist(args.User, requiresEquipped.Whitelist))
                     continue;
@@ -109,11 +115,11 @@ public sealed class RMCClothingSystem : EntitySystem
         }
     }
 
-    private bool HasEquippedItemsWithinWhitelist(EntityUid uid, EntityWhitelist whitelist)
+    private bool HasEquippedItemsWithinWhitelist(EntityUid uid, EntityWhitelist? whitelist)
     {
         foreach (var held in _hands.EnumerateHeld(uid))
         {
-            if (_whitelist.IsValid(whitelist, held))
+            if (_whitelist.IsWhitelistPassOrNull(whitelist, held))
                 return true;
         }
 
@@ -123,7 +129,7 @@ public sealed class RMCClothingSystem : EntitySystem
             if (slot.ContainedEntity is not { } contained)
                 continue;
 
-            if (_whitelist.IsValid(whitelist, contained))
+            if (_whitelist.IsWhitelistPassOrNull(whitelist, contained))
                 return true;
         }
 
@@ -180,5 +186,21 @@ public sealed class RMCClothingSystem : EntitySystem
 
         _clothing.SetEquippedPrefix(ent.Owner, ent.Comp.ActivatedPrefix);
         _uniformAccessories.SetAccessoriesHidden(ent.Owner, hideAccessories);
+    }
+
+    private void OnClothingPrefixActiveTimerTrigger(Entity<ClothingPrefixOnTimerTriggerComponent> ent, ref RMCActiveTimerTriggerEvent args)
+    {
+        if (TryComp(ent, out ClothingComponent? clothing))
+        {
+            ent.Comp.OriginalPrefix = clothing.EquippedPrefix;
+            Dirty(ent);
+        }
+
+        _clothing.SetEquippedPrefix(ent, ent.Comp.Prefix);
+    }
+
+    private void OnClothingPrefixTrigger(Entity<ClothingPrefixOnTimerTriggerComponent> ent, ref RMCTriggerEvent args)
+    {
+        _clothing.SetEquippedPrefix(ent, ent.Comp.OriginalPrefix);
     }
 }

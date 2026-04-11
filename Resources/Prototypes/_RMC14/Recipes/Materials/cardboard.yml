@@ -90,6 +90,8 @@
   - RMCBoxBulletsRifleAPEmptyBuild
   - RMCBoxBulletsSMGEmptyBuild
   - RMCBoxBulletsSMGAPEmptyBuild
+  - RMCBoxBulletsPistolEmptyBuild
+  - RMCBoxBulletsPistolAPEmptyBuild
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
@@ -114,6 +116,18 @@
   id: RMCBoxBulletsSMGAPEmptyBuild
   name: SMG ammunition box (10x20mm AP)
   prototype: RMCBoxBulletsSMGAPEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxBulletsPistolEmptyBuild
+  name: pistol ammunition box (10x20mm-APC)
+  prototype: RMCBoxBulletsPistolEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxBulletsPistolAPEmptyBuild
+  name: pistol ammunition box (10x20mm-APC (AP))
+  prototype: RMCBoxBulletsPistolAPEmpty
 
 # empty rifle magazine boxes
 - type: rmcConstruction
@@ -238,6 +252,7 @@
   listed:
   - RMCBoxMagazinePistolM1984EmptyBuild
   - RMCBoxMagazinePistolM1984APEmptyBuild
+  - RMCBoxMagazinePistolM1984HPEmptyBuild
   - RMCDividerConstruction
   - RMCBoxMagazinePistolMK80EmptyBuild
   - RMCDividerConstruction
@@ -251,6 +266,9 @@
   - RMCBoxMagazinePistolM13EmptyBuild
   - RMCBoxMagazinePistolM13ExtEmptyBuild
   - RMCBoxMagazinePistolM13DrumEmptyBuild
+  - RMCBoxMagazinePistolM13APEmptyBuild
+  - RMCBoxMagazinePistolM13ExtAPEmptyBuild
+  - RMCBoxMagazinePistolM13DrumAPEmptyBuild
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
@@ -263,6 +281,12 @@
   id: RMCBoxMagazinePistolM1984APEmptyBuild
   name: M1984 magazine box (AP)
   prototype: RMCBoxMagazinePistolM1984APEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxMagazinePistolM1984HPEmptyBuild
+  name: M1984 magazine box (HP)
+  prototype: RMCBoxMagazinePistolM1984HPEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
@@ -312,6 +336,24 @@
   id: RMCBoxMagazinePistolM13DrumEmptyBuild
   name: M13 magazine box (Drum)
   prototype: RMCBoxMagazinePistolM13DrumEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxMagazinePistolM13APEmptyBuild
+  name: M13 magazine box (AP)
+  prototype: RMCBoxMagazinePistolM13APEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxMagazinePistolM13ExtAPEmptyBuild
+  name: M13 magazine box (Ext AP)
+  prototype: RMCBoxMagazinePistolM13ExtAPEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxMagazinePistolM13DrumAPEmptyBuild
+  name: M13 magazine box (Drum AP)
+  prototype: RMCBoxMagazinePistolM13DrumAPEmpty
 
 # empty shotgun shell boxes
 - type: rmcConstruction

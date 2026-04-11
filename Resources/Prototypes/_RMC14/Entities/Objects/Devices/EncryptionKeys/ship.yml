@@ -114,6 +114,7 @@
   - type: EncryptionKey
     channels:
     - MarineHighCommand
+    - Provost
     defaultChannel: MarineHighCommand
   - type: Sprite
     state: cap_key
@@ -433,7 +434,7 @@
     defaultChannel: WEYA
   - type: Sprite
     state: cap_key
-    
+
 # Combat Correspondent
 - type: entity
   parent: CMEncryptionKey

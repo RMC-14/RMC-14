@@ -534,6 +534,30 @@
     supplyDrop: true
 
 - type: entity
+  parent: RMCAreaKutjevoInteriorConstruction
+  id: RMCAreaKutjevoInteriorConstructionNorth
+  name: Kutjevo - Northern Abandoned Construction Interior
+  components:
+  - type: Sprite
+    state: construction
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorConstruction
+  id: RMCAreaKutjevoInteriorConstructionEast
+  name: Kutjevo - Eastern Abandoned Construction Interior
+  components:
+  - type: Sprite
+    state: construction
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorConstruction
+  id: RMCAreaKutjevoInteriorConstructionSignalTower
+  name: Kutjevo - Abandoned Signal Tower
+  components:
+  - type: Sprite
+    state: construction2
+
+- type: entity
   parent: RMCAreaKutjevoInterior
   id: RMCAreaKutjevoInteriorForemansOffice
   name: Kutjevo - Foreman's Office

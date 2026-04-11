@@ -177,6 +177,8 @@
     rebounds: true
     capacity: 16
     spreadAngle: 40
+  - type: ClusterLimitHits
+    limit: 5
 
 - type: entity
   parent: RMCBaseAirBurstProjectile
@@ -199,6 +201,8 @@
   - type: DirectionalTileFireOnTrigger
     range: 3
     spawn: RMCTileFire
+    intensity: 20
+    duration: 15
 
 - type: entity
   parent: RMCBaseAirBurstProjectile

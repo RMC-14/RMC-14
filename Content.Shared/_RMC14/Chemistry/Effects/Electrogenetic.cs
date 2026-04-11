@@ -18,7 +18,7 @@ public sealed partial class Electrogenetic : RMCChemicalEffect
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Heals [color=green]{HealAmount}[/color] brute, burn, and toxin damage when defibrillated.\n" +
-               $"Removes 1u of this chemical from the solution when defibrillated.";
+               $"Removes 1u of this chemical from the solution when defibrillated";
     }
 
     public DamageSpecifier CalculateHeal(DamageableSystem damageable, EntityUid target, IEntityManager entityManager)

@@ -54,6 +54,10 @@
   - type: WieldDelay
     baseDelay: 1.2
     preventFiring: true
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 15
   - type: IgnorePredictionHide
   - type: GunIgnorePrediction
   - type: AssistedReloadWeapon
@@ -74,9 +78,6 @@
       - state: base
         sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_icon.rsi
         map: ["enum.GunVisualLayers.Base"]
-      - state: mag-0
-        sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_icon.rsi
-        map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_inhands.rsi
   - type: Gun
@@ -89,15 +90,7 @@
       - DemoSpecWhitelist
   - type: Corrodible
     isCorrodible: false
-  - type: AttachableHolder
-    slots:
-      rmc-aslot-rail:
-        whitelist:
-          tags:
-          - RMCAttachmentMagneticHarness
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-rail: 0.447, 0.122
+  - type: RMCMagneticItem
 
 # 84mm HE
 - type: entity
@@ -157,6 +150,7 @@
       types:
         Blunt: 15
     maxFixedRange: 6 # 7 tiles
+    queueDeletion: true
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
     layers:
