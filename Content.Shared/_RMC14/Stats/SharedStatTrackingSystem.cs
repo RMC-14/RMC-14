@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Roles;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -14,6 +15,7 @@ namespace Content.Shared._RMC14.Stats;
 public abstract class SharedStatTrackingSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     // Marine stats
     protected int TotalMarines;
@@ -77,6 +79,9 @@ public abstract class SharedStatTrackingSystem : EntitySystem
     public void UpdateProjectileHits(bool isXenoProjectile, EntityUid target, EntityUid? shooter = null)
     {
         if (!_net.IsServer)
+            return;
+
+        if (!_mobState.IsAlive(target) || !_mobState.IsCritical(target))
             return;
 
         if (isXenoProjectile)
@@ -156,11 +161,33 @@ public abstract class SharedStatTrackingSystem : EntitySystem
         TotalMarinePermaDeaths++;
     }
 
-    public void UpdateXenoMeleeHitTotal()
+    public void UpdateXenoMeleeHitTotal(IReadOnlyList<EntityUid> targets)
     {
         if (!_net.IsServer)
             return;
 
-        TotalXenoMeleeHits++;
+        foreach (var target in targets)
+        {
+            if (!_mobState.IsAlive(target) || !_mobState.IsCritical(target))
+                continue;
+
+            TotalXenoMeleeHits++;
+        }
+    }
+}
+
+public sealed class RoundEndStatsAppendEvent
+{
+    private bool _doNewLine;
+
+    public string Text { get; private set; } = string.Empty;
+
+    public void AddLine(string text)
+    {
+        if (_doNewLine)
+            Text += "\n";
+
+        Text += text;
+        _doNewLine = true;
     }
 }

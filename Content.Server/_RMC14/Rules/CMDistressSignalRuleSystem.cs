@@ -1766,8 +1766,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             args.AddLine(string.Empty);
 
         _gameRulesExtras.XenoAwards(ref args);
-
-        _stats.AppendRoundEndText(ref args);
     }
 
     protected override void ActiveTick(EntityUid uid, CMDistressSignalRuleComponent component, GameRuleComponent gameRule, float frameTime)

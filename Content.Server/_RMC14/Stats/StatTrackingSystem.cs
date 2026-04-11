@@ -14,6 +14,7 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+        SubscribeLocalEvent<RoundEndStatsAppendEvent>(OnRoundEndStatTextAppend);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -64,7 +65,7 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
         TotalBursts = 0;
     }
 
-    public void AppendRoundEndText(ref RoundEndTextAppendEvent endEvent)
+    public void OnRoundEndStatTextAppend(RoundEndStatsAppendEvent endEvent)
     {
         // Marine stats
         endEvent.AddLine(Loc.GetString("rmc-distress-signal-round-stat-marine-header"));
@@ -97,7 +98,7 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
         endEvent.AddLine(string.Empty);
     }
 
-    private void AddStat(ref RoundEndTextAppendEvent endEvent, string id, int value)
+    private void AddStat(ref RoundEndStatsAppendEvent  endEvent, string id, int value)
     {
         endEvent.AddLine(Loc.GetString(id, ("count", value)));
     }
