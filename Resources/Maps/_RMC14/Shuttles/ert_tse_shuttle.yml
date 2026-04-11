@@ -197,14 +197,6 @@ entities:
     - type: Transform
       pos: 1.546875,-3.421875
       parent: 1
-- proto: CMNormandyDoor
-  entities:
-  - uid: 75
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,0.5
-      parent: 1
 - proto: CMSeatPilot
   entities:
   - uid: 78
@@ -429,6 +421,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,-5.5
+      parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,0.5
       parent: 1
 - proto: RMCTSEDropshipWall21
   entities:
