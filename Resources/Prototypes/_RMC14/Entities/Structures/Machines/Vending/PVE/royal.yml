@@ -33,6 +33,7 @@
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltRCM
+        recommended: true
       - id: RMCBeltHolsterPistolRCM
       - id: RMCBeltUtilityGeneralRCMPVE
     - name: Armor Webbing
