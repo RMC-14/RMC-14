@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Tracker.SquadLeader;
+using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Access;
 using Content.Shared.Radio;
@@ -26,7 +26,7 @@ public sealed partial class SquadTeamComponent : Component
     [DataField]
     public Color? AccessibleColor;
 
-    [DataField(required: true)]
+    [DataField]
     public ProtoId<RadioChannelPrototype>? Radio;
 
     [DataField(required: true)]
