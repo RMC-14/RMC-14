@@ -46,7 +46,6 @@
       role: CMJobCommandingOfficer
       time: 252000 # 70 hours
     RMCRankMajor: []
-  weight: 10
   startingGear: CMGearCommandingOfficer
   icon: "CMJobIconCommandingOfficer"
   requireAdminNotify: true

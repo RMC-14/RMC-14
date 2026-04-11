@@ -18,7 +18,6 @@
       role: CMJobMilitaryWarden
       time: 36000 # 10 hours
     RMCRankSergeant: []
-  weight: 5
   startingGear: CMGearMilitaryWarden
   icon: "CMJobIconMilitaryWarden"
   joinNotifyCrew: false

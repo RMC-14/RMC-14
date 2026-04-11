@@ -29,7 +29,6 @@
       role: CMJobAuxiliarySupportOfficer
       time: 252000 # 70 hours
     RMCRankFirstLT: []
-  weight: 5
   startingGear: CMGearASO
   icon: "CMJobIconASO"
   requireAdminNotify: true
