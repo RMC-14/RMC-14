@@ -566,6 +566,7 @@
 #        box: RMCMagazineShotgunXM51
       - id: RMCBoxBullets458
         box: RMCBox458SOCOM
+        boxAmount: 3
         boxSlots: 3
 #      - name: Magazine Box (M2C x 8)
 #        box: CMMagazineSMGM63
