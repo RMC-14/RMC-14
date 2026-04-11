@@ -446,7 +446,7 @@
   suffix: SE, lower
   components:
   - type: Sprite
-    state: s2
+    state: se2
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
