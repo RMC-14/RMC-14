@@ -10,7 +10,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Sensor;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SensorTowerSystem))]
+[Access(typeof(SensorTowerSystem), typeof(SharedTacticalMapSystem))]
 public sealed partial class SensorTowerComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -60,6 +60,13 @@ public sealed partial class SensorTowerComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<TacticalMapLayerPrototype>> RevealLayers = new();
+
+    /// <summary>
+    /// If above zero, only blips within this tactical-map tile radius are revealed.
+    /// A value of zero keeps the current global layer reveal behavior.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float RevealRange;
 }
 
 [Serializable, NetSerializable]

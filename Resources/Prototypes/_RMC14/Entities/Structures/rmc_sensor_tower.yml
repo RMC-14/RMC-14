@@ -63,6 +63,16 @@
 
 - type: entity
   parent: RMCSensorTower
+  id: RMCSensorTowerRangeTest
+  suffix: "On, Range 5, No break chance"
+  components:
+  - type: SensorTower
+    state: On
+    breakChance: 0
+    revealRange: 5
+
+- type: entity
+  parent: RMCSensorTower
   id: RMCSensorTowerOffset
   suffix: Offset
   components:

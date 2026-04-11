@@ -15,6 +15,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Server._RMC14.Overwatch;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Sensor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Popups;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -1979,6 +1980,86 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
     }
 
+    private void AddRangedSensorTowerBlips(
+        TacticalMapComponent map,
+        IReadOnlySet<ProtoId<TacticalMapLayerPrototype>> visibleLayers,
+        Dictionary<int, TacticalMapBlip> blips,
+        bool useLastUpdateBlips)
+    {
+        if (!TryGetTacticalMapOwner(map, out var mapId) ||
+            !_mapGridQuery.TryComp(mapId, out var grid))
+        {
+            return;
+        }
+
+        var towers = EntityQueryEnumerator<SensorTowerComponent, TransformComponent>();
+        while (towers.MoveNext(out var towerId, out var tower, out var xform))
+        {
+            if (tower.State != SensorTowerState.On ||
+                tower.RevealRange <= 0 ||
+                tower.RevealLayers.Count == 0 ||
+                !CanSensorTowerReveal(tower, visibleLayers) ||
+                xform.GridUid != mapId ||
+                !_transform.TryGetGridTilePosition((towerId, xform), out var towerPosition, grid))
+            {
+                continue;
+            }
+
+            var rangeSquared = tower.RevealRange * tower.RevealRange;
+            foreach (var layer in tower.RevealLayers)
+            {
+                if (!LayerAllowsBlipStorage(layer) ||
+                    !map.Layers.TryGetValue(layer, out var layerData))
+                {
+                    continue;
+                }
+
+                var sourceBlips = useLastUpdateBlips ? layerData.LastUpdateBlips : layerData.Blips;
+                foreach (var (id, blip) in sourceBlips)
+                {
+                    if (blips.ContainsKey(id))
+                        continue;
+
+                    var delta = blip.Indices - towerPosition;
+                    if (delta.X * delta.X + delta.Y * delta.Y <= rangeSquared)
+                        blips[id] = blip;
+                }
+            }
+        }
+    }
+
+    private bool CanSensorTowerReveal(
+        SensorTowerComponent tower,
+        IReadOnlySet<ProtoId<TacticalMapLayerPrototype>> visibleLayers)
+    {
+        if (tower.RevealForLayers.Count == 0)
+            return true;
+
+        foreach (var layer in tower.RevealForLayers)
+        {
+            if (visibleLayers.Contains(layer))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool TryGetTacticalMapOwner(TacticalMapComponent map, out EntityUid owner)
+    {
+        var maps = EntityQueryEnumerator<TacticalMapComponent>();
+        while (maps.MoveNext(out var uid, out var mapComp))
+        {
+            if (ReferenceEquals(mapComp, map))
+            {
+                owner = uid;
+                return true;
+            }
+        }
+
+        owner = default;
+        return false;
+    }
+
     private void AddMarineBlipsFromVisibleSquads(
         EntityUid viewer,
         TacticalMapComponent map,
@@ -2234,6 +2315,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var blipLayers = ApplyLayerVisibilityRules(user.Owner, visibleLayers);
         var blips = BuildBlipsFromLayers(map, blipLayers, useLastUpdateBlips: !user.Comp.LiveUpdate);
         AddAlwaysVisibleBlips(blipLayers, map, blips);
+        AddRangedSensorTowerBlips(map, blipLayers, blips, useLastUpdateBlips: !user.Comp.LiveUpdate);
 
         AddSelfBlip(user.Owner, map, blips);
         FilterXenoBlipsForHive(user.Owner, blips);
@@ -2378,6 +2460,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var blipLayers = ApplyLayerVisibilityRules(computer.Owner, visibleLayers);
 
         var blips = BuildBlipsFromLayers(map, blipLayers, useLastUpdateBlips: false);
+        AddRangedSensorTowerBlips(map, blipLayers, blips, useLastUpdateBlips: false);
         computer.Comp.Blips = blips;
         Dirty(computer);
 

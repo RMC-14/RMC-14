@@ -45,6 +45,9 @@ public sealed class SensorTowerSystem : EntitySystem
         {
             if (tower.State == SensorTowerState.On)
             {
+                if (tower.RevealRange > 0)
+                    continue;
+
                 if (tower.RevealLayers.Count == 0)
                     return;
 
