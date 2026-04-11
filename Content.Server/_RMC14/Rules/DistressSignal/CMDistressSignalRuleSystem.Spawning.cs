@@ -180,6 +180,30 @@ public sealed partial class CMDistressSignalRuleSystem
             return true;
         }
 
+        bool HasHigherPriorityJob(HumanoidCharacterProfile profile, ProtoId<JobPrototype> role, JobPriority priority)
+        {
+            if (!_prototypes.TryIndex(role, out var job))
+                return false;
+
+            foreach (var (otherId, otherPriority) in profile.JobPriorities)
+            {
+                if (otherId == role ||
+                    otherPriority <= JobPriority.Never ||
+                    !_prototypes.TryIndex(otherId, out var otherJob))
+                {
+                    continue;
+                }
+
+                if (otherJob.Weight > job.Weight ||
+                    otherJob.Weight == job.Weight && otherPriority > priority)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent, bool doBurst = false)
         {
             var playerId = _random.PickAndTake(list);
@@ -210,8 +234,13 @@ public sealed partial class CMDistressSignalRuleSystem
 
         foreach (var (id, profile) in ev.Profiles)
         {
-            if (IsAllowed(id, comp.QueenJob) && profile.JobPriorities.TryGetValue(comp.QueenJob, out var p) && p > JobPriority.Never)
+            if (IsAllowed(id, comp.QueenJob) &&
+                profile.JobPriorities.TryGetValue(comp.QueenJob, out var p) &&
+                p > JobPriority.Never &&
+                !HasHigherPriorityJob(profile, comp.QueenJob, p))
+            {
                 xenoCandidates[(int)p].Add(id);
+            }
         }
 
         NetUserId? queenSelected = null;
@@ -236,8 +265,14 @@ public sealed partial class CMDistressSignalRuleSystem
 
         foreach (var (id, profile) in ev.Profiles)
         {
-            if (id != queenSelected && IsAllowed(id, comp.XenoSelectableJob) && profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var p) && p > JobPriority.Never)
+            if (id != queenSelected &&
+                IsAllowed(id, comp.XenoSelectableJob) &&
+                profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var p) &&
+                p > JobPriority.Never &&
+                !HasHigherPriorityJob(profile, comp.XenoSelectableJob, p))
+            {
                 xenoCandidates[(int)p].Add(id);
+            }
         }
 
         var selectedXenos = 0;
