@@ -3,6 +3,7 @@ using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Power;
 using Content.Server._RMC14.Stations;
+using Content.Server._RMC14.Stats;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -132,6 +133,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
+    [Dependency] private readonly StatTrackingSystem _stats = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();

@@ -335,7 +335,11 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?
     {
-        if (args.NewMobState != MobState.Dead) return;
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        _stats.UpdateDeathCount(ent);
+
         RemCompDeferred<GhostRoleComponent>(ent);
         CheckRoundShouldEnd();
     }
