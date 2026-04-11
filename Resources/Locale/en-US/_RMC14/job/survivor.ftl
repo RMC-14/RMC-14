@@ -33,6 +33,7 @@ rmc-playtime-tracker-job-name-survivor-scientist = Scientist Survivor
 rmc-playtime-tracker-job-name-survivor-military = Military Survivor
 rmc-playtime-tracker-job-name-survivor-co = Survivor CO
 rmc-playtime-tracker-job-name-survivor-synth = Survivor Synthetic
+rmc-playtime-tracker-job-name-survivor-clf = CLF Survivor
 
 cm-job-name-survivor-trucker = Trucker Colonist
 
@@ -527,3 +528,25 @@ rmc-job-greeting-shivas-panic-room-engineer = You are an Engineer on the Colony!
   You are an Engineer working on 'Ifrit' for Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. You remember that the xenonids seem to be able to see in the dark, as you saw one grab a co-worker trying to fix the generators after the power went out. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+# CLF SURVIVORS
+
+rmc-job-name-clf-survivor-soldier = CLF Guerilla
+rmc-job-prefix-clf-survivor-soldier = GRL
+
+rmc-job-name-clf-survivor-medic = CLF Field Medic
+rmc-job-prefix-clf-survivor-medic = MED
+
+rmc-job-name-clf-survivor-engineer = CLF Field Technician
+rmc-job-prefix-clf-survivor-engineer = TECH
+
+rmc-job-name-clf-survivor-commander = CLF Cell Leader
+rmc-job-prefix-clf-survivor-commander = LDR
+
+rmc-job-greeting-clf-survivor = You're a CLF member arriving for a scheduled meeting with sympathetic colonists, but everything is eerily quiet.
+
+  You are NOT aware of the xenonid threat.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#ce1e1e][font size=16]HOSTILE to the UNMC![/font][/color][/bold]
