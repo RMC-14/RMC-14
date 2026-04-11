@@ -339,7 +339,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Filtration/32x32.rsi
-    state: NE1
+    state: ne1
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
@@ -347,7 +347,7 @@
   suffix: NE, upper, alt
   components:
   - type: Sprite
-    state: NE2
+    state: ne2
 
 - type: entity
   parent: CMCatwalk
@@ -358,7 +358,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Filtration/32x32.rsi
-    state: NE3
+    state: ne3
 
 - type: entity
   parent: RMCCoagulationCatwalkNE3
@@ -366,7 +366,7 @@
   suffix: NE, End
   components:
   - type: Sprite
-    state: NE4
+    state: ne4
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
@@ -374,7 +374,7 @@
   suffix: NE, End, alt
   components:
   - type: Sprite
-    state: NE5
+    state: ne5
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
@@ -382,7 +382,7 @@
   suffix: N, Left
   components:
   - type: Sprite
-    state: NorthLeft
+    state: northleft
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
@@ -390,7 +390,7 @@
   suffix: N, Mid
   components:
   - type: Sprite
-    state: NorthMid
+    state: northmid
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
@@ -398,7 +398,7 @@
   suffix: N, Right
   components:
   - type: Sprite
-    state: NorthRight
+    state: northright
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
@@ -406,7 +406,7 @@
   suffix: NW, upper
   components:
   - type: Sprite
-    state: NW1
+    state: nw1
 
 - type: entity
   parent: RMCCoagulationCatwalkNW1
@@ -414,7 +414,7 @@
   suffix: NW, lower
   components:
   - type: Sprite
-    state: NW2
+    state: nw2
 
 - type: entity
   parent: RMCCoagulationCatwalkNW1
@@ -422,7 +422,7 @@
   suffix: NW, End
   components:
   - type: Sprite
-    state: NW3
+    state: mw3
 
 - type: entity
   parent: RMCCoagulationCatwalkNW1
@@ -430,7 +430,7 @@
   suffix: NW, End, alt
   components:
   - type: Sprite
-    state: NW4
+    state: mw4
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
@@ -438,7 +438,7 @@
   suffix: SE, upper
   components:
   - type: Sprite
-    state: SE1
+    state: se1
 
 - type: entity
   parent: RMCCoagulationCatwalkSE1
@@ -446,7 +446,7 @@
   suffix: SE, lower
   components:
   - type: Sprite
-    state: SE2
+    state: s2
 
 - type: entity
   parent: RMCCoagulationCatwalkNE1
@@ -454,7 +454,7 @@
   suffix: SW, upper
   components:
   - type: Sprite
-    state: SW1
+    state: sw1
 
 - type: entity
   parent: RMCCoagulationCatwalkSW1
@@ -462,5 +462,5 @@
   suffix: SW, lower
   components:
   - type: Sprite
-    state: SW2
+    state: sw2
 

@@ -23,52 +23,52 @@
       "name": "filtration_segmentD"
     },
     {
-      "name": "NE1"
+      "name": "ne1"
     },
     {
-      "name": "NE2"
+      "name": "ne2"
     },
     {
-      "name": "NE3"
+      "name": "ne3"
     },
     {
-      "name": "NE4"
+      "name": "ne4"
     },
     {
-      "name": "NE5"
+      "name": "ne5"
     },
     {
-      "name": "NorthLeft"
+      "name": "northleft"
     },
     {
-      "name": "NorthMid"
+      "name": "northmid"
     },
     {
-      "name": "NorthRight"
+      "name": "northright"
     },
     {
-      "name": "NW1"
+      "name": "nw1"
     },
     {
-      "name": "NW2"
+      "name": "nw2"
     },
     {
-      "name": "NW3"
+      "name": "nw3"
     },
     {
-      "name": "NW4"
+      "name": "nw4"
     },
     {
-      "name": "SE1"
+      "name": "se1"
     },
     {
-      "name": "SE2"
+      "name": "se2"
     },
     {
-      "name": "SW1"
+      "name": "sw1"
     },
     {
-      "name": "SW2"
+      "name": "sw2"
     }
   ]
 }
