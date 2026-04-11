@@ -7657,7 +7657,7 @@ entities:
     - type: Transform
       pos: 47.41063,10.528065
       parent: 1
-- proto: CMDropshipDestination
+- proto: CMDropshipDestinationNormandy
   entities:
   - uid: 499
     components:
@@ -7666,6 +7666,8 @@ entities:
     - type: Transform
       pos: 14.5,-6.5
       parent: 1
+- proto: CMDropshipDestinationAlamo
+  entities:
   - uid: 500
     components:
     - type: MetaData

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "The RMC-14 development team. Agrip and vgrip sprited by Cepha. grenade-l90, ubs-l90, bipod-l91 by @TadJohnson00 (GitHub).",
+  "copyright": "The RMC-14 development team. Agrip and vgrip sprited by Cepha. grenade-l90, ubs-l90, flamer-l90, bipod-l91 by @TadJohnson00 (GitHub). l88grip by @Drazamuffin (GitHub)",
   "size": {
     "x": 32,
     "y": 32
@@ -54,6 +54,36 @@
     },
     {
       "name": "ubs-l90_a"
+    },
+    {
+      "name": "l88grip"
+    },
+    {
+      "name": "flamer-l90",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "flamer-l90-on",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "flamer-l90_a",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
     }
   ]
 }

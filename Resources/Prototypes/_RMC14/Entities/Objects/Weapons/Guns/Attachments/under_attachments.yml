@@ -916,6 +916,47 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
       state: ubs-l90-on
 
+- type: entity
+  parent: RMCAttachmentMiniFlamethrower
+  id: RMCAttachmentL90UBF
+  name: L90U2 underbarrel flamethrower
+  description: An underbarrel flamethrower attachment designed specifically for L90 pattern rifles. Can be refueled from incinerator tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+    state: flamer-l90
+  - type: AttachableToggleable
+    actionName: Switch to the L90U2 underbarrel flamethrower.
+    actionDesc: Switch to using the L90U2 underbarrel flamethrower.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: flamer-l90
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: flamer-l90-on
+  - type: AttachableVisuals
+    offset: 0, 0
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentL90UBF
+
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentL88Grip
+  name: L88 integrated foregrip
+  description: Oi, you bloody galah! Put this back on your rifle and get back to it!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+    state: l88grip
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentL88Grip
+
 - type: Tag
   id: RMCAttachmentUnderbarrel
 
@@ -974,4 +1015,10 @@
   id: RMCAttachmentL90UBS
 
 - type: Tag
+  id: RMCAttachmentL90UBF
+
+- type: Tag
   id: RMCAttachmentL91Bipod
+
+- type: Tag
+  id: RMCAttachmentL88Grip

@@ -259,7 +259,31 @@
 - type: entity
   parent: RMCBoxMREEmpty
   id: RMCBoxMRE
-  suffix: Filled
+  suffix: Filled, UN
   components:
   - type: CMItemSlots
     startingItem: CMMRE
+
+# TSE Rations
+- type: entity
+  parent: RMCBoxMREEmpty
+  id: RMCBoxMRETSEEmpty
+  name: box of ORPs (x12)
+  suffix: TSE
+  description: A box of ORPs. Scrummy!
+  components:
+  - type: CMItemSlots
+    count: 12
+    slot:
+      name: ORP
+      whitelist:
+        tags:
+        - MRE
+
+- type: entity
+  parent: RMCBoxMRETSEEmpty
+  id: RMCBoxMRETSE
+  suffix: Filled, TSE
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMRETSE
