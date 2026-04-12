@@ -124,7 +124,7 @@
 - type: entity
   parent: RMCExplosiveClaymoreMine
   id: RMCExplosiveClaymoreMineArmed
-  suffix: Armed
+  suffix: Armed, No IFF
   components:
   - type: RMCLandmine
     armed: true
