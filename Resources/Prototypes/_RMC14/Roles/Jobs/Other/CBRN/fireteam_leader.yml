@@ -1,0 +1,107 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCBRNFireteamLeader
+  name: cm-job-name-fireteam-leader
+  description: rmc-job-description-cbrn-fireteam-leader
+  playTimeTracker: RMCJobCBRNFireteamLeader
+  ranks:
+    RMCRankSergeant: []
+  startingGear: RMCGearCBRNFireteamLeader
+  icon: "CMJobIconFireteamLeader"
+  joinNotifyCrew: false
+  marineAuthorityLevel: 1
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: CBRN Fireteam Leader
+  overwatchRoleName: Fire Team Leaders
+  roleWeight: 1
+  displayWeight: 5
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillCqc: 2
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 2
+    - type: SquadArmorWearer
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: JobPrefix
+      prefix: cm-job-prefix-fireteam-leader
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: tl
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCBRNFireteamLeader
+  name: cbrn ghost role fireteam leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCBRNFireteamLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCBRNFireteamLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-cbrn-fireteam-leader
+    description: rmc-job-description-cbrn-fireteam-leader
+    rules: rmc-ghost-role-information-cbrn-rules
+    reregister: false
+    job: RMCCBRNFireteamLeader
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadCBRN
+
+- type: startingGear
+  id: RMCGearCBRNFireteamLeader
+  equipment:
+    head: RMCArmorHelmetCBRN
+    ears: CMHeadsetCBRNLeader
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCCBRNSuitFTL
+    outerClothing: RMCArmorCBRN
+    gloves: RMCHandsVeteranCBRN
+    shoes: RMCBootsCBRN
+    suitstorage: RMCWeaponFlamerExt
+    id: CMDogtagCBRNFTL
+    belt: RMCBeltMarineMK1
+    back: RMCWeaponRifleM54CMK1
+    pocket1: RMCPouchFuelTank
+    pocket2: RMCPouchFirstAidERTFill
+  storage:
+    outerClothing:
+    - CMMRE
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+    pocket1:
+    - RMCTankFlamer
+    - RMCTankFlamer
+
+- type: playTimeTracker
+  id: RMCJobCBRNFireteamLeader
