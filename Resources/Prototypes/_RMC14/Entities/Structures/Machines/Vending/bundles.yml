@@ -205,13 +205,13 @@
   description: Contains an engineer kit, tool pouch, and webbing with a variety of items to engineer and/or assault with.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Tools/crowbar.rsi
+    sprite: _RMC14/Objects/Tools/tac_prybar.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
     - RMCEngineerKitRCMPVEFilled
     - RMCPouchToolsSocRCMPVEAssaultEngi
-    - RMCToolWebbingSmallFilledRCMPVEAssaultEngi
+    - RMCToolWebbingSmallRoyalFilled
     - RMCTeslaTSE
 
 - type: entity

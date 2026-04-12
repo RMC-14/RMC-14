@@ -13,12 +13,18 @@
     - machine_parts
     graph: CMMachineFrame
     node: missingWires
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
         damage: 100
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
       - !type:ChangeConstructionNodeBehavior
         node: start
       - !type:DoActsBehavior
@@ -40,12 +46,18 @@
     containers:
     - machine_board
     - machine_parts
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
         damage: 100
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
       - !type:ChangeConstructionNodeBehavior
         node: missingWires
       - !type:DoActsBehavior
