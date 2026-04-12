@@ -44,6 +44,33 @@
     - spawn: "/Maps/_RMC14/Inserts/Trijent/cave_in_engineering.yml"
       probability: 0.1
 
+#South Bridge
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentCivhold
+  name: Civ hold
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/civhold.yml"
+      probability: 0.1
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentCorphold
+  name: Corp hold
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/civhold.yml"
+      probability: 0.1
+    replaceAreas: false
+
+
+
 # Sprinkles
 - type: entity
   parent: RMCMapInsertTrijentBase
