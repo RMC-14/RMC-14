@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2-fix-physics
   forkId: 1138905189
   forkVersion: ""
-  time: 04/12/2026 20:16:27
-  entityCount: 205
+  time: 04/12/2026 21:38:23
+  entityCount: 207
 maps: []
 grids:
 - 1
@@ -125,7 +125,7 @@ entities:
       pos: 5.5,-3.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -15521
+      secondsUntilStateChange: -15820.116
       state: Opening
     - type: ApcPowerReceiver
       needsPower: True
@@ -143,7 +143,7 @@ entities:
       pos: 5.5,-17.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10527.4
+      secondsUntilStateChange: -10826.517
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -156,7 +156,7 @@ entities:
       pos: 1.5,-8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10528.64
+      secondsUntilStateChange: -10827.756
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -169,7 +169,7 @@ entities:
       pos: 9.5,-8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10530.04
+      secondsUntilStateChange: -10829.156
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1471,6 +1471,18 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 10.5,-14.5
+      parent: 1
+- proto: RMCNanoMed
+  entities:
+  - uid: 206
+    components:
+    - type: Transform
+      pos: 2.5,-14.5
+      parent: 1
+  - uid: 207
+    components:
+    - type: Transform
+      pos: 8.5,-14.5
       parent: 1
 - proto: RMCRotaryPhoneWallmount
   entities:
