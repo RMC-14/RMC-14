@@ -23,7 +23,7 @@
   sprite: /Textures/_RMC14/Tiles/planet/sand.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMTileBase
   id: CMPlanetWood
   name: tiles-cm-wood
   sprite: /Textures/_RMC14/Tiles/planet/wood/wood.png
