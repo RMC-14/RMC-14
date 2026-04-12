@@ -66,6 +66,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly OverwatchConsoleSystem _overwatch = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
+    [Dependency] private readonly TacMapLiveUpdateSystem _tacMapLiveUpdate = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -312,6 +313,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _actions.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
 
         TryResolveUserMap(ent, out _);
+        _tacMapLiveUpdate.RefreshLiveUpdate(ent);
         RefreshUserVisibleLayers(ent);
 
         Dirty(ent);

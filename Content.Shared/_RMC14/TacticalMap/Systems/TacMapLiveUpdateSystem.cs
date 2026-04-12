@@ -12,7 +12,6 @@ public sealed class TacMapLiveUpdateSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<TacticalMapUserComponent, ComponentStartup>(OnTacticalMapUserStartup);
-        SubscribeLocalEvent<TacticalMapUserComponent, MapInitEvent>(OnTacticalMapUserMapInit);
         SubscribeLocalEvent<GrantTacMapLiveUpdateComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantTacMapLiveUpdateComponent, GotUnequippedEvent>(OnGotUnequipped);
     }
@@ -22,12 +21,7 @@ public sealed class TacMapLiveUpdateSystem : EntitySystem
         RefreshLiveUpdate(ent);
     }
 
-    private void OnTacticalMapUserMapInit(Entity<TacticalMapUserComponent> ent, ref MapInitEvent args)
-    {
-        RefreshLiveUpdate(ent);
-    }
-
-    private void RefreshLiveUpdate(Entity<TacticalMapUserComponent> ent)
+    public void RefreshLiveUpdate(Entity<TacticalMapUserComponent> ent)
     {
         if (_timing.ApplyingState)
             return;
