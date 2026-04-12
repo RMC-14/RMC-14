@@ -96,10 +96,6 @@
       vehicle: RMCVehicleTank
       unlock: RMCVehicleTank
       hardpoints:
-      - RMCVehicleTankTurret
-      - RMCVehicleTankTreads
-      - RMCVehicleTankReinforcedTreads
-      - RMCVehicleTankTires
       - RMCVehicleTankArmorBallistic
       - RMCVehicleTankArmorConcussive
       - RMCVehicleTankArmorCaustic
