@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Collections.Generic;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Destructible;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
@@ -45,6 +46,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCVehicleWheelSystem _wheels = default!;
+    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
 
     private EntityQuery<MapGridComponent> gridQ;
     private EntityQuery<PhysicsComponent> physicsQ;

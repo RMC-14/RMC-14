@@ -279,23 +279,33 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             ApplySmashSlowdown(vehicle, mover, smashable);
 
         if (_net.IsClient)
-        {
-            if (smashable.DeleteOnHit && physicsQ.TryComp(vehicle, out var vehicleBody) && vehicleBody.Predict)
-                PredictedQueueDel(target);
-
             return true;
-        }
 
-        if (!_net.IsClient)
-        {
-            if (smashable.SmashSound != null)
-                _audio.PlayPvs(smashable.SmashSound, vehicle);
+        if (smashable.SmashSound != null)
+            _audio.PlayPvs(smashable.SmashSound, vehicle);
 
-            if (smashable.DeleteOnHit && !TerminatingOrDeleted(target))
-                Del(target);
-        }
+        if (smashable.DeleteOnHit && !TerminatingOrDeleted(target))
+            SmashTarget(target, vehicle, smashable);
 
         return true;
+    }
+
+    private void SmashTarget(EntityUid target, EntityUid vehicle, RMCVehicleSmashableComponent smashable)
+    {
+        var damage = new DamageSpecifier
+        {
+            DamageDict =
+            {
+                [CollisionDamageType] = smashable.DamageOnHit,
+            },
+        };
+
+        _damageable.TryChangeDamage(target, damage, true, origin: vehicle, tool: vehicle);
+
+        if (TerminatingOrDeleted(target))
+            return;
+
+        _destructible.DestroyEntity(target);
     }
 
     private void PlayCollisionSound(EntityUid uid, ref bool played)

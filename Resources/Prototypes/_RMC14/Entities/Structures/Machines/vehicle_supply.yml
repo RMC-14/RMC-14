@@ -114,6 +114,8 @@
       - RMCVehicleTankTowLauncher
       - RMCVehicleTankFlareModule
       - RMCVehicleTankArtilleryModule
+      - RMCVehicleTankReinforcedTreads
+      - RMCVehicleTankTreads
     - name: humvee (arc)
       vehicle: RMCVehicleHumveeARC
       unlock: RMCVehicleHumveeARC

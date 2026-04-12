@@ -11,6 +11,9 @@ public sealed partial class RMCVehicleSmashableComponent : Component
     public bool DeleteOnHit = true;
 
     [DataField]
+    public double DamageOnHit = 1000;
+
+    [DataField]
     public float SlowdownMultiplier = 0.5f;
 
     [DataField]
