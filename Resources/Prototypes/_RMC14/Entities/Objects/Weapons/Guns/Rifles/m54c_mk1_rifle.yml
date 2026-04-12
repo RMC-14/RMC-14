@@ -129,6 +129,7 @@
 - type: entity
   parent: RMCWeaponRifleM54CMK1
   id: RMCWeaponRifleM54CMK1AP
+  suffix: AP
   components:
   - type: ItemSlots
     slots:
@@ -141,7 +142,44 @@
           tags:
           - CMMagazineRifleM54CMK1
           - CMMagazineRifleM54CMK1AP
+          - RMCMagazineRifleM54CMK1Incendiary
+          - RMCMagazineRifleM54CMK1HEAP
+          - RMCMagazineRifleM54CMK1WP
         startingItem: CMMagazineRifleM54CMK1AP
+
+- type: entity
+  parent: RMCWeaponRifleM54CMK1AP
+  id: RMCWeaponRifleM54CMK1CBRN
+  suffix: AP, Magharn, Suppressor
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentSuppressor
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentMagneticHarness
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CMK1StockCollapsible
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockCollapsible
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentMK1GrenadeLauncher
+        whitelist:
+          tags:
+          - RMCAttachmentMK1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentExtinguisher
 
 - type: entity
   parent: CMMagazineRifleBase
