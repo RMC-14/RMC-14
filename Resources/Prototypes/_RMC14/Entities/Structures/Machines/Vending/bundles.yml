@@ -219,6 +219,42 @@
 # PVE
 - type: entity
   parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleRCMPVEAssaultEngi
+  name: Essential Engineering Set
+  description: Contains an engineer kit, tool pouch, and webbing with a variety of items to engineer and/or assault with.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/tac_prybar.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCEngineerKitRCMPVEFilled
+    - RMCPouchToolsSocRCMPVEAssaultEngi
+    - RMCToolWebbingSmallRoyalFilled
+    - RMCTeslaTSE
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleRCMPVEMedic
+  name: Essential Medical Set
+  description: Contains a surgical case, stethoscope, penlight, and assortment of medical tools to put people back together. Make use of that Navy training.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/surgical_case.rsi
+    layers:
+    - state: surgical_case_base
+  - type: CMVendorBundle
+    bundle:
+    - RMCFlashlightPen
+    - RMCStethoscope
+    - RMCSurgicalCaseRCMFilled
+    - CMHealthAnalyzer
+    - RMCBurnAidKitFilledPVE
+    - RMCBruteAidKitFilledPVE
+    - RMCStandardAidKitFilledPVE
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleRCMPVEMGL
   name: Multiple Grenade Launcher Set
   description: Contains the L989A2 Multiple Grenade Launcher and the L79 pattern load-bearing rig.
@@ -249,39 +285,3 @@
     - RMCMortarKit # RMC14 TODO: RCM Custom Light Mortar
     - RMCBeltRoyalMortarFilledMortarShells # RMC14 TODO: Check Parity Fill
     - RMCLaserDesignatorPVE
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleRCMPVEAssaultEngi
-  name: Essential Engineering Set
-  description: Contains an engineer kit, tool pouch, and webbing with a variety of items to engineer and/or assault with.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tools/crowbar.rsi
-    state: icon
-  - type: CMVendorBundle
-    bundle:
-    - RMCEngineerKitRCMPVEFilled
-    - RMCPouchToolsSocRCMPVEAssaultEngi
-    - RMCToolWebbingSmallFilledRCMPVEAssaultEngi
-    - RMCTeslaTSE
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleRCMPVEMedic
-  name: Essential Medical Set
-  description: Contains a surgical case, stethoscope, penlight, and assortment of medical tools to put people back together. Make use of that Navy training.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Storage/surgical_case.rsi
-    layers:
-    - state: surgical_case_base
-  - type: CMVendorBundle
-    bundle:
-    - RMCFlashlightPen
-    - RMCStethoscope
-    - RMCSurgicalCaseRCMFilled
-    - CMHealthAnalyzer
-    - RMCBurnAidKitFilledPVE
-    - RMCBruteAidKitFilledPVE
-    - RMCStandardAidKitFilledPVE

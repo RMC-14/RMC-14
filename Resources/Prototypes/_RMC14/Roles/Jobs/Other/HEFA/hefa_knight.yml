@@ -9,6 +9,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - HEFA
     - type: JobPrefix
       prefix: rmc-job-prefix-hefa-shrapnelsworn
 
@@ -57,14 +60,14 @@
 - type: startingGear
   id: RMCGearHEFAShrapnelswornMelee
   equipment:
-    head: RMCArmorHelmetHEFA
+    head: RMCArmorHelmetHEFAFilled
     jumpsuit: RMCJumpsuitHEFA
-    outerClothing: RMCArmorMercenaryHEFA
+    outerClothing: RMCArmorMercenaryHEFAFilled
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlack
     id: RMCIDCardHEFAShrapnelsworn
     belt: RMCBeltGrenadeHEFA
-    back: RMCSatchelHEFAFill
+    back: RMCSatchelHEFAKnightFill
     pocket1: RMCPouchFirstAidERTFill
     pocket2: RMCPouchExplosiveFilledHEFA
   inhand:

@@ -41,13 +41,13 @@ public sealed class CPRSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
 
-    public static readonly EntProtoId<SkillDefinitionComponent> SkillType = "RMCSkillMedical";
-
-    // TODO RMC14 move this to a component
+    // TODO RMC14 move these to a component
     [ValidatePrototypeId<DamageTypePrototype>]
     private const string HealType = "Asphyxiation";
 
+    private static readonly TimeSpan CPRCooldownSeconds = TimeSpan.FromSeconds(7);
     private static readonly FixedPoint2 HealAmount = FixedPoint2.New(10);
+    private static readonly EntProtoId<SkillDefinitionComponent> SkillType = "RMCSkillMedical";
 
     public override void Initialize()
     {
@@ -65,7 +65,6 @@ public sealed class CPRSystem : EntitySystem
         SubscribeLocalEvent<CPRDummyComponent, UseInHandEvent>(OnDummyUseInHand);
         SubscribeLocalEvent<CPRDummyComponent, InteractHandEvent>(OnDummyInteractHand,
             before: [typeof(InteractionPopupSystem), typeof(StunShakeableSystem)]);
-        SubscribeLocalEvent<CPRDummyComponent, CPRDoAfterEvent>(OnDummyDoAfter);
         SubscribeLocalEvent<CPRDummyComponent, ExaminedEvent>(OnDummyExamined);
         SubscribeLocalEvent<CPRDummyComponent, GetVerbsEvent<AlternativeVerb>>(OnDummyGetAlternativeVerbs);
     }
@@ -95,7 +94,13 @@ public sealed class CPRSystem : EntitySystem
 
         args.Handled = true;
 
-        _unrevivable.AddRevivableTime(target, TimeSpan.FromSeconds(7));
+        if (TryComp(target, out CPRDummyComponent? dummy))
+        {
+            HandleDummyCPR((target, dummy), performer);
+            return;
+        }
+
+        _unrevivable.AddRevivableTime(target, CPRCooldownSeconds);
 
         if (!TryComp(target, out DamageableComponent? damageable) ||
             !damageable.Damage.DamageDict.TryGetValue(HealType, out damage))
@@ -114,8 +119,7 @@ public sealed class CPRSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        // TODO RMC14 move this value to a component
-        var selfPopup = Loc.GetString("cm-cpr-self-perform", ("target", target), ("seconds", 7));
+        var selfPopup = Loc.GetString("cm-cpr-self-perform", ("target", target), ("seconds", (int)CPRCooldownSeconds.TotalSeconds));
         _popups.PopupEntity(selfPopup, target, performer, PopupType.Medium);
 
         var othersPopup = Loc.GetString("cm-cpr-other-perform", ("performer", performer), ("target", target));
@@ -125,8 +129,8 @@ public sealed class CPRSystem : EntitySystem
 
     private void OnReceivingCPRAttempt(Entity<ReceivingCPRComponent> ent, ref ReceiveCPRAttemptEvent args)
     {
-        var isStale = _timing.CurTime - ent.Comp.StartTime > TimeSpan.FromSeconds(7);
-        if (isStale) // If stale, remove the component and allow the new CPR attempt
+        // If stale, remove the component and allow the new CPR attempt
+        if (_timing.CurTime - ent.Comp.StartTime > CPRCooldownSeconds)
         {
             RemCompDeferred<ReceivingCPRComponent>(ent);
             return;
@@ -149,9 +153,8 @@ public sealed class CPRSystem : EntitySystem
         var target = ent.Owner;
         var performer = args.Performer;
 
-        // TODO RMC14 move this value to a component
         if (!_mobState.IsDead(ent) ||
-            ent.Comp.Last <= _timing.CurTime - TimeSpan.FromSeconds(7))
+            ent.Comp.Last <= _timing.CurTime - CPRCooldownSeconds)
         {
             return;
         }
@@ -268,51 +271,42 @@ public sealed class CPRSystem : EntitySystem
         StartCPR(args.User, ent);
     }
 
-    private void OnDummyDoAfter(Entity<CPRDummyComponent> ent, ref CPRDoAfterEvent args)
+    private void HandleDummyCPR(Entity<CPRDummyComponent> dummy, EntityUid performer)
     {
-        RemComp<ReceivingCPRComponent>(ent);
+        var received = EnsureComp<CPRReceivedComponent>(dummy);
+        var tooSoon = received.Last > _timing.CurTime - CPRCooldownSeconds;
 
-        if (args.Cancelled || args.Handled)
+        if (tooSoon)
+            dummy.Comp.CPRFailed++;
+        else
+            dummy.Comp.CPRSuccess++;
+
+        Dirty(dummy);
+
+        received.Last = _timing.CurTime;
+        Dirty(dummy.Owner, received);
+
+        if (_net.IsClient)
             return;
 
-        args.Handled = true;
-
-        var user = args.User;
-        var currentTime = _timing.CurTime;
-        if (TryComp(ent, out CPRReceivedComponent? received) && received.Last > currentTime - TimeSpan.FromSeconds(7))
+        if (tooSoon)
         {
-            ent.Comp.CPRFailed++;
-            Dirty(ent);
+            var selfPopup = Loc.GetString("cm-cpr-self-perform-fail-received-too-recently", ("target", dummy));
+            _popups.PopupEntity(selfPopup, dummy, performer, PopupType.MediumCaution);
 
-            if (_net.IsClient)
-                return;
-
-            var selfPopup = Loc.GetString("rmc-cpr-dummy-fail-self");
-            _popups.PopupEntity(selfPopup, ent, user, PopupType.MediumCaution);
-
-            var othersPopup = Loc.GetString("rmc-cpr-dummy-fail-others", ("user", user));
-            var othersFilter = Filter.Pvs(user).RemoveWhereAttachedEntity(e => e == user);
-            _popups.PopupEntity(othersPopup, ent, othersFilter, true, PopupType.MediumCaution);
+            var othersPopup = Loc.GetString("cm-cpr-other-perform-fail", ("performer", performer), ("target", dummy));
+            var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
+            _popups.PopupEntity(othersPopup, dummy, othersFilter, true, PopupType.MediumCaution);
         }
         else
         {
-            ent.Comp.CPRSuccess++;
-            Dirty(ent);
+            var selfPopup = Loc.GetString("cm-cpr-self-perform", ("target", dummy), ("seconds", (int)CPRCooldownSeconds.TotalSeconds));
+            _popups.PopupEntity(selfPopup, dummy, performer, PopupType.Medium);
 
-            if (_net.IsClient)
-                return;
-
-            var selfPopup = Loc.GetString("rmc-cpr-dummy-success-self");
-            _popups.PopupEntity(selfPopup, ent, user, PopupType.Medium);
-
-            var othersPopup = Loc.GetString("rmc-cpr-dummy-success-others", ("user", user));
-            var othersFilter = Filter.Pvs(user).RemoveWhereAttachedEntity(e => e == user);
-            _popups.PopupEntity(othersPopup, ent, othersFilter, true, PopupType.Medium);
+            var othersPopup = Loc.GetString("cm-cpr-other-perform", ("performer", performer), ("target", dummy));
+            var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
+            _popups.PopupEntity(othersPopup, dummy, othersFilter, true, PopupType.Medium);
         }
-
-        var cprReceived = EnsureComp<CPRReceivedComponent>(ent);
-        cprReceived.Last = currentTime;
-        Dirty(ent, cprReceived);
     }
 
     private void OnDummyExamined(Entity<CPRDummyComponent> ent, ref ExaminedEvent args)
@@ -383,16 +377,14 @@ public sealed class CPRSystem : EntitySystem
 
     private void TryResetDummyCounter(Entity<CPRDummyComponent> ent, EntityUid user)
     {
-        var hasAllowedJob = _mind.TryGetMind(user, out var mindId, out _) &&
-            ent.Comp.ResetCPRCounterJobs.Any(job => _job.MindHasJobWithId(mindId, job));
-
-        if (!hasAllowedJob)
+        _mind.TryGetMind(user, out var mindId, out _);
+        if (!_job.MindTryGetJobId(mindId, out var jobId) || !ent.Comp.ResetCPRCounterJobs.Contains(jobId!.Value))
         {
             if (_net.IsClient)
                 return;
 
             var jobNames = ent.Comp.ResetCPRCounterJobs
-                .Select(jobId => _prototypes.Index(jobId).LocalizedName)
+                .Select(job => _prototypes.Index(job).LocalizedName)
                 .ToList();
             var jobsString = string.Join("; ", jobNames);
             _popups.PopupEntity(Loc.GetString("rmc-cpr-dummy-reset-denied", ("jobs", jobsString)), ent, user, PopupType.MediumCaution);

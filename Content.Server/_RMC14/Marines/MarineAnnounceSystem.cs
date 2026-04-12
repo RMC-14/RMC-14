@@ -1,4 +1,4 @@
-﻿using Content.Server._RMC14.Rules;
+﻿using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Radio.EntitySystems;
@@ -16,7 +16,6 @@ using Robust.Server.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Marines;
 
