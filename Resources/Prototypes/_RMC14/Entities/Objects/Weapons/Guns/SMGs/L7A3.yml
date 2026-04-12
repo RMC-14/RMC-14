@@ -1,9 +1,9 @@
 - type: entity
   parent: CMBaseWeaponSMG
-  name: "L7A3 Submachine Gun"   #CM name is L6A2
-  suffix: PVE, Filled
+  name: "L7A3 submachine gun"   #CM name is L6A2
+  suffix: PVE, Filled, Royal
   id: RMCWeaponSMGL7A3
-  description: RCM adopted variant of the M63 SMG, re-engineered for better weight, handling and accuracy. Typically used in CQB engagements such as building-clearing, where the L24A1 proved a tad too unwieldy for such tasks.
+  description: RCM adopted variant of the M63 SMG, re-engineered for better weight, handling and accuracy. Typically used in CQB engagements such as building-clearing, where the L24A1 proved a tad too unwieldy for such tasks. # RMC TODO resprite and redesc
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/L7A3.rsi
@@ -107,7 +107,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSMGL7A3SquashHead
-  name: "L7A3 Magazine Squash-Head (9mm)"
+  name: "L7A3 squash-head magazine (9mm)"
   components:
   - type: Tag
     tags:
@@ -128,7 +128,7 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
-      color: "#9C9A19"
+      color: "#DD4242"
   - type: MagazineVisuals
     magState: mag
     steps: 2
@@ -139,7 +139,7 @@
 - type: entity
   parent: CMCartridgeSMGBase
   id: RMCCartridgeSMG9mmSquashHead
-  name: 9mm Squash-Head Cartridge
+  name: squash-head cartridge (9mm)
   components:
   - type: Tag
     tags:
@@ -151,7 +151,7 @@
 - type: entity # todo rmc14 this is missing a lot of effects, shrapnel, debilitate etc
   parent: CMBulletBase
   id: RMCBulletSMG9mmSquashHead
-  name: 9mmSquash-HeadBullet
+  name: squash-head bullet (9mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
