@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2-fix-physics
   forkId: 1138905189
   forkVersion: ""
-  time: 04/12/2026 18:32:42
-  entityCount: 204
+  time: 04/12/2026 20:16:27
+  entityCount: 205
 maps: []
 grids:
 - 1
@@ -117,20 +117,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-- proto: ChairPilotSeat
-  entities:
-  - uid: 53
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 6.5,-2.5
-      parent: 1
-  - uid: 147
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 4.5,-2.5
-      parent: 1
 - proto: CMAlamoCockpit
   entities:
   - uid: 18
@@ -139,7 +125,7 @@ entities:
       pos: 5.5,-3.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -15153.507
+      secondsUntilStateChange: -15521
       state: Opening
     - type: ApcPowerReceiver
       needsPower: True
@@ -157,7 +143,7 @@ entities:
       pos: 5.5,-17.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10159.907
+      secondsUntilStateChange: -10527.4
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -170,7 +156,7 @@ entities:
       pos: 1.5,-8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10161.146
+      secondsUntilStateChange: -10528.64
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -183,7 +169,7 @@ entities:
       pos: 9.5,-8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -10162.547
+      secondsUntilStateChange: -10530.04
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -916,12 +902,6 @@ entities:
       marineLines: []
 - proto: CMSeatPassenger
   entities:
-  - uid: 21
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 8.719083,-3.5
-      parent: 1
   - uid: 74
     components:
     - type: Transform
@@ -979,8 +959,7 @@ entities:
   - uid: 84
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 8.719083,-3
+      pos: 8.750623,-2.9991753
       parent: 1
   - uid: 85
     components:
@@ -1003,8 +982,7 @@ entities:
   - uid: 88
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.308488,-3
+      pos: 8.283205,-2.9993906
       parent: 1
   - uid: 89
     components:
@@ -1015,8 +993,7 @@ entities:
   - uid: 90
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.308488,-3.5
+      pos: 2.7485762,-2.9993906
       parent: 1
   - uid: 91
     components:
@@ -1296,6 +1273,25 @@ entities:
       rot: 3.141592653589793 rad
       pos: 7.750087,-16.5
       parent: 1
+  - uid: 147
+    components:
+    - type: Transform
+      pos: 2.2812562,-2.9991753
+      parent: 1
+- proto: CMSeatPilot
+  entities:
+  - uid: 21
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,-2.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 6.5,-2.5
+      parent: 1
 - proto: RMCDropshipStorageCompartment
   entities:
   - uid: 16
@@ -1426,6 +1422,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 4.5,-2.5
       parent: 1
+  - uid: 205
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,-2.5
+      parent: 1
 - proto: RMCLightStickBlueSmall
   entities:
   - uid: 42
@@ -1474,6 +1476,8 @@ entities:
   entities:
   - uid: 146
     components:
+    - type: MetaData
+      name: Dropship Alamo
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 7.128996,-2
