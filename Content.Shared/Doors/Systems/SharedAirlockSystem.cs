@@ -121,6 +121,12 @@ public abstract class SharedAirlockSystem : EntitySystem
         if (autoev.Cancelled)
             return;
 
+        if (door.CanHoldOpen)
+        {
+            DoorSystem.SetNextStateChange(uid,TimeSpan.FromSeconds(1));
+            return;
+        }
+
         DoorSystem.SetNextStateChange(uid, airlock.AutoCloseDelay * airlock.AutoCloseDelayModifier);
     }
 
