@@ -23,6 +23,8 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
 
     private void OnRoundCleanup(RoundRestartCleanupEvent ev)
     {
+        PlayerStats.Clear();
+
         TotalMarines = 0;
         TotalMarineDeaths = 0;
         TotalMarinePermaDeaths = 0;
