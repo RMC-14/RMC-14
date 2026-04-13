@@ -18,7 +18,6 @@ namespace Content.Shared._RMC14.Stats;
 public abstract class SharedStatTrackingSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
-
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
 
@@ -52,8 +51,19 @@ public abstract class SharedStatTrackingSystem : EntitySystem
     protected int TotalInfected;
     protected int TotalBursts;
 
-    protected Dictionary<NetUserId, PlayerRoundStats> PlayerStats = new ();
+    protected Dictionary<NetUserId, PlayerRoundStats> PlayerStats = new();
     protected TimeSpan RoundStartTime;
+
+    protected void ModifyStats(NetUserId userId, string? name, Func<PlayerRoundStats, PlayerRoundStats> modify)
+    {
+        PlayerStats.TryGetValue(userId, out var stats);
+
+        if (string.IsNullOrEmpty(stats.UserName) && name != null)
+            stats.UserName = name;
+
+        stats = modify(stats);
+        PlayerStats[userId] = stats;
+    }
 
     public void UpdateDeathCount(EntityUid died)
     {
@@ -308,23 +318,42 @@ public abstract class SharedStatTrackingSystem : EntitySystem
             }
         }
     }
+}
 
-    protected void ModifyStats(NetUserId userId, string? name, Func<PlayerRoundStats, PlayerRoundStats> modify)
-    {
-        PlayerStats.TryGetValue(userId, out var stats);
+public struct PlayerRoundStats
+{
+    public string UserName;
 
-        if (string.IsNullOrEmpty(stats.UserName) && name != null)
-            stats.UserName = name;
+    public MarineRoundStats Marine;
+    public XenoRoundStats Xeno;
+}
 
-        stats = modify(stats);
-        PlayerStats[userId] = stats;
-    }
+public struct MarineRoundStats
+{
+    public int TotalMarineDeaths;
+    public FixedPoint2 TotalDamageReceived;
+    public FixedPoint2 TotalDamageHealed;
+    public int TotalProjectiles;
+    public int TotalProjectileHits;
+    public int TotalFriendlyFireIncidents;
+    public int TotalLarvaExtractions;
+}
+
+public struct XenoRoundStats
+{
+    public int TotalDeaths;
+    public FixedPoint2 TotalDamageReceived;
+    public FixedPoint2 TotalDamageHealed;
+    public int TotalLesserDroneSpawns;
+    public int TotalParasiteSpawns;
+    public int TotalProjectiles;
+    public int TotalProjectileHits;
+    public int TotalMeleeHits;
 }
 
 public sealed class RoundEndStatsAppendEvent
 {
     private bool _doNewLine;
-
     public string Text { get; private set; } = string.Empty;
 
     public void AddLine(string text)
@@ -337,74 +366,49 @@ public sealed class RoundEndStatsAppendEvent
     }
 }
 
-[DataRecord]
-public struct PlayerRoundStats
-{
-    public string UserName;
-
-    // Marine Stats
-    public int TotalMarineDeaths;
-    public FixedPoint2 TotalDamageReceived;
-    public FixedPoint2 TotalDamageHealed;
-    public int TotalProjectiles;
-    public int TotalProjectileHits;
-    public int TotalFriendlyFireIncidents;
-    public int TotalLarvaExtractions;
-
-    // Xeno Stats
-    public int TotalXenoDeaths;
-    public FixedPoint2 TotalXenoDamageReceived;
-    public FixedPoint2 TotalXenoDamageHealed;
-    public int TotalLesserDroneSpawns;
-    public int TotalParasiteSpawns;
-    public int TotalXenoProjectiles;
-    public int TotalXenoProjectileHits;
-    public int TotalXenoMeleeHits;
-}
-
-#region Stat Increase
+#region Stat Modifications
 public static class PlayerRoundStatModifications
 {
     // Marine stats
     public static PlayerRoundStats MarineDeath(PlayerRoundStats stats)
     {
-        stats.TotalMarineDeaths++;
+        stats.Marine.TotalMarineDeaths++;
         return stats;
     }
 
     public static PlayerRoundStats DamageReceived(PlayerRoundStats stats, FixedPoint2 amount)
     {
-        stats.TotalDamageReceived += amount;
+        stats.Marine.TotalDamageReceived += amount;
         return stats;
     }
 
     public static PlayerRoundStats DamageHealed(PlayerRoundStats stats, FixedPoint2 amount)
     {
-        stats.TotalDamageHealed += amount;
+        stats.Marine.TotalDamageHealed += amount;
         return stats;
     }
 
     public static PlayerRoundStats MarineProjectileFired(PlayerRoundStats stats)
     {
-        stats.TotalProjectiles++;
+        stats.Marine.TotalProjectiles++;
         return stats;
     }
 
     public static PlayerRoundStats MarineProjectileHit(PlayerRoundStats stats)
     {
-        stats.TotalProjectileHits++;
+        stats.Marine.TotalProjectileHits++;
         return stats;
     }
 
     public static PlayerRoundStats MarineFriendlyFire(PlayerRoundStats stats)
     {
-        stats.TotalFriendlyFireIncidents++;
+        stats.Marine.TotalFriendlyFireIncidents++;
         return stats;
     }
 
     public static PlayerRoundStats MarineLarvaExtraction(PlayerRoundStats stats)
     {
-        stats.TotalLarvaExtractions++;
+        stats.Marine.TotalLarvaExtractions++;
         return stats;
     }
 
@@ -412,49 +416,49 @@ public static class PlayerRoundStatModifications
 
     public static PlayerRoundStats XenoDeath(PlayerRoundStats stats)
     {
-        stats.TotalXenoDeaths++;
+        stats.Xeno.TotalDeaths++;
         return stats;
     }
 
     public static PlayerRoundStats XenoDamageReceived(PlayerRoundStats stats, FixedPoint2 amount)
     {
-        stats.TotalXenoDamageReceived += amount;
+        stats.Xeno.TotalDamageReceived += amount;
         return stats;
     }
 
     public static PlayerRoundStats XenoDamageHealed(PlayerRoundStats stats, FixedPoint2 amount)
     {
-        stats.TotalXenoDamageHealed += amount;
+        stats.Xeno.TotalDamageHealed += amount;
         return stats;
     }
 
     public static PlayerRoundStats XenoProjectileFired(PlayerRoundStats stats)
     {
-        stats.TotalXenoProjectiles++;
+        stats.Xeno.TotalProjectiles++;
         return stats;
     }
 
     public static PlayerRoundStats XenoProjectileHit(PlayerRoundStats stats)
     {
-        stats.TotalXenoProjectileHits++;
+        stats.Xeno.TotalProjectileHits++;
         return stats;
     }
 
     public static PlayerRoundStats XenoMeleeHit(PlayerRoundStats stats)
     {
-        stats.TotalXenoMeleeHits++;
+        stats.Xeno.TotalMeleeHits++;
         return stats;
     }
 
     public static PlayerRoundStats LesserDroneSpawn(PlayerRoundStats stats)
     {
-        stats.TotalLesserDroneSpawns++;
+        stats.Xeno.TotalLesserDroneSpawns++;
         return stats;
     }
 
     public static PlayerRoundStats ParasiteSpawn(PlayerRoundStats stats)
     {
-        stats.TotalParasiteSpawns++;
+        stats.Xeno.TotalParasiteSpawns++;
         return stats;
     }
 }

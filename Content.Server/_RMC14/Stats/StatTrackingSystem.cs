@@ -91,27 +91,27 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
 
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-total-marines", TotalMarines);
 
-        var (mostDeathsName, mostDeaths) = GetHighScore(player => player.TotalMarineDeaths);
+        var (mostDeathsName, mostDeaths) = GetHighScore(player => player.Marine.TotalMarineDeaths);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-marine-deaths", TotalMarineDeaths, mostDeathsName, mostDeaths);
 
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-marine-perma-deaths", TotalMarinePermaDeaths);
 
-        var (mostDamageReceivedName, mostDamageReceived) = GetHighScore(player => (int) player.TotalDamageReceived);
+        var (mostDamageReceivedName, mostDamageReceived) = GetHighScore(player => (int) player.Marine.TotalDamageReceived);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-damage-received", (int) TotalDamageReceived, mostDamageReceivedName, mostDamageReceived);
 
-        var (mostDamageHealedName, moxeDamageHealed) = GetHighScore(player => (int) player.TotalDamageHealed);
+        var (mostDamageHealedName, moxeDamageHealed) = GetHighScore(player => (int) player.Marine.TotalDamageHealed);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-damage-healed", (int) TotalDamageHealed, mostDamageHealedName, moxeDamageHealed);
 
-        var (mostProjectilesName, mostProjectiles) = GetHighScore(player => player.TotalProjectiles);
+        var (mostProjectilesName, mostProjectiles) = GetHighScore(player => player.Marine.TotalProjectiles);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-marine-projectiles-fired", TotalMarineProjectiles, mostProjectilesName, mostProjectiles);
 
-        var (mostProjectileHitsName, mostProjectileHits) = GetHighScore(player => player.TotalProjectileHits);
+        var (mostProjectileHitsName, mostProjectileHits) = GetHighScore(player => player.Marine.TotalProjectileHits);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-marine-projectile-hits", TotalMarineProjectileHits, mostProjectileHitsName, mostProjectileHits);
 
-        var (mostFriendlyFireIncidentsName, mostFriendlyFireIncidents) = GetHighScore(player => player.TotalFriendlyFireIncidents);
+        var (mostFriendlyFireIncidentsName, mostFriendlyFireIncidents) = GetHighScore(player => player.Marine.TotalFriendlyFireIncidents);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-friendly-fire-incidents", TotalFriendlyFireIncidents, mostFriendlyFireIncidentsName, mostFriendlyFireIncidents);
 
-        var (mostLarvaExtractionsName, mostLarvaExtractions) = GetHighScore(player => player.TotalLarvaExtractions);
+        var (mostLarvaExtractionsName, mostLarvaExtractions) = GetHighScore(player => player.Marine.TotalLarvaExtractions);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-larva-extractions", TotalLarvaExtractions, mostLarvaExtractionsName, mostLarvaExtractions);
 
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-used-requisitions-budget", TotalUsedRequisitionsBudget);
@@ -139,31 +139,31 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
 
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-total-xenos", TotalXenos);
 
-        var (mostXenoDeathsName, mostXenoDeaths) = GetHighScore(player => player.TotalXenoDeaths);
+        var (mostXenoDeathsName, mostXenoDeaths) = GetHighScore(player => player.Xeno.TotalDeaths);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-deaths", TotalXenoDeaths, mostXenoDeathsName, mostXenoDeaths);
 
-        var (mostXenoDamageReceivedName, mostXenoDamageReceived) = GetHighScore(player => (int) player.TotalXenoDamageReceived);
+        var (mostXenoDamageReceivedName, mostXenoDamageReceived) = GetHighScore(player => (int) player.Xeno.TotalDamageReceived);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-damage-received", (int) TotalXenoDamageReceived, mostXenoDamageReceivedName, mostXenoDamageReceived);
 
-        var (mostXenoDamageHealedName, moxeXenoDamageHealed) = GetHighScore(player => (int) player.TotalXenoDamageHealed);
+        var (mostXenoDamageHealedName, moxeXenoDamageHealed) = GetHighScore(player => (int) player.Xeno.TotalDamageHealed);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-damage-healed", (int) TotalXenoDamageHealed, mostXenoDamageHealedName, moxeXenoDamageHealed);
 
-        var (mostLesserXenoSpawnsName, mostLesserXenoSpawns) = GetHighScore(player => player.TotalLesserDroneSpawns);
+        var (mostLesserXenoSpawnsName, mostLesserXenoSpawns) = GetHighScore(player => player.Xeno.TotalLesserDroneSpawns);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-lesser-drones", TotalLesserXenos, mostLesserXenoSpawnsName, mostLesserXenoSpawns);
 
-        var (mostParasitesName, mostParasites) = GetHighScore(player => player.TotalParasiteSpawns);
+        var (mostParasitesName, mostParasites) = GetHighScore(player => player.Xeno.TotalParasiteSpawns);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-player-parasites", TotalPlayerParasites, mostParasitesName, mostParasites);
 
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-infected", TotalInfected);
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-bursts", TotalBursts);
 
-        var (mostXenoProjectilesName, mostXenoProjectiles) = GetHighScore(player => player.TotalXenoProjectiles);
+        var (mostXenoProjectilesName, mostXenoProjectiles) = GetHighScore(player => player.Xeno.TotalProjectiles);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-projectiles-fired", TotalXenoProjectiles, mostXenoProjectilesName, mostXenoProjectiles);
 
-        var (mostXenoProjectileHitsName, mostXenoProjectileHits) = GetHighScore(player => player.TotalXenoProjectileHits);
+        var (mostXenoProjectileHitsName, mostXenoProjectileHits) = GetHighScore(player => player.Xeno.TotalProjectileHits);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-projectile-hits", TotalXenoProjectileHits, mostXenoProjectileHitsName, mostXenoProjectileHits);
 
-        var (mostMeleeHitsName, mostMeleeHits) = GetHighScore(player => player.TotalXenoMeleeHits);
+        var (mostMeleeHitsName, mostMeleeHits) = GetHighScore(player => player.Xeno.TotalMeleeHits);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-melee-hits", TotalXenoMeleeHits, mostMeleeHitsName, mostMeleeHits);
 
         endEvent.AddLine(string.Empty);
