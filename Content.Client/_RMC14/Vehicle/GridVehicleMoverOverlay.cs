@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Vehicle;
@@ -29,6 +30,7 @@ public sealed class GridVehicleMoverOverlay : Overlay
     private readonly EntityQuery<PhysicsComponent> _physicsQ;
     private readonly EntityQuery<VehicleEnterComponent> _enterQ;
     private readonly EntityQuery<VehicleExitComponent> _exitQ;
+    private readonly Dictionary<EntityUid, Vector2> _lastProbePositions = new();
     private readonly Color[] _colors =
     {
         Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Magenta, Color.Cyan, Color.Orange
@@ -83,10 +85,14 @@ public sealed class GridVehicleMoverOverlay : Overlay
             }
 
             if (CollisionsEnabled)
+            {
+                DrawCollisionProbes(handle, args.MapId);
                 DrawCollisions(handle, args.MapId);
+            }
         }
         else if (CollisionsEnabled)
         {
+            DrawCollisionProbes(args.WorldHandle, args.MapId);
             DrawCollisions(args.WorldHandle, args.MapId);
         }
 
@@ -221,6 +227,55 @@ public sealed class GridVehicleMoverOverlay : Overlay
 
     private void DrawCollisions(DrawingHandleWorld h, MapId mapId)
     {
+        DrawBlockedCollisions(h, mapId);
+    }
+
+    private void DrawCollisionProbes(DrawingHandleWorld h, MapId mapId)
+    {
+        _lastProbePositions.Clear();
+
+        foreach (var probe in Content.Shared.Vehicle.GridVehicleMoverSystem.DebugCollisionProbes)
+        {
+            if (probe.Map != mapId)
+                continue;
+
+            var clearFill = probe.ApplyEffects
+                ? new Color(0.22f, 0.78f, 1f, 0.08f)
+                : new Color(0.19f, 0.95f, 0.55f, 0.08f);
+            var clearOutline = probe.ApplyEffects
+                ? new Color(0.25f, 0.84f, 1f, 0.72f)
+                : new Color(0.18f, 1f, 0.55f, 0.74f);
+            var blockedFill = new Color(1f, 0.16f, 0.22f, 0.18f);
+            var blockedOutline = new Color(1f, 0.16f, 0.22f, 0.92f);
+            var fill = probe.Blocked ? blockedFill : clearFill;
+            var outline = probe.Blocked ? blockedOutline : clearOutline;
+
+            if (_lastProbePositions.TryGetValue(probe.Tested, out var last))
+                h.DrawLine(last, probe.Position, new Color(0.55f, 0.9f, 1f, 0.38f));
+            _lastProbePositions[probe.Tested] = probe.Position;
+
+            // axis-aligned boxes are what the movement blocker test actually uses.
+            h.DrawRect(probe.MovementAabb, fill, true);
+            h.DrawRect(probe.MovementAabb, outline, false);
+
+            // rotated boxes show the sampled vehicle pose, so bad orientation is obvious.
+            h.DrawRect(probe.FixtureBounds, new Color(0.45f, 0.92f, 1f, 0.72f), false);
+            h.DrawRect(probe.MovementBounds, new Color(0.95f, 0.95f, 1f, 0.45f), false);
+
+            h.DrawRect(probe.TestedAabb, new Color(0.45f, 0.92f, 1f, 0.18f), false);
+
+            var facing = probe.Rotation.RotateVec(Vector2.UnitX);
+            var arrowColor = probe.Blocked
+                ? new Color(1f, 0.24f, 0.26f, 0.95f)
+                : new Color(0.22f, 1f, 0.58f, 0.95f);
+
+            h.DrawCircle(probe.Position, probe.Blocked ? 0.11f : 0.07f, arrowColor);
+            DrawArrow(h, probe.Position, probe.Position + facing * 0.85f, arrowColor);
+        }
+    }
+
+    private static void DrawBlockedCollisions(DrawingHandleWorld h, MapId mapId)
+    {
         foreach (var hit in Content.Shared.Vehicle.GridVehicleMoverSystem.DebugCollisions)
         {
             if (hit.Map != mapId)
@@ -263,15 +318,7 @@ public sealed class GridVehicleMoverOverlay : Overlay
                 var arrowEnd = testedCenter + dir * maxArrow;
                 var arrowColor = new Color(0.7f, 0.35f, 1f, 0.85f);
 
-                h.DrawLine(testedCenter, arrowEnd, arrowColor);
-
-                var headLength = 0.12f;
-                var headWidth = 0.06f;
-                var basePoint = arrowEnd - dir * headLength;
-                var perp = new Vector2(-dir.Y, dir.X) * headWidth;
-
-                h.DrawLine(arrowEnd, basePoint + perp, arrowColor);
-                h.DrawLine(arrowEnd, basePoint - perp, arrowColor);
+                DrawArrow(h, testedCenter, arrowEnd, arrowColor);
             }
 
             var gap = hit.Distance - hit.Skin + hit.Clearance;
@@ -282,5 +329,24 @@ public sealed class GridVehicleMoverOverlay : Overlay
             h.DrawCircle(mid, gapRadius, gapColor);
             h.DrawCircle(mid, gapRadius * 0.55f, gapColor.WithAlpha(0.55f));
         }
+    }
+
+    private static void DrawArrow(DrawingHandleWorld h, Vector2 start, Vector2 end, Color color)
+    {
+        h.DrawLine(start, end, color);
+
+        var delta = end - start;
+        var dist = delta.Length();
+        if (dist <= 0.01f)
+            return;
+
+        var dir = delta / dist;
+        var headLength = 0.12f;
+        var headWidth = 0.06f;
+        var basePoint = end - dir * headLength;
+        var perp = new Vector2(-dir.Y, dir.X) * headWidth;
+
+        h.DrawLine(end, basePoint + perp, color);
+        h.DrawLine(end, basePoint - perp, color);
     }
 }

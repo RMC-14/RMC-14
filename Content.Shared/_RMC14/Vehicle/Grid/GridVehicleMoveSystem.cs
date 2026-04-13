@@ -83,6 +83,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
 
     public static readonly List<(EntityUid grid, Vector2i tile)> DebugTestedTiles = new();
+    public static readonly List<DebugCollisionProbe> DebugCollisionProbes = new();
     public static readonly List<DebugCollision> DebugCollisions = new();
     private readonly Dictionary<EntityUid, TimeSpan> _lastMobCollision = new();
     private readonly Dictionary<EntityUid, bool> _hardState = new();
@@ -105,6 +106,18 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         float Distance,
         float Skin,
         float Clearance,
+        MapId Map);
+
+    public readonly record struct DebugCollisionProbe(
+        EntityUid Tested,
+        Box2 TestedAabb,
+        Box2 MovementAabb,
+        Box2Rotated FixtureBounds,
+        Box2Rotated MovementBounds,
+        Vector2 Position,
+        Angle Rotation,
+        bool Blocked,
+        bool ApplyEffects,
         MapId Map);
 
     public override void Initialize()
@@ -162,6 +175,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             ent.Comp.SyncedGrid = null;
             ent.Comp.CurrentSpeed = 0f;
+            ent.Comp.PushDirection = Vector2i.Zero;
             ent.Comp.IsCommittedToMove = false;
             ent.Comp.IsPushMove = false;
             ent.Comp.IsMoving = false;
@@ -183,7 +197,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         ent.Comp.Position = centerOnTile
             ? new Vector2(tile.X + 0.5f, tile.Y + 0.5f)
             : coords.Position;
+        ent.Comp.TargetPosition = ent.Comp.Position;
         ent.Comp.CurrentSpeed = 0f;
+        ent.Comp.PushDirection = Vector2i.Zero;
         ent.Comp.NextPushTime = TimeSpan.Zero;
         ent.Comp.NextTurnTime = TimeSpan.Zero;
         ent.Comp.InPlaceTurnBlockUntil = TimeSpan.Zero;
@@ -236,6 +252,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         base.Update(frameTime);
 
         DebugTestedTiles.Clear();
+        DebugCollisionProbes.Clear();
         DebugCollisions.Clear();
 
         var q = EntityQueryEnumerator<GridVehicleMoverComponent, VehicleComponent, TransformComponent>();

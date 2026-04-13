@@ -122,16 +122,16 @@ public static class GridVehicleMotionSimulator
         Vector2 position,
         Vector2i currentTile,
         Vector2i targetTile,
+        Vector2 targetPosition,
         float travelDistance)
     {
-        var targetCenter = new Vector2(targetTile.X + 0.5f, targetTile.Y + 0.5f);
-        var toTarget = targetCenter - position;
+        var toTarget = targetPosition - position;
         var distToTarget = toTarget.Length();
 
         if (distToTarget <= 0.0001f || travelDistance >= distToTarget)
         {
             return new AdvanceResult(
-                targetCenter,
+                targetPosition,
                 targetTile,
                 MathF.Max(0f, travelDistance - distToTarget),
                 true);

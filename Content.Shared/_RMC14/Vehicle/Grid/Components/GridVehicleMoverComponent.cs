@@ -21,7 +21,13 @@ public sealed partial class GridVehicleMoverComponent : Component
     public Vector2 Position;
 
     [AutoNetworkedField]
+    public Vector2 TargetPosition;
+
+    [AutoNetworkedField]
     public Vector2i CurrentDirection;
+
+    [AutoNetworkedField]
+    public Vector2i PushDirection;
 
     [AutoNetworkedField]
     public float CurrentSpeed;
@@ -45,6 +51,24 @@ public sealed partial class GridVehicleMoverComponent : Component
     public float FrontOffset = 0f;
 
     [DataField, AutoNetworkedField]
+    public float TileOffsetLimit = 1f;
+
+    [DataField, AutoNetworkedField]
+    public float TileOffsetStep = 0.05f;
+
+    [DataField, AutoNetworkedField]
+    public int TileOffsetLookahead = 3;
+
+    [DataField, AutoNetworkedField]
+    public float LaneCorrectionSpeed = 4f;
+
+    [DataField, AutoNetworkedField]
+    public float MovementProbeStep = 0.1f;
+
+    [DataField, AutoNetworkedField]
+    public float MovementCollisionInset = 0.05f;
+
+    [DataField, AutoNetworkedField]
     public float PushCooldown = 0f;
 
     [DataField, AutoNetworkedField]
@@ -55,6 +79,15 @@ public sealed partial class GridVehicleMoverComponent : Component
 
     [DataField, AutoNetworkedField]
     public float TurnInPlaceMaxSpeed = 0.35f;
+
+    [DataField, AutoNetworkedField]
+    public float TurnNudgeLimit = 0.45f;
+
+    [DataField, AutoNetworkedField]
+    public float TurnNudgeStep = 0.1f;
+
+    [DataField, AutoNetworkedField]
+    public float TurnCollisionGraceDistance = 1f;
 
     [AutoNetworkedField]
     public TimeSpan NextPushTime;

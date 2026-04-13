@@ -29,7 +29,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         EntityUid grid,
         Vector2 gridPos,
         Angle? overrideRotation,
-        float clearance)
+        float clearance,
+        bool applyEffects,
+        bool debug = true,
+        HashSet<EntityUid>? blockers = null)
     {
         if (!physicsQ.TryComp(uid, out var body) || !fixtureQ.TryComp(uid, out var fixtures))
             return true;
@@ -48,9 +51,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var world = coords.ToMap(EntityManager, transform);
 
         var tileIndices = map.TileIndicesFor(grid, gridComp, coords);
-        DebugTestedTiles.Add((grid, tileIndices));
+        if (debug)
+            DebugTestedTiles.Add((grid, tileIndices));
 
-        var rotation = overrideRotation ?? transform.GetWorldRotation(uid);
+        var rotation = GetCollisionWorldRotation(uid, grid, overrideRotation);
         var tx = new Transform(world.Position, rotation);
 
         var wheelDamage = _net.IsClient ? 0f : GetWheelCollisionDamage(uid, mover);
@@ -58,10 +62,19 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!TryGetFixtureAabb(fixtures, tx, out var aabb))
             return true;
 
+        var movementAabb = GetMovementAabb(aabb, mover);
         var hits = lookup.GetEntitiesIntersecting(world.MapId, aabb, LookupFlags.Dynamic | LookupFlags.Static);
         var playedCollisionSound = false;
         var blocked = false;
         var mobHits = new HashSet<EntityUid>();
+
+        void AddProbe(bool probeBlocked)
+        {
+            if (!debug)
+                return;
+
+            AddDebugCollisionProbe(uid, mover, fixtures, tx, aabb, movementAabb, world.MapId, probeBlocked, applyEffects);
+        }
 
         foreach (var other in hits)
         {
@@ -91,6 +104,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             var isXeno = HasComp<XenoComponent>(other);
             var collisionClass = ClassifyCollisionCandidate(other, otherXform, otherBody, hardCollidable, isMob, isBarricade, isFoldable, hasDoor, isXeno);
             var isUnpoweredDoor = hasDoor && IsDoorUnpowered(other);
+            var collisionAabb = GetCollisionAabb(collisionClass, aabb, movementAabb);
+
+            if (!HasCollisionOverlap(collisionAabb, otherAabb))
+                continue;
 
             if (collisionClass == VehicleCollisionClass.SoftMob && isXeno)
             {
@@ -98,17 +115,32 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
                 if (blocksXeno)
                 {
-                    PlayMobCollisionSound(uid, ref playedCollisionSound);
-                    ApplyWheelCollisionDamage(uid, mover, wheelDamage);
-                    DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
+                    if (applyEffects)
+                    {
+                        PlayMobCollisionSound(uid, ref playedCollisionSound);
+                        ApplyWheelCollisionDamage(uid, mover, wheelDamage);
+                    }
+
+                    blockers?.Add(other);
+                    if (debug)
+                        DebugCollisions.Add(new DebugCollision(uid, other, collisionAabb, otherAabb, 0f, 0f, clearance, world.MapId));
+
+                    AddProbe(true);
                     return false;
                 }
+
+                if (!applyEffects)
+                    continue;
 
                 PlayMobCollisionSound(uid, ref playedCollisionSound);
                 if (!PushMobOutOfVehicle(uid, other, aabb, otherAabb))
                 {
                     ApplyWheelCollisionDamage(uid, mover, wheelDamage);
-                    DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
+                    blockers?.Add(other);
+                    if (debug)
+                        DebugCollisions.Add(new DebugCollision(uid, other, collisionAabb, otherAabb, 0f, 0f, clearance, world.MapId));
+
+                    AddProbe(true);
                     return false;
                 }
 
@@ -118,7 +150,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (collisionClass == VehicleCollisionClass.SoftMob && isMob && _standing.IsDown(other))
                 continue;
 
-            if (hasDoor && !_net.IsClient)
+            if (applyEffects && hasDoor && !_net.IsClient)
             {
                 if (!isUnpoweredDoor)
                 {
@@ -133,6 +165,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             if (collisionClass == VehicleCollisionClass.Breakable || isUnpoweredDoor)
             {
+                if (!applyEffects)
+                    continue;
+
                 if (TrySmash(other, uid, ref playedCollisionSound) || TryBreakDoor(other, uid, ref playedCollisionSound))
                     continue;
                 continue;
@@ -140,22 +175,32 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             if (collisionClass == VehicleCollisionClass.Hard)
             {
-                PlayCollisionSound(uid, ref playedCollisionSound);
-                ApplyWheelCollisionDamage(uid, mover, wheelDamage);
-                DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
+                if (applyEffects)
+                {
+                    PlayCollisionSound(uid, ref playedCollisionSound);
+                    ApplyWheelCollisionDamage(uid, mover, wheelDamage);
+                }
+
+                blockers?.Add(other);
+                if (debug)
+                    DebugCollisions.Add(new DebugCollision(uid, other, collisionAabb, otherAabb, 0f, 0f, clearance, world.MapId));
+
                 blocked = true;
                 break;
             }
 
-            if (_net.IsClient && isMob && !isXeno && mob != null && ShouldPredictVehicleInteractions(uid))
+            if (applyEffects && _net.IsClient && isMob && !isXeno && mob != null && ShouldPredictVehicleInteractions(uid))
                 PredictRunover(uid, other, mob);
 
-            if (!_net.IsClient && isMob && mob != null)
+            if (applyEffects && !_net.IsClient && isMob && mob != null)
                 mobHits.Add(other);
         }
 
         if (blocked)
+        {
+            AddProbe(true);
             return false;
+        }
 
         if (!_net.IsClient)
         {
@@ -168,7 +213,75 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             }
         }
 
+        AddProbe(false);
         return true;
+    }
+
+    private static void AddDebugCollisionProbe(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        FixturesComponent fixtures,
+        Transform transformData,
+        Box2 aabb,
+        Box2 movementAabb,
+        MapId map,
+        bool blocked,
+        bool applyEffects)
+    {
+        if (!TryGetFixtureLocalAabb(fixtures, out var localAabb))
+            return;
+
+        var localMovementAabb = GetMovementAabb(localAabb, mover);
+        var rotation = new Angle(transformData.Quaternion2D.Angle);
+        var fixtureBounds = new Box2Rotated(localAabb.Translated(transformData.Position), rotation, transformData.Position);
+        var movementBounds = new Box2Rotated(localMovementAabb.Translated(transformData.Position), rotation, transformData.Position);
+
+        DebugCollisionProbes.Add(new DebugCollisionProbe(
+            uid,
+            aabb,
+            movementAabb,
+            fixtureBounds,
+            movementBounds,
+            transformData.Position,
+            rotation,
+            blocked,
+            applyEffects,
+            map));
+    }
+
+    private static Box2 GetCollisionAabb(VehicleCollisionClass collisionClass, Box2 fullAabb, Box2 movementAabb)
+    {
+        return collisionClass == VehicleCollisionClass.SoftMob
+            ? fullAabb
+            : movementAabb;
+    }
+
+    private static bool HasCollisionOverlap(Box2 vehicleAabb, Box2 otherAabb)
+    {
+        var intersection = vehicleAabb.Intersect(otherAabb);
+        return intersection.Width > 0f && intersection.Height > 0f;
+    }
+
+    private static Box2 GetMovementAabb(Box2 aabb, GridVehicleMoverComponent mover)
+    {
+        var inset = Math.Clamp(mover.MovementCollisionInset, 0f, 0.45f);
+        if (inset <= 0f)
+            return aabb;
+
+        var adjusted = aabb.Enlarged(-inset);
+        return adjusted.IsValid() ? adjusted : aabb;
+    }
+
+    private Angle GetCollisionWorldRotation(EntityUid uid, EntityUid grid, Angle? overrideRotation)
+    {
+        if (overrideRotation is not { } localRotation)
+            return transform.GetWorldRotation(uid);
+
+        var xform = Transform(uid);
+        if (xform.ParentUid.IsValid())
+            return transform.GetWorldRotation(xform.ParentUid) + localRotation;
+
+        return transform.GetWorldRotation(grid) + localRotation;
     }
 
     private bool IsDoorUnpowered(EntityUid target)
@@ -243,6 +356,36 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         var first = true;
         aabb = default;
+
+        foreach (var fixture in fixtures.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            for (var i = 0; i < fixture.Shape.ChildCount; i++)
+            {
+                var child = fixture.Shape.ComputeAABB(transformData, i);
+
+                if (first)
+                {
+                    aabb = child;
+                    first = false;
+                }
+                else
+                {
+                    aabb = aabb.Union(child);
+                }
+            }
+        }
+
+        return !first;
+    }
+
+    private static bool TryGetFixtureLocalAabb(FixturesComponent fixtures, out Box2 aabb)
+    {
+        var first = true;
+        aabb = default;
+        var transformData = Robust.Shared.Physics.Transform.Empty;
 
         foreach (var fixture in fixtures.Fixtures.Values)
         {
