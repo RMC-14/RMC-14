@@ -417,7 +417,7 @@
     - RMCPacketGrenadeIncendiaryFilled
     - RMCPacketGrenadeSmokeFilled
     # TODO Foam grenade packet
-    # TODO phosphorus grenades packet
+    - RMCPacketGrenadeWhitePhosphorusCompound
     # TODO phosphorus grenades packet SPP
     - CMPacketGrenadeFragOldFilled
     - RMCPacketGrenadeM74AGMFFilled
@@ -440,6 +440,7 @@
     prototypes:
     - RMCRocket84mm
     - RMCRocket84mmAntiArmor
+    - RMCRocket84mmWhitePhosphorus
 
 - type: entity
   parent: RMCSpawnerRandomRockets

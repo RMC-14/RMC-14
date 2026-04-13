@@ -129,6 +129,7 @@
     buildDelay: 1
     canBuild:
     - WallXenoResinThick
+    - WallXenoResinReflective
     - WallXenoMembraneThick
     - DoorXenoResinThick
     - XenoStickyResin
@@ -240,12 +241,6 @@
     - ActionXenoDevolve
     - ActionXenoZoom
   - type: DesignerStrain
-    greaterResinSurgePlasmaCost: 250
-    greaterResinSurgeCooldown: 30
-    greaterResinSurgeRange: 7
-    greaterResinSurgeBuildTime: 1
-    greaterResinSurgeAnimationEffect: RMCEffectWallXenoResinThick
-    greaterResinSurgeWallPrototype: WallXenoResinThickSurge
   - type: DesignerCrosshair
     optimizedWallRsi:
       sprite: _RMC14/Structures/designer_nodes.rsi
