@@ -97,6 +97,8 @@
   id: RMCShutterAlmayer
   components:
   - type: RMCVehicleSmashable
+    smashSound:
+      path: /Audio/_RMC14/Effects/metal_crash.ogg
   - type: RMCPodDoor
   - type: Clickable
   - type: InteractionOutline

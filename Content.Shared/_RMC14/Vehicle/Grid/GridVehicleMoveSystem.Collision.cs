@@ -163,13 +163,33 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (collisionClass == VehicleCollisionClass.Ignore)
                 continue;
 
-            if (collisionClass == VehicleCollisionClass.Breakable || isUnpoweredDoor)
+            if (collisionClass == VehicleCollisionClass.Breakable)
             {
+                if (TryComp(other, out RMCVehicleSmashableComponent? smashable) &&
+                    smashable.RequiresDoorUnpowered &&
+                    hasDoor &&
+                    !isUnpoweredDoor)
+                {
+                    if (applyEffects)
+                    {
+                        PlayCollisionSound(uid, ref playedCollisionSound);
+                        ApplyWheelCollisionDamage(uid, mover, wheelDamage);
+                    }
+
+                    blockers?.Add(other);
+                    if (debug)
+                        DebugCollisions.Add(new DebugCollision(uid, other, collisionAabb, otherAabb, 0f, 0f, clearance, world.MapId));
+
+                    blocked = true;
+                    break;
+                }
+
                 if (!applyEffects)
                     continue;
 
-                if (TrySmash(other, uid, ref playedCollisionSound) || TryBreakDoor(other, uid, ref playedCollisionSound))
+                if (TrySmash(other, uid, ref playedCollisionSound))
                     continue;
+
                 continue;
             }
 
@@ -295,27 +315,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return false;
     }
 
-    private bool TryBreakDoor(EntityUid target, EntityUid vehicle, ref bool playedCollisionSound)
-    {
-        if (!HasComp<DoorComponent>(target))
-            return false;
-
-        PlayCollisionSound(vehicle, ref playedCollisionSound);
-
-        if (_net.IsClient)
-            return true;
-
-        var damage = new DamageSpecifier
-        {
-            DamageDict =
-            {
-                [CollisionDamageType] = UnpoweredDoorCollisionDamage,
-            },
-        };
-
-        return _damageable.TryChangeDamage(target, damage, true, origin: vehicle, tool: vehicle) != null;
-    }
-
     private void ApplyWheelCollisionDamage(EntityUid vehicle, GridVehicleMoverComponent mover, float damage)
     {
         if (_net.IsClient || damage <= 0f)
@@ -425,7 +424,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return true;
 
         if (smashable.SmashSound != null)
-            _audio.PlayPvs(smashable.SmashSound, vehicle);
+            _audio.PlayPvs(smashable.SmashSound, Transform(target).Coordinates);
 
         if (smashable.DeleteOnHit && !TerminatingOrDeleted(target))
             SmashTarget(target, vehicle, smashable);

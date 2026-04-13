@@ -362,8 +362,16 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         blocked = false;
         var forward = new Vector2(moveDir.X, moveDir.Y);
-        var laneTarget = mover.Position + forward * travel;
+        var directTarget = mover.Position + forward * travel;
         var moved = false;
+
+        if (CanMoveContinuous(uid, mover, grid, directTarget, rotation, debugProbes: true))
+        {
+            AddDebugMovementDecision(uid, grid, mover.Position, directTarget, forward, DebugMovementDecisionKind.DirectClear, true);
+            return TryMoveContinuous(uid, mover, grid, directTarget, rotation, out blocked);
+        }
+
+        AddDebugMovementDecision(uid, grid, mover.Position, directTarget, forward, DebugMovementDecisionKind.DirectBlocked, false);
 
         if (TryGetLaneCorrection(
                 uid,
@@ -372,7 +380,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 gridComp,
                 moveDir,
                 rotation,
-                laneTarget,
+                directTarget,
                 frameTime,
                 out var correction))
         {
@@ -382,12 +390,77 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 GetLateralCoordinate(mover.Position, moveDir) + correction);
 
             if ((lateralTarget - mover.Position).LengthSquared() > MinMoveDistance * MinMoveDistance)
+            {
+                var lateralStart = mover.Position;
+                var lateralDirection = lateralTarget - lateralStart;
                 moved = TryMoveContinuous(uid, mover, grid, lateralTarget, rotation, out _, applyBlockEffects: false, debugProbes: false);
+                AddDebugMovementDecision(
+                    uid,
+                    grid,
+                    lateralStart,
+                    lateralTarget,
+                    lateralDirection,
+                    moved ? DebugMovementDecisionKind.LaneCorrection : DebugMovementDecisionKind.LaneCorrectionFailed,
+                    moved);
+            }
         }
 
+        var forwardStart = mover.Position;
         var forwardTarget = mover.Position + forward * travel;
         var forwardMoved = TryMoveContinuous(uid, mover, grid, forwardTarget, rotation, out blocked);
+        AddDebugMovementDecision(
+            uid,
+            grid,
+            forwardStart,
+            forwardTarget,
+            forward,
+            blocked ? DebugMovementDecisionKind.ForwardBlocked : DebugMovementDecisionKind.ForwardAfterCorrection,
+            forwardMoved && !blocked);
         return moved || forwardMoved;
+    }
+
+    private static void AddDebugMovementDecision(
+        EntityUid uid,
+        EntityUid grid,
+        Vector2 start,
+        Vector2 end,
+        Vector2 moveDirection,
+        DebugMovementDecisionKind kind,
+        bool success)
+    {
+        if (moveDirection.LengthSquared() > 0.0001f)
+            moveDirection = Vector2.Normalize(moveDirection);
+        else
+            moveDirection = Vector2.Zero;
+
+        DebugMovementDecisions.Add(new DebugMovementDecision(uid, grid, start, end, moveDirection, kind, success));
+    }
+
+    private bool CanMoveContinuous(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        Vector2 target,
+        Angle? rotation,
+        bool debugProbes)
+    {
+        var start = mover.Position;
+        var delta = target - start;
+        var distance = delta.Length();
+        if (distance <= MinMoveDistance)
+            return true;
+
+        var probeStep = Math.Clamp(mover.MovementProbeStep, 0.02f, 0.5f);
+        var steps = Math.Max(1, (int) MathF.Ceiling(distance / probeStep));
+
+        for (var i = 1; i <= steps; i++)
+        {
+            var candidate = start + delta * (i / (float) steps);
+            if (!CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: false, debug: debugProbes))
+                return false;
+        }
+
+        return true;
     }
 
     private bool TryGetLaneCorrection(

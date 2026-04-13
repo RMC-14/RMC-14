@@ -54,7 +54,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private const float Clearance = PhysicsConstants.PolygonRadius * 0.75f;
     private const double MobCollisionDamage = 8;
-    private const double UnpoweredDoorCollisionDamage = 1000;
     private static readonly TimeSpan MobCollisionKnockdown = TimeSpan.FromSeconds(1.5);
     private static readonly TimeSpan MobCollisionCooldown = TimeSpan.FromSeconds(0.75);
     private static readonly ProtoId<DamageTypePrototype> CollisionDamageType = "Blunt";
@@ -85,6 +84,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     public static readonly List<(EntityUid grid, Vector2i tile)> DebugTestedTiles = new();
     public static readonly List<DebugCollisionProbe> DebugCollisionProbes = new();
     public static readonly List<DebugCollision> DebugCollisions = new();
+    public static readonly List<DebugMovementDecision> DebugMovementDecisions = new();
     private readonly Dictionary<EntityUid, TimeSpan> _lastMobCollision = new();
     private readonly Dictionary<EntityUid, bool> _hardState = new();
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
@@ -96,6 +96,16 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         SoftMob = 1,
         Breakable = 2,
         Hard = 3,
+    }
+
+    public enum DebugMovementDecisionKind : byte
+    {
+        DirectClear = 0,
+        DirectBlocked = 1,
+        LaneCorrection = 2,
+        LaneCorrectionFailed = 3,
+        ForwardAfterCorrection = 4,
+        ForwardBlocked = 5,
     }
 
     public readonly record struct DebugCollision(
@@ -119,6 +129,15 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         bool Blocked,
         bool ApplyEffects,
         MapId Map);
+
+    public readonly record struct DebugMovementDecision(
+        EntityUid Vehicle,
+        EntityUid Grid,
+        Vector2 Start,
+        Vector2 End,
+        Vector2 MoveDirection,
+        DebugMovementDecisionKind Kind,
+        bool Success);
 
     public override void Initialize()
     {
@@ -254,6 +273,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         DebugTestedTiles.Clear();
         DebugCollisionProbes.Clear();
         DebugCollisions.Clear();
+        DebugMovementDecisions.Clear();
 
         var q = EntityQueryEnumerator<GridVehicleMoverComponent, VehicleComponent, TransformComponent>();
 

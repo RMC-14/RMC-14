@@ -17,8 +17,11 @@ public sealed partial class RMCVehicleSmashableComponent : Component
     public float SlowdownMultiplier = 0.5f;
 
     [DataField]
-    public float SlowdownDuration = 0.5f;
+    public float SlowdownDuration = 0f;
 
     [DataField]
     public SoundSpecifier? SmashSound;
+
+    [DataField]
+    public bool RequiresDoorUnpowered;
 }

@@ -6,114 +6,113 @@ using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Timing;
+
+using SharedMover = Content.Shared.Vehicle.GridVehicleMoverSystem;
 
 namespace Content.Client.Vehicle;
 
 public sealed class GridVehicleMoverOverlay : Overlay
 {
+    private const float MovementDecisionFadeSeconds = 2.5f;
+
+    private static readonly Color[] EntryColors =
+    {
+        Color.Red,
+        Color.Green,
+        Color.Blue,
+        Color.Yellow,
+        Color.Magenta,
+        Color.Cyan,
+        Color.Orange,
+    };
+
+    private static readonly Color ClearProbeFill = new(0.19f, 0.95f, 0.55f, 0.08f);
+    private static readonly Color ClearProbeOutline = new(0.18f, 1f, 0.55f, 0.74f);
+    private static readonly Color AppliedProbeFill = new(0.22f, 0.78f, 1f, 0.08f);
+    private static readonly Color AppliedProbeOutline = new(0.25f, 0.84f, 1f, 0.72f);
+    private static readonly Color BlockedProbeFill = new(1f, 0.16f, 0.22f, 0.18f);
+    private static readonly Color BlockedProbeOutline = new(1f, 0.16f, 0.22f, 0.92f);
+
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
     public bool DebugEnabled { get; set; }
     public bool CollisionsEnabled { get; set; } = true;
+    public bool MovementEnabled { get; set; } = true;
 
     private readonly IEntityManager _ents;
+    private readonly IGameTiming _timing;
     private readonly SharedTransformSystem _transform;
     private readonly EntityLookupSystem _lookup;
-    private readonly EntityQuery<MapGridComponent> _gridQ;
-    private readonly EntityQuery<FixturesComponent> _fixturesQ;
-    private readonly EntityQuery<PhysicsComponent> _physicsQ;
-    private readonly EntityQuery<VehicleEnterComponent> _enterQ;
-    private readonly EntityQuery<VehicleExitComponent> _exitQ;
+    private readonly EntityQuery<MapGridComponent> _gridQuery;
+    private readonly EntityQuery<FixturesComponent> _fixturesQuery;
+    private readonly EntityQuery<PhysicsComponent> _physicsQuery;
+
     private readonly Dictionary<EntityUid, Vector2> _lastProbePositions = new();
-    private readonly Color[] _colors =
-    {
-        Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Magenta, Color.Cyan, Color.Orange
-    };
+    private readonly List<FadingMovementDecision> _movementDecisions = new();
 
     public GridVehicleMoverOverlay(IEntityManager ents)
     {
         _ents = ents;
+        _timing = IoCManager.Resolve<IGameTiming>();
         _transform = ents.System<SharedTransformSystem>();
         _lookup = ents.System<EntityLookupSystem>();
-        _gridQ = ents.GetEntityQuery<MapGridComponent>();
-        _fixturesQ = ents.GetEntityQuery<FixturesComponent>();
-        _physicsQ = ents.GetEntityQuery<PhysicsComponent>();
-        _enterQ = ents.GetEntityQuery<VehicleEnterComponent>();
-        _exitQ = ents.GetEntityQuery<VehicleExitComponent>();
+        _gridQuery = ents.GetEntityQuery<MapGridComponent>();
+        _fixturesQuery = ents.GetEntityQuery<FixturesComponent>();
+        _physicsQuery = ents.GetEntityQuery<PhysicsComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
+        var handle = args.WorldHandle;
+
         if (DebugEnabled)
-        {
-            var handle = args.WorldHandle;
-            var q = _ents.EntityQueryEnumerator<GridVehicleMoverComponent, TransformComponent>();
+            DrawVehicleDebug(handle, args.MapId);
 
-            while (q.MoveNext(out var uid, out var mover, out var xform))
-            {
-                if (xform.GridUid is not { } grid || !_gridQ.TryComp(grid, out _))
-                    continue;
+        if (CollisionsEnabled)
+            DrawCollisionDebug(handle, args.MapId);
 
-                DrawMovement(handle, grid, mover);
-                DrawFacing(handle, uid, mover);
-                DrawFixtures(handle, uid);
-                DrawPhysics(handle, uid);
-            }
+        if (MovementEnabled)
+            DrawMovementDecisions(handle, args.MapId);
 
-            DrawEntryAndExitPoints(handle, args.MapId);
-
-            foreach (var entry in Content.Shared.Vehicle.GridVehicleMoverSystem.DebugTestedTiles)
-            {
-                var grid = entry.grid;
-                var tile = entry.tile;
-
-                if (!_gridQ.TryComp(grid, out _))
-                    continue;
-
-                var center = _transform.ToMapCoordinates(new EntityCoordinates(grid, new Vector2(tile.X + 0.5f, tile.Y + 0.5f))).Position;
-                var min = center - new Vector2(0.5f, 0.5f);
-                var max = center + new Vector2(0.5f, 0.5f);
-                var box = new Box2(min, max);
-
-                handle.DrawRect(box, Color.Black.WithAlpha(0.4f), false);
-            }
-
-            if (CollisionsEnabled)
-            {
-                DrawCollisionProbes(handle, args.MapId);
-                DrawCollisions(handle, args.MapId);
-            }
-        }
-        else if (CollisionsEnabled)
-        {
-            DrawCollisionProbes(args.WorldHandle, args.MapId);
-            DrawCollisions(args.WorldHandle, args.MapId);
-        }
-
-        Content.Shared.Vehicle.GridVehicleMoverSystem.DebugTestedTiles.Clear();
-        GridVehicleMoverSystem.DebugCollisionPositions.Clear();
+        ClearFrameDebug();
     }
 
-    private void DrawMovement(DrawingHandleWorld h, EntityUid grid, GridVehicleMoverComponent mover)
+    private void DrawVehicleDebug(DrawingHandleWorld handle, MapId mapId)
     {
-        var start = _transform.ToMapCoordinates(new EntityCoordinates(grid, mover.Position)).Position;
-        var target = _transform.ToMapCoordinates(new EntityCoordinates(grid, new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f))).Position;
+        var query = _ents.EntityQueryEnumerator<GridVehicleMoverComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var mover, out var xform))
+        {
+            if (xform.GridUid is not { } grid || !_gridQuery.HasComp(grid))
+                continue;
 
-        h.DrawLine(start, target, Color.Lime);
+            DrawMovementTarget(handle, grid, mover);
+            DrawFacing(handle, uid, mover);
+            DrawFixtures(handle, uid);
+            DrawPhysics(handle, uid);
+        }
 
-        var color = mover.IsCommittedToMove ? Color.White : Color.Red;
-
-        h.DrawCircle(start, 0.15f, color);
-        h.DrawCircle(target, 0.15f, Color.Yellow);
+        DrawEntryAndExitPoints(handle, mapId);
+        DrawTestedTiles(handle);
     }
 
-    private void DrawFacing(DrawingHandleWorld h, EntityUid uid, GridVehicleMoverComponent mover)
+    private void DrawMovementTarget(DrawingHandleWorld handle, EntityUid grid, GridVehicleMoverComponent mover)
+    {
+        var start = ToMapPosition(grid, mover.Position);
+        var target = ToMapPosition(grid, new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f));
+        var startColor = mover.IsCommittedToMove ? Color.White : Color.Red;
+
+        handle.DrawLine(start, target, Color.Lime);
+        handle.DrawCircle(start, 0.15f, startColor);
+        handle.DrawCircle(target, 0.15f, Color.Yellow);
+    }
+
+    private void DrawFacing(DrawingHandleWorld handle, EntityUid uid, GridVehicleMoverComponent mover)
     {
         if (mover.CurrentDirection == Vector2i.Zero)
             return;
@@ -122,231 +121,364 @@ public sealed class GridVehicleMoverOverlay : Overlay
         if (xform.GridUid is not { } grid)
             return;
 
-        var pos = _transform.ToMapCoordinates(new EntityCoordinates(grid, mover.Position)).Position;
-        var dir = Vector2.Normalize(new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y));
-
-        h.DrawLine(pos, pos + dir * 0.7f, Color.Orange);
+        var position = ToMapPosition(grid, mover.Position);
+        var direction = Vector2.Normalize(new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y));
+        handle.DrawLine(position, position + direction * 0.7f, Color.Orange);
     }
 
-    private void DrawFixtures(DrawingHandleWorld h, EntityUid uid)
+    private void DrawFixtures(DrawingHandleWorld handle, EntityUid uid)
     {
-        if (!_physicsQ.TryComp(uid, out var body))
-            return;
-        if (!_fixturesQ.TryComp(uid, out var fixtures))
+        if (!_physicsQuery.HasComp(uid) || !_fixturesQuery.TryComp(uid, out var fixtures))
             return;
 
         var index = 0;
-
-        foreach (var f in fixtures.Fixtures.Values)
+        foreach (var fixture in fixtures.Fixtures.Values)
         {
-            for (var i = 0; i < f.ProxyCount; i++)
-            {
-                var proxy = f.Proxies[i];
-                var box = proxy.AABB;
-                var col = _colors[index % _colors.Length];
-                h.DrawRect(box, col, false);
-            }
+            var color = EntryColors[index % EntryColors.Length];
+            for (var i = 0; i < fixture.ProxyCount; i++)
+                handle.DrawRect(fixture.Proxies[i].AABB, color, false);
+
             index++;
         }
     }
 
-    private void DrawPhysics(DrawingHandleWorld h, EntityUid uid)
+    private void DrawPhysics(DrawingHandleWorld handle, EntityUid uid)
     {
         var aabb = _lookup.GetWorldAABB(uid);
-        h.DrawRect(aabb, Color.Magenta, false);
+        var position = _transform.GetWorldPosition(uid);
 
-        var pos = _transform.GetWorldPosition(uid);
-        h.DrawCircle(pos, 0.12f, Color.Magenta);
+        handle.DrawRect(aabb, Color.Magenta, false);
+        handle.DrawCircle(position, 0.12f, Color.Magenta);
     }
 
-    private void DrawEntryAndExitPoints(DrawingHandleWorld h, MapId mapId)
+    private void DrawEntryAndExitPoints(DrawingHandleWorld handle, MapId mapId)
     {
-        EntityUid? interiorGrid = null;
-        var gridEnum = _ents.EntityQueryEnumerator<MapGridComponent, TransformComponent>();
-        
-        while (gridEnum.MoveNext(out var gridUid, out _, out var gridXform))
+        var interiorGrid = FindFirstGrid(mapId);
+        DrawEntryPoints(handle, mapId, interiorGrid);
+        DrawExitPoints(handle, mapId);
+    }
+
+    private EntityUid? FindFirstGrid(MapId mapId)
+    {
+        var query = _ents.EntityQueryEnumerator<MapGridComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var xform))
         {
-            if (gridXform.MapID != mapId)
-                continue;
-            interiorGrid = gridUid;
-            break;
+            if (xform.MapID == mapId)
+                return uid;
         }
 
-        var enterEnum = _ents.EntityQueryEnumerator<VehicleEnterComponent, TransformComponent>();
-        while (enterEnum.MoveNext(out var uid, out var enter, out var xform))
+        return null;
+    }
+
+    private void DrawEntryPoints(DrawingHandleWorld handle, MapId mapId, EntityUid? interiorGrid)
+    {
+        var query = _ents.EntityQueryEnumerator<VehicleEnterComponent, TransformComponent>();
+        while (query.MoveNext(out _, out var enter, out var xform))
         {
             if (xform.MapID != mapId)
                 continue;
 
-            var basePos = _transform.GetWorldPosition(xform);
-            var rot = xform.LocalRotation;
+            var basePosition = _transform.GetWorldPosition(xform);
+            var rotation = xform.LocalRotation;
 
             for (var i = 0; i < enter.EntryPoints.Count; i++)
             {
                 var point = enter.EntryPoints[i];
                 var color = GetEntryColor(i);
-                var world = basePos + rot.RotateVec(point.Offset);
-                var radius = Math.Max(0.05f, point.Radius);
-
-                h.DrawCircle(world, radius, color.WithAlpha(0.22f), true);
-                h.DrawCircle(world, radius, color.WithAlpha(0.85f), false);
+                var world = basePosition + rotation.RotateVec(point.Offset);
+                DrawPoint(handle, world, Math.Max(0.05f, point.Radius), color);
 
                 if (interiorGrid is { } grid && point.InteriorCoords is { } interior)
-                {
-                    var target = _transform.ToMapCoordinates(new EntityCoordinates(grid, interior)).Position;
-                    h.DrawCircle(target, 0.15f, color.WithAlpha(0.22f), true);
-                    h.DrawCircle(target, 0.15f, color.WithAlpha(0.85f), false);
-                }
-
+                    DrawPoint(handle, ToMapPosition(grid, interior), 0.15f, color);
             }
         }
+    }
 
-        var exitEnum = _ents.EntityQueryEnumerator<VehicleExitComponent, TransformComponent>();
-        while (exitEnum.MoveNext(out _, out var exit, out var xform))
+    private void DrawExitPoints(DrawingHandleWorld handle, MapId mapId)
+    {
+        var query = _ents.EntityQueryEnumerator<VehicleExitComponent, TransformComponent>();
+        while (query.MoveNext(out _, out var exit, out var xform))
         {
             if (xform.MapID != mapId)
                 continue;
 
-            var pos = _transform.GetWorldPosition(xform);
-            var color = GetEntryColor(exit.EntryIndex);
-
-            h.DrawCircle(pos, 0.12f, color.WithAlpha(0.2f), true);
-            h.DrawCircle(pos, 0.12f, color.WithAlpha(0.9f), false);
-
+            DrawPoint(handle, _transform.GetWorldPosition(xform), 0.12f, GetEntryColor(exit.EntryIndex));
         }
     }
 
-    private Color GetEntryColor(int entryIndex)
+    private static void DrawPoint(DrawingHandleWorld handle, Vector2 position, float radius, Color color)
     {
-        var index = entryIndex;
-        if (index < 0)
-            index = Math.Abs(index);
-        index %= _colors.Length;
-        return _colors[index];
+        handle.DrawCircle(position, radius, color.WithAlpha(0.22f), true);
+        handle.DrawCircle(position, radius, color.WithAlpha(0.85f), false);
     }
 
-    private void DrawCollisions(DrawingHandleWorld h, MapId mapId)
+    private void DrawTestedTiles(DrawingHandleWorld handle)
     {
-        DrawBlockedCollisions(h, mapId);
+        foreach (var (grid, tile) in SharedMover.DebugTestedTiles)
+        {
+            if (!_gridQuery.HasComp(grid))
+                continue;
+
+            var center = ToMapPosition(grid, new Vector2(tile.X + 0.5f, tile.Y + 0.5f));
+            handle.DrawRect(Box2.UnitCentered.Translated(center), Color.Black.WithAlpha(0.4f), false);
+        }
     }
 
-    private void DrawCollisionProbes(DrawingHandleWorld h, MapId mapId)
+    private void DrawCollisionDebug(DrawingHandleWorld handle, MapId mapId)
+    {
+        DrawCollisionProbes(handle, mapId);
+        DrawBlockedCollisions(handle, mapId);
+    }
+
+    private void DrawCollisionProbes(DrawingHandleWorld handle, MapId mapId)
     {
         _lastProbePositions.Clear();
 
-        foreach (var probe in Content.Shared.Vehicle.GridVehicleMoverSystem.DebugCollisionProbes)
+        foreach (var probe in SharedMover.DebugCollisionProbes)
         {
             if (probe.Map != mapId)
                 continue;
 
-            var clearFill = probe.ApplyEffects
-                ? new Color(0.22f, 0.78f, 1f, 0.08f)
-                : new Color(0.19f, 0.95f, 0.55f, 0.08f);
-            var clearOutline = probe.ApplyEffects
-                ? new Color(0.25f, 0.84f, 1f, 0.72f)
-                : new Color(0.18f, 1f, 0.55f, 0.74f);
-            var blockedFill = new Color(1f, 0.16f, 0.22f, 0.18f);
-            var blockedOutline = new Color(1f, 0.16f, 0.22f, 0.92f);
-            var fill = probe.Blocked ? blockedFill : clearFill;
-            var outline = probe.Blocked ? blockedOutline : clearOutline;
-
-            if (_lastProbePositions.TryGetValue(probe.Tested, out var last))
-                h.DrawLine(last, probe.Position, new Color(0.55f, 0.9f, 1f, 0.38f));
-            _lastProbePositions[probe.Tested] = probe.Position;
-
-            // axis-aligned boxes are what the movement blocker test actually uses.
-            h.DrawRect(probe.MovementAabb, fill, true);
-            h.DrawRect(probe.MovementAabb, outline, false);
-
-            // rotated boxes show the sampled vehicle pose, so bad orientation is obvious.
-            h.DrawRect(probe.FixtureBounds, new Color(0.45f, 0.92f, 1f, 0.72f), false);
-            h.DrawRect(probe.MovementBounds, new Color(0.95f, 0.95f, 1f, 0.45f), false);
-
-            h.DrawRect(probe.TestedAabb, new Color(0.45f, 0.92f, 1f, 0.18f), false);
-
-            var facing = probe.Rotation.RotateVec(Vector2.UnitX);
-            var arrowColor = probe.Blocked
-                ? new Color(1f, 0.24f, 0.26f, 0.95f)
-                : new Color(0.22f, 1f, 0.58f, 0.95f);
-
-            h.DrawCircle(probe.Position, probe.Blocked ? 0.11f : 0.07f, arrowColor);
-            DrawArrow(h, probe.Position, probe.Position + facing * 0.85f, arrowColor);
+            DrawProbePath(handle, probe);
+            DrawProbeBounds(handle, probe);
+            DrawProbeFacing(handle, probe);
         }
     }
 
-    private static void DrawBlockedCollisions(DrawingHandleWorld h, MapId mapId)
+    private void DrawProbePath(DrawingHandleWorld handle, SharedMover.DebugCollisionProbe probe)
     {
-        foreach (var hit in Content.Shared.Vehicle.GridVehicleMoverSystem.DebugCollisions)
+        if (_lastProbePositions.TryGetValue(probe.Tested, out var last))
+            handle.DrawLine(last, probe.Position, new Color(0.55f, 0.9f, 1f, 0.38f));
+
+        _lastProbePositions[probe.Tested] = probe.Position;
+    }
+
+    private static void DrawProbeBounds(DrawingHandleWorld handle, SharedMover.DebugCollisionProbe probe)
+    {
+        var fill = probe.Blocked
+            ? BlockedProbeFill
+            : probe.ApplyEffects ? AppliedProbeFill : ClearProbeFill;
+
+        var outline = probe.Blocked
+            ? BlockedProbeOutline
+            : probe.ApplyEffects ? AppliedProbeOutline : ClearProbeOutline;
+
+        // movement aabb is the actual blocker test; rotated bounds show sampled vehicle pose.
+        handle.DrawRect(probe.MovementAabb, fill, true);
+        handle.DrawRect(probe.MovementAabb, outline, false);
+        handle.DrawRect(probe.FixtureBounds, new Color(0.45f, 0.92f, 1f, 0.72f), false);
+        handle.DrawRect(probe.MovementBounds, new Color(0.95f, 0.95f, 1f, 0.45f), false);
+        handle.DrawRect(probe.TestedAabb, new Color(0.45f, 0.92f, 1f, 0.18f), false);
+    }
+
+    private static void DrawProbeFacing(DrawingHandleWorld handle, SharedMover.DebugCollisionProbe probe)
+    {
+        var color = probe.Blocked
+            ? new Color(1f, 0.24f, 0.26f, 0.95f)
+            : new Color(0.22f, 1f, 0.58f, 0.95f);
+
+        var facing = probe.Rotation.RotateVec(Vector2.UnitX);
+        handle.DrawCircle(probe.Position, probe.Blocked ? 0.11f : 0.07f, color);
+        DrawArrow(handle, probe.Position, probe.Position + facing * 0.85f, color);
+    }
+
+    private void DrawMovementDecisions(DrawingHandleWorld handle, MapId mapId)
+    {
+        CaptureMovementDecisions();
+
+        var now = _timing.CurTime;
+        for (var i = _movementDecisions.Count - 1; i >= 0; i--)
+        {
+            var decision = _movementDecisions[i];
+            var age = (float) (now - decision.Created).TotalSeconds;
+            if (age >= MovementDecisionFadeSeconds)
+            {
+                _movementDecisions.RemoveAt(i);
+                continue;
+            }
+
+            if (decision.Map != mapId)
+                continue;
+
+            DrawMovementDecision(handle, decision, 1f - age / MovementDecisionFadeSeconds);
+        }
+    }
+
+    private void CaptureMovementDecisions()
+    {
+        var now = _timing.CurTime;
+        foreach (var decision in SharedMover.DebugMovementDecisions)
+        {
+            if (!_gridQuery.HasComp(decision.Grid))
+                continue;
+
+            var start = _transform.ToMapCoordinates(new EntityCoordinates(decision.Grid, decision.Start));
+            var end = _transform.ToMapCoordinates(new EntityCoordinates(decision.Grid, decision.End));
+            if (start.MapId != end.MapId)
+                continue;
+
+            _movementDecisions.Add(new FadingMovementDecision(
+                start.Position,
+                end.Position,
+                decision.Kind,
+                decision.Success,
+                start.MapId,
+                now));
+        }
+
+        SharedMover.DebugMovementDecisions.Clear();
+    }
+
+    private static void DrawMovementDecision(DrawingHandleWorld handle, FadingMovementDecision decision, float alpha)
+    {
+        var color = GetMovementDecisionColor(decision.Kind, decision.Success).WithAlpha(0.85f * alpha);
+        var fill = color.WithAlpha(0.16f * alpha);
+        var delta = decision.End - decision.Start;
+        var radius = decision.Success ? 0.08f : 0.12f;
+
+        if (delta.LengthSquared() > 0.0001f)
+            DrawArrow(handle, decision.Start, decision.End, color);
+        else
+            handle.DrawCircle(decision.Start, 0.1f, color);
+
+        handle.DrawCircle(decision.Start, radius * 0.75f, fill, true);
+        handle.DrawCircle(decision.Start, radius * 0.75f, color, false);
+        handle.DrawCircle(decision.End, radius, fill, true);
+        handle.DrawCircle(decision.End, radius, color, false);
+
+        if (IsBlockedDecision(decision.Kind))
+            DrawBlockedDecisionMarker(handle, decision.End, delta, color.WithAlpha(0.95f * alpha));
+    }
+
+    private static bool IsBlockedDecision(SharedMover.DebugMovementDecisionKind kind)
+    {
+        return kind is
+            SharedMover.DebugMovementDecisionKind.DirectBlocked or
+            SharedMover.DebugMovementDecisionKind.ForwardBlocked;
+    }
+
+    private static void DrawBlockedDecisionMarker(DrawingHandleWorld handle, Vector2 end, Vector2 delta, Color color)
+    {
+        var side = delta.LengthSquared() > 0.0001f
+            ? Vector2.Normalize(new Vector2(-delta.Y, delta.X)) * 0.14f
+            : new Vector2(0.14f, 0f);
+
+        handle.DrawLine(end - side, end + side, color);
+        handle.DrawLine(end - new Vector2(side.X, -side.Y), end + new Vector2(side.X, -side.Y), color);
+    }
+
+    private static Color GetMovementDecisionColor(SharedMover.DebugMovementDecisionKind kind, bool success)
+    {
+        return kind switch
+        {
+            SharedMover.DebugMovementDecisionKind.DirectClear => new Color(0.2f, 1f, 0.45f),
+            SharedMover.DebugMovementDecisionKind.DirectBlocked => new Color(1f, 0.2f, 0.24f),
+            SharedMover.DebugMovementDecisionKind.LaneCorrection => new Color(0.3f, 0.72f, 1f),
+            SharedMover.DebugMovementDecisionKind.LaneCorrectionFailed => new Color(1f, 0.62f, 0.18f),
+            SharedMover.DebugMovementDecisionKind.ForwardAfterCorrection => new Color(0.78f, 0.42f, 1f),
+            SharedMover.DebugMovementDecisionKind.ForwardBlocked => new Color(1f, 0.1f, 0.12f),
+            _ => success ? Color.Lime : Color.Red,
+        };
+    }
+
+    private static void DrawBlockedCollisions(DrawingHandleWorld handle, MapId mapId)
+    {
+        foreach (var hit in SharedMover.DebugCollisions)
         {
             if (hit.Map != mapId)
                 continue;
 
-            var testedFill = new Color(0.92f, 0.27f, 0.36f, 0.16f);
-            var testedOutline = new Color(0.97f, 0.38f, 0.46f, 0.85f);
-
-            h.DrawRect(hit.TestedAabb, testedFill, true);
-            h.DrawRect(hit.TestedAabb, testedOutline, false);
-
-            var blockerFill = new Color(1f, 0.8f, 0.32f, 0.14f);
-            var blockerOutline = new Color(1f, 0.82f, 0.22f, 0.9f);
-
-            h.DrawRect(hit.BlockerAabb, blockerFill, true);
-            h.DrawRect(hit.BlockerAabb, blockerOutline, false);
-
-            var testedCenter = hit.TestedAabb.Center;
-            var blockerCenter = hit.BlockerAabb.Center;
-
-            h.DrawCircle(testedCenter, 0.09f, testedOutline);
-            h.DrawCircle(blockerCenter, 0.09f, blockerOutline);
-
-            var overlap = hit.TestedAabb.Intersect(hit.BlockerAabb);
-            if (overlap.Width > 0f && overlap.Height > 0f)
-            {
-                var overlapFill = new Color(0.83f, 0.23f, 1f, 0.25f);
-                var overlapOutline = new Color(0.74f, 0.16f, 0.95f, 0.9f);
-                h.DrawRect(overlap, overlapFill, true);
-                h.DrawRect(overlap, overlapOutline, false);
-            }
-
-            var toBlocker = blockerCenter - testedCenter;
-            var dist = toBlocker.Length();
-
-            if (dist > 0.01f)
-            {
-                var dir = toBlocker / dist;
-                var maxArrow = MathF.Min(dist, 0.9f);
-                var arrowEnd = testedCenter + dir * maxArrow;
-                var arrowColor = new Color(0.7f, 0.35f, 1f, 0.85f);
-
-                DrawArrow(h, testedCenter, arrowEnd, arrowColor);
-            }
-
-            var gap = hit.Distance - hit.Skin + hit.Clearance;
-            var mid = (testedCenter + blockerCenter) * 0.5f;
-            var gapColor = gap <= 0 ? new Color(1f, 0.32f, 0.32f, 0.92f) : new Color(0.45f, 1f, 0.58f, 0.95f);
-            var gapRadius = 0.07f + MathF.Min(MathF.Abs(gap) * 0.03f, 0.09f);
-
-            h.DrawCircle(mid, gapRadius, gapColor);
-            h.DrawCircle(mid, gapRadius * 0.55f, gapColor.WithAlpha(0.55f));
+            DrawCollisionAabbs(handle, hit);
+            DrawCollisionDirection(handle, hit);
+            DrawCollisionGap(handle, hit);
         }
     }
 
-    private static void DrawArrow(DrawingHandleWorld h, Vector2 start, Vector2 end, Color color)
+    private static void DrawCollisionAabbs(DrawingHandleWorld handle, SharedMover.DebugCollision hit)
     {
-        h.DrawLine(start, end, color);
+        handle.DrawRect(hit.TestedAabb, new Color(0.92f, 0.27f, 0.36f, 0.16f), true);
+        handle.DrawRect(hit.TestedAabb, new Color(0.97f, 0.38f, 0.46f, 0.85f), false);
+        handle.DrawRect(hit.BlockerAabb, new Color(1f, 0.8f, 0.32f, 0.14f), true);
+        handle.DrawRect(hit.BlockerAabb, new Color(1f, 0.82f, 0.22f, 0.9f), false);
 
-        var delta = end - start;
-        var dist = delta.Length();
-        if (dist <= 0.01f)
+        var overlap = hit.TestedAabb.Intersect(hit.BlockerAabb);
+        if (overlap.Width <= 0f || overlap.Height <= 0f)
             return;
 
-        var dir = delta / dist;
-        var headLength = 0.12f;
-        var headWidth = 0.06f;
-        var basePoint = end - dir * headLength;
-        var perp = new Vector2(-dir.Y, dir.X) * headWidth;
-
-        h.DrawLine(end, basePoint + perp, color);
-        h.DrawLine(end, basePoint - perp, color);
+        handle.DrawRect(overlap, new Color(0.83f, 0.23f, 1f, 0.25f), true);
+        handle.DrawRect(overlap, new Color(0.74f, 0.16f, 0.95f, 0.9f), false);
     }
+
+    private static void DrawCollisionDirection(DrawingHandleWorld handle, SharedMover.DebugCollision hit)
+    {
+        var testedCenter = hit.TestedAabb.Center;
+        var blockerCenter = hit.BlockerAabb.Center;
+        var toBlocker = blockerCenter - testedCenter;
+        var distance = toBlocker.Length();
+
+        handle.DrawCircle(testedCenter, 0.09f, new Color(0.97f, 0.38f, 0.46f, 0.85f));
+        handle.DrawCircle(blockerCenter, 0.09f, new Color(1f, 0.82f, 0.22f, 0.9f));
+
+        if (distance <= 0.01f)
+            return;
+
+        var end = testedCenter + toBlocker / distance * MathF.Min(distance, 0.9f);
+        DrawArrow(handle, testedCenter, end, new Color(0.7f, 0.35f, 1f, 0.85f));
+    }
+
+    private static void DrawCollisionGap(DrawingHandleWorld handle, SharedMover.DebugCollision hit)
+    {
+        var gap = hit.Distance - hit.Skin + hit.Clearance;
+        var center = (hit.TestedAabb.Center + hit.BlockerAabb.Center) * 0.5f;
+        var color = gap <= 0f
+            ? new Color(1f, 0.32f, 0.32f, 0.92f)
+            : new Color(0.45f, 1f, 0.58f, 0.95f);
+        var radius = 0.07f + MathF.Min(MathF.Abs(gap) * 0.03f, 0.09f);
+
+        handle.DrawCircle(center, radius, color);
+        handle.DrawCircle(center, radius * 0.55f, color.WithAlpha(0.55f));
+    }
+
+    private Vector2 ToMapPosition(EntityUid grid, Vector2 localPosition)
+    {
+        return _transform.ToMapCoordinates(new EntityCoordinates(grid, localPosition)).Position;
+    }
+
+    private static Color GetEntryColor(int entryIndex)
+    {
+        var index = entryIndex < 0 ? Math.Abs(entryIndex) : entryIndex;
+        return EntryColors[index % EntryColors.Length];
+    }
+
+    private static void DrawArrow(DrawingHandleWorld handle, Vector2 start, Vector2 end, Color color)
+    {
+        handle.DrawLine(start, end, color);
+
+        var delta = end - start;
+        var distance = delta.Length();
+        if (distance <= 0.01f)
+            return;
+
+        var direction = delta / distance;
+        var basePoint = end - direction * 0.12f;
+        var perpendicular = new Vector2(-direction.Y, direction.X) * 0.06f;
+
+        handle.DrawLine(end, basePoint + perpendicular, color);
+        handle.DrawLine(end, basePoint - perpendicular, color);
+    }
+
+    private static void ClearFrameDebug()
+    {
+        SharedMover.DebugTestedTiles.Clear();
+        SharedMover.DebugMovementDecisions.Clear();
+        GridVehicleMoverSystem.DebugCollisionPositions.Clear();
+    }
+
+    private sealed record FadingMovementDecision(
+        Vector2 Start,
+        Vector2 End,
+        SharedMover.DebugMovementDecisionKind Kind,
+        bool Success,
+        MapId Map,
+        TimeSpan Created);
 }
