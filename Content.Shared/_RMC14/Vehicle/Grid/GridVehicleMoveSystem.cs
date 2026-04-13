@@ -260,6 +260,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (args.OtherBody.BodyType != BodyType.Static)
             return;
 
+        if (IsNormallyMobPassable(args.OtherFixture))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if ((args.OtherFixture.CollisionLayer & GridVehicleStaticBlockerMask) == 0)
             return;
 

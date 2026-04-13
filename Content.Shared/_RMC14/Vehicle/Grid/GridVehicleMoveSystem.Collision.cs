@@ -102,8 +102,11 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             var isFoldable = HasComp<FoldableComponent>(other);
             var isMob = TryComp(other, out MobStateComponent? mob);
             var isXeno = HasComp<XenoComponent>(other);
-            var collisionClass = ClassifyCollisionCandidate(other, otherXform, otherBody, hardCollidable, isMob, isBarricade, isFoldable, hasDoor, isXeno);
+            var collisionClass = ClassifyCollisionCandidate(other, otherXform, otherBody, otherFixtures, hardCollidable, isMob, isBarricade, isFoldable, hasDoor, isXeno);
             var isUnpoweredDoor = hasDoor && IsDoorUnpowered(other);
+            if (hasDoor && !isUnpoweredDoor && door != null && _door.CanOpen(other, door, operatorUid))
+                collisionClass = VehicleCollisionClass.Ignore;
+
             var collisionAabb = GetCollisionAabb(collisionClass, aabb, movementAabb);
 
             if (!HasCollisionOverlap(collisionAabb, otherAabb))
@@ -821,6 +824,13 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (!fixtureQ.TryComp(ent, out var fixtures))
                 continue;
 
+            if (physicsQ.TryComp(mob, out var mobBody) &&
+                fixtureQ.TryComp(mob, out var mobFixtures) &&
+                !physics.IsHardCollidable((mob, mobFixtures, mobBody), (ent, fixtures, otherBody)))
+            {
+                continue;
+            }
+
             var (pos, rot) = transform.GetWorldPositionRotation(entXformComp, xformQuery);
             rot -= gridRot;
             pos = (-gridRot).RotateVec(pos - gridPos);
@@ -961,6 +971,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         EntityUid other,
         TransformComponent otherXform,
         PhysicsComponent otherBody,
+        FixturesComponent otherFixtures,
         bool hardCollidable,
         bool isMob,
         bool isBarricade,
@@ -972,6 +983,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var isSmashable = HasComp<RMCVehicleSmashableComponent>(other);
 
         if (!otherXform.Anchored && HasComp<ItemComponent>(other))
+            return VehicleCollisionClass.Ignore;
+
+        if (isMob || isXeno)
+            return VehicleCollisionClass.SoftMob;
+
+        if (IsNormallyMobPassable(otherFixtures))
             return VehicleCollisionClass.Ignore;
 
         var isLooseDynamic =
@@ -986,9 +1003,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (isLooseDynamic)
             return VehicleCollisionClass.Ignore;
 
-        if (isMob || isXeno)
-            return VehicleCollisionClass.SoftMob;
-
         if (isSmashable)
             return VehicleCollisionClass.Breakable;
 
@@ -1001,5 +1015,26 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return hardCollidable
             ? VehicleCollisionClass.Hard
             : VehicleCollisionClass.Ignore;
+    }
+
+    private static bool IsNormallyMobPassable(FixturesComponent fixtures)
+    {
+        foreach (var fixture in fixtures.Fixtures.Values)
+        {
+            if (!IsNormallyMobPassable(fixture))
+                return false;
+        }
+
+        return true;
+    }
+
+    private static bool IsNormallyMobPassable(Fixture fixture)
+    {
+        const int mobMask = (int) CollisionGroup.MobMask;
+        const int mobLayer = (int) CollisionGroup.MobLayer;
+
+        return !fixture.Hard ||
+               ((fixture.CollisionMask & mobLayer) == 0 &&
+                (fixture.CollisionLayer & mobMask) == 0);
     }
 }

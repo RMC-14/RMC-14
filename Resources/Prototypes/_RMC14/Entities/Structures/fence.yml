@@ -13,6 +13,8 @@
   - type: InteractionOutline
   - type: Clickable
   - type: RMCVehicleSmashable
+    deleteOnHit: false
+    damageOnHit: 50
   - type: IconSmooth
     key: fences
     base: fence
