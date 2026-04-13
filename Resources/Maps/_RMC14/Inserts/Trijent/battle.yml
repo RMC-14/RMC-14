@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/13/2026 15:45:15
-  entityCount: 100
+  time: 04/13/2026 16:27:47
+  entityCount: 103
 maps: []
 grids:
 - 1
@@ -131,7 +131,22 @@ entities:
   - uid: 94
     components:
     - type: Transform
+      anchored: True
       pos: 1.5,3.5
+      parent: 1
+    - type: Lock
+      locked: True
+    - type: Physics
+      canCollide: True
+      bodyType: Static
+    - type: PointLight
+      enabled: True
+- proto: CMMagazinePistolM1984
+  entities:
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 6.4340224,5.558305
       parent: 1
 - proto: CMRack
   entities:
@@ -211,6 +226,21 @@ entities:
     - type: Transform
       pos: 7.5,1.5
       parent: 1
+- proto: CMWeaponPistolM1984
+  entities:
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 6.350689,4.793885
+      parent: 1
+    - type: RMCWeaponAccuracy
+      modifiedAccuracyMultiplier: 0.85
+    - type: UseDelay
+      delays:
+        RMCWieldDelay:
+          endTime: 397.9471463
+          startTime: 423.5662431
+          length: 0.4
 - proto: PortableFlasher
   entities:
   - uid: 68
@@ -278,6 +308,24 @@ entities:
     - type: Transform
       pos: 9.5,3.5
       parent: 1
+- proto: RMCLightFixtureOffset
+  entities:
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 8.5,2.5
+      parent: 1
+  - uid: 102
+    components:
+    - type: Transform
+      pos: 4.5,2.5
+      parent: 1
+  - uid: 103
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,5.5
+      parent: 1
 - proto: RMCLockerGun
   entities:
   - uid: 46
@@ -309,13 +357,6 @@ entities:
     components:
     - type: Transform
       pos: 7.5,1.5
-      parent: 1
-- proto: RMCMagazinePistolHoldout
-  entities:
-  - uid: 88
-    components:
-    - type: Transform
-      pos: 6.6816025,5.4519835
       parent: 1
 - proto: RMCNanoMedLimited
   entities:
@@ -636,12 +677,5 @@ entities:
     components:
     - type: Transform
       pos: 10.418378,1.6603172
-      parent: 1
-- proto: RMCWeaponPistolHoldout
-  entities:
-  - uid: 87
-    components:
-    - type: Transform
-      pos: 6.5253525,4.586799
       parent: 1
 ...
