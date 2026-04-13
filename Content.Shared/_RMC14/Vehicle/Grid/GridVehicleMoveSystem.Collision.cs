@@ -8,6 +8,7 @@ using Content.Shared.Item;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Vehicle.Components;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Physics;
@@ -103,8 +104,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             var isMob = TryComp(other, out MobStateComponent? mob);
             var isXeno = HasComp<XenoComponent>(other);
             var collisionClass = ClassifyCollisionCandidate(other, otherXform, otherBody, otherFixtures, hardCollidable, isMob, isBarricade, isFoldable, hasDoor, isXeno);
-            var isUnpoweredDoor = hasDoor && IsDoorUnpowered(other);
-            if (hasDoor && !isUnpoweredDoor && door != null && _door.CanOpen(other, door, operatorUid))
+            var doorPowerKnown = TryGetDoorPowered(other, out var doorPowered);
+            var isUnpoweredDoor = hasDoor && doorPowerKnown && !doorPowered;
+            if (hasDoor && doorPowerKnown && doorPowered && door != null && _door.CanOpen(other, door, operatorUid))
                 collisionClass = VehicleCollisionClass.Ignore;
 
             var collisionAabb = GetCollisionAabb(collisionClass, aabb, movementAabb);
@@ -307,14 +309,27 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return transform.GetWorldRotation(grid) + localRotation;
     }
 
-    private bool IsDoorUnpowered(EntityUid target)
+    private bool TryGetDoorPowered(EntityUid target, out bool powered)
     {
         if (TryComp(target, out AirlockComponent? airlock))
-            return !airlock.Powered;
+        {
+            powered = airlock.Powered;
+            return true;
+        }
 
         if (TryComp(target, out FirelockComponent? firelock))
-            return !firelock.Powered;
+        {
+            powered = firelock.Powered;
+            return true;
+        }
 
+        if (HasComp<RMCPowerReceiverComponent>(target))
+        {
+            powered = _rmcPower.IsPowered(target);
+            return true;
+        }
+
+        powered = false;
         return false;
     }
 
