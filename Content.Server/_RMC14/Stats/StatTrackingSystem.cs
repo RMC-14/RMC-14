@@ -1,10 +1,13 @@
-using Content.Server.GameTicking;
+using Content.Server.GameTicking.Events;
 using Content.Shared._RMC14.Admin;
+using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stats;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
+using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Stats;
 
@@ -13,33 +16,9 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
+        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<RoundEndStatsAppendEvent>(OnRoundEndStatTextAppend);
-    }
-
-    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
-    {
-        if (HasComp<RMCAdminSpawnedComponent>(ev.Mob))
-            return;
-
-        if (HasComp<XenoParasiteComponent>(ev.Mob))
-        {
-            TotalPlayerParasites++;
-            return;
-        }
-
-        if (TryComp(ev.Mob, out XenoComponent? xeno))
-        {
-            if (xeno.Role == LesserJob)
-            {
-                TotalLesserXenos++;
-                return;
-            }
-
-            TotalXenos++;
-        }
-        else if (HasComp<MarineComponent>(ev.Mob))
-            TotalMarines++;
     }
 
     private void OnRoundCleanup(RoundRestartCleanupEvent ev)
@@ -65,20 +44,83 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
         TotalBursts = 0;
     }
 
-    public void OnRoundEndStatTextAppend(RoundEndStatsAppendEvent endEvent)
+    private void OnRoundStart(RoundStartingEvent ev)
+    {
+        RoundStartTime = Timing.CurTime;
+    }
+
+    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
+    {
+        if (HasComp<RMCAdminSpawnedComponent>(ev.Mob))
+            return;
+
+        if (HasComp<XenoParasiteComponent>(ev.Mob))
+        {
+            if (TryComp(ev.Mob, out ActorComponent? actor))
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.ParasiteSpawn);
+
+            TotalPlayerParasites++;
+            return;
+        }
+
+        if (TryComp(ev.Mob, out XenoComponent? xeno))
+        {
+            if (xeno.Role == LesserJob)
+            {
+                if (TryComp(ev.Mob, out ActorComponent? actor))
+                    ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.LesserDroneSpawn);
+
+                TotalLesserXenos++;
+                return;
+            }
+
+            TotalXenos++;
+        }
+        else if (HasComp<MarineComponent>(ev.Mob))
+            TotalMarines++;
+    }
+
+    private void OnRoundEndStatTextAppend(RoundEndStatsAppendEvent endEvent)
     {
         // Marine stats
         endEvent.AddLine(Loc.GetString("rmc-distress-signal-round-stat-marine-header"));
 
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-total-marines", TotalMarines);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-marine-deaths", TotalMarineDeaths);
+
+        var (mostDeathsName, mostDeaths) = GetHighScore(player => player.TotalMarineDeaths);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-marine-deaths", TotalMarineDeaths, mostDeathsName, mostDeaths);
+
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-marine-perma-deaths", TotalMarinePermaDeaths);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-marine-projectiles-fired", TotalMarineProjectiles);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-marine-projectile-hits", TotalMarineProjectileHits);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-friendly-fire-incidents", TotalFriendlyFireIncidents);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-larva-extractions", TotalLarvaExtractions);
+
+        var (mostProjectilesName, mostProjectiles) = GetHighScore(player => player.TotalProjectiles);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-marine-projectiles-fired", TotalMarineProjectiles, mostProjectilesName, mostProjectiles);
+
+        var (mostProjectileHitsName, mostProjectileHits) = GetHighScore(player => player.TotalProjectileHits);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-marine-projectile-hits", TotalMarineProjectileHits, mostProjectileHitsName, mostProjectileHits);
+
+        var (mostFriendlyFireIncidentsName, mostFriendlyFireIncidents) = GetHighScore(player => player.TotalFriendlyFireIncidents);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-friendly-fire-incidents", TotalFriendlyFireIncidents, mostFriendlyFireIncidentsName, mostFriendlyFireIncidents);
+
+        var (mostLarvaExtractionsName, mostLarvaExtractions) = GetHighScore(player => player.TotalLarvaExtractions);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-larva-extractions", TotalLarvaExtractions, mostLarvaExtractionsName, mostLarvaExtractions);
+
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-used-requisitions-budget", TotalUsedRequisitionsBudget);
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-supply-drops", TotalSupplyDrops);
+
+        FixedPoint2 currentPoints = 0;
+        FixedPoint2 totalPoints = 0;
+        var query = EntityQueryEnumerator<ViewIntelObjectivesComponent>();
+        while (query.MoveNext(out _, out var viewIntel))
+        {
+            currentPoints = viewIntel.Tree.Points;
+            totalPoints = viewIntel.Tree.TotalEarned;
+            break;
+        }
+
+        endEvent.AddLine(Loc.GetString(
+            "rmc-distress-signal-round-stat-intel-points",
+            ("earned", totalPoints),
+            ("spent", totalPoints - currentPoints)));
 
         endEvent.AddLine(string.Empty);
 
@@ -86,14 +128,27 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
         endEvent.AddLine(Loc.GetString("rmc-distress-signal-round-stat-xeno-header"));
 
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-total-xenos", TotalXenos);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-deaths", TotalXenoDeaths);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-lesser-drones", TotalLesserXenos);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-player-parasites", TotalPlayerParasites);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-projectiles-fired", TotalXenoProjectiles);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-projectile-hits", TotalXenoProjectileHits);
-        AddStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-melee-hits", TotalXenoMeleeHits);
+
+        var (mostXenoDeathsName, mostXenoDeaths) = GetHighScore(player => player.TotalXenoDeaths);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-deaths", TotalXenoDeaths, mostXenoDeathsName, mostXenoDeaths);
+
+        var (mostLesserXenoSpawnsName, mostLesserXenoSpawns) = GetHighScore(player => player.TotalLesserDroneSpawns);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-lesser-drones", TotalLesserXenos, mostLesserXenoSpawnsName, mostLesserXenoSpawns);
+
+        var (mostParasitesName, mostParasites) = GetHighScore(player => player.TotalParasiteSpawns);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-player-parasites", TotalPlayerParasites, mostParasitesName, mostParasites);
+
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-infected", TotalInfected);
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-bursts", TotalBursts);
+
+        var (mostXenoProjectilesName, mostXenoProjectiles) = GetHighScore(player => player.TotalXenoProjectiles);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-projectiles-fired", TotalXenoProjectiles, mostXenoProjectilesName, mostXenoProjectiles);
+
+        var (mostXenoProjectileHitsName, mostXenoProjectileHits) = GetHighScore(player => player.TotalXenoProjectileHits);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-projectile-hits", TotalXenoProjectileHits, mostXenoProjectileHitsName, mostXenoProjectileHits);
+
+        var (mostMeleeHitsName, mostMeleeHits) = GetHighScore(player => player.TotalXenoMeleeHits);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-melee-hits", TotalXenoMeleeHits, mostMeleeHitsName, mostMeleeHits);
 
         endEvent.AddLine(string.Empty);
     }
@@ -101,5 +156,35 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
     private void AddStat(ref RoundEndStatsAppendEvent  endEvent, string id, int value)
     {
         endEvent.AddLine(Loc.GetString(id, ("count", value)));
+    }
+
+    private void AddPlayerTrackedStat(ref RoundEndStatsAppendEvent  endEvent, string id, int value, string playerName, int highScore)
+    {
+        if (highScore <= 0)
+        {
+            AddStat(ref endEvent, id, value);
+            return;
+        }
+
+        endEvent.AddLine(Loc.GetString(id + "-top", ("count", value), ("name", playerName), ("value", highScore)));
+    }
+
+    private (string name, int value) GetHighScore(Func<PlayerRoundStats, int> selector)
+    {
+        var bestName = "";
+        var bestValue = 0;
+
+        foreach (var (_, stats) in PlayerStats)
+        {
+            var value = selector(stats);
+
+            if (value <= bestValue)
+                continue;
+
+            bestValue = value;
+            bestName = stats.UserName;
+        }
+
+        return (bestName, bestValue);
     }
 }

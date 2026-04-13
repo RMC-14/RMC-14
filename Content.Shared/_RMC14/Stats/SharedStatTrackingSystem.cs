@@ -8,16 +8,24 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Roles;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Stats;
 
 public abstract class SharedStatTrackingSystem : EntitySystem
 {
+    [Dependency] protected readonly IGameTiming Timing = default!;
+
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
 
-    // Marine stats
+    protected readonly ProtoId<JobPrototype> LesserJob = "CMXenoLesserDrone";
+    private readonly EntProtoId<IFFFactionComponent> _marineFaction = "FactionMarine";
+    private readonly TimeSpan _roundStartTrackingDelay = TimeSpan.FromMinutes(1);
+
+    // Marine Stats
     protected int TotalMarines;
     protected int TotalMarineDeaths;
     protected int TotalMarinePermaDeaths;
@@ -39,9 +47,8 @@ public abstract class SharedStatTrackingSystem : EntitySystem
     protected int TotalInfected;
     protected int TotalBursts;
 
-    protected readonly ProtoId<JobPrototype> LesserJob = "CMXenoLesserDrone";
-    private readonly EntProtoId<IFFFactionComponent> _marineFaction = "FactionMarine";
-
+    protected Dictionary<NetUserId, PlayerRoundStats> PlayerStats = new ();
+    protected TimeSpan RoundStartTime;
 
     public void UpdateDeathCount(EntityUid died)
     {
@@ -59,18 +66,36 @@ public abstract class SharedStatTrackingSystem : EntitySystem
             if (!diedFactionEvent.Factions.Contains(_marineFaction))
                 return;
 
+            if (TryComp(died, out ActorComponent? actor))
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.MarineDeath);
+
             TotalMarineDeaths++;
         }
         else if (TryComp(died, out XenoComponent? xeno) && xeno.Role != LesserJob)
+        {
+            if (TryComp(died, out ActorComponent? actor))
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.XenoDeath);
+
             TotalXenoDeaths++;
+        }
     }
 
-    public void UpdateProjectileCount(EntityUid projectile)
+    public void UpdateProjectileCount(EntityUid projectile, EntityUid? shooter)
     {
         if (!_net.IsServer)
             return;
 
-        if (HasComp<XenoProjectileComponent>(projectile))
+        var isXeno = HasComp<XenoProjectileComponent>(projectile);
+
+        if (TryComp(shooter, out ActorComponent? actor))
+        {
+            if (isXeno)
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.XenoProjectileFired);
+            else
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.MarineProjectileFired);
+        }
+
+        if (isXeno)
             TotalXenoProjectiles++;
         else
             TotalMarineProjectiles++;
@@ -81,13 +106,21 @@ public abstract class SharedStatTrackingSystem : EntitySystem
         if (!_net.IsServer)
             return;
 
-        if (!_mobState.IsAlive(target) || !_mobState.IsCritical(target))
+        if (!_mobState.IsAlive(target) && !_mobState.IsCritical(target))
             return;
 
         if (isXenoProjectile)
+        {
+            if (TryComp(shooter, out ActorComponent? actor))
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.XenoProjectileHit);
+
             TotalXenoProjectileHits++;
+        }
         else
         {
+            if (TryComp(shooter, out ActorComponent? actor))
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.MarineProjectileHit);
+
             TotalMarineProjectileHits++;
 
             if (shooter == null)
@@ -100,13 +133,21 @@ public abstract class SharedStatTrackingSystem : EntitySystem
             RaiseLocalEvent(target, ref targetFactionEvent);
 
             if (HasComp<MarineComponent>(target) && shooterFactionEvent.Factions.Overlaps(targetFactionEvent.Factions))
+            {
+                if (actor != null)
+                    ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.MarineFriendlyFire);
+
                 TotalFriendlyFireIncidents++;
+            }
         }
     }
 
     public void UpdateBurstTotal()
     {
         if (!_net.IsServer)
+            return;
+
+        if (RoundStartTime + _roundStartTrackingDelay > Timing.CurTime) // Don't count round start bursts
             return;
 
         TotalBursts++;
@@ -117,13 +158,19 @@ public abstract class SharedStatTrackingSystem : EntitySystem
         if (!_net.IsServer)
             return;
 
+        if (RoundStartTime + _roundStartTrackingDelay > Timing.CurTime) // Don't count round start infections
+            return;
+
         TotalInfected++;
     }
 
-    public void UpdateTotalLarvaExtractions()
+    public void UpdateTotalLarvaExtractions(EntityUid surgeon)
     {
         if (!_net.IsServer)
             return;
+
+        if (TryComp(surgeon, out ActorComponent? actor))
+            ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.MarineLarvaExtraction);
 
         TotalLarvaExtractions++;
     }
@@ -161,7 +208,7 @@ public abstract class SharedStatTrackingSystem : EntitySystem
         TotalMarinePermaDeaths++;
     }
 
-    public void UpdateXenoMeleeHitTotal(IReadOnlyList<EntityUid> targets)
+    public void UpdateXenoMeleeHitTotal(IReadOnlyList<EntityUid> targets, EntityUid xeno)
     {
         if (!_net.IsServer)
             return;
@@ -171,8 +218,22 @@ public abstract class SharedStatTrackingSystem : EntitySystem
             if (!_mobState.IsAlive(target) || !_mobState.IsCritical(target))
                 continue;
 
+            if (TryComp(xeno, out ActorComponent? actor))
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.XenoMeleeHit);
+
             TotalXenoMeleeHits++;
         }
+    }
+
+    protected void ModifyStats(NetUserId userId, string? name, Func<PlayerRoundStats, PlayerRoundStats> mutate)
+    {
+        PlayerStats.TryGetValue(userId, out var stats);
+
+        if (string.IsNullOrEmpty(stats.UserName) && name != null)
+            stats.UserName = name;
+
+        stats = mutate(stats);
+        PlayerStats[userId] = stats;
     }
 }
 
@@ -191,3 +252,98 @@ public sealed class RoundEndStatsAppendEvent
         _doNewLine = true;
     }
 }
+
+[DataRecord]
+public struct PlayerRoundStats
+{
+    public string UserName;
+
+    // Marine Stats
+    public int TotalMarineDeaths;
+    public int TotalProjectiles;
+    public int TotalProjectileHits;
+    public int TotalFriendlyFireIncidents;
+    public int TotalLarvaExtractions;
+
+    // Xeno Stats
+    public int TotalXenoDeaths;
+    public int TotalLesserDroneSpawns;
+    public int TotalParasiteSpawns;
+    public int TotalXenoProjectiles;
+    public int TotalXenoProjectileHits;
+    public int TotalXenoMeleeHits;
+}
+
+#region Stat Increase
+public static class PlayerRoundStatOperations
+{
+    // Marine stats
+    public static PlayerRoundStats MarineDeath(PlayerRoundStats stats)
+    {
+        stats.TotalMarineDeaths++;
+        return stats;
+    }
+
+    public static PlayerRoundStats MarineProjectileFired(PlayerRoundStats stats)
+    {
+        stats.TotalProjectiles++;
+        return stats;
+    }
+
+    public static PlayerRoundStats MarineProjectileHit(PlayerRoundStats stats)
+    {
+        stats.TotalProjectileHits++;
+        return stats;
+    }
+
+    public static PlayerRoundStats MarineFriendlyFire(PlayerRoundStats stats)
+    {
+        stats.TotalFriendlyFireIncidents++;
+        return stats;
+    }
+
+    public static PlayerRoundStats MarineLarvaExtraction(PlayerRoundStats stats)
+    {
+        stats.TotalLarvaExtractions++;
+        return stats;
+    }
+
+    // Xeno stats
+
+    public static PlayerRoundStats XenoDeath(PlayerRoundStats stats)
+    {
+        stats.TotalXenoDeaths++;
+        return stats;
+    }
+
+    public static PlayerRoundStats XenoProjectileFired(PlayerRoundStats stats)
+    {
+        stats.TotalXenoProjectiles++;
+        return stats;
+    }
+
+    public static PlayerRoundStats XenoProjectileHit(PlayerRoundStats stats)
+    {
+        stats.TotalXenoProjectileHits++;
+        return stats;
+    }
+
+    public static PlayerRoundStats XenoMeleeHit(PlayerRoundStats stats)
+    {
+        stats.TotalXenoMeleeHits++;
+        return stats;
+    }
+
+    public static PlayerRoundStats LesserDroneSpawn(PlayerRoundStats stats)
+    {
+        stats.TotalLesserDroneSpawns++;
+        return stats;
+    }
+
+    public static PlayerRoundStats ParasiteSpawn(PlayerRoundStats stats)
+    {
+        stats.TotalParasiteSpawns++;
+        return stats;
+    }
+}
+# endregion

@@ -154,7 +154,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             SpawnAtPosition(ent.Comp.DeadLarvaItem, coords);
         }
 
-        _stats.UpdateTotalLarvaExtractions();
+        _stats.UpdateTotalLarvaExtractions(args.User);
     }
 
     private void OnStepXenoHeartComplete(Entity<RMCSurgeryStepXenoHeartEffectComponent> ent, ref CMSurgeryStepEvent args)

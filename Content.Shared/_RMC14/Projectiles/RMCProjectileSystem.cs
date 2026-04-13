@@ -50,7 +50,7 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         SubscribeLocalEvent<PreventCollideWithDeadComponent, PreventCollideEvent>(OnPreventCollideWithDead);
 
-        SubscribeLocalEvent<ProjectileComponent, AmmoShotEvent>(OnAmmoShot);
+        SubscribeLocalEvent<ProjectileComponent, ComponentRemove>(OnProjectileRemove);
         SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
     }
 
@@ -247,9 +247,9 @@ public sealed class RMCProjectileSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnAmmoShot(Entity<ProjectileComponent> ent, ref AmmoShotEvent args)
+    private void OnProjectileRemove(Entity<ProjectileComponent> ent, ref ComponentRemove args)
     {
-        _stats.UpdateProjectileCount(ent.Owner);
+        _stats.UpdateProjectileCount(ent.Owner, ent.Comp.Shooter);
     }
 
     private void OnProjectileHit(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)

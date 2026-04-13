@@ -310,7 +310,7 @@ public sealed partial class XenoSystem : EntitySystem
 
             _entityStorage.TryOpenStorage(xeno, hit);
 
-            _stats.UpdateXenoMeleeHitTotal(args.HitEntities);
+            _stats.UpdateXenoMeleeHitTotal(args.HitEntities, xeno);
         }
     }
 

@@ -45,24 +45,36 @@ rmc-round-end-stats-tab-title = Round Stats
 rmc-distress-signal-round-stat-marine-header = [color=green]Marine Statistics[/color]
 
 rmc-distress-signal-round-stat-total-marines = Total Marines: {$count}
-rmc-distress-signal-round-stat-marine-deaths = Marine Deaths: {$count}
-rmc-distress-signal-round-stat-marine-perma-deaths = Marine Permanent Deaths: {$count}
-rmc-distress-signal-round-stat-marine-projectiles-fired = Marine Projectiles Fired: {$count}
-rmc-distress-signal-round-stat-marine-projectile-hits = Marine Projectile Hits: {$count}
+rmc-distress-signal-round-stat-marine-deaths = Deaths: {$count}
+rmc-distress-signal-round-stat-marine-deaths-top = Deaths: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-marine-perma-deaths = Permanent Deaths: {$count}
+rmc-distress-signal-round-stat-marine-projectiles-fired = Projectiles Fired: {$count}
+rmc-distress-signal-round-stat-marine-projectiles-fired-top = Projectiles Fired: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-marine-projectile-hits = Projectile Hits: {$count}
+rmc-distress-signal-round-stat-marine-projectile-hits-top = Projectile Hits: {$count} | {$name}: {$value}
 rmc-distress-signal-round-stat-friendly-fire-incidents = Friendly Fire Incidents: {$count}
+rmc-distress-signal-round-stat-friendly-fire-incidents-top = Friendly Fire Incidents: {$count} | {$name}: {$value}
 rmc-distress-signal-round-stat-larva-extractions = Larva Extractions: {$count}
+rmc-distress-signal-round-stat-larva-extractions-top = Larva Extractions: {$count} | {$name}: {$value}
 rmc-distress-signal-round-stat-used-requisitions-budget = Requisitions Budget Used: {$count}
 rmc-distress-signal-round-stat-supply-drops = Supply Drops: {$count}
+rmc-distress-signal-round-stat-intel-points = Intel Points Spent/Earned: {$spent}/{$earned}
 
 # Xeno Stats
 rmc-distress-signal-round-stat-xeno-header = [color=purple]Xenonid Statistics[/color]
 
 rmc-distress-signal-round-stat-total-xenos = Total Xenonids: {$count}
-rmc-distress-signal-round-stat-xeno-deaths = Xeno Deaths: {$count}
+rmc-distress-signal-round-stat-xeno-deaths = Deaths: {$count}
+rmc-distress-signal-round-stat-xeno-deaths-top = Deaths: {$count} | {$name}: {$value}
 rmc-distress-signal-round-stat-lesser-drones = Lesser Drones Spawned: {$count}
+rmc-distress-signal-round-stat-lesser-drones-top = Lesser Drones Spawned: {$count} | {$name}: {$value}
 rmc-distress-signal-round-stat-player-parasites = Player Parasites Spawned: {$count}
-rmc-distress-signal-round-stat-xeno-projectiles-fired = Xeno Projectiles Fired: {$count}
-rmc-distress-signal-round-stat-xeno-projectile-hits = Xeno Projectile Hits: {$count}
-rmc-distress-signal-round-stat-xeno-melee-hits = Xeno Melee Hits: {$count}
+rmc-distress-signal-round-stat-player-parasites-top = Player Parasites Spawned: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-xeno-projectiles-fired = Projectiles Fired: {$count}
+rmc-distress-signal-round-stat-xeno-projectiles-fired-top = Projectiles Fired: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-xeno-projectile-hits = Projectile Hits: {$count}
+rmc-distress-signal-round-stat-xeno-projectile-hits-top = Projectile Hits: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-xeno-melee-hits = Melee Hits: {$count}
+rmc-distress-signal-round-stat-xeno-melee-hits-top = Melee Hits: {$count} | {$name}: {$value}
 rmc-distress-signal-round-stat-infected = Total Infections: {$count}
 rmc-distress-signal-round-stat-bursts = Larva Bursts: {$count}
