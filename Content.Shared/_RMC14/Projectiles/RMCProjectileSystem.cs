@@ -254,7 +254,7 @@ public sealed class RMCProjectileSystem : EntitySystem
 
     private void OnProjectileHit(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)
     {
-        _stats.UpdateProjectileHits(false, args.Target, args.Shooter);
+        _stats.UpdateProjectileHits(args.Target, args.Shooter);
     }
 
     public void SetMaxRange(Entity<ProjectileMaxRangeComponent> ent, float max)

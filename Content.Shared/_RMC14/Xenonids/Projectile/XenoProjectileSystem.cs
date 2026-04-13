@@ -204,7 +204,7 @@ public sealed class XenoProjectileSystem : EntitySystem
             RaiseLocalEvent(shooter, ref ev);
         }
 
-        _stats.UpdateProjectileHits(true, args.Target, args.Shooter);
+        _stats.UpdateXenoProjectileHits(args.Target, args.Shooter);
     }
 
     private void OnClusterSpawned(Entity<XenoProjectileComponent> ent, ref CMClusterSpawnedEvent args)

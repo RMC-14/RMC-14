@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Roles;
@@ -32,6 +33,8 @@ public abstract class SharedStatTrackingSystem : EntitySystem
     protected int TotalMarineProjectiles;
     protected int TotalMarineProjectileHits;
     protected int TotalFriendlyFireIncidents;
+    protected FixedPoint2 TotalDamageReceived;
+    protected FixedPoint2 TotalDamageHealed;
     protected int TotalLarvaExtractions;
     protected int TotalUsedRequisitionsBudget;
     protected int TotalSupplyDrops;
@@ -44,6 +47,8 @@ public abstract class SharedStatTrackingSystem : EntitySystem
     protected int TotalXenoProjectiles;
     protected int TotalXenoProjectileHits;
     protected int TotalXenoMeleeHits;
+    protected FixedPoint2 TotalXenoDamageReceived;
+    protected FixedPoint2 TotalXenoDamageHealed;
     protected int TotalInfected;
     protected int TotalBursts;
 
@@ -67,14 +72,14 @@ public abstract class SharedStatTrackingSystem : EntitySystem
                 return;
 
             if (TryComp(died, out ActorComponent? actor))
-                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.MarineDeath);
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.MarineDeath);
 
             TotalMarineDeaths++;
         }
         else if (TryComp(died, out XenoComponent? xeno) && xeno.Role != LesserJob)
         {
             if (TryComp(died, out ActorComponent? actor))
-                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.XenoDeath);
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.XenoDeath);
 
             TotalXenoDeaths++;
         }
@@ -90,9 +95,9 @@ public abstract class SharedStatTrackingSystem : EntitySystem
         if (TryComp(shooter, out ActorComponent? actor))
         {
             if (isXeno)
-                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.XenoProjectileFired);
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.XenoProjectileFired);
             else
-                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.MarineProjectileFired);
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.MarineProjectileFired);
         }
 
         if (isXeno)
@@ -101,7 +106,7 @@ public abstract class SharedStatTrackingSystem : EntitySystem
             TotalMarineProjectiles++;
     }
 
-    public void UpdateProjectileHits(bool isXenoProjectile, EntityUid target, EntityUid? shooter = null)
+    public void UpdateProjectileHits(EntityUid target, EntityUid? shooter = null)
     {
         if (!_net.IsServer)
             return;
@@ -109,37 +114,47 @@ public abstract class SharedStatTrackingSystem : EntitySystem
         if (!_mobState.IsAlive(target) && !_mobState.IsCritical(target))
             return;
 
-        if (isXenoProjectile)
+        if (HasComp<RMCAdminSpawnedComponent>(target))
+            return;
+
+        if (TryComp(shooter, out ActorComponent? actor))
+            ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.MarineProjectileHit);
+
+        TotalMarineProjectileHits++;
+
+        if (shooter == null)
+            return;
+
+        var shooterFactionEvent = new GetIFFFactionEvent(SlotFlags.IDCARD, new());
+        RaiseLocalEvent(shooter.Value, ref shooterFactionEvent);
+
+        var targetFactionEvent = new GetIFFFactionEvent(SlotFlags.IDCARD, new());
+        RaiseLocalEvent(target, ref targetFactionEvent);
+
+        if (HasComp<MarineComponent>(target) && shooterFactionEvent.Factions.Overlaps(targetFactionEvent.Factions))
         {
-            if (TryComp(shooter, out ActorComponent? actor))
-                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.XenoProjectileHit);
+            if (actor != null)
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.MarineFriendlyFire);
 
-            TotalXenoProjectileHits++;
+            TotalFriendlyFireIncidents++;
         }
-        else
-        {
-            if (TryComp(shooter, out ActorComponent? actor))
-                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.MarineProjectileHit);
+    }
 
-            TotalMarineProjectileHits++;
+    public void UpdateXenoProjectileHits(EntityUid target, EntityUid? shooter = null)
+    {
+        if (!_net.IsServer)
+            return;
 
-            if (shooter == null)
-                return;
+        if (!_mobState.IsAlive(target) && !_mobState.IsCritical(target))
+            return;
 
-            var shooterFactionEvent = new GetIFFFactionEvent(SlotFlags.IDCARD, new());
-            RaiseLocalEvent(shooter.Value, ref shooterFactionEvent);
+        if (HasComp<RMCAdminSpawnedComponent>(target))
+            return;
 
-            var targetFactionEvent = new GetIFFFactionEvent(SlotFlags.IDCARD, new());
-            RaiseLocalEvent(target, ref targetFactionEvent);
+        if (TryComp(shooter, out ActorComponent? actor))
+            ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.XenoProjectileHit);
 
-            if (HasComp<MarineComponent>(target) && shooterFactionEvent.Factions.Overlaps(targetFactionEvent.Factions))
-            {
-                if (actor != null)
-                    ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.MarineFriendlyFire);
-
-                TotalFriendlyFireIncidents++;
-            }
-        }
+        TotalXenoProjectileHits++;
     }
 
     public void UpdateBurstTotal()
@@ -170,7 +185,7 @@ public abstract class SharedStatTrackingSystem : EntitySystem
             return;
 
         if (TryComp(surgeon, out ActorComponent? actor))
-            ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.MarineLarvaExtraction);
+            ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.MarineLarvaExtraction);
 
         TotalLarvaExtractions++;
     }
@@ -219,20 +234,89 @@ public abstract class SharedStatTrackingSystem : EntitySystem
                 continue;
 
             if (TryComp(xeno, out ActorComponent? actor))
-                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.XenoMeleeHit);
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.XenoMeleeHit);
 
             TotalXenoMeleeHits++;
         }
     }
 
-    protected void ModifyStats(NetUserId userId, string? name, Func<PlayerRoundStats, PlayerRoundStats> mutate)
+    public void UpdateDamageReceived(EntityUid damaged, FixedPoint2 amount, EntityUid? origin)
+    {
+        if (!_net.IsServer)
+            return;
+
+        var isDamage = amount >= 0;
+
+        if (isDamage && !_mobState.IsAlive(damaged) && !_mobState.IsCritical(damaged) || damaged == origin)
+            return;
+
+        if (HasComp<RMCAdminSpawnedComponent>(damaged))
+            return;
+
+        if (HasComp<XenoComponent>(damaged))
+        {
+            if (isDamage)
+            {
+                if (TryComp(damaged, out ActorComponent? actor))
+                {
+                    ModifyStats(
+                        actor.PlayerSession.UserId,
+                        actor.PlayerSession.Data.UserName,
+                        stats => PlayerRoundStatModifications.XenoDamageReceived(stats, amount)
+                    );
+                }
+
+                TotalXenoDamageReceived += amount;
+            }
+            else if (TryComp(origin, out ActorComponent? actor))
+            {
+                {
+                    ModifyStats(
+                        actor.PlayerSession.UserId,
+                        actor.PlayerSession.Data.UserName,
+                        stats => PlayerRoundStatModifications.XenoDamageHealed(stats, -amount)
+                    );
+                }
+
+                TotalXenoDamageHealed += -amount;
+            }
+        }
+        else if (HasComp<MarineComponent>(damaged))
+        {
+            if (isDamage)
+            {
+                if (TryComp(damaged, out ActorComponent? actor))
+                {
+                    ModifyStats(
+                        actor.PlayerSession.UserId,
+                        actor.PlayerSession.Data.UserName,
+                        stats => PlayerRoundStatModifications.DamageReceived(stats, amount)
+                    );
+                }
+
+                TotalDamageReceived += amount;
+            }
+            else if (TryComp(origin, out ActorComponent? actor))
+            {
+                ModifyStats(
+                    actor.PlayerSession.UserId,
+                    actor.PlayerSession.Data.UserName,
+                    stats => PlayerRoundStatModifications.DamageHealed(stats, -amount)
+                );
+
+                TotalDamageHealed += -amount;
+            }
+        }
+    }
+
+    protected void ModifyStats(NetUserId userId, string? name, Func<PlayerRoundStats, PlayerRoundStats> modify)
     {
         PlayerStats.TryGetValue(userId, out var stats);
 
         if (string.IsNullOrEmpty(stats.UserName) && name != null)
             stats.UserName = name;
 
-        stats = mutate(stats);
+        stats = modify(stats);
         PlayerStats[userId] = stats;
     }
 }
@@ -260,6 +344,8 @@ public struct PlayerRoundStats
 
     // Marine Stats
     public int TotalMarineDeaths;
+    public FixedPoint2 TotalDamageReceived;
+    public FixedPoint2 TotalDamageHealed;
     public int TotalProjectiles;
     public int TotalProjectileHits;
     public int TotalFriendlyFireIncidents;
@@ -267,6 +353,8 @@ public struct PlayerRoundStats
 
     // Xeno Stats
     public int TotalXenoDeaths;
+    public FixedPoint2 TotalXenoDamageReceived;
+    public FixedPoint2 TotalXenoDamageHealed;
     public int TotalLesserDroneSpawns;
     public int TotalParasiteSpawns;
     public int TotalXenoProjectiles;
@@ -275,12 +363,24 @@ public struct PlayerRoundStats
 }
 
 #region Stat Increase
-public static class PlayerRoundStatOperations
+public static class PlayerRoundStatModifications
 {
     // Marine stats
     public static PlayerRoundStats MarineDeath(PlayerRoundStats stats)
     {
         stats.TotalMarineDeaths++;
+        return stats;
+    }
+
+    public static PlayerRoundStats DamageReceived(PlayerRoundStats stats, FixedPoint2 amount)
+    {
+        stats.TotalDamageReceived += amount;
+        return stats;
+    }
+
+    public static PlayerRoundStats DamageHealed(PlayerRoundStats stats, FixedPoint2 amount)
+    {
+        stats.TotalDamageHealed += amount;
         return stats;
     }
 
@@ -313,6 +413,18 @@ public static class PlayerRoundStatOperations
     public static PlayerRoundStats XenoDeath(PlayerRoundStats stats)
     {
         stats.TotalXenoDeaths++;
+        return stats;
+    }
+
+    public static PlayerRoundStats XenoDamageReceived(PlayerRoundStats stats, FixedPoint2 amount)
+    {
+        stats.TotalXenoDamageReceived += amount;
+        return stats;
+    }
+
+    public static PlayerRoundStats XenoDamageHealed(PlayerRoundStats stats, FixedPoint2 amount)
+    {
+        stats.TotalXenoDamageHealed += amount;
         return stats;
     }
 

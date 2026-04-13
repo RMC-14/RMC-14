@@ -26,6 +26,7 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
         TotalMarines = 0;
         TotalMarineDeaths = 0;
         TotalMarinePermaDeaths = 0;
+        TotalDamageReceived= 0;
         TotalMarineProjectiles = 0;
         TotalMarineProjectileHits = 0;
         TotalFriendlyFireIncidents = 0;
@@ -35,6 +36,7 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
 
         TotalXenos = 0;
         TotalXenoDeaths = 0;
+        TotalXenoDamageReceived= 0;
         TotalLesserXenos = 0;
         TotalPlayerParasites = 0;
         TotalXenoProjectiles = 0;
@@ -57,7 +59,7 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
         if (HasComp<XenoParasiteComponent>(ev.Mob))
         {
             if (TryComp(ev.Mob, out ActorComponent? actor))
-                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.ParasiteSpawn);
+                ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.ParasiteSpawn);
 
             TotalPlayerParasites++;
             return;
@@ -68,7 +70,7 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
             if (xeno.Role == LesserJob)
             {
                 if (TryComp(ev.Mob, out ActorComponent? actor))
-                    ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatOperations.LesserDroneSpawn);
+                    ModifyStats(actor.PlayerSession.UserId, actor.PlayerSession.Data.UserName, PlayerRoundStatModifications.LesserDroneSpawn);
 
                 TotalLesserXenos++;
                 return;
@@ -91,6 +93,12 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-marine-deaths", TotalMarineDeaths, mostDeathsName, mostDeaths);
 
         AddStat(ref endEvent, "rmc-distress-signal-round-stat-marine-perma-deaths", TotalMarinePermaDeaths);
+
+        var (mostDamageReceivedName, mostDamageReceived) = GetHighScore(player => (int) player.TotalDamageReceived);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-damage-received", (int) TotalDamageReceived, mostDamageReceivedName, mostDamageReceived);
+
+        var (mostDamageHealedName, moxeDamageHealed) = GetHighScore(player => (int) player.TotalDamageHealed);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-damage-healed", (int) TotalDamageHealed, mostDamageHealedName, moxeDamageHealed);
 
         var (mostProjectilesName, mostProjectiles) = GetHighScore(player => player.TotalProjectiles);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-marine-projectiles-fired", TotalMarineProjectiles, mostProjectilesName, mostProjectiles);
@@ -131,6 +139,12 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
 
         var (mostXenoDeathsName, mostXenoDeaths) = GetHighScore(player => player.TotalXenoDeaths);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-deaths", TotalXenoDeaths, mostXenoDeathsName, mostXenoDeaths);
+
+        var (mostXenoDamageReceivedName, mostXenoDamageReceived) = GetHighScore(player => (int) player.TotalXenoDamageReceived);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-damage-received", (int) TotalXenoDamageReceived, mostXenoDamageReceivedName, mostXenoDamageReceived);
+
+        var (mostXenoDamageHealedName, moxeXenoDamageHealed) = GetHighScore(player => (int) player.TotalXenoDamageHealed);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-xeno-damage-healed", (int) TotalXenoDamageHealed, mostXenoDamageHealedName, moxeXenoDamageHealed);
 
         var (mostLesserXenoSpawnsName, mostLesserXenoSpawns) = GetHighScore(player => player.TotalLesserDroneSpawns);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-lesser-drones", TotalLesserXenos, mostLesserXenoSpawnsName, mostLesserXenoSpawns);
