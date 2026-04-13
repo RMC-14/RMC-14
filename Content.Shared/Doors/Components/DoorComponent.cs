@@ -44,10 +44,16 @@ public sealed partial class DoorComponent : Component
 
     //RMC14
     /// <summary>
-    /// Closing time when an open door is held open
+    /// Remaining time an open door is held open
     /// </summary>
     [AutoNetworkedField, ViewVariables]
-    public TimeSpan HoldOpenTime;
+    public TimeSpan HoldOpenDelay;
+
+    /// <summary>
+    /// time the door will be delayed from closing when held open
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan HoldOpenTime = TimeSpan.FromSeconds(5);
 
     /// <summary>
     /// Whether or not the door closing time can be delayed when held open

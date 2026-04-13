@@ -169,7 +169,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
                 //RMC14
                 if (door.CanHoldOpen)
                 {
-                    door.HoldOpenTime = GameTiming.CurTime + TimeSpan.FromSeconds(5);
+                    door.HoldOpenDelay = GameTiming.CurTime + door.HoldOpenTime;
                 }
                 //RMC14
                 break;
@@ -830,11 +830,11 @@ public abstract partial class SharedDoorSystem : EntitySystem
                 //RMC14
                 if (door.CanHoldOpen)
                 {
-                    if (!(time > door.HoldOpenTime))
+                    if (!(time > door.HoldOpenDelay))
                     {
                         if (!CanClose(ent, door))
                         {
-                            door.HoldOpenTime = time + TimeSpan.FromSeconds(5);
+                            door.HoldOpenDelay = time + door.HoldOpenTime;
                         }
                         door.NextStateChange = time + TimeSpan.FromSeconds(1);
                         break;
