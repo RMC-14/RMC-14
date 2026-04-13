@@ -8,6 +8,7 @@
   - ColonistAllAccessNoArmory
   startingGear: RMCGearParaCommander
   icon: RMCJobIconParaCommander
+  playTimeTracker: RMCJobSurvivorCO
   spawnMenuRoleName: Royal Paramarine Commander (Survivor)
   special:
     - !type:AddComponentSpecial
@@ -38,7 +39,7 @@
           squad: SquadPara
         - type: JobPrefix
           prefix: rmc-job-prefix-para-commander
-  hidden: true
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer
 
 - type: startingGear
   id: RMCGearParaCommander

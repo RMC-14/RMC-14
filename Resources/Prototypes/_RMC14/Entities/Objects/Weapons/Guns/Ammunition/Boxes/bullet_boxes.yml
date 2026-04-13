@@ -79,6 +79,37 @@
     bulletType: RMCBoxBulletsRifle
 
 - type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsRifleType71
+  name: rifle ammunition box (5.45x39mm)
+  description: A 5.45x39mm ammunition box. Used to refill Type 71 magazines. It comes with a leather strap allowing to wear it on the back.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#515237"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#ffc000"
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleType71
+
+- type: entity
+  parent: RMCBoxBulletsRifleType71
+  id: RMCBoxBulletsRifleType71HalfEmpty
+  suffix: Half Empty
+  components:
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleType71
+    amount: 300
+
+- type: entity
   parent: RMCBoxBulletsRifle
   id: RMCBoxBulletsRifleEmpty
   suffix: Empty

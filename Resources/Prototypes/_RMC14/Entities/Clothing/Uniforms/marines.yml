@@ -134,6 +134,48 @@
     bio: 100
     explosionArmor: 10
 
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitHEDP
+  suffix: Webbing, 2 HEDP
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNHedp
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitTool
+  suffix: Webbing, Tools
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbingFilled
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitFTL
+  suffix: Webbing, FTL
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNFTL
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitSL
+  suffix: Webbing, SL
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNSL
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitMedic
+  suffix: Webbing, Medic
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNMedic
+
+
+
 # Sun Riders
 
 - type: entity
