@@ -5039,7 +5039,7 @@ entities:
     - type: Transform
       pos: 9.5260935,14.381189
       parent: 1
-- proto: RMCL24BeltFilled
+- proto: RMCBeltRCML24
   entities:
   - uid: 731
     components:
