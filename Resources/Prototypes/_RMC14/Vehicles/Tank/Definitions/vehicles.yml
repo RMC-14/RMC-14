@@ -17,7 +17,7 @@
     turnInPlace: true
     turnInPlaceMaxSpeed: 0.5
     pushCooldown: 2
-    movementCollisionInset: 0.25
+    #movementCollisionInset: 0.25
     xenoBlockMinimumSize: Immobile
     canXenosPush: false
   - type: RMCVehicleOvercharge
