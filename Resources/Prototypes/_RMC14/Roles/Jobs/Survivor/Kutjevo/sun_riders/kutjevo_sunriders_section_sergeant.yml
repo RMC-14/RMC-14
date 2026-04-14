@@ -35,7 +35,6 @@
   id: RMCGearSunRidersSectionSergeant
   equipment:
     jumpsuit: RMCJumpsuitSurvivorMarineDropPouchAlt
-    head: RMCHeadDurag
     eyes: RMCWeldingGoggles
     back: RMCBackpackRTOFilledSurvivor
     shoes: CMBootsBlackFilled
@@ -64,9 +63,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomGearOther:
-    -
-      - [ RMCCigarettePackLuckySloths ]
+    randomOutfits:
+    - [ RMCHeadDurag ]
+    - [ CMHeadCapOfficer ]
+    - [ RMCHeadBeanie ]
+    - [ CMHeadBandTan ]
 
 - type: entity
   parent: RMCSurvivorPresetSunRiderSectionSergeantNoPrimary
