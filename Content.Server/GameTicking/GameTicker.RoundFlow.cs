@@ -8,6 +8,7 @@ using Content.Server.Maps;
 using Content.Server.Roles;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Prototypes;
+using Content.Shared._RMC14.Stats;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -519,6 +520,13 @@ namespace Content.Server.GameTicking
 
             var roundEndText = $"{text}\n{textEv.Text}";
 
+            //RMC14
+            var statsEv = new RoundEndStatsAppendEvent();
+            RaiseLocalEvent(statsEv);
+
+            var statsText = statsEv.Text;
+            //
+
             //Get the timespan of the round.
             var roundDuration = RoundDuration();
 
@@ -592,6 +600,7 @@ namespace Content.Server.GameTicking
             var roundEndMessageEvent = new RoundEndMessageEvent(
                 gamemodeTitle,
                 roundEndText,
+                statsText, //RMC14
                 roundDuration,
                 RoundId,
                 listOfPlayerInfoFinal.Length,

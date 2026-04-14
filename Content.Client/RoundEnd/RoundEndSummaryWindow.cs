@@ -14,7 +14,7 @@ namespace Content.Client.RoundEnd
         private readonly IEntityManager _entityManager;
         public int RoundId;
 
-        public RoundEndSummaryWindow(string gm, string roundEnd, TimeSpan roundTimeSpan, int roundId,
+        public RoundEndSummaryWindow(string gm, string roundEnd, string statsText, TimeSpan roundTimeSpan, int roundId,
             RoundEndMessageEvent.RoundEndPlayerInfo[] info, IEntityManager entityManager)
         {
             _entityManager = entityManager;
@@ -33,6 +33,8 @@ namespace Content.Client.RoundEnd
             var roundEndTabs = new TabContainer();
             roundEndTabs.AddChild(MakeRoundEndSummaryTab(gm, roundEnd, roundTimeSpan, roundId));
             roundEndTabs.AddChild(MakePlayerManifestTab(info));
+
+            roundEndTabs.AddChild(MakeStatisticsTab(statsText)); // RMC14
 
             Contents.AddChild(roundEndTabs);
 
@@ -166,6 +168,40 @@ namespace Content.Client.RoundEnd
             playerManifestTab.AddChild(playerInfoContainerScrollbox);
 
             return playerManifestTab;
+        }
+
+        //RMC14
+        private BoxContainer MakeStatisticsTab(string statsText)
+        {
+            var statsTab = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                Name = Loc.GetString("rmc-round-end-stats-tab-title")
+            };
+
+            var scroll = new ScrollContainer
+            {
+                VerticalExpand = true,
+                Margin = new Thickness(10),
+                HScrollEnabled = false
+            };
+
+            var container = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical
+            };
+
+            if (!string.IsNullOrEmpty(statsText))
+            {
+                var label = new RichTextLabel();
+                label.SetMarkup(statsText);
+                container.AddChild(label);
+            }
+
+            scroll.AddChild(container);
+            statsTab.AddChild(scroll);
+
+            return statsTab;
         }
     }
 

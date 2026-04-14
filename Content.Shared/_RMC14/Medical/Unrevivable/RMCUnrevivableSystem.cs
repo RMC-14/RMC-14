@@ -1,4 +1,5 @@
-﻿using Content.Shared.Mobs;
+﻿using Content.Shared._RMC14.Stats;
+using Content.Shared.Mobs;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Timing;
 
@@ -6,6 +7,7 @@ namespace Content.Shared._RMC14.Medical.Unrevivable;
 
 public sealed class RMCUnrevivableSystem : EntitySystem
 {
+    [Dependency] private readonly SharedStatTrackingSystem _stats = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -54,6 +56,8 @@ public sealed class RMCUnrevivableSystem : EntitySystem
 
         ent.Comp.KillLarva = killLarva;
         Dirty(ent);
+
+        _stats.UpdateMarinePermaDeathTotal(ent);
     }
 
     public bool DoesKillLarvaOnUnrevivable(Entity<RMCRevivableComponent?> ent)

@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Medical.Surgery.Conditions;
 using Content.Shared._RMC14.Medical.Surgery.Effects.Step;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
 using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared._RMC14.Stats;
 using Content.Shared._RMC14.Xenonids.Organs;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Interaction;
@@ -29,6 +30,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedStatTrackingSystem _stats = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly WoundsSystem _wounds = default!;
 
@@ -151,6 +153,8 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         {
             SpawnAtPosition(ent.Comp.DeadLarvaItem, coords);
         }
+
+        _stats.UpdateTotalLarvaExtractions(args.User);
     }
 
     private void OnStepXenoHeartComplete(Entity<RMCSurgeryStepXenoHeartEffectComponent> ent, ref CMSurgeryStepEvent args)

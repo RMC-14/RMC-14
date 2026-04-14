@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Sprite;
+using Content.Shared._RMC14.Stats;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -83,6 +84,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedStatTrackingSystem _stats = default!;
 
     private const CollisionGroup LeapCollisionGroup = CollisionGroup.InteractImpassable;
     private const CollisionGroup ThrownCollisionGroup = CollisionGroup.InteractImpassable | CollisionGroup.BarricadeImpassable;
@@ -421,6 +423,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     private void OnVictimInfectedMapInit(Entity<VictimInfectedComponent> victim, ref MapInitEvent args)
     {
         victim.Comp.BurstAt = _timing.CurTime + victim.Comp.BurstDelay;
+        _stats.UpdateTotalInfected();
     }
 
     private void OnVictimInfectedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
@@ -1053,6 +1056,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         victim.Comp.CurrentStage = 6;
         victim.Comp.SpawnedLarva = spawned;
         Dirty(victim);
+
+        _stats.UpdateBurstTotal();
 
         EnsureComp<BursterComponent>(spawned, out var burster);
         burster.BurstFrom = victim.Owner;

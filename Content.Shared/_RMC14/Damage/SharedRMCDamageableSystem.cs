@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Projectiles;
+using Content.Shared._RMC14.Stats;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Chat.Prototypes;
@@ -51,6 +52,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly SharedStatTrackingSystem _stats = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -133,6 +135,8 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem),
             ]
         );
+
+        SubscribeLocalEvent<DamageableComponent, DamageChangedEvent>(OnDamageableDamageChanged);
 
         _bruteTypes.Clear();
         _burnTypes.Clear();
@@ -344,6 +348,14 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             return;
 
         args.Damage *= ent.Comp.Multiplier;
+    }
+
+    private void OnDamageableDamageChanged(Entity<DamageableComponent> ent, ref DamageChangedEvent args)
+    {
+        if (args.DamageDelta == null)
+            return;
+
+        _stats.UpdateDamageReceived(ent, args.DamageDelta.GetTotal(), args.Origin);
     }
 
     /// <remarks>Do not use when <see cref="equal"/> already has damage types from <see cref="groupId"/></remarks>

@@ -7,6 +7,7 @@ using Content.Server.Storage.EntitySystems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared._RMC14.Stats;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chasm;
@@ -42,6 +43,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedStatTrackingSystem _stats = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
@@ -121,6 +123,8 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         elevator.Comp.Orders.Add(order);
         SendUIStateAll();
         _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(args.Actor):actor} bought requisitions crate {order.Name} with crate {order.Crate} for {order.Cost}");
+
+        _stats.UpDateUsedRequisitionsBudgetTotal(order.Cost);
     }
 
     private void OnPlatform(Entity<RequisitionsComputerComponent> computer, ref RequisitionsPlatformMsg args)

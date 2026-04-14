@@ -38,3 +38,53 @@ rmc-distress-signal-saving-report = Saving operational report to archive.
 rmc-distress-signal-final-scan = Commencing final systems scan in 3 minutes.
 rmc-distress-signal-admin-start-fail = Can't start distress signal. Requires at least {$minimum} xeno player but we have {$candidates}.
 rmc-distress-signal-operation-name = Operation {$name}
+
+rmc-round-end-stats-tab-title = Round Stats
+
+# Marine Stats
+rmc-distress-signal-round-stat-marine-header = [color=green]Marine Statistics[/color]
+
+rmc-distress-signal-round-stat-total-marines = Total Marines: {$count}
+rmc-distress-signal-round-stat-marine-deaths = Deaths: {$count}
+rmc-distress-signal-round-stat-marine-deaths-top = Deaths: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-marine-perma-deaths = Permanent Deaths: {$count}
+rmc-distress-signal-round-stat-damage-received = Damage Received: {$count}
+rmc-distress-signal-round-stat-damage-received-top = Damage Received: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-damage-healed = Healing Done: {$count}
+rmc-distress-signal-round-stat-damage-healed-top = Healing Done: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-marine-projectiles-fired = Projectiles Fired: {$count}
+rmc-distress-signal-round-stat-marine-projectiles-fired-top = Projectiles Fired: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-marine-projectile-hits = Projectile Hits: {$count}
+rmc-distress-signal-round-stat-marine-projectile-hits-top = Projectile Hits: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-friendly-fire-incidents = Friendly Fire Incidents: {$count}
+rmc-distress-signal-round-stat-friendly-fire-incidents-top = Friendly Fire Instances: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-friendly-fire-kills = Friendly Fire Kills: {$count}
+rmc-distress-signal-round-stat-friendly-fire-kills-top = Friendly Fire Kills: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-larva-extractions = Larva Extractions: {$count}
+rmc-distress-signal-round-stat-larva-extractions-top = Larva Extractions: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-used-requisitions-budget = Requisitions Budget Used: {$count}
+rmc-distress-signal-round-stat-supply-drops = Supply Drops: {$count}
+rmc-distress-signal-round-stat-intel-points = Intel Points Spent/Earned: {$spent}/{$earned}
+
+# Xeno Stats
+rmc-distress-signal-round-stat-xeno-header = [color=purple]Xenonid Statistics[/color]
+
+rmc-distress-signal-round-stat-total-xenos = Total Xenonids: {$count}
+rmc-distress-signal-round-stat-xeno-deaths = Deaths: {$count}
+rmc-distress-signal-round-stat-xeno-deaths-top = Deaths: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-xeno-damage-received = Damage Received: {$count}
+rmc-distress-signal-round-stat-xeno-damage-received-top = Damage Received: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-xeno-damage-healed = Healing Done: {$count}
+rmc-distress-signal-round-stat-xeno-damage-healed-top = Healing Done: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-lesser-drones = Lesser Drones Spawned: {$count}
+rmc-distress-signal-round-stat-lesser-drones-top = Lesser Drones Spawned: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-player-parasites = Player Parasites Spawned: {$count}
+rmc-distress-signal-round-stat-player-parasites-top = Player Parasites Spawned: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-xeno-projectiles-fired = Projectiles Fired: {$count}
+rmc-distress-signal-round-stat-xeno-projectiles-fired-top = Projectiles Fired: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-xeno-projectile-hits = Projectile Hits: {$count}
+rmc-distress-signal-round-stat-xeno-projectile-hits-top = Projectile Hits: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-xeno-melee-hits = Melee Hits: {$count}
+rmc-distress-signal-round-stat-xeno-melee-hits-top = Melee Hits: {$count} | {$name}: {$value}
+rmc-distress-signal-round-stat-infected = Total Infections: {$count}
+rmc-distress-signal-round-stat-bursts = Larva Bursts: {$count}

@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Stats;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.GameTicking;
@@ -45,6 +46,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private readonly SharedStatTrackingSystem _stats = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCPullingSystem _rmcpulling = default!;
@@ -296,6 +298,8 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         Dirty(droppingEntity, dropping);
 
         _paradrop.DoParaDrop(droppingEntity, dropEntityCoordinates, skyFallDuration, dropDuration, arrivingSound, dropScatter);
+
+        _stats.UpdateSupplyDropCount();
     }
 
     private MapId EnsureMap()

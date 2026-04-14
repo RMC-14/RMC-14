@@ -194,6 +194,8 @@ namespace Content.Shared.GameTicking
         public int PlayerCount { get; }
         public RoundEndPlayerInfo[] AllPlayersEndInfo { get; }
 
+        public string StatsText { get; } // RMC14
+
         /// <summary>
         /// Sound gets networked due to how entity lifecycle works between client / server and to avoid clipping.
         /// </summary>
@@ -202,6 +204,7 @@ namespace Content.Shared.GameTicking
         public RoundEndMessageEvent(
             string gamemodeTitle,
             string roundEndText,
+            string statsText, //RMC14
             TimeSpan roundDuration,
             int roundId,
             int playerCount,
@@ -215,6 +218,9 @@ namespace Content.Shared.GameTicking
             PlayerCount = playerCount;
             AllPlayersEndInfo = allPlayersEndInfo;
             RestartSound = restartSound;
+
+            //RMC14
+            StatsText = statsText;
         }
     }
 
