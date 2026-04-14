@@ -1127,6 +1127,15 @@
     - id: CMPaper
 
 - type: entity
+  parent: RMCSatchelTSEPA
+  id: RMCSatchelTSEPAFillSurvivorTSEPAInspector
+  suffix: Filled, Survivor, TSEPA Inspector
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCoatTSEPAFormal
+    - id: CMAdvFirstAidKitFilled
+- type: entity
   parent: CMSatchel
   id: RMCSatchelMARSOC
   name: UNMC SOF combat pack

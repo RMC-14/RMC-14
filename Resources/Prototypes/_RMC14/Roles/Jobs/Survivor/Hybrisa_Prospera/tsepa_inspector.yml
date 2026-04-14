@@ -10,9 +10,9 @@
   accessGroups:
   - ColonistAllAccessNoArmory
   - ColonistTSEPA
+  spawnMenuRoleName: TSEPA Inspector (Hybrisa Survivor)
   icon: "RMCJobIconTSEPAInspector"
   hasIcon: true
-  spawnMenuRoleName: TSEPA Inspector (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -52,21 +52,22 @@
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorHybrisaTSEPAInspector
   equipment:
     id: RMCIDCardTSEPAInspectorSurvivor
-    jumpsuit: RMCJumpsuitUniformSurvivorInspector
+    jumpsuit: RMCJumpsuitTSEPASurvivorInspector
     outerClothing: RMCArmourM4TSEPAChief
-    eyes: CMGlassesSecurityBlue
+    eyes: RMCGlassesSecurityBlue
     head: RMCHeadCapTSEPAPeakedGold
     suitstorage: RMCWeaponSMGPDW90
-    belt: RMCMarineBeltPDW90
+    belt: RMCBeltMarinePDW90
     back: RMCSatchelTSEPAFillSurvivorTSEPAInspector
     gloves: RMCHandsVeteran # TODO RMC14: swat gloves
-    shoes: CMBootsBlackFilled
+    shoes: RMCShoesLaceup
     ears: RMCHeadsetTSEPA
-    pocket1: RMCPouchSurvivalFill # TODO RMC14: wy survival pouch
-    pocket2: RMCPouchGeneralLargeFilledTSEPAInspector
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchGeneralLargeFilledSurvivorTSEPAInspector
 
 - type: entity
   parent: RMCJumpsuitTSEPA
