@@ -17,6 +17,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCSurvivor
     - type: Skills
       skills:
         RMCSkillPolice: 2
@@ -31,6 +32,7 @@
         RMCSkillEndurance: 3
     - type: MarineOrders
     - type: RMCPointing
+    - type: RMCTrackable
     - type: CommandAccent
     - type: InnateCommandSpeech
     - type: IntelRescueSurvivorObjective

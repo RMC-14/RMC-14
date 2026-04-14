@@ -462,10 +462,18 @@
     - scenarioName: tse_airbase
       scenarioProbability: 0.3
     minPlayers: 130
+    survivorJobs:
+    - RMCSurvivorCommandingOfficer: 1
+    - CMSurvivor: -1
+    - CMSurvivorCorporate: 2
+    - CMSurvivorDoctor: 3
+    - CMSurvivorEngineer: 4
+    - CMSurvivorSecurity: 2
+    - CMSurvivorScientist: 2
     survivorJobVariants:
-      CMSurvivor:
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorHybrisaTSEPAInspector: 1
+      CMSurvivor:
       - RMCSurvivorHybrisaCivilian: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
       - RMCSurvivorHybrisaGrindBarista: 1
