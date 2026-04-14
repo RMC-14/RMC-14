@@ -29,6 +29,20 @@
 
 - type: entity
   parent: RMCWeaponPistolL54
+  id: RMCWeaponPistolL54Tactical
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentLaserSight
+
+
+- type: entity
+  parent: RMCWeaponPistolL54
   id: RMCWeaponPistolL54Empty
   suffix: Empty
   components:
@@ -64,7 +78,7 @@
             tags:
               - RMCMagazinePistolL54Custom
           startingItem: RMCMagazinePistolL54Custom
-          
+
 - type: entity
   parent: RMCWeaponPistolL54Custom
   id: RMCWeaponPistolL54CustomAlt
@@ -101,7 +115,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    
+
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolL54Custom
@@ -127,7 +141,7 @@
           map: ["enum.GunVisualLayers.Mag"]
     - type: MagazineVisuals
       magState: mag
-      
+
 - type: entity
   parent: CMCartridgePistol9mm
   id: RMCCartridge9x20mm
@@ -140,7 +154,7 @@
         - RMCCartridge9x20mm
     - type: CartridgeAmmo
       proto: RMCBullet9x20mm
-      
+
 - type: entity
   parent: CMBulletPistol9mm
   id: RMCBullet9x20mm
@@ -154,12 +168,12 @@
 
 - type: Tag
   id: RMCMagazinePistolL54
-  
+
 - type: Tag
   id: RMCMagazinePistolL54Custom
-  
+
 - type: Tag
   id: RMCCartridge9x20mm
-  
+
 - type: Tag
   id: RMCBullet9x20mm

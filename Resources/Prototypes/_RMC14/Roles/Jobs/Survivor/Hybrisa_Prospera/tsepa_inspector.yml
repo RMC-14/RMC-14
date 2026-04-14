@@ -1,0 +1,109 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorHybrisaTSEPAInspector
+  name: rmc-job-name-survivor-tsepa-inspector
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCO
+  ranks:
+    RMCRankTSEPAInspector: []
+  startingGear: RMCGearSurvivorHybrisaTSEPAConstable
+  accessGroups:
+  - ColonistAllAccessNoArmory
+  - ColonistTSEPA
+  roleWeight: 0.25
+  icon: "RMCJobIconTSEPAInspector"
+  hasIcon: true
+  spawnMenuRoleName: TSEPA Inspector (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillPolice: 2
+        RMCSkillCqc: 3
+        RMCSkillConstruction: 1
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 2
+        RMCSkillEngineer: 1
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillEndurance: 3
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: NpcFactionMember
+      factions:
+      - TSE
+      - Civilian
+      - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNoGun
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_commander
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_nspa
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-tsepa-inspector
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorHybrisaTSEPAInspector
+  equipment:
+    id: RMCIDCardTSEPAInspectorSurvivor
+    jumpsuit: RMCJumpsuitUniformSurvivorInspector
+    outerClothing: RMCArmourM4TSEPAChief
+    eyes: CMGlassesSecurityBlue
+    head: RMCHeadCapTSEPAPeakedGold
+    suitstorage: RMCWeaponSMGPDW90
+    belt: RMCMarineBeltPDW90
+    back: RMCSatchelTSEPAFillSurvivorTSEPAInspector
+    gloves: RMCHandsVeteran # TODO RMC14: swat gloves
+    shoes: CMBootsBlackFilled
+    ears: RMCHeadsetTSEPA
+    pocket1: RMCPouchSurvivalFill # TODO RMC14: wy survival pouch
+    pocket2: RMCPouchGeneralLargeFilledTSEPAInspector
+
+- type: entity
+  parent: RMCJumpsuitTSEPA
+  id: RMCJumpsuitTSEPASurvivorInspector
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSurvivorTSEPAInspector
+
+- type: entity
+  parent: RMCWebbingHolsterBlack
+  id: RMCWebbingSurvivorTSEPAInspector
+  suffix: Inspector, Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL54Tactical
+    - id: RMCMagazinePistolL54
+    - id: RMCMagazinePistolL54
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledSurvivorTSEPAInspector
+  suffix: Filled, Survivor, Inspector
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMClipboard
+    - id: CMPenFountain
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointHybrisaTSEPAInspector
+  name: hybrisa tsepa inspector spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorHybrisaTSEPAInspector
+  - type: Sprite
+    state: co_spawn
