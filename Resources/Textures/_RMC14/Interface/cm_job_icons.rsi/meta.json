@@ -452,6 +452,12 @@
             "name": "rmc_teamleader_pve"
         },
         {
+            "name": "para_co"
+        },
+        {
+            "name": "para_co_alt"
+        },
+        {
             "name": "para_commander"
         },
         {
@@ -468,12 +474,6 @@
         },
         {
             "name": "para_lieutenant_alt"
-        },
-        {
-            "name": "para_major"
-        },
-        {
-            "name": "para_major_alt"
         },
         {
             "name": "para_medic"
