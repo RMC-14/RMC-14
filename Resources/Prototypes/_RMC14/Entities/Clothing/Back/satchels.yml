@@ -1135,7 +1135,7 @@
     contents:
     - id: RMCCoatTSEPAFormal
     - id: CMAdvFirstAidKitFilled
-    - id: RMCCigarCase
+    - id: RMCShioRoyalsCase
     - id: RMCZippoGold
 - type: entity
   parent: CMSatchel
