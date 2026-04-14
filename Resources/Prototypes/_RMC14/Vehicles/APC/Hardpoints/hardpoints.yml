@@ -99,9 +99,9 @@
   - type: BallisticAmmoProvider
     cycleable: false
     proto: RMCVehicleCartridgeBoyarsDualCannon10x50mm
-    capacity: 60
+    capacity: 40
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 60
+    magazineSize: 40
     maxStoredMagazines: 2
   - type: GunFireArc
     arc: 90
