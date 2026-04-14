@@ -32,6 +32,7 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
         TotalMarineProjectiles = 0;
         TotalMarineProjectileHits = 0;
         TotalFriendlyFireIncidents = 0;
+        TotalFriendlyFireKills = 0;
         TotalLarvaExtractions = 0;
         TotalUsedRequisitionsBudget = 0;
         TotalSupplyDrops = 0;
@@ -110,6 +111,9 @@ public sealed class StatTrackingSystem : SharedStatTrackingSystem
 
         var (mostFriendlyFireIncidentsName, mostFriendlyFireIncidents) = GetHighScore(player => player.Marine.TotalFriendlyFireIncidents);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-friendly-fire-incidents", TotalFriendlyFireIncidents, mostFriendlyFireIncidentsName, mostFriendlyFireIncidents);
+
+        var (mostFriendlyFireKillsName, mostFriendlyFireKills) = GetHighScore(player => player.Marine.TotalFriendlyFireKills);
+        AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-friendly-fire-kills", TotalFriendlyFireKills, mostFriendlyFireKillsName, mostFriendlyFireKills);
 
         var (mostLarvaExtractionsName, mostLarvaExtractions) = GetHighScore(player => player.Marine.TotalLarvaExtractions);
         AddPlayerTrackedStat(ref endEvent, "rmc-distress-signal-round-stat-larva-extractions", TotalLarvaExtractions, mostLarvaExtractionsName, mostLarvaExtractions);

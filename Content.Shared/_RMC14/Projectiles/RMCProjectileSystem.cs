@@ -9,7 +9,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
-using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -254,7 +253,7 @@ public sealed class RMCProjectileSystem : EntitySystem
 
     private void OnProjectileHit(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)
     {
-        _stats.UpdateProjectileHits(args.Target, args.Shooter);
+        _stats.UpdateProjectileHits(ent, args.Target, args.Shooter);
     }
 
     public void SetMaxRange(EntityUid projectile, float max)

@@ -338,7 +338,7 @@ public sealed partial class CMDistressSignalRuleSystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        _stats.UpdateDeathCount(ent);
+        _stats.UpdateDeathCount(ent, args.Origin);
 
         RemCompDeferred<GhostRoleComponent>(ent);
         CheckRoundShouldEnd();
