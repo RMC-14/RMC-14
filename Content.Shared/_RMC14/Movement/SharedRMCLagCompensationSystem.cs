@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.CCVar;
+using System.Numerics;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Coordinates;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -20,6 +21,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public float MarginTiles { get; private set; }
+    public float PredictionCoordinateDeviation { get; private set; }
 
     private EntityQuery<ActorComponent> _actorQuery;
 
@@ -34,6 +36,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         SubscribeNetworkEvent<RMCSetLastRealTickEvent>(OnSetLastRealTick);
 
         Subs.CVar(_config, RMCCVars.RMCLagCompensationMarginTiles, v => MarginTiles = v, true);
+        Subs.CVar(_config, RMCCVars.RMCGunPredictionCoordinateDeviation, v => PredictionCoordinateDeviation = v, true);
     }
 
     private void OnSetLastRealTick(RMCSetLastRealTickEvent msg, EntitySessionEventArgs args)
@@ -154,5 +157,53 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
     {
         var coordinates = _transform.ToMapCoordinates(GetCoordinates(target, session));
         return Collides(target, projectile, coordinates);
+    }
+
+    public bool TryGetAcceptedHitCoordinates(
+        Entity<FixturesComponent?> target,
+        Entity<PhysicsComponent?> collider,
+        ICommonSession session,
+        MapCoordinates clientCoordinates,
+        out MapCoordinates acceptedCoordinates)
+    {
+        var serverCoordinates = _transform.ToMapCoordinates(GetCoordinates(target, session));
+        var clientCoordinatesValid = clientCoordinates.MapId == serverCoordinates.MapId &&
+                                     clientCoordinates.InRange(serverCoordinates, PredictionCoordinateDeviation);
+
+        if (clientCoordinatesValid && Collides(target, collider, clientCoordinates))
+        {
+            acceptedCoordinates = clientCoordinates;
+            return true;
+        }
+
+        if (Collides(target, collider, serverCoordinates))
+        {
+            acceptedCoordinates = serverCoordinates;
+            return true;
+        }
+
+        acceptedCoordinates = default;
+        return false;
+    }
+
+    public void RewindEntityToCoordinates(EntityUid target, MapCoordinates coordinates)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(target, out TransformComponent? xform))
+            return;
+
+        var current = _transform.GetMapCoordinates(target, xform);
+        if (current.MapId != coordinates.MapId)
+            return;
+
+        _transform.SetCoordinates(target, xform, _transform.ToCoordinates(xform.ParentUid, coordinates));
+
+        if (TryComp(target, out PhysicsComponent? physics))
+        {
+            _physics.SetLinearVelocity(target, Vector2.Zero, body: physics);
+            _physics.SetAngularVelocity(target, 0, body: physics);
+        }
     }
 }

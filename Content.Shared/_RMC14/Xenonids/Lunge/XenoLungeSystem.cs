@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Numerics;
-using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Pulling;
@@ -15,7 +14,6 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
-using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
@@ -27,7 +25,6 @@ namespace Content.Shared._RMC14.Xenonids.Lunge;
 
 public sealed class XenoLungeSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
@@ -47,7 +44,6 @@ public sealed class XenoLungeSystem : EntitySystem
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
-    private float _coordinateDeviation;
 
     public override void Initialize()
     {
@@ -65,8 +61,6 @@ public sealed class XenoLungeSystem : EntitySystem
         SubscribeLocalEvent<RMCLungeProtectionComponent, XenoLungeHitAttempt>(OnXenoLungeHitAttempt);
 
         SubscribeLocalEvent<XenoLungeStunnedComponent, PullStoppedMessage>(OnXenoLungeStunnedPullStopped);
-
-        Subs.CVar(_config, RMCCVars.RMCGunPredictionCoordinateDeviation, v => _coordinateDeviation = v, true);
     }
 
     private void OnPredictedHit(XenoLungePredictedHitEvent msg, EntitySessionEventArgs args)
@@ -90,45 +84,18 @@ public sealed class XenoLungeSystem : EntitySystem
             return;
 
         _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
-        var serverCoordinates = _transform.ToMapCoordinates(_rmcLagCompensation.GetCoordinates(target, args.SenderSession));
-        var clientCoordinates = msg.TargetCoordinates;
-        var clientCoordinatesValid = clientCoordinates.MapId == serverCoordinates.MapId &&
-                                     clientCoordinates.InRange(serverCoordinates, _coordinateDeviation);
-        var serverSampleHit = _rmcLagCompensation.Collides(target, ent, serverCoordinates);
-        var clientSampleHit = clientCoordinatesValid &&
-                              _rmcLagCompensation.Collides(target, ent, clientCoordinates);
-
-        MapCoordinates acceptedCoordinates;
-        if (clientSampleHit)
-            acceptedCoordinates = clientCoordinates;
-        else if (serverSampleHit)
-            acceptedCoordinates = serverCoordinates;
-        else
-            return;
-
-        RewindTargetToPredictedHitSample(target, acceptedCoordinates);
-        ApplyLungeHitEffects((ent, lunging), target, true, false, acceptedCoordinates);
-    }
-
-    private void RewindTargetToPredictedHitSample(EntityUid target, MapCoordinates coordinates)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (!TryComp(target, out TransformComponent? xform))
-            return;
-
-        var current = _transform.GetMapCoordinates(target, xform);
-        if (current.MapId != coordinates.MapId)
-            return;
-
-        _transform.SetCoordinates(target, xform, _transform.ToCoordinates(xform.ParentUid, coordinates));
-
-        if (_physicsQuery.TryGetComponent(target, out var physics))
+        if (!_rmcLagCompensation.TryGetAcceptedHitCoordinates(
+                target,
+                ent,
+                args.SenderSession,
+                msg.TargetCoordinates,
+                out var acceptedCoordinates))
         {
-            _physics.SetLinearVelocity(target, Vector2.Zero, body: physics);
-            _physics.SetAngularVelocity(target, 0, body: physics);
+            return;
         }
+
+        _rmcLagCompensation.RewindEntityToCoordinates(target, acceptedCoordinates);
+        ApplyLungeHitEffects((ent, lunging), target, true, false, acceptedCoordinates);
     }
 
     private void OnXenoLungeAction(Entity<XenoLungeComponent> xeno, ref XenoLungeActionEvent args)

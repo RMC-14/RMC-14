@@ -3,7 +3,6 @@ using System.Numerics;
 using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.CameraShake;
-using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Movement;
@@ -41,7 +40,6 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -59,7 +57,6 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly BlindableSystem _blindable = default!;
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -85,7 +82,6 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<FixturesComponent> _fixturesQuery;
-    private float _coordinateDeviation;
 
     public override void Initialize()
     {
@@ -111,8 +107,6 @@ public sealed class XenoLeapSystem : EntitySystem
         SubscribeLocalEvent<XenoLeapingComponent, PhysicsSleepEvent>(OnXenoLeapingPhysicsSleep);
         SubscribeLocalEvent<XenoLeapingComponent, StartPullAttemptEvent>(OnXenoLeapingStartPullAttempt);
         SubscribeLocalEvent<XenoLeapingComponent, PullAttemptEvent>(OnXenoLeapingPullAttempt);
-
-        Subs.CVar(_config, RMCCVars.RMCGunPredictionCoordinateDeviation, v => _coordinateDeviation = v, true);
     }
 
     private void OnPredictedHit(XenoLeapPredictedHitEvent msg, EntitySessionEventArgs args)
@@ -132,45 +126,20 @@ public sealed class XenoLeapSystem : EntitySystem
                 return;
 
             _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
-
-            var serverCoordinates = _transform.ToMapCoordinates(_rmcLagCompensation.GetCoordinates(target, args.SenderSession));
-            var clientCoordinates = msg.TargetCoordinates;
-            var clientCoordinatesValid = clientCoordinates.MapId == serverCoordinates.MapId &&
-                                         clientCoordinates.InRange(serverCoordinates, _coordinateDeviation);
-            var serverSampleHit = _rmcLagCompensation.Collides(target, ent, serverCoordinates);
-            var clientSampleHit = clientCoordinatesValid &&
-                                  _rmcLagCompensation.Collides(target, ent, clientCoordinates);
-
-            if (clientSampleHit)
-                RewindTargetToPredictedHitSample(target, clientCoordinates);
-            else if (serverSampleHit)
-                RewindTargetToPredictedHitSample(target, serverCoordinates);
-            else
+            if (!_rmcLagCompensation.TryGetAcceptedHitCoordinates(
+                    target,
+                    ent,
+                    args.SenderSession,
+                    msg.TargetCoordinates,
+                    out var acceptedCoordinates))
+            {
                 return;
+            }
+
+            _rmcLagCompensation.RewindEntityToCoordinates(target, acceptedCoordinates);
         }
 
         ApplyLeapingHitEffects((ent, leaping), target);
-    }
-
-    private void RewindTargetToPredictedHitSample(EntityUid target, MapCoordinates coordinates)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (!TryComp(target, out TransformComponent? xform))
-            return;
-
-        var current = _transform.GetMapCoordinates(target, xform);
-        if (current.MapId != coordinates.MapId)
-            return;
-
-        _transform.SetCoordinates(target, xform, _transform.ToCoordinates(xform.ParentUid, coordinates));
-
-        if (_physicsQuery.TryGetComponent(target, out var physics))
-        {
-            _physics.SetLinearVelocity(target, Vector2.Zero, body: physics);
-            _physics.SetAngularVelocity(target, 0, body: physics);
-        }
     }
 
     private void OnXenoLeapAction(Entity<XenoLeapComponent> xeno, ref XenoLeapActionEvent args)
