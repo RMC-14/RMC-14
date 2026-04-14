@@ -173,3 +173,33 @@
     contents:
     - id: RMCBoxClaymoreMineFilled
       amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateExplosiveWhitePhosphorus
+  name: 30mm WPDP White Phosphorus grenade crate (x25)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxWPDP
+      amount: 1
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateExplosiveWhitePhosphorusCompound
+  name: 30mm CCDP Chemical Compound grenade crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+      amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateExplosiveWhitePhosphorusCompoundBox
+  name: 30mm CCDP Chemical Compound grenade crate (x25)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxCCDP
+      amount: 1
