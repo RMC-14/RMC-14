@@ -71,7 +71,7 @@
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarines
     belt: RMCMatebaBeltLuxuriousFilled
-    back: RMCSatchelLightpackFilledRoyalMajor
+    back: RMCBackpackRCMSmallPVPMajor
     pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 

@@ -69,8 +69,8 @@
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarines
-    belt: RMCBeltHolsterPistolFilledL54
-    back: RMCSatchelLightpackFilledRoyalMedic
+    belt: RMCBeltHolsterPistolRCML54
+    back: RMCBackpackRCMMediumPVPFilled
     pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 

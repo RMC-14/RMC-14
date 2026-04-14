@@ -79,15 +79,15 @@
     ears: RMCHeadsetRoyalMarine
     eyes: RMCGlassesM4SPRBattleSight
     mask: RMCMaskScarfTan
-    jumpsuit: RMCJumpsuitMarineRoyalMK80
+    jumpsuit: RMCJumpsuitMarineRoyalL189
     outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarinesMarksman
-    belt: RMCL24BeltFilled
-    back: RMCSatchelLightpackFilledRoyalMarksman # TODO RMC14 lightweight rmc backpack
-    pocket1: RMCPouchGeneralLargeFilledRoyalCommando
+    belt: RMCBeltRCML24
+    back: RMCBackpackRCMSmallPVPMarksman
+    pocket1: RMCPouchGeneralLargeFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker

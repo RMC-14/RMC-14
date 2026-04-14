@@ -22,13 +22,13 @@
 
 - type: entity
   parent: RMCPouchGeneralLarge
-  id: RMCPouchGeneralLargeFilledRoyalCommando
-  suffix: Filled, RoyalCommando
+  id: RMCPouchGeneralLargeFilledRCM
+  suffix: RCM, Filled
   components:
   - type: StorageFill
     contents:
     - id: RMCHeadRoyalBeret
-    - id: CMMaskGas # TODO RMC14 royal marine gas masks
+    - id: RMCMaskGasRCM
 
 - type: entity
   parent: RMCPouchGeneralLarge

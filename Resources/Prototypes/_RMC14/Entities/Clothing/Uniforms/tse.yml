@@ -23,7 +23,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
   - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyal
+    startingWebbing: RMCWebbingDropPouchRCMFilled
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
@@ -33,11 +33,11 @@
 
 - type: entity
   parent: RMCJumpsuitMarineRoyal
-  id: RMCJumpsuitMarineRoyalMK80
-  suffix: Filled, Royal, MK80
+  id: RMCJumpsuitMarineRoyalL189
+  suffix: Filled, Royal, L189
   components:
   - type: WebbingClothing
-    startingWebbing: RMCShoulderHolsterMK80
+    startingWebbing: RMCWebbingHolsterRCML189
 
 - type: entity
   parent: RMCJumpsuitMarineRoyal
@@ -45,7 +45,7 @@
   suffix: Filled, Royal, Medic
   components:
   - type: WebbingClothing
-    startingWebbing: RMCWebbingSurgicalBlue
+    startingWebbing: RMCWebbingSurgicalRCMFilled
 
 - type: entity
   parent: RMCJumpsuitMarineRoyal
@@ -53,7 +53,7 @@
   suffix: Filled, Royal, Drop Pouch
   components:
   - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyal
+    startingWebbing: RMCWebbingDropPouchRCMFilled
 
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
@@ -65,7 +65,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/team_lead.rsi
   - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyalTeamlead
+    startingWebbing: RMCWebbingDropPouchRCMFilledTeamlead
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines

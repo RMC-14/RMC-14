@@ -352,6 +352,91 @@
     - 0,0,20,1 # 21 Slots
 
 - type: entity
+  parent: RMCBackpackRCMSmallPVP
+  id: RMCBackpackRCMSmallPVPLieutenant
+  suffix: PVP, RCM, Filled Lieutenant
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMAdvFirstAidKitFilled
+    - id: RMCDefibrillatorCompact
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: RMCSyringeCase
+    - id: RMCPackFlareL96
+    - id: RMCMagazineRifleL24
+
+- type: entity
+  parent: RMCBackpackRCMSmallPVP
+  id: RMCBackpackRCMSmallPVPMajor
+  suffix: PVP, RCM, Filled Major
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMAdvFirstAidKitFilled
+    - id: RMCDefibrillatorCompact
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: RMCSyringeCase
+    - id: RMCPackFlareL96
+
+- type: entity
+  parent: RMCBackpackRCMSmallPVP
+  id: RMCBackpackRCMSmallPVPMarksman
+  suffix: PVP, RCM, Filled Marksman
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL24AP
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: RMCPackFlareL96
+
+- type: entity
+  parent: RMCBackpackRCMSmallPVP
+  id: RMCBackpackRCMSmallPVPRifleman
+  suffix: PVP, RCM, Filled Rifleman
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleL83A3AP
+    - id: RMCMagazineRifleL83A3
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: RMCPackFlareL96
+
+- type: entity
+  parent: RMCBackpackRCMSmallPVP
+  id: RMCBackpackRCMSmallPVPSmartgun
+  suffix: PVP, RCM, Filled Smartgun
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFirstAidKitFilled
+    - id: RMCPowerCellSmartgun
+    - id: RMCMagazineSmartGunHT
+      amount: 2
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: RMCPackFlareL96
+
+- type: entity
+  parent: RMCBackpackRCMSmallPVP
+  id: RMCBackpackRCMSmallPVPTeamlead
+  suffix: PVP, RCM, Filled Teamlead
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMAdvFirstAidKitFilled
+    - id: RMCDefibrillatorCompact
+    - id: RMCSyringeCase
+    - id: CMCautery
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: RMCMagazineRifleL24
+    - id: RMCPackFlareL96
+
+- type: entity
   parent: CMPersonalStorageBase
   id: RMCBackpackRCMMedium
   name: standard RCM backpack
@@ -385,6 +470,24 @@
     maxItemSize: Normal
     grid:
     - 0,0,23,1 # 24 Slots
+
+- type: entity
+  parent: RMCBackpackRCMMediumPVP
+  id: RMCBackpackRCMMediumPVPFilled
+  suffix: PVP, RCM, Filled Captain
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMAdvFirstAidKitFilled
+    - id: RMCDefibrillatorCompact
+    - id: RMCPacketGrenadeIncendiaryFilled
+    - id: CMPacketGrenadeHighExplosiveFilled
+    - id: RMCHeadRoyalBeret
+    - id: RMCMaskGasRCM
+    - id: RMCSyringeCase
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: RMCTacticalPrybar
+    - id: RMCMRETSE
 
 - type: entity
   parent: CMBackpack
@@ -477,8 +580,26 @@
 
 - type: entity
   parent: RMCBackpackRCMMedicPVP
+  id: RMCBackpackRCMMedicPVPFilled
+  suffix: PVP, RCM, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMAdvFirstAidKitFilled
+    - id: RMCDefibrillatorCompact
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175 // Why the FUCK does the medic get nades?
+    - id: RMCHeadRoyalBeret
+    - id: RMCMaskGasRCM
+    - id: RMCSyringeCase
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: RMCTacticalPrybar
+    - id: RMCMRETSE
+
+- type: entity
+  parent: RMCBackpackRCMMedicPVP
   id: RMCBackpackRCMMedicPVPFilledParaMedic
-  suffix: Filled, Paramarine Medic
+  suffix: PVP, RCM, Filled Paramarine
   components:
     - type: StorageFill
       contents:
