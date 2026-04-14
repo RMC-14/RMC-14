@@ -6,11 +6,10 @@
   playTimeTracker: RMCJobSurvivorCO
   ranks:
     RMCRankTSEPAInspector: []
-  startingGear: RMCGearSurvivorHybrisaTSEPAConstable
+  startingGear: RMCGearSurvivorHybrisaTSEPAInspector
   accessGroups:
   - ColonistAllAccessNoArmory
   - ColonistTSEPA
-  roleWeight: 0.25
   icon: "RMCJobIconTSEPAInspector"
   hasIcon: true
   spawnMenuRoleName: TSEPA Inspector (Hybrisa Survivor)
@@ -49,7 +48,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_nspa
     - type: JobPrefix
-      prefix: cm-job-prefix-survivor-tsepa-inspector
+      prefix: rmc-job-prefix-survivor-tsepa-inspector
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
