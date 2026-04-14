@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Movement;
@@ -18,6 +19,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
@@ -34,6 +36,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile;
 public sealed class XenoProjectileSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedGunPredictionSystem _gunPrediction = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -51,6 +54,8 @@ public sealed class XenoProjectileSystem : EntitySystem
 
     private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<PreventAttackLightOffComponent> _preventAttackLightOffQuery;
+    private bool _logHits;
+    private float _coordinateDeviation;
 
     private int _limitHitsId;
 
@@ -73,6 +78,9 @@ public sealed class XenoProjectileSystem : EntitySystem
         SubscribeLocalEvent<XenoProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<XenoProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
         SubscribeLocalEvent<XenoProjectileComponent, CMClusterSpawnedEvent>(OnClusterSpawned);
+
+        Subs.CVar(_config, RMCCVars.RMCGunPredictionCoordinateDeviation, v => _coordinateDeviation = v, true);
+        Subs.CVar(_config, RMCCVars.RMCGunPredictionLogHits, v => _logHits = v, true);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -112,10 +120,67 @@ public sealed class XenoProjectileSystem : EntitySystem
             return;
         }
 
-        if (!_rmcLagCompensation.Collides(target, (shot.Value, physics), coordinates))
+        var clientCoordinates = msg.TargetCoordinates;
+        var clientCoordinatesValid = clientCoordinates.MapId == coordinates.MapId &&
+                                     clientCoordinates.InRange(coordinates, _coordinateDeviation);
+        var serverSampleHit = _rmcLagCompensation.Collides(target, (shot.Value, physics), coordinates);
+        var clientSampleHit = clientCoordinatesValid &&
+                              _rmcLagCompensation.Collides(target, (shot.Value, physics), clientCoordinates);
+
+        MapCoordinates acceptedCoordinates;
+        if (clientSampleHit)
+        {
+            acceptedCoordinates = clientCoordinates;
+            LogPredictedHit($"Accepted xeno predicted hit using client sample. Shooter={ToPrettyString(ent)}, Target={ToPrettyString(target)}, Shot={msg.Id}, ServerSample={serverSampleHit}");
+        }
+        else if (serverSampleHit)
+        {
+            acceptedCoordinates = coordinates;
+            LogPredictedHit($"Accepted xeno predicted hit using server sample. Shooter={ToPrettyString(ent)}, Target={ToPrettyString(target)}, Shot={msg.Id}, ClientValid={clientCoordinatesValid}");
+        }
+        else
+        {
             return;
+        }
+
+        if (TryComp(shot, out XenoProjectileComponent? xenoProjectile) &&
+            xenoProjectile.RewindTargetOnPredictedHit)
+        {
+            RewindTargetToPredictedHitSample(target, acceptedCoordinates);
+        }
 
         _projectile.ProjectileCollide((shot.Value, projectile, physics), target, true);
+    }
+
+    private void RewindTargetToPredictedHitSample(EntityUid target, MapCoordinates coordinates)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(target, out TransformComponent? xform))
+            return;
+
+        var current = _transform.GetMapCoordinates(target, xform);
+        if (current.MapId != coordinates.MapId)
+            return;
+
+        _transform.SetCoordinates(target, xform, _transform.ToCoordinates(xform.ParentUid, coordinates));
+
+        if (TryComp(target, out PhysicsComponent? physics))
+        {
+            _physics.SetLinearVelocity(target, Vector2.Zero, body: physics);
+            _physics.SetAngularVelocity(target, 0, body: physics);
+        }
+
+        LogPredictedHit($"Rewound xeno predicted hit target to sample. Target={ToPrettyString(target)}, From={current}, To={coordinates}");
+    }
+
+    private void LogPredictedHit(string message)
+    {
+        Log.Debug(message);
+
+        if (_logHits)
+            Log.Info(message);
     }
 
     private void OnShooterRemove<T>(Entity<XenoProjectileShooterComponent> ent, ref T args)
@@ -155,6 +220,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         var ev = new XenoProjectilePredictedHitEvent(
             shot.Id,
             GetNetEntity(args.OtherEntity),
+            _transform.GetMapCoordinates(args.OtherEntity),
             _rmcLagCompensation.GetLastRealTick(null)
         );
         RaiseNetworkEvent(ev);

@@ -106,6 +106,7 @@
     armorResistsKnockdown: true
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+    rewindTargetOnPredictedHit: true
   - type: DrainOnHit
   - type: ProjectileMaxRange
     max: 5
@@ -127,6 +128,7 @@
     paralyze: 4
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+    rewindTargetOnPredictedHit: true
   - type: ProjectileMaxRange
     max: 4
   - type: RMCProjectileAccuracy
@@ -149,6 +151,7 @@
     armorResistsKnockdown: false
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+    rewindTargetOnPredictedHit: true
   - type: ProjectileMaxRange
     max: 4
 
@@ -455,6 +458,7 @@
         Slash: 40
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
+    rewindTargetOnPredictedHit: true
   - type: RMCProjectileAccuracy
     accuracy: 185
   - type: XenoHookOnHit
