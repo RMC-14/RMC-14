@@ -61,6 +61,8 @@ rmc-squad-info-FORECONCommandingOfficer = Commanding Officer
 rmc-squad-info-InspectorTSEPA = TSEPA Inspector
 rmc-squad-info-SeniorConstableTSEPA = TSEPA Senior Constable
 
+rmc-squad-info-HybrisaInspectorTSEPA = TSEPA Inspector
+
 rmc-squad-info-PrimaryLandingZone = Primary Landing Zone
 
 rmc-squad-info-SPPAirborneSL = Airborne Squad Leader

@@ -67,7 +67,7 @@
     back: RMCSatchelTSEPAFillSurvivorTSEPAInspector
     gloves: RMCHandsVeteran # TODO RMC14: swat gloves
     shoes: RMCShoesLaceup
-    ears: RMCHeadsetTSEPA
+    ears: RMCHeadsetSurvivorTSEPA
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchGeneralLargeFilledSurvivorTSEPAInspector
 

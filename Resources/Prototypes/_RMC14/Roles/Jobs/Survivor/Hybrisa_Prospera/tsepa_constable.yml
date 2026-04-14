@@ -47,7 +47,7 @@
     shoes: RMCShoesLaceup
     id: RMCIDCardTSEPASurvivor
     back: RMCSatchelBlackFillSurvivorConstable
-    ears: RMCHeadsetTSEPA
+    ears: RMCHeadsetSurvivorTSEPA
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

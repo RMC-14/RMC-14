@@ -43,6 +43,28 @@
   - type: GrantTacMapAlert
 
 - type: entity
+  abstract: true
+  parent: RMCHeadsetIconsTSE
+  id: RMCHeadsetSurvivorTSEAbstract
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: InspectorTSEPA
+    trackerModes:
+    - HybrisaInspectorTSEPA
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetSurvivorTSEAbstract
+  id: RMCHeadsetSurvivorTSEPA
+  name: TSEPA headset
+  prefix: Survivor
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyTSEPA
+
+- type: entity
   parent: RMCHeadsetTSEAbstract
   id: RMCHeadsetTSE
   name: TSE headset

@@ -147,10 +147,15 @@
   job: RMCTSEPAInspector
 
 - type: trackerMode
+  id: HybrisaInspectorTSEPA
+  job: RMCSurvivorHybrisaTSEPAInspector
+  alert: SquadTrackerTSEPAInspector
+
+- type: trackerMode
   id: FORECONCommandingOfficer
   job: RMCSurvivorForeconCommander
   alert: SquadTrackerCommandingOfficer
-  
+
 - type: trackerMode
   id: ParaTeamLeader
   job: RMCSurvivorParaTeamLeader
