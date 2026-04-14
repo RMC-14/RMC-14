@@ -3,6 +3,7 @@
   id: RMCSurvivorHybrisaTSEPAInspector
   name: rmc-job-name-survivor-tsepa-inspector
   description: cm-job-description-commanding-officer
+  spawnMenuRoleName: TSEPA Inspector (Hybrisa Survivor)
   playTimeTracker: RMCJobSurvivorCO
   ranks:
     RMCRankTSEPAInspector: []
@@ -10,7 +11,7 @@
   accessGroups:
   - ColonistAllAccessNoArmory
   - ColonistTSEPA
-  spawnMenuRoleName: TSEPA Inspector (Hybrisa Survivor)
+  roleWeight: 0.25
   icon: "RMCJobIconTSEPAInspector"
   hasIcon: true
   special:
@@ -38,7 +39,7 @@
       factions:
       - TSE
       - Civilian
-      - type: EquipSurvivorPreset
+    - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetNoGun
     - type: TacticalMapIcon
       icon:
@@ -52,7 +53,6 @@
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorHybrisaTSEPAInspector
   equipment:
     id: RMCIDCardTSEPAInspectorSurvivor
