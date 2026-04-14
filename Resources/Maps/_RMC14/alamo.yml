@@ -1,17 +1,17 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.2-fix-physics
-  forkId: 1138905189
+  engineVersion: 264.0.2
+  forkId: ""
   forkVersion: ""
   time: 04/14/2026 21:12:23
   entityCount: 218
 maps: []
 grids:
-- 1
+- 173
 orphans:
-- 1
-nullspace: []
+- 173
+nullspace: [ ]
 tilemap:
   3: Space
   9: CMFloorPlating
@@ -34,10 +34,10 @@ tilemap:
 entities:
 - proto: ""
   entities:
-  - uid: 1
+  - uid: 173
     components:
     - type: MetaData
-      name: Alamo
+      name: debug alamo
     - type: Transform
       pos: -0.5,0.5
       parent: invalid
@@ -64,6 +64,8 @@ entities:
       bodyStatus: InAir
       angularDamping: 0.05
       linearDamping: 0.05
+      angularDamping: 0.05
+      linearDamping: 0.05
       fixedRotation: False
       bodyType: Dynamic
     - type: Fixtures
@@ -84,36 +86,38 @@ entities:
         version: 2
         nodes:
         - node:
+            angle: -1.5707963267948966 rad
             color: '#FFFFFFFF'
-            id: CMDecalCargo
+            id: Arrows
           decals:
             1: 0,-5
             2: 0,-6
         - node:
+            angle: 1.5707963267948966 rad
             color: '#FFFFFFFF'
-            id: CMDecalStriped0
+            id: Arrows
           decals:
             20: -1,-7
             21: 0,-7
             22: 1,-7
         - node:
             color: '#FFFFFFFF'
-            id: CMDecalStriped1
+            id: Bot
           decals:
             23: -1,-4
             24: 0,-4
             25: 1,-4
         - node:
-            color: '#FFFFFFFF'
-            id: CMDecalStriped2
+            color: '#A4610696'
+            id: CheckerNWSE
           decals:
             10: 1,-4
             11: 1,-5
             12: 1,-6
             13: 1,-7
         - node:
-            color: '#FFFFFFFF'
-            id: CMDecalStriped3
+            color: '#A4610696'
+            id: QuarterTileOverlayGreyscale
           decals:
             14: -1,-7
             17: -1,-4
@@ -159,7 +163,10 @@ entities:
           - 0
           - 0
         chunkSize: 4
-    - type: GasTileOverlay
+    - type: OccluderTree
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: GridPathfinding
     - type: RadiationGridResistance
 - proto: AtmosDeviceFanTiny
   entities:

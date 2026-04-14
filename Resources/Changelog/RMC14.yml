@@ -1,215 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: The XL Vests have been resprited, along with having camo now.
-    type: Tweak
-  id: 2585
-  time: '2025-12-01T01:12:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8358
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the gas mask not using the species-specific sprites for the species
-      that have them.
-    type: Tweak
-  id: 2586
-  time: '2025-12-01T01:12:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8510
-- author: Vermidia
-  changes:
-  - message: Fixed barricades not taking damage when on the same tile as fire. Bio
-      and Composite barricades take less.
-    type: Fix
-  id: 2587
-  time: '2025-12-01T01:23:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8313
-- author: noctyrnal
-  changes:
-  - message: Added new sprites for the Evacuation Airlocks, along with new black and
-      white variants.
-    type: Add
-  - message: Fixed Evacuation Airlock's panels always showing.
-    type: Fix
-  id: 2588
-  time: '2025-12-01T01:26:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8465
-- author: mio780308
-  changes:
-  - message: Added a search box for food and drink recipes in the guidebook.
-    type: Add
-  id: 2589
-  time: '2025-12-01T01:37:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8457
-- author: J C Denton
-  changes:
-  - message: Solaris Ridge unique survivors.
-    type: Add
-  id: 2590
-  time: '2025-12-01T01:50:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8506
-- author: YO0teacher
-  changes:
-  - message: Examining now works while watching xenos or viewing Overwatch cameras.
-    type: Tweak
-  id: 2591
-  time: '2025-12-01T01:53:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8508
-- author: Whisper
-  changes:
-  - message: (General Change) Officer Ordered Arrests and all their related mentions
-      and provisions have been removed - excluding those given to Commanding Officers.
-    type: Remove
-  - message: (Marine Law) Added text explaining the goals of the MP and an example
-      of problem-solving.
-    type: Add
-  - message: (Law, Definitions) Added a definition of High Ranking Officers and a
-      link to their provisions.
-    type: Add
-  - message: (Law, Definitions) Standard Issue Equipment definition added, equipment
-      SOP made more clear.
-    type: Add
-  - message: (Law, Arresting) More leeway is granted for accidental bodily harm while
-      deployed.
-    type: Fix
-  - message: (Law, Arresting) Field Arrests have been reworked. This includes a loosening
-      of movement restrictions of groundside MPs, when given approval.
-    type: Tweak
-  - message: (Law, Arresting) MP may warn people for minor crimes.
-    type: Add
-  - message: (Law, Arresting) Added Investigative detainment, and time restrictions
-      for processing and completing arrests.
-    type: Add
-  - message: (Law, Charging) This page has been reorganized for ease of review - following
-      issues of not following procedure.
-    type: Tweak
-  - message: (Prisoner Rights)  Added prisoner rights to have clothing.
-    type: Add
-  - message: (Law, Synthetics) Synthetics not part of either the UNMC or WeYA now
-      have rights.
-    type: Add
-  - message: (Law, Variable Crimes) Insubordination cannot be applied to orders that
-      are made with the intent to arrest - this should be resisting arrest.
-    type: Fix
-  - message: (Law, Variable Crimes) Optional crimes have been merged into variable
-      crimes.
-    type: Tweak
-  - message: (Law, Variable Crimes) Public Mischief has been added as a variable crime.
-      It relates to false statement that accuses someone of having committed an offence,
-      and similar behavior of wasting time.
-    type: Add
-  - message: (Law, Variable Crimes) Cleaned up the text of the Resisting Arrest crime.
-    type: Tweak
-  - message: (SOP, Equipment) Added regulations for the command tablet.
-    type: Add
-  - message: (Rules, Core 5) Added a notice that if behavior in the Military Police
-      role does not meet community standards, rolebans may be applied less leniently.
-      This may not be an indication of a bad player, but it is an indication that
-      a player doesn't have the understanding required to play MP.
-    type: Add
-  - message: (Rules, Command) Command rules have been condensed into a single page.
-    type: Tweak
-  - message: (Rules, Command) MP to the best of their ability should be investigating
-      reports of crimes.
-    type: Add
-  - message: (Marine Roleplay Standards) Do not use setpose for anything but setting
-      an examinable character pose - such as leaning on a wall.
-    type: Add
-  - message: (Law, Minor Crimes) Remade DASO into Disrespecting a Superior, which
-      is an NJP charge that applies to any higher ranking person.
-    type: Tweak
-  - message: Minor guidebook spelling and consistency fixes by CatAndHats
-    type: Fix
-  id: 2592
-  time: '2025-12-01T01:54:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8401
-- author: noctyrnal
-  changes:
-  - message: Added Modular Armor to PVE.  You now start with a generic light / medium
-      vest that you can attach multiple different armor pieces to, such as shin guards,
-      neck guards and paint.
-    type: Add
-  - message: Expanded the options within the PVE equipment vendors, adding more attachments
-      and equipment.
-    type: Add
-  - message: Added Monoculars for PVE - Shorter range binoculars that can only be
-      used when standing still.
-    type: Add
-  - message: Sun Rider Riflemen in PVE can now use special job pamphlets, such as
-      spotter and loader pamphlets.
-    type: Fix
-  - message: Resprited the PVE Smart Gun Harness attachment.
-    type: Add
-  - message: PVE SGOs now get a machete backpack, and no longer get the clip on pouch
-      / grenade webbing.
-    type: Add
-  id: 2593
-  time: '2025-12-01T01:57:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8482
-- author: OmerF-afk
-  changes:
-  - message: Added Crate Loot and Powerloader variants, made Floodlights Unanchorable
-    type: Add
-  id: 2594
-  time: '2025-12-01T02:02:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8222
-- author: Vixting
-  changes:
-  - message: Always see yourself on tacmap
-    type: Add
-  - message: Ping effect to players blip
-    type: Add
-  id: 2595
-  time: '2025-12-01T02:06:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8263
-- author: Vixting
-  changes:
-  - message: Adjust half light vision
-    type: Tweak
-  id: 2596
-  time: '2025-12-01T05:31:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8503
-- author: yagwog
-  changes:
-  - message: secure we-ya crate having wrong access
-    type: Fix
-  id: 2597
-  time: '2025-12-01T07:09:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8518
-- author: Vermidia
-  changes:
-  - message: fixed Healer and Gardener drone abilities not ignoring shields
-    type: Fix
-  id: 2598
-  time: '2025-12-01T07:47:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8160
-- author: Aurallianz
-  changes:
-  - message: Fixed being able to melt IDs
-    type: Fix
-  id: 2599
-  time: '2025-12-01T07:48:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8517
-- author: Tyzemol
-  changes:
-  - message: As a xeno you can now build sticky/speed resin and hive structures on
-      the same tile you are standing on.
-    type: Tweak
-  - message: Minimal range to build walls and doors have been made much more lenient.
-    type: Tweak
-  - message: Hivelords can now upgrade resin on the diagonal corners.
-    type: Tweak
-  - message: Secrete resin ability no longer cancels current resin structure doafter
-      when trying to build a new one too early
-    type: Tweak
-  id: 2600
-  time: '2025-12-01T07:50:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8376
-- author: august-sun
-  changes:
-  - message: Added new combat knife variants, available in loadouts.
-    type: Add
-  id: 2601
-  time: '2025-12-01T07:52:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8476
 - author: CatAndHats
   changes:
   - message: Added Glass, Reinforced Glass, and Plastic construction menus; press
@@ -4553,5 +4342,145 @@
   id: 3085
   time: '2026-04-08T04:37:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9448
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed PMC-FOL survivor and Paramarine Commander not counting towards
+      Survivor CO time.
+    type: Fix
+  - message: Fixed the paramarine commander not using the loadout of your survivor
+      commander profile.
+    type: Fix
+  id: 3086
+  time: '2026-04-10T06:41:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9432
+- author: Arykh
+  changes:
+  - message: Using binoculars will now put them on your eyes.
+    type: Tweak
+  - message: Fixes binoculars not using their camouflage in-hand sprites.
+    type: Fix
+  id: 3087
+  time: '2026-04-10T06:43:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9507
+- author: CatAndHats
+  changes:
+  - message: Fixed marines being able to paradrop into the out of bounds water area
+      of New Varadero
+    type: Fix
+  id: 3088
+  time: '2026-04-10T06:43:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9605
+- author: IceNoobXD
+  changes:
+  - message: Added CBRN squad and ghost roles!
+    type: Add
+  id: 3089
+  time: '2026-04-11T01:37:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9565
+- author: CatAndHats
+  changes:
+  - message: Added a HEFA faction icon
+    type: Add
+  id: 3090
+  time: '2026-04-11T01:40:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9166
+- author: PursuitinAshes
+  changes:
+  - message: Added a guidebook entry under "Humanoid Roles" explaining what each New
+      Player Icon represents.
+    type: Add
+  id: 3091
+  time: '2026-04-11T01:41:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9528
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added lots of missing equipment for the RCM, including faction-specific
+      webbing, hats, eyepro, and gas mask.'
+    type: Add
+  id: 3092
+  time: '2026-04-11T01:38:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9537
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added a few missing weapons to the RCM''s arsenal, including loadout
+      sidearms, a flamethrower, and throwing knife.'
+    type: Add
+  id: 3093
+  time: '2026-04-11T01:39:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9542
+- author: SharkSnake98
+  changes:
+  - message: Added new armour, helmets, and uniforms for freelancers, as well as a
+      freelance clothes vendor
+    type: Add
+  id: 3094
+  time: '2026-04-11T01:38:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9574
+- author: SharkSnake98
+  changes:
+  - message: Added a version of the dwarf beard without eyebrows
+    type: Add
+  id: 3095
+  time: '2026-04-11T01:39:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9371
+- author: IceNoobXD
+  changes:
+  - message: fixed the TacMap icons for the MST, RT, and Correspondent.
+    type: Fix
+  id: 3096
+  time: '2026-04-11T01:37:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9572
+- author: Ian321
+  changes:
+  - message: The logistics officer can now use the consoles in the command bubble,
+      the command tablet and launch the lifeboats.
+    type: Tweak
+  id: 3097
+  time: '2026-04-11T01:44:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9481
+- author: wheelwrightt
+  changes:
+  - message: Coffee machines now can brew coffee into mugs.
+    type: Add
+  id: 3098
+  time: '2026-04-11T01:44:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9490
+- author: KompaniLinge
+  changes:
+  - message: Fixed Kommissar prefix being inconsistent between ranks
+    type: Fix
+  - message: Fixed spp officer shirt disappearing when attempting to fold it.
+    type: Fix
+  id: 3099
+  time: '2026-04-11T03:37:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9412
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Loadouts have been added for RCM characters, make sure to customise
+      your character.'
+    type: Add
+  - message: '[PVE] Adjusted the organisation and contents of the vendors and lockers
+      in the HMS Pratchett.'
+    type: Tweak
+  id: 3100
+  time: '2026-04-11T03:50:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9543
+- author: kleinerstation13
+  changes:
+  - message: Added SPP Airborne Bar Crashlanding scenario
+    type: Add
+  - message: 5.45x39 ammo box, Type 71 HEAP magazine box.
+    type: Add
+  id: 3101
+  time: '2026-04-11T04:10:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9514
+- author: CatAndHats
+  changes:
+  - message: Fixed an error where map inserts wouldn't spawn when a survivor scenario
+      would roll, Solaris is saved
+    type: Fix
+  id: 3102
+  time: '2026-04-11T09:09:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9625
 Name: RMC14
 Order: -1
