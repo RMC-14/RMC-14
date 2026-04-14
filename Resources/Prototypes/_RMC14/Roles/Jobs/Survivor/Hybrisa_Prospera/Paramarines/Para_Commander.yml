@@ -72,4 +72,4 @@
   id: RMCJobIconParaCommander
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: para_commander_alt
+    state: para_commander
