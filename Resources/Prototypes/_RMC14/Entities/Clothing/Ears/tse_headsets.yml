@@ -57,7 +57,7 @@
   parent: RMCHeadsetSurvivorTSEAbstract
   id: RMCHeadsetSurvivorTSEPA
   name: TSEPA headset
-  prefix: Survivor
+  suffix: Survivor
   components:
   - type: ContainerFill
     containers:
