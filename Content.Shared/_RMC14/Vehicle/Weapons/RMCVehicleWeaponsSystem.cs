@@ -32,6 +32,7 @@ public sealed partial class RMCVehicleWeaponsSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly RMCVehicleTopologySystem _topology = default!;
+    [Dependency] private readonly RMCVehicleHardpointAmmoSystem _hardpointAmmo = default!;
     [Dependency] private readonly RMCVehicleSystem _vehicleSystem = default!;
     [Dependency] private readonly VehicleTurretSystem _turretSystem = default!;
     [Dependency] private readonly RMCVehicleViewToggleSystem _viewToggle = default!;

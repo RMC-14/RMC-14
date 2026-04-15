@@ -19,13 +19,13 @@ public sealed class RMCVehicleAmmoLoaderBoundUserInterface : BoundUserInterface
 
         _menu = new RMCVehicleAmmoLoaderMenu();
         _menu.OnClose += Close;
-        _menu.LoaderEntity = Owner;
 
         var metaQuery = EntMan.GetEntityQuery<MetaDataComponent>();
         if (metaQuery.TryGetComponent(Owner, out var metadata))
             _menu.Title = metadata.EntityName;
 
-        _menu.OnLoad += slotId => SendMessage(new RMCVehicleAmmoLoaderSelectMessage(slotId));
+        _menu.OnSlotSelected += (slotId, ammoSlot, action) =>
+            SendMessage(new RMCVehicleAmmoLoaderSelectMessage(slotId, ammoSlot, action));
         _menu.OpenCentered();
     }
 
@@ -50,6 +50,6 @@ public sealed class RMCVehicleAmmoLoaderBoundUserInterface : BoundUserInterface
         if (state is not RMCVehicleAmmoLoaderUiState ammoState)
             return;
 
-        _menu?.Update(ammoState.Hardpoints, ammoState.AmmoAmount, ammoState.AmmoMax);
+        _menu?.Update(ammoState.Hardpoints, ammoState.AmmoAmount, ammoState.AmmoMax, ammoState.AmmoPrototype);
     }
 }

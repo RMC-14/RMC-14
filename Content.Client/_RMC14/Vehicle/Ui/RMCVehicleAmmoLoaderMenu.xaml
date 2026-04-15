@@ -13,33 +13,7 @@
                 BorderThickness="2"/>
         </PanelContainer.PanelOverride>
 
-        <BoxContainer Orientation="Vertical" Margin="14" SeparationOverride="12" HorizontalExpand="True" VerticalExpand="True">
-            <BoxContainer Orientation="Horizontal" SeparationOverride="12" HorizontalExpand="True">
-                <PanelContainer MinSize="118 118" VerticalAlignment="Center">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat
-                            BackgroundColor="#0D2235"
-                            BorderColor="#2D5E8E"
-                            BorderThickness="2"/>
-                    </PanelContainer.PanelOverride>
-
-                    <SpriteView
-                        Name="LoaderIcon"
-                        Access="Public"
-                        MinSize="118 118"
-                        Stretch="Fill"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Margin="10"/>
-                </PanelContainer>
-
-                <BoxContainer Orientation="Vertical" SeparationOverride="6" HorizontalExpand="True">
-                    <Label Text="Ammo Loader" StyleClasses="LabelHeading"/>
-                    <Label Text="Select a hardpoint to load." FontColorOverride="#9DB5D1"/>
-                    <Label Name="AmmoCountLabel" Access="Public" Text="Ammo: --/--" FontColorOverride="#6BC7FF"/>
-                </BoxContainer>
-            </BoxContainer>
-
+        <BoxContainer Orientation="Vertical" Margin="14" HorizontalExpand="True" VerticalExpand="True">
             <PanelContainer HorizontalExpand="True" VerticalExpand="True">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat

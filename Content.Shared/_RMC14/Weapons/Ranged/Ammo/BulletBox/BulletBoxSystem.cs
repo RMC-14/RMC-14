@@ -206,4 +206,15 @@ public sealed class BulletBoxSystem : EntitySystem
         UpdateAppearance(ent);
         return true;
     }
+
+    public bool TryAdd(Entity<BulletBoxComponent> ent, int amount)
+    {
+        if (amount <= 0 || ent.Comp.Amount + amount > ent.Comp.Max)
+            return false;
+
+        ent.Comp.Amount += amount;
+        Dirty(ent);
+        UpdateAppearance(ent);
+        return true;
+    }
 }

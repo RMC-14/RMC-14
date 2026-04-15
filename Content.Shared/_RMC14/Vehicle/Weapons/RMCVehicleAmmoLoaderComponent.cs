@@ -15,4 +15,7 @@ public sealed partial class RMCVehicleAmmoLoaderComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan LoadDelay = TimeSpan.FromSeconds(1.5);
+
+    [DataField, AutoNetworkedField]
+    public float InteractionRange = 2.5f;
 }

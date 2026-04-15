@@ -307,8 +307,11 @@ public sealed partial class RMCVehicleWeaponsSystem
         if (item != null && TryComp(item.Value, out RMCVehicleHardpointAmmoComponent? hardpointAmmo))
         {
             magazineSize = Math.Max(1, hardpointAmmo.MagazineSize);
-            storedMagazines = hardpointAmmo.StoredMagazines;
-            maxStoredMagazines = hardpointAmmo.MaxStoredMagazines;
+            if (TryComp(item.Value, out BallisticAmmoProviderComponent? ammoProvider))
+                magazineSize = _hardpointAmmo.GetMagazineSize(hardpointAmmo, ammoProvider);
+
+            storedMagazines = _hardpointAmmo.GetStoredRounds(hardpointAmmo, magazineSize);
+            maxStoredMagazines = _hardpointAmmo.GetMaxStoredRounds(hardpointAmmo, magazineSize);
             hasMagazineData = hardpointAmmo.MagazineSize > 0 || hardpointAmmo.MaxStoredMagazines > 0;
         }
 
