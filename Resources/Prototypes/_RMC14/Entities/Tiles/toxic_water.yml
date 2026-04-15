@@ -19,6 +19,7 @@
     - state: shallow
   - type: DamageOverTime
     affectsDead: false
+    armorPiercingDamage:
       groups:
         Burn: 15
     emotes:
