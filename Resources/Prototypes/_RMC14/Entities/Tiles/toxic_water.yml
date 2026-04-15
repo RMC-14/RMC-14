@@ -1,0 +1,71 @@
+- type: soundCollection
+  id: ToxicWaterSizzle
+  files:
+    - /Audio/_RMC14/Xeno/acid_sizzle1.ogg
+    - /Audio/_RMC14/Xeno/acid_sizzle2.ogg
+    - /Audio/_RMC14/Xeno/acid_sizzle3.ogg
+    - /Audio/_RMC14/Xeno/acid_sizzle4.ogg
+
+- type: entity
+  parent: CMFloorShallowWaterEntity
+  id: RMCToxicWaterShallow
+  name: water
+  description: Something about this water doesn't look right. Best to stay out of it.
+  suffix: Toxic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Tiles/planet/desert_water_toxic.rsi
+    layers:
+    - state: shallow
+  - type: DamageOverTime
+    affectsDead: false
+      groups:
+        Burn: 15
+    emotes:
+    - Cough
+    - Gasp
+    popup: "The water burns!"
+    sound:
+      collection: ToxicWaterSizzle
+    multipliers:
+    - multiplier: 0.13333
+      whitelist:
+        tags:
+        - RMCXenoLarva
+    - multiplier: 2.26666
+      whitelist:
+        components:
+        - Xeno
+
+- type: entity
+  parent: [CMFloorDeepWaterEntity, RMCToxicWaterShallow]
+  id: RMCToxicWaterDeep
+  name: water
+  description: Something about this water doesn't look right. Best to stay out of it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Tiles/planet/desert_water_toxic.rsi
+    layers:
+    - state: deep
+
+- type: entity
+  parent: CMFloorShallowWaterEntity
+  id: RMCNonToxicToxicWaterShallow
+  description: Something about this water doesn't look right. Best to stay out of it.
+  suffix: NON Toxic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Tiles/planet/desert_water_toxic.rsi
+    layers:
+    - state: shallow
+
+- type: entity
+  parent: CMFloorDeepWaterEntity
+  id: RMCNonToxicToxicWaterDeep
+  description: Something about this water doesn't look right. Best to stay out of it.
+  suffix: NON Toxic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Tiles/planet/desert_water_toxic.rsi
+    layers:
+    - state: deep
