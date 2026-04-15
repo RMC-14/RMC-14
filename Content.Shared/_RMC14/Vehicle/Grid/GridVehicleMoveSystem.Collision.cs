@@ -33,7 +33,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         float clearance,
         bool applyEffects,
         bool debug = true,
-        HashSet<EntityUid>? blockers = null)
+        HashSet<EntityUid>? blockers = null,
+        HashSet<EntityUid>? ignoredEntities = null)
     {
         if (!physicsQ.TryComp(uid, out var body) || !fixtureQ.TryComp(uid, out var fixtures))
             return true;
@@ -82,6 +83,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (other == uid)
                 continue;
 
+            if (ignoredEntities != null && ignoredEntities.Contains(other))
+                continue;
+
             if (!physicsQ.TryComp(other, out var otherBody) || !otherBody.CanCollide)
                 continue;
 
@@ -103,6 +107,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             var isFoldable = HasComp<FoldableComponent>(other);
             var isMob = TryComp(other, out MobStateComponent? mob);
             var isXeno = HasComp<XenoComponent>(other);
+            var isVehicle = HasComp<VehicleComponent>(other);
             var collisionClass = ClassifyCollisionCandidate(other, otherXform, otherBody, otherFixtures, hardCollidable, isMob, isBarricade, isFoldable, hasDoor, isXeno);
             var doorPowerKnown = TryGetDoorPowered(other, out var doorPowered);
             var isUnpoweredDoor = hasDoor && doorPowerKnown && !doorPowered;
@@ -200,6 +205,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             if (collisionClass == VehicleCollisionClass.Hard)
             {
+                if (isVehicle &&
+                    TryPushVehicle(uid, mover, grid, gridPos, other, applyEffects))
+                {
+                    continue;
+                }
+
                 if (applyEffects)
                 {
                     PlayCollisionSound(uid, ref playedCollisionSound);
@@ -426,6 +437,98 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         }
 
         return !first;
+    }
+
+    private bool TryPushVehicle(
+        EntityUid pusher,
+        GridVehicleMoverComponent pusherMover,
+        EntityUid grid,
+        Vector2 pusherTargetPosition,
+        EntityUid pushed,
+        bool applyEffects)
+    {
+        if (!pusherMover.CanPushVehicles)
+            return false;
+
+        if (!TryComp(pushed, out VehicleComponent? pushedVehicle) ||
+            pushedVehicle.MovementKind != VehicleMovementKind.Grid)
+        {
+            return false;
+        }
+
+        if (!TryComp(pushed, out GridVehicleMoverComponent? pushedMover))
+            return false;
+
+        if (!gridQ.TryComp(grid, out var gridComp))
+            return false;
+
+        var pushedXform = Transform(pushed);
+        if (pushedXform.GridUid != grid)
+            return false;
+
+        var pushDelta = pusherTargetPosition - pusherMover.Position;
+        if (pushDelta.LengthSquared() <= MinMoveDistance * MinMoveDistance)
+            return false;
+
+        TrySyncMoverToCurrentGrid((pushed, pushedMover), centerOnTile: false, pushedXform);
+        if (pushedMover.SyncedGrid != grid)
+            return false;
+
+        var ignored = new HashSet<EntityUid> { pusher };
+        var pushedTarget = pushedMover.Position + pushDelta;
+        if (!CanOccupyTransform(
+                pushed,
+                pushedMover,
+                grid,
+                pushedTarget,
+                null,
+                Clearance,
+                applyEffects: false,
+                debug: false,
+                ignoredEntities: ignored))
+        {
+            return false;
+        }
+
+        if (!applyEffects)
+            return true;
+
+        if (!CanOccupyTransform(
+                pushed,
+                pushedMover,
+                grid,
+                pushedTarget,
+                null,
+                Clearance,
+                applyEffects: true,
+                debug: false,
+                ignoredEntities: ignored))
+        {
+            return false;
+        }
+
+        pushedMover.Position = pushedTarget;
+        pushedMover.CurrentSpeed = 0f;
+        pushedMover.IsCommittedToMove = false;
+        pushedMover.IsPushMove = true;
+        pushedMover.PushDirection = GetCardinalDirection(pushDelta);
+        pushedMover.IsMoving = true;
+        UpdateDerivedTileState(grid, gridComp, pushedMover);
+        SetGridPosition(pushed, grid, pushedMover.Position);
+        physics.WakeBody(pushed);
+        Dirty(pushed, pushedMover);
+        return true;
+    }
+
+    private static Vector2i GetCardinalDirection(Vector2 direction)
+    {
+        if (direction.LengthSquared() <= 0f)
+            return Vector2i.Zero;
+
+        if (MathF.Abs(direction.X) >= MathF.Abs(direction.Y))
+            return new Vector2i(Math.Sign(direction.X), 0);
+
+        return new Vector2i(0, Math.Sign(direction.Y));
     }
 
     private bool TrySmash(EntityUid target, EntityUid vehicle, ref bool playedCollisionSound)
