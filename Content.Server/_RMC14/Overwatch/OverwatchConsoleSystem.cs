@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Overwatch;
+﻿using Content.Server.Chat.Systems;
+using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Xenonids.Watch;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
@@ -13,10 +15,44 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<ExpandICChatRecipientsEvent>(OnExpandRecipients);
+
         SubscribeLocalEvent<OverwatchCameraComponent, ComponentRemove>(OnWatchedRemove);
         SubscribeLocalEvent<OverwatchCameraComponent, EntityTerminatingEvent>(OnWatchedRemove);
         SubscribeLocalEvent<OverwatchWatchingComponent, ComponentRemove>(OnWatchingRemove);
         SubscribeLocalEvent<OverwatchWatchingComponent, EntityTerminatingEvent>(OnWatchingRemove);
+    }
+
+    private void OnExpandRecipients(ExpandICChatRecipientsEvent ev)
+    {
+        foreach (var session in Player.Sessions)
+        {
+            if (session.AttachedEntity is not { Valid: true } ent)
+                continue;
+
+            if (!TryComp(ent, out OverwatchWatchingComponent? overwatch))
+                overwatch = null;
+
+            if (!TryComp(ent, out XenoWatchingComponent? xenoWatch))
+                xenoWatch = null;
+
+            if (overwatch == null && xenoWatch == null)
+                continue;
+
+            var watched = overwatch?.Watching ?? xenoWatch?.Watching;
+
+            if (watched is not { } target)
+                continue;
+
+            if (!Transform(target).Coordinates.TryDistance(EntityManager,Transform(ev.Source).Coordinates, out var distance))
+                continue;
+
+            if (distance > ev.VoiceRange)
+                continue;
+
+            if (!ev.Recipients.ContainsKey(session))
+                ev.Recipients.Add(session, new ChatSystem.ICChatRecipientData(distance, false));
+        }
     }
 
     private void OnWatchedRemove<T>(Entity<OverwatchCameraComponent> ent, ref T args)
