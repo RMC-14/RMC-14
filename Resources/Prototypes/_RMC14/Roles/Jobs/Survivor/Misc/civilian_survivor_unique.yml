@@ -1,0 +1,86 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorCivilianUnique
+  name: rmc-job-name-survivor-civilian
+  spawnMenuRoleName: Unique Civilian (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivor
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCivilianUnique
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
+  id: RMCSurvivorPresetCivilianUnique
+  name: unique civilian colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    # Sleepy Colonist
+    - [ RMCJumpsuitBluePjs, RMCShoesSlippers, RMCSatchelSleepyColonistFill ]
+    # Bug Exterminator Colonist (TODO: backpack water tank with fuel)
+    - [ RMCJumpsuitCivilianGreen, CMSatchel, RMCHazardVestGreen, RMCBootsCBRN, RMCHandsVeteranCBRNLessArmored, CMMaskGas ]
+    # Janitor
+    - [ RMCJumpsuitCivilianJanitor, RMCSatchelVirologyJanitorFill, RMCHazardVest, ClothingHeadHatPurplesoft, RMCHandsPurple, RMCHipsterGlasses, RMCShoesGaloshes ]
+    # Bartender
+    - [ RMCJumpsuitWaiter, RMCSatchelBartenderFill, ClothingHeadHatBowlerHat, RMCShoesLaceup ]
+    # Botanist
+    - [ RMCJumpsuitLiaisonGreenWorkwear, RMCSatchelHydro, RMCHydroApron, RMCShoesLaceupBrown, RMCToolHatchet, RMCToolSpade ]
+    # Butcher
+    - [ RMCSatchelButcherFill, ClothingHeadBandBrown, CMJumpsuitMessTech, RMCChefApron, RMCShoesLaceupBrown, CMHandsLatex ]
+    # Protagonist
+    - [ CMJumpsuitTShirtGray, RMCSatchelBlack, RMCOuterClothingExternalWebbing, RMCShoesWeYaStompers, RMCTankFlamerColony ]
+    # Escaped Colony Prisoner
+    - [ RMCJumpsuitOrangeEscapedPrisoner, CMSatchelSecurity, RMCShoesJackboots, RMCPouchGeneralLarge, WeaponShotgunM357Sawn ]
+    # Stowaway
+    - [ RMCHipsterGlasses, RMCSatchelStowawayFill, RMCJumpsuitLiaisonStowaway, RMCShoesBrown, RMCBriefcaseStowAway, RMCPouchGeneralLargeFillStowaway ]
+    # Private Detective (TODO: Camera and tape recorder)
+    - [ RMCHeadCapFedoraTan, RMCJumpsuitLiaisonShoulderHolster, RMCCoatBureauTrenchCoatBeige, CMSatchel, RMCShoesLeather ]
+    # Landing Pad Attendant
+    - [ RMCJumpsuitCivilianYellow, RMCHeadCapFlippable, RMCSatchelNorm, CMBootsBlackFilled, CMPackFlare, RMCHazardVest, RMCBinoculars, RMCBeltUtilityGeneral, CMHandsBlackMarine, RMCEarmuffs ]
+    # High roller
+    - [ RMCHeadCowboyHatDark, RMCSunglassesBigFake, RMCShioCigar, RMCJumpsuitCheckeredSuit, RMCJacketCorporateBrown, RMCHandsLeatherBlack, RMCSatchelBlack, RMCShoesFancyLeather, RMCPouchGeneralLargeFillHighroller ]
+    # Prepper
+    - [ RMCHeadFoil, CMMaskGas, RMCArmorVestCivilian, RMCJumpsuitSteward, RMCHandsVeteranSPP, RMCBootsSPPFilled, RMCBackpackMarineTechPrepperFill, RMCPouchGeneralLargeFillSPPRations]
+    # Mad Scientist
+    - [ RMCMaskKutjevoRespirator, RMCSatchelVirology, RMCJumpsuitCivilianScientist, CMHandsWhite, RMCLabcoatGreen, RMCWeldingGogglesSuperior, RMCShoesGreen, RMCPouchAutoinjectorFillEmergencyInjectors, RMCPamphletScience ]
+    # Cameraman (TODO: Old Camera, Camera, and Camera Film)
+    - [ RMCSunglassesBig, RMCSatchelBlack, RMCJumpsuitCorrespondent, RMCVestGrey, RMCShoesLaceup, RMCPouchGeneralLarge, RMCCameraBroadcasting ]
+    # Pro Welder (TODO: welding pack)
+    - [ RMCSatchelLightpackWelderProWelderFill, RMCHelmetWeldingPainted, RMCJumpsuitMercenaryEngineer, CMUtilityVest, RMCShoesCombat, CMHandsInsulated ]
+    # Farmer (TODO: scythe and coveralls)
+    - [ ClothingHeadHatStrawHat, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesLeather, ClothingHandsGlovesLeather, RMCSatchelEngineerFarmerFill, RMCPouchGeneralLargeFillWheat ]
+    # Fisherman (TODO: tan coveralls, fishing pole, and fish bait)
+    - [ RMCGlassesAviatorsSilver, RMCSatchelLightpack5Slot, RMCBoonieFisherman, RMCJumpsuitLiaisonGreenWorkwear, RMCShoesLaceupBrown, CMHandsBrown, RMCPouchGeneralLarge ]
+    randomGearOther:
+    -
+      - [ CMSheetMetal20 ]
+    tryRandomOutfitsInhand: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorCivilianUnique
+  name: unique civilian colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorCivilianUnique
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorCivilianUnique
+  components:
+  - type: RMCJobSpawner
+    job: RMCSurvivorCivilianUnique

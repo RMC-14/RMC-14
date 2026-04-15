@@ -1,7 +1,8 @@
 ﻿# generic survs
-
 cm-job-name-survivor = Civilian Colonist
 cm-job-description-survivor = You are a survivor of the attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now.
+
+rmc-job-name-survivor-civilian = Civilian
 
 cm-job-name-survivor-doctor = Doctor Colonist
 
@@ -200,6 +201,36 @@ rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
 rmc-job-name-survivor-construction-worker = Construction Worker
 rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator
 
+# Paramarine survs
+
+rmc-job-greeting-para = You are a member of the RCM's 24th Paramarine Regiment!
+
+  Outpost Souter was your final posting before withdrawal. With Weston-Yamada buying out Hybrisa, the TSE began pulling its forces off-world. Your regiment was standing down, preparing to hand over control during the transition. Then the outbreak hit. You've spent the last weeks barely holding the outpost together, repelling wave after wave while sheltering what few survivors you could. Now, only your squad remains. The outpost is falling apart, the armoury's dry, and the dropship in the hangar still has no fuel. A distress signal was sent over a week ago. All you can do now is hold your ground — and pray someone answers.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-para = Paramarine Survivor
+rmc-job-description-para = You are a stranded TSE RCM Paramarine. Your dropship is out of fuel and you are stranded on the planet. Do what it takes to survive!
+
+rmc-job-name-paramarine = Rifleman
+rmc-job-name-para-pilot = Fleet Air Arm Pilot
+rmc-job-name-para-engineer = Assault Engineer
+rmc-job-name-para-medic =  Medical Technician
+rmc-job-prefix-paramarine = 24/PARA
+
+rmc-job-name-para-team-leader = Team Leader
+rmc-job-prefix-para-team-leader = 24/PARA TL
+
+rmc-job-name-para-synth = Support Synthetic
+rmc-job-prefix-para-synth = 24/PARA Syn
+
+rmc-job-name-para-commander = Commander
+rmc-job-prefix-para-commander = 24/PARA CDR
+
 # Sorokyne Strata Survs
 
 rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury
@@ -213,7 +244,7 @@ rmc-job-prefix-army-reservist = 202/ARMY
 
 rmc-job-name-survivor-moh-doctor = Doktor Ministerstva Zdravookhraneniya
 
-rmc-job-name-survivor-cec-researcher = Issledovatel' Korpusa Kosmicheskoy Eksploratsii
+rmc-job-name-survivor-msc-researcher = Issledovatel' Ministerstva Kolonizatsii
 
 rmc-job-name-survivor-soro-civilian = Grazhdanin
 
@@ -223,6 +254,35 @@ rmc-job-prefix-fire-protection-specialist = FPPB
 rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
+
+# Sorokyne SOF insert survs 
+
+rmc-job-greeting-soro-sof = You are a member of an SPP SOF QRF team! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons. You are part of an SOF QRF team of the Socialist Progressive Peoples, deployed alongside the Ministry of Space Colonization to build garrisons on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-soro-sof-base = SPP SOF Survivor
+
+rmc-job-description-soro-sof = You are a stranded SPP SOF marine. Your team was sent to investigate a distress signal. Find out what happened to the colony.
+
+rmc-job-name-soro-sof-sapper = SOF Sapper
+rmc-job-prefix-soro-sof-sapper = 121/RECON SAP
+
+rmc-job-name-soro-sof-medic = SOF Medic
+rmc-job-prefix-soro-sof-medic = 121/RECON MED
+
+rmc-job-name-soro-sof-sl = SOF Squad Leader
+rmc-job-prefix-soro-sof-sl = 121/RECON SL
+
+rmc-job-name-soro-sof-spec = SOF Specialist
+rmc-job-prefix-soro-sof-spec = 121/RECON SPEC
+
+rmc-job-name-soro-sof-soldier = SOF Soldier
+rmc-job-prefix-soro-sof-soldier = 121/RECON SOL
 
 # Trijent survs
 
@@ -242,6 +302,36 @@ cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
 
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
 CMSurvivorTrijentCorporate = Trijent Corporation Liaison
+
+# Trijent crashland insert survs 
+
+rmc-job-greeting-crashland = You are a member of an SPP recon force! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons. Your orders were simple, Recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-crashland-base = SPP Airborne Survivor
+
+rmc-job-description-crashland = You are a stranded SPP Airborne marine. Your Mi-220 assault gunship crashed and you are stranded on the planet. Do what it takes to survive!
+
+rmc-job-name-crashland-sapper = Airborne Sapper
+rmc-job-prefix-crashland-sapper = 173/RECON SAP
+
+rmc-job-name-crashland-medic = Airborne Medic
+rmc-job-prefix-crashland-medic = 173/RECON MED
+
+rmc-job-name-crashland-sl = Airborne Squad Leader
+rmc-job-prefix-crashland-sl = 173/RECON SL
+
+rmc-job-name-crashland-spec = Airborne Specialist
+rmc-job-prefix-crashland-spec = 173/RECON SPEC
+
+rmc-job-name-crashland-soldier = Airborne Soldier
+rmc-job-prefix-crashland-soldier = 173/RECON SOL
+
 
 # Fiorina Science Annex Survs
 

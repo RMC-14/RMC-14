@@ -68,6 +68,16 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: highpower
       map: [ "mk45_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: c_deagle
+      map: [ "peregine_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: g_deagle
+      map: [ "g_peregine_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: taser
+      map: [ "taser_fill" ]
+      
     - state: icon
     - state: closed
       map: [ "holstered" ]
@@ -97,6 +107,9 @@
     - mk45_fill
     - m13_fill
     - m44r_fill
+    - peregine_fill
+    - g_peregine_fill
+    - taser_fill
     mapLayers:
       holstered:
         whitelist:
@@ -110,6 +123,7 @@
         whitelist:
           tags:
           - CMWeaponPistolM1984
+          - CMWeaponPistolM1911
       mk80_fill:
         whitelist:
           tags:
@@ -138,6 +152,19 @@
         whitelist:
           tags:
           - RMCWeaponRevolverM44
+      peregine_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolHandcannon
+      g_peregine_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolHandcannonGold
+      taser_fill:
+        whitelist:
+          tags:
+          - Taser
+            
   - type: Storage
     maxItemSize: Normal
   - type: CMHolster

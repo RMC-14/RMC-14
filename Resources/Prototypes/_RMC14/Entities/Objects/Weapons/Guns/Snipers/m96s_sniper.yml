@@ -251,6 +251,7 @@
   - type: RMCAreaDamage
     damageArea: 2.5
     falloffDistance: 1.5
+    xenoDamageMultiplier: 2 # Xenos take double area damage from flak in CM13 compared to humans, I tried finding out why without success so here's a 2x multiplier.
 
 - type: Tag
   id: CMM96SSniperRifle

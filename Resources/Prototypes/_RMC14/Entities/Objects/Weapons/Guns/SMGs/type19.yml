@@ -17,7 +17,7 @@
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/p90_shot.ogg # TODO SMG HEAVY Sound
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/pdw90_shot.ogg # TODO SMG HEAVY Sound
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto

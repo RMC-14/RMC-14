@@ -308,22 +308,6 @@
       - MortarShell
 
 - type: entity
-  parent: CMBackpackWelder
-  id: RMCBackpackWelderPMC
-  name: pmc technician welderpack
-  description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada PMCs. Features a small fueltank for quick blowtorch refueling.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/welder.rsi
-    layers:
-    - state: icon
-  - type: CMStorageVisualizer
-    storageClosed: null
-    storageOpen: null
-  - type: ItemCamouflage
-    camouflageVariations: {}
-
-- type: entity
   parent: RMCSatchelPMC
   id: RMCSatchelPMCCommando
   name: We-Ya Commando combat backpack
@@ -332,7 +316,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/commando.rsi
 
-# PVE RCM backpacks
+# RCM backpacks
+
 - type: entity
   parent: CMPersonalStorageBase
   id: RMCBackpackRCMSmall
@@ -355,6 +340,16 @@
     maxItemSize: Normal
     grid:
     - 0,0,14,1
+
+- type: entity
+  parent: RMCBackpackRCMSmall
+  id: RMCBackpackRCMSmallPVP
+  suffix: PVP, RCM
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,20,1 # 21 Slots
 
 - type: entity
   parent: CMPersonalStorageBase
@@ -382,6 +377,16 @@
     skipInHand: true
 
 - type: entity
+  parent: RMCBackpackRCMMedium
+  id: RMCBackpackRCMMediumPVP
+  suffix: PVP, RCM
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,23,1 # 24 Slots
+
+- type: entity
   parent: CMBackpack
   id: RMCBackpackRCMLarge
   name: heavyweight RCM backpack
@@ -403,6 +408,16 @@
     maxItemSize: Normal
     grid:
     - 0,0,23,1
+
+- type: entity
+  parent: RMCBackpackRCMLarge
+  id: RMCBackpackRCMLargePVP
+  suffix: PVP, RCM
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,26,1 # 27 Slots
 
 - type: entity
   parent: RMCSatchelWelder
@@ -449,3 +464,26 @@
     maxItemSize: Normal
     grid:
     - 0,0,20,1
+
+- type: entity
+  parent: RMCBackpackRCMMedic
+  id: RMCBackpackRCMMedicPVP
+  suffix: PVP, RCM
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,23,1 # 24 Slots
+
+- type: entity
+  parent: RMCBackpackRCMMedicPVP
+  id: RMCBackpackRCMMedicPVPFilledParaMedic
+  suffix: Filled, Paramarine Medic
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCRadioHandheldColony
+        - id: RMCHeadRoyalL1HelmetBallistic
+        - id: CMFireExtinguisherPortable
+        - id: CMDefibrillator
+        - id: CMHealthAnalyzer
