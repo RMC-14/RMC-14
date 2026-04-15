@@ -1,5 +1,7 @@
 ﻿using Content.Server.Chat.Systems;
+using Content.Shared._RMC14.Communications;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
@@ -8,6 +10,7 @@ namespace Content.Server._RMC14.Overwatch;
 
 public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 {
+    [Dependency] private readonly CommunicationsTowerSystem _communicationsTower = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
@@ -27,14 +30,11 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     {
         foreach (var session in Player.Sessions)
         {
-            if (session.AttachedEntity is not { Valid: true } ent)
+            if (session.AttachedEntity is not { } ent)
                 continue;
 
-            if (!TryComp(ent, out OverwatchWatchingComponent? overwatch))
-                overwatch = null;
-
-            if (!TryComp(ent, out XenoWatchingComponent? xenoWatch))
-                xenoWatch = null;
+            TryComp(ent, out OverwatchWatchingComponent? overwatch);
+            TryComp(ent, out XenoWatchingComponent? xenoWatch);
 
             if (overwatch == null && xenoWatch == null)
                 continue;
@@ -44,7 +44,15 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             if (watched is not { } target)
                 continue;
 
-            if (!Transform(target).Coordinates.TryDistance(EntityManager,Transform(ev.Source).Coordinates, out var distance))
+            var targetCoordinates = TransformSystem.GetMoverCoordinates(target);
+            var targetMap = TransformSystem.GetMap(targetCoordinates);
+            if (overwatch != null && HasComp<RMCPlanetComponent>(targetMap) && targetMap != TransformSystem.GetMap(ent))
+            {
+                if (!_communicationsTower.CanTransmit())
+                    continue;
+            }
+
+            if (!targetCoordinates.TryDistance(EntityManager, Transform(ev.Source).Coordinates, out var distance))
                 continue;
 
             if (distance > ev.VoiceRange)
