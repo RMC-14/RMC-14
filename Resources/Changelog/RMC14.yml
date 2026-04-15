@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: wheelwrightt
-  changes:
-  - message: MAR-50 rail attachments no longer are floating
-    type: Fix
-  id: 2609
-  time: '2025-12-06T09:08:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8544
 - author: Whisper
   changes:
   - message: Added naming guidelines for Skrell and Feroxi.
@@ -4493,5 +4486,24 @@
   id: 3109
   time: '2026-04-13T20:57:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9628
+- author: kleinerstation13
+  changes:
+  - message: Added the M1911 service pistol, it can be acquired from spawning as a
+      survivor, the Black Market Firearm crate or pistol spawners on the colony.
+    type: Add
+  - message: Fixed FORECON spawning with a fully loaded M1984 belt instead of a M1911
+      belt with 2 magazines
+    type: Fix
+  - message: Fixed survivors spawning with an M1984 instead of an M1911
+    type: Fix
+  - message: Fixed .38 revolver not having 2x damage multplier
+    type: Fix
+  - message: Fixed KT-42 using 9mm instead of .45 ACP
+    type: Fix
+  - message: Fixed KT-42 not spawning in pistol spawners
+    type: Fix
+  id: 3110
+  time: '2026-04-15T01:36:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9284
 Name: RMC14
 Order: -1

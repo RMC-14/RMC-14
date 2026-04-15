@@ -48,6 +48,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 _destruction.DestroyEntity(id);
         }
 
+        //TODO RMC14 only do main hive
         var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, InfectableComponent, TransformComponent>();
         var xenoAmount = 0;
         var larva = 0;
@@ -67,6 +68,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 if (comp.CountedInSlots)
                     larva++;
 
+                //Ghost player and send message
                 if (TryComp(xeno, out ActorComponent? actor))
                 {
                     var session = actor.PlayerSession;
@@ -91,6 +93,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 xenoAmount++;
         }
 
+        //Queen Maturing - TODO only main hive
         var queens = EntityQueryEnumerator<XenoMaturingComponent, MobStateComponent>();
         while (queens.MoveNext(out var queen, out var maturing, out _))
         {
@@ -100,7 +103,9 @@ public sealed partial class CMDistressSignalRuleSystem
             _maturing.Mature((queen, maturing));
         }
 
+        //Surge
         var shipQuery = EntityQueryEnumerator<MarineComponent, MobStateComponent, InfectableComponent, TransformComponent>();
+
         float totalHostWeights = 0;
         while (shipQuery.MoveNext(out var marine, out _, out _, out _, out var transformComp))
         {
@@ -160,7 +165,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
         var didCameraShake = false;
         var warshipQuery = EntityQueryEnumerator<AlmayerComponent, TransformComponent>();
-        while (warshipQuery.MoveNext(out var uid, out _, out var xform))
+        while (warshipQuery.MoveNext(out var uid, out _, out var xform)) // Stun everyone on the Almayer
         {
             if (!didCameraShake)
             {
@@ -170,14 +175,18 @@ public sealed partial class CMDistressSignalRuleSystem
                 didCameraShake = true;
             }
 
-            StunAllMarinesOnAlmayer(xform);
+            StunAllEntitiesOnAlmayer(xform);
         }
     }
 
-    private void StunAllMarinesOnAlmayer(TransformComponent xform)
+    /// <summary>
+    /// Stuns all non-xeno on the Almayer.
+    /// </summary>
+    private void StunAllEntitiesOnAlmayer(TransformComponent xform)
     {
+        // Get enumeration exceptions from people dropping things if we just paralyze as we go
         var toKnock = new ValueList<EntityUid>();
-        GetMarinesOnAlmayer(xform, ref toKnock);
+        GetAllEntitiesOnAlmayer(xform, ref toKnock);
 
         foreach (var child in toKnock)
         {
@@ -188,8 +197,12 @@ public sealed partial class CMDistressSignalRuleSystem
         }
     }
 
-    private void GetMarinesOnAlmayer(TransformComponent xform, ref ValueList<EntityUid> reference)
+    /// <summary>
+    /// Gets all non-xeno on the Almayer.
+    /// </summary>
+    private void GetAllEntitiesOnAlmayer(TransformComponent xform, ref ValueList<EntityUid> reference)
     {
+        // Not recursive because probably not necessary? If we need it to be that's why this method is separate.
         var childEnumerator = xform.ChildEnumerator;
         while (childEnumerator.MoveNext(out var child))
         {

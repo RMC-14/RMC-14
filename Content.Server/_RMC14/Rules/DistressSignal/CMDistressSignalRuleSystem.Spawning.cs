@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Numerics;
+﻿using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Fax;
 using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
@@ -15,11 +15,11 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
+using Content.Shared.Database;
 using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Preferences;
-using Content.Shared.Roles;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -45,23 +45,31 @@ public sealed partial class CMDistressSignalRuleSystem
 
         OperationName ??= GetRandomOperationName();
 
-        InitializeXenoMap(rule.Value, comp);
+        if (!InitializeXenoMap(rule.Value, comp))
+            return;
+
         SetupSurvivorJobs(comp);
         ApplyJobSlotScaling(comp, ev);
+
+        var initialPlayerCount = ev.PlayerPool.Count;
         SelectAndSpawnXenos(comp, ev);
+        SpawnSurvivors(comp, ev, initialPlayerCount);
 
         if (_spawnedDropships) return;
+
         _spawnedDropships = true;
         InitializeDropships(comp);
     }
 
-    private void InitializeXenoMap(Entity<CMDistressSignalRuleComponent> rule, CMDistressSignalRuleComponent comp)
+    private bool InitializeXenoMap(Entity<CMDistressSignalRuleComponent> rule, CMDistressSignalRuleComponent comp)
     {
+        // TODO: come up with random name like operation name, in a function that can be reused for hive v hive
         comp.Hive = _hive.CreateHive("xenonid hive", comp.HiveId);
         if (comp.SpawnPlanet && !SpawnXenoMap((rule.Owner, comp)))
         {
             Log.Error("Failed to load xeno map");
-            return;
+            // TODO: how should the gamemode handle failure? restart immediately or create an alert for admins
+            return false;
         }
 
         _intel.RunSpawners();
@@ -79,30 +87,42 @@ public sealed partial class CMDistressSignalRuleSystem
             var bioscan = Spawn(null, MapCoordinates.Nullspace);
             EnsureComp<BioscanComponent>(bioscan);
         }
+
+        return true;
     }
 
     private void SetupSurvivorJobs(CMDistressSignalRuleComponent comp)
     {
-        if (SelectedPlanetMap?.Comp.SurvivorJobs == null)
+        if (SelectedPlanetMap == null)
             return;
 
-        comp.SurvivorJobs = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobs, notNullableOverride: true);
         comp.SurvivorJobVariants = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobVariants);
         comp.SurvivorJobOverrides = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobOverrides);
 
+        if (SelectedPlanetMap.Value.Comp.SurvivorJobs != null)
+            comp.SurvivorJobs = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobs, notNullableOverride: true);
+
         if (ActiveNightmareScenario != null)
         {
-            if (SelectedPlanetMap.Value.Comp.SurvivorJobScenarios?.TryGetValue(ActiveNightmareScenario, out var scenarioJobs) == true)
+            var activeScenarioSurvivors = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobScenarios);
+            var activeScenarioSurvivorOverrides = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobOverrideScenarios);
+            var activeScenarioSurvivorVariants = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobVariantScenarios);
+
+            if (activeScenarioSurvivors != null && activeScenarioSurvivors.TryGetValue(ActiveNightmareScenario, out var scenarioJobs))
                 comp.SurvivorJobs = scenarioJobs;
 
-            SelectedPlanetMap.Value.Comp.SurvivorJobOverrideScenarios?.TryGetValue(ActiveNightmareScenario, out comp.SurvivorJobOverrides);
-            SelectedPlanetMap.Value.Comp.SurvivorJobVariantScenarios?.TryGetValue(ActiveNightmareScenario, out comp.SurvivorJobVariantScenarios);
+            if (activeScenarioSurvivorOverrides != null)
+                activeScenarioSurvivorOverrides.TryGetValue(ActiveNightmareScenario, out comp.SurvivorJobOverrides);
+
+            if (activeScenarioSurvivorVariants != null)
+                activeScenarioSurvivorVariants.TryGetValue(ActiveNightmareScenario, out comp.SurvivorJobVariantScenarios);
         }
     }
 
     private void ApplyJobSlotScaling(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev)
     {
         var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
+        // TODO RMC14 dont count survivors
         var totalSurvivors = (int) Math.Clamp((int)Math.Round(ev.PlayerPool.Count / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
         var marines = ev.PlayerPool.Count - totalXenos - totalSurvivors;
 
@@ -137,6 +157,8 @@ public sealed partial class CMDistressSignalRuleSystem
                         available[i] = slots;
                     }
                 }
+
+                Log.Info($"Setting {job} to {slots} slots.");
                 _stationJobs.TrySetJobSlot(stationId, job, slots, stationJobs: stationJobs);
             }
         }
@@ -146,6 +168,8 @@ public sealed partial class CMDistressSignalRuleSystem
     /// Selects xeno players based on job priorities and spawns them as queen or larva.
     /// Handles burrowed larva calculation if there aren't enough xeno players.
     /// </summary>
+    /// <param name="comp">The distress signal rule component.</param>
+    /// <param name="ev">The rule player spawning event.</param>
     private void SelectAndSpawnXenos(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev)
     {
         if (!comp.SpawnXenos)
@@ -163,21 +187,6 @@ public sealed partial class CMDistressSignalRuleSystem
         while (leaderSpawnQuery.MoveNext(out var spawnUid, out _))
         {
             xenoLeaderSpawnPoints.Add(spawnUid);
-        }
-
-        bool IsAllowed(NetUserId id, ProtoId<JobPrototype> role)
-        {
-            if (!_player.TryGetSessionById(id, out var player))
-                return false;
-
-            var jobBans = _bans.GetJobBans(player.UserId);
-            if (jobBans != null && jobBans.Contains(role))
-                return false;
-
-            if (!_playTime.IsAllowed(player, role))
-                return false;
-
-            return true;
         }
 
         NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent, bool doBurst = false)
@@ -210,7 +219,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
         foreach (var (id, profile) in ev.Profiles)
         {
-            if (IsAllowed(id, comp.QueenJob) && profile.JobPriorities.TryGetValue(comp.QueenJob, out var p) && p > JobPriority.Never)
+            if (IsJobAllowed(id, comp.QueenJob) && profile.JobPriorities.TryGetValue(comp.QueenJob, out var p) && p > JobPriority.Never)
                 xenoCandidates[(int)p].Add(id);
         }
 
@@ -236,7 +245,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
         foreach (var (id, profile) in ev.Profiles)
         {
-            if (id != queenSelected && IsAllowed(id, comp.XenoSelectableJob) && profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var p) && p > JobPriority.Never)
+            if (id != queenSelected && IsJobAllowed(id, comp.XenoSelectableJob) && profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var p) && p > JobPriority.Never)
                 xenoCandidates[(int)p].Add(id);
         }
 
@@ -279,6 +288,8 @@ public sealed partial class CMDistressSignalRuleSystem
 
             RemCompDeferred<HiddenAppearanceComponent>(corpseMob);
             _xeno.MakeXeno(newXeno);
+
+            _adminLog.Add(LogType.RMCXenoSpawn, $"Player {player} with mob {ToPrettyString(newXeno):xeno} spawned as a xeno from their corpse {ToPrettyString(corpseMob):corpse}");
             return newXeno;
         }
 
@@ -294,6 +305,7 @@ public sealed partial class CMDistressSignalRuleSystem
     /// </summary>
     private void InitializeDropships(CMDistressSignalRuleComponent comp)
     {
+        // don't open shitcode inside
         _mapSystem.CreateMap(out var dropshipMap);
         var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, TransformComponent>();
         var shipIndex = 0;
@@ -303,7 +315,8 @@ public sealed partial class CMDistressSignalRuleSystem
             if (_mapSystem.TryGetMap(destTransform.MapID, out var destinationMapId) && comp.XenoMap == destinationMapId)
                 continue;
 
-            if (destination.Spawn == null) continue;
+            if (destination.Spawn == null)
+                continue;
 
             var gridOffset = new Vector2(shipIndex * 100, shipIndex * 100);
             shipIndex++;
@@ -316,14 +329,17 @@ public sealed partial class CMDistressSignalRuleSystem
             {
                 if (xform.GridUid != shipGrids.Value) continue;
 
-                _dropship.FlyTo(
+                if (!_dropship.FlyTo(
                     (computerId, computer),
                     destinationId,
                     user: null,
                     startupTime: 1f,
                     hyperspaceTime: 1f,
-                    offset: true
-                );
+                    offset: true))
+                {
+                    continue;
+                }
+
                 break;
             }
         }
@@ -339,46 +355,87 @@ public sealed partial class CMDistressSignalRuleSystem
         {
             _fax.Refresh(faxId, faxComp);
         }
+
+        if (SelectedPlanetMap == null)
+            return;
+
+        var specialFaxesList = SelectedPlanetMap.Value.Comp.SpecialFaxes;
+        if (specialFaxesList == null)
+            return;
+
+        var specialFaxes = EntityQueryEnumerator<FaxMachineComponent, SpecialFaxComponent>();
+        while (specialFaxes.MoveNext(out var faxId, out var faxComp, out var special))
+        {
+            foreach (var (targetFaxId, paper) in specialFaxesList)
+            {
+                if (special.FaxId != targetFaxId)
+                    continue;
+
+                if (!paper.TryGet(out var paperComponent, _prototypes, _compFactory))
+                    continue;
+
+                if (!_prototypes.TryIndex(paper.Id, out var entProto, logError: false))
+                    continue;
+
+                var content = Loc.GetString(paperComponent.Content);
+                var printout = new FaxPrintout(content, entProto.Name, prototypeId: paper.Id, locked: true);
+                _fax.Receive(faxId, printout, component: faxComp);
+            }
+        }
     }
 
     private void OnPlayerSpawning(PlayerSpawningEvent ev)
     {
-        if (ev.Job is not { } jobId || !_prototypes.TryIndex(jobId, out var job) || !job.IsCM)
+        if (ev.Job is not { } jobId ||
+            !_prototypes.TryIndex(jobId, out var job) ||
+            !job.IsCM)
+        {
             return;
+        }
 
         var comp = TryGetActiveRule();
         if (comp == null)
             return;
 
-        var squadPref = ev.HumanoidCharacterProfile?.SquadPreference;
-        if (GetSpawner(comp, job, squadPref) is not { } spawnerInfo)
+        var squadPreference = ev.HumanoidCharacterProfile?.SquadPreference;
+        if (GetSpawner(comp, job, squadPreference) is not { } spawnerInfo)
             return;
 
         var (spawner, squad) = spawnerInfo;
-        if (_hyperSleepChamberQuery.TryComp(spawner, out var hyperSleep) && _containers.TryGetContainer(spawner, hyperSleep.ContainerId, out var container))
+        if (_hyperSleepChamberQuery.TryComp(spawner, out var hyperSleep) &&
+            _containers.TryGetContainer(spawner, hyperSleep.ContainerId, out var container))
         {
             ev.SpawnResult = _stationSpawning.SpawnPlayerMob(spawner.ToCoordinates(), ev.Job, ev.HumanoidCharacterProfile, ev.Station);
             _containers.Insert(ev.SpawnResult.Value, container);
         }
         else
         {
-            ev.SpawnResult = _stationSpawning.SpawnPlayerMob(_transform.GetMoverCoordinates(spawner), ev.Job, ev.HumanoidCharacterProfile, ev.Station);
+            var coordinates = _transform.GetMoverCoordinates(spawner);
+            ev.SpawnResult = _stationSpawning.SpawnPlayerMob(coordinates, ev.Job, ev.HumanoidCharacterProfile, ev.Station);
         }
 
-        if (squad != null) _squad.AssignSquad(ev.SpawnResult.Value, squad.Value, jobId);
+        if (squad != null)
+        {
+            _squad.AssignSquad(ev.SpawnResult.Value, squad.Value, jobId);
 
-        if (TryComp(spawner, out TransformComponent? xform) && xform.GridUid != null)
-            EnsureComp<AlmayerComponent>(xform.GridUid.Value);
+            // TODO RMC14 add this to the map file
+            if (TryComp(spawner, out TransformComponent? xform) &&
+                xform.GridUid != null)
+            {
+                EnsureComp<AlmayerComponent>(xform.GridUid.Value);
+            }
 
-        if (comp.SetHunger && TryComp(ev.SpawnResult, out HungerComponent? hunger))
-            _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
+            if (comp.SetHunger && TryComp(ev.SpawnResult, out HungerComponent? hunger))
+                _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
+        }
     }
 
     private void SpawnSquads(Entity<CMDistressSignalRuleComponent> rule)
     {
-        foreach (var id in rule.Comp.SquadIds.Where(id => !rule.Comp.Squads.ContainsKey(id)))
+        foreach (var id in rule.Comp.SquadIds)
         {
-            rule.Comp.Squads[id] = Spawn(id);
+            if (!rule.Comp.Squads.ContainsKey(id))
+                rule.Comp.Squads[id] = Spawn(id);
         }
 
         foreach (var id in rule.Comp.ExtraSquadIds)
