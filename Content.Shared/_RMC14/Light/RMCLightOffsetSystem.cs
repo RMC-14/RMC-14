@@ -20,7 +20,8 @@ public sealed class RMCLightOffsetSystem : EntitySystem
 
     private void OnLightStartup(Entity<RMCLightOffsetComponent> ent, ref ComponentStartup args)
     {
-        OffsetLight(ent);
+        if (_net.IsClient)
+            OffsetLight(ent);
     }
 
     private void OnLightUpdate<T>(Entity<RMCLightOffsetComponent> ent, ref T args)
