@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="Ammo Loader"
-    MinSize="680 500">
+    MinSize="460 190">
 
     <PanelContainer HorizontalExpand="True" VerticalExpand="True">
         <PanelContainer.PanelOverride>
@@ -13,7 +13,7 @@
                 BorderThickness="2"/>
         </PanelContainer.PanelOverride>
 
-        <BoxContainer Orientation="Vertical" Margin="14" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical" Margin="8" HorizontalExpand="True" VerticalExpand="True">
             <PanelContainer HorizontalExpand="True" VerticalExpand="True">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat
@@ -22,12 +22,12 @@
                         BorderThickness="1"/>
                 </PanelContainer.PanelOverride>
 
-                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="10">
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="6">
                     <BoxContainer
                         Name="HardpointList"
                         Access="Public"
                         Orientation="Vertical"
-                        SeparationOverride="10"
+                        SeparationOverride="6"
                         HorizontalExpand="True"/>
                 </ScrollContainer>
             </PanelContainer>

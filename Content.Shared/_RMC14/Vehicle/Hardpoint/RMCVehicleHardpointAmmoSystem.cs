@@ -24,7 +24,7 @@ public sealed class RMCVehicleHardpointAmmoSystem : EntitySystem
         if (ammo.Count > 0)
             return;
 
-        TryChamberNextMagazine(ent, ammo);
+        NormalizeAmmoQueue(ent, ammo);
     }
 
     private void OnEmptyGunShot(Entity<RMCVehicleHardpointAmmoComponent> ent, ref OnEmptyGunShotEvent args)
@@ -35,7 +35,15 @@ public sealed class RMCVehicleHardpointAmmoSystem : EntitySystem
         if (ammo.Count > 0)
             return;
 
-        TryChamberNextMagazine(ent, ammo);
+        NormalizeAmmoQueue(ent, ammo);
+    }
+
+    public bool NormalizeAmmoQueue(Entity<RMCVehicleHardpointAmmoComponent> ent, BallisticAmmoProviderComponent ammo)
+    {
+        if (ammo.Count > 0)
+            return false;
+
+        return TryChamberNextMagazine(ent, ammo);
     }
 
     public bool TryChamberNextMagazine(Entity<RMCVehicleHardpointAmmoComponent> ent, BallisticAmmoProviderComponent ammo)

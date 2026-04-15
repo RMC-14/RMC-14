@@ -19,6 +19,7 @@ public sealed class RMCVehicleAmmoLoaderUiEntry
     public readonly string HardpointType;
     public readonly string? InstalledName;
     public readonly NetEntity? InstalledEntity;
+    public readonly EntProtoId? AmmoPrototype;
     public readonly int MagazineSize;
     public readonly List<RMCVehicleAmmoLoaderUiAmmoSlot> AmmoSlots;
     public readonly bool CanLoad;
@@ -29,6 +30,7 @@ public sealed class RMCVehicleAmmoLoaderUiEntry
         string hardpointType,
         string? installedName,
         NetEntity? installedEntity,
+        EntProtoId? ammoPrototype,
         int magazineSize,
         List<RMCVehicleAmmoLoaderUiAmmoSlot> ammoSlots,
         bool canLoad,
@@ -38,6 +40,7 @@ public sealed class RMCVehicleAmmoLoaderUiEntry
         HardpointType = hardpointType;
         InstalledName = installedName;
         InstalledEntity = installedEntity;
+        AmmoPrototype = ammoPrototype;
         MagazineSize = magazineSize;
         AmmoSlots = ammoSlots;
         CanLoad = canLoad;

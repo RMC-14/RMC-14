@@ -23,12 +23,22 @@ namespace Content.Client._RMC14.Vehicle.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
 {
+    private const float SlotButtonWidth = 68f;
+    private const float SlotButtonHeight = 86f;
+    private const float BaseWindowWidth = 270f;
+    private const float WindowWidthPerHardpoint = 86f;
+    private const float MinWindowWidth = 460f;
+    private const float MaxWindowWidth = 940f;
+
     public event Action<string, int, RMCVehicleAmmoLoaderSlotAction>? OnSlotSelected;
     private readonly IEntityManager _entManager = IoCManager.Resolve<IEntityManager>();
+    private readonly Dictionary<string, int> _lastSlotRounds = new();
+    private bool _hasSeenSlotState;
 
     public RMCVehicleAmmoLoaderMenu()
     {
         RobustXamlLoader.Load(this);
+        SetSize = new Vector2(MinWindowWidth, 240);
     }
 
     public void Update(
@@ -38,6 +48,9 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
         EntProtoId? ammoPrototype)
     {
         HardpointList.DisposeAllChildren();
+        ResizeToContent(hardpoints);
+
+        var seenSlots = new HashSet<string>();
 
         if (hardpoints.Count == 0)
         {
@@ -46,11 +59,16 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
                 Text = Loc.GetString("rmc-vehicle-ammo-loader-ui-no-hardpoints"),
                 FontColorOverride = Color.FromHex("#8FA7C2")
             });
+            _lastSlotRounds.Clear();
+            _hasSeenSlotState = true;
             return;
         }
 
         foreach (var hardpoint in hardpoints)
         {
+            var mismatchedHeldAmmo = ammoPrototype != null && !Equals(hardpoint.AmmoPrototype, ammoPrototype);
+            var primaryText = mismatchedHeldAmmo ? Color.FromHex("#8394A8") : Color.FromHex("#E1EEFF");
+            var secondaryText = mismatchedHeldAmmo ? Color.FromHex("#5F7288") : Color.FromHex("#8FA7C2");
             var panel = new PanelContainer
             {
                 HorizontalExpand = true,
@@ -59,16 +77,16 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
 
             panel.PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#0E1B2B"),
-                BorderColor = Color.FromHex("#2D5E8E"),
+                BackgroundColor = mismatchedHeldAmmo ? Color.FromHex("#0A121D") : Color.FromHex("#0E1B2B"),
+                BorderColor = mismatchedHeldAmmo ? Color.FromHex("#25384C") : Color.FromHex("#2D5E8E"),
                 BorderThickness = new Thickness(1.5f)
             };
 
             var root = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                SeparationOverride = 12,
-                Margin = new Thickness(10, 10),
+                SeparationOverride = 8,
+                Margin = new Thickness(8, 7),
                 HorizontalExpand = true
             };
 
@@ -78,7 +96,8 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
             {
                 Stretch = SpriteView.StretchMode.Fill,
                 VerticalAlignment = Control.VAlignment.Center,
-                MinSize = new Vector2(56, 56),
+                MinSize = new Vector2(42, 42),
+                MaxSize = new Vector2(42, 42),
                 OverrideDirection = Direction.South
             };
 
@@ -95,7 +114,7 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
             var centerColumn = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
-                SeparationOverride = 8,
+                SeparationOverride = 4,
                 HorizontalExpand = true
             };
 
@@ -109,24 +128,27 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
             centerColumn.AddChild(new Label
             {
                 Text = nameText,
-                FontColorOverride = Color.FromHex("#E1EEFF")
+                FontColorOverride = primaryText
             });
 
             centerColumn.AddChild(new Label
             {
                 Text = header,
-                FontColorOverride = Color.FromHex("#8FA7C2")
+                FontColorOverride = secondaryText
             });
 
             var ammoSlots = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                SeparationOverride = 8,
+                SeparationOverride = 6,
                 HorizontalExpand = true
             };
 
             foreach (var ammoSlot in hardpoint.AmmoSlots)
-                ammoSlots.AddChild(CreateAmmoSlotButton(hardpoint, ammoSlot, ammoPrototype));
+            {
+                var pulse = GetSlotPulse(GetSlotKey(hardpoint, ammoSlot), ammoSlot.Rounds, seenSlots);
+                ammoSlots.AddChild(CreateAmmoSlotButton(hardpoint, ammoSlot, ammoPrototype, pulse));
+            }
 
             centerColumn.AddChild(ammoSlots);
 
@@ -134,37 +156,43 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
 
             HardpointList.AddChild(panel);
         }
+
+        RemoveStaleSlotState(seenSlots);
+        _hasSeenSlotState = true;
     }
 
     private Control CreateAmmoSlotButton(
         RMCVehicleAmmoLoaderUiEntry hardpoint,
         RMCVehicleAmmoLoaderUiAmmoSlot ammoSlot,
-        EntProtoId? ammoPrototype)
+        EntProtoId? ammoPrototype,
+        int pulseDirection)
     {
         var ratio = ammoSlot.Capacity > 0
             ? Math.Clamp(ammoSlot.Rounds / (float) ammoSlot.Capacity, 0f, 1f)
             : 0f;
 
         var canInteract = ammoSlot.CanLoad || ammoSlot.CanUnload;
-        var button = new Button
+        var backgroundColor = ammoSlot.IsReadySlot
+            ? Color.FromHex("#102238")
+            : Color.FromHex("#0B1724");
+        var borderColor = GetAmmoSlotBorderColor(ammoSlot, ratio);
+        var style = new StyleBoxFlat
         {
-            MinSize = new Vector2(70, 84),
-            MaxSize = new Vector2(70, 84),
+            BackgroundColor = backgroundColor,
+            BorderColor = borderColor,
+            BorderThickness = new Thickness(ammoSlot.IsReadySlot ? 2f : 1.4f)
+        };
+        var button = new AmmoSlotPulseButton(style, backgroundColor, borderColor, pulseDirection)
+        {
+            MinSize = new Vector2(SlotButtonWidth, SlotButtonHeight),
+            MaxSize = new Vector2(SlotButtonWidth, SlotButtonHeight),
             Disabled = !canInteract,
             EnableAllKeybinds = true,
+            StyleBoxOverride = style,
             ToolTip = Loc.GetString(
                 "rmc-vehicle-ammo-loader-ui-slot-tooltip",
                 ("current", ammoSlot.Rounds),
                 ("max", ammoSlot.Capacity))
-        };
-
-        button.StyleBoxOverride = new StyleBoxFlat
-        {
-            BackgroundColor = ammoSlot.IsReadySlot
-                ? Color.FromHex("#102238")
-                : Color.FromHex("#0B1724"),
-            BorderColor = GetAmmoSlotBorderColor(ammoSlot, ratio),
-            BorderThickness = new Thickness(ammoSlot.IsReadySlot ? 2f : 1.4f)
         };
 
         button.OnPressed += args =>
@@ -181,14 +209,15 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
             if (action == RMCVehicleAmmoLoaderSlotAction.Unload && !ammoSlot.CanUnload)
                 return;
 
+            button.StartPulse(action == RMCVehicleAmmoLoaderSlotAction.Load ? 1 : -1);
             OnSlotSelected?.Invoke(hardpoint.SlotId, ammoSlot.SlotIndex, action);
         };
 
         var column = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
-            SeparationOverride = 3,
-            Margin = new Thickness(6, 5),
+            SeparationOverride = 2,
+            Margin = new Thickness(5, 4),
             MouseFilter = Control.MouseFilterMode.Ignore
         };
 
@@ -203,8 +232,8 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
 
         var iconHolder = new Control
         {
-            MinSize = new Vector2(42, 34),
-            MaxSize = new Vector2(42, 34),
+            MinSize = new Vector2(34, 28),
+            MaxSize = new Vector2(34, 28),
             HorizontalAlignment = Control.HAlignment.Center,
             MouseFilter = Control.MouseFilterMode.Ignore
         };
@@ -213,15 +242,16 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
         {
             var icon = new BulletBoxPrototypeView(GetBulletBoxVisual(ratio))
             {
-                MinSize = new Vector2(42, 34),
-                MaxSize = new Vector2(42, 34),
+                MinSize = new Vector2(34, 28),
+                MaxSize = new Vector2(34, 28),
                 Stretch = SpriteView.StretchMode.Fill,
                 OverrideDirection = Direction.South,
                 HorizontalAlignment = Control.HAlignment.Center,
                 MouseFilter = Control.MouseFilterMode.Ignore
             };
 
-            if (ammoPrototype is { } prototype)
+            var slotAmmoPrototype = hardpoint.AmmoPrototype ?? ammoPrototype;
+            if (slotAmmoPrototype is { } prototype)
             {
                 icon.SetPrototype(prototype);
             }
@@ -243,7 +273,7 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
             MinValue = 0f,
             MaxValue = 1f,
             Value = ratio,
-            MinSize = new Vector2(54, 7),
+            MinSize = new Vector2(46, 6),
             HorizontalAlignment = Control.HAlignment.Center,
             MouseFilter = Control.MouseFilterMode.Ignore
         };
@@ -273,6 +303,58 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
 
         button.AddChild(column);
         return button;
+    }
+
+    private void ResizeToContent(IReadOnlyList<RMCVehicleAmmoLoaderUiEntry> hardpoints)
+    {
+        var hardpointCount = Math.Max(1, hardpoints.Count);
+        var maxSlots = 1;
+        foreach (var hardpoint in hardpoints)
+            maxSlots = Math.Max(maxSlots, hardpoint.AmmoSlots.Count);
+
+        var width = Math.Clamp(
+            BaseWindowWidth +
+            maxSlots * (SlotButtonWidth + 8f) +
+            (hardpointCount - 1) * WindowWidthPerHardpoint,
+            MinWindowWidth,
+            MaxWindowWidth);
+        var height = Math.Clamp(126f + hardpointCount * 108f, 190f, 560f);
+        MinSize = new Vector2(MinWindowWidth, 190);
+        SetSize = new Vector2(width, height);
+    }
+
+    private int GetSlotPulse(string key, int rounds, HashSet<string> seenSlots)
+    {
+        seenSlots.Add(key);
+        if (!_lastSlotRounds.TryGetValue(key, out var previous))
+        {
+            _lastSlotRounds[key] = rounds;
+            return 0;
+        }
+
+        _lastSlotRounds[key] = rounds;
+        if (!_hasSeenSlotState || previous == rounds)
+            return 0;
+
+        return rounds > previous ? 1 : -1;
+    }
+
+    private void RemoveStaleSlotState(HashSet<string> seenSlots)
+    {
+        var stale = new List<string>();
+        foreach (var key in _lastSlotRounds.Keys)
+        {
+            if (!seenSlots.Contains(key))
+                stale.Add(key);
+        }
+
+        foreach (var key in stale)
+            _lastSlotRounds.Remove(key);
+    }
+
+    private static string GetSlotKey(RMCVehicleAmmoLoaderUiEntry hardpoint, RMCVehicleAmmoLoaderUiAmmoSlot ammoSlot)
+    {
+        return $"{hardpoint.SlotId}:{ammoSlot.SlotIndex}";
     }
 
     private static Color GetAmmoSlotBorderColor(RMCVehicleAmmoLoaderUiAmmoSlot slot, float ratio)
@@ -341,6 +423,56 @@ public sealed partial class RMCVehicleAmmoLoaderMenu : FancyWindow
             var appearanceSystem = EntMan.System<AppearanceSystem>();
             appearanceSystem.SetData(entity.Owner, BulletBoxLayers.Fill, _visual, appearance);
             appearanceSystem.OnChangeData(entity.Owner, entity.Comp1, appearance);
+        }
+    }
+
+    private sealed class AmmoSlotPulseButton : Button
+    {
+        private const float PulseDuration = 0.45f;
+
+        private readonly StyleBoxFlat _style;
+        private readonly Color _baseBackground;
+        private readonly Color _baseBorder;
+        private Color _pulseColor;
+        private float _pulseRemaining;
+
+        public AmmoSlotPulseButton(StyleBoxFlat style, Color baseBackground, Color baseBorder, int pulseDirection)
+        {
+            _style = style;
+            _baseBackground = baseBackground;
+            _baseBorder = baseBorder;
+
+            if (pulseDirection != 0)
+                StartPulse(pulseDirection);
+        }
+
+        public void StartPulse(int direction)
+        {
+            _pulseColor = direction > 0
+                ? Color.FromHex("#53D188")
+                : Color.FromHex("#D6C45A");
+            _pulseRemaining = PulseDuration;
+        }
+
+        protected override void FrameUpdate(FrameEventArgs args)
+        {
+            base.FrameUpdate(args);
+
+            if (_pulseRemaining <= 0f)
+                return;
+
+            _pulseRemaining = MathF.Max(0f, _pulseRemaining - args.DeltaSeconds);
+            var progress = _pulseRemaining / PulseDuration;
+            var pulse = MathF.Sin(progress * MathF.PI);
+
+            _style.BackgroundColor = Color.InterpolateBetween(_baseBackground, _pulseColor, pulse * 0.22f);
+            _style.BorderColor = Color.InterpolateBetween(_baseBorder, _pulseColor, pulse * 0.9f);
+
+            if (_pulseRemaining > 0f)
+                return;
+
+            _style.BackgroundColor = _baseBackground;
+            _style.BorderColor = _baseBorder;
         }
     }
 }
