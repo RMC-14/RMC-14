@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/13/2026 16:27:47
+  time: 04/15/2026 18:54:27
   entityCount: 103
 maps: []
 grids:
@@ -131,16 +131,8 @@ entities:
   - uid: 94
     components:
     - type: Transform
-      anchored: True
       pos: 1.5,3.5
       parent: 1
-    - type: Lock
-      locked: True
-    - type: Physics
-      canCollide: True
-      bodyType: Static
-    - type: PointLight
-      enabled: True
 - proto: CMMagazinePistolM1984
   entities:
   - uid: 88
