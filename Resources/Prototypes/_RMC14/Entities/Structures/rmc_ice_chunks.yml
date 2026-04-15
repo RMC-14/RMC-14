@@ -66,7 +66,7 @@
   parent: RMCIcechunk
   id: RMCIcechunkCaveman
   name: large ice chunk sample
-  description: A large chunk of glacial ice sitting atop a purpose built, metal pallet secured via a set of sharp spikes built into the pallet. Four large bolts with complex locking mechanisms hold the pallet in place, forget moving it. Inside the ice floats a tall, mummified, sapient. An asortment of mangy fur pelts hang loosely off it's body, a heavily worn, crude baldric, made out of nothing but sinew rope is wrapped around their torso securing two withered haphazardly sharpend spears to their back. It appears that the creature has a large hole in its chest...
+  description: A large chunk of glacial ice sitting atop a purpose built, metal pallet secured via a set of sharp spikes built into the pallet. Four large bolts with complex locking mechanisms hold the pallet in place. Forget moving it. Inside the ice floats a tall, mummified sapient. An assortment of mangy fur pelts hang loosely off its body, a heavily worn, crude baldric, made out of nothing but sinew rope, is wrapped around their torso, securing two withered haphazardly sharpened spears to their back. It appears that the creature has a large hole in its chest...
   suffix: Caveman #NOTE: This is once off species of 0 importance, they're meant to be just another one of many extinct species, space is a big place after all
   components:
   - type: Sprite
