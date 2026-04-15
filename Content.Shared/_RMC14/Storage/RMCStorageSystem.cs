@@ -11,6 +11,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Lock;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
@@ -38,6 +39,7 @@ public sealed class RMCStorageSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly OpenableSystem _openable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
@@ -90,6 +92,7 @@ public sealed class RMCStorageSystem : EntitySystem
         SubscribeLocalEvent<DropshipHijackStartEvent>(OnLockerHijackStart);
         SubscribeLocalEvent<RMCLockerOpenOnHijackComponent, StorageOpenAttemptEvent>(OnLockerOpenAttempt);
         SubscribeLocalEvent<RMCLockerOpenOnHijackComponent, LockToggleAttemptEvent>(OnLockerLockToggleAttempt);
+        SubscribeLocalEvent<MRERequireOpenBeforeStorageComponent, StorageInteractAttemptEvent>(OnMREInteractAttempt);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -578,6 +581,14 @@ public sealed class RMCStorageSystem : EntitySystem
     private static void OnLockerOpenAttempt(Entity<RMCLockerOpenOnHijackComponent> ent, ref StorageOpenAttemptEvent args)
     {
         if (ent.Comp.DidHijackStart)
+            return;
+
+        args.Cancelled = true;
+    }
+
+    private void OnMREInteractAttempt(Entity<MRERequireOpenBeforeStorageComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        if (_openable.IsOpen(ent.Owner))
             return;
 
         args.Cancelled = true;

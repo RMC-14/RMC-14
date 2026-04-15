@@ -25,6 +25,7 @@
   - type: Openable
     sound:
       collection: CMFoodRip
+  - type: MRERequireOpenBeforeStorage
   - type: Appearance
   - type: GenericVisualizer
     visuals:

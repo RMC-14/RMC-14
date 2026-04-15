@@ -1,0 +1,4 @@
+author: nbstrong
+changes:
+  - type: Fix
+    message: MRE ration packs now have to be torn open before you can access their contents.
