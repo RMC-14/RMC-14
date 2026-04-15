@@ -44,7 +44,7 @@
   parent: RMCIcechunk
   id: RMCIcechunkDroLar
   name: large ice chunk sample
-  description: A large chunk of glacial ice sitting atop a purpose built, metal pallet secured via a set of sharp spikes built into the pallet. Four large bolts with complex locking mechanisms hold the pallet in place, forget moving it. Inside the ice floats a sizable frozen creature cradling a tiny frozen serpentine creature. You sense that they know something you don't...
+  description: A large chunk of glacial ice sitting atop a purpose built, metal pallet secured via a set of sharp spikes built into the pallet. Four large bolts with complex locking mechanisms hold the pallet in place. Forget moving it. Inside the ice floats a sizable frozen creature cradling a tiny frozen serpentine creature. You sense that they know something you don't...
   suffix: Drone & Larva
   components:
   - type: Sprite
