@@ -28,6 +28,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
@@ -72,6 +73,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private   readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private   readonly SharedEntityStorageSystem _storageSystem = default!;
 
     // RMC14
     [Dependency] private readonly IConfigurationManager _configuration = default!;
@@ -803,9 +805,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             if (res.Count != 0)
             {
-                // Ignore dead mobs and entites from the same hive.
+                // Ignore dead mobs, entites from the same hive, and open entity containers (lockers, crates, etc).
                 var filteredResults = res.Where(x => !MobState.IsDead(x.HitEntity))
-                    .Where(x => !_hive.FromSameHive(ignore, x.HitEntity));
+                    .Where(x => !_hive.FromSameHive(ignore, x.HitEntity))
+                    .Where(x => !_storageSystem.IsOpen(x.HitEntity));
 
                 if (filteredResults.Count() <= 0)
                 {

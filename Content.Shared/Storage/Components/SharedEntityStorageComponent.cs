@@ -20,7 +20,6 @@ public abstract partial class SharedEntityStorageComponent : Component
     ///     Collision masks that get removed when the storage gets opened.
     /// </summary>
     public readonly int MasksToRemove = (int) (
-        CollisionGroup.Opaque |           // RMC14, prevents open crates/lockers from being wide swing targets.
         CollisionGroup.MidImpassable |
         CollisionGroup.HighImpassable |
         CollisionGroup.LowImpassable);
