@@ -157,6 +157,9 @@
   id: CMXenoDroneGardener
   suffix: Gardener
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleGardener
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
     layers:
@@ -221,6 +224,9 @@
   id: CMXenoDroneHealer
   suffix: Healer
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleHealer
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Drone/healer_drone.rsi
     layers:

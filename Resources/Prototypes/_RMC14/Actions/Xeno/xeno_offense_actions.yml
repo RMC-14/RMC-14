@@ -120,6 +120,14 @@
   - type: RMCDazeableAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoRegurgitate
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: regurgitate
+
+- type: entity
   id: ActionXenoTailStab
   parent: ActionXenoBase
   name: Tail Stab

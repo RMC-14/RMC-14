@@ -28,7 +28,7 @@
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideNewPlayer.xml"
   children:
   - RMCGuideRoleRifleman
-  - RMCGuideRoleDrone
+  - RMCGuideRoleLarva
 
 - type: guideEntry
   parent: RMC
@@ -39,10 +39,10 @@
 
 - type: guideEntry
   parent: RMC
-  id: RMCGuideRoleDrone
+  id: RMCGuideRoleLarva
   priority: 2
-  name: "Drone Guide"
-  text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleDrone.xml"
+  name: "Larva Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleLarva.xml"
 
 # Humanoid Roles
 - type: guideEntry
@@ -254,28 +254,54 @@
   priority: 1
   text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideXenonidRoles.xml"
   children:
+  - RMCGuideRoleDrone
   - RMCGuideRoleDefender
   - RMCGuideRoleSentinel
   - RMCGuideRoleRunner
 
 - type: guideEntry
   parent: RMC
-  id: RMCGuideRoleDefender
+  id: RMCGuideRoleDrone
   priority: 1
+  name: "Drone Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleDrone.xml"
+  children:
+  - RMCGuideRoleGardener
+  - RMCGuideRoleHealer
+
+## Xenonid roles - T1 - Drone Strains
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleGardener
+  priority: 1
+  name: "Gardener Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleGardener.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleHealer
+  priority: 2
+  name: "Healer Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleHealer.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleDefender
+  priority: 2
   name: "Defender Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleDefender.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleSentinel
-  priority: 2
+  priority: 3
   name: "Sentinel Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleSentinel.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleRunner
-  priority: 3
+  priority: 4
   name: "Runner Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleRunner.xml"
 

@@ -82,6 +82,14 @@
   - type: XenoResinSurgeAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoResinSurge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: gardener_resin_surge
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoRetrieve
   name: Retrieve (180 plasma, 100 fury)
@@ -268,6 +276,14 @@
   - type: RMCDazeableAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoApplySalve
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: apply_salve
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoSacrifice
   name: Sacrifice
@@ -287,6 +303,14 @@
       - type: RMCSlowdown
       - type: RMCSuperSlowdown
       - type: RMCRooted
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoSacrifice
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: screech
 
 - type: entity
   parent: ActionXenoBase

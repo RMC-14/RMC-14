@@ -166,6 +166,14 @@
   - type: XenoFruitChooseAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoFruitChoose
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: gardener_plant_pick
+
+- type: entity
   id: ActionXenoFruitPlant
   parent: ActionXenoBase
   name: Plant Resin Fruit (100)
@@ -179,6 +187,14 @@
     useDelay: 5
   - type: InstantAction
     event: !type:XenoFruitPlantActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoFruitPlant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: gardener_plant
 
 - type: entity
   id: ActionXenoPlantWeedsHardy
@@ -196,6 +212,14 @@
     event: !type:XenoPlantWeedsActionEvent
       plasmaCost: 125
       prototype: XenoHardyWeedsSource
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPlantWeedsHardy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: plant_gardener_weeds
 
 # For healer drone
 - type: entity
