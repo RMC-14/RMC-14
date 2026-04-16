@@ -1,9 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Components;
@@ -37,6 +39,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -67,6 +70,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private   readonly SharedXenoHiveSystem _hive = default!;
 
     // RMC14
     [Dependency] private readonly IConfigurationManager _configuration = default!;
@@ -798,8 +802,19 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             if (res.Count != 0)
             {
+                var filteredResults = res.Where(x => !MobState.IsDead(x.HitEntity))                                                   // Ignore dead mobs.
+                    .Where(x => !_hive.FromSameHive(ignore, x.HitEntity))                                                             // Ignore entities from the same hive.
+                    .OrderBy(x => !(HasComp<MobStateComponent>(x.HitEntity)                                                           // Prioritize (non-dead) mobs,
+                        || (CompOrNull<PhysicsComponent>(x.HitEntity)?.CollisionLayer & (int)CollisionGroup.InteractImpassable) != 0  // interact impassable objects (walls, windows, etc),
+                        || HasComp<DirectionalAttackBlockerComponent>(x.HitEntity)));                                                 // and directional blockers (barricades), without priority between them.
+
+                if (filteredResults.Count() <= 0)
+                {
+                    continue;
+                }
+
                 // If there's exact distance overlap, we simply have to deal with all overlapping objects to avoid selecting randomly.
-                var resChecked = res.Where(x => x.Distance.Equals(res[0].Distance));
+                var resChecked = filteredResults.Where(x => x.Distance.Equals(filteredResults.First().Distance));
                 foreach (var r in resChecked)
                 {
                     if (Interaction.InRangeUnobstructed(ignore, r.HitEntity, range + 0.1f, overlapCheck: false))
