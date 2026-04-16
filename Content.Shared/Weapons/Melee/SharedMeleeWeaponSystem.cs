@@ -45,6 +45,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components.ItemToggleMeleeWeaponComponent;
 
 namespace Content.Shared.Weapons.Melee;
@@ -802,19 +803,35 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             if (res.Count != 0)
             {
-                var filteredResults = res.Where(x => !MobState.IsDead(x.HitEntity))                                                   // Ignore dead mobs.
-                    .Where(x => !_hive.FromSameHive(ignore, x.HitEntity))                                                             // Ignore entities from the same hive.
-                    .OrderBy(x => !(HasComp<MobStateComponent>(x.HitEntity)                                                           // Prioritize (non-dead) mobs,
-                        || (CompOrNull<PhysicsComponent>(x.HitEntity)?.CollisionLayer & (int)CollisionGroup.InteractImpassable) != 0  // interact impassable objects (walls, windows, etc),
-                        || HasComp<DirectionalAttackBlockerComponent>(x.HitEntity)));                                                 // and directional blockers (barricades), without priority between them.
+                // Ignore dead mobs and entites from the same hive.
+                var filteredResults = res.Where(x => !MobState.IsDead(x.HitEntity))
+                    .Where(x => !_hive.FromSameHive(ignore, x.HitEntity));
 
                 if (filteredResults.Count() <= 0)
                 {
                     continue;
                 }
 
+                // We prioritize non-dead mobs, but we also have to make sure we don't hit past barricades or entities
+                // that block interactions over them, such as walls, windows, windoors, closed airlocks, etc.
+                // In short, we should hit the closest entity, UNLESS we can hit a mob, in which case we hit the mob.
+                // To accomplish this, we find the first object that either is a mob or would block our attack.
+                var firstPriorityResult = filteredResults.FirstOrNull(
+                    x => HasComp<MobStateComponent>(x.HitEntity)  // mobs
+                      || (CompOrNull<PhysicsComponent>(x.HitEntity)?.CollisionLayer & (int)CollisionGroup.InteractImpassable) != 0  // walls, windows, etc
+                      || HasComp<DirectionalAttackBlockerComponent>(x.HitEntity)  // barricades
+                );
+
+                // If the found object is a mob, we target it. Otherwise we target the first object we found.
+                var target = filteredResults.First();
+                if (firstPriorityResult is { } result &&
+                    HasComp<MobStateComponent>(result.HitEntity))
+                {
+                    target = result;
+                }
+
                 // If there's exact distance overlap, we simply have to deal with all overlapping objects to avoid selecting randomly.
-                var resChecked = filteredResults.Where(x => x.Distance.Equals(filteredResults.First().Distance));
+                var resChecked = filteredResults.Where(x => x.Distance.Equals(target.Distance));
                 foreach (var r in resChecked)
                 {
                     if (Interaction.InRangeUnobstructed(ignore, r.HitEntity, range + 0.1f, overlapCheck: false))
