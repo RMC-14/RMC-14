@@ -1,80 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Added Glass, Reinforced Glass, and Plastic construction menus; press
-      Z with those materials in-hand to open the constuction menus and build items
-      such as the now-craftable plastic crate, plastic ashtray, and plastic cutlery.
-    type: Add
-  id: 2602
-  time: '2025-12-01T07:53:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8504
-- author: Arykh
-  changes:
-  - message: Hand Labelers can now change pill bottle color!
-    type: Add
-  - message: Added sounds for applying and removing labels.
-    type: Add
-  id: 2603
-  time: '2025-12-01T07:54:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8274
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Xenos now have a chance to gib upon death
-    type: Add
-  - message: Added new effects for xenos gibbing
-    type: Add
-  id: 2604
-  time: '2025-12-01T07:57:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8478
-- author: noctyrnal
-  changes:
-  - message: COs with 250+ Hours can now get golden versions of their sidearms in
-      their loadouts.
-    type: Add
-  id: 2605
-  time: '2025-12-01T08:48:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8500
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed dead marines layering under dead xenos and items.
-    type: Fix
-  id: 2606
-  time: '2025-12-04T07:01:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8560
-- author: YO0teacher
-  changes:
-  - message: Fixed xeno leaps colliding with things they shouldn't.
-    type: Fix
-  - message: Fixed a hotkey letting you pick up items while devoured.
-    type: Fix
-  - message: Fixed being able to devour synths.
-    type: Fix
-  - message: Fixed motion detectors not being deactivated when devoured.
-    type: Fix
-  - message: Fixed melee hits not doing proper damage while devoured.
-    type: Fix
-  - message: Fixed larva and parasites making noise when trying to pry doors.
-    type: Fix
-  id: 2607
-  time: '2025-12-04T12:11:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8424
-- author: vorkathbruh
-  changes:
-  - message: Moved Auxiliary Support Officer below the staff officer in command succession.
-    type: Tweak
-  - message: changed wording of Commander Succession to communicate that the Commander
-      is to be granted Senior Command access.
-    type: Tweak
-  id: 2608
-  time: '2025-12-06T09:07:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8564
-- author: wheelwrightt
-  changes:
-  - message: MAR-50 rail attachments no longer are floating
-    type: Fix
-  id: 2609
-  time: '2025-12-06T09:08:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8544
 - author: Whisper
   changes:
   - message: Added naming guidelines for Skrell and Feroxi.
@@ -4482,5 +4406,104 @@
   id: 3102
   time: '2026-04-11T09:09:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9625
+- author: Ian321
+  changes:
+  - message: Marines can no longer see the identity of parasites.
+    type: Fix
+  id: 3103
+  time: '2026-04-13T20:49:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9380
+- author: Dygon
+  changes:
+  - message: White phosphorus rockets are now available from the Weapon Specialist
+      vendor and through requisitions. Instead of exploding, they create a large area
+      of fire and smoke and have slightly more range than other rockets.
+    type: Add
+  - message: WPDP White Phosphorus grenades can now be purchased from most squad role
+      vendors, and CCDP Chemical Compound grenades can now be acquired through requisitions.
+      These grenades create short-lasting incendiary smoke clouds, with the CCDP grenade
+      producing a slightly longer-lasting and more potent smoke effect than the WPDP.
+    type: Add
+  - message: The Demolitionist kit and the Loader kit now have one HE rocket replaced
+      with a white phosphorus rocket.
+    type: Tweak
+  - message: One of the HE rockets in the mixed rocket crate has been replaced with
+      a white phosphorus rocket.
+    type: Tweak
+  - message: Reduced the duration of the tile fire created by the UN 45-FM mini-sentry
+      from 20 seconds to 5 seconds.
+    type: Fix
+  - message: Smoke created by the UN 60-FP plasma sentry now ignites entities that
+      come into contact with it.
+    type: Fix
+  id: 3104
+  time: '2026-04-13T20:52:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9434
+- author: Dygon
+  changes:
+  - message: The Queen and base Hivelords can now build reflective resin walls, these
+      walls have a high chance to reflect projectiles. Every individual can have a
+      maximum of 5 built at the same time.
+    type: Add
+  - message: The Designer Hivelord's Resin Surge ability now creates weak reflective
+      walls, these are less resilient versions of the normal reflective walls.
+    type: Fix
+  id: 3105
+  time: '2026-04-13T20:53:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9389
+- author: PursuitinAshes
+  changes:
+  - message: '[PvE] CORSAT''s Generators will no longer flood the tactical map with
+      Icons.'
+    type: Fix
+  id: 3106
+  time: '2026-04-13T20:55:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9601
+- author: Ian321
+  changes:
+  - message: You can now find your patreon figurine inside your backpack when you
+      wake up.
+    type: Tweak
+  id: 3107
+  time: '2026-04-13T20:55:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9624
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Medals and uniform accessories from loadouts now automatically equip
+      when you spawn in to your jumpsuit or jacket. Notably, this fixes roles that
+      spawn with weapons in their hands not spawning if you are full of uniform accessory
+      loadouts/medals.
+    type: Fix
+  id: 3108
+  time: '2026-04-13T20:54:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9419
+- author: Dygon
+  changes:
+  - message: Reduced gun projectile speed by 3.6%.
+    type: Tweak
+  - message: Flares fired from flare guns no longer spawn inside walls.
+    type: Fix
+  id: 3109
+  time: '2026-04-13T20:57:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9628
+- author: kleinerstation13
+  changes:
+  - message: Added the M1911 service pistol, it can be acquired from spawning as a
+      survivor, the Black Market Firearm crate or pistol spawners on the colony.
+    type: Add
+  - message: Fixed FORECON spawning with a fully loaded M1984 belt instead of a M1911
+      belt with 2 magazines
+    type: Fix
+  - message: Fixed survivors spawning with an M1984 instead of an M1911
+    type: Fix
+  - message: Fixed .38 revolver not having 2x damage multplier
+    type: Fix
+  - message: Fixed KT-42 using 9mm instead of .45 ACP
+    type: Fix
+  - message: Fixed KT-42 not spawning in pistol spawners
+    type: Fix
+  id: 3110
+  time: '2026-04-15T01:36:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9284
 Name: RMC14
 Order: -1

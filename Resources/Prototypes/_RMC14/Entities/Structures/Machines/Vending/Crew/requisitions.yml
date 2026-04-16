@@ -90,8 +90,8 @@
         amount: 25
       - id: RMCGrenadeIncendiary
         amount: 4
-      #- id: M40 HPDP White Phosphorus Smoke Grenade
-      #  amount: 4
+      - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+        amount: 4
       - id: CMGrenadeSmoke
         amount: 5
       - id: RMC40MMGrenadeM74AGMF

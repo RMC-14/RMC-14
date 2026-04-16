@@ -44,9 +44,11 @@
     thresholds:
     - range: 22
       falloff: 10
+
 - type: entity
+  abstract: true
   parent: RMCBaseBullet
-  id: RMCBulletSentryFireProjectile
+  id: RMCBaseBulletSentryFireProjectile
   name: flaming ball
   description: Huh? You shouldn't be able to see this...
   categories: [ HideSpawnMenu ]
@@ -60,7 +62,7 @@
     - state: pulse0
       shader: unshaded
   - type: Projectile
-    deleteOnCollide: True
+    deleteOnCollide: false
     impactEffect: BulletImpactEffect
     damage:
       types:
@@ -75,9 +77,6 @@
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
-  - type: SpawnOnTerminate
-    spawn: RMCTileFire
-  - type: IgnoreArc
   - type: Fixtures
     fixtures:
       projectile:
@@ -88,99 +87,52 @@
         mask:
         - Impassable
         - BulletImpassable
+  - type: TriggerOnCollide
+    fixtureID: projectile
 
 - type: entity
-  parent: RMCBaseBullet
+  parent: RMCBaseBulletSentryFireProjectile
+  id: RMCBulletSentryFireProjectile
+  components:
+  - type: DirectionalTileFireOnTrigger
+    spawn: RMCTileFire
+    range: 1
+    duration: 5
+    offsetForward: true
+
+- type: entity
+  parent: RMCBaseBulletSentryFireProjectile
   id: RMCBulletSentryFireProjectileBlue
   name: flaming ball blue
   description: Huh? You shouldn't be able to see this...
   categories: [ HideSpawnMenu ]
   components:
   - type: IgniteOnProjectileHit
-  - type: IgnorePredictionHide
-  - type: RMCFireProjectile
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
-    layers:
-    - state: pulse0
-      shader: unshaded
-  - type: TileFire
-    id: RMCTileFireBlue
-  - type: Projectile
-    deleteOnCollide: True
-    impactEffect: BulletImpactEffect
-    damage:
-      types:
-        Heat: 35
-    soundHit:
-      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
-  - type: RMCProjectileAccuracy
-    accuracy: 100
-    thresholds:
-    - range: 5
-      falloff: 10
-  - type: ContainerContainer
-    containers:
-      cluster-payload: !type:Container
-  - type: SpawnOnTerminate
+    burnColor: "#00b8ff"
+    intensity: 40
+    duration: 40
+  - type: DirectionalTileFireOnTrigger
     spawn: RMCTileFireBlue
-  - type: IgnoreArc
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.15,-0.45,0.15,0.15"
-        hard: false
-        mask:
-        - Impassable
-        - BulletImpassable
+    range: 1
+    offsetForward: true
 
 - type: entity
-  parent: RMCBaseBullet
+  parent: RMCBaseBulletSentryFireProjectile
   id: RMCBulletSentryFireProjectileSmoke
   name: flaming ball smoke
   description: Huh? You shouldn't be able to see this...
   categories: [ HideSpawnMenu ]
   components:
-  - type: IgniteOnProjectileHit
-  - type: IgnorePredictionHide
-  - type: RMCFireProjectile
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
-    layers:
-    - state: pulse0
-      shader: unshaded
   - type: Projectile
-    deleteOnCollide: True
+    deleteOnCollide: true
     impactEffect: BulletImpactEffect
     damage:
       types:
         Heat: 35
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
-  - type: RMCProjectileAccuracy
-    accuracy: 100
-    thresholds:
-    - range: 5
-      falloff: 10
-  - type: ContainerContainer
-    containers:
-      cluster-payload: !type:Container
   - type: SpawnOnTerminate
     spawn: RMCSmokeFireSentry
-
-  - type: IgnoreArc
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.15,-0.45,0.15,0.15"
-        hard: false
-        mask:
-        - Impassable
-        - BulletImpassable
 
 - type: Tag
   id: RMCBulletSentryFireProjectile

@@ -466,7 +466,7 @@
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.15,-0.45,0.15,0.15"
+          bounds: "-0.15,-0.9,0.15,0.15"
         hard: false
         mask:
         - Impassable
