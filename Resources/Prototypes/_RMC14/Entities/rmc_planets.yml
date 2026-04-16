@@ -401,6 +401,17 @@
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
+    nightmareScenarios:
+    - scenarioName: kutjevo_surv_spawn_bar # Reduce this to 0.18 each once CLF survivors are in at 0.1
+      scenarioProbability: 0.2
+    - scenarioName: kutjevo_surv_spawn_medical
+      scenarioProbability: 0.2
+    - scenarioName: kutjevo_surv_spawn_north_botany
+      scenarioProbability: 0.2
+    - scenarioName: kutjevo_surv_spawn_south_botany
+      scenarioProbability: 0.2
+    - scenarioName: kutjevo_surv_spawn_powerplant
+      scenarioProbability: 0.2
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingKutjevo
     survivorJobVariants:
