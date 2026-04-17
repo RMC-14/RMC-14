@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/05/2026 04:24:19
-  entityCount: 17433
+  time: 02/17/2026 10:10:56
+  entityCount: 17428
 maps:
 - 1
 grids:
@@ -47621,21 +47621,6 @@ entities:
     - type: Transform
       pos: 178.5,146.5
       parent: 1
-  - uid: 2133
-    components:
-    - type: Transform
-      pos: 119.5,13.5
-      parent: 1
-  - uid: 13549
-    components:
-    - type: Transform
-      pos: 119.5,12.5
-      parent: 1
-  - uid: 17431
-    components:
-    - type: Transform
-      pos: 119.5,11.5
-      parent: 1
 - proto: CMRodMetal
   entities:
   - uid: 2042
@@ -48147,6 +48132,11 @@ entities:
       parent: 1
 - proto: CMSheetMetal50
   entities:
+  - uid: 2133
+    components:
+    - type: Transform
+      pos: 179.5,129.5
+      parent: 1
   - uid: 2135
     components:
     - type: Transform
@@ -48161,15 +48151,10 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 17429
+  - uid: 2138
     components:
     - type: Transform
-      pos: 119.5,11.5
-      parent: 1
-  - uid: 17433
-    components:
-    - type: Transform
-      pos: 121.5,10.5
+      pos: 178.5,129.5
       parent: 1
 - proto: CMSheetPhoron
   entities:
@@ -48223,12 +48208,12 @@ entities:
   - uid: 2147
     components:
     - type: Transform
-      pos: 119.5,13.5
+      pos: 179.5,127.5
       parent: 1
-  - uid: 17432
+  - uid: 2148
     components:
     - type: Transform
-      pos: 119.5,12.5
+      pos: 178.5,127.5
       parent: 1
 - proto: CMShellShotgunBuckshot
   entities:
@@ -108630,6 +108615,11 @@ entities:
     - type: Transform
       pos: 101.5,12.5
       parent: 1
+  - uid: 13549
+    components:
+    - type: Transform
+      pos: 121.5,13.5
+      parent: 1
   - uid: 13550
     components:
     - type: Transform
@@ -108759,11 +108749,6 @@ entities:
     components:
     - type: Transform
       pos: 105.71994,47.291527
-      parent: 1
-  - uid: 17430
-    components:
-    - type: Transform
-      pos: 121.5,13.5
       parent: 1
 - proto: RMCCrateMinecart
   entities:
@@ -124001,18 +123986,6 @@ entities:
     components:
     - type: Transform
       pos: 61.5,153.5
-      parent: 1
-- proto: RMCSpawnerBombSupply
-  entities:
-  - uid: 2138
-    components:
-    - type: Transform
-      pos: 178.5,127.5
-      parent: 1
-  - uid: 2148
-    components:
-    - type: Transform
-      pos: 179.5,129.5
       parent: 1
 - proto: RMCSpawnerCommunicationsTowerOne
   entities:
