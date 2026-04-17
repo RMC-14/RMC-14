@@ -445,17 +445,6 @@
     - id: RMCMK80
 
 - type: entity
-  parent: RMCBeltHolsterPistol
-  id: RMCM1984BeltFilledSurvivorSunRiders
-  suffix: Filled, Survivor, Sun Riders
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolM1984
-      amount: 3
-    - id: CMWeaponPistolM1984
-
-- type: entity
   parent: RMCM276ShotgunShellLoadingRig
   id: RMCM276ShotgunShellLoadingRigFill
   suffix: Filled
