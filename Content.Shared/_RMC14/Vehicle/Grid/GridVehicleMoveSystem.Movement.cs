@@ -365,9 +365,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var forward = new Vector2(moveDir.X, moveDir.Y);
         var directTarget = mover.Position + forward * travel;
         var moved = false;
-        var directBlockers = new HashSet<EntityUid>();
+        _directMoveBlockers.Clear();
 
-        if (CanMoveContinuous(uid, mover, grid, directTarget, rotation, debugProbes: true, blockers: directBlockers))
+        if (CanMoveContinuous(uid, mover, grid, directTarget, rotation, debugProbes: true, blockers: _directMoveBlockers))
         {
             AddDebugMovementDecision(uid, grid, mover.Position, directTarget, forward, DebugMovementDecisionKind.DirectClear, true);
             return TryMoveContinuous(uid, mover, grid, directTarget, rotation, out blocked);
@@ -384,31 +384,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 rotation,
                 directTarget,
                 frameTime,
-                directBlockers,
+                _directMoveBlockers,
                 out var mobBypassCorrection))
         {
-            var lateralTarget = SetLateralCoordinate(
-                mover.Position,
-                moveDir,
-                GetLateralCoordinate(mover.Position, moveDir) + mobBypassCorrection);
-
-            if ((lateralTarget - mover.Position).LengthSquared() > MinMoveDistance * MinMoveDistance)
-            {
-                var lateralStart = mover.Position;
-                var lateralDirection = lateralTarget - lateralStart;
-                moved = TryMoveContinuous(uid, mover, grid, lateralTarget, rotation, out _, applyBlockEffects: false, debugProbes: false);
-                AddDebugMovementDecision(
-                    uid,
-                    grid,
-                    lateralStart,
-                    lateralTarget,
-                    lateralDirection,
-                    moved ? DebugMovementDecisionKind.LaneCorrection : DebugMovementDecisionKind.LaneCorrectionFailed,
-                    moved);
-
-                if (moved)
-                    return true;
-            }
+            moved = TryApplyLateralCorrection(uid, mover, grid, moveDir, rotation, mobBypassCorrection);
+            if (moved)
+                return true;
         }
 
         if (TryGetLaneCorrection(
@@ -422,25 +403,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 frameTime,
                 out var correction))
         {
-            var lateralTarget = SetLateralCoordinate(
-                mover.Position,
-                moveDir,
-                GetLateralCoordinate(mover.Position, moveDir) + correction);
-
-            if ((lateralTarget - mover.Position).LengthSquared() > MinMoveDistance * MinMoveDistance)
-            {
-                var lateralStart = mover.Position;
-                var lateralDirection = lateralTarget - lateralStart;
-                moved = TryMoveContinuous(uid, mover, grid, lateralTarget, rotation, out _, applyBlockEffects: false, debugProbes: false);
-                AddDebugMovementDecision(
-                    uid,
-                    grid,
-                    lateralStart,
-                    lateralTarget,
-                    lateralDirection,
-                    moved ? DebugMovementDecisionKind.LaneCorrection : DebugMovementDecisionKind.LaneCorrectionFailed,
-                    moved);
-            }
+            moved = TryApplyLateralCorrection(uid, mover, grid, moveDir, rotation, correction);
         }
 
         var forwardStart = mover.Position;
@@ -455,6 +418,37 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             blocked ? DebugMovementDecisionKind.ForwardBlocked : DebugMovementDecisionKind.ForwardAfterCorrection,
             forwardMoved && !blocked);
         return moved || forwardMoved;
+    }
+
+    private bool TryApplyLateralCorrection(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        Vector2i moveDir,
+        Angle? rotation,
+        float correction)
+    {
+        var lateralTarget = SetLateralCoordinate(
+            mover.Position,
+            moveDir,
+            GetLateralCoordinate(mover.Position, moveDir) + correction);
+
+        if ((lateralTarget - mover.Position).LengthSquared() <= MinMoveDistance * MinMoveDistance)
+            return false;
+
+        var lateralStart = mover.Position;
+        var lateralDirection = lateralTarget - lateralStart;
+        var moved = TryMoveContinuous(uid, mover, grid, lateralTarget, rotation, out _, applyBlockEffects: false, debugProbes: false);
+        AddDebugMovementDecision(
+            uid,
+            grid,
+            lateralStart,
+            lateralTarget,
+            lateralDirection,
+            moved ? DebugMovementDecisionKind.LaneCorrection : DebugMovementDecisionKind.LaneCorrectionFailed,
+            moved);
+
+        return moved;
     }
 
     private static void AddDebugMovementDecision(
@@ -531,17 +525,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!TryFindBlockingMobBypassOffset(uid, mover, grid, gridComp, moveDir, rotation, target, out var laneOffset))
             return false;
 
-        var targetTile = GetTile(grid, gridComp, target);
-        var center = GetTileCenter(targetTile);
-        var currentLateral = GetLateralCoordinate(mover.Position, moveDir);
-        var desiredLateral = GetLateralCoordinate(center, moveDir) + laneOffset;
-        var correctionSpeed = MathF.Max(0f, mover.LaneCorrectionSpeed);
-        if (correctionSpeed <= 0f)
-            return false;
-
-        var maxCorrection = correctionSpeed * frameTime;
-        correction = Math.Clamp(desiredLateral - currentLateral, -maxCorrection, maxCorrection);
-        return MathF.Abs(correction) > MinMoveDistance;
+        return TryGetLateralCorrection(mover, grid, gridComp, moveDir, target, laneOffset, frameTime, out correction);
     }
 
     private bool TryFindBlockingMobBypassOffset(
@@ -634,13 +618,29 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!TryFindBestLaneOffset(uid, mover, grid, gridComp, moveDir, rotation, target, out var laneOffset))
             return false;
 
+        return TryGetLateralCorrection(mover, grid, gridComp, moveDir, target, laneOffset, frameTime, out correction);
+    }
+
+    private bool TryGetLateralCorrection(
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        MapGridComponent gridComp,
+        Vector2i moveDir,
+        Vector2 target,
+        float laneOffset,
+        float frameTime,
+        out float correction)
+    {
         var targetTile = GetTile(grid, gridComp, target);
         var center = GetTileCenter(targetTile);
         var currentLateral = GetLateralCoordinate(mover.Position, moveDir);
         var desiredLateral = GetLateralCoordinate(center, moveDir) + laneOffset;
         var correctionSpeed = MathF.Max(0f, mover.LaneCorrectionSpeed);
         if (correctionSpeed <= 0f)
+        {
+            correction = 0f;
             return false;
+        }
 
         var maxCorrection = correctionSpeed * frameTime;
         correction = Math.Clamp(desiredLateral - currentLateral, -maxCorrection, maxCorrection);

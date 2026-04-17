@@ -91,6 +91,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private readonly Dictionary<EntityUid, bool> _hardState = new();
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
     private readonly Dictionary<EntityUid, float> _movementAccumulator = new();
+    private readonly HashSet<EntityUid> _directMoveBlockers = new();
 
     private enum VehicleCollisionClass : byte
     {
