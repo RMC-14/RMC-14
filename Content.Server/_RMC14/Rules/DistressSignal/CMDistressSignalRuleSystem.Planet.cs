@@ -57,6 +57,7 @@ public sealed partial class CMDistressSignalRuleSystem
             _mapInsert.ProcessMapInsert((uid, mapInsert));
         }
 
+        // TODO RMC14 this should be delayed by 3 minutes + 13 second warning for immersion
         if (_landingZoneMiasmaEnabled &&
             rule.Comp.LandingZoneGas is { } gas &&
             TryComp(rule.Comp.XenoMap, out AreaGridComponent? areaGrid))
