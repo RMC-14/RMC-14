@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
@@ -26,6 +25,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -90,8 +90,8 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                 foreach (var reagent in solution.Contents)
                 {
                     var name = reagent.Reagent.Prototype;
-                    if (_prototypes.TryIndexReagent(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto))
-                        name = reagentProto.LocalizedName;
+                    if (_rmcReagent.TryIndex(reagent.Reagent.Prototype, out var rmcReagentProto))
+                        name = rmcReagentProto.LocalizedName;
 
                     args.PushText($"{reagent.Quantity.Float():F2} units of {name}");
                 }
@@ -358,7 +358,9 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
             var baseMax = storage.BaseMax;
             var baseRecharge = storage.BaseRecharge;
-            if (storage.PopulationEnergyScaling && _scaling.TryGetScaling(out var scaling))
+            if (storage.PopulationEnergyScaling &&
+                _scaling.TryGetScaling(out var scaling) &&
+                scaling.Comp.MaxScale > 0)
             {
                 var scale = scaling.Comp.MaxScale;
                 baseMax *= scale;
