@@ -376,7 +376,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         _directMoveBlockers.Clear();
         var ignoredEntities = GetPushIgnoredEntities(uid, mover);
 
-        if (CanMoveContinuous(uid, mover, grid, directTarget, rotation, debugProbes: true, blockers: _directMoveBlockers, ignoredEntities: ignoredEntities))
+        if (CanMoveContinuous(uid, mover, grid, directTarget, rotation, debugProbes: CollisionDebugEnabled, blockers: _directMoveBlockers, ignoredEntities: ignoredEntities))
         {
             AddDebugMovementDecision(uid, grid, mover.Position, directTarget, forward, DebugMovementDecisionKind.DirectClear, true);
             return TryMoveContinuous(uid, mover, grid, directTarget, rotation, out blocked, ignoredEntities: ignoredEntities);
@@ -471,6 +471,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         DebugMovementDecisionKind kind,
         bool success)
     {
+        if (!MovementDebugEnabled)
+            return;
+
         if (moveDirection.LengthSquared() > 0.0001f)
             moveDirection = Vector2.Normalize(moveDirection);
         else
@@ -1019,7 +1022,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return null;
         }
 
-        return new HashSet<EntityUid> { pusher };
+        _pushIgnoredEntities.Clear();
+        _pushIgnoredEntities.Add(pusher);
+        return _pushIgnoredEntities;
     }
 
     private bool CanApplyTurn(GridVehicleMoverComponent mover)

@@ -87,12 +87,16 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     public static readonly List<DebugCollisionProbe> DebugCollisionProbes = new();
     public static readonly List<DebugCollision> DebugCollisions = new();
     public static readonly List<DebugMovementDecision> DebugMovementDecisions = new();
+    public static bool CollisionDebugEnabled { get; set; }
+    public static bool MovementDebugEnabled { get; set; }
+
     private readonly Dictionary<EntityUid, TimeSpan> _lastMobCollision = new();
     private readonly Dictionary<EntityUid, bool> _hardState = new();
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
     private readonly Dictionary<EntityUid, float> _movementAccumulator = new();
     private readonly Dictionary<EntityUid, EntityUid> _activeXenoPushers = new();
     private readonly HashSet<EntityUid> _directMoveBlockers = new();
+    private readonly HashSet<EntityUid> _pushIgnoredEntities = new();
 
     private enum VehicleCollisionClass : byte
     {
