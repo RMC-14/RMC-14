@@ -1,7 +1,7 @@
 rmc-xeno-strain-specialized-into = It has specialized into {INDEFINITE($strain)} {$strain}.
 
-rmc-xeno-trapper-name = Trapper
-rmc-xeno-trapper-description = You trade your bombard, neurotoxin, acid shroud and acid spray in order to gain some speed and the ability to create acid explosions and restrain enemies within them.
+rmc-xeno-trapper-name = Sapper
+rmc-xeno-trapper-description = You trade your bombard, neurotoxin, acid shroud, acid spray, some speed and a little health to gain the ability to create acid explosions and restrain enemies within them.
    You gain the ability to:
    - Fire a close ranged shotgun of acid that deals high damage, further increased against trapped targets.
    - - Gain stacks of Insight when you strike enemies with your shotgun, at 10 stacks you empower your next trap deployment.

@@ -189,18 +189,18 @@
   - type: NeurotoxinInjector
   - type: XenoEvolution
     strains:
-      - RMCXenoBoilerTrapper
+      - RMCXenoBoilerSapper
   - type: RMCActionOrder
     id: RMCXenoBoiler
 
-    # Trapper strain
+    # Sapper strain
 - type: entity
   parent: CMXenoBoiler
-  id: RMCXenoBoilerTrapper
-  suffix: Trapper
+  id: RMCXenoBoilerSapper
+  suffix: Sapper
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Boiler/boiler_trapper.rsi
+    sprite: _RMC14/Mobs/Xenonids/Boiler/boiler_sapper.rsi
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -246,6 +246,6 @@
   - type: XenoInsight
   - type: XenoAdrenalineSurge
   - type: RMCActionOrder
-    id: RMCXenoBoilerTrapper
+    id: RMCXenoBoilerSapper
 
 
