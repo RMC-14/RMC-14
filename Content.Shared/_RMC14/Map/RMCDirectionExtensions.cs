@@ -2,7 +2,15 @@
 
 public static class RMCDirectionExtensions
 {
-    public static (Direction First, Direction Second) GetPerpendiculars(this Direction direction)
+    private static readonly List<Direction> Cardinals = new ()
+    {
+        Direction.North,
+        Direction.East,
+        Direction.South,
+        Direction.West,
+    };
+
+public static (Direction First, Direction Second) GetPerpendiculars(this Direction direction)
     {
         switch (direction)
         {
@@ -26,5 +34,10 @@ public static class RMCDirectionExtensions
     public static bool IsCardinal(this Direction direction)
     {
         return direction is Direction.North or Direction.East or Direction.South or Direction.West;
+    }
+
+    public static List<Direction> GetCardinals()
+    {
+        return Cardinals;
     }
 }

@@ -1,0 +1,29 @@
+- type: constructionGraph
+  parent: RMC
+  id: RMCBarricadeHandrailPlasticGraph
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity
+    edges:
+    - to: nodeHandrail
+      completed:
+      - !type:SnapToGrid
+      steps:
+      - material: CMSteel
+        amount: 2
+        doAfter: 3
+
+  - node: nodeHandrail
+    entity: RMCBarricadeHybrisaPlasticRoadBarrier
+    edges:
+    - to: start
+      completed:
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      steps:
+      - tool: Screwing
+        doAfter: 3
