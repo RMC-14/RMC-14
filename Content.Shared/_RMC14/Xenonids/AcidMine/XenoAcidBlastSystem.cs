@@ -99,11 +99,6 @@ public sealed class XenoAcidBlastSystem : EntitySystem
                 if (_actions.GetEvent(action) is XenoAcidMineActionEvent)
                     _actions.SetIcon(action.AsNullable(), GetActionIcon(attachedXeno));
             }
-
-            foreach (var usedAction in _rmcActions.GetActionsWithEvent<XenoAcidMineActionEvent>(attachedXeno))
-            {
-                _actions.SetCooldown(usedAction.AsNullable(), ent.Comp.Cooldown);
-            }
         }
 
         if (_net.IsClient && !IsClientSide(ent))
