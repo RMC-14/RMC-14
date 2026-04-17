@@ -7,3 +7,13 @@
   - type: Sprite
     sprite: _RMC14/Objects/Misc/prop_trash.rsi
     state: ztrashbag
+
+- type: entity
+  parent: RMCPropTrashFull
+  id: RMCPropBananaPeel
+  suffix: RMC
+  name: banana peel
+  description: A peel from a banana.
+  components:
+  - type: Sprite
+    state: banana_peel
