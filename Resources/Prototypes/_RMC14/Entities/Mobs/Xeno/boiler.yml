@@ -200,7 +200,7 @@
   suffix: Trapper
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Boiler/boiler.rsi
+    sprite: _RMC14/Mobs/Xenonids/Boiler/boiler_trapper.rsi
   - type: Xeno
     actionIds:
     - ActionXenoRest
