@@ -95,7 +95,7 @@
   parent: [RMCPouchClosed, RMCPouchStorage]
   id: RMCPouchCommand
   name: command pouch
-  description: A specialized, sturdy pouch issued to Commanding Officers. Can hold their sidearm, the command tablet and a set of binoculars.
+  description: A specialized, sturdy pouch issued to Commanding Officers. Can hold their sidearm, the command tablet, and a set of binoculars.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/command.rsi

@@ -20,7 +20,7 @@
 - type: entity
   parent: ArmorHelmetRiot
   id: ArmorHelmetRiotOld
-  description: BA scarred riot helmet covered in cobwebs. It still protects your ears.
+  description: A scarred riot helmet covered in cobwebs. It still protects your ears.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/old_riot.rsi

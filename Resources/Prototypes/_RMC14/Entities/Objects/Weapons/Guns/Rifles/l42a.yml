@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ] # L42A battle rifle base remove wield stuff (uses m54c ammo diffrent mags)
   name: L42A battle rifle
   id: RMCWeaponRifleL42A
-  description: The L42A Battle Rifle, found commonly around the frontiers of the Galaxy. It's commonly used by colonists for self defense, as well as many colonial militias, whomever they serve due to it's rugged reliability and ease of use without much training. This rifle was put up for adoption by the UNMC and tested for a time, but ultimately lost to the M4SPR already in service.
+  description: The L42A Battle Rifle, found commonly around the frontiers of the Galaxy. It's commonly used by colonists for self defense, as well as many colonial militias, whomever they serve due to its rugged reliability and ease of use without much training. This rifle was put up for adoption by the UNMC and tested for a time, but ultimately lost to the M4SPR already in service.
   suffix: Filled
   components:
   - type: Sprite

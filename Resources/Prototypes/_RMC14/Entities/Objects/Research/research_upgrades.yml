@@ -16,7 +16,7 @@
   parent: RMCResearchUpgradeBase
   id: RMCResearchUpgradeAutodocInternalBleeding
   name: research upgrade (autodoc - internal bleeding)
-  description: Research upgrade for an autodoc. The technology on this disk is used for stitching up internal bleeding. Insert it into an autodoc console to use it.
+  description: A research upgrade for an autodoc. The technology on this disk is used for stitching up internal bleeding. Insert it into an autodoc console to use it.
   components:
   - type: AutodocResearchUpgrade
     tier: InternalBleeding
@@ -25,7 +25,7 @@
   parent: RMCResearchUpgradeBase
   id: RMCResearchUpgradeAutodocBrokenBone
   name: research upgrade (autodoc - broken bones)
-  description: Research upgrade for an autodoc. The technology on this disk is used for fixing broken bones. Insert it into an autodoc console to use it.
+  description: A research upgrade for an autodoc. The technology on this disk is used for fixing broken bones. Insert it into an autodoc console to use it.
   components:
   - type: AutodocResearchUpgrade
     tier: BrokenBone
@@ -34,7 +34,7 @@
   parent: RMCResearchUpgradeBase
   id: RMCResearchUpgradeAutodocOrganDamage
   name: research upgrade (autodoc - organ damage)
-  description: Research upgrade for an autodoc. The technology on this disk is used for treating internal organ damage. Insert it into an autodoc console to use it.
+  description: A research upgrade for an autodoc. The technology on this disk is used for treating internal organ damage. Insert it into an autodoc console to use it.
   components:
   - type: AutodocResearchUpgrade
     tier: OrganDamage
@@ -43,7 +43,7 @@
   parent: RMCResearchUpgradeBase
   id: RMCResearchUpgradeAutodocLarvaExtraction
   name: research upgrade (autodoc - parasite extraction)
-  description: Research upgrade for an autodoc. The technology on this disk is used for extracting unknown parasites. Insert it into an autodoc console to use it.
+  description: A research upgrade for an autodoc. The technology on this disk is used for extracting unknown parasites. Insert it into an autodoc console to use it.
   components:
   - type: AutodocResearchUpgrade
     tier: LarvaExtraction
@@ -53,6 +53,6 @@
   parent: RMCResearchUpgradeBase
   id: RMCResearchUpgradeSleeper
   name: research upgrade (sleeper)
-  description: Research upgrade for a sleeper system. The technology on this disk allows a wider spectrum of chemicals to be administered and improves the dialysis machine.
+  description: A research upgrade for a sleeper system. The technology on this disk allows a wider spectrum of chemicals to be administered and improves the dialysis machine.
   components:
   - type: SleeperResearchUpgrade

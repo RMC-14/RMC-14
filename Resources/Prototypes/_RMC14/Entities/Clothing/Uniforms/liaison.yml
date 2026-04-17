@@ -98,7 +98,7 @@
   parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitLiaisonOrange
   name: orange outfit
-  description: A pair of black pants paired with a very We-Ya orange shirt. A popular look with those in the corporate world that conduct the majority of their business from Weston Yamada offices.
+  description: A pair of black pants paired with a very We-Ya orange shirt. A popular look with those in the corporate world that conduct the majority of their business from Weston-Yamada offices.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/orange.rsi

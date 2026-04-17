@@ -67,7 +67,7 @@
   parent: RMCVisorMedical
   id: RMCVisorMedicalAdvanced
   name: advanced medical optic
-  description: An insertable visor HUD into a standard UNMC helmet. This type gives a heads-up display that shows data about nearby humanoids health status and research notes.
+  description: An insertable visor HUD into a standard UNMC helmet. This type gives a heads-up display that shows data about nearby humanoids' health status and research notes.
   components:
   - type: Sprite
     state: med_adv_sight

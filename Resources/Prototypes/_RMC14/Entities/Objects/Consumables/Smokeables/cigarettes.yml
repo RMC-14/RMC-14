@@ -246,7 +246,7 @@
   parent: RMCCigarettePackLuckySloths
   id: RMCCigarettePackArcturianAce
   name: arcturian ace
-  description: An entry level brand of cigarettes with a bright blue packaging. You're guessing these aren't really good for you, but it doesn't matter when it's Arcturian baby!
+  description: An entry level brand of cigarettes with a bright blue packaging. You're guessing these aren't really good for you, but it doesn't matter when it's Arcturian, baby!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/arcturian_ace.rsi

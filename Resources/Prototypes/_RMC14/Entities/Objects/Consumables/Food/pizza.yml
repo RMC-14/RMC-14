@@ -157,7 +157,7 @@
   parent: RMCFoodPizzaFullBase
   id: RMCFoodPizzaVegetableFull
   name: vegetable pizza
-  description: No one of Tomato Sapiens were harmed during making this pizza.
+  description: No one of Tomato Sapiens were harmed during the making of this pizza.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/Pizza/vegetable.rsi

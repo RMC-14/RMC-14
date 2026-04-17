@@ -24,7 +24,7 @@
   parent: RMCBaseAirBurstGrenade
   id: RMC40MMGrenadeM74AGMF
   name: M74 AGM-F 40mm frag grenade
-  description: M74 - Airburst Grenade Munition - Fragmentation. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. It disperses jagged shrapnel in a cone in front of itself, tearing through sinews and armor alike. Dispersion pattern is optimized against large target. Suffers from overpenetration on a direct hit.
+  description: M74 - Airburst Grenade Munition - Fragmentation. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. It disperses jagged shrapnel in a cone in front of itself, tearing through sinews and armor alike. The dispersion pattern is optimized against large targets. Suffers from overpenetration on a direct hit.
   components:
   - type: Tag
     tags:
@@ -43,7 +43,7 @@
   parent: RMC40MMGrenadeM74AGMF
   id: RMC40MMGrenadeM74AGMI
   name: M74 AGM-I 40mm incendiary grenade
-  description: M74 - Airburst Grenade Munition - Incendiary. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. It disperses jagged shrapnel in a cone in front of itself, tearing through sinews and armor alike. Dispersion pattern is optimized against large target. Suffers from overpenetration on a direct hit.
+  description: M74 - Airburst Grenade Munition - Incendiary. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. It disperses jagged shrapnel in a cone in front of itself, tearing through sinews and armor alike. The dispersion pattern is optimized against large targets. Suffers from overpenetration on a direct hit.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
@@ -63,7 +63,7 @@
   parent: RMC40MMGrenadeM74AGMF
   id: RMCHornetShellM74AGMS
   name: M74 AGM-H 40mm hornet shell
-  description: Functions identically to the standard AGM-F 40mm grenade, except instead of exploding into shrapnel, the hornet shell shoots off holo-targeting .22lr rounds. The equivalent to buckshot at-range.
+  description: Functions identically to the standard AGM-F 40mm grenade, except instead of exploding into shrapnel, the hornet shell shoots off holo-targeting .22lr rounds, the equivalent to buckshot at-range.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
@@ -91,7 +91,7 @@
   parent: RMC40MMGrenadeM74AGMF
   id: RMCBatonSlugHIRR
   name: HIRR baton slug
-  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces. Historically, the HIRR was incredibly popular during the Arcturus conflict, as the impact force was found to reliably incapacitate Arcturian resistance forces by breaking their ribs into their lungs.
+  description: A cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces. Historically, the HIRR was incredibly popular during the Arcturus conflict, as the impact force was found to reliably incapacitate Arcturian resistance forces by breaking their ribs into their lungs.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
@@ -110,7 +110,7 @@
   parent: RMC40MMGrenadeM74AGMF
   id: RMC40MMGrenadeM74AGMS
   name: M74 AGM-S 40mm smoke grenade
-  description: M74 - Airburst Grenade Munition - Smoke. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. Upon detonation, instantly combines multiple chemicals inside its casing to form a smoke cloud.
+  description: M74 - Airburst Grenade Munition - Smoke. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. Upon detonation, it instantly combines multiple chemicals inside its casing to form a smoke cloud.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi

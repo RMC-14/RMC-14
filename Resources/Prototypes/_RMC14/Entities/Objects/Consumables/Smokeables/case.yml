@@ -68,7 +68,7 @@
   parent: CigarCase
   id: RMCTarbackCase
   name: tarbacks case
-  description: Don't let the fancy box and piece of paper spouting nonsense about tradition and quality fool you. These stogies are bottom of the barrel. Rolled in Columbia..
+  description: Don't let the fancy box and piece of paper spouting nonsense about tradition and quality fool you. These stogies are bottom of the barrel. Rolled in Columbia.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/tarback_box.rsi

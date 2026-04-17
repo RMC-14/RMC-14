@@ -2,7 +2,7 @@
   name: HJRA-12 Handheld Anti-Tank Grenade Launcher
   parent: [BaseWeaponLauncher, CMBaseWeaponGun, RMCBaseAttachableHolder]
   id: RMCWeaponLauncherHJRA12
-  description: "The HJRA-12 Handheld Anti-Tank Grenade Launcher is the standard Anti-Armor weapon of the SPP. It is designed to be easy to use and to take out or disable armored vehicles."
+  description: "The HJRA-12 Handheld Anti-Tank Grenade Launcher is the standard anti-armor weapon of the SPP. It is designed to be easy to use and to take out or disable armored vehicles."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/hjra12/hjra12_inhands.rsi
@@ -77,7 +77,7 @@
   id: RMCRocketHJRA12AT
   name: HJRA-12 Anti-Tank Rocket
   parent: BaseItem
-  description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is a standard Anti-Tank rocket designed to disable or destroy hostile vehicles.
+  description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is a standard anti-tank rocket designed to disable or destroy hostile vehicles.
   components:
   - type: Tag
     tags:
@@ -155,7 +155,7 @@
   categories: [ HideSpawnMenu ]
   id: RMCProjectileRocketHJRA12AT
   name: HJRA-12 Anti-Tank Rocket
-  description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is a standard Anti-Tank rocket designed to disable or destroy hostile vehicles.
+  description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is a standard anti-tank rocket designed to disable or destroy hostile vehicles.
   components:
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mmAntiArmor

@@ -334,7 +334,7 @@
   parent: RMCSealedChemicalContainer
   id: RMCPressurizedCanister
   name: pressurized canister
-  description: A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery or a storage tank.
+  description: A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery, or a storage tank.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tanks/pressurized_reagent_container.rsi

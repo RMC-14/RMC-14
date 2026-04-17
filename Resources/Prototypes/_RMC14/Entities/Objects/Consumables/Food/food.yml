@@ -148,7 +148,7 @@
   name: carbonara
   parent: FoodNoodlesBase
   id: RMCFoodCarbonara
-  description: Bacon with pasta? YES PLEASE!
+  description: Bacon with pasta? YES, PLEASE!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
@@ -188,7 +188,7 @@
   name: banh mi
   parent: CMFoodBase
   id: FoodBanhMi
-  description: Banh Mi, for Banh You
+  description: Banh Mi, for Banh You.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/sandwiches.rsi
@@ -239,7 +239,7 @@
   name: chicken parm hero
   parent: CMFoodBase
   id: FoodChickenParmHero
-  description: Now thats a sandwich, fuggedaboutit!
+  description: Now that's a sandwich, fuggedaboutit!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/sandwiches.rsi
@@ -593,7 +593,7 @@
   name: hot dog
   parent: CMFoodBase
   id: FoodHotDog
-  description: Life is tasting pretty good! Oh yes!
+  description: Life is tasting pretty good! Oh, yes!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi

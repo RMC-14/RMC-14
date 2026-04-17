@@ -25,7 +25,7 @@
   parent: RMCHelmetGarbToggleableBase
   id: RMCHelmetGarbNightVision
   name: old M2 night vision goggles
-  description: This pair has been gutted of all electronics and therefore not working. But hey, they make you feel tacticool, and that's all that matters, right?
+  description: This pair has been gutted of all electronics and therefore doesn't work. But hey, they make you feel tacticool, and that's all that matters, right?
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
@@ -257,7 +257,7 @@
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbGasmask
   name: M5 integrated gasmask
-  description: The UNMC had its funding pulled for these when it became apparent that not every deployed enlisted was wearing a helmet 24/7; much to the bafflement of UN High Command.
+  description: The UNMC had its funding pulled for these when it became apparent that not every deployed enlisted was wearing a helmet 24/7, much to the bafflement of UN High Command.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
@@ -535,7 +535,7 @@
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbTerraTekFlair
   name: TerraTek flair
-  description: Flair for some weird tech company back on Earth. How did they get promotional material this far out in the rim?.
+  description: Flair for some weird tech company back on Earth. How did they get promotional material this far out in the rim?
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/terratek_flair.rsi
@@ -551,7 +551,7 @@
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbUNMCFlair
   name: UNMC flair
-  description: These pins get handed out like candy at enlistment offices. Wear it with pride marine.
+  description: These pins get handed out like candy at enlistment offices. Wear it with pride, marine.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/unmc_flair.rsi

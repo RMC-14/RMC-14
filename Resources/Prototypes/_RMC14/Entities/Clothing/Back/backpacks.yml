@@ -132,7 +132,7 @@
   parent: CMBackpack
   id: CMBackpackMarine
   name: lightweight IMP backpack
-  description: The standard-issue pack of the UNMC forces. Designed to lug gear into the battlefield.
+  description: The standard-issue pack of the UNMC. Designed to lug gear into the battlefield.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/jungle-desert-classic.rsi
@@ -256,7 +256,7 @@
   parent: CMBackpack
   id: RMCBackpackAmmo
   name: IMP ammo rack
-  description: A bare IMP frame with buckles designed to hold multiple ammo cans, but can fit any cumbersome box thanks to UNMC ingenuity. Helps you lug around extra rounds or supplies.
+  description: A bare IMP frame with buckles designed to hold multiple ammo cans, but which can fit any cumbersome box thanks to UNMC ingenuity. Helps you lug around extra rounds or supplies.
   components:
   - type: Item
     size: Huge
@@ -310,8 +310,8 @@
 - type: entity
   parent: RMCSatchelPMC
   id: RMCSatchelPMCCommando
-  name: We-Ya Commando combat backpack
-  description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada Commandos.
+  name: We-Ya commando combat backpack
+  description: An ergonomic, protected, high capacity backpack, designed for Weston-Yamada Commandos.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/commando.rsi

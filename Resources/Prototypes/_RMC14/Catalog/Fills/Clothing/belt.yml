@@ -466,7 +466,7 @@
   parent: RMCBeltSmartGunOperatorPistol
   id: RMCBeltSmartGunOperatorPistolCLF
   name: M802 pattern 'Freedom' smart gun operator sidearm rig
-  description: A modification of the standard M802 load-bearing equipment, designed to carry smart gun ammunition and a Mateba revolver. This one has the CLF logo carved over the manufacturing stamp.
+  description: A modification of the standard M802 load-bearing belt, designed to carry smart gun ammunition and a Mateba revolver. This one has the CLF logo carved over the manufacturing stamp.
   suffix: Filled, Mateba
   components:
   - type: StorageFill

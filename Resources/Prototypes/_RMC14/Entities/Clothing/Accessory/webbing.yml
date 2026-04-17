@@ -99,7 +99,7 @@
   parent: CMWebbingBrown
   id: RMCWebbingLegPouch
   name: leg pouch
-  description: A camo conforming leg pouch usually worn by hunters, military and people who dream of being military.
+  description: A camo conforming leg pouch usually worn by hunters, military, and people who dream of being military.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
@@ -117,7 +117,7 @@
   parent: CMWebbingBrown
   id: RMCWebbingLegPouchBlack
   name: black leg pouch
-  description: A black leg pouch usually worn by hunters, military and people who dream of being military.
+  description: A black leg pouch usually worn by hunters, military, and people who dream of being military.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/black.rsi
@@ -191,7 +191,7 @@
   parent: CMWebbingBase
   id: CMWebbingBlack
   name: black webbing vest
-  description: Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands.
+  description: A robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in your hands.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
@@ -241,7 +241,7 @@
   parent: CMWebbingBlack
   id: CMWebbingBrown
   name: brown webbing vest
-  description: Worn brownish synthcotton vest with lots of pockets to unload your hands.
+  description: A worn brownish synthcotton vest with lots of pockets to unload your hands.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_brown.rsi
@@ -275,7 +275,7 @@
   parent: CMWebbingBase
   id: CMWebbingHolster
   name: shoulder holster
-  description: A handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
+  description: A handgun holster with an attached pouch, fitting two magazines or speedloaders.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
@@ -396,7 +396,7 @@
   parent: CMWebbingHolster
   id: RMCWebbingHolsterBlack
   name: black shoulder holster
-  description: A black handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
+  description: A black handgun holster with an attached pouch, fitting two magazines or speedloaders.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster_black.rsi
@@ -604,7 +604,7 @@
   parent: CMWebbingBase
   id: RMCWebbingGrenade
   name: clip-on grenade band
-  description: A sturdy mess of synth-leather band designed to store a few grenades for ML66A weapon operators.
+  description: A sturdy mess of synth-leather bands designed to store a few grenades for ML66A weapon operators.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/grenade_pouch.rsi
@@ -1019,7 +1019,7 @@
   parent: CMWebbingBase
   id: RMCWebbingSurgicalGreen
   name: surgical webbing vest
-  description: A robust webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
+  description: A robust webbing vest specially designed to hold a full array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
   components:
   - type: Sprite
@@ -1072,7 +1072,7 @@
   parent: RMCWebbingSurgicalGreen
   id: RMCWebbingSurgicalBlue
   name: surgical webbing vest
-  description: A robust blue webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
+  description: A robust blue webbing vest specially designed to hold a full array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
   components:
   - type: Sprite

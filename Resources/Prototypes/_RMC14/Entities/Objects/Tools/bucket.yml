@@ -73,7 +73,7 @@
   parent: RMCBucket
   id: CMBucketMop
   name: mop bucket
-  description: A larger bucket, typically used with a mop. Holds 240 units
+  description: A larger bucket, typically used with a mop. Holds 240 units.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Janitorial/mopbucket.rsi

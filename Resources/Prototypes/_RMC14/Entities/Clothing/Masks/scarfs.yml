@@ -311,7 +311,7 @@
   parent: RMCMaskTornScarfBase
   id: RMCMaskSmockBlack
   name: tactical smock
-  description: A tactical smock used to keep warm in the cold, and provide increased camouflage.
+  description: A tactical smock used to keep warm in the cold and provide increased camouflage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/Smock/black.rsi

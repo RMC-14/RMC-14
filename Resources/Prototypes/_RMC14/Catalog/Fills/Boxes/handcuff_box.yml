@@ -2,7 +2,7 @@
   name: Box of handcuffs
   parent: RMCBoxCardboard
   id: RMCBoxHandcuffs
-  description: A box full of handcuffs
+  description: A box full of handcuffs.
   components:
   - type: StorageFill
     contents:

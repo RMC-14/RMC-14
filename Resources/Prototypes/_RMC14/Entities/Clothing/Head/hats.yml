@@ -2,7 +2,7 @@
   parent: ClothingHeadBase
   id: CMHeadBeret
   name: beret
-  description: Does not protect a head from bullet.
+  description: Does not protect a head from a bullet.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret.rsi
@@ -434,7 +434,7 @@
   parent: CMHeadCap
   id: RMCHeadCapPeakedCMP
   name: chief mp peaked cap
-  description: A peaked cap given to experienced CMP. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  description: A peaked cap given to experienced CMPs. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_cmp.rsi
@@ -622,7 +622,7 @@
 - type: entity
   parent: RMCHeadBeretSquadAlpha
   id: RMCHeadBeretSquadBravo
-  description: It has quite a lot of debris on it, the person wearing this probably moves less than a wall.
+  description: It has quite a lot of debris on it. The person wearing this probably moves less than a wall.
   suffix: Bravo
   components:
   - type: Sprite
@@ -806,7 +806,7 @@
   parent: CMHeadBeret
   id: RMCHeadWeYaPilotCap
   name: Weston-Yamada Pilot cap
-  description: A dark peaked cap enscribed with the Weston-Yamada 'Wings' logo. A formal cap for qualified civilian Pilots, akin to old Earth formal Pilots-wear.
+  description: A dark peaked cap enscribed with the Weston-Yamada 'Wings' logo. A formal cap for qualified civilian pilots, akin to old Earth formal pilots-wear.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/weya_pilot_cap.rsi

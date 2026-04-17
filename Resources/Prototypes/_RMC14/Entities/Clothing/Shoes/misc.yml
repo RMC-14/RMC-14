@@ -107,7 +107,7 @@
   parent: RMCShoesLaceup
   id: RMCShoesSandals
   name: sandals
-  description: A pair of rather plain, wooden sandals.
+  description: A pair of rather plain wooden sandals.
   suffix: RMC
   components:
   - type: Sprite

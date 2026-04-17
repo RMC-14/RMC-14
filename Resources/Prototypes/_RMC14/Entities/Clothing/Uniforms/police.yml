@@ -3,7 +3,7 @@
   parent: JumpsuitMarine
   id: CMJumpsuitMP
   name: military police jumpsuit
-  description: Standard-issue Military Police uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue military police uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/jungle.rsi
@@ -35,7 +35,7 @@
   parent: JumpsuitMarine
   id: CMJumpsuitWarden
   name: military warden uniform
-  description: Standard-issue Military Warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue military warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/jungle.rsi
@@ -57,7 +57,7 @@
   parent: RMCMarineUniformBase
   id: CMJumpsuitWardenBlue
   name: blue warden uniform
-  description: The insignia on this uniform tells you that this uniform belongs to the Warden.
+  description: The insignia on this uniform tells you that this uniform belongs to the warden.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/blue.rsi

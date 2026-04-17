@@ -109,7 +109,7 @@
   parent: CMDrinkCanBase
   id: CMDrinkCanStarkist
   name: star-kist
-  description: The taste of a star in liquid form. And, a bit of tuna...?
+  description: The taste of a star in liquid form. And... a bit of tuna...?
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/starkist.rsi
@@ -235,7 +235,7 @@
   parent: CMDrinkCanSoda
   id: CMDrinkCanBoda
   name: boda
-  description: State regulated soda beverage. Enjoy comrades.
+  description: State regulated soda beverage. Enjoy, comrades.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/boda.rsi
@@ -248,7 +248,7 @@
   parent: CMDrinkCanCola
   id: CMDrinkCanBodaPlyus
   name: boda-plyus
-  description: State regulated soda beverage, now with added surplus flavoring. Enjoy comrades.
+  description: State regulated soda beverage, now with added surplus flavoring. Enjoy, comrades.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/blank.rsi
@@ -259,7 +259,7 @@
   parent: CMDrinkCanBase
   id: CMDrinkCanFruitBeer
   name: fruit-beer
-  description: In theory, Mango flavored root beer sounds like a pretty good idea. We-Ya has disproved yet another theory with its latest line of cola. Canned by the We-Ya Corporation.
+  description: In theory, mango flavored root beer sounds like a pretty good idea. We-Ya has disproved yet another theory with its latest line of cola. Canned by the We-Ya Corporation.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/fruit_beer.rsi
@@ -277,7 +277,7 @@
   parent: CMDrinkCanBase
   id: CMDrinkCanBeerLite
   name: We-Ya Lite
-  description: Beer. You've dialed in your target. Time to fire for effect. Canned by the Weston-Yamada Corporation
+  description: Beer. You've dialed in your target. Time to fire for effect. Canned by the Weston-Yamada Corporation.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/beer.rsi
@@ -430,7 +430,7 @@
   parent: CMDrinkCanBobda
   id: CMDrinkCanBobdaCherry
   name: cherry bobda
-  description: Now with more artificial flavors! Canned in Havana
+  description: Now with more artificial flavors! Canned in Havana.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/Bobda/cherry.rsi
@@ -575,7 +575,7 @@
   parent: CMDrinkCanBobda
   id: CMDrinkCanBobdaDiet
   name: diet bobda
-  description: Now with 0% fruit juice! Canned in Havana
+  description: Now with 0% fruit juice! Canned in Havana.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/Bobda/Diet/classic.rsi
@@ -593,7 +593,7 @@
   parent: CMDrinkCanBobdaDiet
   id: CMDrinkCanBobdaClassicDiet
   name: diet bobda classic
-  description: Now with 0% fruit juice! Canned in Havana
+  description: Now with 0% fruit juice! Canned in Havana.
   components:
   - type: SolutionContainerManager
     solutions:

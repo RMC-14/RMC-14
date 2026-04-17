@@ -4,7 +4,7 @@
   id: RMCArmorM3PVE
   suffix: PVE, Standard
   name: M3 pattern marine armor
-  description: Standard UNMC issue M3 Pattern Personal Armor. Composite ballistic armor, integral biomonitoring system, and brackets for the IMP system as well as the TNR Shoulder Lamp.
+  description: Standard UNMC issue M3 Pattern Personal Armor. Comes with composite ballistic armor, an integral biomonitoring system, and brackets for the IMP system as well as the TNR Shoulder Lamp.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/standard/jungle.rsi
@@ -72,7 +72,7 @@
   id: RMCArmorB12PVE
   suffix: PVE, B12
   name: B12 pattern marine armor
-  description: Semi-experimental body armor system similar to M3, incorporating primarily carbon fiber instead of boron carbide.
+  description: A semi-experimental body armor system similar to M3, incorporating primarily carbon fiber instead of boron carbide.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/b12/jungle.rsi
@@ -97,7 +97,7 @@
   id: RMCArmorM3PVESGO
   suffix: PVE, Smart Gun harness
   name: ML66A combat harness
-  description: Lightweight vest composed of ballistic micromesh and a ceramic composite chestplate for practical protection, as well as the computers, straps, and armature required for operating the ML66A Smart Gun itself.
+  description: A lightweight vest composed of ballistic micromesh and a ceramic composite chestplate for practical protection, as well as the computers, straps, and armature required for operating the ML66A Smart Gun itself.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/sg/jungle.rsi

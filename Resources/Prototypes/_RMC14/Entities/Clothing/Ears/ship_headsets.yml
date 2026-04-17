@@ -313,7 +313,7 @@
   parent: RMCHeadsetShip
   id: RMCHeadsetMarineCommand
   name: marine command radio headset
-  description: Used by CIC staff and higher-ups, features a non-standard brace.
+  description: Used by CIC staff and higher-ups. Features a non-standard brace.
   components:
   - type: Sprite
     state: mcom_headset

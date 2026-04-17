@@ -567,7 +567,7 @@
   parent: CMBeltMarine
   id: RMCBeltGrenade
   name: M276 pattern 30mm grenade rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is designed to carry up to 12 of the 30mm type grenades.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is designed to carry up to 12 grenades.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/grenade.rsi
@@ -603,7 +603,7 @@
   parent: CMBeltMarine
   id: RMCBeltSmartPistol
   name: M276 pattern SU-6 smart pistol holster rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the SU-6 smartpistol.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the SU-6 smart pistol.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
@@ -817,7 +817,7 @@
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolWeYa
   name: WY-TM892 pattern general pistol holster rig
-  description: The WY-TM892 is the standard load-bearing equipment of the W-Y security forces. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  description: The WY-TM892 is the standard load-bearing equipment of We-Ya security forces. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_weya.rsi
@@ -868,7 +868,7 @@
   parent: RMCBeltHolsterPistolSPP
   id: RMCBeltHolsterPistolPMC
   name: M301 pistol holster rig
-  description: The M301 is the standard load-bearing equipment of Weston-Yamada PMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  description: The M301 is the standard load-bearing equipment of Weston-Yamada PMCs. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
 
 - type: entity
   parent: CMBeltMarine
@@ -929,7 +929,7 @@
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG
   name: M276 pattern M63 holster rig
-  description: Special issue variant of the M276 designed to holster a M63 submachine gun.
+  description: A special issue variant of the M276 designed to holster a M63 submachine gun.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
@@ -973,7 +973,7 @@
   parent: CMBeltBaseStorage
   id: RMCBeltUtilityGeneral
   name: M276 G8-A general utility pouch
-  description: A small, lightweight pouch that can be clipped onto M3 Pattern armor to provide additional storage. The newer G8-A model, while uncomfortable, can also be clipped around the waist.
+  description: A small, lightweight pouch that can be clipped onto M3 pattern armor to provide additional storage. The newer G8-A model, while uncomfortable, can also be clipped around the waist.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/sparepouch/jungle-classic.rsi
@@ -1005,7 +1005,7 @@
   parent: CMBeltBaseStorage
   id: RMCBeltHolsterSMGPouch
   name: M276 pattern M63 holster rig
-  description: Special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to UNMC support and specialist personnel.
+  description: A special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to UNMC support and specialist personnel.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/smg_mags.rsi
@@ -1218,7 +1218,7 @@
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
+  description: A special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
@@ -1306,7 +1306,7 @@
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterNailgun
   name: customized nailgun holster
-  description: Combination of a M276 pistol holster and engineering toolbelt that have been cannibalized into a unique belt that can holster a compact nailgun and two spare nailgun magazines.
+  description: A combination of a M276 pistol holster and engineering toolbelt that have been cannibalized into a unique belt that can holster a compact nailgun and two spare nailgun magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_nailgun.rsi
@@ -1387,7 +1387,7 @@
   parent: RMCBeltBaseStorageNoVisuals
   id: RMCM82FHolster
   name: M276 pattern M82F flare gun holster rig
-  description: he M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the M82F flare gun and can additionally store up to 16 flares.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the M82F flare gun and can additionally store up to 16 flares.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
@@ -1446,7 +1446,7 @@
   parent: CMBeltMarine
   id: RMCBeltSPPBrown
   name: 6B80 pattern ammo rig
-  description: The 6B80 is an outdated but reliable ammo rig, formerly standard for the SPP Army. Its modular belt holds various munitions, still used by SPP security forces and reserves for its rugged design.
+  description: The 6B80 is an outdated but reliable ammo rig, formerly standard for the SPP Army. Its modular belt holds various munitions. It is still used by SPP security forces and reserves for its rugged design.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/spp_brown.rsi

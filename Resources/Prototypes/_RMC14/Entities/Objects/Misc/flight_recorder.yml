@@ -12,4 +12,4 @@
   parent: RMCFlightRecorderProp
   id: RMCFlightRecorderColonyProp
   name: CIR-60 colony information recorder
-  description: A small red box that records colony announcements, colonist flatlines and other key readouts. Usually refered to the black box, although this one comes in bloody red.
+  description: A small red box that records colony announcements, colonist flatlines, and other key readouts. Usually refered to the black box, although this one comes in bloody red.

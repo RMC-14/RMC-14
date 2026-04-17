@@ -59,7 +59,7 @@
   parent: RMCArmorVest
   id: RMCArmorVestCivilian
   name: armored vest
-  description: An general-use, unmarked armored vest that protects against some damage.
+  description: A general-use, unmarked armored vest that protects against some damage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/security_armor.rsi

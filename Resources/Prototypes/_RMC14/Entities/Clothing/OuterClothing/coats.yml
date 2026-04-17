@@ -252,7 +252,7 @@
   parent: RMCBaseJacket
   id: CMCoatChiefMP
   name: chief military police service jacket
-  description: A marine service jacket adopted for use by Military Police personnel on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. Very popular among those who want to inexplicably smell like donuts.
+  description: A marine service jacket adopted for use by Military Police personnel onboard Marine ships. Ironically, most ships require their MP departments to use full armor, making these barely used by on duty MPs. Very popular among those who want to inexplicably smell like donuts.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
@@ -267,7 +267,7 @@
   parent: RMCBaseJacket
   id: CMCoatWarden
   name: military warden service jacket
-  description: A marine service jacket adopted for use by Military Wardens on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty Wardens. The jacket of choice for looking all night at a set of monitors, while cigarette butts pile around you.
+  description: A marine service jacket adopted for use by Military Wardens onboard Marine ships. Ironically, most ships require their MP departments to use full armor, making these barely used by on duty Wardens. The jacket of choice for looking all night at a set of monitors, while cigarette butts pile around you.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/warden.rsi
@@ -281,7 +281,7 @@
   parent: [RMCBaseJacketButtonable, RMCBaseJacket]
   id: CMCoatMP
   name: military police service jacket
-  description: A marine service jacket adopted for use by Military Police personnel on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. This variant is also available to regular Marines, if they are willing to bear the shame.
+  description: A marine service jacket adopted for use by Military Police personnel onboard Marine ships. Ironically, most ships require their MP departments to use full armor, making these barely used by on duty MPs. This variant is also available to regular Marines, if they are willing to bear the shame.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/mp.rsi
@@ -417,7 +417,7 @@
   parent: RMCBaseJacket
   id: CMCoatCO
   name: marine officer dress jacket
-  description: Dress Jacket worn by Commanding Officers of the UNMC.
+  description: A dress jacket worn by Commanding Officers of the UNMC.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket.rsi
@@ -534,7 +534,7 @@
 - type: entity
   parent: CMCoatCO
   id: RMCCoatCOServiceJacketStandard
-  name: Standard commanding officer standard issue jacket
+  name: standard commanding officer standard issue jacket
   description: A jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
   components:
   - type: Sprite
@@ -545,7 +545,7 @@
 - type: entity
   parent: CMCoatCO
   id: RMCCoatCOServiceJacketPurple
-  name: Purple commanding officer standard issue jacket
+  name: purple commanding officer standard issue jacket
   description: A purple jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
   components:
   - type: Sprite
@@ -556,7 +556,7 @@
 - type: entity
   parent: CMCoatCO
   id: RMCCoatCOServiceJacketGreen
-  name: Green commanding officer standard issue jacket
+  name: green commanding officer standard issue jacket
   description: A green jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
   components:
   - type: Sprite
@@ -567,7 +567,7 @@
 - type: entity
   parent: CMCoatCO
   id: RMCCoatCOServiceJacketGrey
-  name: Grey commanding officer standard issue jacket
+  name: grey commanding officer standard issue jacket
   description: A grey jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.
   components:
   - type: Sprite
@@ -633,7 +633,7 @@
 - type: entity
   parent: CMCoatOfficer
   id: RMCProvostCoat
-  name: Provost Coat
+  name: provost coat
   description: The crisp coat of a Provost Officer.
   components:
   - type: Sprite
@@ -655,7 +655,7 @@
 - type: entity
   parent: CMCoatOfficer
   id: RMCProvostCoatMarshal
-  name: Provost Marshal Coat
+  name: provost marshal coat
   description: The crisp coat of a Provost Officer.
   components:
   - type: Sprite
@@ -666,7 +666,7 @@
 - type: entity
   parent: CMCoatOfficer
   id: RMCProvostJacket
-  name: Provost Jacket
+  name: provost jacket
   description: A crisp jacket with the Provost sigil.
   components:
   - type: Sprite
@@ -677,7 +677,7 @@
 - type: entity
   parent: CMCoatOfficer
   id: RMCProvostCommandJacket
-  name: Provost Command Jacket
+  name: provost command jacket
   description: A crisp jacket with the Provost sigil.
   components:
   - type: Sprite
@@ -830,7 +830,7 @@
   parent: RMCBaseJacket
   id: RMCClothingNunRobes
   name: nun robes
-  description: Maximum piety in this star system
+  description: Maximum piety in this star system.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
@@ -854,7 +854,7 @@
   parent: RMCCoatSnow
   id: RMCCoatHoboBlue
   name: dark blue worn parka
-  description: An old worn blue Parka, has seen better days...
+  description: An old worn blue parka. Has seen better days...
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_blue.rsi
@@ -865,7 +865,7 @@
   parent: RMCCoatSnow
   id: RMCCoatHoboGreen
   name: dark green worn parka
-  description: An old worn green Parka, has seen better days...
+  description: An old worn green parka. Has seen better days...
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_green.rsi
@@ -876,7 +876,7 @@
   parent: RMCCoatSnow
   id: RMCCoatHoboBrown
   name: dark brown worn polyester jacket
-  description: An old worn brown polyester jacket, has seen better days...
+  description: An old worn brown polyester jacket. Has seen better days...
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
@@ -887,7 +887,7 @@
   parent: RMCCoatSnow
   id: RMCCoatHoboDarkBlue
   name: dark blue worn polyester jacket
-  description: An old worn blue polyester jacket, has seen better days...
+  description: An old worn blue polyester jacket. Has seen better days...
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_dark_blue.rsi
@@ -898,7 +898,7 @@
   parent: RMCCoatSnow
   id: RMCCoatHoboRed
   name: dark red worn polyester jacket
-  description: An old worn blue polyester jacket, has seen better days...
+  description: An old worn blue polyester jacket. Has seen better days...
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_red.rsi
@@ -920,7 +920,7 @@
   parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
   id: RMCCoatSanitation
   name: sanitation utility uniform
-  description: A Sanitation utility uniform, used by the clean-up crews of the more prosperous colonies.
+  description: A sanitation utility uniform, used by the clean-up crews of the more prosperous colonies.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/sanitation.rsi
@@ -931,7 +931,7 @@
   parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
   id: RMCCoatParamedic
   name: EMT - Paramedic utility fatigues
-  description: A set of EMT - Paramedic utility fatigues, this one is red.
+  description: A set of EMT - Paramedic utility fatigues. This one is red.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
@@ -941,7 +941,7 @@
 - type: entity
   parent: RMCCoatParamedic
   id: RMCCoatParamedicGreen
-  description: A set of EMT - Paramedic utility fatigues, this one is green.
+  description: A set of EMT - Paramedic utility fatigues. This one is green.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
@@ -1072,7 +1072,7 @@
   parent: RMCCoatSnow
   id: RMCCoatSnowSoviet
   name: soviet snowcoat
-  description: A winter coat made in some desolate snowplanet. This wintercoat was made from the fur of local wildlife which donated their fur for the greater good of SPP!
+  description: A winter coat made in some desolate snow planet. This wintercoat was made from local wildlife who donated their fur for the greater good of the SPP!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/soviet.rsi

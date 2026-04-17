@@ -278,7 +278,7 @@
   parent: [RMCItemSlotM5Bayonet, RMCBootsPMCCommando]
   id: RMCBootsCBRN
   name: M3 MOPP boots
-  description: M3 MOPP boots have been designed to protect the wearer from contact with any possible infection vectors or hazardous substances that may have contaminated the area of operations. This includes further enhancements in conjunction with the standard durability of M3 boots, reducing the probability of punctures or cuts as well as the effects of radiation.
+  description: These M3 MOPP boots have been designed to protect the wearer from contact with any possible infection vectors or hazardous substances that may have contaminated the area of operations. This includes further enhancements in conjunction with the standard durability of M3 boots, reducing the probability of punctures or cuts as well as the effects of radiation.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
@@ -289,7 +289,7 @@
   parent: ClothingShoesBase
   id: RMCShoesTychoBoots
   name: Tycho 4000 radiation protection boots
-  description: The burn-resistant boots for the Weston-Yamada Tycho 4000 Radiation Protection Suit. It's lined with lead, and the boot is steel-toed, perfect for trouncing around detonated nuclear reactors and avoiding radiation poisoning.
+  description: The burn-resistant boots for the Weston-Yamada Tycho 4000 Radiation Protection Suit. They're lined with lead, and the boot is steel-toed, perfect for trouncing around detonated nuclear reactors and avoiding radiation poisoning.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/rad_boots_weya.rsi

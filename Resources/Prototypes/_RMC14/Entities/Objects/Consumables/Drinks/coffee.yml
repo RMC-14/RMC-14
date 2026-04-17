@@ -51,7 +51,7 @@
   parent: RMCDrinkCoffee
   id: RMCDrinkTea
   name: Duke Purple tea
-  description: An insult to Duke Purple is an insult to the Space Queen! Any proper gentleman will fight you, if you sully this tea.
+  description: An insult to Duke Purple is an insult to the Space Queen! Any proper gentleman will fight you if you sully this tea.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/tea.rsi

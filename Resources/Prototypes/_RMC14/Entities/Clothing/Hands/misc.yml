@@ -36,7 +36,7 @@
   parent: RMCHandsVeteran
   id: RMCHandsTychoGloves
   name: Tycho 4000 radiation protection gloves
-  description: The burn-resistant gloves for the Weston-Yamada Tycho 4000 Radiation Protection Suit. It's lined with lead, and is pretty heavy, but it'll keep you safe from Radiological materials.
+  description: The burn-resistant gloves for the Weston-Yamada Tycho 4000 Radiation Protection Suit. They're lined with lead, and are pretty heavy, but they'll keep you safe from radiological materials.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/rad_gloves_weya.rsi

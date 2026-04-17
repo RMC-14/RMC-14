@@ -131,8 +131,8 @@
 - type: entity
   parent: WeaponRifleM16
   id: RMCWeaponRifleM16A5
-  name: M16A5 Rifle
-  description: Modernized version of M16 platform rifle, probably originated from bottomless stockpiles of the United Nations when they switched to more modern rifles. It is chambered in 5.56x45mm.
+  name: M16A5 rifle
+  description: A modernized version of the M16 platform rifle, probably originating from bottomless stockpiles of the United Nations when they switched to more modern rifles. It is chambered in 5.56x45mm.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m16a5.rsi

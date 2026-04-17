@@ -87,7 +87,7 @@
   parent: [CMArmorM3Medium, RMCAllowSuitStorageClothingArmorMP]
   id: RMCArmorProvostAgent
   name: M3 pattern special agent armor
-  description: A modified luxury armor, originally meant for a Provost Marshall, modified to use the colors and insignia of the intelligence service.
+  description: A modified luxury armor, originally meant for a Provost Marshal, modified to use the colors and insignia of the intelligence service.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Provost/special.rsi

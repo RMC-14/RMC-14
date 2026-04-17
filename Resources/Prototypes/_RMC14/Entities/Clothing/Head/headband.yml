@@ -3,7 +3,7 @@
   parent: CMHeadCap
   id: CMHeadBandGreen
   name: green headband
-  description: Piece of cloth to wrap around the head.
+  description: A piece of cloth to wrap around the head.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/headband/green.rsi
@@ -110,7 +110,7 @@
   parent: CMHeadBandGreen
   id: CMHeadBandAlpha
   name: alpha headband
-  description: Piece of cloth in colors of your squad.
+  description: A piece of cloth in the colors of your squad.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/headband/alpha.rsi
@@ -214,7 +214,7 @@
   parent: CMHeadBandRed
   id: CMHeadBandIntel
   name: intel headband
-  description: A piece of cloth that belonged to an experienced special forces operative, nobody seems to recall his name though. Viper..? Serpent..?
+  description: A piece of cloth that belonged to an experienced special forces operative. Nobody seems to recall his name, though. Viper..? Serpent..?
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/headband/intel.rsi
