@@ -41,17 +41,17 @@
     - type: SquadLeader
       icon: 
         sprite: _RMC14/Interface/cm_job_icons.rsi
-        state: rmc_teamleader
+        state: rcm_sectionleader
     - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-teamlead
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_teamleader
+        state: rcm_sectionleader
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        state: background_tse
   hidden: true
 
 - type: entity
@@ -108,4 +108,4 @@
   id: RMCJobIconRoyalTeamlead
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_teamleader
+    state: rcm_sectionleader

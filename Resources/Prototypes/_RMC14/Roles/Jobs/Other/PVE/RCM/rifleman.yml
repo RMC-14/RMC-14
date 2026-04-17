@@ -37,10 +37,10 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_rifleman_pve
+        state: rcm_rifleman
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        state: background_tse
   hidden: true
 
 - type: startingGear
@@ -67,4 +67,4 @@
   id: RMCJobIconRoyalRiflemanPVE
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_rifleman_pve
+    state: rcm_pve_rifleman

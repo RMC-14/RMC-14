@@ -3,7 +3,7 @@
   id: RMCSurvivorParaTeamLeader
   name: rmc-job-name-para-team-leader
   ranks:
-    RMCRankParaSergeant: [ ]
+    RMCRankTSESergeant: [ ]
   supervisors: rmc-job-supervisors-commander
   startingGear: RMCGearParaTeamLeader
   icon: RMCJobIconParaTeamLeader
@@ -29,11 +29,11 @@
         - type: SquadLeader
           icon:
             sprite: _RMC14/Interface/cm_job_icons.rsi
-            state: para_teamleader_alt
+            state: rcm_para_sectionleader
         - type: TacticalMapIcon
           icon:
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
-            state: rmc_teamleader
+            state: rcm_sectionleader
           background:
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
             state: background_para
@@ -68,4 +68,4 @@
   id: RMCJobIconParaTeamLeader
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: para_teamleader_alt
+    state: rcm_para_sectionleader

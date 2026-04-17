@@ -3,7 +3,7 @@
   id: RMCSurvivorParaMedicalTechnician
   name: rmc-job-name-para-medic
   ranks:
-    RMCRankParaLanceCorporal: [ ]
+    RMCRankTSELanceCorporal: [ ]
   startingGear: RMCGearParaMedicalTechnician
   icon: RMCJobIconParaMedicalTechnican
   playTimeTracker: RMCJobSurvivorMilitary
@@ -24,7 +24,7 @@
       - type: TacticalMapIcon
         icon:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
-          state: rmc_medic
+          state: rcm_medic
         background:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: background_para
@@ -61,4 +61,4 @@
   id: RMCJobIconParaMedicalTechnican
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: para_medic
+    state: rcm_para_medic

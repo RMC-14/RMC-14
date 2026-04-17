@@ -1,7 +1,7 @@
 - type: job
   parent: CMJobBase
   id: CMRoyalMarinesSmartgunnerPVE
-  name: rmc-job-name-rcm-pve-gpmg-gunner
+  name: rmc-job-name-rcm-pve-smart-gunner
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalSmartgunnerPVE
   ranks:
@@ -12,7 +12,7 @@
   supervisors: cm-job-supervisors-royal-tl
   accessGroups:
   - SmartGunOperator
-  spawnMenuRoleName: RCM GPMG Gunner (PVE)
+  spawnMenuRoleName: RCM Smart Gun Operator(PVE)
   special:
   - !type:AddComponentSpecial
     components:
@@ -35,16 +35,16 @@
         RMCSkillSmartGun: 1
         RMCSkillSurgery: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-pve-gpmg-gunner
+      prefix: rmc-job-prefix-rcm-pve-smart-gunner
     - type: AssignSquad
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_smartgunner_pve
+        state: rcm_smartgunner
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        state: background_tse
   hidden: true
 
 - type: startingGear
@@ -54,8 +54,8 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointRCMPVEGPMGGunner
-  name: RCM gpmg gunner spawn point
+  id: CMSpawnPointRCMPVESmartGunner
+  name: RCM smart gun operator spawn point
   components:
   - type: SpawnPoint
     job_id: CMRoyalMarinesSmartgunnerPVE
@@ -71,4 +71,4 @@
   id: RMCJobIconRoyalSmartgunnerPVE
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_smartgunner_pve
+    state: rcm_pve_smartgunner

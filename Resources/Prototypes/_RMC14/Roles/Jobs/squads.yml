@@ -270,7 +270,7 @@
     radio: TSE
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: background_twe
+      state: background_tse
     canSupplyDrop: false
     group: Royal Marines
     leaderIcon:
@@ -301,7 +301,7 @@
     radio: TSE
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: background_twe
+      state: background_tse
     canSupplyDrop: false
     group: Whiskey Troop
     leaderIcon:
@@ -363,7 +363,7 @@
     radio: Provost
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: background_twe
+      state: background_tse
     canSupplyDrop: false
     group: Provost
     leaderIcon:

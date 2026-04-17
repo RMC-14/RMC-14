@@ -3,7 +3,7 @@
   id: RMCSurvivorParaPilot
   name: rmc-job-name-para-pilot
   ranks:
-    RMCRankParaCorporal: [ ]
+    RMCRankTSECorporal: [ ]
   startingGear: RMCGearParaPilot
   icon: RMCJobIconParaPilot
   playTimeTracker: RMCJobSurvivorMilitary
@@ -24,7 +24,7 @@
         - type: TacticalMapIcon
           icon:
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
-            state: rmc_marksman
+            state: rcm_pilot
           background:
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
             state: background_para
@@ -60,4 +60,4 @@
   id: RMCJobIconParaPilot
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: para_pilot
+    state: rcm_para_pilot

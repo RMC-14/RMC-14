@@ -45,10 +45,10 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_breacher_pve
+        state: rcm_bombard
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        state: background_tse
   hidden: true
 
 - type: startingGear
@@ -75,4 +75,4 @@
   id: RMCJobIconRoyalBombSpecPVE
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_breacher_pve
+    state: rcm_pve_bombard

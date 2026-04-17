@@ -36,10 +36,10 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_marksman
+        state: rcm_marksman
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        state: background_tse
   hidden: true
 
 - type: entity
@@ -98,4 +98,4 @@
   id: RMCJobIconRoyalMarinesMarksman
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_marksman
+    state: rcm_marksman
