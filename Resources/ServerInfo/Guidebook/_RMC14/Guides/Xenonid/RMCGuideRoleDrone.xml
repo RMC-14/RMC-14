@@ -2,7 +2,7 @@
   #Drone, Tier 1
   <GuideEntityEmbed Entity="CMXenoDrone"/>
   ##Playing as a Drone
-  Drones are the core of any hive, a versatile caste that can perform many of the critical tasks needed to keep a Hive running smoothly. As Drones are the first caste unlocked for evolution each round, they often form the backbone of the initial efforts to build up a Hive in anticipation of the coming round.
+  Drones are the core of any Hive, a versatile caste that can perform many of the critical tasks needed to keep a Hive running smoothly. As Drones are the first caste unlocked for evolution each round, they often form the backbone of the initial efforts to build up a Hive in anticipation of the coming round.
 
   Drones are well suited to being a starter caste for new Xeno players, as they have the tools necessary to introduce players to building, supporting the team, and basic backline support. Drones should strive to avoid combat where possible unless it's part of a larger strategy, as they lack the means to defend themselves against most threats.
 
@@ -13,7 +13,7 @@
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoChooseResinStructure"/>
   - [bold]Secrete Resin[/bold]: Secretes the chosen resin structure on any tile you click, provided it has weeds.
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoSecreteResin"/>
-  - [bold]Order Construction[/bold]: Orders the construction of a hive structure.
+  - [bold]Order Construction[/bold]: Orders the construction of a [textlink="Hive Structure" link="RMCGuideHiveStructures.xml"].
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoOrderConstruction" Caption=""/>
   - [bold]Transfer Plasma[/bold]: Transfers plasma from yourself to a sister, provided you both remain still.
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoTransferPlasma"/>
