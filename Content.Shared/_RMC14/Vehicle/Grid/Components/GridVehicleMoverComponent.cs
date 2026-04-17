@@ -141,7 +141,13 @@ public sealed partial class GridVehicleMoverComponent : Component
     /// delay before the vehicle can be pushed again
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float PushCooldown = 0f;
+    public float PushCooldown = 2f;
+
+    /// <summary>
+    /// minimum speed applied when a xeno shove starts
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float PushImpulseSpeed = 0.1f;
 
     /// <summary>
     /// delay after changing facing direction
