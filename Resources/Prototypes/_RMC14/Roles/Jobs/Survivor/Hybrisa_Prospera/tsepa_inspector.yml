@@ -37,6 +37,7 @@
     - type: InnateCommandSpeech
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
       - TSE
