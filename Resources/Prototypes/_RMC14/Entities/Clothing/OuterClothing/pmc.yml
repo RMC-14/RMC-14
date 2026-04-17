@@ -161,7 +161,7 @@
   parent: CMArmorM4PMHeavy
   id: CMArmorM4PMCSmartGunHarness
   name: PMC gun operator armor
-  description: A modification of the standard M3 armor, hooked up with harnesses and straps allowing the user to carry an ML66A Smart Gun.
+  description: A modification of the standard M3 armor, hooked up with harnesses and straps that allow the user to carry an ML66A Smart Gun.
   components:
   - type: RMCArmorSpeedTier
     speedTier: light

@@ -338,7 +338,7 @@
 - type: entity
   parent: ArmorHelmetPMCCorporate
   id: RMCArmorHelmetPMCCorporateLeadHybrisa
-  description: A basic skull-helm with am orange safety visor fitted. Worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
+  description: A basic skull-helm with an orange safety visor fitted. Worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
   suffix: Hybrisa
   components:
   - type: Sprite

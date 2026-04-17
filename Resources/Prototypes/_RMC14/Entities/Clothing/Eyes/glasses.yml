@@ -136,7 +136,7 @@
   parent: ClothingEyesBase
   id: RMCGlassesExperimentalMeson
   name: experimental meson goggles # TODO RMC14 meson tile vision see description below
-  description: An improved but experimental version of the standard issue meson goggles. Due to increased complexity these can only be worn by synthetics. Allows for full night vision. # TODO RMC14 and viewing of the surroundings. Click it to toggle.
+  description: An improved but experimental version of the standard issue meson goggles. Due to increased complexity, these can only be worn by synthetics. Allows for full night vision. # TODO RMC14 and viewing of the surroundings. Click it to toggle.
   components:
   - type: Item
     storedRotation: 0

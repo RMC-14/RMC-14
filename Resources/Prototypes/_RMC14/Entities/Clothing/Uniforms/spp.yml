@@ -162,7 +162,7 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitSPPMariner
   name: SPP mariner fatigues
-  description: A set of SPP fatigues specifcially designed for Marines and Mariners.
+  description: A set of SPP fatigues specifically designed for Marines and Mariners.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/mariner.rsi

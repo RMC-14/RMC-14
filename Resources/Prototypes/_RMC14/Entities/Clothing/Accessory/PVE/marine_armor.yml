@@ -129,7 +129,7 @@
   parent: RMCPVEArmorGroinPlateBase
   id: RMCPVEArmorGroinPlate
   name: M3 Lap Panel
-  description: Attachable supplementary armor for the M3 armor system. A shear thickening liquid armor piece covering the abdomen and groin, with an additional ruggedized boron carbide. Clasps to the inside of the M3 cuirass.
+  description: Attachable supplementary armor for the M3 armor system. A shear thickening liquid armor piece covering the abdomen and groin, with additional ruggedized boron carbide. Clasps to the inside of the M3 cuirass.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/groinplate/jungle.rsi

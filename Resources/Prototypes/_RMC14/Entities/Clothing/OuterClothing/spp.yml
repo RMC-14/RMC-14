@@ -3,7 +3,7 @@
   parent: CMArmorM3Medium
   id: RMCArmorSPP
   name: UM5 personal armor
-  description: The standard body armor of the SPP military, the UM5 (Union Medium MK5) is a medium body armor, roughly on par with the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. Unlike the M3, however, the plate has a heavier neckplate. This has earned many UN members to refer to SPP soldiers as 'tin men'.
+  description: The standard body armor of the SPP military, the UM5 (Union Medium MK5) is a medium body armor pattern, roughly on par with the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. Unlike the M3, however, the plate has a heavier neckplate. This has earned many UN members to refer to SPP soldiers as 'tin men'.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spp.rsi
