@@ -380,6 +380,22 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return size >= minSize;
     }
 
+    private bool HasBlockingVehicleMob(GridVehicleMoverComponent mover, HashSet<EntityUid> blockers)
+    {
+        foreach (var blocker in blockers)
+        {
+            if (IsBlockingVehicleMob(mover, blocker))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool IsBlockingVehicleMob(GridVehicleMoverComponent mover, EntityUid blocker)
+    {
+        return HasComp<XenoComponent>(blocker) && ShouldBlockXeno(mover, blocker);
+    }
+
     private bool TryGetFixtureAabb(FixturesComponent fixtures, Transform transformData, out Box2 aabb)
     {
         var first = true;

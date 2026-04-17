@@ -18,7 +18,7 @@
     turnInPlaceMaxSpeed: 0.5
     pushCooldown: 2
     canPushVehicles: true
-    #movementCollisionInset: 0.25
+    blockingMobBypassNudgeLimit: 2
     xenoBlockMinimumSize: Immobile
     canXenosPush: false
   - type: RMCVehicleOvercharge
