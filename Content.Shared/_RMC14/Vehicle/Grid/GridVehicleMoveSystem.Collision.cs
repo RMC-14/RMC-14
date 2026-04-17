@@ -143,7 +143,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                     continue;
 
                 PlayMobCollisionSound(uid, ref playedCollisionSound);
-                if (!PushMobOutOfVehicle(uid, other, aabb, otherAabb))
+                if (!PushMobOutOfVehicle(uid, other, aabb, otherAabb, GetVehicleMoveDelta(grid, world.Position, world.MapId, mover)))
                 {
                     ApplyWheelCollisionDamage(uid, mover, wheelDamage);
                     blockers?.Add(other);
@@ -678,7 +678,21 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         }
     }
 
-    private bool PushMobOutOfVehicle(EntityUid vehicle, EntityUid mob, Box2 vehicleAabb, Box2 mobAabb)
+    private Vector2 GetVehicleMoveDelta(
+        EntityUid grid,
+        Vector2 worldPos,
+        MapId mapId,
+        GridVehicleMoverComponent mover)
+    {
+        var currentCoords = new EntityCoordinates(grid, mover.Position);
+        var currentWorld = currentCoords.ToMap(EntityManager, transform);
+        if (currentWorld.MapId != mapId)
+            return Vector2.Zero;
+
+        return worldPos - currentWorld.Position;
+    }
+
+    private bool PushMobOutOfVehicle(EntityUid vehicle, EntityUid mob, Box2 vehicleAabb, Box2 mobAabb, Vector2 vehicleMove)
     {
         var xform = Transform(mob);
         if (xform.Anchored)
@@ -688,7 +702,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         var centeredAabb = GetCenteredMobAabb(mob, mobAabb);
 
-        if (!TryGetMobPush(vehicle, mob, vehicleAabb, centeredAabb, out var target, out var reason))
+        if (!TryGetMobPush(vehicle, mob, vehicleAabb, centeredAabb, vehicleMove, out var target, out var reason))
         {
             return false;
         }
@@ -778,6 +792,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         EntityUid mob,
         Box2 vehicleAabb,
         Box2 mobAabb,
+        Vector2 vehicleMove,
         out EntityCoordinates target,
         out string reason)
     {
@@ -814,6 +829,23 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             : Vector2.Zero;
 
         var vehicleBounds = vehicleAabb;
+        if (TryGetMovementSidePushTarget(
+                vehicle,
+                mob,
+                mobAabb,
+                vehicleBounds,
+                vehicleMove,
+                pushX,
+                pushY,
+                out target,
+                out reason))
+        {
+            return true;
+        }
+
+        if (vehicleMove.LengthSquared() > 0.0001f)
+            return false;
+
         var useX = overlapX < overlapY;
         if (MathF.Abs(overlapX - overlapY) <= PushAxisHysteresis &&
             _lastMobPushAxis.TryGetValue(mob, out var lastUseX))
@@ -838,6 +870,49 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         }
 
         reason = $"first={firstReason} second={reason}";
+        return false;
+    }
+
+    private bool TryGetMovementSidePushTarget(
+        EntityUid vehicle,
+        EntityUid mob,
+        Box2 mobAabb,
+        Box2 vehicleBounds,
+        Vector2 vehicleMove,
+        Vector2 pushX,
+        Vector2 pushY,
+        out EntityCoordinates target,
+        out string reason)
+    {
+        target = EntityCoordinates.Invalid;
+        reason = "vehicle is not moving";
+
+        if (vehicleMove.LengthSquared() <= 0.0001f)
+            return false;
+
+        var vehicleMovesX = MathF.Abs(vehicleMove.X) >= MathF.Abs(vehicleMove.Y);
+        var sidePush = vehicleMovesX ? pushY : pushX;
+        if (sidePush == Vector2.Zero)
+        {
+            reason = "side push zero";
+            return false;
+        }
+
+        var useX = !vehicleMovesX;
+        if (TryGetSidePushTarget(vehicle, mob, mobAabb, vehicleBounds, sidePush, out target, out reason))
+        {
+            _lastMobPushAxis[mob] = useX;
+            return true;
+        }
+
+        var firstReason = reason;
+        if (TryGetSidePushTarget(vehicle, mob, mobAabb, vehicleBounds, -sidePush, out target, out reason))
+        {
+            _lastMobPushAxis[mob] = useX;
+            return true;
+        }
+
+        reason = $"side first={firstReason} second={reason}";
         return false;
     }
 
