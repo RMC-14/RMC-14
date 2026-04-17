@@ -8495,7 +8495,7 @@ entities:
     - type: Transform
       pos: 5.905199,4.6946373
       parent: 1
-- proto: RMCWeaponRifleL88A1Filled
+- proto: RMCWeaponRifleL88A2Filled
   entities:
   - uid: 719
     components:
