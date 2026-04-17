@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/17/2026 00:44:28
-  entityCount: 17438
+  time: 04/17/2026 23:44:13
+  entityCount: 17434
 maps:
 - 1
 grids:
@@ -116744,40 +116744,12 @@ entities:
     - type: Transform
       pos: 3.5,110.5
       parent: 1
-- proto: RMCMapInsertShivaSurvSpawnBotany
+- proto: RMCMapInsertShivaSurvSpawnTogether
   entities:
-  - uid: 17446
-    components:
-    - type: Transform
-      pos: 97.5,93.5
-      parent: 1
-- proto: RMCMapInsertShivaSurvSpawnChurch
-  entities:
-  - uid: 17448
+  - uid: 2195
     components:
     - type: Transform
       pos: 113.5,129.5
-      parent: 1
-- proto: RMCMapInsertShivaSurvSpawnCommandCentre
-  entities:
-  - uid: 17447
-    components:
-    - type: Transform
-      pos: 116.5,108.5
-      parent: 1
-- proto: RMCMapInsertShivaSurvSpawnCrisisCentre
-  entities:
-  - uid: 17444
-    components:
-    - type: Transform
-      pos: 113.5,67.5
-      parent: 1
-- proto: RMCMapInsertShivaSurvSpawnGarage
-  entities:
-  - uid: 17445
-    components:
-    - type: Transform
-      pos: 141.5,83.5
       parent: 1
 - proto: RMCMarkerAreaLabel
   entities:

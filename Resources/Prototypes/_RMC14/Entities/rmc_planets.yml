@@ -167,16 +167,8 @@
     nightmareScenarios:
     - scenarioName: panic_room_hold
       scenarioProbability: 0.1
-    - scenarioName: shiva_surv_spawn_church # 90% chance of regular surv. Reduce to 80% (0.16 each) once CLF survs are in.
-      scenarioProbability: 0.18
-    - scenarioName: shiva_surv_spawn_command_centre
-      scenarioProbability: 0.18
-    - scenarioName: shiva_surv_spawn_botany
-      scenarioProbability: 0.18
-    - scenarioName: shiva_surv_spawn_crisis_centre
-      scenarioProbability: 0.18
-    - scenarioName: shiva_surv_spawn_garage
-      scenarioProbability: 0.18
+    - scenarioName: none # 90% chance of regular surv. Reduce to 80% (0.8) once CLF survs are in.
+      scenarioProbability: 0.9
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1

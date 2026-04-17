@@ -66,60 +66,28 @@
 # Regular Surv Spawns
 - type: entity
   parent: RMCMapInsertShivaBaseScenario
-  id: RMCMapInsertShivaSurvSpawnChurch
-  name: Church Surv Spawn
+  id: RMCMapInsertShivaSurvSpawnTogether
+  name: Together Surv Spawn
   suffix: Insert Shiva
   components:
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Shiva/surv_spawn_church.yml"
-      probability: 1
-      nightmareScenario: shiva_surv_spawn_church
-
-- type: entity
-  parent: RMCMapInsertShivaBaseScenario
-  id: RMCMapInsertShivaSurvSpawnCommandCentre
-  name: Command Centre Surv Spawn
-  suffix: Insert Shiva
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.2
+      nightmareScenario: none
     - spawn: "/Maps/_RMC14/Inserts/Shiva/surv_spawn_command_centre.yml"
-      probability: 1
-      nightmareScenario: shiva_surv_spawn_command_centre
-
-- type: entity
-  parent: RMCMapInsertShivaBaseScenario
-  id: RMCMapInsertShivaSurvSpawnBotany
-  name: Botany Surv Spawn
-  suffix: Insert Shiva
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.2
+      nightmareScenario: none
+      offset: 3,-21
     - spawn: "/Maps/_RMC14/Inserts/Shiva/surv_spawn_botany.yml"
-      probability: 1
-      nightmareScenario: shiva_surv_spawn_botany
-
-- type: entity
-  parent: RMCMapInsertShivaBaseScenario
-  id: RMCMapInsertShivaSurvSpawnCrisisCentre
-  name: Crisis Centre Surv Spawn
-  suffix: Insert Shiva
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.2
+      nightmareScenario: none
+      offset: -16,-36
     - spawn: "/Maps/_RMC14/Inserts/Shiva/surv_spawn_crisis_centre.yml"
-      probability: 1
-      nightmareScenario: shiva_surv_spawn_crisis_centre
-
-- type: entity
-  parent: RMCMapInsertShivaBaseScenario
-  id: RMCMapInsertShivaSurvSpawnGarage
-  name: Garage Surv Spawn
-  suffix: Insert Shiva
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.2
+      nightmareScenario: none
+      offset: 0,-62
     - spawn: "/Maps/_RMC14/Inserts/Shiva/surv_spawn_garage.yml"
-      probability: 1
-      nightmareScenario: shiva_surv_spawn_garage
+      probability: 0.2
+      nightmareScenario: none
+      offset: 28,-46
