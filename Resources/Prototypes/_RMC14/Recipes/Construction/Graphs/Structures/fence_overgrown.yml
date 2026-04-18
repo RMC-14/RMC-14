@@ -7,7 +7,7 @@
     actions:
     - !type:DeleteEntity
     edges:
-    - to: fenceOvergrown
+    - to: fenceMetal
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -16,16 +16,16 @@
         amount: 10
         doAfter: 2.0
 
-  - node: fenceOvergrown
+  - node: fenceMetal
     entity: RMCFenceOvergrown
     edges:
-    - to: rmcFenceOvergrownBroken
+    - to: rmcFenceBroken
       steps:
       - tool: Cutting
         doAfter: 1.0
 
-  - node: rmcFenceOvergrownBroken
-    entity: RMCFenceBroken
+  - node: rmcFenceBroken
+    entity: RMCFenceOvergrownBroken
     edges:
     - to: start
       completed:
