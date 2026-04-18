@@ -14,9 +14,9 @@
   suffix: Toxic
   components:
   - type: Sprite
-    sprite: _RMC14/Tiles/planet/desert_water_toxic.rsi
+    sprite: _RMC14/Tiles/planet/desert_water.rsi
     layers:
-    - state: shallow
+    - state: shallow_toxic
   - type: DamageOverTime
     affectsDead: false
     armorPiercingDamage:
@@ -45,9 +45,9 @@
   description: Something about this water doesn't look right. Best to stay out of it.
   components:
   - type: Sprite
-    sprite: _RMC14/Tiles/planet/desert_water_toxic.rsi
+    sprite: _RMC14/Tiles/planet/desert_water.rsi
     layers:
-    - state: deep
+    - state: deep_toxic
 
 - type: entity
   parent: CMFloorShallowWaterEntity
@@ -56,9 +56,9 @@
   suffix: NON Toxic
   components:
   - type: Sprite
-    sprite: _RMC14/Tiles/planet/desert_water_toxic.rsi
+    sprite: _RMC14/Tiles/planet/desert_water.rsi
     layers:
-    - state: shallow
+    - state: shallow_toxic
 
 - type: entity
   parent: CMFloorDeepWaterEntity
@@ -67,6 +67,33 @@
   suffix: NON Toxic
   components:
   - type: Sprite
-    sprite: _RMC14/Tiles/planet/desert_water_toxic.rsi
+    sprite: _RMC14/Tiles/planet/desert_water.rsi
     layers:
-    - state: deep
+    - state: deep_toxic
+
+
+- type: entity
+  parent: RMCToxicWaterShallow
+  id: RMCEntityDesertWaterShallowCornerToxic
+  components:
+  - type: Sprite
+    layers:
+    - state: shallow_c
+
+- type: entity
+  parent: RMCToxicWaterShallow
+  id: RMCEntityDesertWaterShallowCornerEdgeToxic
+  components:
+  - type: Sprite
+    layers:
+    - state: shallow_corner_edge_toxic
+
+
+- type: entity
+  parent: RMCToxicWaterShallow
+  id: RMCEntityDesertWaterShallowEdgeToxic
+  components:
+  - type: Sprite
+    layers:
+    - state: shallow_edge_toxic
+
