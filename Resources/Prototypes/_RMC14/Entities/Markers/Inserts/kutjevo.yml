@@ -101,60 +101,28 @@
 # Regular Surv Spawns
 - type: entity
   parent: RMCMapInsertKutjevoBaseScenario
-  id: RMCMapInsertKutjevoSurvSpawnBar
-  name: Bar Surv Spawn
+  id: RMCMapInsertKutjevoSurvSpawnTogether
+  name: Together Surv Spawn
   suffix: Insert Kutjevo
   components:
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Kutjevo/surv_spawn_bar.yml"
-      probability: 1
-      nightmareScenario: kutjevo_surv_spawn_bar
-
-- type: entity
-  parent: RMCMapInsertKutjevoBaseScenario
-  id: RMCMapInsertKutjevoSurvSpawnMedical
-  name: Medical Surv Spawn
-  suffix: Insert Kutjevo
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.2
+      nightmareScenario: none
     - spawn: "/Maps/_RMC14/Inserts/Kutjevo/surv_spawn_medical.yml"
-      probability: 1
-      nightmareScenario: kutjevo_surv_spawn_medical
-
-- type: entity
-  parent: RMCMapInsertKutjevoBaseScenario
-  id: RMCMapInsertKutjevoSurvSpawnNorthBotany
-  name: North Botany Surv Spawn
-  suffix: Insert Kutjevo
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.2
+      nightmareScenario: none
+      offset: -30,-6
     - spawn: "/Maps/_RMC14/Inserts/Kutjevo/surv_spawn_north_botany.yml"
-      probability: 1
-      nightmareScenario: kutjevo_surv_spawn_north_botany
-
-- type: entity
-  parent: RMCMapInsertKutjevoBaseScenario
-  id: RMCMapInsertKutjevoSurvSpawnSouthBotany
-  name: South Botany Surv Spawn
-  suffix: Insert Kutjevo
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.2
+      nightmareScenario: none
+      offset: -23,-35
     - spawn: "/Maps/_RMC14/Inserts/Kutjevo/surv_spawn_south_botany.yml"
-      probability: 1
-      nightmareScenario: kutjevo_surv_spawn_south_botany
-
-- type: entity
-  parent: RMCMapInsertKutjevoBaseScenario
-  id: RMCMapInsertKutjevoSurvSpawnPowerplant
-  name: Powerplant Surv Spawn
-  suffix: Insert Kutjevo
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.2
+      nightmareScenario: none
+      offset: -19,-65
     - spawn: "/Maps/_RMC14/Inserts/Kutjevo/surv_spawn_powerplant.yml"
-      probability: 1
-      nightmareScenario: kutjevo_surv_spawn_powerplant
+      probability: 0.2
+      nightmareScenario: none
+      offset: 0,-44
