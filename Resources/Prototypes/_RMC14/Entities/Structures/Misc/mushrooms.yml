@@ -65,7 +65,7 @@
 - type: entity
   id: RMCMushroom
   name: fly amanita
-  description: A delicious-looking mushroom like you see in those cartoons.
+  description: "Amanita muscaria: A delicious-looking mushroom like you see in those cartoons."
   suffix: Prop, RMC
   components:
   - type: Clickable
