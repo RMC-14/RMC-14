@@ -1,0 +1,109 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCBRNCombatTech
+  name: cm-job-name-combat-tech
+  description: rmc-job-description-cbrn-combat-tech
+  playTimeTracker: RMCJobCBRNCombatTech
+  startingGear: RMCgearCBRNCombatTech
+  icon: "CMJobIconCombatTech"
+  joinNotifyCrew: false
+  marineAuthorityLevel: 1
+  supervisors: cm-job-supervisors-sl
+  ranks:
+    RMCRankCorporal: []
+  accessGroups:
+  - ShipMasterAccess
+  overwatchRoleName: Combat Technicians
+  spawnMenuRoleName: CBRN Combat Techician
+  roleWeight: 1
+  displayWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 3
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 4
+        RMCSkillMedical: 1
+        RMCSkillJtac: 2
+        RMCSkillPowerLoader: 2
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-combat-tech
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: engi
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCBRNCombatTech
+  name: cbrn ghost role combat technician
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCBRNCombatTech
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCBRNCombatTech
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-cbrn-combat-tech
+    description: rmc-job-description-cbrn-combat-tech
+    rules: rmc-ghost-role-information-cbrn-rules
+    reregister: false
+    job: RMCCBRNCombatTech
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadCBRN
+
+- type: startingGear
+  id: RMCgearCBRNCombatTech
+  equipment:
+    head: RMCArmorHelmetCBRN
+    ears: CMHeadsetCBRN
+    eyes: RMCWeldingGogglesSuperior
+    jumpsuit: RMCCBRNSuitTool
+    outerClothing: RMCArmorCBRN
+    gloves: RMCHandsVeteranCBRN
+    shoes: RMCBootsCBRN
+    suitstorage: RMCWeaponRifleM54CFilled
+    id: CMDogtagCBRNCombatTech
+    belt: RMCBeltMarineMK2
+    back: CMBackpackMarine
+    pocket1: RMCPouchConstructionFillLowGrade
+    pocket2: RMCPouchConstructionFillLowGrade
+  storage:
+    back:
+    - RMCGeigerCounter
+    # RMC TODO: reagent scanner 
+    # RMC TODO: gas/atmos analyzer 
+    - RMCSprayBottleSpaceCleaner
+    - CMBodyBagFolded
+    - CMBodyBagFolded
+    - CMBodyBagFolded
+    - CMBodyBagFolded
+    outerClothing:
+    - CMMRE
+    - RMCExplosiveBreachingCharge
+    - RMCExplosiveBreachingCharge
+
+- type: playTimeTracker
+  id: RMCJobCBRNCombatTech
