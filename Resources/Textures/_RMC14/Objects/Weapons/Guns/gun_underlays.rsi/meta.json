@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/15d853a340792692e623bcd30f7d8cc058ad6343/icons/obj/items/clothing/belts/holstered_guns.dmi. Nailgun Sprites by VictorJob. warwick and warwick_alt by @TadJohnson00 (GitHub), Taser sprite by Phynexa",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/15d853a340792692e623bcd30f7d8cc058ad6343/icons/obj/items/clothing/belts/holstered_guns.dmi. Nailgun Sprites by VictorJob. warwick and warwick_alt by @TadJohnson00 (GitHub), Taser sprite by Phynexa. mag38.png and cmb.png originated from https://github.com/cmss13-devs/cmss13/blob/0b241c0584b792912d42c34007d808494e386023/icons/obj/items/weapons/guns/ammo_by_faction/uscm.dmi then modified by Magicocity by rotating to fit the pistol pouch",
   "size": {
     "x": 32,
     "y": 32
@@ -147,6 +147,12 @@
     },
     {
       "name": "warwick_alt"
+    },
+    {
+      "name": "cmb"
+    },
+    {
+      "name": "mag38"
     }
   ]
 }

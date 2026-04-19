@@ -258,14 +258,16 @@
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
     nightmareScenarios:
-    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF/SPP survivors are in
-      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF survivors are in
+      scenarioProbability: 0.15
     - scenarioName: trijent_surv_spawn_hospital
-      scenarioProbability: 0.25
+      scenarioProbability: 0.15
     - scenarioName: trijent_surv_spawn_dam
-      scenarioProbability: 0.25
+      scenarioProbability: 0.15
     - scenarioName: trijent_surv_spawn_tunneldorm
-      scenarioProbability: 0.25
+      scenarioProbability: 0.15
+    - scenarioName: spp_bar
+      scenarioProbability: 0.4
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
@@ -288,6 +290,27 @@
       - CMSurvivorCMBDeputy: 1
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
+    survivorJobScenarios:
+      spp_bar:
+      - CMSurvivorDoctor: 1
+      - CMSurvivorEngineer: 1
+      - CMSurvivorSecurity: 2
+      - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      spp_bar:
+        CMSurvivorDoctor:
+        - RMCSurvivorSPPCrashlandMedic: 1
+        CMSurvivorEngineer:
+        - RMCSurvivorSPPCrashlandSapper: 1
+        CMSurvivorSecurity:
+        - RMCSurvivorSPPCrashlandSL: 1
+        - RMCSurvivorSPPCrashlandSpec: 1
+        CMSurvivor:
+        - RMCSurvivorSPPCrashlandSoldier: -1
+    survivorJobOverrideScenarios:
+      spp_bar:
+        CMSurvivorScientist: CMSurvivorDoctor
+        CMSurvivorCorporate: CMSurvivor
 #    survivorJobVariantScenarios:
 #      clf_pods:
 #        CMSurvivor:
@@ -324,7 +347,6 @@
 #        - : -1
 #        CMSurvivorScientist:
 #        - : -1
-
 
 - type: entity
   id: RMCPlanetVaradero

@@ -9,6 +9,8 @@ using Content.Shared._RMC14.Smoke;
 using Content.Shared._RMC14.Xenonids.Bombard;
 using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared._RMC14.Xenonids.Spray;
+using Content.Shared._RMC14.Xenonids.Abduct;
+using Content.Shared._RMC14.Xenonids.Pierce;
 using Content.Shared.Actions.Components;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
@@ -35,6 +37,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
     private static readonly Color SprayOutlineColor = new Color(0.44f, 0.76f, 0.2f);
+    private static readonly Color AbductOutlineColor = new Color(1f, 0.67f, 0.28f);
+    private static readonly Color PierceOutlineColor = new Color(1f, 0.15f, 0.1f);
     private static readonly Color BombardFallbackColor = new Color(0.98f, 0.74f, 0.25f);
     private static readonly Color BurrowOutlineColor = new Color(0.95f, 0.85f, 0.2f);
     private static readonly Color BlockerOutlineColor = new Color(0.65f, 0.65f, 0.65f);
@@ -60,6 +64,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly EntityQuery<XenoSprayAcidComponent> _sprayQ;
     private readonly EntityQuery<XenoBombardComponent> _bombardQ;
     private readonly EntityQuery<XenoBurrowComponent> _burrowQ;
+    private readonly EntityQuery<XenoAbductComponent> _abductQ;
+    private readonly EntityQuery<XenoPierceComponent> _pierceQ;
     private readonly EntityQuery<TransformComponent> _xformQ;
 
     public XenoAbilityPreviewOverlay(IEntityManager ents)
@@ -82,6 +88,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _sprayQ = ents.GetEntityQuery<XenoSprayAcidComponent>();
         _bombardQ = ents.GetEntityQuery<XenoBombardComponent>();
         _burrowQ = ents.GetEntityQuery<XenoBurrowComponent>();
+        _abductQ = ents.GetEntityQuery<XenoAbductComponent>();
+        _pierceQ = ents.GetEntityQuery<XenoPierceComponent>();
         _xformQ = ents.GetEntityQuery<TransformComponent>();
     }
 
@@ -143,6 +151,18 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
                 burrowRange ??= GetBurrowRange(player.Value, burrow, action);
                 DrawBurrowTarget(args, originMap, mousePos, burrowRange.Value);
                 break;
+
+            case XenoAbductActionEvent:
+                if (!_abductQ.TryComp(player.Value, out var abduct))
+                    return;
+                DrawAbduct(args, player.Value, xform, originMap, mousePos, abduct);
+                break;
+
+            case XenoPierceActionEvent:
+                if (!_pierceQ.TryComp(player.Value, out var pierce))
+                    return;
+                DrawPierce(args, player.Value, xform, originMap, mousePos, pierce);
+                break;
         }
     }
 
@@ -160,6 +180,38 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
         var color = SprayOutlineColor.WithAlpha(OutlineAlpha);
         DrawLinePreview(args, player, xform.Coordinates, mousePos, spray.Range, color);
+    }
+
+    private void DrawAbduct(
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoAbductComponent abduct)
+    {
+        var direction = mousePos.Position - originMap.Position;
+        if (direction.Length() > abduct.Range)
+            mousePos = originMap.Offset(direction.Normalized() * abduct.Range);
+
+        var color = AbductOutlineColor.WithAlpha(OutlineAlpha);
+        DrawLinePreview(args, player, xform.Coordinates, mousePos, abduct.Range, color);
+    }
+
+    private void DrawPierce(
+        in OverlayDrawArgs args,
+        EntityUid player,
+        TransformComponent xform,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoPierceComponent pierce)
+    {
+        var direction = mousePos.Position - originMap.Position;
+        if (direction.Length() > pierce.Range)
+            mousePos = originMap.Offset(direction.Normalized() * (int)pierce.Range);
+
+        var color = PierceOutlineColor.WithAlpha(OutlineAlpha);
+        DrawLinePreview(args, player, xform.Coordinates, mousePos, (int)pierce.Range, color);
     }
 
     private void DrawBombard(
