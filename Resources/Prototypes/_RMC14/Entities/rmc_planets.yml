@@ -215,6 +215,8 @@
     - scenarioName: riot_in_progress
       scenarioProbability: 0.15
     survivorJobVariants:
+      RMCSurvivorCommandingOfficer:
+      - CMSurvivorFiorinaWarden: 1
       CMSurvivor:
       - CMSurvivor: -1
       - CMSurvivorISR: -1
@@ -247,6 +249,7 @@
         CMSurvivorEngineer: CMSurvivor
         CMSurvivorDoctor: CMSurvivor
         CMSurvivorScientist: CMSurvivor
+        RMCSurvivorCommandingOfficer: CMSurvivorSecurity
 
 - type: entity
   id: RMCPlanetTrijent
