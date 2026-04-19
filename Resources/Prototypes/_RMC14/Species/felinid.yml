@@ -3,7 +3,7 @@
 - type: species
   id: Felinid
   name: species-name-felinid
-  roundStart: true
+  roundStart: false
   prototype: CMMobFelinid
   sprites: MobFelinidSprites
   markingLimits: MobFelinidMarkingLimits

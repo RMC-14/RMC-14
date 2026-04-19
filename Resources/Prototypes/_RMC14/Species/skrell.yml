@@ -3,7 +3,7 @@
 - type: species
   id: Skrell
   name: species-name-skrell
-  roundStart: true
+  roundStart: false
   prototype: RMCMobSkrell
   sprites: MobSkrellSprites
   defaultSkinTone: "#8cd7a3"
