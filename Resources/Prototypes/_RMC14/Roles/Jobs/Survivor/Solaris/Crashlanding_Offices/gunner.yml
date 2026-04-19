@@ -77,7 +77,7 @@
   name: pmc standard survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomStartingGear:
       jumpsuit:
       - RMCJumpsuitVeteranPMCNoWebbingPatch

@@ -68,7 +68,7 @@
   name: doctor colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomGearOther:
     -
       - [ RMCPouchFirstAidSplintsGauzeOintment ]

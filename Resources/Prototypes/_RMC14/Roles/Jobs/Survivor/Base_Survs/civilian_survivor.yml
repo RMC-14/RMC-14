@@ -112,7 +112,7 @@
   name: no gun colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomGear:
     - [ RMCGrenadeMolotov ]
     - [ CMPackFlare ]
@@ -127,7 +127,7 @@
   name: civilian colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomWeapon:
     - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
     - [ RMCWeaponRevolverSpearhead, RMCSpeedLoader357Hollowpoint ]
@@ -146,7 +146,7 @@
   name: civilian colonist preset with rare item
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     rareItems:
       RMCMotionDetectorCompact:
         1: 4 # 2%
@@ -182,7 +182,7 @@
   name: civilian colonist preset with random outfits
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomStartingGear:
       back:
       - RMCSatchelNorm

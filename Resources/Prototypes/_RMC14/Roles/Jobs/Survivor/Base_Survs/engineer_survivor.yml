@@ -69,7 +69,7 @@
   name: engineer colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomGearOther:
     -
       - [ CMBeltUtilityFilled ]

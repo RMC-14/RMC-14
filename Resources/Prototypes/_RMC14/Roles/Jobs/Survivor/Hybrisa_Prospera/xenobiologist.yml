@@ -50,7 +50,7 @@
   name: xenobiologist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomOutfits:
     - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesReagentHUDGlasses, RMCShoesLaceup ]
     - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesReagentHUDGlasses, RMCShoesLaceup ]

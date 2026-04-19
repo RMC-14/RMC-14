@@ -71,7 +71,7 @@
   name: survivor synth hybrisa Xenoarch preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomOutfits:
     - [ CMSatchel, RMCLabcoatScience, RMCShoesBrown ]
     - [ RMCSatchelLightpack, RMCSuitBioWeYa, RMCHoodBioWeYa, RMCShoesBrown, RMCGlassesReagentHUDGlasses ]

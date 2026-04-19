@@ -52,7 +52,7 @@
   name: hybrisa weyamart employee preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     rareItems:
       RMCExplosivePlastic:
         45: 50 # 10%

@@ -55,7 +55,7 @@
   name: hybrisa corporate liaison preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomOutfits:
     - [ RMCGlassesAviators ]
     - [ RMCGlassesAviatorsSilver ]
