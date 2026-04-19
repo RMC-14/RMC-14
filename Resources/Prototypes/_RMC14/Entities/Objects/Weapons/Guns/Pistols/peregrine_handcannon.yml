@@ -162,7 +162,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolHandcannon
-  name: peregrine handcannon magazine (.50)
+  name: Peregrine Handcannon magazine (.50)
   description: Seven rounds of powerful 50-caliber destruction.
   components:
   - type: Tag
@@ -187,7 +187,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolHandcannonHI
-  name: high impact peregrine handcannon magazine (.50)
+  name: high impact Peregrine Handcannon magazine (.50)
   description: Seven rounds of devastatingly powerful 50-caliber destruction. The bullets are tipped with a synthesized osmium and lead alloy to stagger absolutely anything they hit. Point away from anything you value.
   components:
   - type: Tag
@@ -214,7 +214,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolHandcannonHIAP
-  name: high impact armor-piercing peregrine handcannon magazine (.50)
+  name: high impact armor-piercing Peregrine Handcannon magazine (.50)
   description: Seven rounds of devastatingly powerful 50-caliber destruction. Packs a devastating punch. The bullets are tipped with an osmium-tungsten carbide alloy to not only stagger but also shred through any target's armor. Issued in few numbers due to the massive production cost and worries about hull breaches. Point away from anything you value.
   components:
   - type: Tag
