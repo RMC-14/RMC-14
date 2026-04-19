@@ -24,8 +24,6 @@
       probability: 0.2
     replaceAreas: false
 
-
-
 # Standalones
 - type: entity
   parent: RMCMapInsertTrijentBase
@@ -50,8 +48,6 @@
     - spawn: "/Maps/_RMC14/Inserts/Trijent/civhold.yml"
       probability: 0.1
     replaceAreas: false
-
-
 
 # Sprinkles
 - type: entity
@@ -181,7 +177,6 @@
     - spawn: "/Maps/_RMC14/Inserts/Trijent/sensorhold.yml"
       probability: 0.5
     replaceAreas: false
-
 
 - type: entity
   parent: RMCMapInsertTrijentBase
