@@ -21,7 +21,7 @@ public sealed class SurvivorSystem : EntitySystem
         ApplyPreset(ent, ent.Comp.Preset);
     }
 
-    private void ApplyPreset(EntityUid mob, EntProtoId<SurvivorPresetComponent> preset)
+    private void ApplyPreset(EntityUid mob, EntProtoId<EntityPresetComponent> preset)
     {
         if (!preset.TryGet(out var comp, _prototypes, _compFactory))
             return;
