@@ -31,6 +31,7 @@
   - type: ActiveEdgeSpreader
   - type: EdgeSpreader
     id: RMCSmokeAcid
+    spreadDelay: 0.6
   - type: EvenSmoke
     spawn: RMCSmokeAcid
     range: 3
@@ -86,6 +87,7 @@
   - type: ActiveEdgeSpreader
   - type: EdgeSpreader
     id: RMCSmokeNeurotoxin
+    spreadDelay: 0.5
   - type: EvenSmoke
     spawn: RMCSmokeNeurotoxin
     range: 4
