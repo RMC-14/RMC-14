@@ -26,7 +26,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
         string name,
         string text,
         CommendationType type,
-        ProtoId<EntityPrototype>? commendationPrototypeId = null)
+        EntProtoId? commendationPrototypeId = null)
     {
         try
         {
@@ -57,7 +57,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
         string name,
         string text,
         CommendationType type,
-        ProtoId<EntityPrototype>? commendationPrototypeId = null)
+        EntProtoId? commendationPrototypeId = null)
     {
         try
         {
@@ -84,7 +84,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
         string name,
         string text,
         CommendationType type,
-        ProtoId<EntityPrototype>? commendationPrototypeId = null,
+        EntProtoId? commendationPrototypeId = null,
         Entity<CommendationReceiverComponent?>? receiver = null)
     {
         text = text.Trim();

@@ -76,7 +76,7 @@
       entries:
       - id: RMCPouchFirstAid
         amount: 15
-      - id: RMCPouchFlareFilled
+      - id: RMCPouchFlareC18Filled
         name: flare pouch (Full)
         amount: 15
       - id: RMCPouchMagazine
@@ -183,10 +183,10 @@
       - id: RMCBoxFlashlights
         name: Box of Flashlights
         amount: 1
-      - id: RMCBoxPackFlare
+      - id: RMCBoxPackFlareC18
         name: Box of Flares
         amount: 1
-      - id: CMPackFlare
+      - id: RMCPackFlareC18
         amount: 10
       - id: RMCBoxPackFlareCAS
         amount: 1

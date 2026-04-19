@@ -59,8 +59,8 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolKT42
-  name: KT-42 magazine (.44)
-  description: A .44 pistol magazine.
+  name: KT-42 magazine (.45 ACP)
+  description: A .45 ACP pistol magazine.
   components:
   - type: Tag
     tags:
@@ -70,8 +70,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol9mm
-    proto: CMCartridgePistol9mm
+      - CMCartridgePistol45ACP
+    proto: CMCartridgePistol45ACP
     capacity: 16
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/kt42.rsi

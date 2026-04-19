@@ -38,6 +38,18 @@ public sealed partial class XenoScreechComponent : Component
     public TimeSpan ParasiteStunTime = TimeSpan.FromSeconds(8);
 
     [DataField, AutoNetworkedField]
+    public int CloseScreenShakeShakes = 12;
+
+    [DataField, AutoNetworkedField]
+    public int CloseScreenShakeStrength = 6;
+
+    [DataField, AutoNetworkedField]
+    public int FarScreenShakeShakes = 8;
+
+    [DataField, AutoNetworkedField]
+    public int FarScreenShakeStrength = 4;
+
+    [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectScreech";
 
     [DataField, AutoNetworkedField]

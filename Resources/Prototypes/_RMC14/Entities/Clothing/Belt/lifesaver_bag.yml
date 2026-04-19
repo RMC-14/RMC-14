@@ -78,7 +78,10 @@
   name: Type 41 pattern lifesaver bag
   description: The Type 41 load rig is the standard load-bearing equipment of the SPP military. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
   components:
-  # TODO RMC14 - Sprites
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_spp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_spp.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
 
@@ -123,7 +126,7 @@
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterInaprovaline
-    
+
 - type: entity
   parent: RMCBeltMedicBagSPP
   id: RMCBeltMedicBagSPPSynthFilled

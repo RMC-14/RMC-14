@@ -201,6 +201,10 @@
       # leaving this commented, as it is not parity, but we might want it in the future
       #- cost: 2000
       #  crate: RMCCrateGrenadesSmoke
+      - cost: 3200
+        crate: RMCCrateExplosiveWhitePhosphorusCompound
+      - cost: 10800
+        crate: RMCCrateExplosiveWhitePhosphorusCompoundBox
       - cost: 4000
         crate: RMCCrateGrenadesFragOld
       - cost: 3000
@@ -357,8 +361,8 @@
         crate: RMCCrateM5DemoSpecHighExplosive
       - cost: 3000
         crate: RMCCrateM5DemoSpecAntiArmor
-#      - cost: 3000
-#        crate: RMCCrateM5DemoSpecWhitePhosphorous
+      - cost: 3000
+        crate: RMCCrateM5DemoSpecWhitePhosphorus
       - cost: 4000
         crate: RMCCrateMagazineM4SPRCustomMixed
       - cost: 3000

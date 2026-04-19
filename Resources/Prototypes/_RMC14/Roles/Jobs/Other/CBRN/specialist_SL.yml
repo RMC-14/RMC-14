@@ -1,0 +1,131 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCBRNSquadLeader
+  name: cm-job-name-squad-leader
+  description: rmc-job-description-cbrn-squad-leader
+  playTimeTracker: RMCJobCBRNSquadLeader
+  ranks:
+    RMCRankOperator: []
+  startingGear: RMCGearCBRNSquadLeader
+  icon: "CMJobIconSquadLeader"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-marine-high-command
+  marineAuthorityLevel: 2
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: CBRN Specialist Squad Leader
+  overwatchSortPriority: -6
+  overwatchShowName: true
+  overwatchRoleName: Squad Leader
+  roleWeight: 1
+  displayWeight: 6
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 5
+        RMCSkillFireman: 5
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillFirearms: 3
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillEndurance: 5
+        RMCSkillJtac: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-squad-leader
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: leader
+    - type: RMCTrackable
+    - type: RMCAwardRecommendation
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCBRNSquadLeader
+  name: cbrn ghost role specialist squad leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCBRNSquadLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCBRNSquadLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-cbrn-squad-leader
+    description: rmc-job-description-cbrn-squad-leader
+    rules: rmc-ghost-role-information-cbrn-rules
+    reregister: false
+    job: RMCCBRNSquadLeader
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 36000 # 10 Hours
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadCBRN
+
+- type: startingGear
+  id: RMCGearCBRNSquadLeader
+  equipment:
+    head: RMCArmorHelmetCBRN
+    ears: CMHeadsetCBRNLeader
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCCBRNSuitSL
+    outerClothing: RMCArmorCBRNAdvanced
+    gloves: RMCHandsVeteranCBRN
+    shoes: RMCBootsCBRN
+    suitstorage: RMCWeaponRifleM54CMK1CBRN
+    id: CMDogtagCBRNSL
+    belt: CMBeltMarine
+    back: RMCBackpackBroiler
+    pocket1: RMCPouchFuelTank
+    pocket2: RMCPouchFuelTank
+  inhand:
+  - RMCWeaponFlamerSpec
+  storage:
+    outerClothing:
+    - CMMRE
+    - CMGrenadeHighExplosive     #RMC TODO: M40 HPDP White Phosphorus
+    - CMGrenadeHighExplosive     #RMC TODO: M40 HPDP White Phosphorus
+    pocket1:
+    - RMCTankFlamerLargeX
+    - RMCTankFlamerLargeX
+    pocket2:
+    - RMCTankFlamerLargeB
+    - RMCTankFlamerLargeB
+    belt:
+    - RMCMagazineRifleM54CMK1Incendiary
+    - RMCMagazineRifleM54CMK1Incendiary
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+
+- type: playTimeTracker
+  id: RMCJobCBRNSquadLeader

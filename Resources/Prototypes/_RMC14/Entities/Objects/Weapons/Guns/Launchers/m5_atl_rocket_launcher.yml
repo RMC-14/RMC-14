@@ -120,14 +120,11 @@
   - type: AssistedReloadAmmo
 
 - type: entity
-  id: RMCProjectileRocket84mm
+  id: RMCBaseProjectileRocket84mm
   name: 84mm high-explosive rocket
   categories: [ HideSpawnMenu ]
   description: Uh oh.
   components:
-  - type: TriggerOnCollide
-    # TODO RMC14 Make TriggerOnCollide spawn the explosion on the OtherEntity tile more consistently, so the explosion is centered properly
-    fixtureID: projectile # no parent entity from BaseBulletTrigger because it has Clickable
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -145,6 +142,7 @@
         restitution: 0.0
         density: 20
   - type: Projectile
+    deleteOnCollide: false
     impactEffect: BulletImpactEffect
     damage:
       types:
@@ -155,6 +153,24 @@
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
     layers:
     - state: m5_84mm_he
+  - type: IgnorePredictionHide
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+    thresholds:
+    - range: 7
+      falloff: 10
+  - type: DeleteOnTrigger
+
+- type: entity
+  parent: RMCBaseProjectileRocket84mm
+  id: RMCProjectileRocket84mm
+  name: 84mm high-explosive rocket
+  categories: [ HideSpawnMenu ]
+  description: Uh oh.
+  components:
+  - type: TriggerOnCollide
+    # TODO RMC14 Make TriggerOnCollide spawn the explosion on the OtherEntity tile more consistently, so the explosion is centered properly
+    fixtureID: projectile # no parent entity from BaseBulletTrigger because it has Clickable
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: RMC
@@ -168,12 +184,6 @@
     radius: 3.5
     color: orange
     energy: 0.5
-  - type: IgnorePredictionHide
-  - type: RMCProjectileAccuracy
-    accuracy: 95
-    thresholds:
-    - range: 7
-      falloff: 10
 
 # 84mm AP
 
@@ -233,4 +243,86 @@
     - range: 6
       falloff: 10
 
-# TODO RMC14 84mm WP
+- type: entity
+  parent: RMCRocket84mm
+  id: RMCRocket84mmWhitePhosphorus
+  name: 84mm white phosphorus rocket
+  description: A rocket tube loaded with a white phosphorus incendiary warhead. Has two damaging factors. On hit disperses X-Variant Napthal (blue flames) in a 4-meter radius circle, ignoring cover, while simultaneously bursting into highly heated shrapnel that ignites targets within slightly bigger area.
+  components:
+  - type: CartridgeAmmo
+    proto: RMCProjectileRocket84mmWhitePhosphorus
+    deleteOnSpawn: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/m5spec.rsi
+    layers:
+    - state: m5_84mm_wp
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: SpentAmmoVisuals
+    state: m5_84mm_wp
+    suffix: false
+  - type: IgnorePredictionHide
+
+- type: entity
+  parent: RMCBaseProjectileRocket84mm
+  id: RMCProjectileRocket84mmWhitePhosphorus
+  name: 84mm white phosphorus rocket
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnCollide
+    fixtureID: projectile
+  - type: Projectile
+    deleteOnCollide: false
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Heat: 90
+    maxFixedRange: 7
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
+    layers:
+    - state: m5_84mm_wp
+  - type: TileFireOnTrigger
+    spawn: RMCTileFireBlue
+    range: 3
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower3.ogg
+  - type: DeleteOnTrigger
+  - type: SpawnOnTerminate
+    spawn: RMCSmokeWhitePhosphorus
+  - type: RMCAreaDamage
+    damageArea: 3.5
+    falloffDistance: 3.5
+
+- type: entity
+  parent: Smoke
+  id: RMCSmokeWhitePhosphorusNoSpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: DeleteOnExplosion
+  - type: RMCIgniteOnCollide
+    maxStacks: 40
+    intensity: 40
+    burnColor: "#00b8ff"
+  - type: EdgeSpreader
+    id: Smoke
+
+- type: entity
+  parent: RMCSmokeWhitePhosphorusNoSpread
+  id: RMCSmokeWhitePhosphorus
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokeWhitePhosphorusNoSpread
+    initialSpread: 3
+    range: 3
