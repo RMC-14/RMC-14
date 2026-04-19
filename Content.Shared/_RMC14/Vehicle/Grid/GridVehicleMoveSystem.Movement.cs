@@ -379,7 +379,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (CanMoveContinuous(uid, mover, grid, directTarget, rotation, debugProbes: CollisionDebugEnabled, blockers: _directMoveBlockers, ignoredEntities: ignoredEntities))
         {
             AddDebugMovementDecision(uid, grid, mover.Position, directTarget, forward, DebugMovementDecisionKind.DirectClear, true);
-            return TryMoveContinuous(uid, mover, grid, directTarget, rotation, out blocked, ignoredEntities: ignoredEntities);
+            return TryMoveKnownClear(uid, mover, grid, directTarget, rotation, out blocked, ignoredEntities: ignoredEntities);
         }
 
         AddDebugMovementDecision(uid, grid, mover.Position, directTarget, forward, DebugMovementDecisionKind.DirectBlocked, false);
@@ -394,6 +394,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 directTarget,
                 frameTime,
                 _directMoveBlockers,
+                ignoredEntities,
                 out var mobBypassCorrection))
         {
             moved = TryApplyLateralCorrection(uid, mover, grid, moveDir, rotation, mobBypassCorrection, ignoredEntities);
@@ -410,6 +411,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 rotation,
                 directTarget,
                 frameTime,
+                ignoredEntities,
                 out var correction))
         {
             moved = TryApplyLateralCorrection(uid, mover, grid, moveDir, rotation, correction, ignoredEntities);
@@ -530,6 +532,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Vector2 target,
         float frameTime,
         HashSet<EntityUid> directBlockers,
+        HashSet<EntityUid>? ignoredEntities,
         out float correction)
     {
         correction = 0f;
@@ -537,7 +540,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!HasBlockingVehicleMob(mover, directBlockers))
             return false;
 
-        if (!TryFindBlockingMobBypassOffset(uid, mover, grid, gridComp, moveDir, rotation, target, out var laneOffset))
+        if (!TryFindBlockingMobBypassOffset(uid, mover, grid, gridComp, moveDir, rotation, target, ignoredEntities, out var laneOffset))
             return false;
 
         return TryGetLateralCorrection(mover, grid, gridComp, moveDir, target, laneOffset, frameTime, out correction);
@@ -551,6 +554,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Vector2i moveDir,
         Angle? rotation,
         Vector2 target,
+        HashSet<EntityUid>? ignoredEntities,
         out float laneOffset)
     {
         laneOffset = 0f;
@@ -575,10 +579,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         {
             var distance = MathF.Min(i * step, limit);
 
-            if (TryBlockingMobBypassOffset(uid, mover, grid, gridComp, moveDir, rotation, target, baseOffset + distance, limit, centerLateral, lookahead, ref lastPositiveOffset, out laneOffset))
+            if (TryBlockingMobBypassOffset(uid, mover, grid, gridComp, moveDir, rotation, target, baseOffset + distance, limit, centerLateral, lookahead, ignoredEntities, ref lastPositiveOffset, out laneOffset))
                 return true;
 
-            if (TryBlockingMobBypassOffset(uid, mover, grid, gridComp, moveDir, rotation, target, baseOffset - distance, limit, centerLateral, lookahead, ref lastNegativeOffset, out laneOffset))
+            if (TryBlockingMobBypassOffset(uid, mover, grid, gridComp, moveDir, rotation, target, baseOffset - distance, limit, centerLateral, lookahead, ignoredEntities, ref lastNegativeOffset, out laneOffset))
                 return true;
         }
 
@@ -597,6 +601,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         float limit,
         float centerLateral,
         int lookahead,
+        HashSet<EntityUid>? ignoredEntities,
         ref float lastOffset,
         out float laneOffset)
     {
@@ -611,10 +616,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if ((lateralTarget - mover.Position).LengthSquared() <= MinMoveDistance * MinMoveDistance)
             return false;
 
-        if (!CanMoveContinuous(uid, mover, grid, lateralTarget, rotation, debugProbes: false, blockers: null, ignoredEntities: GetPushIgnoredEntities(uid, mover)))
+        if (!CanMoveContinuous(uid, mover, grid, lateralTarget, rotation, debugProbes: false, blockers: null, ignoredEntities: ignoredEntities))
             return false;
 
-        return CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, laneOffset, lookahead);
+        return CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, laneOffset, lookahead, ignoredEntities);
     }
 
     private bool TryGetLaneCorrection(
@@ -626,11 +631,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Angle? rotation,
         Vector2 target,
         float frameTime,
+        HashSet<EntityUid>? ignoredEntities,
         out float correction)
     {
         correction = 0f;
 
-        if (!TryFindBestLaneOffset(uid, mover, grid, gridComp, moveDir, rotation, target, out var laneOffset))
+        if (!TryFindBestLaneOffset(uid, mover, grid, gridComp, moveDir, rotation, target, ignoredEntities, out var laneOffset))
             return false;
 
         return TryGetLateralCorrection(mover, grid, gridComp, moveDir, target, laneOffset, frameTime, out correction);
@@ -670,6 +676,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Vector2i moveDir,
         Angle? rotation,
         Vector2 target,
+        HashSet<EntityUid>? ignoredEntities,
         out float laneOffset)
     {
         laneOffset = 0f;
@@ -696,7 +703,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         for (var i = -sampleSteps; i <= sampleSteps; i++)
         {
             var offset = Math.Clamp(i * step, -limit, limit);
-            var valid = CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, offset, lookahead);
+            var valid = CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, offset, lookahead, ignoredEntities);
             if (valid)
             {
                 if (!inLane)
@@ -739,7 +746,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Angle? rotation,
         Vector2 target,
         float offset,
-        int lookahead)
+        int lookahead,
+        HashSet<EntityUid>? ignoredEntities)
     {
         var forward = new Vector2(moveDir.X, moveDir.Y);
         var tileSize = MathF.Max(1f, gridComp.TileSize);
@@ -752,7 +760,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             var lateral = GetLateralCoordinate(center, moveDir) + offset;
             sample = SetLateralCoordinate(sample, moveDir, lateral);
 
-            if (!CanOccupyTransform(uid, mover, grid, sample, rotation, Clearance, applyEffects: false, debug: false, ignoredEntities: GetPushIgnoredEntities(uid, mover)))
+            if (!CanOccupyTransform(uid, mover, grid, sample, rotation, Clearance, applyEffects: false, debug: false, ignoredEntities: ignoredEntities))
                 return false;
         }
 
@@ -784,7 +792,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         for (var i = 1; i <= steps; i++)
         {
             var candidate = start + delta * (i / (float) steps);
-
             if (!CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: false, debug: debugProbes, ignoredEntities: ignoredEntities))
             {
                 if (applyBlockEffects)
@@ -795,17 +802,41 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 return lastGood != start;
             }
 
-            if (!CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: true, debug: false, ignoredEntities: ignoredEntities))
-            {
-                mover.Position = lastGood;
-                blocked = true;
-                return lastGood != start;
-            }
-
             lastGood = candidate;
         }
 
+        if (applyBlockEffects &&
+            !CanOccupyTransform(uid, mover, grid, lastGood, rotation, Clearance, applyEffects: true, debug: false, ignoredEntities: ignoredEntities))
+        {
+            mover.Position = start;
+            blocked = true;
+            return false;
+        }
+
         mover.Position = lastGood;
+        return true;
+    }
+
+    private bool TryMoveKnownClear(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        Vector2 target,
+        Angle? rotation,
+        out bool blocked,
+        bool applyBlockEffects = true,
+        HashSet<EntityUid>? ignoredEntities = null)
+    {
+        blocked = false;
+
+        if (applyBlockEffects &&
+            !CanOccupyTransform(uid, mover, grid, target, rotation, Clearance, applyEffects: true, debug: false, ignoredEntities: ignoredEntities))
+        {
+            blocked = true;
+            return false;
+        }
+
+        mover.Position = target;
         return true;
     }
 

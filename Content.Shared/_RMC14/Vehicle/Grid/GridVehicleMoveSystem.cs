@@ -285,10 +285,15 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        DebugTestedTiles.Clear();
-        DebugCollisionProbes.Clear();
-        DebugCollisions.Clear();
-        DebugMovementDecisions.Clear();
+        if (CollisionDebugEnabled)
+        {
+            DebugTestedTiles.Clear();
+            DebugCollisionProbes.Clear();
+            DebugCollisions.Clear();
+        }
+
+        if (MovementDebugEnabled)
+            DebugMovementDecisions.Clear();
 
         var q = EntityQueryEnumerator<GridVehicleMoverComponent, VehicleComponent, TransformComponent>();
 

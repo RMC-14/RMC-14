@@ -263,13 +263,36 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         candidate = default;
 
+        var otherXform = Transform(other);
+        if (!otherXform.Anchored && HasComp<ItemComponent>(other))
+            return false;
+
         if (!physicsQ.TryComp(other, out var otherBody) || !otherBody.CanCollide)
             return false;
+
+        var hasDoor = TryComp(other, out DoorComponent? door);
+        var isBarricade = HasComp<BarricadeComponent>(other);
+        var isFoldable = HasComp<FoldableComponent>(other);
+        var isMob = TryComp(other, out MobStateComponent? mob);
+        var isXeno = HasComp<XenoComponent>(other);
+        var isVehicle = HasComp<VehicleComponent>(other);
+        var isSmashable = HasComp<RMCVehicleSmashableComponent>(other);
+
+        if (!isMob &&
+            !isXeno &&
+            !otherXform.Anchored &&
+            otherBody.BodyType != BodyType.Static &&
+            !isBarricade &&
+            !isFoldable &&
+            !isVehicle &&
+            !isSmashable)
+        {
+            return false;
+        }
 
         if (!fixtureQ.TryComp(other, out var otherFixtures))
             return false;
 
-        var otherXform = Transform(other);
         var otherTx = physics.GetPhysicsTransform(other, otherXform);
 
         if (!TryGetFixtureAabb(otherFixtures, otherTx, out var otherAabb))
@@ -279,12 +302,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return false;
 
         var hardCollidable = physics.IsHardCollidable((vehicle, vehicleFixtures, vehicleBody), (other, otherFixtures, otherBody));
-        var hasDoor = TryComp(other, out DoorComponent? door);
-        var isBarricade = HasComp<BarricadeComponent>(other);
-        var isFoldable = HasComp<FoldableComponent>(other);
-        var isMob = TryComp(other, out MobStateComponent? mob);
-        var isXeno = HasComp<XenoComponent>(other);
-        var isVehicle = HasComp<VehicleComponent>(other);
         var collisionClass = ClassifyCollisionCandidate(
             other,
             otherXform,
@@ -295,7 +312,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             isBarricade,
             isFoldable,
             hasDoor,
-            isXeno);
+            isXeno,
+            isVehicle,
+            isSmashable);
 
         var doorPowerKnown = TryGetDoorPowered(other, out var doorPowered);
         var isUnpoweredDoor = hasDoor && doorPowerKnown && !doorPowered;
@@ -1308,11 +1327,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         bool isBarricade,
         bool isFoldable,
         bool hasDoor,
-        bool isXeno)
+        bool isXeno,
+        bool isVehicle,
+        bool isSmashable)
     {
-        var isVehicle = HasComp<VehicleComponent>(other);
-        var isSmashable = HasComp<RMCVehicleSmashableComponent>(other);
-
         if (!otherXform.Anchored && HasComp<ItemComponent>(other))
             return VehicleCollisionClass.Ignore;
 
