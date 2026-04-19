@@ -647,13 +647,12 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         var spawnOnTerminateComp = EnsureComp<SpawnOnTerminateComponent>(ball);
         _projectile.SetSpawn((ball, spawnOnTerminateComp), reagent.FireEntity);
 
-        var maxRangeComp = EnsureComp<ProjectileMaxRangeComponent>(ball);
         var maxRange = nozzle.Comp.MaxRange;
         if (fromCoordinates.TryDistance(EntityManager, toCoordinates, out var distance) && distance < maxRange)
         {
             maxRange = distance;
         }
-        _projectile.SetMaxRange((ball, maxRangeComp), maxRange - 1);
+        _projectile.SetMaxRange(ball, maxRange - 1);
 
         _gun.Shoot(nozzle, gun, ball, fromCoordinates, toCoordinates, out _, user, false);
     }
