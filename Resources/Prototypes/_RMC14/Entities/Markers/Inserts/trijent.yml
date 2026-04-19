@@ -15,7 +15,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentArmory
   name: Pristine/battle Armory
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -32,7 +31,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentCaveInEngineering
   name: Cave in Engineering
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -44,7 +42,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSouthbridge
   name: Civ/Corp Hold Southbridge
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -61,7 +58,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentGreenBridge
   name: Green River New Bridge
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -72,7 +68,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentPurpleBridge
   name: Purple River New Bridge
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -83,7 +78,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentTempleIntact
   name: Temple Intact
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -94,7 +88,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentShipGone
   name: Ship Gone
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -105,7 +98,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentLoaderdude
   name: Loader dude
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -117,7 +109,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentAdminFight
   name: Admin Fight
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -129,7 +120,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentCMBEngi
   name: CMB dead engi
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -141,7 +131,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentHoldGenwest
   name: Hold Genwest
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -153,7 +142,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentHydroBreakroomHold
   name: Hydro Breakroom Hold
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -165,7 +153,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentMetalGeneast
   name: Metal Geneast
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -177,7 +164,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentEngiCentralRepaired
   name: Engineer Central Repaired
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -189,7 +175,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSensorhold
   name: Sensor Hold
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -202,7 +187,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentCLFPods
   name: CLF Pods
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -216,7 +200,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentCrashlandingSPPBar
   name: Crashlanding SPP Bar
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -230,7 +213,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentCrashlandingSPPAlt
   name: Crashlanding SPP Alt
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -244,7 +226,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentMiniEvacWestResearch
   name: Mini-evac West Research
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -258,7 +239,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentWorkshop
   name: Gear/Guns workshop
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -274,7 +254,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSurvSpawnHospital
   name: Hospital Surv Spawn
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -287,7 +266,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSurvSpawnDam
   name: Dam Surv Spawn
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -300,7 +278,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSurvSpawnBar
   name: Bar Surv Spawn
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
@@ -313,7 +290,6 @@
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSurvSpawnTunnelDorm
   name: Tunnel Dorm Surv Spawn
-  suffix: Insert Trijent
   components:
   - type: MapInsert
     variations:
