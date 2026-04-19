@@ -664,7 +664,7 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCD50WinterWyvernBeltFilledAmmo
+  id: RMCPeregrineHandcannonBeltFilledAmmo
   suffix: Filled, Winter Wyvern Ammo
   components:
   - type: StorageFill
@@ -676,7 +676,7 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCD50WinterWyvernBeltFilled
+  id: RMCPeregrineHandcannonBeltFilled
   suffix: Filled, Winter Wyvern
   components:
   - type: StorageFill
@@ -689,7 +689,7 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: GoldHandcannonBeltFilled
+  id: RMCGoldHandcannonBeltFilled
   suffix: Filled, Gold Handcannon
   components:
   - type: StorageFill

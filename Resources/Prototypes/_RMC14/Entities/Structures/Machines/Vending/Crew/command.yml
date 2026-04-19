@@ -571,7 +571,7 @@
     - name: Commander's Secondary Belt
       choices: { CMSecondary: 1 }
       entries:
-      - id: RMCD50WinterWyvernBeltFilledAmmo
+      - id: RMCPeregrineHandcannonBeltFilledAmmo
       - id: RMCMatebaBeltFilledAmmo
     - name: Ceremonial Weapon
       choices: { CMCeremonial: 1 }
