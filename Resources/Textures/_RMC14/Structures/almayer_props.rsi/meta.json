@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4aff6b0a6fbc1b5f31ba7575a70dc39838e1970f/icons/obj/structures/props/almayer_props.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4aff6b0a6fbc1b5f31ba7575a70dc39838e1970f/icons/obj/structures/props/almayer_props.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/props.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -147,6 +147,22 @@
     },
     {
       "name": "floor_sentry_deployed"
+    },    {
+      "name": "joey",
+      "directions": 1,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
     }
   ]
 }

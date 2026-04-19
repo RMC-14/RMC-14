@@ -764,6 +764,7 @@
       - RMCNailgunTactical
       - RMCSynthResetKey
       - RodMetal1
+      - LightReplacer
       components:
       - Welder
       - PowerCell
