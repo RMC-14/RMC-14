@@ -133,7 +133,7 @@
   parent: RMCWeaponPistolHandcannonGold
   id: RMCWeaponPistolHandcannonCustom
   name: custom Peregrine Handcannon
-  description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Tt's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
+  description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. It's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_custom.rsi
