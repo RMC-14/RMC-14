@@ -392,7 +392,7 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolHandcannonFilled
-  suffix: Filled, Handcannon
+  suffix: Filled, Peregrine
   components:
   - type: StorageFill
     contents:
@@ -665,7 +665,7 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCPeregrineHandcannonBeltFilledAmmo
-  suffix: Filled, Winter Wyvern Ammo
+  suffix: Filled, Peregrine Ammo
   components:
   - type: StorageFill
     contents:
@@ -677,7 +677,7 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCPeregrineHandcannonBeltFilled
-  suffix: Filled, Winter Wyvern
+  suffix: Filled, Custom Peregrine
   components:
   - type: StorageFill
     contents:
@@ -690,7 +690,7 @@
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCGoldHandcannonBeltFilled
-  suffix: Filled, Gold Handcannon
+  suffix: Filled, Gold Peregrine
   components:
   - type: StorageFill
     contents:
@@ -699,6 +699,19 @@
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
     - id: RMCWeaponPistolHandcannonGold
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCGoldHandcannonBeltFilled
+  suffix: Filled, Polished Peregrine
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+    - id: RMCWeaponPistolHandcannonPolished
 
 - type: entity
   parent: CMBeltMarine
