@@ -2,7 +2,6 @@
   parent: [ BaseMachinePowered, RMCConstructibleMachine ]
   id: RMCPropExosuitFab
   name: exosuit fabricator
-  description: ""
   suffix: Prop, RMC
   components:
   - type: Damageable
