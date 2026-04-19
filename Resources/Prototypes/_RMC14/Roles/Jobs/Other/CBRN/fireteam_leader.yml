@@ -81,7 +81,6 @@
 - type: startingGear
   id: RMCGearCBRNFireteamLeader
   equipment:
-    head: RMCArmorHelmetCBRN
     ears: CMHeadsetCBRNLeader
     eyes: RMCGlassesMedicalHUDGlasses
     jumpsuit: RMCCBRNSuitFTL

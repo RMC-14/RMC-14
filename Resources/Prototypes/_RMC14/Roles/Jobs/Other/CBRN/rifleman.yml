@@ -67,7 +67,6 @@
 - type: startingGear
   id: RMCGearCBRNRifleman
   equipment:
-    head: RMCArmorHelmetCBRN
     ears: CMHeadsetCBRN
     jumpsuit: RMCCBRNSuit
     outerClothing: RMCArmorCBRN
