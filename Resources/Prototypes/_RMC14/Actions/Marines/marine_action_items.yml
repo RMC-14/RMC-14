@@ -240,7 +240,9 @@
   name: Toggle CBRN Mask
   description: Raise or lower the integrated MOPP mask to toggle full fire protection.
   components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/marine_firewalk_actions.rsi
+      state: firewalk
   - type: InstantAction
-    icon: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi/icon.png
-    iconOn: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi/equipped-HELMET.png
     event: !type:ToggleClothingEvent { }
