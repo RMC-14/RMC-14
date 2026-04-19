@@ -10,6 +10,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Spreader;
@@ -24,6 +25,7 @@ public sealed class SpreaderSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly IGameTiming _timing = default!; // RMC14
 
     /// <summary>
     /// Cached maximum number of updates per spreader prototype. This is applied per-grid.
@@ -50,6 +52,7 @@ public sealed class SpreaderSystem : EntitySystem
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
 
         SubscribeLocalEvent<EdgeSpreaderComponent, EntityTerminatingEvent>(OnTerminating);
+        SubscribeLocalEvent<ActiveEdgeSpreaderComponent, ComponentStartup>(OnActiveEdgeSpreaderStartup); // RMC14
         SetupPrototypes();
 
         _query = GetEntityQuery<EdgeSpreaderComponent>();
@@ -85,6 +88,19 @@ public sealed class SpreaderSystem : EntitySystem
         ActivateSpreadableNeighbors(entity);
     }
 
+    // RMC14
+    private void OnActiveEdgeSpreaderStartup(Entity<ActiveEdgeSpreaderComponent> entity, ref ComponentStartup args)
+    {
+        if (TryComp<EdgeSpreaderComponent>(entity, out var edgeSpreader))
+        {
+            entity.Comp.NextSpread = _timing.CurTime + edgeSpreader.SpreadDelay;
+        }
+        else
+        {
+            entity.Comp.NextSpread = _timing.CurTime + TimeSpan.FromSeconds(1);
+        }
+    }
+
     /// <inheritdoc/>
     public override void Update(float frameTime)
     {
@@ -94,12 +110,14 @@ public sealed class SpreaderSystem : EntitySystem
         _gridUpdates.Clear();
         while (spreadGrids.MoveNext(out var uid, out var grid))
         {
-            grid.UpdateAccumulator -= frameTime;
-            if (grid.UpdateAccumulator > 0)
-                continue;
+            // RMC14 removed
+            //grid.UpdateAccumulator -= frameTime;
+            //if (grid.UpdateAccumulator > 0)
+            //    continue;
 
             _gridUpdates[uid] = _prototypeUpdates.ShallowClone();
-            grid.UpdateAccumulator += SpreadCooldownSeconds;
+            // RMC14 removed
+            //grid.UpdateAccumulator += SpreadCooldownSeconds;
         }
 
         if (_gridUpdates.Count == 0)
@@ -114,6 +132,11 @@ public sealed class SpreaderSystem : EntitySystem
         // Build a list of all existing Edgespreaders, shuffle them
         while (query.MoveNext(out var uid, out var comp))
         {
+            // RMC14
+            if (comp.NextSpread > _timing.CurTime)
+            {
+                continue;
+            }
             spreaders.Add((uid, comp));
         }
 
@@ -144,6 +167,8 @@ public sealed class SpreaderSystem : EntitySystem
 
             if (!groupUpdates.TryGetValue(spreader.Id, out var updates) || updates < 1)
                 continue;
+
+            comp.NextSpread += spreader.SpreadDelay; // RMC14
 
             // Edge detection logic is to be handled
             // by the subscribing system, see KudzuSystem

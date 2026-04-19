@@ -11,4 +11,11 @@ public sealed partial class EdgeSpreaderComponent : Component
 {
     [DataField(required:true)]
     public ProtoId<EdgeSpreaderPrototype> Id;
+
+    /// RMC14
+    /// <summary>
+    /// Time between spreads.
+    /// </summary>
+    [DataField]
+    public TimeSpan SpreadDelay = TimeSpan.FromSeconds(1);
 }
