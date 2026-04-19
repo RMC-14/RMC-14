@@ -5,7 +5,7 @@
   name: secure locker
   description: It's an immobile card-locked storage unit.
   components:
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/standard.rsi
     layers:

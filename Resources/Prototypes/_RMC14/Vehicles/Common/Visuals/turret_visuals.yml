@@ -1,5 +1,5 @@
 - type: entity
-  id: RMCVehicleTurretVisual
+  id: VehicleTurretVisual
   name: vehicle turret visual
   components:
   - type: Sprite

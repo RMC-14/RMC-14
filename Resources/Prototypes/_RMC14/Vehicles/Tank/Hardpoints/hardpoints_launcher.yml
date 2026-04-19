@@ -1,18 +1,18 @@
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankFlamer
+  parent: VehicleTankHardpointBase
+  id: VehicleTankFlamer
   name: tank flamer
   description: A tank-mounted flamethrower hardpoint.
   components:
   - type: Sprite
     state: flamer
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Launcher
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 300
   - type: VehicleTurretAttachment
   - type: VehicleTurret
@@ -66,24 +66,24 @@
     muzzleOffset: "0,-1"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: flamer_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankGrenadeLauncher
+  parent: VehicleTankHardpointBase
+  id: VehicleTankGrenadeLauncher
   name: tank grenade launcher
   description: A tank-mounted grenade launcher hardpoint.
   components:
   - type: Sprite
     state: glauncher
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Launcher
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
   - type: VehicleTurret
@@ -121,13 +121,13 @@
     cycleable: false
     proto: CMGrenadeHighExplosive
     capacity: 10
-  - type: RMCVehicleHardpointAmmo
+  - type: VehicleHardpointAmmo
     magazineSize: 10
     maxStoredMagazines: 3
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxSmokeLauncher
+    bulletType: VehicleAmmoBoxSmokeLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -135,24 +135,24 @@
     muzzleOffset: "0,-1"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: glauncher_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankTowLauncher
+  parent: VehicleTankHardpointBase
+  id: VehicleTankTowLauncher
   name: tank TOW launcher
   description: A tank-mounted TOW launcher hardpoint.
   components:
   - type: Sprite
     state: tow_launcher
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Launcher
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
   - type: VehicleTurret
@@ -184,15 +184,15 @@
     accuracyMultiplierUnwielded: 5
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: RMCVehicleRocket84mmAntiArmor
+    proto: VehicleRocket84mmAntiArmor
     capacity: 5
-  - type: RMCVehicleHardpointAmmo
+  - type: VehicleHardpointAmmo
     magazineSize: 5
     maxStoredMagazines: 1
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxRocketLauncher
+    bulletType: VehicleAmmoBoxRocketLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -200,24 +200,24 @@
     muzzleOffset: "0,-1"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: towlauncher_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankM56Cupola
+  parent: VehicleTankHardpointBase
+  id: VehicleTankM56Cupola
   name: M56 cupola
   description: A cupola-mounted weapon hardpoint.
   components:
   - type: Sprite
     state: m56_cupola
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Launcher
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurretAttachment
   - type: VehicleTurret
@@ -252,15 +252,15 @@
     accuracyMultiplierUnwielded: 5
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: RMCVehicleCartridgeSentry10x50mm
+    proto: VehicleCartridgeSentry10x50mm
     capacity: 500
-  - type: RMCVehicleHardpointAmmo
+  - type: VehicleHardpointAmmo
     magazineSize: 500
     maxStoredMagazines: 1
   - type: GunFireArc
     arc: 180
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxCupola
+    bulletType: VehicleAmmoBoxCupola
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -268,24 +268,24 @@
     muzzleOffset: "0,-1"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: m56cupola_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankRERE700
+  parent: VehicleTankHardpointBase
+  id: VehicleTankRERE700
   name: RE-RE700 cupola
   description: A dual-barrel cupola-mounted weapon hardpoint with integrated IFF.
   components:
   - type: Sprite
     state: m56_cupola
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Launcher
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurretAttachment
   - type: VehicleTurret
@@ -318,15 +318,15 @@
     accuracyMultiplierUnwielded: 5
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: RMCVehicleCartridgeSentry10x50mm
+    proto: VehicleCartridgeSentry10x50mm
     capacity: 500
-  - type: RMCVehicleHardpointAmmo
+  - type: VehicleHardpointAmmo
     magazineSize: 500
     maxStoredMagazines: 2
   - type: GunFireArc
     arc: 180
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxCupola
+    bulletType: VehicleAmmoBoxCupola
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -334,6 +334,6 @@
     muzzleOffset: "0,-1"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: m56cupola_0
 

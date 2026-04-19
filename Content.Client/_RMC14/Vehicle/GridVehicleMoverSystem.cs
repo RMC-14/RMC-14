@@ -28,16 +28,16 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     public override void Initialize()
     {
         _overlay = new GridVehicleMoverOverlay(EntityManager);
-        _overlay.DebugEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleDebugOverlay);
-        _overlay.CollisionsEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleCollisionOverlay);
-        _overlay.MovementEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleMovementOverlay);
+        _overlay.DebugEnabled = _cfg.GetCVar(RMCCVars.VehicleDebugOverlay);
+        _overlay.CollisionsEnabled = _cfg.GetCVar(RMCCVars.VehicleCollisionOverlay);
+        _overlay.MovementEnabled = _cfg.GetCVar(RMCCVars.VehicleMovementOverlay);
         RefreshSharedDebugFlags();
         _hardpointOverlay = new VehicleHardpointDebugOverlay(EntityManager)
         {
-            Enabled = _cfg.GetCVar(RMCCVars.RMCVehicleHardpointOverlay)
+            Enabled = _cfg.GetCVar(RMCCVars.VehicleHardpointOverlay)
         };
 
-        _cfg.OnValueChanged(RMCCVars.RMCVehicleDebugOverlay, val =>
+        _cfg.OnValueChanged(RMCCVars.VehicleDebugOverlay, val =>
         {
             if (_overlay != null)
                 _overlay.DebugEnabled = val;
@@ -46,13 +46,13 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             RefreshVehicleDebugOverlay();
         }, true);
 
-        _cfg.OnValueChanged(RMCCVars.RMCVehicleHardpointOverlay, val =>
+        _cfg.OnValueChanged(RMCCVars.VehicleHardpointOverlay, val =>
         {
             if (_hardpointOverlay != null)
                 _hardpointOverlay.Enabled = val;
         }, true);
 
-        _cfg.OnValueChanged(RMCCVars.RMCVehicleCollisionOverlay, val =>
+        _cfg.OnValueChanged(RMCCVars.VehicleCollisionOverlay, val =>
         {
             if (_overlay != null)
                 _overlay.CollisionsEnabled = val;
@@ -61,7 +61,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             RefreshVehicleDebugOverlay();
         }, true);
 
-        _cfg.OnValueChanged(RMCCVars.RMCVehicleMovementOverlay, val =>
+        _cfg.OnValueChanged(RMCCVars.VehicleMovementOverlay, val =>
         {
             if (_overlay != null)
                 _overlay.MovementEnabled = val;

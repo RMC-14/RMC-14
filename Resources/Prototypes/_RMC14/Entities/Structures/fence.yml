@@ -12,7 +12,7 @@
     state: fence0
   - type: InteractionOutline
   - type: Clickable
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
     deleteOnHit: false
     damageOnHit: 50
   - type: IconSmooth

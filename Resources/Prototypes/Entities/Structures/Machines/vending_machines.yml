@@ -2222,7 +2222,7 @@
 
 - type: entity
   parent: CMBaseStructureCorrodible
-  id: RMCVehicleHardpointVendor
+  id: VehicleHardpointVendor
   name: vehicle hardpoint printer
   description: A machine for printing vehicle hardpoints.
   components:
@@ -2266,7 +2266,7 @@
       sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
       state: vehicle_gear_vend
     sections: []
-  - type: RMCVehicleHardpointVendor
+  - type: VehicleHardpointVendor
   - type: InteractionOutline
   - type: RequireProjectileTarget
 

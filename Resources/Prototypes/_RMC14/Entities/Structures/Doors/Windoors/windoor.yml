@@ -53,7 +53,7 @@
   - type: ExaminableDamage
     messages: WindowMessages
   - type: Destructible
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
     damageOnHit: 1000
     requiresDoorUnpowered: true
   - type: ContainerFill

@@ -143,14 +143,14 @@ entities:
       pos: 2.8887053,-1.2543429
       parent: 2
     - type: PointLight
-- proto: RMCVehicleHumveeBloodVendorVend
+- proto: VehicleHumveeBloodVendorVend
   entities:
   - uid: 4
     components:
     - type: Transform
       pos: 0.8222177,0.035398006
       parent: 2
-- proto: RMCVehicleHumveeCarrierBackDoor1
+- proto: VehicleHumveeCarrierBackDoor1
   entities:
   - uid: 6
     components:
@@ -160,7 +160,7 @@ entities:
     - type: VehicleExit
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeCarrierBackDoor2
+- proto: VehicleHumveeCarrierBackDoor2
   entities:
   - uid: 7
     components:
@@ -171,14 +171,14 @@ entities:
       entryIndex: 1
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeChassisMedical
+- proto: VehicleHumveeChassisMedical
   entities:
   - uid: 3
     components:
     - type: Transform
       pos: 2.762155,-0.7758115
       parent: 2
-- proto: RMCVehicleHumveeExitDoor
+- proto: VehicleHumveeExitDoor
   entities:
   - uid: 19
     components:
@@ -191,7 +191,7 @@ entities:
       entryIndex: 2
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeExitDoorDirectional
+- proto: VehicleHumveeExitDoorDirectional
   entities:
   - uid: 5
     components:
@@ -202,14 +202,14 @@ entities:
       entryIndex: 3
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeLockerMedical
+- proto: VehicleHumveeLockerMedical
   entities:
   - uid: 13
     components:
     - type: Transform
       pos: 1.488935,0.037036955
       parent: 2
-- proto: RMCVehicleHumveeViewportDoor
+- proto: VehicleHumveeViewportDoor
   entities:
   - uid: 20
     components:
@@ -225,7 +225,7 @@ entities:
       parent: 2
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeViewportFrontNorth
+- proto: VehicleHumveeViewportFrontNorth
   entities:
   - uid: 8
     components:
@@ -241,7 +241,7 @@ entities:
       parent: 2
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleInteriorExtinguisher
+- proto: VehicleInteriorExtinguisher
   entities:
   - uid: 18
     components:
@@ -252,7 +252,7 @@ entities:
       canCollide: False
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleInteriorMedVendorVend
+- proto: VehicleInteriorMedVendorVend
   entities:
   - uid: 14
     components:

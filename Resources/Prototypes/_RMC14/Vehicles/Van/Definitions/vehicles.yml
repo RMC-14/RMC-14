@@ -1,5 +1,5 @@
 - type: entity
-  id: RMCVehicleVanBase
+  id: VehicleVanBase
   abstract: true
   name: van
   description: A rugged transport van.
@@ -14,12 +14,12 @@
     pushCooldown: 2
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
-  - type: RMCVehicleOvercharge
+  - type: VehicleOvercharge
     speedMultiplier: 1.6
     duration: 3
     cooldown: 15
     overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
-  - type: RMCVehicleSound
+  - type: VehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
     runningSoundCooldown: 2
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
@@ -27,7 +27,7 @@
     collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
     collisionSoundCooldown: 0.5
     mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
-  - type: RMCVehicleSpotlight
+  - type: VehicleSpotlight
     radius: 6
     energy: 2.5
     softness: 2
@@ -92,14 +92,14 @@
   - type: DoAfter
   - type: UserInterface
     interfaces:
-      enum.RMCHardpointUiKey.Key:
-        type: RMCHardpointBoundUserInterface
-      enum.RMCVehicleWeaponsUiKey.Key:
-        type: RMCVehicleWeaponsBoundUserInterface
-  - type: RMCVehicleWeapons
+      enum.HardpointUiKey.Key:
+        type: HardpointBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+  - type: VehicleWeapons
   - type: InputMover
   - type: ItemSlots
-  - type: RMCHardpointSlots
+  - type: HardpointSlots
     vehicleFamily: Van
     slots:
     - id: wheel-1
@@ -108,10 +108,10 @@
       insertDelay: 1.5
       whitelist:
         components:
-        - RMCVehicleWheelItem
-  - type: RMCVehicleWheelSlots
+        - VehicleWheelItem
+  - type: VehicleWheelSlots
     slotCount: 1
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
@@ -134,18 +134,18 @@
       interiorCoords: 0.25,-1
 
 - type: entity
-  parent: RMCVehicleVanBase
-  id: RMCVehicleVan
+  parent: VehicleVanBase
+  id: VehicleVan
 
 - type: entity
-  parent: RMCVehicleVanBase
-  id: RMCVehicleCLFVan
+  parent: VehicleVanBase
+  id: VehicleCLFVan
   name: CLF van
   description: A rugged transport van painted in CLF colors.
   components:
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: RMCVehicleFrameCLFVan
+    damageModifierSet: VehicleFrameCLFVan
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/CLF_van.rsi
     layers:
@@ -156,7 +156,7 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
-  - type: RMCVehicleSound
+  - type: VehicleSound
     collisionSoundCooldown: 0.4
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml #TODO ACTUAL CLF INTERIOR
@@ -176,7 +176,7 @@
       interiorCoords: 0.25,-1
 
 - type: entity
-  id: RMCVehicleBoxVanBase
+  id: VehicleBoxVanBase
   abstract: true
   name: box van
   description: A rugged transport van fitted with a box body.
@@ -191,19 +191,19 @@
     pushCooldown: 2
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
-  - type: RMCVehicleOvercharge
+  - type: VehicleOvercharge
     speedMultiplier: 1.6
     duration: 3
     cooldown: 15
     overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
-  - type: RMCVehicleSound
+  - type: VehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
     runningSoundCooldown: 2
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
     collisionSoundCooldown: 0.4
     mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
-  - type: RMCVehicleSpotlight
+  - type: VehicleSpotlight
     radius: 6
     energy: 2.5
     softness: 2
@@ -269,14 +269,14 @@
   - type: DoAfter
   - type: UserInterface
     interfaces:
-      enum.RMCHardpointUiKey.Key:
-        type: RMCHardpointBoundUserInterface
-      enum.RMCVehicleWeaponsUiKey.Key:
-        type: RMCVehicleWeaponsBoundUserInterface
-  - type: RMCVehicleWeapons
+      enum.HardpointUiKey.Key:
+        type: HardpointBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+  - type: VehicleWeapons
   - type: InputMover
   - type: ItemSlots
-  - type: RMCHardpointSlots
+  - type: HardpointSlots
     vehicleFamily: Van
     slots:
     - id: wheel-1
@@ -285,10 +285,10 @@
       insertDelay: 1.5
       whitelist:
         components:
-        - RMCVehicleWheelItem
-  - type: RMCVehicleWheelSlots
+        - VehicleWheelItem
+  - type: VehicleWheelSlots
     slotCount: 1
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
@@ -311,12 +311,12 @@
       interiorCoords: -1.74,1.22
 
 - type: entity
-  parent: RMCVehicleBoxVanBase
-  id: RMCVehicleBoxVan
+  parent: VehicleBoxVanBase
+  id: VehicleBoxVan
 
 - type: entity
-  parent: RMCVehicleBoxVanBase
-  id: RMCVehiclePizzaVan
+  parent: VehicleBoxVanBase
+  id: VehiclePizzaVan
   name: pizza van
   description: A van repurposed for pizza delivery, still sturdy enough for transport.
   components:
@@ -349,8 +349,8 @@
       interiorCoords: -0.75,1.2
 
 - type: entity
-  parent: RMCVehicleVanBase
-  id: RMCVehicleSPPVan
+  parent: VehicleVanBase
+  id: VehicleSPPVan
   name: SPP van
   description: A rugged transport van painted in SPP colors.
   components:
@@ -381,7 +381,7 @@
     - offset: -1.2,-0.3
       radius: 0.7
       interiorCoords: 2.5,-0.2
-  - type: RMCHardpointSlots
+  - type: HardpointSlots
     vehicleFamily: Van
     slots:
     - id: wheel-1
@@ -391,8 +391,8 @@
       insertDelay: 1.5
 
 - type: entity
-  parent: RMCVehicleSPPVan
-  id: RMCVehicleSPPVanArmed
+  parent: VehicleSPPVan
+  id: VehicleSPPVanArmed
   name: SPP van (armed)
   description: An SPP van fitted with a roof-mounted weapon.
   components:
@@ -408,15 +408,15 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
-  - type: RMCVehicleHardpointVisuals
+  - type: VehicleHardpointVisuals
   - type: ItemSlots
     slots:
       secondary:
-        startingItem: RMCVehicleSPPVanTurret
+        startingItem: VehicleSPPVanTurret
         whitelist:
           components:
-          - RMCHardpointItem
-  - type: RMCHardpointSlots
+          - HardpointItem
+  - type: HardpointSlots
     vehicleFamily: Van
     slots:
     - id: secondary
@@ -449,8 +449,8 @@
       interiorCoords: 2.5,-0.2
 
 - type: entity
-  parent: RMCVehicleSPPVan
-  id: RMCVehicleSPPVanMedical
+  parent: VehicleSPPVan
+  id: VehicleSPPVanMedical
   name: SPP van (medical)
   description: An SPP van marked for casualty evacuation and field treatment.
   components:
@@ -481,8 +481,8 @@
       interiorCoords: 2.5,-0.2
 
 - type: entity
-  parent: RMCVehicleSPPVan
-  id: RMCVehicleSPPVanPrisoner
+  parent: VehicleSPPVan
+  id: VehicleSPPVanPrisoner
   name: SPP van (prisoner)
   description: An SPP van refitted for prisoner transport.
   components:
@@ -513,8 +513,8 @@
       interiorCoords: 2.5,-0.2
 
 - type: entity
-  parent: RMCVehicleBoxVanBase
-  id: RMCVehicleSPPVanLogistics
+  parent: VehicleBoxVanBase
+  id: VehicleSPPVanLogistics
   name: SPP van (logistics)
   description: An SPP logistics van fitted with an enlarged cargo body.
   components:
@@ -544,7 +544,7 @@
     - offset: -1.2,-0.3
       radius: 0.7
       interiorCoords: 2.5,-0.2
-  - type: RMCHardpointSlots
+  - type: HardpointSlots
     vehicleFamily: Van
     slots:
     - id: wheel-1

@@ -1,6 +1,6 @@
 - type: entity
   parent: ColMarTechBase
-  id: RMCVehicleAPCSupplyVendor
+  id: VehicleAPCSupplyVendor
   name: ColMarTech automated supply vendor
   description: An automated supply rack for APC crews.
   components:

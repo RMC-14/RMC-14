@@ -46,7 +46,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly RMCVehicleWheelSystem _wheels = default!;
+    [Dependency] private readonly VehicleWheelSystem _wheels = default!;
     [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
 

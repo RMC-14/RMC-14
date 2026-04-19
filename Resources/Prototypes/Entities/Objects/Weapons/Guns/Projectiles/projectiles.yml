@@ -774,7 +774,7 @@
     delay: 0
   - type: DeleteOnTrigger
   - type: SpawnOnTerminate
-    spawn: RMCVehicleLTBCannonImpact
+    spawn: VehicleLTBCannonImpact
   - type: ProjectileGrenade
     evenSpread: true
     minVelocity: 0.5

@@ -225,35 +225,35 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCVehiclePizzaVanBackground1
+- proto: VehiclePizzaVanBackground1
   entities:
   - uid: 16
     components:
     - type: Transform
       pos: -1.5,0.5
       parent: 2
-- proto: RMCVehiclePizzaVanBackground3
+- proto: VehiclePizzaVanBackground3
   entities:
   - uid: 17
     components:
     - type: Transform
       pos: -0.5,0.5
       parent: 2
-- proto: RMCVehiclePizzaVanExterior1
+- proto: VehiclePizzaVanExterior1
   entities:
   - uid: 18
     components:
     - type: Transform
       pos: -1.5,2.5
       parent: 2
-- proto: RMCVehiclePizzaVanExterior3
+- proto: VehiclePizzaVanExterior3
   entities:
   - uid: 19
     components:
     - type: Transform
       pos: -0.5,2.5
       parent: 2
-- proto: RMCVehiclePizzaVanExteriorDoor
+- proto: VehiclePizzaVanExteriorDoor
   entities:
   - uid: 20
     components:
@@ -264,28 +264,28 @@ entities:
       entryIndex: 0
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehiclePizzaVanFront1
+- proto: VehiclePizzaVanFront1
   entities:
   - uid: 21
     components:
     - type: Transform
       pos: 1.5,0.5
       parent: 2
-- proto: RMCVehiclePizzaVanFront3
+- proto: VehiclePizzaVanFront3
   entities:
   - uid: 25
     components:
     - type: Transform
       pos: 1.5,2.5
       parent: 2
-- proto: RMCVehiclePizzaVanFrontLeft2
+- proto: VehiclePizzaVanFrontLeft2
   entities:
   - uid: 26
     components:
     - type: Transform
       pos: 1.5,1.5
       parent: 2
-- proto: RMCVehiclePizzaVanFrontRoof1
+- proto: VehiclePizzaVanFrontRoof1
   entities:
   - uid: 27
     components:
@@ -297,7 +297,7 @@ entities:
     - type: PointLight
       energy: 2
       radius: 20
-- proto: RMCVehiclePizzaVanFrontRoof2
+- proto: VehiclePizzaVanFrontRoof2
   entities:
   - uid: 28
     components:
@@ -306,7 +306,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehiclePizzaVanInteriorDoor
+- proto: VehiclePizzaVanInteriorDoor
   entities:
   - uid: 29
     components:
@@ -317,7 +317,7 @@ entities:
       entryIndex: 0
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehiclePizzaVanLeft1
+- proto: VehiclePizzaVanLeft1
   entities:
   - uid: 30
     components:
@@ -326,7 +326,7 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 2
-- proto: RMCVehiclePizzaVanLeft2
+- proto: VehiclePizzaVanLeft2
   entities:
   - uid: 31
     components:
@@ -355,14 +355,14 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 1
-- proto: RMCVehiclePizzaVanRight3
+- proto: VehiclePizzaVanRight3
   entities:
   - uid: 35
     components:
     - type: Transform
       pos: -2.5,2.5
       parent: 2
-- proto: RMCVehiclePizzaVanRoof2
+- proto: VehiclePizzaVanRoof2
   entities:
   - uid: 36
     components:
@@ -371,7 +371,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehiclePizzaVanRoof3
+- proto: VehiclePizzaVanRoof3
   entities:
   - uid: 37
     components:
@@ -380,7 +380,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehiclePizzaVanRoof4
+- proto: VehiclePizzaVanRoof4
   entities:
   - uid: 38
     components:
@@ -389,7 +389,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehiclePizzaVanRoof5
+- proto: VehiclePizzaVanRoof5
   entities:
   - uid: 39
     components:
@@ -398,14 +398,14 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehiclePizzaVanWindshieldBottom
+- proto: VehiclePizzaVanWindshieldBottom
   entities:
   - uid: 40
     components:
     - type: Transform
       pos: 0.5,1.5
       parent: 2
-- proto: RMCVehicleViewportSimple
+- proto: VehicleViewportSimple
   entities:
   - uid: 41
     components:

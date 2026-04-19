@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: RMCVehicleBoxVanRoofBase
+  id: VehicleBoxVanRoofBase
   name: box van interior roof
   description: A removable roof section for the box van interior.
   placement:
@@ -27,8 +27,8 @@
     - "roof"
 
 - type: entity
-  parent: RMCVehicleBoxVanRoofBase
-  id: RMCVehicleBoxVanRoof1
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanRoof1
   components:
   - type: Sprite
     layers:
@@ -36,8 +36,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehicleBoxVanRoofBase
-  id: RMCVehicleBoxVanRoof2
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanRoof2
   components:
   - type: Sprite
     layers:
@@ -45,8 +45,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehicleBoxVanRoofBase
-  id: RMCVehicleBoxVanRoof3
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanRoof3
   components:
   - type: Sprite
     layers:
@@ -54,8 +54,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehicleBoxVanRoofBase
-  id: RMCVehicleBoxVanRoof4
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanRoof4
   components:
   - type: Sprite
     layers:
@@ -63,8 +63,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehicleBoxVanRoofBase
-  id: RMCVehicleBoxVanRoof5
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanRoof5
   components:
   - type: Sprite
     layers:
@@ -72,8 +72,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehicleBoxVanRoofBase
-  id: RMCVehicleBoxVanFrontRoof1
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanFrontRoof1
   components:
   - type: Sprite
     layers:
@@ -87,8 +87,8 @@
     - "roof"
 
 - type: entity
-  parent: RMCVehicleBoxVanRoofBase
-  id: RMCVehicleBoxVanFrontRoof2
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanFrontRoof2
   components:
   - type: Sprite
     layers:
@@ -103,7 +103,7 @@
 
 - type: entity
   abstract: true
-  id: RMCVehicleBoxVanInteriorBase
+  id: VehicleBoxVanInteriorBase
   name: box van interior piece
   description: A decorative interior piece for the box van.
   placement:
@@ -118,8 +118,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleBoxVanInteriorBase
-  id: RMCVehicleBoxVanWallBase
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanWallBase
   components:
   - type: Physics
     bodyType: Static
@@ -143,29 +143,29 @@
         - InteractImpassable
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanFront1
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFront1
   components:
   - type: Sprite
     state: front_1
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanFront2
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFront2
   components:
   - type: Sprite
     state: front_2
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanFront3
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFront3
   components:
   - type: Sprite
     state: front_3
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanBack1
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanBack1
   components:
   - type: Sprite
     state: back_1
@@ -173,8 +173,8 @@
   - type: InteractionOutline
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanBack2
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanBack2
   components:
   - type: Sprite
     state: back_2
@@ -182,15 +182,15 @@
   - type: InteractionOutline
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanBack3
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanBack3
   components:
   - type: Sprite
     state: back_3
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanLeft1
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanLeft1
   components:
   - type: Sprite
     state: back_1
@@ -198,8 +198,8 @@
   - type: InteractionOutline
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanLeft2
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanLeft2
   components:
   - type: Sprite
     state: back_2
@@ -207,57 +207,57 @@
   - type: InteractionOutline
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanLeft3
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanLeft3
   components:
   - type: Sprite
     state: back_3
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanRight1
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanRight1
   components:
   - type: Sprite
     state: back_1
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanRight2
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanRight2
   components:
   - type: Sprite
     state: back_2
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanRight3
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanRight3
   components:
   - type: Sprite
     state: back_3
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanFrontLeft1
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFrontLeft1
   components:
   - type: Sprite
     state: front_1
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanFrontLeft2
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFrontLeft2
   components:
   - type: Sprite
     state: front_2
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanFrontRight1
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFrontRight1
   components:
   - type: Sprite
     state: back_1
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanFrontRight2
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFrontRight2
   components:
   - type: Sprite
     state: back_2
@@ -265,8 +265,8 @@
   - type: InteractionOutline
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanExterior1
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanExterior1
   components:
   - type: Sprite
     state: exterior_2
@@ -277,8 +277,8 @@
     fadeOnSharedGrid: true
 
 - type: entity
-  parent: RMCVehicleBoxVanInteriorBase
-  id: RMCVehicleBoxVanExterior2
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExterior2
   components:
   - type: Sprite
     state: exterior_2
@@ -289,8 +289,8 @@
     fadeOnSharedGrid: true
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanExterior3
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanExterior3
   components:
   - type: Sprite
     state: exterior_3
@@ -301,8 +301,8 @@
     fadeOnSharedGrid: true
 
 - type: entity
-  parent: RMCVehicleBoxVanInteriorBase
-  id: RMCVehicleBoxVanExterior1Old
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExterior1Old
   components:
   - type: Sprite
     state: exterior_2
@@ -313,8 +313,8 @@
     fadeOnSharedGrid: true
 
 - type: entity
-  parent: RMCVehicleBoxVanInteriorBase
-  id: RMCVehicleBoxVanExterior2Old
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExterior2Old
   components:
   - type: Sprite
     state: exterior_2
@@ -325,8 +325,8 @@
     fadeOnSharedGrid: true
 
 - type: entity
-  parent: RMCVehicleBoxVanInteriorBase
-  id: RMCVehicleBoxVanExterior3Old
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExterior3Old
   components:
   - type: Sprite
     state: exterior_3
@@ -337,8 +337,8 @@
     fadeOnSharedGrid: true
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanBackground1
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanBackground1
   components:
   - type: Sprite
     drawdepth: Walls
@@ -350,24 +350,24 @@
   - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleBoxVanRoofBase
-  id: RMCVehicleBoxVanBackground2
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanBackground2
   components:
   - type: Sprite
     state: background_2
   - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleBoxVanRoofBase
-  id: RMCVehicleBoxVanBackground3
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanBackground3
   components:
   - type: Sprite
     state: background_3
   - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
-  id: RMCVehicleBoxVanInteriorDoor
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanInteriorDoor
   components:
   - type: Sprite
     state: interior_door
@@ -378,8 +378,8 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleBoxVanInteriorBase
-  id: RMCVehicleBoxVanExteriorDoor
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExteriorDoor
   components:
   - type: Sprite
     state: exterior_door
@@ -395,8 +395,8 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleBoxVanInteriorBase
-  id: RMCVehicleBoxVanExteriorDoorUnique
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExteriorDoorUnique
   components:
   - type: Sprite
     state: exterior_door_unique
@@ -412,8 +412,8 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleBoxVanInteriorBase
-  id: RMCVehicleBoxVanWindshieldTop
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanWindshieldTop
   components:
   - type: Sprite
     state: windshield_viewport_top
@@ -423,8 +423,8 @@
     reactToMouse: false
 
 - type: entity
-  parent: RMCVehicleBoxVanInteriorBase
-  id: RMCVehicleBoxVanWindshieldBottom
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanWindshieldBottom
   components:
   - type: Sprite
     state: windshield_viewport_bottom

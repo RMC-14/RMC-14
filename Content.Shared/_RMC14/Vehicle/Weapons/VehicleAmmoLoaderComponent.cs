@@ -1,0 +1,21 @@
+using System;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared._RMC14.Vehicle;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class VehicleAmmoLoaderComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public string HardpointType = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? BulletType;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LoadDelay = TimeSpan.FromSeconds(1.5);
+
+    [DataField, AutoNetworkedField]
+    public float InteractionRange = 2.5f;
+}

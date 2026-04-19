@@ -1,5 +1,5 @@
 - type: entity
-  id: RMCVehicleAPCBase
+  id: VehicleAPCBase
   abstract: true
   name: armored personnel carrier
   description: A rugged armored personnel carrier outfitted for battlefield support.
@@ -13,19 +13,19 @@
     deceleration: 10
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
-  - type: RMCVehicleOvercharge
+  - type: VehicleOvercharge
     speedMultiplier: 1.4
     duration: 3
     cooldown: 15
     overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
-  - type: RMCVehicleSound
+  - type: VehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
     runningSoundCooldown: 2
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
     collisionSoundCooldown: 0.5
     mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
-  - type: RMCVehicleSpotlight
+  - type: VehicleSpotlight
     radius: 7
     energy: 3
     softness: 2
@@ -58,7 +58,7 @@
         - LargeMobLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: RMCVehicleFrameAPC
+    damageModifierSet: VehicleFrameAPC
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -99,17 +99,17 @@
   - type: DoAfter
   - type: UserInterface
     interfaces:
-      enum.RMCHardpointUiKey.Key:
-        type: RMCHardpointBoundUserInterface
-      enum.RMCVehicleWeaponsUiKey.Key:
-        type: RMCVehicleWeaponsBoundUserInterface
-  - type: RMCVehicleWeapons
-  - type: RMCVehicleHardpointVisuals
+      enum.HardpointUiKey.Key:
+        type: HardpointBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+  - type: VehicleWeapons
+  - type: VehicleHardpointVisuals
   - type: InputMover
   - type: ItemSlots
     slots:
       port-gun-north:
-        startingItem: RMCVehicleAPCM56FPWPortGunRight
+        startingItem: VehicleAPCM56FPWPortGunRight
         insertOnInteract: false
         ejectOnInteract: false
         ejectOnUse: false
@@ -119,7 +119,7 @@
           components:
           - VehiclePortGun
       port-gun-south:
-        startingItem: RMCVehicleAPCM56FPWPortGunLeft
+        startingItem: VehicleAPCM56FPWPortGunLeft
         insertOnInteract: false
         ejectOnInteract: false
         ejectOnUse: false
@@ -128,7 +128,7 @@
         whitelist:
           components:
           - VehiclePortGun
-  - type: RMCHardpointSlots
+  - type: HardpointSlots
     vehicleFamily: APC
     slots:
     - id: primary
@@ -153,9 +153,9 @@
       hardpointType: Wheel
       slotType: Wheel
       insertDelay: 1.5
-  - type: RMCVehicleWheelSlots
+  - type: VehicleWheelSlots
     slotCount: 1
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 1000
     repairFuelCost: 15
     bypassEntryOnZero: true
@@ -175,12 +175,12 @@
       interiorCoords: 1.55,-1.2
 
 - type: entity
-  parent: RMCVehicleAPCBase
-  id: RMCVehicleAPC
+  parent: VehicleAPCBase
+  id: VehicleAPC
 
 - type: entity
-  parent: RMCVehicleAPCBase
-  id: RMCVehicleAPCMed
+  parent: VehicleAPCBase
+  id: VehicleAPCMed
   name: armored personnel carrier (medical)
   description: A medical-configured APC outfitted with triage markings.
   components:
@@ -220,8 +220,8 @@
       interiorCoords: 0.25,-1
 
 - type: entity
-  parent: RMCVehicleAPCBase
-  id: RMCVehicleAPCCommand
+  parent: VehicleAPCBase
+  id: VehicleAPCCommand
   name: armored personnel carrier (command)
   description: A command-configured APC bristling with sensors and comms gear.
   components:
@@ -261,8 +261,8 @@
       interiorCoords: 0.25,-1
 
 - type: entity
-  parent: RMCVehicleAPCBase
-  id: RMCVehicleSPPAPC
+  parent: VehicleAPCBase
+  id: VehicleSPPAPC
   name: SPP armored personnel carrier
   description: An armored personnel carrier configured for SPP forces.
   components:
@@ -300,16 +300,16 @@
       port-gun-south:
         startingItem: null
       primary:
-        startingItem: RMCVehicleSPPAPCTurret
+        startingItem: VehicleSPPAPCTurret
         whitelist:
           components:
-          - RMCHardpointItem
+          - HardpointItem
       wheel-1:
-        startingItem: RMCVehicleSPPAPCWheel
+        startingItem: VehicleSPPAPCWheel
         whitelist:
           components:
-          - RMCVehicleWheelItem
-  - type: RMCHardpointSlots
+          - VehicleWheelItem
+  - type: HardpointSlots
     vehicleFamily: APC
     slots:
     - id: primary

@@ -130,7 +130,7 @@
   name: Hot Drinks machine
   description: A vending machine which dispenses hot drinks.
   components:
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/coffee.rsi
   - type: VendingMachine
@@ -181,7 +181,7 @@
   name: Hot Foods Machine
   description: A vending machine full of ready to cook meals, mhmmmm taste the nutritional goodness!
   components:
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/snack.rsi
   - type: VendingMachine
@@ -232,7 +232,7 @@
   name: Bobda Softdrinks
   description: A softdrink vendor provided by Bobda Soda Company, Havana.
   components:
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/cola.rsi
   - type: VendingMachine
@@ -675,7 +675,7 @@
   name: Dinnerware
   description: A kitchen and restaurant equipment vendor.
   components:
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/dinnerware.rsi
     snapCardinals: true

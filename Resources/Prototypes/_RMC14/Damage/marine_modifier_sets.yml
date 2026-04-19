@@ -1,4 +1,4 @@
-﻿# RMC-14 Barricade Modifers
+# RMC-14 Barricade Modifers
 
 # Base Barricade
 - type: damageModifierSet
@@ -70,7 +70,7 @@
 
 # Vehicle armor modifier sets
 - type: damageModifierSet
-  id: RMCVehicleArmorBallistic
+  id: VehicleArmorBallistic
   coefficients:
     Blunt: 0.9
     Slash: 0.603
@@ -79,7 +79,7 @@
     Caustic: 0.9
 
 - type: damageModifierSet
-  id: RMCVehicleArmorCaustic
+  id: VehicleArmorCaustic
   coefficients:
     Blunt: 0.9
     Slash: 0.9
@@ -88,7 +88,7 @@
     Caustic: 0.603
 
 - type: damageModifierSet
-  id: RMCVehicleArmorConcussive
+  id: VehicleArmorConcussive
   coefficients:
     Blunt: 0.603
     Slash: 0.9
@@ -97,7 +97,7 @@
     Caustic: 0.9
 
 - type: damageModifierSet
-  id: RMCVehicleArmorPaladin
+  id: VehicleArmorPaladin
   coefficients:
     Blunt: 0.9
     Slash: 0.9
@@ -106,7 +106,7 @@
     Caustic: 0.9
 
 - type: damageModifierSet
-  id: RMCVehicleFrameTank
+  id: VehicleFrameTank
   coefficients:
     Blunt: 0.8
     Slash: 0.7
@@ -115,7 +115,7 @@
     Caustic: 1.5
 
 - type: damageModifierSet
-  id: RMCVehicleFrameAPC
+  id: VehicleFrameAPC
   coefficients:
     Blunt: 0.7
     Slash: 0.8
@@ -124,7 +124,7 @@
     Caustic: 1
 
 - type: damageModifierSet
-  id: RMCVehicleFrameARC
+  id: VehicleFrameARC
   coefficients:
     Blunt: 0.8
     Slash: 1
@@ -133,7 +133,7 @@
     Caustic: 1
 
 - type: damageModifierSet
-  id: RMCVehicleFrameCLFVan
+  id: VehicleFrameCLFVan
   coefficients:
     Blunt: 0.8
     Slash: 0.9

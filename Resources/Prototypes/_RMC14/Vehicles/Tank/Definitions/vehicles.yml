@@ -1,5 +1,5 @@
 - type: entity
-  id: RMCVehicleTankBase
+  id: VehicleTankBase
   abstract: true
   name: tank
   description: A heavy armored tank built for battlefield dominance.
@@ -21,19 +21,19 @@
     blockingMobBypassNudgeLimit: 2
     xenoBlockMinimumSize: Immobile
     canXenosPush: false
-  - type: RMCVehicleOvercharge
+  - type: VehicleOvercharge
     speedMultiplier: 1.3
     duration: 3
     cooldown: 20
     overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
-  - type: RMCVehicleSound
+  - type: VehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
     runningSoundCooldown: 2
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
     collisionSoundCooldown: 0.5
     mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
-  - type: RMCVehicleSpotlight
+  - type: VehicleSpotlight
     radius: 8
     energy: 3
     softness: 2
@@ -66,7 +66,7 @@
         - LargeMobLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: RMCVehicleFrameTank
+    damageModifierSet: VehicleFrameTank
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -106,26 +106,26 @@
   - type: DoAfter
   - type: UserInterface
     interfaces:
-      enum.RMCHardpointUiKey.Key:
-        type: RMCHardpointBoundUserInterface
-      enum.RMCVehicleWeaponsUiKey.Key:
-        type: RMCVehicleWeaponsBoundUserInterface
-  - type: RMCVehicleWeapons
-  - type: RMCVehicleHardpointVisuals
+      enum.HardpointUiKey.Key:
+        type: HardpointBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+  - type: VehicleWeapons
+  - type: VehicleHardpointVisuals
   - type: InputMover
   - type: ItemSlots
     slots:
       primary:
-        startingItem: RMCVehicleTankTurret
+        startingItem: VehicleTankTurret
         whitelist:
           components:
-          - RMCHardpointItem
+          - HardpointItem
       wheel-1:
-        startingItem: RMCVehicleTankTreads
+        startingItem: VehicleTankTreads
         whitelist:
           components:
-          - RMCVehicleWheelItem
-  - type: RMCHardpointSlots
+          - VehicleWheelItem
+  - type: HardpointSlots
     vehicleFamily: Tank
     slots:
     - id: armor
@@ -155,9 +155,9 @@
       hardpointType: Wheel
       slotType: Treads
       insertDelay: 2.0
-  - type: RMCVehicleWheelSlots
+  - type: VehicleWheelSlots
     slotCount: 1
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 1000
     repairFuelCost: 20
     bypassEntryOnZero: true
@@ -174,12 +174,12 @@
       interiorCoords: 0.5,-1
 
 - type: entity
-  parent: RMCVehicleTankBase
-  id: RMCVehicleTank
+  parent: VehicleTankBase
+  id: VehicleTank
 
 - type: entity
-  parent: RMCVehicleTankBase
-  id: RMCVehicleSPPTank
+  parent: VehicleTankBase
+  id: VehicleSPPTank
   name: SPP tank
   description: A heavy SPP battle tank.
   components:
@@ -214,16 +214,16 @@
   - type: ItemSlots
     slots:
       primary:
-        startingItem: RMCVehicleSPPTankTurret
+        startingItem: VehicleSPPTankTurret
         whitelist:
           components:
-          - RMCHardpointItem
+          - HardpointItem
       wheel-1:
-        startingItem: RMCVehicleTankTreads
+        startingItem: VehicleTankTreads
         whitelist:
           components:
-          - RMCVehicleWheelItem
-  - type: RMCHardpointSlots
+          - VehicleWheelItem
+  - type: HardpointSlots
     vehicleFamily: Tank
     slots:
     - id: armor
@@ -259,8 +259,8 @@
       insertDelay: 2.0
 
 - type: entity
-  parent: RMCVehicleSPPTank
-  id: RMCVehicleSPPTankCommand
+  parent: VehicleSPPTank
+  id: VehicleSPPTankCommand
   name: SPP command tank
   description: A heavy SPP command tank.
   components:

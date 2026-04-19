@@ -96,7 +96,7 @@
   parent: RMCShutterBase
   id: RMCShutterAlmayer
   components:
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
     smashSound:
       path: /Audio/_RMC14/Effects/metal_crash.ogg
   - type: RMCPodDoor

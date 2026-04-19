@@ -202,7 +202,7 @@
   parent: BaseStructureDynamic
   id: RMCCrateOpenableBase
   components:
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
   - type: CrateOpenable
     spawn:
     - id: RMCPlankWood2

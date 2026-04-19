@@ -52,7 +52,7 @@
     snap:
     - Wall
   components:
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
   - type: MeleeSound
     soundGroups:
       Brute:

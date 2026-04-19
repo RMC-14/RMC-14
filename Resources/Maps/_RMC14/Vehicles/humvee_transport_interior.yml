@@ -154,7 +154,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.53517,-1.2188032
       parent: 2
-- proto: RMCVehicleHumveeCarrierBackDoor1
+- proto: VehicleHumveeCarrierBackDoor1
   entities:
   - uid: 6
     components:
@@ -165,7 +165,7 @@ entities:
       entryIndex: 0
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeCarrierBackDoor2
+- proto: VehicleHumveeCarrierBackDoor2
   entities:
   - uid: 7
     components:
@@ -176,14 +176,14 @@ entities:
       entryIndex: 1
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeChassisTransport
+- proto: VehicleHumveeChassisTransport
   entities:
   - uid: 3
     components:
     - type: Transform
       pos: 3.3730245,-0.71111596
       parent: 2
-- proto: RMCVehicleHumveeExitDoor
+- proto: VehicleHumveeExitDoor
   entities:
   - uid: 5
     components:
@@ -196,7 +196,7 @@ entities:
       entryIndex: 2
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeExitDoorDirectional
+- proto: VehicleHumveeExitDoorDirectional
   entities:
   - uid: 4
     components:
@@ -207,7 +207,7 @@ entities:
       entryIndex: 3
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeViewportDoor
+- proto: VehicleHumveeViewportDoor
   entities:
   - uid: 8
     components:
@@ -223,7 +223,7 @@ entities:
       parent: 2
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeViewportFrontNorth
+- proto: VehicleHumveeViewportFrontNorth
   entities:
   - uid: 17
     components:
@@ -240,7 +240,7 @@ entities:
       parent: 2
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeViewportSmall
+- proto: VehicleHumveeViewportSmall
   entities:
   - uid: 16
     components:

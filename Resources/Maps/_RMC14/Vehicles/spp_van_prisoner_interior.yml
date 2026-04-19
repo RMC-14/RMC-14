@@ -226,7 +226,7 @@ entities:
     - type: PointLight
       energy: 2
       radius: 10
-- proto: RMCVehicleExitArea
+- proto: VehicleExitArea
   entities:
   - uid: 40
     components:
@@ -238,7 +238,7 @@ entities:
     - type: Transform
       pos: -0.5,0.5
       parent: 3
-- proto: RMCVehicleInteriorExtinguisher
+- proto: VehicleInteriorExtinguisher
   entities:
   - uid: 58
     components:
@@ -249,21 +249,21 @@ entities:
       canCollide: False
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleInteriorNanomed
+- proto: VehicleInteriorNanomed
   entities:
   - uid: 43
     components:
     - type: Transform
       pos: 3.6398478,1.2195121
       parent: 3
-- proto: RMCVehicleSPPVanChassis
+- proto: VehicleSPPVanChassis
   entities:
   - uid: 4
     components:
     - type: Transform
       pos: 2.2479858,0.25340533
       parent: 3
-- proto: RMCVehicleSPPVanExteriorDoorUnique
+- proto: VehicleSPPVanExteriorDoorUnique
   entities:
   - uid: 2
     components:
@@ -274,7 +274,7 @@ entities:
       entryIndex: 1
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleSPPVanInteriorDoor
+- proto: VehicleSPPVanInteriorDoor
   entities:
   - uid: 5
     components:
@@ -287,7 +287,7 @@ entities:
       fixtures: {}
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleSPPVanViewportSimple
+- proto: VehicleSPPVanViewportSimple
   entities:
   - uid: 7
     components:
@@ -303,7 +303,7 @@ entities:
       parent: 3
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleSPPVanViewportSimpleFront
+- proto: VehicleSPPVanViewportSimpleFront
   entities:
   - uid: 6
     components:

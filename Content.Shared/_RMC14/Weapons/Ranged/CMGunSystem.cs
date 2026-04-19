@@ -74,7 +74,7 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
     [Dependency] private readonly RMCProjectileSystem _rmcProjectileSystem = default!;
-    [Dependency] private readonly RMCVehicleWeaponsSystem _vehicleWeapons = default!;
+    [Dependency] private readonly VehicleWeaponsSystem _vehicleWeapons = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;

@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: RMCVehicleTankInteriorBase
+  id: VehicleTankInteriorBase
   name: tank interior piece
   description: A decorative interior piece for the tank.
   placement:
@@ -15,7 +15,7 @@
 
 - type: entity
   abstract: true
-  id: RMCVehicleTankRoofBase
+  id: VehicleTankRoofBase
   name: tank interior roof
   description: A removable roof section for the tank interior.
   placement:
@@ -33,8 +33,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankWallBase
+  parent: VehicleTankInteriorBase
+  id: VehicleTankWallBase
   placement:
     mode: SnapgridCenter
   components:
@@ -61,8 +61,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankDoorBase
+  parent: VehicleTankWallBase
+  id: VehicleTankDoorBase
   components:
   - type: Clickable
   - type: InteractionOutline
@@ -73,7 +73,7 @@
 - type: entity
   abstract: true
   parent: CMClosetBase
-  id: RMCVehicleTankLockerBase
+  id: VehicleTankLockerBase
   name: tank interior locker
   description: A storage locker for tank interiors.
   placement:
@@ -100,135 +100,135 @@
     stateDoorOpen:
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankWall
+  parent: VehicleTankWallBase
+  id: VehicleTankWall
   components:
   - type: Sprite
     drawdepth: Walls
     state: wall
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankWallAlt
+  parent: VehicleTankWallBase
+  id: VehicleTankWallAlt
   components:
   - type: Sprite
     state: wall_1
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankFront1
+  parent: VehicleTankWallBase
+  id: VehicleTankFront1
   components:
   - type: Sprite
     state: front_1
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankFront2
+  parent: VehicleTankWallBase
+  id: VehicleTankFront2
   components:
   - type: Sprite
     state: front_2
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankFront3
+  parent: VehicleTankWallBase
+  id: VehicleTankFront3
   components:
   - type: Sprite
     state: front_3
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankBack1
+  parent: VehicleTankWallBase
+  id: VehicleTankBack1
   components:
   - type: Sprite
     state: back_1
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankBack2
+  parent: VehicleTankWallBase
+  id: VehicleTankBack2
   components:
   - type: Sprite
     state: back_2
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankBack3
+  parent: VehicleTankWallBase
+  id: VehicleTankBack3
   components:
   - type: Sprite
     state: back_3
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankTankFront1
+  parent: VehicleTankWallBase
+  id: VehicleTankTankFront1
   components:
   - type: Sprite
     state: trank_front_1
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankTankFront2
+  parent: VehicleTankWallBase
+  id: VehicleTankTankFront2
   components:
   - type: Sprite
     state: tank_front_2
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankTankFront3
+  parent: VehicleTankWallBase
+  id: VehicleTankTankFront3
   components:
   - type: Sprite
     state: tank_front_3
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankTankBack1
+  parent: VehicleTankWallBase
+  id: VehicleTankTankBack1
   components:
   - type: Sprite
     state: tank_back_1
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankTankBack2
+  parent: VehicleTankWallBase
+  id: VehicleTankTankBack2
   components:
   - type: Sprite
     state: tank_back_2
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankTankBack3
+  parent: VehicleTankWallBase
+  id: VehicleTankTankBack3
   components:
   - type: Sprite
     state: tank_back_3
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankTankLeft1
+  parent: VehicleTankWallBase
+  id: VehicleTankTankLeft1
   components:
   - type: Sprite
     state: tank_left_1
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankTankLeft2
+  parent: VehicleTankWallBase
+  id: VehicleTankTankLeft2
   components:
   - type: Sprite
     state: tank_left_2
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankTankLeft3
+  parent: VehicleTankWallBase
+  id: VehicleTankTankLeft3
   components:
   - type: Sprite
     state: tank_left_3
 
 - type: entity
-  parent: RMCVehicleTankWallBase
-  id: RMCVehicleTankTankRight1
+  parent: VehicleTankWallBase
+  id: VehicleTankTankRight1
   components:
   - type: Sprite
     state: tank_right_1
 
 - type: entity
-  parent: RMCVehicleTankRoofBase
-  id: RMCVehicleTankTankRight2
+  parent: VehicleTankRoofBase
+  id: VehicleTankTankRight2
   components:
   - type: Sprite
     layers:
@@ -243,8 +243,8 @@
     - "roof"
 
 - type: entity
-  parent: RMCVehicleTankRoofBase
-  id: RMCVehicleTankTankRight3
+  parent: VehicleTankRoofBase
+  id: VehicleTankTankRight3
   components:
   - type: Sprite
     layers:
@@ -252,15 +252,15 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehicleTankDoorBase
-  id: RMCVehicleTankHatch
+  parent: VehicleTankDoorBase
+  id: VehicleTankHatch
   components:
   - type: Sprite
     state: hatch
 
 - type: entity
-  parent: RMCVehicleTankHatch
-  id: RMCVehicleTankExitHatch
+  parent: VehicleTankHatch
+  id: VehicleTankExitHatch
   components:
   - type: RemoveComponents
     components:
@@ -274,8 +274,8 @@
   - type: VehicleExit
 
 - type: entity
-  parent: RMCVehicleTankRoofBase
-  id: RMCVehicleTankExterior1
+  parent: VehicleTankRoofBase
+  id: VehicleTankExterior1
   components:
   - type: Sprite
     layers:
@@ -290,8 +290,8 @@
     - "roof"
 
 - type: entity
-  parent: RMCVehicleTankRoofBase
-  id: RMCVehicleTankExterior2
+  parent: VehicleTankRoofBase
+  id: VehicleTankExterior2
   components:
   - type: Sprite
     layers:
@@ -299,8 +299,8 @@
       map: ["roof"]
 
 - type: entity
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankExterior3
+  parent: VehicleTankInteriorBase
+  id: VehicleTankExterior3
   components:
   - type: Sprite
     drawdepth: Objects
@@ -308,8 +308,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankSolidPropBase
+  parent: VehicleTankInteriorBase
+  id: VehicleTankSolidPropBase
   components:
   - type: Physics
     bodyType: Static
@@ -331,85 +331,85 @@
         - InteractImpassable
 
 - type: entity
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankProp0
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp0
   components:
   - type: Sprite
     state: prop0
 
 - type: entity
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankProp1
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp1
   components:
   - type: Sprite
     state: prop1
 
 - type: entity
-  parent: RMCVehicleTankSolidPropBase
-  id: RMCVehicleTankProp2
+  parent: VehicleTankSolidPropBase
+  id: VehicleTankProp2
   components:
   - type: Sprite
     state: prop2
 
 - type: entity
-  parent: RMCVehicleTankSolidPropBase
-  id: RMCVehicleTankProp3
+  parent: VehicleTankSolidPropBase
+  id: VehicleTankProp3
   components:
   - type: Sprite
     drawdepth: Walls
     state: prop3
 
 - type: entity
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankProp4
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp4
   components:
   - type: Sprite
     state: prop4
 
 - type: entity
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankProp5
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp5
   components:
   - type: Sprite
     state: prop5
 
 - type: entity
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankProp6
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp6
   components:
   - type: Sprite
     drawdepth: Walls
     state: prop6
 
 - type: entity
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankProp7
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp7
   components:
   - type: Sprite
     state: prop7
 
 - type: entity
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankProp8Extra
+  parent: VehicleTankInteriorBase
+  id: VehicleTankProp8Extra
   components:
   - type: Sprite
     state: prop8_extra
 
 - type: entity
-  parent: RMCVehicleTankInteriorBase
-  id: RMCVehicleTankNewStuff
+  parent: VehicleTankInteriorBase
+  id: VehicleTankNewStuff
   components:
   - type: Sprite
     state: "new stuff"
 
 - type: entity
-  parent: RMCVehicleTankLockerBase
-  id: RMCVehicleTankLocker
+  parent: VehicleTankLockerBase
+  id: VehicleTankLocker
   name: tank locker
 
 - type: entity
-  parent: RMCVehicleTankLockerBase
-  id: RMCVehicleTankLockerOpen
+  parent: VehicleTankLockerBase
+  id: VehicleTankLockerOpen
   name: tank locker (open)
   components:
   - type: EntityStorageVisuals
@@ -417,8 +417,8 @@
     stateBaseOpen: locker_open
 
 - type: entity
-  parent: RMCVehicleAmmoLoader
-  id: RMCVehicleTankAmmoLoader
+  parent: VehicleAmmoLoader
+  id: VehicleTankAmmoLoader
   name: tank ammo loader
   description: A loader for tank hardpoint ammunition.
   components:

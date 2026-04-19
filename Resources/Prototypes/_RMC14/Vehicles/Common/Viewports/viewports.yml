@@ -1,6 +1,6 @@
 - type: entity
-  parent: RMCVehicleVanInteriorBase
-  id: RMCVehicleViewport
+  parent: VehicleVanInteriorBase
+  id: VehicleViewport
   name: vehicle viewport
   description: A small viewport for peering outside.
   placement:
@@ -14,14 +14,14 @@
     drawdepth: Overdoors
   - type: Clickable
   - type: InteractionOutline
-  - type: RMCVehicleViewport
+  - type: VehicleViewport
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleViewport
-  id: RMCVehicleViewportUnanchored
+  parent: VehicleViewport
+  id: VehicleViewportUnanchored
   name: vehicle viewport (unanchored)
   description: A small viewport for peering outside.
   placement:
@@ -34,8 +34,8 @@
     canCollide: false
 
 - type: entity
-  parent: RMCVehicleViewport
-  id: RMCVehicleViewportSimple
+  parent: VehicleViewport
+  id: VehicleViewportSimple
   name: vehicle viewport (simple)
   description: A small viewport for peering outside.
   components:
@@ -45,8 +45,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleHumveeInteriorBase
-  id: RMCVehicleHumveeViewportBase
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeViewportBase
   placement:
     mode: PlaceFree
   components:
@@ -54,54 +54,54 @@
     arc: 360
   - type: Clickable
   - type: InteractionOutline
-  - type: RMCVehicleViewport
+  - type: VehicleViewport
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportLarge
+  parent: VehicleHumveeViewportBase
+  id: VehicleHumveeViewportLarge
   components:
   - type: Sprite
     state: VIEWPORT
     drawdepth: Overdoors
 
 - type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportSmall
+  parent: VehicleHumveeViewportBase
+  id: VehicleHumveeViewportSmall
   components:
   - type: Sprite
     state: small_viewport
     drawdepth: Overdoors
 
 - type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportSmallWindow
+  parent: VehicleHumveeViewportBase
+  id: VehicleHumveeViewportSmallWindow
   components:
   - type: Sprite
     state: small_viewport_window
     drawdepth: Overdoors
 
 - type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportFrontNorth
+  parent: VehicleHumveeViewportBase
+  id: VehicleHumveeViewportFrontNorth
   components:
   - type: Sprite
     state: viewport_frontwindow_north
     drawdepth: Overdoors
 
 - type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportFrontSouth
+  parent: VehicleHumveeViewportBase
+  id: VehicleHumveeViewportFrontSouth
   components:
   - type: Sprite
     state: viewport_frontwindow_south
     drawdepth: Overdoors
 
 - type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportDoor
+  parent: VehicleHumveeViewportBase
+  id: VehicleHumveeViewportDoor
   components:
   - type: Sprite
     state: viewport_door

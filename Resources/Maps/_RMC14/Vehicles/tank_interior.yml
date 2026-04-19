@@ -134,14 +134,14 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.70269585,-2.3210986
       parent: 2
-- proto: RMCVehicleTankAmmoLoader
+- proto: VehicleTankAmmoLoader
   entities:
   - uid: 38
     components:
     - type: Transform
       pos: 1.340075,-1.3274913
       parent: 2
-- proto: RMCVehicleInteriorExtinguisher
+- proto: VehicleInteriorExtinguisher
   entities:
   - uid: 29
     components:
@@ -149,21 +149,21 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 0.8297322,0.3712867
       parent: 2
-- proto: RMCVehicleInteriorNanomed
+- proto: VehicleInteriorNanomed
   entities:
   - uid: 27
     components:
     - type: Transform
       pos: 0.28445482,0.37976068
       parent: 2
-- proto: RMCVehicleTankBack1
+- proto: VehicleTankBack1
   entities:
   - uid: 21
     components:
     - type: Transform
       pos: -0.5,-2.5
       parent: 2
-- proto: RMCVehicleTankBack2
+- proto: VehicleTankBack2
   entities:
   - uid: 11
     components:
@@ -175,14 +175,14 @@ entities:
     - type: Transform
       pos: -0.5,-1.5
       parent: 2
-- proto: RMCVehicleTankBack3
+- proto: VehicleTankBack3
   entities:
   - uid: 20
     components:
     - type: Transform
       pos: -0.5,0.5
       parent: 2
-- proto: RMCVehicleTankExitHatch
+- proto: VehicleTankExitHatch
   entities:
   - uid: 31
     components:
@@ -196,7 +196,7 @@ entities:
     missingComponents:
     - Occluder
     - InteractionTransparency
-- proto: RMCVehicleTankExterior1
+- proto: VehicleTankExterior1
   entities:
   - uid: 10
     components:
@@ -205,21 +205,21 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleTankExterior3
+- proto: VehicleTankExterior3
   entities:
   - uid: 24
     components:
     - type: Transform
       pos: 2.5,-2.5
       parent: 2
-- proto: RMCVehicleTankFront1
+- proto: VehicleTankFront1
   entities:
   - uid: 25
     components:
     - type: Transform
       pos: 3.5,-2.5
       parent: 2
-- proto: RMCVehicleTankFront2
+- proto: VehicleTankFront2
   entities:
   - uid: 15
     components:
@@ -231,28 +231,28 @@ entities:
     - type: Transform
       pos: 3.5,-1.5
       parent: 2
-- proto: RMCVehicleTankFront3
+- proto: VehicleTankFront3
   entities:
   - uid: 22
     components:
     - type: Transform
       pos: 3.5,0.5
       parent: 2
-- proto: RMCVehicleTankProp0
+- proto: VehicleTankProp0
   entities:
   - uid: 5
     components:
     - type: Transform
       pos: 1.5,-2.5
       parent: 2
-- proto: RMCVehicleTankProp2
+- proto: VehicleTankProp2
   entities:
   - uid: 4
     components:
     - type: Transform
       pos: 1.5,-1.5
       parent: 2
-- proto: RMCVehicleTankProp3
+- proto: VehicleTankProp3
   entities:
   - uid: 13
     components:
@@ -266,42 +266,42 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 2.5,-1.5
       parent: 2
-- proto: RMCVehicleTankProp4
+- proto: VehicleTankProp4
   entities:
   - uid: 6
     components:
     - type: Transform
       pos: 1.5,-0.5
       parent: 2
-- proto: RMCVehicleTankProp5
+- proto: VehicleTankProp5
   entities:
   - uid: 8
     components:
     - type: Transform
       pos: 2.5,-0.5
       parent: 2
-- proto: RMCVehicleTankProp6
+- proto: VehicleTankProp6
   entities:
   - uid: 3
     components:
     - type: Transform
       pos: 1.5,0.5
       parent: 2
-- proto: RMCVehicleTankProp7
+- proto: VehicleTankProp7
   entities:
   - uid: 7
     components:
     - type: Transform
       pos: 2.5,0.5
       parent: 2
-- proto: RMCVehicleTankProp8Extra
+- proto: VehicleTankProp8Extra
   entities:
   - uid: 9
     components:
     - type: Transform
       pos: 1.5,-0.5
       parent: 2
-- proto: RMCVehicleTankTankRight2
+- proto: VehicleTankTankRight2
   entities:
   - uid: 12
     components:
@@ -310,7 +310,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleTankWall
+- proto: VehicleTankWall
   entities:
   - uid: 17
     components:

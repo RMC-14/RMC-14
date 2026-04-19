@@ -266,14 +266,14 @@ entities:
     - type: Transform
       pos: -1.5,-0.5
       parent: 2
-- proto: RMCVehicleAmmoLoader
+- proto: VehicleAmmoLoader
   entities:
   - uid: 28
     components:
     - type: Transform
       pos: 3.5,0.5
       parent: 2
-- proto: RMCVehicleAPCApcRight3
+- proto: VehicleAPCApcRight3
   entities:
   - uid: 8
     components:
@@ -288,56 +288,56 @@ entities:
       fixtures: {}
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleAPCBack2
+- proto: VehicleAPCBack2
   entities:
   - uid: 16
     components:
     - type: Transform
       pos: -2.5,-0.5
       parent: 2
-- proto: RMCVehicleAPCCornerInverseL
+- proto: VehicleAPCCornerInverseL
   entities:
   - uid: 35
     components:
     - type: Transform
       pos: -0.5,2.5
       parent: 2
-- proto: RMCVehicleAPCCornerInverseR
+- proto: VehicleAPCCornerInverseR
   entities:
   - uid: 33
     components:
     - type: Transform
       pos: 2.5,2.5
       parent: 2
-- proto: RMCVehicleAPCCornerSmallL
+- proto: VehicleAPCCornerSmallL
   entities:
   - uid: 11
     components:
     - type: Transform
       pos: -0.5,3.5
       parent: 2
-- proto: RMCVehicleAPCCornerSmallR
+- proto: VehicleAPCCornerSmallR
   entities:
   - uid: 10
     components:
     - type: Transform
       pos: 2.5,3.5
       parent: 2
-- proto: RMCVehicleAPCExterior1
+- proto: VehicleAPCExterior1
   entities:
   - uid: 13
     components:
     - type: Transform
       pos: 4.5,1.5
       parent: 2
-- proto: RMCVehicleAPCExterior3
+- proto: VehicleAPCExterior3
   entities:
   - uid: 20
     components:
     - type: Transform
       pos: 4.5,3.5
       parent: 2
-- proto: RMCVehicleAPCExteriorDoor
+- proto: VehicleAPCExteriorDoor
   entities:
   - uid: 24
     components:
@@ -348,49 +348,49 @@ entities:
       entryIndex: 0
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleAPCFront1
+- proto: VehicleAPCFront1
   entities:
   - uid: 17
     components:
     - type: Transform
       pos: 4.5,-1.5
       parent: 2
-- proto: RMCVehicleAPCFront2
+- proto: VehicleAPCFront2
   entities:
   - uid: 18
     components:
     - type: Transform
       pos: 4.5,-0.5
       parent: 2
-- proto: RMCVehicleAPCFront3
+- proto: VehicleAPCFront3
   entities:
   - uid: 39
     components:
     - type: Transform
       pos: 4.5,0.5
       parent: 2
-- proto: RMCVehicleAPCFront5
+- proto: VehicleAPCFront5
   entities:
   - uid: 19
     components:
     - type: Transform
       pos: 4.5,2.5
       parent: 2
-- proto: RMCVehicleAPCFrontRoof1
+- proto: VehicleAPCFrontRoof1
   entities:
   - uid: 9
     components:
     - type: Transform
       pos: 3.4963846,3.3652205
       parent: 2
-- proto: RMCVehicleAPCFrontWheelL
+- proto: VehicleAPCFrontWheelL
   entities:
   - uid: 4
     components:
     - type: Transform
       pos: 2.5,-1.5
       parent: 2
-- proto: RMCVehicleAPCFrontWheelR
+- proto: VehicleAPCFrontWheelR
   entities:
   - uid: 6
     components:
@@ -400,14 +400,14 @@ entities:
     - type: PointLight
       energy: 2
       radius: 20
-- proto: RMCVehicleAPCRear1
+- proto: VehicleAPCRear1
   entities:
   - uid: 7
     components:
     - type: Transform
       pos: -2.5,-1.5
       parent: 2
-- proto: RMCVehicleAPCRear3
+- proto: VehicleAPCRear3
   entities:
   - uid: 15
     components:
@@ -424,28 +424,28 @@ entities:
     - type: Transform
       pos: -2.5,1.5
       parent: 2
-- proto: RMCVehicleAPCRear6
+- proto: VehicleAPCRear6
   entities:
   - uid: 14
     components:
     - type: Transform
       pos: -2.5,3.5
       parent: 2
-- proto: RMCVehicleAPCRearWheelL
+- proto: VehicleAPCRearWheelL
   entities:
   - uid: 3
     components:
     - type: Transform
       pos: -1.5,-1.5
       parent: 2
-- proto: RMCVehicleAPCRearWheelR
+- proto: VehicleAPCRearWheelR
   entities:
   - uid: 5
     components:
     - type: Transform
       pos: -0.5,-1.5
       parent: 2
-- proto: RMCVehicleAPCWall
+- proto: VehicleAPCWall
   entities:
   - uid: 12
     components:
@@ -457,7 +457,7 @@ entities:
     - type: Transform
       pos: 3.5,2.5
       parent: 2
-- proto: RMCVehicleAPCWallDoorFront
+- proto: VehicleAPCWallDoorFront
   entities:
   - uid: 22
     components:
@@ -468,7 +468,7 @@ entities:
       fixtures: {}
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleAPCWallSmallR
+- proto: VehicleAPCWallSmallR
   entities:
   - uid: 63
     components:
@@ -560,42 +560,42 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.5,4.5
       parent: 2
-- proto: RMCVehicleAPCWallViewport
+- proto: VehicleAPCWallViewport
   entities:
   - uid: 34
     components:
     - type: Transform
       pos: 0.5,3.5
       parent: 2
-- proto: RMCVehicleAPCWheelFrontTop2
+- proto: VehicleAPCWheelFrontTop2
   entities:
   - uid: 25
     components:
     - type: Transform
       pos: 2.6250732,3.3637753
       parent: 2
-- proto: RMCVehicleAPCWindshieldBottom
+- proto: VehicleAPCWindshieldBottom
   entities:
   - uid: 23
     components:
     - type: Transform
       pos: -1.6129854,3.3699212
       parent: 2
-- proto: RMCVehicleAPCWindshieldTop
+- proto: VehicleAPCWindshieldTop
   entities:
   - uid: 21
     components:
     - type: Transform
       pos: -0.61965847,3.3699212
       parent: 2
-- proto: RMCVehicleInteriorBloodVendor
+- proto: VehicleInteriorBloodVendor
   entities:
   - uid: 27
     components:
     - type: Transform
       pos: -1.0969443,2.3030975
       parent: 2
-- proto: RMCVehicleInteriorCamera
+- proto: VehicleInteriorCamera
   entities:
   - uid: 60
     components:
@@ -604,28 +604,28 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleInteriorExtinguisher
+- proto: VehicleInteriorExtinguisher
   entities:
   - uid: 56
     components:
     - type: Transform
       pos: 2.229715,2.3768435
       parent: 2
-- proto: RMCVehicleInteriorLocker
+- proto: VehicleInteriorLocker
   entities:
   - uid: 55
     components:
     - type: Transform
       pos: 3.4939513,2.3498034
       parent: 2
-- proto: RMCVehicleInteriorMedVendor
+- proto: VehicleInteriorMedVendor
   entities:
   - uid: 30
     components:
     - type: Transform
       pos: -0.41095924,2.3030975
       parent: 2
-- proto: RMCVehicleInteriorWallPhone
+- proto: VehicleInteriorWallPhone
   entities:
   - uid: 57
     components:
@@ -634,7 +634,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleViewport
+- proto: VehicleViewport
   entities:
   - uid: 40
     components:
@@ -644,7 +644,7 @@ entities:
       parent: 2
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleViewportUnanchored
+- proto: VehicleViewportUnanchored
   entities:
   - uid: 59
     components:

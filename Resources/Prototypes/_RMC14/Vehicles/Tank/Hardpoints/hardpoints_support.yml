@@ -1,61 +1,61 @@
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankWarningArray
+  parent: VehicleTankHardpointBase
+  id: VehicleTankWarningArray
   name: integrated weapons sensor array
   description: An integrated sensor array that improves accuracy and fire rate of onboard weapons.
   components:
   - type: Sprite
     state: warray
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Support
     vehicleFamily: Tank
     slotType: SupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 250
-  - type: RMCVehicleWeaponSupportAttachment
+  - type: VehicleWeaponSupportAttachment
     accuracyMultiplier: 1.2
     fireRateMultiplier: 1.15
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: warray_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankOverdriveEnhancer
+  parent: VehicleTankHardpointBase
+  id: VehicleTankOverdriveEnhancer
   name: overdrive enhancer
   description: An overdrive enhancer support attachment for a tank.
   components:
   - type: Sprite
     state: odrive_enhancer
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Support
     vehicleFamily: Tank
     slotType: SupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 250
-  - type: RMCVehicleSpeedModifierAttachment
+  - type: VehicleSpeedModifierAttachment
     speedMultiplier: 1.2
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: odrive_enhancer_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankRocketLauncher
+  parent: VehicleTankHardpointBase
+  id: VehicleTankRocketLauncher
   name: smoke launcher
   description: A smoke launcher support attachment for a tank.
   components:
   - type: Sprite
     state: slauncher_0
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Support
     vehicleFamily: Tank
     slotType: SupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 100
   - type: VehicleTurret
     useDirectionalOffsets: true
@@ -81,13 +81,13 @@
     cycleable: false
     proto: RMC40MMGrenadeM74AGMSVehicle
     capacity: 6
-  - type: RMCVehicleHardpointAmmo
+  - type: VehicleHardpointAmmo
     magazineSize: 6
     maxStoredMagazines: 2
   - type: GunFireArc
     arc: 360
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxGrenadeLauncher
+    bulletType: VehicleAmmoBoxGrenadeLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -95,24 +95,24 @@
     muzzleOffset: "0,-1"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: slauncher_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankFlareModule
+  parent: VehicleTankHardpointBase
+  id: VehicleTankFlareModule
   name: flare module
   description: A flare launcher support attachment for a tank.
   components:
   - type: Sprite
     state: slauncher_1
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Support
     vehicleFamily: Tank
     slotType: SupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurret
     useDirectionalOffsets: true
@@ -141,13 +141,13 @@
       - RMCFlare
       - RMCFlareCAS
     proto: CMFlare
-  - type: RMCVehicleHardpointAmmo
+  - type: VehicleHardpointAmmo
     magazineSize: 10
     maxStoredMagazines: 3
   - type: GunFireArc
     arc: 360
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxFlareLauncher
+    bulletType: VehicleAmmoBoxFlareLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -155,29 +155,29 @@
     muzzleOffset: "0,-1"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: slauncher_1
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankArtilleryModule
+  parent: VehicleTankHardpointBase
+  id: VehicleTankArtilleryModule
   name: artillery module
   description: An artillery support module for a tank.
   components:
   - type: Sprite
     state: artillery
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Support
     vehicleFamily: Tank
     slotType: SupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 250
-  - type: RMCVehicleGunnerViewAttachment
+  - type: VehicleGunnerViewAttachment
     pvsScale: 0.35
     cursorMaxOffset: 5
     cursorPvsIncrease: 0.5
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: artillerymod_0
 

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: RMCIntelBase
@@ -183,7 +183,7 @@
           cost: 5
           events:
           - !type:TechUnlockVehicleEvent
-            unlock: RMCVehicleHumveeARC
+            unlock: VehicleHumveeARC
           - !type:TechAnnounceEvent
             author: ALMAYER SPECIAL ASSETS AUTHORIZED
             message: ARC deployment has been authorised for this operation.
@@ -345,7 +345,7 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: nuke
-  - type: RMCVehicleSupplyTech
+  - type: VehicleSupplyTech
 - type: Tag
   id: RMCIntelItem
 

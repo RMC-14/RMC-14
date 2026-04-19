@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: RMCVehicleSPPVanRoofBase
+  id: VehicleSPPVanRoofBase
   name: SPP van interior roof
   description: Side door
   placement:
@@ -28,7 +28,7 @@
 
 - type: entity
   abstract: true
-  id: RMCVehicleSPPVanInteriorBase
+  id: VehicleSPPVanInteriorBase
   name: SPP van interior piece
   description: A decorative interior piece for an SPP van.
   placement:
@@ -41,7 +41,7 @@
 
 - type: entity
   abstract: true
-  id: RMCVehicleSPPVanChassisBase
+  id: VehicleSPPVanChassisBase
   name: SPP van interior chassis
   description: A chassis segment for an SPP van interior.
   placement:
@@ -53,30 +53,30 @@
   - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleSPPVanChassisBase
-  id: RMCVehicleSPPVanChassis
+  parent: VehicleSPPVanChassisBase
+  id: VehicleSPPVanChassis
   components:
   - type: Sprite
     state: sppvan_chassis
 
 - type: entity
-  parent: RMCVehicleSPPVanChassisBase
-  id: RMCVehicleSPPVanChassisArmed
+  parent: VehicleSPPVanChassisBase
+  id: VehicleSPPVanChassisArmed
   components:
   - type: Sprite
     state: sppvant_chassis
 
 - type: entity
-  parent: RMCVehicleSPPVanChassisBase
-  id: RMCVehicleSPPVanChassisLogistics
+  parent: VehicleSPPVanChassisBase
+  id: VehicleSPPVanChassisLogistics
   components:
   - type: Sprite
     state: sppvan_logistics_chassis
 
 - type: entity
   abstract: true
-  parent: RMCVehicleSPPVanInteriorBase
-  id: RMCVehicleSPPVanWallBase
+  parent: VehicleSPPVanInteriorBase
+  id: VehicleSPPVanWallBase
   placement:
     mode: PlaceFree
   components:
@@ -103,8 +103,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleSPPVanWallBase
-  id: RMCVehicleSPPVanDoorBase
+  parent: VehicleSPPVanWallBase
+  id: VehicleSPPVanDoorBase
   components:
   - type: Clickable
   - type: InteractionOutline
@@ -113,22 +113,22 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleSPPVanWallBase
-  id: RMCVehicleSPPVanBack1
+  parent: VehicleSPPVanWallBase
+  id: VehicleSPPVanBack1
   components:
   - type: Sprite
     state: back_1
 
 - type: entity
-  parent: RMCVehicleSPPVanWallBase
-  id: RMCVehicleSPPVanBack2
+  parent: VehicleSPPVanWallBase
+  id: VehicleSPPVanBack2
   components:
   - type: Sprite
     state: back_2
 
 - type: entity
-  parent: RMCVehicleSPPVanInteriorBase
-  id: RMCVehicleSPPVanViewportBase
+  parent: VehicleSPPVanInteriorBase
+  id: VehicleSPPVanViewportBase
   placement:
     mode: PlaceFree
   components:
@@ -136,14 +136,14 @@
     arc: 360
   - type: Clickable
   - type: InteractionOutline
-  - type: RMCVehicleViewport
+  - type: VehicleViewport
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleSPPVanViewportBase
-  id: RMCVehicleSPPVanViewportSimple
+  parent: VehicleSPPVanViewportBase
+  id: VehicleSPPVanViewportSimple
   components:
   - type: Sprite
     drawdepth: BelowMobs
@@ -152,8 +152,8 @@
     enabled: false
 
 - type: entity
-  parent: RMCVehicleSPPVanViewportBase
-  id: RMCVehicleSPPVanViewportSimpleFront
+  parent: VehicleSPPVanViewportBase
+  id: VehicleSPPVanViewportSimpleFront
   components:
   - type: Sprite
     drawdepth: BelowMobs
@@ -162,8 +162,8 @@
     enabled: false
 
 - type: entity
-  parent: RMCVehicleSPPVanRoofBase
-  id: RMCVehicleSPPVanInteriorDoor
+  parent: VehicleSPPVanRoofBase
+  id: VehicleSPPVanInteriorDoor
   components:
   - type: Sprite
     drawdepth: BelowMobs
@@ -177,16 +177,16 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleSPPVanInteriorDoor
-  id: RMCVehicleSPPVanInteriorDoorRoof
+  parent: VehicleSPPVanInteriorDoor
+  id: VehicleSPPVanInteriorDoorRoof
   name: SPP van interior roof door
   components:
   - type: Sprite
     drawdepth: BelowMobs
 
 - type: entity
-  parent: RMCVehicleSPPVanInteriorBase
-  id: RMCVehicleSPPVanExteriorDoorUnique
+  parent: VehicleSPPVanInteriorBase
+  id: VehicleSPPVanExteriorDoorUnique
   components:
   - type: Sprite
     drawdepth: Walls
@@ -205,7 +205,7 @@
 - type: entity
   abstract: true
   parent: CMClosetBase
-  id: RMCVehicleSPPVanStorageBase
+  id: VehicleSPPVanStorageBase
   name: SPP van storage
   description: A small storage locker for an SPP van interior.
   placement:
@@ -232,21 +232,21 @@
     stateDoorOpen:
 
 - type: entity
-  parent: RMCVehicleSPPVanStorageBase
-  id: RMCVehicleSPPVanSmallStorage
+  parent: VehicleSPPVanStorageBase
+  id: VehicleSPPVanSmallStorage
   name: SPP van small storage
 
 - type: entity
-  parent: RMCVehicleInteriorWallMountedBase
-  id: RMCVehicleSPPVanAmmoLoader
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleSPPVanAmmoLoader
   name: SPP van ammo loader
   description: A loader for SPP vehicle hardpoint ammunition.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/sppvan.rsi
     state: weapons_loader
-  - type: RMCVehicleAmmoLoader
+  - type: VehicleAmmoLoader
   - type: UserInterface
     interfaces:
-      enum.RMCVehicleAmmoLoaderUiKey.Key:
-        type: RMCVehicleAmmoLoaderBoundUserInterface
+      enum.VehicleAmmoLoaderUiKey.Key:
+        type: VehicleAmmoLoaderBoundUserInterface

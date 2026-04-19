@@ -9,13 +9,13 @@
     state: tires
   - type: Item
     size: Large
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Wheel
     vehicleFamily: Van
     slotType: Wheel
     damageMultiplier: 0.15
     repairRate: 0.0165
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 500
-  - type: RMCVehicleWheelItem
+  - type: VehicleWheelItem
 

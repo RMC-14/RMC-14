@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseItem
-  id: RMCVehicleTankHardpointBase
+  id: VehicleTankHardpointBase
   abstract: true
   components:
   - type: Sprite
@@ -9,21 +9,21 @@
     size: Large
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankTurret
+  parent: VehicleTankHardpointBase
+  id: VehicleTankTurret
   name: tank turret
   description: A tank turret hardpoint.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/tank.rsi
     state: tank_turret_0
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Turret
     vehicleFamily: Tank
     slotType: Turret
     damageMultiplier: 0.05
     repairRate: 0.008
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 450
   - type: VehicleTurret
     rotateToCursor: true
@@ -42,8 +42,8 @@
       turret-cannon:
         whitelist:
           components:
-          - RMCHardpointItem
-  - type: RMCHardpointSlots
+          - HardpointItem
+  - type: HardpointSlots
     vehicleFamily: Tank
     slots:
     - id: turret-cannon
@@ -58,43 +58,43 @@
       insertDelay: 2.0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankTreads
+  parent: VehicleTankHardpointBase
+  id: VehicleTankTreads
   name: tank treads
   description: Heavy duty tank treads.
   components:
   - type: Sprite
     state: treads
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Wheel
     vehicleFamily: Tank
     slotType: Treads
     damageMultiplier: 0.15
     repairRate: 0.0165
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 300
-  - type: RMCVehicleWheelItem
+  - type: VehicleWheelItem
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankReinforcedTreads
+  parent: VehicleTankHardpointBase
+  id: VehicleTankReinforcedTreads
   name: reinforced tank treads
   description: Heavier tank treads with better durability and acid resistance at the cost of acceleration.
   components:
   - type: Sprite
     state: treads
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Wheel
     vehicleFamily: Tank
     slotType: Treads
     damageMultiplier: 0.15
     repairRate: 0.0165
-  - type: RMCVehicleWheelItem
-  - type: RMCHardpointIntegrity
+  - type: VehicleWheelItem
+  - type: HardpointIntegrity
     maxIntegrity: 500
-  - type: RMCHardpointDamageModifier
+  - type: HardpointDamageModifier
     modifierSets:
-    - RMCVehicleArmorCaustic
-  - type: RMCVehicleAccelerationModifierAttachment
+    - VehicleArmorCaustic
+  - type: VehicleAccelerationModifierAttachment
     accelerationMultiplier: 0.9
 

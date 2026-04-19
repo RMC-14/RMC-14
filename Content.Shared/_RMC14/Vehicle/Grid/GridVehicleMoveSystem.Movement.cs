@@ -967,9 +967,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         var maxSpeed = mover.MaxSpeed * GetSmashSlowdownMultiplier(mover);
 
-        if (TryComp<RMCVehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
+        if (TryComp<VehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
             maxSpeed *= overcharge.SpeedMultiplier;
-        if (TryComp<RMCVehicleSpeedModifierComponent>(uid, out var speedMod))
+        if (TryComp<VehicleSpeedModifierComponent>(uid, out var speedMod))
             maxSpeed *= speedMod.SpeedMultiplier;
 
         return maxSpeed;
@@ -979,9 +979,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         var maxSpeed = mover.MaxReverseSpeed * GetSmashSlowdownMultiplier(mover);
 
-        if (TryComp<RMCVehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
+        if (TryComp<VehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
             maxSpeed *= overcharge.SpeedMultiplier;
-        if (TryComp<RMCVehicleSpeedModifierComponent>(uid, out var speedMod))
+        if (TryComp<VehicleSpeedModifierComponent>(uid, out var speedMod))
             maxSpeed *= speedMod.SpeedMultiplier;
 
         return maxSpeed;
@@ -989,7 +989,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private float GetAccelerationModifier(EntityUid uid)
     {
-        if (TryComp<RMCVehicleAccelerationModifierComponent>(uid, out var accelMod))
+        if (TryComp<VehicleAccelerationModifierComponent>(uid, out var accelMod))
             return MathF.Max(0.05f, accelMod.AccelerationMultiplier);
 
         return 1f;
@@ -1094,7 +1094,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private void PlayRunningSound(EntityUid uid)
     {
-        if (!TryComp<RMCVehicleSoundComponent>(uid, out var sound))
+        if (!TryComp<VehicleSoundComponent>(uid, out var sound))
             return;
 
         if (sound.RunningSound == null)
@@ -1128,7 +1128,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return Math.Clamp(mover.SmashSlowdownMultiplier, 0f, 1f);
     }
 
-    private void ApplySmashSlowdown(EntityUid vehicle, GridVehicleMoverComponent mover, RMCVehicleSmashableComponent smashable)
+    private void ApplySmashSlowdown(EntityUid vehicle, GridVehicleMoverComponent mover, VehicleSmashableComponent smashable)
     {
         if (smashable.SlowdownDuration <= 0f || smashable.SlowdownMultiplier >= 1f)
             return;

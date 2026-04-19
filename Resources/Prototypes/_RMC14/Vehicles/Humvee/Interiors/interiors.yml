@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: RMCVehicleHumveeInteriorBase
+  id: VehicleHumveeInteriorBase
   name: humvee interior piece
   description: A decorative interior piece for the humvee.
   placement:
@@ -13,7 +13,7 @@
 
 - type: entity
   abstract: true
-  id: RMCVehicleHumveeChassisBase
+  id: VehicleHumveeChassisBase
   name: humvee interior chassis
   description: A chassis segment for the humvee interior.
   placement:
@@ -25,30 +25,30 @@
   - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleHumveeChassisBase
-  id: RMCVehicleHumveeChassis
+  parent: VehicleHumveeChassisBase
+  id: VehicleHumveeChassis
   components:
   - type: Sprite
     state: humvee_chassis
 
 - type: entity
-  parent: RMCVehicleHumveeChassisBase
-  id: RMCVehicleHumveeChassisMedical
+  parent: VehicleHumveeChassisBase
+  id: VehicleHumveeChassisMedical
   components:
   - type: Sprite
     state: humvee_chassis_medical
 
 - type: entity
-  parent: RMCVehicleHumveeChassisBase
-  id: RMCVehicleHumveeChassisTransport
+  parent: VehicleHumveeChassisBase
+  id: VehicleHumveeChassisTransport
   components:
   - type: Sprite
     state: humvee_chassis_transport
 
 - type: entity
   abstract: true
-  parent: RMCVehicleHumveeInteriorBase
-  id: RMCVehicleHumveeWallBase
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeWallBase
   placement:
     mode: PlaceFree
   components:
@@ -75,8 +75,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleHumveeInteriorBase
-  id: RMCVehicleHumveeRoofBase
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeRoofBase
   name: humvee interior roof
   description: A removable roof section for the humvee interior.
   placement:
@@ -99,8 +99,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleHumveeInteriorBase
-  id: RMCVehicleHumveeDoorBase
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeDoorBase
   placement:
     mode: PlaceFree
   components:
@@ -113,16 +113,16 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleHumveeInteriorBase
-  id: RMCVehicleHumveeSeatDestroyed
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeSeatDestroyed
   name: humvee seat (destroyed)
   components:
   - type: Sprite
     state: car_seat_destroyed
 
 - type: entity
-  parent: RMCVehicleHumveeWallMountedBase
-  id: RMCVehicleHumveeAmmoLoader
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeAmmoLoader
   name: humvee ammo loader
   description: A loader for humvee hardpoint ammunition.
   components:
@@ -133,15 +133,15 @@
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
-  - type: RMCVehicleAmmoLoader
+  - type: VehicleAmmoLoader
   - type: UserInterface
     interfaces:
-      enum.RMCVehicleAmmoLoaderUiKey.Key:
-        type: RMCVehicleAmmoLoaderBoundUserInterface
+      enum.VehicleAmmoLoaderUiKey.Key:
+        type: VehicleAmmoLoaderBoundUserInterface
 
 - type: entity
-  parent: RMCVehicleHumveeRoofBase
-  id: RMCVehicleHumveeExitDoor
+  parent: VehicleHumveeRoofBase
+  id: VehicleHumveeExitDoor
   components:
   - type: Sprite
     layers:
@@ -154,43 +154,43 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleHumveeDoorBase
-  id: RMCVehicleHumveeExitDoorDirectional
+  parent: VehicleHumveeDoorBase
+  id: VehicleHumveeExitDoorDirectional
   components:
   - type: Sprite
     state: exit_door1
 
 - type: entity
-  parent: RMCVehicleHumveeDoorBase
-  id: RMCVehicleHumveeMedicalBackDoor1
+  parent: VehicleHumveeDoorBase
+  id: VehicleHumveeMedicalBackDoor1
   components:
   - type: Sprite
     state: medical_backdoor1
 
 - type: entity
-  parent: RMCVehicleHumveeDoorBase
-  id: RMCVehicleHumveeMedicalBackDoor2
+  parent: VehicleHumveeDoorBase
+  id: VehicleHumveeMedicalBackDoor2
   components:
   - type: Sprite
     state: medical_backdoor2
 
 - type: entity
-  parent: RMCVehicleHumveeDoorBase
-  id: RMCVehicleHumveeCarrierBackDoor1
+  parent: VehicleHumveeDoorBase
+  id: VehicleHumveeCarrierBackDoor1
   components:
   - type: Sprite
     state: carrier_backdoor1
 
 - type: entity
-  parent: RMCVehicleHumveeDoorBase
-  id: RMCVehicleHumveeCarrierBackDoor2
+  parent: VehicleHumveeDoorBase
+  id: VehicleHumveeCarrierBackDoor2
   components:
   - type: Sprite
     state: carrier_backdoor2
 
 - type: entity
-  parent: RMCVehicleHumveeInteriorBase
-  id: RMCVehicleHumveeMedicalPanel
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeMedicalPanel
   components:
   - type: Sprite
     state: MEDICAL
@@ -198,7 +198,7 @@
 - type: entity
   abstract: true
   parent: CMClosetBase
-  id: RMCVehicleHumveeLockerBase
+  id: VehicleHumveeLockerBase
   name: humvee interior locker
   description: A storage locker for humvee interiors.
   placement:
@@ -225,14 +225,14 @@
     stateDoorOpen:
 
 - type: entity
-  parent: RMCVehicleHumveeLockerBase
-  id: RMCVehicleHumveeLockerMedical
+  parent: VehicleHumveeLockerBase
+  id: VehicleHumveeLockerMedical
   name: humvee locker (medical)
 
 - type: entity
   abstract: true
-  parent: RMCVehicleHumveeInteriorBase
-  id: RMCVehicleHumveeWallMountedBase
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeWallMountedBase
   placement:
     mode: PlaceFree
   components:
@@ -240,36 +240,36 @@
     arc: 360
 
 - type: entity
-  parent: RMCVehicleHumveeWallMountedBase
-  id: RMCVehicleHumveeBloodVendor
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeBloodVendor
   components:
   - type: Sprite
     state: blood
 
 - type: entity
-  parent: RMCVehicleHumveeWallMountedBase
-  id: RMCVehicleHumveeBloodVendorVend
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeBloodVendorVend
   components:
   - type: Sprite
     state: blood_vend
 
 - type: entity
-  parent: RMCVehicleHumveeWallMountedBase
-  id: RMCVehicleHumveeBloodVendorDeny
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeBloodVendorDeny
   components:
   - type: Sprite
     state: mini_blood_denied
 
 - type: entity
-  parent: RMCVehicleHumveeWallMountedBase
-  id: RMCVehicleHumveeBloodVendorOff
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeBloodVendorOff
   components:
   - type: Sprite
     state: mini_blood_off
 
 - type: entity
-  parent: RMCVehicleHumveeWallMountedBase
-  id: RMCVehicleHumveeBloodVendorPanel
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeBloodVendorPanel
   components:
   - type: Sprite
     state: mini_blood_panel

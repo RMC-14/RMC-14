@@ -1,32 +1,32 @@
 - type: entity
-  id: ActionRMCVehicleToggleView
+  id: ActionVehicleToggleView
   name: Toggle View
   description: Switch between the interior and exterior view.
   components:
   - type: InstantAction
-    event: !type:RMCVehicleToggleViewActionEvent
+    event: !type:VehicleToggleViewActionEvent
   - type: Action
     icon: Interface/Actions/eyeopen.png
     iconOn: Interface/Actions/eyeclose.png
     itemIconStyle: BigAction
 
 - type: entity
-  id: ActionRMCVehicleDeploy
+  id: ActionVehicleDeploy
   name: Deploy Vehicle
   description: Deploy or retract the vehicle.
   components:
   - type: InstantAction
-    event: !type:RMCVehicleDeployActionEvent
+    event: !type:VehicleDeployActionEvent
   - type: Action
     itemIconStyle: BigItem
 
 - type: entity
-  id: ActionRMCVehicleLock
+  id: ActionVehicleLock
   name: Toggle Vehicle Lock
   description: Locks or unlocks vehicle entry doors.
   components:
   - type: InstantAction
-    event: !type:RMCVehicleLockActionEvent
+    event: !type:VehicleLockActionEvent
   - type: Action
     icon:
       sprite: _RMC14/Actions/id_lock_actions.rsi
@@ -37,12 +37,12 @@
     itemIconStyle: BigItem
 
 - type: entity
-  id: ActionRMCVehicleSelectHardpoint
+  id: ActionVehicleSelectHardpoint
   name: Select Hardpoint
   description: Select this hardpoint for firing.
   components:
   - type: InstantAction
-    event: !type:RMCVehicleHardpointSelectActionEvent
+    event: !type:VehicleHardpointSelectActionEvent
   - type: Action
     autoPopulate: false
     temporary: false

@@ -1,109 +1,109 @@
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankArmorBallistic
+  parent: VehicleTankHardpointBase
+  id: VehicleTankArmorBallistic
   name: ballistic armor plating
   description: Ballistic armor plating for a tank.
   components:
   - type: Sprite
     state: ballistic_armor
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Armor
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
     repairRate: 0.007
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 1000
-  - type: RMCVehicleArmorHardpoint
+  - type: VehicleArmorHardpoint
     modifierSets:
-    - RMCVehicleArmorBallistic
-  - type: RMCHardpointVisual
+    - VehicleArmorBallistic
+  - type: HardpointVisual
     vehicleState: ballistic_armor_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankArmorConcussive
+  parent: VehicleTankHardpointBase
+  id: VehicleTankArmorConcussive
   name: concussive armor plating
   description: Concussive armor plating for a tank.
   components:
   - type: Sprite
     state: concussive_armor
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Armor
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
     repairRate: 0.007
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 1000
-  - type: RMCVehicleArmorHardpoint
+  - type: VehicleArmorHardpoint
     modifierSets:
-    - RMCVehicleArmorConcussive
+    - VehicleArmorConcussive
     explosionCoefficient: 0.5
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: concussive_armor_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankArmorCaustic
+  parent: VehicleTankHardpointBase
+  id: VehicleTankArmorCaustic
   name: caustic armor plating
   description: Caustic armor plating for a tank.
   components:
   - type: Sprite
     state: caustic_armor
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Armor
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
     repairRate: 0.007
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 1000
-  - type: RMCVehicleArmorHardpoint
+  - type: VehicleArmorHardpoint
     modifierSets:
-    - RMCVehicleArmorCaustic
-  - type: RMCHardpointVisual
+    - VehicleArmorCaustic
+  - type: HardpointVisual
     vehicleState: caustic_armor_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankArmorPaladin
+  parent: VehicleTankHardpointBase
+  id: VehicleTankArmorPaladin
   name: paladin armor plating
   description: Paladin armor plating for a tank.
   components:
   - type: Sprite
     state: paladin_armor
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Armor
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
     repairRate: 0.007
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 1000
-  - type: RMCVehicleArmorHardpoint
+  - type: VehicleArmorHardpoint
     modifierSets:
-    - RMCVehicleArmorPaladin
+    - VehicleArmorPaladin
     explosionCoefficient: 0.5
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: paladin_armor_0
 
 - type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankSnowplow
+  parent: VehicleTankHardpointBase
+  id: VehicleTankSnowplow
   name: tank snowplow
   description: A reinforced snowplow attachment for a tank.
   components:
   - type: Sprite
     state: snowplow
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Armor
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
     repairRate: 0.007
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 150
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: snowplow_0
 

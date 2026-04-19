@@ -154,7 +154,7 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
     damageOnHit: 1000
     requiresDoorUnpowered: true
     smashSound:

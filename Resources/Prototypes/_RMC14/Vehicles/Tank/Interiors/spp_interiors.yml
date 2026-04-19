@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: RMCVehicleSPPTankInteriorBase
+  id: VehicleSPPTankInteriorBase
   name: SPP tank interior piece
   description: A decorative interior piece for an SPP tank.
   placement:
@@ -13,7 +13,7 @@
 
 - type: entity
   abstract: true
-  id: RMCVehicleSPPTankChassisBase
+  id: VehicleSPPTankChassisBase
   name: SPP tank interior chassis
   description: A chassis segment for an SPP tank interior.
   placement:
@@ -25,23 +25,23 @@
   - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleSPPTankChassisBase
-  id: RMCVehicleSPPTankChassis
+  parent: VehicleSPPTankChassisBase
+  id: VehicleSPPTankChassis
   components:
   - type: Sprite
     state: spptank_chassis
 
 - type: entity
-  parent: RMCVehicleSPPTankChassisBase
-  id: RMCVehicleSPPTankChassisAlt
+  parent: VehicleSPPTankChassisBase
+  id: VehicleSPPTankChassisAlt
   components:
   - type: Sprite
     state: spptank_chassis1
 
 - type: entity
   abstract: true
-  parent: RMCVehicleSPPTankInteriorBase
-  id: RMCVehicleSPPTankWallBase
+  parent: VehicleSPPTankInteriorBase
+  id: VehicleSPPTankWallBase
   placement:
     mode: PlaceFree
   components:
@@ -68,8 +68,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleSPPTankWallBase
-  id: RMCVehicleSPPTankDoorBase
+  parent: VehicleSPPTankWallBase
+  id: VehicleSPPTankDoorBase
   components:
   - type: Clickable
   - type: InteractionOutline
@@ -78,15 +78,15 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleSPPTankDoorBase
-  id: RMCVehicleSPPTankHatch
+  parent: VehicleSPPTankDoorBase
+  id: VehicleSPPTankHatch
   components:
   - type: Sprite
     state: hatch
 
 - type: entity
-  parent: RMCVehicleSPPTankHatch
-  id: RMCVehicleSPPTankExitHatch
+  parent: VehicleSPPTankHatch
+  id: VehicleSPPTankExitHatch
   components:
   - type: RemoveComponents
     components:
@@ -98,8 +98,8 @@
   - type: VehicleExit
 
 - type: entity
-  parent: RMCVehicleSPPTankInteriorBase
-  id: RMCVehicleSPPTankProp0
+  parent: VehicleSPPTankInteriorBase
+  id: VehicleSPPTankProp0
   components:
   - type: Sprite
     state: prop0
@@ -107,7 +107,7 @@
 - type: entity
   abstract: true
   parent: CMClosetBase
-  id: RMCVehicleSPPTankLockerBase
+  id: VehicleSPPTankLockerBase
   name: SPP tank locker
   description: A storage locker for SPP tank interiors.
   placement:
@@ -134,14 +134,14 @@
     stateDoorOpen:
 
 - type: entity
-  parent: RMCVehicleSPPTankLockerBase
-  id: RMCVehicleSPPTankLocker
+  parent: VehicleSPPTankLockerBase
+  id: VehicleSPPTankLocker
   name: SPP tank locker
 
 - type: entity
   abstract: true
   parent: CMClosetBase
-  id: RMCVehicleSPPTankSmallLockerBase
+  id: VehicleSPPTankSmallLockerBase
   name: SPP tank small locker
   description: A small storage locker for SPP tank interiors.
   placement:
@@ -168,14 +168,14 @@
     stateDoorOpen:
 
 - type: entity
-  parent: RMCVehicleSPPTankSmallLockerBase
-  id: RMCVehicleSPPTankSmallLocker
+  parent: VehicleSPPTankSmallLockerBase
+  id: VehicleSPPTankSmallLocker
   name: SPP tank small locker
 
 - type: entity
   abstract: true
   parent: CMClosetBase
-  id: RMCVehicleSPPTankSmallLockerAltBase
+  id: VehicleSPPTankSmallLockerAltBase
   name: SPP tank small locker (alt)
   description: An alternate small storage locker for SPP tank interiors.
   placement:
@@ -202,14 +202,14 @@
     stateDoorOpen:
 
 - type: entity
-  parent: RMCVehicleSPPTankSmallLockerAltBase
-  id: RMCVehicleSPPTankSmallLockerAlt
+  parent: VehicleSPPTankSmallLockerAltBase
+  id: VehicleSPPTankSmallLockerAlt
   name: SPP tank small locker (alt)
 
 - type: entity
   abstract: true
   parent: CMClosetBase
-  id: RMCVehicleSPPTankAmmoStorageBase
+  id: VehicleSPPTankAmmoStorageBase
   name: SPP tank ammunition storage
   description: Ammunition storage for SPP tank interiors.
   placement:
@@ -236,13 +236,13 @@
     stateDoorOpen:
 
 - type: entity
-  parent: RMCVehicleSPPTankAmmoStorageBase
-  id: RMCVehicleSPPTankAmmoStorage
+  parent: VehicleSPPTankAmmoStorageBase
+  id: VehicleSPPTankAmmoStorage
   name: SPP tank ammunition storage
 
 - type: entity
-  parent: RMCVehicleInteriorWallMountedBase
-  id: RMCVehicleSPPTankAmmoLoader
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleSPPTankAmmoLoader
   name: SPP tank ammo loader
   description: A loader for SPP tank hardpoint ammunition.
   components:
@@ -250,8 +250,8 @@
     drawdepth: BelowMobs
     sprite: _RMC14/Structures/Vehicles/Interiors/spptank.rsi
     state: weapons_loader
-  - type: RMCVehicleAmmoLoader
+  - type: VehicleAmmoLoader
   - type: UserInterface
     interfaces:
-      enum.RMCVehicleAmmoLoaderUiKey.Key:
-        type: RMCVehicleAmmoLoaderBoundUserInterface
+      enum.VehicleAmmoLoaderUiKey.Key:
+        type: VehicleAmmoLoaderBoundUserInterface

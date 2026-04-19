@@ -131,7 +131,7 @@ entities:
     - type: Transform
       pos: -2.5,1.5
       parent: 2
-- proto: RMCVehicleBoxVanBack1
+- proto: VehicleBoxVanBack1
   entities:
   - uid: 7
     components:
@@ -141,35 +141,35 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 1
-- proto: RMCVehicleBoxVanBackground2
+- proto: VehicleBoxVanBackground2
   entities:
   - uid: 8
     components:
     - type: Transform
       pos: -2.5,0.5
       parent: 2
-- proto: RMCVehicleBoxVanBackground3
+- proto: VehicleBoxVanBackground3
   entities:
   - uid: 9
     components:
     - type: Transform
       pos: -1.5,0.5
       parent: 2
-- proto: RMCVehicleBoxVanExterior1
+- proto: VehicleBoxVanExterior1
   entities:
   - uid: 10
     components:
     - type: Transform
       pos: -2.5,2.5
       parent: 2
-- proto: RMCVehicleBoxVanExterior3
+- proto: VehicleBoxVanExterior3
   entities:
   - uid: 11
     components:
     - type: Transform
       pos: -1.5,2.5
       parent: 2
-- proto: RMCVehicleBoxVanExteriorDoor
+- proto: VehicleBoxVanExteriorDoor
   entities:
   - uid: 12
     components:
@@ -180,28 +180,28 @@ entities:
       entryIndex: 0
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleBoxVanFront1
+- proto: VehicleBoxVanFront1
   entities:
   - uid: 13
     components:
     - type: Transform
       pos: 0.5,0.5
       parent: 2
-- proto: RMCVehicleBoxVanFront2
+- proto: VehicleBoxVanFront2
   entities:
   - uid: 14
     components:
     - type: Transform
       pos: 0.5,1.5
       parent: 2
-- proto: RMCVehicleBoxVanFront3
+- proto: VehicleBoxVanFront3
   entities:
   - uid: 15
     components:
     - type: Transform
       pos: 0.5,2.5
       parent: 2
-- proto: RMCVehicleBoxVanFrontRight2
+- proto: VehicleBoxVanFrontRight2
   entities:
   - uid: 16
     components:
@@ -222,7 +222,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -2.5,-0.5
       parent: 2
-- proto: RMCVehicleBoxVanFrontRoof1
+- proto: VehicleBoxVanFrontRoof1
   entities:
   - uid: 19
     components:
@@ -231,7 +231,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleBoxVanFrontRoof2
+- proto: VehicleBoxVanFrontRoof2
   entities:
   - uid: 20
     components:
@@ -240,7 +240,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleBoxVanInteriorDoor
+- proto: VehicleBoxVanInteriorDoor
   entities:
   - uid: 21
     components:
@@ -251,7 +251,7 @@ entities:
       entryIndex: 0
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleBoxVanLeft1
+- proto: VehicleBoxVanLeft1
   entities:
   - uid: 22
     components:
@@ -260,14 +260,14 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 2
-- proto: RMCVehicleBoxVanLeft3
+- proto: VehicleBoxVanLeft3
   entities:
   - uid: 23
     components:
     - type: Transform
       pos: -3.5,2.5
       parent: 2
-- proto: RMCVehicleBoxVanRoof2
+- proto: VehicleBoxVanRoof2
   entities:
   - uid: 24
     components:
@@ -279,7 +279,7 @@ entities:
     - type: PointLight
       energy: 2
       radius: 20
-- proto: RMCVehicleBoxVanRoof3
+- proto: VehicleBoxVanRoof3
   entities:
   - uid: 25
     components:
@@ -288,7 +288,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleBoxVanRoof4
+- proto: VehicleBoxVanRoof4
   entities:
   - uid: 26
     components:
@@ -297,7 +297,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleBoxVanRoof5
+- proto: VehicleBoxVanRoof5
   entities:
   - uid: 27
     components:
@@ -306,7 +306,7 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleViewportSimple
+- proto: VehicleViewportSimple
   entities:
   - uid: 28
     components:

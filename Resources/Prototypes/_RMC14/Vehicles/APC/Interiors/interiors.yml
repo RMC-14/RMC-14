@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: RMCVehicleAPCInteriorBase
+  id: VehicleAPCInteriorBase
   name: APC interior piece
   description: A decorative interior piece for the APC.
   placement:
@@ -15,7 +15,7 @@
 
 - type: entity
   abstract: true
-  id: RMCVehicleAPCRoofBase
+  id: VehicleAPCRoofBase
   name: APC interior roof
   description: A removable roof section for the APC interior.
   placement:
@@ -40,8 +40,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCWallBase
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWallBase
   placement:
     mode: SnapgridCenter
   components:
@@ -68,8 +68,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCDoorBase
+  parent: VehicleAPCWallBase
+  id: VehicleAPCDoorBase
   components:
   - type: Clickable
   - type: InteractionOutline
@@ -78,134 +78,134 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCFront1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront1
   components:
   - type: Sprite
     state: front_1
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCFront2
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront2
   components:
   - type: Sprite
     state: front_2
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCFront3
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront3
   components:
   - type: Sprite
     state: front_3
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCFront4
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront4
   components:
   - type: Sprite
     state: front_4
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCFront5
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront5
   components:
   - type: Sprite
     state: front_5
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCFront6
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFront6
   components:
   - type: Sprite
     state: front_6
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCRear1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear1
   components:
   - type: Sprite
     state: rear_1
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCRear2
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear2
   components:
   - type: Sprite
     state: rear_2
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCRear3
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear3
   components:
   - type: Sprite
     state: rear_3
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCRear4
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear4
   components:
   - type: Sprite
     state: rear_4
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCRear5
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear5
   components:
   - type: Sprite
     state: rear_5
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCRear6
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRear6
   components:
   - type: Sprite
     state: rear_6
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCWall1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall1
   components:
   - type: Sprite
     state: wall_1
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCWall2
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall2
   components:
   - type: Sprite
     state: wall_2
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCWall3
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall3
   components:
   - type: Sprite
     state: wall_3
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCWall4
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall4
   components:
   - type: Sprite
     state: wall_4
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCWall5
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall5
   components:
   - type: Sprite
     state: wall_5
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCWall6
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall6
   components:
   - type: Sprite
     state: wall_6
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCWall
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWall
   components:
   - type: Sprite
     state: wall
@@ -213,8 +213,8 @@
     enabled: false
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCWallViewport
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWallViewport
   components:
   - type: Sprite
     drawdepth: Walls
@@ -223,22 +223,22 @@
     enabled: false
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCWallSmallL
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWallSmallL
   components:
   - type: Sprite
     state: wall_small_L
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCWallSmallR
+  parent: VehicleAPCWallBase
+  id: VehicleAPCWallSmallR
   components:
   - type: Sprite
     state: wall_small_R
 
 - type: entity
-  parent: RMCVehicleAPCRoofBase
-  id: RMCVehicleAPCWallDoorFront
+  parent: VehicleAPCRoofBase
+  id: VehicleAPCWallDoorFront
   components:
   - type: Sprite
     layers:
@@ -258,64 +258,64 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleAPCDoorBase
-  id: RMCVehicleAPCDoorFront
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCDoorFront
   components:
   - type: Sprite
     state: door_front
 
 - type: entity
-  parent: RMCVehicleAPCDoorBase
-  id: RMCVehicleAPCDoorBack
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCDoorBack
   components:
   - type: Sprite
     state: door_back
 
 - type: entity
-  parent: RMCVehicleAPCDoorBase
-  id: RMCVehicleAPCDoorRearRight
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCDoorRearRight
   components:
   - type: Sprite
     state: door_rear_right
 
 - type: entity
-  parent: RMCVehicleAPCDoorBase
-  id: RMCVehicleAPCDoorRearCenter
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCDoorRearCenter
   components:
   - type: Sprite
     state: door_rear_center
 
 - type: entity
-  parent: RMCVehicleAPCDoorBase
-  id: RMCVehicleAPCDoorRearLeft
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCDoorRearLeft
   components:
   - type: Sprite
     state: door_rear_left
 
 - type: entity
-  parent: RMCVehicleAPCDoorBase
-  id: RMCVehicleAPCExitDoor
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCExitDoor
   components:
   - type: Sprite
     state: exit_door
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerL
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerL
   components:
   - type: Sprite
     state: corner_L
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerR
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerR
   components:
   - type: Sprite
     state: corner_R
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseL
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL
   components:
   - type: Sprite
     state: corner_inverse_L
@@ -323,43 +323,43 @@
     enabled: false
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseL1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL1
   components:
   - type: Sprite
     state: corner_inverse_L_1
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseL2
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL2
   components:
   - type: Sprite
     state: corner_inverse_L_2
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseL3
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL3
   components:
   - type: Sprite
     state: corner_inverse_L_3
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseL4
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL4
   components:
   - type: Sprite
     state: corner_inverse_L_4
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseL5
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseL5
   components:
   - type: Sprite
     state: corner_inverse_L_5
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseR
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseR
   components:
   - type: Sprite
     state: corner_inverse_R
@@ -367,36 +367,36 @@
     enabled: false
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseR1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseR1
   components:
   - type: Sprite
     state: corner_inverse_R_1
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseR2
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseR2
   components:
   - type: Sprite
     state: corner_inverse_R_2
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseR3
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseR3
   components:
   - type: Sprite
     state: corner_inverse_R_3
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerInverseR4
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerInverseR4
   components:
   - type: Sprite
     state: corner_inverse_R_4
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerSmallL
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerSmallL
   components:
   - type: Sprite
     state: corner_small_L
@@ -404,8 +404,8 @@
     enabled: false
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCCornerSmallR
+  parent: VehicleAPCWallBase
+  id: VehicleAPCCornerSmallR
   components:
   - type: Sprite
     state: corner_small_R
@@ -413,71 +413,71 @@
     enabled: false
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCFrontWheelL
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFrontWheelL
   components:
   - type: Sprite
     state: front_wheel_L
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCFrontWheelR
+  parent: VehicleAPCWallBase
+  id: VehicleAPCFrontWheelR
   components:
   - type: Sprite
     state: front_wheel_R
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCRearWheelL
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRearWheelL
   components:
   - type: Sprite
     state: rear_wheel_L
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCRearWheelR
+  parent: VehicleAPCWallBase
+  id: VehicleAPCRearWheelR
   components:
   - type: Sprite
     state: rear_wheel_R
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcFront1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcFront1
   components:
   - type: Sprite
     state: apc_front_1
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcFront2
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcFront2
   components:
   - type: Sprite
     state: apc_front_2
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcFront3
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcFront3
   components:
   - type: Sprite
     state: apc_front_3
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcRight1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcRight1
   components:
   - type: Sprite
     state: apc_right_1
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcRight2
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcRight2
   components:
   - type: Sprite
     state: apc_right_2
 
 - type: entity
-  parent: RMCVehicleAPCRoofBase
-  id: RMCVehicleAPCApcRight3
+  parent: VehicleAPCRoofBase
+  id: VehicleAPCApcRight3
   components:
   - type: Sprite
     layers:
@@ -497,64 +497,64 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcRight4
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcRight4
   components:
   - type: Sprite
     state: apc_right_4
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcBack1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcBack1
   components:
   - type: Sprite
     state: apc_back_1
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcBack2
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcBack2
   components:
   - type: Sprite
     state: apc_back_2
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcBack3
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcBack3
   components:
   - type: Sprite
     state: apc_back_3
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcLeft1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcLeft1
   components:
   - type: Sprite
     state: apc_left_1
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcLeft2
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcLeft2
   components:
   - type: Sprite
     state: apc_left_2
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcLeft3
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcLeft3
   components:
   - type: Sprite
     state: apc_left_3
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCApcLeft4
+  parent: VehicleAPCWallBase
+  id: VehicleAPCApcLeft4
   components:
   - type: Sprite
     state: apc_left_4
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCWheelFrontTop1
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWheelFrontTop1
   placement:
     mode: PlaceFree
   components:
@@ -567,8 +567,8 @@
     state: wheel_front_top_1
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCWheelFrontTop2
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWheelFrontTop2
   placement:
     mode: PlaceFree
   components:
@@ -581,29 +581,29 @@
     state: wheel_front_top_2
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCWheelBackTop1
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWheelBackTop1
   components:
   - type: Sprite
     state: wheel_back_top_1
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCWheelBackTop2
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWheelBackTop2
   components:
   - type: Sprite
     state: wheel_back_top_2
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCInteriorMarker
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCInteriorMarker
   components:
   - type: Sprite
     state: current_interior_sprites
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCM56FPWInterior
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCM56FPWInterior
   components:
   - type: Sprite
     state: m56_FPW
@@ -614,92 +614,92 @@
   - type: VehiclePortGunController
 
 - type: entity
-  parent: RMCVehicleAPCM56FPWInterior
-  id: RMCVehicleAPCM56FPWInteriorNorth
+  parent: VehicleAPCM56FPWInterior
+  id: VehicleAPCM56FPWInteriorNorth
   components:
   - type: VehiclePortGunController
     gunSlotId: port-gun-north
 
 - type: entity
-  parent: RMCVehicleAPCM56FPWInterior
-  id: RMCVehicleAPCM56FPWInteriorSouth
+  parent: VehicleAPCM56FPWInterior
+  id: VehicleAPCM56FPWInteriorSouth
   components:
   - type: VehiclePortGunController
     gunSlotId: port-gun-south
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCSensors
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCSensors
   components:
   - type: Sprite
     state: sensors_equipment
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCBack1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCBack1
   components:
   - type: Sprite
     state: rear_1
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCBack2
+  parent: VehicleAPCWallBase
+  id: VehicleAPCBack2
   components:
   - type: Sprite
     state: rear_2
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCBack3
+  parent: VehicleAPCWallBase
+  id: VehicleAPCBack3
   components:
   - type: Sprite
     state: rear_3
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCBackground1
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCBackground1
   components:
   - type: Sprite
     state: wall_1
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCBackground2
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCBackground2
   components:
   - type: Sprite
     state: wall_2
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCBackground3
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCBackground3
   components:
   - type: Sprite
     state: wall_3
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
-  id: RMCVehicleAPCExterior1
+  parent: VehicleAPCWallBase
+  id: VehicleAPCExterior1
   components:
   - type: Sprite
     state: front_4
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCExterior2
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCExterior2
   components:
   - type: Sprite
     state: front_5
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCExterior3
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCExterior3
   components:
   - type: Sprite
     state: front_6
 
 - type: entity
-  parent: RMCVehicleAPCDoorBase
-  id: RMCVehicleAPCExteriorDoor
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCExteriorDoor
   components:
   - type: Sprite
     state: door_back
@@ -712,22 +712,22 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleAPCDoorBase
-  id: RMCVehicleAPCExteriorDoorUnique
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCExteriorDoorUnique
   components:
   - type: Sprite
     state: door_front
 
 - type: entity
-  parent: RMCVehicleAPCDoorBase
-  id: RMCVehicleAPCInteriorDoor
+  parent: VehicleAPCDoorBase
+  id: VehicleAPCInteriorDoor
   components:
   - type: Sprite
     state: exit_door
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCFrontRoof1
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCFrontRoof1
   placement:
     mode: PlaceFree
   components:
@@ -742,8 +742,8 @@
     enabled: false
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCFrontRoof2
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCFrontRoof2
   placement:
     mode: PlaceFree
   components:
@@ -756,15 +756,15 @@
     state: wheel_front_top_2
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCRoof2
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCRoof2
   components:
   - type: Sprite
     state: wall_4
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCWindshieldTop
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWindshieldTop
   placement:
     mode: PlaceFree
   components:
@@ -779,8 +779,8 @@
     enabled: false
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
-  id: RMCVehicleAPCWindshieldBottom
+  parent: VehicleAPCInteriorBase
+  id: VehicleAPCWindshieldBottom
   placement:
     mode: PlaceFree
   components:

@@ -1,0 +1,36 @@
+<controls:VehicleAmmoLoaderMenu
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="Ammo Loader"
+    MinSize="460 190">
+
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat
+                BackgroundColor="#070E18"
+                BorderColor="#6BC7FF"
+                BorderThickness="2"/>
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="8" HorizontalExpand="True" VerticalExpand="True">
+            <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                        BackgroundColor="#0B131F"
+                        BorderColor="#1E3450"
+                        BorderThickness="1"/>
+                </PanelContainer.PanelOverride>
+
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="6">
+                    <BoxContainer
+                        Name="HardpointList"
+                        Access="Public"
+                        Orientation="Vertical"
+                        SeparationOverride="6"
+                        HorizontalExpand="True"/>
+                </ScrollContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:VehicleAmmoLoaderMenu>

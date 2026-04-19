@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
   parent: BaseItem
-  id: RMCVehicleAmmoBoxBase
+  id: VehicleAmmoBoxBase
   name: vehicle ammunition crate
   description: A bulky ammunition container for vehicle weapons.
   components:
@@ -25,15 +25,15 @@
   - type: BulletBox
     amount: 500
     max: 500
-    bulletType: RMCVehicleAmmoBoxFrontal
+    bulletType: VehicleAmmoBoxFrontal
     usedIn: APC frontal cannon
   - type: Tag
     tags:
     - RMCAmmoBox
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxFrontal
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxFrontal
   name: frontal cannon ammo crate
   description: Ammunition for frontal vehicle cannons.
   components:
@@ -53,11 +53,11 @@
   - type: BulletBox
     amount: 500
     max: 500
-    bulletType: RMCVehicleAmmoBoxFrontal
+    bulletType: VehicleAmmoBoxFrontal
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxCupola
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxCupola
   name: cupola cannon ammo crate
   description: Ammunition for cupola-mounted vehicle cannons.
   components:
@@ -77,12 +77,12 @@
   - type: BulletBox
     amount: 500
     max: 500
-    bulletType: RMCVehicleAmmoBoxCupola
+    bulletType: VehicleAmmoBoxCupola
     usedIn: Tank cupola
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxGrenadeLauncher
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxGrenadeLauncher
   name: grenade launcher ammo crate
   description: Ammunition for vehicle grenade launchers.
   components:
@@ -102,12 +102,12 @@
   - type: BulletBox
     amount: 10
     max: 10
-    bulletType: RMCVehicleAmmoBoxGrenadeLauncher
+    bulletType: VehicleAmmoBoxGrenadeLauncher
     usedIn: Tank grenade launcher, Humvee launcher
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxSmokeLauncher
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxSmokeLauncher
   name: smoke launcher ammo crate
   description: Ammunition for vehicle smoke launchers.
   components:
@@ -127,12 +127,12 @@
   - type: BulletBox
     amount: 6
     max: 6
-    bulletType: RMCVehicleAmmoBoxSmokeLauncher
+    bulletType: VehicleAmmoBoxSmokeLauncher
     usedIn: Tank smoke launcher
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxFlareLauncher
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxFlareLauncher
   name: flare launcher ammo crate
   description: Ammunition for vehicle flare launchers.
   components:
@@ -152,12 +152,12 @@
   - type: BulletBox
     amount: 10
     max: 10
-    bulletType: RMCVehicleAmmoBoxFlareLauncher
+    bulletType: VehicleAmmoBoxFlareLauncher
     usedIn: Tank flare launcher, APC flare launcher
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxLTBCannon
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxLTBCannon
   name: LTB cannon ammo crate
   description: Ammunition for light tank cannons.
   components:
@@ -177,12 +177,12 @@
   - type: BulletBox
     amount: 4
     max: 4
-    bulletType: RMCVehicleAmmoBoxLTBCannon
+    bulletType: VehicleAmmoBoxLTBCannon
     usedIn: Tank LTB cannon
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxRocketLauncher
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxRocketLauncher
   name: rocket launcher ammo crate
   description: Ammunition for vehicle rocket launchers.
   components:
@@ -202,12 +202,12 @@
   - type: BulletBox
     amount: 5
     max: 5
-    bulletType: RMCVehicleAmmoBoxRocketLauncher
+    bulletType: VehicleAmmoBoxRocketLauncher
     usedIn: Tank TOW launcher
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxAceAutocannon
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxAceAutocannon
   name: ACE autocannon ammo crate
   description: Ammunition for ACE autocannons.
   components:
@@ -227,12 +227,12 @@
   - type: BulletBox
     amount: 40
     max: 40
-    bulletType: RMCVehicleAmmoBoxAceAutocannon
+    bulletType: VehicleAmmoBoxAceAutocannon
     usedIn: Tank ACE autocannon, APC Boyars dualcannon
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxRERotaryCannon
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxRERotaryCannon
   name: RE700 rotary cannon ammo crate
   description: Ammunition for RE700 rotary cannons.
   components:
@@ -252,12 +252,12 @@
   - type: BulletBox
     amount: 500
     max: 500
-    bulletType: RMCVehicleAmmoBoxRERotaryCannon
+    bulletType: VehicleAmmoBoxRERotaryCannon
     usedIn: Humvee RE700 rotary cannon
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxDragonFlameTank
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxDragonFlameTank
   name: DRGN flame tank
   description: Fuel for DRGN flamethrower systems.
   components:
@@ -277,12 +277,12 @@
   - type: BulletBox
     amount: 60
     max: 60
-    bulletType: RMCVehicleAmmoBoxDragonFlameTank
+    bulletType: VehicleAmmoBoxDragonFlameTank
     usedIn: Tank DRG-N offensive flamer
 
 - type: entity
-  parent: RMCVehicleAmmoBoxBase
-  id: RMCVehicleAmmoBoxLTAA
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxLTAA
   name: LTAA ammo crate
   description: Ammunition for LTAA systems.
   components:
@@ -302,22 +302,22 @@
   - type: BulletBox
     amount: 500
     max: 500
-    bulletType: RMCVehicleAmmoBoxLTAA
+    bulletType: VehicleAmmoBoxLTAA
     usedIn: Tank LTAA-AP minigun
 
 - type: entity
   parent: CMCartridgeSentry10x50mm
-  id: RMCVehicleCartridgeAPCFrontalCannon10x50mm
+  id: VehicleCartridgeAPCFrontalCannon10x50mm
   name: cartridge (10x50mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: CartridgeAmmo
-    proto: RMCVehicleBulletAPCFrontalCannon10x50mm
+    proto: VehicleBulletAPCFrontalCannon10x50mm
     muzzleFlash: MuzzleFlashEffectVehicleOver
 
 - type: entity
   parent: CMCartridgeSentry10x50mm
-  id: RMCVehicleCartridgeSentry10x50mm
+  id: VehicleCartridgeSentry10x50mm
   name: cartridge (10x50mm)
   categories: [ HideSpawnMenu ]
   components:
@@ -327,27 +327,27 @@
 
 - type: entity
   parent: CMCartridgeSentry10x50mm
-  id: RMCVehicleCartridgeBoyarsDualCannon10x50mm
+  id: VehicleCartridgeBoyarsDualCannon10x50mm
   name: cartridge (10x50mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: CartridgeAmmo
-    proto: RMCVehicleBulletBoyarsDualCannon10x50mm
+    proto: VehicleBulletBoyarsDualCannon10x50mm
     muzzleFlash: MuzzleFlashEffectVehicleOver
 
 - type: entity
   parent: CMCartridgeSentry10x50mm
-  id: RMCVehicleCartridgeRERotaryCannon10x50mm
+  id: VehicleCartridgeRERotaryCannon10x50mm
   name: cartridge (10x50mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: CartridgeAmmo
-    proto: RMCVehicleBulletRERotaryCannon10x50mm
+    proto: VehicleBulletRERotaryCannon10x50mm
     muzzleFlash: MuzzleFlashEffectVehicleOver
 
 - type: entity
   parent: CMBulletSentry10x50mm
-  id: RMCVehicleBulletAPCFrontalCannon10x50mm
+  id: VehicleBulletAPCFrontalCannon10x50mm
   name: bullet (10x50mm)
   categories: [ HideSpawnMenu ]
   components:
@@ -358,7 +358,7 @@
 
 - type: entity
   parent: CMBulletSentry10x50mm
-  id: RMCVehicleBulletAPCFrontCannon10x50mm
+  id: VehicleBulletAPCFrontCannon10x50mm
   name: bullet (10x50mm)
   categories: [ HideSpawnMenu ]
   components:
@@ -371,7 +371,7 @@
 
 - type: entity
   parent: CMBulletSentry10x50mm
-  id: RMCVehicleBulletBoyarsDualCannon10x50mm
+  id: VehicleBulletBoyarsDualCannon10x50mm
   name: bullet (10x50mm)
   categories: [ HideSpawnMenu ]
   components:
@@ -384,7 +384,7 @@
 
 - type: entity
   parent: CMBulletSentry10x50mm
-  id: RMCVehicleBulletRERotaryCannon10x50mm
+  id: VehicleBulletRERotaryCannon10x50mm
   name: bullet (10x50mm)
   categories: [ HideSpawnMenu ]
   components:
@@ -397,16 +397,16 @@
 
 - type: entity
   parent: RMCRocket84mmAntiArmor
-  id: RMCVehicleRocket84mmAntiArmor
+  id: VehicleRocket84mmAntiArmor
   categories: [ HideSpawnMenu ]
   components:
   - type: CartridgeAmmo
-    proto: RMCVehicleProjectileRocket84mmAntiArmor
+    proto: VehicleProjectileRocket84mmAntiArmor
     deleteOnSpawn: false
 
 - type: entity
   parent: RMCProjectileRocket84mm
-  id: RMCVehicleProjectileRocket84mmAntiArmor
+  id: VehicleProjectileRocket84mmAntiArmor
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

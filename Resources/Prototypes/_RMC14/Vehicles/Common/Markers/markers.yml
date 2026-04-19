@@ -1,5 +1,5 @@
 - type: entity
-  id: RMCVehicleExitArea
+  id: VehicleExitArea
   name: vehicle exit marker
   description: A clickable marker used for vehicle exits.
   placement:

@@ -276,7 +276,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var isMob = TryComp(other, out MobStateComponent? mob);
         var isXeno = HasComp<XenoComponent>(other);
         var isVehicle = HasComp<VehicleComponent>(other);
-        var isSmashable = HasComp<RMCVehicleSmashableComponent>(other);
+        var isSmashable = HasComp<VehicleSmashableComponent>(other);
 
         if (!isMob &&
             !isXeno &&
@@ -398,7 +398,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         float wheelDamage,
         ref bool playedCollisionSound)
     {
-        if (TryComp(other, out RMCVehicleSmashableComponent? smashable) &&
+        if (TryComp(other, out VehicleSmashableComponent? smashable) &&
             smashable.RequiresDoorUnpowered &&
             hasDoor &&
             !isUnpoweredDoor)
@@ -565,7 +565,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private float GetWheelCollisionDamage(EntityUid vehicle, GridVehicleMoverComponent mover)
     {
-        if (!TryComp(vehicle, out RMCVehicleWheelSlotsComponent? wheels))
+        if (!TryComp(vehicle, out VehicleWheelSlotsComponent? wheels))
             return 0f;
 
         var speedMag = MathF.Abs(mover.CurrentSpeed);
@@ -735,7 +735,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private bool TrySmash(EntityUid target, EntityUid vehicle, ref bool playedCollisionSound)
     {
-        if (!TryComp(target, out RMCVehicleSmashableComponent? smashable))
+        if (!TryComp(target, out VehicleSmashableComponent? smashable))
             return false;
 
         PlayCollisionSound(vehicle, ref playedCollisionSound);
@@ -754,7 +754,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return true;
     }
 
-    private void SmashTarget(EntityUid target, EntityUid vehicle, RMCVehicleSmashableComponent smashable)
+    private void SmashTarget(EntityUid target, EntityUid vehicle, VehicleSmashableComponent smashable)
     {
         var damage = new DamageSpecifier
         {
@@ -780,7 +780,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (played)
             return;
 
-        if (!TryComp<RMCVehicleSoundComponent>(uid, out var sound))
+        if (!TryComp<VehicleSoundComponent>(uid, out var sound))
             return;
 
         if (sound.CollisionSound == null)
@@ -804,7 +804,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (played)
             return;
 
-        if (!TryComp<RMCVehicleSoundComponent>(uid, out var sound))
+        if (!TryComp<VehicleSoundComponent>(uid, out var sound))
             return;
 
         var mobSound = sound.MobCollisionSound ?? sound.CollisionSound;
@@ -851,10 +851,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return;
 
         _stun.TryKnockdown(target, MobCollisionKnockdown, true);
-        var runover = EnsureComp<RMCVehicleRunoverComponent>(target);
+        var runover = EnsureComp<VehicleRunoverComponent>(target);
         runover.Vehicle = vehicle;
         runover.Duration = MobCollisionKnockdown;
-        runover.ExpiresAt = now + runover.Duration + RMCVehicleRunoverSystem.StandUpGrace;
+        runover.ExpiresAt = now + runover.Duration + VehicleRunoverSystem.StandUpGrace;
         Dirty(target, runover);
 
         if (physicsQ.TryComp(target, out var targetBody))
@@ -948,10 +948,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         _stun.TryKnockdown(mob, MobCollisionKnockdown, true);
 
-        var runover = EnsureComp<RMCVehicleRunoverComponent>(mob);
+        var runover = EnsureComp<VehicleRunoverComponent>(mob);
         runover.Vehicle = vehicle;
         runover.Duration = MobCollisionKnockdown;
-        runover.ExpiresAt = _timing.CurTime + runover.Duration + RMCVehicleRunoverSystem.StandUpGrace;
+        runover.ExpiresAt = _timing.CurTime + runover.Duration + VehicleRunoverSystem.StandUpGrace;
         Dirty(mob, runover);
 
         if (physicsQ.TryComp(mob, out var mobBody))
@@ -1153,7 +1153,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             var entXformComp = Transform(ent);
             if (HasComp<MobStateComponent>(ent) ||
-                HasComp<RMCVehicleSmashableComponent>(ent) ||
+                HasComp<VehicleSmashableComponent>(ent) ||
                 HasComp<FoldableComponent>(ent) ||
                 TryComp<DoorComponent>(ent, out _) ||
                 HasComp<BarricadeComponent>(ent))
@@ -1270,7 +1270,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 continue;
 
             if (HasComp<MobStateComponent>(other) ||
-                HasComp<RMCVehicleSmashableComponent>(other) ||
+                HasComp<VehicleSmashableComponent>(other) ||
                 HasComp<FoldableComponent>(other) ||
                 TryComp<DoorComponent>(other, out _) ||
                 HasComp<BarricadeComponent>(other))

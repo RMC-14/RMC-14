@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseStructureCorrodible
-  id: RMCVehicleSupplyConsole
+  id: VehicleSupplyConsole
   name: vehicle supply console
   description: A console for ordering vehicles and their hardpoints.
   components:
@@ -25,46 +25,46 @@
         layer:
         - MachineLayer
   - type: ActivatableUI
-    key: enum.RMCVehicleSupplyUIKey.Key
+    key: enum.VehicleSupplyUIKey.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "CMAccessRequisitions" ] ]
   - type: UserInterface
     interfaces:
-      enum.RMCVehicleSupplyUIKey.Key:
-        type: RMCVehicleSupplyBui
-  - type: RMCVehicleSupplyConsole
+      enum.VehicleSupplyUIKey.Key:
+        type: VehicleSupplyBui
+  - type: VehicleSupplyConsole
     vehicles:
     - name: humvee
-      vehicle: RMCVehicleHumvee
-      unlock: RMCVehicleHumvee
+      vehicle: VehicleHumvee
+      unlock: VehicleHumvee
       hardpoints:
-      - RMCVehicleHumveeTurret
-      - RMCVehicleHumveeCannon
-      - RMCVehicleHumveeLauncher
-      - RMCVehicleHumveeSnowplow
-      - RMCVehicleHumveeOverlight
-      - RMCVehicleHumveeHatch
-      - RMCVehicleHumveeWheel
+      - VehicleHumveeTurret
+      - VehicleHumveeCannon
+      - VehicleHumveeLauncher
+      - VehicleHumveeSnowplow
+      - VehicleHumveeOverlight
+      - VehicleHumveeHatch
+      - VehicleHumveeWheel
     - name: humvee (medical)
-      vehicle: RMCVehicleHumveeMedical
-      unlock: RMCVehicleHumveeMedical
+      vehicle: VehicleHumveeMedical
+      unlock: VehicleHumveeMedical
       hardpoints:
-      - RMCVehicleHumveeSnowplow
-      - RMCVehicleHumveeOverlight
-      - RMCVehicleHumveeHatch
-      - RMCVehicleHumveeWheel
+      - VehicleHumveeSnowplow
+      - VehicleHumveeOverlight
+      - VehicleHumveeHatch
+      - VehicleHumveeWheel
     - name: humvee (transport)
-      vehicle: RMCVehicleHumveeTransport
-      unlock: RMCVehicleHumveeTransport
+      vehicle: VehicleHumveeTransport
+      unlock: VehicleHumveeTransport
       hardpoints:
-      - RMCVehicleHumveeSnowplow
-      - RMCVehicleHumveeOverlight
-      - RMCVehicleHumveeHatch
-      - RMCVehicleHumveeWheel
+      - VehicleHumveeSnowplow
+      - VehicleHumveeOverlight
+      - VehicleHumveeHatch
+      - VehicleHumveeWheel
     - name: apc
-      vehicle: RMCVehicleAPC
-      unlock: RMCVehicleAPC
+      vehicle: VehicleAPC
+      unlock: VehicleAPC
       hardpoints:
       - RMCAPCDualCannon
       - RMCAPCFrontCannon
@@ -73,8 +73,8 @@
       - RMCAPCFreightStorage
       - RMCAPCWheel
     - name: apc (medical)
-      vehicle: RMCVehicleAPCMed
-      unlock: RMCVehicleAPCMed
+      vehicle: VehicleAPCMed
+      unlock: VehicleAPCMed
       hardpoints:
       - RMCAPCDualCannon
       - RMCAPCFrontCannon
@@ -83,8 +83,8 @@
       - RMCAPCFreightStorage
       - RMCAPCWheel
     - name: apc (command)
-      vehicle: RMCVehicleAPCCommand
-      unlock: RMCVehicleAPCCommand
+      vehicle: VehicleAPCCommand
+      unlock: VehicleAPCCommand
       hardpoints:
       - RMCAPCDualCannon
       - RMCAPCFrontCannon
@@ -93,40 +93,40 @@
       - RMCAPCFreightStorage
       - RMCAPCWheel
     - name: tank
-      vehicle: RMCVehicleTank
-      unlock: RMCVehicleTank
+      vehicle: VehicleTank
+      unlock: VehicleTank
       hardpoints:
-      - RMCVehicleTankArmorBallistic
-      - RMCVehicleTankArmorConcussive
-      - RMCVehicleTankArmorCaustic
-      - RMCVehicleTankArmorPaladin
-      - RMCVehicleTankSnowplow
-      - RMCVehicleTankLTAAAPMinigun
-      - RMCVehicleTankLTBCannon
-      - RMCVehicleTankAceAutocannon
-      - RMCVehicleTankDragonFlamer
-      - RMCVehicleTankFlamer
-      - RMCVehicleTankGrenadeLauncher
-      - RMCVehicleTankRERE700
-      - RMCVehicleTankWarningArray
-      - RMCVehicleTankOverdriveEnhancer
-      - RMCVehicleTankRocketLauncher
-      - RMCVehicleTankTowLauncher
-      - RMCVehicleTankFlareModule
-      - RMCVehicleTankArtilleryModule
-      - RMCVehicleTankReinforcedTreads
-      - RMCVehicleTankTreads
+      - VehicleTankArmorBallistic
+      - VehicleTankArmorConcussive
+      - VehicleTankArmorCaustic
+      - VehicleTankArmorPaladin
+      - VehicleTankSnowplow
+      - VehicleTankLTAAAPMinigun
+      - VehicleTankLTBCannon
+      - VehicleTankAceAutocannon
+      - VehicleTankDragonFlamer
+      - VehicleTankFlamer
+      - VehicleTankGrenadeLauncher
+      - VehicleTankRERE700
+      - VehicleTankWarningArray
+      - VehicleTankOverdriveEnhancer
+      - VehicleTankRocketLauncher
+      - VehicleTankTowLauncher
+      - VehicleTankFlareModule
+      - VehicleTankArtilleryModule
+      - VehicleTankReinforcedTreads
+      - VehicleTankTreads
     - name: humvee (arc)
-      vehicle: RMCVehicleHumveeARC
-      unlock: RMCVehicleHumveeARC
+      vehicle: VehicleHumveeARC
+      unlock: VehicleHumveeARC
       hardpoints:
-      - RMCVehicleHumveeTurret
-      - RMCVehicleHumveeARCCannon
-      - RMCVehicleHumveeLauncher
-      - RMCVehicleHumveeSnowplow
-      - RMCVehicleHumveeOverlight
-      - RMCVehicleHumveeHatch
-      - RMCVehicleHumveeWheel
+      - VehicleHumveeTurret
+      - VehicleHumveeARCCannon
+      - VehicleHumveeLauncher
+      - VehicleHumveeSnowplow
+      - VehicleHumveeOverlight
+      - VehicleHumveeHatch
+      - VehicleHumveeWheel
   - type: PointLight
     radius: 1.5
     energy: 1.6
@@ -152,7 +152,7 @@
   - type: RMCMesonsNonviewable
 
 - type: entity
-  id: RMCVehicleLift
+  id: VehicleLift
   name: vehicle lift
   suffix: Lowered, Vehicle Supply
   placement:
@@ -188,4 +188,4 @@
     blacklist:
       tags:
       - Catwalk
-  - type: RMCVehicleSupplyLift
+  - type: VehicleSupplyLift

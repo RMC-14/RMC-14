@@ -4,7 +4,7 @@
   name: disposal unit
   description: A pneumatic waste disposal unit.
   components:
-  - type: RMCVehicleSmashable
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Piping/disposal.rsi
     layers:

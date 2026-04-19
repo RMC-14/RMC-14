@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: RMCVehiclePizzaVanRoofBase
+  id: VehiclePizzaVanRoofBase
   name: pizza van interior roof
   description: A removable roof section for the pizza van interior.
   placement:
@@ -27,8 +27,8 @@
     - "roof"
 
 - type: entity
-  parent: RMCVehiclePizzaVanRoofBase
-  id: RMCVehiclePizzaVanRoof1
+  parent: VehiclePizzaVanRoofBase
+  id: VehiclePizzaVanRoof1
   components:
   - type: Sprite
     layers:
@@ -36,8 +36,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehiclePizzaVanRoofBase
-  id: RMCVehiclePizzaVanRoof2
+  parent: VehiclePizzaVanRoofBase
+  id: VehiclePizzaVanRoof2
   components:
   - type: Sprite
     layers:
@@ -45,8 +45,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehiclePizzaVanRoofBase
-  id: RMCVehiclePizzaVanRoof3
+  parent: VehiclePizzaVanRoofBase
+  id: VehiclePizzaVanRoof3
   components:
   - type: Sprite
     layers:
@@ -54,8 +54,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehiclePizzaVanRoofBase
-  id: RMCVehiclePizzaVanRoof4
+  parent: VehiclePizzaVanRoofBase
+  id: VehiclePizzaVanRoof4
   components:
   - type: Sprite
     layers:
@@ -63,8 +63,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehiclePizzaVanRoofBase
-  id: RMCVehiclePizzaVanRoof5
+  parent: VehiclePizzaVanRoofBase
+  id: VehiclePizzaVanRoof5
   components:
   - type: Sprite
     layers:
@@ -72,8 +72,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehiclePizzaVanRoofBase
-  id: RMCVehiclePizzaVanFrontRoof1
+  parent: VehiclePizzaVanRoofBase
+  id: VehiclePizzaVanFrontRoof1
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/pizza_van_interior.rsi
@@ -83,8 +83,8 @@
       map: [ "roof" ]
 
 - type: entity
-  parent: RMCVehiclePizzaVanRoofBase
-  id: RMCVehiclePizzaVanFrontRoof2
+  parent: VehiclePizzaVanRoofBase
+  id: VehiclePizzaVanFrontRoof2
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/pizza_van_interior.rsi
@@ -95,7 +95,7 @@
 
 - type: entity
   abstract: true
-  id: RMCVehiclePizzaVanInteriorBase
+  id: VehiclePizzaVanInteriorBase
   name: pizza van interior piece
   description: A decorative interior piece for the pizza van.
   placement:
@@ -110,8 +110,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehiclePizzaVanInteriorBase
-  id: RMCVehiclePizzaVanWallBase
+  parent: VehiclePizzaVanInteriorBase
+  id: VehiclePizzaVanWallBase
   components:
   - type: Physics
     bodyType: Static
@@ -135,36 +135,36 @@
         - InteractImpassable
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanFront1
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanFront1
   components:
   - type: Sprite
     state: front_1
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanFront2
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanFront2
   components:
   - type: Sprite
     state: front_2
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanFront3
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanFront3
   components:
   - type: Sprite
     state: front_3
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanBack1
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanBack1
   components:
   - type: Sprite
     state: back_1
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanBack2
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanBack2
   components:
   - type: Sprite
     state: back_2
@@ -172,15 +172,15 @@
   - type: InteractionOutline
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanBack3
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanBack3
   components:
   - type: Sprite
     state: back_3
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanLeft1
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanLeft1
   components:
   - type: Sprite
     state: back_1
@@ -188,8 +188,8 @@
   - type: InteractionOutline
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanLeft2
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanLeft2
   components:
   - type: Sprite
     state: back_2
@@ -197,64 +197,64 @@
   - type: InteractionOutline
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanLeft3
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanLeft3
   components:
   - type: Sprite
     state: back_3
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanRight1
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanRight1
   components:
   - type: Sprite
     state: back_1
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanRight2
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanRight2
   components:
   - type: Sprite
     state: back_2
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanRight3
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanRight3
   components:
   - type: Sprite
     state: back_3
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanFrontLeft1
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanFrontLeft1
   components:
   - type: Sprite
     state: front_1
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanFrontLeft2
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanFrontLeft2
   components:
   - type: Sprite
     state: front_2
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanFrontRight1
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanFrontRight1
   components:
   - type: Sprite
     state: back_1
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanFrontRight2
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanFrontRight2
   components:
   - type: Sprite
     state: back_2
 
 - type: entity
-  parent: RMCVehiclePizzaVanInteriorBase
-  id: RMCVehiclePizzaVanExterior1
+  parent: VehiclePizzaVanInteriorBase
+  id: VehiclePizzaVanExterior1
   components:
   - type: Sprite
     state: exterior_2
@@ -285,8 +285,8 @@
     fadeOnSharedGrid: true
 
 - type: entity
-  parent: RMCVehiclePizzaVanInteriorBase
-  id: RMCVehiclePizzaVanExterior2
+  parent: VehiclePizzaVanInteriorBase
+  id: VehiclePizzaVanExterior2
   components:
   - type: Sprite
     state: exterior_2
@@ -297,8 +297,8 @@
     fadeOnSharedGrid: true
 
 - type: entity
-  parent: RMCVehiclePizzaVanInteriorBase
-  id: RMCVehiclePizzaVanExterior3
+  parent: VehiclePizzaVanInteriorBase
+  id: VehiclePizzaVanExterior3
   components:
   - type: Sprite
     state: exterior_3
@@ -329,8 +329,8 @@
     fadeOnSharedGrid: true
 
 - type: entity
-  parent: RMCVehiclePizzaVanRoofBase
-  id: RMCVehiclePizzaVanBackground1
+  parent: VehiclePizzaVanRoofBase
+  id: VehiclePizzaVanBackground1
   components:
   - type: Sprite
     state: background_2
@@ -342,8 +342,8 @@
   - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanBackground2
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanBackground2
   components:
   - type: Sprite
     drawdepth: Walls
@@ -351,8 +351,8 @@
   - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehiclePizzaVanRoofBase
-  id: RMCVehiclePizzaVanBackground3
+  parent: VehiclePizzaVanRoofBase
+  id: VehiclePizzaVanBackground3
   components:
   - type: Sprite
     state: background_3
@@ -364,8 +364,8 @@
   - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehiclePizzaVanWallBase
-  id: RMCVehiclePizzaVanInteriorDoor
+  parent: VehiclePizzaVanWallBase
+  id: VehiclePizzaVanInteriorDoor
   components:
   - type: Sprite
     state: interior_door
@@ -400,8 +400,8 @@
     reactToMouse: false
 
 - type: entity
-  parent: RMCVehiclePizzaVanInteriorBase
-  id: RMCVehiclePizzaVanExteriorDoor
+  parent: VehiclePizzaVanInteriorBase
+  id: VehiclePizzaVanExteriorDoor
   components:
   - type: Sprite
     state: exterior_door
@@ -417,8 +417,8 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehiclePizzaVanInteriorBase
-  id: RMCVehiclePizzaVanExteriorDoorUnique
+  parent: VehiclePizzaVanInteriorBase
+  id: VehiclePizzaVanExteriorDoorUnique
   components:
   - type: Sprite
     state: exterior_door_unique
@@ -434,8 +434,8 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehiclePizzaVanInteriorBase
-  id: RMCVehiclePizzaVanWindshieldTop
+  parent: VehiclePizzaVanInteriorBase
+  id: VehiclePizzaVanWindshieldTop
   components:
   - type: Sprite
     state: windshield_viewport_top
@@ -446,8 +446,8 @@
     fadeOnSharedGrid: true
 
 - type: entity
-  parent: RMCVehiclePizzaVanInteriorBase
-  id: RMCVehiclePizzaVanWindshieldBottom
+  parent: VehiclePizzaVanInteriorBase
+  id: VehiclePizzaVanWindshieldBottom
   components:
   - type: Sprite
     state: windshield_viewport_bottom

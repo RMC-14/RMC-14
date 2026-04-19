@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxLTBCannon
+    - id: VehicleAmmoBoxLTBCannon
       amount: 6
 
 - type: entity
@@ -15,7 +15,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxLTAA
+    - id: VehicleAmmoBoxLTAA
       amount: 3
 
 - type: entity
@@ -25,7 +25,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxAceAutocannon
+    - id: VehicleAmmoBoxAceAutocannon
       amount: 5
 
 - type: entity
@@ -35,7 +35,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxDragonFlameTank
+    - id: VehicleAmmoBoxDragonFlameTank
       amount: 3
 
 - type: entity
@@ -45,7 +45,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxAceAutocannon
+    - id: VehicleAmmoBoxAceAutocannon
       amount: 5
 
 - type: entity
@@ -55,7 +55,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxGrenadeLauncher
+    - id: VehicleAmmoBoxGrenadeLauncher
       amount: 5
 
 - type: entity
@@ -65,7 +65,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxSmokeLauncher
+    - id: VehicleAmmoBoxSmokeLauncher
       amount: 4
 
 - type: entity
@@ -75,7 +75,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxRocketLauncher
+    - id: VehicleAmmoBoxRocketLauncher
       amount: 3
 
 - type: entity
@@ -85,7 +85,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxCupola
+    - id: VehicleAmmoBoxCupola
       amount: 2
 
 - type: entity
@@ -105,7 +105,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxFrontal
+    - id: VehicleAmmoBoxFrontal
       amount: 2
 
 - type: entity
@@ -115,7 +115,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxFlareLauncher
+    - id: VehicleAmmoBoxFlareLauncher
       amount: 4
 
 - type: entity
@@ -125,5 +125,5 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCVehicleAmmoBoxRERotaryCannon
+    - id: VehicleAmmoBoxRERotaryCannon
       amount: 3

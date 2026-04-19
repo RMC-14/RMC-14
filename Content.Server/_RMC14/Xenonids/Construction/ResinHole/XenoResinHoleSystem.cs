@@ -61,7 +61,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private readonly DestructibleSystem _destructible = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly RMCVehicleWheelSystem _wheels = default!;
+    [Dependency] private readonly VehicleWheelSystem _wheels = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 

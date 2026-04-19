@@ -16,15 +16,15 @@
   components:
   - type: Sprite
     state: tires
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Wheel
     vehicleFamily: APC
     slotType: Wheel
     damageMultiplier: 0.15
     repairRate: 0.0165
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 500
-  - type: RMCVehicleWheelItem
+  - type: VehicleWheelItem
 
 - type: entity
   parent: RMCAPCHardpointBase
@@ -34,13 +34,13 @@
   components:
   - type: Sprite
     state: front_cannon
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Cannon
     vehicleFamily: APC
     slotType: Cannon
     damageMultiplier: 0.11
     repairRate: 0.01
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurret
   - type: GunUseGunOrigin
@@ -54,20 +54,20 @@
     cameraRecoilScalar: 0
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: RMCVehicleCartridgeAPCFrontalCannon10x50mm
+    proto: VehicleCartridgeAPCFrontalCannon10x50mm
     capacity: 500
-  - type: RMCVehicleHardpointAmmo
+  - type: VehicleHardpointAmmo
     magazineSize: 500
     maxStoredMagazines: 1
   - type: GunFireArc
     arc: 180
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxFrontal
+    bulletType: VehicleAmmoBoxFrontal
   - type: GunMuzzleOffset
     offset: "0.5,-1.7"
     muzzleOffset: "0,0"
     useAimDirection: true
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: frontalcannon_0
 
 - type: entity
@@ -78,13 +78,13 @@
   components:
   - type: Sprite
     state: dual_cannon
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: Turret
     vehicleFamily: APC
     slotType: Turret
     damageMultiplier: 0.2
     repairRate: 0.008
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurret
   - type: GunUseGunOrigin
@@ -98,15 +98,15 @@
     cameraRecoilScalar: 0
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: RMCVehicleCartridgeBoyarsDualCannon10x50mm
+    proto: VehicleCartridgeBoyarsDualCannon10x50mm
     capacity: 40
-  - type: RMCVehicleHardpointAmmo
+  - type: VehicleHardpointAmmo
     magazineSize: 40
     maxStoredMagazines: 2
   - type: GunFireArc
     arc: 90
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxAceAutocannon
+    bulletType: VehicleAmmoBoxAceAutocannon
   - type: GunMuzzleOffset
     useDirectionalOffsets: true
     offsetNorth: "0,0" #TODO
@@ -116,7 +116,7 @@
     muzzleOffset: "0,0"
     useAimDirection: true
 
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: dualcannon_0
 
 - type: entity
@@ -127,15 +127,15 @@
   components:
   - type: Sprite
     state: comms_relay
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: SupportAttachment
     vehicleFamily: APC
     slotType: SupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 100
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: comms_relay_0
 
 - type: entity
@@ -146,13 +146,13 @@
   components:
   - type: Sprite
     state: flare_launcher
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: SupportAttachment
     vehicleFamily: APC
     slotType: SupportAttachment
     damageMultiplier: 0.1
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurret
   - type: GunUseGunOrigin
@@ -176,18 +176,18 @@
       - RMCFlare
       - RMCFlareCAS
     proto: CMFlare
-  - type: RMCVehicleHardpointAmmo
+  - type: VehicleHardpointAmmo
     magazineSize: 10
     maxStoredMagazines: 3
   - type: GunFireArc
     arc: 360
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxFlareLauncher
+    bulletType: VehicleAmmoBoxFlareLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     muzzleOffset: "0,0"
     useAimDirection: true
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: flare_launcher_0
 
 - type: entity
@@ -198,20 +198,20 @@
   components:
   - type: Sprite
     state: freighter_storage
-  - type: RMCHardpointItem
+  - type: HardpointItem
     hardpointType: SupportAttachment
     vehicleFamily: APC
     slotType: SupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 100
-  - type: RMCHardpointVisual
+  - type: HardpointVisual
     vehicleState: freight_0
 
 - type: entity
   parent: BaseItem
-  id: RMCVehicleAPCM56FPWPortGunBase
+  id: VehicleAPCM56FPWPortGunBase
   abstract: true
   name: APC port gun
   description: A mounted M56 FPW port gun.
@@ -221,7 +221,7 @@
     state: m56_FPW
   - type: Item
     size: Huge
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 100
   - type: VehiclePortGun
   - type: GunUseGunOrigin
@@ -252,8 +252,8 @@
           - RMCMagazineSmartGun
 
 - type: entity
-  parent: RMCVehicleAPCM56FPWPortGunBase
-  id: RMCVehicleAPCM56FPWPortGunRight
+  parent: VehicleAPCM56FPWPortGunBase
+  id: VehicleAPCM56FPWPortGunRight
   name: APC port gun (starboard)
   components:
   - type: GunFireArc
@@ -266,8 +266,8 @@
     useAimDirection: true
 
 - type: entity
-  parent: RMCVehicleAPCM56FPWPortGunBase
-  id: RMCVehicleAPCM56FPWPortGunLeft
+  parent: VehicleAPCM56FPWPortGunBase
+  id: VehicleAPCM56FPWPortGunLeft
   name: APC port gun (port)
   components:
   - type: GunFireArc

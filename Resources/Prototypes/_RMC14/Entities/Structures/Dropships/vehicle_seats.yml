@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMSeatBase
   id: CMSeatPassenger
   name: passenger seat
@@ -128,8 +128,8 @@
     allowHotbarSelection: true
   - type: UserInterface
     interfaces:
-      enum.RMCVehicleWeaponsUiKey.Key:
-        type: RMCVehicleWeaponsBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
 
 - type: entity
   parent: RMCSeatArmoredBase
@@ -160,8 +160,8 @@
     - Support
   - type: UserInterface
     interfaces:
-      enum.RMCVehicleWeaponsUiKey.Key:
-        type: RMCVehicleWeaponsBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
 
 - type: entity
   parent: RMCSeatArmoredBase
@@ -178,8 +178,8 @@
     allowHotbarSelection: true
   - type: UserInterface
     interfaces:
-      enum.RMCVehicleWeaponsUiKey.Key:
-        type: RMCVehicleWeaponsBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
 
 - type: entity
   parent: RMCSeatArmoredBase
@@ -202,8 +202,8 @@
     - Launcher
   - type: UserInterface
     interfaces:
-      enum.RMCVehicleWeaponsUiKey.Key:
-        type: RMCVehicleWeaponsBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
 
 - type: entity
   abstract: true
@@ -248,5 +248,5 @@
     allowHotbarSelection: true
   - type: UserInterface
     interfaces:
-      enum.RMCVehicleWeaponsUiKey.Key:
-        type: RMCVehicleWeaponsBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface

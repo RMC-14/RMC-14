@@ -121,14 +121,14 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 1.559523,1.539705
       parent: 2
-- proto: RMCVehicleExitArea
+- proto: VehicleExitArea
   entities:
   - uid: 9
     components:
     - type: Transform
       pos: -0.5,0.5
       parent: 2
-- proto: RMCVehicleInteriorExtinguisherClosed
+- proto: VehicleInteriorExtinguisherClosed
   entities:
   - uid: 11
     components:
@@ -139,35 +139,35 @@ entities:
       canCollide: False
     - type: Fixtures
       fixtures: {}
-- proto: RMCVehicleInteriorNanomed
+- proto: VehicleInteriorNanomed
   entities:
   - uid: 64
     components:
     - type: Transform
       pos: 3.2269573,1.3716365
       parent: 2
-- proto: RMCVehicleInvisibleWallNoVision
+- proto: VehicleInvisibleWallNoVision
   entities:
   - uid: 63
     components:
     - type: Transform
       pos: 2.5,-0.5
       parent: 2
-- proto: RMCVehicleSPPTankAmmoLoader
+- proto: VehicleSPPTankAmmoLoader
   entities:
   - uid: 10
     components:
     - type: Transform
       pos: 1.3103718,2.201783
       parent: 2
-- proto: RMCVehicleSPPTankChassisAlt
+- proto: VehicleSPPTankChassisAlt
   entities:
   - uid: 4
     components:
     - type: Transform
       pos: 2.503652,0.99287343
       parent: 2
-- proto: RMCVehicleSPPTankSmallLocker
+- proto: VehicleSPPTankSmallLocker
   entities:
   - uid: 7
     components:
@@ -179,7 +179,7 @@ entities:
     - type: Transform
       pos: 0.8693948,1.3397707
       parent: 2
-- proto: RMCVehicleViewportUnanchored
+- proto: VehicleViewportUnanchored
   entities:
   - uid: 6
     components:

@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: RMCVehicleSPPAPCInteriorBase
+  id: VehicleSPPAPCInteriorBase
   name: SPP APC interior piece
   description: A decorative interior piece for an SPP APC.
   placement:
@@ -13,7 +13,7 @@
 
 - type: entity
   abstract: true
-  id: RMCVehicleSPPAPCRoofBase
+  id: VehicleSPPAPCRoofBase
   name: SPP APC Side Door
   placement:
     mode: PlaceFree
@@ -37,7 +37,7 @@
 
 - type: entity
   abstract: true
-  id: RMCVehicleSPPAPCChassisBase
+  id: VehicleSPPAPCChassisBase
   name: SPP APC interior chassis
   description: A chassis segment for an SPP APC interior.
   placement:
@@ -49,16 +49,16 @@
   - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleSPPAPCChassisBase
-  id: RMCVehicleSPPAPCChassis
+  parent: VehicleSPPAPCChassisBase
+  id: VehicleSPPAPCChassis
   components:
   - type: Sprite
     state: sppapc_chassis
 
 - type: entity
   abstract: true
-  parent: RMCVehicleSPPAPCInteriorBase
-  id: RMCVehicleSPPAPCWallBase
+  parent: VehicleSPPAPCInteriorBase
+  id: VehicleSPPAPCWallBase
   placement:
     mode: PlaceFree
   components:
@@ -85,8 +85,8 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleSPPAPCWallBase
-  id: RMCVehicleSPPAPCDoorBase
+  parent: VehicleSPPAPCWallBase
+  id: VehicleSPPAPCDoorBase
   components:
   - type: Clickable
   - type: InteractionOutline
@@ -95,8 +95,8 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleSPPAPCDoorBase
-  id: RMCVehicleSPPAPCDoorFront
+  parent: VehicleSPPAPCDoorBase
+  id: VehicleSPPAPCDoorFront
   components:
   - type: Sprite
     state: door_front
@@ -119,8 +119,8 @@
         - InteractImpassable
 
 - type: entity
-  parent: RMCVehicleSPPAPCRoofBase
-  id: RMCVehicleSPPAPCDoorBack
+  parent: VehicleSPPAPCRoofBase
+  id: VehicleSPPAPCDoorBack
   components:
   - type: Sprite
     drawdepth: BelowMobs
@@ -134,23 +134,23 @@
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleSPPAPCDoorBase
-  id: RMCVehicleSPPAPCDoorRearCenter
+  parent: VehicleSPPAPCDoorBase
+  id: VehicleSPPAPCDoorRearCenter
   components:
   - type: Sprite
     state: door_rear_center
 
 - type: entity
-  parent: RMCVehicleSPPAPCDoorBase
-  id: RMCVehicleSPPAPCExitDoor
+  parent: VehicleSPPAPCDoorBase
+  id: VehicleSPPAPCExitDoor
   components:
   - type: Sprite
     state: exit_door
 
 - type: entity
   abstract: true
-  parent: RMCVehicleInteriorWallMountedBase
-  id: RMCVehicleSPPAPCConsoleBase
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleSPPAPCConsoleBase
   placement:
     mode: PlaceFree
   components:
@@ -158,48 +158,48 @@
     sprite: _RMC14/Structures/Vehicles/Interiors/sppapc.rsi
 
 - type: entity
-  parent: RMCVehicleSPPAPCConsoleBase
-  id: RMCVehicleSPPAPCDriverConsole
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCDriverConsole
   name: SPP APC driver console
   components:
   - type: Sprite
     state: Driveconsole
 
 - type: entity
-  parent: RMCVehicleSPPAPCConsoleBase
-  id: RMCVehicleSPPAPCDriverConsoleOff
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCDriverConsoleOff
   name: SPP APC driver console (off)
   components:
   - type: Sprite
     state: Driveconsole0
 
 - type: entity
-  parent: RMCVehicleSPPAPCConsoleBase
-  id: RMCVehicleSPPAPCDriverConsoleBroken
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCDriverConsoleBroken
   name: SPP APC driver console (broken)
   components:
   - type: Sprite
     state: Driveconsoleb
 
 - type: entity
-  parent: RMCVehicleSPPAPCConsoleBase
-  id: RMCVehicleSPPAPCWeaponConsole
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCWeaponConsole
   name: SPP APC weapon console
   components:
   - type: Sprite
     state: Weaponconsole
 
 - type: entity
-  parent: RMCVehicleSPPAPCConsoleBase
-  id: RMCVehicleSPPAPCWeaponConsoleOff
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCWeaponConsoleOff
   name: SPP APC weapon console (off)
   components:
   - type: Sprite
     state: Weaponconsole0
 
 - type: entity
-  parent: RMCVehicleSPPAPCConsoleBase
-  id: RMCVehicleSPPAPCWeaponConsoleBroken
+  parent: VehicleSPPAPCConsoleBase
+  id: VehicleSPPAPCWeaponConsoleBroken
   name: SPP APC weapon console (broken)
   components:
   - type: Sprite
@@ -208,7 +208,7 @@
 - type: entity
   abstract: true
   parent: CMClosetBase
-  id: RMCVehicleSPPAPCLockerBase
+  id: VehicleSPPAPCLockerBase
   name: SPP APC locker
   description: A storage locker for SPP APC interiors.
   placement:
@@ -235,21 +235,21 @@
     stateDoorOpen:
 
 - type: entity
-  parent: RMCVehicleSPPAPCLockerBase
-  id: RMCVehicleSPPAPCLocker
+  parent: VehicleSPPAPCLockerBase
+  id: VehicleSPPAPCLocker
   name: SPP APC locker
 
 - type: entity
-  parent: RMCVehicleInteriorWallMountedBase
-  id: RMCVehicleSPPAPCAmmoLoader
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleSPPAPCAmmoLoader
   name: SPP APC ammo loader
   description: A loader for SPP APC hardpoint ammunition.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/sppapc.rsi
     state: weapons_loader
-  - type: RMCVehicleAmmoLoader
+  - type: VehicleAmmoLoader
   - type: UserInterface
     interfaces:
-      enum.RMCVehicleAmmoLoaderUiKey.Key:
-        type: RMCVehicleAmmoLoaderBoundUserInterface
+      enum.VehicleAmmoLoaderUiKey.Key:
+        type: VehicleAmmoLoaderBoundUserInterface
