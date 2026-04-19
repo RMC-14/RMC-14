@@ -82,7 +82,7 @@
   id: HandcannonRMC
   storage:
     back:
-    - RMCWeaponPistolHandcannonWinterWyvern
+    - RMCWeaponPistolHandcannonCustom
 
 - type: loadout
   id: HandcannonPolishedRMC

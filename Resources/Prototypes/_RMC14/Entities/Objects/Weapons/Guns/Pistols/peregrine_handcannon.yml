@@ -131,18 +131,18 @@
 
 - type: entity
   parent: RMCWeaponPistolHandcannonGold
-  id: RMCWeaponPistolHandcannonWinterWyvern
+  id: RMCWeaponPistolHandcannonCustom
   name: custom Peregrine Handcannon
   description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Tt's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_custom.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_custom.rsi
   - type: Tag
     tags:
     - Sidearm
-    - RMCWeaponPistolHandcannonWyvern
+    - RMCWeaponPistolHandcannonCustom
 
 - type: entity
   parent: RMCWeaponPistolHandcannonGold
@@ -331,7 +331,7 @@
   id: RMCWeaponPistolHandcannonGold
 
 - type: Tag
-  id: RMCWeaponPistolHandcannonWyvern
+  id: RMCWeaponPistolHandcannonCustom
 
 - type: Tag
   id: RMCMagazinePistolHandcannon

@@ -804,7 +804,7 @@
       co_handcannon_fill:
         whitelist:
           tags:
-          - RMCWeaponPistolHandcannonWyvern # ideally should have it's own inbelt sprite
+          - RMCWeaponPistolHandcannonCustom # ideally should have it's own inbelt sprite
           - RMCWeaponPistolHandcannonPolished
   - type: ItemCamouflage
     camouflageVariations:

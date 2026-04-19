@@ -685,7 +685,7 @@
       amount: 4
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
-    - id: RMCWeaponPistolHandcannonWinterWyvern
+    - id: RMCWeaponPistolHandcannonCustom
 
 - type: entity
   parent: RMCBeltHolsterPistol
