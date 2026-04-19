@@ -30,7 +30,7 @@
   parent: CMHeadBeret
   id: CMHeadBeretCMB
   name: CMB Riot Control Unit beret
-  description: A dark beret with a badge that has a word 'MARSHAL' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
+  description: A dark beret with a badge that has the word 'MARSHAL' on the front, representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_cmb.rsi
