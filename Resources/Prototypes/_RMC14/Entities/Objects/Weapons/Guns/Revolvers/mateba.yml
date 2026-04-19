@@ -457,6 +457,9 @@
     - id: RMCAttachmentMatebaStandard
     - id: RMCAttachmentMatebaMarksman
     - id: RMCAttachmentMatebaSnubNose
+  - type: Tag
+    tags:
+    - RMCMatebaCustomizationCase
 
 - type: entity
   parent: RMCMatebaCustomizationCase
@@ -481,6 +484,9 @@
     - id: RMCAttachmentMatebaStandard
     - id: RMCAttachmentMatebaMarksman
     - id: RMCAttachmentMatebaSnubNose
+
+- type: Tag
+  id: RMCMatebaCustomizationCase
 
 - type: entity
   parent: RMCMatebaCustomizationCase
