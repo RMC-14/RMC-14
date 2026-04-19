@@ -6,6 +6,14 @@ using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Shared._RMC14.Vehicle;
 
+public readonly record struct VehicleAmmoSlotState(
+    int SlotIndex,
+    int Rounds,
+    int Capacity,
+    bool IsReadySlot);
+
+public readonly record struct VehicleAmmoChangedEvent(EntityUid AmmoProvider);
+
 public sealed class VehicleHardpointAmmoSystem : EntitySystem
 {
     [Dependency] private readonly SharedGunSystem _gun = default!;
@@ -72,7 +80,169 @@ public sealed class VehicleHardpointAmmoSystem : EntitySystem
         CompactStoredRoundSlots(ent, updatedSlots, magazineSize);
 
         _gun.SetBallisticUnspawned((ent.Owner, ammo), chamberSize);
+        RaiseAmmoChanged(ent.Owner);
         return true;
+    }
+
+    public List<VehicleAmmoSlotState> GetAmmoQueueSlots(
+        VehicleHardpointAmmoComponent hardpointAmmo,
+        BallisticAmmoProviderComponent ammo)
+    {
+        var magazineSize = GetMagazineSize(hardpointAmmo, ammo);
+        var entries = new List<VehicleAmmoSlotState>(Math.Max(1, hardpointAmmo.MaxStoredMagazines));
+        entries.Add(new VehicleAmmoSlotState(
+            0,
+            Math.Clamp(ammo.Count, 0, magazineSize),
+            magazineSize,
+            true));
+
+        var reserveSlots = GetStoredRoundSlots(hardpointAmmo, magazineSize);
+        for (var i = 0; i < reserveSlots.Count; i++)
+        {
+            entries.Add(new VehicleAmmoSlotState(
+                i + 1,
+                reserveSlots[i],
+                magazineSize,
+                false));
+        }
+
+        return entries;
+    }
+
+    public bool HasLoadSpace(
+        VehicleHardpointAmmoComponent hardpointAmmo,
+        BallisticAmmoProviderComponent ammo,
+        int ammoSlot)
+    {
+        if (ammoSlot < 0)
+            return false;
+
+        var magazineSize = GetMagazineSize(hardpointAmmo, ammo);
+        if (ammoSlot == 0)
+            return Math.Clamp(ammo.Count, 0, magazineSize) < magazineSize;
+
+        var reserveSlot = ammoSlot - 1;
+        if (reserveSlot >= GetMaxStoredRoundSlots(hardpointAmmo))
+            return false;
+
+        return GetStoredSlotRounds(hardpointAmmo, reserveSlot, magazineSize) < magazineSize;
+    }
+
+    public bool HasUnloadRounds(
+        VehicleHardpointAmmoComponent hardpointAmmo,
+        BallisticAmmoProviderComponent ammo,
+        int ammoSlot)
+    {
+        if (ammoSlot < 0)
+            return false;
+
+        var magazineSize = GetMagazineSize(hardpointAmmo, ammo);
+        if (ammoSlot == 0)
+            return Math.Min(Math.Clamp(ammo.Count, 0, magazineSize), ammo.UnspawnedCount) > 0;
+
+        var reserveSlot = ammoSlot - 1;
+        if (reserveSlot >= GetMaxStoredRoundSlots(hardpointAmmo))
+            return false;
+
+        return GetStoredSlotRounds(hardpointAmmo, reserveSlot, magazineSize) > 0;
+    }
+
+    public int GetLoadAmount(
+        VehicleHardpointAmmoComponent hardpointAmmo,
+        BallisticAmmoProviderComponent ammo,
+        int ammoSlot,
+        int availableRounds)
+    {
+        if (ammoSlot < 0 || availableRounds <= 0)
+            return 0;
+
+        var magazineSize = GetMagazineSize(hardpointAmmo, ammo);
+        if (ammoSlot == 0)
+        {
+            var chambered = Math.Clamp(ammo.Count, 0, magazineSize);
+            var chamberSpace = magazineSize - chambered;
+            return chamberSpace <= 0 ? 0 : Math.Min(availableRounds, chamberSpace);
+        }
+
+        var reserveSlot = ammoSlot - 1;
+        if (reserveSlot >= GetMaxStoredRoundSlots(hardpointAmmo))
+            return 0;
+
+        var storedRounds = GetStoredSlotRounds(hardpointAmmo, reserveSlot, magazineSize);
+        var reserveSpace = magazineSize - storedRounds;
+        return reserveSpace <= 0 ? 0 : Math.Min(availableRounds, reserveSpace);
+    }
+
+    public int GetUnloadAmount(
+        VehicleHardpointAmmoComponent hardpointAmmo,
+        BallisticAmmoProviderComponent ammo,
+        int ammoSlot)
+    {
+        if (ammoSlot < 0)
+            return 0;
+
+        var magazineSize = GetMagazineSize(hardpointAmmo, ammo);
+        if (ammoSlot == 0)
+            return Math.Min(Math.Clamp(ammo.Count, 0, magazineSize), ammo.UnspawnedCount);
+
+        var reserveSlot = ammoSlot - 1;
+        if (reserveSlot >= GetMaxStoredRoundSlots(hardpointAmmo))
+            return 0;
+
+        return GetStoredSlotRounds(hardpointAmmo, reserveSlot, magazineSize);
+    }
+
+    public bool TryLoadIntoSlot(
+        Entity<VehicleHardpointAmmoComponent> ent,
+        BallisticAmmoProviderComponent ammo,
+        int ammoSlot,
+        int rounds)
+    {
+        var amount = GetLoadAmount(ent.Comp, ammo, ammoSlot, rounds);
+        if (amount <= 0)
+            return false;
+
+        var magazineSize = GetMagazineSize(ent.Comp, ammo);
+        if (ammoSlot == 0)
+        {
+            _gun.SetBallisticUnspawned((ent.Owner, ammo), ammo.UnspawnedCount + amount);
+            RaiseAmmoChanged(ent.Owner);
+        }
+        else
+        {
+            var reserveSlot = ammoSlot - 1;
+            var storedRounds = GetStoredSlotRounds(ent.Comp, reserveSlot, magazineSize);
+            SetStoredSlotRounds(ent, reserveSlot, storedRounds + amount, magazineSize);
+        }
+
+        return true;
+    }
+
+    public int TryUnloadFromSlot(
+        Entity<VehicleHardpointAmmoComponent> ent,
+        BallisticAmmoProviderComponent ammo,
+        int ammoSlot,
+        int maxRounds)
+    {
+        var amount = Math.Min(GetUnloadAmount(ent.Comp, ammo, ammoSlot), Math.Max(0, maxRounds));
+        if (amount <= 0)
+            return 0;
+
+        var magazineSize = GetMagazineSize(ent.Comp, ammo);
+        if (ammoSlot == 0)
+        {
+            _gun.SetBallisticUnspawned((ent.Owner, ammo), ammo.UnspawnedCount - amount);
+            NormalizeAmmoQueue(ent, ammo);
+            RaiseAmmoChanged(ent.Owner);
+        }
+        else
+        {
+            var reserveSlot = ammoSlot - 1;
+            var storedRounds = GetStoredSlotRounds(ent.Comp, reserveSlot, magazineSize);
+            SetStoredSlotRounds(ent, reserveSlot, storedRounds - amount, magazineSize);
+        }
+
+        return amount;
     }
 
     public int GetMagazineSize(VehicleHardpointAmmoComponent hardpointAmmo, BallisticAmmoProviderComponent ammo)
@@ -154,6 +324,7 @@ public sealed class VehicleHardpointAmmoSystem : EntitySystem
 
         UpdateStoredRoundTotals(ent.Comp, capacity);
         Dirty(ent);
+        RaiseAmmoChanged(ent.Owner);
     }
 
     public void SetStoredSlotRounds(Entity<VehicleHardpointAmmoComponent> ent, int reserveSlot, int rounds, int magazineSize)
@@ -177,6 +348,7 @@ public sealed class VehicleHardpointAmmoSystem : EntitySystem
 
         UpdateStoredRoundTotals(ent.Comp, capacity);
         Dirty(ent);
+        RaiseAmmoChanged(ent.Owner);
     }
 
     private static int GetStoredRoundsFallback(VehicleHardpointAmmoComponent hardpointAmmo, int magazineSize)
@@ -210,6 +382,13 @@ public sealed class VehicleHardpointAmmoSystem : EntitySystem
 
         UpdateStoredRoundTotals(ent.Comp, capacity);
         Dirty(ent);
+        RaiseAmmoChanged(ent.Owner);
+    }
+
+    private void RaiseAmmoChanged(EntityUid ammoProvider)
+    {
+        var ev = new VehicleAmmoChangedEvent(ammoProvider);
+        RaiseLocalEvent(ammoProvider, ev, broadcast: true);
     }
 
     private static void UpdateStoredRoundTotals(VehicleHardpointAmmoComponent hardpointAmmo, int magazineSize)

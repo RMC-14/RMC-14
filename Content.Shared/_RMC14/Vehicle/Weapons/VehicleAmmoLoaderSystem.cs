@@ -11,7 +11,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Network;
@@ -24,14 +23,13 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
 {
     [Dependency] private readonly BulletBoxSystem _bulletBox = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly VehicleHardpointAmmoSystem _hardpointAmmo = default!;
     [Dependency] private readonly VehicleSystem _vehicleSystem = default!;
+    [Dependency] private readonly VehicleTopologySystem _topology = default!;
 
     private readonly Dictionary<EntityUid, Dictionary<EntityUid, EntityUid>> _activeAmmoBoxes = new();
     private readonly Dictionary<EntityUid, HashSet<EntityUid>> _openLoadersByUser = new();
@@ -48,6 +46,8 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         SubscribeLocalEvent<HandsComponent, DidUnequipHandEvent>(OnHandItemChanged);
         SubscribeLocalEvent<BulletBoxComponent, HandSelectedEvent>(OnBulletBoxHandSelected);
         SubscribeLocalEvent<BulletBoxComponent, HandDeselectedEvent>(OnBulletBoxHandDeselected);
+        SubscribeLocalEvent<VehicleHardpointAmmoComponent, VehicleAmmoChangedEvent>(OnVehicleAmmoChanged);
+        SubscribeLocalEvent<HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
     }
 
     private void OnInteractUsing(Entity<VehicleAmmoLoaderComponent> ent, ref InteractUsingEvent args)
@@ -113,12 +113,12 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         if (_net.IsClient || args.Cancelled || args.Handled)
             return;
 
-        if (string.IsNullOrWhiteSpace(args.SlotId))
+        if (!args.SlotPath.IsValid)
             return;
 
         if (args.Action == VehicleAmmoLoaderSlotAction.Unload)
         {
-            if (!TryGetUnloadableAmmoProvider(ent, args.User, args.SlotId, out _, out var directAmmoUid, out var directAmmo, out var directHardpointAmmo, out var refill))
+            if (!TryGetUnloadableAmmoProvider(ent, args.User, args.SlotPath, out _, out var directAmmoUid, out var directAmmo, out var directHardpointAmmo, out var refill))
                 return;
 
             DoDirectUnloadAmmoSlot(ent, args.User, directAmmoUid, directAmmo, directHardpointAmmo, refill, args.AmmoSlot);
@@ -133,7 +133,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         if (!TryGetActiveAmmoBox(ent.Owner, args.User, out var activeBox) || activeBox != used)
             return;
 
-        if (!TryGetLoadableAmmoProvider(ent, args.User, box, args.SlotId, out _, out var ammoUid, out var ammo, out var hardpointAmmo))
+        if (!TryGetLoadableAmmoProvider(ent, args.User, box, args.SlotPath, out _, out var ammoUid, out var ammo, out var hardpointAmmo))
             return;
 
         if (args.Action == VehicleAmmoLoaderSlotAction.Load)
@@ -183,6 +183,22 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         UpdateOpenLoaderUis(args.User);
     }
 
+    private void OnVehicleAmmoChanged(Entity<VehicleHardpointAmmoComponent> ent, ref VehicleAmmoChangedEvent args)
+    {
+        if (_net.IsClient || !_topology.TryGetVehicle(ent.Owner, out var vehicle))
+            return;
+
+        UpdateOpenLoaderUisForVehicle(vehicle);
+    }
+
+    private void OnHardpointSlotsChanged(HardpointSlotsChangedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        UpdateOpenLoaderUisForVehicle(args.Vehicle);
+    }
+
     private void OnUiSelect(Entity<VehicleAmmoLoaderComponent> ent, ref VehicleAmmoLoaderSelectMessage args)
     {
         if (!Equals(args.UiKey, VehicleAmmoLoaderUiKey.Key))
@@ -193,7 +209,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
 
         if (args.Action == VehicleAmmoLoaderSlotAction.Unload)
         {
-            if (!TryGetUnloadableAmmoProvider(ent, args.Actor, args.SlotId, out _, out var directAmmoUid, out var directAmmo, out var directHardpointAmmo, out _))
+            if (!TryGetUnloadableAmmoProvider(ent, args.Actor, args.SlotPath, out _, out var directAmmoUid, out var directAmmo, out var directHardpointAmmo, out _))
                 return;
 
             if (GetDirectUnloadAmount(directAmmo, directHardpointAmmo, args.AmmoSlot) <= 0)
@@ -206,7 +222,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
                 EntityManager,
                 args.Actor,
                 ent.Comp.LoadDelay,
-                new VehicleAmmoLoaderDoAfterEvent(args.SlotId, args.AmmoSlot, args.Action),
+                new VehicleAmmoLoaderDoAfterEvent(args.SlotPath, args.AmmoSlot, args.Action),
                 ent.Owner,
                 ent.Owner)
             {
@@ -229,7 +245,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
 
         TrySetActiveAmmoBox(ent.Owner, args.Actor, activeBox);
 
-        if (!TryGetLoadableAmmoProvider(ent, args.Actor, box, args.SlotId, out _, out var ammoUid, out var ammo, out var hardpointAmmo))
+        if (!TryGetLoadableAmmoProvider(ent, args.Actor, box, args.SlotPath, out _, out var ammoUid, out var ammo, out var hardpointAmmo))
             return;
 
         if (args.Action == VehicleAmmoLoaderSlotAction.Load &&
@@ -246,7 +262,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             EntityManager,
             args.Actor,
             ent.Comp.LoadDelay,
-            new VehicleAmmoLoaderDoAfterEvent(args.SlotId, args.AmmoSlot, args.Action),
+            new VehicleAmmoLoaderDoAfterEvent(args.SlotPath, args.AmmoSlot, args.Action),
             ent.Owner,
             ent.Owner,
             activeBox)
@@ -362,11 +378,48 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             _openLoadersByUser.Remove(user);
     }
 
+    private void UpdateOpenLoaderUisForVehicle(EntityUid vehicle)
+    {
+        if (_net.IsClient || _openLoadersByUser.Count == 0)
+            return;
+
+        var staleUsers = new List<EntityUid>();
+        foreach (var (user, loaders) in _openLoadersByUser)
+        {
+            var staleLoaders = new List<EntityUid>();
+            foreach (var loader in loaders)
+            {
+                if (!Exists(loader))
+                {
+                    staleLoaders.Add(loader);
+                    continue;
+                }
+
+                if (!_vehicleSystem.TryGetVehicleFromInterior(loader, out var loaderVehicle) ||
+                    loaderVehicle != vehicle)
+                {
+                    continue;
+                }
+
+                UpdateUi(loader, user);
+            }
+
+            foreach (var loader in staleLoaders)
+                loaders.Remove(loader);
+
+            if (loaders.Count == 0)
+                staleUsers.Add(user);
+        }
+
+        foreach (var user in staleUsers)
+            _openLoadersByUser.Remove(user);
+    }
+
     private bool TryGetLoadableAmmoProvider(
         Entity<VehicleAmmoLoaderComponent> loader,
         EntityUid user,
         BulletBoxComponent box,
-        string? slotId,
+        VehicleSlotPath? slotPath,
         out EntityUid vehicle,
         out EntityUid ammoUid,
         out BallisticAmmoProviderComponent ammo,
@@ -398,7 +451,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             return false;
         }
 
-        if (!TryFindAmmoProvider(vehicle, hardpoints, itemSlots, loader.Comp, box, slotId, out ammoUid, out ammo, out hardpointAmmo, out var result))
+        if (!TryFindAmmoProvider(vehicle, hardpoints, itemSlots, loader.Comp, box, slotPath, out var provider, out var result))
         {
             var popup = result == AmmoLoaderLookupResult.WrongAmmo
                 ? Loc.GetString("rmc-vehicle-ammo-loader-wrong-ammo")
@@ -407,13 +460,16 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             return false;
         }
 
+        ammoUid = provider.AmmoUid;
+        ammo = provider.Ammo;
+        hardpointAmmo = provider.HardpointAmmo;
         return true;
     }
 
     private bool TryGetUnloadableAmmoProvider(
         Entity<VehicleAmmoLoaderComponent> loader,
         EntityUid user,
-        string? slotId,
+        VehicleSlotPath? slotPath,
         out EntityUid vehicle,
         out EntityUid ammoUid,
         out BallisticAmmoProviderComponent ammo,
@@ -441,12 +497,16 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             return false;
         }
 
-        if (!TryFindAmmoProvider(vehicle, hardpoints, itemSlots, loader.Comp, slotId, out ammoUid, out ammo, out hardpointAmmo, out refill))
+        if (!TryFindAmmoProvider(vehicle, hardpoints, itemSlots, loader.Comp, slotPath, out var provider))
         {
             _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-no-hardpoint"), loader, user);
             return false;
         }
 
+        ammoUid = provider.AmmoUid;
+        ammo = provider.Ammo;
+        hardpointAmmo = provider.HardpointAmmo;
+        refill = provider.Refill;
         return true;
     }
 
@@ -456,95 +516,37 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         ItemSlotsComponent itemSlots,
         VehicleAmmoLoaderComponent loader,
         BulletBoxComponent box,
-        string? slotId,
-        out EntityUid ammoUid,
-        out BallisticAmmoProviderComponent ammo,
-        out VehicleHardpointAmmoComponent hardpointAmmo,
+        VehicleSlotPath? slotPath,
+        out VehicleMountedAmmoProvider provider,
         out AmmoLoaderLookupResult result)
     {
-        ammoUid = default;
-        ammo = default!;
-        hardpointAmmo = default!;
+        provider = default;
         result = AmmoLoaderLookupResult.NotFound;
 
-        if (!string.IsNullOrWhiteSpace(slotId) &&
-            VehicleTurretSlotIds.TryParse(slotId, out var parentSlotId, out var childSlotId))
+        if (slotPath is { IsValid: true } selectedPath)
         {
-            if (!TryGetTurretSlot(vehicle, parentSlotId, childSlotId, itemSlots, out var turretSlot, out var item))
+            if (!TryFindAmmoProvider(vehicle, hardpoints, itemSlots, loader, selectedPath, out provider))
                 return false;
 
-            if (!string.IsNullOrWhiteSpace(loader.HardpointType) &&
-                !string.Equals(turretSlot.HardpointType, loader.HardpointType, StringComparison.OrdinalIgnoreCase))
-            {
-                return false;
-            }
-
-            if (TryGetAmmoProviderFromItem(item, box, out ammoUid, out ammo, out hardpointAmmo, out var wrongAmmo))
+            if (provider.Refill.BulletType == box.BulletType)
                 return true;
 
-            if (wrongAmmo)
-                result = AmmoLoaderLookupResult.WrongAmmo;
-
+            result = AmmoLoaderLookupResult.WrongAmmo;
             return false;
         }
 
-        foreach (var slot in hardpoints.Slots)
+        foreach (var candidate in _topology.GetMountedAmmoProviders(vehicle, hardpoints, itemSlots))
         {
-            if (string.IsNullOrWhiteSpace(slot.Id))
+            if (!CanUseAmmoProvider(loader, candidate))
                 continue;
 
-            if (!string.IsNullOrWhiteSpace(slotId) &&
-                !string.Equals(slot.Id, slotId, StringComparison.OrdinalIgnoreCase))
+            if (candidate.Refill.BulletType == box.BulletType)
             {
-                continue;
-            }
-
-            if (!string.IsNullOrWhiteSpace(loader.HardpointType) &&
-                !string.Equals(slot.HardpointType, loader.HardpointType, StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
-                continue;
-
-            var item = itemSlot.Item!.Value;
-            if (TryGetAmmoProviderFromItem(item, box, out ammoUid, out ammo, out hardpointAmmo, out var wrongAmmo))
+                provider = candidate;
                 return true;
-
-            if (wrongAmmo)
-                result = AmmoLoaderLookupResult.WrongAmmo;
-
-            if (!TryComp(item, out HardpointSlotsComponent? turretSlots) ||
-                !TryComp(item, out ItemSlotsComponent? turretItemSlots))
-            {
-                continue;
             }
 
-            foreach (var turretSlot in turretSlots.Slots)
-            {
-                if (string.IsNullOrWhiteSpace(turretSlot.Id))
-                    continue;
-
-                if (!string.IsNullOrWhiteSpace(loader.HardpointType) &&
-                    !string.Equals(turretSlot.HardpointType, loader.HardpointType, StringComparison.OrdinalIgnoreCase))
-                {
-                    continue;
-                }
-
-                if (!_itemSlots.TryGetSlot(item, turretSlot.Id, out var turretItemSlot, turretItemSlots) ||
-                    !turretItemSlot.HasItem)
-                {
-                    continue;
-                }
-
-                var turretItem = turretItemSlot.Item!.Value;
-                if (TryGetAmmoProviderFromItem(turretItem, box, out ammoUid, out ammo, out hardpointAmmo, out wrongAmmo))
-                    return true;
-
-                if (wrongAmmo)
-                    result = AmmoLoaderLookupResult.WrongAmmo;
-            }
+            result = AmmoLoaderLookupResult.WrongAmmo;
         }
 
         return false;
@@ -555,86 +557,35 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         HardpointSlotsComponent hardpoints,
         ItemSlotsComponent itemSlots,
         VehicleAmmoLoaderComponent loader,
-        string? slotId,
-        out EntityUid ammoUid,
-        out BallisticAmmoProviderComponent ammo,
-        out VehicleHardpointAmmoComponent hardpointAmmo,
-        out RefillableByBulletBoxComponent refill)
+        VehicleSlotPath? slotPath,
+        out VehicleMountedAmmoProvider provider)
     {
-        ammoUid = default;
-        ammo = default!;
-        hardpointAmmo = default!;
-        refill = default!;
+        provider = default;
 
-        if (!string.IsNullOrWhiteSpace(slotId) &&
-            VehicleTurretSlotIds.TryParse(slotId, out var parentSlotId, out var childSlotId))
+        if (slotPath is { IsValid: true } selectedPath)
         {
-            if (!TryGetTurretSlot(vehicle, parentSlotId, childSlotId, itemSlots, out var turretSlot, out var item))
+            if (!_topology.TryGetMountedAmmoProvider(vehicle, selectedPath, out provider, hardpoints, itemSlots))
                 return false;
 
-            if (!string.IsNullOrWhiteSpace(loader.HardpointType) &&
-                !string.Equals(turretSlot.HardpointType, loader.HardpointType, StringComparison.OrdinalIgnoreCase))
-            {
-                return false;
-            }
-
-            return TryGetAmmoProviderFromItem(item, out ammoUid, out ammo, out hardpointAmmo, out refill);
+            return CanUseAmmoProvider(loader, provider);
         }
 
-        foreach (var slot in hardpoints.Slots)
+        foreach (var candidate in _topology.GetMountedAmmoProviders(vehicle, hardpoints, itemSlots))
         {
-            if (string.IsNullOrWhiteSpace(slot.Id))
+            if (!CanUseAmmoProvider(loader, candidate))
                 continue;
 
-            if (!string.IsNullOrWhiteSpace(slotId) &&
-                !string.Equals(slot.Id, slotId, StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            if (!string.IsNullOrWhiteSpace(loader.HardpointType) &&
-                !string.Equals(slot.HardpointType, loader.HardpointType, StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
-                continue;
-
-            var item = itemSlot.Item!.Value;
-            if (TryGetAmmoProviderFromItem(item, out ammoUid, out ammo, out hardpointAmmo, out refill))
-                return true;
-
-            if (!TryComp(item, out HardpointSlotsComponent? turretSlots) ||
-                !TryComp(item, out ItemSlotsComponent? turretItemSlots))
-            {
-                continue;
-            }
-
-            foreach (var turretSlot in turretSlots.Slots)
-            {
-                if (string.IsNullOrWhiteSpace(turretSlot.Id))
-                    continue;
-
-                if (!string.IsNullOrWhiteSpace(loader.HardpointType) &&
-                    !string.Equals(turretSlot.HardpointType, loader.HardpointType, StringComparison.OrdinalIgnoreCase))
-                {
-                    continue;
-                }
-
-                if (!_itemSlots.TryGetSlot(item, turretSlot.Id, out var turretItemSlot, turretItemSlots) ||
-                    !turretItemSlot.HasItem)
-                {
-                    continue;
-                }
-
-                var turretItem = turretItemSlot.Item!.Value;
-                if (TryGetAmmoProviderFromItem(turretItem, out ammoUid, out ammo, out hardpointAmmo, out refill))
-                    return true;
-            }
+            provider = candidate;
+            return true;
         }
 
         return false;
+    }
+
+    private static bool CanUseAmmoProvider(VehicleAmmoLoaderComponent loader, VehicleMountedAmmoProvider provider)
+    {
+        return string.IsNullOrWhiteSpace(loader.HardpointType) ||
+               string.Equals(provider.Slot.HardpointType, loader.HardpointType, StringComparison.OrdinalIgnoreCase);
     }
 
     private void UpdateUi(EntityUid loader, EntityUid user)
@@ -660,33 +611,19 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         if (TryGetActiveAmmoBox(loader, user, out var boxUid))
             TryComp(boxUid, out heldBox);
 
-        var entries = new List<VehicleAmmoLoaderUiEntry>(hardpoints.Slots.Count);
+        var providers = _topology.GetMountedAmmoProviders(vehicleUid.Value, hardpoints, itemSlots);
+        var entries = new List<VehicleAmmoLoaderUiEntry>(providers.Count);
 
-        foreach (var slot in hardpoints.Slots)
+        foreach (var provider in providers)
         {
-            if (string.IsNullOrWhiteSpace(slot.Id))
+            if (!CanUseAmmoProvider(loaderComp, provider))
                 continue;
 
-            if (!string.IsNullOrWhiteSpace(loaderComp.HardpointType) &&
-                !string.Equals(slot.HardpointType, loaderComp.HardpointType, StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            if (!_itemSlots.TryGetSlot(vehicleUid.Value, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+            if (loaderComp.BulletType != null && loaderComp.BulletType != provider.Refill.BulletType)
                 continue;
 
-            var item = itemSlot.Item!.Value;
-            AppendTurretAmmoEntries(entries, item, slot.Id, loaderComp, heldBox);
-
-            if (!TryGetAmmoProviderFromItem(item, out _, out var ammoProvider, out var hardpointAmmo, out var refill))
-                continue;
-
-            if (loaderComp.BulletType != null && loaderComp.BulletType != refill.BulletType)
-                continue;
-
-            var magazineSize = _hardpointAmmo.GetMagazineSize(hardpointAmmo, ammoProvider);
-            var ammoSlots = GetAmmoSlotUiEntries(heldBox, refill.BulletType, ammoProvider, hardpointAmmo, magazineSize);
+            var magazineSize = _hardpointAmmo.GetMagazineSize(provider.HardpointAmmo, provider.Ammo);
+            var ammoSlots = GetAmmoSlotUiEntries(heldBox, provider.Refill.BulletType, provider.Ammo, provider.HardpointAmmo, magazineSize);
             var canLoad = false;
             var canUnload = false;
             foreach (var ammoSlot in ammoSlots)
@@ -695,13 +632,12 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
                 canUnload |= ammoSlot.CanUnload;
             }
 
-            var name = Name(item);
             entries.Add(new VehicleAmmoLoaderUiEntry(
-                slot.Id,
-                slot.HardpointType,
-                name,
-                GetNetEntity(item),
-                refill.BulletType,
+                provider.Slot.Path,
+                provider.Slot.HardpointType,
+                Name(provider.AmmoUid),
+                GetNetEntity(provider.AmmoUid),
+                provider.Refill.BulletType,
                 magazineSize,
                 ammoSlots,
                 canLoad,
@@ -718,66 +654,6 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
                 heldBox?.BulletType));
     }
 
-    private void AppendTurretAmmoEntries(
-        List<VehicleAmmoLoaderUiEntry> entries,
-        EntityUid turretUid,
-        string parentSlotId,
-        VehicleAmmoLoaderComponent loaderComp,
-        BulletBoxComponent? heldBox)
-    {
-        if (!TryComp(turretUid, out HardpointSlotsComponent? turretSlots) ||
-            !TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
-        {
-            return;
-        }
-
-        foreach (var turretSlot in turretSlots.Slots)
-        {
-            if (string.IsNullOrWhiteSpace(turretSlot.Id))
-                continue;
-
-            if (!string.IsNullOrWhiteSpace(loaderComp.HardpointType) &&
-                !string.Equals(turretSlot.HardpointType, loaderComp.HardpointType, StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            if (!_itemSlots.TryGetSlot(turretUid, turretSlot.Id, out var turretItemSlot, turretItemSlots) ||
-                !turretItemSlot.HasItem)
-            {
-                continue;
-            }
-
-            var item = turretItemSlot.Item!.Value;
-            if (!TryGetAmmoProviderFromItem(item, out _, out var ammoProvider, out var hardpointAmmo, out var refill))
-                continue;
-
-            if (loaderComp.BulletType != null && loaderComp.BulletType != refill.BulletType)
-                continue;
-
-            var magazineSize = _hardpointAmmo.GetMagazineSize(hardpointAmmo, ammoProvider);
-            var ammoSlots = GetAmmoSlotUiEntries(heldBox, refill.BulletType, ammoProvider, hardpointAmmo, magazineSize);
-            var canLoad = false;
-            var canUnload = false;
-            foreach (var ammoSlot in ammoSlots)
-            {
-                canLoad |= ammoSlot.CanLoad;
-                canUnload |= ammoSlot.CanUnload;
-            }
-
-            entries.Add(new VehicleAmmoLoaderUiEntry(
-                VehicleTurretSlotIds.Compose(parentSlotId, turretSlot.Id),
-                turretSlot.HardpointType,
-                Name(item),
-                GetNetEntity(item),
-                refill.BulletType,
-                magazineSize,
-                ammoSlots,
-                canLoad,
-                canUnload));
-        }
-    }
-
     private List<VehicleAmmoLoaderUiAmmoSlot> GetAmmoSlotUiEntries(
         BulletBoxComponent? heldBox,
         EntProtoId? ammoPrototype,
@@ -786,28 +662,18 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         int magazineSize)
     {
         var entries = new List<VehicleAmmoLoaderUiAmmoSlot>(Math.Max(1, hardpointAmmo.MaxStoredMagazines));
-        var activeRounds = Math.Clamp(ammo.Count, 0, magazineSize);
-        entries.Add(new VehicleAmmoLoaderUiAmmoSlot(
-            0,
-            Loc.GetString("rmc-vehicle-ammo-loader-ui-ready-slot"),
-            activeRounds,
-            magazineSize,
-            CanLoadSlot(heldBox, ammoPrototype, ammo, hardpointAmmo, 0),
-            CanUnloadSlot(ammo, hardpointAmmo, 0),
-            true));
-
-        var reserveSlots = _hardpointAmmo.GetStoredRoundSlots(hardpointAmmo, magazineSize);
-        for (var i = 0; i < reserveSlots.Count; i++)
+        foreach (var slot in _hardpointAmmo.GetAmmoQueueSlots(hardpointAmmo, ammo))
         {
-            var slotIndex = i + 1;
             entries.Add(new VehicleAmmoLoaderUiAmmoSlot(
-                slotIndex,
-                (slotIndex + 1).ToString(),
-                reserveSlots[i],
-                magazineSize,
-                CanLoadSlot(heldBox, ammoPrototype, ammo, hardpointAmmo, slotIndex),
-                CanUnloadSlot(ammo, hardpointAmmo, slotIndex),
-                false));
+                slot.SlotIndex,
+                slot.IsReadySlot
+                    ? Loc.GetString("rmc-vehicle-ammo-loader-ui-ready-slot")
+                    : (slot.SlotIndex + 1).ToString(),
+                slot.Rounds,
+                slot.Capacity,
+                CanLoadSlot(heldBox, ammoPrototype, ammo, hardpointAmmo, slot.SlotIndex),
+                _hardpointAmmo.HasUnloadRounds(hardpointAmmo, ammo, slot.SlotIndex),
+                slot.IsReadySlot));
         }
 
         return entries;
@@ -824,56 +690,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
                heldBox.Amount > 0 &&
                ammoPrototype != null &&
                heldBox.BulletType == ammoPrototype &&
-               HasLoadSpace(ammo, hardpointAmmo, ammoSlot);
-    }
-
-    private bool CanUnloadSlot(
-        BallisticAmmoProviderComponent ammo,
-        VehicleHardpointAmmoComponent hardpointAmmo,
-        int ammoSlot)
-    {
-        if (!HasUnloadRounds(ammo, hardpointAmmo, ammoSlot))
-            return false;
-
-        return true;
-    }
-
-    private bool HasLoadSpace(
-        BallisticAmmoProviderComponent ammo,
-        VehicleHardpointAmmoComponent hardpointAmmo,
-        int ammoSlot)
-    {
-        if (ammoSlot < 0)
-            return false;
-
-        var magazineSize = _hardpointAmmo.GetMagazineSize(hardpointAmmo, ammo);
-        if (ammoSlot == 0)
-            return Math.Clamp(ammo.Count, 0, magazineSize) < magazineSize;
-
-        var reserveSlot = ammoSlot - 1;
-        if (reserveSlot >= _hardpointAmmo.GetMaxStoredRoundSlots(hardpointAmmo))
-            return false;
-
-        return _hardpointAmmo.GetStoredSlotRounds(hardpointAmmo, reserveSlot, magazineSize) < magazineSize;
-    }
-
-    private bool HasUnloadRounds(
-        BallisticAmmoProviderComponent ammo,
-        VehicleHardpointAmmoComponent hardpointAmmo,
-        int ammoSlot)
-    {
-        if (ammoSlot < 0)
-            return false;
-
-        var magazineSize = _hardpointAmmo.GetMagazineSize(hardpointAmmo, ammo);
-        if (ammoSlot == 0)
-            return Math.Min(Math.Clamp(ammo.Count, 0, magazineSize), ammo.UnspawnedCount) > 0;
-
-        var reserveSlot = ammoSlot - 1;
-        if (reserveSlot >= _hardpointAmmo.GetMaxStoredRoundSlots(hardpointAmmo))
-            return false;
-
-        return _hardpointAmmo.GetStoredSlotRounds(hardpointAmmo, reserveSlot, magazineSize) > 0;
+               _hardpointAmmo.HasLoadSpace(hardpointAmmo, ammo, ammoSlot);
     }
 
     private int GetLoadAmount(
@@ -882,30 +699,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         VehicleHardpointAmmoComponent hardpointAmmo,
         int ammoSlot)
     {
-        if (ammoSlot < 0)
-            return 0;
-
-        if (box.Amount <= 0)
-            return 0;
-
-        var magazineSize = _hardpointAmmo.GetMagazineSize(hardpointAmmo, ammo);
-        if (ammoSlot == 0)
-        {
-            var chambered = Math.Clamp(ammo.Count, 0, magazineSize);
-            var chamberSpace = magazineSize - chambered;
-            return chamberSpace <= 0 ? 0 : Math.Min(box.Amount, chamberSpace);
-        }
-
-        var reserveSlot = ammoSlot - 1;
-        if (reserveSlot >= _hardpointAmmo.GetMaxStoredRoundSlots(hardpointAmmo))
-            return 0;
-
-        var storedRounds = _hardpointAmmo.GetStoredSlotRounds(hardpointAmmo, reserveSlot, magazineSize);
-        var reserveSpace = magazineSize - storedRounds;
-        if (reserveSpace <= 0)
-            return 0;
-
-        return Math.Min(box.Amount, reserveSpace);
+        return _hardpointAmmo.GetLoadAmount(hardpointAmmo, ammo, ammoSlot, box.Amount);
     }
 
     private int GetDirectUnloadAmount(
@@ -913,18 +707,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         VehicleHardpointAmmoComponent hardpointAmmo,
         int ammoSlot)
     {
-        if (ammoSlot < 0)
-            return 0;
-
-        var magazineSize = _hardpointAmmo.GetMagazineSize(hardpointAmmo, ammo);
-        if (ammoSlot == 0)
-            return Math.Min(Math.Clamp(ammo.Count, 0, magazineSize), ammo.UnspawnedCount);
-
-        var reserveSlot = ammoSlot - 1;
-        if (reserveSlot >= _hardpointAmmo.GetMaxStoredRoundSlots(hardpointAmmo))
-            return 0;
-
-        return _hardpointAmmo.GetStoredSlotRounds(hardpointAmmo, reserveSlot, magazineSize);
+        return _hardpointAmmo.GetUnloadAmount(hardpointAmmo, ammo, ammoSlot);
     }
 
     private void DoLoadAmmoSlot(
@@ -946,17 +729,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         if (box.Comp.Amount <= 0)
             Del(box.Owner);
 
-        var magazineSize = _hardpointAmmo.GetMagazineSize(hardpointAmmo, ammo);
-        if (ammoSlot == 0)
-        {
-            _gun.SetBallisticUnspawned((ammoUid, ammo), ammo.UnspawnedCount + transferAmount);
-        }
-        else
-        {
-            var reserveSlot = ammoSlot - 1;
-            var storedRounds = _hardpointAmmo.GetStoredSlotRounds(hardpointAmmo, reserveSlot, magazineSize);
-            _hardpointAmmo.SetStoredSlotRounds((ammoUid, hardpointAmmo), reserveSlot, storedRounds + transferAmount, magazineSize);
-        }
+        _hardpointAmmo.TryLoadIntoSlot((ammoUid, hardpointAmmo), ammo, ammoSlot, transferAmount);
 
         _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-loaded", ("amount", transferAmount), ("target", ammoUid)), loader, user);
     }
@@ -978,18 +751,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         if (unloadedAmount <= 0)
             return;
 
-        var magazineSize = _hardpointAmmo.GetMagazineSize(hardpointAmmo, ammo);
-        if (ammoSlot == 0)
-        {
-            _gun.SetBallisticUnspawned((ammoUid, ammo), ammo.UnspawnedCount - unloadedAmount);
-            _hardpointAmmo.NormalizeAmmoQueue((ammoUid, hardpointAmmo), ammo);
-        }
-        else
-        {
-            var reserveSlot = ammoSlot - 1;
-            var storedRounds = _hardpointAmmo.GetStoredSlotRounds(hardpointAmmo, reserveSlot, magazineSize);
-            _hardpointAmmo.SetStoredSlotRounds((ammoUid, hardpointAmmo), reserveSlot, storedRounds - unloadedAmount, magazineSize);
-        }
+        _hardpointAmmo.TryUnloadFromSlot((ammoUid, hardpointAmmo), ammo, ammoSlot, unloadedAmount);
 
         _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-unloaded", ("amount", unloadedAmount), ("target", ammoUid)), loader, user);
     }
@@ -1026,93 +788,6 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         return unloaded;
     }
 
-    private bool TryGetTurretSlot(
-        EntityUid vehicle,
-        string parentSlotId,
-        string childSlotId,
-        ItemSlotsComponent itemSlots,
-        out HardpointSlot turretSlot,
-        out EntityUid item)
-    {
-        turretSlot = default!;
-        item = default;
-
-        if (!_itemSlots.TryGetSlot(vehicle, parentSlotId, out var parentSlot, itemSlots) || !parentSlot.HasItem)
-            return false;
-
-        var turretUid = parentSlot.Item!.Value;
-        if (!TryComp(turretUid, out HardpointSlotsComponent? turretSlots) ||
-            !TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
-        {
-            return false;
-        }
-
-        foreach (var slot in turretSlots.Slots)
-        {
-            if (!string.Equals(slot.Id, childSlotId, StringComparison.OrdinalIgnoreCase))
-                continue;
-
-            turretSlot = slot;
-            if (!_itemSlots.TryGetSlot(turretUid, slot.Id, out var turretItemSlot, turretItemSlots) ||
-                !turretItemSlot.HasItem)
-            {
-                return false;
-            }
-
-            item = turretItemSlot.Item!.Value;
-            return true;
-        }
-
-        return false;
-    }
-
-    private bool TryGetAmmoProviderFromItem(
-        EntityUid item,
-        BulletBoxComponent box,
-        out EntityUid ammoUid,
-        out BallisticAmmoProviderComponent ammo,
-        out VehicleHardpointAmmoComponent hardpointAmmo,
-        out bool wrongAmmo)
-    {
-        wrongAmmo = false;
-        if (!TryGetAmmoProviderFromItem(item, out ammoUid, out ammo, out hardpointAmmo, out var refill))
-            return false;
-
-        if (refill.BulletType == box.BulletType)
-            return true;
-
-        wrongAmmo = true;
-        return false;
-    }
-
-    private bool TryGetAmmoProviderFromItem(
-        EntityUid item,
-        out EntityUid ammoUid,
-        out BallisticAmmoProviderComponent ammo,
-        out VehicleHardpointAmmoComponent hardpointAmmo,
-        out RefillableByBulletBoxComponent refill)
-    {
-        ammoUid = default;
-        ammo = default!;
-        hardpointAmmo = default!;
-        refill = default!;
-
-        if (!TryComp(item, out BallisticAmmoProviderComponent? ammoProvider))
-            return false;
-
-        if (!TryComp(item, out VehicleHardpointAmmoComponent? hardpointAmmoComp))
-            return false;
-
-        if (!TryComp(item, out RefillableByBulletBoxComponent? refillComp))
-            return false;
-
-        ammoUid = item;
-        ammo = ammoProvider;
-        hardpointAmmo = hardpointAmmoComp;
-        refill = refillComp;
-        return true;
-    }
-
 }
 
 internal enum AmmoLoaderLookupResult : byte
@@ -1125,7 +800,7 @@ internal enum AmmoLoaderLookupResult : byte
 public sealed partial class VehicleAmmoLoaderDoAfterEvent : DoAfterEvent
 {
     [DataField(required: true)]
-    public string SlotId = string.Empty;
+    public VehicleSlotPath SlotPath;
 
     [DataField]
     public int AmmoSlot;
@@ -1137,22 +812,22 @@ public sealed partial class VehicleAmmoLoaderDoAfterEvent : DoAfterEvent
     {
     }
 
-    public VehicleAmmoLoaderDoAfterEvent(string slotId, int ammoSlot, VehicleAmmoLoaderSlotAction action)
+    public VehicleAmmoLoaderDoAfterEvent(VehicleSlotPath slotPath, int ammoSlot, VehicleAmmoLoaderSlotAction action)
     {
-        SlotId = slotId;
+        SlotPath = slotPath;
         AmmoSlot = ammoSlot;
         Action = action;
     }
 
     public override DoAfterEvent Clone()
     {
-        return new VehicleAmmoLoaderDoAfterEvent(SlotId, AmmoSlot, Action);
+        return new VehicleAmmoLoaderDoAfterEvent(SlotPath, AmmoSlot, Action);
     }
 
     public override bool IsDuplicate(DoAfterEvent other)
     {
         return other is VehicleAmmoLoaderDoAfterEvent loaderEvent
-               && loaderEvent.SlotId == SlotId
+               && loaderEvent.SlotPath == SlotPath
                && loaderEvent.AmmoSlot == AmmoSlot
                && loaderEvent.Action == Action;
     }

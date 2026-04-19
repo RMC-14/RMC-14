@@ -15,7 +15,7 @@ public enum VehicleAmmoLoaderUiKey : byte
 [Serializable, NetSerializable]
 public sealed class VehicleAmmoLoaderUiEntry
 {
-    public readonly string SlotId;
+    public readonly VehicleSlotPath SlotPath;
     public readonly string HardpointType;
     public readonly string? InstalledName;
     public readonly NetEntity? InstalledEntity;
@@ -26,7 +26,7 @@ public sealed class VehicleAmmoLoaderUiEntry
     public readonly bool CanUnload;
 
     public VehicleAmmoLoaderUiEntry(
-        string slotId,
+        VehicleSlotPath slotPath,
         string hardpointType,
         string? installedName,
         NetEntity? installedEntity,
@@ -36,7 +36,7 @@ public sealed class VehicleAmmoLoaderUiEntry
         bool canLoad,
         bool canUnload)
     {
-        SlotId = slotId;
+        SlotPath = slotPath;
         HardpointType = hardpointType;
         InstalledName = installedName;
         InstalledEntity = installedEntity;
@@ -109,16 +109,16 @@ public enum VehicleAmmoLoaderSlotAction : byte
 [Serializable, NetSerializable]
 public sealed class VehicleAmmoLoaderSelectMessage : BoundUserInterfaceMessage
 {
-    public readonly string SlotId;
+    public readonly VehicleSlotPath SlotPath;
     public readonly int AmmoSlot;
     public readonly VehicleAmmoLoaderSlotAction Action;
 
     public VehicleAmmoLoaderSelectMessage(
-        string slotId,
+        VehicleSlotPath slotPath,
         int ammoSlot,
         VehicleAmmoLoaderSlotAction action)
     {
-        SlotId = slotId;
+        SlotPath = slotPath;
         AmmoSlot = ammoSlot;
         Action = action;
     }

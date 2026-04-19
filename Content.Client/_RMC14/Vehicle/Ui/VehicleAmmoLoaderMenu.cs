@@ -30,7 +30,7 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
     private const float MinWindowWidth = 460f;
     private const float MaxWindowWidth = 940f;
 
-    public event Action<string, int, VehicleAmmoLoaderSlotAction>? OnSlotSelected;
+    public event Action<VehicleSlotPath, int, VehicleAmmoLoaderSlotAction>? OnSlotSelected;
     private readonly IEntityManager _entManager = IoCManager.Resolve<IEntityManager>();
     private readonly Dictionary<string, int> _lastSlotRounds = new();
     private bool _hasSeenSlotState;
@@ -120,7 +120,7 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
 
             var header = Loc.GetString(
                 "rmc-vehicle-ammo-loader-ui-slot",
-                ("slot", hardpoint.SlotId),
+                ("slot", hardpoint.SlotPath.ToCompositeId()),
                 ("type", hardpoint.HardpointType));
 
             var nameText = hardpoint.InstalledName ?? header;
@@ -210,7 +210,7 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
                 return;
 
             button.StartPulse(action == VehicleAmmoLoaderSlotAction.Load ? 1 : -1);
-            OnSlotSelected?.Invoke(hardpoint.SlotId, ammoSlot.SlotIndex, action);
+            OnSlotSelected?.Invoke(hardpoint.SlotPath, ammoSlot.SlotIndex, action);
         };
 
         var column = new BoxContainer
@@ -354,7 +354,7 @@ public sealed partial class VehicleAmmoLoaderMenu : FancyWindow
 
     private static string GetSlotKey(VehicleAmmoLoaderUiEntry hardpoint, VehicleAmmoLoaderUiAmmoSlot ammoSlot)
     {
-        return $"{hardpoint.SlotId}:{ammoSlot.SlotIndex}";
+        return $"{hardpoint.SlotPath.ToCompositeId()}:{ammoSlot.SlotIndex}";
     }
 
     private static Color GetAmmoSlotBorderColor(VehicleAmmoLoaderUiAmmoSlot slot, float ratio)

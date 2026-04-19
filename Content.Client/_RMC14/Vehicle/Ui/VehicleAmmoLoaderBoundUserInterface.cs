@@ -24,8 +24,8 @@ public sealed class VehicleAmmoLoaderBoundUserInterface : BoundUserInterface
         if (metaQuery.TryGetComponent(Owner, out var metadata))
             _menu.Title = metadata.EntityName;
 
-        _menu.OnSlotSelected += (slotId, ammoSlot, action) =>
-            SendMessage(new VehicleAmmoLoaderSelectMessage(slotId, ammoSlot, action));
+        _menu.OnSlotSelected += (slotPath, ammoSlot, action) =>
+            SendMessage(new VehicleAmmoLoaderSelectMessage(slotPath, ammoSlot, action));
         _menu.OpenCentered();
     }
 

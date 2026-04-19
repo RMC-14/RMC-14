@@ -1,25 +1,74 @@
 using System;
 using System.Collections.Generic;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 using Content.Shared.Vehicle.Components;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vehicle;
+
+[Serializable, NetSerializable]
+public readonly record struct VehicleSlotPath(string Root, string? Child = null)
+{
+    public bool IsValid => !string.IsNullOrWhiteSpace(Root);
+    public bool IsNested => !string.IsNullOrWhiteSpace(Child);
+
+    public string ToCompositeId()
+    {
+        return IsNested
+            ? VehicleTurretSlotIds.Compose(Root, Child!)
+            : Root;
+    }
+
+    public VehicleSlotPath Append(string child)
+    {
+        return IsNested
+            ? new VehicleSlotPath(Root, VehicleTurretSlotIds.Compose(Child!, child))
+            : new VehicleSlotPath(Root, child);
+    }
+
+    public static bool TryParse(string? value, out VehicleSlotPath path)
+    {
+        path = default;
+        if (string.IsNullOrWhiteSpace(value))
+            return false;
+
+        if (VehicleTurretSlotIds.TryParse(value, out var parent, out var child))
+        {
+            path = new VehicleSlotPath(parent, child);
+            return true;
+        }
+
+        path = new VehicleSlotPath(value);
+        return true;
+    }
+}
 
 public readonly record struct VehicleMountedSlot(
     EntityUid Vehicle,
     EntityUid SlotOwner,
     string SlotId,
-    string CompositeId,
+    VehicleSlotPath Path,
     string HardpointType,
     EntityUid? Item,
     EntityUid? ParentItem,
-    string? ParentSlotId)
+    VehicleSlotPath? ParentPath)
 {
     public bool HasItem => Item != null;
     public bool IsNested => ParentItem != null;
+    public string CompositeId => Path.ToCompositeId();
+    public string? ParentSlotId => ParentPath?.ToCompositeId();
 }
+
+public readonly record struct VehicleMountedAmmoProvider(
+    VehicleMountedSlot Slot,
+    EntityUid AmmoUid,
+    BallisticAmmoProviderComponent Ammo,
+    VehicleHardpointAmmoComponent HardpointAmmo,
+    RefillableByBulletBoxComponent Refill);
 
 public sealed class VehicleTopologySystem : EntitySystem
 {
@@ -52,7 +101,7 @@ public sealed class VehicleTopologySystem : EntitySystem
             hardpoints,
             itemSlots,
             result,
-            parentCompositeId: null,
+            parentPath: null,
             parentItem: null);
 
         return result;
@@ -81,19 +130,31 @@ public sealed class VehicleTopologySystem : EntitySystem
     {
         mountedSlot = default;
 
-        if (string.IsNullOrWhiteSpace(slotId) ||
-            !Resolve(vehicle, ref hardpoints, ref itemSlots, logMissing: false))
-        {
+        if (!VehicleSlotPath.TryParse(slotId, out var path))
             return false;
-        }
+
+        return TryGetMountedSlot(vehicle, path, out mountedSlot, hardpoints, itemSlots);
+    }
+
+    public bool TryGetMountedSlot(
+        EntityUid vehicle,
+        VehicleSlotPath path,
+        out VehicleMountedSlot mountedSlot,
+        HardpointSlotsComponent? hardpoints = null,
+        ItemSlotsComponent? itemSlots = null)
+    {
+        mountedSlot = default;
+
+        if (!path.IsValid || !Resolve(vehicle, ref hardpoints, ref itemSlots, logMissing: false))
+            return false;
 
         return TryGetMountedSlotRecursive(
             vehicle,
             vehicle,
-            slotId,
+            path,
             hardpoints,
             itemSlots,
-            parentCompositeId: null,
+            parentPath: null,
             parentItem: null,
             out mountedSlot);
     }
@@ -116,7 +177,7 @@ public sealed class VehicleTopologySystem : EntitySystem
             item,
             hardpoints,
             itemSlots,
-            parentCompositeId: null,
+            parentPath: null,
             parentItem: null,
             out mountedSlot);
     }
@@ -156,6 +217,61 @@ public sealed class VehicleTopologySystem : EntitySystem
         return true;
     }
 
+    public List<VehicleMountedAmmoProvider> GetMountedAmmoProviders(
+        EntityUid vehicle,
+        HardpointSlotsComponent? hardpoints = null,
+        ItemSlotsComponent? itemSlots = null)
+    {
+        var result = new List<VehicleMountedAmmoProvider>();
+
+        foreach (var slot in GetMountedSlots(vehicle, hardpoints, itemSlots))
+        {
+            if (slot.Item is not { } item)
+                continue;
+
+            if (!TryGetAmmoProviderFromItem(slot, item, out var provider))
+                continue;
+
+            result.Add(provider);
+        }
+
+        return result;
+    }
+
+    public bool TryGetMountedAmmoProvider(
+        EntityUid vehicle,
+        string? slotId,
+        out VehicleMountedAmmoProvider provider,
+        HardpointSlotsComponent? hardpoints = null,
+        ItemSlotsComponent? itemSlots = null)
+    {
+        provider = default;
+
+        if (!VehicleSlotPath.TryParse(slotId, out var path))
+            return false;
+
+        return TryGetMountedAmmoProvider(vehicle, path, out provider, hardpoints, itemSlots);
+    }
+
+    public bool TryGetMountedAmmoProvider(
+        EntityUid vehicle,
+        VehicleSlotPath path,
+        out VehicleMountedAmmoProvider provider,
+        HardpointSlotsComponent? hardpoints = null,
+        ItemSlotsComponent? itemSlots = null)
+    {
+        provider = default;
+
+        if (!path.IsValid ||
+            !TryGetMountedSlot(vehicle, path, out var mountedSlot, hardpoints, itemSlots) ||
+            mountedSlot.Item is not { } item)
+        {
+            return false;
+        }
+
+        return TryGetAmmoProviderFromItem(mountedSlot, item, out provider);
+    }
+
     public bool TryGetPrimaryTurret(
         EntityUid vehicle,
         out EntityUid turretUid,
@@ -185,6 +301,26 @@ public sealed class VehicleTopologySystem : EntitySystem
         }
 
         return false;
+    }
+
+    private bool TryGetAmmoProviderFromItem(
+        VehicleMountedSlot slot,
+        EntityUid item,
+        out VehicleMountedAmmoProvider provider)
+    {
+        provider = default;
+
+        if (!TryComp(item, out BallisticAmmoProviderComponent? ammo))
+            return false;
+
+        if (!TryComp(item, out VehicleHardpointAmmoComponent? hardpointAmmo))
+            return false;
+
+        if (!TryComp(item, out RefillableByBulletBoxComponent? refill))
+            return false;
+
+        provider = new VehicleMountedAmmoProvider(slot, item, ammo, hardpointAmmo, refill);
+        return true;
     }
 
     private bool TryGetContainerAncestor<TComponent>(EntityUid uid, out EntityUid ancestor, bool includeSelf = false)
@@ -221,7 +357,7 @@ public sealed class VehicleTopologySystem : EntitySystem
         HardpointSlotsComponent hardpoints,
         ItemSlotsComponent itemSlots,
         List<VehicleMountedSlot> result,
-        string? parentCompositeId,
+        VehicleSlotPath? parentPath,
         EntityUid? parentItem)
     {
         foreach (var slot in hardpoints.Slots)
@@ -236,19 +372,17 @@ public sealed class VehicleTopologySystem : EntitySystem
                 item = itemSlot.Item;
             }
 
-            var compositeId = parentCompositeId == null
-                ? slot.Id
-                : VehicleTurretSlotIds.Compose(parentCompositeId, slot.Id);
+            var path = parentPath?.Append(slot.Id) ?? new VehicleSlotPath(slot.Id);
 
             result.Add(new VehicleMountedSlot(
                 vehicle,
                 slotOwner,
                 slot.Id,
-                compositeId,
+                path,
                 slot.HardpointType,
                 item,
                 parentItem,
-                parentCompositeId));
+                parentPath));
 
             if (item is not { } nestedItem ||
                 !TryComp(nestedItem, out HardpointSlotsComponent? nestedHardpoints) ||
@@ -263,7 +397,7 @@ public sealed class VehicleTopologySystem : EntitySystem
                 nestedHardpoints,
                 nestedItemSlots,
                 result,
-                compositeId,
+                path,
                 nestedItem);
         }
     }
@@ -302,10 +436,10 @@ public sealed class VehicleTopologySystem : EntitySystem
     private bool TryGetMountedSlotRecursive(
         EntityUid vehicle,
         EntityUid slotOwner,
-        string targetSlotId,
+        VehicleSlotPath targetPath,
         HardpointSlotsComponent hardpoints,
         ItemSlotsComponent itemSlots,
-        string? parentCompositeId,
+        VehicleSlotPath? parentPath,
         EntityUid? parentItem,
         out VehicleMountedSlot mountedSlot)
     {
@@ -321,21 +455,19 @@ public sealed class VehicleTopologySystem : EntitySystem
                 item = itemSlot.Item;
             }
 
-            var compositeId = parentCompositeId == null
-                ? slot.Id
-                : VehicleTurretSlotIds.Compose(parentCompositeId, slot.Id);
+            var path = parentPath?.Append(slot.Id) ?? new VehicleSlotPath(slot.Id);
 
             var current = new VehicleMountedSlot(
                 vehicle,
                 slotOwner,
                 slot.Id,
-                compositeId,
+                path,
                 slot.HardpointType,
                 item,
                 parentItem,
-                parentCompositeId);
+                parentPath);
 
-            if (compositeId == targetSlotId)
+            if (PathEquals(path, targetPath))
             {
                 mountedSlot = current;
                 return true;
@@ -351,10 +483,10 @@ public sealed class VehicleTopologySystem : EntitySystem
             if (TryGetMountedSlotRecursive(
                     vehicle,
                     nestedItem,
-                    targetSlotId,
+                    targetPath,
                     nestedHardpoints,
                     nestedItemSlots,
-                    compositeId,
+                    path,
                     nestedItem,
                     out mountedSlot))
             {
@@ -372,7 +504,7 @@ public sealed class VehicleTopologySystem : EntitySystem
         EntityUid targetItem,
         HardpointSlotsComponent hardpoints,
         ItemSlotsComponent itemSlots,
-        string? parentCompositeId,
+        VehicleSlotPath? parentPath,
         EntityUid? parentItem,
         out VehicleMountedSlot mountedSlot)
     {
@@ -388,19 +520,17 @@ public sealed class VehicleTopologySystem : EntitySystem
                 item = itemSlot.Item;
             }
 
-            var compositeId = parentCompositeId == null
-                ? slot.Id
-                : VehicleTurretSlotIds.Compose(parentCompositeId, slot.Id);
+            var path = parentPath?.Append(slot.Id) ?? new VehicleSlotPath(slot.Id);
 
             var current = new VehicleMountedSlot(
                 vehicle,
                 slotOwner,
                 slot.Id,
-                compositeId,
+                path,
                 slot.HardpointType,
                 item,
                 parentItem,
-                parentCompositeId);
+                parentPath);
 
             if (item == targetItem)
             {
@@ -421,7 +551,7 @@ public sealed class VehicleTopologySystem : EntitySystem
                     targetItem,
                     nestedHardpoints,
                     nestedItemSlots,
-                    compositeId,
+                    path,
                     nestedItem,
                     out mountedSlot))
             {
@@ -431,5 +561,11 @@ public sealed class VehicleTopologySystem : EntitySystem
 
         mountedSlot = default;
         return false;
+    }
+
+    private static bool PathEquals(VehicleSlotPath left, VehicleSlotPath right)
+    {
+        return string.Equals(left.Root, right.Root, StringComparison.OrdinalIgnoreCase) &&
+               string.Equals(left.Child, right.Child, StringComparison.OrdinalIgnoreCase);
     }
 }
