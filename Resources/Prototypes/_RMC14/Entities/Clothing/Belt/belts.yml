@@ -804,7 +804,8 @@
       co_handcannon_fill:
         whitelist:
           tags:
-          - RMCWeaponPistolHandcannonWyvern
+          - RMCWeaponPistolHandcannonWyvern # ideally should have it's own inbelt sprite
+          - RMCWeaponPistolHandcannonPolished
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi

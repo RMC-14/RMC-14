@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/085c7449b99d1239433d23bb2467faf2224b292f/icons/obj/items/weapons/guns/guns_by_faction/colony/pistols.dmi, https://github.com/cmss13-devs/cmss13/blob/7a848f70e648fbbfba062bbf870dd4daa66e5b60/icons/mob/humans/onmob/inhands/weapons/guns/pistols_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/7a848f70e648fbbfba062bbf870dd4daa66e5b60/icons/mob/humans/onmob/inhands/weapons/guns/pistols_righthand.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "bolt-open"
+    },
+    {
+      "name": "icon"
+    },
+	{
+      "name": "mag-0"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-right",
+      "directions": 4
+    }
+  ]
+}

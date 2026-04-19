@@ -1,7 +1,7 @@
 - type: entity
   parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
   id: RMCWeaponPistolHandcannon
-  name: peregrine handcannon
+  name: Peregrine Handcannon
   description: The handcannon that needs no introduction, the Peregrine Handcannon is expensive, unwieldy, and extremely heavy for a pistol. However, it more than makes up for its weighty build with its powerful shots, capable of stopping a human, or even a bear, dead in their tracks.
   components:
   - type: Gun
@@ -78,7 +78,7 @@
 - type: entity
   parent: RMCWeaponPistolHandcannon
   id: RMCWeaponPistolHandcannonGold
-  name: golden peregrine handcannon
+  name: golden Peregrine Handcannon
   description: A Peregrine Handcannon anodized in gold and adorned with rosewood grips. The living definition of ostentatious, it's flashy, unwieldy, tremendously heavy, and kicks like a mule. But as a symbol of power, there's nothing like it.
   components:
   - type: Corrodible
@@ -132,7 +132,7 @@
 - type: entity
   parent: RMCWeaponPistolHandcannonGold
   id: RMCWeaponPistolHandcannonWinterWyvern
-  name: winter wyvern handcannon
+  name: Winter Wyvern handcannon
   description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Tt's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
   components:
   - type: Sprite
@@ -143,6 +143,21 @@
     tags:
     - Sidearm
     - RMCWeaponPistolHandcannonWyvern
+
+- type: entity
+  parent: RMCWeaponPistolHandcannonGold
+  id: RMCWeaponPistolHandcannonPolished
+  name: polished Peregrine Handcannon
+  description: The handcannon that needs no introduction, the Peregrine Handcannon is expensive, unwieldy, and extremely heavy for a pistol. However, it more than makes up for its weighty build with its powerful shots, capable of stopping a human, or even a bear, dead in their tracks. # base handcanon desc
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_polished.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_polished.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannonPolished
 
 - type: entity
   parent: CMBaseMagazinePistol
