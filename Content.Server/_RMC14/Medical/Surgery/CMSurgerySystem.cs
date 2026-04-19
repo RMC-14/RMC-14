@@ -2,6 +2,7 @@
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
@@ -119,7 +120,10 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
     private void OnStepScreamComplete(Entity<CMSurgeryStepEmoteEffectComponent> ent, ref CMSurgeryStepEvent args)
     {
-        _chat.TryEmoteWithChat(args.Body, ent.Comp.Emote);
+        if (!HasComp<RMCUnconsciousComponent>(args.Body))
+        {
+            _chat.TryEmoteWithChat(args.Body, ent.Comp.Emote);
+        }
     }
 
     private void OnStepSpawnComplete(Entity<RMCSurgeryStepSpawnEffectComponent> ent, ref CMSurgeryStepEvent args)

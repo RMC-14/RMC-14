@@ -224,6 +224,13 @@
     sprite: _RMC14/Effects/laser.rsi
     state: laser_target2
   - type: LaserDesignatorTarget
+  - type: RMCCamera
+    id: null
+    rename: false
+  - type: RMCStaticZoomLevel
+  - type: Eye
+    zoom: 0.5, 0.5
+    drawFov: false
 
 - type: entity
   parent: RMCRangefinderTarget

@@ -418,17 +418,40 @@
   parent: RMCPouchFlare
   id: RMCPouchFlareL96
   name: L96 flare pouch
+  suffix: RCM
   description: A pouch designed to hold flares used by the Royal Crown Marines. Refillable with an L96 flare pack.
+
+- type: entity
+  parent: RMCPouchFlare
+  id: RMCPouchFlareR44
+  name: R44 flare pouch
+  suffix: SPP
+  description: An SPP-issue flare pouch intended to hold R44 illumination flares. Refillable with an R44 flare pack.
   components:
-  - type: CMItemSlots
-    cooldown: 1
-    cooldownPopup: You need to wait before taking another flare!
-    count: 16
-    slot:
-      name: Flare
-      whitelist:
-        tags:
-        - Flare
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/flarespp.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "partialLayer" ]
+    - state: closed
+      map: [ "fullLayer" ]
+
+- type: entity
+  parent: RMCPouchFlare
+  id: RMCPouchFlareC18
+  name: C18 flare pouch
+  suffix: PMC
+  description: A black pouch most often issued to Weston-Yamada PMCs meant for flares. Refillable with a C18 flare pack.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/flarepmc.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "partialLayer" ]
+    - state: closed
+      map: [ "fullLayer" ]
 
 # Radio Pouch
 - type: entity

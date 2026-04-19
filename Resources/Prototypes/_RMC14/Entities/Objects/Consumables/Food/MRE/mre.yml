@@ -108,12 +108,60 @@
 
 - type: entity
   parent: CMMRE
-  id: RMCMREWeYa # TODO RMC14 - Custom Contents
+  id: RMCMREWeYa
   name: We-Ya brand ration pack
-  description: "A more or less cohesive ration, intended for colonist and corporate security, packed with a medium quality foods with a long shelf life.\nOn the box is the Weston-Yamada logo, with a slogan surrounding it:\nWESTON-YAMADA. FEEDING BETTER WORLDS."
+  description: "A more or less cohesive ration, intended for colonist and corporate security, packed with a medium quality foods with a long shelf life. On the box is the Weston-Yamada logo, with a slogan surrounding it: WESTON-YAMADA. FEEDING THE FUTURE."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/mre_weya.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: "open" }
+          False: { state: "closed" }
+  - type: Storage
+    grid:
+    - 0,0,9,1 #5 slots min
+    whitelist: null
+  - type: StorageFill
+    contents:
+    # entree
+    - id: RMCMREComponentBonelessPorkRibsWeya
+      orGroup: main
+    - id: RMCMREComponentGrilledChickenWeya
+      orGroup: main
+    - id: RMCMREComponentChickenTenderWeya
+      orGroup: main
+    - id: RMCMREComponentSpaghettiChunksWeya
+      orGroup: main
+#    - id: RMCMREComponentWYGrilledChickenBreast
+#      orGroup: main
+    # side
+    - id: RMCFoodSnackCheeseburgerPackaged
+      orGroup: side
+    - id: RMCFoodSnackBurritoPackaged
+      orGroup: side
+    # snack
+    - id: RMCFoodSnackHotdogPackaged
+    # dessert
+    - id: RMCFoodSnackEATBar
+      orGroup: dessert
+    - id: RMCFoodSnackBoonie
+      orGroup: dessert
+    - id: RMCFoodSnackBarcaridine
+      orGroup: dessert
+    - id: RMCFoodSnackCHUNK
+      orGroup: dessert
+    # drink
+    - id: RMCDrinkWEYABugJuice
+      orGroup: drink
+    - id: RMCDrinkWEYACocoMilk
+      orGroup: drink
+    - id: RMCDrinkWEYASoylent
+      orGroup: drink
+    - id: CMDrinkWEYAWaterBottle30
+      orGroup: drink
 
 - type: entity
   parent: CMMRE
@@ -287,3 +335,13 @@
   components:
   - type: CMItemSlots
     startingItem: RMCMRETSE
+
+- type: entity
+  parent: RMCBoxMREEmpty
+  name: box of WEYA-brand Ration Packs (x12)
+  description: A box of Weston-Yamada Ration Packs. Often found on Company-owned colonies.
+  id: RMCBoxMREWEYA
+  suffix: Filled, WEYA
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMREWeYa

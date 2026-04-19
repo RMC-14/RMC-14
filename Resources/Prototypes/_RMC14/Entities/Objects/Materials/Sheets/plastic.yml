@@ -27,6 +27,12 @@
     - state: plastic_4
       map: ["base"]
   - type: Item
+    sprite: _RMC14/Objects/Materials/Sheets/plastic.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
     size: Normal
   - type: RMCConstructionItem
     buildable:
