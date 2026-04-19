@@ -462,6 +462,18 @@
       amount: 2
 
 - type: entity
+  parent: RMCWebbingHolsterBlack
+  id: RMCWebbingHolsterBlackRSH9
+  suffix: Filled, RSH9
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverRSh9Custom
+      amount: 1
+    - id: RMCSpeedLoaderRsh9
+      amount: 2
+
+- type: entity
   parent: CMWebbingBase
   id: RMCWebbingDropPouch
   name: drop pouch
