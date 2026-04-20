@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/17/2026 23:44:13
-  entityCount: 17434
+  time: 04/20/2026 01:31:12
+  entityCount: 17433
 maps:
 - 1
 grids:
@@ -121503,23 +121503,23 @@ entities:
       parent: 1
 - proto: RMCPropVehicleTruckSnow
   entities:
-  - uid: 15604
+  - uid: 2197
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 117.5,43.5
+      pos: 118,45
       parent: 1
-  - uid: 15605
+  - uid: 2198
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 99.5,12.5
+      pos: 100,13
       parent: 1
-  - uid: 15606
+  - uid: 2199
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 117.5,44.5
+      pos: 118,44
       parent: 1
 - proto: RMCRackParts
   entities:
@@ -127756,10 +127756,10 @@ entities:
       parent: 1
 - proto: RMCTurretGaussSpaceborne
   entities:
-  - uid: 16686
+  - uid: 2196
     components:
     - type: Transform
-      pos: 15.5,49.5
+      pos: 15.5,48.5
       parent: 1
   - uid: 16687
     components:
@@ -127823,11 +127823,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 17.5,118.5
-      parent: 1
-  - uid: 16698
-    components:
-    - type: Transform
-      pos: 21.5,16.5
       parent: 1
   - uid: 16699
     components:
