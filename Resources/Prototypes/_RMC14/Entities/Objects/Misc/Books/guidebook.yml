@@ -66,7 +66,7 @@
   parent: RMCGuidebookBase
   id: RMCGuidebookEngineering
   name: "Tools, Radiowaves And Electrical Grids"
-  description: A book containing basic, yet important information regarding engineering procedures. Written by the UNMC Engineer Association.
+  description: A book containing basic, yet important information regarding engineering procedures. Written by the United Nations Space Navy.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/engineering_0.rsi
@@ -78,7 +78,7 @@
   parent: RMCGuidebookBase
   id: RMCGuidebookConstruction
   name: "Construction Destruction"
-  description: A detailed guide containing a series of diagrams and tables regarding the required resources and proper procedures to building, from barricades to floor tiles. Written by the UNMC Engineer Association.
+  description: A detailed guide containing a series of diagrams and tables regarding the required resources and proper procedures to building, from barricades to floor tiles. Written by the United Nations Space Navy.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/engineering_0.rsi
@@ -90,7 +90,7 @@
   parent: RMCGuidebookBase
   id: RMCGuidebookHacking
   name: "Hack-A-Mole: How Electrical Components Work"
-  description: A guide specialized on the knowledge of 'hacking', being that of airlocks, vending machines, or anything else that your multitool/security access tuner is capable of messing with. Written by the UNMC Engineer Association.
+  description: A guide specialized on the knowledge of 'hacking', being that of airlocks, vending machines, or anything else that your multitool/security access tuner is capable of messing with. Written by the United Nations Space Navy.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/hacking.rsi
@@ -104,7 +104,7 @@
   parent: RMCGuidebookBase
   id: RMCGuidebookTelecomms
   name: "Subspace Telecommunications And You"
-  description: An instructions manual regarding the use of communication channels and advice on how to be properly heard over the radiowaves while speaking all kinds of languages. Written by the UNMC Association.
+  description: An instructions manual regarding the use of communication channels and advice on how to be properly heard over the radiowaves while speaking all kinds of languages. Written by the United Nations Space Navy.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/particle.rsi
@@ -116,7 +116,7 @@
   parent: RMCGuidebookBase
   id: RMCGuidebookReactor
   name: "How to React: Steps to maintain a S-52 Fusion Reactor"
-  description: A manual containing information on how to maintain S-52 Fusion Ship Reactors, very popular engines among space vessels. Written by the UNMC Engineer Association.
+  description: A manual containing information on how to maintain S-52 Fusion Ship Reactors, very popular engines among space vessels. Written by the United Nations Space Navy.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/supermatter.rsi
@@ -130,7 +130,7 @@
   parent: RMCGuidebookBase
   id: RMCGuidebookSurgery
   name: "Surgical Reference Manual"
-  description: A detailed reference manual for surgical procedures. To be read mid-surgery when you forget a simple surgical step. Written by the UNMC Bureau of Medicine and Surgery.
+  description: A detailed reference manual for surgical procedures. To be read mid-surgery when you forget a simple surgical step. Written by the United Nations Medical Service.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/medical.rsi
@@ -142,7 +142,7 @@
   parent: RMCGuidebookBase
   id: RMCGuidebookMedical
   name: "Principles and Practice of Medicine"
-  description: Firstly and foremost, do no harm. A detailed, thick, and heavy medical practitioner's guide, with the first five full pages only being the book's dedication. Written by Chief Medical Officer Pierre Corbeau, UNMC Bureau of Medicine and Surgery.
+  description: Firstly and foremost, do no harm. A detailed, thick, and heavy medical practitioner's guide, with the first five full pages only being the book's dedication. Written by Chief Medical Officer Pierre Corbeau, United Nations Medical Service.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/medical.rsi
@@ -154,7 +154,7 @@
   parent: RMCGuidebookBase
   id: RMCGuidebookChemistry
   name: "Chemical Reactions and How They Can Ruin Your Day"
-  description: A detailed manual containing everything you need to know about chemistry. Recipes and methodology included. Written by the UNMC Bureau of Medicine and Surgery.
+  description: A detailed manual containing everything you need to know about chemistry. Recipes and methodology included. Written by the United Nations Medical Service.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Other/chemistry.rsi

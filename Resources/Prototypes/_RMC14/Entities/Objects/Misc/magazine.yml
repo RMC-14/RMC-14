@@ -213,7 +213,7 @@
   parent: RMCMagazineLaVoz34
   id: RMCMagazineLaVoz100
   name: La Voz Issue No.100.
-  description: An SPP produced magazine. The cover features an artistic picture of various people of the SPP, from workers to soldiers, standing side by side. Above them is the SPP flag, flying proudly, and the headline 'Anniversary 100, Our Thanks to You.'
+  description: An SPP produced magazine. The cover features an artistic picture of various people of the SPP, from workers to soldiers, standing side by side. Above them is the SPP flag, flying proudly, and the headline 'Issue 100, Our Thanks to You.'
   components:
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-lavoz-100

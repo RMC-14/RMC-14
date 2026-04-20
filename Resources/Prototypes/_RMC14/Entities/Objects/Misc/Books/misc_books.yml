@@ -1,8 +1,8 @@
 ﻿- type: entity
   parent: RMCBookBase
   id: RMCBookBrokenArrow
-  name: "After Action Report No.55: Operation Broken Arrow"
-  description: "An after action report of the infamous Operation 'Broken Arrow', so big that it had to be turned into a book. Warning: Some information, such as personal names, have been REDACTED on this print. Written by Executive Officer 'REDACTED', UNS Heyst, United Nations."
+  name: "After Action Report No.55: Operation Justice"
+  description: "An after action report of the infamous Operation 'Justice', so big that it had to be turned into a book. Warning: Some information, such as personal names, have been REDACTED on this print. Written by Executive Officer 'REDACTED', UNS Heyst, United Nations."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Colored/light_red.rsi
@@ -116,7 +116,7 @@
   parent: RMCBookBase
   id: RMCBookCyrusAutobiography
   name: "A Future Worth Living: The Rise of Cyrus Solara"
-  description: A sizable biographical book containing the information and current life story of Cyrus Solara, following their rise in politics to their eventual role as leader of the United Nations. Rated the Sol Bestseller for April 2123. Written by Historian Kurgan Fiercehammer.
+  description: A sizable biographical book containing the information and current life story of Cyrus Solara, following their rise in politics to their eventual role as leader of the United Nations. It was ranked as a UN Bestseller a few years ago. Written by Historian Kurgan Fiercehammer.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Colored/blue.rsi
@@ -136,7 +136,7 @@
   parent: RMCBookBase
   id: RMCBookPrendergastMoor
   name: "Ian Prendergast and the Murder on the Moor"
-  description: This is a classic entry into the "Prendergast" series of detective novels, popular in the TSE and read across the galaxy. This one has the Detective investigating the murder of an important colonial administrator on the isolated moorlands of LV-43, with a full complement of suspicious characters. Written by Jiya Patel.
+  description: This is a classic entry into the "Prendergast" series of detective novels, popular in the TSE and read across the galaxy. This one has the Detective investigating the murder of an important colonial administrator on an isolated moorland in the outer rim, with a full complement of suspicious characters. Written by Jiya Patel.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Colored/wine.rsi
