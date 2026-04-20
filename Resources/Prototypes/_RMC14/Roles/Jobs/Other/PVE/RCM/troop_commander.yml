@@ -51,10 +51,10 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_lieutenant_pve
+        state: rmc_lt
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        state: background_twe_pve
   hidden: true
 
 - type: startingGear
@@ -88,4 +88,4 @@
   id: RMCJobIconRoyalTroopCommanderPVE
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_lieutenant_pve
+    state: rmc_lt_pve

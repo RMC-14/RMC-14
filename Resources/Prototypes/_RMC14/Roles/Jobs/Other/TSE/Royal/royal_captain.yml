@@ -51,7 +51,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_commander
+        state: rmc_xo
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_twe
@@ -82,4 +82,4 @@
   id: RMCJobIconRoyalCaptain
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_captain
+    state: rmc_xo

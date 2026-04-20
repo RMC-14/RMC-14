@@ -389,82 +389,73 @@
             "name": "cmb_obs"
         },
         {
-            "name": "rmc_breacher"
-        },
-        {
-            "name": "rmc_marksman"
-        },
-        {
-            "name": "rmc_medic"
-        },
-        {
-            "name": "rmc_rifleman"
-        },
-        {
-            "name": "rmc_smart_gun_operator"
-        },
-        {
-            "name": "rmc_teamleader"
-        },
-        {
-            "name": "rmc_lieutenant"
-        },
-        {
-            "name": "rmc_captain"
-        },
-        {
-            "name": "rmc_major"
-        },
-        {
-            "name": "rmc_commander"
-        },
-        {
-            "name": "rmc_engi_pve"
-        },
-        {
-            "name": "rmc_sectionleader_pve"
-        },
-        {
-            "name": "rmc_troopleader_pve"
-        },
-        {
             "name": "rmc_bombardier_pve"
+        },
+        {
+            "name": "rmc_breacher"
         },
         {
             "name": "rmc_breacher_pve"
         },
         {
-            "name": "rmc_commander_pve"
+            "name": "rmc_co"
         },
         {
-            "name": "rmc_lieutenant_pve"
+            "name": "rmc_engi_pve"
+        },
+        {
+            "name": "rmc_lt"
+        },
+        {
+            "name": "rmc_lt_pve"
+        },
+        {
+            "name": "rmc_marksman"
         },
         {
             "name": "rmc_marksman_pve"
         },
         {
+            "name": "rmc_medic"
+        },
+        {
             "name": "rmc_medic_pve"
         },
         {
-            "name": "rmc_smartgunner_pve"
+            "name": "rmc_rifleman"
         },
         {
             "name": "rmc_rifleman_pve"
         },
         {
+            "name": "rmc_sectionleader_pve"
+        },
+        {
+            "name": "rmc_smartgunner"
+        },
+        {
+            "name": "rmc_smartgunner_pve"
+        },
+        {
+            "name": "rmc_teamleader"
+        },
+        {
             "name": "rmc_teamleader_pve"
+        },
+        {
+            "name": "rmc_troopleader_pve"
+        },
+        {
+            "name": "rmc_xo"
+        },
+        {
+            "name": "rmc_xo_pve"
         },
         {
             "name": "para_co"
         },
         {
-            "name": "para_co_alt"
-        },
-        {
-            "name": "para_commander"
-        },
-        {
-            "name": "para_commander_alt"
+            "name": "para_xo"
         },
         {
             "name": "para_engi"
@@ -473,10 +464,7 @@
             "name": "para_general"
         },
         {
-            "name": "para_lieutenant"
-        },
-        {
-            "name": "para_lieutenant_alt"
+            "name": "para_lt"
         },
         {
             "name": "para_medic"
@@ -491,7 +479,7 @@
             "name": "para_smartgunner"
         },
         {
-            "name": "para_sniper"
+            "name": "para_marksman"
         },
         {
             "name": "para_spec"
@@ -500,10 +488,10 @@
             "name": "para_synth"
         },
         {
-            "name": "para_teamleader"
+            "name": "para_squadleader"
         },
         {
-            "name": "para_teamleader_alt"
+            "name": "para_teamleader"
         },
         {
             "name": "hudsquad_vo"

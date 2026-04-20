@@ -44,10 +44,10 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_medic_pve
+        state: rmc_medic
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        state: background_twe_pve
     - type: CMVendorUser
       extraPoints:
         Chemicals: 120

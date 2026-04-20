@@ -52,7 +52,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_major
+        state: rmc_co
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_twe
@@ -83,5 +83,5 @@
   id: RMCJobIconRoyalMajor
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_major
+    state: rmc_co
 

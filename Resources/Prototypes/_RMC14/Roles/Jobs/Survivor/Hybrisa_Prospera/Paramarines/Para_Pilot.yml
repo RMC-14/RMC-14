@@ -24,7 +24,7 @@
         - type: TacticalMapIcon
           icon:
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
-            state: rmc_marksman
+            state: rmc_pilot
           background:
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
             state: background_para

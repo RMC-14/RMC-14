@@ -29,7 +29,7 @@
         - type: SquadLeader
           icon:
             sprite: _RMC14/Interface/cm_job_icons.rsi
-            state: para_teamleader_alt
+            state: para_squadleader
         - type: TacticalMapIcon
           icon:
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -68,4 +68,4 @@
   id: RMCJobIconParaTeamLeader
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: para_teamleader_alt
+    state: para_teamleader

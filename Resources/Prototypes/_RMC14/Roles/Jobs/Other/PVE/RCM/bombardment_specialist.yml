@@ -45,10 +45,10 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_breacher_pve
+        state: rmc_bombardier
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        state: background_twe_pve
   hidden: true
 
 - type: startingGear

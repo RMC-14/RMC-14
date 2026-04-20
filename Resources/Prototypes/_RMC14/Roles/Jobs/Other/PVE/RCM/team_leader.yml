@@ -46,10 +46,10 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_teamleader_pve
+        state: rmc_teamleader
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        state: background_twe_pve
   hidden: true
 
 - type: startingGear

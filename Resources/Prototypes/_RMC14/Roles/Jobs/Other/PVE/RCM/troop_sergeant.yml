@@ -50,10 +50,10 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_troopleader_pve
+        state: rmc_troopleader
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        state: background_twe_pve
   hidden: true
 
 - type: startingGear
