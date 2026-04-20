@@ -42,6 +42,30 @@
     sprite: _RMC14/Objects/Clothing/Pouches/pistol.rsi
     layers:
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: np92
+      map: [ "np92_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: npz92
+      map: [ "npz92_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: ttb
+      map: [ "type74_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: tt
+      map: [ "type73_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: zhnk72
+      map: [ "zhnk72_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: l54
+      map: [ "l14_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: cmb
+      map: [ "cmb_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: mag38
+      map: [ "mag38_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: _m77
       map: [ "_m77_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -77,7 +101,6 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: taser
       map: [ "taser_fill" ]
-      
     - state: icon
     - state: closed
       map: [ "holstered" ]
@@ -110,6 +133,14 @@
     - peregine_fill
     - g_peregine_fill
     - taser_fill
+    - zhnk72_fill
+    - type73_fill
+    - type74_fill
+    - np92_fill
+    - npz92_fill
+    - l14_fill
+    - cmb_fill
+    - mag38_fill
     mapLayers:
       holstered:
         whitelist:
@@ -160,11 +191,43 @@
         whitelist:
           tags:
           - RMCWeaponPistolHandcannonGold
+      npz92_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolNPZ92
+      np92_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolNP92
+      zhnk72_fill:
+        whitelist:
+          tags:
+          - RMCWeaponRevolverZHNK72
+      type73_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolT73
+      type74_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolT74
+      l14_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolL14
+      mag38_fill:
+        whitelist:
+          tags:
+          - RMCWeaponRevolver38Magnum
+      cmb_fill:
+        whitelist:
+          tags:
+          - RMCWeaponRevolverSpearhead
       taser_fill:
         whitelist:
           tags:
           - Taser
-            
+
   - type: Storage
     maxItemSize: Normal
   - type: CMHolster

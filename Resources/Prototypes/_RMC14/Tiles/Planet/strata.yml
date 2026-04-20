@@ -8,6 +8,7 @@
   footstepSounds:
     collection: FootstepHull
   canDig: false
+  isSubfloor: false
 
 - type: tile
   parent: CMPlanetStrata

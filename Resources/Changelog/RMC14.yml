@@ -1,119 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added naming guidelines for Skrell and Feroxi.
-    type: Add
-  id: 2610
-  time: '2025-12-06T19:00:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8585
-- author: PursuitinAshes
-  changes:
-  - message: Provost Inspectors have loadout options and a loadout option to choose
-      which jacket to spawn with.
-    type: Tweak
-  id: 2611
-  time: '2025-12-07T08:51:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8549
-- author: J C Denton
-  changes:
-  - message: Trucker survivor and it's variations now replace engineer colonist instead
-      of civilian.
-    type: Tweak
-  id: 2612
-  time: '2025-12-08T07:54:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8553
-- author: monomethylhydrazine
-  changes:
-  - message: Added an icon to FORECON PVE riflemen and RTOs.
-    type: Add
-  - message: Added tacmap icons to FORECON PVE roles.
-    type: Add
-  - message: Fixed FORECON PVE roles needing to be manually added to the Recon squad.
-    type: Fix
-  - message: Removed the RTO from FORECON vendors.
-    type: Remove
-  id: 2613
-  time: '2025-12-08T07:55:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8563
-- author: Dutch-VanDerLinde
-  changes:
-  - message: 'LV-624 now displays its colony name: LV-624 Lazarus Landing.'
-    type: Tweak
-  id: 2614
-  time: '2025-12-08T07:56:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8587
-- author: Gosera
-  changes:
-  - message: Fixed M276 pattern M13 holster rig not being able to be equipped on the
-      suit storage slot.
-    type: Fix
-  - message: Fixed M276 pattern M82F flare gun holster rig not being able to be equipped
-      on the suit storage slot.
-    type: Fix
-  id: 2615
-  time: '2025-12-08T07:57:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8584
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed xenos being able to pry powered shutters and podlocks. They can
-      still pry powered doors.
-    type: Fix
-  id: 2616
-  time: '2025-12-08T07:59:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8579
-- author: NotInButIn
-  changes:
-  - message: Wooden barricades can now be destroyed with Charge/ToggleCharge and jumped
-      over by runners.
-    type: Add
-  - message: added feature to specify in the XenoParasite component which larva will
-      be born from the infected.
-    type: Add
-  - message: Removed Vanilla-Unequip verb from armor. Use rmc unequip or click to
-      remove.
-    type: Remove
-  - message: The `squad` command now works for all entities, not only marines.
-    type: Fix
-  - message: Items from weapon spawners no longer appear in inaccessible locations.
-    type: Fix
-  - message: Larva are no longer instantly removed after suicide, and you cannot use
-      disablers or toy guns to suicide.
-    type: Fix
-  - message: Queens are now tracked separately per hive. So now each hive has its
-      own evolution points, hive mind and the like.
-    type: Fix
-  - message: "Queen\u2019s Screech no longer stuns other queens."
-    type: Fix
-  - message: Pheromones are no longer distributed to xeno that are not members of
-      the hive.
-    type: Fix
-  - message: Hive mind chat rewritten. Xenos can now possess any specified hive mind.
-    type: Tweak
-  id: 2617
-  time: '2025-12-08T07:59:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7892
-- author: noctyrnal
-  changes:
-  - message: Added the 'Flamer Bodybag' insert to Sorokyne Strata's engineering. It
-      has a 60% chance to spawn.
-    type: Add
-  id: 2618
-  time: '2025-12-08T08:04:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8558
-- author: Wizden
-  changes:
-  - message: Fixed foldable clothes not working while worn.
-    type: Fix
-  id: 2619
-  time: '2025-12-08T08:04:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8569
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Firing a mortar will shake the camera of marines near the mortar
-    type: Tweak
-  id: 2620
-  time: '2025-12-08T08:03:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8530
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Hybrisa Caves Lockdown podlocks being pryable
@@ -4505,5 +4390,96 @@
   id: 3110
   time: '2026-04-15T01:36:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9284
+- author: kleinerstation13
+  changes:
+  - message: Resprited SPP lifesaver belt
+    type: Tweak
+  id: 3111
+  time: '2026-04-17T17:42:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9626
+- author: monomethylhydrazine
+  changes:
+  - message: '[PVE] Added unique marking flares for the SPP and PMC factions.'
+    type: Add
+  id: 3112
+  time: '2026-04-19T01:32:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9549
+- author: Vixting
+  changes:
+  - message: Queens scream will now apply camera shake to those affected.
+    type: Add
+  id: 3113
+  time: '2026-04-19T01:33:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9608
+- author: Dygon
+  changes:
+  - message: Avali can now chirp.
+    type: Tweak
+  id: 3114
+  time: '2026-04-19T01:33:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9620
+- author: SharkSnake98
+  changes:
+  - message: Added new drinks and mains for the colony ration packs
+    type: Add
+  - message: Replaced the current Colony MRE fills with the correct ones.
+    type: Tweak
+  id: 3115
+  time: '2026-04-19T01:35:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9650
+- author: Dygon
+  changes:
+  - message: The dropship's camera controls console can now be used to view targets.
+    type: Tweak
+  - message: Swapping camera views repeatedly without closing the UI no longer causes
+      FPS drops.
+    type: Fix
+  id: 3116
+  time: '2026-04-19T01:37:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9589
+- author: IceNoobXD
+  changes:
+  - message: Added inhand sprites to all of the materials (glass, metal, plastic,
+      etc.) and some other items
+    type: Add
+  id: 3117
+  time: '2026-04-19T01:36:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9551
+- author: Flowylove
+  changes:
+  - message: Makes patient on the surgery table unable to scream because of surgical
+      manipulations while rendered unconscious.
+    type: Tweak
+  id: 3118
+  time: '2026-04-19T01:38:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9603
+- author: PursuitInAshes
+  changes:
+  - message: Fixed the double lights located on New Varadero.
+    type: Fix
+  id: 3119
+  time: '2026-04-19T01:40:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9681
+- author: Magicocity1
+  changes:
+  - message: Fixed some pistols not having sprites underlay on the pistol pouch
+    type: Fix
+  id: 3120
+  time: '2026-04-19T01:39:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9602
+- author: CatAndHats
+  changes:
+  - message: Added the pipe network to Hybrisa Prospera
+    type: Add
+  - message: The Hybrisa Prospera Celestia queen spawn has been removed and in its
+      place is a queen spawn in south-east caves, the survivor spawn in that area
+      has been removed and the nearby loot moved to biogen armoury and biogen dropship.
+    type: Tweak
+  - message: Hybrisa Prospera's Dynagrid has recieved minor internal changes to tear
+      down a few walls in the coridoor south and west of the generators.
+    type: Tweak
+  id: 3121
+  time: '2026-04-20T23:23:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9654
 Name: RMC14
 Order: -1
