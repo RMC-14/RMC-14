@@ -90,8 +90,22 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Trijent/crashlanding-spp-bar.yml"
-      probability: 0.4
+      probability: 1
       offset: 0,-2.0
+      nightmareScenario: spp_bar
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentCrashlandingSPPAlt
+  name: Crashlanding SPP Alt
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/crashlanding-spp-alt.yml"
+      probability: 1
+      offset: 0,-2
       nightmareScenario: spp_bar
     replaceAreas: false
 

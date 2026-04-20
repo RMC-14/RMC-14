@@ -18,4 +18,7 @@ public sealed partial class CrashLandableComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan? LastCrash;
+
+    [DataField, AutoNetworkedField]
+    public float SkyFallDuration = 1.5f;
 }
