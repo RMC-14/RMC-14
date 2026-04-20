@@ -34,6 +34,12 @@ cm-chatsan-replacement-admins-marine = high command
 cm-chatsan-word-eorg-marine = eorg
 cm-chatsan-replacement-eorg-marine = warcrimes
 
+cm-chatsan-word-xx121-marine = xx121
+cm-chatsan-replacement-xx121-marine = xenonids
+
+cm-chatsan-word-xx-121-marine = xx-121
+cm-chatsan-replacement-xx-121-marine = xenonids
+
 cm-chatsan-word-xenoid = xenoid
 cm-chatsan-replacement-xenoid = xenonid
 
@@ -789,6 +795,9 @@ cm-chatsan-word-xover = xover
 cm-chatsan-word-xenoover = xenover
 cm-chatsan-word-replacement-xover = over
 
+cm-chatsan-word-m2c = m2c
+cm-chatsan-word-replacement-m2c = heavy mounted spitter
+
 cm-chatsan-word-m13 = m13
 cm-chatsan-word-replacement-m13 = fast spitter
 
@@ -797,6 +806,9 @@ cm-chatsan-word-replacement-m63 = fast spitter
 
 cm-chatsan-word-p90 = p90
 cm-chatsan-word-replacement-p90 = fast spitter
+
+cm-chatsan-word-pdw90 = pdw90
+cm-chatsan-word-replacement-pdw90 = fast spitter
 
 cm-chatsan-word-m54c = m54c
 cm-chatsan-word-replacement-m54c = spitter

@@ -55,7 +55,7 @@ public sealed class XenoEmoteSystem : EntitySystem
         if (!_whitelist.CheckBoth(target, comp.Blacklist, comp.Whitelist))
             return;
 
-        var chance = (5f + MathF.Floor((float)args.Damage.GetTotal() / 4f)) / 100f;
+        var chance =  Math.Clamp((5f + MathF.Floor((float)args.Damage.GetTotal() / 4f)) / 100f, 0, 1);
 
         if (_random.Prob(chance))
         {

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Xenonids;
@@ -51,6 +51,8 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
                 continue;
 
             var layer = GetKey(accessory, accessoryComp, index);
+            // For items with hasIconSprite (like medals on clothing), use unique key to avoid overwriting on clothing sprite
+            var clothingLayer = accessoryComp.HasIconSprite ? $"{layer}_{index}" : layer;
 
             if (accessoryComp.PlayerSprite == null && TryComp(accessory, out SpriteComponent? accessorySprite))
             {
@@ -65,10 +67,10 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
             if (clothingSprite != null && accessoryComp.HasIconSprite)
             {
-                var clothingLayer = clothingSprite.LayerMapReserveBlank(layer);
-                clothingSprite.LayerSetVisible(clothingLayer, !accessoryComp.Hidden);
-                clothingSprite.LayerSetRSI(clothingLayer, sprite.RsiPath);
-                clothingSprite.LayerSetState(clothingLayer, sprite.RsiState);
+                var clothingSpriteLayer = clothingSprite.LayerMapReserveBlank(clothingLayer);
+                clothingSprite.LayerSetVisible(clothingSpriteLayer, !accessoryComp.Hidden);
+                clothingSprite.LayerSetRSI(clothingSpriteLayer, sprite.RsiPath);
+                clothingSprite.LayerSetState(clothingSpriteLayer, sprite.RsiState);
             }
 
             if (args.Layers.Any(t => t.Item1 == layer))
@@ -114,9 +116,11 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
         }
 
         var layer = GetKey(item, accessoryComp, index);
+        // For items with hasIconSprite, use the same unique key format as when adding
+        var clothingLayer = accessoryComp.HasIconSprite ? $"{layer}_{index}" : layer;
 
-        if (TryComp(ent.Owner, out SpriteComponent? clothingSprite) && clothingSprite.LayerMapTryGet(layer, out var clothingLayer))
-            clothingSprite.LayerSetVisible(clothingLayer, false);
+        if (TryComp(ent.Owner, out SpriteComponent? clothingSprite) && clothingSprite.LayerMapTryGet(clothingLayer, out var clothingSpriteLayer))
+            clothingSprite.LayerSetVisible(clothingSpriteLayer, false);
 
         _item.VisualsChanged(ent);
     }
@@ -129,49 +133,65 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             return;
 
-        var key = string.Empty;
+        if (!TryComp(args.Equipee, out SpriteComponent? sprite))
+            return;
+
+        var index = 0;
         foreach (var accessory in container.ContainedEntities)
         {
             if (!TryComp<UniformAccessoryComponent>(accessory, out var accessoryComp))
-                return;
+                continue;
 
             if (accessoryComp.PlayerSprite == null && TryComp(accessory, out SpriteComponent? accessorySprite))
             {
                 accessoryComp.PlayerSprite = new(accessorySprite.BaseRSI?.Path ?? new ResPath("_RMC14/Objects/Medals/bronze.rsi"), "equipped");
             }
+            
+            var key = GetKey(accessory, accessoryComp, index);
 
-            if (accessoryComp.LayerKey != null)
-                key = accessoryComp.LayerKey;
+            if (accessoryComp.LayerKeys == null || accessoryComp.LayerKeys.Count == 0)
+            {
+                index++;
+                continue;
+            }
+
+            if (!args.RevealedLayers.Contains(key))
+            {
+                index++;
+                continue;
+            }
+
+            if (!sprite.LayerMapTryGet(key, out var layer) ||
+                !sprite.TryGetLayer(layer, out var layerData))
+            {
+                index++;
+                continue;
+            }
+
+            var data = layerData.ToPrototypeData();
+            sprite.RemoveLayer(layer);
+
+            layer = sprite.LayerMapReserveBlank(key);
+            sprite.LayerSetData(layer, data);
+
+            index++;
         }
-
-        if (key == string.Empty)
-            return;
-
-        if (!args.RevealedLayers.Contains(key))
-            return;
-
-        if (!TryComp(args.Equipee, out SpriteComponent? sprite))
-            return;
-
-        if (!sprite.LayerMapTryGet(key, out var layer) ||
-            !sprite.TryGetLayer(layer, out var layerData))
-        {
-            return;
-        }
-
-        var data = layerData.ToPrototypeData();
-        sprite.RemoveLayer(layer);
-
-        layer = sprite.LayerMapReserveBlank(key);
-        sprite.LayerSetData(layer, data);
     }
 
     private string GetKey(EntityUid uid, UniformAccessoryComponent component, int index)
     {
         var key = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(uid)}_{uid.Id}";
 
-        if (component.LayerKey != null)
-            key = component.LayerKey;
+        if (component.LayerKeys != null && component.LayerKeys.Count > 0 && component.Limit > 1)
+        {
+            // Use index to select appropriate layer from list
+            var layerIndex = index < component.LayerKeys.Count ? index : component.LayerKeys.Count - 1;
+            key = component.LayerKeys[layerIndex];
+        }
+        else if (component.LayerKeys != null && component.LayerKeys.Count == 1)
+        {
+            key = component.LayerKeys[0];
+        }
 
         return key;
     }

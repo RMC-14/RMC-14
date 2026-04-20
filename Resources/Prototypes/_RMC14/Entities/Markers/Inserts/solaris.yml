@@ -1,4 +1,4 @@
-# Solaris
+# Solaris Base
 - type: entity
   abstract: true
   parent: RMCMapInsertBase
@@ -10,6 +10,7 @@
     clearDecals: true
     replaceAreas: true
 
+
 # Standalones
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -20,40 +21,25 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/medbay-v3.yml"
-      probability: 0.13 # todo: weight 1 with 0.5 standalone chance vs Medbay Passage
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisMedbayPassage
-  name: Medbay Passage
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.13
     - spawn: "/Maps/_RMC14/Inserts/Solaris/medbay-passage.yml"
-      probability: 0.37 # todo: weight 3 with 0.5 standalone chance vs Medbay v3
+      probability: 0.37
+      offset: 21,-4
 
 - type: entity
   parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisLambdaCaveExtratunnel
-  name: Lambda Cave Extratunnel
+  id: RMCMapInsertSolarisLambdaCaveShortcuts
+  name: Lambda Cave Shortcuts
   suffix: Insert Solaris
   components:
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/lambda-cave_extratunnel.yml"
-      probability: 0.25 # todo: 0.5 lambda caves standalone chance vs Lambda cave mushroom
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisLambdaCaveMushroom
-  name: Lambda Cave Mushroom
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
+      probability: 0.25
     - spawn: "/Maps/_RMC14/Inserts/Solaris/lambda-cave_mushroom.yml"
-      probability: 0.25 # todo: 0.5 lambda caves standalone chance vs Lambda Cave Extratunnel
+      probability: 0.25
+      offset: 22,35
+
 
 # Sprinkles
 - type: entity
@@ -69,25 +55,15 @@
 
 - type: entity
   parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisTCommsOpen
-  name: TComms Open
+  id: RMCMapInsertSolarisLambdaGraveyard
+  name: Lambda Graveyard
   suffix: Insert Solaris
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/tcomms_open.yml"
-      probability: 0.1
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisETATunnelOpen
-  name: ETA Tunnel Open
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/etatunnel_open.yml"
-      probability: 0.2
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/lambda_graveyard.yml"
+      probability: 0.5
+      offset: 0,9.0
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -99,62 +75,6 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/viro_open.yml"
       probability: 0.4
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisViroRockOpen
-  name: Virology Rocks Open
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/viro-rock_open.yml"
-      probability: 0.3
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisLZ1CaveFlank
-  name: LZ1 Cave Flank
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1cave_flank.yml"
-      probability: 0.25
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisLZ1Entrance
-  name: LZ1 Entrance
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1entrance_v2.yml"
-      probability: 0.2
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisLZ1NorthMining
-  name: LZ1 North Mining
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1north_mining.yml"
-      probability: 0.2
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisLambdaGraveyard
-  name: Lambda Graveyard
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/lambda_graveyard.yml"
-      probability: 0.5
-      offset: 0,9.0
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -194,43 +114,6 @@
 
 - type: entity
   parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisVault
-  name: Vault V2
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/vault_v2.yml"
-      probability: 0.25
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisCLFMining
-  name: CLF Mining
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/clfmining.yml"
-      probability: 1
-      nightmareScenario: clfmining
-    replaceAreas: false
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisCrashlandingOffices
-  name: Crashlanding Offices
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/crashlanding-offices.yml"
-      probability: 1
-      nightmareScenario: crashlanding_offices
-    replaceAreas: false
-
-- type: entity
-  parent: RMCMapInsertSolarisBase
   id: RMCMapInsertSolarisCargoContainers
   name: Cargo Containers
   suffix: Insert Solaris
@@ -242,25 +125,25 @@
 
 - type: entity
   parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisLZ1ContainersScramble
-  name: LZ1 Containers Scramble
+  id: RMCMapInsertSolarisViroRockOpen
+  name: Virology Rocks Open
   suffix: Insert Solaris
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1containers_scramble.yml"
-      probability: 0.25
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/viro-rock_open.yml"
+      probability: 0.3
 
 - type: entity
   parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisReactorMeltdown
-  name: Reactor Meltdown
+  id: RMCMapInsertSolarisLZ1CaveFlank
+  name: LZ1 Cave Flank
   suffix: Insert Solaris
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/reactor_meltdown.yml"
-      probability: 0.15
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1cave_flank.yml"
+      probability: 0.25
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -276,13 +159,199 @@
 
 - type: entity
   parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisVault
+  name: Vault V2
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/vault_v2.yml"
+      probability: 0.25
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisLZ1ContainersScramble
+  name: LZ1 Containers Scramble
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1containers_scramble.yml"
+      probability: 0.25
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisContainerroomXenos
+  name: Containerroom Xenos
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/containerroom_xenos.yml"
+      probability: 0.25
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisETATunnelOpen
+  name: ETA Tunnel Open
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/etatunnel_open.yml"
+      probability: 0.2
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisLZ1Entrance
+  name: LZ1 Entrance
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1entrance_v2.yml"
+      probability: 0.2
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisLZ1NorthMining
+  name: LZ1 North Mining
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1north_mining.yml"
+      probability: 0.2
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisReactorMeltdown
+  name: Reactor Meltdown
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/reactor_meltdown.yml"
+      probability: 0.15
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisTCommsOpen
+  name: TComms Open
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/tcomms_open.yml"
+      probability: 0.1
+
+
+# Survivor Scenario Inserts
+- type: entity
+  abstract: true
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisBaseScenario
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    replaceAreas: false
+
+# PMC Crashlanding
+- type: entity
+  parent: RMCMapInsertSolarisBaseScenario
+  id: RMCMapInsertSolarisCrashlandingOffices
+  name: Crashlanding Offices
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/crashlanding-offices.yml"
+      probability: 1
+      nightmareScenario: crashlanding_offices
+
+- type: entity
+  parent: RMCMapInsertSolarisBaseScenario
   id: RMCMapInsertSolarisCrashlandingEva
   name: Crashlanding Eva
   suffix: Insert Solaris
   components:
-    - type: MapInsert
-      variations:
-      - spawn: "/Maps/_RMC14/Inserts/Solaris/crashlanding-eva.yml"
-        probability: 1
-        nightmareScenario: crashlanding_offices
-      replaceAreas: false
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/crashlanding-eva.yml"
+      probability: 1
+      nightmareScenario: crashlanding_offices
+
+# CLF Mining
+- type: entity
+  parent: RMCMapInsertSolarisBaseScenario
+  id: RMCMapInsertSolarisCLFMining
+  name: CLF Mining
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/clfmining.yml"
+      probability: 1
+      nightmareScenario: clfmining
+
+# Regular Surv Spawns
+- type: entity
+  parent: RMCMapInsertSolarisBaseScenario
+  id: RMCMapInsertSolarisSurvSpawnAdmin
+  name: Admin Surv Spawn
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/surv_spawn_admin.yml"
+      probability: 1
+      nightmareScenario: solaris_surv_spawn_admin
+
+- type: entity
+  parent: RMCMapInsertSolarisBaseScenario
+  id: RMCMapInsertSolarisSurvSpawnBar
+  name: Bar Surv Spawn
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/surv_spawn_bar.yml"
+      probability: 1
+      nightmareScenario: solaris_surv_spawn_bar
+
+- type: entity
+  parent: RMCMapInsertSolarisBaseScenario
+  id: RMCMapInsertSolarisSurvSpawnOffice
+  name: Office Surv Spawn
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/surv_spawn_office.yml"
+      probability: 1
+      nightmareScenario: solaris_surv_spawn_office
+
+- type: entity
+  parent: RMCMapInsertSolarisBaseScenario
+  id: RMCMapInsertSolarisSurvSpawnSouthMarshals
+  name: South Marshals Surv Spawn
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/surv_spawn_south_marshals.yml"
+      probability: 1
+      nightmareScenario: solaris_surv_spawn_south_marshals
+
+- type: entity
+  parent: RMCMapInsertSolarisBaseScenario
+  id: RMCMapInsertSolarisSurvSpawnStorage
+  name: Storage Surv Spawn
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/surv_spawn_storage.yml"
+      probability: 1
+      nightmareScenario: solaris_surv_spawn_storage

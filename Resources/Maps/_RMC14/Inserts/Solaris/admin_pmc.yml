@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/03/2026 01:05:04
-  entityCount: 147
+  time: 02/24/2026 19:19:33
+  entityCount: 146
 maps: []
 grids:
 - 1
@@ -413,13 +413,6 @@ entities:
     components:
     - type: Transform
       pos: 2.5,-1.5
-      parent: 1
-- proto: CMSpawnPointSurvivor
-  entities:
-  - uid: 62
-    components:
-    - type: Transform
-      pos: 11.5,0.5
       parent: 1
 - proto: CMTable
   entities:

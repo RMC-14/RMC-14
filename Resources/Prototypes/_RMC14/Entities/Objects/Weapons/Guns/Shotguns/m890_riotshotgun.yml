@@ -1,61 +1,16 @@
 ﻿- type: entity
-  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  parent: WeaponShotgunM890
   name: M890 riot shotgun
   id: RMCWeaponShotgunM890Riot
-  description: A Weston-Yamada semi-automatic riot shotgun with a rapid fire rate. Holds 8 Beanbag shells in the chamber. Specially made for crowd control during tough situations.
+  description: The Weston-Yamada M890 Shotgun, a semi-automatic shotgun with a quick fire rate. Equipped with a steel blue finish to signify use in riot control. It has been modified to only fire 20G beanbags.
+  suffix: Riot, Beanbags
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_riot.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_riot.rsi
-  - type: Gun
-    shotsPerBurst: 1
-    soundGunshot:
-      collection: RMCTacticalShotgunShoot
-  - type: ShootUseDelay
-  - type: RMCSelectiveFire
-    baseFireModes:
-    - SemiAuto
-    recoilWielded: 2
-    recoilUnwielded: 4
-    scatterWielded: 5
-    scatterUnwielded: 10
-    baseFireRate: 0.7
-    burstScatterMult: 5
   - type: BallisticAmmoProvider
-    cycleable: false
     whitelist:
       tags:
       - RMCShellShotgunBeanbag
-    capacity: 8
-  - type: AttachableHolder
-    slots:
-      rmc-aslot-barrel:
-        whitelist:
-          tags:
-          - RMCAttachmentExtendedBarrel
-          - RMCAttachmentRecoilCompensator
-      rmc-aslot-rail:
-        whitelist:
-          tags:
-          - RMCAttachmentRailFlashlight
-          - RMCAttachmentMagneticHarness
-          - RMCAttachmentS5RedDotSight
-          - RMCAttachmentS6ReflexSight
-      rmc-aslot-stock:
-        startingAttachable: RMCAttachmentM890Stock
-        whitelist:
-          tags:
-          - RMCAttachmentM890Stock
-      rmc-aslot-underbarrel:
-        locked: true
-        startingAttachable: RMCAttachmentU1GrenadeLauncher
-        whitelist:
-          tags:
-          - RMCAttachmentU1GrenadeLauncher
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-barrel: 0.825, 0.06
-      rmc-aslot-rail: -0.025, 0.125
-      rmc-aslot-stock: -0.50, 0.065
-      rmc-aslot-underbarrel: 0.30, -0.31
+    proto: CMShellShotgunBeanbag

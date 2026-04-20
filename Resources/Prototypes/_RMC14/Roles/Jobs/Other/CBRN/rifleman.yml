@@ -1,0 +1,100 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCCBRNRifleman
+  name: cm-job-name-rifleman
+  description: rmc-job-description-cbrn-rifleman
+  playTimeTracker: CMJobCBRNRifleman
+  ranks:
+    RMCRankLanceCorporal: []
+  startingGear: RMCGearCBRNRifleman
+  icon: "CMJobIconEmpty"
+  hasIcon: false
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: CBRN Rifleman
+  supervisors: cm-job-supervisors-sl
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 3
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-rifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: private
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCBRNRifleman
+  name: cbrn ghost role rifleman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCBRNRifleman
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCBRNRifleman
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-cbrn-rifleman
+    description: rmc-job-description-cbrn-rifleman
+    rules: rmc-ghost-role-information-cbrn-rules
+    reregister: false
+    job: RMCCBRNRifleman
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadCBRN
+
+- type: startingGear
+  id: RMCGearCBRNRifleman
+  equipment:
+    head: RMCArmorHelmetCBRN
+    ears: CMHeadsetCBRN
+    jumpsuit: RMCCBRNSuit
+    outerClothing: RMCArmorCBRN
+    gloves: RMCHandsVeteranCBRN
+    shoes: RMCBootsCBRN
+    suitstorage: RMCWeaponRifleM54CFilled
+    id: CMDogtagCBRNRifleman
+    belt: RMCBeltMarineMK2
+    back: CMBackpackMarine
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchFlareFilled
+  storage:
+    back:
+    - RMCGeigerCounter
+    # RMC TODO: reagent scanner 
+    # RMC TODO: gas/atmos analyzer 
+    - RMCSprayBottleSpaceCleaner
+    - CMBodyBagFolded
+    - CMBodyBagFolded
+    - CMBodyBagFolded
+    - CMBodyBagFolded
+    - CMMagazineRifleM54CAP
+    outerClothing:
+    - CMMRE
+    - RMCGrenadeIncendiary
+    - RMCGrenadeIncendiary
+
+- type: playTimeTracker
+  id: CMJobCBRNRifleman
+

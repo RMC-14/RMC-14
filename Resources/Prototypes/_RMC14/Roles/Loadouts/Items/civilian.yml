@@ -30,10 +30,10 @@
     - RMCPatchTSE
 
 - type: loadout
-  id: PatchCECRMC
+  id: PatchMSCRMC
   cost: 1
   inhand:
-    - RMCPatchSPPCEC
+    - RMCPatchSPPMSC
 
 - type: loadout
   id: PatchCLFRMC

@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Marines.Announce;
@@ -17,10 +18,12 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.UserInterface;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -31,6 +34,8 @@ namespace Content.Shared._RMC14.Dropship;
 
 public abstract class SharedDropshipSystem : EntitySystem
 {
+    [Dependency] protected readonly SharedAudioSystem Audio = default!;
+
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -55,6 +60,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<DropshipNavigationComputerComponent, AfterActivatableUIOpenEvent>(OnNavigationOpen);
         SubscribeLocalEvent<DropshipNavigationComputerComponent, DropshipLockoutOverrideDoAfterEvent>(OnNavigationLockoutOverride);
+        SubscribeLocalEvent<DropshipNavigationComputerComponent, GettingAttackedAttemptEvent>(OnGettingAttackedAttempt);
 
         SubscribeLocalEvent<DropshipTerminalComponent, ActivateInWorldEvent>(OnDropshipTerminalActivateInWorld, before: [typeof(ActivatableUISystem), typeof(ActivatableUIRequiresAccessSystem)]);
         SubscribeLocalEvent<DropshipTerminalComponent, ActivatableUIOpenAttemptEvent>(OnTerminalOpenAttempt);
@@ -63,6 +69,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipWeaponPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipWeaponPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
         SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, InteractHandEvent>(OnInteract);
 
         SubscribeLocalEvent<DropshipUtilityPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipUtilityPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
@@ -74,6 +81,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipElectronicSystemPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipElectronicSystemPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
         SubscribeLocalEvent<DropshipElectronicSystemPointComponent, ExaminedEvent>(OnElectronicSystemExamined);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, InteractHandEvent>(OnInteract);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -232,6 +240,18 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         _popup.PopupClient(Loc.GetString("rmc-dropship-locked-out-bypass"), ent, args.User, PopupType.Medium);
+    }
+
+    private void OnGettingAttackedAttempt(Entity<DropshipNavigationComputerComponent> ent, ref GettingAttackedAttemptEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Attacker))
+            return;
+
+        if (!TryStopLaunchAlarm(ent))
+            return;
+
+        Audio.PlayPvs(ent.Comp.LaunchAlarmForcedShutdownSound, ent);
+        _popup.PopupEntity( Loc.GetString("rmc-dropship-launch-alarm-xeno-shutdown", ("console", ent)), args.Attacker);
     }
 
     private void OnDropshipTerminalActivateInWorld(Entity<DropshipTerminalComponent> ent, ref ActivateInWorldEvent args)
@@ -533,6 +553,76 @@ public abstract class SharedDropshipSystem : EntitySystem
             var ev = new DropshipHijackStartEvent(xform.ParentUid);
             RaiseLocalEvent(ref ev);
         }
+    }
+
+    protected bool TryStopLaunchAlarm(Entity<DropshipComponent> dropship, DropshipNavigationComputerComponent? navigationComputerComponent = null)
+    {
+        if (dropship.Comp.LaunchAlarmEntity == null)
+            return false;
+
+        Del(dropship.Comp.LaunchAlarmEntity);
+        dropship.Comp.LaunchAlarmEntity = null;
+        Dirty(dropship);
+
+        if (navigationComputerComponent != null)
+            return false;
+
+        var query = Transform(dropship).ChildEnumerator;
+        while (query.MoveNext(out var child))
+        {
+            if (!TryComp(child, out DropshipNavigationComputerComponent? navigationComputer))
+                continue;
+
+            navigationComputer.LaunchAlarmStatus = false;
+            Dirty(child, navigationComputer);
+            break;
+        }
+
+        return true;
+    }
+
+    protected bool TryStopLaunchAlarm(Entity<DropshipNavigationComputerComponent> navigationComputer)
+    {
+        if (!TryGetGridDropship(navigationComputer, out var dropship) || dropship.Comp.LaunchAlarmEntity == null)
+            return false;
+
+        Del(dropship.Comp.LaunchAlarmEntity);
+        dropship.Comp.LaunchAlarmEntity = null;
+        Dirty(dropship);
+
+        navigationComputer.Comp.LaunchAlarmStatus = false;
+        Dirty(navigationComputer);
+
+        return true;
+    }
+
+    /// <summary>
+    ///     Relay interaction events to the entity stored within the Weapon Point.
+    /// </summary>
+    private void OnInteract(Entity<DropshipWeaponPointComponent> ent, ref InteractHandEvent args)
+    {
+        var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.WeaponContainerSlotId);
+        RelayInteractToContained(slot, ref args);
+    }
+
+    /// <summary>
+    ///     Relay interaction events to the entity stored within the Electronic Point.
+    /// </summary>
+    private void OnInteract(Entity<DropshipElectronicSystemPointComponent> ent, ref InteractHandEvent args)
+    {
+        var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
+        RelayInteractToContained(slot, ref args);
+    }
+
+    private void RelayInteractToContained(ContainerSlot slot, ref InteractHandEvent args)
+    {
+        var deployer= slot.ContainedEntity;
+        if (!HasComp<RMCEquipmentDeployerComponent>(deployer))
+            return;
+
+        var ev = new InteractHandEvent(args.User, args.Target);
+        RaiseLocalEvent(deployer.Value, ev);
+        args.Handled = ev.Handled;
     }
 
     public virtual bool FlyTo(Entity<DropshipNavigationComputerComponent> computer,

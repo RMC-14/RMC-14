@@ -34,6 +34,13 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-sgo
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_sg
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: entity
@@ -64,6 +71,7 @@
       role: CMJobSmartGunOperator
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalSmartGunOperator
@@ -71,13 +79,13 @@
     head: RMCHeadRoyalHelmetBallistic
     eyes: RMCGlassesSmartGunSight
     ears: RMCHeadsetRoyalMarine
-    jumpsuit: RMCJumpsuitMarineRoyal
+    jumpsuit: RMCJumpsuitMarineRoyalDropPouch
     outerClothing: RMCArmorRoyalHarnessFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCSmartGunRoyal
     id: RMCIDRoyalMarinesSGO
-    belt: RMCMK80BeltFilled # TODO RMC14 L905 gunbelt
+    belt: RMCMK80BeltRoyalFilled
     back: RMCSatchelLightpackFilledRoyal # TODO RMC14 lightweight rmc backpack
     pocket1: RMCPouchGeneralLargeFilledSmartGunDrums
     pocket2: RMCPouchMedkitFillRoyal

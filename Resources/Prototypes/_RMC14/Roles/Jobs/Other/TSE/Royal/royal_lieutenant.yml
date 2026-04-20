@@ -5,12 +5,12 @@
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalLieutenant
   ranks:
-    RMCRankTSELieutenant: [ ] # According to CM13 devs
-  startingGear: RMCGearRoyalLieutenant # If you don't pronounce it "leftenant"
-  icon: "RMCJobIconRoyalLieutenant" # You should be banned for being LRP
+    RMCRankTSESecondLieutenant: [ ]
+  startingGear: RMCGearRoyalLieutenant
+  icon: "RMCJobIconRoyalLieutenant"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-royal-major
-  spawnMenuRoleName: RCM Lieutenant # I echo the sentiment here
+  supervisors: cm-job-supervisors-royal-captain
+  spawnMenuRoleName: RCM Lieutenant
   special:
   - !type:AddComponentSpecial
     components:
@@ -40,8 +40,24 @@
     - type: RMCPointing
     - type: CommandAccent
     - type: ViewIntelObjectives
+    - type: SquadLeader
+      icon:
+       sprite: _RMC14/Interface/cm_job_icons.rsi
+       state: rmc_lieutenant
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-lieutenant
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_lieutenant
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 # This lieutenant role is NOT part of the ERT. Omitting ghostrole functionality
@@ -59,8 +75,8 @@
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarines
     belt: RMCBeltHolsterPistolFilledL54
-    back: RMCSatchelLightpackFilledRoyalMedic
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    back: RMCSatchelLightpackFilledRoyalLieutenant
+    pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
