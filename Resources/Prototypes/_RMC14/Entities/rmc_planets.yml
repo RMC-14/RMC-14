@@ -14,6 +14,8 @@
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: 1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
       - CMSurvivorLV624CorporateLiaison: 2
@@ -90,6 +92,7 @@
       - CMSurvivorSolarisCMBMarshal: 1
       CMSurvivor:
       - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorSolarisChaplain: -1
       - CMSurvivorUNMCRecruiter: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
@@ -186,16 +189,16 @@
       - CMSurvivorScientist: 2
     survivorJobVariantScenarios:
       panic_room_hold:
-        CMSurvivorEngineer:
-        - RMCSurvivorShivasPanicRoomEngineer: 2
-        CMSurvivorScientist:
-        - RMCSurvivorShivasPanicRoomResearcher: 2
-        CMSurvivorDoctor:
-        - RMCSurvivorShivasPanicRoomDoctor: 2
         CMSurvivorSecurity:
         - RMCSurvivorPMCCommandoShivas: 1
         CMSurvivorCorporate:
         - RMCSurvivorAssistantManager: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorShivasPanicRoomDoctor: 2
+        CMSurvivorEngineer:
+        - RMCSurvivorShivasPanicRoomEngineer: 2
+        CMSurvivorScientist:
+        - RMCSurvivorShivasPanicRoomResearcher: 2
         CMSurvivor:
         - RMCSurvivorShivasPanicRoomCivilian: 2
 
@@ -255,20 +258,23 @@
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
     nightmareScenarios:
-    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF/SPP survivors are in
-      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF survivors are in
+      scenarioProbability: 0.15
     - scenarioName: trijent_surv_spawn_hospital
-      scenarioProbability: 0.25
+      scenarioProbability: 0.15
     - scenarioName: trijent_surv_spawn_dam
-      scenarioProbability: 0.25
+      scenarioProbability: 0.15
     - scenarioName: trijent_surv_spawn_tunneldorm
-      scenarioProbability: 0.25
+      scenarioProbability: 0.15
+    - scenarioName: spp_bar
+      scenarioProbability: 0.4
     survivorJobVariants:
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorTrijentDamSupervisor: 1
       CMSurvivor:
       - CMSurvivor: -1
-      - CMSurvivorMiner: -1
+      - RMCSurvivorCivilianUnique: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorTrijentChaplain: 1
       - RMCSurvivorHybrisaFireProtectionSpecialist: 1
       CMSurvivorCorporate:
@@ -286,6 +292,27 @@
       - CMSurvivorCMBDeputy: 1
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
+    survivorJobScenarios:
+      spp_bar:
+      - CMSurvivorDoctor: 1
+      - CMSurvivorEngineer: 1
+      - CMSurvivorSecurity: 2
+      - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      spp_bar:
+        CMSurvivorDoctor:
+        - RMCSurvivorSPPCrashlandMedic: 1
+        CMSurvivorEngineer:
+        - RMCSurvivorSPPCrashlandSapper: 1
+        CMSurvivorSecurity:
+        - RMCSurvivorSPPCrashlandSL: 1
+        - RMCSurvivorSPPCrashlandSpec: 1
+        CMSurvivor:
+        - RMCSurvivorSPPCrashlandSoldier: -1
+    survivorJobOverrideScenarios:
+      spp_bar:
+        CMSurvivorScientist: CMSurvivorDoctor
+        CMSurvivorCorporate: CMSurvivor
 #    survivorJobVariantScenarios:
 #      clf_pods:
 #        CMSurvivor:
@@ -323,7 +350,6 @@
 #        CMSurvivorScientist:
 #        - : -1
 
-
 - type: entity
   id: RMCPlanetVaradero
   name: New Varadero
@@ -352,8 +378,10 @@
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorCommanderNewVaradero: 1
       CMSurvivor:
+      - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorBeachBum: -1
-      - CMSurvivorMiner: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
       - CMSurvivorVaraderoICB: 2
@@ -465,7 +493,7 @@
     survivorJobScenarios:
       tse_airbase: # Order of job priority for paramarines. Scientist is overriden into doctor, Corporate into survivor
       - RMCSurvivorCommandingOfficer: 1
-      - RMCJobSyntheticColony: 1
+      - RMCSyntheticColony: 1
       - CMSurvivorDoctor: 1
       - CMSurvivorEngineer: 1
       - CMSurvivorSecurity: 2
@@ -474,7 +502,7 @@
       tse_airbase: # RCM Paramarines
         RMCSurvivorCommandingOfficer:
         - RMCSurvivorParaCommander: 1
-        RMCJobSyntheticColony:
+        RMCSyntheticColony:
         - RMCSurvivorParaSupportSynthetic: 1
         CMSurvivorDoctor:
         - RMCSurvivorParaMedicalTechnician: 1

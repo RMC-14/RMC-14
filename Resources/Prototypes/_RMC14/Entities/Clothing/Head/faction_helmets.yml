@@ -179,7 +179,6 @@
     - RMCVisorWeldingIntegrated
 
 # HEFA
-# TODO: actually implement this
 - type: entity
   parent: RMCArmorHelmetM3G4
   id: RMCArmorHelmetHEFA
@@ -188,8 +187,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
+    layers:
+    - state: icon
+      map: ["enum.TriggerVisualLayers.Base"]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
+    quickEquip: false
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: CMArmor
@@ -199,6 +202,84 @@
     explosionArmor: 70
     # armor_rad = 30
     # armor_internaldamage = 30
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - RMCLighter
+      - RMCFlask
+      - CMScalpel
+      - Figurine
+      - HelmetAccessory
+      - CassettePlayer
+      - CassetteTape
+      tags:
+      - CigPack
+      - Cigarette
+      #- TODO RMC14 cards
+      - Slice
+      #- TODO RMC14 glasses (eyewear)
+      - Pen
+      - Crayon
+      - RMCHandful
+      - Flashlight
+      - Brutepack
+      - CMOintment
+      - CMAutoInjector
+      - PillPacket
+      - RMCGrenadeHEFA # Repeating all these just to fit HEFA nades. :(
+  - type: Appearance
+  - type: AnimationPlayer
+  - type: GenericVisualizer
+    visuals:
+      enum.Trigger.TriggerVisuals.VisualState:
+        enum.TriggerVisualLayers.Base:
+          Primed: { state: primed }
+          Unprimed: { state: icon }
+  - type: ClothingPrefixOnTimerTrigger
+    prefix: primed
+  - type: OnUseTimerTrigger
+    delay: 4
+    beepSound:
+      path: "/Audio/_RMC14/Explosion/armbomb.ogg"
+      params:
+        volume: -5
+    initialBeepDelay: 0
+    beepInterval: 10
+    doPopup: false
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 8 # max 40 brute 40 burn
+    intensitySlope: 4
+    totalIntensity: 110
+    deleteAfterExplosion: false
+  - type: ProjectileGrenade
+    fillPrototype: CMProjectileShrapnel
+    capacity: 48
+    minVelocity: 0.5
+    maxVelocity: 1.5
+    evenSpread: true
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ClusterLimitHits
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
+  - type: IgnorePredictionHide
+  - type: ChangeItemSizeOnTimerTrigger
+  - type: CancelUseWithCloak
+
+- type: entity
+  parent: RMCArmorHelmetHEFA
+  id: RMCArmorHelmetHEFAFilled
+  suffix: HEFA, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 2
 
 # CBRN
 - type: entity

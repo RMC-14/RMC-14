@@ -76,6 +76,16 @@
     whitelist:
       components:
       - Xeno
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.35,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
 
 - type: entity
   abstract: true
