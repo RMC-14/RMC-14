@@ -364,6 +364,9 @@
       Telecommunications Array: Repairs required
 
       No further information available at this time."
+    nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
+    - scenarioName: none
+      scenarioProbability: 1
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
