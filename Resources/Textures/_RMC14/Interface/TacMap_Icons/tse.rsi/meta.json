@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, rmc_(role)_pve by github monomethylhydrazine, para_background taken from https://github.com/cmss13-devs/cmss13/blob/71660f23ed6fdbd87e09ba595212f1693ed8e5cd/icons/ui_icons/map_blips.dmi, rcm icons made/modified by MoonlightHollow(Github)",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+  "states": [
+    {
+      "name": "background_para"
+    },
+    {
+      "name": "background_tse"
+    },
+    {
+      "name": "rcm_bombard"
+    },
+    {
+      "name": "rcm_captain"
+    },
+    {
+      "name": "rcm_co"
+    },
+    {
+      "name": "rcm_engi"
+    },
+    {
+      "name": "rcm_hc"
+    },
+    {
+      "name": "rcm_lieutenant"
+    },
+    {
+      "name": "rcm_marksman"
+    },
+    {
+      "name": "rcm_medic"
+    },
+    {
+      "name": "rcm_pilot"
+    },
+    {
+      "name": "rcm_rifleman"
+    },
+    {
+      "name": "rcm_sectionleader"
+    },
+    {
+      "name": "rcm_smartgunner"
+    },
+    {
+      "name": "rcm_teamleader"
+    },
+    {
+      "name": "rcm_troopleader"
+    }
+  ]
+}

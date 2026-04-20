@@ -24,10 +24,10 @@
       prefix: rmc-job-prefix-rcm-breacher
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
         state: rcm_engi
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
         state: background_tse
   hidden: true
 
@@ -84,5 +84,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalBreacher
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/Hud_Icons/TSE/rcm.rsi
     state: rcm_engi

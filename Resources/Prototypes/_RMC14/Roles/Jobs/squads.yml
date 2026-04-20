@@ -269,12 +269,12 @@
     - Gloves
     radio: TSE
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
       state: background_tse
     canSupplyDrop: false
     group: Royal Marines
     leaderIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/Hud_Icons/TSE/rcm.rsi
       state: rmc_teamleader
   - type: Tag
     tags:
@@ -300,12 +300,12 @@
     - Gloves
     radio: TSE
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
       state: background_tse
     canSupplyDrop: false
     group: Whiskey Troop
     leaderIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/Hud_Icons/PVE/rcm.rsi
       state: rmc_troopleader_pve
   - type: Tag
     tags:
@@ -331,13 +331,13 @@
     - Gloves
     radio: TSE
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
       state: background_para
     canSupplyDrop: false
     group: Paramarine
     leaderIcon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
-      state: para_teamleader_alt
+      sprite: _RMC14/Interface/Hud_Icons/TSE/paramarines.rsi
+      state: rcm_para_sectionleader
   - type: Tag
     tags:
       - SquadPara

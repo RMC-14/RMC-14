@@ -41,10 +41,10 @@
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
         state: rcm_marksman
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
         state: background_tse
   hidden: true
 
@@ -71,5 +71,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalScoutSniperPVE
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/Hud_Icons/PVE/rcm.rsi
     state: rcm_pve_marksman

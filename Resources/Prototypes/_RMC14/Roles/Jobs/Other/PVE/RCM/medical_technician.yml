@@ -43,10 +43,10 @@
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
         state: rcm_medic
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
         state: background_tse
     - type: CMVendorUser
       extraPoints:
@@ -76,5 +76,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalMedicPVE
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/Hud_Icons/PVE/rcm.rsi
     state: rcm_pve_medic
