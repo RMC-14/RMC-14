@@ -424,16 +424,16 @@
       - RMCSurvivorKutjevoResearcher: 2
     survivorJobScenarios:
       sunriders: # Sun Riders insert (Non Parity)
-      - CMSurvivor: 5 # rmc14 todo: 6 after parity surv slots (gonna have to map more spawnpoints too)
+      - CMSurvivor: 4 # rmc14 todo: 5 after parity surv slots (gonna have to map more spawnpoints too)
       - CMSurvivorEngineer: 1
       - CMSurvivorDoctor: 1
+      - CMSurvivorSecurity: 1
       - RMCSurvivorCommandingOfficer: 1
     survivorJobVariantScenarios:
       sunriders:
         CMSurvivor:
-        - RMCSurvivorSunRidersSquadLeader: 1
-        - RMCSurvivorSunRidersDM: 1
         - RMCSurvivorSunRidersSquadSpecialist: 1
+        - RMCSurvivorSunRidersDM: 1
         - RMCSurvivorSunRidersRifleman: 1
         - RMCSurvivorSunRidersPilot: 1
         CMSurvivorDoctor:
@@ -441,11 +441,12 @@
         RMCSurvivorCommandingOfficer:
         - RMCSurvivorSunRidersPlatCo: 1
         CMSurvivorEngineer:
+        - RMCSurvivorSunRidersSquadLeader: 1
+        CMSurvivorSecurity:
         - RMCSurvivorSunRidersSectionSergeant: 1
-    survivorJobOverrideScenarios: # doc rolls for corpsman, engi rolls for building role, everyone else rolls for regular marines
+    survivorJobOverrideScenarios: # sec rolls for leader, doc rolls for corpsman, engi rolls for building role, everyone else rolls for regular marines
       sunriders:
         CMSurvivorScientist: CMSurvivorDoctor
-        CMSurvivorSecurity: CMSurvivor
         CMSurvivorCorporate: CMSurvivor
 
 - type: entity

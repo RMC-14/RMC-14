@@ -120,8 +120,10 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
+        locked: true
         startingAttachable: RMCAttachmentExtendedBarrel
       rmc-aslot-rail:
+        locked: true
         startingAttachable: RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:
         startingAttachable: RMCAttachmentVerticalGrip
