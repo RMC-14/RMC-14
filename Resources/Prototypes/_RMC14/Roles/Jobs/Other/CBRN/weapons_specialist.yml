@@ -1,0 +1,122 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCBRNWS
+  name: cm-job-name-weapons-specialist
+  description: rmc-job-description-cbrn-ws
+  playTimeTracker: RMCJobCBRNWS
+  ranks:
+    RMCRankOperator: []
+  startingGear: RMCGearCBRNWS
+  icon: "CMJobIconWeaponsSpecialist"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  marineAuthorityLevel: 2
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: CBRN Weapons Specialist
+  overwatchSortPriority: -4
+  overwatchShowName: true
+  overwatchRoleName: Specialist
+  roleWeight: 1
+  displayWeight: 4
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 5
+        RMCSkillFireman: 2
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillFirearms: 3
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillEndurance: 5
+        RMCSkillJtac: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: SquadArmorWearer
+      leader: true
+    - type: JobPrefix
+      prefix: cm-job-prefix-weapons-specialist
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spec
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCBRNWS
+  name: cbrn ghost role weapons specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCBRNWS
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCBRNWS
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-cbrn-ws
+    description: rmc-job-description-cbrn-ws
+    rules: rmc-ghost-role-information-cbrn-rules
+    reregister: false
+    job: RMCCBRNWS
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadCBRN
+
+- type: startingGear
+  id: RMCGearCBRNWS
+  equipment:
+    head: RMCArmorHelmetCBRN
+    ears: CMHeadsetCBRN
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCCBRNSuitSL
+    outerClothing: RMCArmorCBRNAdvanced
+    gloves: RMCHandsVeteranCBRN
+    shoes: RMCBootsCBRN
+    suitstorage: RMCWeaponRifleM54CMK1CBRN
+    id: CMDogtagCBRNWS
+    belt: CMBeltMarine
+    back: RMCBackpackBroiler
+    pocket1: RMCPouchFuelTank
+    pocket2: RMCPouchFuelTank
+  inhand:
+  - RMCWeaponFlamerSpec
+  storage:
+    outerClothing:
+    - CMMRE
+    - CMGrenadeHighExplosive     #RMC TODO: M40 HPDP White Phosphorus
+    - CMGrenadeHighExplosive     #RMC TODO: M40 HPDP White Phosphorus
+    pocket1:
+    - RMCTankFlamerLargeX
+    - RMCTankFlamerLargeX
+    pocket2:
+    - RMCTankFlamerLargeB
+    - RMCTankFlamerLargeB
+    belt:
+    - RMCMagazineRifleM54CMK1Incendiary
+    - RMCMagazineRifleM54CMK1Incendiary
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+
+- type: playTimeTracker
+  id: RMCJobCBRNWS

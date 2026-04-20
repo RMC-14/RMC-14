@@ -90,8 +90,8 @@
         amount: 25
       - id: RMCGrenadeIncendiary
         amount: 4
-      #- id: M40 HPDP White Phosphorus Smoke Grenade
-      #  amount: 4
+      - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+        amount: 4
       - id: CMGrenadeSmoke
         amount: 5
       - id: RMC40MMGrenadeM74AGMF
@@ -792,6 +792,8 @@
     - name: Radio
       entries:
       - id: RMCHeadsetShip
+        amount: 5
+      - id: RMCHeadsetMarine
         amount: 5
       - id: CMEncryptionKeyAlpha
         amount: 5

@@ -99,6 +99,10 @@ rmc-lore-examinable-spp-survival-ration = Mass produced as emergency rations, th
 
 rmc-lore-examinable-m13-extended-recoil-compensator = A limited-production muzzle device developed by AEGIS Armaments. The compensator channels muzzle gases to counteract recoil and slightly increase bullet velocity through focused pressure, marginally improving ballistic performance.
 
+rmc-lore-examinable-bug-juice = 'Bug Juice' Protein Drink, more commonly labeled Bug Juice, is an inexpensive and calorific beverage made with farmed and processed insects such as cockroaches, mealworms, and beetles. Offered by a variety of manufacturers, Bug Juice is packaged in cartons and bottles, and is widely consumed on the Frontier. It is classified as both a drink and a foodstuff, and is a source of protein and water.
+
+rmc-lore-examinable-soylent = Initially designed in 2173 as meal replacement for high-intensity workers, MRD was recalled from the market multiple times due to reports of gastrointestinal illness, including nausea, vomiting, and diarrhea. Improved formula was created, but the brand name was already tainted, so now the drink remains as emergency food supply for internal Company use.
+
 rmc-lore-examinable-t70-bag-phone = A bulky satchel containing a phone, antenna, and a battery pack with a substantial lifespan, as well as room for items. These civilian bag phones utilize similar technology to a radiotelephone pack, but in a more compact, albeit less durable form. Following hot on the footsteps of Novaris Industries' recent bag-phone product lines, the T70 is designed for more high-end customers, especially those in the business sector, meaning it has a somewhat significant price tag associated with it.
                                     The model itself features several improvements over its predecessors, featuring less weight, more ergonomic design, and improved reception.
 
