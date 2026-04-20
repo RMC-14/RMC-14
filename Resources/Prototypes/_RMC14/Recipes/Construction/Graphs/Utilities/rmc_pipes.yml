@@ -1,7 +1,10 @@
 - type: constructionGraph
   id: RMCGasPipe
-  start: half
+  start: start
   graph:
+  - node: start
+    edges: []
+
   - node: half
     entity: RMCGasPipeHalf
     edges:
@@ -58,6 +61,19 @@
     entity: RMCGasPipeFourway
     edges:
     - to: fourway
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 1
+
+  - node: broken
+    entity: GasPipeBroken
+    edges:
+    - to: broken
       conditions:
       - !type:EntityAnchored
         anchored: false
