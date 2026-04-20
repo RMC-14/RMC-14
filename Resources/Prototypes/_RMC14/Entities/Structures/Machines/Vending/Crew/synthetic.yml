@@ -158,7 +158,7 @@
   components:
   - type: CMAutomatedVendor
     jobs:
-    - RMCJobSyntheticColony
+    - RMCSyntheticColony
 
 - type: entity
   parent: ColMarTechBase

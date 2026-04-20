@@ -234,6 +234,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             return;
 
         var skyFalling = EnsureComp<SkyFallingComponent>(crashLandable);
+        skyFalling.RemainingTime = crashLandable.Comp.SkyFallDuration;
         skyFalling.TargetCoordinates = location;
         Dirty(crashLandable, skyFalling);
 
@@ -284,7 +285,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 }
 
 [ByRefEvent]
-public record struct AttemptCrashLandEvent(EntityUid Crashing, bool Cancelled = false);
+public record struct AttemptCrashLandEvent(EntityUid Crashing, EntityCoordinates? Target = null, bool Cancelled = false);
 
 [ByRefEvent]
 public record struct CrashLandStartedEvent;

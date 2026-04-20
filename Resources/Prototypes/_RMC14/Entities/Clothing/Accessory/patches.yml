@@ -562,8 +562,8 @@
 - type: entity
   parent: RMCPatchBase
   id: RMCPatchFreelancer
-  name: Freelancer's Guild patch
-  description: "A fire-resistant circular patch featuring a white skull on a vertically split black and blue background. Worn by a skilled mercenary of the Freelancers, a well-equipped group for hire across the outer colonies, known for their professionalism and neutrality. This patch is a personal memento from the wearer’s time with the group, representing a life spent navigating the dangerous world of mercenary contracts."
+  name: Freelancer's patch
+  description: "A fire-resistant circular patch featuring a white skull on a vertically split black and blue background. Worn by a skilled mercenary belonging to a freelance mercenary group, representing a life spent navigating the dangerous world of mercenary contracts and loyalty at a price."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch.rsi
