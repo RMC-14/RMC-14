@@ -17,16 +17,9 @@ public sealed class EntityPresetSystem : EntitySystem
     {
         SubscribeLocalEvent<EquipEntityPresetComponent, MapInitEvent>(OnMapInit,
             after: [typeof(SharedCMInventorySystem), typeof(RMCHandsSystem), typeof(CMArmorSystem)]);
-        SubscribeLocalEvent<EquipEntityPresetComponent, ComponentStartup>(OnStartup,
-            after: [typeof(SharedCMInventorySystem), typeof(RMCHandsSystem), typeof(CMArmorSystem)]);
     }
 
     private void OnMapInit(Entity<EquipEntityPresetComponent> ent, ref MapInitEvent args)
-    {
-        TryApplyPreset(ent);
-    }
-
-    private void OnStartup(Entity<EquipEntityPresetComponent> ent, ref ComponentStartup args)
     {
         TryApplyPreset(ent);
     }
