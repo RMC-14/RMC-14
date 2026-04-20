@@ -1,0 +1,47 @@
+- type: job
+  parent: RMCCBRNRifleman
+  id: RMCCBRNRiflemanFlamer
+  name: cm-job-name-rifleman
+  startingGear: RMCCBRNRiflemanFlamer
+  spawnMenuRoleName: CBRN Rifleman Flamethrower
+
+- type: entity
+  parent: RMCRandomHumanoidCBRNRifleman
+  id: RMCRandomHumanoidCBRNRiflemanFlamer
+  name: cbrn ghost role rifleman flamethrower
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCCBRNRiflemanFlamer
+
+- type: randomHumanoidSettings
+  parent: RMCCBRNRifleman
+  id: RMCCBRNRiflemanFlamer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-cbrn-rifleman
+    job: RMCCBRNRiflemanFlamer
+
+- type: startingGear
+  id: RMCCBRNRiflemanFlamer
+  equipment:
+    head: RMCArmorHelmetCBRN
+    ears: CMHeadsetCBRN
+    jumpsuit: RMCCBRNSuitHEDP
+    outerClothing: RMCArmorCBRN
+    gloves: RMCHandsVeteranCBRN
+    shoes: RMCBootsCBRN
+    suitstorage: RMCWeaponFlamerExt
+    id: CMDogtagCBRNRifleman
+    belt: RMCM77BeltFilled
+    back: RMCBackpackFlamer
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchFlareFilled
+  storage:
+    back:
+    - RMCTankFlamer
+    - RMCTankFlamer
+    - RMCTankFlamer
+    outerClothing:
+    - CMMRE
+    - RMCGrenadeIncendiary
+    - RMCGrenadeIncendiary
