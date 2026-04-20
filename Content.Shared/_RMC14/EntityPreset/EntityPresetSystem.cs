@@ -33,10 +33,10 @@ public sealed class EntityPresetSystem : EntitySystem
 
     private void TryApplyPreset(Entity<EquipEntityPresetComponent> ent)
     {
-        if (_net.IsClient || ent.Comp.Applied)
+        if (_net.IsClient)
             return;
 
-        ent.Comp.Applied = true;
+        RemCompDeferred<EquipEntityPresetComponent>(ent);
         ApplyPreset(ent, ent.Comp.Preset);
     }
 

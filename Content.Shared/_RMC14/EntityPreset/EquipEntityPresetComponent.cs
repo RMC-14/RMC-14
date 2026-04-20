@@ -8,6 +8,4 @@ public sealed partial class EquipEntityPresetComponent : Component
 {
     [DataField(required: true)]
     public EntProtoId<EntityPresetComponent> Preset;
-
-    public bool Applied;
 }
