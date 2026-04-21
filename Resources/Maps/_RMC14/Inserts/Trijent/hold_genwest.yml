@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/11/2026 23:34:46
+  time: 04/21/2026 19:43:08
   entityCount: 117
 maps: []
 grids:
@@ -735,19 +735,19 @@ entities:
     - type: Transform
       pos: 5.5,9.5
       parent: 1
+- proto: RMCSpawnerRandomGunCivHigh
+  entities:
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 4.5,9.5
+      parent: 1
 - proto: RMCSpawnerRandomGunPistolHigh
   entities:
   - uid: 38
     components:
     - type: Transform
       pos: 6.5,3.5
-      parent: 1
-- proto: RMCSpawnerRandomGunRifleHigh
-  entities:
-  - uid: 39
-    components:
-    - type: Transform
-      pos: 4.5,9.5
       parent: 1
 - proto: RMCSpawnerRandomPillBottleHighChance
   entities:
