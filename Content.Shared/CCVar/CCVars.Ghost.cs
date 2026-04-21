@@ -15,7 +15,7 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<bool> GhostQuickLottery =
         CVarDef.Create("ghost.quick_lottery", false, CVar.SERVERONLY);
-
+    ///RMC14
     /// <summary>
     ///     Whether or not to kill the player's mob on ghosting, when it is in a critical health state.
     /// </summary>

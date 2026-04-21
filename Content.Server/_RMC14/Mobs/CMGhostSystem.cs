@@ -99,7 +99,7 @@ namespace Content.Server._RMC14.Mobs
 
         private void OnGhostBooChange(bool value, in CVarChangeInfo info)
         {
-            _ghostsCanBoo = false;
+            _ghostsCanBoo = value;
             var query = EntityQueryEnumerator<GhostComponent>();
             while (query.MoveNext(out var uid, out var ghost))
             {
