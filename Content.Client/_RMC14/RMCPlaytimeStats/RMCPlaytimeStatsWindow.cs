@@ -69,12 +69,12 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     {
         if (playtime >= _prismaticTime)
             return RMCPlaytimeMedalType.Prismatic;
+        else if (playtime >= _emeraldTime)
+            return RMCPlaytimeMedalType.Emerald;
         else if (playtime >= _amethystTime)
             return RMCPlaytimeMedalType.Amethyst;
         else if (playtime >= _rubyTime)
             return RMCPlaytimeMedalType.Ruby;
-        else if (playtime >= _emeraldTime)
-            return RMCPlaytimeMedalType.Emerald;
         else if (playtime >= _platinumTime)
             return RMCPlaytimeMedalType.Platinum;
         else if (playtime >= _goldTime)
@@ -112,7 +112,9 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                 RMCPlaytimeMedalType.Silver => "hudxenoupgrade3-ui",
                 RMCPlaytimeMedalType.Gold => "hudxenoupgrade4-ui",
                 RMCPlaytimeMedalType.Platinum => "hudxenoupgrade5-ui",
-                _ => "hudxenoupgrade6-ui"
+                RMCPlaytimeMedalType.Ruby => "hudxenoupgrade6-ui",
+                RMCPlaytimeMedalType.Amethyst => "hudxenoupgrade7-ui",
+                _ => "hudxenoupgrade8-ui"
             };
 
             return new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), iconName);
