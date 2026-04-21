@@ -20,7 +20,7 @@
     - id: RMCPVEArmorCaseRoyalLight
 
 - type: entityTable
-  id: RMCClosetRCMGSGOFill
+  id: RMCClosetRCMSGOFill
   table: !type:AllSelector
     children:
     - id: RMCSmartGunRCMPVE
