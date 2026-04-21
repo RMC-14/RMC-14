@@ -160,9 +160,9 @@
   description: The WY-TM625 is the standard load-bearing equipment of the W-Y security forces. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_pmc.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_pmc.rsi
 
 - type: entity
   parent: RMCBeltMedicBagPMC
