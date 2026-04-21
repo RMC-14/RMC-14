@@ -10,7 +10,17 @@
     clearDecals: true
     replaceAreas: true
 
-# Armory
+# Standalones
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentCaveInEngineering
+  name: Cave in Engineering
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/cave_in_engineering.yml"
+      probability: 0.1
+
 - type: entity
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentArmory
@@ -24,18 +34,6 @@
       probability: 0.2
     replaceAreas: false
 
-# Standalones
-- type: entity
-  parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentCaveInEngineering
-  name: Cave in Engineering
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/cave_in_engineering.yml"
-      probability: 0.1
-
-# Southbridge
 - type: entity
   parent: RMCMapInsertTrijentBase
   id: RMCMapInsertTrijentSouthbridge
@@ -48,6 +46,20 @@
     - spawn: "/Maps/_RMC14/Inserts/Trijent/civhold.yml"
       probability: 0.1
     replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentWorkshop
+  name: Gear/Guns workshop
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/gear.yml"
+      probability: 0.1
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/guns.yml"
+      probability: 0.1
+    replaceAreas: false
+
 
 # Sprinkles
 - type: entity
@@ -227,20 +239,6 @@
     - spawn: "/Maps/_RMC14/Inserts/Trijent/minievac_westresearch.yml"
       probability: 0.2
     clearDecals: false
-    replaceAreas: false
-
-# Workshop
-- type: entity
-  parent: RMCMapInsertTrijentBase
-  id: RMCMapInsertTrijentWorkshop
-  name: Gear/Guns workshop
-  components:
-  - type: MapInsert
-    variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/gear.yml"
-      probability: 0.1
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/guns.yml"
-      probability: 0.1
     replaceAreas: false
 
 # Regular Surv Spawns
