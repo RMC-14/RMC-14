@@ -15,12 +15,6 @@ public sealed partial class ImaginaryFriendComponent : Component
     public float MaxFriendDistance = 9; //TODO Restrict moving further away from the imaginer than this value
 
     [DataField, AutoNetworkedField]
-    public string DefaultName = "rmc-mentor-imaginary-friend-fallback-name";
-
-    [DataField, AutoNetworkedField]
-    public string DefaultXenoName = "rmc-mentor-imaginary-friend-default-name-xeno";
-
-    [DataField, AutoNetworkedField]
     public bool Visible = true;
 
     [DataField]

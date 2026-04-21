@@ -1,4 +1,3 @@
-using Content.Server.GameTicking;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
@@ -13,7 +12,6 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 {
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly EyeSystem _eye = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly VisibilitySystem _visibility = default!;
@@ -103,15 +101,6 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         _visibility.RefreshVisibility(friend);
 
         _eye.RefreshVisibilityMask(imaginer);
-
-        var defaultName = Loc.GetString(imaginaryFriend.DefaultName);
-
-        if (targetIsXeno)
-            _metaData.SetEntityName(friend, imaginaryFriend.DefaultXenoName);
-        else if (!string.IsNullOrWhiteSpace(friendMind.CharacterName))
-            _metaData.SetEntityName(friend, friendMind.CharacterName);
-        else
-            _metaData.SetEntityName(friend, defaultName);
     }
 
     private void RemoveImaginaryFriend(HasImaginaryFriendComponent hasImaginaryFriend)
