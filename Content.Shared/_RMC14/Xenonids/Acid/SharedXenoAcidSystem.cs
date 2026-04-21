@@ -4,9 +4,11 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Energy;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Coordinates;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -19,6 +21,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
@@ -35,7 +39,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weedsSystem = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
 
@@ -297,6 +303,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
                 var ev = new BeforeMeltedEvent();
                 RaiseLocalEvent(uid, ref ev);
 
+                CheckDelForWeedSpread(uid);
+
                 QueueDel(damageableCorrodingComponent.Acid);
                 RemCompDeferred<DamageableCorrodingComponent>(uid);
             }
@@ -325,8 +333,31 @@ public abstract class SharedXenoAcidSystem : EntitySystem
                 }
             }
 
+            CheckDelForWeedSpread(uid);
+
             QueueDel(uid);
             QueueDel(timedCorrodingComponent.Acid);
+        }
+    }
+
+    // Used to tell nearby weeds to check if they should spread, for example after a wall has been melted
+    public void CheckDelForWeedSpread(EntityUid uid)
+    {
+        if (_net.IsClient)
+            return;
+
+        var coordinates = _transform.GetMoverCoordinates(uid).SnapToGrid(EntityManager, _map);
+
+        if (_transform.GetGrid(coordinates) is not { } gridUid ||
+            !TryComp(gridUid, out MapGridComponent? gridComp))
+            return;
+
+        var nearbyWeeds = _weedsSystem.GetWeedsNearby(
+            new Entity<MapGridComponent>(gridUid, gridComp), coordinates, 1);
+
+        foreach (var weeds in nearbyWeeds)
+        {
+            EnsureComp<XenoWeedsSpreadingComponent>(weeds);
         }
     }
 
