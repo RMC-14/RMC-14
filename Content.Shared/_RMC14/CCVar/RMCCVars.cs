@@ -530,7 +530,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("game.new_to_job_popup_time", 15f, CVar.SERVER | CVar.REPLICATED);
     public static readonly CVarDef<bool> RMCGhostCanBoo =
         CVarDef.Create("rmc.ghosts_can_boo", false, CVar.SERVER | CVar.SERVERONLY);
-
+    ///RMC14
     public static readonly CVarDef<int> RMCRoyalResinEveryMinutes =
         CVarDef.Create("rmc.royal_resin_every_minutes", 5, CVar.REPLICATED | CVar.SERVER);
 
