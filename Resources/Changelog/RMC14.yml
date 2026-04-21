@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Hybrisa Caves Lockdown podlocks being pryable
-    type: Fix
-  id: 2621
-  time: '2025-12-08T08:03:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8529
-- author: Tunguso4ka
-  changes:
-  - message: Varadero got a big update.
-    type: Tweak
-  id: 2622
-  time: '2025-12-08T08:22:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8556
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Xenos now have a chance to hiss or roar upon being shot
-    type: Tweak
-  - message: Fixed damaging a xeno ALWAYS splashing acid onto marines. The chance
-      now scales itself based on the damage as intended.
-    type: Fix
-  id: 2623
-  time: '2025-12-08T08:21:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8559
-- author: Anoknee
-  changes:
-  - message: The dropship medevac and fulton screens now show the name of the active
-      system
-    type: Tweak
-  id: 2624
-  time: '2025-12-08T08:23:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8550
 - author: Dygon
   changes:
   - message: Shooting a dummy with a gun now shows the damage popup to the shooter.
@@ -4481,5 +4449,68 @@
   id: 3121
   time: '2026-04-20T23:23:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9654
+- author: kleinerstation13
+  changes:
+  - message: Ported Armory No Gear insert (20%) and Birthday Party insert (15%) on
+      Fiorina
+    type: Add
+  - message: Ported the ML66D in the Survivor Camp on Fiorina
+    type: Add
+  - message: Replaced all instances of We-Ya goon corpses in Fiorina with riot control
+      officer corpses
+    type: Tweak
+  - message: A bunch of tweaks to loot on Fiorina
+    type: Tweak
+  - message: Flamethrower on Fiorina has been moved to western Transit Hub, M890 has
+      been moved to chapel, and the special weapons as well as turret spawner was
+      moved to NE Hospital.
+    type: Tweak
+  - message: Fixed the Riot In Progress insert not overriding non-insert armory loot.
+    type: Fix
+  id: 3122
+  time: '2026-04-21T00:04:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9640
+- author: kleinerstation13
+  changes:
+  - message: Medic lightpack
+    type: Add
+  - message: SOF medic now correctly spawns with a medic lightpack
+    type: Tweak
+  - message: A bunch of tweaks to loot on Sorokyne Strata
+    type: Tweak
+  - message: Moved Type-71 magazines and Type 71 in Deep Security to NW Carp Lake
+    type: Tweak
+  id: 3123
+  time: '2026-04-21T00:03:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9647
+- author: kleinerstation13
+  changes:
+  - message: Special gun loot spawner no longer spawns M54C's
+    type: Tweak
+  - message: Special gun loot spawner now spawns M34 incinerator units and MK80 pistols
+    type: Tweak
+  - message: Fixed random grenade packet spawner spawning empty WP nade packets instead
+      of full packets
+    type: Fix
+  id: 3124
+  time: '2026-04-21T00:04:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9706
+- author: kleinerstation13
+  changes:
+  - message: Added various missing corpse spawners to Solaris Ridge Mining
+    type: Add
+  - message: Ported CMB Riot Control Team beret
+    type: Add
+  - message: Ported PMC lifesaver bag sprites
+    type: Add
+  - message: Replaced various corpse spawners on Solaris Ridge with UN RCO and CMB
+      Deputy corpses
+    type: Tweak
+  - message: Mapping passover on Solaris Ridge Mining, Solaris Ridge PMC Offices Crashlanding
+      insert and PMC Offices insert.
+    type: Tweak
+  id: 3125
+  time: '2026-04-21T00:03:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9638
 Name: RMC14
 Order: -1
