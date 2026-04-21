@@ -6,7 +6,7 @@
   
 - type: rank #Rank used for Paramarines Rifleman
   id: RCMRankParaMarine
-  name: Paramarines
+  name: Paramarine
   prefix: PMne.
   paygrade: E1
 
