@@ -100,7 +100,7 @@
     - RMCWeaponPistolHoldout: RMCMagazinePistolHoldout
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
-    - CMWeaponPistolM1984: CMMagazinePistolM1984
+    - CMWeaponPistolM1911: CMMagazinePistolM1911
     - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
     - WeaponShotgunCustomBuilt: CMShellShotgunBuckshot

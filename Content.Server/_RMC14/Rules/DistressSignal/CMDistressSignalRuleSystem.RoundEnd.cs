@@ -215,8 +215,6 @@ public sealed partial class CMDistressSignalRuleSystem
         }
 
         distress.QueenDiedCheck ??= Timing.CurTime + distress.QueenDiedDelay;
-        if (distress.QueenDiedCheck == null)
-            return;
 
         if (Timing.CurTime >= distress.QueenDiedCheck)
         {
@@ -251,6 +249,10 @@ public sealed partial class CMDistressSignalRuleSystem
         InvalidateActiveRule();
         StartPlanetVote();
         ResetSelectedPlanet();
+        _spawnedDropships = false;
+        OperationName = null;
+        _usingCustomOperationName = false;
+        ActiveNightmareScenario = null;
         _config.SetCVar(CCVars.GameDisallowLateJoins, false);
 
         if (!_autoBalance)
@@ -265,7 +267,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 DistressSignalRuleResult.MajorMarineVictory => -1,
                 DistressSignalRuleResult.MinorMarineVictory => -1,
                 DistressSignalRuleResult.MajorXenoVictory => 1,
-                DistressSignalRuleResult.MinorXenoVictory => 0,
+                DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die or timeout happens
                 DistressSignalRuleResult.AllDied => 0,
                 null => 0,
                 _ => throw new ArgumentOutOfRangeException(),
@@ -295,6 +297,7 @@ public sealed partial class CMDistressSignalRuleSystem
         if (!rule.AutoEnd)
             return;
 
+        // TODO RMC14: Refactor round end timing
         if (rule.StartTime == null || Timing.CurTime - rule.StartTime < rule.RoundEndCheckDelay)
             return;
 
@@ -335,7 +338,11 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?
     {
-        if (args.NewMobState != MobState.Dead) return;
+        if (args.NewMobState != MobState.Dead)
+        {
+            return;
+        }
+
         RemCompDeferred<GhostRoleComponent>(ent);
         CheckRoundShouldEnd();
     }
@@ -387,15 +394,19 @@ public sealed partial class CMDistressSignalRuleSystem
             var xenoCandidates = 0;
             foreach (var player in ev.Players)
             {
-                if (!_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences)) continue;
-                if (preferences.GetProfile(preferences.SelectedCharacterIndex) is not HumanoidCharacterProfile profile)
-                    continue;
-
-                if (profile.JobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
-                    xenoPriority > JobPriority.Never || profile.JobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
-                    queenPriority > JobPriority.Never)
+                if (_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
                 {
-                    xenoCandidates++;
+                    var profile = (HumanoidCharacterProfile) preferences.GetProfile(preferences.SelectedCharacterIndex);
+                    if (profile.JobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
+                        xenoPriority > JobPriority.Never)
+                    {
+                        xenoCandidates++;
+                    }
+                    else if (profile.JobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
+                        queenPriority > JobPriority.Never)
+                    {
+                        xenoCandidates++;
+                    }
                 }
             }
 

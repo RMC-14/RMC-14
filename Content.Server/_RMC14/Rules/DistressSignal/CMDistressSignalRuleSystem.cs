@@ -53,6 +53,7 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Roles;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -132,6 +133,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
+    [Dependency] private readonly SharedRoleSystem _roles = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -278,9 +280,6 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
 
     private void OnMapLoading(LoadingMapsEvent ev)
     {
-        if (SelectedPlanetMap != null)
-            return;
-
         SelectRandomPlanet();
         GameTicker.UpdateInfoText();
     }
@@ -344,6 +343,23 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
             time >= component.EndAtAllClear)
         {
             _roundEnd.EndRound();
+            return;
+        }
+
+        if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+            component.QueenDiedCheck = null;
+
+        if (component.QueenDiedCheck == null)
+            return;
+
+        if (time >= component.QueenDiedCheck)
+        {
+            if (component.Hijack)
+                EndRound(component, DistressSignalRuleResult.MinorXenoVictory);
+            else if (_xenoEvolution.HasLiving<XenoComponent>(4))
+                EndRound(component, DistressSignalRuleResult.MinorMarineVictory);
+            else
+                EndRound(component, DistressSignalRuleResult.MajorMarineVictory, "rmc-distress-signal-majormarinevictory-timeout");
         }
     }
 
