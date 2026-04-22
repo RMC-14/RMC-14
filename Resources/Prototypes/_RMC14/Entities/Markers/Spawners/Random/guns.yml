@@ -535,7 +535,6 @@
     - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
     - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
     - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
-    - WeaponSMGMP5: RMCSpawnerRandomShotgunBoxes
     - WeaponShotgunM357: RMCSpawnerRandomShotgunBoxes
     - WeaponShotgunM357Sawn: RMCSpawnerRandomShotgunBoxes
     - WeaponShotgunM357: RMCSpawnerRandomShotgunBoxes
@@ -598,8 +597,8 @@
     prototypes:
     - RMCWeaponRifleM54CWhiteNoLock: CMMagazineRifleM54C
     - RMCWeaponRifleM54CWhiteNoLock: CMMagazineRifleM54C
-# nsg23/nolock/stripped
-# nsg23/nolock/stripped
+    - RMCWeaponRifleSSG45NoLockStripped: RMCMagazineRifleSSG45
+    - RMCWeaponRifleSSG45NoLockStripped: RMCMagazineRifleSSG45
     - RMCWeaponSMGM63WhiteNoLock: CMMagazineSMGM63
     - RMCWeaponSMGM63WhiteNoLock: CMMagazineSMGM63
     - RMCWeaponSMGFP9000: RMCMagazineSMGFP9000
