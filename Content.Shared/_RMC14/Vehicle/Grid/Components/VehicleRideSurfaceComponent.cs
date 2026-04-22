@@ -54,7 +54,7 @@ public sealed partial class VehicleRideSurfaceComponent : Component
     /// riders that move past this border fall off immediately
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float ExitPadding = 0.75f;
+    public float SoftBorderPadding = 0.75f;
 
     /// <summary>
     /// time a rider must keep moving out of bounds before the climb down doafter starts
@@ -63,7 +63,13 @@ public sealed partial class VehicleRideSurfaceComponent : Component
     public TimeSpan EdgeClimbDownGrace = TimeSpan.FromSeconds(0.15);
 
     /// <summary>
-    /// stun & knockdown applied when a rider is forced past the soft border
+    /// knockdown applied when a rider is forced past the soft border
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan FallOffKnockdown = TimeSpan.FromSeconds(2.5);
+
+    /// <summary>
+    /// stun applied when a rider is forced past the soft border
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan FallOffStun = TimeSpan.FromSeconds(2.5);

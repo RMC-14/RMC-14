@@ -225,7 +225,7 @@ public sealed class GridVehicleMoverOverlay : Overlay
                 continue;
 
             var (position, rotation) = _transform.GetWorldPositionRotation(xform);
-            DrawRideSurfaceBoxes(handle, surface.Bounds, position, rotation, RideSoftBorderOutline, surface.ExitPadding);
+            DrawRideSurfaceBoxes(handle, surface.Bounds, position, rotation, RideSoftBorderOutline, surface.SoftBorderPadding);
             DrawRideSurfaceBoxes(handle, surface.Bounds, position, rotation, RideSurfaceOutline);
             DrawRideSurfaceBoxes(handle, surface.ClimbBounds, position, rotation, RideClimbOutline);
         }
