@@ -11,7 +11,7 @@
   isSubfloor: false
 
 - type: tile
-  parent: CMPlanetStrata
+  parent: CMTileBase
   id: CMPlanetStrataMultiTiles
   name: strata multi tiles
   sprite: /Textures/_RMC14/Tiles/planet/strata/multi_tiles.png

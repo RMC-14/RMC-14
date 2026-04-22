@@ -18,7 +18,7 @@
     RMCRankCivilian: []
   startingGear: RMCGearSurvivorBaseNoBackpack
   dummyStartingGear: RMCGearSurvivorEquipped
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconGenericColonist"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
   accessGroups:

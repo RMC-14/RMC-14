@@ -85,7 +85,7 @@
   sprite: /Textures/_RMC14/Tiles/planet/shuttle/floor6.png
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMTileBase
   id: CMPlanetCorsatSquare
   name: corsat squares
   sprite: /Textures/_RMC14/Tiles/planet/corsat/squares.png
@@ -103,7 +103,7 @@
   canDig: false
 
 - type: tile
-  parent: CMPlanetBase
+  parent: CMTileBase
   id: CMPlanetCorsatPlate
   name: corsat plate
   sprite: /Textures/_RMC14/Tiles/planet/corsat/plate.png
