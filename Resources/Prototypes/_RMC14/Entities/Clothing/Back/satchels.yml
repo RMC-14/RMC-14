@@ -42,6 +42,119 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/black.rsi
 
 - type: entity
+  parent: CMSatchel
+  abstract: true
+  id: CMSatchelSecure
+  name: secure leather satchel
+  description: A very fancy satchel made of fine leather. It's got a lock on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/secure_command.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: locked
+      map: [ "enum.LockVisualLayers.Lock" ]
+      shader: unshaded
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    showOpenClosedWhenEmpty: true
+  - type: LockVisuals
+  - type: RMCIdLockableStorage
+
+- type: entity
+  parent: CMSatchelSecure
+  id: CMSatchelSecureStandard
+  components:
+  - type: RMCIdLockableStorage
+    overrideAccesses:
+    - RMCAccessSeniorCommand
+
+- type: entity
+  parent: CMSatchelSecureStandard
+  id: CMSatchelCommandSecure
+
+- type: entity
+  parent: CMSatchelSecureStandard
+  id: CMSatchelSecureFillSurvivor
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: CMSatchelSecure
+  id: CMSatchelLiaisonSecure
+
+- type: entity
+  parent: CMSatchelLiaisonSecure
+  id: CMSatchelLiaisonSecureFillSurvivor
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackSecure
+  name: secure leather satchel
+  description: A very fancy satchel made of fine leather. It's got a lock on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/black.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/secure_command.rsi
+      state: locked
+      map: [ "enum.LockVisualLayers.Lock" ]
+      shader: unshaded
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    showOpenClosedWhenEmpty: true
+  - type: LockVisuals
+  - type: RMCIdLockableStorage
+    overrideAccesses:
+    - RMCAccessSeniorCommand
+
+- type: entity
+  parent: RMCSatchelNorm
+  id: RMCSatchelNormSecure
+  name: secure satchel
+  description: A trendy-looking satchel with an ID lock.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/norm.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/secure_command.rsi
+      state: locked
+      map: [ "enum.LockVisualLayers.Lock" ]
+      shader: unshaded
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    showOpenClosedWhenEmpty: true
+  - type: LockVisuals
+  - type: RMCIdLockableStorage
+    overrideAccesses:
+    - RMCAccessSeniorCommand
+
+- type: entity
   parent: RMCSatchelBlack
   id: RMCSatchelBlackFillSurvivorConstable
   suffix: Survivor, Constable
@@ -504,11 +617,20 @@
   name: UNMC IMP M63A1 grenade satchel
   description: A satchel specially designed to maximize grenade carrying capacity while minimizing the risks of secondary ignition.
   components:
-  # TODO ID locking feature + make lights green when unlocked.
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/grenadepack.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/secure_command.rsi
+      state: locked
+      map: [ "enum.LockVisualLayers.Lock" ]
+      shader: unshaded
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -517,6 +639,17 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    showOpenClosedWhenEmpty: true
+  - type: LockVisuals
+  - type: RMCIdLockableStorage
+    overrideAccesses:
+    - RMCAccessSeniorCommand
+    - CMAccessRequisitions
+    - CMAccessQM
+    - CMAccessSquadLeaderPrep
 
 - type: entity
   parent: CMSatchel

@@ -16,19 +16,20 @@ public sealed class LockVisualizerSystem : VisualizerSystem<LockVisualsComponent
         if (!AppearanceSystem.TryGetData<bool>(uid, LockVisuals.Locked, out var locked, args.Component))
             locked = true;
 
-        var unlockedStateExist = args.Sprite.BaseRSI?.TryGetState(comp.StateUnlocked, out _);
+        var open = false;
+        AppearanceSystem.TryGetData(uid, StorageVisuals.Open, out open, args.Component);
 
-        if (AppearanceSystem.TryGetData<bool>(uid, StorageVisuals.Open, out var open, args.Component))
-        {
-            SpriteSystem.LayerSetVisible((uid, args.Sprite), LockVisualLayers.Lock, !open);
-        }
-        else if (!(bool)unlockedStateExist!)
-            SpriteSystem.LayerSetVisible((uid, args.Sprite), LockVisualLayers.Lock, locked);
+        // RMC start. Get the RSI from the mapped lock layer so this visualizer can detect whether that layer supports the unlocked state and switch the overlay correctly. Extra functionality: lock visuals now also work when the lock overlay uses a different RSI than the item's base sprite, instead of only supporting BaseRSI.
+        SpriteSystem.TryGetLayer((uid, args.Sprite), LockVisualLayers.Lock, out var lockLayer, false);
+        var lockLayerRsi = lockLayer?.ActualRsi;
+        var unlockedStateExists = !string.IsNullOrEmpty(comp.StateUnlocked) &&
+                                  lockLayerRsi?.TryGetState(comp.StateUnlocked, out _) == true;
+        // RMC end
 
-        if (!open && (bool)unlockedStateExist!)
-        {
+        SpriteSystem.LayerSetVisible((uid, args.Sprite), LockVisualLayers.Lock, !open && (locked || unlockedStateExists));
+
+        if (!open && unlockedStateExists)
             SpriteSystem.LayerSetRsiState((uid, args.Sprite), LockVisualLayers.Lock, locked ? comp.StateLocked : comp.StateUnlocked);
-        }
     }
 }
 

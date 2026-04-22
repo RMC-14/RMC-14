@@ -73,11 +73,11 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCJumpsuitLiaisonExpensiveSuitDropPouch, RMCSatchelBlack, RMCBootsCorporate ]
-    - [ RMCJumpsuitLiaisonExpensiveSuitBrownDropPouch, RMCSatchelBlack, CMBootsBrownFilled ]
-    - [ RMCJumpsuitLiaisonExpensiveSuitJacketDropPouch, CMSatchel, RMCBootsPMCFilled ] # todo lockable satchel
-    - [ RMCJumpsuitLiaisonExpensiveSuitBrownJacketDropPouch, CMSatchel, RMCBootsCorporate ] # Todo lockable satchel
-    - [ RMCJumpsuitLiaisonExpensiveSuitJacketOnlyDropPouch, RMCSatchelNorm, RMCBootsCorporate ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitDropPouch, RMCSatchelBlackSecure, RMCBootsCorporate ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitBrownDropPouch, RMCSatchelBlackSecure, CMBootsBrownFilled ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitJacketDropPouch, CMSatchelSecureStandard, RMCBootsPMCFilled ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitBrownJacketDropPouch, CMSatchelSecureStandard, RMCBootsCorporate ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitJacketOnlyDropPouch, RMCSatchelNormSecure, RMCBootsCorporate ]
     randomStartingGear:
       eyes:
       - CMGlassesSecurity

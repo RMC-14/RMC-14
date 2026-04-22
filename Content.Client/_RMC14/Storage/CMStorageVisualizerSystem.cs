@@ -30,13 +30,21 @@ public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisual
 
         if (used == 0)
         {
-            if (component.StorageOpen != null)
-                args.Sprite.LayerSetVisible(component.StorageOpen, false);
-            if (component.StorageClosed != null)
-                args.Sprite.LayerSetVisible(component.StorageClosed, false);
+            // RMC start. Some storage items still need open/closed visuals while empty, so do not early-return to the empty-only state for those opt-in cases.
+            if (!component.ShowOpenClosedWhenEmpty)
+            {
+                if (component.StorageOpen != null)
+                    args.Sprite.LayerSetVisible(component.StorageOpen, false);
+                if (component.StorageClosed != null)
+                    args.Sprite.LayerSetVisible(component.StorageClosed, false);
+                if (component.StorageEmpty != null)
+                    args.Sprite.LayerSetVisible(component.StorageEmpty, true);
+                return;
+            }
+
             if (component.StorageEmpty != null)
-                args.Sprite.LayerSetVisible(component.StorageEmpty, true);
-            return;
+                args.Sprite.LayerSetVisible(component.StorageEmpty, false);
+            // RMC end
         }
         else
         {

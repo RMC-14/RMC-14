@@ -67,8 +67,8 @@
       - [ CMSheetMetal20, RMCSpaceCash1000, CMPenClicky, CMClipboard ]
     randomStartingGear:
       back:
-      - CMSatchel # todo secure satchel
-      - RMCSatchelBlack
+      - CMSatchelSecureStandard
+      - RMCSatchelBlackSecure
       shoes:
       - RMCShoesLaceup
       - RMCShoesLaceupBrown
