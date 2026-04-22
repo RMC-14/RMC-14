@@ -26,6 +26,17 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurineDeveloper
+  name: developer figurine
+  components:
+  - type: Sprite
+    sprite: Mobs/Pets/corgi.rsi
+    state: real_mouse
+  - type: PatronFigurine
+    id: 00000000-0000-0000-0000-000000000000 # Change to your UID for testing.
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFoxBridgeton
   name: Fox Bridgeton figurine
   description: This is like that book by George Orwell, Nineteen Eighty Fo'
