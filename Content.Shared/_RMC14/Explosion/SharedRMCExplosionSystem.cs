@@ -28,6 +28,7 @@ namespace Content.Shared._RMC14.Explosion;
 
 public abstract class SharedRMCExplosionSystem : EntitySystem
 {
+    [Dependency] private readonly SharedXenoAcidSystem _acid = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
@@ -217,11 +218,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         if (!deleteEntity || TerminatingOrDeleted(ent))
             return;
 
-        if (HasComp<GunComponent>(ent) && ent.Comp.ExplosionProtection > 0) //TODO Once gun acid protection is added, remove that protection instead.
-        {
-            ent.Comp.ExplosionProtection--;
+        if (_acid.TryConsumeGunSecondWind(ent))
             return;
-        }
 
         QueueDel(ent);
     }
