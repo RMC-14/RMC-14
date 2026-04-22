@@ -361,7 +361,7 @@
 
 - type: entity
   parent: CMHeadCapDrill
-  id: CMHeadCapDrillXippy
+  id: RMCHeadCapDrillXippy
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/xippy_hat.rsi

@@ -88,4 +88,4 @@
 - type: startingGear
   id: RMCMobXippyGear
   equipment:
-    head: CMHeadCapDrillXippy
+    head: RMCHeadCapDrillXippy
