@@ -12,9 +12,8 @@ public sealed class UniversalRecorderTapeBui(EntityUid owner, Enum uiKey) : Boun
 {
     private static readonly Dictionary<UniversalRecorderTapeAction, (string Tooltip, SpriteSpecifier Sprite)> ActionData = new()
     {
-        // Temporary: reuse existing textures until the CM radial tape icons are imported.
-        [UniversalRecorderTapeAction.Flip] = ("rmc-universal-recorder-tape-verb-flip", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Objects/Devices/cassette_player.rsi"), "cassette_flip")),
-        [UniversalRecorderTapeAction.Unwind] = ("rmc-universal-recorder-tape-verb-unwind", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Objects/Devices/cassette_player.rsi"), "ribbon_overlay")),
+        [UniversalRecorderTapeAction.Flip] = ("rmc-universal-recorder-tape-verb-flip", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Actions/radial_tape.rsi"), "tape_flip")),
+        [UniversalRecorderTapeAction.Unwind] = ("rmc-universal-recorder-tape-verb-unwind", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Actions/radial_tape.rsi"), "tape_unwind")),
     };
 
     private SimpleRadialMenu? _menu;

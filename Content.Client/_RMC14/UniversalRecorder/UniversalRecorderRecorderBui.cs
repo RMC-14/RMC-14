@@ -12,12 +12,11 @@ public sealed class UniversalRecorderRecorderBui(EntityUid owner, Enum uiKey) : 
 {
     private static readonly Dictionary<UniversalRecorderRecorderAction, (string Tooltip, SpriteSpecifier Sprite)> ActionData = new()
     {
-        // Temporary: reuse existing textures until the CM radial recorder icons are imported.
-        [UniversalRecorderRecorderAction.Record] = ("rmc-universal-recorder-verb-record", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Objects/Devices/cassette_player.rsi"), "taperecorder_recording")),
-        [UniversalRecorderRecorderAction.Play] = ("rmc-universal-recorder-verb-play", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Objects/Devices/cassette_player.rsi"), "taperecorder_playing")),
-        [UniversalRecorderRecorderAction.Stop] = ("rmc-universal-recorder-verb-stop", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Actions/cassette_player.rsi"), "walkman_restart")),
-        [UniversalRecorderRecorderAction.PrintTranscript] = ("rmc-universal-recorder-verb-print", new SpriteSpecifier.Rsi(new ResPath("Objects/Misc/module.rsi"), "printer_mini")),
-        [UniversalRecorderRecorderAction.Eject] = ("rmc-universal-recorder-verb-eject", new SpriteSpecifier.Rsi(new ResPath("Interface/Actions/actions_mecha.rsi"), "mech_eject")),
+        [UniversalRecorderRecorderAction.Record] = ("rmc-universal-recorder-verb-record", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Actions/radial_taperecorder.rsi"), "record")),
+        [UniversalRecorderRecorderAction.Play] = ("rmc-universal-recorder-verb-play", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Actions/radial_taperecorder.rsi"), "play")),
+        [UniversalRecorderRecorderAction.Stop] = ("rmc-universal-recorder-verb-stop", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Actions/radial_taperecorder.rsi"), "stop")),
+        [UniversalRecorderRecorderAction.PrintTranscript] = ("rmc-universal-recorder-verb-print", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Actions/radial_taperecorder.rsi"), "print")),
+        [UniversalRecorderRecorderAction.Eject] = ("rmc-universal-recorder-verb-eject", new SpriteSpecifier.Rsi(new ResPath("_RMC14/Actions/radial_taperecorder.rsi"), "eject")),
     };
 
     private SimpleRadialMenu? _menu;
