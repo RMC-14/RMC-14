@@ -31,6 +31,7 @@
         state: smartgunner
     - type: JobPrefix
       prefix: cm-job-prefix-gun-operator
+    - type: ClothingFactionLockIgnore
   hidden: true
 
 - type: playTimeTracker

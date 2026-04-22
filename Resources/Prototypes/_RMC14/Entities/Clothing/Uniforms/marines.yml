@@ -22,6 +22,9 @@
       Snow: _RMC14/Objects/Clothing/Uniforms/Marine/standard/snow.rsi
       Classic: _RMC14/Objects/Clothing/Uniforms/Marine/standard/classic.rsi
       Urban: _RMC14/Objects/Clothing/Uniforms/Marine/standard/urban.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: [JumpsuitMarine, RMCJumpsuitMarinePatchBase]
@@ -36,6 +39,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/formal.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # ComTech
 - type: entity
@@ -117,6 +123,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # CBRN
 
@@ -133,6 +142,9 @@
     melee: 10
     bio: 100
     explosionArmor: 10
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: RMCCBRNSuit
@@ -196,6 +208,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/ro.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # ReqTech / RT
 - type: entity
@@ -209,6 +224,9 @@
   - type: Foldable
     unfoldVerbText: rmc-pants-verb-unfold
     foldVerbText: rmc-pants-verb-fold
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # MessTech / Chef
 - type: entity
@@ -219,6 +237,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/chef.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # Engineering
 
@@ -233,6 +254,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ec.rsi
   - type: CMArmor
     bio: 15
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # Maintenance Technician / MT
 - type: entity
@@ -245,6 +269,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/mt.rsi
   - type: CMArmor
     bio: 10
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # Ordnance Technician / OT
 - type: entity
@@ -277,6 +304,9 @@
       Snow: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/snow.rsi
       Classic: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/classic.rsi
       Urban: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/urban.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: CMJumpsuitCO
@@ -352,6 +382,9 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # ASO
 
@@ -366,6 +399,9 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: RMCJumpsuitASOBlack
@@ -418,6 +454,9 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: CMJumpsuitBO
@@ -463,6 +502,9 @@
     tags:
     - RMCUniformMarine
     - RMCUniformIntel
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: Tag
   id: RMCUniformIntel
@@ -479,6 +521,9 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
@@ -498,6 +543,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/crewchief.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # Civilian
 
@@ -538,6 +586,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/colonist.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 # Marine
 - type: entity
@@ -552,6 +603,9 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: CMJumpsuitSurvivorMarine
@@ -576,6 +630,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/general.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # Synthetic
 - type: entity

@@ -20,6 +20,9 @@
     tags:
     - RMCUniformMarine
     - RMCUniformMP
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -29,6 +32,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/corporate.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
+    - WeYa
+    - Civilian
 
 # Military Warden
 - type: entity
@@ -52,6 +60,9 @@
     tags:
     - RMCUniformMarine
     - RMCUniformWarden
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -61,6 +72,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/blue.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -70,6 +84,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/red.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -79,6 +96,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/corporate.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -88,6 +108,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/navy.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -97,6 +120,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/tan.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # Warrant Officer / CMP
 - type: entity
@@ -118,6 +144,9 @@
     tags:
     - RMCUniformMarine
     - RMCUniformCMP
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 # Prisoner
 - type: entity

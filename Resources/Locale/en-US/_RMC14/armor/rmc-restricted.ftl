@@ -17,3 +17,5 @@ rmc-armor-not-spp-jumpsuit = You cannot wear this without wearing SPP fatigues.
 rmc-armor-not-cmb-jumpsuit = You cannot wear this without wearing a CMB uniform.
 
 rmc-armor-not-tse-jumpsuit = You cannot wear this without wearing a TSE uniform.
+
+rmc-jumpsuit-not-faction = You cannot wear this as it doesn't belong to your faction.
