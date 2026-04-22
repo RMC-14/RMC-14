@@ -38,6 +38,9 @@ public sealed class GridVehicleMoverOverlay : Overlay
     private static readonly Color AppliedProbeOutline = new(0.25f, 0.84f, 1f, 0.72f);
     private static readonly Color BlockedProbeFill = new(1f, 0.16f, 0.22f, 0.18f);
     private static readonly Color BlockedProbeOutline = new(1f, 0.16f, 0.22f, 0.92f);
+    private static readonly Color RideSurfaceOutline = Color.Cyan.WithAlpha(0.75f);
+    private static readonly Color RideSoftBorderOutline = Color.Yellow.WithAlpha(0.65f);
+    private static readonly Color RideClimbOutline = Color.LimeGreen.WithAlpha(0.85f);
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
@@ -97,6 +100,7 @@ public sealed class GridVehicleMoverOverlay : Overlay
             DrawPhysics(handle, uid);
         }
 
+        DrawRideSurfaces(handle, mapId);
         DrawEntryAndExitPoints(handle, mapId);
         DrawTestedTiles(handle);
     }
@@ -210,6 +214,47 @@ public sealed class GridVehicleMoverOverlay : Overlay
     {
         handle.DrawCircle(position, radius, color.WithAlpha(0.22f), true);
         handle.DrawCircle(position, radius, color.WithAlpha(0.85f), false);
+    }
+
+    private void DrawRideSurfaces(DrawingHandleWorld handle, MapId mapId)
+    {
+        var query = _ents.EntityQueryEnumerator<VehicleRideSurfaceComponent, TransformComponent>();
+        while (query.MoveNext(out _, out var surface, out var xform))
+        {
+            if (xform.MapID != mapId)
+                continue;
+
+            var (position, rotation) = _transform.GetWorldPositionRotation(xform);
+            DrawRideSurfaceBoxes(handle, surface.Bounds, position, rotation, RideSoftBorderOutline, surface.ExitPadding);
+            DrawRideSurfaceBoxes(handle, surface.Bounds, position, rotation, RideSurfaceOutline);
+            DrawRideSurfaceBoxes(handle, surface.ClimbBounds, position, rotation, RideClimbOutline);
+        }
+    }
+
+    private static void DrawRideSurfaceBoxes(
+        DrawingHandleWorld handle,
+        List<Box2> boxes,
+        Vector2 position,
+        Angle rotation,
+        Color color,
+        float padding = 0f)
+    {
+        foreach (var box in boxes)
+        {
+            if (!box.IsValid())
+                continue;
+
+            var padded = box.Enlarged(MathF.Max(0f, padding));
+            var bottomLeft = ToWorld(padded.BottomLeft, position, rotation);
+            var bottomRight = ToWorld(padded.BottomRight, position, rotation);
+            var topRight = ToWorld(padded.TopRight, position, rotation);
+            var topLeft = ToWorld(padded.TopLeft, position, rotation);
+
+            handle.DrawLine(bottomLeft, bottomRight, color);
+            handle.DrawLine(bottomRight, topRight, color);
+            handle.DrawLine(topRight, topLeft, color);
+            handle.DrawLine(topLeft, bottomLeft, color);
+        }
     }
 
     private void DrawTestedTiles(DrawingHandleWorld handle)
@@ -442,6 +487,11 @@ public sealed class GridVehicleMoverOverlay : Overlay
     private Vector2 ToMapPosition(EntityUid grid, Vector2 localPosition)
     {
         return _transform.ToMapCoordinates(new EntityCoordinates(grid, localPosition)).Position;
+    }
+
+    private static Vector2 ToWorld(Vector2 local, Vector2 position, Angle rotation)
+    {
+        return position + rotation.RotateVec(local);
     }
 
     private static Color GetEntryColor(int entryIndex)

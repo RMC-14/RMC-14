@@ -6,7 +6,6 @@ using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Vehicle.Components;
-using Content.Shared.Verbs;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 
@@ -27,7 +26,6 @@ public sealed class HardpointSlotSystem : EntitySystem
 
         SubscribeLocalEvent<HardpointSlotsComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointInsertDoAfterEvent>(OnInsertDoAfter);
-        SubscribeLocalEvent<HardpointSlotsComponent, GetVerbsEvent<InteractionVerb>>(OnGetRemoveVerbs);
         SubscribeLocalEvent<HardpointSlotsComponent, InteractUsingEvent>(OnSlotsInteractUsing, before: new[] { typeof(ItemSlotsSystem) });
         SubscribeLocalEvent<HardpointSlotsComponent, BoundUIOpenedEvent>(OnHardpointUiOpened);
         SubscribeLocalEvent<HardpointSlotsComponent, BoundUIClosedEvent>(OnHardpointUiClosed);
@@ -117,42 +115,6 @@ public sealed class HardpointSlotSystem : EntitySystem
         ent.Comp.CompletingInserts.Add(args.SlotId);
         _itemSlots.TryInsertFromHand(ent.Owner, slot, args.User, excludeUserAudio: false);
         ent.Comp.CompletingInserts.Remove(args.SlotId);
-    }
-
-    private void OnGetRemoveVerbs(Entity<HardpointSlotsComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
-    {
-        if (!args.CanAccess || !args.CanInteract || args.Using == null)
-            return;
-
-        if (!_tool.HasQuality(args.Using.Value, ent.Comp.RemoveToolQuality))
-            return;
-
-        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
-            return;
-
-        foreach (var slot in ent.Comp.Slots)
-        {
-            if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
-                continue;
-
-            if (HasComp<HardpointNoRemoveComponent>(itemSlot.Item!.Value))
-                continue;
-
-            var user = args.User;
-            var slotId = slot.Id;
-            var verb = new InteractionVerb
-            {
-                Act = () => TryStartHardpointRemoval(ent.Owner, ent.Comp, user, slotId),
-                Category = VerbCategory.Eject,
-                Text = Loc.GetString("rmc-hardpoint-remove-verb", ("slot", Name(itemSlot.Item!.Value))),
-                Priority = itemSlot.Priority,
-                IconEntity = GetNetEntity(itemSlot.Item),
-            };
-
-            args.Verbs.Add(verb);
-        }
-
-        AddTurretRemoveVerbs(ent, ref args, itemSlots);
     }
 
     private void OnSlotsInteractUsing(Entity<HardpointSlotsComponent> ent, ref InteractUsingEvent args)
@@ -487,47 +449,4 @@ public sealed class HardpointSlotSystem : EntitySystem
         return false;
     }
 
-    private void AddTurretRemoveVerbs(
-        Entity<HardpointSlotsComponent> ent,
-        ref GetVerbsEvent<InteractionVerb> args,
-        ItemSlotsComponent itemSlots)
-    {
-        foreach (var slot in ent.Comp.Slots)
-        {
-            if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var vehicleSlot, itemSlots) || !vehicleSlot.HasItem)
-                continue;
-
-            var turretUid = vehicleSlot.Item!.Value;
-            if (!TryComp(turretUid, out HardpointSlotsComponent? turretSlots) ||
-                !TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
-            {
-                continue;
-            }
-
-            foreach (var turretSlot in turretSlots.Slots)
-            {
-                if (!_itemSlots.TryGetSlot(turretUid, turretSlot.Id, out var turretItemSlot, turretItemSlots) ||
-                    !turretItemSlot.HasItem)
-                {
-                    continue;
-                }
-
-                if (HasComp<HardpointNoRemoveComponent>(turretItemSlot.Item!.Value))
-                    continue;
-
-                var user = args.User;
-                var slotId = turretSlot.Id;
-                var verb = new InteractionVerb
-                {
-                    Act = () => TryStartHardpointRemoval(turretUid, turretSlots, user, slotId),
-                    Category = VerbCategory.Eject,
-                    Text = Loc.GetString("rmc-hardpoint-remove-verb", ("slot", Name(turretItemSlot.Item!.Value))),
-                    Priority = turretItemSlot.Priority,
-                    IconEntity = GetNetEntity(turretItemSlot.Item),
-                };
-
-                args.Verbs.Add(verb);
-            }
-        }
-    }
 }

@@ -30,6 +30,7 @@
     slots:
       turret-cannon:
         startingItem: VehicleSPPVanCannon
+        disableEject: true
         whitelist:
           components:
           - HardpointItem

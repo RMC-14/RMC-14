@@ -36,11 +36,13 @@
     slots:
       turret-cannon:
         startingItem: VehicleSPPTankP17702
+        disableEject: true
         whitelist:
           components:
           - HardpointItem
       turret-launcher:
         startingItem: VehicleSPPTankCupola
+        disableEject: true
         whitelist:
           components:
           - HardpointItem

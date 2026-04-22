@@ -40,6 +40,12 @@
   - type: ItemSlots
     slots:
       turret-cannon:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      turret-launcher:
+        disableEject: true
         whitelist:
           components:
           - HardpointItem

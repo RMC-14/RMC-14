@@ -104,6 +104,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (other == uid)
                 continue;
 
+            if (TryComp(other, out VehicleRideSurfaceRiderComponent? rider) && rider.Vehicle == uid)
+                continue;
+
             if (ignoredEntities != null && ignoredEntities.Contains(other))
                 continue;
 

@@ -266,6 +266,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (args.OtherEntity == ent.Owner)
             return;
 
+        if (TryComp(args.OtherEntity, out VehicleRideSurfaceRiderComponent? rider) && rider.Vehicle == ent.Owner)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (args.OtherBody.BodyType != BodyType.Static)
             return;
 

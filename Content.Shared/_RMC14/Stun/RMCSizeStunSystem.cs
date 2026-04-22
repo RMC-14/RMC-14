@@ -195,19 +195,20 @@ public sealed class RMCSizeStunSystem : EntitySystem
         if (knockedBackFrom == null)
             return;
 
-        //TODO Camera Shake
-        if (TryComp(target, out PhysicsComponent? physics))
-        {
-            _physics.SetLinearVelocity(target, Vector2.Zero, body: physics);
-            _physics.SetAngularVelocity(target, 0f, body: physics);
-        }
-
         var vec = _transform.GetMoverCoordinates(target).Position - knockedBackFrom.Value.Position;
         if (vec.Length() != 0)
         {
-            _rmcPulling.TryStopPullsOn(target);
             var knockBackPower = _random.NextFloat(knockBackPowerMin, knockBackPowerMax);
             var direction = vec.Normalized() * knockBackPower;
+
+            //TODO Camera Shake
+            if (TryComp(target, out PhysicsComponent? physics))
+            {
+                _physics.SetLinearVelocity(target, Vector2.Zero, body: physics);
+                _physics.SetAngularVelocity(target, 0f, body: physics);
+            }
+
+            _rmcPulling.TryStopPullsOn(target);
             _throwing.TryThrow(target, direction, knockBackSpeed, animated: false, playSound: false, compensateFriction: true);
         }
     }

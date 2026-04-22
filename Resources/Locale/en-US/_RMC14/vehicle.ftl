@@ -1,4 +1,10 @@
 rmc-vehicle-wheel-repaired = Wheel repaired.
+rmc-vehicle-ride-climb = Climb on
+rmc-vehicle-ride-climb-self = You climb onto {$vehicle}.
+rmc-vehicle-ride-climb-others = {$user} climbs onto {$vehicle}.
+rmc-vehicle-ride-climb-down = Climb down
+rmc-vehicle-ride-climb-down-self = You climb down from {$vehicle}.
+rmc-vehicle-ride-climb-down-others = {$user} climbs down from {$vehicle}.
 rmc-hardpoint-remove-verb = Remove {$slot}
 rmc-hardpoint-repaired = Hardpoint repaired.
 rmc-hardpoint-intact = Hardpoint is already intact.

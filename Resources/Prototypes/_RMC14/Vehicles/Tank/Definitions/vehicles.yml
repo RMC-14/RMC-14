@@ -7,6 +7,7 @@
   - type: Vehicle
     movementKind: Grid
   - type: Clickable
+  - type: RequireProjectileTarget
   - type: GridVehicleMover
     maxSpeed: 3
     acceleration: 1
@@ -21,6 +22,11 @@
     blockingMobBypassNudgeLimit: 2
     xenoBlockMinimumSize: Immobile
     canXenosPush: false
+  - type: VehicleRideSurface
+    bounds:
+    - -1.3,-1.9,1.3,1.9
+    climbBounds:
+    - -1.8,1.8,1.8,2.8
   - type: VehicleOvercharge
     speedMultiplier: 1.3
     duration: 3
@@ -115,13 +121,30 @@
   - type: InputMover
   - type: ItemSlots
     slots:
+      armor:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
       primary:
         startingItem: VehicleTankTurret
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      secondary:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      support:
+        disableEject: true
         whitelist:
           components:
           - HardpointItem
       wheel-1:
         startingItem: VehicleTankTreads
+        disableEject: true
         whitelist:
           components:
           - VehicleWheelItem
@@ -213,13 +236,30 @@
       state: wheels_1
   - type: ItemSlots
     slots:
+      armor:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
       primary:
         startingItem: VehicleSPPTankTurret
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      secondary:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      support:
+        disableEject: true
         whitelist:
           components:
           - HardpointItem
       wheel-1:
         startingItem: VehicleTankTreads
+        disableEject: true
         whitelist:
           components:
           - VehicleWheelItem
