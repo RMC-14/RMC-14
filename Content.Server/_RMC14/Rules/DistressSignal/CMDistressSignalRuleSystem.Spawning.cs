@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -20,6 +20,8 @@ using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Preferences;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
