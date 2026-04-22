@@ -599,7 +599,7 @@
     - id: CMFolderWhite
     - id: CMPenClicky
     - id: RMCRadioHandheldColonyOff
-    - id: CMClipboard # TODO RMC14 tape recorder
+    - id: RMCUniversalRecorder
     - id: CMCrowbar
 
 - type: entity

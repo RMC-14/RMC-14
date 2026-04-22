@@ -1,0 +1,93 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCUniversalRecorderBase
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/cassette_player.rsi
+    layers:
+    - map: ["enum.UniversalRecorderVisuals.State"]
+      state: taperecorder_idle
+  - type: Item
+    size: Small
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.UniversalRecorderVisuals.State:
+        enum.UniversalRecorderVisuals.State:
+          enum.UniversalRecorderVisualState.Empty: { state: taperecorder_empty }
+          enum.UniversalRecorderVisualState.Idle: { state: taperecorder_idle }
+          enum.UniversalRecorderVisualState.Recording: { state: taperecorder_recording }
+          enum.UniversalRecorderVisualState.Playing: { state: taperecorder_playing }
+  - type: UniversalRecorder
+    tapeSlot:
+      name: rmc-universal-recorder-slot-name
+      startingItem: RMCUniversalRecorderTape
+      insertSuccessPopup: rmc-universal-recorder-popup-insert-generic
+      insertSound: /Audio/Machines/screwdriverclose.ogg
+      ejectSound: /Audio/Machines/screwdriveropen.ogg
+      whitelist:
+        components:
+        - UniversalRecorderTape
+  - type: ContainerContainer
+    containers:
+      rmc_universal_recorder_tape: !type:ContainerSlot {}
+  - type: ItemSlots
+  - type: UserInterface
+    interfaces:
+      enum.UniversalRecorderUiKey.Recorder:
+        type: UniversalRecorderRecorderBui
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 60
+      CMGlass: 30
+
+- type: entity
+  parent: RMCUniversalRecorderBase
+  id: RMCUniversalRecorder
+  name: universal recorder
+  description: A device that can record dialogue on magnetic tape and play it back. Good for appeals or witness statements.
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCUniversalRecorderTapeBase
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/cassette_player.rsi
+    layers:
+    - map: ["enum.UniversalRecorderTapeVisualLayers.Base"]
+      state: cassette_regulation
+    - map: ["enum.UniversalRecorderTapeVisualLayers.Ribbon"]
+      state: ribbon_overlay
+      visible: false
+  - type: Item
+    size: Small
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.UniversalRecorderTapeVisuals.Side:
+        enum.UniversalRecorderTapeVisualLayers.Base:
+          enum.UniversalRecorderTapeSide.Front:
+            state: cassette_regulation
+          enum.UniversalRecorderTapeSide.Back:
+            state: cassette_flip
+      enum.UniversalRecorderTapeVisuals.Unspooled:
+        enum.UniversalRecorderTapeVisualLayers.Ribbon:
+          True: { visible: true }
+          False: { visible: false }
+  - type: UniversalRecorderTape
+  - type: UserInterface
+    interfaces:
+      enum.UniversalRecorderUiKey.Tape:
+        type: UniversalRecorderTapeBui
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 20
+      CMGlass: 5
+
+- type: entity
+  parent: RMCUniversalRecorderTapeBase
+  id: RMCUniversalRecorderTape
+  name: regulation tape
+  description: A magnetic tape that can hold up to twenty minutes of content on either side.
