@@ -249,3 +249,11 @@
   completetime: 4
   materials:
     CMSteel: 15000 # 12000
+
+- type: latheRecipe
+  id: RMCUniversalRecorder
+  result: RMCUniversalRecorder
+  completetime: 4
+  materials:
+    CMSteel: 75 # 60
+    CMGlass: 37 # 30

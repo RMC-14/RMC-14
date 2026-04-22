@@ -95,3 +95,22 @@
   id: RMCUniversalRecorderTape
   name: regulation tape
   description: A magnetic tape that can hold up to twenty minutes of content on either side.
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxRegulationTapesEmpty
+  name: box of regulation tapes (x5)
+  description: A box of regulation tapes for universal recorders.
+  components:
+  - type: Sprite
+    state: box
+
+- type: entity
+  parent: RMCBoxRegulationTapesEmpty
+  id: RMCBoxRegulationTapes
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCUniversalRecorderTape
+      amount: 5

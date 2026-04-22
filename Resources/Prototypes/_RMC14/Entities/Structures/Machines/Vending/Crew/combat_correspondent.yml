@@ -75,9 +75,9 @@
       #- id: /obj/item/device/toner
       #  name: Toner
       # points: 5
-      #- id: /obj/item/storage/box/tapes
-      #  name: Regulation Tapes
-      #  points: 15
+      - id: RMCBoxRegulationTapes
+        name: Regulation Tapes
+        points: 15
       - id: CMPaperBin30
         name: Paper Bin
         points: 10
@@ -95,4 +95,4 @@
     - CMPen
     - RMCBinoculars
     - CMClipboard # notepad
-    #- taperecorder
+    - RMCUniversalRecorder
