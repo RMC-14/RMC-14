@@ -83,7 +83,7 @@ public sealed class RMCIdLockableStorageSystem : EntitySystem
     private void OnStorageInteractAttempt(Entity<RMCIdLockableStorageComponent> ent, ref StorageInteractAttemptEvent args)
     {
         // Opening the storage itself never uses override access. Override only applies to the ID swipe unlock action.
-        if (args.Cancelled || !ent.Comp.Locked || HasComp<BypassInteractionChecksComponent>(args.User) || IsAuthorized(ent, args.User))
+        if (args.Cancelled || !ent.Comp.Locked || HasComp<BypassInteractionChecksComponent>(args.User) || IsAuthorized(ent, args.User) || HasContainedOwnerId(ent))
             return;
 
         args.Cancelled = true;
@@ -99,7 +99,7 @@ public sealed class RMCIdLockableStorageSystem : EntitySystem
 
     private void OnDumpableDoAfter(Entity<RMCIdLockableStorageComponent> ent, ref DumpableDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled || !ent.Comp.Locked || HasComp<BypassInteractionChecksComponent>(args.User) || IsAuthorized(ent, args.User))
+        if (args.Handled || args.Cancelled || !ent.Comp.Locked || HasComp<BypassInteractionChecksComponent>(args.User) || IsAuthorized(ent, args.User) || HasContainedOwnerId(ent))
             return;
 
         args.Handled = true;
@@ -167,6 +167,23 @@ public sealed class RMCIdLockableStorageSystem : EntitySystem
     {
         ownerName = NormalizeName(idCard.Comp.FullName);
         return ownerName != null;
+    }
+
+    private bool HasContainedOwnerId(Entity<RMCIdLockableStorageComponent> ent)
+    {
+        if (ent.Comp.OwnerName == null || !TryComp(ent, out StorageComponent? storage))
+            return false;
+
+        foreach (var contained in storage.Container.ContainedEntities)
+        {
+            if (!_idCard.TryGetIdCard(contained, out var idCard))
+                continue;
+
+            if (TryGetOwnerName(idCard, out var ownerName) && ownerName == ent.Comp.OwnerName)
+                return true;
+        }
+
+        return false;
     }
 
     private static string? NormalizeName(string? value)
