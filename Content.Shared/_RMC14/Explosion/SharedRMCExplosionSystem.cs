@@ -17,8 +17,8 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Sticky.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
-using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Whitelist;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -30,6 +30,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 {
     [Dependency] private readonly SharedXenoAcidSystem _acid = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -202,6 +203,9 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     private void OnDestroyedByExplosionReceived(Entity<DestroyedByExplosionComponent> ent, ref ExplosionReceivedEvent args)
     {
         if (!ent.Comp.IsExplodable || TryComp(ent, out CorrodibleComponent? corrodible) && !corrodible.IsCorrodible)
+            return;
+
+        if (_container.IsEntityInContainer(ent))
             return;
 
         var deleteEntity = false;
