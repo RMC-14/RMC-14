@@ -101,6 +101,34 @@
     - id: CMSheetMetal20
 
 - type: entity
+  parent: CMSatchelLiaisonSecure
+  id: RMCSatchelBureauObserverSecureFill
+  suffix: Bureau Observer, Filled
+  components:
+  - type: StorageFill
+    contents: # TODO RMC14 film cartridge
+    - id: RMCBinoculars
+    - id: CMPaper
+    - id: CMFolderWhite
+    - id: CMPenClicky
+    - id: RMCRadioHandheldColonyOff
+    - id: CMClipboard # TODO RMC14 tape recorder
+    - id: CMCrowbar
+
+- type: entity
+  parent: CMSatchelLiaisonSecure
+  id: RMCSatchelICBLiaisonSecureFill
+  suffix: Interstellar Commerce Bureau Liaison, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenClicky
+    - id: CMPaper
+    - id: CMPaper
+    - id: RMCRadioHandheldColonyOff
+    - id: CMCrowbar
+
+- type: entity
   parent: RMCSatchelBlack
   id: RMCSatchelBlackSecure
   name: secure leather satchel
@@ -1267,6 +1295,25 @@
   id: RMCSatchelCorporateSynthetic
   suffix: Filled, Corporate Synthetic
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: locked
+      map: [ "enum.LockVisualLayers.Lock" ]
+      shader: unshaded
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    showOpenClosedWhenEmpty: true
+  - type: LockVisuals
+  - type: RMCIdLockableStorage
+    overrideAccesses:
+    - RMCAccessSeniorCommand
   - type: StorageFill
     contents:
     - id: CMFirstAidKitFilled

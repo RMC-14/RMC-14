@@ -11,7 +11,7 @@
   id: RMCGearSurvivorTrijentCorporate
   equipment:
     jumpsuit: CMJumpsuitLiaisonIvy
-    back: CMSatchelFillSurvivor
+    back: CMSatchelSecureFillSurvivor
 
 - type: entity
   parent: CMSpawnPointJobBase
