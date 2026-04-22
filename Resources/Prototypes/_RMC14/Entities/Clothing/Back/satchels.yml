@@ -114,8 +114,7 @@
       map: [ "openLayer" ]
     - state: closed
       map: [ "closedLayer" ]
-    - sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/secure_command.rsi
-      state: locked
+    - state: locked
       map: [ "enum.LockVisualLayers.Lock" ]
       shader: unshaded
   - type: CMStorageVisualizer
@@ -141,8 +140,7 @@
       map: [ "openLayer" ]
     - state: closed
       map: [ "closedLayer" ]
-    - sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/secure_command.rsi
-      state: locked
+    - state: locked
       map: [ "enum.LockVisualLayers.Lock" ]
       shader: unshaded
   - type: CMStorageVisualizer
@@ -627,8 +625,7 @@
       map: [ "openLayer" ]
     - state: closed
       map: [ "closedLayer" ]
-    - sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/secure_command.rsi
-      state: locked
+    - state: locked
       map: [ "enum.LockVisualLayers.Lock" ]
       shader: unshaded
   - type: Storage

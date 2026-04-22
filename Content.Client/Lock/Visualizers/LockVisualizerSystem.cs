@@ -16,20 +16,18 @@ public sealed class LockVisualizerSystem : VisualizerSystem<LockVisualsComponent
         if (!AppearanceSystem.TryGetData<bool>(uid, LockVisuals.Locked, out var locked, args.Component))
             locked = true;
 
-        var open = false;
-        AppearanceSystem.TryGetData(uid, StorageVisuals.Open, out open, args.Component);
+        // RMC start. RMC secure satchels store lock overlay states directly in their bag RSI. This block checks whether the current sprite supports an explicit unlocked overlay, hides the lock layer while the storage is being viewed open, and otherwise either: switches the overlay between locked/unlocked when that state exists, or 2) falls back to only showing the layer while the entity is actually locked.
+        var unlockedStateExist = args.Sprite.BaseRSI?.TryGetState(comp.StateUnlocked, out _);
+        if (AppearanceSystem.TryGetData<bool>(uid, StorageVisuals.Open, out var open, args.Component))
+        {
+            SpriteSystem.LayerSetVisible((uid, args.Sprite), LockVisualLayers.Lock, !open);
+        }
+        else if (!(bool)unlockedStateExist!)
+            SpriteSystem.LayerSetVisible((uid, args.Sprite), LockVisualLayers.Lock, locked);
 
-        // RMC start. Get the RSI from the mapped lock layer so this visualizer can detect whether that layer supports the unlocked state and switch the overlay correctly. Extra functionality: lock visuals now also work when the lock overlay uses a different RSI than the item's base sprite, instead of only supporting BaseRSI.
-        SpriteSystem.TryGetLayer((uid, args.Sprite), LockVisualLayers.Lock, out var lockLayer, false);
-        var lockLayerRsi = lockLayer?.ActualRsi;
-        var unlockedStateExists = !string.IsNullOrEmpty(comp.StateUnlocked) &&
-                                  lockLayerRsi?.TryGetState(comp.StateUnlocked, out _) == true;
-        // RMC end
-
-        SpriteSystem.LayerSetVisible((uid, args.Sprite), LockVisualLayers.Lock, !open && (locked || unlockedStateExists));
-
-        if (!open && unlockedStateExists)
+        if (!open && (bool)unlockedStateExist!)
             SpriteSystem.LayerSetRsiState((uid, args.Sprite), LockVisualLayers.Lock, locked ? comp.StateLocked : comp.StateUnlocked);
+        // RMC end
     }
 }
 

@@ -28,9 +28,37 @@ public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisual
             storage.Container.ContainedEntities.Count == holster.Contents.Count)
             used = 0;
 
+        // Lockable storage uses a custom presentation:
+        // locked storage rests closed but still shows open while actively viewed,
+        // while unlocked storage rests open when empty and closed when it contains items.
+        if (TryComp(uid, out RMCIdLockableStorageComponent? lockable))
+        {
+            if (component.StorageEmpty != null)
+                args.Sprite.LayerSetVisible(component.StorageEmpty, false);
+
+            if (!AppearanceSystem.TryGetData<bool>(uid, StorageVisuals.Open, out var lockableOpen, args.Component))
+                return;
+
+            if (lockable.Locked)
+            {
+                if (component.StorageOpen != null)
+                    args.Sprite.LayerSetVisible(component.StorageOpen, lockableOpen);
+                if (component.StorageClosed != null)
+                    args.Sprite.LayerSetVisible(component.StorageClosed, !lockableOpen);
+                return;
+            }
+
+            var emptyUnlocked = used == 0;
+            var showOpen = lockableOpen || emptyUnlocked;
+            if (component.StorageOpen != null)
+                args.Sprite.LayerSetVisible(component.StorageOpen, showOpen);
+            if (component.StorageClosed != null)
+                args.Sprite.LayerSetVisible(component.StorageClosed, !showOpen);
+            return;
+        }
+
         if (used == 0)
         {
-            // RMC start. Some storage items still need open/closed visuals while empty, so do not early-return to the empty-only state for those opt-in cases.
             if (!component.ShowOpenClosedWhenEmpty)
             {
                 if (component.StorageOpen != null)
@@ -44,7 +72,6 @@ public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisual
 
             if (component.StorageEmpty != null)
                 args.Sprite.LayerSetVisible(component.StorageEmpty, false);
-            // RMC end
         }
         else
         {
