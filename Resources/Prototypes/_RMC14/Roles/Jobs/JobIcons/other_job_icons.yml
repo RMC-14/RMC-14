@@ -82,27 +82,6 @@
     sprite: _RMC14/Interface/map_blips.rsi
     state: surv
 
-- type: jobIcon
-  parent: CMJobIconBase
-  id: RMCJobIconCorrespondent
-  icon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: correspondent
-
-- type: jobIcon
-  parent: CMJobIconBase
-  id: RMCJobIconXeno
-  icon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: xeno
-
-- type: jobIcon
-  parent: CMJobIconBase
-  id: RMCJobIconXenoQueen
-  icon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: xenoqueen
-
 # WEYA Job Icons
 - type: jobIcon
   parent: CMJobIconBase
