@@ -512,7 +512,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
             speech = overrideSpeech;
 
         var speechVerb = Loc.GetString(_random.Pick(speech.SpeechVerbStrings));
-        var line = UniversalRecorderFormatting.FormatTranscriptLine(currentDuration, nameEv.VoiceName, speechVerb, args.Message);
+        var line = FormatTranscriptLine(currentDuration, nameEv.VoiceName, speechVerb, args.Message);
 
         tapeRuntime.Entries.Add(new RecorderEntry(
             currentDuration,
@@ -954,7 +954,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
             return Loc.GetString("rmc-universal-recorder-readout-playing");
 
         return Loc.GetString("rmc-universal-recorder-readout-time",
-            ("duration", UniversalRecorderFormatting.FormatDuration(tapeRuntime.UsedCapacity)));
+            ("duration", FormatDuration(tapeRuntime.UsedCapacity)));
     }
 
     private string GetSideName(UniversalRecorderTapeSide side)
@@ -1014,5 +1014,22 @@ public sealed class UniversalRecorderSystem : EntitySystem
     private UniversalRecorderTapeRuntimeComponent GetTapeRuntime(EntityUid uid)
     {
         return EnsureComp<UniversalRecorderTapeRuntimeComponent>(uid);
+    }
+
+    private static string FormatTimestamp(TimeSpan timestamp)
+    {
+        var totalMinutes = (int) timestamp.TotalMinutes;
+        return $"[{totalMinutes:00}:{timestamp.Seconds:00}]";
+    }
+
+    private static string FormatTranscriptLine(TimeSpan timestamp, string speakerName, string speechVerb, string text)
+    {
+        return $"{FormatTimestamp(timestamp)} {speakerName} {speechVerb}, \"{text}\"";
+    }
+
+    private static string FormatDuration(TimeSpan duration)
+    {
+        var totalMinutes = (int) duration.TotalMinutes;
+        return $"{totalMinutes}m {duration.Seconds}s";
     }
 }
