@@ -44,8 +44,8 @@ public sealed partial class Alcoholic : RMCChemicalEffect
         // TODO RMC14 sleep, confused, slurring, dizziness
         if (IsHumanoid(args) && ProbHundred(potency.Float() * 4f))
         {
-            var vomitEvent = new RMCVomitEvent(args.TargetEntity);
-            args.EntityManager.EventBus.RaiseEvent(EventSource.Local, ref vomitEvent);
+            var rmcVomitSys = System<RMCVomitSystem>(args);
+            rmcVomitSys.StartVomit(args.TargetEntity);
         }
     }
 
@@ -63,8 +63,8 @@ public sealed partial class Alcoholic : RMCChemicalEffect
         // TODO RMC14 sleep, confused, slurring, dizziness
         if (IsHumanoid(args) && ProbHundred(potency.Float() * 4f))
         {
-            var vomitEvent = new RMCVomitEvent(args.TargetEntity);
-            args.EntityManager.EventBus.RaiseEvent(EventSource.Local, ref vomitEvent);
+            var rmcVomitSys = System<RMCVomitSystem>(args);
+            rmcVomitSys.StartVomit(args.TargetEntity);
         }
 
         // TODO RMC14 organ damage liver
