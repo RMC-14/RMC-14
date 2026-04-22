@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2971cd5512123b92f61cbb446dd878514f40ef27/icons/obj/items/clothing/hats/hats_by_map/urban.dmi, https://github.com/cmss13-devs/cmss13/blob/ea8e095a3d4d669175e2dd43a0d226b001f65b46/icons/mob/humans/onmob/clothing/head/hats_by_map/urban.dmi, Avali & Feroxi species specific on mob modified by Drazamuffin",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2971cd5512123b92f61cbb446dd878514f40ef27/icons/obj/items/clothing/hats/hats_by_map/urban.dmi, https://github.com/cmss13-devs/cmss13/blob/ea8e095a3d4d669175e2dd43a0d226b001f65b46/icons/mob/humans/onmob/clothing/head/hats_by_map/urban.dmi, Avali, Reptilian, vulpkanin & Feroxi species specific on mob modified by Drazamuffin",
   "size": {
     "x": 32,
     "y": 32
@@ -13,6 +13,14 @@
     },
     {
       "name": "equipped-HELMET-feroxi",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-reptilian",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-vulpkanin",
       "directions": 4
     },
     {
