@@ -2,7 +2,7 @@
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchFirstAid
   name: first-aid pouch
-  description: It contains, by default, autoinjectors. But it may also hold ointments, bandages, and pill packets.
+  description: It contains, by default, autoinjectors, but it may also hold ointments, bandages, and pill packets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/firstaid.rsi

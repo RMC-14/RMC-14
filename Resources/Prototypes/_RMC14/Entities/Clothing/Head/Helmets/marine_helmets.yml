@@ -58,7 +58,7 @@
   parent: ArmorHelmetM10
   id: RMCArmorHelmetM10SO
   name: M10 pattern officer helmet
-  description: A special variant of the M10 Pattern Helmet worn by Officers of the UNMC, attracting the attention of the grunts and sniper fire alike.
+  description: A special variant of the M10 Pattern Helmet worn by officers of the UNMC, attracting the attention of the grunts and sniper fire alike.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/jungle.rsi
@@ -85,7 +85,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Medic
   name: M10 medic helmet
-  description: A special variant of the M10 Pattern Helmet worn by the medic marines of the Marines. Comes with a built in medical display HUD.
+  description: A special variant of the M10 Pattern Helmet worn by the medics of the Marines. Comes with a built in medical display HUD.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
@@ -131,7 +131,7 @@
   parent: CMArmorHelmetM10Medic
   id: RMCArmorHelmetM10MedicWhite
   name: M10 white corpsman helmet
-  description: An M10 marine helmet version worn by marine hospital corpsmen. Painted in medical white and has white cross in a blue square painted on its front.
+  description: An M10 marine helmet version worn by marine hospital corpsmen. Painted in medical white and has a white cross in a blue square painted on its front.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic_white.rsi
@@ -172,7 +172,7 @@
   parent: ArmorHelmetM10
   id: RMCArmorHelmetM10Welding
   name: M10 welding helmet
-  description: A modified M10 marine helmet, Features a toggleable welding screen for eye protection. Completely invisible while toggled off as opposed to the technician helmet.
+  description: A modified M10 marine helmet. Features a toggleable welding screen for eye protection. Completely invisible while toggled off as opposed to the technician helmet.
   components:
   - type: CycleableVisor
     containers:
@@ -459,7 +459,7 @@
   parent: ArmorHelmetM10
   id: RMCArmorHelmetM3TDemo
   name: M3-T bombardier helmet
-  description: A custom-built helmet for explosive weaponry users. Comes with inbuilt ear blast protection, firing a rocket launcher without this is not recommended.
+  description: A custom-built helmet for explosive weaponry users. Comes with inbuilt ear blast protection. Firing a rocket launcher without this is not recommended.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi

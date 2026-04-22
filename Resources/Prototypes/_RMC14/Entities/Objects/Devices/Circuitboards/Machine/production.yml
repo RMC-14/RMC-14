@@ -18,7 +18,7 @@
   parent: CMBaseMachineCircuitboard
   id: CMAutolatheMachineCircuitboard
   name: autolathe machine board
-  description: A machine printed circuit board for an autolathe
+  description: A machine printed circuit board for an autolathe.
   components: # TODO RMC14 autolathe
     - type: MachineBoard
       prototype: RMCAutolatheEmpty
@@ -134,7 +134,7 @@
   parent: CMBaseMachineCircuitboard
   id: RMCArmylatheMachineCircuitboard
   name: armylathe machine board
-  description: A machine printed circuit board for an armylathe
+  description: A machine printed circuit board for an armylathe.
   components:
     - type: MachineBoard
       prototype: RMCArmylatheEmpty

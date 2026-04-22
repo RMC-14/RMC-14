@@ -567,7 +567,7 @@
   parent: RMCSatchelWelder
   id: RMCSatchelWelderChestrig
   name: technician welder chestrig
-  description: A specialized Chestrig worn by technicians and engineers. It carries one medium fuel tank for quick welder refueling and use.
+  description: A specialized chestrig worn by technicians and engineers. It carries one medium fuel tank for quick welder refueling and use.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/welder_chestrig.rsi
@@ -619,7 +619,7 @@
   parent: CMSatchel
   id: RMCBackpackRTO
   name: UNMC radio telephone pack
-  description: A heavy-duty pack, used for telecommunications between central command. Commonly carried by RTOs.
+  description: A heavy-duty pack, used for telecommunications with central command. Commonly carried by RTOs.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
@@ -671,7 +671,7 @@
   parent: CMSatchel
   id: RMCBackpackRTOPMCBroken
   name: broken We-Ya radio telephone pack
-  description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada and internal systems seem to be completely fried and broken.
+  description: A heavy-duty extended-pack, used for telecommunications with central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada and its internal systems seem to be completely fried and broken.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/rto.rsi
@@ -690,7 +690,7 @@
   parent: RMCBackpackRTO
   id: RMCBackpackRTOPMC
   name: We-Ya radio telephone pack
-  description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada.
+  description: A heavy-duty extended-pack, used for telecommunications with central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/rto.rsi
@@ -706,7 +706,7 @@
   parent: RMCBackpackRTO
   id: RMCBackpackRTOSPP
   name: SPP radio telephone pack
-  description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the Socialist Progressive People's insignia.
+  description: A heavy-duty extended-pack, used for telecommunications with central command. Commonly carried by RTOs. This one bears the Socialist Progressive People's insignia.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/SPP/rto.rsi
@@ -983,7 +983,7 @@
   parent: RMCSatchelLightpack
   id: RMCSatchelPMC
   name: PMC combat backpack
-  description: A Weston-Yamada field tested backpack, featuring multiple pouches and compartments for ease of access, preventing slowdown from operatives in the field.
+  description: A Weston-Yamada field tested backpack, featuring multiple pouches and compartments for ease of access, preventing slowdown to operatives in the field.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/standard.rsi
@@ -992,7 +992,7 @@
   parent: RMCSatchelLightpackWelder
   id: RMCSatchelWelderPMC
   name: PMC technician welderpack
-  description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada PMCs. Features a small fueltank for quick blowtorch refueling.
+  description: An ergonomic, protected, high capacity backpack, designed for Weston-Yamada PMCs. Features a small fueltank for quick blowtorch refueling.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/welder.rsi

@@ -559,7 +559,7 @@
   parent: RMCGunCaseBase
   id: RMCXM51Case
   name: XM51 breaching scattergun case
-  description: A gun case containing the XM51 Breaching Scattergun. Comes with two spare magazines, two spare shell boxes, an optional stock and a belt to holster the weapon.
+  description: A gun case containing the XM51 Breaching Scattergun. Comes with two spare magazines, two spare shell boxes, an optional stock, and a belt to holster the weapon.
   components:
   - type: Storage
     maxItemSize: Huge
@@ -745,7 +745,7 @@
   parent: RMCGunCaseBase
   id: RMCM85A1Case
   name: M85A1 grenade launcher case
-  description: A gun case containing the M85A1 grenade launcher. Comes with three different grenade packets
+  description: A gun case containing the M85A1 grenade launcher. Comes with three different grenade packets.
   components:
   - type: Storage
     maxItemSize: Ginormous
@@ -767,7 +767,7 @@
   parent: RMCGunCaseBase
   id: RMCML66DCase
   name: ML66D heavy machine gun case
-  description: A gun case containing the ML66D heavy machine gun. Comes with 2 magazines
+  description: A gun case containing the ML66D heavy machine gun. Comes with 2 magazines.
   components:
   - type: Storage
     maxItemSize: Ginormous
@@ -797,7 +797,7 @@
   parent: RMCGunCaseBase
   id: RMCM2CCase
   name: M2C heavy machine gun case
-  description: A gun case containing the M2C heavy machine gun. Comes with 4 magazines
+  description: A gun case containing the M2C heavy machine gun. Comes with 4 magazines.
   components:
   - type: Storage
     maxItemSize: Ginormous

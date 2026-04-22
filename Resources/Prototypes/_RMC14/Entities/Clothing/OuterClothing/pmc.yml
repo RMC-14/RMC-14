@@ -3,7 +3,7 @@
   parent: [RMCBaseMarineArmor, RMCAllowSuitStorageClothingArmorPMC]
   id: RMCArmorM4PMCNoLight
   name: M4 pattern PMC armor
-  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind.
+  description: A modification of the standard M3 armor. Designed with high-profile security operators and corporate mercenaries in mind.
   suffix: No Suitlamp
   components:
   - type: RMCArmorSpeedTier
@@ -42,7 +42,7 @@
   parent: CMArmorM4PMC
   id: CMArmorM4PMCLight
   name: M4 pattern light PMC armor
-  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. Has some armor plating removed for extra mobility.
+  description: A modification of the standard M3 armor. Designed with high-profile security operators and corporate mercenaries in mind. Has some armor plating removed for extra mobility.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
@@ -59,7 +59,7 @@
   parent: CMArmorM4PMCLight
   id: RMCArmorM4PMCBulletProof
   name: M4 pattern PMC bulletproof armor
-  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This set is designed for protecting against ballistics, and has minimal protection against blades and biohazards.
+  description: A modification of the standard M3 armor. Designed with high-profile security operators and corporate mercenaries in mind. This set is designed for protecting against ballistics, and has minimal protection against blades and biohazards.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/bulletproof.rsi
@@ -102,7 +102,7 @@
   parent: CMArmorM4PMC
   id: CMArmorM4PMCLeader
   name: M4 pattern PMC leader armor
-  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
+  description: A modification of the standard M3 armor. Designed with high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/officer.rsi
@@ -111,7 +111,7 @@
   parent: RMCArmorM4PMCNoLight
   id: CMArmorM4PMCSniper
   name: M4 pattern PMC sniper armor
-  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
+  description: A modification of the standard M3 armor. Designed with high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
@@ -155,13 +155,13 @@
   parent: RMCArmorM4PMCNoLight
   id: CMArmorM4PMHeavy
   name: PMC heavy armor
-  description: A modification of the standard M3 armor. Featuring additional plating and straps to provide superior protection.
+  description: A modification of the standard M3 armor, featuring additional plating and straps to provide superior protection.
 
 - type: entity
   parent: CMArmorM4PMHeavy
   id: CMArmorM4PMCSmartGunHarness
   name: PMC gun operator armor
-  description: A modification of the standard M3 armor. Hooked up with harnesses and straps allowing the user to carry a ML66A Smart Gun.
+  description: A modification of the standard M3 armor, hooked up with harnesses and straps that allow the user to carry an ML66A Smart Gun.
   components:
   - type: RMCArmorSpeedTier
     speedTier: light
@@ -178,7 +178,7 @@
   parent: CMArmorM4PMCSmartGunHarness
   id: CMArmorM4PMCSmartGunHarnessCommando
   name: M5Xg exoskeleton gun operator armor
-  description: A complex system of overlapping plates intended to render the wearer all but impervious to small arms fire. A passive exoskeleton supports the weight of the armor, allowing a human to carry its massive bulk. This variant is designed to support ML66A Smart Gun.
+  description: A complex system of overlapping plates intended to render the wearer all but impervious to small arms fire. A passive exoskeleton supports the weight of the armor, allowing a human to carry its massive bulk. This variant is designed to support an ML66A Smart Gun.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
@@ -204,7 +204,7 @@
   parent: CMArmorM4PMC
   id: CMArmorM4PMCCommandoSurvivor
   name: damaged MY7 pattern Commando armor
-  description: A modification of the W-Y PMC armor patterns. Designed for elite corporate mercenaries in mind. This one has a lot of scratches and acid damage.
+  description: A modification of We-Ya PMC armor patterns. Designed with elite corporate mercenaries in mind. This one has a lot of scratches and acid damage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi

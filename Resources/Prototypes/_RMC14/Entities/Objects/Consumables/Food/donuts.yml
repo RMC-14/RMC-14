@@ -2,7 +2,7 @@
   parent: [ RMCBoxCardboard, BaseBagOpenClose ]
   id: RMCBoxDonutEmpty
   name: Yum! donuts
-  description: A box of mouth-watering "Yum!" brand donuts
+  description: A box of mouth-watering "Yum!" brand donuts.
   suffix: Empty
   components:
   - type: Sprite #TODO RMC14 - the different donuts have diff storage sprites that should show up based on varieties

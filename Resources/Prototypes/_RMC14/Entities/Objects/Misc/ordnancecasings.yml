@@ -3,7 +3,7 @@
   parent: BaseItem
   id: RMCCasingBase
   name: base casing
-  description:  An empty casing.
+  description: An empty casing.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/CustomOrdnance/m40grenadecasing.rsi

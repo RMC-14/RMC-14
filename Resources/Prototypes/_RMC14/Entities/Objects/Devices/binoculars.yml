@@ -91,7 +91,7 @@
   parent: RMCBinoculars
   id: RMCRangefinder
   name: rangefinder
-  description: "A pair of binoculars with a rangefinding function. Click a tile to acquire it's coordinates."
+  description: "A pair of binoculars with a rangefinding function. Click a tile to acquire its coordinates."
   components:
   - type: Item
     heldPrefix: rangefinder

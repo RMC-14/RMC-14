@@ -2,7 +2,7 @@
   name: human target
   id: RMCTargetHuman
   parent: BaseStructureDynamic
-  description: A shooting target. This one is a Human.
+  description: A shooting target. This one is a human.
   suffix: RMC
   components:
   - type: Sprite

@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponGun, BaseItem]
   id: RMCSmartGunMounted
   name: ML66D heavy machine gun
-  description: The top half of a ML66D heavy machine gun post. However it ain't much use without the tripod.
+  description: The top half of a ML66D heavy machine gun post. However, it ain't much use without the tripod.
   components:
   - type: Item
     size: Huge
@@ -172,7 +172,7 @@
   parent: CMMagazineRifleBase
   id: RMCMagazineML66D
   name: ML66D drum magazine (10x28mm)
-  description: A box of 700, 10x28mm caseless tungsten rounds for the ML66D heavy machine gun system.
+  description: A box of 700 10x28mm caseless tungsten rounds for the ML66D heavy machine gun system.
   components:
   - type: Tag
     tags:

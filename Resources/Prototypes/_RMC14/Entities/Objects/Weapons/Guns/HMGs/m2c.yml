@@ -3,7 +3,7 @@
   id: RMCMachineGunM2C
   categories: [ HideSpawnMenu ]
   name: M2C heavy machine gun
-  description: The top half of a M2C heavy machine gun post. However it ain't much use without a tripod.
+  description: The top half of a M2C heavy machine gun post. However, it ain't much use without a tripod.
   components:
   - type: Item
     size: Huge
@@ -111,7 +111,7 @@
   parent: CMMagazineRifleBase
   id: RMCMagazineM2C
   name: M2C Ammunition Box (10x28mm tungsten rounds)
-  description: A box of 125, 10x28mm caseless tungsten rounds for the M2C heavy machine gun system.
+  description: A box of 125 10x28mm caseless tungsten rounds for the M2C heavy machine gun system.
   components:
   - type: Tag
     tags:

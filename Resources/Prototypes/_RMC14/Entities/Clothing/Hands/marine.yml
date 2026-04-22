@@ -26,7 +26,7 @@
   parent: CMHandsBlackMarine
   id: RMCHandsLatexMarine # TODO RMC14 armor
   name: marine medical combat gloves
-  description: Standard issue marine sterile gloves, offers regular protection whilst offering the user a better grip when performing medical work.
+  description: Standard issue marine sterile gloves. Offers regular protection whilst offering the user a better grip when performing medical work.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/latex.rsi
@@ -43,7 +43,7 @@
   parent: CMHandsBlackMarine
   id: RMCHandsDeluxeMarine
   name: deluxe combat gloves
-  description: Combat gloves finished in an almost golden-looking fabric. Insulated, fashionable, and capable of protecting the soft hands it's likely wrapped around.
+  description: Combat gloves finished in an almost golden-looking fabric. Insulated, fashionable, and capable of protecting the soft hands they're likely wrapped around.
   components:
   - type: Insulated
   - type: Sprite

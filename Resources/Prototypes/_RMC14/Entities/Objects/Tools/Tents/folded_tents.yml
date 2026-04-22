@@ -2,7 +2,7 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCStandardFolded
-  name: folded UNMC Field Tent
+  name: folded UNMC field tent
   description: A standard UNMC Field Tent. This one is just a general purpose version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
@@ -32,7 +32,7 @@
 - type: entity
   parent: RMCTentUNMCStandardFolded
   id: RMCTentUNMCBigFolded
-  name: folded UNMC Big Tent
+  name: folded UNMC big tent
   description: A standard UNMC Field Tent. This one is just a general purpose, large version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
   components:
     - type: RMCDeployable
@@ -55,7 +55,7 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCStandardCommandFolded
-  name: folded UNMC Command Tent
+  name: folded UNMC command tent
   description: A standard UNMC Command Tent. This one comes equipped with a self-powered Overwatch Console and a Telephone. Unfold in a suitable location to maximize usefulness. Staff Officer not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
@@ -122,7 +122,7 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCStandardMedicalFolded # TODO RMC14: Bonus to speed up operations and reduce pain
-  name: folded UNMC Medical Tent
+  name: folded UNMC medical tent
   description: A standard UNMC Medical Tent. This one comes equipped with advanced field surgery facilities. Unfold in a suitable location to maximize health gains. Surgical Tray not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
@@ -157,7 +157,7 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCExtendedFolded
-  name: folded UNMC Extended Field Tent
+  name: folded UNMC extended field tent
   description: A standard UNMC Tent. This one is just an extended general purpose version. Unfold in a suitable location for mega FOB vibes. Mess Tech not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
@@ -187,7 +187,7 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCExtendedReqFolded
-  name: folded UNMC Requisitions Tent
+  name: folded UNMC requisitions tent
   description: A standard UNMC Requisitions Tent. Now, you can enjoy req line anywhere you go! Unfold in a suitable location to maximize resource distribution. ASRS not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
@@ -230,7 +230,7 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCExtendedMessFolded
-  name: folded UNMC Mess Tent
+  name: folded UNMC mess tent
   description: A standard UNMC Mess Tent. This one comes equipped with a kitchen and dining utilities. Unfold in a suitable location to maximize meal handouts. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
@@ -285,7 +285,7 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCExtendedMPFolded
-  name: folded UNMC Military Police Tent
+  name: folded UNMC military police tent
   description: A standard UNMC Military Police Tent. This one comes equipped with a single detention cell and detainee handling equipment. Unfold in a suitable location to maximize order enforcement. ENTRANCE TO THE SOUTH.
   components:
     - type: Item

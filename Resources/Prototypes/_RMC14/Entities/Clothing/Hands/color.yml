@@ -88,7 +88,7 @@
   parent: CMHandsWhite
   id: RMCHandsPurple
   name: purple gloves
-  description: A pair of gloves, they don't look special in any way.
+  description: A pair of gloves. They don't look special in any way.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/purple.rsi

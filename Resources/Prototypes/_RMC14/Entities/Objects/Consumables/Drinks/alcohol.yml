@@ -165,7 +165,7 @@
   parent: RMCDrinkAlcoholBase
   id: RMCDrinkAlcoholKahlua
   name: robert robust's coffee liqueur
-  description: A widely known, Mexican coffee-flavoured liqueur. In production since 1936, HONK
+  description: A widely known, Mexican coffee-flavoured liqueur. In production since 1936, HONK.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/kahlua.rsi

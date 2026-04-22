@@ -219,7 +219,7 @@
   abstract: true
   id: LandingZoneLightBase
   name: landing light
-  description: A landing light, if it's flashing stay clear!
+  description: A landing light. If it's flashing, stay clear!
   placement:
     mode: SnapgridCenter
   components:

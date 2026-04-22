@@ -61,7 +61,7 @@
   parent: CMBeltSecurityMP
   id: CMBeltSecurityMarshal
   name: marshal duty belt
-  description: The black duty belt used to carry the instruments of a Marshals. It is a heavy police belt with several pouches to contain various law enforcement items.
+  description: The black duty belt used to carry the instruments of a Marshal. It is a heavy police belt with several pouches to contain various law enforcement items.
   components:
   - type: Storage
     maxItemSize: Normal

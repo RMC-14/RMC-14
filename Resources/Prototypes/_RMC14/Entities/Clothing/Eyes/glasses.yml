@@ -136,7 +136,7 @@
   parent: ClothingEyesBase
   id: RMCGlassesExperimentalMeson
   name: experimental meson goggles # TODO RMC14 meson tile vision see description below
-  description: An improved but experimental version of the standard issue meson goggles, due to increased complexity these can only be worn by synthetics. Allows for full night vision. # TODO RMC14 and viewing of the surroundings. Click it to toggle.
+  description: An improved but experimental version of the standard issue meson goggles. Due to increased complexity, these can only be worn by synthetics. Allows for full night vision. # TODO RMC14 and viewing of the surroundings. Click it to toggle.
   components:
   - type: Item
     storedRotation: 0
@@ -714,7 +714,7 @@
   id: RMCEyepatch
   suffix: RMC
   name: eyepatch
-  description: Once worn by swashbucklers of old, now more commonly associated with a figure of legend. They say he was big AND a boss. Impressive no? Don't let the MPs see you wearing this non-regulation attire.
+  description: Once worn by swashbucklers of old, now more commonly associated with a figure of legend. They say he was big AND a boss. Impressive, no? Don't let the MPs see you wearing this non-regulation attire.
   components:
   - type: Item
     storedRotation: 0
@@ -852,7 +852,7 @@
   parent: ClothingEyesBase
   id: RMCHipsterGlasses
   name: prescription glasses
-  description: Boring glasses, makes you look smart and potentially reputable.
+  description: Boring glasses. Makes you look smart and potentially reputable.
   components:
   - type: Item
     storedRotation: 0
@@ -951,7 +951,7 @@
   parent: ClothingEyesBase
   id: RMCWeldingGoggles
   name: welding goggles # TODO RMC14 impairs vision when on
-  description: Protects the eyes from welders, approved by the mad scientist association.
+  description: Protects the eyes from welders. Approved by the mad scientist association.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
@@ -992,7 +992,7 @@
   parent: RMCWeldingGoggles
   id: RMCWeldingGogglesSuperior # TODO RMC14 less vision impairment then regular goggles
   name: superior welding goggles
-  description: Welding goggles made from more expensive materials, strangely smells like potatoes.
+  description: Welding goggles made from more expensive materials. Strangely smells like potatoes.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles_superior.rsi
@@ -1003,7 +1003,7 @@
   parent: ClothingEyesBase
   id: RMCGogglesKutjevo
   name: kutjevo goggles
-  description: Goggles used to shield the eyes of workers on Kutjevo. N95Z Rated Goggles.
+  description: N95Z rated goggles used to shield the eyes of workers on Kutjevo.
   components:
   - type: Item
     storedRotation: 0

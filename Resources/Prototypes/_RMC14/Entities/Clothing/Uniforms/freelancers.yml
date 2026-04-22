@@ -2,7 +2,7 @@
   parent: RMCMarineUniformBase
   id: RMCJumpsuitFreelancer
   name: freelancer fatigues
-  description: A set of loose-fitting fatigues, perfect for an informal mercenary. Smells like gunpowder, apple pie, and covered in grease and sake stains.
+  description: A set of loose-fitting fatigues, perfect for an informal mercenary. Smells like gunpowder and apple pie, covered in grease and sake stains.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi

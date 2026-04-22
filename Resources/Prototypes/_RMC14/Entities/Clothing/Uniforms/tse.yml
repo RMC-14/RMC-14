@@ -3,7 +3,7 @@
 - type: entity
   parent: RMCArmoredUniformBase
   id: RMCJumpsuitTSEPA
-  name: tsepa uniform
+  name: TSEPA uniform
   description: The standard uniform of a TSEPA officer.
   components:
   - type: Sprite
@@ -117,7 +117,7 @@
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
   id: RMCJumpsuitMarinePara
   name: paramarine battle dress uniform
-  description: No.8 Pattern BDU used by the RCM's Paramarine regiments. Identical in cut and protection to standard issue uniforms, but issued in woodland camouflage. Lightweight Kevlar mesh offers limited protection against shrapnel and close-quarters threats.
+  description: A No.8 Pattern BDU used by the RCM's Paramarine regiments. Identical in cut and protection to standard issue uniforms, but issued in woodland camouflage. Lightweight Kevlar mesh offers limited protection against shrapnel and close-quarters threats.
   suffix: Survivor, Paramarine
   components:
   - type: Sprite

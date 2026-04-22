@@ -161,8 +161,8 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitSPPMariner
-  name: SPP Mariner Fatigues
-  description: A set of SPP fatigues specifcially designed for Marines and Mariners.
+  name: SPP mariner fatigues
+  description: A set of SPP fatigues specifically designed for Marines and Mariners.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/mariner.rsi
@@ -178,7 +178,7 @@
 - type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitSPPOfficerShirt
-  name: SPP Officer's Shirt
+  name: SPP officer's shirt
   description: A well-tailored off-white shirt and pants, designed for officers who don't use fatigues.
   components:
   - type: Sprite
@@ -192,7 +192,7 @@
   parent: RMCUniformBase
   id: CMJumpsuitSPPCiv1
   name: SPP civilian-style orange overalls
-  description: A set of civilian-style orange overalls with a dark tan undershirt. The material is of a poor quality, however it's better than nothing. Clothing of this style is typically given out to those who work laborious jobs.
+  description: A set of civilian-style orange overalls with a dark tan undershirt. The material is of a poor quality. However, it's better than nothing. Clothing of this style is typically given out to those who work laborious jobs.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/civ1.rsi
@@ -201,7 +201,7 @@
   parent: CMJumpsuitSPPCiv1
   id: CMJumpsuitSPPCiv2
   name: SPP civilian-style tan overalls
-  description: A set of civilian-style tan overalls with a blue undershirt. The material is of a poor quality, however it's better than nothing. Clothing of this style is typically given to those who work laborious jobs.
+  description: A set of civilian-style tan overalls with a blue undershirt. The material is of a poor quality. However, it's better than nothing. Clothing of this style is typically given to those who work laborious jobs.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/civ2.rsi

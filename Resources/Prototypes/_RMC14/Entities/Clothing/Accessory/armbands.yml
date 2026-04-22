@@ -115,7 +115,7 @@
   parent: RMCArmbandBase
   id: RMCMPArmband
   name: MP armband
-  description: An armband worn by UNMC Military Police officers on military installations. It is usually also worn by those from the provost office.
+  description: An armband worn by UNMC Military Police officers on military installations. It is usually also worn by those from the Provost Marshal Office.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Armbands/mp_armband.rsi
@@ -128,7 +128,7 @@
 - type: entity
   parent: RMCMPArmband
   id: RMCSecurityArmband
-  name: Officer armband
+  name: officer armband
   description: An armband worn by Colony law enforcement officers.
 
 # Nurse

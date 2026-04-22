@@ -89,7 +89,7 @@
   parent: RMCCoatBureauDeputy
   id: RMCCoatJacketGeneral
   name: general's jacket
-  description: A black trench coat with gold metallic trim. Flashy, highly protective, and over-the-top. Fit for a king - or, in this case, a General. Has quite a few pockets.
+  description: A black trench coat with gold metallic trim. Flashy, highly protective, and over-the-top. Fit for a king - or, in this case, a general. Has quite a few pockets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/jacket_general.rsi
@@ -132,7 +132,7 @@
   parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
   id: RMCCoatTSEPA
   name: TSEPA police jacket
-  description: A black polyester jacket with a silver Sakura emblem of the TSEPA pinned to it. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  description: A black polyester jacket with the silver Sakura emblem of the TSEPA pinned to it. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/jacket.rsi
@@ -194,8 +194,8 @@
 - type: entity
   parent: RMCBaseJacket
   id: RMCCoatWeYaPilot
-  name: Weston-Yamada Pilot formal-jacket
-  description: A suit-style jacket with a fur lined collar and golden epaulettes signifying rank. Worn by Weston-Yamada qualified civilian Pilots, akin to old Earth formal Pilots-wear.
+  name: Weston-Yamada pilot formal-jacket
+  description: A suit-style jacket with a fur lined collar and golden epaulettes signifying rank. Worn by Weston-Yamada qualified civilian pilots, akin to old Earth formal pilots-wear.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/weya_pilot.rsi

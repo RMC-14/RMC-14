@@ -248,7 +248,7 @@
   parent: CMBaseMask
   id: RMCMaskBalaclava
   name: balaclava
-  description: A basic single eye-hole balaclava, available in almost every sporting goods, outdoor supply, or military surplus store in existence, protects your face from the cold almost as well as it conceals it. This one is in a standard black color.
+  description: A basic single eye-hole balaclava, available in almost every sporting goods, outdoor supply, or military surplus store in existence. Protects your face from the cold almost as well as it conceals it. This one is in a standard black color.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/balaclava.rsi
@@ -269,7 +269,7 @@
   parent: RMCMaskBalaclava
   id: RMCMaskBalaclavaGreen
   name: green balaclava
-  description: A basic single eye-hole balaclava, available in almost every sporting goods, outdoor supply, or military surplus store in existence, protects your face from the cold almost as well as it conceals it. This one is in a non-standard green color.
+  description: A basic single eye-hole balaclava, available in almost every sporting goods, outdoor supply, or military surplus store in existence. Protects your face from the cold almost as well as it conceals it. This one is in a non-standard green color.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/swatclava.rsi
@@ -333,7 +333,7 @@
   parent: [CMBaseMask, RMCHelmetGarbToggleableBase]
   id: RMCVisorSWAT
   name: TC2 CMB riot shield
-  description: Yellowish protective glass piece, can be lifted up when needed, makes you see everything in yellow.
+  description: A yellowish protective glass piece. Can be lifted up when needed and makes you see everything in yellow.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi

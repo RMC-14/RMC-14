@@ -69,7 +69,7 @@
   parent: RMCUniformBase
   id: RMCJumpsuitWaiter
   name: waiter's outfit
-  description: It's a very smart uniform with a special pocket for tip.
+  description: It's a very smart uniform with a special pocket for tips.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/waiter.rsi

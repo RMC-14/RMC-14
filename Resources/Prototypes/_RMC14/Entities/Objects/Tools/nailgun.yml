@@ -79,7 +79,7 @@
   parent: RMCNailgunCompact
   name: tactical compact nailgun
   id: RMCNailgunTactical
-  description: A carpentry tool, used to drive nails into tough surfaces. This one is military grade, it's olive drab and tacticool. Cannot fire nails as a projectile.
+  description: A carpentry tool, used to drive nails into tough surfaces. This one is military grade, so it's olive drab and tacticool. Cannot fire nails as a projectile.
   suffix: Filled
   components:
   - type: Sprite

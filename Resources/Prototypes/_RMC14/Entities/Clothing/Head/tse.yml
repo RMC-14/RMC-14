@@ -1,8 +1,8 @@
 - type: entity
   parent: CMHeadCapMP
   id: RMCHeadCapTSEPA
-  name: tsepa cap
-  description: A cap for TSEPA constables. Wots all this then?
+  name: TSEPA cap
+  description: A cap for TSEPA constables. Wot's all this then?
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap.rsi
@@ -12,7 +12,7 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadBeretTSE
-  name: tse beret
+  name: TSE beret
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/TSE/tse_beret.rsi
@@ -22,7 +22,7 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadBeretTSEPA
-  name: tsepa beret
+  name: TSEPA beret
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_beret.rsi
@@ -32,7 +32,7 @@
 - type: entity
   parent: RMCHeadCapTSEPA
   id: RMCHeadCapTSEPAPeaked
-  name: peaked tsepa cap
+  name: peaked TSEPA cap
   description: A dark peaked cap enscribed with the powerful silver & red Sakura flower shaped emblem of the TSEPA. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
   suffix: Silver and Red
   components:

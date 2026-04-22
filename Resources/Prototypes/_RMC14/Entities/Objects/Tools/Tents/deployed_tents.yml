@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseStructure
   id: RMCTentBase
-  name: UNMC Field Tent
+  name: UNMC field tent
   description: A standard UNMC Tent. This one is just a general purpose version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
   placement:
     mode: SnapgridCenter
@@ -109,7 +109,7 @@
 - type: entity
   parent: RMCTentBase
   id: RMCTentUNMCBig
-  name: UNMC Big Tent
+  name: UNMC big tent
   description: A standard UNMC Field Tent. This one is just a general purpose, large version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
   components:
   - type: Sprite
@@ -168,7 +168,7 @@
 - type: entity
   parent: RMCTentBase
   id: RMCTentUNMCStandardCommand
-  name: UNMC Command Tent
+  name: UNMC command tent
   description: A standard UNMC Command Tent. This one comes equipped with a self-powered Overwatch Console and a Telephone. Unfold in a suitable location to maximize usefulness. Staff Officer not included. ENTRANCE TO THE SOUTH.
   components:
   - type: Sprite
@@ -183,7 +183,7 @@
 - type: entity
   parent: RMCTentBase
   id: RMCTentUNMCStandardMedical
-  name: UNMC Medical Tent
+  name: UNMC medical tent
   description: A standard UNMC Medical Tent. This one comes equipped with advanced field surgery facilities. Unfold in a suitable location to maximize health gains. Surgical Tray not included. ENTRANCE TO THE SOUTH.
   components:
   - type: Sprite
@@ -206,7 +206,7 @@
 - type: entity
   parent: RMCTentBase
   id: RMCTentUNMCExtended
-  name: UNMC Extended Field Tent
+  name: UNMC extended field Tent
   description: A standard UNMC Tent. This one is just an extended general purpose version. Unfold in a suitable location for mega FOB vibes. Mess Tech not included. ENTRANCE TO THE SOUTH.
   components:
   - type: Sprite
@@ -303,8 +303,8 @@
 - type: entity
   parent: RMCTentUNMCExtended
   id: RMCTentUNMCExtendedReq
-  name: UNMC Requisitions Tent
-  description: A standard UNMC Requisitions Tent. Now, you can enjoy req line anywhere you go! Unfold in a suitable location to maximize resource distribution. ASRS not included. ENTRANCE TO THE SOUTH.
+  name: UNMC requisitions tent
+  description: A standard UNMC Requisitions Tent. Now, you can enjoy the req line anywhere you go! Unfold in a suitable location to maximize resource distribution. ASRS not included. ENTRANCE TO THE SOUTH.
   components:
   - type: Sprite
     layers:
@@ -332,7 +332,7 @@
 - type: entity
   parent: RMCTentUNMCExtended
   id: RMCTentUNMCExtendedMess
-  name: UNMC Mess Tent
+  name: UNMC mess tent
   description: A standard UNMC Mess Tent. This one comes equipped with a kitchen and dining utilities. Unfold in a suitable location to maximize meal handouts. ENTRANCE TO THE SOUTH.
   components:
   - type: Sprite
@@ -361,7 +361,7 @@
 - type: entity
   parent: RMCTentUNMCExtended
   id: RMCTentUNMCExtendedMP
-  name: UNMC Military Police Tent
+  name: UNMC military police tent
   description: A standard UNMC Military Police Tent. This one comes equipped with a single detention cell and detainee handling equipment. Unfold in a suitable location to maximize order enforcement. ENTRANCE TO THE SOUTH.
   components:
   - type: Sprite

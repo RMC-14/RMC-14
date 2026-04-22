@@ -2,7 +2,7 @@
   parent: RMCArmorSPP
   id: CMArmorFreelancer
   name: freelancer cuirass
-  description: An armored protective chestplate scrapped together from various plates. It keeps up remarkably well, as the craftsmanship is solid, and the design mirrors such armors in the SPP and the UNMC. The many skilled craftsmen in the freelancers ranks produce these vests at a rate about one a month.
+  description: An armored protective chestplate scrapped together from various plates. It keeps up remarkably well, as the craftsmanship is solid, and the design mirrors such armors in the SPP and the UNMC. The many skilled craftsmen in the freelancers' ranks produce these vests at a rate about one a month.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/freelancer.rsi
@@ -28,7 +28,7 @@
   parent: RMCArmorVestXLBase
   id: RMCArmorFreelancerVestBlack
   name: black plate carrier vest
-  description: A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to both governments, mercenaries and civilians alike. As the name implies, it carries a series of armoured plates for protection, and has two pouches on the front.
+  description: A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to governments, mercenaries, and civilians alike. As the name implies, it carries a series of armoured plates for protection, and has two pouches on the front.
   suffix: No lamp
   components:
   - type: Sprite
@@ -55,7 +55,7 @@
   parent: RMCArmorFreelancerVestBlack
   id: RMCArmorFreelancerVestBlackLamp
   suffix: Lamp
-  description: A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to both governments, mercenaries and civilians alike. As the name implies, it carries a series of armoured plates for protection, two pouches on the front. This one has had a lamp attached to the back.
+  description: A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to governments, mercenaries, and civilians alike. As the name implies, it carries a series of armoured plates for protection, and has two pouches on the front. This one has had a lamp attached to the back.
   components:
   - type: ToggleableVisuals
     spriteLayer: light
@@ -134,7 +134,7 @@
   parent: RMCArmorFreelancerVestBlack
   id: RMCArmorFreelancerVestBeige
   name: beige plate carrier vest
-  description: A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to both governments, mercenaries and civilians alike. As the name implies, it carries a series of armoured plates for protection, and has two pouches on the front.
+  description: A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to governments, mercenaries, and civilians alike. As the name implies, it carries a series of armoured plates for protection, and has two pouches on the front.
   suffix: No lamp
   components:
   - type: Sprite

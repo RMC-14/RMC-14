@@ -2,7 +2,7 @@
   parent: RMCArmorVest
   id: RMCArmorVestTSEPA
   name: TSEPA armored vest
-  description: An TSEPA armored vest that protects against some damage.
+  description: A TSEPA armored vest that protects against some damage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/tsepa_police_vest.rsi

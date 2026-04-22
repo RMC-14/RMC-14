@@ -32,7 +32,7 @@
   parent: RMCMarineUniformBase
   id: CMScrubsBlue
   name: blue medical scrubs
-  description: They're made of a special fiber that provides minor protection against biohazards. These are in blue.
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in blue.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/blue.rsi

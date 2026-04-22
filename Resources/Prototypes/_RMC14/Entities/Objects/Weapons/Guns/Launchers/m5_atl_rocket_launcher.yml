@@ -97,7 +97,7 @@
   id: RMCRocket84mm
   name: 84mm high-explosive rocket
   parent: BaseItem
-  description: A rocket tube compatible with the M5-ATL loaded with a HE warhead. Deals high damage to soft targets on direct hit and splashes other targets in a 5-meter-wide area. Has decreased effect on heavily armored targets.
+  description: A rocket tube compatible with the M5-ATL loaded with an HE warhead. Deals high damage to soft targets on direct hit and splashes other targets in a 5-meter-wide area. Has decreased effect on heavily armored targets.
   components:
   - type: Tag
     tags:
@@ -247,7 +247,7 @@
   parent: RMCRocket84mm
   id: RMCRocket84mmWhitePhosphorus
   name: 84mm white phosphorus rocket
-  description: A rocket tube loaded with a white phosphorus incendiary warhead. Has two damaging factors. On hit disperses X-Variant Napthal (blue flames) in a 4-meter radius circle, ignoring cover, while simultaneously bursting into highly heated shrapnel that ignites targets within slightly bigger area.
+  description: A rocket tube loaded with a white phosphorus incendiary warhead. Has two damaging factors. On hit, it disperses X-Variant Napthal (blue flames) in a 4-meter radius circle, ignoring cover, while simultaneously bursting into highly heated shrapnel that ignites targets within a slightly bigger area.
   components:
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mmWhitePhosphorus

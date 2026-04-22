@@ -10,7 +10,7 @@
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: JumpsuitMarine
   name: UNMC uniform
-  description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue Marine uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard/jungle.rsi
@@ -42,7 +42,7 @@
   parent: JumpsuitMarine
   id: CMJumpsuitMarineEngineer
   name: UNMC ComTech uniform
-  description: Standard-issue Marine combat technician fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue Marine combat technician fatigues. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/jungle.rsi
@@ -64,7 +64,7 @@
   parent: JumpsuitMarine
   id: CMJumpsuitMarineMedic
   name: UNMC corpsman uniform
-  description: Standard-issue Marine hospital corpsman fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue Marine hospital corpsman fatigues. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic/jungle.rsi
@@ -86,7 +86,7 @@
   parent: JumpsuitMarine
   id: CMJumpsuitMarineRTO
   name: UNMC radio telephone operator uniform
-  description: Standard-issue RTO fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue RTO fatigues. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto/jungle.rsi
@@ -124,7 +124,7 @@
   parent: RMCMarineUniformBase
   id: RMCCBRNSuit
   name: M3 MOPP Suit
-  description: M3 MOPP suits are specially designed and engineered to protect the wearer from unshielded exposure to any Chemical, Biological, Radiological, or Nuclear (CBRN) threats in the field. The suit has a recommended lifespan of twenty-four hours once contact with a toxic environment is made, but depending on the severity this can be shortened to eight hours or less.
+  description: M3 MOPP suits are specially designed and engineered to protect the wearer from unshielded exposure to any Chemical, Biological, Radiological, or Nuclear (CBRN) threats in the field. The suit has a recommended lifespan of twenty-four hours once contact with a toxic environment is made, but depending on the severity, this can be shortened to eight hours or less.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/cbrnsuit.rsi
@@ -332,7 +332,7 @@
   parent: CMJumpsuitCO
   id: RMCJumpsuitCOUniformGray
   name: Commanding Officer's gray formal uniform
-  description: A well-ironed UNMC officer uniform  intended for parades or hot weather. Wear this with pride.
+  description: A well-ironed UNMC officer uniform intended for parades or hot weather. Wear this with pride.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/grey_jumpsuit.rsi
@@ -345,7 +345,7 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitXOFormal
   name: marine formal service uniform
-  description: A formal service uniform typically worn by marines of the UNMC. Still practicable while still being more formal than the standard service uniform.
+  description: A formal service uniform typically worn by marines of the UNMC. Still practical while still being more formal than the standard service uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/formal_service.rsi
@@ -472,7 +472,7 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitPilot
   name: pilot bodysuit
-  description: A bodysuit worn by pilots of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: A bodysuit worn by pilots of the marines, meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi
@@ -494,7 +494,7 @@
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitDCC
   name: dropship crew chief bodysuit
-  description: A bodysuit worn by dropship crew chiefs of the UNMC, and is meant for survival in inhospitable conditions. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: A bodysuit worn by dropship crew chiefs of the UNMC, meant for survival in inhospitable conditions. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/crewchief.rsi
@@ -544,7 +544,7 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitSurvivorMarine
   name: UNMC uniform
-  description: Torn, Burned and blood stained. This uniform has seen much more than you could possibly imagine.
+  description: Torn, burned and blood stained. This uniform has seen much more than you could possibly imagine.
   suffix: FORECON, Survivor
   components:
   - type: Sprite
@@ -582,7 +582,7 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitSyntheticPristine
   name: UNMC pristine support uniform
-  description: A simple uniform made for synthetic crew members, this one is in Weston-Yamada's signature black and orange color scheme.
+  description: A simple uniform made for synthetic crew members. This one is in Weston-Yamada's signature black and orange color scheme.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Synthetic/pristine.rsi
@@ -612,7 +612,7 @@
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitSynthetic
   name: UNMC Support Uniform
-  description: A simple uniform made for Synthetic crewmembers
+  description: A simple uniform made for synthetic crewmembers.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Synthetic/synthetic_support.rsi

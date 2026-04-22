@@ -90,7 +90,7 @@
   parent: RMCArmorHelmetPMCTactical
   id: ArmorHelmetPMCGunner
   name: PMC specialist operator helmet
-  description: A modification of the standard PMC tactical helmet, featuring a frontal shield to protect the user's from shrapnel and small arms fire while operating heavy weaponry.
+  description: A modification of the standard PMC tactical helmet, featuring a frontal shield to protect the user from shrapnel and small arms fire while operating heavy weaponry.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/heavy.rsi
@@ -231,7 +231,7 @@
   parent: ArmorHelmetPMC
   id: ArmorHelmetPMCKutjevo
   name: kutjevo helmet
-  description: Standard issued helmet for the workers of Kutjevo. Contains a small webbing to hold small items like pens, oil or even a photo of a loved one.
+  description: Standard issued helmet for the workers of Kutjevo. Contains a small webbing to hold small items like pens, oil, or even a photo of a loved one.
   suffix: Kutjevo
   components:
   - type: Sprite
@@ -267,7 +267,7 @@
   parent: RMCArmorHelmetPMCTactical
   id: ArmorHelmetPMCEngineer
   name: pmc engineer helmet
-  description: An advanced technician helmet with a black finish, including advanced welding protection and resistance to the potential industrial hazards, but has less kevlar against potential firefights.
+  description: An advanced technician helmet with a black finish, including advanced welding protection and resistance to potential industrial hazards, but has less kevlar against potential firefights.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/engineer.rsi
@@ -338,7 +338,7 @@
 - type: entity
   parent: ArmorHelmetPMCCorporate
   id: RMCArmorHelmetPMCCorporateLeadHybrisa
-  description: A basic skull-helm with a orange safety visor fitted. Worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
+  description: A basic skull-helm with an orange safety visor fitted. Worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
   suffix: Hybrisa
   components:
   - type: Sprite

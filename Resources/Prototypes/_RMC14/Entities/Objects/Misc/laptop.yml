@@ -2,7 +2,7 @@
   parent: BaseItem
   id: RMCDropshipMaintsComputer
   name: dropship maintenance computer
-  description: An opened dropship maintenance computer, it seems to be off however. It's used by technicians and pilots to find damaged or broken systems on a dropship. It has various outlets for different systems.
+  description: An opened dropship maintenance computer. It seems to be off, however. It's used by technicians and pilots to find damaged or broken systems on a dropship. It has various outlets for different systems.
   suffix: Open
   components:
   - type: Sprite

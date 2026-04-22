@@ -71,7 +71,7 @@
   name: box of syringes
   parent: RMCBoxCardboard
   id: RMCBoxSyringe
-  description: A biohazard alert warning is printed on the box
+  description: A biohazard alert warning is printed on the box.
   components:
   - type: StorageFill
     contents:
@@ -84,7 +84,7 @@
   name: box of syringes
   parent: RMCBoxCardboard
   id: RMCBoxSyringeCBRN
-  description: A biohazard alert warning is printed on the box
+  description: A biohazard alert warning is printed on the box.
   suffix: CBRN, Small
   components:
   - type: StorageFill

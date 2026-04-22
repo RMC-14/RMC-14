@@ -77,7 +77,7 @@
   parent: CMFoodBase
   id: RMCFoodMeatFishAndChips
   name: fish & chips
-  description: "A Three-Sun Empire staple, featuring a slab of beer-battered fish and french fries."
+  description: "A Three-Suns Empire staple, featuring a slab of beer-battered fish and french fries."
   components:
   - type: FlavorProfile
     flavors:
@@ -115,7 +115,7 @@
   parent: CMFoodBase
   id: RMCFoodMeatFishSushi
   name: fish sushi roll
-  description: A piece of indeterminate fish, contained in rice and wrapped in seaweed. A classic dish in the Three-Sun Empire.
+  description: A piece of indeterminate fish, contained in rice and wrapped in seaweed. A classic dish in the Three-Suns Empire.
   components:
   - type: FlavorProfile
     flavors:

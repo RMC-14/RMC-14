@@ -125,7 +125,7 @@
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsRifleAP
   name: rifle ammunition box (10x24mm AP)
-  description: A 10x24mm armor-piercing ammunition box. Used to refill M54C MK2, and M4SPR AP magazines. It comes with a leather strap allowing someone to wear it on their back.
+  description: A 10x24mm armor-piercing ammunition box. Used to refill M54C MK1, MK2, and M4SPR AP magazines. It comes with a leather strap allowing someone to wear it on their back.
   components:
   - type: Sprite
     layers:
