@@ -1000,12 +1000,13 @@ namespace Content.Client.Lobby.UI
                 ("humanoid-profile-editor-job-toggle-on-button", (int) JobPriority.Low),
             };
 
-            var survivorVariantJobs = new Dictionary<ProtoId<JobPrototype>, List<JobPrototype>>();
+            var survivorVariantJobs = new Dictionary<ProtoId<JobPrototype>, List<SurvivorVariantJobPreferences.MapVariantJobs>>();
             var compFactory = IoCManager.Resolve<IComponentFactory>();
             if (_prototypeManager.HasIndex(SurvivorVariantJobPreferences.SurvivorDepartment))
                 survivorVariantJobs = SurvivorVariantJobPreferences.GetVariantJobsByBase(_prototypeManager, compFactory);
             var survivorVariantJobIds = survivorVariantJobs.Values
-                .SelectMany(jobs => jobs)
+                .SelectMany(mapGroups => mapGroups)
+                .SelectMany(mapGroup => mapGroup.AllJobs)
                 .Select(job => job.ID)
                 .ToHashSet();
 
@@ -1084,10 +1085,10 @@ namespace Content.Client.Lobby.UI
         private void AddSurvivorVariantJobSelectors(
             BoxContainer category,
             BoxContainer baseJobRow,
-            List<JobPrototype> jobs,
+            List<SurvivorVariantJobPreferences.MapVariantJobs> mapGroups,
             (string, int)[] items)
         {
-            if (jobs.Count == 0)
+            if (mapGroups.Count == 0)
                 return;
 
             var toggle = new ContainerButton
@@ -1123,22 +1124,63 @@ namespace Content.Client.Lobby.UI
                 Margin = new Thickness(25f, 0f, 0f, 0f),
             };
 
-            var titleSize = GetJobSelectorTitleSize(jobs);
-            var rows = new List<(JobPrototype Job, Control Row)>();
-            foreach (var job in jobs)
+            var titleSize = GetJobSelectorTitleSize(mapGroups.SelectMany(mapGroup => mapGroup.AllJobs), true);
+            var mapRows = new List<SurvivorVariantMapRows>();
+            foreach (var mapGroup in mapGroups)
             {
-                var row = AddJobSelector(job, variantsContainer, items, titleSize: titleSize, isToggle: true, showLoadout: false);
-                rows.Add((job, row));
+                var mapHeaderText = GetSurvivorVariantMapLabel(mapGroup);
+                var header = new PanelContainer
+                {
+                    Margin = new Thickness(3f, 4f, 3f, 1f),
+                    PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#3a3d55") },
+                    Children =
+                    {
+                        new Label
+                        {
+                            Text = mapHeaderText,
+                            ToolTip = mapHeaderText,
+                            ClipText = true,
+                            Margin = new Thickness(5f, 0f, 0f, 0f),
+                            StyleClasses = { StyleBase.StyleClassLabelSubText },
+                        }
+                    }
+                };
+                variantsContainer.AddChild(header);
+
+                var regularRows = AddSurvivorVariantJobRows(
+                    mapGroup.RegularJobs,
+                    variantsContainer,
+                    items,
+                    null,
+                    titleSize);
+                var insertRows = new List<SurvivorVariantInsertRows>();
+                foreach (var insert in mapGroup.Inserts)
+                    insertRows.Add(AddSurvivorVariantInsertRows(insert, variantsContainer, items, titleSize));
+
+                mapRows.Add(new SurvivorVariantMapRows(
+                    mapGroup.MapName,
+                    mapHeaderText,
+                    header,
+                    regularRows,
+                    insertRows));
             }
 
             search.OnTextChanged += args =>
             {
                 var filter = args.Text.Trim();
-                foreach (var (job, row) in rows)
+                foreach (var map in mapRows)
                 {
-                    row.Visible = string.IsNullOrEmpty(filter) ||
-                                  job.LocalizedName.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
-                                  job.ID.ToString().Contains(filter, StringComparison.OrdinalIgnoreCase);
+                    var mapMatches = IsSurvivorVariantMatch(map.SearchText, filter);
+                    var anyVisible = SetSurvivorVariantRowsVisible(map.RegularRows, filter, mapMatches);
+                    foreach (var insert in map.InsertRows)
+                    {
+                        var insertMatches = mapMatches || IsSurvivorVariantMatch(insert.SearchText, filter);
+                        var anyInsertVisible = SetSurvivorVariantRowsVisible(insert.Rows, filter, insertMatches);
+                        insert.Header.Visible = anyInsertVisible;
+                        anyVisible |= anyInsertVisible;
+                    }
+
+                    map.Header.Visible = anyVisible;
                 }
             };
 
@@ -1158,6 +1200,109 @@ namespace Content.Client.Lobby.UI
             category.AddChild(body);
         }
 
+        private sealed record SurvivorVariantMapRows(
+            string MapName,
+            string SearchText,
+            Control Header,
+            List<SurvivorVariantJobRow> RegularRows,
+            List<SurvivorVariantInsertRows> InsertRows);
+
+        private sealed record SurvivorVariantInsertRows(
+            string SearchText,
+            Control Header,
+            List<SurvivorVariantJobRow> Rows);
+
+        private sealed record SurvivorVariantJobRow(
+            string SearchText,
+            Control Row);
+
+        private SurvivorVariantInsertRows AddSurvivorVariantInsertRows(
+            SurvivorVariantJobPreferences.InsertVariantJobs insert,
+            BoxContainer variantsContainer,
+            (string, int)[] items,
+            int titleSize)
+        {
+            var insertHeaderText = GetSurvivorVariantInsertLabel(insert);
+            var header = new PanelContainer
+            {
+                Margin = new Thickness(19f, 4f, 3f, 1f),
+                PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#34374e") },
+                Children =
+                {
+                    new Label
+                    {
+                        Text = insertHeaderText,
+                        ToolTip = insertHeaderText,
+                        ClipText = true,
+                        Margin = new Thickness(5f, 0f, 0f, 0f),
+                        StyleClasses = { StyleBase.StyleClassLabelSubText },
+                    }
+                }
+            };
+            variantsContainer.AddChild(header);
+
+            var rows = AddSurvivorVariantJobRows(
+                insert.Jobs,
+                variantsContainer,
+                items,
+                new Thickness(16f, 0f, 0f, 0f),
+                titleSize);
+
+            return new SurvivorVariantInsertRows(
+                $"{insert.DisplayName} {insert.ScenarioName} {insertHeaderText}",
+                header,
+                rows);
+        }
+
+        private List<SurvivorVariantJobRow> AddSurvivorVariantJobRows(
+            IEnumerable<JobPrototype> jobs,
+            BoxContainer variantsContainer,
+            (string, int)[] items,
+            Thickness? margin,
+            int titleSize)
+        {
+            var rows = new List<SurvivorVariantJobRow>();
+            foreach (var job in jobs)
+            {
+                var displayName = GetJobSelectorName(job, true);
+                var row = AddJobSelector(
+                    job,
+                    variantsContainer,
+                    items,
+                    margin,
+                    titleSize: titleSize,
+                    isToggle: true,
+                    showLoadout: false,
+                    titleOverride: displayName);
+                rows.Add(new SurvivorVariantJobRow(
+                    $"{displayName} {job.LocalizedName} {job.ID}",
+                    row));
+            }
+
+            return rows;
+        }
+
+        private static bool SetSurvivorVariantRowsVisible(
+            List<SurvivorVariantJobRow> rows,
+            string filter,
+            bool parentMatches)
+        {
+            var anyVisible = false;
+            foreach (var row in rows)
+            {
+                row.Row.Visible = parentMatches || IsSurvivorVariantMatch(row.SearchText, filter);
+                anyVisible |= row.Row.Visible;
+            }
+
+            return anyVisible;
+        }
+
+        private static bool IsSurvivorVariantMatch(string text, string filter)
+        {
+            return string.IsNullOrEmpty(filter) ||
+                   text.Contains(filter, StringComparison.OrdinalIgnoreCase);
+        }
+
         private BoxContainer AddJobSelector(
             JobPrototype job,
             BoxContainer category,
@@ -1165,7 +1310,8 @@ namespace Content.Client.Lobby.UI
             Thickness? margin = null,
             int titleSize = 200,
             bool isToggle = false,
-            bool showLoadout = true)
+            bool showLoadout = true,
+            string? titleOverride = null)
         {
             var jobContainer = new BoxContainer
             {
@@ -1186,7 +1332,7 @@ namespace Content.Client.Lobby.UI
             };
             var jobIcon = _prototypeManager.Index(job.Icon);
             icon.Texture = _sprite.Frame0(jobIcon.Icon);
-            selector.Setup(items, job.LocalizedName, titleSize, job.LocalizedDescription, icon, job.Guides);
+            selector.Setup(items, titleOverride ?? job.LocalizedName, titleSize, job.LocalizedDescription, icon, job.Guides);
 
             if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
             {
@@ -1282,7 +1428,7 @@ namespace Content.Client.Lobby.UI
             return jobContainer;
         }
 
-        private static int GetJobSelectorTitleSize(IEnumerable<JobPrototype> jobs)
+        private static int GetJobSelectorTitleSize(IEnumerable<JobPrototype> jobs, bool preferSpawnMenuRoleName = false)
         {
             const int minTitleSize = 200;
             const int characterWidth = 8;
@@ -1290,9 +1436,51 @@ namespace Content.Client.Lobby.UI
 
             var longest = 0;
             foreach (var job in jobs)
-                longest = Math.Max(longest, job.LocalizedName.Length);
+                longest = Math.Max(longest, GetJobSelectorName(job, preferSpawnMenuRoleName).Length);
 
             return Math.Max(minTitleSize, longest * characterWidth + titlePadding);
+        }
+
+        private static string GetJobSelectorName(JobPrototype job, bool preferSpawnMenuRoleName)
+        {
+            var name = preferSpawnMenuRoleName && !string.IsNullOrWhiteSpace(job.SpawnMenuRoleName)
+                ? job.SpawnMenuRoleName
+                : job.LocalizedName;
+
+            return preferSpawnMenuRoleName
+                ? StripParentheticalSuffix(name)
+                : name;
+        }
+
+        private static string StripParentheticalSuffix(string name)
+        {
+            if (!name.EndsWith(")"))
+                return name;
+
+            var open = name.LastIndexOf('(');
+            if (open < 0)
+                return name;
+
+            return name.Substring(0, open).TrimEnd();
+        }
+
+        private static string GetSurvivorVariantMapLabel(SurvivorVariantJobPreferences.MapVariantJobs mapGroup)
+        {
+            return $"{mapGroup.MapName} ({FormatVariantChance(mapGroup.RegularChance)})";
+        }
+
+        private static string GetSurvivorVariantInsertLabel(SurvivorVariantJobPreferences.InsertVariantJobs insert)
+        {
+            return $"{insert.DisplayName} ({FormatVariantChance(insert.Chance)})";
+        }
+
+        private static string FormatVariantChance(float chance)
+        {
+            var percentage = Math.Clamp(chance, 0f, 1f) * 100f;
+            var format = percentage >= 10f || Math.Abs(MathF.Round(percentage) - percentage) < 0.01f
+                ? "0"
+                : "0.#";
+            return $"{percentage.ToString(format)}%";
         }
 
         private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
