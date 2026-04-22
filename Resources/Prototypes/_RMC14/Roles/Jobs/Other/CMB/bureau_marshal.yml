@@ -38,6 +38,13 @@
     - type: RMCPointing
     - type: MarineOrders
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: xo
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
   hidden: true
 
 - type: entity

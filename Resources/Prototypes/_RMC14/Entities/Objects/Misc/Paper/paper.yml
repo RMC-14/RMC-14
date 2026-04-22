@@ -99,18 +99,6 @@
   parent: CMBasePaper
   id: CMBasePaperFaxable
   components:
-  - type: Food
-    solution: food
-    delay: 7
-    forceFeedDelay: 7
-  - type: BadFood
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 1
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 1
   - type: FaxableObject
 
 - type: entity

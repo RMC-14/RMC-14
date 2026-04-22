@@ -83,7 +83,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        if (GetHive(ent.Owner) is {} hive)
+        if (GetHive(ent.Owner) is { } hive)
         {
             hive.Comp.LastQueenDeath = _timing.CurTime;
             hive.Comp.CurrentQueen = null;
@@ -129,7 +129,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (!_memberQuery.Resolve(member, ref member.Comp, false))
             return null;
 
-        if (member.Comp.Hive is not {} uid || TerminatingOrDeleted(uid))
+        if (member.Comp.Hive is not { } uid || TerminatingOrDeleted(uid))
             return null;
 
         if (!_query.TryComp(uid, out var comp))
@@ -199,7 +199,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// </summary>
     public void SetSameHive(Entity<HiveMemberComponent?> src, Entity<HiveMemberComponent?> dest)
     {
-        if (GetHive(src) is {} hive)
+        if (GetHive(src) is { } hive)
             SetHive(dest, hive);
     }
 
@@ -209,7 +209,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// </summary>
     public bool FromSameHive(Entity<HiveMemberComponent?> a, Entity<HiveMemberComponent?> b)
     {
-        if (GetHive(a) is not {} aHive)
+        if (GetHive(a) is not { } aHive)
             return false;
 
         return IsMember(b, aHive);
@@ -221,7 +221,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// </summary>
     public bool IsMember(Entity<HiveMemberComponent?> member, EntityUid? hive)
     {
-        if (hive == null || GetHive(member) is not {} memberHive)
+        if (hive == null || GetHive(member) is not { } memberHive)
             return false;
 
         return memberHive.Owner == hive;
@@ -231,6 +231,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     {
         return (hive.Comp.CurrentQueen is not null);
     }
+
     public bool SetHiveQueen(EntityUid queen, Entity<HiveComponent> hive)
     {
         hive.Comp.CurrentQueen = queen;
@@ -253,6 +254,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
                 return hiveCoreEnt;
             }
         }
+
         return null;
     }
 
@@ -266,6 +268,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     {
         return hive.Comp.HiveStructureSlots.TryGetValue(structureProtoId, out limit);
     }
+
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)
     {
         if (!_query.Resolve(hive, ref hive.Comp, false))
@@ -284,7 +287,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
     public void AnnounceNeedsOvipositorToSameHive(Entity<HiveMemberComponent?> xeno)
     {
-        if (GetHive(xeno) is not {} hive || hive.Comp.GotOvipositorPopup)
+        if (GetHive(xeno) is not { } hive || hive.Comp.GotOvipositorPopup)
             return;
 
         hive.Comp.GotOvipositorPopup = true;
@@ -390,9 +393,11 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         _xeno.MakeXeno(larva.Value);
         SetHive(larva.Value, hive);
 
-        var newMind = _mind.CreateMind(session.UserId, EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);
+        var newMind = _mind.CreateMind(session.UserId,
+            EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);
         _mind.TransferTo(newMind, larva, ghostCheckOverride: true);
-        _adminLog.Add(LogType.RMCBurrowedLarva, $"{session.Name:player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
+        _adminLog.Add(LogType.RMCBurrowedLarva,
+            $"{session.Name:player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
 
         return true;
     }
@@ -416,6 +421,12 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         {
             SetSameHive(ent.Owner, bullet);
         }
+    }
+
+    public bool FromSameHiveOrAlly(Entity<HiveMemberComponent?> a, Entity<HiveMemberComponent?> b)
+    {
+        // TODO RMC14
+        return FromSameHive(a, b);
     }
 }
 

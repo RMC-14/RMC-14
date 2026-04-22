@@ -1,0 +1,79 @@
+- type: job
+  parent: CMSurvivorFiorinaRiotOfficer
+  id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  name: cm-job-name-survivor-riot-officer
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  accessGroups:
+  - ColonistSec
+  spawnMenuRoleName: CMB Riot Control Officer (Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorMarshal
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetRiotInProgressCMBRCO
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-riot-officer
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+  greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
+
+- type: startingGear
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  equipment:
+    id: RMCIDCardCMBDeputySurvivor
+    back: CMSatchelSecuritySurvivorFill
+    outerClothing: RMCArmorPMCRiot
+    ears: RMCHeadsetDistressBureauDamaged
+    eyes: RMCGlassesSecurityBlue
+    gloves: CMHandsBlackMarine
+    shoes: RMCBootsPMCFilled
+    pocket1: RMCPouchSurvivalBlackFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressUNRiotOfficer
+  name: special survivor fiorina riot in progress cmb riot control officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  id: RMCSurvivorPresetRiotInProgressCMBRCO
+  name: riot in progress CMB RCO preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlMK45, RMCPouchShotgunFilledBeanbag, RMCWeaponShotgunM890Riot, RMCHeadCapBureau ]
+    - [ RMCJumpsuitRiotControlM1984, RMCPouchExplosiveFilledHIRR, RMCWeaponLauncherM85A1, RMCHeadBeanieGray ]
+    - [ RMCJumpsuitRiotControlMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, ArmorHelmetPMCRiotShield ]
+    primaryWeaponChance: 1
+

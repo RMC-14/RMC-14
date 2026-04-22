@@ -31,6 +31,7 @@ public enum CollisionGroup
     BarricadeImpassable = 1 << 26,
     XenoProjectileImpassable = 1 << 27,
     DropshipImpassable = 1 << 28,
+    VaporLayer = 1 << 29,
 
     MapGrid = MapGridHelpers.CollisionGroup, // Map grids, like shuttles. This is the actual grid itself, not the walls or other entities connected to the grid.
 
@@ -56,7 +57,7 @@ public enum CollisionGroup
 
     // Machines, computers
     MachineMask = Impassable | MidImpassable | LowImpassable,
-    MachineLayer = Opaque | MidImpassable | LowImpassable | BulletImpassable,
+    MachineLayer = Opaque | MidImpassable | LowImpassable, // RMC14 removed BulletImpassable
     ConveyorMask = Impassable | MidImpassable | LowImpassable | DoorPassable,
 
     // Crates
@@ -81,6 +82,8 @@ public enum CollisionGroup
     // Soap, spills
     SlipLayer = MidImpassable | LowImpassable,
     ItemMask = Impassable | HighImpassable,
+    // #RMC Vapor-only collision mask for extinguishers on items.
+    VaporMask = VaporLayer,
     ThrownItem = Impassable | HighImpassable | BulletImpassable,
     WallLayer = Opaque | Impassable | HighImpassable | MidImpassable | LowImpassable | BulletImpassable | InteractImpassable,
     GlassLayer = Impassable | HighImpassable | MidImpassable | LowImpassable | BulletImpassable | InteractImpassable,

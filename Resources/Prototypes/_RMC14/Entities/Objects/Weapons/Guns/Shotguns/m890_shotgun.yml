@@ -2,7 +2,7 @@
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: M890 tactical shotgun
   id: WeaponShotgunM890
-  description: A Weston-Yamada semi-automatic shotgun with a rapid fire rate and an attached Underslung Grenade Launcher. Holds 8 shotgun shells in the chamber.
+  description: The Weston-Yamada M890 Shotgun, a semi-automatic shotgun with a quick fire rate.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890.rsi
@@ -27,6 +27,7 @@
     whitelist:
       tags:
       - RMCShellShotgun
+    proto: CMShellShotgunSlugs
     capacity: 8
   - type: AttachableHolder
     slots:

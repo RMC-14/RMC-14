@@ -1,4 +1,5 @@
 using System.Numerics;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
@@ -30,4 +31,10 @@ public sealed partial class SkyFallingComponent : Component
     /// </summary>
     [DataField]
     public EntityCoordinates? TargetCoordinates;
+
+    /// <summary>
+    ///     The sound to play at the target location when the eneity is teleported to the map.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? DropSound;
 }
