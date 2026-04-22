@@ -599,6 +599,7 @@
     - id: CMFolderWhite
     - id: CMPenClicky
     - id: RMCRadioHandheldColonyOff
+    - id: CMClipboard
     - id: RMCUniversalRecorder
     - id: CMCrowbar
 
