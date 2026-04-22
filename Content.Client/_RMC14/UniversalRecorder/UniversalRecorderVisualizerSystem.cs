@@ -15,32 +15,32 @@ public sealed class UniversalRecorderVisualizerSystem : VisualizerSystem<Univers
 
     private void OnComponentStartup(EntityUid uid, UniversalRecorderComponent component, ComponentStartup args)
     {
-        if (!TryComp(uid, out SpriteComponent? sprite) ||
-            !TryComp(uid, out AppearanceComponent? appearance))
-        {
+        if (!TryComp(uid, out SpriteComponent? sprite))
             return;
-        }
 
-        UpdateState(uid, sprite, appearance);
+        UpdateState(uid, sprite, TryComp(uid, out AppearanceComponent? appearance) ? appearance : null);
     }
 
     protected override void OnAppearanceChange(EntityUid uid, UniversalRecorderComponent component, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
-        {
             return;
-        }
 
         UpdateState(uid, args.Sprite, args.Component);
     }
 
-    private void UpdateState(EntityUid uid, SpriteComponent sprite, AppearanceComponent appearance)
+    private void UpdateState(EntityUid uid, SpriteComponent sprite, AppearanceComponent? appearance)
     {
         if (!SpriteSystem.LayerMapTryGet((uid, sprite), UniversalRecorderVisualLayers.Base, out var layer, false))
             return;
 
-        if (!AppearanceSystem.TryGetData(uid, UniversalRecorderVisuals.State, out UniversalRecorderVisualState state, appearance))
-            state = UniversalRecorderVisualState.Empty;
+        SpriteSystem.LayerSetAutoAnimated((uid, sprite), layer, true);
+
+        if (appearance == null ||
+            !AppearanceSystem.TryGetData(uid, UniversalRecorderVisuals.State, out UniversalRecorderVisualState state, appearance))
+        {
+            return;
+        }
 
         SpriteSystem.LayerSetRsiState((uid, sprite), layer, state switch
         {
@@ -48,9 +48,7 @@ public sealed class UniversalRecorderVisualizerSystem : VisualizerSystem<Univers
             UniversalRecorderVisualState.Idle => "taperecorder_idle",
             UniversalRecorderVisualState.Recording => "taperecorder_recording",
             UniversalRecorderVisualState.Playing => "taperecorder_playing",
-            _ => "taperecorder_empty",
+            _ => "taperecorder_idle",
         });
-
-        SpriteSystem.LayerSetAutoAnimated((uid, sprite), layer, true);
     }
 }

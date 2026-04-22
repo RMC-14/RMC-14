@@ -20,7 +20,6 @@
   - type: UniversalRecorder
     tapeSlot:
       name: rmc-universal-recorder-slot-name
-      startingItem: RMCUniversalRecorderTape
       insertSuccessPopup: rmc-universal-recorder-popup-insert-generic
       insertSound: /Audio/Items/taperecorder/taperecorder_close.ogg
       ejectSound: /Audio/Items/taperecorder/taperecorder_open.ogg
@@ -42,9 +41,25 @@
 
 - type: entity
   parent: RMCUniversalRecorderBase
+  id: RMCUniversalRecorderEmpty
+  name: universal recorder
+  description: A device that can record dialogue on magnetic tape and play it back. Good for appeals or witness statements.
+  suffix: Empty
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.UniversalRecorderVisualLayers.Base"]
+      state: taperecorder_empty
+
+- type: entity
+  parent: RMCUniversalRecorderBase
   id: RMCUniversalRecorder
   name: universal recorder
   description: A device that can record dialogue on magnetic tape and play it back. Good for appeals or witness statements.
+  components:
+  - type: UniversalRecorder
+    tapeSlot:
+      startingItem: RMCUniversalRecorderTape
 
 - type: entity
   abstract: true

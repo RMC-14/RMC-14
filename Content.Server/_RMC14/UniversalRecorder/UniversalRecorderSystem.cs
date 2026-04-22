@@ -59,6 +59,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<UniversalRecorderComponent, ComponentInit>(OnRecorderInit);
+        SubscribeLocalEvent<UniversalRecorderComponent, MapInitEvent>(OnRecorderMapInit);
         SubscribeLocalEvent<UniversalRecorderComponent, ComponentRemove>(OnRecorderRemove);
         SubscribeLocalEvent<UniversalRecorderComponent, ExaminedEvent>(OnRecorderExamined);
         SubscribeLocalEvent<UniversalRecorderComponent, UseInHandEvent>(OnRecorderUseInHand);
@@ -67,7 +68,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         SubscribeLocalEvent<UniversalRecorderComponent, UniversalRecorderRecorderActionBuiMsg>(OnRecorderBuiAction);
         SubscribeLocalEvent<UniversalRecorderComponent, ListenEvent>(OnRecorderListen);
         SubscribeLocalEvent<UniversalRecorderComponent, EntInsertedIntoContainerMessage>(OnRecorderTapeInserted);
-        SubscribeLocalEvent<UniversalRecorderComponent, ContainerModifiedMessage>(OnRecorderTapeSlotModified);
+        SubscribeLocalEvent<UniversalRecorderComponent, EntRemovedFromContainerMessage>(OnRecorderTapeRemoved);
         SubscribeLocalEvent<UniversalRecorderComponent, EntityTerminatingEvent>(OnRecorderTerminating);
         SubscribeLocalEvent<UniversalRecorderComponent, IgnitedEvent>(OnRecorderIgnited);
         SubscribeLocalEvent<UniversalRecorderComponent, TileFireEvent>(OnRecorderTileFire);
@@ -110,6 +111,10 @@ public sealed class UniversalRecorderSystem : EntitySystem
     {
         EnsureComp<UniversalRecorderRuntimeComponent>(ent);
         _itemSlots.AddItemSlot(ent, UniversalRecorderComponent.TapeSlotId, ent.Comp.TapeSlot);
+    }
+
+    private void OnRecorderMapInit(Entity<UniversalRecorderComponent> ent, ref MapInitEvent args)
+    {
         UpdateAppearance(ent);
     }
 
@@ -342,7 +347,6 @@ public sealed class UniversalRecorderSystem : EntitySystem
                         Loc.GetString("rmc-universal-recorder-popup-eject", ("tape", tape.Owner)),
                         ent.Owner,
                         args.Actor);
-                    UpdateAppearance(ent);
                 }
                 break;
         }
@@ -536,15 +540,17 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private void OnRecorderTapeInserted(Entity<UniversalRecorderComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != UniversalRecorderComponent.TapeSlotId)
-            return;
-
-        UpdateAppearance(ent);
+        OnRecorderTapeSlotChanged(ent, args.Container.ID);
     }
 
-    private void OnRecorderTapeSlotModified(Entity<UniversalRecorderComponent> ent, ref ContainerModifiedMessage args)
+    private void OnRecorderTapeRemoved(Entity<UniversalRecorderComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID != UniversalRecorderComponent.TapeSlotId)
+        OnRecorderTapeSlotChanged(ent, args.Container.ID);
+    }
+
+    private void OnRecorderTapeSlotChanged(Entity<UniversalRecorderComponent> ent, string containerId)
+    {
+        if (containerId != UniversalRecorderComponent.TapeSlotId)
             return;
 
         if (!TryGetTape(ent, out _))
@@ -779,7 +785,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         if (runtime.PlaybackIndex >= tapeRuntime.Entries.Count)
         {
             SendRecorderNotice(ent, Loc.GetString("rmc-universal-recorder-popup-end"));
-            Stop(ent);
+            Stop(ent, suppressStatus: true);
             return;
         }
 
