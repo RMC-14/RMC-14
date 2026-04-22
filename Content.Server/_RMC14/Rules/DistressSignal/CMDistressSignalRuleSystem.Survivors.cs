@@ -228,8 +228,9 @@ public sealed partial class CMDistressSignalRuleSystem
         ev.PlayerPool.Remove(player);
         GameTicker.PlayerJoinGame(player);
 
-        var profile = SelectSpawnProfile(player, spawnAsJob, job);
-        var survivorMob = _stationSpawning.SpawnPlayerMob(spawner.ToCoordinates(), spawnAsJob, profile, null);
+        var profile = GameTicker.GetPlayerProfile(player);
+        var coordinates = _transform.GetMoverCoordinates(spawner);
+        var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, spawnAsJob, profile, null);
 
         if (!_mind.TryGetMind(playerId, out var mind))
             mind = _mind.CreateMind(playerId);

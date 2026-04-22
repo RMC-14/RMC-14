@@ -293,9 +293,10 @@
     - RMCWeaponMar50LMG: RMCMagazineMar50LMG
     - WeaponShotgunCustomBuilt: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponLauncherDisposable: RMCSpawnerRandomRocketsDisposable
-    - RMCWeaponRifleM54C: CMMagazineRifleM54C
+    - RMCWeaponFlamer: RMCTankFlamer
     - WeaponShotgunM890: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponLauncherM85A1: RMCSpawnerRandomGrenadePackets
+    - RMCMK80: CMMagazinePistolMK80
 
 - type: entity
   parent: RMCSpawnerRandomGunSpecial
@@ -417,7 +418,7 @@
     - RMCPacketGrenadeIncendiaryFilled
     - RMCPacketGrenadeSmokeFilled
     # TODO Foam grenade packet
-    - RMCPacketGrenadeWhitePhosphorusCompound
+    - RMCPacketGrenadeWhitePhosphorusCompoundFilled
     # TODO phosphorus grenades packet SPP
     - CMPacketGrenadeFragOldFilled
     - RMCPacketGrenadeM74AGMFFilled

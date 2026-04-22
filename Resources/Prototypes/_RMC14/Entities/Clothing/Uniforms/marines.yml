@@ -133,6 +133,11 @@
     melee: 10
     bio: 100
     explosionArmor: 10
+  - type: ToggleableClothing
+    action: ActionToggleCBRNHelmet
+    clothingPrototype: RMCArmorHelmetCBRN
+    slot: head
+    requiredSlot: INNERCLOTHING
 
 - type: entity
   parent: RMCCBRNSuit

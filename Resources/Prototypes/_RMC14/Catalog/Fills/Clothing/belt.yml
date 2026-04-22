@@ -576,14 +576,14 @@
 
 - type: entity
   parent: RMCBeltHolsterPistolRCM
-  id: RMCMK80BeltRoyalFilled
-  suffix: Filled, MK80
+  id: RMCBeltHolsterPistolRCML189
+  suffix: RCM, Filled L189
   components:
   - type: StorageFill
     contents:
     - id: CMMagazinePistolMK80
       amount: 6
-    - id: RMCMK80
+    - id: RMCMK80RCM
 
 - type: entity
   parent: RMCBeltHolsterPistolWeYa
@@ -741,9 +741,9 @@
       amount: 5
 
 - type: entity
-  parent: CMBeltMarine
-  id: RMCL24BeltFilled
-  suffix: Filled, L24
+  parent: RMCBeltRCM
+  id: RMCBeltRCML24
+  suffix: RCM, Filled L24
   components:
   - type: StorageFill
     contents:
@@ -751,9 +751,9 @@
       amount: 5
 
 - type: entity
-  parent: CMBeltMarine
-  id: RMCL83A3BeltFilled
-  suffix: Filled, L83A3
+  parent: RMCBeltRCM
+  id: RMCBeltRCML83A3
+  suffix: RCM, Filled L83A3
   components:
   - type: StorageFill
     contents:
@@ -761,9 +761,9 @@
       amount: 5
 
 - type: entity
-  parent: RMCBeltUtilityGeneral
-  id: RMCBeltUtiliyGeneralFilledRoyal
-  suffix: Filled, Royal Breacher
+  parent: RMCBeltUtilityGeneralRCM
+  id: RMCBeltUtilityGeneralRCMFilled
+  suffix: PVP, RCM, Filled Breacher
   components:
   - type: StorageFill
     contents:
@@ -771,18 +771,18 @@
       amount: 3
     - id: CMShellShotgunBuckshot
       amount: 3
-    - id: CMPackFlare
+    - id: RMCPackFlareL96
 
 - type: entity
-  parent: RMCBeltHolsterPistol
-  id: RMCBeltHolsterPistolFilledL54
-  suffix: Filled, L54
+  parent: RMCBeltHolsterPistolRCM
+  id: RMCBeltHolsterPistolRCML54
+  suffix: RCM, Filled L54
   components:
   - type: StorageFill
     contents:
-    - id: RMCWeaponPistolL54
     - id: RMCMagazinePistolL54
       amount: 6
+    - id: RMCWeaponPistolL54
 
 - type: entity
   parent: RMCBeltSmartGunOperatorPistolPMC
@@ -835,6 +835,32 @@
     contents:
     - id: RMCMagazineRifleAK4047
       amount: 2
+
+- type: entity
+  parent: RMCMedicalL75RCM
+  id: RMCMedicalL75RCMFilled
+  suffix: RCM, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterKelotane
+    # - id: CMPillCanisterTramadol
+    # - id: CMPillCanisterTramadol
+    - id: CMPillCanisterDylovene
+    # - id: CMPillCanisterPeridaxon
+    - id: CMPillCanisterDexalin
+    # - id: CMPillCanisterAlkysine
+    - id: RMCPillCanisterImidazoline
+    - id: CMTraumaKit10
+      amount: 3
+    - id: CMBurnKit10
+      amount: 3
+    # - id: RMCSplint
+    - id: CMDexalinPlusAutoInjector
+    - id: CMHealthAnalyzer
 
 - type: entity
   parent: RMCMedicalL75RCM
