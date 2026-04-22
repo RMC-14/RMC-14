@@ -5,8 +5,8 @@ namespace Content.Shared._RMC14.Tether;
 
 public abstract partial class SharedRMCTetherSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
