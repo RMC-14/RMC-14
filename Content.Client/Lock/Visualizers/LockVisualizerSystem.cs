@@ -16,7 +16,7 @@ public sealed class LockVisualizerSystem : VisualizerSystem<LockVisualsComponent
         if (!AppearanceSystem.TryGetData<bool>(uid, LockVisuals.Locked, out var locked, args.Component))
             locked = true;
 
-        // RMC start. RMC secure satchels store lock overlay states directly in their bag RSI. This block checks whether the current sprite supports an explicit unlocked overlay, hides the lock layer while the storage is being viewed open, and otherwise either: switches the overlay between locked/unlocked when that state exists, or 2) falls back to only showing the layer while the entity is actually locked.
+        // RMC start. RMC secure satchels keep their lock overlay states in the bag RSI, so this block hides the lock layer while the storage is open, swaps between locked/unlocked when that overlay exists, and otherwise falls back to showing the layer only while the entity is actually locked.
         var unlockedStateExist = args.Sprite.BaseRSI?.TryGetState(comp.StateUnlocked, out _);
         if (AppearanceSystem.TryGetData<bool>(uid, StorageVisuals.Open, out var open, args.Component))
         {
