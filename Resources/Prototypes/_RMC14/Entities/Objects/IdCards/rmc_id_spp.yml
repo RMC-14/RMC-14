@@ -15,6 +15,21 @@
     - FactionSPP
 
 - type: entity
+  parent: CMIDCardBase
+  id: RMCIDSPPCard
+  name: SPP ID Card
+  description: A SPP officer's ID card.
+  components:
+  - type: ItemIFF
+    factions:
+    - FactionSPP
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/spp_id.rsi
+    state: spp
+  - type: Clothing
+    sprite: _RMC14/Objects/CMIDs/spp_id.rsi
+
+- type: entity
   parent: [ RMCIDCardStandardDogtagHidden, RMCIDSPP ]
   id: RMCIDSPPHidden
   categories: [ HideSpawnMenu ]

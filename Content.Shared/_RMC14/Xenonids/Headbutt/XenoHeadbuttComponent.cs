@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Xenonids.Headbutt;
 public sealed partial class XenoHeadbuttComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PlasmaCost = 10;
+    public FixedPoint2 PlasmaCost = 0;
 
     [DataField]
     public DamageSpecifier Damage = new();
@@ -40,5 +40,5 @@ public sealed partial class XenoHeadbuttComponent : Component
     public int AP = 5;
 
     [DataField, AutoNetworkedField]
-    public DamageSpecifier CrestedDamageReduction = new ();
+    public DamageSpecifier CrestedDamageReduction = new();
 }

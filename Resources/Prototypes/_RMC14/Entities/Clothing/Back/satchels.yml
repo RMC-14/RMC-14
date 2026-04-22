@@ -52,6 +52,16 @@
     - id: RMCHandcuffs
 
 - type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackFillParaCO
+  suffix: Paramarine, Survivor, Filled, CO
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCTieBlack
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelBlue
   components:
@@ -69,6 +79,15 @@
 
 - type: entity
   parent: CMSatchel
+  id: RMCSatchelHydro
+  name: hydroponics satchel
+  description: A green satchel for plant-related work.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/hydro.rsi
+
+- type: entity
+  parent: CMSatchel
   id: CMBackpackSniper
   name: M3 sniper's waist-rig
   description: A specially-designed rig attached to the waist with a pocket, designed for marksmen.
@@ -81,10 +100,14 @@
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
-      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
-      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/urban-desert.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow.rsi
       Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
-      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/urban-desert.rsi
+    camoNames:
+      Snow: "M3 sniper's smock"
+    camoDescriptions:
+      Snow: "A specially-designed smock with pockets for all your sniper needs."
 
 - type: entity
   parent: CMSatchel
@@ -239,13 +262,13 @@
 
 - type: entity
   parent: CMSatchelSecurity
-  id: CMSatchelSecuritySurvivorFillRiotOfficer
+  id: RMCSatchelSecuritySurvivorFillRiotControlOfficer
   suffix: Survivor
   components:
   - type: StorageFill
     contents:
     - id: CMSheetMetal20
-    - id: RMCRC6RiotShield
+    - id: CMGrenadeFragOld
 
 - type: entity
   parent: CMSatchelSecurity
@@ -697,12 +720,16 @@
 
 - type: entity
   parent: RMCBackpackRTO
-  id: RMCBackpackRTOTSE # TODO RMC14 - Different Sprites
+  id: RMCBackpackRTOTSE
   name: TSE radio telephone pack
   description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the Three Suns Empire's insignia.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/rto.rsi
   - type: RotaryPhone
     category: Three Suns Empire
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 - type: entity
   parent: CMSatchel
@@ -724,6 +751,24 @@
   - type: Storage
     grid:
     - 0,0,14,1 # 15
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelMedicpack
+  name: lightweight medic combat pack
+  description: A small, lightweight medic pack for expeditions and short-range operations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_medic.rsi
+
+- type: entity
+  parent: RMCSatchelMedicpack
+  id: RMCSatchelMedicpack5Slot
+  suffix: 15 Slot
+  components:
+  - type: Storage
+    grid:
+    - 0,0,14,1
 
 - type: entity
   parent: RMCSatchelLightpack
@@ -862,6 +907,42 @@
     - id: CMPackFlare
 
 - type: entity
+  parent: RMCSatchelLightpack5Slot
+  id: RMCSatchelLightpackFilledPara
+  suffix: Paramarine, Survivor, Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
+
+- type: entity
+  parent: RMCSatchelLightpack5Slot
+  id: RMCSatchelLightpackFilledParaHelmet
+  suffix: Paramarine, Helmet, Survivor, Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
+        - id: RMCHeadRoyalL1HelmetBallistic
+
+- type: entity
+  parent: RMCSatchelLightpack5Slot
+  id: RMCSatchelLightpackFilledParaSynth
+  suffix: Paramarine, Survivor, Filled, Synth
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
+        - id: CMRollerBedSpawnFolded
+        - id: CMMultitool
+        - id: RMCCableCoil30
+        - id: CMHealthAnalyzer
+        - id: RMCSynthResetKey
+
+- type: entity
   parent: RMCSatchelLightpack
   id: RMCSatchelLightpackFilledHighCommand
   suffix: Filled, High Command
@@ -908,9 +989,9 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/standard.rsi
 
 - type: entity
-  parent: [RMCSatchelPMC, RMCSatchelWelder]
+  parent: RMCSatchelLightpackWelder
   id: RMCSatchelWelderPMC
-  name: pmc technician welderpack
+  name: PMC technician welderpack
   description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada PMCs. Features a small fueltank for quick blowtorch refueling.
   components:
   - type: Sprite
@@ -924,6 +1005,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder.rsi
+
+- type: entity
+  parent: RMCSatchelLightpackWelder
+  id: RMCSatchelLightpackWelderBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder_black.rsi
 
 - type: entity
   parent: CMSatchel
@@ -957,6 +1045,53 @@
     - id: CMDefibrillator
     - id: CMAdvFirstAidKitFilled
     - id: CMRollerBedSpawnFolded
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPSurvivor
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPSurvivorSpec
+  suffix: Filled, Survivor Specialist
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCMagazineRifleType71
+    - id: RMCMagazineRifleType71
+
+- type: entity
+  parent: RMCSatchelSPPMedic
+  id: RMCSatchelSPPMedicSurvivor
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMDefibrillator
+    - id: CMFireExtinguisherPortable
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPSynth
+  suffix: Filled, Synthetic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMDefibrillator
+    - id: CMAdvFirstAidKitFilled
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: CMBloodPackFull
+    - id: CMBloodPackFull
+    - id: RMCSynthResetKeyNovaris
 
 - type: entity
   parent: RMCSatchelWelder
@@ -1017,3 +1152,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelRoyalMOLS
+  name: L1 pattern MOLS day pack
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This particular item is the day pack, which can be worn with or without the full MOLS rig.
+  suffix: PVE, Royal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/mols_pack.rsi
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10 slots

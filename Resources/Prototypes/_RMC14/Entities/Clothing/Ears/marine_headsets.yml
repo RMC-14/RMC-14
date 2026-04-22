@@ -1,6 +1,8 @@
 - type: entity
   parent: RMCHeadsetShip
   id: RMCHeadsetMarine
+  name: marine squad radio headset
+  description: A standard military radio headset.
   components:
   - type: GrantSquadLeaderTracker
     defaultMode: SquadLeader

@@ -1,0 +1,80 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  name: rmc-job-name-bureau-riot-control-team-leader
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  accessGroups:
+  - ColonistSec
+  spawnMenuRoleName: CMB Riot Control Team Leader (Special Survivor)
+  icon: "RMCJobIconBureauDeputy"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorRiotControlTeamLeader
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetRiotInProgressCMBRCTL
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-riot-control-team-leader
+  greeting: rmc-job-greeting-riot-in-progress-CMB-RCTL
+
+- type: startingGear
+  parent: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  equipment:
+    jumpsuit: RMCSwatCMBUniformSpearhead
+    outerClothing: RMCArmorM4RMedium
+    mask: RMCMaskSWAT
+    head: RMCArmorHelmetM10CMBVisorSWAT
+    back: RMCSatchelSecuritySurvivorFillRiotControlOfficer
+    eyes: RMCGlassesSecuritySwat
+
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  name: special survivor fiorina riot in progress colony marshal bureau riot control team leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  id: RMCSurvivorPresetRiotInProgressCMBRCTL
+  name: riot in progress CMB RCTL preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
+    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
+    primaryWeaponChance: 1

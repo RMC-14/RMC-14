@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.CrashLand;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
@@ -10,6 +11,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Lock;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
@@ -37,6 +39,7 @@ public sealed class RMCStorageSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly OpenableSystem _openable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
@@ -85,6 +88,11 @@ public sealed class RMCStorageSystem : EntitySystem
         SubscribeLocalEvent<RMCContainerEmptyOnDestructionComponent, EntityTerminatingEvent>(OnContainerEmptyDeleted);
 
         SubscribeLocalEvent<OpenStorageOnGearEquipComponent, StartingGearEquippedEvent>(OnOpenStorageStartingGear);
+
+        SubscribeLocalEvent<DropshipHijackStartEvent>(OnLockerHijackStart);
+        SubscribeLocalEvent<RMCLockerOpenOnHijackComponent, StorageOpenAttemptEvent>(OnLockerOpenAttempt);
+        SubscribeLocalEvent<RMCLockerOpenOnHijackComponent, LockToggleAttemptEvent>(OnLockerLockToggleAttempt);
+        SubscribeLocalEvent<MRERequireOpenBeforeStorageComponent, StorageInteractAttemptEvent>(OnMREInteractAttempt);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -555,6 +563,46 @@ public sealed class RMCStorageSystem : EntitySystem
 
             _storage.OpenStorageUI(slot.ContainedEntity.Value, ent.Owner, storageComp, doAfter: false);
         }
+    }
+
+    private void OnLockerHijackStart(ref DropshipHijackStartEvent ev)
+    {
+        var query = EntityQueryEnumerator<RMCLockerOpenOnHijackComponent, LockComponent>();
+        while (query.MoveNext(out var locker, out var onHijackComp, out var lockComp))
+        {
+            onHijackComp.DidHijackStart = true;
+            Dirty(locker, onHijackComp);
+
+            _lock.Unlock(locker, null, lockComp);
+            _entityStorage.OpenStorage(locker);
+        }
+    }
+
+    private static void OnLockerOpenAttempt(Entity<RMCLockerOpenOnHijackComponent> ent, ref StorageOpenAttemptEvent args)
+    {
+        if (ent.Comp.DidHijackStart)
+            return;
+
+        args.Cancelled = true;
+    }
+
+    private void OnMREInteractAttempt(Entity<MRERequireOpenBeforeStorageComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        if (_openable.IsOpen(ent.Owner))
+            return;
+
+        args.Cancelled = true;
+    }
+
+    private void OnLockerLockToggleAttempt(Entity<RMCLockerOpenOnHijackComponent> ent, ref LockToggleAttemptEvent args)
+    {
+        if (ent.Comp.DidHijackStart)
+            return;
+
+        args.Cancelled = true;
+
+        if (!args.Silent)
+            _popup.PopupClient(Loc.GetString("rmc-hijack-cabinet-locked"), ent, args.User);
     }
 
     public override void Update(float frameTime)
