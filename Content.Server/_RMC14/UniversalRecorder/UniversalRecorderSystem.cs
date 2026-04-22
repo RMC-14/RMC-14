@@ -14,6 +14,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Item;
 using Content.Shared.Paper;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
@@ -23,6 +24,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -34,11 +36,16 @@ namespace Content.Server._RMC14.UniversalRecorder;
 
 public sealed class UniversalRecorderSystem : EntitySystem
 {
+    private static readonly AudioParams PlaybackHissAudioParams = AudioParams.Default
+        .WithVolume(-8f)
+        .WithMaxDistance(7f);
+
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
@@ -59,8 +66,8 @@ public sealed class UniversalRecorderSystem : EntitySystem
         SubscribeLocalEvent<UniversalRecorderComponent, GetVerbsEvent<AlternativeVerb>>(OnRecorderGetVerbs);
         SubscribeLocalEvent<UniversalRecorderComponent, UniversalRecorderRecorderActionBuiMsg>(OnRecorderBuiAction);
         SubscribeLocalEvent<UniversalRecorderComponent, ListenEvent>(OnRecorderListen);
-        SubscribeLocalEvent<UniversalRecorderComponent, EntInsertedIntoContainerMessage>(OnRecorderInsertedIntoContainer);
-        SubscribeLocalEvent<UniversalRecorderComponent, EntRemovedFromContainerMessage>(OnRecorderRemovedFromContainer);
+        SubscribeLocalEvent<UniversalRecorderComponent, EntInsertedIntoContainerMessage>(OnRecorderTapeInserted);
+        SubscribeLocalEvent<UniversalRecorderComponent, ContainerModifiedMessage>(OnRecorderTapeSlotModified);
         SubscribeLocalEvent<UniversalRecorderComponent, EntityTerminatingEvent>(OnRecorderTerminating);
         SubscribeLocalEvent<UniversalRecorderComponent, IgnitedEvent>(OnRecorderIgnited);
         SubscribeLocalEvent<UniversalRecorderComponent, TileFireEvent>(OnRecorderTileFire);
@@ -335,6 +342,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
                         Loc.GetString("rmc-universal-recorder-popup-eject", ("tape", tape.Owner)),
                         ent.Owner,
                         args.Actor);
+                    UpdateAppearance(ent);
                 }
                 break;
         }
@@ -526,7 +534,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         tapeRuntime.UsedCapacity = currentDuration;
     }
 
-    private void OnRecorderInsertedIntoContainer(Entity<UniversalRecorderComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnRecorderTapeInserted(Entity<UniversalRecorderComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (args.Container.ID != UniversalRecorderComponent.TapeSlotId)
             return;
@@ -534,12 +542,14 @@ public sealed class UniversalRecorderSystem : EntitySystem
         UpdateAppearance(ent);
     }
 
-    private void OnRecorderRemovedFromContainer(Entity<UniversalRecorderComponent> ent, ref EntRemovedFromContainerMessage args)
+    private void OnRecorderTapeSlotModified(Entity<UniversalRecorderComponent> ent, ref ContainerModifiedMessage args)
     {
         if (args.Container.ID != UniversalRecorderComponent.TapeSlotId)
             return;
 
-        Stop(ent, suppressStatus: true);
+        if (!TryGetTape(ent, out _))
+            Stop(ent, suppressStatus: true);
+
         UpdateAppearance(ent);
     }
 
@@ -607,6 +617,9 @@ public sealed class UniversalRecorderSystem : EntitySystem
         runtime.RecordingStartedAt = _timing.CurTime;
         runtime.WarningSent = false;
         runtime.PendingSilenceSeconds = null;
+        runtime.WaitingForHissLoop = false;
+        runtime.HissLoopStartAt = TimeSpan.Zero;
+        runtime.PlaybackStartStream = null;
         runtime.PlaybackIndex = 0;
         runtime.State = UniversalRecorderState.Recording;
 
@@ -648,10 +661,13 @@ public sealed class UniversalRecorderSystem : EntitySystem
         runtime.PendingSilenceSeconds = null;
         runtime.NextPlaybackAt = _timing.CurTime;
         runtime.WarningSent = false;
-        runtime.PlaybackStream = _audio.PlayPvs(
-            ent.Comp.HissSound,
+        runtime.WaitingForHissLoop = true;
+        runtime.HissLoopStartAt = _timing.CurTime + ent.Comp.HissStartDelay;
+        runtime.PlaybackStartStream = _audio.PlayPvs(
+            ent.Comp.HissStartSound,
             ent,
-            AudioParams.Default.WithLoop(true).WithVolume(-8f).WithMaxDistance(7f))?.Entity;
+            PlaybackHissAudioParams)?.Entity;
+        runtime.PlaybackStream = null;
 
         _audio.PlayPvs(ent.Comp.PlaySound, ent);
         SendRecorderNotice(ent, Loc.GetString("rmc-universal-recorder-popup-playback-start"));
@@ -669,13 +685,17 @@ public sealed class UniversalRecorderSystem : EntitySystem
             GetTapeRuntime(tape).UsedCapacity = GetCurrentRecordedDuration(tape.Comp, runtime);
 
         RemCompDeferred<ActiveListenerComponent>(ent);
+        runtime.PlaybackStartStream = _audio.Stop(runtime.PlaybackStartStream);
         runtime.PlaybackStream = _audio.Stop(runtime.PlaybackStream);
 
         var previous = runtime.State;
         runtime.State = UniversalRecorderState.Stopped;
         runtime.WarningSent = false;
         runtime.PendingSilenceSeconds = null;
+        runtime.WaitingForHissLoop = false;
+        runtime.HissLoopStartAt = TimeSpan.Zero;
         runtime.PlaybackIndex = 0;
+        runtime.PlaybackStartStream = null;
         runtime.PlaybackStream = null;
 
         _audio.PlayPvs(ent.Comp.StopSound, ent);
@@ -745,6 +765,8 @@ public sealed class UniversalRecorderSystem : EntitySystem
             Stop(ent, suppressStatus: true);
             return;
         }
+
+        UpdatePlaybackHiss(ent, runtime);
 
         if (runtime.PendingSilenceSeconds is { } silenceSeconds)
         {
@@ -829,6 +851,8 @@ public sealed class UniversalRecorderSystem : EntitySystem
         }
 
         _paper.SetContent((printed, paperComp), text.ToString());
+        paperComp.EditingDisabled = true;
+        Dirty(printed, paperComp);
         _metaData.SetEntityName(printed, Loc.GetString("rmc-universal-recorder-transcript-name", ("tape", tape.Owner)));
         _hands.TryPickupAnyHand(user, printed);
 
@@ -876,7 +900,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         }
 
         if (playSound)
-            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Items/pen_click.ogg"), ent);
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Items/taperecorder/tape_flip.ogg"), ent);
 
         if (popupUser != null)
             _popup.PopupEntity(Loc.GetString("rmc-universal-recorder-tape-popup-flip"), ent.Owner, popupUser.Value);
@@ -926,15 +950,23 @@ public sealed class UniversalRecorderSystem : EntitySystem
             ("fontSize", entry.FontSize),
             ("message", FormattedMessage.EscapeText(entry.Text)));
 
-        _chatManager.ChatMessageToManyFiltered(
-            Filter.Pvs(ent.Owner, entityManager: EntityManager),
+        var channels = new HashSet<INetChannel>();
+        foreach (var recipient in Filter.Pvs(ent.Owner, entityManager: EntityManager).Recipients)
+        {
+            channels.Add(recipient.Channel);
+        }
+
+        if (channels.Count == 0)
+            return;
+
+        _chatManager.ChatMessageToMany(
             ChatChannel.Local,
             entry.Text,
             wrapped,
             ent.Owner,
             hideChat: true,
             recordReplay: true,
-            colorOverride: null);
+            channels);
     }
 
     private TimeSpan GetCurrentRecordedDuration(
@@ -997,6 +1029,24 @@ public sealed class UniversalRecorderSystem : EntitySystem
         }
 
         _appearance.SetData(ent, UniversalRecorderVisuals.State, visual);
+        _item.VisualsChanged(ent);
+    }
+
+    private void UpdatePlaybackHiss(Entity<UniversalRecorderComponent> ent, UniversalRecorderRuntimeComponent runtime)
+    {
+        if (!runtime.WaitingForHissLoop ||
+            runtime.PlaybackStream != null ||
+            _timing.CurTime < runtime.HissLoopStartAt)
+        {
+            return;
+        }
+
+        runtime.WaitingForHissLoop = false;
+        runtime.PlaybackStartStream = _audio.Stop(runtime.PlaybackStartStream);
+        runtime.PlaybackStream = _audio.PlayPvs(
+            ent.Comp.HissLoopSound,
+            ent,
+            PlaybackHissAudioParams.WithLoop(true))?.Entity;
     }
 
     private void UpdateTapeAppearance(Entity<UniversalRecorderTapeComponent> ent)
@@ -1004,6 +1054,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         var runtime = GetTapeRuntime(ent);
         _appearance.SetData(ent, UniversalRecorderTapeVisuals.Side, runtime.Side);
         _appearance.SetData(ent, UniversalRecorderTapeVisuals.Unspooled, runtime.Unspooled);
+        _item.VisualsChanged(ent);
     }
 
     private UniversalRecorderRuntimeComponent GetRecorderRuntime(EntityUid uid)

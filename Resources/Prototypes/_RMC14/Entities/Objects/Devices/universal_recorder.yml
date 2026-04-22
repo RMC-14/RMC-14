@@ -6,26 +6,24 @@
   - type: Sprite
     sprite: _RMC14/Objects/Devices/cassette_player.rsi
     layers:
-    - map: ["enum.UniversalRecorderVisuals.State"]
+    - map: ["enum.UniversalRecorderVisualLayers.Base"]
       state: taperecorder_idle
   - type: Item
     size: Small
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Handling/taperecorder_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Handling/taperecorder_drop.ogg
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.UniversalRecorderVisuals.State:
-        enum.UniversalRecorderVisuals.State:
-          enum.UniversalRecorderVisualState.Empty: { state: taperecorder_empty }
-          enum.UniversalRecorderVisualState.Idle: { state: taperecorder_idle }
-          enum.UniversalRecorderVisualState.Recording: { state: taperecorder_recording }
-          enum.UniversalRecorderVisualState.Playing: { state: taperecorder_playing }
   - type: UniversalRecorder
     tapeSlot:
       name: rmc-universal-recorder-slot-name
       startingItem: RMCUniversalRecorderTape
       insertSuccessPopup: rmc-universal-recorder-popup-insert-generic
-      insertSound: /Audio/Machines/screwdriverclose.ogg
-      ejectSound: /Audio/Machines/screwdriveropen.ogg
+      insertSound: /Audio/Items/taperecorder/taperecorder_close.ogg
+      ejectSound: /Audio/Items/taperecorder/taperecorder_open.ogg
       whitelist:
         components:
         - UniversalRecorderTape
@@ -63,6 +61,12 @@
       visible: false
   - type: Item
     size: Small
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Handling/tape_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Handling/tape_drop.ogg
   - type: Appearance
   - type: GenericVisualizer
     visuals:

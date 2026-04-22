@@ -17,6 +17,12 @@ public enum UniversalRecorderVisuals : byte
 }
 
 [Serializable, NetSerializable]
+public enum UniversalRecorderVisualLayers : byte
+{
+    Base,
+}
+
+[Serializable, NetSerializable]
 public enum UniversalRecorderVisualState : byte
 {
     Empty,

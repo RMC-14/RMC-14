@@ -32,5 +32,14 @@ public sealed partial class UniversalRecorderRuntimeComponent : Component
     public int? PendingSilenceSeconds;
 
     [DataField]
+    public TimeSpan HissLoopStartAt = TimeSpan.Zero;
+
+    [DataField]
+    public bool WaitingForHissLoop;
+
+    [DataField]
+    public EntityUid? PlaybackStartStream;
+
+    [DataField]
     public EntityUid? PlaybackStream;
 }
