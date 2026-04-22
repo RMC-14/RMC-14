@@ -25,10 +25,4 @@ public sealed partial class XenoBulwarkOfTheHiveComponent : Component
 
     [DataField]
     public string VisualState = "king-shield";
-
-    [DataField]
-    public TimeSpan LightningDuration = TimeSpan.FromSeconds(4);
-
-    [DataField]
-    public List<EntityUid> Supporting = new();
 }
