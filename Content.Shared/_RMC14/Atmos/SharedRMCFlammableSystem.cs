@@ -280,18 +280,21 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private void OnDirectionTileFireTriggered(Entity<DirectionalTileFireOnTriggerComponent> ent,
         ref RMCTriggerEvent args)
     {
-        var moverCoordinates = _transform.GetMoverCoordinateRotation(ent, Transform(ent));
-        var tile = moverCoordinates.Coords.SnapToGrid(EntityManager, _map);
+        var rotation = _transform.GetWorldRotation(ent);
+        var coordinates = _transform.GetMoverCoordinates(ent);
 
-        ent.Comp.Direction = Angle.FromDegrees(ent.Comp.Direction.ToAngle().Degrees + moverCoordinates.worldRot.Degrees).GetDir();
+        if (ent.Comp.OffsetForward)
+            coordinates = coordinates.Offset(rotation.ToWorldVec() / 2);
+
+        ent.Comp.Direction = Angle.FromDegrees(ent.Comp.Direction.ToAngle().Degrees + rotation.Degrees).GetDir();
         Dirty(ent);
 
         if (ent.Comp.Rebounded)
-            tile = tile.Offset(ent.Comp.Direction);
+            coordinates = coordinates.Offset(ent.Comp.Direction);
 
-        _audio.PlayPvs(ent.Comp.Sound, moverCoordinates.Coords);
+        _audio.PlayPvs(ent.Comp.Sound, coordinates);
 
-        SpawnFireCone(ent, tile, ent.Comp.Intensity, ent.Comp.Duration);
+        SpawnFireCone(ent, coordinates, ent.Comp.Intensity, ent.Comp.Duration);
         QueueDel(ent);
     }
 
