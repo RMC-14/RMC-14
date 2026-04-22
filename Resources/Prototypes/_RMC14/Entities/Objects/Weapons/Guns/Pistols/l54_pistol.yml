@@ -47,7 +47,7 @@
   parent: RMCWeaponPistolL54
   id: RMCWeaponPistolL54Custom
   name: L54 custom service pistol
-  description: The standard-issue semi-automatic sidearm of the TSPA and various military forces within the Three Sun Empire, chambered in 9x20mm. Functionally comparable to the UNMC’s M1984 service pistol, this particular example has been heavily customized—featuring a gold-alloy finish, extended barrel with an integrated compensator, and precision-tuned internals, as well as an auto-eject feature. These modifications push its performance well beyond standard service specifications.
+  description: The standard-issue semi-automatic sidearm of the TSEPA and various military forces within the Three Sun Empire, chambered in 9x20mm. Functionally comparable to the UNMC’s M1984 service pistol, this particular example has been heavily customized—featuring a gold-alloy finish, extended barrel with an integrated compensator, and precision-tuned internals, as well as an auto-eject feature. These modifications push its performance well beyond standard service specifications.
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54_custom.rsi
@@ -69,7 +69,7 @@
   parent: RMCWeaponPistolL54Custom
   id: RMCWeaponPistolL54CustomAlt
   suffix: Alt
-  description: The standard-issue semi-automatic sidearm of the TSPA and various military forces within the Three Sun Empire, chambered in 9x20mm. Functionally comparable to the UNMC’s M1984 service pistol, this particular example has been heavily customized—featuring a dark special-alloy finish, extended barrel with an integrated compensator, and precision-tuned internals, as well as an auto-eject feature. These modifications push its performance well beyond standard service specifications
+  description: The standard-issue semi-automatic sidearm of the TSEPA and various military forces within the Three Sun Empire, chambered in 9x20mm. Functionally comparable to the UNMC’s M1984 service pistol, this particular example has been heavily customized—featuring a dark special-alloy finish, extended barrel with an integrated compensator, and precision-tuned internals, as well as an auto-eject feature. These modifications push its performance well beyond standard service specifications
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54_custom_alt.rsi

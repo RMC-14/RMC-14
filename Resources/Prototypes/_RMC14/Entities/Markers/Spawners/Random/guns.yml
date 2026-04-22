@@ -32,11 +32,11 @@
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
-    # TODO 3 KT-42 automag
-    - CMWeaponPistolM1984: CMMagazinePistolM1984 # TODO M1911
+    - RMCWeaponPistolKT42: RMCMagazinePistolKT42
+    - RMCWeaponPistolKT42: RMCMagazinePistolKT42
+    - RMCWeaponPistolKT42: RMCMagazinePistolKT42
+    - CMWeaponPistolM1911: CMMagazinePistolM1911
     - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
-    # TODO desert eagle
-    # TODO S&W revolver
     - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     # TODO CZ-81 machine pistol
 
@@ -417,7 +417,7 @@
     - RMCPacketGrenadeIncendiaryFilled
     - RMCPacketGrenadeSmokeFilled
     # TODO Foam grenade packet
-    # TODO phosphorus grenades packet
+    - RMCPacketGrenadeWhitePhosphorusCompound
     # TODO phosphorus grenades packet SPP
     - CMPacketGrenadeFragOldFilled
     - RMCPacketGrenadeM74AGMFFilled
@@ -440,6 +440,7 @@
     prototypes:
     - RMCRocket84mm
     - RMCRocket84mmAntiArmor
+    - RMCRocket84mmWhitePhosphorus
 
 - type: entity
   parent: RMCSpawnerRandomRockets

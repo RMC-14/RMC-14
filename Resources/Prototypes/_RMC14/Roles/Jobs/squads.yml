@@ -141,6 +141,35 @@
 
 - type: entity
   parent: SquadBase
+  id: SquadCBRN
+  name: CBRN
+  components:
+  - type: SquadTeam
+    color: "#4A2070"
+    accessLevels:
+    - CMAccessAlpha
+    - CMAccessBravo
+    - CMAccessCharlie
+    - CMAccessDelta
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    canSupplyDrop: false
+    group: SOF
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_cbrn
+  - type: Tag
+    tags:
+    - RMCSquadCBRN
+
+- type: Tag
+  id: RMCSquadCBRN
+
+- type: entity
+  parent: SquadBase
   id: SquadSPP
   name: SPP
   components:
@@ -284,7 +313,7 @@
 
 - type: Tag
   id: RMCSquadRoyalMarinesPVE
-      
+
 - type: entity
   parent: SquadBase
   id: SquadPara
@@ -308,7 +337,7 @@
     group: Paramarine
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
-      state: rmc_teamleader
+      state: para_teamleader_alt
   - type: Tag
     tags:
       - SquadPara
