@@ -59,11 +59,6 @@
                                     <Control HorizontalExpand="True" />
                                     <OptionButton Name="SquadPreferenceButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-preferred-map-label'}" />
-                                    <Control HorizontalExpand="True" />
-                                    <OptionButton Name="PreferredMapButton" HorizontalAlignment="Right" />
-                                </BoxContainer>
                                 <!-- Armor Preference -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-preferred-armor-label'}" />

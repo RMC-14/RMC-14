@@ -152,75 +152,98 @@ public sealed partial class JobPriorityEditor : BoxContainer
                 .ToList();
 
             jobs.Sort(JobUIComparer.Instance);
+            var titleSize = GetJobSelectorTitleSize(jobs);
 
             foreach (var job in jobs)
-            {
-                var jobContainer = new BoxContainer()
-                {
-                    Orientation = LayoutOrientation.Horizontal,
-                };
-
-                var selector = new RequirementsSelector()
-                {
-                    Margin = new Thickness(3f, 3f, 3f, 0f),
-                };
-
-                var icon = new TextureRect
-                {
-                    TextureScale = new Vector2(2, 2),
-                    VerticalAlignment = VAlignment.Center
-                };
-                var jobIcon = _prototypeManager.Index(job.Icon);
-                icon.Texture = jobIcon.Icon.Frame0();
-                selector.Setup(selectorPriorities, job.LocalizedName, 200, job.LocalizedDescription, icon, job.Guides);
-
-                // This shouldn't depend on any character specific properties, so pass null
-                if (!_requirements.IsAllowed(job, null, out var reason))
-                {
-                    selector.LockRequirements(reason);
-                    SelectedJobPriorities[job.ID] = JobPriority.Never;
-                    CheckDirty();
-                }
-                else
-                {
-                    selector.UnlockRequirements();
-                }
-
-                selector.OnSelected += selectedPrio =>
-                {
-                    var selectedJobPrio = (JobPriority) selectedPrio;
-
-                    SelectedJobPriorities[job.ID] = selectedJobPrio;
-
-                    foreach (var (jobId, other) in _jobPriorities)
-                    {
-                        // Sync other selectors with the same job in case of multiple department jobs
-                        if (jobId == job.ID)
-                        {
-                            other.Select(selectedPrio);
-                            continue;
-                        }
-
-                        if (selectedJobPrio == JobPriority.High && (JobPriority) other.Selected == JobPriority.High)
-                        {
-                            // Lower any other high priorities to medium.
-                            other.Select((int)JobPriority.Medium);
-                            SelectedJobPriorities[jobId] = JobPriority.Medium;
-                        }
-                    }
-
-                    UpdateJobPriorities();
-                    CheckDirty();
-                };
-
-                _jobPriorities.Add((job.ID, selector));
-                jobContainer.AddChild(selector);
-                category.AddChild(jobContainer);
-            }
+                AddJobSelector(job, category, selectorPriorities, titleSize: titleSize);
         }
 
         UpdateJobPriorities();
         CheckDirty();
+    }
+
+    private void AddJobSelector(
+        JobPrototype job,
+        BoxContainer category,
+        (string, int)[] selectorPriorities,
+        Thickness? margin = null,
+        int titleSize = 200)
+    {
+        var jobContainer = new BoxContainer
+        {
+            Orientation = LayoutOrientation.Horizontal,
+            Margin = margin ?? new Thickness(),
+        };
+
+        var selector = new RequirementsSelector
+        {
+            Margin = new Thickness(3f, 3f, 3f, 0f),
+        };
+
+        var icon = new TextureRect
+        {
+            TextureScale = new Vector2(2, 2),
+            VerticalAlignment = VAlignment.Center
+        };
+        var jobIcon = _prototypeManager.Index(job.Icon);
+        icon.Texture = jobIcon.Icon.Frame0();
+        selector.Setup(selectorPriorities, job.LocalizedName, titleSize, job.LocalizedDescription, icon, job.Guides);
+
+        // This shouldn't depend on any character specific properties, so pass null
+        if (!_requirements.IsAllowed(job, null, out var reason))
+        {
+            selector.LockRequirements(reason);
+            SelectedJobPriorities[job.ID] = JobPriority.Never;
+            CheckDirty();
+        }
+        else
+        {
+            selector.UnlockRequirements();
+        }
+
+        selector.OnSelected += selectedPrio =>
+        {
+            var selectedJobPrio = (JobPriority) selectedPrio;
+
+            SelectedJobPriorities[job.ID] = selectedJobPrio;
+
+            foreach (var (jobId, other) in _jobPriorities)
+            {
+                // Sync other selectors with the same job in case of multiple department jobs
+                if (jobId == job.ID)
+                {
+                    other.Select(selectedPrio);
+                    continue;
+                }
+
+                if (selectedJobPrio == JobPriority.High && (JobPriority) other.Selected == JobPriority.High)
+                {
+                    // Lower any other high priorities to medium.
+                    other.Select((int)JobPriority.Medium);
+                    SelectedJobPriorities[jobId] = JobPriority.Medium;
+                }
+            }
+
+            UpdateJobPriorities();
+            CheckDirty();
+        };
+
+        _jobPriorities.Add((job.ID, selector));
+        jobContainer.AddChild(selector);
+        category.AddChild(jobContainer);
+    }
+
+    private static int GetJobSelectorTitleSize(IEnumerable<JobPrototype> jobs)
+    {
+        const int minTitleSize = 200;
+        const int characterWidth = 8;
+        const int titlePadding = 16;
+
+        var longest = 0;
+        foreach (var job in jobs)
+            longest = Math.Max(longest, job.LocalizedName.Length);
+
+        return Math.Max(minTitleSize, longest * characterWidth + titlePadding);
     }
 
     /// <summary>

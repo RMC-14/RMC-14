@@ -38,6 +38,8 @@ using Robust.Client.Utility;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Enums;
+using Robust.Shared.GameObjects;
+using Robust.Shared.IoC;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
@@ -104,9 +106,8 @@ namespace Content.Client.Lobby.UI
         public HumanoidCharacterProfile? Profile;
 
         private List<SpeciesPrototype> _species = new();
-        private readonly List<EntProtoId<RMCPlanetMapPrototypeComponent>> _preferredMaps = new();
 
-        private List<(ProtoId<JobPrototype> JobId, RequirementsSelector PrioritySelector)> _jobPriorities = new();
+        private List<(ProtoId<JobPrototype> JobId, RequirementsSelector PrioritySelector, bool IsToggle)> _jobPriorities = new();
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
 
@@ -427,28 +428,6 @@ namespace Content.Client.Lobby.UI
             };
 
             #endregion SquadPreference
-
-            #region MapPreference
-
-            RefreshPreferredMaps();
-            PreferredMapButton.OnItemSelected += args =>
-            {
-                PreferredMapButton.SelectId(args.Id);
-
-                if (args.Id == 0)
-                {
-                    SetPreferredMap(null);
-                    return;
-                }
-
-                var index = args.Id - 1;
-                if (index < 0 || index >= _preferredMaps.Count)
-                    return;
-
-                SetPreferredMap(_preferredMaps[index]);
-            };
-
-            #endregion MapPreference
 
             #region PlaytimePerks
 
@@ -910,8 +889,6 @@ namespace Content.Client.Lobby.UI
             UpdateSpawnPriorityControls();
             UpdateArmorPreferenceControls();
             UpdateSquadPreferenceControls();
-            RefreshPreferredMaps();
-            UpdatePreferredMapControls();
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();
@@ -1017,6 +994,20 @@ namespace Content.Client.Lobby.UI
                 ("humanoid-profile-editor-job-priority-medium-button", (int) JobPriority.Medium),
                 ("humanoid-profile-editor-job-priority-high-button", (int) JobPriority.High),
             };
+            var toggleItems = new[]
+            {
+                ("humanoid-profile-editor-job-toggle-off-button", (int) JobPriority.Never),
+                ("humanoid-profile-editor-job-toggle-on-button", (int) JobPriority.Low),
+            };
+
+            var survivorVariantJobs = new Dictionary<ProtoId<JobPrototype>, List<JobPrototype>>();
+            var compFactory = IoCManager.Resolve<IComponentFactory>();
+            if (_prototypeManager.HasIndex(SurvivorVariantJobPreferences.SurvivorDepartment))
+                survivorVariantJobs = SurvivorVariantJobPreferences.GetVariantJobsByBase(_prototypeManager, compFactory);
+            var survivorVariantJobIds = survivorVariantJobs.Values
+                .SelectMany(jobs => jobs)
+                .Select(job => job.ID)
+                .ToHashSet();
 
             foreach (var department in departments)
             {
@@ -1063,118 +1054,245 @@ namespace Content.Client.Lobby.UI
                     JobList.AddChild(category);
                 }
 
-                var jobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
+                var departmentJobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
                     .Where(job => job.SetPreference)
-                    .Where(job => !job.Hidden)
-                    .ToArray();
+                    .Where(job => !job.Hidden);
+
+                if (department.ID == SurvivorVariantJobPreferences.SurvivorDepartment)
+                    departmentJobs = departmentJobs.Where(job => !survivorVariantJobIds.Contains(job.ID));
+
+                var jobs = departmentJobs.ToArray();
 
                 Array.Sort(jobs, JobUIComparer.Instance);
+                var titleSize = GetJobSelectorTitleSize(jobs);
 
                 foreach (var job in jobs)
                 {
-                    var jobContainer = new BoxContainer()
-                    {
-                        Orientation = LayoutOrientation.Horizontal,
-                    };
+                    var jobRow = AddJobSelector(job, category, items, titleSize: titleSize);
 
-                    var selector = new RequirementsSelector()
+                    if (department.ID == SurvivorVariantJobPreferences.SurvivorDepartment &&
+                        survivorVariantJobs.TryGetValue(job.ID, out var variants))
                     {
-                        Margin = new Thickness(3f, 3f, 3f, 0f),
-                    };
-                    selector.OnOpenGuidebook += OnOpenGuidebook;
-
-                    var icon = new TextureRect
-                    {
-                        TextureScale = new Vector2(2, 2),
-                        VerticalAlignment = VAlignment.Center
-                    };
-                    var jobIcon = _prototypeManager.Index(job.Icon);
-                    icon.Texture = _sprite.Frame0(jobIcon.Icon);
-                    selector.Setup(items, job.LocalizedName, 200, job.LocalizedDescription, icon, job.Guides);
-
-                    if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
-                    {
-                        selector.LockRequirements(reason);
+                        AddSurvivorVariantJobSelectors(category, jobRow, variants, toggleItems);
                     }
-                    else
-                    {
-                        selector.UnlockRequirements();
-                    }
-
-                    selector.OnSelected += selectedPrio =>
-                    {
-                        var selectedJobPrio = (JobPriority) selectedPrio;
-                        Profile = Profile?.WithJobPriority(job.ID, selectedJobPrio);
-
-                        foreach (var (jobId, other) in _jobPriorities)
-                        {
-                            // Sync other selectors with the same job in case of multiple department jobs
-                            if (jobId == job.ID)
-                            {
-                                other.Select(selectedPrio);
-                                continue;
-                            }
-
-                            if (selectedJobPrio != JobPriority.High || (JobPriority) other.Selected != JobPriority.High)
-                                continue;
-
-                            // Lower any other high priorities to medium.
-                            other.Select((int)JobPriority.Medium);
-                            Profile = Profile?.WithJobPriority(jobId, JobPriority.Medium);
-                        }
-
-                        // TODO: Only reload on high change (either to or from).
-                        ReloadPreview();
-
-                        UpdateJobPriorities();
-                        SetDirty();
-                    };
-
-                    var loadoutWindowBtn = new Button()
-                    {
-                        Text = Loc.GetString("loadout-window"),
-                        HorizontalAlignment = HAlignment.Right,
-                        VerticalAlignment = VAlignment.Center,
-                        Margin = new Thickness(3f, 3f, 0f, 0f),
-                    };
-
-                    var collection = IoCManager.Instance!;
-                    var protoManager = collection.Resolve<IPrototypeManager>();
-
-                    // If no loadout found then disabled button
-                    if (!protoManager.TryIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID), out var roleLoadoutProto))
-                    {
-                        loadoutWindowBtn.Disabled = true;
-                    }
-                    // else
-                    else
-                    {
-                        loadoutWindowBtn.OnPressed += args =>
-                        {
-                            RoleLoadout? loadout = null;
-
-                            // Clone so we don't modify the underlying loadout.
-                            Profile?.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out loadout);
-                            loadout = loadout?.Clone();
-
-                            if (loadout == null)
-                            {
-                                loadout = new RoleLoadout(roleLoadoutProto.ID);
-                                loadout.SetDefault(Profile, _playerManager.LocalSession, _prototypeManager);
-                            }
-
-                            OpenLoadout(job, loadout, roleLoadoutProto);
-                        };
-                    }
-
-                    _jobPriorities.Add((job.ID, selector));
-                    jobContainer.AddChild(selector);
-                    jobContainer.AddChild(loadoutWindowBtn);
-                    category.AddChild(jobContainer);
                 }
             }
 
             UpdateJobPriorities();
+        }
+
+        private void AddSurvivorVariantJobSelectors(
+            BoxContainer category,
+            BoxContainer baseJobRow,
+            List<JobPrototype> jobs,
+            (string, int)[] items)
+        {
+            if (jobs.Count == 0)
+                return;
+
+            var toggle = new ContainerButton
+            {
+                ToggleMode = true,
+                HorizontalAlignment = HAlignment.Right,
+                VerticalAlignment = VAlignment.Center,
+                MinSize = new Vector2(24f, 24f),
+                Margin = new Thickness(3f, 3f, 0f, 0f),
+                Children =
+                {
+                    new TextureRect
+                    {
+                        StyleClasses = { OptionButton.StyleClassOptionTriangle },
+                        Margin = new Thickness(2f, 0f),
+                        HorizontalAlignment = HAlignment.Center,
+                        VerticalAlignment = VAlignment.Center,
+                    }
+                },
+            };
+            baseJobRow.AddChild(toggle);
+
+            var search = new LineEdit
+            {
+                PlaceHolder = Loc.GetString("humanoid-profile-editor-survivor-variants-search"),
+                HorizontalExpand = true,
+                Margin = new Thickness(31f, 3f, 3f, 0f),
+            };
+
+            var variantsContainer = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                Margin = new Thickness(25f, 0f, 0f, 0f),
+            };
+
+            var titleSize = GetJobSelectorTitleSize(jobs);
+            var rows = new List<(JobPrototype Job, Control Row)>();
+            foreach (var job in jobs)
+            {
+                var row = AddJobSelector(job, variantsContainer, items, titleSize: titleSize, isToggle: true, showLoadout: false);
+                rows.Add((job, row));
+            }
+
+            search.OnTextChanged += args =>
+            {
+                var filter = args.Text.Trim();
+                foreach (var (job, row) in rows)
+                {
+                    row.Visible = string.IsNullOrEmpty(filter) ||
+                                  job.LocalizedName.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
+                                  job.ID.ToString().Contains(filter, StringComparison.OrdinalIgnoreCase);
+                }
+            };
+
+            var body = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                Visible = false,
+                Margin = new Thickness(0f, 1f, 0f, 0f),
+                Children =
+                {
+                    search,
+                    variantsContainer,
+                },
+            };
+
+            toggle.OnToggled += args => body.Visible = args.Pressed;
+            category.AddChild(body);
+        }
+
+        private BoxContainer AddJobSelector(
+            JobPrototype job,
+            BoxContainer category,
+            (string, int)[] items,
+            Thickness? margin = null,
+            int titleSize = 200,
+            bool isToggle = false,
+            bool showLoadout = true)
+        {
+            var jobContainer = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                Margin = margin ?? new Thickness(),
+            };
+
+            var selector = new RequirementsSelector
+            {
+                Margin = new Thickness(3f, 3f, 3f, 0f),
+            };
+            selector.OnOpenGuidebook += OnOpenGuidebook;
+
+            var icon = new TextureRect
+            {
+                TextureScale = new Vector2(2, 2),
+                VerticalAlignment = VAlignment.Center
+            };
+            var jobIcon = _prototypeManager.Index(job.Icon);
+            icon.Texture = _sprite.Frame0(jobIcon.Icon);
+            selector.Setup(items, job.LocalizedName, titleSize, job.LocalizedDescription, icon, job.Guides);
+
+            if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
+            {
+                selector.LockRequirements(reason);
+            }
+            else
+            {
+                selector.UnlockRequirements();
+            }
+
+            selector.OnSelected += selectedPrio =>
+            {
+                var selectedJobPrio = isToggle && selectedPrio != (int) JobPriority.Never
+                    ? JobPriority.Low
+                    : (JobPriority) selectedPrio;
+                Profile = Profile?.WithJobPriority(job.ID, selectedJobPrio);
+
+                foreach (var (jobId, other, otherIsToggle) in _jobPriorities)
+                {
+                    // Sync other selectors with the same job in case of multiple department jobs
+                    if (jobId == job.ID)
+                    {
+                        other.Select(isToggle ? (int) selectedJobPrio : selectedPrio);
+                        continue;
+                    }
+
+                    if (isToggle || otherIsToggle)
+                        continue;
+
+                    if (selectedJobPrio != JobPriority.High || (JobPriority) other.Selected != JobPriority.High)
+                        continue;
+
+                    // Lower any other high priorities to medium.
+                    other.Select((int)JobPriority.Medium);
+                    Profile = Profile?.WithJobPriority(jobId, JobPriority.Medium);
+                }
+
+                // TODO: Only reload on high change (either to or from).
+                ReloadPreview();
+
+                UpdateJobPriorities();
+                SetDirty();
+            };
+
+            _jobPriorities.Add((job.ID, selector, isToggle));
+            jobContainer.AddChild(selector);
+
+            if (!showLoadout)
+            {
+                category.AddChild(jobContainer);
+                return jobContainer;
+            }
+
+            var loadoutWindowBtn = new Button
+            {
+                Text = Loc.GetString("loadout-window"),
+                HorizontalAlignment = HAlignment.Right,
+                VerticalAlignment = VAlignment.Center,
+                Margin = new Thickness(3f, 3f, 0f, 0f),
+            };
+
+            var collection = IoCManager.Instance!;
+            var protoManager = collection.Resolve<IPrototypeManager>();
+
+            // If no loadout found then disabled button
+            if (!protoManager.TryIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID), out var roleLoadoutProto))
+            {
+                loadoutWindowBtn.Disabled = true;
+            }
+            // else
+            else
+            {
+                loadoutWindowBtn.OnPressed += args =>
+                {
+                    RoleLoadout? loadout = null;
+
+                    // Clone so we don't modify the underlying loadout.
+                    Profile?.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out loadout);
+                    loadout = loadout?.Clone();
+
+                    if (loadout == null)
+                    {
+                        loadout = new RoleLoadout(roleLoadoutProto.ID);
+                        loadout.SetDefault(Profile, _playerManager.LocalSession, _prototypeManager);
+                    }
+
+                    OpenLoadout(job, loadout, roleLoadoutProto);
+                };
+            }
+
+            jobContainer.AddChild(loadoutWindowBtn);
+            category.AddChild(jobContainer);
+            return jobContainer;
+        }
+
+        private static int GetJobSelectorTitleSize(IEnumerable<JobPrototype> jobs)
+        {
+            const int minTitleSize = 200;
+            const int characterWidth = 8;
+            const int titlePadding = 16;
+
+            var longest = 0;
+            foreach (var job in jobs)
+                longest = Math.Max(longest, job.LocalizedName.Length);
+
+            return Math.Max(minTitleSize, longest * characterWidth + titlePadding);
         }
 
         private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
@@ -1421,12 +1539,6 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
-        private void SetPreferredMap(EntProtoId<RMCPlanetMapPrototypeComponent>? preferredMap)
-        {
-            Profile = Profile?.WithPreferredMap(preferredMap);
-            SetDirty();
-        }
-
         private void SetPlaytimePerks(bool playtimePerks)
         {
             Profile = Profile?.WithPlaytimePerks(playtimePerks);
@@ -1481,9 +1593,12 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         private void UpdateJobPriorities()
         {
-            foreach (var (jobId, prioritySelector) in _jobPriorities)
+            foreach (var (jobId, prioritySelector, isToggle) in _jobPriorities)
             {
                 var priority = Profile?.JobPriorities.GetValueOrDefault(jobId, JobPriority.Never) ?? JobPriority.Never;
+                if (isToggle && priority > JobPriority.Never)
+                    priority = JobPriority.Low;
+
                 prioritySelector.Select((int) priority);
             }
         }
@@ -1664,43 +1779,6 @@ namespace Content.Client.Lobby.UI
             }
 
             SquadPreferenceButton.SelectId(index);
-        }
-
-        private void RefreshPreferredMaps()
-        {
-            _preferredMaps.Clear();
-            PreferredMapButton.Clear();
-            PreferredMapButton.AddItem(Loc.GetString("humanoid-profile-editor-preferred-map-none"), 0);
-
-            var planets = _entManager.System<RMCPlanetSystem>()
-                .GetAllPlanets()
-                .OrderBy(planet => planet.Proto.Name);
-
-            var index = 1;
-            foreach (var planet in planets)
-            {
-                _preferredMaps.Add(planet.Proto.ID);
-                PreferredMapButton.AddItem(planet.Proto.Name, index);
-                index++;
-            }
-        }
-
-        private void UpdatePreferredMapControls()
-        {
-            if (Profile == null)
-            {
-                PreferredMapButton.SelectId(0);
-                return;
-            }
-
-            if (Profile.PreferredMap is not { } preferredMap)
-            {
-                PreferredMapButton.SelectId(0);
-                return;
-            }
-
-            var index = _preferredMaps.IndexOf(preferredMap);
-            PreferredMapButton.SelectId(index >= 0 ? index + 1 : 0);
         }
 
         private void UpdateHairPickers()
