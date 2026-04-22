@@ -112,7 +112,8 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             }
 
             if (IsMentor &&
-                _mentorWindow is not { IsOpen: true })
+                _mentorWindow is not { IsOpen: true } &&
+                other)
             {
                 _unread = true;
                 _aHelp.UnreadMHelpReceived();
@@ -120,9 +121,11 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
 
             _destinationNames.TryAdd(message.Destination, message.DestinationName);
             _messages.GetOrNew(message.Destination).Add(message);
-            _lastMessageTime[message.Destination] = message.Time;
 
-            if (_mentorWindow?.SelectedPlayer != message.Destination)
+            if (message.Author != null)
+                _lastMessageTime[message.Destination] = message.Time;
+
+            if (_mentorWindow?.SelectedPlayer != message.Destination && other)
                 _unreadByPlayer[message.Destination] = true;
 
             UpdatePlayerButton(message.Destination);
