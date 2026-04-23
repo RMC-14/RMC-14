@@ -18,7 +18,7 @@
   id: RMCJumpsuitMarineRoyal
   name: royal crown marine uniform
   description: The field uniform of the Royal Crown Marines, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
-  suffix: Filled, Royal
+  suffix: RCM
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
@@ -32,7 +32,7 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalL189
-  suffix: Filled, Royal, L189
+  suffix: RCM, Filled L189
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingHolsterRCML189
@@ -40,7 +40,7 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalMedic
-  suffix: Filled, Royal, Medic
+  suffix: RCM, Filled Medic
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingSurgicalRCMFilled
@@ -48,7 +48,7 @@
 - type: entity
   parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalDropPouch
-  suffix: Filled, Royal, Drop Pouch
+  suffix: RCM, Filled Drop Pouch
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingDropPouchRCMFilled
@@ -58,7 +58,7 @@
   id: RMCJumpsuitMarineRoyalTeamlead
   name: royal crown marine team lead uniform
   description: The field uniform of Royal Crown Marine officers and NCOs, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
-  suffix: Filled, Royal, Teamlead
+  suffix: RCM, Team Lead, Filled Drop Pouch
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/team_lead.rsi
@@ -76,7 +76,7 @@
   id: RMCJumpsuitMarineRoyalPVE
   name: royal crown marine uniform
   description: The field uniform of the Royal Crown Marines, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
-  suffix: Royal, PVE
+  suffix: PVE, RCM
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
