@@ -85,6 +85,9 @@
   - type: RMCCameraComputer
     protoIds:
     - RMCMonitorCameraAlamo
+    - RMCFlareCAS
+    - RMCAirFlareCAS
+    - RMCLaserDesignatorTarget
   - type: ActivatableUI
     key: enum.RMCCameraUiKey.Key
 
@@ -98,6 +101,9 @@
   - type: RMCCameraComputer
     protoIds:
     - RMCMonitorCameraNormandy
+    - RMCFlareCAS
+    - RMCAirFlareCAS
+    - RMCLaserDesignatorTarget
 
 - type: entity
   parent: CMComputerDropship
@@ -232,6 +238,22 @@
   - type: DropshipDestination
   - type: FTLSmashImmune
   - type: NoFTL
+
+- type: entity
+  parent: CMDropshipDestination
+  id: CMDropshipDestinationAlamo
+  suffix: Alamo
+  components:
+  - type: DropshipDestination
+    spawn: "/Maps/_RMC14/alamo.yml" # The actual Dropship files are private. These are debug versions to ensure tests pass.
+
+- type: entity
+  parent: CMDropshipDestination
+  id: CMDropshipDestinationNormandy
+  suffix: Normandy
+  components:
+  - type: DropshipDestination
+    spawn: "/Maps/_RMC14/normandy.yml" # The actual Dropship files are private. These are debug versions to ensure tests pass.
 
 - type: entity
   parent: MarkerBase

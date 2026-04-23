@@ -135,8 +135,9 @@
           - RMCAttachmentBipod
           - RMCAttachmentExtinguisher
           - RMCAttachmentLaserSight
-          - RMCAttachmentL90GL
-          - RMCAttachmentL90UBS
+          - RMCAttachmentFlamer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.84, 0
@@ -233,8 +234,9 @@
           - RMCAttachmentBipod
           - RMCAttachmentExtinguisher
           - RMCAttachmentLaserSight
-          - RMCAttachmentL90GL
-          - RMCAttachmentL90UBS
+          - RMCAttachmentFlamer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
 
 # Magazines
 
@@ -263,6 +265,8 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
 
 - type: entity
   parent: RMCMagazineRifleL88
@@ -290,6 +294,8 @@
     - state: ammo_band
       color: "#1F951F"
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleAP
 
 # Tags
 
