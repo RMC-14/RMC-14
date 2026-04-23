@@ -13,4 +13,4 @@ public sealed record RMCERTConsoleDistressReasonEvent(NetEntity User, string Mes
 /// <summary>
 /// Dialog callback for handheld distress beacons.
 /// </summary>
-public sealed record RMCERTHandheldDistressReasonEvent(NetEntity Beacon, string Message = "") : DialogInputEvent(Message);
+public sealed record RMCERTHandheldDistressReasonEvent(string Message = "") : DialogInputEvent(Message);

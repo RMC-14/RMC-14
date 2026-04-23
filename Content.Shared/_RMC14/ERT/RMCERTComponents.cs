@@ -6,13 +6,13 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.ERT;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent]
 /// <summary>
 /// Handheld distress beacon settings that control which specific ERT calls it can request.
 /// </summary>
 public sealed partial class RMCERTDistressBeaconComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<ProtoId<RMCERTCallPrototype>> AllowedCalls = [];
 
     // This is only used server-side when building prompts and admin text.
@@ -27,25 +27,25 @@ public sealed partial class RMCERTDistressBeaconComponent : Component
 
     public string Recipient => Loc.GetString(_recipient);
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool ReasonRequired = true;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool SingleUse = true;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool ResetOnDeny = true;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan Cooldown = TimeSpan.FromMinutes(10);
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? LastUsed;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool Spent;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int ReasonLimit = 200;
 }
 

@@ -74,6 +74,7 @@ public sealed class RMCERTSystem : EntitySystem
 
     private readonly Dictionary<Guid, RMCERTRequest> _requests = new();
     private readonly Dictionary<EntityUid, TimeSpan> _sourceCooldowns = new();
+    private readonly Dictionary<EntityUid, EntityUid> _pendingHandheldDialogs = new();
 
     private MapId? _ertMap;
     private int _loadedShuttles;
@@ -104,6 +105,7 @@ public sealed class RMCERTSystem : EntitySystem
     {
         _requests.Clear();
         _sourceCooldowns.Clear();
+        _pendingHandheldDialogs.Clear();
         _ertMap = null;
         _loadedShuttles = 0;
     }
@@ -181,7 +183,6 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         beacon.Comp.LastUsed = _timing.CurTime;
-        Dirty(beacon);
 
         CreateRequest(RMCERTRequestSource.Handheld, beacon, user, reason, calls);
     }
@@ -269,7 +270,6 @@ public sealed class RMCERTSystem : EntitySystem
             beaconComp.ResetOnDeny)
         {
             beaconComp.Spent = false;
-            Dirty(beacon, beaconComp);
         }
 
         UpdateSourceVisual(request, false);
@@ -438,9 +438,10 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (ent.Comp.ReasonRequired)
         {
-            // Attach the dialog to the user, not the held item. This matches the common handheld-input
-            // pattern used elsewhere and avoids mutating networked dialog state on an inventory entity.
-            var ev = new RMCERTHandheldDistressReasonEvent(GetNetEntity(ent));
+            // Attach the dialog to the user, not the held item. Keep the beacon association server-side so the
+            // networked dialog state does not need to serialize an inventory-entity reference back to the client.
+            _pendingHandheldDialogs[args.User] = ent;
+            var ev = new RMCERTHandheldDistressReasonEvent();
             _dialog.OpenInput(args.User, Loc.GetString("rmc-ert-prompt-handheld-reason", ("title", ent.Comp.RequestTitle)), ev, true, ent.Comp.ReasonLimit);
         }
         else
@@ -456,7 +457,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        if (!TryGetEntity(args.Beacon, out var beaconUid) ||
+        if (!_pendingHandheldDialogs.Remove(ent.Owner, out var beaconUid) ||
             !TryComp(beaconUid, out RMCERTDistressBeaconComponent? beacon))
         {
             return;
@@ -573,7 +574,6 @@ public sealed class RMCERTSystem : EntitySystem
             beaconComp.SingleUse)
         {
             beaconComp.Spent = true;
-            Dirty(beacon, beaconComp);
         }
 
         DirtyState();
