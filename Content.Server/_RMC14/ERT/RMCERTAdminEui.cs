@@ -96,6 +96,6 @@ public sealed class RMCERTAdminEui : BaseEui
 
     private bool HasPermission()
     {
-        return _admin.HasAdminFlag(Player, AdminFlags.Admin);
+        return _admin.HasAdminFlag(Player, AdminFlags.Spawn);
     }
 }

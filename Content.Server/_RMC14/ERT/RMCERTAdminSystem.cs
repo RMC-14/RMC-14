@@ -53,7 +53,7 @@ public sealed class RMCERTAdminSystem : EntitySystem
     }
 }
 
-[AdminCommand(AdminFlags.Admin)]
+[AdminCommand(AdminFlags.Spawn)]
 public sealed class RMCERTAdminCommand : LocalizedCommands
 {
     [Dependency] private readonly IEntityManager _entities = default!;
