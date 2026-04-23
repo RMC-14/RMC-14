@@ -17,18 +17,25 @@ public sealed class BecomeImaginaryFriendEui : BaseEui
             Loc.GetString("rmc-mentor-imaginary-friend-confirmation-title"),
             Loc.GetString("rmc-mentor-imaginary-friend-confirmation-text"),
             Loc.GetString("rmc-mentor-imaginary-friend-confirmation-confirm"),
-            Loc.GetString("rmc-mentor-imaginary-friend-confirmation-decline")
+            Loc.GetString("rmc-mentor-imaginary-friend-confirmation-cancel"),
+            Loc.GetString("rmc-mentor-imaginary-friend-confirmation-confirm-default")
         );
 
         _window.AcceptButton.OnPressed += _ =>
         {
-            SendMessage(new BecomeImaginaryFriendMessage(true));
+            SendMessage(new BecomeImaginaryFriendMessage(true, false));
             _window.Close();
         };
 
         _window.DenyButton.OnPressed += _ =>
         {
-            SendMessage(new BecomeImaginaryFriendMessage(false));
+            SendMessage(new BecomeImaginaryFriendMessage(false, false));
+            _window.Close();
+        };
+
+        _window.ExtraButton.OnPressed += _ =>
+        {
+            SendMessage(new BecomeImaginaryFriendMessage(true, true));
             _window.Close();
         };
     }

@@ -9,14 +9,14 @@ public sealed class BecomeImaginaryFriendEui(ImaginaryFriendSystem friend, Entit
 {
     public override void HandleMessage(EuiMessageBase msg)
     {
-        if (msg is not BecomeImaginaryFriendMessage { Accepted: true } ||
+        if (msg is not BecomeImaginaryFriendMessage { Accepted: true } message ||
             session.AttachedEntity is not { } userEntity)
         {
             Close();
             return;
         }
 
-        friend.BecomeImaginaryFriend(targetEntity, userEntity);
+        friend.BecomeImaginaryFriend(targetEntity, userEntity, message.DefaultCharacter);
 
         Close();
     }

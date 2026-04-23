@@ -9,6 +9,7 @@ public sealed class ConfirmationWindow : DefaultWindow
 {
     public readonly Button AcceptButton;
     public readonly Button DenyButton;
+    public readonly Button ExtraButton;
     private readonly Label _label;
 
     public ConfirmationWindow()
@@ -29,6 +30,8 @@ public sealed class ConfirmationWindow : DefaultWindow
                     {
                         (AcceptButton = new Button()),
                         new Control { MinSize = new Vector2(20, 0) },
+                        (ExtraButton = new Button { Visible = false }),
+                        new Control { MinSize = new Vector2(20, 0) },
                         (DenyButton = new Button())
                     },
                 },
@@ -36,11 +39,19 @@ public sealed class ConfirmationWindow : DefaultWindow
         });
     }
 
-    public void Setup(string title, string text, string accept, string deny)
+    public void Setup(string title, string text, string accept, string deny, string? extra = null)
     {
         Title = title;
         _label.Text = text;
         AcceptButton.Text = accept;
         DenyButton.Text = deny;
+
+        if (extra != null)
+        {
+            ExtraButton.Text = extra;
+            ExtraButton.Visible = true;
+        }
+        else
+            ExtraButton.Visible = false;
     }
 }
