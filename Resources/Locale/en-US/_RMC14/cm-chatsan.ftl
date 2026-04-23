@@ -289,12 +289,6 @@ cm-chatsan-replacement-felinid = feline host
 cm-chatsan-word-felinids = felinids
 cm-chatsan-replacement-felinids = feline hosts
 
-cm-chatsan-word-cat = cat
-cm-chatsan-replacement-cat = feline host
-
-cm-chatsan-word-cats = cats
-cm-chatsan-replacement-cats = feline hosts
-
 cm-chatsan-word-vamp = vamp
 cm-chatsan-word-replacement-vamp = vampire lurker
 
@@ -341,7 +335,7 @@ cm-chatsan-word-sharks = sharks
 cm-chatsan-replacement-sharks = aquatic hosts
 
 cm-chatsan-word-dog = dog
-cm-chatsan-replacement-dog = fuzzy
+cm-chatsan-replacement-dog = canine
 
 cm-chatsan-word-corgi = corgi
 cm-chatsan-word-mrwiggles = mr.wiggles
@@ -358,12 +352,12 @@ cm-chatsan-replacement-dogs = canine fuzzies
 cm-chatsan-word-cat = cat
 cm-chatsan-word-kitty = kitty
 cm-chatsan-word-kitten = kitten
-cm-chatsan-replacement-cat = feline fuzzy
+cm-chatsan-replacement-cat = feline
 
 cm-chatsan-word-cats = cats
 cm-chatsan-word-kitties = kitties
 cm-chatsan-word-kittens = kittens
-cm-chatsan-replacement-cats = feline fuzzies
+cm-chatsan-replacement-cats = felines
 
 cm-chatsan-word-fish = fish
 cm-chatsan-word-carp = carp
