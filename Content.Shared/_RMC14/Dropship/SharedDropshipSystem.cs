@@ -757,9 +757,8 @@ public abstract class SharedDropshipSystem : EntitySystem
             return false;
 
         if (destinationComp.DockBounds is { } dockBounds &&
-            !ContainsBounds(dockBounds, shuttleBounds))
+            !TryValidateDockFit(dockBounds, shuttleBounds, out reason))
         {
-            reason = $"This shuttle is too large for the destination berth ({FormatBoundsSize(shuttleBounds)} required, {FormatBoundsSize(dockBounds)} available).";
             return false;
         }
 
@@ -806,12 +805,37 @@ public abstract class SharedDropshipSystem : EntitySystem
         return left.Any(right.Contains);
     }
 
-    private static bool ContainsBounds(Box2 outer, Box2 inner)
+    private static bool TryValidateDockFit(Box2 berth, Box2 shuttle, out string reason)
     {
-        return inner.Left >= outer.Left &&
-               inner.Right <= outer.Right &&
-               inner.Bottom >= outer.Bottom &&
-               inner.Top <= outer.Top;
+        var berthSize = FormatBoundsSize(berth);
+        var shuttleSize = FormatBoundsSize(shuttle);
+
+        if (shuttle.Left < berth.Left)
+        {
+            reason = $"This shuttle extends past the port-side docking clearance ({shuttleSize} required, {berthSize} available).";
+            return false;
+        }
+
+        if (shuttle.Right > berth.Right)
+        {
+            reason = $"This shuttle extends past the starboard docking clearance ({shuttleSize} required, {berthSize} available).";
+            return false;
+        }
+
+        if (shuttle.Bottom < berth.Bottom)
+        {
+            reason = $"This shuttle extends past the aft docking clearance ({shuttleSize} required, {berthSize} available).";
+            return false;
+        }
+
+        if (shuttle.Top > berth.Top)
+        {
+            reason = $"This shuttle extends past the forward docking clearance ({shuttleSize} required, {berthSize} available).";
+            return false;
+        }
+
+        reason = string.Empty;
+        return true;
     }
 
     private static string FormatBoundsSize(Box2 bounds)

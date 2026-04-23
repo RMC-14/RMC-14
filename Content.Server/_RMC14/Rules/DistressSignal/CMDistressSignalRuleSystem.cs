@@ -220,6 +220,11 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
 
     private void InvalidateActiveRule() => _activeRule = null;
 
+    public bool IsHijackActive()
+    {
+        return TryGetActiveRule()?.Hijack == true;
+    }
+
     public override void Initialize()
     {
         base.Initialize();

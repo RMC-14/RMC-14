@@ -16,6 +16,7 @@ public sealed class RMCERTRequest
     public string Reason = string.Empty;
     public TimeSpan CreatedAt;
     public TimeSpan? DispatchAt;
+    public TimeSpan? RecruitmentEndsAt;
     public ProtoId<RMCERTCallPrototype>? SelectedCall;
     public List<ProtoId<RMCERTCallPrototype>> AllowedCalls = [];
     public string LastError = string.Empty;

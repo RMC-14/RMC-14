@@ -1,12 +1,16 @@
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using Content.Server._RMC14.Dropship;
+using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server._RMC14.Marines;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
+using Content.Server.Ghost;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Humanoid.Components;
 using Content.Server.Humanoid.Systems;
+using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Shared.Appearance;
 using Content.Shared.Access.Components;
@@ -22,6 +26,7 @@ using Content.Shared.Database;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
@@ -46,11 +51,15 @@ public sealed class RMCERTSystem : EntitySystem
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
+    [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
+    [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -76,6 +85,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         SubscribeLocalEvent<RMCERTDistressBeaconComponent, UseInHandEvent>(OnHandheldUse);
         SubscribeLocalEvent<RMCERTDistressBeaconComponent, RMCERTHandheldDistressReasonEvent>(OnHandheldReason);
+        SubscribeLocalEvent<RMCERTMemberComponent, MindAddedMessage>(OnERTMindAdded);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, RMCERTConsoleDistressReasonEvent>(OnConsoleReason);
 
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key, subs =>
@@ -276,6 +286,8 @@ public sealed class RMCERTSystem : EntitySystem
 
         request.State = RMCERTRequestState.Cancelled;
         request.LastError = string.Empty;
+        request.RecruitmentEndsAt = null;
+        CleanupRequestContent(request, "cancelled");
         UpdateSourceVisual(request, false);
         var adminText = admin is { Valid: true }
             ? ToPrettyString(admin.Value)
@@ -304,6 +316,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         request.State = RMCERTRequestState.Completed;
         request.LastError = string.Empty;
+        request.RecruitmentEndsAt = null;
         UpdateSourceVisual(request, false);
 
         var adminText = admin is { Valid: true }
@@ -339,6 +352,22 @@ public sealed class RMCERTSystem : EntitySystem
             return;
 
         RequestConsoleDistress(ent, user.Value, args.Message);
+    }
+
+    private void OnERTMindAdded(Entity<RMCERTMemberComponent> ent, ref MindAddedMessage args)
+    {
+        if (!TryComp(ent, out ActorComponent? actor) ||
+            !_requests.TryGetValue(ent.Comp.RequestId, out var request) ||
+            !_prototypes.TryIndex(new ProtoId<RMCERTCallPrototype>(ent.Comp.Call), out var call))
+        {
+            return;
+        }
+
+        var briefing = BuildMemberBriefing(request, call, ent.Comp);
+        if (string.IsNullOrWhiteSpace(briefing))
+            return;
+
+        _chat.DispatchServerMessage(actor.PlayerSession, briefing, false);
     }
 
     private void OnDropshipArrivedAtDestination(ref DropshipArrivedAtDestinationEvent ev)
@@ -445,7 +474,7 @@ public sealed class RMCERTSystem : EntitySystem
         _requests[request.Id] = request;
         _sourceCooldowns[sourceEntity] = _timing.CurTime;
 
-        var text = $"ERT request {request.Id} from {request.RequesterName} via {request.Source}: {reason}";
+        var text = BuildAdminRequestAnnouncement(request);
         _chat.SendAdminAnnouncement(text);
 
         NotifyAdminsOfRequest();
@@ -505,6 +534,7 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         request.State = RMCERTRequestState.Recruiting;
+        request.RecruitmentEndsAt = _timing.CurTime + call.Requirements.RecruitmentDuration;
         Announce(call.Announcements.Recruiting, call.Announcements.RecruitingSound, request, call);
         _chat.SendAdminAnnouncement($"ERT request {request.Id} is recruiting {request.PlannedRoster.Count} ghost-role slots for {call.Name}.");
 
@@ -527,7 +557,10 @@ public sealed class RMCERTSystem : EntitySystem
         shuttle = null;
         error = string.Empty;
 
-        if (call.ShuttleMap == null)
+        if (!TryGetShuttleMapPath(call, out var shuttleMap, out error))
+            return false;
+
+        if (shuttleMap == null)
             return true;
 
         if (_ertMap is not { } targetMap || !_map.MapExists(targetMap))
@@ -540,10 +573,10 @@ public sealed class RMCERTSystem : EntitySystem
         var offset = new Vector2(_loadedShuttles * 50, _loadedShuttles * 50);
         _loadedShuttles++;
 
-        if (!_mapLoader.TryLoadGrid(targetMap, call.ShuttleMap.Value, out var result, offset: offset) ||
+        if (!_mapLoader.TryLoadGrid(targetMap, shuttleMap.Value, out var result, offset: offset) ||
             result == null)
         {
-            error = $"Failed to load ERT shuttle map {call.ShuttleMap}.";
+            error = $"Failed to load ERT shuttle map {shuttleMap}.";
             return false;
         }
 
@@ -562,6 +595,7 @@ public sealed class RMCERTSystem : EntitySystem
             if (xform.GridUid != shuttle.Value)
                 continue;
 
+            computer.Hijackable = !shuttleComp.NoHijack;
             computer.PlanetOnly = false;
             computer.RequiresERTLandingZone = true;
             computer.AllowedERTLandingTags = call.LandingTags.ToList();
@@ -797,8 +831,128 @@ public sealed class RMCERTSystem : EntitySystem
         return new EntityCoordinates(EntityUid.Invalid, Vector2.Zero);
     }
 
+    private bool TryGetShuttleMapPath(RMCERTCallPrototype call, out ResPath? shuttleMap, out string error)
+    {
+        shuttleMap = call.ShuttleMap;
+        error = string.Empty;
+
+        if (call.ShuttleSpawner == null)
+            return true;
+
+        if (!_prototypes.TryIndex(call.ShuttleSpawner.Value, out var spawnerPrototype))
+        {
+            error = $"Unknown ERT shuttle spawner prototype {call.ShuttleSpawner.Value.Id}.";
+            return false;
+        }
+
+        if (!spawnerPrototype.TryGetComponent<GridSpawnerComponent>(out var gridSpawner, _componentFactory))
+        {
+            error = $"ERT shuttle spawner {call.ShuttleSpawner.Value.Id} is missing GridSpawnerComponent.";
+            return false;
+        }
+
+        shuttleMap = gridSpawner.Spawn ?? shuttleMap;
+        if (shuttleMap == null)
+        {
+            error = $"ERT shuttle spawner {call.ShuttleSpawner.Value.Id} does not define a shuttle map.";
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool HasActiveRecruitmentRaffles(RMCERTRequest request)
+    {
+        foreach (var slot in request.SpawnedGhostRoles)
+        {
+            if (Exists(slot) && HasComp<GhostRoleRaffleComponent>(slot))
+                return true;
+        }
+
+        return false;
+    }
+
+    private int FinalizeRecruitment(RMCERTRequest request)
+    {
+        var accepted = 0;
+        for (var i = request.SpawnedGhostRoles.Count - 1; i >= 0; i--)
+        {
+            var member = request.SpawnedGhostRoles[i];
+            if (!Exists(member))
+            {
+                request.SpawnedGhostRoles.RemoveAt(i);
+                continue;
+            }
+
+            if (TryComp(member, out GhostRoleComponent? ghostRole) &&
+                !ghostRole.Taken)
+            {
+                QueueDel(member);
+                request.SpawnedGhostRoles.RemoveAt(i);
+                continue;
+            }
+
+            accepted++;
+        }
+
+        return accepted;
+    }
+
+    private void CleanupRequestContent(RMCERTRequest request, string reason)
+    {
+        foreach (var member in request.SpawnedGhostRoles)
+        {
+            if (!Exists(member))
+                continue;
+
+            if (_mind.TryGetMind(member, out var mindId, out var mind))
+                _ghost.OnGhostAttempt(mindId, false, forced: true, mind: mind);
+
+            QueueDel(member);
+        }
+
+        request.SpawnedGhostRoles.Clear();
+        request.PlannedRoster.Clear();
+
+        if (request.Shuttle is { Valid: true } shuttle && Exists(shuttle))
+        {
+            if (TryComp(shuttle, out DropshipComponent? dropship) &&
+                dropship.Destination is { } destination &&
+                TryComp(destination, out DropshipDestinationComponent? destinationComp) &&
+                destinationComp.Ship == shuttle)
+            {
+                destinationComp.Ship = null;
+                Dirty(destination, destinationComp);
+            }
+
+            QueueDel(shuttle);
+            _chat.SendAdminAnnouncement($"ERT request {request.Id} {reason}; shuttle content cleaned up.");
+        }
+
+        request.Shuttle = null;
+    }
+
     private bool TryAutoLaunch(Guid id)
     {
+        if (!_requests.TryGetValue(id, out var request) ||
+            request.State != RMCERTRequestState.Recruiting)
+        {
+            return false;
+        }
+
+        if (request.RecruitmentEndsAt is { } endsAt &&
+            _timing.CurTime < endsAt)
+        {
+            Timer.Spawn(endsAt - _timing.CurTime, () => TryAutoLaunch(id));
+            return false;
+        }
+
+        if (HasActiveRecruitmentRaffles(request))
+        {
+            Timer.Spawn(TimeSpan.FromSeconds(1), () => TryAutoLaunch(id));
+            return false;
+        }
+
         return TryLaunch(id, null, true);
     }
 
@@ -816,6 +970,18 @@ public sealed class RMCERTSystem : EntitySystem
             return false;
         }
 
+        if (!automatic && request.RecruitmentEndsAt is { } endsAt && _timing.CurTime < endsAt)
+        {
+            request.RecruitmentEndsAt = _timing.CurTime;
+        }
+
+        if (HasActiveRecruitmentRaffles(request))
+        {
+            request.LastError = "Ghost role raffles are still in progress for this response team.";
+            DirtyState();
+            return false;
+        }
+
         var launcher = automatic
             ? "automatic launch timer"
             : admin is { Valid: true }
@@ -828,6 +994,16 @@ public sealed class RMCERTSystem : EntitySystem
     private bool TryLaunchRequest(RMCERTRequest request, RMCERTCallPrototype call, string launcher)
     {
         request.LastError = string.Empty;
+        request.RecruitmentEndsAt = null;
+
+        var acceptedCount = FinalizeRecruitment(request);
+        if (acceptedCount < call.Requirements.MinRequiredSlots)
+        {
+            FailRequest(request, acceptedCount == 0
+                ? "No volunteers accepted the emergency response deployment."
+                : $"Only {acceptedCount} emergency responders accepted deployment, but {call.Requirements.MinRequiredSlots} are required.");
+            return false;
+        }
 
         if (request.Shuttle is not { Valid: true } shuttle)
         {
@@ -961,6 +1137,20 @@ public sealed class RMCERTSystem : EntitySystem
     {
         error = string.Empty;
 
+        if (call.Requirements.DisallowDuringEvacuation &&
+            _evacuation.IsEvacuationInProgress())
+        {
+            error = $"{call.Name} is unavailable while evacuation is in progress.";
+            return false;
+        }
+
+        if (call.Requirements.DisallowDuringHijack &&
+            _distressSignal.IsHijackActive())
+        {
+            error = $"{call.Name} is unavailable during hijack conditions.";
+            return false;
+        }
+
         if (call.Requirements.MinRoundTime is { } minRound && _timing.CurTime < minRound)
         {
             error = $"{call.Name} requires at least {(int) minRound.TotalMinutes} minutes of round time.";
@@ -1024,6 +1214,8 @@ public sealed class RMCERTSystem : EntitySystem
     {
         request.State = RMCERTRequestState.Failed;
         request.LastError = error;
+        request.RecruitmentEndsAt = null;
+        CleanupRequestContent(request, "failed");
         UpdateSourceVisual(request, false);
         _chat.SendAdminAnnouncement($"ERT request {request.Id} failed: {error}");
 
@@ -1038,11 +1230,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (string.IsNullOrWhiteSpace(message))
             return;
 
-        var text = message
-            .Replace("{team}", call.Name, StringComparison.Ordinal)
-            .Replace("{requester}", request.RequesterName, StringComparison.Ordinal)
-            .Replace("{reason}", request.Reason, StringComparison.Ordinal);
-
+        var text = FormatCallText(message, request, call);
         _marineAnnounce.AnnounceHighCommand(text, sound: sound);
     }
 
@@ -1058,6 +1246,68 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         return null;
+    }
+
+    private string BuildAdminRequestAnnouncement(RMCERTRequest request)
+    {
+        var baseText = $"ERT request {request.Id} from {request.RequesterName} via {request.Source}: {request.Reason}";
+        if (request.AllowedCalls.Count != 1 ||
+            !_prototypes.TryIndex(request.AllowedCalls[0], out var call) ||
+            string.IsNullOrWhiteSpace(call.Announcements.RequestAdmin))
+        {
+            return baseText;
+        }
+
+        var extra = FormatCallText(call.Announcements.RequestAdmin!, request, call);
+        return $"{baseText} {extra}";
+    }
+
+    private string BuildMemberBriefing(RMCERTRequest request, RMCERTCallPrototype call, RMCERTMemberComponent member)
+    {
+        if (call.Objectives.Count == 0 &&
+            call.Features.Count == 0 &&
+            string.IsNullOrWhiteSpace(request.Reason))
+        {
+            return string.Empty;
+        }
+
+        var builder = new StringBuilder();
+        builder.AppendLine($"{call.Name} briefing");
+
+        if (!string.IsNullOrWhiteSpace(request.Reason))
+            builder.AppendLine($"Reason: {request.Reason}");
+
+        if (call.Objectives.Count > 0)
+        {
+            builder.AppendLine("Objectives:");
+            foreach (var objective in call.Objectives)
+            {
+                builder.Append("- ");
+                builder.AppendLine(FormatCallText(objective, request, call));
+            }
+        }
+
+        if (call.Features.Count > 0)
+        {
+            builder.AppendLine("Operational notes:");
+            foreach (var feature in call.Features)
+            {
+                builder.Append("- ");
+                builder.AppendLine(FormatCallText(feature, request, call));
+            }
+        }
+
+        var roleName = call.Roles.FirstOrDefault(role => role.Id == member.Role)?.Name ?? member.Role;
+        builder.AppendLine($"Assigned role: {roleName}");
+        return builder.ToString().TrimEnd();
+    }
+
+    private static string FormatCallText(string text, RMCERTRequest request, RMCERTCallPrototype call)
+    {
+        return text
+            .Replace("{team}", call.Name, StringComparison.Ordinal)
+            .Replace("{requester}", request.RequesterName, StringComparison.Ordinal)
+            .Replace("{reason}", request.Reason, StringComparison.Ordinal);
     }
 
     private void NotifyAdminsOfRequest()
@@ -1125,6 +1375,9 @@ public sealed class RMCERTSystem : EntitySystem
         {
             if (call.Roles.Count == 0)
                 Log.Error($"ERT call {call.ID} has no roles configured.");
+
+            if (!TryGetShuttleMapPath(call, out _, out var shuttleError))
+                Log.Error($"ERT call {call.ID} has invalid shuttle configuration: {shuttleError}");
 
             if (string.IsNullOrWhiteSpace(call.Organization) &&
                 call.NpcFactions.Count == 0 &&
