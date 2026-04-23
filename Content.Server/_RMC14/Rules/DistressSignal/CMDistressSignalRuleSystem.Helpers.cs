@@ -13,6 +13,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Fax.Components;
 using Content.Shared.Roles;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -22,6 +23,21 @@ namespace Content.Server._RMC14.Rules.DistressSignal;
 public sealed partial class CMDistressSignalRuleSystem
 {
     private const int FaxPowerLoadValue = 5;
+
+    /// <summary>
+    /// Checks whether a player is allowed to play the specified job, considering bans and playtime requirements.
+    /// </summary>
+    private bool IsJobAllowed(NetUserId id, ProtoId<JobPrototype> role)
+    {
+        if (!_player.TryGetSessionById(id, out var player))
+            return false;
+
+        var jobBans = _bans.GetJobBans(player.UserId);
+        if (jobBans != null && jobBans.Contains(role))
+            return false;
+
+        return _playTime.IsAllowed(player, role);
+    }
 
     // TODO RMC14: Move these to a prototype
     private string GetRandomOperationName()
@@ -45,6 +61,7 @@ public sealed partial class CMDistressSignalRuleSystem
         return name.Trim();
     }
 
+    // TODO RMC14 this would be literally anywhere else if the code for loading maps wasn't dogshit and broken upstream
     private void SpawnAdminAreas(CMDistressSignalRuleComponent comp)
     {
         bool SpawnMap(ResPath path, [NotNullWhen(true)] out EntityUid? mapEntityUid)
@@ -92,6 +109,10 @@ public sealed partial class CMDistressSignalRuleSystem
             _camo.CurrentMapCamouflage = SelectedPlanetMap.Value.Comp.Camouflage;
     }
 
+    /// <summary>
+    /// Sets the hive of all loaded xeno friendly entities (e.g., weeds).
+    /// Only makes sense for distress signal with 1 hive, with multiple hives you would need to determine which weeds belong to which hive
+    /// </summary>
     private void SetFriendlyHives(EntityUid hive)
     {
         var query = EntityQueryEnumerator<XenoFriendlyComponent>();
@@ -122,6 +143,7 @@ public sealed partial class CMDistressSignalRuleSystem
         
         foreach (var tunnel in tunnels)
         {
+            // Replace all pre-mapped tunnels with a new tunnel with name and associated with the hive
             if (_xenoTunnel.TryPlaceTunnel(hive, null, tunnel.ToCoordinates(), out var newTunnel))
                 RemCompDeferred<DeletedByWeedKillerComponent>(newTunnel.Value);
 

@@ -13,6 +13,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMRoyalMarinesAssaultEngineerPVE
+    pointsType: AssaultEngineer
     sections:
     - name: Assault Engineering Set (Mandatory) # TODO RMC royal marines breaching hammer, XM51 is placeholder
       choices: { CMPrimary: 1 }
@@ -20,8 +21,8 @@
       entries:
       # - id: RMCBreachingHammerD2
       #   name: Breaching Hammer
-      - id: RMCXM51Case
-        name: Breaching Shotgun
+      - id: RMCL49Case
+        name: assault shotgun case
     - name: Specialist Equipment (Mandatory)
       takeAll: CMStandard
       entries:
@@ -50,6 +51,16 @@
         name: grenade armor webbing
       - id: RMCArmorWebbingPouchRCM
         name: general armor webbing
+    - name: Shotgun Shells
+      entries:
+      - id: RMCBoxShotgunBuckshot
+        points: 20
+      - id: RMCBoxShotgunSlugs
+        points: 20
+      - id: RMCBoxShotgunFlechette
+        points: 20
+      - id: RMCBoxShotgunL49B
+        points: 20
 
 - type: entity
   parent: ColMarTechBase

@@ -33,6 +33,9 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillPilot: 1
         RMCSkillSurgery: 1
+    - type: CMVendorUser
+      extraPoints:
+        AssaultEngineer: 60
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-assault-engineer
     - type: AssignSquad

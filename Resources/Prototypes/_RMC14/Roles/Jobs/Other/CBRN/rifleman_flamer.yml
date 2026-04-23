@@ -24,7 +24,6 @@
 - type: startingGear
   id: RMCCBRNRiflemanFlamer
   equipment:
-    head: RMCArmorHelmetCBRN
     ears: CMHeadsetCBRN
     jumpsuit: RMCCBRNSuitHEDP
     outerClothing: RMCArmorCBRN
