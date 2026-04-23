@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 08/18/2025 14:27:58
-  entityCount: 97
+  entityCount: 101
 maps: []
 grids:
 - 1
@@ -307,7 +307,22 @@ entities:
     - type: Transform
       pos: 5.5,6.5
       parent: 1
-- proto: CMSeatPassenger
+- proto: RMCERTSeatMedic
+  entities:
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 4.23971,11
+      parent: 1
+- proto: RMCERTSeatEngineer
+  entities:
+  - uid: 59
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.2709599,10
+      parent: 1
+- proto: RMCERTSeatTroop
   entities:
   - uid: 10
     components:
@@ -336,22 +351,11 @@ entities:
       rot: 3.141592653589793 rad
       pos: 4.2475224,10
       parent: 1
-  - uid: 20
-    components:
-    - type: Transform
-      pos: 4.23971,11
-      parent: 1
   - uid: 58
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.7631474,10
-      parent: 1
-  - uid: 59
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.2709599,10
       parent: 1
   - uid: 64
     components:
@@ -397,7 +401,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 2.5,8.5
       parent: 1
-- proto: CMSeatPilot
+- proto: RMCERTSeatPilotCommand
   entities:
   - uid: 89
     components:
@@ -701,6 +705,34 @@ entities:
     components:
     - type: Transform
       pos: 3.5,5.5
+      parent: 1
+- proto: RMCERTSpawnMarkerCommand
+  entities:
+  - uid: 1001
+    components:
+    - type: Transform
+      pos: 3.5,11.5
+      parent: 1
+- proto: RMCERTSpawnMarkerMedic
+  entities:
+  - uid: 1002
+    components:
+    - type: Transform
+      pos: 4.23971,11
+      parent: 1
+- proto: RMCERTSpawnMarkerEngineer
+  entities:
+  - uid: 1003
+    components:
+    - type: Transform
+      pos: 2.2709599,10
+      parent: 1
+- proto: RMCERTSpawnMarker
+  entities:
+  - uid: 1004
+    components:
+    - type: Transform
+      pos: 4.255335,9.5
       parent: 1
 - proto: RMCWeyaEngine65
   entities:

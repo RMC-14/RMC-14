@@ -1,0 +1,145 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCERTSpawnMarker
+  name: ERT spawn marker
+  suffix: ERT
+  description: Fallback spawn marker for emergency response team members on ERT shuttles.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: green
+  - type: RMCERTSpawnPoint
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+
+- type: entity
+  parent: RMCERTSpawnMarker
+  id: RMCERTSpawnMarkerCommand
+  suffix: ERT, Command
+  components:
+  - type: Sprite
+    state: blue
+  - type: RMCERTSpawnPoint
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+
+- type: entity
+  parent: RMCERTSpawnMarker
+  id: RMCERTSpawnMarkerMedic
+  suffix: ERT, Medic
+  components:
+  - type: Sprite
+    state: red
+  - type: RMCERTSpawnPoint
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+    priority: 50
+
+- type: entity
+  parent: RMCERTSpawnMarker
+  id: RMCERTSpawnMarkerEngineer
+  suffix: ERT, Engineer
+  components:
+  - type: Sprite
+    state: pink
+  - type: RMCERTSpawnPoint
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+    priority: 40
+
+- type: entity
+  parent: CMSeatPassenger
+  id: RMCERTSeatTroop
+  name: ERT troop seat
+  suffix: ERT
+  components:
+  - type: RMCERTSeat
+    seatTags: [ troop ]
+
+- type: entity
+  parent: CMSeatPassenger
+  id: RMCERTSeatCommand
+  name: ERT command seat
+  suffix: ERT
+  components:
+  - type: RMCERTSeat
+    seatTags: [ command ]
+    reservedRoleTags: [ leader, command ]
+    priority: 100
+
+- type: entity
+  parent: CMSeatPassenger
+  id: RMCERTSeatMedic
+  name: ERT medic seat
+  suffix: ERT
+  components:
+  - type: RMCERTSeat
+    seatTags: [ medic, troop ]
+    reservedRoleTags: [ medic ]
+    priority: 50
+
+- type: entity
+  parent: CMSeatPassenger
+  id: RMCERTSeatEngineer
+  name: ERT engineer seat
+  suffix: ERT
+  components:
+  - type: RMCERTSeat
+    seatTags: [ engineer, troop ]
+    reservedRoleTags: [ engineer ]
+    priority: 40
+
+- type: entity
+  parent: CMSeatPilot
+  id: RMCERTSeatPilotCommand
+  name: ERT command seat
+  suffix: ERT, Pilot
+  components:
+  - type: RMCERTSeat
+    seatTags: [ command ]
+    reservedRoleTags: [ leader, command ]
+    priority: 110
+
+- type: entity
+  parent: RMCSeatDark
+  id: RMCERTSeatDarkTroop
+  name: ERT troop seat
+  suffix: ERT, Dark
+  components:
+  - type: RMCERTSeat
+    seatTags: [ troop ]
+
+- type: entity
+  parent: RMCSeatDark
+  id: RMCERTSeatDarkCommand
+  name: ERT command seat
+  suffix: ERT, Dark
+  components:
+  - type: RMCERTSeat
+    seatTags: [ command ]
+    reservedRoleTags: [ leader, command ]
+    priority: 100
+
+- type: entity
+  parent: RMCSeatDark
+  id: RMCERTSeatDarkMedic
+  name: ERT medic seat
+  suffix: ERT, Dark
+  components:
+  - type: RMCERTSeat
+    seatTags: [ medic, troop ]
+    reservedRoleTags: [ medic ]
+    priority: 50
+
+- type: entity
+  parent: RMCSeatDark
+  id: RMCERTSeatDarkEngineer
+  name: ERT engineer seat
+  suffix: ERT, Dark
+  components:
+  - type: RMCERTSeat
+    seatTags: [ engineer, troop ]
+    reservedRoleTags: [ engineer ]
+    priority: 40

@@ -1,0 +1,1202 @@
+using System.Linq;
+using System.Numerics;
+using Content.Server._RMC14.Dropship;
+using Content.Server._RMC14.Marines;
+using Content.Server.Administration.Managers;
+using Content.Server.Chat.Managers;
+using Content.Server.Ghost.Roles.Components;
+using Content.Server.Humanoid.Components;
+using Content.Server.Humanoid.Systems;
+using Content.Server.Popups;
+using Content.Shared.Appearance;
+using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems;
+using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.ERT;
+using Content.Shared._RMC14.Evacuation;
+using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Rules;
+using Content.Shared.Buckle;
+using Content.Shared.Database;
+using Content.Shared.Ghost.Roles.Components;
+using Content.Shared.GameTicking;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Popups;
+using Content.Shared.Shuttles.Components;
+using Content.Shared.Shuttles.Systems;
+using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.EntitySerialization.Systems;
+using Robust.Shared.Map;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+
+namespace Content.Server._RMC14.ERT;
+
+public sealed class RMCERTSystem : EntitySystem
+{
+    [Dependency] private readonly AccessReaderSystem _access = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IChatManager _chat = default!;
+    [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private readonly DialogSystem _dialog = default!;
+    [Dependency] private readonly DropshipSystem _dropship = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
+    [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+
+    private readonly Dictionary<Guid, RMCERTRequest> _requests = new();
+    private readonly Dictionary<EntityUid, TimeSpan> _sourceCooldowns = new();
+
+    private MapId? _ertMap;
+    private int _loadedShuttles;
+
+    private static readonly SoundPathSpecifier DefaultRequestSound = new("/Audio/_RMC14/AI/distressbeacon.ogg");
+    private static readonly SoundPathSpecifier AdminRequestSound = new("/Audio/_RMC14/Effects/sos-morse-code.ogg");
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        SubscribeLocalEvent<DropshipArrivedAtDestinationEvent>(OnDropshipArrivedAtDestination);
+
+        SubscribeLocalEvent<RMCERTDistressBeaconComponent, UseInHandEvent>(OnHandheldUse);
+        SubscribeLocalEvent<RMCERTDistressBeaconComponent, RMCERTHandheldDistressReasonEvent>(OnHandheldReason);
+        SubscribeLocalEvent<MarineCommunicationsComputerComponent, RMCERTConsoleDistressReasonEvent>(OnConsoleReason);
+
+        Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key, subs =>
+        {
+            subs.Event<MarineCommunicationsDistressBeaconMsg>(OnMarineCommunicationsDistressBeacon);
+        });
+
+        ValidatePrototypes();
+    }
+
+    private void OnRoundRestart(RoundRestartCleanupEvent ev)
+    {
+        _requests.Clear();
+        _sourceCooldowns.Clear();
+        _ertMap = null;
+        _loadedShuttles = 0;
+    }
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
+    {
+        if (ev.WasModified<RMCERTCallPrototype>() || ev.WasModified<EntityPrototype>())
+            ValidatePrototypes();
+    }
+
+    public RMCERTAdminEuiState CreateAdminState()
+    {
+        var requests = _requests.Values
+            .OrderByDescending(r => r.CreatedAt)
+            .Select(r => new RMCERTRequestOption(
+                r.Id,
+                r.State,
+                r.Source,
+                r.SourceName,
+                r.RequesterName,
+                r.Reason,
+                GetSelectedCallLabel(r),
+                r.AllowedCalls.Select(c => c.Id).ToList(),
+                FormatRoundTime(r.CreatedAt),
+                r.LastError))
+            .ToList();
+
+        var calls = _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
+            .OrderBy(c => c.Category)
+            .ThenBy(c => c.Name)
+            .Select(c => new RMCERTCallOption(c.ID, c.Name, GetOrganizationLabel(c), c.Category, c.RandomWeight, c.AdminSelectable))
+            .ToList();
+
+        return new RMCERTAdminEuiState(requests, calls);
+    }
+
+    public void RequestConsoleDistress(EntityUid console, EntityUid user, string reason)
+    {
+        var calls = _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
+            .Where(c => c.Enabled && c.AllowedSources.Contains(RMCERTRequestSource.Console))
+            .Select(c => new ProtoId<RMCERTCallPrototype>(c.ID))
+            .ToList();
+
+        CreateRequest(RMCERTRequestSource.Console, console, user, reason, calls);
+        _ui.CloseUi(console, MarineCommunicationsComputerUI.Key, user);
+    }
+
+    public void RequestHandheldDistress(Entity<RMCERTDistressBeaconComponent> beacon, EntityUid user, string reason)
+    {
+        if (beacon.Comp.Spent)
+        {
+            _popup.PopupEntity("The distress beacon has already been used.", beacon, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_timing.CurTime < beacon.Comp.LastUsed + beacon.Comp.Cooldown)
+        {
+            _popup.PopupEntity("The distress beacon is still recalibrating.", beacon, user, PopupType.MediumCaution);
+            return;
+        }
+
+        var calls = beacon.Comp.AllowedCalls.Count == 0
+            ? _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
+                .Where(c => c.Enabled && c.AllowedSources.Contains(RMCERTRequestSource.Handheld))
+                .Select(c => new ProtoId<RMCERTCallPrototype>(c.ID))
+                .ToList()
+            : beacon.Comp.AllowedCalls.ToList();
+
+        if (calls.Count == 0)
+        {
+            _popup.PopupEntity("The beacon cannot find any configured response teams.", beacon, user, PopupType.MediumCaution);
+            return;
+        }
+
+        beacon.Comp.LastUsed = _timing.CurTime;
+        Dirty(beacon);
+
+        CreateRequest(RMCERTRequestSource.Handheld, beacon, user, reason, calls);
+    }
+
+    public bool ApproveRandom(Guid id, EntityUid? admin)
+    {
+        if (!TryGetPending(id, out var request))
+            return false;
+
+        if (!TryPickRandomCall(request, out var call, out var error))
+        {
+            FailRequest(request, error);
+            return false;
+        }
+
+        if (call is not { } selected)
+            return false;
+
+        return ApproveSpecific(id, selected, admin);
+    }
+
+    public bool ApproveSpecific(Guid id, ProtoId<RMCERTCallPrototype> callId, EntityUid? admin)
+    {
+        if (!TryGetPending(id, out var request))
+            return false;
+
+        if (!_prototypes.TryIndex(callId, out var call))
+        {
+            FailRequest(request, $"Unknown ERT call prototype: {callId.Id}");
+            return false;
+        }
+
+        if (!request.AllowedCalls.Contains(callId) && request.Source != RMCERTRequestSource.Admin)
+        {
+            FailRequest(request, $"{call.Name} is not allowed for this distress source.");
+            return false;
+        }
+
+        if (!call.Enabled)
+        {
+            FailRequest(request, $"{call.Name} is disabled.");
+            return false;
+        }
+
+        if (!CheckRequirements(request, call, out var error))
+        {
+            FailRequest(request, error);
+            return false;
+        }
+
+        request.State = RMCERTRequestState.PendingDispatch;
+        request.SelectedCall = callId;
+        request.DispatchAt = _timing.CurTime + TimeSpan.FromSeconds(call.LaunchDelay);
+        request.LastError = string.Empty;
+
+        var adminText = admin is { Valid: true }
+            ? ToPrettyString(admin.Value)
+            : "server";
+        _chat.SendAdminAnnouncement($"{adminText} approved ERT request {request.Id} as {call.Name}. Dispatching in {(int) call.LaunchDelay} seconds.");
+        Announce(call.Announcements.Dispatch, call.Announcements.DispatchSound, request, call);
+        Log.Info($"ERT request {request.Id} approved as {call.ID} by {adminText}");
+
+        DirtyState();
+        Timer.Spawn(TimeSpan.FromSeconds(call.LaunchDelay), () => Dispatch(request.Id));
+        return true;
+    }
+
+    public bool Deny(Guid id, EntityUid? admin)
+    {
+        if (!_requests.TryGetValue(id, out var request))
+            return false;
+
+        if (IsTerminal(request.State))
+            return false;
+
+        request.State = RMCERTRequestState.Denied;
+        request.LastError = string.Empty;
+
+        if (request.SourceEntity is { Valid: true } beacon &&
+            TryComp(beacon, out RMCERTDistressBeaconComponent? beaconComp) &&
+            beaconComp.ResetOnDeny)
+        {
+            beaconComp.Spent = false;
+            Dirty(beacon, beaconComp);
+        }
+
+        UpdateSourceVisual(request, false);
+
+        var adminText = admin is { Valid: true }
+            ? ToPrettyString(admin.Value)
+            : "server";
+        _chat.SendAdminAnnouncement($"{adminText} denied ERT request {request.Id} from {request.RequesterName}.");
+
+        if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
+            Announce(call.Announcements.Denied, call.Announcements.DeniedSound, request, call);
+
+        DirtyState();
+        return true;
+    }
+
+    public bool Cancel(Guid id, EntityUid? admin)
+    {
+        if (!_requests.TryGetValue(id, out var request))
+            return false;
+
+        if (IsTerminal(request.State))
+            return false;
+
+        request.State = RMCERTRequestState.Cancelled;
+        request.LastError = string.Empty;
+        UpdateSourceVisual(request, false);
+        var adminText = admin is { Valid: true }
+            ? ToPrettyString(admin.Value)
+            : "server";
+        _chat.SendAdminAnnouncement($"{adminText} cancelled ERT request {request.Id}.");
+
+        if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
+            Announce(call.Announcements.Cancelled, call.Announcements.CancelledSound, request, call);
+
+        DirtyState();
+        return true;
+    }
+
+    public bool Launch(Guid id, EntityUid? admin)
+    {
+        return TryLaunch(id, admin, false);
+    }
+
+    public bool Complete(Guid id, EntityUid? admin)
+    {
+        if (!_requests.TryGetValue(id, out var request))
+            return false;
+
+        if (request.State != RMCERTRequestState.Arrived)
+            return false;
+
+        request.State = RMCERTRequestState.Completed;
+        request.LastError = string.Empty;
+        UpdateSourceVisual(request, false);
+
+        var adminText = admin is { Valid: true }
+            ? ToPrettyString(admin.Value)
+            : "server";
+        var selected = GetSelectedCallLabel(request) ?? "response team";
+        _chat.SendAdminAnnouncement($"{adminText} completed ERT request {request.Id} for {selected}.");
+        DirtyState();
+        return true;
+    }
+
+    private void OnMarineCommunicationsDistressBeacon(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsDistressBeaconMsg args)
+    {
+        if (!ent.Comp.CanTransmitDistress)
+        {
+            _popup.PopupEntity("This console cannot transmit a distress beacon.", ent, args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!CanCreateRequest(ent, out var reason))
+        {
+            _popup.PopupEntity(reason, ent, args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        var ev = new RMCERTConsoleDistressReasonEvent(GetNetEntity(args.Actor));
+        _dialog.OpenInput(ent, args.Actor, "State the reason for the distress beacon.", ev, true, ent.Comp.DistressReasonLimit);
+    }
+
+    private void OnConsoleReason(Entity<MarineCommunicationsComputerComponent> ent, ref RMCERTConsoleDistressReasonEvent args)
+    {
+        if (!TryGetEntity(args.User, out var user))
+            return;
+
+        RequestConsoleDistress(ent, user.Value, args.Message);
+    }
+
+    private void OnDropshipArrivedAtDestination(ref DropshipArrivedAtDestinationEvent ev)
+    {
+        foreach (var request in _requests.Values)
+        {
+            if (request.State != RMCERTRequestState.Launching ||
+                request.Shuttle != ev.Dropship.Owner)
+            {
+                continue;
+            }
+
+            if (request.SelectedCall is { } callId &&
+                _prototypes.TryIndex(callId, out var call))
+            {
+                MarkArrived(request, call);
+            }
+            else
+            {
+                request.State = RMCERTRequestState.Arrived;
+                request.LastError = string.Empty;
+                UpdateSourceVisual(request, false);
+                _chat.SendAdminAnnouncement($"ERT request {request.Id} arrived, but its call prototype is no longer available.");
+                DirtyState();
+            }
+
+            return;
+        }
+    }
+
+    private void OnHandheldUse(Entity<RMCERTDistressBeaconComponent> ent, ref UseInHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (TryComp(ent, out AccessReaderComponent? access) &&
+            !_access.IsAllowed(args.User, ent, access))
+        {
+            _popup.PopupEntity("Access denied.", ent, args.User, PopupType.MediumCaution);
+            args.Handled = true;
+            return;
+        }
+
+        if (!CanCreateRequest(ent, out var reason))
+        {
+            _popup.PopupEntity(reason, ent, args.User, PopupType.MediumCaution);
+            args.Handled = true;
+            return;
+        }
+
+        if (ent.Comp.ReasonRequired)
+        {
+            var ev = new RMCERTHandheldDistressReasonEvent(GetNetEntity(args.User));
+            _dialog.OpenInput(ent, args.User, "State the reason for the handheld distress beacon.", ev, true, ent.Comp.ReasonLimit);
+        }
+        else
+        {
+            RequestHandheldDistress(ent, args.User, string.Empty);
+        }
+
+        args.Handled = true;
+    }
+
+    private void OnHandheldReason(Entity<RMCERTDistressBeaconComponent> ent, ref RMCERTHandheldDistressReasonEvent args)
+    {
+        if (!TryGetEntity(args.User, out var user))
+            return;
+
+        RequestHandheldDistress(ent, user.Value, args.Message);
+    }
+
+    private void CreateRequest(
+        RMCERTRequestSource source,
+        EntityUid sourceEntity,
+        EntityUid requester,
+        string reason,
+        List<ProtoId<RMCERTCallPrototype>> allowedCalls)
+    {
+        if (!CanCreateRequest(sourceEntity, out var error))
+        {
+            _popup.PopupEntity(error, sourceEntity, requester, PopupType.MediumCaution);
+            return;
+        }
+
+        if (allowedCalls.Count == 0)
+        {
+            _popup.PopupEntity("There are no configured response teams for this distress source.", sourceEntity, requester, PopupType.MediumCaution);
+            return;
+        }
+
+        reason = reason.Trim();
+        var request = new RMCERTRequest
+        {
+            Source = source,
+            SourceEntity = sourceEntity,
+            Requester = requester,
+            SourceName = Name(sourceEntity),
+            RequesterName = Name(requester),
+            Reason = reason,
+            CreatedAt = _timing.CurTime,
+            AllowedCalls = allowedCalls,
+        };
+
+        _requests[request.Id] = request;
+        _sourceCooldowns[sourceEntity] = _timing.CurTime;
+
+        var text = $"ERT request {request.Id} from {request.RequesterName} via {request.Source}: {reason}";
+        _chat.SendAdminAnnouncement(text);
+
+        NotifyAdminsOfRequest();
+
+        if (source == RMCERTRequestSource.Console)
+        {
+            var requestSound = GetRequestSound(allowedCalls) ?? DefaultRequestSound;
+            _marineAnnounce.AnnounceHighCommand(
+                "A distress beacon has been launched. High Command is reviewing the request.",
+                sound: requestSound);
+        }
+
+        if (source == RMCERTRequestSource.Handheld)
+            UpdateSourceVisual(request, true);
+
+        _popup.PopupEntity("The distress beacon has been transmitted to High Command.", sourceEntity, requester, PopupType.Medium);
+        DirtyState();
+    }
+
+    private void Dispatch(Guid id)
+    {
+        if (!_requests.TryGetValue(id, out var request))
+            return;
+
+        if (request.State != RMCERTRequestState.PendingDispatch)
+            return;
+
+        if (request.SelectedCall is not { } callId || !_prototypes.TryIndex(callId, out var call))
+        {
+            FailRequest(request, "The selected ERT call no longer exists.");
+            return;
+        }
+
+        request.State = RMCERTRequestState.Spawning;
+        DirtyState();
+
+        if (!TryLoadShuttle(request, call, out var shuttle, out var error))
+        {
+            FailRequest(request, error);
+            return;
+        }
+
+        request.Shuttle = shuttle;
+        request.PlannedRoster.Clear();
+        request.SpawnedGhostRoles.Clear();
+
+        if (!BuildRoster(request, call, out error))
+        {
+            FailRequest(request, error);
+            return;
+        }
+
+        if (!SpawnRosterSlots(request, call, shuttle, out error))
+        {
+            FailRequest(request, error);
+            return;
+        }
+
+        request.State = RMCERTRequestState.Recruiting;
+        Announce(call.Announcements.Recruiting, call.Announcements.RecruitingSound, request, call);
+        _chat.SendAdminAnnouncement($"ERT request {request.Id} is recruiting {request.PlannedRoster.Count} ghost-role slots for {call.Name}.");
+
+        if (request.SourceEntity is { Valid: true } beacon &&
+            TryComp(beacon, out RMCERTDistressBeaconComponent? beaconComp) &&
+            beaconComp.SingleUse)
+        {
+            beaconComp.Spent = true;
+            Dirty(beacon, beaconComp);
+        }
+
+        DirtyState();
+
+        if (call.AutoLaunch)
+            Timer.Spawn(call.Requirements.RecruitmentDuration, () => TryAutoLaunch(id));
+    }
+
+    private bool TryLoadShuttle(RMCERTRequest request, RMCERTCallPrototype call, out EntityUid? shuttle, out string error)
+    {
+        shuttle = null;
+        error = string.Empty;
+
+        if (call.ShuttleMap == null)
+            return true;
+
+        if (_ertMap is not { } targetMap || !_map.MapExists(targetMap))
+        {
+            _map.CreateMap(out var ertMap);
+            _ertMap = ertMap;
+            targetMap = ertMap;
+        }
+
+        var offset = new Vector2(_loadedShuttles * 50, _loadedShuttles * 50);
+        _loadedShuttles++;
+
+        if (!_mapLoader.TryLoadGrid(targetMap, call.ShuttleMap.Value, out var result, offset: offset) ||
+            result == null)
+        {
+            error = $"Failed to load ERT shuttle map {call.ShuttleMap}.";
+            return false;
+        }
+
+        shuttle = result.Value;
+        var shuttleComp = EnsureComp<RMCERTShuttleComponent>(shuttle.Value);
+        shuttleComp.Call = call.ID;
+        shuttleComp.Organization = GetOrganizationLabel(call);
+        shuttleComp.NpcFactions = call.NpcFactions.ToList();
+        shuttleComp.IffFaction = call.IffFaction;
+        shuttleComp.LandingTags = call.LandingTags.ToList();
+        Dirty(shuttle.Value, shuttleComp);
+
+        var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+        while (computerQuery.MoveNext(out var uid, out var computer, out var xform))
+        {
+            if (xform.GridUid != shuttle.Value)
+                continue;
+
+            computer.PlanetOnly = false;
+            computer.RequiresERTLandingZone = true;
+            computer.AllowedERTLandingTags = call.LandingTags.ToList();
+            computer.DeniedERTLandingTags = call.DeniedLandingTags.ToList();
+            Dirty(uid, computer);
+        }
+
+        return true;
+    }
+
+    private bool BuildRoster(RMCERTRequest request, RMCERTCallPrototype call, out string error)
+    {
+        error = string.Empty;
+        var roles = call.Roles
+            .OrderByDescending(r => r.Leader)
+            .ThenByDescending(r => r.Priority)
+            .ToList();
+        var countsByRole = new Dictionary<string, int>();
+        var minTotal = 0;
+        var maxTotal = 0;
+
+        foreach (var role in roles)
+        {
+            if (!_prototypes.HasIndex<EntityPrototype>(role.GhostRoleEntity))
+            {
+                error = $"Missing ghost role entity prototype {role.GhostRoleEntity.Id} for {call.Name}.";
+                return false;
+            }
+
+            var min = GetRoleMinimumCount(role);
+            var max = GetRoleMaximumCount(role);
+            countsByRole[role.Id] = 0;
+            minTotal += min;
+            maxTotal += max;
+
+            for (var i = 0; i < min; i++)
+            {
+                AddRosterSlot(request, role);
+                countsByRole[role.Id]++;
+            }
+        }
+
+        var targetMin = Math.Max(minTotal, call.Requirements.MinRequiredSlots);
+        if (targetMin > maxTotal)
+        {
+            error = $"ERT call {call.Name} requires at least {targetMin} slots, but its configured maximum is {maxTotal}.";
+            return false;
+        }
+
+        var targetCount = targetMin;
+        if (maxTotal > targetMin)
+            targetCount = _random.Next(targetMin, maxTotal + 1);
+
+        while (request.PlannedRoster.Count < targetCount)
+        {
+            var totalWeight = 0;
+            foreach (var role in roles)
+            {
+                var remaining = GetRoleMaximumCount(role) - countsByRole[role.Id];
+                if (remaining > 0)
+                    totalWeight += remaining;
+            }
+
+            if (totalWeight <= 0)
+                break;
+
+            var roll = _random.Next(totalWeight);
+            RMCERTRoleEntry? selected = null;
+            foreach (var role in roles)
+            {
+                var remaining = GetRoleMaximumCount(role) - countsByRole[role.Id];
+                if (remaining <= 0)
+                    continue;
+
+                if (roll < remaining)
+                {
+                    selected = role;
+                    break;
+                }
+
+                roll -= remaining;
+            }
+
+            if (selected == null)
+                break;
+
+            AddRosterSlot(request, selected);
+            countsByRole[selected.Id]++;
+        }
+
+        if (request.PlannedRoster.Count < targetMin)
+        {
+            error = $"Only {request.PlannedRoster.Count} ERT slots were planned, but {targetMin} are required.";
+            return false;
+        }
+
+        return request.PlannedRoster.Count > 0;
+    }
+
+    private bool SpawnRosterSlots(RMCERTRequest request, RMCERTCallPrototype call, EntityUid? shuttle, out string error)
+    {
+        error = string.Empty;
+
+        foreach (var slot in request.PlannedRoster)
+        {
+            var coords = GetSpawnCoordinates(request, shuttle, slot);
+            var spawned = SpawnResponseMember(request, call, slot, coords);
+            TryAssignSeat(spawned, shuttle, slot);
+            request.SpawnedGhostRoles.Add(spawned);
+        }
+
+        return request.SpawnedGhostRoles.Count > 0;
+    }
+
+    private void AddRosterSlot(RMCERTRequest request, RMCERTRoleEntry role)
+    {
+        request.PlannedRoster.Add(new RMCERTRosterSlot
+        {
+            RoleId = role.Id,
+            RoleName = role.Name,
+            GhostRoleEntity = role.GhostRoleEntity,
+            Leader = role.Leader,
+            Priority = role.Priority,
+            RoleTags = role.RoleTags.ToList(),
+            SeatTags = role.SeatTags.ToList(),
+        });
+    }
+
+    private EntityUid SpawnResponseMember(
+        RMCERTRequest request,
+        RMCERTCallPrototype call,
+        RMCERTRosterSlot slot,
+        EntityCoordinates coordinates)
+    {
+        EntityUid spawned;
+        if (_prototypes.TryIndex(slot.GhostRoleEntity, out var entityPrototype) &&
+            entityPrototype.TryGetComponent<RandomHumanoidSpawnerComponent>(out var spawner, _componentFactory) &&
+            !string.IsNullOrWhiteSpace(spawner.SettingsPrototypeId))
+        {
+            spawned = _randomHumanoid.SpawnRandomHumanoid(spawner.SettingsPrototypeId, coordinates, slot.RoleName);
+        }
+        else
+        {
+            spawned = Spawn(slot.GhostRoleEntity, coordinates);
+        }
+
+        var member = EnsureComp<RMCERTMemberComponent>(spawned);
+        member.RequestId = request.Id;
+        member.Call = call.ID;
+        member.Role = slot.RoleId;
+        member.Team = call.Name;
+        Dirty(spawned, member);
+
+        return spawned;
+    }
+
+    private bool TryAssignSeat(EntityUid member, EntityUid? shuttle, RMCERTRosterSlot slot)
+    {
+        if (shuttle is not { Valid: true } shuttleUid)
+            return false;
+
+        var bestSeat = EntityUid.Invalid;
+        var bestPriority = int.MinValue;
+        var query = EntityQueryEnumerator<RMCERTSeatComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var seat, out var xform))
+        {
+            if (xform.GridUid != shuttleUid)
+                continue;
+
+            if (seat.OccupiedBy != null)
+                continue;
+
+            var roleMatch = MatchesAny(seat.ReservedRoleTags, slot.RoleTags);
+            var seatMatch = MatchesAny(seat.SeatTags, slot.SeatTags);
+            if (!roleMatch && !seatMatch)
+                continue;
+
+            if (seat.Priority <= bestPriority)
+                continue;
+
+            bestSeat = uid;
+            bestPriority = seat.Priority;
+        }
+
+        if (!bestSeat.Valid)
+            return false;
+
+        var bestSeatComp = Comp<RMCERTSeatComponent>(bestSeat);
+        bestSeatComp.OccupiedBy = GetNetEntity(member);
+        bestSeatComp.ReservationExpires = null;
+        Dirty(bestSeat, bestSeatComp);
+
+        var coordinates = Transform(bestSeat).Coordinates;
+        _transform.SetCoordinates(member, coordinates);
+        _buckle.TryBuckle(member, null, bestSeat, popup: false);
+        return true;
+    }
+
+    private EntityCoordinates GetSpawnCoordinates(RMCERTRequest request, EntityUid? shuttle, RMCERTRosterSlot slot)
+    {
+        if (shuttle is { Valid: true } shuttleUid)
+        {
+            var matchingSpawns = new List<EntityUid>();
+            var highestPriority = int.MinValue;
+            var query = EntityQueryEnumerator<RMCERTSpawnPointComponent, TransformComponent>();
+            while (query.MoveNext(out var uid, out var spawn, out var xform))
+            {
+                if (xform.GridUid != shuttleUid)
+                    continue;
+
+                if (!MatchesAny(spawn.RoleTags, slot.RoleTags) && !MatchesAny(spawn.SeatTags, slot.SeatTags))
+                    continue;
+
+                if (spawn.Priority > highestPriority)
+                {
+                    highestPriority = spawn.Priority;
+                    matchingSpawns.Clear();
+                }
+
+                if (spawn.Priority == highestPriority)
+                    matchingSpawns.Add(uid);
+            }
+
+            if (matchingSpawns.Count > 0)
+                return Transform(_random.Pick(matchingSpawns)).Coordinates;
+
+            return new EntityCoordinates(shuttleUid, Vector2.Zero);
+        }
+
+        if (request.SourceEntity is { Valid: true } source)
+            return Transform(source).Coordinates;
+
+        return new EntityCoordinates(EntityUid.Invalid, Vector2.Zero);
+    }
+
+    private bool TryAutoLaunch(Guid id)
+    {
+        return TryLaunch(id, null, true);
+    }
+
+    private bool TryLaunch(Guid id, EntityUid? admin, bool automatic)
+    {
+        if (!_requests.TryGetValue(id, out var request))
+            return false;
+
+        if (request.State != RMCERTRequestState.Recruiting)
+            return false;
+
+        if (request.SelectedCall is not { } callId || !_prototypes.TryIndex(callId, out var call))
+        {
+            FailRequest(request, "The selected ERT call no longer exists.");
+            return false;
+        }
+
+        var launcher = automatic
+            ? "automatic launch timer"
+            : admin is { Valid: true }
+                ? ToPrettyString(admin.Value)
+                : "server";
+
+        return TryLaunchRequest(request, call, launcher);
+    }
+
+    private bool TryLaunchRequest(RMCERTRequest request, RMCERTCallPrototype call, string launcher)
+    {
+        request.LastError = string.Empty;
+
+        if (request.Shuttle is not { Valid: true } shuttle)
+        {
+            request.State = RMCERTRequestState.Launching;
+            Announce(call.Announcements.Launch, call.Announcements.LaunchSound, request, call);
+            MarkArrived(request, call, $"{launcher} without a shuttle");
+            return true;
+        }
+
+        if (!TryFindNavigationComputer(shuttle, out var computer))
+        {
+            FailRequest(request, "The ERT shuttle has no navigation computer.");
+            return false;
+        }
+
+        if (!TryFindLandingZone(request, computer, out var destination))
+        {
+            FailRequest(request, "No valid ERT landing zone is available.");
+            return false;
+        }
+
+        if (!_dropship.FlyTo(computer, destination, null, startupTime: 10f))
+        {
+            FailRequest(request, "The ERT shuttle failed to launch.");
+            return false;
+        }
+
+        request.State = RMCERTRequestState.Launching;
+        Announce(call.Announcements.Launch, call.Announcements.LaunchSound, request, call);
+        _chat.SendAdminAnnouncement($"ERT request {request.Id} for {call.Name} launched by {launcher}.");
+        DirtyState();
+        return true;
+    }
+
+    private bool TryFindNavigationComputer(EntityUid shuttle, out Entity<DropshipNavigationComputerComponent> computer)
+    {
+        var query = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var xform))
+        {
+            if (xform.GridUid != shuttle)
+                continue;
+
+            computer = (uid, comp);
+            return true;
+        }
+
+        computer = default;
+        return false;
+    }
+
+    private bool TryFindLandingZone(
+        RMCERTRequest request,
+        Entity<DropshipNavigationComputerComponent> computer,
+        out EntityUid destination)
+    {
+        var candidates = new List<EntityUid>();
+        MapId? sourceMap = null;
+        if (request.SourceEntity is { Valid: true } source)
+            sourceMap = Transform(source).MapUid;
+
+        var query = EntityQueryEnumerator<DropshipDestinationComponent>();
+        while (query.MoveNext(out var uid, out var dropshipDestination))
+        {
+            if (dropshipDestination.Ship != null)
+                continue;
+
+            if (sourceMap != null &&
+                Transform(uid).MapUid != sourceMap)
+            {
+                continue;
+            }
+
+            if (!_dropship.CanUseDestination(computer, uid, out _))
+                continue;
+
+            candidates.Add(uid);
+        }
+
+        if (candidates.Count > 0)
+        {
+            destination = _random.Pick(candidates);
+            return true;
+        }
+
+        destination = default;
+        return false;
+    }
+
+    private bool TryPickRandomCall(RMCERTRequest request, out ProtoId<RMCERTCallPrototype>? callId, out string error)
+    {
+        callId = null;
+        error = string.Empty;
+
+        var calls = new List<RMCERTCallPrototype>();
+        var total = 0;
+        foreach (var id in request.AllowedCalls)
+        {
+            if (!_prototypes.TryIndex(id, out var call))
+                continue;
+
+            if (!call.Enabled || call.RandomWeight <= 0)
+                continue;
+
+            total += call.RandomWeight;
+            calls.Add(call);
+        }
+
+        if (total <= 0)
+        {
+            error = "No weighted random ERT calls are available for this request.";
+            return false;
+        }
+
+        var roll = _random.Next(total);
+        var cursor = 0;
+        foreach (var call in calls)
+        {
+            cursor += call.RandomWeight;
+            if (roll >= cursor)
+                continue;
+
+            callId = new ProtoId<RMCERTCallPrototype>(call.ID);
+            return true;
+        }
+
+        error = "Weighted random ERT selection failed.";
+        return false;
+    }
+
+    private bool CheckRequirements(RMCERTRequest request, RMCERTCallPrototype call, out string error)
+    {
+        error = string.Empty;
+
+        if (call.Requirements.MinRoundTime is { } minRound && _timing.CurTime < minRound)
+        {
+            error = $"{call.Name} requires at least {(int) minRound.TotalMinutes} minutes of round time.";
+            return false;
+        }
+
+        var dispatched = _requests.Values.Count(r =>
+            r.Id != request.Id &&
+            r.SelectedCall?.Id == call.ID &&
+            r.State is RMCERTRequestState.Recruiting or RMCERTRequestState.Spawning or RMCERTRequestState.Launching or RMCERTRequestState.Arrived or RMCERTRequestState.Completed);
+
+        if (call.Requirements.MaxCallsPerRound > 0 && dispatched >= call.Requirements.MaxCallsPerRound)
+        {
+            error = $"{call.Name} has already been dispatched this round.";
+            return false;
+        }
+
+        if (request.SourceEntity is { Valid: true } source &&
+            _sourceCooldowns.TryGetValue(source, out var last) &&
+            _timing.CurTime < last + call.Requirements.Cooldown &&
+            request.CreatedAt != last)
+        {
+            error = $"{call.Name} is on cooldown for this distress source.";
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool CanCreateRequest(EntityUid source, out string reason)
+    {
+        reason = string.Empty;
+
+        foreach (var request in _requests.Values)
+        {
+            if (request.SourceEntity != source)
+                continue;
+
+            if (!IsTerminal(request.State))
+            {
+                reason = "A distress request from this source is already pending.";
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool TryGetPending(Guid id, out RMCERTRequest request)
+    {
+        if (_requests.TryGetValue(id, out request!) &&
+            request.State == RMCERTRequestState.PendingAdmin)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void FailRequest(RMCERTRequest request, string error)
+    {
+        request.State = RMCERTRequestState.Failed;
+        request.LastError = error;
+        UpdateSourceVisual(request, false);
+        _chat.SendAdminAnnouncement($"ERT request {request.Id} failed: {error}");
+
+        if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
+            Announce(call.Announcements.Failed, call.Announcements.FailedSound, request, call);
+
+        DirtyState();
+    }
+
+    private void Announce(string? message, SoundSpecifier? sound, RMCERTRequest request, RMCERTCallPrototype call)
+    {
+        if (string.IsNullOrWhiteSpace(message))
+            return;
+
+        var text = message
+            .Replace("{team}", call.Name, StringComparison.Ordinal)
+            .Replace("{requester}", request.RequesterName, StringComparison.Ordinal)
+            .Replace("{reason}", request.Reason, StringComparison.Ordinal);
+
+        _marineAnnounce.AnnounceHighCommand(text, sound: sound);
+    }
+
+    private SoundSpecifier? GetRequestSound(IReadOnlyCollection<ProtoId<RMCERTCallPrototype>> allowedCalls)
+    {
+        foreach (var callId in allowedCalls)
+        {
+            if (_prototypes.TryIndex(callId, out var call) &&
+                call.Announcements.RequestSound != null)
+            {
+                return call.Announcements.RequestSound;
+            }
+        }
+
+        return null;
+    }
+
+    private void NotifyAdminsOfRequest()
+    {
+        if (!_adminManager.ActiveAdmins.Any())
+            return;
+
+        _audio.PlayGlobal(
+            AdminRequestSound,
+            Filter.Empty().AddPlayers(_adminManager.ActiveAdmins),
+            false,
+            AudioParams.Default.WithVolume(-6f));
+    }
+
+    private void MarkArrived(RMCERTRequest request, RMCERTCallPrototype call, string? detail = null)
+    {
+        request.State = RMCERTRequestState.Arrived;
+        request.LastError = string.Empty;
+        UpdateSourceVisual(request, false);
+        Announce(call.Announcements.Arrival, call.Announcements.ArrivalSound, request, call);
+
+        var text = $"ERT request {request.Id} for {call.Name} arrived.";
+        if (!string.IsNullOrWhiteSpace(detail))
+            text = $"ERT request {request.Id} for {call.Name} arrived via {detail}.";
+
+        _chat.SendAdminAnnouncement(text);
+        DirtyState();
+    }
+
+    private void UpdateSourceVisual(RMCERTRequest request, bool active)
+    {
+        if (request.SourceEntity is { Valid: true } source &&
+            HasComp<RMCERTDistressBeaconComponent>(source))
+        {
+            UpdateBeaconVisual(source, active);
+        }
+    }
+
+    private void UpdateBeaconVisual(EntityUid uid, bool active)
+    {
+        if (!HasComp<AppearanceComponent>(uid))
+            return;
+
+        Appearance.SetData(uid, RMCERTDistressBeaconVisuals.Active, active);
+    }
+
+    private static int GetRoleMinimumCount(RMCERTRoleEntry role)
+    {
+        var min = Math.Max(0, role.Min);
+        if (role.Required)
+            min = Math.Max(min, 1);
+
+        return min;
+    }
+
+    private static int GetRoleMaximumCount(RMCERTRoleEntry role)
+    {
+        var min = GetRoleMinimumCount(role);
+        return Math.Max(min, role.Max);
+    }
+
+    private void ValidatePrototypes()
+    {
+        foreach (var call in _prototypes.EnumeratePrototypes<RMCERTCallPrototype>())
+        {
+            if (call.Roles.Count == 0)
+                Log.Error($"ERT call {call.ID} has no roles configured.");
+
+            if (string.IsNullOrWhiteSpace(call.Organization) &&
+                call.NpcFactions.Count == 0 &&
+                call.IffFaction == null)
+            {
+                Log.Error($"ERT call {call.ID} is missing organization, NPC factions, and IFF faction metadata.");
+            }
+
+            foreach (var role in call.Roles)
+            {
+                if (!_prototypes.HasIndex<EntityPrototype>(role.GhostRoleEntity))
+                    Log.Error($"ERT call {call.ID} role {role.Id} references missing ghost role entity {role.GhostRoleEntity}.");
+
+                if (role.Max < role.Min)
+                    Log.Error($"ERT call {call.ID} role {role.Id} has max {role.Max} lower than min {role.Min}.");
+            }
+
+            var totalMax = call.Roles.Sum(GetRoleMaximumCount);
+            var requiredMinimum = Math.Max(call.Requirements.MinRequiredSlots, call.Roles.Sum(GetRoleMinimumCount));
+            if (requiredMinimum > totalMax)
+            {
+                Log.Error($"ERT call {call.ID} requires at least {requiredMinimum} roster slots, but only {totalMax} are available.");
+            }
+        }
+    }
+
+    private static string GetOrganizationLabel(RMCERTCallPrototype call)
+    {
+        if (!string.IsNullOrWhiteSpace(call.Organization))
+            return call.Organization;
+
+        if (call.NpcFactions.Count > 0)
+            return call.NpcFactions[0].Id;
+
+        if (call.IffFaction is { } iffFaction)
+            return iffFaction.Id;
+
+        return call.Name;
+    }
+
+    private string? GetSelectedCallLabel(RMCERTRequest request)
+    {
+        if (request.SelectedCall is not { } callId)
+            return null;
+
+        if (_prototypes.TryIndex(callId, out var call))
+            return call.Name;
+
+        return callId.Id;
+    }
+
+    private void DirtyState()
+    {
+        var ev = new RMCERTStateChangedEvent();
+        RaiseLocalEvent(ref ev);
+    }
+
+    private static bool MatchesAny(IReadOnlyCollection<string> left, IReadOnlyCollection<string> right)
+    {
+        if (left.Count == 0 || right.Count == 0)
+            return false;
+
+        return left.Any(right.Contains);
+    }
+
+    private static bool IsTerminal(RMCERTRequestState state)
+    {
+        return state is RMCERTRequestState.Denied or RMCERTRequestState.Cancelled or RMCERTRequestState.Failed or RMCERTRequestState.Completed;
+    }
+
+    private static string FormatRoundTime(TimeSpan time)
+    {
+        return $"{(int) time.TotalMinutes:00}:{time.Seconds:00}";
+    }
+}

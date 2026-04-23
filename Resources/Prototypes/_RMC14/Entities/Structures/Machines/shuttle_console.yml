@@ -44,6 +44,27 @@
     state: syndishuttle
   - type: DropshipNavigationComputer
     hijackable: false
+    requiresERTLandingZone: true
+    ertDockingClass: Standard
+    dockingBounds: "-3.5,-8,3.5,6"
+
+- type: entity
+  parent: CMComputerDropshipNavigationERT
+  id: CMComputerDropshipNavigationERTSmall
+  suffix: Small
+  components:
+  - type: DropshipNavigationComputer
+    ertDockingClass: Small
+    dockingBounds: "-4.5,-9,4.5,7"
+
+- type: entity
+  parent: CMComputerDropshipNavigationERT
+  id: CMComputerDropshipNavigationERTBig
+  suffix: Big
+  components:
+  - type: DropshipNavigationComputer
+    ertDockingClass: Big
+    dockingBounds: "-5.5,-10,5.5,8"
 
 - type: entity
   parent: CMComputerDropship
@@ -254,6 +275,90 @@
   components:
   - type: DropshipDestination
     spawn: "/Maps/_RMC14/normandy.yml" # The actual Dropship files are private. These are debug versions to ensure tests pass.
+
+- type: entity
+  parent: CMDropshipDestination
+  id: RMCDropshipDestinationERTPort1
+  name: emergency response dock
+  suffix: Port 1
+  components:
+  - type: DropshipDestination
+    dockBounds: "-4,-8.5,4,6.5"
+  - type: RMCERTLandingZone
+    dockClasses: [ internal ]
+    tags: [ mainship, ert, internal, port1, starboard ]
+
+- type: entity
+  parent: CMDropshipDestination
+  id: RMCDropshipDestinationERTPort2
+  name: emergency response dock
+  suffix: Port 2
+  components:
+  - type: DropshipDestination
+    dockBounds: "-4,-8.5,4,6.5"
+  - type: RMCERTLandingZone
+    dockClasses: [ internal ]
+    tags: [ mainship, ert, internal, port2, port ]
+
+- type: entity
+  parent: CMDropshipDestination
+  id: RMCDropshipDestinationERTPort3
+  name: emergency response dock
+  suffix: Port 3
+  components:
+  - type: DropshipDestination
+    dockBounds: "-4,-8.5,4,6.5"
+  - type: RMCERTLandingZone
+    dockClasses: [ internal ]
+    tags: [ mainship, ert, internal, port3, stern ]
+
+- type: entity
+  parent: CMDropshipDestination
+  id: RMCDropshipDestinationERTPort4
+  name: emergency response dock
+  suffix: Port 4
+  components:
+  - type: DropshipDestination
+    dockBounds: "-5,-9.5,5,7.5"
+  - type: RMCERTLandingZone
+    dockClasses: [ external_side ]
+    tags: [ mainship, ert, external_side, port4, port ]
+
+- type: entity
+  parent: CMDropshipDestination
+  id: RMCDropshipDestinationERTPort5
+  name: emergency response dock
+  suffix: Port 5
+  components:
+  - type: DropshipDestination
+    dockBounds: "-5,-9.5,5,7.5"
+  - type: RMCERTLandingZone
+    dockClasses: [ external_side ]
+    tags: [ mainship, ert, external_side, port5, starboard ]
+
+- type: entity
+  parent: CMDropshipDestination
+  id: RMCDropshipDestinationERTHangarPort
+  name: emergency response dock
+  suffix: Hangar Port
+  components:
+  - type: DropshipDestination
+    dockBounds: "-6,-10.5,6,8.5"
+  - type: RMCERTLandingZone
+    dockClasses: [ external_hangar ]
+    tags: [ mainship, ert, external_hangar, hangar_port, port ]
+
+- type: entity
+  parent: CMDropshipDestination
+  id: RMCDropshipDestinationERTHangarStarboard
+  name: emergency response dock
+  suffix: Hangar Starboard
+  components:
+  - type: DropshipDestination
+    dockBounds: "-6,-10.5,6,8.5"
+  - type: RMCERTLandingZone
+    dockClasses: [ external_hangar ]
+    tags: [ mainship, ert, external_hangar, hangar_starboard, starboard ]
 
 - type: entity
   parent: MarkerBase

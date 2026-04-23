@@ -3,6 +3,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.ERT;
 using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Skills;
@@ -27,6 +28,8 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -505,6 +508,15 @@ public abstract class SharedDropshipSystem : EntitySystem
             return;
         }
 
+        if (!IsDestinationAllowed(ent, destination.Value, out var reason))
+        {
+            if (!string.IsNullOrWhiteSpace(reason))
+                _popup.PopupEntity(reason, ent, args.Actor, PopupType.MediumCaution);
+
+            Log.Warning($"{ToPrettyString(args.Actor)} tried to launch {ToPrettyString(ent)} to disallowed destination {ToPrettyString(destination.Value)}");
+            return;
+        }
+
         FlyTo(ent, destination.Value, user);
     }
 
@@ -652,6 +664,170 @@ public abstract class SharedDropshipSystem : EntitySystem
     protected virtual bool IsInFTL(EntityUid dropship)
     {
         return false;
+    }
+
+    protected bool IsDestinationAllowed(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        out string reason)
+    {
+        reason = string.Empty;
+
+        if (!HasComp<DropshipDestinationComponent>(destination))
+        {
+            reason = "This destination is no longer available.";
+            return false;
+        }
+
+        if (computer.Comp.PlanetOnly &&
+            !IsPlanetsideDestination(destination))
+        {
+            reason = "This shuttle can only route to planetside landing zones.";
+            return false;
+        }
+
+        if (TryComp(destination, out RMCERTLandingZoneComponent? reservedLandingZone) &&
+            reservedLandingZone.ERTOnly &&
+            !computer.Comp.RequiresERTLandingZone)
+        {
+            reason = "This berth is reserved for emergency response traffic.";
+            return false;
+        }
+
+        if (!computer.Comp.RequiresERTLandingZone)
+            return true;
+
+        if (reservedLandingZone == null ||
+            !Resolve(destination, ref reservedLandingZone, false) ||
+            !reservedLandingZone.Enabled)
+        {
+            reason = "This destination is not configured for emergency response shuttles.";
+            return false;
+        }
+
+        var landingZone = reservedLandingZone;
+        var allowedDockClasses = RMCERTDocking.GetAllowedDockClasses(computer.Comp.ERTDockingClass);
+
+        if (allowedDockClasses.Length > 0 &&
+            !MatchesAny(landingZone.DockClasses, allowedDockClasses))
+        {
+            reason = "This berth cannot receive the current emergency shuttle class.";
+            return false;
+        }
+
+        if (computer.Comp.AllowedERTLandingTags.Count > 0 &&
+            !MatchesAny(landingZone.Tags, computer.Comp.AllowedERTLandingTags))
+        {
+            reason = "This destination is not valid for the current response team.";
+            return false;
+        }
+
+        if (MatchesAny(landingZone.Tags, computer.Comp.DeniedERTLandingTags))
+        {
+            reason = "This destination is blocked for the current response team.";
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool CanUseDestination(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        out string reason)
+    {
+        if (!IsDestinationAllowed(computer, destination, out reason))
+            return false;
+
+        if (!TryComp(destination, out DropshipDestinationComponent? destinationComp))
+        {
+            reason = "This destination is no longer available.";
+            return false;
+        }
+
+        var shuttle = Transform(computer).GridUid;
+        if (destinationComp.Ship is { } occupiedBy &&
+            shuttle != occupiedBy)
+        {
+            reason = "This berth is already occupied.";
+            return false;
+        }
+
+        if (!TryGetDockingBounds(computer, out var shuttleBounds, out reason))
+            return false;
+
+        if (destinationComp.DockBounds is { } dockBounds &&
+            !ContainsBounds(dockBounds, shuttleBounds))
+        {
+            reason = $"This shuttle is too large for the destination berth ({FormatBoundsSize(shuttleBounds)} required, {FormatBoundsSize(dockBounds)} available).";
+            return false;
+        }
+
+        return true;
+    }
+
+    protected bool IsPlanetsideDestination(EntityUid destination)
+    {
+        var xform = Transform(destination);
+        return xform.GridUid is { } grid && HasComp<RMCPlanetComponent>(grid) ||
+               HasComp<RMCPlanetComponent>(xform.MapUid);
+    }
+
+    private bool TryGetDockingBounds(
+        Entity<DropshipNavigationComputerComponent> computer,
+        out Box2 bounds,
+        out string reason)
+    {
+        if (computer.Comp.DockingBounds is { } dockingBounds)
+        {
+            bounds = dockingBounds;
+            reason = string.Empty;
+            return true;
+        }
+
+        if (Transform(computer).GridUid is not { } grid ||
+            !TryComp<MapGridComponent>(grid, out var gridComp))
+        {
+            bounds = default;
+            reason = "The shuttle does not have a valid docking footprint.";
+            return false;
+        }
+
+        bounds = gridComp.LocalAABB;
+        reason = string.Empty;
+        return true;
+    }
+
+    private static bool MatchesAny(IReadOnlyCollection<string> left, IReadOnlyCollection<string> right)
+    {
+        if (left.Count == 0 || right.Count == 0)
+            return false;
+
+        return left.Any(right.Contains);
+    }
+
+    private static bool ContainsBounds(Box2 outer, Box2 inner)
+    {
+        return inner.Left >= outer.Left &&
+               inner.Right <= outer.Right &&
+               inner.Bottom >= outer.Bottom &&
+               inner.Top <= outer.Top;
+    }
+
+    private static string FormatBoundsSize(Box2 bounds)
+    {
+        var size = bounds.Size;
+        return $"{FormatDimension(size.X)}x{FormatDimension(size.Y)}";
+    }
+
+    private static string FormatDimension(float value)
+    {
+        var rounded = MathF.Round(value, 2);
+        var nearestInt = MathF.Round(rounded);
+        if (Math.Abs(rounded - nearestInt) < 0.01f)
+            return nearestInt.ToString("0");
+
+        return rounded.ToString("0.##");
     }
 
     private bool TryDropshipLaunchPopup(EntityUid computer, EntityUid user, bool predicted)

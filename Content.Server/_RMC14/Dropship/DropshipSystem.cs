@@ -180,6 +180,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
         RelayToMountedEntities(ent, args);
         RelayToDropshipDestination(ent, args);
 
+        var arrived = new DropshipArrivedAtDestinationEvent(ent, ent.Comp.Destination);
+        RaiseLocalEvent(ref arrived);
+
         ent.Comp.DepartureLocation = ent.Comp.Destination;
         Dirty(ent);
     }
@@ -402,6 +405,14 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         var newDestination = CompOrNull<DropshipDestinationComponent>(destination);
+        if (!hijack &&
+            newDestination != null &&
+            !CanUseDestination(computer, destination, out var reason))
+        {
+            Log.Warning($"{ToPrettyString(user)} tried to launch {ToPrettyString(computer)} to invalid destination {ToPrettyString(destination)} ({reason})");
+            return false;
+        }
+
         if (dropship.Destination == destination)
         {
             if (user != null && !_skills.HasSkill(user.Value, computer.Comp.Skill, computer.Comp.FlyBySkillLevel))
@@ -412,10 +423,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
             }
 
             EnsureComp<DropshipInFlyByComponent>(dropshipId.Value);
-        }
-        else if (!hijack && newDestination != null && newDestination.Ship != null)
-        {
-            Log.Warning($"{ToPrettyString(user)} tried to launch to occupied dropship destination {ToPrettyString(destination)}");
         }
 
         if (TryComp(dropship.Destination, out DropshipDestinationComponent? oldDestination))
@@ -554,6 +561,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
                     flyBy = netDestination;
                     continue;
                 }
+
+                if (!IsDestinationAllowed(computer, uid, out _))
+                    continue;
 
                 var destination = new Destination(
                     netDestination,

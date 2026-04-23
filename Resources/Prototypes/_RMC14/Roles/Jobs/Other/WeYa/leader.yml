@@ -115,6 +115,7 @@
     - CMStunbaton
     - CMCrowbar # TODO RMC14: tactical prybar
     - RMCRangefinder
+    - RMCHandheldDistressBeaconWeYa
     - RMCMREWeYaPMC
     - RMCGrenadeBlastM12
     - RMCExplosivePlastic

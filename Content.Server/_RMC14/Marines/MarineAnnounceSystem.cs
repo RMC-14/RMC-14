@@ -122,7 +122,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         SoundSpecifier? sound = null)
     {
         var wrappedMessage = FormatHighCommand(author, message);
-        AnnounceToMarines(wrappedMessage);
+        AnnounceToMarines(wrappedMessage, sound);
     }
 
     public override void AnnounceRadio(

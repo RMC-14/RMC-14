@@ -288,7 +288,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostFlexi # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostFlexi
+    - id: RMCHandheldDistressBeaconProvost
 
 - type: entity
   parent: CMSatchelSecurity
@@ -307,7 +308,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCHandheldDistressBeaconProvost
 
 - type: entity
   parent: CMSatchelSecurity
@@ -316,7 +318,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCHandheldDistressBeaconProvost
     - id: RMCTabletCO
 
 - type: entity
@@ -326,7 +329,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCHandheldDistressBeaconProvost
     - id: RMCTabletCO
 
 - type: entity

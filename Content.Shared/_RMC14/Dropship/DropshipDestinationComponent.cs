@@ -1,5 +1,6 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
+using Robust.Shared.Maths;
 
 namespace Content.Shared._RMC14.Dropship;
 
@@ -9,6 +10,9 @@ public sealed partial class DropshipDestinationComponent : Component
 {
     [DataField]
     public ResPath? Spawn;
+
+    [DataField]
+    public Box2? DockBounds;
 
     [DataField, AutoNetworkedField]
     public EntityUid? Ship;

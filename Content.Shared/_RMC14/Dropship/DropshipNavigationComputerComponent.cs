@@ -1,7 +1,10 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
+
+using Content.Shared._RMC14.ERT;
 
 namespace Content.Shared._RMC14.Dropship;
 
@@ -41,6 +44,24 @@ public sealed partial class DropshipNavigationComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool LaunchAlarmStatus;
+
+    [DataField, AutoNetworkedField]
+    public bool PlanetOnly;
+
+    [DataField, AutoNetworkedField]
+    public bool RequiresERTLandingZone;
+
+    [DataField]
+    public RMCERTShuttleDockingClass ERTDockingClass = RMCERTShuttleDockingClass.Standard;
+
+    [DataField]
+    public Box2? DockingBounds;
+
+    [DataField, AutoNetworkedField]
+    public List<string> AllowedERTLandingTags = [];
+
+    [DataField, AutoNetworkedField]
+    public List<string> DeniedERTLandingTags = [];
 
     [DataField]
     public SoundSpecifier? LaunchAlarmForcedShutdownSound = new SoundPathSpecifier("/Audio/_RMC14/Structures/metalhit.ogg");

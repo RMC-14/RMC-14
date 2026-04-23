@@ -1,0 +1,74 @@
+- type: entity
+  parent: BaseItem
+  id: RMCHandheldDistressBeaconBase
+  name: handheld distress beacon
+  description: A compact encrypted transmitter used to request an emergency response team.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/handheld_distress_beacon.rsi
+    layers:
+    - state: beacon_inactive
+      map: [ "base" ]
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Devices/handheld_distress_beacon.rsi
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCERTDistressBeaconVisuals.Active:
+        base:
+          "True": { state: beacon_active }
+          "False": { state: beacon_inactive }
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
+  - type: RMCERTDistressBeacon
+
+- type: entity
+  parent: RMCHandheldDistressBeaconBase
+  id: RMCHandheldDistressBeaconCMB
+  name: CMB distress beacon
+  suffix: CMB
+  components:
+  - type: RMCERTDistressBeacon
+    requestTitle: CMB distress beacon
+    allowedCalls:
+    - RMCERTCallCMB
+
+- type: entity
+  parent: RMCHandheldDistressBeaconBase
+  id: RMCHandheldDistressBeaconWeYa
+  name: WeYa distress beacon
+  suffix: WeYa
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]
+  - type: RMCERTDistressBeacon
+    requestTitle: WeYa distress beacon
+    allowedCalls:
+    - RMCERTCallPMC
+
+- type: entity
+  parent: RMCHandheldDistressBeaconBase
+  id: RMCHandheldDistressBeaconProvost
+  name: Provost distress beacon
+  suffix: Provost
+  components:
+  - type: RMCERTDistressBeacon
+    requestTitle: Provost distress beacon
+    allowedCalls:
+    - RMCERTCallProvost
+
+- type: entity
+  parent: RMCHandheldDistressBeaconBase
+  id: RMCHandheldDistressBeaconForeign
+  name: foreign distress beacon
+  suffix: SPP, TSE
+  components:
+  - type: RMCERTDistressBeacon
+    requestTitle: foreign distress beacon
+    allowedCalls:
+    - RMCERTCallSPP
+    - RMCERTCallTSE

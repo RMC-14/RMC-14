@@ -8579,6 +8579,69 @@ entities:
     - type: Transform
       pos: -8.5,-11.5
       parent: 1
+- proto: RMCDropshipDestinationERTPort1
+  entities:
+  - uid: 3535
+    components:
+    - type: MetaData
+      name: Berkley ERT Starboard Landing Pad
+    - type: Transform
+      pos: -8.5,16.5
+      parent: 1
+- proto: RMCDropshipDestinationERTPort2
+  entities:
+  - uid: 3536
+    components:
+    - type: MetaData
+      name: Berkley ERT Port Landing Pad
+    - type: Transform
+      pos: -8.5,0.5
+      parent: 1
+- proto: RMCDropshipDestinationERTPort3
+  entities:
+  - uid: 3537
+    components:
+    - type: MetaData
+      name: Berkley ERT Stern Landing Pad
+    - type: Transform
+      pos: -8.5,-16.5
+      parent: 1
+- proto: RMCDropshipDestinationERTPort4
+  entities:
+  - uid: 3538
+    components:
+    - type: MetaData
+      name: Berkley ERT Port External Airlock
+    - type: Transform
+      pos: 0.5,16.5
+      parent: 1
+- proto: RMCDropshipDestinationERTPort5
+  entities:
+  - uid: 3539
+    components:
+    - type: MetaData
+      name: Berkley ERT Starboard External Airlock
+    - type: Transform
+      pos: 0.5,-16.5
+      parent: 1
+- proto: RMCDropshipDestinationERTHangarPort
+  entities:
+  - uid: 3540
+    components:
+    - type: MetaData
+      name: Berkley ERT Hangar Port
+    - type: Transform
+      pos: 0.5,8.5
+      parent: 1
+- proto: RMCDropshipDestinationERTHangarStarboard
+  entities:
+  - uid: 3541
+    components:
+    - type: MetaData
+      name: Berkley ERT Hangar Starboard
+    - type: Transform
+      pos: 0.5,-8.5
+      parent: 1
 - proto: CMDropshipHijackDestination
   entities:
   - uid: 3528
