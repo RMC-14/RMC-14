@@ -221,13 +221,12 @@
   - type: WeedboundWall
     isThickVariant: true
 
-# Has an effective HP ~800 dmg compaired to CM weak reflective resin. 800 melee dmg multi so it breaks in 1 hit
 - type: entity
-  parent: WallXenoResinThick
-  id: WallXenoResinThickSurge
-  name: Unstable resin wall
-  description: A hastily-constructed resin wall. It won't last long.
-  categories: [ HideSpawnMenu ]
+  abstract: true
+  parent: WallXenoResin
+  id: BaseWallXenoResinReflective
+  name: reflective resin wall
+  description: Weird hardened slime solidified into a fine, smooth wall.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/bone_resin.rsi
@@ -237,21 +236,46 @@
   - type: IconSmooth
     key: walls
     base: bone_resin
-  - type: TimedDespawn
-    lifetime: 13.0
-  - type: XenoStructureUpgradeable
-    to: null
-  - type: ImmuneToUnarmed
-  - type: MeleeReceivedMultiplier
-    xenoDamage:
-      types:
-        Slash: 800
-    otherMultiplier: 800
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 800
+        damage: 300
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: ReflectiveResin
+  - type: XenoConstructionPlasmaCost
+    plasma: 145
+    scalingCost: true
+  - type: RMCReflective
+  - type: ExplosionRandomResistance
+    min: 0.3
+    max: 0.3
+
+- type: entity
+  parent: BaseWallXenoResinReflective
+  id: WallXenoResinReflective
+  components:
+  - type: XenoSecretionLimited
+    id: WallXenoResinReflective
+    amount: 5
+
+- type: entity
+  parent: WallXenoResinReflective
+  id: WallXenoResinReflectiveUnstable
+  name: weakened reflective wall
+  description: Weird slime with strange hardened fragments solidified into a wall. It looks like it last for moment before it will collapse.
+  components:
+  - type: TimedDespawn
+    lifetime: 13.0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
