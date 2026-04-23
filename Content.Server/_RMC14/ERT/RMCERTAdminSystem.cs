@@ -21,7 +21,7 @@ public sealed class RMCERTAdminSystem : EntitySystem
         var player = shell.Player;
         if (player == null)
         {
-            shell.WriteLine("This command can only be used by a player.");
+            shell.WriteLine(Loc.GetString("rmc-ert-admin-command-player-only"));
             return;
         }
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
@@ -763,6 +764,34 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public void ConfigureERTNavigationComputer(
+        Entity<DropshipNavigationComputerComponent?> computer,
+        bool hijackable,
+        bool planetOnly,
+        bool requiresERTLandingZone,
+        IReadOnlyCollection<string>? allowedLandingTags = null,
+        IReadOnlyCollection<string>? deniedLandingTags = null)
+    {
+        if (!Resolve(computer, ref computer.Comp, false))
+            return;
+
+        computer.Comp.Hijackable = hijackable;
+        computer.Comp.PlanetOnly = planetOnly;
+        computer.Comp.RequiresERTLandingZone = requiresERTLandingZone;
+        computer.Comp.AllowedERTLandingTags = allowedLandingTags?.ToList() ?? [];
+        computer.Comp.DeniedERTLandingTags = deniedLandingTags?.ToList() ?? [];
+        Dirty(computer, computer.Comp);
+    }
+
+    public void SetDestinationShip(Entity<DropshipDestinationComponent?> destination, EntityUid? ship)
+    {
+        if (!Resolve(destination, ref destination.Comp, false))
+            return;
+
+        destination.Comp.Ship = ship;
+        Dirty(destination, destination.Comp);
     }
 
     protected bool IsPlanetsideDestination(EntityUid destination)

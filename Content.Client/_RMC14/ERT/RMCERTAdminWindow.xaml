@@ -2,12 +2,11 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.ERT"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    Title="ERT Dispatch"
     MinSize="720 500">
     <BoxContainer Orientation="Vertical" Margin="6">
         <BoxContainer Orientation="Horizontal">
-            <Label Text="Emergency Response Team requests" HorizontalExpand="True" />
-            <Button Name="RefreshButton" Access="Public" Text="Refresh" StyleClasses="OpenBoth" />
+            <Label Name="HeaderLabel" Access="Public" HorizontalExpand="True" />
+            <Button Name="RefreshButton" Access="Public" StyleClasses="OpenBoth" />
         </BoxContainer>
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
         <ScrollContainer VerticalExpand="True">

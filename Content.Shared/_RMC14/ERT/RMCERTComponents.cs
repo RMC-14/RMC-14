@@ -12,8 +12,15 @@ public sealed partial class RMCERTDistressBeaconComponent : Component
     [DataField, AutoNetworkedField]
     public List<ProtoId<RMCERTCallPrototype>> AllowedCalls = [];
 
-    [DataField, AutoNetworkedField]
-    public string RequestTitle = "Handheld distress beacon";
+    [DataField("requestTitle"), AutoNetworkedField]
+    private LocId _requestTitle = "rmc-ert-beacon-request-title-handheld";
+
+    public string RequestTitle => Loc.GetString(_requestTitle);
+
+    [DataField("recipient")]
+    private LocId _recipient = "rmc-ert-recipient-high-command";
+
+    public string Recipient => Loc.GetString(_recipient);
 
     [DataField, AutoNetworkedField]
     public bool ReasonRequired = true;

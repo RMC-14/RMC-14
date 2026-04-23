@@ -427,14 +427,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         if (TryComp(dropship.Destination, out DropshipDestinationComponent? oldDestination))
         {
-            oldDestination.Ship = null;
-            Dirty(dropship.Destination.Value, oldDestination);
+            SetDestinationShip((dropship.Destination.Value, oldDestination), null);
         }
 
         if (newDestination != null)
         {
-            newDestination.Ship = dropshipId;
-            Dirty(destination, newDestination);
+            SetDestinationShip((destination, newDestination), dropshipId);
         }
 
         if (hyperspaceTime == null)

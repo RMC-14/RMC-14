@@ -10,5 +10,9 @@ public sealed partial class RMCERTAdminWindow : FancyWindow
     public RMCERTAdminWindow()
     {
         RobustXamlLoader.Load(this);
+
+        Title = Loc.GetString("rmc-ert-admin-window-title");
+        HeaderLabel.Text = Loc.GetString("rmc-ert-admin-window-header");
+        RefreshButton.Text = Loc.GetString("rmc-ert-admin-window-refresh");
     }
 }

@@ -30,7 +30,7 @@ public sealed class RMCERTAdminEui : BaseEui
 
         if (s.Requests.Count == 0)
         {
-            _window.Requests.AddChild(new Label { Text = "No ERT requests are active." });
+            _window.Requests.AddChild(new Label { Text = Loc.GetString("rmc-ert-admin-no-requests") });
             return;
         }
 
@@ -45,17 +45,38 @@ public sealed class RMCERTAdminEui : BaseEui
 
             box.AddChild(new Label
             {
-                Text = $"{request.State} | {request.Source} | {request.RequesterName} via {request.SourceName} | {request.CreatedAt}",
+                Text = Loc.GetString("rmc-ert-admin-row-summary",
+                    ("state", RMCERTLoc.GetState(request.State)),
+                    ("source", RMCERTLoc.GetSource(request.Source)),
+                    ("requester", request.RequesterName),
+                    ("sourceName", request.SourceName),
+                    ("createdAt", request.CreatedAt)),
             });
 
             if (!string.IsNullOrWhiteSpace(request.Reason))
-                box.AddChild(new Label { Text = $"Reason: {request.Reason}" });
+            {
+                box.AddChild(new Label
+                {
+                    Text = Loc.GetString("rmc-ert-admin-row-reason", ("reason", request.Reason)),
+                });
+            }
 
             if (!string.IsNullOrWhiteSpace(request.SelectedCall))
-                box.AddChild(new Label { Text = $"Selected: {request.SelectedCall}" });
+            {
+                box.AddChild(new Label
+                {
+                    Text = Loc.GetString("rmc-ert-admin-row-selected", ("call", request.SelectedCall)),
+                });
+            }
 
             if (!string.IsNullOrWhiteSpace(request.LastError))
-                box.AddChild(new Label { Text = $"Error: {request.LastError}", FontColorOverride = Color.OrangeRed });
+            {
+                box.AddChild(new Label
+                {
+                    Text = Loc.GetString("rmc-ert-admin-row-error", ("error", request.LastError)),
+                    FontColorOverride = Color.OrangeRed,
+                });
+            }
 
             var actions = new BoxContainer
             {
@@ -65,8 +86,8 @@ public sealed class RMCERTAdminEui : BaseEui
 
             if (request.State == RMCERTRequestState.PendingAdmin)
             {
-                AddButton(actions, "Approve Random", _ => SendMessage(new RMCERTAdminApproveRandomMsg(request.Id)));
-                AddButton(actions, "Deny", _ => SendMessage(new RMCERTAdminDenyMsg(request.Id)));
+                AddButton(actions, Loc.GetString("rmc-ert-admin-action-approve-random"), _ => SendMessage(new RMCERTAdminApproveRandomMsg(request.Id)));
+                AddButton(actions, Loc.GetString("rmc-ert-admin-action-deny"), _ => SendMessage(new RMCERTAdminDenyMsg(request.Id)));
 
                 var allowed = request.AllowedCalls.Count == 0
                     ? s.Calls.Where(c => c.AdminSelectable)
@@ -74,21 +95,24 @@ public sealed class RMCERTAdminEui : BaseEui
 
                 foreach (var call in allowed)
                 {
-                    AddButton(actions, $"Send {call.Name}", _ => SendMessage(new RMCERTAdminApproveSpecificMsg(request.Id, call.Id)));
+                    var label = string.IsNullOrWhiteSpace(call.AdminButtonLabel)
+                        ? Loc.GetString("rmc-ert-admin-action-send", ("call", call.Name))
+                        : call.AdminButtonLabel!;
+                    AddButton(actions, label, _ => SendMessage(new RMCERTAdminApproveSpecificMsg(request.Id, call.Id)));
                 }
             }
             else if (request.State == RMCERTRequestState.Recruiting)
             {
-                AddButton(actions, "Launch", _ => SendMessage(new RMCERTAdminLaunchMsg(request.Id)));
-                AddButton(actions, "Cancel", _ => SendMessage(new RMCERTAdminCancelMsg(request.Id)));
+                AddButton(actions, Loc.GetString("rmc-ert-admin-action-launch"), _ => SendMessage(new RMCERTAdminLaunchMsg(request.Id)));
+                AddButton(actions, Loc.GetString("rmc-ert-admin-action-cancel"), _ => SendMessage(new RMCERTAdminCancelMsg(request.Id)));
             }
             else if (request.State is RMCERTRequestState.PendingDispatch or RMCERTRequestState.Spawning or RMCERTRequestState.Launching)
             {
-                AddButton(actions, "Cancel", _ => SendMessage(new RMCERTAdminCancelMsg(request.Id)));
+                AddButton(actions, Loc.GetString("rmc-ert-admin-action-cancel"), _ => SendMessage(new RMCERTAdminCancelMsg(request.Id)));
             }
             else if (request.State == RMCERTRequestState.Arrived)
             {
-                AddButton(actions, "Complete", _ => SendMessage(new RMCERTAdminCompleteMsg(request.Id)));
+                AddButton(actions, Loc.GetString("rmc-ert-admin-action-complete"), _ => SendMessage(new RMCERTAdminCompleteMsg(request.Id)));
             }
 
             box.AddChild(actions);

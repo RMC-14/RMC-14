@@ -1,0 +1,266 @@
+rmc-ert-admin-command-player-only = This command can only be used by a player.
+
+rmc-ert-admin-window-title = ERT Dispatch
+rmc-ert-admin-window-header = Emergency Response Team requests
+rmc-ert-admin-window-refresh = Refresh
+rmc-ert-admin-no-requests = No ERT requests are active.
+rmc-ert-admin-row-summary = {$state} | {$source} | {$requester} via {$sourceName} | {$createdAt}
+rmc-ert-admin-row-reason = Reason: {$reason}
+rmc-ert-admin-row-selected = Selected: {$call}
+rmc-ert-admin-row-error = Error: {$error}
+rmc-ert-admin-action-approve-random = Approve Random
+rmc-ert-admin-action-deny = Deny
+rmc-ert-admin-action-send = Send {$call}
+rmc-ert-admin-action-launch = Launch
+rmc-ert-admin-action-cancel = Cancel
+rmc-ert-admin-action-complete = Complete
+
+rmc-ert-source-console = Console
+rmc-ert-source-handheld = Handheld
+rmc-ert-source-admin = Admin
+rmc-ert-source-ares = ARES
+
+rmc-ert-state-requested = Requested
+rmc-ert-state-pending-admin = Pending Admin
+rmc-ert-state-pending-dispatch = Pending Dispatch
+rmc-ert-state-recruiting = Recruiting
+rmc-ert-state-spawning = Spawning
+rmc-ert-state-launching = Launching
+rmc-ert-state-arrived = Arrived
+rmc-ert-state-completed = Completed
+rmc-ert-state-denied = Denied
+rmc-ert-state-cancelled = Cancelled
+rmc-ert-state-failed = Failed
+
+rmc-ert-popup-beacon-spent = The distress beacon has already been used.
+rmc-ert-popup-beacon-cooldown = The distress beacon is still recalibrating.
+rmc-ert-popup-beacon-reason-required = You need to provide a reason before transmitting the distress beacon.
+rmc-ert-popup-console-unavailable = This console cannot transmit a distress beacon.
+rmc-ert-popup-no-source-teams = There are no configured response teams for this distress source.
+rmc-ert-prompt-console-reason = State the reason for the distress beacon.
+rmc-ert-prompt-handheld-reason = State the reason for the {$title}.
+rmc-ert-console-request-announcement = A distress beacon has been launched. High Command is reviewing the request.
+
+rmc-ert-admin-actor-server = server
+rmc-ert-launcher-automatic = automatic launch timer
+rmc-ert-response-team-fallback = response team
+rmc-ert-cleanup-reason-cancelled = cancelled
+rmc-ert-cleanup-reason-failed = failed
+
+rmc-ert-admin-approved = {$admin} approved ERT request {$id} as {$call}. Dispatching in {$delay} seconds.
+rmc-ert-admin-denied = {$admin} denied ERT request {$id} from {$requester}.
+rmc-ert-admin-cancelled = {$admin} cancelled ERT request {$id}.
+rmc-ert-admin-completed = {$admin} completed ERT request {$id} for {$team}.
+rmc-ert-admin-arrived-missing-call = ERT request {$id} arrived, but its call prototype is no longer available.
+rmc-ert-admin-recruiting = ERT request {$id} is recruiting {$slots} ghost-role slots for {$call}.
+rmc-ert-admin-cleanup = ERT request {$id} {$reason}; shuttle content cleaned up.
+rmc-ert-admin-launched = ERT request {$id} for {$call} launched by {$launcher}.
+rmc-ert-admin-failed = ERT request {$id} failed: {$error}
+rmc-ert-admin-request = ERT request {$id} from {$requester} via {$source}: {$reason}
+rmc-ert-admin-request-with-extra = {$base} {$extra}
+rmc-ert-admin-arrived = ERT request {$id} for {$call} arrived.
+rmc-ert-admin-arrived-detail = ERT request {$id} for {$call} arrived via {$detail}.
+
+rmc-ert-success-handheld = A distress beacon request has been sent to {$recipient}.
+rmc-ert-success-console = The distress beacon has been transmitted to High Command.
+
+rmc-ert-briefing-title = {$team} briefing
+rmc-ert-briefing-reason = Reason: {$reason}
+rmc-ert-briefing-objectives = Objectives:
+rmc-ert-briefing-bullet = - 
+rmc-ert-briefing-features = Operational notes:
+rmc-ert-briefing-role = Assigned role: {$role}
+
+rmc-ert-error-unknown-call = Unknown ERT call prototype: {$id}
+rmc-ert-error-call-not-allowed = {$call} is not allowed for this distress source.
+rmc-ert-error-call-disabled = {$call} is disabled.
+rmc-ert-error-selected-call-missing = The selected ERT call no longer exists.
+rmc-ert-error-load-shuttle-map = Failed to load ERT shuttle map {$map}.
+rmc-ert-error-missing-ghost-role = Missing ghost role entity prototype {$entity} for {$call}.
+rmc-ert-error-min-slots-over-max = ERT call {$call} requires at least {$required} slots, but its configured maximum is {$maximum}.
+rmc-ert-error-planned-slots-too-low = Only {$planned} ERT slots were planned, but {$required} are required.
+rmc-ert-error-unknown-shuttle-spawner = Unknown ERT shuttle spawner prototype {$id}.
+rmc-ert-error-shuttle-spawner-missing-grid = ERT shuttle spawner {$id} is missing GridSpawnerComponent.
+rmc-ert-error-shuttle-spawner-no-map = ERT shuttle spawner {$id} does not define a shuttle map.
+rmc-ert-error-beacon-no-teams = The beacon cannot find any configured response teams.
+rmc-ert-error-raffles-in-progress = Ghost role raffles are still in progress for this response team.
+rmc-ert-error-no-volunteers = No volunteers accepted the emergency response deployment.
+rmc-ert-error-not-enough-volunteers = Only {$accepted} emergency responders accepted deployment, but {$required} are required.
+rmc-ert-arrived-detail-no-shuttle = {$launcher} without a shuttle
+rmc-ert-error-no-navigation-computer = The ERT shuttle has no navigation computer.
+rmc-ert-error-no-landing-zone = No valid ERT landing zone is available.
+rmc-ert-error-launch-failed = The ERT shuttle failed to launch.
+rmc-ert-error-no-random-calls = No weighted random ERT calls are available for this request.
+rmc-ert-error-random-selection-failed = Weighted random ERT selection failed.
+rmc-ert-error-unavailable-evacuation = {$call} is unavailable while evacuation is in progress.
+rmc-ert-error-unavailable-hijack = {$call} is unavailable during hijack conditions.
+rmc-ert-error-min-round-time = {$call} requires at least {$minutes} minutes of round time.
+rmc-ert-error-max-calls-reached = {$call} has already been dispatched this round.
+rmc-ert-error-source-cooldown = {$call} is on cooldown for this distress source.
+rmc-ert-error-source-pending = A distress request from this source is already pending.
+
+rmc-ert-category-response = Response
+rmc-ert-category-military = Military
+rmc-ert-category-corporate = Corporate
+rmc-ert-category-law = Law
+rmc-ert-category-foreign-military = Foreign Military
+rmc-ert-category-event = Event
+
+rmc-ert-organization-unmc = UNMC
+rmc-ert-organization-weya = WeYa
+rmc-ert-organization-cmb = CMB
+rmc-ert-organization-spp = SPP
+rmc-ert-organization-tse = TSE
+rmc-ert-organization-provost = Provost
+rmc-ert-organization-clf = CLF
+
+rmc-ert-admin-button-cbrn = SEND CBRN
+rmc-ert-admin-button-pmc = SEND PMC
+rmc-ert-admin-button-bodyguards = SEND BODYGUARDS
+rmc-ert-admin-button-lawyers = SEND LAWYERS
+rmc-ert-admin-button-cmb = SEND CMB
+rmc-ert-admin-button-spp = SEND SPP
+rmc-ert-admin-button-tse = SEND TSE
+rmc-ert-admin-button-provost = SEND PROVOST
+rmc-ert-admin-button-clf = SEND CLF
+
+rmc-ert-call-cbrn-name = UNMC CBRN Response Team
+rmc-ert-call-pmc-name = WeYa PMC Response Team
+rmc-ert-call-weya-bodyguard-name = WeYa Executive Protection Detail
+rmc-ert-call-weya-lawyers-name = WeYa Corporate Affairs Team
+rmc-ert-call-cmb-name = CMB Marshal Patrol
+rmc-ert-call-spp-name = SPP Response Squad
+rmc-ert-call-tse-name = TSE Royal Marines
+rmc-ert-call-provost-name = Provost Enforcement Team
+rmc-ert-call-clf-name = CLF Cell
+
+rmc-ert-role-cbrn-leader = CBRN Squad Leader
+rmc-ert-role-cbrn-rifleman = CBRN Rifleman
+rmc-ert-role-cbrn-medic = CBRN Hospital Corpsman
+rmc-ert-role-cbrn-engineer = CBRN Combat Technician
+rmc-ert-role-pmc-leader = PMC Leader
+rmc-ert-role-pmc-operator = PMC Operator
+rmc-ert-role-pmc-medic = PMC Medic
+rmc-ert-role-pmc-engineer = PMC Engineer
+rmc-ert-role-weya-bodyguard-lead = Executive Protection Lead
+rmc-ert-role-weya-bodyguard = Executive Bodyguard
+rmc-ert-role-weya-lawyer-supervisor = Corporate Executive Supervisor
+rmc-ert-role-weya-lawyer-specialist = Corporate Executive Specialist
+rmc-ert-role-cmb-marshal = CMB Marshal
+rmc-ert-role-cmb-deputy = CMB Deputy
+rmc-ert-role-spp-leader = SPP Squad Leader
+rmc-ert-role-spp-rifleman = SPP Rifleman
+rmc-ert-role-spp-medic = SPP Medic
+rmc-ert-role-tse-teamlead = Royal Marines Team Leader
+rmc-ert-role-tse-commando = Royal Marines Commando
+rmc-ert-role-tse-medic = Royal Marines Medic
+rmc-ert-role-provost-leader = Provost Team Leader
+rmc-ert-role-provost-enforcer = Provost Enforcer
+rmc-ert-role-clf-leader = CLF Cell Leader
+rmc-ert-role-clf-soldier = CLF Soldier
+rmc-ert-role-clf-medic = CLF Medic
+
+rmc-ert-announcement-recruiting-immediate = {$team} is accepting volunteers for immediate deployment.
+rmc-ert-announcement-recruiting = {$team} is accepting volunteers.
+rmc-ert-announcement-launch = {$team} has launched.
+
+rmc-ert-announcement-cbrn-dispatch = High Command has approved a distress response. {$team} is being mustered.
+rmc-ert-announcement-cbrn-arrival = {$team} has docked aboard the warship and is awaiting tasking.
+rmc-ert-announcement-cbrn-failed = High Command reports that {$team} deployment failed: {$reason}
+rmc-ert-announcement-cbrn-denied = High Command has denied the distress request.
+
+rmc-ert-announcement-pmc-dispatch = A corporate emergency contract has been accepted. {$team} is preparing to deploy.
+rmc-ert-announcement-pmc-arrival = {$team} has docked aboard the warship under corporate authority.
+rmc-ert-announcement-pmc-denied = Corporate response channels have declined the request.
+
+rmc-ert-announcement-bodyguard-dispatch = Corporate security has accepted a close-protection request. {$team} is preparing to deploy.
+rmc-ert-announcement-bodyguard-arrival = {$team} has docked aboard the warship and is moving to secure the principal.
+rmc-ert-announcement-bodyguard-denied = Corporate security declined the executive protection request.
+
+rmc-ert-announcement-lawyers-dispatch = Corporate Affairs has acknowledged the distress request. {$team} is preparing to deploy.
+rmc-ert-announcement-lawyers-arrival = {$team} has docked aboard the warship and is preparing to review contractual violations.
+rmc-ert-announcement-lawyers-denied = Corporate Affairs declined the legal assistance request.
+
+rmc-ert-announcement-cmb-dispatch = A Colonial Marshal Bureau patrol has accepted the distress request.
+rmc-ert-announcement-cmb-arrival = {$team} has docked aboard the warship and is investigating the reported incident.
+
+rmc-ert-announcement-spp-dispatch = Foreign response traffic has been detected. {$team} is preparing to deploy.
+rmc-ert-announcement-spp-arrival = {$team} has docked aboard the warship and is preparing to support the operation.
+
+rmc-ert-announcement-tse-dispatch = {$team} has accepted the distress request.
+rmc-ert-announcement-tse-arrival = {$team} has docked aboard the warship and is entering the operation area.
+
+rmc-ert-announcement-provost-dispatch = Provost command has approved a response team.
+rmc-ert-announcement-provost-arrival = {$team} has docked aboard the warship and is assuming Provost jurisdiction.
+
+rmc-ert-beacon-request-title-handheld = handheld distress beacon
+rmc-ert-beacon-request-title-cmb = CMB distress beacon
+rmc-ert-beacon-request-title-weya = WeYa distress beacon
+rmc-ert-beacon-request-title-weya-bodyguard = WeYa bodyguard distress beacon
+rmc-ert-beacon-request-title-weya-lawyer = WeYa legal distress beacon
+rmc-ert-beacon-request-title-provost = Provost distress beacon
+rmc-ert-beacon-request-title-foreign = foreign distress beacon
+
+rmc-ert-recipient-high-command = High Command
+rmc-ert-recipient-anchorpoint = Anchorpoint Station
+rmc-ert-recipient-weya-command = Weyland-Yutani emergency response command
+rmc-ert-recipient-weya-security = Weyland-Yutani Corporate Security Division
+rmc-ert-recipient-weya-affairs = Weyland-Yutani Corporate Affairs Division
+rmc-ert-recipient-provost = Provost command
+rmc-ert-recipient-allied = allied response command
+
+rmc-ert-entity-handheld-distress-beacon-name = handheld distress beacon
+rmc-ert-entity-handheld-distress-beacon-description = A compact encrypted transmitter used to request an emergency response team.
+rmc-ert-entity-cmb-distress-beacon-name = CMB distress beacon
+rmc-ert-entity-weya-distress-beacon-name = WeYa distress beacon
+rmc-ert-entity-weya-bodyguard-distress-beacon-name = WeYa bodyguard distress beacon
+rmc-ert-entity-weya-legal-distress-beacon-name = WeYa legal distress beacon
+rmc-ert-entity-provost-distress-beacon-name = Provost distress beacon
+rmc-ert-entity-foreign-distress-beacon-name = foreign distress beacon
+
+rmc-ert-entity-spawn-marker-name = ERT spawn marker
+rmc-ert-entity-spawn-marker-description = Fallback spawn marker for emergency response team members on ERT shuttles.
+rmc-ert-entity-seat-troop-name = ERT troop seat
+rmc-ert-entity-seat-command-name = ERT command seat
+rmc-ert-entity-seat-medic-name = ERT medic seat
+rmc-ert-entity-seat-engineer-name = ERT engineer seat
+
+rmc-ert-entity-transport-shuttle-name = transport shuttle
+rmc-ert-entity-transport-shuttle-description = A transport shuttle flight computer.
+rmc-ert-entity-emergency-response-dock-name = emergency response dock
+rmc-ert-entity-emergency-response-dock-description = Defines a valid location for emergency response shuttles to FTL to aboard the warship.
+rmc-ert-entity-icb-liaison-headset-name = ICB liaison headset
+rmc-ert-entity-cbrn-headset-name = CBRN headset
+rmc-ert-entity-cbrn-headset-description = A headset given to CBRN marines.
+rmc-ert-entity-cbrn-leader-headset-name = CBRN leader headset
+rmc-ert-entity-cbrn-leader-headset-description = A headset given to CBRN team leaders.
+rmc-ert-entity-clf-headset-name = CLF headset
+rmc-ert-entity-clf-headset-description = A special headset used by small groups of trained operatives. Or terrorists.
+rmc-ert-entity-bureau-earpiece-name = bureau earpiece
+rmc-ert-entity-bureau-earpiece-description = A sleek headset used by the Colony Marshal Bureau. Low profile and comfortable. No one is above the law.
+rmc-ert-entity-damaged-bureau-earpiece-name = damaged bureau earpiece
+rmc-ert-entity-damaged-bureau-earpiece-description = A sleek headset used by the Colony Marshal Bureau. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
+rmc-ert-entity-weya-corporate-headset-name = WeYa corporate headset
+rmc-ert-entity-weya-corporate-headset-description = A headset commonly worn by WeYa corporate personnel.
+rmc-ert-entity-pmc-headset-name = PMC headset
+rmc-ert-entity-pmc-headset-description = A special headset used by corporate personnel.
+rmc-ert-entity-weya-security-headset-name = We-Ya headset
+rmc-ert-entity-weya-security-headset-description = A special headset used by corporate security personnel.
+rmc-ert-entity-weya-legal-headset-name = We-Ya headset
+rmc-ert-entity-weya-legal-headset-description = A special headset used by corporate legal personnel.
+rmc-ert-entity-dukes-headset-name = Duke's Dozen headset
+rmc-ert-entity-dukes-headset-description = A special headset used by small groups of trained operatives. Or terrorists.
+rmc-ert-entity-unmc-distress-headset-name = UNMC headset
+rmc-ert-entity-unmc-distress-headset-description = A standard issue UNMC headset. This one is used by marines on colonial protection duties, and only comes equipped with civilian channels.
+rmc-ert-entity-shuttle-wall-name = ERT shuttle wall
+rmc-ert-entity-shuttle-engine-name = shuttle engine
+rmc-ert-entity-standard-shuttle-wall-name = standard shuttle wall
+rmc-ert-entity-standard-shuttle-engine-name = standard shuttle engine
+rmc-ert-entity-weya-shuttle-wall-name = WeYa shuttle wall
+rmc-ert-entity-weya-shuttle-engine-name = WeYa shuttle engine
+rmc-ert-entity-spp-shuttle-wall-name = SPP shuttle wall
+rmc-ert-entity-spp-shuttle-engine-name = SPP shuttle engine
+rmc-ert-entity-tse-shuttle-wall-name = TSE shuttle wall
+rmc-ert-entity-tse-shuttle-engine-name = TSE shuttle engine
+rmc-ert-entity-nightmare-spp-shuttle-wall-name = Nightmare SPP shuttle wall
+rmc-ert-entity-nightmare-spp-shuttle-engine-name = Nightmare SPP shuttle engine

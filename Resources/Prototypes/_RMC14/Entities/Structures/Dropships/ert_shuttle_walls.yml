@@ -2,7 +2,7 @@
   abstract: true
   parent: CMBaseWallInvincible
   id: RMCBaseERTShuttleWall
-  name: ERT Shuttle Wall
+  name: rmc-ert-entity-shuttle-wall-name
   components:
   - type: Corrodible
     isCorrodible: false
@@ -17,7 +17,7 @@
   abstract: true
   parent: RMCBaseERTShuttleWall
   id: RMCBaseERTShuttleEngine
-  name: Shuttle Engine
+  name: rmc-ert-entity-shuttle-engine-name
   components:
   - type: Occluder
     enabled: false
@@ -88,12 +88,12 @@
   abstract: true
   parent: RMCBaseERTShuttleWall
   id: RMCERTShuttleWallStandard
-  name: Standard Shuttle Wall
+  name: rmc-ert-entity-standard-shuttle-wall-name
 
 - type: entity
   parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandardEngineLeft
-  name: Standard Shuttle Engine
+  name: rmc-ert-entity-standard-shuttle-engine-name
   suffix: Left
   components:
   - type: Sprite
@@ -104,7 +104,7 @@
 - type: entity
   parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandardEngineRight
-  name: Standard Shuttle Engine
+  name: rmc-ert-entity-standard-shuttle-engine-name
   suffix: Right
   components:
   - type: Sprite
@@ -360,12 +360,12 @@
   abstract: true
   parent: RMCBaseERTShuttleWall
   id: RMCERTShuttleWallWeYa
-  name: WeYa Shuttle Wall
+  name: rmc-ert-entity-weya-shuttle-wall-name
 
 - type: entity
   parent: RMCERTShuttleWallWeYa
   id: RMCERTShuttleWallWeYaEngineLeft
-  name: WeYa Shuttle Engine
+  name: rmc-ert-entity-weya-shuttle-engine-name
   suffix: Left
   components:
   - type: Sprite
@@ -376,7 +376,7 @@
 - type: entity
   parent: RMCERTShuttleWallWeYa
   id: RMCERTShuttleWallWeYaEngineRight
-  name: WeYa Shuttle Engine
+  name: rmc-ert-entity-weya-shuttle-engine-name
   suffix: Right
   components:
   - type: Sprite
@@ -602,12 +602,12 @@
   abstract: true
   parent: RMCBaseERTShuttleWall
   id: RMCERTShuttleWallSPP
-  name: SPP Shuttle Wall
+  name: rmc-ert-entity-spp-shuttle-wall-name
 
 - type: entity
   parent: RMCERTShuttleWallSPP
   id: RMCERTShuttleWallSPPEngineLeft
-  name: SPP Shuttle Engine
+  name: rmc-ert-entity-spp-shuttle-engine-name
   suffix: Left
   components:
   - type: Sprite
@@ -618,7 +618,7 @@
 - type: entity
   parent: RMCERTShuttleWallSPP
   id: RMCERTShuttleWallSPPEngineRight
-  name: SPP Shuttle Engine
+  name: rmc-ert-entity-spp-shuttle-engine-name
   suffix: Right
   components:
   - type: Sprite
@@ -774,12 +774,12 @@
   abstract: true
   parent: RMCBaseERTShuttleWall
   id: RMCERTShuttleWallTSE
-  name: TSE Shuttle Wall
+  name: rmc-ert-entity-tse-shuttle-wall-name
 
 - type: entity
   parent: RMCERTShuttleWallTSE
   id: RMCERTShuttleWallTSEEngineLeft
-  name: TSE Shuttle Engine
+  name: rmc-ert-entity-tse-shuttle-engine-name
   suffix: Left
   components:
   - type: Sprite
@@ -790,7 +790,7 @@
 - type: entity
   parent: RMCERTShuttleWallTSE
   id: RMCERTShuttleWallTSEEngineRight
-  name: TSE Shuttle Engine
+  name: rmc-ert-entity-tse-shuttle-engine-name
   suffix: Right
   components:
   - type: Sprite
@@ -946,12 +946,12 @@
   abstract: true
   parent: RMCBaseERTShuttleWall
   id: RMCERTShuttleWallNightmareSPP
-  name: Nightmare SPP Shuttle Wall
+  name: rmc-ert-entity-nightmare-spp-shuttle-wall-name
 
 - type: entity
   parent: RMCERTShuttleWallNightmareSPP
   id: RMCERTShuttleWallNightmareSPPEngineLeft01
-  name: Nightmare SPP Shuttle Engine
+  name: rmc-ert-entity-nightmare-spp-shuttle-engine-name
   suffix: Left 01
   components:
   - type: Sprite
@@ -962,7 +962,7 @@
 - type: entity
   parent: RMCERTShuttleWallNightmareSPP
   id: RMCERTShuttleWallNightmareSPPEngineLeft02
-  name: Nightmare SPP Shuttle Engine
+  name: rmc-ert-entity-nightmare-spp-shuttle-engine-name
   suffix: Left 02
   components:
   - type: Sprite
@@ -973,7 +973,7 @@
 - type: entity
   parent: RMCERTShuttleWallNightmareSPP
   id: RMCERTShuttleWallNightmareSPPEngineRight01
-  name: Nightmare SPP Shuttle Engine
+  name: rmc-ert-entity-nightmare-spp-shuttle-engine-name
   suffix: Right 01
   components:
   - type: Sprite
@@ -984,7 +984,7 @@
 - type: entity
   parent: RMCERTShuttleWallNightmareSPP
   id: RMCERTShuttleWallNightmareSPPEngineRight02
-  name: Nightmare SPP Shuttle Engine
+  name: rmc-ert-entity-nightmare-spp-shuttle-engine-name
   suffix: Right 02
   components:
   - type: Sprite

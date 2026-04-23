@@ -37,8 +37,8 @@
 - type: entity
   parent: CMComputerDropshipNavigation
   id: CMComputerDropshipNavigationERT
-  name: transport shuttle
-  description: A transport shuttle flight computer.
+  name: rmc-ert-entity-transport-shuttle-name
+  description: rmc-ert-entity-transport-shuttle-description
   components:
   - type: Sprite
     state: syndishuttle
@@ -279,7 +279,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTPort1
-  name: emergency response dock
+  name: rmc-ert-entity-emergency-response-dock-name
+  description: rmc-ert-entity-emergency-response-dock-description
   suffix: Port 1
   components:
   - type: DropshipDestination
@@ -291,7 +292,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTPort2
-  name: emergency response dock
+  name: rmc-ert-entity-emergency-response-dock-name
+  description: rmc-ert-entity-emergency-response-dock-description
   suffix: Port 2
   components:
   - type: DropshipDestination
@@ -303,7 +305,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTPort3
-  name: emergency response dock
+  name: rmc-ert-entity-emergency-response-dock-name
+  description: rmc-ert-entity-emergency-response-dock-description
   suffix: Port 3
   components:
   - type: DropshipDestination
@@ -315,7 +318,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTPort4
-  name: emergency response dock
+  name: rmc-ert-entity-emergency-response-dock-name
+  description: rmc-ert-entity-emergency-response-dock-description
   suffix: Port 4
   components:
   - type: DropshipDestination
@@ -327,7 +331,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTPort5
-  name: emergency response dock
+  name: rmc-ert-entity-emergency-response-dock-name
+  description: rmc-ert-entity-emergency-response-dock-description
   suffix: Port 5
   components:
   - type: DropshipDestination
@@ -339,7 +344,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTHangarPort
-  name: emergency response dock
+  name: rmc-ert-entity-emergency-response-dock-name
+  description: rmc-ert-entity-emergency-response-dock-description
   suffix: Hangar Port
   components:
   - type: DropshipDestination
@@ -351,7 +357,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTHangarStarboard
-  name: emergency response dock
+  name: rmc-ert-entity-emergency-response-dock-name
+  description: rmc-ert-entity-emergency-response-dock-description
   suffix: Hangar Starboard
   components:
   - type: DropshipDestination

@@ -1,12 +1,13 @@
 - type: rmcERTCall
   id: RMCERTCallCBRN
-  name: UNMC CBRN Response Team
-  organization: UNMC
+  name: rmc-ert-call-cbrn-name
+  organization: rmc-ert-organization-unmc
   npcFactions: [ UNMC ]
   iffFaction: FactionMarine
-  category: Military
+  category: rmc-ert-category-military
   enabled: true
   adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-cbrn
   randomWeight: 35
   allowedSources: [ Console, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
@@ -15,7 +16,7 @@
   landingTags: [ mainship ]
   roles:
   - id: leader
-    name: CBRN Squad Leader
+    name: rmc-ert-role-cbrn-leader
     job: RMCCBRNSquadLeader
     ghostRoleEntity: RMCRandomHumanoidCBRNSquadLeader
     min: 1
@@ -25,7 +26,7 @@
     seatTags: [ command ]
     priority: 100
   - id: rifleman
-    name: CBRN Rifleman
+    name: rmc-ert-role-cbrn-rifleman
     job: RMCCBRNRifleman
     ghostRoleEntity: RMCRandomHumanoidCBRNRifleman
     min: 2
@@ -33,7 +34,7 @@
     roleTags: [ rifleman ]
     seatTags: [ troop ]
   - id: medic
-    name: CBRN Hospital Corpsman
+    name: rmc-ert-role-cbrn-medic
     job: RMCCBRNMedic
     ghostRoleEntity: RMCRandomHumanoidCBRNMedic
     min: 1
@@ -42,7 +43,7 @@
     seatTags: [ medic, troop ]
     priority: 50
   - id: engineer
-    name: CBRN Combat Technician
+    name: rmc-ert-role-cbrn-engineer
     job: RMCCBRNCombatTech
     ghostRoleEntity: RMCRandomHumanoidCBRNCombatTech
     min: 1
@@ -52,16 +53,16 @@
     priority: 40
   announcements:
     requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: "High Command has approved a distress response. {team} is being mustered."
+    dispatch: rmc-ert-announcement-cbrn-dispatch
     dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: "{team} is accepting volunteers for immediate deployment."
+    recruiting: rmc-ert-announcement-recruiting-immediate
     recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: "{team} has launched."
+    launch: rmc-ert-announcement-launch
     launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: "{team} has docked aboard the warship and is awaiting tasking."
+    arrival: rmc-ert-announcement-cbrn-arrival
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
-    failed: "High Command reports that {team} deployment failed: {reason}"
-    denied: "High Command has denied the distress request."
+    failed: rmc-ert-announcement-cbrn-failed
+    denied: rmc-ert-announcement-cbrn-denied
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -70,13 +71,14 @@
 
 - type: rmcERTCall
   id: RMCERTCallPMC
-  name: WeYa PMC Response Team
-  organization: WeYa
+  name: rmc-ert-call-pmc-name
+  organization: rmc-ert-organization-weya
   npcFactions: [ WeYa ]
   iffFaction: FactionWeYa
-  category: Corporate
+  category: rmc-ert-category-corporate
   enabled: true
   adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-pmc
   randomWeight: 20
   allowedSources: [ Console, Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
@@ -85,7 +87,7 @@
   landingTags: [ mainship ]
   roles:
   - id: leader
-    name: PMC Leader
+    name: rmc-ert-role-pmc-leader
     job: RMCPMCLeader
     ghostRoleEntity: RMCRandomHumanoidPMCLeader
     min: 1
@@ -95,7 +97,7 @@
     seatTags: [ command ]
     priority: 100
   - id: operator
-    name: PMC Operator
+    name: rmc-ert-role-pmc-operator
     job: RMCPMCStandardM63B2
     ghostRoleEntity: RMCRandomHumanoidPMCStandardM63B2
     min: 2
@@ -103,7 +105,7 @@
     roleTags: [ rifleman ]
     seatTags: [ troop ]
   - id: medic
-    name: PMC Medic
+    name: rmc-ert-role-pmc-medic
     job: RMCPMCMedic
     ghostRoleEntity: RMCRandomHumanoidPMCMedic
     min: 1
@@ -112,7 +114,7 @@
     seatTags: [ medic, troop ]
     priority: 50
   - id: engineer
-    name: PMC Engineer
+    name: rmc-ert-role-pmc-engineer
     job: RMCPMCEngineer
     ghostRoleEntity: RMCRandomHumanoidPMCEngineer
     min: 1
@@ -122,15 +124,119 @@
     priority: 40
   announcements:
     requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: "A corporate emergency contract has been accepted. {team} is preparing to deploy."
+    dispatch: rmc-ert-announcement-pmc-dispatch
     dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: "{team} is accepting volunteers for immediate deployment."
+    recruiting: rmc-ert-announcement-recruiting-immediate
     recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: "{team} has launched."
+    launch: rmc-ert-announcement-launch
     launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: "{team} has docked aboard the warship under corporate authority."
+    arrival: rmc-ert-announcement-pmc-arrival
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
-    denied: "Corporate response channels have declined the request."
+    denied: rmc-ert-announcement-pmc-denied
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 1
+
+- type: rmcERTCall
+  id: RMCERTCallWeYaBodyguard
+  name: rmc-ert-call-weya-bodyguard-name
+  organization: rmc-ert-organization-weya
+  npcFactions: [ WeYa ]
+  iffFaction: FactionWeYa
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-bodyguards
+  randomWeight: 0
+  allowedSources: [ Handheld, Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleWeYa
+  autoLaunch: true
+  landingTags: [ mainship ]
+  roles:
+  - id: lead
+    name: rmc-ert-role-weya-bodyguard-lead
+    job: RMCWeYaGoonLead
+    ghostRoleEntity: RMCRandomHumanoidWeYaGoonLead
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command, police ]
+    seatTags: [ command ]
+    priority: 100
+  - id: bodyguard
+    name: rmc-ert-role-weya-bodyguard
+    job: RMCWeYaGoon
+    ghostRoleEntity: RMCRandomHumanoidWeYaGoon
+    min: 1
+    max: 3
+    roleTags: [ police, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
+    dispatch: rmc-ert-announcement-bodyguard-dispatch
+    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
+    recruiting: rmc-ert-announcement-recruiting
+    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
+    launch: rmc-ert-announcement-launch
+    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
+    arrival: rmc-ert-announcement-bodyguard-arrival
+    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
+    denied: rmc-ert-announcement-bodyguard-denied
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 1
+
+- type: rmcERTCall
+  id: RMCERTCallWeYaLawyers
+  name: rmc-ert-call-weya-lawyers-name
+  organization: rmc-ert-organization-weya
+  npcFactions: [ WeYa ]
+  iffFaction: FactionWeYa
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-lawyers
+  randomWeight: 0
+  allowedSources: [ Handheld, Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleWeYa
+  autoLaunch: true
+  landingTags: [ mainship ]
+  roles:
+  - id: supervisor
+    name: rmc-ert-role-weya-lawyer-supervisor
+    job: RMCWeYaLawyerSupervisor
+    ghostRoleEntity: RMCRandomHumanoidWeYaLawyerSupervisor
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: specialist
+    name: rmc-ert-role-weya-lawyer-specialist
+    job: RMCWeYaLawyer
+    ghostRoleEntity: RMCRandomHumanoidWeYaLawyer
+    min: 1
+    max: 2
+    roleTags: [ support ]
+    seatTags: [ troop ]
+  announcements:
+    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
+    dispatch: rmc-ert-announcement-lawyers-dispatch
+    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
+    recruiting: rmc-ert-announcement-recruiting
+    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
+    launch: rmc-ert-announcement-launch
+    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
+    arrival: rmc-ert-announcement-lawyers-arrival
+    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
+    denied: rmc-ert-announcement-lawyers-denied
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -139,12 +245,13 @@
 
 - type: rmcERTCall
   id: RMCERTCallCMB
-  name: CMB Marshal Patrol
-  organization: CMB
+  name: rmc-ert-call-cmb-name
+  organization: rmc-ert-organization-cmb
   npcFactions: [ Bureau ]
-  category: Law
+  category: rmc-ert-category-law
   enabled: true
   adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-cmb
   randomWeight: 10
   allowedSources: [ Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_cmb_shuttle.yml
@@ -153,7 +260,7 @@
   landingTags: [ mainship ]
   roles:
   - id: marshal
-    name: CMB Marshal
+    name: rmc-ert-role-cmb-marshal
     job: CMBureauMarshal
     ghostRoleEntity: RMCRandomHumanoidBureauMarshal
     min: 1
@@ -163,7 +270,7 @@
     seatTags: [ command ]
     priority: 100
   - id: deputy
-    name: CMB Deputy
+    name: rmc-ert-role-cmb-deputy
     job: CMBureauDeputy
     ghostRoleEntity: RMCRandomHumanoidBureauDeputy
     min: 1
@@ -172,13 +279,13 @@
     seatTags: [ troop ]
   announcements:
     requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: "A Colonial Marshal Bureau patrol has accepted the distress request."
+    dispatch: rmc-ert-announcement-cmb-dispatch
     dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: "{team} is accepting volunteers."
+    recruiting: rmc-ert-announcement-recruiting
     recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: "{team} has launched."
+    launch: rmc-ert-announcement-launch
     launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: "{team} has docked aboard the warship and is investigating the reported incident."
+    arrival: rmc-ert-announcement-cmb-arrival
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
   requirements:
     cooldown: 10m
@@ -187,13 +294,14 @@
 
 - type: rmcERTCall
   id: RMCERTCallSPP
-  name: SPP Response Squad
-  organization: SPP
+  name: rmc-ert-call-spp-name
+  organization: rmc-ert-organization-spp
   npcFactions: [ SPP ]
   iffFaction: FactionSPP
-  category: Foreign Military
+  category: rmc-ert-category-foreign-military
   enabled: true
   adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-spp
   randomWeight: 10
   allowedSources: [ Console, Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_spp_shuttle.yml
@@ -202,7 +310,7 @@
   landingTags: [ mainship ]
   roles:
   - id: leader
-    name: SPP Squad Leader
+    name: rmc-ert-role-spp-leader
     job: RMCSPPLeader
     ghostRoleEntity: RMCRandomHumanoidSPPLeaderFriendly
     min: 1
@@ -212,7 +320,7 @@
     seatTags: [ command ]
     priority: 100
   - id: rifleman
-    name: SPP Rifleman
+    name: rmc-ert-role-spp-rifleman
     job: RMCSPPRifleman
     ghostRoleEntity: RMCRandomHumanoidSPPRiflemanFriendly
     min: 2
@@ -220,7 +328,7 @@
     roleTags: [ rifleman ]
     seatTags: [ troop ]
   - id: medic
-    name: SPP Medic
+    name: rmc-ert-role-spp-medic
     job: RMCSPPMedic
     ghostRoleEntity: RMCRandomHumanoidSPPMedicFriendly
     min: 1
@@ -229,13 +337,13 @@
     seatTags: [ medic, troop ]
   announcements:
     requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: "Foreign response traffic has been detected. {team} is preparing to deploy."
+    dispatch: rmc-ert-announcement-spp-dispatch
     dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: "{team} is accepting volunteers."
+    recruiting: rmc-ert-announcement-recruiting
     recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: "{team} has launched."
+    launch: rmc-ert-announcement-launch
     launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: "{team} has docked aboard the warship and is preparing to support the operation."
+    arrival: rmc-ert-announcement-spp-arrival
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
   requirements:
     cooldown: 10m
@@ -244,13 +352,14 @@
 
 - type: rmcERTCall
   id: RMCERTCallTSE
-  name: TSE Royal Marines
-  organization: TSE
+  name: rmc-ert-call-tse-name
+  organization: rmc-ert-organization-tse
   npcFactions: [ RoyalMarines, TSE ]
   iffFaction: FactionRoyalMarines
-  category: Foreign Military
+  category: rmc-ert-category-foreign-military
   enabled: true
   adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-tse
   randomWeight: 5
   allowedSources: [ Console, Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_tse_shuttle.yml
@@ -259,7 +368,7 @@
   landingTags: [ mainship ]
   roles:
   - id: teamlead
-    name: Royal Marines Team Leader
+    name: rmc-ert-role-tse-teamlead
     job: CMRoyalMarinesTeamlead
     ghostRoleEntity: RMCRandomHumanoidRoyalMarinesTeamlead
     min: 1
@@ -269,7 +378,7 @@
     seatTags: [ command ]
     priority: 100
   - id: commando
-    name: Royal Marines Commando
+    name: rmc-ert-role-tse-commando
     job: CMRoyalMarinesCommando
     ghostRoleEntity: RMCRandomHumanoidRoyalMarinesCommando
     min: 2
@@ -277,7 +386,7 @@
     roleTags: [ rifleman ]
     seatTags: [ troop ]
   - id: medic
-    name: Royal Marines Medic
+    name: rmc-ert-role-tse-medic
     job: CMRoyalMarinesMedic
     ghostRoleEntity: RMCRandomHumanoidRoyalMarinesMedic
     min: 1
@@ -286,13 +395,13 @@
     seatTags: [ medic, troop ]
   announcements:
     requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: "{team} has accepted the distress request."
+    dispatch: rmc-ert-announcement-tse-dispatch
     dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: "{team} is accepting volunteers."
+    recruiting: rmc-ert-announcement-recruiting
     recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: "{team} has launched."
+    launch: rmc-ert-announcement-launch
     launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: "{team} has docked aboard the warship and is entering the operation area."
+    arrival: rmc-ert-announcement-tse-arrival
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
   requirements:
     cooldown: 10m
@@ -301,12 +410,13 @@
 
 - type: rmcERTCall
   id: RMCERTCallProvost
-  name: Provost Enforcement Team
-  organization: Provost
+  name: rmc-ert-call-provost-name
+  organization: rmc-ert-organization-provost
   npcFactions: [ UNMC ]
-  category: Law
+  category: rmc-ert-category-law
   enabled: true
   adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-provost
   randomWeight: 0
   allowedSources: [ Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
@@ -315,7 +425,7 @@
   landingTags: [ mainship ]
   roles:
   - id: leader
-    name: Provost Team Leader
+    name: rmc-ert-role-provost-leader
     job: CMProvostTeamLeader
     ghostRoleEntity: RMCRandomHumanoidProvostTeamLeader
     min: 1
@@ -325,7 +435,7 @@
     seatTags: [ command ]
     priority: 100
   - id: enforcer
-    name: Provost Enforcer
+    name: rmc-ert-role-provost-enforcer
     job: CMProvostEnforcer
     ghostRoleEntity: RMCRandomHumanoidProvostEnforcer
     min: 1
@@ -334,13 +444,13 @@
     seatTags: [ troop ]
   announcements:
     requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: "Provost command has approved a response team."
+    dispatch: rmc-ert-announcement-provost-dispatch
     dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: "{team} is accepting volunteers."
+    recruiting: rmc-ert-announcement-recruiting
     recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: "{team} has launched."
+    launch: rmc-ert-announcement-launch
     launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: "{team} has docked aboard the warship and is assuming Provost jurisdiction."
+    arrival: rmc-ert-announcement-provost-arrival
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
   requirements:
     cooldown: 10m
@@ -349,19 +459,20 @@
 
 - type: rmcERTCall
   id: RMCERTCallCLF
-  name: CLF Cell
-  organization: CLF
+  name: rmc-ert-call-clf-name
+  organization: rmc-ert-organization-clf
   npcFactions: [ CLF ]
   iffFaction: FactionCLF
-  category: Event
+  category: rmc-ert-category-event
   enabled: true
   adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-clf
   randomWeight: 0
   allowedSources: [ Admin ]
   autoLaunch: false
   roles:
   - id: leader
-    name: CLF Cell Leader
+    name: rmc-ert-role-clf-leader
     job: RMCCLFCellLeader
     ghostRoleEntity: RMCRandomHumanoidCLFCellLeader
     min: 1
@@ -370,21 +481,21 @@
     roleTags: [ leader, command ]
     priority: 100
   - id: soldier
-    name: CLF Soldier
+    name: rmc-ert-role-clf-soldier
     job: RMCCLFSoldier
     ghostRoleEntity: RMCRandomHumanoidCLFSoldier
     min: 2
     max: 5
     roleTags: [ rifleman ]
   - id: medic
-    name: CLF Medic
+    name: rmc-ert-role-clf-medic
     job: RMCCLFMedic
     ghostRoleEntity: RMCRandomHumanoidCLFMedic
     min: 1
     max: 1
     roleTags: [ medic ]
   announcements:
-    recruiting: "{team} is accepting volunteers."
+    recruiting: rmc-ert-announcement-recruiting
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s

@@ -26,15 +26,15 @@
 - type: entity
   parent: [RMCHeadsetIconsCLF, CMHeadsetColony]
   id: RMCHeadsetDistressCLF
-  name: CLF headset
-  description: A special headset used by small groups of trained operatives. Or terrorists.
+  name: rmc-ert-entity-clf-headset-name
+  description: rmc-ert-entity-clf-headset-description
 
 # For Bureau Marshals
 - type: entity
   parent: RMCHeadsetIconsCMB
   id: RMCHeadsetDistressBureau
-  name: bureau earpiece
-  description: A sleek headset used by The Colony Marshal Bureau. Low profile and comfortable. No one is above the law.
+  name: rmc-ert-entity-bureau-earpiece-name
+  description: rmc-ert-entity-bureau-earpiece-description
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -48,8 +48,8 @@
 - type: entity
   parent: RMCHeadsetDistressBureau
   id: RMCHeadsetDistressBureauDamaged
-  name: damaged bureau earpiece
-  description: A sleek headset used by The Colony Marshal Bureau. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
+  name: rmc-ert-entity-damaged-bureau-earpiece-name
+  description: rmc-ert-entity-damaged-bureau-earpiece-description
   components:
   - type: ContainerFill
     containers:
@@ -60,8 +60,8 @@
 - type: entity
   parent: RMCHeadsetIconsWeYa
   id: RMCHeadsetDistressWeYa
-  name: WeYa corporate headset
-  description: A headset commonly worn by WeYa corporate personnel.
+  name: rmc-ert-entity-weya-corporate-headset-name
+  description: rmc-ert-entity-weya-corporate-headset-description
   suffix: WeYa, Colony
   components:
   - type: Sprite
@@ -76,8 +76,8 @@
 - type: entity
   parent: RMCHeadsetDistressWeYa
   id: RMCHeadsetDistressPMC
-  name: PMC headset
-  description: A special headset used by corporate personnel.
+  name: rmc-ert-entity-pmc-headset-name
+  description: rmc-ert-entity-pmc-headset-description
   components:
   - type: ContainerFill
     containers:
@@ -97,8 +97,8 @@
 - type: entity
   parent: RMCHeadsetDistressWeYa
   id: RMCHeadsetDistressPMCPVE
-  name: PMC headset
-  description: A special headset used by corporate personnel.
+  name: rmc-ert-entity-pmc-headset-name
+  description: rmc-ert-entity-pmc-headset-description
   suffix: PVE
   components:
   - type: ContainerFill
@@ -126,8 +126,8 @@
 - type: entity
   parent: RMCHeadsetDistressWeYa
   id: RMCHeadsetDistressPMCDirector
-  name: PMC headset
-  description: A special headset used by corporate personnel.
+  name: rmc-ert-entity-pmc-headset-name
+  description: rmc-ert-entity-pmc-headset-description
   suffix: Director
   components:
   - type: ContainerFill
@@ -149,8 +149,8 @@
 - type: entity
   parent: RMCHeadsetDistressWeYa
   id: RMCHeadsetDistressGoon
-  name: We-Ya headset
-  description: A special headset used by corporate personnel.
+  name: rmc-ert-entity-weya-security-headset-name
+  description: rmc-ert-entity-weya-security-headset-description
   components:
   - type: ContainerFill
     containers:
@@ -181,8 +181,8 @@
 - type: entity
   parent: RMCHeadsetDistressWeYa
   id: RMCHeadsetDistressLawyerWeYa
-  name: We-Ya headset
-  description: A special headset used by corporate personnel.
+  name: rmc-ert-entity-weya-legal-headset-name
+  description: rmc-ert-entity-weya-legal-headset-description
   suffix: Director
   components:
   - type: ContainerFill
@@ -205,8 +205,8 @@
 - type: entity
   parent: RMCHeadsetIcons
   id: RMCHeadsetDistressDukes
-  name: Duke's Dozen headset
-  description: A special headset used by small groups of trained operatives. Or terrorists.
+  name: rmc-ert-entity-dukes-headset-name
+  description: rmc-ert-entity-dukes-headset-description
   components:
   - type: ContainerFill
     containers:
@@ -308,8 +308,8 @@
 - type: entity
   parent: RMCHeadsetMarine
   id: RMCHeadsetMarineDistress
-  name: UNMC headset
-  description: A standard issue UNMC headset. This one is used by marines on colonial protection duties, and only comes equipped with civilian channels.
+  name: rmc-ert-entity-unmc-distress-headset-name
+  description: rmc-ert-entity-unmc-distress-headset-description
   components:
   - type: ContainerFill
     containers:

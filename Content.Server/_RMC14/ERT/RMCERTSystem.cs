@@ -12,7 +12,6 @@ using Content.Server.Humanoid.Components;
 using Content.Server.Humanoid.Systems;
 using Content.Server.Mind;
 using Content.Server.Popups;
-using Content.Shared.Appearance;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared._RMC14.Dialog;
@@ -40,6 +39,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.ERT;
 
@@ -47,6 +47,7 @@ public sealed class RMCERTSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _access = default!;
     [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
@@ -130,7 +131,7 @@ public sealed class RMCERTSystem : EntitySystem
         var calls = _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
             .OrderBy(c => c.Category)
             .ThenBy(c => c.Name)
-            .Select(c => new RMCERTCallOption(c.ID, c.Name, GetOrganizationLabel(c), c.Category, c.RandomWeight, c.AdminSelectable))
+            .Select(c => new RMCERTCallOption(c.ID, c.Name, GetOrganizationLabel(c), c.Category, c.RandomWeight, c.AdminSelectable, c.AdminButtonLabel))
             .ToList();
 
         return new RMCERTAdminEuiState(requests, calls);
@@ -149,28 +150,29 @@ public sealed class RMCERTSystem : EntitySystem
 
     public void RequestHandheldDistress(Entity<RMCERTDistressBeaconComponent> beacon, EntityUid user, string reason)
     {
+        reason = reason.Trim();
+
         if (beacon.Comp.Spent)
         {
-            _popup.PopupEntity("The distress beacon has already been used.", beacon, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-spent"), beacon, user, PopupType.MediumCaution);
             return;
         }
 
         if (_timing.CurTime < beacon.Comp.LastUsed + beacon.Comp.Cooldown)
         {
-            _popup.PopupEntity("The distress beacon is still recalibrating.", beacon, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-cooldown"), beacon, user, PopupType.MediumCaution);
             return;
         }
 
-        var calls = beacon.Comp.AllowedCalls.Count == 0
-            ? _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
-                .Where(c => c.Enabled && c.AllowedSources.Contains(RMCERTRequestSource.Handheld))
-                .Select(c => new ProtoId<RMCERTCallPrototype>(c.ID))
-                .ToList()
-            : beacon.Comp.AllowedCalls.ToList();
-
-        if (calls.Count == 0)
+        if (beacon.Comp.ReasonRequired && string.IsNullOrWhiteSpace(reason))
         {
-            _popup.PopupEntity("The beacon cannot find any configured response teams.", beacon, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-reason-required"), beacon, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!TryGetHandheldAvailableCalls(beacon, user, reason, out var calls, out var error))
+        {
+            _popup.PopupEntity(error, beacon, user, PopupType.MediumCaution);
             return;
         }
 
@@ -204,19 +206,19 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (!_prototypes.TryIndex(callId, out var call))
         {
-            FailRequest(request, $"Unknown ERT call prototype: {callId.Id}");
+            FailRequest(request, Loc.GetString("rmc-ert-error-unknown-call", ("id", callId.Id)));
             return false;
         }
 
         if (!request.AllowedCalls.Contains(callId) && request.Source != RMCERTRequestSource.Admin)
         {
-            FailRequest(request, $"{call.Name} is not allowed for this distress source.");
+            FailRequest(request, Loc.GetString("rmc-ert-error-call-not-allowed", ("call", call.Name)));
             return false;
         }
 
         if (!call.Enabled)
         {
-            FailRequest(request, $"{call.Name} is disabled.");
+            FailRequest(request, Loc.GetString("rmc-ert-error-call-disabled", ("call", call.Name)));
             return false;
         }
 
@@ -233,8 +235,12 @@ public sealed class RMCERTSystem : EntitySystem
 
         var adminText = admin is { Valid: true }
             ? ToPrettyString(admin.Value)
-            : "server";
-        _chat.SendAdminAnnouncement($"{adminText} approved ERT request {request.Id} as {call.Name}. Dispatching in {(int) call.LaunchDelay} seconds.");
+            : Loc.GetString("rmc-ert-admin-actor-server");
+        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-approved",
+            ("admin", adminText),
+            ("id", request.Id),
+            ("call", call.Name),
+            ("delay", (int) call.LaunchDelay)));
         Announce(call.Announcements.Dispatch, call.Announcements.DispatchSound, request, call);
         Log.Info($"ERT request {request.Id} approved as {call.ID} by {adminText}");
 
@@ -266,8 +272,11 @@ public sealed class RMCERTSystem : EntitySystem
 
         var adminText = admin is { Valid: true }
             ? ToPrettyString(admin.Value)
-            : "server";
-        _chat.SendAdminAnnouncement($"{adminText} denied ERT request {request.Id} from {request.RequesterName}.");
+            : Loc.GetString("rmc-ert-admin-actor-server");
+        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-denied",
+            ("admin", adminText),
+            ("id", request.Id),
+            ("requester", request.RequesterName)));
 
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
             Announce(call.Announcements.Denied, call.Announcements.DeniedSound, request, call);
@@ -287,12 +296,14 @@ public sealed class RMCERTSystem : EntitySystem
         request.State = RMCERTRequestState.Cancelled;
         request.LastError = string.Empty;
         request.RecruitmentEndsAt = null;
-        CleanupRequestContent(request, "cancelled");
+        CleanupRequestContent(request, Loc.GetString("rmc-ert-cleanup-reason-cancelled"));
         UpdateSourceVisual(request, false);
         var adminText = admin is { Valid: true }
             ? ToPrettyString(admin.Value)
-            : "server";
-        _chat.SendAdminAnnouncement($"{adminText} cancelled ERT request {request.Id}.");
+            : Loc.GetString("rmc-ert-admin-actor-server");
+        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cancelled",
+            ("admin", adminText),
+            ("id", request.Id)));
 
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
             Announce(call.Announcements.Cancelled, call.Announcements.CancelledSound, request, call);
@@ -321,9 +332,12 @@ public sealed class RMCERTSystem : EntitySystem
 
         var adminText = admin is { Valid: true }
             ? ToPrettyString(admin.Value)
-            : "server";
-        var selected = GetSelectedCallLabel(request) ?? "response team";
-        _chat.SendAdminAnnouncement($"{adminText} completed ERT request {request.Id} for {selected}.");
+            : Loc.GetString("rmc-ert-admin-actor-server");
+        var selected = GetSelectedCallLabel(request) ?? Loc.GetString("rmc-ert-response-team-fallback");
+        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-completed",
+            ("admin", adminText),
+            ("id", request.Id),
+            ("team", selected)));
         DirtyState();
         return true;
     }
@@ -332,7 +346,7 @@ public sealed class RMCERTSystem : EntitySystem
     {
         if (!ent.Comp.CanTransmitDistress)
         {
-            _popup.PopupEntity("This console cannot transmit a distress beacon.", ent, args.Actor, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-console-unavailable"), ent, args.Actor, PopupType.MediumCaution);
             return;
         }
 
@@ -343,7 +357,7 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         var ev = new RMCERTConsoleDistressReasonEvent(GetNetEntity(args.Actor));
-        _dialog.OpenInput(ent, args.Actor, "State the reason for the distress beacon.", ev, true, ent.Comp.DistressReasonLimit);
+        _dialog.OpenInput(ent, args.Actor, Loc.GetString("rmc-ert-prompt-console-reason"), ev, true, ent.Comp.DistressReasonLimit);
     }
 
     private void OnConsoleReason(Entity<MarineCommunicationsComputerComponent> ent, ref RMCERTConsoleDistressReasonEvent args)
@@ -390,7 +404,7 @@ public sealed class RMCERTSystem : EntitySystem
                 request.State = RMCERTRequestState.Arrived;
                 request.LastError = string.Empty;
                 UpdateSourceVisual(request, false);
-                _chat.SendAdminAnnouncement($"ERT request {request.Id} arrived, but its call prototype is no longer available.");
+                _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-arrived-missing-call", ("id", request.Id)));
                 DirtyState();
             }
 
@@ -406,7 +420,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (TryComp(ent, out AccessReaderComponent? access) &&
             !_access.IsAllowed(args.User, ent, access))
         {
-            _popup.PopupEntity("Access denied.", ent, args.User, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-access-denied"), ent, args.User, PopupType.MediumCaution);
             args.Handled = true;
             return;
         }
@@ -421,7 +435,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (ent.Comp.ReasonRequired)
         {
             var ev = new RMCERTHandheldDistressReasonEvent(GetNetEntity(args.User));
-            _dialog.OpenInput(ent, args.User, "State the reason for the handheld distress beacon.", ev, true, ent.Comp.ReasonLimit);
+            _dialog.OpenInput(ent, args.User, Loc.GetString("rmc-ert-prompt-handheld-reason", ("title", ent.Comp.RequestTitle)), ev, true, ent.Comp.ReasonLimit);
         }
         else
         {
@@ -454,7 +468,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (allowedCalls.Count == 0)
         {
-            _popup.PopupEntity("There are no configured response teams for this distress source.", sourceEntity, requester, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-no-source-teams"), sourceEntity, requester, PopupType.MediumCaution);
             return;
         }
 
@@ -483,14 +497,14 @@ public sealed class RMCERTSystem : EntitySystem
         {
             var requestSound = GetRequestSound(allowedCalls) ?? DefaultRequestSound;
             _marineAnnounce.AnnounceHighCommand(
-                "A distress beacon has been launched. High Command is reviewing the request.",
+                Loc.GetString("rmc-ert-console-request-announcement"),
                 sound: requestSound);
         }
 
         if (source == RMCERTRequestSource.Handheld)
             UpdateSourceVisual(request, true);
 
-        _popup.PopupEntity("The distress beacon has been transmitted to High Command.", sourceEntity, requester, PopupType.Medium);
+        _popup.PopupEntity(GetRequestSuccessText(sourceEntity, source), sourceEntity, requester, PopupType.Medium);
         DirtyState();
     }
 
@@ -504,7 +518,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (request.SelectedCall is not { } callId || !_prototypes.TryIndex(callId, out var call))
         {
-            FailRequest(request, "The selected ERT call no longer exists.");
+            FailRequest(request, Loc.GetString("rmc-ert-error-selected-call-missing"));
             return;
         }
 
@@ -536,7 +550,10 @@ public sealed class RMCERTSystem : EntitySystem
         request.State = RMCERTRequestState.Recruiting;
         request.RecruitmentEndsAt = _timing.CurTime + call.Requirements.RecruitmentDuration;
         Announce(call.Announcements.Recruiting, call.Announcements.RecruitingSound, request, call);
-        _chat.SendAdminAnnouncement($"ERT request {request.Id} is recruiting {request.PlannedRoster.Count} ghost-role slots for {call.Name}.");
+        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-recruiting",
+            ("id", request.Id),
+            ("slots", request.PlannedRoster.Count),
+            ("call", call.Name)));
 
         if (request.SourceEntity is { Valid: true } beacon &&
             TryComp(beacon, out RMCERTDistressBeaconComponent? beaconComp) &&
@@ -560,7 +577,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (!TryGetShuttleMapPath(call, out var shuttleMap, out error))
             return false;
 
-        if (shuttleMap == null)
+        if (shuttleMap is not { } shuttleMapPath)
             return true;
 
         if (_ertMap is not { } targetMap || !_map.MapExists(targetMap))
@@ -573,10 +590,10 @@ public sealed class RMCERTSystem : EntitySystem
         var offset = new Vector2(_loadedShuttles * 50, _loadedShuttles * 50);
         _loadedShuttles++;
 
-        if (!_mapLoader.TryLoadGrid(targetMap, shuttleMap.Value, out var result, offset: offset) ||
+        if (!_mapLoader.TryLoadGrid(targetMap, shuttleMapPath, out var result, offset: offset) ||
             result == null)
         {
-            error = $"Failed to load ERT shuttle map {shuttleMap}.";
+            error = Loc.GetString("rmc-ert-error-load-shuttle-map", ("map", shuttleMapPath));
             return false;
         }
 
@@ -595,12 +612,12 @@ public sealed class RMCERTSystem : EntitySystem
             if (xform.GridUid != shuttle.Value)
                 continue;
 
-            computer.Hijackable = !shuttleComp.NoHijack;
-            computer.PlanetOnly = false;
-            computer.RequiresERTLandingZone = true;
-            computer.AllowedERTLandingTags = call.LandingTags.ToList();
-            computer.DeniedERTLandingTags = call.DeniedLandingTags.ToList();
-            Dirty(uid, computer);
+            _dropship.ConfigureERTNavigationComputer((uid, computer),
+                !shuttleComp.NoHijack,
+                false,
+                true,
+                call.LandingTags,
+                call.DeniedLandingTags);
         }
 
         return true;
@@ -621,7 +638,9 @@ public sealed class RMCERTSystem : EntitySystem
         {
             if (!_prototypes.HasIndex<EntityPrototype>(role.GhostRoleEntity))
             {
-                error = $"Missing ghost role entity prototype {role.GhostRoleEntity.Id} for {call.Name}.";
+                error = Loc.GetString("rmc-ert-error-missing-ghost-role",
+                    ("entity", role.GhostRoleEntity.Id),
+                    ("call", call.Name));
                 return false;
             }
 
@@ -641,7 +660,10 @@ public sealed class RMCERTSystem : EntitySystem
         var targetMin = Math.Max(minTotal, call.Requirements.MinRequiredSlots);
         if (targetMin > maxTotal)
         {
-            error = $"ERT call {call.Name} requires at least {targetMin} slots, but its configured maximum is {maxTotal}.";
+            error = Loc.GetString("rmc-ert-error-min-slots-over-max",
+                ("call", call.Name),
+                ("required", targetMin),
+                ("maximum", maxTotal));
             return false;
         }
 
@@ -688,7 +710,9 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (request.PlannedRoster.Count < targetMin)
         {
-            error = $"Only {request.PlannedRoster.Count} ERT slots were planned, but {targetMin} are required.";
+            error = Loc.GetString("rmc-ert-error-planned-slots-too-low",
+                ("planned", request.PlannedRoster.Count),
+                ("required", targetMin));
             return false;
         }
 
@@ -836,29 +860,82 @@ public sealed class RMCERTSystem : EntitySystem
         shuttleMap = call.ShuttleMap;
         error = string.Empty;
 
-        if (call.ShuttleSpawner == null)
+        if (call.ShuttleSpawner is not { } shuttleSpawner)
             return true;
 
-        if (!_prototypes.TryIndex(call.ShuttleSpawner.Value, out var spawnerPrototype))
+        if (!_prototypes.TryIndex(shuttleSpawner, out var spawnerPrototype))
         {
-            error = $"Unknown ERT shuttle spawner prototype {call.ShuttleSpawner.Value.Id}.";
+            error = Loc.GetString("rmc-ert-error-unknown-shuttle-spawner", ("id", shuttleSpawner.Id));
             return false;
         }
 
         if (!spawnerPrototype.TryGetComponent<GridSpawnerComponent>(out var gridSpawner, _componentFactory))
         {
-            error = $"ERT shuttle spawner {call.ShuttleSpawner.Value.Id} is missing GridSpawnerComponent.";
+            error = Loc.GetString("rmc-ert-error-shuttle-spawner-missing-grid", ("id", shuttleSpawner.Id));
             return false;
         }
 
-        shuttleMap = gridSpawner.Spawn ?? shuttleMap;
-        if (shuttleMap == null)
+        if (shuttleMap is null)
+            shuttleMap = gridSpawner.Spawn;
+
+        if (shuttleMap is null)
         {
-            error = $"ERT shuttle spawner {call.ShuttleSpawner.Value.Id} does not define a shuttle map.";
+            error = Loc.GetString("rmc-ert-error-shuttle-spawner-no-map", ("id", shuttleSpawner.Id));
             return false;
         }
 
         return true;
+    }
+
+    private bool TryGetHandheldAvailableCalls(
+        Entity<RMCERTDistressBeaconComponent> beacon,
+        EntityUid user,
+        string reason,
+        out List<ProtoId<RMCERTCallPrototype>> calls,
+        out string error)
+    {
+        calls = new List<ProtoId<RMCERTCallPrototype>>();
+        error = Loc.GetString("rmc-ert-error-beacon-no-teams");
+
+        var configuredCalls = beacon.Comp.AllowedCalls.Count == 0
+            ? _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
+                .Where(c => c.Enabled && c.AllowedSources.Contains(RMCERTRequestSource.Handheld))
+                .Select(c => new ProtoId<RMCERTCallPrototype>(c.ID))
+                .ToList()
+            : beacon.Comp.AllowedCalls.ToList();
+
+        if (configuredCalls.Count == 0)
+            return false;
+
+        var request = new RMCERTRequest
+        {
+            Source = RMCERTRequestSource.Handheld,
+            SourceEntity = beacon,
+            Requester = user,
+            SourceName = Name(beacon),
+            RequesterName = Name(user),
+            Reason = reason,
+            CreatedAt = _timing.CurTime,
+        };
+
+        foreach (var callId in configuredCalls)
+        {
+            if (!_prototypes.TryIndex(callId, out var call))
+                continue;
+
+            if (!call.Enabled || !call.AllowedSources.Contains(RMCERTRequestSource.Handheld))
+                continue;
+
+            if (!CheckRequirements(request, call, out var requirementError))
+            {
+                error = requirementError;
+                continue;
+            }
+
+            calls.Add(callId);
+        }
+
+        return calls.Count > 0;
     }
 
     private bool HasActiveRecruitmentRaffles(RMCERTRequest request)
@@ -921,12 +998,13 @@ public sealed class RMCERTSystem : EntitySystem
                 TryComp(destination, out DropshipDestinationComponent? destinationComp) &&
                 destinationComp.Ship == shuttle)
             {
-                destinationComp.Ship = null;
-                Dirty(destination, destinationComp);
+                _dropship.SetDestinationShip((destination, destinationComp), null);
             }
 
             QueueDel(shuttle);
-            _chat.SendAdminAnnouncement($"ERT request {request.Id} {reason}; shuttle content cleaned up.");
+            _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cleanup",
+                ("id", request.Id),
+                ("reason", reason)));
         }
 
         request.Shuttle = null;
@@ -966,7 +1044,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (request.SelectedCall is not { } callId || !_prototypes.TryIndex(callId, out var call))
         {
-            FailRequest(request, "The selected ERT call no longer exists.");
+            FailRequest(request, Loc.GetString("rmc-ert-error-selected-call-missing"));
             return false;
         }
 
@@ -977,16 +1055,16 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (HasActiveRecruitmentRaffles(request))
         {
-            request.LastError = "Ghost role raffles are still in progress for this response team.";
+            request.LastError = Loc.GetString("rmc-ert-error-raffles-in-progress");
             DirtyState();
             return false;
         }
 
         var launcher = automatic
-            ? "automatic launch timer"
+            ? Loc.GetString("rmc-ert-launcher-automatic")
             : admin is { Valid: true }
                 ? ToPrettyString(admin.Value)
-                : "server";
+                : Loc.GetString("rmc-ert-admin-actor-server");
 
         return TryLaunchRequest(request, call, launcher);
     }
@@ -1000,8 +1078,10 @@ public sealed class RMCERTSystem : EntitySystem
         if (acceptedCount < call.Requirements.MinRequiredSlots)
         {
             FailRequest(request, acceptedCount == 0
-                ? "No volunteers accepted the emergency response deployment."
-                : $"Only {acceptedCount} emergency responders accepted deployment, but {call.Requirements.MinRequiredSlots} are required.");
+                ? Loc.GetString("rmc-ert-error-no-volunteers")
+                : Loc.GetString("rmc-ert-error-not-enough-volunteers",
+                    ("accepted", acceptedCount),
+                    ("required", call.Requirements.MinRequiredSlots)));
             return false;
         }
 
@@ -1009,31 +1089,34 @@ public sealed class RMCERTSystem : EntitySystem
         {
             request.State = RMCERTRequestState.Launching;
             Announce(call.Announcements.Launch, call.Announcements.LaunchSound, request, call);
-            MarkArrived(request, call, $"{launcher} without a shuttle");
+            MarkArrived(request, call, Loc.GetString("rmc-ert-arrived-detail-no-shuttle", ("launcher", launcher)));
             return true;
         }
 
         if (!TryFindNavigationComputer(shuttle, out var computer))
         {
-            FailRequest(request, "The ERT shuttle has no navigation computer.");
+            FailRequest(request, Loc.GetString("rmc-ert-error-no-navigation-computer"));
             return false;
         }
 
         if (!TryFindLandingZone(request, computer, out var destination))
         {
-            FailRequest(request, "No valid ERT landing zone is available.");
+            FailRequest(request, Loc.GetString("rmc-ert-error-no-landing-zone"));
             return false;
         }
 
         if (!_dropship.FlyTo(computer, destination, null, startupTime: 10f))
         {
-            FailRequest(request, "The ERT shuttle failed to launch.");
+            FailRequest(request, Loc.GetString("rmc-ert-error-launch-failed"));
             return false;
         }
 
         request.State = RMCERTRequestState.Launching;
         Announce(call.Announcements.Launch, call.Announcements.LaunchSound, request, call);
-        _chat.SendAdminAnnouncement($"ERT request {request.Id} for {call.Name} launched by {launcher}.");
+        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-launched",
+            ("id", request.Id),
+            ("call", call.Name),
+            ("launcher", launcher)));
         DirtyState();
         return true;
     }
@@ -1060,7 +1143,7 @@ public sealed class RMCERTSystem : EntitySystem
         out EntityUid destination)
     {
         var candidates = new List<EntityUid>();
-        MapId? sourceMap = null;
+        EntityUid? sourceMap = null;
         if (request.SourceEntity is { Valid: true } source)
             sourceMap = Transform(source).MapUid;
 
@@ -1113,7 +1196,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (total <= 0)
         {
-            error = "No weighted random ERT calls are available for this request.";
+            error = Loc.GetString("rmc-ert-error-no-random-calls");
             return false;
         }
 
@@ -1129,7 +1212,7 @@ public sealed class RMCERTSystem : EntitySystem
             return true;
         }
 
-        error = "Weighted random ERT selection failed.";
+        error = Loc.GetString("rmc-ert-error-random-selection-failed");
         return false;
     }
 
@@ -1140,20 +1223,22 @@ public sealed class RMCERTSystem : EntitySystem
         if (call.Requirements.DisallowDuringEvacuation &&
             _evacuation.IsEvacuationInProgress())
         {
-            error = $"{call.Name} is unavailable while evacuation is in progress.";
+            error = Loc.GetString("rmc-ert-error-unavailable-evacuation", ("call", call.Name));
             return false;
         }
 
         if (call.Requirements.DisallowDuringHijack &&
             _distressSignal.IsHijackActive())
         {
-            error = $"{call.Name} is unavailable during hijack conditions.";
+            error = Loc.GetString("rmc-ert-error-unavailable-hijack", ("call", call.Name));
             return false;
         }
 
         if (call.Requirements.MinRoundTime is { } minRound && _timing.CurTime < minRound)
         {
-            error = $"{call.Name} requires at least {(int) minRound.TotalMinutes} minutes of round time.";
+            error = Loc.GetString("rmc-ert-error-min-round-time",
+                ("call", call.Name),
+                ("minutes", (int) minRound.TotalMinutes));
             return false;
         }
 
@@ -1164,7 +1249,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (call.Requirements.MaxCallsPerRound > 0 && dispatched >= call.Requirements.MaxCallsPerRound)
         {
-            error = $"{call.Name} has already been dispatched this round.";
+            error = Loc.GetString("rmc-ert-error-max-calls-reached", ("call", call.Name));
             return false;
         }
 
@@ -1173,7 +1258,7 @@ public sealed class RMCERTSystem : EntitySystem
             _timing.CurTime < last + call.Requirements.Cooldown &&
             request.CreatedAt != last)
         {
-            error = $"{call.Name} is on cooldown for this distress source.";
+            error = Loc.GetString("rmc-ert-error-source-cooldown", ("call", call.Name));
             return false;
         }
 
@@ -1191,7 +1276,7 @@ public sealed class RMCERTSystem : EntitySystem
 
             if (!IsTerminal(request.State))
             {
-                reason = "A distress request from this source is already pending.";
+                reason = Loc.GetString("rmc-ert-error-source-pending");
                 return false;
             }
         }
@@ -1215,9 +1300,11 @@ public sealed class RMCERTSystem : EntitySystem
         request.State = RMCERTRequestState.Failed;
         request.LastError = error;
         request.RecruitmentEndsAt = null;
-        CleanupRequestContent(request, "failed");
+        CleanupRequestContent(request, Loc.GetString("rmc-ert-cleanup-reason-failed"));
         UpdateSourceVisual(request, false);
-        _chat.SendAdminAnnouncement($"ERT request {request.Id} failed: {error}");
+        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-failed",
+            ("id", request.Id),
+            ("error", error)));
 
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
             Announce(call.Announcements.Failed, call.Announcements.FailedSound, request, call);
@@ -1225,12 +1312,12 @@ public sealed class RMCERTSystem : EntitySystem
         DirtyState();
     }
 
-    private void Announce(string? message, SoundSpecifier? sound, RMCERTRequest request, RMCERTCallPrototype call)
+    private void Announce(LocId? message, SoundSpecifier? sound, RMCERTRequest request, RMCERTCallPrototype call)
     {
-        if (string.IsNullOrWhiteSpace(message))
+        if (message == null)
             return;
 
-        var text = FormatCallText(message, request, call);
+        var text = FormatCallText(message.Value, request, call);
         _marineAnnounce.AnnounceHighCommand(text, sound: sound);
     }
 
@@ -1250,16 +1337,44 @@ public sealed class RMCERTSystem : EntitySystem
 
     private string BuildAdminRequestAnnouncement(RMCERTRequest request)
     {
-        var baseText = $"ERT request {request.Id} from {request.RequesterName} via {request.Source}: {request.Reason}";
+        var sourceLabel = GetRequestSourceLabel(request);
+        var baseText = Loc.GetString("rmc-ert-admin-request",
+            ("id", request.Id),
+            ("requester", request.RequesterName),
+            ("source", sourceLabel),
+            ("reason", request.Reason));
         if (request.AllowedCalls.Count != 1 ||
             !_prototypes.TryIndex(request.AllowedCalls[0], out var call) ||
-            string.IsNullOrWhiteSpace(call.Announcements.RequestAdmin))
+            call.Announcements.RequestAdmin == null)
         {
             return baseText;
         }
 
-        var extra = FormatCallText(call.Announcements.RequestAdmin!, request, call);
-        return $"{baseText} {extra}";
+        var extra = FormatCallText(call.Announcements.RequestAdmin.Value, request, call);
+        return Loc.GetString("rmc-ert-admin-request-with-extra", ("base", baseText), ("extra", extra));
+    }
+
+    private string GetRequestSuccessText(EntityUid sourceEntity, RMCERTRequestSource source)
+    {
+        if (source == RMCERTRequestSource.Handheld &&
+            TryComp(sourceEntity, out RMCERTDistressBeaconComponent? beacon))
+        {
+            return Loc.GetString("rmc-ert-success-handheld", ("recipient", beacon.Recipient));
+        }
+
+        return Loc.GetString("rmc-ert-success-console");
+    }
+
+    private string GetRequestSourceLabel(RMCERTRequest request)
+    {
+        if (request.Source == RMCERTRequestSource.Handheld &&
+            request.SourceEntity is { Valid: true } source &&
+            TryComp(source, out RMCERTDistressBeaconComponent? beacon))
+        {
+            return beacon.RequestTitle;
+        }
+
+        return RMCERTLoc.GetSource(request.Source);
     }
 
     private string BuildMemberBriefing(RMCERTRequest request, RMCERTCallPrototype call, RMCERTMemberComponent member)
@@ -1272,42 +1387,42 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         var builder = new StringBuilder();
-        builder.AppendLine($"{call.Name} briefing");
+        builder.AppendLine(Loc.GetString("rmc-ert-briefing-title", ("team", call.Name)));
 
         if (!string.IsNullOrWhiteSpace(request.Reason))
-            builder.AppendLine($"Reason: {request.Reason}");
+            builder.AppendLine(Loc.GetString("rmc-ert-briefing-reason", ("reason", request.Reason)));
 
         if (call.Objectives.Count > 0)
         {
-            builder.AppendLine("Objectives:");
+            builder.AppendLine(Loc.GetString("rmc-ert-briefing-objectives"));
             foreach (var objective in call.Objectives)
             {
-                builder.Append("- ");
+                builder.Append(Loc.GetString("rmc-ert-briefing-bullet"));
                 builder.AppendLine(FormatCallText(objective, request, call));
             }
         }
 
         if (call.Features.Count > 0)
         {
-            builder.AppendLine("Operational notes:");
+            builder.AppendLine(Loc.GetString("rmc-ert-briefing-features"));
             foreach (var feature in call.Features)
             {
-                builder.Append("- ");
+                builder.Append(Loc.GetString("rmc-ert-briefing-bullet"));
                 builder.AppendLine(FormatCallText(feature, request, call));
             }
         }
 
         var roleName = call.Roles.FirstOrDefault(role => role.Id == member.Role)?.Name ?? member.Role;
-        builder.AppendLine($"Assigned role: {roleName}");
+        builder.AppendLine(Loc.GetString("rmc-ert-briefing-role", ("role", roleName)));
         return builder.ToString().TrimEnd();
     }
 
-    private static string FormatCallText(string text, RMCERTRequest request, RMCERTCallPrototype call)
+    private static string FormatCallText(LocId text, RMCERTRequest request, RMCERTCallPrototype call)
     {
-        return text
-            .Replace("{team}", call.Name, StringComparison.Ordinal)
-            .Replace("{requester}", request.RequesterName, StringComparison.Ordinal)
-            .Replace("{reason}", request.Reason, StringComparison.Ordinal);
+        return Loc.GetString(text,
+            ("team", call.Name),
+            ("requester", request.RequesterName),
+            ("reason", request.Reason));
     }
 
     private void NotifyAdminsOfRequest()
@@ -1329,9 +1444,16 @@ public sealed class RMCERTSystem : EntitySystem
         UpdateSourceVisual(request, false);
         Announce(call.Announcements.Arrival, call.Announcements.ArrivalSound, request, call);
 
-        var text = $"ERT request {request.Id} for {call.Name} arrived.";
+        var text = Loc.GetString("rmc-ert-admin-arrived",
+            ("id", request.Id),
+            ("call", call.Name));
         if (!string.IsNullOrWhiteSpace(detail))
-            text = $"ERT request {request.Id} for {call.Name} arrived via {detail}.";
+        {
+            text = Loc.GetString("rmc-ert-admin-arrived-detail",
+                ("id", request.Id),
+                ("call", call.Name),
+                ("detail", detail));
+        }
 
         _chat.SendAdminAnnouncement(text);
         DirtyState();
@@ -1348,10 +1470,8 @@ public sealed class RMCERTSystem : EntitySystem
 
     private void UpdateBeaconVisual(EntityUid uid, bool active)
     {
-        if (!HasComp<AppearanceComponent>(uid))
-            return;
-
-        Appearance.SetData(uid, RMCERTDistressBeaconVisuals.Active, active);
+        if (TryComp<AppearanceComponent>(uid, out var appearance))
+            _appearance.SetData(uid, RMCERTDistressBeaconVisuals.Active, active, appearance);
     }
 
     private static int GetRoleMinimumCount(RMCERTRoleEntry role)

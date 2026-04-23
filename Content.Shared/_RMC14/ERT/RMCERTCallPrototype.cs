@@ -13,11 +13,17 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 
-    [DataField(required: true)]
-    public string Name = string.Empty;
+    [DataField("name", required: true)]
+    private LocId _name = default!;
 
-    [DataField]
-    public string Organization = string.Empty;
+    public string Name => Loc.GetString(_name);
+
+    [DataField("organization")]
+    private LocId? _organization;
+
+    public string Organization => _organization == null
+        ? string.Empty
+        : Loc.GetString(_organization.Value);
 
     [DataField]
     public List<ProtoId<NpcFactionPrototype>> NpcFactions = [];
@@ -25,14 +31,23 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     [DataField]
     public EntProtoId<IFFFactionComponent>? IffFaction;
 
-    [DataField]
-    public string Category = "Response";
+    [DataField("category")]
+    private LocId _category = "rmc-ert-category-response";
+
+    public string Category => Loc.GetString(_category);
 
     [DataField]
     public bool Enabled = true;
 
     [DataField]
     public bool AdminSelectable = true;
+
+    [DataField("adminButtonLabel")]
+    private LocId? _adminButtonLabel;
+
+    public string? AdminButtonLabel => _adminButtonLabel == null
+        ? null
+        : Loc.GetString(_adminButtonLabel.Value);
 
     [DataField]
     public int RandomWeight;
@@ -68,10 +83,10 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     public RMCERTRequirementSet Requirements = new();
 
     [DataField]
-    public List<string> Objectives = [];
+    public List<LocId> Objectives = [];
 
     [DataField]
-    public List<string> Features = [];
+    public List<LocId> Features = [];
 }
 
 [DataDefinition]
@@ -80,8 +95,10 @@ public sealed partial class RMCERTRoleEntry
     [DataField(required: true)]
     public string Id = string.Empty;
 
-    [DataField(required: true)]
-    public string Name = string.Empty;
+    [DataField("name", required: true)]
+    private LocId _name = default!;
+
+    public string Name => Loc.GetString(_name);
 
     [DataField]
     public ProtoId<JobPrototype>? Job;
@@ -115,28 +132,28 @@ public sealed partial class RMCERTRoleEntry
 public sealed partial class RMCERTAnnouncementSet
 {
     [DataField]
-    public string? RequestAdmin;
+    public LocId? RequestAdmin;
 
     [DataField]
-    public string? Dispatch;
+    public LocId? Dispatch;
 
     [DataField]
-    public string? Recruiting;
+    public LocId? Recruiting;
 
     [DataField]
-    public string? Launch;
+    public LocId? Launch;
 
     [DataField]
-    public string? Arrival;
+    public LocId? Arrival;
 
     [DataField]
-    public string? Denied;
+    public LocId? Denied;
 
     [DataField]
-    public string? Cancelled;
+    public LocId? Cancelled;
 
     [DataField]
-    public string? Failed;
+    public LocId? Failed;
 
     [DataField]
     public SoundSpecifier? RequestSound;

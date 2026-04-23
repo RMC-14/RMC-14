@@ -10,7 +10,8 @@ public readonly record struct RMCERTCallOption(
     string Organization,
     string Category,
     int RandomWeight,
-    bool AdminSelectable);
+    bool AdminSelectable,
+    string? AdminButtonLabel);
 
 [Serializable, NetSerializable]
 public readonly record struct RMCERTRequestOption(
