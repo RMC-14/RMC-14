@@ -135,7 +135,7 @@
     bulletType: VehicleAmmoBoxRERotaryCannon
   - type: GunMuzzleOffset
     offset: "0,0"
-    muzzleOffset: "0,-1"
+    muzzleOffset: "0,0"
     useAimDirection: false
     useContainerOwner: false
   - type: HardpointVisual
