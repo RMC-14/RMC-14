@@ -23,6 +23,15 @@
 
 - type: entity
   parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeM63AP
+  suffix: M63 AP, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGM63AP
+    
+- type: entity
+  parent: RMCPouchGeneralLarge
   id: RMCPouchGeneralLargeFillWheat
   suffix: Wheat, Filled
   components:
@@ -215,10 +224,26 @@
 - type: entity
   parent: RMCPouchFlareL96
   id: RMCPouchFlareL96Filled
-  suffix: Filled
+  suffix: Filled, RCM
   components:
   - type: CMItemSlots
     startingItem: RMCFlareL96
+
+- type: entity
+  parent: RMCPouchFlareR44
+  id: RMCPouchFlareR44Filled
+  suffix: Filled, SPP
+  components:
+  - type: CMItemSlots
+    startingItem: RMCFlareR44
+
+- type: entity
+  parent: RMCPouchFlareC18
+  id: RMCPouchFlareC18Filled
+  suffix: Filled, PMC
+  components:
+  - type: CMItemSlots
+    startingItem: RMCFlareC18
 
 # Electronics Pouch
 - type: entity
@@ -286,6 +311,17 @@
     contents:
     - id: RMCMagazineSmartGunirradiated
       amount: 3
+
+# Fuel Tank Strap Pouch
+- type: entity
+  parent: RMCPouchFuelTank
+  id: RMCPouchFuelTankFlamertankExtinguisher
+  suffix: Flamertank, Extinguisher, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamer
+    - id: CMFireExtinguisher
 
 # Survival pouch
 - type: entity

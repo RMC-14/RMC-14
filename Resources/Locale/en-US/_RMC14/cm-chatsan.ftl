@@ -289,6 +289,18 @@ cm-chatsan-replacement-felinid = feline host
 cm-chatsan-word-felinids = felinids
 cm-chatsan-replacement-felinids = feline hosts
 
+cm-chatsan-word-cat = cat
+cm-chatsan-replacement-cat = feline host
+
+cm-chatsan-word-cats = cats
+cm-chatsan-replacement-cats = feline hosts
+
+cm-chatsan-word-vamp = vamp
+cm-chatsan-word-replacement-vamp = vampire lurker
+
+cm-chatsan-word-vamps = vamps
+cm-chatsan-word-replacement-vamps = vampire lurkers
+
 cm-chatsan-word-vulpkanin = vulpkanin
 cm-chatsan-replacement-vulpkanin = canine host
 
@@ -723,6 +735,9 @@ cm-chatsan-replacement-generator = light core
 cm-chatsan-word-generators = generators
 cm-chatsan-replacement-generators = light cores
 
+cm-chatsan-word-gens = gens
+cm-chatsan-word-replacement-gens = light cores
+
 cm-chatsan-word-disk = disk
 cm-chatsan-word-disc = disc
 cm-chatsan-replacement-disk = memory wheel
@@ -930,3 +945,35 @@ cm-chatsan-replacement-clanker = synthetic
 cm-chatsan-word-rwall = rwall
 cm-chatsan-replacement-rwall = reinforced wall
 
+cm-chatsan-word-pyro = pyro
+cm-chatsan-word-replacement-pyro = flamewalker
+
+cm-chatsan-word-pyros = pyros
+cm-chatsan-word-replacement-pyros = flamewalkers
+
+cm-chatsan-word-fender = fender
+cm-chatsan-word-replacement-fender = defender
+
+cm-chatsan-word-fenders = fenders
+cm-chatsan-word-replacement-fenders = defenders
+
+cm-chatsan-word-senti = senti
+cm-chatsan-word-replacement-senti = sentinel
+
+cm-chatsan-word-sentis = sentis
+cm-chatsan-word-replacement-sentis = sentinels
+
+cm-chatsan-word-valk = valk
+cm-chatsan-word-replacement-valk = valkyrie
+
+cm-chatsan-word-valks = valks
+cm-chatsan-word-replacement-valks = valkyries
+
+cm-chatsan-word-lessy = lessy
+cm-chatsan-word-replacement-lessy = lesser
+
+cm-chatsan-word-gamba = gamba
+cm-chatsan-word-replacement-gamba = gamble
+
+cm-chatsan-word-pheros = pheros
+cm-chatsan-word-replacement-pheros = pheromones
