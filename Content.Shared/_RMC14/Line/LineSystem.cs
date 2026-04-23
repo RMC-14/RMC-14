@@ -149,22 +149,25 @@ public sealed class LineSystem : EntitySystem
 
         // Check if the next tile is blocked by more than one wall/structure to prevent the line from passing through diagonally.
         var direction = coords.Position - previousCoords.Position;
-        var ray = new CollisionRay(previousCoords.Position, direction.Normalized(), (int)CollisionGroup.FullTileMask);
-        var intersect = _physics.IntersectRayWithPredicate(Transform(previousCoords.EntityId).MapID, ray, direction.Length(), e => !Transform(e).Anchored, false);
-        var results = intersect.Select(r => r.HitEntity).ToHashSet();
-        var blockCount = 0;
-        foreach (var entity in results)
+        if (direction != Vector2.Zero)
         {
-            if (!_tag.HasAnyTag(entity, StructureTag, WallTag))
-                continue;
+            var ray = new CollisionRay(previousCoords.Position, direction.Normalized(), (int)CollisionGroup.FullTileMask);
+            var intersect = _physics.IntersectRayWithPredicate(Transform(previousCoords.EntityId).MapID, ray, direction.Length(), e => !Transform(e).Anchored, false);
+            var results = intersect.Select(r => r.HitEntity).ToHashSet();
+            var blockCount = 0;
+            foreach (var entity in results)
+            {
+                if (!_tag.HasAnyTag(entity, StructureTag, WallTag))
+                    continue;
 
-            blockCount++;
+                blockCount++;
 
-            if (blockCount < 2)
-                continue;
+                if (blockCount < 2)
+                    continue;
 
-            blocker = entity;
-            return true;
+                blocker = entity;
+                return true;
+            }
         }
 
         var indices = _mapSystem.TileIndicesFor(grid.Value, grid, coords);
