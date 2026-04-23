@@ -22,8 +22,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRCMFilled
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
@@ -71,7 +69,7 @@
     - RMCPatchTSEMarines
     - RMCPatchTSE
 
-# PVE RCM jumpsuit without webbings
+# PVE Whiskey Troop uniform
 
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
@@ -86,6 +84,7 @@
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
+    - RMCPatchTSEWhiskey
   - type: ItemCamouflage
     camouflageVariations: {}
 
@@ -98,19 +97,30 @@
   description: A formal service uniform worn by commissioned officers of the Royal Crown Marines. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
   suffix: Royal, Formal
   components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/service.rsi
-    - type: UniformAccessoryHolder
-      startingAccessories:
-        - RMCPatchTSE
-        - RMCPatchTSEMarines
-    - type: ItemCamouflage
-      camouflageVariations: {}
-    - type: Foldable
-      unfoldVerbText: rmc-sleeves-verb-unfold
-      foldVerbText: rmc-sleeves-verb-fold
-    - type: FoldableClothing
-      foldedEquippedPrefix: sleeves
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/service.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSE
+    - RMCPatchTSEMarines
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+
+- type: entity # PVE service uniform
+  parent: RMCJumpsuitMarineRoyalService
+  id: RMCJumpsuitMarineRoyalServicePVE
+  suffix: PVE, Royal, Formal
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+    - RMCPatchTSEWhiskey
 
 # RCM Paramarines
 - type: entity
