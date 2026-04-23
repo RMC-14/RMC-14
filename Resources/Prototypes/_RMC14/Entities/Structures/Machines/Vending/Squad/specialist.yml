@@ -101,8 +101,8 @@
         points: 40
       - id: RMCRocket84mm
         points: 40
-    #- id: 84mmWhitePhosphorusRocket
-    #  points: 40
+      - id: RMCRocket84mmWhitePhosphorus
+        points: 40
     - name: Extra Grenades
       entries:
       - id: CMGrenadeHighExplosive

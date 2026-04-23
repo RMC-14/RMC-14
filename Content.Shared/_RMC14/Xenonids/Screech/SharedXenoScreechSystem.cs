@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
@@ -24,6 +25,7 @@ public sealed class XenoScreechSystem : EntitySystem
     [Dependency] private readonly SharedDeafnessSystem _deaf = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
     private readonly HashSet<Entity<MobStateComponent>> _closeMobs = new();
@@ -66,7 +68,10 @@ public sealed class XenoScreechSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
                 continue;
 
-            Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
+            if (!Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false))
+                continue;
+
+            _cameraShake.ShakeCamera(receiver, xeno.Comp.CloseScreenShakeShakes, xeno.Comp.CloseScreenShakeStrength);
             Deafen(xeno, receiver, xeno.Comp.CloseDeafTime);
         }
 
@@ -81,7 +86,10 @@ public sealed class XenoScreechSystem : EntitySystem
             if (_closeMobs.Contains(receiver))
                 continue;
 
-            Stun(xeno, receiver, xeno.Comp.StunTime, true);
+            if (!Stun(xeno, receiver, xeno.Comp.StunTime, true))
+                continue;
+
+            _cameraShake.ShakeCamera(receiver, xeno.Comp.FarScreenShakeShakes, xeno.Comp.FarScreenShakeStrength);
             Deafen(xeno, receiver, xeno.Comp.FarDeafTime);
         }
 
@@ -90,25 +98,28 @@ public sealed class XenoScreechSystem : EntitySystem
 
         foreach (var receiver in _parasites)
         {
-            Stun(xeno, receiver, xeno.Comp.ParasiteStunTime, true, false);
+            if (!Stun(xeno, receiver, xeno.Comp.ParasiteStunTime, true, false))
+                continue;
+
+            _cameraShake.ShakeCamera(receiver, xeno.Comp.CloseScreenShakeShakes, xeno.Comp.CloseScreenShakeStrength);
         }
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
     }
 
-    private void Stun(EntityUid xeno, EntityUid receiver, TimeSpan time, bool stun, bool occlusionCheck = true)
+    private bool Stun(EntityUid xeno, EntityUid receiver, TimeSpan time, bool stun, bool occlusionCheck = true)
     {
         if (_mobState.IsDead(receiver))
-            return;
+            return false;
 
         if (occlusionCheck && !_examineSystem.InRangeUnOccluded(xeno, receiver))
-            return;
+            return false;
 
         if (stun)
-            _stun.TryStun(receiver, time, false);
-        else
-            _stun.TryParalyze(receiver, time, false);
+            return _stun.TryStun(receiver, time, false);
+
+        return _stun.TryParalyze(receiver, time, false);
     }
 
     private void Deafen(EntityUid xeno, EntityUid receiver, TimeSpan time)

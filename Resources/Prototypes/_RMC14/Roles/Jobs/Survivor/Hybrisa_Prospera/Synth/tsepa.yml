@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaTSEPA
   startingGear: RMCGearSyntheticColonistHybrisaTSEPA
   spawnMenuRoleName: TSEPA Support Synth (Hybrisa Survivor)
@@ -60,7 +60,7 @@
       preset: RMCSurvivorPresetHybrisaSynthTSEPA
     - type: Synth
       generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistHybrisaCivilian

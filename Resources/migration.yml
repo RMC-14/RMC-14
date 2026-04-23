@@ -1488,6 +1488,9 @@ RMCMagazineSMGP90: RMCMagazineSMGPDW90
 CMWebbingSurgicalGreen: RMCWebbingSurgicalGreen
 CMWebbingSurgicalBlue: RMCWebbingSurgicalBlue
 
+# 2026-03-21
+CMUpgradedTraumaKit: CMUpgradedTraumaKit10
+
 
 # 2026-03-24
 
