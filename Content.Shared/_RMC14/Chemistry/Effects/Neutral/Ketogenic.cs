@@ -43,7 +43,7 @@ public sealed partial class Ketogenic : RMCChemicalEffect
 
         TryChangeDamage(args, PoisonType, potency);
 
-        if (ProbHundred(2.5 * Potency))
+        if (IsHumanoid(args) && ProbHundred(2.5 * Potency))
         {
             var rmcVomitSys = System<RMCVomitSystem>(args);
             rmcVomitSys.StartVomit(args.TargetEntity);
