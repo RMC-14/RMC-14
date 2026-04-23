@@ -3,6 +3,9 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.ERT;
 
 [Serializable, NetSerializable]
+/// <summary>
+/// Source that originated the ERT request.
+/// </summary>
 public enum RMCERTRequestSource : byte
 {
     Console,
@@ -12,6 +15,9 @@ public enum RMCERTRequestSource : byte
 }
 
 [Serializable, NetSerializable]
+/// <summary>
+/// Server-side lifecycle stages for an ERT request.
+/// </summary>
 public enum RMCERTRequestState : byte
 {
     Requested,
@@ -27,6 +33,9 @@ public enum RMCERTRequestState : byte
     Failed,
 }
 
+/// <summary>
+/// Shared localization helpers for ERT enums that are displayed in admin UI.
+/// </summary>
 public static class RMCERTLoc
 {
     public static string GetSource(RMCERTRequestSource source)

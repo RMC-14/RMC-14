@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: RMCHeadsetLiaison
   id: RMCHeadsetDistressICBLiaison
-  name: rmc-ert-entity-icb-liaison-headset-name
+  name: ICB liaison headset
   suffix: ICB, Colony
   components:
   - type: ContainerFill
@@ -12,8 +12,8 @@
 - type: entity
   parent: RMCHeadsetMarine
   id: CMHeadsetCBRN
-  name: rmc-ert-entity-cbrn-headset-name
-  description: rmc-ert-entity-cbrn-headset-description
+  name: CBRN headset
+  description: A headset given to CBRN marines.
   components:
   - type: ContainerFill
     containers:
@@ -32,8 +32,8 @@
 - type: entity
   parent: CMHeadsetCBRN
   id: CMHeadsetCBRNLeader
-  name: rmc-ert-entity-cbrn-leader-headset-name
-  description: rmc-ert-entity-cbrn-leader-headset-description
+  name: CBRN leader headset
+  description: A headset given to CBRN team leaders.
   components:
   - type: RMCHeadset
     radioTextIncrease: 3

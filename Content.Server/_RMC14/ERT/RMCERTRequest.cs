@@ -4,6 +4,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.ERT;
 
+/// <summary>
+/// Runtime state for a single ERT request from creation through cleanup.
+/// </summary>
 public sealed class RMCERTRequest
 {
     public Guid Id = Guid.NewGuid();
@@ -26,6 +29,9 @@ public sealed class RMCERTRequest
 }
 
 [Serializable]
+/// <summary>
+/// Materialized roster entry created from a call prototype before ghost-role recruitment starts.
+/// </summary>
 public sealed class RMCERTRosterSlot
 {
     public string RoleId = string.Empty;

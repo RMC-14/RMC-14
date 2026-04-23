@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseItem
   id: RMCHandheldDistressBeaconBase
-  name: rmc-ert-entity-handheld-distress-beacon-name
-  description: rmc-ert-entity-handheld-distress-beacon-description
+  name: handheld distress beacon
+  description: A compact encrypted transmitter used to request an emergency response team.
   abstract: true
   components:
   - type: Sprite
@@ -29,7 +29,7 @@
 - type: entity
   parent: RMCHandheldDistressBeaconBase
   id: RMCHandheldDistressBeaconCMB
-  name: rmc-ert-entity-cmb-distress-beacon-name
+  name: CMB distress beacon
   suffix: CMB
   components:
   - type: RMCERTDistressBeacon
@@ -41,7 +41,7 @@
 - type: entity
   parent: RMCHandheldDistressBeaconBase
   id: RMCHandheldDistressBeaconWeYa
-  name: rmc-ert-entity-weya-distress-beacon-name
+  name: WeYa distress beacon
   suffix: WeYa
   components:
   - type: AccessReader
@@ -57,7 +57,7 @@
 - type: entity
   parent: RMCHandheldDistressBeaconWeYa
   id: RMCHandheldDistressBeaconWeYaBodyguard
-  name: rmc-ert-entity-weya-bodyguard-distress-beacon-name
+  name: WeYa bodyguard distress beacon
   suffix: WeYa, Bodyguard
   components:
   - type: RMCERTDistressBeacon
@@ -69,7 +69,7 @@
 - type: entity
   parent: RMCHandheldDistressBeaconWeYa
   id: RMCHandheldDistressBeaconWeYaLawyer
-  name: rmc-ert-entity-weya-legal-distress-beacon-name
+  name: WeYa legal distress beacon
   suffix: WeYa, Lawyer
   components:
   - type: RMCERTDistressBeacon
@@ -81,7 +81,7 @@
 - type: entity
   parent: RMCHandheldDistressBeaconBase
   id: RMCHandheldDistressBeaconProvost
-  name: rmc-ert-entity-provost-distress-beacon-name
+  name: Provost distress beacon
   suffix: Provost
   components:
   - type: RMCERTDistressBeacon
@@ -93,7 +93,7 @@
 - type: entity
   parent: RMCHandheldDistressBeaconBase
   id: RMCHandheldDistressBeaconForeign
-  name: rmc-ert-entity-foreign-distress-beacon-name
+  name: foreign distress beacon
   suffix: SPP, TSE
   components:
   - type: RMCERTDistressBeacon

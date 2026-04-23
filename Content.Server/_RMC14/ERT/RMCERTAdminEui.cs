@@ -8,6 +8,9 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.ERT;
 
+/// <summary>
+/// Server-side EUI controller for the admin ERT dispatch window.
+/// </summary>
 public sealed class RMCERTAdminEui : BaseEui
 {
     [Dependency] private readonly IAdminManager _admin = default!;
@@ -48,6 +51,7 @@ public sealed class RMCERTAdminEui : BaseEui
         if (!HasPermission())
             return;
 
+        // Keep the UI thin: validate permissions here, then hand the actual request mutation off to RMCERTSystem.
         var admin = Player.AttachedEntity;
         switch (msg)
         {

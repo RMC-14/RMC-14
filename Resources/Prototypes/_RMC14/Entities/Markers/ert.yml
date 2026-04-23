@@ -1,9 +1,9 @@
 - type: entity
   parent: MarkerBase
   id: RMCERTSpawnMarker
-  name: rmc-ert-entity-spawn-marker-name
+  name: ERT spawn marker
   suffix: ERT
-  description: rmc-ert-entity-spawn-marker-description
+  description: Fallback spawn marker for emergency response team members on ERT shuttles.
   placement:
     mode: SnapgridCenter
   components:
@@ -52,7 +52,7 @@
 - type: entity
   parent: CMSeatPassenger
   id: RMCERTSeatTroop
-  name: rmc-ert-entity-seat-troop-name
+  name: ERT troop seat
   suffix: ERT
   components:
   - type: RMCERTSeat
@@ -61,7 +61,7 @@
 - type: entity
   parent: CMSeatPassenger
   id: RMCERTSeatCommand
-  name: rmc-ert-entity-seat-command-name
+  name: ERT command seat
   suffix: ERT
   components:
   - type: RMCERTSeat
@@ -72,7 +72,7 @@
 - type: entity
   parent: CMSeatPassenger
   id: RMCERTSeatMedic
-  name: rmc-ert-entity-seat-medic-name
+  name: ERT medic seat
   suffix: ERT
   components:
   - type: RMCERTSeat
@@ -83,7 +83,7 @@
 - type: entity
   parent: CMSeatPassenger
   id: RMCERTSeatEngineer
-  name: rmc-ert-entity-seat-engineer-name
+  name: ERT engineer seat
   suffix: ERT
   components:
   - type: RMCERTSeat
@@ -94,7 +94,7 @@
 - type: entity
   parent: CMSeatPilot
   id: RMCERTSeatPilotCommand
-  name: rmc-ert-entity-seat-command-name
+  name: ERT command seat
   suffix: ERT, Pilot
   components:
   - type: RMCERTSeat
@@ -105,7 +105,7 @@
 - type: entity
   parent: RMCSeatDark
   id: RMCERTSeatDarkTroop
-  name: rmc-ert-entity-seat-troop-name
+  name: ERT troop seat
   suffix: ERT, Dark
   components:
   - type: RMCERTSeat
@@ -114,7 +114,7 @@
 - type: entity
   parent: RMCSeatDark
   id: RMCERTSeatDarkCommand
-  name: rmc-ert-entity-seat-command-name
+  name: ERT command seat
   suffix: ERT, Dark
   components:
   - type: RMCERTSeat
@@ -125,7 +125,7 @@
 - type: entity
   parent: RMCSeatDark
   id: RMCERTSeatDarkMedic
-  name: rmc-ert-entity-seat-medic-name
+  name: ERT medic seat
   suffix: ERT, Dark
   components:
   - type: RMCERTSeat
@@ -136,7 +136,7 @@
 - type: entity
   parent: RMCSeatDark
   id: RMCERTSeatDarkEngineer
-  name: rmc-ert-entity-seat-engineer-name
+  name: ERT engineer seat
   suffix: ERT, Dark
   components:
   - type: RMCERTSeat

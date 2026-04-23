@@ -5,6 +5,9 @@ using Robust.Shared.Console;
 
 namespace Content.Server._RMC14.ERT;
 
+/// <summary>
+/// Tracks open admin ERT windows and fans out state changes to them.
+/// </summary>
 public sealed class RMCERTAdminSystem : EntitySystem
 {
     [Dependency] private readonly EuiManager _eui = default!;
@@ -16,6 +19,9 @@ public sealed class RMCERTAdminSystem : EntitySystem
         SubscribeLocalEvent<RMCERTStateChangedEvent>(OnERTStateChanged);
     }
 
+    /// <summary>
+    /// Opens the ERT admin window for a player-backed admin shell.
+    /// </summary>
     public void Open(IConsoleShell shell)
     {
         var player = shell.Player;

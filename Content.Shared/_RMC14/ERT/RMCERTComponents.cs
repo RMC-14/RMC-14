@@ -7,12 +7,17 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.ERT;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+/// <summary>
+/// Handheld distress beacon settings that control which specific ERT calls it can request.
+/// </summary>
 public sealed partial class RMCERTDistressBeaconComponent : Component
 {
     [DataField, AutoNetworkedField]
     public List<ProtoId<RMCERTCallPrototype>> AllowedCalls = [];
 
-    [DataField("requestTitle"), AutoNetworkedField]
+    // This is only used server-side when building prompts and admin text.
+    // The localized key itself does not need to go over component state.
+    [DataField("requestTitle")]
     private LocId _requestTitle = "rmc-ert-beacon-request-title-handheld";
 
     public string RequestTitle => Loc.GetString(_requestTitle);
@@ -45,6 +50,9 @@ public sealed partial class RMCERTDistressBeaconComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+/// <summary>
+/// Marks a shuttle grid as belonging to an active ERT request and carries routing metadata onto the shuttle.
+/// </summary>
 public sealed partial class RMCERTShuttleComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -67,6 +75,9 @@ public sealed partial class RMCERTShuttleComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+/// <summary>
+/// Seat metadata used by ERT spawning to reserve specialist seats before launch.
+/// </summary>
 public sealed partial class RMCERTSeatComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -86,6 +97,9 @@ public sealed partial class RMCERTSeatComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+/// <summary>
+/// Attached to spawned responders so the request can track and clean them up as a group.
+/// </summary>
 public sealed partial class RMCERTMemberComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -102,6 +116,9 @@ public sealed partial class RMCERTMemberComponent : Component
 }
 
 [RegisterComponent]
+/// <summary>
+/// Spawn marker metadata used to place responders on the shuttle before seat assignment.
+/// </summary>
 public sealed partial class RMCERTSpawnPointComponent : Component
 {
     [DataField]
@@ -115,6 +132,9 @@ public sealed partial class RMCERTSpawnPointComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+/// <summary>
+/// Marks a dropship destination as a valid ERT berth and describes which shuttle classes may use it.
+/// </summary>
 public sealed partial class RMCERTLandingZoneComponent : Component
 {
     [DataField, AutoNetworkedField]

@@ -698,6 +698,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         if (!computer.Comp.RequiresERTLandingZone)
             return true;
 
+        // ERT-only routing stays on the shared dropship path, but applies an extra berth filter once a console opts into it.
         if (reservedLandingZone == null ||
             !Resolve(destination, ref reservedLandingZone, false) ||
             !reservedLandingZone.Enabled)
@@ -737,6 +738,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         EntityUid destination,
         out string reason)
     {
+        // First validate routing rules, then validate transient berth state such as occupation and fit.
         if (!IsDestinationAllowed(computer, destination, out reason))
             return false;
 
@@ -777,6 +779,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         if (!Resolve(computer, ref computer.Comp, false))
             return;
 
+        // ERT shuttles reuse the shared dropship console, so their routing rules are pushed in at load time.
         computer.Comp.Hijackable = hijackable;
         computer.Comp.PlanetOnly = planetOnly;
         computer.Comp.RequiresERTLandingZone = requiresERTLandingZone;
@@ -790,6 +793,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         if (!Resolve(destination, ref destination.Comp, false))
             return;
 
+        // Track the occupying shuttle on the destination itself so both UI and launch validation see the berth as reserved.
         destination.Comp.Ship = ship;
         Dirty(destination, destination.Comp);
     }
@@ -839,9 +843,10 @@ public abstract class SharedDropshipSystem : EntitySystem
         var berthSize = FormatBoundsSize(berth);
         var shuttleSize = FormatBoundsSize(shuttle);
 
+        // Compare the shuttle footprint against each berth edge so oversized craft fail with a precise clearance reason.
         if (shuttle.Left < berth.Left)
         {
-            reason = Loc.GetString("rmc-dropship-ert-clearance-port",
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-ert-clearance-port",
                 ("shuttleSize", shuttleSize),
                 ("berthSize", berthSize));
             return false;
@@ -849,7 +854,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (shuttle.Right > berth.Right)
         {
-            reason = Loc.GetString("rmc-dropship-ert-clearance-starboard",
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-ert-clearance-starboard",
                 ("shuttleSize", shuttleSize),
                 ("berthSize", berthSize));
             return false;
@@ -857,7 +862,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (shuttle.Bottom < berth.Bottom)
         {
-            reason = Loc.GetString("rmc-dropship-ert-clearance-aft",
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-ert-clearance-aft",
                 ("shuttleSize", shuttleSize),
                 ("berthSize", berthSize));
             return false;
@@ -865,7 +870,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (shuttle.Top > berth.Top)
         {
-            reason = Loc.GetString("rmc-dropship-ert-clearance-forward",
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-ert-clearance-forward",
                 ("shuttleSize", shuttleSize),
                 ("berthSize", berthSize));
             return false;

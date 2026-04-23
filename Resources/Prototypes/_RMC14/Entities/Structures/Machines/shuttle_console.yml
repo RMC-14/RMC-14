@@ -37,8 +37,8 @@
 - type: entity
   parent: CMComputerDropshipNavigation
   id: CMComputerDropshipNavigationERT
-  name: rmc-ert-entity-transport-shuttle-name
-  description: rmc-ert-entity-transport-shuttle-description
+  name: transport shuttle
+  description: A transport shuttle flight computer.
   components:
   - type: Sprite
     state: syndishuttle
@@ -279,8 +279,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTPort1
-  name: rmc-ert-entity-emergency-response-dock-name
-  description: rmc-ert-entity-emergency-response-dock-description
+  name: emergency response dock
+  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
   suffix: Port 1
   components:
   - type: DropshipDestination
@@ -292,8 +292,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTPort2
-  name: rmc-ert-entity-emergency-response-dock-name
-  description: rmc-ert-entity-emergency-response-dock-description
+  name: emergency response dock
+  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
   suffix: Port 2
   components:
   - type: DropshipDestination
@@ -305,8 +305,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTPort3
-  name: rmc-ert-entity-emergency-response-dock-name
-  description: rmc-ert-entity-emergency-response-dock-description
+  name: emergency response dock
+  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
   suffix: Port 3
   components:
   - type: DropshipDestination
@@ -318,8 +318,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTPort4
-  name: rmc-ert-entity-emergency-response-dock-name
-  description: rmc-ert-entity-emergency-response-dock-description
+  name: emergency response dock
+  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
   suffix: Port 4
   components:
   - type: DropshipDestination
@@ -331,8 +331,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTPort5
-  name: rmc-ert-entity-emergency-response-dock-name
-  description: rmc-ert-entity-emergency-response-dock-description
+  name: emergency response dock
+  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
   suffix: Port 5
   components:
   - type: DropshipDestination
@@ -344,8 +344,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTHangarPort
-  name: rmc-ert-entity-emergency-response-dock-name
-  description: rmc-ert-entity-emergency-response-dock-description
+  name: emergency response dock
+  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
   suffix: Hangar Port
   components:
   - type: DropshipDestination
@@ -357,8 +357,8 @@
 - type: entity
   parent: CMDropshipDestination
   id: RMCDropshipDestinationERTHangarStarboard
-  name: rmc-ert-entity-emergency-response-dock-name
-  description: rmc-ert-entity-emergency-response-dock-description
+  name: emergency response dock
+  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
   suffix: Hangar Starboard
   components:
   - type: DropshipDestination

@@ -43,6 +43,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.ERT;
 
+/// <summary>
+/// Orchestrates the full ERT flow: request creation, admin approval, roster planning, ghost-role recruitment, shuttle launch and cleanup.
+/// </summary>
 public sealed class RMCERTSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _access = default!;
@@ -85,7 +88,7 @@ public sealed class RMCERTSystem : EntitySystem
         SubscribeLocalEvent<DropshipArrivedAtDestinationEvent>(OnDropshipArrivedAtDestination);
 
         SubscribeLocalEvent<RMCERTDistressBeaconComponent, UseInHandEvent>(OnHandheldUse);
-        SubscribeLocalEvent<RMCERTDistressBeaconComponent, RMCERTHandheldDistressReasonEvent>(OnHandheldReason);
+        SubscribeLocalEvent<ActorComponent, RMCERTHandheldDistressReasonEvent>(OnHandheldReason);
         SubscribeLocalEvent<RMCERTMemberComponent, MindAddedMessage>(OnERTMindAdded);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, RMCERTConsoleDistressReasonEvent>(OnConsoleReason);
 
@@ -113,6 +116,7 @@ public sealed class RMCERTSystem : EntitySystem
 
     public RMCERTAdminEuiState CreateAdminState()
     {
+        // The admin window works off a flattened snapshot so the client does not need to know about runtime-only request objects.
         var requests = _requests.Values
             .OrderByDescending(r => r.CreatedAt)
             .Select(r => new RMCERTRequestOption(
@@ -434,8 +438,10 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (ent.Comp.ReasonRequired)
         {
-            var ev = new RMCERTHandheldDistressReasonEvent(GetNetEntity(args.User));
-            _dialog.OpenInput(ent, args.User, Loc.GetString("rmc-ert-prompt-handheld-reason", ("title", ent.Comp.RequestTitle)), ev, true, ent.Comp.ReasonLimit);
+            // Attach the dialog to the user, not the held item. This matches the common handheld-input
+            // pattern used elsewhere and avoids mutating networked dialog state on an inventory entity.
+            var ev = new RMCERTHandheldDistressReasonEvent(GetNetEntity(ent));
+            _dialog.OpenInput(args.User, Loc.GetString("rmc-ert-prompt-handheld-reason", ("title", ent.Comp.RequestTitle)), ev, true, ent.Comp.ReasonLimit);
         }
         else
         {
@@ -445,12 +451,18 @@ public sealed class RMCERTSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnHandheldReason(Entity<RMCERTDistressBeaconComponent> ent, ref RMCERTHandheldDistressReasonEvent args)
+    private void OnHandheldReason(Entity<ActorComponent> ent, ref RMCERTHandheldDistressReasonEvent args)
     {
-        if (!TryGetEntity(args.User, out var user))
+        if (_timing.ApplyingState)
             return;
 
-        RequestHandheldDistress(ent, user.Value, args.Message);
+        if (!TryGetEntity(args.Beacon, out var beaconUid) ||
+            !TryComp(beaconUid, out RMCERTDistressBeaconComponent? beacon))
+        {
+            return;
+        }
+
+        RequestHandheldDistress((beaconUid, beacon), ent.Owner, args.Message);
     }
 
     private void CreateRequest(
@@ -525,6 +537,7 @@ public sealed class RMCERTSystem : EntitySystem
         request.State = RMCERTRequestState.Spawning;
         DirtyState();
 
+        // Build the shuttle and the final roster up front so ghost-role raffles reflect the team that will actually deploy.
         if (!TryLoadShuttle(request, call, out var shuttle, out var error))
         {
             FailRequest(request, error);
@@ -587,6 +600,7 @@ public sealed class RMCERTSystem : EntitySystem
             targetMap = ertMap;
         }
 
+        // Keep staged ERT shuttles separated on the hidden map so simultaneous dispatches do not overlap.
         var offset = new Vector2(_loadedShuttles * 50, _loadedShuttles * 50);
         _loadedShuttles++;
 
@@ -626,6 +640,7 @@ public sealed class RMCERTSystem : EntitySystem
     private bool BuildRoster(RMCERTRequest request, RMCERTCallPrototype call, out string error)
     {
         error = string.Empty;
+        // Required slots are guaranteed first, then optional slots are rolled until we reach the final team size.
         var roles = call.Roles
             .OrderByDescending(r => r.Leader)
             .ThenByDescending(r => r.Priority)
@@ -781,6 +796,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (shuttle is not { Valid: true } shuttleUid)
             return false;
 
+        // Prefer the highest-priority compatible seat so command and specialist slots claim their reserved positions first.
         var bestSeat = EntityUid.Invalid;
         var bestPriority = int.MinValue;
         var query = EntityQueryEnumerator<RMCERTSeatComponent, TransformComponent>();
@@ -822,6 +838,7 @@ public sealed class RMCERTSystem : EntitySystem
     {
         if (shuttle is { Valid: true } shuttleUid)
         {
+            // Match SS13-style landmark behavior by picking randomly among the best compatible spawn markers.
             var matchingSpawns = new List<EntityUid>();
             var highestPriority = int.MinValue;
             var query = EntityQueryEnumerator<RMCERTSpawnPointComponent, TransformComponent>();
@@ -952,6 +969,7 @@ public sealed class RMCERTSystem : EntitySystem
     private int FinalizeRecruitment(RMCERTRequest request)
     {
         var accepted = 0;
+        // Trim unclaimed ghost roles before launch so the minimum-slot check only counts accepted responders.
         for (var i = request.SpawnedGhostRoles.Count - 1; i >= 0; i--)
         {
             var member = request.SpawnedGhostRoles[i];
@@ -977,6 +995,7 @@ public sealed class RMCERTSystem : EntitySystem
 
     private void CleanupRequestContent(RMCERTRequest request, string reason)
     {
+        // Failed and cancelled requests need to unwind both the staged roster and any berth reservation held by the shuttle.
         foreach (var member in request.SpawnedGhostRoles)
         {
             if (!Exists(member))
@@ -1018,6 +1037,7 @@ public sealed class RMCERTSystem : EntitySystem
             return false;
         }
 
+        // Wait for both the ERT recruitment window and the underlying ghost-role raffles to finish before auto-launching.
         if (request.RecruitmentEndsAt is { } endsAt &&
             _timing.CurTime < endsAt)
         {
@@ -1147,6 +1167,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (request.SourceEntity is { Valid: true } source)
             sourceMap = Transform(source).MapUid;
 
+        // Keep arrivals on the same map as the originating request, then let the shared dropship rules filter by berth compatibility.
         var query = EntityQueryEnumerator<DropshipDestinationComponent>();
         while (query.MoveNext(out var uid, out var dropshipDestination))
         {
@@ -1419,7 +1440,7 @@ public sealed class RMCERTSystem : EntitySystem
 
     private static string FormatCallText(LocId text, RMCERTRequest request, RMCERTCallPrototype call)
     {
-        return Loc.GetString(text,
+        return Robust.Shared.Localization.Loc.GetString(text,
             ("team", call.Name),
             ("requester", request.RequesterName),
             ("reason", request.Reason));

@@ -5,6 +5,9 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.ERT;
 
 [GenerateTypedNameReferences]
+/// <summary>
+/// Static frame for the admin ERT dispatch window.
+/// </summary>
 public sealed partial class RMCERTAdminWindow : FancyWindow
 {
     public RMCERTAdminWindow()

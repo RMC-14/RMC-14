@@ -8,6 +8,9 @@ using Robust.Shared.Utility;
 namespace Content.Shared._RMC14.ERT;
 
 [Prototype("rmcERTCall")]
+/// <summary>
+/// Data-driven definition of an ERT option, including roster, shuttle source, announcements and request checks.
+/// </summary>
 public sealed partial class RMCERTCallPrototype : IPrototype
 {
     [IdDataField]
@@ -90,6 +93,9 @@ public sealed partial class RMCERTCallPrototype : IPrototype
 }
 
 [DataDefinition]
+/// <summary>
+/// One role entry within an ERT call's potential roster.
+/// </summary>
 public sealed partial class RMCERTRoleEntry
 {
     [DataField(required: true)]
@@ -129,6 +135,9 @@ public sealed partial class RMCERTRoleEntry
 }
 
 [DataDefinition]
+/// <summary>
+/// Optional announcement and sound hooks for each stage of an ERT request lifecycle.
+/// </summary>
 public sealed partial class RMCERTAnnouncementSet
 {
     [DataField]
@@ -181,6 +190,9 @@ public sealed partial class RMCERTAnnouncementSet
 }
 
 [DataDefinition]
+/// <summary>
+/// Request gating and recruitment limits for a single ERT call.
+/// </summary>
 public sealed partial class RMCERTRequirementSet
 {
     [DataField]

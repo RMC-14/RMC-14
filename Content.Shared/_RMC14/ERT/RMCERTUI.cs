@@ -4,6 +4,9 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.ERT;
 
 [Serializable, NetSerializable]
+/// <summary>
+/// Slimmed-down call data sent to the admin EUI.
+/// </summary>
 public readonly record struct RMCERTCallOption(
     string Id,
     string Name,
@@ -14,6 +17,9 @@ public readonly record struct RMCERTCallOption(
     string? AdminButtonLabel);
 
 [Serializable, NetSerializable]
+/// <summary>
+/// Slimmed-down request data sent to the admin EUI.
+/// </summary>
 public readonly record struct RMCERTRequestOption(
     Guid Id,
     RMCERTRequestState State,
@@ -27,6 +33,9 @@ public readonly record struct RMCERTRequestOption(
     string LastError);
 
 [Serializable, NetSerializable]
+/// <summary>
+/// Current state of the admin ERT dispatch window.
+/// </summary>
 public sealed class RMCERTAdminEuiState(
     List<RMCERTRequestOption> requests,
     List<RMCERTCallOption> calls
@@ -40,12 +49,18 @@ public sealed class RMCERTAdminEuiState(
 public sealed class RMCERTAdminRefreshMsg : EuiMessageBase;
 
 [Serializable, NetSerializable]
+/// <summary>
+/// Requests a weighted-random call selection for the target request.
+/// </summary>
 public sealed class RMCERTAdminApproveRandomMsg(Guid request) : EuiMessageBase
 {
     public readonly Guid Request = request;
 }
 
 [Serializable, NetSerializable]
+/// <summary>
+/// Requests a specific call selection for the target request.
+/// </summary>
 public sealed class RMCERTAdminApproveSpecificMsg(Guid request, string call) : EuiMessageBase
 {
     public readonly Guid Request = request;
