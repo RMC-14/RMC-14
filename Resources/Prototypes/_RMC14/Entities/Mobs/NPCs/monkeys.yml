@@ -1,7 +1,7 @@
 # THE SHIT I NEED TO DO JUST SO WE DONT HAVE TO FUCKING SPECIFY A GHOST ROLE CHANCE OF 0
 - type: entity
   parent: [RMCSmallHost]
-  id: CMSmallHostMonkey
+  id: CMMobSmallHostMonkey
   name: monkey
   suffix: RMC
   components:
@@ -277,7 +277,7 @@
     - state: monkey_spawn
       sprite: _RMC14/Markers/landmarks.rsi
   - type: ProportionalSpawner
-    id: CMSpawnSmallHostMonkey
+    id: CMSpawnMobMonkey
     prototypes:
     - CMMobSmallHostMonkey
 #    - CMMobSmallHostKobold
