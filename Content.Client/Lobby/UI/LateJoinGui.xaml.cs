@@ -61,6 +61,7 @@ namespace Content.Client.Lobby.UI
             _sawmill = _logManager.GetSawmill("latejoin.panel");
             _selectedSlot = _preferencesManager.Preferences?.SelectedCharacterIndex;
 
+            _preferencesManager.OnServerDataLoaded += RebuildUI;
             _jobRequirements.Updated += RebuildUI;
             RebuildUI();
 
@@ -84,11 +85,21 @@ namespace Content.Client.Lobby.UI
         {
             CharacterList.RemoveAllChildren();
 
+            var preferences = _preferencesManager.Preferences;
+            if (preferences == null)
+            {
+                _selectedSlot = null;
+                return;
+            }
+
+            if (!_selectedSlot.HasValue || !preferences.Characters.ContainsKey(_selectedSlot.Value))
+                _selectedSlot = preferences.SelectedCharacterIndex;
+
             var group = new ButtonGroup();
             var selectedExists = _selectedSlot.HasValue &&
-                                 _preferencesManager.Preferences!.Characters.ContainsKey(_selectedSlot.Value);
+                                 preferences.Characters.ContainsKey(_selectedSlot.Value);
             var first = !selectedExists;
-            foreach (var (slot, profile) in _preferencesManager.Preferences!.Characters)
+            foreach (var (slot, profile) in preferences.Characters)
             {
                 var isSelected = selectedExists ? slot == _selectedSlot : first;
                 if (profile is not HumanoidCharacterProfile humanoid)
@@ -123,8 +134,12 @@ namespace Content.Client.Lobby.UI
             if (_gameTicker is { DisallowedLateJoin: false, StationNames.Count: 0 })
                 _sawmill.Debug("No stations exist, nothing to display in late-join GUI");
 
+            var preferences = _preferencesManager.Preferences;
+            if (preferences == null)
+                return;
+
             if (!_selectedSlot.HasValue ||
-                !_preferencesManager.Preferences!.TryGetHumanoidInSlot(_selectedSlot.Value, out var humanoid))
+                !preferences.TryGetHumanoidInSlot(_selectedSlot.Value, out var humanoid))
                 return;
 
             foreach (var (id, name) in _gameTicker.StationNames)
@@ -383,6 +398,7 @@ namespace Content.Client.Lobby.UI
 
             if (disposing)
             {
+                _preferencesManager.OnServerDataLoaded -= RebuildUI;
                 _jobRequirements.Updated -= RebuildUI;
                 _gameTicker.LobbyJobsAvailableUpdated -= JobsAvailableUpdated;
                 _jobButtons.Clear();
