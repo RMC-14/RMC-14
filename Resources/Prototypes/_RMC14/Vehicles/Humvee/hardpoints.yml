@@ -81,6 +81,46 @@
       insertDelay: 2.0
 
 - type: entity
+  parent: VehicleHumveeTurret
+  id: VehicleHumveeTurretArmed
+  name: humvee turret
+  description: A roof-mounted humvee turret pre-fitted with its cannon.
+  components:
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: VehicleHumveeCannon
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      turret-launcher:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+
+- type: entity
+  parent: VehicleHumveeTurret
+  id: VehicleHumveeARCTurret
+  name: humvee turret
+  description: A roof-mounted humvee turret pre-fitted with its ARC cannon.
+  components:
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: VehicleHumveeARCCannon
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      turret-launcher:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+
+- type: entity
   parent: VehicleHumveeHardpointBase
   id: VehicleHumveeCannon
   name: humvee cannon
@@ -134,7 +174,7 @@
   - type: RefillableByBulletBox
     bulletType: VehicleAmmoBoxRERotaryCannon
   - type: GunMuzzleOffset
-    offset: "0,0"
+    offset: "0,-0.8"
     muzzleOffset: "0,0"
     useAimDirection: false
     useContainerOwner: false
