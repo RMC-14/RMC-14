@@ -21,8 +21,6 @@ public sealed class VehicleRideSurfaceVisualSystem : EntitySystem
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private readonly Dictionary<EntityUid, int> _originalDrawDepths = new();
-
     public override void Initialize()
     {
         base.Initialize();
@@ -30,11 +28,18 @@ public sealed class VehicleRideSurfaceVisualSystem : EntitySystem
         UpdatesAfter.Add(typeof(RMCSpriteSystem));
         UpdatesAfter.Add(typeof(VehicleRideSurfaceSystem));
 
-        SubscribeLocalEvent<VehicleRideSurfaceRiderComponent, ComponentShutdown>(OnRiderShutdown);
         SubscribeLocalEvent<VehicleRideSurfaceRiderComponent, AfterAutoHandleStateEvent>(OnRiderState);
         SubscribeLocalEvent<VehicleRideSurfaceRiderComponent, GetDrawDepthEvent>(
             OnGetDrawDepth,
             after: [typeof(XenoHideVisualizerSystem), typeof(XenoVisualizerSystem), typeof(RMCBuckleVisualsSystem)]);
+
+        EntityManager.ComponentRemoved += OnComponentRemoved;
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        EntityManager.ComponentRemoved -= OnComponentRemoved;
     }
 
     public override void Update(float frameTime)
@@ -81,10 +86,12 @@ public sealed class VehicleRideSurfaceVisualSystem : EntitySystem
         _rmcSprite.UpdateDrawDepth(ent.Owner);
     }
 
-    private void OnRiderShutdown(Entity<VehicleRideSurfaceRiderComponent> ent, ref ComponentShutdown args)
+    private void OnComponentRemoved(RemovedComponentEventArgs args)
     {
-        _originalDrawDepths.Remove(ent.Owner);
-        _rmcSprite.UpdateDrawDepth(ent.Owner);
+        if (args.Terminating || args.BaseArgs.Component is not VehicleRideSurfaceRiderComponent)
+            return;
+
+        _rmcSprite.UpdateDrawDepth(args.BaseArgs.Owner);
     }
 
     private void OnGetDrawDepth(Entity<VehicleRideSurfaceRiderComponent> ent, ref GetDrawDepthEvent args)
@@ -94,8 +101,6 @@ public sealed class VehicleRideSurfaceVisualSystem : EntitySystem
 
     private void UpdateDrawDepth(Entity<VehicleRideSurfaceRiderComponent, SpriteComponent> ent)
     {
-        _originalDrawDepths.TryAdd(ent.Owner, ent.Comp2.DrawDepth);
-
         var drawDepth = GetRiderDrawDepth(ent.Comp1);
 
         if (ent.Comp2.DrawDepth != drawDepth)
