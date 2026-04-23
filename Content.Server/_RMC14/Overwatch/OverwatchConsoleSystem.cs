@@ -1,4 +1,8 @@
-﻿using Content.Shared._RMC14.Overwatch;
+﻿using Content.Server.Chat.Systems;
+using Content.Shared._RMC14.Communications;
+using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Xenonids.Watch;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
@@ -6,6 +10,7 @@ namespace Content.Server._RMC14.Overwatch;
 
 public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 {
+    [Dependency] private readonly CommunicationsTowerSystem _communicationsTower = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
@@ -13,10 +18,49 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<ExpandICChatRecipientsEvent>(OnExpandRecipients);
+
         SubscribeLocalEvent<OverwatchCameraComponent, ComponentRemove>(OnWatchedRemove);
         SubscribeLocalEvent<OverwatchCameraComponent, EntityTerminatingEvent>(OnWatchedRemove);
         SubscribeLocalEvent<OverwatchWatchingComponent, ComponentRemove>(OnWatchingRemove);
         SubscribeLocalEvent<OverwatchWatchingComponent, EntityTerminatingEvent>(OnWatchingRemove);
+    }
+
+    private void OnExpandRecipients(ExpandICChatRecipientsEvent ev)
+    {
+        foreach (var session in Player.Sessions)
+        {
+            if (session.AttachedEntity is not { } ent)
+                continue;
+
+            TryComp(ent, out OverwatchWatchingComponent? overwatch);
+            TryComp(ent, out XenoWatchingComponent? xenoWatch);
+
+            if (overwatch == null && xenoWatch == null)
+                continue;
+
+            var watched = overwatch?.Watching ?? xenoWatch?.Watching;
+
+            if (watched is not { } target)
+                continue;
+
+            var targetCoordinates = TransformSystem.GetMoverCoordinates(target);
+            var targetMap = TransformSystem.GetMap(targetCoordinates);
+            if (overwatch != null && HasComp<RMCPlanetComponent>(targetMap) && targetMap != TransformSystem.GetMap(ent))
+            {
+                if (!_communicationsTower.CanTransmit())
+                    continue;
+            }
+
+            if (!targetCoordinates.TryDistance(EntityManager, Transform(ev.Source).Coordinates, out var distance))
+                continue;
+
+            if (distance > ev.VoiceRange)
+                continue;
+
+            if (!ev.Recipients.ContainsKey(session))
+                ev.Recipients.Add(session, new ChatSystem.ICChatRecipientData(distance, false));
+        }
     }
 
     private void OnWatchedRemove<T>(Entity<OverwatchCameraComponent> ent, ref T args)
