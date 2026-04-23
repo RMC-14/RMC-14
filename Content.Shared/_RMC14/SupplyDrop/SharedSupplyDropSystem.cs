@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CameraShake;
+using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Extensions;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
@@ -33,6 +34,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
@@ -60,7 +62,9 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         SubscribeLocalEvent<BeingSupplyDroppedComponent, StorageOpenAttemptEvent>(OnBeingSupplyDroppedOpenAttempt);
-        SubscribeLocalEvent<BeingSupplyDroppedComponent, ParaDropFinishedEvent>(OnBeingSupplyDroppedParadropFinished);
+        SubscribeLocalEvent<BeingSupplyDroppedComponent, ParaDropFinishedEvent>(OnBeingSupplyDroppedLanded);
+        SubscribeLocalEvent<BeingSupplyDroppedComponent, CrashLandedEvent>(OnBeingSupplyDroppedLanded);
+        SubscribeLocalEvent<BeingSupplyDroppedComponent, ComponentRemove>(OnBeingSupplyDroppedRemoved);
 
         Subs.BuiEvents<SupplyDropComputerComponent>(SupplyDropComputerUi.Key,
             subs =>
@@ -83,17 +87,12 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnBeingSupplyDroppedParadropFinished(Entity<BeingSupplyDroppedComponent> ent, ref ParaDropFinishedEvent args)
+    private void OnBeingSupplyDroppedLanded<T>(Entity<BeingSupplyDroppedComponent> ent, ref T args)
     {
         if (_net.IsClient)
             return;
 
-        if (!TerminatingOrDeleted(ent.Comp.LandingEffect))
-        {
-            QueueDel(ent.Comp.LandingEffect);
-            ent.Comp.LandingEffect = null;
-            Dirty(ent);
-        }
+        RemoveWarningMarker(ent);
 
         if (ent.Comp.LandingDamage is { } landingDamage)
         {
@@ -101,7 +100,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             _entityLookup.GetEntitiesInRange(ent, 0.33f, _intersecting);
             foreach (var intersecting in _intersecting)
             {
-                if (_container.TryGetContainingContainer(intersecting, out var container) && container.Owner == ent.Owner)
+                if (_container.TryGetContainingContainer(intersecting, out var container) && (container.Owner == ent.Owner || HasComp<ParaDroppingComponent>(container.Owner) || HasComp<CrashLandingComponent>(container.Owner)))
                         continue;
 
                 _damageable.TryChangeDamage(intersecting, landingDamage, true);
@@ -117,6 +116,11 @@ public abstract class SharedSupplyDropSystem : EntitySystem
 
             _rmcCameraShake.ShakeCamera(player, 4, 5);
         }
+    }
+
+    private void OnBeingSupplyDroppedRemoved(Entity<BeingSupplyDroppedComponent> ent, ref ComponentRemove args)
+    {
+        RemoveWarningMarker(ent);
     }
 
     private void OnSupplyDropComputerLongitudeMsg(Entity<SupplyDropComputerComponent> ent, ref SupplyDropComputerLongitudeBuiMsg args)
@@ -275,7 +279,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         return true;
     }
 
-    public void LaunchSupplyDrop(EntityUid droppingEntity, MapCoordinates dropCoordinates, float skyFallDuration, float dropDuration, TimeSpan openDelay, DamageSpecifier? landingDamage = null, EntProtoId? landingEffect = null, SoundSpecifier? arrivingSound = null, int dropScatter = 0)
+    public void LaunchSupplyDrop(EntityUid droppingEntity, MapCoordinates dropCoordinates, float skyFallDuration, float dropDuration, TimeSpan openDelay, DamageSpecifier? landingDamage = null, EntProtoId? landingEffect = null, SoundSpecifier? arrivingSound = null, int dropScatter = 0, bool useParachute = true)
     {
         if (_net.IsClient)
             return;
@@ -295,7 +299,10 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         dropping.LandingDamage = landingDamage;
         Dirty(droppingEntity, dropping);
 
-        _paradrop.DoParaDrop(droppingEntity, dropEntityCoordinates, skyFallDuration, dropDuration, arrivingSound, dropScatter);
+        if (useParachute)
+            _paradrop.DoParaDrop(droppingEntity, dropEntityCoordinates, skyFallDuration, dropDuration, arrivingSound, dropScatter);
+        else
+            _crashLand.DoCrashLand(droppingEntity, dropEntityCoordinates, skyFallDuration, dropDuration, false, arrivingSound);
     }
 
     private MapId EnsureMap()
@@ -328,6 +335,16 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             return true;
 
         return comp.CanSupplyDrop;
+    }
+
+    private void RemoveWarningMarker(Entity<BeingSupplyDroppedComponent> ent)
+    {
+        if (!TerminatingOrDeleted(ent.Comp.LandingEffect))
+        {
+            QueueDel(ent.Comp.LandingEffect);
+            ent.Comp.LandingEffect = null;
+            Dirty(ent);
+        }
     }
 
     public override void Update(float frameTime)

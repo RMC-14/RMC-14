@@ -894,19 +894,61 @@
     - RMCAttachmentL90GL
 
 - type: entity
-  parent: RMCAttachmentU7UnderbarrelShotgun
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentL90UBS
   name: L90U1 underbarrel shotgun
-  description: An underbarrel shotgun designed specifically for L90 pattern rifles, capable of loading up to five buckshot shells.
+  description: An underbarrel shotgun designed specifically for L90 pattern rifles, capable of loading up to five shotgun shells, including L49B cartridges. Suffers from poor ballistic performance at range.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
     state: ubs-l90
-  - type: Tag
-    tags:
-    - RMCAttachmentUnderbarrel
-    - RMCAttachmentL90UBS
+  - type: Item
+    size: Normal
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
+      params:
+        volume: -2
+  - type: GunDamageModifier
+    multiplier: 0.66
+  - type: RMCWeaponDamageFalloff
+    falloffMultiplier: 1.5
+    rangeFlat: -1.5
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.5
+  - type: RMCSelectiveFire
+    baseFireRate: 0.66
+    scatterWielded: 10
+    scatterUnwielded: 10
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCShellShotgunBuckshot
+      - RMCShellShotgunSlugs
+      - RMCShellShotgunFlechette
+      - RMCShellShotgunL49B
+    capacity: 5
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+  - type: UseDelay
+  - type: GunPointBlank
   - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+      params:
+        volume: -2
     actionName: Switch to the L90U1 underbarrel shotgun
     actionDesc: Switch to using the underbarrel shotgun.
     icon:
@@ -915,6 +957,15 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
       state: ubs-l90-on
+  - type: AttachableVisuals
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentL90UBS
 
 - type: entity
   parent: RMCAttachmentMiniFlamethrower
