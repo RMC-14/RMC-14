@@ -2,7 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
-using Content.Server._RMC14.Rules;
+using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
 using Content.Shared._RMC14.CCVar;
@@ -116,6 +116,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, HiveLeaderStatusChangedEvent>(OnHiveLeaderStatusChanged);
 
         SubscribeLocalEvent<MapBlipIconOverrideComponent, MapInitEvent>(OnMapBlipOverrideMapInit);
+
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
@@ -363,7 +364,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
     {
         var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
-        var state = new TacticalMapBuiState(mapName);
+
+        // Get squad objectives if player is in a squad
+        Dictionary<SquadObjectiveType, string>? squadObjectives = null;
+        if (TryComp<SquadMemberComponent>(ent, out var squadMember) &&
+            _squad.TryGetMemberSquad((ent, squadMember), out var squad))
+        {
+            squadObjectives = _squad.GetSquadObjectives((squad.Owner, squad.Comp));
+        }
+
+        var state = new TacticalMapBuiState(mapName, squadObjectives);
         _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
     }
 

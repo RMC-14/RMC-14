@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaXenoarch
   startingGear: RMCGearSyntheticColonistHybrisaXenoarch
   spawnMenuRoleName: Xenoarchaeologist Synthetic (Hybrisa Survivor)
@@ -56,7 +56,7 @@
       preset: RMCSurvivorPresetHybrisaSynthXenoarch
     - type: Synth
       generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase

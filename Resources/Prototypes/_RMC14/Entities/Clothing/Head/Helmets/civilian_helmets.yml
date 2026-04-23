@@ -18,7 +18,11 @@
     melee: 30
     bullet: 10
     bio: 10
-    explosionArmor: 10
+    explosionArmor: 15
+    # armor_laser = 15
+    # armor_energy = 20
+    # armor_rad = 10
+    # armor_internaldamage = 25
 
 - type: entity
   parent: RMCArmorHelmetFirefighter
@@ -30,6 +34,15 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/tmcc_miner.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/tmcc_miner.rsi
+  - type: CMArmor
+    melee: 30
+    bullet: 10
+    bio: 10
+    explosionArmor: 10
+    # armor_laser = 10
+    # armor_energy = 20
+    # armor_rad = 0
+    # armor_internaldamage = 25
 
 - type: entity
   parent: RMCArmorHelmetFirefighter
@@ -41,3 +54,12 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/paramedic.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/paramedic.rsi
+  - type: CMArmor
+    melee: 30
+    bullet: 10
+    bio: 20
+    explosionArmor: 0
+    # armor_laser = 10
+    # armor_energy = 10
+    # armor_rad = 0
+    # armor_internaldamage = 30

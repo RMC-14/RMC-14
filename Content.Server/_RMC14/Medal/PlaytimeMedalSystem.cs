@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Medal;
 using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
+using Content.Shared.Inventory;
 using Content.Shared.Roles;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
@@ -15,6 +16,8 @@ public sealed class PlaytimeMedalSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private readonly SharedUniformAccessorySystem _uniformAccessory = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
@@ -84,7 +87,11 @@ public sealed class PlaytimeMedalSystem : EntitySystem
             return;
 
         var medal = SpawnAtPosition(medalId, ev.Mob.ToCoordinates());
-        _hands.TryPickupAnyHand(ev.Mob, medal, false);
+
+        // Try to insert into a valid accessory slot. Otherwise, inserts it into the player's hands.
+        if (!_uniformAccessory.TryInsertToValidSlot(medal, ev.Mob))
+            _hands.TryPickupAnyHand(ev.Mob, medal, false);
+
         var medalComp = EnsureComp<UniformAccessoryComponent>(medal);
         medalComp.User = GetNetEntity(ev.Mob);
         Dirty(medal, medalComp);

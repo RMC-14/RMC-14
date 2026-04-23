@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
+  category: Grid
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/08/2026 22:52:36
-  entityCount: 1207
-maps:
-- 1206
+  time: 01/16/2026 21:11:03
+  entityCount: 1206
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   0: Space
@@ -97,7 +97,7 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      parent: 1206
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -1192,16 +1192,6 @@ entities:
         5,3: RMCAreaLv759IndoorsOutpostSouterMainHall
         5,2: RMCAreaLv759IndoorsOutpostSouterMainHall
         29,22: RMCAreaLv759IndoorsOutpostSouterHangar
-  - uid: 1206
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
 - proto: BedrollFolded
   entities:
   - uid: 653
@@ -3073,7 +3063,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 16.5,21.5
       parent: 1
-- proto: RMCArmorEIAFVest
+- proto: RMCArmorParaVest
   entities:
   - uid: 678
     components:
@@ -3384,7 +3374,7 @@ entities:
     - type: Transform
       pos: 10.5,12.5
       parent: 1
-- proto: RMCBeltHolsterPistolEIAFL54
+- proto: RMCBeltHolsterPistolPara
   entities:
   - uid: 702
     components:
@@ -4923,14 +4913,14 @@ entities:
     - type: Transform
       pos: 17.400862,9.680672
       parent: 1
-- proto: RMCHeadCapPeakedEIAF
+- proto: RMCHeadCapPeakedPara
   entities:
   - uid: 802
     components:
     - type: Transform
       pos: 19.60573,26.798523
       parent: 1
-- proto: RMCHeadEIAFBeret
+- proto: RMCHeadParaBeret
   entities:
   - uid: 685
     components:
@@ -5005,7 +4995,7 @@ entities:
     - type: Transform
       pos: 7.5,14.5
       parent: 1
-- proto: RMCJacketEIAFCombatJacket
+- proto: RMCJacketParaCombatJacket
   entities:
   - uid: 668
     components:
@@ -5014,7 +5004,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCJumpsuitMarineEIAFNo8
+- proto: RMCJumpsuitMarinePara
   entities:
   - uid: 654
     components:
@@ -5049,7 +5039,7 @@ entities:
     - type: Transform
       pos: 9.5260935,14.381189
       parent: 1
-- proto: RMCL24BeltFilled
+- proto: RMCBeltRCML24
   entities:
   - uid: 731
     components:
@@ -5456,7 +5446,7 @@ entities:
     - type: Transform
       pos: 7.2478848,4.312557
       parent: 1
-- proto: RMCMagazineSMGP90
+- proto: RMCMagazineSMGPDW90
   entities:
   - uid: 705
     components:
@@ -8456,7 +8446,7 @@ entities:
           endTime: 7911.1872773
           startTime: 7927.7587389
           length: 0.4
-- proto: RMCWeaponSMGP90
+- proto: RMCWeaponSMGPDW90
   entities:
   - uid: 703
     components:

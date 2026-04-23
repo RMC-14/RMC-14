@@ -7,6 +7,8 @@
   startingGear: RMCGearSurvivorGoonLead
   icon: "RMCJobIconPMCGoonLead"
   hasIcon: true
+  ranks:
+    RMCRankCivilianSeniorOfficer: []
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,6 +23,13 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: MarineOrders
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_leader
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   greeting: rmc-job-greeting-corporate-dome-goon-lead
 
 - type: entity

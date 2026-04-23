@@ -79,6 +79,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
             _currentMapName = tacticalState.MapName;
             Window?.SetMapEntity(_currentMapName);
             Window?.Wrapper.SetMapEntity(_currentMapName);
+            Window?.Wrapper.UpdateSquadObjectivesFromState(tacticalState.SquadObjectives);
         }
     }
 

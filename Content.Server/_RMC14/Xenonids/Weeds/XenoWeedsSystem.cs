@@ -29,7 +29,6 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
@@ -167,15 +166,9 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
                 var coords = _map.GridTileToLocal(grid, grid, neighbor);
                 var neighborWeeds = Spawn(prototype, coords);
-                var neighborWeedsComp = EnsureComp<XenoWeedsComponent>(neighborWeeds);
-
-                neighborWeedsComp.IsSource = false;
-                neighborWeedsComp.Source = source;
-                sourceWeeds?.Spread.Add(neighborWeeds);
+                var neighborWeedsEnt = AssignSource(neighborWeeds, (source.Value, sourceWeeds));
 
                 _hive.SetSameHive(uid, neighborWeeds);
-
-                Dirty(neighborWeeds, neighborWeedsComp);
 
                 EnsureComp<ActiveEdgeSpreaderComponent>(neighborWeeds);
 
@@ -204,7 +197,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                             RaiseLocalEvent(source.Value, ref ev);
                         }
 
-                        neighborWeedsComp.LocalWeeded.Add(anchoredId);
+                        neighborWeedsEnt.Comp.LocalWeeded.Add(anchoredId);
 
                         if (!HasComp<CommunicationsTowerComponent>(anchoredId))
                             _appearance.SetData(anchoredId, WeededEntityLayers.Layer, true);

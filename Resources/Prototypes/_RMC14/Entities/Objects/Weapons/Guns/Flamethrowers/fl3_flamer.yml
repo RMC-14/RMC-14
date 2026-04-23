@@ -88,7 +88,7 @@
     state: flametank
     layers:
     - state: flametank
-    - state: flametank_strip2
+    - state: flametank_strip1
     - state: flametank_strip2
       map: [ "enum.SolutionContainerLayers.Fill" ]
   - type: RMCFlamerTank

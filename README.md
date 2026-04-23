@@ -14,6 +14,12 @@ If you want to host or create content for RMC-14, this is the repo you need. It 
 
 We are happy to accept contributions from anybody. Get in Discord if you want to help. We've got a [list of issues](https://github.com/RMC-14/RMC-14/issues) that need to be done and anybody can pick them up. Don't be afraid to ask for help either!
 
+## Contributing Requirements
+- Understanding how to contribute - Read this resource provided by SS14 and attempt to keep to it. [Pull Request and Changelog Guidelines](https://docs.spacestation14.com/en/general-development/codebase-info/pull-request-guidelines.html).
+- Media - Add relevant media like videos and photos whereever possible, as proof of changes working in game, and for easier review.
+- Responisbility - By submitting any form of PR, you are confirming that you either own them or have provided the correct necessary licenses to use and distribute them. You are agreeing to be fully responsible for any legal claims or issues arising from the use of these materials.
+- Patience - Please understand that the amount of capable reviewers is very small, PRs depending on their importance priority and size can take anywhere from weeks to months to review. Please do not close your PRs without providing a reason, as we will eventually get around to all of them. A PR awaiting a review does not mean we do not have interest.
+
 ## Building
 
 1. Clone this repo.
