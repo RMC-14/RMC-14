@@ -6,5 +6,5 @@ namespace Content.Shared._RMC14.Mentor.ImaginaryFriend;
 public sealed partial class HasImaginaryFriendComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityUid? Friend;
+    public HashSet<EntityUid> Friends = new ();
 }

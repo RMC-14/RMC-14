@@ -11,7 +11,6 @@ using Content.Shared.Clothing;
 using Content.Shared.Eye;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
-using Content.Shared.Popups;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
@@ -29,7 +28,6 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
@@ -62,7 +60,16 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 
     private void OnHasImaginaryFriendVisMask(Entity<HasImaginaryFriendComponent> ent, ref GetVisMaskEvent args)
     {
-        if (TerminatingOrDeleted(ent.Comp.Friend))
+        var canSeeFriends = false;
+        foreach (var friend in ent.Comp.Friends)
+        {
+            if (TerminatingOrDeleted(friend))
+                continue;
+
+            canSeeFriends = true;
+        }
+
+        if (!canSeeFriends)
             return;
 
         args.VisibilityMask |= (int)VisibilityFlags.ImaginaryFriend;
@@ -107,11 +114,7 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         if (!HasComp<GhostComponent>(newFriend))
             return;
 
-        if (EnsureComp<HasImaginaryFriendComponent>(imaginer, out var hasFriend))
-        {
-            _popup.PopupClient(Loc.GetString("rmc-mentor-imaginary-friend-already-has-friend"), newFriend, PopupType.SmallCaution);
-            return;
-        }
+        EnsureComp<HasImaginaryFriendComponent>(imaginer, out var hasFriend);
 
         var targetIsXeno = HasComp<XenoComponent>(imaginer);
         var coordinates = _transform.GetMoverCoordinates(newFriend);
@@ -162,18 +165,10 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 
                         _stationSpawning.EquipRoleLoadout(friend, loadout, roleProto);
                     }
-
-                    if (jobProto.StartingGear != null)
-                    {
-                        var startingGear = _prototypeManager.Index<StartingGearPrototype>(jobProto.StartingGear);
-                        _stationSpawning.EquipStartingGear(friend, startingGear, raiseEvent: false);
-                    }
-
-                    var ev = new StartingGearEquippedEvent(friend);
-                    RaiseLocalEvent(friend, ref ev);
                 }
                 break;
             }
+            EquipStartingGear(friend);
         }
         else
         {
@@ -184,7 +179,7 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         _mind.UnVisit(mindId);
         _mind.Visit(mindId, friend, friendMind);
 
-        hasFriend.Friend = friend;
+        hasFriend.Friends.Add(friend);
         Dirty(imaginer, hasFriend);
 
         var imaginaryFriend = EnsureComp<ImaginaryFriendComponent>(friend);
@@ -200,13 +195,13 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 
     private void RemoveImaginaryFriend(HasImaginaryFriendComponent hasImaginaryFriend)
     {
-        if (hasImaginaryFriend.Friend is not { } friend)
-            return;
+        foreach (var friend in hasImaginaryFriend.Friends)
+        {
+            if (TerminatingOrDeleted(friend))
+                continue;
 
-        if (TerminatingOrDeleted(friend))
-            return;
-
-        QueueDel(friend);
+            QueueDel(friend);
+        }
     }
 
     private void RemoveImaginaryFriend(EntityUid friend, ImaginaryFriendComponent imaginaryFriend)
@@ -214,11 +209,34 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         if (imaginaryFriend.Imaginer is not { } imaginer)
             return;
 
-        RemComp<HasImaginaryFriendComponent>(imaginer);
+        if (!TryComp(imaginer, out HasImaginaryFriendComponent? hasFriend))
+            return;
+
+        hasFriend.Friends.Remove(friend);
+
+        if (hasFriend.Friends.Count == 0)
+            RemComp<HasImaginaryFriendComponent>(imaginer);
+        else
+            Dirty(imaginer, hasFriend);
 
         if (TerminatingOrDeleted(friend))
             return;
 
         QueueDel(friend);
+    }
+
+    private void EquipStartingGear(EntityUid friend)
+    {
+        if (!_prototypeManager.TryIndex(ImaginaryFriendJobPrototype, out var jobProto))
+            return;
+
+        if (jobProto.StartingGear != null)
+        {
+            var startingGear = _prototypeManager.Index<StartingGearPrototype>(jobProto.StartingGear);
+            _stationSpawning.EquipStartingGear(friend, startingGear, raiseEvent: false);
+        }
+
+        var ev = new StartingGearEquippedEvent(friend);
+        RaiseLocalEvent(friend, ref ev);
     }
 }
