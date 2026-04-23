@@ -1,7 +1,7 @@
 # THE SHIT I NEED TO DO JUST SO WE DONT HAVE TO FUCKING SPECIFY A GHOST ROLE CHANCE OF 0
 - type: entity
   parent: [RMCSmallHost]
-  id: CMMobMonkey
+  id: CMSmallHostMonkey
   name: monkey
   suffix: RMC
   components:
@@ -14,7 +14,7 @@
 
 - type: entity
   parent: [RMCSmallHost]
-  id: CMMobKobold
+  id: CMMobSmallHostKobold
   name: kobold
   suffix: RMC
   components:
@@ -81,7 +81,7 @@
 
 - type: entity
   parent: [RMCSmallHost]
-  id: RMCMobFrawa
+  id: RMCMobSmallHostFrawa
   name: frawa
   suffix: RMC
   components:
@@ -129,7 +129,7 @@
 
 - type: entity
   parent: [RMCSmallHost]
-  id: RMCMobNeaera
+  id: RMCMobSmallHostNeaera
   name: neaera
   suffix: RMC
   components:
@@ -172,7 +172,7 @@
 
 - type: entity
   parent: [RMCSmallHost]
-  id: RMCMobStok
+  id: RMCMobSmallHostStok
   name: stok
   suffix: RMC
   components:
@@ -221,7 +221,7 @@
 
 - type: entity
   parent: [RMCSmallHost]
-  id: RMCMobYiren
+  id: RMCMobSmallHostYiren
   name: yiren
   suffix: RMC
   components:
@@ -269,7 +269,7 @@
 - type: entity
   parent: MarkerBase
   id: CMSpawnMobMonkey
-  name: monkey spawner
+  name: Small host spawner
   suffix: RMC
   components:
   - type: Sprite
@@ -277,26 +277,10 @@
     - state: monkey_spawn
       sprite: _RMC14/Markers/landmarks.rsi
   - type: ProportionalSpawner
-    id: CMSpawnMobMonkey
+    id: CMSpawnSmallHostMonkey
     prototypes:
-    - CMMobMonkey
-#    - CMMobKobold
-#    - RMCMobFrawa
-#    - RMCMobNeaera
-#    - RMCMobStok
-
-- type: entity
-  parent: MarkerBase
-  id: CMSpawnMobKobold
-  name: kobold spawner
-  suffix: RMC
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - state: kobold
-      sprite: Mobs/Animals/kobold.rsi
-  - type: ProportionalSpawner
-    id: CMSpawnMobMonkey
-    prototypes:
-    - CMMobKobold
+    - CMMobSmallHostMonkey
+#    - CMMobSmallHostKobold
+#    - RMCMobSmallHostFrawa
+#    - RMCMobSmallHostNeaera
+#    - RMCMobSmallHostStok
