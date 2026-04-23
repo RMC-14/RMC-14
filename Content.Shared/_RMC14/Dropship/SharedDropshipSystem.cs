@@ -273,7 +273,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (!HasComp<DropshipHijackerComponent>(user))
         {
-            _popup.PopupEntity($"You stare cluelessly at the {Name(ent.Owner)}", user, user);
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-xeno-clueless", ("terminal", Name(ent.Owner))), user, user);
             return;
         }
 
@@ -287,20 +287,20 @@ public abstract class SharedDropshipSystem : EntitySystem
         var closestDestination = FindClosestLZ(userTransform);
         if (closestDestination == null)
         {
-            _popup.PopupEntity("There are no dropship destinations near you!", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-no-nearby-destinations"), user, user, PopupType.MediumCaution);
             return;
         }
 
         if (closestDestination.Value.Comp1.Ship != null)
         {
-            _popup.PopupEntity("There's already a dropship coming here!", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-dropship-inbound"), user, user, PopupType.MediumCaution);
             return;
         }
 
         if (Count<PrimaryLandingZoneComponent>() > 0 &&
             !HasComp<PrimaryLandingZoneComponent>(closestDestination))
         {
-            _popup.PopupEntity("The shuttle isn't responding to prompts, it looks like this isn't the primary shuttle.", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-not-primary"), user, user, PopupType.MediumCaution);
             return;
         }
 
@@ -322,13 +322,13 @@ public abstract class SharedDropshipSystem : EntitySystem
                 if (Transform(computerId).GridUid == uid &&
                     FlyTo((computerId, computer), closestDestination.Value, user))
                 {
-                    _popup.PopupEntity("You call down one of the dropships to your location", user, user, PopupType.LargeCaution);
+                    _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-call-down-success"), user, user, PopupType.LargeCaution);
                     return;
                 }
             }
         }
 
-        _popup.PopupEntity("There are no available dropships! Wait a moment.", user, user, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-no-available-dropships"), user, user, PopupType.LargeCaution);
     }
 
     private void OnTerminalOpenAttempt(Entity<DropshipTerminalComponent> terminal, ref ActivatableUIOpenAttemptEvent args)
@@ -348,7 +348,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         var closestLZ = FindClosestLZ(terminal);
         if (closestLZ is not { } lz)
         {
-            var failedState = new DropshipTerminalBuiState("???", []);
+            var failedState = new DropshipTerminalBuiState(Loc.GetString("rmc-dropship-terminal-unknown-location"), []);
             _ui.SetUiState(terminal.Owner, DropshipTerminalUiKey.Key, failedState);
             return;
         }
@@ -395,7 +395,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         var closestDestination = FindClosestLZ(terminal);
         if (closestDestination == null)
         {
-            _popup.PopupEntity("There are no dropship destinations near you!", terminal, args.Actor, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-no-nearby-destinations"), terminal, args.Actor, PopupType.MediumCaution);
             return;
         }
 
@@ -403,18 +403,18 @@ public abstract class SharedDropshipSystem : EntitySystem
         {
             if (HasComp<FTLComponent>(ship))
             {
-                _popup.PopupEntity("There is already a dropship coming here!", terminal, args.Actor, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-dropship-inbound"), terminal, args.Actor, PopupType.MediumCaution);
             }
             else
             {
-                _popup.PopupEntity("There is already a dropship here!", terminal, args.Actor, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-dropship-present"), terminal, args.Actor, PopupType.MediumCaution);
             }
             return;
         }
 
         if (!computer.RemoteControl)
         {
-            _popup.PopupEntity("This dropship does not have remote-control enabled.", terminal, args.Actor, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-remote-control-disabled"), terminal, args.Actor, PopupType.MediumCaution);
             return;
         }
 
@@ -423,12 +423,12 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (!FlyTo((computerId.Value, computer), closestDestination.Value, args.Actor))
         {
-            _popup.PopupEntity("This dropship is currently busy. Please try again later.", terminal, args.Actor, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-dropship-busy"), terminal, args.Actor, PopupType.MediumCaution);
             return;
         }
 
         _ui.CloseUi(terminal.Owner, DropshipTerminalUiKey.Key, args.Actor);
-        _popup.PopupEntity("This dropship is now on its way.", terminal, args.Actor, PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString("rmc-dropship-terminal-dropship-routed"), terminal, args.Actor, PopupType.Medium);
     }
 
     private void OnAttachmentPointMapInit<TComp, TEvent>(Entity<TComp> ent, ref TEvent args) where TComp : IComponent?
@@ -676,14 +676,14 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (!HasComp<DropshipDestinationComponent>(destination))
         {
-            reason = "This destination is no longer available.";
+            reason = Loc.GetString("rmc-dropship-ert-destination-unavailable");
             return false;
         }
 
         if (computer.Comp.PlanetOnly &&
             !IsPlanetsideDestination(destination))
         {
-            reason = "This shuttle can only route to planetside landing zones.";
+            reason = Loc.GetString("rmc-dropship-ert-planetside-only");
             return false;
         }
 
@@ -691,7 +691,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             reservedLandingZone.ERTOnly &&
             !computer.Comp.RequiresERTLandingZone)
         {
-            reason = "This berth is reserved for emergency response traffic.";
+            reason = Loc.GetString("rmc-dropship-ert-berth-reserved");
             return false;
         }
 
@@ -702,7 +702,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             !Resolve(destination, ref reservedLandingZone, false) ||
             !reservedLandingZone.Enabled)
         {
-            reason = "This destination is not configured for emergency response shuttles.";
+            reason = Loc.GetString("rmc-dropship-ert-destination-not-configured");
             return false;
         }
 
@@ -712,20 +712,20 @@ public abstract class SharedDropshipSystem : EntitySystem
         if (allowedDockClasses.Length > 0 &&
             !MatchesAny(landingZone.DockClasses, allowedDockClasses))
         {
-            reason = "This berth cannot receive the current emergency shuttle class.";
+            reason = Loc.GetString("rmc-dropship-ert-berth-invalid-class");
             return false;
         }
 
         if (computer.Comp.AllowedERTLandingTags.Count > 0 &&
             !MatchesAny(landingZone.Tags, computer.Comp.AllowedERTLandingTags))
         {
-            reason = "This destination is not valid for the current response team.";
+            reason = Loc.GetString("rmc-dropship-ert-destination-invalid-team");
             return false;
         }
 
         if (MatchesAny(landingZone.Tags, computer.Comp.DeniedERTLandingTags))
         {
-            reason = "This destination is blocked for the current response team.";
+            reason = Loc.GetString("rmc-dropship-ert-destination-blocked-team");
             return false;
         }
 
@@ -742,7 +742,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (!TryComp(destination, out DropshipDestinationComponent? destinationComp))
         {
-            reason = "This destination is no longer available.";
+            reason = Loc.GetString("rmc-dropship-ert-destination-unavailable");
             return false;
         }
 
@@ -750,7 +750,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         if (destinationComp.Ship is { } occupiedBy &&
             shuttle != occupiedBy)
         {
-            reason = "This berth is already occupied.";
+            reason = Loc.GetString("rmc-dropship-ert-berth-occupied");
             return false;
         }
 
@@ -817,7 +817,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             !TryComp<MapGridComponent>(grid, out var gridComp))
         {
             bounds = default;
-            reason = "The shuttle does not have a valid docking footprint.";
+            reason = Loc.GetString("rmc-dropship-ert-invalid-docking-footprint");
             return false;
         }
 
@@ -841,25 +841,33 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (shuttle.Left < berth.Left)
         {
-            reason = $"This shuttle extends past the port-side docking clearance ({shuttleSize} required, {berthSize} available).";
+            reason = Loc.GetString("rmc-dropship-ert-clearance-port",
+                ("shuttleSize", shuttleSize),
+                ("berthSize", berthSize));
             return false;
         }
 
         if (shuttle.Right > berth.Right)
         {
-            reason = $"This shuttle extends past the starboard docking clearance ({shuttleSize} required, {berthSize} available).";
+            reason = Loc.GetString("rmc-dropship-ert-clearance-starboard",
+                ("shuttleSize", shuttleSize),
+                ("berthSize", berthSize));
             return false;
         }
 
         if (shuttle.Bottom < berth.Bottom)
         {
-            reason = $"This shuttle extends past the aft docking clearance ({shuttleSize} required, {berthSize} available).";
+            reason = Loc.GetString("rmc-dropship-ert-clearance-aft",
+                ("shuttleSize", shuttleSize),
+                ("berthSize", berthSize));
             return false;
         }
 
         if (shuttle.Top > berth.Top)
         {
-            reason = $"This shuttle extends past the forward docking clearance ({shuttleSize} required, {berthSize} available).";
+            reason = Loc.GetString("rmc-dropship-ert-clearance-forward",
+                ("shuttleSize", shuttleSize),
+                ("berthSize", berthSize));
             return false;
         }
 

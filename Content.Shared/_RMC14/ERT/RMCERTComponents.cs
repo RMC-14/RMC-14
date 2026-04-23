@@ -70,12 +70,6 @@ public sealed partial class RMCERTShuttleComponent : Component
 public sealed partial class RMCERTSeatComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string SeatId = string.Empty;
-
-    [DataField, AutoNetworkedField]
-    public string DisplayName = string.Empty;
-
-    [DataField, AutoNetworkedField]
     public List<string> SeatTags = [];
 
     [DataField, AutoNetworkedField]
