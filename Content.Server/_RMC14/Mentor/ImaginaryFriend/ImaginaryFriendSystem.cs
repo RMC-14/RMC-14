@@ -6,6 +6,7 @@ using Content.Server.Preferences.Managers;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Clothing;
 using Content.Shared.Eye;
 using Content.Shared.Ghost;
@@ -102,7 +103,7 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         _euiManager.OpenEui(new BecomeImaginaryFriendEui(this, target, session), session);
     }
 
-    public void BecomeImaginaryFriend(EntityUid imaginer, EntityUid newFriend, bool defaultCharacter)
+    public override void BecomeImaginaryFriend(EntityUid imaginer, EntityUid newFriend, bool defaultCharacter = true)
     {
         if (TerminatingOrDeleted(imaginer))
             return;
