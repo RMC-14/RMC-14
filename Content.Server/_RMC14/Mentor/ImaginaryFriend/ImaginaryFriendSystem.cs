@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.EUI;
 using Content.Server.Humanoid;
 using Content.Server.Mind;
 using Content.Server.Popups;
@@ -10,7 +11,6 @@ using Content.Shared.Clothing;
 using Content.Shared.Eye;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
-using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
@@ -24,9 +24,9 @@ namespace Content.Server._RMC14.Mentor.ImaginaryFriend;
 public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 {
     [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly EuiManager _euiManager = default!;
     [Dependency] private readonly EyeSystem _eye = default!;
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -91,8 +91,16 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         RemoveImaginaryFriend(ent, ent.Comp);
     }
 
+    public void OpenImaginaryFriendConfirmWindow(ICommonSession session, EntityUid target)
+    {
+        _euiManager.OpenEui(new BecomeImaginaryFriendEui(this, target, session), session);
+    }
+
     public void BecomeImaginaryFriend(EntityUid imaginer, EntityUid newFriend)
     {
+        if (TerminatingOrDeleted(imaginer))
+            return;
+
         if (!_mind.TryGetMind(newFriend, out var mindId, out var friendMind))
             return;
 

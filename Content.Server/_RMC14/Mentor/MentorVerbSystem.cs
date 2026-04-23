@@ -26,16 +26,17 @@ public sealed partial class MentorVerbSystem : EntitySystem
         if (!TryComp(user, out ActorComponent? actor))
             return;
 
-        if (!_mentorManager.IsMentor(actor.PlayerSession.UserId))
+        var session = actor.PlayerSession;
+
+        if (!_mentorManager.IsMentor(session.UserId))
             return;
 
         args.Verbs.Add(new()
         {
-            Act = () => _imaginaryFriend.BecomeImaginaryFriend(args.Target, args.User),
+            Act = () => _imaginaryFriend.OpenImaginaryFriendConfirmWindow(session, args.Target),
             Text = Loc.GetString("rmc-mentor-imaginary-friend-verb"),
             Priority = -25,
             Icon = new SpriteSpecifier.Rsi(new ResPath("Mobs/Ghosts/ghost_human.rsi"), "icon"),
         });
     }
-
 }
