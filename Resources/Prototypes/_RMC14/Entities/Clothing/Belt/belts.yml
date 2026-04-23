@@ -768,6 +768,7 @@
         whitelist:
           tags:
           - CMWeaponPistolM1984
+          - CMWeaponPistolM1911
       mk80_fill:
         whitelist:
           tags:
@@ -1482,15 +1483,18 @@
       - RMCNailgunCompact
       - RMCNailgunTactical
       - RMCExplosiveClaymoreMine
+      - RMCSmartGunMounted # Not parity
       components:
       - Welder
       - EntrenchingTool
       - BarbedWire
       - EmptySandbag
+      - WeaponMount # Not parity
   - type: IgnoreContentsSize
     items:
       components:
       - EntrenchingTool
+      - MountableWeapon # Not parity
   - type: Tag
     tags:
     - RMCMachineGunnerRig
@@ -1697,6 +1701,96 @@
         tags:
           - CMFirstAidKit
           - RMCEngineerKit
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltL49
+  name: L28-pattern shotgun shell rig
+  suffix: PVE, RCM
+  description: "An L28-pattern shotgun holster rig, equipped with loops to hold loose 12ga shells and featuring a holster on the back capable of holding an L49 assault shotgun.\nShotguns equipped with magnetic harnesses or slings can be strapped directly to the belt, preventing them from being dropped."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/l49.rsi
+    layers:
+    - state: icon
+    - state: l49
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      offset: 0, 0
+      visible: false
+    - state: icon-front
+    - state: full
+      visible: false
+    - state: high
+      visible: false
+    - state: medium
+      visible: false
+    - state: low
+      visible: false
+  - type: Clothing
+    slots:
+    - belt
+    - suitStorage
+    sprite: _RMC14/Objects/Clothing/Belt/l49.rsi
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,19,1 # 10 slots
+    whitelist:
+      tags:
+      - RMCShellShotgun
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+  - type: ItemSlots
+    slots:
+      item:
+        name: L49 assault shotgun
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCWeaponShotgunL49
+  - type: RMCMagneticItemReceiver
+  - type: ItemMapper
+    mapLayers:
+      low:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+      medium:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCShellShotgun
+      high:
+        minCount: 7
+        whitelist:
+          tags:
+          - RMCShellShotgun
+      full:
+        minCount: 10
+        whitelist:
+          tags:
+          - RMCShellShotgun
+  - type: CMItemSlots
+  - type: Tag
+    tags:
+    - RMCXM51Holster
+    - RMCL49Holster
+
+- type: Tag
+  id: RMCL49Holster
 
 - type: Tag
   id: RMCSmartGunSidearmHolster
