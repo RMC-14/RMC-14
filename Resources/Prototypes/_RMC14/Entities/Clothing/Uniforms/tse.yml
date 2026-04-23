@@ -72,21 +72,15 @@
 # PVE Whiskey Troop uniform
 
 - type: entity
-  parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
+  parent: RMCJumpsuitMarineRoyal
   id: RMCJumpsuitMarineRoyalPVE
-  name: royal crown marine uniform
-  description: The field uniform of the Royal Crown Marines, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
   suffix: PVE, RCM
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
     - RMCPatchTSEWhiskey
-  - type: ItemCamouflage
-    camouflageVariations: {}
 
 # RCM service uniform
 
