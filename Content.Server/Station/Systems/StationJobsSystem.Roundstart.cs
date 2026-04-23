@@ -347,14 +347,24 @@ public sealed partial class StationJobsSystem
     {
         var outputDict = new Dictionary<NetUserId, List<string>>(profiles.Count);
 
-        foreach (var (player, _) in profiles)
+        foreach (var (player, profile) in profiles)
         {
-            if (!_serverPreferences.TryGetCachedPreferences(player, out var playerPreferences))
-                continue;
-
             var roleBans = _banManager.GetJobBans(player);
             var antagBlocked = _antag.GetPreSelectedAntagSessions();
-            var playerJobs = playerPreferences.JobPrioritiesFiltered();
+            Dictionary<ProtoId<JobPrototype>, JobPriority> playerJobs;
+
+            if (_serverPreferences.TryGetCachedPreferences(player, out var playerPreferences))
+            {
+                playerJobs = playerPreferences.JobPrioritiesFiltered();
+            }
+            else
+            {
+                // Tests & other synthetic callers may provide profiles without a backing cached preference entry
+                playerJobs = profile.JobPriorities
+                    .Where(kvp => kvp.Value != JobPriority.Never)
+                    .ToDictionary();
+            }
+
             var profileJobs = playerJobs.Keys.ToList();
             var ev = new StationJobsGetCandidatesEvent(player, profileJobs);
             RaiseLocalEvent(ref ev);

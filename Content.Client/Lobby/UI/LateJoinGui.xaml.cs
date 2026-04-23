@@ -121,7 +121,7 @@ namespace Content.Client.Lobby.UI
             _jobCategories.Clear();
 
             if (_gameTicker is { DisallowedLateJoin: false, StationNames.Count: 0 })
-                _sawmill.Warning("No stations exist, nothing to display in late-join GUI");
+                _sawmill.Debug("No stations exist, nothing to display in late-join GUI");
 
             if (!_selectedSlot.HasValue ||
                 !_preferencesManager.Preferences!.TryGetHumanoidInSlot(_selectedSlot.Value, out var humanoid))
