@@ -483,9 +483,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazinePistolM1984
+    - id: CMMagazinePistolM1911
       amount: 2
-    - id: CMWeaponPistolM1984
+    - id: CMWeaponPistolM1911
 
 - type: entity
   parent: RMCBeltHolsterSMGPouch
