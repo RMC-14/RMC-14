@@ -9,6 +9,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Ghost;
 using Content.Shared.Interaction;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Vehicle;
@@ -21,6 +22,8 @@ using Robust.Shared.Localization;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Utility;
 using Content.Shared.Physics;
 using Content.Shared._RMC14.Map;
@@ -43,7 +46,9 @@ public sealed class VehicleSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
     [Dependency] private readonly VehicleLockSystem _vehicleLock = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     public override void Initialize()
     {
@@ -447,7 +452,7 @@ public sealed class VehicleSystem : EntitySystem
         if (!TryGetExitCoordinates(ent, enter, vehicleUid, out var exitCoords, out var exitMapCoords))
             return false;
 
-        if (!HasComp<GhostComponent>(user) && IsExitDestinationBlocked(exitCoords))
+        if (!HasComp<GhostComponent>(user) && IsExitDestinationBlocked(exitCoords, vehicleUid, user))
         {
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-exit-blocked"), user, user, PopupType.SmallCaution);
             return false;
@@ -491,10 +496,61 @@ public sealed class VehicleSystem : EntitySystem
         return exitMapCoords.MapId != MapId.Nullspace;
     }
 
-    private bool IsExitDestinationBlocked(EntityCoordinates exitCoords)
+    private bool IsExitDestinationBlocked(EntityCoordinates exitCoords, EntityUid vehicle, EntityUid user)
     {
-        const CollisionGroup blockedMask = CollisionGroup.Impassable | CollisionGroup.HighImpassable | CollisionGroup.MidImpassable;
-        return _rmcMap.IsTileBlocked(exitCoords, blockedMask) || _rmcMap.TileHasStructure(exitCoords);
+        if (!_turf.TryGetTileRef(exitCoords, out var tileRef))
+            return false;
+
+        var gridUid = tileRef.Value.GridUid;
+        if (!TryComp(gridUid, out MapGridComponent? gridComp))
+            return false;
+
+        var xformQuery = GetEntityQuery<TransformComponent>();
+        var fixtureQuery = GetEntityQuery<FixturesComponent>();
+        var gridXform = Transform(gridUid);
+        var (gridPos, gridRot, matrix) = _transform.GetWorldPositionRotationMatrix(gridXform, xformQuery);
+
+        var size = gridComp.TileSize;
+        var indices = tileRef.Value.GridIndices;
+        var localPos = new Vector2(indices.X * size + (size / 2f), indices.Y * size + (size / 2f));
+        var worldPos = Vector2.Transform(localPos, matrix);
+
+        var tileAabb = Box2.UnitCentered.Scale(0.95f * size).Translated(localPos);
+        var worldBox = new Box2Rotated(Box2.UnitCentered.Scale(0.95f * size).Translated(worldPos), gridRot, worldPos);
+
+        foreach (var ent in _lookup.GetEntitiesIntersecting(gridUid, worldBox, LookupFlags.Dynamic | LookupFlags.Static))
+        {
+            if (ent == vehicle || ent == user)
+                continue;
+
+            if (!fixtureQuery.TryGetComponent(ent, out var fixtures))
+                continue;
+
+            var entXform = xformQuery.GetComponent(ent);
+            var (pos, rot) = _transform.GetWorldPositionRotation(entXform, xformQuery);
+            rot -= gridRot;
+            pos = (-gridRot).RotateVec(pos - gridPos);
+
+            var fixtureTransform = new Transform(pos, (float) rot.Theta);
+
+            foreach (var fixture in fixtures.Fixtures.Values)
+            {
+                if (!fixture.Hard)
+                    continue;
+
+                if ((fixture.CollisionLayer & (int) CollisionGroup.MobMask) == 0)
+                    continue;
+
+                for (var i = 0; i < fixture.Shape.ChildCount; i++)
+                {
+                    var intersection = fixture.Shape.ComputeAABB(fixtureTransform, i).Intersect(tileAabb);
+                    if (intersection.Width * intersection.Height > 0.1f)
+                        return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     private void OnVehicleExitDoAfter(Entity<VehicleExitComponent> ent, ref VehicleExitDoAfterEvent args)
