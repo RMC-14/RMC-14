@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: RMCSmartGunPVENoCamo
   abstract: true
@@ -62,7 +62,7 @@
     - FullAuto
     recoilWielded: 3
     scatterWielded: 10
-    baseFireRate: 5
+    baseFireRate: 6
     burstScatterMult: 4
     modifiers:
       FullAuto:
@@ -102,7 +102,7 @@
     settings:
     - damage:
         types:
-          Piercing: 30
+          Piercing: 35
       armorPiercing: 0
       name: rmc-toggleable-ammo-highly-precise
       icon:
@@ -110,7 +110,7 @@
         state: ammo_swap_normal
     - damage:
         types:
-          Piercing: 20
+          Piercing: 25
       armorPiercing: 40
       name: rmc-toggleable-ammo-armor-shredding
       icon:
