@@ -102,5 +102,5 @@
     modifierSets:
     - VehicleArmorCaustic
   - type: VehicleAccelerationModifierAttachment
-    accelerationMultiplier: 0.9
+    accelerationMultiplier: 0.6
 

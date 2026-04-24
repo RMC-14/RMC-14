@@ -174,7 +174,7 @@
     prototype: Xenonid
   - type: Xeno
   - type: VehicleDamageMultiplier
-    multiplier: 2
+    multiplier: 1.5
   - type: XenoRegen
   - type: XenoStateVisuals
   - type: UserInterface

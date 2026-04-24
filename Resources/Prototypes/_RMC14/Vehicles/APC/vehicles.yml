@@ -10,7 +10,7 @@
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
-    maxSpeed: 7
+    maxSpeed: 5
     acceleration: 4
     deceleration: 10
     xenoBlockMinimumSize: Immobile
@@ -269,7 +269,7 @@
   description: An armored personnel carrier configured for SPP forces.
   components:
   - type: GridVehicleMover
-    maxSpeed: 6.5
+    maxSpeed: 5
     acceleration: 2.0
     deceleration: 7.5
     maxReverseSpeed: 2.5

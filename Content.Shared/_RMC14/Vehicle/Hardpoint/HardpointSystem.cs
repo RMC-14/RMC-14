@@ -40,7 +40,6 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed partial class HardpointSystem : EntitySystem
 {
     private static readonly EntProtoId<SkillDefinitionComponent> EngineerSkill = "RMCSkillEngineer";
-
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -565,6 +564,7 @@ public sealed partial class HardpointSystem : EntitySystem
         {
             var frameDamage = ScaleDamage(args.Damage, hullFraction);
             var frameAmount = GetVehicleFrameDamageAmount(ent.Owner, frameDamage);
+
             if (frameAmount > 0f)
                 DamageHardpoint(ent.Owner, ent.Owner, frameAmount, frameIntegrity);
         }
@@ -674,6 +674,7 @@ public sealed partial class HardpointSystem : EntitySystem
     private void ApplyDamageToHardpoint(EntityUid vehicle, EntityUid hardpoint, HardpointIntegrityComponent integrity, DamageSpecifier damage)
     {
         var amount = GetHardpointDamageAmount(hardpoint, damage);
+
         if (amount <= 0f)
             return;
 
@@ -682,18 +683,23 @@ public sealed partial class HardpointSystem : EntitySystem
 
     private float GetHardpointDamageAmount(EntityUid hardpoint, DamageSpecifier damage)
     {
-        var total = MathF.Max(damage.GetTotal().Float(), 0f);
+        var modifiedTotal = MathF.Max(damage.GetTotal().Float(), 0f);
         var modifierSets = new List<DamageModifierSet>();
         CollectHardpointDamageModifierSets(hardpoint, modifierSets);
 
         if (modifierSets.Count > 0)
         {
             var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage, modifierSets);
-            total = MathF.Max(modifiedDamage.GetTotal().Float(), 0f);
+            modifiedTotal = MathF.Max(modifiedDamage.GetTotal().Float(), 0f);
         }
 
+        var total = modifiedTotal;
+        var damageMultiplier = 1f;
         if (TryComp<HardpointItemComponent>(hardpoint, out var hardpointItem))
-            total *= MathF.Max(hardpointItem.DamageMultiplier, 0f);
+        {
+            damageMultiplier = MathF.Max(hardpointItem.DamageMultiplier, 0f);
+            total *= damageMultiplier;
+        }
 
         return total;
     }

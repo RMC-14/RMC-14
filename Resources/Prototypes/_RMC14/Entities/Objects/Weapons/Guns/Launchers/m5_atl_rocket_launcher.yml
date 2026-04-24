@@ -245,7 +245,7 @@
     - range: 6
       falloff: 10
   - type: VehicleDamageMultiplier
-    multiplier: 4
+    multiplier: 8
 
 - type: entity
   parent: RMCRocket84mm

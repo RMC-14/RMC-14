@@ -10,8 +10,8 @@
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
-    maxSpeed: 9
-    acceleration: 6
+    maxSpeed: 6
+    acceleration: 5
     deceleration: 12
     pushCooldown: 2
     xenoBlockMinimumSize: Immobile

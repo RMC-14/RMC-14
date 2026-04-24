@@ -11,10 +11,10 @@
   - type: RequireProjectileTarget
   - type: GridVehicleMover
     maxSpeed: 3
-    acceleration: 1
+    acceleration: 1.154
     deceleration: 8
     maxReverseSpeed: 2
-    reverseAcceleration: 1
+    reverseAcceleration: 1.154
     turnDelay: 1
     turnInPlace: true
     turnInPlaceMaxSpeed: 0.5
