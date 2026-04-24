@@ -54,7 +54,12 @@ public sealed partial class HardpointSlotsComponent : Component
 
     [DataField]
     public ProtoId<ToolQualityPrototype> RemoveToolQuality = "Prying";
+}
 
+[RegisterComponent]
+[Access(typeof(HardpointSystem), typeof(HardpointSlotSystem))]
+public sealed partial class HardpointStateComponent : Component
+{
     [NonSerialized]
     public HashSet<string> PendingInserts = new();
 

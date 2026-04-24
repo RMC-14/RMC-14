@@ -5,7 +5,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
-using Content.Shared.Vehicle.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 
@@ -33,15 +32,38 @@ public sealed class HardpointSlotSystem : EntitySystem
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointRemoveDoAfterEvent>(OnHardpointRemoveDoAfter);
     }
 
+    private HardpointStateComponent EnsureState(EntityUid uid)
+    {
+        return EnsureComp<HardpointStateComponent>(uid);
+    }
+
+    private void CleanupStaleInsertTracking(EntityUid vehicle, HardpointStateComponent state, string reason)
+    {
+        if (state.CompletingInserts.Count > 0)
+            return;
+
+        if (state.PendingInserts.Count == 0 && state.PendingInsertUsers.Count == 0)
+            return;
+
+        if (state.PendingInserts.Count > 0 && state.PendingInsertUsers.Count > 0)
+            return;
+
+        state.PendingInserts.Clear();
+        state.PendingInsertUsers.Clear();
+    }
+
     private void OnInsertAttempt(Entity<HardpointSlotsComponent> ent, ref ItemSlotInsertAttemptEvent args)
     {
         if (args.User == null)
             return;
 
+        var state = EnsureState(ent.Owner);
+        CleanupStaleInsertTracking(ent.Owner, state, "insert-attempt");
+
         if (!_hardpoints.TryGetSlot(ent.Comp, args.Slot.ID, out var slot))
             return;
 
-        if (ent.Comp.CompletingInserts.Contains(slot.Id))
+        if (state.CompletingInserts.Contains(slot.Id))
             return;
 
         if (!_hardpoints.IsValidHardpoint(args.Item, ent.Comp, slot))
@@ -53,44 +75,15 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (slot.InsertDelay <= 0f)
             return;
 
-        if (ent.Comp.PendingInsertUsers.Contains(args.User.Value))
-        {
-            args.Cancelled = true;
-            return;
-        }
-
-        if (!ent.Comp.PendingInserts.Add(slot.Id))
-        {
-            args.Cancelled = true;
-            return;
-        }
-
         args.Cancelled = true;
-        ent.Comp.PendingInsertUsers.Add(args.User.Value);
-
-        var doAfter = new DoAfterArgs(EntityManager, args.User.Value, slot.InsertDelay, new HardpointInsertDoAfterEvent(slot.Id), ent.Owner, ent.Owner, args.Item)
-        {
-            BreakOnMove = true,
-            BreakOnDamage = true,
-            BreakOnHandChange = true,
-            BreakOnDropItem = true,
-            BreakOnWeightlessMove = true,
-            NeedHand = true,
-            RequireCanInteract = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
-        };
-
-        if (!_doAfter.TryStartDoAfter(doAfter))
-        {
-            ent.Comp.PendingInserts.Remove(slot.Id);
-            ent.Comp.PendingInsertUsers.Remove(args.User.Value);
-        }
     }
 
     private void OnInsertDoAfter(Entity<HardpointSlotsComponent> ent, ref HardpointInsertDoAfterEvent args)
     {
-        ent.Comp.PendingInserts.Remove(args.SlotId);
-        ent.Comp.PendingInsertUsers.Remove(args.User);
+        var state = EnsureState(ent.Owner);
+        state.PendingInserts.Remove(args.SlotId);
+        state.PendingInsertUsers.Remove(args.User);
+        CleanupStaleInsertTracking(ent.Owner, state, "insert-doafter");
 
         if (args.Cancelled || args.Handled)
             return;
@@ -100,21 +93,16 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (args.Used is not { } item || string.IsNullOrEmpty(args.SlotId))
             return;
 
-        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
+        if (!_hardpoints.TryResolveSlotLocation(ent.Owner, ent.Comp, args.SlotId, out var location))
             return;
 
-        if (!_hardpoints.TryGetSlot(ent.Comp, args.SlotId, out var hardpointSlot))
+        if (!_hardpoints.IsValidHardpoint(item, location.Slots, location.Definition))
             return;
 
-        if (!_itemSlots.TryGetSlot(ent.Owner, args.SlotId, out var slot, itemSlots))
-            return;
-
-        if (!_hardpoints.IsValidHardpoint(item, ent.Comp, hardpointSlot))
-            return;
-
-        ent.Comp.CompletingInserts.Add(args.SlotId);
-        _itemSlots.TryInsertFromHand(ent.Owner, slot, args.User, excludeUserAudio: false);
-        ent.Comp.CompletingInserts.Remove(args.SlotId);
+        state.CompletingInserts.Add(location.Definition.Id);
+        _itemSlots.TryInsert(location.Owner, location.Slot, item, args.User, excludeUserAudio: false);
+        state.CompletingInserts.Remove(location.Definition.Id);
+        CleanupStaleInsertTracking(ent.Owner, state, "insert-finished");
     }
 
     private void OnSlotsInteractUsing(Entity<HardpointSlotsComponent> ent, ref InteractUsingEvent args)
@@ -123,6 +111,12 @@ public sealed class HardpointSlotSystem : EntitySystem
             return;
 
         if (TryInsertTurretAttachment(ent, args.User, args.Used))
+        {
+            args.Handled = true;
+            return;
+        }
+
+        if (TryStartHardpointInsert(ent, args.User, args.Used))
         {
             args.Handled = true;
             return;
@@ -138,13 +132,62 @@ public sealed class HardpointSlotSystem : EntitySystem
         }
     }
 
+    private bool TryStartHardpointInsert(Entity<HardpointSlotsComponent> ent, EntityUid user, EntityUid used)
+    {
+        if (!HasComp<HardpointItemComponent>(used))
+            return false;
+
+        var state = EnsureState(ent.Owner);
+        CleanupStaleInsertTracking(ent.Owner, state, "interact-using");
+
+        if (!_hardpoints.TryFindEmptyInstallLocation(ent.Owner, ent.Comp, used, out var targetLocation))
+            return false;
+
+        if (targetLocation.Definition.InsertDelay <= 0f)
+            return false;
+
+        if (EntityManager.IsClientSide(ent.Owner))
+            return true;
+
+        if (state.PendingInsertUsers.Contains(user))
+            return true;
+
+        if (!state.PendingInserts.Add(targetLocation.Definition.Id))
+            return true;
+
+        state.PendingInsertUsers.Add(user);
+
+        var doAfter = new DoAfterArgs(EntityManager, user, targetLocation.Definition.InsertDelay, new HardpointInsertDoAfterEvent(targetLocation.Definition.Id), ent.Owner, ent.Owner, used)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            BreakOnHandChange = true,
+            BreakOnDropItem = true,
+            BreakOnWeightlessMove = true,
+            NeedHand = true,
+            RequireCanInteract = true,
+            AttemptFrequency = AttemptFrequency.StartAndEnd,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
+        if (!_doAfter.TryStartDoAfter(doAfter))
+        {
+            state.PendingInserts.Remove(targetLocation.Definition.Id);
+            state.PendingInsertUsers.Remove(user);
+            return true;
+        }
+
+        return true;
+    }
+
     private void OnHardpointUiOpened(Entity<HardpointSlotsComponent> ent, ref BoundUIOpenedEvent args)
     {
         if (!Equals(args.UiKey, HardpointUiKey.Key))
             return;
 
-        ent.Comp.LastUiError = null;
-        _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp);
+        var state = EnsureState(ent.Owner);
+        state.LastUiError = null;
+        _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
     }
 
     private void OnHardpointUiClosed(Entity<HardpointSlotsComponent> ent, ref BoundUIClosedEvent args)
@@ -152,8 +195,9 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (!Equals(args.UiKey, HardpointUiKey.Key))
             return;
 
-        ent.Comp.PendingRemovals.Clear();
-        ent.Comp.LastUiError = null;
+        var state = EnsureState(ent.Owner);
+        state.PendingRemovals.Clear();
+        state.LastUiError = null;
     }
 
     private void OnHardpointRemoveMessage(Entity<HardpointSlotsComponent> ent, ref HardpointRemoveMessage args)
@@ -169,62 +213,54 @@ public sealed class HardpointSlotSystem : EntitySystem
 
     private void OnHardpointRemoveDoAfter(Entity<HardpointSlotsComponent> ent, ref HardpointRemoveDoAfterEvent args)
     {
-        ent.Comp.PendingRemovals.Remove(args.SlotId);
+        var state = EnsureState(ent.Owner);
+        state.PendingRemovals.Remove(args.SlotId);
 
         if (args.Cancelled || args.Handled)
         {
             if (args.Cancelled)
             {
-                ent.Comp.LastUiError = "Hardpoint removal cancelled.";
-                _hardpoints.SetContainingVehicleUiError(ent.Owner, ent.Comp.LastUiError);
+                state.LastUiError = "Hardpoint removal cancelled.";
+                _hardpoints.SetContainingVehicleUiError(ent.Owner, state.LastUiError);
             }
 
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp);
+            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
             _hardpoints.UpdateContainingVehicleUi(ent.Owner);
             return;
         }
 
         args.Handled = true;
 
-        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
+        if (!_hardpoints.TryResolveSlotLocation(ent.Owner, ent.Comp, args.SlotId, out var location))
         {
-            ent.Comp.LastUiError = "Unable to access hardpoint slots.";
-            _hardpoints.SetContainingVehicleUiError(ent.Owner, ent.Comp.LastUiError);
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp);
+            state.LastUiError = "Unable to access hardpoint slots.";
+            _hardpoints.SetContainingVehicleUiError(ent.Owner, state.LastUiError);
+            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
             _hardpoints.UpdateContainingVehicleUi(ent.Owner);
             return;
         }
 
-        if (!_hardpoints.TryGetSlot(ent.Comp, args.SlotId, out _))
+        if (location.Slot.Item is not { } installed)
         {
-            ent.Comp.LastUiError = "That hardpoint slot is no longer available.";
-            _hardpoints.SetContainingVehicleUiError(ent.Owner, ent.Comp.LastUiError);
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
+            state.LastUiError = "No hardpoint is installed in that slot.";
+            _hardpoints.SetContainingVehicleUiError(ent.Owner, state.LastUiError);
+            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, location.ItemSlots, state);
             _hardpoints.UpdateContainingVehicleUi(ent.Owner);
             return;
         }
 
-        if (!_itemSlots.TryGetSlot(ent.Owner, args.SlotId, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+        if (!_itemSlots.TryEjectToHands(location.Owner, location.Slot, args.User, true))
         {
-            ent.Comp.LastUiError = "No hardpoint is installed in that slot.";
-            _hardpoints.SetContainingVehicleUiError(ent.Owner, ent.Comp.LastUiError);
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
+            state.LastUiError = "Couldn't remove the hardpoint. Free a hand and try again.";
+            _hardpoints.SetContainingVehicleUiError(ent.Owner, state.LastUiError);
+            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, location.ItemSlots, state);
             _hardpoints.UpdateContainingVehicleUi(ent.Owner);
             return;
         }
 
-        if (!_itemSlots.TryEjectToHands(ent.Owner, itemSlot, args.User, true))
-        {
-            ent.Comp.LastUiError = "Couldn't remove the hardpoint. Free a hand and try again.";
-            _hardpoints.SetContainingVehicleUiError(ent.Owner, ent.Comp.LastUiError);
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
-            _hardpoints.UpdateContainingVehicleUi(ent.Owner);
-            return;
-        }
-
-        ent.Comp.LastUiError = null;
+        state.LastUiError = null;
         _hardpoints.SetContainingVehicleUiError(ent.Owner, null);
-        _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
+        _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, location.ItemSlots, state);
         _hardpoints.UpdateContainingVehicleUi(ent.Owner);
         _hardpoints.RefreshCanRun(ent.Owner);
     }
@@ -234,28 +270,22 @@ public sealed class HardpointSlotSystem : EntitySystem
         HardpointSlotsComponent component,
         EntityUid user,
         string? slotId,
-        EntityUid? uiOwnerUid = null,
-        HardpointSlotsComponent? uiOwnerComp = null)
+        EntityUid? uiOwnerUid = null)
     {
-        var rootCall = uiOwnerUid == null || uiOwnerComp == null;
         uiOwnerUid ??= uid;
-        uiOwnerComp ??= component;
+        var uiOwnerState = EnsureState(uiOwnerUid.Value);
 
-        void RefreshUi(ItemSlotsComponent? currentItemSlots = null)
+        void RefreshUi()
         {
-            _hardpoints.UpdateHardpointUi(uid, component, currentItemSlots);
-
-            if (uiOwnerUid.Value != uid || !ReferenceEquals(uiOwnerComp, component))
-                _hardpoints.UpdateHardpointUi(uiOwnerUid.Value, uiOwnerComp);
+            _hardpoints.UpdateHardpointUi(uiOwnerUid.Value, state: uiOwnerState);
         }
 
         void SetError(string error)
         {
-            uiOwnerComp.LastUiError = error;
+            uiOwnerState.LastUiError = error;
         }
 
-        if (rootCall)
-            uiOwnerComp.LastUiError = null;
+        uiOwnerState.LastUiError = null;
 
         if (string.IsNullOrWhiteSpace(slotId))
         {
@@ -264,104 +294,68 @@ public sealed class HardpointSlotSystem : EntitySystem
             return;
         }
 
-        if (VehicleTurretSlotIds.TryParse(slotId, out var parentSlotId, out var childSlotId))
+        if (!_hardpoints.TryResolveSlotLocation(uid, component, slotId, out var location))
         {
-            if (!TryComp(uid, out ItemSlotsComponent? parentItemSlots) ||
-                !_hardpoints.TryGetSlot(component, parentSlotId, out _))
-            {
-                SetError("Unable to find that turret slot.");
-                RefreshUi(parentItemSlots);
-                return;
-            }
-
-            if (!_itemSlots.TryGetSlot(uid, parentSlotId, out var parentSlot, parentItemSlots) || !parentSlot.HasItem)
-            {
-                SetError("Install a turret before removing turret hardpoints.");
-                RefreshUi(parentItemSlots);
-                return;
-            }
-
-            var turretUid = parentSlot.Item!.Value;
-            if (!TryComp(turretUid, out HardpointSlotsComponent? parentTurretSlots))
-            {
-                SetError("Turret hardpoint slots are unavailable.");
-                RefreshUi(parentItemSlots);
-                return;
-            }
-
-            TryStartHardpointRemoval(turretUid, parentTurretSlots, user, childSlotId, uiOwnerUid, uiOwnerComp);
-            RefreshUi(parentItemSlots);
-            return;
-        }
-
-        if (!TryComp(uid, out ItemSlotsComponent? itemSlots))
-        {
-            SetError("Unable to access hardpoint slots.");
+            SetError("That hardpoint slot does not exist.");
             RefreshUi();
             return;
         }
 
-        if (!_hardpoints.TryGetSlot(component, slotId, out var slot))
-        {
-            SetError("That hardpoint slot does not exist.");
-            RefreshUi(itemSlots);
-            return;
-        }
-
-        if (!_itemSlots.TryGetSlot(uid, slotId, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+        if (location.Slot.Item is not { } installed)
         {
             SetError("No hardpoint is installed in that slot.");
-            RefreshUi(itemSlots);
+            RefreshUi();
             return;
         }
 
-        if (TryComp(itemSlot.Item!.Value, out HardpointSlotsComponent? attachedSlots) &&
-            TryComp(itemSlot.Item!.Value, out ItemSlotsComponent? attachedItemSlots) &&
-            _hardpoints.HasAttachedHardpoints(itemSlot.Item!.Value, attachedSlots, attachedItemSlots))
+        if (TryComp(installed, out HardpointSlotsComponent? attachedSlots) &&
+            TryComp(installed, out ItemSlotsComponent? attachedItemSlots) &&
+            _hardpoints.HasAttachedHardpoints(installed, attachedSlots, attachedItemSlots))
         {
             const string error = "Remove the turret attachments before removing the turret.";
-            _popup.PopupEntity(error, uid, user);
+            _popup.PopupEntity(error, location.Owner, user);
             SetError(error);
-            RefreshUi(itemSlots);
+            RefreshUi();
             return;
         }
 
-        if (HasComp<HardpointNoRemoveComponent>(itemSlot.Item!.Value))
+        if (HasComp<HardpointNoRemoveComponent>(installed))
         {
             var error = Loc.GetString("rmc-hardpoint-remove-blocked");
-            _popup.PopupEntity(error, uid, user);
+            _popup.PopupEntity(error, location.Owner, user);
             SetError(error);
-            RefreshUi(itemSlots);
+            RefreshUi();
             return;
         }
 
-        if (component.PendingInserts.Contains(slotId) || component.CompletingInserts.Contains(slotId))
+        if (location.State.PendingInserts.Contains(location.Definition.Id) ||
+            location.State.CompletingInserts.Contains(location.Definition.Id))
         {
             const string error = "Finish installing that hardpoint before removing it.";
             _popup.PopupEntity(error, user, user);
             SetError(error);
-            RefreshUi(itemSlots);
+            RefreshUi();
             return;
         }
 
-        if (!_hardpoints.TryGetPryingTool(user, component.RemoveToolQuality, out var tool))
+        if (!_hardpoints.TryGetPryingTool(user, location.Slots.RemoveToolQuality, out var tool))
         {
             const string error = "You need a prying tool to remove this hardpoint.";
             _popup.PopupEntity(error, user, user);
             SetError(error);
-            RefreshUi(itemSlots);
+            RefreshUi();
             return;
         }
 
-        if (!component.PendingRemovals.Add(slotId))
+        if (!location.State.PendingRemovals.Add(location.Definition.Id))
         {
             SetError("That hardpoint is already being removed.");
-            RefreshUi(itemSlots);
+            RefreshUi();
             return;
         }
 
-        var delay = slot.RemoveDelay > 0f ? slot.RemoveDelay : slot.InsertDelay;
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, new HardpointRemoveDoAfterEvent(slotId), uid, uid, tool)
+        var delay = location.Definition.RemoveDelay > 0f ? location.Definition.RemoveDelay : location.Definition.InsertDelay;
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, new HardpointRemoveDoAfterEvent(location.Definition.Id), location.Owner, location.Owner, tool)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -375,14 +369,14 @@ public sealed class HardpointSlotSystem : EntitySystem
 
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
-            component.PendingRemovals.Remove(slotId);
+            location.State.PendingRemovals.Remove(location.Definition.Id);
             SetError("Couldn't start hardpoint removal.");
-            RefreshUi(itemSlots);
+            RefreshUi();
             return;
         }
 
-        uiOwnerComp.LastUiError = null;
-        RefreshUi(itemSlots);
+        uiOwnerState.LastUiError = null;
+        RefreshUi();
     }
 
     private bool TryInsertTurretAttachment(Entity<HardpointSlotsComponent> ent, EntityUid user, EntityUid used)
