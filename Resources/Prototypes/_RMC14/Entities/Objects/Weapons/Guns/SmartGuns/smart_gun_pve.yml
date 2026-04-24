@@ -136,6 +136,8 @@
     deactivateOnDrop: false
     toggleSound: null
   - type: SmartGun
+  - type: RMCWeaponDamageFalloff
+    rangeFlat: 12
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
