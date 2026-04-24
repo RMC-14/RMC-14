@@ -122,7 +122,6 @@ entities:
       - type: Damageable
       - type: Destructible
       - type: Corrodible
-      - type: MeleeReceivedMultiplier
 - proto: CMRandomPosterAny
   entities:
   - uid: 5

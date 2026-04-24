@@ -51,7 +51,6 @@
     - type: Damageable
     - type: Destructible
     - type: Corrodible
-    - type: MeleeReceivedMultiplier
 
 - type: entity
   parent: CMSeatBase
@@ -114,7 +113,6 @@
     - type: Damageable
     - type: Destructible
     - type: Corrodible
-    - type: MeleeReceivedMultiplier
 
 - type: entity
   parent: RMCSeatArmoredBase
@@ -240,7 +238,6 @@
     - type: Damageable
     - type: Destructible
     - type: Corrodible
-    - type: MeleeReceivedMultiplier
 
 
 - type: entity
