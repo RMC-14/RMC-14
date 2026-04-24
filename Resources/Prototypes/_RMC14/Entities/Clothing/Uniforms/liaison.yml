@@ -87,7 +87,18 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_blue_blazer.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
+  id: RMCJumpsuitLiaisonOrange
+  name: orange outfit
+  description: A pair of black pants paired with a very We-Ya orange shirt. A popular look with those in the corporate world that conduct the majority of their business from Weston Yamada offices.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/orange.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonOrange
   id: CMJumpsuitLiaisonField
   name: corporate casual
   description: A pair of dark brown slacks paired with a dark blue button-down shirt. A popular look among those in the corporate world that conduct the majority of their business from night clubs.
@@ -98,7 +109,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_field.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitLiaisonFieldSuitskirt
   name: corporate field suitskirt
   description: A black pencil skirt paired with a dark blue button-down shirt. A popular look among those in the corporate world that conduct the majority of their business from night clubs.
@@ -109,7 +120,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_field_suitskirt.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: CMJumpsuitLiaisonIvy
   name: country club outfit
   description: A pair of khaki slacks paired with a light blue button-down shirt. A popular look with those in the corporate world that conduct the majority of their business from country clubs.
@@ -120,7 +131,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_ivy.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: CMJumpsuitLiaisonCorporateFormal
   name: white suit pants
   description: A pair of ivory slacks paired with a white shirt. A popular pairing for formal corporate events.
@@ -131,7 +142,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_formal.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: CMJumpsuitLiaisonBlack
   name: black suit pants
   description: A pair of black slacks paired with a white shirt. The most common pairing among corporate workers.
@@ -142,7 +153,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitLiaisonBlackSuitskirt
   name: black suitskirt
   description: A simple black pencil skirt paired with a white shirt. A common pairing among corporate workers.
@@ -153,7 +164,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black_suitskirt.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: CMJumpsuitLiaisonBrown
   name: brown suit pants
   description: A pair of brown slacks paired with a white shirt. A common pairing among corporate workers.
@@ -173,7 +184,7 @@
     - RMCTieBlack
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: CMJumpsuitLiaisonBlue
   name: blue suit pants
   description: A pair of blue slacks paired with a white shirt. A common pairing among corporate workers.
@@ -190,17 +201,6 @@
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchWeYaBlack
-
-- type: entity
-  parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
-  id: RMCJumpsuitLiaisonOrange
-  name: orange outfit
-  description: A pair of black pants paired with a very We-Ya orange shirt. A popular look with those in the corporate world that conduct the majority of their business from Weston Yamada offices.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/orange.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/orange.rsi
 
 - type: entity
   parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
@@ -313,7 +313,7 @@
     startingWebbing: RMCWebbingDropPouch
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitLiaisonPilot
   name: Weston-Yamada Pilot uniform
   description: A pair of grey slacks and a white button-down shirt with a dark-grey tie and golden epaulettes signifying rank; a standard uniform for a commercial grade Weston-Yamada affiliated Pilot.
@@ -346,7 +346,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pink_workwear.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitLiaisonGreyWorkwear
   name: grey workwear
   description: A pair of black slacks and a short-sleeve grey workshirt. Standard uniform for Weston-Yamada employees working in colony operations and administration.
@@ -390,7 +390,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_skirt.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitWEYATrainee
   name: trainee's uniform
   description: It's a uniform with the WEYA insignia on it, with the words "Trainee" stamped below.
@@ -478,7 +478,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/jetblack_suit_fem.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitBlackPantsUniform
   name: simple white shirt with black pants
   description: It's a very simple looking white shirt and black pants.
@@ -489,7 +489,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/black_pants_uniform.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitBluePantsUniform
   name: simple white shirt with blue pants
   description: A classy shirt and tie.
@@ -500,7 +500,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/blue_pants_uniform.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitWornSuit
   name: worn suit
   description: A washed out white shirt with a black tie and brown slacks.
@@ -511,7 +511,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_brown.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitGreySuitPants
   name: grey suit pants
   description: A washed out white shirt with a red tie and black slacks.
@@ -533,7 +533,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/cargo_shorts.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitLiaisonLegalUniform
   name: legal division jumpsuit
   description: A grey and white jumpsuit with blue accents, often distributed to Legal Executives working in the frontier. Puncture and slash resistant, this uniform is fit for all the nasty places lawyers need to be.
@@ -544,7 +544,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/legal_uniform.rsi
 
 - type: entity
-  parent: CMJumpsuitLiaison
+  parent: RMCJumpsuitLiaisonOrange
   id: RMCJumpsuitLiaisonDisco
   name: stylish dress shirt
   description: A pink and purple dress shirt, coupled with grey dress pants. Makes a bold statement about the longevity of disco.
@@ -553,7 +553,6 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/disco_uniform.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/disco_uniform.rsi
-
 
 - type: entity
   parent: RMCJumpsuitLiaisonKhakiWorkwear

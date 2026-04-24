@@ -293,7 +293,7 @@
     - type: StoreAfterFailedInteract
     - type: RMCStorageEjectHand
       state: Open
-      
+
 - type: entity
   parent: CMWebbing
   id: RMCParaWebbing
@@ -305,7 +305,7 @@
       sprite: _RMC14/Objects/Clothing/Webbing/para_webbing.rsi
       state: webbing
     - type: Appearance
-      
+
 - type: entity
   parent: RMCParaWebbing
   id: RMCParaWebbingL88
@@ -317,7 +317,7 @@
         - id: RMCTacticalPrybar
         - id: RMCMagazineRifleL88
         - id: RMCMagazineRifleL88
-        
+
 - type: entity
   parent: RMCParaWebbing
   id: RMCParaWebbingPDW90AP
@@ -933,7 +933,7 @@
 
 - type: entity
   parent: CMWebbingBase
-  id: CMWebbingSurgicalGreen
+  id: RMCWebbingSurgicalGreen
   name: surgical webbing vest
   description: A robust webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
@@ -969,24 +969,24 @@
   - type: FixedItemSizeStorage
   - type: StorageFill
     contents:
-#     - PICT System
-      - id: CMScalpel
-      - id: CMHemostat
-      - id: CMRetractor
-      - id: CMTraumaKit10
-      - id: CMCautery
-      - id: CMCircularSaw
-      - id: CMSurgicalDrill
-      - id: CMBoneGel
-      - id: CMBonesetter
-#     - FixOVein
-#     - Nanopaste
-      - id: CMSurgicalLine
-      - id: CMSynthGraft
+    #- PICT System
+    - id: CMScalpel
+    - id: CMHemostat
+    - id: CMRetractor
+    - id: CMTraumaKit10
+    - id: CMCautery
+    - id: CMCircularSaw
+    - id: CMSurgicalDrill
+    - id: CMBoneGel
+    - id: CMBonesetter
+    #- FixOVein
+    #- Nanopaste
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
 
 - type: entity
-  parent: CMWebbingBase
-  id: CMWebbingSurgicalBlue
+  parent: RMCWebbingSurgicalGreen
+  id: RMCWebbingSurgicalBlue
   name: surgical webbing vest
   description: A robust blue webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
@@ -994,48 +994,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
     state: webbing
-  - type: Webbing
-    components:
-    - type: Storage
-      maxItemSize: Small
-      grid:
-      - 0,0,13,3 # 14 slots
-      whitelist:
-        tags:
-        - CMTraumaKit
-        - CMSurgicalLine
-        - CMSynthGraft
-        components:
-        - CMSurgeryTool
-    - type: FixedItemSizeStorage
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,13,3 # 14 slots
-    whitelist:
-      tags:
-      - CMTraumaKit
-      - CMSurgicalLine
-      - CMSynthGraft
-      components:
-      - CMSurgeryTool
-  - type: FixedItemSizeStorage
-  - type: StorageFill
-    contents:
-#     - PICT System
-      - id: CMScalpel
-      - id: CMHemostat
-      - id: CMRetractor
-      - id: CMTraumaKit10
-      - id: CMCautery
-      - id: CMCircularSaw
-      - id: CMSurgicalDrill
-      - id: CMBoneGel
-      - id: CMBonesetter
-#     - FixOVein
-#     - Nanopaste
-      - id: CMSurgicalLine
-      - id: CMSynthGraft
 
 - type: entity
   parent: CMWebbing

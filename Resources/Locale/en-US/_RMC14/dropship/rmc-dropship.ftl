@@ -104,6 +104,8 @@ rmc-dropship-paradrop-target-screen-target-targeting = Locked to {$dropTarget}.
 rmc-dropship-paradrop-lock-no-target = No target selected.
 rmc-dropship-paradrop-lock-target-not-flying = You can only enable the paradrop module while in flight.
 
+rmc-dropship-paradrop-failed = Your harness got stuck and is preventing you from jumping
+
 rmc-dropship-medevac-system-screen-text = RMU-4M Medevac System
 
 rmc-dropship-fulton-system-screen-text = RMU-19 Fulton Recovery System
@@ -126,3 +128,10 @@ rmc-dropship-equipment-undeployed = UNDEPLOYED
 rmc-dropship-equipment-operational = OPERATIONAL
 rmc-dropship-equipment-damaged = DAMAGED
 rmc-dropship-equipment-destroyed = DESTROYED
+
+rmc-dropship-launch-bay-screen-text = LAG-14 Internal Sentry Launcher
+rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
+
+    Loaded: {$loaded}
+
+    Ammo: {$current} / {$max}

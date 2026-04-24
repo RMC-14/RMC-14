@@ -186,16 +186,16 @@
       - CMSurvivorScientist: 2
     survivorJobVariantScenarios:
       panic_room_hold:
-        CMSurvivorEngineer:
-        - RMCSurvivorShivasPanicRoomEngineer: 2
-        CMSurvivorScientist:
-        - RMCSurvivorShivasPanicRoomResearcher: 2
-        CMSurvivorDoctor:
-        - RMCSurvivorShivasPanicRoomDoctor: 2
         CMSurvivorSecurity:
         - RMCSurvivorPMCCommandoShivas: 1
         CMSurvivorCorporate:
         - RMCSurvivorAssistantManager: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorShivasPanicRoomDoctor: 2
+        CMSurvivorEngineer:
+        - RMCSurvivorShivasPanicRoomEngineer: 2
+        CMSurvivorScientist:
+        - RMCSurvivorShivasPanicRoomResearcher: 2
         CMSurvivor:
         - RMCSurvivorShivasPanicRoomCivilian: 2
 
@@ -254,6 +254,15 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+    nightmareScenarios:
+    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF/SPP survivors are in
+      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_hospital
+      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_dam
+      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_tunneldorm
+      scenarioProbability: 0.25
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
@@ -454,7 +463,7 @@
     survivorJobScenarios:
       tse_airbase: # Order of job priority for paramarines. Scientist is overriden into doctor, Corporate into survivor
       - RMCSurvivorCommandingOfficer: 1
-      - RMCJobSyntheticColony: 1
+      - RMCSyntheticColony: 1
       - CMSurvivorDoctor: 1
       - CMSurvivorEngineer: 1
       - CMSurvivorSecurity: 2
@@ -463,7 +472,7 @@
       tse_airbase: # RCM Paramarines
         RMCSurvivorCommandingOfficer:
         - RMCSurvivorParaCommander: 1
-        RMCJobSyntheticColony:
+        RMCSyntheticColony:
         - RMCSurvivorParaSupportSynthetic: 1
         CMSurvivorDoctor:
         - RMCSurvivorParaMedicalTechnician: 1

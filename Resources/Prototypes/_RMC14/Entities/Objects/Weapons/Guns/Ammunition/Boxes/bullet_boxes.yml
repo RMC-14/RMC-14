@@ -295,7 +295,7 @@
     bulletType: RMCBoxBulletsPistolAP
     amount: 0
 
-# 8.88x51mm
+# 7x43mm
 
 - type: entity
   parent: RMCBoxBulletsBase
@@ -358,6 +358,8 @@
   - type: BulletBox
     bulletType: RMCBoxBulletsRifleL90AP
     amount: 0
+
+# 8.88x51mm
 
 - type: entity
   parent: RMCBoxBulletsBase

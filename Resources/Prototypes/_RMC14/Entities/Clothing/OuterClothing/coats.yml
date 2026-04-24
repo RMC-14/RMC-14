@@ -744,7 +744,7 @@
   - type: Appearance
 
 - type: entity
-  parent: [RMCOuterClothingExternalWebbing, BaseFoldable]
+  parent: [ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket, BaseFoldable, RMCBaseUniformAccessoryItemOuterClothing]
   id: RMCJacketWindbreaker
   name: green windbreaker
   description: A green windbreaker.
@@ -962,7 +962,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/brown_iconcoat.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCJacketWindbreaker
   id: RMCWEYARainCoat
   name: WEYA rain coat
   description: A bright, yellow raincoat with the Company logo. It's gaudy, sure, but it keeps the rain off well. Typically distributed to frontier colonies with heavy rain.

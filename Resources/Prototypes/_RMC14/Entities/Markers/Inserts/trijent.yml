@@ -107,3 +107,57 @@
       probability: 0.2
     clearDecals: false
     replaceAreas: false
+
+# Regular Surv Spawns
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentSurvSpawnHospital
+  name: Hospital Surv Spawn
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_hospital.yml"
+      probability: 1
+      nightmareScenario: trijent_surv_spawn_hospital
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentSurvSpawnDam
+  name: Dam Surv Spawn
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_dam.yml"
+      probability: 1
+      nightmareScenario: trijent_surv_spawn_dam
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentSurvSpawnBar
+  name: Bar Surv Spawn
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_bar.yml"
+      probability: 1
+      nightmareScenario: trijent_surv_spawn_bar
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentSurvSpawnTunnelDorm
+  name: Tunnel Dorm Surv Spawn
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_tunneldorm.yml"
+      probability: 1
+      nightmareScenario: trijent_surv_spawn_tunneldorm
+    replaceAreas: false
