@@ -183,6 +183,16 @@
       Urban: "#acb8c7"
 
 - type: entity
+  parent: RMCSmartGunPVE
+  id: RMCSmartGunOvertunedPVE
+  name: ML66OT heavy support gun
+  description: "The actual firearm in the Support Gun System. Essentially a heavy, mobile machinegun.\n\nThis model appears to have been overtuned, packing a greater punch than usual. Watch where you point this thing."
+  suffix: PVE, Overtuned
+  components:
+  - type: GunDamageModifier
+    multiplier: 1.5
+
+- type: entity
   parent: RMCSmartGunPVENoCamo
   id: RMCSmartGunPMCPVE
   name: ML79A heavy support gun
