@@ -6,10 +6,8 @@ using Content.Server.Preferences.Managers;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Clothing;
 using Content.Shared.Eye;
-using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
@@ -108,10 +106,7 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         if (TerminatingOrDeleted(imaginer))
             return;
 
-        if (!_mind.TryGetMind(newFriend, out var mindId, out var friendMind))
-            return;
-
-        if (!HasComp<GhostComponent>(newFriend))
+        if (!_mind.TryGetMind(newFriend, out var mindId, out _))
             return;
 
         EnsureComp<HasImaginaryFriendComponent>(imaginer, out var hasFriend);
