@@ -79,7 +79,7 @@
     reregister: false
     job: RMCSPPRifleman
     raffle:
-      settings: short
+      settings: default
   - type: GhostRoleApplySpecial
     squad: SquadSPP
 

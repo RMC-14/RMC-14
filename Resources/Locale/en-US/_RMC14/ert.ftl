@@ -2,7 +2,6 @@ rmc-ert-admin-command-player-only = This command can only be used by a player.
 
 rmc-ert-admin-window-title = ERT Dispatch
 rmc-ert-admin-window-header = Emergency Response Team requests
-rmc-ert-admin-window-refresh = Refresh
 rmc-ert-admin-no-requests = No ERT requests are active.
 rmc-ert-admin-row-summary = {$state} | {$source} | {$requester} via {$sourceName} | {$createdAt}
 rmc-ert-admin-row-reason = Reason: {$reason}
@@ -54,6 +53,7 @@ rmc-ert-admin-completed = {$admin} completed ERT request {$id} for {$team}.
 rmc-ert-admin-arrived-missing-call = ERT request {$id} arrived, but its call prototype is no longer available.
 rmc-ert-admin-recruiting = ERT request {$id} is recruiting {$slots} ghost-role slots for {$call}.
 rmc-ert-admin-cleanup = ERT request {$id} {$reason}; shuttle content cleaned up.
+rmc-ert-admin-cleanup-deferred = ERT request {$id} {$reason}; shuttle cleanup deferred because {$actors} actor(s) remain aboard.
 rmc-ert-admin-launched = ERT request {$id} for {$call} launched by {$launcher}.
 rmc-ert-admin-failed = ERT request {$id} failed: {$error}
 rmc-ert-admin-request = ERT request {$id} from {$requester} via {$source}: {$reason}

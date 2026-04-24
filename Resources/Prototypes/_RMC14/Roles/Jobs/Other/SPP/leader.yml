@@ -98,7 +98,7 @@
     reregister: false
     job: RMCSPPLeader
     raffle:
-      settings: short
+      settings: default
   - type: GhostRoleApplySpecial
     squad: SquadSPP
 

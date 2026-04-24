@@ -65,7 +65,7 @@
     reregister: false
     job: CMRoyalMarinesMedic
     raffle:
-      settings: short
+      settings: default
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobHospitalCorpsman

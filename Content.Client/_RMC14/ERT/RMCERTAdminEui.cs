@@ -20,7 +20,6 @@ public sealed class RMCERTAdminEui : BaseEui
     public override void Opened()
     {
         _window = new RMCERTAdminWindow();
-        _window.RefreshButton.OnPressed += _ => SendMessage(new RMCERTAdminRefreshMsg());
         _window.OpenCentered();
     }
 

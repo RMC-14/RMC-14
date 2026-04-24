@@ -20,6 +20,7 @@ public sealed class RMCERTRequest
     public TimeSpan CreatedAt;
     public TimeSpan? DispatchAt;
     public TimeSpan? RecruitmentEndsAt;
+    public TimeSpan NextAutoLaunchAttempt;
     public ProtoId<RMCERTCallPrototype>? SelectedCall;
     public List<ProtoId<RMCERTCallPrototype>> AllowedCalls = [];
     public string LastError = string.Empty;

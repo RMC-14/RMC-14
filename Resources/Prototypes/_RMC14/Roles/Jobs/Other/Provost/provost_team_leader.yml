@@ -63,7 +63,7 @@
     reregister: false
     job: CMProvostTeamLeader
     raffle:
-      settings: short
+      settings: default
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobSquadLeader

@@ -94,7 +94,7 @@
     reregister: false
     job: RMCWeYaGoon
     raffle:
-      settings: short
+      settings: default
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobRifleman

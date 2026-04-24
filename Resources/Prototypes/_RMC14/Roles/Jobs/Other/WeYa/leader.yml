@@ -85,7 +85,7 @@
     reregister: false
     job: RMCPMCLeader
     raffle:
-      settings: short
+      settings: default
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobSquadLeader

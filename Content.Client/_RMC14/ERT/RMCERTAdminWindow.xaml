@@ -6,7 +6,6 @@
     <BoxContainer Orientation="Vertical" Margin="6">
         <BoxContainer Orientation="Horizontal">
             <Label Name="HeaderLabel" Access="Public" HorizontalExpand="True" />
-            <Button Name="RefreshButton" Access="Public" StyleClasses="OpenBoth" />
         </BoxContainer>
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
         <ScrollContainer VerticalExpand="True">

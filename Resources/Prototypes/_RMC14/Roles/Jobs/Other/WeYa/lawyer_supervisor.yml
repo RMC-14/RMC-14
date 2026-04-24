@@ -81,7 +81,7 @@
     reregister: false
     job: RMCWeYaLawyerSupervisor
     raffle:
-      settings: short
+      settings: default
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobLiaison

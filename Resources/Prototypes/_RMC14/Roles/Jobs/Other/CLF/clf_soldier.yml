@@ -54,7 +54,7 @@
     reregister: false
     job: RMCCLFSoldier
     raffle:
-      settings: short
+      settings: default
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobRifleman

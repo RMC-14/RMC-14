@@ -69,7 +69,7 @@
     reregister: false
     job: CMBureauMarshal
     raffle:
-      settings: short
+      settings: default
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobMilitaryPolice

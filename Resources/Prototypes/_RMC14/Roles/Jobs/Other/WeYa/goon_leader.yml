@@ -100,7 +100,7 @@
     reregister: false
     job: RMCWeYaGoonLead
     raffle:
-      settings: short
+      settings: default
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobSquadLeader

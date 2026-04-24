@@ -11,3 +11,12 @@ rmc-job-name-corp-exec-specialist-legal = Corporate Legal Specialist
 rmc-ghost-name-corp-exec-supervisor-legal = Corporate Legal Supervisor (Neutral)
 rmc-job-name-corp-exec-supervisor-legal = Corporate Legal Supervisor
 
+rmc-job-title-corporate-executive-specialist = Corporate Executive Specialist
+rmc-job-title-corporate-executive-supervisor = Corporate Executive Supervisor
+
+rmc-ghost-role-information-corporate-executive-specialist-name = Corporate Executive Specialist
+rmc-ghost-role-information-corporate-executive-specialist-description = You are a Weston-Yamada Corporate Affairs specialist. Provide legal and corporate support to the Corporate Liaison, protect company interests, and await instructions from your supervisor.
+
+rmc-ghost-role-information-corporate-executive-supervisor-name = Corporate Executive Supervisor
+rmc-ghost-role-information-corporate-executive-supervisor-description = You are the Weston-Yamada Corporate Affairs team supervisor. Coordinate your specialists, provide legal and corporate support to the Corporate Liaison, and protect company interests.
+

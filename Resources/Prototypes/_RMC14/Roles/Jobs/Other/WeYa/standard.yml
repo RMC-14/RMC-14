@@ -74,7 +74,7 @@
     reregister: false
     job: RMCPMCStandardM63B2
     raffle:
-      settings: short
+      settings: default
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobRifleman

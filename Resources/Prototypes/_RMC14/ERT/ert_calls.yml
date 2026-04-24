@@ -67,7 +67,7 @@
     cooldown: 10m
     recruitmentDuration: 30s
     maxCallsPerRound: 1
-    minRequiredSlots: 1
+    minRequiredSlots: 3
 
 - type: rmcERTCall
   id: RMCERTCallPMC
@@ -137,7 +137,7 @@
     cooldown: 10m
     recruitmentDuration: 30s
     maxCallsPerRound: 1
-    minRequiredSlots: 1
+    minRequiredSlots: 3
 
 - type: rmcERTCall
   id: RMCERTCallWeYaBodyguard
@@ -291,6 +291,7 @@
     cooldown: 10m
     recruitmentDuration: 30s
     maxCallsPerRound: 1
+    minRequiredSlots: 2
 
 - type: rmcERTCall
   id: RMCERTCallSPP
@@ -349,6 +350,7 @@
     cooldown: 10m
     recruitmentDuration: 30s
     maxCallsPerRound: 1
+    minRequiredSlots: 3
 
 - type: rmcERTCall
   id: RMCERTCallTSE
@@ -407,6 +409,7 @@
     cooldown: 10m
     recruitmentDuration: 30s
     maxCallsPerRound: 1
+    minRequiredSlots: 3
 
 - type: rmcERTCall
   id: RMCERTCallProvost
@@ -456,6 +459,7 @@
     cooldown: 10m
     recruitmentDuration: 30s
     maxCallsPerRound: 1
+    minRequiredSlots: 2
 
 - type: rmcERTCall
   id: RMCERTCallCLF
@@ -500,3 +504,4 @@
     cooldown: 10m
     recruitmentDuration: 30s
     maxCallsPerRound: 1
+    minRequiredSlots: 3

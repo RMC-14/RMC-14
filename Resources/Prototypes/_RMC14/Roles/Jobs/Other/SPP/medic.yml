@@ -84,7 +84,7 @@
     reregister: false
     job: RMCSPPMedic
     raffle:
-      settings: short
+      settings: default
     requirements:
   - type: GhostRoleApplySpecial
     squad: SquadSPP

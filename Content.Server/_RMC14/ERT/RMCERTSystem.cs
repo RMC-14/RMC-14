@@ -6,6 +6,7 @@ using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server._RMC14.Marines;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
+using Content.Server.GameTicking;
 using Content.Server.Ghost;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Humanoid.Components;
@@ -25,6 +26,7 @@ using Content.Shared.Database;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
@@ -58,6 +60,7 @@ public sealed class RMCERTSystem : EntitySystem
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
@@ -99,6 +102,28 @@ public sealed class RMCERTSystem : EntitySystem
         });
 
         ValidatePrototypes();
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        foreach (var request in _requests.Values.ToArray())
+        {
+            if (request.State != RMCERTRequestState.Recruiting)
+                continue;
+
+            if (request.SelectedCall is not { } callId || !_prototypes.TryIndex(callId, out var call))
+                continue;
+
+            if (!call.AutoLaunch)
+                continue;
+
+            if (_timing.CurTime < request.NextAutoLaunchAttempt)
+                continue;
+
+            TryAutoLaunch(request.Id);
+        }
     }
 
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
@@ -563,6 +588,11 @@ public sealed class RMCERTSystem : EntitySystem
 
         request.State = RMCERTRequestState.Recruiting;
         request.RecruitmentEndsAt = _timing.CurTime + call.Requirements.RecruitmentDuration;
+        request.NextAutoLaunchAttempt = request.RecruitmentEndsAt.Value;
+        Log.Info($"ERT request {request.Id} recruiting {request.PlannedRoster.Count} slots for {call.ID}. " +
+                 $"RecruitmentDuration={call.Requirements.RecruitmentDuration}, " +
+                 $"AutoLaunch={call.AutoLaunch}, MinRequiredSlots={call.Requirements.MinRequiredSlots}, " +
+                 $"Shuttle={FormatEntity(shuttle)}, {GetShuttleDiagnostics(request, shuttle)}");
         Announce(call.Announcements.Recruiting, call.Announcements.RecruitingSound, request, call);
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-recruiting",
             ("id", request.Id),
@@ -578,8 +608,9 @@ public sealed class RMCERTSystem : EntitySystem
 
         DirtyState();
 
-        if (call.AutoLaunch)
-            Timer.Spawn(call.Requirements.RecruitmentDuration, () => TryAutoLaunch(id));
+        // Auto-launch retries are polled from Update instead of chained through Timer.Spawn.
+        // TimerManager processes newly-added timers in the same update pass, so adding a short
+        // retry timer from a timer callback can snowball if the server has a long frame.
     }
 
     private bool TryLoadShuttle(RMCERTRequest request, RMCERTCallPrototype call, out EntityUid? shuttle, out string error)
@@ -634,6 +665,8 @@ public sealed class RMCERTSystem : EntitySystem
                 call.DeniedLandingTags);
         }
 
+        Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle.Value)} for {call.ID}. " +
+                 GetShuttleDiagnostics(request, shuttle));
         return true;
     }
 
@@ -996,13 +1029,18 @@ public sealed class RMCERTSystem : EntitySystem
     private void CleanupRequestContent(RMCERTRequest request, string reason)
     {
         // Failed and cancelled requests need to unwind both the staged roster and any berth reservation held by the shuttle.
+        var ghostCoordinates = _gameTicker.GetObserverSpawnPoint();
+        var ghostedMembers = 0;
         foreach (var member in request.SpawnedGhostRoles)
         {
             if (!Exists(member))
                 continue;
 
             if (_mind.TryGetMind(member, out var mindId, out var mind))
-                _ghost.OnGhostAttempt(mindId, false, forced: true, mind: mind);
+            {
+                if (TryGhostMindForCleanup(request, member, mindId, mind, ghostCoordinates, reason))
+                    ghostedMembers++;
+            }
 
             QueueDel(member);
         }
@@ -1012,6 +1050,8 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (request.Shuttle is { Valid: true } shuttle && Exists(shuttle))
         {
+            RemComp<RMCERTShuttleComponent>(shuttle);
+
             if (TryComp(shuttle, out DropshipComponent? dropship) &&
                 dropship.Destination is { } destination &&
                 TryComp(destination, out DropshipDestinationComponent? destinationComp) &&
@@ -1020,13 +1060,123 @@ public sealed class RMCERTSystem : EntitySystem
                 _dropship.SetDestinationShip((destination, destinationComp), null);
             }
 
-            QueueDel(shuttle);
-            _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cleanup",
-                ("id", request.Id),
-                ("reason", reason)));
+            var actorsGhosted = TryGhostActorsOffShuttle(request, shuttle, ghostCoordinates, reason, out var actorsOnShuttle, out var ghostedActors);
+            var remainingActors = CountActorsOnShuttle(shuttle);
+            Log.Info($"ERT request {request.Id} cleanup '{reason}' for {ToPrettyString(shuttle)}. " +
+                     $"GhostedMembers={ghostedMembers}, ActorsOnShuttle={actorsOnShuttle}, " +
+                     $"GhostedActors={ghostedActors}, RemainingActors={remainingActors}, " +
+                     GetShuttleDiagnostics(request, shuttle));
+
+            if (actorsGhosted && remainingActors == 0)
+            {
+                QueueDel(shuttle);
+                request.Shuttle = null;
+                _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cleanup",
+                    ("id", request.Id),
+                    ("reason", reason)));
+            }
+            else
+            {
+                Log.Warning($"ERT request {request.Id} left shuttle {ToPrettyString(shuttle)} in world after cleanup '{reason}' " +
+                            $"because {remainingActors} actor(s) could not be ghosted safely.");
+                _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cleanup-deferred",
+                    ("id", request.Id),
+                    ("reason", reason),
+                    ("actors", remainingActors)));
+            }
+        }
+        else
+        {
+            request.Shuttle = null;
+        }
+    }
+
+    private bool TryGhostActorsOffShuttle(
+        RMCERTRequest request,
+        EntityUid shuttle,
+        EntityCoordinates ghostCoordinates,
+        string reason,
+        out int actorsOnShuttle,
+        out int ghostedActors)
+    {
+        var actors = new List<EntityUid>();
+        var query = EntityQueryEnumerator<ActorComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var xform))
+        {
+            if (TerminatingOrDeleted(uid))
+                continue;
+
+            if (xform.GridUid != shuttle)
+                continue;
+
+            actors.Add(uid);
         }
 
-        request.Shuttle = null;
+        actorsOnShuttle = actors.Count;
+        ghostedActors = 0;
+
+        if (actors.Count == 0)
+            return true;
+
+        foreach (var actor in actors)
+        {
+            if (!Exists(actor) || TerminatingOrDeleted(actor))
+            {
+                ghostedActors++;
+                continue;
+            }
+
+            if (!_mind.TryGetMind(actor, out var mindId, out var mind) &&
+                (!TryComp(actor, out ActorComponent? actorComp) ||
+                 !_mind.TryGetMind(actorComp.PlayerSession, out mindId, out mind)))
+            {
+                Log.Warning($"ERT request {request.Id} cleanup '{reason}' found actor {ToPrettyString(actor)} " +
+                            $"on shuttle {ToPrettyString(shuttle)} but could not find a mind to ghost.");
+                continue;
+            }
+
+            if (!TryGhostMindForCleanup(request, actor, mindId, mind, ghostCoordinates, reason))
+                continue;
+
+            QueueDel(actor);
+            ghostedActors++;
+        }
+
+        return CountActorsOnShuttle(shuttle) == 0;
+    }
+
+    private bool TryGhostMindForCleanup(
+        RMCERTRequest request,
+        EntityUid actor,
+        EntityUid mindId,
+        MindComponent mind,
+        EntityCoordinates ghostCoordinates,
+        string reason)
+    {
+        var ghost = _ghost.SpawnGhost((mindId, mind), ghostCoordinates, canReturn: false);
+        if (ghost == null)
+        {
+            Log.Warning($"ERT request {request.Id} cleanup '{reason}' failed to ghost " +
+                        $"{ToPrettyString(actor)} from cleanup shuttle.");
+            return false;
+        }
+
+        Log.Info($"ERT request {request.Id} cleanup '{reason}' ghosted {ToPrettyString(actor)} " +
+                 $"as {ToPrettyString(ghost.Value)}.");
+        return true;
+    }
+
+    private int CountActorsOnShuttle(EntityUid shuttle)
+    {
+        var count = 0;
+        var query = EntityQueryEnumerator<ActorComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var xform))
+        {
+            if (!TerminatingOrDeleted(uid) && xform.GridUid == shuttle)
+                count++;
+        }
+
+        return count;
     }
 
     private bool TryAutoLaunch(Guid id)
@@ -1041,16 +1191,17 @@ public sealed class RMCERTSystem : EntitySystem
         if (request.RecruitmentEndsAt is { } endsAt &&
             _timing.CurTime < endsAt)
         {
-            Timer.Spawn(endsAt - _timing.CurTime, () => TryAutoLaunch(id));
+            request.NextAutoLaunchAttempt = endsAt;
             return false;
         }
 
         if (HasActiveRecruitmentRaffles(request))
         {
-            Timer.Spawn(TimeSpan.FromSeconds(1), () => TryAutoLaunch(id));
+            request.NextAutoLaunchAttempt = _timing.CurTime + TimeSpan.FromSeconds(1);
             return false;
         }
 
+        request.NextAutoLaunchAttempt = _timing.CurTime + TimeSpan.FromSeconds(1);
         return TryLaunch(id, null, true);
     }
 
@@ -1095,6 +1246,11 @@ public sealed class RMCERTSystem : EntitySystem
         request.RecruitmentEndsAt = null;
 
         var acceptedCount = FinalizeRecruitment(request);
+        Log.Info($"ERT request {request.Id} launching {call.ID}: accepted={acceptedCount}, " +
+                 $"required={call.Requirements.MinRequiredSlots}, planned={request.PlannedRoster.Count}, " +
+                 $"spawnedGhostRoles={request.SpawnedGhostRoles.Count}, launcher={launcher}, " +
+                 $"Shuttle={FormatEntity(request.Shuttle)}, {GetShuttleDiagnostics(request, request.Shuttle)}");
+
         if (acceptedCount < call.Requirements.MinRequiredSlots)
         {
             FailRequest(request, acceptedCount == 0
@@ -1318,6 +1474,9 @@ public sealed class RMCERTSystem : EntitySystem
 
     private void FailRequest(RMCERTRequest request, string error)
     {
+        Log.Warning($"ERT request {request.Id} failed: {error}. " +
+                    $"State={request.State}, SelectedCall={request.SelectedCall?.Id}, " +
+                    $"Shuttle={FormatEntity(request.Shuttle)}, {GetShuttleDiagnostics(request, request.Shuttle)}");
         request.State = RMCERTRequestState.Failed;
         request.LastError = error;
         request.RecruitmentEndsAt = null;
@@ -1568,6 +1727,86 @@ public sealed class RMCERTSystem : EntitySystem
             return call.Name;
 
         return callId.Id;
+    }
+
+    private string FormatEntity(EntityUid? entity)
+    {
+        return entity is { Valid: true } uid && Exists(uid)
+            ? ToPrettyString(uid)
+            : "none";
+    }
+
+    private string GetShuttleDiagnostics(EntityUid? shuttle)
+    {
+        if (shuttle is not { Valid: true } shuttleUid || !Exists(shuttleUid))
+            return "ShuttleState=missing";
+
+        var xform = Transform(shuttleUid);
+        var mapId = xform.MapID;
+        var mapInitialized = _map.MapExists(mapId) && _map.IsInitialized(mapId);
+        var mapPaused = _map.MapExists(mapId) && _map.IsPaused(mapId);
+        var gridPaused = MetaData(shuttleUid).EntityPaused;
+        var navComputers = CountNavigationComputers(shuttleUid);
+        var actors = CountActorsOnShuttle(shuttleUid);
+
+        return $"ShuttleState=map:{mapId}, mapInit:{mapInitialized}, mapPaused:{mapPaused}, " +
+               $"gridPaused:{gridPaused}, navComputers:{navComputers}, actors:{actors}";
+    }
+
+    private string GetShuttleDiagnostics(RMCERTRequest request, EntityUid? shuttle)
+    {
+        var diagnostics = GetShuttleDiagnostics(shuttle);
+        if (shuttle is not { Valid: true } shuttleUid || !Exists(shuttleUid))
+            return diagnostics;
+
+        var landingZones = 0;
+        if (TryFindNavigationComputer(shuttleUid, out var computer))
+            landingZones = CountLandingZoneCandidates(request, computer);
+
+        return $"{diagnostics}, landingZones:{landingZones}";
+    }
+
+    private int CountNavigationComputers(EntityUid shuttle)
+    {
+        var count = 0;
+        var query = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+        while (query.MoveNext(out _, out _, out var xform))
+        {
+            if (xform.GridUid == shuttle)
+                count++;
+        }
+
+        return count;
+    }
+
+    private int CountLandingZoneCandidates(
+        RMCERTRequest request,
+        Entity<DropshipNavigationComputerComponent> computer)
+    {
+        var count = 0;
+        EntityUid? sourceMap = null;
+        if (request.SourceEntity is { Valid: true } source && Exists(source))
+            sourceMap = Transform(source).MapUid;
+
+        var query = EntityQueryEnumerator<DropshipDestinationComponent>();
+        while (query.MoveNext(out var uid, out var dropshipDestination))
+        {
+            if (dropshipDestination.Ship != null)
+                continue;
+
+            if (sourceMap != null &&
+                Transform(uid).MapUid != sourceMap)
+            {
+                continue;
+            }
+
+            if (!_dropship.CanUseDestination(computer, uid, out _))
+                continue;
+
+            count++;
+        }
+
+        return count;
     }
 
     private void DirtyState()
