@@ -151,6 +151,12 @@ entities:
     - type: VehicleDriverSeat
       skills:
         all: {}
+    - type: RemoveComponents
+      components:
+      - type: Damageable
+      - type: Destructible
+      - type: Corrodible
+      - type: MeleeReceivedMultiplier
 - proto: VehicleVanBack1
   entities:
   - uid: 11

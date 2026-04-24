@@ -25,6 +25,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/vehicle_seats.rsi
     state: pilot_chair
+  - type: RemoveComponents
+    components:
+    - type: Damageable
 
 - type: entity
   parent: CMSeatBase
@@ -43,6 +46,12 @@
     skills:
       all:
         RMCSkillVehicles: 1
+  - type: RemoveComponents
+    components:
+    - type: Damageable
+    - type: Destructible
+    - type: Corrodible
+    - type: MeleeReceivedMultiplier
 
 - type: entity
   parent: CMSeatBase
@@ -100,6 +109,12 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
     state: armor_chair
+  - type: RemoveComponents
+    components:
+    - type: Damageable
+    - type: Destructible
+    - type: Corrodible
+    - type: MeleeReceivedMultiplier
 
 - type: entity
   parent: RMCSeatArmoredBase
@@ -220,6 +235,13 @@
     state: car_seat
     drawdepth: BelowMobs
   - type: RMCStrapNoDrawDepthChange
+  - type: RemoveComponents
+    components:
+    - type: Damageable
+    - type: Destructible
+    - type: Corrodible
+    - type: MeleeReceivedMultiplier
+
 
 - type: entity
   parent: RMCSeatHumveeBase

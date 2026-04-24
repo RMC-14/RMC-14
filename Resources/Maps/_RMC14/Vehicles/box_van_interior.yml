@@ -117,6 +117,12 @@ entities:
       pos: -0.5,1.5
       parent: 2
     - type: VehicleDriverSeat
+    - type: RemoveComponents
+      components:
+      - type: Damageable
+      - type: Destructible
+      - type: Corrodible
+      - type: MeleeReceivedMultiplier
 - proto: CMRandomPosterAny
   entities:
   - uid: 5
