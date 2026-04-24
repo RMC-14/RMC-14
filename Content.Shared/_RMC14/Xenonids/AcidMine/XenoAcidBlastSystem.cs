@@ -82,10 +82,16 @@ public sealed class XenoAcidBlastSystem : EntitySystem
 
         var coords = Transform(ent.Owner).Coordinates;
 
-        _audio.PlayPredicted(ent.Comp.ExplosionSound, coords, ent.Owner, ent.Comp.ExplosionSound.Params.WithVolume(-10f));
 
         if (!_net.IsClient)
+        {
+            _audio.PlayPredicted(ent.Comp.ExplosionSound,
+                coords,
+                ent.Owner,
+                ent.Comp.ExplosionSound.Params.WithVolume(-10f));
             PredictedSpawnAtPosition(ent.Comp.SmokeEffect, coords);
+        }
+
 
         var hits = ProcessBlastHits(ent);
 
@@ -143,6 +149,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
                 }
             }
         }
+
         return hits;
     }
 
@@ -188,25 +195,25 @@ public sealed class XenoAcidBlastSystem : EntitySystem
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
         }
 
-        if(ent.Comp.Empowered)
+        if (ent.Comp.Empowered)
             ApplyOrExtendAcid(ent, target);
     }
 
     private void ApplyOrExtendAcid(Entity<XenoAcidBlastComponent> ent, EntityUid target)
     {
-            if (TryComp(target, out UserAcidedComponent? existing))
-            {
-                existing.ExpiresAt += ent.Comp.AcidProlongDuration;
-                Dirty(target, existing);
-            }
-            else
-            {
-                var acided = EnsureComp<UserAcidedComponent>(target);
-                acided.Duration = ent.Comp.AcidDuration;
-                acided.Damage = ent.Comp.AcidDamage;
-                acided.ArmorPiercing = ent.Comp.AcidArmorPiercing;
-                Dirty(target, acided);
-            }
+        if (TryComp(target, out UserAcidedComponent? existing))
+        {
+            existing.ExpiresAt += ent.Comp.AcidProlongDuration;
+            Dirty(target, existing);
+        }
+        else
+        {
+            var acided = EnsureComp<UserAcidedComponent>(target);
+            acided.Duration = ent.Comp.AcidDuration;
+            acided.Damage = ent.Comp.AcidDamage;
+            acided.ArmorPiercing = ent.Comp.AcidArmorPiercing;
+            Dirty(target, acided);
+        }
     }
 
     private void RefreshCooldowns(EntityUid xeno, int hits, XenoAcidBlastComponent blast)
