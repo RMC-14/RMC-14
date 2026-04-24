@@ -814,6 +814,12 @@ public sealed class RMCERTSystem : EntitySystem
             spawned = Spawn(slot.GhostRoleEntity, coordinates);
         }
 
+        if (TryComp(spawned, out GhostRoleComponent? ghostRole))
+        {
+            ghostRole.MindRoles.Clear();
+            Dirty(spawned, ghostRole);
+        }
+
         var member = EnsureComp<RMCERTMemberComponent>(spawned);
         member.RequestId = request.Id;
         member.Call = call.ID;
