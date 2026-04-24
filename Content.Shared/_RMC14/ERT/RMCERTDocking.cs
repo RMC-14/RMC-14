@@ -15,8 +15,8 @@ public enum RMCERTShuttleDockingClass
 /// </summary>
 public static class RMCERTDocking
 {
-    private static readonly string[] StandardDockClasses = ["internal"];
-    private static readonly string[] SmallDockClasses = ["internal", "external_side"];
+    private static readonly string[] StandardDockClasses = ["internal", "external_side"];
+    private static readonly string[] SmallDockClasses = ["internal"];
     private static readonly string[] BigDockClasses = ["internal", "external_side", "external_hangar"];
 
     /// <summary>

@@ -56,7 +56,7 @@ public sealed partial class DropshipNavigationComputerComponent : Component
     public bool RequiresERTLandingZone;
 
     // Defines which class of emergency berth this shuttle may use.
-    [DataField]
+    [DataField("ertDockingClass")]
     public RMCERTShuttleDockingClass ERTDockingClass = RMCERTShuttleDockingClass.Standard;
 
     // Optional explicit footprint used instead of the grid AABB for berth fit validation.

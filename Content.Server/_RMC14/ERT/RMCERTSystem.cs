@@ -406,7 +406,7 @@ public sealed class RMCERTSystem : EntitySystem
             return;
         }
 
-        var briefing = BuildMemberBriefing(request, call, ent.Comp);
+        var briefing = BuildMemberBriefing(request, call);
         if (string.IsNullOrWhiteSpace(briefing))
             return;
 
@@ -817,7 +817,6 @@ public sealed class RMCERTSystem : EntitySystem
         if (TryComp(spawned, out GhostRoleComponent? ghostRole))
         {
             ghostRole.MindRoles.Clear();
-            Dirty(spawned, ghostRole);
         }
 
         var member = EnsureComp<RMCERTMemberComponent>(spawned);
@@ -1283,6 +1282,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (!TryFindLandingZone(request, computer, out var destination))
         {
+            LogLandingZoneDiagnostics(request, computer);
             FailRequest(request, Loc.GetString("rmc-ert-error-no-landing-zone"));
             return false;
         }
@@ -1563,7 +1563,7 @@ public sealed class RMCERTSystem : EntitySystem
         return RMCERTLoc.GetSource(request.Source);
     }
 
-    private string BuildMemberBriefing(RMCERTRequest request, RMCERTCallPrototype call, RMCERTMemberComponent member)
+    private string BuildMemberBriefing(RMCERTRequest request, RMCERTCallPrototype call)
     {
         if (call.Objectives.Count == 0 &&
             call.Features.Count == 0 &&
@@ -1598,8 +1598,6 @@ public sealed class RMCERTSystem : EntitySystem
             }
         }
 
-        var roleName = call.Roles.FirstOrDefault(role => role.Id == member.Role)?.Name ?? member.Role;
-        builder.AppendLine(Loc.GetString("rmc-ert-briefing-role", ("role", roleName)));
         return builder.ToString().TrimEnd();
     }
 
@@ -1813,6 +1811,75 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         return count;
+    }
+
+    private void LogLandingZoneDiagnostics(
+        RMCERTRequest request,
+        Entity<DropshipNavigationComputerComponent> computer)
+    {
+        EntityUid? sourceMap = null;
+        if (request.SourceEntity is { Valid: true } source && Exists(source))
+            sourceMap = Transform(source).MapUid;
+
+        var computerXform = Transform(computer);
+        var builder = new StringBuilder();
+        builder.Append($"ERT request {request.Id} has no valid landing zone. ");
+        builder.Append($"call:{request.SelectedCall?.Id ?? "none"}, ");
+        builder.Append($"source:{FormatEntity(request.SourceEntity)}, ");
+        builder.Append($"sourceMap:{FormatEntity(sourceMap)}, ");
+        builder.Append($"computer:{ToPrettyString(computer.Owner)}, ");
+        builder.Append($"computerMap:{FormatEntity(computerXform.MapUid)}, ");
+        builder.Append($"shuttle:{FormatEntity(computerXform.GridUid)}, ");
+        builder.Append($"class:{computer.Comp.ERTDockingClass}, ");
+        builder.Append($"bounds:{FormatNullable(computer.Comp.DockingBounds)}, ");
+        builder.Append($"allowedTags:[{string.Join(", ", computer.Comp.AllowedERTLandingTags)}], ");
+        builder.Append($"deniedTags:[{string.Join(", ", computer.Comp.DeniedERTLandingTags)}]");
+
+        var total = 0;
+        var accepted = 0;
+        var rejected = 0;
+        var query = EntityQueryEnumerator<DropshipDestinationComponent>();
+        while (query.MoveNext(out var uid, out var dropshipDestination))
+        {
+            total++;
+            var reasons = new List<string>();
+            var destinationXform = Transform(uid);
+            if (dropshipDestination.Ship is { } occupiedBy)
+                reasons.Add($"occupiedBy={FormatEntity(occupiedBy)}");
+
+            if (sourceMap != null && destinationXform.MapUid != sourceMap)
+                reasons.Add($"mapMismatch destinationMap={FormatEntity(destinationXform.MapUid)} sourceMap={FormatEntity(sourceMap)}");
+
+            if (!_dropship.CanUseDestination(computer, uid, out var reason))
+                reasons.Add($"dropshipRule={reason}");
+
+            if (reasons.Count == 0)
+            {
+                accepted++;
+                continue;
+            }
+
+            rejected++;
+            var meta = MetaData(uid);
+            var prototype = meta.EntityPrototype?.ID ?? "none";
+            var landingZone = TryComp(uid, out RMCERTLandingZoneComponent? zone)
+                ? $"landingZone enabled:{zone.Enabled} ertOnly:{zone.ERTOnly} classes:[{string.Join(", ", zone.DockClasses)}] tags:[{string.Join(", ", zone.Tags)}]"
+                : "landingZone:none";
+
+            builder.AppendLine();
+            builder.Append($" - rejected {ToPrettyString(uid)} proto:{prototype} map:{FormatEntity(destinationXform.MapUid)} ");
+            builder.Append($"dockBounds:{FormatNullable(dropshipDestination.DockBounds)} ship:{FormatEntity(dropshipDestination.Ship)} ");
+            builder.Append($"{landingZone} reason:{string.Join("; ", reasons)}");
+        }
+
+        builder.AppendLine();
+        builder.Append($"Landing zone totals: total:{total}, accepted:{accepted}, rejected:{rejected}");
+        Log.Warning(builder.ToString());
+    }
+
+    private static string FormatNullable(object? value)
+    {
+        return value?.ToString() ?? "null";
     }
 
     private void DirtyState()

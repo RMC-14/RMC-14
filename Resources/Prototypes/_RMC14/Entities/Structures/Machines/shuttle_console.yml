@@ -46,7 +46,7 @@
     hijackable: false
     requiresERTLandingZone: true
     ertDockingClass: Standard
-    dockingBounds: "-3.5,-8,3.5,6"
+    dockingBounds: "-4.5,-9,4.5,7"
 
 - type: entity
   parent: CMComputerDropshipNavigationERT
@@ -55,7 +55,7 @@
   components:
   - type: DropshipNavigationComputer
     ertDockingClass: Small
-    dockingBounds: "-4.5,-9,4.5,7"
+    dockingBounds: "-3.5,-8,3.5,6"
 
 - type: entity
   parent: CMComputerDropshipNavigationERT
