@@ -9,6 +9,9 @@
   "states": [
     {
       "name": "coffee_empty_on"
+    },
+    {
+      "name": "coffee_cup_generic"
     }
   ]
 }

@@ -164,7 +164,8 @@
 
 - type: entity
   parent: Smoke
-  id: RMCSmokeFireSentry
+  id: RMCSmokePhosphorusNoSpread
+  categories: [ HideSpawnMenu ]
   components:
   - type: Transform
     anchored: true
@@ -178,13 +179,60 @@
     tags:
     - HideContextMenu
   - type: Appearance
-  - type: ActiveEdgeSpreader
-  - type: EdgeSpreader
-    id: RMCSmokeAcid
-  - type: EvenSmoke
-    spawn: RMCSmoke
-    range: 1
   - type: DeleteOnExplosion
+  - type: RMCIgniteOnCollide
+    maxStacks: 20 #TODO make this 45 after adding fire stacks over time works.
+    duration: 5
+    burnColor: "#EE6515"
+    tileDamage:
+      types:
+        Heat: 0.5
+  - type: EdgeSpreader
+    id: Smoke
+
+- type: entity
+  parent: RMCSmokePhosphorusNoSpread
+  id: RMCSmokeFireSentry
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokePhosphorusNoSpread
+    initialSpread: 1
+    range: 1
+
+- type: entity
+  parent: RMCSmokePhosphorusNoSpread
+  id: RMCSmokePhosphorusNoSpreadStrong
+  components:
+  - type: TimedDespawn
+    lifetime: 3
+
+- type: entity
+  parent: RMCSmokePhosphorusNoSpreadStrong
+  id: RMCSmokePhosphorus
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokePhosphorusNoSpreadStrong
+    initialSpread: 3
+    range: 3
+
+- type: entity
+  parent: RMCSmokePhosphorusNoSpread
+  id: RMCSmokePhosphorusNoSpreadWeak
+  components:
+  - type: TimedDespawn
+    lifetime: 2
+  - type: RMCIgniteOnCollide
+    maxStacks: 15 #TODO make this 45 after adding fire stacks over time works.
+    duration: 5
+
+- type: entity
+  parent: RMCSmokePhosphorusNoSpreadWeak
+  id: RMCSmokePhosphorusWeak
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokePhosphorusNoSpreadWeak
+    initialSpread: 3
+    range: 3
 
 - type: entity
   parent: CMGrenadeHighExplosive
@@ -300,6 +348,40 @@
       path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
 
 - type: entity
+  parent:
+  - RMCM40DPTags
+  - CMGrenadeBase
+  id: RMCGrenadeWhitePhosphorus
+  name: 30mm WPDP white phosphorus grenade
+  description: The 30mm WPDP is a small, but powerful phosphorus grenade. It is set to detonate in 2 seconds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40wpdp.rsi
+  - type: OnUseTimerTrigger
+    delay: 2
+    beepSound: null
+  - type: CMVocalizeTrigger
+  - type: DeleteOnTrigger
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/Smoke-grenade.ogg
+  - type: SpawnOnTrigger
+    proto: RMCSmokePhosphorusWeak
+  - type: SoundOnTrigger
+    sound: /Audio/Effects/smoke.ogg
+
+- type: entity
+  parent: RMCGrenadeWhitePhosphorus
+  id: RMCGrenadeWhitePhosphorusCompound
+  name: 30mm CCDP chemical compound grenade
+  description: The 30mm CCDP is a small, but powerful chemical compound grenade, similar in effect to WPDP. Word on the block says that the CCDP doesn't actually release White Phosphorus, but some other chemical developed in We-Ya labs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/ied.rsi
+  - type: SpawnOnTrigger
+    proto: RMCSmokePhosphorus
+
+- type: entity
   parent: RMCGrenadeIncendiary
   id: RMCGrenadeMolotov
   name: improvised firebomb
@@ -335,7 +417,7 @@
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 1 # TODO RMC14 shrapnel lag
+    capacity: 48
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -397,7 +479,6 @@
     - LauncherCompatibleGrenade
     - RMCGrenade20mm
 
-
 - type: entity
   id: CMExplosionEffectGrenade
   categories: [ HideSpawnMenu ]
@@ -455,6 +536,9 @@
 
 - type: Tag
   id: RMCGrenadeHEFA
+
+- type: Tag
+  id: RMCGrenadeWPDP
 
 - type: Tag
   id: RMCGrenadeM40

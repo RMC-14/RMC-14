@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/11/2026 23:28:53
-  entityCount: 563
+  time: 04/20/2026 03:10:03
+  entityCount: 562
 maps: []
 grids:
 - 1
@@ -794,13 +794,6 @@ entities:
     components:
     - type: Transform
       pos: 23.645504,12.51382
-      parent: 1
-- proto: CMSpawnPointSurvivor
-  entities:
-  - uid: 520
-    components:
-    - type: Transform
-      pos: 4.5,13.5
       parent: 1
 - proto: CMStampApproved
   entities:
@@ -1958,6 +1951,8 @@ entities:
     - type: Transform
       pos: 9.5,15.5
       parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: RMCArmorVest
   entities:
   - uid: 345

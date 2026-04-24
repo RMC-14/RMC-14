@@ -178,8 +178,8 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
-#  - type: RefillableByBulletBox no bullet box yet
-#    bulletType: RMCBoxBulletsRifle
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleType71
 
 - type: entity
   parent: RMCMagazineRifleType71

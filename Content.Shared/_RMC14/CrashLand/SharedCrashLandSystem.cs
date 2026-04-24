@@ -1,16 +1,22 @@
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Systems;
 using Content.Shared.ParaDrop;
 using Content.Shared.Physics;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Throwing;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -59,6 +65,13 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         SubscribeLocalEvent<DeleteCrashLandableOnTouchComponent, StartCollideEvent>(OnDeleteCrashLandableOnTouchStartCollide);
 
         SubscribeLocalEvent<CrashLandingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
+        SubscribeLocalEvent<CrashLandingComponent, RMCIgniteAttemptEvent>(OnIgniteAttempt);
+        SubscribeLocalEvent<CrashLandingComponent, GettingAttackedAttemptEvent>(OnGettingAttacked);
+        SubscribeLocalEvent<CrashLandingComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
+        SubscribeLocalEvent<CrashLandingComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
+        SubscribeLocalEvent<CrashLandingComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
+        SubscribeLocalEvent<CrashLandingComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
+        SubscribeLocalEvent<CrashLandingComponent, NeurotoxinInjectAttemptEvent>(OnNeurotoxinInjectAttempt);
 
         Subs.CVar(_config, RMCCVars.RMCFTLCrashLand, v => _crashLandEnabled = v, true);
     }
@@ -114,6 +127,41 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
     private void OnUpdateCanMove(Entity<CrashLandingComponent> ent, ref UpdateCanMoveEvent args)
     {
         args.Cancel();
+    }
+
+    private void OnIgniteAttempt(Entity<CrashLandingComponent> ent, ref RMCIgniteAttemptEvent args)
+    {
+        args.Cancel();
+    }
+
+    private void OnAttemptMobCollide(Entity<CrashLandingComponent> ent, ref AttemptMobCollideEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnAttemptMobTargetCollide(Entity<CrashLandingComponent> ent, ref AttemptMobTargetCollideEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnGettingAttacked(Entity<CrashLandingComponent> ent, ref GettingAttackedAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnThrowPushbackAttempt(Entity<CrashLandingComponent> ent, ref ThrowPushbackAttemptEvent args)
+    {
+        args.Cancel();
+    }
+
+    private void OnBeforeDamageChanged(Entity<CrashLandingComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnNeurotoxinInjectAttempt(Entity<CrashLandingComponent> ent, ref NeurotoxinInjectAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private bool ShouldCrash(EntityUid crashing, EntityUid oldParent)
@@ -236,6 +284,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         var skyFalling = EnsureComp<SkyFallingComponent>(crashLandable);
         skyFalling.RemainingTime = crashLandable.Comp.SkyFallDuration;
         skyFalling.TargetCoordinates = location;
+        skyFalling.DropSound = crashLandable.Comp.DropSound;
         Dirty(crashLandable, skyFalling);
 
         var crashLanding = EnsureComp<CrashLandingComponent>(crashLandable);
@@ -252,6 +301,18 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
         var ev = new CrashLandStartedEvent();
         RaiseLocalEvent(crashLandable, ref ev);
+    }
+
+    public void DoCrashLand(EntityUid crashing, EntityCoordinates crashLocation, float skyFallDuration = 1.5f, float crashDuration = 0.75f, bool doDamage = true, SoundSpecifier? dropSound = null, SoundSpecifier? crashSound = null)
+    {
+        var crashLandable = EnsureComp<CrashLandableComponent>(crashing);
+        crashLandable.CrashSound = crashSound;
+        crashLandable.SkyFallDuration = skyFallDuration;
+        crashLandable.CrashDuration = crashDuration;
+        crashLandable.DropSound = dropSound;
+        Dirty(crashing, crashLandable);
+
+        TryCrashLand(crashing, doDamage, crashLocation);
     }
 
     public override void Update(float frameTime)
