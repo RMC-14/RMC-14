@@ -189,8 +189,24 @@
   description: "The actual firearm in the Support Gun System. Essentially a heavy, mobile machinegun.\n\nThis model appears to have been overtuned, packing a greater punch than usual. Watch where you point this thing."
   suffix: PVE, Overtuned
   components:
-  - type: GunDamageModifier
-    multiplier: 1.5
+  - type: GunToggleableAmmo
+    settings:
+    - damage:
+        types:
+          Piercing: 60
+      armorPiercing: 10
+      name: rmc-toggleable-ammo-highly-precise
+      icon:
+        sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+        state: ammo_swap_normal
+    - damage:
+        types:
+          Piercing: 50
+      armorPiercing: 40
+      name: rmc-toggleable-ammo-armor-shredding
+      icon:
+        sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+        state: ammo_swap_ap
 
 - type: entity
   parent: RMCSmartGunPVENoCamo
