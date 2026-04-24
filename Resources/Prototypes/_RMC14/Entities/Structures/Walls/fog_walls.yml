@@ -44,6 +44,15 @@
 
 - type: entity
   parent: RMCFogWall25
+  id: RMCFogWall30
+  suffix: 30 minutes
+  components:
+  - type: TimedDespawn
+    lifetime: 1800
+
+
+- type: entity
+  parent: RMCFogWall25
   id: RMCFogWall15
   suffix: 15 minutes
   components:
