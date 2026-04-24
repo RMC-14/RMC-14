@@ -14,6 +14,7 @@
     drawdepth: Overdoors
   - type: Clickable
   - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
   - type: VehicleViewport
   - type: RemoveComponents
     components:
@@ -54,6 +55,7 @@
     arc: 360
   - type: Clickable
   - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
   - type: VehicleViewport
   - type: RemoveComponents
     components:

@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
+using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -86,6 +87,12 @@ public sealed class VehicleSystem : EntitySystem
             return;
         }
 
+        if (HasComp<GhostComponent>(args.User))
+        {
+            args.Handled = TryEnter(ent, args.User, entryIndex);
+            return;
+        }
+
         var interior = EnsureComp<VehicleInteriorComponent>(ent.Owner);
 
         if (!interior.EntryLocks.Add(entryIndex))
@@ -121,10 +128,13 @@ public sealed class VehicleSystem : EntitySystem
         if (!EnsureInterior(ent, out var interior))
             return false;
 
-        PruneTrackedOccupants(ent.Owner, interior);
+        var isGhost = HasComp<GhostComponent>(user);
+
+        if (!isGhost)
+            PruneTrackedOccupants(ent.Owner, interior);
 
         var isXeno = HasComp<XenoComponent>(user);
-        if (isXeno)
+        if (!isGhost && isXeno)
         {
             if (ent.Comp.MaxXenos > 0 &&
                 !interior.Xenos.Contains(user) &&
@@ -156,14 +166,16 @@ public sealed class VehicleSystem : EntitySystem
                 var entityCoords = new EntityCoordinates(parent, interiorCoord);
                 targetMapCoords = _transform.ToMapCoordinates(entityCoords);
                 _rmcTeleporter.HandlePulling(user, targetMapCoords);
-                TrackOccupant(user, ent.Owner, isXeno);
+                if (!isGhost)
+                    TrackOccupant(user, ent.Owner, isXeno);
                 return true;
             }
         }
 
         targetMapCoords = _transform.ToMapCoordinates(coords);
         _rmcTeleporter.HandlePulling(user, targetMapCoords);
-        TrackOccupant(user, ent.Owner, isXeno);
+        if (!isGhost)
+            TrackOccupant(user, ent.Owner, isXeno);
         return true;
     }
 
@@ -320,6 +332,12 @@ public sealed class VehicleSystem : EntitySystem
             return;
         }
 
+        if (HasComp<GhostComponent>(args.User))
+        {
+            args.Handled = TryExit(ent, args.User);
+            return;
+        }
+
         ent.Comp.PendingExit = true;
 
         var doAfter = new DoAfterArgs(EntityManager, args.User, enter.ExitDoAfter, new VehicleExitDoAfterEvent(), ent.Owner)
@@ -343,9 +361,11 @@ public sealed class VehicleSystem : EntitySystem
         if (ent.Comp.EntryPoints.Count == 0)
             return true;
 
-        var bypassEntry = TryComp(ent.Owner, out HardpointIntegrityComponent? frameIntegrity) &&
-                          frameIntegrity.BypassEntryOnZero &&
-                          frameIntegrity.Integrity <= 0f;
+        var bypassEntry =
+            HasComp<GhostComponent>(user) ||
+            TryComp(ent.Owner, out HardpointIntegrityComponent? frameIntegrity) &&
+            frameIntegrity.BypassEntryOnZero &&
+            frameIntegrity.Integrity <= 0f;
 
         var vehicleXform = Transform(ent.Owner);
         var userXform = Transform(user);
@@ -717,6 +737,9 @@ public sealed class VehicleSystem : EntitySystem
 
     private bool IsEntryBlockedByLock(EntityUid vehicle, EntityUid user)
     {
+        if (HasComp<GhostComponent>(user))
+            return false;
+
         if (!TryComp(vehicle, out VehicleLockComponent? vehicleLock) || !vehicleLock.Locked)
             return false;
 
@@ -725,6 +748,9 @@ public sealed class VehicleSystem : EntitySystem
 
     private bool IsExitBlockedByLock(EntityUid vehicle, EntityUid user)
     {
+        if (HasComp<GhostComponent>(user))
+            return false;
+
         if (!TryComp(vehicle, out VehicleLockComponent? vehicleLock) || !vehicleLock.Locked)
             return false;
 

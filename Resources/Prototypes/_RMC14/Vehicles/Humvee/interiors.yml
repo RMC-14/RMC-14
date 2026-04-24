@@ -152,6 +152,8 @@
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
+  - type: VehicleExit
+  - type: RMCIgnoreGhostInteractionLimits
 
 - type: entity
   parent: VehicleHumveeDoorBase
@@ -159,6 +161,8 @@
   components:
   - type: Sprite
     state: exit_door1
+  - type: VehicleExit
+  - type: RMCIgnoreGhostInteractionLimits
 
 - type: entity
   parent: VehicleHumveeDoorBase

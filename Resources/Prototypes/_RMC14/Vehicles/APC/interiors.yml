@@ -298,6 +298,8 @@
   components:
   - type: Sprite
     state: exit_door
+  - type: VehicleExit
+  - type: RMCIgnoreGhostInteractionLimits
 
 - type: entity
   parent: VehicleAPCWallBase

@@ -96,6 +96,7 @@
     bodyType: Static
     canCollide: false
   - type: VehicleExit
+  - type: RMCIgnoreGhostInteractionLimits
 
 - type: entity
   parent: VehicleSPPTankInteriorBase

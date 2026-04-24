@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.CombatMode;
+using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.ActionBlocker;
@@ -434,17 +435,22 @@ namespace Content.Shared.Interaction
                 return;
             }
 
-            if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, target))
+            var ignoreGhostInteractionLimits =
+                target != null &&
+                HasComp<GhostComponent>(user) &&
+                HasComp<RMCIgnoreGhostInteractionLimitsComponent>(target.Value);
+
+            if (checkCanInteract && !ignoreGhostInteractionLimits && !_actionBlockerSystem.CanInteract(user, target))
                 return;
 
             // Check if interacted entity is in the same container, the direct child, or direct parent of the user.
             // Also checks if the item is accessible via some storage UI (e.g., open backpack)
-            if (checkAccess && target != null && !IsAccessible(user, target.Value))
+            if (checkAccess && target != null && !ignoreGhostInteractionLimits && !IsAccessible(user, target.Value))
                 return;
 
             var inRangeUnobstructed = target == null
                 ? !checkAccess || InRangeUnobstructed(user, coordinates)
-                : !checkAccess || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
+                : !checkAccess || ignoreGhostInteractionLimits || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
 
             // empty-hand interactions
             // combat mode hand interactions will always be true here -- since
@@ -1192,15 +1198,19 @@ namespace Content.Shared.Interaction
             if (checkUseDelay && delayComponent != null && _useDelay.IsDelayed((used, delayComponent)))
                 return false;
 
-            if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, used))
+            var ignoreGhostInteractionLimits =
+                HasComp<GhostComponent>(user) &&
+                HasComp<RMCIgnoreGhostInteractionLimitsComponent>(used);
+
+            if (checkCanInteract && !ignoreGhostInteractionLimits && !_actionBlockerSystem.CanInteract(user, used))
                 return false;
 
-            if (checkAccess && !InRangeUnobstructed(user, used))
+            if (checkAccess && !ignoreGhostInteractionLimits && !InRangeUnobstructed(user, used))
                 return false;
 
             // Check if interacted entity is in the same container, the direct child, or direct parent of the user.
             // This is bypassed IF the interaction happened through an item slot (e.g., backpack UI)
-            if (checkAccess && !IsAccessible(user, used))
+            if (checkAccess && !ignoreGhostInteractionLimits && !IsAccessible(user, used))
                 return false;
 
             complexInteractions ??= _actionBlockerSystem.CanComplexInteract(user);
