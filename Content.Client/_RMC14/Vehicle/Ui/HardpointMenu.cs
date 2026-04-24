@@ -18,7 +18,6 @@ using Robust.Shared.Input;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Log;
 using Robust.Shared.Graphics.RSI;
 
 namespace Content.Client._RMC14.Vehicle.Ui;
@@ -33,11 +32,6 @@ public sealed partial class HardpointMenu : FancyWindow
     private float _vehicleSpin;
     private const float VehicleSpinSpeed = MathHelper.TwoPi / 6f;
     private const float PixelsPerMeter = 32f;
-    private const float DebugLogInterval = 0.5f;
-    private const float DebugOffsetEpsilon = 0.001f;
-    private float _debugTimer;
-    private Direction? _lastDebugDir;
-    private readonly Dictionary<EntityUid, Vector2> _lastOverlayOffsets = new();
     private readonly List<PreviewOverlay> _previewOverlays = new();
 
     private sealed class PreviewOverlay
@@ -82,7 +76,6 @@ public sealed partial class HardpointMenu : FancyWindow
 
         TrySetVehicleIcon();
         SpinVehicleIcon(args.DeltaSeconds);
-        _debugTimer += args.DeltaSeconds;
     }
 
     private void SpinVehicleIcon(float frameTime)
@@ -410,11 +403,6 @@ public sealed partial class HardpointMenu : FancyWindow
                 Rsi = overlay.Rsi,
                 DirectionCount = dirCount
             });
-
-            Logger.Log(LogLevel.Info,
-                $"[rmc-hardpoint-preview] overlay state='{overlay.State}' rsi='{overlay.Rsi}' order={overlay.Order} " +
-                $"offsetBase={overlay.Offset.Base} dirOffsets=({overlay.Offset.North},{overlay.Offset.East},{overlay.Offset.South},{overlay.Offset.West}) " +
-                $"useDir={overlay.Offset.UseDirectional}");
         }
 
         UpdatePreviewOffsets(VehicleIcon.OverrideDirection ?? Direction.South);
@@ -472,29 +460,6 @@ public sealed partial class HardpointMenu : FancyWindow
             return;
 
         var spriteSystem = _entManager.System<SpriteSystem>();
-        var canLog = _debugTimer >= DebugLogInterval;
-        var logged = 0;
-
-        if (canLog && (!_lastDebugDir.HasValue || _lastDebugDir.Value != dir))
-        {
-            if (VehicleEntity is { } vehicle && _entManager.TryGetComponent(vehicle, out SpriteComponent? baseSprite))
-            {
-                var layerOffset = Vector2.Zero;
-                var layerState = string.Empty;
-                var layerDirs = 0;
-                if (baseSprite.AllLayers.FirstOrDefault() is SpriteComponent.Layer layer)
-                {
-                    layerOffset = layer.Offset;
-                    layerState = layer.State.ToString();
-                    layerDirs = spriteSystem.LayerGetDirectionCount((vehicle, baseSprite), 0);
-                }
-
-                Logger.Log(LogLevel.Info,
-                    $"[rmc-hardpoint-preview] base dir={dir} vehicleOffset={baseSprite.Offset} " +
-                    $"layer0Offset={layerOffset} layer0State='{layerState}' layer0Dirs={layerDirs} " +
-                    $"spriteOffset={VehicleIcon.SpriteOffset}");
-            }
-        }
 
         foreach (var overlay in _previewOverlays)
         {
@@ -503,35 +468,6 @@ public sealed partial class HardpointMenu : FancyWindow
             var offsetPixels = GetOffsetPixels(overlay.Offset, effectiveDir);
             var offsetMeters = offsetPixels / PixelsPerMeter;
             spriteSystem.SetOffset((overlay.Entity, overlay.Sprite), offsetMeters);
-
-            if (!canLog)
-                continue;
-
-            var shouldLog = !_lastDebugDir.HasValue || _lastDebugDir.Value != dir;
-            if (!shouldLog && _lastOverlayOffsets.TryGetValue(overlay.Entity, out var last))
-                shouldLog = (offsetMeters - last).LengthSquared() > DebugOffsetEpsilon * DebugOffsetEpsilon;
-            else if (!shouldLog)
-                shouldLog = true;
-
-            if (!shouldLog)
-                continue;
-
-            Logger.Log(LogLevel.Info,
-                $"[rmc-hardpoint-preview] offset dir={dir} effectiveDir={effectiveDir} dirs={overlay.DirectionCount} " +
-                $"overlay='{overlay.State}' rsi='{overlay.Rsi}' " +
-                $"offsetPixels={offsetPixels} offsetMeters={offsetMeters}");
-
-            _lastOverlayOffsets[overlay.Entity] = offsetMeters;
-            logged++;
-
-            if (logged >= 3)
-                break;
-        }
-
-        if (logged > 0)
-        {
-            _debugTimer = 0f;
-            _lastDebugDir = dir;
         }
     }
 
@@ -592,8 +528,6 @@ public sealed partial class HardpointMenu : FancyWindow
         }
 
         _previewOverlays.Clear();
-        _lastOverlayOffsets.Clear();
-        _lastDebugDir = null;
     }
 
     protected override void Dispose(bool disposing)
