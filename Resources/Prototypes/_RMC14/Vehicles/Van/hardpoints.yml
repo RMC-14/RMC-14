@@ -16,6 +16,6 @@
     damageMultiplier: 0.15
     repairRate: 0.0165
   - type: HardpointIntegrity
-    maxIntegrity: 500
+    maxIntegrity: 250
   - type: VehicleWheelItem
 
