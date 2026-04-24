@@ -134,6 +134,7 @@ rmc-dropship-ert-destination-invalid-team = This destination is not valid for th
 rmc-dropship-ert-destination-blocked-team = This destination is blocked for the current response team.
 rmc-dropship-ert-berth-occupied = This berth is already occupied.
 rmc-dropship-ert-invalid-docking-footprint = The shuttle does not have a valid docking footprint.
+rmc-dropship-ert-no-compatible-docking-port = No compatible ERT docking port is available for this shuttle.
 rmc-dropship-ert-clearance-port = This shuttle extends past the port-side docking clearance ({$shuttleSize} required, {$berthSize} available).
 rmc-dropship-ert-clearance-starboard = This shuttle extends past the starboard docking clearance ({$shuttleSize} required, {$berthSize} available).
 rmc-dropship-ert-clearance-aft = This shuttle extends past the aft docking clearance ({$shuttleSize} required, {$berthSize} available).

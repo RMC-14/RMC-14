@@ -37,6 +37,8 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
+using Robust.Shared.Maths;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -50,6 +52,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DoorSystem _door = default!;
+    [Dependency] private readonly DockingSystem _docking = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
@@ -80,6 +83,36 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private bool _hijack;
 
     private const float DepartureLocationSearchRange = 12;
+
+    public bool CanUseDestinationForShuttle(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        out string reason)
+    {
+        if (!CanUseDestination(computer, destination, out reason))
+            return false;
+
+        if (!computer.Comp.RequiresERTLandingZone ||
+            !TryComp(destination, out DockingComponent? destinationDock))
+        {
+            return true;
+        }
+
+        if (TryComp(destination, out DropshipDestinationComponent? destinationComp) &&
+            Transform(computer).GridUid is { } currentGrid &&
+            destinationComp.Ship == currentGrid)
+        {
+            return true;
+        }
+
+        return TryGetDockingTravelTarget(
+            computer,
+            destination,
+            destinationDock,
+            out _,
+            out _,
+            out reason);
+    }
 
     public override void Initialize()
     {
@@ -405,12 +438,31 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         var newDestination = CompOrNull<DropshipDestinationComponent>(destination);
+        EntityCoordinates? dockingCoordinates = null;
+        Angle? dockingAngle = null;
+
         if (!hijack &&
             newDestination != null &&
-            !CanUseDestination(computer, destination, out var reason))
+            !CanUseDestinationForShuttle(computer, destination, out var reason))
         {
             Log.Warning($"{ToPrettyString(user)} tried to launch {ToPrettyString(computer)} to invalid destination {ToPrettyString(destination)} ({reason})");
             return false;
+        }
+
+        if (!hijack &&
+            newDestination != null &&
+            computer.Comp.RequiresERTLandingZone &&
+            newDestination.Ship != dropshipId &&
+            TryComp(destination, out DockingComponent? destinationDock))
+        {
+            if (!TryGetDockingTravelTarget(computer, destination, destinationDock, out var travelCoordinates, out var travelAngle, out reason))
+            {
+                Log.Warning($"{ToPrettyString(user)} tried to launch {ToPrettyString(computer)} to invalid docking destination {ToPrettyString(destination)} ({reason})");
+                return false;
+            }
+
+            dockingCoordinates = travelCoordinates;
+            dockingAngle = travelAngle;
         }
 
         if (dropship.Destination == destination)
@@ -490,8 +542,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         Dirty(dropshipId.Value, dropship);
 
         var destTransform = Transform(destination);
-        var destCoords = _transform.GetMoverCoordinates(destination, destTransform);
-        var rotation = destTransform.LocalRotation;
+        var destCoords = dockingCoordinates ?? _transform.GetMoverCoordinates(destination, destTransform);
+        var rotation = dockingAngle ?? destTransform.LocalRotation;
 
         if (TryComp(dropshipId, out PhysicsComponent? physics))
         {
@@ -532,6 +584,55 @@ public sealed class DropshipSystem : SharedDropshipSystem
             $"{ToPrettyString(user):player} {(hijack ? "hijacked" : "launched")} {ToPrettyString(dropshipId):dropship} to {ToPrettyString(destination):destination}");
 
         return true;
+    }
+
+    private bool TryGetDockingTravelTarget(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        DockingComponent destinationDock,
+        out EntityCoordinates coordinates,
+        out Angle angle,
+        out string reason)
+    {
+        coordinates = default;
+        angle = default;
+
+        if (Transform(computer).GridUid is not { } shuttle)
+        {
+            reason = Loc.GetString("rmc-dropship-ert-no-compatible-docking-port");
+            return false;
+        }
+
+        if (Transform(destination).GridUid is not { } targetGrid)
+        {
+            reason = Loc.GetString("rmc-dropship-ert-no-compatible-docking-port");
+            return false;
+        }
+
+        var shuttleDocks = _docking.GetDocks(shuttle)
+            .OrderBy(dock => dock.Owner.GetHashCode());
+
+        foreach (var shuttleDock in shuttleDocks)
+        {
+            var config = _docking.GetDockingConfig(
+                shuttle,
+                targetGrid,
+                shuttleDock.Owner,
+                shuttleDock.Comp,
+                destination,
+                destinationDock);
+
+            if (config == null)
+                continue;
+
+            coordinates = config.Coordinates;
+            angle = config.Angle;
+            reason = string.Empty;
+            return true;
+        }
+
+        reason = Loc.GetString("rmc-dropship-ert-no-compatible-docking-port");
+        return false;
     }
 
     protected override void RefreshUI(Entity<DropshipNavigationComputerComponent> computer)

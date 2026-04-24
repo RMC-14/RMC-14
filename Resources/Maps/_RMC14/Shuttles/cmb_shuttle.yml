@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 08/30/2025 14:03:48
-  entityCount: 87
+  entityCount: 88
 maps: []
 grids:
 - 2
@@ -706,5 +706,13 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 1.5,-3.5
+      parent: 2
+- proto: RMCERTShuttleDockingPort
+  entities:
+  - uid: 89
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,-7.5
       parent: 2
 ...

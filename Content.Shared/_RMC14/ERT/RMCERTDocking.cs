@@ -15,9 +15,9 @@ public enum RMCERTShuttleDockingClass
 /// </summary>
 public static class RMCERTDocking
 {
-    private static readonly string[] StandardDockClasses = ["internal", "external_side"];
-    private static readonly string[] SmallDockClasses = ["internal"];
-    private static readonly string[] BigDockClasses = ["internal", "external_side", "external_hangar"];
+    private static readonly string[] SmallDockClasses = ["internal", "external_side"];
+    private static readonly string[] StandardDockClasses = ["internal"];
+    private static readonly string[] BigDockClasses = ["external_hangar"];
 
     /// <summary>
     /// Returns the berth classes the shuttle may use for automatic routing and nav-console validation.

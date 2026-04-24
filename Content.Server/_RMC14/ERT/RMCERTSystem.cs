@@ -1342,7 +1342,7 @@ public sealed class RMCERTSystem : EntitySystem
                 continue;
             }
 
-            if (!_dropship.CanUseDestination(computer, uid, out _))
+            if (!_dropship.CanUseDestinationForShuttle(computer, uid, out _))
                 continue;
 
             candidates.Add(uid);
@@ -1804,7 +1804,7 @@ public sealed class RMCERTSystem : EntitySystem
                 continue;
             }
 
-            if (!_dropship.CanUseDestination(computer, uid, out _))
+            if (!_dropship.CanUseDestinationForShuttle(computer, uid, out _))
                 continue;
 
             count++;
@@ -1850,7 +1850,7 @@ public sealed class RMCERTSystem : EntitySystem
             if (sourceMap != null && destinationXform.MapUid != sourceMap)
                 reasons.Add($"mapMismatch destinationMap={FormatEntity(destinationXform.MapUid)} sourceMap={FormatEntity(sourceMap)}");
 
-            if (!_dropship.CanUseDestination(computer, uid, out var reason))
+            if (!_dropship.CanUseDestinationForShuttle(computer, uid, out var reason))
                 reasons.Add($"dropshipRule={reason}");
 
             if (reasons.Count == 0)

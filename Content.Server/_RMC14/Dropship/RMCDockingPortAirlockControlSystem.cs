@@ -1,0 +1,90 @@
+using Content.Server.Doors.Systems;
+using Content.Server.Shuttles.Events;
+using Content.Shared.Doors;
+using Content.Shared.Doors.Components;
+using Content.Shared.Tag;
+using Robust.Server.GameObjects;
+
+namespace Content.Server._RMC14.Dropship;
+
+public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
+{
+    [Dependency] private readonly DoorSystem _door = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<RMCDockingPortAirlockControlComponent, DockEvent>(OnDocked);
+        SubscribeLocalEvent<RMCDockingPortAirlockControlComponent, UndockEvent>(OnUndocked);
+    }
+
+    private void OnDocked(Entity<RMCDockingPortAirlockControlComponent> ent, ref DockEvent args)
+    {
+        if (ent.Comp.OpenOnDock)
+            SetAirlocks(ent, open: true);
+    }
+
+    private void OnUndocked(Entity<RMCDockingPortAirlockControlComponent> ent, ref UndockEvent args)
+    {
+        if (ent.Comp.CloseOnUndock)
+            SetAirlocks(ent, open: false);
+    }
+
+    private void SetAirlocks(Entity<RMCDockingPortAirlockControlComponent> ent, bool open)
+    {
+        var xform = Transform(ent);
+        var grid = xform.GridUid;
+        var tagged = new List<Entity<DoorComponent>>();
+        var fallback = new List<Entity<DoorComponent>>();
+
+        foreach (var door in _lookup.GetEntitiesInRange<DoorComponent>(xform.Coordinates, ent.Comp.SearchRadius))
+        {
+            if (door.Owner == ent.Owner ||
+                Transform(door.Owner).GridUid != grid)
+            {
+                continue;
+            }
+
+            if (ent.Comp.AirlockTags.Count == 0)
+            {
+                tagged.Add(door);
+                continue;
+            }
+
+            if (TryComp(door.Owner, out TagComponent? tags) &&
+                _tag.HasAnyTag(tags, ent.Comp.AirlockTags))
+            {
+                tagged.Add(door);
+                continue;
+            }
+
+            if (ent.Comp.FallbackToNearbyDoors)
+                fallback.Add(door);
+        }
+
+        var doors = tagged.Count > 0 ? tagged : fallback;
+        if (doors.Count == 0)
+        {
+            if (ent.Comp.WarnIfMissing)
+                Log.Warning($"RMC docking port {ToPrettyString(ent.Owner)} found no airlocks to {(open ? "open" : "close")} within {ent.Comp.SearchRadius} tiles.");
+
+            return;
+        }
+
+        foreach (var door in doors)
+        {
+            if (open)
+            {
+                if (door.Comp.State == DoorState.Closed)
+                    _door.TryOpen(door.Owner, door.Comp);
+            }
+            else if (door.Comp.State == DoorState.Open)
+            {
+                _door.TryClose(door.Owner, door.Comp);
+            }
+        }
+    }
+}

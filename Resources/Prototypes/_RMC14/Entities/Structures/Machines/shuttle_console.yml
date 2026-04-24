@@ -46,7 +46,7 @@
     hijackable: false
     requiresERTLandingZone: true
     ertDockingClass: Standard
-    dockingBounds: "-4.5,-9,4.5,7"
+    dockingBounds: "-3.5,-7,3.5,6"
 
 - type: entity
   parent: CMComputerDropshipNavigationERT
@@ -55,7 +55,7 @@
   components:
   - type: DropshipNavigationComputer
     ertDockingClass: Small
-    dockingBounds: "-3.5,-8,3.5,6"
+    dockingBounds: "-3,-5,3,4"
 
 - type: entity
   parent: CMComputerDropshipNavigationERT
@@ -277,95 +277,85 @@
     spawn: "/Maps/_RMC14/normandy.yml" # The actual Dropship files are private. These are debug versions to ensure tests pass.
 
 - type: entity
-  parent: CMDropshipDestination
-  id: RMCDropshipDestinationERTPort1
+  parent: MarkerBase
+  id: RMCERTDockingPort
+  name: ERT docking port
+  description: Defines the exact docking connector used by emergency response shuttles.
+  suffix: ERT
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Rotatable
+  - type: Sprite
+    sprite: _RMC14/Markers/docking_port.rsi
+    state: pinonfar
+    snapCardinals: false
+  - type: Docking
+
+- type: entity
+  parent: RMCERTDockingPort
+  id: RMCERTShuttleDockingPort
+  name: ERT shuttle docking port
+  description: Defines the exact docking connector on an emergency response shuttle.
+  suffix: ERT, Shuttle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/docking_port.rsi
+    state: pinonclose
+
+- type: entity
+  parent: RMCERTDockingPort
+  id: RMCERTDockingDestination
+  abstract: true
   name: emergency response dock
-  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
-  suffix: Port 1
+  description: Defines a valid docking location for emergency response shuttles aboard the warship.
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+  - type: FTLSmashImmune
+  - type: NoFTL
+
+- type: entity
+  parent: RMCERTDockingDestination
+  id: RMCERTDockingPortInternal
+  suffix: ERT, Internal
   components:
   - type: DropshipDestination
     dockBounds: "-4,-8.5,4,6.5"
   - type: RMCERTLandingZone
     dockClasses: [ internal ]
-    tags: [ mainship, ert, internal, port1, starboard ]
+    tags: [ mainship, ert, internal ]
 
 - type: entity
-  parent: CMDropshipDestination
-  id: RMCDropshipDestinationERTPort2
-  name: emergency response dock
-  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
-  suffix: Port 2
-  components:
-  - type: DropshipDestination
-    dockBounds: "-4,-8.5,4,6.5"
-  - type: RMCERTLandingZone
-    dockClasses: [ internal ]
-    tags: [ mainship, ert, internal, port2, port ]
-
-- type: entity
-  parent: CMDropshipDestination
-  id: RMCDropshipDestinationERTPort3
-  name: emergency response dock
-  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
-  suffix: Port 3
-  components:
-  - type: DropshipDestination
-    dockBounds: "-4,-8.5,4,6.5"
-  - type: RMCERTLandingZone
-    dockClasses: [ internal ]
-    tags: [ mainship, ert, internal, port3, stern ]
-
-- type: entity
-  parent: CMDropshipDestination
-  id: RMCDropshipDestinationERTPort4
-  name: emergency response dock
-  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
-  suffix: Port 4
+  parent: RMCERTDockingDestination
+  id: RMCERTDockingPortExternalSide
+  suffix: ERT, External Side
   components:
   - type: DropshipDestination
     dockBounds: "-5,-9.5,5,7.5"
   - type: RMCERTLandingZone
     dockClasses: [ external_side ]
-    tags: [ mainship, ert, external_side, port4, port ]
+    tags: [ mainship, ert, external_side ]
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCERTAirlockExternalSide ]
+    searchRadius: 5
 
 - type: entity
-  parent: CMDropshipDestination
-  id: RMCDropshipDestinationERTPort5
-  name: emergency response dock
-  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
-  suffix: Port 5
-  components:
-  - type: DropshipDestination
-    dockBounds: "-5,-9.5,5,7.5"
-  - type: RMCERTLandingZone
-    dockClasses: [ external_side ]
-    tags: [ mainship, ert, external_side, port5, starboard ]
-
-- type: entity
-  parent: CMDropshipDestination
-  id: RMCDropshipDestinationERTHangarPort
-  name: emergency response dock
-  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
-  suffix: Hangar Port
+  parent: RMCERTDockingDestination
+  id: RMCERTDockingPortExternalHangar
+  suffix: ERT, External Hangar
   components:
   - type: DropshipDestination
     dockBounds: "-6,-10.5,6,8.5"
   - type: RMCERTLandingZone
     dockClasses: [ external_hangar ]
-    tags: [ mainship, ert, external_hangar, hangar_port, port ]
-
-- type: entity
-  parent: CMDropshipDestination
-  id: RMCDropshipDestinationERTHangarStarboard
-  name: emergency response dock
-  description: Defines a valid location for emergency response shuttles to FTL to aboard the warship.
-  suffix: Hangar Starboard
-  components:
-  - type: DropshipDestination
-    dockBounds: "-6,-10.5,6,8.5"
-  - type: RMCERTLandingZone
-    dockClasses: [ external_hangar ]
-    tags: [ mainship, ert, external_hangar, hangar_starboard, starboard ]
+    tags: [ mainship, ert, external_hangar ]
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCERTAirlockExternalHangar ]
+    searchRadius: 8
 
 - type: entity
   parent: MarkerBase
