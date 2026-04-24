@@ -99,6 +99,7 @@ rmc-vehicle-exit-busy = Someone is already using this exit.
 rmc-vehicle-exit-blocked = The exit is blocked.
 rmc-vehicle-lock-not-driver = You need to be in the driver seat to lock or unlock the vehicle.
 rmc-vehicle-lock-broken = The vehicle lock is broken.
+rmc-vehicle-lock-broken-attempt = The vehicle cannot be locked until the broken lock is repaired.
 rmc-vehicle-lock-set-locked = Vehicle doors locked.
 rmc-vehicle-lock-set-unlocked = Vehicle doors unlocked.
 rmc-vehicle-lock-broken-success = You break the vehicle lock.
