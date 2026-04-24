@@ -158,7 +158,7 @@ rmc-xeno-hedgehog-popup = This one's hide bristles with deadly spines. Let them 
 
 rmc-xeno-watcher-name = Watcher
 rmc-xeno-watcher-description = You lose your ability to hide, but gain enhanced vision. You can toggle between normal enhanced vision and greatly enhanced vision.
-rmc-xeno-watcher-popup = You are now a Watcher. You have enhanced vision but cannot hide.
+rmc-xeno-watcher-popup = My witness in the dark; watch, wait, and strike.
 
 rmc-xeno-designer-name = Designer
 rmc-xeno-designer-description = You lose:

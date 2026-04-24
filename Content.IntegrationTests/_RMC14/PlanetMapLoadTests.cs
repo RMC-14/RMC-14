@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Content.Server._RMC14.Rules;
+using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
 using Content.Shared._RMC14.Rules;

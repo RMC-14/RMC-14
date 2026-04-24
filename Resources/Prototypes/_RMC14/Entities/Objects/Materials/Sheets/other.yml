@@ -17,7 +17,8 @@
 - type: entity
   parent: SheetOtherBase
   id: CMSheetPhoron
-  name: phoron
+  name: solid phoron
+  description: Phoron is an extremely rare mineral with exotic properties, often used in cutting-edge research. Just getting it into a stable, solid form is already difficult enough, considering it can be quite toxic and flammable.
   suffix: Full
   components:
   - type: Material
@@ -34,6 +35,11 @@
     heldPrefix: phoron
     size: Normal
     sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
   - type: Appearance
   - type: Extractable
     grindableSolutionName: phoron
@@ -123,6 +129,11 @@
       map: ["base"]
   - type: Item
     sprite: _RMC14/Objects/Materials/Sheets/wood.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
     heldPrefix: wood
     size: Normal
   - type: Appearance
@@ -195,14 +206,14 @@
   id: RMCAluminum
   stackEntity: RMCSheetAluminum
   name: materials-aluminum
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi, state: aluminum }
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi, state: icon }
   color: "#A8A8A8"
   price: 0.0053
 
 - type: stack
   id: RMCAluminum
   name: aluminum
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi, state: aluminum }
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi, state: icon }
   spawn: RMCSheetAluminum
   maxCount: 50
 
@@ -210,6 +221,7 @@
   parent: SheetOtherBase
   id: RMCSheetAluminum
   name: aluminum
+  description: A silvery-white soft metal of the boron group. Because of its low density it is often used as a structural material in aircraft.
   suffix: Full
   components:
   - type: Material
@@ -220,12 +232,17 @@
     stackType: RMCAluminum
     count: 50
   - type: Sprite
-    state: aluminum
     sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi
+    state: icon
   - type: Item
     heldPrefix: aluminum
     size: Normal
     sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
   - type: Appearance
   - type: Extractable
     grindableSolutionName: aluminum
