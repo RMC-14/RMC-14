@@ -535,6 +535,10 @@ public sealed partial class HardpointSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        var incomingMultiplier = GetVehicleIncomingDamageMultiplier(args.Origin, args.Tool);
+        if (incomingMultiplier > 1f)
+            args.Damage = ScaleDamage(args.Damage, incomingMultiplier);
+
         var totalDamage = args.Damage.GetTotal().Float();
         if (totalDamage <= 0f)
             return;
@@ -566,6 +570,30 @@ public sealed partial class HardpointSystem : EntitySystem
         }
 
         args.Damage = ScaleDamage(args.Damage, hullFraction);
+    }
+
+    private float GetVehicleIncomingDamageMultiplier(EntityUid? origin, EntityUid? tool)
+    {
+        var multiplier = 1f;
+
+        if (TryGetVehicleDamageMultiplier(origin, out var originMultiplier))
+            multiplier = MathF.Max(multiplier, originMultiplier);
+
+        if (TryGetVehicleDamageMultiplier(tool, out var toolMultiplier))
+            multiplier = MathF.Max(multiplier, toolMultiplier);
+
+        return multiplier;
+    }
+
+    private bool TryGetVehicleDamageMultiplier(EntityUid? source, out float multiplier)
+    {
+        multiplier = 1f;
+
+        if (source == null || !TryComp<VehicleDamageMultiplierComponent>(source.Value, out var vehicleDamage))
+            return false;
+
+        multiplier = MathF.Max(vehicleDamage.Multiplier, 0f);
+        return multiplier > 0f;
     }
 
     private void CollectIntactTopLevelHardpoints(

@@ -184,6 +184,8 @@
     radius: 3.5
     color: orange
     energy: 0.5
+  - type: VehicleDamageMultiplier
+    multiplier: 5
 
 # 84mm AP
 
@@ -242,6 +244,8 @@
     thresholds:
     - range: 6
       falloff: 10
+  - type: VehicleDamageMultiplier
+    multiplier: 4
 
 - type: entity
   parent: RMCRocket84mm
