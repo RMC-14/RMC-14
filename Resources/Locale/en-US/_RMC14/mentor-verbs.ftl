@@ -5,3 +5,5 @@ rmc-mentor-imaginary-friend-confirmation-text = You are about to become an imagi
 rmc-mentor-imaginary-friend-confirmation-confirm = Use Custom Appearance
 rmc-mentor-imaginary-friend-confirmation-confirm-default = Use Default Appearance
 rmc-mentor-imaginary-friend-confirmation-cancel = Cancel
+
+rmc-mentor-imaginary-friend-became = You are now an imaginary friend of {$target}.

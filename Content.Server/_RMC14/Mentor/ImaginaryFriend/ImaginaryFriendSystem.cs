@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.Chat.Managers;
 using Content.Server.EUI;
 using Content.Server.Humanoid;
 using Content.Server.Mind;
@@ -21,6 +22,7 @@ namespace Content.Server._RMC14.Mentor.ImaginaryFriend;
 public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
 {
     [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly EuiManager _euiManager = default!;
     [Dependency] private readonly EyeSystem _eye = default!;
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
@@ -118,11 +120,14 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         var friend = EntityManager.SpawnEntity(prototype, coordinates);
         _transform.AttachToGridOrMap(friend, Transform(friend));
 
-        if (!targetIsXeno && TryComp(newFriend, out ActorComponent? actor))
+        TryComp(newFriend, out ActorComponent? friendActor);
+        var friendSession = friendActor?.PlayerSession;
+
+        if (!targetIsXeno && friendSession != null)
         {
             if (!defaultCharacter)
             {
-                var characters = _preferencesManager.GetPreferences(actor.PlayerSession.UserId).Characters;
+                var characters = _preferencesManager.GetPreferences(friendSession.UserId).Characters;
                 foreach (var (_, profile) in characters)
                 {
                     if (profile is not HumanoidCharacterProfile humanoid)
@@ -189,6 +194,9 @@ public sealed class ImaginaryFriendSystem : SharedImaginaryFriendSystem
         _visibility.RefreshVisibility(friend);
 
         _eye.RefreshVisibilityMask(imaginer);
+
+        if (friendSession != null)
+            _chat.DispatchServerMessage(friendSession, Loc.GetString("rmc-mentor-imaginary-friend-became", ("target", imaginer)));
     }
 
     private void RemoveImaginaryFriend(HasImaginaryFriendComponent hasImaginaryFriend)
