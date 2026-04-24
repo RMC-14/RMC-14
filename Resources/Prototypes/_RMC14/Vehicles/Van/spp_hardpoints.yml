@@ -26,6 +26,10 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/sppvan.rsi
     overlayState: van_turret_0
+    pixelOffsetNorth: "0,4"
+    pixelOffsetEast: "-6,16"
+    pixelOffsetSouth: "0,15"
+    pixelOffsetWest: "6,16"
   - type: ItemSlots
     slots:
       turret-cannon:
