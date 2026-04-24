@@ -25,6 +25,9 @@ public sealed partial class XenoChargeComponent : Component
     public float SlowRange = 1.5f;
 
     [DataField, AutoNetworkedField]
+    public float KnockBackDistance = 3f;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan SlowTime = TimeSpan.FromSeconds(3.5);
 
     [DataField, AutoNetworkedField]
@@ -42,4 +45,7 @@ public sealed partial class XenoChargeComponent : Component
 
     [DataField, AutoNetworkedField]
     public float Strength = 20;
+
+    [DataField]
+    public HashSet<EntityUid> AlreadyHit = new();
 }
