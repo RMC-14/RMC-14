@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/22/2026 10:06:00
-  entityCount: 17435
+  time: 04/20/2026 01:31:12
+  entityCount: 17433
 maps:
 - 1
 grids:
@@ -52715,6 +52715,126 @@ entities:
     components:
     - type: Transform
       pos: 197.5,51.5
+      parent: 1
+  - uid: 3010
+    components:
+    - type: Transform
+      pos: 197.5,16.5
+      parent: 1
+  - uid: 3011
+    components:
+    - type: Transform
+      pos: 197.5,15.5
+      parent: 1
+  - uid: 3012
+    components:
+    - type: Transform
+      pos: 197.5,14.5
+      parent: 1
+  - uid: 3013
+    components:
+    - type: Transform
+      pos: 197.5,13.5
+      parent: 1
+  - uid: 3014
+    components:
+    - type: Transform
+      pos: 198.5,16.5
+      parent: 1
+  - uid: 3015
+    components:
+    - type: Transform
+      pos: 198.5,15.5
+      parent: 1
+  - uid: 3016
+    components:
+    - type: Transform
+      pos: 198.5,14.5
+      parent: 1
+  - uid: 3017
+    components:
+    - type: Transform
+      pos: 198.5,13.5
+      parent: 1
+  - uid: 3018
+    components:
+    - type: Transform
+      pos: 199.5,16.5
+      parent: 1
+  - uid: 3019
+    components:
+    - type: Transform
+      pos: 199.5,15.5
+      parent: 1
+  - uid: 3020
+    components:
+    - type: Transform
+      pos: 199.5,14.5
+      parent: 1
+  - uid: 3021
+    components:
+    - type: Transform
+      pos: 199.5,13.5
+      parent: 1
+  - uid: 3022
+    components:
+    - type: Transform
+      pos: 208.5,13.5
+      parent: 1
+  - uid: 3023
+    components:
+    - type: Transform
+      pos: 208.5,14.5
+      parent: 1
+  - uid: 3024
+    components:
+    - type: Transform
+      pos: 208.5,15.5
+      parent: 1
+  - uid: 3025
+    components:
+    - type: Transform
+      pos: 208.5,16.5
+      parent: 1
+  - uid: 3026
+    components:
+    - type: Transform
+      pos: 209.5,13.5
+      parent: 1
+  - uid: 3027
+    components:
+    - type: Transform
+      pos: 209.5,14.5
+      parent: 1
+  - uid: 3028
+    components:
+    - type: Transform
+      pos: 209.5,15.5
+      parent: 1
+  - uid: 3029
+    components:
+    - type: Transform
+      pos: 209.5,16.5
+      parent: 1
+  - uid: 3030
+    components:
+    - type: Transform
+      pos: 210.5,13.5
+      parent: 1
+  - uid: 3031
+    components:
+    - type: Transform
+      pos: 210.5,14.5
+      parent: 1
+  - uid: 3032
+    components:
+    - type: Transform
+      pos: 210.5,15.5
+      parent: 1
+  - uid: 3033
+    components:
+    - type: Transform
+      pos: 210.5,16.5
       parent: 1
   - uid: 3034
     components:
@@ -111644,20 +111764,6 @@ entities:
     - type: Transform
       pos: 50.5,71.5
       parent: 1
-- proto: RMCIcechunkCaveman
-  entities:
-  - uid: 3028
-    components:
-    - type: Transform
-      pos: 209.5,15.5
-      parent: 1
-- proto: RMCIcechunkElsa
-  entities:
-  - uid: 3027
-    components:
-    - type: Transform
-      pos: 198.5,15.5
-      parent: 1
 - proto: RMCIceCrystal
   entities:
   - uid: 1735
@@ -128229,128 +128335,6 @@ entities:
     components:
     - type: Transform
       pos: 157.5,55.5
-      parent: 1
-- proto: RMCWallInvisibleBulletPassible
-  entities:
-  - uid: 2200
-    components:
-    - type: Transform
-      pos: 210.5,14.5
-      parent: 1
-  - uid: 2201
-    components:
-    - type: Transform
-      pos: 210.5,13.5
-      parent: 1
-  - uid: 2202
-    components:
-    - type: Transform
-      pos: 209.5,13.5
-      parent: 1
-  - uid: 2203
-    components:
-    - type: Transform
-      pos: 209.5,14.5
-      parent: 1
-  - uid: 2204
-    components:
-    - type: Transform
-      pos: 208.5,15.5
-      parent: 1
-  - uid: 3010
-    components:
-    - type: Transform
-      pos: 208.5,16.5
-      parent: 1
-  - uid: 3011
-    components:
-    - type: Transform
-      pos: 209.5,16.5
-      parent: 1
-  - uid: 3012
-    components:
-    - type: Transform
-      pos: 209.5,15.5
-      parent: 1
-  - uid: 3013
-    components:
-    - type: Transform
-      pos: 208.5,14.5
-      parent: 1
-  - uid: 3014
-    components:
-    - type: Transform
-      pos: 208.5,13.5
-      parent: 1
-  - uid: 3015
-    components:
-    - type: Transform
-      pos: 199.5,13.5
-      parent: 1
-  - uid: 3016
-    components:
-    - type: Transform
-      pos: 199.5,14.5
-      parent: 1
-  - uid: 3017
-    components:
-    - type: Transform
-      pos: 198.5,13.5
-      parent: 1
-  - uid: 3018
-    components:
-    - type: Transform
-      pos: 198.5,14.5
-      parent: 1
-  - uid: 3019
-    components:
-    - type: Transform
-      pos: 197.5,14.5
-      parent: 1
-  - uid: 3020
-    components:
-    - type: Transform
-      pos: 197.5,13.5
-      parent: 1
-  - uid: 3021
-    components:
-    - type: Transform
-      pos: 198.5,16.5
-      parent: 1
-  - uid: 3022
-    components:
-    - type: Transform
-      pos: 199.5,15.5
-      parent: 1
-  - uid: 3023
-    components:
-    - type: Transform
-      pos: 198.5,15.5
-      parent: 1
-  - uid: 3024
-    components:
-    - type: Transform
-      pos: 197.5,15.5
-      parent: 1
-  - uid: 3025
-    components:
-    - type: Transform
-      pos: 199.5,16.5
-      parent: 1
-  - uid: 3026
-    components:
-    - type: Transform
-      pos: 197.5,16.5
-      parent: 1
-  - uid: 3029
-    components:
-    - type: Transform
-      pos: 210.5,15.5
-      parent: 1
-  - uid: 3030
-    components:
-    - type: Transform
-      pos: 210.5,16.5
       parent: 1
 - proto: RMCWallPrefabOrange
   entities:
