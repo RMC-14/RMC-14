@@ -80,6 +80,14 @@ cm-xeno-acid-not-corrodible = We cannot dissolve {THE($target)}!
 cm-xeno-acid-already-corroding = {CAPITALIZE(THE($target))} already has corrosive acid on it!
 rmc-xeno-acid-structure-unmeltable = We can only melt barricades and items!
 rmc-xeno-acid-too-weak = {CAPITALIZE(THE($target))} is too tough to be melted by our weak acid.
+rmc-acid-pickup-blocked = {CAPITALIZE(THE($target))} is covered in corrosive acid!
+rmc-acid-hole-already-weakened = It's already been weakened.
+rmc-acid-hole-only-small-xenos = Only small xenos can fit through this hole.
+rmc-acid-hole-too-large = We are too large to squeeze through this hole.
+rmc-acid-hole-wrong-side = We need to approach the hole from the entrance side!
+rmc-acid-hole-no-exit = There's no space to crawl through there.
+rmc-acid-hole-blocked = Something is blocking the other side.
+rmc-acid-hole-repair-blocked = The wall is breached and must be patched first.
 
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
