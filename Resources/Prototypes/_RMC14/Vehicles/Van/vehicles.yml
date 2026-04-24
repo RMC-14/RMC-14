@@ -13,6 +13,7 @@
     maxSpeed: 6
     acceleration: 5
     deceleration: 12
+    turnDelay: 0.25
     pushCooldown: 2
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
@@ -187,9 +188,11 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
-    maxSpeed: 3.3333
+    maxSpeed: 6
     acceleration: 5
     deceleration: 12
+    turnDelay: 0.25
+    rotationPivotOffset: "0,-2"
     pushCooldown: 2
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile

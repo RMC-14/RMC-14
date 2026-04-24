@@ -13,6 +13,7 @@
     maxSpeed: 6
     acceleration: 5
     deceleration: 12
+    turnDelay: 0.25
     pushCooldown: 2
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile

@@ -13,6 +13,7 @@
     maxSpeed: 5
     acceleration: 4
     deceleration: 10
+    turnDelay: 0.4
     xenoBlockMinimumSize: Immobile
     xenoPushMinimumSize: Immobile
   - type: VehicleOvercharge
