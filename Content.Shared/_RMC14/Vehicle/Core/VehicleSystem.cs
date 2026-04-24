@@ -22,6 +22,8 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
+using Content.Shared.Physics;
+using Content.Shared._RMC14.Map;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -41,6 +43,7 @@ public sealed class VehicleSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
     [Dependency] private readonly VehicleLockSystem _vehicleLock = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
 
     public override void Initialize()
     {
@@ -429,9 +432,6 @@ public sealed class VehicleSystem : EntitySystem
 
     private bool TryExit(Entity<VehicleExitComponent> ent, EntityUid user)
     {
-        if (!TryComp(ent, out TransformComponent? exitXform) || exitXform.MapID == MapId.Nullspace)
-            return false;
-
         if (!TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle is not { } vehicleUid)
             return false;
 
@@ -444,6 +444,30 @@ public sealed class VehicleSystem : EntitySystem
             return false;
         }
 
+        if (!TryGetExitCoordinates(ent, enter, vehicleUid, out var exitCoords, out var exitMapCoords))
+            return false;
+
+        if (!HasComp<GhostComponent>(user) && IsExitDestinationBlocked(exitCoords))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-vehicle-exit-blocked"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        _rmcTeleporter.HandlePulling(user, exitMapCoords);
+        UntrackOccupant(user, vehicleUid);
+        return true;
+    }
+
+    private bool TryGetExitCoordinates(
+        Entity<VehicleExitComponent> ent,
+        VehicleEnterComponent enter,
+        EntityUid vehicleUid,
+        out EntityCoordinates exitCoords,
+        out MapCoordinates exitMapCoords)
+    {
+        exitCoords = default;
+        exitMapCoords = default;
+
         var vehicleXform = Transform(vehicleUid);
 
         EntityUid? parent = vehicleXform.ParentUid;
@@ -453,25 +477,24 @@ public sealed class VehicleSystem : EntitySystem
             return false;
 
         Vector2 offset;
-
         var entryIndex = ent.Comp.EntryIndex;
         if (entryIndex >= 0 && entryIndex < enter.EntryPoints.Count)
-        {
             offset = enter.EntryPoints[entryIndex].Offset;
-        }
         else
-        {
             offset = enter.ExitOffset;
-        }
 
         var rotated = vehicleXform.LocalRotation.RotateVec(offset);
         var position = vehicleXform.LocalPosition + rotated;
 
-        var exitCoords = new EntityCoordinates(parent.Value, position);
-        var exitMapCoords = _transform.ToMapCoordinates(exitCoords);
-        _rmcTeleporter.HandlePulling(user, exitMapCoords);
-        UntrackOccupant(user, vehicleUid);
-        return true;
+        exitCoords = new EntityCoordinates(parent.Value, position);
+        exitMapCoords = _transform.ToMapCoordinates(exitCoords);
+        return exitMapCoords.MapId != MapId.Nullspace;
+    }
+
+    private bool IsExitDestinationBlocked(EntityCoordinates exitCoords)
+    {
+        const CollisionGroup blockedMask = CollisionGroup.Impassable | CollisionGroup.HighImpassable | CollisionGroup.MidImpassable;
+        return _rmcMap.IsTileBlocked(exitCoords, blockedMask) || _rmcMap.TileHasStructure(exitCoords);
     }
 
     private void OnVehicleExitDoAfter(Entity<VehicleExitComponent> ent, ref VehicleExitDoAfterEvent args)
