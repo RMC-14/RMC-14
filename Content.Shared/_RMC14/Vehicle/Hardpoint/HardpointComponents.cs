@@ -175,10 +175,7 @@ public sealed partial class HardpointInsertDoAfterEvent : DoAfterEvent
     public override bool IsDuplicate(DoAfterEvent other)
     {
         return other is HardpointInsertDoAfterEvent hardpoint
-               && hardpoint.SlotId == SlotId
-               && other.User == User
-               && other.Target == Target
-               && other.Used == Used;
+               && hardpoint.SlotId == SlotId;
     }
 }
 
@@ -205,10 +202,7 @@ public sealed partial class HardpointRemoveDoAfterEvent : DoAfterEvent
     public override bool IsDuplicate(DoAfterEvent other)
     {
         return other is HardpointRemoveDoAfterEvent remove
-               && remove.SlotId == SlotId
-               && other.User == User
-               && other.Target == Target
-               && other.Used == Used;
+               && remove.SlotId == SlotId;
     }
 }
 
