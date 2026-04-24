@@ -113,6 +113,7 @@ rmc-ert-organization-spp = SPP
 rmc-ert-organization-tse = TSE
 rmc-ert-organization-provost = Provost
 rmc-ert-organization-clf = CLF
+rmc-ert-organization-pizza = Pizza Galaxy
 
 rmc-ert-admin-button-cbrn = SEND CBRN
 rmc-ert-admin-button-pmc = SEND PMC
@@ -123,6 +124,7 @@ rmc-ert-admin-button-spp = SEND SPP
 rmc-ert-admin-button-tse = SEND TSE
 rmc-ert-admin-button-provost = SEND PROVOST
 rmc-ert-admin-button-clf = SEND CLF
+rmc-ert-admin-button-pizza = SEND PIZZA
 
 rmc-ert-call-cbrn-name = UNMC CBRN Response Team
 rmc-ert-call-pmc-name = WeYa PMC Response Team
@@ -133,6 +135,7 @@ rmc-ert-call-spp-name = SPP Response Squad
 rmc-ert-call-tse-name = TSE Royal Marines
 rmc-ert-call-provost-name = Provost Enforcement Team
 rmc-ert-call-clf-name = CLF Cell
+rmc-ert-call-pizza-name = Pizza Galaxy Delivery Shuttle
 
 rmc-ert-role-cbrn-leader = CBRN Squad Leader
 rmc-ert-role-cbrn-rifleman = CBRN Rifleman
@@ -159,6 +162,7 @@ rmc-ert-role-provost-enforcer = Provost Enforcer
 rmc-ert-role-clf-leader = CLF Cell Leader
 rmc-ert-role-clf-soldier = CLF Soldier
 rmc-ert-role-clf-medic = CLF Medic
+rmc-ert-role-pizza-deliverer = Pizza Deliverer
 
 rmc-ert-announcement-recruiting-immediate = {$team} is accepting volunteers for immediate deployment.
 rmc-ert-announcement-recruiting = {$team} is accepting volunteers.
@@ -193,6 +197,9 @@ rmc-ert-announcement-tse-arrival = {$team} has docked aboard the warship and is 
 rmc-ert-announcement-provost-dispatch = Provost command has approved a response team.
 rmc-ert-announcement-provost-arrival = {$team} has docked aboard the warship and is assuming Provost jurisdiction.
 
+rmc-ert-announcement-pizza-dispatch = Pizza Galaxy has accepted the emergency delivery order. {$team} is preparing to deploy.
+rmc-ert-announcement-pizza-arrival = 'That'll be... sixteen orders of cheesy fries, eight large double topping pizzas, nine bottles of Four Loko... hello? Is anyone on this ship? Your pizzas are getting cold.'
+
 rmc-ert-beacon-request-title-handheld = handheld distress beacon
 rmc-ert-beacon-request-title-cmb = CMB distress beacon
 rmc-ert-beacon-request-title-weya = WeYa distress beacon
@@ -208,3 +215,9 @@ rmc-ert-recipient-weya-security = Weyland-Yutani Corporate Security Division
 rmc-ert-recipient-weya-affairs = Weyland-Yutani Corporate Affairs Division
 rmc-ert-recipient-provost = Provost command
 rmc-ert-recipient-allied = allied response command
+rmc-ert-recipient-pizza = Pizza Galaxy dispatch
+
+rmc-ert-beacon-request-title-pizza = pizza delivery distress beacon
+
+rmc-ert-objective-pizza-tip = Make sure you get a tip!
+rmc-ert-feature-pizza-wrong-place = You're PRETTY sure this is the right place.

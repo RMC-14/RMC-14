@@ -71,6 +71,14 @@
 
 - type: entity
   parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttlePizza
+  suffix: ERT Pizza
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_pizza_shuttle.yml"
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
   id: RMCSpawnerERTShuttleTSEPA
   suffix: TSEPA, ERT
   components:

@@ -50,6 +50,18 @@
     priority: 40
 
 - type: entity
+  parent: RMCERTSpawnMarker
+  id: RMCERTSpawnMarkerPizza
+  suffix: ERT, Pizza
+  components:
+  - type: Sprite
+    state: pink
+  - type: RMCERTSpawnPoint
+    roleTags: [ pizza, support ]
+    seatTags: [ pizza, troop ]
+    priority: 30
+
+- type: entity
   parent: CMSeatPassenger
   id: RMCERTSeatTroop
   name: ERT troop seat
@@ -90,6 +102,17 @@
     seatTags: [ engineer, troop ]
     reservedRoleTags: [ engineer ]
     priority: 40
+
+- type: entity
+  parent: CMSeatPassenger
+  id: RMCERTSeatPizza
+  name: ERT pizza delivery seat
+  suffix: ERT, Pizza
+  components:
+  - type: RMCERTSeat
+    seatTags: [ pizza, troop ]
+    reservedRoleTags: [ pizza ]
+    priority: 30
 
 - type: entity
   parent: CMSeatPilot
@@ -143,3 +166,14 @@
     seatTags: [ engineer, troop ]
     reservedRoleTags: [ engineer ]
     priority: 40
+
+- type: entity
+  parent: RMCSeatDark
+  id: RMCERTSeatDarkPizza
+  name: ERT pizza delivery seat
+  suffix: ERT, Dark, Pizza
+  components:
+  - type: RMCERTSeat
+    seatTags: [ pizza, troop ]
+    reservedRoleTags: [ pizza ]
+    priority: 30

@@ -505,3 +505,47 @@
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
+
+- type: rmcERTCall
+  id: RMCERTCallPizza
+  name: rmc-ert-call-pizza-name
+  organization: rmc-ert-organization-pizza
+  npcFactions: [ Civilian ]
+  category: rmc-ert-category-event
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-pizza
+  randomWeight: 2
+  allowedSources: [ Console, Handheld, Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_pizza_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttlePizza
+  autoLaunch: true
+  landingTags: [ mainship ]
+  roles:
+  - id: deliverer
+    name: rmc-ert-role-pizza-deliverer
+    job: CMPizzaDeliverer
+    ghostRoleEntity: RMCRandomHumanoidPizzaDeliveryBoy
+    min: 1
+    max: 1
+    roleTags: [ pizza, support ]
+    seatTags: [ pizza, troop ]
+  objectives:
+  - rmc-ert-objective-pizza-tip
+  features:
+  - rmc-ert-feature-pizza-wrong-place
+  announcements:
+    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
+    dispatch: rmc-ert-announcement-pizza-dispatch
+    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
+    recruiting: rmc-ert-announcement-recruiting
+    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
+    launch: rmc-ert-announcement-launch
+    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
+    arrival: rmc-ert-announcement-pizza-arrival
+    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 1

@@ -102,3 +102,15 @@
     allowedCalls:
     - RMCERTCallSPP
     - RMCERTCallTSE
+
+- type: entity
+  parent: RMCHandheldDistressBeaconBase
+  id: RMCHandheldDistressBeaconPizza
+  name: pizza delivery distress beacon
+  suffix: Pizza
+  components:
+  - type: RMCERTDistressBeacon
+    recipient: rmc-ert-recipient-pizza
+    requestTitle: rmc-ert-beacon-request-title-pizza
+    allowedCalls:
+    - RMCERTCallPizza
