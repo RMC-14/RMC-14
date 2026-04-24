@@ -340,3 +340,14 @@
       insertDelay: 1.5
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/spp_apc_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 14
+    maxXenos: 4
+    entryPoints:
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 4.45,-1.2
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 4.45,1.7
