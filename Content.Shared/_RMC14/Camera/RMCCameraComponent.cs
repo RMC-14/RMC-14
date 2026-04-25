@@ -12,4 +12,7 @@ public sealed partial class RMCCameraComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Rename = true;
+
+    [DataField, AutoNetworkedField]
+    public string? NameOverride;
 }
