@@ -151,6 +151,11 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
 
     private void RequestWarps()
     {
+        var ev = new GhostWarpsWindowRequestedEvent();
+        EntityManager.EventBus.RaiseEvent(EventSource.Local, ev);
+        if (ev.Handled)
+            return;
+
         _system?.RequestWarps();
         Gui?.TargetWindow.Populate();
         Gui?.TargetWindow.OpenCentered();
@@ -160,4 +165,9 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
     {
         _system?.OpenGhostRoles();
     }
+}
+
+public sealed class GhostWarpsWindowRequestedEvent : EntityEventArgs
+{
+    public bool Handled;
 }
