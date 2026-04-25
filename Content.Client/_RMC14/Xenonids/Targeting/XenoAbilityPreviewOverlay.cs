@@ -293,10 +293,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         if (!_mapManager.TryFindGridAt(mousePos, out var gridUid, out var grid))
             return;
 
-        // Snap to tile center
-        var tileIndices = _mapSystem.CoordinatesToTile(gridUid, grid, mousePos);
-        var tileCenter = _mapSystem.GridTileToWorld(gridUid, grid, tileIndices);
-        var snappedPos = tileCenter.Position;
+        var centerTile = _mapSystem.CoordinatesToTile(gridUid, grid, mousePos);
+        var snappedPos = _mapSystem.GridTileToWorld(gridUid, grid, centerTile).Position;
 
         var direction = (snappedPos - originMap.Position);
         if (direction.LengthSquared() <= 0f)
@@ -305,17 +303,22 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         direction = direction.Normalized();
         var ortho = new Vector2(-direction.Y, direction.X);
 
-        var startWorld = new MapCoordinates(snappedPos + ortho * (deployTraps.DeployTrapsRadius + 1), mousePos.MapId);
-        var endWorld = new MapCoordinates(snappedPos - ortho * deployTraps.DeployTrapsRadius, mousePos.MapId);
+        // Convert the orthogonal world vector to a tile-space step
+        // by seeing which tile neighbour it points most toward
+        var orthoTile = new Vector2i(
+            (int) MathF.Round(ortho.X),
+            (int) MathF.Round(ortho.Y)
+        );
 
-        var startCoords = _mapSystem.MapToGrid(gridUid, startWorld);
-        var endCoords = _mapSystem.MapToGrid(gridUid, endWorld);
+        if (orthoTile == Vector2i.Zero)
+            orthoTile = new Vector2i(1, 0);
 
-        var trapTiles = _line.DrawLine(startCoords, endCoords, TimeSpan.Zero, deployTraps.Range, out _);
-
-        var tiles = trapTiles
-            .Select(t => _mapSystem.CoordinatesToTile(gridUid, grid, t.Coordinates))
-            .ToHashSet();
+        var radius = (int) deployTraps.DeployTrapsRadius;
+        var tiles = new HashSet<Vector2i>();
+        for (var i = -radius; i <= radius; i++)
+        {
+            tiles.Add(centerTile + orthoTile * i);
+        }
 
         DrawTileBorder(args.WorldHandle, gridUid, grid, tiles, color);
     }

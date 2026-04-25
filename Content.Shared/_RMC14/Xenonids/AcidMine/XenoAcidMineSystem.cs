@@ -30,17 +30,33 @@ public sealed class XenoAcidMineSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(args))
-            return;
+        var targetMap = _transform.ToMapCoordinates(args.Target);
+        var origin = _transform.GetMapCoordinates(xeno.Owner);
 
-        args.Handled = true;
+        // Trying a different LOS check to see if it feels better.
+        var offsets = new Vector2[]
+        {
+            new(0.5f, 0.5f),   // centre
+            new(0.2f, 0.2f),   // bottom-left
+            new(0.8f, 0.2f),   // bottom-right
+            new(0.2f, 0.8f),   // top-left
+            new(0.8f, 0.8f),   // top-right
+        };
 
-        if (!_interaction.InRangeUnobstructed(
-                _transform.GetMapCoordinates(xeno.Owner),
-                _transform.ToMapCoordinates(args.Target),
-                xeno.Comp.Range,
-                CollisionGroup.Opaque,
-                e => e == xeno.Owner || !Transform(e).Anchored))
+        var tileBase = new Vector2(targetMap.Position.Floored().X, targetMap.Position.Floored().Y);
+        var hasLos = false;
+
+        foreach (var offset in offsets)
+        {
+            var point = new MapCoordinates(tileBase + offset, targetMap.MapId);
+            if (_interaction.InRangeUnobstructed(origin, point, xeno.Comp.Range, CollisionGroup.InteractImpassable,
+                    e => e == xeno.Owner || !Transform(e).Anchored))
+            {
+                hasLos = true;
+                break;
+            }
+        }
+        if (!hasLos)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-acid-mine-see-fail"), xeno, xeno);
             return;
@@ -48,6 +64,11 @@ public sealed class XenoAcidMineSystem : EntitySystem
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
+
+        if (!_rmcActions.TryUseAction(args))
+            return;
+        args.Handled = true;
+
 
         var popupSelf = Loc.GetString("rmc-xeno-acid-mine-self");
         var popupOthers = Loc.GetString("rmc-xeno-acid-mine-others", ("xeno", xeno));

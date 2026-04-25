@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
@@ -36,6 +37,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -52,19 +54,39 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        if (!_interaction.InRangeUnobstructed(
-                _transform.GetMapCoordinates(xeno.Owner),
-                _transform.ToMapCoordinates(args.Target),
-                xeno.Comp.Range,
-                CollisionGroup.Opaque,
-                e => e == xeno.Owner || !Transform(e).Anchored))
+        var targetMap = _transform.ToMapCoordinates(args.Target);
+        var tileBase = new Vector2(targetMap.Position.Floored().X, targetMap.Position.Floored().Y);
+        var origin = _transform.GetMapCoordinates(xeno.Owner);
+        var offsets = new Vector2[]
+        {
+            new(0.5f, 0.5f),   // centre
+            new(0.2f, 0.2f),   // bottom-left
+            new(0.8f, 0.2f),   // bottom-right
+            new(0.2f, 0.8f),   // top-left
+            new(0.8f, 0.8f),   // top-right
+        };
+
+        var hasLos = false;
+        foreach (var offset in offsets)
+        {
+            var point = new MapCoordinates(tileBase + offset, targetMap.MapId);
+            if (_interaction.InRangeUnobstructed(origin, point, xeno.Comp.Range, CollisionGroup.InteractImpassable,
+                    e => e == xeno.Owner || !Transform(e).Anchored))
+            {
+                hasLos = true;
+                break;
+            }
+        }
+        if (!hasLos)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-deploy-traps-see-fail"), xeno, xeno);
             return;
         }
 
-        // Check if user has enough plasma
         if (!_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), args.PlasmaCost))
+            return;
+
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -85,24 +107,27 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             var direction = (targetPos - xenoPos).Normalized();
             var ortho = new Vector2(-direction.Y, direction.X);
 
-            // Project to range, then extend orthogonally
-            //+1 to get the 5 traps we want, rather than 4.
-            var tip = targetPos;
-            var trapStart = new EntityCoordinates(gridId, tip + ortho * (xeno.Comp.DeployTrapsRadius + 1));
-            var trapEnd = new EntityCoordinates(gridId, tip - ortho * xeno.Comp.DeployTrapsRadius);
+            // Round orthogonal world vector to nearest tile-space step
+            var orthoTile = new Vector2i(
+                (int) MathF.Round(ortho.X),
+                (int) MathF.Round(ortho.Y)
+            );
 
-            var trapTiles = _line.DrawLine(trapStart, trapEnd, TimeSpan.Zero, xeno.Comp.Range, out _);
+            if (orthoTile == Vector2i.Zero)
+                orthoTile = new Vector2i(1, 0);
 
+            var mapSystem = EntityManager.System<SharedMapSystem>();
+            var centerTile = mapSystem.CoordinatesToTile(gridId, grid, targetMap);
+
+            var radius = (int) xeno.Comp.DeployTrapsRadius;
             var empowered = xeno.Comp.Empowered;
 
-            foreach (var tile in trapTiles)
+            for (var i = -radius; i <= radius; i++)
             {
-                var turfCoords = new EntityCoordinates(gridId, tile.Coordinates.Position);
-                var blocked = _rmcMap.HasAnchoredEntityEnumerator<DeployTrapsBlockerComponent>(turfCoords, out _);
-                if (!blocked)
-                {
-                    DeployTraps(xeno, turfCoords, empowered);
-                }
+                var tileIndex = centerTile + orthoTile * i;
+                var tileCoords = new EntityCoordinates(gridId, mapSystem.GridTileToLocal(gridId, grid, tileIndex).Position);
+                if(!_rmcMap.HasAnchoredEntityEnumerator<DeployTrapsBlockerComponent>(tileCoords, out _))
+                    DeployTraps(xeno, tileCoords, empowered);
             }
 
             if (empowered)
