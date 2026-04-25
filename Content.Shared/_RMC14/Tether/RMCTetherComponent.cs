@@ -24,4 +24,7 @@ public sealed partial class RMCTetherComponent : Component
 
     [DataField, AutoNetworkedField]
     public float TetherWidth = 0.5f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? RemoveAt;
 }

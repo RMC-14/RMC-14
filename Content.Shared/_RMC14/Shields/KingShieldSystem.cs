@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -16,6 +17,8 @@ public sealed class KingShieldSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<KingShieldComponent, DamageModifyAfterResistEvent>(OnShieldDamage, before: [typeof(XenoShieldSystem)]);
@@ -44,16 +47,17 @@ public sealed class KingShieldSystem : EntitySystem
             if (!_hive.FromSameHive(xeno.Owner, ent.Owner))
                 continue;
 
-            var shield = EnsureComp<KingShieldComponent>(ent);
+            EnsureComp<KingShieldComponent>(ent);
 
             if (!_shield.ApplyShield(ent, XenoShieldSystem.ShieldType.King, xeno.Comp.ShieldAmount, duration: xeno.Comp.DecayTime, decay: xeno.Comp.DecayAmount, visualState: xeno.Comp.VisualState))
                 continue;
 
             var tether = EnsureComp<RMCTetherComponent>(ent);
             tether.TetherOrigin = xeno;
-            tether.RsiPath = shield.RsiPath;
-            tether.TetherState = shield.LightningEffectState;
-            tether.TetherWidth = shield.LightningWidth;
+            tether.RsiPath = xeno.Comp.LightningRsiPath;
+            tether.TetherState = xeno.Comp.LightningEffectState;
+            tether.TetherWidth = xeno.Comp.LightningWidth;
+            tether.RemoveAt = _timing.CurTime + xeno.Comp.LightningDuration;
             Dirty(ent, tether);
         }
     }
