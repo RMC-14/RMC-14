@@ -1,6 +1,15 @@
 ﻿<Document>
   # NON-Modifiable Command SOP
 
+  ## Operations
+
+  Operations are considered ended when the [color=#008000][bold]Commander[/bold][/color] announces such, and it is their responsibility to inform all personnel.
+
+  Some examples of cases where an operation can be considered ended include:
+
+  - The [bold]AO[/bold] is safe and secure, personnel are no longer needed and may be relieved to rest.
+  - Evacuation of the [bold]AO[/bold] has occured, with no intent to continue.
+
   ## Forward Operating Base
 
   The [color=#008000][bold]Commander[/bold][/color] in charge of an operation must take the minimum precautions to ensure security and defense for stationed personnel, and incoming transport, when designating a [bold]Forward Operating Base[/bold].
