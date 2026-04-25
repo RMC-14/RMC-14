@@ -97,3 +97,6 @@ command-description-stairwellprojector = Sets the projection id for the given Te
 command-description-getusername = Gets the username attached to an entity.
 
 command-description-mobstate = Filter entities by their MobState.
+
+command-description-vehiclesupply-addstorage = Adds a vehicle prototype to the nearest vehicle supply lift storage.
+command-description-vehiclesupply-addstoragelift = Adds a vehicle prototype to a specific vehicle supply lift storage.
