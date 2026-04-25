@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.Administration.Logs;
+using Content.Server.Administration.Managers;
 using Content.Server.Body.Components;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
@@ -24,6 +25,7 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Warps;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -45,11 +47,13 @@ public sealed class RMCGhostTargetSystem : EntitySystem
     private static readonly LocId WarpPointsTitle = "rmc-ghost-target-window-group-warp-points";
 
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly FollowerSystem _followerSystem = default!;
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -78,7 +82,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             return;
         }
 
-        var response = new RMCGhostWarpsResponseEvent(BuildSections(ghost));
+        var response = new RMCGhostWarpsResponseEvent(BuildSections(ghost, _adminManager.IsAdmin(args.SenderSession)));
         RaiseNetworkEvent(response, args.SenderSession.Channel);
     }
 
@@ -128,7 +132,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         return true;
     }
 
-    private List<RMCGhostTargetSection> BuildSections(EntityUid ghost)
+    private List<RMCGhostTargetSection> BuildSections(EntityUid ghost, bool showAdminGhosts)
     {
         var factionSections = BuildFactionSections();
         var marines = new SectionBuilder(MarinesTitle, null, Color.FromHex("#1c70b0"));
@@ -138,7 +142,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         var ghosts = new SectionBuilder(GhostsTitle, isExpandedByDefault: false);
         var warpPoints = new SectionBuilder(WarpPointsTitle, isExpandedByDefault: false);
 
-        foreach (var target in GetPlayerTargets(ghost).Concat(GetLocationTargets()))
+        foreach (var target in GetPlayerTargets(ghost).Concat(GetGhostTargets(ghost, showAdminGhosts)).Concat(GetLocationTargets()))
         {
             var uid = target.Uid;
             var entry = target.Entry;
@@ -149,15 +153,15 @@ public sealed class RMCGhostTargetSystem : EntitySystem
                 continue;
             }
 
-            if (_mobState.IsDead(uid))
-            {
-                deads.Entries.Add(entry);
-                continue;
-            }
-
             if (_ghostQuery.HasComp(uid))
             {
                 ghosts.Entries.Add(entry);
+                continue;
+            }
+
+            if (_mobState.IsDead(uid))
+            {
+                deads.Entries.Add(entry);
                 continue;
             }
 
@@ -341,6 +345,9 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             if (uid == except)
                 continue;
 
+            if (_ghostQuery.HasComp(uid))
+                continue;
+
             if (HasComp<BrainComponent>(uid) ||
                 HasComp<BorgBrainComponent>(uid) ||
                 HasComp<MMIComponent>(uid))
@@ -375,6 +382,47 @@ public sealed class RMCGhostTargetSystem : EntitySystem
                 health.Percent,
                 tactical.Icon,
                 tactical.Background,
+                tooltipKind));
+        }
+    }
+
+    private IEnumerable<TargetData> GetGhostTargets(EntityUid except, bool showAdminGhosts)
+    {
+        foreach (var player in _player.Sessions)
+        {
+            if (player.AttachedEntity is not { Valid: true } attached)
+                continue;
+
+            if (attached == except ||
+                !TryComp<GhostComponent>(attached, out var ghost))
+            {
+                continue;
+            }
+
+            if (!showAdminGhosts && ghost.CanGhostInteract)
+                continue;
+
+            var displayName = Name(attached);
+            TryComp<MindContainerComponent>(attached, out var mindContainer);
+            var jobName = _jobs.MindTryGetJobName(mindContainer?.Mind);
+            var searchText = jobName != null
+                ? $"{displayName} {jobName}"
+                : displayName;
+            var tooltipKind = jobName != null
+                ? RMCGhostTargetTooltipJobKind.Job
+                : RMCGhostTargetTooltipJobKind.None;
+
+            yield return new TargetData(attached, new RMCGhostTargetEntry(
+                GetNetEntity(attached),
+                displayName,
+                searchText,
+                jobName,
+                false,
+                GetFollowerCount(attached),
+                null,
+                -1,
+                null,
+                null,
                 tooltipKind));
         }
     }
@@ -504,7 +552,8 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         _adminLog.Add(LogType.GhostWarp, $"{ToPrettyString(uid)} RMC ghost warped to {ToPrettyString(target)}");
 
         if ((TryComp(target, out WarpPointComponent? warp) && warp.Follow) ||
-            HasComp<MobStateComponent>(target))
+            HasComp<MobStateComponent>(target) ||
+            _ghostQuery.HasComp(target))
         {
             _followerSystem.StartFollowingEntity(uid, target);
             return;
