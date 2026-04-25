@@ -90,6 +90,7 @@ rmc-ert-arrived-detail-no-shuttle = {$launcher} without a shuttle
 rmc-ert-error-no-navigation-computer = The ERT shuttle has no navigation computer.
 rmc-ert-error-no-landing-zone = No valid ERT landing zone is available.
 rmc-ert-error-launch-failed = The ERT shuttle failed to launch.
+rmc-ert-error-docking-verification-failed = The ERT shuttle failed to dock with the selected landing port.
 rmc-ert-error-no-random-calls = No weighted random ERT calls are available for this request.
 rmc-ert-error-random-selection-failed = Weighted random ERT selection failed.
 rmc-ert-error-unavailable-evacuation = {$call} is unavailable while evacuation is in progress.

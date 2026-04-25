@@ -56,6 +56,9 @@ public sealed partial class RMCERTDistressBeaconComponent : Component
 public sealed partial class RMCERTShuttleComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public Guid RequestId;
+
+    [DataField, AutoNetworkedField]
     public string? Call;
 
     [DataField, AutoNetworkedField]

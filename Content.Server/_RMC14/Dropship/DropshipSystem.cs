@@ -5,6 +5,7 @@ using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Shuttles;
 using Content.Server.Doors.Systems;
 using Content.Server.GameTicking;
+using Content.Server.Shuttles;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
@@ -15,6 +16,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
+using Content.Shared._RMC14.ERT;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
@@ -110,7 +112,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
             destination,
             destinationDock,
             out _,
-            out _,
             out reason);
     }
 
@@ -130,6 +131,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnFTLUpdated);
         SubscribeLocalEvent<DropshipComponent, BeforeFTLStartedEvent>(OnBeforeFTLStarted);
 
+        SubscribeLocalEvent<DockEvent>(OnDocked);
+
         SubscribeLocalEvent<DropshipInFlyByComponent, FTLCompletedEvent>(OnInFlyByFTLCompleted);
 
         SubscribeLocalEvent<DropshipDestinationComponent, DropshipRelayedEvent<FTLStartedEvent>>(OnDepartureLocationFTLStarted);
@@ -147,6 +150,45 @@ public sealed class DropshipSystem : SharedDropshipSystem
         Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipFlyByTimeSeconds, v => _flyByTime = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipHijackTravelTimeSeconds, v => _hijackTravelTime = TimeSpan.FromSeconds(v), true);
+    }
+
+    private void OnDocked(DockEvent args)
+    {
+        TryConfirmExpectedDock(args.GridAUid, args.GridBUid, args.DockA.Owner, args.DockB.Owner);
+        TryConfirmExpectedDock(args.GridBUid, args.GridAUid, args.DockB.Owner, args.DockA.Owner);
+    }
+
+    private void TryConfirmExpectedDock(
+        EntityUid candidateShuttle,
+        EntityUid actualTargetGrid,
+        EntityUid actualShuttleDock,
+        EntityUid actualTargetDock)
+    {
+        if (!TryComp(candidateShuttle, out RMCERTExpectedDockComponent? expected))
+            return;
+
+        expected.ActualShuttleDock = actualShuttleDock;
+        expected.ActualTargetDock = actualTargetDock;
+
+        if (expected.TargetGrid == actualTargetGrid &&
+            expected.ShuttleDock == actualShuttleDock &&
+            expected.TargetDock == actualTargetDock)
+        {
+            expected.Confirmed = true;
+            Log.Info($"ERT docking verified: shuttle={ToPrettyString(candidateShuttle)}, " +
+                     $"request={expected.RequestId}, call={expected.Call ?? "none"}, class={expected.DockingClass}, " +
+                     $"shuttleDock={ToPrettyString(actualShuttleDock)}, targetDock={ToPrettyString(actualTargetDock)}");
+            RemCompDeferred<RMCERTExpectedDockComponent>(candidateShuttle);
+            return;
+        }
+
+        expected.FailureReason =
+            $"unexpected dock pair: expected shuttleDock={ToPrettyString(expected.ShuttleDock)}, " +
+            $"targetDock={ToPrettyString(expected.TargetDock)}, targetGrid={ToPrettyString(expected.TargetGrid)}; " +
+            $"actual shuttleDock={ToPrettyString(actualShuttleDock)}, " +
+            $"targetDock={ToPrettyString(actualTargetDock)}, targetGrid={ToPrettyString(actualTargetGrid)}";
+
+        Log.Warning($"ERT docking mismatch for {ToPrettyString(candidateShuttle)}: {expected.FailureReason}");
     }
 
     private void OnFTLStarted(Entity<DropshipComponent> ent, ref FTLStartedEvent args)
@@ -213,11 +255,52 @@ public sealed class DropshipSystem : SharedDropshipSystem
         RelayToMountedEntities(ent, args);
         RelayToDropshipDestination(ent, args);
 
+        if (TryFailUnverifiedERTDocking(ent))
+            return;
+
         var arrived = new DropshipArrivedAtDestinationEvent(ent, ent.Comp.Destination);
         RaiseLocalEvent(ref arrived);
 
         ent.Comp.DepartureLocation = ent.Comp.Destination;
         Dirty(ent);
+    }
+
+    private bool TryFailUnverifiedERTDocking(Entity<DropshipComponent> ent)
+    {
+        if (!TryComp(ent, out RMCERTExpectedDockComponent? expected))
+            return false;
+
+        if (expected.Confirmed)
+        {
+            RemCompDeferred<RMCERTExpectedDockComponent>(ent);
+            return false;
+        }
+
+        var reason = expected.FailureReason ??
+                     "no matching DockEvent was received before FTL completion";
+
+        Log.Warning($"ERT docking verification failed for {ToPrettyString(ent.Owner)}: {reason}. " +
+                    $"request={expected.RequestId}, call={expected.Call ?? "none"}, class={expected.DockingClass}, " +
+                    $"destination={ToPrettyString(expected.Destination)}, targetGrid={ToPrettyString(expected.TargetGrid)}, " +
+                    $"expectedShuttleDock={ToPrettyString(expected.ShuttleDock)}, expectedTargetDock={ToPrettyString(expected.TargetDock)}, " +
+                    $"actualShuttleDock={ToPrettyString(expected.ActualShuttleDock)}, actualTargetDock={ToPrettyString(expected.ActualTargetDock)}");
+
+        var ev = new RMCERTDockingVerificationFailedEvent(
+            ent.Owner,
+            expected.Destination,
+            expected.TargetGrid,
+            expected.ShuttleDock,
+            expected.TargetDock,
+            expected.ActualShuttleDock,
+            expected.ActualTargetDock,
+            expected.RequestId,
+            expected.Call,
+            expected.DockingClass,
+            reason);
+
+        RemCompDeferred<RMCERTExpectedDockComponent>(ent);
+        RaiseLocalEvent(ref ev);
+        return true;
     }
 
     private void OnFTLUpdated(Entity<DropshipComponent> ent, ref FTLUpdatedEvent args)
@@ -438,8 +521,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         var newDestination = CompOrNull<DropshipDestinationComponent>(destination);
-        EntityCoordinates? dockingCoordinates = null;
-        Angle? dockingAngle = null;
+        RMCERTDockingTravelTarget? dockingTarget = null;
 
         if (!hijack &&
             newDestination != null &&
@@ -455,14 +537,13 @@ public sealed class DropshipSystem : SharedDropshipSystem
             newDestination.Ship != dropshipId &&
             TryComp(destination, out DockingComponent? destinationDock))
         {
-            if (!TryGetDockingTravelTarget(computer, destination, destinationDock, out var travelCoordinates, out var travelAngle, out reason))
+            if (!TryGetDockingTravelTarget(computer, destination, destinationDock, out var travelTarget, out reason))
             {
                 Log.Warning($"{ToPrettyString(user)} tried to launch {ToPrettyString(computer)} to invalid docking destination {ToPrettyString(destination)} ({reason})");
                 return false;
             }
 
-            dockingCoordinates = travelCoordinates;
-            dockingAngle = travelAngle;
+            dockingTarget = travelTarget;
         }
 
         if (dropship.Destination == destination)
@@ -542,8 +623,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         Dirty(dropshipId.Value, dropship);
 
         var destTransform = Transform(destination);
-        var destCoords = dockingCoordinates ?? _transform.GetMoverCoordinates(destination, destTransform);
-        var rotation = dockingAngle ?? destTransform.LocalRotation;
+        var destCoords = dockingTarget?.Config.Coordinates ?? _transform.GetMoverCoordinates(destination, destTransform);
+        var rotation = dockingTarget?.Config.Angle ?? destTransform.LocalRotation;
 
         if (TryComp(dropshipId, out PhysicsComponent? physics))
         {
@@ -554,7 +635,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (offset)
             destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
 
-        _shuttle.FTLToCoordinates(dropshipId.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
+        if (dockingTarget is { } target)
+            StartERTDockingFTL(dropshipId.Value, shuttleComp, computer, destination, target, destCoords, rotation, startupTime, hyperspaceTime);
+        else
+            _shuttle.FTLToCoordinates(dropshipId.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
 
         if (hijack)
         {
@@ -590,12 +674,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
         Entity<DropshipNavigationComputerComponent> computer,
         EntityUid destination,
         DockingComponent destinationDock,
-        out EntityCoordinates coordinates,
-        out Angle angle,
+        out RMCERTDockingTravelTarget target,
         out string reason)
     {
-        coordinates = default;
-        angle = default;
+        target = default;
 
         if (Transform(computer).GridUid is not { } shuttle)
         {
@@ -625,8 +707,13 @@ public sealed class DropshipSystem : SharedDropshipSystem
             if (config == null)
                 continue;
 
-            coordinates = config.Coordinates;
-            angle = config.Angle;
+            target = new RMCERTDockingTravelTarget(
+                config,
+                shuttle,
+                targetGrid,
+                destination,
+                shuttleDock.Owner,
+                destination);
             reason = string.Empty;
             return true;
         }
@@ -634,6 +721,63 @@ public sealed class DropshipSystem : SharedDropshipSystem
         reason = Loc.GetString("rmc-dropship-ert-no-compatible-docking-port");
         return false;
     }
+
+    private void StartERTDockingFTL(
+        EntityUid dropshipId,
+        ShuttleComponent shuttle,
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        RMCERTDockingTravelTarget target,
+        EntityCoordinates coordinates,
+        Angle angle,
+        float? startupTime,
+        float? hyperspaceTime)
+    {
+        var expected = EnsureComp<RMCERTExpectedDockComponent>(dropshipId);
+        expected.Destination = destination;
+        expected.TargetGrid = target.TargetGrid;
+        expected.ShuttleDock = target.ShuttleDock;
+        expected.TargetDock = target.TargetDock;
+        expected.Coordinates = coordinates;
+        expected.Angle = angle;
+        expected.DockingClass = computer.Comp.ERTDockingClass;
+        expected.Confirmed = false;
+        expected.ActualShuttleDock = null;
+        expected.ActualTargetDock = null;
+        expected.FailureReason = null;
+
+        if (TryComp(dropshipId, out RMCERTShuttleComponent? ertShuttle))
+        {
+            expected.RequestId = ertShuttle.RequestId;
+            expected.Call = ertShuttle.Call;
+        }
+        else
+        {
+            expected.RequestId = Guid.Empty;
+            expected.Call = null;
+        }
+
+        Log.Info($"ERT docking FTL started: shuttle={ToPrettyString(dropshipId)}, " +
+                 $"request={expected.RequestId}, call={expected.Call ?? "none"}, class={expected.DockingClass}, " +
+                 $"destination={ToPrettyString(destination)}, targetGrid={ToPrettyString(target.TargetGrid)}, " +
+                 $"shuttleDock={ToPrettyString(target.ShuttleDock)}, targetDock={ToPrettyString(target.TargetDock)}");
+
+        _shuttle.FTLToCoordinates(
+            dropshipId,
+            shuttle,
+            coordinates,
+            angle,
+            startupTime: startupTime,
+            hyperspaceTime: hyperspaceTime);
+    }
+
+    private readonly record struct RMCERTDockingTravelTarget(
+        DockingConfig Config,
+        EntityUid Shuttle,
+        EntityUid TargetGrid,
+        EntityUid Destination,
+        EntityUid ShuttleDock,
+        EntityUid TargetDock);
 
     protected override void RefreshUI(Entity<DropshipNavigationComputerComponent> computer)
     {

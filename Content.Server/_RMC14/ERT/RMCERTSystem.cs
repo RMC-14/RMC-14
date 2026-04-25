@@ -90,6 +90,7 @@ public sealed class RMCERTSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<DropshipArrivedAtDestinationEvent>(OnDropshipArrivedAtDestination);
+        SubscribeLocalEvent<RMCERTDockingVerificationFailedEvent>(OnDockingVerificationFailed);
 
         SubscribeLocalEvent<RMCERTDistressBeaconComponent, UseInHandEvent>(OnHandheldUse);
         SubscribeLocalEvent<ActorComponent, RMCERTHandheldDistressReasonEvent>(OnHandheldReason);
@@ -441,6 +442,30 @@ public sealed class RMCERTSystem : EntitySystem
         }
     }
 
+    private void OnDockingVerificationFailed(ref RMCERTDockingVerificationFailedEvent ev)
+    {
+        foreach (var request in _requests.Values)
+        {
+            if (request.State != RMCERTRequestState.Launching ||
+                request.Shuttle != ev.Shuttle)
+            {
+                continue;
+            }
+
+            Log.Warning($"ERT request {request.Id} docking verification failed: {ev.Reason}. " +
+                        $"eventRequest={ev.RequestId}, call={ev.Call ?? "none"}, class={ev.DockingClass}, " +
+                        $"shuttle={FormatEntity(ev.Shuttle)}, destination={FormatEntity(ev.Destination)}, " +
+                        $"targetGrid={FormatEntity(ev.TargetGrid)}, shuttleDock={FormatEntity(ev.ShuttleDock)}, " +
+                        $"targetDock={FormatEntity(ev.TargetDock)}, actualShuttleDock={FormatEntity(ev.ActualShuttleDock)}, " +
+                        $"actualTargetDock={FormatEntity(ev.ActualTargetDock)}");
+            FailRequest(request, Loc.GetString("rmc-ert-error-docking-verification-failed"));
+            return;
+        }
+
+        Log.Warning($"ERT docking verification failed for {FormatEntity(ev.Shuttle)}, but no launching ERT request matched it. " +
+                    $"eventRequest={ev.RequestId}, reason={ev.Reason}");
+    }
+
     private void OnHandheldUse(Entity<RMCERTDistressBeaconComponent> ent, ref UseInHandEvent args)
     {
         if (args.Handled)
@@ -644,6 +669,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         shuttle = result.Value;
         var shuttleComp = EnsureComp<RMCERTShuttleComponent>(shuttle.Value);
+        shuttleComp.RequestId = request.Id;
         shuttleComp.Call = call.ID;
         shuttleComp.Organization = GetOrganizationLabel(call);
         shuttleComp.NpcFactions = call.NpcFactions.ToList();
