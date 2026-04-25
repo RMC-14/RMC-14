@@ -28,10 +28,10 @@
         - type: PyroWhitelist
         - type: TacticalMapIcon
           icon:
-            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
             state: synth
           background:
-            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
             state: background_para
         - type: AssignSquad
           squad: SquadPara
@@ -81,5 +81,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaSupportSynthetic
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/JobIcons/tse.rsi
     state: para_synth

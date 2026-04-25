@@ -28,14 +28,14 @@
         - type: RMCTrackable
         - type: SquadLeader
           icon:
-            sprite: _RMC14/Interface/cm_job_icons.rsi
+            sprite: _RMC14/Interface/JobIcons/tse.rsi
             state: para_squadleader
         - type: TacticalMapIcon
           icon:
-            sprite: /Textures/_RMC14/Interface/map_blips.rsi
-            state: rmc_teamleader
+            sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
+            state: rcm_teamleader
           background:
-            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
             state: background_para
         - type: AssignSquad
           squad: SquadPara
@@ -67,5 +67,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaTeamLeader
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/JobIcons/tse.rsi
     state: para_teamleader

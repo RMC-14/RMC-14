@@ -40,8 +40,8 @@
     - type: CommandAccent
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
-        state: rmc_troopleader_pve
+        sprite: _RMC14/Interface/JobIcons/tse.rsi
+        state: rcm_troopleader_pve
     - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-troop-sergeant
@@ -49,11 +49,11 @@
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_troopleader
+        sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
+        state: rcm_troopleader
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe_pve
+        sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
+        state: background_rcm_pve
   hidden: true
 
 - type: startingGear
@@ -79,5 +79,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalTroopSargePVE
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_troopleader_pve
+    sprite: _RMC14/Interface/JobIcons/tse.rsi
+    state: rcm_troopleader_pve

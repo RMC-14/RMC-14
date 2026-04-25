@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi. background_rcm_pve state modified in colour from background_rcm state and rcm_[job] states modified in design by @TadJohnson00 (GitHub).",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+  "states": [
+    {
+      "name": "background_para"
+    },
+    {
+      "name": "background_rcm"
+    },
+    {
+      "name": "background_rcm_pve"
+    },
+    {
+      "name": "rcm_bombardier"
+    },
+    {
+      "name": "rcm_breacher"
+    },
+    {
+      "name": "rcm_co"
+    },
+    {
+      "name": "rcm_engi"
+    },
+    {
+      "name": "rcm_lt"
+    },
+    {
+      "name": "rcm_marksman"
+    },
+    {
+      "name": "rcm_medic"
+    },
+    {
+      "name": "rcm_pilot"
+    },
+    {
+      "name": "rcm_rifleman"
+    },
+    {
+      "name": "rcm_sectionleader"
+    },
+    {
+      "name": "rcm_smartgunner"
+    },
+    {
+      "name": "rcm_teamleader"
+    },
+    {
+      "name": "rcm_troopleader"
+    },
+    {
+      "name": "rcm_xo"
+    }
+  ]
+}

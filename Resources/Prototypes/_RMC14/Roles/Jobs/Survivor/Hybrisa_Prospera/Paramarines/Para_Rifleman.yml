@@ -20,10 +20,10 @@
         preset: RMCSkillPresetParamarine
       - type: TacticalMapIcon
         icon:
-          sprite: /Textures/_RMC14/Interface/map_blips.rsi
-          state: rmc_rifleman
+          sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
+          state: rcm_rifleman
         background:
-          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
           state: background_para
       - type: AssignSquad
         squad: SquadPara
@@ -47,5 +47,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParamarine
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/JobIcons/tse.rsi
     state: para_rifleman

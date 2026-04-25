@@ -43,11 +43,11 @@
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_medic
+        sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
+        state: rcm_medic
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe_pve
+        sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
+        state: background_rcm_pve
     - type: CMVendorUser
       extraPoints:
         Chemicals: 120
@@ -76,5 +76,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalMedicPVE
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_medic_pve
+    sprite: _RMC14/Interface/JobIcons/tse.rsi
+    state: rcm_medic_pve

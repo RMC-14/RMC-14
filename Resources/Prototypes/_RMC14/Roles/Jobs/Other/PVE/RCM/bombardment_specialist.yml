@@ -44,11 +44,11 @@
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_bombardier
+        sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
+        state: rcm_bombardier
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe_pve
+        sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
+        state: background_rcm_pve
   hidden: true
 
 - type: startingGear
@@ -74,5 +74,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalBombSpecPVE
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_bombardier_pve
+    sprite: _RMC14/Interface/JobIcons/tse.rsi
+    state: rcm_bombardier_pve
