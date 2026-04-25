@@ -983,7 +983,12 @@ public sealed class XenoEggSystem : EntitySystem
 
                 if (egg.InfectTarget != null)
                 {
-                    if (TryComp<XenoParasiteComponent>(egg.SpawnedCreature, out var para))
+                    if (!_interaction.InRangeUnobstructed(uid, egg.InfectTarget.Value))
+                    {
+                        // Target left the radius before the parasite could latch = abort infection
+                        egg.InfectTarget = null;
+                    }
+                    else if (TryComp<XenoParasiteComponent>(egg.SpawnedCreature, out var para))
                     {
                         _parasite.Infect((egg.SpawnedCreature.Value, para), egg.InfectTarget.Value, force: true);
                         _stun.TryParalyze(egg.InfectTarget.Value, egg.KnockdownTime, true);
