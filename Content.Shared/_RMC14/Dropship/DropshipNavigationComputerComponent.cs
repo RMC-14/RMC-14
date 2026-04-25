@@ -4,14 +4,46 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 
-using Content.Shared._RMC14.ERT;
-
 namespace Content.Shared._RMC14.Dropship;
+
+/// <summary>
+/// High-level berth profile used by restricted RMC shuttle routing.
+/// </summary>
+public enum RMCShuttleDockingClass
+{
+    Standard,
+    Small,
+    Big,
+}
+
+/// <summary>
+/// Maps an abstract shuttle profile to concrete berth class tags.
+/// </summary>
+public static class RMCShuttleDocking
+{
+    private static readonly string[] SmallDockClasses = ["internal", "external_side"];
+    private static readonly string[] StandardDockClasses = ["internal"];
+    private static readonly string[] BigDockClasses = ["external_hangar"];
+
+    /// <summary>
+    /// Returns the berth classes the shuttle may use for automatic routing and nav-console validation.
+    /// </summary>
+    public static string[] GetAllowedDockClasses(RMCShuttleDockingClass dockingClass)
+    {
+        return dockingClass switch
+        {
+            RMCShuttleDockingClass.Standard => StandardDockClasses,
+            RMCShuttleDockingClass.Small => SmallDockClasses,
+            RMCShuttleDockingClass.Big => BigDockClasses,
+            _ => [],
+        };
+    }
+}
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedDropshipSystem))]
 /// <summary>
-/// Navigation settings for a dropship flight computer, including ERT-specific routing flags when used on response shuttles.
+/// Navigation settings for a dropship flight computer, including restricted berth routing flags.
 /// </summary>
 public sealed partial class DropshipNavigationComputerComponent : Component
 {
@@ -51,24 +83,24 @@ public sealed partial class DropshipNavigationComputerComponent : Component
     [DataField, AutoNetworkedField]
     public bool PlanetOnly;
 
-    // When enabled, destination validation requires the berth to be marked as an ERT landing zone.
+    // When enabled, destination validation requires the destination to be marked as a restricted shuttle berth.
     [DataField, AutoNetworkedField]
-    public bool RequiresERTLandingZone;
+    public bool RequiresShuttleBerth;
 
-    // Defines which class of emergency berth this shuttle may use.
-    [DataField("ertDockingClass")]
-    public RMCERTShuttleDockingClass ERTDockingClass = RMCERTShuttleDockingClass.Standard;
+    // Defines which berth class this shuttle may use.
+    [DataField]
+    public RMCShuttleDockingClass ShuttleDockingClass = RMCShuttleDockingClass.Standard;
 
     // Optional explicit footprint used instead of the grid AABB for berth fit validation.
     [DataField]
     public Box2? DockingBounds;
 
-    // Additional tag filters applied once ERT-only berth routing is enabled.
+    // Additional tag filters applied once restricted berth routing is enabled.
     [DataField, AutoNetworkedField]
-    public List<string> AllowedERTLandingTags = [];
+    public List<string> AllowedLandingTags = [];
 
     [DataField, AutoNetworkedField]
-    public List<string> DeniedERTLandingTags = [];
+    public List<string> DeniedLandingTags = [];
 
     [DataField]
     public SoundSpecifier? LaunchAlarmForcedShutdownSound = new SoundPathSpecifier("/Audio/_RMC14/Structures/metalhit.ogg");

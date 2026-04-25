@@ -80,22 +80,10 @@
   id: RMCDropshipUtilityPoint
 
 - type: Tag
-  id: RMCERTAirlockExternalSide
+  id: RMCShuttleAirlockExternalSide
 
 - type: Tag
-  id: RMCERTAirlockExternalHangar
-
-- type: Tag
-  id: RMCERTAirlockPort4
-
-- type: Tag
-  id: RMCERTAirlockPort5
-
-- type: Tag
-  id: RMCERTAirlockHangarPort
-
-- type: Tag
-  id: RMCERTAirlockHangarStarboard
+  id: RMCShuttleAirlockExternalHangar
 
 - type: Tag
   id: WeaponSMGM63

@@ -114,6 +114,46 @@
     sprite: _RMC14/Structures/Doors/Airlocks/secure_door.rsi
 
 - type: entity
+  parent: CMAirlockSecure
+  id: RMCShuttleExternalSideAirlock
+  name: shuttle external side airlock
+  suffix: Shuttle, External Side
+  components:
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalSide
+
+- type: entity
+  parent: CMAirlock
+  id: RMCShuttleExternalSideBasicAirlock
+  name: shuttle external side airlock
+  suffix: Shuttle, External Side, Basic
+  components:
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalSide
+
+- type: entity
+  parent: CMAirlockSecure
+  id: RMCShuttleExternalHangarAirlock
+  name: shuttle external hangar airlock
+  suffix: Shuttle, External Hangar
+  components:
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalHangar
+
+- type: entity
+  parent: CMAirlock
+  id: RMCShuttleExternalHangarBasicAirlock
+  name: shuttle external hangar airlock
+  suffix: Shuttle, External Hangar, Basic
+  components:
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalHangar
+
+- type: entity
   parent: CMAirlock
   id: CMAirlockCell
   name: cell door

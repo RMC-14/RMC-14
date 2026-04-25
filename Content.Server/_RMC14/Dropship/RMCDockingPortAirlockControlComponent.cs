@@ -19,7 +19,7 @@ public sealed partial class RMCDockingPortAirlockControlComponent : Component
     public bool CloseOnUndock = true;
 
     [DataField]
-    public bool FallbackToNearbyDoors = true;
+    public bool FallbackToNearbyDoors;
 
     [DataField]
     public bool WarnIfMissing = true;

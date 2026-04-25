@@ -38,6 +38,24 @@
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/almayer_solid.rsi
 
 - type: entity
+  parent: RMCDoubleDoorAlmayerSolid
+  id: RMCShuttleExternalSideDoubleDoor
+  suffix: Shuttle, External Side
+  components:
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalSide
+
+- type: entity
+  parent: RMCDoubleDoorAlmayerSolid
+  id: RMCShuttleExternalHangarDoubleDoor
+  suffix: Shuttle, External Hangar
+  components:
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalHangar
+
+- type: entity
   parent: RMCDoubleDoorBase
   id: RMCDoubleDoorCommandGlass
   suffix: Almayer, Glass

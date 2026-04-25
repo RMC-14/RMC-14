@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseStructure
   abstract: true
   id: CMComputerDropship
@@ -44,8 +44,8 @@
     state: syndishuttle
   - type: DropshipNavigationComputer
     hijackable: false
-    requiresERTLandingZone: true
-    ertDockingClass: Standard
+    requiresShuttleBerth: true
+    shuttleDockingClass: Standard
     dockingBounds: "-3.5,-7,3.5,6"
 
 - type: entity
@@ -54,7 +54,7 @@
   suffix: Small
   components:
   - type: DropshipNavigationComputer
-    ertDockingClass: Small
+    shuttleDockingClass: Small
     dockingBounds: "-3,-5,3,4"
 
 - type: entity
@@ -63,7 +63,7 @@
   suffix: Big
   components:
   - type: DropshipNavigationComputer
-    ertDockingClass: Big
+    shuttleDockingClass: Big
     dockingBounds: "-5.5,-10,5.5,8"
 
 - type: entity
@@ -278,10 +278,10 @@
 
 - type: entity
   parent: MarkerBase
-  id: RMCERTDockingPort
-  name: ERT docking port
-  description: Defines the exact docking connector used by emergency response shuttles.
-  suffix: ERT
+  id: RMCShuttleDockingPort
+  name: shuttle docking port
+  description: Defines the exact docking connector used by restricted shuttle routing.
+  suffix: Shuttle
   placement:
     mode: SnapgridCenter
   components:
@@ -296,22 +296,23 @@
   - type: Docking
 
 - type: entity
-  parent: RMCERTDockingPort
-  id: RMCERTShuttleDockingPort
-  name: ERT shuttle docking port
-  description: Defines the exact docking connector on an emergency response shuttle.
-  suffix: ERT, Shuttle
+  parent: RMCShuttleDockingPort
+  id: RMCShuttleMobileDockingPort
+  name: shuttle mobile docking port
+  description: Defines the exact docking connector on a restricted shuttle.
+  suffix: Shuttle, Mobile
   components:
   - type: Sprite
     sprite: _RMC14/Markers/docking_port.rsi
     state: pinonclose
+  - type: RMCShuttleMobileDock
 
 - type: entity
-  parent: RMCERTDockingPort
-  id: RMCERTDockingDestination
+  parent: RMCShuttleDockingPort
+  id: RMCShuttleBerth
   abstract: true
-  name: emergency response dock
-  description: Defines a valid docking location for emergency response shuttles aboard the warship.
+  name: restricted shuttle berth
+  description: Defines a valid docking location for restricted shuttle routing.
   components:
   - type: FTLBeacon
   - type: DropshipDestination
@@ -319,42 +320,42 @@
   - type: NoFTL
 
 - type: entity
-  parent: RMCERTDockingDestination
-  id: RMCERTDockingPortInternal
-  suffix: ERT, Internal
+  parent: RMCShuttleBerth
+  id: RMCShuttleBerthInternal
+  suffix: Shuttle, Internal
   components:
   - type: DropshipDestination
     dockBounds: "-4,-8.5,4,6.5"
-  - type: RMCERTLandingZone
+  - type: RMCShuttleBerth
     dockClasses: [ internal ]
     tags: [ mainship, ert, internal ]
 
 - type: entity
-  parent: RMCERTDockingDestination
-  id: RMCERTDockingPortExternalSide
-  suffix: ERT, External Side
+  parent: RMCShuttleBerth
+  id: RMCShuttleBerthExternalSide
+  suffix: Shuttle, External Side
   components:
   - type: DropshipDestination
     dockBounds: "-5,-9.5,5,7.5"
-  - type: RMCERTLandingZone
+  - type: RMCShuttleBerth
     dockClasses: [ external_side ]
     tags: [ mainship, ert, external_side ]
   - type: RMCDockingPortAirlockControl
-    airlockTags: [ RMCERTAirlockExternalSide ]
+    airlockTags: [ RMCShuttleAirlockExternalSide ]
     searchRadius: 5
 
 - type: entity
-  parent: RMCERTDockingDestination
-  id: RMCERTDockingPortExternalHangar
-  suffix: ERT, External Hangar
+  parent: RMCShuttleBerth
+  id: RMCShuttleBerthExternalHangar
+  suffix: Shuttle, External Hangar
   components:
   - type: DropshipDestination
     dockBounds: "-6,-10.5,6,8.5"
-  - type: RMCERTLandingZone
+  - type: RMCShuttleBerth
     dockClasses: [ external_hangar ]
     tags: [ mainship, ert, external_hangar ]
   - type: RMCDockingPortAirlockControl
-    airlockTags: [ RMCERTAirlockExternalHangar ]
+    airlockTags: [ RMCShuttleAirlockExternalHangar ]
     searchRadius: 8
 
 - type: entity

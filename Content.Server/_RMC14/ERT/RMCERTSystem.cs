@@ -90,7 +90,7 @@ public sealed class RMCERTSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<DropshipArrivedAtDestinationEvent>(OnDropshipArrivedAtDestination);
-        SubscribeLocalEvent<RMCERTDockingVerificationFailedEvent>(OnDockingVerificationFailed);
+        SubscribeLocalEvent<RMCDockingVerificationFailedEvent>(OnDockingVerificationFailed);
 
         SubscribeLocalEvent<RMCERTDistressBeaconComponent, UseInHandEvent>(OnHandheldUse);
         SubscribeLocalEvent<ActorComponent, RMCERTHandheldDistressReasonEvent>(OnHandheldReason);
@@ -442,7 +442,7 @@ public sealed class RMCERTSystem : EntitySystem
         }
     }
 
-    private void OnDockingVerificationFailed(ref RMCERTDockingVerificationFailedEvent ev)
+    private void OnDockingVerificationFailed(ref RMCDockingVerificationFailedEvent ev)
     {
         foreach (var request in _requests.Values)
         {
@@ -677,13 +677,17 @@ public sealed class RMCERTSystem : EntitySystem
         shuttleComp.LandingTags = call.LandingTags.ToList();
         Dirty(shuttle.Value, shuttleComp);
 
+        var restrictedShuttle = EnsureComp<RMCRestrictedShuttleComponent>(shuttle.Value);
+        restrictedShuttle.RequestId = request.Id;
+        restrictedShuttle.Call = call.ID;
+
         var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
         while (computerQuery.MoveNext(out var uid, out var computer, out var xform))
         {
             if (xform.GridUid != shuttle.Value)
                 continue;
 
-            _dropship.ConfigureERTNavigationComputer((uid, computer),
+            _dropship.ConfigureRestrictedNavigationComputer((uid, computer),
                 !shuttleComp.NoHijack,
                 false,
                 true,
@@ -1082,6 +1086,8 @@ public sealed class RMCERTSystem : EntitySystem
         if (request.Shuttle is { Valid: true } shuttle && Exists(shuttle))
         {
             RemComp<RMCERTShuttleComponent>(shuttle);
+            RemComp<RMCRestrictedShuttleComponent>(shuttle);
+            RemComp<RMCExpectedDockComponent>(shuttle);
 
             if (TryComp(shuttle, out DropshipComponent? dropship) &&
                 dropship.Destination is { } destination &&
@@ -1856,10 +1862,10 @@ public sealed class RMCERTSystem : EntitySystem
         builder.Append($"computer:{ToPrettyString(computer.Owner)}, ");
         builder.Append($"computerMap:{FormatEntity(computerXform.MapUid)}, ");
         builder.Append($"shuttle:{FormatEntity(computerXform.GridUid)}, ");
-        builder.Append($"class:{computer.Comp.ERTDockingClass}, ");
+        builder.Append($"class:{computer.Comp.ShuttleDockingClass}, ");
         builder.Append($"bounds:{FormatNullable(computer.Comp.DockingBounds)}, ");
-        builder.Append($"allowedTags:[{string.Join(", ", computer.Comp.AllowedERTLandingTags)}], ");
-        builder.Append($"deniedTags:[{string.Join(", ", computer.Comp.DeniedERTLandingTags)}]");
+        builder.Append($"allowedTags:[{string.Join(", ", computer.Comp.AllowedLandingTags)}], ");
+        builder.Append($"deniedTags:[{string.Join(", ", computer.Comp.DeniedLandingTags)}]");
 
         var total = 0;
         var accepted = 0;
@@ -1888,14 +1894,14 @@ public sealed class RMCERTSystem : EntitySystem
             rejected++;
             var meta = MetaData(uid);
             var prototype = meta.EntityPrototype?.ID ?? "none";
-            var landingZone = TryComp(uid, out RMCERTLandingZoneComponent? zone)
-                ? $"landingZone enabled:{zone.Enabled} ertOnly:{zone.ERTOnly} classes:[{string.Join(", ", zone.DockClasses)}] tags:[{string.Join(", ", zone.Tags)}]"
-                : "landingZone:none";
+            var berth = TryComp(uid, out RMCShuttleBerthComponent? zone)
+                ? $"berth enabled:{zone.Enabled} reserved:{zone.Reserved} classes:[{string.Join(", ", zone.DockClasses)}] tags:[{string.Join(", ", zone.Tags)}]"
+                : "berth:none";
 
             builder.AppendLine();
             builder.Append($" - rejected {ToPrettyString(uid)} proto:{prototype} map:{FormatEntity(destinationXform.MapUid)} ");
             builder.Append($"dockBounds:{FormatNullable(dropshipDestination.DockBounds)} ship:{FormatEntity(dropshipDestination.Ship)} ");
-            builder.Append($"{landingZone} reason:{string.Join("; ", reasons)}");
+            builder.Append($"{berth} reason:{string.Join("; ", reasons)}");
         }
 
         builder.AppendLine();

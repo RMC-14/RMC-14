@@ -4,7 +4,6 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
-using Content.Shared._RMC14.ERT;
 using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Skills;
@@ -360,7 +359,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
             while (computerQuery.MoveNext(out var computerId, out var computer))
             {
-                // ERT-Ships can't be hijacked, so we can use this to filter them out.
+                // Restricted shuttles can opt out of hijacking, so this filters them out of planetside terminals.
                 if (!computer.Hijackable)
                     continue;
 
@@ -676,57 +675,57 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (!HasComp<DropshipDestinationComponent>(destination))
         {
-            reason = Loc.GetString("rmc-dropship-ert-destination-unavailable");
+            reason = Loc.GetString("rmc-dropship-destination-unavailable");
             return false;
         }
 
         if (computer.Comp.PlanetOnly &&
             !IsPlanetsideDestination(destination))
         {
-            reason = Loc.GetString("rmc-dropship-ert-planetside-only");
+            reason = Loc.GetString("rmc-dropship-planetside-only");
             return false;
         }
 
-        if (TryComp(destination, out RMCERTLandingZoneComponent? reservedLandingZone) &&
-            reservedLandingZone.ERTOnly &&
-            !computer.Comp.RequiresERTLandingZone)
+        if (TryComp(destination, out RMCShuttleBerthComponent? reservedBerth) &&
+            reservedBerth.Reserved &&
+            !computer.Comp.RequiresShuttleBerth)
         {
-            reason = Loc.GetString("rmc-dropship-ert-berth-reserved");
+            reason = Loc.GetString("rmc-dropship-berth-reserved");
             return false;
         }
 
-        if (!computer.Comp.RequiresERTLandingZone)
+        if (!computer.Comp.RequiresShuttleBerth)
             return true;
 
-        // ERT-only routing stays on the shared dropship path, but applies an extra berth filter once a console opts into it.
-        if (reservedLandingZone == null ||
-            !Resolve(destination, ref reservedLandingZone, false) ||
-            !reservedLandingZone.Enabled)
+        // Restricted berth routing stays on the shared dropship path, but applies an extra berth filter once a console opts into it.
+        if (reservedBerth == null ||
+            !Resolve(destination, ref reservedBerth, false) ||
+            !reservedBerth.Enabled)
         {
-            reason = Loc.GetString("rmc-dropship-ert-destination-not-configured");
+            reason = Loc.GetString("rmc-dropship-berth-not-configured");
             return false;
         }
 
-        var landingZone = reservedLandingZone;
-        var allowedDockClasses = RMCERTDocking.GetAllowedDockClasses(computer.Comp.ERTDockingClass);
+        var berth = reservedBerth;
+        var allowedDockClasses = RMCShuttleDocking.GetAllowedDockClasses(computer.Comp.ShuttleDockingClass);
 
         if (allowedDockClasses.Length > 0 &&
-            !MatchesAny(landingZone.DockClasses, allowedDockClasses))
+            !MatchesAny(berth.DockClasses, allowedDockClasses))
         {
-            reason = Loc.GetString("rmc-dropship-ert-berth-invalid-class");
+            reason = Loc.GetString("rmc-dropship-berth-invalid-class");
             return false;
         }
 
-        if (computer.Comp.AllowedERTLandingTags.Count > 0 &&
-            !MatchesAny(landingZone.Tags, computer.Comp.AllowedERTLandingTags))
+        if (computer.Comp.AllowedLandingTags.Count > 0 &&
+            !MatchesAny(berth.Tags, computer.Comp.AllowedLandingTags))
         {
-            reason = Loc.GetString("rmc-dropship-ert-destination-invalid-team");
+            reason = Loc.GetString("rmc-dropship-berth-invalid-tags");
             return false;
         }
 
-        if (MatchesAny(landingZone.Tags, computer.Comp.DeniedERTLandingTags))
+        if (MatchesAny(berth.Tags, computer.Comp.DeniedLandingTags))
         {
-            reason = Loc.GetString("rmc-dropship-ert-destination-blocked-team");
+            reason = Loc.GetString("rmc-dropship-berth-blocked-tags");
             return false;
         }
 
@@ -744,7 +743,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (!TryComp(destination, out DropshipDestinationComponent? destinationComp))
         {
-            reason = Loc.GetString("rmc-dropship-ert-destination-unavailable");
+            reason = Loc.GetString("rmc-dropship-destination-unavailable");
             return false;
         }
 
@@ -752,7 +751,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         if (destinationComp.Ship is { } occupiedBy &&
             shuttle != occupiedBy)
         {
-            reason = Loc.GetString("rmc-dropship-ert-berth-occupied");
+            reason = Loc.GetString("rmc-dropship-berth-occupied");
             return false;
         }
 
@@ -768,23 +767,23 @@ public abstract class SharedDropshipSystem : EntitySystem
         return true;
     }
 
-    public void ConfigureERTNavigationComputer(
+    public void ConfigureRestrictedNavigationComputer(
         Entity<DropshipNavigationComputerComponent?> computer,
         bool hijackable,
         bool planetOnly,
-        bool requiresERTLandingZone,
+        bool requiresShuttleBerth,
         IReadOnlyCollection<string>? allowedLandingTags = null,
         IReadOnlyCollection<string>? deniedLandingTags = null)
     {
         if (!Resolve(computer, ref computer.Comp, false))
             return;
 
-        // ERT shuttles reuse the shared dropship console, so their routing rules are pushed in at load time.
+        // Restricted shuttle routing rules can be pushed in at load time by systems such as ERT.
         computer.Comp.Hijackable = hijackable;
         computer.Comp.PlanetOnly = planetOnly;
-        computer.Comp.RequiresERTLandingZone = requiresERTLandingZone;
-        computer.Comp.AllowedERTLandingTags = allowedLandingTags?.ToList() ?? [];
-        computer.Comp.DeniedERTLandingTags = deniedLandingTags?.ToList() ?? [];
+        computer.Comp.RequiresShuttleBerth = requiresShuttleBerth;
+        computer.Comp.AllowedLandingTags = allowedLandingTags?.ToList() ?? [];
+        computer.Comp.DeniedLandingTags = deniedLandingTags?.ToList() ?? [];
         Dirty(computer, computer.Comp);
     }
 
@@ -821,7 +820,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             !TryComp<MapGridComponent>(grid, out var gridComp))
         {
             bounds = default;
-            reason = Loc.GetString("rmc-dropship-ert-invalid-docking-footprint");
+            reason = Loc.GetString("rmc-dropship-invalid-docking-footprint");
             return false;
         }
 
@@ -846,7 +845,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         // Compare the shuttle footprint against each berth edge so oversized craft fail with a precise clearance reason.
         if (shuttle.Left < berth.Left)
         {
-            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-ert-clearance-port",
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-port",
                 ("shuttleSize", shuttleSize),
                 ("berthSize", berthSize));
             return false;
@@ -854,7 +853,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (shuttle.Right > berth.Right)
         {
-            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-ert-clearance-starboard",
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-starboard",
                 ("shuttleSize", shuttleSize),
                 ("berthSize", berthSize));
             return false;
@@ -862,7 +861,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (shuttle.Bottom < berth.Bottom)
         {
-            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-ert-clearance-aft",
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-aft",
                 ("shuttleSize", shuttleSize),
                 ("berthSize", berthSize));
             return false;
@@ -870,7 +869,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (shuttle.Top > berth.Top)
         {
-            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-ert-clearance-forward",
+            reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-forward",
                 ("shuttleSize", shuttleSize),
                 ("berthSize", berthSize));
             return false;

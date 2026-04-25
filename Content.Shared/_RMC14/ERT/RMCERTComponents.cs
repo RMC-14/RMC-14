@@ -133,22 +133,3 @@ public sealed partial class RMCERTSpawnPointComponent : Component
     [DataField]
     public int Priority;
 }
-
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-/// <summary>
-/// Marks a dropship destination as a valid ERT berth and describes which shuttle classes may use it.
-/// </summary>
-public sealed partial class RMCERTLandingZoneComponent : Component
-{
-    [DataField, AutoNetworkedField]
-    public List<string> Tags = [];
-
-    [DataField, AutoNetworkedField]
-    public List<string> DockClasses = [];
-
-    [DataField, AutoNetworkedField]
-    public bool ERTOnly = true;
-
-    [DataField, AutoNetworkedField]
-    public bool Enabled = true;
-}

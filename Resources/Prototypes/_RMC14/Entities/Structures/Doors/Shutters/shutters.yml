@@ -102,6 +102,15 @@
 
 - type: entity
   parent: RMCShutterAlmayer
+  id: RMCShuttleExternalHangarShutter
+  suffix: Shuttle, External Hangar
+  components:
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockExternalHangar
+
+- type: entity
+  parent: RMCShutterAlmayer
   id: RMCShutterAlmayerCL
   name: corporate liaison privacy shutters
 
