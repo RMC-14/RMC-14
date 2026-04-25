@@ -167,7 +167,7 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (turret.VisualEntity is { } existing && Exists(existing))
             return;
 
-        var visual = Spawn("VehicleTurretVisual", Transform(vehicle).Coordinates);
+        var visual = Spawn("VehicleTurretVisual", new EntityCoordinates(vehicle, Vector2.Zero));
         var visualComp = EnsureComp<VehicleTurretVisualComponent>(visual);
         visualComp.Turret = GetNetEntity(turretUid);
         Dirty(visual, visualComp);

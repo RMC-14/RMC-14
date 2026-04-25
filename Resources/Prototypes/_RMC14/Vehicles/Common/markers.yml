@@ -15,8 +15,6 @@
   - type: Vehicle
   - type: Clickable
   - type: RMCIgnoreGhostInteractionLimits
-    bounds:
-      all: "-0.45,-0.45,0.45,0.45"
   - type: InteractionOutline
   - type: Physics
     bodyType: Static
