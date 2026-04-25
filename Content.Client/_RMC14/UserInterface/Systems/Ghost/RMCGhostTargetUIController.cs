@@ -36,7 +36,7 @@ public sealed class RMCGhostTargetUIController : UIController
     private void OnGhostWarpsResponse(RMCGhostWarpsResponseEvent msg, EntitySessionEventArgs args)
     {
         var window = EnsureWindow();
-        window.UpdateWarps(msg.Warps);
+        window.UpdateSections(msg.Sections);
         window.Populate();
     }
 
