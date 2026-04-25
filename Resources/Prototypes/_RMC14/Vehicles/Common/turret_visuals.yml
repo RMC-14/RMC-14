@@ -2,6 +2,9 @@
   id: VehicleTurretVisual
   name: vehicle turret visual
   components:
+  - type: Tag
+    tags:
+    - HideContextMenu
   - type: Sprite
     drawdepth: OverMobs
     sprite: _RMC14/Structures/Vehicles/hardpoints/humvee.rsi
