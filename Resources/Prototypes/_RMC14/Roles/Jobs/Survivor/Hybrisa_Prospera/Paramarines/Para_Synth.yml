@@ -28,7 +28,7 @@
         - type: PyroWhitelist
         - type: TacticalMapIcon
           icon:
-            sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
             state: synth
           background:
             sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi

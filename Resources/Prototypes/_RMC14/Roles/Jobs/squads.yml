@@ -362,8 +362,8 @@
     - Gloves
     radio: Provost
     minimapBackground:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: background_twe
+      sprite: /Textures/_RMC14/Interface/MapBlips/tse.rsi # TODO RMC14 - use a UN background.
+      state: background_rcm
     canSupplyDrop: false
     group: Provost
     leaderIcon:
