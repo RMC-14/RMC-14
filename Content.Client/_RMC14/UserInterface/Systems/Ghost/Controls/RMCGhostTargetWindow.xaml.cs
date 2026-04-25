@@ -310,8 +310,11 @@ namespace Content.Client._RMC14.UserInterface.Systems.Ghost.Controls
         /// </summary>
         public void Populate()
         {
+            _collapsibleGroups.Clear();
             ContentContainer.DisposeAllChildren();
             AddContent();
+            UpdateVisibleButtons();
+            UpdateVisibleCollapsibles();
         }
 
         /// <summary>
@@ -782,25 +785,16 @@ namespace Content.Client._RMC14.UserInterface.Systems.Ghost.Controls
                 if (child is Collapsible collapsible)
                 {
                     var body = collapsible.GetChild(1) as CollapsibleBody;
-                    if (body == null)
-                        continue;
-
-                    // RMC14: Update buttons in all GridContainer inside body
-                    foreach (var bodyChild in body.Children)
-                    {
-                        if (bodyChild is GridContainer groupContainer)
-                        {
-                            foreach (var button in groupContainer.Children.OfType<Button>())
-                            {
-                                button.Visible = ButtonIsVisible(button);
-                            }
-                        }
-                        // RMC14: Recursively traverse BoxContainer with subgroups
-                        else if (bodyChild is BoxContainer subgroupsBox)
-                        {
-                            UpdateVisibleButtonsRecursive(subgroupsBox);
-                        }
-                    }
+                    if (body != null)
+                        UpdateVisibleButtonsRecursive(body);
+                }
+                else if (child is Button button)
+                {
+                    button.Visible = ButtonIsVisible(button);
+                }
+                else if (child is Container childContainer)
+                {
+                    UpdateVisibleButtonsRecursive(childContainer);
                 }
             }
         }
@@ -818,58 +812,32 @@ namespace Content.Client._RMC14.UserInterface.Systems.Ghost.Controls
         /// </summary>
         private bool UpdateVisibleCollapsibles(Container container)
         {
-            bool anyVisible = false;
+            var anyVisible = false;
+            var searchEmpty = string.IsNullOrEmpty(_searchText);
 
             foreach (var child in container.Children)
             {
                 if (child is Collapsible collapsible)
                 {
                     var body = collapsible.GetChild(1) as CollapsibleBody;
-                    if (body == null)
-                        continue;
-
-                    // First child — GridContainer with buttons
-                    bool hasVisibleButton = false;
-                    bool hasVisibleSubgroup = false;
-
-                    foreach (var bodyChild in body.Children)
-                    {
-                        if (bodyChild is GridContainer buttonGrid)
-                        {
-                            if (buttonGrid.Children.OfType<Button>().Any(ButtonIsVisible))
-                                hasVisibleButton = true;
-                        }
-                        else if (bodyChild is BoxContainer subgroupsBox)
-                        {
-                            if (UpdateVisibleCollapsibles(subgroupsBox))
-                                hasVisibleSubgroup = true;
-                        }
-                    }
-
-                    bool visible = hasVisibleButton || hasVisibleSubgroup;
+                    var hasVisibleContent = body != null && UpdateVisibleCollapsibles(body);
+                    var visible = searchEmpty || hasVisibleContent;
                     collapsible.Visible = visible;
-                    collapsible.BodyVisible = string.IsNullOrEmpty(_searchText)
+                    collapsible.BodyVisible = searchEmpty
                         ? _collapsibleGroups.TryGetValue(collapsible, out var group) && group.IsExpandedByDefault
-                        : visible;
+                        : hasVisibleContent;
 
                     if (visible)
                         anyVisible = true;
                 }
-            }
-
-            // Если поиск пустой — показать всё и раскрыть по умолчанию
-            if (string.IsNullOrEmpty(_searchText))
-            {
-                foreach (var child in container.Children)
+                else if (child is Button button)
                 {
-                    if (child is Collapsible collapsible)
-                    {
-                        collapsible.Visible = true;
-                        if (_collapsibleGroups.TryGetValue(collapsible, out var group))
-                            collapsible.BodyVisible = group.IsExpandedByDefault;
-                    }
+                    anyVisible |= ButtonIsVisible(button);
                 }
-                return true;
+                else if (child is Container childContainer)
+                {
+                    anyVisible |= UpdateVisibleCollapsibles(childContainer);
+                }
             }
 
             return anyVisible;
