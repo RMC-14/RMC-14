@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Database;
 using Content.Shared.Damage;
 using Content.Shared.Follower;
@@ -41,6 +42,8 @@ public sealed class RMCGhostTargetSystem : EntitySystem
     private static readonly LocId EmptyTitle = string.Empty;
     private static readonly LocId MarinesTitle = "rmc-ghost-target-window-group-marines";
     private static readonly LocId XenosTitle = "rmc-ghost-target-window-group-xenos";
+    private static readonly LocId InfectedTitle = "rmc-ghost-target-window-group-infected";
+    private static readonly LocId SurvivorsTitle = "rmc-ghost-target-window-group-survivors";
     private static readonly LocId OthersTitle = "rmc-ghost-target-window-group-others";
     private static readonly LocId DeadsTitle = "rmc-ghost-target-window-group-deads";
     private static readonly LocId GhostsTitle = "rmc-ghost-target-window-group-ghosts";
@@ -137,6 +140,8 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         var factionSections = BuildFactionSections();
         var marines = new SectionBuilder(MarinesTitle, null, Color.FromHex("#1c70b0"));
         var xenos = new SectionBuilder(XenosTitle, null, Color.FromHex("#472f4f"));
+        var infected = new SectionBuilder(InfectedTitle, null, Color.FromHex("#8f4f24"));
+        var survivors = new SectionBuilder(SurvivorsTitle, null, Color.FromHex("#3f7f4f"));
         var others = new SectionBuilder(OthersTitle);
         var deads = new SectionBuilder(DeadsTitle, isExpandedByDefault: false);
         var ghosts = new SectionBuilder(GhostsTitle, isExpandedByDefault: false);
@@ -146,6 +151,8 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         {
             var uid = target.Uid;
             var entry = target.Entry;
+            var isInfected = HasComp<VictimInfectedComponent>(uid);
+            var isSurvivor = HasComp<RMCSurvivorComponent>(uid);
 
             if (entry.IsWarpPoint)
             {
@@ -162,6 +169,18 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             if (_mobState.IsDead(uid))
             {
                 deads.Entries.Add(entry);
+                if (isInfected)
+                    infected.Entries.Add(entry);
+
+                continue;
+            }
+
+            if (isInfected)
+                infected.Entries.Add(entry);
+
+            if (isSurvivor)
+            {
+                survivors.Entries.Add(entry);
                 continue;
             }
 
@@ -176,8 +195,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
                     goto nextTarget;
                 }
 
-                if (_npcFaction.IsMember((uid, factionComp), MarineFaction) &&
-                    !HasComp<RMCSurvivorComponent>(uid))
+                if (_npcFaction.IsMember((uid, factionComp), MarineFaction))
                 {
                     AddMarineEntry(marines, uid, entry);
                     continue;
@@ -197,7 +215,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
         factionSections.Roots.Sort(CompareSectionsByTitle);
 
-        var roots = new List<SectionBuilder> { marines, xenos };
+        var roots = new List<SectionBuilder> { marines, xenos, infected, survivors };
         roots.AddRange(factionSections.Roots);
         roots.Add(others);
         roots.Add(deads);
