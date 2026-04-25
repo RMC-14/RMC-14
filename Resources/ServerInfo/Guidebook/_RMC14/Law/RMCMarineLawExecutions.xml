@@ -1,10 +1,11 @@
 ﻿<Document>
   # Executions
 
+  - Information about [bold]Battlefield Executions[/bold] is found in [bold]Commanding Officer Provisions[/bold].
+
   ## Authorization
   - Executions are limited to prisoners who have committed crimes with execution as a possible punishment.
-  - They must be authorized by the [color=#00CBFE][bold]Commanding Officer[/bold][/color].
-  - In the event the [color=#00CBFE][bold]Commanding Officer[/bold][/color] is absent, [bold]BOTH[/bold] the [color=#8B0000][bold]Chief MP[/bold][/color] and [color=#008000][bold]Commander[/bold][/color] must give the authorization.
+  - They must be authorized by the [color=#00CBFE][bold]Commanding Officer[/bold][/color], or [bold]BOTH[/bold] the [color=#8B0000][bold]Chief MP[/bold][/color] and [color=#008000][bold]Commander[/bold][/color].
   - Executions may be delayed if the alert level is RED or DELTA.
   - A prisoner that is permanently confined may request to be executed in place of their confinement, but must still be authorized.
 
