@@ -272,7 +272,7 @@
     mountOnDeploy: true
     mountExclusionAreaSize: 0
     barricadeExclusionAreaSize: 2
-    assembleDelay: 0.5
+    assembleDelay: 3
     undeploySound: null
     acidableWhileUndeployed: true
   - type: Tag
