@@ -10,6 +10,7 @@ rmc-ghost-target-window-group-marines = Marines
 rmc-ghost-target-window-group-xenos = Xenomorphs
 rmc-ghost-target-window-group-infected = Infected
 rmc-ghost-target-window-group-survivors = Survivors
+rmc-ghost-target-window-group-escaped = Escaped
 rmc-ghost-target-window-group-others = Others
 rmc-ghost-target-window-group-deads = Deads
 rmc-ghost-target-window-group-warp-points = Warp-points

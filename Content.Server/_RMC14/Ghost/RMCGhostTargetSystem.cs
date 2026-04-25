@@ -6,7 +6,9 @@ using Content.Server.Body.Components;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
 using Content.Shared._RMC14.Ghost;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
@@ -15,7 +17,9 @@ using Content.Shared.Database;
 using Content.Shared.Damage;
 using Content.Shared.Follower;
 using Content.Shared.Follower.Components;
+using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
+using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -44,6 +48,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
     private static readonly LocId XenosTitle = "rmc-ghost-target-window-group-xenos";
     private static readonly LocId InfectedTitle = "rmc-ghost-target-window-group-infected";
     private static readonly LocId SurvivorsTitle = "rmc-ghost-target-window-group-survivors";
+    private static readonly LocId EscapedTitle = "rmc-ghost-target-window-group-escaped";
     private static readonly LocId OthersTitle = "rmc-ghost-target-window-group-others";
     private static readonly LocId DeadsTitle = "rmc-ghost-target-window-group-deads";
     private static readonly LocId GhostsTitle = "rmc-ghost-target-window-group-ghosts";
@@ -142,10 +147,12 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         var xenos = new SectionBuilder(XenosTitle, null, Color.FromHex("#472f4f"));
         var infected = new SectionBuilder(InfectedTitle, null, Color.FromHex("#8f4f24"));
         var survivors = new SectionBuilder(SurvivorsTitle, null, Color.FromHex("#3f7f4f"));
+        var escaped = new SectionBuilder(EscapedTitle, null, Color.FromHex("#808000"), false);
         var others = new SectionBuilder(OthersTitle);
         var deads = new SectionBuilder(DeadsTitle, isExpandedByDefault: false);
         var ghosts = new SectionBuilder(GhostsTitle, isExpandedByDefault: false);
         var warpPoints = new SectionBuilder(WarpPointsTitle, isExpandedByDefault: false);
+        var distressEndgame = IsDistressEndgame();
 
         foreach (var target in GetPlayerTargets(ghost).Concat(GetGhostTargets(ghost, showAdminGhosts)).Concat(GetLocationTargets()))
         {
@@ -153,6 +160,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             var entry = target.Entry;
             var isInfected = HasComp<VictimInfectedComponent>(uid);
             var isSurvivor = HasComp<RMCSurvivorComponent>(uid);
+            var isEscaped = IsEscaped(uid, distressEndgame);
 
             if (entry.IsWarpPoint)
             {
@@ -181,6 +189,15 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             if (isSurvivor)
             {
                 survivors.Entries.Add(entry);
+                if (isEscaped)
+                    escaped.Entries.Add(entry);
+
+                continue;
+            }
+
+            if (isEscaped)
+            {
+                escaped.Entries.Add(entry);
                 continue;
             }
 
@@ -215,7 +232,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
         factionSections.Roots.Sort(CompareSectionsByTitle);
 
-        var roots = new List<SectionBuilder> { marines, xenos, infected, survivors };
+        var roots = new List<SectionBuilder> { marines, xenos, infected, survivors, escaped };
         roots.AddRange(factionSections.Roots);
         roots.Add(others);
         roots.Add(deads);
@@ -228,6 +245,30 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         roots = roots.Where(HasContent).ToList();
         AssignIndexes(roots);
         return roots.Select(ToSection).ToList();
+    }
+
+    private bool IsDistressEndgame()
+    {
+        var query = EntityQueryEnumerator<ActiveGameRuleComponent, CMDistressSignalRuleComponent>();
+        while (query.MoveNext(out _, out var distress))
+        {
+            if (distress.Hijack || distress.ForceEndAt != null)
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool IsEscaped(EntityUid uid, bool distressEndgame)
+    {
+        if (!distressEndgame ||
+            !HasComp<HumanoidAppearanceComponent>(uid) ||
+            HasComp<XenoComponent>(uid))
+        {
+            return false;
+        }
+
+        return !HasComp<AlmayerComponent>(Transform(uid).MapUid);
     }
 
     private FactionSectionCollection BuildFactionSections()
