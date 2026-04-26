@@ -221,7 +221,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
             if (HasComp<XenoComponent>(uid))
             {
-                xenos.Entries.Add(entry);
+                AddXenoEntry(xenos, uid, entry);
                 continue;
             }
 
@@ -350,6 +350,8 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
     private void AddMarineEntry(SectionBuilder marines, EntityUid uid, RMCGhostTargetEntry entry)
     {
+        var authorityLevel = GetMarineAuthorityLevel(uid);
+
         if (_squad.TryGetMemberSquad(uid, out var squad))
         {
             var squadName = Name(squad.Owner);
@@ -360,7 +362,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
                 marines.Children.Add(squadSection);
             }
 
-            squadSection.Entries.Add(entry);
+            squadSection.AddEntry(entry, authorityLevel);
             return;
         }
 
@@ -371,7 +373,27 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             marines.Children.Add(othersSection);
         }
 
-        othersSection.Entries.Add(entry);
+        othersSection.AddEntry(entry, authorityLevel);
+    }
+
+    private void AddXenoEntry(SectionBuilder xenos, EntityUid uid, RMCGhostTargetEntry entry)
+    {
+        var tier = TryComp<XenoComponent>(uid, out var xeno)
+            ? xeno.Tier
+            : (int?) null;
+
+        xenos.AddEntry(entry, tier);
+    }
+
+    private int? GetMarineAuthorityLevel(EntityUid uid)
+    {
+        if (!TryComp<MindContainerComponent>(uid, out var mindContainer) ||
+            !_jobs.MindTryGetJob(mindContainer.Mind, out var job))
+        {
+            return null;
+        }
+
+        return job.MarineAuthorityLevel;
     }
 
     private IEnumerable<TargetData> GetLocationTargets()
@@ -529,11 +551,35 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
     private void SortSection(SectionBuilder section)
     {
-        section.Entries.Sort((a, b) => string.Compare(a.DisplayName, b.DisplayName, StringComparison.CurrentCulture));
+        section.Entries.Sort((a, b) => CompareEntries(section, a, b));
         section.Children.Sort(CompareSectionsByTitle);
 
         foreach (var child in section.Children)
             SortSection(child);
+    }
+
+    private int CompareEntries(SectionBuilder section, RMCGhostTargetEntry a, RMCGhostTargetEntry b)
+    {
+        var aHasSortValue = section.EntrySortValues.TryGetValue(a.Entity, out var aSortValue);
+        var bHasSortValue = section.EntrySortValues.TryGetValue(b.Entity, out var bSortValue);
+
+        if (aHasSortValue && bHasSortValue)
+        {
+            var sortCompare = bSortValue.CompareTo(aSortValue);
+            if (sortCompare != 0)
+                return sortCompare;
+        }
+        else if (aHasSortValue != bHasSortValue)
+        {
+            return aHasSortValue ? -1 : 1;
+        }
+
+        return CompareEntriesByName(a, b);
+    }
+
+    private static int CompareEntriesByName(RMCGhostTargetEntry a, RMCGhostTargetEntry b)
+    {
+        return string.Compare(a.DisplayName, b.DisplayName, StringComparison.CurrentCulture);
     }
 
     private int CompareSectionsByTitle(SectionBuilder a, SectionBuilder b)
@@ -655,6 +701,15 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         public Color HeaderColor;
         public bool IsExpandedByDefault;
         public readonly List<RMCGhostTargetEntry> Entries = new();
+        public readonly Dictionary<NetEntity, int> EntrySortValues = new();
         public readonly List<SectionBuilder> Children = new();
+
+        public void AddEntry(RMCGhostTargetEntry entry, int? sortValue = null)
+        {
+            Entries.Add(entry);
+
+            if (sortValue != null)
+                EntrySortValues[entry.Entity] = sortValue.Value;
+        }
     }
 }
