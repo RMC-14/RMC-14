@@ -42,9 +42,6 @@ public sealed class HiveLeaderSystem : EntitySystem
         _activePheromonesQuery = GetEntityQuery<XenoActivePheromonesComponent>();
         _pheromonesQuery = GetEntityQuery<XenoPheromonesComponent>();
 
-        SubscribeLocalEvent<NewXenoEvolvedEvent>(OnLeaderNewXenoEvolved);
-        SubscribeLocalEvent<XenoDevolvedEvent>(OnLeaderXenoDevolved);
-
         SubscribeLocalEvent<HiveLeaderComponent, ComponentRemove>(OnLeaderRemove);
         SubscribeLocalEvent<HiveLeaderComponent, EntityTerminatingEvent>(OnLeaderRemove);
         SubscribeLocalEvent<HiveLeaderComponent, MobStateChangedEvent>(OnLeaderMobStateChanged);
@@ -68,16 +65,6 @@ public sealed class HiveLeaderSystem : EntitySystem
     {
         if (args.NewMobState == MobState.Dead)
             RemoveLeader(ent);
-    }
-
-    private void OnLeaderNewXenoEvolved(ref NewXenoEvolvedEvent args)
-    {
-        Transfer(args.OldXeno, args.NewXeno);
-    }
-
-    private void OnLeaderXenoDevolved(ref XenoDevolvedEvent args)
-    {
-        Transfer(args.OldXeno, args.NewXeno);
     }
 
     private void OnGranterRemove<T>(Entity<HiveLeaderGranterComponent> ent, ref T args)
@@ -305,22 +292,6 @@ public sealed class HiveLeaderSystem : EntitySystem
         granter.Leaders.Remove(leader);
         Dirty(leader.Comp.Granter.Value, granter);
         SyncPheromones((leader.Comp.Granter.Value, granter));
-    }
-
-    private void Transfer(EntityUid oldXeno, EntityUid newXeno)
-    {
-        if (!_hiveLeaderQuery.TryComp(oldXeno, out var oldLeader) ||
-            !_hiveLeaderGranterQuery.TryComp(oldLeader.Granter, out var granter) ||
-            _hiveLeaderGranterQuery.HasComp(newXeno))
-        {
-            return;
-        }
-
-        var newLeader = EnsureComp<HiveLeaderComponent>(newXeno);
-        newLeader.Granter = oldLeader.Granter;
-        granter.Leaders.Remove(oldXeno);
-        granter.Leaders.Add(newXeno);
-        AddLeader((newXeno, newLeader), (oldLeader.Granter.Value, granter));
     }
 
     public bool IsLeader(EntityUid leader, [NotNullWhen(true)] out HiveLeaderComponent? leaderComp)

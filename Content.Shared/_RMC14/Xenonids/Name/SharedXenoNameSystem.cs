@@ -1,6 +1,5 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.IdentityManagement;
-using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.NameModifier.EntitySystems;
@@ -29,9 +28,6 @@ public abstract class SharedXenoNameSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<NewXenoEvolvedEvent>(OnNewXenoEvolved);
-        SubscribeLocalEvent<XenoDevolvedEvent>(OnXenoDevolved);
-
         SubscribeLocalEvent<XenoNameComponent, RefreshNameModifiersEvent>(OnRefreshNameModifiers);
         SubscribeLocalEvent<XenoNameComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<XenoNameComponent, RMCGetFixedIdentityEvent>(OnGetFixedIdentity);
@@ -48,16 +44,6 @@ public abstract class SharedXenoNameSystem : EntitySystem
             RMCCVars.RMCPlaytimeXenoPostfixTwoTimeHours,
             v => _xenoPostfixTwoTime = TimeSpan.FromHours(v),
             true);
-    }
-
-    private void OnNewXenoEvolved(ref NewXenoEvolvedEvent ev)
-    {
-        TransferName(ev.OldXeno, ev.NewXeno);
-    }
-
-    private void OnXenoDevolved(ref XenoDevolvedEvent ev)
-    {
-        TransferName(ev.OldXeno, ev.NewXeno);
     }
 
     private void OnRefreshNameModifiers(Entity<XenoNameComponent> ent, ref RefreshNameModifiersEvent args)
@@ -151,25 +137,6 @@ public abstract class SharedXenoNameSystem : EntitySystem
             return 1;
 
         return 0;
-    }
-
-    private void TransferName(EntityUid oldXeno, EntityUid newXeno)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (!TryComp(oldXeno, out XenoNameComponent? oldName))
-            return;
-
-        var newName = EnsureComp<XenoNameComponent>(newXeno);
-        newName.Rank = oldName.Rank;
-        newName.Prefix = oldName.Prefix;
-        newName.Number = oldName.Number;
-        newName.Postfix = oldName.Postfix;
-        Dirty(newXeno, newName);
-        RemComp<AssignXenoNameComponent>(newXeno);
-
-        _nameModifier.RefreshNameModifiers(newXeno);
     }
 
     public virtual void SetupName(EntityUid xeno)

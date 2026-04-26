@@ -62,6 +62,8 @@ public sealed class XenoFortifySystem : EntitySystem
         SubscribeLocalEvent<XenoFortifyComponent, MobStateChangedEvent>(OnXenoFortifyMobStateChanged);
         SubscribeLocalEvent<XenoFortifyComponent, RefreshMovementSpeedModifiersEvent>(OnXenoFortifyRefreshSpeed);
         SubscribeLocalEvent<XenoFortifyComponent, GetMeleeDamageEvent>(OnXenoFortifyGetMeleeDamage);
+
+        SubscribeLocalEvent<XenoFortifyComponent, ComponentShutdown>(OnXenoFortifyShutdown);
     }
 
     private void OnXenoFortifyAction(Entity<XenoFortifyComponent> xeno, ref XenoFortifyActionEvent args)
@@ -188,6 +190,12 @@ public sealed class XenoFortifySystem : EntitySystem
     {
         if (xeno.Comp.Fortified)
             args.Damage.ExclusiveAdd(xeno.Comp.DamageAddedFortified);
+    }
+
+    private void OnXenoFortifyShutdown(Entity<XenoFortifyComponent> xeno, ref ComponentShutdown args)
+    {
+        if (xeno.Comp.Fortified)
+            Unfortify(xeno);
     }
 
     private void Fortify(Entity<XenoFortifyComponent> xeno)

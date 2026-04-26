@@ -50,6 +50,13 @@ public sealed partial class CloningSettingsPrototype : IPrototype, IInheritingPr
     [DataField]
     public bool CopyImplants = true;
 
+    /// RMC14
+    /// <summary>
+    ///     Whether to copy as many components as possible and use the exclusion list instead
+    /// </summary>
+    [DataField]
+    public bool CopyAll = false;
+
     /// <summary>
     ///     Whitelist for the equipment allowed to be copied.
     /// </summary>
@@ -80,4 +87,13 @@ public sealed partial class CloningSettingsPrototype : IPrototype, IInheritingPr
     [DataField]
     [AlwaysPushInheritance]
     public HashSet<string> EventComponents = new();
+
+    /// RMC14
+    /// <summary>
+    ///     Components to NOT copy from the original to the clone.
+    ///     Used in conjunction with CopyAll to specify wich components shouldn't be copied.
+    /// </summary>
+    [DataField]
+    [AlwaysPushInheritance]
+    public HashSet<string> ExcludeComponents = new();
 }

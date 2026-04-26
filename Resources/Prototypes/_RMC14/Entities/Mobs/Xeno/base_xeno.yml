@@ -129,9 +129,27 @@
     noRot: true
     drawdepth: Mobs
     layers:
-    - map: [ "enum.XenoVisualLayers.Base" ]
+    - map: [ "enum.XenoVisualLayers.Base", "enum.ForTheHiveVisualLayers.Base", "enum.XenoShardVisualLayers.Base" ]
       state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
+    - map: [ "enum.XenoHealerVisualLayers.Goop" ]
+      visible: false
+    - map: [ "enum.XenoFruitVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoEggStorageVisualLayers.Base" ]
+      visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoAcidGeneratingVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.RightArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Head" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.LeftArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Back" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
@@ -522,3 +540,57 @@
   name: chat-speech-verb-name-default
   speechVerbStrings:
   - hisses
+
+- type: cloningSettings
+  id: XenoClone
+  copyAll: true
+  excludeComponents:
+  - MetaData
+  # positions/current status shouldn't change
+  - Physics
+  - Actor
+  - Transform
+  - Climbing
+  - InputMover
+  - ActiveInputMover
+  - LagCompensation
+  - MobMover
+  - MindContainer
+  - StatusEffects
+  - ContainerContainer
+  - HiveMember
+  - HiveTracker
+  - XenoActivePheromones
+  - XenoName
+  - ActiveTacticalMapTracked
+  - XenoRecentlyDevolved
+  - XenoRank
+  - Actions
+  - ActionsContainer
+  - NameModifier
+  - AffectableByWeeds
+  - OnFire
+  - Appearance
+  - XenoSecretionList
+  - MouseRotator
+  - NoRotateOnMove
+  # leader related
+  - HiveLeader
+  - RMCInnateRadioTextIncrease
+  # godmode/invincibility should stay if granted
+  - Damageable
+  - Destructible
+  - Godmode
+  # hivemind status shouldn't change
+  - IntrinsicRadioReceiver
+  - IntrinsicRadioTransmitter
+  - ActiveRadio
+  # other?
+  - UserInterface
+  - NpcFactionMember
+  - EmoteCooldown
+  - AssignXenoName # don't rename the xeno
+  # tacmap
+  - TacticalMapUser
+  - ActiveTacticalMapUser
+  - UserInterfaceUser

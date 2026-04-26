@@ -35,8 +35,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
         SubscribeLocalEvent<XenoPlasmaComponent, RejuvenateEvent>(OnXenoRejuvenate);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoTransferPlasmaActionEvent>(OnXenoTransferPlasmaAction);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoTransferPlasmaDoAfterEvent>(OnXenoTransferDoAfter);
-        SubscribeLocalEvent<XenoPlasmaComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
-        SubscribeLocalEvent<XenoPlasmaComponent, XenoDevolvedEvent>(OnXenoDevolved);
+        SubscribeLocalEvent<XenoPlasmaComponent, XenoChangingCasteEvent>(OnXenoChangingCaste);
 
         SubscribeLocalEvent<XenoActionPlasmaComponent, RMCActionUseAttemptEvent>(OnXenoActionEnergyUseAttempt);
         SubscribeLocalEvent<XenoActionPlasmaComponent, RMCActionUseEvent>(OnXenoActionEnergyUse);
@@ -146,14 +145,19 @@ public sealed class XenoPlasmaSystem : EntitySystem
             args.Repeat = true;
     }
 
-    private void OnNewXenoEvolved(Entity<XenoPlasmaComponent> newXeno, ref NewXenoEvolvedEvent args)
+    private void OnXenoChangingCaste(Entity<XenoPlasmaComponent> xeno, ref XenoChangingCasteEvent args)
     {
-        EvolutionTransferPlasma(args.OldXeno, newXeno);
-    }
+        var compName = EntityManager.ComponentFactory.GetComponentName<XenoPlasmaComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoPlasmaComponent { } newComponent)
+        {
+            var xenoPlasmaRatio = xeno.Comp.MaxPlasma switch
+            {
+                0 => 1,
+                _ => xeno.Comp.Plasma / xeno.Comp.MaxPlasma
+            };
 
-    private void OnXenoDevolved(Entity<XenoPlasmaComponent> newXeno, ref XenoDevolvedEvent args)
-    {
-        EvolutionTransferPlasma(args.OldXeno, newXeno);
+            newComponent.Plasma = newComponent.MaxPlasma * xenoPlasmaRatio;
+        }
     }
 
     private void OnXenoActionEnergyUseAttempt(Entity<XenoActionPlasmaComponent> action, ref RMCActionUseAttemptEvent args)

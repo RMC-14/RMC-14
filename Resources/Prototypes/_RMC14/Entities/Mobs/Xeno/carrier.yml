@@ -165,20 +165,6 @@
     - RMCGuideRoleEggsac
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/eggsac_carrier.rsi
-    layers:
-    - map: [ "enum.XenoVisualLayers.Base" ]
-      state: alive
-    - map: [ "enum.XenoEggStorageVisualLayers.Base" ]
-      state: eggsac_0
-    - map: [ "enum.RMCDamageVisualLayers.Base" ]
-      visible: false
-    - map: [ "enum.XenoInhandVisualLayers.Left" ]
-      visible: false
-    - map: [ "enum.XenoInhandVisualLayers.Right" ]
-      visible: false
-    - map: [ "enum.RMCShieldVisuals.Base" ]
-      sprite: _RMC14/Effects/xeno_shields.rsi
-      visible: false
   - type: Xeno
     actionIds:
     - ActionXenoRest

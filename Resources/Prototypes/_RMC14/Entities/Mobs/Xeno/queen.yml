@@ -18,20 +18,6 @@
     name: cm-job-name-xeno-queen
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi
-    layers:
-    - map: [ "enum.XenoVisualLayers.Base" ]
-      state: alive
-    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
-      sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
-    - map: [ "enum.RMCDamageVisualLayers.Base" ]
-      visible: false
-    - map: [ "enum.XenoInhandVisualLayers.Left" ]
-      visible: false
-    - map: [ "enum.XenoInhandVisualLayers.Right" ]
-      visible: false
-    - map: [ "enum.RMCShieldVisuals.Base" ]
-      sprite: _RMC14/Effects/xeno_shields.rsi
-      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -301,13 +287,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_queen.rsi
-    layers:
-    - map: [ "enum.XenoVisualLayers.Base" ]
-      state: alive
-    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
-      sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_ovipositor.rsi
-    - map: [ "enum.RMCDamageVisualLayers.Base" ]
-      visible: false
+  - type: XenoOvipositorCapable
+    sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_ovipositor.rsi
   - type: XenoStrain
     name: rmc-xeno-maid-name
     description: rmc-xeno-maid-description

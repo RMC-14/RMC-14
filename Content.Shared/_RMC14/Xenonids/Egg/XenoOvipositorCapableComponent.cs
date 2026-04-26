@@ -29,4 +29,7 @@ public sealed partial class XenoOvipositorCapableComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, EntityUid> Actions = new();
+
+    [DataField, AutoNetworkedField]
+    public string? Sprite;
 }

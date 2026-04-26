@@ -125,9 +125,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _xenoTunnelQuery = GetEntityQuery<XenoTunnelComponent>();
         _queenBoostQuery = GetEntityQuery<QueenBuildingBoostComponent>();
 
-        SubscribeLocalEvent<NewXenoEvolvedEvent>(OnNewXenoEvolved);
-        SubscribeLocalEvent<XenoDevolvedEvent>(OnXenoDevolved);
-
         SubscribeLocalEvent<XenoConstructionComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
         SubscribeLocalEvent<XenoConstructionComponent, XenoExpandWeedsActionEvent>(OnXenoExpandWeedsAction);
 
@@ -191,16 +188,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         Subs.CVar(_config, RMCCVars.RMCResinConstructionDensityCostIncreaseThreshold, v => _densityThreshold = v, true);
         Subs.CVar(_config, RMCCVars.RMCNewResinPreventCollideTimeSeconds, v => _newResinPreventCollideTime = TimeSpan.FromSeconds(v), true);
-    }
-
-    private void OnNewXenoEvolved(ref NewXenoEvolvedEvent args)
-    {
-        TransferSecretionsBuilt(args.OldXeno.Owner, args.NewXeno);
-    }
-
-    private void OnXenoDevolved(ref XenoDevolvedEvent args)
-    {
-        TransferSecretionsBuilt(args.OldXeno, args.NewXeno);
     }
 
     private void OnXenoOrderConstructionClick(XenoOrderConstructionClickEvent ev, EntitySessionEventArgs args)
@@ -1781,32 +1768,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             cost = plasma.MaxPlasma;
 
         return cost;
-    }
-
-    private void TransferSecretionsBuilt(Entity<XenoSecretionListComponent?> oldXeno, EntityUid newXeno)
-    {
-        if (!Resolve(oldXeno, ref oldXeno.Comp, false))
-            return;
-
-        var limited = EnsureComp<XenoSecretionListComponent>(newXeno);
-        foreach (var (id, built) in oldXeno.Comp.Built)
-        {
-            limited.Built[id] = built;
-            foreach (var netBuild in built)
-            {
-                if (GetEntity(netBuild) is not { Valid: true } builtId ||
-                    !TryComp(builtId, out XenoSecretionLimitedComponent? secretionLimited))
-                {
-                    continue;
-                }
-
-                secretionLimited.Xeno = newXeno;
-                Dirty(builtId, secretionLimited);
-            }
-        }
-
-        Dirty(newXeno, limited);
-        oldXeno.Comp.Built.Clear();
     }
 
     public override void Update(float frameTime)

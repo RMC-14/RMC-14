@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Mind;
 using Content.Shared.MouseRotator;
@@ -22,6 +24,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
         SubscribeLocalEvent<CombatModeComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CombatModeComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<CombatModeComponent, ToggleCombatActionEvent>(OnActionPerform);
+        SubscribeLocalEvent<CombatModeComponent, XenoChangingCasteEvent>(OnXenoChangingCaste);
     }
 
     private void OnMapInit(EntityUid uid, CombatModeComponent component, MapInitEvent args)
@@ -47,6 +50,16 @@ public abstract class SharedCombatModeSystem : EntitySystem
 
         var msg = component.IsInCombatMode ? "action-popup-combat-enabled" : "action-popup-combat-disabled";
         _popup.PopupClient(Loc.GetString(msg), args.Performer, args.Performer);
+    }
+
+    private void OnXenoChangingCaste(Entity<CombatModeComponent> entity, ref XenoChangingCasteEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<CombatModeComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is CombatModeComponent { } newComponent)
+        {
+            // we have combat mode and we will continue to have it. just don't do anything in this case.
+            args.AdditionalExclusions.Add(compName);
+        }
     }
 
     public void SetCanDisarm(EntityUid entity, bool canDisarm, CombatModeComponent? component = null)

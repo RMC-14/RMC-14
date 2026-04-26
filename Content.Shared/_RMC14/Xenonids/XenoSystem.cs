@@ -28,6 +28,7 @@ using Content.Shared.Actions;
 using Content.Shared.Atmos;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
+using Content.Shared.Cloning.Events;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -117,8 +118,6 @@ public sealed partial class XenoSystem : EntitySystem
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
-        SubscribeLocalEvent<XenoComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
-        SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
@@ -138,6 +137,7 @@ public sealed partial class XenoSystem : EntitySystem
             before: [typeof(SharedHandsSystem), typeof(SharedStaminaSystem)],
             after: [typeof(TackleSystem)]);
         SubscribeLocalEvent<XenoComponent, DisarmedEvent>(OnDisarmed, before: new[] { typeof(SharedHandsSystem) });
+        SubscribeLocalEvent<XenoComponent, ComponentShutdown>(OnXenoShutdown);
 
         SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoRegenComponent, DamageStateCritBeforeDamageEvent>(OnXenoRegenBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
@@ -184,16 +184,14 @@ public sealed partial class XenoSystem : EntitySystem
         args.Tags.UnionWith(xeno.Comp.AccessLevels);
     }
 
-    private void OnNewXenoEvolved(Entity<XenoComponent> newXeno, ref NewXenoEvolvedEvent args)
+    private void OnXenoShutdown(Entity<XenoComponent> xeno, ref ComponentShutdown ev)
     {
-        var oldRotation = _transform.GetWorldRotation(args.OldXeno);
-        _transform.SetWorldRotation(newXeno, oldRotation);
-    }
-
-    private void OnXenoDevolved(Entity<XenoComponent> newXeno, ref XenoDevolvedEvent args)
-    {
-        var oldRotation = _transform.GetWorldRotation(args.OldXeno);
-        _transform.SetWorldRotation(newXeno, oldRotation);
+        foreach (var (actionProtoId, actionId) in xeno.Comp.Actions)
+        {
+            _action.RemoveAction(xeno.Owner, actionId);
+        }
+        _eye.RefreshVisibilityMask(xeno.Owner);
+        Dirty(xeno);
     }
 
     private void OnXenoHealthScannerAttemptTarget(Entity<XenoComponent> ent, ref HealthScannerAttemptTargetEvent args)

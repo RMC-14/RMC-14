@@ -16,6 +16,8 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Client.GameObjects;
+using Robust.Client.ResourceManagement;
+using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Xenonids;
@@ -24,6 +26,8 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private readonly IResourceCache _rescache = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private EntityQuery<XenoAnimateMovementComponent> _animateQuery;
 
@@ -78,6 +82,38 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         if (knocked != null && state != MobState.Dead)
             state = MobState.Critical;
 
+        var prototype = MetaData(entity).EntityPrototype;
+        if (prototype != null && prototype.Components.TryGetComponent("Sprite", out var s) && s is SpriteComponent protoSprite)
+        {
+            if (protoSprite.BaseRSI != sprite.BaseRSI)
+            {
+                _sprite.SetBaseRsi((entity, sprite), protoSprite.BaseRSI);
+
+                // TODO how the fuck do you make the sprite recalculate bounds? this is awful
+                _sprite.SetSnapCardinals((entity, sprite), !sprite.SnapCardinals);
+                _sprite.SetSnapCardinals((entity, sprite), !sprite.SnapCardinals);
+                //RemComp<SpriteComponent>(entity);
+                //sprite = EnsureComp<SpriteComponent>(entity);
+                //_sprite.CopySprite((EntityUid.Invalid, protoSprite), (entity, sprite));
+            }
+        }
+
+        //if (AppearanceSystem.TryGetData(entity, RMCXenoStateVisuals.Caste, out string casteId, appearance))
+        //{
+        //    string newRsiPath = casteId switch
+        //    {
+        //        "CMXenoLarva" => "_RMC14/Mobs/Xenonids/Larva/larva.rsi",
+        //        "CMXenoDrone" => "_RMC14/Mobs/Xenonids/Drone/drone.rsi",
+        //        _ => "",
+        //    };
+        //    if (!string.IsNullOrEmpty(newRsiPath))
+        //    {
+        //        var path = SpriteSpecifierSerializer.TextureRoot / newRsiPath;
+        //        if (_rescache.TryGetResource(path, out RSIResource? newRsi))
+        //            _sprite.SetBaseRsi((entity.Owner, sprite), newRsi.RSI);
+        //    }
+        //}
+
         if (sprite is not { BaseRSI: { } rsi } ||
             !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
         {
@@ -87,6 +123,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         // TODO RMC14 split this up into multiple systems with ordered event subscription
         // TODO RMC14 please god
         string? oviState = null;
+        string? oviSprite = null;
         switch (state)
         {
             case MobState.Critical:
@@ -107,6 +144,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     TryComp(entity, out XenoOvipositorCapableComponent? capable))
                 {
                     oviState = capable.AttachedState;
+                    oviSprite = capable.Sprite;
                     break;
                 }
 
@@ -171,6 +209,14 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             sprite.LayerSetVisible(oviLayer, false);
             sprite.LayerSetVisible(layer, true);
             return;
+        }
+
+        if (
+            oviSprite != null
+            && _rescache.TryGetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / oviSprite, out var res)
+            && _sprite.LayerGetEffectiveRsi((entity, sprite), oviLayer) != res.RSI)
+        {
+            _sprite.LayerSetRsi((entity, sprite), oviLayer, res.RSI);
         }
 
         sprite.LayerSetState(oviLayer, oviState);

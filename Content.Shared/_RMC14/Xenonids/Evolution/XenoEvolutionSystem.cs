@@ -8,11 +8,11 @@ using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Systems;
+using Content.Shared.Cloning;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
-using Content.Shared.Doors.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
@@ -29,8 +29,10 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Evolution;
@@ -61,6 +63,10 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly IMapManager _map = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private readonly FixtureSystem _fixture = default!;
+    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private readonly ISerializationManager _serManager = default!;
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
@@ -73,6 +79,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
 
+    public readonly ProtoId<CloningSettingsPrototype> CloningSettingsId = "XenoClone";
+
     public override void Initialize()
     {
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
@@ -80,14 +88,15 @@ public sealed class XenoEvolutionSystem : EntitySystem
         SubscribeLocalEvent<XenoDevolveComponent, XenoOpenDevolveActionEvent>(OnXenoOpenDevolveAction);
 
         SubscribeLocalEvent<XenoEvolutionComponent, MapInitEvent>(OnXenoEvolveMapInit);
+        SubscribeLocalEvent<XenoEvolutionComponent, ComponentShutdown>(OnXenoEvolveShutdown);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
-        SubscribeLocalEvent<XenoEvolutionComponent, NewXenoEvolvedEvent>(OnXenoEvolutionNewEvolved);
-        SubscribeLocalEvent<XenoEvolutionComponent, XenoDevolvedEvent>(OnXenoEvolutionDevolved);
+        SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolvedEvent>(OnXenoEvolved);
+        SubscribeLocalEvent<XenoEvolutionComponent, XenoDevolvedEvent>(OnXenoDevolved);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
 
-        SubscribeLocalEvent<XenoEvolutionGranterComponent, NewXenoEvolvedEvent>(OnGranterEvolved);
+        SubscribeLocalEvent<XenoEvolutionGranterComponent, XenoEvolvedEvent>(OnGranterEvolved);
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
 
@@ -125,6 +134,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private void OnXenoEvolveMapInit(Entity<XenoEvolutionComponent> ent, ref MapInitEvent args)
     {
         _action.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
+    }
+
+    private void OnXenoEvolveShutdown(Entity<XenoEvolutionComponent> ent, ref ComponentShutdown ev)
+    {
+        _action.RemoveAction(ent.Comp.Action);
     }
 
     private void OnXenoEvolveAction(Entity<XenoEvolutionComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
@@ -218,16 +232,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (!DamagedCheckPopup(xeno, false))
             return;
 
-        var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno, newXeno, false);
-        RaiseLocalEvent(newXeno, ref ev, true);
+        var ev = new XenoEvolvedEvent(xeno, xeno.Comp.Points);
+        ChangeXeno(xeno, args.Choice);
+        RaiseLocalEvent(xeno, ref ev, true);
 
-        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {ToPrettyString(newXeno)}");
-
-        Del(xeno.Owner);
-
-        var afterEv = new AfterNewXenoEvolvedEvent();
-        RaiseLocalEvent(newXeno, ref afterEv);
+        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {args.Choice.ToString()}");
     }
 
     private void OnXenoDevolveBui(Entity<XenoDevolveComponent> xeno, ref XenoDevolveBuiMsg args)
@@ -247,41 +256,24 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
         }
 
-        args.Handled = true;
+        var ev = new XenoEvolvedEvent(xeno, FixedPoint2.Max(0, xeno.Comp.Points - xeno.Comp.Max));
+        ChangeXeno(xeno, args.Choice);
+        RaiseLocalEvent(xeno, ref ev, true);
 
-        var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno, newXeno, true);
-        RaiseLocalEvent(newXeno, ref ev, true);
+        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} evolved into proto {args.Choice.ToString()}");
 
-        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} evolved into {ToPrettyString(newXeno)}");
-
-        Del(xeno.Owner);
-
-        _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), newXeno, newXeno);
-
-        var afterEv = new AfterNewXenoEvolvedEvent();
-        RaiseLocalEvent(newXeno, ref afterEv);
+        _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), xeno, xeno);
     }
 
-    private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
+    private void OnXenoEvolved(Entity<XenoEvolutionComponent> xeno, ref XenoEvolvedEvent args)
     {
-        TransferPoints((args.OldXeno, args.OldXeno), xeno, args.SubtractPoints);
+        xeno.Comp.Points = FixedPoint2.Max(0, args.NewPointTotal);
         _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
     }
 
-    private void OnXenoEvolutionDevolved(Entity<XenoEvolutionComponent> xeno, ref XenoDevolvedEvent args)
+    private void OnXenoDevolved(Entity<XenoEvolutionComponent> xeno, ref XenoDevolvedEvent args)
     {
-        TransferPoints(args.OldXeno, (xeno, xeno), false);
-    }
-
-    private void TransferPoints(Entity<XenoEvolutionComponent?> old, Entity<XenoEvolutionComponent> xeno, bool subtract)
-    {
-        if (!Resolve(old, ref old.Comp, false))
-            return;
-
-        xeno.Comp.Points = subtract ? FixedPoint2.Max(0, old.Comp.Points - old.Comp.Max) : old.Comp.Points;
-
-        Dirty(xeno);
+        xeno.Comp.Points = FixedPoint2.Max(0, args.NewPointTotal);
     }
 
     private void OnNewlyEvolvedPreventCollide(Entity<XenoNewlyEvolvedComponent> ent, ref PreventCollideEvent args)
@@ -290,7 +282,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnGranterEvolved(Entity<XenoEvolutionGranterComponent> ent, ref NewXenoEvolvedEvent args)
+    private void OnGranterEvolved(Entity<XenoEvolutionGranterComponent> ent, ref XenoEvolvedEvent args)
     {
         _xenoAnnounce.AnnounceSameHive(ent.Owner, Loc.GetString("rmc-new-queen"));
     }
@@ -572,47 +564,63 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return NeedsOvipositor() && !HasOvipositor();
     }
 
-    private EntityUid TransferXeno(EntityUid xeno, EntProtoId proto)
+    private void ChangeXeno(EntityUid xeno, EntProtoId protoId)
     {
-        var coordinates = _transform.GetMoverCoordinates(xeno);
-        var newXeno = Spawn(proto, coordinates);
-        _xenoHive.SetSameHive(xeno, newXeno);
+        var newProto = _prototypes.Index(protoId);
 
-        if (_mind.TryGetMind(xeno, out var mindId, out _))
-        {
-            _mind.TransferTo(mindId, newXeno);
-            _mind.UnVisit(mindId);
-        }
-
-        foreach (var held in _hands.EnumerateHeld(xeno))
-        {
-            _hands.TryDrop(xeno, held);
-        }
-
-        // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
-        var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
-
-        _doors.Clear();
-        _entityLookup.GetEntitiesIntersecting(xeno, _doors);
-        foreach (var id in _doors)
-        {
-            if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
-                comp.StopCollide.Add(id);
-        }
-
-        var newRecently = EnsureComp<XenoRecentlyDevolvedComponent>(newXeno);
-        if (TryComp(xeno, out XenoRecentlyDevolvedComponent? oldRecently))
-        {
-            foreach (var (id, time) in oldRecently.Recent)
-            {
-                newRecently.Recent[id] = time;
-            }
-        }
-
+        var recently = EnsureComp<XenoRecentlyDevolvedComponent>(xeno);
         if (Prototype(xeno)?.ID is { } oldId)
-            newRecently.Recent[oldId] = _timing.CurTime;
+            recently.Recent[oldId] = _timing.CurTime;
 
-        return newXeno;
+        var meta = MetaData(xeno);
+        meta.EntityPrototype = newProto;
+        _meta.SetEntityName(xeno, newProto.Name);
+        _meta.SetEntityDescription(xeno, newProto.Description);
+
+        ChangeXenoPrototype(xeno, newProto);
+
+        var comp = EnsureComp<XenoNewlyEvolvedComponent>(xeno);
+
+
+        //var coordinates = _transform.GetMoverCoordinates(xeno);
+        //var newXeno = Spawn(proto, coordinates);
+        //_xenoHive.SetSameHive(xeno, newXeno);
+
+        //if (_mind.TryGetMind(xeno, out var mindId, out _))
+        //{
+        //    _mind.TransferTo(mindId, newXeno);
+        //    _mind.UnVisit(mindId);
+        //}
+
+        //foreach (var held in _hands.EnumerateHeld(xeno))
+        //{
+        //    _hands.TryDrop(xeno, held);
+        //}
+
+        //// TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
+        //var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
+
+        //_doors.Clear();
+        //_entityLookup.GetEntitiesIntersecting(xeno, _doors);
+        //foreach (var id in _doors)
+        //{
+        //    if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
+        //        comp.StopCollide.Add(id);
+        //}
+
+        //var newRecently = EnsureComp<XenoRecentlyDevolvedComponent>(newXeno);
+        //if (TryComp(xeno, out XenoRecentlyDevolvedComponent? oldRecently))
+        //{
+        //    foreach (var (id, time) in oldRecently.Recent)
+        //    {
+        //        newRecently.Recent[id] = time;
+        //    }
+        //}
+
+        //if (Prototype(xeno)?.ID is { } oldId)
+        //    newRecently.Recent[oldId] = _timing.CurTime;
+
+        //return newXeno;
     }
 
     private void TryDevolve(Entity<XenoDevolveComponent> xeno, EntProtoId to, bool damagedCheck = true)
@@ -620,30 +628,27 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (damagedCheck && !DamagedCheckPopup(xeno))
             return;
 
-        if (Devolve(xeno, to) is { } newXeno && _net.IsServer)
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
+        if (Devolve(xeno, to) && _net.IsServer)
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", xeno)), xeno, xeno, PopupType.LargeCaution);
     }
 
-    public EntityUid? Devolve(Entity<XenoDevolveComponent> xeno, EntProtoId to)
+    public bool Devolve(Entity<XenoDevolveComponent> xeno, EntProtoId to)
     {
         if (_net.IsClient ||
             !xeno.Comp.DevolvesTo.Contains(to))
         {
-            return null;
+            return false;
         }
 
-        var newXeno = TransferXeno(xeno, to);
-        var ev = new XenoDevolvedEvent(xeno, newXeno);
-        RaiseLocalEvent(newXeno, ref ev, true);
+        TryComp<XenoEvolutionComponent>(xeno, out var evoComp);
 
-        _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
+        var ev = new XenoDevolvedEvent(xeno, evoComp?.Points ?? 0);
+        ChangeXeno(xeno, to);
+        RaiseLocalEvent(xeno, ref ev, true);
 
-        Del(xeno.Owner);
+        _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {to.Id}");
 
-        var afterEv = new AfterNewXenoEvolvedEvent();
-        RaiseLocalEvent(newXeno, ref afterEv);
-
-        return newXeno;
+        return true;
     }
 
     public override void Update(float frameTime)
@@ -764,6 +769,74 @@ public sealed class XenoEvolutionSystem : EntitySystem
             {
                 SetPoints((uid, comp), FixedPoint2.Max(comp.Points - gain, comp.Max));
             }
+        }
+    }
+
+    private void ChangeXenoPrototype(
+        EntityUid xeno,
+        EntityPrototype newProto)
+    {
+        if (!_prototypes.TryIndex(CloningSettingsId, out var settings))
+            return; // invalid settings
+
+        var copyAll = settings.CopyAll;
+        var excludeComponents = settings.ExcludeComponents;
+        var componentsToEvent = settings.EventComponents;
+        if (!copyAll)
+        {
+            // Xeno cloning settings should always copy all and use exclusions.
+            Log.Error("Xeno cloning settings not set to copy all with exclusions. Copy failed.");
+            return;
+        }
+
+        var metadata = MetaData(xeno);
+        var registryToAdd = _serManager.CreateCopy(newProto.Components, notNullableOverride: true);
+        foreach (var excluded in excludeComponents)
+        {
+            registryToAdd.Remove(excluded);
+        }
+        foreach (var toEvent in componentsToEvent)
+        {
+            registryToAdd.Remove(toEvent);
+        }
+
+        var additionalExclusions = new HashSet<string>();
+        var changingCasteEvent = new XenoChangingCasteEvent(xeno, newProto, registryToAdd, additionalExclusions);
+        RaiseLocalEvent(xeno, ref changingCasteEvent);
+        Log.Debug("Done with XenoChangingCasteEvent.");
+
+        Log.Debug("Removing additional exclusions from registry...");
+        foreach (var exclusion in additionalExclusions)
+        {
+            if (registryToAdd.Remove(exclusion))
+            {
+                Log.Debug($"   Removed {exclusion}");
+            }
+        }
+        Log.Debug("Addtional exclusion removed.");
+
+        Log.Debug("Adding components from registry: ");
+        foreach (var componentName in registryToAdd.Keys)
+        {
+            Log.Debug($"   {componentName}");
+        }
+        // Add and overwrite components that are in the registry.
+        _entityManager.AddComponents(xeno, registryToAdd, true);
+        Log.Debug("Added components from registry.");
+
+        foreach (var cloneComponent in EntityManager.GetComponents(xeno))
+        {
+            // Remove every component that isn't in the registry or isn't excluded.
+            var componentName = EntityManager.ComponentFactory.GetComponentName(cloneComponent.GetType());
+            if (excludeComponents.Contains(componentName)
+                || additionalExclusions.Contains(componentName)
+                || registryToAdd.ContainsKey(componentName))
+            {
+                continue;
+            }
+            Log.Debug($"Removing component {componentName}...");
+            RemComp(xeno, cloneComponent);
+            Log.Debug($"Done removing component {componentName}.");
         }
     }
 }

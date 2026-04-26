@@ -18,18 +18,6 @@
     name: cm-job-name-xeno-ravager
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/ravager.rsi
-    layers:
-    - map: [ "enum.XenoVisualLayers.Base", "enum.XenoShardVisualLayers.Base" ]
-      state: alive
-    - map: [ "enum.RMCDamageVisualLayers.Base" ]
-      visible: false
-    - map: [ "enum.RMCShieldVisuals.Base" ]
-      sprite: _RMC14/Effects/xeno_shields.rsi
-      visible: false
-    - map: [ "enum.XenoInhandVisualLayers.Left" ]
-      visible: false
-    - map: [ "enum.XenoInhandVisualLayers.Right" ]
-      visible: false
   - type: MobState
     allowedStates:
     - Alive

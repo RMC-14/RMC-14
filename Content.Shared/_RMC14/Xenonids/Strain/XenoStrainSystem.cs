@@ -13,7 +13,7 @@ public sealed class XenoStrainSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoStrainComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<XenoStrainComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
+        SubscribeLocalEvent<XenoStrainComponent, XenoEvolvedEvent>(OnNewXenoEvolved);
     }
 
     private void OnExamined(Entity<XenoStrainComponent> ent, ref ExaminedEvent args)
@@ -27,7 +27,7 @@ public sealed class XenoStrainSystem : EntitySystem
         }
     }
 
-    private void OnNewXenoEvolved(Entity<XenoStrainComponent> ent, ref NewXenoEvolvedEvent args)
+    private void OnNewXenoEvolved(Entity<XenoStrainComponent> ent, ref XenoEvolvedEvent args)
     {
         if (ent.Comp.Popup is not { } popup)
             return;
