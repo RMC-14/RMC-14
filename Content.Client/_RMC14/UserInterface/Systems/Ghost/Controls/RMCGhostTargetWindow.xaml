@@ -7,7 +7,7 @@
             <PanelContainer.PanelOverride>
                 <graphics:StyleBoxFlat
                     BorderThickness="0"
-                    BackgroundColor="#1A1A1A" />
+                    BackgroundColor="#00000054" />
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="6">
                 <Button Name="GhostnadoButton" Text="{Loc 'ghost-target-window-warp-to-most-followed'}" HorizontalAlignment="Center" Margin="0 4" />
@@ -18,7 +18,7 @@
             <PanelContainer.PanelOverride>
                 <graphics:StyleBoxFlat
                     BorderThickness="0"
-                    BackgroundColor="#1A1A1A" />
+                    BackgroundColor="#00000054" />
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="6">
                 <ScrollContainer Name="GhostScroll" VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">

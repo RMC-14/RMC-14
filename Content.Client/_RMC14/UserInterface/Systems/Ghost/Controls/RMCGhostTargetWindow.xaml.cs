@@ -30,9 +30,23 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+        SetWindowBackgroundColor();
         SearchBar.OnTextChanged += OnSearchTextChanged;
 
         GhostnadoButton.OnPressed += _ => OnGhostnadoClicked?.Invoke();
+    }
+
+    private void SetWindowBackgroundColor()
+    {
+        if (GetChild(0) is not PanelContainer windowPanel)
+            return;
+
+        windowPanel.PanelOverride = new StyleBoxFlat
+        {
+            BackgroundColor = Color.FromHex("#262626"),
+            BorderColor = Color.FromHex("#444444"),
+            BorderThickness = new Thickness(1),
+        };
     }
 
     public void UpdateSections(IEnumerable<RMCGhostTargetSection> sections)
