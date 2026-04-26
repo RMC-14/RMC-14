@@ -65,6 +65,9 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     public EntProtoId? ShuttleSpawner;
 
     [DataField]
+    public EntProtoId? ShuttleSpawnMarker;
+
+    [DataField]
     public bool AutoLaunch;
 
     [DataField]

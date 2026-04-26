@@ -12,6 +12,7 @@
   allowedSources: [ Console, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadUNMC
   autoLaunch: true
   landingTags: [ mainship ]
   roles:
@@ -83,6 +84,7 @@
   allowedSources: [ Console, Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleWeYa
+  shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
   autoLaunch: true
   landingTags: [ mainship ]
   roles:
@@ -153,6 +155,7 @@
   allowedSources: [ Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleWeYa
+  shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
   autoLaunch: true
   landingTags: [ mainship ]
   roles:
@@ -205,6 +208,7 @@
   allowedSources: [ Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleWeYa
+  shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
   autoLaunch: true
   landingTags: [ mainship ]
   roles:
@@ -256,6 +260,7 @@
   allowedSources: [ Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_cmb_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleCMB
+  shuttleSpawnMarker: RMCERTShuttleStartPadLaw
   autoLaunch: true
   landingTags: [ mainship ]
   roles:
@@ -307,6 +312,7 @@
   allowedSources: [ Console, Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_spp_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleSPP
+  shuttleSpawnMarker: RMCERTShuttleStartPadSPP
   autoLaunch: true
   landingTags: [ mainship ]
   roles:
@@ -366,6 +372,7 @@
   allowedSources: [ Console, Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_tse_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleTSE
+  shuttleSpawnMarker: RMCERTShuttleStartPadTSE
   autoLaunch: true
   landingTags: [ mainship ]
   roles:
@@ -424,6 +431,7 @@
   allowedSources: [ Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadLaw
   autoLaunch: true
   landingTags: [ mainship ]
   roles:
@@ -519,6 +527,7 @@
   allowedSources: [ Console, Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_pizza_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttlePizza
+  shuttleSpawnMarker: RMCERTShuttleStartPadEvent
   autoLaunch: true
   landingTags: [ mainship ]
   roles:

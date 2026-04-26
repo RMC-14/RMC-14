@@ -26,6 +26,7 @@ public sealed class RMCERTRequest
     public string LastError = string.Empty;
     public string LastWarning = string.Empty;
     public EntityUid? Shuttle;
+    public EntityUid? ShuttleSpawnMarker;
     public readonly List<RMCERTRosterSlot> PlannedRoster = [];
     public readonly List<EntityUid> SpawnedGhostRoles = [];
 }

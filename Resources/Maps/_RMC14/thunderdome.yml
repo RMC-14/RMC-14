@@ -69057,43 +69057,49 @@ entities:
     - type: Transform
       pos: -62.64428,-21.463293
       parent: 1
-- proto: RMCSpawnerERTShuttle
+- proto: RMCERTShuttleStartPadReserve
   entities:
   - uid: 10107
     components:
     - type: Transform
       pos: -21.5,-118.5
       parent: 1
+- proto: RMCERTShuttleStartPadHostile
+  entities:
   - uid: 10108
     components:
     - type: Transform
       pos: -62.5,-116.5
       parent: 1
+- proto: RMCERTShuttleStartPadUNMC
+  entities:
   - uid: 10109
     components:
     - type: Transform
       pos: -47.5,-89.5
       parent: 1
+- proto: RMCERTShuttleStartPadEvent
+  entities:
   - uid: 10110
     components:
     - type: Transform
       pos: -19.5,-87.5
       parent: 1
-- proto: RMCSpawnerERTShuttleSPP
+- proto: RMCERTShuttleStartPadSPP
   entities:
   - uid: 10111
     components:
     - type: Transform
       pos: -17.5,-56.5
       parent: 1
-- proto: RMCSpawnerERTShuttleTSE
+- proto: RMCERTShuttleStartPadTSE
   entities:
   - uid: 10114
     components:
     - type: Transform
       pos: -11.5,-13.5
       parent: 1
-- proto: RMCSpawnerERTShuttleWeYa
+- proto: RMCERTShuttleStartPadWeYa
   entities:
   - uid: 10112
     components:
@@ -69203,7 +69209,7 @@ entities:
     - type: Transform
       pos: -25.5,-90.5
       parent: 1
-- proto: RMCSpawnerShuttle
+- proto: RMCERTShuttleStartPadLaw
   entities:
   - uid: 10113
     components:

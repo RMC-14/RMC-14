@@ -1,3 +1,4 @@
+using System.Numerics;
 using Robust.Shared.GameStates;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.NPC.Prototypes;
@@ -116,6 +117,16 @@ public sealed partial class RMCERTMemberComponent : Component
 
     [DataField, AutoNetworkedField]
     public string Team = string.Empty;
+}
+
+[RegisterComponent]
+/// <summary>
+/// Map marker used as a physical staging pad for loading an ERT shuttle onto the request source map.
+/// </summary>
+public sealed partial class RMCERTShuttleStartPadComponent : Component
+{
+    [DataField]
+    public Vector2 Offset;
 }
 
 [RegisterComponent]

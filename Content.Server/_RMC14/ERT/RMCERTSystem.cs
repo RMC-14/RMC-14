@@ -30,6 +30,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.GameObjects;
@@ -281,7 +282,7 @@ public sealed class RMCERTSystem : EntitySystem
             ("admin", adminText),
             ("id", request.Id),
             ("call", call.Name),
-            ("delay", (int) call.LaunchDelay)));
+            ("delay", (int)call.LaunchDelay)));
         Log.Info($"ERT request {request.Id} approved as {call.ID} by {adminText}");
 
         DirtyState();
@@ -723,6 +724,8 @@ public sealed class RMCERTSystem : EntitySystem
         if (request.Shuttle == shuttle)
             request.Shuttle = null;
 
+        request.ShuttleSpawnMarker = null;
+
         if (Exists(shuttle))
             QueueDel(shuttle);
     }
@@ -737,6 +740,22 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (shuttleMap is not { } shuttleMapPath)
             return true;
+
+        if (TryLoadShuttleAtPlacedMarker(request, call, shuttleMapPath, out shuttle, out error) &&
+            shuttle is { } placedShuttle)
+        {
+            ConfigureLoadedShuttle(request, call, placedShuttle);
+            return true;
+        }
+
+        if (!string.IsNullOrWhiteSpace(error))
+            return false;
+
+        if (GetShuttleSpawnMarkerId(call) is { } spawnMarker)
+        {
+            Log.Warning($"ERT request {request.Id} found no free placed shuttle spawn marker " +
+                        $"{spawnMarker.Id} for {call.ID}; falling back to hidden ERT map spawn.");
+        }
 
         if (_ertMap is not { } targetMap || !_map.MapExists(targetMap))
         {
@@ -757,23 +776,152 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         shuttle = result.Value;
-        var shuttleComp = EnsureComp<RMCERTShuttleComponent>(shuttle.Value);
+        ConfigureLoadedShuttle(request, call, shuttle.Value);
+        return true;
+    }
+
+    private bool TryLoadShuttleAtPlacedMarker(
+        RMCERTRequest request,
+        RMCERTCallPrototype call,
+        ResPath shuttleMapPath,
+        out EntityUid? shuttle,
+        out string error)
+    {
+        shuttle = null;
+        error = string.Empty;
+
+        if (!TryFindShuttleSpawnMarker(request, call, out var marker, out var markerOffset))
+            return false;
+
+        var markerXform = Transform(marker);
+        if (markerXform.MapUid == null)
+            return false;
+
+        var coordinates = _transform.GetMapCoordinates(marker, markerXform).Offset(markerOffset);
+        var rotation = _transform.GetWorldRotation(markerXform);
+
+        var stagingOffset = new Vector2(_loadedShuttles * 50, _loadedShuttles * 50);
+        _loadedShuttles++;
+        if (!_mapLoader.TryLoadGrid(markerXform.MapID, shuttleMapPath, out var result, offset: stagingOffset) ||
+            result == null)
+        {
+            error = Loc.GetString("rmc-ert-error-load-shuttle-map", ("map", shuttleMapPath));
+            return false;
+        }
+
+        shuttle = result.Value;
+        var shuttleXform = Transform(shuttle.Value);
+        _transform.SetCoordinates(shuttle.Value, shuttleXform, new EntityCoordinates(markerXform.MapUid.Value, coordinates.Position), rotation);
+        request.ShuttleSpawnMarker = marker;
+        Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle.Value)} for {call.ID} " +
+                 $"at placed marker {ToPrettyString(marker)}.");
+        return true;
+    }
+
+    private bool TryFindShuttleSpawnMarker(
+        RMCERTRequest request,
+        RMCERTCallPrototype call,
+        out EntityUid marker,
+        out Vector2 markerOffset)
+    {
+        marker = default;
+        markerOffset = default;
+        if (GetShuttleSpawnMarkerId(call) is not { } spawnMarker)
+            return false;
+
+        var sourceMap = GetRequestSourceMap(request);
+
+        var sourceCandidates = new List<(EntityUid Marker, Vector2 Offset)>();
+        var fallbackCandidates = new List<(EntityUid Marker, Vector2 Offset)>();
+        var startPadQuery = EntityQueryEnumerator<RMCERTShuttleStartPadComponent, TransformComponent>();
+        while (startPadQuery.MoveNext(out var uid, out var startPad, out var xform))
+        {
+            if (MetaData(uid).EntityPrototype?.ID != spawnMarker.Id)
+                continue;
+
+            if (IsShuttleSpawnMarkerReserved(uid))
+                continue;
+
+            var targetCandidates = sourceMap != null && xform.MapUid == sourceMap
+                ? sourceCandidates
+                : fallbackCandidates;
+            targetCandidates.Add((uid, startPad.Offset));
+        }
+
+        var query = EntityQueryEnumerator<GridSpawnerComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var spawner, out var xform))
+        {
+            if (spawner.Spawn == null)
+                continue;
+
+            if (MetaData(uid).EntityPrototype?.ID != spawnMarker.Id)
+                continue;
+
+            if (IsShuttleSpawnMarkerReserved(uid))
+                continue;
+
+            var targetCandidates = sourceMap != null && xform.MapUid == sourceMap
+                ? sourceCandidates
+                : fallbackCandidates;
+            targetCandidates.Add((uid, spawner.Offset));
+        }
+
+        var availableCandidates = sourceCandidates.Count != 0
+            ? sourceCandidates
+            : fallbackCandidates;
+
+        if (availableCandidates.Count == 0)
+            return false;
+
+        var picked = _random.Pick(availableCandidates);
+        marker = picked.Marker;
+        markerOffset = picked.Offset;
+        return true;
+    }
+
+    private static EntProtoId? GetShuttleSpawnMarkerId(RMCERTCallPrototype call)
+    {
+        return call.ShuttleSpawnMarker ?? call.ShuttleSpawner;
+    }
+
+    private bool IsShuttleSpawnMarkerReserved(EntityUid marker)
+    {
+        foreach (var request in _requests.Values)
+        {
+            if (request.ShuttleSpawnMarker != marker)
+                continue;
+
+            if (IsTerminal(request.State))
+            {
+                if (request.Shuttle is not { Valid: true } terminalShuttle || !Exists(terminalShuttle))
+                    continue;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private void ConfigureLoadedShuttle(RMCERTRequest request, RMCERTCallPrototype call, EntityUid shuttle)
+    {
+        var shuttleComp = EnsureComp<RMCERTShuttleComponent>(shuttle);
         shuttleComp.RequestId = request.Id;
         shuttleComp.Call = call.ID;
         shuttleComp.Organization = GetOrganizationLabel(call);
         shuttleComp.NpcFactions = call.NpcFactions.ToList();
         shuttleComp.IffFaction = call.IffFaction;
         shuttleComp.LandingTags = call.LandingTags.ToList();
-        Dirty(shuttle.Value, shuttleComp);
+        Dirty(shuttle, shuttleComp);
 
-        var restrictedShuttle = EnsureComp<RMCRestrictedShuttleComponent>(shuttle.Value);
+        var restrictedShuttle = EnsureComp<RMCRestrictedShuttleComponent>(shuttle);
         restrictedShuttle.RequestId = request.Id;
         restrictedShuttle.Call = call.ID;
 
         var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
         while (computerQuery.MoveNext(out var uid, out var computer, out var xform))
         {
-            if (xform.GridUid != shuttle.Value)
+            if (xform.GridUid != shuttle)
                 continue;
 
             _dropship.ConfigureRestrictedNavigationComputer((uid, computer),
@@ -784,9 +932,8 @@ public sealed class RMCERTSystem : EntitySystem
                 call.DeniedLandingTags);
         }
 
-        Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle.Value)} for {call.ID}. " +
+        Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle)} for {call.ID}. " +
                  GetShuttleDiagnostics(request, shuttle));
-        return true;
     }
 
     private bool BuildRoster(RMCERTRequest request, RMCERTCallPrototype call, out string error)
@@ -1023,8 +1170,11 @@ public sealed class RMCERTSystem : EntitySystem
             return new EntityCoordinates(shuttleUid, Vector2.Zero);
         }
 
-        if (request.SourceEntity is { Valid: true } source)
-            return Transform(source).Coordinates;
+        if (request.SourceEntity is { Valid: true } source &&
+            TryComp(source, out TransformComponent? sourceXform))
+        {
+            return sourceXform.Coordinates;
+        }
 
         return new EntityCoordinates(EntityUid.Invalid, Vector2.Zero);
     }
@@ -1188,15 +1338,17 @@ public sealed class RMCERTSystem : EntitySystem
 
             var actorsGhosted = TryGhostActorsOffShuttle(request, shuttle, ghostCoordinates, reason, out var actorsOnShuttle, out var ghostedActors);
             var remainingActors = CountActorsOnShuttle(shuttle);
+            var unhandledActors = Math.Max(0, actorsOnShuttle - ghostedActors);
             Log.Info($"ERT request {request.Id} cleanup '{reason}' for {ToPrettyString(shuttle)}. " +
-                     $"GhostedMembers={ghostedMembers}, ActorsOnShuttle={actorsOnShuttle}, " +
-                     $"GhostedActors={ghostedActors}, RemainingActors={remainingActors}, " +
-                     GetShuttleDiagnostics(request, shuttle));
+                      $"GhostedMembers={ghostedMembers}, ActorsOnShuttle={actorsOnShuttle}, " +
+                      $"GhostedActors={ghostedActors}, UnhandledActors={unhandledActors}, RemainingActors={remainingActors}, " +
+                      GetShuttleDiagnostics(request, shuttle));
 
-            if (actorsGhosted && remainingActors == 0)
+            if (actorsGhosted && unhandledActors == 0)
             {
                 QueueDel(shuttle);
                 request.Shuttle = null;
+                request.ShuttleSpawnMarker = null;
                 _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cleanup",
                     ("id", request.Id),
                     ("reason", reason)));
@@ -1214,6 +1366,7 @@ public sealed class RMCERTSystem : EntitySystem
         else
         {
             request.Shuttle = null;
+            request.ShuttleSpawnMarker = null;
         }
     }
 
@@ -1268,7 +1421,9 @@ public sealed class RMCERTSystem : EntitySystem
             ghostedActors++;
         }
 
-        return CountActorsOnShuttle(shuttle) == 0;
+        // QueueDel(actor) is processed later, so an immediate entity query can still see
+        // actors that were already safely ghosted and queued for deletion.
+        return ghostedActors >= actorsOnShuttle;
     }
 
     private bool TryGhostMindForCleanup(
@@ -1448,9 +1603,7 @@ public sealed class RMCERTSystem : EntitySystem
         out EntityUid destination)
     {
         var candidates = new List<EntityUid>();
-        EntityUid? sourceMap = null;
-        if (request.SourceEntity is { Valid: true } source)
-            sourceMap = Transform(source).MapUid;
+        var sourceMap = GetRequestSourceMap(request);
 
         // Keep arrivals on the same map as the originating request, then let the shared dropship rules filter by destination compatibility.
         var query = EntityQueryEnumerator<DropshipDestinationComponent>();
@@ -1479,6 +1632,17 @@ public sealed class RMCERTSystem : EntitySystem
 
         destination = default;
         return false;
+    }
+
+    private EntityUid? GetRequestSourceMap(RMCERTRequest request)
+    {
+        if (request.SourceEntity is not { Valid: true } source ||
+            !TryComp(source, out TransformComponent? sourceXform))
+        {
+            return null;
+        }
+
+        return sourceXform.MapUid;
     }
 
     private bool TryPickRandomCall(RMCERTRequest request, out ProtoId<RMCERTCallPrototype>? callId, out string error)
@@ -1544,7 +1708,7 @@ public sealed class RMCERTSystem : EntitySystem
         {
             error = Loc.GetString("rmc-ert-error-min-round-time",
                 ("call", call.Name),
-                ("minutes", (int) minRound.TotalMinutes));
+                ("minutes", (int)minRound.TotalMinutes));
             return false;
         }
 
@@ -1808,6 +1972,19 @@ public sealed class RMCERTSystem : EntitySystem
             if (!TryGetShuttleMapPath(call, out _, out var shuttleError))
                 Log.Error($"ERT call {call.ID} has invalid shuttle configuration: {shuttleError}");
 
+            if (call.ShuttleSpawnMarker is { } spawnMarker)
+            {
+                if (!_prototypes.TryIndex(spawnMarker, out var spawnMarkerPrototype))
+                {
+                    Log.Error($"ERT call {call.ID} references missing shuttle spawn marker {spawnMarker.Id}.");
+                }
+                else if (!spawnMarkerPrototype.HasComponent<RMCERTShuttleStartPadComponent>(_componentFactory) &&
+                         !spawnMarkerPrototype.HasComponent<GridSpawnerComponent>(_componentFactory))
+                {
+                    Log.Error($"ERT call {call.ID} shuttle spawn marker {spawnMarker.Id} is missing RMCERTShuttleStartPadComponent.");
+                }
+            }
+
             if (string.IsNullOrWhiteSpace(call.Organization) &&
                 call.NpcFactions.Count == 0 &&
                 call.IffFaction == null)
@@ -1892,7 +2069,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (TryFindNavigationComputer(shuttleUid, out var computer))
             landingZones = CountLandingZoneCandidates(request, computer);
 
-        return $"{diagnostics}, landingZones:{landingZones}";
+        return $"{diagnostics}, spawnMarker:{FormatEntity(request.ShuttleSpawnMarker)}, landingZones:{landingZones}";
     }
 
     private int CountNavigationComputers(EntityUid shuttle)
@@ -1913,9 +2090,7 @@ public sealed class RMCERTSystem : EntitySystem
         Entity<DropshipNavigationComputerComponent> computer)
     {
         var count = 0;
-        EntityUid? sourceMap = null;
-        if (request.SourceEntity is { Valid: true } source && Exists(source))
-            sourceMap = Transform(source).MapUid;
+        var sourceMap = GetRequestSourceMap(request);
 
         var query = EntityQueryEnumerator<DropshipDestinationComponent>();
         while (query.MoveNext(out var uid, out var dropshipDestination))
@@ -1942,9 +2117,7 @@ public sealed class RMCERTSystem : EntitySystem
         RMCERTRequest request,
         Entity<DropshipNavigationComputerComponent> computer)
     {
-        EntityUid? sourceMap = null;
-        if (request.SourceEntity is { Valid: true } source && Exists(source))
-            sourceMap = Transform(source).MapUid;
+        var sourceMap = GetRequestSourceMap(request);
 
         var computerXform = Transform(computer);
         var builder = new StringBuilder();
@@ -2028,6 +2201,6 @@ public sealed class RMCERTSystem : EntitySystem
 
     private static string FormatRoundTime(TimeSpan time)
     {
-        return $"{(int) time.TotalMinutes:00}:{time.Seconds:00}";
+        return $"{(int)time.TotalMinutes:00}:{time.Seconds:00}";
     }
 }

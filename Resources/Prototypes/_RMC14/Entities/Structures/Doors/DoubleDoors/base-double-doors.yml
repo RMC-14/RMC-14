@@ -168,6 +168,25 @@
     boundingBox: "-0.5,-0.5,0.5,1.5"
 
 - type: entity
+  parent: RMCDoubleDoorPersonalSolid
+  id: RMCShuttleInternalDoubleDoor
+  suffix: Shuttle, Internal
+  components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-4,-8.5,4,6.5"
+    reserved: true
+    landingClasses: [ internal ]
+    landingTags: [ mainship, ert, internal ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Docking
+  - type: DockingSignalControl
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockInternal
+
+- type: entity
   parent: RMCDoubleDoorBase
   id: RMCDoubleDoorPreparations
   suffix: Preparations

@@ -171,6 +171,9 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
     private void OnGridSpawnerMapInit(Entity<GridSpawnerComponent> ent, ref MapInitEvent args)
     {
+        if (!ent.Comp.SpawnOnMapInit)
+            return;
+
         if (ent.Comp.Spawn is not { } spawn)
             return;
 
