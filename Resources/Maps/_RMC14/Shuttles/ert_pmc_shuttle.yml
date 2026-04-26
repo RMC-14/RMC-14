@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 06/07/2025 13:28:17
-  entityCount: 77
+  entityCount: 78
 maps: []
 grids:
 - 1
@@ -213,6 +213,14 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 1.5,-6.5
+      parent: 1
+- proto: RMCShuttleMobileDockingPort
+  entities:
+  - uid: 1005
+    components:
+    - type: Transform
+      rot: 0 rad
+      pos: -0.5,-6.5
       parent: 1
 - proto: CMBeltMedicalFilled
   entities:

@@ -39,11 +39,18 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
         var grid = xform.GridUid;
         var tagged = new List<Entity<DoorComponent>>();
         var fallback = new List<Entity<DoorComponent>>();
+        var scannedDoors = new List<string>();
 
         foreach (var door in _lookup.GetEntitiesInRange<DoorComponent>(xform.Coordinates, ent.Comp.SearchRadius))
         {
+            var doorXform = Transform(door.Owner);
+            var hasTags = TryComp(door.Owner, out TagComponent? tags);
+            var tagText = hasTags ? string.Join(",", tags!.Tags) : "none";
+            scannedDoors.Add($"{ToPrettyString(door.Owner)} grid:{ToPrettyString(doorXform.GridUid)} " +
+                             $"pos:{doorXform.LocalPosition} tags:[{tagText}] state:{door.Comp.State}");
+
             if (door.Owner == ent.Owner ||
-                Transform(door.Owner).GridUid != grid)
+                doorXform.GridUid != grid)
             {
                 continue;
             }
@@ -54,7 +61,7 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
                 continue;
             }
 
-            if (TryComp(door.Owner, out TagComponent? tags) &&
+            if (tags != null &&
                 _tag.HasAnyTag(tags, ent.Comp.AirlockTags))
             {
                 tagged.Add(door);
@@ -69,7 +76,9 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
         if (doors.Count == 0)
         {
             if (ent.Comp.WarnIfMissing)
-                Log.Warning($"RMC docking port {ToPrettyString(ent.Owner)} found no airlocks to {(open ? "open" : "close")} within {ent.Comp.SearchRadius} tiles.");
+                Log.Warning($"RMC docking port {ToPrettyString(ent.Owner)} found no airlocks to {(open ? "open" : "close")} " +
+                            $"within {ent.Comp.SearchRadius} tiles. grid={ToPrettyString(grid)}, pos={xform.LocalPosition}, " +
+                            $"requiredTags=[{string.Join(",", ent.Comp.AirlockTags)}], scanned=[{string.Join(" | ", scannedDoors)}]");
 
             return;
         }
@@ -85,6 +94,9 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
             {
                 _door.TryClose(door.Owner, door.Comp);
             }
+
+            Log.Info($"RMC docking port {ToPrettyString(ent.Owner)} {(open ? "opened" : "closed")} airlock {ToPrettyString(door.Owner)} " +
+                     $"using {(tagged.Count > 0 ? "tagged" : "fallback")} match.");
         }
     }
 }

@@ -124,6 +124,26 @@
     - RMCShuttleAirlockExternalSide
 
 - type: entity
+  parent: CMAirlockSecure
+  id: RMCShuttleInternalAirlock
+  name: shuttle internal airlock
+  suffix: Shuttle, Internal
+  components:
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockInternal
+
+- type: entity
+  parent: CMAirlock
+  id: RMCShuttleInternalBasicAirlock
+  name: shuttle internal airlock
+  suffix: Shuttle, Internal, Basic
+  components:
+  - type: Tag
+    tags:
+    - RMCShuttleAirlockInternal
+
+- type: entity
   parent: CMAirlock
   id: RMCShuttleExternalSideBasicAirlock
   name: shuttle external side airlock

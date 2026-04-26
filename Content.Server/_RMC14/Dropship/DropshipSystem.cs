@@ -205,6 +205,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         SubscribeLocalEvent<DockEvent>(OnDocked);
         SubscribeLocalEvent<DockingComponent, DockEvent>(OnDockingPortDocked);
+        SubscribeLocalEvent<RMCShuttleBerthComponent, MapInitEvent>(OnRestrictedDockMapInit);
+        SubscribeLocalEvent<RMCShuttleMobileDockComponent, MapInitEvent>(OnRestrictedDockMapInit);
 
         SubscribeLocalEvent<DropshipInFlyByComponent, FTLCompletedEvent>(OnInFlyByFTLCompleted);
 
@@ -223,6 +225,24 @@ public sealed class DropshipSystem : SharedDropshipSystem
         Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipFlyByTimeSeconds, v => _flyByTime = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipHijackTravelTimeSeconds, v => _hijackTravelTime = TimeSpan.FromSeconds(v), true);
+    }
+
+    private void OnRestrictedDockMapInit<T>(EntityUid uid, T component, MapInitEvent args) where T : Component
+    {
+        if (!TryComp(uid, out TransformComponent? xform) ||
+            xform.Anchored)
+        {
+            return;
+        }
+
+        if (_transform.AnchorEntity(uid, xform))
+        {
+            Log.Info($"Anchored RMC restricted shuttle dock {ToPrettyString(uid)} on map init.");
+            return;
+        }
+
+        Log.Warning($"Unable to anchor RMC restricted shuttle dock {ToPrettyString(uid)} on map init. " +
+                    $"grid={xform.GridUid?.ToString() ?? "null"}, pos={xform.LocalPosition}, parent={xform.ParentUid}");
     }
 
     private void OnDocked(DockEvent args)
@@ -860,12 +880,16 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (Transform(computer).GridUid is not { } shuttle)
         {
             reason = Loc.GetString("rmc-dropship-no-compatible-docking-port");
+            Log.Warning($"RMC restricted docking target rejected: computer={ToPrettyString(computer)}, " +
+                        $"destination={ToPrettyString(destination)}, reason=computer is not on a shuttle grid");
             return false;
         }
 
         if (Transform(destination).GridUid is not { } targetGrid)
         {
             reason = Loc.GetString("rmc-dropship-no-compatible-docking-port");
+            Log.Warning($"RMC restricted docking target rejected: computer={ToPrettyString(computer)}, " +
+                        $"destination={ToPrettyString(destination)}, reason=destination is not on a grid");
             return false;
         }
 
@@ -876,9 +900,11 @@ public sealed class DropshipSystem : SharedDropshipSystem
             .Where(dock => HasComp<RMCShuttleMobileDockComponent>(dock.Owner))
             .ToList();
 
+        var usingPreferredDocks = preferredDocks.Count > 0;
         if (preferredDocks.Count > 0)
             shuttleDocks = preferredDocks;
 
+        var attempts = new List<string>();
         foreach (var shuttleDock in shuttleDocks)
         {
             var config = _docking.GetDockingConfig(
@@ -890,7 +916,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 destinationDock);
 
             if (config == null)
+            {
+                attempts.Add($"{DescribeDockForLog(shuttleDock.Owner, shuttleDock.Comp)} -> null");
                 continue;
+            }
+
+            attempts.Add($"{DescribeDockForLog(shuttleDock.Owner, shuttleDock.Comp)} -> valid coords={config.Coordinates} angle={config.Angle} docks={config.Docks.Count}");
 
             target = new RMCRestrictedDockingTravelTarget(
                 config,
@@ -903,8 +934,24 @@ public sealed class DropshipSystem : SharedDropshipSystem
             return true;
         }
 
+        Log.Warning($"RMC restricted docking config failed: computer={ToPrettyString(computer)}, " +
+                    $"shuttle={ToPrettyString(shuttle)}, destination={ToPrettyString(destination)}, " +
+                    $"targetGrid={ToPrettyString(targetGrid)}, targetDock={DescribeDockForLog(destination, destinationDock)}, " +
+                    $"totalShuttleDocks={_docking.GetDocks(shuttle).Count}, preferredOnly={usingPreferredDocks}, " +
+                    $"attempts=[{string.Join(" | ", attempts)}]");
+
         reason = Loc.GetString("rmc-dropship-no-compatible-docking-port");
         return false;
+    }
+
+    private string DescribeDockForLog(EntityUid uid, DockingComponent dock)
+    {
+        var xform = Transform(uid);
+        var proto = MetaData(uid).EntityPrototype?.ID ?? "none";
+        return $"{ToPrettyString(uid)} proto:{proto} grid:{ToPrettyString(xform.GridUid)} " +
+               $"pos:{xform.LocalPosition} rot:{xform.LocalRotation} anchored:{xform.Anchored} " +
+               $"docked:{dock.Docked} dockedWith:{ToPrettyString(dock.DockedWith)} " +
+               $"mobile:{HasComp<RMCShuttleMobileDockComponent>(uid)}";
     }
 
     private void StartRestrictedDockingFTL(

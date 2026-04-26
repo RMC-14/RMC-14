@@ -80,6 +80,9 @@
   id: RMCDropshipUtilityPoint
 
 - type: Tag
+  id: RMCShuttleAirlockInternal
+
+- type: Tag
   id: RMCShuttleAirlockExternalSide
 
 - type: Tag
