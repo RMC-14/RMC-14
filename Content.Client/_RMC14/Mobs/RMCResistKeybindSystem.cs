@@ -7,21 +7,19 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Mobs;
 
-/// <summary>
-/// Handles the resist keybind, which activates the first applicable resist-related alert for the local player.
-/// Priority order: Fire, Handcuffed, Ensnared, Buckled.
-/// </summary>
-public sealed class ResistKeybindSystem : EntitySystem
+public sealed class RMCResistKeybindSystem : EntitySystem
 {
     [Dependency] private readonly ClientAlertsSystem _alerts = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 
+    // Container/locker escape is already triggered by WASD.
     private static readonly ProtoId<AlertPrototype>[] ResistAlerts =
     [
         "Fire",
         "Handcuffed",
         "Ensnared",
         "Buckled",
+        "Pulled",
     ];
 
     public override void Initialize()
@@ -46,12 +44,12 @@ public sealed class ResistKeybindSystem : EntitySystem
                     }
                 },
                 handle: true))
-            .Register<ResistKeybindSystem>();
+            .Register<RMCResistKeybindSystem>();
     }
 
     public override void Shutdown()
     {
         base.Shutdown();
-        CommandBinds.Unregister<ResistKeybindSystem>();
+        CommandBinds.Unregister<RMCResistKeybindSystem>();
     }
 }
