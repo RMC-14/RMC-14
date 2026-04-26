@@ -678,10 +678,10 @@ binds:
   type: State
   key: R
   mod1: Shift
-- function: RMCResist
-  type: State
-  key: B
 - function: RMCXenoRest
   type: State
   key: R
   mod1: Shift
+- function: RMCResist
+  type: State
+  key: B
