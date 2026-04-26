@@ -1,6 +1,6 @@
 - type: tile
   abstract: true
-  parent: CMTileBase
+  parent: CMTileBaseUnpryable
   id: RMCFloorVehicleInteriorBase
   name: vehicle interior floor
 
