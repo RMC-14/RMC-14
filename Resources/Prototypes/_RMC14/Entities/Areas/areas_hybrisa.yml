@@ -2655,6 +2655,16 @@
   - type: Sprite
     state: wylab
 
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsWeyaAdministrativeRecordsBureauComplex
+  name: Weston-Yamada - Administrative Records Bureau Complex
+  components:
+  - type: Sprite
+    state: wyoffice
+  - type: Area
+    minimapColor: '#2D3FA2EE'
+
 # TSE Airbase
 - type: entity
   parent: RMCAreaLv759Indoors

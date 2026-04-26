@@ -1,0 +1,10 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaGreyBase
+  name: tiles-cm-default-grey
+
+- type: tile
+  parent: RMCFloorHybrisaGreyBase
+  id: RMCFloorHybrisaTileGrey
+  sprite: /Textures/_RMC14/Tiles/hybrisa/grey_tile.png

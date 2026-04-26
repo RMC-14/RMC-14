@@ -297,6 +297,14 @@
     {
       "name": "platform_sm_stair_alt",
       "directions": 4
+    },
+    {
+      "name": "hybrisadecoedging",
+      "directions": 4
+    },
+    {
+      "name": "hybrisadecoedging_corner",
+      "directions": 4
     }
   ]
 }
