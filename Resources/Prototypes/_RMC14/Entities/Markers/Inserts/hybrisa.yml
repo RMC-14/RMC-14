@@ -20,7 +20,7 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Hybrisa/records_bureau_complex.yml"
-      probability: 1  
+      probability: 0.55
 
 # Standalone
 
