@@ -94,6 +94,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     /// </summary>
     public const float GracePeriod = 0.05f;
 
+    private EntityQuery<MobStateComponent> _mobStateQuery;
+    private EntityQuery<PhysicsComponent> _physicsQuery;
+    private EntityQuery<DirectionalAttackBlockerComponent> _directionalAttackBlockerQuery;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -113,6 +117,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         SubscribeAllEvent<LightAttackEvent>(OnLightAttack);
         SubscribeAllEvent<DisarmAttackEvent>(OnDisarmAttack);
         SubscribeAllEvent<StopAttackEvent>(OnStopAttack);
+
+        _mobStateQuery = GetEntityQuery<MobStateComponent>();
+        _physicsQuery = GetEntityQuery<PhysicsComponent>();
+        _directionalAttackBlockerQuery = GetEntityQuery<DirectionalAttackBlockerComponent>();
 
 #if DEBUG
         SubscribeLocalEvent<MeleeWeaponComponent,
@@ -820,15 +828,15 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 // In short, we should hit the closest entity, UNLESS we can hit a mob, in which case we hit the mob.
                 // To accomplish this, we find the first object that either is a mob or would block our attack.
                 var firstPriorityResult = filteredResults.FirstOrNull(
-                    x => HasComp<MobStateComponent>(x.HitEntity)  // mobs
-                      || (CompOrNull<PhysicsComponent>(x.HitEntity)?.CollisionLayer & (int)CollisionGroup.InteractImpassable) != 0  // walls, windows, etc
-                      || HasComp<DirectionalAttackBlockerComponent>(x.HitEntity)  // barricades
+                    x => _mobStateQuery.HasComp(x.HitEntity) // mobs
+                      || ((_physicsQuery.CompOrNull(x.HitEntity)?.CollisionLayer ?? 0) & (int)CollisionGroup.InteractImpassable) != 0  // walls, windows, etc
+                      || _directionalAttackBlockerQuery.HasComp(x.HitEntity)  // barricades
                 );
 
                 // If the found object is a mob, we target it. Otherwise we target the first object we found.
                 var target = filteredResults.First();
                 if (firstPriorityResult is { } result &&
-                    HasComp<MobStateComponent>(result.HitEntity))
+                    _mobStateQuery.HasComp(result.HitEntity))
                 {
                     target = result;
                 }
