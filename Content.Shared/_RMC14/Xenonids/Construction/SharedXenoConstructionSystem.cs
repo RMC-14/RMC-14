@@ -293,8 +293,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        var tile = _mapSystem.CoordinatesToTile(gridUid, gridComp, coordinates);
-        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, xeno, args.UseOnSemiWeedable, true))
+        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, coordinates.Position, xeno, null, args.UseOnSemiWeedable, true))
             return;
 
         if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, args.LimitDistance))
@@ -340,10 +339,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         Entity<XenoWeedsComponent> adjacent = default;
         if (existing == null)
         {
+            var canSpread = false;
             foreach (var direction in _rmcMap.CardinalDirections)
             {
-                if (_rmcMap.HasAnchoredEntityEnumerator(coordinates, out adjacent, direction))
-                    break;
+                if (!_rmcMap.HasAnchoredEntityEnumerator(coordinates, out adjacent, direction))
+                    continue;
+
+                if (!_xenoWeeds.CanSpreadWeedsPopup(grid, coordinates.Position, xeno, adjacent, false, true))
+                    continue;
+
+                canSpread = true;
             }
 
             if (adjacent == default)
@@ -355,13 +360,20 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
                 return;
             }
+
+            if (!canSpread)
+            {
+                _popup.PopupClient("An obstacle is preventing the weeds from spreading",
+                    args.Target,
+                    xeno,
+                    PopupType.MediumCaution);
+
+                return;
+            }
         }
 
-        var toSpawn = existing == null ? args.Expand : args.Source;
-        var tile = _mapSystem.CoordinatesToTile(gridUid, gridComp, coordinates);
-        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, xeno, false, true))
-            return;
-
+        var spawnSource = existing != null;
+        var toSpawn = !spawnSource ? args.Expand : args.Source;
         if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false))
             return;
 
@@ -370,6 +382,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        if (spawnSource)
+            _actions.SetUseDelay(args.Action.Owner, args.NodePlaceCooldown);
+
         if (_net.IsServer)
         {
             var newWeeds = Spawn(toSpawn, coordinates);
