@@ -132,7 +132,7 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         return relativeDiff is 3 or 4 or 5; // Opposite directions
     }
 
-    public bool IsDirectionBlocked(EntityUid origin, AtmosDirection cardinal, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable)
+    public bool IsDirectionBlocked(EntityUid origin, AtmosDirection cardinal, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
     {
         return IsDirectionBlocked(origin, cardinal.CardinalToIntVec(), checkRange, collisionGroup);
     }
@@ -147,7 +147,7 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
     /// <returns>
     ///     True if at least one valid blocking entity is detected within range, otherwise false.
     /// </returns>
-    public bool IsDirectionBlocked(EntityUid origin, Vector2 direction, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable)
+    public bool IsDirectionBlocked(EntityUid origin, Vector2 direction, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
     {
         if (direction == Vector2.Zero)
             return false;
