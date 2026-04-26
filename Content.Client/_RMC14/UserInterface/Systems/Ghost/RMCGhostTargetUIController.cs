@@ -30,7 +30,7 @@ public sealed class RMCGhostTargetUIController : UIController
         if (!window.IsOpen)
             window.OpenCentered();
 
-        _net.SendSystemNetworkMessage(new RMCGhostWarpsRequestEvent());
+        RequestWarps();
     }
 
     private void OnGhostWarpsResponse(RMCGhostWarpsResponseEvent msg, EntitySessionEventArgs args)
@@ -50,6 +50,11 @@ public sealed class RMCGhostTargetUIController : UIController
         _net.SendSystemNetworkMessage(new RMCGhostnadoRequestEvent());
     }
 
+    private void RequestWarps()
+    {
+        _net.SendSystemNetworkMessage(new RMCGhostWarpsRequestEvent());
+    }
+
     private RMCGhostTargetWindow EnsureWindow()
     {
         if (_window != null)
@@ -58,6 +63,7 @@ public sealed class RMCGhostTargetUIController : UIController
         _window = new RMCGhostTargetWindow();
         _window.WarpClicked += OnWarpClicked;
         _window.OnGhostnadoClicked += OnGhostnadoClicked;
+        _window.OnRefreshClicked += RequestWarps;
         return _window;
     }
 }

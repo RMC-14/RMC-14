@@ -25,6 +25,7 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
 
     public event Action<NetEntity>? WarpClicked;
     public event Action? OnGhostnadoClicked;
+    public event Action? OnRefreshClicked;
 
     public RMCGhostTargetWindow()
     {
@@ -34,6 +35,7 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         SearchBar.OnTextChanged += OnSearchTextChanged;
 
         GhostnadoButton.OnPressed += _ => OnGhostnadoClicked?.Invoke();
+        RefreshButton.OnPressed += _ => OnRefreshClicked?.Invoke();
     }
 
     private void SetWindowBackgroundColor()
