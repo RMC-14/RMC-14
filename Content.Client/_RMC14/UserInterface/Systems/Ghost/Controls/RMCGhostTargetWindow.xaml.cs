@@ -374,17 +374,17 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
             HorizontalAlignment = Control.HAlignment.Right,
             VerticalAlignment = Control.VAlignment.Center,
+            Margin = new Thickness(2, 0, 0, 0),
         };
 
         var ghostIcon = new TextureRect
         {
             HorizontalAlignment = Control.HAlignment.Center,
             VerticalAlignment = Control.VAlignment.Center,
-            Texture = _entityManager.System<SpriteSystem>().Frame0(
-                new SpriteSpecifier.Rsi(new ResPath("/Textures/Mobs/Ghosts/ghost_human.rsi"), "icon")),
+            TexturePath = "/Textures/_RMC14/Interface/ghost_counter.svg.96dpi.png",
             Stretch = TextureRect.StretchMode.KeepAspectCentered,
-            MinSize = new Vector2(17, 17),
-            MaxSize = new Vector2(17, 17),
+            MinSize = new Vector2(13, 13),
+            MaxSize = new Vector2(13, 13),
         };
         ghostCounter.AddChild(ghostIcon);
 
