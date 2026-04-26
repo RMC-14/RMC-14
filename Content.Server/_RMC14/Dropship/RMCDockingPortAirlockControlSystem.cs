@@ -1,5 +1,7 @@
 using Content.Server.Doors.Systems;
+using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
 using Content.Shared.Tag;
@@ -10,6 +12,7 @@ namespace Content.Server._RMC14.Dropship;
 public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
 {
     [Dependency] private readonly DoorSystem _door = default!;
+    [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
@@ -21,6 +24,8 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
         SubscribeLocalEvent<RMCDockingPortAirlockControlComponent, UndockEvent>(OnUndocked);
         SubscribeLocalEvent<RMCDockingPortAirlockControlComponent, DropshipRelayedEvent<FTLCompletedEvent>>(OnFTLCompleted);
         SubscribeLocalEvent<RMCDockingPortAirlockControlComponent, DropshipRelayedEvent<FTLStartedEvent>>(OnFTLStarted);
+        SubscribeLocalEvent<DockEvent>(OnAnyDocked);
+        SubscribeLocalEvent<UndockEvent>(OnAnyUndocked);
     }
 
     private void OnDocked(Entity<RMCDockingPortAirlockControlComponent> ent, ref DockEvent args)
@@ -45,6 +50,116 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
     {
         if (ent.Comp.CloseOnUndock)
             SetAirlocks(ent, open: false);
+    }
+
+    private void OnAnyDocked(DockEvent args)
+    {
+        RecalculateSafetyLocks(args.GridAUid);
+
+        if (args.GridBUid != args.GridAUid)
+            RecalculateSafetyLocks(args.GridBUid);
+    }
+
+    private void OnAnyUndocked(UndockEvent args)
+    {
+        RecalculateSafetyLocks(args.GridAUid);
+
+        if (args.GridBUid != args.GridAUid)
+            RecalculateSafetyLocks(args.GridBUid);
+    }
+
+    private void RecalculateSafetyLocks(EntityUid grid)
+    {
+        if (!HasComp<DropshipComponent>(grid))
+            return;
+
+        var anyDocked = false;
+        var dockedPorts = new HashSet<EntityUid>();
+        var dockDoors = new List<Entity<DoorBoltComponent>>();
+
+        var enumerator = Transform(grid).ChildEnumerator;
+        while (enumerator.MoveNext(out var child))
+        {
+            if (!TryComp(child, out DockingComponent? docking))
+                continue;
+
+            if (docking.DockedWith != null)
+            {
+                anyDocked = true;
+                dockedPorts.Add(child);
+            }
+
+            if (TryComp(child, out DoorBoltComponent? bolt))
+                dockDoors.Add((child, bolt));
+        }
+
+        foreach (var door in dockDoors)
+        {
+            if (!anyDocked)
+            {
+                ReleaseSafetyLock(door);
+                continue;
+            }
+
+            if (dockedPorts.Contains(door.Owner))
+            {
+                var released = ReleaseSafetyLock(door, out var wasBolted);
+                if (released && !wasBolted)
+                    TryOpenDockedDoor(door.Owner);
+
+                continue;
+            }
+
+            ApplySafetyLock(door);
+        }
+    }
+
+    private void ApplySafetyLock(Entity<DoorBoltComponent> door)
+    {
+        if (!TryComp(door.Owner, out RMCDockingSafetyLockedComponent? safety))
+        {
+            safety = EnsureComp<RMCDockingSafetyLockedComponent>(door.Owner);
+            safety.WasBoltedBeforeSafetyLock = door.Comp.BoltsDown;
+        }
+
+        safety.Active = true;
+        _dropship.LockDoor(door.Owner);
+    }
+
+    private bool ReleaseSafetyLock(Entity<DoorBoltComponent> door)
+    {
+        return ReleaseSafetyLock(door, out _);
+    }
+
+    private bool ReleaseSafetyLock(Entity<DoorBoltComponent> door, out bool wasBolted)
+    {
+        wasBolted = false;
+
+        if (!TryComp(door.Owner, out RMCDockingSafetyLockedComponent? safety))
+            return false;
+
+        wasBolted = safety.WasBoltedBeforeSafetyLock;
+        RemComp<RMCDockingSafetyLockedComponent>(door.Owner);
+
+        if (wasBolted)
+            _dropship.LockDoor(door.Owner);
+        else
+            _dropship.UnlockDoor(door.Owner, forceSafetyUnlock: true);
+
+        return true;
+    }
+
+    private void TryOpenDockedDoor(EntityUid door)
+    {
+        if (!TryComp(door, out DockingComponent? docking) ||
+            docking.DockedWith == null ||
+            !TryComp(door, out DoorComponent? doorComp) ||
+            doorComp.State != DoorState.Closed)
+        {
+            return;
+        }
+
+        _door.TryOpen(door, doorComp);
     }
 
     private void SetAirlocks(Entity<RMCDockingPortAirlockControlComponent> ent, bool open)
