@@ -37,6 +37,13 @@
     isCorrodible: false
 
 - type: entity
+  parent: CMAirlockShuttle
+  id: RMCAirlockShuttleMobileDock
+  suffix: Shuttle, Mobile Dock
+  components:
+  - type: RMCShuttleMobileDock
+
+- type: entity
   parent: CMAirlock
   id: CMAirlockCommand
   name: command airlock

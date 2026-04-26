@@ -245,7 +245,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 6.5,5.5
       parent: 1
-- proto: CMNormandyDoorAft
+- proto: RMCNormandyDoorAftMobileDock
   entities:
   - uid: 18
     components:
@@ -253,7 +253,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.5,0.5
       parent: 1
-    - type: RMCShuttleMobileDock
 - proto: CMPlatform
   entities:
   - uid: 76
