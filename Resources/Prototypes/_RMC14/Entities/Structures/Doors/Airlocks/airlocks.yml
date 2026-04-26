@@ -119,6 +119,19 @@
   name: shuttle external side airlock
   suffix: Shuttle, External Side
   components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-5,-9.5,5,7.5"
+    reserved: true
+    landingClasses: [ external_side ]
+    landingTags: [ mainship, ert, external_side ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Docking
+  - type: DockingSignalControl
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalSide ]
+    searchRadius: 5
   - type: Tag
     tags:
     - RMCShuttleAirlockExternalSide
@@ -129,6 +142,16 @@
   name: shuttle internal airlock
   suffix: Shuttle, Internal
   components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-4,-8.5,4,6.5"
+    reserved: true
+    landingClasses: [ internal ]
+    landingTags: [ mainship, ert, internal ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Docking
+  - type: DockingSignalControl
   - type: Tag
     tags:
     - RMCShuttleAirlockInternal
@@ -139,6 +162,16 @@
   name: shuttle internal airlock
   suffix: Shuttle, Internal, Basic
   components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-4,-8.5,4,6.5"
+    reserved: true
+    landingClasses: [ internal ]
+    landingTags: [ mainship, ert, internal ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Docking
+  - type: DockingSignalControl
   - type: Tag
     tags:
     - RMCShuttleAirlockInternal
@@ -149,6 +182,19 @@
   name: shuttle external side airlock
   suffix: Shuttle, External Side, Basic
   components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-5,-9.5,5,7.5"
+    reserved: true
+    landingClasses: [ external_side ]
+    landingTags: [ mainship, ert, external_side ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Docking
+  - type: DockingSignalControl
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalSide ]
+    searchRadius: 5
   - type: Tag
     tags:
     - RMCShuttleAirlockExternalSide
@@ -159,6 +205,19 @@
   name: shuttle external hangar airlock
   suffix: Shuttle, External Hangar
   components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-6,-10.5,6,8.5"
+    reserved: true
+    landingClasses: [ external_hangar ]
+    landingTags: [ mainship, ert, external_hangar ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Docking
+  - type: DockingSignalControl
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalHangar ]
+    searchRadius: 8
   - type: Tag
     tags:
     - RMCShuttleAirlockExternalHangar
@@ -169,6 +228,19 @@
   name: shuttle external hangar airlock
   suffix: Shuttle, External Hangar, Basic
   components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-6,-10.5,6,8.5"
+    reserved: true
+    landingClasses: [ external_hangar ]
+    landingTags: [ mainship, ert, external_hangar ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: Docking
+  - type: DockingSignalControl
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalHangar ]
+    searchRadius: 8
   - type: Tag
     tags:
     - RMCShuttleAirlockExternalHangar

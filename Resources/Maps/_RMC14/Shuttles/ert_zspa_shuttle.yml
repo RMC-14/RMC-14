@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 08/18/2025 14:27:58
-  entityCount: 102
+  entityCount: 101
 maps: []
 grids:
 - 1
@@ -253,6 +253,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.5,0.5
       parent: 1
+    - type: RMCShuttleMobileDock
 - proto: CMPlatform
   entities:
   - uid: 76
@@ -733,14 +734,6 @@ entities:
     components:
     - type: Transform
       pos: 4.255335,9.5
-      parent: 1
-- proto: RMCShuttleMobileDockingPort
-  entities:
-  - uid: 1005
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,0.5
       parent: 1
 - proto: RMCWeyaEngine65
   entities:

@@ -44,7 +44,7 @@
     state: syndishuttle
   - type: DropshipNavigationComputer
     hijackable: false
-    requiresShuttleBerth: true
+    requiresRestrictedDestination: true
     shuttleDockingClass: Standard
     dockingBounds: "-3.5,-7,3.5,6"
 
@@ -277,83 +277,52 @@
     spawn: "/Maps/_RMC14/normandy.yml" # The actual Dropship files are private. These are debug versions to ensure tests pass.
 
 - type: entity
-  parent: MarkerBase
-  id: RMCShuttleDockingPort
-  name: shuttle docking port
-  description: Defines the exact docking connector used by restricted shuttle routing.
-  suffix: Shuttle
-  placement:
-    mode: SnapgridCenter
+  parent: CMDropshipDestination
+  id: RMCRestrictedShuttleDestination
+  abstract: true
+  name: restricted shuttle destination
+  description: Defines a valid landing location for restricted shuttle routing.
   components:
   - type: Transform
     anchored: true
     noRot: false
   - type: Rotatable
-  - type: Sprite
-    sprite: _RMC14/Markers/docking_port.rsi
-    state: pinonfar
-    snapCardinals: false
-  - type: Docking
 
 - type: entity
-  parent: RMCShuttleDockingPort
-  id: RMCShuttleMobileDockingPort
-  name: shuttle mobile docking port
-  description: Defines the exact docking connector on a restricted shuttle.
-  suffix: Shuttle, Mobile
-  components:
-  - type: Sprite
-    sprite: _RMC14/Markers/docking_port.rsi
-    state: pinonclose
-  - type: RMCShuttleMobileDock
-
-- type: entity
-  parent: RMCShuttleDockingPort
-  id: RMCShuttleBerth
-  abstract: true
-  name: restricted shuttle berth
-  description: Defines a valid docking location for restricted shuttle routing.
-  components:
-  - type: FTLBeacon
-  - type: DropshipDestination
-  - type: FTLSmashImmune
-  - type: NoFTL
-
-- type: entity
-  parent: RMCShuttleBerth
-  id: RMCShuttleBerthInternal
+  parent: RMCRestrictedShuttleDestination
+  id: RMCRestrictedShuttleDestinationInternal
   suffix: Shuttle, Internal
   components:
   - type: DropshipDestination
     dockBounds: "-4,-8.5,4,6.5"
-  - type: RMCShuttleBerth
-    dockClasses: [ internal ]
-    tags: [ mainship, ert, internal ]
+    reserved: true
+    landingClasses: [ internal ]
+    landingTags: [ mainship, ert, internal ]
 
 - type: entity
-  parent: RMCShuttleBerth
-  id: RMCShuttleBerthExternalSide
+  parent: RMCRestrictedShuttleDestination
+  id: RMCRestrictedShuttleDestinationExternalSide
   suffix: Shuttle, External Side
   components:
   - type: DropshipDestination
     dockBounds: "-5,-9.5,5,7.5"
-  - type: RMCShuttleBerth
-    dockClasses: [ external_side ]
-    tags: [ mainship, ert, external_side ]
+    reserved: true
+    landingClasses: [ external_side ]
+    landingTags: [ mainship, ert, external_side ]
   - type: RMCDockingPortAirlockControl
     airlockTags: [ RMCShuttleAirlockExternalSide ]
     searchRadius: 5
 
 - type: entity
-  parent: RMCShuttleBerth
-  id: RMCShuttleBerthExternalHangar
+  parent: RMCRestrictedShuttleDestination
+  id: RMCRestrictedShuttleDestinationExternalHangar
   suffix: Shuttle, External Hangar
   components:
   - type: DropshipDestination
     dockBounds: "-6,-10.5,6,8.5"
-  - type: RMCShuttleBerth
-    dockClasses: [ external_hangar ]
-    tags: [ mainship, ert, external_hangar ]
+    reserved: true
+    landingClasses: [ external_hangar ]
+    landingTags: [ mainship, ert, external_hangar ]
   - type: RMCDockingPortAirlockControl
     airlockTags: [ RMCShuttleAirlockExternalHangar ]
     searchRadius: 8

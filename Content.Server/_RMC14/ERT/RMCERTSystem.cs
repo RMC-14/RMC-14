@@ -157,7 +157,8 @@ public sealed class RMCERTSystem : EntitySystem
                 GetSelectedCallLabel(r),
                 r.AllowedCalls.Select(c => c.Id).ToList(),
                 FormatRoundTime(r.CreatedAt),
-                r.LastError))
+                r.LastError,
+                r.LastWarning))
             .ToList();
 
         var calls = _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
@@ -259,10 +260,19 @@ public sealed class RMCERTSystem : EntitySystem
             return false;
         }
 
+        if (!TryPrepareRequestForDispatch(request, call, true, out error))
+        {
+            request.LastError = string.Empty;
+            request.LastWarning = error;
+            DirtyState();
+            return false;
+        }
+
         request.State = RMCERTRequestState.PendingDispatch;
         request.SelectedCall = callId;
         request.DispatchAt = _timing.CurTime + TimeSpan.FromSeconds(call.LaunchDelay);
         request.LastError = string.Empty;
+        request.LastWarning = string.Empty;
 
         var adminText = admin is { Valid: true }
             ? ToPrettyString(admin.Value)
@@ -272,7 +282,6 @@ public sealed class RMCERTSystem : EntitySystem
             ("id", request.Id),
             ("call", call.Name),
             ("delay", (int) call.LaunchDelay)));
-        Announce(call.Announcements.Dispatch, call.Announcements.DispatchSound, request, call);
         Log.Info($"ERT request {request.Id} approved as {call.ID} by {adminText}");
 
         DirtyState();
@@ -290,6 +299,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         request.State = RMCERTRequestState.Denied;
         request.LastError = string.Empty;
+        request.LastWarning = string.Empty;
 
         if (request.SourceEntity is { Valid: true } beacon &&
             TryComp(beacon, out RMCERTDistressBeaconComponent? beaconComp) &&
@@ -325,6 +335,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         request.State = RMCERTRequestState.Cancelled;
         request.LastError = string.Empty;
+        request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
         CleanupRequestContent(request, Loc.GetString("rmc-ert-cleanup-reason-cancelled"));
         UpdateSourceVisual(request, false);
@@ -357,6 +368,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         request.State = RMCERTRequestState.Completed;
         request.LastError = string.Empty;
+        request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
         UpdateSourceVisual(request, false);
 
@@ -433,6 +445,7 @@ public sealed class RMCERTSystem : EntitySystem
             {
                 request.State = RMCERTRequestState.Arrived;
                 request.LastError = string.Empty;
+                request.LastWarning = string.Empty;
                 UpdateSourceVisual(request, false);
                 _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-arrived-missing-call", ("id", request.Id)));
                 DirtyState();
@@ -589,13 +602,13 @@ public sealed class RMCERTSystem : EntitySystem
         DirtyState();
 
         // Build the shuttle and the final roster up front so ghost-role raffles reflect the team that will actually deploy.
-        if (!TryLoadShuttle(request, call, out var shuttle, out var error))
+        if (!TryPrepareRequestForDispatch(request, call, false, out var error))
         {
             FailRequest(request, error);
             return;
         }
 
-        request.Shuttle = shuttle;
+        var shuttle = request.Shuttle;
         request.PlannedRoster.Clear();
         request.SpawnedGhostRoles.Clear();
 
@@ -618,6 +631,7 @@ public sealed class RMCERTSystem : EntitySystem
                  $"RecruitmentDuration={call.Requirements.RecruitmentDuration}, " +
                  $"AutoLaunch={call.AutoLaunch}, MinRequiredSlots={call.Requirements.MinRequiredSlots}, " +
                  $"Shuttle={FormatEntity(shuttle)}, {GetShuttleDiagnostics(request, shuttle)}");
+        Announce(call.Announcements.Dispatch, call.Announcements.DispatchSound, request, call);
         Announce(call.Announcements.Recruiting, call.Announcements.RecruitingSound, request, call);
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-recruiting",
             ("id", request.Id),
@@ -636,6 +650,81 @@ public sealed class RMCERTSystem : EntitySystem
         // Auto-launch retries are polled from Update instead of chained through Timer.Spawn.
         // TimerManager processes newly-added timers in the same update pass, so adding a short
         // retry timer from a timer callback can snowball if the server has a long frame.
+    }
+
+    private bool TryPrepareRequestForDispatch(
+        RMCERTRequest request,
+        RMCERTCallPrototype call,
+        bool approving,
+        out string error)
+    {
+        error = string.Empty;
+
+        if (!TryEnsureShuttleLoaded(request, call, out var shuttle, out var loadedForPreflight, out error))
+            return false;
+
+        if (shuttle is not { Valid: true } shuttleUid || !Exists(shuttleUid))
+            return true;
+
+        if (!TryFindNavigationComputer(shuttleUid, out var computer))
+        {
+            error = Loc.GetString("rmc-ert-error-no-navigation-computer");
+            Log.Warning($"ERT request {request.Id} preflight failed for {call.ID}: no navigation computer. " +
+                        $"Shuttle={FormatEntity(shuttleUid)}, {GetShuttleDiagnostics(request, shuttleUid)}");
+
+            if (loadedForPreflight)
+                DiscardPreflightShuttle(request, shuttleUid);
+
+            return false;
+        }
+
+        if (!TryFindLandingZone(request, computer, out _))
+        {
+            LogLandingZoneDiagnostics(request, computer);
+            error = approving
+                ? Loc.GetString("rmc-ert-warning-no-compatible-landing-zone", ("call", call.Name))
+                : Loc.GetString("rmc-ert-error-no-landing-zone");
+
+            if (loadedForPreflight)
+                DiscardPreflightShuttle(request, shuttleUid);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool TryEnsureShuttleLoaded(
+        RMCERTRequest request,
+        RMCERTCallPrototype call,
+        out EntityUid? shuttle,
+        out bool loadedForPreflight,
+        out string error)
+    {
+        loadedForPreflight = false;
+        error = string.Empty;
+
+        if (request.Shuttle is { Valid: true } existing && Exists(existing))
+        {
+            shuttle = existing;
+            return true;
+        }
+
+        if (!TryLoadShuttle(request, call, out shuttle, out error))
+            return false;
+
+        request.Shuttle = shuttle;
+        loadedForPreflight = shuttle is { Valid: true };
+        return true;
+    }
+
+    private void DiscardPreflightShuttle(RMCERTRequest request, EntityUid shuttle)
+    {
+        if (request.Shuttle == shuttle)
+            request.Shuttle = null;
+
+        if (Exists(shuttle))
+            QueueDel(shuttle);
     }
 
     private bool TryLoadShuttle(RMCERTRequest request, RMCERTCallPrototype call, out EntityUid? shuttle, out string error)
@@ -1063,7 +1152,7 @@ public sealed class RMCERTSystem : EntitySystem
 
     private void CleanupRequestContent(RMCERTRequest request, string reason)
     {
-        // Failed and cancelled requests need to unwind both the staged roster and any berth reservation held by the shuttle.
+        // Failed and cancelled requests need to unwind both the staged roster and any destination reservation held by the shuttle.
         var ghostCoordinates = _gameTicker.GetObserverSpawnPoint();
         var ghostedMembers = 0;
         foreach (var member in request.SpawnedGhostRoles)
@@ -1264,6 +1353,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (HasActiveRecruitmentRaffles(request))
         {
             request.LastError = Loc.GetString("rmc-ert-error-raffles-in-progress");
+            request.LastWarning = string.Empty;
             DirtyState();
             return false;
         }
@@ -1280,6 +1370,7 @@ public sealed class RMCERTSystem : EntitySystem
     private bool TryLaunchRequest(RMCERTRequest request, RMCERTCallPrototype call, string launcher)
     {
         request.LastError = string.Empty;
+        request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
 
         var acceptedCount = FinalizeRecruitment(request);
@@ -1361,7 +1452,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (request.SourceEntity is { Valid: true } source)
             sourceMap = Transform(source).MapUid;
 
-        // Keep arrivals on the same map as the originating request, then let the shared dropship rules filter by berth compatibility.
+        // Keep arrivals on the same map as the originating request, then let the shared dropship rules filter by destination compatibility.
         var query = EntityQueryEnumerator<DropshipDestinationComponent>();
         while (query.MoveNext(out var uid, out var dropshipDestination))
         {
@@ -1517,6 +1608,7 @@ public sealed class RMCERTSystem : EntitySystem
                     $"Shuttle={FormatEntity(request.Shuttle)}, {GetShuttleDiagnostics(request, request.Shuttle)}");
         request.State = RMCERTRequestState.Failed;
         request.LastError = error;
+        request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
         CleanupRequestContent(request, Loc.GetString("rmc-ert-cleanup-reason-failed"));
         UpdateSourceVisual(request, false);
@@ -1657,6 +1749,7 @@ public sealed class RMCERTSystem : EntitySystem
     {
         request.State = RMCERTRequestState.Arrived;
         request.LastError = string.Empty;
+        request.LastWarning = string.Empty;
         UpdateSourceVisual(request, false);
         Announce(call.Announcements.Arrival, call.Announcements.ArrivalSound, request, call);
 
@@ -1894,14 +1987,14 @@ public sealed class RMCERTSystem : EntitySystem
             rejected++;
             var meta = MetaData(uid);
             var prototype = meta.EntityPrototype?.ID ?? "none";
-            var berth = TryComp(uid, out RMCShuttleBerthComponent? zone)
-                ? $"berth enabled:{zone.Enabled} reserved:{zone.Reserved} classes:[{string.Join(", ", zone.DockClasses)}] tags:[{string.Join(", ", zone.Tags)}]"
-                : "berth:none";
+            var landingPolicy = $"destination enabled:{dropshipDestination.Enabled} reserved:{dropshipDestination.Reserved} " +
+                                $"classes:[{string.Join(", ", dropshipDestination.LandingClasses)}] " +
+                                $"tags:[{string.Join(", ", dropshipDestination.LandingTags)}]";
 
             builder.AppendLine();
             builder.Append($" - rejected {ToPrettyString(uid)} proto:{prototype} map:{FormatEntity(destinationXform.MapUid)} ");
             builder.Append($"dockBounds:{FormatNullable(dropshipDestination.DockBounds)} ship:{FormatEntity(dropshipDestination.Ship)} ");
-            builder.Append($"{berth} reason:{string.Join("; ", reasons)}");
+            builder.Append($"{landingPolicy} reason:{string.Join("; ", reasons)}");
         }
 
         builder.AppendLine();

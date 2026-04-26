@@ -81,6 +81,15 @@ public sealed class RMCERTAdminEui : BaseEui
                 });
             }
 
+            if (!string.IsNullOrWhiteSpace(request.LastWarning))
+            {
+                box.AddChild(new Label
+                {
+                    Text = Loc.GetString("rmc-ert-admin-row-warning", ("warning", request.LastWarning)),
+                    FontColorOverride = Color.Orange,
+                });
+            }
+
             var actions = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,

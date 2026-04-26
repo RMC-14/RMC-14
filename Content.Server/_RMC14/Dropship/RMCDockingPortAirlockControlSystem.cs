@@ -19,6 +19,8 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
 
         SubscribeLocalEvent<RMCDockingPortAirlockControlComponent, DockEvent>(OnDocked);
         SubscribeLocalEvent<RMCDockingPortAirlockControlComponent, UndockEvent>(OnUndocked);
+        SubscribeLocalEvent<RMCDockingPortAirlockControlComponent, DropshipRelayedEvent<FTLCompletedEvent>>(OnFTLCompleted);
+        SubscribeLocalEvent<RMCDockingPortAirlockControlComponent, DropshipRelayedEvent<FTLStartedEvent>>(OnFTLStarted);
     }
 
     private void OnDocked(Entity<RMCDockingPortAirlockControlComponent> ent, ref DockEvent args)
@@ -28,6 +30,18 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
     }
 
     private void OnUndocked(Entity<RMCDockingPortAirlockControlComponent> ent, ref UndockEvent args)
+    {
+        if (ent.Comp.CloseOnUndock)
+            SetAirlocks(ent, open: false);
+    }
+
+    private void OnFTLCompleted(Entity<RMCDockingPortAirlockControlComponent> ent, ref DropshipRelayedEvent<FTLCompletedEvent> args)
+    {
+        if (ent.Comp.OpenOnDock)
+            SetAirlocks(ent, open: true);
+    }
+
+    private void OnFTLStarted(Entity<RMCDockingPortAirlockControlComponent> ent, ref DropshipRelayedEvent<FTLStartedEvent> args)
     {
         if (ent.Comp.CloseOnUndock)
             SetAirlocks(ent, open: false);
@@ -49,8 +63,7 @@ public sealed class RMCDockingPortAirlockControlSystem : EntitySystem
             scannedDoors.Add($"{ToPrettyString(door.Owner)} grid:{ToPrettyString(doorXform.GridUid)} " +
                              $"pos:{doorXform.LocalPosition} tags:[{tagText}] state:{door.Comp.State}");
 
-            if (door.Owner == ent.Owner ||
-                doorXform.GridUid != grid)
+            if (doorXform.GridUid != grid)
             {
                 continue;
             }

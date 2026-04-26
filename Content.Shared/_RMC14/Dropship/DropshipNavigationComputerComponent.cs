@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Dropship;
 
 /// <summary>
-/// High-level berth profile used by restricted RMC shuttle routing.
+/// High-level destination profile used by restricted RMC shuttle routing.
 /// </summary>
 public enum RMCShuttleDockingClass
 {
@@ -17,7 +17,7 @@ public enum RMCShuttleDockingClass
 }
 
 /// <summary>
-/// Maps an abstract shuttle profile to concrete berth class tags.
+/// Maps an abstract shuttle profile to concrete landing class tags.
 /// </summary>
 public static class RMCShuttleDocking
 {
@@ -26,7 +26,7 @@ public static class RMCShuttleDocking
     private static readonly string[] BigDockClasses = ["external_hangar"];
 
     /// <summary>
-    /// Returns the berth classes the shuttle may use for automatic routing and nav-console validation.
+    /// Returns the landing classes the shuttle may use for automatic routing and nav-console validation.
     /// </summary>
     public static string[] GetAllowedDockClasses(RMCShuttleDockingClass dockingClass)
     {
@@ -43,7 +43,7 @@ public static class RMCShuttleDocking
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedDropshipSystem))]
 /// <summary>
-/// Navigation settings for a dropship flight computer, including restricted berth routing flags.
+/// Navigation settings for a dropship flight computer, including restricted destination routing flags.
 /// </summary>
 public sealed partial class DropshipNavigationComputerComponent : Component
 {
@@ -83,19 +83,19 @@ public sealed partial class DropshipNavigationComputerComponent : Component
     [DataField, AutoNetworkedField]
     public bool PlanetOnly;
 
-    // When enabled, destination validation requires the destination to be marked as a restricted shuttle berth.
+    // When enabled, destination validation requires a restricted landing policy on the destination.
     [DataField, AutoNetworkedField]
-    public bool RequiresShuttleBerth;
+    public bool RequiresRestrictedDestination;
 
-    // Defines which berth class this shuttle may use.
+    // Defines which landing class this shuttle may use.
     [DataField]
     public RMCShuttleDockingClass ShuttleDockingClass = RMCShuttleDockingClass.Standard;
 
-    // Optional explicit footprint used instead of the grid AABB for berth fit validation.
+    // Optional explicit footprint used instead of the grid AABB for destination fit validation.
     [DataField]
     public Box2? DockingBounds;
 
-    // Additional tag filters applied once restricted berth routing is enabled.
+    // Additional tag filters applied once restricted destination routing is enabled.
     [DataField, AutoNetworkedField]
     public List<string> AllowedLandingTags = [];
 

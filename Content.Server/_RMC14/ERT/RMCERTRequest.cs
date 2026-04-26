@@ -24,6 +24,7 @@ public sealed class RMCERTRequest
     public ProtoId<RMCERTCallPrototype>? SelectedCall;
     public List<ProtoId<RMCERTCallPrototype>> AllowedCalls = [];
     public string LastError = string.Empty;
+    public string LastWarning = string.Empty;
     public EntityUid? Shuttle;
     public readonly List<RMCERTRosterSlot> PlannedRoster = [];
     public readonly List<EntityUid> SpawnedGhostRoles = [];

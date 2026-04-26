@@ -673,7 +673,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     {
         reason = string.Empty;
 
-        if (!HasComp<DropshipDestinationComponent>(destination))
+        if (!TryComp(destination, out DropshipDestinationComponent? destinationComp))
         {
             reason = Loc.GetString("rmc-dropship-destination-unavailable");
             return false;
@@ -686,46 +686,44 @@ public abstract class SharedDropshipSystem : EntitySystem
             return false;
         }
 
-        if (TryComp(destination, out RMCShuttleBerthComponent? reservedBerth) &&
-            reservedBerth.Reserved &&
-            !computer.Comp.RequiresShuttleBerth)
+        if (destinationComp.Reserved &&
+            !computer.Comp.RequiresRestrictedDestination)
         {
-            reason = Loc.GetString("rmc-dropship-berth-reserved");
+            reason = Loc.GetString("rmc-dropship-destination-reserved");
             return false;
         }
 
-        if (!computer.Comp.RequiresShuttleBerth)
+        if (!computer.Comp.RequiresRestrictedDestination)
             return true;
 
-        // Restricted berth routing stays on the shared dropship path, but applies an extra berth filter once a console opts into it.
-        if (reservedBerth == null ||
-            !Resolve(destination, ref reservedBerth, false) ||
-            !reservedBerth.Enabled)
+        // Restricted shuttle routing stays on the shared dropship path, but applies an extra destination filter once a console opts into it.
+        if (!destinationComp.Enabled ||
+            destinationComp.LandingClasses.Count == 0 &&
+            destinationComp.LandingTags.Count == 0)
         {
-            reason = Loc.GetString("rmc-dropship-berth-not-configured");
+            reason = Loc.GetString("rmc-dropship-destination-not-configured");
             return false;
         }
 
-        var berth = reservedBerth;
         var allowedDockClasses = RMCShuttleDocking.GetAllowedDockClasses(computer.Comp.ShuttleDockingClass);
 
         if (allowedDockClasses.Length > 0 &&
-            !MatchesAny(berth.DockClasses, allowedDockClasses))
+            !MatchesAny(destinationComp.LandingClasses, allowedDockClasses))
         {
-            reason = Loc.GetString("rmc-dropship-berth-invalid-class");
+            reason = Loc.GetString("rmc-dropship-destination-invalid-class");
             return false;
         }
 
         if (computer.Comp.AllowedLandingTags.Count > 0 &&
-            !MatchesAny(berth.Tags, computer.Comp.AllowedLandingTags))
+            !MatchesAny(destinationComp.LandingTags, computer.Comp.AllowedLandingTags))
         {
-            reason = Loc.GetString("rmc-dropship-berth-invalid-tags");
+            reason = Loc.GetString("rmc-dropship-destination-invalid-tags");
             return false;
         }
 
-        if (MatchesAny(berth.Tags, computer.Comp.DeniedLandingTags))
+        if (MatchesAny(destinationComp.LandingTags, computer.Comp.DeniedLandingTags))
         {
-            reason = Loc.GetString("rmc-dropship-berth-blocked-tags");
+            reason = Loc.GetString("rmc-dropship-destination-blocked-tags");
             return false;
         }
 
@@ -737,7 +735,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         EntityUid destination,
         out string reason)
     {
-        // First validate routing rules, then validate transient berth state such as occupation and fit.
+        // First validate routing rules, then validate transient destination state such as occupation and fit.
         if (!IsDestinationAllowed(computer, destination, out reason))
             return false;
 
@@ -751,7 +749,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         if (destinationComp.Ship is { } occupiedBy &&
             shuttle != occupiedBy)
         {
-            reason = Loc.GetString("rmc-dropship-berth-occupied");
+            reason = Loc.GetString("rmc-dropship-destination-occupied");
             return false;
         }
 
@@ -771,7 +769,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         Entity<DropshipNavigationComputerComponent?> computer,
         bool hijackable,
         bool planetOnly,
-        bool requiresShuttleBerth,
+        bool requiresRestrictedDestination,
         IReadOnlyCollection<string>? allowedLandingTags = null,
         IReadOnlyCollection<string>? deniedLandingTags = null)
     {
@@ -781,7 +779,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         // Restricted shuttle routing rules can be pushed in at load time by systems such as ERT.
         computer.Comp.Hijackable = hijackable;
         computer.Comp.PlanetOnly = planetOnly;
-        computer.Comp.RequiresShuttleBerth = requiresShuttleBerth;
+        computer.Comp.RequiresRestrictedDestination = requiresRestrictedDestination;
         computer.Comp.AllowedLandingTags = allowedLandingTags?.ToList() ?? [];
         computer.Comp.DeniedLandingTags = deniedLandingTags?.ToList() ?? [];
         Dirty(computer, computer.Comp);
@@ -792,7 +790,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         if (!Resolve(destination, ref destination.Comp, false))
             return;
 
-        // Track the occupying shuttle on the destination itself so both UI and launch validation see the berth as reserved.
+        // Track the occupying shuttle on the destination itself so both UI and launch validation see it as reserved.
         destination.Comp.Ship = ship;
         Dirty(destination, destination.Comp);
     }
@@ -837,41 +835,41 @@ public abstract class SharedDropshipSystem : EntitySystem
         return left.Any(right.Contains);
     }
 
-    private static bool TryValidateDockFit(Box2 berth, Box2 shuttle, out string reason)
+    private static bool TryValidateDockFit(Box2 destination, Box2 shuttle, out string reason)
     {
-        var berthSize = FormatBoundsSize(berth);
+        var destinationSize = FormatBoundsSize(destination);
         var shuttleSize = FormatBoundsSize(shuttle);
 
-        // Compare the shuttle footprint against each berth edge so oversized craft fail with a precise clearance reason.
-        if (shuttle.Left < berth.Left)
+        // Compare the shuttle footprint against each destination edge so oversized craft fail with a precise clearance reason.
+        if (shuttle.Left < destination.Left)
         {
             reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-port",
                 ("shuttleSize", shuttleSize),
-                ("berthSize", berthSize));
+                ("destinationSize", destinationSize));
             return false;
         }
 
-        if (shuttle.Right > berth.Right)
+        if (shuttle.Right > destination.Right)
         {
             reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-starboard",
                 ("shuttleSize", shuttleSize),
-                ("berthSize", berthSize));
+                ("destinationSize", destinationSize));
             return false;
         }
 
-        if (shuttle.Bottom < berth.Bottom)
+        if (shuttle.Bottom < destination.Bottom)
         {
             reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-aft",
                 ("shuttleSize", shuttleSize),
-                ("berthSize", berthSize));
+                ("destinationSize", destinationSize));
             return false;
         }
 
-        if (shuttle.Top > berth.Top)
+        if (shuttle.Top > destination.Top)
         {
             reason = Robust.Shared.Localization.Loc.GetString("rmc-dropship-clearance-forward",
                 ("shuttleSize", shuttleSize),
-                ("berthSize", berthSize));
+                ("destinationSize", destinationSize));
             return false;
         }
 

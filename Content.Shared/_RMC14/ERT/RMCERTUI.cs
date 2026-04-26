@@ -30,7 +30,8 @@ public readonly record struct RMCERTRequestOption(
     string? SelectedCall,
     List<string> AllowedCalls,
     string CreatedAt,
-    string LastError);
+    string LastError,
+    string LastWarning);
 
 [Serializable, NetSerializable]
 /// <summary>

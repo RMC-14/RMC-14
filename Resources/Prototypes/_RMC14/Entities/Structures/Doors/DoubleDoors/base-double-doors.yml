@@ -42,6 +42,17 @@
   id: RMCShuttleExternalSideDoubleDoor
   suffix: Shuttle, External Side
   components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-5,-9.5,5,7.5"
+    reserved: true
+    landingClasses: [ external_side ]
+    landingTags: [ mainship, ert, external_side ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalSide ]
+    searchRadius: 5
   - type: Tag
     tags:
     - RMCShuttleAirlockExternalSide
@@ -51,6 +62,17 @@
   id: RMCShuttleExternalHangarDoubleDoor
   suffix: Shuttle, External Hangar
   components:
+  - type: FTLBeacon
+  - type: DropshipDestination
+    dockBounds: "-6,-10.5,6,8.5"
+    reserved: true
+    landingClasses: [ external_hangar ]
+    landingTags: [ mainship, ert, external_hangar ]
+  - type: FTLSmashImmune
+  - type: NoFTL
+  - type: RMCDockingPortAirlockControl
+    airlockTags: [ RMCShuttleAirlockExternalHangar ]
+    searchRadius: 8
   - type: Tag
     tags:
     - RMCShuttleAirlockExternalHangar
