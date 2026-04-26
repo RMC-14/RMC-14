@@ -170,10 +170,10 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
             PatchMarginBottom = 5,
             PatchMarginLeft = 5,
             PatchMarginRight = 5,
-            ContentMarginTopOverride = 2,
+            ContentMarginTopOverride = 3,
             ContentMarginLeftOverride = 5,
             ContentMarginRightOverride = 5,
-            ContentMarginBottomOverride = 2,
+            ContentMarginBottomOverride = 3,
             Padding = new Thickness(2),
         };
 
