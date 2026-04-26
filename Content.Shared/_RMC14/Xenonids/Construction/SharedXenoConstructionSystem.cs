@@ -336,22 +336,25 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        Entity<XenoWeedsComponent> adjacent = default;
+        List <Entity<XenoWeedsComponent>> adjacentNodes = new ();
         if (existing == null)
         {
             var canSpread = false;
             foreach (var direction in _rmcMap.CardinalDirections)
             {
-                if (!_rmcMap.HasAnchoredEntityEnumerator(coordinates, out adjacent, direction))
+                if (!_rmcMap.HasAnchoredEntityEnumerator(coordinates, out Entity<XenoWeedsComponent> adjacent, direction))
                     continue;
+
+                adjacentNodes.Add(adjacent);
 
                 if (!_xenoWeeds.CanSpreadWeedsPopup(grid, coordinates.Position, xeno, adjacent, false, true))
                     continue;
 
                 canSpread = true;
+                break;
             }
 
-            if (adjacent == default)
+            if (adjacentNodes.Count == 0)
             {
                 _popup.PopupClient("You can only plant weeds if there is a nearby node.",
                     args.Target,
@@ -393,7 +396,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _hive.SetSameHive(xeno.Owner, newWeeds);
 
             if (existing == null)
-                _xenoWeeds.AssignSource(newWeeds, adjacent.Comp?.Source ?? adjacent);
+                _xenoWeeds.AssignSource(newWeeds, adjacentNodes.Last().Comp.Source ?? adjacentNodes.Last());
         }
 
         _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
