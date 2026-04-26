@@ -6,6 +6,6 @@ namespace Content.Shared._RMC14.Vehicle;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class VehicleTurretVisualComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [AutoNetworkedField]
     public NetEntity Turret;
 }

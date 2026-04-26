@@ -103,6 +103,11 @@
   - type: InputMover
   - type: ItemSlots
   - type: ContainerContainer
+    containers:
+      wheel-1: !type:ContainerSlot
+        showEnts: false
+        occludes: true
+        ent: null
   - type: HardpointSlots
     vehicleFamily: Van
     slots:
@@ -286,6 +291,11 @@
   - type: InputMover
   - type: ItemSlots
   - type: ContainerContainer
+    containers:
+      wheel-1: !type:ContainerSlot
+        showEnts: false
+        occludes: true
+        ent: null
   - type: HardpointSlots
     vehicleFamily: Van
     slots:
