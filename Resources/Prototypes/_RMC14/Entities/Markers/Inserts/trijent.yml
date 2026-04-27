@@ -198,7 +198,7 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Trijent/clfpods.yml"
-      probability: 0.1
+      probability: 1
       offset: 0,-2.0
       nightmareScenario: clf_pods
     replaceAreas: false
