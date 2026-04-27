@@ -517,6 +517,15 @@ public abstract class SharedDropshipSystem : EntitySystem
             return;
         }
 
+        if (!CanPlayerLaunchToDestination(ent, destination.Value, out reason))
+        {
+            if (!string.IsNullOrWhiteSpace(reason))
+                _popup.PopupEntity(reason, ent, args.Actor, PopupType.MediumCaution);
+
+            Log.Warning($"{ToPrettyString(args.Actor)} tried to launch {ToPrettyString(ent)} to route-locked destination {ToPrettyString(destination.Value)}");
+            return;
+        }
+
         FlyTo(ent, destination.Value, user);
     }
 
@@ -728,6 +737,22 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         return true;
+    }
+
+    protected bool CanPlayerLaunchToDestination(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        out string reason)
+    {
+        reason = string.Empty;
+        if (!computer.Comp.PlayerDestinationLockEnabled)
+            return true;
+
+        if (computer.Comp.PlayerAllowedDestination == destination)
+            return true;
+
+        reason = Loc.GetString("rmc-dropship-destination-unavailable");
+        return false;
     }
 
     public bool CanUseDestination(

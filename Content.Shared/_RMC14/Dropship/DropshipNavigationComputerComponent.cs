@@ -102,6 +102,13 @@ public sealed partial class DropshipNavigationComputerComponent : Component
     [DataField, AutoNetworkedField]
     public List<string> DeniedLandingTags = [];
 
+    // Optional server-controlled player routing lock. System launches may still route this shuttle directly.
+    [DataField, AutoNetworkedField]
+    public bool PlayerDestinationLockEnabled;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? PlayerAllowedDestination;
+
     [DataField]
     public SoundSpecifier? LaunchAlarmForcedShutdownSound = new SoundPathSpecifier("/Audio/_RMC14/Structures/metalhit.ogg");
 }

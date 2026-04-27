@@ -69057,7 +69057,7 @@ entities:
     - type: Transform
       pos: -62.64428,-21.463293
       parent: 1
-- proto: RMCERTShuttleStartPadReserve
+- proto: RMCERTShuttleStartPadFreelancers
   entities:
   - uid: 10107
     components:
@@ -69069,14 +69069,14 @@ entities:
   - uid: 10108
     components:
     - type: Transform
-      pos: -62.5,-116.5
+      pos: -48.5,-13.5
       parent: 1
 - proto: RMCERTShuttleStartPadUNMC
   entities:
   - uid: 10109
     components:
     - type: Transform
-      pos: -47.5,-89.5
+      pos: -62.5,-116.5
       parent: 1
 - proto: RMCERTShuttleStartPadEvent
   entities:
@@ -69214,7 +69214,7 @@ entities:
   - uid: 10113
     components:
     - type: Transform
-      pos: -48.5,-13.5
+      pos: -47.5,-89.5
       parent: 1
 - proto: RMCSprayBottleSpaceCleaner
   entities:

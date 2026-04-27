@@ -27,6 +27,10 @@ public sealed class RMCERTRequest
     public string LastWarning = string.Empty;
     public EntityUid? Shuttle;
     public EntityUid? ShuttleSpawnMarker;
+    public EntityUid? ShuttleHomeDestination;
+    public bool ShuttleHomeIsFallback;
+    public TimeSpan? ReturnAvailableAt;
+    public bool ReturnRouteUnlocked;
     public readonly List<RMCERTRosterSlot> PlannedRoster = [];
     public readonly List<EntityUid> SpawnedGhostRoles = [];
 }

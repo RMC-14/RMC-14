@@ -481,7 +481,11 @@
   adminButtonLabel: rmc-ert-admin-button-clf
   randomWeight: 0
   allowedSources: [ Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadHostile
   autoLaunch: false
+  landingTags: [ mainship ]
   roles:
   - id: leader
     name: rmc-ert-role-clf-leader

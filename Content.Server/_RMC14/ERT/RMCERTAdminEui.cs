@@ -78,10 +78,6 @@ public sealed class RMCERTAdminEui : BaseEui
                 _ert.Launch(launch.Request, admin);
                 StateDirty();
                 break;
-            case RMCERTAdminCompleteMsg complete:
-                _ert.Complete(complete.Request, admin);
-                StateDirty();
-                break;
         }
     }
 

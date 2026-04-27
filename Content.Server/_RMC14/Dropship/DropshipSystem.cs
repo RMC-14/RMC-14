@@ -196,6 +196,62 @@ public sealed class DropshipSystem : SharedDropshipSystem
             out reason);
     }
 
+    public void SetPlayerRouteLock(EntityUid shuttle, EntityUid? destination)
+    {
+        var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+        while (computerQuery.MoveNext(out var uid, out var computer, out var xform))
+        {
+            if (xform.GridUid != shuttle)
+                continue;
+
+            computer.PlayerDestinationLockEnabled = true;
+            computer.PlayerAllowedDestination = destination;
+            Dirty(uid, computer);
+        }
+
+        if (Exists(shuttle))
+            RaiseUpdate(shuttle);
+    }
+
+    public void ClearPlayerRouteLock(EntityUid shuttle)
+    {
+        var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+        while (computerQuery.MoveNext(out var uid, out var computer, out var xform))
+        {
+            if (xform.GridUid != shuttle)
+                continue;
+
+            computer.PlayerDestinationLockEnabled = false;
+            computer.PlayerAllowedDestination = null;
+            Dirty(uid, computer);
+        }
+
+        if (Exists(shuttle))
+            RaiseUpdate(shuttle);
+    }
+
+    public void SetCurrentDestination(EntityUid shuttle, EntityUid? destination)
+    {
+        var dropship = EnsureComp<DropshipComponent>(shuttle);
+        dropship.Destination = destination;
+        dropship.DepartureLocation = destination;
+        Dirty(shuttle, dropship);
+    }
+
+    public void ClearCurrentDestinationIf(EntityUid shuttle, EntityUid destination)
+    {
+        if (!TryComp(shuttle, out DropshipComponent? dropship))
+            return;
+
+        if (dropship.Destination == destination)
+            dropship.Destination = null;
+
+        if (dropship.DepartureLocation == destination)
+            dropship.DepartureLocation = null;
+
+        Dirty(shuttle, dropship);
+    }
+
     public override void Initialize()
     {
         base.Initialize();
@@ -881,6 +937,16 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
     public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null, bool offset = false)
     {
+        if (user != null &&
+            !CanPlayerLaunchToDestination(computer, destination, out var playerRouteReason))
+        {
+            if (!string.IsNullOrWhiteSpace(playerRouteReason))
+                _popup.PopupEntity(playerRouteReason, computer, user.Value, PopupType.MediumCaution);
+
+            Log.Warning($"{ToPrettyString(user.Value)} tried to launch {ToPrettyString(computer)} to route-locked destination {ToPrettyString(destination)}");
+            return false;
+        }
+
         base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime);
 
         _hijack = hijack;
@@ -1578,26 +1644,42 @@ public sealed class DropshipSystem : SharedDropshipSystem
         {
             NetEntity? flyBy = null;
             var destinations = new List<Destination>();
-            var query = EntityQueryEnumerator<DropshipDestinationComponent>();
-            while (query.MoveNext(out var uid, out var comp))
+            if (computer.Comp.PlayerDestinationLockEnabled)
             {
-                var netDestination = GetNetEntity(uid);
-                if (comp.Ship == grid)
+                if (computer.Comp.PlayerAllowedDestination is { } allowed &&
+                    TryComp(allowed, out DropshipDestinationComponent? allowedComp) &&
+                    IsDestinationAllowed(computer, allowed, out _))
                 {
-                    flyBy = netDestination;
-                    continue;
+                    destinations.Add(new Destination(
+                        GetNetEntity(allowed),
+                        Name(allowed),
+                        allowedComp.Ship != null && allowedComp.Ship != grid,
+                        HasComp<PrimaryLandingZoneComponent>(allowed)));
                 }
+            }
+            else
+            {
+                var query = EntityQueryEnumerator<DropshipDestinationComponent>();
+                while (query.MoveNext(out var uid, out var comp))
+                {
+                    var netDestination = GetNetEntity(uid);
+                    if (comp.Ship == grid)
+                    {
+                        flyBy = netDestination;
+                        continue;
+                    }
 
-                if (!IsDestinationAllowed(computer, uid, out _))
-                    continue;
+                    if (!IsDestinationAllowed(computer, uid, out _))
+                        continue;
 
-                var destination = new Destination(
-                    netDestination,
-                    Name(uid),
-                    comp.Ship != null,
-                    HasComp<PrimaryLandingZoneComponent>(uid)
-                );
-                destinations.Add(destination);
+                    var destination = new Destination(
+                        netDestination,
+                        Name(uid),
+                        comp.Ship != null,
+                        HasComp<PrimaryLandingZoneComponent>(uid)
+                    );
+                    destinations.Add(destination);
+                }
             }
 
             var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations, doorLockStatus, computer.Comp.RemoteControl, computer.Comp.LaunchAlarmStatus);

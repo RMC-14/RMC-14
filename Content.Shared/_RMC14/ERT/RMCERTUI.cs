@@ -85,9 +85,3 @@ public sealed class RMCERTAdminLaunchMsg(Guid request) : EuiMessageBase
 {
     public readonly Guid Request = request;
 }
-
-[Serializable, NetSerializable]
-public sealed class RMCERTAdminCompleteMsg(Guid request) : EuiMessageBase
-{
-    public readonly Guid Request = request;
-}

@@ -47,6 +47,12 @@
     requiresRestrictedDestination: true
     shuttleDockingClass: Standard
     dockingBounds: "-3.5,-7,3.5,6"
+  - type: UserInterface
+    interfaces:
+      enum.DropshipNavigationUiKey.Key:
+        type: DropshipNavigationERTBui
+      enum.DropshipHijackerUiKey.Key:
+        type: DropshipHijackerBui
 
 - type: entity
   parent: CMComputerDropshipNavigationERT
@@ -298,6 +304,24 @@
     reserved: true
     landingClasses: [ internal ]
     landingTags: [ mainship, ert, internal ]
+
+- type: entity
+  parent: RMCRestrictedShuttleDestinationInternal
+  id: RMCERTShuttleReturnDestination
+  name: Base
+  suffix: ERT, Return, Internal
+
+- type: entity
+  parent: RMCRestrictedShuttleDestinationExternalSide
+  id: RMCERTShuttleReturnDestinationSmall
+  name: Base
+  suffix: ERT, Return, External Side
+
+- type: entity
+  parent: RMCRestrictedShuttleDestinationExternalHangar
+  id: RMCERTShuttleReturnDestinationBig
+  name: Base
+  suffix: ERT, Return, External Hangar
 
 - type: entity
   parent: RMCRestrictedShuttleDestination

@@ -88,6 +88,10 @@ public sealed class RMCERTSystem : EntitySystem
 
     private static readonly SoundPathSpecifier DefaultRequestSound = new("/Audio/_RMC14/AI/distressbeacon.ogg");
     private static readonly SoundPathSpecifier AdminRequestSound = new("/Audio/_RMC14/Effects/sos-morse-code.ogg");
+    private static readonly EntProtoId ERTShuttleReturnDestinationPrototype = "RMCERTShuttleReturnDestination";
+    private static readonly EntProtoId ERTShuttleReturnDestinationSmallPrototype = "RMCERTShuttleReturnDestinationSmall";
+    private static readonly EntProtoId ERTShuttleReturnDestinationBigPrototype = "RMCERTShuttleReturnDestinationBig";
+    private static readonly TimeSpan ReturnDelay = TimeSpan.FromMinutes(2);
 
     public override void Initialize()
     {
@@ -99,6 +103,7 @@ public sealed class RMCERTSystem : EntitySystem
         SubscribeLocalEvent<RMCERTDistressBeaconComponent, UseInHandEvent>(OnHandheldUse);
         SubscribeLocalEvent<ActorComponent, RMCERTHandheldDistressReasonEvent>(OnHandheldReason);
         SubscribeLocalEvent<RMCERTMemberComponent, MindAddedMessage>(OnERTMindAdded);
+        SubscribeLocalEvent<RMCERTShuttleComponent, FTLRequestEvent>(OnERTShuttleFTLRequested);
         SubscribeLocalEvent<RMCERTShuttleComponent, FTLStartedEvent>(OnERTShuttleFTLStarted);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, RMCERTConsoleDistressReasonEvent>(OnConsoleReason);
 
@@ -116,6 +121,12 @@ public sealed class RMCERTSystem : EntitySystem
 
         foreach (var request in _requests.Values.ToArray())
         {
+            if (request.State == RMCERTRequestState.Arrived)
+            {
+                TryUnlockReturnRoute(request);
+                continue;
+            }
+
             if (request.State != RMCERTRequestState.Recruiting)
                 continue;
 
@@ -233,13 +244,26 @@ public sealed class RMCERTSystem : EntitySystem
         if (call is not { } selected)
             return false;
 
-        return ApproveSpecific(id, selected, admin);
+        return ApproveSpecific(id, selected, admin, true);
     }
 
     public bool ApproveSpecific(Guid id, ProtoId<RMCERTCallPrototype> callId, EntityUid? admin)
     {
+        return ApproveSpecific(id, callId, admin, false);
+    }
+
+    private bool ApproveSpecific(Guid id, ProtoId<RMCERTCallPrototype> callId, EntityUid? admin, bool randomSelection)
+    {
         if (!TryGetPending(id, out var request))
             return false;
+
+        if (!randomSelection && request.Source == RMCERTRequestSource.Console)
+        {
+            request.LastError = Loc.GetString("rmc-ert-error-console-random-only");
+            request.LastWarning = string.Empty;
+            DirtyState();
+            return false;
+        }
 
         if (!_prototypes.TryIndex(callId, out var call))
         {
@@ -375,6 +399,8 @@ public sealed class RMCERTSystem : EntitySystem
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
+        request.ReturnAvailableAt = null;
+        request.ReturnRouteUnlocked = false;
         UpdateSourceVisual(request, false);
 
         var adminText = admin is { Valid: true }
@@ -435,8 +461,26 @@ public sealed class RMCERTSystem : EntitySystem
     {
         foreach (var request in _requests.Values)
         {
-            if (request.State != RMCERTRequestState.Launching ||
-                request.Shuttle != ev.Dropship.Owner)
+            if (request.Shuttle != ev.Dropship.Owner)
+                continue;
+
+            if (request.State == RMCERTRequestState.Completed &&
+                request.ShuttleHomeDestination is { } homeDestination &&
+                ev.Destination == homeDestination)
+            {
+                if (request.ShuttleHomeIsFallback)
+                {
+                    CleanupRequestContent(request, Loc.GetString("rmc-ert-cleanup-reason-fallback-return"));
+                    DirtyState();
+                    return;
+                }
+
+                ReleasePrelaunchShuttleDoorLocks(ev.Dropship.Owner);
+                _dropship.RaiseUpdate(ev.Dropship.Owner);
+                return;
+            }
+
+            if (request.State != RMCERTRequestState.Launching)
             {
                 continue;
             }
@@ -451,6 +495,7 @@ public sealed class RMCERTSystem : EntitySystem
                 request.State = RMCERTRequestState.Arrived;
                 request.LastError = string.Empty;
                 request.LastWarning = string.Empty;
+                BeginReturnDelay(request);
                 UpdateSourceVisual(request, false);
                 _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-arrived-missing-call", ("id", request.Id)));
                 DirtyState();
@@ -484,9 +529,27 @@ public sealed class RMCERTSystem : EntitySystem
                     $"eventRequest={ev.RequestId}, reason={ev.Reason}");
     }
 
+    private void OnERTShuttleFTLRequested(Entity<RMCERTShuttleComponent> ent, ref FTLRequestEvent args)
+    {
+        if (!TryGetReturnHomeFlight(ent.Owner, ent.Comp, out var request))
+            return;
+
+        var lockedDoors = ApplyShuttleDoorConsoleLocks(ent.Owner);
+        Log.Info($"ERT request {request.Id} return launch locked {lockedDoors} shuttle doors for {ToPrettyString(ent.Owner)}.");
+        _dropship.RaiseUpdate(ent.Owner);
+    }
+
     private void OnERTShuttleFTLStarted(Entity<RMCERTShuttleComponent> ent, ref FTLStartedEvent args)
     {
-        ReleasePrelaunchShuttleDoorLocks(ent.Owner);
+        if (!TryGetReturnHomeFlight(ent.Owner, ent.Comp, out var request))
+        {
+            ReleasePrelaunchShuttleDoorLocks(ent.Owner);
+            return;
+        }
+
+        ApplyShuttleDoorConsoleLocks(ent.Owner);
+        SetShuttlePlayerRouteLock(ent.Owner, null);
+        Complete(request.Id, null);
     }
 
     private void OnHandheldUse(Entity<RMCERTDistressBeaconComponent> ent, ref UseInHandEvent args)
@@ -734,6 +797,7 @@ public sealed class RMCERTSystem : EntitySystem
             request.Shuttle = null;
 
         request.ShuttleSpawnMarker = null;
+        DeleteReturnDestination(request);
 
         if (Exists(shuttle))
             QueueDel(shuttle);
@@ -927,6 +991,9 @@ public sealed class RMCERTSystem : EntitySystem
         restrictedShuttle.RequestId = request.Id;
         restrictedShuttle.Call = call.ID;
 
+        CreateReturnDestination(request, shuttle);
+        SetShuttlePlayerRouteLock(shuttle, null);
+
         var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
         while (computerQuery.MoveNext(out var uid, out var computer, out var xform))
         {
@@ -941,12 +1008,12 @@ public sealed class RMCERTSystem : EntitySystem
                 call.DeniedLandingTags);
         }
 
-        var lockedDoors = ApplyPrelaunchShuttleDoorLocks(shuttle);
+        var lockedDoors = ApplyShuttleDoorConsoleLocks(shuttle);
         Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle)} for {call.ID}. " +
                  $"prelaunchLockedDoors:{lockedDoors}, {GetShuttleDiagnostics(request, shuttle)}");
     }
 
-    private int ApplyPrelaunchShuttleDoorLocks(EntityUid shuttle)
+    private int ApplyShuttleDoorConsoleLocks(EntityUid shuttle)
     {
         var locked = 0;
         var enumerator = Transform(shuttle).ChildEnumerator;
@@ -966,6 +1033,23 @@ public sealed class RMCERTSystem : EntitySystem
         return locked;
     }
 
+    private bool TryGetReturnHomeFlight(EntityUid shuttle, RMCERTShuttleComponent shuttleComp, out RMCERTRequest request)
+    {
+        if (_requests.TryGetValue(shuttleComp.RequestId, out request!) &&
+            request.State == RMCERTRequestState.Arrived &&
+            request.Shuttle == shuttle &&
+            request.ShuttleHomeDestination is { } homeDestination &&
+            Exists(homeDestination) &&
+            TryComp(shuttle, out DropshipComponent? dropship) &&
+            dropship.Destination == homeDestination)
+        {
+            return true;
+        }
+
+        request = default!;
+        return false;
+    }
+
     private void ReleasePrelaunchShuttleDoorLocks(EntityUid shuttle)
     {
         var enumerator = Transform(shuttle).ChildEnumerator;
@@ -973,6 +1057,97 @@ public sealed class RMCERTSystem : EntitySystem
         {
             RemComp<RMCDropshipDoorConsoleLockComponent>(child);
         }
+    }
+
+    private void CreateReturnDestination(RMCERTRequest request, EntityUid shuttle)
+    {
+        DeleteReturnDestination(request);
+
+        if (!Exists(shuttle))
+            return;
+
+        var coordinates = _transform.GetMapCoordinates(shuttle);
+        if (coordinates.MapId == MapId.Nullspace)
+            return;
+
+        var destination = Spawn(GetReturnDestinationPrototype(shuttle), coordinates);
+        _transform.SetWorldRotation(destination, _transform.GetWorldRotation(shuttle));
+        request.ShuttleHomeDestination = destination;
+        request.ShuttleHomeIsFallback = request.ShuttleSpawnMarker == null;
+
+        if (TryComp(destination, out DropshipDestinationComponent? destinationComp))
+            _dropship.SetDestinationShip((destination, destinationComp), shuttle);
+
+        _dropship.SetCurrentDestination(shuttle, destination);
+    }
+
+    private EntProtoId GetReturnDestinationPrototype(EntityUid shuttle)
+    {
+        if (!TryFindNavigationComputer(shuttle, out var computer))
+            return ERTShuttleReturnDestinationPrototype;
+
+        return computer.Comp.ShuttleDockingClass switch
+        {
+            RMCShuttleDockingClass.Small => ERTShuttleReturnDestinationSmallPrototype,
+            RMCShuttleDockingClass.Big => ERTShuttleReturnDestinationBigPrototype,
+            _ => ERTShuttleReturnDestinationPrototype,
+        };
+    }
+
+    private void DeleteReturnDestination(RMCERTRequest request)
+    {
+        if (request.ShuttleHomeDestination is { Valid: true } destination && Exists(destination))
+        {
+            if (request.Shuttle is { Valid: true } shuttle && Exists(shuttle))
+                _dropship.ClearCurrentDestinationIf(shuttle, destination);
+
+            QueueDel(destination);
+        }
+
+        request.ShuttleHomeDestination = null;
+        request.ShuttleHomeIsFallback = false;
+        request.ReturnAvailableAt = null;
+        request.ReturnRouteUnlocked = false;
+    }
+
+    private void SetShuttlePlayerRouteLock(EntityUid shuttle, EntityUid? destination)
+    {
+        _dropship.SetPlayerRouteLock(shuttle, destination);
+    }
+
+    private void ClearShuttlePlayerRouteLock(EntityUid shuttle)
+    {
+        _dropship.ClearPlayerRouteLock(shuttle);
+    }
+
+    private void TryUnlockReturnRoute(RMCERTRequest request)
+    {
+        if (request.ReturnRouteUnlocked ||
+            request.ReturnAvailableAt is not { } returnAvailableAt ||
+            _timing.CurTime < returnAvailableAt)
+        {
+            return;
+        }
+
+        if (request.Shuttle is not { Valid: true } shuttle ||
+            !Exists(shuttle) ||
+            request.ShuttleHomeDestination is not { Valid: true } home ||
+            !Exists(home))
+        {
+            return;
+        }
+
+        request.ReturnRouteUnlocked = true;
+        SetShuttlePlayerRouteLock(shuttle, home);
+    }
+
+    private void BeginReturnDelay(RMCERTRequest request)
+    {
+        request.ReturnAvailableAt = _timing.CurTime + ReturnDelay;
+        request.ReturnRouteUnlocked = false;
+
+        if (request.Shuttle is { Valid: true } shuttle && Exists(shuttle))
+            SetShuttlePlayerRouteLock(shuttle, null);
     }
 
     private bool BuildRoster(RMCERTRequest request, RMCERTCallPrototype call, out string error)
@@ -1364,6 +1539,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (request.Shuttle is { Valid: true } shuttle && Exists(shuttle))
         {
             ReleasePrelaunchShuttleDoorLocks(shuttle);
+            ClearShuttlePlayerRouteLock(shuttle);
             RemComp<RMCERTShuttleComponent>(shuttle);
             RemComp<RMCRestrictedShuttleComponent>(shuttle);
             RemComp<RMCExpectedDockComponent>(shuttle);
@@ -1408,6 +1584,8 @@ public sealed class RMCERTSystem : EntitySystem
             request.Shuttle = null;
             request.ShuttleSpawnMarker = null;
         }
+
+        DeleteReturnDestination(request);
     }
 
     private bool TryGhostActorsOffShuttle(
@@ -1954,6 +2132,7 @@ public sealed class RMCERTSystem : EntitySystem
         request.State = RMCERTRequestState.Arrived;
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
+        BeginReturnDelay(request);
         UpdateSourceVisual(request, false);
         Announce(call.Announcements.Arrival, call.Announcements.ArrivalSound, request, call);
 

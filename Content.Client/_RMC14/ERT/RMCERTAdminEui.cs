@@ -101,16 +101,19 @@ public sealed class RMCERTAdminEui : BaseEui
                 AddButton(actions, Loc.GetString("rmc-ert-admin-action-approve-random"), _ => SendMessage(new RMCERTAdminApproveRandomMsg(request.Id)));
                 AddButton(actions, Loc.GetString("rmc-ert-admin-action-deny"), _ => SendMessage(new RMCERTAdminDenyMsg(request.Id)));
 
-                var allowed = request.AllowedCalls.Count == 0
-                    ? s.Calls.Where(c => c.AdminSelectable)
-                    : s.Calls.Where(c => request.AllowedCalls.Contains(c.Id));
-
-                foreach (var call in allowed)
+                if (request.Source != RMCERTRequestSource.Console)
                 {
-                    var label = string.IsNullOrWhiteSpace(call.AdminButtonLabel)
-                        ? Loc.GetString("rmc-ert-admin-action-send", ("call", call.Name))
-                        : call.AdminButtonLabel!;
-                    AddButton(actions, label, _ => SendMessage(new RMCERTAdminApproveSpecificMsg(request.Id, call.Id)));
+                    var allowed = request.AllowedCalls.Count == 0
+                        ? s.Calls.Where(c => c.AdminSelectable)
+                        : s.Calls.Where(c => request.AllowedCalls.Contains(c.Id));
+
+                    foreach (var call in allowed)
+                    {
+                        var label = string.IsNullOrWhiteSpace(call.AdminButtonLabel)
+                            ? Loc.GetString("rmc-ert-admin-action-send", ("call", call.Name))
+                            : call.AdminButtonLabel!;
+                        AddButton(actions, label, _ => SendMessage(new RMCERTAdminApproveSpecificMsg(request.Id, call.Id)));
+                    }
                 }
             }
             else if (request.State == RMCERTRequestState.Recruiting)
@@ -121,10 +124,6 @@ public sealed class RMCERTAdminEui : BaseEui
             else if (request.State is RMCERTRequestState.PendingDispatch or RMCERTRequestState.Spawning or RMCERTRequestState.Launching)
             {
                 AddButton(actions, Loc.GetString("rmc-ert-admin-action-cancel"), _ => SendMessage(new RMCERTAdminCancelMsg(request.Id)));
-            }
-            else if (request.State == RMCERTRequestState.Arrived)
-            {
-                AddButton(actions, Loc.GetString("rmc-ert-admin-action-complete"), _ => SendMessage(new RMCERTAdminCompleteMsg(request.Id)));
             }
 
             box.AddChild(actions);
