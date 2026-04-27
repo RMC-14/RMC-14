@@ -1,52 +1,4 @@
 ﻿Entries:
-- author: YO0teacher
-  changes:
-  - message: Fixed cross-map examining for watching xenos and viewing overwatch cameras
-    type: Fix
-  id: 2660
-  time: '2025-12-10T01:26:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8644
-- author: J C Denton
-  changes:
-  - message: Fixed Fiorina Flamer cabinet not having a Flamer.
-    type: Fix
-  id: 2661
-  time: '2025-12-10T01:26:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8643
-- author: monomethylhydrazine
-  changes:
-  - message: Fixed a syntax error in mortar beep notifications
-    type: Fix
-  id: 2662
-  time: '2025-12-10T01:29:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8640
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Being ignited will take the color of the fire for the fire visual color.
-    type: Add
-  - message: Fixed the stop, drop, and roll animation not playing.
-    type: Fix
-  - message: Fixed xenos triggering acid blood from fire tick damage.
-    type: Fix
-  id: 2663
-  time: '2025-12-10T01:30:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8648
-- author: blueDev2
-  changes:
-  - message: Ruby ranked xenos properly get their prefixes
-    type: Fix
-  id: 2664
-  time: '2025-12-10T01:32:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8636
-- author: wheelwrightt
-  changes:
-  - message: Tacmap zooms on cursor rather than the center of the map.
-    type: Fix
-  - message: Tacmap freehand lines no longer creates a line back to where it began.
-    type: Fix
-  id: 2665
-  time: '2025-12-10T01:31:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8645
 - author: SurfinNinja1
   changes:
   - message: added 3 more sandwiches
@@ -4459,5 +4411,58 @@
   id: 3159
   time: '2026-04-22T04:17:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9175
+- author: Dygon
+  changes:
+  - message: Fixed left clicking a weapon mount as a xenonid dismounting the user.
+    type: Fix
+  - message: You can now pick up a folded weapon mount with harm mode toggled on.
+    type: Fix
+  id: 3160
+  time: '2026-04-23T23:32:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9719
+- author: kleinerstation13
+  changes:
+  - message: Added intact TSE airbase insert, which has a 28% chance of occuring.
+    type: Add
+  id: 3161
+  time: '2026-04-23T23:31:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9671
+- author: SharkSnake98
+  changes:
+  - message: Changed the sprites of the potted plants, palm trees, and red couch
+    type: Tweak
+  id: 3162
+  time: '2026-04-23T23:33:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9707
+- author: Dygon
+  changes:
+  - message: Fixed throwing items into disposal bins.
+    type: Fix
+  - message: Bullets no longer pass through ColMarTech vendors.
+    type: Fix
+  id: 3163
+  time: '2026-04-23T23:37:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9717
+- author: DrSmugleaf
+  changes:
+  - message: Added impenetrable xeno resin walls and doors, which can't be damaged
+      before 30 minutes into the round, being the equivalent of LZ turrets for marines.
+      Impenetrable resin doors block survivors and marines even while open, and will
+      only let them through if they are stunned or devoured. These will line the inner
+      part of hives on each planet.
+    type: Add
+  id: 3164
+  time: '2026-04-24T03:57:48.075386+00:00'
+  url: null
+- author: IceNoobXD
+  changes:
+  - message: Lazarus Landing has recived a passover which adds a lot of minor props
+      and a gas pipe layout for nexus!
+    type: Tweak
+  - message: Lazarus Landing lake house loot has been removed.
+    type: Remove
+  id: 3165
+  time: '2026-04-24T10:15:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9686
 Name: RMC14
 Order: -1
