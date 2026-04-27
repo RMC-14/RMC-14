@@ -13,6 +13,8 @@ using Content.Server.Humanoid.Components;
 using Content.Server.Humanoid.Systems;
 using Content.Server.Mind;
 using Content.Server.Popups;
+using Content.Server.Shuttles.Components;
+using Content.Server.Shuttles.Events;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared._RMC14.Dialog;
@@ -23,6 +25,7 @@ using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Buckle;
 using Content.Shared.Database;
+using Content.Shared.Doors.Components;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction.Events;
@@ -96,6 +99,7 @@ public sealed class RMCERTSystem : EntitySystem
         SubscribeLocalEvent<RMCERTDistressBeaconComponent, UseInHandEvent>(OnHandheldUse);
         SubscribeLocalEvent<ActorComponent, RMCERTHandheldDistressReasonEvent>(OnHandheldReason);
         SubscribeLocalEvent<RMCERTMemberComponent, MindAddedMessage>(OnERTMindAdded);
+        SubscribeLocalEvent<RMCERTShuttleComponent, FTLStartedEvent>(OnERTShuttleFTLStarted);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, RMCERTConsoleDistressReasonEvent>(OnConsoleReason);
 
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key, subs =>
@@ -478,6 +482,11 @@ public sealed class RMCERTSystem : EntitySystem
 
         Log.Warning($"ERT docking verification failed for {FormatEntity(ev.Shuttle)}, but no launching ERT request matched it. " +
                     $"eventRequest={ev.RequestId}, reason={ev.Reason}");
+    }
+
+    private void OnERTShuttleFTLStarted(Entity<RMCERTShuttleComponent> ent, ref FTLStartedEvent args)
+    {
+        ReleasePrelaunchShuttleDoorLocks(ent.Owner);
     }
 
     private void OnHandheldUse(Entity<RMCERTDistressBeaconComponent> ent, ref UseInHandEvent args)
@@ -932,8 +941,38 @@ public sealed class RMCERTSystem : EntitySystem
                 call.DeniedLandingTags);
         }
 
+        var lockedDoors = ApplyPrelaunchShuttleDoorLocks(shuttle);
         Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle)} for {call.ID}. " +
-                 GetShuttleDiagnostics(request, shuttle));
+                 $"prelaunchLockedDoors:{lockedDoors}, {GetShuttleDiagnostics(request, shuttle)}");
+    }
+
+    private int ApplyPrelaunchShuttleDoorLocks(EntityUid shuttle)
+    {
+        var locked = 0;
+        var enumerator = Transform(shuttle).ChildEnumerator;
+        while (enumerator.MoveNext(out var child))
+        {
+            if (!HasComp<DockingComponent>(child) ||
+                !HasComp<DoorBoltComponent>(child))
+            {
+                continue;
+            }
+
+            EnsureComp<RMCDropshipDoorConsoleLockComponent>(child);
+            _dropship.LockDoor(child);
+            locked++;
+        }
+
+        return locked;
+    }
+
+    private void ReleasePrelaunchShuttleDoorLocks(EntityUid shuttle)
+    {
+        var enumerator = Transform(shuttle).ChildEnumerator;
+        while (enumerator.MoveNext(out var child))
+        {
+            RemComp<RMCDropshipDoorConsoleLockComponent>(child);
+        }
     }
 
     private bool BuildRoster(RMCERTRequest request, RMCERTCallPrototype call, out string error)
@@ -1324,6 +1363,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (request.Shuttle is { Valid: true } shuttle && Exists(shuttle))
         {
+            ReleasePrelaunchShuttleDoorLocks(shuttle);
             RemComp<RMCERTShuttleComponent>(shuttle);
             RemComp<RMCRestrictedShuttleComponent>(shuttle);
             RemComp<RMCExpectedDockComponent>(shuttle);

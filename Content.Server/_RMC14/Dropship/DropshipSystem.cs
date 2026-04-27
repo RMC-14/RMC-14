@@ -1807,6 +1807,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
     public void UnlockDoor(Entity<DoorBoltComponent?> door, bool forceSafetyUnlock = false)
     {
+        if (HasComp<RMCDropshipDoorConsoleLockComponent>(door.Owner))
+            return;
+
         if (!forceSafetyUnlock &&
             TryComp(door.Owner, out RMCDockingSafetyLockedComponent? safetyLock) &&
             safetyLock.Active)
