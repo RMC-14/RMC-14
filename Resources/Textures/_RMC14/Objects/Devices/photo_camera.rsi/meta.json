@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/52681260f1021befe2cdce04d8e21deee78e8b07/icons/obj/items/paper.dmi, https://github.com/cmss13-devs/cmss13/blob/416abfba679334e9013bf485ad2a1dbba0579966/icons/mob/humans/onmob/inhands/equipment/paperwork_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/416abfba679334e9013bf485ad2a1dbba0579966/icons/mob/humans/onmob/inhands/equipment/paperwork_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/7b4244612942e910b40148d4b54d38748f114a84/icons/mob/humans/onmob/clothing/belts/tools.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "film"
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    }
+  ]
+}

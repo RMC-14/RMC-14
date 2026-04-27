@@ -1,0 +1,40 @@
+- type: entity
+  parent: BaseItem
+  id: RMCCameraPhoto
+  name: camera
+  description: A polaroid camera.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/photo_camera.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: Wieldable
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Belt
+
+- type: entity
+  parent: BaseItem
+  id: RMCCameraPhotoFilmCartridge
+  name: film cartridge
+  description: A camera film cartridge. Insert it into a camera to reload it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/photo_camera.rsi
+    state: film
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: RMCCameraPhotoPicture
+  name: photo
+  description: A picture taken by a polaroid camera.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    state: photo_item
+  - type: Item
+    size: Tiny
