@@ -16,5 +16,7 @@ public sealed partial class RMCERTAdminWindow : FancyWindow
 
         Title = Loc.GetString("rmc-ert-admin-window-title");
         HeaderLabel.Text = Loc.GetString("rmc-ert-admin-window-header");
+        Tabs.SetTabTitle(0, Loc.GetString("rmc-ert-admin-tab-requests"));
+        Tabs.SetTabTitle(1, Loc.GetString("rmc-ert-admin-tab-force"));
     }
 }

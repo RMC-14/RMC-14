@@ -1,5 +1,6 @@
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
+using Content.Server.Chat.Managers;
 using Content.Server.EUI;
 using Content.Shared._RMC14.ERT;
 using Content.Shared.Administration;
@@ -14,6 +15,7 @@ namespace Content.Server._RMC14.ERT;
 public sealed class RMCERTAdminEui : BaseEui
 {
     [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
 
     private readonly RMCERTAdminSystem _adminSystem;
@@ -28,6 +30,12 @@ public sealed class RMCERTAdminEui : BaseEui
 
     public override void Opened()
     {
+        if (!HasAdminAccess())
+        {
+            Close();
+            return;
+        }
+
         _admin.OnPermsChanged += OnAdminPermsChanged;
         _adminSystem.Register(this);
         StateDirty();
@@ -41,14 +49,14 @@ public sealed class RMCERTAdminEui : BaseEui
 
     public override EuiStateBase GetNewState()
     {
-        return _ert.CreateAdminState();
+        return _ert.CreateAdminState(CanForceCalls());
     }
 
     public override void HandleMessage(EuiMessageBase msg)
     {
         base.HandleMessage(msg);
 
-        if (!HasPermission())
+        if (!HasAdminAccess())
             return;
 
         // Keep the UI thin: validate permissions here, then hand the actual request mutation off to RMCERTSystem.
@@ -78,6 +86,18 @@ public sealed class RMCERTAdminEui : BaseEui
                 _ert.Launch(launch.Request, admin);
                 StateDirty();
                 break;
+            case RMCERTAdminForceCallMsg force:
+                if (!CanForceCalls())
+                    return;
+
+                if (!_ert.ForceCall(force.Call, admin, Player.Name, force.Reason, out _, out var error) &&
+                    !string.IsNullOrWhiteSpace(error))
+                {
+                    _chat.DispatchServerMessage(Player, error);
+                }
+
+                StateDirty();
+                break;
         }
     }
 
@@ -86,11 +106,18 @@ public sealed class RMCERTAdminEui : BaseEui
         if (args.Player != Player)
             return;
 
-        if (!HasPermission())
+        if (!HasAdminAccess())
             Close();
+        else
+            StateDirty();
     }
 
-    private bool HasPermission()
+    private bool HasAdminAccess()
+    {
+        return _admin.IsAdmin(Player);
+    }
+
+    private bool CanForceCalls()
     {
         return _admin.HasAdminFlag(Player, AdminFlags.Spawn);
     }

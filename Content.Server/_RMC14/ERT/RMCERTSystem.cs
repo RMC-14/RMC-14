@@ -4,6 +4,7 @@ using System.Text;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server._RMC14.Marines;
+using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
@@ -55,6 +56,7 @@ namespace Content.Server._RMC14.ERT;
 public sealed class RMCERTSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _access = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -158,7 +160,7 @@ public sealed class RMCERTSystem : EntitySystem
             ValidatePrototypes();
     }
 
-    public RMCERTAdminEuiState CreateAdminState()
+    public RMCERTAdminEuiState CreateAdminState(bool canForceCalls)
     {
         // The admin window works off a flattened snapshot so the client does not need to know about runtime-only request objects.
         var requests = _requests.Values
@@ -180,10 +182,41 @@ public sealed class RMCERTSystem : EntitySystem
         var calls = _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
             .OrderBy(c => c.Category)
             .ThenBy(c => c.Name)
-            .Select(c => new RMCERTCallOption(c.ID, c.Name, GetOrganizationLabel(c), c.Category, c.RandomWeight, c.AdminSelectable, c.AdminButtonLabel))
+            .Select(ToCallOption)
             .ToList();
 
-        return new RMCERTAdminEuiState(requests, calls);
+        var forceCalls = canForceCalls
+            ? GetForceCallOptions()
+            : [];
+
+        return new RMCERTAdminEuiState(requests, calls, canForceCalls, forceCalls);
+    }
+
+    public List<RMCERTCallOption> GetForceCallOptions()
+    {
+        return _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
+            .Where(IsForceCallable)
+            .OrderBy(c => c.Category)
+            .ThenBy(c => c.Name)
+            .Select(ToCallOption)
+            .ToList();
+    }
+
+    public bool IsForceCallable(RMCERTCallPrototype call)
+    {
+        return call.Enabled && call.AdminSelectable;
+    }
+
+    private RMCERTCallOption ToCallOption(RMCERTCallPrototype call)
+    {
+        return new RMCERTCallOption(
+            call.ID,
+            call.Name,
+            GetOrganizationLabel(call),
+            call.Category,
+            call.RandomWeight,
+            call.AdminSelectable,
+            call.AdminButtonLabel);
     }
 
     public void RequestConsoleDistress(EntityUid console, EntityUid user, string reason)
@@ -230,6 +263,62 @@ public sealed class RMCERTSystem : EntitySystem
         CreateRequest(RMCERTRequestSource.Handheld, beacon, user, reason, calls);
     }
 
+    public bool ForceCall(
+        ProtoId<RMCERTCallPrototype> callId,
+        EntityUid? admin,
+        string? adminName,
+        string reason,
+        out Guid requestId,
+        out string error)
+    {
+        requestId = Guid.Empty;
+        error = string.Empty;
+        reason = reason.Trim();
+
+        if (!_prototypes.TryIndex(callId, out var call))
+        {
+            error = Loc.GetString("rmc-ert-error-unknown-call", ("id", callId.Id));
+            _adminLog.Add(LogType.RMCAdminCommandLogging,
+                LogImpact.Medium,
+                $"ERT force call failed: actor={FormatLogValue(GetAdminActorText(admin, adminName))}, call={FormatLogValue(callId.Id)}, reason=\"{FormatLogValue(reason)}\", error=\"{FormatLogValue(error)}\"");
+            return false;
+        }
+
+        if (!IsForceCallable(call))
+        {
+            error = Loc.GetString("rmc-ert-error-call-not-force-callable", ("call", call.Name));
+            _adminLog.Add(LogType.RMCAdminCommandLogging,
+                LogImpact.Medium,
+                $"ERT force call failed: actor={FormatLogValue(GetAdminActorText(admin, adminName))}, call={FormatLogValue(call.Name)}, prototype={call.ID}, reason=\"{FormatLogValue(reason)}\", error=\"{FormatLogValue(error)}\"");
+            return false;
+        }
+
+        var request = new RMCERTRequest
+        {
+            Source = RMCERTRequestSource.Admin,
+            Requester = admin,
+            SourceName = Loc.GetString("rmc-ert-source-admin"),
+            RequesterName = GetAdminActorText(admin, adminName),
+            Reason = reason,
+            CreatedAt = _timing.CurTime,
+            AllowedCalls = [callId],
+        };
+
+        _requests[request.Id] = request;
+        requestId = request.Id;
+        AddERTRequestLog(LogImpact.High, "force requested", request, request.RequesterName, call);
+
+        if (ApproveSpecific(request.Id, callId, admin, false, request.RequesterName, true))
+            return true;
+
+        error = !string.IsNullOrWhiteSpace(request.LastError)
+            ? request.LastError
+            : !string.IsNullOrWhiteSpace(request.LastWarning)
+                ? request.LastWarning
+                : Loc.GetString("rmc-ert-error-force-call-failed", ("call", call.Name));
+        return false;
+    }
+
     public bool ApproveRandom(Guid id, EntityUid? admin)
     {
         if (!TryGetPending(id, out var request))
@@ -252,7 +341,13 @@ public sealed class RMCERTSystem : EntitySystem
         return ApproveSpecific(id, callId, admin, false);
     }
 
-    private bool ApproveSpecific(Guid id, ProtoId<RMCERTCallPrototype> callId, EntityUid? admin, bool randomSelection)
+    private bool ApproveSpecific(
+        Guid id,
+        ProtoId<RMCERTCallPrototype> callId,
+        EntityUid? admin,
+        bool randomSelection,
+        string? adminOverrideName = null,
+        bool forced = false)
     {
         if (!TryGetPending(id, out var request))
             return false;
@@ -293,6 +388,12 @@ public sealed class RMCERTSystem : EntitySystem
         {
             request.LastError = string.Empty;
             request.LastWarning = error;
+            AddERTRequestLog(LogImpact.Medium,
+                forced ? "force approve blocked" : "approve blocked",
+                request,
+                GetAdminActorText(admin, adminOverrideName),
+                call,
+                $"warning=\"{FormatLogValue(error)}\"");
             DirtyState();
             return false;
         }
@@ -303,15 +404,21 @@ public sealed class RMCERTSystem : EntitySystem
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
 
-        var adminText = admin is { Valid: true }
-            ? ToPrettyString(admin.Value)
-            : Loc.GetString("rmc-ert-admin-actor-server");
-        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-approved",
-            ("admin", adminText),
-            ("id", request.Id),
-            ("call", call.Name),
-            ("delay", (int)call.LaunchDelay)));
+        var adminText = GetAdminActorText(admin, adminOverrideName);
+        _chat.SendAdminAnnouncement(forced
+            ? GetForceCallAnnouncement(request, call, adminText)
+            : Loc.GetString("rmc-ert-admin-approved",
+                ("admin", adminText),
+                ("id", request.Id),
+                ("call", call.Name),
+                ("delay", (int)call.LaunchDelay)));
         Log.Info($"ERT request {request.Id} approved as {call.ID} by {adminText}");
+        AddERTRequestLog(forced ? LogImpact.High : LogImpact.Medium,
+            forced ? "force approved" : "approved",
+            request,
+            adminText,
+            call,
+            $"selection={(randomSelection ? "random" : "specific")}, dispatchDelay={call.LaunchDelay:0}s");
 
         DirtyState();
         Timer.Spawn(TimeSpan.FromSeconds(call.LaunchDelay), () => Dispatch(request.Id));
@@ -346,6 +453,7 @@ public sealed class RMCERTSystem : EntitySystem
             ("admin", adminText),
             ("id", request.Id),
             ("requester", request.RequesterName)));
+        AddERTRequestLog(LogImpact.Medium, "denied", request, adminText);
 
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
             Announce(call.Announcements.Denied, call.Announcements.DeniedSound, request, call);
@@ -374,6 +482,7 @@ public sealed class RMCERTSystem : EntitySystem
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cancelled",
             ("admin", adminText),
             ("id", request.Id)));
+        AddERTRequestLog(LogImpact.High, "cancelled", request, adminText);
 
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
             Announce(call.Announcements.Cancelled, call.Announcements.CancelledSound, request, call);
@@ -411,6 +520,7 @@ public sealed class RMCERTSystem : EntitySystem
             ("admin", adminText),
             ("id", request.Id),
             ("team", selected)));
+        AddERTRequestLog(LogImpact.Medium, "completed", request, adminText);
         DirtyState();
         return true;
     }
@@ -498,6 +608,7 @@ public sealed class RMCERTSystem : EntitySystem
                 BeginReturnDelay(request);
                 UpdateSourceVisual(request, false);
                 _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-arrived-missing-call", ("id", request.Id)));
+                AddERTRequestLog(LogImpact.Medium, "arrived with missing call prototype", request, "system");
                 DirtyState();
             }
 
@@ -636,6 +747,11 @@ public sealed class RMCERTSystem : EntitySystem
 
         _requests[request.Id] = request;
         _sourceCooldowns[sourceEntity] = _timing.CurTime;
+        AddERTRequestLog(LogImpact.Medium,
+            "created",
+            request,
+            GetRequesterLogText(request),
+            extra: $"allowedCalls=[{string.Join(", ", allowedCalls.Select(c => c.Id))}]");
 
         var text = BuildAdminRequestAnnouncement(request);
         _chat.SendAdminAnnouncement(text);
@@ -704,6 +820,12 @@ public sealed class RMCERTSystem : EntitySystem
                  $"RecruitmentDuration={call.Requirements.RecruitmentDuration}, " +
                  $"AutoLaunch={call.AutoLaunch}, MinRequiredSlots={call.Requirements.MinRequiredSlots}, " +
                  $"Shuttle={FormatEntity(shuttle)}, {GetShuttleDiagnostics(request, shuttle)}");
+        AddERTRequestLog(LogImpact.Medium,
+            "recruiting started",
+            request,
+            "system",
+            call,
+            $"slots={request.PlannedRoster.Count}, recruitmentDuration={call.Requirements.RecruitmentDuration.TotalSeconds:0}s, autoLaunch={call.AutoLaunch}");
         Announce(call.Announcements.Dispatch, call.Announcements.DispatchSound, request, call);
         Announce(call.Announcements.Recruiting, call.Announcements.RecruitingSound, request, call);
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-recruiting",
@@ -751,10 +873,12 @@ public sealed class RMCERTSystem : EntitySystem
             return false;
         }
 
-        if (!TryFindLandingZone(request, computer, out _))
+        if (!TryFindLandingZone(request, call, computer, out _, out var landingZoneError))
         {
             LogLandingZoneDiagnostics(request, computer);
-            error = approving
+            error = !string.IsNullOrWhiteSpace(landingZoneError)
+                ? landingZoneError
+                : approving
                 ? Loc.GetString("rmc-ert-warning-no-compatible-landing-zone", ("call", call.Name))
                 : Loc.GetString("rmc-ert-error-no-landing-zone");
 
@@ -1727,6 +1851,15 @@ public sealed class RMCERTSystem : EntitySystem
         {
             request.LastError = Loc.GetString("rmc-ert-error-raffles-in-progress");
             request.LastWarning = string.Empty;
+            if (!automatic)
+            {
+                AddERTRequestLog(LogImpact.Low,
+                    "launch blocked",
+                    request,
+                    GetAdminActorText(admin),
+                    call,
+                    $"error=\"{FormatLogValue(request.LastError)}\"");
+            }
             DirtyState();
             return false;
         }
@@ -1765,6 +1898,12 @@ public sealed class RMCERTSystem : EntitySystem
         if (request.Shuttle is not { Valid: true } shuttle)
         {
             request.State = RMCERTRequestState.Launching;
+            AddERTRequestLog(LogImpact.High,
+                "launched without shuttle",
+                request,
+                launcher,
+                call,
+                $"accepted={acceptedCount}, required={call.Requirements.MinRequiredSlots}");
             Announce(call.Announcements.Launch, call.Announcements.LaunchSound, request, call);
             MarkArrived(request, call, Loc.GetString("rmc-ert-arrived-detail-no-shuttle", ("launcher", launcher)));
             return true;
@@ -1776,10 +1915,12 @@ public sealed class RMCERTSystem : EntitySystem
             return false;
         }
 
-        if (!TryFindLandingZone(request, computer, out var destination))
+        if (!TryFindLandingZone(request, call, computer, out var destination, out var landingZoneError))
         {
             LogLandingZoneDiagnostics(request, computer);
-            FailRequest(request, Loc.GetString("rmc-ert-error-no-landing-zone"));
+            FailRequest(request, !string.IsNullOrWhiteSpace(landingZoneError)
+                ? landingZoneError
+                : Loc.GetString("rmc-ert-error-no-landing-zone"));
             return false;
         }
 
@@ -1795,6 +1936,12 @@ public sealed class RMCERTSystem : EntitySystem
             ("id", request.Id),
             ("call", call.Name),
             ("launcher", launcher)));
+        AddERTRequestLog(LogImpact.High,
+            "launched",
+            request,
+            launcher,
+            call,
+            $"destination={FormatEntity(destination)}, accepted={acceptedCount}, required={call.Requirements.MinRequiredSlots}");
         DirtyState();
         return true;
     }
@@ -1817,9 +1964,12 @@ public sealed class RMCERTSystem : EntitySystem
 
     private bool TryFindLandingZone(
         RMCERTRequest request,
+        RMCERTCallPrototype call,
         Entity<DropshipNavigationComputerComponent> computer,
-        out EntityUid destination)
+        out EntityUid destination,
+        out string error)
     {
+        error = string.Empty;
         var candidates = new List<EntityUid>();
         var sourceMap = GetRequestSourceMap(request);
 
@@ -1985,6 +2135,7 @@ public sealed class RMCERTSystem : EntitySystem
 
     private void FailRequest(RMCERTRequest request, string error)
     {
+        var previousState = request.State;
         Log.Warning($"ERT request {request.Id} failed: {error}. " +
                     $"State={request.State}, SelectedCall={request.SelectedCall?.Id}, " +
                     $"Shuttle={FormatEntity(request.Shuttle)}, {GetShuttleDiagnostics(request, request.Shuttle)}");
@@ -1997,6 +2148,11 @@ public sealed class RMCERTSystem : EntitySystem
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-failed",
             ("id", request.Id),
             ("error", error)));
+        AddERTRequestLog(LogImpact.High,
+            "failed",
+            request,
+            "system",
+            extra: $"previousState={previousState}, error=\"{FormatLogValue(error)}\"");
 
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
             Announce(call.Announcements.Failed, call.Announcements.FailedSound, request, call);
@@ -2025,6 +2181,74 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         return null;
+    }
+
+    private void AddERTRequestLog(
+        LogImpact impact,
+        string action,
+        RMCERTRequest request,
+        string actor,
+        RMCERTCallPrototype? call = null,
+        string? extra = null)
+    {
+        var selected = call?.Name ?? GetSelectedCallLabel(request) ?? "none";
+        var extraText = string.IsNullOrWhiteSpace(extra)
+            ? string.Empty
+            : $", {extra}";
+
+        _adminLog.Add(LogType.RMCAdminCommandLogging,
+            impact,
+            $"ERT {action}: request={request.Id}, actor={FormatLogValue(actor)}, state={request.State}, " +
+            $"source={request.Source}, requester={FormatLogValue(GetRequesterLogText(request))}, " +
+            $"sourceName={FormatLogValue(request.SourceName)}, sourceEntity={FormatEntity(request.SourceEntity)}, " +
+            $"call={FormatLogValue(selected)}, reason=\"{FormatLogValue(request.Reason)}\", " +
+            $"shuttle={FormatEntity(request.Shuttle)}{extraText}");
+    }
+
+    private string GetRequesterLogText(RMCERTRequest request)
+    {
+        if (request.Requester is { Valid: true } requester && Exists(requester))
+            return ToPrettyString(requester);
+
+        return request.RequesterName;
+    }
+
+    private static string FormatLogValue(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return "none";
+
+        return value.Replace('\r', ' ').Replace('\n', ' ');
+    }
+
+    private string GetAdminActorText(EntityUid? admin, string? fallbackName = null)
+    {
+        if (admin is { Valid: true } && Exists(admin.Value))
+            return ToPrettyString(admin.Value);
+
+        if (!string.IsNullOrWhiteSpace(fallbackName))
+            return fallbackName;
+
+        return Loc.GetString("rmc-ert-admin-actor-server");
+    }
+
+    private string GetForceCallAnnouncement(RMCERTRequest request, RMCERTCallPrototype call, string adminText)
+    {
+        if (!string.IsNullOrWhiteSpace(request.Reason))
+        {
+            return Loc.GetString("rmc-ert-admin-force-called-reason",
+                ("admin", adminText),
+                ("id", request.Id),
+                ("call", call.Name),
+                ("delay", (int)call.LaunchDelay),
+                ("reason", request.Reason));
+        }
+
+        return Loc.GetString("rmc-ert-admin-force-called",
+            ("admin", adminText),
+            ("id", request.Id),
+            ("call", call.Name),
+            ("delay", (int)call.LaunchDelay));
     }
 
     private string BuildAdminRequestAnnouncement(RMCERTRequest request)
@@ -2148,6 +2372,12 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         _chat.SendAdminAnnouncement(text);
+        AddERTRequestLog(LogImpact.Medium,
+            "arrived",
+            request,
+            "system",
+            call,
+            string.IsNullOrWhiteSpace(detail) ? null : $"detail=\"{FormatLogValue(detail)}\"");
         DirtyState();
     }
 
