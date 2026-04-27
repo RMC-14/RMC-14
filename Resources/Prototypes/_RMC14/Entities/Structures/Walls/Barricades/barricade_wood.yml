@@ -113,6 +113,3 @@
       interactSuccessSound:
         collection: FenceRattle
     - type: NailgunRepairable
-      # cm13 max_health%: 0.3, 0.45
-      repairMetal: 135
-      repairPlasteel: 200
