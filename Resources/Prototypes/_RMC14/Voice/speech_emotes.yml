@@ -174,7 +174,7 @@
     - whined.
     - whined!
     - whining.
-      
+
 - type: emote
   id: Yip
   name: rmc-emote-name-yip
@@ -351,7 +351,7 @@
   available: false
   icon: Interface/Emotes/squish.png # todo: new icons?
   whitelist:
-    components: 
+    components:
     - Vocal
   blacklist:
     components:
@@ -368,7 +368,7 @@
   available: false
   icon: Interface/Emotes/squish.png # todo: new icons?
   whitelist:
-    components: 
+    components:
     - Vocal
   blacklist:
     components:
@@ -385,7 +385,7 @@
   available: false
   icon: Interface/Emotes/squish.png # todo: new icons?
   whitelist:
-    components: 
+    components:
     - Vocal
   blacklist:
     components:
@@ -394,5 +394,33 @@
   chatTriggers:
   - wobbles
   - wobbling
-  - wibbles 
+  - wibbles
   - wibbling
+
+#Avali
+- type: emote
+  id: RMCAvaliChirp
+  name: rmc-emote-name-avali-chirp
+  category: Vocal
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/peep.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-avali-chirp"]
+  chatTriggers:
+  - chirp
+  - chirps
+  - chirping
+  - chirped
+  - tweet
+  - tweets
+  - tweeting
+  - tweeted
+  - cheep
+  - cheeps
+  - cheeping
+  - cheeped

@@ -49,6 +49,25 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillMedical: 1
+    skillCap:
+      RMCSkillMedical: 1
+    bypassLimit: true
+
+# gives science skill
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletScience
+  name: scientific instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge of science, and how to operate its various egg-headed machineries and other research-qualitative practices.
+  components:
+  - type: Sprite
+    state: pamphlet_science
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillResearch: 1
+    skillCap:
+      RMCSkillResearch: 1
+    bypassLimit: true
 
 # gives miniengie skill
 - type: entity
@@ -63,6 +82,10 @@
     addSkills:
       RMCSkillEngineer: 1
       RMCSkillConstruction: 1
+    skillCap:
+      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
+      RMCSkillConstruction: 1
+    bypassLimit: true
 
 # gives jtac skill
 - type: entity
@@ -76,6 +99,9 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillJtac: 1
+    skillCap:
+      RMCSkillJtac: 2
+    bypassLimit: true
 
 # gives spotter skill / bypasses limit
 - type: entity
@@ -87,11 +113,13 @@
   - type: Sprite
     state: pamphlet_spotter
   - type: SkillPamphlet
+    bypassSkill: true
     addComps:
     - type: SpotterWhitelist
     addSkills:
       RMCSkillJtac: 1
-    bypassLimit: true
+    skillCap:
+      RMCSkillJtac: 2 # RMC14: In case they read another one first.
     giveJobTitle: rmc-job-name-spotter
     givePrefix: rmc-job-prefix-spotter
     isAppendPrefix: false
@@ -119,6 +147,8 @@
     - type: SkillPamphlet
       addSkills:
         RMCSkillPowerLoader: 1
+      skillCap:
+        RMCSkillPowerLoader: 2
       bypassLimit: true
 
 # gives police skill / bypasses limit
@@ -132,6 +162,8 @@
     state: pamphlet_jtac
   - type: SkillPamphlet
     addSkills:
+      RMCSkillPolice: 1
+    skillCap:
       RMCSkillPolice: 1
     bypassLimit: true
 
@@ -147,6 +179,8 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillSurgery: 1
+    skillCap:
+      RMCSkillSurgery: 2
     bypassLimit: true
 
 # gives intel skill / bypasses limit
@@ -161,6 +195,8 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillIntel: 1
+    skillCap:
+      RMCSkillIntel: 2
     addComps:
       - type: ViewIntelObjectives
     bypassLimit: true
@@ -174,10 +210,11 @@
   - type: Sprite
     state: pamphlet_loader
   - type: SkillPamphlet
+    bypassSkill: true
     addSkills:
       RMCSkillEngineer: 1
     skillCap:
-      RMCSkillEngineer: 1
+      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
     giveJobTitle: rmc-job-name-loader
     givePrefix: rmc-job-prefix-loader
     isAppendPrefix: false
@@ -187,7 +224,6 @@
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: loader
-    bypassLimit: true
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
@@ -203,11 +239,12 @@
   - type: Sprite
     state: pamphlet_mortar
   - type: SkillPamphlet
+    bypassSkill: true
     addSkills:
       RMCSkillEngineer: 1
       RMCSkillJtac: 2
     skillCap:
-      RMCSkillEngineer: 1
+      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
       RMCSkillJtac: 2
     giveJobTitle: rmc-job-name-mortar-operator
     givePrefix: rmc-job-prefix-mortar-operator
@@ -218,7 +255,6 @@
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: mortar
-    bypassLimit: true
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
@@ -229,14 +265,100 @@
   parent: CMPamphlet
   id: RMCPamphletHeavyMachineGunner
   name: heavy machinegunner instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has an engineering and a machinegun insignia
+  description: A pamphlet used to quickly impart vital knowledge. This one has an engineering and a machinegun insignia.
   components:
   - type: Sprite
     state: pamphlet_machinegunner
   - type: SkillPamphlet
     addSkills:
       RMCSkillEngineer: 1
+    skillCap:
+      RMCSkillEngineer: 2
     bypassLimit: true
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletVehicles
+  name: vehicle training manual
+  description: A manual used to quickly impart vital knowledge on driving vehicles.
+  components:
+  - type: Sprite
+    state: pamphlet_vehicle
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillVehicles: 1
+    skillCap:
+      RMCSkillVehicles: 1
+    bypassLimit: true
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletOverwatch
+  name: overwatch console manual
+  description: A manual used to quickly impart vital knowledge on operating overwatch consoles.
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillOverwatch: 1
+    skillCap:
+      RMCSkillOverwatch: 1
+    bypassLimit: true
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletCanine
+  name: K9 handler instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge of taking care of K9 units, even if they aren't exactly real dogs.
+  components:
+  - type: Sprite
+    state: pamphlet_k9_handler
+  - type: SkillPamphlet
+    bypassSkill: true
+    addSkills:
+      RMCSkillJtac: 1
+      RMCSkillEngineer: 1
+    skillCap:
+      RMCSkillJtac: 2     # RMC14: In case they read another one first.
+      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
+    # TODO: custom icon and title dependent on if they are a medic or MP
+    jobWhitelists:
+    - popup: rmc-pamphlets-k9-warning
+      jobProto: CMHospitalCorpsman
+    - popup: rmc-pamphlets-k9-warning
+      jobProto: CMMilitaryPolice
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletVehicleCrewman
+  name: Vehicle Crewman instructional pamphlet
+  description: A manual used to quickly impart vital knowledge of driving heavy-duty vehicles and its maintenance. It also imparts some deep knowledge on related engineering applications.
+  components:
+  - type: Sprite
+    state: pamphlet_vehicle
+  - type: SkillPamphlet
+    # TODO: should probably give and icon and title
+    addSkills:
+      RMCSkillVehicles: 3
+      RMCSkillEngineer: 2
+    skillCap:
+      RMCSkillVehicles: 3
+      RMCSkillEngineer: 2
+    bypassLimit: true
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletVulture
+  name: vulture instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge of how to shoot big guns and spot for them.
+  components:
+  - type: Sprite
+    state: pamphlet_vulture
+  - type: SkillPamphlet
+    # TODO: should probably give and icon and title
+    addSkills:
+      RMCSkillVulture: 1
+    skillCap:
+      RMCSkillVulture: 1
 
 # OTHER
 
@@ -260,7 +382,6 @@
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: honorguard
-    bypassLimit: true
     jobWhitelists:
     - popup: rmc-pamphlets-mp-warning
       jobProto: CMMilitaryPolice

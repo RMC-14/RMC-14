@@ -427,3 +427,41 @@
     - state: smallshell_empty
       map: [ "empty" ]
       color: "#757575"
+
+# PVE, RCM
+
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunL49B
+  name: box of L49B shells
+  suffix: PVE, RCM
+  description: A box filled with breaching shells, compatible with the L49 assault shotgun. 12 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunL49B
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunL49B
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#595959"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#595959"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#595959"
+  - type: Tag
+    tags:
+    - RMCBoxShotgunL49B
+
+- type: Tag
+  id: RMCBoxShotgunL49B
