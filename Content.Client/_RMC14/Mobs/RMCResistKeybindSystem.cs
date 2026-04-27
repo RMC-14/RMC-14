@@ -36,7 +36,6 @@ public sealed class RMCResistKeybindSystem : EntitySystem
                                 continue;
 
                             _alerts.AlertClicked(alertId);
-                            return;
                         }
                     },
                     handle: true))
