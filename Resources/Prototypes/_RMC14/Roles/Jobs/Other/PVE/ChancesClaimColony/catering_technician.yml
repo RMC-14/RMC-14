@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: CMSurvivorChancesCivilian
   name: rmc-job-name-colonist-chances-civilian
@@ -69,7 +69,7 @@
   name: chances catering technician preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHeadBeanie, RMCBrownWEYACoat, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesBlack, CMSatchel ]
     - [ RMCWEYARainCoat, RMCJumpsuitCivilianGreen, RMCShoesBlue, CMHandsBrown, RMCMaskRebreather, RMCSatchelNorm ]

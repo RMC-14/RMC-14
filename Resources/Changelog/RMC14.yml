@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: SurfinNinja1
-  changes:
-  - message: added 3 more sandwiches
-    type: Add
-  - message: fixed tocilog recipe to actually use bacon
-    type: Fix
-  - message: changed all cooking and drink recipes to use RMCSugar
-    type: Tweak
-  - message: cotton burgers and buns are now edible
-    type: Tweak
-  id: 2666
-  time: '2025-12-10T01:32:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8572
-- author: yagwog
-  changes:
-  - message: Fixed ghost half bright staying after returning to your body.
-    type: Fix
-  id: 2667
-  time: '2025-12-10T01:44:17.894436+00:00'
-  url: null
 - author: Aurallianz
   changes:
   - message: Fixed nuke also killing everyone not on the planet.
@@ -4464,5 +4444,25 @@
   id: 3165
   time: '2026-04-24T10:15:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9686
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added the Webley MkX TBR for use by RCM senior officers.'
+    type: Add
+  id: 3166
+  time: '2026-04-27T00:29:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8907
+- author: Vixting
+  changes:
+  - message: Added fun!
+    type: Add
+  - message: Removed fun!
+    type: Remove
+  - message: Changed fun!
+    type: Tweak
+  - message: Fixed fun!
+    type: Fix
+  id: 3167
+  time: '2026-04-27T00:31:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9703
 Name: RMC14
 Order: -1
