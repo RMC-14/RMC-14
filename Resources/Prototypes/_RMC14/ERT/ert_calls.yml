@@ -1,3 +1,12 @@
+# RMC ERT call prototypes.
+# Shuttle placement notes:
+# - To stage a shuttle on a mapped pad, set shuttleMap plus shuttleSpawnMarker
+#   or shuttleSpawner, and place that marker/spawner on the map.
+# - To stage a shuttle immediately on the hidden fallback ERT space map, set
+#   shuttleMap directly and leave shuttleSpawner/shuttleSpawnMarker unset.
+# - If shuttleMap is also omitted, no shuttle is loaded; roster spawn positions
+#   fall back to the request source coordinates instead.
+
 - type: rmcERTCall
   id: RMCERTCallCBRN
   name: rmc-ert-call-cbrn-name
