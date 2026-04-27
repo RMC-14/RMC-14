@@ -1,7 +1,6 @@
 using Content.Client.Alerts;
 using Content.Shared._RMC14.Input;
 using Content.Shared.Alert;
-using Robust.Client.Player;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Prototypes;
 
@@ -10,9 +9,7 @@ namespace Content.Client._RMC14.Mobs;
 public sealed class RMCResistKeybindSystem : EntitySystem
 {
     [Dependency] private readonly ClientAlertsSystem _alerts = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
 
-    // Container/locker escape is already triggered by WASD.
     private static readonly ProtoId<AlertPrototype>[] ResistAlerts =
     [
         "Fire",
@@ -28,22 +25,21 @@ public sealed class RMCResistKeybindSystem : EntitySystem
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.RMCResist,
-                InputCmdHandler.FromDelegate(_ =>
-                {
-                    var ent = _playerManager.LocalEntity;
-                    if (ent == null || !ent.Value.IsValid())
-                        return;
-
-                    foreach (var alertId in ResistAlerts)
+                InputCmdHandler.FromDelegate(session =>
                     {
-                        if (!_alerts.IsShowingAlert(ent.Value, alertId))
-                            continue;
+                        if (session?.AttachedEntity is not { } ent)
+                            return;
 
-                        _alerts.AlertClicked(alertId);
-                        return;
-                    }
-                },
-                handle: true))
+                        foreach (var alertId in ResistAlerts)
+                        {
+                            if (!_alerts.IsShowingAlert(ent, alertId))
+                                continue;
+
+                            _alerts.AlertClicked(alertId);
+                            return;
+                        }
+                    },
+                    handle: true))
             .Register<RMCResistKeybindSystem>();
     }
 
