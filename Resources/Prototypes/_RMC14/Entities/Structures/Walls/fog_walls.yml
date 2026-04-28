@@ -65,6 +65,7 @@
 - type: entity
   parent: RMCFogWallWeedPermanent
   id: RMCFogWallWeed30
+  description: These weeds look much thicker than any other xenonid structure.
   suffix: 30 minutes, weed wall
   components:
   - type: TimedDespawn
