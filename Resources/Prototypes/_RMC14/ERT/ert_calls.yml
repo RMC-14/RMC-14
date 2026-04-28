@@ -63,17 +63,9 @@
     seatTags: [ engineer, troop ]
     priority: 40
   announcements:
-    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: rmc-ert-announcement-cbrn-dispatch
-    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: rmc-ert-announcement-recruiting-immediate
-    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: rmc-ert-announcement-launch
-    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: rmc-ert-announcement-cbrn-arrival
-    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
-    failed: rmc-ert-announcement-cbrn-failed
-    denied: rmc-ert-announcement-cbrn-denied
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-cbrn-arrival
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -136,16 +128,9 @@
     seatTags: [ engineer, troop ]
     priority: 40
   announcements:
-    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: rmc-ert-announcement-pmc-dispatch
-    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: rmc-ert-announcement-recruiting-immediate
-    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: rmc-ert-announcement-launch
-    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: rmc-ert-announcement-pmc-arrival
-    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
-    denied: rmc-ert-announcement-pmc-denied
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-pmc-arrival
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -190,16 +175,10 @@
     roleTags: [ police, rifleman ]
     seatTags: [ troop ]
   announcements:
-    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: rmc-ert-announcement-bodyguard-dispatch
-    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: rmc-ert-announcement-recruiting
-    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: rmc-ert-announcement-launch
-    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: rmc-ert-announcement-bodyguard-arrival
-    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
-    denied: rmc-ert-announcement-bodyguard-denied
+    dispatch:
+      title: rmc-ert-announcement-title-distress-beacon
+      message: rmc-ert-announcement-bodyguard-dispatch
+      sound: /Audio/_RMC14/AI/distressreceived.ogg
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -243,17 +222,6 @@
     max: 2
     roleTags: [ support ]
     seatTags: [ troop ]
-  announcements:
-    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: rmc-ert-announcement-lawyers-dispatch
-    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: rmc-ert-announcement-recruiting
-    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: rmc-ert-announcement-launch
-    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: rmc-ert-announcement-lawyers-arrival
-    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
-    denied: rmc-ert-announcement-lawyers-denied
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -297,15 +265,9 @@
     roleTags: [ police ]
     seatTags: [ troop ]
   announcements:
-    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: rmc-ert-announcement-cmb-dispatch
-    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: rmc-ert-announcement-recruiting
-    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: rmc-ert-announcement-launch
-    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: rmc-ert-announcement-cmb-arrival
-    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-cmb-arrival
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -358,15 +320,9 @@
     roleTags: [ medic ]
     seatTags: [ medic, troop ]
   announcements:
-    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: rmc-ert-announcement-spp-dispatch
-    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: rmc-ert-announcement-recruiting
-    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: rmc-ert-announcement-launch
-    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: rmc-ert-announcement-spp-arrival
-    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-spp-arrival
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -419,15 +375,11 @@
     roleTags: [ medic ]
     seatTags: [ medic, troop ]
   announcements:
-    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: rmc-ert-announcement-tse-dispatch
-    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: rmc-ert-announcement-recruiting
-    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: rmc-ert-announcement-launch
-    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: rmc-ert-announcement-tse-arrival
-    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      messages:
+      - rmc-ert-announcement-tse-arrival-patna
+      - rmc-ert-announcement-tse-arrival-thunderchild
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -470,16 +422,6 @@
     max: 3
     roleTags: [ police ]
     seatTags: [ troop ]
-  announcements:
-    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: rmc-ert-announcement-provost-dispatch
-    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: rmc-ert-announcement-recruiting
-    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: rmc-ert-announcement-launch
-    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: rmc-ert-announcement-provost-arrival
-    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -529,7 +471,9 @@
     max: 1
     roleTags: [ medic ]
   announcements:
-    recruiting: rmc-ert-announcement-recruiting
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-clf-arrival
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
@@ -567,15 +511,9 @@
   features:
   - rmc-ert-feature-pizza-wrong-place
   announcements:
-    requestSound: /Audio/_RMC14/AI/distressbeacon.ogg
-    dispatch: rmc-ert-announcement-pizza-dispatch
-    dispatchSound: /Audio/_RMC14/AI/distressreceived.ogg
-    recruiting: rmc-ert-announcement-recruiting
-    recruitingSound: /Audio/_RMC14/AI/commandreport.ogg
-    launch: rmc-ert-announcement-launch
-    launchSound: /Audio/_RMC14/Dropship/dropship_emergency.ogg
-    arrival: rmc-ert-announcement-pizza-arrival
-    arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-pizza-arrival
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s

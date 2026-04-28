@@ -225,20 +225,32 @@ rmc-ert-role-clf-soldier = CLF Soldier
 rmc-ert-role-clf-medic = CLF Medic
 rmc-ert-role-pizza-deliverer = Pizza Deliverer
 
+rmc-ert-announcement-title-priority-alert = Priority Alert
+rmc-ert-announcement-title-distress-beacon = Distress Beacon
+rmc-ert-announcement-title-intercepted-transmission = Intercepted Transmission:
+
+rmc-ert-announcement-message = [font size=16][bold][color=#CECECE]{$title}[/color][/bold][/font][font size=16][color=red]
+
+    {$message}[/color][/font]
+
+rmc-ert-announcement-priority-alert = A distress beacon has been launched from the UNS Almayer.
+rmc-ert-announcement-distress-dispatch = An encrypted signal has been received from a nearby vessel. Stand by.
+rmc-ert-announcement-distress-no-response = The distress signal has not received a response, the launch tubes are now recalibrating.
+
 rmc-ert-announcement-recruiting-immediate = {$team} is accepting volunteers for immediate deployment.
 rmc-ert-announcement-recruiting = {$team} is accepting volunteers.
 rmc-ert-announcement-launch = {$team} has launched.
 
 rmc-ert-announcement-cbrn-dispatch = High Command has approved a distress response. {$team} is being mustered.
-rmc-ert-announcement-cbrn-arrival = {$team} has docked aboard the warship and is awaiting tasking.
+rmc-ert-announcement-cbrn-arrival = Attention, this is the USS Kurtz, we have dispatched a CBRN squad to your ship per your distress call. Stand by for arrival.
 rmc-ert-announcement-cbrn-failed = High Command reports that {$team} deployment failed: {$reason}
 rmc-ert-announcement-cbrn-denied = High Command has denied the distress request.
 
 rmc-ert-announcement-pmc-dispatch = A corporate emergency contract has been accepted. {$team} is preparing to deploy.
-rmc-ert-announcement-pmc-arrival = {$team} has docked aboard the warship under corporate authority.
+rmc-ert-announcement-pmc-arrival = UNS Almayer, this is USCSS Royce responding to your distress call. We are boarding. Any hostile actions will be met with lethal force.
 rmc-ert-announcement-pmc-denied = Corporate response channels have declined the request.
 
-rmc-ert-announcement-bodyguard-dispatch = Corporate security has accepted a close-protection request. {$team} is preparing to deploy.
+rmc-ert-announcement-bodyguard-dispatch = UNS Almayer, this is a Weyland-Yutani Corporate Security Protection Detail shuttle inbound to the Liaison's Beacon.
 rmc-ert-announcement-bodyguard-arrival = {$team} has docked aboard the warship and is moving to secure the principal.
 rmc-ert-announcement-bodyguard-denied = Corporate security declined the executive protection request.
 
@@ -247,16 +259,20 @@ rmc-ert-announcement-lawyers-arrival = {$team} has docked aboard the warship and
 rmc-ert-announcement-lawyers-denied = Corporate Affairs declined the legal assistance request.
 
 rmc-ert-announcement-cmb-dispatch = A Colonial Marshal Bureau patrol has accepted the distress request.
-rmc-ert-announcement-cmb-arrival = {$team} has docked aboard the warship and is investigating the reported incident.
+rmc-ert-announcement-cmb-arrival = Incoming Transmission: UNS Almayer, this is Anchorpoint Station with the Colonial Marshal Bureau. We are receiving your distress signal and are dispatching a nearby team to board with you now. Standby.
 
 rmc-ert-announcement-spp-dispatch = Foreign response traffic has been detected. {$team} is preparing to deploy.
-rmc-ert-announcement-spp-arrival = {$team} has docked aboard the warship and is preparing to support the operation.
+rmc-ert-announcement-spp-arrival = This is SPP dispatch. UNS Almayer, we are responding to your distress call, we will render aid as able, do not fire.
 
 rmc-ert-announcement-tse-dispatch = {$team} has accepted the distress request.
 rmc-ert-announcement-tse-arrival = {$team} has docked aboard the warship and is entering the operation area.
+rmc-ert-announcement-tse-arrival-patna = UNS Almayer, this is HMS Patna; we are responding to your distress call and boarding in accordance with the Military Aid Act of 2177, Authentication code Lima-18153.
+rmc-ert-announcement-tse-arrival-thunderchild = UNS Almayer, this is HMS Thunderchild; we are responding to your distress call and boarding in accordance with the Military Aid Act of 2177, Authentication code Lima-18153.
 
 rmc-ert-announcement-provost-dispatch = Provost command has approved a response team.
 rmc-ert-announcement-provost-arrival = {$team} has docked aboard the warship and is assuming Provost jurisdiction.
+
+rmc-ert-announcement-clf-arrival = 'Attention, you are trespassing on our sovereign territory. Expect no forgiveness.'
 
 rmc-ert-announcement-pizza-dispatch = Pizza Galaxy has accepted the emergency delivery order. {$team} is preparing to deploy.
 rmc-ert-announcement-pizza-arrival = 'That'll be... sixteen orders of cheesy fries, eight large double topping pizzas, nine bottles of Four Loko... hello? Is anyone on this ship? Your pizzas are getting cold.'

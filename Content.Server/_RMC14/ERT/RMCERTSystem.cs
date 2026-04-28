@@ -94,7 +94,8 @@ public sealed class RMCERTSystem : EntitySystem
     private MapId? _ertMap;
     private int _loadedShuttles;
 
-    private static readonly SoundPathSpecifier DefaultRequestSound = new("/Audio/_RMC14/AI/distressbeacon.ogg");
+    private static readonly SoundPathSpecifier DistressBeaconSound = new("/Audio/_RMC14/AI/distressbeacon.ogg");
+    private static readonly SoundPathSpecifier DistressReceivedSound = new("/Audio/_RMC14/AI/distressreceived.ogg");
     private static readonly SoundPathSpecifier AdminRequestSound = new("/Audio/_RMC14/Effects/sos-morse-code.ogg");
     private static readonly EntProtoId ERTShuttleReturnDestinationPrototype = "RMCERTShuttleReturnDestination";
     private static readonly EntProtoId ERTShuttleReturnDestinationSmallPrototype = "RMCERTShuttleReturnDestinationSmall";
@@ -439,6 +440,8 @@ public sealed class RMCERTSystem : EntitySystem
             call,
             $"selection={(randomSelection ? "random" : "specific")}, dispatchDelay={call.LaunchDelay:0}s");
 
+        AnnounceDistressLaunched(request, call);
+
         DirtyState(request);
         Timer.Spawn(TimeSpan.FromSeconds(call.LaunchDelay), () => Dispatch(request.Id));
         return true;
@@ -475,7 +478,9 @@ public sealed class RMCERTSystem : EntitySystem
         AddERTRequestLog(LogImpact.Medium, "denied", request, adminText);
 
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
-            Announce(call.Announcements.Denied, call.Announcements.DeniedSound, request, call);
+            AnnounceNoResponse(request, call);
+        else
+            AnnounceNoResponse(request, null);
 
         DirtyState(request);
         return true;
@@ -504,7 +509,7 @@ public sealed class RMCERTSystem : EntitySystem
         AddERTRequestLog(LogImpact.High, "cancelled", request, adminText);
 
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
-            Announce(call.Announcements.Cancelled, call.Announcements.CancelledSound, request, call);
+            Announce(call.Announcements.Cancelled, request, call);
 
         DirtyState(request);
         return true;
@@ -777,14 +782,6 @@ public sealed class RMCERTSystem : EntitySystem
 
         NotifyAdminsOfRequest();
 
-        if (source == RMCERTRequestSource.Console)
-        {
-            var requestSound = GetRequestSound(allowedCalls) ?? DefaultRequestSound;
-            _marineAnnounce.AnnounceHighCommand(
-                Loc.GetString("rmc-ert-console-request-announcement"),
-                sound: requestSound);
-        }
-
         if (source == RMCERTRequestSource.Handheld)
             UpdateSourceVisual(request, true);
 
@@ -905,8 +902,6 @@ public sealed class RMCERTSystem : EntitySystem
             "system",
             call,
             $"slots={request.PlannedRoster.Count}, recruitmentDuration={call.Requirements.RecruitmentDuration.TotalSeconds:0}s, autoLaunch={call.AutoLaunch}");
-        Announce(call.Announcements.Dispatch, call.Announcements.DispatchSound, request, call);
-        Announce(call.Announcements.Recruiting, call.Announcements.RecruitingSound, request, call);
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-recruiting",
             ("id", request.Id),
             ("slots", request.PlannedRoster.Count),
@@ -1966,11 +1961,13 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (acceptedCount < call.Requirements.MinRequiredSlots)
         {
-            FailRequest(request, acceptedCount == 0
-                ? Loc.GetString("rmc-ert-error-no-volunteers")
-                : Loc.GetString("rmc-ert-error-not-enough-volunteers",
-                    ("accepted", acceptedCount),
-                    ("required", call.Requirements.MinRequiredSlots)));
+            FailRequest(request,
+                acceptedCount == 0
+                    ? Loc.GetString("rmc-ert-error-no-volunteers")
+                    : Loc.GetString("rmc-ert-error-not-enough-volunteers",
+                        ("accepted", acceptedCount),
+                        ("required", call.Requirements.MinRequiredSlots)),
+                announceNoResponse: true);
             return false;
         }
 
@@ -1983,7 +1980,7 @@ public sealed class RMCERTSystem : EntitySystem
                 launcher,
                 call,
                 $"accepted={acceptedCount}, required={call.Requirements.MinRequiredSlots}");
-            Announce(call.Announcements.Launch, call.Announcements.LaunchSound, request, call);
+            AnnounceDispatch(request, call);
             MarkArrived(request, call, Loc.GetString("rmc-ert-arrived-detail-no-shuttle", ("launcher", launcher)));
             return true;
         }
@@ -2014,7 +2011,7 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         request.State = RMCERTRequestState.Launching;
-        Announce(call.Announcements.Launch, call.Announcements.LaunchSound, request, call);
+        AnnounceDispatch(request, call);
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-launched",
             ("id", request.Id),
             ("call", call.Name),
@@ -2216,7 +2213,7 @@ public sealed class RMCERTSystem : EntitySystem
         return false;
     }
 
-    private void FailRequest(RMCERTRequest request, string error)
+    private void FailRequest(RMCERTRequest request, string error, bool announceNoResponse = false)
     {
         var previousState = request.State;
         Log.Warning($"ERT request {request.Id} failed: {error}. " +
@@ -2237,33 +2234,93 @@ public sealed class RMCERTSystem : EntitySystem
             "system",
             extra: $"previousState={previousState}, error=\"{FormatLogValue(error)}\"");
 
-        if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
-            Announce(call.Announcements.Failed, call.Announcements.FailedSound, request, call);
+        if (request.SelectedCall is { } callId &&
+            _prototypes.TryIndex(callId, out var call) &&
+            announceNoResponse)
+        {
+            AnnounceNoResponse(request, call);
+        }
 
         DirtyState(request);
     }
 
-    private void Announce(LocId? message, SoundSpecifier? sound, RMCERTRequest request, RMCERTCallPrototype call)
+    private void AnnounceDistressLaunched(RMCERTRequest request, RMCERTCallPrototype call)
     {
+        var announcement = new RMCERTStageAnnouncement
+        {
+            Title = "rmc-ert-announcement-title-priority-alert",
+            Message = "rmc-ert-announcement-priority-alert",
+            Sound = DistressBeaconSound,
+        };
+
+        Announce(announcement, request, call);
+    }
+
+    private void AnnounceNoResponse(RMCERTRequest request, RMCERTCallPrototype? call)
+    {
+        var announcement = new RMCERTStageAnnouncement
+        {
+            Title = "rmc-ert-announcement-title-distress-beacon",
+            Message = "rmc-ert-announcement-distress-no-response",
+        };
+
+        if (call != null)
+        {
+            Announce(announcement, request, call);
+            return;
+        }
+
+        var title = Loc.GetString(announcement.Title!.Value);
+        var message = Loc.GetString(announcement.Message!.Value,
+            ("team", Loc.GetString("rmc-ert-response-team-fallback")),
+            ("requester", request.RequesterName),
+            ("reason", request.Reason));
+        AnnounceERTToMarines(title, message);
+    }
+
+    private static RMCERTStageAnnouncement CreateDefaultDispatchAnnouncement()
+    {
+        return new RMCERTStageAnnouncement
+        {
+            Title = "rmc-ert-announcement-title-distress-beacon",
+            Message = "rmc-ert-announcement-distress-dispatch",
+            Sound = DistressReceivedSound,
+        };
+    }
+
+    private void AnnounceDispatch(RMCERTRequest request, RMCERTCallPrototype call)
+    {
+        Announce(call.Announcements.Dispatch ?? CreateDefaultDispatchAnnouncement(), request, call);
+    }
+
+    private void Announce(RMCERTStageAnnouncement? announcement, RMCERTRequest request, RMCERTCallPrototype call)
+    {
+        if (announcement == null)
+            return;
+
+        var message = announcement.Message;
+        if (message == null && announcement.Messages.Count > 0)
+            message = _random.Pick(announcement.Messages);
+
         if (message == null)
             return;
 
         var text = FormatCallText(message.Value, request, call);
-        _marineAnnounce.AnnounceHighCommand(text, sound: sound);
+        var title = announcement.Title != null
+            ? FormatCallText(announcement.Title.Value, request, call)
+            : null;
+
+        AnnounceERTToMarines(title, text, announcement.Sound, announcement.RawTitle);
     }
 
-    private SoundSpecifier? GetRequestSound(IReadOnlyCollection<ProtoId<RMCERTCallPrototype>> allowedCalls)
+    private void AnnounceERTToMarines(string? title, string message, SoundSpecifier? sound = null, bool rawTitle = true)
     {
-        foreach (var callId in allowedCalls)
-        {
-            if (_prototypes.TryIndex(callId, out var call) &&
-                call.Announcements.RequestSound != null)
-            {
-                return call.Announcements.RequestSound;
-            }
-        }
-
-        return null;
+        title ??= Loc.GetString("rmc-announcement-author-highcommand");
+        var loc = rawTitle
+            ? "rmc-ert-announcement-message"
+            : "rmc-announcement-message";
+        var wrapped = Loc.GetString(loc, ("author", title), ("title", title), ("message", message));
+        _marineAnnounce.AnnounceToMarines(wrapped, sound);
     }
 
     private void AddERTRequestLog(
@@ -2441,7 +2498,7 @@ public sealed class RMCERTSystem : EntitySystem
         request.LastWarning = string.Empty;
         BeginReturnDelay(request);
         UpdateSourceVisual(request, false);
-        Announce(call.Announcements.Arrival, call.Announcements.ArrivalSound, request, call);
+        Announce(call.Announcements.Arrival, request, call);
 
         var text = Loc.GetString("rmc-ert-admin-arrived",
             ("id", request.Id),

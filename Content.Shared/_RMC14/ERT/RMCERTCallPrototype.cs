@@ -150,49 +150,41 @@ public sealed partial class RMCERTAnnouncementSet
     public LocId? RequestAdmin;
 
     [DataField]
-    public LocId? Dispatch;
+    public RMCERTStageAnnouncement? Dispatch;
 
     [DataField]
-    public LocId? Recruiting;
+    public RMCERTStageAnnouncement? Arrival;
 
     [DataField]
-    public LocId? Launch;
+    public RMCERTStageAnnouncement? Denied;
 
     [DataField]
-    public LocId? Arrival;
+    public RMCERTStageAnnouncement? Cancelled;
 
     [DataField]
-    public LocId? Denied;
+    public RMCERTStageAnnouncement? Failed;
+}
+
+[DataDefinition]
+/// <summary>
+/// Marine-facing announcement data for one public ERT lifecycle stage.
+/// </summary>
+public sealed partial class RMCERTStageAnnouncement
+{
+    [DataField]
+    public LocId? Title;
 
     [DataField]
-    public LocId? Cancelled;
+    public LocId? Message;
 
     [DataField]
-    public LocId? Failed;
+    public List<LocId> Messages = [];
 
     [DataField]
-    public SoundSpecifier? RequestSound;
+    public SoundSpecifier? Sound;
 
     [DataField]
-    public SoundSpecifier? DispatchSound;
-
-    [DataField]
-    public SoundSpecifier? RecruitingSound;
-
-    [DataField]
-    public SoundSpecifier? LaunchSound;
-
-    [DataField]
-    public SoundSpecifier? ArrivalSound;
-
-    [DataField]
-    public SoundSpecifier? DeniedSound;
-
-    [DataField]
-    public SoundSpecifier? CancelledSound;
-
-    [DataField]
-    public SoundSpecifier? FailedSound;
+    public bool RawTitle = true;
 }
 
 [DataDefinition]
