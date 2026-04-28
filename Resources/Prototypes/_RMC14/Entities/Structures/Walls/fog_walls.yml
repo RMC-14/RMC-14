@@ -54,7 +54,7 @@
   parent: RMCFogWallPermanent
   id: RMCFogWallWeedPermanent
   name: impenetrable weeds
-  description: These weeds look much thicker than any other xenonid structure, it looks like it slowly is wiltering though.
+  description: These weeds look much thicker than any other xenonid structure, it looks like it slowly is wilting.
   suffix: Permanent, weed wall
   components:
   - type: Sprite
