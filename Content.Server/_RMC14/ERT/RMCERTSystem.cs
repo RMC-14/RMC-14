@@ -4,6 +4,7 @@ using System.Text;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server._RMC14.Marines;
+using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -38,9 +39,11 @@ using Content.Shared.Prototypes;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.EntitySerialization.Systems;
+using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -73,6 +76,7 @@ public sealed class RMCERTSystem : EntitySystem
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -84,6 +88,7 @@ public sealed class RMCERTSystem : EntitySystem
     private readonly Dictionary<Guid, RMCERTRequest> _requests = new();
     private readonly Dictionary<EntityUid, TimeSpan> _sourceCooldowns = new();
     private readonly Dictionary<EntityUid, EntityUid> _pendingHandheldDialogs = new();
+    private readonly HashSet<ICommonSession> _queuedPendingAdminNotifications = [];
 
     private MapId? _ertMap;
     private int _loadedShuttles;
@@ -94,6 +99,8 @@ public sealed class RMCERTSystem : EntitySystem
     private static readonly EntProtoId ERTShuttleReturnDestinationSmallPrototype = "RMCERTShuttleReturnDestinationSmall";
     private static readonly EntProtoId ERTShuttleReturnDestinationBigPrototype = "RMCERTShuttleReturnDestinationBig";
     private static readonly TimeSpan ReturnDelay = TimeSpan.FromMinutes(2);
+    // AdminManager raises OnPermsChanged before the client enables admin chat filters.
+    private static readonly TimeSpan PendingAdminNotificationDelay = TimeSpan.FromSeconds(1);
 
     public override void Initialize()
     {
@@ -108,13 +115,22 @@ public sealed class RMCERTSystem : EntitySystem
         SubscribeLocalEvent<RMCERTShuttleComponent, FTLRequestEvent>(OnERTShuttleFTLRequested);
         SubscribeLocalEvent<RMCERTShuttleComponent, FTLStartedEvent>(OnERTShuttleFTLStarted);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, RMCERTConsoleDistressReasonEvent>(OnConsoleReason);
-
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key, subs =>
         {
             subs.Event<MarineCommunicationsDistressBeaconMsg>(OnMarineCommunicationsDistressBeacon);
         });
 
+        _adminManager.OnPermsChanged += OnAdminPermsChanged;
+        _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
         ValidatePrototypes();
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+
+        _adminManager.OnPermsChanged -= OnAdminPermsChanged;
+        _playerManager.PlayerStatusChanged -= OnPlayerStatusChanged;
     }
 
     public override void Update(float frameTime)
@@ -150,6 +166,7 @@ public sealed class RMCERTSystem : EntitySystem
         _requests.Clear();
         _sourceCooldowns.Clear();
         _pendingHandheldDialogs.Clear();
+        _queuedPendingAdminNotifications.Clear();
         _ertMap = null;
         _loadedShuttles = 0;
     }
@@ -771,6 +788,66 @@ public sealed class RMCERTSystem : EntitySystem
 
         _popup.PopupEntity(GetRequestSuccessText(sourceEntity, source), sourceEntity, requester, PopupType.Medium);
         DirtyState();
+    }
+
+    private void OnAdminPermsChanged(AdminPermsChangedEventArgs args)
+    {
+        if (!args.IsAdmin)
+            return;
+
+        QueuePendingAdminRequestNotification(args.Player, "admin permissions changed");
+    }
+
+    private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs args)
+    {
+        if (args.NewStatus != SessionStatus.InGame)
+            return;
+
+        QueuePendingAdminRequestNotification(args.Session, "session entered game");
+    }
+
+    private void QueuePendingAdminRequestNotification(ICommonSession session, string reason)
+    {
+        if (!_queuedPendingAdminNotifications.Add(session))
+        {
+            Log.Debug($"Skipped duplicate pending ERT request notification queue for {session.Name}: {reason}.");
+            return;
+        }
+
+        Log.Debug($"Queued pending ERT request notification for {session.Name}: {reason}.");
+        Timer.Spawn(PendingAdminNotificationDelay, () =>
+        {
+            _queuedPendingAdminNotifications.Remove(session);
+
+            if (session.Status == SessionStatus.Disconnected)
+            {
+                Log.Debug($"Skipped pending ERT request notification for {session.Name}: session disconnected.");
+                return;
+            }
+
+            NotifyAdminOfPendingRequests(session);
+        });
+    }
+
+    private void NotifyAdminOfPendingRequests(ICommonSession session)
+    {
+        if (!_adminManager.IsAdmin(session))
+        {
+            Log.Debug($"Skipped pending ERT request notification for {session.Name}: session is not an active admin.");
+            return;
+        }
+
+        var sent = 0;
+        foreach (var request in _requests.Values)
+        {
+            if (request.State != RMCERTRequestState.PendingAdmin)
+                continue;
+
+            _chat.SendAdminAnnouncementMessage(session, BuildAdminRequestAnnouncement(request));
+            sent++;
+        }
+
+        Log.Debug($"Sent {sent} pending ERT request notifications to {session.Name}.");
     }
 
     private void Dispatch(Guid id)
