@@ -68,6 +68,7 @@ public sealed class RMCERTSystem : EntitySystem
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
+    [Dependency] private readonly RMCERTDiscordWebhookSystem _discordWebhook = default!;
     [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
@@ -167,6 +168,7 @@ public sealed class RMCERTSystem : EntitySystem
         _sourceCooldowns.Clear();
         _pendingHandheldDialogs.Clear();
         _queuedPendingAdminNotifications.Clear();
+        _discordWebhook.ClearRequests();
         _ertMap = null;
         _loadedShuttles = 0;
     }
@@ -373,7 +375,7 @@ public sealed class RMCERTSystem : EntitySystem
         {
             request.LastError = Loc.GetString("rmc-ert-error-console-random-only");
             request.LastWarning = string.Empty;
-            DirtyState();
+            DirtyState(request);
             return false;
         }
 
@@ -411,7 +413,7 @@ public sealed class RMCERTSystem : EntitySystem
                 GetAdminActorText(admin, adminOverrideName),
                 call,
                 $"warning=\"{FormatLogValue(error)}\"");
-            DirtyState();
+            DirtyState(request);
             return false;
         }
 
@@ -437,7 +439,7 @@ public sealed class RMCERTSystem : EntitySystem
             call,
             $"selection={(randomSelection ? "random" : "specific")}, dispatchDelay={call.LaunchDelay:0}s");
 
-        DirtyState();
+        DirtyState(request);
         Timer.Spawn(TimeSpan.FromSeconds(call.LaunchDelay), () => Dispatch(request.Id));
         return true;
     }
@@ -475,7 +477,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
             Announce(call.Announcements.Denied, call.Announcements.DeniedSound, request, call);
 
-        DirtyState();
+        DirtyState(request);
         return true;
     }
 
@@ -504,7 +506,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
             Announce(call.Announcements.Cancelled, call.Announcements.CancelledSound, request, call);
 
-        DirtyState();
+        DirtyState(request);
         return true;
     }
 
@@ -538,7 +540,7 @@ public sealed class RMCERTSystem : EntitySystem
             ("id", request.Id),
             ("team", selected)));
         AddERTRequestLog(LogImpact.Medium, "completed", request, adminText);
-        DirtyState();
+        DirtyState(request);
         return true;
     }
 
@@ -598,7 +600,7 @@ public sealed class RMCERTSystem : EntitySystem
                 if (request.ShuttleHomeIsFallback)
                 {
                     CleanupRequestContent(request, Loc.GetString("rmc-ert-cleanup-reason-fallback-return"));
-                    DirtyState();
+                    DirtyState(request);
                     return;
                 }
 
@@ -626,7 +628,7 @@ public sealed class RMCERTSystem : EntitySystem
                 UpdateSourceVisual(request, false);
                 _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-arrived-missing-call", ("id", request.Id)));
                 AddERTRequestLog(LogImpact.Medium, "arrived with missing call prototype", request, "system");
-                DirtyState();
+                DirtyState(request);
             }
 
             return;
@@ -787,7 +789,7 @@ public sealed class RMCERTSystem : EntitySystem
             UpdateSourceVisual(request, true);
 
         _popup.PopupEntity(GetRequestSuccessText(sourceEntity, source), sourceEntity, requester, PopupType.Medium);
-        DirtyState();
+        DirtyState(request);
     }
 
     private void OnAdminPermsChanged(AdminPermsChangedEventArgs args)
@@ -865,7 +867,7 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         request.State = RMCERTRequestState.Spawning;
-        DirtyState();
+        DirtyState(request);
 
         // Build the shuttle and the final roster up front so ghost-role raffles reflect the team that will actually deploy.
         if (!TryPrepareRequestForDispatch(request, call, false, out var error))
@@ -917,7 +919,7 @@ public sealed class RMCERTSystem : EntitySystem
             beaconComp.Spent = true;
         }
 
-        DirtyState();
+        DirtyState(request);
 
         // Auto-launch retries are polled from Update instead of chained through Timer.Spawn.
         // TimerManager processes newly-added timers in the same update pass, so adding a short
@@ -1937,7 +1939,7 @@ public sealed class RMCERTSystem : EntitySystem
                     call,
                     $"error=\"{FormatLogValue(request.LastError)}\"");
             }
-            DirtyState();
+            DirtyState(request);
             return false;
         }
 
@@ -2023,7 +2025,7 @@ public sealed class RMCERTSystem : EntitySystem
             launcher,
             call,
             $"destination={FormatEntity(destination)}, accepted={acceptedCount}, required={call.Requirements.MinRequiredSlots}");
-        DirtyState();
+        DirtyState(request);
         return true;
     }
 
@@ -2238,7 +2240,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
             Announce(call.Announcements.Failed, call.Announcements.FailedSound, request, call);
 
-        DirtyState();
+        DirtyState(request);
     }
 
     private void Announce(LocId? message, SoundSpecifier? sound, RMCERTRequest request, RMCERTCallPrototype call)
@@ -2459,7 +2461,7 @@ public sealed class RMCERTSystem : EntitySystem
             "system",
             call,
             string.IsNullOrWhiteSpace(detail) ? null : $"detail=\"{FormatLogValue(detail)}\"");
-        DirtyState();
+        DirtyState(request);
     }
 
     private void UpdateSourceVisual(RMCERTRequest request, bool active)
@@ -2714,6 +2716,12 @@ public sealed class RMCERTSystem : EntitySystem
     {
         var ev = new RMCERTStateChangedEvent();
         RaiseLocalEvent(ref ev);
+    }
+
+    private void DirtyState(RMCERTRequest request)
+    {
+        DirtyState();
+        _discordWebhook.SyncRequest(request);
     }
 
     private static bool MatchesAny(IReadOnlyCollection<string> left, IReadOnlyCollection<string> right)
