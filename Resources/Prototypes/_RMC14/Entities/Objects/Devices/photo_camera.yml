@@ -14,6 +14,7 @@
     quickEquip: false
     slots:
     - Belt
+  - type: RMCPhotoCamera
 
 - type: entity
   parent: BaseItem
@@ -38,3 +39,10 @@
     state: photo_item
   - type: Item
     size: Tiny
+  - type: RMCPhoto
+  - type: ActivatableUI
+    key: enum.RMCPhotoUi.Key
+  - type: UserInterface
+    interfaces:
+      enum.RMCPhotoUi.Key:
+        type: PhotoBui
