@@ -60,7 +60,7 @@
     reregister: false
     job: RMCCBRNRifleman
     raffle:
-      settings: default
+      settings: short
   - type: GhostRoleApplySpecial
     squad: SquadCBRN
 

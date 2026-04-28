@@ -2001,7 +2001,11 @@ public sealed class RMCERTSystem : EntitySystem
             return false;
         }
 
-        if (!_dropship.FlyTo(computer, destination, null, startupTime: 10f))
+        var shuttleTravelTime = call.ShuttleTravelTime is { } travelTime
+            ? (float) travelTime.TotalSeconds
+            : (float?) null;
+
+        if (!_dropship.FlyTo(computer, destination, null, startupTime: 10f, hyperspaceTime: shuttleTravelTime))
         {
             FailRequest(request, Loc.GetString("rmc-ert-error-launch-failed"));
             return false;

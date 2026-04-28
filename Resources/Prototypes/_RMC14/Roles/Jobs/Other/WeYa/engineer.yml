@@ -76,7 +76,7 @@
     reregister: false
     job: RMCPMCEngineer
     raffle:
-      settings: default
+      settings: short
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobCombatTech

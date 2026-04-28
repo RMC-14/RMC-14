@@ -64,7 +64,7 @@
     reregister: false
     job: CMRoyalMarinesCommando
     raffle:
-      settings: default
+      settings: short
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobRifleman

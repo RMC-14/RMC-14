@@ -51,7 +51,7 @@
     reregister: false
     job: RMCCLFMedic
     raffle:
-      settings: default
+      settings: short
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobHospitalCorpsman

@@ -65,7 +65,7 @@
     reregister: false
     job: CMBureauDeputy
     raffle:
-      settings: default
+      settings: short
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobMilitaryPolice

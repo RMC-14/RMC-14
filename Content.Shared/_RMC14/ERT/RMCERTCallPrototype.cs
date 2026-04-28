@@ -74,6 +74,9 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     public float LaunchDelay = 10f;
 
     [DataField]
+    public TimeSpan? ShuttleTravelTime;
+
+    [DataField]
     public List<string> LandingTags = [];
 
     [DataField]

@@ -23,6 +23,7 @@
   shuttleSpawner: RMCSpawnerERTShuttle
   shuttleSpawnMarker: RMCERTShuttleStartPadUNMC
   autoLaunch: true
+  shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: leader
@@ -75,7 +76,7 @@
     denied: rmc-ert-announcement-cbrn-denied
   requirements:
     cooldown: 10m
-    recruitmentDuration: 60s
+    recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
 
@@ -95,6 +96,7 @@
   shuttleSpawner: RMCSpawnerERTShuttleWeYa
   shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
   autoLaunch: true
+  shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: leader
@@ -146,7 +148,7 @@
     denied: rmc-ert-announcement-pmc-denied
   requirements:
     cooldown: 10m
-    recruitmentDuration: 60s
+    recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
 
@@ -166,6 +168,7 @@
   shuttleSpawner: RMCSpawnerERTShuttleWeYa
   shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
   autoLaunch: true
+  shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: lead
@@ -199,7 +202,7 @@
     denied: rmc-ert-announcement-bodyguard-denied
   requirements:
     cooldown: 10m
-    recruitmentDuration: 60s
+    recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 1
 
@@ -219,6 +222,7 @@
   shuttleSpawner: RMCSpawnerERTShuttleWeYa
   shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
   autoLaunch: true
+  shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: supervisor
@@ -252,7 +256,7 @@
     denied: rmc-ert-announcement-lawyers-denied
   requirements:
     cooldown: 10m
-    recruitmentDuration: 60s
+    recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 1
 
@@ -271,6 +275,7 @@
   shuttleSpawner: RMCSpawnerERTShuttleCMB
   shuttleSpawnMarker: RMCERTShuttleStartPadLaw
   autoLaunch: true
+  shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: marshal
@@ -303,7 +308,7 @@
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
   requirements:
     cooldown: 10m
-    recruitmentDuration: 60s
+    recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 2
 
@@ -323,6 +328,7 @@
   shuttleSpawner: RMCSpawnerERTShuttleSPP
   shuttleSpawnMarker: RMCERTShuttleStartPadSPP
   autoLaunch: true
+  shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: leader
@@ -363,7 +369,7 @@
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
   requirements:
     cooldown: 10m
-    recruitmentDuration: 60s
+    recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
 
@@ -383,6 +389,7 @@
   shuttleSpawner: RMCSpawnerERTShuttleTSE
   shuttleSpawnMarker: RMCERTShuttleStartPadTSE
   autoLaunch: true
+  shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: teamlead
@@ -423,7 +430,7 @@
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
   requirements:
     cooldown: 10m
-    recruitmentDuration: 60s
+    recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
 
@@ -442,6 +449,7 @@
   shuttleSpawner: RMCSpawnerERTShuttle
   shuttleSpawnMarker: RMCERTShuttleStartPadLaw
   autoLaunch: true
+  shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: leader
@@ -474,7 +482,7 @@
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
   requirements:
     cooldown: 10m
-    recruitmentDuration: 60s
+    recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 2
 
@@ -494,6 +502,7 @@
   shuttleSpawner: RMCSpawnerERTShuttle
   shuttleSpawnMarker: RMCERTShuttleStartPadHostile
   autoLaunch: false
+  shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: leader
@@ -523,7 +532,7 @@
     recruiting: rmc-ert-announcement-recruiting
   requirements:
     cooldown: 10m
-    recruitmentDuration: 60s
+    recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
 
@@ -542,6 +551,7 @@
   shuttleSpawner: RMCSpawnerERTShuttlePizza
   shuttleSpawnMarker: RMCERTShuttleStartPadEvent
   autoLaunch: true
+  shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: deliverer
@@ -568,6 +578,6 @@
     arrivalSound: /Audio/_RMC14/AI/commandreport.ogg
   requirements:
     cooldown: 10m
-    recruitmentDuration: 60s
+    recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 1
