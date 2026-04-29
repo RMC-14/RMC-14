@@ -1,6 +1,7 @@
 using Content.Shared.Atmos;
 using Content.Shared.Camera;
 using Content.Shared.Cuffs;
+using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Projectiles;
@@ -43,6 +44,9 @@ public abstract partial class SharedHandsSystem
 
         foreach (var held in EnumerateHeld(entity.AsNullable()))
         {
+            if (HasComp<GhostCosmeticComponent>(held))
+                continue;
+
             RaiseLocalEvent(held, ref ev);
         }
 

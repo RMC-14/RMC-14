@@ -119,10 +119,13 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    color: "#fff8"
+    color: "#ffffffff"
     noRot: true
     overrideContainerOcclusion: true
     drawdepth: Ghosts
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 12
+    baseWalkSpeed: 8
   - type: ContentEye
     maxZoom: 1.44,1.44
   - type: Eye

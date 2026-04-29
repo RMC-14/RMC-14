@@ -3,6 +3,7 @@ using Content.Client.Hands.Systems;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Hands.Controls;
 using Content.Client.UserInterface.Systems.Hotbar.Widgets;
+using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
 using Content.Shared.Inventory.VirtualItem;
@@ -133,6 +134,16 @@ public sealed class HandsUIController : UIController, IOnStateEntered<GameplaySt
     private void LoadPlayerHands(Entity<HandsComponent> handsComp)
     {
         DebugTools.Assert(_playerHandsComponent == null);
+
+        if (_entities.HasComponent<GhostComponent>(handsComp.Owner))
+        {
+            if (HandsGui != null)
+                HandsGui.Visible = false;
+
+            _playerHandsComponent = handsComp.Comp;
+            return;
+        }
+
         if (HandsGui != null)
             HandsGui.Visible = true;
 

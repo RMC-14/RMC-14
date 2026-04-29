@@ -12,6 +12,7 @@ using Content.Client.UserInterface.Systems.Inventory.Controls;
 using Content.Client.UserInterface.Systems.Inventory.Widgets;
 using Content.Client.UserInterface.Systems.Inventory.Windows;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Ghost;
 using Content.Shared.Input;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Storage;
@@ -141,6 +142,15 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
             return;
         }
 
+        if (_playerUid is { } uid && _entities.HasComponent<GhostComponent>(uid))
+        {
+            _inventoryHotbar?.ClearButtons();
+            if (_inventoryButton != null)
+                _inventoryButton.Visible = false;
+
+            return;
+        }
+
         foreach (var (_, data) in clientInv.SlotData)
         {
             if (!data.ShowInWindow || !_slotGroups.TryGetValue(data.SlotGroup, out var container))
@@ -243,6 +253,9 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
 
     public void ToggleInventoryBar()
     {
+        if (_playerUid is { } uid && _entities.HasComponent<GhostComponent>(uid))
+            return;
+
         if (_inventoryHotbar == null)
         {
             Log.Warning("Tried to toggle inventory bar when none are assigned");
@@ -398,6 +411,13 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
         UnloadSlots();
         _playerUid = clientUid;
         _playerInventory = clientInv;
+
+        if (_entities.HasComponent<GhostComponent>(clientUid))
+        {
+            UpdateInventoryHotbar(_playerInventory);
+            return;
+        }
+
         foreach (var slotData in clientInv.SlotData.Values)
         {
             AddSlot(slotData);

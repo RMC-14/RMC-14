@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
+using Content.Shared.Clothing;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Database;
@@ -27,6 +28,8 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
+using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -37,6 +40,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
+using Content.Shared.Strip.Components;
 using Content.Shared.Tag;
 using Content.Shared.Warps;
 using Robust.Server.GameObjects;
@@ -118,8 +122,11 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, BooActionEvent>(OnActionPerform);
             SubscribeLocalEvent<GhostComponent, ToggleGhostHearingActionEvent>(OnGhostHearingAction);
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
+            SubscribeLocalEvent<GhostComponent, RefreshMovementSpeedModifiersEvent>(OnGhostRefreshMovementSpeed);
             SubscribeLocalEvent<GhostDeathAppearanceComponent, EntRemovedFromContainerMessage>(OnDeathAppearanceRemoved);
             SubscribeLocalEvent<GhostDeathAppearanceComponent, EntityTerminatingEvent>(OnDeathAppearanceTerminating);
+            SubscribeLocalEvent<GhostDeathAppearanceComponent, IsUnequippingTargetAttemptEvent>(OnGhostAppearanceUnequipAttempt);
+            SubscribeLocalEvent<GhostCosmeticItemComponent, BeingUnequippedAttemptEvent>(OnGhostCosmeticUnequipAttempt);
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
@@ -414,6 +421,24 @@ namespace Content.Server.Ghost
             args.Cancelled = true;
         }
 
+        private void OnGhostRefreshMovementSpeed(Entity<GhostComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+        {
+            if (args.WalkSpeedModifier != 0f && args.SprintSpeedModifier != 0f)
+                args.ModifySpeed(1f / args.WalkSpeedModifier, 1f / args.SprintSpeedModifier);
+        }
+
+        private void OnGhostAppearanceUnequipAttempt(Entity<GhostDeathAppearanceComponent> ent, ref IsUnequippingTargetAttemptEvent args)
+        {
+            args.Cancel();
+            args.Reason ??= "inventory-component-can-unequip-cannot";
+        }
+
+        private void OnGhostCosmeticUnequipAttempt(Entity<GhostCosmeticItemComponent> ent, ref BeingUnequippedAttemptEvent args)
+        {
+            args.Cancel();
+            args.Reason ??= "inventory-component-can-unequip-cannot";
+        }
+
         private void OnDeathAppearanceRemoved(Entity<GhostDeathAppearanceComponent> ent, ref EntRemovedFromContainerMessage args)
         {
             if (HasComp<GhostCosmeticItemComponent>(args.Entity))
@@ -542,6 +567,7 @@ namespace Content.Server.Ghost
             var ghost = SpawnAtPosition(ghostPrototype, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
             var hasAppearanceCopyTarget = HasComp<GhostDeathAppearanceComponent>(ghost) || HasComp<GhostXenoAppearanceComponent>(ghost);
+            RemComp<StrippableComponent>(ghost);
 
             if (appearanceSource is { } source &&
                 hasAppearanceCopyTarget)
@@ -658,7 +684,7 @@ namespace Content.Server.Ghost
                 while (slotEnumerator.NextItem(out var item, out var slot))
                 {
                     attemptedInventory++;
-                    var cosmetic = CreateGhostCosmeticItem(item, Transform(ghost).Coordinates);
+                    var cosmetic = CreateGhostCosmeticItem(item);
                     if (cosmetic == null)
                         continue;
 
@@ -678,7 +704,7 @@ namespace Content.Server.Ghost
                         continue;
 
                     attemptedHands++;
-                    var cosmetic = CreateGhostCosmeticItem(held.Value, Transform(ghost).Coordinates);
+                    var cosmetic = CreateGhostCosmeticItem(held.Value);
                     if (cosmetic == null)
                         continue;
 
@@ -713,7 +739,7 @@ namespace Content.Server.Ghost
             return true;
         }
 
-        private EntityUid? CreateGhostCosmeticItem(EntityUid original, EntityCoordinates coordinates)
+        private EntityUid? CreateGhostCosmeticItem(EntityUid original)
         {
             var prototype = MetaData(original).EntityPrototype?.ID;
             if (prototype == null)
@@ -722,8 +748,11 @@ namespace Content.Server.Ghost
                 return null;
             }
 
-            var cosmetic = SpawnAtPosition(prototype, coordinates);
+            var cosmetic = Spawn(prototype, MapCoordinates.Nullspace);
             AddComp<GhostCosmeticItemComponent>(cosmetic);
+            AddComp<GhostCosmeticComponent>(cosmetic);
+            RemCompDeferred<ClothingSpeedModifierComponent>(cosmetic);
+            RemCompDeferred<HeldSpeedModifierComponent>(cosmetic);
 
             var cloneEvent = new CloningItemEvent(cosmetic);
             RaiseLocalEvent(original, ref cloneEvent);
