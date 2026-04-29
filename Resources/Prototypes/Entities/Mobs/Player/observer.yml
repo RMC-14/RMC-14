@@ -277,6 +277,28 @@
   id: MobVulpkaninObserver
 
 - type: entity
+  parent: MobObserver
+  id: MobXenoObserver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
+    color: "#fff8"
+    noRot: true
+    overrideContainerOcclusion: true
+    drawdepth: Ghosts
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: dead
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: Appearance
+  - type: GhostXenoAppearance
+    sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
+
+- type: entity
   parent: BaseMentalAction
   id: ActionGhostBoo
   name: Boo!

@@ -19,6 +19,8 @@
     name: cm-job-name-xeno-burrower
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Burrower/burrower.rsi
+  - type: GhostXenoAppearanceSource
+    sprite: _RMC14/Mobs/Xenonids/Burrower/burrower.rsi
   - type: MobState
     allowedStates:
     - Alive

@@ -10,6 +10,8 @@ using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
 using Content.Shared.Cloning.Events;
 using Content.Shared._RMC14.Ghost;
+using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -77,6 +79,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
         [Dependency] private readonly InventorySystem _inventory = default!;
         [Dependency] private readonly SharedHandsSystem _hands = default!;
+        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
@@ -538,17 +541,18 @@ namespace Content.Server.Ghost
             Log.Info($"Ghost debug: spawning ghost prototype \"{ghostPrototype}\" for mind \"{ToPrettyString(mind)}\" at {spawnPosition.Value}");
             var ghost = SpawnAtPosition(ghostPrototype, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
+            var hasAppearanceCopyTarget = HasComp<GhostDeathAppearanceComponent>(ghost) || HasComp<GhostXenoAppearanceComponent>(ghost);
 
             if (appearanceSource is { } source &&
-                HasComp<GhostDeathAppearanceComponent>(ghost))
+                hasAppearanceCopyTarget)
             {
-                Log.Info($"Ghost debug: ghost \"{ToPrettyString(ghost)}\" has death appearance component, copying from source \"{ToPrettyString(source)}\"");
+                Log.Info($"Ghost debug: ghost \"{ToPrettyString(ghost)}\" has appearance copy component, copying from source \"{ToPrettyString(source)}\"");
                 CopyDeathAppearance(source, ghost);
             }
             else
             {
                 Log.Info($"Ghost debug: skipping appearance copy for ghost \"{ToPrettyString(ghost)}\". " +
-                         $"appearanceSourcePresent={appearanceSource != null}, ghostHasDeathAppearance={HasComp<GhostDeathAppearanceComponent>(ghost)}");
+                         $"appearanceSourcePresent={appearanceSource != null}, hasAppearanceCopyTarget={hasAppearanceCopyTarget}");
             }
 
             // Try setting the ghost entity name to either the character name or the player name.
@@ -586,6 +590,19 @@ namespace Content.Server.Ghost
                 return null;
             }
 
+            if (HasComp<GhostXenoAppearanceSourceComponent>(appearanceSource.Value))
+            {
+                const string xenoObserverPrototype = "MobXenoObserver";
+                if (!_prototypeManager.HasIndex<EntityPrototype>(xenoObserverPrototype))
+                {
+                    Log.Info($"Ghost debug: xeno observer prototype \"{xenoObserverPrototype}\" does not exist for source \"{ToPrettyString(appearanceSource.Value)}\".");
+                    return null;
+                }
+
+                Log.Info($"Ghost debug: source \"{ToPrettyString(appearanceSource.Value)}\" resolved to xeno observer prototype \"{xenoObserverPrototype}\".");
+                return xenoObserverPrototype;
+            }
+
             if (!TryComp<HumanoidAppearanceComponent>(appearanceSource.Value, out var humanoid))
             {
                 Log.Info($"Ghost debug: source \"{ToPrettyString(appearanceSource.Value)}\" has no humanoid appearance, using default observer prototype.");
@@ -618,6 +635,9 @@ namespace Content.Server.Ghost
 
         private void CopyDeathAppearance(EntityUid source, EntityUid ghost)
         {
+            if (TryCopyXenoDeathAppearance(source, ghost))
+                return;
+
             var copiedHumanoid = false;
             var attemptedInventory = 0;
             var equippedInventory = 0;
@@ -671,6 +691,26 @@ namespace Content.Server.Ghost
 
             Log.Info($"Ghost debug: copied death appearance from \"{ToPrettyString(source)}\" to \"{ToPrettyString(ghost)}\". " +
                      $"copiedHumanoid={copiedHumanoid}, inventory={equippedInventory}/{attemptedInventory}, hands={equippedHands}/{attemptedHands}");
+        }
+
+        private bool TryCopyXenoDeathAppearance(EntityUid source, EntityUid ghost)
+        {
+            if (!TryComp<GhostXenoAppearanceSourceComponent>(source, out var sourceAppearance) ||
+                !TryComp<GhostXenoAppearanceComponent>(ghost, out var ghostAppearance))
+            {
+                return false;
+            }
+
+            ghostAppearance.Sprite = sourceAppearance.Sprite;
+            ghostAppearance.OvipositorSprite = sourceAppearance.OvipositorSprite;
+            ghostAppearance.OvipositorState = CompOrNull<XenoOvipositorCapableComponent>(source)?.AttachedState;
+            ghostAppearance.SpentParasite = HasComp<ParasiteSpentComponent>(source);
+            Dirty(ghost, ghostAppearance);
+
+            Log.Info($"Ghost debug: copied xeno death appearance from \"{ToPrettyString(source)}\" to \"{ToPrettyString(ghost)}\". " +
+                     $"sprite={ghostAppearance.Sprite}, ovipositorSprite={ghostAppearance.OvipositorSprite?.ToString() ?? "<null>"}, " +
+                     $"ovipositorState={ghostAppearance.OvipositorState ?? "<null>"}, spentParasite={ghostAppearance.SpentParasite}");
+            return true;
         }
 
         private EntityUid? CreateGhostCosmeticItem(EntityUid original, EntityCoordinates coordinates)

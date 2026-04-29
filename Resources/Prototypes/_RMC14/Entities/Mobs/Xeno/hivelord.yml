@@ -109,6 +109,8 @@
     - RMCGuideRoleHivelord
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Hivelord/hivelord.rsi
+  - type: GhostXenoAppearanceSource
+    sprite: _RMC14/Mobs/Xenonids/Hivelord/hivelord.rsi
   - type: Xeno
     role: CMXenoHivelord
     actionIds:
@@ -163,6 +165,8 @@
   components:
   - type: CanBuildThickFromConstructNode
   - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Hivelord/resin_whisperer_hivelord.rsi
+  - type: GhostXenoAppearanceSource
     sprite: _RMC14/Mobs/Xenonids/Hivelord/resin_whisperer_hivelord.rsi
   - type: Xeno
     role: CMXenoHivelord
@@ -221,6 +225,8 @@
     guides:
     - RMCGuideRoleDesigner
   - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Hivelord/designer_hivelord.rsi
+  - type: GhostXenoAppearanceSource
     sprite: _RMC14/Mobs/Xenonids/Hivelord/designer_hivelord.rsi
   - type: Xeno
     role: CMXenoHivelord

@@ -36,4 +36,12 @@ public sealed class RMCXenoDamageVisualsSystem : EntitySystem
             level = ContentHelpers.RoundToEqualLevels(damage, max, ent.Comp.States + 1);
         _appearance.SetData(ent, RMCDamageVisuals.State, level);
     }
+
+    public void CopyTo(Entity<RMCXenoDamageVisualsComponent> source, Entity<RMCXenoDamageVisualsComponent?> dest)
+    {
+        dest.Comp ??= EnsureComp<RMCXenoDamageVisualsComponent>(dest);
+        dest.Comp.Prefix = source.Comp.Prefix;
+        dest.Comp.States = source.Comp.States;
+        Dirty(dest, dest.Comp);
+    }
 }
