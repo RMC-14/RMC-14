@@ -35,8 +35,8 @@
         points: 13
       - id: RMCBoxClaymoreMineFilled
         points: 20
-    #- id: CMM40MFHSMetalFoamGrenade
-    #  points: 5
+      - id: RMCGrenadeMFHS
+        points: 5
     # -id: RMCElectroshockGrenadex3
     #  points: 16
     - name: Primary Ammunition
