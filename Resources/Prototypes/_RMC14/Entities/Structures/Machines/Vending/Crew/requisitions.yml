@@ -352,6 +352,10 @@
         box: RMCBatonSlugHIRR
         boxAmount: 3
         boxSlots: 3
+      - id: RMCPacketGrenadeMetalFoamFilled
+        name: M40 Metal Foam grenade packet
+        boxAmount: 3
+        boxSlots: 3
 
 #AMMUNITION VENDOR
 - type: entity
