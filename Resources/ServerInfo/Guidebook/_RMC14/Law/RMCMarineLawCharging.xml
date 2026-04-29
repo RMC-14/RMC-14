@@ -5,15 +5,17 @@
 
   ## General Information
 
-  - Brig timers must not exceed 30 minutes unless in the case of a [bold]Capital Crime[/bold], or if extended by crimes performed while jailed.
+  - Brig timers must not exceed 30 minutes, but can be extended by crimes performed while jailed past this limit.
   - Ensure to follow prisoner rights and the right to appeal.
   - In the case of Prisoners of War, be sure to read the relevant section of [textlink="Third-Parties SOP." link="RMCMarineSOPNONModThirdparty"]
-  - If a prisoner has been SSD for over 5 minutes you may place them in hypersleep, but they must serve the rest of their time if they return.
+  - If a prisoner has been SSD for over 5 minutes they may be placed in hypersleep, but they must serve the rest of their time if they return.
 
-  ### Charging must be carried out in this order:
+  ### Who May Charge
+
+  This order of priority should be used to select a person to set charges:
 
   - [bold]Military Warden[/bold].
-  - Chief MP.
+  - [color=#8B0000][bold]Chief MP[/bold][/color].
   - An uninvolved [color=#ff000d][bold]MP[/bold][/color], in order of rank.
   - Arresting [color=#ff000d][bold]MP[/bold][/color] (only as a last resort).
 
