@@ -19,6 +19,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.ERT;
@@ -45,6 +46,8 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -70,6 +73,7 @@ public sealed class RMCERTSystem : EntitySystem
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly RMCERTDiscordWebhookSystem _discordWebhook = default!;
     [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -90,6 +94,7 @@ public sealed class RMCERTSystem : EntitySystem
     private readonly Dictionary<EntityUid, TimeSpan> _sourceCooldowns = new();
     private readonly Dictionary<EntityUid, EntityUid> _pendingHandheldDialogs = new();
     private readonly HashSet<ICommonSession> _queuedPendingAdminNotifications = [];
+    private readonly HashSet<EntityUid> _shuttleSpawnObstacles = [];
 
     private MapId? _ertMap;
     private int _loadedShuttles;
@@ -1083,12 +1088,82 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         shuttle = result.Value;
+        if (TryFindShuttleSpawnObstacle(shuttle.Value, marker, markerXform.MapUid.Value, coordinates.Position, rotation, out var obstacle))
+        {
+            Log.Warning($"ERT request {request.Id} could not load shuttle {ToPrettyString(shuttle.Value)} for {call.ID} " +
+                        $"at placed marker {ToPrettyString(marker)} because it would intersect {ToPrettyString(obstacle)}; " +
+                        "falling back to hidden ERT map spawn.");
+
+            QueueDel(shuttle.Value);
+            shuttle = null;
+            return false;
+        }
+
         var shuttleXform = Transform(shuttle.Value);
         _transform.SetCoordinates(shuttle.Value, shuttleXform, new EntityCoordinates(markerXform.MapUid.Value, coordinates.Position), rotation);
         request.ShuttleSpawnMarker = marker;
         Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle.Value)} for {call.ID} " +
                  $"at placed marker {ToPrettyString(marker)}.");
         return true;
+    }
+
+    private bool TryFindShuttleSpawnObstacle(
+        EntityUid shuttle,
+        EntityUid marker,
+        EntityUid targetMap,
+        Vector2 position,
+        Angle rotation,
+        out EntityUid obstacle)
+    {
+        obstacle = default;
+
+        if (!TryComp(shuttle, out FixturesComponent? shuttleFixtures))
+            return false;
+
+        var projectedTransform = new Transform(position, rotation);
+        foreach (var fixture in shuttleFixtures.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            _shuttleSpawnObstacles.Clear();
+            _entityLookup.GetLocalEntitiesIntersecting(
+                targetMap,
+                fixture.Shape,
+                projectedTransform,
+                _shuttleSpawnObstacles,
+                flags: LookupFlags.Uncontained);
+
+            foreach (var ent in _shuttleSpawnObstacles)
+            {
+                if (ent == shuttle ||
+                    ent == marker ||
+                    HasComp<AreaComponent>(ent) ||
+                    HasComp<FTLSmashImmuneComponent>(ent))
+                {
+                    continue;
+                }
+
+                if (!TryComp(ent, out TransformComponent? entXform) ||
+                    entXform.GridUid == shuttle ||
+                    !entXform.Anchored)
+                {
+                    continue;
+                }
+
+                if (!TryComp(ent, out PhysicsComponent? physics) ||
+                    !physics.CanCollide ||
+                    !physics.Hard)
+                {
+                    continue;
+                }
+
+                obstacle = ent;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private bool TryFindShuttleSpawnMarker(
