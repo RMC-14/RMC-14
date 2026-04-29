@@ -169,22 +169,27 @@
 
 - type: entity
   parent: RMCDoubleDoorPersonalSolid
-  id: RMCShuttleInternalDoubleDoor
-  suffix: Shuttle, Internal
+  id: RMCShuttleMobileDockDoubleDoorBase
+  abstract: true
   components:
-  - type: FTLBeacon
-  - type: DropshipDestination
-    dockBounds: "-4,-8.5,4,6.5"
-    reserved: true
-    landingClasses: [ internal ]
-    landingTags: [ mainship, ert, internal ]
-  - type: FTLSmashImmune
-  - type: NoFTL
   - type: Docking
   - type: DockingSignalControl
-  - type: Tag
-    tags:
-    - RMCShuttleAirlockInternal
+  - type: RMCShuttleMobileDock
+
+- type: entity
+  parent: RMCShuttleMobileDockDoubleDoorBase
+  id: RMCShuttleInternalDoubleDoor
+  suffix: Shuttle, Internal, Mobile Dock
+
+- type: entity
+  parent: RMCShuttleMobileDockDoubleDoorBase
+  id: RMCShuttleExternalSideMobileDockDoubleDoor
+  suffix: Shuttle, External Side, Mobile Dock
+
+- type: entity
+  parent: RMCShuttleMobileDockDoubleDoorBase
+  id: RMCShuttleExternalHangarMobileDockDoubleDoor
+  suffix: Shuttle, External Hangar, Mobile Dock
 
 - type: entity
   parent: RMCDoubleDoorBase
