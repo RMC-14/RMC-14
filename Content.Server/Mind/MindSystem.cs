@@ -210,8 +210,6 @@ public sealed class MindSystem : SharedMindSystem
                 ? _gameTicker.GetObserverSpawnPoint()
                 : Transform(appearanceSource!.Value).Coordinates;
 
-            Log.Info($"Ghost debug: MindSystem.TransferTo createGhost path for mind \"{ToPrettyString(mindId)}\", " +
-                     $"appearanceSource={ToPrettyString(appearanceSource)}, position={position}");
             _ghosts.SpawnGhost((mindId, mind), position, false, appearanceSource);
             return;
         }

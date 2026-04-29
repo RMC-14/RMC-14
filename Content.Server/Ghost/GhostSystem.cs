@@ -35,6 +35,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NameModifier.EntitySystems;
@@ -68,6 +69,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly EntityLookupSystem _lookup = default!;
         [Dependency] private readonly MindSystem _minds = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
+        [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
         [Dependency] private readonly SharedPhysicsSystem _physics = default!;
         [Dependency] private readonly ISharedPlayerManager _player = default!;
         [Dependency] private readonly TransformSystem _transformSystem = default!;
@@ -542,10 +544,6 @@ namespace Content.Server.Ghost
             if (!Resolve(mind, ref mind.Comp))
                 return null;
 
-            Log.Info($"Ghost debug: SpawnGhost start for mind \"{ToPrettyString(mind)}\", " +
-                     $"appearanceSource={ToPrettyString(appearanceSource)}, " +
-                     $"requestedPosition={spawnPosition?.ToString() ?? "<null>"}, canReturn={canReturn}");
-
             // Test if the map or grid is being deleted
             if (!IsValidSpawnPosition(spawnPosition))
                 spawnPosition = null;
@@ -563,22 +561,16 @@ namespace Content.Server.Ghost
             }
 
             var ghostPrototype = TryGetDeathAppearanceObserverPrototype(appearanceSource) ?? GameTicker.ObserverPrototypeName;
-            Log.Info($"Ghost debug: spawning ghost prototype \"{ghostPrototype}\" for mind \"{ToPrettyString(mind)}\" at {spawnPosition.Value}");
             var ghost = SpawnAtPosition(ghostPrototype, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
             var hasAppearanceCopyTarget = HasComp<GhostDeathAppearanceComponent>(ghost) || HasComp<GhostXenoAppearanceComponent>(ghost);
             RemComp<StrippableComponent>(ghost);
+            NormalizeGhostMovementSpeed(ghost);
 
             if (appearanceSource is { } source &&
                 hasAppearanceCopyTarget)
             {
-                Log.Info($"Ghost debug: ghost \"{ToPrettyString(ghost)}\" has appearance copy component, copying from source \"{ToPrettyString(source)}\"");
                 CopyDeathAppearance(source, ghost);
-            }
-            else
-            {
-                Log.Info($"Ghost debug: skipping appearance copy for ghost \"{ToPrettyString(ghost)}\". " +
-                         $"appearanceSourcePresent={appearanceSource != null}, hasAppearanceCopyTarget={hasAppearanceCopyTarget}");
             }
 
             // Try setting the ghost entity name to either the character name or the player name.
@@ -608,54 +600,46 @@ namespace Content.Server.Ghost
             return ghost;
         }
 
+        private void NormalizeGhostMovementSpeed(EntityUid ghost)
+        {
+            if (!TryComp<MovementSpeedModifierComponent>(ghost, out var movement))
+                return;
+
+            const float ghostWalkSpeed = 8f;
+            const float ghostSprintSpeed = 12f;
+            _movementSpeed.ChangeBaseSpeed(ghost, ghostWalkSpeed, ghostSprintSpeed, movement.BaseAcceleration, movement);
+            _movementSpeed.RefreshMovementSpeedModifiers(ghost, movement);
+
+        }
+
         private EntProtoId? TryGetDeathAppearanceObserverPrototype(EntityUid? appearanceSource)
         {
             if (appearanceSource == null)
-            {
-                Log.Info("Ghost debug: no appearance source, using default observer prototype.");
                 return null;
-            }
 
             if (HasComp<GhostXenoAppearanceSourceComponent>(appearanceSource.Value))
             {
                 const string xenoObserverPrototype = "MobXenoObserver";
                 if (!_prototypeManager.HasIndex<EntityPrototype>(xenoObserverPrototype))
-                {
-                    Log.Info($"Ghost debug: xeno observer prototype \"{xenoObserverPrototype}\" does not exist for source \"{ToPrettyString(appearanceSource.Value)}\".");
                     return null;
-                }
 
-                Log.Info($"Ghost debug: source \"{ToPrettyString(appearanceSource.Value)}\" resolved to xeno observer prototype \"{xenoObserverPrototype}\".");
                 return xenoObserverPrototype;
             }
 
             if (!TryComp<HumanoidAppearanceComponent>(appearanceSource.Value, out var humanoid))
-            {
-                Log.Info($"Ghost debug: source \"{ToPrettyString(appearanceSource.Value)}\" has no humanoid appearance, using default observer prototype.");
                 return null;
-            }
 
             if (!_prototypeManager.TryIndex<SpeciesPrototype>(humanoid.Species, out var species))
-            {
-                Log.Info($"Ghost debug: source \"{ToPrettyString(appearanceSource.Value)}\" species \"{humanoid.Species}\" is missing, using default observer prototype.");
                 return null;
-            }
 
             var dollPrototype = species.DollPrototype.ToString();
             if (!dollPrototype.EndsWith("Dummy"))
-            {
-                Log.Info($"Ghost debug: species \"{humanoid.Species}\" doll prototype \"{dollPrototype}\" does not end with Dummy, using default observer prototype.");
                 return null;
-            }
 
             var observerPrototype = dollPrototype[..^"Dummy".Length] + "Observer";
             if (!_prototypeManager.HasIndex<EntityPrototype>(observerPrototype))
-            {
-                Log.Info($"Ghost debug: observer prototype \"{observerPrototype}\" does not exist for source \"{ToPrettyString(appearanceSource.Value)}\".");
                 return null;
-            }
 
-            Log.Info($"Ghost debug: source \"{ToPrettyString(appearanceSource.Value)}\" species \"{humanoid.Species}\" resolved to observer prototype \"{observerPrototype}\".");
             return new EntProtoId(observerPrototype);
         }
 
@@ -715,8 +699,6 @@ namespace Content.Server.Ghost
                 }
             }
 
-            Log.Info($"Ghost debug: copied death appearance from \"{ToPrettyString(source)}\" to \"{ToPrettyString(ghost)}\". " +
-                     $"copiedHumanoid={copiedHumanoid}, inventory={equippedInventory}/{attemptedInventory}, hands={equippedHands}/{attemptedHands}");
         }
 
         private bool TryCopyXenoDeathAppearance(EntityUid source, EntityUid ghost)
@@ -733,9 +715,6 @@ namespace Content.Server.Ghost
             ghostAppearance.SpentParasite = HasComp<ParasiteSpentComponent>(source);
             Dirty(ghost, ghostAppearance);
 
-            Log.Info($"Ghost debug: copied xeno death appearance from \"{ToPrettyString(source)}\" to \"{ToPrettyString(ghost)}\". " +
-                     $"sprite={ghostAppearance.Sprite}, ovipositorSprite={ghostAppearance.OvipositorSprite?.ToString() ?? "<null>"}, " +
-                     $"ovipositorState={ghostAppearance.OvipositorState ?? "<null>"}, spentParasite={ghostAppearance.SpentParasite}");
             return true;
         }
 
@@ -743,10 +722,7 @@ namespace Content.Server.Ghost
         {
             var prototype = MetaData(original).EntityPrototype?.ID;
             if (prototype == null)
-            {
-                Log.Info($"Ghost debug: could not create cosmetic item for \"{ToPrettyString(original)}\" because it has no prototype.");
                 return null;
-            }
 
             var cosmetic = Spawn(prototype, MapCoordinates.Nullspace);
             AddComp<GhostCosmeticItemComponent>(cosmetic);
@@ -756,7 +732,6 @@ namespace Content.Server.Ghost
 
             var cloneEvent = new CloningItemEvent(cosmetic);
             RaiseLocalEvent(original, ref cloneEvent);
-            Log.Info($"Ghost debug: created cosmetic item \"{ToPrettyString(cosmetic)}\" from \"{ToPrettyString(original)}\" using prototype \"{prototype}\".");
             return cosmetic;
         }
 
@@ -847,8 +822,6 @@ namespace Content.Server.Ghost
             if (playerEntity != null)
                 _adminLog.Add(LogType.Mind, $"{ToPrettyString(playerEntity.Value):player} ghosted{(!canReturn ? " (non-returnable)" : "")}");
 
-            Log.Info($"Ghost debug: OnGhostAttempt for mind \"{ToPrettyString(mindId)}\", playerEntity={ToPrettyString(playerEntity)}, " +
-                     $"position={position}, canReturn={canReturn}, viaCommand={viaCommand}, forced={forced}");
             var ghost = SpawnGhost((mindId, mind), position, canReturn, playerEntity);
 
             if (ghost == null)
