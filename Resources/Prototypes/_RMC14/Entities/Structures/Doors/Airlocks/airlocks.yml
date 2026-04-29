@@ -134,6 +134,14 @@
     landingTags: [ mainship, ert, external_side ]
   - type: FTLSmashImmune
   - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
   - type: Docking
   - type: DockingSignalControl
   - type: RMCDockingPortAirlockControl
@@ -157,6 +165,14 @@
     landingTags: [ mainship, ert, internal ]
   - type: FTLSmashImmune
   - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
   - type: Docking
   - type: DockingSignalControl
   - type: Tag
@@ -177,6 +193,14 @@
     landingTags: [ mainship, ert, internal ]
   - type: FTLSmashImmune
   - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
   - type: Docking
   - type: DockingSignalControl
   - type: Tag
@@ -197,6 +221,14 @@
     landingTags: [ mainship, ert, external_side ]
   - type: FTLSmashImmune
   - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
   - type: Docking
   - type: DockingSignalControl
   - type: RMCDockingPortAirlockControl
@@ -220,6 +252,14 @@
     landingTags: [ mainship, ert, external_hangar ]
   - type: FTLSmashImmune
   - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
   - type: Docking
   - type: DockingSignalControl
   - type: RMCDockingPortAirlockControl
@@ -243,6 +283,14 @@
     landingTags: [ mainship, ert, external_hangar ]
   - type: FTLSmashImmune
   - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
   - type: Docking
   - type: DockingSignalControl
   - type: RMCDockingPortAirlockControl

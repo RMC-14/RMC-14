@@ -125,6 +125,12 @@
     landingTags: [ mainship, ert, external_hangar ]
   - type: FTLSmashImmune
   - type: NoFTL
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
   - type: RMCDockingPortAirlockControl
     airlockTags: [ RMCShuttleAirlockExternalHangar ]
     searchRadius: 8

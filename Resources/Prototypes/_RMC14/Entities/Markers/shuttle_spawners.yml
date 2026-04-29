@@ -85,6 +85,15 @@
 
 - type: entity
   parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleBig
+  suffix: ERT Big
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_shuttle_big.yml"
+    spawnOnMapInit: false
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
   id: RMCSpawnerERTShuttleTSEPA
   suffix: TSEPA, ERT
   components:

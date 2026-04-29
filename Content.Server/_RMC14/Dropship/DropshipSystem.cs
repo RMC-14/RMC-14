@@ -972,6 +972,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         var newDestination = CompOrNull<DropshipDestinationComponent>(destination);
+        var ownDestination = newDestination?.Ship == dropshipId;
         RMCRestrictedDockingTravelTarget? dockingTarget = null;
 
         if (!hijack &&
@@ -985,7 +986,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (!hijack &&
             newDestination != null &&
             computer.Comp.RequiresRestrictedDestination &&
-            newDestination.Ship != dropshipId &&
+            !ownDestination &&
             TryComp(destination, out DockingComponent? destinationDock))
         {
             if (!TryGetDockingTravelTarget(computer, destination, destinationDock, out var travelTarget, out reason))
@@ -1094,7 +1095,15 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
         else
         {
-            if (TryComp(dropshipId, out PhysicsComponent? physics))
+            if (!hijack &&
+                newDestination != null &&
+                computer.Comp.RequiresRestrictedDestination &&
+                !ownDestination &&
+                TryGetShuttleHardBoundsCenter(dropshipId.Value, out var hardBoundsCenter))
+            {
+                destCoords = destCoords.Offset(-rotation.RotateVec(hardBoundsCenter));
+            }
+            else if (TryComp(dropshipId, out PhysicsComponent? physics))
             {
                 _physics.SetLocalCenter(dropshipId.Value, physics, Vector2.Zero);
                 destCoords = destCoords.Offset(-physics.LocalCenter);
@@ -1136,6 +1145,34 @@ public sealed class DropshipSystem : SharedDropshipSystem
         _adminLog.Add(LogType.RMCDropshipLaunch,
             $"{ToPrettyString(user):player} {(hijack ? "hijacked" : "launched")} {ToPrettyString(dropshipId):dropship} to {ToPrettyString(destination):destination}");
 
+        return true;
+    }
+
+    private bool TryGetShuttleHardBoundsCenter(EntityUid shuttle, out Vector2 center)
+    {
+        center = default;
+
+        if (!TryComp(shuttle, out FixturesComponent? shuttleFixtures))
+            return false;
+
+        var localTransform = new Transform(Vector2.Zero, Angle.Zero);
+        Box2? bounds = null;
+        foreach (var fixture in shuttleFixtures.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            for (var i = 0; i < fixture.Shape.ChildCount; i++)
+            {
+                var fixtureBounds = fixture.Shape.ComputeAABB(localTransform, i);
+                bounds = bounds?.Union(fixtureBounds) ?? fixtureBounds;
+            }
+        }
+
+        if (bounds == null)
+            return false;
+
+        center = bounds.Value.Center;
         return true;
     }
 

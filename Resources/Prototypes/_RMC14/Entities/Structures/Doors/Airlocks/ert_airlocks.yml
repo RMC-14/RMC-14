@@ -1,0 +1,55 @@
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockERT
+  suffix: ERT, Always Powered
+  components:
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+
+- type: entity
+  parent: CMAirlockCommandLocked
+  id: RMCAirlockCommandLockedERT
+  suffix: Command, Locked, ERT, Always Powered
+  components:
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+
+- type: entity
+  parent: CMAirlockEngineer
+  id: RMCAirlockEngineerERT
+  suffix: Engineering, ERT, Always Powered
+  components:
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+
+- type: entity
+  parent: CMAirlockMedical
+  id: RMCAirlockMedicalERT
+  suffix: Medical, ERT, Always Powered
+  components:
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0

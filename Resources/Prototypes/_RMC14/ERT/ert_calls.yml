@@ -138,6 +138,91 @@
     minRequiredSlots: 3
 
 - type: rmcERTCall
+  id: RMCERTCallPMCPlatoon
+  name: rmc-ert-call-pmc-platoon-name
+  organization: rmc-ert-organization-weya
+  npcFactions: [ WeYa ]
+  iffFaction: FactionWeYa
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-pmc-platoon
+  randomWeight: 0
+  allowedSources: [ Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_shuttle_big.yml
+  shuttleSpawner: RMCSpawnerERTShuttleBig
+  shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-pmc-leader
+    job: RMCPMCLeader
+    ghostRoleEntity: RMCRandomHumanoidPMCLeader
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: operator
+    name: rmc-ert-role-pmc-operator
+    job: RMCPMCStandardM63B2
+    ghostRoleEntity: RMCRandomHumanoidPMCStandardM63B2
+    min: 5
+    max: 14
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-pmc-medic
+    job: RMCPMCMedic
+    ghostRoleEntity: RMCRandomHumanoidPMCMedic
+    min: 1
+    max: 2
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+    priority: 50
+  - id: engineer
+    name: rmc-ert-role-pmc-engineer
+    job: RMCPMCEngineer
+    ghostRoleEntity: RMCRandomHumanoidPMCEngineer
+    min: 1
+    max: 2
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+    priority: 40
+  - id: gunner
+    name: rmc-ert-role-pmc-gunner
+    job: RMCPMCGunner
+    ghostRoleEntity: RMCRandomHumanoidPMCGunner
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ smartgunner, rifleman ]
+    seatTags: [ troop ]
+    priority: 30
+  - id: sniper
+    name: rmc-ert-role-pmc-sniper
+    job: RMCPMCSniper
+    ghostRoleEntity: RMCRandomHumanoidPMCSniper
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ specialist, rifleman ]
+    seatTags: [ troop ]
+    priority: 30
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-pmc-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 8
+
+- type: rmcERTCall
   id: RMCERTCallWeYaBodyguard
   name: rmc-ert-call-weya-bodyguard-name
   organization: rmc-ert-organization-weya

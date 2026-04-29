@@ -179,6 +179,7 @@ rmc-ert-organization-pizza = Pizza Galaxy
 
 rmc-ert-admin-button-cbrn = SEND CBRN
 rmc-ert-admin-button-pmc = SEND PMC
+rmc-ert-admin-button-pmc-platoon = SEND PMC PLATOON
 rmc-ert-admin-button-bodyguards = SEND BODYGUARDS
 rmc-ert-admin-button-lawyers = SEND LAWYERS
 rmc-ert-admin-button-cmb = SEND CMB
@@ -190,6 +191,7 @@ rmc-ert-admin-button-pizza = SEND PIZZA
 
 rmc-ert-call-cbrn-name = UNMC CBRN Response Team
 rmc-ert-call-pmc-name = WeYa PMC Response Team
+rmc-ert-call-pmc-platoon-name = WeYa PMC Platoon
 rmc-ert-call-weya-bodyguard-name = WeYa Executive Protection Detail
 rmc-ert-call-weya-lawyers-name = WeYa Corporate Affairs Team
 rmc-ert-call-cmb-name = CMB Marshal Patrol
@@ -207,6 +209,8 @@ rmc-ert-role-pmc-leader = PMC Leader
 rmc-ert-role-pmc-operator = PMC Operator
 rmc-ert-role-pmc-medic = PMC Medic
 rmc-ert-role-pmc-engineer = PMC Engineer
+rmc-ert-role-pmc-gunner = PMC Heavy Gunner
+rmc-ert-role-pmc-sniper = PMC Sniper
 rmc-ert-role-weya-bodyguard-lead = Executive Protection Lead
 rmc-ert-role-weya-bodyguard = Executive Bodyguard
 rmc-ert-role-weya-lawyer-supervisor = Corporate Executive Supervisor

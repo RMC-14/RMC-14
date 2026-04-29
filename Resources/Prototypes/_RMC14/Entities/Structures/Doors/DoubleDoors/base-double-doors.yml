@@ -50,6 +50,14 @@
     landingTags: [ mainship, ert, external_side ]
   - type: FTLSmashImmune
   - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
   - type: RMCDockingPortAirlockControl
     airlockTags: [ RMCShuttleAirlockExternalSide ]
     searchRadius: 5
@@ -70,6 +78,14 @@
     landingTags: [ mainship, ert, external_hangar ]
   - type: FTLSmashImmune
   - type: NoFTL
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
   - type: RMCDockingPortAirlockControl
     airlockTags: [ RMCShuttleAirlockExternalHangar ]
     searchRadius: 8
@@ -172,6 +188,14 @@
   id: RMCShuttleMobileDockDoubleDoorBase
   abstract: true
   components:
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
   - type: Docking
   - type: DockingSignalControl
   - type: RMCShuttleMobileDock
