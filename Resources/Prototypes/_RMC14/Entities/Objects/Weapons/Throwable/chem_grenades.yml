@@ -206,8 +206,20 @@
     tags:
     - HideContextMenu
 
+- type: entity
+  parent: RMCGrenadeCustomMetalFoam
+  id: RMCGrenadeMFHS
+  name: M40 Metal Foam Grenade
+  description: Creates a field of liquid metal that quickly solidfies into foamed metal that acts like a temporary wall, said metal foam is easy to destroy. 
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40mfhs.rsi
+
 - type: Tag
   id: RMCGrenadeWeedkiller
 
 - type: Tag
   id: RMCGrenadeMetalFoam
+
+- type: Tag
+  id: RMCGrenadeMFHS
