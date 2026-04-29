@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.UserInterface;
+using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
@@ -11,6 +13,7 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] protected readonly SharedHandsSystem Hands = default!;
+    [Dependency] protected readonly SharedEyeSystem EyeSystem = default!;
 
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
@@ -47,12 +50,24 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public sealed class PhotoCaptureEvent : EntityEventArgs
+public sealed class PhotoCaptureEvent(byte[] imageData, NetEntity eye, NetEntity cameraUser) : EntityEventArgs
 {
-    public byte[] ImageData;
+    public byte[] ImageData = imageData;
+    public NetEntity Eye = eye;
+    public NetEntity CameraUser = cameraUser;
+}
 
-    public PhotoCaptureEvent(byte[] imageData)
-    {
-        ImageData = imageData;
-    }
+[Serializable, NetSerializable]
+public sealed class RequestPhotoCaptureEvent(NetCoordinates coordinates) : EntityEventArgs
+{
+    public NetCoordinates Coordinates = coordinates;
+}
+
+[Serializable, NetSerializable]
+public sealed class TakePhotoEvent(NetEntity eye, NetEntity camera, NetEntity user, Vector2 zoom) : EntityEventArgs
+{
+    public NetEntity Eye = eye;
+    public NetEntity Camera = camera;
+    public NetEntity User = user;
+    public Vector2 Zoom = zoom;
 }

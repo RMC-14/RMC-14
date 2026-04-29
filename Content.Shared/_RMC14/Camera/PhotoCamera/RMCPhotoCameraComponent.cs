@@ -12,16 +12,19 @@ public sealed partial class RMCPhotoCameraComponent : Component
     public TimeSpan? PhotoPrintedAt;
 
     [DataField, AutoNetworkedField]
-    public float ZoomLevel = 0.25f;
+    public float ZoomLevel = 0.125f;
 
     [DataField, AutoNetworkedField]
-    public int Resolution = 640;
+    public int Resolution = 1280;
 
     [DataField, AutoNetworkedField]
     public TimeSpan PrintDelay = TimeSpan.FromSeconds(2);
 
     [DataField]
     public byte[]? ImageData;
+
+    [DataField]
+    public Guid? ImageRenderedBy;
 
     [DataField]
     public EntProtoId PhotoPrototype = "RMCCameraPhotoPicture";

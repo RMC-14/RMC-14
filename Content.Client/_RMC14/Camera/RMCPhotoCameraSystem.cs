@@ -1,7 +1,5 @@
 using System.IO;
 using System.Numerics;
-using Content.Client.Eye;
-using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.Camera.PhotoCamera;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Coordinates.Helpers;
@@ -16,16 +14,16 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 {
     [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly SharedEyeSystem _eyeSystem = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly EyeLerpingSystem _eyeLerping = default!;
 
-    private (IClydeViewport viewport, EntityUid eye)? _pendingCapture;
+    private (IClydeViewport viewport, EntityUid eye, NetEntity user)? _pendingCapture;
     private bool _skipFrame;
 
     public override void Initialize()
     {
         base.Initialize();
+        SubscribeNetworkEvent<TakePhotoEvent>(OnTakePhoto);
+
         SubscribeLocalEvent<RMCPhotoCameraComponent, UniqueActionEvent>(OnUniqueAction);
     }
 
@@ -37,34 +35,43 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (ent.Comp.PhotoPrintedAt != null || ent.Comp.ImageData != null)
             return;
 
-        TakePhoto(ent.Comp.ZoomLevel, ent.Comp.Resolution);
-    }
-
-    private void TakePhoto(float zoomLevel, int resolution)
-    {
         var world = _eye.PixelToMap(_inputManager.MouseScreenPosition);
         var center = TransformSystem.ToCoordinates(world).SnapToGrid();
 
         if (!center.IsValid(EntityManager))
             return;
 
-        var eye = Spawn(null, center);
+        RaiseNetworkEvent(new RequestPhotoCaptureEvent(GetNetCoordinates(center)));
+    }
 
-        var eyeComp = EnsureComp<EyeComponent>(eye);
-        EnsureComp<RMCStaticZoomLevelComponent>(eye);
+    private void OnTakePhoto(TakePhotoEvent ev, EntitySessionEventArgs args)
+    {
+        if (!TryComp(GetEntity(ev.Camera), out RMCPhotoCameraComponent? cameraComp))
+            return;
 
-        _eyeSystem.SetZoom(eye, new Vector2(zoomLevel, zoomLevel), eyeComp);
-        _eyeSystem.SetDrawFov(eye, true, eyeComp);
-        _eyeSystem.UpdateEye((eye, eyeComp));
-        _eyeSystem.SetDrawLight(eye, true);
-        _eyeLerping.AddEye(eye);
+        TakePhoto(cameraComp.Resolution, ev.Eye, ev.User, ev.Zoom);
+    }
+
+    private void TakePhoto(int resolution, NetEntity netEye, NetEntity user, Vector2 zoom)
+    {
+        var eye = GetEntity(netEye);
+        if (!TryComp(eye, out EyeComponent? eyeComp))
+            return;
+
+        EyeSystem.SetZoom(eye, zoom);
 
         var size = new Vector2i(resolution, resolution);
         var viewport = _clyde.CreateViewport(size);
         viewport.AutomaticRender = true;
         viewport.Eye = eyeComp.Eye;
 
-        _pendingCapture = (viewport, eye);
+        _pendingCapture = (viewport, eye, user);
+    }
+
+    public OwnedTexture GetPhoto(byte[] imageData)
+    {
+        using var ms = new MemoryStream(imageData);
+        return _clyde.LoadTextureFromPNGStream(ms);
     }
 
     public override void FrameUpdate(float frameTime)
@@ -83,22 +90,14 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         _skipFrame = false;
         _pendingCapture = null;
 
-        var (viewport, eye) = pending;
+        var (viewport, eye, user) = pending;
 
         viewport.RenderTarget.CopyPixelsToMemory<Rgba32>(image =>
         {
             using var output = new MemoryStream();
             image.SaveAsPng(output);
 
-            RaiseNetworkEvent(new PhotoCaptureEvent(output.ToArray()));
-
-            QueueDel(eye);
+            RaiseNetworkEvent(new PhotoCaptureEvent(output.ToArray(), GetNetEntity(eye), user));
         });
-    }
-
-    public OwnedTexture GetPhoto(byte[] imageData)
-    {
-        using var ms = new MemoryStream(imageData);
-        return _clyde.LoadTextureFromPNGStream(ms);
     }
 }

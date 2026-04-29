@@ -10,4 +10,7 @@ public sealed partial class RMCPhotoComponent : Component
 
     [DataField, AutoNetworkedField]
     public string PhotoName = "Picture";
+
+    [DataField]
+    public Guid? RenderedBy;
 }
