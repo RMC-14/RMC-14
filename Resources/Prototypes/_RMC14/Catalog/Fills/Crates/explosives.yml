@@ -191,8 +191,8 @@
       amount: 2
     - id: RMCGrenadeBlastM12
       amount: 2
-    # - id: M40 MFHS Metal Foam Grenade
-    #   amount: 2
+    - id: RMCGrenadeMFHS
+      amount: 2
 
 - type: entity
   parent: RMCCrateExplosives
