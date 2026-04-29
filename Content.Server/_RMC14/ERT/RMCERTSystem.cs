@@ -440,7 +440,8 @@ public sealed class RMCERTSystem : EntitySystem
             call,
             $"selection={(randomSelection ? "random" : "specific")}, dispatchDelay={call.LaunchDelay:0}s");
 
-        AnnounceDistressLaunched(request, call);
+        if (request.Source == RMCERTRequestSource.Admin)
+            AnnounceDistressLaunched(request);
 
         DirtyState(request);
         Timer.Spawn(TimeSpan.FromSeconds(call.LaunchDelay), () => Dispatch(request.Id));
@@ -779,6 +780,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         var text = BuildAdminRequestAnnouncement(request);
         _chat.SendAdminAnnouncement(text);
+        AnnounceDistressLaunched(request);
 
         NotifyAdminsOfRequest();
 
@@ -2244,16 +2246,14 @@ public sealed class RMCERTSystem : EntitySystem
         DirtyState(request);
     }
 
-    private void AnnounceDistressLaunched(RMCERTRequest request, RMCERTCallPrototype call)
+    private void AnnounceDistressLaunched(RMCERTRequest request)
     {
-        var announcement = new RMCERTStageAnnouncement
-        {
-            Title = "rmc-ert-announcement-title-priority-alert",
-            Message = "rmc-ert-announcement-priority-alert",
-            Sound = DistressBeaconSound,
-        };
-
-        Announce(announcement, request, call);
+        var title = Loc.GetString("rmc-ert-announcement-title-priority-alert");
+        var message = Loc.GetString("rmc-ert-announcement-priority-alert",
+            ("team", Loc.GetString("rmc-ert-response-team-fallback")),
+            ("requester", request.RequesterName),
+            ("reason", request.Reason));
+        AnnounceERTToMarines(title, message, DistressBeaconSound);
     }
 
     private void AnnounceNoResponse(RMCERTRequest request, RMCERTCallPrototype? call)
