@@ -63,9 +63,9 @@
   components:
   - type: Sprite
     layers:
-    - state: hedp_packet
+    - state: hfhs_packet
       map: [ "closedLayer" ]
-    - state: hedp_packet_e
+    - state: hfhs_packet_e
       map: [ "openLayer", "emptyLayer" ]
 
 - type: entity
