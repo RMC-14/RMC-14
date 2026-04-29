@@ -354,6 +354,7 @@
         boxSlots: 3
       - id: RMCPacketGrenadeMetalFoamFilled
         name: M40 Metal Foam grenade packet
+        box: RMCPacketGrenadeMetalFoam
         boxAmount: 3
         boxSlots: 3
 
