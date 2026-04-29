@@ -56,12 +56,30 @@
 
 - type: entity
   parent: CMComputerDropshipNavigationERT
+  id: CMComputerDropshipNavigationERTCommAlt
+  suffix: Standard, Comm Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: comm_alt
+
+- type: entity
+  parent: CMComputerDropshipNavigationERT
   id: CMComputerDropshipNavigationERTSmall
   suffix: Small
   components:
   - type: DropshipNavigationComputer
     shuttleDockingClass: Small
     dockingBounds: "-3,-5,3,4"
+
+- type: entity
+  parent: CMComputerDropshipNavigationERTSmall
+  id: CMComputerDropshipNavigationERTSmallCommAlt
+  suffix: Small, Comm Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: comm_alt
 
 - type: entity
   parent: CMComputerDropshipNavigationERT
@@ -71,6 +89,15 @@
   - type: DropshipNavigationComputer
     shuttleDockingClass: Big
     dockingBounds: "-5.5,-10,5.5,8"
+
+- type: entity
+  parent: CMComputerDropshipNavigationERTBig
+  id: CMComputerDropshipNavigationERTBigCommAlt
+  suffix: Big, Comm Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: comm_alt
 
 - type: entity
   parent: CMComputerDropship
