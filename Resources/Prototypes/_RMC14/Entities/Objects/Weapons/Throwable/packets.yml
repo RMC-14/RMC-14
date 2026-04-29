@@ -63,9 +63,9 @@
   components:
   - type: Sprite
     layers:
-    - state: hfhs_packet
+    - state: mfhs_packet
       map: [ "closedLayer" ]
-    - state: hfhs_packet_e
+    - state: mfhs_packet_e
       map: [ "openLayer", "emptyLayer" ]
 
 - type: entity
