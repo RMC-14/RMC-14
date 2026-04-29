@@ -1082,6 +1082,16 @@ public sealed class DropshipSystem : SharedDropshipSystem
             destCoords = docking.Config.Coordinates;
             rotation = docking.Config.Angle;
         }
+        else if (TryComp(destination, out RMCDropshipDestinationCoordinatesOverrideComponent? coordinatesOverride) &&
+                 coordinatesOverride.Coordinates.MapId != MapId.Nullspace)
+        {
+            if (!_mapSystem.MapExists(coordinatesOverride.Coordinates.MapId))
+                return false;
+
+            var map = _mapSystem.GetMap(coordinatesOverride.Coordinates.MapId);
+            destCoords = new EntityCoordinates(map, coordinatesOverride.Coordinates.Position);
+            rotation = coordinatesOverride.Rotation;
+        }
         else
         {
             if (TryComp(dropshipId, out PhysicsComponent? physics))

@@ -1002,6 +1002,9 @@ public sealed class RMCERTSystem : EntitySystem
             request.Shuttle = null;
 
         request.ShuttleSpawnMarker = null;
+        request.ShuttleHomeVisualCoordinates = null;
+        request.ShuttleHomeReturnCoordinates = null;
+        request.ShuttleHomeRotation = null;
         DeleteReturnDestination(request);
 
         if (Exists(shuttle))
@@ -1018,6 +1021,11 @@ public sealed class RMCERTSystem : EntitySystem
 
         if (shuttleMap is not { } shuttleMapPath)
             return true;
+
+        request.ShuttleSpawnMarker = null;
+        request.ShuttleHomeVisualCoordinates = null;
+        request.ShuttleHomeReturnCoordinates = null;
+        request.ShuttleHomeRotation = null;
 
         if (TryLoadShuttleAtPlacedMarker(request, call, shuttleMapPath, out shuttle, out error) &&
             shuttle is { } placedShuttle)
@@ -1110,6 +1118,9 @@ public sealed class RMCERTSystem : EntitySystem
         var shuttleXform = Transform(shuttle.Value);
         _transform.SetCoordinates(shuttle.Value, shuttleXform, new EntityCoordinates(markerXform.MapUid.Value, spawnPosition), rotation);
         request.ShuttleSpawnMarker = marker;
+        request.ShuttleHomeVisualCoordinates = coordinates;
+        request.ShuttleHomeReturnCoordinates = new MapCoordinates(spawnPosition, markerXform.MapID);
+        request.ShuttleHomeRotation = rotation;
         Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle.Value)} for {call.ID} " +
                  $"at placed marker {ToPrettyString(marker)}.");
         return true;
@@ -1380,12 +1391,22 @@ public sealed class RMCERTSystem : EntitySystem
         if (!Exists(shuttle))
             return;
 
-        var coordinates = _transform.GetMapCoordinates(shuttle);
-        if (coordinates.MapId == MapId.Nullspace)
+        var returnCoordinates = request.ShuttleHomeReturnCoordinates ?? _transform.GetMapCoordinates(shuttle);
+        if (returnCoordinates.MapId == MapId.Nullspace)
             return;
 
-        var destination = Spawn(GetReturnDestinationPrototype(shuttle), coordinates);
-        _transform.SetWorldRotation(destination, _transform.GetWorldRotation(shuttle));
+        var visualCoordinates = request.ShuttleHomeVisualCoordinates ?? returnCoordinates;
+        if (visualCoordinates.MapId == MapId.Nullspace)
+            return;
+
+        var rotation = request.ShuttleHomeRotation ?? _transform.GetWorldRotation(shuttle);
+        var destination = Spawn(GetReturnDestinationPrototype(shuttle), visualCoordinates);
+        _transform.SetWorldRotation(destination, rotation);
+
+        var coordinatesOverride = EnsureComp<RMCDropshipDestinationCoordinatesOverrideComponent>(destination);
+        coordinatesOverride.Coordinates = returnCoordinates;
+        coordinatesOverride.Rotation = rotation;
+
         request.ShuttleHomeDestination = destination;
         request.ShuttleHomeIsFallback = request.ShuttleSpawnMarker == null;
 

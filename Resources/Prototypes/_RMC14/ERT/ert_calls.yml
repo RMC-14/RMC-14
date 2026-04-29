@@ -485,7 +485,7 @@
   name: rmc-ert-call-pizza-name
   organization: rmc-ert-organization-pizza
   npcFactions: [ Civilian ]
-  category: rmc-ert-category-event
+  category: rmc-ert-category-civilian
   enabled: true
   adminSelectable: true
   adminButtonLabel: rmc-ert-admin-button-pizza

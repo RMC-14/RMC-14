@@ -1,5 +1,7 @@
 using System;
 using Content.Shared._RMC14.ERT;
+using Robust.Shared.Map;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.ERT;
@@ -27,6 +29,9 @@ public sealed class RMCERTRequest
     public string LastWarning = string.Empty;
     public EntityUid? Shuttle;
     public EntityUid? ShuttleSpawnMarker;
+    public MapCoordinates? ShuttleHomeVisualCoordinates;
+    public MapCoordinates? ShuttleHomeReturnCoordinates;
+    public Angle? ShuttleHomeRotation;
     public EntityUid? ShuttleHomeDestination;
     public bool ShuttleHomeIsFallback;
     public TimeSpan? ReturnAvailableAt;

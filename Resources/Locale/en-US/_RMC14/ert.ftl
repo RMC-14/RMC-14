@@ -165,6 +165,7 @@ rmc-ert-category-military = Military
 rmc-ert-category-corporate = Corporate
 rmc-ert-category-law = Law
 rmc-ert-category-foreign-military = Foreign Military
+rmc-ert-category-civilian = Civilian
 rmc-ert-category-event = Event
 
 rmc-ert-organization-unmc = UNMC
