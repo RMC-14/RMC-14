@@ -7,6 +7,7 @@ using Content.Server._RMC14.Marines;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Server.Access.Systems;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
@@ -17,6 +18,7 @@ using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
+using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared._RMC14.Areas;
@@ -77,6 +79,7 @@ public sealed class RMCERTSystem : EntitySystem
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IdCardSystem _idCard = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
@@ -102,6 +105,7 @@ public sealed class RMCERTSystem : EntitySystem
     private static readonly SoundPathSpecifier DistressBeaconSound = new("/Audio/_RMC14/AI/distressbeacon.ogg");
     private static readonly SoundPathSpecifier DistressReceivedSound = new("/Audio/_RMC14/AI/distressreceived.ogg");
     private static readonly SoundPathSpecifier AdminRequestSound = new("/Audio/_RMC14/Effects/sos-morse-code.ogg");
+    private static readonly ProtoId<AccessLevelPrototype> ERTAccess = "CMAccessERT";
     private static readonly EntProtoId ERTShuttleReturnDestinationPrototype = "RMCERTShuttleReturnDestination";
     private static readonly EntProtoId ERTShuttleReturnDestinationSmallPrototype = "RMCERTShuttleReturnDestinationSmall";
     private static readonly EntProtoId ERTShuttleReturnDestinationBigPrototype = "RMCERTShuttleReturnDestinationBig";
@@ -591,6 +595,7 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         var briefing = BuildMemberBriefing(request, call);
+        GrantERTAccess(ent);
         if (string.IsNullOrWhiteSpace(briefing))
             return;
 
@@ -1641,7 +1646,20 @@ public sealed class RMCERTSystem : EntitySystem
         member.Team = call.Name;
         Dirty(spawned, member);
 
+        GrantERTAccess(spawned);
         return spawned;
+    }
+
+    private void GrantERTAccess(EntityUid member)
+    {
+        if (!_idCard.TryFindIdCard(member, out var idCard) ||
+            !TryComp(idCard.Owner, out AccessComponent? access))
+        {
+            return;
+        }
+
+        if (access.Tags.Add(ERTAccess))
+            Dirty(idCard.Owner, access);
     }
 
     private bool TryAssignSeat(EntityUid member, EntityUid? shuttle, RMCERTRosterSlot slot)

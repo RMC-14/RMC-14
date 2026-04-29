@@ -1884,7 +1884,7 @@ entities:
     - type: Transform
       pos: -2.5,-10.5
       parent: 1
-- proto: CMWindoor
+- proto: CMWindoorERT
   entities:
   - uid: 244
     components:

@@ -47,6 +47,8 @@
     requiresRestrictedDestination: true
     shuttleDockingClass: Standard
     dockingBounds: "-3.5,-7,3.5,6"
+  - type: AccessReader
+    access: [["CMAccessERT"]]
   - type: UserInterface
     interfaces:
       enum.DropshipNavigationUiKey.Key:

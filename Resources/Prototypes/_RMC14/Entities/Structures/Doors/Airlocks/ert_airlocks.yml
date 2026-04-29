@@ -5,6 +5,8 @@
   components:
   - type: Airlock
     powered: true
+  - type: AccessReader
+    access: [["CMAccessERT"]]
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
@@ -19,6 +21,8 @@
   components:
   - type: Airlock
     powered: true
+  - type: AccessReader
+    access: [["CMAccessERT"]]
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
@@ -33,6 +37,8 @@
   components:
   - type: Airlock
     powered: true
+  - type: AccessReader
+    access: [["CMAccessERT"]]
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
@@ -47,6 +53,8 @@
   components:
   - type: Airlock
     powered: true
+  - type: AccessReader
+    access: [["CMAccessERT"]]
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
