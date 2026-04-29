@@ -110,14 +110,16 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (args.Handled || args.User == null)
             return;
 
-        if (TryInsertTurretAttachment(ent, args.User, args.Used))
+        if (TryStartHardpointInsert(ent, args.User, args.Used))
         {
             args.Handled = true;
             return;
         }
 
-        if (TryStartHardpointInsert(ent, args.User, args.Used))
+        if (HasComp<HardpointItemComponent>(args.Used) &&
+            HasComp<VehicleTurretAttachmentComponent>(args.Used))
         {
+            _popup.PopupClient(Loc.GetString("rmc-vehicle-turret-no-base"), ent.Owner, args.User);
             args.Handled = true;
             return;
         }
@@ -144,20 +146,26 @@ public sealed class HardpointSlotSystem : EntitySystem
             return false;
 
         if (targetLocation.Definition.InsertDelay <= 0f)
-            return false;
+        {
+            targetLocation.State.CompletingInserts.Add(targetLocation.Definition.Id);
+            _itemSlots.TryInsertFromHand(targetLocation.Owner, targetLocation.Slot, user);
+            targetLocation.State.CompletingInserts.Remove(targetLocation.Definition.Id);
+            CleanupStaleInsertTracking(targetLocation.Owner, targetLocation.State, "instant-insert");
+            return true;
+        }
 
         if (EntityManager.IsClientSide(ent.Owner))
             return true;
 
-        if (state.PendingInsertUsers.Contains(user))
+        if (targetLocation.State.PendingInsertUsers.Contains(user))
             return true;
 
-        if (!state.PendingInserts.Add(targetLocation.Definition.Id))
+        if (!targetLocation.State.PendingInserts.Add(targetLocation.Definition.Id))
             return true;
 
-        state.PendingInsertUsers.Add(user);
+        targetLocation.State.PendingInsertUsers.Add(user);
 
-        var doAfter = new DoAfterArgs(EntityManager, user, targetLocation.Definition.InsertDelay, new HardpointInsertDoAfterEvent(targetLocation.Definition.Id), ent.Owner, ent.Owner, used)
+        var doAfter = new DoAfterArgs(EntityManager, user, targetLocation.Definition.InsertDelay, new HardpointInsertDoAfterEvent(targetLocation.Definition.Id), targetLocation.Owner, targetLocation.Owner, used)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -172,8 +180,8 @@ public sealed class HardpointSlotSystem : EntitySystem
 
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
-            state.PendingInserts.Remove(targetLocation.Definition.Id);
-            state.PendingInsertUsers.Remove(user);
+            targetLocation.State.PendingInserts.Remove(targetLocation.Definition.Id);
+            targetLocation.State.PendingInsertUsers.Remove(user);
             return true;
         }
 
@@ -377,70 +385,6 @@ public sealed class HardpointSlotSystem : EntitySystem
 
         uiOwnerState.LastUiError = null;
         RefreshUi();
-    }
-
-    private bool TryInsertTurretAttachment(Entity<HardpointSlotsComponent> ent, EntityUid user, EntityUid used)
-    {
-        if (!HasComp<HardpointItemComponent>(used))
-            return false;
-
-        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
-            return false;
-
-        var requiresTurret = HasComp<VehicleTurretAttachmentComponent>(used);
-        var hasMatchingEmptySlot = false;
-
-        foreach (var slot in ent.Comp.Slots)
-        {
-            if (!_hardpoints.IsValidHardpoint(used, ent.Comp, slot))
-                continue;
-
-            if (_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var vehicleSlot, itemSlots) &&
-                !vehicleSlot.HasItem)
-            {
-                hasMatchingEmptySlot = true;
-                break;
-            }
-        }
-
-        if (!requiresTurret && hasMatchingEmptySlot)
-            return false;
-
-        foreach (var slot in ent.Comp.Slots)
-        {
-            if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var vehicleSlot, itemSlots) || !vehicleSlot.HasItem)
-                continue;
-
-            var turretUid = vehicleSlot.Item!.Value;
-            if (!TryComp(turretUid, out HardpointSlotsComponent? turretSlots) ||
-                !TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
-            {
-                continue;
-            }
-
-            foreach (var turretSlot in turretSlots.Slots)
-            {
-                if (!_hardpoints.IsValidHardpoint(used, turretSlots, turretSlot))
-                    continue;
-
-                if (!_itemSlots.TryGetSlot(turretUid, turretSlot.Id, out var turretItemSlot, turretItemSlots))
-                    continue;
-
-                if (turretItemSlot.HasItem)
-                    continue;
-
-                _itemSlots.TryInsertFromHand(turretUid, turretItemSlot, user);
-                return true;
-            }
-        }
-
-        if (requiresTurret)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-vehicle-turret-no-base"), ent.Owner, user);
-            return true;
-        }
-
-        return false;
     }
 
 }

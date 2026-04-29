@@ -87,6 +87,21 @@ public sealed partial class HardpointSystem
             return true;
         }
 
+        foreach (var slot in hardpoints.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(owner, slot.Id, out var itemSlot, itemSlots) ||
+                itemSlot.Item is not { } installed)
+            {
+                continue;
+            }
+
+            if (!TryComp(installed, out HardpointSlotsComponent? childSlots))
+                continue;
+
+            if (TryFindEmptyInstallLocation(installed, childSlots, item, out location))
+                return true;
+        }
+
         return false;
     }
 
