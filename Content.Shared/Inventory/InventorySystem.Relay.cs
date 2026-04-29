@@ -28,8 +28,6 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Wieldable;
 using Content.Shared.Zombies;
-using Content.Shared.Ghost;
-
 namespace Content.Shared.Inventory;
 
 public partial class InventorySystem
@@ -115,9 +113,6 @@ public partial class InventorySystem
         var enumerator = new InventorySlotEnumerator(inventory, args.TargetSlots);
         while (enumerator.NextItem(out var item))
         {
-            if (HasComp<GhostCosmeticComponent>(item))
-                continue;
-
             RaiseLocalEvent(item, ev);
         }
 
@@ -134,9 +129,6 @@ public partial class InventorySystem
         var enumerator = new InventorySlotEnumerator(inventory, args.TargetSlots);
         while (enumerator.NextItem(out var item))
         {
-            if (HasComp<GhostCosmeticComponent>(item))
-                continue;
-
             RaiseLocalEvent(item, ev);
         }
     }
@@ -148,9 +140,6 @@ public partial class InventorySystem
         var enumerator = new InventorySlotEnumerator(component);
         while (enumerator.NextItem(out var item, out var slotDef))
         {
-            if (HasComp<GhostCosmeticComponent>(item))
-                continue;
-
             if (!_strippable.IsStripHidden(slotDef, args.User) || args.User == uid)
                 RaiseLocalEvent(item, ev);
         }
@@ -163,9 +152,6 @@ public partial class InventorySystem
         var enumerator = new InventorySlotEnumerator(component, SlotFlags.WITHOUT_POCKET);
         while (enumerator.NextItem(out var item))
         {
-            if (HasComp<GhostCosmeticComponent>(item))
-                continue;
-
             RaiseLocalEvent(item, ev);
         }
     }
