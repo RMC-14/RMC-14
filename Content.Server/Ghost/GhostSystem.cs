@@ -4,9 +4,11 @@ using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Components;
+using Content.Server.Humanoid;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
+using Content.Shared.Cloning.Events;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
@@ -18,6 +20,11 @@ using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
 using Content.Shared.Follower;
 using Content.Shared.Ghost;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -33,6 +40,7 @@ using Content.Shared.Warps;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -66,6 +74,9 @@ namespace Content.Server.Ghost
         [Dependency] private readonly SharedMindSystem _mind = default!;
         [Dependency] private readonly GameTicker _gameTicker = default!;
         [Dependency] private readonly DamageableSystem _damageable = default!;
+        [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+        [Dependency] private readonly InventorySystem _inventory = default!;
+        [Dependency] private readonly SharedHandsSystem _hands = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
@@ -104,6 +115,8 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, BooActionEvent>(OnActionPerform);
             SubscribeLocalEvent<GhostComponent, ToggleGhostHearingActionEvent>(OnGhostHearingAction);
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
+            SubscribeLocalEvent<GhostDeathAppearanceComponent, EntRemovedFromContainerMessage>(OnDeathAppearanceRemoved);
+            SubscribeLocalEvent<GhostDeathAppearanceComponent, EntityTerminatingEvent>(OnDeathAppearanceTerminating);
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
@@ -398,6 +411,37 @@ namespace Content.Server.Ghost
             args.Cancelled = true;
         }
 
+        private void OnDeathAppearanceRemoved(Entity<GhostDeathAppearanceComponent> ent, ref EntRemovedFromContainerMessage args)
+        {
+            if (HasComp<GhostCosmeticItemComponent>(args.Entity))
+                QueueDel(args.Entity);
+        }
+
+        private void OnDeathAppearanceTerminating(Entity<GhostDeathAppearanceComponent> ent, ref EntityTerminatingEvent args)
+        {
+            if (TryComp(ent, out InventoryComponent? inventory))
+            {
+                var slotEnumerator = _inventory.GetSlotEnumerator((ent.Owner, inventory));
+                while (slotEnumerator.NextItem(out var item))
+                {
+                    if (HasComp<GhostCosmeticItemComponent>(item))
+                        QueueDel(item);
+                }
+            }
+
+            if (!TryComp(ent, out HandsComponent? hands))
+                return;
+
+            foreach (var hand in hands.Hands.Keys)
+            {
+                if (_hands.TryGetHeldItem((ent.Owner, hands), hand, out var held) &&
+                    HasComp<GhostCosmeticItemComponent>(held))
+                {
+                    QueueDel(held.Value);
+                }
+            }
+        }
+
         private void OnToggleGhostVisibilityToAll(ToggleGhostVisibilityToAllEvent ev)
         {
             if (ev.Handled)
@@ -444,7 +488,7 @@ namespace Content.Server.Ghost
             bool canReturn = false)
         {
             _transformSystem.TryGetMapOrGridCoordinates(targetEntity, out var spawnPosition);
-            return SpawnGhost(mind, spawnPosition, canReturn);
+            return SpawnGhost(mind, spawnPosition, canReturn, targetEntity);
         }
 
         private bool IsValidSpawnPosition(EntityCoordinates? spawnPosition)
@@ -465,10 +509,14 @@ namespace Content.Server.Ghost
         }
 
         public EntityUid? SpawnGhost(Entity<MindComponent?> mind, EntityCoordinates? spawnPosition = null,
-            bool canReturn = false)
+            bool canReturn = false, EntityUid? appearanceSource = null)
         {
             if (!Resolve(mind, ref mind.Comp))
                 return null;
+
+            Log.Info($"Ghost debug: SpawnGhost start for mind \"{ToPrettyString(mind)}\", " +
+                     $"appearanceSource={ToPrettyString(appearanceSource)}, " +
+                     $"requestedPosition={spawnPosition?.ToString() ?? "<null>"}, canReturn={canReturn}");
 
             // Test if the map or grid is being deleted
             if (!IsValidSpawnPosition(spawnPosition))
@@ -486,8 +534,22 @@ namespace Content.Server.Ghost
                 return null;
             }
 
-            var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
+            var ghostPrototype = TryGetDeathAppearanceObserverPrototype(appearanceSource) ?? GameTicker.ObserverPrototypeName;
+            Log.Info($"Ghost debug: spawning ghost prototype \"{ghostPrototype}\" for mind \"{ToPrettyString(mind)}\" at {spawnPosition.Value}");
+            var ghost = SpawnAtPosition(ghostPrototype, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
+
+            if (appearanceSource is { } source &&
+                HasComp<GhostDeathAppearanceComponent>(ghost))
+            {
+                Log.Info($"Ghost debug: ghost \"{ToPrettyString(ghost)}\" has death appearance component, copying from source \"{ToPrettyString(source)}\"");
+                CopyDeathAppearance(source, ghost);
+            }
+            else
+            {
+                Log.Info($"Ghost debug: skipping appearance copy for ghost \"{ToPrettyString(ghost)}\". " +
+                         $"appearanceSourcePresent={appearanceSource != null}, ghostHasDeathAppearance={HasComp<GhostDeathAppearanceComponent>(ghost)}");
+            }
 
             // Try setting the ghost entity name to either the character name or the player name.
             // If all else fails, it'll default to the default entity prototype name, "observer".
@@ -514,6 +576,119 @@ namespace Content.Server.Ghost
             // we have to call this after the mind has been transferred since some mind roles modify the ghost's name
             _nameMod.RefreshNameModifiers(ghost);
             return ghost;
+        }
+
+        private EntProtoId? TryGetDeathAppearanceObserverPrototype(EntityUid? appearanceSource)
+        {
+            if (appearanceSource == null)
+            {
+                Log.Info("Ghost debug: no appearance source, using default observer prototype.");
+                return null;
+            }
+
+            if (!TryComp<HumanoidAppearanceComponent>(appearanceSource.Value, out var humanoid))
+            {
+                Log.Info($"Ghost debug: source \"{ToPrettyString(appearanceSource.Value)}\" has no humanoid appearance, using default observer prototype.");
+                return null;
+            }
+
+            if (!_prototypeManager.TryIndex<SpeciesPrototype>(humanoid.Species, out var species))
+            {
+                Log.Info($"Ghost debug: source \"{ToPrettyString(appearanceSource.Value)}\" species \"{humanoid.Species}\" is missing, using default observer prototype.");
+                return null;
+            }
+
+            var dollPrototype = species.DollPrototype.ToString();
+            if (!dollPrototype.EndsWith("Dummy"))
+            {
+                Log.Info($"Ghost debug: species \"{humanoid.Species}\" doll prototype \"{dollPrototype}\" does not end with Dummy, using default observer prototype.");
+                return null;
+            }
+
+            var observerPrototype = dollPrototype[..^"Dummy".Length] + "Observer";
+            if (!_prototypeManager.HasIndex<EntityPrototype>(observerPrototype))
+            {
+                Log.Info($"Ghost debug: observer prototype \"{observerPrototype}\" does not exist for source \"{ToPrettyString(appearanceSource.Value)}\".");
+                return null;
+            }
+
+            Log.Info($"Ghost debug: source \"{ToPrettyString(appearanceSource.Value)}\" species \"{humanoid.Species}\" resolved to observer prototype \"{observerPrototype}\".");
+            return new EntProtoId(observerPrototype);
+        }
+
+        private void CopyDeathAppearance(EntityUid source, EntityUid ghost)
+        {
+            var copiedHumanoid = false;
+            var attemptedInventory = 0;
+            var equippedInventory = 0;
+            var attemptedHands = 0;
+            var equippedHands = 0;
+
+            if (TryComp<HumanoidAppearanceComponent>(source, out var sourceHumanoid) &&
+                TryComp<HumanoidAppearanceComponent>(ghost, out var ghostHumanoid))
+            {
+                _humanoid.CloneAppearance(source, ghost, sourceHumanoid, ghostHumanoid);
+                copiedHumanoid = true;
+            }
+
+            if (TryComp<InventoryComponent>(source, out var sourceInventory) &&
+                TryComp<InventoryComponent>(ghost, out var ghostInventory))
+            {
+                var slotEnumerator = _inventory.GetSlotEnumerator((source, sourceInventory));
+                while (slotEnumerator.NextItem(out var item, out var slot))
+                {
+                    attemptedInventory++;
+                    var cosmetic = CreateGhostCosmeticItem(item, Transform(ghost).Coordinates);
+                    if (cosmetic == null)
+                        continue;
+
+                    if (!_inventory.TryEquip(ghost, cosmetic.Value, slot.Name, silent: true, force: true, inventory: ghostInventory))
+                        QueueDel(cosmetic.Value);
+                    else
+                        equippedInventory++;
+                }
+            }
+
+            if (TryComp<HandsComponent>(source, out var sourceHands) &&
+                TryComp<HandsComponent>(ghost, out var ghostHands))
+            {
+                foreach (var handName in sourceHands.SortedHands)
+                {
+                    if (!_hands.TryGetHeldItem((source, sourceHands), handName, out var held))
+                        continue;
+
+                    attemptedHands++;
+                    var cosmetic = CreateGhostCosmeticItem(held.Value, Transform(ghost).Coordinates);
+                    if (cosmetic == null)
+                        continue;
+
+                    if (!_hands.TryPickup(ghost, cosmetic.Value, handName, checkActionBlocker: false, animate: false, handsComp: ghostHands))
+                        QueueDel(cosmetic.Value);
+                    else
+                        equippedHands++;
+                }
+            }
+
+            Log.Info($"Ghost debug: copied death appearance from \"{ToPrettyString(source)}\" to \"{ToPrettyString(ghost)}\". " +
+                     $"copiedHumanoid={copiedHumanoid}, inventory={equippedInventory}/{attemptedInventory}, hands={equippedHands}/{attemptedHands}");
+        }
+
+        private EntityUid? CreateGhostCosmeticItem(EntityUid original, EntityCoordinates coordinates)
+        {
+            var prototype = MetaData(original).EntityPrototype?.ID;
+            if (prototype == null)
+            {
+                Log.Info($"Ghost debug: could not create cosmetic item for \"{ToPrettyString(original)}\" because it has no prototype.");
+                return null;
+            }
+
+            var cosmetic = SpawnAtPosition(prototype, coordinates);
+            AddComp<GhostCosmeticItemComponent>(cosmetic);
+
+            var cloneEvent = new CloningItemEvent(cosmetic);
+            RaiseLocalEvent(original, ref cloneEvent);
+            Log.Info($"Ghost debug: created cosmetic item \"{ToPrettyString(cosmetic)}\" from \"{ToPrettyString(original)}\" using prototype \"{prototype}\".");
+            return cosmetic;
         }
 
         public bool OnGhostAttempt(EntityUid mindId, bool canReturnGlobal, bool viaCommand = false, bool forced = false, MindComponent? mind = null)
@@ -603,7 +778,9 @@ namespace Content.Server.Ghost
             if (playerEntity != null)
                 _adminLog.Add(LogType.Mind, $"{ToPrettyString(playerEntity.Value):player} ghosted{(!canReturn ? " (non-returnable)" : "")}");
 
-            var ghost = SpawnGhost((mindId, mind), position, canReturn);
+            Log.Info($"Ghost debug: OnGhostAttempt for mind \"{ToPrettyString(mindId)}\", playerEntity={ToPrettyString(playerEntity)}, " +
+                     $"position={position}, canReturn={canReturn}, viaCommand={viaCommand}, forced={forced}");
+            var ghost = SpawnGhost((mindId, mind), position, canReturn, playerEntity);
 
             if (ghost == null)
                 return false;

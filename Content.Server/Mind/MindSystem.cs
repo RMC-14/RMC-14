@@ -22,7 +22,6 @@ public sealed class MindSystem : SharedMindSystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly GhostSystem _ghosts = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
     public override void Initialize()
@@ -206,15 +205,15 @@ public sealed class MindSystem : SharedMindSystem
             // Transfer-to-null should just detach a mind.
             // If people want to create a ghost, that should be done explicitly via some TransferToGhost() method, not
             // not implicitly via optional arguments.
+            var appearanceSource = mind.OwnedEntity;
+            var position = Deleted(appearanceSource)
+                ? _gameTicker.GetObserverSpawnPoint()
+                : Transform(appearanceSource!.Value).Coordinates;
 
-            var position = Deleted(mind.OwnedEntity)
-                ? _transform.ToMapCoordinates(_gameTicker.GetObserverSpawnPoint())
-                : _transform.GetMapCoordinates(mind.OwnedEntity.Value);
-
-            entity = Spawn(GameTicker.ObserverPrototypeName, position);
-            component = EnsureComp<MindContainerComponent>(entity.Value);
-            var ghostComponent = Comp<GhostComponent>(entity.Value);
-            _ghosts.SetCanReturnToBody((entity.Value, ghostComponent), false);
+            Log.Info($"Ghost debug: MindSystem.TransferTo createGhost path for mind \"{ToPrettyString(mindId)}\", " +
+                     $"appearanceSource={ToPrettyString(appearanceSource)}, position={position}");
+            _ghosts.SpawnGhost((mindId, mind), position, false, appearanceSource);
+            return;
         }
 
         var oldEntity = mind.OwnedEntity;
