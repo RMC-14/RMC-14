@@ -16,6 +16,12 @@ rmc-hands-emotes-fistbump = {$ent} gives {$target} a fistbump!
 rmc-hands-emotes-fistbump-attempt-self = You raise your fist out for a fistbump from {$target}.
 rmc-hands-emotes-fistbump-attempt = {$ent} raises {POSS-ADJ($ent)} fist out for a fistbump from {$target}.
 
+rmc-hands-emotes-handshake-self = You and {$target} shake hands!
+rmc-hands-emotes-handshake = {$ent} and {$target} shake hands!
+
+rmc-hands-emotes-handshake-attempt-self = You reach out your hand for a handshake from {$target}.
+rmc-hands-emotes-handshake-attempt = {$ent} reaches {POSS-ADJ($ent)} hand out for a handshake from {$target}.
+
 rmc-hands-emotes-tailswipe-self = We clash our tail with {$target}!
 rmc-hands-emotes-tailswipe = {$ent} clashes their tail with {$target}!
 
@@ -27,6 +33,7 @@ rmc-hands-emotes-left-hanging = You were left hanging!
 rmc-hands-emotes-fistbump-perform = Perform a fistbump
 rmc-hands-emotes-highfive-perform = Perform a high five
 rmc-hands-emotes-hug-perform = Give a hug
+rmc-hands-emotes-handshake-perform = Perform a handshake
 rmc-hands-emotes-tailswipe-perform = Perform a tail swipe
 
 rmc-hands-emotes-get-closer = Get closer.

@@ -34,3 +34,6 @@
     ears: RMCHeadsetDistressSPP # TODO RMC14 replace this with a 121/RECON headset after 8602 is merged
     pocket1: RMCPouchFirstAidSplintsGauzeOintment
     pocket2: RMCPouchFlareFilled
+  storage:
+    back:
+    - CMSheetMetal20
