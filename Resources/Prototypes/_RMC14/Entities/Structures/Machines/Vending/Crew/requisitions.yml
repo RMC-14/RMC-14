@@ -106,8 +106,8 @@
         amount: 4
       - id: RMCBatonSlugHIRR
         amount: 8
-      #- id: M40 MFHS Metal Foam Grenade
-      #  amount: 6
+      - id: RMCGrenadeMFHS
+        amount: 6
       - id: RMCExplosivePlastic
         amount: 3
       - id: RMCExplosiveBreachingCharge
