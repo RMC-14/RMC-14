@@ -97,6 +97,7 @@ rmc-vehicle-enter-passenger-full = There's no room for more passengers inside.
 rmc-vehicle-hull-destroyed = The vehicle's hull is destroyed.
 rmc-vehicle-exit-busy = Someone is already using this exit.
 rmc-vehicle-exit-blocked = The exit is blocked.
+rmc-vehicle-look-inside = Look inside
 rmc-vehicle-lock-not-driver = You need to be in the driver seat to lock or unlock the vehicle.
 rmc-vehicle-lock-broken = The vehicle lock is broken.
 rmc-vehicle-lock-broken-attempt = The vehicle cannot be locked until the broken lock is repaired.
@@ -104,4 +105,15 @@ rmc-vehicle-lock-set-locked = Vehicle doors locked.
 rmc-vehicle-lock-set-unlocked = Vehicle doors unlocked.
 rmc-vehicle-lock-broken-success = You break the vehicle lock.
 rmc-vehicle-lock-repaired = You repair the vehicle lock.
+rmc-vehicle-key-name = vehicle key
+rmc-vehicle-key-name-copy = duplicate vehicle key
+rmc-vehicle-key-bind-success = You imprint the key to the vehicle.
+rmc-vehicle-key-copy-success = You copy the vehicle key.
+rmc-vehicle-key-copy-invalid = That key cannot be copied.
+rmc-vehicle-key-copy-requires-source = You need to copy an existing vehicle key first.
+rmc-vehicle-key-unbound = The key is not bound to any vehicle.
+rmc-vehicle-key-invalid = The key does not fit this vehicle.
+rmc-vehicle-key-examine-blank = [color=lightblue]This blank key can be imprinted onto a vehicle by using it on the vehicle.[/color]
+rmc-vehicle-key-examine-duplicator = [color=lightblue]This blank key can copy an existing vehicle key by using it on that key.[/color]
+rmc-vehicle-key-examine-bound = [color=lightblue]This key is bound to a vehicle lock.[/color]
 rmc-hardpoint-remove-blocked = That hardpoint is fixed in place.

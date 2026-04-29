@@ -256,6 +256,8 @@ public sealed class VehicleSystem : EntitySystem
         var link = EnsureComp<VehicleInteriorLinkComponent>(mapUid);
         link.Vehicle = ent.Owner;
 
+        SpawnVehicleInteriorKey(ent.Owner, mapId);
+
         return true;
     }
 
@@ -699,6 +701,23 @@ public sealed class VehicleSystem : EntitySystem
         return count;
     }
 
+    private void SpawnVehicleInteriorKey(EntityUid vehicle, MapId mapId)
+    {
+        var keyId = _vehicleLock.EnsureVehicleKeyId(vehicle);
+        var seatQuery = EntityQueryEnumerator<VehicleDriverSeatComponent, TransformComponent>();
+        while (seatQuery.MoveNext(out var seatUid, out _, out var seatXform))
+        {
+            if (seatXform.MapID != mapId)
+                continue;
+
+            var key = Spawn("RMCVehicleKey", seatXform.Coordinates);
+            if (TryComp(key, out VehicleKeyComponent? keyComp))
+                _vehicleLock.BindKey((key, keyComp), keyId);
+
+            return;
+        }
+    }
+
     private void OnDriverSeatStrapAttempt(Entity<VehicleDriverSeatComponent> ent, ref StrapAttemptEvent args)
     {
         if (args.Cancelled)
@@ -896,5 +915,42 @@ public sealed class VehicleSystem : EntitySystem
 
         mapId = interior.MapId;
         return mapId != MapId.Nullspace;
+    }
+
+    public bool TryFindEntryPoint(EntityUid vehicle, EntityUid user, out int entryIndex)
+    {
+        entryIndex = -1;
+
+        if (!TryComp(vehicle, out VehicleEnterComponent? enter))
+            return false;
+
+        return TryFindEntry((vehicle, enter), user, out entryIndex);
+    }
+
+    public bool TryGetInteriorPeekTarget(EntityUid vehicle, out EntityUid target)
+    {
+        target = EntityUid.Invalid;
+
+        if (_net.IsClient ||
+            !TryComp(vehicle, out VehicleEnterComponent? enter) ||
+            !EnsureInterior((vehicle, enter), out var interior))
+        {
+            return false;
+        }
+
+        if (interior.Grid.IsValid())
+        {
+            target = interior.Grid;
+            return true;
+        }
+
+        if (interior.EntryParent.IsValid())
+        {
+            target = interior.EntryParent;
+            return true;
+        }
+
+        target = interior.Map;
+        return target.IsValid();
     }
 }

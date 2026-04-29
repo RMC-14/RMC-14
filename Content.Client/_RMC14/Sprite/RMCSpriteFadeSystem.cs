@@ -8,10 +8,12 @@ using Robust.Client.State;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Physics;
 using Robust.Client.Graphics;
 using Content.Shared.Ghost;
+using Robust.Shared.GameObjects;
 
 namespace Content.Client._RMC14.Sprite;
 
@@ -130,15 +132,15 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
                 }
             }
 
-            // If player is on a grid, fade all fade-enabled sprites on that same grid (e.g. van roofs) while inside.
-            if (playerXform != null && playerXform.GridUid is { } playerGrid)
+            // Fade shared-grid sprites on the grid currently being viewed, not just the player's physical grid.
+            if (TryGetViewedGrid(player, playerXform, out var viewedGrid))
             {
                 var gridQuery = AllEntityQuery<RMCSpriteFadeComponent, TransformComponent>();
                 while (gridQuery.MoveNext(out var uid, out var fade, out var xform))
                 {
                     if (!fade.FadeOnSharedGrid)
                         continue;
-                    if (xform.GridUid != playerGrid)
+                    if (xform.GridUid != viewedGrid)
                         continue;
                     if (!_spriteQuery.TryGetComponent(uid, out var sprite))
                         continue;
@@ -147,6 +149,37 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
                 }
             }
         }
+    }
+
+    private bool TryGetViewedGrid(EntityUid? player, TransformComponent? playerXform, out EntityUid viewedGrid)
+    {
+        viewedGrid = EntityUid.Invalid;
+
+        if (player != null &&
+            TryComp(player.Value, out EyeComponent? eye) &&
+            eye.Target is { } target &&
+            TryComp(target, out TransformComponent? targetXform))
+        {
+            if (targetXform.GridUid is { } targetGrid)
+            {
+                viewedGrid = targetGrid;
+                return true;
+            }
+
+            if (HasComp<MapGridComponent>(target))
+            {
+                viewedGrid = target;
+                return true;
+            }
+        }
+
+        if (playerXform?.GridUid is { } playerGrid)
+        {
+            viewedGrid = playerGrid;
+            return true;
+        }
+
+        return false;
     }
 
     private void TryApplyFade(EntityUid ent, SpriteComponent sprite, RMCSpriteFadeComponent fadeComponent, float frameTime)
