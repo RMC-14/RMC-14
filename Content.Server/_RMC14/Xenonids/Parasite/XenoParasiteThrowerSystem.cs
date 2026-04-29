@@ -41,12 +41,19 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, ComponentStartup>(OnXenoParasiteThrowerStartup);
+
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoThrowParasiteActionEvent>(OnToggleParasiteThrow);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
 
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoDevolveBuiMsg>(OnXenoDevolveDoAfter);
+    }
+
+    private void OnXenoParasiteThrowerStartup(Entity<XenoParasiteThrowerComponent> xeno, ref ComponentStartup args)
+    {
+        UpdateParasiteClingers(xeno);
     }
 
     private void OnToggleParasiteThrow(Entity<XenoParasiteThrowerComponent> xeno, ref XenoThrowParasiteActionEvent args)

@@ -6,6 +6,33 @@ namespace Content.Client._RMC14.Xenonids.Egg;
 
 public sealed partial class XenoEggStorageVisualizerSystem : VisualizerSystem<XenoEggStorageVisualsComponent>
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<XenoEggStorageVisualsComponent, ComponentShutdown>(OnComponentShutdown);
+    }
+
+    private void OnComponentShutdown(Entity<XenoEggStorageVisualsComponent> entity, ref ComponentShutdown args)
+    {
+        TryComp<SpriteComponent>(entity, out var spriteComp);
+
+        if (spriteComp == null)
+        {
+            return;
+        }
+
+        var sprite = (entity.Owner, spriteComp);
+
+        if (_sprite.LayerMapTryGet(sprite, XenoEggStorageVisualLayers.Base, out var layer, false))
+        {
+            _sprite.LayerSetVisible(sprite, layer, false);
+            _sprite.LayerSetRsiState(sprite, layer, null);
+        }
+    }
+
     protected override void OnAppearanceChange(EntityUid uid, XenoEggStorageVisualsComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
