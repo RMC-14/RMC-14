@@ -1068,7 +1068,7 @@ public sealed class RMCERTSystem : EntitySystem
         shuttle = null;
         error = string.Empty;
 
-        if (!TryFindShuttleSpawnMarker(request, call, out var marker, out var markerOffset))
+        if (!TryFindShuttleSpawnMarker(request, call, out var marker, out var markerOffset, out var centerShuttleOnMarker))
             return false;
 
         var markerXform = Transform(marker);
@@ -1088,10 +1088,18 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         shuttle = result.Value;
-        if (TryFindShuttleSpawnObstacle(shuttle.Value, marker, markerXform.MapUid.Value, coordinates.Position, rotation, out var obstacle))
+        var spawnPosition = coordinates.Position;
+        if (centerShuttleOnMarker &&
+            TryGetShuttleHardBoundsCenter(shuttle.Value, out var hardBoundsCenter))
+        {
+            spawnPosition -= rotation.RotateVec(hardBoundsCenter);
+        }
+
+        if (TryFindShuttleSpawnObstacle(shuttle.Value, marker, markerXform.MapUid.Value, spawnPosition, rotation, out var obstacle))
         {
             Log.Warning($"ERT request {request.Id} could not load shuttle {ToPrettyString(shuttle.Value)} for {call.ID} " +
-                        $"at placed marker {ToPrettyString(marker)} because it would intersect {ToPrettyString(obstacle)}; " +
+                        $"at placed marker {ToPrettyString(marker)} because it would intersect {ToPrettyString(obstacle)}. " +
+                        $"markerPosition={coordinates.Position}, spawnPosition={spawnPosition}; " +
                         "falling back to hidden ERT map spawn.");
 
             QueueDel(shuttle.Value);
@@ -1100,10 +1108,38 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         var shuttleXform = Transform(shuttle.Value);
-        _transform.SetCoordinates(shuttle.Value, shuttleXform, new EntityCoordinates(markerXform.MapUid.Value, coordinates.Position), rotation);
+        _transform.SetCoordinates(shuttle.Value, shuttleXform, new EntityCoordinates(markerXform.MapUid.Value, spawnPosition), rotation);
         request.ShuttleSpawnMarker = marker;
         Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle.Value)} for {call.ID} " +
                  $"at placed marker {ToPrettyString(marker)}.");
+        return true;
+    }
+
+    private bool TryGetShuttleHardBoundsCenter(EntityUid shuttle, out Vector2 center)
+    {
+        center = default;
+
+        if (!TryComp(shuttle, out FixturesComponent? shuttleFixtures))
+            return false;
+
+        var localTransform = new Transform(Vector2.Zero, Angle.Zero);
+        Box2? bounds = null;
+        foreach (var fixture in shuttleFixtures.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            for (var i = 0; i < fixture.Shape.ChildCount; i++)
+            {
+                var fixtureBounds = fixture.Shape.ComputeAABB(localTransform, i);
+                bounds = bounds?.Union(fixtureBounds) ?? fixtureBounds;
+            }
+        }
+
+        if (bounds == null)
+            return false;
+
+        center = bounds.Value.Center;
         return true;
     }
 
@@ -1170,17 +1206,19 @@ public sealed class RMCERTSystem : EntitySystem
         RMCERTRequest request,
         RMCERTCallPrototype call,
         out EntityUid marker,
-        out Vector2 markerOffset)
+        out Vector2 markerOffset,
+        out bool centerShuttleOnMarker)
     {
         marker = default;
         markerOffset = default;
+        centerShuttleOnMarker = false;
         if (GetShuttleSpawnMarkerId(call) is not { } spawnMarker)
             return false;
 
         var sourceMap = GetRequestSourceMap(request);
 
-        var sourceCandidates = new List<(EntityUid Marker, Vector2 Offset)>();
-        var fallbackCandidates = new List<(EntityUid Marker, Vector2 Offset)>();
+        var sourceCandidates = new List<(EntityUid Marker, Vector2 Offset, bool CenterShuttleOnMarker)>();
+        var fallbackCandidates = new List<(EntityUid Marker, Vector2 Offset, bool CenterShuttleOnMarker)>();
         var startPadQuery = EntityQueryEnumerator<RMCERTShuttleStartPadComponent, TransformComponent>();
         while (startPadQuery.MoveNext(out var uid, out var startPad, out var xform))
         {
@@ -1193,7 +1231,7 @@ public sealed class RMCERTSystem : EntitySystem
             var targetCandidates = sourceMap != null && xform.MapUid == sourceMap
                 ? sourceCandidates
                 : fallbackCandidates;
-            targetCandidates.Add((uid, startPad.Offset));
+            targetCandidates.Add((uid, startPad.Offset, true));
         }
 
         var query = EntityQueryEnumerator<GridSpawnerComponent, TransformComponent>();
@@ -1211,7 +1249,7 @@ public sealed class RMCERTSystem : EntitySystem
             var targetCandidates = sourceMap != null && xform.MapUid == sourceMap
                 ? sourceCandidates
                 : fallbackCandidates;
-            targetCandidates.Add((uid, spawner.Offset));
+            targetCandidates.Add((uid, spawner.Offset, false));
         }
 
         var availableCandidates = sourceCandidates.Count != 0
@@ -1224,6 +1262,7 @@ public sealed class RMCERTSystem : EntitySystem
         var picked = _random.Pick(availableCandidates);
         marker = picked.Marker;
         markerOffset = picked.Offset;
+        centerShuttleOnMarker = picked.CenterShuttleOnMarker;
         return true;
     }
 
