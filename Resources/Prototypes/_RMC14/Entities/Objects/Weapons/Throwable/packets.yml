@@ -58,7 +58,7 @@
 - type: entity
   parent: CMPacketBase
   id: RMCPacketGrenadeMetalFoam
-  name: HFHS Grenade Packet
+  name: MFHS Grenade Packet
   description: It contains three HFHS Metal Foam Grenades.
   components:
   - type: Sprite
