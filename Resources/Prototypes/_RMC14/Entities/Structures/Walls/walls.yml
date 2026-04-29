@@ -26,6 +26,12 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
+        damage: 3125
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
         damage: 3000
       behaviors:
         - !type:ChangeConstructionNodeBehavior
@@ -174,6 +180,12 @@
     minimumClawStrength: VerySharp
   - type: Destructible
     thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 9000

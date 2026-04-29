@@ -8,7 +8,6 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.ClawSharpness;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
@@ -46,7 +45,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<OccluderComponent> _occluderQuery;
@@ -55,7 +53,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoAcidHoleWallComponent> _holeWallQuery;
 
-    private static readonly ProtoId<DamageGroupPrototype> BruteDamageGroup = "Brute";
     private static readonly ProtoId<StackPrototype> PlasteelStack = "CMPlasteel";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
@@ -348,14 +345,10 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (!TryGetBreakData(args.User, wall, out var receiver))
             return;
 
-        if (!_damageableQuery.TryComp(wall, out var damageable))
-            return;
-
         args.Handled = true;
 
-        var damage = FixedPoint2.New(receiver.MaxHealth);
-        var spec = new DamageSpecifier(_proto.Index(BruteDamageGroup), damage);
-        _damageable.TryChangeDamage(wall, spec, ignoreResistances: true, damageable: damageable, origin: args.User, tool: args.User);
+        Spawn(wall.Comp.BreakResultPrototype, Transform(wall.Owner).Coordinates);
+        QueueDel(wall.Owner);
     }
 
     private void OnHoleAttacked(Entity<XenoAcidHoleComponent> hole, ref GettingAttackedAttemptEvent args)
