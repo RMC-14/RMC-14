@@ -3,13 +3,11 @@ using System.Numerics;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.Ghost.Components;
 using Content.Server.Humanoid;
 using Content.Shared.Body.Components;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
-using Content.Shared.Cloning.Events;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -23,7 +21,6 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DisplacementMap;
 using Content.Shared.Database;
-using Content.Shared.Examine;
 using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
 using Content.Shared.Follower;
@@ -33,7 +30,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
-using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -46,7 +42,6 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Nutrition.Components;
-using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Strip.Components;
@@ -94,9 +89,6 @@ namespace Content.Server.Ghost
         [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
         [Dependency] private readonly InventorySystem _inventory = default!;
         [Dependency] private readonly SharedHandsSystem _hands = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
 
@@ -152,11 +144,6 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, ToggleGhostHearingActionEvent>(OnGhostHearingAction);
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
             SubscribeLocalEvent<GhostComponent, RefreshMovementSpeedModifiersEvent>(OnGhostRefreshMovementSpeed);
-            SubscribeLocalEvent<GhostDeathAppearanceComponent, EntRemovedFromContainerMessage>(OnDeathAppearanceRemoved);
-            SubscribeLocalEvent<GhostDeathAppearanceComponent, EntityTerminatingEvent>(OnDeathAppearanceTerminating);
-            SubscribeLocalEvent<GhostDeathAppearanceComponent, IsUnequippingTargetAttemptEvent>(OnGhostAppearanceUnequipAttempt);
-            SubscribeLocalEvent<GhostCosmeticItemComponent, BeingUnequippedAttemptEvent>(OnGhostCosmeticUnequipAttempt);
-
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
 
@@ -454,49 +441,6 @@ namespace Content.Server.Ghost
         {
             if (args.WalkSpeedModifier != 0f && args.SprintSpeedModifier != 0f)
                 args.ModifySpeed(1f / args.WalkSpeedModifier, 1f / args.SprintSpeedModifier);
-        }
-
-        private void OnGhostAppearanceUnequipAttempt(Entity<GhostDeathAppearanceComponent> ent, ref IsUnequippingTargetAttemptEvent args)
-        {
-            args.Cancel();
-            args.Reason ??= "inventory-component-can-unequip-cannot";
-        }
-
-        private void OnGhostCosmeticUnequipAttempt(Entity<GhostCosmeticItemComponent> ent, ref BeingUnequippedAttemptEvent args)
-        {
-            args.Cancel();
-            args.Reason ??= "inventory-component-can-unequip-cannot";
-        }
-
-        private void OnDeathAppearanceRemoved(Entity<GhostDeathAppearanceComponent> ent, ref EntRemovedFromContainerMessage args)
-        {
-            if (HasComp<GhostCosmeticItemComponent>(args.Entity))
-                QueueDel(args.Entity);
-        }
-
-        private void OnDeathAppearanceTerminating(Entity<GhostDeathAppearanceComponent> ent, ref EntityTerminatingEvent args)
-        {
-            if (TryComp(ent, out InventoryComponent? inventory))
-            {
-                var slotEnumerator = _inventory.GetSlotEnumerator((ent.Owner, inventory));
-                while (slotEnumerator.NextItem(out var item))
-                {
-                    if (HasComp<GhostCosmeticItemComponent>(item))
-                        QueueDel(item);
-                }
-            }
-
-            if (!TryComp(ent, out HandsComponent? hands))
-                return;
-
-            foreach (var hand in hands.Hands.Keys)
-            {
-                if (_hands.TryGetHeldItem((ent.Owner, hands), hand, out var held) &&
-                    HasComp<GhostCosmeticItemComponent>(held))
-                {
-                    QueueDel(held.Value);
-                }
-            }
         }
 
         private void OnToggleGhostVisibilityToAll(ToggleGhostVisibilityToAllEvent ev)
@@ -939,23 +883,6 @@ namespace Content.Server.Ghost
             Dirty(ghost, ghostAppearance);
 
             return true;
-        }
-
-        private EntityUid? CreateGhostCosmeticItem(EntityUid original)
-        {
-            var prototype = MetaData(original).EntityPrototype?.ID;
-            if (prototype == null)
-                return null;
-
-            var cosmetic = Spawn(prototype, MapCoordinates.Nullspace);
-            AddComp<GhostCosmeticItemComponent>(cosmetic);
-            AddComp<GhostCosmeticComponent>(cosmetic);
-            RemCompDeferred<ClothingSpeedModifierComponent>(cosmetic);
-            RemCompDeferred<HeldSpeedModifierComponent>(cosmetic);
-
-            var cloneEvent = new CloningItemEvent(cosmetic);
-            RaiseLocalEvent(original, ref cloneEvent);
-            return cosmetic;
         }
 
         public bool OnGhostAttempt(EntityUid mindId, bool canReturnGlobal, bool viaCommand = false, bool forced = false, MindComponent? mind = null)
