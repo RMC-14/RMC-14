@@ -40,15 +40,14 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, ComponentStartup>(OnXenoParasiteThrowerStartup);
-
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoThrowParasiteActionEvent>(OnToggleParasiteThrow);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoChangingCasteEvent>(OnXenoChangingCaste);
     }
 
-    private void OnXenoParasiteThrowerStartup(Entity<XenoParasiteThrowerComponent> xeno, ref ComponentStartup args)
+    private void OnComponentStartup(Entity<XenoParasiteThrowerComponent> xeno, ref ComponentStartup args)
     {
         UpdateParasiteClingers(xeno);
     }
@@ -205,7 +204,7 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         else
         {
             // new caste doesn't have parasite storage, drop all parasites
-            DropAllStoredParasites(xeno);
+            DropStoredParasites(xeno, xeno.Comp.CurParasites);
         }
     }
 
@@ -214,29 +213,24 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        if (xeno.Comp.CurParasites > 0)
+        if (DropStoredParasites(xeno, xeno.Comp.CurParasites, 0.75f) > 0)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-carrier-death", ("xeno", xeno)), xeno, PopupType.MediumCaution);
-            DropAllStoredParasites(xeno, 0.75f);
         }
     }
 
-    private void DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno, float chance = 1.0f)
-    {
-        DropStoredParasites(xeno, xeno.Comp.CurParasites, chance);
-    }
-
-    private void DropStoredParasites(Entity<XenoParasiteThrowerComponent> xeno, int amount, float chance = 1.0f)
+    private int DropStoredParasites(Entity<XenoParasiteThrowerComponent> xeno, int amount, float chance = 1.0f)
     {
         var hive = _hive.GetHive(xeno.Owner);
 
         var dropAmount = Math.Min(amount, xeno.Comp.CurParasites);
+        var actualDrop = 0;
 
         for (var i = 0; i < dropAmount; ++i)
         {
             if (chance != 1.0 && !_random.Prob(chance))
                 continue;
-
+            actualDrop++;
             var newParasite = Spawn(xeno.Comp.ParasitePrototype);
             _hive.SetHive(newParasite, hive);
             _transform.DropNextTo(newParasite, xeno.Owner);
@@ -247,6 +241,8 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
 
         xeno.Comp.CurParasites -= dropAmount;
         UpdateParasiteClingers(xeno);
+
+        return actualDrop;
     }
 
     /// <summary>
