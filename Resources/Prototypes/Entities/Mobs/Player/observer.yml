@@ -153,7 +153,7 @@
   - type: ActiveInputMover
   - type: GhostColor
   - type: Spectral
-  - type: GhostDeathAppearance
+  - type: GhostHumanoidAppearance
   - type: FindParasite
   - type: JoinXeno
   - type: UserInterface
@@ -180,8 +180,6 @@
       components:
       - Ladder
     range: 15
-  - type: Hands
-    canBeStripped: false
 
 - type: entity
   parent:

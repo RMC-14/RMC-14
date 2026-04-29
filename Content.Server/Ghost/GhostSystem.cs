@@ -5,18 +5,23 @@ using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Components;
 using Content.Server.Humanoid;
+using Content.Shared.Body.Components;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
 using Content.Shared.Cloning.Events;
 using Content.Shared._RMC14.Ghost;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.DisplacementMap;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Eye;
@@ -37,12 +42,16 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NameModifier.EntitySystems;
+using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
+using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Strip.Components;
 using Content.Shared.Tag;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Warps;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -96,6 +105,24 @@ namespace Content.Server.Ghost
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
         private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamageType = "Asphyxiation";
+        private static readonly Dictionary<string, string> TemporarySlotMap = new()
+        {
+            { "head", "HELMET" },
+            { "eyes", "EYES" },
+            { "ears", "EARS" },
+            { "mask", "MASK" },
+            { "outerClothing", "OUTERCLOTHING" },
+            { "jumpsuit", "INNERCLOTHING" },
+            { "neck", "NECK" },
+            { "back", "BACKPACK" },
+            { "belt", "BELT" },
+            { "gloves", "HAND" },
+            { "shoes", "FEET" },
+            { "id", "IDCARD" },
+            { "pocket1", "POCKET1" },
+            { "pocket2", "POCKET2" },
+            { "suitstorage", "SUITSTORAGE" },
+        };
 
         public override void Initialize()
         {
@@ -563,8 +590,9 @@ namespace Content.Server.Ghost
             var ghostPrototype = TryGetDeathAppearanceObserverPrototype(appearanceSource) ?? GameTicker.ObserverPrototypeName;
             var ghost = SpawnAtPosition(ghostPrototype, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
-            var hasAppearanceCopyTarget = HasComp<GhostDeathAppearanceComponent>(ghost) || HasComp<GhostXenoAppearanceComponent>(ghost);
+            var hasAppearanceCopyTarget = HasComp<GhostHumanoidAppearanceComponent>(ghost) || HasComp<GhostXenoAppearanceComponent>(ghost);
             RemComp<StrippableComponent>(ghost);
+            StripGhostInheritedMobComponents(ghost);
             NormalizeGhostMovementSpeed(ghost);
 
             if (appearanceSource is { } source &&
@@ -612,6 +640,20 @@ namespace Content.Server.Ghost
 
         }
 
+        private void StripGhostInheritedMobComponents(EntityUid ghost)
+        {
+            RemComp<BodyComponent>(ghost);
+            RemComp<InventoryComponent>(ghost);
+            RemComp<HandsComponent>(ghost);
+            RemComp<PullerComponent>(ghost);
+            RemComp<StandingStateComponent>(ghost);
+            RemComp<SlowOnDamageComponent>(ghost);
+            RemComp<HungerComponent>(ghost);
+            RemComp<ThirstComponent>(ghost);
+            RemComp<TemperatureSpeedComponent>(ghost);
+            RemComp<SlowOnPullComponent>(ghost);
+        }
+
         private EntProtoId? TryGetDeathAppearanceObserverPrototype(EntityUid? appearanceSource)
         {
             if (appearanceSource == null)
@@ -648,57 +690,238 @@ namespace Content.Server.Ghost
             if (TryCopyXenoDeathAppearance(source, ghost))
                 return;
 
-            var copiedHumanoid = false;
-            var attemptedInventory = 0;
-            var equippedInventory = 0;
-            var attemptedHands = 0;
-            var equippedHands = 0;
-
             if (TryComp<HumanoidAppearanceComponent>(source, out var sourceHumanoid) &&
                 TryComp<HumanoidAppearanceComponent>(ghost, out var ghostHumanoid))
             {
                 _humanoid.CloneAppearance(source, ghost, sourceHumanoid, ghostHumanoid);
-                copiedHumanoid = true;
             }
 
             if (TryComp<InventoryComponent>(source, out var sourceInventory) &&
-                TryComp<InventoryComponent>(ghost, out var ghostInventory))
+                TryComp<GhostHumanoidAppearanceComponent>(ghost, out var ghostAppearance) &&
+                TryComp<HumanoidAppearanceComponent>(source, out sourceHumanoid))
             {
-                var slotEnumerator = _inventory.GetSlotEnumerator((source, sourceInventory));
-                while (slotEnumerator.NextItem(out var item, out var slot))
-                {
-                    attemptedInventory++;
-                    var cosmetic = CreateGhostCosmeticItem(item);
-                    if (cosmetic == null)
-                        continue;
-
-                    if (!_inventory.TryEquip(ghost, cosmetic.Value, slot.Name, silent: true, force: true, inventory: ghostInventory))
-                        QueueDel(cosmetic.Value);
-                    else
-                        equippedInventory++;
-                }
+                AppendGhostInventoryLayers(source, ghost, sourceInventory, sourceHumanoid, ghostAppearance);
             }
 
             if (TryComp<HandsComponent>(source, out var sourceHands) &&
-                TryComp<HandsComponent>(ghost, out var ghostHands))
+                TryComp<GhostHumanoidAppearanceComponent>(ghost, out var ghostAppearanceHands))
             {
-                foreach (var handName in sourceHands.SortedHands)
-                {
-                    if (!_hands.TryGetHeldItem((source, sourceHands), handName, out var held))
-                        continue;
+                AppendGhostHandLayers(source, ghost, sourceHands, ghostAppearanceHands);
+            }
+        }
 
-                    attemptedHands++;
-                    var cosmetic = CreateGhostCosmeticItem(held.Value);
-                    if (cosmetic == null)
-                        continue;
+        private void AppendGhostInventoryLayers(
+            EntityUid source,
+            EntityUid ghost,
+            InventoryComponent sourceInventory,
+            HumanoidAppearanceComponent sourceHumanoid,
+            GhostHumanoidAppearanceComponent ghostAppearance)
+        {
+            ghostAppearance.Layers.Clear();
 
-                    if (!_hands.TryPickup(ghost, cosmetic.Value, handName, checkActionBlocker: false, animate: false, handsComp: ghostHands))
-                        QueueDel(cosmetic.Value);
-                    else
-                        equippedHands++;
-                }
+            var slotEnumerator = _inventory.GetSlotEnumerator((source, sourceInventory));
+            while (slotEnumerator.NextItem(out var item, out var slot))
+            {
+                if (!TryComp(item, out ClothingComponent? clothing))
+                    continue;
+
+                AddBaseEquipmentVisuals(item, slot.Name, sourceInventory.SpeciesId, clothing, GetClothingDisplacement(sourceInventory, sourceHumanoid, slot.Name), ghostAppearance);
             }
 
+            Dirty(ghost, ghostAppearance);
+        }
+
+        private void AppendGhostHandLayers(EntityUid source, EntityUid ghost, HandsComponent sourceHands, GhostHumanoidAppearanceComponent ghostAppearance)
+        {
+            foreach (var handName in sourceHands.SortedHands)
+            {
+                if (!_hands.TryGetHeldItem((source, sourceHands), handName, out var held) ||
+                    !TryComp(held.Value, out ItemComponent? item) ||
+                    !_hands.TryGetHand((source, sourceHands), handName, out var hand))
+                {
+                    continue;
+                }
+
+                AddBaseInhandVisuals(held.Value, hand.Value.Location, item, GetHandDisplacement(sourceHands, hand.Value.Location), ghostAppearance);
+            }
+
+            Dirty(ghost, ghostAppearance);
+        }
+
+        private void AddBaseEquipmentVisuals(
+            EntityUid item,
+            string slot,
+            string? speciesId,
+            ClothingComponent clothing,
+            DisplacementData? displacement,
+            GhostHumanoidAppearanceComponent ghostAppearance)
+        {
+            if (!TryGetDefaultClothingVisuals(clothing, slot, speciesId, out var defaultLayers))
+                return;
+
+            foreach (var layer in defaultLayers!)
+            {
+                AddSnapshot(slot, layer, displacement, true, ghostAppearance);
+            }
+        }
+
+        private void AddBaseInhandVisuals(
+            EntityUid itemUid,
+            HandLocation location,
+            ItemComponent item,
+            DisplacementData? displacement,
+            GhostHumanoidAppearanceComponent ghostAppearance)
+        {
+            if (!TryGetDefaultInhandVisuals(itemUid, item, location, out var defaultLayers))
+                return;
+
+            foreach (var layer in defaultLayers!)
+            {
+                AddSnapshot($"inhand-{location.ToString().ToLowerInvariant()}", layer, displacement, true, ghostAppearance);
+            }
+        }
+
+        private bool TryGetDefaultClothingVisuals(
+            ClothingComponent clothing,
+            string slot,
+            string? speciesId,
+            out List<PrototypeLayerData>? layers)
+        {
+            layers = null;
+
+            if (string.IsNullOrWhiteSpace(clothing.RsiPath))
+                return false;
+
+            var correctedSlot = TemporarySlotMap.GetValueOrDefault(slot, slot);
+
+            if (slot == "id" && clothing.EquippedState == null)
+                return false;
+
+            var state = clothing.EquippedState ?? $"equipped-{correctedSlot}";
+            if (!string.IsNullOrEmpty(clothing.EquippedPrefix) && clothing.EquippedState == null)
+                state = $"{clothing.EquippedPrefix}-equipped-{correctedSlot}";
+
+            if (speciesId != null)
+                state = $"{state}-{speciesId}";
+
+            layers = new()
+            {
+                new PrototypeLayerData
+                {
+                    RsiPath = clothing.RsiPath,
+                    State = state,
+                },
+            };
+
+            return true;
+        }
+
+        private bool TryGetDefaultInhandVisuals(
+            EntityUid itemUid,
+            ItemComponent item,
+            HandLocation location,
+            out List<PrototypeLayerData>? layers)
+        {
+            layers = null;
+
+            var rsiPath = item.RsiPath;
+            if (rsiPath == null)
+                return false;
+
+            var defaultKey = $"inhand-{location.ToString().ToLowerInvariant()}";
+            var state = item.HeldPrefix == null ? defaultKey : $"{item.HeldPrefix}-{defaultKey}";
+            layers = new()
+            {
+                new PrototypeLayerData
+                {
+                    RsiPath = rsiPath,
+                    State = state,
+                    MapKeys = new() { state },
+                },
+            };
+
+            return true;
+        }
+
+        private static DisplacementData? GetClothingDisplacement(
+            InventoryComponent inventory,
+            HumanoidAppearanceComponent humanoid,
+            string slot)
+        {
+            return humanoid.Sex switch
+            {
+                Sex.Male when inventory.MaleDisplacements.Count > 0 => inventory.MaleDisplacements.GetValueOrDefault(slot),
+                Sex.Female when inventory.FemaleDisplacements.Count > 0 => inventory.FemaleDisplacements.GetValueOrDefault(slot),
+                _ => inventory.Displacements.GetValueOrDefault(slot),
+            };
+        }
+
+        private static DisplacementData? GetHandDisplacement(HandsComponent hands, HandLocation location)
+        {
+            return location switch
+            {
+                HandLocation.Left when hands.LeftHandDisplacement != null => hands.LeftHandDisplacement,
+                HandLocation.Middle or HandLocation.Right when hands.RightHandDisplacement != null => hands.RightHandDisplacement,
+                _ => hands.HandDisplacement,
+            };
+        }
+
+        private static void AddSnapshot(
+            string key,
+            PrototypeLayerData layer,
+            DisplacementData? displacement,
+            bool boostedAlpha,
+            GhostHumanoidAppearanceComponent ghostAppearance)
+        {
+            ghostAppearance.Layers.Add(new GhostHumanoidLayerSnapshot
+            {
+                Key = key,
+                Layer = CopyLayer(layer),
+                Displacement = displacement == null ? null : CopyDisplacement(displacement),
+                BoostedAlpha = boostedAlpha,
+            });
+        }
+
+        private static PrototypeLayerData CopyLayer(PrototypeLayerData layer)
+        {
+            return new PrototypeLayerData
+            {
+                Shader = layer.Shader,
+                TexturePath = layer.TexturePath,
+                RsiPath = layer.RsiPath,
+                State = layer.State,
+                Scale = layer.Scale,
+                Rotation = layer.Rotation,
+                Offset = layer.Offset,
+                Visible = layer.Visible,
+                Color = layer.Color,
+                MapKeys = layer.MapKeys == null ? null : new(layer.MapKeys),
+                RenderingStrategy = layer.RenderingStrategy,
+                CopyToShaderParameters = layer.CopyToShaderParameters == null
+                    ? null
+                    : new()
+                    {
+                        LayerKey = layer.CopyToShaderParameters.LayerKey,
+                        ParameterTexture = layer.CopyToShaderParameters.ParameterTexture,
+                        ParameterUV = layer.CopyToShaderParameters.ParameterUV,
+                    },
+                Cycle = layer.Cycle,
+            };
+        }
+
+        private static DisplacementData CopyDisplacement(DisplacementData displacement)
+        {
+            var copy = new DisplacementData
+            {
+                ShaderOverride = displacement.ShaderOverride,
+            };
+
+            foreach (var (size, layer) in displacement.SizeMaps)
+            {
+                copy.SizeMaps[size] = CopyLayer(layer);
+            }
+
+            return copy;
         }
 
         private bool TryCopyXenoDeathAppearance(EntityUid source, EntityUid ghost)

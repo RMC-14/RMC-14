@@ -1,7 +1,6 @@
-using Content.Client.Inventory;
+using Content.Client._RMC14.Ghost;
 using Content.Shared._RMC14.GhostColor;
 using Content.Shared.Ghost;
-using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Robust.Client.GameObjects;
 
@@ -34,31 +33,14 @@ public sealed class GhostColorSystem : EntitySystem
                 layer.Color = layer.Color.WithAlpha(BodyAlpha);
             }
 
-            if (TryComp(uid, out InventorySlotsComponent? inventory))
+            if (TryComp(uid, out GhostHumanoidAppearanceVisualsComponent? ghostVisuals))
             {
-                foreach (var revealed in inventory.VisualLayerKeys.Values)
+                foreach (var key in ghostVisuals.BoostedLayers)
                 {
-                    foreach (var key in revealed)
-                    {
-                        if (!sprite.LayerMapTryGet(key, out var index))
-                            continue;
+                    if (!sprite.LayerMapTryGet(key, out var index))
+                        continue;
 
-                        sprite[index].Color = sprite[index].Color.WithAlpha(clothingAlpha);
-                    }
-                }
-            }
-
-            if (TryComp(uid, out HandsComponent? hands))
-            {
-                foreach (var revealed in hands.RevealedLayers.Values)
-                {
-                    foreach (var key in revealed)
-                    {
-                        if (!sprite.LayerMapTryGet(key, out var index))
-                            continue;
-
-                        sprite[index].Color = sprite[index].Color.WithAlpha(clothingAlpha);
-                    }
+                    sprite[index].Color = sprite[index].Color.WithAlpha(clothingAlpha);
                 }
             }
         }
