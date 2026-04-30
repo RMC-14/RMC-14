@@ -18,7 +18,6 @@ using Robust.Shared.Prototypes;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
 
 namespace Content.Server._RMC14.Camera;
 
@@ -162,8 +161,6 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
             using var image = Image.Load<Rgba32>(input);
             image.Metadata.ExifProfile = null;
             image.Metadata.IccProfile = null;
-
-            image.Mutate(x => x.Resize(cameraComp.Resolution, cameraComp.Resolution));
 
             using var output = new MemoryStream();
             image.SaveAsPng(output);

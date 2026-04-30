@@ -44,8 +44,8 @@
     - [ RMCJumpsuitOrangeEscapedPrisoner, CMSatchelSecurity, RMCShoesJackboots, RMCPouchGeneralLarge, WeaponShotgunM357Sawn ]
     # Stowaway
     - [ RMCHipsterGlasses, RMCSatchelStowawayFill, RMCJumpsuitLiaisonStowaway, RMCShoesBrown, RMCBriefcaseStowAway, RMCPouchGeneralLargeFillStowaway ]
-    # Private Detective (TODO: Camera and tape recorder)
-    - [ RMCHeadCapFedoraTan, RMCJumpsuitLiaisonShoulderHolster, RMCCoatBureauTrenchCoatBeige, CMSatchel, RMCShoesLeather ]
+    # Private Detective (TODO: Tape recorder)
+    - [ RMCHeadCapFedoraTan, RMCJumpsuitLiaisonShoulderHolster, RMCCoatBureauTrenchCoatBeige, CMSatchel, RMCShoesLeather, RMCPhotoCamera ]
     # Landing Pad Attendant
     - [ RMCJumpsuitCivilianYellow, RMCHeadCapFlippable, RMCSatchelNorm, CMBootsBlackFilled, CMPackFlare, RMCHazardVest, RMCBinoculars, RMCBeltUtilityGeneral, CMHandsBlackMarine, RMCEarmuffs ]
     # High roller
@@ -54,8 +54,8 @@
     - [ RMCHeadFoil, CMMaskGas, RMCArmorVestCivilian, RMCJumpsuitSteward, RMCHandsVeteranSPP, RMCBootsSPPFilled, RMCBackpackMarineTechPrepperFill, RMCPouchGeneralLargeFillSPPRations]
     # Mad Scientist
     - [ RMCMaskKutjevoRespirator, RMCSatchelVirology, RMCJumpsuitCivilianScientist, CMHandsWhite, RMCLabcoatGreen, RMCWeldingGogglesSuperior, RMCShoesGreen, RMCPouchAutoinjectorFillEmergencyInjectors, RMCPamphletScience ]
-    # Cameraman (TODO: Old Camera, Camera, and Camera Film)
-    - [ RMCSunglassesBig, RMCSatchelBlack, RMCJumpsuitCorrespondent, RMCVestGrey, RMCShoesLaceup, RMCPouchGeneralLarge, RMCCameraBroadcasting ]
+    # Cameraman
+    - [ RMCSunglassesBig, RMCSatchelBlack, RMCJumpsuitCorrespondent, RMCVestGrey, RMCShoesLaceup, RMCPouchGeneralLarge, RMCCameraBroadcasting, RMCPhotoCameraOld, RMCPhotoCamera, RMCPhotoCameraFilmCartridge]
     # Pro Welder (TODO: welding pack)
     - [ RMCSatchelLightpackWelderProWelderFill, RMCHelmetWeldingPainted, RMCJumpsuitMercenaryEngineer, CMUtilityVest, RMCShoesCombat, CMHandsInsulated ]
     # Farmer (TODO: scythe and coveralls)

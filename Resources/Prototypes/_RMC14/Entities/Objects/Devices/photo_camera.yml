@@ -17,10 +17,25 @@
   - type: RMCPhotoCamera
 
 - type: entity
+  parent: RMCPhotoCamera
+  id: RMCPhotoCameraOld
+  name: old camera
+  description: An old, slightly beat-up retro-esque polaroid camera, it's antiquated enough to be marked as a collectors item, probably. It's a nice shade of blue.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/photo_camera.rsi
+    state: old
+  - type: Item
+    size: Tiny
+  - type: RMCPhotoCamera
+    remainingCharges: 30
+    canBeRecharged: false
+
+- type: entity
   parent: BaseItem
   id: RMCPhotoCameraFilmCartridge
   name: film cartridge
-  description: A camera film cartridge. Insert it into a camera to reload it.
+  description: A camera film cartridge. Insert it into a camera to reload it. #
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/photo_camera.rsi

@@ -82,7 +82,8 @@
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchGeneralLargeBureauObserverFill
     suitstorage: RMCFlashlight
-  inhand: # TODO RMC14 camera
+  inhand:
+  - RMCPhotoCamera
   - CMHealthAnalyzer
 
 - type: playTimeTracker

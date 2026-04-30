@@ -65,6 +65,12 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
         if (!TryComp(args.Used, out RMCPhotoCameraFilmComponent? cameraFilm))
             return;
 
+        if (!ent.Comp.CanBeRecharged)
+        {
+            Popup.PopupClient(Loc.GetString("rmc-photo-camera-film-insert-failed-unable", ("camera", ent)), args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
+
         if (ent.Comp.RemainingCharges > 0)
         {
             Popup.PopupClient(Loc.GetString("rmc-photo-camera-film-insert-failed-full", ("camera", ent)), args.User, args.User, PopupType.SmallCaution);

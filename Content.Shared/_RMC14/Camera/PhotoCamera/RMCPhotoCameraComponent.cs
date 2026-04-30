@@ -16,6 +16,12 @@ public sealed partial class RMCPhotoCameraComponent : Component
     public int RemainingCharges = 10;
 
     /// <summary>
+    ///     Whether the camera can be recharged.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool CanBeRecharged = true;
+
+    /// <summary>
     ///     The time when the current photo will finish printing.
     /// </summary>
     [DataField, AutoNetworkedField]

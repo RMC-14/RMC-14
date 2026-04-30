@@ -61,3 +61,24 @@
   storage:
     back:
     - CMFolderYellow
+
+- type: loadout
+  id: PhotoCameraRMC
+  cost: 2
+  storage:
+    back:
+    - RMCPhotoCamera
+
+- type: loadout
+  id: PhotoCameraFilmCartridgeRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPhotoCameraFilmCartridge
+
+- type: loadout
+  id: PhotoCameraOldRMC
+  cost: 3
+  storage:
+    back:
+    - RMCPhotoCameraOld
