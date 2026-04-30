@@ -1,7 +1,7 @@
 using Content.Client._RMC14.Ghost;
+using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.GhostColor;
 using Content.Shared.Ghost;
-using Content.Shared.Humanoid;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.GhostColor;
@@ -18,7 +18,7 @@ public sealed class GhostColorSystem : EntitySystem
         {
             var ghostColor = CompOrNull<GhostColorComponent>(uid)?.Color ?? ghost.Color;
 
-            if (!HasComp<HumanoidAppearanceComponent>(uid))
+            if (!HasComp<GhostHumanoidAppearanceComponent>(uid))
             {
                 sprite.Color = ghostColor.WithAlpha(BodyAlpha);
                 continue;

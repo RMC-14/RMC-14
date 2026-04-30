@@ -12,7 +12,6 @@ using Content.Client.UserInterface.Systems.Inventory.Controls;
 using Content.Client.UserInterface.Systems.Inventory.Widgets;
 using Content.Client.UserInterface.Systems.Inventory.Windows;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Ghost;
 using Content.Shared.Input;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Storage;
@@ -37,8 +36,6 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
     [UISystemDependency] private readonly HandsSystem _handsSystem = default!;
     [UISystemDependency] private readonly ContainerSystem _container = default!;
     [UISystemDependency] private readonly SpriteSystem _sprite = default!;
-    [UISystemDependency] private readonly WebbingSystem _webbing = default!;
-
     private EntityUid? _playerUid;
     private InventorySlotsComponent? _playerInventory;
     private readonly Dictionary<string, ItemSlotButtonContainer> _slotGroups = new();
@@ -134,15 +131,6 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
     private void UpdateInventoryHotbar(InventorySlotsComponent? clientInv)
     {
         if (clientInv == null)
-        {
-            _inventoryHotbar?.ClearButtons();
-            if (_inventoryButton != null)
-                _inventoryButton.Visible = false;
-
-            return;
-        }
-
-        if (_playerUid is { } uid && _entities.HasComponent<GhostComponent>(uid))
         {
             _inventoryHotbar?.ClearButtons();
             if (_inventoryButton != null)
@@ -253,9 +241,6 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
 
     public void ToggleInventoryBar()
     {
-        if (_playerUid is { } uid && _entities.HasComponent<GhostComponent>(uid))
-            return;
-
         if (_inventoryHotbar == null)
         {
             Log.Warning("Tried to toggle inventory bar when none are assigned");
@@ -411,12 +396,6 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
         UnloadSlots();
         _playerUid = clientUid;
         _playerInventory = clientInv;
-
-        if (_entities.HasComponent<GhostComponent>(clientUid))
-        {
-            UpdateInventoryHotbar(_playerInventory);
-            return;
-        }
 
         foreach (var slotData in clientInv.SlotData.Values)
         {

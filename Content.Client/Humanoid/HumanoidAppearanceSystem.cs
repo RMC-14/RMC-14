@@ -45,7 +45,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 
     private void OnHandleState(EntityUid uid, HumanoidAppearanceComponent component, ref AfterAutoHandleStateEvent args)
     {
-        UpdateSprite(uid, component, Comp<SpriteComponent>(uid));
+        RefreshAppearance(uid, component, Comp<SpriteComponent>(uid));
     }
 
     private void OnCvarChanged(bool value)
@@ -53,11 +53,11 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         var humanoidQuery = AllEntityQuery<HumanoidAppearanceComponent, SpriteComponent>();
         while (humanoidQuery.MoveNext(out var uid, out var humanoidComp, out var spriteComp))
         {
-            UpdateSprite(uid, humanoidComp, spriteComp);
+            RefreshAppearance(uid, humanoidComp, spriteComp);
         }
     }
 
-    private void UpdateSprite(EntityUid entity, IRMCHumanoidAppearance humanoid, SpriteComponent sprite)
+    public void RefreshAppearance(EntityUid entity, IRMCHumanoidAppearance humanoid, SpriteComponent sprite)
     {
         ClearAllMarkings(entity, humanoid, sprite);
         foreach (var key in humanoid.BaseLayers)
@@ -252,7 +252,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         humanoid.SkinColor = profile.Appearance.SkinColor;
         humanoid.EyeColor = profile.Appearance.EyeColor;
 
-        UpdateSprite(uid, humanoid, Comp<SpriteComponent>(uid));
+        RefreshAppearance(uid, humanoid, Comp<SpriteComponent>(uid));
     }
 
     private void ApplyMarkingSet(EntityUid entity, IRMCHumanoidAppearance humanoid, SpriteComponent sprite)
@@ -484,7 +484,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         var query = AllEntityQuery<HiddenAppearanceComponent, HumanoidAppearanceComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out _, out var appearance, out var sprite))
         {
-            UpdateSprite(uid, appearance, sprite);
+            RefreshAppearance(uid, appearance, sprite);
             UpdatePlayerMedals(uid);
         }
     }
@@ -497,7 +497,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             return;
         }
 
-        UpdateSprite(ent, appearance, sprite);
+        RefreshAppearance(ent, appearance, sprite);
         UpdatePlayerMedals(ent);
     }
 

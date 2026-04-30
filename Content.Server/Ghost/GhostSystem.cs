@@ -4,21 +4,17 @@ using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Components;
-using Content.Server.Humanoid;
-using Content.Shared.Body.Components;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
 using Content.Shared._RMC14.Ghost;
-using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
-using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DisplacementMap;
 using Content.Shared.Database;
@@ -30,7 +26,6 @@ using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
-using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Mind;
@@ -38,23 +33,16 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
-using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NameModifier.EntitySystems;
-using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
-using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
-using Content.Shared.Strip.Components;
 using Content.Shared.Tag;
-using Content.Shared.Temperature.Components;
 using Content.Shared.Warps;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
-using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -76,7 +64,6 @@ namespace Content.Server.Ghost
         [Dependency] private readonly EntityLookupSystem _lookup = default!;
         [Dependency] private readonly MindSystem _minds = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
-        [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
         [Dependency] private readonly SharedPhysicsSystem _physics = default!;
         [Dependency] private readonly ISharedPlayerManager _player = default!;
         [Dependency] private readonly TransformSystem _transformSystem = default!;
@@ -89,7 +76,6 @@ namespace Content.Server.Ghost
         [Dependency] private readonly SharedMindSystem _mind = default!;
         [Dependency] private readonly GameTicker _gameTicker = default!;
         [Dependency] private readonly DamageableSystem _damageable = default!;
-        [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
         [Dependency] private readonly InventorySystem _inventory = default!;
         [Dependency] private readonly SharedHandsSystem _hands = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -102,7 +88,7 @@ namespace Content.Server.Ghost
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
         private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamageType = "Asphyxiation";
-        private static readonly Dictionary<string, string> TemporarySlotMap = new()
+        private static readonly Dictionary<string, string> LegacySlotMap = new()
         {
             { "head", "HELMET" },
             { "eyes", "EYES" },
@@ -148,7 +134,6 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, BooActionEvent>(OnActionPerform);
             SubscribeLocalEvent<GhostComponent, ToggleGhostHearingActionEvent>(OnGhostHearingAction);
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
-            SubscribeLocalEvent<GhostComponent, RefreshMovementSpeedModifiersEvent>(OnGhostRefreshMovementSpeed);
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
 
@@ -442,12 +427,6 @@ namespace Content.Server.Ghost
             args.Cancelled = true;
         }
 
-        private void OnGhostRefreshMovementSpeed(Entity<GhostComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
-        {
-            if (args.WalkSpeedModifier != 0f && args.SprintSpeedModifier != 0f)
-                args.ModifySpeed(1f / args.WalkSpeedModifier, 1f / args.SprintSpeedModifier);
-        }
-
         private void OnToggleGhostVisibilityToAll(ToggleGhostVisibilityToAllEvent ev)
         {
             if (ev.Handled)
@@ -536,16 +515,10 @@ namespace Content.Server.Ghost
                 return null;
             }
 
-            var ghostPrototype = TryGetDeathAppearanceObserverPrototype(appearanceSource) ?? GameTicker.ObserverPrototypeName;
-            var ghost = SpawnAtPosition(ghostPrototype, spawnPosition.Value);
+            var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
-            var hasAppearanceCopyTarget = HasComp<GhostHumanoidAppearanceComponent>(ghost) || HasComp<GhostXenoAppearanceComponent>(ghost);
-            RemComp<StrippableComponent>(ghost);
-            StripGhostInheritedMobComponents(ghost);
-            NormalizeGhostMovementSpeed(ghost);
 
-            if (appearanceSource is { } source &&
-                hasAppearanceCopyTarget)
+            if (appearanceSource is { } source)
             {
                 CopyDeathAppearance(source, ghost);
             }
@@ -577,110 +550,50 @@ namespace Content.Server.Ghost
             return ghost;
         }
 
-        private void NormalizeGhostMovementSpeed(EntityUid ghost)
-        {
-            if (!TryComp<MovementSpeedModifierComponent>(ghost, out var movement))
-                return;
-
-            const float ghostWalkSpeed = 8f;
-            const float ghostSprintSpeed = 12f;
-            _movementSpeed.ChangeBaseSpeed(ghost, ghostWalkSpeed, ghostSprintSpeed, movement.BaseAcceleration, movement);
-            _movementSpeed.RefreshMovementSpeedModifiers(ghost, movement);
-
-        }
-
-        private void StripGhostInheritedMobComponents(EntityUid ghost)
-        {
-            RemComp<BodyComponent>(ghost);
-            RemComp<InventoryComponent>(ghost);
-            RemComp<HandsComponent>(ghost);
-            RemComp<PullerComponent>(ghost);
-            RemComp<StandingStateComponent>(ghost);
-            RemComp<SlowOnDamageComponent>(ghost);
-            RemComp<HungerComponent>(ghost);
-            RemComp<ThirstComponent>(ghost);
-            RemComp<TemperatureSpeedComponent>(ghost);
-            RemComp<SlowOnPullComponent>(ghost);
-        }
-
-        private EntProtoId? TryGetDeathAppearanceObserverPrototype(EntityUid? appearanceSource)
-        {
-            if (appearanceSource == null)
-                return null;
-
-            if (HasComp<GhostXenoAppearanceSourceComponent>(appearanceSource.Value))
-            {
-                const string xenoObserverPrototype = "MobXenoObserver";
-                if (!_prototypeManager.HasIndex<EntityPrototype>(xenoObserverPrototype))
-                    return null;
-
-                return xenoObserverPrototype;
-            }
-
-            if (!TryComp<HumanoidAppearanceComponent>(appearanceSource.Value, out var humanoid))
-                return null;
-
-            if (!_prototypeManager.TryIndex<SpeciesPrototype>(humanoid.Species, out var species))
-                return null;
-
-            var dollPrototype = species.DollPrototype.ToString();
-            if (!dollPrototype.EndsWith("Dummy"))
-                return null;
-
-            var observerPrototype = dollPrototype[..^"Dummy".Length] + "Observer";
-            if (!_prototypeManager.HasIndex<EntityPrototype>(observerPrototype))
-                return null;
-
-            return new EntProtoId(observerPrototype);
-        }
-
         private void CopyDeathAppearance(EntityUid source, EntityUid ghost)
         {
             if (TryCopyXenoDeathAppearance(source, ghost))
                 return;
 
-            if (TryComp<HumanoidAppearanceComponent>(source, out var sourceHumanoid) &&
-                TryComp<HumanoidAppearanceComponent>(ghost, out var ghostHumanoid))
-            {
-                _humanoid.CloneAppearance(source, ghost, sourceHumanoid, ghostHumanoid);
-            }
+            if (!TryComp(source, out HumanoidAppearanceComponent? sourceHumanoid))
+                return;
 
-            if (TryComp<InventoryComponent>(source, out var sourceInventory) &&
-                TryComp<GhostHumanoidAppearanceComponent>(ghost, out var ghostAppearance) &&
-                TryComp<HumanoidAppearanceComponent>(source, out sourceHumanoid))
-            {
-                AppendGhostInventoryLayers(source, ghost, sourceInventory, sourceHumanoid, ghostAppearance);
-            }
+            var ghostAppearance = EnsureComp<GhostHumanoidAppearanceComponent>(ghost);
+            ghostAppearance.Appearance = SnapshotHumanoidAppearance(sourceHumanoid);
+            ghostAppearance.Layers.Clear();
 
-            if (TryComp<HandsComponent>(source, out var sourceHands) &&
-                TryComp<GhostHumanoidAppearanceComponent>(ghost, out var ghostAppearanceHands))
-            {
-                AppendGhostHandLayers(source, ghost, sourceHands, ghostAppearanceHands);
-            }
+            if (TryComp(source, out InventoryComponent? sourceInventory))
+                AppendGhostInventoryLayers(source, sourceInventory, sourceHumanoid, ghostAppearance);
+
+            if (TryComp(source, out HandsComponent? sourceHands))
+                AppendGhostHandLayers(source, sourceHands, ghostAppearance);
+
+            Dirty(ghost, ghostAppearance);
         }
 
         private void AppendGhostInventoryLayers(
             EntityUid source,
-            EntityUid ghost,
             InventoryComponent sourceInventory,
             HumanoidAppearanceComponent sourceHumanoid,
             GhostHumanoidAppearanceComponent ghostAppearance)
         {
-            ghostAppearance.Layers.Clear();
-
             var slotEnumerator = _inventory.GetSlotEnumerator((source, sourceInventory));
             while (slotEnumerator.NextItem(out var item, out var slot))
             {
                 if (!TryComp(item, out ClothingComponent? clothing))
                     continue;
 
-                AddBaseEquipmentVisuals(item, slot.Name, sourceInventory.SpeciesId, clothing, GetClothingDisplacement(sourceInventory, sourceHumanoid, slot.Name), ghostAppearance);
+                AddEquipmentVisuals(
+                    slot.Name,
+                    sourceInventory.SpeciesId,
+                    clothing,
+                    GetClothingDisplacement(sourceInventory, sourceHumanoid, slot.Name),
+                    slot.Offset,
+                    ghostAppearance);
             }
-
-            Dirty(ghost, ghostAppearance);
         }
 
-        private void AppendGhostHandLayers(EntityUid source, EntityUid ghost, HandsComponent sourceHands, GhostHumanoidAppearanceComponent ghostAppearance)
+        private void AppendGhostHandLayers(EntityUid source, HandsComponent sourceHands, GhostHumanoidAppearanceComponent ghostAppearance)
         {
             foreach (var handName in sourceHands.SortedHands)
             {
@@ -691,87 +604,115 @@ namespace Content.Server.Ghost
                     continue;
                 }
 
-                AddBaseInhandVisuals(held.Value, hand.Value.Location, item, GetHandDisplacement(sourceHands, hand.Value.Location), ghostAppearance);
+                AddInhandVisuals(hand.Value.Location, item, GetHandDisplacement(sourceHands, hand.Value.Location), ghostAppearance);
             }
-
-            Dirty(ghost, ghostAppearance);
         }
 
-        private void AddBaseEquipmentVisuals(
-            EntityUid item,
+        private void AddEquipmentVisuals(
             string slot,
             string? speciesId,
             ClothingComponent clothing,
             DisplacementData? displacement,
+            Vector2 slotOffset,
             GhostHumanoidAppearanceComponent ghostAppearance)
         {
-            if (!TryGetDefaultClothingVisuals(clothing, slot, speciesId, out var defaultLayers))
+            if (!TryGetClothingVisuals(clothing, slot, speciesId, out var layers))
                 return;
 
-            foreach (var layer in defaultLayers!)
+            for (var i = 0; i < layers.Count; i++)
             {
-                AddSnapshot(slot, layer, displacement, true, ghostAppearance);
+                var layer = CopyLayer(layers[i]);
+                layer.Offset += slotOffset;
+
+                var key = layer.MapKeys?.FirstOrDefault() ?? $"{slot}-{i}";
+                AddSnapshot(key, layer, displacement, slot, true, ghostAppearance);
             }
         }
 
-        private void AddBaseInhandVisuals(
-            EntityUid itemUid,
+        private void AddInhandVisuals(
             HandLocation location,
             ItemComponent item,
             DisplacementData? displacement,
             GhostHumanoidAppearanceComponent ghostAppearance)
         {
-            if (!TryGetDefaultInhandVisuals(itemUid, item, location, out var defaultLayers))
+            if (!TryGetInhandVisuals(item, location, out var layers))
                 return;
 
-            foreach (var layer in defaultLayers!)
+            var defaultKey = $"inhand-{location.ToString().ToLowerInvariant()}";
+            for (var i = 0; i < layers.Count; i++)
             {
-                AddSnapshot($"inhand-{location.ToString().ToLowerInvariant()}", layer, displacement, true, ghostAppearance);
+                var key = layers[i].MapKeys?.FirstOrDefault() ?? (i == 0 ? defaultKey : $"{defaultKey}-{i}");
+                AddSnapshot(key, layers[i], displacement, null, true, ghostAppearance);
             }
+        }
+
+        private bool TryGetClothingVisuals(
+            ClothingComponent clothing,
+            string slot,
+            string? speciesId,
+            out List<PrototypeLayerData> layers)
+        {
+            var clothingVisuals = clothing.ClothingVisuals;
+            if (speciesId != null &&
+                clothingVisuals.TryGetValue($"{slot}-{speciesId}", out layers!))
+            {
+                return true;
+            }
+
+            if (clothingVisuals.TryGetValue(slot, out layers!))
+                return true;
+
+            return TryGetDefaultClothingVisuals(clothing, slot, speciesId, out layers);
         }
 
         private bool TryGetDefaultClothingVisuals(
             ClothingComponent clothing,
             string slot,
             string? speciesId,
-            out List<PrototypeLayerData>? layers)
+            out List<PrototypeLayerData> layers)
         {
-            layers = null;
+            layers = new();
 
             if (string.IsNullOrWhiteSpace(clothing.RsiPath))
                 return false;
 
-            var correctedSlot = TemporarySlotMap.GetValueOrDefault(slot, slot);
-
-            if (slot == "id" && clothing.EquippedState == null)
-                return false;
-
-            var state = clothing.EquippedState ?? $"equipped-{correctedSlot}";
-            if (!string.IsNullOrEmpty(clothing.EquippedPrefix) && clothing.EquippedState == null)
+            var correctedSlot = LegacySlotMap.GetValueOrDefault(slot, slot);
+            var state = $"equipped-{correctedSlot}";
+            if (clothing.EquippedState != null)
+                state = clothing.EquippedState;
+            else if (!string.IsNullOrEmpty(clothing.EquippedPrefix))
                 state = $"{clothing.EquippedPrefix}-equipped-{correctedSlot}";
 
             if (speciesId != null)
                 state = $"{state}-{speciesId}";
 
-            layers = new()
+            layers.Add(new PrototypeLayerData
             {
-                new PrototypeLayerData
-                {
-                    RsiPath = clothing.RsiPath,
-                    State = state,
-                },
-            };
+                RsiPath = clothing.RsiPath,
+                State = state,
+            });
 
             return true;
         }
 
-        private bool TryGetDefaultInhandVisuals(
-            EntityUid itemUid,
+        private bool TryGetInhandVisuals(
             ItemComponent item,
             HandLocation location,
-            out List<PrototypeLayerData>? layers)
+            out List<PrototypeLayerData> layers)
         {
-            layers = null;
+            var inhandVisuals = item.InhandVisuals;
+            if (inhandVisuals.TryGetValue(location, out layers!))
+                return true;
+
+            return TryGetDefaultInhandVisuals(item, location, out layers);
+        }
+
+        private bool TryGetDefaultInhandVisuals(
+            ItemComponent item,
+            HandLocation location,
+            out List<PrototypeLayerData> layers)
+        {
+            layers = new();
 
             var rsiPath = item.RsiPath;
             if (rsiPath == null)
@@ -779,15 +720,12 @@ namespace Content.Server.Ghost
 
             var defaultKey = $"inhand-{location.ToString().ToLowerInvariant()}";
             var state = item.HeldPrefix == null ? defaultKey : $"{item.HeldPrefix}-{defaultKey}";
-            layers = new()
+            layers.Add(new PrototypeLayerData
             {
-                new PrototypeLayerData
-                {
-                    RsiPath = rsiPath,
-                    State = state,
-                    MapKeys = new() { state },
-                },
-            };
+                RsiPath = rsiPath,
+                State = state,
+                MapKeys = new() { state },
+            });
 
             return true;
         }
@@ -819,16 +757,43 @@ namespace Content.Server.Ghost
             string key,
             PrototypeLayerData layer,
             DisplacementData? displacement,
+            string? bookmarkKey,
             bool boostedAlpha,
             GhostHumanoidAppearanceComponent ghostAppearance)
         {
             ghostAppearance.Layers.Add(new GhostHumanoidLayerSnapshot
             {
                 Key = key,
+                BookmarkKey = bookmarkKey,
                 Layer = CopyLayer(layer),
                 Displacement = displacement == null ? null : CopyDisplacement(displacement),
                 BoostedAlpha = boostedAlpha,
             });
+        }
+
+        private static RMCHumanoidAppearance SnapshotHumanoidAppearance(HumanoidAppearanceComponent sourceHumanoid)
+        {
+            return new RMCHumanoidAppearance
+            {
+                ClientOldMarkings = new(sourceHumanoid.ClientOldMarkings),
+                MarkingSet = new(sourceHumanoid.MarkingSet),
+                BaseLayers = new(sourceHumanoid.BaseLayers),
+                PermanentlyHidden = new(sourceHumanoid.PermanentlyHidden),
+                Gender = sourceHumanoid.Gender,
+                Age = sourceHumanoid.Age,
+                CustomBaseLayers = new(sourceHumanoid.CustomBaseLayers),
+                Species = sourceHumanoid.Species,
+                SkinColor = sourceHumanoid.SkinColor,
+                HiddenLayers = new(sourceHumanoid.HiddenLayers),
+                Sex = sourceHumanoid.Sex,
+                EyeColor = sourceHumanoid.EyeColor,
+                CachedHairColor = sourceHumanoid.CachedHairColor,
+                CachedFacialHairColor = sourceHumanoid.CachedFacialHairColor,
+                HideLayersOnEquip = new(sourceHumanoid.HideLayersOnEquip),
+                UndergarmentTop = sourceHumanoid.UndergarmentTop,
+                UndergarmentBottom = sourceHumanoid.UndergarmentBottom,
+                MarkingsDisplacement = new(sourceHumanoid.MarkingsDisplacement),
+            };
         }
 
         private static PrototypeLayerData CopyLayer(PrototypeLayerData layer)
@@ -875,12 +840,12 @@ namespace Content.Server.Ghost
 
         private bool TryCopyXenoDeathAppearance(EntityUid source, EntityUid ghost)
         {
-            if (!TryComp<GhostXenoAppearanceSourceComponent>(source, out var sourceAppearance) ||
-                !TryComp<GhostXenoAppearanceComponent>(ghost, out var ghostAppearance))
+            if (!TryComp<GhostXenoAppearanceSourceComponent>(source, out var sourceAppearance))
             {
                 return false;
             }
 
+            var ghostAppearance = EnsureComp<GhostXenoAppearanceComponent>(ghost);
             ghostAppearance.Sprite = sourceAppearance.Sprite;
             ghostAppearance.OvipositorSprite = sourceAppearance.OvipositorSprite;
             ghostAppearance.OvipositorState = CompOrNull<XenoOvipositorCapableComponent>(source)?.AttachedState;
