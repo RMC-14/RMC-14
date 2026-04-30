@@ -295,7 +295,7 @@
     - RMCWeaponLauncherDisposable: RMCSpawnerRandomRocketsDisposable
     - RMCWeaponFlamer: RMCTankFlamer
     - WeaponShotgunM890: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponLauncherM85A1: RMCSpawnerRandomGrenadePackets
+    - RMCWeaponLauncherM79: RMCSpawnerRandomGrenadePackets
     - RMCMK80: CMMagazinePistolMK80
 
 - type: entity
@@ -516,7 +516,7 @@
   - type: GunSpawner
     chanceToSpawn: 0.8
 
-# Civilian gun 
+# Civilian gun
 - type: entity
   parent: RMCSpawnerRandomGunBase
   id: RMCSpawnerRandomGunCiv
@@ -581,7 +581,7 @@
   - type: GunSpawner
     chanceToSpawn: 0.8
 
-# corporate gun 
+# corporate gun
 - type: entity
   parent: RMCSpawnerRandomGunBase
   id: RMCSpawnerRandomGunCorp
