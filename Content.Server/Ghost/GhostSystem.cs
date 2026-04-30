@@ -7,7 +7,6 @@ using Content.Server.Ghost.Components;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
-// RMC: upstream ghost system is extended by RMC appearance-copy support in a dedicated partial.
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared.Actions;
@@ -45,7 +44,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Ghost
 {
-    // RMC: partial so the large death-appearance implementation lives in Content.Server/_RMC14/Ghost.
+    // RMC
     public sealed partial class GhostSystem : SharedGhostSystem
     {
         [Dependency] private readonly SharedActionsSystem _actions = default!;
@@ -107,6 +106,7 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, BooActionEvent>(OnActionPerform);
             SubscribeLocalEvent<GhostComponent, ToggleGhostHearingActionEvent>(OnGhostHearingAction);
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
+
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
 
