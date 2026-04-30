@@ -159,6 +159,8 @@ rmc-ert-error-source-cooldown = {$call} is on cooldown for this distress source.
 rmc-ert-error-source-pending = A distress request from this source is already pending.
 rmc-ert-error-call-not-force-callable = {$call} is not available for force calling.
 rmc-ert-error-force-call-failed = Failed to force call {$call}.
+rmc-ert-error-no-shuttle = {$call} has no shuttle available.
+rmc-ert-error-missing-shuttle-cargo = {$call} has no shuttle cargo configured.
 
 rmc-ert-category-response = Response
 rmc-ert-category-military = Military
@@ -167,6 +169,7 @@ rmc-ert-category-law = Law
 rmc-ert-category-foreign-military = Foreign Military
 rmc-ert-category-civilian = Civilian
 rmc-ert-category-event = Event
+rmc-ert-category-hostile = Hostile
 
 rmc-ert-organization-unmc = UNMC
 rmc-ert-organization-weya = WeYa
@@ -176,6 +179,7 @@ rmc-ert-organization-tse = TSE
 rmc-ert-organization-provost = Provost
 rmc-ert-organization-clf = CLF
 rmc-ert-organization-pizza = Pizza Galaxy
+rmc-ert-organization-civilian = Civilian
 
 rmc-ert-admin-button-cbrn = SEND CBRN
 rmc-ert-admin-button-pmc = SEND PMC
@@ -200,6 +204,8 @@ rmc-ert-call-tse-name = TSE Royal Marines
 rmc-ert-call-provost-name = Provost Enforcement Team
 rmc-ert-call-clf-name = CLF Cell
 rmc-ert-call-pizza-name = Pizza Galaxy Delivery Shuttle
+rmc-ert-call-supply-drop-name = Emergency Supply Drop
+rmc-ert-call-zombies-name = Zombie Mob
 
 rmc-ert-role-cbrn-leader = CBRN Squad Leader
 rmc-ert-role-cbrn-rifleman = CBRN Rifleman
@@ -229,6 +235,7 @@ rmc-ert-role-clf-leader = CLF Cell Leader
 rmc-ert-role-clf-soldier = CLF Soldier
 rmc-ert-role-clf-medic = CLF Medic
 rmc-ert-role-pizza-deliverer = Pizza Deliverer
+rmc-ert-role-zombie = Zombie
 
 rmc-ert-announcement-title-priority-alert = Priority Alert
 rmc-ert-announcement-title-distress-beacon = Distress Beacon
@@ -281,6 +288,8 @@ rmc-ert-announcement-clf-arrival = 'Attention, you are trespassing on our sovere
 
 rmc-ert-announcement-pizza-dispatch = Pizza Galaxy has accepted the emergency delivery order. {$team} is preparing to deploy.
 rmc-ert-announcement-pizza-arrival = 'That'll be... sixteen orders of cheesy fries, eight large double topping pizzas, nine bottles of Four Loko... hello? Is anyone on this ship? Your pizzas are getting cold.'
+rmc-ert-announcement-supply-drop-dispatch = Weyland-Yutani Automated Supply Drop 334-Q signal received. Docking procedures have commenced.
+rmc-ert-announcement-supply-drop-arrival = Weyland-Yutani Automated Supply Drop 334-Q has docked aboard the warship.
 
 rmc-ert-beacon-request-title-handheld = handheld distress beacon
 rmc-ert-beacon-request-title-cmb = CMB distress beacon

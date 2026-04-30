@@ -314,6 +314,70 @@
     minRequiredSlots: 1
 
 - type: rmcERTCall
+  id: RMCERTCallSupplyDrop
+  name: rmc-ert-call-supply-drop-name
+  organization: rmc-ert-organization-weya
+  npcFactions: [ WeYa ]
+  iffFaction: FactionWeYa
+  category: rmc-ert-category-corporate
+  randomWeight: 0
+  allowedSources: [ Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  shuttleCargoCount: 4
+  shuttleCargo:
+  - RMCCrateMK80
+  - RMCCrateM34
+  - RMCCrateExplosivesSurplus
+  - RMCCrateM54CMK1
+  - RMCCrateM54CE2
+  - RMCCrateMOU53
+  - RMCCrateM2C
+  - RMCCrateXM88 # TODO RMC14 replace with exact SS13 L42A-equivalent crate if ported separately.
+  - RMCCrateXM51
+  announcements:
+    dispatch:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-supply-drop-dispatch
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-supply-drop-arrival
+  requirements:
+    recruitmentDuration: 0s
+    minRequiredSlots: 0
+    maxCallsPerRound: 0
+
+- type: rmcERTCall
+  id: RMCERTCallZombies
+  name: rmc-ert-call-zombies-name
+  organization: rmc-ert-organization-civilian
+  npcFactions: [ SimpleHostile ]
+  category: rmc-ert-category-hostile
+  randomWeight: 0
+  allowedSources: [ Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadHostile
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: zombie
+    name: rmc-ert-role-zombie
+    job: CMSurvivor
+    ghostRoleEntity: RMCRandomHumanoidZombie
+    min: 2
+    max: 8
+  requirements:
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 2
+
+- type: rmcERTCall
   id: RMCERTCallCMB
   name: rmc-ert-call-cmb-name
   organization: rmc-ert-organization-cmb

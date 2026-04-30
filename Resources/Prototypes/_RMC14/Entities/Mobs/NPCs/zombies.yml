@@ -1,3 +1,33 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidZombie
+  name: zombie ghost role
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: Interface/Misc/job_icons.rsi
+    state: Zombie
+  - type: RandomHumanoidSpawner
+    settings: RMCERTZombie
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCERTZombie
+  components:
+  - type: GhostRole
+    name: rmc-ert-role-zombie
+    description: zombie-role-desc
+    rules: zombie-role-rules
+    raffle:
+      settings: short
+  - type: RMCJobSpawner
+    job: CMSurvivor
+  - type: Loadout
+    prototypes: [ RMCGearCorpseColonist ]
+  - type: Zombie
+  - type: ZombieAccentOverride
+    accent: RMCZombie
+
 - type: randomHumanoidSettings
   parent: RMCCorpse
   id: RMCZombifiedCorpse

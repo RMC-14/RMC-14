@@ -889,6 +889,35 @@ public sealed class RMCERTSystem : EntitySystem
         request.PlannedRoster.Clear();
         request.SpawnedGhostRoles.Clear();
 
+        if (IsCargoOnlyShuttle(call))
+        {
+            if (!SpawnShuttleCargo(request, call, shuttle, out error))
+            {
+                FailRequest(request, error);
+                return;
+            }
+
+            request.State = RMCERTRequestState.Recruiting;
+            request.RecruitmentEndsAt = _timing.CurTime;
+            request.NextAutoLaunchAttempt = _timing.CurTime;
+            AddERTRequestLog(LogImpact.High,
+                "cargo shuttle loaded",
+                request,
+                "system",
+                call,
+                $"cargo={call.ShuttleCargoCount}, shuttle={FormatEntity(shuttle)}");
+            if (request.SourceEntity is { Valid: true } cargoBeacon &&
+                TryComp(cargoBeacon, out RMCERTDistressBeaconComponent? cargoBeaconComp) &&
+                cargoBeaconComp.SingleUse)
+            {
+                cargoBeaconComp.Spent = true;
+            }
+
+            DirtyState(request);
+            TryLaunchRequest(request, call, Loc.GetString("rmc-ert-launcher-automatic"));
+            return;
+        }
+
         if (!BuildRoster(request, call, out error))
         {
             FailRequest(request, error);
@@ -931,6 +960,12 @@ public sealed class RMCERTSystem : EntitySystem
         // Auto-launch retries are polled from Update instead of chained through Timer.Spawn.
         // TimerManager processes newly-added timers in the same update pass, so adding a short
         // retry timer from a timer callback can snowball if the server has a long frame.
+    }
+
+    private static bool IsCargoOnlyShuttle(RMCERTCallPrototype call)
+    {
+        return call.Roles.Count == 0 &&
+               call.ShuttleCargo.Count > 0;
     }
 
     private bool TryPrepareRequestForDispatch(
@@ -1600,6 +1635,72 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         return request.SpawnedGhostRoles.Count > 0;
+    }
+
+    private bool SpawnShuttleCargo(RMCERTRequest request, RMCERTCallPrototype call, EntityUid? shuttle, out string error)
+    {
+        error = string.Empty;
+        if (shuttle is not { Valid: true } shuttleUid || !Exists(shuttleUid))
+        {
+            error = Loc.GetString("rmc-ert-error-no-shuttle", ("call", call.Name));
+            return false;
+        }
+
+        if (call.ShuttleCargo.Count == 0)
+        {
+            error = Loc.GetString("rmc-ert-error-missing-shuttle-cargo", ("call", call.Name));
+            return false;
+        }
+
+        var cargoCount = call.ShuttleCargoCount > 0
+            ? call.ShuttleCargoCount
+            : call.ShuttleCargo.Count;
+        var coordinates = GetShuttleCargoCoordinates(shuttleUid);
+        var cargoPool = call.ShuttleCargo.ToList();
+        var coordinatePool = coordinates.ToList();
+        var spawnedCargo = new List<EntityUid>();
+
+        for (var i = 0; i < cargoCount; i++)
+        {
+            if (cargoPool.Count == 0)
+                cargoPool = call.ShuttleCargo.ToList();
+            if (coordinatePool.Count == 0)
+                coordinatePool = coordinates.ToList();
+
+            var cargoIndex = _random.Next(cargoPool.Count);
+            var cargo = cargoPool[cargoIndex];
+            cargoPool.RemoveAt(cargoIndex);
+
+            var coordinateIndex = _random.Next(coordinatePool.Count);
+            var coords = coordinatePool[coordinateIndex];
+            coordinatePool.RemoveAt(coordinateIndex);
+
+            spawnedCargo.Add(Spawn(cargo, coords));
+        }
+
+        AddERTRequestLog(LogImpact.Medium,
+            "cargo spawned",
+            request,
+            "system",
+            call,
+            $"count={spawnedCargo.Count}, entities=[{string.Join(", ", spawnedCargo.Select(uid => ToPrettyString(uid)))}]");
+        return spawnedCargo.Count > 0;
+    }
+
+    private List<EntityCoordinates> GetShuttleCargoCoordinates(EntityUid shuttle)
+    {
+        var coordinates = new List<EntityCoordinates>();
+        var query = EntityQueryEnumerator<RMCERTSpawnPointComponent, TransformComponent>();
+        while (query.MoveNext(out _, out _, out var xform))
+        {
+            if (xform.GridUid == shuttle)
+                coordinates.Add(xform.Coordinates);
+        }
+
+        if (coordinates.Count == 0)
+            coordinates.Add(new EntityCoordinates(shuttle, Vector2.Zero));
+
+        return coordinates;
     }
 
     private void AddRosterSlot(RMCERTRequest request, RMCERTRoleEntry role)
@@ -2708,11 +2809,26 @@ public sealed class RMCERTSystem : EntitySystem
     {
         foreach (var call in _prototypes.EnumeratePrototypes<RMCERTCallPrototype>())
         {
-            if (call.Roles.Count == 0)
+            if (call.Roles.Count == 0 &&
+                !IsCargoOnlyShuttle(call))
+            {
                 Log.Error($"ERT call {call.ID} has no roles configured.");
+            }
 
             if (!TryGetShuttleMapPath(call, out _, out var shuttleError))
                 Log.Error($"ERT call {call.ID} has invalid shuttle configuration: {shuttleError}");
+
+            if (call.ShuttleCargo.Count > 0 || call.ShuttleCargoCount > 0)
+            {
+                if (call.ShuttleCargo.Count == 0)
+                    Log.Error($"ERT call {call.ID} has shuttleCargoCount but no shuttle cargo prototypes.");
+
+                foreach (var cargo in call.ShuttleCargo)
+                {
+                    if (!_prototypes.HasIndex<EntityPrototype>(cargo))
+                        Log.Error($"ERT call {call.ID} references missing shuttle cargo entity {cargo}.");
+                }
+            }
 
             if (call.ShuttleSpawnMarker is { } spawnMarker)
             {

@@ -68,6 +68,12 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     public EntProtoId? ShuttleSpawnMarker;
 
     [DataField]
+    public List<EntProtoId> ShuttleCargo = [];
+
+    [DataField]
+    public int ShuttleCargoCount;
+
+    [DataField]
     public bool AutoLaunch;
 
     [DataField]
@@ -82,7 +88,7 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     [DataField]
     public List<string> DeniedLandingTags = [];
 
-    [DataField(required: true)]
+    [DataField]
     public List<RMCERTRoleEntry> Roles = [];
 
     [DataField]
