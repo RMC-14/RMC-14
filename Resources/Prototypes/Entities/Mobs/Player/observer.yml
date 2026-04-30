@@ -109,6 +109,199 @@
     - AllowGhostShownByEvent
 
 - type: entity
+  parent:
+  - Incorporeal
+  - BaseMob
+  id: MobObserverHumanoidBase
+  abstract: true
+  name: observer
+  description: Boo!
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    color: "#ffffffff"
+    noRot: true
+    overrideContainerOcclusion: true
+    drawdepth: Ghosts
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 12
+    baseWalkSpeed: 8
+  - type: ContentEye
+    maxZoom: 1.44,1.44
+  - type: Eye
+    drawFov: false
+  - type: Input
+    context: "ghost"
+  - type: Examiner
+    skipChecks: true
+  - type: Ghost
+  - type: GhostHearing
+  - type: ShowElectrocutionHUD
+  - type: IntrinsicRadioReceiver
+  - type: ActiveRadio
+    receiveAllChannels: true
+    globalReceive: true
+  - type: Tag
+    tags:
+    - BypassInteractionRangeChecks
+    - AllowGhostShownByEvent
+  - type: PointLight
+    netsync: false
+    radius: 6
+    castShadows: false
+    enabled: false
+  - type: ActiveInputMover
+  - type: GhostColor
+  - type: Spectral
+  - type: GhostHumanoidAppearance
+  - type: FindParasite
+  - type: JoinXeno
+  - type: UserInterface
+    interfaces:
+      enum.XenoFindParasiteUI.Key:
+        type: FindParasiteBoundUserInterface
+        requireInputValidation: false
+      enum.DialogUiKey.Key:
+        type: DialogBui
+        requireInputValidation: false
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
+        requireInputValidation: false
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapGhost
+    marines: true
+    xenos: true
+  - type: ViewIntelObjectives
+  - type: VentSight
+  - type: IgnoreInteractionRange
+    whitelist:
+      components:
+      - Ladder
+    range: 15
+  - type: Hands
+    canBeStripped: false
+
+- type: entity
+  parent:
+  - MobHumanDummy
+  - MobObserverHumanoidBase
+  id: MobHumanObserver
+
+- type: entity
+  parent:
+  - MobDwarfDummy
+  - MobObserverHumanoidBase
+  id: MobDwarfObserver
+
+- type: entity
+  parent:
+  - MobDionaDummy
+  - MobObserverHumanoidBase
+  id: MobDionaObserver
+
+- type: entity
+  parent:
+  - MobMothDummy
+  - MobObserverHumanoidBase
+  id: MobMothObserver
+
+- type: entity
+  parent:
+  - MobReptilianDummy
+  - MobObserverHumanoidBase
+  id: MobReptilianObserver
+
+- type: entity
+  parent:
+  - MobSkeletonPersonDummy
+  - MobObserverHumanoidBase
+  id: MobSkeletonPersonObserver
+
+- type: entity
+  parent:
+  - MobSlimePersonDummy
+  - MobObserverHumanoidBase
+  id: MobSlimePersonObserver
+
+- type: entity
+  parent:
+  - MobVoxDummy
+  - MobObserverHumanoidBase
+  id: MobVoxObserver
+
+- type: entity
+  parent:
+  - MobGingerbreadDummy
+  - MobObserverHumanoidBase
+  id: MobGingerbreadObserver
+
+- type: entity
+  parent:
+  - MobArachnidDummy
+  - MobObserverHumanoidBase
+  id: MobArachnidObserver
+
+- type: entity
+  parent:
+  - MobAvaliDummy
+  - MobObserverHumanoidBase
+  id: MobAvaliObserver
+
+- type: entity
+  parent:
+  - MobFeroxiDummy
+  - MobObserverHumanoidBase
+  id: MobFeroxiObserver
+
+- type: entity
+  parent:
+  - MobFelinidDummy
+  - MobObserverHumanoidBase
+  id: MobFelinidObserver
+
+- type: entity
+  parent:
+  - MobRodentiaDummy
+  - MobObserverHumanoidBase
+  id: MobRodentiaObserver
+
+- type: entity
+  parent:
+  - MobSkrellDummy
+  - MobObserverHumanoidBase
+  id: MobSkrellObserver
+
+- type: entity
+  parent:
+  - MobVulpkaninDummy
+  - MobObserverHumanoidBase
+  id: MobVulpkaninObserver
+
+- type: entity
+  parent: MobObserver
+  id: MobXenoObserver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
+    color: "#fff8"
+    noRot: true
+    overrideContainerOcclusion: true
+    drawdepth: Ghosts
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: dead
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: Appearance
+  - type: GhostNonHumanoidAppearance
+    sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
+
+- type: entity
   parent: BaseMentalAction
   id: ActionGhostBoo
   name: Boo!

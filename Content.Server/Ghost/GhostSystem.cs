@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
+using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -555,11 +556,11 @@ namespace Content.Server.Ghost
 
         private void CopyDeathAppearance(EntityUid source, EntityUid ghost)
         {
-            if (TryCopyXenoDeathAppearance(source, ghost))
-                return;
-
             if (!TryComp(source, out HumanoidAppearanceComponent? sourceHumanoid))
+            {
+                TryCopyNonHumanoidDeathAppearance(source, ghost);
                 return;
+            }
 
             var ghostAppearance = EnsureComp<GhostHumanoidAppearanceComponent>(ghost);
             ghostAppearance.Appearance = SnapshotHumanoidAppearance(sourceHumanoid);
@@ -633,6 +634,7 @@ namespace Content.Server.Ghost
                 layer.Offset += slotOffset;
 
                 var key = layer.MapKeys?.FirstOrDefault() ?? $"{slot}-{i}";
+                layer.MapKeys = null;
                 AddSnapshot(key, layer, displacement, slot, true, ghostAppearance);
             }
         }
@@ -653,6 +655,7 @@ namespace Content.Server.Ghost
                 PopulateFallbackRsiPath(layer, item.RsiPath);
 
                 var key = layer.MapKeys?.FirstOrDefault() ?? (i == 0 ? defaultKey : $"{defaultKey}-{i}");
+                layer.MapKeys = null;
                 AddSnapshot(key, layer, displacement, null, true, ghostAppearance);
             }
         }
@@ -950,19 +953,21 @@ namespace Content.Server.Ghost
             return copy;
         }
 
-        private bool TryCopyXenoDeathAppearance(EntityUid source, EntityUid ghost)
+        private bool TryCopyNonHumanoidDeathAppearance(EntityUid source, EntityUid ghost)
         {
-            var ghostAppearance = EnsureComp<GhostXenoAppearanceComponent>(ghost);
+            var ghostAppearance = EnsureComp<GhostNonHumanoidAppearanceComponent>(ghost);
 
-            if (TryComp<GhostXenoAppearanceSourceComponent>(source, out var sourceAppearance))
+            if (TryComp<GhostNonHumanoidAppearanceSourceComponent>(source, out var sourceAppearance))
             {
                 ghostAppearance.Sprite = sourceAppearance.Sprite;
+                ghostAppearance.State = sourceAppearance.State;
                 ghostAppearance.SourcePrototype = null;
             }
             else if (TryComp(source, out MetaDataComponent? metaData) &&
                      metaData.EntityPrototype is { } prototype)
             {
                 ghostAppearance.Sprite = null;
+                ghostAppearance.State = null;
                 ghostAppearance.SourcePrototype = prototype.ID;
             }
             else
