@@ -15,7 +15,8 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Humanoid;
 
-public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
+// RMC: partial to expose RMC-specific appearance entrypoints from a dedicated _RMC14 file.
+public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly MarkingManager _markingManager = default!;
@@ -23,10 +24,11 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
     [Dependency] private readonly DisplacementMapSystem _displacement = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
-    // RMC14
+    // RMC begin
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ItemSystem _item = default!;
     [Dependency] private readonly RMCHumanoidAppearanceSystem _rmcHumanoid = default!;
+    // RMC end
 
     public override void Initialize()
     {
@@ -36,16 +38,17 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         Subs.CVar(_configurationManager, CCVars.AccessibilityClientCensorNudity, OnCvarChanged, true);
         Subs.CVar(_configurationManager, CCVars.AccessibilityServerCensorNudity, OnCvarChanged, true);
 
-        // RMC14
+        // RMC begin
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(UpdateHiddenSprites);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(UpdateHiddenSprites);
 
         SubscribeLocalEvent<HiddenAppearanceComponent, ComponentRemove>(OnHiddenRemove);
+        // RMC end
     }
 
     private void OnHandleState(EntityUid uid, HumanoidAppearanceComponent component, ref AfterAutoHandleStateEvent args)
     {
-        RefreshAppearance(uid, component, Comp<SpriteComponent>(uid));
+        UpdateSprite(uid, component, Comp<SpriteComponent>(uid));
     }
 
     private void OnCvarChanged(bool value)
@@ -53,11 +56,11 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         var humanoidQuery = AllEntityQuery<HumanoidAppearanceComponent, SpriteComponent>();
         while (humanoidQuery.MoveNext(out var uid, out var humanoidComp, out var spriteComp))
         {
-            RefreshAppearance(uid, humanoidComp, spriteComp);
+            UpdateSprite(uid, humanoidComp, spriteComp);
         }
     }
 
-    public void RefreshAppearance(EntityUid entity, IRMCHumanoidAppearance humanoid, SpriteComponent sprite)
+    private void UpdateSprite(EntityUid entity, IRMCHumanoidAppearance humanoid, SpriteComponent sprite)
     {
         ClearAllMarkings(entity, humanoid, sprite);
         foreach (var key in humanoid.BaseLayers)
@@ -252,7 +255,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         humanoid.SkinColor = profile.Appearance.SkinColor;
         humanoid.EyeColor = profile.Appearance.EyeColor;
 
-        RefreshAppearance(uid, humanoid, Comp<SpriteComponent>(uid));
+        UpdateSprite(uid, humanoid, Comp<SpriteComponent>(uid));
     }
 
     private void ApplyMarkingSet(EntityUid entity, IRMCHumanoidAppearance humanoid, SpriteComponent sprite)
@@ -484,7 +487,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         var query = AllEntityQuery<HiddenAppearanceComponent, HumanoidAppearanceComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out _, out var appearance, out var sprite))
         {
-            RefreshAppearance(uid, appearance, sprite);
+            UpdateSprite(uid, appearance, sprite);
             UpdatePlayerMedals(uid);
         }
     }
@@ -497,7 +500,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             return;
         }
 
-        RefreshAppearance(ent, appearance, sprite);
+        UpdateSprite(ent, appearance, sprite);
         UpdatePlayerMedals(ent);
     }
 

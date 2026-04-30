@@ -82,6 +82,7 @@ public sealed class ClientClothingSystem : ClothingSystem
         else if (TryComp(uid, out SpriteComponent? sprite))
             rsi = sprite.BaseRSI;
 
+        // RMC: keep client clothing rendering aligned with the shared equipped-visual resolver used by ghost appearance.
         var rsiPath = rsi?.Path.ToString();
         var resolution = ResolveEquippedVisuals(
             item,

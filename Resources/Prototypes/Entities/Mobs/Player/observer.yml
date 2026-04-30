@@ -108,6 +108,7 @@
     tags:
     - AllowGhostShownByEvent
 
+# RMC begin
 - type: entity
   parent:
   - Incorporeal
@@ -300,6 +301,7 @@
   - type: Appearance
   - type: GhostNonHumanoidAppearance
     sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
+# RMC end
 
 - type: entity
   parent: BaseMentalAction
