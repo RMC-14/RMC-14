@@ -2,7 +2,7 @@
   name: M79 grenade launcher
   parent: [ RMCBaseSlideMagazineVisualsBallistic, RMCBaseWeaponGrenadeLauncher ]
   id: RMCWeaponLauncherM79
-  description: The M79 grenade launcher is a single-shot, shoulder-fired, break-action grenade launcher.
+  description: A heavy, low-angle 40mm grenade launcher. Looks to be a hobbyist modification made to resemble a Vietnam War prop. This version has been modernized with an IFF enabled micro-computer. The wooden furniture is, in fact, made of painted hardened polykevlon.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
