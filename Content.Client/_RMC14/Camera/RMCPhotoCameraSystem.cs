@@ -4,8 +4,8 @@ using System.Numerics;
 using Content.Client._RMC14.NewPlayer;
 using Content.Client._RMC14.Photo;
 using Content.Shared._RMC14.Camera.PhotoCamera;
-using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -25,19 +25,19 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
-    private (IClydeViewport viewport, EntityUid eye, NetEntity cameraUser)? _pendingCapture;
+    private (IClydeViewport viewport, NetEntity camera)? _pendingCapture;
     private bool _skipFrame;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeNetworkEvent<TakePhotoEvent>(OnTakePhoto);
-        SubscribeNetworkEvent<ReceivedStoredPhotoEvent>(OnReceivedStoredPhoto);
+        SubscribeNetworkEvent<ReceiveStoredPhotoEvent>(OnReceivedStoredPhoto);
 
-        SubscribeLocalEvent<RMCPhotoCameraComponent, UniqueActionEvent>(OnUniqueAction);
+        SubscribeLocalEvent<RMCPhotoCameraComponent, AfterInteractEvent>(OnAfterInteract);
     }
 
-    private void OnUniqueAction(Entity<RMCPhotoCameraComponent> ent, ref UniqueActionEvent args)
+    private void OnAfterInteract(Entity<RMCPhotoCameraComponent> ent, ref AfterInteractEvent args)
     {
         if (!Timing.IsFirstTimePredicted || args.Handled)
             return;
@@ -69,24 +69,24 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (!TryComp(GetEntity(ev.Camera), out RMCPhotoCameraComponent? cameraComp))
             return;
 
-        if (_player.LocalEntity is not { } localEntity)
-            return;
-
-        var eye = GetEntity(ev.Eye);
+        var eye = GetEntity(cameraComp.Eye);
         if (!TryComp(eye, out EyeComponent? eyeComp))
             return;
 
-        var takingPhoto = EnsureComp<RMCTakingPhotoComponent>(localEntity);
-        takingPhoto.PhotoCoordinates = TransformSystem.GetMoverCoordinates(GetEntity(ev.Eye)).Offset(eyeComp.Offset);
-        takingPhoto.ZoomMode = ev.ZoomMode;
-        takingPhoto.Offset = eyeComp.Offset;
+        if (_player.LocalEntity is { } localEntity)
+        {
+            var takingPhoto = EnsureComp<RMCTakingPhotoComponent>(localEntity);
+            takingPhoto.PhotoCoordinates = TransformSystem.GetMoverCoordinates(eye.Value).Offset(eyeComp.Offset);
+            takingPhoto.ZoomMode = ev.ZoomMode;
+            takingPhoto.Offset = eyeComp.Offset;
 
-        _newPlayerVisualizer.UpdateAllAppearance();
+            _newPlayerVisualizer.UpdateAllAppearance();
+        }
 
-        TakePhoto((eye, eyeComp), cameraComp.Resolution, ev.CameraUser, ev.Zoom);
+        TakePhoto((eye.Value, eyeComp), cameraComp.Resolution, ev.Camera, ev.Zoom);
     }
 
-    private void OnReceivedStoredPhoto(ReceivedStoredPhotoEvent ev, EntitySessionEventArgs args)
+    private void OnReceivedStoredPhoto(ReceiveStoredPhotoEvent ev, EntitySessionEventArgs args)
     {
         var photo = GetEntity(ev.Photo);
         if (!TryComp(photo, out RMCPhotoComponent? photoComp))
@@ -103,7 +103,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         }
     }
 
-    private void TakePhoto(Entity<EyeComponent> eye, int resolution, NetEntity cameraUser, Vector2 zoom)
+    private void TakePhoto(Entity<EyeComponent> eye, int resolution, NetEntity camera, Vector2 zoom)
     {
         EyeSystem.SetZoom(eye, zoom);
 
@@ -112,7 +112,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         viewport.AutomaticRender = true;
         viewport.Eye = eye.Comp.Eye;
 
-        _pendingCapture = (viewport, eye, cameraUser);
+        _pendingCapture = (viewport, camera);
     }
 
     public bool TryGetPhoto(EntityUid photo, [NotNullWhen(true)] out OwnedTexture? photoTexture, out string photoName)
@@ -186,21 +186,22 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         _skipFrame = false;
         _pendingCapture = null;
 
-        var (viewport, eye, cameraUser) = pending;
+        var (viewport, camera) = pending;
 
         viewport.RenderTarget.CopyPixelsToMemory<Rgba32>(image =>
         {
             using var output = new MemoryStream();
             image.SaveAsPng(output);
 
-            RaiseNetworkEvent(new PhotoCaptureEvent(output.ToArray(), GetNetEntity(eye), cameraUser));
+            RaiseNetworkEvent(new PhotoCaptureEvent(output.ToArray(), camera));
+
+            viewport.Dispose();
 
             if (_player.LocalEntity is not { } localEntity)
                 return;
 
             RemComp<RMCTakingPhotoComponent>(localEntity);
             _newPlayerVisualizer.UpdateAllAppearance();
-            viewport.Dispose();
         });
     }
 }

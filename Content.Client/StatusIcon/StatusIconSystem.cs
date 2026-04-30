@@ -66,7 +66,7 @@ public sealed class StatusIconSystem : SharedStatusIconSystem
         if (meta.EntityLifeStage >= EntityLifeStage.Terminating)
             return list;
 
-        if (_photoCamera.InPhotoRange(uid)) // RMC14
+        if (_photoCamera.InPhotoRange(uid) || _playerManager.LocalEntity == null) // RMC14
             return list;
 
         var ev = new GetStatusIconsEvent(list);

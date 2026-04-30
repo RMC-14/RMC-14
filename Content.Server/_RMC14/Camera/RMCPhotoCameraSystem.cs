@@ -65,11 +65,14 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (!coordinates.IsValid(EntityManager))
             return;
 
-        if (!_examine.InRangeUnOccluded(sessionEntity, coordinates, 11))
+        if (!_examine.InRangeUnOccluded(sessionEntity, coordinates, camera.Value.Comp.Range))
             return;
 
         var cameraCoordinates = TransformSystem.GetMoverCoordinates(sessionEntity).SnapToGrid();
         var eye = Spawn(null, cameraCoordinates);
+
+        camera.Value.Comp.Eye = GetNetEntity(eye);
+        Dirty(camera.Value);
 
         var eyeComp = EnsureComp<EyeComponent>(eye);
         EnsureComp<RMCStaticZoomLevelComponent>(eye);
@@ -83,19 +86,26 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         var offset = coordinates.Position - cameraCoordinates.Position;
         EyeSystem.SetOffset(eye, offset, eyeComp);
 
-        var whiteListedSession = _adminManager.ActiveAdmins.FirstOrDefault() ?? _mentorManager.GetActiveMentors().FirstOrDefault();
+        var whiteListedSession = _adminManager.AllAdmins.FirstOrDefault();
 
         if (whiteListedSession == null)
         {
             foreach (var session in _playerManager.Sessions)
             {
-                if (!_mentorManager.IsMentor(session.UserId) &&
-                    !_jobWhitelist.IsWhitelisted(session.UserId, CommandingOfficerJob) &&
-                    !_jobWhitelist.IsWhitelisted(session.UserId, ProvostInspectorJob))
+                var isWhitelisted = _mentorManager.IsMentor(session.UserId) ||
+                                    _jobWhitelist.IsWhitelisted(session.UserId, CommandingOfficerJob) ||
+                                    _jobWhitelist.IsWhitelisted(session.UserId, ProvostInspectorJob);
+
+                if (!isWhitelisted)
                     continue;
 
-                whiteListedSession = session;
-                break;
+                if (session.AttachedEntity == null) // Prioritize players that are in the lobby.
+                {
+                    whiteListedSession = session;
+                    break;
+                }
+
+                whiteListedSession ??= session;
             }
         }
 
@@ -104,7 +114,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
             _viewSubscriber.AddViewSubscriber(eye, whiteListedSession);
             camera.Value.Comp.ImageRenderedBy = whiteListedSession.UserId;
 
-            var photoEv = new TakePhotoEvent(GetNetEntity(eye), GetNetEntity(camera.Value), GetNetEntity(sessionEntity), zoom, camera.Value.Comp.ZoomMode);
+            var photoEv = new TakePhotoEvent(GetNetEntity(camera.Value), zoom, camera.Value.Comp.ZoomMode);
             RaiseNetworkEvent(photoEv, whiteListedSession);
 
             return;
@@ -115,19 +125,30 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
     private void OnPhotoCaptured(PhotoCaptureEvent ev, EntitySessionEventArgs args)
     {
-        if (!_adminManager.IsAdmin(args.SenderSession, true) && !_mentorManager.IsMentor(args.SenderSession.UserId))
+        if (!_adminManager.IsAdmin(args.SenderSession, true) &&
+            !_mentorManager.IsMentor(args.SenderSession.UserId) &&
+            !_jobWhitelist.IsWhitelisted(args.SenderSession.UserId, CommandingOfficerJob) &&
+            !_jobWhitelist.IsWhitelisted(args.SenderSession.UserId, ProvostInspectorJob))
             return;
 
-        _viewSubscriber.RemoveViewSubscriber(GetEntity(ev.Eye), args.SenderSession);
-        QueueDel(GetEntity(ev.Eye));
+        var camera = GetEntity(ev.Camera);
+        if (!TryComp<RMCPhotoCameraComponent>(camera, out var cameraComp))
+            return;
+
+        var eyeEntity = GetEntity(cameraComp.Eye);
+        if (eyeEntity == null)
+            return;
+
+        _viewSubscriber.RemoveViewSubscriber(eyeEntity.Value, args.SenderSession);
+        QueueDel(eyeEntity);
+
+        cameraComp.Eye = null;
+        Dirty(camera, cameraComp);
 
         if (ev.ImageData.Length > MaxSize)
             return;
 
-        if (!TryGetCamera(GetEntity(ev.CameraUser), out var camera))
-            return;
-
-        if (camera.Value.Comp.PhotoPrintedAt != null || camera.Value.Comp.ImageData != null)
+        if (cameraComp.PhotoPrintedAt != null || cameraComp.ImageData != null)
             return;
 
         try
@@ -142,16 +163,16 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
             image.Metadata.ExifProfile = null;
             image.Metadata.IccProfile = null;
 
-            image.Mutate(x => x.Resize(camera.Value.Comp.Resolution, camera.Value.Comp.Resolution));
+            image.Mutate(x => x.Resize(cameraComp.Resolution, cameraComp.Resolution));
 
             using var output = new MemoryStream();
             image.SaveAsPng(output);
 
-            camera.Value.Comp.PhotoPrintedAt = Timing.CurTime + camera.Value.Comp.PrintDelay;
-            camera.Value.Comp.ImageData = output.ToArray();
-            Dirty(camera.Value);
+            cameraComp.PhotoPrintedAt = Timing.CurTime + cameraComp.PrintDelay;
+            cameraComp.ImageData = output.ToArray();
+            Dirty(camera, cameraComp);
 
-            Audio.PlayPvs(camera.Value.Comp.ShutterSound, camera.Value);
+            Audio.PlayPvs(cameraComp.ShutterSound, camera);
         }
         catch
         {
@@ -164,7 +185,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (!TryComp(GetEntity(ev.Photo), out RMCPhotoComponent? photo) || photo.ImageData == null)
             return;
 
-        RaiseNetworkEvent(new ReceivedStoredPhotoEvent(photo.ImageData, ev.Photo), args.SenderSession);
+        RaiseNetworkEvent(new ReceiveStoredPhotoEvent(photo.ImageData, ev.Photo), args.SenderSession);
     }
 
     public override void Update(float frameTime)

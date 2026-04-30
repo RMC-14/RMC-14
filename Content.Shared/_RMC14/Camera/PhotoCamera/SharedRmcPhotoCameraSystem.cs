@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -30,6 +31,7 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPhotoCameraComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<RMCPhotoCameraComponent, CycleCameraZoomActionEvent>(OnCycleZoom);
+        SubscribeLocalEvent<RMCPhotoCameraComponent, UniqueActionEvent>(OnUniqueAction);
         SubscribeLocalEvent<RMCPhotoCameraComponent, ExaminedEvent>(OnCameraExamined);
         SubscribeLocalEvent<RMCPhotoCameraComponent, InteractUsingEvent>(OnInteractUsing);
     }
@@ -42,17 +44,13 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 
     private void OnCycleZoom(Entity<RMCPhotoCameraComponent> ent, ref CycleCameraZoomActionEvent args)
     {
-        ent.Comp.ZoomMode++;
-        if ((int)ent.Comp.ZoomMode > (int)PhotoZoomMode.Wide)
-            ent.Comp.ZoomMode = PhotoZoomMode.Focused;
+        CycleZoom(ent, args.Performer);
+        args.Handled = true;
+    }
 
-        ent.Comp.ZoomLevel = ent.Comp.BaseZoomLevel + (int)ent.Comp.ZoomMode * ent.Comp.ZoomStep;
-        Dirty(ent);
-
-        var captureSize = (int)ent.Comp.ZoomMode * 2 + 1;
-        Popup.PopupClient(Loc.GetString("rmc-photo-camera-cycle-zoom", ("camera", ent.Owner), ("captureSize", captureSize)), args.Performer, args.Performer);
-        Audio.PlayPredicted(ent.Comp.CycleZoomSound, args.Performer, args.Performer);
-
+    private void OnUniqueAction(Entity<RMCPhotoCameraComponent> ent, ref UniqueActionEvent args)
+    {
+        CycleZoom(ent, args.UserUid);
         args.Handled = true;
     }
 
@@ -84,6 +82,20 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
             QueueDel(args.Used);
     }
 
+    private void CycleZoom(Entity<RMCPhotoCameraComponent> ent, EntityUid user)
+    {
+        ent.Comp.ZoomMode++;
+        if ((int)ent.Comp.ZoomMode > (int)PhotoZoomMode.Wide)
+            ent.Comp.ZoomMode = PhotoZoomMode.Focused;
+
+        ent.Comp.ZoomLevel = ent.Comp.BaseZoomLevel + (int)ent.Comp.ZoomMode * ent.Comp.ZoomStep;
+        Dirty(ent);
+
+        var captureSize = (int)ent.Comp.ZoomMode * 2 + 1;
+        Popup.PopupClient(Loc.GetString("rmc-photo-camera-cycle-zoom", ("camera", ent.Owner), ("captureSize", captureSize)), user, user);
+        Audio.PlayPredicted(ent.Comp.CycleZoomSound, user, user);
+    }
+
     protected bool TryGetCamera(EntityUid uid, [NotNullWhen(true)] out Entity<RMCPhotoCameraComponent>? camera)
     {
         camera = null;
@@ -104,21 +116,18 @@ public sealed class RequestPhotoCaptureEvent(NetCoordinates coordinates) : Entit
 }
 
 [Serializable, NetSerializable]
-public sealed class TakePhotoEvent(NetEntity eye, NetEntity camera, NetEntity cameraUser, Vector2 zoom, PhotoZoomMode zoomMode) : EntityEventArgs
+public sealed class TakePhotoEvent(NetEntity camera, Vector2 zoom, PhotoZoomMode zoomMode) : EntityEventArgs
 {
-    public NetEntity Eye = eye;
     public NetEntity Camera = camera;
-    public NetEntity CameraUser = cameraUser;
     public Vector2 Zoom = zoom;
     public PhotoZoomMode ZoomMode = zoomMode;
 }
 
 [Serializable, NetSerializable]
-public sealed class PhotoCaptureEvent(byte[] imageData, NetEntity eye, NetEntity cameraUser) : EntityEventArgs
+public sealed class PhotoCaptureEvent(byte[] imageData, NetEntity camera) : EntityEventArgs
 {
     public byte[] ImageData = imageData;
-    public NetEntity Eye = eye;
-    public NetEntity CameraUser = cameraUser;
+    public NetEntity Camera = camera;
 }
 
 [Serializable, NetSerializable]
@@ -128,7 +137,7 @@ public sealed class RequestStoredPhotoEvent(NetEntity photo) : EntityEventArgs
 }
 
 [Serializable, NetSerializable]
-public sealed class ReceivedStoredPhotoEvent(byte[] imageData, NetEntity photo) : EntityEventArgs
+public sealed class ReceiveStoredPhotoEvent(byte[] imageData, NetEntity photo) : EntityEventArgs
 {
     public byte[] ImageData = imageData;
     public NetEntity Photo = photo;

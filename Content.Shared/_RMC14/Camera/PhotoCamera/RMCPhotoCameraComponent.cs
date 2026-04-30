@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Maths;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -67,6 +68,18 @@ public sealed partial class RMCPhotoCameraComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Action;
+
+    /// <summary>
+    ///     The temporary eye used by the camera.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public NetEntity? Eye;
+
+    /// <summary>
+    ///     The maximum distance at which the camera can capture a photo.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float Range = 12f;
 
     /// <summary>
     ///     Image data that will be stored in the printed photo entity's <see cref="RMCPhotoComponent"/>.
