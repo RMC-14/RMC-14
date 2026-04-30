@@ -15,7 +15,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Humanoid;
 
-// RMC: partial to expose RMC-specific appearance entrypoints from a dedicated _RMC14 file.
+// RMC partial to expose
 public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -24,11 +24,10 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
     [Dependency] private readonly DisplacementMapSystem _displacement = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
-    // RMC begin
+    // RMC14
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ItemSystem _item = default!;
     [Dependency] private readonly RMCHumanoidAppearanceSystem _rmcHumanoid = default!;
-    // RMC end
 
     public override void Initialize()
     {
@@ -38,12 +37,10 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         Subs.CVar(_configurationManager, CCVars.AccessibilityClientCensorNudity, OnCvarChanged, true);
         Subs.CVar(_configurationManager, CCVars.AccessibilityServerCensorNudity, OnCvarChanged, true);
 
-        // RMC begin
-        SubscribeLocalEvent<LocalPlayerAttachedEvent>(UpdateHiddenSprites);
+        // RMC14        SubscribeLocalEvent<LocalPlayerAttachedEvent>(UpdateHiddenSprites);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(UpdateHiddenSprites);
 
         SubscribeLocalEvent<HiddenAppearanceComponent, ComponentRemove>(OnHiddenRemove);
-        // RMC end
     }
 
     private void OnHandleState(EntityUid uid, HumanoidAppearanceComponent component, ref AfterAutoHandleStateEvent args)

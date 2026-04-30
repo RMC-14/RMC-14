@@ -36,5 +36,4 @@ public sealed class RMCXenoDamageVisualsSystem : EntitySystem
             level = ContentHelpers.RoundToEqualLevels(damage, max, ent.Comp.States + 1);
         _appearance.SetData(ent, RMCDamageVisuals.State, level);
     }
-
 }

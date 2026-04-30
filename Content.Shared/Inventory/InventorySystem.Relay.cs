@@ -28,6 +28,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Wieldable;
 using Content.Shared.Zombies;
+
 namespace Content.Shared.Inventory;
 
 public partial class InventorySystem

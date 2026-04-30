@@ -10,7 +10,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-// RMC: partial so the shared equipped-visual resolver can live in Content.Shared/_RMC14/Clothing.
+// RMC partial
 public abstract partial class ClothingSystem : EntitySystem
 {
     [Dependency] private readonly SharedItemSystem _itemSys = default!;
