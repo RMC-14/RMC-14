@@ -27,6 +27,7 @@
     state: film
   - type: Item
     size: Tiny
+  - type: RMCPhotoCameraFilm
 
 - type: entity
   parent: BaseItem

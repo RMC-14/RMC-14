@@ -4,6 +4,7 @@ using Content.Client._RMC14.NewPlayer;
 using Content.Shared._RMC14.Camera.PhotoCamera;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Popups;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Shared.Player;
@@ -37,7 +38,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (!Timing.IsFirstTimePredicted || args.Handled)
             return;
 
-        if (ent.Comp.PhotoPrintedAt != null || ent.Comp.ImageData != null)
+        if (ent.Comp.PhotoPrintedAt != null)
             return;
 
         var world = _eye.PixelToMap(_inputManager.MouseScreenPosition);
@@ -47,6 +48,14 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         var center = TransformSystem.ToCoordinates(world).SnapToGrid();
         if (!center.IsValid(EntityManager))
             return;
+
+        if (ent.Comp.RemainingCharges <= 0)
+        {
+            if (_player.LocalEntity is { } localEntity)
+                Popup.PopupClient(Loc.GetString("rmc-photo-camera-make-photo-failed-empty", ("camera", ent)), localEntity, localEntity, PopupType.SmallCaution);
+
+            return;
+        }
 
         RaiseNetworkEvent(new RequestPhotoCaptureEvent(GetNetCoordinates(center)));
     }

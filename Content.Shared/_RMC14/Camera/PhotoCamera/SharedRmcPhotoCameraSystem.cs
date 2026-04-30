@@ -3,10 +3,12 @@ using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
@@ -21,6 +23,7 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
@@ -31,6 +34,7 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
         SubscribeLocalEvent<RMCPhotoCameraComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<RMCPhotoCameraComponent, CycleCameraZoomActionEvent>(OnCycleZoom);
         SubscribeLocalEvent<RMCPhotoCameraComponent, ExaminedEvent>(OnCameraExamined);
+        SubscribeLocalEvent<RMCPhotoCameraComponent, InteractUsingEvent>(OnInteractUsing);
     }
 
     private void AfterUIOpen(Entity<RMCPhotoComponent> ent, ref AfterActivatableUIOpenEvent args)
@@ -70,7 +74,29 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
     private void OnCameraExamined(Entity<RMCPhotoCameraComponent> ent, ref ExaminedEvent args)
     {
         var captureSize = (int)ent.Comp.ZoomMode * 2 + 1;
-        args.PushMarkup(Loc.GetString(Loc.GetString("rmc-photo-camera-examine-text", ("captureSize", captureSize))), 1);
+        args.PushMarkup(Loc.GetString(Loc.GetString("rmc-photo-camera-examine-text", ("captureSize", captureSize), ("charges", ent.Comp.RemainingCharges))), 1);
+    }
+
+    private void OnInteractUsing(Entity<RMCPhotoCameraComponent> ent, ref InteractUsingEvent args)
+    {
+        if (!TryComp(args.Used, out RMCPhotoCameraFilmComponent? cameraFilm))
+            return;
+
+        if (ent.Comp.RemainingCharges > 0)
+        {
+            Popup.PopupClient(Loc.GetString("rmc-photo-camera-film-insert-failed-full", ("camera", ent)), args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
+
+        args.Handled = true;
+
+        ent.Comp.RemainingCharges += cameraFilm.PhotoCharges;
+        Dirty(ent);
+
+        Audio.PlayPredicted(ent.Comp.FilmInsertSound, ent, args.User);
+
+        if (_net.IsServer)
+            QueueDel(args.Used);
     }
 
     protected bool TryGetCamera(EntityUid uid, [NotNullWhen(true)] out Entity<RMCPhotoCameraComponent>? camera)

@@ -9,25 +9,31 @@ namespace Content.Shared._RMC14.Camera.PhotoCamera;
 public sealed partial class RMCPhotoCameraComponent : Component
 {
     /// <summary>
-    ///     The time at which the photo will be printed.
+    ///     Remaining number of photos the camera can take before requiring new film.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int RemainingCharges = 10;
+
+    /// <summary>
+    ///     The time when the current photo will finish printing.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan? PhotoPrintedAt;
 
     /// <summary>
-    ///     The zoom level of the eye used to make the photo.
+    ///     The zoom level applied when capturing a photo.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float ZoomLevel = 0.125f;
 
     /// <summary>
-    ///     The base zoom level, used in combination with <see cref="ZoomStep"/>.
+    ///     The minimum zoom level used as the baseline for all zoom calculations.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float BaseZoomLevel = 0.025f;
 
     /// <summary>
-    ///     How much the zoom should be increased per increase in zoom mode.
+    ///     The incremental zoom change applied per zoom mode step.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float ZoomStep = 0.05f;
@@ -39,19 +45,19 @@ public sealed partial class RMCPhotoCameraComponent : Component
     public int Resolution = 1280;
 
     /// <summary>
-    ///     The current zoom mode of the camera, determines how many times the <see cref="Zoomstep"/> is multiplied, before being added to the <see cref="BaseZoomLevel"/>
+    ///     The current zoom preset determining how zoom step modifiers are applied.
     /// </summary>
     [DataField, AutoNetworkedField]
     public PhotoZoomMode ZoomMode = PhotoZoomMode.Standard;
 
     /// <summary>
-    ///     The time between taking the picture and the picture being spawned.
+    ///     The delay between capturing a photo and the printed photo being created.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan PrintDelay = TimeSpan.FromSeconds(2);
 
     /// <summary>
-    ///     The action prototype belonging to this action.
+    ///     Prototype ID of the action used to cycle camera zoom modes.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId ActionId = "RMCActionCycleCameraZoom";
@@ -63,34 +69,40 @@ public sealed partial class RMCPhotoCameraComponent : Component
     public EntityUid? Action;
 
     /// <summary>
-    ///     The photo data, only stored temporarily so it can be transferred to the <see cref="RMCPhotoComponent"/> of the printed photo.
+    ///     Image data that will be stored in the printed photo entity's <see cref="RMCPhotoComponent"/>.
     /// </summary>
     [DataField]
     public byte[]? ImageData;
 
     /// <summary>
-    ///     The user that rendered the photo.
+    ///     The identifier of the user that rendered the photo.
     /// </summary>
     [DataField]
     public Guid? ImageRenderedBy;
 
     /// <summary>
-    ///     The photo prototype.
+    ///     Prototype ID of the printed photo entity spawned from the camera.
     /// </summary>
     [DataField]
     public EntProtoId PhotoPrototype = "RMCPhotoCameraPicture";
 
     /// <summary>
-    ///     The sound played when a photo is made.
+    ///     The sound played when a photo is captured.
     /// </summary>
     [DataField]
     public SoundSpecifier ShutterSound = new SoundCollectionSpecifier("RMCPolaroid");
 
     /// <summary>
-    ///     The sound played when switching zoom mode.
+    ///     The sound played when cycling between zoom modes.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SoundSpecifier? CycleZoomSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/safety_toggle.ogg", AudioParams.Default.WithMaxDistance(6).WithVariation(0.125f));
+
+    /// <summary>
+    ///     The sound played when a new roll of film is inserted into the camera.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? FilmInsertSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagIn/revolver_magin.ogg");
 }
 
 [Serializable, NetSerializable]

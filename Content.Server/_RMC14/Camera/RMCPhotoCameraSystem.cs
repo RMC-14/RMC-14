@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.Camera.PhotoCamera;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Hands.Components;
+using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -49,6 +50,15 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
         if (!TryGetCamera(sessionEntity, out var camera))
             return;
+
+        if (camera.Value.Comp.PhotoPrintedAt != null)
+            return;
+
+        if (camera.Value.Comp.RemainingCharges <= 0)
+        {
+            Popup.PopupClient(Loc.GetString("rmc-photo-camera-make-photo-failed-empty", ("camera", camera)), sessionEntity, sessionEntity);
+            return;
+        }
 
         var coordinates = GetCoordinates(ev.Coordinates);
         if (!coordinates.IsValid(EntityManager))
@@ -95,15 +105,20 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
             var photoEv = new TakePhotoEvent(GetNetEntity(eye), GetNetEntity(camera.Value), GetNetEntity(sessionEntity), zoom, camera.Value.Comp.ZoomMode);
             RaiseNetworkEvent(photoEv, whiteListedSession);
+
+            return;
         }
 
-        Popup.PopupClient(Loc.GetString("rmc-photo-camera-make-photo-failed"), sessionEntity, sessionEntity);
+        Popup.PopupEntity(Loc.GetString("rmc-photo-camera-make-photo-failed"), sessionEntity, sessionEntity, PopupType.SmallCaution);
     }
 
     private void OnPhotoCaptured(PhotoCaptureEvent ev, EntitySessionEventArgs args)
     {
         if (!_adminManager.IsAdmin(args.SenderSession, true) && !_mentorManager.IsMentor(args.SenderSession.UserId))
             return;
+
+        _viewSubscriber.RemoveViewSubscriber(GetEntity(ev.Eye), args.SenderSession);
+        QueueDel(GetEntity(ev.Eye));
 
         if (ev.ImageData.Length > MaxSize)
             return;
@@ -136,8 +151,6 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
             Dirty(camera.Value);
 
             Audio.PlayPvs(camera.Value.Comp.ShutterSound, camera.Value);
-            _viewSubscriber.RemoveViewSubscriber(GetEntity(ev.Eye), args.SenderSession);
-            QueueDel(GetEntity(ev.Eye));
         }
         catch
         {
@@ -164,6 +177,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
             camera.PhotoPrintedAt = null;
             camera.ImageData = null;
+            camera.RemainingCharges -= 1;
             Dirty(uid, camera);
 
             if (_container.TryGetContainingContainer(uid, out var container))
