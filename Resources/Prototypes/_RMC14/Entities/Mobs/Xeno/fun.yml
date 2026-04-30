@@ -9,8 +9,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Rouny/rouny.rsi
-  - type: GhostXenoAppearanceSource
-    sprite: _RMC14/Mobs/Xenonids/Rouny/rouny.rsi
   - type: XenoEvolution
     max: 200
     evolvesTo: [ ]
@@ -27,8 +25,6 @@
   description: A cruel, cruel joke made by some sick individual.
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Wehny/wehny.rsi
-  - type: GhostXenoAppearanceSource
     sprite: _RMC14/Mobs/Xenonids/Wehny/wehny.rsi
   - type: XenoEvolution
     max: 200
@@ -57,8 +53,6 @@
     - DoorBumpOpener
     - RMCSynthGrabbable
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Extras/lesser_carrier.rsi
-  - type: GhostXenoAppearanceSource
     sprite: _RMC14/Mobs/Xenonids/Extras/lesser_carrier.rsi
     layers:
     - map: [ "enum.XenoVisualLayers.Base" ]

@@ -18,8 +18,6 @@
     name: cm-job-name-xeno-ravager
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/ravager.rsi
-  - type: GhostXenoAppearanceSource
-    sprite: _RMC14/Mobs/Xenonids/Ravager/ravager.rsi
     layers:
     - map: [ "enum.XenoVisualLayers.Base", "enum.XenoShardVisualLayers.Base" ]
       state: alive
@@ -185,8 +183,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
-  - type: GhostXenoAppearanceSource
-    sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -259,8 +255,6 @@
   suffix: Hedgehog
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Ravager/hedgehog_ravager.rsi
-  - type: GhostXenoAppearanceSource
     sprite: _RMC14/Mobs/Xenonids/Ravager/hedgehog_ravager.rsi
   - type: Xeno
     actionIds:

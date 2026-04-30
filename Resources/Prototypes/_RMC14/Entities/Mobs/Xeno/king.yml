@@ -13,8 +13,6 @@
     name: rmc-job-name-xeno-king
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/King/king.rsi
-  - type: GhostXenoAppearanceSource
-    sprite: _RMC14/Mobs/Xenonids/King/king.rsi
   - type: MobState
     allowedStates:
     - Alive

@@ -18,8 +18,6 @@
       settings: parasiteTimeRequirement
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
-  - type: GhostXenoAppearanceSource
-    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -176,8 +174,6 @@
     description: rmc-xeno-watcher-description
     popup: rmc-xeno-watcher-popup
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Parasite/watcher_parasite.rsi
-  - type: GhostXenoAppearanceSource
     sprite: _RMC14/Mobs/Xenonids/Parasite/watcher_parasite.rsi
   - type: XenoZoom
     zoom: 1.3, 1.3

@@ -18,8 +18,6 @@
     name: cm-job-name-xeno-crusher
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Crusher/crusher.rsi
-  - type: GhostXenoAppearanceSource
-    sprite: _RMC14/Mobs/Xenonids/Crusher/crusher.rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -148,8 +146,6 @@
   suffix: Charger
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
-  - type: GhostXenoAppearanceSource
     sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
   - type: MobThresholds
     thresholds:

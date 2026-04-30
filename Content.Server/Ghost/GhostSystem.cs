@@ -9,6 +9,7 @@ using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Humanoid;
+using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
@@ -39,6 +40,7 @@ using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Tag;
+using Robust.Shared.Containers;
 using Content.Shared.Warps;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -78,6 +80,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly DamageableSystem _damageable = default!;
         [Dependency] private readonly InventorySystem _inventory = default!;
         [Dependency] private readonly SharedHandsSystem _hands = default!;
+        [Dependency] private readonly SharedContainerSystem _container = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
@@ -584,6 +587,8 @@ namespace Content.Server.Ghost
                     continue;
 
                 AddEquipmentVisuals(
+                    source,
+                    item,
                     slot.Name,
                     sourceInventory.SpeciesId,
                     clothing,
@@ -609,6 +614,8 @@ namespace Content.Server.Ghost
         }
 
         private void AddEquipmentVisuals(
+            EntityUid wearer,
+            EntityUid equipment,
             string slot,
             string? speciesId,
             ClothingComponent clothing,
@@ -616,7 +623,7 @@ namespace Content.Server.Ghost
             Vector2 slotOffset,
             GhostHumanoidAppearanceComponent ghostAppearance)
         {
-            if (!TryGetClothingVisuals(clothing, slot, speciesId, out var layers))
+            if (!TryGetClothingVisuals(wearer, equipment, clothing, slot, speciesId, out var layers))
                 return;
 
             for (var i = 0; i < layers.Count; i++)
@@ -651,22 +658,111 @@ namespace Content.Server.Ghost
         }
 
         private bool TryGetClothingVisuals(
+            EntityUid wearer,
+            EntityUid clothingUid,
             ClothingComponent clothing,
             string slot,
             string? speciesId,
             out List<PrototypeLayerData> layers)
         {
+            layers = new();
+
             var clothingVisuals = clothing.ClothingVisuals;
             if (speciesId != null &&
-                clothingVisuals.TryGetValue($"{slot}-{speciesId}", out layers!))
+                clothingVisuals.TryGetValue($"{slot}-{speciesId}", out var speciesLayers))
             {
-                return true;
+                layers.AddRange(speciesLayers.Select(CopyLayer));
+            }
+            else if (clothingVisuals.TryGetValue(slot, out var slotLayers))
+            {
+                layers.AddRange(slotLayers.Select(CopyLayer));
+            }
+            else if (!TryGetDefaultClothingVisuals(clothing, slot, speciesId, out var defaultLayers))
+            {
+                return TryAppendAdditionalClothingVisuals(wearer, clothingUid, slot, layers);
+            }
+            else
+            {
+                layers.AddRange(defaultLayers);
             }
 
-            if (clothingVisuals.TryGetValue(slot, out layers!))
-                return true;
+            TryAppendAdditionalClothingVisuals(wearer, clothingUid, slot, layers);
+            return layers.Count > 0;
+        }
 
-            return TryGetDefaultClothingVisuals(clothing, slot, speciesId, out layers);
+        private bool TryAppendAdditionalClothingVisuals(
+            EntityUid wearer,
+            EntityUid clothingUid,
+            string slot,
+            List<PrototypeLayerData> layers)
+        {
+            var visuals = new GetEquipmentVisualsEvent(wearer, slot);
+            RaiseLocalEvent(clothingUid, visuals);
+
+            foreach (var (key, layer) in visuals.Layers)
+            {
+                var copy = CopyLayer(layer);
+                copy.MapKeys ??= new() { key };
+                layers.Add(copy);
+            }
+
+            AppendUniformAccessoryVisuals(clothingUid, layers);
+            return visuals.Layers.Count > 0 || layers.Count > 0;
+        }
+
+        private void AppendUniformAccessoryVisuals(EntityUid clothingUid, List<PrototypeLayerData> layers)
+        {
+            if (!TryComp<UniformAccessoryHolderComponent>(clothingUid, out var holder) ||
+                !_container.TryGetContainer(clothingUid, holder.ContainerId, out var container))
+            {
+                return;
+            }
+
+            var index = 0;
+            foreach (var accessory in container.ContainedEntities)
+            {
+                if (!TryComp<UniformAccessoryComponent>(accessory, out var accessoryComp))
+                    continue;
+
+                if (holder.HideAccessories && accessoryComp.HiddenByJacketRolling)
+                {
+                    index++;
+                    continue;
+                }
+
+                if (accessoryComp.PlayerSprite is not { } sprite)
+                {
+                    index++;
+                    continue;
+                }
+
+                layers.Add(new PrototypeLayerData
+                {
+                    RsiPath = sprite.RsiPath.ToString(),
+                    State = sprite.RsiState,
+                    Visible = !accessoryComp.Hidden,
+                    MapKeys = new() { GetUniformAccessoryKey(accessory, accessoryComp, index) },
+                });
+
+                index++;
+            }
+        }
+
+        private string GetUniformAccessoryKey(EntityUid uid, UniformAccessoryComponent component, int index)
+        {
+            var key = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(uid)}_{uid.Id}";
+
+            if (component.LayerKeys != null && component.LayerKeys.Count > 0 && component.Limit > 1)
+            {
+                var layerIndex = index < component.LayerKeys.Count ? index : component.LayerKeys.Count - 1;
+                key = component.LayerKeys[layerIndex];
+            }
+            else if (component.LayerKeys != null && component.LayerKeys.Count == 1)
+            {
+                key = component.LayerKeys[0];
+            }
+
+            return key;
         }
 
         private bool TryGetDefaultClothingVisuals(
@@ -856,15 +952,24 @@ namespace Content.Server.Ghost
 
         private bool TryCopyXenoDeathAppearance(EntityUid source, EntityUid ghost)
         {
-            if (!TryComp<GhostXenoAppearanceSourceComponent>(source, out var sourceAppearance))
+            var ghostAppearance = EnsureComp<GhostXenoAppearanceComponent>(ghost);
+
+            if (TryComp<GhostXenoAppearanceSourceComponent>(source, out var sourceAppearance))
+            {
+                ghostAppearance.Sprite = sourceAppearance.Sprite;
+                ghostAppearance.SourcePrototype = null;
+            }
+            else if (TryComp(source, out MetaDataComponent? metaData) &&
+                     metaData.EntityPrototype is { } prototype)
+            {
+                ghostAppearance.Sprite = null;
+                ghostAppearance.SourcePrototype = prototype.ID;
+            }
+            else
             {
                 return false;
             }
 
-            var ghostAppearance = EnsureComp<GhostXenoAppearanceComponent>(ghost);
-            ghostAppearance.Sprite = sourceAppearance.Sprite;
-            ghostAppearance.OvipositorSprite = sourceAppearance.OvipositorSprite;
-            ghostAppearance.OvipositorState = CompOrNull<XenoOvipositorCapableComponent>(source)?.AttachedState;
             ghostAppearance.SpentParasite = HasComp<ParasiteSpentComponent>(source);
             Dirty(ghost, ghostAppearance);
 
