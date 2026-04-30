@@ -5,6 +5,9 @@ using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Humanoid;
 using Robust.Client.GameObjects;
+using Robust.Client.ResourceManagement;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Client._RMC14.Ghost;
 
@@ -12,6 +15,7 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
 {
     [Dependency] private readonly DisplacementMapSystem _displacement = default!;
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private static readonly object[] TemplateLayers =
@@ -86,6 +90,9 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
         for (var i = 0; i < ent.Comp.Layers.Count; i++)
         {
             var snapshot = ent.Comp.Layers[i];
+            if (!CanApplyLayer(snapshot.Layer))
+                continue;
+
             var renderKey = $"ghosthum-{i}-{snapshot.Key}";
             var index = ResolveLayerIndex((ent.Owner, sprite), snapshot, renderKey, insertionIndices);
             _sprite.LayerSetData((ent.Owner, sprite), index, snapshot.Layer);
@@ -108,6 +115,20 @@ public sealed class GhostHumanoidAppearanceVisualizerSystem : EntitySystem
                 }
             }
         }
+    }
+
+    private bool CanApplyLayer(PrototypeLayerData layer)
+    {
+        if (string.IsNullOrWhiteSpace(layer.State))
+            return true;
+
+        if (string.IsNullOrWhiteSpace(layer.RsiPath))
+            return false;
+
+        if (!_resourceCache.TryGetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / layer.RsiPath, out var rsi))
+            return false;
+
+        return rsi.RSI.TryGetState(layer.State, out _);
     }
 
     private int ResolveLayerIndex(

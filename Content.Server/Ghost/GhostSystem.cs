@@ -622,6 +622,7 @@ namespace Content.Server.Ghost
             for (var i = 0; i < layers.Count; i++)
             {
                 var layer = CopyLayer(layers[i]);
+                PopulateFallbackRsiPath(layer, clothing.RsiPath);
                 layer.Offset += slotOffset;
 
                 var key = layer.MapKeys?.FirstOrDefault() ?? $"{slot}-{i}";
@@ -641,8 +642,11 @@ namespace Content.Server.Ghost
             var defaultKey = $"inhand-{location.ToString().ToLowerInvariant()}";
             for (var i = 0; i < layers.Count; i++)
             {
-                var key = layers[i].MapKeys?.FirstOrDefault() ?? (i == 0 ? defaultKey : $"{defaultKey}-{i}");
-                AddSnapshot(key, layers[i], displacement, null, true, ghostAppearance);
+                var layer = CopyLayer(layers[i]);
+                PopulateFallbackRsiPath(layer, item.RsiPath);
+
+                var key = layer.MapKeys?.FirstOrDefault() ?? (i == 0 ? defaultKey : $"{defaultKey}-{i}");
+                AddSnapshot(key, layer, displacement, null, true, ghostAppearance);
             }
         }
 
@@ -821,6 +825,18 @@ namespace Content.Server.Ghost
                     },
                 Cycle = layer.Cycle,
             };
+        }
+
+        private static void PopulateFallbackRsiPath(PrototypeLayerData layer, string? fallbackRsiPath)
+        {
+            if (!string.IsNullOrWhiteSpace(layer.RsiPath) ||
+                !string.IsNullOrWhiteSpace(layer.TexturePath) ||
+                string.IsNullOrWhiteSpace(fallbackRsiPath))
+            {
+                return;
+            }
+
+            layer.RsiPath = fallbackRsiPath;
         }
 
         private static DisplacementData CopyDisplacement(DisplacementData displacement)
