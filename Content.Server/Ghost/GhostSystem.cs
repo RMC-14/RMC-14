@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using System.Text.Json;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
@@ -10,12 +11,14 @@ using Content.Server.Warps;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.UniformAccessories;
+using Content.Shared._RMC14.Webbing;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DisplacementMap;
@@ -46,13 +49,19 @@ using Content.Shared.Warps;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.ContentPack;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization.Markdown.Mapping;
+using Robust.Shared.Serialization.Markdown.Sequence;
+using Robust.Shared.Serialization.Markdown.Value;
+using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Ghost
 {
@@ -84,6 +93,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly SharedContainerSystem _container = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private readonly IResourceManager _resources = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
 
@@ -92,24 +102,7 @@ namespace Content.Server.Ghost
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
         private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamageType = "Asphyxiation";
-        private static readonly Dictionary<string, string> LegacySlotMap = new()
-        {
-            { "head", "HELMET" },
-            { "eyes", "EYES" },
-            { "ears", "EARS" },
-            { "mask", "MASK" },
-            { "outerClothing", "OUTERCLOTHING" },
-            { "jumpsuit", "INNERCLOTHING" },
-            { "neck", "NECK" },
-            { "back", "BACKPACK" },
-            { "belt", "BELT" },
-            { "gloves", "HAND" },
-            { "shoes", "FEET" },
-            { "id", "IDCARD" },
-            { "pocket1", "POCKET1" },
-            { "pocket2", "POCKET2" },
-            { "suitstorage", "SUITSTORAGE" },
-        };
+        private readonly Dictionary<ResPath, HashSet<string>?> _rsiStateCache = new();
 
         public override void Initialize()
         {
@@ -610,7 +603,7 @@ namespace Content.Server.Ghost
                     continue;
                 }
 
-                AddInhandVisuals(hand.Value.Location, item, GetHandDisplacement(sourceHands, hand.Value.Location), ghostAppearance);
+                AddInhandVisuals(held.Value, hand.Value.Location, item, GetHandDisplacement(sourceHands, hand.Value.Location), ghostAppearance);
             }
         }
 
@@ -627,10 +620,11 @@ namespace Content.Server.Ghost
             if (!TryGetClothingVisuals(wearer, equipment, clothing, slot, speciesId, out var layers))
                 return;
 
+            var clothingRsiPath = GetClothingRsiPath(equipment, clothing);
             for (var i = 0; i < layers.Count; i++)
             {
                 var layer = CopyLayer(layers[i]);
-                PopulateFallbackRsiPath(layer, clothing.RsiPath);
+                PopulateFallbackRsiPath(layer, clothingRsiPath);
                 layer.Offset += slotOffset;
 
                 var key = layer.MapKeys?.FirstOrDefault() ?? $"{slot}-{i}";
@@ -640,19 +634,21 @@ namespace Content.Server.Ghost
         }
 
         private void AddInhandVisuals(
+            EntityUid itemUid,
             HandLocation location,
             ItemComponent item,
             DisplacementData? displacement,
             GhostHumanoidAppearanceComponent ghostAppearance)
         {
-            if (!TryGetInhandVisuals(item, location, out var layers))
+            var itemRsiPath = GetItemRsiPath(itemUid, item);
+            if (!TryGetInhandVisuals(item, location, itemRsiPath, out var layers))
                 return;
 
             var defaultKey = $"inhand-{location.ToString().ToLowerInvariant()}";
             for (var i = 0; i < layers.Count; i++)
             {
                 var layer = CopyLayer(layers[i]);
-                PopulateFallbackRsiPath(layer, item.RsiPath);
+                PopulateFallbackRsiPath(layer, itemRsiPath);
 
                 var key = layer.MapKeys?.FirstOrDefault() ?? (i == 0 ? defaultKey : $"{defaultKey}-{i}");
                 layer.MapKeys = null;
@@ -670,23 +666,34 @@ namespace Content.Server.Ghost
         {
             layers = new();
 
-            var clothingVisuals = clothing.ClothingVisuals;
-            if (speciesId != null &&
-                clothingVisuals.TryGetValue($"{slot}-{speciesId}", out var speciesLayers))
+            var clothingRsiPath = GetClothingRsiPath(clothingUid, clothing);
+            var resolution = ClothingSystem.ResolveEquippedVisuals(
+                clothing,
+                slot,
+                speciesId,
+                clothingRsiPath,
+                state => RsiHasState(clothingRsiPath, state),
+                out var resolvedLayers);
+
+            switch (resolution)
             {
-                layers.AddRange(speciesLayers.Select(CopyLayer));
-            }
-            else if (clothingVisuals.TryGetValue(slot, out var slotLayers))
-            {
-                layers.AddRange(slotLayers.Select(CopyLayer));
-            }
-            else if (!TryGetDefaultClothingVisuals(clothing, slot, speciesId, out var defaultLayers))
-            {
-                return TryAppendAdditionalClothingVisuals(wearer, clothingUid, slot, layers);
-            }
-            else
-            {
-                layers.AddRange(defaultLayers);
+                case ClothingVisualResolution.Species:
+                    if (resolvedLayers == null)
+                        return TryAppendAdditionalClothingVisuals(wearer, clothingUid, slot, layers);
+                    layers.AddRange(resolvedLayers.Select(CopyLayer));
+                    break;
+                case ClothingVisualResolution.Explicit:
+                    if (resolvedLayers == null)
+                        return TryAppendAdditionalClothingVisuals(wearer, clothingUid, slot, layers);
+                    layers.AddRange(resolvedLayers.Select(CopyLayer));
+                    break;
+                case ClothingVisualResolution.Default:
+                    if (resolvedLayers == null)
+                        return TryAppendAdditionalClothingVisuals(wearer, clothingUid, slot, layers);
+                    layers.AddRange(resolvedLayers);
+                    break;
+                default:
+                    return TryAppendAdditionalClothingVisuals(wearer, clothingUid, slot, layers);
             }
 
             TryAppendAdditionalClothingVisuals(wearer, clothingUid, slot, layers);
@@ -699,6 +706,7 @@ namespace Content.Server.Ghost
             string slot,
             List<PrototypeLayerData> layers)
         {
+            var before = layers.Count;
             var visuals = new GetEquipmentVisualsEvent(wearer, slot);
             RaiseLocalEvent(clothingUid, visuals);
 
@@ -710,6 +718,7 @@ namespace Content.Server.Ghost
             }
 
             AppendUniformAccessoryVisuals(clothingUid, layers);
+            AppendWebbingVisuals(clothingUid, layers);
             return visuals.Layers.Count > 0 || layers.Count > 0;
         }
 
@@ -751,6 +760,29 @@ namespace Content.Server.Ghost
             }
         }
 
+        private void AppendWebbingVisuals(EntityUid clothingUid, List<PrototypeLayerData> layers)
+        {
+            if (!TryComp<WebbingClothingComponent>(clothingUid, out var clothing) ||
+                clothing.Webbing is not { } webbingUid ||
+                !TryComp<WebbingComponent>(webbingUid, out var webbing) ||
+                webbing.PlayerSprite is not { } sprite)
+            {
+                return;
+            }
+
+            var layer = clothing.Whitelist?.Tags?.Contains("ArmorWebbing") == true
+                ? WebbingVisualLayers.Outer
+                : WebbingVisualLayers.Base;
+
+            layers.Add(new PrototypeLayerData
+            {
+                RsiPath = sprite.RsiPath.ToString(),
+                State = sprite.RsiState,
+                Visible = true,
+                MapKeys = new() { $"enum.{nameof(WebbingVisualLayers)}.{layer}" },
+            });
+        }
+
         private string GetUniformAccessoryKey(EntityUid uid, UniformAccessoryComponent component, int index)
         {
             var key = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(uid)}_{uid.Id}";
@@ -768,69 +800,55 @@ namespace Content.Server.Ghost
             return key;
         }
 
-        private bool TryGetDefaultClothingVisuals(
-            ClothingComponent clothing,
-            string slot,
-            string? speciesId,
-            out List<PrototypeLayerData> layers)
-        {
-            layers = new();
-
-            if (string.IsNullOrWhiteSpace(clothing.RsiPath))
-                return false;
-
-            var correctedSlot = LegacySlotMap.GetValueOrDefault(slot, slot);
-            var state = $"equipped-{correctedSlot}";
-            if (clothing.EquippedState != null)
-                state = clothing.EquippedState;
-            else if (!string.IsNullOrEmpty(clothing.EquippedPrefix))
-                state = $"{clothing.EquippedPrefix}-equipped-{correctedSlot}";
-
-            if (speciesId != null)
-                state = $"{state}-{speciesId}";
-
-            layers.Add(new PrototypeLayerData
-            {
-                RsiPath = clothing.RsiPath,
-                State = state,
-            });
-
-            return true;
-        }
-
         private bool TryGetInhandVisuals(
             ItemComponent item,
             HandLocation location,
+            string? fallbackRsiPath,
             out List<PrototypeLayerData> layers)
         {
             var inhandVisuals = item.InhandVisuals;
             if (inhandVisuals.TryGetValue(location, out layers!))
                 return true;
 
-            return TryGetDefaultInhandVisuals(item, location, out layers);
+            return TryGetDefaultInhandVisuals(item, location, fallbackRsiPath, out layers);
         }
 
         private bool TryGetDefaultInhandVisuals(
             ItemComponent item,
             HandLocation location,
+            string? fallbackRsiPath,
             out List<PrototypeLayerData> layers)
         {
             layers = new();
 
-            var rsiPath = item.RsiPath;
-            if (rsiPath == null)
+            if (fallbackRsiPath == null)
                 return false;
 
             var defaultKey = $"inhand-{location.ToString().ToLowerInvariant()}";
             var state = item.HeldPrefix == null ? defaultKey : $"{item.HeldPrefix}-{defaultKey}";
             layers.Add(new PrototypeLayerData
             {
-                RsiPath = rsiPath,
+                RsiPath = fallbackRsiPath,
                 State = state,
                 MapKeys = new() { state },
             });
 
             return true;
+        }
+
+        private string? GetItemRsiPath(EntityUid itemUid, ItemComponent item)
+        {
+            if (!string.IsNullOrWhiteSpace(item.RsiPath))
+                return item.RsiPath;
+
+            if (!TryComp(itemUid, out MetaDataComponent? metaData) ||
+                metaData.EntityPrototype?.ID is not { } prototypeId ||
+                !TryGetPrototypeSpritePath(prototypeId, out var rsi))
+            {
+                return null;
+            }
+
+            return rsi;
         }
 
         private static DisplacementData? GetClothingDisplacement(
@@ -951,6 +969,132 @@ namespace Content.Server.Ghost
             }
 
             return copy;
+        }
+
+        private string? GetClothingRsiPath(EntityUid clothingUid, ClothingComponent clothing)
+        {
+            if (!string.IsNullOrWhiteSpace(clothing.RsiPath))
+                return clothing.RsiPath;
+
+            if (!TryComp(clothingUid, out MetaDataComponent? metaData) ||
+                metaData.EntityPrototype?.ID is not { } prototypeId ||
+                !TryGetPrototypeSpritePath(prototypeId, out var rsi))
+                return null;
+
+            return rsi;
+        }
+
+        private bool TryGetPrototypeSpritePath(string prototypeId, out string? rsi)
+        {
+            return TryGetPrototypeSpritePath(prototypeId, new HashSet<string>(), out rsi);
+        }
+
+        private bool TryGetPrototypeSpritePath(string prototypeId, HashSet<string> visited, out string? rsi)
+        {
+            rsi = null;
+
+            if (!visited.Add(prototypeId))
+                return false;
+
+            // Use the prototype mapping instead of EntityPrototype.Components so ignored client-only
+            // components like Sprite still participate in ghost clothing fallback on the server.
+            if (_prototypeManager.TryGetMapping(typeof(EntityPrototype), prototypeId, out var prototypeMapping) &&
+                TryGetPrototypeComponentMapping(prototypeMapping, "Sprite", out var spriteMapping) &&
+                spriteMapping.TryGet("sprite", out ValueDataNode? spriteNode) &&
+                !string.IsNullOrWhiteSpace(spriteNode.Value))
+            {
+                rsi = spriteNode.Value;
+                return true;
+            }
+
+            if (_prototypeManager.TryIndex<EntityPrototype>(prototypeId, out var prototype) &&
+                prototype.Parents != null)
+            {
+                foreach (var parentId in prototype.Parents)
+                {
+                    if (TryGetPrototypeSpritePath(parentId, visited, out rsi))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool TryGetPrototypeComponentMapping(
+            MappingDataNode prototypeMapping,
+            string componentName,
+            out MappingDataNode componentMapping)
+        {
+            componentMapping = null!;
+
+            if (!prototypeMapping.TryGet("components", out SequenceDataNode? components))
+                return false;
+
+            foreach (var node in components)
+            {
+                if (node is not MappingDataNode component ||
+                    !component.TryGet("type", out ValueDataNode? typeNode) ||
+                    typeNode.Value != componentName)
+                {
+                    continue;
+                }
+
+                componentMapping = component;
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool RsiHasState(string? rsiPath, string state)
+        {
+            if (string.IsNullOrWhiteSpace(rsiPath))
+                return false;
+
+            var path = new ResPath(rsiPath);
+            if (!_rsiStateCache.TryGetValue(path, out var states))
+            {
+                states = LoadRsiStates(path);
+                _rsiStateCache[path] = states;
+            }
+
+            return states?.Contains(state) == true;
+        }
+
+        private HashSet<string>? LoadRsiStates(ResPath rsiPath)
+        {
+            var texturePath = rsiPath.IsRooted
+                ? (rsiPath.CanonPath.StartsWith(SpriteSpecifierSerializer.TextureRoot.CanonPath)
+                    ? rsiPath
+                    : SpriteSpecifierSerializer.TextureRoot / rsiPath.ToRelativePath())
+                : SpriteSpecifierSerializer.TextureRoot / rsiPath;
+
+            if (!_resources.TryContentFileRead(texturePath / "meta.json", out var stream))
+                return null;
+
+            using (stream)
+            {
+                using var document = JsonDocument.Parse(stream);
+
+                if (!document.RootElement.TryGetProperty("states", out var statesElement) ||
+                    statesElement.ValueKind != JsonValueKind.Array)
+                {
+                    return null;
+                }
+
+                var states = new HashSet<string>();
+                foreach (var state in statesElement.EnumerateArray())
+                {
+                    if (state.TryGetProperty("name", out var name) &&
+                        name.ValueKind == JsonValueKind.String &&
+                        name.GetString() is { Length: > 0 } stateName)
+                    {
+                        states.Add(stateName);
+                    }
+                }
+
+                return states;
+            }
         }
 
         private bool TryCopyNonHumanoidDeathAppearance(EntityUid source, EntityUid ghost)
