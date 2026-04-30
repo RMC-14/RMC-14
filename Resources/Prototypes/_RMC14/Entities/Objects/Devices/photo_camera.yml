@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseItem
-  id: RMCCameraPhoto
+  id: RMCPhotoCamera
   name: camera
   description: A polaroid camera.
   components:
@@ -18,7 +18,7 @@
 
 - type: entity
   parent: BaseItem
-  id: RMCCameraPhotoFilmCartridge
+  id: RMCPhotoCameraFilmCartridge
   name: film cartridge
   description: A camera film cartridge. Insert it into a camera to reload it.
   components:
@@ -30,7 +30,7 @@
 
 - type: entity
   parent: BaseItem
-  id: RMCCameraPhotoPicture
+  id: RMCPhotoCameraPicture
   name: photo
   description: A picture taken by a polaroid camera.
   components:

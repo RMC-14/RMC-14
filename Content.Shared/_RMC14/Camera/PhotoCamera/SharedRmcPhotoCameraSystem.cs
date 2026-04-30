@@ -1,7 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared.Actions;
+using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.UserInterface;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -10,18 +14,23 @@ namespace Content.Shared._RMC14.Camera.PhotoCamera;
 
 public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 {
+    [Dependency] protected readonly SharedAudioSystem Audio = default!;
+    [Dependency] protected readonly SharedEyeSystem EyeSystem = default!;
+    [Dependency] protected readonly SharedHandsSystem Hands = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
-    [Dependency] protected readonly SharedHandsSystem Hands = default!;
-    [Dependency] protected readonly SharedEyeSystem EyeSystem = default!;
 
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<RMCPhotoComponent, AfterActivatableUIOpenEvent>(AfterUIOpen);
+
+        SubscribeLocalEvent<RMCPhotoCameraComponent, GetItemActionsEvent>(OnGetItemActions);
+        SubscribeLocalEvent<RMCPhotoCameraComponent, CycleCameraZoomActionEvent>(OnCycleZoom);
+        SubscribeLocalEvent<RMCPhotoCameraComponent, ExaminedEvent>(OnCameraExamined);
     }
 
     private void AfterUIOpen(Entity<RMCPhotoComponent> ent, ref AfterActivatableUIOpenEvent args)
@@ -34,6 +43,34 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 
         var state = new PhotoBoundUserInterfaceState(ent.Comp.ImageData, ent.Comp.PhotoName);
         _uiSystem.SetUiState(ent.Owner, RMCPhotoUi.Key, state);
+    }
+
+    private void OnGetItemActions(Entity<RMCPhotoCameraComponent> ent, ref GetItemActionsEvent args)
+    {
+        args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
+        Dirty(ent.Owner, ent.Comp);
+    }
+
+    private void OnCycleZoom(Entity<RMCPhotoCameraComponent> ent, ref CycleCameraZoomActionEvent args)
+    {
+        ent.Comp.ZoomMode++;
+        if ((int)ent.Comp.ZoomMode > (int)PhotoZoomMode.Wide)
+            ent.Comp.ZoomMode = PhotoZoomMode.Focused;
+
+        ent.Comp.ZoomLevel = ent.Comp.BaseZoomLevel + (int)ent.Comp.ZoomMode * ent.Comp.ZoomStep;
+        Dirty(ent);
+
+        var captureSize = (int)ent.Comp.ZoomMode * 2 + 1;
+        _popup.PopupClient(Loc.GetString("rmc-photo-camera-cycle-zoom", ("camera", ent.Owner), ("captureSize", captureSize)), args.Performer, args.Performer);
+        Audio.PlayPredicted(ent.Comp.CycleZoomSound, args.Performer, args.Performer);
+
+        args.Handled = true;
+    }
+
+    private void OnCameraExamined(Entity<RMCPhotoCameraComponent> ent, ref ExaminedEvent args)
+    {
+        var captureSize = (int)ent.Comp.ZoomMode * 2 + 1;
+        args.PushMarkup(Loc.GetString(Loc.GetString("rmc-photo-camera-examine-text", ("captureSize", captureSize))), 1);
     }
 
     protected bool TryGetCamera(EntityUid uid, [NotNullWhen(true)] out Entity<RMCPhotoCameraComponent>? camera)
@@ -64,10 +101,11 @@ public sealed class RequestPhotoCaptureEvent(NetCoordinates coordinates) : Entit
 }
 
 [Serializable, NetSerializable]
-public sealed class TakePhotoEvent(NetEntity eye, NetEntity camera, NetEntity user, Vector2 zoom) : EntityEventArgs
+public sealed class TakePhotoEvent(NetEntity eye, NetEntity camera, NetEntity cameraUser, Vector2 zoom, PhotoZoomMode zoomMode) : EntityEventArgs
 {
     public NetEntity Eye = eye;
     public NetEntity Camera = camera;
-    public NetEntity User = user;
+    public NetEntity CameraUser = cameraUser;
     public Vector2 Zoom = zoom;
+    public PhotoZoomMode ZoomMode = zoomMode;
 }

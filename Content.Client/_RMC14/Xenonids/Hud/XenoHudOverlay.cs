@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._RMC14.Camera;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client._RMC14.NightVision;
 using Content.Shared._RMC14.Mobs;
@@ -47,6 +48,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly CMHealthIconsSystem _healthIcons;
     private readonly MobStateSystem _mobState;
     private readonly MobThresholdSystem _mobThresholds;
+    private readonly RMCPhotoCameraSystem _photoCamera;
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
 
@@ -80,6 +82,7 @@ public sealed class XenoHudOverlay : Overlay
         _healthIcons = _entity.System<CMHealthIconsSystem>();
         _mobState = _entity.System<MobStateSystem>();
         _mobThresholds = _entity.System<MobThresholdSystem>();
+        _photoCamera = _entity.System<RMCPhotoCameraSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
 
@@ -161,6 +164,9 @@ public sealed class XenoHudOverlay : Overlay
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
                 continue;
 
+            if (_photoCamera.InPhotoRange(uid))
+                return;
+
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 
@@ -207,6 +213,9 @@ public sealed class XenoHudOverlay : Overlay
             if (_invisQuery.HasComp(uid))
                 continue;
 
+            if (_photoCamera.InPhotoRange(uid))
+                return;
+
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 
@@ -243,6 +252,9 @@ public sealed class XenoHudOverlay : Overlay
 
             if (_invisQuery.HasComp(uid))
                 continue;
+
+            if (_photoCamera.InPhotoRange(uid))
+                return;
 
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
@@ -285,6 +297,9 @@ public sealed class XenoHudOverlay : Overlay
             if (_invisQuery.HasComp(uid))
                 continue;
 
+            if (_photoCamera.InPhotoRange(uid))
+                return;
+
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 
@@ -323,6 +338,9 @@ public sealed class XenoHudOverlay : Overlay
 
             if (_invisQuery.HasComp(uid))
                 continue;
+
+            if (_photoCamera.InPhotoRange(uid))
+                return;
 
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
@@ -366,6 +384,9 @@ public sealed class XenoHudOverlay : Overlay
             if (_xenoQuery.HasComp(uid))
                 continue;
 
+            if (_photoCamera.InPhotoRange(uid))
+                return;
+
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 
@@ -408,6 +429,9 @@ public sealed class XenoHudOverlay : Overlay
             if (_xenoQuery.HasComp(uid))
                 continue;
 
+            if (_photoCamera.InPhotoRange(uid))
+                return;
+
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 
@@ -444,6 +468,9 @@ public sealed class XenoHudOverlay : Overlay
 
             if (_invisQuery.HasComp(uid))
                 continue;
+
+            if (_photoCamera.InPhotoRange(uid))
+                return;
 
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
@@ -482,6 +509,9 @@ public sealed class XenoHudOverlay : Overlay
 
             if (_invisQuery.HasComp(uid))
                 continue;
+
+            if (_photoCamera.InPhotoRange(uid))
+                return;
 
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
