@@ -1,72 +1,4 @@
 ﻿Entries:
-- author: wheelwrightt
-  changes:
-  - message: Tacmap zooms on cursor rather than the center of the map.
-    type: Fix
-  - message: Tacmap freehand lines no longer creates a line back to where it began.
-    type: Fix
-  id: 2665
-  time: '2025-12-10T01:31:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8645
-- author: SurfinNinja1
-  changes:
-  - message: added 3 more sandwiches
-    type: Add
-  - message: fixed tocilog recipe to actually use bacon
-    type: Fix
-  - message: changed all cooking and drink recipes to use RMCSugar
-    type: Tweak
-  - message: cotton burgers and buns are now edible
-    type: Tweak
-  id: 2666
-  time: '2025-12-10T01:32:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8572
-- author: yagwog
-  changes:
-  - message: Fixed ghost half bright staying after returning to your body.
-    type: Fix
-  id: 2667
-  time: '2025-12-10T01:44:17.894436+00:00'
-  url: null
-- author: Aurallianz
-  changes:
-  - message: Fixed nuke also killing everyone not on the planet.
-    type: Fix
-  id: 2668
-  time: '2025-12-10T01:44:17.894979+00:00'
-  url: null
-- author: DrSmugleaf
-  changes:
-  - message: Fixed being able to duplicate breaching shells by transferring between
-      xm51 magazines.
-    type: Fix
-  id: 2669
-  time: '2025-12-10T02:10:11.117279+00:00'
-  url: null
-- author: Ian321
-  changes:
-  - message: You can now flush incinerator tanks to empty them.
-    type: Add
-  - message: Fixed being able to empty incinerator tanks into reagent tanks.
-    type: Fix
-  - message: Fixed being able to fill underbarrel flamethrower attachments with reagents
-      other than welding fuel and regular incinerator fuel.
-    type: Fix
-  - message: Incinerators can now be filled from welderpacks.
-    type: Tweak
-  id: 2670
-  time: '2025-12-14T22:11:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8666
-- author: vorkathbruh
-  changes:
-  - message: Commanding Officers no longer spawn with a Mateba Customization Kit
-    type: Fix
-  - message: Lieutenant Colonel and Colonel berets no longer take points from the
-      loadout menu.
-    type: Tweak
-  id: 2671
-  time: '2025-12-14T22:13:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8713
 - author: CatAndHats
   changes:
   - message: Fixed the behind-character in-hand sprites for the automated storage
@@ -4463,5 +4395,83 @@
   id: 3164
   time: '2026-04-24T03:57:48.075386+00:00'
   url: null
+- author: IceNoobXD
+  changes:
+  - message: Lazarus Landing has recived a passover which adds a lot of minor props
+      and a gas pipe layout for nexus!
+    type: Tweak
+  - message: Lazarus Landing lake house loot has been removed.
+    type: Remove
+  id: 3165
+  time: '2026-04-24T10:15:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9686
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added the Webley MkX TBR for use by RCM senior officers.'
+    type: Add
+  id: 3166
+  time: '2026-04-27T00:29:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8907
+- author: Vixting
+  changes:
+  - message: Added fun!
+    type: Add
+  - message: Removed fun!
+    type: Remove
+  - message: Changed fun!
+    type: Tweak
+  - message: Fixed fun!
+    type: Fix
+  id: 3167
+  time: '2026-04-27T00:31:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9703
+- author: TadJohnson00
+  changes:
+  - message: The Warwick MkVII revolver now has the correct tags and should fit in
+      appropriate webbings, belts, etc.
+    type: Fix
+  id: 3168
+  time: '2026-04-28T01:39:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9739
+- author: TadJohnson00
+  changes:
+  - message: Added new ear markings for vulpkanin, felinids, and humans - as well
+      as three new hairstyles.
+    type: Add
+  id: 3169
+  time: '2026-04-29T19:59:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8974
+- author: TadJohnson00
+  changes:
+  - message: Resprited the M890 to look a little more slick.
+    type: Tweak
+  id: 3170
+  time: '2026-04-29T19:59:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8880
+- author: IceNoobXD
+  changes:
+  - message: The water in the coagulation pits and at the river ends on Trijent Dam
+      has been made toxic! THE WATER BURNS!!
+    type: Add
+  - message: Trijent Dam has been reworked, featuring 3 new random weapon loot spawners
+      themed around CMB, Civilian, and Corporate guns, found across the map and its
+      inserts. The Eastern Laboratory's armory loot has also been relocated further
+      away from the nearby hive spawn point.
+    type: Tweak
+  - message: Trijent Dam's workshops have been renamed to western/eastern workshop
+      accordingly, to remove confusion for newer players!
+    type: Tweak
+  - message: The area around Trijent Dam marshal has been changed from T-Comms valley
+      to sec valley, this means south LZ weedkiller will no longer affect that area!
+    type: Fix
+  - message: 'Plenty of new inserts have been ported for Trijent Dam: admin fight
+      (30%), dead CMB engi (30%), destroyed engi central (30%), Hold west dam (30%),
+      hydro breakroom hold (30%), dead loader-dude (25%), dead guy east of dam (30%),
+      sensorhold (50%), civhold (10%), corphold (10%), guns/gear workshop (both 10%),
+      pristine (10%) and battle armory (20%)!'
+    type: Add
+  id: 3171
+  time: '2026-04-29T20:44:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9642
 Name: RMC14
 Order: -1

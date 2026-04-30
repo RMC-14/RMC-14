@@ -46,7 +46,7 @@
   name: pmc survivor weapons preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomWeapon:
     - [ RMCWeaponRifleM54CWhiteNoLock, CMMagazineRifleM54C, CMMagazineRifleM54C]
     - [ RMCWeaponRifleSSG45NoLockStripped, RMCMagazineRifleSSG45, RMCMagazineRifleSSG45 ]

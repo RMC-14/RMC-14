@@ -37,7 +37,7 @@
   parent: WallXenoResinThick
   id: WallXenoResinImpenetrable
   name: impenetrable resin wall
-  suffix: Invincible, 20 minutes
+  suffix: Invincible, 30 minutes
   components:
   - type: InvincibleHiveStructure
     replace: WallXenoResinThick
@@ -46,7 +46,7 @@
   parent: DoorXenoResinThick
   id: DoorXenoResinImpenetrable
   name: impenetrable resin door
-  suffix: Invincible, 20 minutes
+  suffix: Invincible, 30 minutes
   components:
   - type: InvincibleHiveStructure
     replace: DoorXenoResinThick
@@ -55,6 +55,8 @@
 - type: entity
   id: RMCBlockerMarine
   name: marine blocker
+  suffix: DO NOT MAP
+  categories: [ HideSpawnMenu ]
   components:
   - type: Physics
     bodyType: Static

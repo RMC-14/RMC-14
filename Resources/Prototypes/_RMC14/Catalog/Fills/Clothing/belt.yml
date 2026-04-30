@@ -1094,3 +1094,16 @@
       amount: 1
     - id: RMCMagazinePistolL14
       amount: 6
+
+- type: entity
+  parent: RMCMkXBelt
+  id: RMCMkXBeltFilled
+  suffix: PVE, CO, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 3
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMkX
