@@ -133,14 +133,14 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
             }
 
             // Fade shared-grid sprites on the grid currently being viewed, not just the player's physical grid.
-            if (TryGetViewedGrid(player, playerXform, out var viewedGrid))
+            if (TryGetViewedGrid(player, playerXform, out var viewedGrid, out var viewedMap))
             {
                 var gridQuery = AllEntityQuery<RMCSpriteFadeComponent, TransformComponent>();
                 while (gridQuery.MoveNext(out var uid, out var fade, out var xform))
                 {
                     if (!fade.FadeOnSharedGrid)
                         continue;
-                    if (xform.GridUid != viewedGrid)
+                    if (xform.GridUid != viewedGrid && xform.MapID != viewedMap)
                         continue;
                     if (!_spriteQuery.TryGetComponent(uid, out var sprite))
                         continue;
@@ -151,15 +151,18 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
         }
     }
 
-    private bool TryGetViewedGrid(EntityUid? player, TransformComponent? playerXform, out EntityUid viewedGrid)
+    private bool TryGetViewedGrid(EntityUid? player, TransformComponent? playerXform, out EntityUid viewedGrid, out MapId viewedMap)
     {
         viewedGrid = EntityUid.Invalid;
+        viewedMap = MapId.Nullspace;
 
         if (player != null &&
             TryComp(player.Value, out EyeComponent? eye) &&
             eye.Target is { } target &&
             TryComp(target, out TransformComponent? targetXform))
         {
+            viewedMap = targetXform.MapID;
+
             if (targetXform.GridUid is { } targetGrid)
             {
                 viewedGrid = targetGrid;
@@ -171,11 +174,15 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
                 viewedGrid = target;
                 return true;
             }
+
+            if (viewedMap != MapId.Nullspace)
+                return true;
         }
 
         if (playerXform?.GridUid is { } playerGrid)
         {
             viewedGrid = playerGrid;
+            viewedMap = playerXform.MapID;
             return true;
         }
 

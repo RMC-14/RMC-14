@@ -34,3 +34,13 @@
         - MidImpassable
         - LowImpassable
         - Opaque
+
+- type: entity
+  id: VehiclePeekAnchor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false

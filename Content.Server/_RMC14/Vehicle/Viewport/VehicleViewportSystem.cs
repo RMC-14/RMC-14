@@ -77,7 +77,7 @@ public sealed class VehicleViewportSystem : EntitySystem
             !args.CanInteract ||
             !args.CanAccess ||
             args.Using != null ||
-            !_vehicles.TryFindEntryPoint(ent.Owner, args.User, out _))
+            !_vehicles.TryFindEntryPoint(ent.Owner, args.User, out var entryIndex))
         {
             return;
         }
@@ -87,7 +87,7 @@ public sealed class VehicleViewportSystem : EntitySystem
         args.Verbs.Add(new AlternativeVerb
         {
             Text = Loc.GetString("rmc-vehicle-look-inside"),
-            Act = () => ToggleInteriorPeek(user, vehicle),
+            Act = () => ToggleInteriorPeek(user, vehicle, entryIndex),
         });
     }
 
@@ -109,7 +109,7 @@ public sealed class VehicleViewportSystem : EntitySystem
         return true;
     }
 
-    private bool ToggleInteriorPeek(EntityUid user, EntityUid vehicle)
+    private bool ToggleInteriorPeek(EntityUid user, EntityUid vehicle, int entryIndex)
     {
         if (TryComp(user, out VehicleViewportUserComponent? existing))
         {
@@ -122,15 +122,17 @@ public sealed class VehicleViewportSystem : EntitySystem
             CloseViewport(user, existing);
         }
 
-        if (!_vehicles.TryGetInteriorPeekTarget(vehicle, out var peekTarget))
+        if (!_vehicles.TryGetInteriorEntryCoordinates(vehicle, entryIndex, out var peekCoords))
             return false;
 
         var userState = EnsureComp<VehicleViewportUserComponent>(user);
         if (TryComp(user, out EyeComponent? eye))
             userState.PreviousTarget = eye.Target;
         userState.Source = vehicle;
+        userState.PeekTarget = Spawn("VehiclePeekAnchor", peekCoords);
 
-        _eye.SetTarget(user, peekTarget);
+        _eye.SetTarget(user, userState.PeekTarget);
+        Dirty(user, userState);
         return true;
     }
 
@@ -145,6 +147,9 @@ public sealed class VehicleViewportSystem : EntitySystem
 
         if (state.Source != null)
             _viewToggle.DisableViewToggle(user, state.Source.Value);
+
+        if (state.PeekTarget is { } peekTarget && Exists(peekTarget))
+            QueueDel(peekTarget);
 
         RemCompDeferred<VehicleViewportUserComponent>(user);
     }

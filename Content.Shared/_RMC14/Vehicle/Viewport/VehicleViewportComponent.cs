@@ -15,4 +15,7 @@ public sealed partial class VehicleViewportUserComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? Source;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? PeekTarget;
 }
