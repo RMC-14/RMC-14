@@ -119,10 +119,3 @@ public enum RMCPhotoUi
 {
     Key,
 }
-
-[Serializable, NetSerializable]
-public sealed class PhotoBoundUserInterfaceState(byte[] imageData, string name) : BoundUserInterfaceState
-{
-    public byte[] ImageData = imageData;
-    public string PhotoName = name;
-}

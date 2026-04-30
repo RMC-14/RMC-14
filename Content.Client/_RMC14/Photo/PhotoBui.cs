@@ -1,5 +1,4 @@
 using Content.Client._RMC14.Camera;
-using Content.Shared._RMC14.Camera.PhotoCamera;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
@@ -22,18 +21,23 @@ public sealed partial class PhotoBui : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindow<PhotoWindow>();
+
+        Refresh();
     }
 
-    protected override void UpdateState(BoundUserInterfaceState state)
+    public void Refresh()
     {
-        base.UpdateState(state);
-
-        if (_window == null || state is not PhotoBoundUserInterfaceState cast)
+        if (_window == null)
             return;
 
-        var photo = _photo.GetPhoto(cast.ImageData);
+        if (_photo.TryGetPhoto(Owner, out var texture, out var name))
+        {
+            _window.SetImage(texture);
+            _window.SetName(name);
+            return;
+        }
 
-        _window.SetImage(photo);
-        _window.SetName(cast.PhotoName);
+        _window.SetName("Photo");
+        _photo.RequestPhoto(Owner);
     }
 }

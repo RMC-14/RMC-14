@@ -1,6 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Numerics;
 using Content.Client._RMC14.NewPlayer;
+using Content.Client._RMC14.Photo;
 using Content.Shared._RMC14.Camera.PhotoCamera;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Coordinates.Helpers;
@@ -21,6 +23,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly NewPlayerVisualizerSystem _newPlayerVisualizer = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
     private (IClydeViewport viewport, EntityUid eye, NetEntity cameraUser)? _pendingCapture;
     private bool _skipFrame;
@@ -29,6 +32,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
     {
         base.Initialize();
         SubscribeNetworkEvent<TakePhotoEvent>(OnTakePhoto);
+        SubscribeNetworkEvent<ReceivedStoredPhotoEvent>(OnReceivedStoredPhoto);
 
         SubscribeLocalEvent<RMCPhotoCameraComponent, UniqueActionEvent>(OnUniqueAction);
     }
@@ -82,6 +86,23 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         TakePhoto((eye, eyeComp), cameraComp.Resolution, ev.CameraUser, ev.Zoom);
     }
 
+    private void OnReceivedStoredPhoto(ReceivedStoredPhotoEvent ev, EntitySessionEventArgs args)
+    {
+        var photo = GetEntity(ev.Photo);
+        if (!TryComp(photo, out RMCPhotoComponent? photoComp))
+            return;
+
+        if (!Timing.IsFirstTimePredicted)
+            return;
+
+        photoComp.ImageData = ev.ImageData;
+
+        if (_uiSystem.TryGetOpenUi(photo, RMCPhotoUi.Key, out PhotoBui? bui))
+        {
+            bui.Refresh();
+        }
+    }
+
     private void TakePhoto(Entity<EyeComponent> eye, int resolution, NetEntity cameraUser, Vector2 zoom)
     {
         EyeSystem.SetZoom(eye, zoom);
@@ -94,10 +115,44 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         _pendingCapture = (viewport, eye, cameraUser);
     }
 
-    public OwnedTexture GetPhoto(byte[] imageData)
+    public bool TryGetPhoto(EntityUid photo, [NotNullWhen(true)] out OwnedTexture? photoTexture, out string photoName)
     {
-        using var ms = new MemoryStream(imageData);
-        return _clyde.LoadTextureFromPNGStream(ms);
+        photoName = "";
+        photoTexture = null;
+
+        if (!TryComp(photo, out RMCPhotoComponent? photoComp))
+            return false;
+
+        photoName = photoComp.PhotoName;
+
+        if (TryComp(photo, out RMCCachedPhotoComponent? cachedPhoto))
+        {
+            photoTexture = cachedPhoto.CachedPhoto;
+            if (photoTexture != null)
+                return true;
+        }
+
+        if (photoComp.ImageData == null)
+            return false;
+
+        using var ms = new MemoryStream(photoComp.ImageData);
+        photoTexture = _clyde.LoadTextureFromPNGStream(ms);
+
+        var cachedPhotoComp = EnsureComp<RMCCachedPhotoComponent>(photo);
+        cachedPhotoComp.CachedPhoto = photoTexture;
+
+        return true;
+    }
+
+    public void RequestPhoto(EntityUid photo)
+    {
+        if (!TryComp(photo, out RMCPhotoComponent? comp))
+            return;
+
+        if (comp.ImageData != null)
+            return;
+
+        RaiseNetworkEvent(new RequestStoredPhotoEvent(GetNetEntity(photo)));
     }
 
     public bool InPhotoRange(EntityUid uid)
@@ -145,6 +200,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
             RemComp<RMCTakingPhotoComponent>(localEntity);
             _newPlayerVisualizer.UpdateAllAppearance();
+            viewport.Dispose();
         });
     }
 }

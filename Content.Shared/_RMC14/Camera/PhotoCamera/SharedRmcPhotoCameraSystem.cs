@@ -5,7 +5,6 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -24,29 +23,15 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RMCPhotoComponent, AfterActivatableUIOpenEvent>(AfterUIOpen);
 
         SubscribeLocalEvent<RMCPhotoCameraComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<RMCPhotoCameraComponent, CycleCameraZoomActionEvent>(OnCycleZoom);
         SubscribeLocalEvent<RMCPhotoCameraComponent, ExaminedEvent>(OnCameraExamined);
         SubscribeLocalEvent<RMCPhotoCameraComponent, InteractUsingEvent>(OnInteractUsing);
-    }
-
-    private void AfterUIOpen(Entity<RMCPhotoComponent> ent, ref AfterActivatableUIOpenEvent args)
-    {
-        if (!_uiSystem.HasUi(ent, RMCPhotoUi.Key))
-            return;
-
-        if (ent.Comp.ImageData == null)
-            return;
-
-        var state = new PhotoBoundUserInterfaceState(ent.Comp.ImageData, ent.Comp.PhotoName);
-        _uiSystem.SetUiState(ent.Owner, RMCPhotoUi.Key, state);
     }
 
     private void OnGetItemActions(Entity<RMCPhotoCameraComponent> ent, ref GetItemActionsEvent args)
@@ -113,14 +98,6 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public sealed class PhotoCaptureEvent(byte[] imageData, NetEntity eye, NetEntity cameraUser) : EntityEventArgs
-{
-    public byte[] ImageData = imageData;
-    public NetEntity Eye = eye;
-    public NetEntity CameraUser = cameraUser;
-}
-
-[Serializable, NetSerializable]
 public sealed class RequestPhotoCaptureEvent(NetCoordinates coordinates) : EntityEventArgs
 {
     public NetCoordinates Coordinates = coordinates;
@@ -134,4 +111,25 @@ public sealed class TakePhotoEvent(NetEntity eye, NetEntity camera, NetEntity ca
     public NetEntity CameraUser = cameraUser;
     public Vector2 Zoom = zoom;
     public PhotoZoomMode ZoomMode = zoomMode;
+}
+
+[Serializable, NetSerializable]
+public sealed class PhotoCaptureEvent(byte[] imageData, NetEntity eye, NetEntity cameraUser) : EntityEventArgs
+{
+    public byte[] ImageData = imageData;
+    public NetEntity Eye = eye;
+    public NetEntity CameraUser = cameraUser;
+}
+
+[Serializable, NetSerializable]
+public sealed class RequestStoredPhotoEvent(NetEntity photo) : EntityEventArgs
+{
+    public NetEntity Photo = photo;
+}
+
+[Serializable, NetSerializable]
+public sealed class ReceivedStoredPhotoEvent(byte[] imageData, NetEntity photo) : EntityEventArgs
+{
+    public byte[] ImageData = imageData;
+    public NetEntity Photo = photo;
 }

@@ -41,6 +41,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         base.Initialize();
         SubscribeNetworkEvent<RequestPhotoCaptureEvent>(OnRequestPhotoCapture);
         SubscribeNetworkEvent<PhotoCaptureEvent>(OnPhotoCaptured);
+        SubscribeNetworkEvent<RequestStoredPhotoEvent>(OnRequestStoredPhoto);
     }
 
     private void OnRequestPhotoCapture(RequestPhotoCaptureEvent ev, EntitySessionEventArgs args)
@@ -156,6 +157,14 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         {
             // Failed to load the image
         }
+    }
+
+    private void OnRequestStoredPhoto(RequestStoredPhotoEvent ev, EntitySessionEventArgs args)
+    {
+        if (!TryComp(GetEntity(ev.Photo), out RMCPhotoComponent? photo) || photo.ImageData == null)
+            return;
+
+        RaiseNetworkEvent(new ReceivedStoredPhotoEvent(photo.ImageData, ev.Photo), args.SenderSession);
     }
 
     public override void Update(float frameTime)
