@@ -254,7 +254,7 @@ public sealed class VehicleLockSystem : EntitySystem
             return;
         }
 
-        BindKey((args.Used, sourceKey), ent.Comp.KeyId, copied: true);
+        BindKey((args.Used, sourceKey), ent.Comp.KeyId, copied: true, sourceName: Name(ent));
         _popup.PopupEntity(Loc.GetString("rmc-vehicle-key-copy-success"), args.User, args.User, PopupType.Small);
         args.Handled = true;
     }
@@ -328,7 +328,7 @@ public sealed class VehicleLockSystem : EntitySystem
             switch (key.Comp.Mode)
             {
                 case VehicleKeyMode.Blank:
-                    BindKey(key, vehicleKeyId);
+                    BindKey(key, vehicleKeyId, vehicle);
                     _popup.PopupEntity(Loc.GetString("rmc-vehicle-key-bind-success"), user, user, PopupType.Small);
                     return true;
                 case VehicleKeyMode.Duplicator:
@@ -363,10 +363,29 @@ public sealed class VehicleLockSystem : EntitySystem
         return true;
     }
 
-    public void BindKey(Entity<VehicleKeyComponent> key, string keyId, bool copied = false)
+    public void BindKey(
+        Entity<VehicleKeyComponent> key,
+        string keyId,
+        EntityUid? vehicle = null,
+        bool copied = false,
+        string? sourceName = null)
     {
         key.Comp.KeyId = keyId;
         Dirty(key.Owner, key.Comp);
+
+        var vehicleName = sourceName;
+        if (vehicleName == null && vehicle is { } vehicleUid)
+            vehicleName = Name(vehicleUid);
+
+        if (vehicleName != null)
+        {
+            _metaData.SetEntityName(
+                key.Owner,
+                Loc.GetString(
+                    copied ? "rmc-vehicle-key-name-copy-specific" : "rmc-vehicle-key-name-specific",
+                    ("vehicle", vehicleName)));
+            return;
+        }
 
         _metaData.SetEntityName(key.Owner, Loc.GetString(copied ? "rmc-vehicle-key-name-copy" : "rmc-vehicle-key-name"));
     }

@@ -722,7 +722,7 @@ public sealed class VehicleSystem : EntitySystem
 
             var key = Spawn("RMCVehicleKey", seatXform.Coordinates);
             if (TryComp(key, out VehicleKeyComponent? keyComp))
-                _vehicleLock.BindKey((key, keyComp), keyId);
+                _vehicleLock.BindKey((key, keyComp), keyId, vehicle);
 
             return;
         }
