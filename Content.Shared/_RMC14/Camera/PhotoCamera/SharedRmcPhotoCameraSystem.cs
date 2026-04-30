@@ -17,10 +17,10 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
     [Dependency] protected readonly SharedAudioSystem Audio = default!;
     [Dependency] protected readonly SharedEyeSystem EyeSystem = default!;
     [Dependency] protected readonly SharedHandsSystem Hands = default!;
+    [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
@@ -61,7 +61,7 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
         Dirty(ent);
 
         var captureSize = (int)ent.Comp.ZoomMode * 2 + 1;
-        _popup.PopupClient(Loc.GetString("rmc-photo-camera-cycle-zoom", ("camera", ent.Owner), ("captureSize", captureSize)), args.Performer, args.Performer);
+        Popup.PopupClient(Loc.GetString("rmc-photo-camera-cycle-zoom", ("camera", ent.Owner), ("captureSize", captureSize)), args.Performer, args.Performer);
         Audio.PlayPredicted(ent.Comp.CycleZoomSound, args.Performer, args.Performer);
 
         args.Handled = true;

@@ -59,27 +59,28 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (_player.LocalEntity is not { } localEntity)
             return;
 
-        var takingPhoto = EnsureComp<RMCTakingPhotoComponent>(localEntity);
-        takingPhoto.PhotoCoordinates = TransformSystem.GetMoverCoordinates(GetEntity(ev.Eye));
-        takingPhoto.ZoomMode = ev.ZoomMode;
-
-        _newPlayerVisualizer.UpdateAllAppearance();
-
-        TakePhoto(cameraComp.Resolution, ev.Eye, ev.CameraUser, ev.Zoom);
-    }
-
-    private void TakePhoto(int resolution, NetEntity netEye, NetEntity cameraUser, Vector2 zoom)
-    {
-        var eye = GetEntity(netEye);
+        var eye = GetEntity(ev.Eye);
         if (!TryComp(eye, out EyeComponent? eyeComp))
             return;
 
+        var takingPhoto = EnsureComp<RMCTakingPhotoComponent>(localEntity);
+        takingPhoto.PhotoCoordinates = TransformSystem.GetMoverCoordinates(GetEntity(ev.Eye)).Offset(eyeComp.Offset);
+        takingPhoto.ZoomMode = ev.ZoomMode;
+        takingPhoto.Offset = eyeComp.Offset;
+
+        _newPlayerVisualizer.UpdateAllAppearance();
+
+        TakePhoto((eye, eyeComp), cameraComp.Resolution, ev.CameraUser, ev.Zoom);
+    }
+
+    private void TakePhoto(Entity<EyeComponent> eye, int resolution, NetEntity cameraUser, Vector2 zoom)
+    {
         EyeSystem.SetZoom(eye, zoom);
 
         var size = new Vector2i(resolution, resolution);
         var viewport = _clyde.CreateViewport(size);
         viewport.AutomaticRender = true;
-        viewport.Eye = eyeComp.Eye;
+        viewport.Eye = eye.Comp.Eye;
 
         _pendingCapture = (viewport, eye, cameraUser);
     }

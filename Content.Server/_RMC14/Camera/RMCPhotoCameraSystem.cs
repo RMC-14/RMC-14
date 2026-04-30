@@ -7,6 +7,7 @@ using Content.Server.Examine;
 using Content.Server.Players.JobWhitelist;
 using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.Camera.PhotoCamera;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Hands.Components;
 using Content.Shared.Roles;
 using Robust.Server.Containers;
@@ -50,14 +51,14 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
             return;
 
         var coordinates = GetCoordinates(ev.Coordinates);
-
         if (!coordinates.IsValid(EntityManager))
             return;
 
         if (!_examine.InRangeUnOccluded(sessionEntity, coordinates, 11))
             return;
 
-        var eye = Spawn(null, TransformSystem.GetMoverCoordinates(camera.Value));
+        var cameraCoordinates = TransformSystem.GetMoverCoordinates(sessionEntity).SnapToGrid();
+        var eye = Spawn(null, cameraCoordinates);
 
         var eyeComp = EnsureComp<EyeComponent>(eye);
         EnsureComp<RMCStaticZoomLevelComponent>(eye);
@@ -67,6 +68,9 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         EyeSystem.SetDrawFov(eye, true, eyeComp);
         EyeSystem.UpdateEye((eye, eyeComp));
         EyeSystem.SetDrawLight(eye, true);
+
+        var offset = coordinates.Position - cameraCoordinates.Position;
+        EyeSystem.SetOffset(eye, offset, eyeComp);
 
         var whiteListedSession = _adminManager.ActiveAdmins.FirstOrDefault() ?? _mentorManager.GetActiveMentors().FirstOrDefault();
 
@@ -92,6 +96,8 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
             var photoEv = new TakePhotoEvent(GetNetEntity(eye), GetNetEntity(camera.Value), GetNetEntity(sessionEntity), zoom, camera.Value.Comp.ZoomMode);
             RaiseNetworkEvent(photoEv, whiteListedSession);
         }
+
+        Popup.PopupClient(Loc.GetString("rmc-photo-camera-make-photo-failed"), sessionEntity, sessionEntity);
     }
 
     private void OnPhotoCaptured(PhotoCaptureEvent ev, EntitySessionEventArgs args)
