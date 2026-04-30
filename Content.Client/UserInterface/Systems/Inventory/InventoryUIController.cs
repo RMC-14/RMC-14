@@ -36,6 +36,8 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
     [UISystemDependency] private readonly HandsSystem _handsSystem = default!;
     [UISystemDependency] private readonly ContainerSystem _container = default!;
     [UISystemDependency] private readonly SpriteSystem _sprite = default!;
+    [UISystemDependency] private readonly WebbingSystem _webbing = default!;
+
     private EntityUid? _playerUid;
     private InventorySlotsComponent? _playerInventory;
     private readonly Dictionary<string, ItemSlotButtonContainer> _slotGroups = new();
@@ -396,7 +398,6 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
         UnloadSlots();
         _playerUid = clientUid;
         _playerInventory = clientInv;
-
         foreach (var slotData in clientInv.SlotData.Values)
         {
             AddSlot(slotData);

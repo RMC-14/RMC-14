@@ -37,7 +37,8 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         Subs.CVar(_configurationManager, CCVars.AccessibilityClientCensorNudity, OnCvarChanged, true);
         Subs.CVar(_configurationManager, CCVars.AccessibilityServerCensorNudity, OnCvarChanged, true);
 
-        // RMC14        SubscribeLocalEvent<LocalPlayerAttachedEvent>(UpdateHiddenSprites);
+        // RMC14
+        SubscribeLocalEvent<LocalPlayerAttachedEvent>(UpdateHiddenSprites);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(UpdateHiddenSprites);
 
         SubscribeLocalEvent<HiddenAppearanceComponent, ComponentRemove>(OnHiddenRemove);

@@ -22,6 +22,7 @@ public sealed class MindSystem : SharedMindSystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly GhostSystem _ghosts = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
     public override void Initialize()

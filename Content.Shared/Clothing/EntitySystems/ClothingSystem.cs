@@ -24,6 +24,12 @@ public enum ClothingVisualResolution
 public abstract partial class ClothingSystem : EntitySystem
 {
     // RMC begin
+
+    /// <summary>
+    /// This is a shitty hotfix written by me (Paul) to save me from renaming all files.
+    /// For some context, im currently refactoring inventory. Part of that is slots not being indexed by a massive enum anymore, but by strings.
+    /// Problem here: Every rsi-state is using the old enum-names in their state. I already used the new inventoryslots ALOT. tldr: its this or another week of renaming files.
+    /// </summary>
     public static readonly IReadOnlyDictionary<string, string> EquippedStateSlotMap = new Dictionary<string, string>
     {
         {"head", "HELMET"},
