@@ -152,3 +152,11 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseCLFNoArmor
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseRussian
+  name: Corpse Spawner - Russian
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseRussian
