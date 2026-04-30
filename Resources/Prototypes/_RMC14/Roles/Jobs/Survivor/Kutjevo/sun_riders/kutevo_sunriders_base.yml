@@ -31,11 +31,11 @@
     suitstorage: RMCFlashlight
 
 - type: entity
-  id: RMCSurvivorPresetSunRidersNoPrimary
+  id: RMCEntityPresetSunRidersNoPrimary
   name: sun riders no primary survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ ArmorHelmetM10Gasmask, RMCMaskTornScarfDesert ]
     - [ ArmorHelmetM10GasmaskTan, RMCMaskTornScarfDesert ]
@@ -78,12 +78,12 @@
     tryEquipRandomWeapon: true
 
 - type: entity
-  parent: RMCSurvivorPresetSunRidersNoPrimary
-  id: RMCSurvivorPresetSunRiders
+  parent: RMCEntityPresetSunRidersNoPrimary
+  id: RMCEntityPresetSunRiders
   name: sun riders survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ RMCWeaponRifleM54CFilled, CMMagazineRifleM54C, CMMagazineRifleM54C ]
     - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]

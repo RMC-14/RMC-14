@@ -89,6 +89,22 @@
 
 - type: entity
   parent: RMCBinoculars
+  id: RMCRangefinderBroken
+  name: broken rangefinder
+  description: A pair of binoculars with a rangefinding function. This pair seems to be smashed up pretty badly.
+  components:
+  - type: Item
+    heldPrefix: rangefinder
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    layers:
+    - state: rangefinder
+    state: binoculars_broken
+  - type: ItemCamouflage
+    states: {}
+
+- type: entity
+  parent: RMCBinoculars
   id: RMCRangefinder
   name: rangefinder
   description: "A pair of binoculars with a rangefinding function. Click a tile to acquire it's coordinates."

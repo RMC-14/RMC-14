@@ -23,7 +23,7 @@
         tags:
         - RMCSquadSunRidersPVP
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetSunRidersPilot
+      preset: RMCEntityPresetSunRidersPilot
   startingGear: RMCGearSunRidersPilot
   hidden: true
 
@@ -43,11 +43,11 @@
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
 
 - type: entity
-  id: RMCSurvivorPresetSunRidersPilot
+  id: RMCEntityPresetSunRidersPilot
   name: sun riders pilot preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ CMArmorHelmetM30PSP, RMCMaskScarfTanDown ]
     - [ CMArmorHelmetM30PSP, RMCMaskTornScarfDesert ]

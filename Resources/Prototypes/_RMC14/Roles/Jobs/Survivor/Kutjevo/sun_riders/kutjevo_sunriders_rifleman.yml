@@ -21,7 +21,7 @@
     - type: JobPrefix
       prefix: cm-job-prefix-rifleman
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetSunRidersRifleman
+      preset: RMCEntityPresetSunRidersRifleman
   hidden: true
 
 - type: entity
@@ -35,12 +35,12 @@
     state: marine_spawn
 
 - type: entity
-  parent: RMCSurvivorPresetSunRidersNoPrimary
-  id: RMCSurvivorPresetSunRidersRifleman
+  parent: RMCEntityPresetSunRidersNoPrimary
+  id: RMCEntityPresetSunRidersRifleman
   name: sun riders rifleman survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ RMCWeaponShotgunSKG12, CMShellShotgunBuckshot, CMShellShotgunBuckshot ]
     primaryWeaponChance: 1

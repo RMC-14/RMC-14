@@ -23,17 +23,17 @@
         tags:
         - RMCSquadSunRidersPVP
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetSunRidersSquadSpecialist
+      preset: RMCEntityPresetSunRidersSquadSpecialist
   startingGear: RMCGearSunRidersSquadSpecialist
   hidden: true
 
 - type: entity
-  parent: RMCSurvivorPresetSunRidersNoPrimary
-  id: RMCSurvivorPresetSunRidersSquadSpecialist
+  parent: RMCEntityPresetSunRidersNoPrimary
+  id: RMCEntityPresetSunRidersSquadSpecialist
   name: sun riders squad specialist survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ WeaponRifleM4SPRFilled, CMMagazineRifleM4SPR, CMMagazineRifleM4SPR ]
     primaryWeaponChance: 1

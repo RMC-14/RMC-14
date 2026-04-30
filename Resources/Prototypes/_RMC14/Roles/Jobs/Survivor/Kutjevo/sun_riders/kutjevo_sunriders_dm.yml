@@ -19,7 +19,7 @@
         tags:
         - RMCSquadSunRidersPVP
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetSunRidersDM
+      preset: RMCEntityPresetSunRidersDM
   startingGear: RMCGearSunRidersDM
   hidden: true
 
@@ -41,11 +41,11 @@
     belt: RMCM4SPRBeltFilledSunRidersSurvivor
 
 - type: entity
-  id: RMCSurvivorPresetSunRidersDM
+  id: RMCEntityPresetSunRidersDM
   name: sun riders designated marksman survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCMaskScarfTan ]
     - [ RMCMaskTornScarfDesert ]

@@ -25,7 +25,7 @@
         tags:
         - RMCSquadSunRidersPVP
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetSunRiderSectionSergeant
+      preset: RMCEntityPresetSunRiderSectionSergeant
     - type: RMCTrackable
     - type: RMCAwardRecommendation
   startingGear: RMCGearSunRidersSectionSergeant
@@ -58,11 +58,11 @@
     state: marine_spawn
 
 - type: entity
-  id: RMCSurvivorPresetSunRiderSectionSergeantNoPrimary
+  id: RMCEntityPresetSunRiderSectionSergeantNoPrimary
   name: sun riders section sergeant no primary survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHeadDurag ]
     - [ CMHeadCapOfficer ]
@@ -70,12 +70,12 @@
     - [ CMHeadBandTan ]
 
 - type: entity
-  parent: RMCSurvivorPresetSunRiderSectionSergeantNoPrimary
-  id: RMCSurvivorPresetSunRiderSectionSergeant
+  parent: RMCEntityPresetSunRiderSectionSergeantNoPrimary
+  id: RMCEntityPresetSunRiderSectionSergeant
   name: sun riders section sergeant survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ RMCWeaponRifleM54CFilled, CMMagazineRifleM54C, CMMagazineRifleM54C ]
     - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]

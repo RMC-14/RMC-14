@@ -23,7 +23,7 @@
         tags:
         - RMCSquadSunRidersPVP
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetSunRiders
+      preset: RMCEntityPresetSunRiders
     - type: RMCTrackable
     - type: RMCAwardRecommendation
   hidden: true

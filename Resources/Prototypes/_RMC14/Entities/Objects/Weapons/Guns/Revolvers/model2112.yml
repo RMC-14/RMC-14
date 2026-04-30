@@ -12,7 +12,6 @@
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_model.ogg
       params:
-        pitch: 2
         volume: 3
   - type: RMCAirShot # shorter doafter but less shake than mateba
     preparationTime: 1
@@ -24,3 +23,9 @@
       RMCSkillLeadership: 3
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-m2112
+  - type: RMCWeaponAccuracy # better RoF and damage than mateba but has terrible accuracy
+    accuracyMultiplier: 0.8
+  - type: RMCSelectiveFire
+    baseFireRate: 0.9
+  - type: GunDamageModifier
+    multiplier: 1.2

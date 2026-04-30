@@ -21,7 +21,7 @@
         tags:
         - RMCSquadSunRidersPVP
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetSunRidersCorpsman
+      preset: RMCEntityPresetSunRidersCorpsman
   startingGear: RMCGearSunRidersCorpsman
   hidden: true
 
@@ -34,11 +34,11 @@
     jumpsuit: RMCJumpsuitSurvivorMarineDropPouchSunRidersCorpsman
 
 - type: entity
-  id: RMCSurvivorPresetSunRidersCorpsman
+  id: RMCEntityPresetSunRidersCorpsman
   name: sun riders corpsman survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCMaskTornScarfDesert, CMArmorHelmetM10MedicHeadband ]
     - [ RMCMaskTornScarfDesert, CMArmorHelmetM10Medic ]

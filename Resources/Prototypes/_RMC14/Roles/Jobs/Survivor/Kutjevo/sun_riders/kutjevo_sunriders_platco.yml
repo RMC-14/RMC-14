@@ -25,7 +25,7 @@
         tags:
         - RMCSquadSunRidersPVP
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetSunRidersPlatCo
+      preset: RMCEntityPresetSunRidersPlatCo
     - type: RMCTrackable
     - type: RMCAwardRecommendation
   startingGear: RMCGearSunRidersPlatCo
@@ -43,16 +43,16 @@
     id: CMIDCardStandardDogtag
     ears: RMCHeadsetSunRidersPVP
     gloves: CMHandsBrown
-    pocket1: RMCRangefinder
+    pocket1: RMCRangefinderBroken
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
     suitstorage: RMCFlashlight
 
 - type: entity
-  id: RMCSurvivorPresetSunRidersPlatCo
+  id: RMCEntityPresetSunRidersPlatCo
   name: sun riders platoon commander survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGearOther: # 1/2 chance for no flares
     -
       - [ RMCPackFlareM94BP ]
