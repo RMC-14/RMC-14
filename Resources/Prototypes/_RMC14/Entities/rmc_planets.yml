@@ -167,6 +167,8 @@
     nightmareScenarios:
     - scenarioName: panic_room_hold
       scenarioProbability: 0.1
+    - scenarioName: none # 90% chance of regular surv. Reduce to 80% (0.8) once CLF survs are in.
+      scenarioProbability: 0.9
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
@@ -367,6 +369,9 @@
       Telecommunications Array: Repairs required
 
       No further information available at this time."
+    nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
+    - scenarioName: none
+      scenarioProbability: 1
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
@@ -404,6 +409,9 @@
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
+    nightmareScenarios:
+    - scenarioName: none # Reduce this to 0.9 once CLF survivors are in at 0.1
+      scenarioProbability: 1
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingKutjevo
     survivorJobVariants:
@@ -464,6 +472,8 @@
     nightmareScenarios:
     - scenarioName: tse_airbase
       scenarioProbability: 0.3
+    - scenarioName: none
+      scenarioProbability: 0.7
     minPlayers: 130
     survivorJobVariants:
       CMSurvivor:

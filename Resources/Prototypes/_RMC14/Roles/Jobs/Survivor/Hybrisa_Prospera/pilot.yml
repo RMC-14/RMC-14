@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorCorporate
   id: RMCSurvivorHybrisaCommercialPilot
   name: rmc-job-name-survivor-commercial-pilot
@@ -55,7 +55,7 @@
   name: hybrisa corporate liaison preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCGlassesAviators ]
     - [ RMCGlassesAviatorsSilver ]

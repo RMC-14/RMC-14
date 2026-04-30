@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: UnfinishedMachineFrame
   id: CMMachineFrameUnfinished
   suffix: RMC14, Unfinished
@@ -16,6 +16,8 @@
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: null
+  - type: Corrodible
+    isCorrodible: true
   - type: Destructible
     thresholds:
     - trigger:
@@ -49,6 +51,8 @@
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: null
+  - type: Corrodible
+    isCorrodible: true
   - type: Destructible
     thresholds:
     - trigger:

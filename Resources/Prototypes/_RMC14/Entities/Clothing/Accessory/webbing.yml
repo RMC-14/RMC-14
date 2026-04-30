@@ -414,6 +414,17 @@
     state: holster
 
 - type: entity
+  parent: RMCWebbingHolsterRCM
+  id: RMCWebbingHolsterRCML189
+  suffix: RCM, Filled L189
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMK80RCM
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
+
+- type: entity
   parent: RMCWebbingHolsterBlack
   id: RMCWebbingHolsterBlackB92FS
   suffix: Filled, B92FS
@@ -776,6 +787,7 @@
       - RMCNailgunTactical
       - RMCSynthResetKey
       - RodMetal1
+      - LightReplacer
       components:
       - Welder
       - PowerCell
@@ -995,24 +1007,24 @@
       amount: 5
 
 - type: entity
-  parent: RMCWebbingDropPouch
-  id: RMCWebbingDropPouchRoyal
-  suffix: Filled, Royal
+  parent: RMCWebbingDropPouchRCM
+  id: RMCWebbingDropPouchRCMFilled
+  suffix: RCM, Filled
   components:
   - type: StorageFill
     contents:
-      - id: CMMaskGas # TODO RMC14 l7 gasmask
+      - id: RMCMaskGasRCM
       - id: RMCHeadRoyalBeret
       - id: RMCMRETSE
 
 - type: entity
-  parent: RMCWebbingDropPouch
-  id: RMCWebbingDropPouchRoyalTeamlead
-  suffix: Filled, Royal Team Leader
+  parent: RMCWebbingDropPouchRCM
+  id: RMCWebbingDropPouchRCMFilledTeamlead
+  suffix: RCM, Filled Teamlead
   components:
   - type: StorageFill
     contents:
-      - id: CMMaskGas # TODO RMC14 l7 gasmask
+      - id: RMCMaskGasRCM
       - id: RMCHeadRoyalHelmetBallistic
       - id: RMCMRETSE
 
