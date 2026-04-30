@@ -270,9 +270,6 @@ namespace Content.Server.Database
 
             var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
             var squadPreference = profile.SquadPreference?.Squad;
-            EntProtoId<RMCPlanetMapPrototypeComponent>? preferredMap = null;
-            if (!string.IsNullOrWhiteSpace(profile.PreferredMap))
-                preferredMap = new EntProtoId<RMCPlanetMapPrototypeComponent>(profile.PreferredMap!);
 
             var armorPreference = ArmorPreference.Random;
             if (Enum.TryParse<ArmorPreference>(profile.ArmorPreference, true, out var armorVal))
@@ -358,8 +355,7 @@ namespace Content.Server.Database
                 profile.PlaytimePerks,
                 profile.XenoPrefix,
                 profile.XenoPostfix,
-                preferredMap,
-                profile.Enabled
+                enabled: profile.Enabled
             );
         }
 
@@ -455,7 +451,6 @@ namespace Content.Server.Database
             profile.PlaytimePerks = humanoid.PlaytimePerks;
             profile.XenoPrefix = humanoid.XenoPrefix;
             profile.XenoPostfix = humanoid.XenoPostfix;
-            profile.PreferredMap = humanoid.PreferredMap?.Id;
             profile.Enabled = humanoid.Enabled;
 
             return profile;

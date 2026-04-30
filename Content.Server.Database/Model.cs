@@ -600,7 +600,6 @@ namespace Content.Server.Database
         public bool PlaytimePerks { get; set; } = true;
         public string XenoPrefix { get; set; } = string.Empty;
         public string XenoPostfix { get; set; } = string.Empty;
-        public string? PreferredMap { get; set; }
         public bool Enabled { get; set; } = true;
     }
 
