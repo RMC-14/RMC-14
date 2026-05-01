@@ -398,6 +398,47 @@
 
 - type: entity
   parent: CMPackFlareBase
+  id: CMPackFlareColonist
+  name: CK25 signaling flare pack
+  description: A packet of eight CK25 Signaling Flares. Issued to colonists to light dark areas in emergency situations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/boxes.rsi
+    layers:
+    - state: m94_e
+      map: [ "emptyLayer" ]
+    - state: ck25
+      map: [ "fullLayer" ]
+
+- type: entity
+  parent: CMPackFlareColonist
+  id: CMPackFlareColonistFilled
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMFlareColonist
+
+- type: entity
+  parent: CMFlare
+  id: CMFlareColonist
+  description: A red flare issued to colonists in emergencies. There are instructions on the side, it reads 'pull cord, make light'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+      state: flare
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      state: flare_flame
+      color: "#ec4b4b"
+      visible: false
+    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+      state: overlay
+  - type: PointLight
+    color: "#FFCCCC"
+
+- type: entity
+  parent: CMPackFlareBase
   id: CMPackFlare
   suffix: Filled
   components:
