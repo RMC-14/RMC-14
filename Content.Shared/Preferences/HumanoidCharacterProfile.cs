@@ -29,6 +29,7 @@ namespace Content.Shared.Preferences
     [Serializable, NetSerializable]
     public sealed partial class HumanoidCharacterProfile : ICharacterProfile
     {
+        private static readonly HashSet<EntProtoId<SquadTeamComponent>> EmptySquadPreferences = [];
         private static readonly Regex RestrictedNameRegex = new(@"[^A-Za-z0-9 '\-]");
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
@@ -111,10 +112,64 @@ namespace Content.Shared.Preferences
         public ArmorPreference ArmorPreference { get; private set; }
 
         /// <summary>
-        /// When spawning into a squad role, what squad is preferred.
+        /// When spawning into a squad role, what squads are preferred.
+        /// A null value means "no explicit restriction", which the UI presents as all squads enabled.
+        /// </summary>
+        [DataField("squadPreferences")]
+        private HashSet<EntProtoId<SquadTeamComponent>>? _squadPreferences;
+
+        /// <summary>
+        /// Backwardscompatibility for imported/exported profiles that still store a single squad preference, probably uncessary
+        /// </summary>
+        [DataField("squadPreference")]
+        private EntProtoId<SquadTeamComponent>? LegacySquadPreference
+        {
+            get => SquadPreference;
+            set
+            {
+                if (_squadPreferences != null || value == null)
+                    return;
+
+                _squadPreferences = [value.Value];
+            }
+        }
+
+        /// <summary>
+        /// When spawning into a squad role, what squads are preferred
+        /// </summary>
+        public IReadOnlySet<EntProtoId<SquadTeamComponent>> SquadPreferences => _squadPreferences ?? EmptySquadPreferences;
+
+        /// <summary>
+        /// Whether the user has explicitly customized squad selections
+        /// </summary>
+        public bool HasExplicitSquadPreferences => _squadPreferences != null;
+
+        /// <summary>
+        /// Compatibility accessor for older single squad
+        /// Returns a squad only when exactly one explicit squad is selected
+        /// </summary>
+        public EntProtoId<SquadTeamComponent>? SquadPreference
+        {
+            get
+            {
+                if (_squadPreferences is not { Count: 1 })
+                    return default;
+
+                foreach (var squadPreference in _squadPreferences)
+                {
+                    return squadPreference;
+                }
+
+                return default;
+            }
+        }
+
+        /// <summary>
+        /// If true, only the selected preferred squads may be used for squad jobs
+        /// Otherwise the selection is a soft preference and other squads may be chosen as fallback
         /// </summary>
         [DataField]
-        public EntProtoId<SquadTeamComponent>? SquadPreference { get; private set; }
+        public bool OnlyUsePreferredSquads { get; private set; }
 
         /// <summary>
         /// <see cref="_jobPriorities"/>
@@ -178,7 +233,8 @@ namespace Content.Shared.Preferences
             HumanoidCharacterAppearance appearance,
             SpawnPriorityPreference spawnPriority,
             ArmorPreference armorPreference,
-            EntProtoId<SquadTeamComponent>? squadPreference,
+            HashSet<EntProtoId<SquadTeamComponent>>? squadPreferences,
+            bool onlyUsePreferredSquads,
             Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
@@ -200,7 +256,8 @@ namespace Content.Shared.Preferences
             Appearance = appearance;
             SpawnPriority = spawnPriority;
             ArmorPreference = armorPreference;
-            SquadPreference = squadPreference;
+            _squadPreferences = squadPreferences;
+            OnlyUsePreferredSquads = onlyUsePreferredSquads;
             _jobPriorities = jobPriorities;
             PreferenceUnavailable = preferenceUnavailable;
             _antagPreferences = antagPreferences;
@@ -227,7 +284,8 @@ namespace Content.Shared.Preferences
                 other.Appearance.Clone(),
                 other.SpawnPriority,
                 other.ArmorPreference,
-                other.SquadPreference,
+                other._squadPreferences != null ? new HashSet<EntProtoId<SquadTeamComponent>>(other._squadPreferences) : null,
+                other.OnlyUsePreferredSquads,
                 new Dictionary<ProtoId<JobPrototype>, JobPriority>(other.JobPriorities),
                 other.PreferenceUnavailable,
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
@@ -369,7 +427,25 @@ namespace Content.Shared.Preferences
 
         public HumanoidCharacterProfile WithSquadPreference(EntProtoId<SquadTeamComponent>? squadPreference)
         {
-            return new(this) { SquadPreference = squadPreference };
+            return new(this)
+            {
+                _squadPreferences = squadPreference == null ? null : [squadPreference.Value],
+            };
+        }
+
+        public HumanoidCharacterProfile WithSquadPreferences(HashSet<EntProtoId<SquadTeamComponent>>? squadPreferences)
+        {
+            return new(this)
+            {
+                _squadPreferences = squadPreferences != null
+                    ? new HashSet<EntProtoId<SquadTeamComponent>>(squadPreferences)
+                    : null,
+            };
+        }
+
+        public HumanoidCharacterProfile WithOnlyUsePreferredSquads(bool onlyUsePreferredSquads)
+        {
+            return new(this) { OnlyUsePreferredSquads = onlyUsePreferredSquads };
         }
 
         public HumanoidCharacterProfile WithPlaytimePerks(bool playtimePerks)
@@ -574,7 +650,9 @@ namespace Content.Shared.Preferences
             if (Species != other.Species) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (SpawnPriority != other.SpawnPriority) return false;
-            if (SquadPreference != other.SquadPreference) return false;
+            if (OnlyUsePreferredSquads != other.OnlyUsePreferredSquads) return false;
+            if ((_squadPreferences == null) != (other._squadPreferences == null)) return false;
+            if (_squadPreferences != null && !_squadPreferences.SetEquals(other._squadPreferences!)) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
@@ -737,11 +815,22 @@ namespace Content.Shared.Preferences
 
             ArmorPreference = armorPreference;
 
-            if (!prototypeManager.TryIndex(SquadPreference, out var squad) ||
-                !squad.TryGetComponent(out SquadTeamComponent? team, compFactory) ||
-                !team.RoundStart)
+            if (_squadPreferences != null)
             {
-                SquadPreference = null;
+                var validSquads = new HashSet<EntProtoId<SquadTeamComponent>>();
+                foreach (var squadPreference in _squadPreferences)
+                {
+                    if (!prototypeManager.TryIndex(squadPreference, out var squad) ||
+                        !squad.TryGetComponent(out SquadTeamComponent? team, compFactory) ||
+                        !team.RoundStart)
+                    {
+                        continue;
+                    }
+
+                    validSquads.Add(squadPreference);
+                }
+
+                _squadPreferences = validSquads;
             }
 
             if (PreferredMap is { } preferredMap)
@@ -916,7 +1005,8 @@ namespace Content.Shared.Preferences
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);
             hashCode.Add((int)ArmorPreference);
-            hashCode.Add(SquadPreference);
+            hashCode.Add(OnlyUsePreferredSquads);
+            hashCode.Add(_squadPreferences);
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(NamedItems);
             hashCode.Add(PlaytimePerks);

@@ -449,8 +449,7 @@ public sealed partial class CMDistressSignalRuleSystem
         if (comp == null)
             return;
 
-        var squadPreference = ev.HumanoidCharacterProfile?.SquadPreference;
-        if (GetSpawner(comp, job, squadPreference) is not { } spawnerInfo)
+        if (GetSpawner(comp, job, ev.HumanoidCharacterProfile) is not { } spawnerInfo)
             return;
 
         var (spawner, squad) = spawnerInfo;

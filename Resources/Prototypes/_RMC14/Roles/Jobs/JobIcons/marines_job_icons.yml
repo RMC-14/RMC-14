@@ -58,8 +58,8 @@
   parent: CMJobIconBase
   id: RMCJobIconRifleman
   icon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: rmc_rifleman
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_rifleman
 
 - type: jobIcon
   parent: CMJobIconBase

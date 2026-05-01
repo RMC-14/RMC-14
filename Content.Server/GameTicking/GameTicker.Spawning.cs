@@ -145,15 +145,21 @@ namespace Content.Server.GameTicking
             IReadOnlyDictionary<NetUserId, HumanoidCharacterProfile> fallbackProfiles)
         {
             var currentMap = _distressSignal?.SelectedPlanetMapId;
+            Predicate<HumanoidCharacterProfile>? compatibility = null;
+            compatibility = profile => _distressSignal!.CanSpawnForJob(job, profile);
 
             if (_prefsManager.TryGetCachedPreferences(userId, out var prefs))
             {
-                var selected = prefs.SelectProfileForJob(job, currentMap);
+                var selected = prefs.SelectProfileForJob(job, currentMap, compatibility);
                 if (selected != null)
                     return selected;
 
-                if (prefs.TryGetHumanoidInSlot(prefs.SelectedCharacterIndex, out var selectedProfile))
+                if (prefs.TryGetHumanoidInSlot(prefs.SelectedCharacterIndex, out var selectedProfile) &&
+                    selectedProfile != null &&
+                    (compatibility == null || compatibility(selectedProfile)))
+                {
                     return selectedProfile;
+                }
             }
 
             return fallbackProfiles.GetValueOrDefault(userId);
@@ -290,21 +296,44 @@ namespace Content.Server.GameTicking
             if (!_randomizeCharacters)
             {
                 HumanoidCharacterProfile? matchingProfile = null;
+                Predicate<HumanoidCharacterProfile>? compatibility = null;
+                var chosenJobId = new ProtoId<JobPrototype>(jobId);
+                compatibility = profile => _distressSignal!.CanSpawnForJob(chosenJobId, profile);
+
                 if (selectedCharacterSlot != null &&
                     playerPreferences.TryGetHumanoidInSlot(selectedCharacterSlot.Value, out var preferredProfile) &&
-                    preferredProfile != null)
+                    preferredProfile != null &&
+                    compatibility(preferredProfile))
                 {
                     matchingProfile = preferredProfile;
                 }
                 else
                 {
-                    matchingProfile = playerPreferences.SelectProfileForJob(jobId, _distressSignal?.SelectedPlanetMapId);
+                    matchingProfile = playerPreferences.SelectProfileForJob(
+                        jobId,
+                        _distressSignal?.SelectedPlanetMapId,
+                        compatibility);
                 }
 
                 if (matchingProfile != null)
                 {
                     character = matchingProfile;
                 }
+            }
+
+            var finalJobId = new ProtoId<JobPrototype>(jobId);
+            if (character.OnlyUsePreferredSquads &&
+                !_distressSignal!.CanSpawnForJob(finalJobId, character))
+            {
+                if (!LobbyEnabled)
+                    JoinAsObserver(player);
+
+                var evNoJobs = new NoJobsAvailableSpawningEvent(player);
+                RaiseLocalEvent(evNoJobs);
+
+                _chatManager.DispatchServerMessage(player,
+                    Loc.GetString("game-ticker-player-no-preferred-squads-available"));
+                return;
             }
 
             PlayerJoinGame(player, silent);

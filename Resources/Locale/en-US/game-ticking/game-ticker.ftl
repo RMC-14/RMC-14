@@ -27,6 +27,7 @@ game-ticker-get-info-preround-text = Hi and welcome to [color=white]Rouny's Mari
                             >[color=yellow]{$desc}[/color]
 game-ticker-no-map-selected = [color=yellow]Map not yet selected![/color]
 game-ticker-player-no-jobs-available-when-joining = When attempting to join to the game, no jobs were available.
+game-ticker-player-no-preferred-squads-available = None of your selected squads were available for that job, so you remain in the lobby.
 
 # Displayed in chat to admins when a player joins
 player-join-message = Player {$name} joined.

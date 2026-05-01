@@ -116,6 +116,8 @@ namespace Content.Client.Lobby.UI
         private ColorSelectorSliders _rgbSkinColorSelector;
 
         private bool _isDirty;
+        private bool _updatingSquadPreferenceControls;
+        private readonly Dictionary<EntProtoId<SquadTeamComponent>, CheckBox> _squadPreferenceCheckboxes = [];
 
         private static readonly ProtoId<GuideEntryPrototype> DefaultSpeciesGuidebook = "Species";
 
@@ -399,32 +401,39 @@ namespace Content.Client.Lobby.UI
 
             #region SquadPreference
 
-            SquadPreferenceButton.AddItem(Loc.GetString("loadout-none"), 0);
             var squad = _entManager.System<SquadSystem>();
-            for (var i = 0; i < squad.SquadPrototypes.Length; i++)
+            foreach (var squadProto in squad.SquadPrototypes)
             {
-                var squadProto = squad.SquadPrototypes[i];
                 if (!squadProto.TryGetComponent(out SquadTeamComponent? team) ||
                     !team.RoundStart)
                 {
                     continue;
                 }
 
-                SquadPreferenceButton.AddItem(squadProto.Name, i + 1);
+                var checkbox = new CheckBox
+                {
+                    Text = squadProto.Name,
+                    Pressed = true,
+                };
+
+                checkbox.OnToggled += _ =>
+                {
+                    if (_updatingSquadPreferenceControls)
+                        return;
+
+                    SetSquadPreferencesFromControls();
+                };
+
+                _squadPreferenceCheckboxes[squadProto.ID] = checkbox;
+                SquadPreferenceContainer.AddChild(checkbox);
             }
 
-            SquadPreferenceButton.OnItemSelected += args =>
+            OnlyUsePreferredSquadsCheckbox.OnToggled += args =>
             {
-                SquadPreferenceButton.SelectId(args.Id);
-
-                if (args.Id == 0)
-                {
-                    SetSquadPreference(null);
+                if (_updatingSquadPreferenceControls)
                     return;
-                }
 
-                if (squad.SquadPrototypes.TryGetValue(args.Id - 1, out var proto))
-                    SetSquadPreference(proto.ID);
+                SetOnlyUsePreferredSquads(args.Pressed);
             };
 
             #endregion SquadPreference
@@ -1727,6 +1736,32 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetSquadPreferences(HashSet<EntProtoId<SquadTeamComponent>>? newSquadPreferences)
+        {
+            Profile = Profile?.WithSquadPreferences(newSquadPreferences);
+            SetDirty();
+        }
+
+        private void SetSquadPreferencesFromControls()
+        {
+            var selectedSquads = new HashSet<EntProtoId<SquadTeamComponent>>();
+            foreach (var (squadId, checkbox) in _squadPreferenceCheckboxes)
+            {
+                if (checkbox.Pressed)
+                    selectedSquads.Add(squadId);
+            }
+
+            SetSquadPreferences(selectedSquads.Count == _squadPreferenceCheckboxes.Count
+                ? null
+                : selectedSquads);
+        }
+
+        private void SetOnlyUsePreferredSquads(bool onlyUsePreferredSquads)
+        {
+            Profile = Profile?.WithOnlyUsePreferredSquads(onlyUsePreferredSquads);
+            SetDirty();
+        }
+
         private void SetPlaytimePerks(bool playtimePerks)
         {
             Profile = Profile?.WithPlaytimePerks(playtimePerks);
@@ -1953,20 +1988,17 @@ namespace Content.Client.Lobby.UI
         private void UpdateSquadPreferenceControls()
         {
             if (Profile == null)
-            {
                 return;
-            }
 
-            var index = 0;
-            if (Profile.SquadPreference is { } preference)
+            _updatingSquadPreferenceControls = true;
+            foreach (var (squadId, checkbox) in _squadPreferenceCheckboxes)
             {
-                var squads = new List<EntityPrototype>(_entManager.System<SquadSystem>().SquadPrototypes)
-                    .Select(s => s.ID)
-                    .ToList();
-                index = squads.IndexOf(preference.Id) + 1;
+                checkbox.Pressed = !Profile.HasExplicitSquadPreferences ||
+                                   Profile.SquadPreferences.Contains(squadId);
             }
 
-            SquadPreferenceButton.SelectId(index);
+            OnlyUsePreferredSquadsCheckbox.Pressed = Profile.OnlyUsePreferredSquads;
+            _updatingSquadPreferenceControls = false;
         }
 
         private void UpdateHairPickers()

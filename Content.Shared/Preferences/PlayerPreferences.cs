@@ -126,7 +126,8 @@ namespace Content.Shared.Preferences
         /// </summary>
         public HumanoidCharacterProfile? SelectProfileForJob(
             ProtoId<JobPrototype> job,
-            EntProtoId<RMCPlanetMapPrototypeComponent>? currentMap = null)
+            EntProtoId<RMCPlanetMapPrototypeComponent>? currentMap = null,
+            Predicate<HumanoidCharacterProfile>? filter = null)
         {
             List<HumanoidCharacterProfile> pool = [];
             foreach (var profile in Characters.Values)
@@ -135,6 +136,9 @@ namespace Content.Shared.Preferences
                     continue;
 
                 if (!humanoid.JobPreferences.Contains(job))
+                    continue;
+
+                if (filter != null && !filter(humanoid))
                     continue;
 
                 pool.Add(humanoid);

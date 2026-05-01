@@ -10,6 +10,7 @@ using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.IP;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Administration.Logs;
@@ -31,6 +32,12 @@ namespace Content.Server.Database
 {
     public abstract class ServerDbBase
     {
+        private sealed class SerializedSquadPreferences
+        {
+            public bool OnlyUsePreferredSquads { get; set; }
+            public List<string> Squads { get; set; } = [];
+        }
+
         private readonly ISawmill _opsLog;
 
         public event Action<DatabaseNotification>? OnNotificationReceived;
@@ -269,7 +276,7 @@ namespace Content.Server.Database
                 sex = sexVal;
 
             var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
-            var squadPreference = profile.SquadPreference?.Squad;
+            var (squadPreferences, onlyUsePreferredSquads) = DeserializeSquadPreferences(profile.SquadPreference?.Squad);
 
             var armorPreference = ArmorPreference.Random;
             if (Enum.TryParse<ArmorPreference>(profile.ArmorPreference, true, out var armorVal))
@@ -338,7 +345,8 @@ namespace Content.Server.Database
                 ),
                 spawnPriority,
                 armorPreference,
-                squadPreference,
+                squadPreferences,
+                onlyUsePreferredSquads,
                 jobs,
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToHashSet(),
@@ -384,7 +392,8 @@ namespace Content.Server.Database
             profile.SkinColor = appearance.SkinColor.ToHex();
             profile.SpawnPriority = (int) humanoid.SpawnPriority;
             profile.ArmorPreference = humanoid.ArmorPreference.ToString();
-            profile.SquadPreference = new RMCSquadPreference { Squad = humanoid.SquadPreference };
+            profile.SquadPreference ??= new RMCSquadPreference();
+            profile.SquadPreference.Squad = SerializeSquadPreferences(humanoid);
             profile.Markings = markings;
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
@@ -454,6 +463,48 @@ namespace Content.Server.Database
             profile.Enabled = humanoid.Enabled;
 
             return profile;
+        }
+
+        private static (HashSet<EntProtoId<SquadTeamComponent>>? Squads, bool OnlyUsePreferredSquads) DeserializeSquadPreferences(string? serialized)
+        {
+            if (string.IsNullOrWhiteSpace(serialized))
+                return (null, false);
+
+            try
+            {
+                if (serialized.TrimStart().StartsWith('{'))
+                {
+                    var data = JsonSerializer.Deserialize<SerializedSquadPreferences>(serialized);
+                    if (data == null)
+                        return (null, false);
+
+                    return (data.Squads.Select(id => new EntProtoId<SquadTeamComponent>(id)).ToHashSet(),
+                        data.OnlyUsePreferredSquads);
+                }
+            }
+            catch (JsonException)
+            {
+                // Fall back to the legacy single-squad format below.
+            }
+
+            return ([new EntProtoId<SquadTeamComponent>(serialized)], false);
+        }
+
+        private static string? SerializeSquadPreferences(HumanoidCharacterProfile humanoid)
+        {
+            if (!humanoid.HasExplicitSquadPreferences)
+                return null;
+
+            var data = new SerializedSquadPreferences
+            {
+                OnlyUsePreferredSquads = humanoid.OnlyUsePreferredSquads,
+                Squads = humanoid.SquadPreferences
+                    .Select(squad => squad.Id)
+                    .OrderBy(id => id)
+                    .ToList(),
+            };
+
+            return JsonSerializer.Serialize(data);
         }
         #endregion
 
