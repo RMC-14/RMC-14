@@ -541,6 +541,7 @@
 - type: entity
   parent: RMCPatchBase
   id: RMCPatchTSEWhiskey
+  suffix: PVE, RCM
   name: RCM Whiskey Troop patch
   description: A fire-resistant shoulder patch, worn by the men and women of Whiskey Troop, stationed aboard the HMS Pratchett. The patch features a crown and two knives facing left and right, embroidered in gold.
   components:
