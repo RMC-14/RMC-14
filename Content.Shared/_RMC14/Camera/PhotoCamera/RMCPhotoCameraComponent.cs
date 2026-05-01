@@ -31,25 +31,19 @@ public sealed partial class RMCPhotoCameraComponent : Component
     ///     The zoom level applied when capturing a photo.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float ZoomLevel = 0.125f;
-
-    /// <summary>
-    ///     The minimum zoom level used as the baseline for all zoom calculations.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float BaseZoomLevel = 0.025f;
-
-    /// <summary>
-    ///     The incremental zoom change applied per zoom mode step.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float ZoomStep = 0.05f;
+    public float ZoomLevel = 0.25f;
 
     /// <summary>
     ///     The resolution of the eye used to take the photo.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int Resolution = 1280;
+    public int Resolution = 640;
+
+    /// <summary>
+    ///     The resolution of the eye used to take the photo.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int BaseResolution = 128;
 
     /// <summary>
     ///     The current zoom preset determining how zoom step modifiers are applied.

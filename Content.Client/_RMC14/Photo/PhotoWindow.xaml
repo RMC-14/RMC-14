@@ -1,8 +1,6 @@
 <photo:PhotoWindow xmlns="https://spacestation14.io"
                 xmlns:photo="clr-namespace:Content.Client._RMC14.Photo"
-                Resizable="True"
-                MinSize="420 420"
-                SetSize="576 576">
+                Resizable="True">
 
     <TextureRect Name="PhotoDisplay"
                  HorizontalAlignment="Center"

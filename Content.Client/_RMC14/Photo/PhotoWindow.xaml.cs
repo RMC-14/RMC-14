@@ -8,6 +8,7 @@ namespace Content.Client._RMC14.Photo;
 public sealed class PhotoWindow : DefaultWindow
 {
     private readonly TextureRect _image;
+    private static readonly Vector2i MaxDefaultWindowSize = new (640, 640);
 
     public PhotoWindow()
     {
@@ -26,6 +27,12 @@ public sealed class PhotoWindow : DefaultWindow
     public void SetImage(OwnedTexture texture)
     {
         _image.Texture = texture;
+
+        var size = texture.Size;
+        if (size > MaxDefaultWindowSize)
+            size = MaxDefaultWindowSize;
+
+        SetSize = size + new Vector2i(50, 50);
     }
 
     public void SetName(string name)

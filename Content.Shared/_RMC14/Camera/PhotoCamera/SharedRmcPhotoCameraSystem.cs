@@ -94,10 +94,10 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
         if ((int)ent.Comp.ZoomMode > (int)PhotoZoomMode.Wide)
             ent.Comp.ZoomMode = PhotoZoomMode.Focused;
 
-        ent.Comp.ZoomLevel = ent.Comp.BaseZoomLevel + (int)ent.Comp.ZoomMode * ent.Comp.ZoomStep;
+        var captureSize = (int)ent.Comp.ZoomMode * 2 + 1;
+        ent.Comp.Resolution = ent.Comp.BaseResolution * captureSize;
         Dirty(ent);
 
-        var captureSize = (int)ent.Comp.ZoomMode * 2 + 1;
         Popup.PopupClient(Loc.GetString("rmc-photo-camera-cycle-zoom", ("camera", ent.Owner), ("captureSize", captureSize)), user, user);
         Audio.PlayPredicted(ent.Comp.CycleZoomSound, user, user);
     }
