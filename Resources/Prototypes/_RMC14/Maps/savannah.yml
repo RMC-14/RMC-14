@@ -7,7 +7,7 @@
   maxRandomOffset: 0
   randomRotation: false
   stations:
-    Almayer:
+    Savannah:
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
