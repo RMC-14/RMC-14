@@ -400,6 +400,7 @@
   parent: CMPackFlareBase
   id: CMPackFlareColonist
   name: CK25 signaling flare pack
+  suffix: Colony, Filled
   description: A packet of eight CK25 Signaling Flares. Issued to colonists to light dark areas in emergency situations.
   components:
   - type: Sprite
@@ -409,12 +410,6 @@
       map: [ "emptyLayer" ]
     - state: ck25
       map: [ "fullLayer" ]
-
-- type: entity
-  parent: CMPackFlareColonist
-  id: CMPackFlareColonistFilled
-  suffix: Filled
-  components:
   - type: CMItemSlots
     startingItem: CMFlareColonist
 
