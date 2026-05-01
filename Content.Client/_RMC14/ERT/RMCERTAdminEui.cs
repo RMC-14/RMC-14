@@ -371,8 +371,6 @@ public sealed class RMCERTAdminEui : BaseEui
             Text = text,
             ConfirmationText = Loc.GetString("generic-confirm"),
             MinWidth = 118,
-            SetWidth = 148,
-            ClipText = true,
             StyleClasses = { "OpenBoth" },
             Disabled = disabled,
         };
