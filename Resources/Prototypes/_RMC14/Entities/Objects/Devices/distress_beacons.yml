@@ -1,3 +1,15 @@
+# RMCERTDistressBeacon field guide:
+# - allowedCalls: explicit ERT call prototypes this beacon may request; empty means all enabled handheld calls.
+# - requestTitle: loc id for the title shown in the reason prompt and admin request text.
+# - recipient: loc id for the authority or organization receiving the request.
+# - reasonRequired: whether the user must enter a non-empty reason.
+# - singleUse: whether the beacon becomes spent after a successful request.
+# - resetOnDeny: whether denial clears the spent/cooldown state for reuse.
+# - cooldown: time before another request can be sent by this beacon.
+# - lastUsed: runtime round time when the beacon last sent a request.
+# - spent: runtime single-use state; normally not set in prototypes.
+# - reasonLimit: maximum number of characters accepted for the request reason.
+
 - type: entity
   parent: BaseItem
   id: RMCHandheldDistressBeaconBase

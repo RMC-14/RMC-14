@@ -8,5 +8,8 @@ namespace Content.Shared._RMC14.ERT;
 [Serializable, NetSerializable]
 public enum RMCERTDistressBeaconVisuals : byte
 {
+    /// <summary>
+    /// Whether the distress beacon is lit as active/spent after sending a request.
+    /// </summary>
     Active,
 }

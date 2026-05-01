@@ -1,3 +1,15 @@
+# RMCERTSpawnPoint field guide:
+# - roleTags: responder role tags this marker is intended to spawn.
+# - seatTags: preferred shuttle seat tags copied into seat assignment.
+# - priority: higher values are considered before lower-priority markers.
+#
+# RMCERTSeat field guide:
+# - seatTags: tags describing which roster roles prefer this seat.
+# - reservedRoleTags: role tags that should reserve this seat before generic assignment.
+# - priority: higher values are assigned before lower-priority seats.
+# - occupiedBy: runtime responder assigned to this seat; normally not set in prototypes.
+# - reservationExpires: runtime round time when a temporary reservation expires.
+
 - type: entity
   parent: MarkerBase
   id: RMCERTSpawnMarker

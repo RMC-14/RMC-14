@@ -48,62 +48,130 @@ using Robust.Shared.Timing;
 namespace Content.Server._RMC14.Dropship;
 
 [RegisterComponent]
+/// <summary>
+/// Stores the expected dock pairing for a restricted shuttle launch until verification completes.
+/// </summary>
 public sealed partial class RMCExpectedDockComponent : Component
 {
+    /// <summary>
+    /// Destination marker the shuttle is expected to dock with.
+    /// </summary>
     [ViewVariables]
     public EntityUid Destination;
 
+    /// <summary>
+    /// Grid containing the destination dock.
+    /// </summary>
     [ViewVariables]
     public EntityUid TargetGrid;
 
+    /// <summary>
+    /// Dock entity on the moving shuttle grid chosen for the launch.
+    /// </summary>
     [ViewVariables]
     public EntityUid ShuttleDock;
 
+    /// <summary>
+    /// Dock entity on the target grid chosen for the launch.
+    /// </summary>
     [ViewVariables]
     public EntityUid TargetDock;
 
+    /// <summary>
+    /// Expected post-dock coordinates for the shuttle.
+    /// </summary>
     [ViewVariables]
     public EntityCoordinates Coordinates;
 
+    /// <summary>
+    /// Expected post-dock shuttle rotation.
+    /// </summary>
     [ViewVariables]
     public Angle Angle;
 
+    /// <summary>
+    /// Docking configuration used to perform the launch.
+    /// </summary>
     [ViewVariables]
     public DockingConfig? Config;
 
+    /// <summary>
+    /// Docking profile used when choosing and validating the target destination.
+    /// </summary>
     [ViewVariables]
     public RMCShuttleDockingClass DockingClass;
 
+    /// <summary>
+    /// ERT request id that owns this expected dock, when launched by ERT.
+    /// </summary>
     [ViewVariables]
     public Guid RequestId;
 
+    /// <summary>
+    /// ERT call prototype id that configured this launch, when available.
+    /// </summary>
     [ViewVariables]
     public string? Call;
 
+    /// <summary>
+    /// Whether the actual docked pair has already matched the expected pair.
+    /// </summary>
     [ViewVariables]
     public bool Confirmed;
 
+    /// <summary>
+    /// Actual shuttle dock found during verification.
+    /// </summary>
     [ViewVariables]
     public EntityUid? ActualShuttleDock;
 
+    /// <summary>
+    /// Actual destination dock found during verification.
+    /// </summary>
     [ViewVariables]
     public EntityUid? ActualTargetDock;
 
+    /// <summary>
+    /// Last verification failure reason for diagnostics.
+    /// </summary>
     [ViewVariables]
     public string? FailureReason;
 }
 
 [RegisterComponent]
+/// <summary>
+/// Marks a shuttle grid as using restricted routing metadata for launch and dock verification.
+/// </summary>
 public sealed partial class RMCRestrictedShuttleComponent : Component
 {
+    /// <summary>
+    /// ERT request id that owns this restricted shuttle, when launched by ERT.
+    /// </summary>
     [ViewVariables]
     public Guid RequestId;
 
+    /// <summary>
+    /// ERT call prototype id that configured this shuttle, when available.
+    /// </summary>
     [ViewVariables]
     public string? Call;
 }
 
 [ByRefEvent]
+/// <summary>
+/// Raised when a restricted shuttle docks somewhere other than the expected destination pair.
+/// </summary>
+/// <param name="Shuttle">Shuttle grid that failed verification.</param>
+/// <param name="Destination">Destination marker selected for the launch.</param>
+/// <param name="TargetGrid">Grid containing the expected target dock.</param>
+/// <param name="ShuttleDock">Expected dock entity on the shuttle grid.</param>
+/// <param name="TargetDock">Expected dock entity on the destination grid.</param>
+/// <param name="ActualShuttleDock">Actual shuttle dock found after docking, if any.</param>
+/// <param name="ActualTargetDock">Actual destination dock found after docking, if any.</param>
+/// <param name="RequestId">ERT request id that owns the launch, when launched by ERT.</param>
+/// <param name="Call">ERT call prototype id that configured the launch, when available.</param>
+/// <param name="DockingClass">Docking profile used during destination selection.</param>
+/// <param name="Reason">Human-readable verification failure reason.</param>
 public readonly record struct RMCDockingVerificationFailedEvent(
     EntityUid Shuttle,
     EntityUid Destination,

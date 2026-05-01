@@ -1,11 +1,76 @@
 # RMC ERT call prototypes.
 # Shuttle placement notes:
-# - To stage a shuttle on a mapped pad, set shuttleMap plus shuttleSpawnMarker
-#   or shuttleSpawner, and place that marker/spawner on the map.
-# - To stage a shuttle immediately on the hidden fallback ERT space map, set
-#   shuttleMap directly and leave shuttleSpawner/shuttleSpawnMarker unset.
-# - If shuttleMap is also omitted, no shuttle is loaded; roster spawn positions
-#   fall back to the request source coordinates instead.
+# - shuttleMap sets the shuttle map directly; if omitted, shuttleSpawner can
+#   provide the map through its GridSpawner.spawn field.
+# - To stage a shuttle on a mapped pad, set shuttleSpawnMarker or shuttleSpawner
+#   to a marker/spawner prototype that is placed on the source map.
+# - If no free placed marker/spawner is found, the shuttle is staged on the
+#   hidden fallback ERT space map.
+# - If neither shuttleMap nor a shuttleSpawner map is available, no shuttle is
+#   loaded; roster spawn positions fall back to the request source coordinates.
+#
+# rmcERTCall field guide:
+# - type: must be rmcERTCall for response team call prototypes.
+# - id: stable prototype id referenced by beacons, admin actions and request state.
+# - name: loc id for the response team display name.
+# - organization: optional loc id for the faction or group behind the call.
+# - npcFactions: NPC factions applied to spawned responders.
+# - iffFaction: optional IFF faction applied to responders and the shuttle.
+# - category: loc id used to group calls in the admin UI.
+# - enabled: false disables selection and random dispatch.
+# - adminSelectable: false hides the call from direct admin selection and force-call tools.
+# - adminButtonLabel: optional loc id overriding the force-call button label.
+# - randomWeight: weighted-random chance when admins approve without choosing a call.
+# - allowedSources: sources allowed to request this call, such as Console, Handheld or Admin.
+# - shuttleMap: map file loaded as the team shuttle.
+# - shuttleSpawner: optional grid spawner prototype used for mapped shuttle staging.
+# - shuttleSpawnMarker: optional start pad or spawner marker used to place the shuttle.
+# - shuttleCargo: entity prototypes spawned onto the shuttle before launch.
+# - shuttleCargoCount: number of cargo entries chosen from shuttleCargo.
+# - autoLaunch: whether the shuttle launches after recruitment without another admin action.
+# - launchDelay: seconds before an automatic launch attempt.
+# - shuttleTravelTime: optional FTL travel-time override for the shuttle.
+# - landingTags: destination tags the shuttle is allowed to route to.
+# - deniedLandingTags: destination tags the shuttle may not route to.
+# - roles: roster entries used to create ghost-role slots for responders.
+# - announcements: optional messages and sounds for request lifecycle stages.
+# - requirements: cooldown, round-state and recruitment limits for the call.
+# - objectives: loc ids shown as responder objectives in the briefing.
+# - features: loc ids shown as notable team features in the briefing.
+#
+# Role field guide:
+# - roles.id: stable role id copied to roster/member metadata.
+# - roles.name: loc id for the role display name.
+# - roles.job: optional job prototype associated with spawned responders.
+# - roles.ghostRoleEntityPool: weighted pool of ghost-role entity prototypes.
+# - roles.ghostRoleEntityPool.entity: ghost-role entity prototype to spawn.
+# - roles.ghostRoleEntityPool.weight: relative selection weight within the pool.
+# - roles.min: minimum slots this role contributes to the roster.
+# - roles.max: maximum slots this role can contribute to the roster.
+# - roles.required: whether the role minimum must be recruited before launch.
+# - roles.leader: whether the role is treated as the team leader.
+# - roles.roleTags: tags used to match roles to spawn markers and reserved seats.
+# - roles.seatTags: preferred seat tags for shuttle seat assignment.
+# - roles.priority: higher values are planned, spawned and seated first.
+#
+# Announcement field guide:
+# - announcements.requestAdmin: optional admin-facing loc id sent when a request is created.
+# - announcements.dispatch/arrival/denied/cancelled/failed: stage-specific public announcements.
+# - title: optional loc id for the announcement title.
+# - message: optional loc id for a single announcement body.
+# - messages: optional random pool of announcement body loc ids.
+# - sound: optional sound played with the announcement.
+# - rawTitle: whether title is used directly instead of formatted with call context.
+#
+# Requirements field guide:
+# - cooldown: per-call cooldown between successful requests.
+# - minRoundTime: optional minimum round time before approval is allowed.
+# - recruitmentDuration: how long ghost roles remain open.
+# - disallowDuringEvacuation: blocks the call during evacuation.
+# - disallowDuringHijack: blocks the call during hijack.
+# - maxCallsPerRound: maximum requests of this call per round.
+# - minRequiredSlots: minimum recruited required slots before launch.
+# - maxSlots: maximum planned roster slots for this call.
 
 - type: rmcERTCall
   id: RMCERTCallCBRN

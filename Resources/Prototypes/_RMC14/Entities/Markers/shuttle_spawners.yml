@@ -1,3 +1,6 @@
+# RMCERTShuttleStartPad field guide:
+# - offset: local placement offset applied when an ERT shuttle is loaded onto this start pad.
+
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerShuttle
