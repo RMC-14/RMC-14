@@ -1088,7 +1088,11 @@ public sealed class DropshipSystem : SharedDropshipSystem
             SetDestinationShip((destination, newDestination), dropshipId);
         }
 
-        if (hyperspaceTime == null)
+        var calculateTravelTime = hyperspaceTime == null;
+        var hasSkill = user != null && _skills.HasSkill(user.Value, computer.Comp.Skill, computer.Comp.MultiplierSkillLevel);
+        var flyBy = dropship.Destination == destination;
+
+        if (calculateTravelTime)
         {
             if (hijack)
             {
@@ -1096,9 +1100,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
             }
             else
             {
-                var hasSkill = user != null && _skills.HasSkill(user.Value, computer.Comp.Skill, computer.Comp.MultiplierSkillLevel);
-                var rechargeMultiplier = hasSkill ? computer.Comp.SkillRechargeMultiplier : 1f;
-                var flyBy = dropship.Destination == destination;
                 if (flyBy)
                 {
                     hyperspaceTime = (float) _flyByTime.TotalSeconds;
@@ -1111,32 +1112,38 @@ public sealed class DropshipSystem : SharedDropshipSystem
                     if (hasSkill)
                         hyperspaceTime *= computer.Comp.SkillTravelMultiplier;
                 }
+            }
+        }
 
-                dropship.RechargeTime = TimeSpan.FromSeconds(_config.GetCVar(CCVars.FTLCooldown) * rechargeMultiplier);
+        if (!hijack)
+        {
+            var rechargeMultiplier = hasSkill ? computer.Comp.SkillRechargeMultiplier : 1f;
+            dropship.RechargeTime = TimeSpan.FromSeconds(_config.GetCVar(CCVars.FTLCooldown) * rechargeMultiplier);
 
-                foreach (var point in dropship.AttachmentPoints)
+            foreach (var point in dropship.AttachmentPoints)
+            {
+                if (TryComp(point, out DropshipEnginePointComponent? engine) &&
+                    _container.TryGetContainer(point, engine.ContainerId, out var container))
                 {
-                    if (TryComp(point, out DropshipEnginePointComponent? engine) &&
-                        _container.TryGetContainer(point, engine.ContainerId, out var container))
+                    foreach (var contained in container.ContainedEntities)
                     {
-                        foreach (var contained in container.ContainedEntities)
+                        if (calculateTravelTime &&
+                            TryComp(contained, out DropshipFlightMultiplierComponent? flightMult))
                         {
-                            if (TryComp(contained, out DropshipFlightMultiplierComponent? flightMult))
-                            {
-                                if (flyBy)
-                                    hyperspaceTime /= flightMult.Multiplier;
-                                else
-                                    hyperspaceTime *= flightMult.Multiplier;
-                            }
-
-                            if (TryComp(contained, out DropshipRechargeMultiplierComponent? rechargeMult))
-                                dropship.RechargeTime *= rechargeMult.Multiplier;
+                            if (flyBy)
+                                hyperspaceTime /= flightMult.Multiplier;
+                            else
+                                hyperspaceTime *= flightMult.Multiplier;
                         }
+
+                        if (TryComp(contained, out DropshipRechargeMultiplierComponent? rechargeMult))
+                            dropship.RechargeTime *= rechargeMult.Multiplier;
                     }
                 }
-
-                hyperspaceTime += _config.GetCVar(CCVars.FTLArrivalTime);
             }
+
+            if (calculateTravelTime)
+                hyperspaceTime += _config.GetCVar(CCVars.FTLArrivalTime);
         }
 
         dropship.Destination = destination;
@@ -1181,10 +1188,18 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
         }
 
+        if (hyperspaceTime == null)
+        {
+            Log.Error($"Failed to calculate hyperspace time for dropship {ToPrettyString(dropshipId.Value)}");
+            return false;
+        }
+
+        var finalHyperspaceTime = hyperspaceTime.Value;
+
         if (dockingTarget is { } target)
-            StartRestrictedDockingFTL(dropshipId.Value, shuttleComp, computer, destination, target, startupTime, hyperspaceTime);
+            StartRestrictedDockingFTL(dropshipId.Value, shuttleComp, computer, destination, target, startupTime, finalHyperspaceTime);
         else
-            _shuttle.FTLToCoordinates(dropshipId.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
+            _shuttle.FTLToCoordinates(dropshipId.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: finalHyperspaceTime);
 
         if (hijack)
         {
@@ -1206,7 +1221,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             }
 
             // Add 10 seconds to compensate for the arriving times
-            dropship.HijackLandAt = _timing.CurTime + TimeSpan.FromSeconds(hyperspaceTime.Value) + TimeSpan.FromSeconds(10);
+            dropship.HijackLandAt = _timing.CurTime + TimeSpan.FromSeconds(finalHyperspaceTime) + TimeSpan.FromSeconds(10);
             Dirty(dropshipId.Value, dropship);
         }
 

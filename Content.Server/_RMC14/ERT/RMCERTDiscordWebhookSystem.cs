@@ -311,10 +311,6 @@ public sealed class RMCERTDiscordWebhookSystem : EntitySystem
             timing.Add(Loc.GetString("rmc-ert-discord-timing-recruitment-ends",
                 ("time", FormatRoundTime(recruitmentEndsAt))));
 
-        if (request.ReturnAvailableAt is { } returnAvailableAt)
-            timing.Add(Loc.GetString("rmc-ert-discord-timing-return-available",
-                ("time", FormatRoundTime(returnAvailableAt))));
-
         return string.Join('\n', timing);
     }
 

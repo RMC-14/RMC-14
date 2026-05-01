@@ -109,7 +109,6 @@ public sealed class RMCERTSystem : EntitySystem
     private static readonly EntProtoId ERTShuttleReturnDestinationPrototype = "RMCERTShuttleReturnDestination";
     private static readonly EntProtoId ERTShuttleReturnDestinationSmallPrototype = "RMCERTShuttleReturnDestinationSmall";
     private static readonly EntProtoId ERTShuttleReturnDestinationBigPrototype = "RMCERTShuttleReturnDestinationBig";
-    private static readonly TimeSpan ReturnDelay = TimeSpan.FromMinutes(2);
     // AdminManager raises OnPermsChanged before the client enables admin chat filters.
     private static readonly TimeSpan PendingAdminNotificationDelay = TimeSpan.FromSeconds(1);
 
@@ -150,12 +149,6 @@ public sealed class RMCERTSystem : EntitySystem
 
         foreach (var request in _requests.Values.ToArray())
         {
-            if (request.State == RMCERTRequestState.Arrived)
-            {
-                TryUnlockReturnRoute(request);
-                continue;
-            }
-
             if (request.State != RMCERTRequestState.Recruiting)
                 continue;
 
@@ -542,8 +535,6 @@ public sealed class RMCERTSystem : EntitySystem
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
-        request.ReturnAvailableAt = null;
-        request.ReturnRouteUnlocked = false;
         UpdateSourceVisual(request, false);
 
         var adminText = admin is { Valid: true }
@@ -640,7 +631,7 @@ public sealed class RMCERTSystem : EntitySystem
                 request.State = RMCERTRequestState.Arrived;
                 request.LastError = string.Empty;
                 request.LastWarning = string.Empty;
-                BeginReturnDelay(request);
+                MakeReturnRouteAvailable(request);
                 UpdateSourceVisual(request, false);
                 _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-arrived-missing-call", ("id", request.Id)));
                 AddERTRequestLog(LogImpact.Medium, "arrived with missing call prototype", request, "system");
@@ -1481,8 +1472,6 @@ public sealed class RMCERTSystem : EntitySystem
 
         request.ShuttleHomeDestination = null;
         request.ShuttleHomeIsFallback = false;
-        request.ReturnAvailableAt = null;
-        request.ReturnRouteUnlocked = false;
     }
 
     private void SetShuttlePlayerRouteLock(EntityUid shuttle, EntityUid? destination)
@@ -1495,34 +1484,15 @@ public sealed class RMCERTSystem : EntitySystem
         _dropship.ClearPlayerRouteLock(shuttle);
     }
 
-    private void TryUnlockReturnRoute(RMCERTRequest request)
+    private void MakeReturnRouteAvailable(RMCERTRequest request)
     {
-        if (request.ReturnRouteUnlocked ||
-            request.ReturnAvailableAt is not { } returnAvailableAt ||
-            _timing.CurTime < returnAvailableAt)
-        {
-            return;
-        }
-
         if (request.Shuttle is not { Valid: true } shuttle ||
             !Exists(shuttle) ||
             request.ShuttleHomeDestination is not { Valid: true } home ||
             !Exists(home))
-        {
             return;
-        }
 
-        request.ReturnRouteUnlocked = true;
         SetShuttlePlayerRouteLock(shuttle, home);
-    }
-
-    private void BeginReturnDelay(RMCERTRequest request)
-    {
-        request.ReturnAvailableAt = _timing.CurTime + ReturnDelay;
-        request.ReturnRouteUnlocked = false;
-
-        if (request.Shuttle is { Valid: true } shuttle && Exists(shuttle))
-            SetShuttlePlayerRouteLock(shuttle, null);
     }
 
     private bool BuildRoster(RMCERTRequest request, RMCERTCallPrototype call, out string error)
@@ -2839,7 +2809,7 @@ public sealed class RMCERTSystem : EntitySystem
         request.State = RMCERTRequestState.Arrived;
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
-        BeginReturnDelay(request);
+        MakeReturnRouteAvailable(request);
         UpdateSourceVisual(request, false);
         Announce(call.Announcements.Arrival, request, call);
 

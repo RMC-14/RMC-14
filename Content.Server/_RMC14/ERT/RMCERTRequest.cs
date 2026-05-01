@@ -127,16 +127,6 @@ public sealed class RMCERTRequest
     public bool ShuttleHomeIsFallback;
 
     /// <summary>
-    /// Round time when the shuttle may unlock its return route.
-    /// </summary>
-    public TimeSpan? ReturnAvailableAt;
-
-    /// <summary>
-    /// Whether the return destination has been made available to the shuttle crew.
-    /// </summary>
-    public bool ReturnRouteUnlocked;
-
-    /// <summary>
     /// Materialized roster slots planned from the selected call prototype.
     /// </summary>
     public readonly List<RMCERTRosterSlot> PlannedRoster = [];
