@@ -122,7 +122,7 @@ public sealed partial class RMCERTRoleEntry
     public ProtoId<JobPrototype>? Job;
 
     [DataField(required: true)]
-    public EntProtoId GhostRoleEntity;
+    public List<RMCERTWeightedGhostRoleEntity> GhostRoleEntityPool = [];
 
     [DataField]
     public int Min = 1;
@@ -144,6 +144,16 @@ public sealed partial class RMCERTRoleEntry
 
     [DataField]
     public int Priority;
+}
+
+[DataDefinition]
+public sealed partial class RMCERTWeightedGhostRoleEntity
+{
+    [DataField(required: true)]
+    public EntProtoId Entity;
+
+    [DataField]
+    public int Weight = 1;
 }
 
 [DataDefinition]
@@ -219,4 +229,7 @@ public sealed partial class RMCERTRequirementSet
 
     [DataField]
     public int MinRequiredSlots;
+
+    [DataField]
+    public int MaxSlots;
 }

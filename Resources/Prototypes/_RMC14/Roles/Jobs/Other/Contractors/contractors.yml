@@ -1,0 +1,950 @@
+# Vanguard's Arrow Incorporated contractors.
+- type: job
+  parent: CMJobBase
+  id: RMCContractorLeader
+  name: rmc-job-name-contractor-leader
+  description: rmc-ghost-role-information-contractor-description
+  playTimeTracker: RMCJobContractorLeader
+  ranks:
+    RMCRankFLLeader: []
+  startingGear: RMCGearContractorLeader
+  icon: RMCJobIconFreelancerLeader
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: VAI Contractor Team Leader
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillMedical: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: JobPrefix
+      prefix: rmc-job-prefix-contractor-leader
+    - type: RMCPointing
+    - type: RMCTrackable
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidContractorLeader
+  name: contractor ghost role leader
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: vai_headset
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCContractorLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-leader
+    description: rmc-ghost-role-information-contractor-description
+    rules: rmc-ghost-role-information-contractor-rules
+    reregister: false
+    job: RMCContractorLeader
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
+
+- type: job
+  parent: CMJobBase
+  id: RMCContractorStandard
+  name: rmc-job-name-contractor-standard
+  description: rmc-ghost-role-information-contractor-description
+  playTimeTracker: RMCJobContractorStandard
+  ranks:
+    RMCRankFLFreelancer: []
+  startingGear: RMCGearContractorStandard
+  icon: RMCJobIconFreelancerStandard
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: VAI Contractor
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-contractor-standard
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidContractorStandard
+  name: contractor ghost role standard
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: vai_headset
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandard
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorStandardMAR40
+  suffix: Spawner, Player, Friendly, MAR40
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandard
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorStandardL42A
+  suffix: Spawner, Player, Friendly, L42A
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandardL42A
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorStandardM54C
+  suffix: Spawner, Player, Friendly, M54C
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandardM54C
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorStandardShotgun
+  suffix: Spawner, Player, Friendly, Shotgun
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandardShotgun
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorStandardM54CMK1
+  suffix: Spawner, Player, Friendly, M54C MK1
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorStandardM54CMK1
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCContractorStandard
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-standard
+    description: rmc-ghost-role-information-contractor-description
+    rules: rmc-ghost-role-information-contractor-rules
+    reregister: false
+    job: RMCContractorStandard
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorStandardL42A
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-standard
+    job: RMCContractorStandardL42A
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorStandardM54C
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-standard
+    job: RMCContractorStandardM54C
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorStandardShotgun
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-standard
+    job: RMCContractorStandardShotgun
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorStandardM54CMK1
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-standard
+    job: RMCContractorStandardM54CMK1
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorStandardL42A
+  playTimeTracker: RMCJobContractorStandard
+  startingGear: RMCGearContractorStandardL42A
+  spawnMenuRoleName: VAI Contractor (L42A)
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorStandardM54C
+  playTimeTracker: RMCJobContractorStandard
+  startingGear: RMCGearContractorStandardM54C
+  spawnMenuRoleName: VAI Contractor (M54C)
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorStandardShotgun
+  playTimeTracker: RMCJobContractorStandard
+  startingGear: RMCGearContractorStandardShotgun
+  spawnMenuRoleName: VAI Contractor (Shotgun)
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorStandardM54CMK1
+  playTimeTracker: RMCJobContractorStandard
+  startingGear: RMCGearContractorStandardM54CMK1
+  spawnMenuRoleName: VAI Contractor (M54C MK1)
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorMedic
+  name: rmc-job-name-contractor-medic
+  playTimeTracker: RMCJobContractorMedic
+  ranks:
+    RMCRankFLMedic: []
+  startingGear: RMCGearContractorMedic
+  icon: RMCJobIconFreelancerMedic
+  spawnMenuRoleName: VAI Contractor Medical Specialist
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorMedic
+  name: contractor ghost role medic
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorMedic
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-medic
+    job: RMCContractorMedic
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorEngineer
+  name: rmc-job-name-contractor-engineer
+  playTimeTracker: RMCJobContractorEngineer
+  startingGear: RMCGearContractorEngineer
+  spawnMenuRoleName: VAI Contractor Engineering Specialist
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorEngineer
+  name: contractor ghost role engineer
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorEngineer
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorEngineer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-engineer
+    job: RMCContractorEngineer
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorHeavy
+  name: rmc-job-name-contractor-heavy
+  playTimeTracker: RMCJobContractorHeavy
+  startingGear: RMCGearContractorHeavy
+  spawnMenuRoleName: VAI Contractor Machinegunner
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorHeavy
+  name: contractor ghost role heavy
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorHeavy
+
+- type: entity
+  parent: RMCRandomHumanoidContractorHeavy
+  id: RMCRandomHumanoidContractorHeavyMAR40LMG
+  suffix: Spawner, Player, Friendly, MAR40 LMG
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorHeavy
+
+- type: entity
+  parent: RMCRandomHumanoidContractorHeavy
+  id: RMCRandomHumanoidContractorHeavyM60
+  suffix: Spawner, Player, Friendly, M60
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorHeavyM60
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorHeavy
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-heavy
+    job: RMCContractorHeavy
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
+
+- type: randomHumanoidSettings
+  parent: RMCContractorHeavy
+  id: RMCContractorHeavyM60
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-heavy
+    job: RMCContractorHeavyM60
+
+- type: job
+  parent: RMCContractorHeavy
+  id: RMCContractorHeavyM60
+  playTimeTracker: RMCJobContractorHeavy
+  startingGear: RMCGearContractorHeavyM60
+  spawnMenuRoleName: VAI Contractor Machinegunner (M60)
+
+- type: job
+  parent: RMCContractorLeader
+  id: RMCContractorCovertLeader
+  name: rmc-job-name-contractor-covert-leader
+  playTimeTracker: RMCJobContractorCovertLeader
+  startingGear: RMCGearContractorCovertLeader
+  spawnMenuRoleName: VAI Covert Contractor Team Leader
+
+- type: entity
+  parent: RMCRandomHumanoidContractorLeader
+  id: RMCRandomHumanoidContractorCovertLeader
+  name: covert contractor ghost role leader
+  suffix: Spawner, Player, Friendly, Covert
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertLeader
+
+- type: randomHumanoidSettings
+  parent: RMCContractorLeader
+  id: RMCContractorCovertLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-leader
+    job: RMCContractorCovertLeader
+
+- type: job
+  parent: RMCContractorStandard
+  id: RMCContractorCovertStandard
+  name: rmc-job-name-contractor-covert-standard
+  playTimeTracker: RMCJobContractorCovertStandard
+  startingGear: RMCGearContractorCovertStandard
+  spawnMenuRoleName: VAI Covert Contractor
+
+- type: entity
+  parent: RMCRandomHumanoidContractorStandard
+  id: RMCRandomHumanoidContractorCovertStandard
+  name: covert contractor ghost role standard
+  suffix: Spawner, Player, Friendly, Covert
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertStandard
+
+- type: entity
+  parent: RMCRandomHumanoidContractorCovertStandard
+  id: RMCRandomHumanoidContractorCovertStandardMAR40
+  suffix: Spawner, Player, Friendly, Covert, MAR40
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertStandard
+
+- type: entity
+  parent: RMCRandomHumanoidContractorCovertStandard
+  id: RMCRandomHumanoidContractorCovertStandardL42A
+  suffix: Spawner, Player, Friendly, Covert, L42A
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertStandardL42A
+
+- type: entity
+  parent: RMCRandomHumanoidContractorCovertStandard
+  id: RMCRandomHumanoidContractorCovertStandardM54C
+  suffix: Spawner, Player, Friendly, Covert, M54C
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertStandardM54C
+
+- type: entity
+  parent: RMCRandomHumanoidContractorCovertStandard
+  id: RMCRandomHumanoidContractorCovertStandardShotgun
+  suffix: Spawner, Player, Friendly, Covert, Shotgun
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertStandardShotgun
+
+- type: entity
+  parent: RMCRandomHumanoidContractorCovertStandard
+  id: RMCRandomHumanoidContractorCovertStandardM54CMK1
+  suffix: Spawner, Player, Friendly, Covert, M54C MK1
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertStandardM54CMK1
+
+- type: randomHumanoidSettings
+  parent: RMCContractorStandard
+  id: RMCContractorCovertStandard
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-standard
+    job: RMCContractorCovertStandard
+
+- type: randomHumanoidSettings
+  parent: RMCContractorCovertStandard
+  id: RMCContractorCovertStandardL42A
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-standard
+    job: RMCContractorCovertStandardL42A
+
+- type: randomHumanoidSettings
+  parent: RMCContractorCovertStandard
+  id: RMCContractorCovertStandardM54C
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-standard
+    job: RMCContractorCovertStandardM54C
+
+- type: randomHumanoidSettings
+  parent: RMCContractorCovertStandard
+  id: RMCContractorCovertStandardShotgun
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-standard
+    job: RMCContractorCovertStandardShotgun
+
+- type: randomHumanoidSettings
+  parent: RMCContractorCovertStandard
+  id: RMCContractorCovertStandardM54CMK1
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-standard
+    job: RMCContractorCovertStandardM54CMK1
+
+- type: job
+  parent: RMCContractorCovertStandard
+  id: RMCContractorCovertStandardL42A
+  playTimeTracker: RMCJobContractorCovertStandard
+  startingGear: RMCGearContractorCovertStandardL42A
+  spawnMenuRoleName: VAI Covert Contractor (L42A)
+
+- type: job
+  parent: RMCContractorCovertStandard
+  id: RMCContractorCovertStandardM54C
+  playTimeTracker: RMCJobContractorCovertStandard
+  startingGear: RMCGearContractorCovertStandardM54C
+  spawnMenuRoleName: VAI Covert Contractor (M54C)
+
+- type: job
+  parent: RMCContractorCovertStandard
+  id: RMCContractorCovertStandardShotgun
+  playTimeTracker: RMCJobContractorCovertStandard
+  startingGear: RMCGearContractorCovertStandardShotgun
+  spawnMenuRoleName: VAI Covert Contractor (Shotgun)
+
+- type: job
+  parent: RMCContractorCovertStandard
+  id: RMCContractorCovertStandardM54CMK1
+  playTimeTracker: RMCJobContractorCovertStandard
+  startingGear: RMCGearContractorCovertStandardM54CMK1
+  spawnMenuRoleName: VAI Covert Contractor (M54C MK1)
+
+- type: job
+  parent: RMCContractorMedic
+  id: RMCContractorCovertMedic
+  name: rmc-job-name-contractor-covert-medic
+  playTimeTracker: RMCJobContractorCovertMedic
+  startingGear: RMCGearContractorCovertMedic
+  spawnMenuRoleName: VAI Covert Contractor Medical Specialist
+
+- type: entity
+  parent: RMCRandomHumanoidContractorMedic
+  id: RMCRandomHumanoidContractorCovertMedic
+  name: covert contractor ghost role medic
+  suffix: Spawner, Player, Friendly, Covert
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertMedic
+
+- type: randomHumanoidSettings
+  parent: RMCContractorMedic
+  id: RMCContractorCovertMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-medic
+    job: RMCContractorCovertMedic
+
+- type: job
+  parent: RMCContractorEngineer
+  id: RMCContractorCovertEngineer
+  name: rmc-job-name-contractor-covert-engineer
+  playTimeTracker: RMCJobContractorCovertEngineer
+  startingGear: RMCGearContractorCovertEngineer
+  spawnMenuRoleName: VAI Covert Contractor Engineering Specialist
+
+- type: entity
+  parent: RMCRandomHumanoidContractorEngineer
+  id: RMCRandomHumanoidContractorCovertEngineer
+  name: covert contractor ghost role engineer
+  suffix: Spawner, Player, Friendly, Covert
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertEngineer
+
+- type: randomHumanoidSettings
+  parent: RMCContractorEngineer
+  id: RMCContractorCovertEngineer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-engineer
+    job: RMCContractorCovertEngineer
+
+- type: job
+  parent: RMCContractorHeavy
+  id: RMCContractorCovertHeavy
+  name: rmc-job-name-contractor-covert-heavy
+  playTimeTracker: RMCJobContractorCovertHeavy
+  startingGear: RMCGearContractorCovertHeavy
+  spawnMenuRoleName: VAI Covert Contractor Machinegunner
+
+- type: entity
+  parent: RMCRandomHumanoidContractorHeavy
+  id: RMCRandomHumanoidContractorCovertHeavy
+  name: covert contractor ghost role heavy
+  suffix: Spawner, Player, Friendly, Covert
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertHeavy
+
+- type: entity
+  parent: RMCRandomHumanoidContractorCovertHeavy
+  id: RMCRandomHumanoidContractorCovertHeavyMAR40LMG
+  suffix: Spawner, Player, Friendly, Covert, MAR40 LMG
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertHeavy
+
+- type: entity
+  parent: RMCRandomHumanoidContractorCovertHeavy
+  id: RMCRandomHumanoidContractorCovertHeavyM60
+  suffix: Spawner, Player, Friendly, Covert, M60
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCContractorCovertHeavyM60
+
+- type: randomHumanoidSettings
+  parent: RMCContractorHeavy
+  id: RMCContractorCovertHeavy
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-heavy
+    job: RMCContractorCovertHeavy
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 18000 # 5 Hours
+
+- type: randomHumanoidSettings
+  parent: RMCContractorCovertHeavy
+  id: RMCContractorCovertHeavyM60
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-contractor-covert-heavy
+    job: RMCContractorCovertHeavyM60
+
+- type: job
+  parent: RMCContractorCovertHeavy
+  id: RMCContractorCovertHeavyM60
+  playTimeTracker: RMCJobContractorCovertHeavy
+  startingGear: RMCGearContractorCovertHeavyM60
+  spawnMenuRoleName: VAI Covert Contractor Machinegunner (M60)
+
+- type: startingGear
+  id: RMCGearContractorDutyBase
+  equipment:
+    id: RMCIDCardContractor
+    ears: RMCHeadsetDistressVAI
+    jumpsuit: RMCJumpsuitFreelancerBluePants
+    outerClothing: CMArmorM3Light
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetM10
+    shoes: RMCBootsPMCFilled
+    eyes: RMCGlassesHUDSecurity
+    back: RMCSatchelLightpackBlack
+    belt: RMCMK80BeltPMCFilled
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchMagazineLarge
+  storage:
+    back:
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeBlastM12
+    - RMCGrenadeBlastM12
+    - RMCMREWeYaPMC
+    - CMCrowbar
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorLeader
+  equipment:
+    ears: RMCHeadsetDistressVAILeader
+    jumpsuit: RMCJumpsuitFreelancerBlackPants
+    outerClothing: RMCArmorM3LightCarrier
+    eyes: RMCGlassesHUDSecurity
+    suitstorage: RMCWeaponRifleM54CMK1
+  storage:
+    back:
+    - RMCRangefinder
+    - RMCMotionDetector
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeBlastM12
+    - CMGrenadeSmoke
+    - RMCHandheldDistressBeaconWeYa
+    pocket2:
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorStandard
+  equipment:
+    suitstorage: WeaponRifleMAR40
+    belt: RMCMAR40BeltFilled
+  storage:
+    pocket2:
+    - RMCMagazineRifleMAR40Ext
+    - RMCMagazineRifleMAR40Ext
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorStandardL42A
+  equipment:
+    suitstorage: RMCWeaponRifleL42A
+  storage:
+    pocket2:
+    - RMCMagazineRifleL42AExtended
+    - RMCMagazineRifleL42AExtended
+    - RMCMagazineRifleL42AAP
+    - RMCMagazineRifleL42AAP
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorStandardM54C
+  equipment:
+    suitstorage: RMCWeaponRifleM54C
+  storage:
+    pocket2:
+    - CMMagazineRifleM54CExt
+    - CMMagazineRifleM54CExt
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorStandardShotgun
+  equipment:
+    outerClothing: RMCArmorM3LightPadless
+    suitstorage: RMCWeaponShotgunM42A2Filled
+    pocket2: RMCPouchShotgunLargeBuckshot
+  storage:
+    back:
+    - RMCBoxShotgunBuckshot
+    - RMCBoxShotgunSlugs
+    - RMCGrenadeBlastM12
+    - RMCGrenadeBlastM12
+    - RMCExplosiveBreachingCharge
+    - CMCrowbar
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorStandardM54CMK1
+  equipment:
+    outerClothing: RMCArmorM3LightCarrier
+    suitstorage: RMCWeaponRifleM54CMK1
+  storage:
+    pocket2:
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1
+    - CMMagazineRifleM54CMK1AP
+    - CMMagazineRifleM54CMK1AP
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorMedic
+  equipment:
+    jumpsuit: RMCJumpsuitFreelancerGreenPants
+    outerClothing: CMArmorM3Light
+    eyes: RMCGlassesMedicalHUDGlasses
+    belt: CMBeltMedicBagFilled
+    suitstorage: WeaponRifleMAR40
+    pocket1: RMCPouchMedicalERT
+    pocket2: RMCPouchMagazineLargeMAR40
+  storage:
+    back:
+    - CMDefibrillator
+    - CMHealthAnalyzer
+    - CMRollerBedSpawnFolded
+    - CMCrowbar
+    - RMCMREWeYaPMC
+    - CMGrenadeSmoke
+    pocket2:
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40Ext
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorEngineer
+  equipment:
+    jumpsuit: RMCJumpsuitFreelancer
+    eyes: ClothingEyesGlassesMeson
+    back: RMCSatchelWelderPMC
+    belt: CMBeltUtilityCombatFilled
+    pocket1: RMCPouchToolsFill
+    pocket2: RMCPouchConstructionFillFull
+    suitstorage: WeaponRifleMAR40
+  storage:
+    back:
+    - RMCExplosiveBreachingCharge
+    - RMCExplosiveBreachingCharge
+    - RMCExplosivePlastic
+    - CMSheetMetal50
+    - CMSheetPlasteel30
+    - RMCMotionDetector
+    - CMCrowbar
+
+- type: startingGear
+  parent: RMCGearContractorDutyBase
+  id: RMCGearContractorHeavy
+  equipment:
+    outerClothing: RMCArmorM3LightPadded
+    belt: RMCBeltMachineGunner
+    pocket1: RMCPouchExplosiveFilledHEDP
+    pocket2: RMCPouchMagazineLarge
+    suitstorage: RMCWeaponLMGM60
+  storage:
+    belt:
+    - RMCMagazineLMGM60
+    - RMCMagazineLMGM60
+    - RMCExplosiveBreachingCharge
+    pocket2:
+    - RMCMagazineLMGM60
+    - RMCMagazineLMGM60
+    back:
+    - RMCGrenadeBlastM12
+    - RMCGrenadeBlastM12
+    - CMCrowbar
+    - RMCMREWeYaPMC
+
+- type: startingGear
+  parent: RMCGearContractorHeavy
+  id: RMCGearContractorHeavyM60
+  equipment:
+    suitstorage: RMCWeaponLMGM60
+
+- type: startingGear
+  parent: RMCGearContractorLeader
+  id: RMCGearContractorCovertLeader
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: startingGear
+  parent: RMCGearContractorStandard
+  id: RMCGearContractorCovertStandard
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: startingGear
+  parent: RMCGearContractorStandardL42A
+  id: RMCGearContractorCovertStandardL42A
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+    suitstorage: RMCWeaponRifleABR40Tactical
+  storage:
+    pocket2:
+    - RMCMagazineRifleABR40
+    - RMCMagazineRifleABR40
+    - RMCMagazineRifleL42AAP
+    - RMCMagazineRifleL42AExtended
+
+- type: startingGear
+  parent: RMCGearContractorStandardM54C
+  id: RMCGearContractorCovertStandardM54C
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: startingGear
+  parent: RMCGearContractorStandardShotgun
+  id: RMCGearContractorCovertStandardShotgun
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+    suitstorage: RMCWeaponShotgunM42A2Filled
+
+- type: startingGear
+  parent: RMCGearContractorStandardM54CMK1
+  id: RMCGearContractorCovertStandardM54CMK1
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: startingGear
+  parent: RMCGearContractorMedic
+  id: RMCGearContractorCovertMedic
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: startingGear
+  parent: RMCGearContractorEngineer
+  id: RMCGearContractorCovertEngineer
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: startingGear
+  parent: RMCGearContractorHeavy
+  id: RMCGearContractorCovertHeavy
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: startingGear
+  parent: RMCGearContractorHeavyM60
+  id: RMCGearContractorCovertHeavyM60
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    mask: RMCMaskCoifPMC
+    back: RMCSatchelPMCCommando
+
+- type: playTimeTracker
+  id: RMCJobContractorLeader
+
+- type: playTimeTracker
+  id: RMCJobContractorStandard
+
+- type: playTimeTracker
+  id: RMCJobContractorMedic
+
+- type: playTimeTracker
+  id: RMCJobContractorEngineer
+
+- type: playTimeTracker
+  id: RMCJobContractorHeavy
+
+- type: playTimeTracker
+  id: RMCJobContractorCovertLeader
+
+- type: playTimeTracker
+  id: RMCJobContractorCovertStandard
+
+- type: playTimeTracker
+  id: RMCJobContractorCovertMedic
+
+- type: playTimeTracker
+  id: RMCJobContractorCovertEngineer
+
+- type: playTimeTracker
+  id: RMCJobContractorCovertHeavy

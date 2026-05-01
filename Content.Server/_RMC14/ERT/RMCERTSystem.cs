@@ -1528,7 +1528,7 @@ public sealed class RMCERTSystem : EntitySystem
     private bool BuildRoster(RMCERTRequest request, RMCERTCallPrototype call, out string error)
     {
         error = string.Empty;
-        // Required slots are guaranteed first, then optional slots are rolled until we reach the final team size.
+        // Required slots are guaranteed first, then optional slots fill out the SS13 mob_max equivalent.
         var roles = call.Roles
             .OrderByDescending(r => r.Leader)
             .ThenByDescending(r => r.Priority)
@@ -1539,10 +1539,33 @@ public sealed class RMCERTSystem : EntitySystem
 
         foreach (var role in roles)
         {
-            if (!_prototypes.HasIndex<EntityPrototype>(role.GhostRoleEntity))
+            if (role.GhostRoleEntityPool.Count == 0)
             {
+                error = Loc.GetString("rmc-ert-error-empty-ghost-role-pool",
+                    ("role", role.Id),
+                    ("call", call.Name));
+                Log.Error($"ERT call {call.ID} role {role.Id} has no ghost role entity pool entries.");
+                return false;
+            }
+
+            foreach (var entry in role.GhostRoleEntityPool)
+            {
+                if (entry.Weight <= 0)
+                {
+                    error = Loc.GetString("rmc-ert-error-invalid-ghost-role-pool-weight",
+                        ("entity", entry.Entity.Id),
+                        ("role", role.Id),
+                        ("call", call.Name),
+                        ("weight", entry.Weight));
+                    Log.Error($"ERT call {call.ID} role {role.Id} has invalid ghost role entity pool weight {entry.Weight} for {entry.Entity}.");
+                    return false;
+                }
+
+                if (_prototypes.HasIndex<EntityPrototype>(entry.Entity))
+                    continue;
+
                 error = Loc.GetString("rmc-ert-error-missing-ghost-role",
-                    ("entity", role.GhostRoleEntity.Id),
+                    ("entity", entry.Entity.Id),
                     ("call", call.Name));
                 return false;
             }
@@ -1555,24 +1578,28 @@ public sealed class RMCERTSystem : EntitySystem
 
             for (var i = 0; i < min; i++)
             {
-                AddRosterSlot(request, role);
+                if (!TryAddRosterSlot(request, call, role, out error))
+                    return false;
+
                 countsByRole[role.Id]++;
             }
         }
 
         var targetMin = Math.Max(minTotal, call.Requirements.MinRequiredSlots);
-        if (targetMin > maxTotal)
+        var targetMax = maxTotal;
+        if (call.Requirements.MaxSlots > 0)
+            targetMax = Math.Min(targetMax, call.Requirements.MaxSlots);
+
+        if (targetMin > targetMax)
         {
             error = Loc.GetString("rmc-ert-error-min-slots-over-max",
                 ("call", call.Name),
                 ("required", targetMin),
-                ("maximum", maxTotal));
+                ("maximum", targetMax));
             return false;
         }
 
-        var targetCount = targetMin;
-        if (maxTotal > targetMin)
-            targetCount = _random.Next(targetMin, maxTotal + 1);
+        var targetCount = targetMax;
 
         while (request.PlannedRoster.Count < targetCount)
         {
@@ -1607,7 +1634,9 @@ public sealed class RMCERTSystem : EntitySystem
             if (selected == null)
                 break;
 
-            AddRosterSlot(request, selected);
+            if (!TryAddRosterSlot(request, call, selected, out error))
+                return false;
+
             countsByRole[selected.Id]++;
         }
 
@@ -1703,18 +1732,78 @@ public sealed class RMCERTSystem : EntitySystem
         return coordinates;
     }
 
-    private void AddRosterSlot(RMCERTRequest request, RMCERTRoleEntry role)
+    private bool TryAddRosterSlot(
+        RMCERTRequest request,
+        RMCERTCallPrototype call,
+        RMCERTRoleEntry role,
+        out string error)
     {
+        if (!TryPickGhostRoleEntity(call, role, out var ghostRoleEntity, out error))
+            return false;
+
         request.PlannedRoster.Add(new RMCERTRosterSlot
         {
             RoleId = role.Id,
             RoleName = role.Name,
-            GhostRoleEntity = role.GhostRoleEntity,
+            GhostRoleEntity = ghostRoleEntity,
             Leader = role.Leader,
             Priority = role.Priority,
             RoleTags = role.RoleTags.ToList(),
             SeatTags = role.SeatTags.ToList(),
         });
+
+        return true;
+    }
+
+    private bool TryPickGhostRoleEntity(
+        RMCERTCallPrototype call,
+        RMCERTRoleEntry role,
+        out EntProtoId ghostRoleEntity,
+        out string error)
+    {
+        ghostRoleEntity = default;
+        error = string.Empty;
+
+        if (role.GhostRoleEntityPool.Count == 0)
+        {
+            error = Loc.GetString("rmc-ert-error-empty-ghost-role-pool",
+                ("role", role.Id),
+                ("call", call.Name));
+            Log.Error($"ERT call {call.ID} role {role.Id} has no ghost role entity pool entries.");
+            return false;
+        }
+
+        var totalWeight = 0;
+        foreach (var entry in role.GhostRoleEntityPool)
+            totalWeight += Math.Max(0, entry.Weight);
+
+        if (totalWeight <= 0)
+        {
+            error = Loc.GetString("rmc-ert-error-empty-ghost-role-pool",
+                ("role", role.Id),
+                ("call", call.Name));
+            Log.Error($"ERT call {call.ID} role {role.Id} has no positive ghost role entity pool weights.");
+            return false;
+        }
+
+        var roll = _random.Next(totalWeight);
+        foreach (var entry in role.GhostRoleEntityPool)
+        {
+            var weight = Math.Max(0, entry.Weight);
+            if (weight == 0)
+                continue;
+
+            if (roll < weight)
+            {
+                ghostRoleEntity = entry.Entity;
+                return true;
+            }
+
+            roll -= weight;
+        }
+
+        ghostRoleEntity = role.GhostRoleEntityPool[^1].Entity;
+        return true;
     }
 
     private EntityUid SpawnResponseMember(
@@ -2852,8 +2941,17 @@ public sealed class RMCERTSystem : EntitySystem
 
             foreach (var role in call.Roles)
             {
-                if (!_prototypes.HasIndex<EntityPrototype>(role.GhostRoleEntity))
-                    Log.Error($"ERT call {call.ID} role {role.Id} references missing ghost role entity {role.GhostRoleEntity}.");
+                if (role.GhostRoleEntityPool.Count == 0)
+                    Log.Error($"ERT call {call.ID} role {role.Id} has no ghost role entity pool entries.");
+
+                foreach (var entry in role.GhostRoleEntityPool)
+                {
+                    if (entry.Weight <= 0)
+                        Log.Error($"ERT call {call.ID} role {role.Id} has non-positive ghost role entity pool weight {entry.Weight} for {entry.Entity}.");
+
+                    if (!_prototypes.HasIndex<EntityPrototype>(entry.Entity))
+                        Log.Error($"ERT call {call.ID} role {role.Id} references missing pooled ghost role entity {entry.Entity}.");
+                }
 
                 if (role.Max < role.Min)
                     Log.Error($"ERT call {call.ID} role {role.Id} has max {role.Max} lower than min {role.Min}.");
@@ -2861,9 +2959,16 @@ public sealed class RMCERTSystem : EntitySystem
 
             var totalMax = call.Roles.Sum(GetRoleMaximumCount);
             var requiredMinimum = Math.Max(call.Requirements.MinRequiredSlots, call.Roles.Sum(GetRoleMinimumCount));
-            if (requiredMinimum > totalMax)
+            var effectiveMax = call.Requirements.MaxSlots > 0
+                ? Math.Min(totalMax, call.Requirements.MaxSlots)
+                : totalMax;
+
+            if (call.Requirements.MaxSlots < 0)
+                Log.Error($"ERT call {call.ID} has negative maxSlots {call.Requirements.MaxSlots}.");
+
+            if (requiredMinimum > effectiveMax)
             {
-                Log.Error($"ERT call {call.ID} requires at least {requiredMinimum} roster slots, but only {totalMax} are available.");
+                Log.Error($"ERT call {call.ID} requires at least {requiredMinimum} roster slots, but only {effectiveMax} are available.");
             }
         }
     }

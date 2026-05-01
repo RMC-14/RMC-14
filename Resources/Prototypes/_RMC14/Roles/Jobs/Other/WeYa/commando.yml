@@ -1,0 +1,184 @@
+# Weyland-Yutani Commandos
+- type: job
+  parent: RMCPMCLeader
+  id: RMCWeYaCommandoLeader
+  name: rmc-job-name-weya-commando-leader
+  playTimeTracker: RMCJobWeYaCommandoLeader
+  startingGear: RMCGearWeYaCommandoLeader
+  spawnMenuRoleName: WEYA Commando Squad Leader
+
+- type: entity
+  parent: RMCRandomHumanoidPMCLeader
+  id: RMCRandomHumanoidWeYaCommandoLeader
+  name: weya commando ghost role leader
+  suffix: Spawner, Player, Low Threat
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaCommandoLeader
+
+- type: randomHumanoidSettings
+  parent: RMCPMCLeader
+  id: RMCWeYaCommandoLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-weya-commando-leader
+    job: RMCWeYaCommandoLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+
+- type: startingGear
+  id: RMCGearWeYaCommandoLeader
+  equipment:
+    id: CMIDCardCommando
+    ears: RMCHeadsetDistressPMCLeader
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    shoes: RMCBootsPMCCommandoFilled
+    mask: RMCMaskCoifPMC
+    eyes: RMCGlassesHUDSecurity
+    back: RMCSatchelPMCCommandoFilled
+    belt: RMCBeltPMCFilledCommando
+    pocket1: RMCPouchMedicalSocFill
+    pocket2: RMCPouchMagazineLargePMC
+    suitstorage: RMCWeaponRifleM54CWhiteCommando
+  storage:
+    back:
+    - RMCRangefinder
+    - RMCMotionDetector
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeBlastM12
+    - RMCGrenadeBlastM12
+    - RMCHandheldDistressBeaconWeYa
+    pocket2:
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+- type: job
+  parent: RMCPMCStandardM63B2
+  id: RMCWeYaCommando
+  name: rmc-job-name-weya-commando
+  playTimeTracker: RMCJobWeYaCommando
+  startingGear: RMCGearWeYaCommando
+  spawnMenuRoleName: WEYA Commando
+
+- type: entity
+  parent: RMCRandomHumanoidPMCStandardM63B2
+  id: RMCRandomHumanoidWeYaCommando
+  name: weya commando ghost role standard
+  suffix: Spawner, Player, Low Threat
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaCommando
+
+- type: randomHumanoidSettings
+  parent: RMCPMCStandardM63B2
+  id: RMCWeYaCommando
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-weya-commando
+    job: RMCWeYaCommando
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+
+- type: startingGear
+  id: RMCGearWeYaCommando
+  equipment:
+    id: CMIDCardCommando
+    ears: RMCHeadsetDistressPMC
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    shoes: RMCBootsPMCCommandoFilled
+    mask: RMCMaskCoifPMC
+    eyes: RMCGlassesHUDSecurity
+    back: RMCSatchelPMCCommandoFilled
+    belt: RMCBeltPMCFilledCommando
+    pocket1: RMCPouchMedicalSocFill
+    pocket2: RMCPouchMagazineLargePMC
+    suitstorage: RMCWeaponRifleM54CWhiteCommando
+  storage:
+    back:
+    - RMCMotionDetector
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeBlastM12
+    - RMCGrenadeBlastM12
+    - RMCHandheldDistressBeaconWeYa
+    pocket2:
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+- type: job
+  parent: RMCPMCGunner
+  id: RMCWeYaCommandoGunner
+  name: rmc-job-name-weya-commando-gunner
+  playTimeTracker: RMCJobWeYaCommandoGunner
+  startingGear: RMCGearWeYaCommandoGunner
+  spawnMenuRoleName: WEYA Commando Heavy Gunner
+
+- type: entity
+  parent: RMCRandomHumanoidPMCGunner
+  id: RMCRandomHumanoidWeYaCommandoGunner
+  name: weya commando ghost role gunner
+  suffix: Spawner, Player, Low Threat
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaCommandoGunner
+
+- type: randomHumanoidSettings
+  parent: RMCPMCGunner
+  id: RMCWeYaCommandoGunner
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-weya-commando-gunner
+    job: RMCWeYaCommandoGunner
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 18000 # 5 Hours
+
+- type: startingGear
+  id: RMCGearWeYaCommandoGunner
+  equipment:
+    id: CMIDCardCommando
+    ears: RMCHeadsetDistressPMC
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCSmartGunHarnessCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: RMCArmorHelmetPMCCommando
+    shoes: RMCBootsPMCCommandoFilled
+    mask: RMCMaskCoifPMC
+    eyes: RMCGlassesSmartGunSight
+    back: RMCSatchelPMCCommandoFilled
+    belt: RMCBeltSmartGunOperatorPistolPMCFilled
+    pocket1: RMCPouchMedicalSocFill
+    pocket2: RMCPouchDrumPMCFill
+    suitstorage: RMCSmartGunPMC
+  storage:
+    back:
+    - RMCMotionDetector
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeBlastM12
+    - RMCHandheldDistressBeaconWeYa
+    pocket2:
+    - RMCMagazineSmartGun
+    - RMCMagazineSmartGun
+
+- type: playTimeTracker
+  id: RMCJobWeYaCommandoLeader
+
+- type: playTimeTracker
+  id: RMCJobWeYaCommando
+
+- type: playTimeTracker
+  id: RMCJobWeYaCommandoGunner

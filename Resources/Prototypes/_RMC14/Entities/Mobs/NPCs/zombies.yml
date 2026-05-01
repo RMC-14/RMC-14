@@ -22,6 +22,7 @@
       settings: short
   - type: RMCJobSpawner
     job: CMSurvivor
+    loadout: false
   - type: Loadout
     prototypes: [ RMCGearCorpseColonist ]
   - type: Zombie

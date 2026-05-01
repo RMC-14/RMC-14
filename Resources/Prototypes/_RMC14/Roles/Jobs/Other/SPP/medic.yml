@@ -86,6 +86,9 @@
     raffle:
       settings: short
     requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadSPP
 

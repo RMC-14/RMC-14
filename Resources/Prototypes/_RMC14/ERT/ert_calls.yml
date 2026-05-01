@@ -17,8 +17,9 @@
   enabled: true
   adminSelectable: true
   adminButtonLabel: rmc-ert-admin-button-cbrn
-  randomWeight: 35
+  randomWeight: 10
   allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with an exact CBRN/UNMC response shuttle once ported.
   shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttle
   shuttleSpawnMarker: RMCERTShuttleStartPadUNMC
@@ -29,7 +30,9 @@
   - id: leader
     name: rmc-ert-role-cbrn-leader
     job: RMCCBRNSquadLeader
-    ghostRoleEntity: RMCRandomHumanoidCBRNSquadLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCBRNSquadLeader
+      weight: 100
     min: 1
     max: 1
     leader: true
@@ -39,26 +42,36 @@
   - id: rifleman
     name: rmc-ert-role-cbrn-rifleman
     job: RMCCBRNRifleman
-    ghostRoleEntity: RMCRandomHumanoidCBRNRifleman
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCBRNRifleman
+      weight: 50
+    - entity: RMCRandomHumanoidCBRNRiflemanFlamer
+      weight: 50
     min: 2
-    max: 4
+    max: 2
     roleTags: [ rifleman ]
     seatTags: [ troop ]
   - id: medic
     name: rmc-ert-role-cbrn-medic
     job: RMCCBRNMedic
-    ghostRoleEntity: RMCRandomHumanoidCBRNMedic
-    min: 1
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCBRNMedic
+      weight: 100
+    min: 0
     max: 1
+    required: false
     roleTags: [ medic ]
     seatTags: [ medic, troop ]
     priority: 50
   - id: engineer
     name: rmc-ert-role-cbrn-engineer
     job: RMCCBRNCombatTech
-    ghostRoleEntity: RMCRandomHumanoidCBRNCombatTech
-    min: 1
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCBRNCombatTech
+      weight: 100
+    min: 0
     max: 1
+    required: false
     roleTags: [ engineer ]
     seatTags: [ engineer, troop ]
     priority: 40
@@ -71,6 +84,7 @@
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
+    maxSlots: 5
 
 - type: rmcERTCall
   id: RMCERTCallPMC
@@ -84,6 +98,7 @@
   adminButtonLabel: rmc-ert-admin-button-pmc
   randomWeight: 20
   allowedSources: [ Console, Handheld, Admin ]
+  # TODO RMC14 replace with an exact /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml once ported.
   shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleWeYa
   shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
@@ -94,7 +109,9 @@
   - id: leader
     name: rmc-ert-role-pmc-leader
     job: RMCPMCLeader
-    ghostRoleEntity: RMCRandomHumanoidPMCLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCLeader
+      weight: 100
     min: 1
     max: 1
     leader: true
@@ -104,29 +121,48 @@
   - id: operator
     name: rmc-ert-role-pmc-operator
     job: RMCPMCStandardM63B2
-    ghostRoleEntity: RMCRandomHumanoidPMCStandardM63B2
-    min: 2
-    max: 4
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCStandardM63B2
+      weight: 100
+    min: 1
+    max: 1
     roleTags: [ rifleman ]
     seatTags: [ troop ]
   - id: medic
     name: rmc-ert-role-pmc-medic
     job: RMCPMCMedic
-    ghostRoleEntity: RMCRandomHumanoidPMCMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCMedic
+      weight: 100
     min: 1
-    max: 1
+    max: 2
     roleTags: [ medic ]
     seatTags: [ medic, troop ]
     priority: 50
-  - id: engineer
-    name: rmc-ert-role-pmc-engineer
-    job: RMCPMCEngineer
-    ghostRoleEntity: RMCRandomHumanoidPMCEngineer
-    min: 1
+  - id: gunner
+    name: rmc-ert-role-pmc-gunner
+    job: RMCPMCGunner
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCGunner
+      weight: 100
+    min: 0
     max: 1
-    roleTags: [ engineer ]
-    seatTags: [ engineer, troop ]
-    priority: 40
+    required: false
+    roleTags: [ smartgunner, rifleman ]
+    seatTags: [ troop ]
+    priority: 30
+  - id: sniper
+    name: rmc-ert-role-pmc-sniper
+    job: RMCPMCSniper
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCSniper
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ specialist, rifleman ]
+    seatTags: [ troop ]
+    priority: 30
   announcements:
     arrival:
       title: rmc-ert-announcement-title-intercepted-transmission
@@ -136,6 +172,7 @@
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
+    maxSlots: 6
 
 - type: rmcERTCall
   id: RMCERTCallPMCPlatoon
@@ -149,6 +186,7 @@
   adminButtonLabel: rmc-ert-admin-button-pmc-platoon
   randomWeight: 0
   allowedSources: [ Admin ]
+  # TODO RMC14 replace with a dedicated Big PMC shuttle once ported.
   shuttleMap: /Maps/_RMC14/Shuttles/ert_shuttle_big.yml
   shuttleSpawner: RMCSpawnerERTShuttleBig
   shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
@@ -159,7 +197,9 @@
   - id: leader
     name: rmc-ert-role-pmc-leader
     job: RMCPMCLeader
-    ghostRoleEntity: RMCRandomHumanoidPMCLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCLeader
+      weight: 100
     min: 1
     max: 1
     leader: true
@@ -169,7 +209,9 @@
   - id: operator
     name: rmc-ert-role-pmc-operator
     job: RMCPMCStandardM63B2
-    ghostRoleEntity: RMCRandomHumanoidPMCStandardM63B2
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCStandardM63B2
+      weight: 100
     min: 5
     max: 14
     roleTags: [ rifleman ]
@@ -177,7 +219,9 @@
   - id: medic
     name: rmc-ert-role-pmc-medic
     job: RMCPMCMedic
-    ghostRoleEntity: RMCRandomHumanoidPMCMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCMedic
+      weight: 100
     min: 1
     max: 2
     roleTags: [ medic ]
@@ -186,7 +230,9 @@
   - id: engineer
     name: rmc-ert-role-pmc-engineer
     job: RMCPMCEngineer
-    ghostRoleEntity: RMCRandomHumanoidPMCEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCEngineer
+      weight: 100
     min: 1
     max: 2
     roleTags: [ engineer ]
@@ -195,7 +241,9 @@
   - id: gunner
     name: rmc-ert-role-pmc-gunner
     job: RMCPMCGunner
-    ghostRoleEntity: RMCRandomHumanoidPMCGunner
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCGunner
+      weight: 100
     min: 0
     max: 1
     required: false
@@ -205,7 +253,9 @@
   - id: sniper
     name: rmc-ert-role-pmc-sniper
     job: RMCPMCSniper
-    ghostRoleEntity: RMCRandomHumanoidPMCSniper
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCSniper
+      weight: 100
     min: 0
     max: 1
     required: false
@@ -231,7 +281,7 @@
   category: rmc-ert-category-corporate
   enabled: true
   adminSelectable: true
-  adminButtonLabel: rmc-ert-admin-button-bodyguards
+  adminButtonLabel: rmc-ert-admin-button-bodyguard-security
   randomWeight: 0
   allowedSources: [ Handheld, Admin ]
   shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
@@ -241,22 +291,14 @@
   shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
-  - id: lead
-    name: rmc-ert-role-weya-bodyguard-lead
-    job: RMCWeYaGoonLead
-    ghostRoleEntity: RMCRandomHumanoidWeYaGoonLead
-    min: 1
-    max: 1
-    leader: true
-    roleTags: [ leader, command, police ]
-    seatTags: [ command ]
-    priority: 100
-  - id: bodyguard
+  - id: security
     name: rmc-ert-role-weya-bodyguard
     job: RMCWeYaGoon
-    ghostRoleEntity: RMCRandomHumanoidWeYaGoon
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidWeYaGoon
+      weight: 100
     min: 1
-    max: 3
+    max: 1
     roleTags: [ police, rifleman ]
     seatTags: [ troop ]
   announcements:
@@ -269,6 +311,152 @@
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 1
+    maxSlots: 1
+
+- type: rmcERTCall
+  id: RMCERTCallWeYaBodyguardGoon
+  name: rmc-ert-call-weya-bodyguard-goon-name
+  organization: rmc-ert-organization-weya
+  npcFactions: [ WeYa ]
+  iffFaction: FactionWeYa
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-bodyguard-goon
+  randomWeight: 0
+  allowedSources: [ Handheld, Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleWeYa
+  shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: goon
+    name: rmc-ert-role-weya-goon
+    job: RMCWeYaGoonLead
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidWeYaGoonLead
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, police ]
+    seatTags: [ command ]
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 1
+    maxSlots: 1
+
+- type: rmcERTCall
+  id: RMCERTCallWeYaBodyguardPMC
+  name: rmc-ert-call-weya-bodyguard-pmc-name
+  organization: rmc-ert-organization-weya
+  npcFactions: [ WeYa ]
+  iffFaction: FactionWeYa
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-bodyguard-pmc
+  randomWeight: 0
+  allowedSources: [ Handheld, Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleWeYa
+  shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: pmc
+    name: rmc-ert-role-weya-bodyguard-pmc
+    job: RMCPMCStandardM63B2
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCStandardM63B2
+      weight: 100
+    min: 1
+    max: 1
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 1
+    maxSlots: 1
+
+- type: rmcERTCall
+  id: RMCERTCallWeYaBodyguardPMCEnforcer
+  name: rmc-ert-call-weya-bodyguard-pmc-enforcer-name
+  organization: rmc-ert-organization-weya
+  npcFactions: [ WeYa ]
+  iffFaction: FactionWeYa
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-bodyguard-pmc-enforcer
+  randomWeight: 0
+  allowedSources: [ Handheld, Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleWeYa
+  shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: enforcer
+    name: rmc-ert-role-weya-bodyguard-pmc-enforcer
+    job: RMCPMCStandardSSG45
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPMCStandardSSG45
+      weight: 100
+    min: 1
+    max: 1
+    roleTags: [ police, rifleman ]
+    seatTags: [ troop ]
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 1
+    maxSlots: 1
+
+- type: rmcERTCall
+  id: RMCERTCallWeYaBodyguardCommando
+  name: rmc-ert-call-weya-bodyguard-commando-name
+  organization: rmc-ert-organization-weya
+  npcFactions: [ WeYa ]
+  iffFaction: FactionWeYa
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-bodyguard-commando
+  randomWeight: 0
+  allowedSources: [ Handheld, Admin ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleWeYa
+  shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: commando
+    name: rmc-ert-role-weya-commando
+    job: RMCWeYaCommando
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidWeYaCommando
+      weight: 100
+    min: 1
+    max: 1
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 1
+    maxSlots: 1
 
 - type: rmcERTCall
   id: RMCERTCallWeYaLawyers
@@ -292,7 +480,9 @@
   - id: supervisor
     name: rmc-ert-role-weya-lawyer-supervisor
     job: RMCWeYaLawyerSupervisor
-    ghostRoleEntity: RMCRandomHumanoidWeYaLawyerSupervisor
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidWeYaLawyerSupervisor
+      weight: 100
     min: 1
     max: 1
     leader: true
@@ -302,9 +492,12 @@
   - id: specialist
     name: rmc-ert-role-weya-lawyer-specialist
     job: RMCWeYaLawyer
-    ghostRoleEntity: RMCRandomHumanoidWeYaLawyer
-    min: 1
-    max: 2
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidWeYaLawyer
+      weight: 100
+    min: 0
+    max: 1
+    required: false
     roleTags: [ support ]
     seatTags: [ troop ]
   requirements:
@@ -312,6 +505,7 @@
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 1
+    maxSlots: 2
 
 - type: rmcERTCall
   id: RMCERTCallSupplyDrop
@@ -369,13 +563,16 @@
   - id: zombie
     name: rmc-ert-role-zombie
     job: CMSurvivor
-    ghostRoleEntity: RMCRandomHumanoidZombie
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidZombie
+      weight: 100
     min: 2
     max: 8
   requirements:
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 2
+    maxSlots: 8
 
 - type: rmcERTCall
   id: RMCERTCallCMB
@@ -387,7 +584,8 @@
   adminSelectable: true
   adminButtonLabel: rmc-ert-admin-button-cmb
   randomWeight: 10
-  allowedSources: [ Handheld, Admin ]
+  allowedSources: [ Console, Handheld, Admin ]
+  # TODO RMC14 replace with an exact /Maps/_RMC14/Shuttles/ert_cmb_shuttle.yml once ported.
   shuttleMap: /Maps/_RMC14/Shuttles/ert_cmb_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleCMB
   shuttleSpawnMarker: RMCERTShuttleStartPadLaw
@@ -398,7 +596,9 @@
   - id: marshal
     name: rmc-ert-role-cmb-marshal
     job: CMBureauMarshal
-    ghostRoleEntity: RMCRandomHumanoidBureauMarshal
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauMarshal
+      weight: 100
     min: 1
     max: 1
     leader: true
@@ -408,11 +608,35 @@
   - id: deputy
     name: rmc-ert-role-cmb-deputy
     job: CMBureauDeputy
-    ghostRoleEntity: RMCRandomHumanoidBureauDeputy
-    min: 1
-    max: 3
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauDeputy
+      weight: 100
+    min: 2
+    max: 4
     roleTags: [ police ]
     seatTags: [ troop ]
+  - id: liaison
+    name: rmc-ert-role-cmb-liaison
+    job: CMICBLiaison
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidICBLiaison
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ support ]
+    seatTags: [ troop ]
+  - id: observer
+    name: rmc-ert-role-cmb-observer
+    job: CMBureauObserver
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauObserver
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ support, medic ]
+    seatTags: [ troop, medic ]
   announcements:
     arrival:
       title: rmc-ert-announcement-title-intercepted-transmission
@@ -421,20 +645,114 @@
     cooldown: 10m
     recruitmentDuration: 30s
     maxCallsPerRound: 1
-    minRequiredSlots: 2
+    minRequiredSlots: 3
+    maxSlots: 5
 
 - type: rmcERTCall
-  id: RMCERTCallSPP
-  name: rmc-ert-call-spp-name
+  id: RMCERTCallCMBRiot
+  name: rmc-ert-call-cmb-riot-name
+  organization: rmc-ert-organization-cmb
+  npcFactions: [ Bureau ]
+  category: rmc-ert-category-law
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-cmb-riot
+  randomWeight: 20
+  allowedSources: [ Console, Handheld, Admin ]
+  # TODO RMC14 replace with a dedicated CMB riot shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_cmb_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleCMB
+  shuttleSpawnMarker: RMCERTShuttleStartPadLaw
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-cmb-riot-leader
+    job: CMBureauRiotLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauRiotLeader
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, police ]
+    seatTags: [ command ]
+    priority: 100
+  - id: officer
+    name: rmc-ert-role-cmb-riot-officer
+    job: CMBureauRiotOfficer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauRiotOfficerShotgun
+      weight: 40
+    - entity: RMCRandomHumanoidBureauRiotOfficerLauncher
+      weight: 30
+    - entity: RMCRandomHumanoidBureauRiotOfficerSMG
+      weight: 30
+    min: 2
+    max: 3
+    roleTags: [ police, rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-cmb-riot-medic
+    job: CMBureauRiotMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauRiotMedic
+      weight: 100
+    min: 0
+    max: 2
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+    priority: 50
+  - id: engineer
+    name: rmc-ert-role-cmb-riot-engineer
+    job: CMBureauRiotEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauRiotEngineer
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+    priority: 40
+  - id: specialist
+    name: rmc-ert-role-cmb-riot-specialist
+    job: CMBureauRiotSpecialist
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauRiotSpecialist
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ specialist, rifleman ]
+    seatTags: [ troop ]
+    priority: 30
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-cmb-riot-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 8
+
+- type: rmcERTCall
+  id: RMCERTCallSPPFriendly
+  name: rmc-ert-call-spp-friendly-name
   organization: rmc-ert-organization-spp
   npcFactions: [ SPP ]
   iffFaction: FactionSPP
   category: rmc-ert-category-foreign-military
   enabled: true
   adminSelectable: true
-  adminButtonLabel: rmc-ert-admin-button-spp
+  adminButtonLabel: rmc-ert-admin-button-spp-friendly
   randomWeight: 10
   allowedSources: [ Console, Handheld, Admin ]
+  # TODO RMC14 replace with an exact SPP/UPP squad shuttle once ported.
   shuttleMap: /Maps/_RMC14/Shuttles/ert_spp_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleSPP
   shuttleSpawnMarker: RMCERTShuttleStartPadSPP
@@ -445,7 +763,9 @@
   - id: leader
     name: rmc-ert-role-spp-leader
     job: RMCSPPLeader
-    ghostRoleEntity: RMCRandomHumanoidSPPLeaderFriendly
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPLeaderFriendly
+      weight: 100
     min: 1
     max: 1
     leader: true
@@ -455,7 +775,13 @@
   - id: rifleman
     name: rmc-ert-role-spp-rifleman
     job: RMCSPPRifleman
-    ghostRoleEntity: RMCRandomHumanoidSPPRiflemanFriendly
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPRiflemanFriendly
+      weight: 66
+    - entity: RMCRandomHumanoidSPPRiflemanBreacherFriendly
+      weight: 19
+    - entity: RMCRandomHumanoidSPPRiflemanDoubleFriendly
+      weight: 15
     min: 2
     max: 4
     roleTags: [ rifleman ]
@@ -463,11 +789,38 @@
   - id: medic
     name: rmc-ert-role-spp-medic
     job: RMCSPPMedic
-    ghostRoleEntity: RMCRandomHumanoidSPPMedicFriendly
-    min: 1
-    max: 1
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPMedicFriendly
+      weight: 100
+    min: 0
+    max: 2
+    required: false
     roleTags: [ medic ]
     seatTags: [ medic, troop ]
+  - id: sapper
+    name: rmc-ert-role-spp-sapper
+    job: RMCSPPEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPEngineerFriendly
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+  - id: specialist
+    name: rmc-ert-role-spp-specialist
+    job: RMCSPPSpecialist
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPSpecialistFriendly
+      weight: 50
+    - entity: RMCRandomHumanoidSPPSpecialistShotgunFriendly
+      weight: 50
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ specialist, rifleman ]
+    seatTags: [ troop ]
   announcements:
     arrival:
       title: rmc-ert-announcement-title-intercepted-transmission
@@ -477,6 +830,99 @@
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
+    maxSlots: 9
+
+- type: rmcERTCall
+  id: RMCERTCallSPPHostile
+  name: rmc-ert-call-spp-hostile-name
+  organization: rmc-ert-organization-spp
+  npcFactions: [ SPP ]
+  iffFaction: FactionSPP
+  category: rmc-ert-category-foreign-military
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-spp-hostile
+  randomWeight: 10
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with an exact SPP/UPP squad shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_spp_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleSPP
+  shuttleSpawnMarker: RMCERTShuttleStartPadSPP
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-spp-leader
+    job: RMCSPPLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPLeaderHostile
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: rifleman
+    name: rmc-ert-role-spp-rifleman
+    job: RMCSPPRifleman
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPRiflemanHostile
+      weight: 66
+    - entity: RMCRandomHumanoidSPPRiflemanBreacherHostile
+      weight: 19
+    - entity: RMCRandomHumanoidSPPRiflemanDoubleHostile
+      weight: 15
+    min: 2
+    max: 4
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-spp-medic
+    job: RMCSPPMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPMedicHostile
+      weight: 100
+    min: 0
+    max: 2
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  - id: sapper
+    name: rmc-ert-role-spp-sapper
+    job: RMCSPPEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPEngineerHostile
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+  - id: specialist
+    name: rmc-ert-role-spp-specialist
+    job: RMCSPPSpecialist
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidSPPSpecialistHostile
+      weight: 50
+    - entity: RMCRandomHumanoidSPPSpecialistShotgunHostile
+      weight: 50
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ specialist, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-spp-hostile-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 9
 
 - type: rmcERTCall
   id: RMCERTCallTSE
@@ -488,8 +934,9 @@
   enabled: true
   adminSelectable: true
   adminButtonLabel: rmc-ert-admin-button-tse
-  randomWeight: 5
+  randomWeight: 15
   allowedSources: [ Console, Handheld, Admin ]
+  # TODO RMC14 replace with an exact TSE/Royal Marines squad shuttle once ported.
   shuttleMap: /Maps/_RMC14/Shuttles/ert_tse_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleTSE
   shuttleSpawnMarker: RMCERTShuttleStartPadTSE
@@ -500,7 +947,9 @@
   - id: teamlead
     name: rmc-ert-role-tse-teamlead
     job: CMRoyalMarinesTeamlead
-    ghostRoleEntity: RMCRandomHumanoidRoyalMarinesTeamlead
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidRoyalMarinesTeamlead
+      weight: 100
     min: 1
     max: 1
     leader: true
@@ -510,19 +959,46 @@
   - id: commando
     name: rmc-ert-role-tse-commando
     job: CMRoyalMarinesCommando
-    ghostRoleEntity: RMCRandomHumanoidRoyalMarinesCommando
-    min: 2
-    max: 4
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidRoyalMarinesCommando
+      weight: 100
+    min: 1
+    max: 1
     roleTags: [ rifleman ]
     seatTags: [ troop ]
   - id: medic
     name: rmc-ert-role-tse-medic
     job: CMRoyalMarinesMedic
-    ghostRoleEntity: RMCRandomHumanoidRoyalMarinesMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidRoyalMarinesMedic
+      weight: 100
     min: 1
     max: 1
     roleTags: [ medic ]
     seatTags: [ medic, troop ]
+  - id: breacher
+    name: rmc-ert-role-tse-breacher
+    job: CMRoyalMarinesBreacher
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidRoyalMarinesBreacher
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer, breacher ]
+    seatTags: [ engineer, troop ]
+  - id: heavy
+    name: rmc-ert-role-tse-heavy
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidRoyalMarinesMarksman
+      weight: 50
+    - entity: RMCRandomHumanoidRoyalMarinesSGO
+      weight: 50
+    min: 0
+    max: 2
+    required: false
+    roleTags: [ specialist, smartgunner, rifleman ]
+    seatTags: [ troop ]
   announcements:
     arrival:
       title: rmc-ert-announcement-title-intercepted-transmission
@@ -534,6 +1010,7 @@
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
+    maxSlots: 6
 
 - type: rmcERTCall
   id: RMCERTCallProvost
@@ -546,6 +1023,7 @@
   adminButtonLabel: rmc-ert-admin-button-provost
   randomWeight: 0
   allowedSources: [ Handheld, Admin ]
+  # TODO RMC14 replace with a dedicated Provost shuttle once ported.
   shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttle
   shuttleSpawnMarker: RMCERTShuttleStartPadLaw
@@ -556,7 +1034,9 @@
   - id: leader
     name: rmc-ert-role-provost-leader
     job: CMProvostTeamLeader
-    ghostRoleEntity: RMCRandomHumanoidProvostTeamLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidProvostTeamLeader
+      weight: 100
     min: 1
     max: 1
     leader: true
@@ -566,16 +1046,19 @@
   - id: enforcer
     name: rmc-ert-role-provost-enforcer
     job: CMProvostEnforcer
-    ghostRoleEntity: RMCRandomHumanoidProvostEnforcer
-    min: 1
-    max: 3
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidProvostEnforcer
+      weight: 100
+    min: 4
+    max: 4
     roleTags: [ police ]
     seatTags: [ troop ]
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
     maxCallsPerRound: 1
-    minRequiredSlots: 2
+    minRequiredSlots: 5
+    maxSlots: 5
 
 - type: rmcERTCall
   id: RMCERTCallCLF
@@ -583,42 +1066,75 @@
   organization: rmc-ert-organization-clf
   npcFactions: [ CLF ]
   iffFaction: FactionCLF
-  category: rmc-ert-category-event
+  category: rmc-ert-category-hostile
   enabled: true
   adminSelectable: true
   adminButtonLabel: rmc-ert-admin-button-clf
-  randomWeight: 0
-  allowedSources: [ Admin ]
+  randomWeight: 20
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with /Maps/_RMC14/Shuttles/ert_clf_shuttle.yml once ported.
   shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttle
   shuttleSpawnMarker: RMCERTShuttleStartPadHostile
-  autoLaunch: false
+  autoLaunch: true
   shuttleTravelTime: 40s
   landingTags: [ mainship ]
   roles:
   - id: leader
     name: rmc-ert-role-clf-leader
     job: RMCCLFCellLeader
-    ghostRoleEntity: RMCRandomHumanoidCLFCellLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCLFCellLeader
+      weight: 100
     min: 1
     max: 1
     leader: true
     roleTags: [ leader, command ]
+    seatTags: [ command ]
     priority: 100
   - id: soldier
     name: rmc-ert-role-clf-soldier
     job: RMCCLFSoldier
-    ghostRoleEntity: RMCRandomHumanoidCLFSoldier
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCLFSoldier
+      weight: 100
     min: 2
-    max: 5
+    max: 6
     roleTags: [ rifleman ]
+    seatTags: [ troop ]
   - id: medic
     name: rmc-ert-role-clf-medic
     job: RMCCLFMedic
-    ghostRoleEntity: RMCRandomHumanoidCLFMedic
-    min: 1
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCLFMedic
+      weight: 100
+    min: 0
     max: 1
+    required: false
     roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  - id: engineer
+    name: rmc-ert-role-clf-engineer
+    job: RMCCLFEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCLFEngineer
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+  - id: specialist
+    name: rmc-ert-role-clf-specialist
+    job: RMCCLFSpecialist
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidCLFSpecialist
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ specialist, rifleman ]
+    seatTags: [ troop ]
   announcements:
     arrival:
       title: rmc-ert-announcement-title-intercepted-transmission
@@ -628,6 +1144,533 @@
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
+    maxSlots: 10
+
+- type: rmcERTCall
+  id: RMCERTCallContractors
+  name: rmc-ert-call-contractors-name
+  organization: rmc-ert-organization-vai
+  npcFactions: [ WeYa ]
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-contractors
+  randomWeight: 10
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with a dedicated Vanguard's Arrow contractor shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadFreelancers
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-contractor-leader
+    job: RMCContractorLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorLeader
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: standard
+    name: rmc-ert-role-contractor-standard
+    job: RMCContractorStandard
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorStandardMAR40
+      weight: 30
+    - entity: RMCRandomHumanoidContractorStandardL42A
+      weight: 20
+    - entity: RMCRandomHumanoidContractorStandardM54C
+      weight: 20
+    - entity: RMCRandomHumanoidContractorStandardShotgun
+      weight: 10
+    - entity: RMCRandomHumanoidContractorStandardM54CMK1
+      weight: 10
+    min: 2
+    max: 3
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-contractor-medic
+    job: RMCContractorMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorMedic
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  - id: engineer
+    name: rmc-ert-role-contractor-engineer
+    job: RMCContractorEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorEngineer
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+  - id: heavy
+    name: rmc-ert-role-contractor-heavy
+    job: RMCContractorHeavy
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorHeavyMAR40LMG
+      weight: 66
+    - entity: RMCRandomHumanoidContractorHeavyM60
+      weight: 33
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ smartgunner, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-contractors-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 7
+
+- type: rmcERTCall
+  id: RMCERTCallContractorsCovert
+  name: rmc-ert-call-contractors-covert-name
+  organization: rmc-ert-organization-vai
+  npcFactions: [ WeYa ]
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-contractors-covert
+  randomWeight: 10
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with a dedicated Vanguard's Arrow covert contractor shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadFreelancers
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-contractor-covert-leader
+    job: RMCContractorCovertLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorCovertLeader
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: standard
+    name: rmc-ert-role-contractor-covert-standard
+    job: RMCContractorCovertStandard
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorCovertStandardMAR40
+      weight: 30
+    - entity: RMCRandomHumanoidContractorCovertStandardL42A
+      weight: 20
+    - entity: RMCRandomHumanoidContractorCovertStandardM54C
+      weight: 20
+    - entity: RMCRandomHumanoidContractorCovertStandardShotgun
+      weight: 10
+    - entity: RMCRandomHumanoidContractorCovertStandardM54CMK1
+      weight: 10
+    min: 2
+    max: 3
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-contractor-covert-medic
+    job: RMCContractorCovertMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorCovertMedic
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  - id: engineer
+    name: rmc-ert-role-contractor-covert-engineer
+    job: RMCContractorCovertEngineer
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorCovertEngineer
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ engineer ]
+    seatTags: [ engineer, troop ]
+  - id: heavy
+    name: rmc-ert-role-contractor-covert-heavy
+    job: RMCContractorCovertHeavy
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidContractorCovertHeavyMAR40LMG
+      weight: 66
+    - entity: RMCRandomHumanoidContractorCovertHeavyM60
+      weight: 33
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ smartgunner, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-contractors-covert-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 7
+
+- type: rmcERTCall
+  id: RMCERTCallFreelancersFriendly
+  name: rmc-ert-call-freelancers-friendly-name
+  organization: rmc-ert-organization-freelancers
+  npcFactions: [ WeYa ]
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-freelancers-friendly
+  randomWeight: 15
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with /Maps/_RMC14/Shuttles/ert_freelancer_shuttle.yml once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadFreelancers
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-freelancer-leader
+    job: CMFreelancerLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerLeaderFriendly
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: standard
+    name: rmc-ert-role-freelancer-standard
+    job: CMFreelancerRifleman
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerStandardFriendly
+      weight: 100
+    min: 2
+    max: 6
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-freelancer-medic
+    job: CMFreelancerMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerMedicFriendly
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-freelancers-friendly-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 8
+
+- type: rmcERTCall
+  id: RMCERTCallFreelancersHostile
+  name: rmc-ert-call-freelancers-hostile-name
+  organization: rmc-ert-organization-freelancers
+  npcFactions: [ WeYa ]
+  category: rmc-ert-category-hostile
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-freelancers-hostile
+  randomWeight: 5
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with /Maps/_RMC14/Shuttles/ert_freelancer_shuttle.yml once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadFreelancers
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-freelancer-leader
+    job: CMFreelancerLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerLeaderHostile
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: standard
+    name: rmc-ert-role-freelancer-standard
+    job: CMFreelancerRifleman
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerStandardHostile
+      weight: 100
+    min: 2
+    max: 6
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: medic
+    name: rmc-ert-role-freelancer-medic
+    job: CMFreelancerMedic
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidFreelancerMedicHostile
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ medic ]
+    seatTags: [ medic, troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-freelancers-hostile-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 8
+
+- type: rmcERTCall
+  id: RMCERTCallWYCommando
+  name: rmc-ert-call-wy-commando-name
+  organization: rmc-ert-organization-weya
+  npcFactions: [ WeYa ]
+  iffFaction: FactionWeYa
+  category: rmc-ert-category-corporate
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-wy-commando
+  randomWeight: 5
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with an exact WeYa commando shuttle once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleWeYa
+  shuttleSpawnMarker: RMCERTShuttleStartPadWeYa
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: leader
+    name: rmc-ert-role-weya-commando-leader
+    job: RMCWeYaCommandoLeader
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidWeYaCommandoLeader
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, command ]
+    seatTags: [ command ]
+    priority: 100
+  - id: commando
+    name: rmc-ert-role-weya-commando
+    job: RMCWeYaCommando
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidWeYaCommando
+      weight: 100
+    min: 2
+    max: 4
+    roleTags: [ rifleman ]
+    seatTags: [ troop ]
+  - id: gunner
+    name: rmc-ert-role-weya-commando-gunner
+    job: RMCWeYaCommandoGunner
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidWeYaCommandoGunner
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ smartgunner, rifleman ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-wy-commando-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 6
+
+- type: rmcERTCall
+  id: RMCERTCallXenos
+  name: rmc-ert-call-xenos-name
+  organization: rmc-ert-organization-xenos
+  npcFactions: [ Xeno ]
+  category: rmc-ert-category-hostile
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-xenos
+  randomWeight: 5
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with a dedicated xeno hostile shuttle/marker flow once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadHostile
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  shuttleCargoCount: 1
+  shuttleCargo:
+  - XenoHiveWeedsSource
+  roles:
+  - id: ravager
+    name: rmc-ert-role-xeno-ravager
+    ghostRoleEntityPool:
+    - entity: CMXenoRavager
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, xeno ]
+    seatTags: [ troop ]
+    priority: 100
+  - id: filler
+    name: rmc-ert-role-xeno-filler
+    ghostRoleEntityPool:
+    - entity: CMXenoDrone
+      weight: 1
+    - entity: CMXenoSpitter
+      weight: 1
+    - entity: CMXenoLurker
+      weight: 1
+    min: 2
+    max: 6
+    roleTags: [ xeno ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-xenos-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 3
+    maxSlots: 7
+
+- type: rmcERTCall
+  id: RMCERTCallFeralXenos
+  name: rmc-ert-call-feral-xenos-name
+  organization: rmc-ert-organization-xenos
+  npcFactions: [ Xeno ]
+  category: rmc-ert-category-hostile
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-feral-xenos
+  randomWeight: 5
+  allowedSources: [ Console, Admin ]
+  # TODO RMC14 replace with a dedicated feral xeno marker/hive flow once ported.
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_response_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttle
+  shuttleSpawnMarker: RMCERTShuttleStartPadHostile
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  shuttleCargoCount: 1
+  shuttleCargo:
+  - XenoHardyWeedsSource
+  roles:
+  - id: leader
+    name: rmc-ert-role-xeno-leader
+    ghostRoleEntityPool:
+    - entity: CMXenoRavager
+      weight: 1
+    - entity: CMXenoPraetorian
+      weight: 1
+    - entity: RMCXenoCrusher
+      weight: 1
+    # TODO RMC14 add CMXenoDespoiler when the Despoiler caste is ported.
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, xeno ]
+    seatTags: [ troop ]
+    priority: 100
+  - id: support
+    name: rmc-ert-role-xeno-support
+    ghostRoleEntityPool:
+    - entity: CMXenoDrone
+      weight: 1
+    - entity: CMXenoHivelord
+      weight: 1
+    min: 0
+    max: 2
+    required: false
+    roleTags: [ support, xeno ]
+    seatTags: [ troop ]
+  - id: combat
+    name: rmc-ert-role-xeno-combat
+    ghostRoleEntityPool:
+    - entity: CMXenoWarrior
+      weight: 1
+    - entity: CMXenoLurker
+      weight: 1
+    - entity: CMXenoSpitter
+      weight: 1
+    min: 0
+    max: 3
+    required: false
+    roleTags: [ rifleman, xeno ]
+    seatTags: [ troop ]
+  - id: filler
+    name: rmc-ert-role-xeno-filler
+    ghostRoleEntityPool:
+    - entity: CMXenoDrone
+      weight: 1
+    - entity: CMXenoRunner
+      weight: 1
+    - entity: CMXenoDefender
+      weight: 1
+    min: 0
+    max: 7
+    required: false
+    roleTags: [ xeno ]
+    seatTags: [ troop ]
+  announcements:
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-feral-xenos-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 1
+    maxSlots: 8
 
 - type: rmcERTCall
   id: RMCERTCallPizza
@@ -650,7 +1693,9 @@
   - id: deliverer
     name: rmc-ert-role-pizza-deliverer
     job: CMPizzaDeliverer
-    ghostRoleEntity: RMCRandomHumanoidPizzaDeliveryBoy
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidPizzaDeliveryBoy
+      weight: 100
     min: 1
     max: 1
     roleTags: [ pizza, support ]
@@ -668,3 +1713,4 @@
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 1
+    maxSlots: 1

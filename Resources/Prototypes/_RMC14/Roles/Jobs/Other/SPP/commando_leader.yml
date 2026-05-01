@@ -94,8 +94,8 @@
   storage:
     back:
     - RMCMRESPP
-    - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
-    - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
+    - RMCPacketGrenadeWhitePhosphorusFilled
+    - RMCPacketGrenadeWhitePhosphorusFilled
     - CMCrowbar
     - RMCRangefinder
     - RMCHandcuffs

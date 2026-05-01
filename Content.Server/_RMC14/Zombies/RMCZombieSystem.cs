@@ -17,7 +17,7 @@ public sealed partial class RMCZombieSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<ZombifyOnDeathComponent, EntityZombifiedEvent>(OnZombified);
-        SubscribeLocalEvent<ZombieComponent, ComponentStartup>(OnZombieStartup);
+        SubscribeLocalEvent<ZombieComponent, ComponentInit>(OnZombieInit);
     }
 
     private void OnZombified(Entity<ZombifyOnDeathComponent> ent, ref EntityZombifiedEvent args)
@@ -28,7 +28,7 @@ public sealed partial class RMCZombieSystem : EntitySystem
         ApplyRMCZombie(target);
     }
 
-    private void OnZombieStartup(Entity<ZombieComponent> ent, ref ComponentStartup args)
+    private void OnZombieInit(Entity<ZombieComponent> ent, ref ComponentInit args)
     {
         RemoveRMCZombieIncompatibleComponents(ent.Owner, false);
         ApplyRMCZombie(ent.Owner);

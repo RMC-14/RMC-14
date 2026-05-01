@@ -104,7 +104,7 @@
     pocket2: RMCPouchFirstAidPMCFill
   storage:
     back:
-    - CMCrowbar # TODO RMC14: tactical prybar
+    - RMCTacticalPrybar
     - RMCExplosivePlastic
     - CMMagazineSMGM63AP
     - CMMagazineSMGM63AP

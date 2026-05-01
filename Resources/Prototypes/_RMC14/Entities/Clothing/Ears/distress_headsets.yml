@@ -225,6 +225,23 @@
   - type: RMCHeadset
     radioTextIncrease: 3
 
+- type: entity
+  parent: RMCHeadsetDistressDukes
+  id: RMCHeadsetDistressVAI
+  name: VAI contractor headset
+  description: A corporate contractor headset used by Vanguard's Arrow Incorporated response teams.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: vai_headset
+
+- type: entity
+  parent: RMCHeadsetDistressVAI
+  id: RMCHeadsetDistressVAILeader
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
+
 # Survivor SOF/FORECON
 - type: entity
   parent: RMCHeadsetMarine

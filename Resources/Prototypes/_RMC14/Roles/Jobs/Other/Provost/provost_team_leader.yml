@@ -87,7 +87,7 @@
     suitstorage: WeaponShotgunM890
     id: RMCIDCardProvostTeamLeader
     belt: RMCMK80BeltFilled
-    back: CMSatchelSecurityFilledProvostEnforcer
+    back: CMSatchelSecurityFilledProvostTeamLeader
     pocket1: RMCPouchShotgunLargeBeanbag
     pocket2: RMCPouchShotgunLargeSlugs # TODO RMC14 big tear gas grenade box, riot shield
 

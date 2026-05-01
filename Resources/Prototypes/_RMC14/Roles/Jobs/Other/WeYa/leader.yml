@@ -113,7 +113,7 @@
   storage:
     back:
     - CMStunbaton
-    - CMCrowbar # TODO RMC14: tactical prybar
+    - RMCTacticalPrybar
     - RMCRangefinder
     - RMCHandheldDistressBeaconWeYa
     - RMCMREWeYaPMC

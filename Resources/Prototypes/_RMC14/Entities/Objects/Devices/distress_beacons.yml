@@ -37,6 +37,7 @@
     requestTitle: rmc-ert-beacon-request-title-cmb
     allowedCalls:
     - RMCERTCallCMB
+    - RMCERTCallCMBRiot
 
 - type: entity
   parent: RMCHandheldDistressBeaconBase
@@ -52,6 +53,10 @@
     allowedCalls:
     - RMCERTCallPMC
     - RMCERTCallWeYaBodyguard
+    - RMCERTCallWeYaBodyguardGoon
+    - RMCERTCallWeYaBodyguardPMC
+    - RMCERTCallWeYaBodyguardPMCEnforcer
+    - RMCERTCallWeYaBodyguardCommando
     - RMCERTCallWeYaLawyers
 
 - type: entity
@@ -65,6 +70,10 @@
     requestTitle: rmc-ert-beacon-request-title-weya-bodyguard
     allowedCalls:
     - RMCERTCallWeYaBodyguard
+    - RMCERTCallWeYaBodyguardGoon
+    - RMCERTCallWeYaBodyguardPMC
+    - RMCERTCallWeYaBodyguardPMCEnforcer
+    - RMCERTCallWeYaBodyguardCommando
 
 - type: entity
   parent: RMCHandheldDistressBeaconWeYa
@@ -100,7 +109,7 @@
     recipient: rmc-ert-recipient-allied
     requestTitle: rmc-ert-beacon-request-title-foreign
     allowedCalls:
-    - RMCERTCallSPP
+    - RMCERTCallSPPFriendly
     - RMCERTCallTSE
 
 - type: entity

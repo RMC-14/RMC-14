@@ -104,7 +104,7 @@
     pocket1: RMCPouchMedicalERT
     pocket2: RMCPouchMagazineLargeMAR40
     gloves: RMCHandsVeteranPMC
-    jumpsuit: RMCJumpsuitFreelancer # TODO RMC14 add surg vest
+    jumpsuit: RMCJumpsuitFreelancerSurgicalWebbing
     outerClothing: CMArmorFreelancer
     shoes: RMCBootsSPPFilled
     id: RMCIDCardFreelancer
