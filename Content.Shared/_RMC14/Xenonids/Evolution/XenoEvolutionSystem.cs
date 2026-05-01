@@ -580,47 +580,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         ChangeXenoPrototype(xeno, newProto);
 
         var comp = EnsureComp<XenoNewlyEvolvedComponent>(xeno);
-
-
-        //var coordinates = _transform.GetMoverCoordinates(xeno);
-        //var newXeno = Spawn(proto, coordinates);
-        //_xenoHive.SetSameHive(xeno, newXeno);
-
-        //if (_mind.TryGetMind(xeno, out var mindId, out _))
-        //{
-        //    _mind.TransferTo(mindId, newXeno);
-        //    _mind.UnVisit(mindId);
-        //}
-
-        //foreach (var held in _hands.EnumerateHeld(xeno))
-        //{
-        //    _hands.TryDrop(xeno, held);
-        //}
-
-        //// TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
-        //var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
-
-        //_doors.Clear();
-        //_entityLookup.GetEntitiesIntersecting(xeno, _doors);
-        //foreach (var id in _doors)
-        //{
-        //    if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
-        //        comp.StopCollide.Add(id);
-        //}
-
-        //var newRecently = EnsureComp<XenoRecentlyDevolvedComponent>(newXeno);
-        //if (TryComp(xeno, out XenoRecentlyDevolvedComponent? oldRecently))
-        //{
-        //    foreach (var (id, time) in oldRecently.Recent)
-        //    {
-        //        newRecently.Recent[id] = time;
-        //    }
-        //}
-
-        //if (Prototype(xeno)?.ID is { } oldId)
-        //    newRecently.Recent[oldId] = _timing.CurTime;
-
-        //return newXeno;
     }
 
     private void TryDevolve(Entity<XenoDevolveComponent> xeno, EntProtoId to, bool damagedCheck = true)

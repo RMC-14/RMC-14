@@ -95,21 +95,6 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             }
         }
 
-        //if (AppearanceSystem.TryGetData(entity, RMCXenoStateVisuals.Caste, out string casteId, appearance))
-        //{
-        //    string newRsiPath = casteId switch
-        //    {
-        //        "CMXenoLarva" => "_RMC14/Mobs/Xenonids/Larva/larva.rsi",
-        //        "CMXenoDrone" => "_RMC14/Mobs/Xenonids/Drone/drone.rsi",
-        //        _ => "",
-        //    };
-        //    if (!string.IsNullOrEmpty(newRsiPath))
-        //    {
-        //        var path = SpriteSpecifierSerializer.TextureRoot / newRsiPath;
-        //        if (_rescache.TryGetResource(path, out RSIResource? newRsi))
-        //            _sprite.SetBaseRsi((entity.Owner, sprite), newRsi.RSI);
-        //    }
-        //}
 
         if (sprite is not { BaseRSI: { } rsi } ||
             !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
