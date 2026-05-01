@@ -574,6 +574,7 @@
   - XenoSecretionList
   - MouseRotator
   - NoRotateOnMove
+  - ContainerManager
   # leader related
   - HiveLeader
   - RMCInnateRadioTextIncrease

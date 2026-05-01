@@ -7,6 +7,50 @@ namespace Content.Client._RMC14.Xenonids.Inhands;
 
 public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsComponent>
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
+    private static readonly XenoInhandVisualLayers[] HandLayers = new[] { XenoInhandVisualLayers.Left, XenoInhandVisualLayers.Right };
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<XenoInhandsComponent, AfterAutoHandleStateEvent>(OnStateChanged);
+        SubscribeLocalEvent<XenoInhandsComponent, ComponentShutdown>(OnShutdown);
+    }
+
+    private void OnStateChanged(Entity<XenoInhandsComponent> entity, ref AfterAutoHandleStateEvent args)
+    {
+        // Layer states will become invalid, so we disable the layers here.
+        // The layers will become re-enabled when the appearance data is updated.
+        DisableHandLayers(entity);
+    }
+    private void OnShutdown(Entity<XenoInhandsComponent> entity, ref ComponentShutdown shutdown)
+    {
+        DisableHandLayers(entity);
+    }
+
+    private void DisableHandLayers(EntityUid entity)
+    {
+        TryComp<SpriteComponent>(entity, out var spriteComp);
+
+        if (spriteComp == null)
+        {
+            return;
+        }
+
+        var sprite = (entity, spriteComp);
+
+        foreach (var layerDef in HandLayers)
+        {
+            if (!_sprite.LayerMapTryGet(sprite, layerDef, out var layer, false))
+                continue;
+
+            _sprite.LayerSetRsiState(sprite, layer, null);
+            _sprite.LayerSetVisible(sprite, layer, false);
+        }
+    }
+
     protected override void OnAppearanceChange(EntityUid uid, XenoInhandsComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
@@ -28,17 +72,14 @@ public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsCompo
         AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out resting);
         AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Ovipositor, out ovi);
 
-        string name = left;
-        XenoInhandVisualLayers layerDef = XenoInhandVisualLayers.Left;
-
-        for (int i = 0; i < 2; i++)
+        foreach (var layerDef in HandLayers)
         {
-            if (i == 1)
+            string name = layerDef switch
             {
-                name = right;
-                layerDef = XenoInhandVisualLayers.Right;
-
-            }
+                XenoInhandVisualLayers.Left => left,
+                XenoInhandVisualLayers.Right => right,
+                _ => string.Empty,
+            };
 
             if (!sprite.LayerMapTryGet(layerDef, out var layer))
                 continue;

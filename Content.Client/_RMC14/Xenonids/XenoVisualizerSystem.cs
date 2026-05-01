@@ -92,9 +92,6 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                 // TODO how the fuck do you make the sprite recalculate bounds? this is awful
                 _sprite.SetSnapCardinals((entity, sprite), !sprite.SnapCardinals);
                 _sprite.SetSnapCardinals((entity, sprite), !sprite.SnapCardinals);
-                //RemComp<SpriteComponent>(entity);
-                //sprite = EnsureComp<SpriteComponent>(entity);
-                //_sprite.CopySprite((EntityUid.Invalid, protoSprite), (entity, sprite));
             }
         }
 
