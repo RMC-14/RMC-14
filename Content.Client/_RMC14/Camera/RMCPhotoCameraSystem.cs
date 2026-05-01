@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Numerics;
+using System.Threading.Tasks;
 using Content.Client._RMC14.NewPlayer;
 using Content.Client._RMC14.Photo;
 using Content.Shared._RMC14.Camera.PhotoCamera;
@@ -190,10 +191,18 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
         viewport.RenderTarget.CopyPixelsToMemory<Rgba32>(image =>
         {
-            using var output = new MemoryStream();
-            image.SaveAsPng(output);
+            var img = image.Clone();
 
-            RaiseNetworkEvent(new PhotoCaptureEvent(output.ToArray(), camera));
+            Task.Run(() =>
+            {
+                using (img)
+                {
+                    using var output = new MemoryStream();
+                    img.SaveAsPng(output);
+
+                    RaiseNetworkEvent(new PhotoCaptureEvent(output.ToArray(), camera));
+                }
+            });
 
             viewport.Dispose();
 
