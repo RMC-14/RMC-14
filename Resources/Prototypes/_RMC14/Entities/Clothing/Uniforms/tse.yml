@@ -105,7 +105,7 @@
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
 
-- type: entity # PVE service uniform
+- type: entity
   parent: RMCJumpsuitMarineRoyalService
   id: RMCJumpsuitMarineRoyalServicePVE
   suffix: PVE, Royal, Formal
