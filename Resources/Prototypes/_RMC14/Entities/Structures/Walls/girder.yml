@@ -153,6 +153,7 @@
     state: displaced
   - type: Icon
     state: displaced
+
 - type: entity
   id: RMCGirderDamaged
   name: damaged girder
