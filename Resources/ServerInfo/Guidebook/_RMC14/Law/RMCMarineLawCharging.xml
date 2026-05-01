@@ -12,7 +12,7 @@
 
   ### Who May Charge
 
-  This order of priority should be used to select a person to set charges:
+  This order of priority must be used to select the person issuing charges:
 
   - [bold]Military Warden[/bold].
   - [color=#8B0000][bold]Chief MP[/bold][/color].
@@ -23,17 +23,24 @@
 
   ## Charging and Sentencing Procedure
 
-  Charging and sentencing should be done in this order.
+  Charging and sentencing must be done in this order.
 
+  ### Set the Charges
   - The person issuing the charges should determine a sentence.
   - Inform the Suspect of their Charges before the brig timer starts.
   - Apply the charges and activate the brig timer.
+
+  ### Search and Remove belongings
   - Remove all their belongings, including ID and headset.
   - Put them in the orange uniform, if available, else their original uniform. Ensure they also have footwear.
   - Give them a standard headset of common channel, if available.
+
+  ### Cell
   - Place them inside the cell, buckled to the bed, then stun them and recover your handcuffs.
   - Inform the Suspect they may file an appeal should they wish so.
   - Search their belongings for contraband and theft.
+
+  ### End of Time Served
   - When the time is over, let them grab their belongings, escort them out of the brig.
   - If the prisoner is SSD at the end of their sentence, return their belongings and place them in brig hypersleep.
 
@@ -45,7 +52,7 @@
 
   ## Medical Experiments
 
-  A prisoner may waive their rights to participate in medical experiments. Researchers performing approved medical experiments  may not be held liable for damages inflicted on the subject within the approved parameters of the experiment.
+  A prisoner may waive their rights in order to participate in medical experiments. Researchers performing approved medical experiments may not be held liable for damages inflicted on the subject within the approved parameters of the experiment.
   - All experiments require the signed (or stamped) approval of either the [color=#008000][bold]Commander[/bold][/color], or the [bold]Chief Medical Officer[/bold].
   - Prisoners can request to be used as subjects. The prisoner's brig time must continue to run while they are being used, and are free to go when it expires and are not obligated to continue.
   - Medical experiments that will result in death must only be offered to prisoners who are to be executed, or if execution is one of the listed punishment options for their crime. It is otherwise illegal, and will result in a [bold]Attempted Murder[/bold], or [bold]Murder[/bold] charge where relevant.
