@@ -15,7 +15,6 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Jittering;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
@@ -29,7 +28,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
@@ -59,12 +57,10 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly ISerializationManager _serManager = default!;
 
@@ -91,12 +87,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
         SubscribeLocalEvent<XenoEvolutionComponent, ComponentShutdown>(OnXenoEvolveShutdown);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
-        SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolvedEvent>(OnXenoEvolved);
-        SubscribeLocalEvent<XenoEvolutionComponent, XenoDevolvedEvent>(OnXenoDevolved);
+        SubscribeLocalEvent<XenoEvolutionComponent, XenoChangingCasteEvent>(OnXenoChangingCaste);
+        SubscribeLocalEvent<XenoEvolutionComponent, AfterXenoChangedCasteEvent>(OnAfterXenoChangedCaste);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
 
-        SubscribeLocalEvent<XenoEvolutionGranterComponent, XenoEvolvedEvent>(OnGranterEvolved);
+        SubscribeLocalEvent<XenoEvolutionGranterComponent, AfterXenoChangedCasteEvent>(OnGranterEvolved);
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
 
@@ -232,8 +228,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (!DamagedCheckPopup(xeno, false))
             return;
 
-        var ev = new XenoEvolvedEvent(xeno, xeno.Comp.Points);
-        ChangeXeno(xeno, args.Choice);
+        var ev = new AfterXenoChangedCasteEvent(xeno, xeno.Comp.Points, false);
+        ChangeCaste(xeno, args.Choice);
         RaiseLocalEvent(xeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {args.Choice.ToString()}");
@@ -256,8 +252,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
         }
 
-        var ev = new XenoEvolvedEvent(xeno, FixedPoint2.Max(0, xeno.Comp.Points - xeno.Comp.Max));
-        ChangeXeno(xeno, args.Choice);
+        var newPointTotal = FixedPoint2.Max(0, xeno.Comp.Points - xeno.Comp.Max);
+        var ev = new AfterXenoChangedCasteEvent(xeno, newPointTotal, false);
+        ChangeCaste(xeno, args.Choice);
         RaiseLocalEvent(xeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} evolved into proto {args.Choice.ToString()}");
@@ -265,15 +262,26 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), xeno, xeno);
     }
 
-    private void OnXenoEvolved(Entity<XenoEvolutionComponent> xeno, ref XenoEvolvedEvent args)
-    {
-        xeno.Comp.Points = FixedPoint2.Max(0, args.NewPointTotal);
-        _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
+    private void OnXenoChangingCaste(Entity<XenoEvolutionComponent> xeno, ref XenoChangingCasteEvent args)
+    { 
+        var compName = EntityManager.ComponentFactory.GetComponentName<XenoEvolutionComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoEvolutionComponent { } newComponent)
+        {
+            // transfer points over.
+            // points are deducted when handling AfterXenoChangedCasteEvent, as only the
+            // caller of ChangeCaste knows how many points to deduct.
+            newComponent.Points = xeno.Comp.Points;
+            newComponent.LastPointsAt = xeno.Comp.LastPointsAt;
+        }
     }
 
-    private void OnXenoDevolved(Entity<XenoEvolutionComponent> xeno, ref XenoDevolvedEvent args)
+    private void OnAfterXenoChangedCaste(Entity<XenoEvolutionComponent> xeno, ref AfterXenoChangedCasteEvent args)
     {
         xeno.Comp.Points = FixedPoint2.Max(0, args.NewPointTotal);
+        if (!args.Devolved)
+        {
+            _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
+        }
     }
 
     private void OnNewlyEvolvedPreventCollide(Entity<XenoNewlyEvolvedComponent> ent, ref PreventCollideEvent args)
@@ -282,7 +290,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnGranterEvolved(Entity<XenoEvolutionGranterComponent> ent, ref XenoEvolvedEvent args)
+    private void OnGranterEvolved(Entity<XenoEvolutionGranterComponent> ent, ref AfterXenoChangedCasteEvent args)
     {
         _xenoAnnounce.AnnounceSameHive(ent.Owner, Loc.GetString("rmc-new-queen"));
     }
@@ -564,7 +572,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return NeedsOvipositor() && !HasOvipositor();
     }
 
-    private void ChangeXeno(EntityUid xeno, EntProtoId protoId)
+    private void ChangeCaste(EntityUid xeno, EntProtoId protoId)
     {
         var newProto = _prototypes.Index(protoId);
 
@@ -601,8 +609,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         TryComp<XenoEvolutionComponent>(xeno, out var evoComp);
 
-        var ev = new XenoDevolvedEvent(xeno, evoComp?.Points ?? 0);
-        ChangeXeno(xeno, to);
+        var ev = new AfterXenoChangedCasteEvent(xeno.Owner, evoComp?.Points ?? 0, true);
+        ChangeCaste(xeno, to);
         RaiseLocalEvent(xeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {to.Id}");

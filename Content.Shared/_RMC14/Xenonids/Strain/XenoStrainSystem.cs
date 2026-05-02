@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
@@ -13,7 +13,7 @@ public sealed class XenoStrainSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoStrainComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<XenoStrainComponent, XenoEvolvedEvent>(OnNewXenoEvolved);
+        SubscribeLocalEvent<XenoStrainComponent, AfterXenoChangedCasteEvent>(OnAfterXenoChangedCasteEvent);
     }
 
     private void OnExamined(Entity<XenoStrainComponent> ent, ref ExaminedEvent args)
@@ -27,7 +27,7 @@ public sealed class XenoStrainSystem : EntitySystem
         }
     }
 
-    private void OnNewXenoEvolved(Entity<XenoStrainComponent> ent, ref XenoEvolvedEvent args)
+    private void OnAfterXenoChangedCasteEvent(Entity<XenoStrainComponent> ent, ref AfterXenoChangedCasteEvent args)
     {
         if (ent.Comp.Popup is not { } popup)
             return;
