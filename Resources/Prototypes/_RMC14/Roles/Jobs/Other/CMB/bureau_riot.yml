@@ -166,8 +166,6 @@
     id: RMCIDCardCMBDeputy
     pocket1: RMCPouchFirstAidERTFill
     pocket2: RMCPouchToolsFill
-  inhand:
-  - RiotShield
   storage:
     back:
     - RMCPacketGrenadeFlashBang
