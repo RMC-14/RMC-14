@@ -240,10 +240,6 @@
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchShotgunLargeBuckshot
-  storage:
-    back:
-    - RMCBoxShotgunBuckshot
-    - RMCBoxShotgunSlugs
 
 - type: startingGear
   id: RMCGearSPPRiflemanDouble

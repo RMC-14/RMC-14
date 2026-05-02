@@ -162,7 +162,7 @@
     back: RMCSatchelPMCCommandoFilled
     belt: RMCBeltSmartGunOperatorPistolPMCFilled
     pocket1: RMCPouchMedicalSocFill
-    pocket2: RMCPouchDrumPMCFill
+    pocket2: RMCPouchDrumPMC
     suitstorage: RMCSmartGunPMC
   storage:
     back:

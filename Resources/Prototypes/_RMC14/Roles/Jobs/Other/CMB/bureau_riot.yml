@@ -49,7 +49,6 @@
     suitstorage: RMCWeaponShotgunM3717
   storage:
     back:
-    - RiotShield
     - RMCGrenadeFlashBang
     - RMCGrenadeFlashBang
     - RMCRangefinder
@@ -167,9 +166,10 @@
     id: RMCIDCardCMBDeputy
     pocket1: RMCPouchFirstAidERTFill
     pocket2: RMCPouchToolsFill
+  inhand:
+  - RiotShield
   storage:
     back:
-    - RiotShield
     - RMCPacketGrenadeFlashBang
     - CMCrowbar
     - RMCHandheldDistressBeaconCMB
@@ -197,7 +197,6 @@
     pocket2: RMCPouchExplosiveFilledHIRR
   storage:
     back:
-    - RiotShield
     - RMCPacketGrenadeFlashBang
     - RMCPacketGrenadeBatonSlugHIRRFilled
     - RMCGrenadeFlashBang

@@ -707,8 +707,6 @@
     pocket2: RMCPouchShotgunLargeBuckshot
   storage:
     back:
-    - RMCBoxShotgunBuckshot
-    - RMCBoxShotgunSlugs
     - RMCGrenadeBlastM12
     - RMCGrenadeBlastM12
     - RMCExplosiveBreachingCharge
@@ -737,7 +735,7 @@
     belt: CMBeltMedicBagFilled
     suitstorage: WeaponRifleMAR40
     pocket1: RMCPouchMedicalERT
-    pocket2: RMCPouchMagazineLargeMAR40
+    pocket2: RMCPouchMagazineLarge
   storage:
     back:
     - CMDefibrillator
