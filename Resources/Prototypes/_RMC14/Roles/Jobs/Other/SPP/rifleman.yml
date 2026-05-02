@@ -5,7 +5,7 @@
   description: rmc-job-description-spp-soldier
   playTimeTracker: CMJobSPPRifleman
   ranks:
-    RMCRankSPPRyadovoy: []
+    RMCRankSPPPrivate: []
   startingGear: RMCGearSPPRifleman
   icon: "RMCJobIconSPPRifleman"
   joinNotifyCrew: false

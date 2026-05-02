@@ -5,7 +5,7 @@
   description: rmc-job-description-spp-so
   playTimeTracker: CMJobSPPSO
   ranks:
-    RMCRankSPPStarshiyLeytenant: []
+    RMCRankSPPSrLeytenant: []
   startingGear: RMCGearSPPSO
   icon: "RMCJobIconSPPSO"
   joinNotifyCrew: false

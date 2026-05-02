@@ -5,11 +5,11 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   ranks:
-    RMCRankSPPEfreitor:
+    RMCRankSPPSrPrivate:
     - !type:RoleTimeRequirement
       role: CMJobSurvivorSecurity
       time: 252000 # 70 hours
-    RMCRankSPPRyadovoy: []
+    RMCRankSPPPrivate: []
   startingGear: RMCGearSurvivorArmyReservist
   accessGroups:
   - ColonistSec

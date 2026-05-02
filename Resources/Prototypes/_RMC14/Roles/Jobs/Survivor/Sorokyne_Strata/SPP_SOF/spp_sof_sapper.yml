@@ -4,7 +4,7 @@
   name: rmc-job-name-soro-sof-sapper
   startingGear: RMCGearSPPSOFSapper
   ranks:
-    RMCRankSPPMladshiySerzhant: []
+    RMCRankSPPKorporal: []
   icon: "RMCJobIconSPPEngineer"
   spawnMenuRoleName: SPP SOF Sapper (Survivor)
   special:

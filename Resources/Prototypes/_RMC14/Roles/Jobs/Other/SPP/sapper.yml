@@ -5,7 +5,7 @@
   description: rmc-job-description-spp-engineer
   playTimeTracker: CMJobSPPEngineer
   ranks:
-    RMCRankSPPMladshiySerzhant: []
+    RMCRankSPPKorporal: []
   startingGear: RMCGearSPPEngineer
   icon: "RMCJobIconSPPEngineer"
   joinNotifyCrew: false

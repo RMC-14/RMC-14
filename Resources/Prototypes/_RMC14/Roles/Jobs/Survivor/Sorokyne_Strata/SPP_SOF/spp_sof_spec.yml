@@ -4,7 +4,7 @@
   name: rmc-job-name-soro-sof-spec
   startingGear: RMCGearSPPSOFSpec
   ranks:
-    RMCRankSPPSerzhant: []
+    RMCRankSPPJrSergeant: []
   icon: "RMCJobIconSPPSpecialist"
   spawnMenuRoleName: SPP SOF Specialist (Survivor)
   special:

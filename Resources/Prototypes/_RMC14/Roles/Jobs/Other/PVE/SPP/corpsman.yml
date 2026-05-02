@@ -9,7 +9,7 @@
     group: CMJobsMedical
     time: 10800 # 3 hours
   ranks:
-    RMCRankSPPMladshiySerzhant: []
+    RMCRankSPPKorporal: []
   startingGear: RMCJobSPPCorpsmanPVEGear
   icon: "RMCJobIconSPPMedic"
   joinNotifyCrew: false

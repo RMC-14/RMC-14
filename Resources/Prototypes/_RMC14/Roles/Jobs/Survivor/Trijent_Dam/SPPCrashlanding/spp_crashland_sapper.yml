@@ -4,7 +4,7 @@
   name: rmc-job-name-crashland-sapper
   startingGear: RMCGearSPPCrashlandSapper
   ranks:
-    RMCRankSPPMladshiySerzhant: []
+    RMCRankSPPKorporal: []
   icon: "RMCJobIconSPPEngineer"
   spawnMenuRoleName: SPP Airborne Sapper (Survivor)
   special:

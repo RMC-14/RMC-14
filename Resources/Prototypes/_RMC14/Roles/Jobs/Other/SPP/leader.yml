@@ -5,7 +5,7 @@
   description: rmc-job-description-spp-leader
   playTimeTracker: CMJobSPPLeader
   ranks:
-    RMCRankSPPSerzhant: []
+    RMCRankSPPJrSergeant: []
   startingGear: RMCGearSPPLeader
   icon: "RMCJobIconSPPLeader"
   joinNotifyCrew: false

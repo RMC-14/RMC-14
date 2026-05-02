@@ -5,7 +5,7 @@
   description: rmc-job-description-spp-gunner-pve
   playTimeTracker: RMCJobSPPHeavyGunnerPVE
   ranks:
-    RMCRankSPPMladshiySerzhant: []
+    RMCRankSPPKorporal: []
   startingGear: RMCJobSPPHeavyGunnerPVEGear
   icon: "RMCJobIconSPPEngineer"
   joinNotifyCrew: false

@@ -4,7 +4,7 @@
   name: rmc-job-name-soro-sof-base
   description: rmc-job-description-soro-sof
   ranks:
-    RMCRankSPPRyadovoy: []
+    RMCRankSPPPrivate: []
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - Colonist

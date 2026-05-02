@@ -5,7 +5,7 @@
   description: rmc-job-description-spp-rifleman-pve
   playTimeTracker: RMCJobSPPRiflemanPVE
   ranks:
-   RMCRankSPPRyadovoy: []
+   RMCRankSPPPrivate: []
   startingGear: RMCJobSPPRiflemanPVEGear
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false

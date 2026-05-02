@@ -26,39 +26,39 @@
 # Military
 
 - type: rank
-  id: RMCRankSPPRyadovoy
-  name: Ryadovoy
-  prefix: Rya.
+  id: RMCRankSPPPrivate
+  name: Private
+  prefix: Pvt.
   paygrade: E1
 
 - type: rank
-  id: RMCRankSPPEfreitor
-  name: Efreitor
-  prefix: Efr.
+  id: RMCRankSPPSrPrivate
+  name: Senior Private
+  prefix: SrPvt.
   paygrade: E2
 
 - type: rank
-  id: RMCRankSPPMladshiySerzhant
-  name: Mladshiy Serzhant
-  prefix: MSzht.
+  id: RMCRankSPPKorporal
+  name: Korporal
+  prefix: Kpl.
   paygrade: E3
 
 - type: rank
-  id: RMCRankSPPSerzhant
-  name: Serzhant
-  prefix: Sgt.
+  id: RMCRankSPPJrSergeant
+  name: Junior Sergeant
+  prefix: JrSgt.
   paygrade: E4
 
 - type: rank
-  id: RMCRankSPPStarshiySerzhant
-  name: Starshiy Serzhant
-  prefix: SSgt.
+  id: RMCRankSPPSergeant
+  name: Sergeant
+  prefix: Sgt.
   paygrade: E5
 
 - type: rank
-  id: RMCRankSPPStarshyna
-  name: Starshyna
-  prefix: StS.
+  id: RMCRankSPPSrSergeant
+  name: Senior Sergeant
+  prefix: SrSgt.
   paygrade: E6
 
 # THE RANKS BELOW ARE USED FOR THE SPP DEATHSQUAD, PLEASE DON'T USE THEM FOR ANYTHING ELSE
@@ -84,14 +84,14 @@
 # THE RANKS ABOVE ARE USED FOR THE SPP DEATHSQUAD, PLEASE DON'T USE THEM FOR ANYTHING ELSE
 
 - type: rank
-  id: RMCRankSPPMladshiyLeytenant
-  name: Mladshiy Leytenant
-  prefix: MsLt.
+  id: RMCRankSPPJrLeytenant
+  name: Junior Leytenant
+  prefix: JrLt.
   paygrade: O1
 
 - type: rank
-  id: RMCRankSPPStarshiyLeytenant
-  name: Starshiy Leytenant
+  id: RMCRankSPPSrLeytenant
+  name: Senior Leytenant
   prefix: SrLt.
   paygrade: O2
 
@@ -108,15 +108,15 @@
   paygrade: O4
 
 - type: rank
-  id: RMCRankSPPPodpolkovnik
-  name: Podpolkovnik
-  prefix: Pdk.
+  id: RMCRankSPPLtKolonel
+  name: Leytenant Kolonel
+  prefix: Lt. Kol.
   paygrade: O5
 
 - type: rank
-  id: RMCRankSPPPolkovnik
-  name: Polkovnik
-  prefix: Plk.
+  id: RMCRankSPPKolonel
+  name: Kolonel
+  prefix: Kol.
   paygrade: O6
 
 - type: rank
@@ -132,9 +132,9 @@
   paygrade: O8
 
 - type: rank
-  id: RMCRankSPPGeneralPolkovnik
-  name: General Polkovnik
-  prefix: GenPlk.
+  id: RMCRankSPPGeneralKolonel
+  name: General Kolonel
+  prefix: GenKol.
   paygrade: O9
 
 - type: rank

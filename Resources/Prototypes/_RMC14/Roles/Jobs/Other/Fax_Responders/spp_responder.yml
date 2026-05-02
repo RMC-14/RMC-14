@@ -5,7 +5,7 @@
   description: rmc-job-description-spp-responder
   playTimeTracker: CMJobSPPResponder
   ranks:
-    RMCRankSPPStarshiyLeytenant: []
+    RMCRankSPPSrLeytenant: []
   startingGear: RMCGearSPPResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false

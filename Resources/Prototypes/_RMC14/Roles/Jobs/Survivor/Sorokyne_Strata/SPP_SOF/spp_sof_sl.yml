@@ -4,7 +4,7 @@
   name: rmc-job-name-soro-sof-sl
   startingGear: RMCGearSPPSOFSL
   ranks:
-    RMCRankSPPStarshiySerzhant: []
+    RMCRankSPPSergeant: []
   icon: "RMCJobIconSPPLeader"
   spawnMenuRoleName: SPP SOF Squad Leader (Survivor)
   special:

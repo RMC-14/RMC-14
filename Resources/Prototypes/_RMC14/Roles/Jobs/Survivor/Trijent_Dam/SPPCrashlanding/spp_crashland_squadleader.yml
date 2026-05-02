@@ -4,7 +4,7 @@
   name: rmc-job-name-crashland-sl
   startingGear: RMCGearSPPCrashlandSL
   ranks:
-    RMCRankSPPStarshiySerzhant: []
+    RMCRankSPPSergeant: []
   icon: "RMCJobIconSPPLeader"
   spawnMenuRoleName: SPP Airborne Squad Leader (Survivor)
   special:

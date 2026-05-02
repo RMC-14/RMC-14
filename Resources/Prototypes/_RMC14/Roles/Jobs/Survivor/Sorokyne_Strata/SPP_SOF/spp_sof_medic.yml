@@ -4,7 +4,7 @@
   name: rmc-job-name-soro-sof-medic
   startingGear: RMCGearSPPSOFMedic
   ranks:
-    RMCRankSPPMladshiySerzhant: []
+    RMCRankSPPKorporal: []
   icon: "RMCJobIconSPPMedic"
   spawnMenuRoleName: SPP SOF Medic (Survivor)
   special:

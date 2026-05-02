@@ -4,7 +4,7 @@
   name: rmc-job-name-crashland-medic
   startingGear: RMCGearSPPCrashlandMedic
   ranks:
-    RMCRankSPPMladshiySerzhant: []
+    RMCRankSPPKorporal: []
   icon: "RMCJobIconSPPMedic"
   spawnMenuRoleName: SPP Airborne Medic (Survivor)
   special:
