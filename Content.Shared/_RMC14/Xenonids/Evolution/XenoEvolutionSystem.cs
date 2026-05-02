@@ -580,11 +580,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (Prototype(xeno)?.ID is { } oldId)
             recently.Recent[oldId] = _timing.CurTime;
 
-        var meta = MetaData(xeno);
-        meta.EntityPrototype = newProto;
-        _meta.SetEntityName(xeno, newProto.Name);
-        _meta.SetEntityDescription(xeno, newProto.Description);
-
         ChangeXenoPrototype(xeno, newProto);
 
         var comp = EnsureComp<XenoNewlyEvolvedComponent>(xeno);
@@ -757,6 +752,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         var metadata = MetaData(xeno);
+
+        metadata.EntityPrototype = newProto;
+        _meta.SetEntityName(xeno, newProto.Name);
+        _meta.SetEntityDescription(xeno, newProto.Description);
+
         var registryToAdd = _serManager.CreateCopy(newProto.Components, notNullableOverride: true);
         foreach (var excluded in excludeComponents)
         {
