@@ -1,0 +1,48 @@
+- type: entity
+  parent: CMBackpack
+  id: RMCM271A2BruteLauncherRig
+  name: M271A2 pattern launcher rig
+  description: A specialized back harness for carrying the M6H-BRUTE breaching launcher and M5510 rockets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/brute_rig.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/brute_rig.rsi
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCWeaponLauncherM6HBrute
+      - RMCRocketAmmoM5510Brute
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+    whitelist:
+      tags:
+      - RMCWeaponLauncherM6HBrute
+  - type: Item
+    size: Large
+  - type: Tag
+    tags:
+    - RMCM271A2BruteLauncherRig
+
+- type: entity
+  parent: RMCM271A2BruteLauncherRig
+  id: RMCM271A2BruteLauncherRigFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponLauncherM6HBrute
+    - id: RMCRocketM5510Brute
+      amount: 3
+
+- type: Tag
+  id: RMCM271A2BruteLauncherRig
