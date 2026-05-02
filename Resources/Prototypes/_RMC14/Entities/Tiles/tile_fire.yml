@@ -121,6 +121,7 @@
     burnColor: "#00b8ff"
   - type: TileFire
     id: RMCTileFireBlue
+    duration: 40
     extinguishInstantly: false
     patExtinguishMultiplier: 2
   - type: GenericVisualizer
