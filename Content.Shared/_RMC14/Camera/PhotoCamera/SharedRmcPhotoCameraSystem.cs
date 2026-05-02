@@ -23,6 +23,7 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
@@ -31,6 +32,7 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPhotoCameraComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<RMCPhotoCameraComponent, CycleCameraZoomActionEvent>(OnCycleZoom);
+        SubscribeLocalEvent<RMCPhotoCameraComponent, ToggleCameraAutoCenter>(OnToggleAutoFocus);
         SubscribeLocalEvent<RMCPhotoCameraComponent, UniqueActionEvent>(OnUniqueAction);
         SubscribeLocalEvent<RMCPhotoCameraComponent, ExaminedEvent>(OnCameraExamined);
         SubscribeLocalEvent<RMCPhotoCameraComponent, InteractUsingEvent>(OnInteractUsing);
@@ -38,13 +40,31 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 
     private void OnGetItemActions(Entity<RMCPhotoCameraComponent> ent, ref GetItemActionsEvent args)
     {
-        args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
+        if (!_net.IsServer) //TODO Remove this after figuring out why action order is being mispredicted.
+            return;
+
+        args.AddAction(ref ent.Comp.AutoCenterAction, ent.Comp.AutoCenterActionId);
+        args.AddAction(ref ent.Comp.CycleZoomAction, ent.Comp.CycleZoomActionId);
+        _actions.SetToggled(ent.Comp.AutoCenterAction, ent.Comp.AutoCenter);
+
         Dirty(ent.Owner, ent.Comp);
     }
 
     private void OnCycleZoom(Entity<RMCPhotoCameraComponent> ent, ref CycleCameraZoomActionEvent args)
     {
         CycleZoom(ent, args.Performer);
+        args.Handled = true;
+    }
+
+    private void OnToggleAutoFocus(Entity<RMCPhotoCameraComponent> ent, ref ToggleCameraAutoCenter args)
+    {
+        ent.Comp.AutoCenter = !ent.Comp.AutoCenter;
+        Dirty(ent);
+
+        if (ent.Comp.AutoCenterAction is { } action)
+            _actions.SetToggled(action, ent.Comp.AutoCenter);
+
+        Audio.PlayPredicted(ent.Comp.CycleZoomSound, args.Performer, args.Performer);
         args.Handled = true;
     }
 

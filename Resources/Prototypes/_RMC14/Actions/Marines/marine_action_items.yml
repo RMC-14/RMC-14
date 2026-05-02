@@ -248,6 +248,21 @@
   - type: InstantAction
     event: !type:CycleCameraZoomActionEvent
 
+- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionToggleCameraAutoCenter
+  name: Toggle Auto Center
+  description: Whether your photo will be focused on the center of the targeted tile.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi #TODO find a better icon for this action.
+      state: autofire
+    useDelay: 0.25
+  - type: InstantAction
+    event: !type:ToggleCameraAutoCenter
+
 # CBRN
 - type: entity
   parent: BaseAction

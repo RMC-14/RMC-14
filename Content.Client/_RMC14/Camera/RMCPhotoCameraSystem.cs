@@ -50,8 +50,11 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (!_map.MapExists(world.MapId))
             return;
 
-        var center = TransformSystem.ToCoordinates(world).SnapToGrid();
-        if (!center.IsValid(EntityManager))
+        var coordinates = TransformSystem.ToCoordinates(world);
+        if (ent.Comp.AutoCenter)
+            coordinates = coordinates.SnapToGrid();
+
+        if (!coordinates.IsValid(EntityManager))
             return;
 
         if (ent.Comp.RemainingCharges <= 0)
@@ -62,7 +65,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
             return;
         }
 
-        RaiseNetworkEvent(new RequestPhotoCaptureEvent(GetNetCoordinates(center)));
+        RaiseNetworkEvent(new RequestPhotoCaptureEvent(GetNetCoordinates(coordinates)));
     }
 
     private void OnTakePhoto(TakePhotoEvent ev, EntitySessionEventArgs args)

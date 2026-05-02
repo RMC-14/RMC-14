@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Maths;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -40,7 +39,7 @@ public sealed partial class RMCPhotoCameraComponent : Component
     public int Resolution = 640;
 
     /// <summary>
-    ///     The resolution of the eye used to take the photo.
+    ///     The base resolution of the eye used to take the photo, this is multiplied by the currently selected <see cref="ZoomMode"/> to get the final resolution.
     /// </summary>
     [DataField, AutoNetworkedField]
     public int BaseResolution = 128;
@@ -52,6 +51,12 @@ public sealed partial class RMCPhotoCameraComponent : Component
     public PhotoZoomMode ZoomMode = PhotoZoomMode.Standard;
 
     /// <summary>
+    ///     Whether the photo location will be snapped to the center of the clicked tile.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool AutoCenter = true;
+
+    /// <summary>
     ///     The delay between capturing a photo and the printed photo being created.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -61,13 +66,25 @@ public sealed partial class RMCPhotoCameraComponent : Component
     ///     Prototype ID of the action used to cycle camera zoom modes.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntProtoId ActionId = "RMCActionCycleCameraZoom";
+    public EntProtoId CycleZoomActionId = "RMCActionCycleCameraZoom";
 
     /// <summary>
-    ///     The action id.
+    ///     The cycle camera zoom action id.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid? Action;
+    public EntityUid? CycleZoomAction;
+
+    /// <summary>
+    ///     Prototype of the ID of the action used to toggle the camera's autofocus.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId AutoCenterActionId = "RMCActionToggleCameraAutoCenter";
+
+    /// <summary>
+    ///     The autofocus action id.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? AutoCenterAction;
 
     /// <summary>
     ///     The temporary eye used by the camera.

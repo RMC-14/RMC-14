@@ -67,7 +67,10 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (!_examine.InRangeUnOccluded(sessionEntity, coordinates, camera.Value.Comp.Range))
             return;
 
-        var cameraCoordinates = TransformSystem.GetMoverCoordinates(sessionEntity).SnapToGrid();
+        var cameraCoordinates = TransformSystem.GetMoverCoordinates(sessionEntity);
+        if (camera.Value.Comp.AutoCenter)
+            cameraCoordinates = cameraCoordinates.SnapToGrid();
+
         var eye = Spawn(null, cameraCoordinates);
 
         camera.Value.Comp.Eye = GetNetEntity(eye);
