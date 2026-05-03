@@ -22,6 +22,18 @@ public sealed partial class RMCBruteProjectileComponent : Component
     public int EdgeUpperDamage = 700;
 
     [DataField]
+    public int WallDamageMultiplier = 15;
+
+    [DataField]
+    public float OpenDoorDamageMultiplier = 0.5f;
+
+    [DataField]
+    public int DoorDamageMultiplier = 15;
+
+    [DataField]
+    public float ResinExplosionDamageMultiplier = 0.85f;
+
+    [DataField]
     public float FireChance = 0.3f;
 
     [DataField]
@@ -40,7 +52,7 @@ public sealed partial class RMCBruteProjectileComponent : Component
     public float ThrowSpeed = 5f;
 
     [DataField]
-    public EntProtoId FirePrototype = "RMCTileFire";
+    public EntProtoId FirePrototype = "RMCTileFireGreen";
 
     [DataField]
     public EntProtoId SparkPrototype = "RMCBruteSparks";

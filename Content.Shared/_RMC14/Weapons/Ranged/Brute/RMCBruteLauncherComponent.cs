@@ -43,19 +43,26 @@ public sealed partial class RMCBruteLauncherComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? LockTarget;
+
+    [DataField]
+    public uint LockId;
 }
 
 [Serializable, NetSerializable]
 public sealed partial class RMCBruteLockOnDoAfterEvent : DoAfterEvent
 {
     [DataField(required: true)]
+    public uint LockId;
+
+    [DataField(required: true)]
     public NetEntity Target;
 
     [DataField(required: true)]
     public NetCoordinates Coordinates;
 
-    public RMCBruteLockOnDoAfterEvent(NetEntity target, NetCoordinates coordinates)
+    public RMCBruteLockOnDoAfterEvent(uint lockId, NetEntity target, NetCoordinates coordinates)
     {
+        LockId = lockId;
         Target = target;
         Coordinates = coordinates;
     }
@@ -66,6 +73,6 @@ public sealed partial class RMCBruteLockOnDoAfterEvent : DoAfterEvent
 
     public override DoAfterEvent Clone()
     {
-        return new RMCBruteLockOnDoAfterEvent(Target, Coordinates);
+        return new RMCBruteLockOnDoAfterEvent(LockId, Target, Coordinates);
     }
 }

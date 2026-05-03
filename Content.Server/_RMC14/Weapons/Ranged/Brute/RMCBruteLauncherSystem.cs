@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server._RMC14.Targeting;
 using Content.Shared._RMC14.Deafness;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Projectiles.Penetration;
 using Content.Shared._RMC14.Stun;
@@ -8,11 +9,13 @@ using Content.Shared._RMC14.Targeting;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Brute;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
@@ -22,7 +25,9 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Wieldable.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
@@ -37,6 +42,13 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
 {
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly LocId InvalidTarget = "rmc-brute-launcher-invalid-target";
+    private static readonly LocId LockInterrupted = "rmc-brute-launcher-lock-interrupted";
+    private static readonly LocId NoAmmo = "gun-magazine-fired-empty";
+    private static readonly LocId OutOfRange = "rmc-brute-launcher-out-of-range";
+    private static readonly LocId RequiresWield = "rmc-brute-launcher-requires-wield";
+    private static readonly LocId TargetObscured = "rmc-brute-launcher-target-obscured";
+    private static readonly LocId Unskilled = "cm-gun-unskilled";
 
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -57,10 +69,33 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    private sealed class BruteWaveState
+    {
+        public BruteWaveState(int structureDamage)
+        {
+            StructureDamage = structureDamage;
+        }
+
+        public int StructureDamage;
+    }
+
+    private readonly struct BruteWaveTile
+    {
+        public BruteWaveTile(Vector2i offset, bool edge)
+        {
+            Offset = offset;
+            Edge = edge;
+        }
+
+        public readonly Vector2i Offset;
+        public readonly bool Edge;
+    }
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCBruteLauncherComponent, AttemptShootEvent>(OnAttemptShoot, before: [typeof(CMGunSystem)]);
         SubscribeLocalEvent<RMCBruteLauncherComponent, RMCBruteLockOnDoAfterEvent>(OnLockOnDoAfter);
+        SubscribeLocalEvent<RMCBruteLauncherComponent, DoAfterAttemptEvent<RMCBruteLockOnDoAfterEvent>>(OnLockOnDoAfterAttempt);
         SubscribeLocalEvent<RMCBruteLauncherComponent, ComponentShutdown>(OnLauncherShutdown);
 
         SubscribeLocalEvent<RMCBruteProjectileComponent, AfterProjectileHitEvent>(OnProjectileHit);
@@ -88,12 +123,26 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         if (launcher.Comp.LockComplete)
             return;
 
+        if (launcher.Comp.LockTarget != null)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (!HasAmmo(launcher.Owner))
+            return;
+
         args.Cancelled = true;
-        args.ResetCooldown = true;
+
+        if (!IsWielded(launcher.Owner))
+        {
+            args.Message = Loc.GetString(RequiresWield);
+            return;
+        }
 
         if (!_skills.HasSkill(args.User, launcher.Comp.RequiredSkill, launcher.Comp.RequiredSkillLevel))
         {
-            args.Message = Loc.GetString("cm-gun-unskilled", ("gun", launcher.Owner));
+            args.Message = Loc.GetString(Unskilled, ("gun", launcher.Owner));
             return;
         }
 
@@ -101,13 +150,13 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             args.ToCoordinates is not { } targetCoordinates ||
             !TryGetTarget(gun, targetCoordinates, out var target))
         {
-            args.Message = Loc.GetString("rmc-brute-launcher-invalid-target");
+            args.Message = Loc.GetString(InvalidTarget);
             return;
         }
 
-        if (!TryValidateTarget(args.User, target, launcher.Comp.MaxRange, out var message))
+        if (!TryValidateTarget(args.User, target, launcher.Comp.MaxRange, out var messageId))
         {
-            args.Message = message;
+            args.Message = Loc.GetString(messageId);
             return;
         }
 
@@ -116,12 +165,15 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
 
     private void OnLockOnDoAfter(Entity<RMCBruteLauncherComponent> launcher, ref RMCBruteLockOnDoAfterEvent args)
     {
+        if (args.LockId != launcher.Comp.LockId)
+            return;
+
         CleanupTargeting(launcher);
 
         if (args.Handled || args.Cancelled)
         {
             if (!TerminatingOrDeleted(args.User))
-                _popup.PopupEntity(Loc.GetString("rmc-brute-launcher-lock-interrupted"), args.User, args.User, PopupType.SmallCaution);
+                _popup.PopupEntity(Loc.GetString(LockInterrupted), args.User, args.User, PopupType.SmallCaution);
 
             return;
         }
@@ -131,13 +183,25 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         if (!TryComp(launcher, out GunComponent? gun))
             return;
 
+        if (!IsWielded(launcher.Owner))
+        {
+            _popup.PopupEntity(Loc.GetString(RequiresWield), args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
+
+        if (!HasAmmo(launcher.Owner))
+        {
+            _popup.PopupEntity(Loc.GetString(NoAmmo), args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
+
         var target = GetEntity(args.Target);
         if (TerminatingOrDeleted(target))
             return;
 
-        if (!TryValidateTarget(args.User, target, launcher.Comp.MaxRange, out var message))
+        if (!TryValidateTarget(args.User, target, launcher.Comp.MaxRange, out var messageId))
         {
-            _popup.PopupEntity(message, args.User, args.User, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString(messageId), args.User, args.User, PopupType.SmallCaution);
             return;
         }
 
@@ -156,6 +220,19 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         }
     }
 
+    private void OnLockOnDoAfterAttempt(Entity<RMCBruteLauncherComponent> launcher, ref DoAfterAttemptEvent<RMCBruteLockOnDoAfterEvent> args)
+    {
+        var target = GetEntity(args.Event.Target);
+        if (args.Event.LockId != launcher.Comp.LockId ||
+            launcher.Comp.LockTarget != target ||
+            TerminatingOrDeleted(target) ||
+            !IsWielded(launcher.Owner) ||
+            !HasAmmo(launcher.Owner))
+        {
+            args.Cancel();
+        }
+    }
+
     private void OnLauncherShutdown(Entity<RMCBruteLauncherComponent> launcher, ref ComponentShutdown args)
     {
         CleanupTargeting(launcher);
@@ -163,8 +240,12 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
 
     private void StartLockOn(Entity<RMCBruteLauncherComponent> launcher, EntityUid user, EntityUid target, EntityCoordinates targetCoordinates)
     {
+        if (launcher.Comp.LockTarget != null)
+            return;
+
         CleanupTargeting(launcher);
 
+        var lockId = ++launcher.Comp.LockId;
         launcher.Comp.LockTarget = target;
         Dirty(launcher);
 
@@ -182,8 +263,8 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             Dirty(launcher.Owner, laser);
         }
 
-        var ev = new RMCBruteLockOnDoAfterEvent(GetNetEntity(target), GetNetCoordinates(targetCoordinates));
-        var doAfter = new DoAfterArgs(EntityManager, user, launcher.Comp.AimDelay, ev, launcher.Owner, target: target, used: launcher.Owner)
+        var ev = new RMCBruteLockOnDoAfterEvent(lockId, GetNetEntity(target), GetNetCoordinates(targetCoordinates));
+        var doAfter = new DoAfterArgs(EntityManager, user, launcher.Comp.AimDelay, ev, launcher.Owner, used: launcher.Owner)
         {
             BreakOnDamage = true,
             BreakOnDropItem = true,
@@ -192,9 +273,11 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             NeedHand = true,
             RequireCanInteract = false,
             RangeCheck = false,
+            AttemptFrequency = AttemptFrequency.EveryTick,
             ForceVisible = true,
-            CancelDuplicate = true,
+            CancelDuplicate = false,
             BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
@@ -235,11 +318,11 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         return false;
     }
 
-    private bool TryValidateTarget(EntityUid user, EntityUid target, float maxRange, out string message)
+    private bool TryValidateTarget(EntityUid user, EntityUid target, float maxRange, out LocId messageId)
     {
         if (!IsBruteTarget(target))
         {
-            message = Loc.GetString("rmc-brute-launcher-invalid-target");
+            messageId = InvalidTarget;
             return false;
         }
 
@@ -248,17 +331,17 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         if (userMap.MapId != targetMap.MapId ||
             (targetMap.Position - userMap.Position).Length() > maxRange + 0.01f)
         {
-            message = Loc.GetString("rmc-brute-launcher-out-of-range");
+            messageId = OutOfRange;
             return false;
         }
 
         if (!_examine.InRangeUnOccluded(user, target, maxRange, uid => uid == user || uid == target))
         {
-            message = Loc.GetString("rmc-brute-launcher-target-obscured");
+            messageId = TargetObscured;
             return false;
         }
 
-        message = string.Empty;
+        messageId = default;
         return true;
     }
 
@@ -277,9 +360,21 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         return _tag.HasAnyTag(target, StructureTag, WallTag);
     }
 
+    private bool IsWielded(EntityUid launcher)
+    {
+        return !TryComp(launcher, out WieldableComponent? wieldable) || wieldable.Wielded;
+    }
+
+    private bool HasAmmo(EntityUid launcher)
+    {
+        var ev = new GetAmmoCountEvent();
+        RaiseLocalEvent(launcher, ref ev);
+        return ev.Count > 0;
+    }
+
     private void OnProjectileHit(Entity<RMCBruteProjectileComponent> projectile, ref AfterProjectileHitEvent args)
     {
-        Prime(projectile);
+        Prime(projectile, _transform.GetMapCoordinates(args.Target));
     }
 
     private void OnProjectileFixedDistanceStop(Entity<RMCBruteProjectileComponent> projectile, ref ProjectileFixedDistanceStopEvent args)
@@ -287,25 +382,33 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         Prime(projectile);
     }
 
-    private void Prime(Entity<RMCBruteProjectileComponent> projectile)
+    private void Prime(Entity<RMCBruteProjectileComponent> projectile, MapCoordinates? targetCoordinates = null)
     {
         if (projectile.Comp.Primed)
             return;
 
         projectile.Comp.Primed = true;
 
-        var origin = _transform.GetMapCoordinates(projectile.Owner);
+        var direction = GetWaveDirection(projectile.Comp.LastDirection);
+        var origin = targetCoordinates ?? _transform.GetMapCoordinates(projectile.Owner);
         var centered = new MapCoordinates(
             new Vector2(MathF.Floor(origin.Position.X) + 0.5f, MathF.Floor(origin.Position.Y) + 0.5f),
             origin.MapId);
-        var forward = ToTileVector(projectile.Comp.LastDirection.GetDir());
-        var right = new Vector2i(forward.Y, -forward.X);
-        var seen = new HashSet<Vector2i>();
+
+        if (targetCoordinates is { })
+        {
+            var impactOffset = GetAngleTargetOffset(direction, 1);
+            centered = centered.Offset(new Vector2(-impactOffset.X, -impactOffset.Y));
+        }
+
+        var seen = new HashSet<Vector2i> { Vector2i.Zero };
+        var wave = new BruteWaveState(projectile.Comp.StructureDamage);
 
         for (var i = 0; i <= projectile.Comp.MaxDistance; i++)
         {
             var row = i;
-            Timer.Spawn(TimeSpan.FromSeconds(projectile.Comp.RowDelay * row), () => DetonateRow(projectile.Comp, centered, forward, right, row, seen));
+            var tiles = GetWaveRow(projectile.Comp, direction, row);
+            Timer.Spawn(TimeSpan.FromSeconds(projectile.Comp.RowDelay * row), () => DetonateRow(projectile.Comp, centered, tiles, seen, wave));
         }
 
         QueueDel(projectile.Owner);
@@ -314,26 +417,13 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
     private void DetonateRow(
         RMCBruteProjectileComponent component,
         MapCoordinates origin,
-        Vector2i forward,
-        Vector2i right,
-        int row,
-        HashSet<Vector2i> seen)
+        List<BruteWaveTile> tiles,
+        HashSet<Vector2i> seen,
+        BruteWaveState wave)
     {
-        var center = forward * row;
-        DetonateTile(component, origin, center, false, seen);
-
-        var maxWidth = row == 1 || row == component.MaxDistance ? 1 : 2;
-        for (var width = 1; width <= maxWidth; width++)
+        foreach (var tile in tiles)
         {
-            var edge = width == maxWidth;
-            DetonateTile(component, origin, center + right * width, edge, seen);
-            DetonateTile(component, origin, center - right * width, edge, seen);
-
-            if (row <= 2)
-                continue;
-
-            DetonateTile(component, origin, center + right * width + forward, edge, seen);
-            DetonateTile(component, origin, center - right * width + forward, edge, seen);
+            DetonateTile(component, origin, tile.Offset, tile.Edge, seen, wave);
         }
     }
 
@@ -342,39 +432,51 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         MapCoordinates origin,
         Vector2i offset,
         bool edge,
-        HashSet<Vector2i> seen)
+        HashSet<Vector2i> seen,
+        BruteWaveState wave)
     {
         if (!seen.Add(offset))
             return;
 
         var coordinates = new MapCoordinates(origin.Position + new Vector2(offset.X, offset.Y), origin.MapId);
-        var damageAmount = edge
-            ? _random.Next(component.EdgeLowerDamage, component.EdgeUpperDamage + 1)
-            : component.StructureDamage;
-        var damage = new DamageSpecifier
-        {
-            DamageDict =
-            {
-                ["Structural"] = damageAmount,
-            },
-        };
+        // CM13 stores this on the ammo datum. Keep the same wave-local damage state without leaking between shots.
+        if (edge)
+            wave.StructureDamage = _random.Next(component.EdgeLowerDamage, component.EdgeUpperDamage + 1);
 
+        var damageAmount = wave.StructureDamage;
         foreach (var damageable in _lookup.GetEntitiesInRange<DamageableComponent>(coordinates, 0.45f))
         {
             if (!IsWaveStructure(damageable.Owner))
                 continue;
 
+            var effectiveDamage = GetStructureDamage(component, damageable.Owner, damageAmount);
+            var damage = new DamageSpecifier
+            {
+                DamageDict =
+                {
+                    ["Structural"] = effectiveDamage,
+                },
+            };
+
             _damageable.TryChangeDamage(damageable.Owner, damage, true, damageable: damageable.Comp);
         }
 
+        foreach (var wall in _lookup.GetEntitiesInRange<RMCWallExplosionDeletableComponent>(coordinates, 0.45f))
+        {
+            if (IsWaveStructure(wall.Owner) && !HasComp<DamageableComponent>(wall.Owner))
+                QueueDel(wall.Owner);
+        }
+
+        var spawnCoordinates = _transform.ToCoordinates(coordinates);
+
         if (_random.Prob(component.FireChance))
-            Spawn(component.FirePrototype, coordinates);
+            SpawnAtPosition(component.FirePrototype, spawnCoordinates);
 
         if (_random.Prob(component.SparkChance))
-            Spawn(component.SparkPrototype, coordinates);
+            SpawnAtPosition(component.SparkPrototype, spawnCoordinates);
 
         if (_random.Prob(component.SmokeChance))
-            Spawn(component.SmokePrototype, coordinates);
+            SpawnAtPosition(component.SmokePrototype, spawnCoordinates);
 
         ThrowEntities(component, origin, coordinates, offset);
     }
@@ -383,6 +485,37 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
     {
         return !TerminatingOrDeleted(target) &&
                _tag.HasAnyTag(target, StructureTag, WallTag);
+    }
+
+    private float GetStructureDamage(RMCBruteProjectileComponent component, EntityUid target, int damageAmount)
+    {
+        var damage = (float) damageAmount;
+        if (_tag.HasTag(target, WallTag))
+        {
+            damage *= component.WallDamageMultiplier;
+        }
+        else if (TryComp(target, out DoorComponent? door))
+        {
+            damage *= component.DoorDamageMultiplier;
+            if (IsDoorOpenForExplosion(door))
+                damage *= component.OpenDoorDamageMultiplier;
+        }
+        else if (TryComp(target, out RMCBruteStructureDamageMultiplierComponent? bruteMultiplier))
+        {
+            damage *= bruteMultiplier.Multiplier;
+        }
+
+        if (HasComp<XenoConstructComponent>(target))
+            damage *= component.ResinExplosionDamageMultiplier;
+
+        return damage;
+    }
+
+    private static bool IsDoorOpenForExplosion(DoorComponent door)
+    {
+        return door.State == DoorState.Open ||
+               door.State == DoorState.Opening && door.Partial ||
+               door.State == DoorState.Closing && !door.Partial;
     }
 
     private void ThrowEntities(RMCBruteProjectileComponent component, MapCoordinates origin, MapCoordinates coordinates, Vector2i offset)
@@ -408,7 +541,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
                 skipChance += size * component.LivingSizeSkipChance;
             }
 
-            if (_random.Prob(Math.Clamp(skipChance, 0, 1)))
+            if (_random.Prob(Math.Clamp(skipChance, 0f, 1f)))
                 continue;
 
             var entityCoordinates = _transform.GetMapCoordinates(ent.Owner);
@@ -441,8 +574,9 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             return;
 
         var back = fromMap.Offset(shotDirection.GetDir().GetOpposite().ToVec());
-        Spawn(launcher.Comp.SmokePrototype, back);
-        _audio.PlayPvs(launcher.Comp.Sound, back);
+        var backCoordinates = _transform.ToCoordinates(back);
+        SpawnAtPosition(launcher.Comp.SmokePrototype, backCoordinates);
+        _audio.PlayPvs(launcher.Comp.Sound, backCoordinates);
 
         ApplyShooterBackblast(args.User, launcher.Comp);
 
@@ -470,15 +604,60 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         _deafness.TryDeafen(user, component.DeafTime, true);
     }
 
-    private static Vector2i ToTileVector(Direction direction)
+    private static List<BruteWaveTile> GetWaveRow(RMCBruteProjectileComponent component, Vector2 direction, int row)
     {
-        var vector = direction.ToVec();
-        var x = Math.Clamp((int) MathF.Round(vector.X), -1, 1);
-        var y = Math.Clamp((int) MathF.Round(vector.Y), -1, 1);
+        var tiles = new List<BruteWaveTile>();
+        var center = GetAngleTargetOffset(direction, row);
+        tiles.Add(new BruteWaveTile(center, false));
 
-        if (x == 0 && y == 0)
-            x = 1;
+        var right = RotateDirection(direction, MathF.PI / 2);
+        var left = RotateDirection(direction, -MathF.PI / 2);
+        var diagonalRight = RotateDirection(direction, MathF.PI * 3 / 4);
+        var diagonalLeft = RotateDirection(direction, -MathF.PI * 3 / 4);
 
-        return new Vector2i(x, y);
+        var maxWidth = row == 1 || row == component.MaxDistance ? 1 : 2;
+        for (var width = 1; width <= maxWidth; width++)
+        {
+            var edge = width == maxWidth;
+
+            tiles.Add(new BruteWaveTile(center + GetAngleTargetOffset(right, width), false));
+            tiles.Add(new BruteWaveTile(center + GetAngleTargetOffset(left, width), false));
+
+            if (row <= 2)
+                continue;
+
+            tiles.Add(new BruteWaveTile(center + GetAngleTargetOffset(diagonalRight, width), edge));
+            tiles.Add(new BruteWaveTile(center + GetAngleTargetOffset(diagonalLeft, width), edge));
+        }
+
+        return tiles;
+    }
+
+    private static Vector2 GetWaveDirection(Vector2 direction)
+    {
+        return direction.LengthSquared() <= 0.01f
+            ? Vector2.UnitX
+            : Vector2.Normalize(direction);
+    }
+
+    private static Vector2i GetAngleTargetOffset(Vector2 direction, int range)
+    {
+        return new Vector2i(
+            RoundToTile(direction.X * range),
+            RoundToTile(direction.Y * range));
+    }
+
+    private static Vector2 RotateDirection(Vector2 direction, float radians)
+    {
+        var sin = MathF.Sin(radians);
+        var cos = MathF.Cos(radians);
+        return new Vector2(
+            direction.X * cos + direction.Y * sin,
+            direction.Y * cos - direction.X * sin);
+    }
+
+    private static int RoundToTile(float value)
+    {
+        return (int) MathF.Round(value, MidpointRounding.AwayFromZero);
     }
 }
