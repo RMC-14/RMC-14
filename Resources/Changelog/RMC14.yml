@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added linkladders command, which links 2 ladders together.
-    type: Add
-  id: 2675
-  time: '2025-12-14T22:23:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8718
 - author: monomethylhydrazine
   changes:
   - message: Added playtime locks to PMC, SPP, and FORECON corpsmen as well as PMC
@@ -4481,5 +4474,12 @@
   id: 3174
   time: '2026-05-01T00:18:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9715
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Powerloaders now overlay over the operator and have new buckle sounds.
+    type: Tweak
+  id: 3175
+  time: '2026-05-03T17:21:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9257
 Name: RMC14
 Order: -1
