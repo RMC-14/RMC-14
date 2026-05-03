@@ -136,8 +136,8 @@
 - type: entity
   parent: RMCMechPowerLoaderWreckage
   id: RMCMechPowerLoaderWreckageGreen
-  name: Fujin 4100 Power Loader wreckage
-  description: The wreckage of a Fujin 4100 Power Loader.
+  name: LU-43 Power loader wreckage
+  description: The wreckage of a LU-43 Power loader.
   components:
   - type: Sprite
     drawdepth: BelowMobs
