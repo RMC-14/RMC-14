@@ -8,274 +8,364 @@
   },
   "states": [
     {
-      "name": "airlock"
+      "name": "airlock",
+      "directions": 4
     },
     {
-      "name": "airtraffictower"
+      "name": "airtraffictower",
+      "directions": 4
     },
     {
-      "name": "ammo"
+      "name": "ammo",
+      "directions": 4
     },
     {
-      "name": "analysislab"
+      "name": "analysislab",
+      "directions": 4
     },
     {
-      "name": "astronics"
+      "name": "astronics",
+      "directions": 4
     },
     {
-      "name": "autodoc"
+      "name": "autodoc",
+      "directions": 4
     },
     {
-      "name": "autoopenclose"
+      "name": "autoopenclose",
+      "directions": 4
     },
     {
-      "name": "bathmens"
+      "name": "bathmens",
+      "directions": 4
     },
     {
-      "name": "bathunisex"
+      "name": "bathunisex",
+      "directions": 4
     },
     {
-      "name": "bathwomens"
+      "name": "bathwomens",
+      "directions": 4
     },
     {
-      "name": "biohazard"
+      "name": "biohazard",
+      "directions": 4
     },
     {
-      "name": "biolab"
+      "name": "biolab",
+      "directions": 4
     },
     {
-      "name": "bridge"
+      "name": "bridge",
+      "directions": 4
     },
     {
-      "name": "bulkheaddoor"
+      "name": "bulkheaddoor",
+      "directions": 4
     },
     {
-      "name": "chemlab"
+      "name": "chemlab",
+      "directions": 4
     },
     {
-      "name": "coffee"
+      "name": "coffee",
+      "directions": 4
     },
     {
-      "name": "comm"
+      "name": "comm",
+      "directions": 4
     },
     {
-      "name": "commlineconnection"
+      "name": "commlineconnection",
+      "directions": 4
     },
     {
-      "name": "confroom"
+      "name": "confroom",
+      "directions": 4
     },
     {
-      "name": "cryo"
+      "name": "cryo",
+      "directions": 4
     },
     {
-      "name": "debarkationlounge"
+      "name": "debarkationlounge",
+      "directions": 4
     },
     {
-      "name": "distpipe"
+      "name": "distpipe",
+      "directions": 4
     },
     {
-      "name": "east"
+      "name": "east",
+      "directions": 4
     },
     {
-      "name": "elevator"
+      "name": "elevator",
+      "directions": 4
     },
     {
-      "name": "escapepod"
+      "name": "escapepod",
+      "directions": 4
     },
     {
-      "name": "exhaust"
+      "name": "exhaust",
+      "directions": 4
     },
     {
-      "name": "fibreoptic"
+      "name": "fibreoptic",
+      "directions": 4
     },
     {
-      "name": "firehaz"
+      "name": "firehaz",
+      "directions": 4
     },
     {
-      "name": "firingrange"
+      "name": "firingrange",
+      "directions": 4
     },
     {
-      "name": "flightcontrol"
+      "name": "flightcontrol",
+      "directions": 4
     },
     {
-      "name": "fluidhaz"
+      "name": "fluidhaz",
+      "directions": 4
     },
     {
-      "name": "foodstorage"
+      "name": "foodstorage",
+      "directions": 4
     },
     {
-      "name": "fridge"
+      "name": "fridge",
+      "directions": 4
     },
     {
-      "name": "galley"
+      "name": "galley",
+      "directions": 4
     },
     {
-      "name": "hazard"
+      "name": "hazard",
+      "directions": 4
     },
     {
-      "name": "highrad"
+      "name": "highrad",
+      "directions": 4
     },
     {
-      "name": "highvoltage"
+      "name": "highvoltage",
+      "directions": 4
     },
     {
-      "name": "hvac"
+      "name": "hvac",
+      "directions": 4
     },
     {
-      "name": "hvacold"
+      "name": "hvacold",
+      "directions": 4
     },
     {
-      "name": "ladder"
+      "name": "ladder",
+      "directions": 4
     },
     {
-      "name": "landingzone"
+      "name": "landingzone",
+      "directions": 4
     },
     {
-      "name": "laser"
+      "name": "laser",
+      "directions": 4
     },
     {
-      "name": "lifesupport"
+      "name": "lifesupport",
+      "directions": 4
     },
     {
-      "name": "luggageclaim"
+      "name": "luggageclaim",
+      "directions": 4
     },
     {
-      "name": "maint"
+      "name": "maint",
+      "directions": 4
     },
     {
-      "name": "manualopenclose"
+      "name": "manualopenclose",
+      "directions": 4
     },
     {
-      "name": "medcryo"
+      "name": "medcryo",
+      "directions": 4
     },
     {
-      "name": "medlifesupport"
+      "name": "medlifesupport",
+      "directions": 4
     },
     {
-      "name": "medical"
+      "name": "medical",
+      "directions": 4
     },
     {
-      "name": "nonpresszerog"
+      "name": "nonpresszerog",
+      "directions": 4
     },
     {
-      "name": "nonpressag"
+      "name": "nonpressag",
+      "directions": 4
     },
     {
-      "name": "nonpressarea"
+      "name": "nonpressarea",
+      "directions": 4
     },
     {
-      "name": "north"
+      "name": "north",
+      "directions": 4
     },
     {
-      "name": "opensup"
+      "name": "opensup",
+      "directions": 4
     },
     {
-      "name": "outpatient"
+      "name": "outpatient",
+      "directions": 4
     },
     {
-      "name": "pressareaag"
+      "name": "pressareaag",
+      "directions": 4
     },
     {
-      "name": "pressarea"
+      "name": "pressarea",
+      "directions": 4
     },
     {
-      "name": "radhaz"
+      "name": "radhaz",
+      "directions": 4
     },
     {
-      "name": "radshield"
+      "name": "radshield",
+      "directions": 4
     },
     {
-      "name": "radiorad"
+      "name": "radiorad",
+      "directions": 4
     },
     {
-      "name": "reduction"
+      "name": "reduction",
+      "directions": 4
     },
     {
-      "name": "reception"
+      "name": "reception",
+      "directions": 4
     },
     {
-      "name": "refbiostorage"
+      "name": "refbiostorage",
+      "directions": 4
     },
     {
-      "name": "refchemstorage"
+      "name": "refchemstorage",
+      "directions": 4
     },
     {
-      "name": "refridgeration"
+      "name": "refridgeration",
+      "directions": 4
     },
     {
-      "name": "restrictedarea"
+      "name": "restrictedarea",
+      "directions": 4
     },
     {
-      "name": "rewire"
+      "name": "rewire",
+      "directions": 4
     },
     {
-      "name": "security"
+      "name": "security",
+      "directions": 4
     },
     {
-      "name": "south"
+      "name": "south",
+      "directions": 4
     },
     {
-      "name": "stairs"
+      "name": "stairs",
+      "directions": 4
     },
     {
-      "name": "storage"
+      "name": "storage",
+      "directions": 4
     },
     {
-      "name": "suitstorage"
+      "name": "suitstorage",
+      "directions": 4
     },
     {
-      "name": "siliconstorage"
+      "name": "siliconstorage",
+      "directions": 4
     },
     {
-      "name": "terminal"
+      "name": "terminal",
+      "directions": 4
     },
     {
-      "name": "tramline"
+      "name": "tramline",
+      "directions": 4
     },
     {
-      "name": "twilightzoneterminator"
+      "name": "twilightzoneterminator",
+      "directions": 4
     },
     {
-      "name": "water"
+      "name": "water",
+      "directions": 4
     },
     {
-      "name": "waterhaz"
+      "name": "waterhaz",
+      "directions": 4
     },
     {
-      "name": "west"
+      "name": "west",
+      "directions": 4
     },
     {
-      "name": "zerog"
+      "name": "zerog",
+      "directions": 4
     },
     {
-      "name": "0"
+      "name": "0",
+      "directions": 4
     },
     {
-      "name": "1"
+      "name": "1",
+      "directions": 4
     },
     {
-      "name": "2"
+      "name": "2",
+      "directions": 4
     },
     {
-      "name": "3"
+      "name": "3",
+      "directions": 4
     },
     {
-      "name": "4"
+      "name": "4",
+      "directions": 4
     },
     {
-      "name": "5"
+      "name": "5",
+      "directions": 4
     },
     {
-      "name": "6"
+      "name": "6",
+      "directions": 4
     },
     {
-      "name": "7"
+      "name": "7",
+      "directions": 4
     },
     {
-      "name": "8"
+      "name": "8",
+      "directions": 4
     },
     {
-      "name": "9"
+      "name": "9",
+      "directions": 4
     }
   ]
 }
