@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Server._RMC14.Damage;
 using Content.Server._RMC14.Targeting;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Explosion;
@@ -17,6 +18,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -62,6 +64,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
+    [Dependency] private readonly RMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
@@ -203,6 +206,12 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         if (TerminatingOrDeleted(target))
             return;
 
+        if (!TryValidateTarget(args.User, target, out var messageId))
+        {
+            _popup.PopupEntity(Loc.GetString(messageId), args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
+
         var coordinates = GetCoordinates(args.Coordinates);
         launcher.Comp.LockComplete = true;
         Dirty(launcher);
@@ -224,6 +233,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         if (args.Event.LockId != launcher.Comp.LockId ||
             launcher.Comp.LockTarget != target ||
             TerminatingOrDeleted(target) ||
+            !IsBruteTarget(target) ||
             !IsWielded(launcher.Owner) ||
             !HasAmmo(launcher.Owner))
         {
@@ -349,7 +359,19 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         if (!HasComp<TransformComponent>(target))
             return false;
 
-        return _tag.HasAnyTag(target, StructureTag, WallTag);
+        return _tag.HasAnyTag(target, StructureTag, WallTag) &&
+               CanBruteBreakStructure(target);
+    }
+
+    private bool CanBruteBreakStructure(EntityUid target)
+    {
+        if (HasComp<RMCWallExplosionDeletableComponent>(target))
+            return true;
+
+        return HasComp<DamageableComponent>(target) &&
+               _rmcDamageable.TryGetDestroyedAt(target, out var destroyedAt) &&
+               destroyedAt is { } threshold &&
+               threshold < FixedPoint2.MaxValue;
     }
 
     private bool IsTargetObscured(EntityUid user, EntityUid target)
