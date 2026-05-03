@@ -154,7 +154,16 @@
     sprite: _RMC14/Objects/Clothing/Head/Royal/para_beret.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Royal/para_beret.rsi
-    
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 10
+    explosionArmor: 20
+    # armor_laser = 15
+    # armor_energy = 15
+    # armor_rad = 10
+    # armor_internaldamage = 10
+
 - type: entity
   parent: RMCHeadRoyalBeret
   id: RMCHeadParaBeretLead

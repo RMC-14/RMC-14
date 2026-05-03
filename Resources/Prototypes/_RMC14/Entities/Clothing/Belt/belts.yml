@@ -1703,6 +1703,66 @@
 
 - type: entity
   parent: CMBeltBaseStorage
+  id: RMCMkXBelt
+  name: L21 pattern revolver holster
+  suffix: PVE, CO
+  description: An expensive tan leather belt designed to fit the MkX top-break revolver. Available to senior officers of the RCM by back order only.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_rcm.rsi
+    layers:
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: mkx
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: icon-front
+      map: [ "holstered" ]
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_rcm.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - RMCSpeedLoaderMateba
+      - RMCSpeedLoaderMatebaHE
+      - RMCSpeedLoaderMatebaHIAP
+      - RMCSpeedLoaderMatebaHighImpact
+      - RMCWeaponRevolverMkX
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+  - type: ItemMapper
+    spriteLayers:
+    - holstered
+    mapLayers:
+      holstered:
+        whitelist:
+          tags:
+          - Sidearm
+  - type: Tag
+    tags:
+    - RMCMkXBelt
+
+- type: entity
+  parent: CMBeltBaseStorage
   id: RMCBeltL49
   name: L28-pattern shotgun shell rig
   suffix: PVE, RCM
@@ -1835,3 +1895,6 @@
 
 - type: Tag
   id: RMCMachineGunnerRig
+
+- type: Tag
+  id: RMCMkXBelt
