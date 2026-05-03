@@ -916,7 +916,8 @@
   - PatchMSCRMC
   - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
-  # TODO Halcyon Dynamics patch
+  - PatchHalcyon
+  - PatchNovaris
   - HeadCowboyHatLightRMC
   - HeadCowboyHatDarkRMC
   - HeadBandRebelRMC
