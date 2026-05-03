@@ -7,8 +7,11 @@ using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Medical;
+using Content.Shared.PowerCell;
+using Content.Shared.PowerCell.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Serialization;
+using static Content.Shared._RMC14.Sprite.SpriteSetRenderOrderComponent;
 
 namespace Content.Shared._RMC14.Medical.Defibrillator;
 
@@ -20,6 +23,8 @@ public sealed class RMCDefibrillatorSystem : EntitySystem
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly SharedPowerCellSystem _powerCell = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
