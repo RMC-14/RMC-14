@@ -149,8 +149,8 @@
 - type: entity
   parent: RMCMechPowerLoaderWreckage
   id: RMCMechPowerLoaderWreckageBlue
-  name: Ferret Heavy Industries Mk4 Power Loader wreckage
-  description: The wreckage of a Ferret Heavy Industries Mk4 Power Loader.
+  name: LU-52 Power loader wreckage
+  description: The wreckage of a LU-52 Power loader.
   components:
   - type: Sprite
     drawdepth: BelowMobs
@@ -163,8 +163,8 @@
 - type: entity
   parent: RMCMechBase
   id: RMCMechPowerLoader
-  name: LU-50 Power Loader
-  description: The LU-50 Power Loader is a commercial mechanized exoskeleton used for lifting heavy materials and objects, first designed on October 28, 2025 by the Weston Corporation. An old but trusted design used in warehouses, constructions and military ships everywhere.
+  name: LU-50 Power loader
+  description: An old Fujin design refurbished by Weston-Yamada used in warehouses, constructions and military ships everywhere. # TODO RMC14 BETTER DESCRIPTION
   components:
   - type: PowerLoader
     skills:
@@ -188,8 +188,8 @@
 - type: entity
   parent: RMCMechPowerLoader
   id: RMCMechPowerLoaderGreen
-  name: Fujin 4100 Power Loader
-  description: The Fujin 4100 Power Loader is a commercial mechanized exoskeleton used for lifting heavy materials and objects based on the LU-50 Power Loader, first designed on October 28, 2025 by the Weston Corporation. An old but trusted design used in warehouses, constructions and military ships everywhere. This one has a signature green and yellow livery of Fujin. The label claims they make electronics and machinery, though you've never heard of them before.
+  name: LU-43 Power loader
+  description: An really old but trusted design used in warehouses, constructions and military ships everywhere. This one has a signature green and yellow livery of Fujin. The label claims they make electronics and machinery, though you’ve never heard of them before. # TODO RMC14 BETTER DESCRIPTION
   components:
   - type: Sprite
     layers:
@@ -207,8 +207,8 @@
 - type: entity
   parent: RMCMechPowerLoader
   id: RMCMechPowerLoaderBlue
-  name: Ferret Heavy Industries Mk4 Power Loader
-  description: The Ferret Heavy Industries Mk4 Power Loader is a commercial mechanized exoskeleton used for lifting heavy materials and objects based on the LU-50, first designed on October 28, 2025 by the Weston Corporation. An old but trusted design used in warehouses, constructions and military ships everywhere. This one has the signature blue and white livery of the now defunct Ferret Heavy Industries that went bankrupt in 2123.
+  name: LU-52 Power loader
+  description: A modernized design made to outdo the older models once used in fancy ports and facilities. It was built by Ferret Heavy Industries before they went bankrupt, making these units surprisingly affordable. # TODO RMC14 BETTER DESCRIPTION
   components:
   - type: Sprite
     layers:
