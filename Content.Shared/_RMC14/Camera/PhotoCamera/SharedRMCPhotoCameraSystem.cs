@@ -1,9 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
@@ -43,7 +45,7 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 
     private void OnGetItemActions(Entity<RMCPhotoCameraComponent> ent, ref GetItemActionsEvent args)
     {
-        if (!_net.IsServer) //TODO RMC14 Remove this after figuring out why action order is being mispredicted.
+        if (!_net.IsServer) //TODO RMC14 Remove this after figuring out why action order is being mispredicted(or why the server decides to swap the action order around after the first time picking up the item).
             return;
 
         args.AddAction(ref ent.Comp.AutoCenterAction, ent.Comp.AutoCenterActionId);
@@ -113,10 +115,19 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 
     private void OnPhotoExamined(Entity<RMCPhotoComponent> ent, ref ExaminedEvent args)
     {
-        foreach (var line in ent.Comp.ExamineText)
+        if (_net.IsClient)
+            RaiseNetworkEvent(new RequestStoredPhotoDescriptionEvent(GetNetEntity(ent)));
+
+        var examineText = GetExamineText(ent, args.Examiner);
+        foreach (var line in examineText)
         {
             args.PushMarkup(line, 2);
         }
+    }
+
+    protected virtual List<string> GetExamineText(RMCPhotoComponent photo, EntityUid user)
+    {
+        return photo.ExamineText;
     }
 
     private void CycleZoom(Entity<RMCPhotoCameraComponent> ent, EntityUid user)
@@ -184,6 +195,19 @@ public sealed class ReceiveStoredPhotoEvent(byte[] imageData, NetEntity photo) :
 {
     public byte[] ImageData = imageData;
     public NetEntity Photo = photo;
+}
+
+[Serializable, NetSerializable]
+public sealed class RequestStoredPhotoDescriptionEvent(NetEntity photo) : EntityEventArgs
+{
+    public NetEntity Photo = photo;
+}
+
+[Serializable, NetSerializable]
+public sealed class ReceiveStoredPhotoDescriptionEvent(NetEntity photo, List<string> examineText) : EntityEventArgs
+{
+    public NetEntity Photo = photo;
+    public List<string> ExamineText = examineText;
 }
 
 [Serializable, NetSerializable]

@@ -19,6 +19,7 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Spawners;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
@@ -47,6 +48,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         SubscribeNetworkEvent<RequestPhotoCaptureEvent>(OnRequestPhotoCapture);
         SubscribeNetworkEvent<PhotoCaptureEvent>(OnPhotoCaptured);
         SubscribeNetworkEvent<RequestStoredPhotoEvent>(OnRequestStoredPhoto);
+        SubscribeNetworkEvent<RequestStoredPhotoDescriptionEvent>(OnRequestStoredPhotoDescription);
     }
 
     private void OnRequestPhotoCapture(RequestPhotoCaptureEvent ev, EntitySessionEventArgs args)
@@ -84,6 +86,8 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
         var eyeComp = EnsureComp<EyeComponent>(eye);
         EnsureComp<RMCStaticZoomLevelComponent>(eye);
+        var timedDespawn = EnsureComp<TimedDespawnComponent>(eye);  // In case the client fails to send an image to the server.
+        timedDespawn.Lifetime = 5;
 
         var zoom = new Vector2(camera.Value.Comp.ZoomLevel, camera.Value.Comp.ZoomLevel);
         EyeSystem.SetZoom(eye, zoom, eyeComp);
@@ -176,20 +180,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
             cameraComp.PhotoPrintedAt = Timing.CurTime + cameraComp.PrintDelay;
             cameraComp.ImageData = output.ToArray();
-
-            foreach (var entity in ev.EntitiesInPhoto)
-            {
-                var uid = GetEntity(entity.Entity);
-                var name = Identity.Name(uid, EntityManager, args.SenderSession.AttachedEntity);
-
-                var description = GetVisibilityText(uid, name);
-
-                var items = entity.HeldItems.Select(GetEntity).ToList();
-                var holdingText = _rmcHands.GetExamineText(uid, uid, items);
-
-                cameraComp.EntitiesInPhoto.Add($"{description} {holdingText}".Trim());
-            }
-
+            cameraComp.EntitiesInPhoto = ev.EntitiesInPhoto.ToList();
             Dirty(camera, cameraComp);
 
             Audio.PlayPvs(cameraComp.ShutterSound, camera);
@@ -208,9 +199,46 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         RaiseNetworkEvent(new ReceiveStoredPhotoEvent(photo.ImageData, ev.Photo), args.SenderSession);
     }
 
+    private void OnRequestStoredPhotoDescription(RequestStoredPhotoDescriptionEvent ev, EntitySessionEventArgs args)
+    {
+        if (!TryComp(GetEntity(ev.Photo), out RMCPhotoComponent? photo))
+            return;
+
+        if (args.SenderSession.AttachedEntity is not { } attachedEntity)
+            return;
+
+        var examineText = GetPhotoDescription(photo.EntitiesInPhoto, attachedEntity);
+
+        RaiseNetworkEvent(new ReceiveStoredPhotoDescriptionEvent(ev.Photo, examineText), args.SenderSession);
+    }
+
+    private List<string> GetPhotoDescription(List<EntityInPhoto> entitiesInPhoto, EntityUid user)
+    {
+        List<string> photoText = new();
+        foreach (var entity in entitiesInPhoto)
+        {
+            var uid = GetEntity(entity.Entity);
+            var name = Identity.Name(uid, EntityManager, user);
+
+            var description = GetVisibilityText(uid, name);
+
+            var items = entity.HeldItems.Select(GetEntity).ToList();
+            var holdingText = _rmcHands.GetExamineText(uid, user, items);
+
+            photoText.Add($"{description} {holdingText}".Trim());
+        }
+
+        return photoText;
+    }
+
+    protected override List<string> GetExamineText(RMCPhotoComponent photo, EntityUid user)
+    {
+        return GetPhotoDescription(photo.EntitiesInPhoto, user);
+    }
+
     private string GetVisibilityText(EntityUid uid, string name)
     {
-        var text = Loc.GetString("rmc-photo-camera-entity-in-photo-entity-see", ("entity", uid));
+        var text = Loc.GetString("rmc-photo-camera-entity-in-photo-entity-see", ("name", name));
 
         if (!TryComp(uid, out DamageableComponent? damageable) ||
             !TryComp(uid, out MobThresholdsComponent? thresholds))
@@ -224,7 +252,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
             if (damageable.TotalDamage < threshold * HurtThreshold)
                 continue;
 
-            text = Loc.GetString("rmc-photo-camera-entity-in-photo-entity-see-damaged", ("entity", name));
+            text = Loc.GetString("rmc-photo-camera-entity-in-photo-entity-see-damaged", ("entity", uid), ("name", name));
             break;
         }
 
@@ -246,7 +274,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
             photoComp.ImageData = camera.ImageData;
             photoComp.RenderedBy = camera.ImageRenderedBy;
-            photoComp.ExamineText = camera.EntitiesInPhoto.ToList();
+            photoComp.EntitiesInPhoto = camera.EntitiesInPhoto.ToList();
             Dirty(photo, photoComp);
 
             camera.PhotoPrintedAt = null;

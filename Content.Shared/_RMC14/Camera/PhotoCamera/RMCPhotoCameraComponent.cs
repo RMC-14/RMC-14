@@ -105,10 +105,10 @@ public sealed partial class RMCPhotoCameraComponent : Component
     public byte[]? ImageData;
 
     /// <summary>
-    ///     The examine text that will be added to the photo.
+    ///     The entities visible on the photo being printed.
     /// </summary>
     [DataField]
-    public List<string> EntitiesInPhoto = new ();
+    public List<EntityInPhoto> EntitiesInPhoto = new ();
 
     /// <summary>
     ///     The identifier of the user that rendered the photo.

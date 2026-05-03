@@ -39,38 +39,11 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         base.Initialize();
         SubscribeNetworkEvent<TakePhotoEvent>(OnTakePhoto);
         SubscribeNetworkEvent<ReceiveStoredPhotoEvent>(OnReceivedStoredPhoto);
+        SubscribeNetworkEvent<ReceiveStoredPhotoDescriptionEvent>(OnReceivedStoredPhotoDescription);
 
         SubscribeLocalEvent<RMCPhotoCameraComponent, AfterInteractEvent>(OnAfterInteract);
-    }
 
-    private void OnAfterInteract(Entity<RMCPhotoCameraComponent> ent, ref AfterInteractEvent args)
-    {
-        if (!Timing.IsFirstTimePredicted || args.Handled)
-            return;
-
-        if (ent.Comp.PhotoPrintedAt != null)
-            return;
-
-        var world = _eye.PixelToMap(_inputManager.MouseScreenPosition);
-        if (!_map.MapExists(world.MapId))
-            return;
-
-        var coordinates = TransformSystem.ToCoordinates(world);
-        if (ent.Comp.AutoCenter)
-            coordinates = coordinates.SnapToGrid();
-
-        if (!coordinates.IsValid(EntityManager))
-            return;
-
-        if (ent.Comp.RemainingCharges <= 0)
-        {
-            if (_player.LocalEntity is { } localEntity)
-                Popup.PopupClient(Loc.GetString("rmc-photo-camera-make-photo-failed-empty", ("camera", ent)), localEntity, localEntity, PopupType.SmallCaution);
-
-            return;
-        }
-
-        RaiseNetworkEvent(new RequestPhotoCaptureEvent(GetNetCoordinates(coordinates)));
+        SubscribeLocalEvent<RMCPhotoComponent, ComponentStartup>(OnPhotoComponentStartup);
     }
 
     private void OnTakePhoto(TakePhotoEvent ev, EntitySessionEventArgs args)
@@ -103,15 +76,56 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (!TryComp(photo, out RMCPhotoComponent? photoComp))
             return;
 
-        if (!Timing.IsFirstTimePredicted)
-            return;
-
         photoComp.ImageData = ev.ImageData;
 
         if (_uiSystem.TryGetOpenUi(photo, RMCPhotoUi.Key, out PhotoBui? bui))
         {
             bui.Refresh();
         }
+    }
+
+    private void OnReceivedStoredPhotoDescription(ReceiveStoredPhotoDescriptionEvent ev, EntitySessionEventArgs args)
+    {
+        var photo = GetEntity(ev.Photo);
+        if (!TryComp(photo, out RMCPhotoComponent? photoComp))
+            return;
+
+        photoComp.ExamineText = ev.ExamineText;
+    }
+
+    private void OnAfterInteract(Entity<RMCPhotoCameraComponent> ent, ref AfterInteractEvent args)
+    {
+        if (!Timing.IsFirstTimePredicted || args.Handled)
+            return;
+
+        if (ent.Comp.PhotoPrintedAt != null)
+            return;
+
+        var world = _eye.PixelToMap(_inputManager.MouseScreenPosition);
+        if (!_map.MapExists(world.MapId))
+            return;
+
+        var coordinates = TransformSystem.ToCoordinates(world);
+        if (ent.Comp.AutoCenter)
+            coordinates = coordinates.SnapToGrid();
+
+        if (!coordinates.IsValid(EntityManager))
+            return;
+
+        if (ent.Comp.RemainingCharges <= 0)
+        {
+            if (_player.LocalEntity is { } localEntity)
+                Popup.PopupClient(Loc.GetString("rmc-photo-camera-make-photo-failed-empty", ("camera", ent)), localEntity, localEntity, PopupType.SmallCaution);
+
+            return;
+        }
+
+        RaiseNetworkEvent(new RequestPhotoCaptureEvent(GetNetCoordinates(coordinates)));
+    }
+
+    private void OnPhotoComponentStartup(Entity<RMCPhotoComponent> ent, ref ComponentStartup args)
+    {
+        RaiseNetworkEvent(new RequestStoredPhotoDescriptionEvent(GetNetEntity(ent)));
     }
 
     private void TakePhoto(Entity<EyeComponent> eye, int resolution, NetEntity camera, Vector2 zoom, PhotoZoomMode zoomMode, EntityCoordinates photoCoordinates)

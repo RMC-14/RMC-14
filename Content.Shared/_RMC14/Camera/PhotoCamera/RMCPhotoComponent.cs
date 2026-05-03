@@ -12,10 +12,16 @@ public sealed partial class RMCPhotoComponent : Component
     public string PhotoName = "Photo";
 
     /// <summary>
-    ///     The text describing who is visible in the photo.
+    ///     The examine text, used by the client to prevent having to wait for the server's identity response.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<string> ExamineText = new ();
+
+    /// <summary>
+    ///     The entities visible in the photo.
+    /// </summary>
+    [DataField]
+    public List<EntityInPhoto> EntitiesInPhoto = new ();
 
     /// <summary>
     ///     The image data, this is not networked and instead requested by a client through the <see cref="RequestStoredPhotoEvent"/> when interacting with a photo.

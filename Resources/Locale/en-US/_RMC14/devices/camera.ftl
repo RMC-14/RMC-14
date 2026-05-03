@@ -5,5 +5,5 @@ rmc-photo-camera-make-photo-failed = The camera is unable to take a photo right 
 rmc-photo-camera-make-photo-failed-empty = There isn't enough film in the {$camera} to take a photo.
 rmc-photo-camera-film-insert-failed-full = The {$camera} cannot fit more film in it!
 rmc-photo-camera-film-insert-failed-unable = You can't seem to open up the {$camera} to insert some film.
-rmc-photo-camera-entity-in-photo-entity-see = You can see [color=yellow]{$entity}[/color] in the photo.
-rmc-photo-camera-entity-in-photo-entity-see-damaged = You can see [color=yellow]{$entity}[/color] in the photo - {SUBJECT($entity)} looks hurt.
+rmc-photo-camera-entity-in-photo-entity-see = You can see [color=paleturquoise]{$name}[/color] in the photo.
+rmc-photo-camera-entity-in-photo-entity-see-damaged = You can see [color=paleturquoise]{$name}[/color] in the photo - {SUBJECT($entity)} looks hurt.
