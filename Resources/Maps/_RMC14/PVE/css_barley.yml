@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/03/2026 17:36:41
-  entityCount: 6794
+  time: 05/03/2026 23:31:50
+  entityCount: 6796
 maps:
 - 1
 grids:
@@ -34010,41 +34010,41 @@ entities:
     - type: Transform
       pos: 19.65602,-75.35781
       parent: 1
-  - uid: 4171
+  - uid: 4170
     components:
     - type: Transform
       pos: 22.501354,-82.26043
       parent: 1
-  - uid: 4172
+  - uid: 4171
     components:
     - type: Transform
       pos: 25.515917,-84.80209
       parent: 1
-  - uid: 4173
+  - uid: 4172
     components:
     - type: Transform
       pos: 28.42591,-81.27485
       parent: 1
-  - uid: 4174
+  - uid: 4173
     components:
     - type: Transform
       pos: 28.613504,-81.12902
       parent: 1
 - proto: RMCTrayEmptyPMC
   entities:
-  - uid: 4175
+  - uid: 4174
     components:
     - type: Transform
       pos: 30.388905,-80.18227
       parent: 1
-  - uid: 4176
+  - uid: 4175
     components:
     - type: Transform
       pos: 20.125,-75.430725
       parent: 1
 - proto: RMCTrayEmptyRCM
   entities:
-  - uid: 4170
+  - uid: 4176
     components:
     - type: Transform
       pos: 19.437632,-84.12055
@@ -48223,6 +48223,18 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -16.265203,-68.26304
+      parent: 1
+- proto: SpawnPointLatejoin
+  entities:
+  - uid: 6795
+    components:
+    - type: Transform
+      pos: 8.5,-64.5
+      parent: 1
+  - uid: 6796
+    components:
+    - type: Transform
+      pos: 9.5,-92.5
       parent: 1
 - proto: WeYaExperimentalToolsVendor
   entities:
