@@ -46,7 +46,6 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
     private static readonly LocId InvalidTarget = "rmc-brute-launcher-invalid-target";
     private static readonly LocId LockInterrupted = "rmc-brute-launcher-lock-interrupted";
     private static readonly LocId NoAmmo = "gun-magazine-fired-empty";
-    private static readonly LocId OutOfRange = "rmc-brute-launcher-out-of-range";
     private static readonly LocId RequiresWield = "rmc-brute-launcher-requires-wield";
     private static readonly LocId TargetObscured = "rmc-brute-launcher-target-obscured";
     private static readonly LocId Unskilled = "cm-gun-unskilled";
@@ -157,7 +156,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             return;
         }
 
-        if (!TryValidateTarget(args.User, target, launcher.Comp.MaxRange, out var messageId))
+        if (!TryValidateTarget(args.User, target, out var messageId))
         {
             args.Message = Loc.GetString(messageId);
             return;
@@ -315,20 +314,11 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         return false;
     }
 
-    private bool TryValidateTarget(EntityUid user, EntityUid target, float maxRange, out LocId messageId)
+    private bool TryValidateTarget(EntityUid user, EntityUid target, out LocId messageId)
     {
         if (!IsBruteTarget(target))
         {
             messageId = InvalidTarget;
-            return false;
-        }
-
-        var userMap = _transform.GetMapCoordinates(user);
-        var targetMap = _transform.GetMapCoordinates(target);
-        if (userMap.MapId != targetMap.MapId ||
-            (targetMap.Position - userMap.Position).Length() > maxRange + 0.01f)
-        {
-            messageId = OutOfRange;
             return false;
         }
 

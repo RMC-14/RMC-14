@@ -14,9 +14,6 @@ public sealed partial class RMCBruteLauncherComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan AimDelay = TimeSpan.FromSeconds(4);
 
-    [DataField, AutoNetworkedField]
-    public float MaxRange = 7;
-
     [DataField]
     public EntProtoId<SkillDefinitionComponent> RequiredSkill = "RMCSkillEngineer";
 
