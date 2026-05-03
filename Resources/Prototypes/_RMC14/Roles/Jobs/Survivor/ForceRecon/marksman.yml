@@ -65,6 +65,6 @@
   name: forecon marksman survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ WeaponRifleM4SPRCustom, RMCMagazineRifleM4SPRA19, RMCMagazineRifleM4SPRA19 ]
