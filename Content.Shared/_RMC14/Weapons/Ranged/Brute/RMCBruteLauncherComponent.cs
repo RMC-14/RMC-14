@@ -38,9 +38,11 @@ public sealed partial class RMCBruteLauncherComponent : Component
     [DataField, AutoNetworkedField]
     public bool LockComplete;
 
+    // Server-authoritative lock state used to clean up targeting visuals consistently.
     [DataField, AutoNetworkedField]
     public EntityUid? LockTarget;
 
+    // Prevents stale do-afters from firing after a newer lock attempt replaces them.
     [DataField]
     public uint LockId;
 }

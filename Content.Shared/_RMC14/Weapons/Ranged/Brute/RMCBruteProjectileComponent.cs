@@ -6,6 +6,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Brute;
 [RegisterComponent]
 public sealed partial class RMCBruteProjectileComponent : Component
 {
+    // M5510 wave timing and raw structure damage values.
     [DataField]
     public int MaxDistance = 7;
 
@@ -21,6 +22,7 @@ public sealed partial class RMCBruteProjectileComponent : Component
     [DataField]
     public int EdgeUpperDamage = 700;
 
+    // Convert BRUTE breakage to local damage for RMC wall-like health scales.
     [DataField]
     public int WallDamageMultiplier = 15;
 
@@ -33,6 +35,7 @@ public sealed partial class RMCBruteProjectileComponent : Component
     [DataField]
     public float ResinExplosionDamageMultiplier = 0.85f;
 
+    // These are independent per-tile rolls.
     [DataField]
     public float FireChance = 0.3f;
 
@@ -42,6 +45,7 @@ public sealed partial class RMCBruteProjectileComponent : Component
     [DataField]
     public float SmokeChance = 0.3f;
 
+    // Stores the inverse of the throw chance.
     [DataField]
     public float ThrowSkipChance = 0.2f;
 

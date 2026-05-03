@@ -122,6 +122,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        // Completed lock-on calls back into the gun system; let it pass without starting another lock-on.
         if (launcher.Comp.LockComplete)
             return;
 
@@ -131,6 +132,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             return;
         }
 
+        // Leave empty fire handling to the gun system so click feedback matches other guns.
         if (!HasAmmo(launcher.Owner))
             return;
 
@@ -241,6 +243,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
 
         CleanupTargeting(launcher);
 
+        // A monotonic id keeps stale do-afters from completing after a newer lock attempt started.
         var lockId = ++launcher.Comp.LockId;
         launcher.Comp.LockTarget = target;
         Dirty(launcher);
@@ -269,6 +272,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             NeedHand = true,
             RequireCanInteract = false,
             RangeCheck = false,
+            // Re-check ammo, wield state, and target lifetime continuously while the guided lock is visible.
             AttemptFrequency = AttemptFrequency.EveryTick,
             ForceVisible = true,
             CancelDuplicate = false,
@@ -294,6 +298,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
 
     private bool TryGetTarget(GunComponent gun, EntityCoordinates coordinates, out EntityUid target)
     {
+        // Fixed-point guns may resolve a clicked entity; otherwise look around the clicked tile.
         if (gun.Target is { } gunTarget && IsBruteTarget(gunTarget))
         {
             target = gunTarget;
@@ -365,6 +370,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         var end = _map.WorldToTile(userGrid, grid, targetMap.Position);
         var targetIsWall = _tag.HasTag(target, WallTag);
 
+        // The target wall can be opaque, but intermediate opaque walls should block lock-on.
         foreach (var tile in GetLine(start, end))
         {
             if (tile == start || (tile == end && targetIsWall))
@@ -458,6 +464,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             new Vector2(MathF.Floor(origin.Position.X) + 0.5f, MathF.Floor(origin.Position.Y) + 0.5f),
             origin.MapId);
 
+        // On impact the breach wave starts one tile before the hit turf, then walks through the target.
         if (targetCoordinates is { })
         {
             var impactOffset = GetAngleTargetOffset(direction, 1);
@@ -467,6 +474,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         var seen = new HashSet<Vector2i> { Vector2i.Zero };
         var wave = new BruteWaveState(projectile.Comp.StructureDamage);
 
+        // Spawn each row separately to keep the cascading 0.1 second breach wave.
         for (var i = 0; i <= projectile.Comp.MaxDistance; i++)
         {
             var row = i;
@@ -502,7 +510,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             return;
 
         var coordinates = new MapCoordinates(origin.Position + new Vector2(offset.X, offset.Y), origin.MapId);
-        // CM13 stores this on the ammo datum. Keep the same wave-local damage state without leaking between shots.
+        // Keep edge damage wave-local so rolls cannot leak between shots.
         if (edge)
             wave.StructureDamage = _random.Next(component.EdgeLowerDamage, component.EdgeUpperDamage + 1);
 
@@ -524,6 +532,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             _damageable.TryChangeDamage(damageable.Owner, damage, true, damageable: damageable.Comp);
         }
 
+        // Some wall-like entities are modeled as explosion-deletable rather than damageable in RMC.
         foreach (var wall in _lookup.GetEntitiesInRange<RMCWallExplosionDeletableComponent>(coordinates, 0.45f))
         {
             if (IsWaveStructure(wall.Owner) && !HasComp<DamageableComponent>(wall.Owner))
@@ -532,6 +541,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
 
         var spawnCoordinates = _transform.ToCoordinates(coordinates);
 
+        // Fire, sparks, and smoke are independent rolls, not one shared effect roll.
         if (_random.Prob(component.FireChance))
             SpawnAtPosition(component.FirePrototype, spawnCoordinates);
 
@@ -553,6 +563,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
     private float GetStructureDamage(RMCBruteProjectileComponent component, EntityUid target, int damageAmount)
     {
         var damage = (float) damageAmount;
+        // Scale RMC walls and doors separately so BRUTE breakage stays consistent.
         if (_tag.HasTag(target, WallTag))
         {
             damage *= component.WallDamageMultiplier;
@@ -597,6 +608,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             var skipChance = component.ThrowSkipChance;
             if (HasComp<MobStateComponent>(ent.Owner))
             {
+                // Larger living targets are harder to throw, stored here as an added skip chance.
                 var size = _size.TryGetSize(ent.Owner, out var foundSize)
                     ? (int) foundSize
                     : 1;
@@ -678,6 +690,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
         var diagonalRight = RotateDirection(direction, MathF.PI * 3 / 4);
         var diagonalLeft = RotateDirection(direction, -MathF.PI * 3 / 4);
 
+        // Keep narrow near/far rows and wide middle rows; diagonals only join after row two.
         var maxWidth = row == 1 || row == component.MaxDistance ? 1 : 2;
         for (var width = 1; width <= maxWidth; width++)
         {

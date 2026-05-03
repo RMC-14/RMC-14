@@ -7,6 +7,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Brute;
 [RegisterComponent]
 public sealed partial class RMCBackblastOnShootComponent : Component
 {
+    // Backblast numbers for the tile directly behind the launcher.
     [DataField]
     public DamageSpecifier Damage = new()
     {
