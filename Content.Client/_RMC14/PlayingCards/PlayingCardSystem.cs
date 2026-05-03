@@ -121,6 +121,17 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
     private void OnHandStateChanged(Entity<PlayingCardHandComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         UpdateHandSprite(ent);
+        if (_ui.TryGetOpenUi<PlayingCardHandBui>(ent.Owner, PlayingCardHandUi.Key, out var bui))
+        {
+            try
+            {
+                bui.Refresh();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error refreshing PlayingCardHandBui: {e}");
+            }
+        }
     }
 
     private void OnHandEquippedHand(Entity<PlayingCardHandComponent> ent, ref GotEquippedHandEvent args)

@@ -41,7 +41,7 @@ rmc-playing-card-deck-pickup = You pick up {$count} cards into the deck.
 # Hand of cards
 rmc-playing-card-hand-name = hand of cards
 rmc-playing-card-stack-name = stack of cards
-rmc-playing-card-hand-examine = A hand of {$count} cards:
+rmc-playing-card-hand-examine = A hand of {$count} cards.
 rmc-playing-card-hand-examine-hidden = A hand of {$count} cards, face down.
 rmc-playing-card-hand-card = - {$rank} of {$suit}
 

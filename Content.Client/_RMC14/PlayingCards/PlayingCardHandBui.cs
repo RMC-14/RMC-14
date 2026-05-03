@@ -94,11 +94,4 @@ public sealed class PlayingCardHandBui : BoundUserInterface
         _menu.OpenCenteredAt(pos);
     }
 
-    protected override void UpdateState(BoundUserInterfaceState state)
-    {
-        base.UpdateState(state);
-
-        if (state is PlayingCardHandBuiState)
-            Refresh();
-    }
 }

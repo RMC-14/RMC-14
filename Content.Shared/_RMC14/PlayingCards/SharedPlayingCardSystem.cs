@@ -22,15 +22,18 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] protected readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+
+    private readonly HashSet<Entity<PlayingCardComponent>> _cardLookup = new();
+    private readonly HashSet<Entity<PlayingCardHandComponent>> _handLookup = new();
 
     private const float AreaPickupRadius = 1f;
     private const float AreaPickupDelayPerCard = 0.1f;
@@ -264,27 +267,27 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
         // Find all cards and hands in range
         var cards = new List<EntityUid>();
-        var cardSet = _entityLookup.GetEntitiesInRange<PlayingCardComponent>(args.ClickLocation, AreaPickupRadius);
-        var handSet = _entityLookup.GetEntitiesInRange<PlayingCardHandComponent>(args.ClickLocation, AreaPickupRadius);
+        _cardLookup.Clear();
+        _handLookup.Clear();
+        _entityLookup.GetEntitiesInRange(args.ClickLocation, AreaPickupRadius, _cardLookup);
+        _entityLookup.GetEntitiesInRange(args.ClickLocation, AreaPickupRadius, _handLookup);
 
-        foreach (var card in cardSet)
+        foreach (var card in _cardLookup)
         {
             if (!_interaction.InRangeUnobstructed(args.User, card.Owner))
                 continue;
 
-            // Skip cards in containers
             if (_container.IsEntityInContainer(card.Owner))
                 continue;
 
             cards.Add(card.Owner);
         }
 
-        foreach (var hand in handSet)
+        foreach (var hand in _handLookup)
         {
             if (!_interaction.InRangeUnobstructed(args.User, hand.Owner))
                 continue;
 
-            // Skip hands in containers
             if (_container.IsEntityInContainer(hand.Owner))
                 continue;
 

@@ -7,15 +7,12 @@ namespace Content.Shared._RMC14.PlayingCards;
 [Access(typeof(SharedPlayingCardSystem))]
 public sealed partial class PlayingCardComponent : Component
 {
-    /// The suit of the card (spades, hearts, diamonds, clubs).
     [DataField, AutoNetworkedField]
     public CardSuit Suit = CardSuit.Spades;
 
-    /// The rank of the card (ace, 2-10, jack, queen, king).
     [DataField, AutoNetworkedField]
     public CardRank Rank = CardRank.Ace;
 
-    /// Whether the card is face up (showing its value) or face down.
     [DataField, AutoNetworkedField]
     public bool FaceUp = true;
 }

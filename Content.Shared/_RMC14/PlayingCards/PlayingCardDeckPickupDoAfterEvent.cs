@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.PlayingCards;
 [Serializable, NetSerializable]
 public sealed partial class PlayingCardDeckPickupDoAfterEvent : DoAfterEvent
 {
-    [DataField("entities", required: true)]
+    [DataField(required: true)]
     public IReadOnlyList<NetEntity> Entities = default!;
 
     private PlayingCardDeckPickupDoAfterEvent()
