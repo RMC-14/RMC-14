@@ -703,7 +703,7 @@
 - type: entity
   parent: CMPlatformBaseDestructible
   id: RMCPlatformLadder
-  name: Ladder
+  name: ladder
   description: A simple wooden ladder.
   components:
   - type: Sprite
