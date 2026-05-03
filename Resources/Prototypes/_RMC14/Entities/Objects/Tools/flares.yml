@@ -134,13 +134,13 @@
   - type: PointLight
     color: "#AACCAA"
   - type: FlareSignal
-  - type: ExpendableLight
   - type: GenericVisualizer
     visuals:
       enum.SignalFlareVisuals.BeaconState:
         enum.ExpendableLightVisualLayers.Base:
           True: { state: flare-on }
           False: { state: flare }
+  - type: ExpendableLight
     glowDuration: 5
     phaseOneDuration: 150
     phaseTwoDuration: 0
