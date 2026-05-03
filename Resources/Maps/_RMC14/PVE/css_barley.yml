@@ -135,8 +135,10 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: Barley
+      name: CSS Barley
     - type: Transform
+    - type: BecomesStation
+      id: CSSBarley
     - type: Map
       mapPaused: True
     - type: GridTree
@@ -1879,8 +1881,6 @@ entities:
             id: u
           decals:
             178: 20.25199,9.90531
-    - type: BecomesStation
-      id: StationNameHere
     - type: MapAtmosphere
       space: False
       mixture:
