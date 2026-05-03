@@ -76,6 +76,7 @@
     - showareas
     - dumpentities
     - showaccessreaders
+    - entcompare
 
 - Flags: MAPPING
   Commands:
