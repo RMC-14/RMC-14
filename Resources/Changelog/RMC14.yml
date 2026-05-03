@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: Added playtime locks to PMC, SPP, and FORECON corpsmen as well as PMC
-      and SPP OW. They now require 3h of medical jobs and 3h of Executive Officer
-      time respectively.
-    type: Add
-  id: 2676
-  time: '2025-12-14T22:27:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8723
 - author: CatAndHats
   changes:
   - message: Shotgun Shell Loadrigs have now got more detailed visuals to indicate
@@ -4481,5 +4472,13 @@
   id: 3175
   time: '2026-05-03T17:21:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9257
+- author: SharkSnake98
+  changes:
+  - message: Added 2 new patches for Halcyon & Novaris. They can be accessed in the
+      civilian loadout tab.
+    type: Add
+  id: 3176
+  time: '2026-05-03T23:35:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9560
 Name: RMC14
 Order: -1
