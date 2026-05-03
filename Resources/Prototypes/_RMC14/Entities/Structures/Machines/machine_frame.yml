@@ -104,3 +104,53 @@
   components:
   - type: Sprite
     state: 0
+
+- type: entity
+  parent: UnfinishedMachineFrame
+  id: CMMachineFrameUnfinished
+  suffix: RMC14, Unfinished
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/parts.rsi
+  - type: Construction
+    containers:
+    - machine_board
+    - machine_parts
+    graph: CMMachineFrame
+    node: missingWires
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
+  - type: Corrodible
+    isCorrodible: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: CMMachineFrame
+  id: CMMachineFrameUnanchored
+  suffix: RMC14, Ready, Unanchored
+  components:
+  - type: Transform
+    anchored: false
+
+- type: entity
+  parent: CMMachineFrameUnfinished
+  id: CMMachineFrameUnfinishedUnanchored
+  suffix: RMC14, Unfinished, Unanchored
+  components:
+  - type: Transform
+    anchored: false

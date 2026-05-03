@@ -1,0 +1,39 @@
+﻿- type: entity
+  id: RMCSlotMachine
+  name: slot machine
+  description: A slot machine. Let's go gambling!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1,-0.4,-0.4,0.45"
+        density: 190
+        layer:
+        - MobMask
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Structures/Props/slot_machine.rsi
+    state: slotmachine_idle
+
+- type: entity
+  parent: RMCSlotMachine
+  id: RMCSlotMachineOff
+  suffix: "Off"
+  components:
+  - type: Sprite
+    state: slotmachine_off
+
+- type: entity
+  parent: RMCSlotMachine
+  id: RMCSlotMachineBroken
+  suffix: "Broken"
+  components:
+  - type: Sprite
+    state: slotmachine_broken
