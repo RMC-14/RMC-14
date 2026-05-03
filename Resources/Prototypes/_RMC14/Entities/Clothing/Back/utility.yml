@@ -37,7 +37,7 @@
 
 # Fuel tank
 - type: entity
-  parent: ClothingBackpack
+  parent: Clothing
   id: RMCWeldingKit
   name: welding kit
   description: A heavy-duty, portable welding fluid carrier.
@@ -50,6 +50,7 @@
   - type: ClothingIgnoreBlockBackpack
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/welderpack.rsi
+    state: icon
   - type: ExaminableSolution
     solution: tank
   - type: SolutionContainerManager
