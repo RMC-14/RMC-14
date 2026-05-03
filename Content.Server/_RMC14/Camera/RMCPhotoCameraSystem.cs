@@ -3,12 +3,16 @@ using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Mentor;
 using Content.Server.Administration.Managers;
-using Content.Server.Examine;
 using Content.Server.Players.JobWhitelist;
 using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.Camera.PhotoCamera;
+using Content.Shared._RMC14.Hands;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Robust.Server.Containers;
@@ -25,13 +29,15 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 {
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly ExamineSystem _examine = default!;
     [Dependency] private readonly JobWhitelistManager _jobWhitelist = default!;
     [Dependency] private readonly MentorManager _mentorManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
     private const int MaxSize = 256 * 1024; // 256 KB
+    private const float HurtThreshold = 0.25f;
+
     private static readonly ProtoId<JobPrototype> CommandingOfficerJob = "CMCommandingOfficer";
     private static readonly ProtoId<JobPrototype> ProvostInspectorJob = "CMProvostInspector";
 
@@ -64,7 +70,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (!coordinates.IsValid(EntityManager))
             return;
 
-        if (!_examine.InRangeUnOccluded(sessionEntity, coordinates, camera.Value.Comp.Range))
+        if (!Examine.InRangeUnOccluded(sessionEntity, coordinates, camera.Value.Comp.Range))
             return;
 
         var cameraCoordinates = TransformSystem.GetMoverCoordinates(sessionEntity);
@@ -170,6 +176,20 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
             cameraComp.PhotoPrintedAt = Timing.CurTime + cameraComp.PrintDelay;
             cameraComp.ImageData = output.ToArray();
+
+            foreach (var entity in ev.EntitiesInPhoto)
+            {
+                var uid = GetEntity(entity.Entity);
+                var name = Identity.Name(uid, EntityManager, args.SenderSession.AttachedEntity);
+
+                var description = GetVisibilityText(uid, name);
+
+                var items = entity.HeldItems.Select(GetEntity).ToList();
+                var holdingText = _rmcHands.GetExamineText(uid, uid, items);
+
+                cameraComp.EntitiesInPhoto.Add($"{description} {holdingText}".Trim());
+            }
+
             Dirty(camera, cameraComp);
 
             Audio.PlayPvs(cameraComp.ShutterSound, camera);
@@ -188,6 +208,29 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         RaiseNetworkEvent(new ReceiveStoredPhotoEvent(photo.ImageData, ev.Photo), args.SenderSession);
     }
 
+    private string GetVisibilityText(EntityUid uid, string name)
+    {
+        var text = Loc.GetString("rmc-photo-camera-entity-in-photo-entity-see", ("entity", uid));
+
+        if (!TryComp(uid, out DamageableComponent? damageable) ||
+            !TryComp(uid, out MobThresholdsComponent? thresholds))
+            return text;
+
+        foreach (var (threshold, state) in thresholds.Thresholds)
+        {
+            if (state != MobState.Dead)
+                continue;
+
+            if (damageable.TotalDamage < threshold * HurtThreshold)
+                continue;
+
+            text = Loc.GetString("rmc-photo-camera-entity-in-photo-entity-see-damaged", ("entity", name));
+            break;
+        }
+
+        return text;
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -203,11 +246,14 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 
             photoComp.ImageData = camera.ImageData;
             photoComp.RenderedBy = camera.ImageRenderedBy;
+            photoComp.ExamineText = camera.EntitiesInPhoto.ToList();
             Dirty(photo, photoComp);
 
             camera.PhotoPrintedAt = null;
             camera.ImageData = null;
             camera.RemainingCharges -= 1;
+            camera.ImageRenderedBy = null;
+            camera.EntitiesInPhoto.Clear();
             Dirty(uid, camera);
 
             if (_container.TryGetContainingContainer(uid, out var container))

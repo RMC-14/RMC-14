@@ -17,6 +17,7 @@ namespace Content.Shared._RMC14.Camera.PhotoCamera;
 public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 {
     [Dependency] protected readonly SharedAudioSystem Audio = default!;
+    [Dependency] protected readonly ExamineSystemShared Examine = default!;
     [Dependency] protected readonly SharedEyeSystem EyeSystem = default!;
     [Dependency] protected readonly SharedHandsSystem Hands = default!;
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
@@ -32,15 +33,17 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPhotoCameraComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<RMCPhotoCameraComponent, CycleCameraZoomActionEvent>(OnCycleZoom);
-        SubscribeLocalEvent<RMCPhotoCameraComponent, ToggleCameraAutoCenter>(OnToggleAutoFocus);
+        SubscribeLocalEvent<RMCPhotoCameraComponent, ToggleCameraAutoCenter>(OnToggleAutoCenter);
         SubscribeLocalEvent<RMCPhotoCameraComponent, UniqueActionEvent>(OnUniqueAction);
         SubscribeLocalEvent<RMCPhotoCameraComponent, ExaminedEvent>(OnCameraExamined);
         SubscribeLocalEvent<RMCPhotoCameraComponent, InteractUsingEvent>(OnInteractUsing);
+
+        SubscribeLocalEvent<RMCPhotoComponent, ExaminedEvent>(OnPhotoExamined);
     }
 
     private void OnGetItemActions(Entity<RMCPhotoCameraComponent> ent, ref GetItemActionsEvent args)
     {
-        if (!_net.IsServer) //TODO Remove this after figuring out why action order is being mispredicted.
+        if (!_net.IsServer) //TODO RMC14 Remove this after figuring out why action order is being mispredicted.
             return;
 
         args.AddAction(ref ent.Comp.AutoCenterAction, ent.Comp.AutoCenterActionId);
@@ -56,7 +59,7 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnToggleAutoFocus(Entity<RMCPhotoCameraComponent> ent, ref ToggleCameraAutoCenter args)
+    private void OnToggleAutoCenter(Entity<RMCPhotoCameraComponent> ent, ref ToggleCameraAutoCenter args)
     {
         ent.Comp.AutoCenter = !ent.Comp.AutoCenter;
         Dirty(ent);
@@ -108,6 +111,14 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
             QueueDel(args.Used);
     }
 
+    private void OnPhotoExamined(Entity<RMCPhotoComponent> ent, ref ExaminedEvent args)
+    {
+        foreach (var line in ent.Comp.ExamineText)
+        {
+            args.PushMarkup(line, 2);
+        }
+    }
+
     private void CycleZoom(Entity<RMCPhotoCameraComponent> ent, EntityUid user)
     {
         ent.Comp.ZoomMode++;
@@ -120,6 +131,11 @@ public abstract class SharedRmcPhotoCameraSystem : EntitySystem
 
         Popup.PopupClient(Loc.GetString("rmc-photo-camera-cycle-zoom", ("camera", ent.Owner), ("captureSize", captureSize)), user, user);
         Audio.PlayPredicted(ent.Comp.CycleZoomSound, user, user);
+    }
+
+    protected float GetPhotoAreaRange(PhotoZoomMode zoomMode)
+    {
+        return (float) (((float)zoomMode * 2 + 1) / 2 * Math.Sqrt(2));
     }
 
     protected bool TryGetCamera(EntityUid uid, [NotNullWhen(true)] out Entity<RMCPhotoCameraComponent>? camera)
@@ -150,10 +166,11 @@ public sealed class TakePhotoEvent(NetEntity camera, Vector2 zoom, PhotoZoomMode
 }
 
 [Serializable, NetSerializable]
-public sealed class PhotoCaptureEvent(byte[] imageData, NetEntity camera) : EntityEventArgs
+public sealed class PhotoCaptureEvent(byte[] imageData, NetEntity camera,  List<EntityInPhoto> entitiesInPhoto) : EntityEventArgs
 {
     public byte[] ImageData = imageData;
     public NetEntity Camera = camera;
+    public List<EntityInPhoto> EntitiesInPhoto = entitiesInPhoto;
 }
 
 [Serializable, NetSerializable]
@@ -168,3 +185,6 @@ public sealed class ReceiveStoredPhotoEvent(byte[] imageData, NetEntity photo) :
     public byte[] ImageData = imageData;
     public NetEntity Photo = photo;
 }
+
+[Serializable, NetSerializable]
+public readonly record struct EntityInPhoto(NetEntity Entity, List<NetEntity> HeldItems);

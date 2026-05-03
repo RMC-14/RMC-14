@@ -252,12 +252,12 @@
   parent: ActionMarineToggleable
   id: RMCActionToggleCameraAutoCenter
   name: Toggle Auto Center
-  description: Whether your photo will be focused on the center of the targeted tile.
+  description: Toggles whether your photo will be focused on the center of the targeted tile.
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi #TODO find a better icon for this action.
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi #TODO RMC14 find a better icon for this action.
       state: autofire
     useDelay: 0.25
   - type: InstantAction

@@ -5,11 +5,15 @@ using System.Threading.Tasks;
 using Content.Client._RMC14.NewPlayer;
 using Content.Client._RMC14.Photo;
 using Content.Shared._RMC14.Camera.PhotoCamera;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -19,6 +23,7 @@ namespace Content.Client._RMC14.Camera;
 public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
 {
     [Dependency] private readonly IClyde _clyde = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
@@ -26,7 +31,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
-    private (IClydeViewport viewport, NetEntity camera)? _pendingCapture;
+    private (IClydeViewport viewport, NetEntity camera, List<EntityInPhoto> entities)? _pendingCapture;
     private bool _skipFrame;
 
     public override void Initialize()
@@ -77,17 +82,19 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (!TryComp(eye, out EyeComponent? eyeComp))
             return;
 
+        var photoCoordinates = TransformSystem.GetMoverCoordinates(eye.Value).Offset(eyeComp.Offset);
+
         if (_player.LocalEntity is { } localEntity)
         {
             var takingPhoto = EnsureComp<RMCTakingPhotoComponent>(localEntity);
-            takingPhoto.PhotoCoordinates = TransformSystem.GetMoverCoordinates(eye.Value).Offset(eyeComp.Offset);
+            takingPhoto.PhotoCoordinates = photoCoordinates;
             takingPhoto.ZoomMode = ev.ZoomMode;
             takingPhoto.Offset = eyeComp.Offset;
 
             _newPlayerVisualizer.UpdateAllAppearance();
         }
 
-        TakePhoto((eye.Value, eyeComp), cameraComp.Resolution, ev.Camera, ev.Zoom);
+        TakePhoto((eye.Value, eyeComp), cameraComp.Resolution, ev.Camera, ev.Zoom, ev.ZoomMode, photoCoordinates);
     }
 
     private void OnReceivedStoredPhoto(ReceiveStoredPhotoEvent ev, EntitySessionEventArgs args)
@@ -107,7 +114,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         }
     }
 
-    private void TakePhoto(Entity<EyeComponent> eye, int resolution, NetEntity camera, Vector2 zoom)
+    private void TakePhoto(Entity<EyeComponent> eye, int resolution, NetEntity camera, Vector2 zoom, PhotoZoomMode zoomMode, EntityCoordinates photoCoordinates)
     {
         EyeSystem.SetZoom(eye, zoom);
 
@@ -116,7 +123,60 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         viewport.AutomaticRender = true;
         viewport.Eye = eye.Comp.Eye;
 
-        _pendingCapture = (viewport, camera);
+        var photoArea = GetPhotoAreaRange(zoomMode);
+        var visibleEntities = GetVisibleEntities(eye, photoCoordinates, photoArea); // Doing this here instead of on the server so it's more accurate.
+
+        List<EntityInPhoto> entitiesInPhoto = new();
+        foreach (var entity in visibleEntities)
+        {
+            if (!TryComp(entity, out HandsComponent? hands))
+                continue;
+
+            var heldItems = new List<NetEntity>();
+            foreach (var hand in hands.Hands)
+            {
+                var heldItem = Hands.GetHeldItem((entity, hands), hand.Key);
+                if (heldItem == null)
+                    continue;
+
+                heldItems.Add(GetNetEntity(heldItem.Value));
+            }
+
+            entitiesInPhoto.Add(new EntityInPhoto(GetNetEntity(entity), heldItems));
+        }
+
+        _pendingCapture = (viewport, camera, entitiesInPhoto);
+    }
+
+    private HashSet<EntityUid> GetVisibleEntities(Entity<EyeComponent> eye, EntityCoordinates photoCoords, float range)
+    {
+        var visibleEntities = new HashSet<EntityUid>();
+        photoCoords.TryDistance(EntityManager, TransformSystem.GetMoverCoordinates(eye), out var cameraDistance);
+        var occludeRange = range + cameraDistance;
+
+        foreach (var marine in _entityLookup.GetEntitiesInRange<MarineComponent>(photoCoords, range, LookupFlags.Dynamic | LookupFlags.Uncontained))
+        {
+            if (!photoCoords.TryDistance(EntityManager, TransformSystem.GetMoverCoordinates(marine), out var distance) || distance > range)
+                continue;
+
+            if (!Examine.InRangeUnOccluded(eye, marine, occludeRange))
+                continue;
+
+            visibleEntities.Add(marine);
+        }
+
+        foreach (var xeno in _entityLookup.GetEntitiesInRange<XenoComponent>(photoCoords, range, LookupFlags.Dynamic | LookupFlags.Uncontained))
+        {
+            if (!photoCoords.TryDistance(EntityManager, TransformSystem.GetMoverCoordinates(xeno), out var distance) || distance > range)
+                continue;
+
+            if (!Examine.InRangeUnOccluded(eye, xeno, occludeRange))
+                continue;
+
+            visibleEntities.Add(xeno);
+        }
+
+        return visibleEntities;
     }
 
     public bool TryGetPhoto(EntityUid photo, [NotNullWhen(true)] out OwnedTexture? photoTexture, out string photoName)
@@ -167,7 +227,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         if (takingPhoto.PhotoCoordinates is  not { } photoCoordinates)
             return false;
 
-        var photoCaptureDistance = ((float)takingPhoto.ZoomMode * 2 + 1) / 2 * Math.Sqrt(2) + 1.5f;
+        var photoCaptureDistance = GetPhotoAreaRange(takingPhoto.ZoomMode) + 1.5f;
         if (!photoCoordinates.TryDistance(EntityManager, TransformSystem.GetMoverCoordinates(uid), out var distance) || distance > photoCaptureDistance)
             return false;
 
@@ -190,7 +250,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
         _skipFrame = false;
         _pendingCapture = null;
 
-        var (viewport, camera) = pending;
+        var (viewport, camera, entitiesInPhoto) = pending;
 
         viewport.RenderTarget.CopyPixelsToMemory<Rgba32>(image =>
         {
@@ -203,7 +263,7 @@ public sealed class RMCPhotoCameraSystem : SharedRmcPhotoCameraSystem
                     using var output = new MemoryStream();
                     img.SaveAsPng(output);
 
-                    RaiseNetworkEvent(new PhotoCaptureEvent(output.ToArray(), camera));
+                    RaiseNetworkEvent(new PhotoCaptureEvent(output.ToArray(), camera, entitiesInPhoto));
                 }
             });
 

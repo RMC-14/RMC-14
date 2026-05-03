@@ -75,13 +75,13 @@ public sealed partial class RMCPhotoCameraComponent : Component
     public EntityUid? CycleZoomAction;
 
     /// <summary>
-    ///     Prototype of the ID of the action used to toggle the camera's autofocus.
+    ///     Prototype of the ID of the action used to toggle the camera's auto center mode.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId AutoCenterActionId = "RMCActionToggleCameraAutoCenter";
 
     /// <summary>
-    ///     The autofocus action id.
+    ///     The auto center action id.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? AutoCenterAction;
@@ -103,6 +103,12 @@ public sealed partial class RMCPhotoCameraComponent : Component
     /// </summary>
     [DataField]
     public byte[]? ImageData;
+
+    /// <summary>
+    ///     The examine text that will be added to the photo.
+    /// </summary>
+    [DataField]
+    public List<string> EntitiesInPhoto = new ();
 
     /// <summary>
     ///     The identifier of the user that rendered the photo.
