@@ -61,8 +61,6 @@
       - cost: 4000
         crate: RMCCrateBoxMagazineSmartPistol
       - cost: 2000
-        crate: RMCCrateBoxMagazineBreaching
-      - cost: 2000
         crate: RMCCrateBoxMagazineM54CE2
       - cost: 2000
         crate: RMCCrateBoxMagazineM44Revolver
@@ -339,8 +337,6 @@
         crate: RMCCrateM34
       - cost: 3000
         crate: RMCCrateMOU53
-      - cost: 3000
-        crate: RMCCrateXM51
       - cost: 4000
         crate: RMCCrateM85A1
       - cost: 6000
