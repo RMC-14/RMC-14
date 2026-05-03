@@ -23,8 +23,8 @@ public sealed partial class Nutritious : RMCChemicalEffect
         if (mobState.IsDead(args.TargetEntity))
             return;
 
-        var hungerSys = System<HungerSystem>(args);
+        var hunger = System<HungerSystem>(args);
         var updatedFactor = NutrimentFactor + Level;
-        hungerSys.ModifyHunger(args.TargetEntity, updatedFactor * Potency); // Half because chemicals tick every second
+        hunger.ModifyHunger(args.TargetEntity, updatedFactor * Potency); // Half because chemicals tick every second
     }
 }

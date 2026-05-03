@@ -23,30 +23,30 @@ public sealed partial class Ketogenic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var hungerSys = System<HungerSystem>(args);
-        hungerSys.ModifyHunger(args.TargetEntity, PotencyPerSecond * -5);
+        var hunger = System<HungerSystem>(args);
+        hunger.ModifyHunger(args.TargetEntity, PotencyPerSecond * -5);
         // TODO RMC14 M.overeatduration = 0
 
-        var bloodstream = System<SharedRMCBloodstreamSystem>(args);
-        var alcoholRemoved = bloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
+        var rmcBloodstream = System<SharedRMCBloodstreamSystem>(args);
+        var alcoholRemoved = rmcBloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
         if (!alcoholRemoved)
             return;
 
-        var drunkSys = System<SharedDrunkSystem>(args);
-        drunkSys.TryApplyDrunkenness(args.TargetEntity, PotencyPerSecond * 5);
+        var drunk = System<SharedDrunkSystem>(args);
+        drunk.TryApplyDrunkenness(args.TargetEntity, PotencyPerSecond * 5);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var hungerSys = System<HungerSystem>(args);
-        hungerSys.ModifyHunger(args.TargetEntity, PotencyPerSecond * -5);
+        var hunger = System<HungerSystem>(args);
+        hunger.ModifyHunger(args.TargetEntity, PotencyPerSecond * -5);
 
         TryChangeDamage(args, PoisonType, potency);
 
         if (IsHumanoid(args) && ProbHundred(2.5 * Potency))
         {
-            var rmcVomitSys = System<RMCVomitSystem>(args);
-            rmcVomitSys.StartVomit(args.TargetEntity);
+            var rmcVomit = System<RMCVomitSystem>(args);
+            rmcVomit.StartVomit(args.TargetEntity);
         }
     }
 

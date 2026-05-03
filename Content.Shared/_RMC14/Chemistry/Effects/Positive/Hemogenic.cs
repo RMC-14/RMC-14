@@ -28,11 +28,11 @@ public sealed partial class Hemogenic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var hungerSys = System<HungerSystem>(args);
-        if (!TryComp<HungerComponent>(args, out var hungerComponent) || hungerSys.GetHunger(hungerComponent) < 200)
+        var hunger = System<HungerSystem>(args);
+        if (!TryComp<HungerComponent>(args, out var hungerComponent) || hunger.GetHunger(hungerComponent) < 200)
             return;
 
-        hungerSys.ModifyHunger(args.TargetEntity, -PotencyPerSecond); // TODO RMC14 Yuatja get no hunger drain.
+        hunger.ModifyHunger(args.TargetEntity, -PotencyPerSecond); // TODO RMC14 No hunger drain for Yuatjas.
 
         if (TryComp<BloodstreamComponent>(args, out var bloodstreamComponent))
         {
@@ -58,7 +58,7 @@ public sealed partial class Hemogenic : RMCChemicalEffect
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var hungerSystem = System<HungerSystem>(args);
-        hungerSystem.ModifyHunger(args.TargetEntity, PotencyPerSecond * -5);
+        var hunger = System<HungerSystem>(args);
+        hunger.ModifyHunger(args.TargetEntity, PotencyPerSecond * -5);
     }
 }

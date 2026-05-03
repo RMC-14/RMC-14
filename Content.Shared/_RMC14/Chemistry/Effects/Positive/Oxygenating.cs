@@ -29,8 +29,8 @@ public sealed partial class Oxygenating : RMCChemicalEffect
         var amount = Potency >= 3 ? 99999 : potency;
         TryHealDamageGroup(args, AirlossGroup, amount);
 
-        var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
-        bloodstream.RemoveBloodstreamChemical(args.TargetEntity, Lexorin, potency);
+        var rmcBloodstream = System<SharedRMCBloodstreamSystem>(args);
+        rmcBloodstream.RemoveBloodstreamChemical(args.TargetEntity, Lexorin, potency);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

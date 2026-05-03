@@ -32,15 +32,15 @@ public sealed partial class Focusing : RMCChemicalEffect
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var rmcBloodstream = System<SharedRMCBloodstreamSystem>(args);
-        var stutterSys = System<SharedStutteringSystem>(args);
-        var drunkSys = System<SharedDrunkSystem>(args);
-        var drowsySys = System<DrowsynessSystem>(args);
+        var stutter = System<SharedStutteringSystem>(args);
+        var drunk = System<SharedDrunkSystem>(args);
+        var drowsy = System<DrowsynessSystem>(args);
         var status = System<SharedStatusEffectsSystem>(args);
 
         rmcBloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
-        stutterSys.DoRemoveStutterTime(args.TargetEntity, PotencyPerSecond * 2);
-        drunkSys.TryRemoveDrunkenessTime(args.TargetEntity, PotencyPerSecond * 2);
-        drowsySys.TryChange(args.TargetEntity, PotencyPerSecond * -2);
+        stutter.DoRemoveStutterTime(args.TargetEntity, PotencyPerSecond * 2);
+        drunk.TryRemoveDrunkenessTime(args.TargetEntity, PotencyPerSecond * 2);
+        drowsy.TryChange(args.TargetEntity, PotencyPerSecond * -2);
         status.TryAddTime(args.TargetEntity, "Jitter", TimeSpan.FromSeconds(PotencyPerSecond * -2)); // TODO RMC14 amplitude frequency
         // TODO RMC14 M.ReduceEyeBlur(PotencyPerSecond * 2) remove blur without healing eyes
 

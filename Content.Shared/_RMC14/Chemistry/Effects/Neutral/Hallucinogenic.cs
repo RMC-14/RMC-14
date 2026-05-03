@@ -15,7 +15,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 public sealed partial class Hallucinogenic : RMCChemicalEffect
 {
     private static readonly EntProtoId<StatusEffectComponent> Druggy = "StatusEffectSeeingRainbow";
-    private static readonly ImmutableArray<string> Emotes = ImmutableArray.Create("twitches", "drools", "moans", "giggles"); // TODO RMC14 emotes?
+    private static readonly ImmutableArray<string> Emotes = ImmutableArray.Create("twitches", "drools", "moans", "giggles");
 
     public override string Abbreviation => "HLG";
 
@@ -43,8 +43,8 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
         if (Potency > 2)
         {
             // TODO RMC14 hallucination
-            var jitterSys = System<SharedJitteringSystem>(args);
-            jitterSys.DoJitter(args.TargetEntity, TimeSpan.FromSeconds(5), true); // TODO RMC14 amplitude, frequency 10?
+            var jitter = System<SharedJitteringSystem>(args);
+            jitter.DoJitter(args.TargetEntity, TimeSpan.FromSeconds(5), true); // TODO RMC14 amplitude, frequency 10?
         }
 
         var status = System<SharedStatusEffectsSystem>(args);
@@ -59,8 +59,8 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
     {
         // TODO RMC14 random step
         // TODO RMC14 hallucination
-        var jitterSys = System<SharedJitteringSystem>(args);
-        jitterSys.DoJitter(args.TargetEntity, TimeSpan.FromSeconds(5), true); // TODO RMC14 more amplitude, frequency 10?
+        var jitter = System<SharedJitteringSystem>(args);
+        jitter.DoJitter(args.TargetEntity, TimeSpan.FromSeconds(5), true); // TODO RMC14 more amplitude, frequency 10?
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
