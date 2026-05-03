@@ -409,3 +409,5 @@ rmc-destroy-cant-area = We can't leap to that area!
 
 # Queen Eye
 rmc-xeno-queen-eye-no-weeds = We can't move our eye there, there are no weeds!
+rmc-xeno-queen-eye-expand-weeds-name = Expand Weeds (50)
+rmc-xeno-queen-eye-expand-weeds-desc = Expand existing weeds or turn a weed tile into a node.

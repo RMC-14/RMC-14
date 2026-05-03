@@ -38,6 +38,9 @@ public sealed class QueenEyeSystem : EntitySystem
 
     private readonly HashSet<Vector2i> _singleTiles = new();
 
+    private readonly HashSet<Entity<XenoWeedsComponent>> _nearbyWeeds = new();
+    private readonly HashSet<Entity<XenoWeedsComponent>> _anchorWeeds = new();
+
     private bool _isRevertingMove;
 
     public override void Initialize()
@@ -121,7 +124,7 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
         }
 
-        args.VisibilityMask |= (int) ent.Comp.Visibility;
+        args.VisibilityMask |= (int)ent.Comp.Visibility;
     }
 
     private void OnQueenEyeActionWatch(Entity<QueenEyeActionComponent> ent, ref XenoWatchEvent args)
@@ -171,22 +174,24 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
 
         var newCoords = args.NewPosition;
-        var nearbyWeeds = _entityLookup.GetEntitiesInRange<XenoWeedsComponent>(newCoords, ent.Comp.SoftWeedDistance);
+        _nearbyWeeds.Clear();
+        _entityLookup.GetEntitiesInRange(newCoords, ent.Comp.SoftWeedDistance, _nearbyWeeds);
 
-        if (nearbyWeeds.Count == 0)
+        if (_nearbyWeeds.Count == 0)
         {
             _isRevertingMove = true;
 
             // Find nearest weed from old position to use as anchor
-            var anchorWeeds = _entityLookup.GetEntitiesInRange<XenoWeedsComponent>(args.OldPosition, ent.Comp.MaxWeedDistance);
-            if (anchorWeeds.Count > 0)
+            _anchorWeeds.Clear();
+            _entityLookup.GetEntitiesInRange(args.OldPosition, ent.Comp.MaxWeedDistance, _anchorWeeds);
+            if (_anchorWeeds.Count > 0)
             {
                 var newWorldPos = _transform.ToMapCoordinates(newCoords).Position;
                 var oldWorldPos = _transform.ToMapCoordinates(args.OldPosition).Position;
                 var closestDistSq = float.MaxValue;
                 var closestWeedPos = oldWorldPos;
 
-                foreach (var weed in anchorWeeds)
+                foreach (var weed in _anchorWeeds)
                 {
                     var weedPos = _transform.GetWorldPosition(weed.Owner);
                     var distSq = Vector2.DistanceSquared(oldWorldPos, weedPos);
@@ -306,8 +311,8 @@ public sealed class QueenEyeSystem : EntitySystem
         _swappableAction.SwapInstantToWorldTarget<XenoPlantWeedsActionEvent>(
             queen.Owner,
             new XenoExpandWeedsActionEvent(),
-            "Expand Weeds (50)",
-            "Expand existing weeds or turn a weed tile into a node.");
+            Loc.GetString("rmc-xeno-queen-eye-expand-weeds-name"),
+            Loc.GetString("rmc-xeno-queen-eye-expand-weeds-desc"));
     }
 
     private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen)
