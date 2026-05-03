@@ -37,6 +37,7 @@
     - map: [ "enum.SquadArmorLayers.Armor" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
     - map: [ "enum.MedalVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base1" ]
     - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "neck" ] # RMC14 re-arrange neck slot
@@ -65,18 +66,6 @@
       state: hooked
       visible: false
     - map: [ "enum.NewPlayerLayers.Layer" ]
-      visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
       visible: false
   - type: DamageVisuals
     thresholds: [ 10, 20, 30, 50, 70, 100 ]

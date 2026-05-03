@@ -1,0 +1,10 @@
+- type: marking
+  id: LongEarsDrow
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  forcedColoring: true
+  followSkinColor: true
+  speciesRestriction: [Human]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/ears.rsi
+    state: drow

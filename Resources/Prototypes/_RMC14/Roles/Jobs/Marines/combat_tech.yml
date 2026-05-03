@@ -3,6 +3,7 @@
   id: CMCombatTech
   name: cm-job-name-combat-tech
   description: cm-job-description-combat-tech
+  newToJobInfo: rmc-new-to-job-combat-tech
   playTimeTracker: CMJobCombatTech
   requirements:
   - !type:DepartmentTimeRequirement

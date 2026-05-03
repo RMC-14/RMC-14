@@ -25,6 +25,7 @@
         - MachineMask
         layer:
         - MachineLayer
+        - BulletImpassable # TODO Remove this after vendor tipping is added.
   - type: Tag
     tags:
     - Structure
@@ -76,8 +77,11 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500
+        damage: 100
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   # - type: XenoCrusherChargable TODO knock over by crusher

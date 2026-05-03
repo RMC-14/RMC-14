@@ -7,7 +7,7 @@
   description: A cotton hamburger bun. Soft, round and convenient to hold.
   components:
   - type: Food
-    requiresSpecialDigestion: true
+    #requiresSpecialDigestion: true Disabled for RMC
   - type: Sprite
     sprite: Objects/Consumable/Food/cottonburger.rsi
     layers:
@@ -44,7 +44,7 @@
   - type: Item
     size: Normal #patch until there is an adequate resizing system in place
   - type: Food
-    requiresSpecialDigestion: true
+    #requiresSpecialDigestion: true Disabled for RMC
   - type: Sprite
     drawdepth: Mobs
     noRot: true
@@ -85,7 +85,7 @@
   description: The perfect finish for your fibrous burger tower.
   components:
   - type: Food
-    requiresSpecialDigestion: true
+    #requiresSpecialDigestion: true Disabled for RMC
   - type: Sprite
     sprite: Objects/Consumable/Food/cottonburger.rsi
     layers:

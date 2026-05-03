@@ -183,7 +183,7 @@
       amount: 1
     JuiceBanana:
       amount: 1
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
   products:
     BananaHonk: 3
@@ -301,7 +301,7 @@
   reactants:
     CoconutWater:
       amount: 1
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
     Milk:
       amount: 1
@@ -528,7 +528,7 @@
       amount: 1
     Water:
       amount: 2
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
   products:
     Grog: 4
@@ -573,7 +573,7 @@
       amount: 1
     Ice:
       amount: 1
-    Sugar:
+    RMCSugar:
       amount: 1
   products:
     IceCream: 3
@@ -735,7 +735,7 @@
   reactants:
     JuiceLemon:
       amount: 1
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
     Water:
       amount: 1
@@ -831,7 +831,7 @@
   reactants:
     RMCBlackGoo: # TODO RMC14 remove this later
       amount: 0.5
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
       # TODO replace Sugar with Honey once added
     Enzyme:
@@ -850,7 +850,7 @@
       amount: 1
     SodaWater:
       amount: 1
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
   products:
     Mojito: 4
@@ -915,7 +915,7 @@
   products:
     Ipecac: 2
     Water: 2
-    Sugar: 2
+    RMCSugar: 2 #Changed for RMC
     Uranium: 1
 
 - type: reaction
@@ -1029,7 +1029,7 @@
       amount: 2
     Moonshine:
       amount: 1
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
   products:
     Rubberneck: 4
@@ -1073,7 +1073,7 @@
       amount: 1
     Cream:
       amount: 1
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
   products:
     Silencer: 3
@@ -1192,7 +1192,7 @@
   reactants:
     IcedTea:
       amount: 1
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
   products:
     Tortuga: 2
@@ -1385,11 +1385,11 @@
   reactants:
     Ipecac:
       amount: 1
-    Oxygen:
+    RMCOxygen: #Changed for RMC
       amount: 1
     Water:
       amount: 1
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
   products:
     Cola: 4
@@ -1403,7 +1403,7 @@
       amount: 1
     JuiceLime:
       amount: 1
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
     Ice:
       amount: 1
@@ -1417,7 +1417,7 @@
   reactants:
     Rum:
       amount: 4
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
     JuiceLime:
       amount: 1
@@ -1523,7 +1523,7 @@
   reactants:
     Whiskey:
       amount: 2
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
     JuiceLemon:
       amount: 2

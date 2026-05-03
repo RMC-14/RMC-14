@@ -55,6 +55,28 @@
    # TODO gas_transfer_coefficient = 0.90
 
 - type: entity
+  parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
+  id: RMCSuitFirefighter
+  name: firesuit
+  description: A suit that protects against fire and heat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/firesuit.rsi
+  - type: Item
+    size: Large
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
+  - type: ClothingSpeedModifier # slowdown = 1 (SLOWDOWN_ARMOR_HEAVY)
+    walkModifier: 0.62
+    sprintModifier: 0.62
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.3
+  - type: RMCImmuneToIgnition
+    immuneToDirectHits: false
+  # TODO gas_transfer_coefficient = 0.90
+
+- type: entity
   parent: RMCArmorFirefighter
   id: RMCArmorSPPFirefighter
   name: T-20 fire response coat

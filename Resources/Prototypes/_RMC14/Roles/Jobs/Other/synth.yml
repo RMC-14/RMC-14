@@ -5,7 +5,11 @@
   description: rmc-job-description-synth
   playTimeTracker: RMCJobSynthetic
   ranks:
-    RMCRankMasterSergeant: [ ]
+    RMCRankChiefWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: RMCJobSynthetic
+      time: 270000 # 75 hours
+    RMCRankWarrantOfficer: [ ]
   startingGear: RMCGearSyntheticEquipped
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
@@ -109,6 +113,10 @@
   - type: RMCLeapProtection
     inherentStunDuration: 3
   - type: ZombieImmune
+  - type: ParalyzeImmuneFrom
+    whitelist:
+      tags:
+      - RMCSynthGrabbable
 
 - type: entity
   id: RMCSynthRemoveComponents

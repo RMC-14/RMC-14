@@ -27,6 +27,7 @@ public sealed class ScalingSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
     [Dependency] private readonly SharedCMAutomatedVendorSystem _rmcAutomatedVendor = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
 
     public float MarineScalingNormal { get; private set; }
     private float _marineScalingBonus;
@@ -110,7 +111,7 @@ public sealed class ScalingSystem : EntitySystem
         var marines = EntityQueryEnumerator<UserIFFComponent, ActorComponent>();
         while (marines.MoveNext(out var marineId, out var userIFF, out _))
         {
-            if (userIFF.Faction != faction)
+            if (!_gunIFF.IsInFaction((marineId, userIFF), faction))
                 continue;
 
             if (!_mind.TryGetMind(marineId, out var mindId, out _) ||

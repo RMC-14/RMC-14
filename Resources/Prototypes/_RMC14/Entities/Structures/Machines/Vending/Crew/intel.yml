@@ -204,7 +204,7 @@
       - id: RMCPouchToolsFill
         name: tools pouch (Full)
         recommended: true
-      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+      - id: RMCPouchSling
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

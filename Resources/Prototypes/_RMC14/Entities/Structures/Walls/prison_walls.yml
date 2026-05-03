@@ -19,7 +19,7 @@
     base: metal
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: RMCWallPrisonReinforced
   name: reinforced metal wall
   description: A huge chunk of ultra-reinforced metal used to separate rooms.

@@ -13,6 +13,30 @@
   id: CMFloorSteelPlanetDelivery
   sprite: /Textures/_RMC14/Tiles/floors/delivery.png
 
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorGreyDamaged1
+  sprite: /Textures/_RMC14/Tiles/floors/damaged1.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorGreyDamaged2
+  sprite: /Textures/_RMC14/Tiles/floors/damaged2.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorGreyDamaged3
+  sprite: /Textures/_RMC14/Tiles/floors/damaged3.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorGreyDamaged4
+  sprite: /Textures/_RMC14/Tiles/floors/damaged4.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorGreyDamaged5
+  sprite: /Textures/_RMC14/Tiles/floors/damaged5.png
 
 - type: tile
   parent: CMFloorWhite

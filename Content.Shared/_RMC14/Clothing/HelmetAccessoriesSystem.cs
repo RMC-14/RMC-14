@@ -85,6 +85,7 @@ public sealed class HelmetAccessoriesSystem : EntitySystem
                 RsiPath = rsi.RsiPath.ToString(),
                 State = rsi.RsiState,
                 Visible = true,
+                Offset = accessoryComp.Offset,
             }));
 
             index++;

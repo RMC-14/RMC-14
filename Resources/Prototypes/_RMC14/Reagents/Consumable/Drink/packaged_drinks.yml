@@ -1,0 +1,43 @@
+﻿- type: reagent
+  id: RMCJuiceBug
+  name: rmc-reagent-name-juice-bug
+  parent: RMCDrinkBase
+  desc: rmc-reagent-desc-juice-bug
+  physicalDesc: reagent-physical-desc-bubbly
+  color: "#2ca314"
+  flavor: rmckiwi
+
+- type: reagent
+  id: RMCCocoMilk
+  name: rmc-reagent-name-coco-milk
+  parent: RMCDrinkBase
+  desc: rmc-reagent-desc-coco-milk
+  physicalDesc: reagent-physical-desc-creamy
+  color: "#DFDFC7"
+  flavor: rmccocomilk
+
+- type: reagent
+  id: RMCSoyMilk
+  name: rmc-reagent-name-soy-milk
+  parent: RMCDrinkBase
+  desc: rmc-reagent-desc-soy-milk
+  physicalDesc: reagent-physical-desc-creamy
+  color: "#DFDFC7"
+  flavor: rmcsoymilk
+
+- type: reagent
+  id: RMCChocolateDrink
+  name: rmc-reagent-name-chocolate-drink
+  color: "#61450e"
+  flavor: chocolate
+  desc: rmc-reagent-desc-chocolate-drink
+  physicalDesc: reagent-physical-desc-creamy
+  metabolisms:
+    Drink:
+      metabolismRate: 0.1
+      effects:
+      - !type:SatiateHunger
+        factor: 4
+      - !type:SatiateThirst
+        factor: 0.2
+

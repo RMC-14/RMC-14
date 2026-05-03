@@ -19,3 +19,13 @@
   - type: RandomDecalSpawner
     decals:
     - RMCDecalGibSplatterDrone
+
+- type: entity
+  parent: RMCDecalSpawnerGibsBase
+  id: RMCDecalSpawnerGibsLesserDrone
+  name: gibs spawner
+  suffix: RMC14, Lesser Drone
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - RMCDecalGibSplatterLesserDrone

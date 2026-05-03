@@ -262,6 +262,14 @@
     access: [ [ "CMAccessMedical" ], [ "RMCAccessCommand" ] ]
 
 - type: entity
+  parent: RMCDoubleDoorMedicalSolid
+  id: RMCDoubleDoorMedicalSolidMorgue
+  suffix: Morgue, Solid, Locked, Medical
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessMorgue" ] ]
+
+- type: entity
   parent: RMCDoubleDoorMedicalGlass
   id: RMCDoubleDoorMedicalGlassResearch
   suffix: Medical, Glass, Locked, Research

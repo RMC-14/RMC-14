@@ -107,6 +107,9 @@
     - state: acid2
   - type: ApplyAcidStacks
     amount: 2
+    damage:
+      types:
+        Heat: 30
   - type: DamageOnCollide
     damage:
       types:
@@ -196,4 +199,37 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  id: RMCAcidHole
+  name: acid hole
+  description: A corroded opening in the wall.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WallMount
+    arc: 360
+  - type: InteractionOutline
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Effects/new_acid.rsi
+    drawdepth: WallMountedItems
+    layers:
+    - state: hole_0
+  - type: Fixtures
+    fixtures:
+      holeFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        hard: false
+        layer:
+        - WallLayer
+        mask:
+        - FullTileMask
+  - type: Clickable
+  - type: XenoAcidHole
 
