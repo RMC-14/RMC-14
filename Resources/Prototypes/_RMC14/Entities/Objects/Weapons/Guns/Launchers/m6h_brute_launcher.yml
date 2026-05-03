@@ -4,9 +4,6 @@
   id: RMCWeaponLauncherM6HBrute
   description: A laser-guided breaching launcher designed to rip open walls and hardened structures with focused shockwaves.
   components:
-  - type: GuideHelp
-    guides:
-    - RMCGuideRoleSpecDemo
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m6h/m6h_inhands.rsi
     layers:
