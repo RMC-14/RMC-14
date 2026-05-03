@@ -52,7 +52,7 @@ public sealed partial class RMCBruteProjectileComponent : Component
     public float ThrowSpeed = 5f;
 
     [DataField]
-    public EntProtoId FirePrototype = "RMCTileFireGreen";
+    public EntProtoId FirePrototype = "RMCTileFireBrute";
 
     [DataField]
     public EntProtoId SparkPrototype = "RMCBruteSparks";
