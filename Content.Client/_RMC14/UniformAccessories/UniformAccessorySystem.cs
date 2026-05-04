@@ -118,8 +118,8 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
         // For items with hasIconSprite, use the same unique key format as when adding
         var clothingLayer = accessoryComp.HasIconSprite ? $"{layer}_{index}" : layer;
 
-        if (_sprite.LayerMapTryGet(ent.Owner, layer, out var clothingSpriteLayer, false))
-            _sprite.LayerSetVisible(ent.Owner, clothingLayer, false);
+        if (_sprite.LayerMapTryGet(ent.Owner, clothingLayer, out var spriteLayer, false))
+            _sprite.LayerSetVisible(ent.Owner, spriteLayer, false);
 
         _item.VisualsChanged(ent);
     }
