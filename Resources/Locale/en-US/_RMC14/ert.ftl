@@ -123,7 +123,7 @@ rmc-ert-success-console = The distress beacon has been transmitted to High Comma
 rmc-ert-briefing-title = {$team} briefing
 rmc-ert-briefing-reason = Reason: {$reason}
 rmc-ert-briefing-objectives = Objectives:
-rmc-ert-briefing-bullet = - 
+rmc-ert-briefing-bullet = -
 rmc-ert-briefing-features = Operational notes:
 rmc-ert-briefing-role = Assigned role: {$role}
 
