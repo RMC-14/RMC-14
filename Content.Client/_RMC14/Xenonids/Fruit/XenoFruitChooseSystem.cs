@@ -1,5 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Fruit;
-using Content.Shared._RMC14.Xenonids.Fruit.Components;
+﻿using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Fruit;

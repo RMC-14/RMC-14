@@ -1,6 +1,5 @@
 using Content.Client.Gameplay;
 using Content.Shared._RMC14.Sprite;
-using Content.Shared._RMC14.Item;
 using Robust.Client.GameObjects;
 using Robust.Client.Input;
 using Robust.Client.Player;

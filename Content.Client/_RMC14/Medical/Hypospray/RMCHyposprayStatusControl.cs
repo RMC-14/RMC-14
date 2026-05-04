@@ -7,7 +7,6 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Timing;
 using Robust.Shared.Containers;
-using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Medical.Hypospray;
 

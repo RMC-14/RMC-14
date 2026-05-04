@@ -7,7 +7,6 @@ using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.Utility;
-using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Intel;
 

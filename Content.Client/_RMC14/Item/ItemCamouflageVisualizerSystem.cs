@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Content.Client._RMC14.Attachable.Components;
+﻿using Content.Client._RMC14.Attachable.Components;
 using Content.Client._RMC14.Attachable.Systems;
 using Content.Client.Clothing;
 using Content.Client.Items.Systems;
@@ -14,7 +13,6 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory;
-using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Item;
 

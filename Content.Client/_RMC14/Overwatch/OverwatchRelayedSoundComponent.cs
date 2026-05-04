@@ -1,6 +1,4 @@
-﻿using Robust.Shared.GameStates;
-
-namespace Content.Client._RMC14.Overwatch;
+﻿namespace Content.Client._RMC14.Overwatch;
 
 [RegisterComponent]
 [Access(typeof(OverwatchConsoleSystem))]

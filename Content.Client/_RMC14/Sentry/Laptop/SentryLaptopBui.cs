@@ -7,13 +7,10 @@ using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Sentry.Laptop;
 using Content.Shared.Popups;
 using JetBrains.Annotations;
-using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Map;
-using Robust.Shared.Maths;
-using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Sentry.Laptop;
 

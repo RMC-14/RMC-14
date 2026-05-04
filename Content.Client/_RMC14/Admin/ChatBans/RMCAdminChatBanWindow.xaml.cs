@@ -2,7 +2,6 @@
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
-using TerraFX.Interop.Xlib;
 
 namespace Content.Client._RMC14.Admin.ChatBans;
 

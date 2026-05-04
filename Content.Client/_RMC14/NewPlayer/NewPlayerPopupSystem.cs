@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.NewPlayer;
-using Content.Shared.GameTicking;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;
 

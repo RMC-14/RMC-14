@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Admin.ChatBans;
 using Content.Shared.Database;
 using Content.Shared.Eui;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Admin.ChatBans;

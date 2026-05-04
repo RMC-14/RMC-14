@@ -1,7 +1,6 @@
 ﻿<controls:OrbitalCannonWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.OrbitalCannon"
-    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="{Loc rmc-ui-ob-console-name}"
     MinSize="450 350">

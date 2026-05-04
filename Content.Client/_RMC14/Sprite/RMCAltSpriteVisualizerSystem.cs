@@ -1,4 +1,3 @@
-using Content.Client._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Sprite;
 using Robust.Client.GameObjects;

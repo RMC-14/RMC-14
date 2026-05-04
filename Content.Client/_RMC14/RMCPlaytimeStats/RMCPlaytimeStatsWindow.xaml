@@ -1,6 +1,5 @@
 <ui:FancyWindow xmlns="https://spacestation14.io"
                 xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
-                xmlns:pt="clr-namespace:Content.Client._RMC14.RMCPlaytimeStats"
                 xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
                 VerticalExpand="True" HorizontalExpand="True"
                 Title="{Loc ui-playtime-stats-title}"

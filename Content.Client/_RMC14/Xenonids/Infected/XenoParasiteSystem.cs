@@ -6,7 +6,6 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Robust.Client.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Xenonids.Infected;
 

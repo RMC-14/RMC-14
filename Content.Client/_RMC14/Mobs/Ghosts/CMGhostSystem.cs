@@ -1,4 +1,3 @@
-using Content.Shared.Ghost;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared.Actions;
 

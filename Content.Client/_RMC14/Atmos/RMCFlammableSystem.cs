@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.Atmos;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
