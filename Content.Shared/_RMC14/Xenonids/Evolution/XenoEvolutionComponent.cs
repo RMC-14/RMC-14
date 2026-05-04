@@ -71,7 +71,6 @@ public sealed partial class XenoEvolutionComponent : Component, IComponentDebug
             Strains:
               {string.Join("\r\n  ", Strains.Order())}
             EvolutionDelay: {EvolutionDelay.TotalSeconds}
-            Points: {Points}
             Max: {Max}
             PointsPerSecond: {PointsPerSecond}
             EarlyPointsPerSecond: {EarlyPointsPerSecond}
