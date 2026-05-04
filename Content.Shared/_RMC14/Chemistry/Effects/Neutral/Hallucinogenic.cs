@@ -44,7 +44,7 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
         {
             // TODO RMC14 hallucination
             var jitter = System<SharedJitteringSystem>(args);
-            jitter.DoJitter(args.TargetEntity, TimeSpan.FromSeconds(5), true); // TODO RMC14 amplitude, frequency 10?
+            jitter.DoJitter(args.TargetEntity, TimeSpan.FromSeconds(2), true, 5, 10);
         }
 
         var status = System<SharedStatusEffectsSystem>(args);
@@ -60,7 +60,7 @@ public sealed partial class Hallucinogenic : RMCChemicalEffect
         // TODO RMC14 random step
         // TODO RMC14 hallucination
         var jitter = System<SharedJitteringSystem>(args);
-        jitter.DoJitter(args.TargetEntity, TimeSpan.FromSeconds(5), true); // TODO RMC14 more amplitude, frequency 10?
+        jitter.DoJitter(args.TargetEntity, TimeSpan.FromSeconds(2), true, 5, 10);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
