@@ -22,7 +22,7 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     /// <summary>
     /// Localization id for the response team name shown in admin UI and responder briefings.
     /// </summary>
-    [DataField("name", required: true)]
+    [DataField(required: true)]
     private LocId _name = default!;
 
     /// <summary>
@@ -33,7 +33,7 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     /// <summary>
     /// Optional localization id for the organization responsible for this response team.
     /// </summary>
-    [DataField("organization")]
+    [DataField]
     private LocId? _organization;
 
     /// <summary>
@@ -58,7 +58,7 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     /// <summary>
     /// Localization id for the admin UI category this call is grouped under.
     /// </summary>
-    [DataField("category")]
+    [DataField]
     private LocId _category = "rmc-ert-category-response";
 
     /// <summary>
@@ -81,7 +81,7 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     /// <summary>
     /// Optional localization id overriding the force-call button label in the admin UI.
     /// </summary>
-    [DataField("adminButtonLabel")]
+    [DataField]
     private LocId? _adminButtonLabel;
 
     /// <summary>
@@ -209,7 +209,7 @@ public sealed partial class RMCERTRoleEntry
     /// <summary>
     /// Localization id for the role name shown to admins and responders.
     /// </summary>
-    [DataField("name", required: true)]
+    [DataField(required: true)]
     private LocId _name = default!;
 
     /// <summary>
