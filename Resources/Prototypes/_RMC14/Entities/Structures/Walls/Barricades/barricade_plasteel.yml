@@ -173,8 +173,22 @@
     layers:
     - state: folding_plasteel
       map: ["enum.DoorVisualLayers.Base"]
+    - state: folding_plasteel_connection_1
+      map: ["enum.RMCFoldingBarricadeLinkingVisualLayers.North"]
+      visible: false
+    - state: folding_plasteel_connection_2
+      map: ["enum.RMCFoldingBarricadeLinkingVisualLayers.South"]
+      visible: false
+    - state: folding_plasteel_connection_4
+      map: ["enum.RMCFoldingBarricadeLinkingVisualLayers.East"]
+      visible: false
+    - state: folding_plasteel_connection_8
+      map: ["enum.RMCFoldingBarricadeLinkingVisualLayers.West"]
+      visible: false
     - map: [ "acided" ]
     drawdepth: WallTops
+  - type: RMCFoldingBarricadeLinking
+    linkable: true
   - type: RMCRepairable
     heal: 200
     skill: RMCSkillConstruction
@@ -203,6 +217,26 @@
         acts: [ "Destruction" ]
   - type: GenericVisualizer
     visuals:
+      enum.RMCFoldingBarricadeLinkingVisuals.North:
+        enum.RMCFoldingBarricadeLinkingVisualLayers.North:
+          None: { visible: false }
+          Closed: { state: folding_plasteel_connection_1, visible: true }
+          Open: { state: folding_plasteel_closed_connection_1, visible: true }
+      enum.RMCFoldingBarricadeLinkingVisuals.South:
+        enum.RMCFoldingBarricadeLinkingVisualLayers.South:
+          None: { visible: false }
+          Closed: { state: folding_plasteel_connection_2, visible: true }
+          Open: { state: folding_plasteel_closed_connection_2, visible: true }
+      enum.RMCFoldingBarricadeLinkingVisuals.East:
+        enum.RMCFoldingBarricadeLinkingVisualLayers.East:
+          None: { visible: false }
+          Closed: { state: folding_plasteel_connection_4, visible: true }
+          Open: { state: folding_plasteel_closed_connection_4, visible: true }
+      enum.RMCFoldingBarricadeLinkingVisuals.West:
+        enum.RMCFoldingBarricadeLinkingVisualLayers.West:
+          None: { visible: false }
+          Closed: { state: folding_plasteel_connection_8, visible: true }
+          Open: { state: folding_plasteel_closed_connection_8, visible: true }
       enum.BarbedWireVisualLayers.Wire:
         barbWired:
           UnWired: { state: folding_plasteel_closed_wire, visible: false }
