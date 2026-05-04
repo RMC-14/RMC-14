@@ -66,7 +66,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
             if (accessoryComp.HasIconSprite)
             {
-                var clothingSpriteLayer = _sprite.LayerMapReserve(ent.Owner, clothingLayer);
+                _sprite.LayerMapReserve(ent.Owner, clothingLayer);
                 _sprite.LayerSetVisible(ent.Owner, clothingLayer, !accessoryComp.Hidden);
                 _sprite.LayerSetRsi(ent.Owner, clothingLayer, sprite.RsiPath);
                 _sprite.LayerSetRsiState(ent.Owner, clothingLayer, sprite.RsiState);
