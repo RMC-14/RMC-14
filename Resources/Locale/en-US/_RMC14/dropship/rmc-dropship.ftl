@@ -58,10 +58,11 @@ rmc-dropship-weapons-fire = FIRE
 rmc-dropship-weapons-strike = STRIKE
 rmc-dropship-weapons-vector = VECTOR
 rmc-dropship-weapons-quick = QUICK
-rmc-dropship-weapons-north = NORTH
-rmc-dropship-weapons-south = SOUTH
-rmc-dropship-weapons-east = EAST
-rmc-dropship-weapons-west = WEST
+# TODO RMC14 fire missions: restore these labels with fire mission vector controls.
+# rmc-dropship-weapons-north = NORTH
+# rmc-dropship-weapons-south = SOUTH
+# rmc-dropship-weapons-east = EAST
+# rmc-dropship-weapons-west = WEST
 rmc-dropship-weapons-target-mode-quick = QUICK
 rmc-dropship-weapons-target-mode-standard = STANDARD
 

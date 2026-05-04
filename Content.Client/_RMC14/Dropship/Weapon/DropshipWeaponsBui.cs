@@ -229,14 +229,15 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         // var vector = Loc.GetString("rmc-dropship-weapons-vector");
         var quick = ButtonAction("quick",
             _ => SendPredictedMessage(new DropshipTerminalWeaponsQuickModeMsg(first, !compScreen.QuickMode)));
-        var north = ButtonAction("north",
-            _ => SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.North)));
-        var south = ButtonAction("south",
-            _ => SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.South)));
-        var east = ButtonAction("east",
-            _ => SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.East)));
-        var west = ButtonAction("west",
-            _ => SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.West)));
+        // TODO RMC14 fire missions: restore these quick-mode vector buttons when fire missions are implemented.
+        // var north = ButtonAction("north",
+        //     _ => SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.North)));
+        // var south = ButtonAction("south",
+        //     _ => SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.South)));
+        // var east = ButtonAction("east",
+        //     _ => SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.East)));
+        // var west = ButtonAction("west",
+        //     _ => SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.West)));
         var nightVisionOn = ButtonAction("night-vision-on",
             _ => SendPredictedMessage(new DropshipTerminalWeaponsNightVisionMsg(true)));
         var nightVisionOff = ButtonAction("night-vision-off",
@@ -267,7 +268,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             TryGetWeapons(first, out var one, out var two, out var three, out var four, out _, out _, out _, out _, out _);
             screen.TopRow.SetData(fire, quick, four: previous, five: next);
             screen.LeftRow.SetData(one, two, three, four);
-            screen.BottomRow.SetData(exit, north, south, east, west);
+            screen.BottomRow.SetData(exit);
             screen.ScreenLabel.Text = TargetAcquisition();
         }
 

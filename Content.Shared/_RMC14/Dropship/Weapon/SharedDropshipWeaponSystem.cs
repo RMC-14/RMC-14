@@ -1140,6 +1140,19 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void UpdateTarget(Entity<DropshipTerminalWeaponsComponent> ent, EntityUid target)
     {
+        if (ent.Comp.Target == target)
+        {
+            if (EnsureTargetEye(ent, ent.Comp.Target) is { } currentTargetEye)
+            {
+                _eye.SetOffset(currentTargetEye, ent.Comp.Offset);
+                _eye.SetDrawLight(currentTargetEye, !ent.Comp.NightVision);
+            }
+
+            RefreshWeaponsUI(ent);
+            Dirty(ent);
+            return;
+        }
+
         RemovePvsActors(ent);
         SetTarget(ent, target);
 
