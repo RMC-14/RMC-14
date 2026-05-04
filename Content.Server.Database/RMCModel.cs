@@ -224,6 +224,15 @@ public sealed class RMCCommendation
     public string Text { get; set; } = string.Empty;
 
     public CommendationType Type { get; set; }
+
+    public bool Deleted { get; set; }
+
+    [ForeignKey("DeletedBy")]
+    public Guid? DeletedById { get; set; }
+
+    public Player? DeletedBy { get; set; }
+
+    public DateTime? DeletedAt { get; set; }
 }
 
 [Table("rmc_player_stats")]

@@ -1,6 +1,6 @@
 # m3
 - type: entity
-  parent: [RMCBaseMarineArmorLightNoAccessory, RMCBaseUniformAccessoryItemArmorPVE]
+  parent: [RMCBaseArmorPVE, RMCBaseUniformAccessoryItemArmorPVE]
   id: RMCArmorM3PVE
   suffix: PVE, Standard
   name: M3 pattern marine armor
@@ -23,6 +23,12 @@
     worn: false
   - type: Corrodible
     isCorrodible: false
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-marine-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMarine
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/standard/jungle.rsi
@@ -104,3 +110,230 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/sg/urban.rsi
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
+
+# Armour Cases
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVEArmorCaseBase
+  name: base armor case
+  description: An armor set case.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/marine.rsi
+    state: icon
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/marine.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed }
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCHelmet
+      - RMCPVEArmor
+      - RMCPVEArmorAccessory
+  - type: ItemMapper
+    mapLayers:
+      armor:
+        whitelist:
+          tags:
+          - RMCPVEArmor
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-generic
+      whitelist:
+        tags:
+        - RMCPVEArmor
+    - popup: rmc-storage-limit-generic
+      whitelist:
+        tags:
+        - RMCHelmet
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseM3
+  name: standard M3 pattern marine armor set
+  description: A case containing standard M3 pattern marine armor, an M10 helmet, and attachable armor pieces.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/marine.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_standard
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_standard }
+  - type: StorageFill
+    contents:
+    - id: ArmorHelmetM10
+    - id: RMCArmorM3PVE
+    - id: RMCPVEArmorPads
+    - id: RMCPVEArmorBracers
+    - id: RMCPVEArmorNeckGuard
+    - id: RMCPVEArmorGroinPlate
+    - id: RMCPVEArmorShinGuard
+    - id: RMCPVEArmorKneeGuard
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseM3Smooth
+  name: smooth M3 pattern marine armor set
+  description: A case containing smooth M3 pattern marine armor, an M10 helmet, and attachable armor pieces.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/marine.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_smooth
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_smooth }
+  - type: StorageFill
+    contents:
+    - id: ArmorHelmetM10
+    - id: RMCArmorM3PVESmooth
+    - id: RMCPVEArmorPads
+    - id: RMCPVEArmorBracers
+    - id: RMCPVEArmorNeckGuard
+    - id: RMCPVEArmorGroinPlate
+    - id: RMCPVEArmorShinGuard
+    - id: RMCPVEArmorKneeGuard
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseM3Ridged
+  name: ridged M3 pattern marine armor set
+  description: A case containing ridged M3 pattern marine armor, an M10 helmet, and attachable armor pieces.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/marine.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_ridged
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_ridged }
+  - type: StorageFill
+    contents:
+    - id: ArmorHelmetM10
+    - id: RMCArmorM3PVERidged
+    - id: RMCPVEArmorPads
+    - id: RMCPVEArmorBracers
+    - id: RMCPVEArmorNeckGuard
+    - id: RMCPVEArmorGroinPlate
+    - id: RMCPVEArmorShinGuard
+    - id: RMCPVEArmorKneeGuard
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseB12
+  name: B12 pattern marine armor set
+  description: A case containing B12 pattern marine armor, an M10 helmet, and attachable armor pieces.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/marine.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_b12
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_b12 }
+  - type: StorageFill
+    contents:
+    - id: ArmorHelmetM10
+    - id: RMCArmorB12PVE
+    - id: RMCPVEArmorPads
+    - id: RMCPVEArmorBracers
+    - id: RMCPVEArmorNeckGuard
+    - id: RMCPVEArmorGroinPlate
+    - id: RMCPVEArmorShinGuard
+    - id: RMCPVEArmorKneeGuard
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseM3SGO
+  name: ML66A combat harness set
+  description: A case containing an ML66A combat harness, an M10 helmet, and attachable armor pieces.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/marine.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_sg
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_sg }
+  - type: StorageFill
+    contents:
+    - id: ArmorHelmetM10
+    - id: RMCArmorM3PVESGO
+    - id: RMCPVEArmorPads
+    - id: RMCPVEArmorBracers
+    - id: RMCPVEArmorNeckGuard
+    - id: RMCPVEArmorGroinPlate
+    - id: RMCPVEArmorShinGuard
+    - id: RMCPVEArmorKneeGuard

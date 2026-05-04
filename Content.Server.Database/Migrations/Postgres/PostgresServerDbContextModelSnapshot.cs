@@ -1146,12 +1146,27 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("text");
 
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid?>("DeletedById")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by_id");
+
                     b.Property<int>("Type")
                         .HasColumnType("integer")
                         .HasColumnName("type");
 
                     b.HasKey("Id")
                         .HasName("PK_rmc_commendations");
+
+                    b.HasIndex("DeletedById")
+                        .HasDatabaseName("IX_rmc_commendations_deleted_by_id");
 
                     b.HasIndex("GiverId");
 
@@ -2375,12 +2390,21 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsRequired()
                         .HasConstraintName("FK_rmc_commendations_player_receiver_id");
 
+                    b.HasOne("Content.Server.Database.Player", "DeletedBy")
+                        .WithMany("CommendationsDeleted")
+                        .HasForeignKey("DeletedById")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("FK_rmc_commendations_player_deleted_by_id");
+
                     b.HasOne("Content.Server.Database.Round", "Round")
                         .WithMany("Commendations")
                         .HasForeignKey("RoundId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_rmc_commendations_round_round_id");
+
+                    b.Navigation("DeletedBy");
 
                     b.Navigation("Giver");
 
@@ -2845,6 +2869,8 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("AdminWatchlistsReceived");
 
                     b.Navigation("ChatBans");
+
+                    b.Navigation("CommendationsDeleted");
 
                     b.Navigation("CommendationsGiven");
 

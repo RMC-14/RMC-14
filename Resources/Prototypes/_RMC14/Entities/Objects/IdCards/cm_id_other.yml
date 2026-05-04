@@ -86,6 +86,7 @@
   - type: ItemIFF
     factions:
     - FactionWeYa
+    - FactionMarine
   - type: PresetIdCard
     job: CMLiaison
 
@@ -101,6 +102,15 @@
   - type: ItemIFF
     factions:
     - FactionWeYa
+
+- type: entity
+  parent: CMIDCardPMC
+  id: CMIDCardCommando
+  name: commando holo-badge
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: commando
 
 - type: entity
   parent: CMIDCardLiaison
@@ -222,16 +232,6 @@
     - RMCWeYa
 
 - type: entity
-  id: FactionWeYa
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: IFFFaction
-  - type: FactionFrequencies
-    channels:
-    - Colony
-    - WEYA
-
-- type: entity
   parent: CMIDCardLanyard
   id: RMCIDCardBureauObserver
   name: bureau observer ID card
@@ -330,7 +330,7 @@
   suffix: Survivor
   components:
   - type: PresetIdCard
-    job: RMCJobSyntheticColony
+    job: RMCSyntheticColony
   - type: ItemIFF
     factions:
     - FactionSurvivor
@@ -371,3 +371,56 @@
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/aegis.rsi
     state: bloody
+
+
+# CBRN
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNRifleman
+  name: CBRN Rifleman's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNRifleman
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNCombatTech
+  name: CBRN Combat Technician's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNCombatTech
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNFTL
+  name: CBRN Fireteam Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNFireteamLeader
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNSL
+  name: CBRN Squad Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNSquadLeader
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNWS
+  name: CBRN Weapons Specialist's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNWS
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNMedic
+  name: CBRN Hospital Corpsman's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNMedic
+
+

@@ -5,6 +5,9 @@
   description: perfectly generic
   suffix: RMC
   components:
+  - type: ClothingSpeedModifier
+    walkModifier: 0.5
+    sprintModifier: 0.5
   - type: Sprite
     sprite: _RMC14/Objects/Fun/plushies.rsi
     state: debug
@@ -31,6 +34,9 @@
   id: RMCPlushieMoth
   suffix: RMC
   components:
+  - type: ClothingSpeedModifier
+    walkModifier: 0.5
+    sprintModifier: 0.5
   - type: UseDelay
     delay: 120
   - type: EmitSoundOnLand
@@ -45,6 +51,9 @@
   id: RMCPlushieSharkGrey
   suffix: RMC
   components:
+  - type: ClothingSpeedModifier
+    walkModifier: 0.5
+    sprintModifier: 0.5
   - type: UseDelay
     delay: 120
   - type: EmitSoundOnLand
@@ -59,6 +68,9 @@
   id: RMCPlushieSharkBlue
   suffix: RMC
   components:
+  - type: ClothingSpeedModifier
+    walkModifier: 0.5
+    sprintModifier: 0.5
   - type: UseDelay
     delay: 120
   - type: EmitSoundOnLand
@@ -73,6 +85,9 @@
   id: RMCPlushieSharkPink
   suffix: RMC
   components:
+  - type: ClothingSpeedModifier
+    walkModifier: 0.5
+    sprintModifier: 0.5
   - type: UseDelay
     delay: 120
   - type: EmitSoundOnLand
@@ -86,7 +101,7 @@
   parent: RMCPlushieSharkBlue
   id: RMCShorkMedicalOfficer
   name: Shork medical officer plushie
-  description: The Shork Medical Officer is dissapointed to see you in surgery yet again. Maybe you should take better care of yourself?
+  description: The Shork Medical Officer is disappointed to see you in surgery yet again. Maybe you should take better care of yourself?
   suffix: RMC
   components:
   - type: Sprite

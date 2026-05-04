@@ -18,3 +18,4 @@ cm-xeno-devour-failed-stomach-full = You already have something in your belly, t
 cm-xeno-devour-failed-target-roting = Ew, {$target} is already starting to rot.
 cm-xeno-devour-failed-target-buckled = {$target} is buckled to {$strap}.
 cm-xeno-devour-failed-target-resisting = {$target} is resisting, ground them!
+cm-xeno-devour-failed-target-not-grabbed = We need to get a better grip on {$target}, grab them!
