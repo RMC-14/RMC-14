@@ -104,6 +104,29 @@ public sealed class SpreaderSystem : EntitySystem
     /// <inheritdoc/>
     public override void Update(float frameTime)
     {
+        var query = EntityQueryEnumerator<ActiveEdgeSpreaderComponent>();
+        var xforms = GetEntityQuery<TransformComponent>();
+        var spreaderQuery = GetEntityQuery<EdgeSpreaderComponent>();
+
+        var spreaders = new List<(EntityUid Uid, ActiveEdgeSpreaderComponent Comp)>(Count<ActiveEdgeSpreaderComponent>());
+
+        // Build a list of all existing Edgespreaders, shuffle them
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            // RMC14
+            if (comp.NextSpread > _timing.CurTime)
+            {
+                continue;
+            }
+            spreaders.Add((uid, comp));
+        }
+
+        if (spreaders.Count <= 0)
+        {
+            return;
+        }
+
+        // RMC14 _gridUpdates changes moved after collecting spreaders (only updates if there are any spreaders that need updating)
         // Check which grids are valid for spreading
         var spreadGrids = EntityQueryEnumerator<SpreaderGridComponent>();
 
@@ -122,23 +145,6 @@ public sealed class SpreaderSystem : EntitySystem
 
         if (_gridUpdates.Count == 0)
             return;
-
-        var query = EntityQueryEnumerator<ActiveEdgeSpreaderComponent>();
-        var xforms = GetEntityQuery<TransformComponent>();
-        var spreaderQuery = GetEntityQuery<EdgeSpreaderComponent>();
-
-        var spreaders = new List<(EntityUid Uid, ActiveEdgeSpreaderComponent Comp)>(Count<ActiveEdgeSpreaderComponent>());
-
-        // Build a list of all existing Edgespreaders, shuffle them
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            // RMC14
-            if (comp.NextSpread > _timing.CurTime)
-            {
-                continue;
-            }
-            spreaders.Add((uid, comp));
-        }
 
         _robustRandom.Shuffle(spreaders);
 
