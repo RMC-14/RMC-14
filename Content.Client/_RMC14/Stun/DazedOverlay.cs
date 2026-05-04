@@ -1,7 +1,6 @@
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Stun;
 
