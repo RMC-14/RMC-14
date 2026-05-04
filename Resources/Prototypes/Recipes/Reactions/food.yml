@@ -98,7 +98,7 @@
       amount: 15
     Egg:
       amount: 12
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 5
     Milk:
       amount: 5
@@ -150,7 +150,7 @@
       amount: 15
     MilkSoy:
       amount: 15
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 5
   effects:
     - !type:CreateEntityReactionEffect
@@ -197,7 +197,7 @@
       amount: 4
     Milk:
       amount: 2
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 2
   effects:
     - !type:CreateEntityReactionEffect
@@ -210,7 +210,7 @@
   reactants:
     JuiceTomato:
       amount: 2
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
   products:
     Ketchup: 3
@@ -267,7 +267,7 @@
       amount: 1
     Vinegar:
       amount: 1
-    Sugar:
+    RMCSugar: #Changed for RMC
       amount: 1
   products:
     BbqSauce: 3

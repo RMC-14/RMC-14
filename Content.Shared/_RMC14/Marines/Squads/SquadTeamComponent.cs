@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Tracker.SquadLeader;
+using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared.Access;
 using Content.Shared.Radio;
 using Content.Shared.Roles;
@@ -25,7 +25,7 @@ public sealed partial class SquadTeamComponent : Component
     [DataField]
     public Color? AccessibleColor;
 
-    [DataField(required: true)]
+    [DataField]
     public ProtoId<RadioChannelPrototype>? Radio;
 
     [DataField(required: true)]
@@ -61,4 +61,10 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField]
     public SpriteSpecifier.Rsi LeaderIcon = new(new ResPath("_RMC14/Interface/cm_job_icons.rsi"), "hudsquad_leader_a");
+
+    /// <summary>
+    /// Squad objectives assigned to this squad. Key is the objective type, value is the objective text.
+    /// </summary>
+    [DataField]
+    public Dictionary<SquadObjectiveType, string> Objectives = new();
 }

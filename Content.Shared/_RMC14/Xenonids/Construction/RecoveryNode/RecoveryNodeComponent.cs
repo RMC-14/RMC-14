@@ -8,17 +8,17 @@ namespace Content.Shared._RMC14.Xenonids.Construction.RecoveryNode;
 public sealed partial class RecoveryNodeComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 HealAmount = 20;
+    public FixedPoint2 HealAmount = 25;
 
     [DataField, AutoNetworkedField]
     public float HealRange = 1.5F;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan HealCooldown = TimeSpan.FromSeconds(5);
+    public TimeSpan HealCooldown = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public TimeSpan NextHealAt;
 
     [DataField]
-    public DoAfterId? HealDoafter;
+    public DoAfterId? HealDoAfter;
 }

@@ -56,6 +56,7 @@ public sealed class SkillsSystem : EntitySystem
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<GetMeleeDamageEvent>(OnGetMeleeDamage);
 
+        SubscribeLocalEvent<SkillsComponent, MapInitEvent>(OnSkillsMapInit);
         SubscribeLocalEvent<SkillsComponent, GetVerbsEvent<ExamineVerb>>(OnSkillsVerbExamine);
 
         SubscribeLocalEvent<MedicallyUnskilledDoAfterComponent, AttemptHyposprayUseEvent>(OnAttemptHyposprayUse);
@@ -94,6 +95,18 @@ public sealed class SkillsSystem : EntitySystem
             return;
 
         args.Damage = ApplyMeleeSkillModifier(args.User, args.Damage);
+    }
+
+    private void OnSkillsMapInit(Entity<SkillsComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.Preset is not { } presetPrototype)
+            return;
+
+        if (!presetPrototype.TryGet(out var skillPreset, _prototypes, _compFactory))
+            return;
+
+        ent.Comp.Skills = new(skillPreset.Skills);
+        Dirty(ent);
     }
 
     private void OnSkillsVerbExamine(Entity<SkillsComponent> ent, ref GetVerbsEvent<ExamineVerb> args)

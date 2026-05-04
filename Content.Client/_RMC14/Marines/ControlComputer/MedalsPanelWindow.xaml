@@ -1,0 +1,57 @@
+<controls:MedalsPanelWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Marines.ControlComputer"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="{Loc 'rmc-medal-panel'}"
+    MinSize="750 625">
+    <TabContainer Name="TabContainer" Access="Public" VerticalExpand="True" HorizontalExpand="True">
+        <TabContainer.PanelStyleBoxOverride>
+            <graphics:StyleBoxFlat 
+                BorderColor="#3A3A3A" 
+                BorderThickness="1" 
+                BackgroundColor="#141414" />
+        </TabContainer.PanelStyleBoxOverride>
+        
+        <!-- Tab 1: Give medals -->
+        <ScrollContainer Name="GiveMedalsTab" Access="Public" 
+                         HScrollEnabled="False" VScrollEnabled="True"
+                         VerticalExpand="True" HorizontalExpand="True">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" 
+                        SeparationOverride="6" Margin="8">
+                <!-- Panel with button -->
+                <PanelContainer HorizontalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat 
+                            BackgroundColor="#1F1F1F"
+                            BorderColor="#3A3A3A" 
+                            BorderThickness="1" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="8">
+                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" 
+                                     HorizontalAlignment="Center">
+                            <Button Name="GrantNewMedalButton" Access="Public" 
+                                   Text="{Loc 'rmc-medal-panel-give-new-medal'}" 
+                                   StyleClasses="OpenBoth" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+                <!-- Recommendations list -->
+                <ScrollContainer VerticalExpand="True" HScrollEnabled="False" 
+                                HorizontalExpand="True">
+                    <BoxContainer Name="RecommendationsList" Access="Public" 
+                                 Orientation="Vertical" HorizontalExpand="True" 
+                                 SeparationOverride="6" />
+                </ScrollContainer>
+            </BoxContainer>
+        </ScrollContainer>
+        
+        <!-- Tab 2: View medals -->
+        <ScrollContainer Name="ViewMedalsTab" Access="Public" 
+                         HScrollEnabled="False" VScrollEnabled="True"
+                         VerticalExpand="True" HorizontalExpand="True">
+            <BoxContainer Name="ViewMedalsList" Access="Public" 
+                         Orientation="Vertical" HorizontalExpand="True" 
+                         SeparationOverride="6" Margin="8" />
+        </ScrollContainer>
+    </TabContainer>
+</controls:MedalsPanelWindow>

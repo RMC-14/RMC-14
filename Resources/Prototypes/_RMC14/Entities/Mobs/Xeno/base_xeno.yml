@@ -33,6 +33,7 @@
   abstract: true
   save: false
   components: # TODO RMC14 camera recoil from large explosions? check 13
+  - type: ZombieImmune
   - type: BlockEntityStorage
     whitelist:
       components:
@@ -75,6 +76,9 @@
         volume: -4
   - type: RMCHealthExaminable
   - type: AcidBloodSplash
+    closeSplashRadius: 0.5
+    standardSplashRadius: 1.5
+    gibSplashRadius: 2.5
     damage:
       types:
         Heat: 25
@@ -114,8 +118,13 @@
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
   - type: FireVisuals
-    sprite: Mobs/Effects/onfire.rsi
-    normalState: Generic_mob_burning
+    sprite: _RMC14/Mobs/Effects/on_fire_xeno.rsi
+    normalState: simple_onfire
+    lightEnergyPerStack: 0.2
+    lightRadiusPerStack: 0.1
+    maxLightRadius: 2
+    maxLightEnergy: 8
+  - type: RMCFireColor
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -131,48 +140,6 @@
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
-      visible: false
-  - type: GenericVisualizer
-    visuals:
-      enum.TargetedVisuals.Targeted:
-        targeted:
-          None:
-            visible: false
-          Spotted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: spotter_lockon
-            visible: true
-          Targeted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon
-            visible: true
-          TargetedIntense:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon_intense
-            visible: true
-      enum.TargetedVisuals.TargetedDirection:
-        targetedDirection:
-          True: { visible: true}
-          False: { visible: false}
-      enum.TargetedVisuals.TargetedDirectionIntense:
-        targetedDirectionIntense:
-          True: { visible: true }
-          False: { visible: false }
-      enum.FocusedVisuals.Focused:
-        focused:
-          True: { visible: true}
-          False: { visible: false}
   - type: Spottable
   - type: Physics
     bodyType: KinematicController

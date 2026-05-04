@@ -37,7 +37,7 @@
   <Box> <GuideEntityEmbed Entity="RMCWeaponLauncherM5ATL" Context="" /> <GuideEntityEmbed Entity="RMCRocket84mm" Context=""/> <GuideEntityEmbed Entity="RMCRocket84mmAntiArmor" Context=""/> <GuideEntityEmbed Entity="RMCExplosivePlastic" Context=""/> </Box>
 
   - [bold][textlink="Sniper Specialist" link="RMCGuideRoleSniperSpec"][/textlink][/bold] - "Long-Range Deterrent"
-  - Wielding the M96S sniper rifle or the XM43E1 anti-materiel sniper rifle , this specialist provides crucial long-range fire support, capable of slowing key targets and acting as a powerful psychological deterrent to Xenomorph advances. Comes with a spotter kit for rifleman.
+  - Wielding the M96S sniper rifle or the XM43E1 anti-materiel sniper rifle , this specialist provides crucial long-range fire support, capable of slowing key targets and acting as a powerful psychological deterrent to Xenonid advances. Comes with a spotter kit for rifleman.
   <Box> <GuideEntityEmbed Entity="CMM96SSniperRifle" Context=""/> <GuideEntityEmbed Entity="RMCXM43E1AntiMaterielRifle" Context=""/> <GuideEntityEmbed Entity="RMCKitSpotter" Context=""/> </Box>
 
   - [bold][textlink="Scout Specialist" link="RMCGuideRoleScoutSpec"][/textlink][/bold] - "Silent Hunter & Intel"

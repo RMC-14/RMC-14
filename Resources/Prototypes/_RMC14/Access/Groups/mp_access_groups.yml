@@ -10,6 +10,7 @@
   - CMAccessMarinePrep
   - CMAccessCMP
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessAlpha
   - CMAccessBravo
   - CMAccessCharlie
@@ -30,6 +31,7 @@
   - CMAccessDropship
   - CMAccessMarinePrep
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessAlpha
   - CMAccessBravo
   - CMAccessCharlie
@@ -50,6 +52,7 @@
   - CMAccessMarinePrep
   - CMAccessArmory
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessAlpha
   - CMAccessBravo
   - CMAccessCharlie

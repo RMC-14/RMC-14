@@ -18,9 +18,9 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly RMCHumanoidAppearanceSystem _rmcHumanoid = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     public event Action? PlayerMedalUpdated;
 
@@ -50,6 +50,8 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
                 continue;
 
             var layer = GetKey(accessory, accessoryComp, index);
+            // For items with hasIconSprite (like medals on clothing), use unique key to avoid overwriting on clothing sprite
+            var clothingLayer = accessoryComp.HasIconSprite ? $"{layer}_{index}" : layer;
 
             if (accessoryComp.PlayerSprite == null && TryComp(accessory, out SpriteComponent? accessorySprite))
             {
@@ -64,7 +66,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
             if (accessoryComp.HasIconSprite)
             {
-                var clothingLayer = _sprite.LayerMapReserve(ent.Owner, layer);
+                var clothingSpriteLayer = _sprite.LayerMapReserve(ent.Owner, clothingLayer);
                 _sprite.LayerSetVisible(ent.Owner, clothingLayer, !accessoryComp.Hidden);
                 _sprite.LayerSetRsi(ent.Owner, clothingLayer, sprite.RsiPath);
                 _sprite.LayerSetRsiState(ent.Owner, clothingLayer, sprite.RsiState);
@@ -113,8 +115,10 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
         }
 
         var layer = GetKey(item, accessoryComp, index);
+        // For items with hasIconSprite, use the same unique key format as when adding
+        var clothingLayer = accessoryComp.HasIconSprite ? $"{layer}_{index}" : layer;
 
-        if (_sprite.LayerMapTryGet(ent.Owner, layer, out var clothingLayer, false))
+        if (_sprite.LayerMapTryGet(ent.Owner, layer, out var clothingSpriteLayer, false))
             _sprite.LayerSetVisible(ent.Owner, clothingLayer, false);
 
         _item.VisualsChanged(ent);
@@ -130,27 +134,30 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
         var user = args.Equipee;
 
+        var index = 0;
         foreach (var accessory in container.ContainedEntities)
         {
             if (!TryComp<UniformAccessoryComponent>(accessory, out var accessoryComp))
                 continue;
 
-            if (accessoryComp.LayerKey is not { } key)
-                continue;
             if (accessoryComp.PlayerSprite == null && TryComp(accessory, out SpriteComponent? accessorySprite))
             {
                 accessoryComp.PlayerSprite = new(accessorySprite.BaseRSI?.Path ?? new ResPath("_RMC14/Objects/Medals/bronze.rsi"), "equipped");
             }
 
-            if (accessoryComp.LayerKey != null)
-                key = accessoryComp.LayerKey;
-
-            if (!args.RevealedLayers.Contains(key))
+            if (accessoryComp.LayerKeys == null || accessoryComp.LayerKeys.Count == 0)
+            {
+                index++;
                 continue;
+            }
 
-            if (!_sprite.LayerMapTryGet(user, key, out var layer, false) ||
+            var key = GetKey(accessory, accessoryComp, index);
+
+            if (!args.RevealedLayers.Contains(key) ||
+                !_sprite.LayerMapTryGet(user, key, out var layer, false) ||
                 !_sprite.TryGetLayer(user, layer, out var layerData, false))
             {
+                index++;
                 continue;
             }
 
@@ -159,6 +166,8 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
             layer = _sprite.LayerMapReserve(user, key);
             _sprite.LayerSetData(user, layer, data);
+
+            index++;
         }
     }
 
@@ -166,8 +175,16 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
     {
         var key = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(uid)}_{uid.Id}";
 
-        if (component.LayerKey != null)
-            key = component.LayerKey;
+        if (component.LayerKeys != null && component.LayerKeys.Count > 0 && component.Limit > 1)
+        {
+            // Use index to select appropriate layer from list
+            var layerIndex = index < component.LayerKeys.Count ? index : component.LayerKeys.Count - 1;
+            key = component.LayerKeys[layerIndex];
+        }
+        else if (component.LayerKeys != null && component.LayerKeys.Count == 1)
+        {
+            key = component.LayerKeys[0];
+        }
 
         return key;
     }

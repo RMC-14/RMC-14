@@ -14,11 +14,14 @@
                     <PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BackgroundColor="#252525" BorderColor="#3A3A3A" BorderThickness="0 0 0 1" />
                     </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Horizontal" Margin="8 4">
-                        <RichTextLabel Name="SquadLeaderLabel" Access="Public" StyleClasses="HeaderText" />
-                        <Control HorizontalExpand="True" />
-                        <Button Name="ChangeTrackerButton" Access="Public"
-                                Text="{Loc rmc-squad-info-change-tracker}" StyleClasses="ActionButton" />
+                    <BoxContainer Orientation="Vertical">
+                        <BoxContainer Orientation="Horizontal" Margin="8 4">
+                            <RichTextLabel Name="SquadLeaderLabel" Access="Public" StyleClasses="HeaderText" />
+                            <Control HorizontalExpand="True" />
+                            <Button Name="ChangeTrackerButton" Access="Public"
+                                    Text="{Loc rmc-squad-info-change-tracker}" StyleClasses="ActionButton" />
+                        </BoxContainer>
+                        <BoxContainer Name="ObjectivesContainer" Access="Public" Orientation="Vertical" Margin="8 0 8 4" />
                     </BoxContainer>
                 </PanelContainer>
                 <BoxContainer Orientation="Vertical" Margin="0 8">

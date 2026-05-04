@@ -4,7 +4,7 @@
   abstract: true
   parent: CMPlanetBase
   id: RMCPlanetDesertWaterShoreBase
-  name: tile-rmc-desert-water-shore
+  name: tiles-rmc-desert-water-shore
   blockAnchoring: true
   blockConstruction: true
 

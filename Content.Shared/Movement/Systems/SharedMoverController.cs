@@ -265,6 +265,15 @@ public abstract partial class SharedMoverController : VirtualController
             var walkSpeed = moveSpeedComponent?.CurrentWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
             var sprintSpeed = moveSpeedComponent?.CurrentSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
 
+            // RMC14
+            var baseWalkSpeed = moveSpeedComponent?.BaseWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
+            // Keep the walk speed unchanged if the modified sprint speed is higher than the base walk speed.
+            if (baseWalkSpeed < sprintSpeed)
+                walkSpeed = baseWalkSpeed;
+            // If the sprint speed drops below the walk speed, lower the walk speed to match the sprint speed.
+            else
+                walkSpeed = sprintSpeed;
+
             wishDir = AssertValidWish(mover, walkSpeed, sprintSpeed);
 
             if (wishDir != Vector2.Zero)
