@@ -1215,7 +1215,8 @@
   id: RMCERTCallContractors
   name: rmc-ert-call-contractors-name
   organization: rmc-ert-organization-vai
-  npcFactions: [ WeYa ]
+  npcFactions: [ VAI ]
+  iffFaction: FactionVAI
   category: rmc-ert-category-corporate
   enabled: true
   adminSelectable: true
@@ -1310,7 +1311,8 @@
   id: RMCERTCallContractorsCovert
   name: rmc-ert-call-contractors-covert-name
   organization: rmc-ert-organization-vai
-  npcFactions: [ WeYa ]
+  npcFactions: [ VAI ]
+  iffFaction: FactionVAI
   category: rmc-ert-category-corporate
   enabled: true
   adminSelectable: true

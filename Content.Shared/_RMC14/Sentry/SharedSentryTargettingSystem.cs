@@ -27,6 +27,7 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         { "SPP", "FactionSPP" },
         { "Halcyon", "FactionHalcyon" },
         { "WeYa", "FactionWeYa" },
+        { "VAI", "FactionVAI" },
         { "Civilian", "FactionSurvivor" },
         { "RoyalMarines", "FactionRoyalMarines" },
         { "Bureau", "FactionBureau" },

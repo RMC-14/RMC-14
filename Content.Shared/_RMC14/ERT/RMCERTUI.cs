@@ -3,7 +3,6 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.ERT;
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Slimmed-down call data sent to the admin EUI.
 /// </summary>
@@ -14,6 +13,7 @@ namespace Content.Shared._RMC14.ERT;
 /// <param name="RandomWeight">Weighted-random selection weight for random approval.</param>
 /// <param name="AdminSelectable">Whether admins may pick this call directly.</param>
 /// <param name="AdminButtonLabel">Optional localized force-call button label.</param>
+[Serializable, NetSerializable]
 public readonly record struct RMCERTCallOption(
     string Id,
     string Name,
@@ -23,7 +23,6 @@ public readonly record struct RMCERTCallOption(
     bool AdminSelectable,
     string? AdminButtonLabel);
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Slimmed-down request data sent to the admin EUI.
 /// </summary>
@@ -38,6 +37,7 @@ public readonly record struct RMCERTCallOption(
 /// <param name="CreatedAt">Formatted round time when the request was created.</param>
 /// <param name="LastError">Last blocking error for this request.</param>
 /// <param name="LastWarning">Last non-blocking warning for this request.</param>
+[Serializable, NetSerializable]
 public readonly record struct RMCERTRequestOption(
     Guid Id,
     RMCERTRequestState State,
@@ -51,7 +51,6 @@ public readonly record struct RMCERTRequestOption(
     string LastError,
     string LastWarning);
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Current state of the admin ERT dispatch window.
 /// </summary>
@@ -59,6 +58,7 @@ public readonly record struct RMCERTRequestOption(
 /// <param name="calls">Call options available for request approval.</param>
 /// <param name="canForceCalls">Whether the viewer can send force-call messages.</param>
 /// <param name="forceCalls">Call options exposed in the force-call tab.</param>
+[Serializable, NetSerializable]
 public sealed class RMCERTAdminEuiState(
     List<RMCERTRequestOption> requests,
     List<RMCERTCallOption> calls,
@@ -87,17 +87,17 @@ public sealed class RMCERTAdminEuiState(
     public readonly List<RMCERTCallOption> ForceCalls = forceCalls;
 }
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Requests a fresh admin EUI state from the server.
 /// </summary>
+[Serializable, NetSerializable]
 public sealed class RMCERTAdminRefreshMsg : EuiMessageBase;
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Requests a weighted-random call selection for the target request.
 /// </summary>
 /// <param name="request">Runtime request id to approve.</param>
+[Serializable, NetSerializable]
 public sealed class RMCERTAdminApproveRandomMsg(Guid request) : EuiMessageBase
 {
     /// <summary>
@@ -106,12 +106,12 @@ public sealed class RMCERTAdminApproveRandomMsg(Guid request) : EuiMessageBase
     public readonly Guid Request = request;
 }
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Requests a specific call selection for the target request.
 /// </summary>
 /// <param name="request">Runtime request id to approve.</param>
 /// <param name="call">Prototype id of the call to dispatch.</param>
+[Serializable, NetSerializable]
 public sealed class RMCERTAdminApproveSpecificMsg(Guid request, string call) : EuiMessageBase
 {
     /// <summary>
@@ -125,11 +125,11 @@ public sealed class RMCERTAdminApproveSpecificMsg(Guid request, string call) : E
     public readonly string Call = call;
 }
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Requests denial of a pending ERT request.
 /// </summary>
 /// <param name="request">Runtime request id to deny.</param>
+[Serializable, NetSerializable]
 public sealed class RMCERTAdminDenyMsg(Guid request) : EuiMessageBase
 {
     /// <summary>
@@ -138,11 +138,11 @@ public sealed class RMCERTAdminDenyMsg(Guid request) : EuiMessageBase
     public readonly Guid Request = request;
 }
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Requests cancellation of an approved or active ERT request.
 /// </summary>
 /// <param name="request">Runtime request id to cancel.</param>
+[Serializable, NetSerializable]
 public sealed class RMCERTAdminCancelMsg(Guid request) : EuiMessageBase
 {
     /// <summary>
@@ -151,11 +151,11 @@ public sealed class RMCERTAdminCancelMsg(Guid request) : EuiMessageBase
     public readonly Guid Request = request;
 }
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Requests immediate launch of a recruiting ERT request.
 /// </summary>
 /// <param name="request">Runtime request id to launch.</param>
+[Serializable, NetSerializable]
 public sealed class RMCERTAdminLaunchMsg(Guid request) : EuiMessageBase
 {
     /// <summary>
@@ -164,12 +164,12 @@ public sealed class RMCERTAdminLaunchMsg(Guid request) : EuiMessageBase
     public readonly Guid Request = request;
 }
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Requests an admin-forced call without a player distress source.
 /// </summary>
 /// <param name="call">Prototype id of the call to force dispatch.</param>
 /// <param name="reason">Admin supplied reason for the force call.</param>
+[Serializable, NetSerializable]
 public sealed class RMCERTAdminForceCallMsg(string call, string reason) : EuiMessageBase
 {
     /// <summary>

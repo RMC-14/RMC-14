@@ -19,7 +19,7 @@
     components:
     - type: NpcFactionMember
       factions:
-      - WeYa
+      - VAI
     - type: Skills
       skills:
         RMCSkillCqc: 1
@@ -91,7 +91,7 @@
     components:
     - type: NpcFactionMember
       factions:
-      - WeYa
+      - VAI
     - type: Skills
       skills:
         RMCSkillFireman: 1

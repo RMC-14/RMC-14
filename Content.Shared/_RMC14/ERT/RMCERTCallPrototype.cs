@@ -7,10 +7,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.ERT;
 
-[Prototype("rmcERTCall")]
 /// <summary>
 /// Data-driven definition of an ERT option, including roster, shuttle source, announcements and request checks.
 /// </summary>
+[Prototype("rmcERTCall")]
 public sealed partial class RMCERTCallPrototype : IPrototype
 {
     /// <summary>
@@ -194,10 +194,10 @@ public sealed partial class RMCERTCallPrototype : IPrototype
     public List<LocId> Features = [];
 }
 
-[DataDefinition]
 /// <summary>
 /// One role entry within an ERT call's potential roster.
 /// </summary>
+[DataDefinition]
 public sealed partial class RMCERTRoleEntry
 {
     /// <summary>
@@ -272,10 +272,10 @@ public sealed partial class RMCERTRoleEntry
     public int Priority;
 }
 
-[DataDefinition]
 /// <summary>
 /// Weighted ghost-role entity choice within an ERT role entry.
 /// </summary>
+[DataDefinition]
 public sealed partial class RMCERTWeightedGhostRoleEntity
 {
     /// <summary>
@@ -291,10 +291,10 @@ public sealed partial class RMCERTWeightedGhostRoleEntity
     public int Weight = 1;
 }
 
-[DataDefinition]
 /// <summary>
 /// Optional announcement and sound hooks for each stage of an ERT request lifecycle.
 /// </summary>
+[DataDefinition]
 public sealed partial class RMCERTAnnouncementSet
 {
     /// <summary>
@@ -334,10 +334,10 @@ public sealed partial class RMCERTAnnouncementSet
     public RMCERTStageAnnouncement? Failed;
 }
 
-[DataDefinition]
 /// <summary>
 /// Marine-facing announcement data for one public ERT lifecycle stage.
 /// </summary>
+[DataDefinition]
 public sealed partial class RMCERTStageAnnouncement
 {
     /// <summary>
@@ -371,10 +371,10 @@ public sealed partial class RMCERTStageAnnouncement
     public bool RawTitle = true;
 }
 
-[DataDefinition]
 /// <summary>
 /// Request gating and recruitment limits for a single ERT call.
 /// </summary>
+[DataDefinition]
 public sealed partial class RMCERTRequirementSet
 {
     /// <summary>

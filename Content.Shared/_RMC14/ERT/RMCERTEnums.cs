@@ -2,10 +2,10 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.ERT;
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Source that originated the ERT request.
 /// </summary>
+[Serializable, NetSerializable]
 public enum RMCERTRequestSource : byte
 {
     /// <summary>
@@ -29,10 +29,10 @@ public enum RMCERTRequestSource : byte
     Ares,
 }
 
-[Serializable, NetSerializable]
 /// <summary>
 /// Server-side lifecycle stages for an ERT request.
 /// </summary>
+[Serializable, NetSerializable]
 public enum RMCERTRequestState : byte
 {
     /// <summary>

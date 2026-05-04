@@ -12,10 +12,10 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 
 namespace Content.Client._RMC14.ERT;
 
-[UsedImplicitly]
 /// <summary>
 /// Client-side admin EUI that renders requests as a lightweight action list.
 /// </summary>
+[UsedImplicitly]
 public sealed class RMCERTAdminEui : BaseEui
 {
     private static readonly Color RequestCardBackground = Color.FromHex("#2b2c38");

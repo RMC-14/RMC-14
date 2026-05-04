@@ -4,11 +4,11 @@ using Robust.Shared.Maths;
 
 namespace Content.Shared._RMC14.Dropship;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedDropshipSystem))]
 /// <summary>
 /// Landing destination metadata used by dropship navigation and restricted ERT routing.
 /// </summary>
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedDropshipSystem))]
 public sealed partial class DropshipDestinationComponent : Component
 {
     /// <summary>
@@ -70,13 +70,4 @@ public sealed partial class DropshipDestinationComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? ArrivalSoundEntity;
-}
-
-/// <summary>
-/// Marks a docking connector on the shuttle as the preferred port for restricted RMC destination routing.
-/// Vanilla docking doors remain a fallback for older/event shuttle maps.
-/// </summary>
-[RegisterComponent]
-public sealed partial class RMCShuttleMobileDockComponent : Component
-{
 }
