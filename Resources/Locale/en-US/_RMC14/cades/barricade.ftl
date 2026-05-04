@@ -8,4 +8,3 @@ rmc-barricade-damaged-4 = [color=red]It's crumbling apart, just a few more blows
 rmc-folding-barricade-link-set = You set up {THE($barricade)} for linking.
 rmc-folding-barricade-link-removed = You remove the linking from {THE($barricade)}.
 rmc-folding-barricade-link-no-points = {CAPITALIZE(THE($barricade))} has no linking points.
-rmc-folding-barricade-link-unsecured = Secure {THE($barricade)} before setting up linking.

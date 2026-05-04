@@ -76,10 +76,6 @@ public sealed class RMCFoldingBarricadeLinkingSystem : EntitySystem
         if (!_transformQuery.TryGetComponent(ent, out var xform) ||
             !xform.Anchored)
         {
-            _popup.PopupPredicted(Loc.GetString("rmc-folding-barricade-link-unsecured", ("barricade", ent.Owner)),
-                ent,
-                args.User,
-                PopupType.SmallCaution);
             return;
         }
 
