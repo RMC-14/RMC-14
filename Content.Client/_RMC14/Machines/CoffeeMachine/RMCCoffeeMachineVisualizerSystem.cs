@@ -5,6 +5,7 @@ namespace Content.Client._RMC14.Machines.CoffeeMachine;
 
 public sealed class RMCCoffeeMachineVisualizerSystem : VisualizerSystem<RMCCoffeeMachineComponent>
 {
+    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
     protected override void OnAppearanceChange(EntityUid uid, RMCCoffeeMachineComponent component, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
@@ -13,7 +14,8 @@ public sealed class RMCCoffeeMachineVisualizerSystem : VisualizerSystem<RMCCoffe
         if (!AppearanceSystem.TryGetData(uid, RMCCoffeeMachineVisuals.HasCup, out bool hasCup, args.Component))
             hasCup = false;
 
-        args.Sprite.LayerSetVisible(CoffeeMachineLayers.Cup, hasCup);
+        var entity = new Entity<SpriteComponent?>(uid, args.Sprite);
+        _spriteSystem.LayerSetVisible(entity, CoffeeMachineLayers.Cup, hasCup);
     }
 }
 

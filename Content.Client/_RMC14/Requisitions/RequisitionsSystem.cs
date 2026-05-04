@@ -1,14 +1,14 @@
-﻿using Content.Shared._RMC14.Requisitions;
+using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
-using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client._RMC14.Requisitions;
 
 public sealed class RequisitionsSystem : SharedRequisitionsSystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private const string AnimationKey = "cm_requisitions_animation";
 
@@ -24,7 +24,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
     private void OnElevatorHandleState(Entity<RequisitionsElevatorComponent> elevator, ref AfterAutoHandleStateEvent args)
     {
         if (!TryComp(elevator, out SpriteComponent? sprite) ||
-            !sprite.LayerMapTryGet(RequisitionsElevatorLayers.Base, out var layer))
+            !_sprite.LayerMapTryGet((elevator.Owner, sprite), RequisitionsElevatorLayers.Base, out var layer, false))
         {
             return;
         }
@@ -35,10 +35,10 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         switch (elevator.Comp.Mode)
         {
             case RequisitionsElevatorMode.Lowered:
-                sprite.LayerSetState(layer, elevator.Comp.LoweredState);
+                _sprite.LayerSetRsiState((elevator.Owner, sprite), layer, elevator.Comp.LoweredState);
                 break;
             case RequisitionsElevatorMode.Raised:
-                sprite.LayerSetState(layer, elevator.Comp.RaisedState);
+                _sprite.LayerSetRsiState((elevator.Owner, sprite), layer, elevator.Comp.RaisedState);
                 break;
             case RequisitionsElevatorMode.Lowering:
                 elevator.Comp.LoweringAnimation ??= new Animation
@@ -84,7 +84,7 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
     private void OnGearHandleState(Entity<RequisitionsGearComponent> gear, ref AfterAutoHandleStateEvent args)
     {
         if (!TryComp(gear, out SpriteComponent? sprite) ||
-            !sprite.LayerMapTryGet(RequisitionsGearLayers.Base, out var layer))
+            !_sprite.LayerMapTryGet((gear.Owner, sprite), RequisitionsGearLayers.Base, out var layer, false))
         {
             return;
         }
@@ -96,13 +96,13 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
             _ => gear.Comp.StaticState
         };
 
-        sprite.LayerSetState(layer, state);
+        _sprite.LayerSetRsiState((gear.Owner, sprite), layer, state);
     }
 
     private void OnRailingHandleState(Entity<RequisitionsRailingComponent> railing, ref AfterAutoHandleStateEvent args)
     {
         if (!TryComp(railing, out SpriteComponent? sprite) ||
-            !sprite.LayerMapTryGet(RequisitionsRailingLayers.Base, out var layer))
+            !_sprite.LayerMapTryGet((railing.Owner, sprite), RequisitionsRailingLayers.Base, out var layer, false))
         {
             return;
         }
@@ -111,10 +111,10 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         switch (railing.Comp.Mode)
         {
             case RequisitionsRailingMode.Lowered:
-                sprite.LayerSetState(layer, railing.Comp.LoweredState);
+                _sprite.LayerSetRsiState((railing.Owner, sprite), layer, railing.Comp.LoweredState);
                 break;
             case RequisitionsRailingMode.Raised:
-                sprite.LayerSetState(layer, railing.Comp.RaisedState);
+                _sprite.LayerSetRsiState((railing.Owner, sprite), layer, railing.Comp.RaisedState);
                 break;
             case RequisitionsRailingMode.Lowering:
                 railing.Comp.LowerAnimation ??= new Animation
@@ -157,17 +157,17 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         }
     }
 
-    private void Animate(SpriteComponent sprite, object layerKey)
+    private void Animate(EntityUid uid, SpriteComponent sprite, Enum layerKey)
     {
-        if (!sprite.LayerExists(layerKey) ||
-            sprite[layerKey] is not Layer layer ||
+        if (!_sprite.LayerExists((uid, sprite), layerKey) ||
+            !_sprite.TryGetLayer((uid, sprite), layerKey, out var layer, false) ||
             layer.ActualState?.DelayCount is not { } delays)
         {
             return;
         }
 
         if (layer.AnimationFrame >= delays - 1)
-            layer.AutoAnimated = false;
+            _sprite.LayerSetAutoAnimated((uid, sprite), layerKey, false);
     }
 
     public override void FrameUpdate(float frameTime)
@@ -175,15 +175,15 @@ public sealed class RequisitionsSystem : SharedRequisitionsSystem
         base.FrameUpdate(frameTime);
 
         var elevatorQuery = EntityQueryEnumerator<RequisitionsElevatorComponent, SpriteComponent>();
-        while (elevatorQuery.MoveNext(out var elevator, out var sprite))
+        while (elevatorQuery.MoveNext(out var uid, out var elevator, out var sprite))
         {
-            Animate(sprite, elevator.Mode);
+            Animate(uid, sprite, elevator.Mode);
         }
 
         var railingQuery = EntityQueryEnumerator<RequisitionsRailingComponent, SpriteComponent>();
-        while (railingQuery.MoveNext(out var gear, out var sprite))
+        while (railingQuery.MoveNext(out var uid, out var gear, out var sprite))
         {
-            Animate(sprite, gear.Mode);
+            Animate(uid, sprite, gear.Mode);
         }
     }
 }

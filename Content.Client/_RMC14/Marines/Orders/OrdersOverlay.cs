@@ -83,7 +83,7 @@ public sealed class OrdersOverlay : Overlay
         if (xform.MapID != args.MapId)
             return;
 
-        var bounds = sprite.Bounds;
+        var bounds = _sprite.GetLocalBounds(ent);
 
         var worldPos = _transform.GetWorldPosition(xform);
 

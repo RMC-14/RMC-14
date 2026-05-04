@@ -25,7 +25,7 @@ public enum DrawingMode
 public sealed partial class TacticalMapWrapper : Control
 {
     [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly ISawmill _sawmill = default!;
 
     public TimeSpan LastUpdateAt;
     public TimeSpan NextUpdateAt;
@@ -53,16 +53,16 @@ public sealed partial class TacticalMapWrapper : Control
     private int? _cachedPlayerNetId;
     private TacticalMapUserComponent? _cachedUserComponent;
 
-    private bool _settingsVisible = false;
+    private bool _settingsVisible;
     private DrawingMode _currentDrawingMode = DrawingMode.None;
 
     private TacticalMapControl.LabelMode _currentLabelState = TacticalMapControl.LabelMode.Area;
     private TacticalMapControl.LabelMode _lastActiveState = TacticalMapControl.LabelMode.Area;
 
     private TacticalMapSettingsManager? _settingsManager;
-    private bool _settingsLoaded = false;
+    private bool _settingsLoaded;
     private string? _currentMapName;
-    private bool _mapNameSet = false;
+    private bool _mapNameSet;
 
     private float _currentBlipSizeMultiplier = 1.0f;
     private float _currentLineThickness = 2.0f;
@@ -149,17 +149,17 @@ public sealed partial class TacticalMapWrapper : Control
             {
                 _settingsManager = new TacticalMapSettingsManager();
                 IoCManager.RegisterInstance<TacticalMapSettingsManager>(_settingsManager);
-                Logger.Warning("not registered in IoC, creating fallback instance");
+                _sawmill.Warning("not registered in IoC, creating fallback instance");
             }
             catch (Exception ex)
             {
-                Logger.Error($"failed to create fallback settings manager: {ex}");
+                _sawmill.Error($"failed to create fallback settings manager: {ex}");
                 _settingsManager = null;
             }
         }
         catch (Exception ex)
         {
-            Logger.Error($"failed to initialize settings manager: {ex}");
+            _sawmill.Error($"failed to initialize settings manager: {ex}");
             _settingsManager = null;
         }
     }
@@ -177,7 +177,7 @@ public sealed partial class TacticalMapWrapper : Control
         }
         catch (Exception ex)
         {
-            Logger.Error($"TacticalMapWrapper: Failed to load settings: {ex}");
+            _sawmill.Error($"TacticalMapWrapper: Failed to load settings: {ex}");
             _settingsLoaded = true;
         }
     }
@@ -217,11 +217,11 @@ public sealed partial class TacticalMapWrapper : Control
         }
         catch (Exception ex)
         {
-            Logger.Error($"failed to apply settings: {ex}");
+            _sawmill.Error($"failed to apply settings: {ex}");
         }
     }
 
-    public void SetupUpdateButton(System.Action<TacticalMapUpdateCanvasMsg> sendMessage)
+    public void SetupUpdateButton(Action<TacticalMapUpdateCanvasMsg> sendMessage)
     {
         UpdateCanvasButton.OnPressed += _ => {
             Dictionary<Vector2i, string> canvasLabels = new(Canvas.TacticalLabels);
@@ -434,7 +434,7 @@ public sealed partial class TacticalMapWrapper : Control
 
         BlipSizeSlider.OnValueChanged += args =>
         {
-            float value = (float)args.Value;
+            float value = args.Value;
             BlipSizeLabel.Text = Loc.GetString("ui-tactical-map-blip-size-label", ("size", value.ToString("F1")));
             Map.BlipSizeMultiplier = value;
             Canvas.BlipSizeMultiplier = value;
@@ -453,7 +453,7 @@ public sealed partial class TacticalMapWrapper : Control
 
         LineThicknessSlider.OnValueChanged += args =>
         {
-            float value = (float)args.Value;
+            float value = args.Value;
             LineThicknessLabel.Text = Loc.GetString("ui-tactical-map-line-width-label", ("width", value.ToString("F1")));
             Map.LineThickness = value;
             Canvas.LineThickness = value;
@@ -742,7 +742,7 @@ public sealed partial class TacticalMapWrapper : Control
         if (player == null)
             return false;
 
-        if (!entMan.TryGetComponent<QueenEyeActionComponent>(player.Value, out QueenEyeActionComponent? queenEyeComp))
+        if (!entMan.TryGetComponent(player.Value, out QueenEyeActionComponent? queenEyeComp))
             return false;
 
         return queenEyeComp.Eye != null;
@@ -770,7 +770,7 @@ public sealed partial class TacticalMapWrapper : Control
         if (_cachedPlayerEntity != currentPlayer)
         {
             IEntityManager entMan = IoCManager.Resolve<IEntityManager>();
-            if (!entMan.TryGetComponent<TacticalMapUserComponent>(currentPlayer.Value, out TacticalMapUserComponent? newUserComp))
+            if (!entMan.TryGetComponent(currentPlayer.Value, out TacticalMapUserComponent? newUserComp))
             {
                 InvalidatePlayerCache();
                 return false;

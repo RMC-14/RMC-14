@@ -7,6 +7,8 @@ namespace Content.Client._RMC14.Xenonids.Inhands;
 
 public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsComponent>
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     protected override void OnAppearanceChange(EntityUid uid, XenoInhandsComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
@@ -20,9 +22,9 @@ public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsCompo
         if (!AppearanceSystem.TryGetData(uid, XenoInhandVisuals.LeftHand, out string left))
             return;
 
-        bool downed = false;
-        bool resting = false;
-        bool ovi = false;
+        bool downed;
+        bool resting;
+        bool ovi;
 
         AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out downed);
         AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out resting);
@@ -40,16 +42,16 @@ public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsCompo
 
             }
 
-            if (!sprite.LayerMapTryGet(layerDef, out var layer))
+            if (!_sprite.LayerMapTryGet((uid, sprite), layerDef, out var layer, false))
                 continue;
 
             if (name == string.Empty)
             {
-                sprite.LayerSetVisible(layer, false);
+                _sprite.LayerSetVisible(uid, layer, false);
             }
             else
             {
-                sprite.LayerSetVisible(layer, true);
+                _sprite.LayerSetVisible(uid, layer, true);
 
                 string stateString = $"{component.Prefix}_{name}_{layerDef.ToString().ToLower()}";
 
@@ -61,7 +63,7 @@ public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsCompo
                 else if (resting)
                     stateString += "_" + component.Resting;
 
-                RSI? rsi = sprite.LayerGetActualRSI(layerDef);
+                RSI? rsi = _sprite.LayerGetEffectiveRsi((uid, sprite), layer);
 
                 if (rsi == null)
                     continue;
@@ -70,10 +72,10 @@ public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsCompo
 
                 if (state != null)
                 {
-                    sprite.LayerSetState(layer, stateString);
+                    _sprite.LayerSetRsiState((uid, sprite), layer, stateString);
                 }
                 else
-                    sprite.LayerSetVisible(layer, false);
+                    _sprite.LayerSetVisible(uid, layer, false);
             }
         }
     }

@@ -1,7 +1,6 @@
-﻿using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Robust.Client.GameObjects;
-using static Robust.Client.GameObjects.SpriteComponent;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Construction;
@@ -9,6 +8,7 @@ namespace Content.Client._RMC14.Xenonids.Construction;
 public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -19,7 +19,6 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
     private void OnAnimateResinBuilding(XenoConstructionAnimationStartEvent ev)
     {
         if (!TryGetEntity(ev.Effect, out var eff) ||
-        !TryGetEntity(ev.Xeno, out var entity) ||
         !TryComp(eff, out XenoConstructionAnimationComponent? timing))
         {
             return;
@@ -28,23 +27,22 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
         if (!TryComp<SpriteComponent>(eff, out var sprite))
             return;
 
-        sprite.LayerMapTryGet(XenoConstructionVisualLayers.Animation, out var layer);
-        var state = sprite.LayerGetState(layer);
+        _sprite.LayerMapTryGet((eff.Value, sprite), XenoConstructionVisualLayers.Animation, out var layer, false);
 
         timing.AnimationTime = ev.BuildTime;
         timing.AnimationTimeFinished = _timing.CurTime + ev.BuildTime;
-        if(sprite.TryGetLayer(layer, out var aLayer) && aLayer.ActualState != null)
+        if(_sprite.TryGetLayer((eff.Value, sprite), layer, out var aLayer, false) && aLayer.ActualState != null)
             timing.TotalFrames = aLayer.ActualState.DelayCount;
     }
 
-    private void Animate(SpriteComponent sprite, object layerKey, int frame)
+    private void Animate(EntityUid uid, SpriteComponent sprite, Enum layerKey, int frame)
     {
-        if (!sprite.LayerExists(layerKey) ||
-            sprite[layerKey] is not Layer layer)
+        if (!_sprite.LayerExists((uid, sprite), layerKey) ||
+            !_sprite.TryGetLayer((uid, sprite), layerKey, out var layer, false))
         {
             return;
         }
-        layer.SetAutoAnimated(layer.AnimationFrame < frame);
+        _sprite.LayerSetAutoAnimated((uid, sprite), layerKey, layer.AnimationFrame < frame);
     }
 
     public override void FrameUpdate(float frameTime)
@@ -58,7 +56,7 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
             if (progression < 0)
                 progression = 0;
             int expectedFrame = (int) Math.Min(effect.TotalFrames * (1 - progression), effect.TotalFrames - 1);
-            Animate(sprite, XenoConstructionVisualLayers.Animation, expectedFrame);
+            Animate(uid, sprite, XenoConstructionVisualLayers.Animation, expectedFrame);
         }
 
     }

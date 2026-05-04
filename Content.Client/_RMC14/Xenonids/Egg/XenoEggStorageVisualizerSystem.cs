@@ -6,6 +6,8 @@ namespace Content.Client._RMC14.Xenonids.Egg;
 
 public sealed partial class XenoEggStorageVisualizerSystem : VisualizerSystem<XenoEggStorageVisualsComponent>
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     protected override void OnAppearanceChange(EntityUid uid, XenoEggStorageVisualsComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
@@ -13,7 +15,7 @@ public sealed partial class XenoEggStorageVisualizerSystem : VisualizerSystem<Xe
         if (sprite == null || !AppearanceSystem.TryGetData(uid, XenoEggStorageVisuals.Number, out int eggs))
             return;
 
-        if (!sprite.LayerMapTryGet(XenoEggStorageVisualLayers.Base, out var layer))
+        if (!_sprite.LayerMapTryGet(uid, XenoEggStorageVisualLayers.Base, out var layer, false))
             return;
 
         string layerState = "eggsac_";
@@ -29,11 +31,11 @@ public sealed partial class XenoEggStorageVisualizerSystem : VisualizerSystem<Xe
         if (AppearanceSystem.TryGetData(uid, XenoEggStorageVisuals.Active, out bool active) && active)
             layerState += "_active";
 
-        sprite.LayerSetState(layer, layerState);
+        _sprite.LayerSetRsiState(uid, layer, layerState);
 
         if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Dead, out bool dead) && dead)
-            sprite.LayerSetVisible(layer, false);
+            _sprite.LayerSetVisible(uid, layer, false);
         else
-            sprite.LayerSetVisible(layer, true);
+            _sprite.LayerSetVisible(uid, layer, true);
     }
 }

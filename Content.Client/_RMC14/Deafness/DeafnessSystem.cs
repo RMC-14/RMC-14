@@ -1,8 +1,8 @@
 using Content.Shared._RMC14.Deafness;
-using Content.Shared.CCVar;
 using Content.Shared.StatusEffect;
 using Robust.Client.Audio;
 using Robust.Client.Player;
+using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -26,7 +26,7 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
         SubscribeLocalEvent<DeafComponent, ComponentShutdown>(OnDeafShutdown);
         SubscribeLocalEvent<DeafComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
 
-        Subs.CVar(_cfg, CCVars.AudioMasterVolume, value => _originalVolume = value, true);
+        Subs.CVar(_cfg, CVars.AudioMasterVolume, value => _originalVolume = value, true);
     }
 
     private void OnDeafShutdown(EntityUid uid, DeafComponent component, ComponentShutdown args)

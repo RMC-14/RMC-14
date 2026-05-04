@@ -22,6 +22,7 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly ItemSystem _item = default!;
     [Dependency] private readonly IResourceCache _resource = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -120,14 +121,14 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
         {
             if (args.Sprite != null)
             {
-                if (args.Sprite.LayerMapTryGet(ItemCamouflageLayers.Layer, out var layer))
+                if (_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(uid, (SpriteComponent?)args.Sprite), ItemCamouflageLayers.Layer, out var layer, false))
                 {
-                    args.Sprite.LayerSetRSI(layer, rsi);
+                    _sprite.LayerSetRsi(new Entity<SpriteComponent?>(uid, (SpriteComponent?)args.Sprite), layer, rsi);
                 }
                 else if (args.Sprite.BaseRSI != null &&
                          _resource.TryGetResource(SpriteSpecifierSerializer.TextureRoot / rsi, out RSIResource? baseRsi))
                 {
-                    args.Sprite.BaseRSI = baseRsi.RSI;
+                    _sprite.SetBaseRsi(new Entity<SpriteComponent?>(uid, args.Sprite), baseRsi.RSI);
                 }
             }
 
@@ -173,7 +174,8 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
 
         if (component.States != null && component.States.TryGetValue(camo, out var state))
         {
-            args.Sprite?.LayerSetState(0, state);
+            if (args.Sprite != null)
+                _sprite.LayerSetRsiState(new Entity<SpriteComponent?>(uid, (SpriteComponent?)args.Sprite), 0, state);
 
             if (TryComp(uid, out AttachableToggleableComponent? toggleable))
             {
@@ -193,11 +195,11 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
         {
             if (args.Sprite != null)
             {
-                foreach (var camoLayer in Enum.GetValues(typeof(ItemCamouflageLayers)))
+                foreach (ItemCamouflageLayers camoLayer in Enum.GetValues(typeof(ItemCamouflageLayers)))
                 {
-                    if (args.Sprite.LayerMapTryGet(camoLayer, out var layer))
+                    if (_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(uid, (SpriteComponent?)args.Sprite), camoLayer, out var layer, false))
                     {
-                        args.Sprite.LayerSetColor(layer, color);
+                        _sprite.LayerSetColor(new Entity<SpriteComponent?>(uid, (SpriteComponent?)args.Sprite), layer, color);
                     }
                 }
             }
@@ -208,9 +210,9 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
             foreach (var (key, layerCamos) in component.Layers)
             {
                 if (layerCamos.TryGetValue(camo, out var layerState) &&
-                    args.Sprite.LayerMapTryGet(key, out var layer))
+                    _sprite.LayerMapTryGet(new Entity<SpriteComponent?>(uid, (SpriteComponent?)args.Sprite), key, out var layer, false))
                 {
-                    args.Sprite.LayerSetState(layer, layerState);
+                    _sprite.LayerSetRsiState(new Entity<SpriteComponent?>(uid, (SpriteComponent?)args.Sprite), layer, layerState);
                 }
             }
         }

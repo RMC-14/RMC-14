@@ -5,6 +5,7 @@ namespace Content.Client._RMC14.Areas;
 
 public sealed class AreasCommandSystem : EntitySystem
 {
+    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
     public bool Enabled = false;
     public bool ShowCAS = false;
 
@@ -14,9 +15,9 @@ public sealed class AreasCommandSystem : EntitySystem
             return;
 
         var areas = AllEntityQuery<AreaComponent, SpriteComponent>();
-        while (areas.MoveNext(out var area, out var sprite))
+        while (areas.MoveNext(out var uid, out var area, out var sprite))
         {
-            sprite.Visible = area.CAS == ShowCAS;
+            _spriteSystem.SetVisible((uid, sprite), area.CAS == ShowCAS);
         }
     }
 }

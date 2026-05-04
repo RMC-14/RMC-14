@@ -8,7 +8,6 @@ namespace Content.Client._RMC14.Stun;
 public sealed class DazedOverlay : Overlay
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 

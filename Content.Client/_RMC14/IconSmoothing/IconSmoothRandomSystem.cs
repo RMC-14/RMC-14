@@ -8,6 +8,7 @@ namespace Content.Client._RMC14.IconSmoothing;
 public sealed class IconSmoothRandomSystem : EntitySystem
 {
     [Dependency] private readonly IReflectionManager _reflection = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private EntityQuery<RandomSpriteComponent> _randomSpriteQuery;
     private EntityQuery<SpriteComponent> _spriteQuery;
@@ -33,10 +34,10 @@ public sealed class IconSmoothRandomSystem : EntitySystem
             int index;
             if (_reflection.TryParseEnumReference(layer.Key, out var @enum))
             {
-                if (!sprite.LayerMapTryGet(@enum, out index, logError: true))
+                if (!_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(ent, sprite), @enum, out index, false))
                     continue;
             }
-            else if (!sprite.LayerMapTryGet(layer.Key, out index))
+            else if (!_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(ent, sprite), layer.Key, out index, false))
             {
                 if (layer.Key is not { } strKey || !int.TryParse(strKey, out index))
                 {
@@ -45,11 +46,11 @@ public sealed class IconSmoothRandomSystem : EntitySystem
                 }
             }
 
-            var spriteName = sprite.LayerGetState(index).Name;
+            var spriteName = _sprite.LayerGetRsiState(new Entity<SpriteComponent?>(ent, sprite), index).Name;
             if (spriteName != null && ent.Comp.Overrides.Contains(spriteName))
             {
-                sprite.LayerSetState(index, layer.Value.State);
-                sprite.LayerSetColor(index, layer.Value.Color ?? Color.White);
+                _sprite.LayerSetRsiState(new Entity<SpriteComponent?>(ent, sprite), index, layer.Value.State);
+                _sprite.LayerSetColor(new Entity<SpriteComponent?>(ent, sprite), index, layer.Value.Color ?? Color.White);
             }
         }
     }

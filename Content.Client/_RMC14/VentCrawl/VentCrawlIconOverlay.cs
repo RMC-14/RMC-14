@@ -28,8 +28,9 @@ public sealed class VentCrawlIconOverlay : Overlay
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
 
-    public VentCrawlIconOverlay()
+    public VentCrawlIconOverlay(EntityQuery<TransformComponent> xformQuery)
     {
+        _xformQuery = xformQuery;
         IoCManager.InjectDependencies(this);
 
         _container = _entity.System<ContainerSystem>();
@@ -52,7 +53,7 @@ public sealed class VentCrawlIconOverlay : Overlay
 
         var ventCrawlers = _entity.AllEntityQueryEnumerator<VentCrawlingComponent, VentCrawlerComponent, TransformComponent, SpriteComponent>();
 
-        while (ventCrawlers.MoveNext(out var uid, out var crawling, out var crawler, out var transform, out var sprite))
+        while (ventCrawlers.MoveNext(out var uid, out _, out var crawler, out var transform, out var sprite))
         {
             if (uid != _players.LocalEntity && (!_container.TryGetContainingContainer(uid, out var container) ||
                 (_entity.TryGetComponent<SubFloorHideComponent>(uid, out var hide) && hide.IsUnderCover &&

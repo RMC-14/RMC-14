@@ -20,7 +20,6 @@ public sealed class RMCFlamerPreviewOverlay : Overlay
     private const float OutlineAlpha = 0.45f;
     private const float OutlineThickness = 0.04f;
 
-    private readonly IEntityManager _ents;
     private readonly IInputManager _input;
     private readonly IEyeManager _eye;
     private readonly IPlayerManager _player;
@@ -36,7 +35,6 @@ public sealed class RMCFlamerPreviewOverlay : Overlay
 
     public RMCFlamerPreviewOverlay(IEntityManager ents)
     {
-        _ents = ents;
         _input = IoCManager.Resolve<IInputManager>();
         _eye = IoCManager.Resolve<IEyeManager>();
         _player = IoCManager.Resolve<IPlayerManager>();

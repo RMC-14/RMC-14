@@ -92,7 +92,7 @@ public sealed class MarineOverlay : Overlay
             if (xform.MapID != args.MapId)
                 continue;
 
-            var bounds = status.Bounds ?? sprite.Bounds;
+            var bounds = status.Bounds ?? _sprite.GetLocalBounds((uid, sprite));
 
             var worldPos = _transform.GetWorldPosition(xform, xformQuery);
 

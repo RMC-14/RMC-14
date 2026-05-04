@@ -2,7 +2,7 @@ using Content.Shared._RMC14.AegisCrate;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._RMC14.AegisCrate;
+namespace Content.Client._RMC14.AegisEvent;
 
 public sealed class AegisCrateSystem : SharedAegisCrateSystem
 {

@@ -324,7 +324,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.LaunchAlarmButton.Text = launchAlarmStatus ? "Stop Alarm" : "Start Alarm";
     }
 
-    public void Update()
+    public override void Update()
     {
         if (_window == null || _window.Disposed)
             return;

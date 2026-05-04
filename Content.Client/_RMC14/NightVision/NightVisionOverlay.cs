@@ -20,6 +20,7 @@ public sealed class NightVisionOverlay : Overlay
     private readonly ContainerSystem _container;
     private readonly ExamineSystem _examine;
     private readonly TransformSystem _transform;
+    private readonly SpriteSystem _sprite;
     private readonly EntityQuery<XenoComponent> _xenoQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -34,6 +35,7 @@ public sealed class NightVisionOverlay : Overlay
         _container = _entity.System<ContainerSystem>();
         _examine = _entity.System<ExamineSystem>();
         _transform = _entity.System<TransformSystem>();
+        _sprite = _entity.System<SpriteSystem>();
         _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
 
         _shader = _prototype.Index<ShaderPrototype>("RMCNightVision").Instance().Duplicate();
@@ -134,12 +136,12 @@ public sealed class NightVisionOverlay : Overlay
         if (transparency != null)
         {
             var color = sprite.Color * Color.White.WithAlpha(transparency.Value);
-            sprite.Color = color;
+            _sprite.SetColor(new Entity<SpriteComponent?>(ent.Owner, sprite), color);
         }
-        sprite.Render(handle, eyeRot, rotation, position: position);
+        _sprite.RenderSprite(new Entity<SpriteComponent>(uid, sprite), handle, eyeRot, rotation, position);
         if (transparency != null)
         {
-            sprite.Color = colorCache;
+            _sprite.SetColor(new Entity<SpriteComponent?>(ent.Owner, sprite), colorCache);
         }
     }
 }

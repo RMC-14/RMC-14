@@ -11,7 +11,7 @@ public sealed class VentCrawlingSystem : SharedVentCrawlingSystem
         base.Initialize();
 
         if (!_overlay.HasOverlay<VentCrawlIconOverlay>())
-            _overlay.AddOverlay(new VentCrawlIconOverlay());
+            _overlay.AddOverlay(new VentCrawlIconOverlay(GetEntityQuery<TransformComponent>()));
     }
 
     public override void Shutdown()

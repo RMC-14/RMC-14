@@ -11,22 +11,23 @@ public sealed class RMCEffectSystem : SharedRMCEffectSystem
     private const int OpacityDivider = 3;
 
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
 
     public override void FrameUpdate(float frameTime)
     {
         var time = _timing.CurTime;
         var query = EntityQueryEnumerator<EffectAlphaAnimationComponent, SpriteComponent>();
-        while (query.MoveNext(out var effect, out var sprite))
+        while (query.MoveNext(out var uid, out var effect, out var sprite))
         {
             if (effect.SpawnedAt is not { } spawned)
                 continue;
 
             var alpha = MathHelper.Lerp((spawned + effect.Delay).TotalSeconds, spawned.TotalSeconds, time.TotalSeconds);
-            sprite.Color = sprite.Color.WithAlpha((float) alpha);
+            _spriteSystem.SetColor((uid, sprite), sprite.Color.WithAlpha((float) alpha));
         }
 
         var query2 = EntityQueryEnumerator<RMCEffectComponent>();
-        while (query2.MoveNext(out var uid, out var effect))
+        while (query2.MoveNext(out var uid, out _))
         {
             var parent = Transform(uid).ParentUid;
 
@@ -38,9 +39,9 @@ public sealed class RMCEffectSystem : SharedRMCEffectSystem
 
             // Only apply the reduced opacity to the effect if the parent's opacity is < 1.
             if (TryComp(parent, out EntityActiveInvisibleComponent? invisible) && invisible.Opacity < 1)
-                sprite.Color = sprite.Color.WithAlpha(invisible.Opacity / OpacityDivider);
+                _spriteSystem.SetColor((uid, sprite), sprite.Color.WithAlpha(invisible.Opacity / OpacityDivider));
             else if (sprite.Color.A < 1)
-                sprite.Color = sprite.Color.WithAlpha(parentSprite.Color.A / OpacityDivider);
+                _spriteSystem.SetColor((uid, sprite), sprite.Color.WithAlpha(parentSprite.Color.A / OpacityDivider));
         }
     }
 }

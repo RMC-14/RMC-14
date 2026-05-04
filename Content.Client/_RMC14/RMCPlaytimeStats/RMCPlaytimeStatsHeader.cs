@@ -6,7 +6,7 @@ using Robust.Shared.Input;
 namespace Content.Client._RMC14.RMCPlaytimeStats;
 
 [GenerateTypedNameReferences]
-public sealed partial class RMCPlaytimeStatsHeader : Control
+public sealed partial class RMCPlaytimeStatsHeader : Control, IDisposable
 {
     public event Action<Header, SortDirection>? OnHeaderClicked;
     private SortDirection _roleDirection = SortDirection.Ascending;
@@ -70,14 +70,10 @@ public sealed partial class RMCPlaytimeStatsHeader : Control
         HeaderClicked(args, Header.Playtime);
     }
 
-    protected override void Dispose(bool disposing)
+    public new void Dispose()
     {
-        base.Dispose(disposing);
-
-        if (disposing)
-        {
-            RoleLabel.OnKeyBindDown -= RoleClicked;
-            PlaytimeLabel.OnKeyBindDown -= PlaytimeClicked;
-        }
+        RoleLabel.OnKeyBindDown -= RoleClicked;
+        PlaytimeLabel.OnKeyBindDown -= PlaytimeClicked;
+        Parent?.RemoveChild(this);
     }
 }

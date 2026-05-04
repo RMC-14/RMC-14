@@ -1,10 +1,12 @@
-﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Xenonids.Infected;
 
 public sealed class VictimBurstVisualizerSystem : VisualizerSystem<VictimBurstComponent>
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     protected override void OnAppearanceChange(EntityUid uid, VictimBurstComponent component, ref AppearanceChangeEvent args)
     {
         base.OnAppearanceChange(uid, component, ref args);
@@ -27,12 +29,12 @@ public sealed class VictimBurstVisualizerSystem : VisualizerSystem<VictimBurstCo
         if (string.IsNullOrWhiteSpace(spriteState))
             return;
 
-        if (!args.Sprite.LayerMapTryGet(BurstLayer.Base, out var layer))
+        if (!_sprite.LayerMapTryGet(uid, BurstLayer.Base, out var layer, false))
         {
-            layer = args.Sprite.LayerMapReserveBlank(BurstLayer.Base);
-            args.Sprite.LayerSetRSI(layer, rsiPath);
+            layer = _sprite.LayerMapReserve(uid, BurstLayer.Base);
+            _sprite.LayerSetRsi(uid, layer, rsiPath);
         }
 
-        args.Sprite.LayerSetState(layer, spriteState);
+        _sprite.LayerSetRsiState(uid, layer, spriteState);
     }
 }

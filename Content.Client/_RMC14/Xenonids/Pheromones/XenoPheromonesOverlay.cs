@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Numerics;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Xenonids;
@@ -119,7 +119,7 @@ public sealed class XenoPheromonesOverlay : Overlay
         if (xform.MapID != args.MapId)
             return;
 
-        var bounds = sprite.Bounds;
+        var bounds = _sprite.GetLocalBounds(ent);
 
         var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 

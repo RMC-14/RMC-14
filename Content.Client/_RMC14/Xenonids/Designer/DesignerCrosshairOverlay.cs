@@ -11,7 +11,6 @@ namespace Content.Client._RMC14.Xenonids.Designer;
 public sealed class DesignerCrosshairOverlay : Overlay
 {
     private readonly IInputManager _input;
-    private readonly IEntityManager _entMan;
     private readonly IEyeManager _eye;
     private readonly IPlayerManager _player;
     private readonly DesignerCrosshairSystem _designerCrosshair;
@@ -29,7 +28,6 @@ public sealed class DesignerCrosshairOverlay : Overlay
         IPlayerManager player)
     {
         _input = input;
-        _entMan = entMan;
         _eye = eye;
         _player = player;
         _designerCrosshair = entMan.System<DesignerCrosshairSystem>();

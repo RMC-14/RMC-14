@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Client._RMC14.NightVision;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Xenonids;
@@ -63,12 +63,12 @@ public sealed class HiveLeaderOverlay : Overlay
         handle.UseShader(_shader);
 
         var leaders = _entity.EntityQueryEnumerator<HiveLeaderComponent, SpriteComponent, TransformComponent>();
-        while (leaders.MoveNext(out _, out var sprite, out var xform))
+        while (leaders.MoveNext(out var uid, out _, out var sprite, out var xform))
         {
             if (xform.MapID != args.MapId)
                 continue;
 
-            var bounds = sprite.Bounds;
+            var bounds = _sprite.GetLocalBounds((uid, sprite));
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 
             if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))

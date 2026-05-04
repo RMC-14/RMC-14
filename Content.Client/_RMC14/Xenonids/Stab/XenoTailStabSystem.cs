@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Client.Interactable;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Robust.Client.Animations;
@@ -20,6 +20,7 @@ public sealed class XenoTailStabSystem : SharedXenoTailStabSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IOverlayManager _overlays = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private const string TailAnimationKey = "cm-xeno-tail";
     private const string TailFadeAnimationKey = "cm-xeno-tail-fade";
@@ -71,7 +72,7 @@ public sealed class XenoTailStabSystem : SharedXenoTailStabSystem
 
         var sprite = EnsureComp<SpriteComponent>(animationEnt);
         sprite.NoRotation = true;
-        sprite.Rotation = localPos.ToWorldAngle();
+        _sprite.SetRotation(animationEnt, localPos.ToWorldAngle());
 
         // lie by 20% so the player feels less bad about missing
         var distance = localPos.Length() * 0.80f;

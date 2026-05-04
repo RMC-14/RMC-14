@@ -119,7 +119,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         {
             if (job.Medals.TryGetValue(type, out var medalId) &&
                 _prototypeManager.TryIndex(medalId, out EntityPrototype? medalProto) &&
-                medalProto.TryGetComponent<SpriteComponent>(out var sprite))
+                medalProto.TryGetComponent("Sprite", out SpriteComponent? sprite))
             {
                 foreach (var layer in sprite.AllLayers)
                 {
@@ -349,9 +349,9 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             if (!_prototypeManager.TryIndex<JobPrototype>(kvp.Key, out var job))
                 continue;
 
-            var dept = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>()
-                .Where(d => d.Roles.Contains(job.ID))
-                .FirstOrDefault();
+            var dept = _prototypeManager
+                .EnumeratePrototypes<DepartmentPrototype>()
+                .FirstOrDefault(d => d.Roles.Contains(job.ID));
 
             var entry = new RMCPlaytimeStatsEntry(
                 job.LocalizedName,

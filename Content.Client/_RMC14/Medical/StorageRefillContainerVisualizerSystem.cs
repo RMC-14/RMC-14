@@ -11,6 +11,7 @@ public sealed class StorageRefillContainerVisualizerSystem : VisualizerSystem<RM
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly CMRefillableSolutionSystem _refillable = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     protected override void OnAppearanceChange(EntityUid uid, RMCRefillSolutionFromContainerOnStoreComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
@@ -21,7 +22,7 @@ public sealed class StorageRefillContainerVisualizerSystem : VisualizerSystem<RM
         if (!AppearanceSystem.TryGetData<Color>(uid, SolutionContainerStoreVisuals.Color, out var color))
             return;
 
-        if (!sprite.LayerMapTryGet(SolutionContainerStoreVisuals.Base, out var colorLayer))
+        if (!_sprite.LayerMapTryGet((uid, sprite), SolutionContainerStoreVisuals.Base, out var colorLayer, false))
             return;
 
         if (!_container.TryGetContainer(uid, component.ContainerId, out var container) ||
@@ -29,11 +30,11 @@ public sealed class StorageRefillContainerVisualizerSystem : VisualizerSystem<RM
             (!_solution.TryGetDrainableSolution(contained.Value, out var drainable, out var sol) && !_refillable.TryGetPressurizedSolution(contained.Value, out drainable, out sol)) ||
             sol.Volume == 0)
         {
-            sprite.LayerSetVisible(colorLayer, false);
+            _sprite.LayerSetVisible((uid, sprite), colorLayer, false);
             return;
         }
 
-        sprite.LayerSetVisible(colorLayer, true);
-        sprite.LayerSetColor(colorLayer, color.WithAlpha(component.LayerOpacity));
+        _sprite.LayerSetVisible((uid, sprite), colorLayer, true);
+        _sprite.LayerSetColor((uid, sprite), colorLayer, color.WithAlpha(component.LayerOpacity));
     }
 }

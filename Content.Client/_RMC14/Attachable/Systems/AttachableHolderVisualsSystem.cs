@@ -10,6 +10,7 @@ namespace Content.Client._RMC14.Attachable.Systems;
 public sealed class AttachableHolderVisualsSystem : EntitySystem
 {
     [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -83,11 +84,11 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         if (!holder.Comp.Offsets.ContainsKey(slotId) || !TryComp(holder, out SpriteComponent? spriteComponent))
             return;
 
-        if (!spriteComponent.LayerMapTryGet(slotId, out var index))
+        if (!_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(holder.Owner, spriteComponent), slotId, out var index, false))
             return;
 
-        spriteComponent.LayerMapRemove(slotId);
-        spriteComponent.RemoveLayer(index);
+        _sprite.LayerMapRemove(new Entity<SpriteComponent?>(holder.Owner, spriteComponent), slotId);
+        _sprite.RemoveLayer(new Entity<SpriteComponent?>(holder.Owner, spriteComponent), index);
     }
 
     private void SetAttachableOverlay(Entity<AttachableHolderVisualsComponent> holder,
@@ -125,8 +126,8 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         attachable.Comp.LastSlotId = slotId;
         attachable.Comp.LastSuffix = suffix;
 
-        var rsi = attachableSprite.LayerGetActualRSI(attachable.Comp.Layer)?.Path;
-        var state = attachableSprite.LayerGetState(attachable.Comp.Layer).ToString();
+        var rsi = _sprite.LayerGetEffectiveRsi(new Entity<SpriteComponent?>(attachable.Owner, attachableSprite), attachable.Comp.Layer)?.Path;
+        var state = _sprite.LayerGetRsiState(new Entity<SpriteComponent?>(attachable.Owner, attachableSprite), attachable.Comp.Layer).ToString();
         if (attachable.Comp.Rsi is { } rsiPath)
             rsi = rsiPath;
 
@@ -149,12 +150,12 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
             Visible = true,
         };
 
-        if (holderSprite.LayerMapTryGet(slotId, out var index))
+        if (_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(holder.Owner, holderSprite), slotId, out var index, false))
         {
-            holderSprite.LayerSetData(index, layerData);
+            _sprite.LayerSetData(new Entity<SpriteComponent?>(holder.Owner, holderSprite), index, layerData);
             return;
         }
 
-        holderSprite.LayerMapSet(slotId, holderSprite.AddLayer(layerData));
+        _sprite.LayerMapSet(new Entity<SpriteComponent?>(holder.Owner, holderSprite), slotId, _sprite.AddLayer(new Entity<SpriteComponent?>(holder.Owner, holderSprite), layerData, null));
     }
 }

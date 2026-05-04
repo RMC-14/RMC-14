@@ -24,6 +24,7 @@ public sealed class RMCTeleporterViewerOverlay : Overlay
     private readonly SharedContainerSystem _container;
     private readonly EntityLookupSystem _entityLookup;
     private readonly SharedPhysicsSystem _physics;
+    private readonly SpriteSystem _sprite;
     private readonly SharedRMCTeleporterSystem _teleporter;
     private readonly SharedTransformSystem _transform;
 
@@ -46,6 +47,7 @@ public sealed class RMCTeleporterViewerOverlay : Overlay
         _container = _entity.System<SharedContainerSystem>();
         _entityLookup = _entity.System<EntityLookupSystem>();
         _physics = _entity.System<SharedPhysicsSystem>();
+        _sprite = _entity.System<SpriteSystem>();
         _teleporter = _entity.System<SharedRMCTeleporterSystem>();
         _transform = _entity.System<SharedTransformSystem>();
 
@@ -108,7 +110,7 @@ public sealed class RMCTeleporterViewerOverlay : Overlay
                 foreach (ref var draw in CollectionsMarshal.AsSpan(_toDraw))
                 {
                     draw.Position -= viewerPositionDiff;
-                    draw.Ent.Comp.Render(handle, eyeRot, draw.Rotation, position: draw.Position);
+                    _sprite.RenderSprite(draw.Ent, handle, eyeRot, draw.Rotation, draw.Position);
                 }
             }
         }

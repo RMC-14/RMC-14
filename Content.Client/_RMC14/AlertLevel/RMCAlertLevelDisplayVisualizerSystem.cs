@@ -12,6 +12,7 @@ public sealed class RMCAlertLevelDisplayVisualizerSystem : EntitySystem
 
     [Dependency] private readonly SharedGameTicker _ticker = default!;
     [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     public override void Update(float frameTime)
     {
@@ -23,13 +24,13 @@ public sealed class RMCAlertLevelDisplayVisualizerSystem : EntitySystem
             return;
 
         var query = EntityQueryEnumerator<RMCAlertLevelDisplayComponent, SpriteComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var sprite))
+        while (query.MoveNext(out var uid, out _, out var sprite))
         {
-            if (!sprite.LayerMapTryGet(RMCAlertLevelDisplayVisualLayers.HourTens, out var hourTensLayer) ||
-                !sprite.LayerMapTryGet(RMCAlertLevelDisplayVisualLayers.HourOnes, out var hourOnesLayer) ||
-                !sprite.LayerMapTryGet(RMCAlertLevelDisplayVisualLayers.Separator, out var separatorLayer) ||
-                !sprite.LayerMapTryGet(RMCAlertLevelDisplayVisualLayers.MinuteTens, out var minuteTensLayer) ||
-                !sprite.LayerMapTryGet(RMCAlertLevelDisplayVisualLayers.MinuteOnes, out var minuteOnesLayer)
+            if (!_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(uid, sprite), RMCAlertLevelDisplayVisualLayers.HourTens, out var hourTensLayer, false) ||
+                !_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(uid, sprite), RMCAlertLevelDisplayVisualLayers.HourOnes, out var hourOnesLayer, false) ||
+                !_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(uid, sprite), RMCAlertLevelDisplayVisualLayers.Separator, out var separatorLayer, false) ||
+                !_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(uid, sprite), RMCAlertLevelDisplayVisualLayers.MinuteTens, out var minuteTensLayer, false) ||
+                !_sprite.LayerMapTryGet(new Entity<SpriteComponent?>(uid, sprite), RMCAlertLevelDisplayVisualLayers.MinuteOnes, out var minuteOnesLayer, false)
                 )
                 continue;
 
@@ -41,17 +42,17 @@ public sealed class RMCAlertLevelDisplayVisualizerSystem : EntitySystem
             var minuteTensState = $"{timeString[3]}";
             var minuteOnesState = $"{timeString[4]}";
 
-            sprite.LayerSetOffset(hourTensLayer, new Vector2(0.11f, -0.4375f));
-            sprite.LayerSetOffset(hourOnesLayer, new Vector2(0.28f, -0.4375f));
-            sprite.LayerSetOffset(separatorLayer, new Vector2(0.406f, -0.4375f));
-            sprite.LayerSetOffset(minuteTensLayer, new Vector2(0.56f, -0.4375f));
-            sprite.LayerSetOffset(minuteOnesLayer, new Vector2(0.73f, -0.4375f));
+            _sprite.LayerSetOffset(new Entity<SpriteComponent?>(uid, sprite), hourTensLayer, new Vector2(0.11f, -0.4375f));
+            _sprite.LayerSetOffset(new Entity<SpriteComponent?>(uid, sprite), hourOnesLayer, new Vector2(0.28f, -0.4375f));
+            _sprite.LayerSetOffset(new Entity<SpriteComponent?>(uid, sprite), separatorLayer, new Vector2(0.406f, -0.4375f));
+            _sprite.LayerSetOffset(new Entity<SpriteComponent?>(uid, sprite), minuteTensLayer, new Vector2(0.56f, -0.4375f));
+            _sprite.LayerSetOffset(new Entity<SpriteComponent?>(uid, sprite), minuteOnesLayer, new Vector2(0.73f, -0.4375f));
 
-            sprite.LayerSetState(hourTensLayer, hourTensState);
-            sprite.LayerSetState(hourOnesLayer, hourOnesState);
-            sprite.LayerSetState(separatorLayer, separatorState);
-            sprite.LayerSetState(minuteTensLayer, minuteTensState);
-            sprite.LayerSetState(minuteOnesLayer, minuteOnesState);
+            _sprite.LayerSetRsiState(new Entity<SpriteComponent?>(uid, sprite), hourTensLayer, hourTensState);
+            _sprite.LayerSetRsiState(new Entity<SpriteComponent?>(uid, sprite), hourOnesLayer, hourOnesState);
+            _sprite.LayerSetRsiState(new Entity<SpriteComponent?>(uid, sprite), separatorLayer, separatorState);
+            _sprite.LayerSetRsiState(new Entity<SpriteComponent?>(uid, sprite), minuteTensLayer, minuteTensState);
+            _sprite.LayerSetRsiState(new Entity<SpriteComponent?>(uid, sprite), minuteOnesLayer, minuteOnesState);
         }
     }
 }

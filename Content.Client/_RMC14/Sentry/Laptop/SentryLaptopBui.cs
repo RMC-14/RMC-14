@@ -18,6 +18,7 @@ namespace Content.Client._RMC14.Sentry.Laptop;
 public sealed class SentryLaptopBui : BoundUserInterface
 {
     [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private SentryLaptopWindow? _window;
     private readonly Dictionary<NetEntity, SentryCard> _sentryCards = new();
@@ -674,7 +675,8 @@ public sealed class SentryLaptopBui : BoundUserInterface
         if (mapUid == EntityUid.Invalid)
             return;
 
-        _cameraEntity = _entities.SpawnEntity(null, new EntityCoordinates(mapUid, sentryXform.WorldPosition));
+        var worldPos = _transform.GetWorldPosition(sentryXform);
+        _cameraEntity = _entities.SpawnEntity(null, new EntityCoordinates(mapUid, worldPos));
 
         if (!_entities.TryGetComponent<TransformComponent>(_cameraEntity.Value, out var camXform))
             return;
@@ -801,7 +803,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
                 }
             }
 
-            _window?.Dispose();
+            _window?.Orphan();
         }
     }
 }

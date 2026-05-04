@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared.Containers.ItemSlots;
 using Robust.Client.GameObjects;
 
@@ -6,6 +6,8 @@ namespace Content.Client._RMC14.Inventory;
 
 public sealed class CMInventorySystem : SharedCMInventorySystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -22,14 +24,14 @@ public sealed class CMInventorySystem : SharedCMInventorySystem
         base.ContentsUpdated(ent);
 
         if (!TryComp(ent, out SpriteComponent? sprite) ||
-            !sprite.LayerMapTryGet(CMItemSlotsLayers.Fill, out var layer))
+            !_sprite.LayerMapTryGet((ent.Owner, sprite), CMItemSlotsLayers.Fill, out var layer, false))
         {
             return;
         }
 
         if (!TryComp(ent, out ItemSlotsComponent? itemSlots))
         {
-            sprite.LayerSetVisible(layer, false);
+            _sprite.LayerSetVisible((ent.Owner, sprite), layer, false);
             return;
         }
 
@@ -38,11 +40,11 @@ public sealed class CMInventorySystem : SharedCMInventorySystem
             if (slot.ContainerSlot?.ContainedEntity is { } contained &&
                 !TerminatingOrDeleted(contained))
             {
-                sprite.LayerSetVisible(layer, true);
+                _sprite.LayerSetVisible((ent.Owner, sprite), layer, true);
                 return;
             }
         }
 
-        sprite.LayerSetVisible(layer, false);
+        _sprite.LayerSetVisible((ent.Owner, sprite), layer, false);
     }
 }

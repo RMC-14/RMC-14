@@ -6,6 +6,8 @@ namespace Content.Client._RMC14.Xenonids.Parasite;
 
 public sealed class XenoParasitesVisualSystem : VisualizerSystem<XenoParasiteThrowerComponent>
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     protected override void OnAppearanceChange(EntityUid uid, XenoParasiteThrowerComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
@@ -22,12 +24,12 @@ public sealed class XenoParasitesVisualSystem : VisualizerSystem<XenoParasiteThr
 
         foreach(var layer in Enum.GetValues<ParasiteOverlayLayers>())
         {
-            if (!sprite.LayerMapTryGet(layer, out var paraLayer))
+            if (!_sprite.LayerMapTryGet(uid, layer, out _, false))
                 continue;
 
-            sprite.LayerSetVisible(layer, states[(int)layer]);
+            _sprite.LayerSetVisible(uid, layer, states[(int)layer]);
 
-            sprite.LayerSetState(layer, $"{layerState}{(int)layer}");
+            _sprite.LayerSetRsiState(uid, layer, $"{layerState}{(int)layer}");
         }
     }
 }

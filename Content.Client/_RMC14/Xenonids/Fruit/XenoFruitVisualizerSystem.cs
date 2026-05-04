@@ -7,6 +7,8 @@ namespace Content.Client._RMC14.Xenonids.Fruit;
 // System for updating the appearance of the resin fruits
 public sealed class XenoFruitVisualizerSystem : EntitySystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -32,6 +34,6 @@ public sealed class XenoFruitVisualizerSystem : EntitySystem
         if (string.IsNullOrWhiteSpace(state))
             return;
 
-        sprite.LayerSetState(XenoFruitLayers.Base, state);
+        _sprite.LayerSetRsiState((ent, sprite), XenoFruitLayers.Base, state);
     }
 }

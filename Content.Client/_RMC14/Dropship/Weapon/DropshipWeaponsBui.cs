@@ -781,10 +781,9 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
     {
         if (disposing)
         {
-            _embeddedTacMapWrapperScreen1?.Dispose();
+            Window?.ScreenOne?.Viewport?.DisposeAllChildren();
+            Window?.ScreenTwo?.Viewport?.DisposeAllChildren();
             _embeddedTacMapWrapperScreen1 = null;
-
-            _embeddedTacMapWrapperScreen2?.Dispose();
             _embeddedTacMapWrapperScreen2 = null;
 
             if (_oldEye != null)

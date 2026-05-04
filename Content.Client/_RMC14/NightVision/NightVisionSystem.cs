@@ -17,6 +17,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<NightVisionComponent> _nvQuery;
@@ -129,14 +130,14 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         {
             if (isXeno && viewable.XenoVisible)
             {
-                sprite.Visible = true;
+                _sprite.SetVisible((uid, sprite), true);
                 continue;
             }
 
             if (TryComp<XenoBurrowComponent>(uid, out var burrow) && burrow.Active)
                 continue;
 
-            sprite.Visible = !mesons || _examine.InRangeUnOccluded(_player.LocalEntity.Value, uid);
+            _sprite.SetVisible((uid, sprite), !mesons || _examine.InRangeUnOccluded(_player.LocalEntity.Value, uid));
         }
     }
 
