@@ -8,9 +8,7 @@ using Content.Shared.Item;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Client._RMC14.UniformAccessories;
 
