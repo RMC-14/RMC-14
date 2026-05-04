@@ -575,6 +575,7 @@
   - MouseRotator
   - NoRotateOnMove
   - ContainerManager
+  - Alerts
   # leader related
   - HiveLeader
   - RMCInnateRadioTextIncrease
