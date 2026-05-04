@@ -42,7 +42,7 @@
   parent: RMCBookBase
   id: RMCBookIllandalBridge
   name: "Warrior of Illandal: The Bridge of Terror."
-  description: Ah, one of the classic Warrior of Illandal books. This one has the mighty Warrior attempting to cross a bridge of comical proportions to defeat a goblin warlord, which hangs over the entrance to hell. If those stakes weren't high enough, he's also on a time limit before the bridge collapses and explodes. Written by John Desierder.
+  description: Ah, one of the classic Warrior of Illandal books. This one has the mighty Warrior attempting to cross a bridge of comical proportions to defeat a conniving machiavellian warlord, which hangs over the entrance to hell. If those stakes weren't high enough, he's also on a time limit before the bridge collapses and explodes. Written by John Desierder.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Colored/tan.rsi
@@ -54,7 +54,7 @@
   parent: RMCBookIllandalBridge
   id: RMCBookIllandalNecromancer
   name: "Warrior of Illandal: The Necromancer of Tethar."
-  description: The Warrior returns in this thrilling new entry into the Warrior of Illandal. This time, the Warrior must team up with his previous enemy, the Orc Bazaak, to stop the schemes of an evil necromancer. It's pretty standard for the Warrior of Illandal series, except for the portion where the pair of protaganists debate the difference between absurdism and existentialism. Written by John Desierder.
+  description: The Warrior returns in this thrilling new entry into the Warrior of Illandal. This time, the Warrior must team up with his previous enemy, the Thief Bazaak, to stop the schemes of an evil necromancer. It's pretty standard for the Warrior of Illandal series, except for the portion where the pair of protaganists debate the difference between absurdism and existentialism. Written by John Desierder.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Books/Colored/purple.rsi
