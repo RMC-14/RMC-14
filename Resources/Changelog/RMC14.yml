@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Shotgun Shell Loadrigs have now got more detailed visuals to indicate
-      how full they are.
-    type: Tweak
-  id: 2677
-  time: '2025-12-14T22:29:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8710
 - author: Majkl-J
   changes:
   - message: Bipods now check if you are moving before deploying
@@ -4480,5 +4472,12 @@
   id: 3176
   time: '2026-05-03T23:35:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9560
+- author: kleinerstation13
+  changes:
+  - message: Fixed attachments being invisible on the M37-17 shotgun
+    type: Fix
+  id: 3177
+  time: '2026-05-04T06:39:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9746
 Name: RMC14
 Order: -1
