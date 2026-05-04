@@ -1,11 +1,11 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Zoom;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoZoomSystem))]
-public sealed partial class XenoZoomComponent : Component
+public sealed partial class XenoZoomComponent : Component, IComponentDebug
 {
     [DataField, AutoNetworkedField]
     public bool Enabled;
@@ -27,4 +27,17 @@ public sealed partial class XenoZoomComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool BlockLeaps;
+
+    public string GetDebugString()
+    {
+        return $"""
+            Enabled: {Enabled}
+            Zoom: {Zoom}
+            OffsetLength: {OffsetLength}
+            Offset: {Offset}
+            Speed: {Speed}
+            DoAfter: {DoAfter.TotalSeconds}
+            BlockLeaps: {BlockLeaps}
+            """;
+    }
 }

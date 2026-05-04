@@ -1,3 +1,4 @@
+using System.Diagnostics.Metrics;
 using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
@@ -7,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.Atmos.Components
 {
     [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-    public sealed partial class FlammableComponent : Component
+    public sealed partial class FlammableComponent : Component, IComponentDebug
     {
         [DataField, AutoNetworkedField]
         public bool Resisting;
@@ -98,5 +99,17 @@ namespace Content.Shared.Atmos.Components
 
         [DataField, AutoNetworkedField]
         public DamageSpecifier? TileDamage;
+
+        public string GetDebugString()
+        {
+            return $"""
+            FireSpread: {FireSpread}
+            CanResistFire: {CanResistFire}
+            FireSpread: {FireSpread}
+            Damage: {Damage}
+            ResistStacks: {ResistStacks}
+            ResistDuration: {ResistDuration.TotalSeconds}
+            """;
+        }
     }
 }

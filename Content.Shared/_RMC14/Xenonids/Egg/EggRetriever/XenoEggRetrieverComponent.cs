@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Xenonids.Egg;
 /// Allows a xeno to stash eggs into an internal inventory and bring them back out
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class XenoEggRetrieverComponent : Component
+public sealed partial class XenoEggRetrieverComponent : Component, IComponentDebug
 {
     public EntProtoId EggPrototype = "XenoEgg";
 
@@ -21,4 +21,13 @@ public sealed partial class XenoEggRetrieverComponent : Component
 
     [DataField, AutoNetworkedField]
     public int CurEggs = 0;
+
+    public string GetDebugString()
+    {
+        return $"""
+            EggPrototype: {EggPrototype.Id}
+            MaxEggs: {MaxEggs}
+            CurEggs: {CurEggs}
+            """;
+    }
 }

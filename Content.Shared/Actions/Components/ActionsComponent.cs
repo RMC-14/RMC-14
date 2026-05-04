@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
@@ -8,7 +9,7 @@ namespace Content.Shared.Actions.Components;
 /// Lets the player controlling this entity use actions.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem))]
-public sealed partial class ActionsComponent : Component
+public sealed partial class ActionsComponent : Component, IComponentDebug
 {
     /// <summary>
     /// List of actions currently granted to this entity.
@@ -16,6 +17,13 @@ public sealed partial class ActionsComponent : Component
     /// </summary>
     [DataField]
     public HashSet<EntityUid> Actions = new();
+
+    public string GetDebugString()
+    {
+        return $"""
+            Actions Count: {Actions.Count}
+            """;
+    }
 }
 
 [Serializable, NetSerializable]

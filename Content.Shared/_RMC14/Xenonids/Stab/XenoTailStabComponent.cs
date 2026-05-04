@@ -1,4 +1,6 @@
-﻿using Content.Shared.Chemistry.Reagent;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -9,7 +11,7 @@ namespace Content.Shared._RMC14.Xenonids.Stab;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedXenoTailStabSystem))]
-public sealed partial class XenoTailStabComponent : Component
+public sealed partial class XenoTailStabComponent : Component, IComponentDebug
 {
     [DataField, AutoNetworkedField]
     public EntProtoId TailAnimationId = "WeaponArcThrust";
@@ -52,4 +54,21 @@ public sealed partial class XenoTailStabComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool InjectNeuro = false;
+
+    public string GetDebugString()
+    {
+        var injectStrings = Inject?.Select(item => $"{item.Key}: {item.Value}");
+        return $"""
+            TailAnimationId: {TailAnimationId}
+            HitAnimationId: {HitAnimationId}
+            TailRange: {TailRange}
+            TailDamage: {TailDamage}
+            DazeTime: {DazeTime.TotalSeconds}
+            BigDazeTime: {BigDazeTime.TotalSeconds}
+            Toggle: {Toggle}
+            InjectNeuro: {InjectNeuro}
+            Inject:
+              {string.Join("\r\n  ", injectStrings ?? [])}
+            """;
+    }
 }

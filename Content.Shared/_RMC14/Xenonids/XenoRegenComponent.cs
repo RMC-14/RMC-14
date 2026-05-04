@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Xenonids;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), AutoGenerateComponentPause]
 [Access(typeof(XenoSystem))]
-public sealed partial class XenoRegenComponent : Component
+public sealed partial class XenoRegenComponent : Component, IComponentDebug
 {
     [DataField, AutoNetworkedField]
     public FixedPoint2 FlatHealing = 0.5;
@@ -31,4 +31,17 @@ public sealed partial class XenoRegenComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextRegenTime;
+
+    public string GetDebugString()
+    {
+        return $"""
+            FlatHealing: {FlatHealing}
+            CritHealMultiplier: {CritHealMultiplier}
+            RestHealMultiplier: {RestHealMultiplier}
+            StandHealingMultiplier: {StandHealingMultiplier}
+            MaxHealthDivisorHeal: {MaxHealthDivisorHeal}
+            HealOffWeeds: {HealOffWeeds}
+            RegenCooldown: {RegenCooldown.TotalSeconds}
+            """;
+    }
 }

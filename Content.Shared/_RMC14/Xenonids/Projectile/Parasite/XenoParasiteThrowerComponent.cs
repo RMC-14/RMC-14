@@ -1,6 +1,7 @@
+using Content.Shared._RMC14.Medical.Wounds;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 
@@ -8,7 +9,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 /// Allows a xeno to throw parasites using the "Throw Parasite" Action
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class XenoParasiteThrowerComponent : Component
+public sealed partial class XenoParasiteThrowerComponent : Component, IComponentDebug
 {
     public EntProtoId ParasitePrototype = "CMXenoParasite";
 
@@ -36,6 +37,21 @@ public sealed partial class XenoParasiteThrowerComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool[] VisiblePositions = [false, false, false, false];
+
+    public string GetDebugString()
+    {
+        return $"""
+            ParasitePrototype: {ParasitePrototype.Id}
+            ReservedParasites: {ReservedParasites}
+            ParasiteThrowDistance: {ParasiteThrowDistance}
+            MaxParasites: {MaxParasites}
+            CurParasites: {CurParasites}
+            ThrownParasiteStunDuration: {ThrownParasiteStunDuration.TotalSeconds}
+            ThrownParasiteCooldown: {ThrownParasiteStunDuration.TotalSeconds}
+            NumPositions: {NumPositions}
+            VisiblePositions: [{string.Join(", ", VisiblePositions)}]
+            """;
+    }
 }
 
 [Serializable, NetSerializable]

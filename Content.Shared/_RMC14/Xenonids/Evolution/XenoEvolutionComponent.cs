@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Xenonids.Evolution;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(XenoEvolutionSystem))]
-public sealed partial class XenoEvolutionComponent : Component
+public sealed partial class XenoEvolutionComponent : Component, IComponentDebug
 {
     [DataField, AutoNetworkedField]
     public bool RequiresGranter = true;
@@ -58,4 +58,26 @@ public sealed partial class XenoEvolutionComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan EvolutionJitterDuration = TimeSpan.FromSeconds(10);
+
+    public string GetDebugString()
+    {
+        return $"""
+            RequiresGranter: {RequiresGranter}
+            CanEvolveWithoutGranter: {CanEvolveWithoutGranter}
+            EvolvesTo:
+              {string.Join("\r\n  ", EvolvesTo.Order())}
+            EvolvesToWithoutPoints:
+              {string.Join("\r\n  ", EvolvesToWithoutPoints.Order())}
+            Strains:
+              {string.Join("\r\n  ", Strains.Order())}
+            EvolutionDelay: {EvolutionDelay.TotalSeconds}
+            Points: {Points}
+            Max: {Max}
+            PointsPerSecond: {PointsPerSecond}
+            EarlyPointsPerSecond: {EarlyPointsPerSecond}
+            ActionId: {ActionId}
+            GotPopup: {GotPopup}
+            EvolutionJitterDuration: {EvolutionJitterDuration.TotalSeconds}
+            """;
+    }
 }
