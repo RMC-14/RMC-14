@@ -276,9 +276,6 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         var prototypes = new Dictionary<ProtoId<NpcFactionPrototype>, NpcFactionPrototype>();
         foreach (var proto in _prototypes.EnumeratePrototypes<NpcFactionPrototype>())
         {
-            if (proto.Name == string.Empty)
-                continue;
-
             prototypes[proto.ID] = proto;
         }
 
@@ -323,7 +320,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
                 return null;
             }
 
-            section = new SectionBuilder(proto.Name, null, proto.Color);
+            section = CreateFactionSection(proto);
             all[id] = section;
         }
 
@@ -346,6 +343,17 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
         path.Pop();
         return section;
+    }
+
+    private static SectionBuilder CreateFactionSection(NpcFactionPrototype proto)
+    {
+        if (proto.Name is { } name &&
+            !string.IsNullOrEmpty(name.Id))
+        {
+            return new SectionBuilder(name, null, proto.Color);
+        }
+
+        return new SectionBuilder(EmptyTitle, "-", proto.Color);
     }
 
     private void AddMarineEntry(SectionBuilder marines, EntityUid uid, RMCGhostTargetEntry entry)

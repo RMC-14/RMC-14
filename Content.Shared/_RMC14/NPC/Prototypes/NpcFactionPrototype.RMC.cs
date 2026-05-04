@@ -7,7 +7,7 @@ namespace Content.Shared.NPC.Prototypes;
 public sealed partial class NpcFactionPrototype
 {
     [DataField]
-    public LocId Name { get; private set; } = string.Empty;
+    public LocId? Name { get; private set; }
 
     [DataField]
     public Color Color { get; private set; } = Color.FromHex("#696969");
