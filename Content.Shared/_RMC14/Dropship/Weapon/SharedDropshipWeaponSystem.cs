@@ -139,6 +139,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             subs =>
             {
                 subs.Event<DropshipTerminalWeaponsChangeScreenMsg>(OnWeaponsChangeScreenMsg);
+                subs.Event<DropshipTerminalWeaponsQuickModeMsg>(OnWeaponsQuickModeMsg);
                 subs.Event<DropshipTerminalWeaponsChooseWeaponMsg>(OnWeaponsChooseWeaponMsg);
                 subs.Event<DropshipTerminalWeaponsChooseMedevacMsg>(OnWeaponsChooseMedevacMsg);
                 subs.Event<DropshipTerminalWeaponsChooseFultonMsg>(OnWeaponsChooseFultonMsg);
@@ -499,6 +500,19 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         if (args.Screen == StrikeWeapon)
             screen.Weapon = null;
+
+        Dirty(ent);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnWeaponsQuickModeMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsQuickModeMsg args)
+    {
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        if (screen.State is not (Target or Strike or StrikeWeapon))
+            return;
+
+        screen.QuickMode = args.Enabled;
+        screen.State = Target;
 
         Dirty(ent);
         RefreshWeaponsUI(ent);

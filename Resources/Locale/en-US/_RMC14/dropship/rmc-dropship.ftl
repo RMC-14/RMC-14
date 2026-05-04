@@ -18,6 +18,8 @@ rmc-dropship-weapons-target-strike = Target Acquisition
 
   Strike mode: {$mode}
 
+  Target mode: {$targetMode}
+
   Strike configuration {$weapon}
 
   Target selected: {$target}
@@ -55,6 +57,13 @@ rmc-dropship-weapons-offset-calibration-does-not-affect-direct-bombardment = Doe
 rmc-dropship-weapons-fire = FIRE
 rmc-dropship-weapons-strike = STRIKE
 rmc-dropship-weapons-vector = VECTOR
+rmc-dropship-weapons-quick = QUICK
+rmc-dropship-weapons-north = NORTH
+rmc-dropship-weapons-south = SOUTH
+rmc-dropship-weapons-east = EAST
+rmc-dropship-weapons-west = WEST
+rmc-dropship-weapons-target-mode-quick = QUICK
+rmc-dropship-weapons-target-mode-standard = STANDARD
 
 rmc-dropship-weapons-night-vision-on = NV-ON
 rmc-dropship-weapons-night-vision-off = NV-OFF
