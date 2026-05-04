@@ -20,7 +20,7 @@ public sealed partial class RMCERTDistressBeaconComponent : Component
     /// <summary>
     /// Localization id for the title shown in the reason prompt and admin request text.
     /// </summary>
-    [DataField]
+    [DataField("requestTitle")]
     private LocId _requestTitle = "rmc-ert-beacon-request-title-handheld";
 
     /// <summary>
@@ -31,7 +31,7 @@ public sealed partial class RMCERTDistressBeaconComponent : Component
     /// <summary>
     /// Localization id for the authority or organization receiving this beacon request.
     /// </summary>
-    [DataField]
+    [DataField("recipient")]
     private LocId _recipient = "rmc-ert-recipient-high-command";
 
     /// <summary>
