@@ -13,7 +13,7 @@
   - type: Item
     size: Normal
 
-- type: entity 
+- type: entity
   parent: RMCPonchoBase
   id: RMCPoncho
   name: UNMC poncho
@@ -27,7 +27,7 @@
       sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/classic.rsi
       state: poncho
 
-- type: entity 
+- type: entity
   parent: RMCPonchoBase
   id: RMCPonchoUrban
   name: UNMC urban poncho
@@ -41,7 +41,7 @@
       sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/urban.rsi
       state: poncho
 
-- type: entity 
+- type: entity
   parent: RMCPonchoBase
   id: RMCPonchoJungle
   name: UNMC jungle poncho
@@ -54,8 +54,8 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/jungle.rsi
       state: poncho
-      
-- type: entity 
+
+- type: entity
   parent: RMCPonchoBase
   id: RMCPonchoDesert
   name: UNMC desert poncho
@@ -68,8 +68,8 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/desert.rsi
       state: poncho
-      
-- type: entity 
+
+- type: entity
   parent: RMCPonchoBase
   id: RMCPonchoSnow
   name: UNMC snow poncho
