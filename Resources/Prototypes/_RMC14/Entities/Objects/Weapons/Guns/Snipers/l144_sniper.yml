@@ -1,0 +1,184 @@
+- type: entity
+  parent: RMCBaseWeaponSniperRifle
+  id: RMCL144SniperRifle
+  name: L144 LRR
+  suffix: PVE, Royal
+  description: The L144 Long-Range Rifle, adopted by the TSE for use by Royal Crown Marine snipers. Praised by its users and feared by their targets, the L144 sends 10x28mm rounds downrange at a devastating velocity and with pinpoint accuracy.
+  components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSpecSniper
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/l144.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/l144.rsi
+  - type: Tag
+    tags:
+    - RMCL144SniperRifle
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper.ogg
+  - type: RMCSelectiveFire
+    recoilWielded: 1
+    scatterWielded: 0
+    baseFireRate: 0.667
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 3
+  - type: GunDamageModifier
+    multiplier: 1.5
+  - type: WieldDelay
+    baseDelay: 1.2
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSniperL144
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSniperL144
+          - RMCMagazineSniperL144SH
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - SniperWhitelist
+  - type: GunRequiresWield
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+    enabled: true
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCM96SIntegratedScope
+        whitelist:
+          tags:
+          - RMCM96SIntegratedScope
+      rmc-aslot-barrel:
+        locked: true
+        startingAttachable: RMCAttachmentSuppressorL144
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressorL144
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.42, -0.28
+  - type: RMCGunChamber
+    enabled: false
+
+- type: entity
+  parent: CMMagazineSniperM96S
+  id: RMCMagazineSniperL144
+  name: "L144 marksman magazine (10x28mm)"
+  description: A 15-round magazine of 10x28mm marksman cartridges.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniper
+    - RMCMagazineSniperL144
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeSniper10x28mm
+    proto: CMCartridgeSniper10x28mm
+    capacity: 15
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l144.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: RMCMagazineSniperL144
+  id: RMCMagazineSniperL144SH
+  name: "L144 squash-head magazine (10x28mm)"
+  description: A 15-round magazine of 10x28mm squash-head cartridges.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniper
+    - RMCMagazineSniperL144SH
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeSniper10x28mmSH
+    proto: RMCCartridgeSniper10x28mmSH
+    capacity: 15
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l144.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#DD4242"
+
+- type: entity
+  parent: CMCartridgeSniper10x28mm
+  id: RMCCartridgeSniper10x28mmSH
+  name: squash-head cartridge (10x28mm)
+  components:
+  - type: CartridgeAmmo
+    proto: RMCBulletSniper10x28mmSH
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeSniper10x28mmSH
+
+- type: entity
+  parent: CMBulletSniper10x28mm
+  id: RMCBulletSniper10x28mmSH
+  name: squash-head bullet (10x28mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 70
+  - type: CMArmorPiercing
+    amount: 50
+  - type: AimedShotEffect
+    extraHits: 1
+    superSlowDuration: 14
+  - type: RMCAreaDamage
+    damageArea: 2.5
+    falloffDistance: 1.5
+    xenoDamageMultiplier: 2
+
+- type: Tag
+  id: RMCL144SniperRifle
+
+- type: Tag
+  id: RMCMagazineSniperL144
+
+- type: Tag
+  id: RMCMagazineSniperL144SH
+
+- type: Tag
+  id: RMCCartridgeSniper10x28mmSH

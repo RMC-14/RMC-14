@@ -8,16 +8,22 @@
   },
   "states": [
     {
-      "name": "suppressor_l112"
+      "name": "icon"
     },
     {
-      "name": "suppressor_l112_a"
+      "name": "icon-on",
+      "delays": [
+        [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ]
+      ]
     },
     {
-      "name": "suppressor_l144"
-    },
-    {
-      "name": "suppressor_l144_a"
+      "name": "equipped-EYES",
+      "directions": 4
     }
   ]
 }

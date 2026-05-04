@@ -326,19 +326,20 @@
 
 - type: entity
   parent: RMCBarrelAttachmentBase
-  id: RMCAttachmentSuppressorM96SB
-  name: M96S-B integrated suppressor
-  description: You shouldn't have this.
+  id: RMCAttachmentSuppressorL144
+  name: L144 integrated suppressor
+  description: Sod, son! That'll cost a pretty penny to fix...
   components:
   - type: Sprite
-    state: suppressed_sniper_barrel
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_barrel.rsi
+    state: suppressor_l144
   - type: Tag
     tags:
     - RMCAttachmentBarrel
-    - RMCAttachmentSuppressorM96SB
+    - RMCAttachmentSuppressorL144
   - type: AttachableSilencer
     sound:
-      collection: CMSilencedShoot
+      collection: RMCL112Shoot
       params:
         maxDistance: 6
 
@@ -506,7 +507,7 @@
   id: RMCAttachmentSuppressorNPZ92
 
 - type: Tag
-  id: RMCAttachmentSuppressorM96SB
+  id: RMCAttachmentSuppressorL144
 
 - type: Tag
   id: RMCAttachmentSuppressorL112
