@@ -136,7 +136,7 @@
     sprite: _RMC14/Objects/Misc/Books/Other/medical.rsi
   - type: GuideHelp
     guides:
-    - RMCMedical # TODO: Specific Surgery when Guidebook entry for that is added
+    - RMCMedical # TODO RMC14: Specific Surgery when Guidebook entry for that is added
 
 - type: entity
   parent: RMCGuidebookBase
