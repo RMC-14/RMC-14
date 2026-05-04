@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 icons/obj/items/clothing/backpack/backpacks_by_faction/UA.dmi",
+  "states": [
+    {
+      "name": "marinepack_medic_k9",
+      "directions": 1
+    },
+    {
+      "name": "marinepack_k9",
+      "directions": 1
+    },
+    {
+      "name": "mppack_k9",
+      "directions": 1
+    }
+  ]
+}
