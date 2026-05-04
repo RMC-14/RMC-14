@@ -31,7 +31,6 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
     private const float HoverLightnessPercent = 0.1f;
 
     public event Action<NetEntity>? WarpClicked;
-    public event Action? OnGhostnadoClicked;
     public event Action? OnRefreshClicked;
 
     public RMCGhostTargetWindow()
@@ -41,7 +40,8 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         SetWindowBackgroundColor();
         SearchBar.OnTextChanged += OnSearchTextChanged;
 
-        GhostnadoButton.OnPressed += _ => OnGhostnadoClicked?.Invoke();
+        GhostnadoButton.Disabled = true;
+        GhostnadoButton.OnPressed += _ => WarpToMostFollowed();
         RefreshButton.OnPressed += _ => OnRefreshClicked?.Invoke();
         SetupGhostnadoButtonColors();
         SetupRefreshButtonHover();
@@ -114,6 +114,49 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         _sections = sections
             .OrderBy(section => section.Index)
             .ToList();
+        UpdateGhostnadoButtonState();
+    }
+
+    private void UpdateGhostnadoButtonState()
+    {
+        GhostnadoButton.Disabled = GetMostFollowedEntry() == null;
+    }
+
+    private void WarpToMostFollowed()
+    {
+        if (GetMostFollowedEntry() is not { } entry)
+            return;
+
+        WarpClicked?.Invoke(entry.Entity);
+    }
+
+    private RMCGhostTargetEntry? GetMostFollowedEntry()
+    {
+        RMCGhostTargetEntry? mostFollowed = null;
+        var mostFollowers = 0;
+
+        foreach (var entry in EnumerateEntries(_sections))
+        {
+            if (entry.IsWarpPoint || entry.FollowerCount <= mostFollowers)
+                continue;
+
+            mostFollowed = entry;
+            mostFollowers = entry.FollowerCount;
+        }
+
+        return mostFollowed;
+    }
+
+    private static IEnumerable<RMCGhostTargetEntry> EnumerateEntries(IEnumerable<RMCGhostTargetSection> sections)
+    {
+        foreach (var section in sections)
+        {
+            foreach (var entry in section.Entries)
+                yield return entry;
+
+            foreach (var entry in EnumerateEntries(section.Children))
+                yield return entry;
+        }
     }
 
     public void Populate()
