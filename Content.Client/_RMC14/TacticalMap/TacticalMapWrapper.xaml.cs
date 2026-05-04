@@ -25,7 +25,7 @@ public enum DrawingMode
 public sealed partial class TacticalMapWrapper : Control
 {
     [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly ISawmill _sawmill = default!;
+    private readonly ISawmill _sawmill;
 
     public TimeSpan LastUpdateAt;
     public TimeSpan NextUpdateAt;
@@ -76,6 +76,7 @@ public sealed partial class TacticalMapWrapper : Control
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        _sawmill = IoCManager.Resolve<ILogManager>().GetSawmill("tactical-map");
         InvalidatePlayerCache();
 
         InitializeSettingsManager();
