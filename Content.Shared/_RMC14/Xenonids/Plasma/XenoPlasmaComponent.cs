@@ -34,6 +34,7 @@ public sealed partial class XenoPlasmaComponent : Component, IComponentDebug
     public string GetDebugString()
     {
         return $"""
+            Plasma: {Plasma}
             MaxPlasma: {MaxPlasma}
             TransferDelay: {PlasmaTransferDelay.TotalSeconds}
             RegenOnWeeds: {PlasmaRegenOnWeeds}
