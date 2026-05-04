@@ -26,6 +26,7 @@ public enum CollisionGroup
     DoorPassable       = 1 << 8, // 256 Allows door to close over top, Like blast doors over conveyors for disposals rooms/cargo.
 
     // RMC14
+    Marine = 1 << 23,
     MobCollision = 1 << 24,
     BarbedBarricade = 1 << 25,
     BarricadeImpassable = 1 << 26,
