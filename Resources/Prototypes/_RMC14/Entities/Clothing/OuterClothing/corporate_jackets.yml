@@ -153,7 +153,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/logistics_jacket.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCJacketWindbreaker
   id: RMCCorporateDutyJacket
   name: corporate duty jacket
   description: A brown coat, built to withstand the conditions of the frontier, to orbital space stations, ships, and colonies. Surprisingly comfortable and warm.
