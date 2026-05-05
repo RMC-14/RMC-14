@@ -15,6 +15,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Designer;
@@ -1312,6 +1313,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     public bool CanSecreteOnTilePopup(Entity<XenoConstructionComponent> xeno, EntProtoId? buildChoice, EntityCoordinates target, bool checkStructureSelected, bool checkWeeds, bool popup = true)
     {
+        if (HasComp<VehicleInteriorOccupantComponent>(xeno.Owner))
+        {
+            if (popup)
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+
+            return false;
+        }
+
         if (checkStructureSelected && buildChoice == null)
         {
             if (popup)

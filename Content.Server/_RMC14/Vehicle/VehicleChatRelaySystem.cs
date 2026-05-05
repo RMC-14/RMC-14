@@ -2,7 +2,6 @@ using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Vehicle.Viewport;
 using Content.Shared.Ghost;
-using Content.Shared.Vehicle.Components;
 using Robust.Shared.Player;
 using static Content.Server.Chat.Systems.ChatSystem;
 
@@ -81,15 +80,11 @@ public sealed class VehicleChatRelaySystem : EntitySystem
     {
         target = default;
 
-        if (TryComp(user, out VehicleViewToggleComponent? viewToggle))
+        if (TryComp(user, out VehicleViewToggleComponent? viewToggle) &&
+            viewToggle.IsOutside &&
+            viewToggle.OutsideTarget is { } outsideTarget &&
+            Exists(outsideTarget))
         {
-            if (!viewToggle.IsOutside ||
-                viewToggle.OutsideTarget is not { } outsideTarget ||
-                !HasComp<VehicleComponent>(outsideTarget))
-            {
-                return false;
-            }
-
             target = outsideTarget;
             return true;
         }

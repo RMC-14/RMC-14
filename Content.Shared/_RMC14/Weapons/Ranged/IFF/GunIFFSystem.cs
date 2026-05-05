@@ -129,20 +129,15 @@ public sealed class GunIFFSystem : EntitySystem
     public bool TryGetFactions(Entity<UserIFFComponent?> user, HashSet<EntProtoId<IFFFactionComponent>> factions, SlotFlags slots = SlotFlags.IDCARD)
     {
         factions.Clear();
-        if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
-            return false;
-
-        factions.UnionWith(user.Comp.Factions);
+        _userIFFQuery.Resolve(user, ref user.Comp, false);
+        if (user.Comp != null)
+            factions.UnionWith(user.Comp.Factions);
 
         var ev = new GetIFFFactionEvent(slots, new HashSet<EntProtoId<IFFFactionComponent>>());
         RaiseLocalEvent(user, ref ev);
-
         factions.UnionWith(ev.Factions);
 
-        if (factions.Count == 0)
-            return false;
-
-        return true;
+        return factions.Count > 0;
     }
 
     public bool IsInFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
@@ -246,9 +241,7 @@ public sealed class GunIFFSystem : EntitySystem
             return;
         }
 
-        if (!_userIFFQuery.TryComp(owner, out var ownerIFF))
-            return;
-
+        _userIFFQuery.TryComp(owner, out var ownerIFF);
         _factionBuffer.Clear();
         if (!TryGetFactions((owner, ownerIFF), _factionBuffer, SlotFlags.IDCARD))
             return;

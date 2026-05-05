@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Construction.Prototypes;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Emplacements;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Ladder;
@@ -402,7 +403,16 @@ public sealed class RMCConstructionSystem : EntitySystem
 
     public bool CanConstruct(EntityUid? user)
     {
-        return !HasComp<DisableConstructionComponent>(user);
+        if (HasComp<DisableConstructionComponent>(user))
+            return false;
+
+        if (user is { } uid && HasComp<VehicleInteriorOccupantComponent>(uid))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-construction-vehicle"), uid, uid);
+            return false;
+        }
+
+        return true;
     }
 
     public bool CanBuildAt(EntityCoordinates coordinates, EntProtoId prototype, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision = null, EntityUid? user = null)

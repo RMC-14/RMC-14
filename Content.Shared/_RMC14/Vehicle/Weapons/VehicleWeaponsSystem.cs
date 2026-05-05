@@ -12,12 +12,12 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Network;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Vehicle.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
@@ -62,6 +62,7 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         SubscribeLocalEvent<HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
 
         SubscribeLocalEvent<VehicleTurretComponent, GunShotEvent>(OnTurretGunShot);
+        SubscribeLocalEvent<VehicleTurretComponent, GetIFFGunUserEvent>(OnTurretGetIFFGunUser);
     }
 
     private void OnWeaponSeatStrapAttempt(Entity<VehicleWeaponsSeatComponent> ent, ref StrapAttemptEvent args)
@@ -470,6 +471,19 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
             return;
 
         UpdateWeaponsUiForAllOperators(vehicle, weapons);
+    }
+
+    private void OnTurretGetIFFGunUser(Entity<VehicleTurretComponent> ent, ref GetIFFGunUserEvent args)
+    {
+        var query = EntityQueryEnumerator<VehicleWeaponsOperatorComponent>();
+        while (query.MoveNext(out var operatorUid, out var operatorComp))
+        {
+            if (operatorComp.SelectedWeapon == ent.Owner)
+            {
+                args.GunUser = operatorUid;
+                return;
+            }
+        }
     }
 
     private bool TryGetContainingVehicle(EntityUid owner, out EntityUid vehicle)

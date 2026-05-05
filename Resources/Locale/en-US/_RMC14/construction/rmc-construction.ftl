@@ -19,3 +19,5 @@ rmc-construction-build-here = Build Here
 rmc-construction-name = construction
 
 rmc-construction-non-anchorable =  It cannot be anchored nor unanchored.
+
+rmc-construction-vehicle = You can't build inside a vehicle!
