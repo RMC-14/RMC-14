@@ -110,14 +110,19 @@
   - type: Insulated
   - type: RMCLeapProtection
     inherentStunDuration: 3
-  - type: RMCShowHealthBars
-  - type: ShowHealthIcons
-  - type: HolocardScanner
   - type: ZombieImmune
   - type: ParalyzeImmuneFrom
     whitelist:
       tags:
       - RMCSynthGrabbable
+
+- type: entity
+  id: RMCSynthHudComponents
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ShowHealthBars
+  - type: ShowHealthIcons
+  - type: HolocardScanner
 
 - type: entity
   id: RMCSynthRemoveComponents

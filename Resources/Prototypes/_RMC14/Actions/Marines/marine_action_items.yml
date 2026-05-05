@@ -148,6 +148,23 @@
 
 - type: entity
   parent: ActionMarineBase
+  id: RMCActionToggleSynthHud
+  name: Toggle Synthetic HUD
+  description: Toggle the integrated synthetic medical HUD.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+      state: icon
+    iconOn:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+      state: icon-on
+    useDelay: 0.25
+  - type: InstantAction
+    event: !type:RMCToggleSynthHudActionEvent
+
+- type: entity
+  parent: ActionMarineBase
   id: RMCActionToggleSechud
   name: Toggle Security HUD
   description: Toggle the optical matrix of the security HUD.

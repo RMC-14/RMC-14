@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 icons/obj/items/synth/synth_reset_key.dmi",
+  "copyright": "Placeholder art taken from cmss13 makeshift_key state at https://github.com/cmss13-devs/cmss13/blob/38736e5e5e70829bada223b8c6d121f682c04956/icons/obj/items/synth/synth_reset_key.dmi. TODO: replace all placeholder reset key states with original sprites without Alien media logos.",
   "size": {
     "x": 32,
     "y": 32
