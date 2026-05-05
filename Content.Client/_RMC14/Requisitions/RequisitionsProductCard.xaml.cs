@@ -14,5 +14,7 @@ public sealed partial class RequisitionsProductCard : BoxContainer
     public RequisitionsProductCard()
     {
         RobustXamlLoader.Load(this);
+        RequisitionsUiStyles.ApplyQuantityButton(RemoveButton);
+        RequisitionsUiStyles.ApplyQuantityButton(AddButton);
     }
 }

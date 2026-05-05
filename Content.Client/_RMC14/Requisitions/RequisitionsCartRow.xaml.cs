@@ -14,5 +14,7 @@ public sealed partial class RequisitionsCartRow : BoxContainer
     public RequisitionsCartRow()
     {
         RobustXamlLoader.Load(this);
+        RequisitionsUiStyles.ApplyQuantityButton(RemoveButton);
+        RequisitionsUiStyles.ApplyQuantityButton(AddButton);
     }
 }

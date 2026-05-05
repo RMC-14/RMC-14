@@ -307,8 +307,7 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (string.IsNullOrWhiteSpace(search))
             return true;
 
-        return display.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase) ||
-               display.Description.Contains(search, StringComparison.CurrentCultureIgnoreCase);
+        return display.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase);
     }
 
     private void AddToCart(CartKey key)

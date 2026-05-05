@@ -12,6 +12,9 @@ public sealed partial class RequisitionsWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
 
+        Stylesheet = RequisitionsUiStyles.Create();
+        ShopTabs.StyleClasses.Add(RequisitionsUiStyles.ShopTabs);
+
         TabContainer.SetTabTitle(ProductsTab, Loc.GetString("rmc-requisitions-tab-products"));
         TabContainer.SetTabTitle(CartTab, Loc.GetString("rmc-requisitions-tab-cart"));
         TabContainer.SetTabTitle(PendingTab, Loc.GetString("rmc-requisitions-tab-pending"));
