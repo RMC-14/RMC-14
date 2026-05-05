@@ -20,7 +20,7 @@ public sealed partial class HardpointItemComponent : Component
     public const string ComponentId = "HardpointItem";
 
     [DataField(required: true)]
-    public string HardpointType = string.Empty;
+    public EntProtoId HardpointType;
 
     [DataField]
     public EntProtoId? VehicleFamily;
@@ -29,7 +29,7 @@ public sealed partial class HardpointItemComponent : Component
     public EntProtoId? SlotType;
 
     [DataField]
-    public string? CompatibilityId;
+    public EntProtoId? CompatibilityId;
 
     [DataField]
     public float DamageMultiplier = 1f;
@@ -83,13 +83,13 @@ public sealed partial class HardpointSlot
     public string Id { get; set; } = string.Empty;
 
     [DataField(required: true)]
-    public string HardpointType { get; set; } = string.Empty;
+    public EntProtoId HardpointType { get; set; }
 
     [DataField]
     public EntProtoId? SlotType { get; set; }
 
     [DataField]
-    public string? CompatibilityId { get; set; }
+    public EntProtoId? CompatibilityId { get; set; }
 
     [DataField]
     public string VisualLayer { get; set; } = string.Empty;

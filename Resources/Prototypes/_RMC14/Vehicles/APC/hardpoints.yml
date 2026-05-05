@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseItem
   id: RMCAPCHardpointBase
   abstract: true
@@ -17,7 +17,7 @@
   - type: Sprite
     state: tires
   - type: HardpointItem
-    hardpointType: Wheel
+    hardpointType: HardpointTypeWheel
     vehicleFamily: HardpointVehicleFamilyAPC
     slotType: HardpointSlotTypeWheel
     damageMultiplier: 0.15
@@ -35,7 +35,7 @@
   - type: Sprite
     state: front_cannon
   - type: HardpointItem
-    hardpointType: Cannon
+    hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyAPC
     slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.11
@@ -79,7 +79,7 @@
   - type: Sprite
     state: dual_cannon
   - type: HardpointItem
-    hardpointType: Turret
+    hardpointType: HardpointTypeTurret
     vehicleFamily: HardpointVehicleFamilyAPC
     slotType: HardpointSlotTypeTurret
     damageMultiplier: 0.2
@@ -128,7 +128,7 @@
   - type: Sprite
     state: comms_relay
   - type: HardpointItem
-    hardpointType: SupportAttachment
+    hardpointType: HardpointTypeSupportAttachment
     vehicleFamily: HardpointVehicleFamilyAPC
     slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
@@ -147,7 +147,7 @@
   - type: Sprite
     state: flare_launcher
   - type: HardpointItem
-    hardpointType: SupportAttachment
+    hardpointType: HardpointTypeSupportAttachment
     vehicleFamily: HardpointVehicleFamilyAPC
     slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.1
@@ -199,7 +199,7 @@
   - type: Sprite
     state: freighter_storage
   - type: HardpointItem
-    hardpointType: SupportAttachment
+    hardpointType: HardpointTypeSupportAttachment
     vehicleFamily: HardpointVehicleFamilyAPC
     slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075

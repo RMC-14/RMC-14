@@ -480,13 +480,13 @@ public sealed partial class HardpointSystem : EntitySystem
                 return false;
         }
 
-        if (!string.Equals(hardpoint.CompatibilityId, slot.CompatibilityId, StringComparison.OrdinalIgnoreCase))
+        if (hardpoint.CompatibilityId != slot.CompatibilityId)
             return false;
 
-        if (string.IsNullOrWhiteSpace(slot.HardpointType))
+        if (slot.HardpointType == default)
             return slot.Whitelist == null || _whitelist.IsValid(slot.Whitelist, item);
 
-        if (!string.Equals(hardpoint.HardpointType, slot.HardpointType, StringComparison.OrdinalIgnoreCase))
+        if (hardpoint.HardpointType != slot.HardpointType)
             return false;
 
         return slot.Whitelist == null || _whitelist.IsValid(slot.Whitelist, item);
@@ -1252,7 +1252,7 @@ public sealed partial class HardpointSystem : EntitySystem
 
             entries.Add(new HardpointUiEntry(
                 slot.Id,
-                slot.HardpointType,
+                slot.HardpointType.Id,
                 installedName,
                 installedEntity,
                 integrity,
@@ -1332,7 +1332,7 @@ public sealed partial class HardpointSystem : EntitySystem
 
             entries.Add(new HardpointUiEntry(
                 compositeId,
-                turretSlot.HardpointType,
+                turretSlot.HardpointType.Id,
                 installedName,
                 installedEntity,
                 integrity,

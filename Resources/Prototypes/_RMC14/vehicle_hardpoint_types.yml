@@ -19,6 +19,76 @@
   - type: HardpointVehicleFamily
 
 - type: entity
+  id: HardpointTypeWheel
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeTurret
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeCannon
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeLauncher
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeArmor
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeSupport
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeSupportAttachment
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeRoofAttachment
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeFrontAttachment
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeSecondary
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointCompatibilitySPPVan
+  components:
+  - type: HardpointCompatibility
+
+- type: entity
+  id: HardpointCompatibilitySPPAPC
+  components:
+  - type: HardpointCompatibility
+
+- type: entity
+  id: HardpointCompatibilitySPPAPCTurret
+  components:
+  - type: HardpointCompatibility
+
+- type: entity
+  id: HardpointCompatibilitySPPTank
+  components:
+  - type: HardpointCompatibility
+
+- type: entity
   id: HardpointSlotTypeWheel
   components:
   - type: HardpointSlotType

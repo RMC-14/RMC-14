@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: VehicleTankHardpointBase
   id: VehicleTankWarningArray
   name: integrated weapons sensor array
@@ -7,7 +7,7 @@
   - type: Sprite
     state: warray
   - type: HardpointItem
-    hardpointType: Support
+    hardpointType: HardpointTypeSupport
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
@@ -29,7 +29,7 @@
   - type: Sprite
     state: odrive_enhancer
   - type: HardpointItem
-    hardpointType: Support
+    hardpointType: HardpointTypeSupport
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
@@ -50,7 +50,7 @@
   - type: Sprite
     state: slauncher_0
   - type: HardpointItem
-    hardpointType: Support
+    hardpointType: HardpointTypeSupport
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
@@ -107,7 +107,7 @@
   - type: Sprite
     state: slauncher_1
   - type: HardpointItem
-    hardpointType: Support
+    hardpointType: HardpointTypeSupport
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
@@ -167,7 +167,7 @@
   - type: Sprite
     state: artillery
   - type: HardpointItem
-    hardpointType: Support
+    hardpointType: HardpointTypeSupport
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075

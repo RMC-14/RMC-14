@@ -584,8 +584,8 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
 
     private static bool CanUseAmmoProvider(VehicleAmmoLoaderComponent loader, VehicleMountedAmmoProvider provider)
     {
-        return string.IsNullOrWhiteSpace(loader.HardpointType) ||
-               string.Equals(provider.Slot.HardpointType, loader.HardpointType, StringComparison.OrdinalIgnoreCase);
+        return loader.HardpointType == default ||
+               provider.Slot.HardpointType == loader.HardpointType;
     }
 
     private void UpdateUi(EntityUid loader, EntityUid user)
@@ -634,7 +634,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
 
             entries.Add(new VehicleAmmoLoaderUiEntry(
                 provider.Slot.Path,
-                provider.Slot.HardpointType,
+                provider.Slot.HardpointType.Id,
                 Name(provider.AmmoUid),
                 GetNetEntity(provider.AmmoUid),
                 provider.Refill.BulletType,

@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -58,7 +59,7 @@ public sealed partial class VehicleWeaponsSeatComponent : Component
     public bool AllowHotbarSelection = true;
 
     [DataField]
-    public List<string> AllowedHardpointTypes = new();
+    public List<EntProtoId> AllowedHardpointTypes = new();
 
     [DataField]
     public float BaseViewPvsScale;

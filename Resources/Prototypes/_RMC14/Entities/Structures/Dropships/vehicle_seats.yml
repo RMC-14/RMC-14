@@ -170,7 +170,7 @@
     allowUiSelection: false
     allowHotbarSelection: true
     allowedHardpointTypes:
-    - Support
+    - HardpointTypeSupport
   - type: UserInterface
     interfaces:
       enum.VehicleWeaponsUiKey.Key:
@@ -211,8 +211,8 @@
     baseViewCursorMaxOffset: 5
     baseViewCursorPvsIncrease: 0.5
     allowedHardpointTypes:
-    - Secondary
-    - Launcher
+    - HardpointTypeSecondary
+    - HardpointTypeLauncher
   - type: UserInterface
     interfaces:
       enum.VehicleWeaponsUiKey.Key:

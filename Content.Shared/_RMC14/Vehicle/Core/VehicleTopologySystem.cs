@@ -6,6 +6,7 @@ using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vehicle;
@@ -52,7 +53,7 @@ public readonly record struct VehicleMountedSlot(
     EntityUid SlotOwner,
     string SlotId,
     VehicleSlotPath Path,
-    string HardpointType,
+    EntProtoId HardpointType,
     EntityUid? Item,
     EntityUid? ParentItem,
     VehicleSlotPath? ParentPath)
@@ -204,11 +205,11 @@ public sealed class VehicleTopologySystem : EntitySystem
     public bool TryGetMountedSlotHardpointType(
         EntityUid vehicle,
         string slotId,
-        out string hardpointType,
+        out EntProtoId hardpointType,
         HardpointSlotsComponent? hardpoints = null,
         ItemSlotsComponent? itemSlots = null)
     {
-        hardpointType = string.Empty;
+        hardpointType = default;
 
         if (!TryGetMountedSlot(vehicle, slotId, out var mountedSlot, hardpoints, itemSlots))
             return false;

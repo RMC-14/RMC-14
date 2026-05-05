@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseItem
   id: VehicleSPPVanTurret
   name: SPP van turret
@@ -10,10 +10,10 @@
   - type: Item
     size: Large
   - type: HardpointItem
-    hardpointType: Secondary
+    hardpointType: HardpointTypeSecondary
     vehicleFamily: HardpointVehicleFamilyVan
     slotType: HardpointSlotTypeLauncher
-    compatibilityId: SPPVan
+    compatibilityId: HardpointCompatibilitySPPVan
     damageMultiplier: 0.15
     repairRate: 0.0125
   - type: HardpointIntegrity
@@ -42,9 +42,9 @@
     vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: turret-cannon
-      hardpointType: Cannon
+      hardpointType: HardpointTypeCannon
       slotType: HardpointSlotTypeCannon
-      compatibilityId: SPPVan
+      compatibilityId: HardpointCompatibilitySPPVan
       required: false
       insertDelay: 2.0
 
@@ -58,10 +58,10 @@
     sprite: _RMC14/Structures/Vehicles/sppvan.rsi
     state: t60p3m_0
   - type: HardpointItem
-    hardpointType: Cannon
+    hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyVan
     slotType: HardpointSlotTypeCannon
-    compatibilityId: SPPVan
+    compatibilityId: HardpointCompatibilitySPPVan
     damageMultiplier: 0.0
     repairRate: 0.01
   - type: HardpointIntegrity
@@ -110,5 +110,5 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/sppvan.rsi
     state: spp_tires
   - type: HardpointItem
-    compatibilityId: SPPVan
+    compatibilityId: HardpointCompatibilitySPPVan
 

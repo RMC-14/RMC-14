@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: VehicleTankBase
   abstract: true
   name: tank
@@ -153,30 +153,30 @@
     vehicleFamily: HardpointVehicleFamilyTank
     slots:
     - id: armor
-      hardpointType: Armor
+      hardpointType: HardpointTypeArmor
       slotType: HardpointSlotTypeArmor
       visualLayer: armor
       insertDelay: 2.5
       required: false
     - id: primary
-      hardpointType: Turret
+      hardpointType: HardpointTypeTurret
       slotType: HardpointSlotTypeTurret
       visualLayer: primary
       insertDelay: 3.0
       required: false
     - id: secondary
-      hardpointType: Secondary
+      hardpointType: HardpointTypeSecondary
       visualLayer: secondary
       insertDelay: 2.5
       required: false
     - id: support
-      hardpointType: Support
+      hardpointType: HardpointTypeSupport
       slotType: HardpointSlotTypeSupportAttachment
       visualLayer: support
       insertDelay: 2.0
       required: false
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeTreads
       insertDelay: 2.0
   - type: VehicleWheelSlots
@@ -268,34 +268,34 @@
     vehicleFamily: HardpointVehicleFamilyTank
     slots:
     - id: armor
-      hardpointType: Armor
+      hardpointType: HardpointTypeArmor
       slotType: HardpointSlotTypeArmor
-      compatibilityId: SPPTank
+      compatibilityId: HardpointCompatibilitySPPTank
       visualLayer: armor
       insertDelay: 2.5
       required: false
     - id: primary
-      hardpointType: Turret
+      hardpointType: HardpointTypeTurret
       slotType: HardpointSlotTypeTurret
-      compatibilityId: SPPTank
+      compatibilityId: HardpointCompatibilitySPPTank
       visualLayer: primary
       insertDelay: 3.0
       required: false
     - id: secondary
-      hardpointType: Secondary
-      compatibilityId: SPPTank
+      hardpointType: HardpointTypeSecondary
+      compatibilityId: HardpointCompatibilitySPPTank
       visualLayer: secondary
       insertDelay: 2.5
       required: false
     - id: support
-      hardpointType: Support
+      hardpointType: HardpointTypeSupport
       slotType: HardpointSlotTypeSupportAttachment
-      compatibilityId: SPPTank
+      compatibilityId: HardpointCompatibilitySPPTank
       visualLayer: support
       insertDelay: 2.0
       required: false
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeTreads
       insertDelay: 2.0
 

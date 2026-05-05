@@ -324,7 +324,7 @@ public sealed partial class VehicleWeaponsSystem
 
         return new VehicleWeaponsUiEntry(
             mountedSlot.CompositeId,
-            mountedSlot.HardpointType,
+            mountedSlot.HardpointType.Id,
             installedEntity,
             installedName,
             installedEntity,

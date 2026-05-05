@@ -28,7 +28,7 @@ public sealed partial class VehicleViewToggleComponent : Component
     [DataField, AutoNetworkedField]
     public bool IsOutside;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Sources = new();
 }
 

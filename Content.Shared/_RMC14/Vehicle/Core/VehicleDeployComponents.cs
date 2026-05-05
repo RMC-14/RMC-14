@@ -66,7 +66,7 @@ public sealed partial class VehicleDeployableComponent : Component
 public sealed partial class VehicleDeployGatedHardpointsComponent : Component
 {
     [DataField]
-    public List<string> BlockedHardpoints = new();
+    public List<EntProtoId> BlockedHardpoints = new();
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

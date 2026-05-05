@@ -83,7 +83,7 @@ public sealed class VehicleWheelSystem : EntitySystem
         {
             foreach (var slot in hardpoints.Slots)
             {
-                if (string.Equals(slot.HardpointType, VehicleWheelSlotsComponent.HardpointTypeId, StringComparison.OrdinalIgnoreCase))
+                if (slot.HardpointType == VehicleWheelSlotsComponent.HardpointTypeId)
                     component.Slots.Add(slot.Id);
             }
         }

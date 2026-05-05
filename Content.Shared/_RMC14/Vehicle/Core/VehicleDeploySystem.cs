@@ -23,6 +23,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Containers;
 using Content.Shared.Mobs;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Vehicle;
@@ -292,7 +293,7 @@ public sealed class VehicleDeploySystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (!string.Equals(ent.Comp.HardpointType, "Cannon", StringComparison.OrdinalIgnoreCase))
+        if (ent.Comp.HardpointType != "HardpointTypeCannon")
             return;
 
         if (!TryGetVehicleFromContained(ent.Owner, out var vehicle))
@@ -318,14 +319,14 @@ public sealed class VehicleDeploySystem : EntitySystem
         }
     }
 
-    private static bool IsBlockedHardpoint(VehicleDeployGatedHardpointsComponent gated, string hardpointType)
+    private static bool IsBlockedHardpoint(VehicleDeployGatedHardpointsComponent gated, EntProtoId hardpointType)
     {
-        if (string.IsNullOrWhiteSpace(hardpointType))
+        if (hardpointType == default)
             return false;
 
         foreach (var blocked in gated.BlockedHardpoints)
         {
-            if (string.Equals(blocked, hardpointType, StringComparison.OrdinalIgnoreCase))
+            if (blocked == hardpointType)
                 return true;
         }
 

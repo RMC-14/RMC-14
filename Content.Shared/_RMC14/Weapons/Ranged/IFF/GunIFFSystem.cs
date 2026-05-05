@@ -20,6 +20,7 @@ public sealed class GunIFFSystem : EntitySystem
 
     private EntityQuery<UserIFFComponent> _userIFFQuery;
     private readonly HashSet<EntProtoId<IFFFactionComponent>> _factionBuffer = new();
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _iffEventBuffer = new();
 
     public override void Initialize()
     {
@@ -133,7 +134,8 @@ public sealed class GunIFFSystem : EntitySystem
         if (user.Comp != null)
             factions.UnionWith(user.Comp.Factions);
 
-        var ev = new GetIFFFactionEvent(slots, new HashSet<EntProtoId<IFFFactionComponent>>());
+        _iffEventBuffer.Clear();
+        var ev = new GetIFFFactionEvent(slots, _iffEventBuffer);
         RaiseLocalEvent(user, ref ev);
         factions.UnionWith(ev.Factions);
 

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: VehicleVanBase
   abstract: true
   name: van
@@ -112,7 +112,7 @@
     vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
       whitelist:
@@ -300,7 +300,7 @@
     vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
       whitelist:
@@ -409,9 +409,9 @@
     vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
-      compatibilityId: SPPVan
+      compatibilityId: HardpointCompatibilitySPPVan
       insertDelay: 1.5
 
 - type: entity
@@ -444,16 +444,16 @@
     vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: secondary
-      hardpointType: Secondary
+      hardpointType: HardpointTypeSecondary
       slotType: HardpointSlotTypeLauncher
-      compatibilityId: SPPVan
+      compatibilityId: HardpointCompatibilitySPPVan
       visualLayer: secondary
       insertDelay: 2.0
       required: false
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
-      compatibilityId: SPPVan
+      compatibilityId: HardpointCompatibilitySPPVan
       insertDelay: 1.5
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/spp_van_armed_interior.yml
@@ -572,7 +572,7 @@
     vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
-      compatibilityId: SPPVan
+      compatibilityId: HardpointCompatibilitySPPVan
       insertDelay: 1.5

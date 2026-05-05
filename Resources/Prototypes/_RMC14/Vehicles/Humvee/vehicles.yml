@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: VehicleHumveeBase
   abstract: true
   name: humvee
@@ -122,25 +122,25 @@
     vehicleFamily: HardpointVehicleFamilyHumvee
     slots:
     - id: turret
-      hardpointType: Turret
+      hardpointType: HardpointTypeTurret
       slotType: HardpointSlotTypeTurret
       visualLayer: primary
       insertDelay: 2.0
       required: false
     - id: roof
-      hardpointType: RoofAttachment
+      hardpointType: HardpointTypeRoofAttachment
       slotType: HardpointSlotTypeRoofAttachment
       visualLayer: support
       insertDelay: 1.5
       required: false
     - id: front
-      hardpointType: FrontAttachment
+      hardpointType: HardpointTypeFrontAttachment
       slotType: HardpointSlotTypeFrontAttachment
       visualLayer: support-2
       insertDelay: 1.5
       required: false
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
   - type: VehicleWheelSlots
@@ -218,19 +218,19 @@
     vehicleFamily: HardpointVehicleFamilyHumvee
     slots:
     - id: roof
-      hardpointType: RoofAttachment
+      hardpointType: HardpointTypeRoofAttachment
       slotType: HardpointSlotTypeRoofAttachment
       visualLayer: support
       insertDelay: 1.5
       required: false
     - id: front
-      hardpointType: FrontAttachment
+      hardpointType: HardpointTypeFrontAttachment
       slotType: HardpointSlotTypeFrontAttachment
       visualLayer: support-2
       insertDelay: 1.5
       required: false
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
   - type: VehicleEnter
@@ -286,19 +286,19 @@
     vehicleFamily: HardpointVehicleFamilyHumvee
     slots:
     - id: roof
-      hardpointType: RoofAttachment
+      hardpointType: HardpointTypeRoofAttachment
       slotType: HardpointSlotTypeRoofAttachment
       visualLayer: support
       insertDelay: 1.5
       required: false
     - id: front
-      hardpointType: FrontAttachment
+      hardpointType: HardpointTypeFrontAttachment
       slotType: HardpointSlotTypeFrontAttachment
       visualLayer: support-2
       insertDelay: 1.5
       required: false
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
   - type: VehicleEnter
@@ -349,7 +349,7 @@
     autoTurretEnabled: true
   - type: VehicleDeployGatedHardpoints
     blockedHardpoints:
-    - Cannon
+    - HardpointTypeCannon
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_arc_interior.yml
     enterDoAfter: 1.0

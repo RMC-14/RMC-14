@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: VehicleTankHardpointBase
   id: VehicleTankFlamer
   name: tank flamer
@@ -7,7 +7,7 @@
   - type: Sprite
     state: flamer
   - type: HardpointItem
-    hardpointType: Launcher
+    hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
     damageMultiplier: 0.0
@@ -78,7 +78,7 @@
   - type: Sprite
     state: glauncher
   - type: HardpointItem
-    hardpointType: Launcher
+    hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
     damageMultiplier: 0.0
@@ -147,7 +147,7 @@
   - type: Sprite
     state: tow_launcher
   - type: HardpointItem
-    hardpointType: Launcher
+    hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
     damageMultiplier: 0.0
@@ -212,7 +212,7 @@
   - type: Sprite
     state: m56_cupola
   - type: HardpointItem
-    hardpointType: Launcher
+    hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
     damageMultiplier: 0.0
@@ -280,7 +280,7 @@
   - type: Sprite
     state: m56_cupola
   - type: HardpointItem
-    hardpointType: Launcher
+    hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
     damageMultiplier: 0.0

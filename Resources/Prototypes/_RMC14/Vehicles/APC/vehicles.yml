@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: VehicleAPCBase
   abstract: true
   name: armored personnel carrier
@@ -135,25 +135,25 @@
     vehicleFamily: HardpointVehicleFamilyAPC
     slots:
     - id: primary
-      hardpointType: Turret
+      hardpointType: HardpointTypeTurret
       slotType: HardpointSlotTypeTurret
       visualLayer: primary
       insertDelay: 2.5
       required: false
     - id: secondary
-      hardpointType: Cannon
+      hardpointType: HardpointTypeCannon
       slotType: HardpointSlotTypeCannon
       visualLayer: secondary
       insertDelay: 2.5
       required: false
     - id: support
-      hardpointType: SupportAttachment
+      hardpointType: HardpointTypeSupportAttachment
       slotType: HardpointSlotTypeSupportAttachment
       visualLayer: support
       insertDelay: 2.0
       required: false
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
   - type: VehicleWheelSlots
@@ -316,30 +316,30 @@
     vehicleFamily: HardpointVehicleFamilyAPC
     slots:
     - id: primary
-      hardpointType: Turret
+      hardpointType: HardpointTypeTurret
       slotType: HardpointSlotTypeTurret
-      compatibilityId: SPPAPC
+      compatibilityId: HardpointCompatibilitySPPAPC
       visualLayer: primary
       insertDelay: 2.5
       required: false
     - id: secondary
-      hardpointType: Cannon
+      hardpointType: HardpointTypeCannon
       slotType: HardpointSlotTypeCannon
-      compatibilityId: SPPAPC
+      compatibilityId: HardpointCompatibilitySPPAPC
       visualLayer: secondary
       insertDelay: 2.5
       required: false
     - id: support
-      hardpointType: SupportAttachment
+      hardpointType: HardpointTypeSupportAttachment
       slotType: HardpointSlotTypeSupportAttachment
-      compatibilityId: SPPAPC
+      compatibilityId: HardpointCompatibilitySPPAPC
       visualLayer: support
       insertDelay: 2.0
       required: false
     - id: wheel-1
-      hardpointType: Wheel
+      hardpointType: HardpointTypeWheel
       slotType: HardpointSlotTypeWheel
-      compatibilityId: SPPAPC
+      compatibilityId: HardpointCompatibilitySPPAPC
       insertDelay: 1.5
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/spp_apc_interior.yml

@@ -250,9 +250,9 @@ public sealed class VehicleSupplySystem : EntitySystem
             if (!proto.TryGetComponent(out HardpointItemComponent? hardpointItem, _compFactory))
                 continue;
 
-            _hardpointTypeByProto[Normalize(proto.ID)] = hardpointItem.HardpointType;
+            _hardpointTypeByProto[Normalize(proto.ID)] = hardpointItem.HardpointType.Id;
 
-            var key = Normalize(hardpointItem.HardpointType);
+            var key = Normalize(hardpointItem.HardpointType.Id);
             if (!_hardpointItemsByType.TryGetValue(key, out var list))
             {
                 list = new List<HardpointItemInfo>();
@@ -1584,7 +1584,7 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         foreach (var slot in slots.Slots)
         {
-            var typeKey = Normalize(slot.HardpointType);
+            var typeKey = Normalize(slot.HardpointType.Id);
             if (!_hardpointItemsByType.TryGetValue(typeKey, out var candidates))
                 continue;
 

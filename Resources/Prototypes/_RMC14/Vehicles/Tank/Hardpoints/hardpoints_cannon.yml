@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: VehicleTankHardpointBase
   id: VehicleTankLTBCannon
   name: LTB cannon
@@ -7,7 +7,7 @@
   - type: Sprite
     state: ltb_cannon
   - type: HardpointItem
-    hardpointType: Cannon
+    hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.125
@@ -69,7 +69,7 @@
   - type: Sprite
     state: ltaaap_minigun
   - type: HardpointItem
-    hardpointType: Cannon
+    hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.125
@@ -152,7 +152,7 @@
   - type: Sprite
     state: ace_autocannon
   - type: HardpointItem
-    hardpointType: Cannon
+    hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.125
@@ -216,7 +216,7 @@
   - type: Sprite
     state: drgn_flamer
   - type: HardpointItem
-    hardpointType: Cannon
+    hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.125

@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed partial class VehicleAmmoLoaderComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string HardpointType = string.Empty;
+    public EntProtoId HardpointType;
 
     [DataField, AutoNetworkedField]
     public EntProtoId? BulletType;
