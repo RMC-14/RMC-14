@@ -766,7 +766,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         var copyAll = settings.CopyAll;
         var excludeComponents = settings.ExcludeComponents;
-        var componentsToEvent = settings.EventComponents;
         if (!copyAll)
         {
             // Xeno cloning settings should always copy all and use exclusions.
@@ -784,10 +783,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         foreach (var excluded in excludeComponents)
         {
             registryToAdd.Remove(excluded);
-        }
-        foreach (var toEvent in componentsToEvent)
-        {
-            registryToAdd.Remove(toEvent);
         }
 
         var additionalExclusions = new HashSet<string>();
