@@ -19,6 +19,12 @@ public sealed partial class RequisitionsComputerComponent : Component
     [DataField(required: true), AutoNetworkedField, AlwaysPushInheritance]
     public List<RequisitionsCategory> Categories = new();
 
+    [DataField, AutoNetworkedField, AlwaysPushInheritance]
+    public List<RequisitionsCategory> BlackMarketCategories = new();
+
+    [DataField, AutoNetworkedField]
+    public bool BlackMarketUnlocked;
+
     [DataField]
     public bool IsLastInteracted = false;
 }

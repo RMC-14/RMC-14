@@ -18,6 +18,10 @@ public sealed class RequisitionsBuiState : BoundUserInterfaceState
     public bool Full;
     public int OrderCount;
     public int Capacity;
+    public bool BlackMarketUnlocked;
+    public int BlackMarketBalance;
+    public int BlackMarketHeat;
+    public RequisitionsBlackMarketStatus BlackMarketStatus;
     public List<RequisitionsPendingOrder> PendingOrders;
 
     public RequisitionsBuiState(
@@ -27,6 +31,10 @@ public sealed class RequisitionsBuiState : BoundUserInterfaceState
         bool full,
         int orderCount,
         int capacity,
+        bool blackMarketUnlocked,
+        int blackMarketBalance,
+        int blackMarketHeat,
+        RequisitionsBlackMarketStatus blackMarketStatus,
         List<RequisitionsPendingOrder> pendingOrders)
     {
         PlatformLowered = platformLowered;
@@ -35,6 +43,10 @@ public sealed class RequisitionsBuiState : BoundUserInterfaceState
         Full = full;
         OrderCount = orderCount;
         Capacity = capacity;
+        BlackMarketUnlocked = blackMarketUnlocked;
+        BlackMarketBalance = blackMarketBalance;
+        BlackMarketHeat = blackMarketHeat;
+        BlackMarketStatus = blackMarketStatus;
         PendingOrders = pendingOrders;
     }
 }
@@ -56,6 +68,12 @@ public sealed class RequisitionsCartItem(int category, int order, int amount)
 
 [Serializable, NetSerializable]
 public sealed class RequisitionsBuyCartMsg(List<RequisitionsCartItem> items) : BoundUserInterfaceMessage
+{
+    public List<RequisitionsCartItem> Items = items;
+}
+
+[Serializable, NetSerializable]
+public sealed class RequisitionsBuyBlackMarketCartMsg(List<RequisitionsCartItem> items) : BoundUserInterfaceMessage
 {
     public List<RequisitionsCartItem> Items = items;
 }

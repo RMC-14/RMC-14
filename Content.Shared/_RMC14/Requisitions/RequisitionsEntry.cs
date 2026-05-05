@@ -21,6 +21,15 @@ public sealed partial class RequisitionsEntry
     [DataField(required: true)]
     public int Cost;
 
+    [DataField]
+    public bool BlackMarket;
+
+    [DataField]
+    public int BlackMarketCost;
+
+    [DataField]
+    public int BlackMarketHeat;
+
     [DataField(required: true)]
     public EntProtoId Crate;
 

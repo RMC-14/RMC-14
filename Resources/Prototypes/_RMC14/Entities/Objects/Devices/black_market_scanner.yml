@@ -1,0 +1,50 @@
+- type: entity
+  parent: BaseItem
+  id: RMCBlackMarketScanner
+  name: suspicious device
+  description: This is... seemingly a makeshift combination between an autopsy scanner, an ancient t-ray scanner, and some sort of robotic clamp, but you can see a lightbulb inside it. What the hell is this?
+  components:
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Devices/black_market_scanner.rsi
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/black_market_scanner.rsi
+    layers:
+    - state: mendoza_scanner
+    - state: mendoza_scanner_flash
+    - state: mendoza_scanner_clamp_off
+      map: ["enum.RMCBlackMarketScannerLayers.Clamp"]
+    - state: mendoza_scanner_value_red
+      visible: false
+      map: ["enum.RMCBlackMarketScannerLayers.Value"]
+  - type: RMCBlackMarketScanner
+  - type: UseDelay
+    delay: 1
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCBlackMarketScannerVisuals.Scanning:
+        enum.RMCBlackMarketScannerLayers.Clamp:
+          True: { state: mendoza_scanner_clamp_on }
+          False: { state: mendoza_scanner_clamp_off }
+        enum.RMCBlackMarketScannerLayers.Value:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCBlackMarketScannerVisuals.Value:
+        enum.RMCBlackMarketScannerLayers.Value:
+          Red: { state: mendoza_scanner_value_red }
+          Orange: { state: mendoza_scanner_value_orange }
+          Yellow: { state: mendoza_scanner_value_yellow }
+          Green: { state: mendoza_scanner_value_green }
+          Cyan: { state: mendoza_scanner_value_cyan }
+          White: { state: mendoza_scanner_value_white }
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - belt
+    - suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 60
+      CMGlass: 30

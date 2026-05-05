@@ -126,7 +126,11 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         var elevator = GetElevator(computer);
         var mode = elevator?.Comp.NextMode ?? elevator?.Comp.Mode;
         var busy = elevator?.Comp.Busy ?? false;
-        var balance = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account)?.Balance ?? 0;
+        var account = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account);
+        var balance = account?.Balance ?? 0;
+        var blackMarketBalance = account?.BlackMarketBalance ?? 0;
+        var blackMarketHeat = account?.BlackMarketHeat ?? 0;
+        var blackMarketStatus = account?.BlackMarketStatus ?? RequisitionsBlackMarketStatus.Available;
         var orderCount = elevator?.Comp.Orders.Count ?? 0;
         var capacity = elevator != null ? GetElevatorCapacity(elevator.Value) : 0;
         var full = elevator != null && orderCount >= capacity;
@@ -134,7 +138,18 @@ public abstract class SharedRequisitionsSystem : EntitySystem
             ? GetPendingOrders(elevator.Value.Comp.Orders)
             : new List<RequisitionsPendingOrder>();
 
-        var state = new RequisitionsBuiState(mode, busy, balance, full, orderCount, capacity, pendingOrders);
+        var state = new RequisitionsBuiState(
+            mode,
+            busy,
+            balance,
+            full,
+            orderCount,
+            capacity,
+            computer.Comp.BlackMarketUnlocked,
+            blackMarketBalance,
+            blackMarketHeat,
+            blackMarketStatus,
+            pendingOrders);
         _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);
     }
 
@@ -165,6 +180,9 @@ public abstract class SharedRequisitionsSystem : EntitySystem
     {
         if (a.Crate != b.Crate ||
             a.Cost != b.Cost ||
+            a.BlackMarket != b.BlackMarket ||
+            a.BlackMarketCost != b.BlackMarketCost ||
+            a.BlackMarketHeat != b.BlackMarketHeat ||
             a.Name != b.Name ||
             a.Description != b.Description ||
             !Equals(a.Icon, b.Icon) ||

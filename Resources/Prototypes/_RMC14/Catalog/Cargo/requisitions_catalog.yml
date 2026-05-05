@@ -5,6 +5,28 @@
   - type: Speech
     speechVerb: Robotic
   - type: RequisitionsComputer
+    blackMarketCategories:
+    - name: rmc-requisitions-black-market-category-seized-items
+      entries:
+      - cost: 0
+        name: rmc-requisitions-black-market-scanner-crate-name
+        description: rmc-requisitions-black-market-scanner-crate-desc
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: 0
+        crate: RMCCrateBlackMarketScanner
+        icon:
+          entity: RMCBlackMarketScanner
+    - name: rmc-requisitions-black-market-category-shipside-contraband
+      entries: []
+    - name: rmc-requisitions-black-market-category-surplus-equipment
+      entries: []
+    - name: rmc-requisitions-black-market-category-contraband-ammo
+      entries: []
+    - name: rmc-requisitions-black-market-category-deep-storage
+      entries: []
+    - name: rmc-requisitions-black-market-category-miscellaneous
+      entries: []
     categories:
     - name: rmc-requisitions-category-ammo
       entries:

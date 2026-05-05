@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Graphics.RSI;
@@ -24,11 +25,26 @@ public sealed class RequisitionsBui : BoundUserInterface
 
     private readonly SpriteSystem _sprite;
     private readonly Dictionary<CartKey, int> _cart = new();
+    private readonly Dictionary<CartKey, int> _blackMarketCart = new();
     private readonly Dictionary<CartKey, RequisitionsProductCard> _productCards = new();
 
     private RequisitionsBuiState? _state;
     private RequisitionsWindow? _window;
     private int? _selectedCategory;
+    private int? _selectedBlackMarketCategory;
+    private bool _blackMarketMode;
+
+    private int? SelectedCategory
+    {
+        get => _blackMarketMode ? _selectedBlackMarketCategory : _selectedCategory;
+        set
+        {
+            if (_blackMarketMode)
+                _selectedBlackMarketCategory = value;
+            else
+                _selectedCategory = value;
+        }
+    }
 
     public RequisitionsBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -66,7 +82,7 @@ public sealed class RequisitionsBui : BoundUserInterface
         _window.PlatformButton.OnPressed += _ => PressPlatformButton();
         _window.ClearCartButton.OnPressed += _ =>
         {
-            _cart.Clear();
+            GetCurrentCart().Clear();
             RefreshVisibleEntries();
         };
         _window.BuyButton.OnPressed += _ => BuyCart();
@@ -74,10 +90,14 @@ public sealed class RequisitionsBui : BoundUserInterface
 
     private void RefreshShop()
     {
+        if (_state is { BlackMarketUnlocked: false })
+            _blackMarketMode = false;
+
         if (_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer) &&
-            _selectedCategory >= computer.Categories.Count)
+            SelectedCategory is { } selectedCategory &&
+            selectedCategory >= GetCurrentCategories(computer).Count)
         {
-            _selectedCategory = null;
+            SelectedCategory = null;
         }
 
         UpdatePlatformButtons();
@@ -151,9 +171,15 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (_window == null || _state == null)
             return;
 
-        _window.BudgetLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
-            "rmc-requisitions-balance",
-            ("balance", _state.Balance))));
+        var balance = _blackMarketMode
+            ? Loc.GetString(
+                "rmc-requisitions-black-market-balance",
+                ("balance", _state.Balance),
+                ("wy", _state.BlackMarketBalance),
+                ("heat", _state.BlackMarketHeat))
+            : Loc.GetString("rmc-requisitions-balance", ("balance", _state.Balance));
+
+        _window.BudgetLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(balance));
 
         _window.CapacityLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
             "rmc-requisitions-capacity",
@@ -171,27 +197,51 @@ public sealed class RequisitionsBui : BoundUserInterface
         _entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer);
 
         var buttons = new List<Button>();
-        var allButton = CreateCategoryButton(Loc.GetString("rmc-requisitions-category-all"), _selectedCategory == null);
+        if (_blackMarketMode)
+        {
+            var returnButton = CreateCategoryButton(Loc.GetString("rmc-requisitions-black-market-return"), false);
+            returnButton.OnPressed += _ =>
+            {
+                _blackMarketMode = false;
+                RefreshShop();
+            };
+            buttons.Add(returnButton);
+        }
+
+        var allButton = CreateCategoryButton(Loc.GetString("rmc-requisitions-category-all"), SelectedCategory == null);
         allButton.OnPressed += _ =>
         {
-            _selectedCategory = null;
+            SelectedCategory = null;
             RefreshShop();
         };
         buttons.Add(allButton);
 
         if (computer != null)
         {
-            for (var i = 0; i < computer.Categories.Count; i++)
+            var categories = GetCurrentCategories(computer);
+            for (var i = 0; i < categories.Count; i++)
             {
                 var categoryIndex = i;
-                var button = CreateCategoryButton(Loc.GetString(computer.Categories[i].Name), _selectedCategory == categoryIndex);
+                var button = CreateCategoryButton(Loc.GetString(categories[i].Name), SelectedCategory == categoryIndex);
                 button.OnPressed += _ =>
                 {
-                    _selectedCategory = categoryIndex;
+                    SelectedCategory = categoryIndex;
                     RefreshShop();
                 };
                 buttons.Add(button);
             }
+        }
+
+        if (!_blackMarketMode && _state is { BlackMarketUnlocked: true })
+        {
+            var blackMarketButton = CreateBlackMarketButton(_blackMarketMode);
+            blackMarketButton.OnPressed += _ =>
+            {
+                _blackMarketMode = true;
+                _selectedBlackMarketCategory = null;
+                RefreshShop();
+            };
+            buttons.Add(blackMarketButton);
         }
 
         var buttonWidth = CategoryMinWidth;
@@ -221,6 +271,18 @@ public sealed class RequisitionsBui : BoundUserInterface
         };
     }
 
+    private static Button CreateBlackMarketButton(bool disabled)
+    {
+        var button = CreateCategoryButton(Loc.GetString("rmc-requisitions-black-market-button"), disabled);
+        button.StyleBoxOverride = new StyleBoxFlat
+        {
+            BackgroundColor = Color.FromHex("#311218"),
+            BorderColor = Color.FromHex("#ce3349"),
+            BorderThickness = new Thickness(2),
+        };
+        return button;
+    }
+
     private void PopulateProducts()
     {
         if (_window == null)
@@ -232,15 +294,25 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (!_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer))
             return;
 
+        if (_blackMarketMode && !CanUseBlackMarket())
+        {
+            _window.ProductsContainer.AddChild(new Label
+            {
+                Text = GetBlackMarketStatusText(),
+            });
+            return;
+        }
+
+        var categories = GetCurrentCategories(computer);
         var search = _window.SearchBar.Text.Trim();
         var added = 0;
 
-        for (var categoryIndex = 0; categoryIndex < computer.Categories.Count; categoryIndex++)
+        for (var categoryIndex = 0; categoryIndex < categories.Count; categoryIndex++)
         {
-            if (_selectedCategory != null && _selectedCategory != categoryIndex)
+            if (SelectedCategory != null && SelectedCategory != categoryIndex)
                 continue;
 
-            var category = computer.Categories[categoryIndex];
+            var category = categories[categoryIndex];
             for (var entryIndex = 0; entryIndex < category.Entries.Count; entryIndex++)
             {
                 var entry = category.Entries[entryIndex];
@@ -253,8 +325,8 @@ public sealed class RequisitionsBui : BoundUserInterface
                 {
                     CategoryIndex = categoryIndex,
                     EntryIndex = entryIndex,
-                    UnitCost = entry.Cost,
-                    Cost = { Text = Loc.GetString("rmc-requisitions-card-cost", ("cost", entry.Cost)) },
+                    UnitCost = entry.BlackMarket ? entry.BlackMarketCost : entry.Cost,
+                    Cost = { Text = GetCostText(entry) },
                     Icon = { Texture = display.Icon },
                 };
                 card.ProductName.SetMessage(FormattedMessage.FromUnformatted(display.Name), defaultColor: Color.White);
@@ -315,35 +387,45 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (!TryGetEntry(key, out var entry))
             return;
 
-        if (!CanAdd(entry.Cost))
+        if (!CanAdd(entry))
             return;
 
-        _cart[key] = GetCartAmount(key) + 1;
+        var cart = GetCurrentCart();
+        cart[key] = GetCartAmount(key) + 1;
         RefreshCart();
         UpdateVisibleProductCards();
     }
 
     private void RemoveFromCart(CartKey key)
     {
+        var cart = GetCurrentCart();
         var amount = GetCartAmount(key);
         if (amount <= 0)
             return;
 
         if (amount == 1)
-            _cart.Remove(key);
+            cart.Remove(key);
         else
-            _cart[key] = amount - 1;
+            cart[key] = amount - 1;
 
         RefreshCart();
         UpdateVisibleProductCards();
     }
 
-    private bool CanAdd(int cost)
+    private bool CanAdd(RequisitionsEntry entry)
     {
         if (_state == null)
             return false;
 
-        return GetCartTotal() + cost <= _state.Balance &&
+        var supplyTotal = GetCartSupplyTotal() + entry.Cost;
+        var blackMarketTotal = GetCartBlackMarketTotal() + entry.BlackMarketCost;
+        if (entry.BlackMarket &&
+            (!CanUseBlackMarket() || blackMarketTotal > _state.BlackMarketBalance))
+        {
+            return false;
+        }
+
+        return supplyTotal <= _state.Balance &&
                GetCartAmount() + 1 <= GetRemainingCapacity();
     }
 
@@ -354,11 +436,12 @@ public sealed class RequisitionsBui : BoundUserInterface
 
         _window.CartContainer.DisposeAllChildren();
 
+        var cart = GetCurrentCart();
         var search = _window.SearchBar.Text.Trim();
         var scopedItems = 0;
         var visibleItems = 0;
-        var items = new List<(CartKey Key, int Amount)>(_cart.Count);
-        foreach (var (key, amount) in _cart)
+        var items = new List<(CartKey Key, int Amount)>(cart.Count);
+        foreach (var (key, amount) in cart)
         {
             items.Add((key, amount));
         }
@@ -373,7 +456,7 @@ public sealed class RequisitionsBui : BoundUserInterface
 
         foreach (var (key, amount) in items)
         {
-            if (_selectedCategory != null && _selectedCategory != key.Category)
+            if (SelectedCategory != null && SelectedCategory != key.Category)
                 continue;
 
             if (!TryGetEntry(key, out var entry))
@@ -389,9 +472,9 @@ public sealed class RequisitionsBui : BoundUserInterface
             {
                 CategoryIndex = key.Category,
                 EntryIndex = key.Entry,
-                UnitCost = entry.Cost,
+                UnitCost = entry.BlackMarket ? entry.BlackMarketCost : entry.Cost,
                 Quantity = { Text = amount.ToString() },
-                Cost = { Text = Loc.GetString("rmc-requisitions-cart-row-cost", ("cost", entry.Cost * amount)) },
+                Cost = { Text = GetLineCostText(entry, amount) },
                 Icon = { Texture = display.Icon },
             };
             row.ProductName.SetMessage(FormattedMessage.FromUnformatted(display.Name), defaultColor: Color.White);
@@ -399,37 +482,42 @@ public sealed class RequisitionsBui : BoundUserInterface
 
             row.AddButton.OnPressed += _ => AddToCart(key);
             row.RemoveButton.OnPressed += _ => RemoveFromCart(key);
-            row.AddButton.Disabled = !CanAdd(entry.Cost);
+            row.AddButton.Disabled = !CanAdd(entry);
 
             _window.CartContainer.AddChild(row);
         }
 
-        var total = GetCartTotal();
+        var supplyTotal = GetCartSupplyTotal();
+        var blackMarketTotal = GetCartBlackMarketTotal();
         var cartAmount = GetCartAmount();
         var remainingCapacity = GetRemainingCapacity();
 
-        _window.CartTotalLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
-            "rmc-requisitions-cart-total",
-            ("total", total))));
+        _window.CartTotalLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(GetCartTotalText(supplyTotal, blackMarketTotal)));
 
         var status = string.Empty;
-        if (_cart.Count == 0)
+        if (cart.Count == 0)
             status = Loc.GetString("rmc-requisitions-cart-empty");
+        else if (_blackMarketMode && !CanUseBlackMarket())
+            status = GetBlackMarketStatusText();
         else if (visibleItems == 0 && !string.IsNullOrWhiteSpace(search))
             status = Loc.GetString("rmc-requisitions-cart-filter-empty");
         else if (scopedItems == 0)
             status = Loc.GetString("rmc-requisitions-cart-category-empty");
-        else if (_state != null && total > _state.Balance)
+        else if (_state != null && supplyTotal > _state.Balance)
             status = Loc.GetString("rmc-requisitions-cart-insufficient-funds");
+        else if (_state != null && blackMarketTotal > _state.BlackMarketBalance)
+            status = Loc.GetString("rmc-requisitions-cart-insufficient-wy");
         else if (cartAmount > remainingCapacity)
             status = Loc.GetString("rmc-requisitions-cart-insufficient-capacity");
 
         _window.CartStatusLabel.SetMessage(FormattedMessage.FromUnformatted(status));
 
-        _window.ClearCartButton.Disabled = _cart.Count == 0;
-        _window.BuyButton.Disabled = _cart.Count == 0 ||
+        _window.ClearCartButton.Disabled = cart.Count == 0;
+        _window.BuyButton.Disabled = cart.Count == 0 ||
                                      _state == null ||
-                                     total > _state.Balance ||
+                                     (_blackMarketMode && !CanUseBlackMarket()) ||
+                                     supplyTotal > _state.Balance ||
+                                     blackMarketTotal > _state.BlackMarketBalance ||
                                      cartAmount > remainingCapacity;
     }
 
@@ -451,7 +539,7 @@ public sealed class RequisitionsBui : BoundUserInterface
         foreach (var order in _state.PendingOrders)
         {
             var category = GetPendingOrderCategory(order.Entry);
-            if (_selectedCategory != null && category != _selectedCategory)
+            if (!ShouldShowPendingOrder(order.Entry, category))
                 continue;
 
             var display = GetDisplay(order.Entry);
@@ -474,7 +562,7 @@ public sealed class RequisitionsBui : BoundUserInterface
         {
             var card = new RequisitionsPendingOrderCard
             {
-                Cost = { Text = Loc.GetString("rmc-requisitions-card-cost", ("cost", order.Entry.Cost)) },
+                Cost = { Text = GetCostText(order.Entry) },
                 Quantity = { Text = Loc.GetString("rmc-requisitions-pending-quantity", ("amount", order.Amount)) },
                 Icon = { Texture = display.Icon },
             };
@@ -506,16 +594,17 @@ public sealed class RequisitionsBui : BoundUserInterface
         var amount = GetCartAmount(key);
         card.Quantity.Text = amount.ToString();
         card.RemoveButton.Disabled = amount <= 0;
-        card.AddButton.Disabled = !TryGetEntry(key, out var entry) || !CanAdd(entry.Cost);
+        card.AddButton.Disabled = !TryGetEntry(key, out var entry) || !CanAdd(entry);
     }
 
     private void BuyCart()
     {
-        if (_cart.Count == 0)
+        var cart = GetCurrentCart();
+        if (cart.Count == 0)
             return;
 
         var items = new List<RequisitionsCartItem>();
-        foreach (var (key, amount) in _cart)
+        foreach (var (key, amount) in cart)
         {
             if (amount > 0)
                 items.Add(new RequisitionsCartItem(key.Category, key.Entry, amount));
@@ -524,8 +613,12 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (items.Count == 0)
             return;
 
-        SendMessage(new RequisitionsBuyCartMsg(items));
-        _cart.Clear();
+        if (_blackMarketMode)
+            SendMessage(new RequisitionsBuyBlackMarketCartMsg(items));
+        else
+            SendMessage(new RequisitionsBuyCartMsg(items));
+
+        cart.Clear();
         RefreshCart();
         UpdateVisibleProductCards();
     }
@@ -535,9 +628,10 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (!_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer))
             return null;
 
-        for (var categoryIndex = 0; categoryIndex < computer.Categories.Count; categoryIndex++)
+        var categories = entry.BlackMarket ? computer.BlackMarketCategories : computer.Categories;
+        for (var categoryIndex = 0; categoryIndex < categories.Count; categoryIndex++)
         {
-            var category = computer.Categories[categoryIndex];
+            var category = categories[categoryIndex];
             foreach (var categoryEntry in category.Entries)
             {
                 if (SamePendingEntry(categoryEntry, entry))
@@ -548,10 +642,29 @@ public sealed class RequisitionsBui : BoundUserInterface
         return null;
     }
 
+    private bool ShouldShowPendingOrder(RequisitionsEntry entry, int? category)
+    {
+        if (_blackMarketMode)
+        {
+            if (!entry.BlackMarket)
+                return false;
+
+            return SelectedCategory == null || category == SelectedCategory;
+        }
+
+        if (SelectedCategory == null)
+            return true;
+
+        return !entry.BlackMarket && category == SelectedCategory;
+    }
+
     private static bool SamePendingEntry(RequisitionsEntry a, RequisitionsEntry b)
     {
         if (a.Crate != b.Crate ||
             a.Cost != b.Cost ||
+            a.BlackMarket != b.BlackMarket ||
+            a.BlackMarketCost != b.BlackMarketCost ||
+            a.BlackMarketHeat != b.BlackMarketHeat ||
             a.Name != b.Name ||
             a.Description != b.Description ||
             !Equals(a.Icon, b.Icon) ||
@@ -574,13 +687,16 @@ public sealed class RequisitionsBui : BoundUserInterface
         entry = default!;
 
         if (!_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer) ||
-            key.Category < 0 ||
-            key.Category >= computer.Categories.Count)
+            key.Category < 0)
         {
             return false;
         }
 
-        var category = computer.Categories[key.Category];
+        var categories = GetCurrentCategories(computer);
+        if (key.Category >= categories.Count)
+            return false;
+
+        var category = categories[key.Category];
         if (key.Entry < 0 || key.Entry >= category.Entries.Count)
             return false;
 
@@ -588,15 +704,91 @@ public sealed class RequisitionsBui : BoundUserInterface
         return true;
     }
 
+    private List<RequisitionsCategory> GetCurrentCategories(RequisitionsComputerComponent computer)
+    {
+        return _blackMarketMode ? computer.BlackMarketCategories : computer.Categories;
+    }
+
+    private Dictionary<CartKey, int> GetCurrentCart()
+    {
+        return _blackMarketMode ? _blackMarketCart : _cart;
+    }
+
+    private bool CanUseBlackMarket()
+    {
+        return _state is { BlackMarketUnlocked: true, BlackMarketStatus: RequisitionsBlackMarketStatus.Available };
+    }
+
+    private string GetBlackMarketStatusText()
+    {
+        if (_state == null)
+            return Loc.GetString("rmc-requisitions-black-market-unavailable");
+
+        return _state.BlackMarketStatus switch
+        {
+            RequisitionsBlackMarketStatus.LockedOut => Loc.GetString("rmc-requisitions-black-market-locked-out"),
+            RequisitionsBlackMarketStatus.MendozaDead => Loc.GetString("rmc-requisitions-black-market-mendoza-dead"),
+            _ => Loc.GetString("rmc-requisitions-black-market-unavailable"),
+        };
+    }
+
+    private string GetCostText(RequisitionsEntry entry)
+    {
+        if (!entry.BlackMarket)
+            return Loc.GetString("rmc-requisitions-card-cost", ("cost", entry.Cost));
+
+        if (entry.Cost > 0)
+        {
+            return Loc.GetString(
+                "rmc-requisitions-card-cost-dual",
+                ("cost", entry.Cost),
+                ("wy", entry.BlackMarketCost));
+        }
+
+        return Loc.GetString("rmc-requisitions-card-cost-wy", ("cost", entry.BlackMarketCost));
+    }
+
+    private string GetLineCostText(RequisitionsEntry entry, int amount)
+    {
+        if (!entry.BlackMarket)
+            return Loc.GetString("rmc-requisitions-cart-row-cost", ("cost", entry.Cost * amount));
+
+        if (entry.Cost > 0)
+        {
+            return Loc.GetString(
+                "rmc-requisitions-cart-row-cost-dual",
+                ("cost", entry.Cost * amount),
+                ("wy", entry.BlackMarketCost * amount));
+        }
+
+        return Loc.GetString("rmc-requisitions-cart-row-cost-wy", ("cost", entry.BlackMarketCost * amount));
+    }
+
+    private string GetCartTotalText(int supplyTotal, int blackMarketTotal)
+    {
+        if (!_blackMarketMode)
+            return Loc.GetString("rmc-requisitions-cart-total", ("total", supplyTotal));
+
+        if (supplyTotal > 0)
+        {
+            return Loc.GetString(
+                "rmc-requisitions-cart-total-dual",
+                ("total", supplyTotal),
+                ("wy", blackMarketTotal));
+        }
+
+        return Loc.GetString("rmc-requisitions-cart-total-wy", ("total", blackMarketTotal));
+    }
+
     private int GetCartAmount(CartKey key)
     {
-        return _cart.GetValueOrDefault(key);
+        return GetCurrentCart().GetValueOrDefault(key);
     }
 
     private int GetCartAmount()
     {
         var amount = 0;
-        foreach (var count in _cart.Values)
+        foreach (var count in GetCurrentCart().Values)
         {
             amount += count;
         }
@@ -604,13 +796,25 @@ public sealed class RequisitionsBui : BoundUserInterface
         return amount;
     }
 
-    private int GetCartTotal()
+    private int GetCartSupplyTotal()
     {
         var total = 0;
-        foreach (var (key, amount) in _cart)
+        foreach (var (key, amount) in GetCurrentCart())
         {
             if (TryGetEntry(key, out var entry))
                 total += entry.Cost * amount;
+        }
+
+        return total;
+    }
+
+    private int GetCartBlackMarketTotal()
+    {
+        var total = 0;
+        foreach (var (key, amount) in GetCurrentCart())
+        {
+            if (TryGetEntry(key, out var entry))
+                total += entry.BlackMarketCost * amount;
         }
 
         return total;

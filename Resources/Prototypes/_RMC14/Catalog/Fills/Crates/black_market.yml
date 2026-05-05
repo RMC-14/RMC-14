@@ -1,0 +1,9 @@
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketScanner
+  name: interesting wooden crate
+  description: A wooden crate. Something about it seems a little too deliberately ordinary.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBlackMarketScanner

@@ -160,6 +160,29 @@
       CMGlass: 20
 
 - type: entity
+  parent: BaseItem
+  id: RMCBlackMarketHackingDevice
+  name: modified security access tuner
+  description: A security access tuner with wires and electrical pins sticking out at odd angles. A handwritten label on the bottom says something about the ASRS system.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/black_market_hacking_device.rsi
+    state: bm_hacker
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Tools/black_market_hacking_device.rsi
+    storedRotation: 0
+  - type: RMCBlackMarketHackingDevice
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - belt
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
+      CMGlass: 20
+
+- type: entity
   parent: trayScanner
   id: CMTRayScanner
   name: t-ray scanner

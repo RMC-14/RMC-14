@@ -70,8 +70,11 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         {
             subs.Event<RequisitionsBuyMsg>(OnBuy);
             subs.Event<RequisitionsBuyCartMsg>(OnBuyCart);
+            subs.Event<RequisitionsBuyBlackMarketCartMsg>(OnBuyBlackMarketCart);
             subs.Event<RequisitionsPlatformMsg>(OnPlatform);
         });
+
+        InitializeBlackMarket();
 
         Subs.CVar(_config, RMCCVars.RMCRequisitionsBalanceGain, v => _gain = v, true);
         Subs.CVar(_config, RMCCVars.RMCRequisitionsFreeCratesXenoDivider, v => _freeCratesXenoDivider = v, true);
@@ -145,6 +148,12 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             }
 
             var order = category.Entries[item.Order];
+            if (order.BlackMarket)
+            {
+                Log.Error($"Player {ToPrettyString(actor)} tried to buy a black market order from the requisitions catalog: category {item.Category}, order {item.Order}");
+                return;
+            }
+
             if (order.Cost > 0 && item.Amount > (int.MaxValue - totalCost) / order.Cost)
                 return;
 
@@ -370,7 +379,10 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
                     _entityStorage.Insert(entity, crate);
                 }
 
-                PrintInvoice(crate, coordinates, PaperRequisitionInvoice);
+                if (order.BlackMarket)
+                    MarkBlackMarketUnsellableRecursive(crate);
+                else
+                    PrintInvoice(crate, coordinates, PaperRequisitionInvoice);
 
                 yOffset--;
                 if (yOffset < -comp.Radius)
@@ -421,6 +433,9 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         var entities = _lookup.GetEntitiesIntersecting(elevator);
         var soldAny = false;
         var rewards = 0;
+        var blackMarketRewards = 0;
+        var blackMarketChanged = false;
+        var blackMarketVisited = new HashSet<EntityUid>();
         foreach (var entity in entities)
         {
             if (entity == elevator.Comp.Audio)
@@ -429,12 +444,25 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             if (HasComp<CargoSellBlacklistComponent>(entity))
                 continue;
 
-            rewards += SubmitInvoices(entity);
-
-            if (TryComp(entity, out RequisitionsCrateComponent? crate))
+            if (!HasComp<BlackMarketUnsellableComponent>(entity))
             {
-                rewards += crate.Reward;
-                soldAny = true;
+                rewards += SubmitInvoices(entity);
+
+                if (TryComp(entity, out RequisitionsCrateComponent? crate))
+                {
+                    rewards += crate.Reward;
+                    soldAny = true;
+                }
+
+                if (IsBlackMarketEnabled(account.Comp))
+                {
+                    var sale = GetBlackMarketSaleValue(entity, account.Comp, true, blackMarketVisited);
+                    blackMarketRewards += sale.Value;
+                    blackMarketChanged |= sale.Value > 0 || sale.KillsMendoza;
+
+                    if (sale.KillsMendoza)
+                        KillMendoza(account, entity);
+                }
             }
 
             QueueDel(entity);
@@ -443,12 +471,16 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         if (rewards > 0)
             SendUIFeedback(Loc.GetString("requisition-paperwork-reward-message", ("amount", rewards)));
 
-        account.Comp.Balance += rewards;
+        if (blackMarketRewards > 0)
+            SendUIFeedback(Loc.GetString("rmc-requisitions-black-market-sell-message", ("amount", blackMarketRewards)));
 
-        if (soldAny)
+        account.Comp.Balance += rewards;
+        account.Comp.BlackMarketBalance += blackMarketRewards;
+
+        if (soldAny || rewards > 0 || blackMarketChanged)
             Dirty(account);
 
-        return soldAny;
+        return soldAny || rewards > 0 || blackMarketChanged;
     }
 
     private void GetCrateWeight(Entity<RequisitionsAccountComponent> account, Dictionary<EntProtoId, float> crates, out Entity<RequisitionsComputerComponent> computer)
@@ -478,6 +510,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         base.Update(frameTime);
 
         var time = _timing.CurTime;
+        UpdateBlackMarketScanners(time);
         var updateUI = false;
         var accounts = EntityQueryEnumerator<RequisitionsAccountComponent>();
         while (accounts.MoveNext(out var uid, out var account))
