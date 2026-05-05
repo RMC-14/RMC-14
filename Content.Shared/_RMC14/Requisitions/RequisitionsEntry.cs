@@ -1,5 +1,7 @@
-﻿using Robust.Shared.Prototypes;
+using Robust.Shared.Localization;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Requisitions;
 
@@ -8,13 +10,13 @@ namespace Content.Shared._RMC14.Requisitions;
 public sealed partial class RequisitionsEntry
 {
     [DataField]
-    public string? Name;
+    public LocId? Name;
 
     [DataField]
-    public string? NameLocId;
+    public LocId? Description;
 
     [DataField]
-    public string? DescriptionLocId;
+    public SpriteSpecifier? Icon;
 
     [DataField(required: true)]
     public int Cost;

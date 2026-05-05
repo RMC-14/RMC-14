@@ -284,18 +284,18 @@ public sealed class RequisitionsBui : BoundUserInterface
         _prototypes.TryIndex<EntityPrototype>(entry.Crate, out var prototype);
 
         var name = prototype?.Name ?? entry.Crate.ToString();
-        if (!string.IsNullOrWhiteSpace(entry.Name))
-            name = entry.Name;
-        if (entry.NameLocId != null && Loc.TryGetString(entry.NameLocId, out var localizedName))
+        if (entry.Name is { } nameOverride && Loc.TryGetString(nameOverride, out var localizedName))
             name = localizedName;
 
         var description = prototype?.Description ?? string.Empty;
-        if (entry.DescriptionLocId != null && Loc.TryGetString(entry.DescriptionLocId, out var localizedDescription))
+        if (entry.Description is { } descriptionOverride && Loc.TryGetString(descriptionOverride, out var localizedDescription))
             description = localizedDescription;
         if (string.IsNullOrWhiteSpace(description))
             description = Loc.GetString("rmc-requisitions-card-no-description");
 
-        var icon = prototype != null
+        var icon = entry.Icon != null
+            ? _sprite.Frame0(entry.Icon)
+            : prototype != null
             ? _sprite.GetPrototypeIcon(prototype).GetFrame(RsiDirection.South, 0)
             : null;
 
@@ -553,8 +553,8 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (a.Crate != b.Crate ||
             a.Cost != b.Cost ||
             a.Name != b.Name ||
-            a.NameLocId != b.NameLocId ||
-            a.DescriptionLocId != b.DescriptionLocId ||
+            a.Description != b.Description ||
+            !Equals(a.Icon, b.Icon) ||
             a.Entities.Count != b.Entities.Count)
         {
             return false;

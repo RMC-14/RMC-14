@@ -166,8 +166,8 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         if (a.Crate != b.Crate ||
             a.Cost != b.Cost ||
             a.Name != b.Name ||
-            a.NameLocId != b.NameLocId ||
-            a.DescriptionLocId != b.DescriptionLocId ||
+            a.Description != b.Description ||
+            !Equals(a.Icon, b.Icon) ||
             a.Entities.Count != b.Entities.Count)
         {
             return false;
