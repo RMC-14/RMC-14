@@ -816,7 +816,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/trench_signs.rsi
     state: trench_sign_frontline
-    noRot: true
+    snapCardinals: false
     drawdepth: OverMobs
 
 - type: entity
