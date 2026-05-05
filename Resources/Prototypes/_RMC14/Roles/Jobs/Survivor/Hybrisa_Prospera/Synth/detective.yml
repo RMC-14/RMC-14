@@ -72,7 +72,7 @@
   name: survivor synth hybrisa detective colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCGlassesSecurityBlue, RMCCoatBureauTrenchCoatBrown, RMCHeadCapFedoraBrown, ClothingUniformJumpsuitDetective ]
     - [ CMGlassesSecurity, RMCCoatBureauTrenchCoatGrey, RMCHeadCapFedoraGrey, ClothingUniformJumpsuitDetectiveGrey ]

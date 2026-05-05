@@ -33,7 +33,7 @@
   name: spp crashland survivor weapon only preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
@@ -47,7 +47,7 @@
   name: spp crashland survivor no belt preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
@@ -73,7 +73,7 @@
   name: spp crashland survivor all random preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71

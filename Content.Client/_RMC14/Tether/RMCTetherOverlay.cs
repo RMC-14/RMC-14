@@ -3,6 +3,8 @@ using Robust.Client.Graphics;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
+using Robust.Shared.Graphics.RSI;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Tether;
@@ -15,12 +17,16 @@ public sealed class RMCTetherOverlay : Overlay
     private readonly IPlayerManager _playerManager;
     private readonly SpriteSystem _sprite;
     private readonly SharedTransformSystem _transform;
+    private readonly IGameTiming _timing;
 
+    private float _animTime;
 
-    public RMCTetherOverlay(IEntityManager entManager, IPlayerManager playerManager)
+    public RMCTetherOverlay(IEntityManager entManager, IPlayerManager playerManager, IGameTiming timing)
     {
         _entManager = entManager;
         _playerManager = playerManager;
+        _timing = timing;
+
         _sprite = entManager.System<SpriteSystem>();
         _transform = entManager.System<SharedTransformSystem>();
     }
@@ -33,6 +39,8 @@ public sealed class RMCTetherOverlay : Overlay
         var query = _entManager.EntityQueryEnumerator<RMCTetherComponent>();
         var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
         var worldHandle = args.WorldHandle;
+
+        _animTime += (float)_timing.FrameTime.TotalSeconds;
 
         while (query.MoveNext(out var uid, out var tether))
         {
@@ -62,10 +70,26 @@ public sealed class RMCTetherOverlay : Overlay
             var box = new Box2(-width, -length, width, length);
             var rotated = new Box2Rotated(box.Translated(midPoint), angle, midPoint);
 
-            var laserTexture = _sprite.GetState(new SpriteSpecifier.Rsi(tether.RsiPath, tether.TetherState));
-            var laserRsi = laserTexture.Frame0;
+            var tetherRsi = _sprite.GetState(new SpriteSpecifier.Rsi(tether.RsiPath, tether.TetherState));
 
-            worldHandle.DrawTextureRect(laserRsi, rotated);
+            var time = _animTime % tetherRsi.AnimationLength;
+
+            var delay = 0f;
+            var frameIndex = 0;
+
+            for (var i = 0; i < tetherRsi.DelayCount; i++)
+            {
+                delay += tetherRsi.GetDelay(i);
+
+                if (!(time < delay))
+                    continue;
+
+                frameIndex = i;
+                break;
+            }
+
+            var tetherTexture = tetherRsi.GetFrames(RsiDirection.South)[frameIndex];
+            worldHandle.DrawTextureRect(tetherTexture, rotated);
         }
     }
 }
