@@ -23,10 +23,10 @@ public sealed partial class HardpointItemComponent : Component
     public string HardpointType = string.Empty;
 
     [DataField]
-    public ProtoId<HardpointVehicleFamilyPrototype>? VehicleFamily;
+    public EntProtoId? VehicleFamily;
 
     [DataField]
-    public ProtoId<HardpointSlotTypePrototype>? SlotType;
+    public EntProtoId? SlotType;
 
     [DataField]
     public string? CompatibilityId;
@@ -44,7 +44,7 @@ public sealed partial class HardpointItemComponent : Component
 public sealed partial class HardpointSlotsComponent : Component
 {
     [DataField]
-    public ProtoId<HardpointVehicleFamilyPrototype>? VehicleFamily;
+    public EntProtoId? VehicleFamily;
 
     [DataField(required: true)]
     public List<HardpointSlot> Slots = new();
@@ -86,7 +86,7 @@ public sealed partial class HardpointSlot
     public string HardpointType { get; set; } = string.Empty;
 
     [DataField]
-    public ProtoId<HardpointSlotTypePrototype>? SlotType { get; set; }
+    public EntProtoId? SlotType { get; set; }
 
     [DataField]
     public string? CompatibilityId { get; set; }

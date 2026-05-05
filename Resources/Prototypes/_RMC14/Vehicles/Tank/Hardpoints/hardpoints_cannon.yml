@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: VehicleTankHardpointBase
   id: VehicleTankLTBCannon
   name: LTB cannon
@@ -8,8 +8,8 @@
     state: ltb_cannon
   - type: HardpointItem
     hardpointType: Cannon
-    vehicleFamily: Tank
-    slotType: Cannon
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.125
     repairRate: 0.01
   - type: HardpointIntegrity
@@ -70,8 +70,8 @@
     state: ltaaap_minigun
   - type: HardpointItem
     hardpointType: Cannon
-    vehicleFamily: Tank
-    slotType: Cannon
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.125
     repairRate: 0.01
   - type: HardpointIntegrity
@@ -153,8 +153,8 @@
     state: ace_autocannon
   - type: HardpointItem
     hardpointType: Cannon
-    vehicleFamily: Tank
-    slotType: Cannon
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.125
     repairRate: 0.01
   - type: HardpointIntegrity
@@ -217,8 +217,8 @@
     state: drgn_flamer
   - type: HardpointItem
     hardpointType: Cannon
-    vehicleFamily: Tank
-    slotType: Cannon
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.125
     repairRate: 0.01
   - type: HardpointIntegrity

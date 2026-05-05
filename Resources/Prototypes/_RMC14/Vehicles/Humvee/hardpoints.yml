@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: BaseItem
   id: VehicleHumveeHardpointBase
   abstract: true
@@ -18,8 +18,8 @@
     state: tires
   - type: HardpointItem
     hardpointType: Wheel
-    vehicleFamily: Humvee
-    slotType: Wheel
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slotType: HardpointSlotTypeWheel
     damageMultiplier: 0.15
     repairRate: 0.0165
   - type: HardpointIntegrity
@@ -36,8 +36,8 @@
     state: humveeturret
   - type: HardpointItem
     hardpointType: Turret
-    vehicleFamily: Humvee
-    slotType: Turret
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slotType: HardpointSlotTypeTurret
     damageMultiplier: 0.15
     repairRate: 0.008
   - type: HardpointIntegrity
@@ -67,16 +67,16 @@
           components:
           - HardpointItem
   - type: HardpointSlots
-    vehicleFamily: Humvee
+    vehicleFamily: HardpointVehicleFamilyHumvee
     slots:
     - id: turret-cannon
       hardpointType: Cannon
-      slotType: Cannon
+      slotType: HardpointSlotTypeCannon
       required: false
       insertDelay: 2.0
     - id: turret-launcher
       hardpointType: Launcher
-      slotType: Launcher
+      slotType: HardpointSlotTypeLauncher
       required: false
       insertDelay: 2.0
 
@@ -130,8 +130,8 @@
     state: humveecannon
   - type: HardpointItem
     hardpointType: Cannon
-    vehicleFamily: Humvee
-    slotType: Cannon
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.1
     repairRate: 0.01
   - type: HardpointIntegrity
@@ -205,8 +205,8 @@
     state: humveelauncher
   - type: HardpointItem
     hardpointType: Launcher
-    vehicleFamily: Humvee
-    slotType: Launcher
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slotType: HardpointSlotTypeLauncher
     damageMultiplier: 0.0
     repairRate: 0.0125
   - type: HardpointIntegrity
@@ -257,8 +257,8 @@
     state: snowplow
   - type: HardpointItem
     hardpointType: FrontAttachment
-    vehicleFamily: Humvee
-    slotType: FrontAttachment
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slotType: HardpointSlotTypeFrontAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
   - type: HardpointIntegrity
@@ -276,8 +276,8 @@
     state: overlight
   - type: HardpointItem
     hardpointType: RoofAttachment
-    vehicleFamily: Humvee
-    slotType: RoofAttachment
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slotType: HardpointSlotTypeRoofAttachment
     damageMultiplier: 0.1
     repairRate: 0.0125
   - type: HardpointIntegrity
@@ -297,8 +297,8 @@
     state: humveehatch
   - type: HardpointItem
     hardpointType: RoofAttachment
-    vehicleFamily: Humvee
-    slotType: RoofAttachment
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slotType: HardpointSlotTypeRoofAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
   - type: HardpointIntegrity

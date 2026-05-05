@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: VehicleTankHardpointBase
   id: VehicleTankWarningArray
   name: integrated weapons sensor array
@@ -8,8 +8,8 @@
     state: warray
   - type: HardpointItem
     hardpointType: Support
-    vehicleFamily: Tank
-    slotType: SupportAttachment
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
   - type: HardpointIntegrity
@@ -30,8 +30,8 @@
     state: odrive_enhancer
   - type: HardpointItem
     hardpointType: Support
-    vehicleFamily: Tank
-    slotType: SupportAttachment
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
   - type: HardpointIntegrity
@@ -51,8 +51,8 @@
     state: slauncher_0
   - type: HardpointItem
     hardpointType: Support
-    vehicleFamily: Tank
-    slotType: SupportAttachment
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
   - type: HardpointIntegrity
@@ -108,8 +108,8 @@
     state: slauncher_1
   - type: HardpointItem
     hardpointType: Support
-    vehicleFamily: Tank
-    slotType: SupportAttachment
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
   - type: HardpointIntegrity
@@ -168,8 +168,8 @@
     state: artillery
   - type: HardpointItem
     hardpointType: Support
-    vehicleFamily: Tank
-    slotType: SupportAttachment
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
   - type: HardpointIntegrity

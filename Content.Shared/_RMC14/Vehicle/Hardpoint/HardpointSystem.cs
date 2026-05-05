@@ -480,14 +480,8 @@ public sealed partial class HardpointSystem : EntitySystem
                 return false;
         }
 
-        if (!string.IsNullOrWhiteSpace(slot.CompatibilityId))
-        {
-            if (string.IsNullOrWhiteSpace(hardpoint.CompatibilityId))
-                return false;
-
-            if (!string.Equals(hardpoint.CompatibilityId, slot.CompatibilityId, StringComparison.OrdinalIgnoreCase))
-                return false;
-        }
+        if (!string.Equals(hardpoint.CompatibilityId, slot.CompatibilityId, StringComparison.OrdinalIgnoreCase))
+            return false;
 
         if (string.IsNullOrWhiteSpace(slot.HardpointType))
             return slot.Whitelist == null || _whitelist.IsValid(slot.Whitelist, item);
@@ -808,7 +802,7 @@ public sealed partial class HardpointSystem : EntitySystem
             return false;
 
         if (TryComp(uid, out HardpointItemComponent? item) &&
-            item.VehicleFamily == "Tank" &&
+            item.VehicleFamily == "HardpointVehicleFamilyTank" &&
             _prototypeManager.TryIndex<DamageModifierSetPrototype>("VehicleFrameTank", out var tankBase))
         {
             ApplyDamageModifierCoefficients(tankBase, ref acid, ref slash, ref bullet, ref explosive, ref blunt);

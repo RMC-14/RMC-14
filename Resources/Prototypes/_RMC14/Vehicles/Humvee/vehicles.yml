@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: VehicleHumveeBase
   abstract: true
   name: humvee
@@ -119,29 +119,29 @@
           components:
           - VehicleWheelItem
   - type: HardpointSlots
-    vehicleFamily: Humvee
+    vehicleFamily: HardpointVehicleFamilyHumvee
     slots:
     - id: turret
       hardpointType: Turret
-      slotType: Turret
+      slotType: HardpointSlotTypeTurret
       visualLayer: primary
       insertDelay: 2.0
       required: false
     - id: roof
       hardpointType: RoofAttachment
-      slotType: RoofAttachment
+      slotType: HardpointSlotTypeRoofAttachment
       visualLayer: support
       insertDelay: 1.5
       required: false
     - id: front
       hardpointType: FrontAttachment
-      slotType: FrontAttachment
+      slotType: HardpointSlotTypeFrontAttachment
       visualLayer: support-2
       insertDelay: 1.5
       required: false
     - id: wheel-1
       hardpointType: Wheel
-      slotType: Wheel
+      slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
   - type: VehicleWheelSlots
     slotCount: 1
@@ -215,23 +215,23 @@
     - map: [ rmc-wheels ]
       state: wheels_1
   - type: HardpointSlots
-    vehicleFamily: Humvee
+    vehicleFamily: HardpointVehicleFamilyHumvee
     slots:
     - id: roof
       hardpointType: RoofAttachment
-      slotType: RoofAttachment
+      slotType: HardpointSlotTypeRoofAttachment
       visualLayer: support
       insertDelay: 1.5
       required: false
     - id: front
       hardpointType: FrontAttachment
-      slotType: FrontAttachment
+      slotType: HardpointSlotTypeFrontAttachment
       visualLayer: support-2
       insertDelay: 1.5
       required: false
     - id: wheel-1
       hardpointType: Wheel
-      slotType: Wheel
+      slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_medical_interior.yml
@@ -283,23 +283,23 @@
     - map: [ rmc-wheels ]
       state: wheels_1
   - type: HardpointSlots
-    vehicleFamily: Humvee
+    vehicleFamily: HardpointVehicleFamilyHumvee
     slots:
     - id: roof
       hardpointType: RoofAttachment
-      slotType: RoofAttachment
+      slotType: HardpointSlotTypeRoofAttachment
       visualLayer: support
       insertDelay: 1.5
       required: false
     - id: front
       hardpointType: FrontAttachment
-      slotType: FrontAttachment
+      slotType: HardpointSlotTypeFrontAttachment
       visualLayer: support-2
       insertDelay: 1.5
       required: false
     - id: wheel-1
       hardpointType: Wheel
-      slotType: Wheel
+      slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_transport_interior.yml

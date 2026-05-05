@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: BaseItem
   id: RMCAPCHardpointBase
   abstract: true
@@ -18,8 +18,8 @@
     state: tires
   - type: HardpointItem
     hardpointType: Wheel
-    vehicleFamily: APC
-    slotType: Wheel
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeWheel
     damageMultiplier: 0.15
     repairRate: 0.0165
   - type: HardpointIntegrity
@@ -36,8 +36,8 @@
     state: front_cannon
   - type: HardpointItem
     hardpointType: Cannon
-    vehicleFamily: APC
-    slotType: Cannon
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeCannon
     damageMultiplier: 0.11
     repairRate: 0.01
   - type: HardpointIntegrity
@@ -80,8 +80,8 @@
     state: dual_cannon
   - type: HardpointItem
     hardpointType: Turret
-    vehicleFamily: APC
-    slotType: Turret
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeTurret
     damageMultiplier: 0.2
     repairRate: 0.008
   - type: HardpointIntegrity
@@ -129,8 +129,8 @@
     state: comms_relay
   - type: HardpointItem
     hardpointType: SupportAttachment
-    vehicleFamily: APC
-    slotType: SupportAttachment
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
   - type: HardpointIntegrity
@@ -148,8 +148,8 @@
     state: flare_launcher
   - type: HardpointItem
     hardpointType: SupportAttachment
-    vehicleFamily: APC
-    slotType: SupportAttachment
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.1
     repairRate: 0.0125
   - type: HardpointIntegrity
@@ -200,8 +200,8 @@
     state: freighter_storage
   - type: HardpointItem
     hardpointType: SupportAttachment
-    vehicleFamily: APC
-    slotType: SupportAttachment
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeSupportAttachment
     damageMultiplier: 0.075
     repairRate: 0.0125
   - type: HardpointIntegrity

@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: VehicleTankHardpointBase
   id: VehicleTankArmorBallistic
   name: ballistic armor plating
@@ -8,8 +8,8 @@
     state: ballistic_armor
   - type: HardpointItem
     hardpointType: Armor
-    vehicleFamily: Tank
-    slotType: Armor
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeArmor
     damageMultiplier: 0.5
     repairRate: 0.007
   - type: HardpointIntegrity
@@ -30,8 +30,8 @@
     state: concussive_armor
   - type: HardpointItem
     hardpointType: Armor
-    vehicleFamily: Tank
-    slotType: Armor
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeArmor
     damageMultiplier: 0.5
     repairRate: 0.007
   - type: HardpointIntegrity
@@ -53,8 +53,8 @@
     state: caustic_armor
   - type: HardpointItem
     hardpointType: Armor
-    vehicleFamily: Tank
-    slotType: Armor
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeArmor
     damageMultiplier: 0.5
     repairRate: 0.007
   - type: HardpointIntegrity
@@ -75,8 +75,8 @@
     state: paladin_armor
   - type: HardpointItem
     hardpointType: Armor
-    vehicleFamily: Tank
-    slotType: Armor
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeArmor
     damageMultiplier: 0.5
     repairRate: 0.007
   - type: HardpointIntegrity
@@ -98,8 +98,8 @@
     state: snowplow
   - type: HardpointItem
     hardpointType: Armor
-    vehicleFamily: Tank
-    slotType: Armor
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeArmor
     damageMultiplier: 0.5
     repairRate: 0.007
   - type: HardpointIntegrity

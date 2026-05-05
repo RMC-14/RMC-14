@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: BaseItem
   id: VehicleSPPVanTurret
   name: SPP van turret
@@ -11,8 +11,8 @@
     size: Large
   - type: HardpointItem
     hardpointType: Secondary
-    vehicleFamily: Van
-    slotType: Launcher
+    vehicleFamily: HardpointVehicleFamilyVan
+    slotType: HardpointSlotTypeLauncher
     compatibilityId: SPPVan
     damageMultiplier: 0.15
     repairRate: 0.0125
@@ -39,11 +39,11 @@
           components:
           - HardpointItem
   - type: HardpointSlots
-    vehicleFamily: Van
+    vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: turret-cannon
       hardpointType: Cannon
-      slotType: Cannon
+      slotType: HardpointSlotTypeCannon
       compatibilityId: SPPVan
       required: false
       insertDelay: 2.0
@@ -59,8 +59,8 @@
     state: t60p3m_0
   - type: HardpointItem
     hardpointType: Cannon
-    vehicleFamily: Van
-    slotType: Cannon
+    vehicleFamily: HardpointVehicleFamilyVan
+    slotType: HardpointSlotTypeCannon
     compatibilityId: SPPVan
     damageMultiplier: 0.0
     repairRate: 0.01

@@ -21,7 +21,7 @@ public sealed class VehicleHardpointVendorBui : BoundUserInterface
         base.Open();
         _window = this.CreateWindow<VehicleHardpointVendorWindow>();
 
-        if (TryComp(Owner, out MetaDataComponent? metaData))
+        if (EntMan.TryGetComponent(Owner, out MetaDataComponent? metaData))
             _window.Title = metaData.EntityName;
 
         _window.VehicleList.OnItemSelected += OnVehicleSelected;

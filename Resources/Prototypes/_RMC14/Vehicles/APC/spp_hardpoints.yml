@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: BaseItem
   id: VehicleSPPAPCHardpointBase
   abstract: true
@@ -18,8 +18,8 @@
     state: spp_tires
   - type: HardpointItem
     hardpointType: Wheel
-    vehicleFamily: APC
-    slotType: Wheel
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeWheel
     compatibilityId: SPPAPC
     damageMultiplier: 0.15
     repairRate: 0.0165
@@ -38,8 +38,8 @@
     state: apc_turret_0
   - type: HardpointItem
     hardpointType: Turret
-    vehicleFamily: APC
-    slotType: Turret
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeTurret
     compatibilityId: SPPAPC
     damageMultiplier: 0.2
     repairRate: 0.008
@@ -66,11 +66,11 @@
           components:
           - HardpointItem
   - type: HardpointSlots
-    vehicleFamily: APC
+    vehicleFamily: HardpointVehicleFamilyAPC
     slots:
     - id: turret-cannon
       hardpointType: Cannon
-      slotType: Cannon
+      slotType: HardpointSlotTypeCannon
       compatibilityId: SPPAPCTurret
       required: false
       insertDelay: 2.0
@@ -88,8 +88,8 @@
     state: apc_minigun
   - type: HardpointItem
     hardpointType: Cannon
-    vehicleFamily: APC
-    slotType: Cannon
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeCannon
     compatibilityId: SPPAPCTurret
     damageMultiplier: 0.2
     repairRate: 0.01
@@ -149,8 +149,8 @@
     state: hj35launcher
   - type: HardpointItem
     hardpointType: Cannon
-    vehicleFamily: APC
-    slotType: Cannon
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeCannon
     compatibilityId: SPPAPC
     damageMultiplier: 0.11
   - type: HardpointIntegrity

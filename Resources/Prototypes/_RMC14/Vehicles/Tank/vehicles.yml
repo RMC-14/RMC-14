@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: VehicleTankBase
   abstract: true
   name: tank
@@ -150,17 +150,17 @@
           components:
           - VehicleWheelItem
   - type: HardpointSlots
-    vehicleFamily: Tank
+    vehicleFamily: HardpointVehicleFamilyTank
     slots:
     - id: armor
       hardpointType: Armor
-      slotType: Armor
+      slotType: HardpointSlotTypeArmor
       visualLayer: armor
       insertDelay: 2.5
       required: false
     - id: primary
       hardpointType: Turret
-      slotType: Turret
+      slotType: HardpointSlotTypeTurret
       visualLayer: primary
       insertDelay: 3.0
       required: false
@@ -171,13 +171,13 @@
       required: false
     - id: support
       hardpointType: Support
-      slotType: SupportAttachment
+      slotType: HardpointSlotTypeSupportAttachment
       visualLayer: support
       insertDelay: 2.0
       required: false
     - id: wheel-1
       hardpointType: Wheel
-      slotType: Treads
+      slotType: HardpointSlotTypeTreads
       insertDelay: 2.0
   - type: VehicleWheelSlots
     slotCount: 1
@@ -265,18 +265,18 @@
           components:
           - VehicleWheelItem
   - type: HardpointSlots
-    vehicleFamily: Tank
+    vehicleFamily: HardpointVehicleFamilyTank
     slots:
     - id: armor
       hardpointType: Armor
-      slotType: Armor
+      slotType: HardpointSlotTypeArmor
       compatibilityId: SPPTank
       visualLayer: armor
       insertDelay: 2.5
       required: false
     - id: primary
       hardpointType: Turret
-      slotType: Turret
+      slotType: HardpointSlotTypeTurret
       compatibilityId: SPPTank
       visualLayer: primary
       insertDelay: 3.0
@@ -289,14 +289,14 @@
       required: false
     - id: support
       hardpointType: Support
-      slotType: SupportAttachment
+      slotType: HardpointSlotTypeSupportAttachment
       compatibilityId: SPPTank
       visualLayer: support
       insertDelay: 2.0
       required: false
     - id: wheel-1
       hardpointType: Wheel
-      slotType: Treads
+      slotType: HardpointSlotTypeTreads
       insertDelay: 2.0
 
 - type: entity

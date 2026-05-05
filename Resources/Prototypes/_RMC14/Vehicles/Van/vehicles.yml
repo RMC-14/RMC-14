@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: VehicleVanBase
   abstract: true
   name: van
@@ -109,11 +109,11 @@
         occludes: true
         ent: null
   - type: HardpointSlots
-    vehicleFamily: Van
+    vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: wheel-1
       hardpointType: Wheel
-      slotType: Wheel
+      slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
       whitelist:
         components:
@@ -297,11 +297,11 @@
         occludes: true
         ent: null
   - type: HardpointSlots
-    vehicleFamily: Van
+    vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: wheel-1
       hardpointType: Wheel
-      slotType: Wheel
+      slotType: HardpointSlotTypeWheel
       insertDelay: 1.5
       whitelist:
         components:
@@ -406,11 +406,11 @@
       radius: 0.7
       interiorCoords: 2.5,-0.2
   - type: HardpointSlots
-    vehicleFamily: Van
+    vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: wheel-1
       hardpointType: Wheel
-      slotType: Wheel
+      slotType: HardpointSlotTypeWheel
       compatibilityId: SPPVan
       insertDelay: 1.5
 
@@ -441,18 +441,18 @@
           components:
           - HardpointItem
   - type: HardpointSlots
-    vehicleFamily: Van
+    vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: secondary
       hardpointType: Secondary
-      slotType: Launcher
+      slotType: HardpointSlotTypeLauncher
       compatibilityId: SPPVan
       visualLayer: secondary
       insertDelay: 2.0
       required: false
     - id: wheel-1
       hardpointType: Wheel
-      slotType: Wheel
+      slotType: HardpointSlotTypeWheel
       compatibilityId: SPPVan
       insertDelay: 1.5
   - type: VehicleEnter
@@ -569,10 +569,10 @@
       radius: 0.7
       interiorCoords: 2.5,-0.2
   - type: HardpointSlots
-    vehicleFamily: Van
+    vehicleFamily: HardpointVehicleFamilyVan
     slots:
     - id: wheel-1
       hardpointType: Wheel
-      slotType: Wheel
+      slotType: HardpointSlotTypeWheel
       compatibilityId: SPPVan
       insertDelay: 1.5

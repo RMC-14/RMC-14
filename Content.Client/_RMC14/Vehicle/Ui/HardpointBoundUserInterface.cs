@@ -21,7 +21,7 @@ public sealed class HardpointBoundUserInterface : BoundUserInterface
         _menu.OnClose += Close;
         _menu.VehicleEntity = Owner;
 
-        if (TryComp(Owner, out MetaDataComponent? metadata))
+        if (EntMan.TryGetComponent(Owner, out MetaDataComponent? metadata))
             _menu.Title = metadata.EntityName;
 
         _menu.OnRemove += slotId => SendMessage(new HardpointRemoveMessage(slotId));

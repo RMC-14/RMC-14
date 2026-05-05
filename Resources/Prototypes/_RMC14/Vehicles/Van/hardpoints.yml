@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: BaseItem
   id: RMCVanWheel
   name: van wheel
@@ -11,8 +11,8 @@
     size: Large
   - type: HardpointItem
     hardpointType: Wheel
-    vehicleFamily: Van
-    slotType: Wheel
+    vehicleFamily: HardpointVehicleFamilyVan
+    slotType: HardpointSlotTypeWheel
     damageMultiplier: 0.15
     repairRate: 0.0165
   - type: HardpointIntegrity
