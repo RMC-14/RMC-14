@@ -45,6 +45,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -90,14 +91,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly ILogManager _log = default!;
 
     private EntityQuery<RMCWallExplosionDeletableComponent> _wallDeletableQuery;
-    private readonly HashSet<EntityUid> _wallDeleteBuffer = new();
-
-    private readonly HashSet<EntityUid> _tileEnts = new();
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
     private const string SpotlightState = "spotlights_";
@@ -648,10 +646,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (spread != 0)
             targetCoords = targetCoords.Offset(_random.NextVector2(-spread, spread + 1));
 
-        if (ev.Explosion != null)
-        {
+        if (ev.Explosion != null && HasNonDeletableWallOnTile(targetCoords))
             targetCoords = FindAlternateLandingTile(targetCoords, 3);
-        }
         var inFlight = Spawn(null, MapCoordinates.Nullspace);
         var inFlightComp = new AmmoInFlightComponent
         {
@@ -691,10 +687,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var time = _timing.CurTime;
 
+        var spawnTarget = _transform.GetMoverCoordinates(active).SnapToGrid(EntityManager, _mapManager);
+        if (ammo.Explosion != null && HasNonDeletableWallOnTile(spawnTarget))
+            spawnTarget = FindAlternateLandingTile(spawnTarget, 3);
+
         var inFlight = Spawn(null, MapCoordinates.Nullspace);
         var inFlightComp = new AmmoInFlightComponent
         {
-            Target = FindAlternateLandingTile(_transform.GetMoverCoordinates(active).SnapToGrid(EntityManager, _mapManager),3),
+            Target = spawnTarget,
             MarkerAt = time + ammo.TravelTime,
             ShotsLeft = ammo.RoundsPerShot,
             ShotsPerVolley = ammo.ShotsPerVolley,
@@ -1414,23 +1414,21 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private bool HasNonDeletableWallOnTile(EntityCoordinates impactCoords)
     {
-        var tile = impactCoords.SnapToGrid(EntityManager, _mapManager);
+        if (_transform.GetGrid(impactCoords) is not { } gridUid ||
+            !TryComp(gridUid, out MapGridComponent? grid))
+            return false;
 
-        _tileEnts.Clear();
-        _entityLookup.GetEntitiesInRange(tile, 0.49f, _tileEnts, LookupFlags.Uncontained);
+        var tile = _map.LocalToTile(gridUid, grid, impactCoords);
+        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
 
         var foundWall = false;
-
-        foreach (var ent in _tileEnts)
+        while (anchored.MoveNext(out var uid))
         {
-            if (Transform(ent).Coordinates.SnapToGrid(EntityManager, _mapManager) != tile)
-                continue;
-
-            if (!IsWall(ent))
+            if (!IsWall(uid.Value))
                 continue;
 
             foundWall = true;
-            if (_wallDeletableQuery.HasComp(ent))
+            if (_wallDeletableQuery.HasComp(uid.Value))
                 return false;
         }
         return foundWall;
@@ -1440,28 +1438,15 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     {
         var origin = desired.SnapToGrid(EntityManager, _mapManager);
 
-        if (!HasNonDeletableWallOnTile(origin))
-            return origin;
-
         for (var r = 1; r <= maxRadius; r++)
         {
-            var offsets = new List<Vector2i> { new(r,0), new(-r,0), new(0,r), new(0,-r) };
-
             for (var x = -r; x <= r; x++)
             for (var y = -r; y <= r; y++)
             {
                 if (Math.Abs(x) != r && Math.Abs(y) != r)
                     continue;
 
-                var o = new Vector2i(x, y);
-                if (!offsets.Contains(o))
-                    offsets.Add(o);
-            }
-
-            foreach (var off in offsets)
-            {
-                var candidate = origin.Offset(off);
-
+                var candidate = origin.Offset(new Vector2i(x, y));
                 if (!HasNonDeletableWallOnTile(candidate))
                     return candidate;
             }
@@ -1469,21 +1454,22 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         return origin;
     }
+
     private bool TryDeleteDestructibleWallAt(EntityCoordinates impactCoords)
     {
-        var impactSnap = impactCoords.SnapToGrid(EntityManager, _mapManager);
+        if (_transform.GetGrid(impactCoords) is not { } gridUid ||
+            !TryComp(gridUid, out MapGridComponent? grid))
+            return false;
 
-        _wallDeleteBuffer.Clear();
-        _entityLookup.GetEntitiesInRange(impactSnap, 0.49f, _wallDeleteBuffer, LookupFlags.Uncontained);
+        var tile = _map.LocalToTile(gridUid, grid, impactCoords);
+        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
 
-        foreach (var ent in _wallDeleteBuffer)
+        while (anchored.MoveNext(out var uid))
         {
-            if (!_wallDeletableQuery.HasComp(ent))
+            if (!_wallDeletableQuery.HasComp(uid.Value))
                 continue;
-            var entSnap = Transform(ent).Coordinates.SnapToGrid(EntityManager, _mapManager);
-            if (entSnap != impactSnap)
-                continue;
-            EntityManager.DeleteEntity(ent);
+
+            QueueDel(uid.Value);
             return true;
         }
 
