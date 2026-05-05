@@ -1506,9 +1506,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("job_name");
 
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
+                    b.Property<string>("RankName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("rank_name");
 
                     b.Property<int>("ProfileId")
                         .HasColumnType("integer")

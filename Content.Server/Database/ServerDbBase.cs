@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server._RMC14.LinkAccount;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.IP;
@@ -220,7 +221,9 @@ namespace Content.Server.Database
             var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
             var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName));
-            var ranks = profile.Ranks.ToDictionary(r => new ProtoId<JobPrototype>(r.JobName), r => r.Priority);
+            var ranks = profile.Ranks.ToDictionary(
+                r => new ProtoId<JobPrototype>(r.JobName),
+                r => (ProtoId<RankPrototype>?) new ProtoId<RankPrototype>(r.RankName));
 
             var sex = Sex.Male;
             if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
@@ -366,13 +369,12 @@ namespace Content.Server.Database
                         .Select(t => new Trait {TraitName = t})
             );
 
-            // We add only ranks that are not the default value to avoid having to save default values in the DB.
             profile.Ranks.Clear();
             profile.Ranks.AddRange(
                 humanoid.RankPreferences
-                    .Where(r => r.Value != 0)
-                    .Select(r => new Rank {JobName = r.Key, Priority = r.Value })
-                );
+                    .Where(r => r.Value != null)
+                    .Select(r => new Rank { JobName = r.Key, RankName = r.Value!.Value.Id })
+            );
 
             profile.Loadouts.Clear();
 

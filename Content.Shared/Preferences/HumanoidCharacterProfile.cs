@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Xenonids.Name;
@@ -58,7 +59,7 @@ namespace Content.Shared.Preferences
         /// When spawning in, decides what type of rank to give based on job. (Also dependent on playtime)
         /// </summary>
         [DataField]
-        private Dictionary<ProtoId<JobPrototype>, int> _rankPreferences = new();
+        private Dictionary<ProtoId<JobPrototype>, ProtoId<RankPrototype>?> _rankPreferences = new();
 
         /// <summary>
         /// <see cref="_loadouts"/>
@@ -118,7 +119,7 @@ namespace Content.Shared.Preferences
         /// <summary>
         /// <see cref="_rankPreferences"/>
         /// </summary>
-        public IReadOnlyDictionary<ProtoId<JobPrototype>, int> RankPreferences => _rankPreferences;
+        public IReadOnlyDictionary<ProtoId<JobPrototype>, ProtoId<RankPrototype>?> RankPreferences => _rankPreferences;
 
         /// <summary>
         /// When spawning into a squad role, what squad is preferred.
@@ -170,7 +171,7 @@ namespace Content.Shared.Preferences
             HumanoidCharacterAppearance appearance,
             SpawnPriorityPreference spawnPriority,
             ArmorPreference armorPreference,
-            Dictionary<ProtoId<JobPrototype>, int> rankPreference,
+            Dictionary<ProtoId<JobPrototype>, ProtoId<RankPrototype>?> rankPreference,
             EntProtoId<SquadTeamComponent>? squadPreference,
             Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
@@ -230,7 +231,7 @@ namespace Content.Shared.Preferences
                 other.Appearance.Clone(),
                 other.SpawnPriority,
                 other.ArmorPreference,
-                new Dictionary<ProtoId<JobPrototype>, int>(other.RankPreferences),
+                new Dictionary<ProtoId<JobPrototype>, ProtoId<RankPrototype>?>(other.RankPreferences),
                 other.SquadPreference,
                 new Dictionary<ProtoId<JobPrototype>, JobPriority>(other.JobPriorities),
                 other.PreferenceUnavailable,
@@ -369,15 +370,14 @@ namespace Content.Shared.Preferences
             return new(this) { ArmorPreference = armorPreference };
         }
 
-        public HumanoidCharacterProfile WithRankPreference(ProtoId<JobPrototype> jobId, int rankPriority)
+        public HumanoidCharacterProfile WithRankPreference(ProtoId<JobPrototype> jobId, ProtoId<RankPrototype>? rankId)
         {
-            var dictionary = new Dictionary<ProtoId<JobPrototype>, int>(_rankPreferences);
+            var dictionary = new Dictionary<ProtoId<JobPrototype>, ProtoId<RankPrototype>?>(_rankPreferences);
 
-            // In order to not save the default prefs in the dictionary we remove any default prefs saved.
-            if (rankPriority == 0)
+            if (rankId == null)
                 dictionary.Remove(jobId);
             else
-                dictionary[jobId] = rankPriority;
+                dictionary[jobId] = rankId;
 
             return new(this) { _rankPreferences = dictionary };
         }
@@ -725,8 +725,8 @@ namespace Content.Shared.Preferences
 
             ArmorPreference = armorPreference;
 
-            var ranks = new Dictionary<ProtoId<JobPrototype>, int>(RankPreferences
-                .Where(p => prototypeManager.TryIndex<JobPrototype>(p.Key, out var job) && job.SetRankPreference && p.Value == Math.Abs(p.Value)));
+            var ranks = new Dictionary<ProtoId<JobPrototype>, ProtoId<RankPrototype>?>(RankPreferences
+                .Where(p => prototypeManager.TryIndex<JobPrototype>(p.Key, out var job) && job.SetRankPreference && p.Value != null));
 
             _rankPreferences.Clear();
 

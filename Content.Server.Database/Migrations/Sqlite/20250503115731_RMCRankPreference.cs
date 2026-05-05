@@ -22,7 +22,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .Annotation("Sqlite:Autoincrement", true),
                     profile_id = table.Column<int>(type: "INTEGER", nullable: false),
                     job_name = table.Column<string>(type: "TEXT", nullable: false),
-                    priority = table.Column<int>(type: "INTEGER", nullable: false)
+                    rank_name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1325,9 +1325,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("job_name");
 
-                    b.Property<int>("Priority")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("priority");
+                    b.Property<string>("RankName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("rank_name");
 
                     b.Property<int>("ProfileId")
                         .HasColumnType("INTEGER")

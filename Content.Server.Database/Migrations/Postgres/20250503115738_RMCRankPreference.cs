@@ -23,7 +23,7 @@ namespace Content.Server.Database.Migrations.Postgres
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     profile_id = table.Column<int>(type: "integer", nullable: false),
                     job_name = table.Column<string>(type: "text", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false)
+                    rank_name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
