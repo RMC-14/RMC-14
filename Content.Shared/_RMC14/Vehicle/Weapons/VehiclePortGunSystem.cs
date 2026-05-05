@@ -24,7 +24,7 @@ public sealed class VehiclePortGunSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly VehicleSystem _vehicleSystem = default!;
+    [Dependency] private readonly VehicleSystem _vehicle = default!;
     [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
     [Dependency] private readonly INetManager _net = default!;
 
@@ -250,7 +250,7 @@ public sealed class VehiclePortGunSystem : EntitySystem
             return false;
         }
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicleUid) || vehicleUid == null)
+        if (!_vehicle.TryGetVehicleFromInterior(ent.Owner, out var vehicleUid) || vehicleUid == null)
         {
             _popup.PopupClient(Loc.GetString("rmc-vehicle-portgun-no-vehicle"), ent, user);
             return false;
@@ -291,7 +291,7 @@ public sealed class VehiclePortGunSystem : EntitySystem
     {
         gunUid = default;
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicleUid) || vehicleUid == null)
+        if (!_vehicle.TryGetVehicleFromInterior(ent.Owner, out var vehicleUid) || vehicleUid == null)
             return false;
 
         var vehicle = vehicleUid.Value;

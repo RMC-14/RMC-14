@@ -67,7 +67,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         SetGridPosition(uid, grid, mover.Position);
 
         if (moved || mover.IsMoving)
-            physics.WakeBody(uid);
+            _physics.WakeBody(uid);
 
         Dirty(uid, mover);
     }
@@ -292,7 +292,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         mover.Position = turnPosition;
         mover.CurrentTile = GetTile(grid, gridComp, mover.Position);
         mover.CurrentDirection = desiredFacing;
-        transform.SetLocalRotation(uid, desiredRot);
+        _transform.SetLocalRotation(uid, desiredRot);
 
         if (turned && startDelay)
         {
@@ -1081,15 +1081,15 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return;
 
         var coords = new EntityCoordinates(grid, gridPos);
-        var local = coords.WithEntityId(xform.ParentUid, transform, EntityManager).Position;
+        var local = coords.WithEntityId(xform.ParentUid, _transform, EntityManager).Position;
 
-        transform.SetLocalPosition(uid, local, xform);
+        _transform.SetLocalPosition(uid, local, xform);
     }
 
     private Vector2i GetTile(EntityUid grid, MapGridComponent gridComp, Vector2 pos)
     {
         var coords = new EntityCoordinates(grid, pos);
-        return map.TileIndicesFor(grid, gridComp, coords);
+        return _map.TileIndicesFor(grid, gridComp, coords);
     }
 
     private void PlayRunningSound(EntityUid uid)

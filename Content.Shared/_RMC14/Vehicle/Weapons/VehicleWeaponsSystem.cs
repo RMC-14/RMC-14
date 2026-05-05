@@ -27,21 +27,21 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
     private const string HardpointSelectActionId = "ActionVehicleSelectHardpoint";
 
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly VehicleHardpointAmmoSystem _hardpointAmmo = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly VehicleTopologySystem _topology = default!;
-    [Dependency] private readonly VehicleHardpointAmmoSystem _hardpointAmmo = default!;
-    [Dependency] private readonly VehicleSystem _vehicleSystem = default!;
-    [Dependency] private readonly VehicleTurretSystem _turretSystem = default!;
-    [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedContentEyeSystem _eyeSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly VehicleTopologySystem _topology = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly VehicleTurretSystem _turret = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly VehicleSystem _vehicle = default!;
+    [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
 
     public override void Initialize()
     {
@@ -81,7 +81,7 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
+        if (!_vehicle.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
         {
             return;
         }
@@ -131,7 +131,7 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
 
         _viewToggle.DisableViewToggle(args.Buckle.Owner, ent.Owner);
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
+        if (!_vehicle.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
             return;
 
         var vehicleUid = vehicle.Value;
@@ -227,7 +227,7 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         if (_net.IsClient)
             return false;
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(seat, out var vehicle) || vehicle == null)
+        if (!_vehicle.TryGetVehicleFromInterior(seat, out var vehicle) || vehicle == null)
             return false;
 
         var vehicleUid = vehicle.Value;
@@ -392,7 +392,7 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         if (removeOnly)
         {
             if (RemCompDeferred<VehicleGunnerViewUserComponent>(user))
-                _eyeSystem.UpdatePvsScale(user);
+                _contentEye.UpdatePvsScale(user);
 
             return;
         }
@@ -432,12 +432,12 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
             view.CursorOffsetSpeed = cursorOffsetSpeed;
             view.CursorPvsIncrease = cursorPvsIncrease;
             Dirty(user, view);
-            _eyeSystem.UpdatePvsScale(user);
+            _contentEye.UpdatePvsScale(user);
             return;
         }
 
         if (RemCompDeferred<VehicleGunnerViewUserComponent>(user))
-            _eyeSystem.UpdatePvsScale(user);
+            _contentEye.UpdatePvsScale(user);
     }
 
     private static bool HasBaseGunnerView(VehicleWeaponsSeatComponent seatComp)

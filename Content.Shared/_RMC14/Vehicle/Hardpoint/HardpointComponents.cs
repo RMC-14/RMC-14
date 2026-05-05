@@ -153,7 +153,7 @@ public sealed partial class HardpointIntegrityComponent : Component
 [RegisterComponent]
 public sealed partial class HardpointDamageModifierComponent : Component
 {
-    [DataField("modifierSets")]
+    [DataField]
     public List<ProtoId<DamageModifierSetPrototype>> ModifierSets = new();
 }
 

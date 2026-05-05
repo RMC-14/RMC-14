@@ -34,12 +34,5 @@ public sealed partial class VehicleViewToggleComponent : Component
 
 public sealed partial class VehicleToggleViewActionEvent : InstantActionEvent;
 
-public sealed class VehicleViewToggledEvent : EntityEventArgs
-{
-    public readonly bool IsOutside;
-
-    public VehicleViewToggledEvent(bool isOutside)
-    {
-        IsOutside = isOutside;
-    }
-}
+[ByRefEvent]
+public readonly record struct VehicleViewToggledEvent(bool IsOutside);

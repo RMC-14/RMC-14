@@ -12,13 +12,17 @@ public abstract partial class SharedMoverController
         SubscribeLocalEvent<MovementRelayTargetComponent, ComponentShutdown>(OnTargetRelayShutdown);
         SubscribeLocalEvent<MovementRelayTargetComponent, AfterAutoHandleStateEvent>(OnAfterRelayTargetState);
         SubscribeLocalEvent<RelayInputMoverComponent, AfterAutoHandleStateEvent>(OnAfterRelayState);
+        // RMC14
         SubscribeLocalEvent<RelayInputMoverComponent, CanMoveUpdatedEvent>(OnRelayCanMoveUpdated);
+        // RMC14
     }
 
     private void OnAfterRelayTargetState(Entity<MovementRelayTargetComponent> entity, ref AfterAutoHandleStateEvent args)
     {
         PhysicsSystem.UpdateIsPredicted(entity.Owner);
+        // RMC14
         EnsureValidRelayTarget(entity.Owner, entity.Comp);
+        // RMC14
     }
 
     private void OnAfterRelayState(Entity<RelayInputMoverComponent> entity, ref AfterAutoHandleStateEvent args)
@@ -26,6 +30,7 @@ public abstract partial class SharedMoverController
         PhysicsSystem.UpdateIsPredicted(entity.Owner);
     }
 
+    // RMC14
     private void OnRelayCanMoveUpdated(Entity<RelayInputMoverComponent> ent, ref CanMoveUpdatedEvent args)
     {
         if (args.CanMove)
@@ -34,6 +39,7 @@ public abstract partial class SharedMoverController
         if (MoverQuery.TryComp(ent.Comp.RelayEntity, out var inputMoverComponent))
             SetMoveInput((ent.Comp.RelayEntity, inputMoverComponent), MoveButtons.None);
     }
+    // RMC14
 
     /// <summary>
     ///     Sets the relay entity and marks the component as dirty. This only exists because people have previously
@@ -104,6 +110,7 @@ public abstract partial class SharedMoverController
             RemComp(entity.Comp.Source, relay);
     }
 
+    // RMC14
     private bool EnsureValidRelayTarget(EntityUid uid, MovementRelayTargetComponent relayTarget)
     {
         var source = relayTarget.Source;
@@ -123,4 +130,5 @@ public abstract partial class SharedMoverController
 
         return false;
     }
+    // RMC14
 }

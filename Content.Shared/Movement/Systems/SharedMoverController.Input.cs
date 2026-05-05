@@ -296,14 +296,17 @@ namespace Content.Shared.Movement.Systems
             Dirty(entity.Owner, entity.Comp);
         }
 
+        // RMC14
         private void HandleDirChange(Entity<InputMoverComponent?> entity, Direction dir, ushort subTick, bool state)
         {
             var hasMover = MoverQuery.Resolve(entity.Owner, ref entity.Comp, false);
+        // RMC14
 
             // Relayed movement just uses the same keybinds given we're moving the relayed entity
             // the same as us.
 
             // TODO: Should move this into HandleMobMovement itself.
+            // RMC14
             if (hasMover && entity.Comp != null && entity.Comp.CanMove && RelayQuery.TryComp(entity, out var relayMover))
             {
                 DebugTools.Assert(relayMover.RelayEntity != entity.Owner);
@@ -315,6 +318,7 @@ namespace Content.Shared.Movement.Systems
                 HandleDirChange(relayMover.RelayEntity, dir, subTick, state);
                 return;
             }
+            // RMC14
 
             // For stuff like "Moving out of locker" or the likes
             // We'll relay a movement input to the parent.

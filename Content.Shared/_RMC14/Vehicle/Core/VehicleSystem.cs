@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Construction;
@@ -32,23 +33,25 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
-    [Dependency] private readonly VehicleLockSystem _vehicleLock = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly VehicleLockSystem _vehicleLock = default!;
+    [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
+    [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
+
+    private readonly HashSet<EntityUid> _intersecting = new();
 
     public override void Initialize()
     {
@@ -530,7 +533,9 @@ public sealed class VehicleSystem : EntitySystem
         var tileAabb = Box2.UnitCentered.Scale(0.95f * size).Translated(localPos);
         var worldBox = new Box2Rotated(Box2.UnitCentered.Scale(0.95f * size).Translated(worldPos), gridRot, worldPos);
 
-        foreach (var ent in _lookup.GetEntitiesIntersecting(gridUid, worldBox, LookupFlags.Dynamic | LookupFlags.Static))
+        _intersecting.Clear();
+        _lookup.GetEntitiesIntersecting(gridUid, worldBox, _intersecting, LookupFlags.Dynamic | LookupFlags.Static);
+        foreach (var ent in _intersecting)
         {
             if (ent == vehicle || ent == user)
                 continue;

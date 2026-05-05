@@ -8,9 +8,9 @@ namespace Content.Shared._RMC14.Vehicle;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class VehicleArmorHardpointComponent : Component
 {
-    [DataField("modifierSets")]
+    [DataField]
     public List<ProtoId<DamageModifierSetPrototype>> ModifierSets = new();
 
-    [DataField("explosionCoefficient")]
+    [DataField]
     public float? ExplosionCoefficient;
 }

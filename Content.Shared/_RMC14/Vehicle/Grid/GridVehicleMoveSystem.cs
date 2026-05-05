@@ -32,23 +32,23 @@ namespace Content.Shared.Vehicle;
 
 public sealed partial class GridVehicleMoverSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem transform = default!;
-    [Dependency] private readonly SharedMapSystem map = default!;
-    [Dependency] private readonly SharedPhysicsSystem physics = default!;
-    [Dependency] private readonly EntityLookupSystem lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly VehicleWheelSystem _wheels = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
 
     private EntityQuery<MapGridComponent> gridQ;
     private EntityQuery<PhysicsComponent> physicsQ;
@@ -90,6 +90,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     public static bool CollisionDebugEnabled { get; set; }
     public static bool MovementDebugEnabled { get; set; }
 
+    private readonly HashSet<EntityUid> _intersecting = new();
     private readonly Dictionary<EntityUid, TimeSpan> _lastMobCollision = new();
     private readonly Dictionary<EntityUid, bool> _hardState = new();
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
@@ -216,8 +217,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!force && ent.Comp.SyncedGrid == grid)
             return false;
 
-        var coords = xform.Coordinates.WithEntityId(grid, transform, EntityManager);
-        var tile = map.TileIndicesFor(grid, gridComp, coords);
+        var coords = xform.Coordinates.WithEntityId(grid, _transform, EntityManager);
+        var tile = _map.TileIndicesFor(grid, gridComp, coords);
 
         ent.Comp.SyncedGrid = grid;
         ent.Comp.CurrentTile = tile;
@@ -360,18 +361,18 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return;
 
         var coords = new EntityCoordinates(grid, mover.Position);
-        var target = coords.WithEntityId(xform.ParentUid, transform, EntityManager).Position;
+        var target = coords.WithEntityId(xform.ParentUid, _transform, EntityManager).Position;
         var current = xform.LocalPosition;
         var delta = target - current;
 
         if (delta.LengthSquared() >= ClientSmoothingSnapDistance * ClientSmoothingSnapDistance)
         {
-            transform.SetLocalPosition(uid, target, xform);
+            _transform.SetLocalPosition(uid, target, xform);
             return;
         }
 
         var alpha = 1f - MathF.Exp(-ClientSmoothingRate * frameTime);
         var smoothed = Vector2.Lerp(current, target, alpha);
-        transform.SetLocalPosition(uid, smoothed, xform);
+        _transform.SetLocalPosition(uid, smoothed, xform);
     }
 }

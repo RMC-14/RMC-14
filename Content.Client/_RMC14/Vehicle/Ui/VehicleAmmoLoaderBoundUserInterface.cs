@@ -20,8 +20,7 @@ public sealed class VehicleAmmoLoaderBoundUserInterface : BoundUserInterface
         _menu = new VehicleAmmoLoaderMenu();
         _menu.OnClose += Close;
 
-        var metaQuery = EntMan.GetEntityQuery<MetaDataComponent>();
-        if (metaQuery.TryGetComponent(Owner, out var metadata))
+        if (TryComp(Owner, out MetaDataComponent? metadata))
             _menu.Title = metadata.EntityName;
 
         _menu.OnSlotSelected += (slotPath, ammoSlot, action) =>

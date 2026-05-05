@@ -24,12 +24,12 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
     [Dependency] private readonly BulletBoxSystem _bulletBox = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly VehicleHardpointAmmoSystem _hardpointAmmo = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly VehicleHardpointAmmoSystem _hardpointAmmo = default!;
-    [Dependency] private readonly VehicleSystem _vehicleSystem = default!;
     [Dependency] private readonly VehicleTopologySystem _topology = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly VehicleSystem _vehicle = default!;
 
     private readonly Dictionary<EntityUid, Dictionary<EntityUid, EntityUid>> _activeAmmoBoxes = new();
     private readonly Dictionary<EntityUid, HashSet<EntityUid>> _openLoadersByUser = new();
@@ -85,7 +85,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             return false;
         }
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicleUid) || vehicleUid == null)
+        if (!_vehicle.TryGetVehicleFromInterior(ent.Owner, out var vehicleUid) || vehicleUid == null)
         {
             _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-no-vehicle"), ent, user);
             return false;
@@ -395,7 +395,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
                     continue;
                 }
 
-                if (!_vehicleSystem.TryGetVehicleFromInterior(loader, out var loaderVehicle) ||
+                if (!_vehicle.TryGetVehicleFromInterior(loader, out var loaderVehicle) ||
                     loaderVehicle != vehicle)
                 {
                     continue;
@@ -430,7 +430,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         hardpointAmmo = default!;
         vehicle = default;
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(loader.Owner, out var vehicleUid) || vehicleUid == null)
+        if (!_vehicle.TryGetVehicleFromInterior(loader.Owner, out var vehicleUid) || vehicleUid == null)
         {
             _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-no-vehicle"), loader, user);
             return false;
@@ -482,7 +482,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         refill = default!;
         vehicle = default;
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(loader.Owner, out var vehicleUid) || vehicleUid == null)
+        if (!_vehicle.TryGetVehicleFromInterior(loader.Owner, out var vehicleUid) || vehicleUid == null)
         {
             _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-no-vehicle"), loader, user);
             return false;
@@ -596,7 +596,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         if (!TryComp(loader, out VehicleAmmoLoaderComponent? loaderComp))
             return;
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(loader, out var vehicleUid) || vehicleUid == null)
+        if (!_vehicle.TryGetVehicleFromInterior(loader, out var vehicleUid) || vehicleUid == null)
             return;
 
         if (!TryComp(vehicleUid.Value, out HardpointSlotsComponent? hardpoints) ||

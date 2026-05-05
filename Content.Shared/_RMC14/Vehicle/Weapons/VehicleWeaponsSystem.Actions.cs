@@ -106,7 +106,7 @@ public sealed partial class VehicleWeaponsSystem
                 }
 
                 _actions.SetTemporary((existingAction, existingActionComp), false);
-                _metaData.SetEntityName(existingAction, desiredSlot.DisplayName);
+                _meta.SetEntityName(existingAction, desiredSlot.DisplayName);
                 continue;
             }
 
@@ -129,7 +129,7 @@ public sealed partial class VehicleWeaponsSystem
             hardpointAction.SortOrder = i;
             Dirty(action.Value, hardpointAction);
             _actions.SetTemporary((action.Value, Comp<ActionComponent>(action.Value)), false);
-            _metaData.SetEntityName(action.Value, desiredSlot.DisplayName);
+            _meta.SetEntityName(action.Value, desiredSlot.DisplayName);
             operatorComp.HardpointActions[desiredSlot.MountedWeapon] = action.Value;
         }
 

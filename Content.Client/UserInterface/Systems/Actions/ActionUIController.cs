@@ -236,6 +236,7 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
 
     private void TriggerAction(int index)
     {
+        // RMC14
         var activeActions = GetActiveHotbarActions();
         if (index < 0 || index >= activeActions.Count)
             return;
@@ -249,6 +250,7 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
             ToggleTargeting((actionId, action.Comp, target));
         else
             _actionsSystem?.TriggerAction(action);
+        // RMC14
     }
 
     private void OnActionAdded(EntityUid actionId)
@@ -261,17 +263,21 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         if (action.Comp.Toggled && EntityManager.TryGetComponent<TargetActionComponent>(actionId, out var target))
             StartTargeting((action, action, target));
 
+        // RMC14
         if (EntityManager.HasComponent<VehicleHardpointActionComponent>(actionId))
         {
             RefreshVehicleHotbarOverride(forceUpdate: true);
             return;
         }
+        // RMC14
 
         if (_actions.Contains(action))
             return;
 
         _actions.Add(action);
+        // RMC14
         RefreshVehicleHotbarOverride(forceUpdate: true);
+        // RMC14
     }
 
     private void OnActionRemoved(EntityUid actionId)
@@ -279,6 +285,7 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         if (actionId == SelectingTargetFor)
             StopTargeting();
 
+        // RMC14
         if (EntityManager.HasComponent<VehicleHardpointActionComponent>(actionId) ||
             _vehicleActions.Contains(actionId))
         {
@@ -286,15 +293,20 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
             RefreshVehicleHotbarOverride();
             return;
         }
+        // RMC14
 
         _actions.RemoveAll(x => x == actionId);
+        // RMC14
         RefreshVehicleHotbarOverride(forceUpdate: true);
+        // RMC14
     }
 
     private void OnActionsUpdated()
     {
         QueueWindowUpdate();
+        // RMC14
         RefreshVehicleHotbarOverride(forceUpdate: true);
+        // RMC14
     }
 
     private void ActionButtonPressed(ButtonEventArgs args)

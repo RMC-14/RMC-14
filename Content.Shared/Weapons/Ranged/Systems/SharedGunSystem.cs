@@ -184,6 +184,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         return true;
     }
 
+    // RMC14
     /// <summary>
     /// Sets the current gun target, returning the previous value.
     /// </summary>
@@ -193,9 +194,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.Comp.Target = target;
         return previous;
     }
+    // RMC14
 
     public bool TryGetGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
     {
+        // RMC14
         if (TryComp(entity, out VehiclePortGunOperatorComponent? portGunOperator) &&
             portGunOperator.Gun is { } portGun &&
             TryComp(portGun, out VehiclePortGunComponent? portGunComp) &&
@@ -216,6 +219,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             gunComp = selectedGun;
             return true;
         }
+        // RMC14
 
         if(_attachableHolder.TryGetInhandSupercedingGun(entity, out gunEntity, out gunComp))
             return true;

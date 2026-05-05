@@ -18,7 +18,7 @@ public sealed partial class VehicleWeaponsSystem
         if (!Equals(args.UiKey, VehicleWeaponsUiKey.Key))
             return;
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
+        if (!_vehicle.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
             return;
 
         var vehicleUid = vehicle.Value;
@@ -64,7 +64,7 @@ public sealed partial class VehicleWeaponsSystem
         if (args.Actor == default || !Exists(args.Actor))
             return;
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
+        if (!_vehicle.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
             return;
 
         var vehicleUid = vehicle.Value;
@@ -89,7 +89,7 @@ public sealed partial class VehicleWeaponsSystem
         }
 
         if (!TryComp(selectedWeapon, out VehicleTurretComponent? turret) ||
-            !_turretSystem.TryResolveRotationTarget(selectedWeapon, out var targetUid, out var targetTurret))
+            !_turret.TryResolveRotationTarget(selectedWeapon, out var targetUid, out var targetTurret))
         {
             return;
         }
@@ -117,7 +117,7 @@ public sealed partial class VehicleWeaponsSystem
         if (args.Actor == default || !Exists(args.Actor))
             return;
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
+        if (!_vehicle.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
             return;
 
         var vehicleUid = vehicle.Value;
@@ -205,7 +205,7 @@ public sealed partial class VehicleWeaponsSystem
             operatorSelection != null &&
             Exists(operatorSelection.Value) &&
             TryComp(operatorSelection.Value, out VehicleTurretComponent? selectedTurret) &&
-            _turretSystem.TryResolveRotationTarget(operatorSelection.Value, out _, out var targetTurret))
+            _turret.TryResolveRotationTarget(operatorSelection.Value, out _, out var targetTurret))
         {
             stabilizationEnabled = targetTurret.StabilizedRotation;
             canToggleStabilization = targetTurret.RotateToCursor;

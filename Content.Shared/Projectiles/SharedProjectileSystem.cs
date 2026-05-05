@@ -39,7 +39,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    // RMC14
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    // RMC14
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
@@ -412,6 +414,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             return;
         }
 
+        // RMC14
         if (component.Weapon == null)
             return;
 
@@ -429,6 +432,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
             current = container.Owner;
         }
+        // RMC14
     }
 
     public void SetShooter(EntityUid id, ProjectileComponent component, EntityUid? shooterId = null)

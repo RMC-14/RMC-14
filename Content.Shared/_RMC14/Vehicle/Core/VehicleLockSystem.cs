@@ -21,10 +21,10 @@ public sealed class VehicleLockSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly SharedPointLightSystem _lights = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
@@ -379,7 +379,7 @@ public sealed class VehicleLockSystem : EntitySystem
 
         if (vehicleName != null)
         {
-            _metaData.SetEntityName(
+            _meta.SetEntityName(
                 key.Owner,
                 Loc.GetString(
                     copied ? "rmc-vehicle-key-name-copy-specific" : "rmc-vehicle-key-name-specific",
@@ -387,7 +387,7 @@ public sealed class VehicleLockSystem : EntitySystem
             return;
         }
 
-        _metaData.SetEntityName(key.Owner, Loc.GetString(copied ? "rmc-vehicle-key-name-copy" : "rmc-vehicle-key-name"));
+        _meta.SetEntityName(key.Owner, Loc.GetString(copied ? "rmc-vehicle-key-name-copy" : "rmc-vehicle-key-name"));
     }
 
     private void StartBreakAlarm(EntityUid vehicle, VehicleLockComponent lockComp)
