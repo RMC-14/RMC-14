@@ -1,0 +1,97 @@
+name: Labels: Reviewed By Maintainer
+
+on:
+  pull_request_target:
+    types: [review_submitted, review_dismissed]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Test Step
+      run: echo "Workflow step is running"
+    - name: Add label based on review type
+      uses: actions/github-script@v9
+      with:
+        script: |
+          console.log("SCRIPT STARTED");
+          const { owner, repo } = context.repo;
+          const review = context.payload.review;
+          const pr = context.payload.pull_request;
+
+          const state = review.state;
+          const username = review.user.login;
+
+          if (!["APPROVED", "CHANGES_REQUESTED", "DISMISSED", "COMMENTED"].includes(state)) {
+            console.log(`Not the right state`);
+            return;
+          }
+
+          console.log(`${state}`);
+
+          const approvedLabel = "S: Approved Review";
+          const changesLabel = "S: Changes Requested";
+          const commentedLabel = "S: Review Commented";
+
+          if (state !== "DISMISSED") {
+            const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner,
+              repo,
+              username,
+            });
+
+            const permission = data.permission;
+            if (!["write", "maintain", "admin"].includes(permission)) {
+              console.log(`Skipping ${username}, permission: ${permission}`);
+              return;
+            }
+            console.log(`User has permissions`);
+          }
+
+          async function removeLabel(name) {
+            try {
+              await github.rest.issues.removeLabel({
+                owner,
+                repo,
+                issue_number: pr.number,
+                name,
+              });
+            } catch (e) {
+
+            }
+          }
+
+          if (state === "APPROVED") {
+            await removeLabel(changesLabel);
+
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: pr.number,
+              labels: [approvedLabel],
+            });
+
+          } else if (state === "CHANGES_REQUESTED") {
+            await removeLabel(approvedLabel);
+
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: pr.number,
+              labels: [changesLabel],
+            });
+
+          } else if (state === "DISMISSED") {
+            await removeLabel(approvedLabel);
+            await removeLabel(changesLabel);
+            await removeLabel(commentedLabel);
+          } else if (state === "COMMENTED"){
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: pr.number,
+              labels: [changesLabel],
+            });
+          }
+
