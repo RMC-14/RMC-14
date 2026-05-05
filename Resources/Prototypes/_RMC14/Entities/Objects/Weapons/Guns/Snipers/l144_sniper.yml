@@ -36,15 +36,13 @@
     baseFireRate: 0.667
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 3
-  - type: GunDamageModifier
-    multiplier: 1.5
   - type: WieldDelay
     baseDelay: 1.2
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineSniperL144
+        startingItem: RMCMagazineSniperL144SH
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
         priority: 2
@@ -160,16 +158,15 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 70
+        Piercing: 90
   - type: CMArmorPiercing
     amount: 50
   - type: AimedShotEffect
-    extraHits: 1
-    superSlowDuration: 14
+    extraHits: 2
+    superSlowDuration: 7.5
   - type: RMCAreaDamage
-    damageArea: 2.5
-    falloffDistance: 1.5
-    xenoDamageMultiplier: 2
+    damageArea: 1
+    falloffDistance: 0.5
 
 - type: Tag
   id: RMCL144SniperRifle

@@ -2,7 +2,7 @@
   parent: CMSniperEquipmentCase
   id: RMCScoutSniperSniperEquipmentCase
   name: scout-sniper equipment case
-  description: "A large case containing an L144 long-range rifle, an L8 head-mounted optical device, four spare magazines of standard ammo, two spare magazines of squash-head rounds, and a bipod."
+  description: "A large case containing an L144 long-range rifle, an L8 head-mounted optical device, six spare magazines of squash-head rounds, and a bipod."
   suffix: Sniper
   components:
   - type: Sprite
@@ -30,10 +30,8 @@
   - type: StorageFill
     contents:
     - id: RMCGlassesL8HMOD
-    - id: RMCMagazineSniperL144
-      amount: 4
     - id: RMCMagazineSniperL144SH
-      amount: 2
+      amount: 6
     - id: RMCL144SniperRifle
     - id: RMCAttachmentBipod
   - type: CMChangeUserOnVend
