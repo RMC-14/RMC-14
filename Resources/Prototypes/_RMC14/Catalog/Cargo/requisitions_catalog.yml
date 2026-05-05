@@ -6,7 +6,7 @@
     speechVerb: Robotic
   - type: RequisitionsComputer
     categories:
-    - name: Ammo
+    - name: rmc-requisitions-category-ammo
       entries:
       - cost: 2000
         crate: RMCCrateBoxBulletsSMG
@@ -88,7 +88,7 @@
         crate: RMCCrateMagazineML66DDrum
       - cost: 2500
         crate: RMCCrateMagazineM2C
-    - name: Attachments
+    - name: rmc-requisitions-category-attachments
       entries:
       - cost: 3000
         crate: RMCCrateAttachmentSmartScope
@@ -132,7 +132,7 @@
         crate: RMCCrateAttachmentShotgunStock
       - cost: 3000
         crate: RMCCrateAttachmentSmgStock
-    - name: Clothing
+    - name: rmc-requisitions-category-clothing
       entries:
       - cost: 2000
         crate: RMCCrateClothingLargePouches
@@ -156,7 +156,7 @@
         crate: RMCCrateClothingDropPouchBlack
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit
-    - name: Engineering
+    - name: rmc-requisitions-category-engineering
       entries:
       - cost: 2000
         crate: RMCCrateEmptySandbags
@@ -190,7 +190,7 @@
         crate: RMCCrateFlashlights
       - cost: 1000
         crate: RMCCrateHighCapacityPowerCell
-    - name: Explosives
+    - name: rmc-requisitions-category-explosives
       entries:
       - cost: 3000
         crate: RMCCrateGrenadesHighExplosive
@@ -235,7 +235,7 @@
         crate: RMCCrateExplosiveClaymoreMine
       - cost: 4000
         crate: RMCCrateExplosivesSurplus
-    - name: Food
+    - name: rmc-requisitions-category-food
       entries:
       - cost: 1000
         crate: RMCCrateFoodDonuts
@@ -245,7 +245,7 @@
         crate: RMCCrateFoodPizza
       - cost: 1000
         crate: RMCCrateFoodIngredients
-    - name: Gear
+    - name: rmc-requisitions-category-gear
       entries:
       - cost: 2000
         crate: RMCCrateGearBinoculars
@@ -259,7 +259,7 @@
         crate: RMCCrateGearFulton
       - cost: 4000
         crate: RMCCrateGearParachute
-    - name: Medical
+    - name: rmc-requisitions-category-medical
       entries:
       - cost: 2500
         crate: RMCCrateMedicalSurgery
@@ -277,7 +277,7 @@
         crate: RMCCrateMedicalFilled
       - cost: 1500
         crate: RMCCrateMedicalPill
-    - name: Mortar
+    - name: rmc-requisitions-category-mortar
       entries:
       - cost: 6000
         crate: RMCCrateMortarKit
@@ -287,19 +287,19 @@
         crate: RMCCrateMortarShellIncendiary
       - cost: 1000
         crate: RMCCrateMortarShellFlare
-#    - name: Operations
+#    - name: rmc-requisitions-category-operations
 #      entries: []
-    - name: Reagent tanks
+    - name: rmc-requisitions-category-reagent-tanks
       entries:
       - cost: 2000
         crate: RMCTankReagentFuel
-    - name: Research
+    - name: rmc-requisitions-category-research
       entries:
       - cost: 3000
         crate: RMCCrateResearchPhoron
       - cost: 2000
         crate: RMCCrateResearchPlastic
-    - name: Restricted Equipment
+    - name: rmc-requisitions-category-restricted-equipment
       entries:
       - cost: 2000
         crate: RMCCrateRestrictedEquipmentArmorM4
@@ -307,7 +307,7 @@
         crate: RMCCrateRestrictedEquipmentArmorB12
       - cost: 2000
         crate: RMCCrateRestrictedEquipmentIntelSupportKit
-    - name: Supplies
+    - name: rmc-requisitions-category-supplies
       entries:
       - cost: 2000
         crate: RMCCrateSupplyInternals
@@ -319,9 +319,9 @@
         crate: RMCCrateSupplyJanitor
       - cost: 2000
         crate: RMCCrateSuppliesCrayons
-#    - name: Vehicle Ammo
+#    - name: rmc-requisitions-category-vehicle-ammo
 #      entries: []
-    - name: Weapons
+    - name: rmc-requisitions-category-weapons
       entries:
       - cost: 4000
         crate: RMCCrateM54CE2
@@ -345,7 +345,7 @@
         crate: RMCCrateML66D
       - cost: 6000
         crate: RMCCrateM2C
-    - name: Weapons Specialist Ammo
+    - name: rmc-requisitions-category-weapons-specialist-ammo
       entries:
       - cost: 4000
         crate: RMCCrateMagazineM96SMixed

@@ -184,7 +184,7 @@ public sealed class RequisitionsBui : BoundUserInterface
             for (var i = 0; i < computer.Categories.Count; i++)
             {
                 var categoryIndex = i;
-                var button = CreateCategoryButton(computer.Categories[i].Name, _selectedCategory == categoryIndex);
+                var button = CreateCategoryButton(Loc.GetString(computer.Categories[i].Name), _selectedCategory == categoryIndex);
                 button.OnPressed += _ =>
                 {
                     _selectedCategory = categoryIndex;
