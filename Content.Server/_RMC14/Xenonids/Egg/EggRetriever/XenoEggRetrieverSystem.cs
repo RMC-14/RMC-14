@@ -37,7 +37,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoRetrieveEggActionEvent>(OnXenoRetrieveEgg);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoEggUseInHandEvent>(OnXenoRetrieverUseInHand);
         SubscribeLocalEvent<XenoEggRetrieverComponent, MobStateChangedEvent>(OnDeathMobStateChanged);
-        SubscribeLocalEvent<XenoEggRetrieverComponent, XenoChangingCasteEvent>(OnXenoChangingCaste);
+        SubscribeLocalEvent<XenoEggRetrieverComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
     }
 
     private void OnComponentStartup(Entity<XenoEggRetrieverComponent> xeno, ref ComponentStartup args)
@@ -122,7 +122,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         args.Handled = true;
     }
 
-    private void OnXenoChangingCaste(Entity<XenoEggRetrieverComponent> xeno, ref XenoChangingCasteEvent args)
+    private void OnXenoChangingPrototype(Entity<XenoEggRetrieverComponent> xeno, ref XenoChangingPrototypeEvent args)
     {
         var compName = EntityManager.ComponentFactory.GetComponentName<XenoEggRetrieverComponent>();
         if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoEggRetrieverComponent { } newComponent)

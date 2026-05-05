@@ -122,7 +122,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         SubscribeLocalEvent<FlammableComponent, IgnitedEvent>(OnFlammableIgnite);
         SubscribeLocalEvent<FlammableComponent, RMCExtinguishedEvent>(OnFlammableExtinguished);
-        SubscribeLocalEvent<FlammableComponent, XenoChangingCasteEvent>(OnFlammableChangingCaste);
+        SubscribeLocalEvent<FlammableComponent, XenoChangingPrototypeEvent>(OnFlammableChangingCaste);
 
         SubscribeLocalEvent<PlasmaFrenzyComponent, IgnitedEvent>(OnPlasmaFrenzyIgnite);
 
@@ -372,7 +372,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         RemCompDeferred<RMCFireBypassActiveComponent>(ent);
     }
 
-    private void OnFlammableChangingCaste(Entity<FlammableComponent> ent, ref XenoChangingCasteEvent args)
+    private void OnFlammableChangingCaste(Entity<FlammableComponent> ent, ref XenoChangingPrototypeEvent args)
     {
         var compName = EntityManager.ComponentFactory.GetComponentName<FlammableComponent>();
         if (args.NewComponents.TryGetComponent(compName, out var c) && c is FlammableComponent { } newComponent)

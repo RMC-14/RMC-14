@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Movement;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -38,6 +39,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         SubscribeLocalEvent<XenoComponent, KnockedDownEvent>(OnXenoKnockedDown);
         SubscribeLocalEvent<XenoComponent, StatusEffectEndedEvent>(OnXenoStatusEffectEnded);
         SubscribeLocalEvent<XenoComponent, GetDrawDepthEvent>(OnXenoGetDrawDepth);
+        SubscribeLocalEvent<SpriteComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
 
         _animateQuery = GetEntityQuery<XenoAnimateMovementComponent>();
     }
@@ -61,6 +63,26 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             args.DrawDepth = DrawDepth.DeadMobs;
     }
 
+    private void OnXenoChangingPrototype(Entity<SpriteComponent> xeno, ref XenoChangingPrototypeEvent args)
+    {
+        var nullableXeno = xeno.AsNullable();
+        var compName = EntityManager.ComponentFactory.GetComponentName<SpriteComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is SpriteComponent { } newComponent)
+        {
+            _sprite.SetBaseRsi(nullableXeno, newComponent.BaseRSI);
+
+            // TODO how the hell do you make the sprite recalculate bounds? this is awful
+            _sprite.SetSnapCardinals(nullableXeno, !xeno.Comp.SnapCardinals);
+            _sprite.SetSnapCardinals(nullableXeno, !xeno.Comp.SnapCardinals);
+        }
+        else
+        {
+            Log.Error("Xeno prototype missing a sprite component.");
+        }
+
+        args.AdditionalExclusions.Add(compName);
+    }
+
     protected override void OnAppearanceChange(EntityUid uid, XenoComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
@@ -81,20 +103,6 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         Resolve(entity, ref input, ref thrown, ref leaping, ref knocked, false);
         if (knocked != null && state != MobState.Dead)
             state = MobState.Critical;
-
-        var prototype = MetaData(entity).EntityPrototype;
-        if (prototype != null && prototype.Components.TryGetComponent("Sprite", out var s) && s is SpriteComponent protoSprite)
-        {
-            if (protoSprite.BaseRSI != sprite.BaseRSI)
-            {
-                _sprite.SetBaseRsi((entity, sprite), protoSprite.BaseRSI);
-
-                // TODO how the fuck do you make the sprite recalculate bounds? this is awful
-                _sprite.SetSnapCardinals((entity, sprite), !sprite.SnapCardinals);
-                _sprite.SetSnapCardinals((entity, sprite), !sprite.SnapCardinals);
-            }
-        }
-
 
         if (sprite is not { BaseRSI: { } rsi } ||
             !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))

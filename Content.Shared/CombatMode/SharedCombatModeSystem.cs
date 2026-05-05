@@ -24,7 +24,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
         SubscribeLocalEvent<CombatModeComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CombatModeComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<CombatModeComponent, ToggleCombatActionEvent>(OnActionPerform);
-        SubscribeLocalEvent<CombatModeComponent, XenoChangingCasteEvent>(OnXenoChangingCaste);
+        SubscribeLocalEvent<CombatModeComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
     }
 
     private void OnMapInit(EntityUid uid, CombatModeComponent component, MapInitEvent args)
@@ -52,7 +52,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
         _popup.PopupClient(Loc.GetString(msg), args.Performer, args.Performer);
     }
 
-    private void OnXenoChangingCaste(Entity<CombatModeComponent> entity, ref XenoChangingCasteEvent args)
+    private void OnXenoChangingPrototype(Entity<CombatModeComponent> entity, ref XenoChangingPrototypeEvent args)
     {
         var compName = EntityManager.ComponentFactory.GetComponentName<CombatModeComponent>();
         if (args.NewComponents.TryGetComponent(compName, out var c) && c is CombatModeComponent { } newComponent)

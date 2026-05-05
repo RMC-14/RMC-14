@@ -44,7 +44,7 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoThrowParasiteActionEvent>(OnToggleParasiteThrow);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoChangingCasteEvent>(OnXenoChangingCaste);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
     }
 
     private void OnComponentStartup(Entity<XenoParasiteThrowerComponent> xeno, ref ComponentStartup args)
@@ -188,7 +188,7 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         args.Handled = true;
     }
 
-    private void OnXenoChangingCaste(Entity<XenoParasiteThrowerComponent> xeno, ref XenoChangingCasteEvent args)
+    private void OnXenoChangingPrototype(Entity<XenoParasiteThrowerComponent> xeno, ref XenoChangingPrototypeEvent args)
     {
         var compName = EntityManager.ComponentFactory.GetComponentName<XenoParasiteThrowerComponent>();
         if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoParasiteThrowerComponent { } newComponent)

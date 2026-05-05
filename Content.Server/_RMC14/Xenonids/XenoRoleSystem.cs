@@ -58,7 +58,7 @@ public sealed class XenoRoleSystem : EntitySystem
         SubscribeLocalEvent<ActorComponent, HiveChangedEvent>(OnHiveChanged);
 
         SubscribeLocalEvent<XenoRankComponent, RefreshNameModifiersEvent>(OnRankRefreshName, before: new[] { typeof(SharedXenoNameSystem) });
-        SubscribeLocalEvent<XenoRankComponent, XenoChangingCasteEvent>(OnXenoChangingCaste);
+        SubscribeLocalEvent<XenoRankComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
 
         Subs.CVar(_config, RMCCVars.RMCPlaytimeBronzeMedalTimeHours, v => _rankTwoTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _rankThreeTime = TimeSpan.FromHours(v), true);
@@ -125,7 +125,7 @@ public sealed class XenoRoleSystem : EntitySystem
         args.AddModifier(rank.Value);
     }
 
-    private void OnXenoChangingCaste(Entity<XenoRankComponent> ent, ref XenoChangingCasteEvent args)
+    private void OnXenoChangingPrototype(Entity<XenoRankComponent> ent, ref XenoChangingPrototypeEvent args)
     {
         if (TryComp<XenoComponent>(ent, out var xenoComp) && xenoComp != null)
         {

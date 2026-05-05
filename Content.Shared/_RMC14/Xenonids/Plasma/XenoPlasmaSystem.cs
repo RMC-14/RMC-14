@@ -35,7 +35,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
         SubscribeLocalEvent<XenoPlasmaComponent, RejuvenateEvent>(OnXenoRejuvenate);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoTransferPlasmaActionEvent>(OnXenoTransferPlasmaAction);
         SubscribeLocalEvent<XenoPlasmaComponent, XenoTransferPlasmaDoAfterEvent>(OnXenoTransferDoAfter);
-        SubscribeLocalEvent<XenoPlasmaComponent, XenoChangingCasteEvent>(OnXenoChangingCaste);
+        SubscribeLocalEvent<XenoPlasmaComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
 
         SubscribeLocalEvent<XenoActionPlasmaComponent, RMCActionUseAttemptEvent>(OnXenoActionEnergyUseAttempt);
         SubscribeLocalEvent<XenoActionPlasmaComponent, RMCActionUseEvent>(OnXenoActionEnergyUse);
@@ -145,7 +145,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
             args.Repeat = true;
     }
 
-    private void OnXenoChangingCaste(Entity<XenoPlasmaComponent> xeno, ref XenoChangingCasteEvent args)
+    private void OnXenoChangingPrototype(Entity<XenoPlasmaComponent> xeno, ref XenoChangingPrototypeEvent args)
     {
         var compName = EntityManager.ComponentFactory.GetComponentName<XenoPlasmaComponent>();
         if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoPlasmaComponent { } newComponent)

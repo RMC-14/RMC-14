@@ -81,13 +81,15 @@ public sealed class XenoEvolutionSystem : EntitySystem
     {
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
+        SubscribeNetworkEvent<XenoChangingCasteEvent>(OnXenoChangingCaste);
+
         SubscribeLocalEvent<XenoDevolveComponent, XenoOpenDevolveActionEvent>(OnXenoOpenDevolveAction);
 
         SubscribeLocalEvent<XenoEvolutionComponent, MapInitEvent>(OnXenoEvolveMapInit);
         SubscribeLocalEvent<XenoEvolutionComponent, ComponentShutdown>(OnXenoEvolveShutdown);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
-        SubscribeLocalEvent<XenoEvolutionComponent, XenoChangingCasteEvent>(OnXenoChangingCaste);
+        SubscribeLocalEvent<XenoEvolutionComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
         SubscribeLocalEvent<XenoEvolutionComponent, AfterXenoChangedCasteEvent>(OnAfterXenoChangedCaste);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
@@ -262,7 +264,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), xeno, xeno);
     }
 
-    private void OnXenoChangingCaste(Entity<XenoEvolutionComponent> xeno, ref XenoChangingCasteEvent args)
+    private void OnXenoChangingPrototype(Entity<XenoEvolutionComponent> xeno, ref XenoChangingPrototypeEvent args)
     { 
         var compName = EntityManager.ComponentFactory.GetComponentName<XenoEvolutionComponent>();
         if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoEvolutionComponent { } newComponent)
@@ -574,6 +576,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void ChangeCaste(EntityUid xeno, EntProtoId protoId)
     {
+        // Only server can initiate changing a xeno's caste.
+        if (_net.IsClient)
+            return;
+
+        RaiseNetworkEvent(new XenoChangingCasteEvent(EntityManager.GetNetEntity(xeno), protoId), Filter.Pvs(xeno));
+
         var newProto = _prototypes.Index(protoId);
 
         var recently = EnsureComp<XenoRecentlyDevolvedComponent>(xeno);
@@ -734,6 +742,21 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
     }
 
+    private void OnXenoChangingCaste(XenoChangingCasteEvent args)
+    {
+        // Servers must ignore this event to prevent clients from sending it to the server,
+        // because this event can cause any entity to switch over to any prototype.
+        if (_net.IsServer)
+            return;
+
+        var newProto = _prototypes.Index(args.NewProtoId);
+        var xeno = EntityManager.GetEntity(args.Xeno);
+        if (xeno != EntityUid.Invalid)
+        {
+            ChangeXenoPrototype(xeno, newProto);
+        }
+    }
+
     private void ChangeXenoPrototype(
         EntityUid xeno,
         EntityPrototype newProto)
@@ -768,9 +791,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         var additionalExclusions = new HashSet<string>();
-        var changingCasteEvent = new XenoChangingCasteEvent(xeno, newProto, registryToAdd, additionalExclusions);
+        var changingCasteEvent = new XenoChangingPrototypeEvent(xeno, newProto, registryToAdd, additionalExclusions);
         RaiseLocalEvent(xeno, ref changingCasteEvent);
-        Log.Debug("Done with XenoChangingCasteEvent.");
+        Log.Debug("Done with XenoChangingPrototypeEvent.");
 
         Log.Debug("Removing additional exclusions from registry...");
         foreach (var exclusion in additionalExclusions)
