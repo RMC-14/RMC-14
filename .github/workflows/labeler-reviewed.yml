@@ -1,8 +1,8 @@
 name: "Labels: Reviewed By Maintaine"
 
 on:
-  pull_request_target:
-    types: [review_submitted, review_dismissed]
+  pull_request_review:
+    types: [submitted, dismissed]
 
 jobs:
   label:
