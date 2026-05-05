@@ -10,6 +10,12 @@ public sealed partial class RequisitionsEntry
     [DataField]
     public string? Name;
 
+    [DataField]
+    public string? NameLocId;
+
+    [DataField]
+    public string? DescriptionLocId;
+
     [DataField(required: true)]
     public int Cost;
 

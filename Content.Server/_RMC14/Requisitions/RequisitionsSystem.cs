@@ -69,6 +69,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         Subs.BuiEvents<RequisitionsComputerComponent>(RequisitionsUIKey.Key, subs =>
         {
             subs.Event<RequisitionsBuyMsg>(OnBuy);
+            subs.Event<RequisitionsBuyCartMsg>(OnBuyCart);
             subs.Event<RequisitionsPlatformMsg>(OnPlatform);
         });
 
@@ -90,37 +91,88 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
     private void OnBuy(Entity<RequisitionsComputerComponent> computer, ref RequisitionsBuyMsg args)
     {
-        var actor = args.Actor;
-        if (args.Category >= computer.Comp.Categories.Count)
+        var items = new List<RequisitionsCartItem>
         {
-            Log.Error($"Player {ToPrettyString(actor)} tried to buy out of bounds requisitions order: category {args.Category}");
-            return;
-        }
+            new(args.Category, args.Order, 1),
+        };
 
-        var category = computer.Comp.Categories[args.Category];
-        if (args.Order >= category.Entries.Count)
-        {
-            Log.Error($"Player {ToPrettyString(actor)} tried to buy out of bounds requisitions order: category {args.Category}");
-            return;
-        }
+        TryBuyCart(computer, args.Actor, items);
+    }
 
-        var order = category.Entries[args.Order];
-        if (!TryComp(computer.Comp.Account, out RequisitionsAccountComponent? account) ||
-            account.Balance < order.Cost)
-        {
+    private void OnBuyCart(Entity<RequisitionsComputerComponent> computer, ref RequisitionsBuyCartMsg args)
+    {
+        TryBuyCart(computer, args.Actor, args.Items);
+    }
+
+    private void TryBuyCart(Entity<RequisitionsComputerComponent> computer, EntityUid actor, List<RequisitionsCartItem> items)
+    {
+        if (items.Count == 0)
             return;
-        }
 
         if (GetElevator(computer) is not { } elevator)
             return;
 
-        if (IsFull(elevator))
+        var remainingCapacity = GetElevatorCapacity(elevator) - elevator.Comp.Orders.Count;
+        if (remainingCapacity <= 0)
             return;
 
-        account.Balance -= order.Cost;
-        elevator.Comp.Orders.Add(order);
+        if (computer.Comp.Account is not { } accountUid ||
+            !TryComp(accountUid, out RequisitionsAccountComponent? account))
+        {
+            return;
+        }
+
+        var orders = new List<RequisitionsEntry>();
+        var totalCost = 0;
+        var totalAmount = 0;
+
+        foreach (var item in items)
+        {
+            if (item.Amount <= 0)
+                return;
+
+            if (item.Category < 0 || item.Category >= computer.Comp.Categories.Count)
+            {
+                Log.Error($"Player {ToPrettyString(actor)} tried to buy out of bounds requisitions order: category {item.Category}");
+                return;
+            }
+
+            var category = computer.Comp.Categories[item.Category];
+            if (item.Order < 0 || item.Order >= category.Entries.Count)
+            {
+                Log.Error($"Player {ToPrettyString(actor)} tried to buy out of bounds requisitions order: category {item.Category}, order {item.Order}");
+                return;
+            }
+
+            var order = category.Entries[item.Order];
+            if (order.Cost > 0 && item.Amount > (int.MaxValue - totalCost) / order.Cost)
+                return;
+
+            if (item.Amount > int.MaxValue - totalAmount)
+                return;
+
+            totalCost += order.Cost * item.Amount;
+            totalAmount += item.Amount;
+
+            if (totalAmount > remainingCapacity)
+                return;
+
+            for (var i = 0; i < item.Amount; i++)
+            {
+                orders.Add(order);
+            }
+        }
+
+        if (account.Balance < totalCost)
+            return;
+
+        account.Balance -= totalCost;
+        elevator.Comp.Orders.AddRange(orders);
+        Dirty(accountUid, account);
+        Dirty(elevator);
+
         SendUIStateAll();
-        _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(args.Actor):actor} bought requisitions crate {order.Name} with crate {order.Crate} for {order.Cost}");
+        _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(actor):actor} bought {totalAmount} requisitions crate(s) for {totalCost}");
     }
 
     private void OnPlatform(Entity<RequisitionsComputerComponent> computer, ref RequisitionsPlatformMsg args)
@@ -489,6 +541,9 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
                     var crate = _random.Pick(crateCosts);
                     elevator.Comp.Orders.Add(new RequisitionsEntry { Crate = crate });
                 }
+
+                Dirty(elevator);
+                updateUI = true;
             }
         }
 

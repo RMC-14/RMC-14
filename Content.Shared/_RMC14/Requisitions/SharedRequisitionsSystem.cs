@@ -127,10 +127,59 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         var mode = elevator?.Comp.NextMode ?? elevator?.Comp.Mode;
         var busy = elevator?.Comp.Busy ?? false;
         var balance = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account)?.Balance ?? 0;
-        var full = elevator != null && IsFull(elevator.Value);
+        var orderCount = elevator?.Comp.Orders.Count ?? 0;
+        var capacity = elevator != null ? GetElevatorCapacity(elevator.Value) : 0;
+        var full = elevator != null && orderCount >= capacity;
+        var pendingOrders = elevator != null
+            ? GetPendingOrders(elevator.Value.Comp.Orders)
+            : new List<RequisitionsPendingOrder>();
 
-        var state = new RequisitionsBuiState(mode, busy, balance, full);
+        var state = new RequisitionsBuiState(mode, busy, balance, full, orderCount, capacity, pendingOrders);
         _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);
+    }
+
+    private static List<RequisitionsPendingOrder> GetPendingOrders(List<RequisitionsEntry> orders)
+    {
+        var pendingOrders = new List<RequisitionsPendingOrder>();
+        foreach (var order in orders)
+        {
+            var found = false;
+            foreach (var pending in pendingOrders)
+            {
+                if (!SamePendingOrder(pending.Entry, order))
+                    continue;
+
+                pending.Amount++;
+                found = true;
+                break;
+            }
+
+            if (!found)
+                pendingOrders.Add(new RequisitionsPendingOrder(order, 1));
+        }
+
+        return pendingOrders;
+    }
+
+    private static bool SamePendingOrder(RequisitionsEntry a, RequisitionsEntry b)
+    {
+        if (a.Crate != b.Crate ||
+            a.Cost != b.Cost ||
+            a.Name != b.Name ||
+            a.NameLocId != b.NameLocId ||
+            a.DescriptionLocId != b.DescriptionLocId ||
+            a.Entities.Count != b.Entities.Count)
+        {
+            return false;
+        }
+
+        for (var i = 0; i < a.Entities.Count; i++)
+        {
+            if (a.Entities[i] != b.Entities[i])
+                return false;
+        }
+
+        return true;
     }
 
     protected bool IsFull(Entity<RequisitionsElevatorComponent> elevator)

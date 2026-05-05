@@ -1,8 +1,12 @@
-﻿using Content.Shared._RMC14.Requisitions;
+using System.Numerics;
+using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
 using JetBrains.Annotations;
+using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Graphics.RSI;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
@@ -10,236 +14,618 @@ using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorM
 namespace Content.Client._RMC14.Requisitions;
 
 [UsedImplicitly]
-public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class RequisitionsBui : BoundUserInterface
 {
+    private const float CategoryMinWidth = 180f;
+    private const float CategoryPanelPadding = 12f;
+
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
-    [ViewVariables]
+    private readonly SpriteSystem _sprite;
+    private readonly Dictionary<CartKey, int> _cart = new();
+    private readonly Dictionary<CartKey, RequisitionsProductCard> _productCards = new();
+
+    private RequisitionsBuiState? _state;
     private RequisitionsWindow? _window;
+    private int? _selectedCategory;
+
+    public RequisitionsBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+        _sprite = EntMan.System<SpriteSystem>();
+    }
 
     protected override void Open()
     {
         base.Open();
-        _window = this.CreateWindow<RequisitionsWindow>();
-
-        _window.MainView.OrderItemsButton.OnPressed += _ => ShowView(_window, _window.OrderCategoriesView);
-        _window.MainView.ViewRequestsButton.OnPressed += _ => { };
-        _window.MainView.ViewOrdersButton.OnPressed += _ => { };
-
-        _window.OrderCategoriesView.MainMenuButton.OnPressed += _ => ShowView(_window, _window.MainView);
-        _window.OrderCategoriesView.SearchMenuButton.OnPressed += _ => ShowView(_window, _window.OrderSearchView);
-
-        _window.OrderSearchView.BackButton.OnPressed += _ => ShowView(_window, _window.OrderCategoriesView);
-        _window.OrderSearchView.SearchBar.OnTextChanged += _ =>
-        {
-            UpdateItemSearch(_window.OrderSearchView.SearchBar.Text);
-        };
-
-        _window.CategoryView.BackButton.OnPressed += _ => ShowView(_window, _window.OrderCategoriesView);
+        EnsureWindow();
+        RefreshShop();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
-        if (state is RequisitionsBuiState uiState)
-            UpdateState(uiState);
-    }
+        if (state is not RequisitionsBuiState uiState)
+            return;
 
-    private void UpdateState(RequisitionsBuiState uiState)
-    {
-        _window ??= this.CreateWindow<RequisitionsWindow>();
+        _state = uiState;
+        EnsureWindow();
+        RefreshShop();
 
-        var platformLabel = "No platform";
-        var platformButtonLabel = "No platform";
-        var platformButtonDisabled = false;
-        bool? raise = null;
-        switch (uiState.PlatformLowered)
-        {
-            case Lowered or Raised when uiState.Busy:
-                platformLabel = $"Platform position: {uiState.PlatformLowered}";
-                platformButtonLabel = "ASRS is busy";
-                platformButtonDisabled = true;
-                break;
-            case Lowered:
-                platformButtonLabel = "Raise platform";
-                platformLabel = "Platform position: Lowered";
-                raise = true;
-                break;
-            case Raised:
-                platformButtonLabel = "Lower platform";
-                platformLabel = "Platform position: Raised";
-                raise = false;
-                break;
-            case Lowering:
-                platformButtonLabel = "Please wait";
-                platformLabel = "Platform lowering...";
-                platformButtonDisabled = true;
-                break;
-            case Raising:
-                platformButtonLabel = "Please wait";
-                platformLabel = "Platform raising...";
-                platformButtonDisabled = true;
-                break;
-            case null:
-                platformButtonDisabled = true;
-                break;
-        }
-
-        _window.MainView.PlatformLabel.SetMessage(platformLabel);
-        _window.MainView.PlatformButton.Text = platformButtonLabel;
-
-        _window.MainView.PlatformButton.Disabled = platformButtonDisabled;
-
-        if (raise != null)
-        {
-            _window.MainView.PlatformButton.OnPressed += _ => SendMessage(new RequisitionsPlatformMsg(raise.Value));
-        }
-
-        var budget = new FormattedMessage();
-        budget.AddMarkupOrThrow($"[bold]Supply budget: ${uiState.Balance}[/bold]");
-        _window.MainView.BudgetLabel.SetMessage(budget);
-        _window.OrderCategoriesView.BudgetLabel.SetMessage(budget);
-        _window.CategoryView.BudgetLabel.SetMessage(budget);
-        _window.OrderSearchView.BudgetLabel.SetMessage(budget);
-
-        var categoryHeader = new FormattedMessage();
-        categoryHeader.AddMarkupOrThrow("[bold]Select a category[/bold]");
-        _window.OrderCategoriesView.CategoryHeaderLabel.SetMessage(categoryHeader);
-        _window.OrderCategoriesView.CategoriesContainer.DisposeAllChildren();
-
-        if (_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer))
-        {
-            for (var i = 0; i < computer.Categories.Count; i++)
-            {
-                var category = computer.Categories[i];
-                var uiCategory = new Button { Text = category.Name, StyleClasses = { "ButtonSquare" } };
-                var categoryIndex = i;
-                uiCategory.OnPressed += _ => ChangeOrderCategory(categoryIndex);
-                _window.OrderCategoriesView.CategoriesContainer.AddChild(uiCategory);
-            }
-        }
-
-        foreach (var child in _window.CategoryView.OrdersContainer.Children)
-        {
-            if (child is RequisitionsOrderButton order)
-                UpdateOrderButton(order, uiState);
-        }
-
-        foreach (var group in _window.OrderSearchView.ResultContainer.Children)
-        {
-            if (group is RequisitionsOrderSearchGroup categoryGroup)
-            {
-                foreach (var child in categoryGroup.GroupItems.Children)
-                {
-                    if (child is RequisitionsOrderButton order)
-                        UpdateOrderButton(order, uiState);
-                }
-            }
-        }
-
-        if (!_window.IsOpen)
+        if (_window is { IsOpen: false })
             _window.OpenCentered();
     }
 
-    private void ShowView(RequisitionsWindow window, Control view)
+    private void EnsureWindow()
     {
-        foreach (var child in window.Contents.Children)
+        if (_window != null)
+            return;
+
+        _window = this.CreateWindow<RequisitionsWindow>();
+
+        _window.SearchBar.OnTextChanged += _ => RefreshVisibleEntries();
+        _window.PlatformButton.OnPressed += _ => PressPlatformButton();
+        _window.ClearCartButton.OnPressed += _ =>
         {
-            child.Visible = child == view;
-        }
+            _cart.Clear();
+            RefreshVisibleEntries();
+        };
+        _window.BuyButton.OnPressed += _ => BuyCart();
     }
 
-    private void ChangeOrderCategory(int categoryIndex)
+    private void RefreshShop()
+    {
+        if (_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer) &&
+            _selectedCategory >= computer.Categories.Count)
+        {
+            _selectedCategory = null;
+        }
+
+        UpdatePlatformButtons();
+        UpdateBalance();
+        PopulateCategories();
+        PopulateProducts();
+        RefreshCart();
+        PopulatePendingOrders();
+    }
+
+    private void RefreshVisibleEntries()
+    {
+        PopulateProducts();
+        RefreshCart();
+        PopulatePendingOrders();
+    }
+
+    private void UpdatePlatformButtons()
     {
         if (_window == null)
             return;
 
-        if (!_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer) ||
-            categoryIndex >= computer.Categories.Count)
+        _window.PlatformButton.Disabled = true;
+
+        if (_state == null)
         {
+            _window.PlatformButton.Text = Loc.GetString("rmc-requisitions-platform-missing");
             return;
         }
 
-        ShowView(_window, _window.CategoryView);
-        _window.CategoryView.OrdersContainer.DisposeAllChildren();
-
-        var category = computer.Categories[categoryIndex];
-        var requestMsg = new FormattedMessage();
-        requestMsg.AddMarkupOrThrow($"[bold]Request from: {category.Name}[/bold]");
-        _window.CategoryView.RequestFromLabel.SetMessage(requestMsg);
-
-        var state = State as RequisitionsBuiState;
-        for (var i = 0; i < category.Entries.Count; i++)
+        if (_state.Busy || _state.PlatformLowered is Preparing or Lowering or Raising)
         {
-            var entry = category.Entries[i];
-            var order = new RequisitionsOrderButton();
-            var orderIndex = i;
-            order.Button.Text = entry.Name ?? _prototypes.Index<EntityPrototype>(entry.Crate).Name;
-            order.Button.OnPressed += _ => SendMessage(new RequisitionsBuyMsg(categoryIndex, orderIndex));
+            _window.PlatformButton.Text = Loc.GetString("rmc-requisitions-platform-busy");
+            return;
+        }
 
-            order.SetCost(entry.Cost);
-            UpdateOrderButton(order, state);
-            _window.CategoryView.OrdersContainer.AddChild(order);
+        switch (_state.PlatformLowered)
+        {
+            case Lowered:
+                _window.PlatformButton.Text = Loc.GetString("rmc-requisitions-platform-raise");
+                _window.PlatformButton.Disabled = false;
+                break;
+            case Raised:
+                _window.PlatformButton.Text = Loc.GetString("rmc-requisitions-platform-lower");
+                _window.PlatformButton.Disabled = false;
+                break;
+            default:
+                _window.PlatformButton.Text = Loc.GetString("rmc-requisitions-platform-missing");
+                break;
         }
     }
 
-    private void UpdateItemSearch(string? filter = null)
+    private void PressPlatformButton()
+    {
+        if (_state == null || _state.Busy)
+            return;
+
+        switch (_state.PlatformLowered)
+        {
+            case Lowered:
+                SendMessage(new RequisitionsPlatformMsg(true));
+                break;
+            case Raised:
+                SendMessage(new RequisitionsPlatformMsg(false));
+                break;
+        }
+    }
+
+    private void UpdateBalance()
+    {
+        if (_window == null || _state == null)
+            return;
+
+        _window.BudgetLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+            "rmc-requisitions-balance",
+            ("balance", _state.Balance))));
+
+        _window.CapacityLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+            "rmc-requisitions-capacity",
+            ("count", _state.OrderCount),
+            ("capacity", _state.Capacity))));
+    }
+
+    private void PopulateCategories()
     {
         if (_window == null)
             return;
+
+        _window.CategoriesContainer.DisposeAllChildren();
+
+        _entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer);
+
+        var buttons = new List<Button>();
+        var allButton = CreateCategoryButton(Loc.GetString("rmc-requisitions-category-all"), _selectedCategory == null);
+        allButton.OnPressed += _ =>
+        {
+            _selectedCategory = null;
+            RefreshShop();
+        };
+        buttons.Add(allButton);
+
+        if (computer != null)
+        {
+            for (var i = 0; i < computer.Categories.Count; i++)
+            {
+                var categoryIndex = i;
+                var button = CreateCategoryButton(computer.Categories[i].Name, _selectedCategory == categoryIndex);
+                button.OnPressed += _ =>
+                {
+                    _selectedCategory = categoryIndex;
+                    RefreshShop();
+                };
+                buttons.Add(button);
+            }
+        }
+
+        var buttonWidth = CategoryMinWidth;
+        foreach (var button in buttons)
+        {
+            button.Measure(new Vector2(float.PositiveInfinity, float.PositiveInfinity));
+            buttonWidth = Math.Max(buttonWidth, MathF.Ceiling(button.DesiredSize.X));
+        }
+
+        _window.CategoryPanel.MinWidth = buttonWidth + CategoryPanelPadding;
+        foreach (var button in buttons)
+        {
+            button.MinWidth = buttonWidth;
+            _window.CategoriesContainer.AddChild(button);
+        }
+    }
+
+    private static Button CreateCategoryButton(string text, bool disabled)
+    {
+        return new Button
+        {
+            Text = text,
+            Disabled = disabled,
+            ClipText = false,
+            HorizontalExpand = true,
+            StyleClasses = { "ButtonSquare" },
+        };
+    }
+
+    private void PopulateProducts()
+    {
+        if (_window == null)
+            return;
+
+        _window.ProductsContainer.DisposeAllChildren();
+        _productCards.Clear();
 
         if (!_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer))
             return;
 
-        _window.OrderSearchView.ResultContainer.DisposeAllChildren();
+        var search = _window.SearchBar.Text.Trim();
+        var added = 0;
 
-        if (string.IsNullOrEmpty(filter))
-            return;
-
-        var state = State as RequisitionsBuiState;
-        for (var catIndex = 0; catIndex < computer.Categories.Count; catIndex++)
+        for (var categoryIndex = 0; categoryIndex < computer.Categories.Count; categoryIndex++)
         {
-            var entryCount = 0;
-            var category = computer.Categories[catIndex];
-            var categoryGroup = new RequisitionsOrderSearchGroup();
+            if (_selectedCategory != null && _selectedCategory != categoryIndex)
+                continue;
 
+            var category = computer.Categories[categoryIndex];
             for (var entryIndex = 0; entryIndex < category.Entries.Count; entryIndex++)
             {
                 var entry = category.Entries[entryIndex];
-                var itemName = entry.Name ?? _prototypes.Index<EntityPrototype>(entry.Crate).Name;
-
-                if (!itemName.ToLowerInvariant().Contains(filter.Trim().ToLowerInvariant()))
-                {
+                var display = GetDisplay(entry);
+                if (!MatchesSearch(display, search))
                     continue;
-                }
 
-                var order = new RequisitionsOrderButton();
-                var orderIndex = entryIndex;
-                var categoryIndex = catIndex;
-                order.Button.Text = itemName;
-                order.Button.OnPressed += _ => SendMessage(new RequisitionsBuyMsg(categoryIndex, orderIndex));
+                var key = new CartKey(categoryIndex, entryIndex);
+                var card = new RequisitionsProductCard
+                {
+                    CategoryIndex = categoryIndex,
+                    EntryIndex = entryIndex,
+                    UnitCost = entry.Cost,
+                    Cost = { Text = Loc.GetString("rmc-requisitions-card-cost", ("cost", entry.Cost)) },
+                    Icon = { Texture = display.Icon },
+                };
+                card.ProductName.SetMessage(FormattedMessage.FromUnformatted(display.Name), defaultColor: Color.White);
+                card.Description.SetMessage(FormattedMessage.FromUnformatted(display.Description));
 
-                order.SetCost(entry.Cost);
-                UpdateOrderButton(order, state);
-                categoryGroup.GroupItems.AddChild(order);
-                entryCount++;
+                card.AddButton.OnPressed += _ => AddToCart(key);
+                card.RemoveButton.OnPressed += _ => RemoveFromCart(key);
+
+                _productCards[key] = card;
+                UpdateProductCard(card, key);
+                _window.ProductsContainer.AddChild(card);
+                added++;
             }
+        }
 
-            if (entryCount < 1)
-                continue;
-
-            var categoryHeader = new FormattedMessage();
-            categoryHeader.AddMarkupOrThrow($"[bold]Request from: {category.Name}[/bold]");
-            categoryGroup.GroupLabel.SetMessage(categoryHeader);
-
-            _window.OrderSearchView.ResultContainer.AddChild(categoryGroup);
+        if (added == 0)
+        {
+            _window.ProductsContainer.AddChild(new Label
+            {
+                Text = Loc.GetString("rmc-requisitions-products-empty"),
+            });
         }
     }
 
-    private void UpdateOrderButton(RequisitionsOrderButton order, RequisitionsBuiState? state)
+    private ProductDisplay GetDisplay(RequisitionsEntry entry)
     {
-        order.Button.Disabled = state == null ||
-                                state.Balance < order.Cost ||
-                                state.Full;
+        _prototypes.TryIndex<EntityPrototype>(entry.Crate, out var prototype);
+
+        var name = prototype?.Name ?? entry.Crate.ToString();
+        if (!string.IsNullOrWhiteSpace(entry.Name))
+            name = entry.Name;
+        if (entry.NameLocId != null && Loc.TryGetString(entry.NameLocId, out var localizedName))
+            name = localizedName;
+
+        var description = prototype?.Description ?? string.Empty;
+        if (entry.DescriptionLocId != null && Loc.TryGetString(entry.DescriptionLocId, out var localizedDescription))
+            description = localizedDescription;
+        if (string.IsNullOrWhiteSpace(description))
+            description = Loc.GetString("rmc-requisitions-card-no-description");
+
+        var icon = prototype != null
+            ? _sprite.GetPrototypeIcon(prototype).GetFrame(RsiDirection.South, 0)
+            : null;
+
+        return new ProductDisplay(name, description, icon);
     }
+
+    private static bool MatchesSearch(ProductDisplay display, string search)
+    {
+        if (string.IsNullOrWhiteSpace(search))
+            return true;
+
+        return display.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase) ||
+               display.Description.Contains(search, StringComparison.CurrentCultureIgnoreCase);
+    }
+
+    private void AddToCart(CartKey key)
+    {
+        if (!TryGetEntry(key, out var entry))
+            return;
+
+        if (!CanAdd(entry.Cost))
+            return;
+
+        _cart[key] = GetCartAmount(key) + 1;
+        RefreshCart();
+        UpdateVisibleProductCards();
+    }
+
+    private void RemoveFromCart(CartKey key)
+    {
+        var amount = GetCartAmount(key);
+        if (amount <= 0)
+            return;
+
+        if (amount == 1)
+            _cart.Remove(key);
+        else
+            _cart[key] = amount - 1;
+
+        RefreshCart();
+        UpdateVisibleProductCards();
+    }
+
+    private bool CanAdd(int cost)
+    {
+        if (_state == null)
+            return false;
+
+        return GetCartTotal() + cost <= _state.Balance &&
+               GetCartAmount() + 1 <= GetRemainingCapacity();
+    }
+
+    private void RefreshCart()
+    {
+        if (_window == null)
+            return;
+
+        _window.CartContainer.DisposeAllChildren();
+
+        var search = _window.SearchBar.Text.Trim();
+        var scopedItems = 0;
+        var visibleItems = 0;
+        var items = new List<(CartKey Key, int Amount)>(_cart.Count);
+        foreach (var (key, amount) in _cart)
+        {
+            items.Add((key, amount));
+        }
+
+        items.Sort((a, b) =>
+        {
+            var categoryComparison = a.Key.Category.CompareTo(b.Key.Category);
+            return categoryComparison != 0
+                ? categoryComparison
+                : a.Key.Entry.CompareTo(b.Key.Entry);
+        });
+
+        foreach (var (key, amount) in items)
+        {
+            if (_selectedCategory != null && _selectedCategory != key.Category)
+                continue;
+
+            if (!TryGetEntry(key, out var entry))
+                continue;
+
+            scopedItems++;
+            var display = GetDisplay(entry);
+            if (!MatchesSearch(display, search))
+                continue;
+
+            visibleItems++;
+            var row = new RequisitionsCartRow
+            {
+                CategoryIndex = key.Category,
+                EntryIndex = key.Entry,
+                UnitCost = entry.Cost,
+                Quantity = { Text = amount.ToString() },
+                Cost = { Text = Loc.GetString("rmc-requisitions-cart-row-cost", ("cost", entry.Cost * amount)) },
+                Icon = { Texture = display.Icon },
+            };
+            row.ProductName.SetMessage(FormattedMessage.FromUnformatted(display.Name), defaultColor: Color.White);
+            row.Description.SetMessage(FormattedMessage.FromUnformatted(display.Description));
+
+            row.AddButton.OnPressed += _ => AddToCart(key);
+            row.RemoveButton.OnPressed += _ => RemoveFromCart(key);
+            row.AddButton.Disabled = !CanAdd(entry.Cost);
+
+            _window.CartContainer.AddChild(row);
+        }
+
+        var total = GetCartTotal();
+        var cartAmount = GetCartAmount();
+        var remainingCapacity = GetRemainingCapacity();
+
+        _window.CartTotalLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+            "rmc-requisitions-cart-total",
+            ("total", total))));
+
+        var status = string.Empty;
+        if (_cart.Count == 0)
+            status = Loc.GetString("rmc-requisitions-cart-empty");
+        else if (visibleItems == 0 && !string.IsNullOrWhiteSpace(search))
+            status = Loc.GetString("rmc-requisitions-cart-filter-empty");
+        else if (scopedItems == 0)
+            status = Loc.GetString("rmc-requisitions-cart-category-empty");
+        else if (_state != null && total > _state.Balance)
+            status = Loc.GetString("rmc-requisitions-cart-insufficient-funds");
+        else if (cartAmount > remainingCapacity)
+            status = Loc.GetString("rmc-requisitions-cart-insufficient-capacity");
+
+        _window.CartStatusLabel.SetMessage(FormattedMessage.FromUnformatted(status));
+
+        _window.ClearCartButton.Disabled = _cart.Count == 0;
+        _window.BuyButton.Disabled = _cart.Count == 0 ||
+                                     _state == null ||
+                                     total > _state.Balance ||
+                                     cartAmount > remainingCapacity;
+    }
+
+    private void PopulatePendingOrders()
+    {
+        if (_window == null)
+            return;
+
+        _window.PendingContainer.DisposeAllChildren();
+
+        if (_state == null || _state.PendingOrders.Count == 0)
+        {
+            _window.PendingStatusLabel.SetMessage(FormattedMessage.FromUnformatted(Loc.GetString("rmc-requisitions-pending-empty")));
+            return;
+        }
+
+        var search = _window.SearchBar.Text.Trim();
+        var visibleOrders = new List<(RequisitionsPendingOrder Order, int? Category, ProductDisplay Display)>();
+        foreach (var order in _state.PendingOrders)
+        {
+            var category = GetPendingOrderCategory(order.Entry);
+            if (_selectedCategory != null && category != _selectedCategory)
+                continue;
+
+            var display = GetDisplay(order.Entry);
+            if (!MatchesSearch(display, search))
+                continue;
+
+            visibleOrders.Add((order, category, display));
+        }
+
+        visibleOrders.Sort((a, b) =>
+        {
+            var categoryComparison = (a.Category ?? int.MaxValue).CompareTo(b.Category ?? int.MaxValue);
+            if (categoryComparison != 0)
+                return categoryComparison;
+
+            return string.Compare(a.Display.Name, b.Display.Name, StringComparison.CurrentCultureIgnoreCase);
+        });
+
+        foreach (var (order, _, display) in visibleOrders)
+        {
+            var card = new RequisitionsPendingOrderCard
+            {
+                Cost = { Text = Loc.GetString("rmc-requisitions-card-cost", ("cost", order.Entry.Cost)) },
+                Quantity = { Text = Loc.GetString("rmc-requisitions-pending-quantity", ("amount", order.Amount)) },
+                Icon = { Texture = display.Icon },
+            };
+            card.ProductName.SetMessage(FormattedMessage.FromUnformatted(display.Name), defaultColor: Color.White);
+            card.Description.SetMessage(FormattedMessage.FromUnformatted(display.Description));
+
+            _window.PendingContainer.AddChild(card);
+        }
+
+        var status = (visibleOrders.Count, string.IsNullOrWhiteSpace(search)) switch
+        {
+            (0, false) => Loc.GetString("rmc-requisitions-pending-filter-empty"),
+            (0, true) => Loc.GetString("rmc-requisitions-pending-category-empty"),
+            _ => string.Empty,
+        };
+        _window.PendingStatusLabel.SetMessage(FormattedMessage.FromUnformatted(status));
+    }
+
+    private void UpdateVisibleProductCards()
+    {
+        foreach (var (key, card) in _productCards)
+        {
+            UpdateProductCard(card, key);
+        }
+    }
+
+    private void UpdateProductCard(RequisitionsProductCard card, CartKey key)
+    {
+        var amount = GetCartAmount(key);
+        card.Quantity.Text = amount.ToString();
+        card.RemoveButton.Disabled = amount <= 0;
+        card.AddButton.Disabled = !TryGetEntry(key, out var entry) || !CanAdd(entry.Cost);
+    }
+
+    private void BuyCart()
+    {
+        if (_cart.Count == 0)
+            return;
+
+        var items = new List<RequisitionsCartItem>();
+        foreach (var (key, amount) in _cart)
+        {
+            if (amount > 0)
+                items.Add(new RequisitionsCartItem(key.Category, key.Entry, amount));
+        }
+
+        if (items.Count == 0)
+            return;
+
+        SendMessage(new RequisitionsBuyCartMsg(items));
+        _cart.Clear();
+        RefreshCart();
+        UpdateVisibleProductCards();
+    }
+
+    private int? GetPendingOrderCategory(RequisitionsEntry entry)
+    {
+        if (!_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer))
+            return null;
+
+        for (var categoryIndex = 0; categoryIndex < computer.Categories.Count; categoryIndex++)
+        {
+            var category = computer.Categories[categoryIndex];
+            foreach (var categoryEntry in category.Entries)
+            {
+                if (SamePendingEntry(categoryEntry, entry))
+                    return categoryIndex;
+            }
+        }
+
+        return null;
+    }
+
+    private static bool SamePendingEntry(RequisitionsEntry a, RequisitionsEntry b)
+    {
+        if (a.Crate != b.Crate ||
+            a.Cost != b.Cost ||
+            a.Name != b.Name ||
+            a.NameLocId != b.NameLocId ||
+            a.DescriptionLocId != b.DescriptionLocId ||
+            a.Entities.Count != b.Entities.Count)
+        {
+            return false;
+        }
+
+        for (var i = 0; i < a.Entities.Count; i++)
+        {
+            if (a.Entities[i] != b.Entities[i])
+                return false;
+        }
+
+        return true;
+    }
+
+    private bool TryGetEntry(CartKey key, out RequisitionsEntry entry)
+    {
+        entry = default!;
+
+        if (!_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer) ||
+            key.Category < 0 ||
+            key.Category >= computer.Categories.Count)
+        {
+            return false;
+        }
+
+        var category = computer.Categories[key.Category];
+        if (key.Entry < 0 || key.Entry >= category.Entries.Count)
+            return false;
+
+        entry = category.Entries[key.Entry];
+        return true;
+    }
+
+    private int GetCartAmount(CartKey key)
+    {
+        return _cart.GetValueOrDefault(key);
+    }
+
+    private int GetCartAmount()
+    {
+        var amount = 0;
+        foreach (var count in _cart.Values)
+        {
+            amount += count;
+        }
+
+        return amount;
+    }
+
+    private int GetCartTotal()
+    {
+        var total = 0;
+        foreach (var (key, amount) in _cart)
+        {
+            if (TryGetEntry(key, out var entry))
+                total += entry.Cost * amount;
+        }
+
+        return total;
+    }
+
+    private int GetRemainingCapacity()
+    {
+        if (_state == null)
+            return 0;
+
+        return Math.Max(0, _state.Capacity - _state.OrderCount);
+    }
+
+    private readonly record struct CartKey(int Category, int Entry);
+
+    private readonly record struct ProductDisplay(string Name, string Description, Robust.Client.Graphics.Texture? Icon);
 }

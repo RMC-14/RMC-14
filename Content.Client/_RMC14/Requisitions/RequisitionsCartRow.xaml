@@ -1,0 +1,51 @@
+<controls:RequisitionsCartRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Requisitions"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Orientation="Vertical"
+    HorizontalExpand="True">
+    <PanelContainer HorizontalExpand="True">
+        <BoxContainer Orientation="Horizontal" Margin="6" HorizontalExpand="True">
+            <TextureRect Name="Icon"
+                         Access="Public"
+                         SetSize="64 64"
+                         Stretch="KeepAspectCentered"
+                         RectClipContent="True" />
+            <Control MinWidth="8" />
+            <BoxContainer Orientation="Vertical"
+                          HorizontalExpand="True"
+                          VerticalAlignment="Top">
+                <RichTextLabel Name="ProductName"
+                               Access="Public"
+                               HorizontalExpand="True"
+                               VerticalAlignment="Top" />
+                <RichTextLabel Name="Description"
+                               Access="Public"
+                               HorizontalExpand="True"
+                               VerticalAlignment="Top" />
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                    <Label Name="Cost" Access="Public" />
+                    <Control HorizontalExpand="True" />
+                    <Button Name="RemoveButton"
+                            Access="Public"
+                            Text="-"
+                            ToolTip="{Loc rmc-requisitions-remove-tooltip}"
+                            StyleClasses="ButtonSquare"
+                            MinWidth="32" />
+                    <Label Name="Quantity"
+                           Access="Public"
+                           Text="0"
+                           Align="Center"
+                           MinWidth="32" />
+                    <Button Name="AddButton"
+                            Access="Public"
+                            Text="+"
+                            ToolTip="{Loc rmc-requisitions-add-tooltip}"
+                            StyleClasses="ButtonSquare"
+                            MinWidth="32" />
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+    <ui:BlueHorizontalSeparator />
+</controls:RequisitionsCartRow>
