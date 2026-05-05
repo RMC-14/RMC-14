@@ -1,16 +1,17 @@
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Paper;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.UniversalRecorder;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class UniversalRecorderComponent : Component
 {
     public const string TapeSlotId = "rmc_universal_recorder_tape";
 
-    [DataField("tapeSlot")]
+    [DataField]
     public ItemSlot TapeSlot = new();
 
     [DataField]
@@ -24,6 +25,9 @@ public sealed partial class UniversalRecorderComponent : Component
 
     [DataField]
     public TimeSpan PrintCooldown = TimeSpan.FromSeconds(30);
+
+    [DataField]
+    public TimeSpan PlaybackSilenceThreshold = TimeSpan.FromSeconds(14);
 
     [DataField]
     public SoundSpecifier PlaySound = new SoundPathSpecifier("/Audio/Items/taperecorder/taperecorder_play.ogg");

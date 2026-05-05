@@ -803,7 +803,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
         var nextEntry = tapeRuntime.Entries[runtime.PlaybackIndex];
         var delta = nextEntry.Timestamp - currentEntry.Timestamp;
-        if (delta > TimeSpan.FromSeconds(14))
+        if (delta > ent.Comp.PlaybackSilenceThreshold)
         {
             runtime.PendingSilenceSeconds = Math.Max(1, (int) Math.Round(delta.TotalSeconds));
             runtime.NextPlaybackAt = _timing.CurTime + TimeSpan.FromSeconds(1);
@@ -906,7 +906,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         }
 
         if (playSound)
-            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Items/taperecorder/tape_flip.ogg"), ent);
+            _audio.PlayPvs(ent.Comp.FlipSound, ent);
 
         if (popupUser != null)
             _popup.PopupEntity(Loc.GetString("rmc-universal-recorder-tape-popup-flip"), ent.Owner, popupUser.Value);

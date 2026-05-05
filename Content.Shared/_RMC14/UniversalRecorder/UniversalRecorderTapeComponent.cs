@@ -1,6 +1,9 @@
+using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
+
 namespace Content.Shared._RMC14.UniversalRecorder;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class UniversalRecorderTapeComponent : Component
 {
     [DataField]
@@ -11,4 +14,7 @@ public sealed partial class UniversalRecorderTapeComponent : Component
 
     [DataField]
     public string ScrewdriverQuality = "Screwing";
+
+    [DataField]
+    public SoundSpecifier FlipSound = new SoundPathSpecifier("/Audio/Items/taperecorder/tape_flip.ogg");
 }
