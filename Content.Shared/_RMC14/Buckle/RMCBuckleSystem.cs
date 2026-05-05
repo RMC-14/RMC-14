@@ -38,6 +38,7 @@ public sealed class RMCBuckleSystem : EntitySystem
         var active = EnsureComp<ActiveBuckleClimbingComponent>(args.Buckle);
         active.Strap = ent;
         Dirty(args.Buckle, active);
+        var test = "test";
     }
 
     private void OnBuckleClimbablePreventCollide(Entity<ActiveBuckleClimbingComponent> ent, ref PreventCollideEvent args)
