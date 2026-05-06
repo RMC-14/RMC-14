@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Linq;
 using Content.Client.Resources;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
@@ -8,7 +9,6 @@ using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Graphics.RSI;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -366,7 +366,11 @@ public sealed class RequisitionsBui : BoundUserInterface
                     EntryIndex = entryIndex,
                     UnitCost = entry.BlackMarket ? entry.BlackMarketCost : entry.Cost,
                     Cost = { Text = GetCostText(entry) },
-                    Icon = { Texture = display.Icon },
+                    Icon =
+                    {
+                        Textures = display.IconTextures,
+                        Modulate = display.IconModulate,
+                    },
                 };
                 card.ProductName.SetMessage(FormattedMessage.FromUnformatted(display.Name), defaultColor: Color.White);
                 card.Description.SetMessage(FormattedMessage.FromUnformatted(display.Description));
@@ -734,13 +738,42 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (string.IsNullOrWhiteSpace(description))
             description = Loc.GetString("rmc-requisitions-card-no-description");
 
-        var icon = entry.Icon != null
-            ? _sprite.Frame0(entry.Icon)
-            : prototype != null
-            ? _sprite.GetPrototypeIcon(prototype).GetFrame(RsiDirection.South, 0)
-            : null;
+        var icon = GetDisplayIcon(entry.Icon, prototype);
 
-        return new ProductDisplay(name, description, icon);
+        return new ProductDisplay(name, description, icon.Textures, icon.Modulate);
+    }
+
+    private DisplayIcon GetDisplayIcon(SpriteSpecifier? icon, EntityPrototype? fallbackPrototype)
+    {
+        if (icon is SpriteSpecifier.EntityPrototype entityIcon &&
+            _prototypes.TryIndex<EntityPrototype>(entityIcon.EntityPrototypeId, out var iconPrototype))
+        {
+            return GetPrototypeDisplayIcon(iconPrototype);
+        }
+
+        if (icon != null)
+            return new DisplayIcon(new List<Texture> { _sprite.Frame0(icon) }, Color.White);
+
+        if (fallbackPrototype != null)
+            return GetPrototypeDisplayIcon(fallbackPrototype);
+
+        return new DisplayIcon(new List<Texture>(), Color.White);
+    }
+
+    private DisplayIcon GetPrototypeDisplayIcon(EntityPrototype prototype)
+    {
+        var textures = _sprite.GetPrototypeTextures(prototype)
+            .Select(texture => texture.Default)
+            .ToList();
+
+        var modulate = Color.White;
+        if (prototype.TryGetComponent<SpriteComponent>("Sprite", out var sprite) &&
+            sprite.AllLayers.Any())
+        {
+            modulate = sprite.AllLayers.First().Color;
+        }
+
+        return new DisplayIcon(textures, modulate);
     }
 
     private static bool MatchesSearch(ProductDisplay display, string search)
@@ -844,7 +877,11 @@ public sealed class RequisitionsBui : BoundUserInterface
                 UnitCost = entry.BlackMarket ? entry.BlackMarketCost : entry.Cost,
                 Quantity = { Text = amount.ToString() },
                 Cost = { Text = GetLineCostText(entry, amount) },
-                Icon = { Texture = display.Icon },
+                Icon =
+                {
+                    Textures = display.IconTextures,
+                    Modulate = display.IconModulate,
+                },
             };
             row.ProductName.SetMessage(FormattedMessage.FromUnformatted(display.Name), defaultColor: Color.White);
             row.Description.SetMessage(FormattedMessage.FromUnformatted(display.Description));
@@ -933,7 +970,11 @@ public sealed class RequisitionsBui : BoundUserInterface
             {
                 Cost = { Text = GetCostText(order.Entry) },
                 Quantity = { Text = Loc.GetString("rmc-requisitions-pending-quantity", ("amount", order.Amount)) },
-                Icon = { Texture = display.Icon },
+                Icon =
+                {
+                    Textures = display.IconTextures,
+                    Modulate = display.IconModulate,
+                },
             };
             card.ProductName.SetMessage(FormattedMessage.FromUnformatted(display.Name), defaultColor: Color.White);
             card.Description.SetMessage(FormattedMessage.FromUnformatted(display.Description));
@@ -1199,5 +1240,7 @@ public sealed class RequisitionsBui : BoundUserInterface
 
     private readonly record struct CartKey(int Category, int Entry);
 
-    private readonly record struct ProductDisplay(string Name, string Description, Robust.Client.Graphics.Texture? Icon);
+    private readonly record struct DisplayIcon(List<Texture> Textures, Color Modulate);
+
+    private readonly record struct ProductDisplay(string Name, string Description, List<Texture> IconTextures, Color IconModulate);
 }

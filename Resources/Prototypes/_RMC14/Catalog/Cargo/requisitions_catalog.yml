@@ -365,30 +365,36 @@
       - cost: 3000
         crate: RMCCrateGrenadesHighExplosive
         icon:
-          entity: CMPacketGrenadeHighExplosiveFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: hedp_packet
       - cost: 4000
         crate: RMCCrateGrenadesIncendiary
         icon:
-          entity: RMCPacketGrenadeIncendiaryFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: hidp_packet
       - cost: 3000
         crate: RMCCrateGrenadesFrag
         icon:
-          entity: CMPacketGrenadeFragFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: hefa_packet
       # leaving this commented, as it is not parity, but we might want it in the future
       #- cost: 2000
       #  crate: RMCCrateGrenadesSmoke
       - cost: 3200
         crate: RMCCrateExplosiveWhitePhosphorusCompound
         icon:
-          entity: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: ccdp_packet
       - cost: 10800
         crate: RMCCrateExplosiveWhitePhosphorusCompoundBox
         icon:
-          entity: RMCBoxCCDP
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: d_nade_placeholder
       - cost: 4000
         crate: RMCCrateGrenadesFragOld
         icon:
-          entity: CMPacketGrenadeFragOldFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: m15_packet
       - cost: 3000
         crate: RMCCratePlasticExplosives
         icon:
@@ -400,47 +406,58 @@
       - cost: 10000
         crate: RMCCrateGrenadesHighExplosiveBox
         icon:
-          entity: RMCBoxHEDP
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: d_nade_placeholder
       - cost: 10000
         crate: RMCCrateGrenadesBoxHEFA
         icon:
-          entity: RMCBoxHEFA
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: d_nade_placeholder
       - cost: 10000
         crate: RMCCrateGrenadesAirburstFragBox
         icon:
-          entity: RMCBoxAGMF
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: d_nade_placeholder
       - cost: 10000
         crate: RMCCrateBoxAGMI
         icon:
-          entity: RMCBoxAGMI
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: d_nade_placeholder
       - cost: 4000
         crate: RMCCrateGrenadesAirburstFrag
         icon:
-          entity: RMCPacketGrenadeM74AGMFFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: agmf_packet
       - cost: 4000
         crate: RMCCrateGrenadesAirburstIncendiary
         icon:
-          entity: RMCPacketGrenadeM74AGMIFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: agmi_packet
       - cost: 3000
         crate: RMCCrateGrenadesAirburstSmoke
         icon:
-          entity: RMCPacketGrenadeM74AGMSFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: agms_packet
       - cost: 4000
         crate: RMCCrateGrenadesAirburstHornet
         icon:
-          entity: RMCPacketGrenadeM74AGMSHornetFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: hornet_packet
       - cost: 4000
         crate: RMCCrateGrenadesAirburstStarShell
         icon:
-          entity: RMCPacketGrenadeM74AGMSStarShellFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: starshell_packet
       - cost: 1000
         crate: RMCCrateGrenadesBatonSlug
         icon:
-          entity: RMCPacketGrenadeBatonSlugHIRRFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: baton_packet
       - cost: 3000
         crate: RMCCrateExplosiveClaymoreMine
         icon:
-          entity: RMCBoxClaymoreMineFilled
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: minebox
       - cost: 4000
         crate: RMCCrateExplosivesSurplus
     - name: rmc-requisitions-category-food
@@ -476,7 +493,8 @@
       - cost: 6000
         crate: RMCCrateGearPackFlareCAS
         icon:
-          entity: RMCPackFlareCAS
+          sprite: _RMC14/Objects/Storage/boxes.rsi
+          state: m89
       - cost: 2000
         crate: RMCCrateGearFulton
         icon:

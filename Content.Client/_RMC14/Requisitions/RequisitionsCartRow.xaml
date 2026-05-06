@@ -6,11 +6,11 @@
     HorizontalExpand="True">
     <PanelContainer HorizontalExpand="True">
         <BoxContainer Orientation="Horizontal" Margin="6" HorizontalExpand="True">
-            <TextureRect Name="Icon"
-                         Access="Public"
-                         SetSize="64 64"
-                         Stretch="KeepAspectCentered"
-                         RectClipContent="True" />
+            <LayeredTextureRect Name="Icon"
+                                Access="Public"
+                                SetSize="64 64"
+                                Stretch="KeepAspectCentered"
+                                RectClipContent="True" />
             <Control MinWidth="8" />
             <BoxContainer Orientation="Vertical"
                           HorizontalExpand="True"
