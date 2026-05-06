@@ -302,6 +302,11 @@
         box: CMGrenadeFragOld
         boxAmount: 3
         boxSlots: 3
+      - id: RMCBoxClaymoreMineFilled
+        name: M20 Claymore anti-personnel mine box
+        box: RMCExplosiveClaymoreMine
+        boxAmount: 5
+        boxSlots: 5
       - id: CMPacketGrenadeHighExplosiveFilled
         name: 30mm HEDP grenade packet
         box: CMGrenadeHighExplosive
@@ -559,8 +564,10 @@
 
 #      - name: Magazine Box (XM51 x 8)
 #        box: RMCMagazineShotgunXM51
-#      - name: Magazine Box (.458 SOCOM x 300) # TODO RMC14
-#        box: RMCBox458SOCOM
+      - id: RMCBoxBullets458
+        box: RMCBox458SOCOM
+        boxAmount: 3
+        boxSlots: 3
 #      - name: Magazine Box (M2C x 8)
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (M56B x 8)

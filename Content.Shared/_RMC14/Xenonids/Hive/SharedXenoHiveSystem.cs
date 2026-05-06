@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -9,12 +10,15 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
@@ -26,13 +30,16 @@ namespace Content.Shared._RMC14.Xenonids.Hive;
 public abstract class SharedXenoHiveSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -41,12 +48,17 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     private EntityQuery<HiveComponent> _query;
     private EntityQuery<HiveMemberComponent> _memberQuery;
 
+    private readonly HashSet<EntityUid> _contacting = new();
+
     public override void Initialize()
     {
         _query = GetEntityQuery<HiveComponent>();
         _memberQuery = GetEntityQuery<HiveMemberComponent>();
 
         SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
+
+        SubscribeLocalEvent<MarineComponent, StunnedEvent>(OnStunned);
+        SubscribeLocalEvent<MarineComponent, KnockedDownEvent>(OnStunned);
 
         SubscribeLocalEvent<HiveComponent, MapInitEvent>(OnMapInit);
 
@@ -55,6 +67,8 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         SubscribeLocalEvent<AutoAssignHiveComponent, ComponentStartup>(OnAutoAssignHiveAdded);
 
         SubscribeLocalEvent<HiveGunComponent, AmmoShotEvent>(OnHiveGunShot);
+
+        SubscribeLocalEvent<XenoStunnedPreventCollisionComponent, PreventCollideEvent>(OnStunnedPreventCollide);
     }
 
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
@@ -74,6 +88,21 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             Dirty(boost, evoOverride);
 
             EnsureComp<TimedDespawnComponent>(boost).Lifetime = 180;
+            break;
+        }
+    }
+
+    private void OnStunned<T>(Entity<MarineComponent> marine, ref T ev)
+    {
+        _contacting.Clear();
+        _physics.GetContactingEntities(marine.Owner, _contacting);
+
+        foreach (var contacting in _contacting)
+        {
+            if (!HasComp<XenoStunnedPreventCollisionComponent>(contacting))
+                continue;
+
+            _broadphase.RegenerateContacts(marine.Owner);
             break;
         }
     }
@@ -421,6 +450,27 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         {
             SetSameHive(ent.Owner, bullet);
         }
+    }
+
+    private void OnStunnedPreventCollide(Entity<XenoStunnedPreventCollisionComponent> ent, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!HasComp<StunnedComponent>(args.OtherEntity) &&
+            !HasComp<KnockedDownComponent>(args.OtherEntity))
+        {
+            return;
+        }
+
+        // This will make it so explosions and warrior punches do not throw someone through the door, for example
+        if (_pulling.GetPuller(args.OtherEntity) is not { } puller ||
+            !HasComp<XenoComponent>(puller))
+        {
+            return;
+        }
+
+        args.Cancelled = true;
     }
 
     public bool FromSameHiveOrAlly(Entity<HiveMemberComponent?> a, Entity<HiveMemberComponent?> b)
