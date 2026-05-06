@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Pulling;
 using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -8,7 +9,7 @@ namespace Content.Shared.Movement.Pulling.Components;
 /// Specifies an entity as being pullable by an entity with <see cref="PullerComponent"/>
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(Systems.PullingSystem))]
+[Access(typeof(Systems.PullingSystem), typeof(RMCPullingSystem))]
 public sealed partial class PullableComponent : Component
 {
     /// <summary>
@@ -28,14 +29,14 @@ public sealed partial class PullableComponent : Component
     /// <summary>
     /// If the physics component has FixedRotation should we keep it upon being pulled
     /// </summary>
-    [Access(typeof(Systems.PullingSystem), Other = AccessPermissions.ReadExecute)]
+    [Access(typeof(Systems.PullingSystem), typeof(RMCPullingSystem), Other = AccessPermissions.ReadExecute)]
     [ViewVariables(VVAccess.ReadWrite), DataField("fixedRotation")]
     public bool FixedRotationOnPull;
 
     /// <summary>
     /// What the pullable's fixedrotation was set to before being pulled.
     /// </summary>
-    [Access(typeof(Systems.PullingSystem), Other = AccessPermissions.ReadExecute)]
+    [Access(typeof(Systems.PullingSystem), typeof(RMCPullingSystem), Other = AccessPermissions.ReadExecute)]
     [AutoNetworkedField, DataField]
     public bool PrevFixedRotation;
 
