@@ -6,6 +6,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -31,11 +32,13 @@ public abstract class RMCHandsSystem : EntitySystem
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<GiveHandsComponent, MapInitEvent>(OnXenoHandsMapInit);
         SubscribeLocalEvent<HandsComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
+        SubscribeLocalEvent<HandsComponent, AfterXenoChangedPrototypeEvent>(OnAfterXenoChangedPrototype);
         SubscribeLocalEvent<WhitelistPickupByComponent, GettingPickedUpAttemptEvent>(OnWhitelistGettingPickedUpAttempt);
         SubscribeLocalEvent<WhitelistPickupComponent, PickupAttemptEvent>(OnWhitelistPickUpAttempt);
         SubscribeLocalEvent<DropHeldOnIncapacitateComponent, MobStateChangedEvent>(OnDropMobStateChanged);
@@ -94,6 +97,28 @@ public abstract class RMCHandsSystem : EntitySystem
             // (Honestly, removing the hands component should _probably_ cause held items to drop in and of itself,
             // but that would be upstream code's responsibility and we can handle it here just fine.)
             _hands.RemoveHands(xeno.AsNullable());
+        }
+    }
+
+    private void OnAfterXenoChangedPrototype(Entity<HandsComponent> xeno, ref AfterXenoChangedPrototypeEvent args)
+    {
+        // drop and re-pickup items if possible. number of hands required and hand whitelists might change between prototypes
+        foreach (var handId in xeno.Comp.SortedHands)
+        {
+            var heldItem = _hands.GetHeldItem(xeno.AsNullable(), handId);
+
+            if (heldItem == null || TryComp(heldItem, out VirtualItemComponent? _))
+            {
+                // ignore virtual items, they will be dropped when their real item is dropped
+                continue;
+            }
+
+            if(heldItem != null && _hands.TryDrop(xeno.AsNullable(), handId, doDropInteraction: false))
+            {
+                // successfully dropped. remove matching virtual items and then try picking up the item again
+                _virtualItem.DeleteInHandsMatching(xeno, heldItem.Value);
+                _hands.TryPickup(xeno.Owner, heldItem.Value, handId, animate: false, handsComp: xeno.Comp);
+            }
         }
     }
 
