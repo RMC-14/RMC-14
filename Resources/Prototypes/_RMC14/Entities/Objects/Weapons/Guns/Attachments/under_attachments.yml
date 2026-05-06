@@ -298,7 +298,7 @@
     activatePopupText: attachable-popup-switch-to-generic
     deactivatePopupText: attachable-popup-switch-from-generic
     activateSound:
-      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14: different sound
       params:
         volume: -2
     actionName: Switch to the mini flamethrower.
@@ -346,7 +346,7 @@
     activatePopupText: attachable-popup-switch-to-generic
     deactivatePopupText: attachable-popup-switch-from-generic
     activateSound:
-      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14: different sound
       params:
         volume: -2
     actionName: Switch to the VESG nozzle.

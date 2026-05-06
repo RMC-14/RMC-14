@@ -652,7 +652,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         {
             maxRange = distance;
         }
-        _projectile.SetMaxRange(ball, maxRange - 1);
+        _projectile.SetMaxRange(ball, maxRange);
 
         _gun.Shoot(nozzle, gun, ball, fromCoordinates, toCoordinates, out _, user, false);
     }

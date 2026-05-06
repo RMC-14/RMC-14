@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Maths;
 using Content.Shared.FixedPoint;
 using Content.Shared.Weapons.Ranged;
 using Robust.Shared.GameStates;
@@ -13,7 +14,7 @@ public sealed partial class RMCFlamerNozzleComponent : Component, IShootable
     public FixedPoint2 CostPer = FixedPoint2.New(3);
 
     [DataField, AutoNetworkedField]
-    public float MaxRange = 6;
+    public float MaxRange = RMCMathExtensions.CircleAreaFromSquareAbilityRange(6);
 
     [DataField, AutoNetworkedField]
     public EntProtoId Projectile = "RMCBulletSentryFireProjectile";
