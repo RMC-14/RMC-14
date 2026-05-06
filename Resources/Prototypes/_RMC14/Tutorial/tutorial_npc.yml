@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: RMCBaseMobSpeciesOrganic
-  id: RMCTutorialNPC
+  id: RMCBaseTutorialNPC
   name: SgtMaj. Urist R. McMarine
   description: A Senior Enlisted Advisor tasked with training new recruits to the United Nations Marine Corps.
   suffix: RMC14
@@ -69,7 +69,7 @@
 
 
 - type: entity
-  parent: RMCTutorialNPC
+  parent: RMCBaseTutorialNPC
   id: RMCTutorialNPC2
   suffix: RMC14 2
   components:
@@ -79,11 +79,9 @@
     - "Haul your ass to the automated equipment vendor and get your uniform on. Click on the vending machine, and then click the 'Standard Marine Apparel'."
     - "This will give you your uniform, including undersuit, boots, gloves, helmet, and headset - and you will wear them at ALL TIMES."
     - "Take note of the colors on your helmet, they denote your squad."
-    lineDelay: 5
-    resetDelay: 0
 
 - type: entity
-  parent: RMCTutorialNPC
+  parent: RMCBaseTutorialNPC
   id: RMCTutorialNPC3
   suffix: RMC14 3
   components:
