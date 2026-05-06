@@ -5,40 +5,40 @@
     Title="{Loc rmc-requisitions-window-title}"
     SetSize="900 650"
     MinSize="780 560">
-    <BoxContainer Orientation="Vertical" Margin="10">
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-            <Button Name="PlatformButton"
-                    Access="Public"
-                    Text="{Loc rmc-requisitions-platform-raise}"
-                    StyleClasses="ButtonSquare"
-                    MinWidth="190" />
-            <Control MinWidth="10" />
+    <BoxContainer Orientation="Horizontal" Margin="10" HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer Name="CategoryPanel"
+                        Access="Public"
+                        MinWidth="180"
+                        VerticalExpand="True">
+            <BoxContainer Orientation="Vertical"
+                          HorizontalExpand="True"
+                          VerticalExpand="True">
+                <Button Name="PlatformButton"
+                        Access="Public"
+                        Text="{Loc rmc-requisitions-platform-raise}"
+                        StyleClasses="ButtonSquare"
+                        HorizontalExpand="True" />
+                <Control MinHeight="8" />
+                <RichTextLabel Name="BudgetLabel" Access="Public" />
+                <RichTextLabel Name="CapacityLabel" Access="Public" />
+                <Control MinHeight="8" />
+                <Label Text="{Loc rmc-requisitions-categories-title}" StyleClasses="LabelKeyText" />
+                <Control MinHeight="4" />
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
+                    <BoxContainer Name="CategoriesContainer"
+                                  Access="Public"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True" />
+                </ScrollContainer>
+            </BoxContainer>
+        </PanelContainer>
+        <Control MinWidth="14" />
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
             <LineEdit Name="SearchBar"
                       Access="Public"
                       PlaceHolder="{Loc rmc-requisitions-search-placeholder}"
                       HorizontalExpand="True" />
-        </BoxContainer>
-        <Control MinHeight="8" />
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
-            <PanelContainer Name="CategoryPanel"
-                            Access="Public"
-                            MinWidth="180"
-                            VerticalExpand="True">
-                <BoxContainer Orientation="Vertical" Margin="6">
-                    <RichTextLabel Name="BudgetLabel" Access="Public" />
-                    <RichTextLabel Name="CapacityLabel" Access="Public" />
-                    <Control MinHeight="8" />
-                    <Label Text="{Loc rmc-requisitions-categories-title}" StyleClasses="LabelKeyText" />
-                    <Control MinHeight="4" />
-                    <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
-                        <BoxContainer Name="CategoriesContainer"
-                                      Access="Public"
-                                      Orientation="Vertical"
-                                      HorizontalExpand="True" />
-                    </ScrollContainer>
-                </BoxContainer>
-            </PanelContainer>
-            <Control MinWidth="8" />
+            <Control MinHeight="8" />
             <TabContainer Name="ShopTabs"
                           Access="Public"
                           HorizontalExpand="True"
