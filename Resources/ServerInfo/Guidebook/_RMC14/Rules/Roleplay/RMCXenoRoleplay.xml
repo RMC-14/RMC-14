@@ -7,15 +7,10 @@
   - All xenonid knowledge is immediately considered shared knowledge.\nThis means that when any living xenonid that witnesses information, this is considered information shared to all other xenonid players. This includes ghosted players that later become a xenonid.
 
   ## Xenonids VS Hosts
-  - Xenonids are a hostile, invasive species driven by instincts to defend and grow the hive.\nDo not ignore or act passively to potential hosts, unless it is for the preservation of your own life.
-  - They are not friendly, and may not pretend to be friendly to potential hosts, or negotiate with them.\nThe exception to this are synthetics, which xenonids do not care for and can be ignored if safe to do so, and speak to them. However, under no circumstances will the xenonids decide against attacking or capturing potential hosts.
-
-  ## Xenonids VS Survivors
-
-  Not all maps and spawn locations can be accounted for by the rules, be reasonable.
-
-  - These rules between survivors and xenonids are foremost intended to ensure survivors do not make intentional efforts kill many xenonids at the start of the round, assuming said xenonids also are making reasonable efforts to avoid being found by a survivor.\nThis does not however provide leeway for xenonids to stalk or search for survivors, or remain near gear, without risking being killed.
-  - It is recommended to hide from survivors when the round starts, in places where survivors will not typically attempt to access, such as deep parts of the map without any equipment, protected by several layers of resin walls, doors, and traps, so you can avoid them with your vision before they can approach you.\n[bold]You are not protected by any rules should you die from ignoring this recommendation, and the survivor will not be held at fault.[/bold]
+  - Xenonids are a hostile, invasive species driven by instincts to defend and grow the hive.
+  \nDo not ignore or act passively to potential hosts, unless it is for the preservation of your own life.
+  - They are not friendly, and may not pretend to be friendly to potential hosts, or negotiate with them.
+  \nThe exception to this are synthetics, which xenonids do not care for and if they wish, may ignore them if safe to do so, and speak to them. However, under no circumstances will the xenonids decide against attacking or capturing potential hosts.
 
   ## Killing
   (Reports of this from marines are less likely to be accurate.)
@@ -42,11 +37,13 @@
 
   - Xenonids may not build with the [bold]intent[/bold] to hide [bold]revivable[/bold] player corpses.\nThis means to intentionally build in a way that is to hide a corpse that is both revivable and reasonably still able to be recovered. Placing a resin structure directly on top of a corpse does not break this rule, so long as the body is still visible and not surrounded by resin (for example, 2x2 blocks of resin with the body in the center can make it impossible to see). If a body is where defenses would reasonably be built or rebuilt, this is also not against the rule.
   - If you are a xenonid aboard the warship before hijack, [color=#ff0000]do not attack newly spawned players in spawn areas, let them have a chance to gear up before you attack them![/color] Avoiding the spawn area unless the players are using them as cover will be enough.
-  - Xenonids may not encase objective structures/objects.\nYou can build a surrounding room that contains it. A room at minimum should have a tile of walkable space around the structure, with the spirit of the rule being that you are building defenses that includes the structure behind them, and not boxing it in resin.\nExamples of objectives include but are not limited to sensors, communications, APCs
+  - Xenonids may not encase revivable corpses, or objective structures/objects, but may build a surrounding room that contains it similar to regular defenses.
+  \n\nA room at minimum should have a tile of walkable space around the subject, with the spirit of the rule being that you are building defenses that includes the subject behind them, and not entombing it in resin.\nExamples of objectives include but are not limited to sensors, communications, APCs
 
   [bold]NOT against rules:[/bold]
 
   - Xenonids may build in a way that disrupts a character. An example of this is a xenonid that remotely builds a wall on top of a living character to interrupt an action or movement.
+  - A single wall does not typically obscure a corpse- a resin structure may sometimes need to be built on top of a corpse naturally for proper defenses to be made.
 
 
 </Document>
