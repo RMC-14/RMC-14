@@ -11,9 +11,14 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chasm;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
+using Content.Shared.FixedPoint;
+using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
+using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
@@ -36,6 +41,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly ChasmSystem _chasm = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -212,7 +218,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         if (nextMode == null)
             return;
 
-        if (nextMode == Lowering)
+        if (nextMode == Lowering && !CanLowerLivingCargo(computer))
         {
             var mask = (int) (CollisionGroup.MobLayer | CollisionGroup.MobMask);
             foreach (var entity in _physics.GetEntitiesIntersectingBody(elevator, mask, false))
@@ -226,6 +232,13 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         comp.Busy = true;
         SetMode(elevator, Preparing, nextMode);
         Dirty(elevator);
+    }
+
+    private bool CanLowerLivingCargo(Entity<RequisitionsComputerComponent> computer)
+    {
+        return computer.Comp.Account is { } accountUid &&
+            TryComp(accountUid, out RequisitionsAccountComponent? account) &&
+            IsBlackMarketEnabled((accountUid, account));
     }
 
     private Entity<RequisitionsAccountComponent> GetAccount()
@@ -454,7 +467,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
                     soldAny = true;
                 }
 
-                if (IsBlackMarketEnabled(account.Comp))
+                if (IsBlackMarketEnabled(account))
                 {
                     var sale = GetBlackMarketSaleValue(entity, account.Comp, true, blackMarketVisited);
                     blackMarketRewards += sale.Value;
@@ -465,7 +478,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
                 }
             }
 
-            QueueDel(entity);
+            HandleSoldEntity(entity, elevator);
         }
 
         if (rewards > 0)
@@ -481,6 +494,26 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             Dirty(account);
 
         return soldAny || rewards > 0 || blackMarketChanged;
+    }
+
+    private void HandleSoldEntity(EntityUid entity, EntityUid elevator)
+    {
+        if (!HasComp<HumanoidAppearanceComponent>(entity))
+        {
+            QueueDel(entity);
+            return;
+        }
+
+        EnsureComp<CargoSellBlacklistComponent>(entity);
+        _damageable.TryChangeDamage(entity, GetElevatorCrushDamage(), true, origin: elevator);
+        _popup.PopupEntity(Loc.GetString("rmc-requisitions-elevator-crush", ("target", entity)), entity, PopupType.SmallCaution);
+    }
+
+    private static DamageSpecifier GetElevatorCrushDamage()
+    {
+        var damage = new DamageSpecifier();
+        damage.DamageDict["Blunt"] = FixedPoint2.New(60);
+        return damage;
     }
 
     private void GetCrateWeight(Entity<RequisitionsAccountComponent> account, Dictionary<EntProtoId, float> crates, out Entity<RequisitionsComputerComponent> computer)

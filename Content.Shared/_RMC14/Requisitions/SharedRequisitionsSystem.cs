@@ -129,7 +129,6 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         var account = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account);
         var balance = account?.Balance ?? 0;
         var blackMarketBalance = account?.BlackMarketBalance ?? 0;
-        var blackMarketHeat = account?.BlackMarketHeat ?? 0;
         var blackMarketStatus = account?.BlackMarketStatus ?? RequisitionsBlackMarketStatus.Available;
         var orderCount = elevator?.Comp.Orders.Count ?? 0;
         var capacity = elevator != null ? GetElevatorCapacity(elevator.Value) : 0;
@@ -147,7 +146,6 @@ public abstract class SharedRequisitionsSystem : EntitySystem
             capacity,
             computer.Comp.BlackMarketUnlocked,
             blackMarketBalance,
-            blackMarketHeat,
             blackMarketStatus,
             pendingOrders);
         _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);

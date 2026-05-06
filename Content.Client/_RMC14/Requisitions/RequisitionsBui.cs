@@ -1,9 +1,11 @@
 using System.Numerics;
+using Content.Client.Resources;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Graphics.RSI;
@@ -11,6 +13,7 @@ using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
+using static Robust.Client.UserInterface.Control;
 
 namespace Content.Client._RMC14.Requisitions;
 
@@ -19,9 +22,21 @@ public sealed class RequisitionsBui : BoundUserInterface
 {
     private const float CategoryMinWidth = 180f;
     private const float CategoryPanelPadding = 12f;
+    private static readonly ResPath CmbLogoPath = new("/Textures/_RMC14/Interface/logo_cmb.png");
+    private static readonly string[] MendozaDialogueLocIds =
+    [
+        "rmc-requisitions-black-market-mendoza-random-1",
+        "rmc-requisitions-black-market-mendoza-random-2",
+        "rmc-requisitions-black-market-mendoza-random-3",
+        "rmc-requisitions-black-market-mendoza-random-4",
+        "rmc-requisitions-black-market-mendoza-random-5",
+        "rmc-requisitions-black-market-mendoza-random-6",
+        "rmc-requisitions-black-market-mendoza-random-7",
+    ];
 
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly Dictionary<CartKey, int> _cart = new();
@@ -33,6 +48,10 @@ public sealed class RequisitionsBui : BoundUserInterface
     private int? _selectedCategory;
     private int? _selectedBlackMarketCategory;
     private bool _blackMarketMode;
+    private bool _mendozaIntroSeen;
+    private bool _mendozaBriefingExpanded;
+    private bool _mendozaDialogueRolled;
+    private string? _mendozaDialogue;
 
     private int? SelectedCategory
     {
@@ -90,8 +109,15 @@ public sealed class RequisitionsBui : BoundUserInterface
 
     private void RefreshShop()
     {
-        if (_state is { BlackMarketUnlocked: false })
+        if (_state is
+            {
+                BlackMarketUnlocked: false,
+                BlackMarketStatus: not RequisitionsBlackMarketStatus.LockedOut,
+            })
+        {
             _blackMarketMode = false;
+            _mendozaDialogueRolled = false;
+        }
 
         if (_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer) &&
             SelectedCategory is { } selectedCategory &&
@@ -171,15 +197,9 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (_window == null || _state == null)
             return;
 
-        var balance = Loc.GetString("rmc-requisitions-balance", ("balance", _state.Balance));
-        if (_blackMarketMode)
-        {
-            balance += "\n" + Loc.GetString(
-                "rmc-requisitions-black-market-balance",
-                ("wy", _state.BlackMarketBalance));
-        }
-
-        _window.BudgetLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(balance));
+        _window.BudgetLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+            "rmc-requisitions-balance",
+            ("balance", _state.Balance))));
 
         _window.CapacityLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
             "rmc-requisitions-capacity",
@@ -194,8 +214,6 @@ public sealed class RequisitionsBui : BoundUserInterface
 
         _window.CategoriesContainer.DisposeAllChildren();
 
-        _entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer);
-
         var buttons = new List<Button>();
         if (_blackMarketMode)
         {
@@ -203,45 +221,53 @@ public sealed class RequisitionsBui : BoundUserInterface
             returnButton.OnPressed += _ =>
             {
                 _blackMarketMode = false;
+                _selectedBlackMarketCategory = null;
+                _mendozaDialogueRolled = false;
+                ClearSearch();
                 RefreshShop();
             };
             buttons.Add(returnButton);
+
+            buttons.Add(CreateBlackMarketButton(true));
         }
-
-        var allButton = CreateCategoryButton(Loc.GetString("rmc-requisitions-category-all"), SelectedCategory == null);
-        allButton.OnPressed += _ =>
+        else
         {
-            SelectedCategory = null;
-            RefreshShop();
-        };
-        buttons.Add(allButton);
-
-        if (computer != null)
-        {
-            var categories = GetCurrentCategories(computer);
-            for (var i = 0; i < categories.Count; i++)
+            var allButton = CreateCategoryButton(Loc.GetString("rmc-requisitions-category-all"), SelectedCategory == null);
+            allButton.OnPressed += _ =>
             {
-                var categoryIndex = i;
-                var button = CreateCategoryButton(Loc.GetString(categories[i].Name), SelectedCategory == categoryIndex);
-                button.OnPressed += _ =>
-                {
-                    SelectedCategory = categoryIndex;
-                    RefreshShop();
-                };
-                buttons.Add(button);
-            }
-        }
-
-        if (!_blackMarketMode && _state is { BlackMarketUnlocked: true })
-        {
-            var blackMarketButton = CreateBlackMarketButton(_blackMarketMode);
-            blackMarketButton.OnPressed += _ =>
-            {
-                _blackMarketMode = true;
-                _selectedBlackMarketCategory = null;
+                SelectedCategory = null;
                 RefreshShop();
             };
-            buttons.Add(blackMarketButton);
+            buttons.Add(allButton);
+
+            if (_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer))
+            {
+                for (var i = 0; i < computer.Categories.Count; i++)
+                {
+                    var categoryIndex = i;
+                    var button = CreateCategoryButton(Loc.GetString(computer.Categories[i].Name), SelectedCategory == categoryIndex);
+                    button.OnPressed += _ =>
+                    {
+                        SelectedCategory = categoryIndex;
+                        RefreshShop();
+                    };
+                    buttons.Add(button);
+                }
+            }
+
+            if (_state is { BlackMarketUnlocked: true } or { BlackMarketStatus: RequisitionsBlackMarketStatus.LockedOut })
+            {
+                var blackMarketButton = CreateBlackMarketButton(false);
+                blackMarketButton.OnPressed += _ =>
+                {
+                    _blackMarketMode = true;
+                    _selectedBlackMarketCategory = null;
+                    _mendozaDialogueRolled = false;
+                    ClearSearch();
+                    RefreshShop();
+                };
+                buttons.Add(blackMarketButton);
+            }
         }
 
         var buttonWidth = CategoryMinWidth;
@@ -294,17 +320,30 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (!_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer))
             return;
 
-        if (_blackMarketMode && !CanUseBlackMarket())
+        var search = _window.SearchBar.Text.Trim();
+        if (_blackMarketMode)
         {
-            _window.ProductsContainer.AddChild(new Label
+            if (!CanUseBlackMarket())
             {
-                Text = GetBlackMarketStatusText(),
-            });
-            return;
+                PopulateBlackMarketStatus();
+                return;
+            }
+
+            if (SelectedCategory == null && string.IsNullOrWhiteSpace(search))
+            {
+                PopulateBlackMarketHome(computer);
+                return;
+            }
         }
 
         var categories = GetCurrentCategories(computer);
-        var search = _window.SearchBar.Text.Trim();
+        if (_blackMarketMode &&
+            SelectedCategory is { } selectedCategory &&
+            selectedCategory < categories.Count)
+        {
+            PopulateBlackMarketCategoryHeader(categories[selectedCategory]);
+        }
+
         var added = 0;
 
         for (var categoryIndex = 0; categoryIndex < categories.Count; categoryIndex++)
@@ -349,6 +388,336 @@ public sealed class RequisitionsBui : BoundUserInterface
                 Text = Loc.GetString("rmc-requisitions-products-empty"),
             });
         }
+    }
+
+    private void PopulateBlackMarketStatus()
+    {
+        if (_state?.BlackMarketStatus == RequisitionsBlackMarketStatus.LockedOut)
+        {
+            PopulateBlackMarketSeizureNotice();
+            return;
+        }
+
+        if (_state?.BlackMarketStatus == RequisitionsBlackMarketStatus.MendozaDead)
+        {
+            AddProductsLabel(Loc.GetString("rmc-requisitions-black-market-mendoza-dead-dialogue"));
+            return;
+        }
+
+        AddProductsLabel(GetBlackMarketStatusText());
+    }
+
+    private void PopulateBlackMarketHome(RequisitionsComputerComponent computer)
+    {
+        if (_window == null || _state == null)
+            return;
+
+        var panel = CreateBlackMarketSurface();
+        var contents = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            Margin = new Thickness(8),
+        };
+
+        var header = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            HorizontalExpand = true,
+            Margin = new Thickness(0, 0, 0, 8),
+        };
+
+        header.AddChild(new Label
+        {
+            Text = Loc.GetString("rmc-requisitions-black-market-contact"),
+            FontColorOverride = Color.White,
+            HorizontalExpand = true,
+        });
+
+        header.AddChild(CreateBlackMarketBalanceLabel());
+        contents.AddChild(header);
+
+        var showBriefingButton = !_mendozaIntroSeen || _mendozaBriefingExpanded;
+        var dialogueContents = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            Margin = new Thickness(8),
+        };
+        if (PopulateBlackMarketDialogue(dialogueContents))
+        {
+            var dialoguePanel = CreateBlackMarketSurface(Color.FromHex("#4a2f34"));
+            dialoguePanel.Margin = new Thickness(0, 0, 0, 8);
+            dialoguePanel.AddChild(dialogueContents);
+            contents.AddChild(dialoguePanel);
+        }
+
+        if (showBriefingButton)
+            contents.AddChild(CreateMendozaBriefingButton());
+
+        contents.AddChild(new Label
+        {
+            Text = Loc.GetString("rmc-requisitions-black-market-categories-title"),
+            FontColorOverride = Color.FromHex("#c6a46f"),
+            Margin = new Thickness(0, 0, 0, 4),
+        });
+        PopulateBlackMarketCategoryButtons(contents, computer.BlackMarketCategories);
+
+        panel.AddChild(contents);
+        _window.ProductsContainer.AddChild(panel);
+    }
+
+    private bool PopulateBlackMarketDialogue(BoxContainer container)
+    {
+        if (_mendozaBriefingExpanded)
+        {
+            PopulateMendozaFullBriefing(container);
+            return true;
+        }
+
+        if (!_mendozaIntroSeen)
+        {
+            AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-intro-1"));
+            AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-intro-2"));
+            AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-instructions"), Color.White);
+            _mendozaIntroSeen = true;
+            return true;
+        }
+
+        if (!_mendozaDialogueRolled)
+        {
+            _mendozaDialogueRolled = true;
+            _mendozaDialogue = Random.Shared.Next(100) < 30
+                ? MendozaDialogueLocIds[Random.Shared.Next(MendozaDialogueLocIds.Length)]
+                : null;
+        }
+
+        if (_mendozaDialogue == null)
+            return false;
+
+        AddProductsLabel(container, Loc.GetString(_mendozaDialogue));
+        return true;
+    }
+
+    private static void PopulateMendozaFullBriefing(BoxContainer container)
+    {
+        AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-intro-1"));
+        AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-intro-2"));
+        AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-intro-3"));
+        AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-intro-4"));
+        AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-intro-5"));
+        AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-instructions"), Color.White);
+    }
+
+    private Button CreateMendozaBriefingButton()
+    {
+        var button = CreateCategoryButton(Loc.GetString(_mendozaBriefingExpanded
+            ? "rmc-requisitions-black-market-briefing-hide"
+            : "rmc-requisitions-black-market-briefing-show"), false);
+        button.HorizontalExpand = false;
+        button.MinWidth = 120;
+        button.Margin = new Thickness(0, 0, 0, 8);
+        button.OnPressed += _ =>
+        {
+            _mendozaBriefingExpanded = !_mendozaBriefingExpanded;
+            _mendozaDialogueRolled = false;
+            RefreshShop();
+        };
+
+        return button;
+    }
+
+    private void PopulateBlackMarketCategoryHeader(RequisitionsCategory category)
+    {
+        if (_window == null)
+            return;
+
+        var header = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            HorizontalExpand = true,
+            Margin = new Thickness(0, 0, 0, 6),
+        };
+
+        var backButton = CreateBlackMarketButton(false);
+        backButton.Text = Loc.GetString("rmc-requisitions-black-market-home");
+        backButton.MinWidth = 120;
+        backButton.HorizontalExpand = false;
+        backButton.OnPressed += _ =>
+        {
+            _selectedBlackMarketCategory = null;
+            _mendozaDialogueRolled = false;
+            ClearSearch();
+            RefreshShop();
+        };
+        header.AddChild(backButton);
+
+        var title = new RichTextLabel
+        {
+            HorizontalExpand = true,
+            Margin = new Thickness(8, 4, 0, 0),
+        };
+        title.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+            "rmc-requisitions-products-header",
+            ("category", Loc.GetString(category.Name)))));
+        header.AddChild(title);
+
+        header.AddChild(CreateBlackMarketBalanceLabel());
+
+        _window.ProductsContainer.AddChild(header);
+    }
+
+    private RichTextLabel CreateBlackMarketBalanceLabel()
+    {
+        var balance = new RichTextLabel
+        {
+            HorizontalAlignment = HAlignment.Right,
+        };
+        balance.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+            "rmc-requisitions-black-market-balance",
+            ("wy", _state?.BlackMarketBalance ?? 0))));
+
+        return balance;
+    }
+
+    private void PopulateBlackMarketCategoryButtons(BoxContainer contents, List<RequisitionsCategory> categories)
+    {
+        if (categories.Count == 0)
+        {
+            contents.AddChild(new Label
+            {
+                Text = Loc.GetString("rmc-requisitions-black-market-no-categories"),
+            });
+            return;
+        }
+
+        for (var i = 0; i < categories.Count; i += 2)
+        {
+            var row = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                HorizontalExpand = true,
+                Margin = new Thickness(0, 2),
+            };
+
+            AddBlackMarketCategoryButton(row, categories, i);
+            if (i + 1 < categories.Count)
+                AddBlackMarketCategoryButton(row, categories, i + 1);
+            else
+                row.AddChild(new Control { HorizontalExpand = true });
+
+            contents.AddChild(row);
+        }
+    }
+
+    private void AddBlackMarketCategoryButton(BoxContainer row, List<RequisitionsCategory> categories, int categoryIndex)
+    {
+        var button = CreateCategoryButton(Loc.GetString(categories[categoryIndex].Name), false);
+        button.HorizontalExpand = true;
+        button.Margin = new Thickness(2, 0);
+        button.OnPressed += _ =>
+        {
+            _selectedBlackMarketCategory = categoryIndex;
+            _mendozaDialogueRolled = false;
+            ClearSearch();
+            RefreshShop();
+        };
+        row.AddChild(button);
+    }
+
+    private static PanelContainer CreateBlackMarketSurface(Color? borderColor = null)
+    {
+        return new PanelContainer
+        {
+            HorizontalExpand = true,
+            PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#17151a"),
+                BorderColor = borderColor ?? Color.FromHex("#66333b"),
+                BorderThickness = new Thickness(1),
+            },
+        };
+    }
+
+    private void PopulateBlackMarketSeizureNotice()
+    {
+        if (_window == null)
+            return;
+
+        var panel = new PanelContainer
+        {
+            HorizontalExpand = true,
+            PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#1b1b21"),
+                BorderColor = Color.FromHex("#5c637a"),
+                BorderThickness = new Thickness(1),
+            },
+        };
+
+        var notice = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            Margin = new Thickness(8),
+        };
+
+        notice.AddChild(CreateNoticeLabel(Loc.GetString("rmc-requisitions-black-market-seizure-title"), Color.White));
+        notice.AddChild(new TextureRect
+        {
+            Texture = _resourceCache.GetTexture(CmbLogoPath),
+            SetWidth = 175,
+            SetHeight = 175,
+            Stretch = TextureRect.StretchMode.KeepAspectCentered,
+            HorizontalAlignment = HAlignment.Center,
+            Margin = new Thickness(0, 0, 0, 8),
+        });
+
+        notice.AddChild(CreateNoticeLabel(Loc.GetString("rmc-requisitions-black-market-seizure-unauthorized"), Color.White));
+        notice.AddChild(CreateNoticeLabel(Loc.GetString("rmc-requisitions-black-market-seizure-investigation")));
+        notice.AddChild(CreateNoticeLabel(Loc.GetString("rmc-requisitions-black-market-seizure-thanks")));
+
+        panel.AddChild(notice);
+        _window.ProductsContainer.AddChild(panel);
+    }
+
+    private static Label CreateNoticeLabel(string text, Color? color = null)
+    {
+        return new Label
+        {
+            Text = text,
+            FontColorOverride = color ?? Color.LightGray,
+            HorizontalAlignment = HAlignment.Center,
+            Margin = new Thickness(0, 2),
+        };
+    }
+
+    private void AddProductsLabel(string text, Color? color = null)
+    {
+        if (_window == null)
+            return;
+
+        _window.ProductsContainer.AddChild(CreateProductsLabel(text, color));
+    }
+
+    private static void AddProductsLabel(BoxContainer container, string text, Color? color = null)
+    {
+        container.AddChild(CreateProductsLabel(text, color));
+    }
+
+    private static RichTextLabel CreateProductsLabel(string text, Color? color = null)
+    {
+        var label = new RichTextLabel();
+        label.SetMessage(FormattedMessage.FromUnformatted(text), defaultColor: color ?? Color.LightGray);
+        return label;
+    }
+
+    private void ClearSearch()
+    {
+        if (_window == null || string.IsNullOrEmpty(_window.SearchBar.Text))
+            return;
+
+        _window.SearchBar.Text = string.Empty;
     }
 
     private ProductDisplay GetDisplay(RequisitionsEntry entry)
@@ -456,7 +825,7 @@ public sealed class RequisitionsBui : BoundUserInterface
 
         foreach (var (key, amount) in items)
         {
-            if (SelectedCategory != null && SelectedCategory != key.Category)
+            if (!_blackMarketMode && SelectedCategory != null && SelectedCategory != key.Category)
                 continue;
 
             if (!TryGetEntry(key, out var entry))
@@ -649,7 +1018,7 @@ public sealed class RequisitionsBui : BoundUserInterface
             if (!entry.BlackMarket)
                 return false;
 
-            return SelectedCategory == null || category == SelectedCategory;
+            return true;
         }
 
         if (SelectedCategory == null)

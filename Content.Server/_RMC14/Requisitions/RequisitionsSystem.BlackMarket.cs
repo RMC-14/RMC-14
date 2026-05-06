@@ -1,6 +1,8 @@
+using Content.Server.Cargo.Systems;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared.Cargo.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
@@ -10,16 +12,36 @@ using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Robust.Shared.Containers;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Requisitions;
 
 public sealed partial class RequisitionsSystem
 {
+    private static readonly (TimeSpan Delay, SoundSpecifier Sound)[] MendozaDeathSounds =
+    [
+        (TimeSpan.FromSeconds(0.5), new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_growl1.ogg")),
+        (TimeSpan.FromSeconds(1), new SoundPathSpecifier("/Audio/_RMC14/Voice/Human/male_scream_2.ogg")),
+        (TimeSpan.FromSeconds(2), new SoundCollectionSpecifier("RCMXenoClaw")),
+        (TimeSpan.FromSeconds(2.5), new SoundCollectionSpecifier("RCMXenoClaw")),
+        (TimeSpan.FromSeconds(3), new SoundPathSpecifier("/Audio/_RMC14/Voice/Human/male_scream_3.ogg")),
+        (TimeSpan.FromSeconds(4), new SoundCollectionSpecifier("RMCTacticalShotgunShoot")),
+        (TimeSpan.FromSeconds(5), new SoundCollectionSpecifier("RMCTacticalShotgunShoot")),
+        (TimeSpan.FromSeconds(6), new SoundPathSpecifier("/Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1911.ogg")),
+        (TimeSpan.FromSeconds(6.5), new SoundPathSpecifier("/Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1911.ogg")),
+        (TimeSpan.FromSeconds(8.5), new SoundPathSpecifier("/Audio/_RMC14/Voice/Human/male_scream_4.ogg")),
+        (TimeSpan.FromSeconds(9), new SoundPathSpecifier("/Audio/_RMC14/Voice/Human/male_scream_5.ogg")),
+        (TimeSpan.FromSeconds(10), new SoundCollectionSpecifier("XenoBite")),
+        (TimeSpan.FromSeconds(11), new SoundPathSpecifier("/Audio/_RMC14/Handling/click_2.ogg")),
+    ];
+
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly PricingSystem _pricing = default!;
 
     private void InitializeBlackMarket()
     {
@@ -129,7 +151,7 @@ public sealed partial class RequisitionsSystem
         Dirty(elevator);
 
         if (oldHeat < 100 && account.BlackMarketHeat >= 100)
-            BlackMarketInvestigation(actor, account.BlackMarketHeat);
+            BlackMarketInvestigation(accountUid, actor, account.BlackMarketHeat);
 
         SendUIStateAll();
         _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(actor):actor} bought {totalAmount} black market crate(s) for WY${totalBlackMarketCost} and ${totalCost}");
@@ -137,20 +159,32 @@ public sealed partial class RequisitionsSystem
 
     private void AddBlackMarketHeat(RequisitionsAccountComponent account, int heat)
     {
-        if (heat <= 0)
+        if (heat == 0)
             return;
 
-        var adjusted = Math.Max(1, (int) MathF.Round(heat * _random.NextFloat(0.75f, 1.25f)));
+        var adjusted = (int) MathF.Round(heat * _random.NextFloat(0.75f, 1.25f));
+        if (adjusted == 0)
+            adjusted = Math.Sign(heat);
+
         account.BlackMarketHeat = Math.Clamp(account.BlackMarketHeat + adjusted, 0, 100);
     }
 
-    private void BlackMarketInvestigation(EntityUid actor, int heat)
+    private void BlackMarketInvestigation(EntityUid account, EntityUid actor, int heat)
     {
+        var ev = new RMCBlackMarketInvestigationEvent(actor, heat);
+        RaiseLocalEvent(account, ev);
         _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(actor):actor} pushed black market heat to {heat}/100. Investigation hook fired.");
     }
 
     private void OnBlackMarketInteractUsing(Entity<RequisitionsComputerComponent> computer, ref InteractUsingEvent args)
     {
+        if (HasComp<CashComponent>(args.Used))
+        {
+            args.Handled = true;
+            TryInsertBlackMarketCash(computer, args.User, args.Used);
+            return;
+        }
+
         if (TryComp(args.Used, out RMCBlackMarketTradebandDeviceComponent? tradeband))
         {
             args.Handled = true;
@@ -198,6 +232,33 @@ public sealed partial class RequisitionsSystem
         var doAfter = CreateBlackMarketHackDoAfter(args.User, device.ProbeDelay, new RMCBlackMarketConsoleHackProbeDoAfterEvent(), computer, args.Used);
         if (_doAfter.TryStartDoAfter(doAfter))
             _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-hack-start", ("target", computer.Owner)), computer, args.User);
+    }
+
+    private void TryInsertBlackMarketCash(Entity<RequisitionsComputerComponent> computer, EntityUid user, EntityUid cash)
+    {
+        if (!computer.Comp.BlackMarketUnlocked ||
+            computer.Comp.Account is not { } accountUid ||
+            !TryComp(accountUid, out RequisitionsAccountComponent? account) ||
+            account.BlackMarketStatus != RequisitionsBlackMarketStatus.Available)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-cash-blocked", ("cash", cash)), computer, user);
+            return;
+        }
+
+        var price = (int) _pricing.GetPrice(cash);
+        if (price <= 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-cash-blocked", ("cash", cash)), computer, user);
+            return;
+        }
+
+        account.BlackMarketBalance = Math.Min(int.MaxValue, account.BlackMarketBalance + price);
+        Dirty(accountUid, account);
+
+        _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(user):user} fed {ToPrettyString(cash):cash} into the black market for WY${price}");
+        QueueDel(cash);
+        SendUIStateAll();
+        _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-cash-insert", ("cash", cash)), computer, user);
     }
 
     private void OnBlackMarketHackProbe(Entity<RequisitionsComputerComponent> computer, ref RMCBlackMarketConsoleHackProbeDoAfterEvent args)
@@ -415,16 +476,19 @@ public sealed partial class RequisitionsSystem
         return RMCBlackMarketScannerValueVisual.White;
     }
 
-    private bool IsBlackMarketEnabled(RequisitionsAccountComponent account)
+    private bool IsBlackMarketEnabled(Entity<RequisitionsAccountComponent> account)
     {
-        if (account.BlackMarketStatus != RequisitionsBlackMarketStatus.Available)
+        if (account.Comp.BlackMarketStatus != RequisitionsBlackMarketStatus.Available)
             return false;
 
         var query = EntityQueryEnumerator<RequisitionsComputerComponent>();
         while (query.MoveNext(out _, out var computer))
         {
-            if (computer.BlackMarketUnlocked)
+            if (computer.Account == account.Owner &&
+                computer.BlackMarketUnlocked)
+            {
                 return true;
+            }
         }
 
         return false;
@@ -540,7 +604,40 @@ public sealed partial class RequisitionsSystem
         Dirty(account);
 
         _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(sold):entity} was sold alive through the black market and Mendoza was killed.");
+        PlayMendozaDeathSounds(GetBlackMarketFeedbackSource(account, sold));
         SendUIFeedback(Loc.GetString("rmc-requisitions-black-market-mendoza-dead-message"));
+    }
+
+    private EntityUid GetBlackMarketFeedbackSource(Entity<RequisitionsAccountComponent> account, EntityUid fallback)
+    {
+        EntityUid? first = null;
+        var query = EntityQueryEnumerator<RequisitionsComputerComponent>();
+        while (query.MoveNext(out var uid, out var computer))
+        {
+            if (computer.Account != account.Owner)
+                continue;
+
+            if (computer.IsLastInteracted)
+                return uid;
+
+            first ??= uid;
+        }
+
+        return first ?? fallback;
+    }
+
+    private void PlayMendozaDeathSounds(EntityUid source)
+    {
+        foreach (var (delay, sound) in MendozaDeathSounds)
+        {
+            Timer.Spawn(delay, () =>
+            {
+                if (TerminatingOrDeleted(source))
+                    return;
+
+                _audio.PlayPvs(sound, source);
+            });
+        }
     }
 
     private readonly record struct BlackMarketSaleResult(int Value, bool KillsMendoza);

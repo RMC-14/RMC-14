@@ -20,7 +20,6 @@ public sealed class RequisitionsBuiState : BoundUserInterfaceState
     public int Capacity;
     public bool BlackMarketUnlocked;
     public int BlackMarketBalance;
-    public int BlackMarketHeat;
     public RequisitionsBlackMarketStatus BlackMarketStatus;
     public List<RequisitionsPendingOrder> PendingOrders;
 
@@ -33,7 +32,6 @@ public sealed class RequisitionsBuiState : BoundUserInterfaceState
         int capacity,
         bool blackMarketUnlocked,
         int blackMarketBalance,
-        int blackMarketHeat,
         RequisitionsBlackMarketStatus blackMarketStatus,
         List<RequisitionsPendingOrder> pendingOrders)
     {
@@ -45,7 +43,6 @@ public sealed class RequisitionsBuiState : BoundUserInterfaceState
         Capacity = capacity;
         BlackMarketUnlocked = blackMarketUnlocked;
         BlackMarketBalance = blackMarketBalance;
-        BlackMarketHeat = blackMarketHeat;
         BlackMarketStatus = blackMarketStatus;
         PendingOrders = pendingOrders;
     }
