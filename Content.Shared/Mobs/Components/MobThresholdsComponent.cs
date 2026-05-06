@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
@@ -10,7 +9,7 @@ namespace Content.Shared.Mobs.Components;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(MobThresholdSystem))]
-public sealed partial class MobThresholdsComponent : Component, IComponentDebug
+public sealed partial class MobThresholdsComponent : Component
 {
     [DataField("thresholds", required: true)]
     public SortedDictionary<FixedPoint2, MobState> Thresholds = new();
@@ -54,19 +53,6 @@ public sealed partial class MobThresholdsComponent : Component, IComponentDebug
     /// 
     [DataField("displayDamageInAlert")]
     public bool DisplayDamageInAlert = false;
-
-    public string GetDebugString()
-    {
-        var thresholdStrings = Thresholds.Select(item => $"{item.Key}: {item.Value}");
-        var alertStrings = StateAlertDict.OrderBy(item => (int)item.Key).Select(item => $"{item.Key}: {item.Value}");
-        return $"""
-            TriggersAlerts: {TriggersAlerts}
-            Thresholds:
-              {string.Join("\r\n  ", thresholdStrings)}
-            StateAlertDict:
-              {string.Join("\r\n  ", alertStrings)}
-            """;
-    }
 }
 
 [Serializable, NetSerializable]
