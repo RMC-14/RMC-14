@@ -1,5 +1,7 @@
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Emplacements;
+using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared.CombatMode;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Utility;
 
@@ -7,6 +9,23 @@ namespace Content.Shared._RMC14.CombatMode;
 
 public sealed class RMCCombatModeSystem : EntitySystem
 {
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<CombatModeComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
+    }
+
+    private void OnXenoChangingPrototype(Entity<CombatModeComponent> entity, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<CombatModeComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is CombatModeComponent { } newComponent)
+        {
+            // we have combat mode and we will continue to have it. just don't do anything in this case.
+            args.AdditionalExclusions.Add(compName);
+        }
+    }
+
     public SpriteSpecifier.Rsi? GetCrosshair(Entity<WieldedCrosshairComponent?, WieldableComponent?> crosshair)
     {
         // Require the held item to be wielded (this keeps existing behavior).
