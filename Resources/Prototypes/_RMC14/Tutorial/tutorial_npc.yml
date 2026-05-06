@@ -1,0 +1,98 @@
+﻿- type: entity
+  parent: RMCBaseMobSpeciesOrganic
+  id: RMCTutorialNPC
+  name: SgtMaj. Urist R. McMarine
+  description: A Senior Enlisted Advisor tasked with training new recruits to the United Nations Marine Corps.
+  suffix: RMC14
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearTutorialNPC ]
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-synthetic
+  - type: Physics
+    bodyType: Static
+  - type: StatusEffects
+    allowed: []
+  - type: Fixtures
+    fixtures:
+      tutorialTrigger:
+        shape:
+          !type:PhysShapeCircle
+          radius: 3
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        hard: false
+  - type: RMCTutorialNPC
+    removeComponents:
+    - type: CanEnterCryostorage
+    - type: CommendationReceiver
+    - type: Hunger
+    - type: Infectable
+    - type: Marine
+    - type: MarineMapTracked
+    - type: MindContainer
+    - type: NewPlayerLabel
+    - type: Perishable
+    - type: RMCRevivable
+    - type: SSDIndicator
+    - type: TacticalMapTracked
+    - type: Thirst
+    - type: Damageable
+    - type: CMSurgeryTarget
+    - type: RMCDisarmable
+    - type: Infectable
+    - type: Tackleable
+    - type: XenoNestable
+    - type: Devourable
+    - type: EmoteCooldown
+    - type: Strippable
+    factions:
+    - UNMC
+    voicelines:
+    - "Rise and shine, soldier! Get up and get tactical!"
+    - "You've just woken up, so you're hungry. Head to the food vendor, dispense two meals from the machine and get them down your neck. If you have complaints about the food, you can address them to someone who gives a damn!"
+    - "You can't bring those trays with you, so leave them on a nearby table or throw them into the disposals. God help you if I catch you throwing them anywhere else!"
+    lineDelay: 3
+    resetDelay: 8
+
+
+- type: startingGear
+  id: RMCGearTutorialNPC
+  equipment:
+    jumpsuit: CMJumpsuitBO
+    shoes: CMBootsBrownFilled
+    head: CMHeadCapDrill
+    id: CMIDCardSeniorEnlistedAdvisor
+    ears: RMCHeadsetSEA
+
+
+- type: entity
+  parent: RMCTutorialNPC
+  id: RMCTutorialNPC2
+  suffix: RMC14 2
+  components:
+  - type: RMCTutorialNPC
+    voicelines:
+    - "MARINE! You cannot fight in your shorts! Get dressed! DOUBLE TIME!!"
+    - "Haul your ass to the automated equipment vendor and get your uniform on. Click on the vending machine, and then click the 'Standard Marine Apparel'."
+    - "This will give you your uniform, including undersuit, boots, gloves, helmet, and headset - and you will wear them at ALL TIMES."
+    - "Take note of the colors on your helmet, they denote your squad."
+    lineDelay: 5
+    resetDelay: 0
+
+- type: entity
+  parent: RMCTutorialNPC
+  id: RMCTutorialNPC3
+  suffix: RMC14 3
+  components:
+  - type: RMCTutorialNPC
+    voicelines:
+    - "You now have your choice of equipment. You will only be dispensed one item per category (two for pouches) so choose carefully. Anything marked in Green is recommended for your role."
+    - "Grab yourself some light or medium armor, an M276 Ammo Load Rig, some first aid pouches, and a gas mask or coif if you so desire."
+    - "You have 45 points to spend on extra equipment, such as grenades, tools, or special ammo! Each item has its own point cost and some items are better value than others."
+    - "For now, grab some extended or armor-piercing magazines for the M54C and store them in your belt."
+    autoLine: false
+    lineDelay: 1
+    resetDelay: 0
