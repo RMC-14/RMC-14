@@ -41,7 +41,15 @@ public sealed partial class RequisitionsAccountComponent : Component
 
     [DataField]
     [Access(typeof(SharedRequisitionsSystem), typeof(ScalingSystem))]
-    public RequisitionsBlackMarketStatus BlackMarketStatus;
+    public bool BlackMarketHeatDisabled;
+
+    [DataField]
+    [Access(typeof(SharedRequisitionsSystem), typeof(ScalingSystem))]
+    public bool BlackMarketLockedOut;
+
+    [DataField]
+    [Access(typeof(SharedRequisitionsSystem), typeof(ScalingSystem))]
+    public bool BlackMarketMendozaDead;
 
     [DataField]
     [Access(typeof(SharedRequisitionsSystem), typeof(ScalingSystem))]

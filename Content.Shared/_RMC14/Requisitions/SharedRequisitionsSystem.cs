@@ -129,7 +129,7 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         var account = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account);
         var balance = account?.Balance ?? 0;
         var blackMarketBalance = account?.BlackMarketBalance ?? 0;
-        var blackMarketStatus = account?.BlackMarketStatus ?? RequisitionsBlackMarketStatus.Available;
+        var blackMarketStatus = GetBlackMarketStatus(account);
         var orderCount = elevator?.Comp.Orders.Count ?? 0;
         var capacity = elevator != null ? GetElevatorCapacity(elevator.Value) : 0;
         var full = elevator != null && orderCount >= capacity;
@@ -149,6 +149,25 @@ public abstract class SharedRequisitionsSystem : EntitySystem
             blackMarketStatus,
             pendingOrders);
         _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);
+    }
+
+    protected static RequisitionsBlackMarketStatus GetBlackMarketStatus(RequisitionsAccountComponent? account)
+    {
+        if (account == null)
+            return RequisitionsBlackMarketStatus.Available;
+
+        if (account.BlackMarketLockedOut)
+            return RequisitionsBlackMarketStatus.LockedOut;
+
+        if (account.BlackMarketMendozaDead)
+            return RequisitionsBlackMarketStatus.MendozaDead;
+
+        return RequisitionsBlackMarketStatus.Available;
+    }
+
+    protected static bool CanUseBlackMarket(RequisitionsAccountComponent account)
+    {
+        return GetBlackMarketStatus(account) == RequisitionsBlackMarketStatus.Available;
     }
 
     private static List<RequisitionsPendingOrder> GetPendingOrders(List<RequisitionsEntry> orders)

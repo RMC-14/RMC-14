@@ -130,3 +130,10 @@
   - type: Stack
     stackType: Dollar
     count: 1000
+
+- type: entity
+  parent: RMCSpaceCash1000
+  id: RMCSpaceCash1000Counterfeit
+  suffix: Counterfeit
+  components:
+  - type: RMCBlackMarketCounterfeitCash

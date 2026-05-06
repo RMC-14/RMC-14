@@ -69,6 +69,9 @@
     pocket2: CMClipboard # TODO RMC14 notepad
   inhand:
   - RMCBriefcasePaperPen # TODO RMC14 secure briefcase
+  storage:
+    back:
+    - RMCSpaceCash1000Counterfeit
 
 - type: playTimeTracker
   id: RMCJobCorporateLegalSupervisor

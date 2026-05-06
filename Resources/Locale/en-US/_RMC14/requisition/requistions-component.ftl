@@ -100,6 +100,7 @@ rmc-requisitions-black-market-mendoza-random-6 = You know... don't tell anyone, 
 rmc-requisitions-black-market-mendoza-random-7 = If you see any, er.. 'elite' equipment, be sure to throw it down here. I know a few people that'd offer quite the amount of money for a UNMC commander's gun, or pet. Even the armor is worth a fortune. Don't kill yourself doin' it, though. Hell, any kind of wildlife too, actually! Anythin' that isn't a replicant animal is worth a truly ridiculous sum back on Terra, I'll give ya quite the amount of points for 'em. As long as it isn't plannin' on killing me.
 rmc-requisitions-black-market-cash-insert = You find a small horizontal slot at the bottom of the console. You feed {$cash} into it.
 rmc-requisitions-black-market-cash-blocked = You find a small horizontal slot at the bottom of the console. You try to feed {$cash} into it, but it's seemingly blocked off from the inside.
+rmc-requisitions-black-market-cash-counterfeit = You find a small horizontal slot at the bottom of the console. You try to feed {$cash} into it, but the irregular tradeband rejects it.
 rmc-requisitions-black-market-hack-already = The console is already tuned to an irregular tradeband.
 rmc-requisitions-black-market-hack-unavailable = The irregular tradeband refuses the handshake.
 rmc-requisitions-black-market-hack-no-skill = You have no idea what you're doing.

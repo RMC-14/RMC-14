@@ -236,9 +236,14 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
     private bool CanLowerLivingCargo(Entity<RequisitionsComputerComponent> computer)
     {
-        return computer.Comp.Account is { } accountUid &&
-            TryComp(accountUid, out RequisitionsAccountComponent? account) &&
-            IsBlackMarketEnabled((accountUid, account));
+        if (computer.Comp.Account is not { } accountUid ||
+            !TryComp(accountUid, out RequisitionsAccountComponent? account))
+        {
+            return false;
+        }
+
+        //disables the ASRS live-organism safety while any linked tradeband is tuned to the black market.
+        return HasBlackMarketTradebandEnabled((accountUid, account));
     }
 
     private Entity<RequisitionsAccountComponent> GetAccount()
@@ -383,16 +388,17 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             int remainingDeliveries = GetElevatorCapacity(elevator);
             foreach (var order in comp.Orders)
             {
-                var crate = SpawnAtPosition(order.Crate, coordinates.Offset(new Vector2(xOffset, yOffset)));
+                var deliveredOrder = GetBlackMarketDeliveryOrder(order);
+                var crate = SpawnAtPosition(deliveredOrder.Crate, coordinates.Offset(new Vector2(xOffset, yOffset)));
                 remainingDeliveries--;
 
-                foreach (var prototype in order.Entities)
+                foreach (var prototype in deliveredOrder.Entities)
                 {
                     var entity = Spawn(prototype, MapCoordinates.Nullspace);
                     _entityStorage.Insert(entity, crate);
                 }
 
-                if (order.BlackMarket)
+                if (deliveredOrder.BlackMarket)
                     MarkBlackMarketUnsellableRecursive(crate);
                 else
                     PrintInvoice(crate, coordinates, PaperRequisitionInvoice);
@@ -409,6 +415,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             }
 
             comp.Orders.Clear();
+            SpawnPendingMendozaDeathAftermath(elevator, coordinates);
 
             var query = EntityQueryEnumerator<RequisitionsCustomDeliveryComponent>();
 
@@ -474,7 +481,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
                     blackMarketChanged |= sale.Value > 0 || sale.KillsMendoza;
 
                     if (sale.KillsMendoza)
-                        KillMendoza(account, entity);
+                        KillMendoza(account, entity, elevator);
                 }
             }
 
