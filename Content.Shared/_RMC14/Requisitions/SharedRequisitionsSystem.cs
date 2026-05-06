@@ -100,12 +100,16 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         UpdateRailing(railing);
     }
 
-    public void ChangeBudget(int amount)
+    public void ChangeBudget(int amount, RequisitionsBudgetAccount account = RequisitionsBudgetAccount.Cargo)
     {
         var accountQuery = EntityQueryEnumerator<RequisitionsAccountComponent>();
         while (accountQuery.MoveNext(out var uid, out var comp))
         {
-            comp.Balance += amount;
+            if (account == RequisitionsBudgetAccount.Cargo)
+                comp.Balance += amount;
+            else if (account == RequisitionsBudgetAccount.BlackMarket)
+                comp.BlackMarketBalance += amount;
+
             Dirty(uid, comp);
         }
 
