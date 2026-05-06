@@ -7,3 +7,282 @@
   - type: StorageFill
     contents:
     - id: RMCBlackMarketScanner
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAK4047
+  name: AK-4047 pulse assault rifle crate
+  description: Includes an AK-4047 pulse assault rifle and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleAK4047
+    - id: RMCMagazineRifleAK4047
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketM16
+  name: M16 rifle crate
+  description: Includes an M16 rifle and four magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM16
+    - id: RMCMagazineRifleM16
+      amount: 4
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAR10
+  name: AR10 rifle crate
+  description: Includes an AR10 rifle and four magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleAR10
+    - id: RMCMagazineRifleAR10
+      amount: 4
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMAR30
+  name: MAR-30 battle carbine crate
+  description: Includes a MAR-30 battle carbine and five MAR magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleMAR30
+    - id: RMCMagazineRifleMAR40
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketHuntingRifle
+  name: Basira-Armstrong bolt-action hunting rifle crate
+  description: Includes a Basira-Armstrong bolt-action hunting rifle and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponBoltActionRifle
+    - id: RMCMagazineRifleHunting
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketCustomShotgun
+  name: damaged custom-built shotgun crate
+  description: Includes a damaged custom-built shotgun and one slug shell box.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunCustomBuiltDamaged
+    - id: RMCBoxShotgunSlugs
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketFP9000
+  name: FN FP9000 submachine gun crate
+  description: Includes an FN FP9000 submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGFP9000
+    - id: RMCMagazineSMGFP9000
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketP90
+  name: FN P90 submachine gun crate
+  description: Includes an FN P90 submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGP90
+    - id: RMCMagazineSMGP90
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMP27
+  name: MP-27 submachine gun crate
+  description: Includes an MP-27 submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGMP27
+    - id: RMCMagazineSMGMP27
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMP5
+  name: MP5 submachine gun crate
+  description: Includes an MP5 submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSMGMP5
+    - id: CMMagazineSMGMP5
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketUZI
+  name: UZI submachine gun crate
+  description: Includes a UZI submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGUZI
+    - id: RMCMagazineSMGUZI
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMAC15
+  name: MAC-15 submachine gun crate
+  description: Includes a MAC-15 submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSMGMAC15
+    - id: RMCMagazineSMGMAC15
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketType19
+  name: Type-19 submachine gun crate
+  description: Includes a Type-19 submachine gun, two drum magazines, and three stick magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGType19
+    - id: RMCMagazineSMGType19Drum
+      amount: 2
+    - id: RMCMagazineSMGType19
+      amount: 3
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketB92FS
+  name: Beretta pistol crate
+  description: Includes a Beretta 92FS pistol and six magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolB92FS
+    - id: RMCMagazinePistolB92FS
+      amount: 6
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDesertEagle
+  name: Desert Eagle crate
+  description: Includes a Desert Eagle and four magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolDesertEagle
+    - id: RMCMagazinePistolDesertEagle
+      amount: 4
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketType73
+  name: Type 73 pistol crate
+  description: Includes a Type 73 pistol and six magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolT73
+    - id: RMCMagazinePistolT73
+      amount: 6
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketKT42
+  name: KT-42 Automag pistol crate
+  description: Includes a KT-42 Automag pistol and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolKT42
+    - id: RMCMagazinePistolKT42
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketHoldout
+  name: holdout pistol crate
+  description: Includes a holdout pistol and seven magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolHoldout
+    - id: RMCMagazinePistolHoldout
+      amount: 7
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketType64
+  name: Type 64 submachine gun crate
+  description: Includes a Type 64 submachine gun and four magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGType64
+    - id: RMCMagazineSMGType64
+      amount: 4
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSpearhead
+  name: CMB Spearhead revolver crate
+  description: Includes a CMB Spearhead revolver and five speed loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSpearhead
+    - id: RMCSpeedLoader357
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSmithWesson
+  name: Smith and Wesson revolver crate
+  description: Includes a Smith and Wesson model 37 revolver and six speed loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSAndWModel37
+    - id: RMCSpeedLoaderSAndW38
+      amount: 6
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketZHNK72
+  name: ZHNK-72 revolver crate
+  description: Includes a ZHNK-72 revolver and six speed loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverZHNK72
+    - id: RMCSpeedLoaderZHNK72
+      amount: 6
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketR4T
+  name: R4T hunting rifle case
+  description: Includes an R4T lever-action rifle, scouting stock, two 45-70 ammo boxes, and one 45-70 blank box.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleR4T
+    - id: RMCAttachmentR4TStock
+    - id: RMCBox4570
+      amount: 2
+    - id: RMCBox4570Training

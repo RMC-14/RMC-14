@@ -68,6 +68,19 @@
     - null
 
 - type: entity
+  parent: RMCWeaponRevolver38Magnum
+  id: RMCWeaponRevolverSAndWModel37
+  name: "S&W .38 model 37 revolver"
+  description: A lean .38 made by Smith & Wesson. A timeless classic, from antiquity to the future. This specific model is known to be wildly inaccurate, yet extremely lethal.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCWeaponRevolver38Magnum
+    - RMCWeaponRevolverSAndWModel37
+
+- type: entity
   id: RMCBaseSpeedLoader38
   name: "Speed loader (.38)"
   parent: BaseItem
@@ -114,6 +127,11 @@
   - type: Appearance
 
 - type: entity
+  parent: RMCSpeedLoader38
+  id: RMCSpeedLoaderSAndW38
+  name: "S&W speed loader (.38)"
+
+- type: entity
   id: RMCCartridgeRevolver38
   name: cartridge (.38)
   parent: CMCartridgePistolBase
@@ -147,6 +165,9 @@
 
 - type: Tag
   id: RMCWeaponRevolver38Magnum
+
+- type: Tag
+  id: RMCWeaponRevolverSAndWModel37
 
 - type: Tag
   id: RMCSpeedLoader38

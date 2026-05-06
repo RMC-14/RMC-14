@@ -1,0 +1,192 @@
+- type: entity
+  parent: RMCBaseWeaponRifleNoMagazineProvider
+  id: RMCWeaponRifleR4T
+  name: R4T lever-action rifle
+  description: This lever-action was designed for exotic hunting and small scout operations in harsh environments such as the jungle or particularly windy deserts, as such its internal mechanisms are simple yet robust.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Unsorted/r4t/classic.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Unsorted/r4t/classic.rsi
+  - type: Gun
+    fireRate: 1
+    shotsPerBurst: 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_lever_action_fire.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 5
+    scatterWielded: 5
+    scatterUnwielded: 16
+    baseFireRate: 1
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.1
+    accuracyMultiplierUnwielded: 0.65
+  - type: PumpAction
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Pump/gun_lever_action_lever.ogg
+  - type: BallisticAmmoProvider
+    cycleable: true
+    whitelist:
+      tags:
+      - RMCCartridge4570
+    capacity: 9
+    proto: RMCCartridge4570
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_lever_action_reload.ogg
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: GunStacks
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      ballistic-ammo: !type:Container
+  - type: WieldDelay
+    baseDelay: 0.3
+  - type: WieldableSpeedModifiers
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentR4TStock
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.78, 0.02
+      rmc-aslot-rail: -0.16, 0.13
+      rmc-aslot-underbarrel: 0.32, -0.25
+      rmc-aslot-stock: -0.32, -0.05
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Unsorted/r4t/jungle.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Unsorted/r4t/snow.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Unsorted/r4t/desert.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Unsorted/r4t/urban.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Unsorted/r4t/classic.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponRifleR4T
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: RMCBullet4570
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 80
+  - type: GunStacksProjectile
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 7
+      falloff: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+    thresholds:
+    - range: 14
+      falloff: 10
+
+- type: entity
+  parent: RMCBullet4570
+  id: RMCBullet4570Training
+  name: 45-70 blank
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 70
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 2
+      falloff: 9999
+      ignoreModifiers: true
+
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBox4570
+  name: box of 45-70 rounds
+  description: A box filled with handfuls of 45-70 Govt. rounds, for the old-timers.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,19,1
+    whitelist:
+      tags:
+      - RMCCartridge4570
+  - type: StorageFill
+    contents:
+    - id: RMCCartridge4570
+      amount: 10
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/lever_action.rsi
+    layers:
+    - state: box-4570
+      map: [ "full" ]
+    - state: box-4570-empty
+      map: [ "empty" ]
+
+- type: entity
+  parent: RMCBox4570
+  id: RMCBox4570Training
+  name: box of 45-70 blanks
+  description: A box filled with handfuls of 45-70 Govt. blank rounds. These won't do much damage unless you fire them point blank, or something.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCartridge4570Training
+      amount: 10
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/lever_action.rsi
+    layers:
+    - state: box-4570-training
+      map: [ "full" ]
+    - state: box-4570-training-empty
+      map: [ "empty" ]
+
+- type: Tag
+  id: RMCWeaponRifleR4T
+
+- type: Tag
+  id: RMCCartridge4570
+
+- type: Tag
+  id: RMCCartridge4570Training

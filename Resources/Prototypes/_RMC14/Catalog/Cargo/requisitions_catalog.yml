@@ -17,6 +17,181 @@
         crate: RMCCrateBlackMarketScanner
         icon:
           entity: RMCBlackMarketScanner
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 70
+        blackMarketHeat: 10
+        crate: RMCCrateBlackmarketConfiscatedEquipment
+        icon:
+          entity: RMCCrateBlackmarketConfiscatedEquipment
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 15
+        crate: RMCCrateBlackmarketConfiscatedWeaponry
+        icon:
+          entity: RMCCrateBlackmarketConfiscatedWeaponry
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 20
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAK4047
+        icon:
+          entity: RMCWeaponRifleAK4047
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketM16
+        icon:
+          entity: WeaponRifleM16
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAR10
+        icon:
+          entity: WeaponRifleAR10
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketMAR30
+        icon:
+          entity: RMCWeaponRifleMAR30
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketHuntingRifle
+        icon:
+          entity: RMCWeaponBoltActionRifle
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 50
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketCustomShotgun
+        icon:
+          entity: WeaponShotgunCustomBuiltDamaged
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 25
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketFP9000
+        icon:
+          entity: RMCWeaponSMGFP9000
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 20
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketP90
+        icon:
+          entity: RMCWeaponSMGP90
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 20
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketMP27
+        icon:
+          entity: RMCWeaponSMGMP27
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 25
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketMP5
+        icon:
+          entity: WeaponSMGMP5
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketUZI
+        icon:
+          entity: RMCWeaponSMGUZI
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketMAC15
+        icon:
+          entity: WeaponSMGMAC15
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketType19
+        icon:
+          entity: RMCWeaponSMGType19
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketB92FS
+        icon:
+          entity: RMCWeaponPistolB92FS
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketDesertEagle
+        icon:
+          entity: RMCWeaponPistolDesertEagle
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketType73
+        icon:
+          entity: RMCWeaponPistolT73
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketKT42
+        icon:
+          entity: RMCWeaponPistolKT42
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: 2
+        crate: RMCCrateBlackMarketHoldout
+        icon:
+          entity: RMCWeaponPistolHoldout
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketType64
+        icon:
+          entity: RMCWeaponSMGType64
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 20
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSpearhead
+        icon:
+          entity: RMCWeaponRevolverSpearhead
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSmithWesson
+        icon:
+          entity: RMCWeaponRevolverSAndWModel37
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketZHNK72
+        icon:
+          entity: RMCWeaponRevolverZHNK72
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 75
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketR4T
+        icon:
+          entity: RMCWeaponRifleR4T
     - name: rmc-requisitions-black-market-category-shipside-contraband
       entries: []
     - name: rmc-requisitions-black-market-category-surplus-equipment

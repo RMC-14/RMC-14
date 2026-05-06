@@ -1,0 +1,138 @@
+- type: entity
+  parent: [ RMCBaseSlideMagazineVisuals, CMWeaponPistolBase ]
+  id: RMCWeaponPistolDesertEagle
+  name: Desert Eagle
+  description: The handcannon that needs no introduction, the Desert Eagle is expensive, unwieldy, and extremely heavy for a pistol. However, it more than makes up for its weighty build with its powerful shots, capable of stopping a human, or even a bear, dead in their tracks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/desert_eagle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/desert_eagle.rsi
+  - type: Gun
+    shotsPerBurst: 2
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_DE50.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 5
+    recoilUnwielded: 3
+    scatterWielded: 6
+    scatterUnwielded: 6
+    baseFireRate: 1.43
+    burstScatterMult: 6
+    modifiers:
+      Burst:
+        fireDelay: 0.2
+        maxScatterModifier: 6
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.5
+  - type: GunDamageModifier
+    multiplier: 1.05
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolDesertEagle
+        startingItem: RMCMagazinePistolDesertEagle
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.07
+      rmc-aslot-rail: 0.09, 0.125
+      rmc-aslot-underbarrel: 0.312, -0.25
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolDesertEagle
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolDesertEagle
+  name: Desert Eagle magazine (.50)
+  description: Seven rounds of powerful 50-caliber destruction.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolDesertEagle
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolDesertEagle
+    proto: RMCCartridgePistolDesertEagle
+    capacity: 7
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/desert_eagle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMCartridgePistolBase
+  id: RMCCartridgePistolDesertEagle
+  name: cartridge (.50)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolDesertEagle
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolDesertEagle
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolDesertEagle
+  name: bullet (.50)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: CMArmorPiercing
+    amount: 15
+  - type: RMCProjectileAccuracy
+    accuracy: 60
+
+- type: Tag
+  id: RMCWeaponPistolDesertEagle
+
+- type: Tag
+  id: RMCMagazinePistolDesertEagle
+
+- type: Tag
+  id: RMCCartridgePistolDesertEagle

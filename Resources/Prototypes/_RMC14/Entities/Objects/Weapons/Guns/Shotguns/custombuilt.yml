@@ -45,4 +45,31 @@
       rmc-aslot-rail: -0.025, 0.125
       rmc-aslot-underbarrel: 0.30, -0.31
 
-# Theres a damaged version of this with worse stats, make sure to use the "busted" state as the base/icon for it
+- type: entity
+  parent: WeaponShotgunCustomBuilt
+  name: damaged custom built shotgun
+  id: WeaponShotgunCustomBuiltDamaged
+  description: A cobbled-together pile of scrap and alien wood. Point end towards things you want to die. Has a burst fire feature, as if it needed it. Well, it had one, this one's barrel has apparently exploded outwards like an overripe grape. Guess that's what happens when you DIY a shotgun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/custombuilt.rsi
+    layers:
+    - state: busted
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Gun
+    shotsPerBurst: 1
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 14
+    scatterUnwielded: 24
+    baseFireRate: 0.7
+    burstScatterMult: 3
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 0.95
+    accuracyMultiplierUnwielded: 0.5
+  - type: GunDamageModifier
+    multiplier: 0.8
