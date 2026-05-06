@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared._RMC14.Storage;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -34,6 +35,7 @@ public abstract class RMCHandsSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<GiveHandsComponent, MapInitEvent>(OnXenoHandsMapInit);
+        SubscribeLocalEvent<HandsComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
         SubscribeLocalEvent<WhitelistPickupByComponent, GettingPickedUpAttemptEvent>(OnWhitelistGettingPickedUpAttempt);
         SubscribeLocalEvent<WhitelistPickupComponent, PickupAttemptEvent>(OnWhitelistPickUpAttempt);
         SubscribeLocalEvent<DropHeldOnIncapacitateComponent, MobStateChangedEvent>(OnDropMobStateChanged);
@@ -46,6 +48,52 @@ public abstract class RMCHandsSystem : EntitySystem
         foreach (var hand in ent.Comp.Hands)
         {
             _hands.AddHand(ent.Owner, hand.Name, hand.Location);
+        }
+    }
+
+    private void OnXenoChangingPrototype(Entity<HandsComponent> xeno, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<HandsComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is HandsComponent { } newComponent)
+        {
+            // Copy data over to our hands component
+            var newHands = newComponent.Hands.Keys.Except(xeno.Comp.Hands.Keys); // hands that were added
+            var oldHands = xeno.Comp.Hands.Keys.Except(newComponent.Hands.Keys); // hands that were removed
+
+            foreach (var handId in oldHands)
+            {
+                _hands.RemoveHand(xeno.AsNullable(), handId);
+            }
+
+            foreach (var handId in newComponent.SortedHands.Intersect(newHands))
+            {
+                _hands.AddHand(xeno.AsNullable(), handId, newComponent.Hands[handId]);
+            }
+
+            xeno.Comp.SortedHands.Clear();
+            xeno.Comp.SortedHands.AddRange(newComponent.SortedHands);
+
+            foreach (var handId in xeno.Comp.Hands.Keys)
+            {
+                // Put hands that weren't explicitly sorted at the end
+                if (!xeno.Comp.SortedHands.Contains(handId))
+                {
+                    xeno.Comp.SortedHands.Add(handId);
+                }
+            }
+
+            // We try to keep our active hand the same, but if no longer have our active hand, assign a new one.
+            if (!xeno.Comp.SortedHands.Contains(xeno.Comp.ActiveHandId ?? ""))
+                _hands.SetActiveHand(xeno.AsNullable(), xeno.Comp.SortedHands.FirstOrDefault());
+
+            args.AdditionalExclusions.Add(compName);
+        }
+        else
+        {
+            // We are losing our hands, remove all our hands first so that we drop our held items.
+            // (Honestly, removing the hands component should _probably_ cause held items to drop in and of itself,
+            // but that would be upstream code's responsibility and we can handle it here just fine.)
+            _hands.RemoveHands(xeno.AsNullable());
         }
     }
 
