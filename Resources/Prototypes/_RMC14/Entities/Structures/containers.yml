@@ -1034,6 +1034,36 @@
   - type: Sprite
     state: amsright
 
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerMedicalLeft
+  name: medical cargo container
+  description: A huge industrial shipping container. This one belongs to the Medical Supply Corporation, a company that produces medical supplies and pharmaceuticals.
+  suffix: Medical, Left
+  components:
+  - type: Sprite
+    state: medical_left
+
+- type: entity
+  parent: RMCContainerMedicalLeft
+  id: RMCContainerMedicalEmptyRight
+  suffix: Medical, Empty, Right
+  components:
+  - type: Sprite
+    state: medical_empty_right
+  - type: Fixtures
+    fixtures: {}
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCContainerMedicalLeft
+  id: RMCContainerMedicalRight
+  suffix: Medical, Right
+  components:
+  - type: Sprite
+    state: medical_right
+
 # Vertical
 
 - type: entity
