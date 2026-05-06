@@ -76,7 +76,7 @@
     - showareas
     - dumpentities
     - showaccessreaders
-    - entcompare
+    - entcompare # RMC14
 
 - Flags: MAPPING
   Commands:
