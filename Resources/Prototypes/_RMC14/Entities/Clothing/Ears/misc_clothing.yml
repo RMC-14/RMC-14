@@ -23,3 +23,5 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Ears/earmuffs.rsi
   - type: RMCEarProtection
+  - type: BlackMarketValue
+    value: 20

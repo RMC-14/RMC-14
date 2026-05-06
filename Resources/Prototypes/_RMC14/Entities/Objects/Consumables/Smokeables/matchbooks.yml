@@ -63,6 +63,8 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/matches/matches_mre.rsi
       state: helmet
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMMatchBook

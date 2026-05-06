@@ -158,6 +158,8 @@
     materialComposition:
       CMSteel: 50
       CMGlass: 20
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: BaseItem

@@ -39,6 +39,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_red.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_red.rsi
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: CMHeadBeret
@@ -71,6 +73,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_wo.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_wo.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMHeadBeret
@@ -89,6 +93,8 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/CO/beret/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/CO/beret/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/CO/beret/urban.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMHeadBeret
@@ -100,6 +106,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMHeadBeret
@@ -111,6 +119,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_white.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_white.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMHeadBeret
@@ -122,6 +132,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_ltcol.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_ltcol.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMHeadBeret
@@ -133,6 +145,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_col.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_col.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMHeadBeret
@@ -180,15 +194,10 @@
 
 # Caps
 - type: entity
+  abstract: true
   parent: ClothingHeadBase
-  id: CMHeadCapMP
-  name: MP cap
-  description: A ball-cap worn by the more casual of the Marines' Military Police.
+  id: CMHeadCapBase
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
   - type: Tag
     tags:
     - ClothMade
@@ -219,6 +228,19 @@
   - type: HelmetAccessoryHolder
 
 - type: entity
+  parent: CMHeadCapBase
+  id: CMHeadCapMP
+  name: MP cap
+  description: A ball-cap worn by the more casual of the Marines' Military Police.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/mp_cap.rsi
+  - type: BlackMarketValue
+    value: 25
+
+- type: entity
   parent: CMHeadCapMP
   id: CMHeadCapWarden
   name: warden cap
@@ -230,7 +252,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/warden.rsi
 
 - type: entity
-  parent: CMHeadCapMP
+  parent: CMHeadCapBase
   id: CMHeadCapCargo
   name: cargo cap
   description: It's a baseball hat in a tasteless yellow color.
@@ -241,7 +263,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cargo_cap.rsi
 
 - type: entity
-  parent: CMHeadCapMP
+  parent: CMHeadCapBase
   id: CMHeadCap
   name: cap
   description: Standard baseball cap.
@@ -252,7 +274,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap.rsi
 
 - type: entity
-  parent: CMHeadCapMP
+  parent: CMHeadCapBase
   id: RMCHeadCapFlippable
   name: cap
   description: Standard baseball cap.
@@ -327,6 +349,8 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/CO/cap/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/CO/cap/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/CO/cap/urban.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMHeadCap
@@ -337,6 +361,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/formal_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/formal_black.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMHeadCap
@@ -347,6 +373,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/formal_white.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/formal_white.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMHeadCap
@@ -440,6 +468,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_cmp.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_cmp.rsi
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMHeadCap
@@ -453,7 +483,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cmo_cap.rsi
 
 - type: entity
-  parent: CMHeadCapMP
+  parent: CMHeadCapBase
   id: CMHeadFlapCap
   name: UNMC expedition cap
   description: It's a cap, with flaps. A patch stitched across the front reads "UNS ALMAYER".
@@ -485,7 +515,7 @@
 # soft caps
 
 - type: entity
-  parent: CMHeadCapMP
+  parent: CMHeadCapBase
   id: RMCHeadBlueSoftCap
   name: blue cap
   description: It's a baseball hat in a tasteless blue color.
@@ -695,6 +725,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+  - type: BlackMarketValue
+    value: 25
 
 # beanies
 
@@ -868,6 +900,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: RMCHeadCapGrey

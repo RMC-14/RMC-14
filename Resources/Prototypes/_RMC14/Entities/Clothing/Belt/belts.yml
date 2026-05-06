@@ -12,6 +12,8 @@
     sprite: _RMC14/Objects/Clothing/Belt/inflatable.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/inflatable.rsi
+  - type: BlackMarketValue
+    value: 20
 
 # Storage
 - type: entity

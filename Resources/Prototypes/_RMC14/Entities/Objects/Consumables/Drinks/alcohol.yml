@@ -32,6 +32,8 @@
   - type: Tag
     tags:
     - RMCAlcohol
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: RMCDrinkAlcoholBase

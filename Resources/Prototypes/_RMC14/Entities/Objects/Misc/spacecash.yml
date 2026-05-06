@@ -34,6 +34,8 @@
   - type: PhysicalComposition
     materialComposition:
       Dollar: 1
+  - type: BlackMarketValue
+    value: 1
   - type: Appearance
 
 - type: entity
@@ -137,3 +139,5 @@
   suffix: Counterfeit
   components:
   - type: RMCBlackMarketCounterfeitCash
+  - type: BlackMarketValue
+    value: 0

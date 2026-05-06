@@ -27,3 +27,5 @@
     rename: false
   - type: Corrodible
     isCorrodible: false
+  - type: BlackMarketValue
+    value: 20

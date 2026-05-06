@@ -11,6 +11,8 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Misc/boots_magazine.rsi
+  - type: BlackMarketValue
+    value: 15
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -120,6 +122,8 @@
     sprite: _RMC14/Objects/Misc/boots_magazine.rsi
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-orrery-65
+  - type: BlackMarketValue
+    value: 15
 
 - type: entity
   parent: RMCMagazineWeYaOrrery

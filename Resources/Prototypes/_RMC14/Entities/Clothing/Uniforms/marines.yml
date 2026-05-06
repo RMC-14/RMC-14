@@ -238,6 +238,8 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ec.rsi
   - type: CMArmor
     bio: 15
+  - type: BlackMarketValue
+    value: 25
 
 # Maintenance Technician / MT
 - type: entity
@@ -250,6 +252,8 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/mt.rsi
   - type: CMArmor
     bio: 10
+  - type: BlackMarketValue
+    value: 25
 
 # Ordnance Technician / OT
 - type: entity
@@ -282,6 +286,8 @@
       Snow: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/snow.rsi
       Classic: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/classic.rsi
       Urban: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/urban.rsi
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: CMJumpsuitCO
@@ -315,6 +321,8 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/service.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: CMJumpsuitCOService
@@ -357,6 +365,8 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: BlackMarketValue
+    value: 15
 
 # ASO
 
@@ -423,6 +433,8 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: CMJumpsuitBO
@@ -468,6 +480,8 @@
     tags:
     - RMCUniformMarine
     - RMCUniformIntel
+  - type: BlackMarketValue
+    value: 25
 
 - type: Tag
   id: RMCUniformIntel
@@ -484,6 +498,8 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
@@ -493,6 +509,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt.rsi
+  - type: BlackMarketValue
+    value: 25
 
 # Dropship Crew Chief
 - type: entity
@@ -503,6 +521,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/crewchief.rsi
+  - type: BlackMarketValue
+    value: 25
 
 # Civilian
 

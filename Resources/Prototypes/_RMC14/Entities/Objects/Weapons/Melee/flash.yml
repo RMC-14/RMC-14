@@ -30,3 +30,5 @@
   - type: MeleeRequiresSkill
     skills:
       RMCSkillPolice: 1
+  - type: BlackMarketValue
+    value: 10

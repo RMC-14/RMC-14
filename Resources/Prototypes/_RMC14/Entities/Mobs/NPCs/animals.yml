@@ -30,6 +30,9 @@
     - Blinded
     - Deaf
     - Unconscious
+  - type: BlackMarketValue
+    value: 25
+    deadValue: 0
 
 - type: entity
   id: RMCSmallHost
@@ -343,6 +346,9 @@
   - type: WarpPoint
     follow: true
     location: Mister Wiggles
+  - type: BlackMarketValue
+    value: 50
+    deadValue: 0
   - type: CrashLandable
   - type: PressureImmunity
   - type: Respirator
@@ -360,6 +366,9 @@
   - type: WarpPoint
     follow: true
     location: Jones
+  - type: BlackMarketValue
+    value: 50
+    deadValue: 0
   - type: CrashLandable
   - type: PressureImmunity
   - type: Respirator
@@ -377,6 +386,9 @@
   - type: WarpPoint
     follow: true
     location: Orion
+  - type: BlackMarketValue
+    value: 50
+    deadValue: 0
   - type: CrashLandable
   - type: PressureImmunity
   - type: Respirator
@@ -394,6 +406,9 @@
   - type: WarpPoint
     follow: true
     location: Garry
+  - type: BlackMarketValue
+    value: 50
+    deadValue: 0
   - type: CrashLandable
   - type: PressureImmunity
   - type: Respirator

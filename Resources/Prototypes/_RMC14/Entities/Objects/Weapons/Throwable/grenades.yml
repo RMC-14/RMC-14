@@ -69,6 +69,8 @@
   - type: RequiresSkill
     skills:
       RMCSkillPolice: 2
+  - type: BlackMarketValue
+    value: 10
 
 - type: entity
   parent:

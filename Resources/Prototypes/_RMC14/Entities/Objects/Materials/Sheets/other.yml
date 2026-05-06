@@ -52,6 +52,8 @@
   - type: Tag
     tags:
     - Sheet
+  - type: BlackMarketValue
+    value: 10
 
 - type: entity
   parent: CMSheetPhoron
@@ -255,6 +257,8 @@
   - type: Tag
     tags:
     - Sheet
+  - type: BlackMarketValue
+    value: 10
 
 - type: entity
   parent: RMCSheetAluminum

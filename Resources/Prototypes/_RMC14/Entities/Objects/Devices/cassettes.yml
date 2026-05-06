@@ -16,6 +16,8 @@
   - type: ClothingLimit
     slot: All
     id: RMCCassettePlayer
+  - type: BlackMarketValue
+    value: 15
 
 - type: entity
   abstract: true
@@ -30,6 +32,8 @@
   - type: Item
     size: Small
   - type: CassetteTape
+  - type: BlackMarketValue
+    value: 15
 
 # RMC14
 - type: entity
