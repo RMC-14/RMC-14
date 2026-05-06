@@ -152,8 +152,8 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         if (direction == Vector2.Zero)
             return false;
 
-        var weedPosition = _transform.GetMoverCoordinates(origin).Position;
-        var ray = new CollisionRay(weedPosition, direction, (int) collisionGroup);
+        var originPosition = _transform.GetMoverCoordinates(origin).Position;
+        var ray = new CollisionRay(originPosition, direction, (int) collisionGroup);
         var intersect = _physics.IntersectRayWithPredicate(Transform(origin).MapID, ray, checkRange, e => !Transform(e).Anchored);
         var results = intersect.Select(r => r.HitEntity).ToHashSet();
 
