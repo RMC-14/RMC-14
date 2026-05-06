@@ -186,7 +186,7 @@ public sealed class MedevacStretcherSystem : EntitySystem
             return;
 
         var name = GetName(stretcher);
-        _dropshipWeapon.MakeTarget(stretcher, name, false);
+        _dropshipWeapon.MakeDropshipTarget(stretcher, name, false);
 
         _appearance.SetData(stretcher, MedevacStretcherVisuals.BeaconState, BeaconVisuals.On);
         _popup.PopupClient(Loc.GetString("rmc-medevac-activate-beacon"), stretcherCoords, user);

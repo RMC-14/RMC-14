@@ -11,6 +11,9 @@ public sealed partial class DropshipTargetComponent : Component
     [Access(typeof(SharedDropshipWeaponSystem), typeof(MedevacStretcherSystem))]
     public string Abbreviation = string.Empty;
 
+    [DataField]
+    public string? OriginalName;
+
     [DataField, AutoNetworkedField]
     public bool IsTargetableByWeapons = true;
 

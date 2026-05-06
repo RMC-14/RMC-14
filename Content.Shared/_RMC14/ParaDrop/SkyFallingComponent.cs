@@ -3,7 +3,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
-namespace Content.Shared.ParaDrop;
+namespace Content.Shared._RMC14.ParaDrop;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class SkyFallingComponent : Component
@@ -24,7 +24,7 @@ public sealed partial class SkyFallingComponent : Component
     ///     Scale that the animation should bring entities to.
     /// </summary>
     [DataField]
-    public Vector2 AnimationScale = new (0.01f, 0.01f);
+    public Vector2 AnimationScale = new(0.01f, 0.01f);
 
     /// <summary>
     ///     The location the entity should be teleported to after the animation is done.

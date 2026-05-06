@@ -7,13 +7,14 @@ using Content.Shared._RMC14.Extensions;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.ParaDrop;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared.Body.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.Maps;
-using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
@@ -100,8 +101,25 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             _entityLookup.GetEntitiesInRange(ent, 0.33f, _intersecting);
             foreach (var intersecting in _intersecting)
             {
-                if (_container.TryGetContainingContainer(intersecting, out var container) && (container.Owner == ent.Owner || HasComp<ParaDroppingComponent>(container.Owner) || HasComp<CrashLandingComponent>(container.Owner)))
-                        continue;
+                if (!HasComp<BodyComponent>(intersecting))
+                    continue;
+
+                var isInside = false;
+                var parent = Transform(intersecting).ParentUid;
+
+                while (parent.IsValid())
+                {
+                    if (parent == ent.Owner || HasComp<ParaDroppingComponent>(parent) || HasComp<CrashLandingComponent>(parent))
+                    {
+                        isInside = true;
+                        break;
+                    }
+
+                    parent = Transform(parent).ParentUid;
+                }
+
+                if (isInside)
+                    continue;
 
                 _damageable.TryChangeDamage(intersecting, landingDamage, true);
             }

@@ -37,7 +37,7 @@ public sealed class RMCAirShotSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCAirShotComponent, UniqueActionEvent>(OnUniqueAction, before: new[] { typeof(CMGunSystem) } );
+        SubscribeLocalEvent<RMCAirShotComponent, UniqueActionEvent>(OnUniqueAction, before: new[] { typeof(CMGunSystem) });
         SubscribeLocalEvent<RMCAirShotComponent, AirShotDoAfterEvent>(OnAirShotDoAfter);
         SubscribeLocalEvent<RMCAirShotComponent, ExaminedEvent>(OnAirShotExamined);
     }
@@ -85,7 +85,7 @@ public sealed class RMCAirShotSystem : EntitySystem
                     {
                         var id = _dropship.ComputeNextId();
                         var flareIdentifier = _dropship.GetUserAbbreviation(args.User, id);
-                        _dropship.MakeDropshipTarget(spawned, flareIdentifier);
+                        _dropship.MakeDropshipTarget(spawned, flareIdentifier, true);
 
                         ent.Comp.LastFlareId = flareIdentifier;
                         Dirty(ent);

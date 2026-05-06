@@ -28,7 +28,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Shared.ParaDrop;
+namespace Content.Shared._RMC14.ParaDrop;
 
 public abstract partial class SharedParaDropSystem : EntitySystem
 {
@@ -274,7 +274,8 @@ public abstract partial class SharedParaDropSystem : EntitySystem
             if (TryGetParaDropLocation(dropCoordinates, CrashScatter, out var adjustedCrashCoordinates))
                 dropCoordinates = adjustedCrashCoordinates;
 
-            _crashLand.TryCrashLand(dropping, true, dropCoordinates);
+            _crashLand.DoCrashLand(dropping, dropCoordinates, doDamage: true);
+
             return false;
         }
 

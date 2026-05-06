@@ -1,3 +1,6 @@
+using System.Numerics;
+using Content.Shared._RMC14.CrashLand;
+using Content.Shared._RMC14.ParaDrop;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
@@ -5,9 +8,6 @@ using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using System.Numerics;
-using Content.Shared._RMC14.CrashLand;
-using Content.Shared.ParaDrop;
 
 namespace Content.Client.StatusIcon;
 

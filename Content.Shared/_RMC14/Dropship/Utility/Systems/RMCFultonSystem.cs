@@ -118,7 +118,7 @@ public sealed class RMCFultonSystem : EntitySystem
             _audio.PlayPredicted(canBeFultoned.FultonSound, active.ReturnTo, args.User);
 
         var name = Name(target);
-        _dropshipWeapon.MakeTarget(target, name, false);
+        _dropshipWeapon.MakeDropshipTarget(target, name, false);
         _rmcpulling.TryStopAllPullsFromAndOn(target);
 
         var mapId = EnsureMap();

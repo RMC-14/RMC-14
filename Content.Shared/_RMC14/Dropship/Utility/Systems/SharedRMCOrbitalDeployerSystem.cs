@@ -48,7 +48,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
         if (!TryComp(deployableEnt, out RMCOrbitalDeployableComponent? deployable))
             return false;
 
-        var dropLocation =_map.AlignToGrid(target.ToCoordinates());
+        var dropLocation = _map.AlignToGrid(target.ToCoordinates());
 
         if (deployable.DeployBlacklist is { } blacklist)
         {
@@ -77,6 +77,12 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
 
             deployable.RemainingDeployCount--;
             Dirty(deployableEnt, deployable);
+
+            if (_net.IsServer && deployable.RemainingDeployCount <= 0)
+            {
+                Container.Remove(deployableEnt, container);
+                QueueDel(deployableEnt);
+            }
         }
 
         var openAt = TimeSpan.FromSeconds(deployable.ArrivingSoundDelay + deployable.DropDuration);

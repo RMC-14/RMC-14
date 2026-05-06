@@ -681,6 +681,21 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             slotId = target.Comp.WeaponContainerSlotId;
             msg = Loc.GetString("rmc-power-loader-occupied-weapon");
+
+            if (_container.TryGetContainer(target, target.Comp.AmmoContainerSlotId, out var ammoContainer) &&
+                ammoContainer.ContainedEntities.TryFirstOrNull(out var ammoEnt) &&
+                TryComp(ammoEnt, out DropshipAmmoComponent? ammo))
+            {
+                if (ammo.Weapon.Id != Prototype(used)?.ID)
+                {
+                    foreach (var buckled in GetBuckled(user))
+                    {
+                        _popup.PopupClient(Loc.GetString("rmc-power-loader-wrong-weapon"), target, buckled, PopupType.SmallCaution);
+                    }
+                    slot = null;
+                    return false;
+                }
+            }
         }
         else if (HasComp<DropshipAmmoComponent>(used))
         {
