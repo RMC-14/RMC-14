@@ -74,7 +74,7 @@ jobs:
           }
 
           if (state === "changes_requested") {
-            await removeLabel(partiallyApprovedLabel);
+            await removeLabel(approvedLabel);
             await addLabel(changesRequestedLabel);
             return;
           }
