@@ -10,7 +10,7 @@ public enum RequisitionsBlackMarketStatus
 {
     Available,
     LockedOut,
-    MendozaDead,
+    MendozaDead, // poor guy..
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]

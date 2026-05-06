@@ -564,6 +564,10 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
                 updateUI = true;
             }
 
+            // Mendoza is dead; nobody's left below to kick free junk onto the ASRS lift for us :(
+            if (account.BlackMarketMendozaDead)
+                continue;
+
             var xenos = _xeno.GetGroundXenosAlive();
             var randomCrates = CollectionsMarshal.AsSpan(account.RandomCrates);
             foreach (ref var pool in randomCrates)
