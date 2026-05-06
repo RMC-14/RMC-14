@@ -175,8 +175,7 @@ public sealed class RequisitionsBui : BoundUserInterface
             ? Loc.GetString(
                 "rmc-requisitions-black-market-balance",
                 ("balance", _state.Balance),
-                ("wy", _state.BlackMarketBalance),
-                ("heat", _state.BlackMarketHeat))
+                ("wy", _state.BlackMarketBalance))
             : Loc.GetString("rmc-requisitions-balance", ("balance", _state.Balance));
 
         _window.BudgetLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(balance));
