@@ -10,6 +10,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Robust.Shared.Containers;
 using Robust.Server.GameObjects;
+using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Requisitions;
 
@@ -25,6 +26,7 @@ public sealed partial class RequisitionsSystem
         SubscribeLocalEvent<RequisitionsComputerComponent, InteractUsingEvent>(OnBlackMarketInteractUsing);
         SubscribeLocalEvent<RequisitionsComputerComponent, RMCBlackMarketConsoleHackProbeDoAfterEvent>(OnBlackMarketHackProbe);
         SubscribeLocalEvent<RequisitionsComputerComponent, RMCBlackMarketConsoleHackTuneDoAfterEvent>(OnBlackMarketHackTune);
+        SubscribeLocalEvent<RequisitionsComputerComponent, RMCBlackMarketTradebandDoAfterEvent>(OnBlackMarketTradebandDoAfter);
         SubscribeLocalEvent<RMCBlackMarketScannerComponent, AfterInteractEvent>(OnBlackMarketScannerAfterInteract);
     }
 
@@ -149,6 +151,41 @@ public sealed partial class RequisitionsSystem
 
     private void OnBlackMarketInteractUsing(Entity<RequisitionsComputerComponent> computer, ref InteractUsingEvent args)
     {
+        if (TryComp(args.Used, out RMCBlackMarketTradebandDeviceComponent? tradeband))
+        {
+            args.Handled = true;
+
+            if (!_skills.HasSkill(args.User, tradeband.Skill, tradeband.SkillLevel))
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-tradeband-no-skill", ("tool", args.Used)), computer, args.User, PopupType.SmallCaution);
+                return;
+            }
+
+            if (IsBlackMarketTradebandLockedOut(computer))
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-tradeband-already-reset", ("target", computer.Owner)), computer, args.User);
+                return;
+            }
+
+            var tradebandDoAfter = new DoAfterArgs(EntityManager, args.User, tradeband.Delay, new RMCBlackMarketTradebandDoAfterEvent(), computer, computer, args.Used)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                NeedHand = true,
+            };
+            if (!_doAfter.TryStartDoAfter(tradebandDoAfter))
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-tradeband-busy"), computer, args.User, PopupType.SmallCaution);
+                return;
+            }
+
+            _audio.PlayPvs(tradeband.StartSound, args.Used);
+            SetBlackMarketTradebandActive(args.Used, true);
+            _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-tradeband-start-others", ("user", args.User), ("tool", args.Used), ("target", computer.Owner)), computer, Filter.PvsExcept(args.User), true, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-tradeband-start", ("target", computer.Owner)), computer, args.User);
+            return;
+        }
+
         if (!TryComp(args.Used, out RMCBlackMarketHackingDeviceComponent? device))
             return;
 
@@ -158,7 +195,7 @@ public sealed partial class RequisitionsSystem
             return;
 
         // CMSS13 hacks the ASRS circuit board; RMC14 keeps the black market state on the ASRS console.
-        var doAfter = new DoAfterArgs(EntityManager, args.User, device.ProbeDelay, new RMCBlackMarketConsoleHackProbeDoAfterEvent(), computer, computer, args.Used);
+        var doAfter = CreateBlackMarketHackDoAfter(args.User, device.ProbeDelay, new RMCBlackMarketConsoleHackProbeDoAfterEvent(), computer, args.Used);
         if (_doAfter.TryStartDoAfter(doAfter))
             _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-hack-start", ("target", computer.Owner)), computer, args.User);
     }
@@ -185,8 +222,18 @@ public sealed partial class RequisitionsSystem
 
         _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-hack-bus"), computer, args.User);
 
-        var doAfter = new DoAfterArgs(EntityManager, args.User, device.TuneDelay, new RMCBlackMarketConsoleHackTuneDoAfterEvent(), computer, computer, used);
+        var doAfter = CreateBlackMarketHackDoAfter(args.User, device.TuneDelay, new RMCBlackMarketConsoleHackTuneDoAfterEvent(), computer, used);
         _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private DoAfterArgs CreateBlackMarketHackDoAfter(EntityUid user, TimeSpan delay, DoAfterEvent ev, EntityUid computer, EntityUid used)
+    {
+        return new DoAfterArgs(EntityManager, user, delay, ev, computer, computer, used)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            NeedHand = true,
+        };
     }
 
     private void OnBlackMarketHackTune(Entity<RequisitionsComputerComponent> computer, ref RMCBlackMarketConsoleHackTuneDoAfterEvent args)
@@ -214,6 +261,68 @@ public sealed partial class RequisitionsSystem
         _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(args.User):user} toggled the black market tradeband on {ToPrettyString(computer):console} to {computer.Comp.BlackMarketUnlocked}");
     }
 
+    private void OnBlackMarketTradebandDoAfter(Entity<RequisitionsComputerComponent> computer, ref RMCBlackMarketTradebandDoAfterEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (args.Used is not { } used ||
+            !TryComp(used, out RMCBlackMarketTradebandDeviceComponent? tradeband))
+        {
+            return;
+        }
+
+        SetBlackMarketTradebandActive(used, false);
+
+        if (args.Cancelled)
+            return;
+
+        if (!_skills.HasSkill(args.User, tradeband.Skill, tradeband.SkillLevel))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-tradeband-no-skill", ("tool", used)), computer, args.User, PopupType.SmallCaution);
+            return;
+        }
+
+        if (IsBlackMarketTradebandLockedOut(computer))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-tradeband-already-reset", ("target", computer.Owner)), computer, args.User);
+            return;
+        }
+
+        // CMSS13 writes this lock to the ASRS board; RMC14 keeps the shared lockout on the requisitions account.
+        var accountUid = computer.Comp.Account;
+        if (accountUid is { } lockedAccount &&
+            TryComp(lockedAccount, out RequisitionsAccountComponent? account))
+        {
+            account.BlackMarketStatus = RequisitionsBlackMarketStatus.LockedOut;
+            Dirty(lockedAccount, account);
+        }
+
+        var query = EntityQueryEnumerator<RequisitionsComputerComponent>();
+        while (query.MoveNext(out var uid, out var requisitions))
+        {
+            if (accountUid is { } linkedAccount)
+            {
+                if (requisitions.Account != linkedAccount)
+                    continue;
+            }
+            else if (uid != computer.Owner)
+            {
+                continue;
+            }
+
+            requisitions.BlackMarketUnlocked = false;
+            Dirty(uid, requisitions);
+        }
+
+        _audio.PlayPvs(tradeband.FinishSound, used);
+        SendUIStateAll();
+        _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-tradeband-finish", ("target", computer.Owner)), computer, args.User);
+        _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(args.User):user} reset and locked the black market tradeband on {ToPrettyString(computer):console}");
+    }
+
     private bool IsBlackMarketHackUnavailable(Entity<RequisitionsComputerComponent> computer, EntityUid user)
     {
         if (computer.Comp.Account is not { } accountUid ||
@@ -225,6 +334,18 @@ public sealed partial class RequisitionsSystem
 
         _popup.PopupEntity(Loc.GetString("rmc-requisitions-black-market-hack-unavailable"), computer, user, PopupType.SmallCaution);
         return true;
+    }
+
+    private bool IsBlackMarketTradebandLockedOut(Entity<RequisitionsComputerComponent> computer)
+    {
+        return computer.Comp.Account is { } accountUid &&
+            TryComp(accountUid, out RequisitionsAccountComponent? account) &&
+            account.BlackMarketStatus == RequisitionsBlackMarketStatus.LockedOut;
+    }
+
+    private void SetBlackMarketTradebandActive(EntityUid device, bool active)
+    {
+        _appearance.SetData(device, RMCBlackMarketTradebandVisuals.Active, active);
     }
 
     private void OnBlackMarketScannerAfterInteract(Entity<RMCBlackMarketScannerComponent> scanner, ref AfterInteractEvent args)
