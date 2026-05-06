@@ -774,6 +774,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         var metadata = MetaData(xeno);
+        var oldProtoId = metadata.EntityPrototype?.ID;
 
         metadata.EntityPrototype = newProto;
         _meta.SetEntityName(xeno, newProto.Name);
@@ -823,5 +824,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
             RemComp(xeno, cloneComponent);
             Log.Debug($"Done removing component {componentName}.");
         }
+
+        var afterEv = new AfterXenoChangedPrototypeEvent(xeno, oldProtoId);
+        RaiseLocalEvent(xeno, ref afterEv);
     }
 }
