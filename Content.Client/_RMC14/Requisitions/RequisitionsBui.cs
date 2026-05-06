@@ -171,12 +171,13 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (_window == null || _state == null)
             return;
 
-        var balance = _blackMarketMode
-            ? Loc.GetString(
+        var balance = Loc.GetString("rmc-requisitions-balance", ("balance", _state.Balance));
+        if (_blackMarketMode)
+        {
+            balance += "\n" + Loc.GetString(
                 "rmc-requisitions-black-market-balance",
-                ("balance", _state.Balance),
-                ("wy", _state.BlackMarketBalance))
-            : Loc.GetString("rmc-requisitions-balance", ("balance", _state.Balance));
+                ("wy", _state.BlackMarketBalance));
+        }
 
         _window.BudgetLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(balance));
 

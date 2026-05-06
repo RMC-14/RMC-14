@@ -61,9 +61,7 @@ rmc-requisitions-pending-filter-empty = No matching pending orders.
 rmc-requisitions-pending-quantity = Ordered: {$amount}
 rmc-requisitions-black-market-button = $E4RR301¿
 rmc-requisitions-black-market-return = ASRS CATALOG
-rmc-requisitions-black-market-balance =
-    [bold]Supply budget:[/bold] ${$balance}
-    [bold]WY account:[/bold] WY${$wy}
+rmc-requisitions-black-market-balance = [bold]WY account:[/bold] WY${$wy}
 rmc-requisitions-black-market-category-seized-items = Seized Items
 rmc-requisitions-black-market-category-shipside-contraband = Shipside Contraband
 rmc-requisitions-black-market-category-surplus-equipment = Surplus Equipment
