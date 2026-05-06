@@ -27,7 +27,9 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
@@ -63,6 +65,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly ISerializationManager _serManager = default!;
+    [Dependency] private readonly FixtureSystem _fixtures = default!;
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
@@ -82,6 +85,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
         SubscribeNetworkEvent<XenoChangingCasteEvent>(OnXenoChangingCaste);
+
+        SubscribeLocalEvent<FixturesComponent, XenoChangingPrototypeEvent>(OnFixturesXenoChangingPrototype);
 
         SubscribeLocalEvent<XenoDevolveComponent, XenoOpenDevolveActionEvent>(OnXenoOpenDevolveAction);
 
@@ -265,7 +270,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     }
 
     private void OnXenoChangingPrototype(Entity<XenoEvolutionComponent> xeno, ref XenoChangingPrototypeEvent args)
-    { 
+    {
         var compName = EntityManager.ComponentFactory.GetComponentName<XenoEvolutionComponent>();
         if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoEvolutionComponent { } newComponent)
         {
@@ -274,6 +279,20 @@ public sealed class XenoEvolutionSystem : EntitySystem
             // caller of ChangeCaste knows how many points to deduct.
             newComponent.Points = xeno.Comp.Points;
             newComponent.LastPointsAt = xeno.Comp.LastPointsAt;
+        }
+    }
+
+    private void OnFixturesXenoChangingPrototype(Entity<FixturesComponent> xeno, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<FixturesComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is FixturesComponent { } newComponent)
+        {
+            // TODO RMC14 I'm unsure of why the fixtures aren't properly removed when the FixturesComponent is removed,
+            // but it causes some issues in the physics system. We remove them here.
+            foreach (var id in xeno.Comp.Fixtures.Keys)
+            {
+                _fixtures.DestroyFixture(xeno, id);
+            }
         }
     }
 
