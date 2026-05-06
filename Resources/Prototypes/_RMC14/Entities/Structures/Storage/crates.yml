@@ -737,6 +737,25 @@
 
 - type: entity
   parent: RMCCrateBase
+  id: RMCCrateMinecartYellow
+  name: minecart
+  description: Essentially a big metal bucket on wheels. This one has a modern plastic shroud.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/minecart_y.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/minecart_y.rsi
+
+- type: entity
+  parent: RMCCrateBase
   id: RMCCrateMortarAmmo
   name: mortar ammo crate
   description: A crate containing live mortar shells with various payloads. DO NOT DROP. KEEP AWAY FROM FIRE SOURCES.

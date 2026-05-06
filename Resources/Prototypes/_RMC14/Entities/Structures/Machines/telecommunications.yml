@@ -446,3 +446,28 @@
     - state: sensor_comp3_off
     - state: sensor_comp3
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCBlackMessagingServer
+  parent: RMCBlackMappingComputer
+  name: messaging server
+  components:
+  - type: Sprite
+    layers:
+    - state: messageserver_black
+
+- type: entity
+  id: RMCBrownMessagingServer
+  parent: RMCBlackMessagingServer
+  components:
+  - type: Sprite
+    layers:
+    - state: messageserver_brown
+
+- type: entity
+  id: RMCWhiteMessagingServer
+  parent: RMCBlackMessagingServer
+  components:
+  - type: Sprite
+    layers:
+    - state: messageserver_white

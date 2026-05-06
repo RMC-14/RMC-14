@@ -1,0 +1,20 @@
+- type: entity
+  parent: BaseItem
+  id: RMCPropHanddrill
+  name: mining drill
+  description: Yours is the drill that will pierce through the rock walls.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/mining_prop_tools.rsi
+    state: handdrill
+  - type: Item
+    size: Large
+
+- type: entity
+  parent: RMCPropHanddrill
+  id: RMCPropJackhammer
+  name: sonic jackhammer
+  description: Cracks rocks with sonic blasts, perfect for killing cave lizards
+  components:
+  - type: Sprite
+    state: jackhammer

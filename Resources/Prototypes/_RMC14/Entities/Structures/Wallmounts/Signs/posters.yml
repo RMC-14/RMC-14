@@ -706,6 +706,16 @@
   - type: Sprite
     state: weya_5
 
+- type: entity
+  parent: RMCPosterWEYA1
+  id: RMCPosterROCreed
+  name: founders plaque
+  description: A plaque with the names of the research team of this facility, including the founders and contributors.
+  components:
+  - type: Sprite
+    state: rocreed
+
+
 # Daniel
 - type: entity
   parent: CMPosterBase

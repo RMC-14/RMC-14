@@ -118,3 +118,28 @@
   components:
   - type: Sprite
     state: barrel_yellow
+
+- type: entity
+  parent: RMCBarrelWhite
+  id: RMCBarrelPureWhite
+  components:
+  - type: Sprite
+    state: barrel_purewhite
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelBlack
+  name: black barrel
+  description: A black storage barrel.
+  components:
+  - type: Sprite
+    state: barrel_black
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelBrown
+  name: brown barrel
+  description: A brown storage barrel.
+  components:
+  - type: Sprite
+    state: barrel_tan

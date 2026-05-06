@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: RMCContainerBase
   name: cargo container
@@ -464,6 +464,79 @@
   components:
   - type: Sprite
     state: aegiscontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerGrafLeft
+  suffix: Graffiti, Left
+  name: Cargo Container
+  description: "A huge industrial shipping container.\nThis one has been turned into a canvas for street art"
+  components:
+  - type: Sprite
+    state: grafcontain_l
+
+- type: entity
+  parent: RMCContainerGrafLeft
+  id: RMCContainerGrafMiddle
+  suffix: Graffiti, Middle
+  components:
+  - type: Sprite
+    state: grafcontain_rm
+
+- type: entity
+  parent: RMCContainerGrafLeft
+  id: RMCContainerGrafRight
+  suffix: Graffiti, Right
+  components:
+  - type: Sprite
+    state: grafcontain_r
+
+- type: entity
+  parent: RMCContainerGrafLeft
+  id: RMCContainerGraf2Left
+  suffix: Graffiti, Left
+  components:
+  - type: Sprite
+    state: grafcontain2_l
+
+- type: entity
+  parent: RMCContainerGraf2Left
+  id: RMCContainerGraf2Middle
+  suffix: Graffiti, Middle
+  components:
+  - type: Sprite
+    state: grafcontain2_rm
+
+- type: entity
+  parent: RMCContainerGraf2Left
+  id: RMCContainerGraf2Right      
+  suffix: Graffiti, Right
+  components:
+  - type: Sprite
+    state: grafcontain2_r
+
+- type: entity
+  parent: RMCContainerGrafLeft
+  id: RMCContainerGraf3Left
+  suffix: Graffiti, Left
+  components:
+  - type: Sprite
+    state: grafcontain3_l
+- type: entity
+  parent: RMCContainerGraf3Left
+  id: RMCContainerGraf3Middle
+  suffix: Graffiti, Middle
+  components:
+  - type: Sprite
+    state: grafcontain3
+
+- type: entity
+  parent: RMCContainerGraf3Left
+  id: RMCContainerGraf3Right      
+  suffix: Graffiti, Right
+  components:
+  - type: Sprite
+    state: grafcontain3_r
 
 # Small
 

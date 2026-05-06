@@ -1,0 +1,110 @@
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropInertEgg
+  name: strange egg
+  description: A strange ancient looking egg, it seems to be inert.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/32x32.rsi
+    state: inertegg
+    drawdepth: BelowFloor
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropDogcatchersuit
+  name: Weston-Yamada 'M5X Apesuit' showcase
+  description: A display model of the Weston-Yamada 'Apesuit', shame it's only a model...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/32x32.rsi
+    state: dogcatchersuitempty
+
+- type: entity
+  parent: RMCPropDogcatchersuit
+  id: RMCPropFireHydrantRed
+  name: fire hydrant
+  description: It is just a fire hydrant. You know what it does.
+  components:
+  - type: Sprite
+    state: firehydrant_red
+
+- type: entity
+  parent: RMCPropFireHydrantRed
+  id: RMCPropFireHydrantBlue
+  components:
+  - type: Sprite
+    state: firehydrant_blue
+
+- type: entity
+  parent: RMCPropFireHydrantRed
+  id: RMCPropFireHydrantwhite
+  components:
+  - type: Sprite
+    state: firehydrant_white
+
+- type: entity
+  parent: RMCPropFireHydrantRed
+  id: RMCPropFireHydrantGrey
+  components:
+  - type: Sprite
+    state: firehydrant_grey
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropEngineerConsol
+  name: giant alien console
+  description: A giant alien console of some kind, unlike anything you've ever seen before. Who knows the purpose of this strange technology...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/engineerconsol.rsi
+    state: engineerconsol
+    offset: "0.5, 0.5"
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropGiantPod
+  name: colossal hypersleep chamber
+  description: Before you stands an imposing structure, what looks like a colossal 'hypersleep chamber' of alien design, unlike anything you've ever encountered. Its intricate patterns and unfamiliar symbols hint at technologies far beyond human comprehension. Yet, despite its grandeur, the chamber is empty, devoid of any sign of life.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/giantpod.rsi
+    state: pod
+    offset: "0.5, 0"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+            bounds: "0,-1.5,1,1.5"
+        density: 190
+        layer:
+        - MobMask
+
+- type: entity
+  parent: RMCPropGiantPod
+  id: RMCPropGiantPodBroken
+  name: giant hypersleep chamber
+  description: Before you lies a behemoth of what looks like a 'hypersleep chamber', dwarfing everything around it. Within, a fossilized alien presence lies dormant. The chamber itself bears the scars of a violent past, with holes melted in its outer shell, as if something within had erupted outwards with some unknown force. The desiccated remains of the occupant are twisted and contorted, suggesting a violent demise that occurred long ago.
+  components:
+  - type: Sprite
+    state: pod_broken
+
+- type: entity
+  parent: RMCPropBaseUnbreakable
+  id: RMCPropGiantXenoCryo
+  name: colossal specimen containment cell
+  description: A colossal cryogenic tube with yellow-tinted glass towers before you, housing a hulking, monstrous entity. Is it alive, or in a deep slumber? Cold mist swirls around the base as a low hum fills the air.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/giant_xeno_cryo.rsi
+    state: icon
+    offset: "-0.5, 0"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+            bounds: "-1.5,-2,0.5,2"
+        density: 190
+        layer:
+        - MobMask
