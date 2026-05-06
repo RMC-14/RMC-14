@@ -74,15 +74,12 @@ jobs:
           }
 
           if (state === "changes_requested") {
-            await removeLabel(approvedLabel);
             await removeLabel(partiallyApprovedLabel);
             await addLabel(changesRequestedLabel);
             return;
           }
 
           if (state === "approved") {
-            await removeLabel(changesRequestedLabel);
-
             const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({
               owner,
               repo,
@@ -97,6 +94,7 @@ jobs:
             }
 
             if (labels.has(partiallyApprovedLabel) && !labels.has(approvedLabel)) {
+              await removeLabel(changesRequestedLabel);
               await removeLabel(partiallyApprovedLabel);
               await addLabel(approvedLabel);
             }
