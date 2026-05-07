@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Announce;
@@ -80,6 +81,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
 
+    private FrozenSet<string>? _xenoComponents = null;
+
     public readonly ProtoId<CloningSettingsPrototype> CloningSettingsId = "XenoClone";
 
     public override void Initialize()
@@ -105,6 +108,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
 
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
+
         Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key,
             subs =>
             {
@@ -122,6 +127,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v => _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEvolveSameCasteCooldownSeconds, v => _evolveSameCasteCooldown = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEarlyEvoPointBoostBeforeMinutes, v => _earlyEvoBoostBefore = TimeSpan.FromMinutes(v), true);
+
+        ReloadXenoComponents();
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -328,6 +335,14 @@ public sealed class XenoEvolutionSystem : EntitySystem
         while (xenos.MoveNext(out var uid, out _, out _))
         {
             _ui.SetUiState(uid, XenoEvolutionUIKey.Key, state);
+        }
+    }
+
+    private void OnPrototypeReload(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<EntityPrototype>() || args.WasModified<CloningSettingsPrototype>())
+        {
+            ReloadXenoComponents();
         }
     }
 
@@ -783,16 +798,19 @@ public sealed class XenoEvolutionSystem : EntitySystem
         EntityPrototype newProto)
     {
         if (!_prototypes.TryIndex(CloningSettingsId, out var settings))
-            return; // invalid settings
-
-        var copyAll = settings.CopyAll;
-        var excludeComponents = settings.ExcludeComponents;
-        if (!copyAll)
         {
-            // Xeno cloning settings should always copy all and use exclusions.
-            Log.Error("Xeno cloning settings not set to copy all with exclusions. Copy failed.");
+            Log.Error($"Failed to load cloning prototype {CloningSettingsId}, unable to change xeno prototype.");
             return;
         }
+
+        if (_xenoComponents is not { } includeComponents)
+        {
+            Log.Error("Failed to load set of xeno components, unable to change xeno prototype.");
+            return;
+        }
+
+        var excludeComponents = settings.ExcludeComponents;
+        var additionalExclusions = new HashSet<string>();
 
         var metadata = MetaData(xeno);
         var oldProtoId = metadata.EntityPrototype?.ID;
@@ -806,8 +824,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         {
             registryToAdd.Remove(excluded);
         }
-
-        var additionalExclusions = new HashSet<string>();
+        Log.Debug("Raising XenoChangingPrototypeEvent...");
         var changingCasteEvent = new XenoChangingPrototypeEvent(xeno, newProto, registryToAdd, additionalExclusions);
         RaiseLocalEvent(xeno, ref changingCasteEvent);
         Log.Debug("Done with XenoChangingPrototypeEvent.");
@@ -820,9 +837,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 Log.Debug($"   Removed {exclusion}");
             }
         }
-        Log.Debug("Addtional exclusion removed.");
+        Log.Debug("Addtional exclusions removed.");
 
-        Log.Debug("Adding components from registry: ");
+        Log.Debug("Adding components from registry...");
         foreach (var componentName in registryToAdd.Keys)
         {
             Log.Debug($"   {componentName}");
@@ -833,9 +850,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         foreach (var cloneComponent in EntityManager.GetComponents(xeno))
         {
-            // Remove every component that isn't in the registry or isn't excluded.
+            // We have to remove components that the old xeno has defined in their prototype and the new xeno does not.
+            // Components that aren't part of xeno prototypes shouldn't be removed (something else added them),
+            // and components we handled earlier or are explicitly skipped aren't removed either.
             var componentName = EntityManager.ComponentFactory.GetComponentName(cloneComponent.GetType());
-            if (excludeComponents.Contains(componentName)
+            if (!includeComponents.Contains(componentName)
+                || excludeComponents.Contains(componentName)
                 || additionalExclusions.Contains(componentName)
                 || registryToAdd.ContainsKey(componentName))
             {
@@ -850,5 +870,48 @@ public sealed class XenoEvolutionSystem : EntitySystem
         RaiseLocalEvent(xeno, ref afterEv);
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+    }
+
+    /// <summary>
+    /// Regenerate the set of all component names that xeno prototypes have defined.
+    /// </summary>
+    private void ReloadXenoComponents()
+    {
+        var components = new HashSet<string>();
+        foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno, _compFactory))
+                continue;
+
+            foreach (var component in entity.Components)
+            {
+                components.Add(component.Key);
+            }
+        }
+        Log.Debug("Loaded xeno components: ");
+        foreach (var component in components)
+        {
+            Log.Debug($"  {component}");
+        }
+        _xenoComponents = components.ToFrozenSet();
+
+        if (!_prototypes.TryIndex(CloningSettingsId, out var settings))
+        {
+            Log.Error($"Failed to load cloning prototype {CloningSettingsId}, xenos will be unable to change prototypes.");
+            return;
+        }
+
+        foreach (var pointlessExclude in settings.ExcludeComponents.Except(_xenoComponents))
+        {
+            if (!EntityManager.ComponentFactory.TryGetRegistration(pointlessExclude, out _))
+            {
+                // We failed to find the component registration of this component name. Most likely means it is
+                // a client or server side exclusive component, and we're on the wrong side. So we don't
+                // have to issue a warning for it.
+                continue;
+            }
+            Log.Warning($"Pointless exclude in clone settings (no xeno prototypes contain it): {pointlessExclude}");
+        }
+        Log.Debug("Xeno components reloaded.");
     }
 }

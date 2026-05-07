@@ -545,13 +545,10 @@
 
 - type: cloningSettings
   id: XenoClone
-  copyAll: true
   excludeComponents:
-  - MetaData
-  # positions/current status shouldn't change
+  # components that all xenos have defined but must NOT
+  # be replaced with fresh versions (keep current state)
   - Physics
-  - Actor
-  - Transform
   - Climbing
   - InputMover
   - ActiveInputMover
@@ -559,43 +556,17 @@
   - MobMover
   - MindContainer
   - StatusEffects
-  - ContainerContainer
-  - HiveMember
   - HiveTracker
-  - XenoActivePheromones
-  - XenoName
-  - ActiveTacticalMapTracked
-  - XenoRecentlyDevolved
-  - XenoRank
   - Actions
-  - ActionsContainer
-  - NameModifier
   - AffectableByWeeds
-  - OnFire
   - Appearance
-  - XenoSecretionList
-  - MouseRotator
-  - NoRotateOnMove
-  - ContainerManager
   - Alerts
-  - ActiveDoAfter
-  - ActivePuller
-  - BeingPulled
-  - Joint
   - NightVision
-  - Forensics
-  - ViewSubscriber
-  - Followed
-  - XenoWatched
-  - XenoWatching
-  - XenoResting
   # leader related
-  - HiveLeader
   - RMCInnateRadioTextIncrease
   # godmode/invincibility should stay if granted
   - Damageable
   - Destructible
-  - Godmode
   # hivemind status shouldn't change
   - IntrinsicRadioReceiver
   - IntrinsicRadioTransmitter
@@ -607,14 +578,4 @@
   - AssignXenoName # don't rename the xeno
   # tacmap
   - TacticalMapUser
-  - ActiveTacticalMapUser
-  - UserInterfaceUser
-  # clientside specific
-  - XenoNewlyEvolved
-  - LerpingEye
-  - PredictedPhysics
-  - Jittering
-  - AnimationPlayer
-  - ActiveStatusEffects
   - Eye
-  - ActiveUserInterface
