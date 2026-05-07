@@ -642,11 +642,11 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     {
         if (_prototypes.TryIndex<EntityPrototype>(projectile, out var projectileProto) &&
             projectileProto.TryGetComponent<SpawnOnTerminateComponent>(out var spawn, _componentFactory) &&
-            spawn.ProjectileAdjust)
+            spawn.SpawnOffsetMultiplier > 0)
         {
             var delta = impact.Position - origin.Position;
             if (delta.LengthSquared() > 0f)
-                return impact.Offset(delta.Normalized() * -0.5f);
+                return impact.Offset(delta.Normalized() * spawn.SpawnOffsetMultiplier);
         }
 
         return impact;

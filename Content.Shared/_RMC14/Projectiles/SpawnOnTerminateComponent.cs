@@ -22,5 +22,5 @@ public sealed partial class SpawnOnTerminateComponent : Component
     public PopupType? PopupType;
 
     [DataField, AutoNetworkedField]
-    public bool ProjectileAdjust = true;
+    public float SpawnOffsetMultiplier = -0.5f;
 }

@@ -268,7 +268,6 @@
   - type: Projectile
     impactEffect: BulletImpactEffect
     deleteOnCollide: false
-    maxFixedRange: 9
     damage:
       types:
         Piercing: 30
@@ -276,7 +275,7 @@
       path: /Audio/Effects/gen_hit.ogg
   - type: SpawnOnTerminate
     spawn: RMCSmoke
-    projectileAdjust: false
+    spawnOffsetMultiplier: 0
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
