@@ -11,7 +11,7 @@ namespace Content.Client._RMC14.Language.Systems;
 
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     public event Action? OnLanguagesChanged;
     public event Action? OnLanguageLearningChanged;
@@ -19,21 +19,13 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<LanguageComponent, ComponentHandleState>(OnHandleState);
-        SubscribeLocalEvent<LanguageComponent, LanguagesUpdateEvent>(OnLanguagesUpdate);
+        SubscribeLocalEvent<LanguageComponent, AfterAutoHandleStateEvent>(OnLanguageAfterState);
         SubscribeLocalEvent<LanguageLearningComponent, ComponentHandleState>(OnHandleLearningState);
     }
 
-    private void OnHandleState(Entity<LanguageComponent> ent, ref ComponentHandleState args)
+    private void OnLanguageAfterState(Entity<LanguageComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (args.Current is not LanguageComponent.State state)
-            return;
-
-        ent.Comp.CurrentLanguage = state.CurrentLanguage;
-        ent.Comp.SpokenLanguages = state.SpokenLanguages.ToHashSet();
-        ent.Comp.UnderstoodLanguages = state.UnderstoodLanguages.ToHashSet();
-
-        if (ent.Owner == _playerManager.LocalEntity)
+        if (ent.Owner == _player.LocalEntity)
             OnLanguagesChanged?.Invoke();
     }
 
@@ -58,24 +50,18 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             }
         );
 
-        if (ent.Owner == _playerManager.LocalEntity)
+        if (ent.Owner == _player.LocalEntity)
             OnLanguageLearningChanged?.Invoke();
-    }
-
-    private void OnLanguagesUpdate(Entity<LanguageComponent> ent, ref LanguagesUpdateEvent args)
-    {
-        if (ent.Owner == _playerManager.LocalEntity)
-            OnLanguagesChanged?.Invoke();
     }
 
     public LanguageComponent? GetLocalSpeaker()
     {
-        return CompOrNull<LanguageComponent>(_playerManager.LocalEntity);
+        return CompOrNull<LanguageComponent>(_player.LocalEntity);
     }
 
     public LanguageLearningComponent? GetLocalLearner()
     {
-        return CompOrNull<LanguageLearningComponent>(_playerManager.LocalEntity);
+        return CompOrNull<LanguageLearningComponent>(_player.LocalEntity);
     }
 
     public void RequestSetLanguage(ProtoId<LanguagePrototype> language)

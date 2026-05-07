@@ -1,28 +1,28 @@
 using Content.Server.Chat.Systems;
-using Content.Shared._RMC14.Language.Components;
-using Content.Shared._RMC14.Language.Systems;
-using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language;
-using Content.Shared.Popups;
 using Content.Server._RMC14.Language.Systems;
-using Robust.Shared.Timing;
+using Content.Shared._RMC14.Language.Components;
+using Content.Shared._RMC14.Language.Prototypes;
+using Content.Shared._RMC14.Language.Systems;
+using Content.Shared.Popups;
 using System.Linq;
-using Robust.Shared.Prototypes;
 using System.Numerics;
 using Robust.Server.GameObjects;
-using Robust.Shared.Log;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Language.Systems;
 
 public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
-    [Dependency] private readonly LanguageSystem _languageSystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private const float MaxHearingRange = 10.0f;
+    private readonly HashSet<EntityUid> _potentialLearners = [];
 
     public override void Initialize()
     {
@@ -44,9 +44,9 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         }
     }
 
-    private void OnGetLearningState(EntityUid uid, LanguageLearningComponent component, ref ComponentGetState args)
+    private void OnGetLearningState(Entity<LanguageLearningComponent> ent, ref ComponentGetState args)
     {
-        var languagesForState = component.Languages.ToDictionary(
+        var languagesForState = ent.Comp.Languages.ToDictionary(
             kvp => kvp.Key,
             kvp => new LanguageLearningStateData(
                 kvp.Value.RequiresFirstContact,
@@ -82,10 +82,10 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         if (!_prototypeManager.TryIndex(args.Language, out var languageProto))
             return;
 
-        var potentialLearners = new HashSet<EntityUid>();
-        _lookupSystem.GetEntitiesInRange(Transform(args.Source).Coordinates, MaxHearingRange, potentialLearners);
+        _potentialLearners.Clear();
+        _lookup.GetEntitiesInRange(Transform(args.Source).Coordinates, MaxHearingRange, _potentialLearners);
 
-        foreach (var potentialLearner in potentialLearners)
+        foreach (var potentialLearner in _potentialLearners)
         {
             if (potentialLearner == args.Source)
                 continue;
@@ -266,7 +266,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
         if (hasLearnedAnyWords)
         {
-            _languageSystem.AddLanguage(learner.Owner, language, addSpoken: true, addUnderstood: false);
+            _language.AddLanguage(learner.Owner, language, addSpoken: true, addUnderstood: false);
         }
 
         if (comprehension >= 0.8f && hasLearnedAnyWords)
@@ -275,7 +275,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             {
                 if (!langComp.UnderstoodLanguages.Contains(language))
                 {
-                    _languageSystem.AddLanguage(learner.Owner, language, addSpoken: false, addUnderstood: true);
+                    _language.AddLanguage(learner.Owner, language, addSpoken: false, addUnderstood: true);
                     _popup.PopupEntity($"You have mastered {language}!", learner, learner, PopupType.Large);
                 }
             }

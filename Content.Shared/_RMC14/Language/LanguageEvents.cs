@@ -5,75 +5,48 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Language;
 
 [ByRefEvent]
-public struct DetermineLanguageEvent
-{
-    public EntityUid Speaker;
-    public ProtoId<LanguagePrototype> Language;
-
-    public DetermineLanguageEvent(EntityUid speaker, ProtoId<LanguagePrototype> language)
-    {
-        Speaker = speaker;
-        Language = language;
-    }
-}
+public record struct DetermineLanguageEvent(EntityUid Speaker, ProtoId<LanguagePrototype> Language);
 
 [Serializable, NetSerializable]
-public sealed class LanguagesSetMessage : EntityEventArgs
+public sealed class LanguagesSetMessage(ProtoId<LanguagePrototype> currentLanguage) : EntityEventArgs
 {
-    public ProtoId<LanguagePrototype> CurrentLanguage;
+    public ProtoId<LanguagePrototype> CurrentLanguage = currentLanguage;
+}
 
-    public LanguagesSetMessage(ProtoId<LanguagePrototype> currentLanguage)
+[ByRefEvent]
+public record struct TransformLanguageMessageEvent(
+    EntityUid Speaker,
+    ProtoId<LanguagePrototype> Language,
+    string Message);
+
+[ByRefEvent]
+public record struct CanUnderstandLanguageEvent(
+    EntityUid Listener,
+    ProtoId<LanguagePrototype> Language,
+    bool CanUnderstand = false);
+
+[ByRefEvent]
+public record struct DetermineEntityLanguagesEvent(
+    HashSet<ProtoId<LanguagePrototype>> SpokenLanguages,
+    HashSet<ProtoId<LanguagePrototype>> UnderstoodLanguages)
+{
+    public DetermineEntityLanguagesEvent() : this([], [])
     {
-        CurrentLanguage = currentLanguage;
     }
 }
 
 [ByRefEvent]
-public struct TransformLanguageMessageEvent
-{
-    public EntityUid Speaker;
-    public ProtoId<LanguagePrototype> Language;
-    public string Message;
-
-    public TransformLanguageMessageEvent(EntityUid speaker, ProtoId<LanguagePrototype> language, string message)
-    {
-        Speaker = speaker;
-        Language = language;
-        Message = message;
-    }
-}
+public record struct ProcessSpeakerLanguageEvent(
+    EntityUid Speaker,
+    ProtoId<LanguagePrototype> Language,
+    string ProcessedMessage);
 
 [ByRefEvent]
-public struct CanUnderstandLanguageEvent
-{
-    public EntityUid Listener;
-    public ProtoId<LanguagePrototype> Language;
-    public bool CanUnderstand;
+public readonly record struct LanguagesUpdateEvent;
 
-    public CanUnderstandLanguageEvent(EntityUid listener, ProtoId<LanguagePrototype> language)
-    {
-        Listener = listener;
-        Language = language;
-        CanUnderstand = false;
-    }
-}
-
-public sealed class LanguagesUpdateEvent : EntityEventArgs
-{
-}
-
-public sealed class LanguageChangeAttemptedEvent : EntityEventArgs
-{
-    public EntityUid Entity;
-    public ProtoId<LanguagePrototype> OldLanguage;
-    public ProtoId<LanguagePrototype> NewLanguage;
-    public bool Success;
-
-    public LanguageChangeAttemptedEvent(EntityUid entity, ProtoId<LanguagePrototype> oldLanguage, ProtoId<LanguagePrototype> newLanguage, bool success)
-    {
-        Entity = entity;
-        OldLanguage = oldLanguage;
-        NewLanguage = newLanguage;
-        Success = success;
-    }
-}
+[ByRefEvent]
+public readonly record struct LanguageChangeAttemptedEvent(
+    EntityUid Entity,
+    ProtoId<LanguagePrototype> OldLanguage,
+    ProtoId<LanguagePrototype> NewLanguage,
+    bool Success);

@@ -3,11 +3,12 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Timing;
+using Content.Shared._RMC14.Language.Systems;
 
 namespace Content.Shared._RMC14.Language.Components;
 
 [RegisterComponent, NetworkedComponent]
+[Access(typeof(SharedLanguageLearningSystem), typeof(SharedLanguageSystem))]
 public sealed partial class LanguageLearningComponent : Component
 {
     [DataField]
@@ -17,6 +18,7 @@ public sealed partial class LanguageLearningComponent : Component
     public HashSet<ProtoId<LanguagePrototype>> FirstContactLanguages = new();
 
     [DataField]
+    [Access(typeof(SharedLanguageLearningSystem), typeof(SharedLanguageSystem), Other = AccessPermissions.ReadExecute)]
     public Dictionary<ProtoId<LanguagePrototype>, LanguageLearningData> Languages = new();
 
     [DataField]
@@ -77,6 +79,7 @@ public sealed partial class LanguageLearningComponent : Component
 }
 
 [DataDefinition]
+[Serializable, NetSerializable]
 public sealed partial class LanguageLearningData
 {
     [DataField]

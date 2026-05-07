@@ -1,43 +1,25 @@
-using Content.Server.Administration.Logs;
+using Content.Server.GameTicking.Events;
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
-using Content.Shared.Database;
-using Content.Server.GameTicking.Events;
 using Robust.Server.GameObjects;
-using Robust.Shared.GameStates;
-using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using System.Linq;
-using System.Text;
 
 namespace Content.Server._RMC14.Language.Systems;
 
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ActorSystem _actorSystem = default!;
-    [Dependency] private readonly LanguageLearningSystem _languageLearning = default!;
+    [Dependency] private readonly LanguageLearningSystem _learning = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnInitLanguageSpeaker);
-        SubscribeLocalEvent<LanguageComponent, ComponentGetState>(OnGetLanguageState);
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         SubscribeNetworkEvent<LanguagesSetMessage>(OnClientSetLanguage);
-    }
-
-    private void OnGetLanguageState(Entity<LanguageComponent> entity, ref ComponentGetState args)
-    {
-        args.State = new LanguageComponent.State(
-            entity.Comp.CurrentLanguage,
-            entity.Comp.SpokenLanguages.ToList(),
-            entity.Comp.UnderstoodLanguages.ToList()
-        );
     }
 
     private void OnInitLanguageSpeaker(Entity<LanguageComponent> ent, ref MapInitEvent args)
@@ -73,7 +55,8 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             return;
 
         ent.Comp.CurrentLanguage = language;
-        RaiseLocalEvent(ent, new LanguagesUpdateEvent(), true);
+        var update = new LanguagesUpdateEvent();
+        RaiseLocalEvent(ent, ref update, true);
         Dirty(ent);
     }
 
@@ -122,7 +105,8 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             !ent.Comp.SpokenLanguages.Contains(ent.Comp.CurrentLanguage.Value))
         {
             ent.Comp.CurrentLanguage = ent.Comp.DefaultLanguage ?? ent.Comp.SpokenLanguages.FirstOrDefault();
-            RaiseLocalEvent(ent, new LanguagesUpdateEvent());
+            var update = new LanguagesUpdateEvent();
+            RaiseLocalEvent(ent, ref update);
             Dirty(ent);
             return true;
         }
@@ -152,7 +136,10 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         ent.Comp.UnderstoodLanguages.UnionWith(ev.UnderstoodLanguages);
 
         if (!TryFixCurrentLanguage(ent))
-            RaiseLocalEvent(ent, new LanguagesUpdateEvent());
+        {
+            var update = new LanguagesUpdateEvent();
+            RaiseLocalEvent(ent, ref update);
+        }
 
         Dirty(ent);
     }
@@ -165,10 +152,10 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         if (TryComp<LanguageLearningComponent>(speaker, out var learningComp) &&
             learningComp.Languages.ContainsKey(language))
         {
-            return _languageLearning.ProcessMessageForSpeaker(speaker, message, language);
+            return _learning.ProcessMessageForSpeaker(speaker, message, language);
         }
 
-        var languageLearningEv = new ProcessSpeakerLanguageEvent(speaker, message, language);
+        var languageLearningEv = new ProcessSpeakerLanguageEvent(speaker, language, message);
         RaiseLocalEvent(speaker, ref languageLearningEv);
         return languageLearningEv.ProcessedMessage;
     }
@@ -184,39 +171,11 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         if (TryComp<LanguageLearningComponent>(listener, out var learningComp) &&
             learningComp.Languages.ContainsKey(language))
         {
-            var result = _languageLearning.ProcessMessageForListener(listener, speakerMessage, language);
+            var result = _learning.ProcessMessageForListener(listener, speakerMessage, language);
             return result;
         }
 
         var obfuscated = ObfuscateMessage(speakerMessage, language);
         return obfuscated;
-    }
-}
-
-[ByRefEvent]
-public struct DetermineEntityLanguagesEvent
-{
-    public HashSet<ProtoId<LanguagePrototype>> SpokenLanguages;
-    public HashSet<ProtoId<LanguagePrototype>> UnderstoodLanguages;
-
-    public DetermineEntityLanguagesEvent()
-    {
-        SpokenLanguages = new HashSet<ProtoId<LanguagePrototype>>();
-        UnderstoodLanguages = new HashSet<ProtoId<LanguagePrototype>>();
-    }
-}
-
-[ByRefEvent]
-public struct ProcessSpeakerLanguageEvent
-{
-    public EntityUid Speaker;
-    public ProtoId<LanguagePrototype> Language;
-    public string ProcessedMessage;
-
-    public ProcessSpeakerLanguageEvent(EntityUid speaker, string message, ProtoId<LanguagePrototype> language)
-    {
-        Speaker = speaker;
-        ProcessedMessage = message;
-        Language = language;
     }
 }

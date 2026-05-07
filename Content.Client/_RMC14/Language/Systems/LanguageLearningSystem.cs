@@ -9,16 +9,11 @@ namespace Content.Client._RMC14.Language.Systems;
 
 public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     public LanguageLearningComponent? GetLocalLearner()
     {
-        return CompOrNull<LanguageLearningComponent>(_playerManager.LocalEntity);
+        return CompOrNull<LanguageLearningComponent>(_player.LocalEntity);
     }
 
     public float GetLocalLanguageProgress(ProtoId<LanguagePrototype> language)
