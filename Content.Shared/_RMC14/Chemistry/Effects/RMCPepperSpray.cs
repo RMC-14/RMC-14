@@ -1,10 +1,11 @@
 using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Emote;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Humanoid;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
@@ -42,7 +43,11 @@ public sealed partial class RMCPepperSpray : EntityEffect
         var target = args.TargetEntity;
         var entMan = args.EntityManager;
 
-        if (!entMan.HasComponent<MarineComponent>(target))
+        if (!entMan.HasComponent<HumanoidAppearanceComponent>(target))
+            return;
+
+        var mobState = entMan.System<MobStateSystem>();
+        if (mobState.IsDead(target))
             return;
 
         var skills = entMan.System<SkillsSystem>();
