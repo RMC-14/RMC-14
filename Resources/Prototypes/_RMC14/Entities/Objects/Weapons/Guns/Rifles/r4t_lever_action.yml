@@ -18,7 +18,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_lever_action_fire.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_lever_action_fire.wav
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
