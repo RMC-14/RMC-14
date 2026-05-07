@@ -58,16 +58,21 @@
     magState: mag
     steps: 1
     zeroVisible: true
-  - type: AttachableHolder # TODO RMC14 barrel nozzle
+  - type: AttachableHolder
     slots:
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlamerNozzle
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: 0.03, 0.092
+      rmc-aslot-underbarrel: 0.405, -0.3425
   - type: WieldedCrosshair
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi

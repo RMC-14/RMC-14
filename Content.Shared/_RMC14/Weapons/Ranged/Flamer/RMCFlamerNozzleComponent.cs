@@ -17,5 +17,5 @@ public sealed partial class RMCFlamerNozzleComponent : Component, IShootable
     public float MaxRange = RMCMathExtensions.CircleAreaFromSquareAbilityRange(5);
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Projectile = "RMCBulletSentryFireProjectile";
+    public EntProtoId Projectile = "RMCFlamerNozzleFireBall";
 }

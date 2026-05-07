@@ -1,0 +1,37 @@
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCFlamerNozzleFireBall
+  name: flaming ball
+  description: Huh? You shouldn't be able to see this...
+  categories: [ HideSpawnMenu ]
+  components:
+  # Added via code: IgniteOnProjectileHit, ProjectileMaxRange
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
+    layers:
+    - state: pulse0
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: true
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Heat: 1 # Gets multiplied by `ReagentPrototype.Intensity`.
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: IgnoreArc
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: SpawnOnTerminate
+    spawn: RMCTileFire # Gets set to `ReagentPrototype.FireEntity`.
+  - type: RMCFireProjectile

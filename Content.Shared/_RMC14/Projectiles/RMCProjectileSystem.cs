@@ -268,6 +268,15 @@ public sealed class RMCProjectileSystem : EntitySystem
         Dirty(projectile, maxRange);
     }
 
+    public void ModifyDamage(EntityUid projectile, int multiplier)
+    {
+        if (!TryComp<ProjectileComponent>(projectile, out var comp))
+            return;
+
+        comp.Damage *= multiplier;
+        Dirty(projectile, comp);
+    }
+
     private void StopProjectile(Entity<ProjectileMaxRangeComponent> ent)
     {
         if (ent.Comp.Delete)
