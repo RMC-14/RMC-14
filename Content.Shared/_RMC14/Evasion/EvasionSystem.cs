@@ -13,7 +13,7 @@ public sealed class EvasionSystem : EntitySystem
         SubscribeLocalEvent<EvasionComponent, XenoRestEvent>(CallRefresh);
         SubscribeLocalEvent<EvasionComponent, DownedEvent>(CallRefresh);
         SubscribeLocalEvent<EvasionComponent, StoodEvent>(CallRefresh);
-        SubscribeLocalEvent<EvasionComponent, AfterXenoChangedCasteEvent>(CallRefresh);
+        SubscribeLocalEvent<EvasionComponent, AfterXenoChangedPrototypeEvent>(CallRefresh);
 
         SubscribeLocalEvent<RMCSizeComponent, EvasionRefreshModifiersEvent>(OnSizeRefreshEvasion);
     }
