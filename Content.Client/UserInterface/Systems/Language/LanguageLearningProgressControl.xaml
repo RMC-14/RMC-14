@@ -1,0 +1,60 @@
+<widgets:LanguageLearningProgressControl xmlns="https://spacestation14.io"
+                                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                         xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Language">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+        <PanelContainer Name="HeaderPanel" HorizontalExpand="True">
+            <BoxContainer Name="HeaderBox" Orientation="Horizontal" HorizontalExpand="True">
+                <TextureRect Name="LanguageIcon"
+                             SetWidth="32"
+                             SetHeight="32"
+                             Stretch="KeepAspectCentered"
+                             Margin="0 0 8 0"
+                             Visible="False"/>
+                <BoxContainer Orientation="Vertical"
+                              HorizontalExpand="True"
+                              VerticalAlignment="Center">
+                    <Label Name="NameLabel"
+                           FontColorOverride="#FFFFFF"
+                           StyleClasses="LabelHeading"/>
+                    <Label Name="StatsLabel"
+                           FontColorOverride="#D3D3D3"
+                           StyleClasses="LabelSubText"/>
+                    <ProgressBar Name="ProgressBar"
+                                 HorizontalExpand="True"
+                                 SetHeight="8"
+                                 Margin="0 2 0 0"/>
+                </BoxContainer>
+                <Button Name="ExpandButton"
+                        SetWidth="90"
+                        SetHeight="24"
+                        VerticalAlignment="Center"
+                        Visible="False"/>
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer Name="WordsPanel"
+                        HorizontalExpand="True"
+                        SetHeight="180"
+                        Visible="False">
+            <BoxContainer Orientation="Vertical"
+                          HorizontalExpand="True"
+                          VerticalExpand="True"
+                          SeparationOverride="2">
+                <LineEdit Name="SearchBox"
+                          HorizontalExpand="True"
+                          SetHeight="24"
+                          Margin="6 4 6 2"/>
+                <ScrollContainer HorizontalExpand="True"
+                                 VerticalExpand="True"
+                                 HScrollEnabled="False"
+                                 VScrollEnabled="True"
+                                 ReturnMeasure="True">
+                    <BoxContainer Name="WordsContainer"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True"
+                                  SeparationOverride="3"
+                                  Margin="6 2 6 4"/>
+                </ScrollContainer>
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</widgets:LanguageLearningProgressControl>

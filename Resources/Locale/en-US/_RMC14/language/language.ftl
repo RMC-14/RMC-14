@@ -57,6 +57,10 @@ language-learning-hide-words = Hide words
 language-learning-no-results = No words found matching your search.
 language-learning-first-contact = You identify this as {$language}.
 language-learning-first-contact-with-meaning = You identify this as {$language}. {$meaning}
+language-learning-progress-single = Language analysis improved. Progress: {$progress}% ({$words} words)
+language-learning-progress-multi = Analyzed {$terms} terms. Progress: {$progress}% ({$words} words)
+language-learning-mastered = You have mastered {$language}!
+language-learning-fluent = You are becoming fluent in {$language}!
 
 # Language errors
 chat-manager-no-radio-key = No radio key specified.

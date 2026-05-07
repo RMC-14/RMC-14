@@ -6,7 +6,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Language.Systems;
 
-public class SharedLanguageSystem : EntitySystem
+public abstract class SharedLanguageSystem : EntitySystem
 {
     [Dependency] protected readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -18,42 +18,94 @@ public class SharedLanguageSystem : EntitySystem
 
     public ProtoId<LanguagePrototype> GetCurrentLanguage(EntityUid entity)
     {
-        if (!TryComp<LanguageComponent>(entity, out var component))
+        return GetCurrentLanguage((entity, CompOrNull<LanguageComponent>(entity)));
+    }
+
+    public bool TryGetCurrentLanguage(EntityUid entity, out ProtoId<LanguagePrototype> language)
+    {
+        return TryGetCurrentLanguage((entity, CompOrNull<LanguageComponent>(entity)), out language);
+    }
+
+    public ProtoId<LanguagePrototype> GetCurrentLanguage(Entity<LanguageComponent?> ent)
+    {
+        if (!TryGetCurrentLanguage(ent, out var language))
             return CommonLanguage;
 
-        return component.CurrentLanguage ?? component.DefaultLanguage ?? CommonLanguage;
+        return language;
+    }
+
+    public bool TryGetCurrentLanguage(Entity<LanguageComponent?> ent, out ProtoId<LanguagePrototype> language)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+        {
+            language = default!;
+            return false;
+        }
+
+        language = ent.Comp.CurrentLanguage ?? ent.Comp.DefaultLanguage ?? CommonLanguage;
+        return true;
+    }
+
+    public bool HasLanguageComponent(EntityUid entity)
+    {
+        return HasLanguageComponent((entity, CompOrNull<LanguageComponent>(entity)));
+    }
+
+    public bool HasLanguageComponent(Entity<LanguageComponent?> ent)
+    {
+        return Resolve(ent, ref ent.Comp, false);
     }
 
     public bool CanSpeak(EntityUid entity, ProtoId<LanguagePrototype> language)
     {
-        if (!TryComp<LanguageComponent>(entity, out var component))
+        return CanSpeak((entity, CompOrNull<LanguageComponent>(entity)), language);
+    }
+
+    public bool CanSpeak(Entity<LanguageComponent?> ent, ProtoId<LanguagePrototype> language)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
             return language == CommonLanguage;
 
-        return component.SpokenLanguages.Contains(language);
+        return ent.Comp.SpokenLanguages.Contains(language);
     }
 
     public bool CanUnderstand(EntityUid entity, ProtoId<LanguagePrototype> language)
     {
-        if (!TryComp<LanguageComponent>(entity, out var component))
+        return CanUnderstand((entity, CompOrNull<LanguageComponent>(entity)), language);
+    }
+
+    public bool CanUnderstand(Entity<LanguageComponent?> ent, ProtoId<LanguagePrototype> language)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
             return language == CommonLanguage;
 
-        return component.UnderstoodLanguages.Contains(language);
+        return ent.Comp.UnderstoodLanguages.Contains(language);
     }
 
     public IReadOnlySet<ProtoId<LanguagePrototype>> GetSpokenLanguages(EntityUid entity)
     {
-        if (!TryComp<LanguageComponent>(entity, out var component))
+        return GetSpokenLanguages((entity, CompOrNull<LanguageComponent>(entity)));
+    }
+
+    public IReadOnlySet<ProtoId<LanguagePrototype>> GetSpokenLanguages(Entity<LanguageComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
             return DefaultLanguages;
 
-        return component.SpokenLanguages;
+        return ent.Comp.SpokenLanguages;
     }
 
     public IReadOnlySet<ProtoId<LanguagePrototype>> GetUnderstoodLanguages(EntityUid entity)
     {
-        if (!TryComp<LanguageComponent>(entity, out var component))
+        return GetUnderstoodLanguages((entity, CompOrNull<LanguageComponent>(entity)));
+    }
+
+    public IReadOnlySet<ProtoId<LanguagePrototype>> GetUnderstoodLanguages(Entity<LanguageComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
             return DefaultLanguages;
 
-        return component.UnderstoodLanguages;
+        return ent.Comp.UnderstoodLanguages;
     }
 
     public string ObfuscateMessage(string message, ProtoId<LanguagePrototype> language)

@@ -12,6 +12,8 @@ namespace Content.Client._RMC14.Language.Systems;
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
+    private static readonly IReadOnlyDictionary<ProtoId<LanguagePrototype>, LanguageLearningViewData> EmptyLearningLanguages =
+        new Dictionary<ProtoId<LanguagePrototype>, LanguageLearningViewData>();
 
     public event Action? OnLanguagesChanged;
     public event Action? OnLanguageLearningChanged;
@@ -34,11 +36,6 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         if (args.Current is not LanguageLearningComponent.State state)
             return;
 
-        ent.Comp.LearnableLanguages = state.Languages.Keys.ToHashSet();
-        ent.Comp.FirstContactLanguages = state.Languages
-            .Where(kvp => kvp.Value.RequiresFirstContact)
-            .Select(kvp => kvp.Key)
-            .ToHashSet();
         ent.Comp.Languages = state.Languages.ToDictionary(
             kvp => kvp.Key,
             kvp => new LanguageLearningData
@@ -47,8 +44,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
                 Encountered = kvp.Value.Encountered,
                 Progress = kvp.Value.Progress,
                 LearnedWords = new Dictionary<string, float>(kvp.Value.LearnedWords),
-            }
-        );
+            });
 
         if (ent.Owner == _player.LocalEntity)
             OnLanguageLearningChanged?.Invoke();
@@ -72,27 +68,17 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         RaiseNetworkEvent(new LanguagesSetMessage(language));
     }
 
-    public float GetLanguageProgress(EntityUid entity, ProtoId<LanguagePrototype> language)
+    public IReadOnlyDictionary<ProtoId<LanguagePrototype>, LanguageLearningViewData> GetLearningLanguages(EntityUid entity)
     {
-        var learningComp = CompOrNull<LanguageLearningComponent>(entity);
-        return learningComp?.Languages.GetValueOrDefault(language)?.Progress ?? 0f;
-    }
+        if (CompOrNull<LanguageLearningComponent>(entity) is not { } learningComp)
+            return EmptyLearningLanguages;
 
-    public IReadOnlyDictionary<string, float> GetLearnedWords(EntityUid entity, ProtoId<LanguagePrototype> language)
-    {
-        var learningComp = CompOrNull<LanguageLearningComponent>(entity);
-        if (learningComp?.Languages.TryGetValue(language, out var languageData) == true)
-            return new Dictionary<string, float>(languageData.LearnedWords);
-
-        return new Dictionary<string, float>();
-    }
-
-    public IReadOnlySet<ProtoId<LanguagePrototype>> GetLearnableLanguages(EntityUid entity)
-    {
-        var learningComp = CompOrNull<LanguageLearningComponent>(entity);
-        if (learningComp == null)
-            return new HashSet<ProtoId<LanguagePrototype>>();
-
-        return new HashSet<ProtoId<LanguagePrototype>>(learningComp.Languages.Keys);
+        return learningComp.Languages.ToDictionary(
+            kvp => kvp.Key,
+            kvp => new LanguageLearningViewData(
+                kvp.Value.RequiresFirstContact,
+                kvp.Value.Encountered,
+                kvp.Value.Progress,
+                new Dictionary<string, float>(kvp.Value.LearnedWords)));
     }
 }

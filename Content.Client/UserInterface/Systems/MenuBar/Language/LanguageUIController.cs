@@ -1,14 +1,14 @@
 using Content.Client._RMC14.Language.Systems;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
-using Content.Shared._RMC14.Language.Components;
+using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared.Input;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
-using System.Linq;
+using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 
 namespace Content.Client.UserInterface.Systems.Language;
@@ -16,8 +16,7 @@ namespace Content.Client.UserInterface.Systems.Language;
 public sealed class LanguageUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     private LanguageSystem _languageSystem = default!;
     private LanguageMenuWindow? _window;
@@ -99,11 +98,6 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
         }
     }
 
-    private void OnLanguageSelected(string languageId)
-    {
-        _languageSystem.RequestSetLanguage(languageId);
-    }
-
     private void OnLanguagesChanged()
     {
         UpdateLanguageWindow();
@@ -116,19 +110,17 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
 
     private void UpdateLanguageWindow()
     {
-        if (_window == null || _playerManager.LocalSession?.AttachedEntity is not { } entity)
+        if (_window == null || _player.LocalSession?.AttachedEntity is not { } entity)
             return;
 
         var currentLanguage = _languageSystem.GetCurrentLanguage(entity);
         var spokenLanguages = _languageSystem.GetSpokenLanguages(entity);
-        var spokenLanguageIds = spokenLanguages.Select(lang => lang.Id).ToHashSet();
+        var learningLanguages = _languageSystem.GetLearningLanguages(entity);
+        _window.UpdateLanguages(currentLanguage, spokenLanguages, learningLanguages);
+    }
 
-        LanguageLearningComponent? learningComponent = null;
-        if (_entityManager.TryGetComponent<LanguageLearningComponent>(entity, out var learningComp))
-        {
-            learningComponent = learningComp;
-        }
-
-        _window.UpdateLanguages(currentLanguage, spokenLanguageIds, learningComponent);
+    private void OnLanguageSelected(ProtoId<LanguagePrototype> language)
+    {
+        _languageSystem.RequestSetLanguage(language);
     }
 }

@@ -242,10 +242,16 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
                 var overallComprehension = CalculateOverallComprehension(comp, language);
                 var percentage = (int)(overallComprehension * 100);
                 var uniqueWords = languageData.LearnedWords.Count;
-
-                var progressMessage = wordsLearned == 1 ?
-                    $"Language analysis improved. Progress: {percentage}% ({uniqueWords} words)" :
-                    $"Analyzed {wordsLearned} terms. Progress: {percentage}% ({uniqueWords} words)";
+                var progressMessage = wordsLearned == 1
+                    ? Loc.GetString(
+                        "language-learning-progress-single",
+                        ("progress", percentage),
+                        ("words", uniqueWords))
+                    : Loc.GetString(
+                        "language-learning-progress-multi",
+                        ("terms", wordsLearned),
+                        ("progress", percentage),
+                        ("words", uniqueWords));
 
                 _popup.PopupEntity(progressMessage, learner, learner, PopupType.Medium);
             }
@@ -259,6 +265,9 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         var comp = learner.Comp;
         var comprehension = CalculateOverallComprehension(comp, language);
         var languageData = EnsureLanguageTracking(comp, language);
+        var languageName = _prototypeManager.TryIndex(language, out var languageProto)
+            ? languageProto.LocalizedName
+            : language.Id;
 
         languageData.Progress = comprehension;
 
@@ -276,13 +285,21 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
                 if (!langComp.UnderstoodLanguages.Contains(language))
                 {
                     _language.AddLanguage(learner.Owner, language, addSpoken: false, addUnderstood: true);
-                    _popup.PopupEntity($"You have mastered {language}!", learner, learner, PopupType.Large);
+                    _popup.PopupEntity(
+                        Loc.GetString("language-learning-mastered", ("language", languageName)),
+                        learner,
+                        learner,
+                        PopupType.Large);
                 }
             }
         }
         else if (comprehension >= 0.6f && hasLearnedAnyWords)
         {
-            _popup.PopupEntity($"You are becoming fluent in {language}!", learner, learner, PopupType.Large);
+            _popup.PopupEntity(
+                Loc.GetString("language-learning-fluent", ("language", languageName)),
+                learner,
+                learner,
+                PopupType.Large);
         }
     }
 

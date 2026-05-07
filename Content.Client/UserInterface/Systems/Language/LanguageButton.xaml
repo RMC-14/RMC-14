@@ -1,0 +1,32 @@
+<widgets:LanguageButton xmlns="https://spacestation14.io"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Language">
+    <PanelContainer Name="Background" HorizontalExpand="True">
+        <BoxContainer Orientation="Horizontal"
+                      HorizontalExpand="True"
+                      VerticalExpand="True"
+                      Margin="12 8">
+            <TextureRect Name="Icon"
+                         SetWidth="32"
+                         SetHeight="32"
+                         Stretch="KeepAspectCentered"
+                         Margin="0 0 12 0"
+                         Visible="False"/>
+            <BoxContainer Orientation="Vertical"
+                          HorizontalExpand="True"
+                          VerticalAlignment="Center">
+                <Label Name="NameLabel"
+                       StyleClasses="LabelHeading"
+                       Margin="0 0 0 2"/>
+                <Label Name="DescriptionLabel"
+                       StyleClasses="LabelSubText"/>
+            </BoxContainer>
+            <Label Name="SelectedIndicator"
+                   SetWidth="24"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   StyleClasses="LabelHeading"
+                   Visible="False"/>
+        </BoxContainer>
+    </PanelContainer>
+</widgets:LanguageButton>
