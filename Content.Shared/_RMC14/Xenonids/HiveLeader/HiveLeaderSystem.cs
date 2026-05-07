@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Radio;
@@ -54,6 +54,8 @@ public sealed class HiveLeaderSystem : EntitySystem
         SubscribeLocalEvent<HiveLeaderGranterComponent, XenoPheromonesActivatedEvent>(OnGranterPheromonesActivated);
         SubscribeLocalEvent<HiveLeaderGranterComponent, XenoPheromonesDeactivatedEvent>(OnGranterPheromonesDeactivated);
         SubscribeLocalEvent<HiveLeaderGranterComponent, XenoOvipositorChangedEvent>(OnGranterOvipositorChanged);
+
+        SubscribeLocalEvent<RMCInnateRadioTextIncreaseComponent, XenoChangingPrototypeEvent>(OnRadioTextIncreaseChangingPrototype);
     }
 
     private void OnLeaderRemove<T>(Entity<HiveLeaderComponent> ent, ref T args)
@@ -169,6 +171,22 @@ public sealed class HiveLeaderSystem : EntitySystem
     private void OnGranterOvipositorChanged(Entity<HiveLeaderGranterComponent> ent, ref XenoOvipositorChangedEvent args)
     {
         SyncPheromones(ent);
+    }
+
+    private void OnRadioTextIncreaseChangingPrototype(Entity<RMCInnateRadioTextIncreaseComponent> ent, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<RMCInnateRadioTextIncreaseComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is RMCInnateRadioTextIncreaseComponent { } newComponent)
+        {
+            // new xeno has an intrinsic component, just take the new component (do nothing)
+        }
+        else if (_hiveLeaderQuery.TryGetComponent(ent, out var leaderComp))
+        {
+            // new xeno doesn't have an intrinsic component, BUT we are a hive leader, so we should keep our component
+            // with the proper text sizing
+            ent.Comp.RadioTextIncrease = leaderComp.GrantRadioTextIncrease ?? 0;
+            args.AdditionalExclusions.Add(compName);
+        }
     }
 
     private void RemoveLeaders(Entity<HiveLeaderGranterComponent> ent)

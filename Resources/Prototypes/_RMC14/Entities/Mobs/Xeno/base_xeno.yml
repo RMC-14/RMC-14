@@ -562,8 +562,6 @@
   - Appearance
   - Alerts
   - NightVision
-  # leader related
-  - RMCInnateRadioTextIncrease
   # hivemind status shouldn't change
   - IntrinsicRadioReceiver
   - IntrinsicRadioTransmitter
