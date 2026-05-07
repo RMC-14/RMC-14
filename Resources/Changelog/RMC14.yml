@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed king being able to sometimes move while still in the air.
-    type: Fix
-  id: 2680
-  time: '2025-12-14T22:43:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8691
 - author: PursuitInAshes
   changes:
   - message: SEAs now have a stamp accessible through their vendor.
@@ -4486,5 +4479,13 @@
   id: 3179
   time: '2026-05-05T15:00:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9778
+- author: stranthbackup
+  changes:
+  - message: Rebalanced some current OT chems to produce the correct amount. CLF3
+      now produces 3u. High combustion & sticky napalm now produce 2u.
+    type: Tweak
+  id: 3180
+  time: '2026-05-07T02:18:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8637
 Name: RMC14
 Order: -1
