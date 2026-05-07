@@ -51,6 +51,60 @@
 
 - type: entity
   parent: RMCPropBase
+  id: RMCPropFactoryConveyer
+  name: large conveyor belt
+  description: A large conveyor belt used in industrial factories.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: factory_conveyer
+    offset: "-0.5, 0.5"
+    drawdepth: BelowFloor
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropFactoryRoboticArm
+  name: robotic arm
+  suffix: left
+  description: A robust robotic arm used in a range of mechanical processes, including assembly and packaging.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: factory_roboticarm
+
+- type: entity
+  parent: RMCPropFactoryRoboticArm
+  id: RMCPropFactoryRoboticArm2
+  suffix: right
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: factory_roboticarm2
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropPowerTransformer
+  name: power transformer
+  description: A passive electrical component that controls where and which circuits power flows into...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: transformer
+    offset: "0.5, -0.5"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+            bounds: "0,-1.5,1,0.5"
+        density: 190
+        layer:
+        - MobMask
+
+- type: entity
+  parent: RMCPropBase
   id: RMCPropEngineerConsol
   name: giant alien console
   description: A giant alien console of some kind, unlike anything you've ever seen before. Who knows the purpose of this strange technology...

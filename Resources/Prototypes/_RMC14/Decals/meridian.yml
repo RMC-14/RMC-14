@@ -1,0 +1,107 @@
+- type: decal
+  id: RMCDecalMeridianTile1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 1
+
+- type: decal
+  id: RMCDecalMeridianTile2
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 2
+
+- type: decal
+  id: RMCDecalMeridianTile3
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 3
+
+- type: decal
+  id: RMCDecalMeridianTile4
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 4
+
+- type: decal
+  id: RMCDecalMeridianTile5
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 5
+
+- type: decal
+  id: RMCDecalMeridianTile6
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 6
+
+- type: decal
+  id: RMCDecalMeridianTile7
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 7
+
+- type: decal
+  id: RMCDecalMeridianTile8
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 8
+
+- type: decal
+  id: RMCDecalMeridianTile9
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 9
+
+- type: decal
+  id: RMCDecalMeridianTile10
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 10
+
+- type: decal
+  id: RMCDecalMeridianTile11
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 11
+
+- type: decal
+  id: RMCDecalMeridianTile12
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/meridian.rsi
+    state: 12
