@@ -564,18 +564,13 @@
   - NightVision
   # leader related
   - RMCInnateRadioTextIncrease
-  # godmode/invincibility should stay if granted
-  - Damageable
-  - Destructible
   # hivemind status shouldn't change
   - IntrinsicRadioReceiver
   - IntrinsicRadioTransmitter
   - ActiveRadio
-  # other?
   - UserInterface
   - NpcFactionMember
   - EmoteCooldown
   - AssignXenoName # don't rename the xeno
-  # tacmap
   - TacticalMapUser
   - Eye
