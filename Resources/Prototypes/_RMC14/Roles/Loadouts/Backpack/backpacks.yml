@@ -28,3 +28,8 @@
   id: ProvostSecuritySatchel
   equipment:
     back: CMSatchelSecurityFilledProvostInspector
+
+- type: loadout
+  id: SatchelRoyalMOLS
+  equipment:
+    back: RMCSatchelRoyalMOLS
