@@ -1,19 +1,8 @@
-﻿using Content.Shared.NPC.Prototypes;
-using Robust.Shared.Prototypes;
-
-namespace Content.Server._RMC14.Tutorial;
+﻿namespace Content.Server._RMC14.Tutorial;
 
 [RegisterComponent]
 public sealed partial class RMCTutorialNPCComponent: Component
 {
-    // List of components to strip from the owning Entity. (Used to make entity immortable/unaffectable)
-    [DataField]
-    public ComponentRegistry? RemoveComponents;
-
-    // Factions allowed to trigger Voicelines.
-    [DataField]
-    public HashSet<ProtoId<NpcFactionPrototype>> Factions = new();
-
     // List of messages for the NPC to state
     [DataField]
     public List<string> Voicelines = [];

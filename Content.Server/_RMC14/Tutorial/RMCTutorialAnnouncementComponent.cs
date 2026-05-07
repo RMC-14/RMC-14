@@ -6,14 +6,6 @@ namespace Content.Server._RMC14.Tutorial;
 [RegisterComponent]
 public sealed partial class RMCTutorialAnnouncementComponent: Component
 {
-    // List of components to strip from the owning Entity. (Used to make entity immortable/unaffectable)
-    [DataField]
-    public ComponentRegistry? RemoveComponents;
-
-    // Factions allowed to trigger Voicelines.
-    [DataField]
-    public HashSet<ProtoId<NpcFactionPrototype>> Factions = new();
-
     // Announcement Body Text
     [DataField]
     public string Text = "";

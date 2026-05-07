@@ -20,13 +20,6 @@ public sealed partial class RMCTutorialAnnouncementSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RMCTutorialAnnouncementComponent, StartCollideEvent>(OnCollide);
-        SubscribeLocalEvent<RMCTutorialAnnouncementComponent, ComponentStartup>(OnStartup);
-    }
-
-    private void OnStartup(Entity<RMCTutorialAnnouncementComponent> ent, ref ComponentStartup args)
-    {
-        if (ent.Comp.RemoveComponents != null)
-            EntityManager.RemoveComponents(ent.Owner, ent.Comp.RemoveComponents);
     }
 
     private void OnCollide(EntityUid uid, RMCTutorialAnnouncementComponent component, ref StartCollideEvent args)
@@ -36,10 +29,10 @@ public sealed partial class RMCTutorialAnnouncementSystem : EntitySystem
             return;
         var subject = args.OtherEntity;
         // Ensure entity has a faction.
-        if (!TryComp<NpcFactionMemberComponent>(subject, out var factionComp))
+        if (!TryComp<RMCTutorialDummyComponent>(subject, out var tutComp) || !TryComp<NpcFactionMemberComponent>(subject, out var factionComp))
             return;
         // Ensures triggering entity is a member of the wanted faction
-        if (!factionComp.Factions.Any(faction => component.Factions.Contains(faction)))
+        if (!factionComp.Factions.Any(faction => tutComp.Factions.Contains(faction)))
             return;
 
         // Marine style signed announcement

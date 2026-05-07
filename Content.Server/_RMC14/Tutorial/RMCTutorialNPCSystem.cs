@@ -24,9 +24,6 @@ public sealed partial class RMCTutorialNPCSystem : EntitySystem
 
     private void OnStartup(Entity<RMCTutorialNPCComponent> ent, ref ComponentStartup args)
     {
-        if (ent.Comp.RemoveComponents != null)
-            EntityManager.RemoveComponents(ent.Owner, ent.Comp.RemoveComponents);
-
         // Can't set gender via component as it gets overwritten on spawn.
         if (TryComp<GrammarComponent>(ent.Owner, out var grammar))
         {
@@ -38,9 +35,9 @@ public sealed partial class RMCTutorialNPCSystem : EntitySystem
     {
         // Ensures triggering entity is a member of a given faction.
         var subject = args.OtherEntity;
-        if (!TryComp<NpcFactionMemberComponent>(subject, out var factionComp))
+        if (!TryComp<RMCTutorialDummyComponent>(subject, out var tutComp) || !TryComp<NpcFactionMemberComponent>(subject, out var factionComp))
             return;
-        if (!EntityManager.System<NpcFactionSystem>().IsMemberOfAny(uid, component.Factions))
+        if (!EntityManager.System<NpcFactionSystem>().IsMemberOfAny(uid, tutComp.Factions))
             return;
 
         // If it hasn't yet started, set initial Index
