@@ -180,17 +180,29 @@
   - type: Sprite
     sprite: Objects/Fun/Plushies/hampter.rsi
     state: icon
+  #RMC14
   - type: UseDelay
     delay: 120
+  #RMC14
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/mousesqueek.ogg
+  #RMC14
+  #- type: EmitSoundOnLand
+  #  sound:
+  #    path: /Audio/Items/Toys/mousesqueek.ogg
+  #RMC14
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Items/Toys/mousesqueek.ogg
   - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Items/Toys/mousesqueek.ogg
+  #RMC14
+  #- type: EmitSoundOnCollide
+  #  sound:
+  #    path: /Audio/Items/Toys/mousesqueek.ogg
+  #RMC14
   - type: Food
     requiresSpecialDigestion: true
     useSound:
@@ -308,17 +320,26 @@
   - type: Sprite
     sprite: Objects/Fun/Plushies/arachnid.rsi
     state: icon
+  #RMC14
   - type: UseDelay
     delay: 120
+  #RMC14
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
+  #RMC14
+  #- type: EmitSoundOnLand #RMC14
+  #  sound:
+  #    path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
+  #RMC14
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
-  - type: EmitSoundOnTrigger
-    sound:
-      path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
+  #RMC14
+  # - type: EmitSoundOnTrigger
+  #   sound:
+  #     path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
+  #RMC14
   - type: Food
     requiresSpecialDigestion: true
     useSound:
@@ -347,17 +368,29 @@
     state: icon
   - type: Item
     sprite: Objects/Fun/Plushies/lizard.rsi
+  #RMC14
   - type: UseDelay
     delay: 120
+  #RMC14
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/weh.ogg
+  #RMC14
+  #- type: EmitSoundOnLand
+  #  sound:
+  #    path: /Audio/Items/Toys/weh.ogg
+  #RMC14
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Items/Toys/weh.ogg
   - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Items/Toys/weh.ogg
+  #RMC14
+  #- type: EmitSoundOnCollide
+  #  sound:
+  #    path: /Audio/Items/Toys/weh.ogg
+  #RMC14
   - type: Food
     requiresSpecialDigestion: true
     useSound:
@@ -414,17 +447,29 @@
       right:
       - state: inhand-right
         shader: shaded
+  #RMC14
   - type: UseDelay
     delay: 120
+  #RMC14
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/arf.ogg
+  #RMC14
+  #- type: EmitSoundOnLand
+  #  sound:
+  #    path: /Audio/Items/Toys/arf.ogg
+  #RMC14
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Items/Toys/arf.ogg
   - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Items/Toys/arf.ogg
+  #RMC14
+  #- type: EmitSoundOnCollide
+  #  sound:
+  #    path: /Audio/Items/Toys/arf.ogg
+  #RMC14
   - type: Food
     requiresSpecialDigestion: true
     useSound:
@@ -602,17 +647,29 @@
     - state: plushie_diona1
       map: [ "enum.SolutionContainerLayers.Fill" ]
       visible: false
+  #RMC14
   - type: UseDelay
     delay: 120
+  #RMC14
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/toy_rustle.ogg
+  #RMC14
+  #- type: EmitSoundOnLand
+  #  sound:
+  #    path: /Audio/Items/Toys/toy_rustle.ogg
+  #RMC14
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Items/Toys/toy_rustle.ogg
   - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Items/Toys/toy_rustle.ogg
+  #RMC14
+  #- type: EmitSoundOnCollide
+  #  sound:
+  #    path: /Audio/Items/Toys/toy_rustle.ogg
+  #RMC14
   - type: MeleeWeapon
     wideAnimationRotation: 180
     soundHit:
@@ -1137,8 +1194,10 @@
   - type: Sprite
     sprite: Objects/Fun/Plushies/penguin.rsi
     state: icon
+  #RMC14
   - type: UseDelay
     delay: 120
+  #RMC14
   - type: Clothing
     quickEquip: false
     sprite: Objects/Fun/Plushies/penguin.rsi
