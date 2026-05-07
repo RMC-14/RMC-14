@@ -164,9 +164,6 @@
   - type: AimedShotEffect
     extraHits: 2
     superSlowDuration: 7.5
-  - type: RMCAreaDamage
-    damageArea: 1
-    falloffDistance: 0.5
 
 - type: Tag
   id: RMCL144SniperRifle
