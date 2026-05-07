@@ -781,12 +781,12 @@
   - type: ContainerFill
     containers:
       item_1:
-      - RMCWeaponRifleL90A2FilledSemiStripped
+      - RMCWeaponRifleL90A2Filled
       item_2:
-      - RMCWeaponRifleL90A2FilledSemiStripped
+      - RMCWeaponRifleL90A2Filled
       item_3:
-      - RMCWeaponRifleL90A2FilledSemiStripped
+      - RMCWeaponRifleL90A2Filled
       item_4:
-      - RMCWeaponRifleL90A2FilledSemiStripped
+      - RMCWeaponRifleL90A2Filled
       item_5:
-      - RMCWeaponRifleL90A2FilledSemiStripped
+      - RMCWeaponRifleL90A2Filled

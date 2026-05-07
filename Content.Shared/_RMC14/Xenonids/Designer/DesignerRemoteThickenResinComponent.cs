@@ -15,9 +15,6 @@ public sealed partial class DesignerRemoteThickenResinComponent : Component
     public int PlasmaCost = 60;
 
     [DataField, AutoNetworkedField]
-    public float Cooldown = 0.5f;
-
-    [DataField, AutoNetworkedField]
     public float DoAfter = 1f;
 
     [DataField, AutoNetworkedField]
