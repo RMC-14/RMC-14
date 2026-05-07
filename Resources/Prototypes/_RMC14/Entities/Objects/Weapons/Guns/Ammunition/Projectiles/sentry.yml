@@ -46,7 +46,6 @@
       falloff: 10
 
 - type: entity
-  abstract: true
   parent: RMCBaseBullet
   id: RMCBaseBulletSentryFireProjectile
   name: flaming ball
@@ -55,7 +54,6 @@
   components:
   - type: IgniteOnProjectileHit
   - type: IgnorePredictionHide
-  - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
     layers:
@@ -89,6 +87,7 @@
         - BulletImpassable
   - type: TriggerOnCollide
     fixtureID: projectile
+  - type: DeleteOnTrigger
 
 - type: entity
   parent: RMCBaseBulletSentryFireProjectile
