@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Client.Actions;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids;
@@ -19,12 +19,22 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
     {
         base.Initialize();
         SubscribeNetworkEvent<RMCActionOrderLoadedEvent>(OnActionOrderLoaded);
+        SubscribeLocalEvent<RMCActionOrderComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
     }
 
     private void OnActionOrderLoaded(RMCActionOrderLoadedEvent ev)
     {
         // Re-trigger reordering
         _sortEnt = null;
+    }
+
+    private void OnAfterAutoHandleState(Entity<RMCActionOrderComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (_player.LocalEntity == ent.Owner)
+        {
+            // Re-trigger reordering
+            _sortEnt = null;
+        }
     }
 
     public void ActionsChanged(List<EntityUid?> actions)
