@@ -256,7 +256,203 @@
         icon:
           entity: RMCWeaponPistolM1911SOCOM
     - name: rmc-requisitions-black-market-category-contraband-ammo
-      entries: []
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 135
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmo4570
+        icon:
+          entity: RMCBox4570
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmo4570Training
+        icon:
+          entity: RMCBox4570Training
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 115
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType23Slugs
+        icon:
+          entity: RMCBoxShellsType23Slugs
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 115
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType23Buckshot
+        icon:
+          entity: RMCBoxShellsType23Buckshot
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 115
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType23Flechette
+        icon:
+          entity: RMCBoxShellsType23Flechette
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoAK4047
+        icon:
+          entity: RMCBoxMagazineRifleAK4047
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 80
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoAK4047AP
+        icon:
+          entity: RMCBoxMagazineRifleAK4047AP
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 100
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoM16
+        icon:
+          entity: RMCBoxMagazineRifleM16
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 115
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoAR10
+        icon:
+          entity: RMCBoxMagazineRifleAR10
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 180
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoDesertEagle
+        icon:
+          entity: RMCBoxMagazinePistolDesertEagle
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 260
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoDesertEagleHIAP
+        icon:
+          entity: RMCBoxMagazinePistolDesertEagleHIAPEmpty
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 60
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType73
+        icon:
+          entity: RMCBoxMagazinePistolType73
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 140
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoNSG23
+        icon:
+          entity: RMCBoxMagazineRifleNSG23
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 60
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoMAR30
+        icon:
+          entity: RMCBoxMagazineRifleMAR30
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoFP9000
+        icon:
+          entity: RMCBoxMagazineSMGFP9000
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoP90
+        icon:
+          entity: RMCBoxMagazineSMGP90
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoMP27
+        icon:
+          entity: RMCBoxMagazineSMGMP27
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 25
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoUZI
+        icon:
+          entity: RMCBoxMagazineSMGUZI
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoMAC15
+        icon:
+          entity: RMCBoxMagazineSMGMAC15
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType19
+        icon:
+          entity: RMCBoxMagazineSMGType19
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoB92FS
+        icon:
+          entity: RMCBoxMagazinePistolB92FS
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoKT42
+        icon:
+          entity: RMCBoxMagazinePistolKT42
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType64
+        icon:
+          entity: RMCBoxMagazineSMGType64
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoM1911
+        icon:
+          entity: RMCBoxMagazinePistolM1911
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 80
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoMK45
+        icon:
+          entity: RMCBoxMagazinePistolMK45
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 70
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoSpearhead
+        icon:
+          entity: RMCBoxMagazineRevolverSpearheadHP
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoSmithWesson
+        icon:
+          entity: RMCBoxMagazineRevolverSAndW
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoZHNK72
+        icon:
+          entity: RMCBoxMagazineRevolverZHNK72
     - name: rmc-requisitions-black-market-category-deep-storage
       entries: []
     - name: rmc-requisitions-black-market-category-miscellaneous

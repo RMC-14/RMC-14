@@ -173,5 +173,8 @@
   id: RMCSpeedLoader38
 
 - type: Tag
+  id: RMCSpeedLoaderSAndW38
+
+- type: Tag
   id: RMCCartridgeRevolver38
 

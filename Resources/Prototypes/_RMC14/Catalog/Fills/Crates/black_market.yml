@@ -446,3 +446,283 @@
   - type: StorageFill
     contents:
     - id: RMCM1911SOCOMCase
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmo4570
+  name: 45-70 bullet box crate
+  description: Contains one 45-70 bullet bundle box with 300 rounds.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBox4570
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmo4570Training
+  name: 45-70 training bullet box crate
+  description: Contains one 45-70 blank bullet bundle box with 300 training rounds.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBox4570Training
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType23Slugs
+  name: Type 23 slug shell box crate
+  description: Contains one Type 23 8g slug shell box with 100 shells.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxShellsType23Slugs
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType23Buckshot
+  name: Type 23 buckshot shell box crate
+  description: Contains one Type 23 8g buckshot shell box with 100 shells.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxShellsType23Buckshot
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType23Flechette
+  name: Type 23 flechette shell box crate
+  description: Contains one Type 23 8g flechette shell box with 100 shells.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxShellsType23Flechette
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoAK4047
+  name: AK-4047 magazine box crate
+  description: Contains one AK-4047 magazine box with 14 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleAK4047
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoAK4047AP
+  name: AK-4047 AP magazine box crate
+  description: Contains one AK-4047 AP magazine box with 14 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleAK4047AP
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoM16
+  name: M16 magazine box crate
+  description: Contains one M16 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleM16
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoAR10
+  name: AR10 magazine box crate
+  description: Contains one AR10 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleAR10
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoDesertEagle
+  name: Desert Eagle magazine box crate
+  description: Contains one Desert Eagle magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolDesertEagle
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoDesertEagleHIAP
+  name: Desert Eagle HIAP magazine box crate
+  description: Contains one empty Desert Eagle HIAP magazine box.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolDesertEagleHIAPEmpty
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType73
+  name: Type 73 magazine box crate
+  description: Contains one Type 73 magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolType73
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoNSG23
+  name: NSG-23 magazine box crate
+  description: Contains one NSG-23 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleNSG23
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoMAR30
+  name: MAR30/40 magazine box crate
+  description: Contains one MAR30/40 magazine box with 10 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleMAR30
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoFP9000
+  name: FN FP9000 magazine box crate
+  description: Contains one FN FP9000 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGFP9000
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoP90
+  name: FN P90 magazine box crate
+  description: Contains one FN P90 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGP90
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoMP27
+  name: MP27 magazine box crate
+  description: Contains one MP27 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGMP27
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoUZI
+  name: UZI magazine box crate
+  description: Contains one UZI magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGUZI
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoMAC15
+  name: MAC-15 magazine box crate
+  description: Contains one MAC-15 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGMAC15
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType19
+  name: Type-19 magazine box crate
+  description: Contains one Type-19 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGType19
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoB92FS
+  name: Beretta 92FS magazine box crate
+  description: Contains one Beretta 92FS magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolB92FS
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoKT42
+  name: KT-42 magazine box crate
+  description: Contains one KT-42 magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolKT42
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType64
+  name: Type 64 magazine box crate
+  description: Contains one Type 64 magazine box with 10 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGType64
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoM1911
+  name: M1911 magazine box crate
+  description: Contains one M1911 magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM1911
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoMK45
+  name: MK-45 Automagnum magazine box crate
+  description: Contains one MK-45 Automagnum magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolMK45
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoSpearhead
+  name: CMB Spearhead HP speedloader box crate
+  description: Contains one CMB Spearhead hollowpoint speedloader box with 12 loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRevolverSpearheadHP
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoSmithWesson
+  name: Smith and Wesson speedloader box crate
+  description: Contains one Smith and Wesson .38 speedloader box with 12 loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRevolverSAndW
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoZHNK72
+  name: ZHNK-72 speedloader box crate
+  description: Contains one ZHNK-72 speedloader box with 12 loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRevolverZHNK72

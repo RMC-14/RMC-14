@@ -1069,6 +1069,181 @@
   - type: CMItemSlots
     startingItem: RMCCartridge458SOCOM
 
+# R4T
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBox4570Empty
+  name: bullet bundle box (45-70 x 300)
+  description: A box filled with handfuls of 45-70 Govt. rounds, for the old-timers.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#62757b"
+    - state: rifle_box_458
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#719380"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#62757b"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_marking:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: rifle_ammo_full_rounds_base, visible: false }
+          Low: { state: rifle_ammo_low_rounds_base, visible: true }
+          Medium: { state: rifle_ammo_medium_rounds_base, visible: true }
+          High: { state: rifle_ammo_high_rounds_base, visible: true }
+          Full: { state: rifle_ammo_full_rounds_base, visible: true }
+        enum.CMItemSlotsLayers2.Fill:
+          Empty: { state: rifle_ammo_full_rounds_color, visible: false }
+          Low: { state: rifle_ammo_low_rounds_color, visible: true }
+          Medium: { state: rifle_ammo_medium_rounds_color, visible: true }
+          High: { state: rifle_ammo_high_rounds_color, visible: true }
+          Full: { state: rifle_ammo_full_rounds_color, visible: true }
+  - type: CMItemSlots
+    count: 34
+    slot:
+      whitelist:
+        tags:
+        - RMCCartridge4570
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
+
+- type: entity
+  parent: RMCBox4570Empty
+  id: RMCBox4570
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItems:
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570
+    - RMCCartridge4570Three
+
+- type: entity
+  parent: RMCBox4570Empty
+  id: RMCBox4570TrainingEmpty
+  name: bullet bundle box (45-70 training x 300)
+  description: A box filled with handfuls of 45-70 Govt. blank rounds. These won't do much damage unless you fire them point blank, or something.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#62757b"
+    - state: rifle_box_458
+      color: "#a6a6a6"
+    - state: rifle_box_marking
+      color: "#4f4f4f"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#b7b7b7"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#62757b"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#4f4f4f"
+  - type: CMItemSlots
+    count: 34
+    slot:
+      whitelist:
+        tags:
+        - RMCCartridge4570Training
+
+- type: entity
+  parent: RMCBox4570TrainingEmpty
+  id: RMCBox4570Training
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItems:
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570Training
+    - RMCCartridge4570TrainingThree
+
 # M16
 - type: entity
   parent: RMCBoxMagazineRifleBase
@@ -1112,6 +1287,46 @@
   - type: CMItemSlots
     startingItem: RMCMagazineRifleM16
     count: 12
+
+# AR10
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleAR10Empty
+  name: magazine box (AR10 x 12)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#353b40"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#353b40"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleAR10
+
+- type: entity
+  parent: RMCBoxMagazineRifleAR10Empty
+  id: RMCBoxMagazineRifleAR10
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleAR10
 
 # L83A3 REG
 - type: entity
@@ -1251,7 +1466,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleAK4047Empty
-  name: magazine box (AK-4047 x 10)
+  name: magazine box (AK-4047 x 14)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1276,7 +1491,7 @@
       map: [ "lid_marking" ]
       color: "#7c4c1b"
   - type: CMItemSlots
-    count: 10
+    count: 14
     slot:
       whitelist:
         tags:
@@ -1289,7 +1504,125 @@
   components:
   - type: CMItemSlots
     startingItem: RMCMagazineRifleAK4047
+
+- type: entity
+  parent: RMCBoxMagazineRifleAK4047Empty
+  id: RMCBoxMagazineRifleAK4047APEmpty
+  name: magazine box (AK-4047 AP x 14)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#515237"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#1f951f"
+    - state: rifle_box_54
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#318b11"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#515237"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 14
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleAK4047AP
+
+- type: entity
+  parent: RMCBoxMagazineRifleAK4047APEmpty
+  id: RMCBoxMagazineRifleAK4047AP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleAK4047AP
+
+# NSG-23
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleNSG23Empty
+  name: magazine box (NSG-23 x 12)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#42504d"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#42504d"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleNSG23
+
+- type: entity
+  parent: RMCBoxMagazineRifleNSG23Empty
+  id: RMCBoxMagazineRifleNSG23
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleNSG23
+
+# MAR30/40
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleMAR30Empty
+  name: magazine box (MAR30/40 x 10)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#535b4b"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#535b4b"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
     count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleMAR40
+
+- type: entity
+  parent: RMCBoxMagazineRifleMAR30Empty
+  id: RMCBoxMagazineRifleMAR30
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleMAR40
 
 # SSG45
 
@@ -2125,7 +2458,7 @@
 - type: entity
   parent: RMCBoxMagazineSMGBase
   id: RMCBoxMagazineSMGType64Empty
-  name: magazine box (Type 64 x 12)
+  name: magazine box (Type 64 x 10)
   components:
   - type: Sprite
     layers:
@@ -2147,7 +2480,7 @@
       map: [ "lid_marking" ]
       color: "#7c4c1b"
   - type: CMItemSlots
-    count: 12
+    count: 10
     slot:
       whitelist:
         tags:
@@ -2160,11 +2493,212 @@
   components:
   - type: CMItemSlots
     startingItem: RMCMagazineSMGType64
-    count: 12
     slot:
       whitelist:
         tags:
         - RMCMagazineSMGType64
+
+# FN FP9000
+- type: entity
+  parent: RMCBoxMagazineSMGBase
+  id: RMCBoxMagazineSMGFP9000Empty
+  name: magazine box (FN FP9000 x 12)
+  components:
+  - type: Sprite
+    layers:
+    - state: smg_box
+      color: "#3d4b57"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#727e90"
+    - state: smg_box_63
+      color: "#ffcb26"
+    - state: smg_box_marking
+      color: "#7c4c1b"
+    - state: smg_lid
+      map: [ "lid" ]
+      color: "#3d4b57"
+    - state: smg_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGFP9000
+
+- type: entity
+  parent: RMCBoxMagazineSMGFP9000Empty
+  id: RMCBoxMagazineSMGFP9000
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGFP9000
+
+# FN P90
+- type: entity
+  parent: RMCBoxMagazineSMGFP9000Empty
+  id: RMCBoxMagazineSMGP90Empty
+  name: magazine box (FN P90 x 12)
+  components:
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGP90
+
+- type: entity
+  parent: RMCBoxMagazineSMGP90Empty
+  id: RMCBoxMagazineSMGP90
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGP90
+
+# MP-27
+- type: entity
+  parent: RMCBoxMagazineSMGBase
+  id: RMCBoxMagazineSMGMP27Empty
+  name: magazine box (MP27 x 12)
+  components:
+  - type: Sprite
+    layers:
+    - state: smg_box
+      color: "#2f3a41"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#727e90"
+    - state: smg_box_63
+      color: "#ffcb26"
+    - state: smg_box_marking
+      color: "#7c4c1b"
+    - state: smg_lid
+      map: [ "lid" ]
+      color: "#2f3a41"
+    - state: smg_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGMP27
+
+- type: entity
+  parent: RMCBoxMagazineSMGMP27Empty
+  id: RMCBoxMagazineSMGMP27
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGMP27
+
+# UZI
+- type: entity
+  parent: RMCBoxMagazineSMGBase
+  id: RMCBoxMagazineSMGUZIEmpty
+  name: magazine box (UZI x 12)
+  components:
+  - type: Sprite
+    layers:
+    - state: smg_box
+      color: "#4f4f4f"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#727e90"
+    - state: smg_box_63
+      color: "#ffcb26"
+    - state: smg_box_marking
+      color: "#7c4c1b"
+    - state: smg_lid
+      map: [ "lid" ]
+      color: "#4f4f4f"
+    - state: smg_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGUZI
+
+- type: entity
+  parent: RMCBoxMagazineSMGUZIEmpty
+  id: RMCBoxMagazineSMGUZI
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGUZI
+
+# MAC-15
+- type: entity
+  parent: RMCBoxMagazineSMGUZIEmpty
+  id: RMCBoxMagazineSMGMAC15Empty
+  name: magazine box (MAC-15 x 12)
+  components:
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGMAC15
+
+- type: entity
+  parent: RMCBoxMagazineSMGMAC15Empty
+  id: RMCBoxMagazineSMGMAC15
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGMAC15
+
+# Type-19
+- type: entity
+  parent: RMCBoxMagazineSMGBase
+  id: RMCBoxMagazineSMGType19Empty
+  name: magazine box (Type-19 x 12)
+  components:
+  - type: Sprite
+    layers:
+    - state: smg_box
+      color: "#6f5a45"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#727e90"
+    - state: smg_box_63
+      color: "#ffcb26"
+    - state: smg_box_marking
+      color: "#7c4c1b"
+    - state: smg_lid
+      map: [ "lid" ]
+      color: "#6f5a45"
+    - state: smg_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGType19
+
+- type: entity
+  parent: RMCBoxMagazineSMGType19Empty
+  id: RMCBoxMagazineSMGType19
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGType19
 
 # L7A3 HESH
 
@@ -2616,6 +3150,350 @@
       whitelist:
         tags:
         - RMCMagazinePistolT73
+
+# Desert Eagle
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolDesertEagleEmpty
+  name: magazine box (Desert Eagle x 16)
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#3d3d3d"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_80
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#3d3d3d"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolDesertEagle
+
+- type: entity
+  parent: RMCBoxMagazinePistolDesertEagleEmpty
+  id: RMCBoxMagazinePistolDesertEagle
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolDesertEagle
+
+- type: entity
+  parent: RMCBoxMagazinePistolDesertEagleEmpty
+  id: RMCBoxMagazinePistolDesertEagleHIAPEmpty
+  name: magazine box (High Impact Armor-Piercing Desert Eagle x 8)
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#3d3d3d"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#4aa14a"
+    - state: pistol_box_80
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#318b11"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#3d3d3d"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 8
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolDesertEagleHIAP
+
+- type: entity
+  parent: RMCBoxMagazinePistolDesertEagleHIAPEmpty
+  id: RMCBoxMagazinePistolDesertEagleHIAP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolDesertEagleHIAP
+
+# Beretta B92FS
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolB92FSEmpty
+  name: magazine box (Beretta 92FS x 16)
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#4b5257"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_92
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#4b5257"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolB92FS
+
+- type: entity
+  parent: RMCBoxMagazinePistolB92FSEmpty
+  id: RMCBoxMagazinePistolB92FS
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolB92FS
+
+# KT-42
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolKT42Empty
+  name: magazine box (KT-42 x 16)
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#3f4548"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_80
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#3f4548"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolKT42
+
+- type: entity
+  parent: RMCBoxMagazinePistolKT42Empty
+  id: RMCBoxMagazinePistolKT42
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolKT42
+
+# M1911
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolM1911Empty
+  name: magazine box (M1911 x 16)
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#4f4f4f"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_11
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#4f4f4f"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazinePistolM1911
+
+- type: entity
+  parent: RMCBoxMagazinePistolM1911Empty
+  id: RMCBoxMagazinePistolM1911
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazinePistolM1911
+
+# MK-45
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolMK45Empty
+  name: magazine box (MK-45 x 16)
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#252525"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_80
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#252525"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolMK45
+
+- type: entity
+  parent: RMCBoxMagazinePistolMK45Empty
+  id: RMCBoxMagazinePistolMK45
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolMK45
+
+# Spearhead HP
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazineRevolverSpearheadHPEmpty
+  name: speedloader box (Spearhead HP x 12)
+  description: A box of revolver speedloaders.
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#727e90"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#d25539"
+    - state: pistol_box_44
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#d25539"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#727e90"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#d25539"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoader357Hollowpoint
+
+- type: entity
+  parent: RMCBoxMagazineRevolverSpearheadHPEmpty
+  id: RMCBoxMagazineRevolverSpearheadHP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoader357Hollowpoint
+
+# Smith & Wesson
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazineRevolverSAndWEmpty
+  name: speedloader box (S&W .38 x 12)
+  description: A box of revolver speedloaders.
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#727e90"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_44
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#727e90"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderSAndW38
+
+- type: entity
+  parent: RMCBoxMagazineRevolverSAndWEmpty
+  id: RMCBoxMagazineRevolverSAndW
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoaderSAndW38
+
+# ZHNK-72
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazineRevolverZHNK72Empty
+  name: speedloader box (ZHNK-72 x 12)
+  description: A box of revolver speedloaders.
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#52624c"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_73
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#52624c"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderZHNK72
+
+- type: entity
+  parent: RMCBoxMagazineRevolverZHNK72Empty
+  id: RMCBoxMagazineRevolverZHNK72
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoaderZHNK72
 
 # NP92
 - type: entity
@@ -3188,6 +4066,112 @@
       whitelist:
         tags:
         - RMCShellShotgunHeavySlugs
+
+# Type 23 8g shells
+- type: entity
+  parent: RMCBoxMagazineShellBase
+  id: RMCBoxShellsType23SlugsEmpty
+  name: Type 23 shotgun shell box (Slugs 8g x 100)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: rifle_box
+      color: "#1e4c1e"
+    - state: shell_ammo_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: shell_ammo_full_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#1e4c1e"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#1e4c1e"
+  - type: CMItemSlots
+    count: 25
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunHeavySlugs
+
+- type: entity
+  parent: RMCBoxShellsType23SlugsEmpty
+  id: RMCBoxShellsType23Slugs
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCShellShotgunHeavySlugs
+
+- type: entity
+  parent: RMCBoxMagazineShellBase
+  id: RMCBoxShellsType23BuckshotEmpty
+  name: Type 23 shotgun shell box (Buckshot 8g x 100)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: rifle_box
+      color: "#681a1a"
+    - state: shell_ammo_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: shell_ammo_full_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#681a1a"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#681a1a"
+  - type: CMItemSlots
+    count: 25
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunHeavyBuckshot
+
+- type: entity
+  parent: RMCBoxShellsType23BuckshotEmpty
+  id: RMCBoxShellsType23Buckshot
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCShellShotgunHeavyBuckshot
+
+- type: entity
+  parent: RMCBoxMagazineShellBase
+  id: RMCBoxShellsType23FlechetteEmpty
+  name: Type 23 shotgun shell box (Flechette 8g x 100)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: rifle_box
+      color: "#4b1c68"
+    - state: shell_ammo_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: shell_ammo_full_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#4b1c68"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#4b1c68"
+  - type: CMItemSlots
+    count: 25
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunHeavyFlechette
+
+- type: entity
+  parent: RMCBoxShellsType23FlechetteEmpty
+  id: RMCBoxShellsType23Flechette
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCShellShotgunHeavyFlechette
 
 # -- SUPPLY BOXES --
 

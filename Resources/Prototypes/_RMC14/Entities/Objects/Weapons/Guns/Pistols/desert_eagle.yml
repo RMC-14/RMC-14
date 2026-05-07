@@ -103,6 +103,24 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
+  parent: RMCMagazinePistolDesertEagle
+  id: RMCMagazinePistolDesertEagleHIAP
+  name: HIAP Desert Eagle magazine (.50)
+  description: Seven rounds of devastatingly powerful 50-caliber destruction. The bullets are tipped with an osmium-tungsten carbide alloy to stagger and shred through armor.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolDesertEagleHIAP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolDesertEagleHIAP
+    proto: RMCCartridgePistolDesertEagleHIAP
+    capacity: 7
+
+- type: entity
   parent: CMCartridgePistolBase
   id: RMCCartridgePistolDesertEagle
   name: cartridge (.50)
@@ -113,6 +131,18 @@
     - RMCCartridgePistolDesertEagle
   - type: CartridgeAmmo
     proto: RMCBulletPistolDesertEagle
+
+- type: entity
+  parent: CMCartridgePistolBase
+  id: RMCCartridgePistolDesertEagleHIAP
+  name: cartridge (HIAP .50)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolDesertEagleHIAP
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolDesertEagleHIAP
 
 - type: entity
   parent: CMBulletBase
@@ -128,6 +158,35 @@
   - type: RMCProjectileAccuracy
     accuracy: 60
 
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolDesertEagleHIAP
+  name: bullet (HIAP .50)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 60
+  - type: RMCDebilitate
+    blacklist:
+      components:
+      - Synth
+    whitelist:
+      components:
+      - Marine
+    knockdown: 4
+
 - type: Tag
   id: RMCWeaponPistolDesertEagle
 
@@ -135,4 +194,10 @@
   id: RMCMagazinePistolDesertEagle
 
 - type: Tag
+  id: RMCMagazinePistolDesertEagleHIAP
+
+- type: Tag
   id: RMCCartridgePistolDesertEagle
+
+- type: Tag
+  id: RMCCartridgePistolDesertEagleHIAP

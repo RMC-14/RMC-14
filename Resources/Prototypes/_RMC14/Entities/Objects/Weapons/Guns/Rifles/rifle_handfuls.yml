@@ -103,6 +103,22 @@
     - RMCCartridge4570
     - RMCCartridge4570Training
 
+- type: entity
+  parent: RMCCartridge4570
+  id: RMCCartridge4570Three
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: RMCCartridge4570Training
+  id: RMCCartridge4570TrainingThree
+  suffix: 3
+  components:
+  - type: Stack
+    count: 3
+
 - type: stack
   id: RMCCartridge4570
   name: handful of 45-70 rounds

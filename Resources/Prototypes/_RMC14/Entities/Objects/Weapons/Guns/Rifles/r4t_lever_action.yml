@@ -140,48 +140,6 @@
       falloff: 9999
       ignoreModifiers: true
 
-- type: entity
-  parent: RMCBoxShotgunBase
-  id: RMCBox4570
-  name: box of 45-70 rounds
-  description: A box filled with handfuls of 45-70 Govt. rounds, for the old-timers.
-  components:
-  - type: Storage
-    grid:
-    - 0,0,19,1
-    whitelist:
-      tags:
-      - RMCCartridge4570
-  - type: StorageFill
-    contents:
-    - id: RMCCartridge4570
-      amount: 10
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/lever_action.rsi
-    layers:
-    - state: box-4570
-      map: [ "full" ]
-    - state: box-4570-empty
-      map: [ "empty" ]
-
-- type: entity
-  parent: RMCBox4570
-  id: RMCBox4570Training
-  name: box of 45-70 blanks
-  description: A box filled with handfuls of 45-70 Govt. blank rounds. These won't do much damage unless you fire them point blank, or something.
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCCartridge4570Training
-      amount: 10
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/lever_action.rsi
-    layers:
-    - state: box-4570-training
-      map: [ "full" ]
-    - state: box-4570-training-empty
-      map: [ "empty" ]
-
 - type: Tag
   id: RMCWeaponRifleR4T
 
