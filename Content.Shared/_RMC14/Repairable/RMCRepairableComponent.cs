@@ -33,5 +33,14 @@ public sealed partial class RMCRepairableComponent : Component
     public FixedPoint2 FuelUsed = FixedPoint2.New(0);
 
     [DataField, AutoNetworkedField]
+    public bool RequireWeldingEyeProtection;
+
+    [DataField, AutoNetworkedField]
     public float RepairableDamageLimit;
+
+    [DataField, AutoNetworkedField]
+    public float WeldDelayDamageStep = 200f;
+
+    [DataField, AutoNetworkedField]
+    public float WeldDelayMinimumSeconds = 2f;
 }

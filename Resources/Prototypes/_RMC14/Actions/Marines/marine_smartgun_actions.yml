@@ -20,7 +20,7 @@
   parent: ActionMarineBase
   id: RMCActionToggleAmmo
   name: Toggle Ammo Type
-  description: Switch the ammo type fired by this gun. [color=red]You can activate this by pressing the unique gun action keybind, Spacebar by default![//color]
+  description: Switch the ammo type fired by this gun. [color=red]You can activate this by pressing the unique gun action keybind, Spacebar by default![/color]
   components:
   - type: Action
     icon:

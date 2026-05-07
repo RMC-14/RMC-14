@@ -13,6 +13,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: GuideHelp
+      guides:
+      - RMCGuideRoleDesigner
     - type: Transform
       anchored: true
     - type: Clickable
@@ -41,6 +44,9 @@
       soundGroups:
         Brute:
           collection: XenoMove
+    - type: RMCNightVisionVisible
+      priority: -1
+      transparency: 0.2
     - type: DesignNode
       nodeType: Construct
       boundXeno: null
@@ -79,7 +85,6 @@
   components:
     - type: DesignerRemoteThickenResin
       plasmaCost: 60
-      cooldown: 0.5
       doAfter: 1
       range: 10
     - type: Icon
@@ -104,6 +109,9 @@
       sprite: _RMC14/Structures/designer_nodes.rsi
     - type: Visibility
       layer: 32768
+    - type: RMCNightVisionVisible
+      priority: -1
+      transparency: 0.2
     - type: Tag
       tags:
         - HideContextMenu
@@ -182,6 +190,7 @@
   id: DesignNodeOptimizedWall
   parent: DesignNodeBase
   name: Optimized Node
+  suffix: Wall
   description: This node looks like it has a big green oozing bulb at its center, making the weeds under it twitch...
   placement:
     mode: SnapgridCenter
@@ -207,6 +216,7 @@
   id: DesignNodeOptimizedDoor
   parent: DesignNodeBase
   name: Optimized Node
+  suffix: Door
   description: This node looks like it has a big green oozing bulb at its center, making the weeds under it twitch...
   placement:
     mode: SnapgridCenter
@@ -234,6 +244,7 @@
   id: DesignNodeFlexibleWall
   parent: DesignNodeBase
   name: Flexible Node
+  suffix: Wall
   description: This node looks like its made of smaller blue bulbs grown together, making the weeds under them look soft and squishy.
   placement:
     mode: SnapgridCenter
@@ -259,6 +270,7 @@
   id: DesignNodeFlexibleDoor
   parent: DesignNodeBase
   name: Flexible Node
+  suffix: Door
   description: This node looks like its made of smaller blue bulbs grown together, making the weeds under them look soft and squishy.
   placement:
     mode: SnapgridCenter
@@ -286,6 +298,7 @@
   id: DesignNodeConstructWall
   parent: DesignNodeBase
   name: Construct Node
+  suffix: Wall
   description: This node looks like big blub composed of smaller purple glowing cups, pumping some strange liquid trough weeds.
   placement:
     mode: SnapgridCenter
@@ -310,6 +323,7 @@
   id: DesignNodeConstructDoor
   parent: DesignNodeBase
   name: Construct Node
+  suffix: Door
   description: This node looks like big blub composed of smaller purple glowing cups, pumping some strange liquid trough weeds.
   placement:
     mode: SnapgridCenter

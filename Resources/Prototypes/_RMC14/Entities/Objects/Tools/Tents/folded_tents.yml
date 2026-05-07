@@ -355,7 +355,6 @@
         !type:PhysShapeAabb
         bounds: "-0.4,0.6,3.4,4.4" # The non-perfect rectangle allows the tent to be placed close to the walls
       collapseToolPrototype: CMEntrenchingTool
-      failIfNotSurface: false
       deploySetups:
         - prototype: RMCTentUNMCExtendedCorrespondent
           mode: ReactiveParental
@@ -394,5 +393,4 @@
           mode: Reactive
         - prototype: CMPaperBin10
           offset: 1.5, 0.5
-          neverRedeployableSetup: true
           anchor: false

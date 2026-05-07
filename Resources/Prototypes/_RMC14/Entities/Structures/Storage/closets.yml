@@ -305,3 +305,36 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetRCMGPMGFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMTeamLeaderGear
+  name: team leader locker
+  suffix: PVE, RCM, Team Leader
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMTeamLeaderFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMTroopCommanderGear
+  name: troop commander locker
+  suffix: PVE, RCM, Troop Commander
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMTroopCommanderFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMSapperGear
+  name: sapper locker
+  suffix: PVE, RCM, Sapper
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMSapperFill

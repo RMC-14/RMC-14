@@ -280,18 +280,21 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private void OnDirectionTileFireTriggered(Entity<DirectionalTileFireOnTriggerComponent> ent,
         ref RMCTriggerEvent args)
     {
-        var moverCoordinates = _transform.GetMoverCoordinateRotation(ent, Transform(ent));
-        var tile = moverCoordinates.Coords.SnapToGrid(EntityManager, _map);
+        var rotation = _transform.GetWorldRotation(ent);
+        var coordinates = _transform.GetMoverCoordinates(ent);
 
-        ent.Comp.Direction = Angle.FromDegrees(ent.Comp.Direction.ToAngle().Degrees + moverCoordinates.worldRot.Degrees).GetDir();
+        if (ent.Comp.OffsetForward)
+            coordinates = coordinates.Offset(rotation.ToWorldVec() / 2);
+
+        ent.Comp.Direction = Angle.FromDegrees(ent.Comp.Direction.ToAngle().Degrees + rotation.Degrees).GetDir();
         Dirty(ent);
 
         if (ent.Comp.Rebounded)
-            tile = tile.Offset(ent.Comp.Direction);
+            coordinates = coordinates.Offset(ent.Comp.Direction);
 
-        _audio.PlayPvs(ent.Comp.Sound, moverCoordinates.Coords);
+        _audio.PlayPvs(ent.Comp.Sound, coordinates);
 
-        SpawnFireCone(ent, tile, ent.Comp.Intensity, ent.Comp.Duration);
+        SpawnFireCone(ent, coordinates, ent.Comp.Intensity, ent.Comp.Duration);
         QueueDel(ent);
     }
 
@@ -311,7 +314,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!CanBeIgnited(args.Target, ent, ent.Comp.Intensity, true)) // Direct hits can ignore pyro/firesuit ignition resistance
             return;
 
-        Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks);
+        Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks, tileDamage: ent.Comp.TileDamage);
     }
 
     private void OnSteppingOnFireRemoved(Entity<SteppingOnFireComponent> ent, ref ComponentRemove args)
@@ -383,7 +386,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         return Resolve(ent, ref ent.Comp, false) && ent.Comp.OnFire;
     }
 
-    public virtual bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks, bool igniteDamage = true)
+    public virtual bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks, bool igniteDamage = true, DamageSpecifier? tileDamage = null)
     {
         // TODO RMC14
         return false;
@@ -411,11 +414,15 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (intensity != null || duration != null)
         {
             var ignite = EnsureComp<RMCIgniteOnCollideComponent>(spawned);
+            var tileFire = EnsureComp<TileFireComponent>(spawned);
             if (intensity != null)
                 ignite.Intensity = intensity.Value;
 
             if (duration != null)
+            {
                 ignite.Duration = duration.Value;
+                tileFire.Duration = TimeSpan.FromSeconds(duration.Value);
+            }
 
             Dirty(spawned, ignite);
         }
@@ -755,9 +762,9 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         }
     }
 
-    public void SetIntensityDuration(Entity<RMCIgniteOnCollideComponent?, DamageOnCollideComponent?> ent, int? intensity, int? duration)
+    public void SetIntensityDuration(Entity<RMCIgniteOnCollideComponent?, DamageOnCollideComponent?, TileFireComponent?> ent, int? intensity, int? duration)
     {
-        Resolve(ent, ref ent.Comp1, ref ent.Comp2, false);
+        Resolve(ent, ref ent.Comp1, ref ent.Comp2, ref ent.Comp3, false);
         if (ent.Comp1 != null)
         {
             if (intensity != null)
@@ -775,6 +782,14 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                 ent.Comp2.Damage.DamageDict[HeatDamage] = intensity.Value * ent.Comp2.DirectHitMultiplier;
 
             Dirty(ent, ent.Comp2);
+        }
+
+        if (ent.Comp3 != null)
+        {
+            if (duration != null)
+                ent.Comp3.Duration = TimeSpan.FromSeconds(duration.Value);
+
+            Dirty(ent, ent.Comp3);
         }
     }
 
@@ -799,7 +814,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!tileEv.Ignite)
             return;
 
-        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
+        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks, tileDamage:ent.Comp.TileDamage))
             return;
 
         ChangeBurnColor(flammableEnt, ent.Comp.BurnColor);
@@ -860,7 +875,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         if (canIgnite)
         {
-            Ignite((uid, flammable), ignite.Intensity, ignite.Duration, ignite.MaxStacks);
+            Ignite((uid, flammable), ignite.Intensity, ignite.Duration, ignite.MaxStacks, tileDamage:ignite.TileDamage);
 
             // If this fire can bypass immunity, mark the target as having bypass-active fire
             if (!CanFireBypassImmunity(fireEntity, uid))
@@ -992,9 +1007,9 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
                 if (time < fire.SpawnedAt + fire.BigFireDuration)
                     _appearance.SetData(uid, TileFireLayers.Base, TileFireVisuals.Four);
-                else if (timeLeft < TimeSpan.FromSeconds(9))
+                else if (timeLeft < fire.Duration * 0.33)
                     _appearance.SetData(uid, TileFireLayers.Base, TileFireVisuals.One);
-                else if (timeLeft < TimeSpan.FromSeconds(25))
+                else if (timeLeft < fire.Duration * 0.66)
                     _appearance.SetData(uid, TileFireLayers.Base, TileFireVisuals.Two);
                 else
                     _appearance.SetData(uid, TileFireLayers.Base, TileFireVisuals.Three);
