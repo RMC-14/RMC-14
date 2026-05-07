@@ -4,7 +4,6 @@ using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Jittering;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Stunnable;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -19,21 +18,15 @@ public sealed partial class Cardiostabilizing : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Heals [color=green]1[/color] asphyxiation damage while in critical state.\n" +
-               $"Overdoses cause [color=red]40[/color] seconds of stun, knockdown, and some jitteriness";//.\n" +
+        return $"Prevents asphyxiation damage from being in crit.\n" + //and minor pain relief.\n" +
+               $"Overdoses cause [color=red]40[/color] seconds of stun, knockdown, and some jitteriness"; //.\n" +
                //$"Critical overdoses cause [color=red]0.25[/color] heart damage";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         // TODO RMC14 Pain Reduction
-
-        // TODO RMC14 allow breathing in crit instead of reducing asphyxiation
-        var mobState = System<MobStateSystem>(args);
-        if (mobState.IsCritical(args.TargetEntity))
-        {
-            TryChangeDamage(args, AsphyxiationType, -1);
-        }
+        // TODO RMC14 M.losebreath
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

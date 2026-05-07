@@ -171,7 +171,6 @@
             Asphyxiation: 1.5
 
 # TODO RMC14 other effects (heart damage) (pain)
-# TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
   parent: [ CMReagentMedicine, Inaprovaline ]
   id: CMInaprovaline

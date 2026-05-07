@@ -1,5 +1,7 @@
-﻿using Content.Shared.Damage;
+﻿using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Damage;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Damage;
@@ -13,6 +15,9 @@ public sealed partial class DamageMobStateComponent : Component
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier NonDeadDamage = new();
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<ReagentPrototype> StopCritDamageReagent = "CMInaprovaline";
 
     [DataField, AutoNetworkedField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(1);
