@@ -19,6 +19,7 @@ using Content.Shared.Jittering;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
@@ -51,6 +52,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -846,5 +848,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         var afterEv = new AfterXenoChangedPrototypeEvent(xeno, oldProtoId);
         RaiseLocalEvent(xeno, ref afterEv);
+
+        _movementSpeed.RefreshMovementSpeedModifiers(xeno);
     }
 }
