@@ -48,3 +48,9 @@
     # armor_laser = 10
     # armor_energy = 10
     # armor_internaldamage = 20
+
+# PVE
+- type: entity
+  parent: ArmorHelmetRiot
+  id: RMCPVEArmorHelmetPrisonGuard
+  name: M10D pattern CMB Corrections Peace Officer helmet
