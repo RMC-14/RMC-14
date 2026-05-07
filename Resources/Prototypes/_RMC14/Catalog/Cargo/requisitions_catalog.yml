@@ -489,7 +489,176 @@
         icon:
           entity: RMCBoxMagazineRevolverZHNK72
     - name: rmc-requisitions-black-market-category-deep-storage
-      entries: []
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: -2
+        crate: RMCCrateBlackMarketDeepStorageSpaceJam
+        icon:
+          entity: RMCHelmetGarbSpaceJamTickets
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageNightVision
+        icon:
+          entity: RMCHelmetGarbNightVision
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageXM43E1
+        icon:
+          entity: RMCHelmetGarbBulletPipe
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageWire
+        icon:
+          entity: RMCHelmetGarbWire
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageLuckyFeather
+        icon:
+          entity: RMCHelmetGarbFeatherRed
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageRosary
+        icon:
+          entity: RMCHelmetGarbRosary
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageRabbitFoot
+        icon:
+          entity: RMCHelmetGarbRabbitFoot
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageTacticalMask
+        icon:
+          entity: RMCMaskScarfGray
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageSkullBalaclava
+        icon:
+          entity: RMCMaskBalaclavaSkullBlack
+      # TODO RMC14: Port Skull Facepaint behavior before enabling this Deep Storage entry.
+      # TODO RMC14: Skull Facepaint, cost 10, heat -5.
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageAviators
+        icon:
+          entity: RMCGlassesAviators
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageBallisticGoggles
+        icon:
+          entity: RMCGogglesBallistic
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageBiMexShades
+        icon:
+          entity: RMCGlassesBiMexPersonal
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageUNMCBandana
+        icon:
+          entity: RMCHeadBandana
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageUNMCEarpiece
+        icon:
+          entity: RMCHeadUNMCHeadset
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageUNMCHeadband
+        icon:
+          entity: CMHeadBandGreen
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageUNMCBoonieHat
+        icon:
+          entity: RMCBoonie
+      # TODO RMC14: Port CMSS PDT/L Kit behavior before enabling this Deep Storage entry.
+      # TODO RMC14: PDT/L Kit, cost 10, heat -5.
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: -2
+        crate: RMCCrateBlackMarketDeepStorageFrozenLime
+        icon:
+          entity: RMCFoodLime
+      # TODO RMC14: Port CMSS Uno Reverse Card behavior/assets before enabling this Deep Storage entry.
+      # TODO RMC14: Uno Reverse Card, cost 10, heat -5.
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageJungleBoots
+        icon:
+          entity: CMBootsJungle
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageType80Bayonet
+        icon:
+          entity: RMCType80BayonetReplica
+      # TODO RMC14: Port CMSS M8 Cartridge Bayonet Kit behavior before enabling this Deep Storage entry.
+      # TODO RMC14: M8 Cartridge Bayonet Kit, cost 10, heat -5.
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: 2
+        crate: RMCCrateBlackMarketDeepStorageD18
+        icon:
+          entity: RMCCLFD18Box
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: 4
+        crate: RMCCrateBlackMarketDeepStorageM1984Custom
+        icon:
+          entity: CMWeaponPistolM1984Custom
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 70
+        blackMarketHeat: 4
+        crate: RMCCrateBlackMarketDeepStorageM44Custom
+        icon:
+          entity: RMCWeaponRevolverM44Custom
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 20
+        blackMarketHeat: 4
+        crate: RMCCrateBlackMarketDeepStorageGunslingerBelts
+        icon:
+          entity: RMCBeltGunslinger
     - name: rmc-requisitions-black-market-category-miscellaneous
       entries: []
     categories:

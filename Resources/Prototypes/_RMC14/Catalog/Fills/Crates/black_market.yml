@@ -933,3 +933,271 @@
   - type: StorageFill
     contents:
     - id: RMCBoxMagazineRevolverZHNK72
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageSpaceJam
+  name: Tickets to Space Jam crate
+  description: Contains two original tickets to Space Jam.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbSpaceJamTickets
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageNightVision
+  name: broken night vision goggles crate
+  description: Contains a cosmetic set of broken M2 night vision goggles.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbNightVision
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageXM43E1
+  name: 10x99mm XM43E1 casing crate
+  description: Contains a spent XM43E1 casing converted into helmet garb.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbBulletPipe
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageWire
+  name: trimmed barbed wire crate
+  description: Contains a piece of trimmed barbed wire for helmet decoration.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbWire
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageLuckyFeather
+  name: lucky feather crate
+  description: Contains one randomly colored lucky feather.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbFeatherRed
+      orGroup: DeepStorageLuckyFeather
+    - id: RMCHelmetGarbFeatherBlue
+      orGroup: DeepStorageLuckyFeather
+    - id: RMCHelmetGarbFeatherPurple
+      orGroup: DeepStorageLuckyFeather
+    - id: RMCHelmetGarbFeatherYellow
+      orGroup: DeepStorageLuckyFeather
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageRosary
+  name: rosary crate
+  description: Contains a rosary for helmet decoration.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbRosary
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageRabbitFoot
+  name: rabbit's foot crate
+  description: Contains a lucky rabbit's foot.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbRabbitFoot
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageTacticalMask
+  name: tactical mask crate
+  description: Contains one randomly colored tactical mask.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMaskScarfGray
+      orGroup: DeepStorageTacticalMask
+    - id: RMCMaskScarfRed
+      orGroup: DeepStorageTacticalMask
+    - id: RMCMaskScarfGreen
+      orGroup: DeepStorageTacticalMask
+    - id: RMCMaskScarfTan
+      orGroup: DeepStorageTacticalMask
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageSkullBalaclava
+  name: skull balaclava crate
+  description: Contains one randomly colored skull balaclava.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMaskBalaclavaSkullBlack
+      orGroup: DeepStorageSkullBalaclava
+    - id: RMCMaskBalaclavaSkullBlue
+      orGroup: DeepStorageSkullBalaclava
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageAviators
+  name: aviator shades crate
+  description: Contains a pair of aviator sunglasses.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesAviators
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageBallisticGoggles
+  name: ballistic goggles crate
+  description: Contains one randomly colored pair of ballistic goggles.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGogglesBallistic
+      orGroup: DeepStorageBallisticGoggles
+    - id: RMCGogglesBallisticOrange
+      orGroup: DeepStorageBallisticGoggles
+    - id: RMCGogglesBallisticBlack
+      orGroup: DeepStorageBallisticGoggles
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageBiMexShades
+  name: BiMex personal shades crate
+  description: Contains a pair of BiMex personal shades.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesBiMexPersonal
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageUNMCBandana
+  name: UNMC bandana crate
+  description: Contains one randomly colored UNMC bandana.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHeadBandana
+      orGroup: DeepStorageUNMCBandana
+    - id: RMCHeadBandanaTan
+      orGroup: DeepStorageUNMCBandana
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageUNMCEarpiece
+  name: UNMC earpiece crate
+  description: Contains a UNMC headset earpiece.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHeadUNMCHeadset
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageUNMCHeadband
+  name: UNMC headband crate
+  description: Contains one randomly colored UNMC headband.
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHeadBandGreen
+      orGroup: DeepStorageUNMCHeadband
+    - id: CMHeadBandBrown
+      orGroup: DeepStorageUNMCHeadband
+    - id: CMHeadBandGray
+      orGroup: DeepStorageUNMCHeadband
+    - id: CMHeadBandRed
+      orGroup: DeepStorageUNMCHeadband
+    - id: CMHeadBandTan
+      orGroup: DeepStorageUNMCHeadband
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageUNMCBoonieHat
+  name: UNMC boonie hat crate
+  description: Contains one randomly colored UNMC boonie hat.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoonieTan
+      orGroup: DeepStorageUNMCBoonie
+    - id: RMCBoonie
+      orGroup: DeepStorageUNMCBoonie
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageFrozenLime
+  name: frozen lime crate
+  description: Contains one lime from deep storage.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFoodLime
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageJungleBoots
+  name: jungle pattern combat boots crate
+  description: Contains one pair of jungle pattern combat boots.
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBootsJungle
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageType80Bayonet
+  name: Type 80 bayonet replica crate
+  description: Contains a dulled Type 80 bayonet replica.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCType80BayonetReplica
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageD18
+  name: D18 holdout pistol crate
+  description: Contains a CLF D18 box with a D18 Hummingbird and one magazine.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCLFD18Box
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageM1984Custom
+  name: M4A3 custom pistol crate
+  description: Contains one custom M4A3 service pistol.
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMWeaponPistolM1984Custom
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageM44Custom
+  name: M44 custom revolver crate
+  description: Contains one custom M44 revolver.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverM44Custom
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageGunslingerBelts
+  name: Red Ranger cowboy gunbelt crate
+  description: Contains two empty custom-tooled gunslinger's belts.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBeltGunslinger
+      amount: 2

@@ -107,6 +107,30 @@
 
 - type: entity
   parent: CMFoodBase
+  id: RMCFoodLime
+  name: lime
+  description: It's so sour, your face will twist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/harvest.rsi
+    state: lime
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/harvest.rsi
+  - type: Food
+    transferAmount: 2
+  - type: FlavorProfile
+    flavors:
+    - sour
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: JuiceLime
+          Quantity: 5
+
+- type: entity
+  parent: CMFoodBase
   id: RMCFoodBurgerMonkey
   name: burger
   description: The cornerstone of every nutritious breakfast.

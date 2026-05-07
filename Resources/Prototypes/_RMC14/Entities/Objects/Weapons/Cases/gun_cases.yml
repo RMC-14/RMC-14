@@ -69,6 +69,12 @@
     - id: RMCWeaponPistolD18
     - id: RMCMagazinePistolD18
 
+- type: entity
+  parent: RMCD18Case
+  id: RMCCLFD18Box
+  name: D18-storing box
+  description: A compact box containing a D18 Hummingbird and a single magazine.
+
 # M77
 - type: entity
   parent: RMCGunCaseBase
