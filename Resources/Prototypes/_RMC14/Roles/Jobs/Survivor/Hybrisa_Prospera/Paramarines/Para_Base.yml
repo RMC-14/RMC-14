@@ -36,7 +36,7 @@
   name: para preset
   categories: [ HideSpawnMenu ]
   components:
-    - type: SurvivorPreset
+    - type: EntityPreset
       randomOutfits: #1/4 chance to get Jacket and helmet
         - [ RMCArmorParaVest, RMCSatchelLightpackFilledPara ]
         - [ RMCArmorParaVest, RMCSatchelLightpackFilledPara ]

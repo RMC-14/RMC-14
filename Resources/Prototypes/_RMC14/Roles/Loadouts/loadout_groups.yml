@@ -395,6 +395,11 @@
   loadouts:
   - UNMCSquadPatchRMC
   - SquadArmbandRMC
+  - PonchoRMC
+  - PonchoJungleRMC
+  - PonchoDesertRMC
+  - PonchoUrbanRMC
+  - PonchoSnowRMC
   - PatchPeaceRMC
 
 - type: loadoutGroup
@@ -903,6 +908,55 @@
   - NeckerchiefWhiteRMC
   - NeckerchiefRedRMC
 
+# Watches
+- type: loadoutGroup
+  id: WatchesBasicRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts: 
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+
+- type: loadoutGroup
+  id: WatchesSynthRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+  - WatchSynthRMC
+
+- type: loadoutGroup
+  id: WatchesLiaisonRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts: 
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+  - WatchLiaisonRMC
+
+- type: loadoutGroup
+  id: WatchesCommandingOfficerRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts: 
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+  - WatchLiaisonRMC
+  - WatchSynthRMC
+
 # Civilian
 - type: loadoutGroup
   id: CivilianOnlyRMC
@@ -919,6 +973,10 @@
   - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch
+  - PatchHalcyon
+  - PatchNovaris
+  # - HeadCowboyHatLightRMC # RMC14 - Moved to be available to everyone.
+  # - HeadCowboyHatDarkRMC # RMC14 - Moved to be available to everyone.
   - HeadBandRebelRMC
   # BiMex tactical shades TODO
   - ShoesBlackRMC

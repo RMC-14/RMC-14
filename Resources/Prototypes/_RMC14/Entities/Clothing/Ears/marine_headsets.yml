@@ -13,6 +13,7 @@
     - PrimaryLandingZone
   - type: GrantTacMapAlert
   - type: HeadsetAutoSquad
+  - type: RMCStaticDefaultChannel
 
 # Alpha
 - type: entity
@@ -23,6 +24,8 @@
   components:
   - type: Sprite
     state: alpha_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineAlpha
   - type: ContainerFill
     containers:
       key_slots:
@@ -98,6 +101,8 @@
   components:
   - type: Sprite
     state: bravo_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineBravo
   - type: ContainerFill
     containers:
       key_slots:
@@ -173,6 +178,8 @@
   components:
   - type: Sprite
     state: charlie_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineCharlie
   - type: ContainerFill
     containers:
       key_slots:
@@ -248,6 +255,8 @@
   components:
   - type: Sprite
     state: delta_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineDelta
   - type: ContainerFill
     containers:
       key_slots:
@@ -323,6 +332,8 @@
   components:
   - type: Sprite
     state: echo_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineEcho
   - type: ContainerFill
     containers:
       key_slots:
@@ -398,6 +409,8 @@
   components:
   - type: Sprite
     state: cryo_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineFoxtrot
   - type: ContainerFill
     containers:
       key_slots:

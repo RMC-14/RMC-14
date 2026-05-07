@@ -142,6 +142,9 @@
     ventCrawlIcon: parasite
   - type: Unshieldable
   - type: ExcludedFromKingVote
+  - type: RemoveComponents
+    components:
+    - type: ComplexInteraction
 
 - type: entity
   parent: CMXenoParasiteBase
