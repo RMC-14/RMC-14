@@ -193,7 +193,42 @@
         icon:
           entity: RMCWeaponRifleR4T
     - name: rmc-requisitions-black-market-category-shipside-contraband
-      entries: []
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketShipsideAlcohol
+        icon:
+          entity: RMCDrinkAlcoholWhiskey
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 25
+        blackMarketHeat: 3
+        crate: RMCCrateBlackMarketShipsideMedicine
+        icon:
+          entity: RMCPillCanisterHappy
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketShipsideCuisine
+        icon:
+          entity: RMCFoodSnackHUNK
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketShipsideNicotine
+        icon:
+          entity: RMCCigarettePackWeYaGold
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: -2
+        crate: RMCCrateBlackMarketShipsideMiscellaneous
+        icon:
+          entity: BikeHorn
     - name: rmc-requisitions-black-market-category-surplus-equipment
       entries:
       - cost: 0

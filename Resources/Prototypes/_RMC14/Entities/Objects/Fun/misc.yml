@@ -17,3 +17,34 @@
         path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
       rmc-sound-select-detector:
         path: /Audio/_RMC14/Effects/motion_detector.ogg
+
+- type: entity
+  parent: SprayBottleWater
+  id: RMCWaterFlower
+  name: water flower
+  description: A plastic flower that sprays water. It is still somehow funnier than most shipside entertainment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/sunflower.rsi
+    state: produce
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Kitchen/Plants/sunflower.rsi
+
+- type: entity
+  parent: SingularityToy
+  id: RMCSpinningToy
+  name: spinning toy
+  description: A small toy that spins and hums when you flick it.
+
+- type: entity
+  parent: BaseItem
+  id: RMCRolledPoster
+  name: rolled-up poster
+  description: A rolled-up poster. Whatever is printed on it is still hidden.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/posters.rsi
+    state: rolled_poster
+  - type: Item
+    size: Small

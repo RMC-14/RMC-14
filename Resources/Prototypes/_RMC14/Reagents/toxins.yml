@@ -170,3 +170,45 @@
         time: 4
         type: Add
         refresh: false
+
+- type: reagent
+  parent: CMReagent
+  id: RMCNeurotoxin
+  name: reagent-name-rmcneurotoxin
+  desc: reagent-desc-rmcneurotoxin
+  physicalDesc: reagent-physical-desc-pungent
+  flavor: neurotoxin
+  color: "#2E2E61"
+  unknown: true
+  toxin: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:GenericStatusEffect
+        key: KnockedDown
+        component: KnockedDown
+        type: Add
+        time: 5
+        refresh: true
+      - !type:Jitter
+        time: 6
+        amplitude: 6
+        frequency: 4
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        key: Stutter
+        component: StutteringAccent
+        type: Add
+        time: 3
+        refresh: true
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 55
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 5
+        refresh: true

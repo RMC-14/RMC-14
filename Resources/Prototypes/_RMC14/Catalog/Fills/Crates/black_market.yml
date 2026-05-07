@@ -289,6 +289,213 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketShipsideAlcohol
+  name: confiscated alcohol crate
+  description: Contains five random bottles of confiscated shipside alcohol.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCBlackMarketShipsideAlcoholTable
+        rolls: !type:ConstantNumberSelector
+          value: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketShipsideMedicine
+  name: confiscated medicinal supplies crate
+  description: Contains five random batches of confiscated shipside medicinal supplies.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCBlackMarketShipsideMedicineTable
+        rolls: !type:ConstantNumberSelector
+          value: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketShipsideCuisine
+  name: confiscated cuisine supplies crate
+  description: Contains seven random pieces of confiscated shipside cuisine.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCBlackMarketShipsideCuisineTable
+        rolls: !type:ConstantNumberSelector
+          value: 7
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketShipsideNicotine
+  name: confiscated nicotine items crate
+  description: Contains two random confiscated nicotine items.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCBlackMarketShipsideNicotineTable
+        rolls: !type:ConstantNumberSelector
+          value: 2
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketShipsideMiscellaneous
+  name: confiscated miscellaneous items crate
+  description: Contains six random miscellaneous confiscated shipside items.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCBlackMarketShipsideMiscellaneousTable
+        rolls: !type:ConstantNumberSelector
+          value: 6
+
+- type: entityTable
+  id: RMCBlackMarketShipsideAlcoholTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCDrinkAlcoholGin
+    - id: RMCDrinkAlcoholWhiskey
+    - id: RMCDrinkAlcoholSake
+    - id: RMCDrinkAlcoholVodka
+    - !type:GroupSelector
+      children:
+      - id: RMCDrinkAlcoholVodkaChessBlackBishop
+      - id: RMCDrinkAlcoholVodkaChessBlackKing
+      - id: RMCDrinkAlcoholVodkaChessBlackKnight
+      - id: RMCDrinkAlcoholVodkaChessBlackPawn
+      - id: RMCDrinkAlcoholVodkaChessBlackQueen
+      - id: RMCDrinkAlcoholVodkaChessBlackRook
+      - id: RMCDrinkAlcoholVodkaChessWhiteBishop
+      - id: RMCDrinkAlcoholVodkaChessWhiteKing
+      - id: RMCDrinkAlcoholVodkaChessWhiteKnight
+      - id: RMCDrinkAlcoholVodkaChessWhitePawn
+      - id: RMCDrinkAlcoholVodkaChessWhiteQueen
+      - id: RMCDrinkAlcoholVodkaChessWhiteRook
+    - id: RMCDrinkAlcoholTequila
+    - id: RMCDrinkAlcoholDavenport
+    - id: RMCDrinkAlcoholNothing
+    - id: RMCDrinkAlcoholPatron
+    - id: RMCDrinkAlcoholRum
+    - id: RMCDrinkAlcoholVermouth
+    - id: RMCDrinkAlcoholKahlua
+    - id: RMCDrinkAlcoholGoldschlager
+    - id: RMCDrinkAlcoholCognac
+    - id: RMCDrinkAlcoholWine
+    - id: RMCDrinkAlcoholAbsinthe
+    - id: RMCDrinkAlcoholMelonLiquor
+    - id: RMCDrinkAlcoholBlueCuracao
+    - id: RMCDrinkAlcoholGrenadine
+    - id: RMCDrinkAlcoholPurpleWine
+    - id: RMCDrinkAlcoholCraftBeer
+    - id: RMCDrinkAlcoholTuxedo
+    - id: RMCDrinkAlcoholGanucci
+    - id: RMCDrinkAlcoholBlueMalt
+    - id: RMCDrinkAlcoholPartyPopper
+    - id: RMCDrinkAlcoholTazhushka
+    - id: RMCDrinkAlcoholReaper
+    - id: RMCDrinkAlcoholMono
+
+- type: entityTable
+  id: RMCBlackMarketShipsideMedicineTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCPillCanisterHappy
+    - id: RMCPillCanisterMystery
+    - id: RMCPillCanisterRussianRedNoSkill
+    - id: RMCDrinkFlaskWeYaPoisoned
+    - id: RMCDrinkFlaskHippieWater
+    # TODO RMC14: port paracetamol once pain/painkiller mechanics exist.
+
+- type: entityTable
+  id: RMCBlackMarketShipsideCuisineTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCDrinkAlcoholAbsinthe
+    - id: RMCDrinkAlcoholPurpleWine
+    - id: RMCFoodStew
+    - id: RMCFoodDonutChaos
+    - id: FoodEgg
+    - id: FoodEgg
+    - id: RMCFoodXenoMeatPie
+    - id: RMCMRESPP
+    - id: RMCMarinePreparedMealCookies
+    - id: RMCMarinePreparedMealGingerbread
+    - id: RMCMarinePreparedMealFruitcake
+    - id: RMCFoodSnackHUNK
+    - id: RMCFoodMeatHuman
+    - id: RMCFoodMeatCorgi
+    - id: RMCFoodMeatXeno
+    - id: RMCFoodPoisonedApple
+    - id: RMCFoodPoisonBerries
+    - id: RMCFoodDeathBerries
+    - id: RMCFoodCarpFillet
+    - id: RMCFoodCandyCorn
+    - id: RMCFoodBurgerMonkey
+    - id: RMCFoodBurgerHuman
+    - id: RMCFoodBurgerXeno
+    - id: RMCFoodAmanitaJelly
+    - id: RMCFoodSpacyLibertyDuff
+    - id: RMCFoodMonkeysDelight
+    - id: RMCFoodBrainCake
+    - id: RMCFoodResinFruit
+    - id: RMCCondimentHotsauceFranksMacho
+
+- type: entityTable
+  id: RMCBlackMarketShipsideNicotineTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCCigarettePackExecutiveSelect
+    - id: RMCCigarettePackWeYaGold
+    - id: RMCCigarettePackKoorlanderGold
+    - id: RMCCigarettePackArcturianAce
+    - id: RMCCigarettePackLadyFingers
+    - id: RMCTarbackCase
+    - id: RMCTarbackTube
+
+- type: entityTable
+  id: RMCBlackMarketShipsideMiscellaneousTable
+  table: !type:GroupSelector
+    children:
+    - id: BikeHorn
+    - id: RMCPacketGrenadeHEFAToyFilled
+    - id: CMBeltInflatable
+    - id: BeachBall
+    - id: CMPlushieFarwa
+    - id: RMCWaterFlower
+    - id: RMCSpinningToy
+    - id: SnapPopBox
+    - id: RMCCrayonBox
+    - id: BalloonNT
+    - id: RMCWallet
+    - id: ClothingBeltChampion
+    - id: RMCClothingMaskLuchador
+    - id: CMSoapDeluxe
+    # TODO RMC14: port K92 Maintenance Jack and add RMCMaintenanceJack here.
+    - id: CMGrenadeSmoke
+    - id: FoodCornTrash
+    - id: RMCRolledPoster
+    - id: ToyRipley
+    - id: ToyFireRipley
+    - id: ToyDeathRipley
+    - id: FoodAmbrosiaDeus
+    - id: FoodAmbrosiaVulgaris
+    - id: RMCTieHorrible
+    - id: CMBeltInflatable
+    # TODO RMC14: uncomment pamphlets once their black-market functionality is implemented.
+    # - id: CMPamphletPowerloader
+    # - id: CMPamphletLanguageRussian
+    # - id: CMPamphletLanguageJapanese
+    # - id: CMPamphletLanguageChinese
+    # - id: CMPamphletLanguageGerman
+    # - id: CMPamphletLanguageSpanish
+    # - id: CMPamphletLanguageScandinavian
+    # - id: CMPamphletLanguageFrench
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
   id: RMCCrateBlackMarketSurplusPoncho
   name: surplus UNCM poncho crate (x2)
   description: An ASRS crate containing a failure note instead of surplus UNCM ponchos.

@@ -17,3 +17,6 @@ reagent-desc-rmcblackgoo = A strange substance of unknown origin. . .
 
 reagent-name-rmc-chloral-hydrate = Chloral Hydrate
 reagent-desc-rmc-chloral-hydrate = Chloral hydrate was the first synthetically produced sedative-hypnotic drug. It is a powerful sedative which causes near instant sleepiness, but can be deadly in large quantities. Often used together with other anesthetics for surgical procedures.
+
+reagent-name-rmcneurotoxin = Neurotoxin
+reagent-desc-rmcneurotoxin = A strong neurotoxin that puts the subject into a death-like state.

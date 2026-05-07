@@ -47,7 +47,7 @@ reagent-name-cmclonexadone = Clonexadone
 reagent-desc-cmclonexadone = Advanced cryogenic medicine made from cryoxadone. Treats most types of tissue damage. Requires temperatures below 170K to to metabolise correctly.
 
 reagent-name-rmcrussianred = Russian Red
-reagent-desc-rmcrussianred = An emergency radiation treatment. The list of potential side effects include retinal damage and unconsciousness.
+reagent-desc-rmcrussianred = An emergency radiation treatment. The list of potential side effects includes retinal damage and unconsciousness.
 
 # Medical Icon Labels
 rmc-tricordazine-container-label-text = TI
@@ -66,6 +66,8 @@ rmc-russianred-container-label-text = Rr
 rmc-imidazoline-container-label-text = IM
 rmc-dermaline-container-label-text = DE
 rmc-iron-container-label-text = Fe
+rmc-happy-container-label-text = :)
+rmc-mystery-container-label-text = ??
 
 rmc-custom-container-label-text = {$customLabel}
 

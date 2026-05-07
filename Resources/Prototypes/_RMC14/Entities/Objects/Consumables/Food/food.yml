@@ -12,6 +12,382 @@
     - nutriment
 
 - type: entity
+  parent: CMFoodBase
+  id: RMCFoodPoisonedApple
+  name: apple
+  suffix: Poisoned
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/harvest.rsi
+    state: apple
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/harvest.rsi
+  - type: Food
+    transferAmount: 2
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 2
+        reagents:
+        - ReagentId: RMCCyanide
+          Quantity: 2
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodPoisonBerries
+  name: bunch of poison-berries
+  description: Taste so good, you could die!
+  suffix: Poisoned
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/harvest.rsi
+    state: poisonberrypile
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/harvest.rsi
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 7
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: RMCGenericToxin
+          Quantity: 6
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodDeathBerries
+  name: bunch of death-berries
+  description: Taste so good, you will die!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/harvest.rsi
+    state: deathberrypile
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/harvest.rsi
+  - type: Food
+    transferAmount: 10
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 18
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: RMCLexorin
+          Quantity: 17
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodCandyCorn
+  name: candy corn
+  description: It's a handful of candy corn. Cannot be stored in a detective's hat, alas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+    state: candy_corn
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+  - type: Food
+    transferAmount: 2
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Sugar
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - sweet
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodBurgerMonkey
+  name: burger
+  description: The cornerstone of every nutritious breakfast.
+  components:
+  - type: Food
+    transferAmount: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: hburger
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+  - type: FlavorProfile
+    flavors:
+    - bun
+    - meaty
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Protein
+          Quantity: 3
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodBurgerHuman
+  name: bob burger
+  description: A bloody burger.
+  components:
+  - type: Food
+    transferAmount: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: hamburger
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+  - type: FlavorProfile
+    flavors:
+    - bun
+    - meaty
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 9
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Protein
+          Quantity: 6
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodBurgerXeno
+  name: xenoburger
+  description: Smells caustic. Tastes like heresy.
+  components:
+  - type: Food
+    transferAmount: 3
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: xburger
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+  - type: FlavorProfile
+    flavors:
+    - bun
+    - meaty
+    - acid
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 9
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Protein
+          Quantity: 6
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodStew
+  name: Stew
+  description: A nice and warm stew. Healthy and strong.
+  components:
+  - type: Food
+    transferAmount: 10
+    trash:
+    - FoodBowlBig
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: stew
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - mushroom
+    - tomato
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 7
+        - ReagentId: Protein
+          Quantity: 3
+        - ReagentId: Water
+          Quantity: 5
+
+- type: entity
+  parent: FoodDonutChaos
+  id: RMCFoodDonutChaos
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/donuts.rsi
+    state: donut1_cmss
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/donuts.rsi
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodAmanitaJelly
+  name: Amanita Jelly
+  description: Looks curiously toxic.
+  components:
+  - type: Food
+    transferAmount: 3
+    trash:
+    - FoodBowlBig
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: amanitajelly
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+  - type: FlavorProfile
+    flavors:
+    - mushroom
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 12
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: RMCGenericToxin
+          Quantity: 6
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodSpacyLibertyDuff
+  name: Spacy Liberty Duff
+  description: Jello gelatin, from Alfred Hubbard's cookbook.
+  components:
+  - type: Food
+    transferAmount: 3
+    trash:
+    - FoodBowlBig
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: spacylibertyduff
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+  - type: FlavorProfile
+    flavors:
+    - mushroom
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 12
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: SpaceDrugs
+          Quantity: 6
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodMonkeysDelight
+  name: monkey's Delight
+  description: Eeee Eee!
+  components:
+  - type: Food
+    transferAmount: 6
+    trash:
+    - FoodPlate
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: monkeysdelight
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - sweet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 17
+        reagents:
+        - ReagentId: Protein
+          Quantity: 10
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: TableSalt
+          Quantity: 1
+        - ReagentId: Blackpepper
+          Quantity: 1
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodBrainCake
+  name: Brain Cake
+  description: A squishy cake-thing.
+  components:
+  - type: Food
+    transferAmount: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: braincake
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - meaty
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Protein
+          Quantity: 10
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodXenoMeatPie
+  name: Xeno-pie
+  description: A delicious meatpie. Probably heretical.
+  components:
+  - type: Food
+    transferAmount: 2
+    trash:
+    - FoodPlate
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/xeno_pie.rsi
+    state: icon
+  - type: FlavorProfile
+    flavors:
+    - bun
+    - meaty
+    - acid
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Protein
+          Quantity: 2
+  - type: Tag
+    tags:
+    - Pie
+
+- type: entity
+  parent: XenoFruitLesser
+  id: RMCFoodResinFruit
+  name: resin fruit
+  description: A strange green-ish fruit-looking thing.
+  components:
+  - type: XenoFruit
+    state: Item
+  - type: XenoFruitHeal
+    healAmount: 75
+
+- type: entity
   parent: RMCFoodDonut
   id: RMCFoodDonutJellyFrosted
   name: frosted jelly donut

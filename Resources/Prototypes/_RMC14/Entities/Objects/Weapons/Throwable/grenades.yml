@@ -297,6 +297,29 @@
     maxShrapnel: 0
 
 - type: entity
+  parent: CMGrenadeFrag
+  id: RMCGrenadeHEFAToy
+  name: toy HEFA grenade
+  description: High-Explosive Fragmenting-Antipersonnel. A small, but deceptively strong fragmentation grenade that has been phasing out the M15 fragmentation grenades alongside the 30mm HEDP. Capable of being loaded in grenade launchers, or thrown by hand. Wait, the labeling on the side indicates this is a toy, what the hell?
+  components:
+  - type: Explosive
+    maxIntensity: 0
+    intensitySlope: 1
+    totalIntensity: 0
+    deleteAfterExplosion: false
+    canCreateVacuum: false
+  - type: ProjectileGrenade
+    fillPrototype: RMCProjectileShrapnelRubber
+    capacity: 48
+    directHit: false
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeHEFAToy
+    - RMCGrenadeM40
+
+- type: entity
   parent: CMGrenadeFragOld
   id: RMCGrenadeM15Rubber
   name: M15 rubber pellet grenade

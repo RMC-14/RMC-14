@@ -92,6 +92,36 @@
     state: flask_we_ya
 
 - type: entity
+  parent: CMWEYAFlask
+  id: RMCDrinkFlaskWeYaPoisoned
+  description: A metal flask embossed with Weston-Yamada's signature logo that some corporate bootlicker probably ordered to be stocked in USS military vessels' canteen vendors. This one smells off...
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMSodaBobdaClassic
+          Quantity: 30
+        - ReagentId: RMCNeurotoxin
+          Quantity: 30
+
+- type: entity
+  parent: CMMetalFlask
+  id: RMCDrinkFlaskHippieWater
+  name: flask of hippie water
+  description: Formerly a flask of the chaplain's holy water, this one has been repurposed as... something else visually similar.
+  suffix: Filled
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCHippiesDelight
+          Quantity: 100
+
+- type: entity
   parent: [CMCanteenBase, DrinkFlaskVisualsOpenable]
   id: RMCWeYaThermos
   name: We-Ya thermos

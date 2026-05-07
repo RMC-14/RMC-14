@@ -4,3 +4,56 @@
   parent: Whiskey
   desc: rmc-reagent-desc-special-whiskey
   flavor: rmcwhiskey
+
+- type: reagent
+  id: RMCPoisonWine
+  parent: [ CMReagent, PoisonWine ]
+  name: reagent-name-poison-wine
+  desc: reagent-desc-poison-wine
+  color: "#000000"
+  unknown: true
+  toxin: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.05
+    Narcotic:
+      metabolismRate: 0.2
+      effects:
+      - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+        type: Add
+        time: 3
+        refresh: true
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 6
+        refresh: true
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        time: 4
+        amplitude: 4
+        frequency: 4
+      - !type:Emote
+        emote: Laugh
+        showInChat: true
+        probability: 0.05
+    Poison:
+      metabolismRate: 0.2
+      effects:
+      - !type:HealthChange
+        probability: 0.3
+        conditions:
+        - !type:ReagentThreshold
+          min: 75
+        damage:
+          types:
+            Poison: 2

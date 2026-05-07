@@ -277,6 +277,27 @@
     sprite: _RMC14/Objects/Clothing/Mask/swatclava.rsi
 
 - type: entity
+  parent: CMBaseMask
+  id: RMCClothingMaskLuchador
+  name: Luchador Mask
+  description: Worn by robust fighters, flying high to defeat their foes!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/luchador.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/luchador.rsi
+  - type: IdentityBlocker
+    coverage: MOUTH
+  - type: HideLayerClothing
+    slots:
+    - HeadTop
+    - HeadSide
+    - Hair
+    - Snout
+  - type: Item
+    size: Small
+
+- type: entity
   parent: RMCMaskCoifPMC
   id: RMCMaskBalaclavaMARSOC
   name: SOF armored balaclava
