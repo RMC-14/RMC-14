@@ -3,11 +3,11 @@
   name: "English"
   description: "The standard galactic English language."
   isVisibleLanguage: true
-  textColor: null
   typefaceId: Default
   textSize: null
   boldTypefaceId: null
   showLanguageName: false
+  showLanguageIcon: false
   languageIcon: "/Textures/_RMC14/Interface/flags.rsi/GB.png"
   canUseRadio: true
   needsSpeech: true
@@ -32,7 +32,6 @@
   name: "Xenomorph"
   description: "The alien language of the Xenomorphs."
   isVisibleLanguage: true
-  textColor: null
   typefaceId: null
   textSize: null
   boldTypefaceId: null
@@ -41,6 +40,7 @@
   canUseRadio: true
   needsSpeech: true
   randomizeObfuscation: true
+  firstContactMeaning: language-Xeno-first-contact
   expectedVocabularySize: 80
   obfuscationMethod:
     !type:XenoObfuscation
@@ -64,7 +64,6 @@
   name: "French"
   description: "An old Earth language."
   isVisibleLanguage: true
-  textColor: "#4169e1"
   typefaceId: DefaultItalic
   textSize: null
   boldTypefaceId: null
@@ -95,7 +94,6 @@
   name: "Japanese"
   description: "An old Earth language."
   isVisibleLanguage: true
-  textColor: null
   typefaceId: NotoSansDisplay
   textSize: null
   boldTypefaceId: null
@@ -126,7 +124,6 @@
   name: "Russian"
   description: "An old Earth language."
   isVisibleLanguage: true
-  textColor: "#ffd700"
   typefaceId: DefaultBold
   textSize: null
   boldTypefaceId: null
@@ -157,7 +154,6 @@
   name: "German"
   description: "An old Earth language."
   isVisibleLanguage: true
-  textColor: "#ffa500"
   typefaceId: DefaultBold
   textSize: null
   boldTypefaceId: DefaultBoldItalic
@@ -188,7 +184,6 @@
   name: "Sign Language"
   description: "A visual language using hand gestures and body movements."
   isVisibleLanguage: true
-  textColor: "#87ceeb"
   typefaceId: DefaultItalic
   textSize: null
   boldTypefaceId: null

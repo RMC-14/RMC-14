@@ -28,8 +28,20 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
     {
         base.Initialize();
         SubscribeLocalEvent<EntitySpokeEvent>(OnEntitySpoke);
+        SubscribeLocalEvent<LanguageLearningComponent, MapInitEvent>(OnLearningMapInit);
         SubscribeLocalEvent<LanguageLearningComponent, DetermineEntityLanguagesEvent>(OnDetermineEntityLanguages);
         SubscribeLocalEvent<LanguageLearningComponent, ComponentGetState>(OnGetLearningState);
+    }
+
+    private void OnLearningMapInit(Entity<LanguageLearningComponent> ent, ref MapInitEvent args)
+    {
+        foreach (var language in ent.Comp.LearnableLanguages)
+        {
+            EnsureLanguageTracking(ent.Comp, language);
+
+            if (ShouldStartEncountered(ent.Comp, language))
+                ent.Comp.EncounteredLanguages.Add(language);
+        }
     }
 
     private void OnGetLearningState(EntityUid uid, LanguageLearningComponent component, ref ComponentGetState args)
@@ -56,6 +68,8 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
         args.State = new LanguageLearningComponent.State(
             new HashSet<ProtoId<LanguagePrototype>>(component.LearnableLanguages),
+            new HashSet<ProtoId<LanguagePrototype>>(component.FirstContactLanguages),
+            new HashSet<ProtoId<LanguagePrototype>>(component.EncounteredLanguages),
             progressForState,
             learnedWordsForState
         );
@@ -82,7 +96,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
     private void OnEntitySpoke(EntitySpokeEvent args)
     {
-        if (!_prototypeManager.TryIndex(args.Language, out _))
+        if (!_prototypeManager.TryIndex(args.Language, out var languageProto))
             return;
 
         var potentialLearners = new HashSet<EntityUid>();
@@ -108,6 +122,8 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
                     continue;
             }
 
+            TryHandleFirstContact((potentialLearner, learnerComp), args.Language, languageProto);
+
             var distance = Vector2.Distance(Transform(args.Source).WorldPosition, Transform(potentialLearner).WorldPosition);
 
             if (distance > learnerComp.LearningRange)
@@ -115,6 +131,48 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
             TryLearnWords((potentialLearner, learnerComp), args.Source, args.Message, args.Language, distance);
         }
+    }
+
+    private void TryHandleFirstContact(
+        Entity<LanguageLearningComponent> learner,
+        ProtoId<LanguagePrototype> language,
+        LanguagePrototype languageProto)
+    {
+        if (!learner.Comp.FirstContactLanguages.Contains(language) ||
+            learner.Comp.EncounteredLanguages.Contains(language))
+        {
+            return;
+        }
+
+        learner.Comp.EncounteredLanguages.Add(language);
+
+        var popup = languageProto.FirstContactMeaning != null
+            ? Loc.GetString(
+                "language-learning-first-contact-with-meaning",
+                ("language", languageProto.LocalizedName),
+                ("meaning", Loc.GetString(languageProto.FirstContactMeaning.Value)))
+            : Loc.GetString("language-learning-first-contact", ("language", languageProto.LocalizedName));
+
+        _popup.PopupEntity(popup, learner, learner, PopupType.Medium);
+        Dirty(learner.Owner, learner.Comp);
+    }
+
+    private bool ShouldStartEncountered(LanguageLearningComponent comp, ProtoId<LanguagePrototype> language)
+    {
+        if (!comp.FirstContactLanguages.Contains(language))
+            return true;
+
+        if (comp.LanguageProgress.GetValueOrDefault(language) > 0f)
+            return true;
+
+        return comp.LearnedWords.TryGetValue(language, out var words) && words.Count > 0;
+    }
+
+    private static void EnsureLanguageTracking(LanguageLearningComponent comp, ProtoId<LanguagePrototype> language)
+    {
+        comp.LearnedWords.TryAdd(language, new Dictionary<string, float>());
+        comp.WordFrequency.TryAdd(language, new Dictionary<string, int>());
+        comp.LanguageProgress.TryAdd(language, 0f);
     }
 
     private void TryLearnWords(Entity<LanguageLearningComponent> learner, EntityUid source, string messageText,
@@ -239,9 +297,12 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         if (!TryComp<LanguageLearningComponent>(entity, out var comp))
             return;
 
-        comp.LearnedWords.TryAdd(language, new Dictionary<string, float>());
+        EnsureLanguageTracking(comp, language);
         var wordLower = word.ToLower();
         comp.LearnedWords[language][wordLower] = Math.Clamp(level, 0.0f, comp.MaxWordComprehension);
+
+        if (ShouldStartEncountered(comp, language))
+            comp.EncounteredLanguages.Add(language);
 
         comp.LanguageProgress[language] = CalculateOverallComprehension(comp, language);
         Dirty(entity, comp);
@@ -251,13 +312,10 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
     {
         var comp = EnsureComp<LanguageLearningComponent>(entity);
         comp.LearnableLanguages.Add(language);
+        EnsureLanguageTracking(comp, language);
 
-        if (!comp.LearnedWords.ContainsKey(language))
-            comp.LearnedWords[language] = new Dictionary<string, float>();
-        if (!comp.WordFrequency.ContainsKey(language))
-            comp.WordFrequency[language] = new Dictionary<string, int>();
-        if (!comp.LanguageProgress.ContainsKey(language))
-            comp.LanguageProgress[language] = 0f;
+        if (ShouldStartEncountered(comp, language))
+            comp.EncounteredLanguages.Add(language);
 
         Dirty(entity, comp);
     }
@@ -268,6 +326,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             return;
 
         comp.LearnableLanguages.Remove(language);
+        comp.EncounteredLanguages.Remove(language);
         comp.LanguageProgress.Remove(language);
         comp.LearnedWords.Remove(language);
         comp.WordFrequency.Remove(language);

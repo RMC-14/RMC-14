@@ -107,9 +107,8 @@ public sealed class RadioSystem : EntitySystem
         if (language != null && !language.CanUseRadio)
             return;
 
-        Color? languageColor = language?.TextColor;
         bool showLanguageName = language?.ShowLanguageName ?? false;
-        string? languageIcon = showLanguageName ? language?.LanguageIcon : null;
+        string? languageIcon = showLanguageName ? language?.DisplayedLanguageIcon : null;
         // RMC14
 
         var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
@@ -204,7 +203,6 @@ public sealed class RadioSystem : EntitySystem
             //RMC - because we cant send the same msg to everyone - tho i think there is better way
             string actualMessage = message;
             string actualWrappedMessage = wrappedMessage;
-            Color? actualColorOverride = languageColor;
             string? actualLanguageIcon = languageIcon;
 
             EntityUid? listenerEntity = null;
@@ -246,7 +244,6 @@ public sealed class RadioSystem : EntitySystem
                 actualWrappedMessage,
                 GetNetEntity(messageSource),
                 _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
-                colorOverride: actualColorOverride,
                 languageIcon: actualLanguageIcon,
                 repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
 
@@ -275,7 +272,6 @@ public sealed class RadioSystem : EntitySystem
             wrappedMessage,
             GetNetEntity(messageSource),
             _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
-            colorOverride: languageColor,
             languageIcon: languageIcon,
             repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
         _replay.RecordServerMessage(replayChat);

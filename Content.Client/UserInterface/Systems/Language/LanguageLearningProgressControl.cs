@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._RMC14.Language.Systems;
 using Content.Shared._RMC14.Language.Prototypes;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
@@ -11,6 +12,8 @@ namespace Content.Client.UserInterface.Systems.Language;
 
 public sealed class LanguageLearningProgressControl : Control
 {
+    [Dependency] private readonly LanguageLearningSystem _languageLearning = default!;
+
     private const int DefaultWordsPerRow = 4;
     private const float EstimatedChipWidth = 90f;
     private const int MaxWordsPerRow = 10;
@@ -59,6 +62,7 @@ public sealed class LanguageLearningProgressControl : Control
     public LanguageLearningProgressControl(LanguagePrototype prototype, float overallProgress,
         int wordCount, float avgWordComprehension, Dictionary<string, float>? learnedWords)
     {
+        IoCManager.InjectDependencies(this);
         _data = new LanguageProgressData(prototype, overallProgress, wordCount, avgWordComprehension, learnedWords);
         _headerStyle = CreateHeaderStyle();
         _wordsStyle = CreateWordsStyle();
@@ -234,7 +238,7 @@ public sealed class LanguageLearningProgressControl : Control
         var nameLabel = new Label
         {
             Text = _data.Prototype.LocalizedName,
-            FontColorOverride = _data.Prototype.TextColor ?? Color.White,
+            FontColorOverride = Color.White,
             StyleClasses = { "LabelHeading" }
         };
 
@@ -356,7 +360,7 @@ public sealed class LanguageLearningProgressControl : Control
         if (searchTerms.Length == 0)
         {
             _filteredWords = _data.LearnedWords
-                .Select(kvp => new WordEntry(kvp.Key, kvp.Value, 1))
+                .Select(kvp => CreateWordEntry(kvp.Key, kvp.Value, 1))
                 .OrderByDescending(entry => entry.Comprehension)
                 .ThenBy(entry => entry.Word)
                 .ToList();
@@ -372,7 +376,7 @@ public sealed class LanguageLearningProgressControl : Control
             var term = searchTerms[i];
             if (_data.LearnedWords.TryGetValue(term, out var comprehension))
             {
-                exactMatches.Add(new WordEntry(term, comprehension, 1000 + (searchTerms.Length - i)));
+                exactMatches.Add(CreateWordEntry(term, comprehension, 1000 + (searchTerms.Length - i)));
             }
         }
 
@@ -380,7 +384,6 @@ public sealed class LanguageLearningProgressControl : Control
         foreach (var kvp in _data.LearnedWords)
         {
             var word = kvp.Key;
-
             // skip if already added as exact match
             if (searchTerms.Contains(word.ToLowerInvariant()))
                 continue;
@@ -388,7 +391,7 @@ public sealed class LanguageLearningProgressControl : Control
             var relevance = CalculateSearchRelevance(word, searchTerms);
             if (relevance > 0)
             {
-                otherMatches.Add(new WordEntry(word, kvp.Value, relevance));
+                otherMatches.Add(CreateWordEntry(word, kvp.Value, relevance));
             }
         }
 
@@ -475,7 +478,7 @@ public sealed class LanguageLearningProgressControl : Control
                 wordsInCurrentRow = 0;
             }
 
-            currentRow.AddChild(CreateWordChip(entry.Word, entry.Comprehension));
+            currentRow.AddChild(CreateWordChip(entry.DisplayWord, entry.Comprehension));
             wordsInCurrentRow++;
         }
 
@@ -502,6 +505,17 @@ public sealed class LanguageLearningProgressControl : Control
         var wordsPerRow = Math.Max(1, (int)(availableWidth / EstimatedChipWidth));
 
         return Math.Clamp(wordsPerRow, MinWordsPerRow, MaxWordsPerRow);
+    }
+
+    private WordEntry CreateWordEntry(string word, float comprehension, int relevance)
+    {
+        var displayWord = _languageLearning.ProcessWordForDisplay(
+            word,
+            _data.Prototype.ID,
+            comprehension,
+            _data.OverallProgress);
+
+        return new WordEntry(word, displayWord, comprehension, relevance);
     }
 
     private static Control CreateWordChip(string word, float comprehension)
@@ -594,12 +608,14 @@ public sealed class LanguageLearningProgressControl : Control
     private readonly struct WordEntry
     {
         public readonly string Word;
+        public readonly string DisplayWord;
         public readonly float Comprehension;
         public readonly int Relevance;
 
-        public WordEntry(string word, float comprehension, int relevance)
+        public WordEntry(string word, string displayWord, float comprehension, int relevance)
         {
             Word = word;
+            DisplayWord = displayWord;
             Comprehension = comprehension;
             Relevance = relevance;
         }

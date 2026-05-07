@@ -14,6 +14,12 @@ public sealed partial class LanguageLearningComponent : Component
     public HashSet<ProtoId<LanguagePrototype>> LearnableLanguages = new();
 
     [DataField]
+    public HashSet<ProtoId<LanguagePrototype>> FirstContactLanguages = new();
+
+    [DataField]
+    public HashSet<ProtoId<LanguagePrototype>> EncounteredLanguages = new();
+
+    [DataField]
     public Dictionary<ProtoId<LanguagePrototype>, float> LanguageProgress = new();
 
     [DataField]
@@ -77,15 +83,21 @@ public sealed partial class LanguageLearningComponent : Component
     public sealed class State : ComponentState
     {
         public HashSet<ProtoId<LanguagePrototype>> LearnableLanguages { get; }
+        public HashSet<ProtoId<LanguagePrototype>> FirstContactLanguages { get; }
+        public HashSet<ProtoId<LanguagePrototype>> EncounteredLanguages { get; }
         public Dictionary<ProtoId<LanguagePrototype>, float> LanguageProgress { get; }
         public Dictionary<ProtoId<LanguagePrototype>, Dictionary<string, float>> LearnedWords { get; }
 
         public State(
             HashSet<ProtoId<LanguagePrototype>> learnableLanguages,
+            HashSet<ProtoId<LanguagePrototype>> firstContactLanguages,
+            HashSet<ProtoId<LanguagePrototype>> encounteredLanguages,
             Dictionary<ProtoId<LanguagePrototype>, float> languageProgress,
             Dictionary<ProtoId<LanguagePrototype>, Dictionary<string, float>> learnedWords)
         {
             LearnableLanguages = learnableLanguages;
+            FirstContactLanguages = firstContactLanguages;
+            EncounteredLanguages = encounteredLanguages;
             LanguageProgress = languageProgress;
             LearnedWords = learnedWords;
         }

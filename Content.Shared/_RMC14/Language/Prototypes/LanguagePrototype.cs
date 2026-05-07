@@ -22,9 +22,6 @@ public sealed partial class LanguagePrototype : IPrototype
     public bool IsVisibleLanguage { get; set; }
 
     [DataField]
-    public Color? TextColor;
-
-    [DataField]
     public string? TypefaceId;
 
     [DataField]
@@ -35,6 +32,9 @@ public sealed partial class LanguagePrototype : IPrototype
 
     [DataField]
     public bool ShowLanguageName { get; set; } = false;
+
+    [DataField]
+    public bool ShowLanguageIcon { get; set; } = true;
 
     [DataField]
     public string? LanguageIcon;
@@ -58,6 +58,9 @@ public sealed partial class LanguagePrototype : IPrototype
     public SpeechOverrideInfo SpeechOverride = new();
 
     [DataField]
+    public LocId? FirstContactMeaning;
+
+    [DataField]
     public int ExpectedVocabularySize { get; set; } = 100;
 
     [DataField]
@@ -72,6 +75,7 @@ public sealed partial class LanguagePrototype : IPrototype
     public string LocalizedName => Loc.GetString($"language-{ID}-name");
     public string ChatName => Loc.GetString($"chat-language-{ID}-name");
     public string LocalizedDescription => Loc.GetString($"language-{ID}-description");
+    public string? DisplayedLanguageIcon => ShowLanguageIcon ? LanguageIcon : null;
 }
 
 [DataDefinition]

@@ -76,6 +76,18 @@ public class SharedLanguageSystem : EntitySystem
             comprehension);
     }
 
+    public string ObfuscateMessageForDisplayWithComprehension(string message, ProtoId<LanguagePrototype> language, float comprehension)
+    {
+        if (!_prototypeManager.TryIndex(language, out var languageProto))
+            return message;
+
+        return ObfuscateMessageInternalWithComprehension(
+            message,
+            languageProto.ObfuscationMethod,
+            false,
+            comprehension);
+    }
+
     protected string ObfuscateMessageInternal(
         string message,
         ObfuscationMethod obfuscationMethod,

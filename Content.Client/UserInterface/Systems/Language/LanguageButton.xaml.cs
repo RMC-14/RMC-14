@@ -142,8 +142,8 @@ public sealed class LanguageButton : ContainerButton
             StyleClasses = { "LabelHeading" },
             Visible = false
         };
-
         mainContainer.AddChild(_selectedIndicator);
+
         AddChild(mainContainer);
 
         UpdateVisualState();
@@ -152,6 +152,9 @@ public sealed class LanguageButton : ContainerButton
 
     private void UpdateVisualState()
     {
+        if (_background == null || _nameLabel == null || _selectedIndicator == null)
+            return;
+
         if (_isSelected)
         {
             _background.PanelOverride = _selectedStyleBox;
@@ -162,7 +165,7 @@ public sealed class LanguageButton : ContainerButton
         else
         {
             _background.PanelOverride = DrawMode == DrawModeEnum.Hover ? _hoverStyleBox : _normalStyleBox;
-            _nameLabel.FontColorOverride = _prototype.TextColor ?? Color.White;
+            _nameLabel.FontColorOverride = Color.White;
             _selectedIndicator.Visible = false;
         }
     }
@@ -171,7 +174,10 @@ public sealed class LanguageButton : ContainerButton
     {
         base.DrawModeChanged();
 
-        if (!_isSelected && _background != null)
+        if (_background == null)
+            return;
+
+        if (!_isSelected)
         {
             _background.PanelOverride = DrawMode == DrawModeEnum.Hover ? _hoverStyleBox : _normalStyleBox;
         }

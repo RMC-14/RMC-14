@@ -43,6 +43,8 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             return;
 
         ent.Comp.LearnableLanguages = state.LearnableLanguages.ToHashSet();
+        ent.Comp.FirstContactLanguages = state.FirstContactLanguages.ToHashSet();
+        ent.Comp.EncounteredLanguages = state.EncounteredLanguages.ToHashSet();
         ent.Comp.LanguageProgress = new(state.LanguageProgress);
         ent.Comp.LearnedWords = state.LearnedWords.ToDictionary(
             kvp => kvp.Key,

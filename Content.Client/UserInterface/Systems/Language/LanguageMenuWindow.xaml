@@ -11,7 +11,7 @@
             <TabContainer Name="TabContainer"
                           HorizontalExpand="True"
                           VerticalExpand="True"
-                          Margin="8">
+                          Margin="0">
 
                 <ScrollContainer Name="KnownLanguagesTab"
                                 HorizontalExpand="True"
@@ -23,7 +23,7 @@
                         <BoxContainer Name="KnownLanguageList"
                                      Orientation="Vertical"
                                      SeparationOverride="6"
-                                     Margin="12"/>
+                                     Margin="0"/>
                     </PanelContainer>
                 </ScrollContainer>
 
@@ -40,7 +40,7 @@
                         <BoxContainer Name="LearningLanguageList"
                                      Orientation="Vertical"
                                      SeparationOverride="8"
-                                     Margin="12"
+                                     Margin="0"
                                      HorizontalExpand="True"/>
                     </PanelContainer>
                 </ScrollContainer>

@@ -2,6 +2,9 @@
 language-menu-title = Language Menu
 language-menu-known-tab = Known Languages
 language-menu-learning-tab = Learning Languages
+language-menu-current-label = Speaking now
+language-menu-current-none = No language selected
+language-menu-speaking-badge = Speaking
 
 # Language names
 language-English-name = English
@@ -17,6 +20,7 @@ language-Predator-name = Yautja
 # Language descr
 language-English-description = Earth language.
 language-Xeno-description = The alien language of the Xenomorphs.
+language-Xeno-first-contact = The sounds follow an alien hive pattern.
 language-Binary-description = The language of synthetic beings.
 language-Spanish-description = Earth language.
 language-French-description = Earth language.
@@ -48,6 +52,11 @@ language-learning-word-count = Words: {$count}
 language-learning-average-comprehension = Avg: {$average}
 language-learning-no-words = No words learned yet.
 language-learning-search-placeholder = Search words...
+language-learning-show-words = Show words
+language-learning-hide-words = Hide words
+language-learning-no-results = No words found matching your search.
+language-learning-first-contact = You identify this as {$language}.
+language-learning-first-contact-with-meaning = You identify this as {$language}. {$meaning}
 
 # Language errors
 chat-manager-no-radio-key = No radio key specified.

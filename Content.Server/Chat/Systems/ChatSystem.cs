@@ -370,11 +370,10 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         name = FormattedMessage.EscapeText(name);
 
-        var languageColor = languagePrototype?.TextColor;
         var languageTypeface = languagePrototype?.TypefaceId;
         var languageSize = languagePrototype?.TextSize;
         var showLanguageName = languagePrototype?.ShowLanguageName ?? false;
-        var languageIcon = languagePrototype?.LanguageIcon;
+        var languageIcon = languagePrototype?.DisplayedLanguageIcon;
 
         var typefaceToUse = languageTypeface ?? speech.FontId;
         var sizeToUse = languageSize ?? speech.FontSize;
@@ -395,7 +394,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("fontSize", sizeToUse),
             ("message", "{0}"));
 
-        SendInVoiceRangeWithLanguage(ChatChannel.Local, speakerProcessedMessage, wrappedMessageTemplate, source, range, language, languageColor, languageIcon, needsLOS: needsLOS);
+        SendInVoiceRangeWithLanguage(ChatChannel.Local, speakerProcessedMessage, wrappedMessageTemplate, source, range, language, languageIcon, needsLOS: needsLOS);
 
         var ev = new EntitySpokeEvent(source, speakerProcessedMessage, null, null, language);
         RaiseLocalEvent(source, ev, true);
@@ -464,9 +463,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         name = FormattedMessage.EscapeText(name);
 
-        var languageColor = languagePrototype?.TextColor;
         var showLanguageName = languagePrototype?.ShowLanguageName ?? false;
-        var languageIcon = showLanguageName ? languagePrototype?.LanguageIcon : null;
+        var languageIcon = showLanguageName ? languagePrototype?.DisplayedLanguageIcon : null;
 
         foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ignoreXenos))
         {
@@ -493,14 +491,13 @@ public sealed partial class ChatSystem : SharedChatSystem
             }
 
             string actualWrappedMessage;
-            Color? actualColor = languageColor;
             string? actualIcon = languageIcon;
 
             if (data.Range <= WhisperClearRange)
             {
                 actualWrappedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
                     ("entityName", name), ("message", FormattedMessage.EscapeText(listenerMessage)));
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, listenerMessage, actualWrappedMessage, source, false, session.Channel, colorOverride: actualColor, languageIcon: actualIcon);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, listenerMessage, actualWrappedMessage, source, false, session.Channel, languageIcon: actualIcon);
             }
             //If listener is too far, they only hear fragments of the message
             else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
@@ -508,7 +505,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 var obfuscatedMessage = ObfuscateMessageReadability(listenerMessage, 0.2f);
                 actualWrappedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
                     ("entityName", nameIdentity), ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, actualWrappedMessage, source, false, session.Channel, colorOverride: actualColor, languageIcon: actualIcon);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, actualWrappedMessage, source, false, session.Channel, languageIcon: actualIcon);
             }
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
             else
@@ -516,13 +513,13 @@ public sealed partial class ChatSystem : SharedChatSystem
                 var obfuscatedMessage = ObfuscateMessageReadability(listenerMessage, 0.2f);
                 actualWrappedMessage = Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
                     ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, actualWrappedMessage, source, false, session.Channel, colorOverride: actualColor, languageIcon: actualIcon);
+                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, actualWrappedMessage, source, false, session.Channel, languageIcon: actualIcon);
             }
         }
 
         var replayWrappedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
             ("entityName", name), ("message", FormattedMessage.EscapeText(speakerMessage)));
-        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, speakerMessage, replayWrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range), colorOverride: languageColor, speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source)));
+        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, speakerMessage, replayWrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range), speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source)));
 
         var ev = new EntitySpokeEvent(source, speakerMessage, channel, null, language);
         RaiseLocalEvent(source, ev, true);
@@ -546,7 +543,6 @@ public sealed partial class ChatSystem : SharedChatSystem
         EntityUid source,
         ChatTransmitRange range,
         ProtoId<LanguagePrototype> language,
-        Color? languageColor,
         string? languageIcon = null,
         NetUserId? author = null,
         bool needsLOS = false)
@@ -587,11 +583,11 @@ public sealed partial class ChatSystem : SharedChatSystem
             else
                 RaiseLocalEvent(source, ref ev);
 
-            _chatManager.ChatMessageToOne(channel, ev.Message, ev.WrappedMessage, source, ev.EntHideChat, session.Channel, colorOverride: languageColor, author: author, languageIcon: languageIcon);
+            _chatManager.ChatMessageToOne(channel, ev.Message, ev.WrappedMessage, source, ev.EntHideChat, session.Channel, author: author, languageIcon: languageIcon);
         }
 
         var replayWrappedMessage = string.Format(wrappedMessageTemplate, FormattedMessage.EscapeText(speakerMessage));
-        _replay.RecordServerMessage(new ChatMessage(channel, speakerMessage, replayWrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range), colorOverride: languageColor, speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source), languageIcon: languageIcon));
+        _replay.RecordServerMessage(new ChatMessage(channel, speakerMessage, replayWrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range), speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source), languageIcon: languageIcon));
     }
 
     public void TrySendInGameOOCMessage(

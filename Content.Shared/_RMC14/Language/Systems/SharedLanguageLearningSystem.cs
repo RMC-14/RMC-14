@@ -98,6 +98,24 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
         return result.ToString();
     }
 
+    public string ProcessWordForDisplay(
+        string word,
+        ProtoId<LanguagePrototype> language,
+        float wordComprehension,
+        float overallComprehension)
+    {
+        var thresholds = GetComprehensionThresholds(language);
+        var effectiveComprehension = Math.Max(wordComprehension, overallComprehension);
+
+        if (effectiveComprehension >= thresholds.Clear)
+            return word;
+
+        return _languageSystem.ObfuscateMessageForDisplayWithComprehension(
+            word,
+            language,
+            effectiveComprehension);
+    }
+
     protected string LightlyGarbleWord(string word, float comprehension)
     {
         var garbleRate = Math.Max(0.1f, (1.0f - comprehension) * 0.75f);

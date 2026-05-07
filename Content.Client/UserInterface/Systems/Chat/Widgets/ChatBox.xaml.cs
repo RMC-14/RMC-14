@@ -32,7 +32,7 @@ public partial class ChatBox : UIWidget
 
     // RMC14
     public readonly Queue<RepeatedMessage> RepeatQueue = new();
-    private readonly HashSet<string> _whitelist = ["mono", "scramble", "bolditalic", "bold", "bullet", "color", "font", "head", "italic"];
+    private readonly HashSet<string> _whitelist = ["mono", "scramble", "bolditalic", "bold", "bullet", "color", "font", "head", "italic", "langicon"];
 
     public ChatBox()
     {
@@ -73,7 +73,7 @@ public partial class ChatBox : UIWidget
 
         var color = msg.MessageColorOverride ?? msg.Channel.TextColor();
 
-        AddLine(msg.WrappedMessage, color, msg.SenderEntity, msg.Message, msg.Channel, msg.RepeatCheckSender);
+        AddLine(msg.WrappedMessage, color, msg.SenderEntity, msg.Message, msg.Channel, msg.RepeatCheckSender, msg.LanguageIcon);
     }
 
     private void OnHighlightsUpdated(string highlights)
@@ -116,16 +116,25 @@ public partial class ChatBox : UIWidget
         _controller.UpdateHighlights(highlighs);
     }
 
-    public void AddLine(string message, Color color, NetEntity sender, string unwrapped, ChatChannel channel, bool repeatCheckSender)
+    public void AddLine(
+        string message,
+        Color color,
+        NetEntity sender,
+        string unwrapped,
+        ChatChannel channel,
+        bool repeatCheckSender,
+        string? languageIcon = null)
     {
         var formatted = new FormattedMessage(3);
         formatted.PushColor(color);
+        if (!string.IsNullOrWhiteSpace(languageIcon))
+            formatted.AddMarkupOrThrow($"[langicon path=\"{FormattedMessage.EscapeText(languageIcon)}\"][/langicon]");
         formatted.AddMarkupOrThrow(message);
         formatted.Pop();
 
         // RMC14
         formatted = FilterProblematicTags(formatted);
-        if (_entManager.SystemOrNull<CMChatSystem>()?.TryRepetition(this, Contents, formatted, sender, unwrapped, channel, repeatCheckSender) ?? false)
+        if (_entManager.SystemOrNull<CMChatSystem>()?.TryRepetition(this, Contents, formatted, sender, unwrapped, channel, repeatCheckSender, languageIcon) ?? false)
             return;
 
         Contents.AddMessage(formatted);
