@@ -227,6 +227,7 @@
     spawn: RMCSmokeAcid
     popup: rmc-glob-land
     popupType: LargeCaution
+    spawnOffsetMultiplier: -0.5
   - type: ProjectileMaxRange
     max: 10
   - type: XenoSlowingSpitProjectile
@@ -283,6 +284,7 @@
     spawn: RMCSmokeNeurotoxin
     popup: rmc-glob-land
     popupType: LargeCaution
+    spawnOffsetMultiplier: -0.5
   - type: ProjectileMaxRange
     max: 10
   - type: XenoSlowingSpitProjectile
