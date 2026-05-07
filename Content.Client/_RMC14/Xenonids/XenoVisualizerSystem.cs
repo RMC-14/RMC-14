@@ -71,7 +71,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         {
             _sprite.SetBaseRsi(nullableXeno, newComponent.BaseRSI);
 
-            // TODO how the hell do you make the sprite recalculate bounds? this is awful
+            // TODO RMC14 how the hell do you make the sprite recalculate bounds? this is awful
             _sprite.SetSnapCardinals(nullableXeno, !xeno.Comp.SnapCardinals);
             _sprite.SetSnapCardinals(nullableXeno, !xeno.Comp.SnapCardinals);
         }
