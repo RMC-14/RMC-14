@@ -41,6 +41,22 @@
   loadouts:
   - MarineSecuritySatchel
 
+- type: loadoutGroup
+  id: ProvostSecurityBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - ProvostSecuritySatchel
+
+- type: loadoutGroup
+  id: RoyalBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - SatchelRoyalMOLS
+
 # Eyewear
 - type: loadoutGroup
   id: EyewearRMC
@@ -104,6 +120,23 @@
   - GlassesTriMaxBronzeRMC
   - GlassesTriMaxBlackRMC
 
+- type: loadoutGroup
+  id: EyewearRoyalRMC
+  name: rmc-loadout-group-eyewear
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - AviatorsRMC
+  - AviatorsSilverRMC
+  - EyepatchRMC
+  - GlassesPrescriptionRMC
+  - HippieGlassesRMC
+  - PersonalShadesRMC
+  - SunglassesRMC # TODO prescription sunglasses
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
+
 # Masks
 - type: loadoutGroup
   id: MasksRMC
@@ -141,10 +174,11 @@
   - SmockRMC
   - SmockCamoRMC
   - NeckerchiefSquadRMC
-  - NeckerchiefTanRMC
+  - NeckerchiefRedRMC
   - NeckerchiefBlackRMC
-  - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
+  - NeckerchiefGrayRMC
+  - NeckerchiefTanRMC
   - NeckerchiefWhiteRMC
 
 - type: loadoutGroup
@@ -168,6 +202,41 @@
   - KeffiyehWhiteRMC
   - KeffiyehRedRMC
 
+- type: loadoutGroup
+  id: MasksRoyalRMC
+  name: rmc-loadout-group-masks
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - BalaclavaRMC
+  - CoifRMC
+  - MaskScarfRedRMC
+  - MaskScarfBlackRMC
+  - MaskScarfGrayRMC
+  - MaskScarfGreenRMC
+  - MaskScarfTanRMC
+  - GasMaskRoyalRMC
+  - TornScarfBlackRMC
+  - TornScarfDesertRMC
+  - TornScarfGreenRMC
+  - TornScarfGreyRMC
+  - TornScarfUrbanRMC
+  - TornScarfSnowRMC
+  - BalaclavaSkullBlueRMC
+  - BalaclavaSkullBlackRMC
+  - KeffiyehRMC
+  - KeffiyehBlackRMC
+  - KeffiyehBlueRMC
+  - KeffiyehGreenRMC
+  - KeffiyehWhiteRMC
+  - KeffiyehRedRMC
+  - NeckerchiefRedRMC
+  - NeckerchiefBlackRMC
+  - NeckerchiefGreenRMC
+  - NeckerchiefGrayRMC
+  - NeckerchiefTanRMC
+  - NeckerchiefWhiteRMC
+
 # Headwear
 - type: loadoutGroup
   id: HeadwearRMC
@@ -178,6 +247,7 @@
   - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
+  - CamoBeretRMC
   - BoonieRMC
   - BoonieTanRMC
   - CapRMC
@@ -206,6 +276,21 @@
   - TanHeadbandRMC
   - UNMCHeadsetRMC
 
+- type: loadoutGroup
+  id: HeadwearRoyalRMC
+  name: rmc-loadout-group-headwear
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - BrownHeadbandRMC
+  - GreenHeadbandRMC
+  - GrayHeadbandRMC
+  - RedHeadbandRMC
+  - TanHeadbandRMC
+  - HeadsetRoyalRMC
+  - CapRoyalRMC
+  - BoonieRoyalRMC
+
 # Helmet Garbs
 - type: loadoutGroup
   id: HelmetGarbsRMC
@@ -214,6 +299,7 @@
   maxLimit: 10
   loadouts:
   - FakeNVGRMC
+  - FakeNVGPVERMC
   - NettingRMC
   - NettingUrbanRMC
   - NettingDesertRMC
@@ -277,6 +363,27 @@
   - UNMCFlairRMC
   - MovieTicketRMC
 
+- type: loadoutGroup
+  id: HelmetGarbsRoyalRMC
+  name: rmc-loadout-group-helmet-garbs
+  minLimit: 0
+  maxLimit: 4
+  loadouts:
+  - BuckshotSpentRMC
+  - FlechetteSpentRMC
+  - SlugSpentRMC
+  - CartridgeSpentRMC
+  - FeatherRMC
+  - FeatherRedRMC
+  - FeatherBlueRMC
+  - FeatherPurpleRMC
+  - FeatherYellowRMC
+  - GunOilRMC
+  - RosaryRMC
+  - PrescriptionRMC
+  - TrimmedWireRMC
+  - PeaceFlairRMC
+
 # Accessories
 - type: loadoutGroup
   id: AccessoriesRMC
@@ -286,7 +393,46 @@
   loadouts:
   - UNMCSquadPatchRMC
   - SquadArmbandRMC
+  - PonchoRMC
+  - PonchoJungleRMC
+  - PonchoDesertRMC
+  - PonchoUrbanRMC
+  - PonchoSnowRMC
   - PatchPeaceRMC
+
+- type: loadoutGroup
+  id: AccessoriesRMCPVE
+  name: rmc-loadout-group-accessories
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - PaintSkullRMC
+  - PaintHeartRMC
+  - PaintMedicRMC
+  - PaintUNRMC
+  - PaintTargetRMC
+  - PaintSmileyFaceRMC
+  - PaintNeutralFaceRMC
+  - PaintCrossRMC
+  - PaintInscriptionRMC
+  - PaintMixtapeRMC
+
+- type: loadoutGroup
+  id: AccessoriesRoyalRMC
+  name: rmc-loadout-group-accessories
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - PaintSkullRMC
+  - PaintHeartRMC
+  - PaintMedicRMC
+  - PaintTSERMC
+  - PaintTargetRMC
+  - PaintSmileyFaceRMC
+  - PaintNeutralFaceRMC
+  - PaintCrossRMC
+  - PaintInscriptionRMC
+  - PaintMixtapeRMC
 
 # Paperwork
 - type: loadoutGroup
@@ -350,6 +496,28 @@
   - D20DiceRMC
   - D6DiceRMC
 
+# Melee Weapons
+- type: loadoutGroup
+  id: MeleeWeaponsRMC
+  name: rmc-loadout-group-melee-weapons
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - TantoARMC
+  - TantoBRMC
+  - CombatUtilityARMC
+  - CombatUtilityBRMC
+  - SawtoothDaggerARMC
+  - SawtoothDaggerBRMC
+
+- type: loadoutGroup
+  id: MeleeWeaponsRoyalRMC
+  name: rmc-loadout-group-melee-weapons
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - TantoBRMC
+  - CommandoKnifeRMC
 
 # Weapons
 - type: loadoutGroup
@@ -373,6 +541,17 @@
   loadouts:
   - T73CaseRMC
   - ZHNK72CaseRMC
+
+# RCM Weapons
+- type: loadoutGroup
+  id: WeaponsRoyalRMC
+  name: rmc-loadout-group-weapons
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - CustomL14CaseRMC
+  - L54CaseRMC
+  - WarwickMkVIISnubCaseRMC
 
 # Canned Drinks
 - type: loadoutGroup
@@ -529,6 +708,15 @@
   - ColIDCardRMC
   - ColNormalIDCardRMC
 
+- type: loadoutGroup
+  id: CommandingOfficerWeaponRMC
+  name: rmc-loadout-group-role-specific-weapon
+  loadouts:
+  - MatebaRMC
+  - HandcannonRMC
+  - GoldMatebaRMC
+  - GoldHandcannonRMC
+
 # Corporate Liaison
 - type: loadoutGroup
   id: LiaisonRoleSpecificRMC
@@ -636,6 +824,7 @@
   - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
+  - CamoBeretRMC
   - BoonieRMC
   - BoonieTanRMC
   - CapRMC
@@ -722,6 +911,56 @@
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
+  - NeckerchiefRedRMC
+
+# Watches
+- type: loadoutGroup
+  id: WatchesBasicRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts: 
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+
+- type: loadoutGroup
+  id: WatchesSynthRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+  - WatchSynthRMC
+
+- type: loadoutGroup
+  id: WatchesLiaisonRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts: 
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+  - WatchLiaisonRMC
+
+- type: loadoutGroup
+  id: WatchesCommandingOfficerRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts: 
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchSurvRMC
+  - WatchPilotRMC
+  - WatchLiaisonRMC
+  - WatchSynthRMC
 
 # Civilian
 - type: loadoutGroup
@@ -735,10 +974,11 @@
   - PatchWeYaRMCBlack
   - PatchWeYaRMCFury161
   - PatchTSERMC
-  - PatchCECRMC
+  - PatchMSCRMC
   - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
-  # TODO Halcyon Dynamics patch
+  - PatchHalcyon
+  - PatchNovaris
   - HeadCowboyHatLightRMC
   - HeadCowboyHatDarkRMC
   - HeadBandRebelRMC
@@ -761,3 +1001,13 @@
   - PlushieTherapyRMC
   - PlushieGnarpGnarpRMC
   - PlushieGnarpGnarpAltRMC
+
+# Provost Inspector
+- type: loadoutGroup
+  id: ProvostRoleSpecificOuterwearRMC
+  name: rmc-loadout-group-provost-role-specific-outerwear
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ProvostJacketFilledRMC
+  - ProvostCoatFilledRMC

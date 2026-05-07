@@ -944,6 +944,23 @@
   - type: Sprite
     state: whitewyright
 
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerAMSLeft
+  description: A huge industrial shipping container. This one belongs to the Asian Multinational Shipping Line, a bulk-freight Weston-Yamada subsidiary.
+  suffix: AMS, Left
+  components:
+  - type: Sprite
+    state: amsleft
+
+- type: entity
+  parent: RMCContainerAMSLeft
+  id: RMCContainerAMSRight
+  suffix: AMS, Right
+  components:
+  - type: Sprite
+    state: amsright
+
 # Vertical
 
 - type: entity

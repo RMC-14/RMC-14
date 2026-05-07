@@ -152,8 +152,6 @@
         amount: 1
       - id: RMCWEYARainCoat
         amount: 1
-#      - id: LiaisonsWinterCoat
-#        amount:
       - id: RMCCoatHoboBrown
         amount: 1
       - id: RMCCoatHoboDarkBlue
@@ -167,6 +165,9 @@
       - id: RMCJacketWindbreakerGrey
         amount: 1
       - id: RMCJacketWindbreakerExpedition
+        amount: 1
+      - id: RMCCoatSnowLiaison
+        name: liaison's winter coat
         amount: 1
       - id: RMCLabcoat
         amount: 1

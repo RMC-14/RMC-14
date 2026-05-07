@@ -99,8 +99,6 @@
   name: M44 Combat Revolver case
   description: A gun case containing an M44 Combat Revolver loaded with marksman ammo.
   components:
-  - type: Item
-    size: Small
   - type: Storage
     maxItemSize: Huge
     grid:
@@ -386,6 +384,99 @@
       tags:
       - RMCBeltHolsterM13
 
+# L14 Custom
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolL14Custom
+  name: L14 custom combat pistol case
+  description: A case containing a loaded custom L14 custom combat pistol and two spare magazines.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # TODO - closed sprites
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+        tags:
+        - RMCWeaponPistolL14
+        - RMCMagazinePistolL14
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponPistolL14Custom
+      - id: RMCMagazinePistolL14
+        amount: 2
+
+# L54 Custom
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolL54
+  name: L54 service pistol case
+  description: A case containing a loaded L54 service pistol and two spare magazines.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # TODO - closed sprites
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+        tags:
+        - RMCWeaponPistolL54
+        - RMCMagazinePistolL54
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponPistolL54
+      - id: RMCMagazinePistolL54
+        amount: 2
+
+# Warwick Snubnose
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCaseRevolverWarwickMkVIISnub
+  name: Warwick MkVII snubnose revolver case
+  description: A case containing a loaded Warwick MkVII snubnose revolver and two spare speedloaders.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # TODO - closed sprites
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+        tags:
+        - RMCWeaponRevolverWarwickMkVII
+        - RMCSpeedLoaderM44
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponRevolverWarwickMkVIISnub
+      - id: RMCSpeedLoaderM44
+        amount: 2
+
 # rifles
 # M54C
 - type: entity
@@ -560,6 +651,26 @@
 
 - type: entity
   parent: RMCGunCaseBase
+  id: RMCM59ACaseAP
+  name: M59A prototype rifle AP case
+  description: A gun case containing the M59A prototype rifle loaded with AP rounds. Experimental and back issue only, built to outperform the standard M54C. While this case contains MK1 rifle magazines, the weapon also supports MK2 rifle magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,5,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM59A
+      - CMMagazineRifleM54CMK1AP
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleM59A
+    - id: CMMagazineRifleM54CMK1AP
+    - id: CMMagazineRifleM54CMK1AP
+
+- type: entity
+  parent: RMCGunCaseBase
   id: RMCM54CMK2Case
   name: M54C assault rifle MK2 case
   description: A gun case containing the M54C assault rifle MK2.
@@ -650,3 +761,60 @@
     - id: RMCPacketGrenadeM74AGMSStarShellFilled
     - id: RMCPacketGrenadeM74AGMSHornetFilled
     - id: RMCPacketGrenadeBatonSlugHIRRFilled
+
+# Mountable weapons
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCML66DCase
+  name: ML66D heavy machine gun case
+  description: A gun case containing the ML66D heavy machine gun. Comes with 2 magazines
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCSmartGunMounted
+      - RMCMagazineML66D
+      - ML66DMount
+      - Wrench
+      - Screwdriver
+      - RMCSkillPamphlet
+      - RMCMachineGunnerRig
+  - type: StorageFill
+    contents:
+    - id: RMCSmartGunMounted
+    - id: RMCMagazineML66D
+    - id: RMCMagazineML66D
+    - id: RMCML66DMount
+    - id: CMWrench
+    - id: CMScrewdriver
+    - id: RMCPamphletHeavyMachineGunner
+    - id: RMCBeltMachineGunner
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM2CCase
+  name: M2C heavy machine gun case
+  description: A gun case containing the M2C heavy machine gun. Comes with 4 magazines
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,13,1
+    whitelist:
+      tags:
+      - M2CMount
+      - RMCMagazineM2C
+      - RMCSkillPamphlet
+      - RMCMachineGunnerRig
+  - type: StorageFill
+    contents:
+    - id: RMCPamphletHeavyMachineGunner
+    - id: RMCM2CMount
+    - id: RMCMagazineM2C
+    - id: RMCMagazineM2C
+    - id: RMCMagazineM2C
+    - id: RMCMagazineM2C
+    - id: RMCBeltMachineGunner

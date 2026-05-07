@@ -88,7 +88,7 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
         RMCBattleExecuteComponent executionComponent,
         EntityUid handHeldItem)
     {
-        if (HasComp<RMCBattleExecutedComponent>(target) || HasComp<UnrevivableComponent>(target))
+        if (_mobState.IsDead(target) && _unrevivable.IsUnrevivable(target))
         {
             var cancelledMessage = $"You decide to not Execute {Name(target)}, as they are already far beyond revival.";
             _popup.PopupClient(cancelledMessage, user, PopupType.MediumCaution);

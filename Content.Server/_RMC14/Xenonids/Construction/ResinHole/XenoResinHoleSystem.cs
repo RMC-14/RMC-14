@@ -3,10 +3,12 @@ using Content.Server.Destructible;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
+using Content.Shared._RMC14.Xenonids.AciderGeneration;
 using Content.Shared._RMC14.Xenonids.Bombard;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -43,6 +45,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -195,8 +198,16 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         if (TryComp<AcidTrapComponent>(args.User, out var ourAcid) &&
             (resinHole.Comp.TrapPrototype == null || (IsAcidPrototype(resinHole.Comp.TrapPrototype, out var level) && ourAcid.TrapLevel > level)))
         {
-            if (!_xenoPlasma.HasPlasmaPopup(args.User, ourAcid.Cost, false))
-                return;
+            if (HasComp<XenoAciderGenerationComponent>(args.User))
+            {
+                if (!_xenoEnergy.HasEnergyPopup(args.User, ourAcid.Cost, false))
+                    return;
+            }
+            else 
+            {
+                if (!_xenoPlasma.HasPlasmaPopup(args.User, ourAcid.Cost, false))
+                    return;
+            }
 
             var ev = new XenoPlaceFluidInHoleDoAfterEvent();
             var doAfterArgs = new DoAfterArgs(EntityManager, args.User, resinHole.Comp.AddFluidDelay, ev, resinHole)
@@ -212,10 +223,13 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         if (resinHole.Comp.TrapPrototype == null || resinHole.Comp.TrapPrototype != XenoResinHoleComponent.ParasitePrototype)
         {
-            var msg = HasComp<AcidTrapComponent>(args.User)
-                ? Loc.GetString("rmc-xeno-construction-resin-hole-good-acid")
-                : Loc.GetString("rmc-xeno-construction-resin-hole-no-acid");
-            _popup.PopupEntity(msg, resinHole, args.User, PopupType.SmallCaution);
+            if (HasComp<XenoComponent>(args.User))
+            {
+                var msg = HasComp<AcidTrapComponent>(args.User)
+                    ? Loc.GetString("rmc-xeno-construction-resin-hole-good-acid")
+                    : Loc.GetString("rmc-xeno-construction-resin-hole-no-acid");
+                _popup.PopupEntity(msg, resinHole, args.User, PopupType.SmallCaution);
+            }
             return;
         }
 
@@ -268,7 +282,9 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
             if (resinHole.Comp.TrapPrototype != null && (!IsAcidPrototype(resinHole.Comp.TrapPrototype, out var level) || level >= acid.TrapLevel))
                 return;
 
-            if (!_xenoPlasma.TryRemovePlasmaPopup(args.User, acid.Cost))
+            if (HasComp<XenoAciderGenerationComponent>(args.User))
+                _xenoEnergy.TryRemoveEnergy(args.User, acid.Cost);
+            if (!_xenoPlasma.TryRemovePlasmaPopup(args.User, acid.Cost) && !HasComp<XenoAciderGenerationComponent>(args.User))
                 return;
 
             SetTrapType(resinHole, acid.Spray);

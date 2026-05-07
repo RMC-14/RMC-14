@@ -128,41 +128,27 @@
       "directions": 4
     },
     {
-      "name": "cannon_tray"
-    },
-    {
-      "name": "cannon_tray_explosive"
-    },
-    {
-      "name": "cannon_tray_incendiary"
-    },
-    {
-      "name": "cannon_tray_cluster"
-    },
-    {
-      "name": "cannon_tray_1"
-    },
-    {
-      "name": "cannon_tray_2"
-    },
-    {
-      "name": "cannon_tray_3"
-    },
-    {
-      "name": "cannon_tray_4"
-    },
-    {
-      "name": "cannon_tray_5"
-    },
-    {
-      "name": "cannon_tray_6"
-    },
-    {
       "name": "rocket_pod_loadeds",
       "directions": 4
     },
     {
       "name": "harpoon"
+    },
+    {
+      "name": "mg_system_installed",
+      "directions": 4
+    },
+    {
+      "name": "mg_system_deployed",
+      "directions": 4
+    },
+    {
+      "name": "sentry_system_installed",
+      "directions": 4
+    },
+    {
+      "name": "sentry_system_deployed",
+      "directions": 4
     }
   ]
 }

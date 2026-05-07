@@ -81,6 +81,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             _window.AccessContainer.Visible = false;
             _window.JobContainer.Visible = false;
             // _window.RanksContainer.Visible = false;
+            _window.SquadContainer.Visible = false;
 
             switch (_currenttab)
             {
@@ -97,6 +98,10 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
                 case "Ranks":
                     // _window.RanksContainer.Visible = true;
                     break;
+                case "Squads":
+                    _window.SquadContainer.Visible = true;
+                    DisplaySquads(console);
+                    break;
             }
         }
         else
@@ -105,6 +110,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             _window.AccessContainer.Visible = false;
             _window.JobContainer.Visible = false;
             // _window.RanksContainer.Visible = false;
+            _window.SquadContainer.Visible = false;
         }
     }
 
@@ -239,6 +245,24 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
         // };
         // tabs.Add(tab3);
         // _window.Tabs.AddChild(tab3);
+
+        // Squads
+        var tab4 = new IdModificationConsoleTabButton();
+        tab4.TabButton.Text = "Squads";
+        tab4.TabButton.OnPressed += _ =>
+        {
+            _currenttab = "Squads";
+            tab4.TabButton.Disabled = true;
+            Refresh();
+        };
+        tabs.Add(tab4);
+        _window.Tabs.AddChild(tab4);
+
+        _window.SquadClear.OnPressed += _ =>
+        {
+            SendPredictedMessage(new IdModificationConsoleAssignSquadMsg(null));
+            Refresh();
+        };
 
         Refresh();
     }
@@ -382,6 +406,30 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             };
             _jobGroupButtons.Add(button);
             _window.JobGroups.AddChild(button);
+        }
+    }
+
+    public void DisplaySquads(IdModificationConsoleComponent console)
+    {
+        if (_window is not { IsOpen: true })
+            return;
+
+        _window.Squads.RemoveAllChildren();
+
+        if (console.Squads is not { } squads)
+            return;
+
+        foreach (var squad in squads)
+        {
+            var button = new IdModificationConsoleAccessButton();
+            button.AccessButton.Text = squad.Name;
+            button.AccessButton.Modulate = squad.Color;
+            button.AccessButton.OnPressed += _ =>
+            {
+                SendPredictedMessage(new IdModificationConsoleAssignSquadMsg(squad.Id));
+                Refresh();
+            };
+            _window.Squads.AddChild(button);
         }
     }
 

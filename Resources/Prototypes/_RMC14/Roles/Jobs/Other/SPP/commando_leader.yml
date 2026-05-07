@@ -31,6 +31,7 @@
         RMCSkillMedical: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 1
+        RMCSkillVehicles: 1
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -92,7 +93,7 @@
     pocket2: RMCPouchExplosiveFilledPlasticExplosives
   storage:
     back:
-    - CMMRE # TODO RMC14 - SPP MRE
+    - RMCMRESPP
     - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
     - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
     - CMCrowbar

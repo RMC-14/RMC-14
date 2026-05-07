@@ -33,5 +33,13 @@ namespace Content.Server.Power.Components
         /// </summary>
         [DataField]
         public bool Portable = false;
+
+        /// <summary>
+        /// RMC14 - How many charge-level sprite states the charger should support.
+        /// The server will produce a value in the range `0..(ChargeLevelSteps-1)` where 0 = empty
+        /// and `ChargeLevelSteps-1` = fully charged. Default is 2 (one intermediate and one full charge sprite)
+        /// </summary>
+        [DataField]
+        public int ChargeLevelSteps = 2;
     }
 }

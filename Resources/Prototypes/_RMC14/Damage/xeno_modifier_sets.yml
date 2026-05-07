@@ -12,3 +12,9 @@
     Heat: 0.333
     Shock: 0.333
     Structural: 0.333
+
+- type: damageModifierSet
+  id: ReflectiveResin
+  coefficients:
+    Heat: 1.5
+    Piercing: 0.3

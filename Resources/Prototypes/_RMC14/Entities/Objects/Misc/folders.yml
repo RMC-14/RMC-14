@@ -4,6 +4,7 @@
   abstract: true
   name: folder
   description: A folder.
+  suffix: Empty
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/paper.rsi
@@ -28,10 +29,13 @@
     blacklist:
       components:
       - Xeno
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: CMFolderBaseEmpty
   id: CMFolderBase
+  suffix: ""
   components:
   - type: StorageFill
     contents:

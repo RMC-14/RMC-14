@@ -1,9 +1,6 @@
 using Content.Server.Administration;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared.Administration;
-using Robust.Server.GameObjects;
-using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Toolshed.StairwellCommands;
@@ -16,8 +13,8 @@ internal sealed class StairwellCommand : ToolshedCommand
     {
         foreach (var entity in input)
         {
-            var transform = EntityManager.GetComponent<TransformComponent>(entity);
-            var comp = EntityManager.GetComponent<RMCTeleporterComponent>(entity);
+            if (!EntityManager.TryGetComponent<RMCTeleporterComponent>(entity, out var comp))
+                continue;
 
 #pragma warning disable RA0002
             comp.Adjust.X = x;

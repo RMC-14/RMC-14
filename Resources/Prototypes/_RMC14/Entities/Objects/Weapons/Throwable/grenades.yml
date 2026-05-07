@@ -75,8 +75,8 @@
   - CMGrenadeBase
   - RMCM40DPTags
   id: CMGrenadeHighExplosive
-  name: M40 HEDP grenade
-  description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has been phasing out the M15 HE grenades alongside the M40 HEFA. Capable of being loaded in grenade launchers, or thrown by hand.
+  name: 30mm HEDP grenade
+  description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has been phasing out the M15 HE grenades alongside the 30mm HEFA. Capable of being loaded in grenade launchers, or thrown by hand.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hedp.rsi
@@ -102,8 +102,8 @@
   - CMGrenadeBase
   - RMCM40DPTags
   id: CMGrenadeSmoke
-  name: M40 HSDP smoke grenade
-  description: The M40 HSDP is a small, but powerful smoke grenade. Based off the same platform as the M40 HEDP. It is set to detonate in 2 seconds.
+  name: 30mm HSDP smoke grenade
+  description: The 30mm HSDP is a small, but powerful smoke grenade. Based off the same platform as the 30mm HEDP. It is set to detonate in 2 seconds.
   components:
   - type: OnUseTimerTrigger
     delay: 2
@@ -164,7 +164,8 @@
 
 - type: entity
   parent: Smoke
-  id: RMCSmokeFireSentry
+  id: RMCSmokePhosphorusNoSpread
+  categories: [ HideSpawnMenu ]
   components:
   - type: Transform
     anchored: true
@@ -178,19 +179,66 @@
     tags:
     - HideContextMenu
   - type: Appearance
-  - type: ActiveEdgeSpreader
-  - type: EdgeSpreader
-    id: RMCSmokeAcid
-  - type: EvenSmoke
-    spawn: RMCSmoke
-    range: 1
   - type: DeleteOnExplosion
+  - type: RMCIgniteOnCollide
+    maxStacks: 20 #TODO make this 45 after adding fire stacks over time works.
+    duration: 5
+    burnColor: "#EE6515"
+    tileDamage:
+      types:
+        Heat: 0.5
+  - type: EdgeSpreader
+    id: Smoke
+
+- type: entity
+  parent: RMCSmokePhosphorusNoSpread
+  id: RMCSmokeFireSentry
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokePhosphorusNoSpread
+    initialSpread: 1
+    range: 1
+
+- type: entity
+  parent: RMCSmokePhosphorusNoSpread
+  id: RMCSmokePhosphorusNoSpreadStrong
+  components:
+  - type: TimedDespawn
+    lifetime: 3
+
+- type: entity
+  parent: RMCSmokePhosphorusNoSpreadStrong
+  id: RMCSmokePhosphorus
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokePhosphorusNoSpreadStrong
+    initialSpread: 3
+    range: 3
+
+- type: entity
+  parent: RMCSmokePhosphorusNoSpread
+  id: RMCSmokePhosphorusNoSpreadWeak
+  components:
+  - type: TimedDespawn
+    lifetime: 2
+  - type: RMCIgniteOnCollide
+    maxStacks: 15 #TODO make this 45 after adding fire stacks over time works.
+    duration: 5
+
+- type: entity
+  parent: RMCSmokePhosphorusNoSpreadWeak
+  id: RMCSmokePhosphorusWeak
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokePhosphorusNoSpreadWeak
+    initialSpread: 3
+    range: 3
 
 - type: entity
   parent: CMGrenadeHighExplosive
   id: CMGrenadeFrag
-  name: M40 HEFA grenade
-  description: High-Explosive Fragmenting-Antipersonnel. A small, but deceptively strong fragmentation grenade that has been phasing out the M15 fragmentation grenades alongside the M40 HEDP. Capable of being loaded in grenade launchers, or thrown by hand.
+  name: 30mm HEFA grenade
+  description: High-Explosive Fragmenting-Antipersonnel. A small, but deceptively strong fragmentation grenade that has been phasing out the M15 fragmentation grenades alongside the 30mm HEDP. Capable of being loaded in grenade launchers, or thrown by hand.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
@@ -201,7 +249,7 @@
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 1 # TODO RMC14 shrapnel lag
+    capacity: 48
     directHit: false
   - type: ContainerContainer
     containers:
@@ -210,8 +258,6 @@
   - type: ClusterLimitHits
   - type: CMExplosionEffect
     maxShrapnel: 0
-  - type: CMVocalizeTrigger
-  - type: RMCScorchEffect
   - type: Tag
     tags:
     - Grenade
@@ -223,7 +269,7 @@
   parent: CMGrenadeHighExplosive
   id: CMGrenadeFragOld
   name: M15 fragmentation grenade
-  description: An outdated UNMC Fragmentation Grenade. With decades of service in the UNMC, the old M15 Fragmentation Grenade is slowly being replaced by the slightly safer M40-series grenades. It is set to detonate in 4 seconds.
+  description: An outdated UNMC Fragmentation Grenade. With decades of service in the UNMC, the old M15 Fragmentation Grenade is slowly being replaced by the slightly safer 30mm-series grenades. It is set to detonate in 4 seconds.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m15frag.rsi
@@ -234,7 +280,7 @@
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 1 #same as HEFA # TODO RMC14 shrapnel lag
+    capacity: 48 #same as HEFA
     directHit: false
   - type: ContainerContainer
     containers:
@@ -247,11 +293,9 @@
   - type: ClusterLimitHits
   - type: CMExplosionEffect
     maxShrapnel: 0
-  - type: CMVocalizeTrigger
-  - type: RMCScorchEffect
 
 - type: entity
-  parent: CMGrenadeFragOld
+  parent: CMGrenadeHighExplosive
   id: RMCGrenadeBlastM12
   name: M12 blast grenade
   description: A high-explosive grenade produced for private security firms. It explodes around 3 seconds after the pin has been pulled.
@@ -259,31 +303,19 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m12blast.rsi
   - type: Explosive
-    maxIntensity: 20
-    intensitySlope: 8
+    maxIntensity: 35 # max 175 brute, 175 burn
+    intensitySlope: 5
     totalIntensity: 280
-    deleteAfterExplosion: false
-  - type: ProjectileGrenade
-    fillPrototype: CMProjectileShrapnel
-    capacity: 1 #same as HEFA
-    directHit: false
-  - type: ContainerContainer
-    containers:
-      cluster-payload: !type:Container
   - type: Tag
     tags:
     - Grenade
-  - type: Ammo
-  - type: ClusterLimitHits
-  - type: CMExplosionEffect
-    maxShrapnel: 0
-  - type: RMCScorchEffect
+    - LauncherCompatibleGrenade
 
 - type: entity
   parent: CMGrenadeBase
   id: RMCGrenadeTraining
   name: M07 Training Grenade
-  description: A harmless reusable version of the M40 HEDP, used for training. Capable of being loaded into a grenade launcher, or thrown by hand.
+  description: A harmless reusable version of the 30mm HEDP, used for training. Capable of being loaded into a grenade launcher, or thrown by hand.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m07training.rsi
@@ -302,8 +334,8 @@
   - RMCM40DPTags
   - CMGrenadeBase
   id: RMCGrenadeIncendiary
-  name: M40 HIDP incendiary grenade
-  description: The M40 HIDP is a small, but deceptively strong incendiary grenade designed to disrupt enemy mobility with long-lasting Type B napalm. It is set to detonate in 4 seconds.
+  name: 30mm HIDP incendiary grenade
+  description: The 30mm HIDP is a small, but deceptively strong incendiary grenade designed to disrupt enemy mobility with long-lasting Type B napalm. It is set to detonate in 4 seconds.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40hidp.rsi
@@ -314,6 +346,40 @@
     spawn: RMCTileFireGreen
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
+
+- type: entity
+  parent:
+  - RMCM40DPTags
+  - CMGrenadeBase
+  id: RMCGrenadeWhitePhosphorus
+  name: 30mm WPDP white phosphorus grenade
+  description: The 30mm WPDP is a small, but powerful phosphorus grenade. It is set to detonate in 2 seconds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40wpdp.rsi
+  - type: OnUseTimerTrigger
+    delay: 2
+    beepSound: null
+  - type: CMVocalizeTrigger
+  - type: DeleteOnTrigger
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/Smoke-grenade.ogg
+  - type: SpawnOnTrigger
+    proto: RMCSmokePhosphorusWeak
+  - type: SoundOnTrigger
+    sound: /Audio/Effects/smoke.ogg
+
+- type: entity
+  parent: RMCGrenadeWhitePhosphorus
+  id: RMCGrenadeWhitePhosphorusCompound
+  name: 30mm CCDP chemical compound grenade
+  description: The 30mm CCDP is a small, but powerful chemical compound grenade, similar in effect to WPDP. Word on the block says that the CCDP doesn't actually release White Phosphorus, but some other chemical developed in We-Ya labs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/ied.rsi
+  - type: SpawnOnTrigger
+    proto: RMCSmokePhosphorus
 
 - type: entity
   parent: RMCGrenadeIncendiary
@@ -330,6 +396,7 @@
     max: 4
   - type: TileFireOnTrigger
     spawn: RMCTileFire
+    duration: 60
   - type: Tag
     tags:
     - Grenade
@@ -350,7 +417,7 @@
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 1 # TODO RMC14 shrapnel lag
+    capacity: 48
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -361,6 +428,56 @@
     tags:
     - Grenade
     - RMCGrenadeIED
+
+# RCM grenades for PVE
+- type: entity
+  parent: CMGrenadeBase
+  id: RMCGrenade20mmIncendiary
+  name: L109A2 20mm incendiary grenade
+  suffix: PvE
+  description: A 20mm grenade that creates flames upon impact. Less powerful than full-sized grenades. Be careful how you handle these.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/rcm20mm/incend.rsi
+  - type: TriggerOnThrowEnd
+    delay: 0
+  - type: TileFireOnTrigger
+    spawn: RMCTileFire
+  - type: Ammo
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenade20mm
+
+- type: entity
+  parent: CMGrenadeBase
+  id: RMCGrenade20mmHE
+  name: L109A1 20mm HE grenade
+  suffix: PVE
+  description: A 20mm grenade that explodes upon impact. Less powerful than full-sized grenades. Be careful how you handle these.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/rcm20mm/he.rsi
+  - type: TriggerOnThrowEnd
+    delay: 0
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    maxIntensity: 16
+    intensitySlope: 6
+    totalIntensity: 160
+    canCreateVacuum: false
+  - type: Ammo
+  - type: CMExplosionEffect
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenade20mm
 
 - type: entity
   id: CMExplosionEffectGrenade
@@ -421,6 +538,9 @@
   id: RMCGrenadeHEFA
 
 - type: Tag
+  id: RMCGrenadeWPDP
+
+- type: Tag
   id: RMCGrenadeM40
 
 - type: Tag
@@ -434,3 +554,6 @@
 
 - type: Tag
   id: RMCGrenadeIED
+
+- type: Tag
+  id: RMCGrenade20mm

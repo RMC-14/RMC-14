@@ -1,7 +1,7 @@
 ﻿{
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/fe0134eee0c220b5b4a896689630fa9e14d92f55/icons/obj/items/weapons/guns/ammo_by_faction/uscm.dmi, improvised variant by github noctyrnal",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/fe0134eee0c220b5b4a896689630fa9e14d92f55/icons/obj/items/weapons/guns/ammo_by_faction/uscm.dmi, improvised variant by github noctyrnal. flametank_l104 by @TadJohnson00 (GitHub).",
   "size": {
     "x": 32,
     "y": 32
@@ -57,6 +57,9 @@
     },
     {
       "name": "flametank_improvised"
+    },
+    {
+      "name": "flametank_l104"
     }
   ]
 }

@@ -88,13 +88,14 @@ namespace Content.IntegrationTests.Tests
             "Savannah",
             "Almayer",
             "RMCAdminFax",
-            "GoldenArrowLarge",
             "OCP-583",
             "Haurchefant",
             "Breakwater_Strand",
             "UNSEndeavour",
             "Berkley",
-            "SSVDeyneka"
+            "SSVDeyneka",
+			"HMSPratchett",
+            "Rover"
         };
 
         private static readonly ProtoId<EntityCategoryPrototype> DoNotMapCategory = "DoNotMap";

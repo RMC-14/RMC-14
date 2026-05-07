@@ -1,0 +1,48 @@
+<controls:RMCChemMasterPresetRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Master">
+    <BoxContainer Orientation="Vertical">
+        <!-- Main Preset Row -->
+        <BoxContainer Orientation="Horizontal" Margin="2" MinHeight="36" MinWidth="350">
+            <!-- Bottle Color Icon -->
+            <TextureRect Name="BottleColorView" Access="Public" SetSize="24 24"
+                         Stretch="KeepAspectCentered" Margin="0 0 2 0" />
+            <!-- Pill Type Icon -->
+            <TextureRect Name="PillTypeView" Access="Public" SetSize="24 24"
+                         Stretch="KeepAspectCentered" Margin="0 0 5 0" />
+            <!-- Apply Preset (Button shows preset name, "label", [slot]) -->
+            <Button Name="ApplyButton" Access="Public" StyleClasses="OpenBoth"
+                    HorizontalExpand="True" />
+            <!-- Quick Access Button -->
+            <Button Name="QuickAccessButton" Access="Public" StyleClasses="OpenBoth"
+                    Margin="2 0 0 0" MinWidth="28" MinHeight="28" />
+            <!-- Move Buttons (hidden by default, shown when reorder mode) -->
+            <Button Name="MoveUpButton" Access="Public" StyleClasses="OpenBoth"
+                    Text="↑" Margin="2 0 0 0" MinWidth="28" Visible="False" />
+            <Button Name="MoveDownButton" Access="Public" StyleClasses="OpenBoth"
+                    Text="↓" Margin="2 0 0 0" MinWidth="28" Visible="False" />
+            <!-- Edit Button -->
+            <Button Name="EditButton" Access="Public" StyleClasses="OpenBoth"
+                    Margin="2 0 0 0" MinWidth="28" MinHeight="28" />
+            <!-- Delete Button -->
+            <Button Name="DeleteButton" Access="Public" StyleClasses="OpenBoth Caution"
+                    Margin="2 0 0 0" MinWidth="28" MinHeight="28" />
+        </BoxContainer>
+        <!-- Quick Access Dropdown (inline, hidden by default) -->
+        <BoxContainer Name="QuickAccessDropdown" Access="Public" Orientation="Vertical"
+                      Visible="False" Margin="20 5 5 5">
+            <PanelContainer StyleClasses="LowDivider">
+                <BoxContainer Orientation="Vertical" Margin="5">
+                    <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+                        <RichTextLabel Text="{Loc rmc-chem-master-preset-quick-access-slot}" MinWidth="100" />
+                        <BoxContainer Name="QuickAccessSlotContainer" Access="Public" Orientation="Horizontal" />
+                    </BoxContainer>
+                    <BoxContainer Name="QuickAccessLabelRow" Access="Public" Orientation="Horizontal" Visible="False">
+                        <RichTextLabel Text="{Loc rmc-chem-master-preset-button-text}" MinWidth="100" />
+                        <LineEdit Name="QuickAccessLabelInput" Access="Public" SetWidth="60" />
+                    </BoxContainer>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:RMCChemMasterPresetRow>

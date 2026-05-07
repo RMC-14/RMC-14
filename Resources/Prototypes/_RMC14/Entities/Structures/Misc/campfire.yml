@@ -1,6 +1,47 @@
 - type: entity
+  parent: CMBaseStructure
+  id: RMCBrazier
+  name: brazier
+  description: A burning pile of wood in a metal plate.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/brazier.rsi
+    layers:
+      - state: brazier
+      - state: burning
+        map: ["burning"]
+        visible: false
+  - type: RMCMesonsNonviewable
+  - type: Campfire
+    fuelRequired: false
+  - type: PointLight
+    enabled: false
+    radius: 10
+    energy: 3
+    color: "#FFC90C"
+  - type: AmbientSound
+    enabled: false
+    volume: -5
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/fireplace.ogg
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CampfireVisuals.Lit:
+        burning:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Tag
+    tags: []
+
+- type: entity
+  parent: CMBaseStructure
   id: RMCCampfire
-  parent: Bonfire
   name: campfire
   description: A useful tool to turn fellow marines into lifelong friends. Pull up a chair!
   components:
@@ -10,7 +51,33 @@
     layers:
       - state: campfire
       - state: burning
+        map: ["burning"]
+        visible: false
   - type: Construction
     graph: RMCCampfire
-    node: start
+    node: Campfire
   - type: RMCMesonsNonviewable
+  - type: Campfire
+  - type: PointLight
+    enabled: false
+    radius: 5
+    energy: 3
+    color: "#FFC90C"
+  - type: AmbientSound
+    enabled: false
+    volume: -5
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/fireplace.ogg
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CampfireVisuals.Lit:
+        burning:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Tag
+    tags: []

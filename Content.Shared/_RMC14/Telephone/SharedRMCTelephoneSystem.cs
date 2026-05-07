@@ -1,11 +1,13 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Audio;
 using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
@@ -42,6 +44,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         SubscribeLocalEvent<RotaryPhoneComponent, BeforeActivatableUIOpenEvent>(OnRotaryPhoneBeforeOpen);
         SubscribeLocalEvent<RotaryPhoneComponent, ComponentShutdown>(OnRotaryPhoneTerminating);
         SubscribeLocalEvent<RotaryPhoneComponent, EntityTerminatingEvent>(OnRotaryPhoneTerminating);
+        SubscribeLocalEvent<RotaryPhoneComponent, GettingAttackedAttemptEvent>(OnRotaryPhoneGettingAttacked);
 
         SubscribeLocalEvent<RotaryPhoneDialingComponent, InteractUsingEvent>(OnRotaryPhoneDialingInteractUsing);
 
@@ -58,6 +61,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
             subs =>
             {
                 subs.Event<RMCTelephoneCallBuiMsg>(OnTelephoneCallMsg);
+                subs.Event<RMCTelephoneDndBuiMsg>(OnTelephoneDndMsg);
             });
     }
 
@@ -90,6 +94,17 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
             phone.RotaryPhone = null;
             Dirty(ent.Comp.Phone.Value, phone);
         }
+    }
+
+    private void OnRotaryPhoneGettingAttacked(Entity<RotaryPhoneComponent> ent, ref GettingAttackedAttemptEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Attacker))
+            return;
+
+        StopSound(ent);
+
+        _audio.PlayPredicted(RemoteHangupSound, ent, args.Attacker);
+        _popup.PopupClient(Loc.GetString("rmc-dropship-launch-alarm-xeno-shutdown", ("console", ent)), args.Attacker, args.Attacker);
     }
 
     private void OnRotaryPhoneDialingInteractUsing(Entity<RotaryPhoneDialingComponent> ent, ref InteractUsingEvent args)
@@ -220,7 +235,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
                 _ambientSound.SetRange(target, 16, otherSound);
                 _ambientSound.SetVolume(target, receivingSound.Params.Volume, otherSound);
                 _ambientSound.SetAmbience(target, true, otherSound);
-                var ev = new RMCTelephoneRingEvent(target);
+                var ev = new RMCTelephoneRingEvent(target, ent, args.Actor);
                 RaiseLocalEvent(ref ev);
             }
         }
@@ -234,9 +249,23 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         _adminLog.Add(LogType.RMCTelephone, $"{ToPrettyString(args.Actor)} started calling {ToPrettyString(target)} using {ToPrettyString(ent)}");
     }
 
+
+    private void OnTelephoneDndMsg(Entity<RotaryPhoneComponent> ent, ref RMCTelephoneDndBuiMsg args)
+    {
+        if (args.Dnd && ent.Comp.CanDnd)
+        {
+            EnsureComp<RotaryPhoneDndComponent>(ent);
+        }
+        else
+        {
+            RemComp<RotaryPhoneDndComponent>(ent);
+        }
+        SendUIState(ent);
+    }
+
     private bool IsPhoneBusy(EntityUid ent)
     {
-        return HasComp<RotaryPhoneDialingComponent>(ent) || HasComp<RotaryPhoneReceivingComponent>(ent);
+        return HasComp<RotaryPhoneDialingComponent>(ent) || HasComp<RotaryPhoneReceivingComponent>(ent) || HasComp<RotaryPhoneDndComponent>(ent);
     }
 
     private void UpdateAppearance(Entity<RotaryPhoneComponent?> phone, bool forceNotRinging = false)
@@ -394,8 +423,10 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
             var name = GetPhoneName((otherId, otherComp));
             phones.Add(new RMCPhone(GetNetEntity(otherId), otherComp.Category, name));
         }
+        var canDnd = Comp<RotaryPhoneComponent>(phone).CanDnd;
+        var dnd = HasComp<RotaryPhoneDndComponent>(phone);
 
-        _ui.SetUiState(phone, RMCTelephoneUiKey.Key, new RMCTelephoneBuiState(phones));
+        _ui.SetUiState(phone, RMCTelephoneUiKey.Key, new RMCTelephoneBuiState(phones, canDnd, dnd));
     }
 
     private void PickupReceiving(Entity<RotaryPhoneReceivingComponent> receiving, EntityUid user)

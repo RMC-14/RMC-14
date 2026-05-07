@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Armor.ThermalCloak;
 public sealed partial class ThermalCloakComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityWhitelist Whitelist = new();
+    public EntityWhitelist? Whitelist = new();
 
     public bool Enabled;
 

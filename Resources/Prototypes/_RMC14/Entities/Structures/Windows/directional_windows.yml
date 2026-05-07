@@ -58,6 +58,14 @@
     node: windowDirectional
 
 - type: entity
+  parent: CMWindowDirectional
+  id: RMCWindowDirectionalAltDrawDepth
+  suffix: Alt Drawdepth
+  components:
+  - type: Sprite
+    drawdepth: WallTops
+
+- type: entity
   id: CMWindowReinforcedDirectional
   parent: CMWindowDirectional
   name: reinforced window

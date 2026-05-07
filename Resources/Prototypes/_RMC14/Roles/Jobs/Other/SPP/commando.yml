@@ -89,7 +89,7 @@
     pocket2: RMCPouchFirstAidERTFill
   storage:
     back:
-    - CMMRE # TODO RMC14 - SPP MRE
+    - RMCMRESPP
     - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
     - CMCrowbar
     - RMCHandcuffs

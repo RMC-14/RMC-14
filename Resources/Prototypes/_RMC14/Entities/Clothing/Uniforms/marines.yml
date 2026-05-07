@@ -28,55 +28,6 @@
   id: RMCJumpsuitMarinePatch
   suffix: Patch
 
-# Royal
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyal # TODO RMC14 sprite
-  suffix: Filled, Royal
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyal
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalMK80 # TODO RMC14 sprite
-  suffix: Filled, Royal, MK80
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCShoulderHolsterMK80
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalMedic # TODO RMC14 sprite
-  suffix: Filled, Royal, Medic
-  components:
-  - type: WebbingClothing
-    startingWebbing: CMWebbingSurgicalBlue
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalTeamlead # TODO RMC14 sprite
-  suffix: Filled, Royal, Teamlead
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyalTeamlead
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-
 # Formal
 - type: entity
   parent: RMCMarineUniformBase
@@ -182,6 +133,53 @@
     melee: 10
     bio: 100
     explosionArmor: 10
+  - type: ToggleableClothing
+    action: ActionToggleCBRNHelmet
+    clothingPrototype: RMCArmorHelmetCBRN
+    slot: head
+    requiredSlot: INNERCLOTHING
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitHEDP
+  suffix: Webbing, 2 HEDP
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNHedp
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitTool
+  suffix: Webbing, Tools
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbingFilled
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitFTL
+  suffix: Webbing, FTL
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNFTL
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitSL
+  suffix: Webbing, SL
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNSL
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitMedic
+  suffix: Webbing, Medic
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNMedic
+
+
 
 # Sun Riders
 
@@ -241,18 +239,6 @@
   - type: CMArmor
     bio: 15
 
-# Ordnance Technician / OT
-- type: entity
-  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
-  id: CMJumpsuitOrdnanceTech
-  name: ordnance engineer uniform
-  description: A uniform for a professional bomb maker. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. Padded with extra plates to take the brunt force of an explosion.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ot.rsi
-  - type: CMArmor
-    explosionArmor: 10
-
 # Maintenance Technician / MT
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
@@ -264,6 +250,18 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/mt.rsi
   - type: CMArmor
     bio: 10
+
+# Ordnance Technician / OT
+- type: entity
+  parent: CMJumpsuitMaintTech
+  id: CMJumpsuitOrdnanceTech
+  name: ordnance engineer uniform
+  description: A uniform for a professional bomb maker. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. Padded with extra plates to take the brunt force of an explosion.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ot.rsi
+  - type: CMArmor
+    explosionArmor: 10
 
 # Command
 
@@ -455,6 +453,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/intel/jungle.rsi
+  - type: Appearance
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
@@ -467,6 +466,7 @@
       Urban: _RMC14/Objects/Clothing/Uniforms/intel/urban.rsi
   - type: Tag
     tags:
+    - RMCUniformMarine
     - RMCUniformIntel
 
 - type: Tag
@@ -484,6 +484,15 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitPilotAlt
+  name: tactical pilot officer flightsuit
+  description: A flightsuit worn by pilot officers of the UNMC, with plenty of leather straps, pouches, and other essential gear you will never use. Looks badass.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt.rsi
 
 # Dropship Crew Chief
 - type: entity

@@ -1,0 +1,65 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorAssistantManager
+  name: rmc-job-name-survivor-shivas-assman
+  description: rmc-job-description-survivor
+  ranks:
+    RMCRankWeYaAssistantManager: []
+  supervisors: cm-job-supervisors-we-ya
+  accessGroups:
+  - ColonistCorporate
+  startingGear: RMCGearSurvivorShivasAssistantManager
+  icon: CMJobIconExecAssMan # TODO RMC14: minimap icons of diff factions mechanic
+  hasIcon: true
+  joinNotifyCrew: false
+  greeting: rmc-job-greeting-shivas-assistant-manager
+  playTimeTracker: CMJobSurvivorCorporate
+  spawnMenuRoleName: Survivor — Assistant Operations Manager (Shivas)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorWeYaManager
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCorporate
+    - type: MarineOrders
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: ass_man
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
+  camouflageStartingGear: null
+
+- type: startingGear
+  parent: RMCGearSurvivorCorporate
+  id: RMCGearSurvivorShivasAssistantManager
+  equipment: # i think there's supposed to be a scarf but i have no idea which
+    outerClothing: RMCCoatSnowSurvivorNavy
+    jumpsuit: RMCJumpsuitLiaisonManager
+    shoes: RMCShoesJackbootsFilled
+    head: RMCHeadUshanka
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    # TODO RMC14: research_notes/grant
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorPanicRoomAssistantManager
+  name: special survivor panic room assistant manager spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorAssistantManager
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

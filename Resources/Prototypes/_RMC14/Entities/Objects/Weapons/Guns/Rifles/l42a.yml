@@ -44,6 +44,8 @@
           - RMCMagazineRifleL42A
           - RMCMagazineRifleL42AAP
           - RMCMagazineRifleL42AExtended
+          - RMCMagazineRifleL42AWP
+          - RMCMagazineRifleL42AIncendiary
   - type: GunDamageModifier
     multiplier: 1.3
   - type: RMCWeaponAccuracy
@@ -185,6 +187,66 @@
     bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleL42AWP
+  name: L42A WP magazine (10x24mm)
+  description: A 10x24mm Wall Piercing battle rifle magazine.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL42AWP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmWP
+    proto: RMCCartridgeRifle10x24mmWP
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l42a.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#6365E6"
+  - type: Appearance
+#  - type: RefillableByBulletBox no ammobox for it yet
+#    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleL42AIncendiary
+  name: L42A incendiary magazine (10x24mm)
+  description: A 10x24mm Incendiary battle rifle magazine.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL42AIncendiary
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmIncendiary
+    proto: RMCCartridgeRifle10x24mmIncendiary
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l42a.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#771A10"
+  - type: Appearance
+#  - type: RefillableByBulletBox no ammobox for it yet
+#    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
   parent: RMCMagazineRifleL42AAP
   id: RMCMagazineRifleL42AAPEmpty
   suffix: Empty
@@ -212,3 +274,9 @@
 
 - type: Tag
   id: RMCMagazineRifleL42AExtendedEmpty
+
+- type: Tag
+  id: RMCMagazineRifleL42AWP
+
+- type: Tag
+  id: RMCMagazineRifleL42AIncendiary

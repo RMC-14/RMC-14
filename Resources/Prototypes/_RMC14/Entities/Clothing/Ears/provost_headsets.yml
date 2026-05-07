@@ -28,3 +28,24 @@
     - ProvostInspector
     - ProvostTeamLeader
     - ProvostAdvisor
+    - ChiefMilitaryPolice
+    - MilitaryWarden
+
+- type: entity
+  parent: RMCHeadsetProvost
+  id: RMCHeadsetProvostLead
+  suffix: SL Tracker
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: ProvostTeamLeader
+    trackerModes:
+    - ProvostMarshal
+    - ProvostDeputyMarshal
+    - ProvostChiefInspector
+    - ProvostInspector
+    - ProvostTeamLeader
+    - ProvostAdvisor
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - ChiefMilitaryPolice
+    - MilitaryWarden
