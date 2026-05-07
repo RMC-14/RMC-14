@@ -370,8 +370,38 @@
     - id: CMGrenadeFragOld
       amount: 3
 
+- type: entity
+  parent: CMPacketBase
+  id: RMCPacketGrenadeM15Rubber
+  name: M15 rubber pellet grenade packet
+  description: It contains three M15 rubber pellet grenades, for riot control or combat exercises.
+  components:
+  - type: Sprite
+    layers:
+    - state: general_packet
+      map: [ "closedLayer" ]
+    - state: general_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeM15Rubber
+
+- type: entity
+  parent: RMCPacketGrenadeM15Rubber
+  id: RMCPacketGrenadeM15RubberFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeM15Rubber
+      amount: 3
+
 - type: Tag
   id: RMCPacketGrenade
+
+- type: Tag
+  id: RMCGrenadeM15Rubber
 
 - type: entity
   abstract: true

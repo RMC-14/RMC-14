@@ -446,6 +446,84 @@
       - id: RMCMagazinePistolL54
         amount: 2
 
+- type: entityTable
+  id: RMCSurplusMK45AutomagCaseFillTable
+  table: !type:GroupSelector
+    children:
+    - !type:AllSelector
+      weight: 30
+      children:
+      - id: RMCWeaponPistolMK45
+      - id: RMCMagazinePistolMK45
+        amount: 6
+    - !type:AllSelector
+      weight: 70
+      children:
+      - id: RMCWeaponPistolMK45Black
+      - id: RMCMagazinePistolMK45Black
+        amount: 6
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCMK45AutomagCase
+  name: MK-45 Automagnum case
+  description: A gun case containing a MK-45 Automagnum with six spare magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCMK45
+      - RMCMagazinePistolMK45
+      - RMCMagazinePistolMK45Black
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: RMCSurplusMK45AutomagCaseFillTable
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM1911Case
+  name: M1911 service pistol case
+  description: A gun case containing a M1911 service pistol with seven spare magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - CMWeaponPistolM1911
+      - CMMagazinePistolM1911
+  - type: StorageFill
+    contents:
+    - id: CMWeaponPistolM1911
+    - id: CMMagazinePistolM1911
+      amount: 7
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM1911SOCOMCase
+  name: SOCOM M1911 service pistol case
+  description: A gun case containing a M48A4 service pistol with seven spare M1911 magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - CMWeaponPistolM1911
+      - RMCWeaponPistolM1911SOCOM
+      - CMMagazinePistolM1911
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolM1911SOCOM
+    - id: CMMagazinePistolM1911
+      amount: 7
+
 # Warwick Snubnose
 - type: entity
   parent: RMCGunCaseBase
@@ -501,6 +579,30 @@
     - id: CMMagazineRifleM54C
     - id: CMMagazineRifleM54C
 
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCNSG23Case
+  name: NSG-23 assault rifle case
+  description: A gun case containing a no-lock NSG 23 assault rifle, one AP magazine, one high-capacity drum magazine, and three regular magazines.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleNSG23
+      - RMCMagazineRifleNSG23
+      - RMCMagazineRifleNSG23AP
+      - RMCMagazineRifleNSG23Extended
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleNSG23NoLock
+    - id: RMCMagazineRifleNSG23AP
+    - id: RMCMagazineRifleNSG23Extended
+    - id: RMCMagazineRifleNSG23
+      amount: 3
+
 # M54CE2
 - type: entity
   parent: RMCGunCaseBase
@@ -554,6 +656,26 @@
     - id: RMCM300SOCOMBelt
 
 # Shotguns
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM3717Case
+  name: M37-17 pump shotgun case
+  description: A gun case containing a M37-17 pump shotgun with three boxes of buckshot shells.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponShotgunM3717
+      - RMCBoxShotgunShells
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponShotgunM3717
+    - id: RMCBoxShotgunBuckshot
+      amount: 3
+
 # XM51
 - type: entity
   parent: RMCGunCaseBase

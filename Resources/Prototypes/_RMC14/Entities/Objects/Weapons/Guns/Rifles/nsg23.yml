@@ -1,0 +1,358 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  id: RMCWeaponRifleNSG23NoLock
+  name: NSG 23 assault rifle
+  description: A rare sight, this rifle is seen most commonly in the hands of Weyland-Yutani PMCs. Compared to the M41A MK2, it has noticeably improved handling and vastly improved performance at long and medium range, but compares similarly up close.
+  suffix: No ID Lock, Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/nsg23.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/nsg23.rsi
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: RMCNSG23Shoot
+    shotsPerBurst: 3
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 3
+    scatterUnwielded: 20
+    baseFireRate: 4.4
+    burstScatterMult: 1
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 5
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        fireDelay: 0
+        maxScatterModifier: 5
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.5
+    accuracyMultiplierUnwielded: 0.8
+  - type: GunDamageModifier
+    multiplier: 1.25
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/nsg23_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/nsg23_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleNSG23
+          - RMCMagazineRifleNSG23AP
+          - RMCMagazineRifleNSG23Extended
+          - RMCMagazineRifleNSG23HEAP
+          - RMCMagazineRifleNSG23Incendiary
+          - RMCMagazineRifleNSG23Rubber
+        startingItem: RMCMagazineRifleNSG23
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS42xAdvancedTelescopicMiniscope
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS42xAdvancedTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentMiniFlamethrower
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.655, 0
+      rmc-aslot-rail: -0.125, 0.188
+      rmc-aslot-underbarrel: 0.312, -0.188
+  - type: Tag
+    tags:
+    - RMCWeaponRifleNSG23
+
+- type: entity
+  parent: RMCWeaponRifleNSG23NoLock
+  id: RMCWeaponRifleNSG23
+  suffix: Has ID Lock, Filled
+  components:
+  - type: GunIDLock
+
+- type: entity
+  parent: RMCWeaponRifleNSG23NoLock
+  id: RMCWeaponRifleNSG23NoLockStripped
+  suffix: No ID Lock, Stripped
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/nsg23_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/nsg23_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleNSG23
+          - RMCMagazineRifleNSG23AP
+          - RMCMagazineRifleNSG23Extended
+          - RMCMagazineRifleNSG23HEAP
+          - RMCMagazineRifleNSG23Incendiary
+          - RMCMagazineRifleNSG23Rubber
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS42xAdvancedTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+
+- type: entity
+  parent: RMCWeaponRifleNSG23NoLockStripped
+  id: RMCWeaponRifleNSG23Stripped
+  suffix: Has ID Lock, Stripped
+  components:
+  - type: GunIDLock
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleNSG23
+  name: NSG 23 magazine (10x24mm)
+  description: An NSG 23 assault rifle magazine.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleNSG23
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/nsg23.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: RMCMagazineRifleNSG23
+  id: RMCMagazineRifleNSG23Extended
+  name: NSG 23 high-capacity drum magazine (10x24mm)
+  description: An NSG 23 assault rifle magazine. This one contains 45 bullets.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleNSG23Extended
+  - type: BallisticAmmoProvider
+    capacity: 45
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/nsg23_extended.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: entity
+  parent: RMCMagazineRifleNSG23
+  id: RMCMagazineRifleNSG23AP
+  name: NSG 23 armor-piercing magazine (10x24mm)
+  description: An armor-piercing NSG 23 assault rifle magazine.
+  suffix: AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleNSG23AP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mmAP
+    proto: CMCartridgeRifle10x24mmAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: RMCMagazineRifleNSG23
+  id: RMCMagazineRifleNSG23HEAP
+  name: NSG 23 HEAP magazine (10x24mm)
+  description: A high-explosive armor-piercing NSG 23 assault rifle magazine.
+  suffix: HEAP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleNSG23HEAP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmHEAP
+    proto: RMCCartridgeRifle10x24mmHEAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#9C9A19"
+  - type: RefillableByBulletBox
+    bulletType: null
+
+- type: entity
+  parent: RMCMagazineRifleNSG23
+  id: RMCMagazineRifleNSG23Incendiary
+  name: NSG 23 incendiary magazine (10x24mm)
+  description: A white phosphorus-tipped incendiary NSG 23 assault rifle magazine.
+  suffix: Incendiary
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleNSG23Incendiary
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmIncendiary
+    proto: RMCCartridgeRifle10x24mmIncendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#771A10"
+
+- type: entity
+  parent: RMCMagazineRifleNSG23
+  id: RMCMagazineRifleNSG23Rubber
+  name: NSG 23 training magazine (10x24mm)
+  description: An NSG 23 assault rifle magazine. This one is loaded with rubber bullets.
+  suffix: Rubber
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleNSG23Rubber
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmRubber
+    proto: RMCCartridgeRifle10x24mmRubber
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#0A00C8"
+
+- type: Tag
+  id: RMCWeaponRifleNSG23
+
+- type: Tag
+  id: RMCMagazineRifleNSG23
+
+- type: Tag
+  id: RMCMagazineRifleNSG23Extended
+
+- type: Tag
+  id: RMCMagazineRifleNSG23AP
+
+- type: Tag
+  id: RMCMagazineRifleNSG23HEAP
+
+- type: Tag
+  id: RMCMagazineRifleNSG23Incendiary
+
+- type: Tag
+  id: RMCMagazineRifleNSG23Rubber

@@ -297,6 +297,29 @@
     maxShrapnel: 0
 
 - type: entity
+  parent: CMGrenadeFragOld
+  id: RMCGrenadeM15Rubber
+  name: M15 rubber pellet grenade
+  description: A relatively harmless version of the M15 grenade designed for riot control and combat exercises.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m15rubber.rsi
+  - type: Explosive
+    maxIntensity: 0
+    intensitySlope: 1
+    totalIntensity: 0
+    deleteAfterExplosion: false
+    canCreateVacuum: false
+  - type: ProjectileGrenade
+    fillPrototype: RMCProjectileShrapnelRubber
+    capacity: 48
+    directHit: false
+  - type: Tag
+    tags:
+    - Grenade
+    - RMCGrenadeM15Rubber
+
+- type: entity
   parent: CMGrenadeHighExplosive
   id: RMCGrenadeBlastM12
   name: M12 blast grenade

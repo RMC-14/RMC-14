@@ -286,3 +286,163 @@
     - id: RMCBox4570
       amount: 2
     - id: RMCBox4570Training
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusPoncho
+  name: surplus UNCM poncho crate (x2)
+  description: An ASRS crate containing a failure note instead of surplus UNCM ponchos.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPaperBlackMarketPonchoFailure
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusHEAP
+  name: surplus high-explosive armor-piercing M41A magazine crate (x3)
+  description: An ASRS crate containing a failure note instead of surplus HEAP magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPaperBlackMarketHEAPFailure
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusRiotControl
+  name: surplus riot control equipment
+  description: Contains three random pieces of surplus riot control equipment.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCStunBatonDamaged
+      orGroup: SurplusRiotOne
+    - id: RMCPepperSpray
+      orGroup: SurplusRiotOne
+    - id: RMCStunprod
+      orGroup: SurplusRiotOne
+    - id: RMCBoxShotgunBeanbag
+      orGroup: SurplusRiotOne
+    - id: RMCPacketGrenadeM15RubberFilled
+      orGroup: SurplusRiotOne
+    - id: RMCM85A1Case
+      orGroup: SurplusRiotOne
+    - id: CMArmorHelmetM10MP
+      orGroup: SurplusRiotOne
+    - id: RMCRC6RiotShield
+      orGroup: SurplusRiotOne
+    - id: RMCStunBatonDamaged
+      orGroup: SurplusRiotTwo
+    - id: RMCPepperSpray
+      orGroup: SurplusRiotTwo
+    - id: RMCStunprod
+      orGroup: SurplusRiotTwo
+    - id: RMCBoxShotgunBeanbag
+      orGroup: SurplusRiotTwo
+    - id: RMCPacketGrenadeM15RubberFilled
+      orGroup: SurplusRiotTwo
+    - id: RMCM85A1Case
+      orGroup: SurplusRiotTwo
+    - id: CMArmorHelmetM10MP
+      orGroup: SurplusRiotTwo
+    - id: RMCRC6RiotShield
+      orGroup: SurplusRiotTwo
+    - id: RMCStunBatonDamaged
+      orGroup: SurplusRiotThree
+    - id: RMCPepperSpray
+      orGroup: SurplusRiotThree
+    - id: RMCStunprod
+      orGroup: SurplusRiotThree
+    - id: RMCBoxShotgunBeanbag
+      orGroup: SurplusRiotThree
+    - id: RMCPacketGrenadeM15RubberFilled
+      orGroup: SurplusRiotThree
+    - id: RMCM85A1Case
+      orGroup: SurplusRiotThree
+    - id: CMArmorHelmetM10MP
+      orGroup: SurplusRiotThree
+    - id: RMCRC6RiotShield
+      orGroup: SurplusRiotThree
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusNonLethalAmmo
+  name: surplus non-lethal ammunition
+  description: Contains two random batches of surplus non-lethal ammunition.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGM63Rubber
+      orGroup: SurplusNonLethalOne
+    - id: RMCMagazinePistolM1984Rubber
+      orGroup: SurplusNonLethalOne
+    - id: RMCMagazinePistolM77Rubber
+      orGroup: SurplusNonLethalOne
+    - id: RMCMagazineRifleM54CRubber
+      orGroup: SurplusNonLethalOne
+    - id: RMCMagazineRifleM4SPRRubber
+      orGroup: SurplusNonLethalOne
+    - id: RMCBoxShotgunBeanbag
+      orGroup: SurplusNonLethalOne
+    - id: RMCMagazineSMGM63Rubber
+      orGroup: SurplusNonLethalTwo
+    - id: RMCMagazinePistolM1984Rubber
+      orGroup: SurplusNonLethalTwo
+    - id: RMCMagazinePistolM77Rubber
+      orGroup: SurplusNonLethalTwo
+    - id: RMCMagazineRifleM54CRubber
+      orGroup: SurplusNonLethalTwo
+    - id: RMCMagazineRifleM4SPRRubber
+      orGroup: SurplusNonLethalTwo
+    - id: RMCBoxShotgunBeanbag
+      orGroup: SurplusNonLethalTwo
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusMK45
+  name: surplus MK-45 Automagnum case
+  description: Contains a MK-45 Automagnum gun case.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMK45AutomagCase
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusNSG23
+  name: surplus NSG-23 assault rifle case
+  description: Contains a NSG-23 assault rifle gun case.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCNSG23Case
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusM3717
+  name: surplus M37-17 pump shotgun case
+  description: Contains a M37-17 pump shotgun gun case.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCM3717Case
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusM1911
+  name: surplus M1911 service pistol case
+  description: Contains a M1911 service pistol gun case.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCM1911Case
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusM1911SOCOM
+  name: surplus SOCOM M1911 service pistol case
+  description: Contains a SOCOM M1911 service pistol gun case.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCM1911SOCOMCase

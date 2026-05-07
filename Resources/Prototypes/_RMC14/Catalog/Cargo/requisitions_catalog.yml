@@ -195,7 +195,66 @@
     - name: rmc-requisitions-black-market-category-shipside-contraband
       entries: []
     - name: rmc-requisitions-black-market-category-surplus-equipment
-      entries: []
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: -2
+        crate: RMCCrateBlackMarketSurplusPoncho
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: -2
+        crate: RMCCrateBlackMarketSurplusHEAP
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 55
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusRiotControl
+        icon:
+          entity: RMCPepperSpray
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 50
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusNonLethalAmmo
+        icon:
+          entity: RMCMagazineSMGM63Rubber
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusMK45
+        icon:
+          entity: RMCMK45AutomagCase
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusNSG23
+        icon:
+          entity: RMCWeaponRifleNSG23NoLock
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 80
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusM3717
+        icon:
+          entity: RMCWeaponShotgunM3717
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusM1911
+        icon:
+          entity: CMWeaponPistolM1911
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 25
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusM1911SOCOM
+        icon:
+          entity: RMCWeaponPistolM1911SOCOM
     - name: rmc-requisitions-black-market-category-contraband-ammo
       entries: []
     - name: rmc-requisitions-black-market-category-deep-storage
