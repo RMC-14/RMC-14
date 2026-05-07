@@ -268,6 +268,7 @@
   - type: Projectile
     impactEffect: BulletImpactEffect
     deleteOnCollide: false
+    maxFixedRange: 9
     damage:
       types:
         Piercing: 30
