@@ -17,22 +17,7 @@ public sealed partial class LanguageLearningComponent : Component
     public HashSet<ProtoId<LanguagePrototype>> FirstContactLanguages = new();
 
     [DataField]
-    public HashSet<ProtoId<LanguagePrototype>> EncounteredLanguages = new();
-
-    [DataField]
-    public Dictionary<ProtoId<LanguagePrototype>, float> LanguageProgress = new();
-
-    [DataField]
-    public Dictionary<ProtoId<LanguagePrototype>, Dictionary<string, float>> LearnedWords = new();
-
-    [DataField]
-    public Dictionary<ProtoId<LanguagePrototype>, Dictionary<string, int>> WordFrequency = new();
-
-    [DataField]
-    public Dictionary<ProtoId<LanguagePrototype>, Dictionary<string, List<string>>> WordContext = new();
-
-    [DataField]
-    public Dictionary<ProtoId<LanguagePrototype>, Dictionary<string, float>> WordPatterns = new();
+    public Dictionary<ProtoId<LanguagePrototype>, LanguageLearningData> Languages = new();
 
     [DataField]
     public Dictionary<NetEntity, int> StudiedSources = new();
@@ -82,24 +67,57 @@ public sealed partial class LanguageLearningComponent : Component
     [Serializable, NetSerializable]
     public sealed class State : ComponentState
     {
-        public HashSet<ProtoId<LanguagePrototype>> LearnableLanguages { get; }
-        public HashSet<ProtoId<LanguagePrototype>> FirstContactLanguages { get; }
-        public HashSet<ProtoId<LanguagePrototype>> EncounteredLanguages { get; }
-        public Dictionary<ProtoId<LanguagePrototype>, float> LanguageProgress { get; }
-        public Dictionary<ProtoId<LanguagePrototype>, Dictionary<string, float>> LearnedWords { get; }
+        public Dictionary<ProtoId<LanguagePrototype>, LanguageLearningStateData> Languages { get; }
 
-        public State(
-            HashSet<ProtoId<LanguagePrototype>> learnableLanguages,
-            HashSet<ProtoId<LanguagePrototype>> firstContactLanguages,
-            HashSet<ProtoId<LanguagePrototype>> encounteredLanguages,
-            Dictionary<ProtoId<LanguagePrototype>, float> languageProgress,
-            Dictionary<ProtoId<LanguagePrototype>, Dictionary<string, float>> learnedWords)
+        public State(Dictionary<ProtoId<LanguagePrototype>, LanguageLearningStateData> languages)
         {
-            LearnableLanguages = learnableLanguages;
-            FirstContactLanguages = firstContactLanguages;
-            EncounteredLanguages = encounteredLanguages;
-            LanguageProgress = languageProgress;
-            LearnedWords = learnedWords;
+            Languages = languages;
         }
+    }
+}
+
+[DataDefinition]
+public sealed partial class LanguageLearningData
+{
+    [DataField]
+    public bool RequiresFirstContact;
+
+    [DataField]
+    public bool Encountered;
+
+    [DataField]
+    public float Progress;
+
+    [DataField]
+    public Dictionary<string, float> LearnedWords = new();
+
+    [DataField]
+    public Dictionary<string, int> WordFrequency = new();
+
+    [DataField]
+    public Dictionary<string, List<string>> WordContext = new();
+
+    [DataField]
+    public Dictionary<string, float> WordPatterns = new();
+}
+
+[Serializable, NetSerializable]
+public sealed class LanguageLearningStateData
+{
+    public bool RequiresFirstContact { get; }
+    public bool Encountered { get; }
+    public float Progress { get; }
+    public Dictionary<string, float> LearnedWords { get; }
+
+    public LanguageLearningStateData(
+        bool requiresFirstContact,
+        bool encountered,
+        float progress,
+        Dictionary<string, float> learnedWords)
+    {
+        RequiresFirstContact = requiresFirstContact;
+        Encountered = encountered;
+        Progress = progress;
+        LearnedWords = learnedWords;
     }
 }

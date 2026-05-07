@@ -42,13 +42,20 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         if (args.Current is not LanguageLearningComponent.State state)
             return;
 
-        ent.Comp.LearnableLanguages = state.LearnableLanguages.ToHashSet();
-        ent.Comp.FirstContactLanguages = state.FirstContactLanguages.ToHashSet();
-        ent.Comp.EncounteredLanguages = state.EncounteredLanguages.ToHashSet();
-        ent.Comp.LanguageProgress = new(state.LanguageProgress);
-        ent.Comp.LearnedWords = state.LearnedWords.ToDictionary(
+        ent.Comp.LearnableLanguages = state.Languages.Keys.ToHashSet();
+        ent.Comp.FirstContactLanguages = state.Languages
+            .Where(kvp => kvp.Value.RequiresFirstContact)
+            .Select(kvp => kvp.Key)
+            .ToHashSet();
+        ent.Comp.Languages = state.Languages.ToDictionary(
             kvp => kvp.Key,
-            kvp => new Dictionary<string, float>(kvp.Value)
+            kvp => new LanguageLearningData
+            {
+                RequiresFirstContact = kvp.Value.RequiresFirstContact,
+                Encountered = kvp.Value.Encountered,
+                Progress = kvp.Value.Progress,
+                LearnedWords = new Dictionary<string, float>(kvp.Value.LearnedWords),
+            }
         );
 
         if (ent.Owner == _playerManager.LocalEntity)
@@ -81,14 +88,15 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     public float GetLanguageProgress(EntityUid entity, ProtoId<LanguagePrototype> language)
     {
-        return CompOrNull<LanguageLearningComponent>(entity)?.LanguageProgress.GetValueOrDefault(language, 0f) ?? 0f;
+        var learningComp = CompOrNull<LanguageLearningComponent>(entity);
+        return learningComp?.Languages.GetValueOrDefault(language)?.Progress ?? 0f;
     }
 
     public IReadOnlyDictionary<string, float> GetLearnedWords(EntityUid entity, ProtoId<LanguagePrototype> language)
     {
         var learningComp = CompOrNull<LanguageLearningComponent>(entity);
-        if (learningComp?.LearnedWords.TryGetValue(language, out var words) == true)
-            return new Dictionary<string, float>(words);
+        if (learningComp?.Languages.TryGetValue(language, out var languageData) == true)
+            return new Dictionary<string, float>(languageData.LearnedWords);
 
         return new Dictionary<string, float>();
     }
@@ -99,6 +107,6 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         if (learningComp == null)
             return new HashSet<ProtoId<LanguagePrototype>>();
 
-        return new HashSet<ProtoId<LanguagePrototype>>(learningComp.LearnableLanguages);
+        return new HashSet<ProtoId<LanguagePrototype>>(learningComp.Languages.Keys);
     }
 }

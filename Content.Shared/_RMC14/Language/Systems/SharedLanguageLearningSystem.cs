@@ -27,7 +27,7 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
         if (!TryComp<LanguageLearningComponent>(listener, out var comp))
             return _languageSystem.ObfuscateMessage(message, language);
 
-        if (!comp.LearnableLanguages.Contains(language))
+        if (!comp.Languages.ContainsKey(language))
             return _languageSystem.ObfuscateMessage(message, language);
 
         return ProcessMessageWordByWord(message, language, comp);
@@ -41,7 +41,7 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
         if (!TryComp<LanguageLearningComponent>(speaker, out var comp))
             return _languageSystem.ObfuscateMessage(message, language);
 
-        if (!comp.LearnableLanguages.Contains(language))
+        if (!comp.Languages.ContainsKey(language))
             return _languageSystem.ObfuscateMessage(message, language);
 
         return ProcessMessageWordByWord(message, language, comp);
@@ -53,7 +53,8 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
         var defaultComprehension = GetDefaultWordComprehension(language);
         var thresholds = GetComprehensionThresholds(language);
 
-        learningComp.LearnedWords.TryGetValue(language, out var learnedWords);
+        learningComp.Languages.TryGetValue(language, out var languageData);
+        var learnedWords = languageData?.LearnedWords;
 
         var result = new StringBuilder(message.Length);
         var lastIndex = 0;
@@ -144,7 +145,8 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
 
     public float CalculateOverallComprehension(LanguageLearningComponent comp, ProtoId<LanguagePrototype> language)
     {
-        if (!comp.LearnedWords.TryGetValue(language, out var learnedWords) || learnedWords.Count == 0)
+        if (!comp.Languages.TryGetValue(language, out var languageData) ||
+            languageData.LearnedWords.Count == 0)
             return 0f;
 
         if (!_prototypeManager.TryIndex(language, out var languageProto))
@@ -153,29 +155,28 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
         const int MinRequiredWords = 15;
         var expectedVocabSize = Math.Max(MinRequiredWords, languageProto.ExpectedVocabularySize);
 
-        if (learnedWords.Count < MinRequiredWords)
+        if (languageData.LearnedWords.Count < MinRequiredWords)
         {
-            var wordCountFactor = (float)learnedWords.Count / MinRequiredWords;
-            var baseComprehension = CalculateBaseComprehension(comp, language, learnedWords);
+            var wordCountFactor = (float) languageData.LearnedWords.Count / MinRequiredWords;
+            var baseComprehension = CalculateBaseComprehension(languageData);
             return Math.Min(0.95f, baseComprehension * wordCountFactor);
         }
 
-        var vocabularyCompleteness = Math.Min(1.0f, (float)learnedWords.Count / expectedVocabSize);
-        var averageWordComprehension = CalculateBaseComprehension(comp, language, learnedWords);
+        var vocabularyCompleteness = Math.Min(1.0f, (float) languageData.LearnedWords.Count / expectedVocabSize);
+        var averageWordComprehension = CalculateBaseComprehension(languageData);
 
         var combinedComprehension = (averageWordComprehension * 0.7f) + (vocabularyCompleteness * 0.3f);
         return Math.Min(0.95f, combinedComprehension);
     }
 
-    private float CalculateBaseComprehension(LanguageLearningComponent comp, ProtoId<LanguagePrototype> language, Dictionary<string, float> learnedWords)
+    private static float CalculateBaseComprehension(LanguageLearningData languageData)
     {
         var totalComprehension = 0f;
         var totalWeight = 0f;
-        var wordFreq = comp.WordFrequency.GetValueOrDefault(language, new Dictionary<string, int>());
 
-        foreach (var (word, comprehension) in learnedWords)
+        foreach (var (word, comprehension) in languageData.LearnedWords)
         {
-            var frequency = wordFreq.GetValueOrDefault(word, 1);
+            var frequency = languageData.WordFrequency.GetValueOrDefault(word, 1);
             var weight = Math.Min(frequency, 10) + 1;
             totalComprehension += comprehension * weight;
             totalWeight += weight;
@@ -195,10 +196,10 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
     public Dictionary<string, float> GetLearnedWords(EntityUid entity, ProtoId<LanguagePrototype> language)
     {
         if (!TryComp<LanguageLearningComponent>(entity, out var comp) ||
-            !comp.LearnedWords.TryGetValue(language, out var words))
+            !comp.Languages.TryGetValue(language, out var languageData))
             return new Dictionary<string, float>();
 
-        return new Dictionary<string, float>(words);
+        return new Dictionary<string, float>(languageData.LearnedWords);
     }
 
     public float GetDefaultWordComprehension(ProtoId<LanguagePrototype> language)

@@ -163,7 +163,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             return message;
 
         if (TryComp<LanguageLearningComponent>(speaker, out var learningComp) &&
-            learningComp.LearnableLanguages.Contains(language))
+            learningComp.Languages.ContainsKey(language))
         {
             return _languageLearning.ProcessMessageForSpeaker(speaker, message, language);
         }
@@ -182,7 +182,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         }
 
         if (TryComp<LanguageLearningComponent>(listener, out var learningComp) &&
-            learningComp.LearnableLanguages.Contains(language))
+            learningComp.Languages.ContainsKey(language))
         {
             var result = _languageLearning.ProcessMessageForListener(listener, speakerMessage, language);
             return result;

@@ -37,56 +37,39 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
     {
         foreach (var language in ent.Comp.LearnableLanguages)
         {
-            EnsureLanguageTracking(ent.Comp, language);
+            var languageData = EnsureLanguageTracking(ent.Comp, language);
 
             if (ShouldStartEncountered(ent.Comp, language))
-                ent.Comp.EncounteredLanguages.Add(language);
+                languageData.Encountered = true;
         }
     }
 
     private void OnGetLearningState(EntityUid uid, LanguageLearningComponent component, ref ComponentGetState args)
     {
-        var learnedWordsForState = new Dictionary<ProtoId<LanguagePrototype>, Dictionary<string, float>>();
-
-        foreach (var language in component.LearnableLanguages)
-        {
-            if (component.LearnedWords.TryGetValue(language, out var words))
-            {
-                learnedWordsForState[language] = new Dictionary<string, float>(words);
-            }
-            else
-            {
-                learnedWordsForState[language] = new Dictionary<string, float>();
-            }
-        }
-
-        var progressForState = new Dictionary<ProtoId<LanguagePrototype>, float>();
-        foreach (var language in component.LearnableLanguages)
-        {
-            progressForState[language] = component.LanguageProgress.GetValueOrDefault(language, 0f);
-        }
-
-        args.State = new LanguageLearningComponent.State(
-            new HashSet<ProtoId<LanguagePrototype>>(component.LearnableLanguages),
-            new HashSet<ProtoId<LanguagePrototype>>(component.FirstContactLanguages),
-            new HashSet<ProtoId<LanguagePrototype>>(component.EncounteredLanguages),
-            progressForState,
-            learnedWordsForState
+        var languagesForState = component.Languages.ToDictionary(
+            kvp => kvp.Key,
+            kvp => new LanguageLearningStateData(
+                kvp.Value.RequiresFirstContact,
+                kvp.Value.Encountered,
+                kvp.Value.Progress,
+                new Dictionary<string, float>(kvp.Value.LearnedWords))
         );
+
+        args.State = new LanguageLearningComponent.State(languagesForState);
     }
 
     private void OnDetermineEntityLanguages(Entity<LanguageLearningComponent> learner, ref DetermineEntityLanguagesEvent args)
     {
         var learningComp = learner.Comp;
 
-        foreach (var language in learningComp.LearnableLanguages)
+        foreach (var (language, languageData) in learningComp.Languages)
         {
-            if (learningComp.LearnedWords.TryGetValue(language, out var words) && words.Count > 0)
+            if (languageData.LearnedWords.Count > 0)
             {
                 args.SpokenLanguages.Add(language);
             }
 
-            var comprehension = learningComp.LanguageProgress.GetValueOrDefault(language, 0f);
+            var comprehension = languageData.Progress;
             if (comprehension >= learningComp.ComprehensionThreshold)
             {
                 args.UnderstoodLanguages.Add(language);
@@ -110,7 +93,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             if (!TryComp<LanguageLearningComponent>(potentialLearner, out var learnerComp))
                 continue;
 
-            if (!learnerComp.LearnableLanguages.Contains(args.Language))
+            if (!learnerComp.Languages.ContainsKey(args.Language))
                 continue;
 
             if (TryComp<LanguageComponent>(potentialLearner, out var langComp))
@@ -139,12 +122,13 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         LanguagePrototype languageProto)
     {
         if (!learner.Comp.FirstContactLanguages.Contains(language) ||
-            learner.Comp.EncounteredLanguages.Contains(language))
+            !learner.Comp.Languages.TryGetValue(language, out var languageData) ||
+            languageData.Encountered)
         {
             return;
         }
 
-        learner.Comp.EncounteredLanguages.Add(language);
+        languageData.Encountered = true;
 
         var popup = languageProto.FirstContactMeaning != null
             ? Loc.GetString(
@@ -162,17 +146,29 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         if (!comp.FirstContactLanguages.Contains(language))
             return true;
 
-        if (comp.LanguageProgress.GetValueOrDefault(language) > 0f)
+        if (!comp.Languages.TryGetValue(language, out var languageData))
+            return false;
+
+        if (languageData.Progress > 0f)
             return true;
 
-        return comp.LearnedWords.TryGetValue(language, out var words) && words.Count > 0;
+        return languageData.LearnedWords.Count > 0;
     }
 
-    private static void EnsureLanguageTracking(LanguageLearningComponent comp, ProtoId<LanguagePrototype> language)
+    private static LanguageLearningData EnsureLanguageTracking(LanguageLearningComponent comp, ProtoId<LanguagePrototype> language)
     {
-        comp.LearnedWords.TryAdd(language, new Dictionary<string, float>());
-        comp.WordFrequency.TryAdd(language, new Dictionary<string, int>());
-        comp.LanguageProgress.TryAdd(language, 0f);
+        if (comp.Languages.TryGetValue(language, out var existing))
+        {
+            existing.RequiresFirstContact = comp.FirstContactLanguages.Contains(language);
+            return existing;
+        }
+
+        var created = new LanguageLearningData
+        {
+            RequiresFirstContact = comp.FirstContactLanguages.Contains(language),
+        };
+        comp.Languages[language] = created;
+        return created;
     }
 
     private void TryLearnWords(Entity<LanguageLearningComponent> learner, EntityUid source, string messageText,
@@ -193,10 +189,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         var diminishingFactor = Math.Max(0.2f, 1.0f - (studyCount / (float)comp.MaxLearningFromSameSource));
         var distancePenalty = Math.Max(0.5f, 1.0f - (distance / comp.LearningRange));
 
-        if (!comp.LearnedWords.ContainsKey(language))
-            comp.LearnedWords[language] = new Dictionary<string, float>();
-        if (!comp.WordFrequency.ContainsKey(language))
-            comp.WordFrequency[language] = new Dictionary<string, int>();
+        var languageData = EnsureLanguageTracking(comp, language);
 
         var words = ExtractWords(messageText);
 
@@ -212,15 +205,15 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
                 break;
 
             var wordLower = word.ToLower();
-            var currentComprehension = comp.LearnedWords[language].GetValueOrDefault(wordLower, 0f);
+            var currentComprehension = languageData.LearnedWords.GetValueOrDefault(wordLower, 0f);
 
             if (currentComprehension >= comp.MaxWordComprehension)
                 continue;
 
-            comp.WordFrequency[language][wordLower] = comp.WordFrequency[language].GetValueOrDefault(wordLower, 0) + 1;
+            languageData.WordFrequency[wordLower] = languageData.WordFrequency.GetValueOrDefault(wordLower, 0) + 1;
 
             var baseRate = currentComprehension == 0f ? 0.25f : comp.BaseWordLearningRate;
-            var frequencyBonus = Math.Min(comp.WordFrequency[language][wordLower] * comp.FrequencyLearningBonus, 0.2f);
+            var frequencyBonus = Math.Min(languageData.WordFrequency[wordLower] * comp.FrequencyLearningBonus, 0.2f);
 
             var learningRate = baseRate + frequencyBonus;
             var actualLearning = learningRate * diminishingFactor * distancePenalty;
@@ -229,7 +222,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             var newComprehension = Math.Min(comp.MaxWordComprehension, currentComprehension + actualLearning);
             var learningGain = newComprehension - currentComprehension;
 
-            comp.LearnedWords[language][wordLower] = newComprehension;
+            languageData.LearnedWords[wordLower] = newComprehension;
 
             if (learningGain > 0.05f)
                 significantLearning = true;
@@ -248,7 +241,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             {
                 var overallComprehension = CalculateOverallComprehension(comp, language);
                 var percentage = (int)(overallComprehension * 100);
-                var uniqueWords = comp.LearnedWords[language].Count;
+                var uniqueWords = languageData.LearnedWords.Count;
 
                 var progressMessage = wordsLearned == 1 ?
                     $"Language analysis improved. Progress: {percentage}% ({uniqueWords} words)" :
@@ -265,10 +258,11 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
     {
         var comp = learner.Comp;
         var comprehension = CalculateOverallComprehension(comp, language);
+        var languageData = EnsureLanguageTracking(comp, language);
 
-        comp.LanguageProgress[language] = comprehension;
+        languageData.Progress = comprehension;
 
-        var hasLearnedAnyWords = comp.LearnedWords.TryGetValue(language, out var words) && words.Count > 0;
+        var hasLearnedAnyWords = languageData.LearnedWords.Count > 0;
 
         if (hasLearnedAnyWords)
         {
@@ -297,14 +291,14 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         if (!TryComp<LanguageLearningComponent>(entity, out var comp))
             return;
 
-        EnsureLanguageTracking(comp, language);
+        var languageData = EnsureLanguageTracking(comp, language);
         var wordLower = word.ToLower();
-        comp.LearnedWords[language][wordLower] = Math.Clamp(level, 0.0f, comp.MaxWordComprehension);
+        languageData.LearnedWords[wordLower] = Math.Clamp(level, 0.0f, comp.MaxWordComprehension);
 
         if (ShouldStartEncountered(comp, language))
-            comp.EncounteredLanguages.Add(language);
+            languageData.Encountered = true;
 
-        comp.LanguageProgress[language] = CalculateOverallComprehension(comp, language);
+        languageData.Progress = CalculateOverallComprehension(comp, language);
         Dirty(entity, comp);
     }
 
@@ -312,10 +306,10 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
     {
         var comp = EnsureComp<LanguageLearningComponent>(entity);
         comp.LearnableLanguages.Add(language);
-        EnsureLanguageTracking(comp, language);
+        var languageData = EnsureLanguageTracking(comp, language);
 
         if (ShouldStartEncountered(comp, language))
-            comp.EncounteredLanguages.Add(language);
+            languageData.Encountered = true;
 
         Dirty(entity, comp);
     }
@@ -326,10 +320,8 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             return;
 
         comp.LearnableLanguages.Remove(language);
-        comp.EncounteredLanguages.Remove(language);
-        comp.LanguageProgress.Remove(language);
-        comp.LearnedWords.Remove(language);
-        comp.WordFrequency.Remove(language);
+        comp.FirstContactLanguages.Remove(language);
+        comp.Languages.Remove(language);
         Dirty(entity, comp);
     }
 }

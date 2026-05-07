@@ -26,36 +26,41 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         var learner = GetLocalLearner();
         if (learner == null)
             return 0f;
-        return learner.LanguageProgress.GetValueOrDefault(language, 0f);
+        return learner.Languages.GetValueOrDefault(language)?.Progress ?? 0f;
     }
 
     public Dictionary<string, float> GetLocalLearnedWords(ProtoId<LanguagePrototype> language)
     {
         var learner = GetLocalLearner();
-        if (learner?.LearnedWords.TryGetValue(language, out var words) == true)
-            return new Dictionary<string, float>(words);
+        if (learner?.Languages.TryGetValue(language, out var languageData) == true)
+            return new Dictionary<string, float>(languageData.LearnedWords);
         return new Dictionary<string, float>();
     }
 
     public HashSet<ProtoId<LanguagePrototype>> GetLocalLearnableLanguages()
     {
         var learner = GetLocalLearner();
-        return learner?.LearnableLanguages ?? new HashSet<ProtoId<LanguagePrototype>>();
+        return learner == null
+            ? new HashSet<ProtoId<LanguagePrototype>>()
+            : learner.Languages.Keys.ToHashSet();
     }
 
     public int GetWordCount(ProtoId<LanguagePrototype> language)
     {
         var learner = GetLocalLearner();
-        if (learner?.LearnedWords.TryGetValue(language, out var words) == true)
-            return words.Count;
+        if (learner?.Languages.TryGetValue(language, out var languageData) == true)
+            return languageData.LearnedWords.Count;
         return 0;
     }
 
     public float GetAverageWordComprehension(ProtoId<LanguagePrototype> language)
     {
         var learner = GetLocalLearner();
-        if (learner?.LearnedWords.TryGetValue(language, out var words) == true && words.Count > 0)
-            return words.Values.Average();
+        if (learner?.Languages.TryGetValue(language, out var languageData) == true &&
+            languageData.LearnedWords.Count > 0)
+        {
+            return languageData.LearnedWords.Values.Average();
+        }
         return 0f;
     }
 }

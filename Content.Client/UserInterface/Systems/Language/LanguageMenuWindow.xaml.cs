@@ -170,7 +170,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
         if (_learningComponent == null)
             return new List<string>();
 
-        return _learningComponent!.LearnableLanguages
+        return _learningComponent!.Languages.Keys
             .Where(IsVisibleLearnableLanguage)
             .OrderBy(lang => _prototypeManager.Index<LanguagePrototype>(lang).LocalizedName)
             .Select(lang => lang.Id)
@@ -182,8 +182,9 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
         if (!_prototypeManager.TryIndex<LanguagePrototype>(language, out var proto) || !proto.IsVisibleLanguage)
             return false;
 
-        return !_learningComponent!.FirstContactLanguages.Contains(language) ||
-               _learningComponent.EncounteredLanguages.Contains(language);
+        return !_learningComponent!.Languages.TryGetValue(language, out var languageData) ||
+               !languageData.RequiresFirstContact ||
+               languageData.Encountered;
     }
 
     private LanguageLearningProgressControl? CreateOrUpdateProgressControl(
@@ -215,11 +216,13 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
 
     private LanguageProgressData ExtractProgressData(string languageId)
     {
-        var learningProgress = _learningComponent!.LanguageProgress.GetValueOrDefault(languageId, 0f);
-
+        var learningProgress = 0f;
         Dictionary<string, float>? learnedWords = null;
-        if (_learningComponent.LearnedWords?.TryGetValue(languageId, out var words) == true)
-            learnedWords = words;
+        if (_learningComponent!.Languages.TryGetValue(languageId, out var languageData))
+        {
+            learningProgress = languageData.Progress;
+            learnedWords = languageData.LearnedWords;
+        }
 
         var wordCount = learnedWords?.Count ?? 0;
         var avgWordComprehension = learnedWords?.Values.Count > 0 ? learnedWords.Values.Average() : 0f;
