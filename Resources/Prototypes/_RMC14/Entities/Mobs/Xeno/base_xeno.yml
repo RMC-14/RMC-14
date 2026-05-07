@@ -582,6 +582,7 @@
   - ActivePuller
   - BeingPulled
   - Joint
+  - NightVision
   # leader related
   - HiveLeader
   - RMCInnateRadioTextIncrease
