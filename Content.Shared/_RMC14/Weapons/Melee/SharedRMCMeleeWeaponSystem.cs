@@ -1,8 +1,9 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -52,6 +53,8 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 
         SubscribeLocalEvent<MeleeDamageMultiplierComponent, MeleeHitEvent>(OnMultiplierOnHitMeleeHit);
         SubscribeLocalEvent<RMCMeleeDamageSkillComponent, MeleeHitEvent>(OnSkilledOnHitMeleeHit);
+
+        SubscribeLocalEvent<MeleeWeaponComponent, XenoChangingPrototypeEvent>(OnMeleeXenoChangingPrototype);
 
         SubscribeAllEvent<LightAttackEvent>(OnLightAttack, before: new[] { typeof(SharedMeleeWeaponSystem) });
 
@@ -161,6 +164,17 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         }
 
         args.Damage = args.Damage * ent.Comp.OtherMultiplier;
+    }
+
+    private void OnMeleeXenoChangingPrototype(Entity<MeleeWeaponComponent> ent, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<MeleeWeaponComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is MeleeWeaponComponent { } newComponent)
+        {
+            // just need to transfer current state fields to the new component
+            newComponent.NextAttack = ent.Comp.NextAttack;
+            newComponent.Attacking = ent.Comp.Attacking;
+        }
     }
 
     private void OnLightAttack(LightAttackEvent msg, EntitySessionEventArgs args)
