@@ -17,17 +17,19 @@
         layer:
         - MobLayer
         hard: false
-  - type: RMCTutorialAnnouncement
-    text: "This is a test announcement"
+  - type: RMCTutorialDummy
     factions:
     - UNMC
+  - type: RMCTutorialAnnouncement
+    text: "This is a test announcement"
 
 - type: entity
   parent: RMCBaseTutorialAnnouncer
   id: RMCBaseTutorialAnnouncer2
   suffix: RMC14 2
   components:
-  - type: RMCTutorialAnnouncement
-    text: "Xibidi"
+  - type: RMCTutorialDummy
     factions:
     - RMCXeno
+  - type: RMCTutorialAnnouncement
+    text: "Xibidi"
