@@ -417,6 +417,57 @@
     heatDamageThreshold: 423
     coldDamageThreshold: 0
 
+- type: entity
+  parent: CMMobMonkey
+  id: RMCMobFarwa
+  name: farwa
+  suffix: RMC
+
+- type: entity
+  parent: CMMobMonkey
+  id: RMCMobStok
+  name: stok
+  suffix: RMC
+
+- type: entity
+  parent: CMMobMonkey
+  id: RMCMobYiren
+  name: yiren
+  suffix: RMC
+
+- type: entity
+  parent: CMMobMonkey
+  id: RMCMobNeaera
+  name: neaera
+  suffix: RMC
+
+- type: entity
+  parent: [RMCSimpleMob, MobGoat]
+  id: RMCMobGoat
+  name: goat
+  suffix: RMC
+  components:
+  - type: GhostRole
+    prob: 0
+
+- type: entity
+  parent: [RMCSimpleMob, MobBearSpace]
+  id: RMCMobBear
+  name: bear
+  suffix: RMC
+  components:
+  - type: GhostRole
+    prob: 0
+
+- type: entity
+  parent: [RMCSimpleMob, MobSpiderSpace]
+  id: RMCMobGiantSpider
+  name: giant spider
+  suffix: RMC
+  components:
+  - type: GhostRole
+    prob: 0
+
 # Spawners
 
 - type: entity

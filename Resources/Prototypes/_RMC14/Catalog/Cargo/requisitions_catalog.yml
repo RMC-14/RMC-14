@@ -9,8 +9,6 @@
     - name: rmc-requisitions-black-market-category-seized-items
       entries:
       - cost: 0
-        name: rmc-requisitions-black-market-scanner-crate-name
-        description: rmc-requisitions-black-market-scanner-crate-desc
         blackMarket: true
         blackMarketCost: 5
         blackMarketHeat: 0
@@ -660,7 +658,25 @@
         icon:
           entity: RMCBeltGunslinger
     - name: rmc-requisitions-black-market-category-miscellaneous
-      entries: []
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 7
+        crate: RMCCrateBlackMarketMiscSecuredWildlife
+        icon:
+          entity: RMCCrateBlackMarketMiscSecuredWildlife
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 50
+        blackMarketHeat: -10
+        crate: RMCCrateBlackMarketMiscPottedPlant
+        icon:
+          entity: RMCPottedPlantRandomUnanchored
+      # TODO RMC14: Port cargo tug behavior before enabling this Miscellaneous entry.
+      # TODO RMC14: Cargo Tug Crate, cost 50, heat 0.
+      # TODO RMC14: Port unmarked CLF supply crate behavior before enabling this Miscellaneous entry.
+      # TODO RMC14: Unmarked CLF Supply Crate, cost 40, heat 25.
     categories:
     - name: rmc-requisitions-category-ammo
       entries:
@@ -1322,8 +1338,3 @@
         icon:
           entity: RMCTankFlamerLargeX
 
-
-
-#        Black Market Orders
-#      - cost: 5 We-Ya Funnybucks
-#        crate: RMCCrateD18
