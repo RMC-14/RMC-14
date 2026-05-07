@@ -132,7 +132,7 @@
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: SpawnOnTerminate
     spawn: RMCSmokeFireSentry
-    spawnOffsetMultiplier: -0.5
+    spawnOffsetMultiplier: 0.5
 
 - type: Tag
   id: RMCBulletSentryFireProjectile
