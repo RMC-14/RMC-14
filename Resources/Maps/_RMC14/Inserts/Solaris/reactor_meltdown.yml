@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 01/06/2026 19:08:45
-  entityCount: 631
+  entityCount: 633
 maps: []
 grids:
 - 1
@@ -4594,5 +4594,17 @@ entities:
     components:
     - type: Transform
       pos: 21.5,18.5
+      parent: 1
+- proto: RMCSpawnerRandomTechnologyScanner
+  entities:
+  - uid: 632
+    components:
+    - type: Transform
+      pos: 13.5,23.5
+      parent: 1
+  - uid: 633
+    components:
+    - type: Transform
+      pos: 21.5,24.5
       parent: 1
 ...
