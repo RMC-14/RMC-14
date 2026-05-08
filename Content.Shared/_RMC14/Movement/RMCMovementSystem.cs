@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -84,6 +85,10 @@ public sealed class RMCMovementSystem : EntitySystem
         var userPosition = _transform.GetMoverCoordinates(user.Value).Position;
         var targetPosition = _transform.GetMoverCoordinates(target).Position;
         var direction = targetPosition - userPosition;
+
+        if (direction == Vector2.Zero)
+            return true;
+
         var ray = new CollisionRay(userPosition, direction.Normalized(), (int)ClimbCheckGroup);
         var intersect = _physics.IntersectRayWithPredicate(Transform(user.Value).MapID, ray, direction.Length(), e => !Transform(e).Anchored);
         var results = intersect.Select(r => r.HitEntity).ToHashSet();

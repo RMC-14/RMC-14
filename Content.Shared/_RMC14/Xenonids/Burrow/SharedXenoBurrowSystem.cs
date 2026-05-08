@@ -137,6 +137,8 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         if (args.burrowed)
         {
             _transform.AnchorEntity(burrower);
+            if (_net.IsServer)
+                _audio.PlayPvs(burrower.Comp.BurrowDownSound, burrower);
         }
         else
         {
@@ -225,10 +227,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
                 burrower.Comp.Tunneling = true;
                 Dirty(burrower);
             }
-
             Dirty(burrower);
-            if (_net.IsServer)
-                _audio.PlayPvs(burrower.Comp.BurrowDownSound, burrower);
         }
         else
         {

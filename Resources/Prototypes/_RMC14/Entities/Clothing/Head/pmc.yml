@@ -101,14 +101,35 @@
       - state: equipped-HELMET
 
 - type: entity
-  parent: ArmorHelmetM10
-  id: ArmorHelmetPMCCommandoSurvivor
+  parent: RMCArmorHelmetPMCTactical
+  id: RMCArmorHelmetPMCCommando
+  name: We-Ya commando helmet
+  description: A standard enclosed helmet utilized by Weston-Yamada Commandos.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
+  - type: CMArmor
+    bullet: 40
+    explosionArmor: 40
+    melee: 30
+    bio: 30
+    # armor_internaldamage = 40
+  - type: RMCEarProtection
+  - type: ParasiteResistance
+    maxCount: 6
+  - type: PointLight
+    color: "#e7e2e3"
+
+- type: entity
+  parent: RMCArmorHelmetPMCCommando
+  id: RMCArmorHelmetPMCCommandoDamaged
   name: damaged We-Ya Commando helmet
   description: A standard enclosed helmet utilized by Weston-Yamada Commandos. Has been through a lot of wear and tear.
+  suffix: Damaged
   components:
-  - type: ItemCamouflage
-    camouflageVariations: { }
-  - type: Sprite # TODO: Sprites
+  - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
@@ -116,16 +137,16 @@
     melee: 20
     bio: 20
     # armor_internaldamage = 20
-  - type: Corrodible
-    isCorrodible: false
+  - type: ParasiteResistance
+    maxCount: 0
 
 - type: entity
   parent: RMCArmorHelmetPMCTactical
-  id: ArmorHelmetPMCCommando
+  id: RMCArmorHelmetPMCDeathsquad
   name: PMC M5X helmet
   description: A fully enclosed, armored helmet made to complete the M5X exoskeleton armor.
   components:
-  - type: Sprite
+  - type: Sprite # TODO: Sprites
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
@@ -146,12 +167,12 @@
     color: "#e41c1f"
 
 - type: entity
-  parent: ArmorHelmetPMCCommando
-  id: RMCArmorHelmetPMCCommandoAlt
+  parent: RMCArmorHelmetPMCDeathsquad
+  id: RMCArmorHelmetPMCDeathsquadAlt
   suffix: Alt
   description: A fully enclosed, armored helmet made to complete the M5X exoskeleton armor. This one has had a skull scratched into the visor.
   components:
-  - type: Sprite
+  - type: Sprite # TODO: Sprites
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando_alt.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando_alt.rsi
