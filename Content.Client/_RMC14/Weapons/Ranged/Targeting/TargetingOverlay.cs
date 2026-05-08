@@ -13,7 +13,7 @@ namespace Content.Client._RMC14.Weapons.Ranged.Targeting;
 
 public sealed class TargetingOverlay : Overlay
 {
-    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
+    public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     private readonly IEntityManager _entManager;
     private readonly SpriteSystem _sprite;

@@ -1,5 +1,8 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Robust.Shared.Audio;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -32,6 +35,8 @@ public sealed partial class DropshipNavigationComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId<IFFFactionComponent> Faction = "FactionMarine";
+
+    [DataField, AutoNetworkedField]
     public bool RemoteControl = false;
 
     [DataField, AutoNetworkedField]
@@ -39,4 +44,10 @@ public sealed partial class DropshipNavigationComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan LockedOutUntil = TimeSpan.Zero;
+
+    [DataField, AutoNetworkedField]
+    public bool LaunchAlarmStatus;
+
+    [DataField]
+    public SoundSpecifier? LaunchAlarmForcedShutdownSound = new SoundPathSpecifier("/Audio/_RMC14/Structures/metalhit.ogg");
 }
