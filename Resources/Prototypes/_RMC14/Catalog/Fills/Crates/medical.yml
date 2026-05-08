@@ -20,7 +20,7 @@
   - type: StorageFill
     contents:
       - id: RMCTentUNMCStandardMedicalFolded
-      - id: CMWebbingSurgicalGreen
+      - id: RMCWebbingSurgicalGreen
       - id: CMPortableSurgicalBedSpawnFolded
       - id: RMCPortableDialysis
       #- id: CMIV # TODO RMC14 Make IV fit in crate.

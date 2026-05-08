@@ -1,6 +1,6 @@
 - type: job
   parent: CMSurvivor
-  id: RMCJobSyntheticColony
+  id: RMCSyntheticColony
   name: rmc-job-name-synth-colony
   description: rmc-job-description-synth-colony
   playTimeTracker: RMCJobSyntheticColony
@@ -68,7 +68,7 @@
     - type: Synth
       generation: rmc-species-synth-generation-second
   hidden: true
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   id: RMCGearSyntheticColonistBase
@@ -93,7 +93,7 @@
   name: synthetic colonist spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCJobSyntheticColony
+    job_id: RMCSyntheticColony
   - type: Sprite
     state: syn_spawn
 

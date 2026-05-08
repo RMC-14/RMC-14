@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/17/2026 10:10:56
-  entityCount: 17428
+  time: 04/20/2026 01:31:12
+  entityCount: 17433
 maps:
 - 1
 grids:
@@ -37446,11 +37446,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 142.5,130.5
       parent: 1
-  - uid: 172
-    components:
-    - type: Transform
-      pos: 120.5,138.5
-      parent: 1
   - uid: 173
     components:
     - type: Transform
@@ -37587,6 +37582,11 @@ entities:
       parent: 1
 - proto: CMAirlockMaintLockedColony
   entities:
+  - uid: 172
+    components:
+    - type: Transform
+      pos: 120.5,138.5
+      parent: 1
   - uid: 197
     components:
     - type: Transform
@@ -37741,7 +37741,7 @@ entities:
   - uid: 222
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 122.5,131.5
       parent: 1
   - uid: 223
@@ -45981,17 +45981,17 @@ entities:
   - uid: 1733
     components:
     - type: Transform
-      pos: 162.5,46.5
+      pos: 67.5,14.5
       parent: 1
-  - uid: 1734
+  - uid: 17001
     components:
     - type: Transform
-      pos: 161.5,47.5
+      pos: 67.5,14.5
       parent: 1
-  - uid: 1735
+  - uid: 17431
     components:
     - type: Transform
-      pos: 163.5,47.5
+      pos: 68.5,4.5
       parent: 1
 - proto: CMMagazineSMGMP5
   entities:
@@ -46786,6 +46786,11 @@ entities:
       parent: 1
 - proto: CMRack
   entities:
+  - uid: 1734
+    components:
+    - type: Transform
+      pos: 119.5,13.5
+      parent: 1
   - uid: 1875
     components:
     - type: Transform
@@ -47621,6 +47626,16 @@ entities:
     - type: Transform
       pos: 178.5,146.5
       parent: 1
+  - uid: 17002
+    components:
+    - type: Transform
+      pos: 119.5,12.5
+      parent: 1
+  - uid: 17432
+    components:
+    - type: Transform
+      pos: 119.5,11.5
+      parent: 1
 - proto: CMRodMetal
   entities:
   - uid: 2042
@@ -47979,10 +47994,8 @@ entities:
   - uid: 2106
     components:
     - type: Transform
-      pos: 204.5625,117.5625
+      pos: 204.5,117.5
       parent: 1
-    - type: Stack
-      count: 25
   - uid: 2107
     components:
     - type: Transform
@@ -48132,11 +48145,6 @@ entities:
       parent: 1
 - proto: CMSheetMetal50
   entities:
-  - uid: 2133
-    components:
-    - type: Transform
-      pos: 179.5,129.5
-      parent: 1
   - uid: 2135
     components:
     - type: Transform
@@ -48151,10 +48159,15 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 2138
+  - uid: 2147
     components:
     - type: Transform
-      pos: 178.5,129.5
+      pos: 121.5,10.5
+      parent: 1
+  - uid: 2148
+    components:
+    - type: Transform
+      pos: 119.5,11.5
       parent: 1
 - proto: CMSheetPhoron
   entities:
@@ -48205,15 +48218,15 @@ entities:
     - type: InsideEntityStorage
 - proto: CMSheetPlasteel30
   entities:
-  - uid: 2147
+  - uid: 17429
     components:
     - type: Transform
-      pos: 179.5,127.5
+      pos: 119.5,13.5
       parent: 1
-  - uid: 2148
+  - uid: 17433
     components:
     - type: Transform
-      pos: 178.5,127.5
+      pos: 119.5,12.5
       parent: 1
 - proto: CMShellShotgunBuckshot
   entities:
@@ -48437,58 +48450,6 @@ entities:
     components:
     - type: Transform
       pos: 18.5,50.5
-      parent: 1
-- proto: CMSpawnPointSurvivor
-  entities:
-  - uid: 2195
-    components:
-    - type: Transform
-      pos: 68.5,46.5
-      parent: 1
-  - uid: 2196
-    components:
-    - type: Transform
-      pos: 93.5,101.5
-      parent: 1
-  - uid: 2197
-    components:
-    - type: Transform
-      pos: 95.5,88.5
-      parent: 1
-  - uid: 2198
-    components:
-    - type: Transform
-      pos: 100.5,114.5
-      parent: 1
-  - uid: 2199
-    components:
-    - type: Transform
-      pos: 104.5,82.5
-      parent: 1
-  - uid: 2200
-    components:
-    - type: Transform
-      pos: 105.5,113.5
-      parent: 1
-  - uid: 2201
-    components:
-    - type: Transform
-      pos: 106.5,51.5
-      parent: 1
-  - uid: 2202
-    components:
-    - type: Transform
-      pos: 115.5,86.5
-      parent: 1
-  - uid: 2203
-    components:
-    - type: Transform
-      pos: 164.5,82.5
-      parent: 1
-  - uid: 2204
-    components:
-    - type: Transform
-      pos: 6.5,133.5
       parent: 1
 - proto: CMSpawnPointXeno
   entities:
@@ -49937,11 +49898,6 @@ entities:
     - type: Transform
       pos: 195.5,87.5
       parent: 1
-  - uid: 2480
-    components:
-    - type: Transform
-      pos: 194.5,87.5
-      parent: 1
   - uid: 2481
     components:
     - type: Transform
@@ -50376,6 +50332,11 @@ entities:
     components:
     - type: Transform
       pos: 209.5,44.5
+      parent: 1
+  - uid: 14125
+    components:
+    - type: Transform
+      pos: 194.5,87.5
       parent: 1
 - proto: CMTableReinforced
   entities:
@@ -107049,10 +107010,10 @@ entities:
     - type: Transform
       pos: 164.6875,152.375
       parent: 1
-  - uid: 13322
+  - uid: 17438
     components:
     - type: Transform
-      pos: 195.6875,92.375
+      pos: 109.5,12.5
       parent: 1
 - proto: RMCBoxSterileMask
   entities:
@@ -111803,6 +111764,34 @@ entities:
     - type: Transform
       pos: 50.5,71.5
       parent: 1
+- proto: RMCIceCrystal
+  entities:
+  - uid: 1735
+    components:
+    - type: Transform
+      pos: 3.5,136.5
+      parent: 1
+- proto: RMCIceCrystal3
+  entities:
+  - uid: 17443
+    components:
+    - type: Transform
+      pos: 3.5,145.5
+      parent: 1
+- proto: RMCIceCrystal6
+  entities:
+  - uid: 17436
+    components:
+    - type: Transform
+      pos: 3.5,142.5
+      parent: 1
+- proto: RMCIceCrystal7
+  entities:
+  - uid: 17439
+    components:
+    - type: Transform
+      pos: 3.5,139.5
+      parent: 1
 - proto: RMCIceSlabTray1
   entities:
   - uid: 14080
@@ -112098,11 +112087,6 @@ entities:
     - type: Transform
       pos: 126.5,12.5
       parent: 1
-  - uid: 14125
-    components:
-    - type: Transform
-      pos: 194.5,87.5
-      parent: 1
   - uid: 14126
     components:
     - type: Transform
@@ -112118,16 +112102,6 @@ entities:
     - type: Transform
       pos: 177.5,120.5
       parent: 1
-  - uid: 14129
-    components:
-    - type: Transform
-      pos: 199.5,87.5
-      parent: 1
-  - uid: 14130
-    components:
-    - type: Transform
-      pos: 198.5,87.5
-      parent: 1
   - uid: 14131
     components:
     - type: Transform
@@ -112137,11 +112111,6 @@ entities:
     components:
     - type: Transform
       pos: 163.5,137.5
-      parent: 1
-  - uid: 14133
-    components:
-    - type: Transform
-      pos: 195.5,87.5
       parent: 1
   - uid: 14134
     components:
@@ -112153,20 +112122,10 @@ entities:
     - type: Transform
       pos: 9.5,138.5
       parent: 1
-  - uid: 14136
-    components:
-    - type: Transform
-      pos: 194.5,88.5
-      parent: 1
   - uid: 14137
     components:
     - type: Transform
       pos: 163.5,138.5
-      parent: 1
-  - uid: 14138
-    components:
-    - type: Transform
-      pos: 194.5,87.5
       parent: 1
   - uid: 14139
     components:
@@ -112347,6 +112306,31 @@ entities:
     components:
     - type: Transform
       pos: 99.5,112.5
+      parent: 1
+  - uid: 17012
+    components:
+    - type: Transform
+      pos: 126.5,21.5
+      parent: 1
+  - uid: 17437
+    components:
+    - type: Transform
+      pos: 107.5,12.5
+      parent: 1
+  - uid: 17440
+    components:
+    - type: Transform
+      pos: 107.5,12.5
+      parent: 1
+  - uid: 17441
+    components:
+    - type: Transform
+      pos: 123.5,20.5
+      parent: 1
+  - uid: 17442
+    components:
+    - type: Transform
+      pos: 123.5,20.5
       parent: 1
 - proto: RMCJumpsuitMarsoc
   entities:
@@ -116717,6 +116701,28 @@ entities:
     - type: Transform
       pos: 123.5,21.5
       parent: 1
+- proto: RMCMagazineSMGType19
+  entities:
+  - uid: 14130
+    components:
+    - type: Transform
+      pos: 121.5,13.5
+      parent: 1
+  - uid: 14133
+    components:
+    - type: Transform
+      pos: 132.5,20.5
+      parent: 1
+  - uid: 14136
+    components:
+    - type: Transform
+      pos: 131.5,21.5
+      parent: 1
+  - uid: 14138
+    components:
+    - type: Transform
+      pos: 121.5,13.5
+      parent: 1
 - proto: RMCMapInsertShivaCLFRaid
   entities:
   - uid: 17350
@@ -116737,6 +116743,13 @@ entities:
     components:
     - type: Transform
       pos: 3.5,110.5
+      parent: 1
+- proto: RMCMapInsertShivaSurvSpawnTogether
+  entities:
+  - uid: 2195
+    components:
+    - type: Transform
+      pos: 113.5,129.5
       parent: 1
 - proto: RMCMarkerAreaLabel
   entities:
@@ -121490,23 +121503,23 @@ entities:
       parent: 1
 - proto: RMCPropVehicleTruckSnow
   entities:
-  - uid: 15604
+  - uid: 2197
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 117.5,43.5
+      pos: 118,45
       parent: 1
-  - uid: 15605
+  - uid: 2198
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 99.5,12.5
+      pos: 100,13
       parent: 1
-  - uid: 15606
+  - uid: 2199
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 117.5,44.5
+      pos: 118,44
       parent: 1
 - proto: RMCRackParts
   entities:
@@ -123986,6 +123999,23 @@ entities:
     components:
     - type: Transform
       pos: 61.5,153.5
+      parent: 1
+- proto: RMCSpawnerBombSupply
+  entities:
+  - uid: 2133
+    components:
+    - type: Transform
+      pos: 179.5,127.5
+      parent: 1
+  - uid: 2138
+    components:
+    - type: Transform
+      pos: 178.5,127.5
+      parent: 1
+  - uid: 17434
+    components:
+    - type: Transform
+      pos: 179.5,129.5
       parent: 1
 - proto: RMCSpawnerCommunicationsTowerOne
   entities:
@@ -127726,10 +127756,10 @@ entities:
       parent: 1
 - proto: RMCTurretGaussSpaceborne
   entities:
-  - uid: 16686
+  - uid: 2196
     components:
     - type: Transform
-      pos: 15.5,49.5
+      pos: 15.5,48.5
       parent: 1
   - uid: 16687
     components:
@@ -127793,11 +127823,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 17.5,118.5
-      parent: 1
-  - uid: 16698
-    components:
-    - type: Transform
-      pos: 21.5,16.5
       parent: 1
   - uid: 16699
     components:
@@ -129537,15 +129562,15 @@ entities:
     - type: Transform
       pos: 96.5,70.5
       parent: 1
-  - uid: 17001
+  - uid: 14129
     components:
     - type: Transform
-      pos: 161.5,46.5
+      pos: 68.5,5.5
       parent: 1
-  - uid: 17002
+  - uid: 17430
     components:
     - type: Transform
-      pos: 166.5,35.5
+      pos: 66.5,14.5
       parent: 1
 - proto: RMCWeaponRifleM54CStripped
   entities:
@@ -129598,10 +129623,22 @@ entities:
       parent: 1
 - proto: RMCWeaponShotgunType23
   entities:
-  - uid: 17012
+  - uid: 17435
     components:
     - type: Transform
-      pos: 198.5,93.5
+      pos: 108.5,12.5
+      parent: 1
+- proto: RMCWeaponSMGType19
+  entities:
+  - uid: 2480
+    components:
+    - type: Transform
+      pos: 131.5,21.5
+      parent: 1
+  - uid: 13322
+    components:
+    - type: Transform
+      pos: 121.5,13.5
       parent: 1
 - proto: RMCWeaponTaser
   entities:
