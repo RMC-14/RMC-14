@@ -71,7 +71,7 @@ public sealed partial class LanguageLearningProgressControl : Control
     public ProtoId<LanguagePrototype> LanguageId => _prototype.ID;
     public event Action<ProtoId<LanguagePrototype>, bool>? OnExpansionChanged;
 
-    public LanguageLearningProgressControl(LanguagePrototype prototype, LanguageLearningViewData data)
+    public LanguageLearningProgressControl()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
@@ -83,7 +83,10 @@ public sealed partial class LanguageLearningProgressControl : Control
 
         ExpandButton.OnPressed += _ => SetExpanded(!_wordsExpanded);
         SearchBox.OnTextChanged += OnSearchTextChanged;
+    }
 
+    public LanguageLearningProgressControl(LanguagePrototype prototype, LanguageLearningViewData data) : this()
+    {
         UpdateData(prototype, data);
     }
 

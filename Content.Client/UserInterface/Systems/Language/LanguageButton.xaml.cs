@@ -60,14 +60,17 @@ public sealed partial class LanguageButton : ContainerButton
         }
     }
 
-    public LanguageButton(LanguagePrototype prototype, bool isSelected)
+    public LanguageButton()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
         HorizontalExpand = true;
         SetHeight = 64;
+    }
 
+    public LanguageButton(LanguagePrototype prototype, bool isSelected) : this()
+    {
         NameLabel.Text = prototype.LocalizedName;
         DescriptionLabel.Text = prototype.LocalizedDescription;
         DescriptionLabel.FontColorOverride = Color.Gray;

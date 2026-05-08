@@ -10,6 +10,7 @@ namespace Content.Client.Lobby.UI.Roles;
 public sealed partial class TraitPreferenceSelector : Control
 {
     public int Cost;
+    public string TraitId { get; }
 
     public bool Preference
     {
@@ -22,6 +23,7 @@ public sealed partial class TraitPreferenceSelector : Control
     public TraitPreferenceSelector(TraitPrototype trait)
     {
         RobustXamlLoader.Load(this);
+        TraitId = trait.ID;
 
         var text = trait.Cost != 0 ? $"[{trait.Cost}] " : "";
         text += Loc.GetString(trait.Name);

@@ -687,13 +687,52 @@ namespace Content.Client.Lobby.UI
                     });
                 }
 
-                foreach (var selector in selectors)
+                if (categoryId == "SpeechTraits")
+                {
+                    var languageSelectors = selectors
+                        .Where(selector => selector != null &&
+                                           _prototypeManager.Index<TraitPrototype>(selector.TraitId).Language != null)
+                        .ToList();
+                    var otherSelectors = selectors
+                        .Where(selector => selector != null &&
+                                           _prototypeManager.Index<TraitPrototype>(selector.TraitId).Language == null)
+                        .ToList();
+
+                    AddTraitSelectors(languageSelectors, selectionCount, category, "rmc-trait-group-languages");
+                    AddTraitSelectors(otherSelectors, selectionCount, category, "rmc-trait-group-other-speech");
+                }
+                else
+                {
+                    AddTraitSelectors(selectors, selectionCount, category);
+                }
+            }
+
+            void AddTraitSelectors(
+                List<TraitPreferenceSelector?> selectorsToAdd,
+                int currentSelectionCount,
+                TraitCategoryPrototype? currentCategory,
+                string? groupLabel = null)
+            {
+                if (selectorsToAdd.Count == 0)
+                    return;
+
+                if (groupLabel != null)
+                {
+                    TraitsList.AddChild(new Label
+                    {
+                        Text = Loc.GetString(groupLabel),
+                        Margin = new Thickness(8, 6, 0, 0),
+                        FontColorOverride = Color.LightGray
+                    });
+                }
+
+                foreach (var selector in selectorsToAdd)
                 {
                     if (selector == null)
                         continue;
 
-                    if (category is { MaxTraitPoints: >= 0 } &&
-                        selector.Cost + selectionCount > category.MaxTraitPoints)
+                    if (currentCategory is { MaxTraitPoints: >= 0 } &&
+                        selector.Cost + currentSelectionCount > currentCategory.MaxTraitPoints)
                     {
                         selector.Checkbox.Label.FontColorOverride = Color.Red;
                     }

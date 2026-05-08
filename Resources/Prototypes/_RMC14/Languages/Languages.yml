@@ -90,6 +90,36 @@
     messageWrapOverrides: {}
 
 - type: language
+  id: Spanish
+  name: "Spanish"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  boldTypefaceId: null
+  showLanguageName: true
+  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/ES.png"
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 120
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["el", "la", "de", "que", "los", "las", "por", "con", "una", "para"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    color: null
+    fontId: null
+    fontSize: null
+    boldFontId: null
+    allowRadio: true
+    requireSpeech: true
+    requireLOS: false
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
   id: Japanese
   name: "Japanese"
   description: "An old Earth language."

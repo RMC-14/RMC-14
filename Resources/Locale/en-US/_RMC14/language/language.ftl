@@ -62,11 +62,6 @@ language-learning-progress-multi = Analyzed {$terms} terms. Progress: {$progress
 language-learning-mastered = You have mastered {$language}!
 language-learning-fluent = You are becoming fluent in {$language}!
 
-# Language errors
-chat-manager-no-radio-key = No radio key specified.
-chat-manager-no-such-channel = No such radio channel: {$key}
-rmc-no-queen-hivemind-chat = There is no Queen to guide the hive mind.
-
 # Speech Transformation Messages
 language-obfuscated-warning = You don't fully understand this language.
 language-learning-progress-gained = You're getting better at understanding {$language}.
