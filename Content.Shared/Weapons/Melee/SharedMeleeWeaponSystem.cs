@@ -72,12 +72,13 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private   readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private   readonly SharedEntityStorageSystem _storageSystem = default!;
 
-    // RMC14
+    // RMC14 start
     [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _storage = default!;
+    // RMC14 end
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -94,9 +95,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     /// </summary>
     public const float GracePeriod = 0.05f;
 
+    // RMC14 start
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<DirectionalAttackBlockerComponent> _directionalAttackBlockerQuery;
+    // RMC14 end
 
     public override void Initialize()
     {
@@ -813,10 +816,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             if (res.Count != 0)
             {
+                // RMC14 start
                 // Ignore dead mobs, mobs from the same hive, and open entity containers (lockers, crates, etc).
                 var filteredResults = res.Where(x => !MobState.IsDead(x.HitEntity))
                     .Where(x => !(_mobStateQuery.HasComp(x.HitEntity) && _hive.FromSameHive(ignore, x.HitEntity)))
-                    .Where(x => !_storageSystem.IsOpen(x.HitEntity));
+                    .Where(x => !_storage.IsOpen(x.HitEntity));
 
                 if (filteredResults.Count() <= 0)
                 {
@@ -828,7 +832,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 // In short, we should hit the closest entity, UNLESS we can hit a mob, in which case we hit the mob.
                 // To accomplish this, we find the first object that either is a mob or would block our attack.
                 var firstPriorityResult = filteredResults.FirstOrNull(
-                    x => _mobStateQuery.HasComp(x.HitEntity) // mobs
+                    x => _mobStateQuery.HasComp(x.HitEntity)  // mobs
                       || ((_physicsQuery.CompOrNull(x.HitEntity)?.CollisionLayer ?? 0) & (int)CollisionGroup.InteractImpassable) != 0  // walls, windows, etc
                       || _directionalAttackBlockerQuery.HasComp(x.HitEntity)  // barricades
                 );
@@ -840,6 +844,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 {
                     target = result;
                 }
+                // RMC14 end
 
                 // If there's exact distance overlap, we simply have to deal with all overlapping objects to avoid selecting randomly.
                 var resChecked = filteredResults.Where(x => x.Distance.Equals(target.Distance));
