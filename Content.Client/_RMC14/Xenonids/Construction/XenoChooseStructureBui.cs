@@ -117,12 +117,11 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
                         displayName += $" ({cost} plasma)";
                 }
 
-                control.Set(displayName, _sprite.Frame0(_prototype.Index(displayId)));
+                control.Set(displayName, _sprite.Frame0(structure));
 
                 _structureIds.Add(structureId);
                 _buttons.Add(structureId, control);
             }
-
 
             // If we have too many buttons, delete the extras
             _window.StructureContainer.RemoveChildrenAfter(xeno.CanBuild.Count);

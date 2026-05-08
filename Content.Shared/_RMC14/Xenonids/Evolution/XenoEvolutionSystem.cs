@@ -867,7 +867,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         var afterEv = new AfterXenoChangedPrototypeEvent(xeno, oldProtoId);
-        RaiseLocalEvent(xeno, ref afterEv);
+        RaiseLocalEvent(xeno, ref afterEv, true);
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
     }
