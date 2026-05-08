@@ -177,19 +177,6 @@ public sealed class XenoPlasmaSystem : EntitySystem
         RemovePlasma((args.User, plasma), action.Comp.Cost);
     }
 
-    private void EvolutionTransferPlasma(EntityUid oldXeno, Entity<XenoPlasmaComponent> newXeno)
-    {
-        if (!TryComp(oldXeno, out XenoPlasmaComponent? oldXenoPlasma))
-            return;
-
-        var newMax = newXeno.Comp.MaxPlasma;
-        FixedPoint2 newPlasma = newMax;
-        if (oldXenoPlasma.MaxPlasma > 0)
-            newPlasma *= oldXenoPlasma.Plasma / oldXenoPlasma.MaxPlasma;
-
-        SetPlasma(newXeno, newPlasma);
-    }
-
     private void UpdateAlert(Entity<XenoPlasmaComponent> xeno)
     {
         if (xeno.Comp.MaxPlasma != 0)
