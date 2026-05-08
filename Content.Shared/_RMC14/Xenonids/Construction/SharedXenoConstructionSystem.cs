@@ -112,6 +112,18 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private readonly HashSet<EntityUid> _intersectingResin = new();
 
+    /// <summary>
+    /// When a xeno that can secrete resin changes castes, this list is used to determine what their
+    /// chosen secretion becomes if it can no longer be secreted, in priority order.
+    /// An selected secretion in any of these lists will become a different secretion in the same list, if possible.
+    /// </summary>
+    private readonly List<List<EntProtoId>> _similarSecretions = new List<List<EntProtoId>>
+    {
+        new() { "WallXenoResin", "WallXenoResinThick", "WallXenoResinReflective" },
+        new() { "WallXenoMembrane", "WallXenoMembraneThick" },
+        new() { "DoorXenoResin", "DoorXenoResinThick" }
+    };
+
     public override void Initialize()
     {
         _blockXenoConstructionQuery = GetEntityQuery<BlockXenoConstructionComponent>();
@@ -129,6 +141,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoConstructionComponent, XenoExpandWeedsActionEvent>(OnXenoExpandWeedsAction);
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoChooseStructureActionEvent>(OnXenoChooseStructureAction);
+        SubscribeLocalEvent<XenoConstructionComponent, XenoChangingPrototypeEvent>(OnConstructorChangingPrototype);
 
         SubscribeLocalEvent<DesignerStrainComponent, DesignerSelectedDesignToggleActionEvent>(OnDesignerSelectedDesignToggle);
 
@@ -374,6 +387,28 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         args.Handled = true;
         _ui.TryOpenUi(xeno.Owner, XenoChooseStructureUI.Key, xeno);
+    }
+
+    private void OnConstructorChangingPrototype(Entity<XenoConstructionComponent> xeno, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<XenoConstructionComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoConstructionComponent { } newComponent)
+        {
+            if (xeno.Comp.BuildChoice != null)
+            {
+                if (newComponent.CanBuild.Contains(xeno.Comp.BuildChoice.Value))
+                {
+                    newComponent.BuildChoice = xeno.Comp.BuildChoice;
+                }
+                else
+                {
+                    // try to find the equivalent structure
+                    var options = _similarSecretions.Find(item => item.Contains(xeno.Comp.BuildChoice.Value));
+                    var newSelection = options?.FirstOrNull(item => newComponent.CanBuild.Contains(item));
+                    newComponent.BuildChoice = newSelection;
+                }
+            }
+        }
     }
 
     private void OnXenoChooseStructureBui(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureBuiMsg args)

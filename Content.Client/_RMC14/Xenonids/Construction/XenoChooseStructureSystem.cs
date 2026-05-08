@@ -1,5 +1,7 @@
-﻿using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Designer;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Construction;
@@ -14,22 +16,14 @@ public sealed class XenoChooseStructureSystem : EntitySystem
         SubscribeLocalEvent<QueenBuildingBoostComponent, ComponentStartup>(OnBoostAdded);
         SubscribeLocalEvent<QueenBuildingBoostComponent, ComponentRemove>(OnBoostRemoved);
         SubscribeLocalEvent<DesignerStrainComponent, AfterAutoHandleStateEvent>(OnDesignerAfterState);
+        SubscribeLocalEvent<XenoComponent, AfterXenoChangedPrototypeEvent>(OnAfterXenoChangedPrototype);
     }
 
-    private void OnDesignerAfterState(Entity<DesignerStrainComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void OnXenoConstructionAfterState(Entity<XenoConstructionComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        if (!TryComp(ent, out UserInterfaceComponent? ui))
-            return;
-
-        foreach (var bui in ui.ClientOpenInterfaces.Values)
-        {
-            if (bui is XenoChooseStructureBui chooseUi)
-                chooseUi.Refresh();
-        }
+        RefreshUI(ent);
     }
+
 
     private void OnBoostAdded(Entity<QueenBuildingBoostComponent> ent, ref ComponentStartup args)
     {
@@ -39,6 +33,16 @@ public sealed class XenoChooseStructureSystem : EntitySystem
     private void OnBoostRemoved(Entity<QueenBuildingBoostComponent> ent, ref ComponentRemove args)
     {
         RefreshUI(ent.Owner);
+    }
+
+    private void OnDesignerAfterState(Entity<DesignerStrainComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshUI(ent);
+    }
+
+    private void OnAfterXenoChangedPrototype(Entity<XenoComponent> ent, ref AfterXenoChangedPrototypeEvent args)
+    {
+        RefreshUI(ent);
     }
 
     private void RefreshUI(EntityUid entity)
@@ -53,23 +57,15 @@ public sealed class XenoChooseStructureSystem : EntitySystem
         {
             if (bui is XenoChooseStructureBui chooseUi)
             {
-                chooseUi.Close();
+                if (HasComp<XenoConstructionComponent>(entity))
+                {
+                    chooseUi.Refresh();
+                }
+                else
+                {
+                    chooseUi.Close();
+                }
             }
-        }
-    }
-
-    private void OnXenoConstructionAfterState(Entity<XenoConstructionComponent> ent, ref AfterAutoHandleStateEvent args)
-    {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        if (!TryComp(ent, out UserInterfaceComponent? ui))
-            return;
-
-        foreach (var bui in ui.ClientOpenInterfaces.Values)
-        {
-            if (bui is XenoChooseStructureBui chooseUi)
-                chooseUi.Refresh();
         }
     }
 }
