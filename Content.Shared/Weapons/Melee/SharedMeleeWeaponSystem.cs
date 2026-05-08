@@ -121,9 +121,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         SubscribeAllEvent<DisarmAttackEvent>(OnDisarmAttack);
         SubscribeAllEvent<StopAttackEvent>(OnStopAttack);
 
+        // RMC14 start
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _directionalAttackBlockerQuery = GetEntityQuery<DirectionalAttackBlockerComponent>();
+        // RMC14 end
 
 #if DEBUG
         SubscribeLocalEvent<MeleeWeaponComponent,
