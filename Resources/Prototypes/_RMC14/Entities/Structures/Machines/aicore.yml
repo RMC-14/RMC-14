@@ -214,7 +214,6 @@
     state: console
     layers: [ ]
   - type: SynthRepairStation
-  - type: APCPowerReceiver
   - type: RMCPowerReceiver
     Channel: Equipment
     ActiveLoad: 20
