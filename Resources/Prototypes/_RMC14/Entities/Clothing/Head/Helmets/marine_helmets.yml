@@ -399,10 +399,21 @@
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m35/urban.rsi
   - type: TemperatureProtection
     heatingCoefficient: 0.001
+  - type: FoldableClothing
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+    unfoldedHideLayers:
+    - Snout
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 # M45 Sniper Spec
 - type: entity
-  parent: RMCMarineHelmetBase
+  parent: ArmorHelmetM10
   id: CMArmorHelmetM45
   name: M45 ghillie helmet
   description: A lightweight M45 helmet with ghillie coif used by Marine snipers on recon missions.
@@ -411,9 +422,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
-  - type: HideLayerClothing
-    slots:
-    - Snout
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
@@ -435,13 +443,15 @@
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: snpr-helmet
   - type: FoldableClothing
-    foldedEquippedPrefix: closed
-    foldedHeldPrefix: closed
     foldedHideLayers:
     - Hair
     - HeadTop
     - HeadSide
+    - Snout
     unfoldedHideLayers:
+    - Snout
+  - type: HideLayerClothing
+    slots:
     - Snout
 
 # M3-T Demo Spec

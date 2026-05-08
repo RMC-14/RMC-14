@@ -48,6 +48,10 @@ marking-VulpEarCoyote = Vulpkanin Coyote
 marking-VulpEarDalmatian-dalmatian = Dalmatian ears
 marking-VulpEarDalmatian = Vulpkanin Dalmatian
 
+marking-VulpEarFloppy-floppy = Floppy ears (base)
+marking-VulpEarFloppy-floppy-inner = Floppy ears (inner)
+marking-VulpEarFloppy = Vulpkanin Floppy
+
 
 marking-VulpSnoutAlt-muzzle_alt = Muzzle
 marking-VulpSnoutAlt-nose = Nose
@@ -77,6 +81,7 @@ marking-VulpSnoutSwift = Vulpkanin Swift
 
 marking-VulpSnoutBlaze-blaze = Blaze
 marking-VulpSnoutBlaze = Vulpkanin Blaze
+marking-VulpSnoutBlaze-nose_blaze = Nose
 
 marking-VulpSnoutPatch-patch = Patch
 marking-VulpSnoutPatch = Vulpkanin Patch
@@ -170,15 +175,14 @@ marking-VulpTailAustralianShepherd-m_tail_australianshepherd_secondary = Seconda
 marking-VulpTailStraight = Straight
 marking-VulpTailStraight-m_tail_straighttail_primary = Primary
 
-marking-VulpTailFox3 = Vulpkanin Fox 3
+marking-VulpTailFox3 = Vulpkanin Fox 3 (no wag)
 marking-VulpTailFox3-m_tail_fox3_ = Primary
 
-marking-VulpTailFox4 = Vulpkanin Fox 4
+marking-VulpTailFox4 = Vulpkanin Fox 4 (no wag)
 marking-VulpTailFox4-m_tail_fox4_primary = Primary
 marking-VulpTailFox4-m_tail_fox4_secondary = Tip
 
-
-marking-VulpTailLong = Long
+marking-VulpTailLong = Long (no wag)
 marking-VulpTailLong-long = Base
 marking-VulpTailLong-long-tip = Tip
 
