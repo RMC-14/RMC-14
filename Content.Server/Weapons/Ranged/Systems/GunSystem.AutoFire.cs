@@ -33,7 +33,7 @@ public sealed partial class GunSystem
             {
                 var parent = TransformSystem.GetParentUid(uid);
 
-                //RMC14 Stop burst fire when inside a bag o holster.
+                //RMC14 Stop burst fire when inside a bag or holster.
                 if (!HasComp<DamageableComponent>(parent) &&
                     Containers.TryGetOuterContainer(uid, Transform(uid), out var outerParent))
                 {
