@@ -15,7 +15,7 @@
     - CMRoyalMarinesAssaultEngineerPVE
     pointsType: AssaultEngineer
     sections:
-    - name: Assault Engineering Set (Mandatory) # TODO RMC royal marines breaching hammer
+    - name: Assault Engineering Set (Mandatory) # TODO RMC royal marines breaching hammer, XM51 is placeholder
       choices: { CMPrimary: 1 }
       takeOne: CMAccessories
       entries:
