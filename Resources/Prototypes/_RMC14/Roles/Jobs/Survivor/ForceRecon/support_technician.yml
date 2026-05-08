@@ -73,6 +73,6 @@
   name: forecon support technician survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGear:
     - [ CMAdvFirstAidKitFilled ]

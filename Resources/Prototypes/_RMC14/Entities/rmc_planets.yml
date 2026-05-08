@@ -14,6 +14,8 @@
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: 1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
       - CMSurvivorLV624CorporateLiaison: 2
@@ -90,6 +92,7 @@
       - CMSurvivorSolarisCMBMarshal: 1
       CMSurvivor:
       - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorSolarisChaplain: -1
       - CMSurvivorUNMCRecruiter: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
@@ -164,6 +167,8 @@
     nightmareScenarios:
     - scenarioName: panic_room_hold
       scenarioProbability: 0.1
+    - scenarioName: none # 90% chance of regular surv. Reduce to 80% (0.8) once CLF survs are in.
+      scenarioProbability: 0.9
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
@@ -186,16 +191,16 @@
       - CMSurvivorScientist: 2
     survivorJobVariantScenarios:
       panic_room_hold:
-        CMSurvivorEngineer:
-        - RMCSurvivorShivasPanicRoomEngineer: 2
-        CMSurvivorScientist:
-        - RMCSurvivorShivasPanicRoomResearcher: 2
-        CMSurvivorDoctor:
-        - RMCSurvivorShivasPanicRoomDoctor: 2
         CMSurvivorSecurity:
         - RMCSurvivorPMCCommandoShivas: 1
         CMSurvivorCorporate:
         - RMCSurvivorAssistantManager: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorShivasPanicRoomDoctor: 2
+        CMSurvivorEngineer:
+        - RMCSurvivorShivasPanicRoomEngineer: 2
+        CMSurvivorScientist:
+        - RMCSurvivorShivasPanicRoomResearcher: 2
         CMSurvivor:
         - RMCSurvivorShivasPanicRoomCivilian: 2
 
@@ -254,10 +259,22 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+    nightmareScenarios:
+    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF survivors are in
+      scenarioProbability: 0.15
+    - scenarioName: trijent_surv_spawn_hospital
+      scenarioProbability: 0.15
+    - scenarioName: trijent_surv_spawn_dam
+      scenarioProbability: 0.15
+    - scenarioName: trijent_surv_spawn_tunneldorm
+      scenarioProbability: 0.15
+    - scenarioName: spp_bar
+      scenarioProbability: 0.4
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
-      - CMSurvivorMiner: -1
+      - RMCSurvivorCivilianUnique: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorTrijentChaplain: 1
       - RMCSurvivorHybrisaFireProtectionSpecialist: 1
       CMSurvivorCorporate:
@@ -275,6 +292,27 @@
       - CMSurvivorCMBDeputy: 1
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
+    survivorJobScenarios:
+      spp_bar:
+      - CMSurvivorDoctor: 1
+      - CMSurvivorEngineer: 1
+      - CMSurvivorSecurity: 2
+      - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      spp_bar:
+        CMSurvivorDoctor:
+        - RMCSurvivorSPPCrashlandMedic: 1
+        CMSurvivorEngineer:
+        - RMCSurvivorSPPCrashlandSapper: 1
+        CMSurvivorSecurity:
+        - RMCSurvivorSPPCrashlandSL: 1
+        - RMCSurvivorSPPCrashlandSpec: 1
+        CMSurvivor:
+        - RMCSurvivorSPPCrashlandSoldier: -1
+    survivorJobOverrideScenarios:
+      spp_bar:
+        CMSurvivorScientist: CMSurvivorDoctor
+        CMSurvivorCorporate: CMSurvivor
 #    survivorJobVariantScenarios:
 #      clf_pods:
 #        CMSurvivor:
@@ -312,7 +350,6 @@
 #        CMSurvivorScientist:
 #        - : -1
 
-
 - type: entity
   id: RMCPlanetVaradero
   name: New Varadero
@@ -329,6 +366,9 @@
       Telecommunications Array: Repairs required
 
       No further information available at this time."
+    nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
+    - scenarioName: none
+      scenarioProbability: 1
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
@@ -341,8 +381,10 @@
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorCommanderNewVaradero: 1
       CMSurvivor:
+      - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorBeachBum: -1
-      - CMSurvivorMiner: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
       - CMSurvivorVaraderoICB: 2
@@ -364,6 +406,9 @@
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
+    nightmareScenarios:
+    - scenarioName: none # Reduce this to 0.9 once CLF survivors are in at 0.1
+      scenarioProbability: 1
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingKutjevo
     survivorJobVariants:
@@ -421,6 +466,11 @@
     map: /Maps/_RMC14/hybrisa.yml
     camouflage: Urban
     announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
+    nightmareScenarios:
+    - scenarioName: tse_airbase
+      scenarioProbability: 0.3
+    - scenarioName: none
+      scenarioProbability: 0.7
     minPlayers: 130
     survivorJobVariants:
       CMSurvivor:
@@ -448,6 +498,34 @@
       CMSurvivorScientist:
       - RMCSurvivorHybrisaXenoarchaeologist: 2
       - RMCSurvivorHybrisaXenobiologist: 2
+    survivorJobScenarios:
+      tse_airbase: # Order of job priority for paramarines. Scientist is overriden into doctor, Corporate into survivor
+      - RMCSurvivorCommandingOfficer: 1
+      - RMCSyntheticColony: 1
+      - CMSurvivorDoctor: 1
+      - CMSurvivorEngineer: 1
+      - CMSurvivorSecurity: 2
+      - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      tse_airbase: # RCM Paramarines
+        RMCSurvivorCommandingOfficer:
+        - RMCSurvivorParaCommander: 1
+        RMCSyntheticColony:
+        - RMCSurvivorParaSupportSynthetic: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorParaMedicalTechnician: 1
+        CMSurvivorEngineer:
+        - RMCSurvivorParaAssaultEngineer: 1
+        CMSurvivorSecurity:
+        - RMCSurvivorParaTeamLeader: 1
+        - RMCSurvivorParaPilot: 1
+        CMSurvivor:
+        - RMCSurvivorParamarine: -1
+    survivorJobOverrideScenarios:
+      tse_airbase: # RCM Paramarines
+        CMSurvivorScientist: CMSurvivorDoctor
+        CMSurvivorCorporate: CMSurvivor
+
 
 - type: entity
   id: RMCPlanetSorokyne

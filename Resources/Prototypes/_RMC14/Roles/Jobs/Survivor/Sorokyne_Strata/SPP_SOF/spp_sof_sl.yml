@@ -10,23 +10,12 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
       - SPP
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillConstruction: 2
-        RMCSkillEndurance: 2
-        RMCSkillEngineer: 3
-        RMCSkillFirearms: 1
-        RMCSkillLeadership: 2
-        RMCSkillFireman: 1
-        RMCSkillJtac: 3
-        RMCSkillMeleeWeapons: 1
-        #RMCSkillSpecialistWeapons: 1
-        RMCSkillMedical: 2
-        RMCSkillOverwatch: 1
+      preset: RMCSkillPresetSurvivorSPPLeader
     - type: MarineOrders
     - type: IntelRescueSurvivorObjective
     - type: JobPrefix
@@ -36,6 +25,8 @@
         sprite: _RMC14/Interface/cm_job_icons.rsi
         state: upp_sl_a
     - type: RMCTrackable
+    - type: AssignSquad
+      squad: SquadSPP
     #- type: SPPSpecWhitelist TODO RMC14: SPP special weapons whitelist
   hidden: true
 
@@ -48,11 +39,13 @@
     head: RMCHeadCapSPPSOF
   storage:
     back:
-    - ArmorHelmetSPPHeavy
+    - RMCArmorHelmetSPPSOF
+    - CMSheetMetal20
     outerClothing:
     - RMCTacticalPrybar
     - RMCMagazineRifleAK4047
     - RMCMagazineRifleAK4047
+    - RMCRadioHandheldColony
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaExecBodyguard
   startingGear: RMCGearSyntheticColonistHybrisaExecBodyguard
   spawnMenuRoleName: Executive Bodyguard Synth (Hybrisa Survivor)
@@ -36,7 +36,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaSynthExecBodyguard
     - type: Synth
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
@@ -51,7 +51,7 @@
   name: survivor synth hybrisa executive bodyguard preset
   categories: [ HideSpawnMenu ] # Todo random research notes, telebaton in backpack
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCJumpsuitLiaisonExpensiveSuitDropPouch, RMCSatchelBlack, RMCBootsCorporate ]
     - [ RMCJumpsuitLiaisonExpensiveSuitBrownDropPouch, RMCSatchelBlack, CMBootsBrownFilled ]

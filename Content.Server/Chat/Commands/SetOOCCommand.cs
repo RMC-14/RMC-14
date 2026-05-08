@@ -6,7 +6,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server.Chat.Commands;
 
-[AdminCommand(AdminFlags.Admin)] //RMC14
+[AdminCommand(AdminFlags.Admin)]
 public sealed class SetOOCCommand : LocalizedCommands
 {
     [Dependency] private readonly IConfigurationManager _configManager = default!;

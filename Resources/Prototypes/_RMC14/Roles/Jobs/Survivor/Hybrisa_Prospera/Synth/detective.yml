@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaDetective
   startingGear: RMCGearSyntheticColonistHybrisaDetective
   spawnMenuRoleName: Detective Synth (Hybrisa Survivor)
@@ -36,7 +36,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaSynthDetective
     - type: Synth
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistHybrisaCivilian
@@ -52,7 +52,7 @@
   name: survivor synth hybrisa detective colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
-    - [ RMCGlassesSecurityBlue, RMCCoatBureauTrenchCoatBrown, ClothingHeadHatFedoraBrown, ClothingUniformJumpsuitDetective ]
-    - [ CMGlassesSecurity, RMCCoatBureauTrenchCoatGrey, ClothingHeadHatFedoraGrey, ClothingUniformJumpsuitDetectiveGrey ]
+    - [ RMCGlassesSecurityBlue, RMCCoatBureauTrenchCoatBrown, RMCHeadCapFedoraBrown, ClothingUniformJumpsuitDetective ]
+    - [ CMGlassesSecurity, RMCCoatBureauTrenchCoatGrey, RMCHeadCapFedoraGrey, ClothingUniformJumpsuitDetectiveGrey ]

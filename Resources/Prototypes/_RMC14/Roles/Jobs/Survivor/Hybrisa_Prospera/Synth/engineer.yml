@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaEngineer
   startingGear: RMCGearSyntheticColonistHybrisaEngineer
   spawnMenuRoleName: Engineer Synth (Hybrisa Survivor)
@@ -36,7 +36,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaSynthEngineer
     - type: Synth
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistHybrisaCivilian
@@ -55,7 +55,7 @@
   name: survivor synth hybrisa engineer colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHardhatOrange, RMCJumpsuitCivilianEngineerWorker, RMCHazardVest ]
     - [ RMCOuterEngineeringUtilityOversuit, RMCJumpsuitCivilianEngineerWorker, CMSheetPlasteel10 ]
