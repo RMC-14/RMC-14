@@ -115,7 +115,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     /// <summary>
     /// When a xeno that can secrete resin changes castes, this list is used to determine what their
     /// chosen secretion becomes if it can no longer be secreted, in priority order.
-    /// An selected secretion in any of these lists will become a different secretion in the same list, if possible.
+    /// A selected secretion in any of these lists will become a different secretion in the same list, if possible.
     /// </summary>
     private readonly List<List<EntProtoId>> _similarSecretions = new List<List<EntProtoId>>
     {
@@ -142,6 +142,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoChooseStructureActionEvent>(OnXenoChooseStructureAction);
         SubscribeLocalEvent<XenoConstructionComponent, XenoChangingPrototypeEvent>(OnConstructorChangingPrototype);
+        SubscribeLocalEvent<XenoConstructionComponent, AfterXenoChangedPrototypeEvent>(OnAfterConstructorChangedPrototype);
 
         SubscribeLocalEvent<DesignerStrainComponent, DesignerSelectedDesignToggleActionEvent>(OnDesignerSelectedDesignToggle);
 
@@ -407,6 +408,18 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                     var newSelection = options?.FirstOrNull(item => newComponent.CanBuild.Contains(item));
                     newComponent.BuildChoice = newSelection;
                 }
+            }
+        }
+    }
+
+    private void OnAfterConstructorChangedPrototype(Entity<XenoConstructionComponent> xeno, ref AfterXenoChangedPrototypeEvent args)
+    {
+        if (xeno.Comp.BuildChoice.HasValue)
+        {
+            var ev = new XenoConstructionChosenEvent(xeno.Comp.BuildChoice.Value, xeno.Owner);
+            foreach (var (id, _) in _actions.GetActions(xeno))
+            {
+                RaiseLocalEvent(id, ref ev);
             }
         }
     }
