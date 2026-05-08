@@ -1,11 +1,13 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Audio;
 using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
@@ -42,6 +44,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         SubscribeLocalEvent<RotaryPhoneComponent, BeforeActivatableUIOpenEvent>(OnRotaryPhoneBeforeOpen);
         SubscribeLocalEvent<RotaryPhoneComponent, ComponentShutdown>(OnRotaryPhoneTerminating);
         SubscribeLocalEvent<RotaryPhoneComponent, EntityTerminatingEvent>(OnRotaryPhoneTerminating);
+        SubscribeLocalEvent<RotaryPhoneComponent, GettingAttackedAttemptEvent>(OnRotaryPhoneGettingAttacked);
 
         SubscribeLocalEvent<RotaryPhoneDialingComponent, InteractUsingEvent>(OnRotaryPhoneDialingInteractUsing);
 
@@ -91,6 +94,17 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
             phone.RotaryPhone = null;
             Dirty(ent.Comp.Phone.Value, phone);
         }
+    }
+
+    private void OnRotaryPhoneGettingAttacked(Entity<RotaryPhoneComponent> ent, ref GettingAttackedAttemptEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Attacker))
+            return;
+
+        StopSound(ent);
+
+        _audio.PlayPredicted(RemoteHangupSound, ent, args.Attacker);
+        _popup.PopupClient(Loc.GetString("rmc-dropship-launch-alarm-xeno-shutdown", ("console", ent)), args.Attacker, args.Attacker);
     }
 
     private void OnRotaryPhoneDialingInteractUsing(Entity<RotaryPhoneDialingComponent> ent, ref InteractUsingEvent args)

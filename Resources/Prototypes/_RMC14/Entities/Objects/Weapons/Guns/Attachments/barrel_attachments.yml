@@ -448,6 +448,27 @@
     - RMCAttachmentBarrel
     - RMCAttachmentMatebaSnubNoseGolden
 
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentL49Barrel
+  name: L49 standoff device
+  description: How are you even seeing this?
+  components:
+  - type: Sprite
+    state: choke
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentL49Barrel
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - damageFalloffAddMult: -0.5
+      rangeFlat: 0.5
+  - type: AttachableSilencer
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_choke.ogg
+    hideMuzzleFlash: false
+
 - type: Tag
   id: RMCAttachmentBarrel
 
@@ -510,3 +531,6 @@
 
 - type: Tag
   id: RMCAttachmentMatebaSnubNoseGolden
+
+- type: Tag
+  id: RMCAttachmentL49Barrel
