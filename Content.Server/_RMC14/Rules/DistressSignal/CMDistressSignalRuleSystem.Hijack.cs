@@ -136,7 +136,7 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         var hiveComp = EnsureComp<HiveComponent>(rule.Hive);
-        _hive.IncreaseBurrowedLarva(larva);
+        _hive.ChangeBurrowedLarva(larva);
         _hive.ResetHiveCoreCooldown((rule.Hive, hiveComp));
         var surge = EnsureComp<HijackBurrowedSurgeComponent>(rule.Hive);
         surge.PooledLarva = surgeAmount;
