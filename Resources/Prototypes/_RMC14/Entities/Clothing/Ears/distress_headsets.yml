@@ -243,6 +243,9 @@
   - type: RMCHeadset
     channels:
     - MarineSOF
+  - type: RMCStaticDefaultChannel
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineSOF
   - type: GrantSquadLeaderTracker
     defaultMode: SquadLeader
     trackerModes:
@@ -318,8 +321,6 @@
 - type: entity
   parent: RMCHeadsetForecon
   id: RMCHeadsetMARSOC
-  name: UNMC SOF headset
-  description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
   suffix: ERT
   components:
   - type: ContainerFill
@@ -332,3 +333,21 @@
     defaultMode: MARSOCLeader
     trackerModes:
     - MARSOCLeader
+
+# For Trijent SPP Airborne
+
+- type: entity
+  parent: RMCHeadsetColonyIcons
+  id: RMCHeadsetSPPCrashland
+  name: SPP 173/Airborne headset 
+  description: A headset used by members of the 173rd Airborne Reconnaissance unit.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+      - CMEncryptionKeyColony
+  - type: GrantSquadLeaderTracker
+    defaultMode: SPPAirborneSL
+    trackerModes:
+    - SPPAirborneSL

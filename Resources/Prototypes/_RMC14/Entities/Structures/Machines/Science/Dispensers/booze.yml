@@ -8,6 +8,29 @@
     sprite: _RMC14/Structures/Machines/Science/small_dispensers.rsi
     state: booze_dispenser
     snapCardinals: true
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
   - type: StorageFill
     contents:
     # Water
