@@ -52,7 +52,6 @@ public sealed class SpreaderSystem : EntitySystem
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
 
         SubscribeLocalEvent<EdgeSpreaderComponent, EntityTerminatingEvent>(OnTerminating);
-        SubscribeLocalEvent<ActiveEdgeSpreaderComponent, ComponentStartup>(OnActiveEdgeSpreaderStartup); // RMC14
         SetupPrototypes();
 
         _query = GetEntityQuery<EdgeSpreaderComponent>();
@@ -88,19 +87,6 @@ public sealed class SpreaderSystem : EntitySystem
         ActivateSpreadableNeighbors(entity);
     }
 
-    // RMC14
-    private void OnActiveEdgeSpreaderStartup(Entity<ActiveEdgeSpreaderComponent> entity, ref ComponentStartup args)
-    {
-        if (TryComp<EdgeSpreaderComponent>(entity, out var edgeSpreader))
-        {
-            entity.Comp.NextSpread = _timing.CurTime + edgeSpreader.SpreadDelay;
-        }
-        else
-        {
-            entity.Comp.NextSpread = _timing.CurTime + TimeSpan.FromSeconds(1);
-        }
-    }
-
     /// <inheritdoc/>
     public override void Update(float frameTime)
     {
@@ -126,6 +112,8 @@ public sealed class SpreaderSystem : EntitySystem
             return;
         }
 
+        _robustRandom.Shuffle(spreaders);
+
         // RMC14 _gridUpdates changes moved after collecting spreaders (only updates if there are any spreaders that need updating)
         // Check which grids are valid for spreading
         var spreadGrids = EntityQueryEnumerator<SpreaderGridComponent>();
@@ -137,16 +125,14 @@ public sealed class SpreaderSystem : EntitySystem
             //grid.UpdateAccumulator -= frameTime;
             //if (grid.UpdateAccumulator > 0)
             //    continue;
+            // RMC14 end
 
             _gridUpdates[uid] = _prototypeUpdates.ShallowClone();
-            // RMC14 removed
-            //grid.UpdateAccumulator += SpreadCooldownSeconds;
+            //grid.UpdateAccumulator += SpreadCooldownSeconds; // RMC14 removed
         }
 
         if (_gridUpdates.Count == 0)
             return;
-
-        _robustRandom.Shuffle(spreaders);
 
         // Remove the EdgeSpreaderComponent from any entity
         // that doesn't meet a few trivial prerequisites

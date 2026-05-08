@@ -1,5 +1,3 @@
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-
 namespace Content.Server.Spreader;
 
 /// <summary>
@@ -9,10 +7,4 @@ namespace Content.Server.Spreader;
 [RegisterComponent]
 public sealed partial class ActiveEdgeSpreaderComponent : Component
 {
-    /// RMC14
-    /// <summary>
-    /// Game time for the next spread.
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    public TimeSpan NextSpread = TimeSpan.Zero;
 }
