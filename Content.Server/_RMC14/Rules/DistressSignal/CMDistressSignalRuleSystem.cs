@@ -111,7 +111,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly ARESSystem _ares = default!;
+    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
