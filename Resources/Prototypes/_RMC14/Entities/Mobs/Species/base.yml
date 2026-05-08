@@ -195,9 +195,7 @@
       types:
         Asphyxiation: 1
     stopCritDamageReagent: CMInaprovaline
-    nonDeadDamage:
-      types:
-        Asphyxiation: -0.33
+  - type: RMCRespirator
   - type: NoSlip
   - type: NoClothingSlowdown
   - type: RMCSize

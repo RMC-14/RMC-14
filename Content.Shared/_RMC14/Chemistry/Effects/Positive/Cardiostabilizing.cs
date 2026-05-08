@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Respiration;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
@@ -26,7 +27,12 @@ public sealed partial class Cardiostabilizing : RMCChemicalEffect
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         // TODO RMC14 Pain Reduction
-        // TODO RMC14 M.losebreath
+
+        if (TryComp(args, out RMCRespiratorComponent? comp) && comp.LoseBreath >= 10f)
+        {
+            var rmcRespirator = System<RMCRespiratorSystem>(args);
+            rmcRespirator.SetLoseBreath(args.TargetEntity, MathF.Max(10f, comp.LoseBreath - 2.5f * (float) potency));
+        }
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

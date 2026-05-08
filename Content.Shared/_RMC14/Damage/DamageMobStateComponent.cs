@@ -14,9 +14,6 @@ public sealed partial class DamageMobStateComponent : Component
     public DamageSpecifier CritDamage = new();
 
     [DataField, AutoNetworkedField]
-    public DamageSpecifier NonDeadDamage = new();
-
-    [DataField, AutoNetworkedField]
     public ProtoId<ReagentPrototype> StopCritDamageReagent = "CMInaprovaline";
 
     [DataField, AutoNetworkedField]
