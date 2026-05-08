@@ -5,6 +5,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Shared._RMC14.UniversalRecorder;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Atmos;
 using Content.Shared.Chat;
 using Content.Shared.Containers.ItemSlots;
@@ -24,7 +25,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -66,6 +66,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         SubscribeLocalEvent<UniversalRecorderComponent, InteractUsingEvent>(OnRecorderInteractUsing);
         SubscribeLocalEvent<UniversalRecorderComponent, GetVerbsEvent<AlternativeVerb>>(OnRecorderGetVerbs);
         SubscribeLocalEvent<UniversalRecorderComponent, UniversalRecorderRecorderActionBuiMsg>(OnRecorderBuiAction);
+        SubscribeLocalEvent<UniversalRecorderComponent, BoundUserInterfaceCheckRangeEvent>(OnRecorderUiRangeCheck);
         SubscribeLocalEvent<UniversalRecorderComponent, ListenEvent>(OnRecorderListen);
         SubscribeLocalEvent<UniversalRecorderComponent, EntInsertedIntoContainerMessage>(OnRecorderTapeInserted);
         SubscribeLocalEvent<UniversalRecorderComponent, EntRemovedFromContainerMessage>(OnRecorderTapeRemoved);
@@ -194,7 +195,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private void OnRecorderUseInHand(Entity<UniversalRecorderComponent> ent, ref UseInHandEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !CanUse(args.User))
             return;
 
         if (!TryGetTape(ent, out var tape))
@@ -217,7 +218,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private void OnRecorderInteractUsing(Entity<UniversalRecorderComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled || !HasComp<UniversalRecorderTapeComponent>(args.Used))
+        if (args.Handled || !CanUse(args.User) || !HasComp<UniversalRecorderTapeComponent>(args.Used))
             return;
 
         if (TryGetTape(ent, out _))
@@ -235,7 +236,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private void OnRecorderGetVerbs(Entity<UniversalRecorderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || !TryGetTape(ent, out var tape))
+        if (!args.CanAccess || !args.CanInteract || !CanUse(args.User) || !TryGetTape(ent, out var tape))
             return;
 
         var user = args.User;
@@ -288,7 +289,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private void OnTapeUseInHand(Entity<UniversalRecorderTapeComponent> ent, ref UseInHandEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !CanUse(args.User))
             return;
 
         if (GetTapeRuntime(ent).Unspooled)
@@ -303,6 +304,9 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private void OnTapeBuiAction(Entity<UniversalRecorderTapeComponent> ent, ref UniversalRecorderTapeActionBuiMsg args)
     {
+        if (!CanUse(args.Actor))
+            return;
+
         switch (args.Action)
         {
             case UniversalRecorderTapeAction.Flip:
@@ -319,12 +323,24 @@ public sealed class UniversalRecorderSystem : EntitySystem
         if (args.Result == BoundUserInterfaceRangeResult.Fail || args.UiKey is not UniversalRecorderUiKey.Tape)
             return;
 
-        if (!_hands.IsHolding(args.Actor.Owner, ent.Owner))
+        if (!CanUse(args.Actor.Owner) || !_hands.IsHolding(args.Actor.Owner, ent.Owner))
+            args.Result = BoundUserInterfaceRangeResult.Fail;
+    }
+
+    private void OnRecorderUiRangeCheck(Entity<UniversalRecorderComponent> ent, ref BoundUserInterfaceCheckRangeEvent args)
+    {
+        if (args.Result == BoundUserInterfaceRangeResult.Fail || args.UiKey is not UniversalRecorderUiKey.Recorder)
+            return;
+
+        if (!CanUse(args.Actor.Owner))
             args.Result = BoundUserInterfaceRangeResult.Fail;
     }
 
     private void OnRecorderBuiAction(Entity<UniversalRecorderComponent> ent, ref UniversalRecorderRecorderActionBuiMsg args)
     {
+        if (!CanUse(args.Actor))
+            return;
+
         switch (args.Action)
         {
             case UniversalRecorderRecorderAction.Record:
@@ -354,6 +370,9 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private bool TryOpenRecorderUi(Entity<UniversalRecorderComponent> ent, EntityUid user)
     {
+        if (!CanUse(user))
+            return false;
+
         if (!TryGetTape(ent, out var tape))
         {
             _popup.PopupEntity(Loc.GetString("rmc-universal-recorder-popup-no-tape"), ent.Owner, user);
@@ -376,6 +395,9 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private bool TryOpenTapeUi(Entity<UniversalRecorderTapeComponent> ent, EntityUid user)
     {
+        if (!CanUse(user))
+            return false;
+
         var actions = GetTapeRadialActions(ent);
         if (actions.Count == 0)
             return false;
@@ -427,7 +449,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private void OnTapeGetVerbs(Entity<UniversalRecorderTapeComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || !TryComp<HandsComponent>(args.User, out var hands) || !_hands.IsHolding((args.User, hands), ent.Owner))
+        if (!args.CanAccess || !args.CanInteract || !CanUse(args.User) || !TryComp<HandsComponent>(args.User, out var hands) || !_hands.IsHolding((args.User, hands), ent.Owner))
             return;
 
         var user = args.User;
@@ -462,7 +484,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
     private void OnTapeInteractUsing(Entity<UniversalRecorderTapeComponent> ent, ref InteractUsingEvent args)
     {
         var runtime = GetTapeRuntime(ent);
-        if (args.Handled || !runtime.Unspooled)
+        if (args.Handled || !CanUse(args.User) || !runtime.Unspooled)
             return;
 
         if (!_tool.HasQuality(args.Used, ent.Comp.ScrewdriverQuality))
@@ -596,6 +618,9 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private bool StartRecording(Entity<UniversalRecorderComponent> ent, EntityUid user)
     {
+        if (!CanUse(user))
+            return false;
+
         var runtime = GetRecorderRuntime(ent);
         if (runtime.State != UniversalRecorderState.Stopped)
             return false;
@@ -639,6 +664,9 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private bool StartPlayback(Entity<UniversalRecorderComponent> ent, EntityUid user)
     {
+        if (!CanUse(user))
+            return false;
+
         var runtime = GetRecorderRuntime(ent);
         if (runtime.State != UniversalRecorderState.Stopped)
             return false;
@@ -818,6 +846,9 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private bool PrintTranscript(Entity<UniversalRecorderComponent> ent, EntityUid user)
     {
+        if (!CanUse(user))
+            return false;
+
         var runtime = GetRecorderRuntime(ent);
         if (runtime.State != UniversalRecorderState.Stopped)
             return false;
@@ -956,23 +987,18 @@ public sealed class UniversalRecorderSystem : EntitySystem
             ("fontSize", entry.FontSize),
             ("message", FormattedMessage.EscapeText(entry.Text)));
 
-        var channels = new HashSet<INetChannel>();
-        foreach (var recipient in Filter.Pvs(ent.Owner, entityManager: EntityManager).Recipients)
-        {
-            channels.Add(recipient.Channel);
-        }
+        var filter = Filter.Pvs(ent.Owner, entityManager: EntityManager);
+        filter.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
 
-        if (channels.Count == 0)
-            return;
-
-        _chatManager.ChatMessageToMany(
+        _chatManager.ChatMessageToManyFiltered(
+            filter,
             ChatChannel.Local,
             entry.Text,
             wrapped,
             ent.Owner,
             hideChat: true,
             recordReplay: true,
-            channels);
+            colorOverride: null);
     }
 
     private TimeSpan GetCurrentRecordedDuration(
@@ -1065,12 +1091,17 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
     private UniversalRecorderRuntimeComponent GetRecorderRuntime(EntityUid uid)
     {
-        return EnsureComp<UniversalRecorderRuntimeComponent>(uid);
+        return Comp<UniversalRecorderRuntimeComponent>(uid);
     }
 
     private UniversalRecorderTapeRuntimeComponent GetTapeRuntime(EntityUid uid)
     {
-        return EnsureComp<UniversalRecorderTapeRuntimeComponent>(uid);
+        return Comp<UniversalRecorderTapeRuntimeComponent>(uid);
+    }
+
+    private bool CanUse(EntityUid user)
+    {
+        return !HasComp<XenoComponent>(user);
     }
 
     private static string FormatTimestamp(TimeSpan timestamp)

@@ -1,5 +1,7 @@
+using Content.Shared.Tools;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.UniversalRecorder;
 
@@ -13,7 +15,7 @@ public sealed partial class UniversalRecorderTapeComponent : Component
     public TimeSpan RespoolTime = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public string ScrewdriverQuality = "Screwing";
+    public ProtoId<ToolQualityPrototype> ScrewdriverQuality = "Screwing";
 
     [DataField]
     public SoundSpecifier FlipSound = new SoundPathSpecifier("/Audio/Items/taperecorder/tape_flip.ogg");

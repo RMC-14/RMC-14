@@ -13,12 +13,12 @@ public sealed class UniversalRecorderVisualizerSystem : VisualizerSystem<Univers
         SubscribeLocalEvent<UniversalRecorderComponent, ComponentStartup>(OnComponentStartup);
     }
 
-    private void OnComponentStartup(EntityUid uid, UniversalRecorderComponent component, ComponentStartup args)
+    private void OnComponentStartup(Entity<UniversalRecorderComponent> ent, ref ComponentStartup args)
     {
-        if (!TryComp(uid, out SpriteComponent? sprite))
+        if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        UpdateState(uid, sprite, TryComp(uid, out AppearanceComponent? appearance) ? appearance : null);
+        UpdateState(ent, sprite, TryComp(ent, out AppearanceComponent? appearance) ? appearance : null);
     }
 
     protected override void OnAppearanceChange(EntityUid uid, UniversalRecorderComponent component, ref AppearanceChangeEvent args)
