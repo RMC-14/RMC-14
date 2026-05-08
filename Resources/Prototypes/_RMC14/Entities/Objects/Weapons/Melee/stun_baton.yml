@@ -168,7 +168,6 @@
     energyPerUse: 250
   - type: RMCStaminaDamageOnHit
     damage: 40
-    sound: /Audio/Weapons/egloves.ogg
   - type: ItemToggle
     predictable: false
     soundActivate:
