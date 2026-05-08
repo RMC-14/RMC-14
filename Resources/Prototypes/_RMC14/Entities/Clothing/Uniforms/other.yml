@@ -534,7 +534,7 @@
     startingWebbing: RMCWebbingHolsterBlackM1984
 
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitPrisonGuard
   name: corrections guard uniform
   description: A UN Fiorina Orbital Prison Guard's uniform, worn by the station's WEYA correctional peace officers and CMB correctional deputies. It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection.
