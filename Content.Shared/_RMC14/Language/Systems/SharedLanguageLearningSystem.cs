@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
-using Content.Shared._RMC14.Language.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Linq;
@@ -15,10 +14,7 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
     [Dependency] protected readonly IRobustRandom _random = default!;
     [Dependency] protected readonly SharedLanguageSystem _languageSystem = default!;
 
-    protected const float MinComprehensionToSpeak = 0.2f;
     protected static readonly Regex WordRegex = new(@"\b[\w']+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-    protected static readonly char[] GarbleChars = { '~', '?', '*', '#', '¿', '§' };
-
     public string ProcessMessageForListener(EntityUid listener, string message, ProtoId<LanguagePrototype> language)
     {
         if (_languageSystem.CanUnderstand(listener, language))
@@ -69,13 +65,9 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
 
             var wordComprehension = 0f;
             if (learnedWords?.ContainsKey(wordLower) == true)
-            {
                 wordComprehension = learnedWords[wordLower];
-            }
             else
-            {
                 wordComprehension = Math.Max(overallComprehension, defaultComprehension);
-            }
 
             var effectiveComprehension = Math.Max(wordComprehension, overallComprehension);
 
@@ -85,7 +77,7 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
             }
             else if (effectiveComprehension >= thresholds.Partial)
             {
-                result.Append(LightlyGarbleWord(word, effectiveComprehension));
+                result.Append(LightlyGarbleWord(word, language, effectiveComprehension));
             }
             else
             {
@@ -117,18 +109,31 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
             effectiveComprehension);
     }
 
-    protected string LightlyGarbleWord(string word, float comprehension)
+    protected string LightlyGarbleWord(string word, ProtoId<LanguagePrototype> language, float comprehension)
     {
-        var garbleRate = Math.Max(0.1f, (1.0f - comprehension) * 0.75f);
+        var garbleCharacters = LanguagePrototype.DefaultPartialGarbleCharactersValue;
+        var minimumGarbleRate = LanguagePrototype.DefaultMinimumPartialGarbleRateValue;
+        var garbleRateMultiplier = LanguagePrototype.DefaultPartialGarbleRateMultiplierValue;
 
-        var result = new StringBuilder(word);
-        for (int i = 1; i < word.Length - 1; i++)
+        if (_prototypeManager.TryIndex(language, out var languageProto))
         {
-            if (char.IsLetter(word[i]) && _random.Prob(garbleRate))
-            {
-                var garbleChar = _random.Pick(GarbleChars);
-                result[i] = char.IsUpper(word[i]) ? char.ToUpperInvariant(garbleChar) : garbleChar;
-            }
+            if (!string.IsNullOrEmpty(languageProto.PartialGarbleCharacters))
+                garbleCharacters = languageProto.PartialGarbleCharacters;
+
+            minimumGarbleRate = languageProto.MinimumPartialGarbleRate;
+            garbleRateMultiplier = languageProto.PartialGarbleRateMultiplier;
+        }
+
+        var garbleRate = Math.Max(minimumGarbleRate, (1.0f - comprehension) * garbleRateMultiplier);
+        var result = new StringBuilder(word);
+
+        for (var i = 1; i < word.Length - 1; i++)
+        {
+            if (!char.IsLetter(word[i]) || !_random.Prob(garbleRate))
+                continue;
+
+            var garbleChar = garbleCharacters[_random.Next(garbleCharacters.Length)];
+            result[i] = char.IsUpper(word[i]) ? char.ToUpperInvariant(garbleChar) : garbleChar;
         }
 
         return result.ToString();
@@ -138,8 +143,10 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
     {
         var matches = WordRegex.Matches(message);
         var words = new List<string>(matches.Count);
+
         foreach (Match match in matches)
             words.Add(match.Value);
+
         return words;
     }
 
@@ -147,26 +154,32 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
     {
         if (!comp.Languages.TryGetValue(language, out var languageData) ||
             languageData.LearnedWords.Count == 0)
+        {
             return 0f;
+        }
 
         if (!_prototypeManager.TryIndex(language, out var languageProto))
             return 0f;
 
-        const int MinRequiredWords = 15;
-        var expectedVocabSize = Math.Max(MinRequiredWords, languageProto.ExpectedVocabularySize);
+        var minimumRequiredWords = Math.Max(1, languageProto.MinimumRequiredLearnedWords);
+        var expectedVocabSize = Math.Max(minimumRequiredWords, languageProto.ExpectedVocabularySize);
 
-        if (languageData.LearnedWords.Count < MinRequiredWords)
+        if (languageData.LearnedWords.Count < minimumRequiredWords)
         {
-            var wordCountFactor = (float) languageData.LearnedWords.Count / MinRequiredWords;
+            var wordCountFactor = (float) languageData.LearnedWords.Count / minimumRequiredWords;
             var baseComprehension = CalculateBaseComprehension(languageData);
-            return Math.Min(0.95f, baseComprehension * wordCountFactor);
+            return Math.Min(languageProto.MaximumOverallComprehension, baseComprehension * wordCountFactor);
         }
 
         var vocabularyCompleteness = Math.Min(1.0f, (float) languageData.LearnedWords.Count / expectedVocabSize);
         var averageWordComprehension = CalculateBaseComprehension(languageData);
+        var totalWeight = languageProto.LearnedWordComprehensionWeight + languageProto.VocabularyCompletenessWeight;
+        var combinedComprehension = totalWeight > 0f
+            ? ((averageWordComprehension * languageProto.LearnedWordComprehensionWeight) +
+               (vocabularyCompleteness * languageProto.VocabularyCompletenessWeight)) / totalWeight
+            : averageWordComprehension;
 
-        var combinedComprehension = (averageWordComprehension * 0.7f) + (vocabularyCompleteness * 0.3f);
-        return Math.Min(0.95f, combinedComprehension);
+        return Math.Min(languageProto.MaximumOverallComprehension, combinedComprehension);
     }
 
     private static float CalculateBaseComprehension(LanguageLearningData languageData)
@@ -197,7 +210,9 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
     {
         if (!TryComp<LanguageLearningComponent>(entity, out var comp) ||
             !comp.Languages.TryGetValue(language, out var languageData))
+        {
             return new Dictionary<string, float>();
+        }
 
         return new Dictionary<string, float>(languageData.LearnedWords);
     }
@@ -206,6 +221,7 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
     {
         if (_prototypeManager.TryIndex(language, out var languageProto))
             return languageProto.DefaultWordComprehension;
+
         return 0.0f;
     }
 
@@ -213,6 +229,9 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
     {
         if (_prototypeManager.TryIndex(language, out var languageProto))
             return (languageProto.ClearComprehensionThreshold, languageProto.PartialComprehensionThreshold);
-        return (0.6f, 0.2f);
+
+        return (
+            LanguagePrototype.DefaultClearComprehensionThresholdValue,
+            LanguagePrototype.DefaultPartialComprehensionThresholdValue);
     }
 }

@@ -6,8 +6,15 @@ namespace Content.Shared._RMC14.Language;
 public sealed partial class SyllableObfuscation : ReplacementObfuscation
 {
     private const char EndOfFile = (char)0;
-    private const float FullComprehensionThreshold = 0.8f;
-    private const float PartialComprehensionThreshold = 0.6f;
+
+    [DataField]
+    public float ClearWordThreshold = 0.8f;
+
+    [DataField]
+    public float PartialWordThreshold = 0.6f;
+
+    [DataField]
+    public int MinimumPartialWordLength = 3;
 
     [DataField]
     public int MinSyllables = 1;
@@ -24,7 +31,16 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
     {
         if (Replacement.Count == 0) return;
 
-        var wordProcessor = new WordProcessor(message, context, Replacement, comprehension, randomize);
+        var wordProcessor = new WordProcessor(
+            message,
+            context,
+            Replacement,
+            comprehension,
+            randomize,
+            ClearWordThreshold,
+            PartialWordThreshold,
+            MinimumPartialWordLength,
+            ComprehensionVariance);
         wordProcessor.ProcessWords(builder, MinSyllables, MaxSyllables);
     }
 
@@ -35,15 +51,25 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
         private readonly IReadOnlyList<string> _replacement;
         private readonly float _comprehension;
         private readonly bool _randomize;
+        private readonly float _clearWordThreshold;
+        private readonly float _partialWordThreshold;
+        private readonly int _minimumPartialWordLength;
+        private readonly float _comprehensionVariance;
 
         public WordProcessor(string message, SharedLanguageSystem context,
-            IReadOnlyList<string> replacement, float comprehension, bool randomize)
+            IReadOnlyList<string> replacement, float comprehension, bool randomize,
+            float clearWordThreshold, float partialWordThreshold, int minimumPartialWordLength,
+            float comprehensionVariance)
         {
             _message = message;
             _context = context;
             _replacement = replacement;
             _comprehension = comprehension;
             _randomize = randomize;
+            _clearWordThreshold = clearWordThreshold;
+            _partialWordThreshold = partialWordThreshold;
+            _minimumPartialWordLength = minimumPartialWordLength;
+            _comprehensionVariance = comprehensionVariance;
         }
 
         public void ProcessWords(StringBuilder builder, int minSyllables, int maxSyllables)
@@ -79,13 +105,18 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
             if (wordLength <= 0) return;
 
             var word = _message.Substring(wordBeginIndex, wordLength);
-            var wordComprehension = CalculateWordComprehension(word, _comprehension, _context, _randomize);
+            var wordComprehension = CalculateWordComprehension(
+                word,
+                _comprehension,
+                _context,
+                _randomize,
+                _comprehensionVariance);
 
-            if (wordComprehension >= FullComprehensionThreshold)
+            if (wordComprehension >= _clearWordThreshold)
             {
                 builder.Append(word);
             }
-            else if (wordComprehension >= PartialComprehensionThreshold && wordLength > 2)
+            else if (wordComprehension >= _partialWordThreshold && wordLength >= _minimumPartialWordLength)
             {
                 ObfuscateWordPartially(builder, word, hashCode, maxSyllables, wordComprehension);
             }

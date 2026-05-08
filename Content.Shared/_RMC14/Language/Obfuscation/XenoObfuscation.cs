@@ -5,9 +5,14 @@ namespace Content.Shared._RMC14.Language;
 
 public sealed partial class XenoObfuscation : ObfuscationMethod
 {
-    private const float MinComprehensionThreshold = 0.01f;
-    private const float HighComprehensionThreshold = 0.85f;
-    private const float BaseObfuscationChance = 0.7f;
+    [DataField]
+    public float CompleteObfuscationThreshold = 0.01f;
+
+    [DataField]
+    public float ClearWordThreshold = 0.85f;
+
+    [DataField]
+    public float BaseObfuscationChance = 0.7f;
 
     [DataField]
     public List<string> XenoSounds = new()
@@ -17,10 +22,22 @@ public sealed partial class XenoObfuscation : ObfuscationMethod
     };
 
     [DataField]
-    public char[] GarbleChars = { '~', '?', '*', '#', '¿', '§' };
+    public char[] GarbleChars = { '~', '?', '*', '#' };
 
     [DataField]
     public float IntensityMultiplier = 1.0f;
+
+    [DataField]
+    public int MinSoundsPerWord = 1;
+
+    [DataField]
+    public int MaxSoundsPerWord = 3;
+
+    [DataField]
+    public float HyphenChance = 1f / 3f;
+
+    [DataField]
+    public float SoundReplacementChance = 1f / 3f;
 
     internal override void ObfuscateInternal(
         StringBuilder builder,
@@ -38,9 +55,10 @@ public sealed partial class XenoObfuscation : ObfuscationMethod
         bool randomize,
         float comprehension)
     {
-        if (XenoSounds.Count == 0 || GarbleChars.Length == 0) return;
+        if (XenoSounds.Count == 0 || GarbleChars.Length == 0)
+            return;
 
-        if (comprehension <= MinComprehensionThreshold)
+        if (comprehension <= CompleteObfuscationThreshold)
         {
             ObfuscateCompletelyAsXeno(builder, message, context, randomize);
             return;
@@ -52,6 +70,10 @@ public sealed partial class XenoObfuscation : ObfuscationMethod
             GarbleChars,
             comprehension,
             IntensityMultiplier,
+            ClearWordThreshold,
+            BaseObfuscationChance,
+            SoundReplacementChance,
+            ComprehensionVariance,
             context,
             randomize);
         processor.ProcessMessage(builder);
@@ -101,11 +123,11 @@ public sealed partial class XenoObfuscation : ObfuscationMethod
 
     private void AppendXenoSoundsForWord(StringBuilder builder, System.Random random)
     {
-        var soundCount = random.Next(1, 4);
+        var soundCount = random.Next(MinSoundsPerWord, MaxSoundsPerWord + 1);
 
         for (var i = 0; i < soundCount; i++)
         {
-            if (i > 0 && random.Next(0, 3) == 0)
+            if (i > 0 && random.NextDouble() < HyphenChance)
                 builder.Append('-');
 
             builder.Append(XenoSounds[random.Next(XenoSounds.Count)]);
@@ -125,18 +147,35 @@ public sealed partial class XenoObfuscation : ObfuscationMethod
         private readonly char[] _garbleChars;
         private readonly float _comprehension;
         private readonly float _intensityMultiplier;
+        private readonly float _clearWordThreshold;
+        private readonly float _baseObfuscationChance;
+        private readonly float _soundReplacementChance;
+        private readonly float _comprehensionVariance;
         private readonly SharedLanguageSystem _context;
         private readonly bool _randomize;
 
-        public XenoWordProcessor(string message, IReadOnlyList<string> xenoSounds,
-            char[] garbleChars, float comprehension, float intensityMultiplier,
-            SharedLanguageSystem context, bool randomize)
+        public XenoWordProcessor(
+            string message,
+            IReadOnlyList<string> xenoSounds,
+            char[] garbleChars,
+            float comprehension,
+            float intensityMultiplier,
+            float clearWordThreshold,
+            float baseObfuscationChance,
+            float soundReplacementChance,
+            float comprehensionVariance,
+            SharedLanguageSystem context,
+            bool randomize)
         {
             _message = message;
             _xenoSounds = xenoSounds;
             _garbleChars = garbleChars;
             _comprehension = comprehension;
             _intensityMultiplier = intensityMultiplier;
+            _clearWordThreshold = clearWordThreshold;
+            _baseObfuscationChance = baseObfuscationChance;
+            _soundReplacementChance = soundReplacementChance;
+            _comprehensionVariance = comprehensionVariance;
             _context = context;
             _randomize = randomize;
         }
@@ -167,49 +206,45 @@ public sealed partial class XenoObfuscation : ObfuscationMethod
 
         private void ProcessWord(StringBuilder builder, string word, System.Random random)
         {
-            if (string.IsNullOrEmpty(word)) return;
+            if (string.IsNullOrEmpty(word))
+                return;
 
-            var wordComprehension = CalculateWordComprehension(word, _comprehension, _context, _randomize);
+            var wordComprehension = CalculateWordComprehension(
+                word,
+                _comprehension,
+                _context,
+                _randomize,
+                _comprehensionVariance);
 
-            if (wordComprehension >= HighComprehensionThreshold)
+            if (wordComprehension >= _clearWordThreshold)
             {
                 builder.Append(word);
                 return;
             }
 
-            var obfuscationChance = (1.0f - wordComprehension) * BaseObfuscationChance * _intensityMultiplier;
+            var obfuscationChance = (1.0f - wordComprehension) * _baseObfuscationChance * _intensityMultiplier;
 
             foreach (var ch in word)
             {
-                if (char.IsLetter(ch))
-                {
-                    if (random.NextDouble() < obfuscationChance)
-                    {
-                        AppendObfuscatedCharacter(builder, random);
-                    }
-                    else
-                    {
-                        builder.Append(ch);
-                    }
-                }
-                else
+                if (!char.IsLetter(ch))
                 {
                     builder.Append(ch);
+                    continue;
                 }
+
+                if (random.NextDouble() < obfuscationChance)
+                    AppendObfuscatedCharacter(builder, random);
+                else
+                    builder.Append(ch);
             }
         }
 
         private void AppendObfuscatedCharacter(StringBuilder builder, System.Random random)
         {
-            // 1/3 chance for xeno sound, 2/3 chance for garble character
-            if (random.Next(0, 3) == 0)
-            {
+            if (random.NextDouble() < _soundReplacementChance)
                 builder.Append(_xenoSounds[random.Next(_xenoSounds.Count)]);
-            }
             else
-            {
                 builder.Append(_garbleChars[random.Next(_garbleChars.Length)]);
-            }
         }
     }
 }

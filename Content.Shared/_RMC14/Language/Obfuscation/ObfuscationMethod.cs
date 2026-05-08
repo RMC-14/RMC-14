@@ -11,6 +11,9 @@ public abstract partial class ObfuscationMethod
         Replacement = new List<string> { "<?>" }
     };
 
+    [DataField]
+    public float ComprehensionVariance = 0.1f;
+
     internal abstract void ObfuscateInternal(
         StringBuilder builder,
         string message,
@@ -32,10 +35,11 @@ public abstract partial class ObfuscationMethod
         string word,
         float baseComprehension,
         SharedLanguageSystem context,
-        bool randomize)
+        bool randomize,
+        float varianceRange)
     {
         var random = context.CreateRandom(word.GetHashCode(), randomize);
-        var variance = random.NextSingle() * 0.2f - 0.1f;
+        var variance = random.NextSingle() * (varianceRange * 2f) - varianceRange;
         return Math.Clamp(baseComprehension + variance, 0.0f, 1.0f);
     }
 }

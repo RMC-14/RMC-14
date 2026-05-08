@@ -34,7 +34,13 @@ public sealed partial class LanguageLearningComponent : Component
     public float BaseWordLearningRate = 0.45f;
 
     [DataField]
+    public float InitialWordLearningRate = 0.25f;
+
+    [DataField]
     public float FrequencyLearningBonus = 0.05f;
+
+    [DataField]
+    public float MaxFrequencyLearningBonus = 0.2f;
 
     [DataField]
     public float ContextLearningBonus = 0.05f;
@@ -55,6 +61,12 @@ public sealed partial class LanguageLearningComponent : Component
     public int MaxLearningFromSameSource = 999;
 
     [DataField]
+    public float MinimumDiminishingFactor = 0.2f;
+
+    [DataField]
+    public float MinimumDistancePenalty = 0.5f;
+
+    [DataField]
     public TimeSpan MinTimeBetweenLearning = TimeSpan.FromSeconds(2);
 
     [DataField]
@@ -62,6 +74,12 @@ public sealed partial class LanguageLearningComponent : Component
 
     [DataField]
     public float ComprehensionThreshold = 0.5f;
+
+    [DataField]
+    public float FluentComprehensionThreshold = 0.6f;
+
+    [DataField]
+    public float MasteredComprehensionThreshold = 0.8f;
 
     [DataField]
     public int MaxContextWordsStored = 50;

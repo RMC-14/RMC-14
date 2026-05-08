@@ -5,7 +5,8 @@ namespace Content.Shared._RMC14.Language;
 
 public sealed partial class PhraseObfuscation : ReplacementObfuscation
 {
-    private const float FullComprehensionThreshold = 0.8f;
+    [DataField]
+    public float ClearSentenceThreshold = 0.8f;
 
     [DataField]
     public int MinPhrases = 1;
@@ -28,7 +29,13 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
     {
         if (Replacement.Count == 0) return;
 
-        var sentenceProcessor = new SentenceProcessor(message, context, Replacement, comprehension, randomize);
+        var sentenceProcessor = new SentenceProcessor(
+            message,
+            context,
+            Replacement,
+            comprehension,
+            randomize,
+            ClearSentenceThreshold);
         sentenceProcessor.ProcessSentences(builder, MinPhrases, MaxPhrases, Separator, Proportion);
     }
 
@@ -39,15 +46,17 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
         private readonly IReadOnlyList<string> _replacement;
         private readonly float _comprehension;
         private readonly bool _randomize;
+        private readonly float _clearSentenceThreshold;
 
         public SentenceProcessor(string message, SharedLanguageSystem context,
-            IReadOnlyList<string> replacement, float comprehension, bool randomize)
+            IReadOnlyList<string> replacement, float comprehension, bool randomize, float clearSentenceThreshold)
         {
             _message = message;
             _context = context;
             _replacement = replacement;
             _comprehension = comprehension;
             _randomize = randomize;
+            _clearSentenceThreshold = clearSentenceThreshold;
         }
 
         public void ProcessSentences(StringBuilder builder, int minPhrases, int maxPhrases,
@@ -84,7 +93,7 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
 
             var sentence = _message.Substring(sentenceBeginIndex, length);
 
-            if (_comprehension >= FullComprehensionThreshold)
+            if (_comprehension >= _clearSentenceThreshold)
             {
                 builder.Append(sentence);
                 return;

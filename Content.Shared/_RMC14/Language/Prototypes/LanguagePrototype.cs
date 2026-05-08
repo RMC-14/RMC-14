@@ -9,6 +9,17 @@ namespace Content.Shared._RMC14.Language.Prototypes;
 [Prototype]
 public sealed partial class LanguagePrototype : IPrototype
 {
+    public const float DefaultWordComprehensionValue = 0.0f;
+    public const float DefaultClearComprehensionThresholdValue = 0.6f;
+    public const float DefaultPartialComprehensionThresholdValue = 0.2f;
+    public const string DefaultPartialGarbleCharactersValue = "~?*#";
+    public const float DefaultMinimumPartialGarbleRateValue = 0.1f;
+    public const float DefaultPartialGarbleRateMultiplierValue = 0.75f;
+    public const int DefaultMinimumRequiredLearnedWordsValue = 15;
+    public const float DefaultMaximumOverallComprehensionValue = 0.95f;
+    public const float DefaultLearnedWordComprehensionWeightValue = 0.7f;
+    public const float DefaultVocabularyCompletenessWeightValue = 0.3f;
+
     [IdDataField]
     public string ID { get; private set; } = default!;
 
@@ -64,13 +75,34 @@ public sealed partial class LanguagePrototype : IPrototype
     public int ExpectedVocabularySize { get; set; } = 100;
 
     [DataField]
-    public float DefaultWordComprehension { get; set; } = 0.0f;
+    public float DefaultWordComprehension { get; set; } = DefaultWordComprehensionValue;
 
     [DataField]
-    public float ClearComprehensionThreshold { get; set; } = 0.6f;
+    public float ClearComprehensionThreshold { get; set; } = DefaultClearComprehensionThresholdValue;
 
     [DataField]
-    public float PartialComprehensionThreshold { get; set; } = 0.2f;
+    public float PartialComprehensionThreshold { get; set; } = DefaultPartialComprehensionThresholdValue;
+
+    [DataField]
+    public string PartialGarbleCharacters { get; set; } = DefaultPartialGarbleCharactersValue;
+
+    [DataField]
+    public float MinimumPartialGarbleRate { get; set; } = DefaultMinimumPartialGarbleRateValue;
+
+    [DataField]
+    public float PartialGarbleRateMultiplier { get; set; } = DefaultPartialGarbleRateMultiplierValue;
+
+    [DataField]
+    public int MinimumRequiredLearnedWords { get; set; } = DefaultMinimumRequiredLearnedWordsValue;
+
+    [DataField]
+    public float MaximumOverallComprehension { get; set; } = DefaultMaximumOverallComprehensionValue;
+
+    [DataField]
+    public float LearnedWordComprehensionWeight { get; set; } = DefaultLearnedWordComprehensionWeightValue;
+
+    [DataField]
+    public float VocabularyCompletenessWeight { get; set; } = DefaultVocabularyCompletenessWeightValue;
 
     public string LocalizedName => Loc.GetString($"language-{ID}-name");
     public string ChatName => Loc.GetString($"chat-language-{ID}-name");

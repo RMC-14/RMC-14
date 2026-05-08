@@ -186,8 +186,12 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         if (studyCount >= comp.MaxLearningFromSameSource)
             return;
 
-        var diminishingFactor = Math.Max(0.2f, 1.0f - (studyCount / (float)comp.MaxLearningFromSameSource));
-        var distancePenalty = Math.Max(0.5f, 1.0f - (distance / comp.LearningRange));
+        var diminishingFactor = Math.Max(
+            comp.MinimumDiminishingFactor,
+            1.0f - (studyCount / (float) comp.MaxLearningFromSameSource));
+        var distancePenalty = Math.Max(
+            comp.MinimumDistancePenalty,
+            1.0f - (distance / comp.LearningRange));
 
         var languageData = EnsureLanguageTracking(comp, language);
 
@@ -212,8 +216,10 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
             languageData.WordFrequency[wordLower] = languageData.WordFrequency.GetValueOrDefault(wordLower, 0) + 1;
 
-            var baseRate = currentComprehension == 0f ? 0.25f : comp.BaseWordLearningRate;
-            var frequencyBonus = Math.Min(languageData.WordFrequency[wordLower] * comp.FrequencyLearningBonus, 0.2f);
+            var baseRate = currentComprehension == 0f ? comp.InitialWordLearningRate : comp.BaseWordLearningRate;
+            var frequencyBonus = Math.Min(
+                languageData.WordFrequency[wordLower] * comp.FrequencyLearningBonus,
+                comp.MaxFrequencyLearningBonus);
 
             var learningRate = baseRate + frequencyBonus;
             var actualLearning = learningRate * diminishingFactor * distancePenalty;
@@ -278,7 +284,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             _language.AddLanguage(learner.Owner, language, addSpoken: true, addUnderstood: false);
         }
 
-        if (comprehension >= 0.8f && hasLearnedAnyWords)
+        if (comprehension >= comp.MasteredComprehensionThreshold && hasLearnedAnyWords)
         {
             if (TryComp<LanguageComponent>(learner.Owner, out var langComp))
             {
@@ -293,7 +299,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
                 }
             }
         }
-        else if (comprehension >= 0.6f && hasLearnedAnyWords)
+        else if (comprehension >= comp.FluentComprehensionThreshold && hasLearnedAnyWords)
         {
             _popup.PopupEntity(
                 Loc.GetString("language-learning-fluent", ("language", languageName)),
