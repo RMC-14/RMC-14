@@ -654,6 +654,13 @@
     - doors
     base: strata_jungle
 
+- type: entity
+  parent: RMCWallJungleStrata
+  id: RMCWallJungleFiberbush
+  suffix: Fiberbush
+  name: synthetic vegetation
+  description: It is made of Fiberbush(tm). It contains asbestos.
+
 # Elevator
 
 - type: entity
