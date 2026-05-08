@@ -19,9 +19,7 @@ public sealed class RMCWeldableSystem : EntitySystem
         if (!TryComp<RMCBlowtorchWeldFuelComponent>(args.Tool, out var blowtorchFuel))
             return;
 
-        if (!_baseFuels.ContainsKey(ent))
-            _baseFuels[ent] = ent.Comp.Fuel;
-
+        _baseFuels.TryAdd(ent, ent.Comp.Fuel);
         ent.Comp.Fuel = Math.Max(_baseFuels[ent] * blowtorchFuel.WeldFuelMultiplier, blowtorchFuel.MinWeldFuel);
     }
 

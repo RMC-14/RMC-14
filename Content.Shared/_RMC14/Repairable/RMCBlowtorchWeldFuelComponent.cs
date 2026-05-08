@@ -1,4 +1,3 @@
-using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Repairable;
@@ -12,10 +11,4 @@ public sealed partial class RMCBlowtorchWeldFuelComponent : Component
 
     [DataField, AutoNetworkedField]
     public float MinWeldFuel = 0f;
-
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 FuelConsumption = FixedPoint2.New(0.025f);
-
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 FuelLitCost = FixedPoint2.New(0f);
 }
