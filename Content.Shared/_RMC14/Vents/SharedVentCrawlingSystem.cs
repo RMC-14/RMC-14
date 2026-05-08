@@ -91,10 +91,10 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
 
     private void OnVentDuctInit(Entity<VentCrawlableComponent> vent, ref ComponentInit args)
     {
+        vent.Comp.OriginalTravelDirection = vent.Comp.TravelDirection;
         if (vent.Comp.TravelDirection == PipeDirection.Fourway)
             return;
 
-        vent.Comp.OriginalTravelDirection = vent.Comp.TravelDirection;
         vent.Comp.TravelDirection = vent.Comp.TravelDirection.RotatePipeDirection(Transform(vent).LocalRotation);
         Dirty(vent);
     }
