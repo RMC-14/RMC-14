@@ -33,9 +33,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-corpsman
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadSPP
+      squad: SquadSPP
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

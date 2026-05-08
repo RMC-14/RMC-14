@@ -144,6 +144,7 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoResinSpikes
   - type: VentCrawler
     ventCrawlIcon: drone
   - type: RMCActionOrder

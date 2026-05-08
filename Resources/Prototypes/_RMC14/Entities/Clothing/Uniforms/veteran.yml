@@ -65,7 +65,7 @@
   suffix: Webbing, Synthetic
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingSurgicalGreen
+    startingWebbing: RMCWebbingSurgicalGreen
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchWeYa
@@ -132,6 +132,16 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/officer.rsi
   - type: WebbingClothing
     startingWebbing: RMCWebbingPMC
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCLeaderNoWebbing
+  id: RMCJumpsuitVeteranPMCCommandoSurvivor
+  name: We-Ya Commando fatigues
+  description: An armored uniform worn by We-Ya elite commandos. It is well protected while remaining light and comfortable.
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYa
 
 - type: entity
   parent: RMCJumpsuitVeteranPMCLeader
