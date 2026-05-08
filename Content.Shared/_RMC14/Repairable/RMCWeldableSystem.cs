@@ -3,28 +3,30 @@ using Content.Shared.Tools.Systems;
 
 namespace Content.Shared._RMC14.Repairable;
 
-/// <summary>
-///     Handles RMC-specific blowtorch fuel consumption for welding operations.
-///     Intercepts weld attempts and applies custom fuel values from RMCBlowtorchWeldFuelComponent.
-/// </summary>
 public sealed class RMCWeldableSystem : EntitySystem
 {
+    private readonly Dictionary<EntityUid, float> _baseFuels = new();
+
     public override void Initialize()
     {
         base.Initialize();
-
-        // Upstream evil
         SubscribeLocalEvent<WeldableComponent, WeldableAttemptEvent>(OnWeldableAttempt);
+        SubscribeLocalEvent<WeldableComponent, EntityTerminatingEvent>(OnWeldableTerminating);
     }
 
-    private void OnWeldableAttempt(EntityUid uid, WeldableComponent component, WeldableAttemptEvent args)
+    private void OnWeldableAttempt(Entity<WeldableComponent> ent, ref WeldableAttemptEvent args)
     {
-        // Check if the tool being used has our RMC blowtorch fuel component
         if (!TryComp<RMCBlowtorchWeldFuelComponent>(args.Tool, out var blowtorchFuel))
             return;
 
-        // Apply fuel multiplier with minimum cap
-        var newFuel = component.Fuel * blowtorchFuel.WeldFuelMultiplier;
-        component.Fuel = Math.Max(newFuel, blowtorchFuel.MinWeldFuel);
+        if (!_baseFuels.ContainsKey(ent))
+            _baseFuels[ent] = ent.Comp.Fuel;
+
+        ent.Comp.Fuel = Math.Max(_baseFuels[ent] * blowtorchFuel.WeldFuelMultiplier, blowtorchFuel.MinWeldFuel);
+    }
+
+    private void OnWeldableTerminating(Entity<WeldableComponent> ent, ref EntityTerminatingEvent args)
+    {
+        _baseFuels.Remove(ent);
     }
 }

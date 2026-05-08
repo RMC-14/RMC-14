@@ -25,13 +25,23 @@ public sealed class RMCInputSystem : EntitySystem
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerDetachedEvent>(OnActiveDetached);
 
         // Clean up RelativeEntity refs when grids/maps are deleted.
-        SubscribeLocalEvent<MapGridComponent, EntityTerminatingEvent>(OnGridOrMapTerminating);
-        SubscribeLocalEvent<MapComponent, EntityTerminatingEvent>(OnGridOrMapTerminating);
+        SubscribeLocalEvent<MapGridComponent, EntityTerminatingEvent>(OnGridTerminating);
+        SubscribeLocalEvent<MapComponent, EntityTerminatingEvent>(OnMapTerminating);
 
         Subs.CVar(_config, RMCCVars.RMCActiveInputMoverEnabled, v => _activeInputMoverEnabled = v, true);
     }
 
-    private void OnGridOrMapTerminating(EntityUid uid, Component comp, ref EntityTerminatingEvent args)
+    private void OnGridTerminating(Entity<MapGridComponent> ent, ref EntityTerminatingEvent args)
+    {
+        ClearRelativeEntity(ent);
+    }
+
+    private void OnMapTerminating(Entity<MapComponent> ent, ref EntityTerminatingEvent args)
+    {
+        ClearRelativeEntity(ent);
+    }
+
+    private void ClearRelativeEntity(EntityUid uid)
     {
         var query = EntityQueryEnumerator<InputMoverComponent>();
         while (query.MoveNext(out _, out var mover))
