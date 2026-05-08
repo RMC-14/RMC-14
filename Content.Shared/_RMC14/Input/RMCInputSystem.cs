@@ -24,7 +24,6 @@ public sealed class RMCInputSystem : EntitySystem
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerAttachedEvent>(OnActiveAttached);
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerDetachedEvent>(OnActiveDetached);
 
-        // Clean up RelativeEntity refs when grids/maps are deleted.
         SubscribeLocalEvent<MapGridComponent, EntityTerminatingEvent>(OnGridTerminating);
         SubscribeLocalEvent<MapComponent, EntityTerminatingEvent>(OnMapTerminating);
 
