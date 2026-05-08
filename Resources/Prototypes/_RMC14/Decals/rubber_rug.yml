@@ -1,0 +1,19 @@
+- type: decal
+  id: RMCDecalColorableRubberRug
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/rubber_rug.rsi
+    state: colorable_rug
+    scale: 2, 2
+
+- type: decal
+  id: RMCDecalColorableRubberRug1
+  parent: CMDecalBase
+  tags: ["station"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/rubber_rug.rsi
+    state: colorable_rug1
+    scale: 2, 2
