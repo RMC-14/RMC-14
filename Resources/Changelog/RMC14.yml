@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: PursuitInAshes
-  changes:
-  - message: SEAs now have a stamp accessible through their vendor.
-    type: Add
-  id: 2681
-  time: '2025-12-14T22:45:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8704
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Kutjevo WeYa Corporate security survivor spawning with the incorrect
@@ -4487,5 +4480,12 @@
   id: 3180
   time: '2026-05-07T02:18:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8637
+- author: IceNoobXD
+  changes:
+  - message: Added five new cassette player variants.
+    type: Add
+  id: 3181
+  time: '2026-05-08T21:03:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9496
 Name: RMC14
 Order: -1
