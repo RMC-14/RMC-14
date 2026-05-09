@@ -17,38 +17,45 @@
   These are summaries. Read the relevant sections for the entire text changed.
 
   [bold]Newer Changes (2026-04-24)[/bold]
-  - (Crimes) Assault with a deadly weapon has been removed, threats to murder are now only considered assault. Many other changes.
+
+  ### Rules
   - (General) Many pages have been condensed, and moved. It's recommended to go over the rules again, as many pages have received clarifications.
-  - (SOP, Equipment) [bold]High Ranking Officers[/bold] can be granted a Command headset if requested.
-  - (SOP, Command) It is the Commander's responsibility to inform personnel the operation ended.
-  - (SOP, Equipment) Many changes. Read page for full information.
-  - (Law, Intoxication and Alcohol) Clarified intoxication only applies to UNMC personnel and only during operations. Also clarified where alcohol must be stored at all times, regardless of usage.
   - (General Roleplay) Added restrictions for objective defenses.
-  - (General SOP) Defensive shipside modifications (like welding doors shut) do not require approval during code red and delta while a threat is active.
   - (Combat Escalation) In some extreme circumstances, escalation does not apply.
-  - (CO BE Provisions) Commanding Officers may battlefield execute for any capital crime committed in their presence, except desertion.
   - (Zero Tolerance) Added a clarification for voice chat and ooc channel usage while playing.
-  - (Medical Dept. SOP) Surgery tools are allowed to be left outside their container, as long as they're still visible. (These tools will be needed in the future, keep them around.)
-  - (Command/MP rules) Added a disclaimer, that the MP role is not guaranteed to be laid-back at all times. Do not select this role if expecting this.
-  - (Roleplay, Xenonid/Survivor) Early round interaction rules have been rewritten, hopefully with more clarity. Not all maps and spawn locations can be accounted for by the rules, be reasonable.
-  - (SOP, Third party enlistment) This section of handling survivors and related has been redone, making the process simpler and straightforward- all third party personnel are offered to join, and all non-UN factions are offered to defect, then join.
+  - (Command/MP) Added a disclaimer, that the MP role is not guaranteed to be laid-back at all times. Do not select this role if expecting this.
+  - (Roleplay, Xenonid/Survivor) Early round interaction rules have been replaced with mechanical prevention. This means there are no longer rules preventing survivors from attacking xenonids, but xenonids have been granted safe areas that cannot be breached. Please report any experienced issues with the implementation such as gaps in defenses or exploits.
   - (Mutinies) Mutiny rules and process has been redone. Make sure to read the changes. Do not goad other players into a mutiny before receiving permission to start one.
-  - (Names) Clarification on name restrictions related to combining nicknames and species formats. They are mutually exclusive.
-  - (General Law Change) [color=#90EE90][bold]Duty Officer[/bold][/color] definitions have been changed and clarified. Almost all law restrictions regarding Duty Officers have been removed, and replaced with a clause in definitions that grants the [color=#90EE90][bold]Duty Officer[/bold][/color] a [color=#008000][bold]Commander[/bold][/color]'s Authority.
-  - (Sedition Crime / Mutinies) The commander may deny treatment/revival to mutineers that have not surrendered, with sedition as the reason.
+
+  ### Law
+  - (CO BE Provisions) Commanding Officers may battlefield execute for any capital crime committed in their presence, except desertion.
+  - (Intoxication and Alcohol) Clarified intoxication only applies to UNMC personnel and only during operations. Also clarified where alcohol must be stored at all times, regardless of usage.
+  - (Sedition / Mutinies) The commander may deny treatment/revival to mutineers that have not surrendered, with sedition as the reason.
+  - (General Change) [color=#90EE90][bold]Duty Officer[/bold][/color] definitions have been changed and clarified. Almost all law restrictions regarding Duty Officers have been removed, and replaced with a clause in definitions that grants the [color=#90EE90][bold]Duty Officer[/bold][/color] a [color=#008000][bold]Commander[/bold][/color]'s Authority.
+  - (Crimes and Threats) Assault with a deadly weapon has been removed, threats to murder are now only considered assault. Many other changes.
+
+  ### SOP
+  - (Ship Mods) Defensive shipside modifications (like welding doors shut) do not require approval during code red and delta while a threat is active.
+  - (Equipment) [bold]High Ranking Officers[/bold] can be granted a Command headset if requested. Many other changes. Read page for full information.
+  - (Command) It is the Commander's responsibility to inform personnel the operation ended. (Mostly relates to use of alcohol.)
+  - (Third party enlistment) This section of handling survivors and related has been redone, making the process simpler and straightforward- all third party personnel are offered to join, and all non-UN factions are offered to defect, then join.
+  - (Medical Dept. SOP) Surgery tools are allowed to be left outside their container, as long as they're still visible. (These tools will be needed in the future, keep them around.)
 
   ## Admin Decisions Are Final.
-  - Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule's intention.
+  - Rules are enforced as intended.
+  - Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule's intention.
   - Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules, and rule breaks may not be requested to be handled this way.
-  - Do not argue with the staff. You may file an appeal if you feel the decision to be incorrect, not ignore it.
+  - Do not argue with the staff.
+  \nYou may file an appeal if you feel the decision to be incorrect, not ignore it.
 
   ## VPNs
 
-  - Heavily avoid using a VPN or any similar program to connect or while connected to RMC.\nYou are putting your account at risk, which may result in your account being permanently banned.
+  - Heavily avoid using a VPN or any similar program to connect or while connected to RMC.
+  \nYou are putting your account at risk, which may result in your account being permanently banned.
   - If you have a legitimate reason to use a VPN, you must attempt at least once to connect to the server without a VPN before requesting an exemption for it, to ensure security from bad actors.
 
   ## General Important Notes
-  - Disconnecting from or ignoring/evading admin-helps will result in action being taken.
+  - Disconnecting from or ignoring/evading admin messages will result in action being taken.
   This is to prevent bad actors from avoiding issues. If you need to leave urgently, let us know.
   - This game has friendly fire mechanics. Avoid shooting your team.
 
@@ -82,11 +89,11 @@
   ## Command and Military Police
 
   These rules also apply to any individual who is a MP/Command role (unless they are a member of a hostile force).
+  \n\nCommand level roles are defined as all department heads, cic staff, MP, and squad leaders.
 
-  - Command level roles are defined as all department heads, cic staff, MP, and squad leaders.
   - You may be rolebanned without warning. This will not usually restrict you from accessing the game.
   - [textlink="1. Command and MP are held to higher standards." link="RMCRulesCommand"]
-  - [textlink="2. Command and MP must follow Marine Law." link="RMCMarineLaw"]
+  - 2. Command and MP must follow [textlink="Marine Law." link="RMCMarineLaw"]
   - 3. The goal of MP is to make the server a more immersive and enjoyable place for everyone. Do your best to uphold that goal, by mediating conflicts and assisting the crew and marines with their needs with the minimal force required.
 
   ## Roleplay Rules and Standards
