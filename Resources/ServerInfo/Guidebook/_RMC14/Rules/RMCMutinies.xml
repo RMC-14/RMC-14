@@ -15,19 +15,19 @@
 
   - Mutiny cannot occur during hijack, and any ongoing mutiny and hostilities will, and must, be ended upon hijack.
   - Only the current Commander can be mutinied against. They must be given a chance to stand down peacefully.
-  - Mutineers may escalate to physical interactions, such as shoving MPs out of the way or blowing open walls with explosives, but may escalate to lethal weapons if they are engaged by the MPs who are using any crowd control tools or attempting to make arrests on mutineers.
+  - Mutineers may escalate to physical interactions, such as shoving MPs out of the way or blowing open walls with explosives, and may further escalate to lethal weapons if they are engaged by the MPs who are using any crowd control tools or attempting to make arrests on mutineers.
   - During the mutiny, attacking any uninvolved, medical, or surrendered personnel is forbidden, as is permanently killing anyone involved in the combat, if there is any.
   - If you have surrendered during a mutiny, you must remain as such.
   - You may not change sides or pretend to be non-hostile before engaging.
 
   ### Mutiny Outcomes
-  - If the mutiny fails to depose the commander, all sides must be given medical treatment. The Commander is permitted to deny treatment and revival, or battlefield execute mutineers if they are capable. Mutineers remaining will be charged per marine law.
-  - If the mutiny succeeds, all sides must be given medical treatment. The next in the command chain should be put in charge.
+  - If the mutiny fails to depose the commander, all sides must be given medical treatment. The Commander is permitted to deny treatment and revival, or battlefield execute mutineers if they are capable. Remaining mutineers will be charged per marine law. See marine law for full information.
+  - If the mutiny succeeds, all sides must be given medical treatment. The next in the commander succession line should be put in charge.
 
   ### Steps to Starting a Mutiny
   - Avoid goading other players into mutiny until you have confirmation to start.
   - Request a mutiny in ahelp with a valid mutiny reason.
-  - After becoming a mutiny leader, you will gain the ability to invite others.
+  - After becoming a mutiny leader, you will gain the ability to invite others through an action added to the action bar. (Non-leader mutineers will not be invited through ahelp.)
   - The mutiny leader must have 3 invited members minimum to proceed.
 
 
