@@ -72,7 +72,10 @@ public sealed class RadioSystem : EntitySystem
     {
         if (args.Channel != null && component.Channels.Contains(args.Channel.ID))
         {
-            SendRadioMessage(uid, args.Message, args.Channel, uid);
+            // RMC14
+            var language = _prototype.TryIndex(args.Language, out var languageProto) ? languageProto : null;
+            SendRadioMessage(uid, args.Message, args.Channel, uid, language);
+            // RMC14
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
     }
