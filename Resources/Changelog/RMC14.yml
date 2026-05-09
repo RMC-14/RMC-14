@@ -1,49 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: Added playtime locks to PMC, SPP, and FORECON corpsmen as well as PMC
-      and SPP OW. They now require 3h of medical jobs and 3h of Executive Officer
-      time respectively.
-    type: Add
-  id: 2676
-  time: '2025-12-14T22:27:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8723
-- author: CatAndHats
-  changes:
-  - message: Shotgun Shell Loadrigs have now got more detailed visuals to indicate
-      how full they are.
-    type: Tweak
-  id: 2677
-  time: '2025-12-14T22:29:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8710
-- author: Majkl-J
-  changes:
-  - message: Bipods now check if you are moving before deploying
-    type: Fix
-  id: 2678
-  time: '2025-12-14T22:38:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8700
-- author: Vermidia
-  changes:
-  - message: Fixed King being able to hijack.
-    type: Fix
-  id: 2679
-  time: '2025-12-14T22:41:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8686
-- author: Vermidia
-  changes:
-  - message: Fixed king being able to sometimes move while still in the air.
-    type: Fix
-  id: 2680
-  time: '2025-12-14T22:43:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8691
-- author: PursuitInAshes
-  changes:
-  - message: SEAs now have a stamp accessible through their vendor.
-    type: Add
-  id: 2681
-  time: '2025-12-14T22:45:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8704
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Kutjevo WeYa Corporate security survivor spawning with the incorrect
@@ -4481,5 +4436,56 @@
   id: 3175
   time: '2026-05-03T17:21:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9257
+- author: SharkSnake98
+  changes:
+  - message: Added 2 new patches for Halcyon & Novaris. They can be accessed in the
+      civilian loadout tab.
+    type: Add
+  id: 3176
+  time: '2026-05-03T23:35:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9560
+- author: kleinerstation13
+  changes:
+  - message: Fixed attachments being invisible on the M37-17 shotgun
+    type: Fix
+  id: 3177
+  time: '2026-05-04T06:39:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9746
+- author: t0wnshark
+  changes:
+  - message: Added ponchos, which are found in the Uniform Accessories loadout category
+      and can be attached to either a uniform or armor.
+    type: Add
+  - message: Added the cheap digital watch, Seikaku Pulsemeter wristwatch, Seikaku
+      13B6-2000 wristwatch, Seikaku 13B6-3000 wristwatch, Seikaku H487-9098 wristwatch,
+      and Veniti E-338 wristwatch, as well as their respective cases. Most can be
+      found in the new Watches loadout category, and some are locked behind playtime
+      requirements or certain jobs.
+    type: Add
+  id: 3178
+  time: '2026-05-04T16:42:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7083
+- author: Pyromaniac365
+  changes:
+  - message: Removed Valkyrie's ability to retrieve dead xenonids.
+    type: Fix
+  id: 3179
+  time: '2026-05-05T15:00:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9778
+- author: stranthbackup
+  changes:
+  - message: Rebalanced some current OT chems to produce the correct amount. CLF3
+      now produces 3u. High combustion & sticky napalm now produce 2u.
+    type: Tweak
+  id: 3180
+  time: '2026-05-07T02:18:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8637
+- author: IceNoobXD
+  changes:
+  - message: Added five new cassette player variants.
+    type: Add
+  id: 3181
+  time: '2026-05-08T21:03:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9496
 Name: RMC14
 Order: -1

@@ -638,3 +638,31 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/peace_patch.rsi
       state: patch
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchHalcyon
+  name: Halcyon Systems patch
+  description: A sleek corporate patch bearing the logo of the Halcyon Systems Corporation, a powerful conglomerate. Known for prosthetic manufacturing, weapons development, and ship-manufacturing. Wearing this patch implies ruthlessness and untempered ambition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/halcyon.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/halcyon.rsi
+      state: patch
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchNovaris
+  name: Novaris Industries patch
+  description: A reliable-looking patch bearing the logo of Novaris Industries, an industry leader in affordable technology. Known for developing Average Joes and AI, it also produces other goods for the civilian market and utilitarian space-station. The patch itself was probably made and sold at an insanely cheap price.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/novaris.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/novaris.rsi
+      state: patch
