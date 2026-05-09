@@ -62,7 +62,7 @@ public sealed partial class RMCAdminChatBanWindow : DefaultWindow
             (int) Multipliers.Months => 60 * 24 * 30,
             (int) Multipliers.Years => 60 * 24 * 365,
             (int) Multipliers.Permanent => 0,
-            _ => throw new ArgumentOutOfRangeException(nameof(TimeOption.SelectedId), "Multiplier out of range"),
+            _ => throw new ArgumentOutOfRangeException(nameof(TimeOption.SelectedId), Loc.GetString("rmc-admin-multiplier-out-of-range")),
         };
 
         UpdateExpiresLabel();

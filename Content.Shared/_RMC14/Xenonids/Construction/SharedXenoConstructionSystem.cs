@@ -330,7 +330,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (!hasAdjacent)
             {
-                // TODO RMC14
+                _popup.PopupClient(Loc.GetString("rmc-xeno-plant-weeds"),
+                    args.Target,
+                    xeno,
+                    PopupType.MediumCaution);
+
+                return;
             }
         }
 
@@ -443,8 +448,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return;
 
             var msg = hasBoost
-                ? "We regurgitate some resin and thicken the " + Name(upgradeable) + " effortlessly."
-                : $"We regurgitate some resin and thicken the {Name(upgradeable)}, using {cost} plasma.";
+                ? Loc.GetString("rmc-xeno-construct-update-free", ("structure", Name(upgradeable)))
+                : Loc.GetString("rmc-xeno-construct-update-free", ("structure", Name(upgradeable)), ("cost", cost));
             _popup.PopupClient(msg, upgradeable, xeno);
 
             if (_net.IsClient)
@@ -1328,7 +1333,27 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             if (!IsSupported((gridId, grid), target))
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-requires-support", ("choice", choiceProto.Name)), target, xeno);
+                if (!IsSupported((gridId, grid), target))
+                {
+                    if (popup)
+                        _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-requires-support", ("choice", choiceProto.Name)), target, xeno);
+
+                    return false;
+                }
+            }
+
+            if (!CanPlaceLimitedXenoStructure(xeno.Owner, buildChoice.Value))
+            {
+                if (popup)
+                {
+                    _popup.PopupClient(
+                        Loc.GetString("rmc-xeno-construct-limit-max"),
+                        target,
+                        xeno,
+                        PopupType.MediumCaution
+                    );
+                }
+
                 return false;
             }
         }
@@ -1773,8 +1798,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _actions.SetToggled(args.Action.AsNullable(), ent.Comp.BuildDoorNodes);
 
         var msg = ent.Comp.BuildDoorNodes
-            ? "We will now place door markers."
-            : "We will now place wall markers.";
+            ? Loc.GetString("rmc-xeno-construct-design-door-markers")
+            : Loc.GetString("rmc-xeno-construct-design-wall-markers");
         _popup.PopupClient(msg, ent, ent, PopupType.Small);
 
         Dirty(ent);

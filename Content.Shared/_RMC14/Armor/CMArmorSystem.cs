@@ -126,13 +126,13 @@ public sealed class CMArmorSystem : EntitySystem
                            armored.Comp.FrontalArmor == 0 &&
                            armored.Comp.SideArmor == 0
             ? $"{FixedPoint2.New(ev.XenoArmor * ev.ArmorModifier)} / {armored.Comp.XenoArmor}"
-            : $"Overall: {FixedPoint2.New(ev.XenoArmor * ev.ArmorModifier)} / {armored.Comp.XenoArmor}";
+            : Loc.GetString("rmc-xeno-armor-overall", ("armor", FixedPoint2.New(ev.XenoArmor * ev.ArmorModifier)), ("armor2", armored.Comp.XenoArmor));
 
         if (armored.Comp.FrontalArmor != 0 || ev.FrontalArmor != 0)
-            armorMessage = $"{armorMessage}\nFrontal: {FixedPoint2.New((ev.XenoArmor + ev.FrontalArmor) * ev.ArmorModifier)} / {armored.Comp.XenoArmor + armored.Comp.FrontalArmor}";
+            armorMessage = $" {armorMessage} /n {Loc.GetString("rmc-xeno-armor-frontal", ("armor", FixedPoint2.New((ev.XenoArmor + ev.FrontalArmor) * ev.ArmorModifier)), ("armor2", armored.Comp.XenoArmor + armored.Comp.FrontalArmor))}";
 
         if (armored.Comp.SideArmor != 0 || ev.SideArmor != 0)
-            armorMessage = $"{armorMessage}\nSide: {FixedPoint2.New((ev.XenoArmor + ev.SideArmor) * ev.ArmorModifier)} / {armored.Comp.XenoArmor + armored.Comp.SideArmor}";
+            armorMessage = $" {armorMessage} /n {Loc.GetString("rmc-xeno-armor-side", ("armor", FixedPoint2.New((ev.XenoArmor + ev.SideArmor) * ev.ArmorModifier)), ("armor2", armored.Comp.XenoArmor + armored.Comp.SideArmor))}";
 
         var max = _alerts.GetMaxSeverity(xeno.ArmorAlert);
 

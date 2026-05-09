@@ -58,8 +58,8 @@ public sealed class RMCAdminGhostDragPossessionSystem : EntitySystem
 
         _dialog.OpenConfirmation(
             args.User,
-            "Are you sure?",
-            $"Are you sure you want [Bold][Italic]{MetaData(ent).EntityName} | {ent.Owner.Id}[/Bold][/Italic] to possess [Bold][Italic]{MetaData(args.Target).EntityName} | {args.Target.Id}[/Bold][/Italic]",
+            "Вы уверены?",
+            $"Вы уверены, что хотите, чтобы [Bold][Italic]{MetaData(ent).EntityName} | {ent.Owner.Id}[/Bold][/Italic] обладал [Bold][Italic]{MetaData(args.Target).EntityName} | {args.Target.Id}[/Bold][/Italic]",
             ev);
     }
     private void OnPossessionConfirmation(Entity<CMGhostComponent> ent, ref GhostPossessionConfirmEvent args)

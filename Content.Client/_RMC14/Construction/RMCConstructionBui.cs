@@ -146,6 +146,6 @@ public sealed class RMCConstructionBui : BoundUserInterface
             return;
 
         if (EntMan.TryGetComponent(Owner, out StackComponent? stack))
-            _window.MaterialLabel.Text = $"Amount Left: {stack.Count}";
+            _window.MaterialLabel.Text = Loc.GetString("rmc-construction-amount-left", ("stackcount", stack.Count));
     }
 }

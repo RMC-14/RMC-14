@@ -46,7 +46,7 @@ public sealed class RMCRadioSystem : EntitySystem
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = "Tune Radio",
+            Text = Loc.GetString("rmc-interactive-tune-radio"),
             IconEntity = GetNetEntity(ent.Owner),
             Act = () =>
             {

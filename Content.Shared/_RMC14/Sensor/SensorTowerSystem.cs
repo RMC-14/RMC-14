@@ -111,18 +111,18 @@ public sealed class SensorTowerSystem : EntitySystem
 
         if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
         {
-            _popup.PopupClient("You have no clue how this thing works...", ent, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-bioscan-skill-issue"), ent, user, PopupType.SmallCaution);
             return;
         }
 
         ref var state = ref ent.Comp.State;
         var popup = state switch
         {
-            SensorTowerState.Weld => "Use a blowtorch, then wirecutters, then wrench to repair it.",
-            SensorTowerState.Wire => "Use some wirecutters, then wrench to repair it.",
-            SensorTowerState.Wrench => "Use a wrench to repair it.",
-            SensorTowerState.Off => $"The {Name(ent)} lights up.",
-            SensorTowerState.On => $"The {Name(ent)} goes dark.",
+            SensorTowerState.Weld => Loc.GetString("rmc-bioscan-repair-welder-wirecut-wrench"),
+            SensorTowerState.Wire => Loc.GetString("rmc-bioscan-repair-wirecut-wrench"),
+            SensorTowerState.Wrench => Loc.GetString("rmc-bioscan-repair-wrench"),
+            SensorTowerState.Off => Loc.GetString("rmc-bioscan-lights-up", ("name", Name(ent))),
+            SensorTowerState.On => Loc.GetString("rmc-bioscan-goes-dark", ("name", Name(ent))),
             _ => throw new ArgumentOutOfRangeException(),
         };
         _popup.PopupClient(popup, ent, user, PopupType.Medium);
@@ -149,11 +149,11 @@ public sealed class SensorTowerSystem : EntitySystem
             // TODO: localize
             var text = ent.Comp.State switch
             {
-                SensorTowerState.Weld => "This one is heavily damaged. Use a blowtorch, wirecutters, then a wrench to repair it.",
-                SensorTowerState.Wire => "This one is heavily damaged. Use wirecutters, then a wrench to repair it.",
-                SensorTowerState.Wrench => "This one is heavily damaged. Use a wrench to repair it.",
-                SensorTowerState.Off => "It looks like it is offline.",
-                SensorTowerState.On => "It looks like it is online.",
+                SensorTowerState.Weld => Loc.GetString("rmc-bioscan-damaged-repair-welder-wirecut-wrench"),
+                SensorTowerState.Wire => Loc.GetString("rmc-bioscan-damaged-repair-wirecut-wrench"),
+                SensorTowerState.Wrench => Loc.GetString("rmc-bioscan-damaged-repair-wrench"),
+                SensorTowerState.Off => Loc.GetString("rmc-bioscan-status-on"),
+                SensorTowerState.On => Loc.GetString("rmc-bioscan-status-off"),
                 _ => throw new ArgumentOutOfRangeException(),
             };
             args.PushText(text);
@@ -162,13 +162,13 @@ public sealed class SensorTowerSystem : EntitySystem
             {
                 var tool = ent.Comp.State switch
                 {
-                    SensorTowerState.Wrench => "a [color=cyan]Wrench[/color]",
-                    SensorTowerState.Wire => "[color=cyan]Wirecutters[/color]",
-                    SensorTowerState.Weld => "a [color=cyan]Welder[/color]",
+                    SensorTowerState.Wrench => Loc.GetString("rmc-apc-use-repair-wrench"),
+                    SensorTowerState.Wire => Loc.GetString("rmc-apc-use-repair-wirecutters"),
+                    SensorTowerState.Weld => Loc.GetString("rmc-apc-use-repair-welder"),
                     _ => throw new ArgumentOutOfRangeException(),
                 };
 
-                args.PushMarkup($"Use {tool} to repair it!");
+                args.PushMarkup(Loc.GetString("rmc-apc-use-repair-tool", ("tool", tool)));
             }
         }
     }
@@ -264,7 +264,7 @@ public sealed class SensorTowerSystem : EntitySystem
     {
         if (tower.Comp.State == SensorTowerState.Weld)
         {
-            _popup.PopupClient("We stare at the experimental sensor tower cluelessly.", user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-bioscan-xeno-issue"), user, user, PopupType.SmallCaution);
             return;
         }
 
@@ -276,7 +276,7 @@ public sealed class SensorTowerSystem : EntitySystem
 
         if (_doAfter.TryStartDoAfter(doAfter))
         {
-            _popup.PopupClient($"You start wrenching apart the {Name(tower)}'s panels and reaching inside it!", tower, user, PopupType.Medium);
+            _popup.PopupClient(Loc.GetString("rmc-bioscan-xeno-breach", ("tower", Name(tower))), tower, user, PopupType.Medium);
         }
     }
 
@@ -304,13 +304,13 @@ public sealed class SensorTowerSystem : EntitySystem
 
             if (_random.Prob(0.75f))
             {
-                _popup.PopupEntity($"The {Name(uid)} beeps wildly and sprays random pieces everywhere! Use a wrench to repair it.", uid, uid, PopupType.LargeCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-bioscan-breach-beep", ("name", Name(uid))), uid, uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wrench;
                 Dirty(uid, tower);
             }
             else
             {
-                _popup.PopupEntity($"The {Name(uid)} beeps wildly and a fuse blows! Use wirecutters, then a wrench to repair it.", uid, uid, PopupType.LargeCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-bioscan-breach-beep-wirecut", ("name", Name(uid))), uid, uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wire;
                 Dirty(uid, tower);
             }

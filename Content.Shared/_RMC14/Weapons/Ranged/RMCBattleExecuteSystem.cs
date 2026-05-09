@@ -90,7 +90,7 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
     {
         if (_mobState.IsDead(target) && _unrevivable.IsUnrevivable(target))
         {
-            var cancelledMessage = $"You decide to not Execute {Name(target)}, as they are already far beyond revival.";
+            var cancelledMessage = Loc.GetString("rmc-execute-no-defib-cancel", ("target", Name(target)));
             _popup.PopupClient(cancelledMessage, user, PopupType.MediumCaution);
             return;
         }
@@ -120,7 +120,7 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
             _admin.Add(LogType.RMCExecution,
                 LogImpact.High,
                 $"{ToPrettyString(user)}'s Execution of {ToPrettyString(target)} was cancelled.");
-            var cancelledMessage = $"You decide to not Execute {Name(target)}.";
+            var cancelledMessage = Loc.GetString("rmc-execute-cancel", ("target", Name(target)));
             _popup.PopupClient(cancelledMessage, user, PopupType.MediumCaution);
             return;
         }
@@ -180,10 +180,10 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
 
         _audio.PlayPredicted(gun.SoundGunshotModified, args.Used.Value, user);
 
-        var popupMessage = $"{Name(target)} WAS EXECUTED BY {Name(user)}!";
+        var popupMessage = Loc.GetString("rmc-execute-was-executed-by", ("target", Name(target)), ("name", Name(user)));
         _popup.PopupPredicted(popupMessage, target, user, PopupType.LargeCaution);
 
-        var chatMsg = $"[bold][font size=24][color=red]\n{Name(target)} WAS EXECUTED BY {Name(user)}!\n[/color][/font][/bold]";
+        var chatMsg = $"\n {Loc.GetString("rmc-execute-was-executed-by", ("target", Name(target)), ("name", Name(user)))} \n";
         var coordinates = _transform.GetMapCoordinates(target);
         var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
 

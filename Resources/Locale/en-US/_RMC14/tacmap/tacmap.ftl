@@ -41,7 +41,7 @@ ui-tactical-map-cooldown-seconds = {$seconds}
 
 ui-tactical-map-tunnel-info = Tunnel: {$name}
 
-rmc-tactical-map-cancel = Cancel
-rmc-tactical-map-ui-delete = Delete
+rmc-tac-map-delete = Delete
 rmc-tactical-map-ui-blip-size = Blip Size: 1.0x
 rmc-tactical-map-ui-line-width = Line Width: 2.0px
+rmc-tac-map-delete = Delete

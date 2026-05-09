@@ -160,7 +160,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
     {
         if (args.User != null && HasComp<ScopingComponent>(args.User))
         {
-            _popup.PopupClient("You cannot use the night vision optic while using optics.",
+            _popup.PopupClient(Loc.GetString("rmc-interactive-nv-optics"),
                 args.User.Value,
                 args.User,
                 PopupType.SmallCaution);

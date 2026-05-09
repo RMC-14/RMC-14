@@ -1,11 +1,23 @@
-rmc-marines-evac-ui-inform-display = [bold]Information display[/bold]
 rmc-marines-evac-ui-status-label = Escape Pod Status: NO EVACUATION
-rmc-marines-evac-ui-hatch-label = Docking Hatch: UNSECURED
 rmc-marines-evac-ui-pod-control = [bold]Pod controls[/bold]
-rmc-marines-evac-ui-unlock-door = Unlock door
-rmc-marines-evac-ui-eject-button = Manual eject
-rmc-marines-evac-ui-delay-button = Delay launch
-rmc-marines-lifeboat-ui-launch-question = Launch the lifeboat?
-rmc-marines-lifeboat-ui-emergency-launch = Emergency Launch
-rmc-marines-lifeboat-ui-no = No
-rmc-marines-lifeboat-ui-yes = Yes
+rmc-command-comp-evac-send = Confirm?
+rmc-command-comp-cancel-evac = Cancel Evacuation
+rmc-command-comp-initiate-evac = Initiate Evacuation
+
+rmc-evac-comp-hatch-label = Docking Hatch: UNSECURED
+rmc-evac-comp-hatch-label-secured = Docking Hatch: SECURED
+
+rmc-evac-comp-status-label-travelling = Escape Pod Status: TRAVELLING
+rmc-evac-comp-status-label-crashed = Escape Pod Status: CRASHED
+rmc-evac-comp-status-label-stand-by = Escape Pod Status: STANDING BY
+rmc-evac-comp-status-label = Escape Pod Status: NO EVACUATION
+rmc-evac-comp-status-label-delayed = Escape Pod Status: DELAYED
+
+rmc-evac-comp-information-display = [bold]Information display[/bold]
+rmc-evac-comp-door-button-unlock = Unlock door
+rmc-evac-comp-eject-button-manual = Manual eject
+rmc-evac-comp-delay-button = Delay launch
+rmc-evac-comp-boat-emergency-launch-question = Launch the lifeboat?
+rmc-evac-comp-boat-emergency-launch = Emergency Launch
+rmc-evac-comp-boat-emergency-launch-no = No
+rmc-evac-comp-boat-emergency-launch-yes = Yes

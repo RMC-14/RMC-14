@@ -63,6 +63,9 @@ rmc-overwatch-console-ready = [color=green][bold][ READY ][/bold][/color]
 rmc-overwatch-console-not-ready = [color=red][bold][ NOT READY ][/bold][/color]
 rmc-overwatch-console-cooldown = [color=#D3B400][bold][ COOLDOWN - { $seconds } SECONDS ][/bold][/color]
 rmc-overwatch-console-no-warhead-loaded = [color=red][bold]No warhead loaded[/bold][/color]
+rmc-overwatch-console-tactical-map = Tactical Map
+rmc-overwatch-ok-button = OK
+rmc-overwatch-cancel-button = Cancel
 
 # Transfer messages
 rmc-overwatch-console-squad-selection = Squad Selection

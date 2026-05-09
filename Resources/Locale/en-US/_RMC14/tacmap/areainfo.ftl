@@ -15,3 +15,7 @@ rmc-area-information-ceiling-level = Ceiling level: { $ceilinglevel }{ $protecti
 rmc-area-information-allowed-actions-label = Allowed:
 rmc-area-information-blocked-actions-label = Blocked:
 
+rmc-area-supply-drop = Supply Drop
+rmc-area-mortar = Mortar
+rmc-area-cas = Close Air Support
+rmc-area-ob = Orbital Bombardment

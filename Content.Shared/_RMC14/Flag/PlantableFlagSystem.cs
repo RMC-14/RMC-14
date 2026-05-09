@@ -135,7 +135,7 @@ public sealed class PlantableFlagSystem : EntitySystem
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = "Take Down",
+            Text = Loc.GetString("rmc-interactive-flag-take-down"),
             Act = () =>
             {
                 var ev = new PlantableFlagRemoveDoAfterEvent();
@@ -162,7 +162,7 @@ public sealed class PlantableFlagSystem : EntitySystem
         if (_rmcMap.IsTileBlocked(target.Value))
         {
             _popup.PopupClient(
-                $"You need a clear, open area to plant the {Name(ent)}, something is blocking the way in front of you!",
+                Loc.GetString("rmc-interactive-flag-no-area", ("target", Name(ent))),
                 user,
                 user,
                 PopupType.MediumCaution

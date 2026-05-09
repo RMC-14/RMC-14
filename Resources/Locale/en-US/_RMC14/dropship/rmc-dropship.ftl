@@ -113,10 +113,6 @@ rmc-dropship-locked-out = The shuttle is not responding, try again in {$minutes}
 rmc-dropship-locked-out-bypass = You partially bypassed the lockout, try again!
 rmc-dropship-locked-out-bypass-complete = You successfully removed the lockout!
 
-rmc-dropship-ui-cancel = Cancel
-rmc-dropship-ui-launch = Launch
-rmc-dropship-ui-summon = Summon
-
 rmc-dropship-equipment-deployer-text = {$deployName}
 rmc-dropship-equipment-deployer-health = Condition: {$status}
 rmc-dropship-equipment-deployer-ammo = Ammo: {$ammoCount} / {$totalAmmoCount}
@@ -130,3 +126,34 @@ rmc-dropship-equipment-undeployed = UNDEPLOYED
 rmc-dropship-equipment-operational = OPERATIONAL
 rmc-dropship-equipment-damaged = DAMAGED
 rmc-dropship-equipment-destroyed = DESTROYED
+
+rmc-dropship-flight-controls = Flight controls
+rmc-dropship-door-controls = Door Controls
+rmc-dropship-remote-control-header = Remote Control:
+rmc-dropship-flyby = Flyby
+rmc-dropship-primary-lz = (Primary)
+rmc-drophip-launch-in-progress = Launch in progress
+rmc-dropship-launch-to-lz-time = Launching in T-{$time}s to {$destination}
+rmc-dropship-in-flight-to = In flight: {$destination}
+rmc-dropship-in-flight-time = Time until destination: T-{$time}s
+rmc-dropship-final-approach-to = Final Approach: {$destination}
+rmc-dropship-final-approach-time = Time until landing: T-{$time}s
+rmc-dropship-fuel-progress = Refueling in progress
+rmc-dropship-fuel-progress-time = Ready to launch in T-{$time}s
+rmc-dropship-lift-lockdown = Lift Lockdown
+rmc-dropship-lockdown = Lockdown
+rmc-dropship-unlock-aft = Unlock Aft
+rmc-dropship-lock-aft = Lock Aft
+rmc-dropship-unlock-port = Unlock Port
+rmc-dropship-lock-port = Lock Port
+rmc-dropship-unlock-starboard = Unlock Starboard
+rmc-dropship-lock-starboard = Lock Starboard
+
+rmc-dropship-fly-cancel = Cancel
+rmc-dropship-fly-launch = Launch
+rmc-dropship-remote-control = Summon
+
+rmc-dropship-equipment-medevac = Medevac
+rmc-dropship-equipment-fulton = Fulton
+rmc-dropship-equipment-pds = PDS
+rmc-dropship-equipment-spotlight = Spotlight

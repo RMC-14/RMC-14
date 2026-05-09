@@ -11,19 +11,19 @@
                   MinHeight="26" />
         <BoxContainer Orientation="Horizontal">
             <Button Name="OkButton" Access="Public"
-                    Text="OK"
+                    Text="{Loc rmc-overwath-ok-button}"
                     HorizontalExpand="True"
                     Margin="0 0 4 0"
                     MinHeight="24"
                     MinWidth="50" />
             <Button Name="CancelButton" Access="Public"
-                    Text="{Loc 'rmc-tactical-map-cancel'}"
+                    Text="{Loc rmc-overwath-cancel-button}"
                     HorizontalExpand="True"
                     Margin="0 0 4 0"
                     MinHeight="24"
                     MinWidth="60" />
             <Button Name="DeleteButton" Access="Public"
-                    Text="{Loc 'rmc-tactical-map-ui-delete'}"
+                    Text="{Loc rmc-tac-map-delete}"
                     HorizontalExpand="True"
                     Visible="False"
                     MinHeight="24"

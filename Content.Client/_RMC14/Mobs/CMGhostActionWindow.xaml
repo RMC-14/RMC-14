@@ -12,7 +12,7 @@
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
             <Control HorizontalExpand="True" />
-            <Button Name="Ghost" Access="Public" Text="{Loc 'cm-ghost-ghost' }" StyleClasses="OpenBoth"
+            <Button Name="Ghost" Access="Public" Text="{Loc 'cm-ghost-ghost'}" StyleClasses="OpenBoth"
                     HorizontalExpand="True" SizeFlagsStretchRatio="3" />
             <Control HorizontalExpand="True" />
         </BoxContainer>

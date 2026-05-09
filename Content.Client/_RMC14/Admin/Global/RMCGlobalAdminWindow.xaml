@@ -14,7 +14,7 @@
             </ScrollContainer>
             <BoxContainer Name="MarinesTab" Access="Public" Orientation="Vertical">
                 <BoxContainer Orientation="Vertical" VerticalExpand="True">
-                    <Label Text="Squads" />
+                    <Label Text="{Loc rmc-admin-squads}" />
                     <cc:HSeparator Color="#4972A1" />
                     <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
                         <BoxContainer Name="Squads" Access="Public" Orientation="Vertical" />
@@ -44,6 +44,6 @@
                               HorizontalExpand="True" VerticalExpand="True" />
             </ScrollContainer>
         </TabContainer>
-        <Button Name="RefreshButton" Access="Public" Text="Refresh" HorizontalExpand="True" />
+        <Button Name="RefreshButton" Access="Public" Text="{Loc rmc-admin-refresh}" HorizontalExpand="True" />
     </BoxContainer>
 </controls:RMCGlobalAdminWindow>

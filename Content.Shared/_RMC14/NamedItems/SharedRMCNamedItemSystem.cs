@@ -22,7 +22,7 @@ public abstract class SharedRMCNamedItemSystem : EntitySystem
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = "Reapply custom name",
+            Text = Loc.GetString("rmc-reapply-custom-name"),
             Act = () =>
             {
                 TryNameItem((user, named), ent, ent.Comp.Item);

@@ -136,70 +136,70 @@ public sealed class AreaInfoSystem : EntitySystem
         var restrictedActions = new List<string>();
 
         if (_area.CanOrbitalBombard(coordinates, out _))
-            allowedActions.Add(Loc.GetString("rmc-area-information-ob"));
+            allowedActions.Add(Loc.GetString("rmc-area-ob"));
         else
-            restrictedActions.Add(Loc.GetString("rmc-area-information-ob"));
+            restrictedActions.Add(Loc.GetString("rmc-area-ob"));
 
         if (_area.CanCAS(coordinates))
-            allowedActions.Add(Loc.GetString("rmc-area-information-cas"));
+            allowedActions.Add(Loc.GetString("rmc-area-cas"));
         else
-            restrictedActions.Add(Loc.GetString("rmc-area-information-cas"));
+            restrictedActions.Add(Loc.GetString("rmc-area-cas"));
 
         if (_area.CanSupplyDrop(coordinates.ToMap(_entityManager, _transform)))
-            allowedActions.Add(Loc.GetString("rmc-area-information-sup"));
+            allowedActions.Add(Loc.GetString("rmc-area-supply-drop"));
         else
-            restrictedActions.Add(Loc.GetString("rmc-area-information-sup"));
+            restrictedActions.Add(Loc.GetString("rmc-area-supply-drop"));
 
         if (_area.CanMortarFire(coordinates))
-            allowedActions.Add(Loc.GetString("rmc-area-information-mortar-fire"));
+            allowedActions.Add(Loc.GetString("rmc-area-mortar"));
         else
-            restrictedActions.Add(Loc.GetString("rmc-area-information-mortar-fire"));
+            restrictedActions.Add(Loc.GetString("rmc-area-mortar"));
 
         if (_area.CanMortarPlacement(coordinates))
-            allowedActions.Add(Loc.GetString("rmc-area-information-mortar-place"));
+            allowedActions.Add(Loc.GetString("rmc-area-mortar-placement"));
         else
-            restrictedActions.Add(Loc.GetString("rmc-area-information-mortar-place"));
+            restrictedActions.Add(Loc.GetString("rmc-area-mortar-placement"));
 
         if (_area.CanLase(coordinates))
-            allowedActions.Add(Loc.GetString("rmc-area-information-laser"));
+            allowedActions.Add(Loc.GetString("rmc-area-laser-designation"));
         else
-            restrictedActions.Add(Loc.GetString("rmc-area-information-laser"));
+            restrictedActions.Add(Loc.GetString("rmc-area-laser-designation"));
 
         if (area.Value.Comp.Medevac)
-            allowedActions.Add(Loc.GetString("rmc-area-information-medevac"));
+            allowedActions.Add(Loc.GetString("rmc-area-medevac"));
         else
-            restrictedActions.Add(Loc.GetString("rmc-area-information-medevac"));
+            restrictedActions.Add(Loc.GetString("rmc-area-medevac"));
 
         if (area.Value.Comp.Paradropping)
-            allowedActions.Add(Loc.GetString("rmc-area-information-paradrop"));
+            allowedActions.Add(Loc.GetString("rmc-area-paradrop"));
         else
-            restrictedActions.Add(Loc.GetString("rmc-area-information-paradrop"));
+            restrictedActions.Add(Loc.GetString("rmc-area-paradrop"));
 
         // Add special restrictions
         if (area.Value.Comp.NoTunnel)
-            restrictedActions.Add(Loc.GetString("rmc-area-information-tunnel"));
+            restrictedActions.Add(Loc.GetString("rmc-area-xeno-tunnel"));
         if (area.Value.Comp.Unweedable)
-            restrictedActions.Add(Loc.GetString("rmc-area-information-weed"));
+            restrictedActions.Add(Loc.GetString("rmc-area-xeno-weed"));
         else if (!area.Value.Comp.ResinAllowed)
-            restrictedActions.Add(Loc.GetString("rmc-area-information-resin"));
+            restrictedActions.Add(Loc.GetString("rmc-area-resin-structures"));
 
         var protectionSource = "";
         if (hasHiveCoreProtection)
-            protectionSource = "\n" + Loc.GetString("rmc-area-information-protection-source-hive-core");
+            protectionSource = $"\n{Loc.GetString("rmc-area-xeno-core-protect")}";
         else if (hasPylonProtection)
-            protectionSource = "\n" + Loc.GetString("rmc-area-information-protection-source-hive-pylon");
+            protectionSource = $"\n{Loc.GetString("rmc-area-xeno-pylon-protect")}";
 
-        var restrictionsStr = "\n" + Loc.GetString("rmc-area-information-ceiling-level", ("ceilinglevel", ceilingLevel), ("protectionsource", protectionSource));
+        var restrictionsStr = $"\n{Loc.GetString("rmc-area-ceiling-level")} {ceilingLevel}{protectionSource}";
 
         if (allowedActions.Count > 0)
         {
-            restrictionsStr += "\n\n" + Loc.GetString("rmc-area-information-allowed-actions-label");
+            restrictionsStr += $"\n\n{Loc.GetString("rmc-area-allowed")}";
             restrictionsStr += "\n• " + string.Join("\n• ", allowedActions);
         }
 
         if (restrictedActions.Count > 0)
         {
-            restrictionsStr += "\n\n" + Loc.GetString("rmc-area-information-blocked-actions-label");
+            restrictionsStr += $"\n\n{Loc.GetString("rmc-area-blocked")}";
             restrictionsStr += "\n• " + string.Join("\n• ", restrictedActions);
         }
 

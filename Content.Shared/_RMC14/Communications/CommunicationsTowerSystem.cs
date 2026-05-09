@@ -80,12 +80,12 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     {
         using (args.PushGroup(nameof(CommunicationsTowerComponent)))
         {
-            var msg = $"[color=cyan]If placed {(int) _hiveBoon.CommunicationTowerXenoTakeoverTime.TotalMinutes} minutes into the round, a hive cluster will turn into a hive pylon when its weeds take over this![/color]";
+            var msg = Loc.GetString("rmc-comm-tower-cluster-pylon-minutes", ("minutes", (int) _hiveBoon.CommunicationTowerXenoTakeoverTime.TotalMinutes));
             args.PushMarkup(msg);
             if (ent.Comp.State != CommunicationsTowerState.Broken)
                 return;
 
-            args.PushMarkup("[color=red]It is damaged and needs a welder for repairs![/color]");
+            args.PushMarkup(Loc.GetString("rmc-comm-tower-damaged-welder"));
         }
     }
 
@@ -113,10 +113,10 @@ public sealed class CommunicationsTowerSystem : EntitySystem
 
         var options = new List<DialogOption>
         {
-            new("Wipe communication frequencies"),
-            new("Add your faction's frequencies"),
+            new(Loc.GetString("rmc-comm-tower-wipe-radio")),
+            new(Loc.GetString("rmc-comm-tower-add-radio")),
         };
-        _dialog.OpenOptions(ent, args.User, "TC-3T comms tower", options);
+        _dialog.OpenOptions(ent, args.User, "TC-3T телекоммуникационная вышка", options);
     }
 
     private void OnTowerDialogChosen(Entity<CommunicationsTowerComponent> ent, ref DialogChosenEvent args)
@@ -149,7 +149,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
             return;
 
         args.Handled = true;
-        var msg = $"You wipe the preexisting frequencies from the {Name(ent)}.";
+        var msg = Loc.GetString("rmc-comm-tower-wipe-radio-done", ("tower", Name(ent)));
         _popup.PopupClient(msg, ent, args.User, PopupType.Medium);
     }
 
@@ -178,7 +178,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         }
 
         args.Handled = true;
-        var msg = $"You add your faction's communication frequencies to the {Name(ent)}'s comm list.";
+        var msg = Loc.GetString("rmc-comm-tower-add-radio-done", ("tower", Name(ent)));
         _popup.PopupClient(msg, ent, args.User, PopupType.Medium);
     }
 
@@ -186,13 +186,13 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     {
         if (ent.Comp.State == CommunicationsTowerState.Broken)
         {
-            _popup.PopupClient($"{Name(ent)} needs repairs to be turned back on!", ent, args.User, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-comm-tower-need-repair-to-work", ("tower", Name(ent))), ent, args.User, PopupType.MediumCaution);
             return;
         }
 
         if (!_rmcPower.IsPowered(ent))
         {
-            _popup.PopupClient($"{Name(ent)} makes a small plaintful beep, and nothing happens. It seems to be out of power.", ent, args.User, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-comm-tower-out-of-power", ("tower", Name(ent))), ent, args.User, PopupType.MediumCaution);
             return;
         }
 

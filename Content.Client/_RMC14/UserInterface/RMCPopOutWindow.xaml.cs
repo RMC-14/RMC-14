@@ -29,7 +29,7 @@ public partial class RMCPopOutWindow : DefaultWindow
 
     private void AddButton()
     {
-        var button = new Button { Text = "Pop Out", StyleClasses = { "OpenBoth" }};
+        var button = new Button { Text = Loc.GetString("rmc-dialog-pop-out"), StyleClasses = { "OpenBoth" }};
         button.Margin = new Thickness(5, 0);
         if (!WindowHeader.Children.OfType<BoxContainer>().TryFirstOrDefault(out var header))
             return;

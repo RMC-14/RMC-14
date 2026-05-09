@@ -158,13 +158,13 @@ public sealed class HiveBoonSystem : EntitySystem
     private void OnActivateFireResistance(HiveBoonActivateFireResistanceEvent ev)
     {
         EnsureComp<HiveBoonFireImmunityComponent>(ev.Boon);
-        _xenoAnnounce.AnnounceSameHiveDefaultSound(ev.Boon, "The Queen has imbued us with flame-resistant chitin for 5 minutes.");
+        _xenoAnnounce.AnnounceSameHiveDefaultSound(ev.Boon, Loc.GetString("rmc-xeno-boon-fire-resist"));
     }
 
     private void OnActivateLarvaSurge(HiveBoonActivateLarvaSurgeEvent ev)
     {
         _hive.IncreaseBurrowedLarva(ev.Hive, 5);
-        _xenoAnnounce.AnnounceSameHiveDefaultSound(ev.Boon, "The Queen has awakened 5 extra burrowed larva to join the hive!");
+        _xenoAnnounce.AnnounceSameHiveDefaultSound(ev.Boon, Loc.GetString("rmc-xeno-boon-extra-five-larvas"));
     }
 
     private void OnActivateKing(HiveBoonActivateKingEvent ev)
@@ -239,7 +239,7 @@ public sealed class HiveBoonSystem : EntitySystem
     {
         using (args.PushGroup(nameof(HivePylonComponent)))
         {
-            var msg = $"[color=cyan]This will grant the hive 1 royal resin every {(int)_royalResinEvery.TotalMinutes} minutes, allowing the Queen to obtain buffs![/color]";
+            var msg = Loc.GetString("rmc-xeno-boon-desc", ("minutes", (int)_royalResinEvery.TotalMinutes));
             args.PushMarkup(msg);
         }
     }
@@ -255,7 +255,7 @@ public sealed class HiveBoonSystem : EntitySystem
 
         var area = _area.GetAreaName(ent);
         _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-boon-pylon-destroyed-announcement-marine", ("area", area)));
-        _xenoAnnounce.AnnounceSameHiveDefaultSound(ent.Owner, $"We have lost our control of the tall's communication relay at {area}.");
+        _xenoAnnounce.AnnounceSameHiveDefaultSound(ent.Owner, Loc.GetString("rmc-xeno-boon-lost-telecom", ("area", area)));
 
         if (ent.Comp.Tower is { } tower)
         {
@@ -272,7 +272,7 @@ public sealed class HiveBoonSystem : EntitySystem
     {
         using (args.PushGroup(nameof(HivePylonComponent)))
         {
-            var msg = $"[color=cyan]If placed {(int) CommunicationTowerXenoTakeoverTime.TotalMinutes} minutes into the round, this can turn into a hive pylon when its weeds take over a telecommunications tower![/color]";
+            var msg = Loc.GetString("rmc-xeno-boon-telecom-desc", ("minutes", (int) CommunicationTowerXenoTakeoverTime.TotalMinutes));
             args.PushMarkup(msg);
         }
     }
@@ -310,7 +310,7 @@ public sealed class HiveBoonSystem : EntitySystem
             return;
 
         args.Cancelled = true;
-        args.Popup = $"The {Name(ent)} is entangled in resin. Impossible to interact with.";
+        args.Popup = Loc.GetString("rmc-xeno-entangled-in-resin", ("name", Name(ent)));
     }
 
     private void OnCocoonTerminating(Entity<HiveKingCocoonComponent> ent, ref EntityTerminatingEvent args)
@@ -376,7 +376,7 @@ public sealed class HiveBoonSystem : EntitySystem
 
         foreach (var uid in canVoteList)
         {
-            _dialog.OpenOptions(uid, "Choose a sister", options, "Vote for a sister you wish to become the King.");
+            _dialog.OpenOptions(uid, Loc.GetString("rmc-xeno-king-vote-header"), options, Loc.GetString("rmc-xeno-king-vote-desc"));
         }
 
         EnsureVote(cocoon);
@@ -469,7 +469,7 @@ public sealed class HiveBoonSystem : EntitySystem
 
             var areaName = _area.GetAreaName(tower);
             _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-boon-pylon-announcement-marine", ("area", areaName)));
-            _xenoAnnounce.AnnounceSameHiveDefaultSound(newWeedSource, $"We have harnessed the tall's communication relay at {areaName}.\n\nWe will now grow royal resin from this pylon. Hold it!");
+            _xenoAnnounce.AnnounceSameHiveDefaultSound(newWeedSource, Loc.GetString("rmc-xeno-boon-telecom-captured", ("area", areaName)));
         }
 
         if (!TryComp(newWeedSource, out XenoWeedsComponent? newWeedSourceComp) ||
@@ -855,7 +855,7 @@ public sealed class HiveBoonSystem : EntitySystem
                 Dirty(boons);
 
                 var sound = new BioscanComponent().XenoSound;
-                _xenoAnnounce.AnnounceToHive(default, uid, "The hive is now ready to begin hatching His Grace, the King, if we gain control of both tall hivemind towers.", sound);
+                _xenoAnnounce.AnnounceToHive(default, uid, Loc.GetString("rmc-xeno-king-ready"), sound);
             }
         }
         catch (Exception e)

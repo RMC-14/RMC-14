@@ -141,7 +141,7 @@ public sealed partial class AttachableToggleableComponent : Component
     public string ActionName = "Toggle Attachable";
 
     [DataField, AutoNetworkedField]
-    public string ActionDesc = "Toggle an attachable. If you're seeing this, someone forgot to set the description properly.";
+    public string ActionDesc = new LocId("rmc-attach-bug-toggle");
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist? ActionsToRelayWhitelist;

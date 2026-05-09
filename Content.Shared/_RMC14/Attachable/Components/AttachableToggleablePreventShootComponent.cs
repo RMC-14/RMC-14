@@ -11,5 +11,5 @@ public sealed partial class AttachableToggleablePreventShootComponent : Componen
     public bool ShootWhenActive = true;
 
     [DataField, AutoNetworkedField]
-    public string Message = "You can't shoot this right now!";
+    public string Message = new LocId("rmc-attach-you-can-not-shoot-this");
 }

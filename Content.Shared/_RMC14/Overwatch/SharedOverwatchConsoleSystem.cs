@@ -389,7 +389,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         {
             if (_net.IsServer)
             {
-                _popup.PopupCursor("You're too busy peering through optics.", args.Actor, PopupType.MediumCaution);
+                _popup.PopupCursor(Loc.GetString("rmc-overwatch-with-optics"), args.Actor, PopupType.MediumCaution);
             }
             return;
         }

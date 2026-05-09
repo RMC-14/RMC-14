@@ -194,7 +194,7 @@ public sealed class HealthScannerBui : BoundUserInterface
 
                 var text = $"{reagent.Quantity.Float():F1} {prototype.LocalizedName}";
                 if (prototype.Overdose != null && reagent.Quantity > prototype.Overdose)
-                    text = $"[bold][color=red]{FormattedMessage.EscapeText(text)} OD[/color][/bold]";
+                    text = Loc.GetString("rmc-medical-scanner-ui-od", ("reagent", FormattedMessage.EscapeText(text)));
 
                 var label = new RichTextLabel();
                 label.SetMarkupPermissive(text);
@@ -209,7 +209,7 @@ public sealed class HealthScannerBui : BoundUserInterface
         _window.ChemicalContentsSeparator.Visible = anyChemicals;
         _window.ChemicalsContainer.Visible = anyChemicals;
 
-        _window.BloodTypeLabel.Text = "Blood:";
+        _window.BloodTypeLabel.Text = Loc.GetString("rmc-medical-scanner-ui-bleed");
         var bloodMsg = new FormattedMessage();
         bloodMsg.PushColor(Color.FromHex("#25B732"));
 
@@ -220,7 +220,7 @@ public sealed class HealthScannerBui : BoundUserInterface
         _window.BloodAmountLabel.SetMessage(bloodMsg);
 
         if (uiState.Bleeding)
-            _window.Bleeding.SetMarkup(" [bold][color=#DF3E3E]\\[Bleeding\\][/color][/bold]");
+            _window.Bleeding.SetMarkup(Loc.GetString("rmc-medical-scanner-ui-bleeding"));
         else
             _window.Bleeding.SetMessage(string.Empty);
 
@@ -233,7 +233,7 @@ public sealed class HealthScannerBui : BoundUserInterface
         }
         else
         {
-            temperatureMsg.AddText("None");
+            temperatureMsg.AddText(Loc.GetString("rmc-medical-scanner-ui-no-temp"));
         }
 
         _window.BodyTemperatureLabel.SetMessage(temperatureMsg);

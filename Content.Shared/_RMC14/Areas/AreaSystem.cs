@@ -338,8 +338,8 @@ public sealed class AreaSystem : EntitySystem
 
         if (area.Value.Comp.WeedKilling)
         {
-            if (user != null)
-                _popup.PopupClient("This area is unsuited to host the hive!", user.Value, user.Value, PopupType.MediumCaution);
+            if (user != null && popup)
+                _popup.PopupClient(Loc.GetString("rmc-area-xeno-no-hive"), user.Value, user.Value, PopupType.MediumCaution);
 
             return false;
         }
@@ -351,8 +351,8 @@ public sealed class AreaSystem : EntitySystem
         if (roundDuration > _earlySpreadHiveTime)
             return true;
 
-        if (user != null)
-            _popup.PopupClient("It's too early to spread the hive this far.", user.Value, user.Value, PopupType.MediumCaution);
+        if (user != null && popup)
+            _popup.PopupClient(Loc.GetString("rmc-area-xeno-no-smola"), user.Value, user.Value, PopupType.MediumCaution);
 
         return false;
     }

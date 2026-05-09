@@ -7,8 +7,8 @@
         <Button Name="PlatformButton" Access="Public" StyleClasses="ButtonSquare" />
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
         <RichTextLabel Name="BudgetLabel" Access="Public" Margin="0 0 0 5" />
-        <Button Name="OrderItemsButton" Access="Public" Text="{Loc 'rmc-req-main-view-order-items'}" StyleClasses="ButtonSquare" />
-        <Button Name="ViewRequestsButton" Access="Public" Text="{Loc 'rmc-req-main-view-view-requests'}" StyleClasses="ButtonSquare" Visible="False" />
-        <Button Name="ViewOrdersButton" Access="Public" Text="{Loc 'rmc-req-main-view-view-orders'}" StyleClasses="ButtonSquare" Visible="False" />
+        <Button Name="OrderItemsButton" Access="Public" Text="{Loc rmc-req-order-items}" StyleClasses="ButtonSquare" />
+        <Button Name="ViewRequestsButton" Access="Public" Text="{Loc rmc-req-view-requests}" StyleClasses="ButtonSquare" Visible="False" />
+        <Button Name="ViewOrdersButton" Access="Public" Text="{Loc rmc-req-view-orders}" StyleClasses="ButtonSquare" Visible="False" />
     </BoxContainer>
 </controls:RequisitionsMainView>

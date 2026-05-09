@@ -44,7 +44,7 @@ public sealed class UniqueActionSystem : EntitySystem
         args.Verbs.Add(new InteractionVerb
         {
             Act = () => TryUniqueAction(user, ent.Owner),
-            Text = "Unique action",
+            Text = Loc.GetString("rmc-weapons-unique-action"),
         });
     }
 

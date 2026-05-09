@@ -1,13 +1,15 @@
-rmc-marines-announce-planet = Planet:
-rmc-marines-announce-operation = Operation:
-rmc-marines-announce-ui-give-medal = Give a medal
-rmc-marines-announce-ui-tactical-map = Tactical Map
-rmc-marines-announce-ui-overwatch = Overwatch
-rmc-marines-announce-ui-echo-designate = Designate Echo Squad
-rmc-marines-announce-ui-primary-lz = Designate Primary LZ
-rmc-marines-announce-ui-send = Send
-rmc-marines-control-computer-ui-ship-control = [bold]Ship Control[/bold]
-rmc-marines-control-computer-ui-ship-announcement = Make a shipwide announcement
-rmc-marines-control-computer-ui-emergency-measures = [bold]Emergency measures[/bold]
-rmc-overwatch-console-not-loaded-orbital-bombardment = [color=red][bold]No warhead loaded[/color][/bold]
-rmc-overwatch-console-text-input-cancel = Cancel
+rmc-command-comp-planet-name = Planet:
+rmc-command-comp-operation-name = Operation:
+rmc-command-comp-give-medal = Give a medal
+rmc-overwatch-console-tactical-map = Tactical Map
+rmc-overwatch-console = Overwatch
+rmc-overwatch-console-no-crate-loaded = [color=red][bold][ NO CRATE LOADED ][/bold][/color]
+rmc-overwatch-console-warhead-loaded = [color=red][bold]No warhead loaded[/color][/bold]
+rmc-command-comp-designate-echo = Designate Echo Squad
+rmc-command-comp-primary-lz = Designate Primary LZ
+rmc-command-comp-send = Send
+rmc-command-comp-ship-control = [bold]Ship Control[/bold]
+rmc-command-comp-ship-control-make-announce = Make a shipside announcement
+rmc-command-comp-ship-control-emergency = [bold]Emergency measures[/bold]
+rmc-overwatch-ok-button = Ok
+rmc-overwatch-cancel-button = Cancel

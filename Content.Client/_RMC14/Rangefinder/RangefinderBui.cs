@@ -52,10 +52,10 @@ public sealed class RangefinderBui : BoundUserInterface
         if (rangefinder.LastCoords is { } mapCoords)
         {
             var coords = _transform.ToCoordinates(mapCoords);
-            _window.BottomContainer.AddChild(AddRow("Supply Drop", _area.CanSupplyDrop(mapCoords)));
-            _window.BottomContainer.AddChild(AddRow("Mortar", _area.CanMortarFire(coords)));
-            _window.BottomContainer.AddChild(AddRow("Close Air Support", _area.CanCAS(coords)));
-            _window.BottomContainer.AddChild(AddRow("Orbital Bombardment", _area.CanOrbitalBombard(coords, out _)));
+            _window.BottomContainer.AddChild(AddRow(Loc.GetString("rmc-area-supply-drop"), _area.CanSupplyDrop(mapCoords)));
+            _window.BottomContainer.AddChild(AddRow(Loc.GetString("rmc-area-mortar"), _area.CanMortarFire(coords)));
+            _window.BottomContainer.AddChild(AddRow(Loc.GetString("rmc-area-cas"), _area.CanCAS(coords)));
+            _window.BottomContainer.AddChild(AddRow(Loc.GetString("rmc-area-ob"), _area.CanOrbitalBombard(coords, out _)));
         }
     }
 

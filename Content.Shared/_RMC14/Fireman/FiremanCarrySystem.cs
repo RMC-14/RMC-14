@@ -77,13 +77,13 @@ public sealed class FiremanCarrySystem : EntitySystem
         args.Handled = true;
         if (!_skills.HasSkill(user, ent.Comp.Skill, 1))
         {
-            _popup.PopupClient(Loc.GetString("You aren't trained to carry people!"), ent, user, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-interactive-fireman-skill-issue"), ent, user, PopupType.MediumCaution);
             return;
         }
 
         if (!carrier.AggressiveGrab)
         {
-            _popup.PopupClient(Loc.GetString("You need to grab them aggressively first!"), ent, user, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-interactive-fireman-agressive-grab"), ent, user, PopupType.MediumCaution);
             return;
         }
 
@@ -100,7 +100,7 @@ public sealed class FiremanCarrySystem : EntitySystem
             return;
 
         var target = Identity.Name(ent, EntityManager, args.User);
-        _popup.PopupClient(Loc.GetString($"You start loading {target} onto your back."), ent, user, PopupType.Medium);
+        _popup.PopupClient(Loc.GetString("rmc-interactive-fireman-process", ("target", target)), ent, user, PopupType.Medium);
     }
 
     private void OnCarriableFiremanCarryDoAfterAttempt(Entity<FiremanCarriableComponent> ent, ref DoAfterAttemptEvent<FiremanCarryDoAfterEvent> args)

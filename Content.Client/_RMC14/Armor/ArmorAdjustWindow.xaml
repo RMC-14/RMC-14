@@ -2,13 +2,13 @@
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                Title="Armor Values">
     <BoxContainer Orientation="Vertical" SeparationOverride="4" MinWidth="50" Margin="4">
-        <Label Text="Bullet Armor" />
-        <LineEdit Name="BulletLineEdit" Text="Enter bullet armor value" />
-        <Label Text="Melee Armor" />
-        <LineEdit Name="MeleeLineEdit" Text="Enter melee armor value" />
-        <Label Text="Explosion Armor" />
-        <LineEdit Name="ExplosionLineEdit" Text="Enter explosion armor value" />
-        <Label Text="Bio Armor" />
-        <LineEdit Name="BioLineEdit" Text="Enter bio armor value" />
+        <Label Text="{Loc rmc-bullet-armor}" />
+        <LineEdit Name="BulletLineEdit" Text="{Loc rmc-enter-bullet-armor}" />
+        <Label Text="{Loc rmc-melee-armor}" />
+        <LineEdit Name="MeleeLineEdit" Text="{Loc rmc-enter-melee-armor}" />
+        <Label Text="{Loc rmc-explosion-armor}" />
+        <LineEdit Name="ExplosionLineEdit" Text="{Loc rmc-enter-explosion-armor}" />
+        <Label Text="{Loc rmc-bio-armor}" />
+        <LineEdit Name="BioLineEdit" Text="{Loc rmc-enter-bio-armor}" />
     </BoxContainer>
 </DefaultWindow>

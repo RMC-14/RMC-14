@@ -17,11 +17,11 @@
                     <controls:DropshipButton Name="CancelButton" Access="Public"
                                              Margin="1" BackgroundColor="#004E25"
                                              BorderColor="#02E74E" BorderThickness="1"
-                                             Text="{Loc 'rmc-dropship-ui-cancel'}" Disabled="True" />
+                                             Text="{Loc 'rmc-dropship-fly-cancel'}" Disabled="True" />
                     <controls:DropshipButton Name="LaunchButton" Access="Public"
                                              Margin="1" BackgroundColor="#004E25"
                                              BorderColor="#02E74E" BorderThickness="1"
-                                             Text="{Loc 'rmc-dropship-ui-launch'}" Disabled="True" />
+                                             Text="{Loc 'rmc-dropship-fly-launch'}" Disabled="True" />
                 </BoxContainer>
             </BoxContainer>
             <cc:HSeparator Color="#02E74E" />
@@ -39,24 +39,24 @@
                 <controls:DropshipButton Name="LockdownButton" Access="Public"
                                          Margin="1" BackgroundColor="#004E25"
                                          BorderColor="#02E74E" BorderThickness="1"
-                                         Text="Lockdown" />
+                                         Text="{Loc rmc-dropship-lockdown}" />
             </BoxContainer>
             <cc:HSeparator Color="#02E74E" />
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5">
                 <controls:DropshipButton Name="LockdownButtonAft" Access="Public"
                                          Margin="1" BackgroundColor="#004E25"
                                          BorderColor="#02E74E" BorderThickness="1"
-                                         Text="Lock Aft"
+                                         Text="{Loc rmc-dropship-lock-aft}"
                                          HorizontalExpand="True"/>
                 <controls:DropshipButton Name="LockdownButtonPort" Access="Public"
                                          Margin="1" BackgroundColor="#004E25"
                                          BorderColor="#02E74E" BorderThickness="1"
-                                         Text="Lock Port"
+                                         Text="{Loc rmc-dropship-lock-port}"
                                          HorizontalExpand="True"/>
                 <controls:DropshipButton Name="LockdownButtonStarboard" Access="Public"
                                          Margin="1" BackgroundColor="#004E25"
                                          BorderColor="#02E74E" BorderThickness="1"
-                                         Text="Lock Starboard"
+                                         Text="{Loc rmc-dropship-lock-starboard}"
                                          HorizontalExpand="True"/>
             </BoxContainer>
             <cc:HSeparator Color="#02E74E" />

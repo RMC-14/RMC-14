@@ -6,14 +6,14 @@ public static class RMCDirectionExtensions
     {
         return direction switch
         {
-            Direction.South => "S",
-            Direction.SouthEast => "SE",
-            Direction.East => "E",
-            Direction.NorthEast => "NE",
-            Direction.North => "N",
-            Direction.NorthWest => "NW",
-            Direction.West => "W",
-            Direction.SouthWest => "SW",
+            Direction.South => "Ю",
+            Direction.SouthEast => "С-В",
+            Direction.East => "В",
+            Direction.NorthEast => "С-В",
+            Direction.North => "С",
+            Direction.NorthWest => "С-З",
+            Direction.West => "З",
+            Direction.SouthWest => "Ю-З",
             _ => string.Empty,
         };
     }

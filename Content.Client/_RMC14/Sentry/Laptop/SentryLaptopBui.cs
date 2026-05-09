@@ -105,7 +105,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         var selectAllButton = new SentryButton
         {
-            Text = "Select All",
+            Text = Loc.GetString("rmc-sentry-select-all"),
             HorizontalExpand = true,
             Margin = new Thickness(0, 0, 2, 0),
             BackgroundColor = Color.FromHex("#1A3D5C"),
@@ -115,7 +115,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         var deselectAllButton = new SentryButton
         {
-            Text = "Deselect All",
+            Text = Loc.GetString("rmc-sentry-deselect-all"),
             HorizontalExpand = true,
             Margin = new Thickness(2, 0, 0, 0),
             BackgroundColor = Color.FromHex("#5C1A1A"),
@@ -329,7 +329,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
             var sentryCount = state.Sentries.Count;
             var maxSentries = laptop.MaxLinkedSentries;
 
-            _window!.LaptopHeader.SetMarkupPermissive($"[color=#88C7FA][font size=16][bold]SENTRY NETWORK - {sentryCount}/{maxSentries} LINKED[/bold][/font][/color]");
+            _window!.LaptopHeader.SetMarkupPermissive(Loc.GetString("rmc-sentry-network", ("count", sentryCount), ("max", maxSentries)));
         }
     }
 
@@ -346,13 +346,13 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         if (state.Sentries.Count == 0)
         {
-            _window!.StatusLabel.Text = "Status: No sentries linked";
+            _window!.StatusLabel.Text = Loc.GetString("rmc-sentry-status-no-linked");
             _window.StatusLabel.FontColorOverride = Color.FromHex("#A42625");
             return;
         }
 
         var onlineCount = state.Sentries.Count(s => s.Mode == SentryMode.On);
-        _window!.StatusLabel.Text = $"Status: {onlineCount}/{state.Sentries.Count} Online";
+        _window!.StatusLabel.Text = Loc.GetString("rmc-sentry-status-online", ("online", onlineCount), ("allcount", state.Sentries.Count));
         _window.StatusLabel.FontColorOverride = onlineCount > 0 ? Color.FromHex("#229132") : Color.FromHex("#CED22B");
     }
 
@@ -417,9 +417,9 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         card.SentryStatus.SetMarkupPermissive(info.Mode switch
         {
-            SentryMode.On => "[color=#229132][ONLINE][/color]",
-            SentryMode.Off => "[color=#CED22B][OFFLINE][/color]",
-            _ => "[color=#A42625][OFFLINE][/color]"
+            SentryMode.On => Loc.GetString("rmc-sentry-mode-on"),
+            SentryMode.Off => Loc.GetString("rmc-sentry-mode-off"),
+            _ => Loc.GetString("rmc-sentry-mode-off2")
         });
 
         card.LocationLabel.Text = info.Location;
@@ -462,9 +462,9 @@ public sealed class SentryLaptopBui : BoundUserInterface
     {
         card.ModeLabel.SetMarkupPermissive(info.Mode switch
         {
-            SentryMode.On => "[color=#229132]Active[/color]",
-            SentryMode.Off => "[color=#CED22B]Standby[/color]",
-            _ => "[color=#A42625]Packed[/color]"
+            SentryMode.On => Loc.GetString("rmc-sentry-mode2-on"),
+            SentryMode.Off => Loc.GetString("rmc-sentry-mode2-off"),
+            _ => Loc.GetString("rmc-sentry-mode2-off2")
         });
 
         if (info.Target != null && _entities.TryGetEntity(info.Target.Value, out var targetEnt))
@@ -474,7 +474,7 @@ public sealed class SentryLaptopBui : BoundUserInterface
         }
         else
         {
-            card.TargetLabel.SetMarkupPermissive("[color=#B0B0B0]None[/color]");
+            card.TargetLabel.SetMarkupPermissive(Loc.GetString("rmc-sentry-target-none"));
         }
     }
 
@@ -692,12 +692,12 @@ public sealed class SentryLaptopBui : BoundUserInterface
         _window.CameraPanel.Visible = true;
         _window.CameraViewport.Eye = eye.Eye;
 
-        var sentryName = "Unknown";
+        var sentryName = Loc.GetString("rmc-sentry-name-unknown");
         if (_entities.TryGetComponent<MetaDataComponent>(sentryEntity.Value, out var meta))
             sentryName = meta.EntityName;
 
         var fovText = sentryInfo?.MaxDeviation is >= 180 ? "360°" : $"{(int)((sentryInfo?.MaxDeviation ?? 75f) * 2)}°";
-        _window.CameraTitle.SetMarkupPermissive($"[color=#88C7FA][bold]CAMERA: {sentryName} (Range: {visionRadius:F1} tiles, FOV: {fovText})[/bold][/color]");
+        _window.CameraTitle.SetMarkupPermissive(Loc.GetString("rmc-sentry-info", ("name", sentryName), ("radius", visionRadius), ("fov", fovText)));
 
         if (_savedWindowSize == null)
             _savedWindowSize = new Vector2i((int)_window.Size.X, (int)_window.Size.Y);

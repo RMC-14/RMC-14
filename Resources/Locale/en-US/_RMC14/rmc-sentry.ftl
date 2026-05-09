@@ -62,30 +62,38 @@ health-examinable-sentry-Shock-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))
 rmc-sentry-not-emergency = {CAPITALIZE(THE($deployer))} can only be activated in emergencies.
 rmc-sentry-deploy = You deploy {THE($spawned)}
 
-rmc-sentry-laptop-ui-name = [color=#88C7FA][bold] UN 571-C Sentry Gun: [/color][/bold]
-rmc-sentry-laptop-ui-status-online = [color=#229132][ONLINE][/color]
-rmc-sentry-laptop-ui-name2 = NAME
-rmc-sentry-laptop-ui-healthbar = HEALTH
-rmc-sentry-laptop-ui-ammobar = AMMO
-rmc-sentry-laptop-ui-mode-label = MODE
-rmc-sentry-laptop-ui-mode-active = Active
-rmc-sentry-laptop-ui-location = LOCATION
-rmc-sentry-laptop-ui-location-unknown = Unknown
-rmc-sentry-laptop-ui-target = TARGET
-rmc-sentry-laptop-ui-target-none = None
-rmc-sentry-laptop-ui-iff-target-controls = IFF TARGETING CONTROLS
-rmc-sentry-laptop-ui-iff-target-controls-reset = RESET TO DEFAULT
-rmc-sentry-laptop-ui-toggle-power = TOGGLE POWER
-rmc-sentry-laptop-ui-view-cam = VIEW CAM
-rmc-sentry-laptop-ui-unlink = UNLINK
-rmc-sentry-laptop-ui-global-iff = GLOBAL IFF
-rmc-sentry-laptop-ui-refresh = REFRESH
-rmc-sentry-laptop-ui-unlink-all = UNLINK ALL
-rmc-sentry-laptop-window-ui-status = Status: No sentries linked
-rmc-sentry-laptop-window-ui-search = SEARCH
-rmc-sentry-laptop-window-ui-global-iff-target-controls = GLOBAL IFF TARGETING CONTROLS
-rmc-sentry-laptop-window-ui-global-iff-target-controls-reset-all = RESET ALL TO DEFAULT
-rmc-sentry-laptop-window-ui-global-power-on = POWER ALL ON
-rmc-sentry-laptop-window-ui-global-power-off = POWER ALL OFF
-rmc-sentry-laptop-window-ui-camera-view = [color=#88C7FA][bold]CAMERA VIEW[/color][/bold]
-rmc-sentry-laptop-window-ui-camera-view-close = CLOSE
+rmc-sentry-standart-name = [color=#88C7FA][bold] UN 571-C Sentry Gun: [/color][/bold]
+rmc-sentry-mode-on = [color=#229132][ONLINE][/color]
+rmc-sentry-name-header = NAME
+rmc-sentry-name-enter = Enter custom name...
+rmc-sentry-healthbar = HEALTH
+rmc-sentry-ammobar = AMMO
+rmc-sentry-mode = MODE
+rmc-sentry-mode-active = Active
+rmc-sentry-location = LOCATION
+rmc-sentry-location-unknown = Unknown
+rmc-sentry-target = TARGET
+rmc-sentry-target-none = None
+rmc-sentry-iff-target-controls = IFF TARGETING CONTROLS
+rmc-sentry-iff-target-controls-reset-to-def = RESET TO DEFAULT
+rmc-sentry-toggle-power = TOGGLE POWER
+rmc-sentry-view-cam = VIEW CAM
+rmc-sentry-unlink = UNLINK
+rmc-sentry-select-all = Select All
+rmc-sentry-deselect-all = Deselect All
+rmc-sentry-network = [color=#88C7FA][font size=16][bold]SENTRY NETWORK - {count}/{max} LINKED[/bold][/font][/color]
+rmc-sentry-status-no-linked = Status: No sentries linked
+rmc-sentry-status-online = Status: {$online}/{$allcount} Online
+rmc-sentry-mode-off2 = [color=#A42625][OFFLINE][/color]
+rmc-sentry-mode2-on = [color=#229132]Active[/color]
+rmc-sentry-mode2-off = [color=#CED22B]Standby[/color]
+rmc-sentry-mode2-off2 = [color=#A42625]Packed[/color]
+rmc-sentry-target-none2 = [color=#B0B0B0]None[/color]
+rmc-sentry-name-unknown = Unknown
+rmc-sentry-info = [color=#88C7FA][bold]CAMERA: {$name}[/bold][/color] (Range: {$radius} tiles, FOV: {$fov})
+rmc-sentry-apply-to-all = APPLY TO ALL
+rmc-sentry-reset-to-all = RESET ALL TO DEFAULT
+rmc-sentry-power-all-on = POWER ALL ON
+rmc-sentry-power-all-off = POWER ALL OFF
+rmc-sentry-camera-view-header = [color=#88C7FA][bold]CAMERA VIEW[/color][/bold]
+rmc-sentry-camera-view-close = CLOSE

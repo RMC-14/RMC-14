@@ -171,14 +171,14 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         var user = args.Actor;
         if (IsPhoneBusy(target))
         {
-            _popup.PopupEntity("That phone is busy!", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-telephone-is-busy"), user, user, PopupType.MediumCaution);
             return;
         }
 
         if (HasComp<RotaryPhoneBackpackComponent>(target) &&
             !TryGetPhoneBackpackHolder(target, out _))
         {
-            _popup.PopupEntity("No transmitters could be located to call!", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-telephone-no-transmitters"), user, user, PopupType.MediumCaution);
             return;
         }
 
@@ -188,7 +188,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
             TryComp(user, out MetaDataComponent? marineMeta) &&
             TryComp(ent, out MetaDataComponent? phoneMeta))
         {
-            _popup.PopupEntity($"{marineMeta.EntityName} dials a number on the {phoneMeta.EntityName}.", ent);
+            _popup.PopupEntity($"{marineMeta.EntityName} {Loc.GetString("rmc-telephone-dials-number")} {phoneMeta.EntityName}.", ent);
         }
 
         ent.Comp.Idle = false;
@@ -589,7 +589,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
             void PhoneSnapBackPopup()
             {
-                _popup.PopupEntity($"The {Name(uid)} snaps back to the {Name(rotary)}!", uid, PopupType.MediumCaution);
+                _popup.PopupEntity($"{Name(uid)} {Loc.GetString("rmc-telephone-snap-back")} {Name(rotary)}!", uid, PopupType.MediumCaution);
             }
 
             var phonePosition = _transform.GetMoverCoordinates(uid);

@@ -122,7 +122,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             access.Tags.Remove(accessToRemove);
         }
 
-        idCard._jobTitle = "Civilian";
+        idCard._jobTitle = Loc.GetString("rmc-id-console-rank-civilian");
         Dirty(uid.Value, idCard);
         Dirty(uid.Value, access);
         if (idCard.OriginalOwner != null)
@@ -217,7 +217,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             if (!_prototype.TryIndex(ent.Comp.Access, out var accessPrototype) || accessPrototype.Name == null)
                 return;
 
-            _popup.PopupClient($"This id is missing the {Loc.GetString(accessPrototype.Name)}",
+            _popup.PopupClient(Loc.GetString("rmc-id-console-missing-access", ("access", Loc.GetString(accessPrototype.Name))),
                 args.Actor,
                 PopupType.MediumCaution);
         }
@@ -506,11 +506,11 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             _metaData.SetEntityName(uid.Value,
                 $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({idCard._jobTitle})");
 
-            var selfMsgUnassign = $"{Name(marineId)} has been unassigned.";
+            var selfMsgUnassign = Loc.GetString("rmc-id-console-id-has-been-unassigned", ("id", Name(marineId)));
             _marineAnnounce.AnnounceSingle(selfMsgUnassign, actor);
             _popup.PopupCursor(selfMsgUnassign, actor, PopupType.Large);
 
-            var targetMsgUnassign = "You've been unassigned from your squad.";
+            var targetMsgUnassign = Loc.GetString("rmc-id-console-you-has-been-unassigned");
             _marineAnnounce.AnnounceSingle(targetMsgUnassign, marineId);
             _popup.PopupEntity(targetMsgUnassign, marineId, marineId, PopupType.Large);
 
@@ -522,7 +522,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         if (!TryGetEntity(squadNetEnt, out var newSquadEnt))
         {
-            _popup.PopupCursor($"There was an error assigning {Name(marineId)}.", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-id-console-error-assigning-squad ", ("name", Name(marineId))), actor, PopupType.LargeCaution);
             return;
         }
 
@@ -531,17 +531,13 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             role.Job is { } job &&
             !_squad.HasSpaceForRole((newSquadEnt.Value, newSquadComp), job))
         {
-            var jobName = job.Id;
-            if (_prototype.TryIndex(job, out var jobProto))
-                jobName = Loc.GetString(jobProto.Name);
-
-            _popup.PopupCursor($"{Name(newSquadEnt.Value)} can't have another {jobName}.", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-id-console-no-another-jobs-in-squad", ("squad", Name(newSquadEnt.Value)), ("job", jobName)), actor, PopupType.LargeCaution);
             return;
         }
 
         if (ent.Comp.EnlistmentRequirement is { } requirements && !_skills.HasAllSkills(marineId, requirements))
         {
-            _popup.PopupCursor("You cannot assign untrained civilians to squads!", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-id-console-no-civilians-in-squad"), actor, PopupType.LargeCaution);
             return;
         }
 
@@ -550,11 +546,11 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         _metaData.SetEntityName(uid.Value,
             $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({Name(newSquadEnt.Value)} {idCard._jobTitle})");
 
-        var selfMsg = $"{Name(marineId)} has been assigned to {Name(newSquadEnt.Value)}.";
+        var selfMsg = Loc.GetString("rmc-id-console-smb-has-been-assigned", ("name", Name(marineId)), ("squadName", Name(newSquadEnt.Value)));
         _marineAnnounce.AnnounceSingle(selfMsg, actor);
         _popup.PopupCursor(selfMsg, actor, PopupType.Large);
 
-        var targetMsg = $"You've been transferred to {Name(newSquadEnt.Value)}!";
+        var targetMsg = Loc.GetString("rmc-overwatch-console-you-transferred", ("squadName", Name(newSquadEnt.Value)));
         _marineAnnounce.AnnounceSingle(targetMsg, marineId);
         _popup.PopupEntity(targetMsg, marineId, marineId, PopupType.Large);
 

@@ -1,12 +1,26 @@
 # Requisition Computer
 requisition-paperwork-receiver-name = Logistics Branch
 requisition-paperwork-reward-message = Confirmation Received! transferred ${$amount} from budget surplus
-rmc-req-cat-view-back-button = Back to all categories
-rmc-req-main-view-order-items = Order items
-rmc-req-main-view-view-requests = View requests
-rmc-req-main-view-view-orders = View orders
-rmc-req-order-cat-view-main-menu = Main menu
-rmc-req-order-cat-view-search-menu = Search item
+
+rmc-req-no-platform = No platform
+rmc-req-platform-pos = Platform position: {$position}
+rmc-req-asrs-is-busy = ASRS is busy
+rmc-req-raise-platform = Raise platform
+rmc-req-platform-pos-low = Platform position: Lowered
+rmc-req-lower-platform = Lower platform
+rmc-req-platform-pos-raise = Platform position: Raised
+rmc-req-asrs-please-wait = Please wait
+rmc-req-lower-platform-wait = Platform lowering...
+rmc-req-raise-platform-wait = Platform raising...
+rmc-req-supply-budget = [bold]Supply budget: {$balance}[/bold]
+rmc-req-select-category = [bold]Select a category[/bold]
+rmc-req-request-from-category = [bold]Request from: {$category}[/bold]
+rmc-req-back-to-all-cat = Back to all categories
+rmc-req-order-items = Order items
+rmc-req-view-requests = View requests
+rmc-req-view-orders = View orders
+rmc-req-main-menu = Main menu
+rmc-req-search-item = Search item
 
 # Requisition Invoice
 requisition-paper-print-name = {$name} invoice

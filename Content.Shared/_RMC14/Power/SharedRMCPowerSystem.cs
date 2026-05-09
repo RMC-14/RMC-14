@@ -125,7 +125,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
 
         if (_area.TryGetArea(ent, out _, out var areaProto))
-            _metaData.SetEntityName(ent, $"{areaProto.Name} APC");
+            _metaData.SetEntityName(ent, $"{areaProto.Name} ЛКП");
 
         _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.CellContainerSlot);
         if (ent.Comp.StartingCell is { } startingCell)
@@ -160,7 +160,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         var user = args.User;
         if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
         {
-            _popup.PopupClient($"You don't know how to use the {Name(ent)}'s interface.", ent, user, SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-apc-skill-issue", ("name", Name(ent))), ent, user, SmallCaution);
             return;
         }
 
@@ -173,7 +173,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
                 case RMCApcState.WiresExposed:
                     if (ent.Comp.CoverLockedButton)
                     {
-                        _popup.PopupClient("The cover is locked and cannot be opened.", user, user, MediumCaution);
+                        _popup.PopupClient(Loc.GetString("rmc-apc-cover-lock-try"), user, user, MediumCaution);
                         return;
                     }
 
@@ -275,7 +275,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (!_skills.HasSkill(args.User, ent.Comp.Skill, ent.Comp.SkillLevel))
         {
             args.Cancel();
-            _popup.PopupClient($"You don't know how to use the {Name(ent)}'s interface.", ent, args.User, SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-apc-skill-issue", ("name", Name(ent))), ent, args.User, SmallCaution);
             return;
         }
 
@@ -292,13 +292,13 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         {
             var markup = ent.Comp.State switch
             {
-                RMCApcState.Working => "Use:\n" +
-                                       "- An [color=cyan]engineering ID[/color] to lock or unlock the interface.\n" +
-                                       "- A [color=cyan]crowbar[/color] to open the cover.\n" +
-                                       "- A [color=cyan]screwdriver[/color] to expose the wires.",
-                RMCApcState.WiresExposed => "Use a [color=cyan]screwdriver[/color] to unexpose the wires or a [color=cyan]crowbar[/color] to open the cover!",
-                RMCApcState.CoverOpenBattery => "Use an [color=cyan]empty hand[/color] to remove the battery or a [color=cyan]crowbar[/color] to close the cover!",
-                RMCApcState.CoverOpenNoBattery => "Use a [color=cyan]battery[/color] to put in a battery!",
+                RMCApcState.Working => "Используйте:\n" +
+                                       "- [color=cyan]ID  с инж. доступом[/color] для блокировки или разблокировки интерфейса.\n" +
+                                       "- [color=cyan]Лом[/color] для открытия крышки.\n" +
+                                       "- [color=cyan]отвертку[/color] для доступа к проводам.",
+                RMCApcState.WiresExposed => Loc.GetString("rmc-apc-screw-crowbar"),
+                RMCApcState.CoverOpenBattery => Loc.GetString("rmc-apc-hand-crowbar"),
+                RMCApcState.CoverOpenNoBattery => Loc.GetString("rmc-apc-battery-slot"),
                 _ => null,
             };
 
@@ -584,20 +584,20 @@ public abstract class SharedRMCPowerSystem : EntitySystem
                 // TODO: localize
                 var tool = ent.Comp.State switch
                 {
-                    RMCFusionReactorState.Wrench => "a [color=cyan]Wrench[/color]",
-                    RMCFusionReactorState.Wire => "[color=cyan]Wirecutters[/color]",
-                    RMCFusionReactorState.Weld => "a [color=cyan]Welder[/color]",
+                    RMCFusionReactorState.Wrench => Loc.GetString("rmc-apc-use-repair-wrench"),
+                    RMCFusionReactorState.Wire => Loc.GetString("rmc-apc-use-repair-wirecutters"),
+                    RMCFusionReactorState.Weld => Loc.GetString("rmc-apc-use-repair-welder"),
                     _ => throw new ArgumentOutOfRangeException(),
                 };
 
-                args.PushMarkup($"Use {tool} to repair it!");
+                args.PushMarkup(Loc.GetString("rmc-apc-use-repair-tool", ("tool", tool)));
             }
 
             if (!_container.TryGetContainer(ent, ent.Comp.CellContainerSlot, out var container) ||
                 container.ContainedEntities.Count == 0)
             {
                 // TODO: localize
-                args.PushMarkup("It needs a [color=cyan]fuel cell[/color]!");
+                args.PushMarkup(Loc.GetString("rmc-apc-need-battery"));
             }
         }
     }

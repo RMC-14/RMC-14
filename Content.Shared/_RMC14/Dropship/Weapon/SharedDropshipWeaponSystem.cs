@@ -835,7 +835,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         UpdateTarget(ent, target.Value);
-        _popup.PopupClient("You move your dropship above the selected stretcher's beacon. You can now manually activate the medevac system to hoist the patient up.", args.Actor);
+        _popup.PopupClient(Loc.GetString("rmc-dropship-equipment-medevac-entered"), args.Actor);
     }
 
     private void OnWeaponsFultonPrevious(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFultonPreviousMsg args)

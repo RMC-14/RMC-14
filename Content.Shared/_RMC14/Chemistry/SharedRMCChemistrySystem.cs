@@ -77,11 +77,11 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
     {
         using (args.PushGroup(nameof(DetailedExaminableSolutionComponent)))
         {
-            args.PushText("It contains:");
+            args.PushText(Loc.GetString("rmc-chem-disp-contents"));
             if (!_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out _, out var solution) ||
                 solution.Volume <= FixedPoint2.Zero)
             {
-                args.PushText("Nothing.");
+                args.PushText(Loc.GetString("rmc-chem-nothing"));
             }
             else
             {
@@ -91,18 +91,18 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                     if (_prototypes.TryIndexReagent(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto))
                         name = reagentProto.LocalizedName;
 
-                    args.PushText($"{reagent.Quantity.Float():F2} units of {name}");
+                    args.PushText(Loc.GetString("rmc-chem-disp-reagent-quantity", ("reagentquantity", reagent.Quantity.Float()), ("reagentname", name)));
                 }
 
-                args.PushText($"Total volume: {solution.Volume} / {solution.MaxVolume}.");
+                args.PushText(Loc.GetString("rmc-chem-total-volume", ("units", solution.Volume), ("max", solution.MaxVolume)));
             }
 
             if (TryComp<RMCToggleableSolutionTransferComponent>(ent.Owner, out var transferComp))
             {
                 var directionText = transferComp.Direction switch
                 {
-                    SolutionTransferDirection.Input => "Transfer mode: Drawing",
-                    SolutionTransferDirection.Output => "Transfer mode: Dispensing",
+                    SolutionTransferDirection.Input => Loc.GetString("rmc-chem-transfer-mode-drawing"),
+                    SolutionTransferDirection.Output => Loc.GetString("rmc-chem-transfer-mode-dispersing"),
                     _ => string.Empty,
                 };
 
@@ -135,7 +135,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         var dispensing = HasComp<DrainableSolutionComponent>(ent);
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = dispensing ? "Enable drawing" : "Enable dispensing",
+            Text = dispensing ? Loc.GetString("rmc-chem-transfer-mode-enable-drawing"): Loc.GetString("rmc-chem-transfer-mode-enable-dispersing"),
             Act = () =>
             {
                 dispensing = HasComp<DrainableSolutionComponent>(ent);
@@ -146,7 +146,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                     refillable.Solution = ent.Comp.Solution;
                     ent.Comp.Direction = SolutionTransferDirection.Input;
                     Dirty(ent, refillable);
-                    _popup.PopupClient("Now drawing", ent, user, PopupType.Medium);
+                    _popup.PopupClient(Loc.GetString("rmc-chem-transfer-mode-drawning"), ent, user, PopupType.Medium);
                 }
                 else
                 {
@@ -155,7 +155,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                     drainable.Solution = ent.Comp.Solution;
                     ent.Comp.Direction = SolutionTransferDirection.Output;
                     Dirty(ent, drainable);
-                    _popup.PopupClient("Now dispensing", ent, user, PopupType.Medium);
+                    _popup.PopupClient(Loc.GetString("rmc-chem-transfer-mode-dispersing"), ent, user, PopupType.Medium);
                 }
             },
         });
