@@ -36,7 +36,7 @@ public sealed class LanguageIconTag : IMarkupTagHandler
 
     private sealed class LanguageIconControl : Control
     {
-        private const float VerticalOffset = 2f;
+        private const float VerticalOffset = 3f;
 
         private readonly TextureRect _icon;
 

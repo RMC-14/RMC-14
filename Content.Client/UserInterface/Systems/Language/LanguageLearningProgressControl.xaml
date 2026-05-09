@@ -8,27 +8,34 @@
                              SetWidth="32"
                              SetHeight="32"
                              Stretch="KeepAspectCentered"
-                             Margin="0 0 8 0"
+                             Margin="0 2 8 0"
+                             VerticalAlignment="Top"
                              Visible="False"/>
                 <BoxContainer Orientation="Vertical"
                               HorizontalExpand="True"
                               VerticalAlignment="Center">
-                    <Label Name="NameLabel"
-                           FontColorOverride="#FFFFFF"
-                           StyleClasses="LabelHeading"/>
+                    <BoxContainer Orientation="Horizontal"
+                                  VerticalAlignment="Center"
+                                  SeparationOverride="6">
+                        <Label Name="NameLabel"
+                               FontColorOverride="#FFFFFF"
+                               StyleClasses="LabelHeading"
+                               VerticalAlignment="Center"/>
+                        <TextureButton Name="ExpandButton"
+                                       Scale="0.3 0.3"
+                                       VerticalAlignment="Center"
+                                       StyleClasses="SpeciesInfoDefault"
+                                       Visible="False"/>
+                    </BoxContainer>
                     <Label Name="StatsLabel"
                            FontColorOverride="#D3D3D3"
                            StyleClasses="LabelSubText"/>
                     <ProgressBar Name="ProgressBar"
+                                 MaxValue="1"
                                  HorizontalExpand="True"
                                  SetHeight="8"
                                  Margin="0 2 0 0"/>
                 </BoxContainer>
-                <Button Name="ExpandButton"
-                        SetWidth="90"
-                        SetHeight="24"
-                        VerticalAlignment="Center"
-                        Visible="False"/>
             </BoxContainer>
         </PanelContainer>
         <PanelContainer Name="WordsPanel"

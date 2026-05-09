@@ -50,6 +50,9 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
 
         learningComp.Languages.TryGetValue(language, out var languageData);
         var learnedWords = languageData?.LearnedWords;
+        var previewBoostedWordsRemaining = languageData?.BoostedWordsRemaining ?? 0;
+        var previewBoostedWordComprehension = languageData?.InitialBoostedWordComprehension ?? 0f;
+        HashSet<string>? previewBoostedWords = null;
 
         var result = new StringBuilder(message.Length);
         var lastIndex = 0;
@@ -66,7 +69,21 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
             if (learnedWords?.ContainsKey(wordLower) == true)
                 wordComprehension = learnedWords[wordLower];
             else
-                wordComprehension = Math.Max(overallComprehension, defaultComprehension);
+            {
+                if (previewBoostedWordsRemaining > 0 && previewBoostedWordComprehension > 0f)
+                {
+                    previewBoostedWords ??= new HashSet<string>();
+
+                    if (previewBoostedWords.Add(wordLower))
+                        previewBoostedWordsRemaining--;
+
+                    wordComprehension = Math.Max(previewBoostedWordComprehension, defaultComprehension);
+                }
+                else
+                {
+                    wordComprehension = Math.Max(overallComprehension, defaultComprehension);
+                }
+            }
 
             var effectiveComprehension = Math.Max(wordComprehension, overallComprehension);
 

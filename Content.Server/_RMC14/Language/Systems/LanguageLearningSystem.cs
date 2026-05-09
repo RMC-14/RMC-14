@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
-using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -16,7 +15,6 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 {
     [Dependency] private readonly LanguageSystem _language = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private const float MaxHearingRange = 10.0f;
@@ -64,7 +62,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
     private void OnEntitySpoke(EntitySpokeEvent args)
     {
-        if (!_prototypeManager.TryIndex(args.Language, out var languageProto))
+        if (!_prototypeManager.HasIndex(args.Language))
             return;
 
         _potentialLearners.Clear();
@@ -90,7 +88,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
                     continue;
             }
 
-            TryHandleFirstContact((potentialLearner, learnerComp), args.Language, languageProto);
+            TryHandleFirstContact((potentialLearner, learnerComp), args.Language);
 
             var distance = Vector2.Distance(Transform(args.Source).WorldPosition, Transform(potentialLearner).WorldPosition);
 
@@ -103,8 +101,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
     private void TryHandleFirstContact(
         Entity<LanguageLearningComponent> learner,
-        ProtoId<LanguagePrototype> language,
-        LanguagePrototype languageProto)
+        ProtoId<LanguagePrototype> language)
     {
         if (!learner.Comp.FirstContactLanguages.Contains(language) ||
             !learner.Comp.Languages.TryGetValue(language, out var languageData) ||
@@ -115,15 +112,6 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
         languageData.Encountered = true;
         SyncLanguageState(learner.Comp, language);
-
-        var popup = languageProto.FirstContactMeaning != null
-            ? Loc.GetString(
-                "language-learning-first-contact-with-meaning",
-                ("language", languageProto.LocalizedName),
-                ("meaning", Loc.GetString(languageProto.FirstContactMeaning.Value)))
-            : Loc.GetString("language-learning-first-contact", ("language", languageProto.LocalizedName));
-
-        _popup.PopupEntity(popup, learner, learner, PopupType.Medium);
         Dirty(learner.Owner, learner.Comp);
     }
 
@@ -146,14 +134,27 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         if (comp.Languages.TryGetValue(language, out var existing))
         {
             existing.RequiresFirstContact = comp.FirstContactLanguages.Contains(language);
+
+            if (existing.BoostedWordsRemaining <= 0 &&
+                existing.InitialBoostedWordCount > 0 &&
+                existing.LearnedWords.Count == 0)
+            {
+                existing.BoostedWordsRemaining = existing.InitialBoostedWordCount;
+            }
+
             return existing;
         }
 
         var created = new LanguageLearningData
         {
             RequiresFirstContact = comp.FirstContactLanguages.Contains(language),
+            BoostedWordsRemaining = 0,
         };
         comp.Languages[language] = created;
+
+        if (created.InitialBoostedWordCount > 0)
+            created.BoostedWordsRemaining = created.InitialBoostedWordCount;
+
         return created;
     }
 
@@ -202,6 +203,9 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         if (studyCount >= comp.MaxLearningFromSameSource)
             return;
 
+        if (!_prototypeManager.TryIndex(language, out var languageProto))
+            return;
+
         var diminishingFactor = Math.Max(
             comp.MinimumDiminishingFactor,
             1.0f - (studyCount / (float) comp.MaxLearningFromSameSource));
@@ -214,7 +218,6 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         var words = ExtractWords(messageText);
 
         var wordsLearned = 0;
-        var significantLearning = false;
 
         foreach (var word in words)
         {
@@ -226,6 +229,15 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
             var wordLower = word.ToLower();
             var currentComprehension = languageData.LearnedWords.GetValueOrDefault(wordLower, 0f);
+
+            if (currentComprehension == 0f &&
+                languageData.BoostedWordsRemaining > 0 &&
+                languageData.InitialBoostedWordComprehension > 0f)
+            {
+                currentComprehension = Math.Min(comp.MaxWordComprehension, languageData.InitialBoostedWordComprehension);
+                languageData.LearnedWords[wordLower] = currentComprehension;
+                languageData.BoostedWordsRemaining--;
+            }
 
             if (currentComprehension >= comp.MaxWordComprehension)
                 continue;
@@ -239,15 +251,11 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
             var learningRate = baseRate + frequencyBonus;
             var actualLearning = learningRate * diminishingFactor * distancePenalty;
+            actualLearning *= languageProto.LearningRateMultiplier;
             actualLearning *= _random.NextFloat(0.9f, 1.1f);
 
             var newComprehension = Math.Min(comp.MaxWordComprehension, currentComprehension + actualLearning);
-            var learningGain = newComprehension - currentComprehension;
-
             languageData.LearnedWords[wordLower] = newComprehension;
-
-            if (learningGain > 0.05f)
-                significantLearning = true;
 
             wordsLearned++;
         }
@@ -259,25 +267,6 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
             UpdateLanguageProgress(learner, language);
 
-            if (significantLearning)
-            {
-                var overallComprehension = CalculateOverallComprehension(comp, language);
-                var percentage = (int) (overallComprehension * 100);
-                var uniqueWords = languageData.LearnedWords.Count;
-                var progressMessage = wordsLearned == 1
-                    ? Loc.GetString(
-                        "language-learning-progress-single",
-                        ("progress", percentage),
-                        ("words", uniqueWords))
-                    : Loc.GetString(
-                        "language-learning-progress-multi",
-                        ("terms", wordsLearned),
-                        ("progress", percentage),
-                        ("words", uniqueWords));
-
-                _popup.PopupEntity(progressMessage, learner, learner, PopupType.Medium);
-            }
-
             SyncLanguageState(comp, language);
             Dirty(learner.Owner, comp);
         }
@@ -288,9 +277,6 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         var comp = learner.Comp;
         var comprehension = CalculateOverallComprehension(comp, language);
         var languageData = EnsureLanguageTracking(comp, language);
-        var languageName = _prototypeManager.TryIndex(language, out var languageProto)
-            ? languageProto.LocalizedName
-            : language.Id;
 
         languageData.Progress = comprehension;
 
@@ -306,24 +292,12 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             if (TryComp<LanguageComponent>(learner.Owner, out var langComp))
             {
                 if (!langComp.UnderstoodLanguages.Contains(language))
-                {
                     _language.AddLanguage(learner.Owner, language, addSpoken: false, addUnderstood: true);
-                    _popup.PopupEntity(
-                        Loc.GetString("language-learning-mastered", ("language", languageName)),
-                        learner,
-                        learner,
-                        PopupType.Large);
-                }
             }
         }
         else if (comprehension >= comp.FluentComprehensionThreshold && hasLearnedAnyWords && !languageData.FluentAnnounced)
         {
             languageData.FluentAnnounced = true;
-            _popup.PopupEntity(
-                Loc.GetString("language-learning-fluent", ("language", languageName)),
-                learner,
-                learner,
-                PopupType.Large);
         }
 
         SyncLanguageState(comp, language);

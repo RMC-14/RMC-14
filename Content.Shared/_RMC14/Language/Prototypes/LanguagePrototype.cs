@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Language;
 using Content.Shared.Chat;
+using Content.Shared.Speech;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -19,6 +20,7 @@ public sealed partial class LanguagePrototype : IPrototype
     public const float DefaultMaximumOverallComprehensionValue = 0.95f;
     public const float DefaultLearnedWordComprehensionWeightValue = 0.7f;
     public const float DefaultVocabularyCompletenessWeightValue = 0.3f;
+    public const float DefaultLearningRateMultiplierValue = 1.0f;
 
     [IdDataField]
     public string ID { get; private set; } = default!;
@@ -104,6 +106,9 @@ public sealed partial class LanguagePrototype : IPrototype
     [DataField]
     public float VocabularyCompletenessWeight { get; set; } = DefaultVocabularyCompletenessWeightValue;
 
+    [DataField]
+    public float LearningRateMultiplier { get; set; } = DefaultLearningRateMultiplierValue;
+
     public string LocalizedName => Loc.GetString($"language-{ID}-name");
     public string ChatName => Loc.GetString($"chat-language-{ID}-name");
     public string LocalizedDescription => Loc.GetString($"language-{ID}-description");
@@ -139,6 +144,9 @@ public sealed partial class SpeechOverrideInfo
 
     [DataField]
     public List<LocId>? SpeechVerbOverrides;
+
+    [DataField]
+    public ProtoId<SpeechSoundsPrototype>? SpeechSoundsOverride;
 
     [DataField]
     public Dictionary<InGameICChatType, LocId> MessageWrapOverrides = new();

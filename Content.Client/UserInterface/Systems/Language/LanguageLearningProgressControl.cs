@@ -9,14 +9,15 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.IoC;
 using Robust.Shared.Prototypes;
+using Robust.Shared.GameObjects;
 
 namespace Content.Client.UserInterface.Systems.Language;
 
 [GenerateTypedNameReferences]
 public sealed partial class LanguageLearningProgressControl : Control
 {
-    [Dependency] private readonly LanguageLearningSystem _languageLearning = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
 
     private const float EstimatedChipWidth = 90f;
     private const int MaxWordsPerRow = 10;
@@ -147,7 +148,7 @@ public sealed partial class LanguageLearningProgressControl : Control
 
     private WordEntry CreateWordEntry(string word, float comprehension, int relevance)
     {
-        var displayWord = _languageLearning.ProcessWordForDisplay(
+        var displayWord = _entitySystemManager.GetEntitySystem<LanguageLearningSystem>().ProcessWordForDisplay(
             word,
             LanguageId,
             comprehension,
@@ -374,7 +375,7 @@ public sealed partial class LanguageLearningProgressControl : Control
             ("average", _data.AverageWordComprehension.ToString("P1")));
 
         StatsLabel.Text = string.Join(" | ", overallProgress, wordCount, averageComprehension);
-        ProgressBar.Value = _data.Progress;
+        ProgressBar.Value = Math.Clamp(_data.Progress, 0f, 1f);
         UpdateExpandButtonVisibility();
     }
 
@@ -392,9 +393,12 @@ public sealed partial class LanguageLearningProgressControl : Control
     private void UpdateExpansionState()
     {
         WordsPanel.Visible = _wordsExpanded && _data.WordCount > 0;
-        ExpandButton.Text = Loc.GetString(_wordsExpanded
+        ExpandButton.ToolTip = Loc.GetString(_wordsExpanded
             ? "language-learning-hide-words"
             : "language-learning-show-words");
+        ExpandButton.Modulate = _wordsExpanded
+            ? Color.White
+            : Color.FromHex("#888888");
 
         if (WordsPanel.Visible)
             RebuildWordsDisplay();

@@ -19,6 +19,18 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: LanguageLearning
+      learnableLanguages:
+      - Xeno
+      firstContactLanguages:
+      - Xeno
+      languages:
+        Xeno:
+          initialBoostedWordCount: 18
+          initialBoostedWordComprehension: 0.65
+      comprehensionThreshold: 0.8
+      learningRange: 8.0
+      baseWordLearningRate: 0.05
     - type: Skills
       skills:
         RMCSkillCqc: 5

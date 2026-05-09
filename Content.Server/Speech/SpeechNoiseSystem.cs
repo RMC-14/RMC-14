@@ -7,6 +7,8 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Random;
+using Content.Shared._RMC14.Language.Prototypes;
+using Content.Shared._RMC14.Xenonids;
 
 namespace Content.Server.Speech
 {
@@ -24,14 +26,18 @@ namespace Content.Server.Speech
             SubscribeLocalEvent<SpeechComponent, EntitySpokeEvent>(OnEntitySpoke);
         }
 
-        public SoundSpecifier? GetSpeechSound(Entity<SpeechComponent> ent, string message)
+        public SoundSpecifier? GetSpeechSound(
+            Entity<SpeechComponent> ent,
+            string message,
+            ProtoId<SpeechSoundsPrototype>? speechSoundsOverride = null)
         {
-            if (ent.Comp.SpeechSounds == null)
+            var speechSounds = speechSoundsOverride ?? ent.Comp.SpeechSounds;
+            if (speechSounds == null)
                 return null;
 
             // Play speech sound
             SoundSpecifier? contextSound;
-            var prototype = _protoManager.Index<SpeechSoundsPrototype>(ent.Comp.SpeechSounds);
+            var prototype = _protoManager.Index<SpeechSoundsPrototype>(speechSounds);
 
             // Different sounds for ask/exclaim based on last character
             contextSound = message[^1] switch
@@ -58,9 +64,24 @@ namespace Content.Server.Speech
             return contextSound;
         }
 
+        private ProtoId<SpeechSoundsPrototype>? GetSpeechSoundOverride(EntityUid uid, ProtoId<LanguagePrototype>? language)
+        {
+            if (language == null ||
+                !_protoManager.TryIndex(language.Value, out var languageProto))
+            {
+                return null;
+            }
+
+            if (HasComp<XenoComponent>(uid))
+                return null;
+
+            return languageProto.SpeechOverride.SpeechSoundsOverride;
+        }
+
         private void OnEntitySpoke(EntityUid uid, SpeechComponent component, EntitySpokeEvent args)
         {
-            if (component.SpeechSounds == null)
+            var effectiveSpeechSounds = GetSpeechSoundOverride(uid, args.Language) ?? component.SpeechSounds;
+            if (effectiveSpeechSounds == null)
                 return;
 
             var currentTime = _gameTiming.CurTime;
@@ -70,7 +91,7 @@ namespace Content.Server.Speech
             if (currentTime - component.LastTimeSoundPlayed < cooldown)
                 return;
 
-            var sound = GetSpeechSound((uid, component), args.Message);
+            var sound = GetSpeechSound((uid, component), args.Message, effectiveSpeechSounds);
             component.LastTimeSoundPlayed = currentTime;
             _audio.PlayPvs(sound, uid);
         }

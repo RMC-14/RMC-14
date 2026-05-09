@@ -18,6 +18,15 @@
     - type: NpcFactionMember
       factions:
       - Bureau
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillPolice: 2

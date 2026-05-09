@@ -30,12 +30,16 @@
       - Japanese
       - Russian
       - German
+      - Chinese
+      - Spanish
       understoodLanguages:
       - English
       - French
       - Japanese
       - Russian
       - German
+      - Chinese
+      - Spanish
       currentLanguage: English
       defaultLanguage: English
     - type: LanguageLearning

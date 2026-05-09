@@ -14,7 +14,7 @@
   expectedVocabularySize: 150
   obfuscationMethod:
     !type:ReplacementObfuscation
-    replacement: ["<??>"]
+    replacement: ["uh", "eh", "hm", "mm", "huh", "erm", "..."]
   speechOverride:
     allowRadio: true
     requireSpeech: true
@@ -35,9 +35,13 @@
   languageIcon: "/Textures/_RMC14/Actions/xeno_actions.rsi/queen_word.png"
   canUseRadio: true
   needsSpeech: true
+  showLanguageIcon: false
+  showLanguageName: false
   randomizeObfuscation: true
   firstContactMeaning: language-Xeno-first-contact
-  expectedVocabularySize: 80
+  expectedVocabularySize: 120
+  minimumRequiredLearnedWords: 20
+  learningRateMultiplier: 0.45
   obfuscationMethod:
     !type:XenoObfuscation
     xenoSounds: ["hss", "sss", "tss", "chk", "krr", "hrr", "skr", "tsk", "rrk", "hsk", "ssk"]
@@ -49,6 +53,7 @@
     requireLOS: false
     chatTypeOverride: null
     speechVerbOverrides: null
+    speechSoundsOverride: Xenonid
     messageWrapOverrides: {}
 
 - type: language

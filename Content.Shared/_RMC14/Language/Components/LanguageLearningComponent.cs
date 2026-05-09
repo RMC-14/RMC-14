@@ -108,6 +108,15 @@ public sealed partial class LanguageLearningData
     public float Progress;
 
     [DataField]
+    public int InitialBoostedWordCount;
+
+    [DataField]
+    public int BoostedWordsRemaining;
+
+    [DataField]
+    public float InitialBoostedWordComprehension;
+
+    [DataField]
     public Dictionary<string, float> LearnedWords = new();
 
     [DataField]

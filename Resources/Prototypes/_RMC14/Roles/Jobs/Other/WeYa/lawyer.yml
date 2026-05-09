@@ -20,6 +20,15 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillCqc: 0
