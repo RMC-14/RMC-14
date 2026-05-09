@@ -285,7 +285,7 @@
   - type: Clothing
     quickEquip: false
     sprite: _RMC14/Mobs/Animals/cat.rsi
-    heldPrefix: cat1
+    equippedPrefix: cat1
     slots:
     - HEAD
   - type: Speech

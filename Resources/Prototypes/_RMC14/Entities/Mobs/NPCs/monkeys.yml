@@ -3,7 +3,7 @@
   parent: [RMCSmallHost]
   id: CMMobSmallHostMonkey
   name: monkey
-  suffix: RMC
+  suffix: RMC, Small Host
   components:
   - type: NameIdentifier
     group: Monkey
@@ -16,7 +16,7 @@
   parent: [RMCSmallHost]
   id: CMMobSmallHostKobold
   name: kobold
-  suffix: RMC
+  suffix: RMC, Small Host
   components:
   - type: NameIdentifier
     group: Kobold
@@ -81,9 +81,9 @@
 
 - type: entity
   parent: [RMCSmallHost]
-  id: RMCMobSmallHostFrawa
-  name: frawa
-  suffix: RMC
+  id: RMCMobSmallHostFarwa
+  name: farwa
+  suffix: RMC, Small Host
   components:
   - type: NameIdentifier
     group: frawa
@@ -131,7 +131,7 @@
   parent: [RMCSmallHost]
   id: RMCMobSmallHostNeaera
   name: neaera
-  suffix: RMC
+  suffix: RMC, Small Host
   components:
   - type: NameIdentifier
     group: Neaera
@@ -139,8 +139,8 @@
     drawdepth: Mobs
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
-      sprite: _RMC14/Mobs/Animals/monkeys/frawa.rsi
-      state: frawa
+      sprite: _RMC14/Mobs/Animals/monkeys/neaera.rsi
+      state: neaera
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
       color: "#ffffff"
       sprite: Objects/Misc/handcuffs.rsi
@@ -174,7 +174,7 @@
   parent: [RMCSmallHost]
   id: RMCMobSmallHostStok
   name: stok
-  suffix: RMC
+  suffix: RMC, Small Host
   components:
   - type: NameIdentifier
     group: Stok
@@ -223,7 +223,7 @@
   parent: [RMCSmallHost]
   id: RMCMobSmallHostYiren
   name: yiren
-  suffix: RMC
+  suffix: RMC, Small Host
   components:
   - type: NameIdentifier
     group: Yiren
@@ -281,6 +281,6 @@
     prototypes:
     - CMMobSmallHostMonkey
 #    - CMMobSmallHostKobold
-#    - RMCMobSmallHostFrawa
+#    - RMCMobSmallHostFarwa
 #    - RMCMobSmallHostNeaera
 #    - RMCMobSmallHostStok

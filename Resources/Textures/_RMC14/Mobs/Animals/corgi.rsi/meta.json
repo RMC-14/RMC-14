@@ -11,13 +11,6 @@
       "name": "puppy-icon"
     },
     {
-      "name": "puppy",
-      "directions": 4
-    },
-    {
-      "name": "puppy_dead"
-    },
-    {
       "name": "puppy-inhand-left",
       "directions": 4
     },

@@ -347,7 +347,7 @@ cm-chatsan-replacement-corgi = canine fuzzy
 cm-chatsan-word-dogs = dogs
 cm-chatsan-word-corgies = corgies
 cm-chatsan-word-puppies = puppies
-cm-chatsan-replacement-dogs = canine fuzzies
+cm-chatsan-replacement-dogs = canines
 
 cm-chatsan-word-cat = cat
 cm-chatsan-word-kitty = kitty
@@ -361,15 +361,15 @@ cm-chatsan-replacement-cats = felines
 
 cm-chatsan-word-fish = fish
 cm-chatsan-word-carp = carp
-cm-chatsan-replacement-fish = aquatic pest
+cm-chatsan-replacement-fish = aquatic creature
 
 cm-chatsan-word-rat = rat
 cm-chatsan-word-mouse = mouse
-cm-chatsan-replacement-rat = squeaking pest
+cm-chatsan-replacement-rat = squeaking creature
 
 cm-chatsan-word-rats = rats
 cm-chatsan-word-mice = mice
-cm-chatsan-replacement-rats = squeaking pests
+cm-chatsan-replacement-rats = squeaking creature
 
 cm-chatsan-word-monkey = monkey
 cm-chatsan-word-monke = monke
