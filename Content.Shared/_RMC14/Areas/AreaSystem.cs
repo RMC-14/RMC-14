@@ -371,7 +371,7 @@ public sealed class AreaSystem : EntitySystem
         return false;
     }
 
-    public bool CanXenoHiveSetupPopup(EntityUid coordinates, EntityUid? user, bool popup = true)
+    public bool CanXenoHiveSetupPopup(EntityCoordinates coordinates, EntityUid? user, bool popup = true)
     {
         if (!TryGetArea(coordinates, out var area, out _))
             return true;
@@ -383,6 +383,18 @@ public sealed class AreaSystem : EntitySystem
             PopupXenoHiveSetupRestricted(user.Value, remaining);
 
         return false;
+    }
+
+    public bool CanXenoHiveSetupPopup(EntityUid coordinates, EntityUid? user, bool popup = true)
+    {
+        return CanXenoHiveSetupPopup(coordinates.ToCoordinates(), user, popup);
+    }
+
+    public bool IsXenoHiveSetupRestricted(EntityCoordinates coordinates, out TimeSpan remaining)
+    {
+        remaining = TimeSpan.Zero;
+        return TryGetArea(coordinates, out var area, out _) &&
+               IsXenoHiveSetupRestricted(area.Value, _gameTicker.RoundDuration(), out remaining);
     }
 
     private void PopupXenoHiveSetupRestricted(EntityUid user, TimeSpan remaining)

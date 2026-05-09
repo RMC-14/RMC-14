@@ -105,7 +105,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<QueenBuildingBoostComponent> _queenBoostQuery;
 
     private const string XenoStructuresAnimation = "RMCEffect";
-    private const string XenoHiveCoreNodeId = "HiveCoreXenoConstructionNode";
+    public const string XenoHiveCoreNodeId = "HiveCoreXenoConstructionNode";
 
     private float _densityThreshold;
     private TimeSpan _newResinPreventCollideTime;
