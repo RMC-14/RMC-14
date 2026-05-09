@@ -47,7 +47,7 @@
   name: hybrisa material reprocessing technician preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
     - [ RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]

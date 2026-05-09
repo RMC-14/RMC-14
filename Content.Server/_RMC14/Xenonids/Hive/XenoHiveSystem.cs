@@ -19,6 +19,13 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Data;
+using Content.Server.Destructible;
+using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Sprite;
+using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared.Coordinates;
+using Content.Shared.Damage;
+using Robust.Shared.Serialization.Manager;
 using IConfigurationManager = Robust.Shared.Configuration.IConfigurationManager;
 
 namespace Content.Server._RMC14.Xenonids.Hive;
@@ -26,15 +33,17 @@ namespace Content.Server._RMC14.Xenonids.Hive;
 public sealed class XenoHiveSystem : SharedXenoHiveSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
 
     private readonly List<string> _announce = [];
     private readonly EntProtoId _defaultHive = "CMXenoHive";
@@ -43,6 +52,9 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     private float _lateJoinsPerBurrowedLarvaEarly;
     private float _lateJoinsPerBurrowedLarva;
 
+    private const int InvinciblePer = 10;
+    private readonly List<Entity<InvincibleHiveStructureComponent>> _invincibles = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -50,6 +62,8 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
 
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentStartup>(OnBurrowedSurgeStartup);
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentShutdown>(OnBurrowedSurgeShutdown);
+
+        SubscribeLocalEvent<InvincibleHiveStructureComponent, MapInitEvent>(OnInvincibleMapInit);
 
         Subs.CVar(_config,
             RMCCVars.RMCLateJoinsPerBurrowedLarvaEarlyThresholdMinutes,
@@ -104,92 +118,20 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hive, Loc.GetString("rmc-xeno-burrowed-surge-end"));
     }
 
-    public override void Update(float frameTime)
+    private void OnInvincibleMapInit(Entity<InvincibleHiveStructureComponent> ent, ref MapInitEvent args)
     {
-        if (_gameTicker.RunLevel != GameRunLevel.InRound)
-            return;
+        ent.Comp.ReplaceAt = _timing.CurTime + ent.Comp.Duration;
+        Dirty(ent);
 
-        var roundTime = _gameTicker.RoundDuration();
-        var hives = EntityQueryEnumerator<HiveComponent>();
-        while (hives.MoveNext(out var hiveId, out var hive))
-        {
-            _announce.Clear();
+        EntityManager.RemoveComponent<DamageableComponent>(ent);
+        EntityManager.RemoveComponent<DestructibleComponent>(ent);
+        EntityManager.RemoveComponent<RMCWallExplosionDeletableComponent>(ent);
+        EntityManager.RemoveComponent<XenoConstructionRequiresSupportComponent>(ent);
 
-            for (var i = 0; i < hive.AnnouncementsLeft.Count; i++)
-            {
-                var left = hive.AnnouncementsLeft[i];
-                if (roundTime >= left)
-                {
-                    if (hive.Unlocks.TryGetValue(left, out var unlocks))
-                    {
-                        foreach (var unlock in unlocks)
-                        {
-                            hive.AnnouncedUnlocks.Add(unlock);
+        if (ent.Comp.BlockerId != null)
+            ent.Comp.Blocker = Spawn(ent.Comp.BlockerId, ent.Owner.ToCoordinates());
 
-                            if (_prototypes.TryIndex(unlock, out var prototype))
-                            {
-                                _announce.Add(prototype.Name);
-                            }
-                        }
-                    }
-
-                    hive.AnnouncementsLeft.RemoveAt(i);
-                    i--;
-                    Dirty(hiveId, hive);
-                }
-            }
-
-            if (_announce.Count > 0)
-            {
-                var popup = Loc.GetString("rmc-hive-supports-castes", ("castes", string.Join(", ", _announce)));
-                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, popup, hive.AnnounceSound, PopupType.Large);
-                EvoScreech(hive);
-            }
-
-            if (!hive.AnnouncedQueenDeathCooldownOver && hive.CurrentQueen == null && hive.NewQueenAt.HasValue && roundTime >= hive.NewQueenAt.Value)
-            {
-                var queenPopup = Loc.GetString("rmc-queen-death-cooldown-over");
-                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, queenPopup, hive.AnnounceSound);
-                hive.AnnouncedQueenDeathCooldownOver = true;
-                Dirty(hiveId, hive);
-            }
-
-            if (!hive.AnnouncedHiveCoreCooldownOver && hive.NewCoreAt.HasValue && roundTime >= hive.NewCoreAt)
-            {
-                var corePopup = Loc.GetString("rmc-hive-core-cooldown-over");
-                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, corePopup, hive.AnnounceSound);
-                hive.AnnouncedHiveCoreCooldownOver = true;
-                Dirty(hiveId, hive);
-            }
-
-        }
-
-        var time = _timing.CurTime;
-        var surge = EntityQueryEnumerator<HijackBurrowedSurgeComponent, HiveComponent>();
-        while (surge.MoveNext(out var id, out var burrowed, out var hive))
-        {
-            if (time < burrowed.NextSurgeAt)
-                continue;
-
-            if (GetHiveCore((id, hive)) == null)
-            {
-                //Reset time between if no core
-                if (burrowed.SurgeEvery != burrowed.ResetSurgeTime)
-                    burrowed.SurgeEvery = burrowed.ResetSurgeTime;
-                continue;
-            }
-
-            IncreaseBurrowedLarva(1);
-            burrowed.PooledLarva--;
-            if (burrowed.PooledLarva < 1)
-                RemCompDeferred<HijackBurrowedSurgeComponent>(id);
-
-            if (burrowed.SurgeEvery > burrowed.MinSurgeTime)
-                burrowed.SurgeEvery -= burrowed.ReduceSurgeBy;
-
-            burrowed.NextSurgeAt = time + burrowed.SurgeEvery;
-
-        }
+        _rmcSprite.SetColor(ent.Owner, ent.Comp.Color);
     }
 
     /// <summary>
@@ -228,5 +170,160 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
             _audio.PlayEntity(hive.MarineAnnounceSound, recipient, recipient);
             _rmcChat.ChatMessageToOne(ChatChannel.Radio, popupText, popupText, default, false, session.Channel);
         }
+    }
+
+    private void UpdateHives()
+    {
+        var roundTime = _gameTicker.RoundDuration();
+        var hives = EntityQueryEnumerator<HiveComponent>();
+        while (hives.MoveNext(out var hiveId, out var hive))
+        {
+            _announce.Clear();
+
+            for (var i = 0; i < hive.AnnouncementsLeft.Count; i++)
+            {
+                var left = hive.AnnouncementsLeft[i];
+                if (roundTime < left)
+                    continue;
+
+                if (hive.Unlocks.TryGetValue(left, out var unlocks))
+                {
+                    foreach (var unlock in unlocks)
+                    {
+                        hive.AnnouncedUnlocks.Add(unlock);
+
+                        if (_prototypes.TryIndex(unlock, out var prototype))
+                            _announce.Add(prototype.Name);
+                    }
+                }
+
+                hive.AnnouncementsLeft.RemoveAt(i);
+                i--;
+                Dirty(hiveId, hive);
+            }
+
+            if (_announce.Count > 0)
+            {
+                var popup = Loc.GetString("rmc-hive-supports-castes", ("castes", string.Join(", ", _announce)));
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, popup, hive.AnnounceSound, PopupType.Large);
+                EvoScreech(hive);
+            }
+
+            if (!hive.AnnouncedQueenDeathCooldownOver && hive.CurrentQueen == null && hive.NewQueenAt.HasValue && roundTime >= hive.NewQueenAt.Value)
+            {
+                var queenPopup = Loc.GetString("rmc-queen-death-cooldown-over");
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, queenPopup, hive.AnnounceSound);
+                hive.AnnouncedQueenDeathCooldownOver = true;
+                Dirty(hiveId, hive);
+            }
+
+            if (!hive.AnnouncedHiveCoreCooldownOver && hive.NewCoreAt.HasValue && roundTime >= hive.NewCoreAt)
+            {
+                var corePopup = Loc.GetString("rmc-hive-core-cooldown-over");
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, corePopup, hive.AnnounceSound);
+                hive.AnnouncedHiveCoreCooldownOver = true;
+                Dirty(hiveId, hive);
+            }
+        }
+    }
+
+    private void UpdateBurrowedSurge()
+    {
+        var time = _timing.CurTime;
+        var surge = EntityQueryEnumerator<HijackBurrowedSurgeComponent, HiveComponent>();
+        while (surge.MoveNext(out var id, out var burrowed, out var hive))
+        {
+            if (time < burrowed.NextSurgeAt)
+                continue;
+
+            if (GetHiveCore((id, hive)) == null)
+            {
+                //Reset time between if no core
+                if (burrowed.SurgeEvery != burrowed.ResetSurgeTime)
+                    burrowed.SurgeEvery = burrowed.ResetSurgeTime;
+                continue;
+            }
+
+            IncreaseBurrowedLarva(1);
+            burrowed.PooledLarva--;
+            if (burrowed.PooledLarva < 1)
+                RemCompDeferred<HijackBurrowedSurgeComponent>(id);
+
+            if (burrowed.SurgeEvery > burrowed.MinSurgeTime)
+                burrowed.SurgeEvery -= burrowed.ReduceSurgeBy;
+
+            burrowed.NextSurgeAt = time + burrowed.SurgeEvery;
+        }
+    }
+
+    private void UpdateInvincible()
+    {
+        if (_invincibles.Count == 0)
+        {
+            var time = _timing.CurTime;
+            var query = EntityQueryEnumerator<InvincibleHiveStructureComponent>();
+            while (query.MoveNext(out var uid, out var comp))
+            {
+                if (time < comp.ReplaceAt)
+                    continue;
+
+                _invincibles.Add((uid, comp));
+            }
+        }
+
+        try
+        {
+            var i = 0;
+            for (var j = _invincibles.Count - 1; j >= 0; j--)
+            {
+                if (i++ > InvinciblePer)
+                    break;
+
+                var ent = _invincibles[j];
+                _invincibles.RemoveAt(j);
+
+                if (TerminatingOrDeleted(ent))
+                    continue;
+
+                RemCompDeferred<InvincibleHiveStructureComponent>(ent);
+                QueueDel(ent.Comp.Blocker);
+
+                _rmcSprite.SetColor(ent.Owner, Color.White);
+
+                if (!_prototypes.TryIndex(ent.Comp.Replace, out var replace))
+                    continue;
+
+                _metaData.SetEntityName(ent, replace.Name);
+
+                if (replace.TryGetComponent(out DamageableComponent? damageable, _compFactory))
+                    AddComp(ent, _serialization.CreateCopy(damageable, notNullableOverride: true), true);
+
+                if (replace.TryGetComponent(out DestructibleComponent? destructible, _compFactory))
+                    AddComp(ent, _serialization.CreateCopy(destructible, notNullableOverride: true), true);
+
+                if (replace.TryGetComponent(out RMCWallExplosionDeletableComponent? wallDeletable, _compFactory))
+                    AddComp(ent, _serialization.CreateCopy(wallDeletable, notNullableOverride: true), true);
+
+                if (replace.TryGetComponent(out XenoConstructionRequiresSupportComponent? requiresSupport, _compFactory))
+                    AddComp(ent, _serialization.CreateCopy(requiresSupport, notNullableOverride: true), true);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error processing {nameof(InvincibleHiveStructureComponent)}:\n{e}");
+
+            // Clear on exceptions so we aren't stuck processing the same broken entity
+            _invincibles.Clear();
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_gameTicker.RunLevel != GameRunLevel.InRound)
+            return;
+
+        UpdateHives();
+        UpdateBurrowedSurge();
+        UpdateInvincible();
     }
 }
