@@ -139,6 +139,13 @@
 
 - type: entity
   parent: RMCMachineScreenBase
+  id: RMCTelescreenEntertainment
+  components:
+  - type: Sprite
+    state: entertainment
+
+- type: entity
+  parent: RMCMachineScreenBase
   id: RMCRedAlarmProp
   suffix: Always Red, Prop
   components:
