@@ -1,9 +1,9 @@
 - type: entity
   parent: RMCBaseWeaponSniperRifle
   id: RMCL144SniperRifle
-  name: L144 LRR
-  suffix: PVE, Royal
-  description: The L144 Long-Range Rifle, adopted by the TSE for use by Royal Crown Marine snipers. Praised by its users and feared by their targets, the L144 sends 10x28mm rounds downrange at a devastating velocity and with pinpoint accuracy.
+  name: L144 long-range rifle
+  suffix: PVE, Royal, HESH
+  description: The L144 LRR, adopted by the TSE for use by Royal Crown Marine snipers. Praised by its users and feared by their targets, the L144 sends 10x28mm rounds downrange at a devastating velocity and with pinpoint accuracy.
   components:
   - type: GuideHelp
     guides:
@@ -36,6 +36,8 @@
     baseFireRate: 0.667
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 3
+  - type: GunDamageModifier
+    multiplier: 1.5
   - type: WieldDelay
     baseDelay: 1.2
   - type: ItemSlots
@@ -162,7 +164,7 @@
   - type: CMArmorPiercing
     amount: 50
   - type: AimedShotEffect
-    extraHits: 2
+    extraHits: 1
     superSlowDuration: 7.5
 
 - type: Tag
