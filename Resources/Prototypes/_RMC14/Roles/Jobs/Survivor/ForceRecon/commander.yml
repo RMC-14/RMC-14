@@ -17,7 +17,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: Commander
+      preset: RMCSkillPresetCommander
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
@@ -40,6 +40,8 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
     - type: SpotterWhitelist
+    - type: RMCAwardRecommendation
+      maxRecommendations: 4
   hidden: true
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 

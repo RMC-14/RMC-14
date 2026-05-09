@@ -25,3 +25,10 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_researcher
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconFieldDoctor
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_fielddoctor

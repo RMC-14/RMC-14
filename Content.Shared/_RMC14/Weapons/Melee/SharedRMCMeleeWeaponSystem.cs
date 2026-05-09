@@ -7,6 +7,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Item.ItemToggle;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
@@ -26,6 +27,7 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -76,6 +78,9 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     private void OnStunOnHitMeleeHit(Entity<StunOnHitComponent> ent, ref MeleeHitEvent args)
     {
         if (!args.IsHit)
+            return;
+
+        if (!_itemToggle.IsActivated(ent.Owner))
             return;
 
         foreach (var hit in args.HitEntities)
@@ -229,9 +234,11 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     /// <param name="attack">The <see cref="AttackEvent"/></param>
     /// <param name="newAttack">The new <see cref="AttackEvent"/></param>
     /// <param name="range">The range of the attack</param>
-    /// <returns>True if the attack hasn't been modified, or if it is modified and still valid</returns>
-    public bool AttemptOverrideAttack(EntityUid target, Entity<MeleeWeaponComponent> weapon, EntityUid user, AttackEvent attack, out AttackEvent newAttack, float range = 1.5f)
+    /// <param name="canceled">Whether the modified attack should be canceled</param>
+    /// <returns>True if the attack is modified and still valid, false if the attack is not modified or the modified attack fails</returns>
+    public bool AttemptOverrideAttack(EntityUid target, Entity<MeleeWeaponComponent> weapon, EntityUid user, AttackEvent attack, out AttackEvent newAttack, out bool canceled, float range = 1.5f)
     {
+        canceled = false;
         var targetPosition = _transform.GetMoverCoordinates(target).Position;
         var userPosition = _transform.GetMoverCoordinates(user).Position;
         var entities = GetNetEntityList(_melee.ArcRayCast(userPosition,
@@ -254,11 +261,14 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 
         // The attack hasn't been modified.
         if (attack == newAttack)
-            return true;
+            return false;
 
         // The new target is the weapon being used for the attack.
         if (meleeEv.Weapon == meleeEv.Target)
+        {
+            canceled = true;
             return false;
+        }
 
         var disarm = newAttack switch
         {
@@ -268,7 +278,10 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 
         // The new target is unable to be attacked by the user.
         if (!_blocker.CanAttack(user, GetEntity(meleeEv.Target), weapon, disarm))
+        {
+            canceled = true;
             return false;
+        }
 
         return true;
     }

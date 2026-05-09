@@ -5,11 +5,13 @@
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorTrucker
   playTimeTracker: CMJobSurvivorEngineer
+  accessGroups:
+  - ColonistEngi
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorTrucker
+      preset: RMCSkillPresetSurvivorTrucker
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetTrucker
     - type: RMCSurvivor

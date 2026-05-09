@@ -32,3 +32,7 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 75
+      CMGlass: 25

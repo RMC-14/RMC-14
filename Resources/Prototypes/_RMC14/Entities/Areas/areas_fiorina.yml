@@ -476,3 +476,11 @@
   components:
   - type: Area
     linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaFiorinaMaintenance
+  id: RMCAreaFiorinaStationRocinante
+  name: Tramp Freighter Rocinante
+  components:
+  - type: Sprite
+    state: security_hub

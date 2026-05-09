@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMDoctor
-  name: cm-job-name-doctor
-  description: cm-job-description-doctor
+  name: rmc-job-name-doctor
+  description: rmc-job-description-doctor
   playTimeTracker: CMJobDoctor
   requirements:
   - !type:TotalJobsTimeRequirement
@@ -29,7 +29,7 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: cm-job-prefix-doctor
+      prefix: rmc-job-prefix-doctor
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi

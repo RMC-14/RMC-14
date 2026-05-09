@@ -83,8 +83,9 @@
         points: 1
       - id: CMPaper
         points: 1
-      #- id: WeYa paper
-      #  points: 1
+      - id: RMCPaperWeYaLiaison
+        name: We-Ya paper
+        points: 1
       #- id: Carbon paper
       #  points: 1
       - id: CMClipboard

@@ -123,6 +123,11 @@ public sealed class RadioSystem : EntitySystem
                 name = $"({prefixText}) {name}";
             }
         }
+        else if (TryComp(messageSource, out RMCRadioPrefixComponent? radioPrefix))
+        {
+            var prefixText = Loc.GetString(radioPrefix.Prefix);
+            name = $"{prefixText} {name}";
+        }
 
         SpeechVerbPrototype speech;
         if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))
@@ -140,6 +145,10 @@ public sealed class RadioSystem : EntitySystem
             TryComp<RMCHeadsetComponent>(wearingHeadset.Headset, out var headsetComp))
         {
             radioFontSize += headsetComp.RadioTextIncrease ?? 0;
+        }
+        else if (TryComp<RMCInnateRadioTextIncreaseComponent>(messageSource, out var innateRadioIncrease))
+        {
+            radioFontSize += innateRadioIncrease.RadioTextIncrease;
         }
 
         var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",

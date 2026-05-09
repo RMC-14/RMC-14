@@ -47,8 +47,8 @@
     - RMCRecipesMedilathe
   - type: MaterialStorage
     storage:
-      CMGlass: 533
-      RMCPlastic: 2000
+      CMGlass: 20000
+      RMCPlastic: 40000
     whitelist:
       tags:
       - Plastic
