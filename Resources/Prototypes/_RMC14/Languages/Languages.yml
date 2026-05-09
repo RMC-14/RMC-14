@@ -31,7 +31,6 @@
   typefaceId: null
   textSize: null
   boldTypefaceId: null
-  showLanguageName: true
   languageIcon: "/Textures/_RMC14/Actions/xeno_actions.rsi/queen_word.png"
   canUseRadio: true
   needsSpeech: true
