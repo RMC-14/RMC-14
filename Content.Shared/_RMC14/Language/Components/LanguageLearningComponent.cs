@@ -7,7 +7,7 @@ using Content.Shared._RMC14.Language.Systems;
 
 namespace Content.Shared._RMC14.Language.Components;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(SharedLanguageLearningSystem), typeof(SharedLanguageSystem))]
 public sealed partial class LanguageLearningComponent : Component
 {
@@ -20,6 +20,9 @@ public sealed partial class LanguageLearningComponent : Component
     [DataField]
     [Access(typeof(SharedLanguageLearningSystem), typeof(SharedLanguageSystem), Other = AccessPermissions.ReadExecute)]
     public Dictionary<ProtoId<LanguagePrototype>, LanguageLearningData> Languages = new();
+
+    [AutoNetworkedField]
+    public Dictionary<ProtoId<LanguagePrototype>, LanguageLearningStateData> LanguageStates = new();
 
     [DataField]
     public Dictionary<NetEntity, int> StudiedSources = new();
@@ -83,17 +86,6 @@ public sealed partial class LanguageLearningComponent : Component
 
     [DataField]
     public int MaxContextWordsStored = 50;
-
-    [Serializable, NetSerializable]
-    public sealed class State : ComponentState
-    {
-        public Dictionary<ProtoId<LanguagePrototype>, LanguageLearningStateData> Languages { get; }
-
-        public State(Dictionary<ProtoId<LanguagePrototype>, LanguageLearningStateData> languages)
-        {
-            Languages = languages;
-        }
-    }
 }
 
 [DataDefinition]
@@ -125,10 +117,14 @@ public sealed partial class LanguageLearningData
 [Serializable, NetSerializable]
 public sealed class LanguageLearningStateData
 {
-    public bool RequiresFirstContact { get; }
-    public bool Encountered { get; }
-    public float Progress { get; }
-    public Dictionary<string, float> LearnedWords { get; }
+    public bool RequiresFirstContact;
+    public bool Encountered;
+    public float Progress;
+    public Dictionary<string, float> LearnedWords = new();
+
+    public LanguageLearningStateData()
+    {
+    }
 
     public LanguageLearningStateData(
         bool requiresFirstContact,

@@ -8,5 +8,5 @@ namespace Content.Shared.Traits;
 public sealed partial class TraitPrototype
 {
     [DataField]
-    public ProtoId<LanguagePrototype>? Language;
+    public ProtoId<LanguagePrototype>? Language { get; private set; }
 }

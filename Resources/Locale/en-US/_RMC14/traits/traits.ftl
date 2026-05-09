@@ -24,6 +24,9 @@ rmc-trait-french-language-desc = You can speak and understand French.
 rmc-trait-japanese-language-name = Japanese language
 rmc-trait-japanese-language-desc = You can speak and understand Japanese.
 
+rmc-trait-chinese-language-name = Chinese language
+rmc-trait-chinese-language-desc = You can speak and understand Chinese.
+
 rmc-trait-russian-language-name = Russian language
 rmc-trait-russian-language-desc = You can speak and understand Russian.
 

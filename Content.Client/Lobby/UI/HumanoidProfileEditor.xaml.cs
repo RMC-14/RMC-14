@@ -110,6 +110,9 @@ namespace Content.Client.Lobby.UI
         private bool _isDirty;
 
         private static readonly ProtoId<GuideEntryPrototype> DefaultSpeciesGuidebook = "Species";
+        // RMC14
+        private static readonly ProtoId<TraitCategoryPrototype> SpeechTraitsCategory = "SpeechTraits";
+        // RMC14
 
         public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
 
@@ -612,8 +615,8 @@ namespace Content.Client.Lobby.UI
             }
 
             // Setup model
-            Dictionary<string, List<string>> traitGroups = new();
-            List<string> defaultTraits = new();
+            var traitGroups = new Dictionary<string, List<string>>();
+            var defaultTraits = new List<string>();
             traitGroups.Add(TraitCategoryPrototype.Default, defaultTraits);
 
             foreach (var trait in traits)
@@ -648,7 +651,7 @@ namespace Content.Client.Lobby.UI
                     });
                 }
 
-                List<TraitPreferenceSelector?> selectors = new();
+                var selectors = new List<TraitPreferenceSelector>();
                 var selectionCount = 0;
 
                 foreach (var traitProto in categoryTraits)
@@ -687,15 +690,14 @@ namespace Content.Client.Lobby.UI
                     });
                 }
 
-                if (categoryId == "SpeechTraits")
+                // RMC14
+                if (categoryId == SpeechTraitsCategory)
                 {
                     var languageSelectors = selectors
-                        .Where(selector => selector != null &&
-                                           _prototypeManager.Index<TraitPrototype>(selector.TraitId).Language != null)
+                        .Where(selector => selector.IsLanguageTrait)
                         .ToList();
                     var otherSelectors = selectors
-                        .Where(selector => selector != null &&
-                                           _prototypeManager.Index<TraitPrototype>(selector.TraitId).Language == null)
+                        .Where(selector => !selector.IsLanguageTrait)
                         .ToList();
 
                     AddTraitSelectors(languageSelectors, selectionCount, category, "rmc-trait-group-languages");
@@ -705,10 +707,12 @@ namespace Content.Client.Lobby.UI
                 {
                     AddTraitSelectors(selectors, selectionCount, category);
                 }
+                // RMC14
             }
 
+            // RMC14
             void AddTraitSelectors(
-                List<TraitPreferenceSelector?> selectorsToAdd,
+                List<TraitPreferenceSelector> selectorsToAdd,
                 int currentSelectionCount,
                 TraitCategoryPrototype? currentCategory,
                 string? groupLabel = null)
@@ -728,9 +732,6 @@ namespace Content.Client.Lobby.UI
 
                 foreach (var selector in selectorsToAdd)
                 {
-                    if (selector == null)
-                        continue;
-
                     if (currentCategory is { MaxTraitPoints: >= 0 } &&
                         selector.Cost + currentSelectionCount > currentCategory.MaxTraitPoints)
                     {
@@ -740,6 +741,7 @@ namespace Content.Client.Lobby.UI
                     TraitsList.AddChild(selector);
                 }
             }
+            // RMC14
         }
 
         /// <summary>

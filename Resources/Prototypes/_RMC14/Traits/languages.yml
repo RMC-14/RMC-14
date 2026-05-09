@@ -26,6 +26,15 @@
   language: Japanese
 
 - type: trait
+  id: ChineseLanguage
+  name: rmc-trait-chinese-language-name
+  description: rmc-trait-chinese-language-desc
+  category: SpeechTraits
+  cost: 1
+  components: []
+  language: Chinese
+
+- type: trait
   id: RussianLanguage
   name: rmc-trait-russian-language-name
   description: rmc-trait-russian-language-desc

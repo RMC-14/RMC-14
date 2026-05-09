@@ -16,10 +16,6 @@
     !type:ReplacementObfuscation
     replacement: ["<??>"]
   speechOverride:
-    color: null
-    fontId: null
-    fontSize: null
-    boldFontId: null
     allowRadio: true
     requireSpeech: true
     requireLOS: false
@@ -48,10 +44,6 @@
     garbleChars: ['~', '?', '*', '#', '¿', '§']
     intensityMultiplier: 1.0
   speechOverride:
-    color: null
-    fontId: null
-    fontSize: null
-    boldFontId: null
     allowRadio: true
     requireSpeech: true
     requireLOS: false
@@ -78,10 +70,6 @@
     minSyllables: 1
     maxSyllables: 3
   speechOverride:
-    color: null
-    fontId: null
-    fontSize: null
-    boldFontId: null
     allowRadio: true
     requireSpeech: true
     requireLOS: false
@@ -108,10 +96,6 @@
     minSyllables: 1
     maxSyllables: 3
   speechOverride:
-    color: null
-    fontId: null
-    fontSize: null
-    boldFontId: null
     allowRadio: true
     requireSpeech: true
     requireLOS: false
@@ -138,10 +122,32 @@
     minSyllables: 2
     maxSyllables: 5
   speechOverride:
-    color: null
-    fontId: null
-    fontSize: null
-    boldFontId: null
+    allowRadio: true
+    requireSpeech: true
+    requireLOS: false
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Chinese
+  name: "Chinese"
+  description: "An old Earth language."
+  isVisibleLanguage: true
+  typefaceId: NotoSansDisplay
+  textSize: null
+  boldTypefaceId: null
+  showLanguageName: true
+  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/CN.png"
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 140
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["ni", "hao", "shi", "de", "wo", "men", "zhe", "na", "ma", "le", "qing", "xie", "zai", "guo"]
+    minSyllables: 1
+    maxSyllables: 4
+  speechOverride:
     allowRadio: true
     requireSpeech: true
     requireLOS: false
@@ -168,10 +174,6 @@
     minSyllables: 1
     maxSyllables: 4
   speechOverride:
-    color: null
-    fontId: null
-    fontSize: null
-    boldFontId: null
     allowRadio: true
     requireSpeech: true
     requireLOS: false
@@ -198,10 +200,6 @@
     minSyllables: 1
     maxSyllables: 3
   speechOverride:
-    color: null
-    fontId: null
-    fontSize: null
-    boldFontId: null
     allowRadio: true
     requireSpeech: true
     requireLOS: false
@@ -228,3 +226,29 @@
     replacement: ["*waves*", "*gestures*", "*points*", "*nods*", "*shakes head*", "*thumbs up*", "*claps*", "*motions*", "*indicates*", "*signals*"]
     minSyllables: 1
     maxSyllables: 2
+
+- type: language
+  id: Primitive
+  name: "Primitive"
+  description: "A primitive animal language made up of screeches, hoots, and emphatic gestures."
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  boldTypefaceId: null
+  showLanguageName: true
+  languageIcon: "/Textures/Mobs/Animals/monkey.rsi/monkey.png"
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 40
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["ook", "eek", "aa", "hoo", "ooka", "kee", "rah", "ik", "uh", "chit"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    allowRadio: true
+    requireSpeech: true
+    requireLOS: false
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}

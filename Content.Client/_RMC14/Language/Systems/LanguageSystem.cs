@@ -22,7 +22,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     {
         base.Initialize();
         SubscribeLocalEvent<LanguageComponent, AfterAutoHandleStateEvent>(OnLanguageAfterState);
-        SubscribeLocalEvent<LanguageLearningComponent, ComponentHandleState>(OnHandleLearningState);
+        SubscribeLocalEvent<LanguageLearningComponent, AfterAutoHandleStateEvent>(OnLearningAfterState);
     }
 
     private void OnLanguageAfterState(Entity<LanguageComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -31,21 +31,8 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             OnLanguagesChanged?.Invoke();
     }
 
-    private void OnHandleLearningState(Entity<LanguageLearningComponent> ent, ref ComponentHandleState args)
+    private void OnLearningAfterState(Entity<LanguageLearningComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (args.Current is not LanguageLearningComponent.State state)
-            return;
-
-        ent.Comp.Languages = state.Languages.ToDictionary(
-            kvp => kvp.Key,
-            kvp => new LanguageLearningData
-            {
-                RequiresFirstContact = kvp.Value.RequiresFirstContact,
-                Encountered = kvp.Value.Encountered,
-                Progress = kvp.Value.Progress,
-                LearnedWords = new Dictionary<string, float>(kvp.Value.LearnedWords),
-            });
-
         if (ent.Owner == _player.LocalEntity)
             OnLanguageLearningChanged?.Invoke();
     }
@@ -73,7 +60,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         if (CompOrNull<LanguageLearningComponent>(entity) is not { } learningComp)
             return EmptyLearningLanguages;
 
-        return learningComp.Languages.ToDictionary(
+        return learningComp.LanguageStates.ToDictionary(
             kvp => kvp.Key,
             kvp => new LanguageLearningViewData(
                 kvp.Value.RequiresFirstContact,

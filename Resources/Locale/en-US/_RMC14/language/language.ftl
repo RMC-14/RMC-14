@@ -13,9 +13,10 @@ language-Binary-name = Binary
 language-Spanish-name = Spanish
 language-French-name = French
 language-Japanese-name = Japanese
+language-Chinese-name = Chinese
 language-Russian-name = Russian
 language-German-name = German
-language-Predator-name = Yautja
+language-Primitive-name = Primitive
 
 # Language descr
 language-English-description = Earth language.
@@ -25,9 +26,10 @@ language-Binary-description = The language of synthetic beings.
 language-Spanish-description = Earth language.
 language-French-description = Earth language.
 language-Japanese-description = Earth language.
+language-Chinese-description = Earth language.
 language-Russian-description = Earth language.
 language-German-description = Earth language.
-language-Predator-description = The ancient language of the Predator species.
+language-Primitive-description = A primitive language of screeches, hoots, and gestures.
 
 # language names
 chat-language-Common-name = Common
@@ -36,9 +38,10 @@ chat-language-Binary-name = Binary
 chat-language-Spanish-name = Spanish
 chat-language-French-name = French
 chat-language-Japanese-name = Japanese
+chat-language-Chinese-name = Chinese
 chat-language-Russian-name = Russian
 chat-language-German-name = German
-chat-language-Predator-name = Yautja
+chat-language-Primitive-name = Primitive
 
 # language selection
 chat-language-switched = You are now speaking {$language}.
@@ -81,6 +84,7 @@ language-icon-alt-Binary = Binary code symbol
 language-icon-alt-Spanish = Spanish flag
 language-icon-alt-French = French flag
 language-icon-alt-Japanese = Japanese flag
+language-icon-alt-Chinese = Chinese flag
 language-icon-alt-Russian = Russian flag
 language-icon-alt-German = German flag
-language-icon-alt-Predator = Predator symbol
+language-icon-alt-Primitive = Primitive symbol

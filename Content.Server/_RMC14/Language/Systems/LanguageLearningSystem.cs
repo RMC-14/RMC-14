@@ -5,10 +5,8 @@ using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
 using Content.Shared.Popups;
-using System.Linq;
 using System.Numerics;
 using Robust.Server.GameObjects;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -30,7 +28,6 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         SubscribeLocalEvent<EntitySpokeEvent>(OnEntitySpoke);
         SubscribeLocalEvent<LanguageLearningComponent, MapInitEvent>(OnLearningMapInit);
         SubscribeLocalEvent<LanguageLearningComponent, DetermineEntityLanguagesEvent>(OnDetermineEntityLanguages);
-        SubscribeLocalEvent<LanguageLearningComponent, ComponentGetState>(OnGetLearningState);
     }
 
     private void OnLearningMapInit(Entity<LanguageLearningComponent> ent, ref MapInitEvent args)
@@ -42,20 +39,8 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             if (ShouldStartEncountered(ent.Comp, language))
                 languageData.Encountered = true;
         }
-    }
 
-    private void OnGetLearningState(Entity<LanguageLearningComponent> ent, ref ComponentGetState args)
-    {
-        var languagesForState = ent.Comp.Languages.ToDictionary(
-            kvp => kvp.Key,
-            kvp => new LanguageLearningStateData(
-                kvp.Value.RequiresFirstContact,
-                kvp.Value.Encountered,
-                kvp.Value.Progress,
-                new Dictionary<string, float>(kvp.Value.LearnedWords))
-        );
-
-        args.State = new LanguageLearningComponent.State(languagesForState);
+        SyncLanguageStates(ent.Comp);
     }
 
     private void OnDetermineEntityLanguages(Entity<LanguageLearningComponent> learner, ref DetermineEntityLanguagesEvent args)
@@ -129,6 +114,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         }
 
         languageData.Encountered = true;
+        SyncLanguageState(learner.Comp, language);
 
         var popup = languageProto.FirstContactMeaning != null
             ? Loc.GetString(
@@ -169,6 +155,31 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         };
         comp.Languages[language] = created;
         return created;
+    }
+
+    private static void SyncLanguageState(LanguageLearningComponent comp, ProtoId<LanguagePrototype> language)
+    {
+        if (!comp.Languages.TryGetValue(language, out var data))
+        {
+            comp.LanguageStates.Remove(language);
+            return;
+        }
+
+        comp.LanguageStates[language] = new LanguageLearningStateData(
+            data.RequiresFirstContact,
+            data.Encountered,
+            data.Progress,
+            new Dictionary<string, float>(data.LearnedWords));
+    }
+
+    private static void SyncLanguageStates(LanguageLearningComponent comp)
+    {
+        comp.LanguageStates.Clear();
+
+        foreach (var language in comp.Languages.Keys)
+        {
+            SyncLanguageState(comp, language);
+        }
     }
 
     private void TryLearnWords(Entity<LanguageLearningComponent> learner, EntityUid source, string messageText,
@@ -246,7 +257,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             if (significantLearning)
             {
                 var overallComprehension = CalculateOverallComprehension(comp, language);
-                var percentage = (int)(overallComprehension * 100);
+                var percentage = (int) (overallComprehension * 100);
                 var uniqueWords = languageData.LearnedWords.Count;
                 var progressMessage = wordsLearned == 1
                     ? Loc.GetString(
@@ -262,6 +273,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
                 _popup.PopupEntity(progressMessage, learner, learner, PopupType.Medium);
             }
 
+            SyncLanguageState(comp, language);
             Dirty(learner.Owner, comp);
         }
     }
@@ -307,6 +319,8 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
                 learner,
                 PopupType.Large);
         }
+
+        SyncLanguageState(comp, language);
     }
 
     public void SetWordComprehension(EntityUid entity, ProtoId<LanguagePrototype> language, string word, float level)
@@ -322,6 +336,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             languageData.Encountered = true;
 
         languageData.Progress = CalculateOverallComprehension(comp, language);
+        SyncLanguageState(comp, language);
         Dirty(entity, comp);
     }
 
@@ -334,6 +349,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         if (ShouldStartEncountered(comp, language))
             languageData.Encountered = true;
 
+        SyncLanguageState(comp, language);
         Dirty(entity, comp);
     }
 
@@ -345,6 +361,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         comp.LearnableLanguages.Remove(language);
         comp.FirstContactLanguages.Remove(language);
         comp.Languages.Remove(language);
+        comp.LanguageStates.Remove(language);
         Dirty(entity, comp);
     }
 }
