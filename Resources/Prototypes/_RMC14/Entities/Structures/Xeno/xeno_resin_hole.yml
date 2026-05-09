@@ -35,7 +35,7 @@
           radius: 1.5
         hard: false
         layer:
-        - SmallMobLayer
+        - Opaque
         mask:
         - MobLayer
   - type: CollisionWake

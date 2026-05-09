@@ -15,7 +15,7 @@
   parent: RMCArmbandBase
   id: RMCAlphaArmband
   name: alpha armband
-  description: An armband in squad colors, worn for ease of idenfication.
+  description: An armband in squad colors, worn for ease of identification.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Armbands/alpha_armband.rsi

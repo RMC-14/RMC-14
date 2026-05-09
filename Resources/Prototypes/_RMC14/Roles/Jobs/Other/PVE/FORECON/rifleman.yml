@@ -7,7 +7,7 @@
   ranks:
    RMCRankLanceCorporal: []
   startingGear: RMCJobFORECONPVERifleman
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconRifleman"
   joinNotifyCrew: false
   accessGroups:
   - Rifleman
@@ -19,27 +19,24 @@
       factions:
       - UNMC
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 1
-        RMCSkillPilot: 1
-        RMCSkillSmartGun: 1
-        RMCSkillPowerLoader: 1
+      preset: RMCSkillPresetPVERifleman
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-rifleman
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: private
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
   hidden: true
-
 
 - type: entity
   parent: CMSpawnPointJobBase

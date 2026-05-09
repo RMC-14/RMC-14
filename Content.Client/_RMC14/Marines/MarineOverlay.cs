@@ -119,7 +119,8 @@ public sealed class MarineOverlay : Overlay
                 if (_npcFactionMemberQuery.TryComp(uid, out var factionMember))
                 {
                     // First faction is the entity's default faction
-                    if (factionIcons.TryGetValue(factionMember.Factions.First(), out var newIcon))
+                    if (factionMember.Factions.TryFirstOrNull(out var firstFaction) &&
+                        factionIcons.TryGetValue(firstFaction.Value, out var newIcon))
                     {
                         icon.Background = null;
                         icon.Icon = newIcon;
@@ -181,6 +182,7 @@ public sealed class MarineOverlay : Overlay
             }
         }
 
+        handle.SetTransform(Matrix3x2.Identity);
         handle.UseShader(null);
     }
 }

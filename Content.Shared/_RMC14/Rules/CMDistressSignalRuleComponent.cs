@@ -116,13 +116,13 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public List<ProtoId<JobPrototype>> IgnoreMaximumSurvivorJobs = new() { "RMCSurvivorCommandingOfficer" };
 
     [DataField]
-    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Insert, int Amount)>>? SurvivorJobInserts;
+    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Variant, int Amount)>>? SurvivorJobVariants;
 
     [DataField]
     public Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>? SurvivorJobOverrides;
 
     [DataField]
-    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Special, int Amount)>>? SurvivorJobScenarios;
+    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Special, int Amount)>>? SurvivorJobVariantScenarios;
 
     [DataField]
     public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);
@@ -167,7 +167,6 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public ResPath Thunderdome = new("/Maps/_RMC14/thunderdome.yml");
 
     public List<string> AuxiliaryMaps = new() {
-        "/Maps/_RMC14/OCP-583.yml",
         "/Maps/_RMC14/admin_fax.yml"
     };
 

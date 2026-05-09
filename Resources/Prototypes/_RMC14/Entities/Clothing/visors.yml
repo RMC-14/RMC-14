@@ -155,6 +155,15 @@
   components:
   - type: Sprite
     state: po_visor
+  - type: ToggleVisor
+    ignoreRedundancy: true
+  - type: ComponentToggler
+    components:
+    - type: PointLight # this exists purely to stop the game from crying that component toggler isnt on the visor.
+      enabled: true
+      radius: 1
+      softness: 1
+      color: "#000000"
   - type: Visor
     toggledSprite:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi

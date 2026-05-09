@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivor
+  parent: RMCSurvivorMilitary
   id: CMSurvivorUNMC
   name: cm-job-name-survivor-unmc
   description: cm-job-description-survivor

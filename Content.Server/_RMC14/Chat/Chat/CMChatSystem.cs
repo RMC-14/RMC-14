@@ -22,7 +22,7 @@ namespace Content.Server._RMC14.Chat.Chat;
 public sealed class CMChatSystem : SharedCMChatSystem
 {
     [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly SharedChatSystem _chatSystem = default!;
+    [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;

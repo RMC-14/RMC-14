@@ -60,6 +60,10 @@
         Blunt: 0
     throwRange: 2
   - type: RMCMesonsNonviewable
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCTankReagentEmpty
@@ -164,3 +168,31 @@
           Quantity: 1000
   - type: Label
     currentLabel: reagent-name-cmdermaline
+
+- type: entity
+  parent: RMCTankReagentEmpty
+  id: RMCTankReagentPhoron
+  suffix: Phoron
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: RMCPhoron
+          Quantity: 1000
+  - type: Label
+    currentLabel: reagent-name-rmcphoron
+
+- type: entity
+  parent: RMCTankReagentEmpty
+  id: RMCTankReagentSulphuricAcid
+  suffix: SulphuricAcid
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: RMCSulphuricAcid
+          Quantity: 1000
+  - type: Label
+    currentLabel: reagent-name-rmc-sulphuric-acid

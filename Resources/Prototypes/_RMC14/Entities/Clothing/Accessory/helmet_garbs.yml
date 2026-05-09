@@ -44,7 +44,7 @@
   parent: RMCHelmetGarbToggleableBase
   id: RMCHelmetGarbNightVisionPVE
   name: old M1 multi-spectrum visor
-  description: A failed prototype for next generation HUD optics for the Marine Corps that was surpased by the current issue integrated IR optic, this flip down visor offers a full visor suite with multi-spectrum capabilities. A really cool piece until you realize you are one headbang away from losing night capability.
+  description: A failed prototype for next generation HUD optics for the Marine Corps that was surpassed by the current issue integrated IR optic, this flip down visor offers a full visor suite with multi-spectrum capabilities. A really cool piece until you realize you are one headbang away from losing night capability.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles_alt.rsi
@@ -567,7 +567,7 @@
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbMovieTicket
   name: movie ticket
-  description: A pair of red movie tickets. It reminds you of a time you could watch more then the same 5 or so VHS films the Almayer has.
+  description: A pair of red movie tickets. It reminds you of a time you could watch more than the same 5 or so VHS films the Almayer has.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/movie_ticket.rsi
