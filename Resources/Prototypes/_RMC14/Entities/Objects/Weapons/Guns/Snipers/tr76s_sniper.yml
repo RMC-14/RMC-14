@@ -2,7 +2,7 @@
   parent: RMCBaseWeaponSniperRifle
   id: RMCTR76SniperRifle
   name: TR76S police marksman rifle
-  description: A heavy sniper rifle produced for law enforcement agencies, such as the CMB and ZSPA. Features an integrated scope, as well as IFF capabilities and a 14-round magazine.
+  description: A heavy sniper rifle produced for law enforcement agencies, such as the CMB and TSEPA. Features an integrated scope, as well as IFF capabilities and a 14-round magazine.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Snipers/tr76s/tr76s_inhands.rsi
