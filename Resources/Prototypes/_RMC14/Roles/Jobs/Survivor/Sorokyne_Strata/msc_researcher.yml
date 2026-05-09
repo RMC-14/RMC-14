@@ -61,7 +61,7 @@
   name: ministry of space colonisation researcher preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomStartingGear:
       back:
       - CMSatchel

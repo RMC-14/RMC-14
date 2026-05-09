@@ -47,7 +47,7 @@
   name: hybrisa office worker preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomOutfits:
     - [ RMCJacketCorporateBrown, RMCJumpsuitLiaisonStowaway, RMCShoesLaceupBrown, CMSatchel]
     - [ RMCJacketCorporateBlack, RMCJumsuitWhiteService, RMCShoesLaceup, RMCSatchelBlack]

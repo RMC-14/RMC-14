@@ -140,11 +140,6 @@
   id: Bacon
 
 - type: Tag
-
-  id: Watch
-
-- type: Tag
-
   id: RMCPinpointer
 
 - type: Tag

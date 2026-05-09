@@ -8,31 +8,13 @@
   },
   "states": [
     {
-      "name": "mecha_abooster_ccw"
+      "name": "mecha_drill"
     },
     {
       "name": "mecha_clamp"
     },
     {
-      "name": "mecha_drill"
-    },
-    {
-      "name": "gygax_chassis"
-    },
-    {
-      "name": "gygax_harness"
-    },
-    {
-      "name": "ripley_broken"
-    },
-    {
-      "name": "gygax_armor"
-    },
-    {
-      "name": "repair_droid"
-    },
-    {
-      "name": "tesla"
+      "name": "mecha_abooster_ccw"
     }
   ]
 }

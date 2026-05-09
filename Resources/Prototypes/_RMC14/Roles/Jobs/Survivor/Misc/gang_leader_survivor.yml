@@ -57,7 +57,7 @@
   name: gang leader survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomOutfits:
     - [ ArmorHelmetRiot ]
     - [ RMCArmorVestCivilian ]

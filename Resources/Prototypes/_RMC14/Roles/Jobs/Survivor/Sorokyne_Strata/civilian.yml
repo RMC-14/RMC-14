@@ -48,7 +48,7 @@
   name: sorokyne civilian preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomStartingGear:
       back:
       - CMSatchel

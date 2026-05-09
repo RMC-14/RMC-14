@@ -71,7 +71,7 @@
   name: survivor synth hybrisa executive bodyguard preset
   categories: [ HideSpawnMenu ] # Todo random research notes, telebaton in backpack
   components:
-  - type: EntityPreset
+  - type: SurvivorPreset
     randomOutfits:
     - [ RMCJumpsuitLiaisonExpensiveSuitDropPouch, RMCSatchelBlack, RMCBootsCorporate ]
     - [ RMCJumpsuitLiaisonExpensiveSuitBrownDropPouch, RMCSatchelBlack, CMBootsBrownFilled ]
