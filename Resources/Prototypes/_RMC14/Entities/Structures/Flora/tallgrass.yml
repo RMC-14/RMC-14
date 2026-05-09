@@ -25,7 +25,6 @@
     timeToApply: 1
     MeltTimeMult: 0.1
     structure: true
-  - type: XenoCrusherChargable
   - type: Flammable
     fireSpread: false
     maximumFireStacks: 0.5
@@ -40,7 +39,6 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  
 
 - type: entity
   abstract: true
