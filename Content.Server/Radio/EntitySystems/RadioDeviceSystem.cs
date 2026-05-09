@@ -209,20 +209,22 @@ public sealed class RadioDeviceSystem : EntitySystem
         }
     }
 
-    private void OnReceiveRadio(EntityUid uid, RadioSpeakerComponent component, ref RadioReceiveEvent args)
+    private void OnReceiveRadio(Entity<RadioSpeakerComponent> ent, ref RadioReceiveEvent args)
     {
-        if (uid == args.RadioSource)
+        if (ent.Owner == args.RadioSource)
             return;
 
         var nameEv = new TransformSpeakerNameEvent(args.MessageSource, Name(args.MessageSource));
         RaiseLocalEvent(args.MessageSource, nameEv);
 
         var name = Loc.GetString("speech-name-relay",
-            ("speaker", Name(uid)),
+            ("speaker", Name(ent.Owner)),
             ("originalName", nameEv.VoiceName));
 
         // log to chat so people can identity the speaker/source, but avoid clogging ghost chat if there are many radios
-        _chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false, ignoreXenos: true);
+        // RMC14
+        _chat.SendRadioSpeakerWhisperWithLanguage(ent.Owner, args.Message, args.Language, name, ignoreXenos: true);
+        // RMC14
     }
 
     private void OnIntercomEncryptionChannelsChanged(Entity<IntercomComponent> ent, ref EncryptionChannelsChangedEvent args)

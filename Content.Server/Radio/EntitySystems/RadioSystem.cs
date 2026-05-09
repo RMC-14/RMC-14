@@ -68,21 +68,21 @@ public sealed class RadioSystem : EntitySystem
         _exemptQuery = GetEntityQuery<TelecomExemptComponent>();
     }
 
-    private void OnIntrinsicSpeak(EntityUid uid, IntrinsicRadioTransmitterComponent component, EntitySpokeEvent args)
+    private void OnIntrinsicSpeak(Entity<IntrinsicRadioTransmitterComponent> ent, ref EntitySpokeEvent args)
     {
-        if (args.Channel != null && component.Channels.Contains(args.Channel.ID))
+        if (args.Channel != null && ent.Comp.Channels.Contains(args.Channel.ID))
         {
             // RMC14
             var language = _prototype.TryIndex(args.Language, out var languageProto) ? languageProto : null;
-            SendRadioMessage(uid, args.Message, args.Channel, uid, language);
+            SendRadioMessage(ent.Owner, args.Message, args.Channel, ent.Owner, language);
             // RMC14
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
     }
 
-    private void OnIntrinsicReceive(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveEvent args)
+    private void OnIntrinsicReceive(Entity<IntrinsicRadioReceiverComponent> ent, ref RadioReceiveEvent args)
     {
-        if (TryComp(uid, out ActorComponent? actor))
+        if (TryComp(ent.Owner, out ActorComponent? actor))
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
     }
 
@@ -105,194 +105,203 @@ public sealed class RadioSystem : EntitySystem
         if (!_messages.Add(message))
             return;
 
-        // RMC14
-        var currentLanguage = language?.ID ?? _language.GetCurrentLanguage(messageSource);
-
-        if (language != null && !language.CanUseRadio)
-            return;
-
-        bool showLanguageName = language?.ShowLanguageName ?? false;
-        string? languageIcon = showLanguageName ? language?.DisplayedLanguageIcon : null;
-        // RMC14
-
-        var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
-        RaiseLocalEvent(messageSource, evt);
-
-        var name = evt.VoiceName;
-        name = FormattedMessage.EscapeText(name);
-
-        if (TryComp(messageSource, out JobPrefixComponent? prefix))
+        try
         {
-            var prefixText = (prefix.AdditionalPrefix != null ? $"{Loc.GetString(prefix.AdditionalPrefix.Value)} " : "") + Loc.GetString(prefix.Prefix);
-            if (TryComp(messageSource, out SquadMemberComponent? member) &&
-                TryComp(member.Squad, out SquadTeamComponent? team) &&
-                team.Radio != null &&
-                team.Radio != channel.ID)
+            // RMC14
+            var currentLanguage = language?.ID ?? _language.GetCurrentLanguage(messageSource);
+            if (language == null)
+                _prototype.TryIndex(currentLanguage, out language);
+
+            if (language != null && !language.CanUseRadio)
+                return;
+
+            var showLanguageName = language?.ShowLanguageName ?? false;
+            var languageIcon = showLanguageName ? language?.DisplayedLanguageIcon : null;
+            // RMC14
+
+            var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
+            RaiseLocalEvent(messageSource, evt);
+
+            var name = evt.VoiceName;
+            name = FormattedMessage.EscapeText(name);
+
+            if (TryComp(messageSource, out JobPrefixComponent? prefix))
             {
-                name = $"({Name(member.Squad.Value)} {prefixText}) {name}";
-            }
-            else
-            {
-                if (TryComp(messageSource, out FireteamMemberComponent? fireteamMember) && fireteamMember.Fireteam >= 0)
+                var prefixText = (prefix.AdditionalPrefix != null ? $"{Loc.GetString(prefix.AdditionalPrefix.Value)} " : "") + Loc.GetString(prefix.Prefix);
+                if (TryComp(messageSource, out SquadMemberComponent? member) &&
+                    TryComp(member.Squad, out SquadTeamComponent? team) &&
+                    team.Radio != null &&
+                    team.Radio != channel.ID)
                 {
-                    prefixText += $" FT{fireteamMember.Fireteam + 1}" + (TryComp(messageSource, out FireteamLeaderComponent? fireteamLeader) ? " TL" : "");
+                    name = $"({Name(member.Squad.Value)} {prefixText}) {name}";
                 }
-                name = $"({prefixText}) {name}";
-            }
-        }
-        else if (TryComp(messageSource, out RMCRadioPrefixComponent? radioPrefix))
-        {
-            var prefixText = Loc.GetString(radioPrefix.Prefix);
-            name = $"{prefixText} {name}";
-        }
-
-        SpeechVerbPrototype speech;
-        if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))
-            speech = evntProto;
-        else
-            speech = _chat.GetSpeechVerb(messageSource, message);
-
-        var content = escapeMarkup
-            ? FormattedMessage.EscapeText(message)
-            : message;
-
-        // RMC14
-        var radioFontSize = speech.FontSize;
-        var radioFontId = language?.TypefaceId ?? speech.FontId;
-        // RMC14
-        if (TryComp<WearingHeadsetComponent>(messageSource, out var wearingHeadset) &&
-            TryComp<RMCHeadsetComponent>(wearingHeadset.Headset, out var headsetComp))
-        {
-            radioFontSize += headsetComp.RadioTextIncrease ?? 0;
-        }
-        else if (TryComp<RMCInnateRadioTextIncreaseComponent>(messageSource, out var innateRadioIncrease))
-        {
-            radioFontSize += innateRadioIncrease.RadioTextIncrease;
-        }
-
-        var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
-            ("color", channel.Color),
-            // RMC14
-            ("fontType", radioFontId),
-            ("fontSize", radioFontSize),
-            // RMC14
-            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-            ("channel", $"\\[{channel.LocalizedName}\\]"),
-            ("name", name),
-            ("message", content));
-
-        var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
-        RaiseLocalEvent(ref sendAttemptEv);
-        RaiseLocalEvent(radioSource, ref sendAttemptEv);
-        var canSend = !sendAttemptEv.Cancelled;
-
-        var sourceMapId = Transform(radioSource).MapID;
-        var hasActiveServer = HasActiveServer(sourceMapId, channel.ID);
-        var sourceServerExempt = _exemptQuery.HasComp(radioSource);
-
-        var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
-        while (canSend && radioQuery.MoveNext(out var receiver, out var radio, out var transform))
-        {
-            if (!radio.ReceiveAllChannels)
-            {
-                if (!radio.Channels.Contains(channel.ID) || (TryComp<IntercomComponent>(receiver, out var intercom) &&
-                                                             !intercom.SupportedChannels.Contains(channel.ID)))
-                    continue;
-            }
-
-            if (!channel.LongRange && transform.MapID != sourceMapId && !radio.GlobalReceive)
-                continue;
-
-            // don't need telecom server for long range channels or handheld radios and intercoms
-            var needServer = !channel.LongRange && !sourceServerExempt;
-            if (needServer && !hasActiveServer)
-                continue;
-
-            // check if message can be sent to specific receiver
-            var attemptEv = new RadioReceiveAttemptEvent(channel, radioSource, receiver);
-            RaiseLocalEvent(ref attemptEv);
-            RaiseLocalEvent(receiver, ref attemptEv);
-            if (attemptEv.Cancelled)
-                continue;
-
-            // send the message
-            // RMC14
-            string actualMessage = message;
-            string actualWrappedMessage = wrappedMessage;
-            string? actualLanguageIcon = languageIcon;
-
-            EntityUid? listenerEntity = null;
-            if (TryComp<IntrinsicRadioReceiverComponent>(receiver, out var intrinsicReceiver))
-            {
-                listenerEntity = receiver;
-            }
-            else
-            {
-                var query = EntityQueryEnumerator<WearingHeadsetComponent>();
-                while (query.MoveNext(out var wearer, out var wearing))
+                else
                 {
-                    if (wearing.Headset == receiver)
+                    if (TryComp(messageSource, out FireteamMemberComponent? fireteamMember) && fireteamMember.Fireteam >= 0)
                     {
-                        listenerEntity = wearer;
-                        break;
+                        prefixText += $" FT{fireteamMember.Fireteam + 1}" + (TryComp(messageSource, out FireteamLeaderComponent? fireteamLeader) ? " TL" : "");
+                    }
+                    name = $"({prefixText}) {name}";
+                }
+            }
+            else if (TryComp(messageSource, out RMCRadioPrefixComponent? radioPrefix))
+            {
+                var prefixText = Loc.GetString(radioPrefix.Prefix);
+                name = $"{prefixText} {name}";
+            }
+
+            // RMC14
+            SpeechVerbPrototype speech;
+            // RMC14
+            if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))
+                speech = evntProto;
+            else
+                speech = _chat.GetSpeechVerb(messageSource, message);
+
+            var content = escapeMarkup
+                ? FormattedMessage.EscapeText(message)
+                : message;
+
+            // RMC14
+            var radioFontSize = speech.FontSize;
+            var radioFontId = language?.TypefaceId ?? speech.FontId;
+            // RMC14
+            if (TryComp<WearingHeadsetComponent>(messageSource, out var wearingHeadset) &&
+                TryComp<RMCHeadsetComponent>(wearingHeadset.Headset, out var headsetComp))
+            {
+                radioFontSize += headsetComp.RadioTextIncrease ?? 0;
+            }
+            else if (TryComp<RMCInnateRadioTextIncreaseComponent>(messageSource, out var innateRadioIncrease))
+            {
+                radioFontSize += innateRadioIncrease.RadioTextIncrease;
+            }
+
+            var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
+                ("color", channel.Color),
+                // RMC14
+                ("fontType", radioFontId),
+                ("fontSize", radioFontSize),
+                // RMC14
+                ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+                ("channel", $"\\[{channel.LocalizedName}\\]"),
+                ("name", name),
+                ("message", content));
+
+            var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
+            RaiseLocalEvent(ref sendAttemptEv);
+            RaiseLocalEvent(radioSource, ref sendAttemptEv);
+            var canSend = !sendAttemptEv.Cancelled;
+
+            var sourceMapId = Transform(radioSource).MapID;
+            var hasActiveServer = HasActiveServer(sourceMapId, channel.ID);
+            var sourceServerExempt = _exemptQuery.HasComp(radioSource);
+
+            var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
+            while (canSend && radioQuery.MoveNext(out var receiver, out var radio, out var transform))
+            {
+                if (!radio.ReceiveAllChannels)
+                {
+                    if (!radio.Channels.Contains(channel.ID) || (TryComp<IntercomComponent>(receiver, out var intercom) &&
+                                                                 !intercom.SupportedChannels.Contains(channel.ID)))
+                        continue;
+                }
+
+                if (!channel.LongRange && transform.MapID != sourceMapId && !radio.GlobalReceive)
+                    continue;
+
+                // don't need telecom server for long range channels or handheld radios and intercoms
+                var needServer = !channel.LongRange && !sourceServerExempt;
+                if (needServer && !hasActiveServer)
+                    continue;
+
+                // check if message can be sent to specific receiver
+                var attemptEv = new RadioReceiveAttemptEvent(channel, radioSource, receiver);
+                RaiseLocalEvent(ref attemptEv);
+                RaiseLocalEvent(receiver, ref attemptEv);
+                if (attemptEv.Cancelled)
+                    continue;
+
+                // send the message
+                // RMC14
+                var actualMessage = message;
+                var actualWrappedMessage = wrappedMessage;
+                string? actualLanguageIcon = languageIcon;
+
+                EntityUid? listenerEntity = null;
+                if (TryComp<IntrinsicRadioReceiverComponent>(receiver, out _))
+                {
+                    listenerEntity = receiver;
+                }
+                else
+                {
+                    var query = EntityQueryEnumerator<WearingHeadsetComponent>();
+                    while (query.MoveNext(out var wearer, out var wearing))
+                    {
+                        if (wearing.Headset == receiver)
+                        {
+                            listenerEntity = wearer;
+                            break;
+                        }
                     }
                 }
+
+                if (listenerEntity.HasValue && !_language.CanUnderstand(listenerEntity.Value, currentLanguage))
+                {
+                    var obfuscatedMessage = _language.ObfuscateMessageForListener(listenerEntity.Value, message, currentLanguage);
+                    actualMessage = obfuscatedMessage;
+
+                    actualWrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
+                        ("color", channel.Color),
+                        ("fontType", radioFontId),
+                        ("fontSize", radioFontSize),
+                        ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+                        ("channel", $"\\[{channel.LocalizedName}\\]"),
+                        ("name", name),
+                        ("message", escapeMarkup ? FormattedMessage.EscapeText(obfuscatedMessage) : obfuscatedMessage));
+                }
+
+                var chat = new ChatMessage(
+                    ChatChannel.Radio,
+                    actualMessage,
+                    actualWrappedMessage,
+                    GetNetEntity(messageSource),
+                    _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
+                    languageIcon: actualLanguageIcon,
+                    repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
+
+                var chatMsg = new MsgChatMessage { Message = chat };
+                var ev = new RadioReceiveEvent(actualMessage, messageSource, channel, radioSource, chatMsg, currentLanguage);
+                // RMC14
+                RaiseLocalEvent(receiver, ref ev);
             }
 
-            if (listenerEntity.HasValue && !_language.CanUnderstand(listenerEntity.Value, currentLanguage))
+            if (canSend &&
+                !HasComp<XenoComponent>(messageSource) &&
+                HasComp<RMCHeadsetComponent>(radioSource))
             {
-                var obfuscatedMessage = _language.ObfuscateMessageForListener(listenerEntity.Value, message, currentLanguage);
-                actualMessage = obfuscatedMessage;
-
-                actualWrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
-                    ("color", channel.Color),
-                    ("fontType", radioFontId),
-                    ("fontSize", radioFontSize),
-                    ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-                    ("channel", $"\\[{channel.LocalizedName}\\]"),
-                    ("name", name),
-                    ("message", escapeMarkup ? FormattedMessage.EscapeText(obfuscatedMessage) : obfuscatedMessage));
+                var filter = Filter.Pvs(messageSource).RemoveWhereAttachedEntity(HasComp<XenoComponent>);
+                _audio.PlayEntity(_radioSound, filter, messageSource, false); // RMC14
             }
 
-            var chat = new ChatMessage(
+            if (name != Name(messageSource))
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName} in {currentLanguage}: {message}");
+            else
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} on {channel.LocalizedName} in {currentLanguage}: {message}");
+
+            var replayChat = new ChatMessage(
                 ChatChannel.Radio,
-                actualMessage,
-                actualWrappedMessage,
+                message,
+                wrappedMessage,
                 GetNetEntity(messageSource),
                 _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
-                languageIcon: actualLanguageIcon,
+                languageIcon: languageIcon,
                 repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
-
-            var chatMsg = new MsgChatMessage { Message = chat };
-            var ev = new RadioReceiveEvent(actualMessage, messageSource, channel, radioSource, chatMsg);
-            // RMC14
-            RaiseLocalEvent(receiver, ref ev);
+            _replay.RecordServerMessage(replayChat);
         }
-
-        if (canSend &&
-            !HasComp<XenoComponent>(messageSource) &&
-            HasComp<RMCHeadsetComponent>(radioSource))
+        finally
         {
-            var filter = Filter.Pvs(messageSource).RemoveWhereAttachedEntity(HasComp<XenoComponent>);
-            _audio.PlayEntity(_radioSound, filter, messageSource, false); // RMC14
+            _messages.Remove(message);
         }
-
-        if (name != Name(messageSource))
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName} in {currentLanguage}: {message}");
-        else
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} on {channel.LocalizedName} in {currentLanguage}: {message}");
-
-        var replayChat = new ChatMessage(
-            ChatChannel.Radio,
-            message,
-            wrappedMessage,
-            GetNetEntity(messageSource),
-            _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
-            languageIcon: languageIcon,
-            repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
-        _replay.RecordServerMessage(replayChat);
-
-        _messages.Remove(message);
     }
 
     /// <inheritdoc cref="TelecomServerComponent"/>

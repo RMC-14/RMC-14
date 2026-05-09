@@ -66,7 +66,7 @@ public abstract class SharedChatSystem : EntitySystem
 
         foreach (var radioChannel in _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>())
         {
-            var key = $"{radioChannel.RadioPrefix}{radioChannel.KeyCode}";
+            var key = $"{radioChannel.RadioPrefix}{char.ToLowerInvariant(radioChannel.KeyCode)}";
             channelDict[key] = radioChannel;
             prefixSet.Add(radioChannel.RadioPrefix);
         }
@@ -123,7 +123,7 @@ public abstract class SharedChatSystem : EntitySystem
         if (!_validPrefixes.Contains(input[0]))
             return;
 
-        var lookupKey = input[..2];
+        var lookupKey = $"{input[0]}{char.ToLowerInvariant(input[1])}";
         if (!_channelLookup.ContainsKey(lookupKey))
             return;
         // RMC14
@@ -195,13 +195,13 @@ public abstract class SharedChatSystem : EntitySystem
         // RMC14
         var prefix = input[0];
         var channelKey = input[1];
-        var lookupKey = $"{prefix}{char.ToLower(channelKey)}";
+        var lookupKey = $"{prefix}{char.ToLowerInvariant(channelKey)}";
         output = SanitizeMessageCapital(input[2..].TrimStart());
 
         if (_channelLookup.TryGetValue(lookupKey, out channel))
         {
         }
-        else if (channelKey == DefaultChannelKey || char.ToLower(channelKey) == DefaultChannelKey)
+        else if (channelKey == DefaultChannelKey || char.ToLowerInvariant(channelKey) == DefaultChannelKey)
         {
             var ev = new GetDefaultRadioChannelEvent();
             RaiseLocalEvent(source, ev);
