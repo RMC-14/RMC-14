@@ -615,7 +615,7 @@
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbBulletPipe
   name: 10x99mm XM43E1 casing pipe
-  description: The XM43E1 was an experimental weapons platform briefly fielded by the UNMC and We-Ya PMC teams. It was manufactured by Armat systems at the Atlas weapons facility. This spent casing has been converted into a pipe, but there is too much tar in the mouthpiece for it to be usable.
+  description: The XM43E1 was an experimental weapons platform briefly fielded by the UNMC and We-Ya PMC teams. It was manufactured by AEGIS at the Atlas weapons facility. This spent casing has been converted into a pipe, but there is too much tar in the mouthpiece for it to be usable.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/bullet_pipe.rsi

@@ -743,9 +743,9 @@
 
 - type: entity
   parent: RMCSunglassesBig
-  id: RMCGlassesBiMexPersonal
-  name: BiMex personal shades
-  description: These are an expensive pair of BiMex sunglasses. They look like they could survive the end of the world and still make the wearer look insufferably confident.
+  id: RMCGlassesTriMaxPersonal
+  name: TriMax personal shades
+  description: These are an expensive pair of TriMax sunglasses. They look like they could survive the end of the world and still make the wearer look insufferably confident.
 
 - type: entity
   parent: RMCSunglassesBig

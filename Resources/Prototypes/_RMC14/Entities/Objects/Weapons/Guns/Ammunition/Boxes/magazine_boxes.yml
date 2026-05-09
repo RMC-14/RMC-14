@@ -1544,46 +1544,6 @@
   - type: CMItemSlots
     startingItem: RMCMagazineRifleAK4047AP
 
-# NSG-23
-- type: entity
-  parent: RMCBoxMagazineRifleBase
-  id: RMCBoxMagazineRifleNSG23Empty
-  name: magazine box (NSG-23 x 12)
-  components:
-  - type: Sprite
-    layers:
-    - state: rifle_box
-      color: "#42504d"
-    - state: rifle_ammo_full_mags_base
-      map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_mags_color
-      map: [ "enum.CMItemSlotsLayers2.Fill" ]
-      color: "#ffc000"
-    - state: rifle_box_generic
-      color: "#ffcb26"
-    - state: rifle_box_marking
-      color: "#7c4c1b"
-    - state: rifle_lid
-      map: [ "lid" ]
-      color: "#42504d"
-    - state: rifle_lid_marking
-      map: [ "lid_marking" ]
-      color: "#7c4c1b"
-  - type: CMItemSlots
-    count: 12
-    slot:
-      whitelist:
-        tags:
-        - RMCMagazineRifleNSG23
-
-- type: entity
-  parent: RMCBoxMagazineRifleNSG23Empty
-  id: RMCBoxMagazineRifleNSG23
-  suffix: Full
-  components:
-  - type: CMItemSlots
-    startingItem: RMCMagazineRifleNSG23
-
 # MAR30/40
 - type: entity
   parent: RMCBoxMagazineRifleBase
@@ -2538,26 +2498,26 @@
   - type: CMItemSlots
     startingItem: RMCMagazineSMGFP9000
 
-# FN P90
+# PDW90
 - type: entity
   parent: RMCBoxMagazineSMGFP9000Empty
-  id: RMCBoxMagazineSMGP90Empty
-  name: magazine box (FN P90 x 12)
+  id: RMCBoxMagazineSMGPDW90Empty
+  name: magazine box (PDW90 x 12)
   components:
   - type: CMItemSlots
     count: 12
     slot:
       whitelist:
         tags:
-        - RMCMagazineSMGP90
+        - RMCMagazineSMGPDW90
 
 - type: entity
-  parent: RMCBoxMagazineSMGP90Empty
-  id: RMCBoxMagazineSMGP90
+  parent: RMCBoxMagazineSMGPDW90Empty
+  id: RMCBoxMagazineSMGPDW90
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: RMCMagazineSMGP90
+    startingItem: RMCMagazineSMGPDW90
 
 # MP-27
 - type: entity
@@ -3151,11 +3111,11 @@
         tags:
         - RMCMagazinePistolT73
 
-# Desert Eagle
+# Peregrine handcannon
 - type: entity
   parent: RMCBoxMagazinePistolBase
-  id: RMCBoxMagazinePistolDesertEagleEmpty
-  name: magazine box (Desert Eagle x 16)
+  id: RMCBoxMagazinePistolHandcannonEmpty
+  name: magazine box (Peregrine handcannon x 16)
   components:
   - type: Sprite
     layers:
@@ -3179,20 +3139,20 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolDesertEagle
+        - RMCMagazinePistolHandcannon
 
 - type: entity
-  parent: RMCBoxMagazinePistolDesertEagleEmpty
-  id: RMCBoxMagazinePistolDesertEagle
+  parent: RMCBoxMagazinePistolHandcannonEmpty
+  id: RMCBoxMagazinePistolHandcannon
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: RMCMagazinePistolDesertEagle
+    startingItem: RMCMagazinePistolHandcannon
 
 - type: entity
-  parent: RMCBoxMagazinePistolDesertEagleEmpty
-  id: RMCBoxMagazinePistolDesertEagleHIAPEmpty
-  name: magazine box (High Impact Armor-Piercing Desert Eagle x 8)
+  parent: RMCBoxMagazinePistolHandcannonEmpty
+  id: RMCBoxMagazinePistolHandcannonHIAPEmpty
+  name: magazine box (high impact armor-piercing Peregrine handcannon x 8)
   components:
   - type: Sprite
     layers:
@@ -3216,15 +3176,15 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolDesertEagleHIAP
+        - RMCMagazinePistolHandcannonHIAP
 
 - type: entity
-  parent: RMCBoxMagazinePistolDesertEagleHIAPEmpty
-  id: RMCBoxMagazinePistolDesertEagleHIAP
+  parent: RMCBoxMagazinePistolHandcannonHIAPEmpty
+  id: RMCBoxMagazinePistolHandcannonHIAP
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: RMCMagazinePistolDesertEagleHIAP
+    startingItem: RMCMagazinePistolHandcannonHIAP
 
 # Beretta B92FS
 - type: entity
@@ -3417,11 +3377,11 @@
   - type: CMItemSlots
     startingItem: RMCSpeedLoader357Hollowpoint
 
-# Smith & Wesson
+# M37
 - type: entity
   parent: RMCBoxMagazinePistolBase
-  id: RMCBoxMagazineRevolverSAndWEmpty
-  name: speedloader box (S&W .38 x 12)
+  id: RMCBoxMagazineRevolverM37Empty
+  name: speedloader box (M37 .38 x 12)
   description: A box of revolver speedloaders.
   components:
   - type: Sprite
@@ -3446,15 +3406,15 @@
     slot:
       whitelist:
         tags:
-        - RMCSpeedLoaderSAndW38
+        - RMCSpeedLoaderM37
 
 - type: entity
-  parent: RMCBoxMagazineRevolverSAndWEmpty
-  id: RMCBoxMagazineRevolverSAndW
+  parent: RMCBoxMagazineRevolverM37Empty
+  id: RMCBoxMagazineRevolverM37
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: RMCSpeedLoaderSAndW38
+    startingItem: RMCSpeedLoaderM37
 
 # ZHNK-72
 - type: entity

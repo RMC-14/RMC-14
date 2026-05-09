@@ -37,9 +37,9 @@
 
 - type: entity
   parent: CMFoodBase
-  id: RMCFoodMeatHuman
-  name: human meat
-  description: A slab of flesh for cannibals.
+  id: RMCFoodMeatCorgi
+  name: corgi meat
+  description: Tastes like... well you know...
   components:
   - type: Food
     transferAmount: 3
@@ -65,12 +65,6 @@
         reagents:
         - ReagentId: Protein
           Quantity: 3
-
-- type: entity
-  parent: RMCFoodMeatHuman
-  id: RMCFoodMeatCorgi
-  name: Corgi meat
-  description: Tastes like... well you know...
 
 - type: entity
   parent: CMFoodBase

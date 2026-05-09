@@ -587,9 +587,9 @@
 
 - type: entity
   parent: RMCGunCaseBase
-  id: RMCNSG23Case
-  name: NSG-23 assault rifle case
-  description: A gun case containing a no-lock NSG 23 assault rifle, one AP magazine, one high-capacity drum magazine, and three regular magazines.
+  id: RMCSSG45Case
+  name: SSG45 assault rifle case
+  description: A gun case containing a no-lock SSG45 assault rifle, one AP magazine, one high-capacity magazine, and three regular magazines.
   components:
   - type: Storage
     maxItemSize: Ginormous
@@ -597,16 +597,16 @@
     - 0,0,15,1
     whitelist:
       tags:
-      - RMCWeaponRifleNSG23
-      - RMCMagazineRifleNSG23
-      - RMCMagazineRifleNSG23AP
-      - RMCMagazineRifleNSG23Extended
+      - RMCWeaponRifleSSG45
+      - RMCMagazineRifleSSG45
+      - RMCMagazineRifleSSG45AP
+      - RMCMagazineRifleSSG45Ext
   - type: StorageFill
     contents:
-    - id: RMCWeaponRifleNSG23NoLock
-    - id: RMCMagazineRifleNSG23AP
-    - id: RMCMagazineRifleNSG23Extended
-    - id: RMCMagazineRifleNSG23
+    - id: RMCWeaponRifleSSG45NoLock
+    - id: RMCMagazineRifleSSG45AP
+    - id: RMCMagazineRifleSSG45Extended
+    - id: RMCMagazineRifleSSG45
       amount: 3
 
 # M54CE2

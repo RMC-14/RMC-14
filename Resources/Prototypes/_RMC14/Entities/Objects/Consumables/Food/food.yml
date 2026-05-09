@@ -158,33 +158,6 @@
 
 - type: entity
   parent: CMFoodBase
-  id: RMCFoodBurgerHuman
-  name: bob burger
-  description: A bloody burger.
-  components:
-  - type: Food
-    transferAmount: 2
-  - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
-    state: hamburger
-  - type: Item
-    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
-  - type: FlavorProfile
-    flavors:
-    - bun
-    - meaty
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 9
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 3
-        - ReagentId: Protein
-          Quantity: 6
-
-- type: entity
-  parent: CMFoodBase
   id: RMCFoodBurgerXeno
   name: xenoburger
   description: Smells caustic. Tastes like heresy.
@@ -341,33 +314,6 @@
           Quantity: 1
         - ReagentId: Blackpepper
           Quantity: 1
-
-- type: entity
-  parent: CMFoodBase
-  id: RMCFoodBrainCake
-  name: Brain Cake
-  description: A squishy cake-thing.
-  components:
-  - type: Food
-    transferAmount: 2
-  - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
-    state: braincake
-  - type: Item
-    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
-  - type: FlavorProfile
-    flavors:
-    - sweet
-    - meaty
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 25
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 15
-        - ReagentId: Protein
-          Quantity: 10
 
 - type: entity
   parent: CMFoodBase

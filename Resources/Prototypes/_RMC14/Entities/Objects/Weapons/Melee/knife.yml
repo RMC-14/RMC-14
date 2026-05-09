@@ -117,7 +117,7 @@
   parent: RMCM5Bayonet
   id: RMCType80BayonetReplica
   name: Type 80 bayonet replica
-  description: A dulled replica of the standard-issue bayonet of the UPP.
+  description: A dulled replica of the standard-issue bayonet of the SPP.
   components:
   - type: Clothing
     slots:

@@ -82,9 +82,9 @@
         blackMarket: true
         blackMarketCost: 20
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketP90
+        crate: RMCCrateBlackMarketPDW90
         icon:
-          entity: RMCWeaponSMGP90
+          entity: RMCWeaponSMGPDW90
       - cost: 0
         blackMarket: true
         blackMarketCost: 20
@@ -131,9 +131,9 @@
         blackMarket: true
         blackMarketCost: 45
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketDesertEagle
+        crate: RMCCrateBlackMarketPeregrineHandcannon
         icon:
-          entity: RMCWeaponPistolDesertEagle
+          entity: RMCWeaponPistolHandcannon
       - cost: 0
         blackMarket: true
         blackMarketCost: 15
@@ -173,9 +173,9 @@
         blackMarket: true
         blackMarketCost: 15
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketSmithWesson
+        crate: RMCCrateBlackMarketM37
         icon:
-          entity: RMCWeaponRevolverSAndWModel37
+          entity: RMCWeaponRevolverM37
       - cost: 0
         blackMarket: true
         blackMarketCost: 15
@@ -264,9 +264,9 @@
         blackMarket: true
         blackMarketCost: 45
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketSurplusNSG23
+        crate: RMCCrateBlackMarketSurplusSSG45
         icon:
-          entity: RMCWeaponRifleNSG23NoLock
+          entity: RMCWeaponRifleSSG45NoLock
       - cost: 0
         blackMarket: true
         blackMarketCost: 80
@@ -357,16 +357,16 @@
         blackMarket: true
         blackMarketCost: 180
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketAmmoDesertEagle
+        crate: RMCCrateBlackMarketAmmoPeregrineHandcannon
         icon:
-          entity: RMCBoxMagazinePistolDesertEagle
+          entity: RMCBoxMagazinePistolHandcannon
       - cost: 0
         blackMarket: true
         blackMarketCost: 260
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketAmmoDesertEagleHIAP
+        crate: RMCCrateBlackMarketAmmoPeregrineHandcannonHIAP
         icon:
-          entity: RMCBoxMagazinePistolDesertEagleHIAPEmpty
+          entity: RMCBoxMagazinePistolHandcannonHIAPEmpty
       - cost: 0
         blackMarket: true
         blackMarketCost: 60
@@ -378,9 +378,9 @@
         blackMarket: true
         blackMarketCost: 140
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketAmmoNSG23
+        crate: RMCCrateBlackMarketAmmoSSG45
         icon:
-          entity: RMCBoxMagazineRifleNSG23
+          entity: RMCBoxMagazineRifleSSG45
       - cost: 0
         blackMarket: true
         blackMarketCost: 60
@@ -399,9 +399,9 @@
         blackMarket: true
         blackMarketCost: 30
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketAmmoP90
+        crate: RMCCrateBlackMarketAmmoPDW90
         icon:
-          entity: RMCBoxMagazineSMGP90
+          entity: RMCBoxMagazineSMGPDW90
       - cost: 0
         blackMarket: true
         blackMarketCost: 45
@@ -476,9 +476,9 @@
         blackMarket: true
         blackMarketCost: 30
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketAmmoSmithWesson
+        crate: RMCCrateBlackMarketAmmoM37
         icon:
-          entity: RMCBoxMagazineRevolverSAndW
+          entity: RMCBoxMagazineRevolverM37
       - cost: 0
         blackMarket: true
         blackMarketCost: 30
@@ -571,9 +571,9 @@
         blackMarket: true
         blackMarketCost: 15
         blackMarketHeat: -5
-        crate: RMCCrateBlackMarketDeepStorageBiMexShades
+        crate: RMCCrateBlackMarketDeepStorageTriMaxShades
         icon:
-          entity: RMCGlassesBiMexPersonal
+          entity: RMCGlassesTriMaxPersonal
       - cost: 0
         blackMarket: true
         blackMarketCost: 10

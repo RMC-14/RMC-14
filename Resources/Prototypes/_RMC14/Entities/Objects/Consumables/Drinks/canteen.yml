@@ -94,7 +94,7 @@
 - type: entity
   parent: CMWEYAFlask
   id: RMCDrinkFlaskWeYaPoisoned
-  description: A metal flask embossed with Weston-Yamada's signature logo that some corporate bootlicker probably ordered to be stocked in USS military vessels' canteen vendors. This one smells off...
+  description: A metal flask embossed with Weston-Yamada's signature logo that some corporate bootlicker probably ordered to be stocked in UNS military vessels' canteen vendors. This one smells off...
   components:
   - type: SolutionContainerManager
     solutions:

@@ -73,12 +73,12 @@ public sealed partial class RequisitionsSystem
         "RMCBlackMarketMendozaXenoBlood7",
     ];
 
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly PricingSystem _pricing = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     private void InitializeBlackMarket()
     {

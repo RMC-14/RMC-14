@@ -20,7 +20,6 @@ public abstract class SharedRequisitionsSystem : EntitySystem
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
 
     public int Starting { get; private set; }
@@ -141,18 +140,16 @@ public abstract class SharedRequisitionsSystem : EntitySystem
             ? GetPendingOrders(elevator.Value.Comp.Orders)
             : new List<RequisitionsPendingOrder>();
 
-        var state = new RequisitionsBuiState(
-            mode,
-            busy,
-            balance,
-            full,
-            orderCount,
-            capacity,
-            computer.Comp.BlackMarketUnlocked,
-            blackMarketBalance,
-            blackMarketStatus,
-            pendingOrders);
-        _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);
+        computer.Comp.PlatformLowered = mode;
+        computer.Comp.Busy = busy;
+        computer.Comp.Balance = balance;
+        computer.Comp.Full = full;
+        computer.Comp.OrderCount = orderCount;
+        computer.Comp.Capacity = capacity;
+        computer.Comp.BlackMarketBalance = blackMarketBalance;
+        computer.Comp.BlackMarketStatus = blackMarketStatus;
+        computer.Comp.PendingOrders = pendingOrders;
+        Dirty(computer);
     }
 
     protected static RequisitionsBlackMarketStatus GetBlackMarketStatus(RequisitionsAccountComponent? account)

@@ -1,12 +1,11 @@
 using System.Numerics;
 using System.Linq;
-using Content.Client.Resources;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared._RMC14.UserInterface;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Maths;
@@ -18,11 +17,10 @@ using static Robust.Client.UserInterface.Control;
 namespace Content.Client._RMC14.Requisitions;
 
 [UsedImplicitly]
-public sealed class RequisitionsBui : BoundUserInterface
+public sealed class RequisitionsBui : BoundUserInterface, IRefreshableBui
 {
     private const float CategoryMinWidth = 180f;
     private const float CategoryPanelPadding = 12f;
-    private static readonly ResPath CmbLogoPath = new("/Textures/_RMC14/Interface/logo_cmb.png");
     private static readonly string[] MendozaDialogueLocIds =
     [
         "rmc-requisitions-black-market-mendoza-random-1",
@@ -36,14 +34,13 @@ public sealed class RequisitionsBui : BoundUserInterface
 
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly Dictionary<CartKey, int> _cart = new();
     private readonly Dictionary<CartKey, int> _blackMarketCart = new();
     private readonly Dictionary<CartKey, RequisitionsProductCard> _productCards = new();
 
-    private RequisitionsBuiState? _state;
+    private RequisitionsComputerComponent? _state;
     private RequisitionsWindow? _window;
     private int? _selectedCategory;
     private int? _selectedBlackMarketCategory;
@@ -73,21 +70,7 @@ public sealed class RequisitionsBui : BoundUserInterface
     protected override void Open()
     {
         base.Open();
-        EnsureWindow();
-        RefreshShop();
-    }
-
-    protected override void UpdateState(BoundUserInterfaceState state)
-    {
-        if (state is not RequisitionsBuiState uiState)
-            return;
-
-        _state = uiState;
-        EnsureWindow();
-        RefreshShop();
-
-        if (_window is { IsOpen: false })
-            _window.OpenCentered();
+        Refresh();
     }
 
     private void EnsureWindow()
@@ -107,8 +90,19 @@ public sealed class RequisitionsBui : BoundUserInterface
         _window.BuyButton.OnPressed += _ => BuyCart();
     }
 
+    public void Refresh()
+    {
+        EnsureWindow();
+        RefreshShop();
+
+        if (_window is { IsOpen: false })
+            _window.OpenCentered();
+    }
+
     private void RefreshShop()
     {
+        _entities.TryGetComponent(Owner, out _state);
+
         if (_state is
             {
                 BlackMarketUnlocked: false,
@@ -119,7 +113,7 @@ public sealed class RequisitionsBui : BoundUserInterface
             _mendozaDialogueRolled = false;
         }
 
-        if (_entities.TryGetComponent(Owner, out RequisitionsComputerComponent? computer) &&
+        if (_state is { } computer &&
             SelectedCategory is { } selectedCategory &&
             selectedCategory >= GetCurrentCategories(computer).Count)
         {
@@ -416,59 +410,31 @@ public sealed class RequisitionsBui : BoundUserInterface
         if (_window == null || _state == null)
             return;
 
-        var panel = CreateBlackMarketSurface();
-        var contents = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-            HorizontalExpand = true,
-            Margin = new Thickness(8),
-        };
-
-        var header = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            HorizontalExpand = true,
-            Margin = new Thickness(0, 0, 0, 8),
-        };
-
-        header.AddChild(new Label
-        {
-            Text = Loc.GetString("rmc-requisitions-black-market-contact"),
-            FontColorOverride = Color.White,
-            HorizontalExpand = true,
-        });
-
-        header.AddChild(CreateBlackMarketBalanceLabel());
-        contents.AddChild(header);
+        var home = new RequisitionsBlackMarketHome();
+        home.BalanceLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(
+            "rmc-requisitions-black-market-balance",
+            ("wy", _state.BlackMarketBalance))));
 
         var showBriefingButton = !_mendozaIntroSeen || _mendozaBriefingExpanded;
-        var dialogueContents = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-            HorizontalExpand = true,
-            Margin = new Thickness(8),
-        };
-        if (PopulateBlackMarketDialogue(dialogueContents))
-        {
-            var dialoguePanel = CreateBlackMarketSurface(Color.FromHex("#4a2f34"));
-            dialoguePanel.Margin = new Thickness(0, 0, 0, 8);
-            dialoguePanel.AddChild(dialogueContents);
-            contents.AddChild(dialoguePanel);
-        }
+        home.DialoguePanel.Visible = PopulateBlackMarketDialogue(home.DialogueContents);
 
         if (showBriefingButton)
-            contents.AddChild(CreateMendozaBriefingButton());
-
-        contents.AddChild(new Label
         {
-            Text = Loc.GetString("rmc-requisitions-black-market-categories-title"),
-            FontColorOverride = Color.FromHex("#c6a46f"),
-            Margin = new Thickness(0, 0, 0, 4),
-        });
-        PopulateBlackMarketCategoryButtons(contents, computer.BlackMarketCategories);
+            home.BriefingButton.Visible = true;
+            home.BriefingButton.Text = Loc.GetString(_mendozaBriefingExpanded
+                ? "rmc-requisitions-black-market-briefing-hide"
+                : "rmc-requisitions-black-market-briefing-show");
+            home.BriefingButton.OnPressed += _ =>
+            {
+                _mendozaBriefingExpanded = !_mendozaBriefingExpanded;
+                _mendozaDialogueRolled = false;
+                RefreshShop();
+            };
+        }
 
-        panel.AddChild(contents);
-        _window.ProductsContainer.AddChild(panel);
+        PopulateBlackMarketCategoryButtons(home.CategoryButtons, computer.BlackMarketCategories);
+
+        _window.ProductsContainer.AddChild(home);
     }
 
     private bool PopulateBlackMarketDialogue(BoxContainer container)
@@ -511,24 +477,6 @@ public sealed class RequisitionsBui : BoundUserInterface
         AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-intro-4"));
         AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-intro-5"));
         AddProductsLabel(container, Loc.GetString("rmc-requisitions-black-market-mendoza-instructions"), Color.White);
-    }
-
-    private Button CreateMendozaBriefingButton()
-    {
-        var button = CreateCategoryButton(Loc.GetString(_mendozaBriefingExpanded
-            ? "rmc-requisitions-black-market-briefing-hide"
-            : "rmc-requisitions-black-market-briefing-show"), false);
-        button.HorizontalExpand = false;
-        button.MinWidth = 120;
-        button.Margin = new Thickness(0, 0, 0, 8);
-        button.OnPressed += _ =>
-        {
-            _mendozaBriefingExpanded = !_mendozaBriefingExpanded;
-            _mendozaDialogueRolled = false;
-            RefreshShop();
-        };
-
-        return button;
     }
 
     private void PopulateBlackMarketCategoryHeader(RequisitionsCategory category)
@@ -629,71 +577,12 @@ public sealed class RequisitionsBui : BoundUserInterface
         row.AddChild(button);
     }
 
-    private static PanelContainer CreateBlackMarketSurface(Color? borderColor = null)
-    {
-        return new PanelContainer
-        {
-            HorizontalExpand = true,
-            PanelOverride = new StyleBoxFlat
-            {
-                BackgroundColor = Color.FromHex("#17151a"),
-                BorderColor = borderColor ?? Color.FromHex("#66333b"),
-                BorderThickness = new Thickness(1),
-            },
-        };
-    }
-
     private void PopulateBlackMarketSeizureNotice()
     {
         if (_window == null)
             return;
 
-        var panel = new PanelContainer
-        {
-            HorizontalExpand = true,
-            PanelOverride = new StyleBoxFlat
-            {
-                BackgroundColor = Color.FromHex("#1b1b21"),
-                BorderColor = Color.FromHex("#5c637a"),
-                BorderThickness = new Thickness(1),
-            },
-        };
-
-        var notice = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-            HorizontalExpand = true,
-            Margin = new Thickness(8),
-        };
-
-        notice.AddChild(CreateNoticeLabel(Loc.GetString("rmc-requisitions-black-market-seizure-title"), Color.White));
-        notice.AddChild(new TextureRect
-        {
-            Texture = _resourceCache.GetTexture(CmbLogoPath),
-            SetWidth = 175,
-            SetHeight = 175,
-            Stretch = TextureRect.StretchMode.KeepAspectCentered,
-            HorizontalAlignment = HAlignment.Center,
-            Margin = new Thickness(0, 0, 0, 8),
-        });
-
-        notice.AddChild(CreateNoticeLabel(Loc.GetString("rmc-requisitions-black-market-seizure-unauthorized"), Color.White));
-        notice.AddChild(CreateNoticeLabel(Loc.GetString("rmc-requisitions-black-market-seizure-investigation")));
-        notice.AddChild(CreateNoticeLabel(Loc.GetString("rmc-requisitions-black-market-seizure-thanks")));
-
-        panel.AddChild(notice);
-        _window.ProductsContainer.AddChild(panel);
-    }
-
-    private static Label CreateNoticeLabel(string text, Color? color = null)
-    {
-        return new Label
-        {
-            Text = text,
-            FontColorOverride = color ?? Color.LightGray,
-            HorizontalAlignment = HAlignment.Center,
-            Margin = new Thickness(0, 2),
-        };
+        _window.ProductsContainer.AddChild(new RequisitionsBlackMarketSeizureNotice());
     }
 
     private void AddProductsLabel(string text, Color? color = null)

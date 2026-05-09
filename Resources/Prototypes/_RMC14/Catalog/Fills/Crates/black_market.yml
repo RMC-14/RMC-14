@@ -93,14 +93,14 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketP90
-  name: FN P90 submachine gun crate
-  description: Includes an FN P90 submachine gun and five magazines.
+  id: RMCCrateBlackMarketPDW90
+  name: PDW90 submachine gun crate
+  description: Includes a PDW90 submachine gun and five magazines.
   components:
   - type: StorageFill
     contents:
-    - id: RMCWeaponSMGP90
-    - id: RMCMagazineSMGP90
+    - id: RMCWeaponSMGPDW90
+    - id: RMCMagazineSMGPDW90
       amount: 5
 
 - type: entity
@@ -179,14 +179,14 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketDesertEagle
-  name: Desert Eagle crate
-  description: Includes a Desert Eagle and four magazines.
+  id: RMCCrateBlackMarketPeregrineHandcannon
+  name: Peregrine handcannon crate
+  description: Includes a Peregrine handcannon and four magazines.
   components:
   - type: StorageFill
     contents:
-    - id: RMCWeaponPistolDesertEagle
-    - id: RMCMagazinePistolDesertEagle
+    - id: RMCWeaponPistolHandcannon
+    - id: RMCMagazinePistolHandcannon
       amount: 4
 
 - type: entity
@@ -251,14 +251,14 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketSmithWesson
-  name: Smith and Wesson revolver crate
-  description: Includes a Smith and Wesson model 37 revolver and six speed loaders.
+  id: RMCCrateBlackMarketM37
+  name: M37 revolver crate
+  description: Includes an M37 revolver and six speed loaders.
   components:
   - type: StorageFill
     contents:
-    - id: RMCWeaponRevolverSAndWModel37
-    - id: RMCSpeedLoaderSAndW38
+    - id: RMCWeaponRevolverM37
+    - id: RMCSpeedLoaderM37
       amount: 6
 
 - type: entity
@@ -425,7 +425,6 @@
     - id: RMCMarinePreparedMealGingerbread
     - id: RMCMarinePreparedMealFruitcake
     - id: RMCFoodSnackHUNK
-    - id: RMCFoodMeatHuman
     - id: RMCFoodMeatCorgi
     - id: RMCFoodMeatXeno
     - id: RMCFoodPoisonedApple
@@ -434,12 +433,10 @@
     - id: RMCFoodCarpFillet
     - id: RMCFoodCandyCorn
     - id: RMCFoodBurgerMonkey
-    - id: RMCFoodBurgerHuman
     - id: RMCFoodBurgerXeno
     - id: RMCFoodAmanitaJelly
     - id: RMCFoodSpacyLibertyDuff
     - id: RMCFoodMonkeysDelight
-    - id: RMCFoodBrainCake
     - id: RMCFoodResinFruit
     - id: RMCCondimentHotsauceFranksMacho
 
@@ -497,8 +494,8 @@
 - type: entity
   parent: RMCCrateWoodenBuildable
   id: RMCCrateBlackMarketSurplusPoncho
-  name: surplus UNCM poncho crate (x2)
-  description: An ASRS crate containing a failure note instead of surplus UNCM ponchos.
+  name: surplus UNMC poncho crate (x2)
+  description: An ASRS crate containing a failure note instead of surplus UNMC ponchos.
   components:
   - type: StorageFill
     contents:
@@ -507,7 +504,7 @@
 - type: entity
   parent: RMCCrateWoodenBuildable
   id: RMCCrateBlackMarketSurplusHEAP
-  name: surplus high-explosive armor-piercing M41A magazine crate (x3)
+  name: surplus high-explosive armor-piercing M54C magazine crate (x3)
   description: An ASRS crate containing a failure note instead of surplus HEAP magazines.
   components:
   - type: StorageFill
@@ -616,13 +613,13 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketSurplusNSG23
-  name: surplus NSG-23 assault rifle case
-  description: Contains a NSG-23 assault rifle gun case.
+  id: RMCCrateBlackMarketSurplusSSG45
+  name: surplus SSG45 assault rifle case
+  description: Contains an SSG45 assault rifle gun case.
   components:
   - type: StorageFill
     contents:
-    - id: RMCNSG23Case
+    - id: RMCSSG45Case
 
 - type: entity
   parent: RMCCrateWoodenBuildable
@@ -746,23 +743,23 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketAmmoDesertEagle
-  name: Desert Eagle magazine box crate
-  description: Contains one Desert Eagle magazine box with 16 magazines.
+  id: RMCCrateBlackMarketAmmoPeregrineHandcannon
+  name: Peregrine handcannon magazine box crate
+  description: Contains one Peregrine handcannon magazine box with 16 magazines.
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazinePistolDesertEagle
+    - id: RMCBoxMagazinePistolHandcannon
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketAmmoDesertEagleHIAP
-  name: Desert Eagle HIAP magazine box crate
-  description: Contains one empty Desert Eagle HIAP magazine box.
+  id: RMCCrateBlackMarketAmmoPeregrineHandcannonHIAP
+  name: Peregrine handcannon HIAP magazine box crate
+  description: Contains one empty Peregrine handcannon HIAP magazine box.
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazinePistolDesertEagleHIAPEmpty
+    - id: RMCBoxMagazinePistolHandcannonHIAPEmpty
 
 - type: entity
   parent: RMCCrateWoodenBuildable
@@ -776,13 +773,13 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketAmmoNSG23
-  name: NSG-23 magazine box crate
-  description: Contains one NSG-23 magazine box with 12 magazines.
+  id: RMCCrateBlackMarketAmmoSSG45
+  name: SSG45 magazine box crate
+  description: Contains one SSG45 magazine box with 10 magazines.
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazineRifleNSG23
+    - id: RMCBoxMagazineRifleSSG45
 
 - type: entity
   parent: RMCCrateWoodenBuildable
@@ -806,13 +803,13 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketAmmoP90
-  name: FN P90 magazine box crate
-  description: Contains one FN P90 magazine box with 12 magazines.
+  id: RMCCrateBlackMarketAmmoPDW90
+  name: PDW90 magazine box crate
+  description: Contains one PDW90 magazine box with 12 magazines.
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazineSMGP90
+    - id: RMCBoxMagazineSMGPDW90
 
 - type: entity
   parent: RMCCrateWoodenBuildable
@@ -916,13 +913,13 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketAmmoSmithWesson
-  name: Smith and Wesson speedloader box crate
-  description: Contains one Smith and Wesson .38 speedloader box with 12 loaders.
+  id: RMCCrateBlackMarketAmmoM37
+  name: M37 speedloader box crate
+  description: Contains one M37 .38 speedloader box with 12 loaders.
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazineRevolverSAndW
+    - id: RMCBoxMagazineRevolverM37
 
 - type: entity
   parent: RMCCrateWoodenBuildable
@@ -1068,13 +1065,13 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketDeepStorageBiMexShades
-  name: BiMex personal shades crate
-  description: Contains a pair of BiMex personal shades.
+  id: RMCCrateBlackMarketDeepStorageTriMaxShades
+  name: TriMax personal shades crate
+  description: Contains a pair of TriMax personal shades.
   components:
   - type: StorageFill
     contents:
-    - id: RMCGlassesBiMexPersonal
+    - id: RMCGlassesTriMaxPersonal
 
 - type: entity
   parent: RMCCrateWoodenBuildable
