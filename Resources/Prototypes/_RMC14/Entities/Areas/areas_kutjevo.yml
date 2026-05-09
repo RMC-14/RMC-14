@@ -701,6 +701,7 @@
   - type: Sprite
     state: colony_caves_2
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -719,6 +720,7 @@
   - type: Sprite
     state: colony_caves_2
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false

@@ -572,6 +572,7 @@
   - type: Sprite
     state: caves_lambda
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
