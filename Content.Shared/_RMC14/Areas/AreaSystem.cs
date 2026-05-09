@@ -357,6 +357,68 @@ public sealed class AreaSystem : EntitySystem
         return false;
     }
 
+    public bool CanXenoHiveSetupPopup(Entity<MapGridComponent, AreaGridComponent?> grid, Vector2i indices, EntityUid? user, bool popup = true)
+    {
+        if (!TryGetArea(grid, indices, out var area, out _))
+            return true;
+
+        if (!IsXenoHiveSetupRestricted(area.Value, _gameTicker.RoundDuration(), out var remaining))
+            return true;
+
+        if (user != null && popup)
+            PopupXenoHiveSetupRestricted(user.Value, remaining);
+
+        return false;
+    }
+
+    public bool CanXenoHiveSetupPopup(EntityUid coordinates, EntityUid? user, bool popup = true)
+    {
+        if (!TryGetArea(coordinates, out var area, out _))
+            return true;
+
+        if (!IsXenoHiveSetupRestricted(area.Value, _gameTicker.RoundDuration(), out var remaining))
+            return true;
+
+        if (user != null && popup)
+            PopupXenoHiveSetupRestricted(user.Value, remaining);
+
+        return false;
+    }
+
+    private void PopupXenoHiveSetupRestricted(EntityUid user, TimeSpan remaining)
+    {
+        var message = remaining > TimeSpan.Zero
+            ? Loc.GetString("rmc-xeno-hive-setup-area-restricted-remaining", ("time", remaining.ToString(@"mm\:ss")))
+            : Loc.GetString("rmc-xeno-hive-setup-area-restricted");
+
+        _popup.PopupClient(message, user, user, PopupType.MediumCaution);
+    }
+
+    public bool IsXenoHiveSetupRestricted(Entity<AreaComponent> area, TimeSpan roundDuration, out TimeSpan remaining)
+    {
+        remaining = TimeSpan.Zero;
+        if (area.Comp.XenoHiveSetupRestriction is not { } restriction)
+            return false;
+
+        remaining = restriction - roundDuration;
+        if (remaining <= TimeSpan.Zero)
+        {
+            remaining = TimeSpan.Zero;
+            return false;
+        }
+
+        return true;
+    }
+
+    public void SetXenoHiveSetupRestriction(Entity<AreaComponent> area, TimeSpan? restriction)
+    {
+        if (area.Comp.XenoHiveSetupRestriction == restriction)
+            return;
+
+        area.Comp.XenoHiveSetupRestriction = restriction;
+        Dirty(area);
+    }
+
     public bool CanSupplyDrop(MapCoordinates mapCoordinates)
     {
         if (!TryGetArea(mapCoordinates, out var area, out _))
