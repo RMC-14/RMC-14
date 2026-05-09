@@ -178,9 +178,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCWeaponTaser
+    - id: RMCWeaponTaser # TODO RMC14 provost office handheld beacon
     - id: RMCPacketGrenadeFlashBang
-    #- id: RMCTabletCO
+    - id: RMCTabletCO
     - id: RMCProvostJacket
 
 - type: entity

@@ -326,7 +326,7 @@
 - type: entity
   parent: RMCIDCardProvost
   id: RMCIDCardProvostOperative
-  name: provost operative ID card
+  name: provost intelligence operative ID card
   components:
   - type: PresetIdCard
     job: CMProvostOperative
