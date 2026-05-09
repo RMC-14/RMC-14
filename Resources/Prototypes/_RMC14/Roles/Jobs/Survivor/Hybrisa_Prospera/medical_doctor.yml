@@ -53,7 +53,7 @@
   name: medical doctor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ CMMaskSterile, CMHeadCapSurgBlue, CMScrubsBlue ]
     - [ CMMaskSterile, CMHeadCapSurgBlue, CMScrubsBlue ]
