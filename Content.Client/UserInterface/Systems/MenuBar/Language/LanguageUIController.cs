@@ -1,5 +1,6 @@
 using Content.Client._RMC14.Language.Systems;
 using Content.Client.Gameplay;
+using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared.Input;
@@ -20,6 +21,8 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
 
     private LanguageSystem _languageSystem = default!;
     private LanguageMenuWindow? _window;
+
+    private MenuButton? LanguageButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.LanguageButton;
 
     public void OnStateEntered(GameplayState state)
     {
@@ -82,7 +85,12 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
         if (_window == null)
         {
             _window = UIManager.CreateWindow<LanguageMenuWindow>();
-            _window.OnClose += () => _window = null;
+            _window.OnClose += () =>
+            {
+                _window = null;
+                if (LanguageButton != null)
+                    LanguageButton.Pressed = false;
+            };
             _window.OnOpen += UpdateLanguageWindow;
             _window.OnLanguageSelected += OnLanguageSelected;
         }

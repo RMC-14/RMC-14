@@ -6,6 +6,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.IoC;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.UserInterface.Systems.Language;
 
@@ -14,41 +15,70 @@ public sealed partial class LanguageButton : ContainerButton
 {
     [Dependency] private readonly IResourceCache _resourceCache = default!;
 
-    private readonly StyleBoxFlat _hoverStyleBox = new()
+    private static readonly StyleBoxFlat NormalStyle = new()
     {
-        BackgroundColor = Color.FromHex("#2A2A2F"),
-        BorderColor = Color.FromHex("#505050"),
+        BackgroundColor = Color.FromHex("#1E1E23"),
+        BorderColor = Color.FromHex("#383840"),
         BorderThickness = new Thickness(1),
         ContentMarginTopOverride = 4,
         ContentMarginBottomOverride = 4,
-        ContentMarginLeftOverride = 8,
-        ContentMarginRightOverride = 8
+        ContentMarginLeftOverride = 0,
+        ContentMarginRightOverride = 4,
     };
 
-    private readonly StyleBoxFlat _normalStyleBox = new()
+    private static readonly StyleBoxFlat HoverStyle = new()
     {
-        BackgroundColor = Color.FromHex("#25252a"),
-        BorderColor = Color.FromHex("#404040"),
+        BackgroundColor = Color.FromHex("#26262E"),
+        BorderColor = Color.FromHex("#4A4A58"),
         BorderThickness = new Thickness(1),
         ContentMarginTopOverride = 4,
         ContentMarginBottomOverride = 4,
-        ContentMarginLeftOverride = 8,
-        ContentMarginRightOverride = 8
+        ContentMarginLeftOverride = 0,
+        ContentMarginRightOverride = 4,
     };
 
-    private readonly StyleBoxFlat _selectedStyleBox = new()
+    private static readonly StyleBoxFlat SelectedStyle = new()
     {
-        BackgroundColor = Color.FromHex("#2E5233"),
+        BackgroundColor = Color.FromHex("#182818"),
         BorderColor = Color.FromHex("#4CAF50"),
-        BorderThickness = new Thickness(2),
+        BorderThickness = new Thickness(3, 1, 1, 1),
         ContentMarginTopOverride = 4,
         ContentMarginBottomOverride = 4,
-        ContentMarginLeftOverride = 8,
-        ContentMarginRightOverride = 8
+        ContentMarginLeftOverride = 0,
+        ContentMarginRightOverride = 4,
+    };
+
+    private static readonly StyleBoxFlat DescriptionStyle = new()
+    {
+        BackgroundColor = Color.FromHex("#14141A"),
+        BorderColor = Color.FromHex("#383840"),
+        BorderThickness = new Thickness(1, 0, 1, 1),
+        ContentMarginTopOverride = 4,
+        ContentMarginBottomOverride = 4,
+        ContentMarginLeftOverride = 4,
+        ContentMarginRightOverride = 4,
+    };
+
+    private static readonly StyleBoxFlat DescriptionSelectedStyle = new()
+    {
+        BackgroundColor = Color.FromHex("#12201A"),
+        BorderColor = Color.FromHex("#4CAF50"),
+        BorderThickness = new Thickness(3, 0, 1, 1),
+        ContentMarginTopOverride = 4,
+        ContentMarginBottomOverride = 4,
+        ContentMarginLeftOverride = 4,
+        ContentMarginRightOverride = 4,
     };
 
     private bool _isSelected;
+    private bool _descriptionExpanded;
+    private readonly bool _hasDescription;
     private bool _xamlLoaded;
+    private readonly ProtoId<LanguagePrototype> _languageId;
+
+    public event Action<ProtoId<LanguagePrototype>, bool>? OnDescriptionExpansionChanged;
+
+    public bool IsDescriptionExpanded => _descriptionExpanded;
 
     public bool IsSelected
     {
@@ -64,23 +94,40 @@ public sealed partial class LanguageButton : ContainerButton
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-
-        HorizontalExpand = true;
-        SetHeight = 64;
+        Mode = ActionMode.Press;
     }
 
     public LanguageButton(LanguagePrototype prototype, bool isSelected) : this()
     {
-        NameLabel.Text = prototype.LocalizedName;
-        DescriptionLabel.Text = prototype.LocalizedDescription;
-        DescriptionLabel.FontColorOverride = Color.Gray;
-        SelectedIndicator.Text = ">";
-
+        _languageId = prototype.ID;
         _isSelected = isSelected;
+
+        NameLabel.Text = prototype.LocalizedName;
         LoadLanguageIcon(prototype);
+
+        var description = prototype.LocalizedDescription;
+        _hasDescription = !string.IsNullOrWhiteSpace(description);
+        if (_hasDescription)
+        {
+            DescriptionLabel.Text = description;
+            DescriptionLabel.FontColorOverride = Color.FromHex("#AAAAAA");
+            DescriptionToggle.Visible = true;
+            DescriptionToggle.OnPressed += _ => SetDescriptionExpanded(!_descriptionExpanded);
+        }
 
         _xamlLoaded = true;
         UpdateVisualState();
+    }
+
+    public void SetDescriptionExpanded(bool expanded)
+    {
+        if (_descriptionExpanded == expanded)
+            return;
+
+        _descriptionExpanded = expanded;
+        DescriptionPanel.Visible = _descriptionExpanded;
+        UpdateDescriptionPanelStyle();
+        OnDescriptionExpansionChanged?.Invoke(_languageId, _descriptionExpanded);
     }
 
     protected override void DrawModeChanged()
@@ -108,15 +155,28 @@ public sealed partial class LanguageButton : ContainerButton
 
         if (_isSelected)
         {
-            Background.PanelOverride = _selectedStyleBox;
-            NameLabel.FontColorOverride = Color.LightGreen;
-            SelectedIndicator.Visible = true;
-            SelectedIndicator.FontColorOverride = Color.LightGreen;
-            return;
+            Background.PanelOverride = SelectedStyle;
+            NameLabel.FontColorOverride = Color.FromHex("#7DD87F");
+        }
+        else if (DrawMode == DrawModeEnum.Hover)
+        {
+            Background.PanelOverride = HoverStyle;
+            NameLabel.FontColorOverride = Color.White;
+        }
+        else
+        {
+            Background.PanelOverride = NormalStyle;
+            NameLabel.FontColorOverride = Color.FromHex("#CCCCCC");
         }
 
-        Background.PanelOverride = DrawMode == DrawModeEnum.Hover ? _hoverStyleBox : _normalStyleBox;
-        NameLabel.FontColorOverride = Color.White;
-        SelectedIndicator.Visible = false;
+        UpdateDescriptionPanelStyle();
+    }
+
+    private void UpdateDescriptionPanelStyle()
+    {
+        if (!_hasDescription)
+            return;
+
+        DescriptionPanel.PanelOverride = _isSelected ? DescriptionSelectedStyle : DescriptionStyle;
     }
 }

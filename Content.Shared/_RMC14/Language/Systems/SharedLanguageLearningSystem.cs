@@ -1,44 +1,43 @@
+using System.Text;
+using System.Text.RegularExpressions;
 using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Content.Shared._RMC14.Language.Systems;
 
 public abstract class SharedLanguageLearningSystem : EntitySystem
 {
+    [Dependency] protected readonly SharedLanguageSystem _language = default!;
     [Dependency] protected readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] protected readonly IRobustRandom _random = default!;
-    [Dependency] protected readonly SharedLanguageSystem _languageSystem = default!;
 
-    protected static readonly Regex WordRegex = new(@"\b[\w']+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+    protected static readonly Regex WordRegex = new(@"\b[a-zA-Z']+\b", RegexOptions.Compiled);
     public string ProcessMessageForListener(EntityUid listener, string message, ProtoId<LanguagePrototype> language)
     {
-        if (_languageSystem.CanUnderstand(listener, language))
+        if (_language.CanUnderstand(listener, language))
             return message;
 
         if (!TryComp<LanguageLearningComponent>(listener, out var comp))
-            return _languageSystem.ObfuscateMessage(message, language);
+            return _language.ObfuscateMessage(message, language);
 
         if (!comp.Languages.ContainsKey(language))
-            return _languageSystem.ObfuscateMessage(message, language);
+            return _language.ObfuscateMessage(message, language);
 
         return ProcessMessageWordByWord(message, language, comp);
     }
 
     public string ProcessMessageForSpeaker(EntityUid speaker, string message, ProtoId<LanguagePrototype> language)
     {
-        if (_languageSystem.CanUnderstand(speaker, language))
+        if (_language.CanUnderstand(speaker, language))
             return message;
 
         if (!TryComp<LanguageLearningComponent>(speaker, out var comp))
-            return _languageSystem.ObfuscateMessage(message, language);
+            return _language.ObfuscateMessage(message, language);
 
         if (!comp.Languages.ContainsKey(language))
-            return _languageSystem.ObfuscateMessage(message, language);
+            return _language.ObfuscateMessage(message, language);
 
         return ProcessMessageWordByWord(message, language, comp);
     }
@@ -81,7 +80,7 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
             }
             else
             {
-                result.Append(_languageSystem.ObfuscateMessage(word, language));
+                result.Append(_language.ObfuscateMessage(word, language));
             }
 
             lastIndex = match.Index + match.Length;
@@ -103,7 +102,7 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
         if (effectiveComprehension >= thresholds.Clear)
             return word;
 
-        return _languageSystem.ObfuscateMessageForDisplayWithComprehension(
+        return _language.ObfuscateMessageForDisplayWithComprehension(
             word,
             language,
             effectiveComprehension);

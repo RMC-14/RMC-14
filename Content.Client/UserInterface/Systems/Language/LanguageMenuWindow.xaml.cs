@@ -38,6 +38,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
     private ProtoId<LanguagePrototype>? _currentLanguage;
     private IReadOnlyDictionary<ProtoId<LanguagePrototype>, LanguageLearningViewData> _learningLanguages = EmptyLearningLanguages;
     private readonly Dictionary<ProtoId<LanguagePrototype>, bool> _expansionStates = [];
+    private readonly Dictionary<ProtoId<LanguagePrototype>, bool> _descriptionExpansionStates = [];
 
     public event Action<ProtoId<LanguagePrototype>>? OnLanguageSelected;
 
@@ -100,6 +101,11 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
 
             var button = new LanguageButton(proto, languageId == _currentLanguage);
             button.OnPressed += _ => OnLanguageSelected?.Invoke(languageId);
+
+            if (_descriptionExpansionStates.GetValueOrDefault(languageId, false))
+                button.SetDescriptionExpanded(true);
+
+            button.OnDescriptionExpansionChanged += (langId, expanded) => _descriptionExpansionStates[langId] = expanded;
             KnownLanguageList.AddChild(button);
         }
     }

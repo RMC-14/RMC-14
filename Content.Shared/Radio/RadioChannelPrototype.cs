@@ -20,10 +20,6 @@ public sealed partial class RadioChannelPrototype : IPrototype
     [DataField("keycode")]
     public char KeyCode { get; private set; } = '\0';
 
-    //RMC
-    [DataField("radioPrefix")]
-    public char RadioPrefix { get; private set; } = ':';
-
     [DataField("frequency")]
     public int Frequency { get; private set; } = 0;
 

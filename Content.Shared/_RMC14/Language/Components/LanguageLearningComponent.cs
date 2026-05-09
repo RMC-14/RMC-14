@@ -28,6 +28,9 @@ public sealed partial class LanguageLearningComponent : Component
     public Dictionary<NetEntity, int> StudiedSources = new();
 
     [DataField]
+    public int MaxStudiedSourcesTracked = 500;
+
+    [DataField]
     public TimeSpan LastLearningTime = TimeSpan.Zero;
 
     [DataField]
@@ -97,6 +100,9 @@ public sealed partial class LanguageLearningData
 
     [DataField]
     public bool Encountered;
+
+    [DataField]
+    public bool FluentAnnounced;
 
     [DataField]
     public float Progress;

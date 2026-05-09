@@ -8,8 +8,9 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Language.Systems;
+using Content.Server._RMC14.Language.Systems;
 using Content.Shared._RMC14.Language.Prototypes;
+using Content.Shared._RMC14.Language.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
@@ -41,7 +42,7 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!; // RMC14
     [Dependency] private readonly IChatManager _chatManager = default!; // RMC14
-    [Dependency] private readonly SharedLanguageSystem _languageSystem = default!; // RMC14
+    [Dependency] private readonly LanguageSystem _language = default!; // RMC14
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
@@ -102,7 +103,7 @@ public sealed class RadioSystem : EntitySystem
             return;
 
         // RMC14
-        var currentLanguage = language?.ID ?? _languageSystem.GetCurrentLanguage(messageSource);
+        var currentLanguage = language?.ID ?? _language.GetCurrentLanguage(messageSource);
 
         if (language != null && !language.CanUseRadio)
             return;
@@ -152,9 +153,10 @@ public sealed class RadioSystem : EntitySystem
             ? FormattedMessage.EscapeText(message)
             : message;
 
-        // RMC14 increase font size
+        // RMC14
         var radioFontSize = speech.FontSize;
-        var radioFontId = language?.TypefaceId ?? speech.FontId; // RMC14
+        var radioFontId = language?.TypefaceId ?? speech.FontId;
+        // RMC14
         if (TryComp<WearingHeadsetComponent>(messageSource, out var wearingHeadset) &&
             TryComp<RMCHeadsetComponent>(wearingHeadset.Headset, out var headsetComp))
         {
@@ -167,8 +169,10 @@ public sealed class RadioSystem : EntitySystem
 
         var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
             ("color", channel.Color),
-            ("fontType", radioFontId), // RMC14
-            ("fontSize", radioFontSize), // RMC14
+            // RMC14
+            ("fontType", radioFontId),
+            ("fontSize", radioFontSize),
+            // RMC14
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("channel", $"\\[{channel.LocalizedName}\\]"),
             ("name", name),
@@ -209,7 +213,7 @@ public sealed class RadioSystem : EntitySystem
                 continue;
 
             // send the message
-            //RMC - because we cant send the same msg to everyone - tho i think there is better way
+            // RMC14
             string actualMessage = message;
             string actualWrappedMessage = wrappedMessage;
             string? actualLanguageIcon = languageIcon;
@@ -232,9 +236,9 @@ public sealed class RadioSystem : EntitySystem
                 }
             }
 
-            if (listenerEntity.HasValue && !_languageSystem.CanUnderstand(listenerEntity.Value, currentLanguage))
+            if (listenerEntity.HasValue && !_language.CanUnderstand(listenerEntity.Value, currentLanguage))
             {
-                var obfuscatedMessage = _languageSystem.ObfuscateMessage(message, currentLanguage);
+                var obfuscatedMessage = _language.ObfuscateMessageForListener(listenerEntity.Value, message, currentLanguage);
                 actualMessage = obfuscatedMessage;
 
                 actualWrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
@@ -258,7 +262,7 @@ public sealed class RadioSystem : EntitySystem
 
             var chatMsg = new MsgChatMessage { Message = chat };
             var ev = new RadioReceiveEvent(actualMessage, messageSource, channel, radioSource, chatMsg);
-            //RMC
+            // RMC14
             RaiseLocalEvent(receiver, ref ev);
         }
 

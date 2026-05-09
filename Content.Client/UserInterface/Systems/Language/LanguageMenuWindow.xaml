@@ -3,8 +3,8 @@
                                xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Language"
                                xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                                Title="{Loc 'language-menu-title'}"
-                               MinSize="200 250"
-                               SetSize="400 450">
+                               MinSize="200 180"
+                               SetSize="300 260">
 
     <PanelContainer Name="MainContainer" HorizontalExpand="True" VerticalExpand="True">
         <PanelContainer Name="ContentContainer" HorizontalExpand="True" VerticalExpand="True" Margin="0">

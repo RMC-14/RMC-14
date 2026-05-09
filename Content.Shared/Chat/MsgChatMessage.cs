@@ -42,13 +42,16 @@ namespace Content.Shared.Chat
         public bool HidePopup;
         public string? SpeechStyleClass;
         public bool RepeatCheckSender;
-        public string? LanguageIcon; //RMC
+        // RMC14
+        public string? LanguageIcon;
+        // RMC14
 
         [NonSerialized]
         public bool Read;
 
+        // RMC14
         public ChatMessage(ChatChannel channel, string message, string wrappedMessage, NetEntity source, int? senderKey, bool hideChat = false, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, bool hidePopup = false, string? speechStyleClass = null, bool repeatCheckSender = true,
-        string? languageIcon = null) //RMC
+            string? languageIcon = null)
         {
             Channel = channel;
             Message = message;
@@ -62,8 +65,9 @@ namespace Content.Shared.Chat
             HidePopup = hidePopup;
             SpeechStyleClass = speechStyleClass;
             RepeatCheckSender = repeatCheckSender;
-            LanguageIcon = languageIcon; //RMC
+            LanguageIcon = languageIcon;
         }
+        // RMC14
     }
 
     /// <summary>

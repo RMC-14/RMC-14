@@ -1,11 +1,11 @@
+using System.Numerics;
+using Content.Server._RMC14.Language.Systems;
 using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Language;
-using Content.Server._RMC14.Language.Systems;
 using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
 using Content.Shared.Popups;
-using System.Numerics;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -192,6 +192,11 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             return;
 
         var sourceNetEntity = GetNetEntity(source);
+        var isTracked = comp.StudiedSources.ContainsKey(sourceNetEntity);
+
+        if (!isTracked && comp.StudiedSources.Count >= comp.MaxStudiedSourcesTracked)
+            return;
+
         var studyCount = comp.StudiedSources.GetValueOrDefault(sourceNetEntity, 0);
 
         if (studyCount >= comp.MaxLearningFromSameSource)
@@ -311,8 +316,9 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
                 }
             }
         }
-        else if (comprehension >= comp.FluentComprehensionThreshold && hasLearnedAnyWords)
+        else if (comprehension >= comp.FluentComprehensionThreshold && hasLearnedAnyWords && !languageData.FluentAnnounced)
         {
+            languageData.FluentAnnounced = true;
             _popup.PopupEntity(
                 Loc.GetString("language-learning-fluent", ("language", languageName)),
                 learner,
