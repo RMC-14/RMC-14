@@ -18,8 +18,8 @@ rmc-distress-signal-next-map-title = Next Planet Map
 rmc-distress-signal-next-map-tie = Tie for map vote! Picking... {$picked}
 rmc-distress-signal-next-map-win = [font size=14][bold][color=green]{$winner}[/color][/bold] won the map vote![/font]
 rmc-distress-signal-next-map-header = [font size=14][bold]Map Vote Results[/bold][/font]
-rmc-distress-signal-next-map-votes = {$map}: {$votes} votes
-rmc-distress-signal-next-map-votes-new = {$map}: {$votes} votes ({$newVotes} new)
+rmc-distress-signal-next-map-votes = [bold]{$map}:[/bold] [color=white]{$votes}[/color] votes
+rmc-distress-signal-next-map-votes-new = [bold]{$map}:[/bold] [color=white]{$votes}[/color] votes ({$newVotes} new)
 rmc-distress-signal-next-map-tiebreaker = [bold]Vote tied between:[/bold]
 
 rmc-distress-signal-fallen = In memoriam of our fallen soldiers:
