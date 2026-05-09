@@ -23,7 +23,7 @@
           variation: 0.05
   - type: Corrodible
     timeToApply: 1
-    MeltTimeMult: 0.1
+    meltTimeMult: 0.1
     structure: true
   - type: Flammable
     fireSpread: false
