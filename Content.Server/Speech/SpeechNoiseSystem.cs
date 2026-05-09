@@ -14,10 +14,12 @@ namespace Content.Server.Speech
 {
     public sealed class SpeechSoundSystem : EntitySystem
     {
+        // RMC14
+        [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IPrototypeManager _protoManager = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
+        // RMC14
 
         public override void Initialize()
         {
@@ -26,6 +28,7 @@ namespace Content.Server.Speech
             SubscribeLocalEvent<SpeechComponent, EntitySpokeEvent>(OnEntitySpoke);
         }
 
+        // RMC14
         public SoundSpecifier? GetSpeechSound(
             Entity<SpeechComponent> ent,
             string message,
@@ -48,8 +51,8 @@ namespace Content.Server.Speech
             };
 
             // Use exclaim sound if most characters are uppercase.
-            int uppercaseCount = 0;
-            for (int i = 0; i < message.Length; i++)
+            var uppercaseCount = 0;
+            for (var i = 0; i < message.Length; i++)
             {
                 if (char.IsUpper(message[i]))
                     uppercaseCount++;
@@ -63,7 +66,9 @@ namespace Content.Server.Speech
             contextSound.Params = ent.Comp.AudioParams.WithPitchScale(scale);
             return contextSound;
         }
+        // RMC14
 
+        // RMC14
         private ProtoId<SpeechSoundsPrototype>? GetSpeechSoundOverride(EntityUid uid, ProtoId<LanguagePrototype>? language)
         {
             if (language == null ||
@@ -77,23 +82,26 @@ namespace Content.Server.Speech
 
             return languageProto.SpeechOverride.SpeechSoundsOverride;
         }
+        // RMC14
 
-        private void OnEntitySpoke(EntityUid uid, SpeechComponent component, EntitySpokeEvent args)
+        // RMC14
+        private void OnEntitySpoke(Entity<SpeechComponent> ent, EntitySpokeEvent args)
         {
-            var effectiveSpeechSounds = GetSpeechSoundOverride(uid, args.Language) ?? component.SpeechSounds;
+            var effectiveSpeechSounds = GetSpeechSoundOverride(ent.Owner, args.Language) ?? ent.Comp.SpeechSounds;
             if (effectiveSpeechSounds == null)
                 return;
 
             var currentTime = _gameTiming.CurTime;
-            var cooldown = TimeSpan.FromSeconds(component.SoundCooldownTime);
+            var cooldown = TimeSpan.FromSeconds(ent.Comp.SoundCooldownTime);
 
             // Ensure more than the cooldown time has passed since last speaking
-            if (currentTime - component.LastTimeSoundPlayed < cooldown)
+            if (currentTime - ent.Comp.LastTimeSoundPlayed < cooldown)
                 return;
 
-            var sound = GetSpeechSound((uid, component), args.Message, effectiveSpeechSounds);
-            component.LastTimeSoundPlayed = currentTime;
-            _audio.PlayPvs(sound, uid);
+            var sound = GetSpeechSound(ent, args.Message, effectiveSpeechSounds);
+            ent.Comp.LastTimeSoundPlayed = currentTime;
+            _audio.PlayPvs(sound, ent.Owner);
         }
+        // RMC14
     }
 }
