@@ -2,10 +2,10 @@ using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Rules;
-using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
+using Content.Server.Temperature.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -32,6 +32,8 @@ public sealed partial class CMDistressSignalRuleSystem
     private const int ScuttleNuclearShakeDuration = 110;
     private const float ScuttleHeatRadius = 3.5f;
     private const float ScuttleSuperheatRadius = 5f;
+    private const float ScuttleHeatJoules = 45000f;
+    private const float ScuttleSuperheatJoules = 75000f;
 
     private static readonly EntProtoId ScuttleFire = "RMCTileFire";
     private static readonly DamageSpecifier ScuttleHeatDamage = new() { DamageDict = { { "Heat", 5 } } };
@@ -39,6 +41,9 @@ public sealed partial class CMDistressSignalRuleSystem
     private static readonly SoundSpecifier ScuttleStageSound = new SoundPathSpecifier("/Audio/Machines/warning_buzzer.ogg");
     private static readonly SoundSpecifier ScuttleDetonationSound = new SoundPathSpecifier("/Audio/Effects/explosionfar.ogg");
     private static readonly SoundSpecifier ScuttleNoticeSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
+    private static readonly SoundSpecifier ScuttleRumbleSound = new SoundPathSpecifier(
+        "/Audio/Magic/rumble.ogg",
+        AudioParams.Default.WithVolume(3f));
     private static readonly SoundSpecifier[] ScuttleCreakSounds =
     [
         new SoundPathSpecifier("/Audio/_RMC14/Scuttle/creak1.ogg"),
@@ -47,8 +52,8 @@ public sealed partial class CMDistressSignalRuleSystem
     ];
     private static readonly SoundSpecifier[] ScuttleNuclearDetonationSounds =
     [
-        new SoundPathSpecifier("/Audio/_RMC14/Scuttle/nuclear_detonation1.ogg"),
-        new SoundPathSpecifier("/Audio/_RMC14/Scuttle/nuclear_detonation2.ogg"),
+        new SoundPathSpecifier("/Audio/_RMC14/Scuttle/nuclear_detonation1.ogg", AudioParams.Default.WithVolume(4f)),
+        new SoundPathSpecifier("/Audio/_RMC14/Scuttle/nuclear_detonation2.ogg", AudioParams.Default.WithVolume(4f)),
     ];
 
     private bool UpdateScuttle(CMDistressSignalRuleComponent rule, float frameTime)
@@ -76,7 +81,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
         rule.ScuttleProgress += TimeSpan.FromSeconds(frameTime);
 
-        var required = GetScuttleRequiredDuration(rule, overloaded);
+        var required = GetScuttleRequiredDuration(rule, overloaded, GetScuttleTotalReactors(rule, overloaded));
         if (!rule.ScuttleOneThirdAnnounced && HasReachedScuttleProgress(rule, required, 1.0 / 3.0))
         {
             rule.ScuttleOneThirdAnnounced = true;
@@ -107,6 +112,7 @@ public sealed partial class CMDistressSignalRuleSystem
     {
         rule.ScuttleUnlocked = true;
         rule.ScuttleUnlockAt = null;
+        rule.ScuttleTotalReactors = CountMappedScuttleReactors();
 
         _alertLevelSystem.Set(RMCAlertLevels.Delta, null, true, false);
         _marineAnnounce.AnnounceARESStaging(
@@ -185,16 +191,16 @@ public sealed partial class CMDistressSignalRuleSystem
         foreach (var map in GetAlmayerMapIds())
         {
             var filter = Filter.BroadcastMap(map);
-            _chatManager.ChatMessageToManyFiltered(
-                filter,
-                ChatChannel.Server,
-                message,
-                message,
-                _mapSystem.GetMapOrInvalid(map),
-                false,
-                true,
-                Color.Orange);
             _audio.PlayGlobal(sound, filter, true);
+        }
+
+        var actors = EntityQueryEnumerator<ActorComponent, TransformComponent>();
+        while (actors.MoveNext(out var uid, out _, out var xform))
+        {
+            if (!IsAlmayerMap(xform.MapUid))
+                continue;
+
+            _popup.PopupEntity(message, uid, uid, PopupType.MediumCaution);
         }
     }
 
@@ -209,6 +215,7 @@ public sealed partial class CMDistressSignalRuleSystem
         foreach (var map in GetAlmayerMapIds())
         {
             var filter = Filter.BroadcastMap(map);
+            _audio.PlayGlobal(ScuttleRumbleSound, filter, true);
             _rmcCameraShake.ShakeCamera(filter, ScuttleMeltdownShakeDuration, ScuttleMeltdownShakeIntensity);
         }
 
@@ -222,6 +229,7 @@ public sealed partial class CMDistressSignalRuleSystem
         foreach (var map in GetAlmayerMapIds())
         {
             var filter = Filter.BroadcastMap(map);
+            _audio.PlayGlobal(ScuttleRumbleSound, filter, true);
             _rmcCameraShake.ShakeCamera(filter, ScuttleNuclearShakeDuration, ScuttleNuclearShakeIntensity);
         }
     }
@@ -285,13 +293,14 @@ public sealed partial class CMDistressSignalRuleSystem
         var superheated = rule.ScuttleTwoThirdsAnnounced || rule.ScuttleFinalSequenceStarted;
         ApplyScuttleHeatAura(
             superheated ? ScuttleSuperheatRadius : ScuttleHeatRadius,
+            superheated ? ScuttleSuperheatJoules : ScuttleHeatJoules,
             superheated ? ScuttleSuperheatDamage : ScuttleHeatDamage,
             superheated
                 ? "rmc-distress-signal-scuttle-superheat-aura"
                 : "rmc-distress-signal-scuttle-heat-aura");
     }
 
-    private void ApplyScuttleHeatAura(float radius, DamageSpecifier damage, LocId message)
+    private void ApplyScuttleHeatAura(float radius, float heatJoules, DamageSpecifier fallbackDamage, LocId message)
     {
         var damaged = new HashSet<EntityUid>();
         var targets = new HashSet<Entity<DamageableComponent>>();
@@ -312,7 +321,21 @@ public sealed partial class CMDistressSignalRuleSystem
                 if (!damaged.Add(target))
                     continue;
 
-                _damageable.TryChangeDamage(target, damage, true, false, origin: reactorUid);
+                if (TryComp<TemperatureComponent>(target, out var temperature))
+                {
+                    _temperature.ChangeHeat(target, heatJoules, temperature: temperature);
+
+                    // RMC mobs currently carry body temperature state, but their base Temperature
+                    // component does not define HeatDamage, so keep scuttle lethal without broad
+                    // changes to every temperature source in RMC.
+                    if (temperature.HeatDamage.Empty)
+                        _damageable.TryChangeDamage(target, fallbackDamage, true, false, origin: reactorUid);
+                }
+                else
+                {
+                    _damageable.TryChangeDamage(target, fallbackDamage, true, false, origin: reactorUid);
+                }
+
                 _popup.PopupEntity(Loc.GetString(message), target, target, PopupType.SmallCaution);
             }
         }
@@ -331,12 +354,33 @@ public sealed partial class CMDistressSignalRuleSystem
         return count;
     }
 
-    private TimeSpan GetScuttleRequiredDuration(CMDistressSignalRuleComponent rule, int overloadedReactors)
+    private int CountMappedScuttleReactors()
     {
-        if (rule.ScuttleMaxReactors <= 0)
+        var count = 0;
+        var reactors = EntityQueryEnumerator<RMCFusionReactorComponent, TransformComponent>();
+        while (reactors.MoveNext(out _, out _, out var xform))
+        {
+            if (IsAlmayerMap(xform.MapUid))
+                count++;
+        }
+
+        return count;
+    }
+
+    private int GetScuttleTotalReactors(CMDistressSignalRuleComponent rule, int overloadedReactors)
+    {
+        if (rule.ScuttleTotalReactors <= 0)
+            rule.ScuttleTotalReactors = CountMappedScuttleReactors();
+
+        return Math.Max(rule.ScuttleTotalReactors, overloadedReactors);
+    }
+
+    private TimeSpan GetScuttleRequiredDuration(CMDistressSignalRuleComponent rule, int overloadedReactors, int totalReactors)
+    {
+        if (totalReactors <= 0)
             return rule.ScuttleMaxDuration;
 
-        var fraction = Math.Clamp(overloadedReactors / (double) rule.ScuttleMaxReactors, 0, 1);
+        var fraction = Math.Clamp(overloadedReactors / (double) totalReactors, 0, 1);
         var seconds = rule.ScuttleMaxDuration.TotalSeconds +
                       (rule.ScuttleMinDuration.TotalSeconds - rule.ScuttleMaxDuration.TotalSeconds) * fraction;
         return TimeSpan.FromSeconds(seconds);
@@ -392,6 +436,7 @@ public sealed partial class CMDistressSignalRuleSystem
         }
 
         var overloadedReactors = CountOverloadedScuttleReactors();
+        var totalReactors = GetScuttleTotalReactors(rule, overloadedReactors);
         var eta = Loc.GetString("rmc-fusion-reactor-overload-eta-never");
         var progress = 0;
 
@@ -402,7 +447,7 @@ public sealed partial class CMDistressSignalRuleSystem
         }
         else if (overloadedReactors > 0)
         {
-            var required = GetScuttleRequiredDuration(rule, overloadedReactors);
+            var required = GetScuttleRequiredDuration(rule, overloadedReactors, totalReactors);
             var remaining = required - rule.ScuttleProgress;
             eta = FormatScuttleEta(remaining);
             progress = (int) Math.Clamp(rule.ScuttleProgress.TotalSeconds / required.TotalSeconds * 100, 0, 100);
@@ -412,6 +457,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 ? "rmc-fusion-reactor-overload-examine-active"
                 : "rmc-fusion-reactor-overload-examine-available",
             ("reactors", overloadedReactors),
+            ("totalReactors", totalReactors),
             ("eta", eta),
             ("progress", progress));
     }

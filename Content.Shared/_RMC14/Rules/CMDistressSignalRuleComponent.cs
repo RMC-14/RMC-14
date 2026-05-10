@@ -89,7 +89,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public TimeSpan ScuttleMaxDuration = TimeSpan.FromMinutes(15);
 
     [DataField]
-    public int ScuttleMaxReactors = 18;
+    public int ScuttleTotalReactors;
 
     [DataField]
     public TimeSpan ScuttleFinalMeltdownDelay = TimeSpan.FromSeconds(7);

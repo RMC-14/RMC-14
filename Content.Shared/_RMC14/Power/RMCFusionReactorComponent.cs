@@ -62,12 +62,12 @@ public sealed partial class RMCFusionReactorComponent : Component
     [DataField]
     public SoundSpecifier OverloadHumSound = new SoundPathSpecifier(
         "/Audio/Ambience/Objects/engine_hum.ogg",
-        AudioParams.Default.WithVolume(-5f).WithMaxDistance(8f).WithVariation(0.05f));
+        AudioParams.Default.WithVolume(0f).WithMaxDistance(10f).WithVariation(0.05f));
 
     [DataField]
     public SoundSpecifier OverloadHissSound = new SoundPathSpecifier(
         "/Audio/Ambience/Objects/gas_hiss.ogg",
-        AudioParams.Default.WithVolume(-4f).WithMaxDistance(8f).WithVariation(0.05f));
+        AudioParams.Default.WithVolume(2.1f).WithMaxDistance(10f).WithVariation(0.05f));
 
     [DataField]
     public SoundSpecifier OverloadStopSound = new SoundPathSpecifier(
