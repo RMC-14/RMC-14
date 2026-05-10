@@ -55,6 +55,10 @@
       "directions": 4
     },
     {
+      "name": "tail",
+      "directions": 4
+    },
+    {
       "name": "frawa",
       "directions": 4
     }

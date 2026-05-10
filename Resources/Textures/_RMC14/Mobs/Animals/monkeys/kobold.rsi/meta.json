@@ -55,6 +55,14 @@
       "directions": 4
     },
     {
+      "name": "tail",
+      "directions": 4
+    },
+    {
+      "name": "eyes",
+      "directions": 4
+    },
+    {
       "name": "kobold",
       "directions": 4
     }
