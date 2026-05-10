@@ -28,7 +28,7 @@
 - type: language
   id: Xeno
   name: "Xenonid"
-  description: "The alien language of the Xenomorphs."
+  description: "The alien language of the Xenonids."
   isVisibleLanguage: true
   typefaceId: null
   textSize: null

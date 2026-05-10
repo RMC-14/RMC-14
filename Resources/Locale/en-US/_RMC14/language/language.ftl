@@ -17,7 +17,7 @@ language-Primitive-name = Primitive
 
 # Language descr
 language-English-description = Earth language.
-language-Xeno-description = The alien language of the Xenomorphs.
+language-Xeno-description = The alien language of the Xenonids.
 language-Xeno-first-contact = The sounds follow an alien hive pattern.
 language-Spanish-description = Earth language.
 language-French-description = Earth language.
