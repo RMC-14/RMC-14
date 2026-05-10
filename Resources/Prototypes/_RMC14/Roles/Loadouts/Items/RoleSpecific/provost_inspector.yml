@@ -14,6 +14,7 @@
 - type: loadout
   id: RMCWeaponPistolHandcannon
   cost: 0
+  dummyEntity: RMCWeaponPistolHandcannon
   equipment:
     belt: RMCBeltHolsterPistolHandcannonFilled
 
@@ -26,5 +27,6 @@
       !type:RoleTimeRequirement
       role: CMJobProvostInspector
       time: 540000 # 150 hrs
+  dummyEntity: RMCWeaponPistolHandcannonProvost
   equipment:
     belt: RMCBeltHolsterPistolHandcannonProvostFilled
