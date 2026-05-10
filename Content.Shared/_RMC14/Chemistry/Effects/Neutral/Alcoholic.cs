@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Drowsyness;
+using Content.Shared._RMC14.Medical.Vomit;
 using Content.Shared.Damage;
 using Content.Shared.Drunk;
 using Content.Shared.EntityEffects;

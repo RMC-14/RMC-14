@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._RMC14.Respiration;
+namespace Content.Shared._RMC14.Body;
 
 public sealed class RMCRespiratorSystem : EntitySystem
 {
