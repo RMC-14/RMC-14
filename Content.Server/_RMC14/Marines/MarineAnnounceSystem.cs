@@ -2,6 +2,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Radio.EntitySystems;
+using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
@@ -22,6 +23,7 @@ namespace Content.Server._RMC14.Marines;
 public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
+    [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
@@ -37,6 +39,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
 
+        SubscribeLocalEvent<RMCAlertLevelChangedEvent>(OnAlertLevelChanged);
         SubscribeLocalEvent<RMCPlanetComponent, RMCPlanetAddedEvent>(OnPlanetAdded);
 
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
@@ -57,6 +60,16 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     }
 
     private void OnPlanetAdded(Entity<RMCPlanetComponent> ent, ref RMCPlanetAddedEvent args)
+    {
+        UpdateCommunicationsComputers();
+    }
+
+    private void OnAlertLevelChanged(ref RMCAlertLevelChangedEvent ev)
+    {
+        UpdateCommunicationsComputers();
+    }
+
+    private void UpdateCommunicationsComputers()
     {
         var computers = EntityQueryEnumerator<MarineCommunicationsComputerComponent>();
         while (computers.MoveNext(out var uid, out var computer))
@@ -92,7 +105,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         landingZones.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
 
-        var state = new MarineCommunicationsComputerBuiState(planet, operation, landingZones);
+        var distressBeaconEnabled = computer.Comp.CanTransmitDistress && _alertLevel.IsRedOrDeltaAlert();
+        var state = new MarineCommunicationsComputerBuiState(planet, operation, landingZones, distressBeaconEnabled);
         _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
     }
 

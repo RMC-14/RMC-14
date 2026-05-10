@@ -88,6 +88,7 @@ rmc-ert-popup-beacon-spent = The distress beacon has already been used.
 rmc-ert-popup-beacon-cooldown = The distress beacon is still recalibrating.
 rmc-ert-popup-beacon-reason-required = You need to provide a reason before transmitting the distress beacon.
 rmc-ert-popup-console-unavailable = This console cannot transmit a distress beacon.
+rmc-ert-popup-console-alert-required = The distress beacon can only be transmitted on red alert or higher.
 rmc-ert-popup-no-source-teams = There are no configured response teams for this distress source.
 rmc-ert-prompt-console-reason = State the reason for the distress beacon.
 rmc-ert-prompt-handheld-reason = State the reason for the {$title}.

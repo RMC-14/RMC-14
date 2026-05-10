@@ -21,6 +21,7 @@ using Content.Server.Shuttles.Events;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
@@ -66,6 +67,7 @@ public sealed class RMCERTSystem : EntitySystem
     [Dependency] private readonly AccessReaderSystem _access = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chat = default!;
@@ -656,13 +658,7 @@ public sealed class RMCERTSystem : EntitySystem
 
     private void OnMarineCommunicationsDistressBeacon(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsDistressBeaconMsg args)
     {
-        if (!ent.Comp.CanTransmitDistress)
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-console-unavailable"), ent, args.Actor, PopupType.MediumCaution);
-            return;
-        }
-
-        if (!CanCreateRequest(ent, out var reason))
+        if (!CanUseConsoleDistress(ent, out var reason))
         {
             _popup.PopupEntity(reason, ent, args.Actor, PopupType.MediumCaution);
             return;
@@ -677,7 +673,33 @@ public sealed class RMCERTSystem : EntitySystem
         if (!TryGetEntity(args.User, out var user))
             return;
 
+        if (!CanUseConsoleDistress(ent, out var reason))
+        {
+            _popup.PopupEntity(reason, ent, user.Value, PopupType.MediumCaution);
+            return;
+        }
+
         CreateConsoleDistressRequest(ent, user.Value, args.Message);
+    }
+
+    private bool CanUseConsoleDistress(Entity<MarineCommunicationsComputerComponent> console, out string reason)
+    {
+        if (!console.Comp.CanTransmitDistress)
+        {
+            reason = Loc.GetString("rmc-ert-popup-console-unavailable");
+            return false;
+        }
+
+        if (!_alertLevel.IsRedOrDeltaAlert())
+        {
+            reason = Loc.GetString("rmc-ert-popup-console-alert-required");
+            return false;
+        }
+
+        if (!CanCreateRequest(console, out reason))
+            return false;
+
+        return true;
     }
 
     private void OnERTMindAdded(Entity<RMCERTMemberComponent> ent, ref MindAddedMessage args)
