@@ -34,6 +34,7 @@ public sealed partial class CMDistressSignalRuleSystem
     private const float ScuttleSuperheatRadius = 5f;
     private const float ScuttleHeatJoules = 45000f;
     private const float ScuttleSuperheatJoules = 75000f;
+    private static readonly TimeSpan ScuttleCinematicDetonationLead = TimeSpan.FromSeconds(1);
 
     private static readonly EntProtoId ScuttleFire = "RMCTileFire";
     private static readonly DamageSpecifier ScuttleHeatDamage = new() { DamageDict = { { "Heat", 5 } } };
@@ -129,8 +130,9 @@ public sealed partial class CMDistressSignalRuleSystem
         rule.ScuttleFinalSequenceStarted = true;
         rule.ScuttleFinalStartedAt = Timing.CurTime;
         rule.ScuttleFinalDetonateAt = Timing.CurTime +
-                                      NonNegative(rule.ScuttleFinalCinematicDelay) +
-                                      NonNegative(rule.ScuttleFinalSequenceDelay);
+                                      NonNegative(NonNegative(rule.ScuttleFinalCinematicDelay) +
+                                                  NonNegative(rule.ScuttleFinalSequenceDelay) -
+                                                  ScuttleCinematicDetonationLead);
 
         _marineAnnounce.AnnounceARESStaging(
             default,
