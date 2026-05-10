@@ -97,15 +97,15 @@ public sealed class RMCRespiratorSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Sets the entity's <see cref="RMCRespiratorComponent.LoseBreath"/> to <paramref name="value"/>.
+    ///     Pass a positive value to increase suffocation (e.g. bruised lung: +15), or a negative value to decrease it.
+    ///     Result is clamped to a minimum of 0.
     /// </summary>
-    /// <remarks>Positive values increase suffocation; negative values reduce it.</remarks>
-    public void SetLoseBreath(Entity<RMCRespiratorComponent?> ent, float value)
+    public void AdjustLoseBreath(Entity<RMCRespiratorComponent?> ent, float amount, float floor = 0)
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        ent.Comp.LoseBreath = value;
+        ent.Comp.LoseBreath = MathF.Max(floor, ent.Comp.LoseBreath + amount);
         Dirty(ent, ent.Comp);
     }
 }
