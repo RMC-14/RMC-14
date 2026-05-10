@@ -2175,6 +2175,10 @@ public sealed class RMCERTSystem : EntitySystem
             if (!Exists(member))
                 continue;
 
+            // Cleanup can move a player to a ghost and delete their old body in the same tick.
+            // Close their UIs first so clients don't keep stale BUIs for entities queued for deletion.
+            _ui.CloseUserUis(member);
+
             if (_mind.TryGetMind(member, out var mindId, out var mind))
             {
                 if (TryGhostMindForCleanup(request, member, mindId, mind, ghostCoordinates, reason))
@@ -2273,6 +2277,9 @@ public sealed class RMCERTSystem : EntitySystem
                 ghostedActors++;
                 continue;
             }
+
+            // Close all UIs before the mind is moved away and this shuttle actor is queued for deletion.
+            _ui.CloseUserUis(actor);
 
             if (!_mind.TryGetMind(actor, out var mindId, out var mind) &&
                 (!TryComp(actor, out ActorComponent? actorComp) ||
