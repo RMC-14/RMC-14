@@ -1,6 +1,16 @@
 ﻿rmc-dropship-pre-flight-fueling = The shuttle is still undergoing pre-flight fueling and cannot depart yet. Please wait another {$minutes} minutes before trying again.
 rmc-dropship-pre-hijack = This terminal won't be operational for another {$minutes} minutes.
 rmc-dropship-invalid-hijack = Lights flash from the terminal but you can't comprehend their meaning.
+rmc-dropship-terminal-clueless = You stare cluelessly at the {$terminal}.
+rmc-dropship-no-destinations-nearby = There are no dropship destinations near you!
+rmc-dropship-already-incoming = There is already a dropship coming here!
+rmc-dropship-already-here = There is already a dropship here!
+rmc-dropship-not-primary-shuttle = The shuttle isn't responding to prompts, it looks like this isn't the primary shuttle.
+rmc-dropship-call-to-location = You call down one of the dropships to your location.
+rmc-dropship-none-available = There are no available dropships! Wait a moment.
+rmc-dropship-no-remote-control = This dropship does not have remote-control enabled.
+rmc-dropship-busy = This dropship is currently busy. Please try again later.
+rmc-dropship-now-on-its-way = This dropship is now on its way.
 
 rmc-dropship-weapons-title = Weapons Console
 
@@ -110,7 +120,7 @@ rmc-dropship-medevac-system-screen-text = RMU-4M Medevac System
 
 rmc-dropship-fulton-system-screen-text = RMU-19 Fulton Recovery System
 
-rmc-dropship-locked= This bird is now ours for the next {$minutes} minutes.
+rmc-dropship-locked = This bird is now ours for the next {$minutes} minutes.
 rmc-dropship-locked-out = The shuttle is not responding, try again in {$minutes} minutes.
 rmc-dropship-locked-out-bypass = You partially bypassed the lockout, try again!
 rmc-dropship-locked-out-bypass-complete = You successfully removed the lockout!

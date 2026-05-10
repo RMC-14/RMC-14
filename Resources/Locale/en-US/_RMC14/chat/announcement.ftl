@@ -56,7 +56,7 @@ rmc-announcement-ares-command = [color=#CECECE][font size=16][bold]ARES v3.2[/bo
 
     {$message}[/font][/color]
 
-rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Unidentifled lifesigns[/bold][/font][/color][color=red][font size=16][bold]
+rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Unidentified lifesigns[/bold][/font][/color][color=red][font size=16][bold]
 
     Unidentified lifesigns ({$count}) detected onboard the dropship {$name}. Recommendation: lockdown of exterior access ports, including ducting and ventilation.[/bold][/font][/color]
 
