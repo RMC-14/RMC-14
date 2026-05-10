@@ -27,6 +27,17 @@ public sealed class RMCERTAdminForceCallCommand : LocalizedCommands
         var admin = shell.Player?.AttachedEntity;
         var adminName = shell.Player?.Name;
         var ert = _entities.System<RMCERTSystem>();
+        var canAdminForceCall = ert.GetCallOptions(new RMCERTCallQueryArgs
+        {
+            EnabledOnly = true,
+            AdminSelectableOnly = true,
+        }).Any(c => c.Id == args[0]);
+        if (!canAdminForceCall)
+        {
+            shell.WriteError(Loc.GetString("rmc-ert-error-call-not-force-callable", ("call", args[0])));
+            return;
+        }
+
         var result = ert.ForceCall(new RMCERTForceCallArgs
         {
             Call = args[0],

@@ -248,11 +248,6 @@ public sealed class RMCERTSystem : EntitySystem
             .ToList();
     }
 
-    private static bool IsForceCallable(RMCERTCallPrototype call)
-    {
-        return call.Enabled && call.AdminSelectable;
-    }
-
     private RMCERTCallOption ToCallOption(RMCERTCallPrototype call)
     {
         return new RMCERTCallOption(
@@ -346,8 +341,8 @@ public sealed class RMCERTSystem : EntitySystem
     /// </summary>
     /// <param name="args">Force-call parameters, including the exact call id and optional actor/reason metadata.</param>
     /// <returns>
-    /// Success with the created request id after approval, or failure when the call is unknown, disabled, not admin-selectable,
-    /// or blocked during approval/preflight.
+    /// Success with the created request id after approval, or failure when the call is unknown, disabled, or blocked during
+    /// approval/preflight.
     /// </returns>
     public RMCERTRequestResult ForceCall(RMCERTForceCallArgs args)
     {
@@ -364,9 +359,9 @@ public sealed class RMCERTSystem : EntitySystem
             return ResultFailure(Guid.Empty, null, unknownCallError);
         }
 
-        if (!IsForceCallable(call))
+        if (!call.Enabled)
         {
-            var notForceCallableError = Loc.GetString("rmc-ert-error-call-not-force-callable", ("call", call.Name));
+            var notForceCallableError = Loc.GetString("rmc-ert-error-call-disabled", ("call", call.Name));
             _adminLog.Add(LogType.RMCAdminCommandLogging,
                 LogImpact.Medium,
                 $"ERT force call failed: actor={FormatLogValue(actorText)}, call={FormatLogValue(call.Name)}, prototype={call.ID}, reason=\"{FormatLogValue(reason)}\", error=\"{FormatLogValue(notForceCallableError)}\"");

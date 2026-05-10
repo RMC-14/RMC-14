@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -115,6 +116,17 @@ public sealed class RMCERTAdminEui : BaseEui
             case RMCERTAdminForceCallMsg force:
                 if (!CanForceCalls())
                     return;
+
+                var canAdminForceCall = _ert.GetCallOptions(new RMCERTCallQueryArgs
+                {
+                    EnabledOnly = true,
+                    AdminSelectableOnly = true,
+                }).Any(c => c.Id == force.Call);
+                if (!canAdminForceCall)
+                {
+                    _chat.DispatchServerMessage(Player, Loc.GetString("rmc-ert-error-call-not-force-callable", ("call", force.Call)));
+                    return;
+                }
 
                 var result = _ert.ForceCall(new RMCERTForceCallArgs
                 {

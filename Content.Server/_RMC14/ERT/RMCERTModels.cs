@@ -218,7 +218,7 @@ public sealed class RMCERTForceCallArgs
 {
     /// <summary>
     /// Specific ERT call prototype to create and approve immediately.
-    /// The call must exist, be enabled, and be admin-selectable.
+    /// The call must exist and be enabled; admin-facing adapters may add their own <c>AdminSelectable</c> restriction before calling.
     /// </summary>
     public ProtoId<RMCERTCallPrototype> Call;
 
