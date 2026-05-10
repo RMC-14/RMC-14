@@ -31,7 +31,7 @@ public sealed partial class Cardiostabilizing : RMCChemicalEffect
         if (TryComp(args, out RMCRespiratorComponent? comp) && comp.LoseBreath >= 10f)
         {
             var rmcRespirator = System<RMCRespiratorSystem>(args);
-            rmcRespirator.AdjustLoseBreath(args.TargetEntity, comp.LoseBreath - 2.5f * (float) potency, 10f);
+            rmcRespirator.AdjustLoseBreath(args.TargetEntity, -2.5f * (float) potency, 10f);
         }
     }
 

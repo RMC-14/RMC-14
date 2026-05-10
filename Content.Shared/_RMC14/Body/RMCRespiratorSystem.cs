@@ -45,7 +45,7 @@ public sealed class RMCRespiratorSystem : EntitySystem
                 continue;
 
             respirator.NextBreathAt = time + respirator.BreathInterval;
-            Dirty(uid, respirator);
+            DirtyField(uid, respirator, nameof(RMCRespiratorComponent.NextBreathAt));
 
             if (_mobState.IsDead(uid))
                 continue;
@@ -75,7 +75,7 @@ public sealed class RMCRespiratorSystem : EntitySystem
         if (ent.Comp.LoseBreath > 0)
         {
             ent.Comp.LoseBreath--;
-            Dirty(ent, ent.Comp);
+            DirtyField(ent, ent.Comp, nameof(RMCRespiratorComponent.LoseBreath));
 
             if (_random.Prob(0.2f))
                 _emote.TryEmoteWithChat(ent, GaspEmote, forceEmote: true);
@@ -83,16 +83,11 @@ public sealed class RMCRespiratorSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.BreathHealAmount > FixedPoint2.Zero)
+        if (TryComp(ent, out DamageableComponent? damageable) &&
+            damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup) > FixedPoint2.Zero)
         {
-            if (!TryComp(ent, out DamageableComponent? damageable))
-                return;
-
-            if (damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup) > FixedPoint2.Zero)
-            {
-                var heal = _rmcDamageable.DistributeHealingCached(ent.Owner, AirlossGroup, ent.Comp.BreathHealAmount);
-                _damageable.TryChangeDamage(ent, heal, ignoreResistances: true, interruptsDoAfters: false);
-            }
+            var heal = _rmcDamageable.DistributeHealingCached(ent.Owner, AirlossGroup, ent.Comp.BreathHealAmount);
+            _damageable.TryChangeDamage(ent, heal, ignoreResistances: true, interruptsDoAfters: false);
         }
     }
 
@@ -100,12 +95,15 @@ public sealed class RMCRespiratorSystem : EntitySystem
     ///     Pass a positive value to increase suffocation (e.g. bruised lung: +15), or a negative value to decrease it.
     ///     Result is clamped to a minimum of 0.
     /// </summary>
+    /// <param name="ent">The target entity.</param>
+    /// <param name="amount">The delta to add. Positive increases suffocation; negative decreases it.</param>
+    /// <param name="floor">The minimum value <see cref="RMCRespiratorComponent.LoseBreath"/> may reach. Defaults to 0.</param>
     public void AdjustLoseBreath(Entity<RMCRespiratorComponent?> ent, float amount, float floor = 0)
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
         ent.Comp.LoseBreath = MathF.Max(floor, ent.Comp.LoseBreath + amount);
-        Dirty(ent, ent.Comp);
+        DirtyField(ent, ent.Comp, nameof(RMCRespiratorComponent.LoseBreath));
     }
 }
