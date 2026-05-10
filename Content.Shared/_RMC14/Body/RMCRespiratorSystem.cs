@@ -1,7 +1,9 @@
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Medical.Stasis;
+using Content.Shared._RMC14.Synth;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -20,12 +22,13 @@ public sealed class RMCRespiratorSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly CMStasisBagSystem _stasisBag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> AirlossGroup = "Airloss";
     private static readonly ProtoId<EmotePrototype> GaspEmote = "Gasp";
+    private static readonly ProtoId<ReagentPrototype> Lexorin = "RMCLexorin";
 
     public override void Update(float frameTime)
     {
@@ -47,7 +50,10 @@ public sealed class RMCRespiratorSystem : EntitySystem
             if (_mobState.IsDead(uid))
                 continue;
 
-            if (!_stasisBag.CanBodyMetabolize(uid))
+            if (HasComp<CMInStasisComponent>(uid))
+                continue;
+
+            if (HasComp<SynthComponent>(uid))
                 continue;
 
             ProcessBreath((uid, respirator));
@@ -60,6 +66,12 @@ public sealed class RMCRespiratorSystem : EntitySystem
     /// </summary>
     private void ProcessBreath(Entity<RMCRespiratorComponent> ent)
     {
+        if (_rmcBloodstream.TryGetChemicalSolution(ent, out _, out var chemicals)
+            && chemicals.GetTotalPrototypeQuantity(Lexorin) > FixedPoint2.Zero)
+        {
+            return;
+        }
+
         if (ent.Comp.LoseBreath > 0)
         {
             ent.Comp.LoseBreath--;
