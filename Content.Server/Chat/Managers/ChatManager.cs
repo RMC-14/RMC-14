@@ -389,11 +389,11 @@ internal sealed partial class ChatManager : IChatManager
 
     #region Utility
 
+    // RMC14
     public void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool hidePopup = false,
-        // RMC14
         bool useEmoteSpeechBubble = false,
         string? languageIcon = null)
-        // RMC14
+    // RMC14
     {
         var user = author == null ? null : EnsurePlayer(author);
         var netSource = _entityManager.GetNetEntity(source);

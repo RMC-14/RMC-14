@@ -17,8 +17,8 @@ namespace Content.Client._RMC14.Chat;
 [UsedImplicitly]
 public sealed class LanguageIconTag : IMarkupTagHandler
 {
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     public string Name => "langicon";
 

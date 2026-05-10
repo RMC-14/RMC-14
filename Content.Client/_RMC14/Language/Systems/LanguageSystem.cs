@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
@@ -5,7 +6,6 @@ using Content.Shared._RMC14.Language.Systems;
 using Robust.Client.Player;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using System.Linq;
 
 namespace Content.Client._RMC14.Language.Systems;
 

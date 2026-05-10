@@ -1,6 +1,8 @@
+using System.Linq;
+using System.Numerics;
+using Content.Client._RMC14.Language;
 using Content.Client._RMC14.Language.Systems;
 using Content.Client.Gameplay;
-using Content.Client._RMC14.Language;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
@@ -8,6 +10,7 @@ using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared.Input;
+using Robust.Client.GameObjects;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
@@ -16,10 +19,7 @@ using Robust.Shared.Input.Binding;
 using Robust.Shared.IoC;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using System.Linq;
-using System.Numerics;
 using static Robust.Client.UserInterface.Controls.BaseButton;
-using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.UserInterface.Systems.Language;
 

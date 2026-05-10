@@ -3,6 +3,7 @@ using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
+// RMC14
 using Content.Server._RMC14.Language.Systems;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Language.Prototypes;
@@ -12,6 +13,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Xenonids;
+// RMC14
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
@@ -40,9 +42,11 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!; // RMC14
-    [Dependency] private readonly IChatManager _chatManager = default!; // RMC14
-    [Dependency] private readonly LanguageSystem _language = default!; // RMC14
+    // RMC14
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly LanguageSystem _language = default!;
+    // RMC14
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
@@ -68,37 +72,42 @@ public sealed class RadioSystem : EntitySystem
         _exemptQuery = GetEntityQuery<TelecomExemptComponent>();
     }
 
+    // RMC14
     private void OnIntrinsicSpeak(Entity<IntrinsicRadioTransmitterComponent> ent, ref EntitySpokeEvent args)
     {
         if (args.Channel != null && ent.Comp.Channels.Contains(args.Channel.ID))
         {
-            // RMC14
             var language = _prototype.TryIndex(args.Language, out var languageProto) ? languageProto : null;
             SendRadioMessage(ent.Owner, args.Message, args.Channel, ent.Owner, language);
-            // RMC14
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
     }
+    // RMC14
 
+    // RMC14
     private void OnIntrinsicReceive(Entity<IntrinsicRadioReceiverComponent> ent, ref RadioReceiveEvent args)
     {
         if (TryComp(ent.Owner, out ActorComponent? actor))
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
     }
+    // RMC14
 
     /// <summary>
     /// Send radio message to all active radio listeners
     /// </summary>
+    // RMC14
     public void SendRadioMessage(EntityUid messageSource, string message, ProtoId<RadioChannelPrototype> channel, EntityUid radioSource, LanguagePrototype? language = null, bool escapeMarkup = true)
     {
         SendRadioMessage(messageSource, message, _prototype.Index(channel), radioSource, language, escapeMarkup);
     }
+    // RMC14
 
     /// <summary>
     /// Send radio message to all active radio listeners
     /// </summary>
     /// <param name="messageSource">Entity that spoke the message</param>
     /// <param name="radioSource">Entity that picked up the message and will send it, e.g. headset</param>
+    // RMC14
     public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, LanguagePrototype? language = null, bool escapeMarkup = true)
     {
         // TODO if radios ever garble / modify messages, feedback-prevention needs to be handled better than this.
@@ -123,7 +132,6 @@ public sealed class RadioSystem : EntitySystem
             RaiseLocalEvent(messageSource, evt);
 
             var name = evt.VoiceName;
-            name = FormattedMessage.EscapeText(name);
 
             if (TryComp(messageSource, out JobPrefixComponent? prefix))
             {
@@ -184,7 +192,7 @@ public sealed class RadioSystem : EntitySystem
                 // RMC14
                 ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
                 ("channel", $"\\[{channel.LocalizedName}\\]"),
-                ("name", name),
+                ("name", FormattedMessage.EscapeText(name)),
                 ("message", content));
 
             var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
@@ -250,14 +258,27 @@ public sealed class RadioSystem : EntitySystem
                     var obfuscatedMessage = _language.ObfuscateMessageForListener(listenerEntity.Value, message, currentLanguage);
                     actualMessage = obfuscatedMessage;
 
+                    var actualName = _chat.GetSpeakerNameForListener(messageSource, listenerEntity, name);
                     actualWrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
                         ("color", channel.Color),
                         ("fontType", radioFontId),
                         ("fontSize", radioFontSize),
                         ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
                         ("channel", $"\\[{channel.LocalizedName}\\]"),
-                        ("name", name),
+                        ("name", FormattedMessage.EscapeText(actualName)),
                         ("message", escapeMarkup ? FormattedMessage.EscapeText(obfuscatedMessage) : obfuscatedMessage));
+                }
+                else if (listenerEntity.HasValue)
+                {
+                    var actualName = _chat.GetSpeakerNameForListener(messageSource, listenerEntity, name);
+                    actualWrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
+                        ("color", channel.Color),
+                        ("fontType", radioFontId),
+                        ("fontSize", radioFontSize),
+                        ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+                        ("channel", $"\\[{channel.LocalizedName}\\]"),
+                        ("name", FormattedMessage.EscapeText(actualName)),
+                        ("message", escapeMarkup ? FormattedMessage.EscapeText(actualMessage) : actualMessage));
                 }
 
                 var chat = new ChatMessage(
@@ -303,6 +324,7 @@ public sealed class RadioSystem : EntitySystem
             _messages.Remove(message);
         }
     }
+    // RMC14
 
     /// <inheritdoc cref="TelecomServerComponent"/>
     private bool HasActiveServer(MapId mapId, string channelId)

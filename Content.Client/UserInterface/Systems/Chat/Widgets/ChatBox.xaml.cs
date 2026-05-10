@@ -1,4 +1,6 @@
+// RMC14
 using Content.Client._RMC14.Chat;
+// RMC14
 using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Shared.Chat;
 using Content.Shared.Input;
@@ -120,6 +122,7 @@ public partial class ChatBox : UIWidget
         _controller.UpdateHighlights(highlighs);
     }
 
+    // RMC14
     public void AddLine(
         string message,
         Color color,
@@ -128,6 +131,7 @@ public partial class ChatBox : UIWidget
         ChatChannel channel,
         bool repeatCheckSender,
         string? languageIcon = null)
+    // RMC14
     {
         var formatted = new FormattedMessage(3);
         formatted.PushColor(color);
@@ -157,6 +161,7 @@ public partial class ChatBox : UIWidget
         }
         return output;
     }
+    // RMC14
 
     public void Focus(ChatSelectChannel? channel = null)
     {

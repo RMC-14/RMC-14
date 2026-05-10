@@ -1,13 +1,13 @@
+using Content.Shared._RMC14.Language.Systems;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.TacticalMap;
-using Content.Shared._RMC14.Language.Systems;
+using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Network;
-using Content.Shared.Examine;
 
 namespace Content.Shared._RMC14.Marines.Skills.Pamphlets;
 
@@ -20,7 +20,7 @@ public sealed class SkillPamphletSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squads = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -47,7 +47,7 @@ public sealed class SkillPamphletSystem : EntitySystem
         // Next go through the EntityWhitelist that's attached, if any, and deny them for the attached reason
         foreach (var whitelist in ent.Comp.Whitelists)
         {
-            if (_whitelistSystem.IsWhitelistFail(whitelist.Restrictions, args.User))
+            if (_whitelist.IsWhitelistFail(whitelist.Restrictions, args.User))
             {
                 _popup.PopupClient(Loc.GetString(whitelist.Popup), ent, args.User);
                 return;

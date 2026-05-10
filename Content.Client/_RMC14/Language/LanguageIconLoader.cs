@@ -16,7 +16,7 @@ public static class LanguageIconLoader
             return spriteSystem.Frame0(new SpriteSpecifier.Rsi(rsiPath, state));
 
         return resourceCache.TryGetResource<TextureResource>(icon, out var texture)
-            ? texture
+            ? texture.Texture
             : null;
     }
 

@@ -13,8 +13,10 @@
   needsSpeech: true
   expectedVocabularySize: 150
   obfuscationMethod:
-    !type:ReplacementObfuscation
+    !type:SyllableObfuscation
     replacement: ["uh", "eh", "hm", "mm", "huh", "erm", "..."]
+    minSyllables: 1
+    maxSyllables: 3
   speechOverride:
     allowRadio: true
     requireSpeech: true

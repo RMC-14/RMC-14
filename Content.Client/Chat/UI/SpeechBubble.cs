@@ -1,5 +1,7 @@
 using System.Numerics;
+// RMC14
 using Content.Client._RMC14.Language;
+// RMC14
 using Content.Client.Chat.Managers;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
@@ -7,13 +9,19 @@ using Content.Shared._RMC14.Chat;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
+// RMC14
 using Robust.Client.GameObjects;
+// RMC14
 using Robust.Client.Graphics;
+// RMC14
 using Robust.Client.ResourceManagement;
+// RMC14
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
+// RMC14
 using Robust.Shared.IoC;
+// RMC14
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -249,7 +257,7 @@ namespace Content.Client.Chat.UI
             var entityManager = IoCManager.Resolve<IEntityManager>();
             var senderUid = entityManager.GetEntity(message.SenderEntity);
 
-            if (speechStyleClass == "sayBox") //RMC14 we try to use a specific style
+            if (speechStyleClass == "sayBox") // RMC14 we try to use a specific style
             {
                 if (message.SpeechStyleClass != null)
                     speechStyleClass = message.SpeechStyleClass;
@@ -281,21 +289,24 @@ namespace Content.Client.Chat.UI
                         container.AddChild(textureRect);
                     }
                 }
-                // RMC14
 
                 var label = new RichTextLabel
                 {
                     MaxWidth = SpeechMaxWidth,
-                    StyleClasses = { "bubbleContent" }, //RMC14 The simplified bubble does not have any styles of its own and in order to apply styles to it we mark it in the same way as a regular bubble but it's a dummy, just a marker. damned.
+                    StyleClasses = { "bubbleContent" }, // RMC14 The simplified bubble does not have any styles of its own and in order to apply styles to it we mark it in the same way as a regular bubble but it's a dummy, just a marker. damned.
                 };
 
                 label.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
+                // RMC14
                 container.AddChild(label);
+                // RMC14
 
                 var unfanciedPanel = new PanelContainer
                 {
                     StyleClasses = { "speechBox", speechStyleClass },
+                    // RMC14
                     Children = { container },
+                    // RMC14
                     ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity)),
                 };
                 return unfanciedPanel;
@@ -338,10 +349,11 @@ namespace Content.Client.Chat.UI
                     headerContainer.AddChild(iconTexture);
                 }
             }
-            // RMC14
 
             bubbleHeader.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleHeader", fontColor));
+            // RMC14
             headerContainer.AddChild(bubbleHeader);
+            // RMC14
             bubbleContent.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
 
             //As for below: Some day this could probably be converted to xaml. But that is not today. -Myr
@@ -358,7 +370,9 @@ namespace Content.Client.Chat.UI
             var headerPanel = new PanelContainer
             {
                 StyleClasses = { "speechBox", speechStyleClass },
+                // RMC14
                 Children = { headerContainer },
+                // RMC14
                 ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.ChatFancyNameBackground) ? ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity) : 0f),
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Top

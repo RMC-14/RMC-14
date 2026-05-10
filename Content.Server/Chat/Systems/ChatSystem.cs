@@ -4,7 +4,9 @@ using System.Text;
 using Content.Server._RMC14.Admin;
 using Content.Server._RMC14.Chat.Chat;
 using Content.Server._RMC14.Emote;
+// RMC14
 using Content.Server._RMC14.Language.Systems;
+// RMC14
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -17,9 +19,11 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
+// RMC14
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
+// RMC14
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.ActionBlocker;
@@ -132,6 +136,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             Loc.GetString(val ? "chat-manager-crit-looc-chat-enabled-message" : "chat-manager-crit-looc-chat-disabled-message"));
     }
 
+    // RMC14
     private void OnDeadChatEnabledChanged(bool val)
     {
         if (_DeadchatEnabled == val)
@@ -141,6 +146,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         _chatManager.DispatchServerAnnouncement(
             Loc.GetString(val ? "set-dchat-command-dchat-enabled" : "set-dchat-command-dchat-disabled"));
     }
+    // RMC14
 
     private void OnGameChange(GameRunLevelChangedEvent ev)
     {
@@ -488,52 +494,6 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     #region Private API
 
-    private enum MessageRangeCheckResult
-    {
-        Disallowed,
-        HideChat,
-        Full
-    }
-
-    /// <summary>
-    ///     If hideChat should be set as far as replays are concerned.
-    /// </summary>
-    private bool MessageRangeHideChatForReplay(ChatTransmitRange range)
-    {
-        return range == ChatTransmitRange.HideChat;
-    }
-
-    /// <summary>
-    ///     Checks if a target as returned from GetRecipients should receive the message.
-    ///     Keep in mind data.Range is -1 for out of range observers.
-    /// </summary>
-    private MessageRangeCheckResult MessageRangeCheck(ICommonSession session, ICChatRecipientData data, ChatTransmitRange range)
-    {
-        var initialResult = MessageRangeCheckResult.Full;
-        switch (range)
-        {
-            case ChatTransmitRange.Normal:
-                initialResult = MessageRangeCheckResult.Full;
-                break;
-            case ChatTransmitRange.GhostRangeLimit:
-                initialResult = (data.Observer && data.Range < 0 && !_adminManager.IsAdmin(session)) ? MessageRangeCheckResult.HideChat : MessageRangeCheckResult.Full;
-                break;
-            case ChatTransmitRange.HideChat:
-                initialResult = MessageRangeCheckResult.HideChat;
-                break;
-            case ChatTransmitRange.NoGhosts:
-                initialResult = (data.Observer && !_adminManager.IsAdmin(session)) ? MessageRangeCheckResult.Disallowed : MessageRangeCheckResult.Full;
-                break;
-        }
-        var insistHideChat = data.HideChatOverride ?? false;
-        var insistNoHideChat = !(data.HideChatOverride ?? true);
-        if (insistHideChat && initialResult == MessageRangeCheckResult.Full)
-            return MessageRangeCheckResult.HideChat;
-        if (insistNoHideChat && initialResult == MessageRangeCheckResult.HideChat)
-            return MessageRangeCheckResult.Full;
-        return initialResult;
-    }
-
     private void SendEntityEmote(
         EntityUid source,
         string action,
@@ -642,6 +602,56 @@ public sealed partial class ChatSystem : SharedChatSystem
         _chatManager.ChatMessageToMany(ChatChannel.Dead, message, wrappedMessage, source, hideChat, true, clients.ToList(), author: player.UserId);
     }
 
+    #endregion
+
+    #region Utility
+
+    private enum MessageRangeCheckResult
+    {
+        Disallowed,
+        HideChat,
+        Full
+    }
+
+    /// <summary>
+    ///     If hideChat should be set as far as replays are concerned.
+    /// </summary>
+    private bool MessageRangeHideChatForReplay(ChatTransmitRange range)
+    {
+        return range == ChatTransmitRange.HideChat;
+    }
+
+    /// <summary>
+    ///     Checks if a target as returned from GetRecipients should receive the message.
+    ///     Keep in mind data.Range is -1 for out of range observers.
+    /// </summary>
+    private MessageRangeCheckResult MessageRangeCheck(ICommonSession session, ICChatRecipientData data, ChatTransmitRange range)
+    {
+        var initialResult = MessageRangeCheckResult.Full;
+        switch (range)
+        {
+            case ChatTransmitRange.Normal:
+                initialResult = MessageRangeCheckResult.Full;
+                break;
+            case ChatTransmitRange.GhostRangeLimit:
+                initialResult = (data.Observer && data.Range < 0 && !_adminManager.IsAdmin(session)) ? MessageRangeCheckResult.HideChat : MessageRangeCheckResult.Full;
+                break;
+            case ChatTransmitRange.HideChat:
+                initialResult = MessageRangeCheckResult.HideChat;
+                break;
+            case ChatTransmitRange.NoGhosts:
+                initialResult = (data.Observer && !_adminManager.IsAdmin(session)) ? MessageRangeCheckResult.Disallowed : MessageRangeCheckResult.Full;
+                break;
+        }
+        var insistHideChat = data.HideChatOverride ?? false;
+        var insistNoHideChat = !(data.HideChatOverride ?? true);
+        if (insistHideChat && initialResult == MessageRangeCheckResult.Full)
+            return MessageRangeCheckResult.HideChat;
+        if (insistNoHideChat && initialResult == MessageRangeCheckResult.HideChat)
+            return MessageRangeCheckResult.Full;
+        return initialResult;
+    }
+
     /// <summary>
     ///     Sends a chat message to the given players in range of the source entity.
     /// </summary>
@@ -666,10 +676,6 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range), speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source)));
     }
-
-    #endregion
-
-    #region Utility
 
     /// <summary>
     ///     Returns true if the given player is 'allowed' to send the given message, false otherwise.
@@ -926,7 +932,6 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     public readonly string? ObfuscatedMessage; // not null if this was a whisper
     // RMC14
     public readonly ProtoId<LanguagePrototype> Language;
-    // RMC14
     // RMC14
 
     /// <summary>

@@ -15,8 +15,8 @@ namespace Content.Client._RMC14.UserInterface.Systems.Language;
 [GenerateTypedNameReferences]
 public sealed partial class LanguageButton : ContainerButton
 {
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private static readonly StyleBoxFlat NormalStyle = new()
     {

@@ -651,7 +651,9 @@ namespace Content.Client.Lobby.UI
                     });
                 }
 
+                // RMC14
                 var selectors = new List<(TraitPreferenceSelector Selector, bool IsLanguageTrait)>();
+                // RMC14
                 var selectionCount = 0;
 
                 foreach (var traitProto in categoryTraits)
@@ -677,7 +679,9 @@ namespace Content.Client.Lobby.UI
                         SetDirty();
                         RefreshTraits(); // If too many traits are selected, they will be reset to the real value.
                     };
+                    // RMC14
                     selectors.Add((selector, trait.Language != null));
+                    // RMC14
                 }
 
                 // Selection counter
