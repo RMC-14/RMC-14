@@ -1,3 +1,4 @@
+using Content.Server._RMC14.PlayTimeTracking;
 using Content.Server.GameTicking;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
@@ -31,6 +32,7 @@ public sealed class XenoRoleSystem : EntitySystem
     [Dependency] private readonly PlayTimeTrackingManager _playTimeManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private readonly RMCPlayTimeManager _rmcPlaytime = default!;
     [Dependency] private readonly RoleSystem _role = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -43,6 +45,8 @@ public sealed class XenoRoleSystem : EntitySystem
     private TimeSpan _rankSixTime;
 
     private readonly List<Entity<XenoComponent>> _toUpdate = new();
+
+    private readonly ProtoId<JobPrototype> _larvaJobProtoId = "CMXenoLarva";
 
     public override void Initialize()
     {
@@ -129,7 +133,19 @@ public sealed class XenoRoleSystem : EntitySystem
             return;
 
         var time = TimeSpan.Zero;
-        if (_prototype.TryIndex(jobId, out JobPrototype? job) &&
+        if (jobId == _larvaJobProtoId)
+        {
+            // Larva's rank is determined by TOTAL xeno playtime, NOT larva playtime.
+            try
+            {
+                time = _rmcPlaytime.GetTotalXenoPlaytime(player);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error reading total xeno playtime:\n{e}");
+            }
+        }
+        else if (_prototype.TryIndex(jobId, out JobPrototype? job) &&
             _playTimeManager.TryGetTrackerTime(player, job.PlayTimeTracker, out var nullableTime))
         {
             time = nullableTime.Value;
