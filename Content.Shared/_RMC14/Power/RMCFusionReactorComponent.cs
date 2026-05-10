@@ -35,6 +35,21 @@ public sealed partial class RMCFusionReactorComponent : Component
     public TimeSpan DestroyDelay = TimeSpan.FromSeconds(10);
 
     [DataField, AutoNetworkedField]
+    public bool Overloaded;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan OverloadDelay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId<SkillDefinitionComponent> OverloadSkill = "RMCSkillEngineer";
+
+    [DataField, AutoNetworkedField]
+    public int OverloadSkillLevel = 2;
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<ToolQualityPrototype> OverloadQuality = "Pulsing";
+
+    [DataField, AutoNetworkedField]
     public float WeldingCost = 1f;
 
     [DataField, AutoNetworkedField]

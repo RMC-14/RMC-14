@@ -35,6 +35,51 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public bool Hijack;
 
     [DataField]
+    public bool ScuttleUnlocked;
+
+    [DataField]
+    public bool ScuttleDetonated;
+
+    [DataField]
+    public bool ScuttleFinalSequenceStarted;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? ScuttleUnlockAt;
+
+    [DataField]
+    public TimeSpan ScuttleProgress;
+
+    [DataField]
+    public bool ScuttleOneThirdAnnounced;
+
+    [DataField]
+    public bool ScuttleHalfwayAnnounced;
+
+    [DataField]
+    public bool ScuttleTwoThirdsAnnounced;
+
+    [DataField]
+    public bool ScuttleFirstOverloadAnnounced;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? ScuttleFinalDetonateAt;
+
+    [DataField]
+    public TimeSpan ScuttleUnlockDelay = TimeSpan.FromSeconds(15);
+
+    [DataField]
+    public TimeSpan ScuttleMinDuration = TimeSpan.FromMinutes(5);
+
+    [DataField]
+    public TimeSpan ScuttleMaxDuration = TimeSpan.FromMinutes(15);
+
+    [DataField]
+    public int ScuttleMaxReactors = 18;
+
+    [DataField]
+    public TimeSpan ScuttleFinalSequenceDelay = TimeSpan.FromSeconds(8);
+
+    [DataField]
     public ProtoId<JobPrototype> QueenJob = "CMXenoQueen";
 
     [DataField]
