@@ -40,6 +40,7 @@ namespace Content.Shared.Chat
 
         // RMC14
         public bool HidePopup;
+        public bool UseEmoteSpeechBubble;
         public string? SpeechStyleClass;
         public bool RepeatCheckSender;
         // RMC14
@@ -50,7 +51,7 @@ namespace Content.Shared.Chat
         public bool Read;
 
         // RMC14
-        public ChatMessage(ChatChannel channel, string message, string wrappedMessage, NetEntity source, int? senderKey, bool hideChat = false, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, bool hidePopup = false, string? speechStyleClass = null, bool repeatCheckSender = true,
+        public ChatMessage(ChatChannel channel, string message, string wrappedMessage, NetEntity source, int? senderKey, bool hideChat = false, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, bool hidePopup = false, bool useEmoteSpeechBubble = false, string? speechStyleClass = null, bool repeatCheckSender = true,
             string? languageIcon = null)
         {
             Channel = channel;
@@ -63,6 +64,7 @@ namespace Content.Shared.Chat
             AudioPath = audioPath;
             AudioVolume = audioVolume;
             HidePopup = hidePopup;
+            UseEmoteSpeechBubble = useEmoteSpeechBubble;
             SpeechStyleClass = speechStyleClass;
             RepeatCheckSender = repeatCheckSender;
             LanguageIcon = languageIcon;

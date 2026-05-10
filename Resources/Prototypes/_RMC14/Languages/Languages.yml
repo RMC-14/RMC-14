@@ -229,7 +229,7 @@
     !type:SyllableObfuscation
     replacement: ["*waves*", "*gestures*", "*points*", "*nods*", "*shakes head*", "*thumbs up*", "*claps*", "*motions*", "*indicates*", "*signals*"]
     minSyllables: 1
-    maxSyllables: 2
+    maxSyllables: 1
 
 - type: language
   id: Primitive

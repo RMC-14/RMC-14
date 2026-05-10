@@ -193,6 +193,7 @@ public sealed partial class ChatSystem
             if (data.Range <= WhisperClearRange)
             {
                 var hidePopup = visibleLanguage && !_language.CanUnderstand(listener, language);
+                var useEmoteSpeechBubble = hidePopup;
                 actualWrappedMessage = hidePopup
                     ? Loc.GetString(
                         "chat-manager-entity-me-wrap-message",
@@ -211,12 +212,14 @@ public sealed partial class ChatSystem
                     false,
                     session.Channel,
                     hidePopup: hidePopup,
+                    useEmoteSpeechBubble: useEmoteSpeechBubble,
                     languageIcon: languageIcon);
             }
             else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
             {
                 var obfuscatedMessage = ObfuscateMessageReadability(listenerMessage, 0.2f);
                 var hidePopup = visibleLanguage && !_language.CanUnderstand(listener, language);
+                var useEmoteSpeechBubble = hidePopup;
                 actualWrappedMessage = hidePopup
                     ? Loc.GetString(
                         "chat-manager-entity-me-wrap-message",
@@ -235,6 +238,7 @@ public sealed partial class ChatSystem
                     false,
                     session.Channel,
                     hidePopup: hidePopup,
+                    useEmoteSpeechBubble: useEmoteSpeechBubble,
                     languageIcon: languageIcon);
             }
             else
@@ -323,6 +327,7 @@ public sealed partial class ChatSystem
             if (data.Range <= WhisperClearRange)
             {
                 var hidePopup = visibleLanguage && !_language.CanUnderstand(listener, language);
+                var useEmoteSpeechBubble = hidePopup;
                 actualWrappedMessage = hidePopup
                     ? Loc.GetString(
                         "chat-manager-entity-me-wrap-message",
@@ -341,12 +346,14 @@ public sealed partial class ChatSystem
                     false,
                     session.Channel,
                     hidePopup: hidePopup,
+                    useEmoteSpeechBubble: useEmoteSpeechBubble,
                     languageIcon: languageIcon);
             }
             else if (data.HasLOS)
             {
                 var obfuscatedMessage = ObfuscateMessageReadability(listenerMessage, 0.2f);
                 var hidePopup = visibleLanguage && !_language.CanUnderstand(listener, language);
+                var useEmoteSpeechBubble = hidePopup;
                 actualWrappedMessage = hidePopup
                     ? Loc.GetString(
                         "chat-manager-entity-me-wrap-message",
@@ -365,6 +372,7 @@ public sealed partial class ChatSystem
                     false,
                     session.Channel,
                     hidePopup: hidePopup,
+                    useEmoteSpeechBubble: useEmoteSpeechBubble,
                     languageIcon: languageIcon);
             }
             else
@@ -435,8 +443,9 @@ public sealed partial class ChatSystem
             var listenerMessage = listener == source
                 ? speakerMessage
                 : _language.ObfuscateMessageForListener(listener, speakerMessage, language);
+            var useEmoteSpeechBubble = visibleLanguage && !canUnderstand;
 
-            var finalWrappedMessage = visibleLanguage && !canUnderstand
+            var finalWrappedMessage = useEmoteSpeechBubble
                 ? Loc.GetString(
                     "chat-manager-entity-me-wrap-message",
                     ("entityName", speakerName ?? FormattedMessage.EscapeText(Name(source))),
@@ -468,6 +477,7 @@ public sealed partial class ChatSystem
                 session.Channel,
                 author: author,
                 hidePopup: visibleLanguage && !canUnderstand,
+                useEmoteSpeechBubble: useEmoteSpeechBubble,
                 languageIcon: languageIcon);
         }
 
