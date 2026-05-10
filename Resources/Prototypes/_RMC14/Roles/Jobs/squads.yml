@@ -481,3 +481,28 @@
 
 - type: Tag
   id: RMCSquadSunRiders
+
+- type: entity
+  parent: SquadBase
+  id: RMCSquadUNMC
+  name: Devil Dogs
+  components:
+  - type: SquadTeam
+    color: "#349c30"
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: MarineArmy
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_unmc
+    canSupplyDrop: false
+    group: UNMC
+  - type: Tag
+    tags:
+    - RMCSquadUNMC
+
+- type: Tag
+  id: RMCSquadUNMC

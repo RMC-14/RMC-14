@@ -206,6 +206,26 @@
 
 - type: entity
   parent: RMCBaseTree
+  id: RMCBaseTreeTyrargo
+  abstract: true
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/Flora/Trees/flora_trees_tyrargo.rsi
+    drawdepth: Overdoors
+    offset: 0,0.9
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-1.15,0.35,-0.3"
+        density: 1000
+        layer:
+        - WallLayer
+
+- type: entity
+  parent: RMCBaseTree
   id: RMCFloraTree01
   suffix: RMCFloraTree01
   name: tree
@@ -418,3 +438,117 @@
   components:
   - type: Sprite
     state: treealien01
+
+- type: entity
+  parent: RMCBaseTreeTyrargo
+  id: RMCFloraTreeTyrargo01
+  suffix: RMCFloraTreeTyrargo01
+  name: tree
+  components:
+  - type: Sprite
+    state: treetyrargo01
+
+- type: entity
+  parent: RMCBaseTreeTyrargo
+  id: RMCFloraTreeTyrargo02
+  suffix: RMCFloraTreeTyrargo02
+  name: tree
+  components:
+  - type: Sprite
+    state: treetyrargo02
+
+- type: entity
+  parent: RMCBaseTreeTyrargo
+  id: RMCFloraTreeTyrargo03
+  suffix: RMCFloraTreeTyrargo03
+  name: tree
+  components:
+  - type: Sprite
+    state: treetyrargo03
+
+- type: entity
+  parent: RMCBaseTreeTyrargo
+  id: RMCFloraTreeTyrargoBald01
+  suffix: RMCFloraTreeTyrargoBald01
+  name: tree
+  components:
+  - type: Sprite
+    state: treetyrargo_bald01
+
+- type: entity
+  parent: RMCBaseTreeTyrargo
+  id: RMCFloraTreeTyrargoDead01
+  suffix: RMCFloraTreeTyrargoDead01
+  name: tree
+  components:
+  - type: Sprite
+    state: treetyrargo_dead01
+
+- type: entity
+  parent: RMCBaseTreeTyrargo
+  id: RMCFloraTreeTyrargoDead02
+  suffix: RMCFloraTreeTyrargoDead02
+  name: tree
+  components:
+  - type: Sprite
+    state: treetyrargo_dead02
+
+- type: entity
+  parent: RMCBaseTreeTyrargo
+  id: RMCFloraTreeTyrargoDead03
+  suffix: RMCFloraTreeTyrargoDead03
+  name: tree
+  components:
+  - type: Sprite
+    state: treetyrargo_dead03
+
+- type: entity
+  parent: RMCBaseTreeSnow
+  id: RMCFloraTyrargoDeadTree01
+  suffix: RMCFloraTyrargoDeadTree01
+  name: dead tree
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/Trees/flora_trees_tyrargodead.rsi
+    state: tyrargo_deadtree01
+
+- type: entity
+  parent: RMCFloraTyrargoDeadTree01
+  id: RMCFloraTyrargoDeadTree02
+  suffix: RMCFloraTyrargoDeadTree02
+  components:
+  - type: Sprite
+    state: tyrargo_deadtree02
+
+- type: entity
+  parent: RMCFloraTyrargoDeadTree01
+  id: RMCFloraTyrargoDeadTree03
+  suffix: RMCFloraTyrargoDeadTree03
+  components:
+  - type: Sprite
+    state: tyrargo_deadtree03
+
+- type: entity
+  parent: RMCFloraTyrargoDeadTree01
+  id: RMCFloraTyrargoDeadTree04
+  suffix: RMCFloraTyrargoDeadTree04
+  components:
+  - type: Sprite
+    state: tyrargo_deadtree04
+
+- type: entity
+  parent: RMCFloraTyrargoDeadTree01
+  id: RMCFloraTyrargoDeadTree05
+  suffix: RMCFloraTyrargoDeadTree05
+  components:
+  - type: Sprite
+    state: tyrargo_deadtree05
+
+- type: entity
+  parent: RMCFloraTyrargoDeadTree01
+  id: RMCFloraTyrargoTreeStump01
+  suffix: RMCFloraTyrargoTreeStump01
+  name: tree stump
+  components:
+  - type: Sprite
+    state: tyrargo_treestump01

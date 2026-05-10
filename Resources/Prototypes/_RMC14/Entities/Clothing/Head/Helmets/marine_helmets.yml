@@ -481,3 +481,39 @@
   id: RMCArmorHelmetM12Intel
   name: XM12 pattern intelligence helmet
   description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation, can also hold a second visor optic. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work.
+
+# Tyrargo army surv helmet
+
+- type: entity
+  parent: CMArmorHelmetM12
+  id: RMCArmorHelmetTyrargo
+  name: Personal body armor system helmet
+  description: The personal body armor system helmet is an experimental combat helmet issued sparingly to the UN Marine Corps. A contender to the M12 pattern helmet during combat trials, it offers allegedly superior protection compared to the M12 series, at over four times the cost. Though it's far more uncomfortable to wear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/army.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/army.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCArmorHelmetTyrargo
+  id: RMCArmorHelmetTyrargoEngineer
+  suffix: Engineer
+  components:
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
+    - RMCVisorWeldingIntegrated
+
+- type: entity
+  parent: RMCArmorHelmetTyrargo
+  id: RMCArmorHelmetTyrargoMedic
+  suffix: Medic
+  components:
+  - type: IntegratedVisors
+    startToggled: true
+    visorsToAdd:
+    - RMCVisorMedicalAdvancedIntegrated
+    - RMCVisorSquadIntegrated

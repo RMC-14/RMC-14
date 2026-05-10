@@ -640,4 +640,4 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/PVE/sorokyne_repaired.yml
     camouflage: Jungle
-    inRotation: false
+    in

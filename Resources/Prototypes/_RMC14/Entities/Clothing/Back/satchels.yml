@@ -588,6 +588,16 @@
     - 0,0,20,1 # same as backpack, up to 7 normal size rockets
 
 - type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelArmy
+  name: T13 MOLLE Satchel
+  suffix: UNMC
+  description: A tactical satchel manufactured by one of the Weston-Yamada subsidiaries. Very lightweight beltbag variant that utilizes UN standard MOLLE fastening systems. Can be often found in hands of colonial security and various private military groups.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/molle.rsi
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelBureauObserverFill
   suffix: Bureau Observer, Filled

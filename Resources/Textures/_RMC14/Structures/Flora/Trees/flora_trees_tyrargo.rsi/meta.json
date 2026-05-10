@@ -1,0 +1,32 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/d388dee8b7b6d854f6f0d844988552acf5962b1f",
+    "size": {
+        "x": 64,
+        "y": 128
+    },
+    "states": [
+        {
+            "name": "treetyrargo01"
+        },
+        {
+            "name": "treetyrargo02"
+        },
+        {
+            "name": "treetyrargo03"
+        },
+        {
+            "name": "treetyrargo_bald01"
+        },
+        {
+            "name": "treetyrargo_dead01"
+        },
+        {
+            "name": "treetyrargo_dead02"
+        },
+        {
+            "name": "treetyrargo_dead03"
+        }
+    ]
+}
