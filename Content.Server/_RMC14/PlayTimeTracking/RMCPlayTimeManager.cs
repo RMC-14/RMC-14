@@ -19,9 +19,9 @@ public sealed class RMCPlayTimeManager : SharedRMCPlayTimeManager
 
     private readonly Dictionary<NetUserId, HashSet<string>> _excluded = [];
 
-    public override void Initialize()
+    protected override void PostInject()
     {
-        base.Initialize();
+        base.PostInject();
 
         _net.RegisterNetMessage<RMCExcludedTimersMsg>();
         _userDb.AddOnLoadPlayer(LoadData);

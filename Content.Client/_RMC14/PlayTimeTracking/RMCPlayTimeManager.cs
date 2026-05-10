@@ -11,9 +11,9 @@ public sealed class RMCPlayTimeManager : SharedRMCPlayTimeManager
 
     public event Action? Updated;
 
-    public override void Initialize()
+    protected override void PostInject()
     {
-        base.Initialize();
+        base.PostInject();
         _net.RegisterNetMessage<RMCExcludedTimersMsg>(OnExcludedTimers);
     }
 

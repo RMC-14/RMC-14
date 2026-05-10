@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using Content.Shared._RMC14.PlayTimeTracking;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.IoC;
 using Content.Shared.Maps;
@@ -47,13 +46,6 @@ namespace Content.Shared.Entry
 
             InitTileDefinitions();
             IoCManager.Resolve<MarkingManager>().Initialize();
-
-            // RMC14
-            // TODO RMC14 this is only here because we need prototypes to be loaded by the
-            // prototype manager, which apparently they are at this point. It's very sus but
-            // I couldn't find a better way, MarkingManager is the only manager that does
-            // something similar, and you can see it right above.
-            IoCManager.Resolve<SharedRMCPlayTimeManager>().Initialize();
 
 #if DEBUG
             var configMan = IoCManager.Resolve<IConfigurationManager>();

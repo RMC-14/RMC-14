@@ -7,19 +7,19 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.PlayTimeTracking;
 
-public abstract class SharedRMCPlayTimeManager
+public abstract class SharedRMCPlayTimeManager : IPostInjectInit
 {
     [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
+    private bool _jobsDataLoaded = false;
     private FrozenSet<ProtoId<PlayTimeTrackerPrototype>> _xenoJobs = [];
     private FrozenSet<ProtoId<PlayTimeTrackerPrototype>> _humanJobs = [];
 
-    // TODO RMC14 we use this Initialize function that's called in EntryPoint instead of implementing
-    // IPostInjectInit because prototypes aren't loaded during IPostInjectInit
-    public virtual void Initialize()
+    void IPostInjectInit.PostInject() => PostInject();
+
+    protected virtual void PostInject()
     {
-        ReloadPrototypes();
         _prototype.PrototypesReloaded += OnPrototypesReloaded;
     }
 
@@ -66,6 +66,8 @@ public abstract class SharedRMCPlayTimeManager
     /// <returns>The total time the player has spent in those jobs.</returns>
     public TimeSpan GetTotalPlaytime(ICommonSession playerSession, IEnumerable<ProtoId<PlayTimeTrackerPrototype>> jobs)
     {
+        EnsurePrototypesLoaded();
+
         IReadOnlyDictionary<string, TimeSpan> playTimes;
 
         playTimes = _playtime.GetPlayTimes(playerSession);
@@ -80,6 +82,12 @@ public abstract class SharedRMCPlayTimeManager
         }
 
         return totalTime;
+    }
+
+    private void EnsurePrototypesLoaded()
+    {
+        if (!_jobsDataLoaded)
+            ReloadPrototypes();
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
@@ -105,5 +113,7 @@ public abstract class SharedRMCPlayTimeManager
                 jobs.Add(job.ID);
         }
         _xenoJobs = jobs.ToFrozenSet();
+
+        _jobsDataLoaded = true;
     }
 }
