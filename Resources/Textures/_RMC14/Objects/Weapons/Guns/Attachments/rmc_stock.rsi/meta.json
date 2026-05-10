@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "The RMC-14 development team",
+  "copyright": "The RMC-14 development team. l49-stock by @TadJohnson00 (GitHub).",
   "size": {
     "x": 32,
     "y": 32
@@ -51,6 +51,9 @@
     },
     {
       "name": "smartgun_harness_a-on"
+    },
+    {
+      "name": "l49-stock"
     }
   ]
 }

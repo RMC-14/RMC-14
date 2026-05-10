@@ -9,8 +9,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Royal/kestrelmedium.rsi
   - type: CMArmor
-    melee: 25
-    bullet: 25
+    melee: 20
+    bullet: 20
     bio: 20
     explosionArmor: 20
   - type: RMCArmorSpeedTier
@@ -54,10 +54,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Royal/kestrelheavy.rsi
   - type: CMArmor
-    melee: 30
-    bullet: 35
-    explosionArmor: 35
-    bio: 20
+    bullet: 25
+    explosionArmor: 25
   - type: RMCArmorSpeedTier
     speedTier: medium
   - type: ClothingSpeedModifier

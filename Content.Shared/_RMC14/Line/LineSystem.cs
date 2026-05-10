@@ -31,6 +31,7 @@ public sealed class LineSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly ProtoId<TagPrototype> WindowFrameTag = "WindowFrame";
     private static readonly float MaxBeamDistance = 500;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
@@ -148,30 +149,36 @@ public sealed class LineSystem : EntitySystem
 
         // Check if the next tile is blocked by more than one wall/structure to prevent the line from passing through diagonally.
         var direction = coords.Position - previousCoords.Position;
-        var ray = new CollisionRay(previousCoords.Position, direction.Normalized(), (int)CollisionGroup.FullTileMask);
-        var intersect = _physics.IntersectRayWithPredicate(Transform(previousCoords.EntityId).MapID, ray, direction.Length(), e => !Transform(e).Anchored, false);
-        var results = intersect.Select(r => r.HitEntity).ToHashSet();
-        var blockCount = 0;
-        foreach (var entity in results)
+        if (direction != Vector2.Zero)
         {
-            if (!_tag.HasAnyTag(entity, StructureTag, WallTag))
-                continue;
+            var ray = new CollisionRay(previousCoords.Position, direction.Normalized(), (int)CollisionGroup.FullTileMask);
+            var intersect = _physics.IntersectRayWithPredicate(Transform(previousCoords.EntityId).MapID, ray, direction.Length(), e => !Transform(e).Anchored, false);
+            var results = intersect.Select(r => r.HitEntity).ToHashSet();
+            var blockCount = 0;
+            foreach (var entity in results)
+            {
+                if (!_tag.HasAnyTag(entity, StructureTag, WallTag))
+                    continue;
 
-            blockCount++;
+                blockCount++;
 
-            if (blockCount < 2)
-                continue;
+                if (blockCount < 2)
+                    continue;
 
-            blocker = entity;
-            return true;
+                blocker = entity;
+                return true;
+            }
         }
 
         var indices = _mapSystem.TileIndicesFor(grid.Value, grid, coords);
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid.Value, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
-            if (!ignoreBarricades && _barricadeQuery.HasComp(uid))
+            if (_barricadeQuery.HasComp(uid))
             {
+                if (ignoreBarricades)
+                    continue;
+
                 if (_doorQuery.TryComp(uid, out var door) && door.State != DoorState.Closed)
                     continue;
 
@@ -197,6 +204,9 @@ public sealed class LineSystem : EntitySystem
             }
             else if (_tag.HasAnyTag(uid.Value, StructureTag, WallTag))
             {
+                if (ignoreBarricades && _tag.HasTag(uid.Value, WindowFrameTag))
+                    continue;
+
                 blocker = uid.Value;
                 return true;
             }

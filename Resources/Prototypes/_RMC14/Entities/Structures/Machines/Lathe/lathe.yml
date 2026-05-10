@@ -50,11 +50,14 @@
       - RMCRackParts
       - RMCTablePartMetalReinforced
       - RodMetal1
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 400
+        damage: 100
       behaviors:
       - !type:PlaySoundBehavior
         sound:
