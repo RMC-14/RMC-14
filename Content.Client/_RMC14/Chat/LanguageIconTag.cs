@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using JetBrains.Annotations;
+using Content.Client._RMC14.Language;
+using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -16,14 +18,22 @@ namespace Content.Client._RMC14.Chat;
 public sealed class LanguageIconTag : IMarkupTagHandler
 {
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
 
     public string Name => "langicon";
 
     public bool TryCreateControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
     {
         if (!node.Attributes.TryGetValue("path", out var pathParameter) ||
-            !pathParameter.TryGetString(out var path) ||
-            !_resourceCache.TryGetResource<TextureResource>(path, out var texture))
+            !pathParameter.TryGetString(out var path))
+        {
+            control = null;
+            return false;
+        }
+
+        var spriteSystem = _entitySystemManager.GetEntitySystem<SpriteSystem>();
+        var texture = LanguageIconLoader.Load(_resourceCache, spriteSystem, path);
+        if (texture == null)
         {
             control = null;
             return false;

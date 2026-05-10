@@ -25,7 +25,7 @@
 
 - type: language
   id: Xeno
-  name: "Xenomorph"
+  name: "Xenonid"
   description: "The alien language of the Xenomorphs."
   isVisibleLanguage: true
   typefaceId: null
@@ -220,7 +220,7 @@
   textSize: null
   boldTypefaceId: null
   showLanguageName: true
-  languageIcon: "/Textures/_RMC14/Interface/hands.rsi/sign_language.png"
+  languageIcon: "/Textures/Interface/Default/Slots/hand_m.png"
   canUseRadio: false
   needsSpeech: false
   needsLOS: true

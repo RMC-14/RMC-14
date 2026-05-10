@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._RMC14.Language;
 using Content.Client.Chat.Managers;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
@@ -6,11 +7,13 @@ using Content.Shared._RMC14.Chat;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
+using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
-using Robust.Shared.Prototypes;
+using Robust.Shared.IoC;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -256,6 +259,30 @@ namespace Content.Client.Chat.UI
 
             if (!ConfigManager.GetCVar(CCVars.ChatEnableFancyBubbles))
             {
+                // RMC14
+                var container = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
+                if (!string.IsNullOrEmpty(message.LanguageIcon))
+                {
+                    var spriteSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SpriteSystem>();
+                    var iconTexture = LanguageIconLoader.Load(
+                        IoCManager.Resolve<IResourceCache>(),
+                        spriteSystem,
+                        message.LanguageIcon);
+
+                    if (iconTexture != null)
+                    {
+                        var textureRect = new TextureRect
+                        {
+                            Texture = iconTexture,
+                            TextureScale = Vector2.One * 0.5f,
+                            VerticalAlignment = VAlignment.Center,
+                            Margin = new Thickness(0, 0, 4, 0)
+                        };
+                        container.AddChild(textureRect);
+                    }
+                }
+                // RMC14
+
                 var label = new RichTextLabel
                 {
                     MaxWidth = SpeechMaxWidth,
@@ -263,11 +290,12 @@ namespace Content.Client.Chat.UI
                 };
 
                 label.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
+                container.AddChild(label);
 
                 var unfanciedPanel = new PanelContainer
                 {
                     StyleClasses = { "speechBox", speechStyleClass },
-                    Children = { label },
+                    Children = { container },
                     ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity)),
                 };
                 return unfanciedPanel;
@@ -288,7 +316,32 @@ namespace Content.Client.Chat.UI
             };
 
             //We'll be honest. *Yes* this is hacky. Doing this in a cleaner way would require a bottom-up refactor of how saycode handles sending chat messages. -Myr
+            // RMC14
+            var headerContainer = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
+            if (!string.IsNullOrEmpty(message.LanguageIcon))
+            {
+                var spriteSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SpriteSystem>();
+                var headerIcon = LanguageIconLoader.Load(
+                    IoCManager.Resolve<IResourceCache>(),
+                    spriteSystem,
+                    message.LanguageIcon);
+
+                if (headerIcon != null)
+                {
+                    var iconTexture = new TextureRect
+                    {
+                        Texture = headerIcon,
+                        TextureScale = Vector2.One * 0.5f,
+                        VerticalAlignment = VAlignment.Center,
+                        Margin = new Thickness(0, 0, 4, 0)
+                    };
+                    headerContainer.AddChild(iconTexture);
+                }
+            }
+            // RMC14
+
             bubbleHeader.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleHeader", fontColor));
+            headerContainer.AddChild(bubbleHeader);
             bubbleContent.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
 
             //As for below: Some day this could probably be converted to xaml. But that is not today. -Myr
@@ -305,7 +358,7 @@ namespace Content.Client.Chat.UI
             var headerPanel = new PanelContainer
             {
                 StyleClasses = { "speechBox", speechStyleClass },
-                Children = { bubbleHeader },
+                Children = { headerContainer },
                 ModulateSelfOverride = Color.White.WithAlpha(ConfigManager.GetCVar(CCVars.ChatFancyNameBackground) ? ConfigManager.GetCVar(CCVars.SpeechBubbleBackgroundOpacity) : 0f),
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Top

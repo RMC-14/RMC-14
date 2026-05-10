@@ -8,7 +8,7 @@ language-menu-speaking-badge = Speaking
 
 # Language names
 language-English-name = English
-language-Xeno-name = Xenomorph
+language-Xeno-name = Xenonid
 language-Binary-name = Binary
 language-Spanish-name = Spanish
 language-French-name = French
@@ -16,6 +16,7 @@ language-Japanese-name = Japanese
 language-Chinese-name = Chinese
 language-Russian-name = Russian
 language-German-name = German
+language-SignLanguage-name = Sign Language
 language-Primitive-name = Primitive
 
 # Language descr
@@ -29,11 +30,12 @@ language-Japanese-description = Earth language.
 language-Chinese-description = Earth language.
 language-Russian-description = Earth language.
 language-German-description = Earth language.
+language-SignLanguage-description = A visual language using hand gestures and body movements.
 language-Primitive-description = A primitive language of screeches, hoots, and gestures.
 
 # language names
 chat-language-Common-name = Common
-chat-language-Xeno-name = Xenomorph
+chat-language-Xeno-name = Xenonid
 chat-language-Binary-name = Binary
 chat-language-Spanish-name = Spanish
 chat-language-French-name = French
@@ -41,6 +43,7 @@ chat-language-Japanese-name = Japanese
 chat-language-Chinese-name = Chinese
 chat-language-Russian-name = Russian
 chat-language-German-name = German
+chat-language-SignLanguage-name = Sign Language
 chat-language-Primitive-name = Primitive
 
 # language selection
@@ -87,4 +90,5 @@ language-icon-alt-Japanese = Japanese flag
 language-icon-alt-Chinese = Chinese flag
 language-icon-alt-Russian = Russian flag
 language-icon-alt-German = German flag
+language-icon-alt-SignLanguage = Handshake symbol
 language-icon-alt-Primitive = Primitive symbol
