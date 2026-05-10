@@ -49,7 +49,7 @@ namespace Content.Shared.Entry
             IoCManager.Resolve<MarkingManager>().Initialize();
 
             // RMC14
-            // RMC14 TODO this is only here because we need prototypes to be loaded by the
+            // TODO RMC14 this is only here because we need prototypes to be loaded by the
             // prototype manager, which apparently they are at this point. It's very sus but
             // I couldn't find a better way, MarkingManager is the only manager that does
             // something similar, and you can see it right above.

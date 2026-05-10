@@ -15,7 +15,7 @@ public abstract class SharedRMCPlayTimeManager
     private FrozenSet<ProtoId<PlayTimeTrackerPrototype>> _xenoJobs = [];
     private FrozenSet<ProtoId<PlayTimeTrackerPrototype>> _humanJobs = [];
 
-    // RMC14 TODO we use this Initialize function that's called in EntryPoint instead of implementing
+    // TODO RMC14 we use this Initialize function that's called in EntryPoint instead of implementing
     // IPostInjectInit because prototypes aren't loaded during IPostInjectInit
     public virtual void Initialize()
     {
