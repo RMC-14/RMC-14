@@ -1,12 +1,15 @@
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
 using Robust.Client.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Light;
 
 public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly PointLightSystem _pointLight = default!;
@@ -15,9 +18,6 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
 
     private static readonly TimeSpan LightCheckInterval = TimeSpan.FromSeconds(1);
 
-    private const int MaxNearbyLights = 6;
-    private const float MaxNearbyLightCheckRange = 2.5f;
-
     private readonly HashSet<Entity<PointLightComponent>> _nearbyLights = new();
     private readonly List<Entity<PointLightComponent>> _nearbyLightsList = new();
 
@@ -25,11 +25,16 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
     private EntityQuery<HandheldLightComponent> _handHeldLightQuery;
 
     private TimeSpan _nextUpdate;
+    private int _maxNearbyLights;
+    private float _maxNearbyLightCheckRange;
 
     public override void Initialize()
     {
         _expendableLightQuery = GetEntityQuery<ExpendableLightComponent>();
         _handHeldLightQuery = GetEntityQuery<HandheldLightComponent>();
+
+        _maxNearbyLights = _config.GetCVar(RMCCVars.RMCLightningMaxAmountLightNearbyCount);
+        _maxNearbyLightCheckRange = _config.GetCVar(RMCCVars.RMCLightningMaxAmountLightNearbyAreaSize);
     }
 
     public override void Update(float frameTime)
@@ -49,12 +54,12 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
                 continue;
 
             _nearbyLights.Clear();
-            _entityLookup.GetEntitiesInRange(_transform.GetMapCoordinates(uid), MaxNearbyLightCheckRange, _nearbyLights);
+            _entityLookup.GetEntitiesInRange(_transform.GetMapCoordinates(uid), _maxNearbyLightCheckRange, _nearbyLights);
             _nearbyLights.RemoveWhere(ent => _container.TryGetContainingContainer(ent.Owner, out var container) && container.OccludesLight ||
                                              (!_expendableLightQuery.TryComp(ent, out var expendable) || !expendable.Activated) &&
                                              (!_handHeldLightQuery.TryComp(ent, out var toggle) || !toggle.Activated));
 
-            if (_nearbyLights.Count <= MaxNearbyLights)
+            if (_nearbyLights.Count <= _maxNearbyLights)
             {
                 RemComp<RMCTemporaryDisabledLightComponent>(uid);
 
@@ -75,7 +80,7 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
             for (var i = 0; i < _nearbyLightsList.Count; i++)
             {
                 var enabledLight = _nearbyLightsList[i];
-                var shouldDisable = i < MaxNearbyLights;
+                var shouldDisable = i < _maxNearbyLights;
 
                 if (!shouldDisable)
                     continue;
