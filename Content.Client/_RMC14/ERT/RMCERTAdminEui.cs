@@ -144,11 +144,16 @@ public sealed class RMCERTAdminEui : BaseEui
 
         if (request.State == RMCERTRequestState.PendingAdmin)
         {
-            AddRequestActionButton(actions, Loc.GetString("rmc-ert-admin-action-approve-random"), _ => SendMessage(new RMCERTAdminApproveRandomMsg(request.Id)));
-            AddRequestActionButton(actions, Loc.GetString("rmc-ert-admin-action-deny"), _ => SendMessage(new RMCERTAdminDenyMsg(request.Id)));
-            count += 2;
+            if (request.AllowRandomSelection)
+            {
+                AddRequestActionButton(actions, Loc.GetString("rmc-ert-admin-action-approve-random"), _ => SendMessage(new RMCERTAdminApproveRandomMsg(request.Id)));
+                count++;
+            }
 
-            if (request.Source != RMCERTRequestSource.Console)
+            AddRequestActionButton(actions, Loc.GetString("rmc-ert-admin-action-deny"), _ => SendMessage(new RMCERTAdminDenyMsg(request.Id)));
+            count++;
+
+            if (request.AllowSpecificSelection)
             {
                 var allowed = request.AllowedCalls.Count == 0
                     ? state.Calls.Where(c => c.AdminSelectable)

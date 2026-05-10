@@ -130,6 +130,7 @@ rmc-ert-briefing-role = Assigned role: {$role}
 rmc-ert-error-unknown-call = Unknown ERT call prototype: {$id}
 rmc-ert-error-call-not-allowed = {$call} is not allowed for this distress source.
 rmc-ert-error-console-random-only = Console distress requests can only be approved as a random response team.
+rmc-ert-error-specific-selection-disabled = This ERT request cannot be approved as a specific response team.
 rmc-ert-error-call-disabled = {$call} is disabled.
 rmc-ert-error-selected-call-missing = The selected ERT call no longer exists.
 rmc-ert-error-load-shuttle-map = Failed to load ERT shuttle map {$map}.

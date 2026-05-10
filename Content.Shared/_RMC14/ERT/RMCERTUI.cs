@@ -11,7 +11,10 @@ namespace Content.Shared._RMC14.ERT;
 /// <param name="Organization">Localized organization label for grouping and context.</param>
 /// <param name="Category">Localized admin UI category label.</param>
 /// <param name="RandomWeight">Weighted-random selection weight for random approval.</param>
-/// <param name="AdminSelectable">Whether admins may pick this call directly.</param>
+/// <param name="AdminSelectable">
+/// Whether the prototype is exposed in default direct-admin lists such as force-call controls.
+/// Request-specific approval may still expose other calls when they are explicitly allowed by the request.
+/// </param>
 /// <param name="AdminButtonLabel">Optional localized force-call button label.</param>
 [Serializable, NetSerializable]
 public readonly record struct RMCERTCallOption(
@@ -32,11 +35,13 @@ public readonly record struct RMCERTCallOption(
 /// <param name="SourceName">Display name for the request source.</param>
 /// <param name="RequesterName">Display name for the requester.</param>
 /// <param name="Reason">Reason supplied when the request was created.</param>
-/// <param name="SelectedCall">Prototype id selected for dispatch, if any.</param>
+/// <param name="SelectedCall">Display label for the call selected for dispatch, if any.</param>
 /// <param name="AllowedCalls">Call ids that this request may dispatch.</param>
+/// <param name="AllowRandomSelection">Whether admins may approve this request by weighted-random selection.</param>
+/// <param name="AllowSpecificSelection">Whether admins may approve this request by choosing a specific call.</param>
 /// <param name="CreatedAt">Formatted round time when the request was created.</param>
 /// <param name="LastError">Last blocking error for this request.</param>
-/// <param name="LastWarning">Last non-blocking warning for this request.</param>
+/// <param name="LastWarning">Last recoverable warning for this request, typically a preflight block that left it pending.</param>
 [Serializable, NetSerializable]
 public readonly record struct RMCERTRequestOption(
     Guid Id,
@@ -47,6 +52,8 @@ public readonly record struct RMCERTRequestOption(
     string Reason,
     string? SelectedCall,
     List<string> AllowedCalls,
+    bool AllowRandomSelection,
+    bool AllowSpecificSelection,
     string CreatedAt,
     string LastError,
     string LastWarning);
@@ -72,7 +79,7 @@ public sealed class RMCERTAdminEuiState(
     public readonly List<RMCERTRequestOption> Requests = requests;
 
     /// <summary>
-    /// Call options available for approving player-created requests.
+    /// Call options available for approving requests.
     /// </summary>
     public readonly List<RMCERTCallOption> Calls = calls;
 

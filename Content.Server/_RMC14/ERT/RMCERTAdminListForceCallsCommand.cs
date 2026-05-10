@@ -19,7 +19,11 @@ public sealed class RMCERTAdminListForceCallsCommand : LocalizedCommands
             return;
         }
 
-        var calls = _entities.System<RMCERTSystem>().GetForceCallOptions();
+        var calls = _entities.System<RMCERTSystem>().GetCallOptions(new RMCERTCallQueryArgs
+        {
+            EnabledOnly = true,
+            AdminSelectableOnly = true,
+        });
         if (calls.Count == 0)
         {
             shell.WriteLine(Loc.GetString("rmc-ert-admin-command-force-list-empty"));

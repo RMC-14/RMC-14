@@ -112,6 +112,7 @@ public sealed class RMCERTSystem : EntitySystem
     // AdminManager raises OnPermsChanged before the client enables admin chat filters.
     private static readonly TimeSpan PendingAdminNotificationDelay = TimeSpan.FromSeconds(1);
 
+    /// <inheritdoc />
     public override void Initialize()
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
@@ -135,6 +136,7 @@ public sealed class RMCERTSystem : EntitySystem
         ValidatePrototypes();
     }
 
+    /// <inheritdoc />
     public override void Shutdown()
     {
         base.Shutdown();
@@ -143,6 +145,7 @@ public sealed class RMCERTSystem : EntitySystem
         _playerManager.PlayerStatusChanged -= OnPlayerStatusChanged;
     }
 
+    /// <inheritdoc />
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -182,6 +185,12 @@ public sealed class RMCERTSystem : EntitySystem
             ValidatePrototypes();
     }
 
+    /// <summary>
+    /// Builds a flattened snapshot for the admin ERT window.
+    /// This is UI state only: callers receive safe DTOs instead of mutable server-side <see cref="RMCERTRequest"/> instances.
+    /// </summary>
+    /// <param name="canForceCalls">Whether the viewing admin may see and use force-call controls.</param>
+    /// <returns>Current request/call state for the admin EUI.</returns>
     public RMCERTAdminEuiState CreateAdminState(bool canForceCalls)
     {
         // The admin window works off a flattened snapshot so the client does not need to know about runtime-only request objects.
@@ -196,35 +205,48 @@ public sealed class RMCERTSystem : EntitySystem
                 r.Reason,
                 GetSelectedCallLabel(r),
                 r.AllowedCalls.Select(c => c.Id).ToList(),
+                r.AllowRandomSelection,
+                r.AllowSpecificSelection,
                 FormatRoundTime(r.CreatedAt),
                 r.LastError,
                 r.LastWarning))
             .ToList();
 
-        var calls = _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
-            .OrderBy(c => c.Category)
-            .ThenBy(c => c.Name)
-            .Select(ToCallOption)
-            .ToList();
+        var calls = GetCallOptions(new RMCERTCallQueryArgs());
 
         var forceCalls = canForceCalls
-            ? GetForceCallOptions()
+            ? GetCallOptions(new RMCERTCallQueryArgs
+            {
+                EnabledOnly = true,
+                AdminSelectableOnly = true,
+            })
             : [];
 
         return new RMCERTAdminEuiState(requests, calls, canForceCalls, forceCalls);
     }
 
-    public List<RMCERTCallOption> GetForceCallOptions()
+    /// <summary>
+    /// Returns ERT call prototypes as public option DTOs using the supplied filters.
+    /// This method only queries prototype data; it does not create, mutate, approve, or validate a request.
+    /// </summary>
+    /// <param name="args">
+    /// Query filters for enabled calls, direct admin-selectable calls, and allowed source.
+    /// Leave filters unset to list every known ERT call option.
+    /// </param>
+    /// <returns>Sorted call options suitable for admin UI, commands, or preparing <see cref="RMCERTCreateRequestArgs.AllowedCalls"/>.</returns>
+    public List<RMCERTCallOption> GetCallOptions(RMCERTCallQueryArgs args)
     {
         return _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
-            .Where(IsForceCallable)
+            .Where(c => !args.EnabledOnly || c.Enabled)
+            .Where(c => !args.AdminSelectableOnly || c.AdminSelectable)
+            .Where(c => args.Source == null || c.AllowedSources.Contains(args.Source.Value))
             .OrderBy(c => c.Category)
             .ThenBy(c => c.Name)
             .Select(ToCallOption)
             .ToList();
     }
 
-    public bool IsForceCallable(RMCERTCallPrototype call)
+    private static bool IsForceCallable(RMCERTCallPrototype call)
     {
         return call.Enabled && call.AdminSelectable;
     }
@@ -241,169 +263,224 @@ public sealed class RMCERTSystem : EntitySystem
             call.AdminButtonLabel);
     }
 
-    public void RequestConsoleDistress(EntityUid console, EntityUid user, string reason)
+    /// <summary>
+    /// Creates a new pending ERT request for admin review.
+    /// The caller supplies the already-prepared allowed call set and approval modes; this method materializes the internal request,
+    /// checks for duplicate non-terminal requests from the same source entity when one exists, records source cooldown timing,
+    /// announces the pending request, and returns its id.
+    /// </summary>
+    /// <remarks>
+    /// This method intentionally does not re-check prototype <c>AllowedSources</c>.
+    /// Callers that want source filtering should call <see cref="GetCallOptions"/> first and pass the resulting ids through
+    /// <see cref="RMCERTCreateRequestArgs.AllowedCalls"/>.
+    /// </remarks>
+    /// <param name="args">Creation parameters prepared by the caller.</param>
+    /// <returns>
+    /// Success with the new request id and <see cref="RMCERTRequestState.PendingAdmin"/>, or failure with an error when the request
+    /// cannot be created.
+    /// </returns>
+    public RMCERTRequestResult CreateRequest(RMCERTCreateRequestArgs args)
     {
-        var calls = _prototypes.EnumeratePrototypes<RMCERTCallPrototype>()
-            .Where(c => c.Enabled && c.AllowedSources.Contains(RMCERTRequestSource.Console))
-            .Select(c => new ProtoId<RMCERTCallPrototype>(c.ID))
-            .ToList();
+        var allowedCalls = args.AllowedCalls.Distinct().ToList();
+        if (args.SourceEntity is { Valid: true } sourceEntity &&
+            !CanCreateRequest(sourceEntity, out var error))
+        {
+            return ResultFailure(Guid.Empty, null, error);
+        }
 
-        CreateRequest(RMCERTRequestSource.Console, console, user, reason, calls);
-        _ui.CloseUi(console, MarineCommunicationsComputerUI.Key, user);
+        if (allowedCalls.Count == 0)
+        {
+            return ResultFailure(Guid.Empty, null, Loc.GetString("rmc-ert-popup-no-source-teams"));
+        }
+
+        var reason = args.Reason.Trim();
+        var request = new RMCERTRequest
+        {
+            Source = args.Source,
+            SourceEntity = args.SourceEntity,
+            Requester = args.Requester,
+            SourceName = GetRequestSourceName(args.Source, args.SourceEntity, args.SourceName),
+            RequesterName = GetRequestRequesterName(args.Source, args.Requester, args.RequesterName),
+            Reason = reason,
+            CreatedAt = _timing.CurTime,
+            AllowedCalls = allowedCalls,
+            AllowRandomSelection = args.AllowRandomSelection,
+            AllowSpecificSelection = args.AllowSpecificSelection,
+        };
+
+        _requests[request.Id] = request;
+
+        if (request.SourceEntity is { Valid: true } cooldownSource)
+            _sourceCooldowns[cooldownSource] = _timing.CurTime;
+
+        AddERTRequestLog(LogImpact.Medium,
+            "created",
+            request,
+            GetRequesterLogText(request),
+            extra: $"allowedCalls=[{string.Join(", ", allowedCalls.Select(c => c.Id))}], allowRandom={request.AllowRandomSelection}, allowSpecific={request.AllowSpecificSelection}");
+
+        var text = BuildAdminRequestAnnouncement(request);
+        _chat.SendAdminAnnouncement(text);
+        AnnounceDistressLaunched(request);
+
+        NotifyAdminsOfRequest();
+
+        if (request.Source == RMCERTRequestSource.Handheld)
+            UpdateSourceVisual(request, true);
+
+        if (request.SourceEntity is { Valid: true } popupSource &&
+            request.Requester is { Valid: true } popupRequester)
+        {
+            _popup.PopupEntity(GetRequestSuccessText(popupSource, request.Source), popupSource, popupRequester, PopupType.Medium);
+        }
+
+        DirtyState(request);
+        return ResultSuccess(request);
     }
 
-    public void RequestHandheldDistress(Entity<RMCERTDistressBeaconComponent> beacon, EntityUid user, string reason)
+    /// <summary>
+    /// Creates an admin-sourced request for one specific call and immediately approves it.
+    /// This preserves force-call behavior while exposing the operation through the same public result contract as the normal lifecycle API.
+    /// </summary>
+    /// <param name="args">Force-call parameters, including the exact call id and optional actor/reason metadata.</param>
+    /// <returns>
+    /// Success with the created request id after approval, or failure when the call is unknown, disabled, not admin-selectable,
+    /// or blocked during approval/preflight.
+    /// </returns>
+    public RMCERTRequestResult ForceCall(RMCERTForceCallArgs args)
     {
-        reason = reason.Trim();
+        var callId = args.Call;
+        var reason = args.Reason.Trim();
+        var actorText = GetAdminActorText(args.Actor, args.ActorName);
 
-        if (beacon.Comp.Spent)
+        if (!_prototypes.TryIndex(callId, out var call, false))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-spent"), beacon, user, PopupType.MediumCaution);
-            return;
-        }
-
-        if (_timing.CurTime < beacon.Comp.LastUsed + beacon.Comp.Cooldown)
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-cooldown"), beacon, user, PopupType.MediumCaution);
-            return;
-        }
-
-        if (beacon.Comp.ReasonRequired && string.IsNullOrWhiteSpace(reason))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-reason-required"), beacon, user, PopupType.MediumCaution);
-            return;
-        }
-
-        if (!TryGetHandheldAvailableCalls(beacon, user, reason, out var calls, out var error))
-        {
-            _popup.PopupEntity(error, beacon, user, PopupType.MediumCaution);
-            return;
-        }
-
-        beacon.Comp.LastUsed = _timing.CurTime;
-
-        CreateRequest(RMCERTRequestSource.Handheld, beacon, user, reason, calls);
-    }
-
-    public bool ForceCall(
-        ProtoId<RMCERTCallPrototype> callId,
-        EntityUid? admin,
-        string? adminName,
-        string reason,
-        out Guid requestId,
-        out string error)
-    {
-        requestId = Guid.Empty;
-        error = string.Empty;
-        reason = reason.Trim();
-
-        if (!_prototypes.TryIndex(callId, out var call))
-        {
-            error = Loc.GetString("rmc-ert-error-unknown-call", ("id", callId.Id));
+            var unknownCallError = Loc.GetString("rmc-ert-error-unknown-call", ("id", callId.Id));
             _adminLog.Add(LogType.RMCAdminCommandLogging,
                 LogImpact.Medium,
-                $"ERT force call failed: actor={FormatLogValue(GetAdminActorText(admin, adminName))}, call={FormatLogValue(callId.Id)}, reason=\"{FormatLogValue(reason)}\", error=\"{FormatLogValue(error)}\"");
-            return false;
+                $"ERT force call failed: actor={FormatLogValue(actorText)}, call={FormatLogValue(callId.Id)}, reason=\"{FormatLogValue(reason)}\", error=\"{FormatLogValue(unknownCallError)}\"");
+            return ResultFailure(Guid.Empty, null, unknownCallError);
         }
 
         if (!IsForceCallable(call))
         {
-            error = Loc.GetString("rmc-ert-error-call-not-force-callable", ("call", call.Name));
+            var notForceCallableError = Loc.GetString("rmc-ert-error-call-not-force-callable", ("call", call.Name));
             _adminLog.Add(LogType.RMCAdminCommandLogging,
                 LogImpact.Medium,
-                $"ERT force call failed: actor={FormatLogValue(GetAdminActorText(admin, adminName))}, call={FormatLogValue(call.Name)}, prototype={call.ID}, reason=\"{FormatLogValue(reason)}\", error=\"{FormatLogValue(error)}\"");
-            return false;
+                $"ERT force call failed: actor={FormatLogValue(actorText)}, call={FormatLogValue(call.Name)}, prototype={call.ID}, reason=\"{FormatLogValue(reason)}\", error=\"{FormatLogValue(notForceCallableError)}\"");
+            return ResultFailure(Guid.Empty, null, notForceCallableError);
         }
 
         var request = new RMCERTRequest
         {
             Source = RMCERTRequestSource.Admin,
-            Requester = admin,
+            Requester = args.Actor,
             SourceName = Loc.GetString("rmc-ert-source-admin"),
-            RequesterName = GetAdminActorText(admin, adminName),
+            RequesterName = actorText,
             Reason = reason,
             CreatedAt = _timing.CurTime,
             AllowedCalls = [callId],
+            AllowRandomSelection = false,
+            AllowSpecificSelection = true,
         };
 
         _requests[request.Id] = request;
-        requestId = request.Id;
         AddERTRequestLog(LogImpact.High, "force requested", request, request.RequesterName, call);
 
-        if (ApproveSpecific(request.Id, callId, admin, false, request.RequesterName, true))
-            return true;
+        var result = ApproveSpecificRequest(request.Id, callId, args.Actor, args.ActorName, false, true);
+        if (result.Success)
+            return result;
 
-        error = !string.IsNullOrWhiteSpace(request.LastError)
+        var error = !string.IsNullOrWhiteSpace(request.LastError)
             ? request.LastError
             : !string.IsNullOrWhiteSpace(request.LastWarning)
                 ? request.LastWarning
                 : Loc.GetString("rmc-ert-error-force-call-failed", ("call", call.Name));
-        return false;
+        return ResultFailure(request.Id, request.State, error, request.LastWarning);
     }
 
-    public bool ApproveRandom(Guid id, EntityUid? admin)
+    /// <summary>
+    /// Approves a pending ERT request either by weighted-random selection or by a specific call id.
+    /// Passing a null call uses random selection from the request's allowed call set; passing a call id approves that exact call.
+    /// </summary>
+    /// <param name="args">Approval parameters with request id, optional selected call, and optional actor metadata.</param>
+    /// <returns>
+    /// Success when the request enters dispatch preparation, or failure when the request is not pending, the requested approval mode
+    /// is disabled, the call is invalid/not allowed/disabled, requirements fail, or preflight blocks dispatch.
+    /// </returns>
+    public RMCERTRequestResult ApproveRequest(RMCERTApproveRequestArgs args)
     {
-        if (!TryGetPending(id, out var request))
-            return false;
+        if (!TryGetPending(args.Request, out var request))
+            return RequestUnavailable(args.Request);
+
+        if (args.Call is { } callId)
+        {
+            if (!request.AllowSpecificSelection)
+            {
+                request.LastError = Loc.GetString("rmc-ert-error-specific-selection-disabled");
+                request.LastWarning = string.Empty;
+                DirtyState(request);
+                return ResultFailure(request.Id, request.State, request.LastError);
+            }
+
+            return ApproveSpecificRequest(args.Request, callId, args.Actor, args.ActorName, false, false);
+        }
+
+        if (!request.AllowRandomSelection)
+        {
+            request.LastError = Loc.GetString("rmc-ert-error-no-random-calls");
+            request.LastWarning = string.Empty;
+            DirtyState(request);
+            return ResultFailure(request.Id, request.State, request.LastError);
+        }
 
         if (!TryPickRandomCall(request, out var call, out var error))
         {
             FailRequest(request, error);
-            return false;
+            return ResultFailure(request.Id, request.State, error);
         }
 
-        if (call is not { } selected)
-            return false;
-
-        return ApproveSpecific(id, selected, admin, true);
+        return call is { } selected
+            ? ApproveSpecificRequest(args.Request, selected, args.Actor, args.ActorName, true, false)
+            : ResultFailure(request.Id, request.State, Loc.GetString("rmc-ert-error-random-selection-failed"));
     }
 
-    public bool ApproveSpecific(Guid id, ProtoId<RMCERTCallPrototype> callId, EntityUid? admin)
-    {
-        return ApproveSpecific(id, callId, admin, false);
-    }
-
-    private bool ApproveSpecific(
+    private RMCERTRequestResult ApproveSpecificRequest(
         Guid id,
         ProtoId<RMCERTCallPrototype> callId,
         EntityUid? admin,
+        string? adminName,
         bool randomSelection,
-        string? adminOverrideName = null,
         bool forced = false)
     {
         if (!TryGetPending(id, out var request))
-            return false;
+            return RequestUnavailable(id);
 
-        if (!randomSelection && request.Source == RMCERTRequestSource.Console)
+        if (!_prototypes.TryIndex(callId, out var call, false))
         {
-            request.LastError = Loc.GetString("rmc-ert-error-console-random-only");
-            request.LastWarning = string.Empty;
-            DirtyState(request);
-            return false;
+            var unknownCallError = Loc.GetString("rmc-ert-error-unknown-call", ("id", callId.Id));
+            FailRequest(request, unknownCallError);
+            return ResultFailure(request.Id, request.State, unknownCallError);
         }
 
-        if (!_prototypes.TryIndex(callId, out var call))
+        if (!request.AllowedCalls.Contains(callId))
         {
-            FailRequest(request, Loc.GetString("rmc-ert-error-unknown-call", ("id", callId.Id)));
-            return false;
-        }
-
-        if (!request.AllowedCalls.Contains(callId) && request.Source != RMCERTRequestSource.Admin)
-        {
-            FailRequest(request, Loc.GetString("rmc-ert-error-call-not-allowed", ("call", call.Name)));
-            return false;
+            var notAllowedError = Loc.GetString("rmc-ert-error-call-not-allowed", ("call", call.Name));
+            FailRequest(request, notAllowedError);
+            return ResultFailure(request.Id, request.State, notAllowedError);
         }
 
         if (!call.Enabled)
         {
-            FailRequest(request, Loc.GetString("rmc-ert-error-call-disabled", ("call", call.Name)));
-            return false;
+            var disabledError = Loc.GetString("rmc-ert-error-call-disabled", ("call", call.Name));
+            FailRequest(request, disabledError);
+            return ResultFailure(request.Id, request.State, disabledError);
         }
 
         if (!CheckRequirements(request, call, out var error))
         {
             FailRequest(request, error);
-            return false;
+            return ResultFailure(request.Id, request.State, error);
         }
 
         if (!TryPrepareRequestForDispatch(request, call, true, out error))
@@ -413,11 +490,11 @@ public sealed class RMCERTSystem : EntitySystem
             AddERTRequestLog(LogImpact.Medium,
                 forced ? "force approve blocked" : "approve blocked",
                 request,
-                GetAdminActorText(admin, adminOverrideName),
+                GetAdminActorText(admin, adminName),
                 call,
                 $"warning=\"{FormatLogValue(error)}\"");
             DirtyState(request);
-            return false;
+            return ResultFailure(request.Id, request.State, string.Empty, error);
         }
 
         request.State = RMCERTRequestState.PendingDispatch;
@@ -426,7 +503,7 @@ public sealed class RMCERTSystem : EntitySystem
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
 
-        var adminText = GetAdminActorText(admin, adminOverrideName);
+        var adminText = GetAdminActorText(admin, adminName);
         _chat.SendAdminAnnouncement(forced
             ? GetForceCallAnnouncement(request, call, adminText)
             : Loc.GetString("rmc-ert-admin-approved",
@@ -447,16 +524,23 @@ public sealed class RMCERTSystem : EntitySystem
 
         DirtyState(request);
         Timer.Spawn(TimeSpan.FromSeconds(call.LaunchDelay), () => Dispatch(request.Id));
-        return true;
+        return ResultSuccess(request);
     }
 
-    public bool Deny(Guid id, EntityUid? admin)
+    /// <summary>
+    /// Moves a non-terminal ERT request to denied, primarily for pending admin-review rejection.
+    /// Denial runs source cleanup such as handheld beacon reset behavior, but does not clean up already-spawned ERT content;
+    /// use <see cref="CancelRequest"/> for active requests that need content cleanup.
+    /// </summary>
+    /// <param name="args">Request id and optional actor metadata for logs/announcements.</param>
+    /// <returns>Success when the request is moved to denied, or failure when the request is unknown or already terminal.</returns>
+    public RMCERTRequestResult DenyRequest(RMCERTRequestActionArgs args)
     {
-        if (!_requests.TryGetValue(id, out var request))
-            return false;
+        if (!_requests.TryGetValue(args.Request, out var request))
+            return RequestUnavailable(args.Request);
 
         if (IsTerminal(request.State))
-            return false;
+            return RequestTerminal(request);
 
         request.State = RMCERTRequestState.Denied;
         request.LastError = string.Empty;
@@ -471,9 +555,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         UpdateSourceVisual(request, false);
 
-        var adminText = admin is { Valid: true }
-            ? ToPrettyString(admin.Value)
-            : Loc.GetString("rmc-ert-admin-actor-server");
+        var adminText = GetAdminActorText(args.Actor, args.ActorName);
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-denied",
             ("admin", adminText),
             ("id", request.Id),
@@ -486,16 +568,22 @@ public sealed class RMCERTSystem : EntitySystem
             AnnounceNoResponse(request, null);
 
         DirtyState(request);
-        return true;
+        return ResultSuccess(request);
     }
 
-    public bool Cancel(Guid id, EntityUid? admin)
+    /// <summary>
+    /// Cancels a non-terminal ERT request by id and performs active content cleanup.
+    /// Use this for already-created requests that should stop regardless of whether they are pending, recruiting, launching, or arrived.
+    /// </summary>
+    /// <param name="args">Request id and optional actor metadata for logs/announcements.</param>
+    /// <returns>Success when the request is moved to cancelled, or failure when the request is unknown or already terminal.</returns>
+    public RMCERTRequestResult CancelRequest(RMCERTRequestActionArgs args)
     {
-        if (!_requests.TryGetValue(id, out var request))
-            return false;
+        if (!_requests.TryGetValue(args.Request, out var request))
+            return RequestUnavailable(args.Request);
 
         if (IsTerminal(request.State))
-            return false;
+            return RequestTerminal(request);
 
         request.State = RMCERTRequestState.Cancelled;
         request.LastError = string.Empty;
@@ -503,9 +591,7 @@ public sealed class RMCERTSystem : EntitySystem
         request.RecruitmentEndsAt = null;
         CleanupRequestContent(request, Loc.GetString("rmc-ert-cleanup-reason-cancelled"));
         UpdateSourceVisual(request, false);
-        var adminText = admin is { Valid: true }
-            ? ToPrettyString(admin.Value)
-            : Loc.GetString("rmc-ert-admin-actor-server");
+        var adminText = GetAdminActorText(args.Actor, args.ActorName);
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cancelled",
             ("admin", adminText),
             ("id", request.Id)));
@@ -515,21 +601,41 @@ public sealed class RMCERTSystem : EntitySystem
             Announce(call.Announcements.Cancelled, request, call);
 
         DirtyState(request);
-        return true;
+        return ResultSuccess(request);
     }
 
-    public bool Launch(Guid id, EntityUid? admin)
+    /// <summary>
+    /// Manually launches an ERT request that is in the recruiting state.
+    /// If recruitment is still open, this shortens the recruitment window before checking active ghost-role raffles and launch readiness.
+    /// </summary>
+    /// <param name="args">Request id and optional actor metadata for logs/announcements.</param>
+    /// <returns>
+    /// Success when launch begins, or failure when the request is unknown, not launchable, still has active raffles, or launch preflight fails.
+    /// </returns>
+    public RMCERTRequestResult LaunchRequest(RMCERTRequestActionArgs args)
     {
-        return TryLaunch(id, admin, false);
+        var success = TryLaunch(args.Request, args.Actor, args.ActorName, false);
+        if (!_requests.TryGetValue(args.Request, out var request))
+            return RequestUnavailable(args.Request);
+
+        return success
+            ? ResultSuccess(request)
+            : ResultFailure(request.Id, request.State, request.LastError, request.LastWarning);
     }
 
-    public bool Complete(Guid id, EntityUid? admin)
+    /// <summary>
+    /// Marks an arrived ERT request as completed and clears source visual state.
+    /// This is normally called by shuttle/FTL flow when the team is done and the shuttle starts returning home.
+    /// </summary>
+    /// <param name="args">Request id and optional actor metadata for logs/announcements.</param>
+    /// <returns>Success when the arrived request is completed, or failure when the request is unknown or not in the arrived state.</returns>
+    public RMCERTRequestResult CompleteRequest(RMCERTRequestActionArgs args)
     {
-        if (!_requests.TryGetValue(id, out var request))
-            return false;
+        if (!_requests.TryGetValue(args.Request, out var request))
+            return RequestUnavailable(args.Request);
 
         if (request.State != RMCERTRequestState.Arrived)
-            return false;
+            return ResultFailure(request.Id, request.State, $"ERT request {request.Id} is not arrived.");
 
         request.State = RMCERTRequestState.Completed;
         request.LastError = string.Empty;
@@ -537,9 +643,7 @@ public sealed class RMCERTSystem : EntitySystem
         request.RecruitmentEndsAt = null;
         UpdateSourceVisual(request, false);
 
-        var adminText = admin is { Valid: true }
-            ? ToPrettyString(admin.Value)
-            : Loc.GetString("rmc-ert-admin-actor-server");
+        var adminText = GetAdminActorText(args.Actor, args.ActorName);
         var selected = GetSelectedCallLabel(request) ?? Loc.GetString("rmc-ert-response-team-fallback");
         _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-completed",
             ("admin", adminText),
@@ -547,7 +651,7 @@ public sealed class RMCERTSystem : EntitySystem
             ("team", selected)));
         AddERTRequestLog(LogImpact.Medium, "completed", request, adminText);
         DirtyState(request);
-        return true;
+        return ResultSuccess(request);
     }
 
     private void OnMarineCommunicationsDistressBeacon(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsDistressBeaconMsg args)
@@ -573,7 +677,7 @@ public sealed class RMCERTSystem : EntitySystem
         if (!TryGetEntity(args.User, out var user))
             return;
 
-        RequestConsoleDistress(ent, user.Value, args.Message);
+        CreateConsoleDistressRequest(ent, user.Value, args.Message);
     }
 
     private void OnERTMindAdded(Entity<RMCERTMemberComponent> ent, ref MindAddedMessage args)
@@ -686,7 +790,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         ApplyShuttleDoorConsoleLocks(ent.Owner);
         SetShuttlePlayerRouteLock(ent.Owner, null);
-        Complete(request.Id, null);
+        CompleteRequest(new RMCERTRequestActionArgs { Request = request.Id });
     }
 
     private void OnHandheldUse(Entity<RMCERTDistressBeaconComponent> ent, ref UseInHandEvent args)
@@ -719,7 +823,7 @@ public sealed class RMCERTSystem : EntitySystem
         }
         else
         {
-            RequestHandheldDistress(ent, args.User, string.Empty);
+            CreateHandheldDistressRequest(ent, args.User, string.Empty);
         }
 
         args.Handled = true;
@@ -736,60 +840,77 @@ public sealed class RMCERTSystem : EntitySystem
             return;
         }
 
-        RequestHandheldDistress((beaconUid, beacon), ent.Owner, args.Message);
+        CreateHandheldDistressRequest((beaconUid, beacon), ent.Owner, args.Message);
     }
 
-    private void CreateRequest(
-        RMCERTRequestSource source,
-        EntityUid sourceEntity,
-        EntityUid requester,
-        string reason,
-        List<ProtoId<RMCERTCallPrototype>> allowedCalls)
+    private void CreateConsoleDistressRequest(EntityUid console, EntityUid user, string reason)
     {
-        if (!CanCreateRequest(sourceEntity, out var error))
+        var calls = GetCallOptions(new RMCERTCallQueryArgs
         {
-            _popup.PopupEntity(error, sourceEntity, requester, PopupType.MediumCaution);
-            return;
-        }
+            EnabledOnly = true,
+            Source = RMCERTRequestSource.Console,
+        }).Select(c => new ProtoId<RMCERTCallPrototype>(c.Id)).ToList();
 
-        if (allowedCalls.Count == 0)
+        var result = CreateRequest(new RMCERTCreateRequestArgs
         {
-            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-no-source-teams"), sourceEntity, requester, PopupType.MediumCaution);
-            return;
-        }
-
-        reason = reason.Trim();
-        var request = new RMCERTRequest
-        {
-            Source = source,
-            SourceEntity = sourceEntity,
-            Requester = requester,
-            SourceName = Name(sourceEntity),
-            RequesterName = Name(requester),
+            Source = RMCERTRequestSource.Console,
+            SourceEntity = console,
+            Requester = user,
             Reason = reason,
-            CreatedAt = _timing.CurTime,
-            AllowedCalls = allowedCalls,
-        };
+            AllowedCalls = calls,
+            AllowRandomSelection = true,
+            AllowSpecificSelection = false,
+        });
 
-        _requests[request.Id] = request;
-        _sourceCooldowns[sourceEntity] = _timing.CurTime;
-        AddERTRequestLog(LogImpact.Medium,
-            "created",
-            request,
-            GetRequesterLogText(request),
-            extra: $"allowedCalls=[{string.Join(", ", allowedCalls.Select(c => c.Id))}]");
+        if (!result.Success && !string.IsNullOrWhiteSpace(result.Error))
+            _popup.PopupEntity(result.Error, console, user, PopupType.MediumCaution);
 
-        var text = BuildAdminRequestAnnouncement(request);
-        _chat.SendAdminAnnouncement(text);
-        AnnounceDistressLaunched(request);
+        _ui.CloseUi(console, MarineCommunicationsComputerUI.Key, user);
+    }
 
-        NotifyAdminsOfRequest();
+    private void CreateHandheldDistressRequest(Entity<RMCERTDistressBeaconComponent> beacon, EntityUid user, string reason)
+    {
+        reason = reason.Trim();
 
-        if (source == RMCERTRequestSource.Handheld)
-            UpdateSourceVisual(request, true);
+        if (beacon.Comp.Spent)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-spent"), beacon, user, PopupType.MediumCaution);
+            return;
+        }
 
-        _popup.PopupEntity(GetRequestSuccessText(sourceEntity, source), sourceEntity, requester, PopupType.Medium);
-        DirtyState(request);
+        if (_timing.CurTime < beacon.Comp.LastUsed + beacon.Comp.Cooldown)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-cooldown"), beacon, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (beacon.Comp.ReasonRequired && string.IsNullOrWhiteSpace(reason))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-ert-popup-beacon-reason-required"), beacon, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!TryGetHandheldAvailableCalls(beacon, user, reason, out var calls, out var error))
+        {
+            _popup.PopupEntity(error, beacon, user, PopupType.MediumCaution);
+            return;
+        }
+
+        beacon.Comp.LastUsed = _timing.CurTime;
+
+        var result = CreateRequest(new RMCERTCreateRequestArgs
+        {
+            Source = RMCERTRequestSource.Handheld,
+            SourceEntity = beacon,
+            Requester = user,
+            Reason = reason,
+            AllowedCalls = calls,
+            AllowRandomSelection = true,
+            AllowSpecificSelection = true,
+        });
+
+        if (!result.Success && !string.IsNullOrWhiteSpace(result.Error))
+            _popup.PopupEntity(result.Error, beacon, user, PopupType.MediumCaution);
     }
 
     private void OnAdminPermsChanged(AdminPermsChangedEventArgs args)
@@ -2214,10 +2335,10 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         request.NextAutoLaunchAttempt = _timing.CurTime + TimeSpan.FromSeconds(1);
-        return TryLaunch(id, null, true);
+        return TryLaunch(id, null, null, true);
     }
 
-    private bool TryLaunch(Guid id, EntityUid? admin, bool automatic)
+    private bool TryLaunch(Guid id, EntityUid? admin, string? adminName, bool automatic)
     {
         if (!_requests.TryGetValue(id, out var request))
             return false;
@@ -2245,7 +2366,7 @@ public sealed class RMCERTSystem : EntitySystem
                 AddERTRequestLog(LogImpact.Low,
                     "launch blocked",
                     request,
-                    GetAdminActorText(admin),
+                    GetAdminActorText(admin, adminName),
                     call,
                     $"error=\"{FormatLogValue(request.LastError)}\"");
             }
@@ -2255,9 +2376,7 @@ public sealed class RMCERTSystem : EntitySystem
 
         var launcher = automatic
             ? Loc.GetString("rmc-ert-launcher-automatic")
-            : admin is { Valid: true }
-                ? ToPrettyString(admin.Value)
-                : Loc.GetString("rmc-ert-admin-actor-server");
+            : GetAdminActorText(admin, adminName);
 
         return TryLaunchRequest(request, call, launcher);
     }
@@ -2417,7 +2536,7 @@ public sealed class RMCERTSystem : EntitySystem
         var total = 0;
         foreach (var id in request.AllowedCalls)
         {
-            if (!_prototypes.TryIndex(id, out var call))
+            if (!_prototypes.TryIndex(id, out var call, false))
                 continue;
 
             if (!call.Enabled || call.RandomWeight <= 0)
@@ -2732,6 +2851,28 @@ public sealed class RMCERTSystem : EntitySystem
         }
 
         return Loc.GetString("rmc-ert-success-console");
+    }
+
+    private string GetRequestSourceName(RMCERTRequestSource source, EntityUid? sourceEntity, string fallbackName)
+    {
+        if (!string.IsNullOrWhiteSpace(fallbackName))
+            return fallbackName.Trim();
+
+        if (sourceEntity is { Valid: true } entity && Exists(entity))
+            return Name(entity);
+
+        return RMCERTLoc.GetSource(source);
+    }
+
+    private string GetRequestRequesterName(RMCERTRequestSource source, EntityUid? requester, string fallbackName)
+    {
+        if (!string.IsNullOrWhiteSpace(fallbackName))
+            return fallbackName.Trim();
+
+        if (requester is { Valid: true } entity && Exists(entity))
+            return Name(entity);
+
+        return RMCERTLoc.GetSource(source);
     }
 
     private string GetRequestSourceLabel(RMCERTRequest request)
@@ -3111,6 +3252,33 @@ public sealed class RMCERTSystem : EntitySystem
     private static string FormatNullable(object? value)
     {
         return value?.ToString() ?? "null";
+    }
+
+    private static RMCERTRequestResult ResultSuccess(RMCERTRequest request)
+    {
+        return new RMCERTRequestResult(true, request.Id, request.State, request.LastError, request.LastWarning);
+    }
+
+    private static RMCERTRequestResult ResultFailure(
+        Guid requestId,
+        RMCERTRequestState? state,
+        string error,
+        string warning = "")
+    {
+        return new RMCERTRequestResult(false, requestId, state, error, warning);
+    }
+
+    private RMCERTRequestResult RequestUnavailable(Guid id)
+    {
+        if (_requests.TryGetValue(id, out var request))
+            return ResultFailure(id, request.State, $"ERT request {id} is not pending or available.", request.LastWarning);
+
+        return ResultFailure(id, null, $"Unknown ERT request: {id}");
+    }
+
+    private static RMCERTRequestResult RequestTerminal(RMCERTRequest request)
+    {
+        return ResultFailure(request.Id, request.State, $"ERT request {request.Id} is already terminal.");
     }
 
     private void DirtyState()

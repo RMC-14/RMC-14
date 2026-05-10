@@ -67,33 +67,65 @@ public sealed class RMCERTAdminEui : BaseEui
                 StateDirty();
                 break;
             case RMCERTAdminApproveRandomMsg approve:
-                _ert.ApproveRandom(approve.Request, admin);
+                _ert.ApproveRequest(new RMCERTApproveRequestArgs
+                {
+                    Request = approve.Request,
+                    Actor = admin,
+                    ActorName = Player.Name,
+                });
                 StateDirty();
                 break;
             case RMCERTAdminApproveSpecificMsg approve:
-                _ert.ApproveSpecific(approve.Request, approve.Call, admin);
+                _ert.ApproveRequest(new RMCERTApproveRequestArgs
+                {
+                    Request = approve.Request,
+                    Call = approve.Call,
+                    Actor = admin,
+                    ActorName = Player.Name,
+                });
                 StateDirty();
                 break;
             case RMCERTAdminDenyMsg deny:
-                _ert.Deny(deny.Request, admin);
+                _ert.DenyRequest(new RMCERTRequestActionArgs
+                {
+                    Request = deny.Request,
+                    Actor = admin,
+                    ActorName = Player.Name,
+                });
                 StateDirty();
                 break;
             case RMCERTAdminCancelMsg cancel:
-                _ert.Cancel(cancel.Request, admin);
+                _ert.CancelRequest(new RMCERTRequestActionArgs
+                {
+                    Request = cancel.Request,
+                    Actor = admin,
+                    ActorName = Player.Name,
+                });
                 StateDirty();
                 break;
             case RMCERTAdminLaunchMsg launch:
-                _ert.Launch(launch.Request, admin);
+                _ert.LaunchRequest(new RMCERTRequestActionArgs
+                {
+                    Request = launch.Request,
+                    Actor = admin,
+                    ActorName = Player.Name,
+                });
                 StateDirty();
                 break;
             case RMCERTAdminForceCallMsg force:
                 if (!CanForceCalls())
                     return;
 
-                if (!_ert.ForceCall(force.Call, admin, Player.Name, force.Reason, out _, out var error) &&
-                    !string.IsNullOrWhiteSpace(error))
+                var result = _ert.ForceCall(new RMCERTForceCallArgs
                 {
-                    _chat.DispatchServerMessage(Player, error);
+                    Call = force.Call,
+                    Actor = admin,
+                    ActorName = Player.Name,
+                    Reason = force.Reason,
+                });
+                if (!result.Success && !string.IsNullOrWhiteSpace(result.Error))
+                {
+                    _chat.DispatchServerMessage(Player, result.Error);
                 }
 
                 StateDirty();

@@ -27,14 +27,21 @@ public sealed class RMCERTAdminForceCallCommand : LocalizedCommands
         var admin = shell.Player?.AttachedEntity;
         var adminName = shell.Player?.Name;
         var ert = _entities.System<RMCERTSystem>();
-        if (!ert.ForceCall(args[0], admin, adminName, reason, out var requestId, out var error))
+        var result = ert.ForceCall(new RMCERTForceCallArgs
         {
-            shell.WriteError(error);
+            Call = args[0],
+            Actor = admin,
+            ActorName = adminName,
+            Reason = reason,
+        });
+        if (!result.Success)
+        {
+            shell.WriteError(result.Error);
             return;
         }
 
         shell.WriteLine(Loc.GetString("rmc-ert-admin-command-force-success",
-            ("id", requestId),
+            ("id", result.RequestId),
             ("call", args[0])));
     }
 
@@ -43,7 +50,11 @@ public sealed class RMCERTAdminForceCallCommand : LocalizedCommands
         if (args.Length == 1)
         {
             var options = _entities.System<RMCERTSystem>()
-                .GetForceCallOptions()
+                .GetCallOptions(new RMCERTCallQueryArgs
+                {
+                    EnabledOnly = true,
+                    AdminSelectableOnly = true,
+                })
                 .Select(c => c.Id);
             return CompletionResult.FromHintOptions(options, Loc.GetString("rmc-ert-admin-command-force-call-hint"));
         }
