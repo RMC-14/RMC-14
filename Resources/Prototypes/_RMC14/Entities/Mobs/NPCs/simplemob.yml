@@ -89,7 +89,7 @@
 
 - type: entity
   parent: RMCSimpleMob
-  id: RMCRodent # required for all our code to not blow up, yes, it is pretty much just a 1-1 copy past of upstream mouse code
+  id: RMCRodent # required for all our code to not blow up, yes, it is pretty much just a 1-1 copy paste of upstream mouse code
   name: Abstract rodent
   abstract: true
   suffix: CM
@@ -202,7 +202,7 @@
   abstract: true
   components:
   - type: CombatMode
-  - type: Inventory
+  - type: Inventory #placeholder until the monkey equipped sprites are ported
     templateId: monkey
     speciesId: monkey
   - type: Deathgasp
@@ -276,10 +276,10 @@
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Monkey_burning
-  - type: MobThresholds # CM13 uses damage multipliers instead of setting a unique health for em. All small hosts use a 1.5 brute and burn mult so just doing this instead.
+  - type: MobThresholds # CM13 uses damage multipliers instead of setting a unique health for em. All small hosts use a 1.5 brute and burn mult so just doing this instead
     thresholds:
       0: Alive
-      100: Critical # They get a crit state, not parity, just for anti code reasonance cascadey reasons
+      120: Critical # They get a crit state, not parity, just for anti code reasonance cascadey reasons
       130: Dead
   - type: MeleeWeapon # TODO: give them a secondary attack method which is bite. Parity
     soundHit:

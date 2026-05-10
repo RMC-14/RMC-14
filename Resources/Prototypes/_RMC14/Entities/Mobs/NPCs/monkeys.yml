@@ -46,6 +46,9 @@
     - map: ["enum.DamageStateVisualLayers.Base"]
       sprite: _RMC14/Mobs/Animals/monkeys/kobold.rsi
       state: kobold
+    - map: [enum.HumanoidVisualLayers.Eyes]
+      sprite: _RMC14/Mobs/Animals/monkeys/kobold.rsi
+      state: eyes
     - map: [ "horns" ]
       sprite: Mobs/Customization/reptilian_parts.rsi
       state: horns_short
@@ -280,7 +283,55 @@
     id: CMSpawnMobMonkey
     prototypes:
     - CMMobSmallHostMonkey
-#    - CMMobSmallHostKobold
-#    - RMCMobSmallHostFarwa
-#    - RMCMobSmallHostNeaera
-#    - RMCMobSmallHostStok
+
+- type: entity
+  parent: CMSpawnMobMonkey
+  id: RMCSpawnMobKobold
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: CMSpawnMobKobold
+    prototypes:
+    - CMMobSmallHostKobold
+
+- type: entity
+  parent: CMSpawnMobMonkey
+  id: RMCSpawnMobFarwa
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: CMSpawnMobFarwa
+    prototypes:
+    - RMCMobSmallHostFarwa
+
+- type: entity
+  parent: CMSpawnMobMonkey
+  id: RMCSpawnMobNeaera
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: CMSpawnMobNeaera
+    prototypes:
+    - RMCMobSmallHostNeaera
+
+- type: entity
+  parent: CMSpawnMobMonkey
+  id: RMCSpawnMobStok
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: CMSpawnMobStok
+    prototypes:
+    - CMMobSmallHostStok
