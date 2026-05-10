@@ -137,7 +137,7 @@
     - RMCMagazineSMGMAC15Ext
 
 - type: entity
-  parent: CMCartridge9mmSMG
+  parent: CMCartridge10x20mm
   id: RMCCartridge9mmSMGMAC15
   description: A 9mm cartridge for the mac-15 submachinegun.
   components:

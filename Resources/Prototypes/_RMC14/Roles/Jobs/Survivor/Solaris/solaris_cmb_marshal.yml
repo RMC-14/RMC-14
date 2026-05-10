@@ -62,8 +62,8 @@
     outerClothing: RMCArmorM4RLight
     eyes: CMGlassesSecurity
     head: RMCHeadCapBureau
-    suitstorage: RMCWeaponSMGMP5Alt
-    belt: CMBeltMarineMP5
+    suitstorage: RMCWeaponSMGPCAC5A5
+    belt: RMCBeltMarinePCAC5
     back: RMCSatchelSecuritySurvivorFillCMBMarshal
     gloves: RMCHandsVeteran # TODO RMC14: swat gloves
     shoes: CMBootsBlackFilled
