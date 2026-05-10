@@ -77,7 +77,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public int ScuttleMaxReactors = 18;
 
     [DataField]
-    public TimeSpan ScuttleFinalSequenceDelay = TimeSpan.FromSeconds(8);
+    public TimeSpan ScuttleFinalSequenceDelay = TimeSpan.FromSeconds(15);
 
     [DataField]
     public ProtoId<JobPrototype> QueenJob = "CMXenoQueen";

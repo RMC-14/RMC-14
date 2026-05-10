@@ -105,6 +105,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
         rule.ScuttleFinalSequenceStarted = true;
         rule.ScuttleFinalDetonateAt = Timing.CurTime + rule.ScuttleFinalSequenceDelay;
+        RaiseNetworkEvent(new RMCScuttleCinematicEvent(rule.ScuttleFinalSequenceDelay), Filter.Broadcast());
 
         _marineAnnounce.AnnounceARESStaging(
             default,
