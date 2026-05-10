@@ -1,0 +1,56 @@
+﻿- type: entity
+  parent: RMCWeaponSMGPCAC5A4
+  id: RMCWeaponSMGPCAC5SD
+  name: PCAC5SD submachine gun
+  description: A Pistol-Caliber Automatic Carbine, Model 5 - a timeless classic. The PCAC5 Schalldampfer variant features a collapsible stock and integral suppressor.
+  suffix: PVE, Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/pcac5.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/pcac5.rsi
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        locked: true
+        startingAttachable: RMCAttachmentSuppressorPCAC5
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressorPCAC5
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentBipod
+          - RMCAttachmentM203GrenadeLauncher
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentStockPCAC5Collapsible
+        whitelist:
+          tags:
+          - RMCAttachmentStockPCAC5Collapsible
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.25, 0
+      rmc-aslot-rail: -0.16, 0.09
+      rmc-aslot-underbarrel: 0.28, -0.37
+      rmc-aslot-stock: -0.5, 0

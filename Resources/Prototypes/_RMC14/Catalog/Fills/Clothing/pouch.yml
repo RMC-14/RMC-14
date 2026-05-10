@@ -77,12 +77,12 @@
 # Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
-  id: RMCPouchMagazineFilledMP5
-  suffix: Filled, MP5
+  id: RMCPouchMagazineFilledPCAC5
+  suffix: Filled, PCAC5
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGMP5
+    - id: RMCMagazineSMGPCAC5
       amount: 3
 
 - type: entity
@@ -128,12 +128,12 @@
 # Large Magazine Pouch
 - type: entity
   parent: RMCPouchMagazineLarge
-  id: RMCPouchMagazineLargeMP5
-  suffix: Filled, MP5
+  id: RMCPouchMagazineLargePCAC5
+  suffix: Filled, PCAC5
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGMP5
+    - id: RMCMagazineSMGPCAC5
       amount: 4
 
 - type: entity

@@ -54,6 +54,24 @@
     },
     {
       "name": "l49-stock"
+    },
+    {
+      "name": "pcac_collapsible"
+    },
+    {
+      "name": "pcac_collapsible_a"
+    },
+    {
+      "name": "pcac_collapsible-on"
+    },
+    {
+      "name": "pcac_collapsible_a-on"
+    },
+    {
+      "name": "pcac_solid"
+    },
+    {
+      "name": "pcac_solid_a"
     }
   ]
 }
