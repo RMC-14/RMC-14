@@ -371,6 +371,50 @@
 
 - type: entity
   parent: RMCCrateBase
+  id: RMCCrateFoodcart
+  name: food cart
+  description: A heavy, metal foodcart with wheels.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/Foodcarts/foodcart.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/Foodcarts/foodcart.rsi
+
+- type: entity
+  parent: RMCCrateFoodcart
+  id: RMCCrateFoodcartEmpty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/Foodcarts/foodcartempty.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/Foodcarts/foodcartempty.rsi
+
+- type: entity
+  parent: RMCCrateBase
   id: RMCCratePlastic
   name: plastic crate
   description: A rectangular plastic crate.

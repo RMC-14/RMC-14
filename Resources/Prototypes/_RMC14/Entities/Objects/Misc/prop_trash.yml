@@ -21,7 +21,7 @@
 - type: entity
   parent: RMCPropTrashFull
   id: RMCPropCuppaJoeLid
-  name: coffee cup lid
+  name: The Daily Grind coffee cup lid
   description: A lid from a disposable coffee cup. It's made of plastic and has a small hole for sipping.
   components:
   - type: Sprite
@@ -30,9 +30,26 @@
 - type: entity
   parent: RMCPropTrashFull
   id: RMCPropCuppaJoeNoLid
-  name: empty The Daily Grind cup
+  name: empty The Daily Grind coffee cup
   description: An empty disposable coffee cup from The Daily Grind. It has a small hole at the bottom, so it's not very useful for holding liquids anymore.
   components:
   - type: Sprite
     state: coffeecuppajoenolid
 
+- type: entity
+  parent: RMCPropTrashFull
+  id: RMCPropCuppaJoeNoLidStack
+  name: empty The Daily Grind cup stack
+  description: A stack of empty disposable coffee cups from The Daily Grind.
+  components:
+  - type: Sprite
+    state: coffeecuppajoestacknolid
+
+- type: entity
+  parent: RMCPropTrashFull
+  id: RMCPropCuppaJoeLidStack
+  name: The Daily Grind coffee cup lid stack
+  description: A stack of coffee cup lids from The Daily Grind.
+  components:
+  - type: Sprite
+    state: coffeecuppajoelidstack

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/tables_64x64.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/tables_64x64.dmi, blackmetaltable modified by @IceNoobXD on Github",
   "size": {
     "x": 64,
     "y": 64
@@ -18,6 +18,15 @@
     },
     {
       "name": "table_cards2"
+    },
+    {
+      "name": "blackmetaltable_computer"
+    },
+    {
+      "name": "blackmetaltable_computer1"
+    },
+    {
+      "name": "blackmetaltable"
     }
   ]
 }

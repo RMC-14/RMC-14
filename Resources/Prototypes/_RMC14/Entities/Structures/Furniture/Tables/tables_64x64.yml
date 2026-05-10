@@ -76,3 +76,45 @@
     sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
     state: table_pool2
     offset: 0.5, 0.5
+
+- type: entity
+  parent: RMCTablePoolTable
+  id: RMCTableLargeMetalTableComputer
+  name: large metal table
+  description: A large metal table, perfect for heavy-duty work or dining.
+  suffix: Computer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
+    state: blackmetaltable_computer
+    offset: 0.5, 0.5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,1.5,0.5"
+        density: 55
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+
+- type: entity
+  parent: RMCTableLargeMetalTableComputer
+  id: RMCTableLargeMetalTableComputer1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
+    state: blackmetaltable_computer1
+    offset: 0.5, 0.5
+
+- type: entity
+  parent: RMCTableLargeMetalTableComputer
+  id: RMCTableLargeMetalTable
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/tables_64x64.rsi
+    state: blackmetaltable
+    offset: 0.5, 0.5

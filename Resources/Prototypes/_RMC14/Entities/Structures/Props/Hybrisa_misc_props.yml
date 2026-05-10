@@ -162,3 +162,90 @@
         density: 190
         layer:
         - MobMask
+
+- type: entity
+  parent: RMCPropBaseUnbreakable
+  id: RMCPropDropshipdamage
+  name: dropship damage
+  description: The engine appears to have severe damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/dropshipdamage.rsi
+    state: dropshipdamage
+    offset: 0.5, 0.0
+  - type: PointLight
+    radius: 1.5
+    energy: 1.5
+    color: "#FF6A00"
+    softness: 1.0
+    offset: 0.5, 0.0
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropSlotmachinebroken
+  name: slot machine
+  suffix: broken
+  description: Looks like the house lost... a machine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: slotmachine_broken
+    offset: 0.7, 0.5
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.5,0.3,0.5"
+        density: 55
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Transform
+    anchored: false
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: RMCPropSlotmachinebroken
+  id: RMCPropSlotmachineIdle
+  name: slot machine
+  suffix: idle, prop
+  description: A fast way to lose all of your money, but hey, atleast you had fun while doing so, right?
+  components:
+  - type: Sprite
+    state: slotmachine_idle
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropHybrisaPole
+  name: pole
+  description: For all of your 'pole' related activities.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: pole
+  - type: Transform
+    anchored: false

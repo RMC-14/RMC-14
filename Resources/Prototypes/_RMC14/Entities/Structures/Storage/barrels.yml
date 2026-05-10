@@ -143,3 +143,20 @@
   components:
   - type: Sprite
     state: barrel_tan
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelFire
+  name: barrel
+  suffix: fire
+  description: A burning barrel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_misc_props/64x64.rsi
+    state: fire_barrel
+    offset: 0.73, 0.5
+  - type: PointLight
+    radius: 4.0
+    energy: 1.5
+    color: "#FF6A00"
+    softness: 1.0
