@@ -1,8 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 // RMC14
-using Content.Client._RMC14.Language;
-// RMC14
 using Content.Client.Chat.Managers;
+using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Chat;
@@ -14,13 +14,13 @@ using Robust.Client.GameObjects;
 // RMC14
 using Robust.Client.Graphics;
 // RMC14
-using Robust.Client.ResourceManagement;
-// RMC14
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
 // RMC14
 using Robust.Shared.IoC;
+// RMC14
+using Robust.Shared.Prototypes;
 // RMC14
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -269,25 +269,16 @@ namespace Content.Client.Chat.UI
             {
                 // RMC14
                 var container = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
-                if (!string.IsNullOrEmpty(message.LanguageIcon))
+                if (TryGetLanguageIcon(message, out var iconTexture))
                 {
-                    var spriteSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SpriteSystem>();
-                    var iconTexture = LanguageIconLoader.Load(
-                        IoCManager.Resolve<IResourceCache>(),
-                        spriteSystem,
-                        message.LanguageIcon);
-
-                    if (iconTexture != null)
+                    var textureRect = new TextureRect
                     {
-                        var textureRect = new TextureRect
-                        {
-                            Texture = iconTexture,
-                            TextureScale = Vector2.One * 0.5f,
-                            VerticalAlignment = VAlignment.Center,
-                            Margin = new Thickness(0, 0, 4, 0)
-                        };
-                        container.AddChild(textureRect);
-                    }
+                        Texture = iconTexture,
+                        TextureScale = Vector2.One * 0.5f,
+                        VerticalAlignment = VAlignment.Center,
+                        Margin = new Thickness(0, 0, 4, 0)
+                    };
+                    container.AddChild(textureRect);
                 }
 
                 var label = new RichTextLabel
@@ -329,25 +320,16 @@ namespace Content.Client.Chat.UI
             //We'll be honest. *Yes* this is hacky. Doing this in a cleaner way would require a bottom-up refactor of how saycode handles sending chat messages. -Myr
             // RMC14
             var headerContainer = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
-            if (!string.IsNullOrEmpty(message.LanguageIcon))
+            if (TryGetLanguageIcon(message, out var headerIcon))
             {
-                var spriteSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SpriteSystem>();
-                var headerIcon = LanguageIconLoader.Load(
-                    IoCManager.Resolve<IResourceCache>(),
-                    spriteSystem,
-                    message.LanguageIcon);
-
-                if (headerIcon != null)
+                var iconTexture = new TextureRect
                 {
-                    var iconTexture = new TextureRect
-                    {
-                        Texture = headerIcon,
-                        TextureScale = Vector2.One * 0.5f,
-                        VerticalAlignment = VAlignment.Center,
-                        Margin = new Thickness(0, 0, 4, 0)
-                    };
-                    headerContainer.AddChild(iconTexture);
-                }
+                    Texture = headerIcon,
+                    TextureScale = Vector2.One * 0.5f,
+                    VerticalAlignment = VAlignment.Center,
+                    Margin = new Thickness(0, 0, 4, 0)
+                };
+                headerContainer.AddChild(iconTexture);
             }
 
             bubbleHeader.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleHeader", fontColor));
@@ -384,6 +366,25 @@ namespace Content.Client.Chat.UI
             };
 
             return panel;
+        }
+
+        private static bool TryGetLanguageIcon(ChatMessage message, [NotNullWhen(true)] out Texture? texture)
+        {
+            texture = null;
+
+            if (string.IsNullOrEmpty(message.LanguageIcon))
+                return false;
+
+            var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+            if (!prototypeManager.TryIndex<LanguagePrototype>(message.LanguageIcon, out var prototype) ||
+                prototype.LanguageIcon is not { } icon)
+            {
+                return false;
+            }
+
+            var spriteSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SpriteSystem>();
+            texture = spriteSystem.Frame0(icon);
+            return true;
         }
     }
 }

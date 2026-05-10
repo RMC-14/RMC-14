@@ -50,7 +50,7 @@ public sealed partial class LanguagePrototype : IPrototype
     public bool ShowLanguageIcon { get; set; } = true;
 
     [DataField]
-    public string? LanguageIcon;
+    public SpriteSpecifier? LanguageIcon;
 
     [DataField]
     public bool CanUseRadio { get; set; } = true;
@@ -112,7 +112,7 @@ public sealed partial class LanguagePrototype : IPrototype
     public string LocalizedName => Loc.GetString($"language-{ID}-name");
     public string ChatName => Loc.GetString($"chat-language-{ID}-name");
     public string LocalizedDescription => Loc.GetString($"language-{ID}-description");
-    public string? DisplayedLanguageIcon => ShowLanguageIcon ? LanguageIcon : null;
+    public string? DisplayedLanguageIcon => ShowLanguageIcon ? ID : null;
 }
 
 [DataDefinition]

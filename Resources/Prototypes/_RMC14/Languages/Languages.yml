@@ -8,7 +8,9 @@
   boldTypefaceId: null
   showLanguageName: false
   showLanguageIcon: false
-  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/GB.png"
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: GB
   canUseRadio: true
   needsSpeech: true
   expectedVocabularySize: 150
@@ -33,7 +35,9 @@
   typefaceId: null
   textSize: null
   boldTypefaceId: null
-  languageIcon: "/Textures/_RMC14/Actions/xeno_actions.rsi/queen_word.png"
+  languageIcon:
+    sprite: /Textures/_RMC14/Actions/xeno_actions.rsi
+    state: queen_word
   canUseRadio: true
   needsSpeech: true
   showLanguageIcon: false
@@ -66,7 +70,9 @@
   textSize: null
   boldTypefaceId: null
   showLanguageName: true
-  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/FR.png"
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: FR
   canUseRadio: true
   needsSpeech: true
   expectedVocabularySize: 120
@@ -92,7 +98,9 @@
   textSize: null
   boldTypefaceId: null
   showLanguageName: true
-  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/ES.png"
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: ES
   canUseRadio: true
   needsSpeech: true
   expectedVocabularySize: 120
@@ -118,7 +126,9 @@
   textSize: null
   boldTypefaceId: null
   showLanguageName: true
-  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/JP.png"
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: JP
   canUseRadio: true
   needsSpeech: true
   expectedVocabularySize: 140
@@ -144,7 +154,9 @@
   textSize: null
   boldTypefaceId: null
   showLanguageName: true
-  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/CN.png"
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: CN
   canUseRadio: true
   needsSpeech: true
   expectedVocabularySize: 140
@@ -170,7 +182,9 @@
   textSize: null
   boldTypefaceId: null
   showLanguageName: true
-  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/RU.png"
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: RU
   canUseRadio: true
   needsSpeech: true
   expectedVocabularySize: 130
@@ -196,7 +210,9 @@
   textSize: null
   boldTypefaceId: DefaultBoldItalic
   showLanguageName: true
-  languageIcon: "/Textures/_RMC14/Interface/flags.rsi/DE.png"
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: DE
   canUseRadio: true
   needsSpeech: true
   expectedVocabularySize: 125
@@ -242,7 +258,9 @@
   textSize: null
   boldTypefaceId: null
   showLanguageName: true
-  languageIcon: "/Textures/Mobs/Animals/monkey.rsi/monkey.png"
+  languageIcon:
+    sprite: /Textures/Mobs/Animals/monkey.rsi
+    state: monkey
   canUseRadio: true
   needsSpeech: true
   expectedVocabularySize: 40

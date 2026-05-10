@@ -1,15 +1,15 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using JetBrains.Annotations;
-using Content.Client._RMC14.Language;
+using Content.Shared._RMC14.Language.Prototypes;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
 using Robust.Shared.IoC;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Chat;
@@ -18,28 +18,23 @@ namespace Content.Client._RMC14.Chat;
 public sealed class LanguageIconTag : IMarkupTagHandler
 {
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public string Name => "langicon";
 
     public bool TryCreateControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
     {
-        if (!node.Attributes.TryGetValue("path", out var pathParameter) ||
-            !pathParameter.TryGetString(out var path))
+        if (!node.Attributes.TryGetValue("language", out var languageParameter) ||
+            !languageParameter.TryGetString(out var language) ||
+            !_prototypeManager.TryIndex<LanguagePrototype>(language, out var prototype) ||
+            prototype.LanguageIcon is not { } icon)
         {
             control = null;
             return false;
         }
 
         var spriteSystem = _entitySystemManager.GetEntitySystem<SpriteSystem>();
-        var texture = LanguageIconLoader.Load(_resourceCache, spriteSystem, path);
-        if (texture == null)
-        {
-            control = null;
-            return false;
-        }
-
-        control = new LanguageIconControl(texture);
+        control = new LanguageIconControl(spriteSystem.Frame0(icon));
 
         return true;
     }
