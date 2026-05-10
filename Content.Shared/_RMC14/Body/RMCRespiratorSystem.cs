@@ -53,24 +53,23 @@ public sealed class RMCRespiratorSystem : EntitySystem
             if (HasComp<CMInStasisComponent>(uid))
                 continue;
 
-            if (HasComp<SynthComponent>(uid))
-                continue;
-
             ProcessBreath((uid, respirator));
         }
     }
 
-    /// <summary>
-    ///     Processes a single breath cycle for the entity.
-    ///     Runs once per <see cref="RMCRespiratorComponent.BreathInterval"/>.
-    /// </summary>
     private void ProcessBreath(Entity<RMCRespiratorComponent> ent)
     {
+        if (!ent.Comp.CanBreathe)
+            return;
+
         if (_rmcBloodstream.TryGetChemicalSolution(ent, out _, out var chemicals)
             && chemicals.GetTotalPrototypeQuantity(Lexorin) > FixedPoint2.Zero)
         {
             return;
         }
+
+        if (HasComp<SynthComponent>(ent))
+            return;
 
         if (ent.Comp.LoseBreath > 0)
         {

@@ -18,6 +18,9 @@ public sealed partial class RMCRespiratorComponent : Component
     [DataField, AutoNetworkedField]
     public FixedPoint2 BreathHealAmount = 2;
 
+    [DataField, AutoNetworkedField]
+    public bool CanBreathe = true;
+
     // One breath every 3 life_ticks. One life_tick takes 2 seconds.
     [DataField, AutoNetworkedField]
     public TimeSpan BreathInterval = TimeSpan.FromSeconds(6);
