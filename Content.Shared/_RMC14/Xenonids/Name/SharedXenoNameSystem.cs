@@ -19,7 +19,6 @@ public abstract class SharedXenoNameSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedRMCPlayTimeManager _rmcPlaytime = default!;
 
     private const string DefaultPrefix = "XX";
