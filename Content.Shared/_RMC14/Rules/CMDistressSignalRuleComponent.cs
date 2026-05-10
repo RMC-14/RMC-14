@@ -64,6 +64,18 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? ScuttleFinalDetonateAt;
 
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? ScuttleFinalStartedAt;
+
+    [DataField]
+    public bool ScuttleFinalMeltdownAnnounced;
+
+    [DataField]
+    public bool ScuttleFinalNuclearSoundPlayed;
+
+    [DataField]
+    public bool ScuttleFinalCinematicStarted;
+
     [DataField]
     public TimeSpan ScuttleUnlockDelay = TimeSpan.FromSeconds(15);
 
@@ -75,6 +87,15 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public int ScuttleMaxReactors = 18;
+
+    [DataField]
+    public TimeSpan ScuttleFinalMeltdownDelay = TimeSpan.FromSeconds(7);
+
+    [DataField]
+    public TimeSpan ScuttleFinalNuclearSoundDelay = TimeSpan.FromSeconds(12);
+
+    [DataField]
+    public TimeSpan ScuttleFinalCinematicDelay = TimeSpan.FromSeconds(22);
 
     [DataField]
     public TimeSpan ScuttleFinalSequenceDelay = TimeSpan.FromSeconds(15);

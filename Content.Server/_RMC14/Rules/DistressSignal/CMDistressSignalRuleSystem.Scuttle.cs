@@ -2,10 +2,12 @@ using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Rules;
+using Content.Shared.Chat;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Rules.DistressSignal;
 
@@ -21,11 +23,26 @@ public sealed partial class CMDistressSignalRuleSystem
     private const int ScuttleFinalShakeIntensity = 12;
     private const int ScuttleStageShakeDuration = 2;
     private const int ScuttleFinalShakeDuration = 5;
+    private const int ScuttleMeltdownShakeIntensity = 4;
+    private const int ScuttleMeltdownShakeDuration = 20;
+    private const int ScuttleNuclearShakeIntensity = 4;
+    private const int ScuttleNuclearShakeDuration = 110;
 
     private static readonly EntProtoId ScuttleFire = "RMCTileFire";
     private static readonly SoundSpecifier ScuttleStageSound = new SoundPathSpecifier("/Audio/Machines/warning_buzzer.ogg");
-    private static readonly SoundSpecifier ScuttleFinalSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Nuke/nuke.ogg");
     private static readonly SoundSpecifier ScuttleDetonationSound = new SoundPathSpecifier("/Audio/Effects/explosionfar.ogg");
+    private static readonly SoundSpecifier ScuttleNoticeSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
+    private static readonly SoundSpecifier[] ScuttleCreakSounds =
+    [
+        new SoundPathSpecifier("/Audio/_RMC14/Scuttle/creak1.ogg"),
+        new SoundPathSpecifier("/Audio/_RMC14/Scuttle/creak2.ogg"),
+        new SoundPathSpecifier("/Audio/_RMC14/Scuttle/creak3.ogg"),
+    ];
+    private static readonly SoundSpecifier[] ScuttleNuclearDetonationSounds =
+    [
+        new SoundPathSpecifier("/Audio/_RMC14/Scuttle/nuclear_detonation1.ogg"),
+        new SoundPathSpecifier("/Audio/_RMC14/Scuttle/nuclear_detonation2.ogg"),
+    ];
 
     private bool UpdateScuttle(CMDistressSignalRuleComponent rule, float frameTime)
     {
@@ -44,16 +61,7 @@ public sealed partial class CMDistressSignalRuleSystem
             return false;
 
         if (rule.ScuttleFinalSequenceStarted)
-        {
-            if (rule.ScuttleFinalDetonateAt is { } detonateAt &&
-                time >= detonateAt)
-            {
-                DetonateScuttle(rule);
-                return true;
-            }
-
-            return false;
-        }
+            return UpdateScuttleFinalSequence(rule);
 
         var overloaded = CountOverloadedScuttleReactors();
         if (overloaded <= 0)
@@ -104,23 +112,107 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         rule.ScuttleFinalSequenceStarted = true;
-        rule.ScuttleFinalDetonateAt = Timing.CurTime + rule.ScuttleFinalSequenceDelay;
-        RaiseNetworkEvent(new RMCScuttleCinematicEvent(rule.ScuttleFinalSequenceDelay), Filter.Broadcast());
+        rule.ScuttleFinalStartedAt = Timing.CurTime;
+        rule.ScuttleFinalDetonateAt = Timing.CurTime +
+                                      NonNegative(rule.ScuttleFinalCinematicDelay) +
+                                      NonNegative(rule.ScuttleFinalSequenceDelay);
 
         _marineAnnounce.AnnounceARESStaging(
             default,
             Loc.GetString("rmc-distress-signal-scuttle-final"),
-            ScuttleFinalSound,
+            ScuttleStageSound,
+            "rmc-announcement-ares-command");
+
+        AnnounceScuttleDeckCreak();
+        SpawnScuttleFireAroundOverloadedReactors(ScuttleFinalFireRange, ScuttleFinalFireIntensity, ScuttleFinalFireDuration);
+    }
+
+    private bool UpdateScuttleFinalSequence(CMDistressSignalRuleComponent rule)
+    {
+        var time = Timing.CurTime;
+        var startedAt = rule.ScuttleFinalStartedAt ?? time;
+        if (rule.ScuttleFinalStartedAt == null)
+            rule.ScuttleFinalStartedAt = startedAt;
+
+        var elapsed = time - startedAt;
+        if (!rule.ScuttleFinalMeltdownAnnounced &&
+            elapsed >= NonNegative(rule.ScuttleFinalMeltdownDelay))
+        {
+            rule.ScuttleFinalMeltdownAnnounced = true;
+            AnnounceScuttleRunawayMeltdown();
+        }
+
+        if (!rule.ScuttleFinalNuclearSoundPlayed &&
+            elapsed >= NonNegative(rule.ScuttleFinalNuclearSoundDelay))
+        {
+            rule.ScuttleFinalNuclearSoundPlayed = true;
+            PlayScuttleNuclearDetonationWarning();
+        }
+
+        if (!rule.ScuttleFinalCinematicStarted &&
+            elapsed >= NonNegative(rule.ScuttleFinalCinematicDelay))
+        {
+            rule.ScuttleFinalCinematicStarted = true;
+            RaiseNetworkEvent(new RMCScuttleCinematicEvent(NonNegative(rule.ScuttleFinalSequenceDelay)), Filter.Broadcast());
+        }
+
+        if (rule.ScuttleFinalDetonateAt is { } detonateAt &&
+            time >= detonateAt)
+        {
+            DetonateScuttle(rule);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void AnnounceScuttleDeckCreak()
+    {
+        var message = Loc.GetString("rmc-distress-signal-scuttle-deck-creak");
+        var sound = _random.Pick(ScuttleCreakSounds);
+
+        foreach (var map in GetAlmayerMapIds())
+        {
+            var filter = Filter.BroadcastMap(map);
+            _chatManager.ChatMessageToManyFiltered(
+                filter,
+                ChatChannel.Server,
+                message,
+                message,
+                _mapSystem.GetMapOrInvalid(map),
+                false,
+                true,
+                Color.Orange);
+            _audio.PlayGlobal(sound, filter, true);
+        }
+    }
+
+    private void AnnounceScuttleRunawayMeltdown()
+    {
+        _marineAnnounce.AnnounceARESStaging(
+            default,
+            Loc.GetString("rmc-distress-signal-scuttle-runaway-meltdown"),
+            ScuttleNoticeSound,
             "rmc-announcement-ares-command");
 
         foreach (var map in GetAlmayerMapIds())
         {
             var filter = Filter.BroadcastMap(map);
-            _audio.PlayGlobal(ScuttleFinalSound, filter, true);
-            _rmcCameraShake.ShakeCamera(filter, ScuttleFinalShakeIntensity, ScuttleFinalShakeDuration);
+            _rmcCameraShake.ShakeCamera(filter, ScuttleMeltdownShakeDuration, ScuttleMeltdownShakeIntensity);
         }
 
         SpawnScuttleFireAroundOverloadedReactors(ScuttleFinalFireRange, ScuttleFinalFireIntensity, ScuttleFinalFireDuration);
+    }
+
+    private void PlayScuttleNuclearDetonationWarning()
+    {
+        _audio.PlayGlobal(_random.Pick(ScuttleNuclearDetonationSounds), Filter.Broadcast(), true);
+
+        foreach (var map in GetAlmayerMapIds())
+        {
+            var filter = Filter.BroadcastMap(map);
+            _rmcCameraShake.ShakeCamera(filter, ScuttleNuclearShakeDuration, ScuttleNuclearShakeIntensity);
+        }
     }
 
     private void DetonateScuttle(CMDistressSignalRuleComponent rule)
@@ -129,10 +221,10 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         rule.ScuttleDetonated = true;
+        _audio.PlayGlobal(ScuttleDetonationSound, Filter.Broadcast(), true);
 
         foreach (var map in GetAlmayerMapIds())
         {
-            _audio.PlayGlobal(ScuttleDetonationSound, Filter.BroadcastMap(map), true);
             _rmcNuke.NukeMap(map);
         }
 
@@ -189,6 +281,11 @@ public sealed partial class CMDistressSignalRuleSystem
     private bool HasReachedScuttleProgress(CMDistressSignalRuleComponent rule, TimeSpan required, double fraction)
     {
         return required > TimeSpan.Zero && rule.ScuttleProgress.TotalSeconds / required.TotalSeconds >= fraction;
+    }
+
+    private static TimeSpan NonNegative(TimeSpan time)
+    {
+        return time < TimeSpan.Zero ? TimeSpan.Zero : time;
     }
 
     private void SpawnScuttleFireAroundOverloadedReactors(int range, int intensity, int duration)

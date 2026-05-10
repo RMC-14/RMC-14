@@ -46,5 +46,7 @@ rmc-distress-signal-scuttle-stage-one = Warning. Engine-core thermal output is r
 rmc-distress-signal-scuttle-halfway = Warning. Emergency scuttle sequence has reached projected halfway progression. Immediate reactor shutdown is advised if scuttle is no longer desired.
 rmc-distress-signal-scuttle-stage-two = Critical warning. Engine core superheat detected. Structural damage and localized fires are expected near overloaded reactors.
 rmc-distress-signal-scuttle-final = Final warning. Engine-core containment failure is imminent. UNS Almayer emergency scuttle sequence is irreversible.
+rmc-distress-signal-scuttle-deck-creak = The ship's deck worryingly creaks underneath you.
+rmc-distress-signal-scuttle-runaway-meltdown = ALERT: Fusion reactors dangerously overloaded. Runaway meltdown in reactor core imminent.
 
 rmc-xeno-announcement-scuttle-first-overload = The talls are overloading the metal hive's burning hearts. Stop them before the sky-hive tears itself apart.
