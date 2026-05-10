@@ -72,6 +72,8 @@ public sealed class XenoHudOverlay : Overlay
     private readonly ResPath _rsiPathSlow = new("/Textures/_RMC14/Effects/xeno_stomp.rsi");
     private readonly ResPath _rsiPathFreeze = new("/Textures/_RMC14/Effects/xeno_freeze.rsi");
 
+    private readonly int _maxDisplayRank = 6;
+
     public XenoHudOverlay()
     {
         IoCManager.InjectDependencies(this);
@@ -273,7 +275,7 @@ public sealed class XenoHudOverlay : Overlay
         var ranks = _entity.EntityQueryEnumerator<XenoRankComponent, SpriteComponent, TransformComponent>();
         while (ranks.MoveNext(out var uid, out var comp, out var sprite, out var xform))
         {
-            if (comp.Rank < 2 || comp.Rank > 6 || _xenoMaturingQuery.HasComp(uid))
+            if (comp.Rank < 2 || _xenoMaturingQuery.HasComp(uid))
                 continue;
 
             if (xform.MapID != args.MapId)
@@ -296,7 +298,9 @@ public sealed class XenoHudOverlay : Overlay
             var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
             handle.SetTransform(matrix);
 
-            var icon = new Rsi(_rsiPath, $"hudxenoupgrade{comp.Rank}");
+            var displayRank = Math.Min(comp.Rank, _maxDisplayRank);
+
+            var icon = new Rsi(_rsiPath, $"hudxenoupgrade{displayRank}");
             var texture = _sprite.GetFrame(icon, _timing.CurTime);
 
             var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
