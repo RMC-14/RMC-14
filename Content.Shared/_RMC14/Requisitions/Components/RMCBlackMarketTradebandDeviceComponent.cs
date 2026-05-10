@@ -19,6 +19,7 @@ public enum RMCBlackMarketTradebandLayers
 }
 
 [RegisterComponent, NetworkedComponent]
+[Access(typeof(SharedRequisitionsSystem))]
 public sealed partial class RMCBlackMarketTradebandDeviceComponent : Component
 {
     [DataField]

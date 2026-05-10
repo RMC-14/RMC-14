@@ -11,6 +11,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
@@ -19,13 +20,21 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Requisitions;
 
 public sealed partial class RequisitionsSystem
 {
-    private static readonly string SimpleHostileFaction = "SimpleHostile";
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PricingSystem _pricing = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+
+    private static readonly ProtoId<NpcFactionPrototype> SimpleHostileFaction = "SimpleHostile";
     private readonly HashSet<EntityUid> _pendingMendozaDeathAftermath = new();
 
     private static readonly (TimeSpan Delay, SoundSpecifier Sound)[] MendozaDeathSounds =
@@ -49,9 +58,9 @@ public sealed partial class RequisitionsSystem
 
     private static readonly TimeSpan MendozaDeathAftermathDelay = TimeSpan.FromSeconds(11.25);
 
-    private const string MendozaRemainsEntity = "RMCRemains";
+    private static readonly EntProtoId MendozaRemainsEntity = "RMCRemains";
 
-    private static readonly string[] MendozaHumanBloodAftermath =
+    private static readonly EntProtoId[] MendozaHumanBloodAftermath =
     [
         "RMCBlackMarketMendozaHumanBlood1",
         "RMCBlackMarketMendozaHumanBlood2",
@@ -62,7 +71,7 @@ public sealed partial class RequisitionsSystem
         "RMCBlackMarketMendozaHumanBlood7",
     ];
 
-    private static readonly string[] MendozaXenoBloodAftermath =
+    private static readonly EntProtoId[] MendozaXenoBloodAftermath =
     [
         "RMCBlackMarketMendozaXenoBlood1",
         "RMCBlackMarketMendozaXenoBlood2",
@@ -72,13 +81,6 @@ public sealed partial class RequisitionsSystem
         "RMCBlackMarketMendozaXenoBlood6",
         "RMCBlackMarketMendozaXenoBlood7",
     ];
-
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PricingSystem _pricing = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
 
     private void InitializeBlackMarket()
     {
@@ -794,12 +796,12 @@ public sealed partial class RequisitionsSystem
         return coordinates[_random.Next(coordinates.Count)];
     }
 
-    private void AddMendozaDeathBlood(string[] options, EntityCoordinates coordinate)
+    private void AddMendozaDeathBlood(EntProtoId[] options, EntityCoordinates coordinate)
     {
         AddMendozaDeathEntity(options[_random.Next(options.Length)], coordinate);
     }
 
-    private void AddMendozaDeathEntity(string id, EntityCoordinates coordinate)
+    private void AddMendozaDeathEntity(EntProtoId id, EntityCoordinates coordinate)
     {
         var ent = SpawnAtPosition(id, coordinate);
         _transform.SetLocalRotation(ent, _random.NextAngle());

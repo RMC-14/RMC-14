@@ -30,6 +30,7 @@ public enum RMCBlackMarketScannerValueVisual
 }
 
 [RegisterComponent, NetworkedComponent]
+[Access(typeof(SharedRequisitionsSystem))]
 public sealed partial class RMCBlackMarketScannerComponent : Component
 {
     [DataField]
