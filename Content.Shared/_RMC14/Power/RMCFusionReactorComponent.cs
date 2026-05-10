@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Tools;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -48,6 +49,30 @@ public sealed partial class RMCFusionReactorComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<ToolQualityPrototype> OverloadQuality = "Pulsing";
+
+    [DataField]
+    public TimeSpan OverloadFeedbackMinDelay = TimeSpan.FromSeconds(20);
+
+    [DataField]
+    public TimeSpan OverloadFeedbackMaxDelay = TimeSpan.FromSeconds(35);
+
+    [ViewVariables]
+    public TimeSpan OverloadNextFeedbackAt;
+
+    [DataField]
+    public SoundSpecifier OverloadHumSound = new SoundPathSpecifier(
+        "/Audio/Ambience/Objects/engine_hum.ogg",
+        AudioParams.Default.WithVolume(-5f).WithMaxDistance(8f).WithVariation(0.05f));
+
+    [DataField]
+    public SoundSpecifier OverloadHissSound = new SoundPathSpecifier(
+        "/Audio/Ambience/Objects/gas_hiss.ogg",
+        AudioParams.Default.WithVolume(-4f).WithMaxDistance(8f).WithVariation(0.05f));
+
+    [DataField]
+    public SoundSpecifier OverloadStopSound = new SoundPathSpecifier(
+        "/Audio/_RMC14/Structures/metalhit.ogg",
+        AudioParams.Default.WithVolume(-2f).WithMaxDistance(10f).WithVariation(0.05f));
 
     [DataField, AutoNetworkedField]
     public float WeldingCost = 1f;

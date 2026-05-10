@@ -240,6 +240,7 @@ public sealed partial class CMDistressSignalRuleSystem
             DistressSignalRuleResult.MinorMarineVictory => distress.MinorMarineAudio,
             DistressSignalRuleResult.MajorXenoVictory => distress.MajorXenoAudio,
             DistressSignalRuleResult.MinorXenoVictory => distress.MinorXenoAudio,
+            DistressSignalRuleResult.SelfDestruct => distress.SelfDestructAudio,
             _ => null,
         };
 

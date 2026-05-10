@@ -3,6 +3,9 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Chat;
+using Content.Shared.Damage;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -27,8 +30,12 @@ public sealed partial class CMDistressSignalRuleSystem
     private const int ScuttleMeltdownShakeDuration = 20;
     private const int ScuttleNuclearShakeIntensity = 4;
     private const int ScuttleNuclearShakeDuration = 110;
+    private const float ScuttleHeatRadius = 3.5f;
+    private const float ScuttleSuperheatRadius = 5f;
 
     private static readonly EntProtoId ScuttleFire = "RMCTileFire";
+    private static readonly DamageSpecifier ScuttleHeatDamage = new() { DamageDict = { { "Heat", 5 } } };
+    private static readonly DamageSpecifier ScuttleSuperheatDamage = new() { DamageDict = { { "Heat", 10 } } };
     private static readonly SoundSpecifier ScuttleStageSound = new SoundPathSpecifier("/Audio/Machines/warning_buzzer.ogg");
     private static readonly SoundSpecifier ScuttleDetonationSound = new SoundPathSpecifier("/Audio/Effects/explosionfar.ogg");
     private static readonly SoundSpecifier ScuttleNoticeSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
@@ -87,6 +94,8 @@ public sealed partial class CMDistressSignalRuleSystem
             rule.ScuttleTwoThirdsAnnounced = true;
             AnnounceScuttleStage("rmc-distress-signal-scuttle-stage-two", ScuttleFinalFireRange, ScuttleFinalFireIntensity, ScuttleFinalFireDuration);
         }
+
+        UpdateScuttleHeatAura(rule);
 
         if (rule.ScuttleProgress >= required)
             StartScuttleFinalSequence(rule);
@@ -155,6 +164,8 @@ public sealed partial class CMDistressSignalRuleSystem
             rule.ScuttleFinalCinematicStarted = true;
             RaiseNetworkEvent(new RMCScuttleCinematicEvent(NonNegative(rule.ScuttleFinalSequenceDelay)), Filter.Broadcast());
         }
+
+        UpdateScuttleHeatAura(rule);
 
         if (rule.ScuttleFinalDetonateAt is { } detonateAt &&
             time >= detonateAt)
@@ -252,6 +263,59 @@ public sealed partial class CMDistressSignalRuleSystem
         }
 
         SpawnScuttleFireAroundOverloadedReactors(fireRange, fireIntensity, fireDuration);
+    }
+
+    private void UpdateScuttleHeatAura(CMDistressSignalRuleComponent rule)
+    {
+        if (!rule.ScuttleOneThirdAnnounced && !rule.ScuttleFinalSequenceStarted)
+            return;
+
+        var time = Timing.CurTime;
+        rule.ScuttleNextHeatPulseAt ??= time;
+
+        if (time < rule.ScuttleNextHeatPulseAt)
+            return;
+
+        var pulseEvery = NonNegative(rule.ScuttleHeatPulseEvery);
+        if (pulseEvery == TimeSpan.Zero)
+            pulseEvery = TimeSpan.FromSeconds(1);
+
+        rule.ScuttleNextHeatPulseAt = time + pulseEvery;
+
+        var superheated = rule.ScuttleTwoThirdsAnnounced || rule.ScuttleFinalSequenceStarted;
+        ApplyScuttleHeatAura(
+            superheated ? ScuttleSuperheatRadius : ScuttleHeatRadius,
+            superheated ? ScuttleSuperheatDamage : ScuttleHeatDamage,
+            superheated
+                ? "rmc-distress-signal-scuttle-superheat-aura"
+                : "rmc-distress-signal-scuttle-heat-aura");
+    }
+
+    private void ApplyScuttleHeatAura(float radius, DamageSpecifier damage, LocId message)
+    {
+        var damaged = new HashSet<EntityUid>();
+        var targets = new HashSet<Entity<DamageableComponent>>();
+
+        var reactors = EntityQueryEnumerator<RMCFusionReactorComponent, TransformComponent>();
+        while (reactors.MoveNext(out var reactorUid, out var reactor, out var xform))
+        {
+            if (!reactor.Overloaded || !IsAlmayerMap(xform.MapUid))
+                continue;
+
+            targets.Clear();
+            _lookup.GetEntitiesInRange(_transform.GetMapCoordinates(reactorUid, xform), radius, targets);
+            foreach (var (target, _) in targets)
+            {
+                if (target == reactorUid || !HasComp<MobStateComponent>(target))
+                    continue;
+
+                if (!damaged.Add(target))
+                    continue;
+
+                _damageable.TryChangeDamage(target, damage, true, false, origin: reactorUid);
+                _popup.PopupEntity(Loc.GetString(message), target, target, PopupType.SmallCaution);
+            }
+        }
     }
 
     private int CountOverloadedScuttleReactors()

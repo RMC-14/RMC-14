@@ -76,6 +76,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public bool ScuttleFinalCinematicStarted;
 
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? ScuttleNextHeatPulseAt;
+
     [DataField]
     public TimeSpan ScuttleUnlockDelay = TimeSpan.FromSeconds(15);
 
@@ -99,6 +102,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public TimeSpan ScuttleFinalSequenceDelay = TimeSpan.FromSeconds(15);
+
+    [DataField]
+    public TimeSpan ScuttleHeatPulseEvery = TimeSpan.FromSeconds(6);
 
     [DataField]
     public ProtoId<JobPrototype> QueenJob = "CMXenoQueen";
@@ -156,6 +162,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public SoundSpecifier MinorXenoAudio = new SoundCollectionSpecifier("RMCXenoMinor");
+
+    [DataField]
+    public SoundSpecifier SelfDestructAudio = new SoundCollectionSpecifier("RMCSelfDestruct");
 
     // TODO RMC14
     // [DataField]

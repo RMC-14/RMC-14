@@ -20,6 +20,7 @@ using Content.Shared.Toggleable;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -35,6 +36,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     [Dependency] protected readonly SharedPointLightSystem Pointlight = default!;
 
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -526,7 +528,13 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         {
             args.Handled = true;
             SetFusionReactorOverloaded(ent, false, user);
-            _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-overload-stop-xeno", ("reactor", ent)), ent, user);
+            _popup.PopupPredicted(
+                Loc.GetString("rmc-fusion-reactor-overload-stop-xeno", ("reactor", ent)),
+                Loc.GetString("rmc-fusion-reactor-overload-stop-xeno-others", ("xeno", user), ("reactor", ent)),
+                ent,
+                user,
+                MediumCaution);
+            _audio.PlayPredicted(ent.Comp.OverloadStopSound, ent, user);
             return;
         }
 
@@ -795,6 +803,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
 
         ent.Comp.Overloaded = overloaded;
+        ent.Comp.OverloadNextFeedbackAt = TimeSpan.Zero;
         Dirty(ent);
         UpdateAppearance(ent);
         ReactorUpdated(ent);
