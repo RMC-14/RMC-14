@@ -72,7 +72,7 @@
   - type: EntityPreset
     primaryWeapons:
     - [ RMCBeltMarineMAR, RMCWeaponRifleMAR30 ]
-    - [ RMCBeltMarinePCAC5, RMCWeaponSMGPCAC5A4 ]
+    - [ CMBeltMarineMP5, WeaponSMGMP5 ]
     - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
     - [ CMBeltMarineM16, WeaponRifleM16 ]
     primaryWeaponChance: 1

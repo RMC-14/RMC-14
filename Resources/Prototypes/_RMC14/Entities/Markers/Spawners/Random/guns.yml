@@ -222,10 +222,10 @@
     minMagazines: 1
     maxMagazines: 5
     prototypes: # Weighted
-    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
-    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
-    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
-    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
+    - WeaponSMGMP5: CMMagazineSMGMP5
+    - WeaponSMGMP5: CMMagazineSMGMP5
+    - WeaponSMGMP5: CMMagazineSMGMP5
+    - WeaponSMGMP5: CMMagazineSMGMP5
     - RMCWeaponSMGMP27: RMCMagazineSMGMP27
     - RMCWeaponSMGMP27: RMCMagazineSMGMP27
     - RMCWeaponSMGMP27: RMCMagazineSMGMP27
@@ -470,14 +470,14 @@
     - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
-    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
-    - RMCWeaponSMGPCAC5A4: RMCMagazineSMGPCAC5
+    - WeaponSMGMP5: CMMagazineSMGMP5
+    - WeaponSMGMP5: CMMagazineSMGMP5
+    - WeaponSMGMP5: CMMagazineSMGMP5
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponShotgunM3717: RMCSpawnerRandomShotgunBoxes
-    - RMCWeaponSMGPCAC5A5: RMCMagazineSMGPCAC5
+    - RMCWeaponSMGMP5Alt: CMMagazineSMGMP5
     - RMCWeaponRevolverSpearheadCustom: RMCSpeedLoader357
 
 - type: entity

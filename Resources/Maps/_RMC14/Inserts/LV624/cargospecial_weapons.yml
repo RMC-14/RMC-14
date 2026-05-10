@@ -57,7 +57,7 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-- proto: RMCMagazineSMGPCAC5
+- proto: CMMagazineSMGMP5
   entities:
   - uid: 12
     components:
@@ -183,7 +183,7 @@ entities:
     - type: Transform
       pos: 0.50035834,1.3802611
       parent: 1
-- proto: RMCWeaponSMGPCAC5A4
+- proto: WeaponSMGMP5
   entities:
   - uid: 5
     components:

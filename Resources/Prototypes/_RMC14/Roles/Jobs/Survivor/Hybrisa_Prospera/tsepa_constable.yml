@@ -58,9 +58,9 @@
   - type: EntityPreset
     primaryWeapons: [ ]
     randomOutfits:
-    - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPA, RMCPouchMagazineFilledPCAC5, RMCWeaponSMGPCAC5A4 ]
-    - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAFormal, RMCPouchMagazineFilledPCAC5, RMCWeaponSMGPCAC5A4 ]
+    - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPA, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]
+    - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAFormal, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]
     - [ RMCHeadCapTSEPAPeaked, RMCArmorVestTSEPA, RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712, RMCExplosiveBreachingChargeRubberTSEPA ]
-    - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAHighVis, RMCPouchMagazineFilledPCAC5, RMCWeaponSMGPCAC5A4, RMCHandsCombat ]
+    - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAHighVis, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCHandsCombat ]
     - [ RMCHeadCapTSEPAPeakedGoldSilver, RMCCoatTSEPAHighVisVest, RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712, RMCHandsCombat ]
     - [ RMCHeadCapTSEPAPeakedGold, RMCCoatTSEPAFormal, RMCPouchShotgunFilledPolicing, RMCHandsCombat ]

@@ -75,6 +75,6 @@
     - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
     - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
     - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
-    - [ RMCPouchMagazineFilledPCAC5, RMCWeaponSMGPCAC5A5, RMCMotionDetectorCompact ]
-    - [ RMCPouchMagazineFilledPCAC5, RMCWeaponSMGPCAC5A5, RMCMotionDetectorCompact ]
+    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
+    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
     primaryWeaponChance: 1

@@ -642,7 +642,7 @@ entities:
       removedMasks: 20
     - type: PlaceableSurface
       isPlaceable: True
-- proto: RMCMagazineSMGPCAC5
+- proto: CMMagazineSMGMP5
   entities:
   - uid: 452
     components:
@@ -3632,7 +3632,7 @@ entities:
     - type: Transform
       pos: 2.5,-11.5
       parent: 1
-- proto: RMCWeaponSMGPCAC5A4
+- proto: WeaponSMGMP5
   entities:
   - uid: 451
     components:
