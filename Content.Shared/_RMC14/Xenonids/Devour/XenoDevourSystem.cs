@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.TrainingDummy;
 using Content.Shared._RMC14.Vents;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
@@ -106,6 +107,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<XenoDevourComponent, RMCCombatModeInteractOverrideUserEvent>(OnXenoCombatModeInteract);
         SubscribeLocalEvent<XenoDevourComponent, InteractUsingEvent>(OnXenoDevouredInteractWith);
         SubscribeLocalEvent<XenoDevourComponent, VentEnterAttemptEvent>(OnXenoDevouredVentAttempt);
+        SubscribeLocalEvent<XenoDevourComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
 
         SubscribeLocalEvent<UsableWhileDevouredComponent, CMGetArmorPiercingEvent>(OnUsableWhileDevouredGetArmorPiercing);
     }
@@ -481,6 +483,25 @@ public sealed class XenoDevourSystem : EntitySystem
 
             args.Cancel();
             return;
+        }
+    }
+
+    private void OnXenoChangingPrototype(Entity<XenoDevourComponent> ent, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<XenoDevourComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoDevourComponent { } newComponent)
+        {
+            if (ent.Comp.DevourContainerId != newComponent.DevourContainerId)
+            {
+                // Not sure why the container ID is defined in the component, but if for some reason the new xeno
+                // has a different container ID, regurgitate everything. We'll consider it incompatible.
+                RegurgitateAll(ent);
+            }
+        }
+        else
+        {
+            // New xeno not capable of devouring, regurgitate everything.
+            RegurgitateAll(ent);
         }
     }
 
