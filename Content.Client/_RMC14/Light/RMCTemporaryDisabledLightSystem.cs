@@ -15,7 +15,7 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
 
     private static readonly TimeSpan LightCheckInterval = TimeSpan.FromSeconds(1);
 
-    private const int MaxNearbyLights = 8;
+    private const int MaxNearbyLights = 6;
     private const float MaxNearbyLightCheckRange = 2.5f;
 
     private readonly HashSet<Entity<PointLightComponent>> _nearbyLights = new();
