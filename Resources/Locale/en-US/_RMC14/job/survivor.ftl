@@ -542,7 +542,7 @@ rmc-job-name-army = UNMC Devil Dogs Survivor
 rmc-job-description-army = You are a UNMC Marine hailing from the Devil Dogs battalion. Your training exercises have turned into a massive battle against the xenonids. Do what it takes to survive!
 
 rmc-job-name-army-cmt = Combat Medical Technician
-rmc-job-prefix-cmt = CMT
+rmc-job-prefix-army-cmt = CMT
 rmc-job-name-army-cet = Combat Engineering Technician
 rmc-job-prefix-army-cet = CET
 rmc-job-name-army-heavy-gunner = Heavy Gunner
