@@ -1,8 +1,10 @@
-using System.Numerics;
 using Content.Client._RMC14.Language.Systems;
-using Content.Client.Stylesheets;
 using Content.Client.Gameplay;
+using Content.Client._RMC14.Language;
+using Content.Client.Resources;
+using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
+using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared.Input;
@@ -14,9 +16,10 @@ using Robust.Shared.Input.Binding;
 using Robust.Shared.IoC;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using System.Linq;
+using System.Numerics;
 using static Robust.Client.UserInterface.Controls.BaseButton;
-using Content.Client.UserInterface.Systems.Gameplay;
-using Content.Client.Resources;
+using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.UserInterface.Systems.Language;
 
@@ -24,6 +27,7 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
 {
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private LanguageSystem _languageSystem = default!;
@@ -31,6 +35,7 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
     private LanguageMenuWindow? _window;
 
     private MenuButton? LanguageButton => _languageButton;
+    private static readonly string FallbackLanguageIcon = "/Textures/_RMC14/Interface/flags.rsi/unknown.png";
 
     public void OnStateEntered(GameplayState state)
     {
@@ -76,7 +81,7 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
 
         var button = new MenuButton
         {
-            Icon = _resourceCache.GetTexture("/Textures/_RMC14/Interface/flags.rsi/unknown.png"),
+            Icon = _resourceCache.GetTexture(FallbackLanguageIcon),
             ToolTip = Loc.GetString("game-hud-open-language-menu-button-tooltip"),
             BoundKey = ContentKeyFunctions.OpenLanguageMenu,
             MinSize = new Vector2(42f, 64f),
@@ -84,10 +89,13 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
         };
         button.AppendStyleClass = StyleBase.ButtonSquare;
         button.OnPressed += LanguageButtonPressed;
+        if (button.ButtonRoot.Children.FirstOrDefault() is TextureRect icon)
+            icon.TextureScale = new Vector2(1.2f, 1.2f);
 
         topBar.AddChild(button);
         button.SetPositionInParent(topBar.EmotesButton.GetPositionInParent());
         _languageButton = button;
+        UpdateLanguageButtonIcon();
     }
 
     private void UnloadButton()
@@ -133,12 +141,35 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
 
     private void OnLanguagesChanged()
     {
+        UpdateLanguageButtonIcon();
         UpdateLanguageWindow();
     }
 
     private void OnLanguageLearningChanged()
     {
         UpdateLanguageWindow();
+    }
+
+    private void UpdateLanguageButtonIcon()
+    {
+        if (_languageButton == null ||
+            _languageSystem == null ||
+            _player.LocalSession?.AttachedEntity is not { } entity)
+        {
+            return;
+        }
+
+        var currentLanguage = _languageSystem.GetCurrentLanguage(entity);
+        var spriteSystem = _entitySystemManager.GetEntitySystem<SpriteSystem>();
+
+        if (_prototypeManager.TryIndex<LanguagePrototype>(currentLanguage, out var prototype) &&
+            LanguageIconLoader.Load(_resourceCache, spriteSystem, prototype.LanguageIcon) is { } texture)
+        {
+            _languageButton.Icon = texture;
+            return;
+        }
+
+        _languageButton.Icon = _resourceCache.GetTexture(FallbackLanguageIcon);
     }
 
     private void UpdateLanguageWindow()
