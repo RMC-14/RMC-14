@@ -615,8 +615,8 @@ namespace Content.Client.Lobby.UI
             }
 
             // Setup model
-            var traitGroups = new Dictionary<string, List<string>>();
-            var defaultTraits = new List<string>();
+            Dictionary<string, List<string>> traitGroups = new();
+            List<string> defaultTraits = new();
             traitGroups.Add(TraitCategoryPrototype.Default, defaultTraits);
 
             foreach (var trait in traits)
@@ -651,7 +651,7 @@ namespace Content.Client.Lobby.UI
                     });
                 }
 
-                var selectors = new List<TraitPreferenceSelector>();
+                var selectors = new List<(TraitPreferenceSelector Selector, bool IsLanguageTrait)>();
                 var selectionCount = 0;
 
                 foreach (var traitProto in categoryTraits)
@@ -677,7 +677,7 @@ namespace Content.Client.Lobby.UI
                         SetDirty();
                         RefreshTraits(); // If too many traits are selected, they will be reset to the real value.
                     };
-                    selectors.Add(selector);
+                    selectors.Add((selector, trait.Language != null));
                 }
 
                 // Selection counter
@@ -695,9 +695,11 @@ namespace Content.Client.Lobby.UI
                 {
                     var languageSelectors = selectors
                         .Where(selector => selector.IsLanguageTrait)
+                        .Select(selector => selector.Selector)
                         .ToList();
                     var otherSelectors = selectors
                         .Where(selector => !selector.IsLanguageTrait)
+                        .Select(selector => selector.Selector)
                         .ToList();
 
                     AddTraitSelectors(languageSelectors, selectionCount, category, "rmc-trait-group-languages");
@@ -705,7 +707,7 @@ namespace Content.Client.Lobby.UI
                 }
                 else
                 {
-                    AddTraitSelectors(selectors, selectionCount, category);
+                    AddTraitSelectors(selectors.Select(selector => selector.Selector).ToList(), selectionCount, category);
                 }
                 // RMC14
             }

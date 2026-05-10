@@ -1,28 +1,36 @@
+using System.Numerics;
 using Content.Client._RMC14.Language.Systems;
+using Content.Client.Stylesheets;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared.Input;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.IoC;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.BaseButton;
+using Content.Client.UserInterface.Systems.Gameplay;
+using Content.Client.Resources;
 
-namespace Content.Client.UserInterface.Systems.Language;
+namespace Content.Client._RMC14.UserInterface.Systems.Language;
 
 public sealed class LanguageUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private LanguageSystem _languageSystem = default!;
+    private MenuButton? _languageButton;
     private LanguageMenuWindow? _window;
 
-    private MenuButton? LanguageButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.LanguageButton;
+    private MenuButton? LanguageButton => _languageButton;
 
     public void OnStateEntered(GameplayState state)
     {
@@ -45,34 +53,51 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
 
         _window?.Dispose();
         _window = null;
+        UnloadButton();
         CommandBinds.Unregister<LanguageUIController>();
     }
 
-    private void OnLocalPlayerChanged(EntityUid? oldEntity, EntityUid? newEntity)
+    public override void Initialize()
     {
-        UpdateLanguageWindow();
+        base.Initialize();
+
+        var gameplayStateLoad = UIManager.GetUIController<GameplayStateLoadController>();
+        gameplayStateLoad.OnScreenLoad += LoadButton;
+        gameplayStateLoad.OnScreenUnload += UnloadButton;
     }
 
-    public void LoadButton()
+    private void LoadButton()
     {
-        if (UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>() is not { } gameTopMenuBar)
+        if (_languageButton != null ||
+            UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>() is not { } topBar)
+        {
             return;
+        }
 
-        if (gameTopMenuBar.LanguageButton == null)
-            return;
+        var button = new MenuButton
+        {
+            Icon = _resourceCache.GetTexture("/Textures/_RMC14/Interface/flags.rsi/unknown.png"),
+            ToolTip = Loc.GetString("game-hud-open-language-menu-button-tooltip"),
+            BoundKey = ContentKeyFunctions.OpenLanguageMenu,
+            MinSize = new Vector2(42f, 64f),
+            HorizontalExpand = true,
+        };
+        button.AppendStyleClass = StyleBase.ButtonSquare;
+        button.OnPressed += LanguageButtonPressed;
 
-        gameTopMenuBar.LanguageButton.OnPressed += LanguageButtonPressed;
+        topBar.AddChild(button);
+        button.SetPositionInParent(topBar.EmotesButton.GetPositionInParent());
+        _languageButton = button;
     }
 
-    public void UnloadButton()
+    private void UnloadButton()
     {
-        if (UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>() is not { } gameTopMenuBar)
+        if (_languageButton == null)
             return;
 
-        if (gameTopMenuBar.LanguageButton == null)
-            return;
-
-        gameTopMenuBar.LanguageButton.OnPressed -= LanguageButtonPressed;
+        _languageButton.OnPressed -= LanguageButtonPressed;
+        _languageButton.Dispose();
+        _languageButton = null;
     }
 
     private void LanguageButtonPressed(ButtonEventArgs args)

@@ -9,9 +9,17 @@ namespace Content.Shared.EntityEffects.Effects
 {
     public sealed partial class AdjustReagent : EntityEffect
     {
+        /// <summary>
+        ///     The reagent ID to remove. Only one of this and <see cref="Group"/> should be active.
+        /// </summary>
         [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<ReagentPrototype>))]
         public string? Reagent = null;
+        // TODO use ReagentId
 
+        /// <summary>
+        ///     The metabolism group to remove, if the reagent satisfies any.
+        ///     Only one of this and <see cref="Reagent"/> should be active.
+        /// </summary>
         [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<MetabolismGroupPrototype>))]
         public string? Group = null;
 
@@ -52,6 +60,9 @@ namespace Content.Shared.EntityEffects.Effects
                 }
                 return;
             }
+
+            // TODO: Someone needs to figure out how to do this for non-reagent effects.
+            throw new NotImplementedException();
         }
 
         protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
@@ -73,8 +84,8 @@ namespace Content.Shared.EntityEffects.Effects
                     ("amount", MathF.Abs(Amount.Float())));
             }
 
-            // Return null instead of throwing NotImplementedException
-            return null;
+            throw new NotImplementedException();
         }
     }
 }
+

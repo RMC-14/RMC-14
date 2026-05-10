@@ -8,7 +8,7 @@ using Robust.Client.Graphics;
 using Robust.Shared.IoC;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client.UserInterface.Systems.Language;
+namespace Content.Client._RMC14.UserInterface.Systems.Language;
 
 [GenerateTypedNameReferences]
 public sealed partial class LanguageMenuWindow : DefaultWindow

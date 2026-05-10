@@ -32,7 +32,9 @@ public partial class ChatBox : UIWidget
 
     // RMC14
     public readonly Queue<RepeatedMessage> RepeatQueue = new();
+    // RMC14
     private readonly HashSet<string> _whitelist = ["mono", "scramble", "bolditalic", "bold", "bullet", "color", "font", "head", "italic", "langicon"];
+    // RMC14
 
     public ChatBox()
     {
@@ -73,7 +75,9 @@ public partial class ChatBox : UIWidget
 
         var color = msg.MessageColorOverride ?? msg.Channel.TextColor();
 
+        // RMC14
         AddLine(msg.WrappedMessage, color, msg.SenderEntity, msg.Message, msg.Channel, msg.RepeatCheckSender, msg.LanguageIcon);
+        // RMC14
     }
 
     private void OnHighlightsUpdated(string highlights)
@@ -127,8 +131,10 @@ public partial class ChatBox : UIWidget
     {
         var formatted = new FormattedMessage(3);
         formatted.PushColor(color);
+        // RMC14
         if (!string.IsNullOrWhiteSpace(languageIcon))
             formatted.AddMarkupOrThrow($"[langicon path=\"{FormattedMessage.EscapeText(languageIcon)}\"][/langicon]");
+        // RMC14
         formatted.AddMarkupOrThrow(message);
         formatted.Pop();
 

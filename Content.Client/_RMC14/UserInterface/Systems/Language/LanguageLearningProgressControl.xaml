@@ -1,6 +1,6 @@
 <widgets:LanguageLearningProgressControl xmlns="https://spacestation14.io"
                                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                                         xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Language">
+                                         xmlns:widgets="clr-namespace:Content.Client._RMC14.UserInterface.Systems.Language">
     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
         <PanelContainer Name="HeaderPanel" HorizontalExpand="True">
             <BoxContainer Name="HeaderBox" Orientation="Horizontal" HorizontalExpand="True">

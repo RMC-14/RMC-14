@@ -1,24 +1,24 @@
 using Robust.Shared.Audio;
 using Content.Server.Chat;
 using Content.Server.Chat.Systems;
+using Content.Shared._RMC14.Language.Prototypes;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Speech;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Random;
-using Content.Shared._RMC14.Language.Prototypes;
-using Content.Shared._RMC14.Xenonids;
 
 namespace Content.Server.Speech
 {
     public sealed class SpeechSoundSystem : EntitySystem
     {
-        // RMC14
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IPrototypeManager _protoManager = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
+        // RMC14
+        [Dependency] private readonly SharedAudioSystem _audio = default!;
         // RMC14
 
         public override void Initialize()
@@ -51,8 +51,8 @@ namespace Content.Server.Speech
             };
 
             // Use exclaim sound if most characters are uppercase.
-            var uppercaseCount = 0;
-            for (var i = 0; i < message.Length; i++)
+            int uppercaseCount = 0;
+            for (int i = 0; i < message.Length; i++)
             {
                 if (char.IsUpper(message[i]))
                     uppercaseCount++;
