@@ -42,8 +42,8 @@
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 2
-    accuracyMultiplierUnwielded: 1.33
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.8
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null
@@ -106,10 +106,7 @@
       rmc-aslot-underbarrel: 0.25, -0.34
       rmc-aslot-stock: -0.5, 0
   - type: GunDamageModifier
-    multiplier: 1.02
-  - type: RMCWeaponDamageFalloff
-    falloffMultiplier: 6
-    rangeFlat: 4
+    multiplier: 1.2
 
 - type: entity
   parent: RMCWeaponSMGPCAC5A4
@@ -158,11 +155,13 @@
           tags:
           - RMCAttachmentStockPCAC5Collapsible
 
+# MAGAZINES
+
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSMGPCAC5
-  name: "PCAC5 magazine (9mm)"
-  description: "A 9mm magazine for the PCAC5."
+  name: "PCAC5 magazine (9mm SMG)"
+  description: "A 9mm SMG magazine for the PCAC5."
   components:
   - type: Tag
     tags:
@@ -172,8 +171,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol9mm
-    proto: CMCartridgePistol9mm
+      - CMCartridge9mmSMG
+    proto: CMCartridge9mmSMG
     capacity: 30
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/pcac5.rsi
@@ -189,8 +188,9 @@
 - type: entity
   parent: RMCMagazineSMGPCAC5
   id: RMCMagazineSMGPCAC5AP
-  name: "PCAC5 AP magazine (9mm)"
-  description: "A 9mm magazine for the PCAC5, loaded with armor-piercing rounds."
+  name: "PCAC5 AP magazine (9mm SMG)"
+  suffix: PVE # TODO RMC14: Remove PVE suffix when the 9mm cartridge situation is fixed.
+  description: "A 9mm SMG magazine for the PCAC5, loaded with armor-piercing rounds."
   components:
   - type: Tag
     tags:
@@ -200,8 +200,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol9mmAP
-    proto: CMCartridgePistolM77AP
+      - RMCCartridge9mmSMGAP
+    proto: RMCCartridge9mmSMGAP
     capacity: 30
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/pcac5.rsi
@@ -217,7 +217,8 @@
   parent: RMCMagazineSMGPCAC5
   id: RMCMagazineSMGPCAC5Rubber
   name: "PCAC5 rubber magazine (9mm)"
-  description: "A 9mm magazine for the PCAC5, loaded with less-lethal rubber rounds."
+  suffix: PVE # TODO RMC14: Remove PVE suffix when the 9mm cartridge situation is fixed.
+  description: "A 9mm SMG magazine for the PCAC5, loaded with less-lethal rubber rounds."
   components:
   - type: Tag
     tags:
@@ -227,8 +228,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgePistol9mmRubber
-    proto: RMCCartridgePistol9mmRubber
+      - RMCCartridge9mmSMGRubber
+    proto: RMCCartridge9mmSMGRubber
     capacity: 30
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/pcac5.rsi
@@ -240,6 +241,54 @@
     - state: ammo_band
       color: "#0A00C8"
 
+# CARTRIDGES        # TODO RMC14: Fix having a half-dozen duplicate 9mm cartridges.
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: CMCartridge9mmSMG
+  name: cartridge (9mm SMG)
+  description: A 9mm cartridge for the mp5 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridge9mmSMG
+  - type: CartridgeAmmo
+    proto: CMBullet9mmSMG
+
+- type: entity
+  parent: CMCartridge9mmSMG
+  id: RMCCartridge9mmSMGAP
+  name: AP cartridge (9mm SMG)
+  description: A 9mm armor-piercing cartridge for the mp5 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge9mmSMGAP
+  - type: CartridgeAmmo
+    proto: CMBulletPistolM77AP
+
+- type: entity
+  parent: CMCartridge9mmSMG
+  id: RMCCartridge9mmSMGRubber
+  name: AP cartridge (9mm SMG)
+  description: A 9mm armor-piercing cartridge for the mp5 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge9mmSMGRubber
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmRubber
+
+# BULLETS
+
+- type: entity
+  parent: Bullet10x20mm
+  id: CMBullet9mmSMG
+  categories: [ HideSpawnMenu ]
+
 - type: Tag
   id: RMCMagazineSMGPCAC5
 
@@ -248,3 +297,9 @@
 
 - type: Tag
   id: RMCMagazineSMGPCAC5Rubber
+
+- type: Tag
+  id: RMCCartridge9mmSMGAP
+
+- type: Tag
+  id: RMCCartridge9mmSMGRubber
