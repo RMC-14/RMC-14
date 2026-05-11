@@ -293,8 +293,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        var tile = _mapSystem.CoordinatesToTile(gridUid, gridComp, coordinates);
-        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, xeno, args.UseOnSemiWeedable, true))
+        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, coordinates.Position, xeno, null, args.UseOnSemiWeedable, true))
             return;
 
         if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, args.LimitDistance))
@@ -330,41 +329,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        DirectionFlag barricadeFrontDirs = DirectionFlag.None;
-        if (isInQueenEye)
-        {
-            var barricadeEnum = _rmcMap.GetAnchoredEntitiesEnumerator<BarricadeComponent>(coordinates);
-            while (barricadeEnum.MoveNext(out var barricadeUid))
-            {
-                if (TryComp(barricadeUid, out DoorComponent? door) && door.State == DoorState.Open)
-                    continue;
-
-                barricadeFrontDirs |= _transform.GetWorldRotation(barricadeUid).GetCardinalDir().AsFlag();
-            }
-
-            if (barricadeFrontDirs != DirectionFlag.None)
-            {
-                var hasValidAdjacentWeed = false;
-                foreach (var direction in _rmcMap.CardinalDirections)
-                {
-                    if ((direction.AsFlag() & barricadeFrontDirs) != 0)
-                        continue;
-
-                    if (_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates, direction))
-                    {
-                        hasValidAdjacentWeed = true;
-                        break;
-                    }
-                }
-
-                if (!hasValidAdjacentWeed)
-                {
-                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-weeds-blocked"), coordinates, xeno.Owner);
-                    return;
-                }
-            }
-        }
-
         var grid = new Entity<MapGridComponent>(gridUid, gridComp);
         var existing = _xenoWeeds.GetWeedsOnFloor(grid, coordinates);
         if (existing is { Comp.IsSource: true })
@@ -376,19 +340,25 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        Entity<XenoWeedsComponent> adjacent = default;
+        List<Entity<XenoWeedsComponent>> adjacentNodes = new();
         if (existing == null)
         {
+            var canSpread = false;
             foreach (var direction in _rmcMap.CardinalDirections)
             {
-                if (isInQueenEye && (direction.AsFlag() & barricadeFrontDirs) != 0)
+                if (!_rmcMap.HasAnchoredEntityEnumerator(coordinates, out Entity<XenoWeedsComponent> adjacent, direction))
                     continue;
 
-                if (_rmcMap.HasAnchoredEntityEnumerator(coordinates, out adjacent, direction))
-                    break;
+                adjacentNodes.Add(adjacent);
+
+                if (!_xenoWeeds.CanSpreadWeedsPopup(grid, coordinates.Position, xeno, adjacent, false, true))
+                    continue;
+
+                canSpread = true;
+                break;
             }
 
-            if (adjacent == default)
+            if (adjacentNodes.Count == 0)
             {
                 if (isInQueenEye)
                     _popup.PopupCoordinates("You can only plant weeds if there is a nearby node.",
@@ -403,17 +373,19 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
                 return;
             }
+
+            if (!canSpread)
+            {
+                if (isInQueenEye)
+                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-weeds-blocked"), coordinates, xeno.Owner);
+                else
+                    _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), args.Target, xeno.Owner, PopupType.MediumCaution);
+
+                return;
+            }
         }
 
         var toSpawn = existing == null ? args.Expand : args.Source;
-        var tile = _mapSystem.CoordinatesToTile(gridUid, gridComp, coordinates);
-        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, isInQueenEye ? null : (EntityUid?)xeno.Owner, false, true))
-        {
-            if (isInQueenEye)
-                _popup.PopupCoordinates(Loc.GetString("cm-xeno-construction-failed-weeds"), coordinates, xeno.Owner, PopupType.SmallCaution);
-
-            return;
-        }
 
         if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false, isInQueenEye ? coordinates : (EntityCoordinates?)null))
             return;
@@ -434,7 +406,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _hive.SetSameHive(xeno.Owner, newWeeds);
 
             if (existing == null)
-                _xenoWeeds.AssignSource(newWeeds, adjacent.Comp?.Source ?? adjacent);
+                _xenoWeeds.AssignSource(newWeeds, adjacentNodes.Last().Comp?.Source ?? adjacentNodes.Last());
         }
 
         var audioUser = isInQueenEye ? null : (EntityUid?)xeno.Owner;

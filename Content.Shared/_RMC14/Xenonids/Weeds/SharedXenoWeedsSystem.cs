@@ -1,5 +1,7 @@
+using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Communications;
 using Content.Shared._RMC14.Entrenching;
@@ -49,6 +51,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] protected readonly SharedDirectionalAttackBlockSystem _directionBlocker = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -515,9 +518,10 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         Dirty(ent);
     }
 
-    public bool CanSpreadWeedsPopup(Entity<MapGridComponent> grid, Vector2i tile, EntityUid? user, bool semiWeedable = false, bool source = false)
+    public bool CanSpreadWeedsPopup(Entity<MapGridComponent> grid, Vector2 tile, EntityUid? user, EntityUid? spreadFrom, bool semiWeedable = false, bool source = false)
     {
-        if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef) ||
+        var tileIndex = (Vector2i)tile;
+        if (!_mapSystem.TryGetTileRef(grid, grid, tileIndex, out var tileRef) ||
             !_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) ||
             tileDef.ID == ContentTileDefinition.SpaceID ||
             tileDef is ContentTileDefinition { WeedsSpreadable: false } &&
@@ -528,10 +532,18 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             return false;
         }
 
-        if (!_area.CanResinPopup((grid, grid, null), tile, user))
+        if (!_area.CanResinPopup((grid, grid, null), tileIndex, user))
             return false;
 
-        var targetTileAnchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, tile);
+        if (spreadFrom is { } spreadOrigin && !TerminatingOrDeleted(spreadOrigin))
+        {
+            var originPos = _transform.GetMoverCoordinates(spreadOrigin).Position;
+            var direction = (tile - originPos).Normalized();
+            if (_directionBlocker.IsDirectionBlocked(spreadOrigin, direction))
+                return false;
+        }
+
+        var targetTileAnchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, tileIndex);
         while (targetTileAnchored.MoveNext(out var uid))
         {
             if (_blockWeedsQuery.HasComp(uid))
