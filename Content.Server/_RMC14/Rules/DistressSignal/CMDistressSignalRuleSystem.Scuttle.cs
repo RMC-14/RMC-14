@@ -484,15 +484,11 @@ public sealed partial class CMDistressSignalRuleSystem
             rule.ScuttleDetonated ||
             rule.ScuttleFinalSequenceStarted)
         {
-            args.Failure = "rmc-fusion-reactor-overload-unavailable";
             return;
         }
 
         if (!IsAlmayerMap(Transform(ent).MapUid))
-        {
-            args.Failure = "rmc-fusion-reactor-overload-not-almayer";
             return;
-        }
 
         args.CanOverload = true;
     }

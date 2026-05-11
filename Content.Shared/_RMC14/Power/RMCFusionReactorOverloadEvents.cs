@@ -8,7 +8,6 @@ public sealed class RMCFusionReactorCanOverloadEvent(EntityUid reactor, EntityUi
     public readonly EntityUid Reactor = reactor;
     public readonly EntityUid User = user;
     public bool CanOverload;
-    public LocId Failure = "rmc-fusion-reactor-overload-unavailable";
 }
 
 [ByRefEvent]

@@ -14,11 +14,6 @@ rmc-fusion-reactor-repair-start-self = You start repairing {$reactor} with {$too
 rmc-fusion-reactor-already-destroyed = You see no reason to attack the {$reactor}.
 rmc-fusion-reactor-destroyed = The {$reactor} gets torn apart!
 
-rmc-fusion-reactor-overload-no-skill = You don't have the engineering training to configure {$reactor}'s overload controls.
-rmc-fusion-reactor-overload-unavailable = {$reactor}'s emergency overload controls are locked by ARES.
-rmc-fusion-reactor-overload-not-almayer = {$reactor}'s overload controls are not connected to Almayer scuttle authorization.
-rmc-fusion-reactor-overload-not-working = {$reactor} must be operational before it can be overloaded.
-rmc-fusion-reactor-overload-no-cell = {$reactor} needs a fuel cell before it can be overloaded.
 rmc-fusion-reactor-overload-start-enable = You start configuring {$reactor}'s emergency overload.
 rmc-fusion-reactor-overload-start-disable = You start disengaging {$reactor}'s emergency overload.
 rmc-fusion-reactor-overload-enabled = You engage {$reactor}'s emergency overload.

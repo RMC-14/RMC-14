@@ -706,7 +706,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!CanToggleFusionReactorOverload(ent, user, used, true))
+        if (!CanToggleFusionReactorOverload(ent, user, used))
             return;
 
         var ev = new RMCFusionReactorOverloadDoAfterEvent();
@@ -735,7 +735,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!CanToggleFusionReactorOverload(ent, args.User, used, false))
+        if (!CanToggleFusionReactorOverload(ent, args.User, used))
             return;
 
         var overloaded = !ent.Comp.Overloaded;
@@ -748,47 +748,26 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         _popup.PopupClient(msg, ent, args.User);
     }
 
-    private bool CanToggleFusionReactorOverload(Entity<RMCFusionReactorComponent> ent, EntityUid user, EntityUid used, bool popup)
+    private bool CanToggleFusionReactorOverload(Entity<RMCFusionReactorComponent> ent, EntityUid user, EntityUid used)
     {
         if (!_tool.HasQuality(used, ent.Comp.OverloadQuality))
             return false;
 
         if (!_skills.HasSkill(user, ent.Comp.OverloadSkill, ent.Comp.OverloadSkillLevel))
-        {
-            PopupFusionReactorOverloadFailure(ent, user, "rmc-fusion-reactor-overload-no-skill", popup);
             return false;
-        }
 
         if (ent.Comp.State != RMCFusionReactorState.Working)
-        {
-            PopupFusionReactorOverloadFailure(ent, user, "rmc-fusion-reactor-overload-not-working", popup);
             return false;
-        }
 
         if (!HasFusionReactorCell(ent))
-        {
-            PopupFusionReactorOverloadFailure(ent, user, "rmc-fusion-reactor-overload-no-cell", popup);
             return false;
-        }
 
         var ev = new RMCFusionReactorCanOverloadEvent(ent, user);
         RaiseLocalEvent(ent.Owner, ref ev, true);
         if (!ev.CanOverload)
-        {
-            PopupFusionReactorOverloadFailure(ent, user, ev.Failure, popup);
             return false;
-        }
 
         return true;
-    }
-
-    private void PopupFusionReactorOverloadFailure(Entity<RMCFusionReactorComponent> ent, EntityUid user, LocId loc, bool popup)
-    {
-        if (!popup)
-            return;
-
-        var msg = Loc.GetString(loc, ("reactor", ent));
-        _popup.PopupClient(msg, ent, user, SmallCaution);
     }
 
     private bool HasFusionReactorCell(Entity<RMCFusionReactorComponent> ent)
