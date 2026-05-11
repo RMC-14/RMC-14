@@ -20,7 +20,6 @@ public abstract partial class SharedBuckleSystem
 
         SubscribeLocalEvent<BuckleComponent, InteractHandEvent>(OnBuckleInteractHand, before: [typeof(InteractionPopupSystem)]);
         SubscribeLocalEvent<BuckleComponent, GetVerbsEvent<InteractionVerb>>(AddUnbuckleVerb);
-        SubscribeLocalEvent<BuckleComponent, GetVerbsEvent<AlternativeVerb>>(AddAltUnbuckleVerb); // RMC 14 Edit.
     }
 
     private void OnCanDropTarget(EntityUid uid, StrapComponent component, ref CanDropTargetEvent args)
@@ -242,29 +241,5 @@ public abstract partial class SharedBuckleSystem
 
         args.Verbs.Add(verb);
     }
-
-    // RMC 14 Edit start
-    // This isn't worth splitting up into methods and helpers, your upstreamer will hate you for changing code here that much.
-    // Add Unbuckle verb on ALT interact so alt-cllick interact picks this up as a verb and executes it.
-    private void AddAltUnbuckleVerb(EntityUid uid, BuckleComponent component, GetVerbsEvent<AlternativeVerb> args)
-    {
-
-        if (!args.CanAccess || !args.CanInteract || !component.Buckled)
-            return;
-
-        if (!CanUnbuckle((uid, component), args.User, false))
-            return;
-
-        AlternativeVerb verb = new()
-        {
-            Act = () => TryUnbuckle(uid, args.User, buckleComp: component),
-            Text = Loc.GetString("verb-categories-unbuckle"),
-            Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/unbuckle.svg.192dpi.png"))
-        };
-
-        args.Verbs.Add(verb);
-
-    }
-    // RMC 14 Edit end.
 
 }
