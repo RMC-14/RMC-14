@@ -369,7 +369,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var existing = _xenoWeeds.GetWeedsOnFloor(grid, coordinates);
         if (existing is { Comp.IsSource: true })
         {
-            _popup.PopupCoordinates(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
+            if (isInQueenEye)
+                _popup.PopupCoordinates(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
+            else
+                _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
             return;
         }
 
@@ -387,10 +390,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (adjacent == default)
             {
-                _popup.PopupCoordinates("You can only plant weeds if there is a nearby node.",
-                    args.Target,
-                    xeno,
-                    PopupType.MediumCaution);
+                if (isInQueenEye)
+                    _popup.PopupCoordinates("You can only plant weeds if there is a nearby node.",
+                        args.Target,
+                        xeno,
+                        PopupType.MediumCaution);
+                else
+                    _popup.PopupClient("You can only plant weeds if there is a nearby node.",
+                        args.Target,
+                        xeno,
+                        PopupType.MediumCaution);
 
                 return;
             }
@@ -410,13 +419,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         var plasmaCost = existing == null ? args.PlasmaCost : args.SourcePlasmaCost;
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost))
-        {
-            if (isInQueenEye)
-                _popup.PopupCoordinates(Loc.GetString("cm-xeno-not-enough-plasma"), coordinates, xeno.Owner, PopupType.MediumCaution);
-
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost, predicted: !isInQueenEye, popupOn: isInQueenEye ? coordinates : args.Target))
             return;
-        }
 
         if (existing != null)
             _actions.SetCooldown(args.Action.AsNullable(), args.SourceCooldown);

@@ -251,6 +251,9 @@ public sealed class QueenEyeSystem : EntitySystem
         _parallel.ProcessNow(_job, _job.Data.Count);
     }
 
+    /// <summary>
+    /// Returns whether a tile is accessible based on vision.
+    /// </summary>
     private bool IsAccessible(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile, float expansionSize = 29)
     {
         _seeds.Clear();
@@ -312,10 +315,8 @@ public sealed class QueenEyeSystem : EntitySystem
             Loc.GetString("rmc-xeno-queen-eye-expand-weeds-desc"));
     }
 
-    private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen)
-    {
+    private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen) =>
         _swappableAction.SwapAllToInstant(queen.Owner, new XenoPlantWeedsActionEvent());
-    }
 
     public bool IsInQueenEye(Entity<QueenEyeActionComponent?> queen)
     {
@@ -360,6 +361,9 @@ public sealed class QueenEyeSystem : EntitySystem
         return IsAccessible((gridId, broadphase, grid), targetTile);
     }
 
+    /// <summary>
+    /// Gets the relevant vision seeds for later.
+    /// </summary>
     private record struct SeedJob : IRobustJob
     {
         public required QueenEyeSystem System;
