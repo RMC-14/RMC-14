@@ -216,7 +216,7 @@
 - type: entity
   parent: RMCMagazineSMGPCAC5
   id: RMCMagazineSMGPCAC5Rubber
-  name: "PCAC5 rubber magazine (9mm)"
+  name: "PCAC5 rubber magazine (9mm SMG)"
   suffix: PVE # TODO RMC14: Remove PVE suffix when the 9mm cartridge situation is fixed.
   description: "A 9mm SMG magazine for the PCAC5, loaded with less-lethal rubber rounds."
   components:
@@ -247,7 +247,7 @@
   parent: CMCartridge10x20mm
   id: CMCartridge9mmSMG
   name: cartridge (9mm SMG)
-  description: A 9mm cartridge for the mp5 submachinegun.
+  description: A 9mm SMG cartridge for the PCAC5 submachinegun.
   components:
   - type: Tag
     tags:
@@ -260,7 +260,7 @@
   parent: CMCartridge9mmSMG
   id: RMCCartridge9mmSMGAP
   name: AP cartridge (9mm SMG)
-  description: A 9mm armor-piercing cartridge for the mp5 submachinegun.
+  description: A 9mm SMG armor-piercing cartridge for the PCAC5 submachinegun.
   components:
   - type: Tag
     tags:
@@ -272,8 +272,8 @@
 - type: entity
   parent: CMCartridge9mmSMG
   id: RMCCartridge9mmSMGRubber
-  name: AP cartridge (9mm SMG)
-  description: A 9mm armor-piercing cartridge for the mp5 submachinegun.
+  name: rubber cartridge (9mm SMG)
+  description: A 9mm SMG less-lethal rubber cartridge for the PCAC5 submachinegun.
   components:
   - type: Tag
     tags:
@@ -297,6 +297,9 @@
 
 - type: Tag
   id: RMCMagazineSMGPCAC5Rubber
+
+- type: Tag
+  id: CMCartridge9mmSMG
 
 - type: Tag
   id: RMCCartridge9mmSMGAP
