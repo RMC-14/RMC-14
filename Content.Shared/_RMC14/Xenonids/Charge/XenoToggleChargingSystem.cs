@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -13,6 +14,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
@@ -75,18 +77,23 @@ public sealed class XenoToggleChargingSystem : EntitySystem
 
         SubscribeLocalEvent<ActiveXenoToggleChargingComponent, MapInitEvent>(OnActiveToggleChargingMapInit);
         SubscribeLocalEvent<ActiveXenoToggleChargingComponent, ComponentRemove>(OnActiveToggleChargingRemove);
-        SubscribeLocalEvent<ActiveXenoToggleChargingComponent, RefreshMovementSpeedModifiersEvent>(OnActiveToggleChargingSpeed);
+        SubscribeLocalEvent<ActiveXenoToggleChargingComponent, RefreshMovementSpeedModifiersEvent>(
+            OnActiveToggleChargingSpeed);
         SubscribeLocalEvent<ActiveXenoToggleChargingComponent, MoveInputEvent>(OnActiveToggleChargingMoveInput);
         SubscribeLocalEvent<ActiveXenoToggleChargingComponent, MoveEvent>(OnActiveToggleChargingMove);
         SubscribeLocalEvent<ActiveXenoToggleChargingComponent, StartCollideEvent>(OnActiveToggleChargingCollide);
-        SubscribeLocalEvent<ActiveXenoToggleChargingComponent, MobStateChangedEvent>(OnActiveToggleChargingMobStateChanged);
+        SubscribeLocalEvent<ActiveXenoToggleChargingComponent, MobStateChangedEvent>(
+            OnActiveToggleChargingMobStateChanged);
 
         SubscribeLocalEvent<XenoToggleChargingDamageComponent, XenoToggleChargingCollideEvent>(OnChargingDamageCollide);
 
-        SubscribeLocalEvent<XenoToggleChargingKnockbackComponent, XenoToggleChargingCollideEvent>(OnChargingKnockbackCollide);
-        SubscribeLocalEvent<XenoToggleChargingKnockbackComponent, AttemptMobTargetCollideEvent>(OnChargingKnockbackAttemptCollide);
+        SubscribeLocalEvent<XenoToggleChargingKnockbackComponent, XenoToggleChargingCollideEvent>(
+            OnChargingKnockbackCollide);
+        SubscribeLocalEvent<XenoToggleChargingKnockbackComponent, AttemptMobTargetCollideEvent>(
+            OnChargingKnockbackAttemptCollide);
 
-        SubscribeLocalEvent<XenoToggleChargingParalyzeComponent, XenoToggleChargingCollideEvent>(OnChargingParalyzeCollide);
+        SubscribeLocalEvent<XenoToggleChargingParalyzeComponent, XenoToggleChargingCollideEvent>(
+            OnChargingParalyzeCollide);
 
         SubscribeLocalEvent<XenoToggleChargingStopComponent, XenoToggleChargingCollideEvent>(OnChargingStopCollide);
 
@@ -95,7 +102,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         Subs.CVar(_config, CCVars.RelativeMovement, v => _relativeMovement = v, true);
     }
 
-    private void OnChargingDamageCollide(Entity<XenoToggleChargingDamageComponent> damage, ref XenoToggleChargingCollideEvent args)
+    private void OnChargingDamageCollide(Entity<XenoToggleChargingDamageComponent> damage,
+        ref XenoToggleChargingCollideEvent args)
     {
         args.Handled = true;
 
@@ -194,7 +202,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
             IncrementStages(ent, -damage.Comp.StageLoss);
     }
 
-    private void OnChargingKnockbackCollide(Entity<XenoToggleChargingKnockbackComponent> ent, ref XenoToggleChargingCollideEvent args)
+    private void OnChargingKnockbackCollide(Entity<XenoToggleChargingKnockbackComponent> ent,
+        ref XenoToggleChargingCollideEvent args)
     {
         args.Handled = true;
 
@@ -240,7 +249,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         }
     }
 
-    private void OnChargingKnockbackAttemptCollide(Entity<XenoToggleChargingKnockbackComponent> ent, ref AttemptMobTargetCollideEvent args)
+    private void OnChargingKnockbackAttemptCollide(Entity<XenoToggleChargingKnockbackComponent> ent,
+        ref AttemptMobTargetCollideEvent args)
     {
         if (!_activeXenoToggleChargingQuery.TryComp(args.Entity, out var active) ||
             active.Stage <= 0)
@@ -251,7 +261,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnChargingParalyzeCollide(Entity<XenoToggleChargingParalyzeComponent> ent, ref XenoToggleChargingCollideEvent args)
+    private void OnChargingParalyzeCollide(Entity<XenoToggleChargingParalyzeComponent> ent,
+        ref XenoToggleChargingCollideEvent args)
     {
         args.Handled = true;
 
@@ -268,7 +279,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         _stun.TryParalyze(ent, duration, false);
     }
 
-    private void OnChargingStopCollide(Entity<XenoToggleChargingStopComponent> ent, ref XenoToggleChargingCollideEvent args)
+    private void OnChargingStopCollide(Entity<XenoToggleChargingStopComponent> ent,
+        ref XenoToggleChargingCollideEvent args)
     {
         args.Handled = true;
         ResetStage(args.Charger);
@@ -280,7 +292,9 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         ResetStage(args.Charger);
     }
 
-    private void OnXenoToggleChargingAction(Entity<XenoToggleChargingComponent> ent, ref XenoToggleChargingActionEvent args)
+
+    private void OnXenoToggleChargingAction(Entity<XenoToggleChargingComponent> ent,
+        ref XenoToggleChargingActionEvent args)
     {
         if (_timing.ApplyingState)
             return;
@@ -323,7 +337,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         }
     }
 
-    private void OnActiveToggleChargingSpeed(Entity<ActiveXenoToggleChargingComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    private void OnActiveToggleChargingSpeed(Entity<ActiveXenoToggleChargingComponent> ent,
+        ref RefreshMovementSpeedModifiersEvent args)
     {
         if (ent.Comp.Stage == 0)
             return;
@@ -438,7 +453,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }
 
-    private void OnActiveToggleChargingCollide(Entity<ActiveXenoToggleChargingComponent> ent, ref StartCollideEvent args)
+    private void OnActiveToggleChargingCollide(Entity<ActiveXenoToggleChargingComponent> ent,
+        ref StartCollideEvent args)
     {
         if (Math.Abs(ent.Comp.Steps - 1) < 0.001)
             return;
@@ -446,7 +462,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         _hit.Add((ent, args.OtherEntity));
     }
 
-    private void OnActiveToggleChargingMobStateChanged(Entity<ActiveXenoToggleChargingComponent> ent, ref MobStateChangedEvent args)
+    private void OnActiveToggleChargingMobStateChanged(Entity<ActiveXenoToggleChargingComponent> ent,
+        ref MobStateChangedEvent args)
     {
         if (args.NewMobState == MobState.Alive)
             return;
@@ -503,6 +520,54 @@ public sealed class XenoToggleChargingSystem : EntitySystem
         return wishDir.GetDir().AsFlag();
     }
 
+    private bool TryDefaultStructureCollide(Entity<ActiveXenoToggleChargingComponent> crusher, EntityUid target)
+    {
+        if (HasComp<MobStateComponent>(target))
+            return false;
+
+        if (!TryComp(target, out DamageableComponent? _))
+            return false;
+
+        if (!TryComp(crusher, out XenoToggleChargingDefaultCollideComponent? defaults))
+            return false;
+
+        var stage = crusher.Comp.Stage;
+        if (stage <= 0)
+            return false;
+
+        if (!_xenoToggleChargingQuery.TryComp(crusher, out var chargingComp))
+            return false;
+
+        if (_net.IsServer)
+        {
+            var mult = stage >= chargingComp.MaxStage
+                ? defaults.MaxStageDamageMultiplier
+                : 1f;
+
+            DamageSpecifier damage;
+            if (HasComp<BarricadeComponent>(target))
+                damage = defaults.BarricadeDamagePerStage;
+            else if (HasComp<MobStateComponent>(target))
+                damage = defaults.DamagePerStage;
+            else
+                damage = defaults.StructureDamagePerStage;
+
+            _damageable.TryChangeDamage(target, damage * stage * mult);
+
+            _popup.PopupEntity(
+                Loc.GetString("rmc-xeno-charge-smashes", ("xeno", crusher), ("target", target)),
+                target,
+                PopupType.SmallCaution
+            );
+
+            if (defaults.Sound != null)
+                _audio.PlayPvs(defaults.Sound, target);
+        }
+
+        ResetCharging(crusher, false);
+        return true;
+    }
+
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
@@ -516,11 +581,14 @@ public sealed class XenoToggleChargingSystem : EntitySystem
                 if (_xenoToggleChargingRecentlyHitQuery.TryComp(hit.Target, out var recently) &&
                     time < recently.LastHitAt + recently.Cooldown)
                 {
-                    return;
+                    continue;
                 }
 
                 var ev = new XenoToggleChargingCollideEvent(hit.Crusher);
                 RaiseLocalEvent(hit.Target, ref ev);
+
+                if (!ev.Handled)
+                    ev.Handled = TryDefaultStructureCollide(hit.Crusher, hit.Target);
 
                 if (ev.Handled)
                 {
@@ -541,7 +609,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
             _hit.Clear();
         }
 
-        var query = EntityQueryEnumerator<ActiveXenoToggleChargingComponent, XenoToggleChargingComponent, PhysicsComponent>();
+        var query =
+            EntityQueryEnumerator<ActiveXenoToggleChargingComponent, XenoToggleChargingComponent, PhysicsComponent>();
         while (query.MoveNext(out var uid, out var active, out var charging, out var physics))
         {
             if (physics.BodyStatus == BodyStatus.InAir)
