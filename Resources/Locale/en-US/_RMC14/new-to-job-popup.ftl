@@ -101,7 +101,7 @@ rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of t
 
                                              If you have any other questions, consult the guidebook's Corporate Liaison page.
 
-rmc-new-to-job-eb = Your job as an Executive Bodyguard is to ensure the safety of the shipside Liaison, as well as roleplaying with them over the course of a round.
+rmc-new-to-job-executive-bodyguard = Your job as an Executive Bodyguard is to ensure the safety of the shipside Liaison, as well as roleplaying with them over the course of a round.
 
                                              To preform your duties, your vendors should have both clothing and gear; at first, the items avalible to you are limited, but will expand as you gain experience and time in the role.
 
