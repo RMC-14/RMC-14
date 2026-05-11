@@ -135,3 +135,5 @@ rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
     Loaded: {$loaded}
 
     Ammo: {$current} / {$max}
+
+rmc-dropship-launch-alarm-xeno-shutdown = We slash at {$console}, silencing its squawking!

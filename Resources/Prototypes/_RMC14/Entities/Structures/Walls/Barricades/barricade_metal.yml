@@ -31,8 +31,9 @@
     repairableDamageLimit: 340
   - type: NailgunRepairable
     # cm13 max_health%: 0.3, 0.45
-    repairMetal: 135
-    repairPlasteel: 200
+    repairValues:
+      CMSteel: 135
+      CMPlasteel: 200
   - type: Destructible
     thresholds:
     - trigger:
@@ -359,7 +360,7 @@
       - state: centerroadbarrier1
       - map: [ "acided" ]
 
-
+# Plastic Handrails
 - type: entity
   parent: RMCBarricadeHandrail
   id: RMCBarricadeHybrisaPlasticRoadBarrier
@@ -370,7 +371,7 @@
       - state: plasticroadbarrierred
       - map: [ "acided" ]
     - type: Construction
-      graph: BarricadeHandrailGraph
+      graph: RMCBarricadeHandrailPlasticGraph
       node: nodeHandrail
 
 - type: entity
@@ -419,8 +420,9 @@
     repairableDamageLimit: 300
   - type: NailgunRepairable
     # cm13 max_health%: 0.3, 0.45
-    repairMetal: 120
-    repairPlasteel: 180
+    repairValues:
+      CMSteel: 120
+      CMPlasteel: 180
   - type: Destructible
     thresholds:
     - trigger:
