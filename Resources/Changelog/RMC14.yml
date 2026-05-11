@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed being unable to upgrade corrosive acid on cades
-    type: Fix
-  id: 2684
-  time: '2025-12-14T22:48:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8676
 - author: BarteG44
   changes:
   - message: Boxes of .458 can now be worn on the back
@@ -4490,5 +4483,12 @@
   id: 3183
   time: '2026-05-11T04:00:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9724
+- author: IceNoobXD
+  changes:
+  - message: Added landing lights to Kutjevo's alternative LZ1 insert!
+    type: Add
+  id: 3184
+  time: '2026-05-11T16:08:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9833
 Name: RMC14
 Order: -1
