@@ -10,31 +10,38 @@
   - The [bold]AO[/bold] is safe and secure, personnel are no longer needed and may be relieved to rest.
   - Evacuation of the [bold]AO[/bold] has occured, with no intent to return.
 
-  ## Forward Operating Base
+  ## Areas
+
+  ### Forward Operating Base
 
   The [color=#008000][bold]Commander[/bold][/color] in charge of an operation must take the minimum precautions to ensure security and defense for stationed personnel, and incoming transport, when designating a [bold]Forward Operating Base[/bold].
 
   - The [bold]FOB[/bold] must be a [bold]Secure Area[/bold] and designated by the [color=#008000][bold]Commander[/bold][/color].
-  - The primary landing zone still requires its outlined defenses, regardless of where the [bold]FOB[/bold] is designated.
-  - Only Bravo may be stationed as the primary landing zone and [bold]FOB[/bold]'s primary defense. Any additional squads may assist where needed, and combat technicians may also be ordered to help reinforce the [bold]FOB[/bold] and primary landing zone defenses before resuming their original squad's orders.
+  - The [bold]Primary Landing Zone[/bold] still requires its outlined defenses, regardless of where the [bold]FOB[/bold] is designated.
+  - The [bold]Primary Landing Zone[/bold] is assumed to be the [bold]FOB[/bold] if not designated elsewhere.
 
-  ## Secure Areas
 
-  - Additional areas may be designated as a [bold]Secure Area[/bold]s by any [bold]CIC Personnel[/bold]. Their secure status may be revoked for any reason by any [bold]CIC Personnel[/bold]. It should be announced in both cases for clarity.
-  - These areas dictate where certain shipside personnel are allowed to be given permission to work.
-  - These areas are no longer secure if there is a breach or the area is being attacked by hostiles.
+  ### Secure Areas
+
+  - Must be designated by [bold]CIC Personnel[/bold].
+  - It must be reinforced with a minimum of a surrounding line of non-makeshift barricades, and where there has been no recent combat or threats.
+  - Additional areas may be designated as [bold]Secure Areas[/bold] by any [bold]CIC Personnel[/bold]. Their secure status may be revoked for any reason by any [bold]CIC Personnel[/bold]. It should be announced in both cases for clarity.
+  - These areas dictate where certain shipside personnel are allowed to be given permission to work safely.
+  - [bold]Secure Areas[/bold] that have had their innermost barricades attacked are presumed no longer secure, and should be reported for safety. Relevant personnel should be escorted from the area if the safety and status of the area cannot be restored.
 
   ### Field Hospital
 
-  - It must be designated as a [bold]Secure Area[/bold], which in this case can be designated by the [bold]Chief Medical Officer[/bold] as well.
-  - The Field Hospital itself must also be designated as such by the [color=#008000][bold]Commander[/bold][/color] or [bold]Chief Medical Officer[/bold].
+  - Must be designated by the [color=#008000][bold]Commander[/bold][/color] or [bold]Chief Medical Officer[/bold], and must also be able to be considered a [bold]Secure Area[/bold] by either person.
+  - It is the only area aside from the [bold]FOB[/bold] in the [bold]AO[/bold] that the [bold]Chief Medical Officer[/bold] or [color=#008000][bold]Commander[/bold][/color] may give permission to doctors and nurses to move to.
   - This should be announced for clarity.
 
 
   ### Primary Landing Zone
 
   - Selected for the entire duration of the operation by the [color=#008000][bold]Commander[/bold][/color].
-  - The primary landing zone must be reinforced with a minimum of a line of non-makeshift defenses, including stationed marines.
+  - The primary landing zone must be reinforced with a minimum of a surrounding line of non-makeshift barricades, including stationed marines.
+  - It can be presumed by all personnel to be a [bold]Secure Area[/bold] regardless of barricades, while deployed gauss turret systems are still active during the initial phase of the operation.
+  - Only Bravo may be stationed as the primary landing zone and [bold]FOB[/bold]'s primary defense. Any additional squads may assist where needed, and combat technicians may also be ordered to help reinforce the [bold]FOB[/bold] and primary landing zone defenses before resuming their original squad's orders.
 
   ## Conduct of Briefing
 

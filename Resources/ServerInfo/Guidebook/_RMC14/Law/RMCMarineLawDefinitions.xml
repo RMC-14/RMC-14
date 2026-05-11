@@ -3,6 +3,8 @@
 
   [italic]These definitions are used throughout the rest of Marine Law.[/italic]
 
+  ## Personnel
+
   [color=#00CBFE][bold]Commanding Officer[/bold][/color]
   - The official UNMC Commanding Officer of the warship.
   - Anything with the words [color=#00CBFE][bold]Commanding Officer[/bold][/color] only applies to the current whitelisted Commanding Officer of the warship. These rights can be transferred to any UNMC Officers that are ranked [bold]Major[/bold] or above by the [color=#008000][bold]Commander[/bold][/color].
@@ -69,12 +71,7 @@
   [bold]Flight Crew[/bold]
   - Designated Pilots and Dropship Crew Chiefs.
 
-  \n
-
-  [bold]Aiding, abetting, conspiring[/bold]
-  - Assisting others in committing a crime, directly or indirectly, encouraging them to commit one (including bribery), conspiring or attempting to commit a crime will be treated as having committed that crime with regards to punishment.
-
-  \n
+  ## Orders
 
   [bold]Lawful Orders[/bold]
   - Personnel are required to follow all lawful orders from their superiors and are not required to follow unlawful orders.
@@ -82,6 +79,8 @@
   - Valid NJPs are not unlawful orders in the case of neglected duties.
 
   \n
+
+  ## Equipment
 
   [bold]Standard Issue Equipment[/bold]
 
@@ -99,9 +98,29 @@
 
   \n
 
+  ## Areas
+
+  Further definitions and requirements for these areas can be found in Non-Modifiable Command SOP.
+
+
+  [bold]Secure Areas[/bold]
+
+  - These areas dictate where certain shipside personnel are allowed to be given permission to work safely.
+  - The [bold]FOB[/bold] and [bold]Field Hospital[/bold] are typical [bold]Secure Areas[/bold].
+
+  \n
+
   [bold]FOB[/bold]
-  - The Forward Operating Base.
-  - Designated by the [color=#008000][bold]Commander[/bold][/color]. It is a reinforced area, usually being the primary landing zone.
+  - The Forward Operating Base, usually used for staging combat personnel and storing excess supplies.
+  - Designated by the [color=#008000][bold]Commander[/bold][/color], or otherwise usually the [bold]Primary Landing Zone[/bold].
+
+  \n
+
+  [bold]Primary Landing Zone[/bold]
+
+  - Selected for the entire duration of the operation by the [color=#008000][bold]Commander[/bold][/color].
+  - The primary drop-off and evacuation point.
+
 
   \n
 
@@ -110,20 +129,13 @@
 
   \n
 
-  [bold]Secure Areas[/bold]
-  - Must be designated by the [color=#008000][bold]Commander[/bold][/color] or [bold]Staff Officer[/bold]s. It is a reinforced area, where there has been no recent combat or threats.
-  - The [bold]FOB[/bold] is usually a secure area until it is attacked, for example.
-  - The [color=#008000][bold]Commander[/bold][/color] or any [bold]CIC Personnel[/bold] at any point may designate an area no longer secure.
-  - Areas that have been recently attacked are presumed no longer secure, and should be reported for safety.
-
-  \n
-
   [bold]Field Hospital[/bold]
-  - Must be designated by the [color=#008000][bold]Commander[/bold][/color] or [bold]Chief Medical Officer[/bold]. It is a reinforced area, where there has been no recent combat or threats.
-  - It is the only area aside from the [bold]FOB[/bold] that the [bold]Chief Medical Officer[/bold] or [color=#008000][bold]Commander[/bold][/color] may give permission to doctors and nurses to move to.
-  - It must be designated as a [bold]Secure Area.[/bold]
+  - A [bold]Secure Area[/bold] designated by the [bold]Chief Medical Officer[/bold] or [color=#008000][bold]Commander[/bold][/color].
+  - It is the only area aside from the [bold]FOB[/bold] may receive permission to doctors and nurses to move to.
 
   \n
+
+  ## Alerts
 
   [bold]Alert Levels[/bold]
   - Code [bold][color=lightgreen]Green[/color][/bold]: All clear.
@@ -132,6 +144,8 @@
   - Code [bold][color=black]Delta[/color][/bold]:  Immediately applies if the warship hull has a major breach by intruders. An order of evacuation, self-destruction, or hold of the warship will be made at this time.
 
   \n
+
+  ## High Ranks and Provost
 
   [bold]High Ranking Officers[/bold]
   - UNMC Officers ranked [bold]Major[/bold] or above.
