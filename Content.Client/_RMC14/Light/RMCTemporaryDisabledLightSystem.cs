@@ -79,12 +79,12 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
             _nearbyLightsList.AddRange(_nearbyLights);
             _nearbyLightsList.Sort((a, b) => a.Owner.Id.CompareTo(b.Owner.Id));
 
-            foreach (var candidate in _nearbyLightsList)
+            foreach (var nearbyLight in _nearbyLightsList)
             {
-                if (HasComp<RMCTemporaryDisabledLightComponent>(candidate))
+                if (HasComp<RMCTemporaryDisabledLightComponent>(nearbyLight))
                     continue;
 
-                var candidatePos = _transform.GetWorldPosition(candidate.Owner);
+                var nearbyLightPosition = _transform.GetWorldPosition(nearbyLight.Owner);
                 var tooCloseToAll = true;
 
                 if (_keptLights.Count == 0)
@@ -93,8 +93,8 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
                 {
                     foreach (var kept in _keptLights)
                     {
-                        var keptPos = _transform.GetWorldPosition(kept.Owner);
-                        var distance = (candidatePos - keptPos).Length();
+                        var keptLightPosition = _transform.GetWorldPosition(kept.Owner);
+                        var distance = (nearbyLightPosition - keptLightPosition).Length();
 
                         if (!(distance >= _maxNearbyLightCheckRange))
                             continue;
@@ -107,17 +107,17 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
                 var shouldDisable = _keptLights.Count >= _maxNearbyLights || tooCloseToAll;
                 if (shouldDisable)
                 {
-                    var disabled = EnsureComp<RMCTemporaryDisabledLightComponent>(candidate);
+                    var disabled = EnsureComp<RMCTemporaryDisabledLightComponent>(nearbyLight);
                     disabled.NextCheckAt = time + LightCheckInterval;
 
-                    _pointLight.SetEnabled(candidate, false, candidate.Comp);
+                    _pointLight.SetEnabled(nearbyLight, false, nearbyLight.Comp);
                 }
                 else
                 {
-                    _keptLights.Add(candidate);
-                    RemComp<RMCTemporaryDisabledLightComponent>(candidate);
+                    _keptLights.Add(nearbyLight);
+                    RemComp<RMCTemporaryDisabledLightComponent>(nearbyLight);
 
-                    _pointLight.SetEnabled(candidate, true, candidate.Comp);
+                    _pointLight.SetEnabled(nearbyLight, true, nearbyLight.Comp);
                 }
             }
         }
