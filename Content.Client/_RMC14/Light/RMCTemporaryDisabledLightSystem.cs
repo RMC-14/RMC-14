@@ -20,6 +20,7 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
 
     private readonly HashSet<Entity<PointLightComponent>> _nearbyLights = new();
     private readonly List<Entity<PointLightComponent>> _nearbyLightsList = new();
+    private readonly List<Entity<PointLightComponent>> _keptLights = new();
 
     private EntityQuery<ExpendableLightComponent> _expendableLightQuery;
     private EntityQuery<HandheldLightComponent> _handHeldLightQuery;
@@ -73,22 +74,51 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
                 continue;
             }
 
+            _keptLights.Clear();
             _nearbyLightsList.Clear();
             _nearbyLightsList.AddRange(_nearbyLights);
             _nearbyLightsList.Sort((a, b) => a.Owner.Id.CompareTo(b.Owner.Id));
 
-            for (var i = 0; i < _nearbyLightsList.Count; i++)
+            foreach (var candidate in _nearbyLightsList)
             {
-                var enabledLight = _nearbyLightsList[i];
-                var shouldDisable = i < _maxNearbyLights;
-
-                if (!shouldDisable)
+                if (HasComp<RMCTemporaryDisabledLightComponent>(candidate))
                     continue;
 
-                var disabled = EnsureComp<RMCTemporaryDisabledLightComponent>(enabledLight);
-                disabled.NextCheckAt = time + LightCheckInterval;
+                var candidatePos = _transform.GetWorldPosition(candidate.Owner);
+                var tooCloseToAll = true;
 
-                _pointLight.SetEnabled(enabledLight, false, enabledLight.Comp);
+                if (_keptLights.Count == 0)
+                    tooCloseToAll = false;
+                else
+                {
+                    foreach (var kept in _keptLights)
+                    {
+                        var keptPos = _transform.GetWorldPosition(kept.Owner);
+                        var distance = (candidatePos - keptPos).Length();
+
+                        if (!(distance >= _maxNearbyLightCheckRange))
+                            continue;
+
+                        tooCloseToAll = false;
+                        break;
+                    }
+                }
+
+                var shouldDisable = _keptLights.Count >= _maxNearbyLights || tooCloseToAll;
+                if (shouldDisable)
+                {
+                    var disabled = EnsureComp<RMCTemporaryDisabledLightComponent>(candidate);
+                    disabled.NextCheckAt = time + LightCheckInterval;
+
+                    _pointLight.SetEnabled(candidate, false, candidate.Comp);
+                }
+                else
+                {
+                    _keptLights.Add(candidate);
+                    RemComp<RMCTemporaryDisabledLightComponent>(candidate);
+
+                    _pointLight.SetEnabled(candidate, true, candidate.Comp);
+                }
             }
         }
     }
