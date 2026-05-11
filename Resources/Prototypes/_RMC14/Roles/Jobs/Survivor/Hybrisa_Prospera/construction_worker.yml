@@ -47,7 +47,7 @@
   name: hybrisa construction worker colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHandsVeteranInsulated, RMCHardhatOrange, RMCHazardVest ]
     - [ RMCHandsVeteranInsulated, RMCHardhatOrange, RMCHazardVest ]
