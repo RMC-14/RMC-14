@@ -111,7 +111,6 @@ public sealed class QueenEyeSystem : EntitySystem
         _eye.SetDrawFov(ent, false);
         _mover.SetRelay(ent, ent.Comp.Eye.Value);
 
-        // When queen eye is activated, swap plant weeds to world-target expand weeds
         if (HasComp<XenoAttachedOvipositorComponent>(ent.Owner))
             SwapPlantWeedsToWorldTarget(ent);
     }
@@ -181,7 +180,6 @@ public sealed class QueenEyeSystem : EntitySystem
         {
             _isRevertingMove = true;
 
-            // Find nearest weed from old position to use as anchor
             _anchorWeeds.Clear();
             _entityLookup.GetEntitiesInRange(args.OldPosition, ent.Comp.MaxWeedDistance, _anchorWeeds);
             if (_anchorWeeds.Count > 0)
@@ -202,7 +200,6 @@ public sealed class QueenEyeSystem : EntitySystem
                     }
                 }
 
-                // Lerp damping: smoothly reduce movement as the eye approaches the boundary
                 var offset = newWorldPos - closestWeedPos;
                 var dist = offset.Length();
                 var soft = ent.Comp.SoftWeedDistance;
@@ -214,7 +211,6 @@ public sealed class QueenEyeSystem : EntitySystem
                     _transform.SetWorldPosition(ent, closestWeedPos + offset / dist * dampedDist);
                 }
             }
-            // TODO RMC14 Find some way to teleport eye back without jittery movements
             else if (ent.Comp.Queen is { } queen &&
                      !TerminatingOrDeleted(queen) &&
                      TryComp(queen, out QueenEyeActionComponent? queenAction))
@@ -252,7 +248,6 @@ public sealed class QueenEyeSystem : EntitySystem
         _parallel.ProcessNow(_job, _job.Data.Count);
     }
 
-    // Returns whether a tile is accessible based on vision.
     private bool IsAccessible(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile, float expansionSize = 29)
     {
         _seeds.Clear();
@@ -297,7 +292,6 @@ public sealed class QueenEyeSystem : EntitySystem
 
         RemComp<RelayInputMoverComponent>(ent);
 
-        // Swap plant weeds action back to instant mode
         SwapPlantWeedsToInstant(ent);
 
         var ev = new QueenEyeActionUpdated(ent);
@@ -363,7 +357,6 @@ public sealed class QueenEyeSystem : EntitySystem
         return IsAccessible((gridId, broadphase, grid), targetTile);
     }
 
-    // Gets the relevant vision seeds for later.
     private record struct SeedJob : IRobustJob
     {
         public required QueenEyeSystem System;

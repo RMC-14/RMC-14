@@ -335,7 +335,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             var barricadeEnum = _rmcMap.GetAnchoredEntitiesEnumerator<BarricadeComponent>(coordinates);
             while (barricadeEnum.MoveNext(out var barricadeUid))
             {
-                // Open folding barricades won't block expand weed
                 if (TryComp(barricadeUid, out DoorComponent? door) && door.State == DoorState.Open)
                     continue;
 
@@ -428,7 +427,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 _xenoWeeds.AssignSource(newWeeds, adjacent.Comp?.Source ?? adjacent);
         }
 
-        // passes null so weedplant sound still plays for queen
         var audioUser = _queenEye.IsInQueenEye(xeno.Owner) ? null : (EntityUid?) xeno.Owner;
         _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, audioUser);
     }
