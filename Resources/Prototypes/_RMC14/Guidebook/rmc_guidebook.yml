@@ -66,6 +66,7 @@
   - RMCGuideMarineCommunications
   - RMCGuideCorporateLiaison
   - RMCGuideSquadLeader
+  - RMCGuideNewIcons
 
 - type: guideEntry
   parent: RMC
@@ -142,6 +143,13 @@
   - RMCGuideRoleSpecGrenadier
   - RMCGuideRoleSpecScout
   - RMCGuideRoleSpecSniper
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideNewIcons
+  priority: 11
+  name: "New Player Icons"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideNewIcons.xml"
 
 - type: guideEntry
   parent: RMC
