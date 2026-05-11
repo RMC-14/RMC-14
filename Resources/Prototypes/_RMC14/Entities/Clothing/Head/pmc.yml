@@ -371,7 +371,7 @@
 
 - type: entity
   parent: ArmorHelmetPMC
-  id: ArmorHelmetEB
+  id: RMCArmorHelmetExecutiveBodyguard
   name: We-Ya executive bodyguard helmet
   description: A basic skull-helm worn by Security Division assets, graded to protect your head from an unruly scientist armed with a crowbar.
   components:

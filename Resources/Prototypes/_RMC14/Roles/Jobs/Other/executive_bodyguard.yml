@@ -1,10 +1,9 @@
-﻿# Executive Bodyguard
-- type: job
+﻿- type: job
   parent: RMCJobNametagBase
   id: RMCWeYaExecutiveBodyguard
   name: rmc-job-name-executive-bodyguard
   description: rmc-job-description-executive-bodyguard
-  newToJobInfo: rmc-new-to-job-eb
+  newToJobInfo: rmc-new-to-job-executive-bodyguard
   playTimeTracker: RMCJobWeYaExecutiveBodyguard
   requirements:
   - !type:DepartmentTimeRequirement
@@ -90,7 +89,7 @@
     - RMCWeaponTaser
     - CMFlash
     - RMCHandcuffs
-    # TODO: RMCPepperSpray
+    # RMC14 TODO: RMCPepperSpray
 
 - type: entity
   parent: CMSpawnPointJobBase

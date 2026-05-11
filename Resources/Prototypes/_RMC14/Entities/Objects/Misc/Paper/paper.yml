@@ -270,7 +270,7 @@
     - stampedColor: '#996600'
       stampedName: stamp-component-stamped-name-cm-we-ya
     - stampedColor: '#4E806AFF'
-      stampedName: stamp-component-stamped-name-cm-marine
+      stampedName: stamp-component-stamped-name-cm-marine # UNMC High Command
     content: |
       [ head=2 ]Authority & You; Your Provisions on a UNMC Vessel![/head]
 

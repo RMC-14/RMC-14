@@ -1,12 +1,10 @@
-﻿# Executive Bodyguard
-
+﻿
   #Clothes Rack
 - type: entity
   parent: ColMarTechWardrobeCorp
-  id: ColMarTechWardrobeEB
+  id: ColMarTechWardrobeExecutiveBodyguard
   name: executive bodyguard clothes rack
   description: An automated rack hooked up to a colossal storage of Security Division standard-issue clothing.
-  suffix: Exec. Bodyguard
   components:
   - type: CMAutomatedVendor
     jobs:
@@ -18,7 +16,7 @@
       - id: RMCBootsPMCFilled
       - id: RMCHeadsetLiaison
       - id: RMCGlassesSecurityBlue
-        # Blue SecHud Perscription
+      # RMC14 TODO: Blue SecHud Perscription
     - name: Uniforms
       choices: { CMUniform: 5 }
       entries:
@@ -53,13 +51,11 @@
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
 
-   # Executive Bodyguard Gear
 - type: entity
   parent: ColMarTechBase
-  id: ColMarTechGearRackEB
+  id: ColMarTechGearRackExecutiveBodyguard
   name: executive bodyguard gear rack
   description: An automated rack hooked up to a colossal storage of Security Division standard-issue gear.
-  suffix: Exec. Bodyguard
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
@@ -75,7 +71,7 @@
         - RMCRankWeYaBodyguardTPPO
         choices: { CMHelmet: 1 }
         entries:
-        - id: RMCHeadCapEB
+        - id: RMCHeadCapExecutiveBodyguard
       - name: Mask
         ranks:
         - RMCRankWeYaBodyguardTPPO
@@ -88,7 +84,7 @@
         - RMCRankWeYaBodyguardTPPO
         choices: { CMArmor: 1 }
         entries:
-        - id: RMCArmorM1EB
+        - id: RMCArmorM1ExecutiveBodyguard
       - name: Backpack
         ranks:
         - RMCRankWeYaBodyguardTPPO
@@ -100,7 +96,7 @@
         - RMCRankWeYaBodyguardTPPO
         choices: { CMHands: 1 }
         entries:
-        - id: RMCHandsVeteranEB
+        - id: RMCHandsVeteranExecutiveBodyguard
       - name: Pouches
         ranks:
         - RMCRankWeYaBodyguardTPPO
@@ -160,7 +156,7 @@
         - RMCRankWeYaBodyguardPPO
         choices: { CMHelmet: 1 }
         entries:
-        - id: RMCHeadCapEB
+        - id: RMCHeadCapExecutiveBodyguard
       - name: Mask
         ranks:
         - RMCRankWeYaBodyguardPPO
@@ -173,7 +169,7 @@
         - RMCRankWeYaBodyguardPPO
         choices: { CMArmor: 1 }
         entries:
-        - id: RMCArmorM1EB
+        - id: RMCArmorM1ExecutiveBodyguard
       - name: Backpack
         ranks:
         - RMCRankWeYaBodyguardPPO
@@ -185,7 +181,7 @@
         - RMCRankWeYaBodyguardPPO
         choices: { CMHands: 1 }
         entries:
-        - id: RMCHandsVeteranEB
+        - id: RMCHandsVeteranExecutiveBodyguard
       - name: Pouches
         ranks:
         - RMCRankWeYaBodyguardPPO
@@ -206,11 +202,11 @@
         entries:
         - id: RMCBeltHolsterPistolWeYaPK7Fill
           name: PK-7 electrostatic pistol
+        - id: RMCBeltHolsterPistolWeYaM77Fill
+          name: M77 combat pistol
         - id: RMCBeltHolsterPistolWeYaMK80Fill
           points: 8
           name: MK80 pistol
-        - id: RMCBeltHolsterPistolWeYaM77Fill
-          name: M77 combat pistol
       - name: Ammunition
         ranks:
         - RMCRankWeYaBodyguardPPO
@@ -255,8 +251,8 @@
         - RMCRankWeYaBodyguardPPC
         choices: { CMHelmet: 1 }
         entries:
-        - id: RMCHeadCapEB
-        - id: ArmorHelmetEB
+        - id: RMCHeadCapExecutiveBodyguard
+        - id: RMCArmorHelmetExecutiveBodyguard
       - name: Mask
         ranks:
         - RMCRankWeYaBodyguardPPS
@@ -271,8 +267,8 @@
         - RMCRankWeYaBodyguardPPC
         choices: { CMArmor: 1 }
         entries:
-        - id: RMCArmorM1EB
-        - id: RMCArmorM4EB
+        - id: RMCArmorM1ExecutiveBodyguard
+        - id: RMCArmorM4ExecutiveBodyguard
       - name: Backpack
         ranks:
         - RMCRankWeYaBodyguardPPS
@@ -286,7 +282,7 @@
         - RMCRankWeYaBodyguardPPC
         choices: { CMHands: 1 }
         entries:
-        - id: RMCHandsVeteranEB
+        - id: RMCHandsVeteranExecutiveBodyguard
       - name: Pouches
         ranks:
         - RMCRankWeYaBodyguardPPS
@@ -307,7 +303,7 @@
         - RMCRankWeYaBodyguardPPC
         choices: { CMPrimary: 1 }
         entries:
-        # id: Shock Shotgun 15p
+        # RMC14 TODO: Shock Shotgun 15p
         - id: RMCWeaponRifleM54CWhite
         - id: RMCWeaponSMGM63WhiteNoLock
         - id: RMCWeaponRifleSSG45Stripped
@@ -319,17 +315,17 @@
         entries:
         - id: RMCBeltHolsterPistolWeYaPK7Fill
           name: PK-7 electrostatic pistol
+        - id: RMCBeltHolsterPistolWeYaM77Fill
+          name: M77 combat pistol
         - id: RMCBeltHolsterPistolWeYaMK80Fill
           points: 8
           name: MK80 pistol
-        - id: RMCBeltHolsterPistolWeYaM77Fill
-          name: M77 combat pistol
       - name: Primary Ammunition
         ranks:
         - RMCRankWeYaBodyguardPPS
         - RMCRankWeYaBodyguardPPC
         entries:
-        #Shock Shotgun lethal 15p & Stun shells 10p
+        #RMC14 TODO: Shock Shotgun lethal 15p & Stun shells 10p
         - id: CMMagazineSMGM63
           points: 6
         - id: CMMagazineSMGM63Ext
@@ -381,7 +377,7 @@
         entries:
         - id: CMFlash
           points: 2
-        # Pepper Spray
+        # RMC14 TODO: Pepper Spray
         - id: CMStunbaton
           points: 4
         - id: RMCBoxZiptie

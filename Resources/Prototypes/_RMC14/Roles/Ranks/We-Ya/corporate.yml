@@ -104,7 +104,7 @@
   prefix: Adm. Syn.
   paygrade: WYS3
 
-  #TTPO
+# Executive Bodyguard
 - type: rank
   id: RMCRankWeYaBodyguardTPPO
   name: Trainee Personal Protection Officer
@@ -128,21 +128,3 @@
   name: Personal Protection Coordinator
   prefix: PPC.
   paygrade: WY-SEC-4
-
-- type: rank
-  id: RMCRankWeYaBodyguardDPO
-  name: Directorate Protection Officer
-  prefix: DPO.
-  paygrade: WY-SEC-5
-
-- type: rank
-  id: RMCRankWeYaBodyguardDPS
-  name: Directorate Protection Specialist
-  prefix: DPS.
-  paygrade: WY-SEC-6
-
-- type: rank
-  id: RMCRankWeYaBodyguardDPC
-  name: Directorate Protection Coordinator
-  prefix: DPC.
-  paygrade: WY-SEC-7

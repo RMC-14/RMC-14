@@ -79,7 +79,7 @@
 # PPO
 - type: entity
   parent: RMCHandsVeteran
-  id: RMCHandsVeteranEB
+  id: RMCHandsVeteranExecutiveBodyguard
   name: executive bodyguard gloves
   description: Standard issue reinforced fiber gloves manufactured by Weston-Yamada for the Security Division. They are insulated against electrical shock.
   components:
