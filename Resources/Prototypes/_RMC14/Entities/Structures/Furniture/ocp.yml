@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseStructureDynamic
   id: RMCBagScanner
   name: baggage scanner
@@ -68,67 +68,53 @@
     state: luggage1
 
 - type: entity
-  parent: RMCSecureCase
+  parent: RMCLuggage1
   id: RMCLuggage2
-  name: luggage
-  description: A stack of luggage.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/luggage.rsi
-    noRot: true
     layers:
     - state: luggage2
       map: ["enum.StorageVisualLayers.Base"]
   - type: Icon
-    sprite: _RMC14/Objects/Misc/luggage.rsi
     state: luggage2
 
 - type: entity
-  parent: RMCSecureCase
+  parent: RMCLuggage1
   id: RMCLuggage3
   name: luggage
   description: A stack of luggage.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/luggage.rsi
-    noRot: true
     layers:
     - state: luggage3
       map: ["enum.StorageVisualLayers.Base"]
   - type: Icon
-    sprite: _RMC14/Objects/Misc/luggage.rsi
     state: luggage3
 
 - type: entity
-  parent: RMCSecureCase
+  parent: RMCLuggage1
   id: RMCLuggage4
   name: luggage
   description: A stack of luggage.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/luggage.rsi
-    noRot: true
     layers:
     - state: luggage4
       map: ["enum.StorageVisualLayers.Base"]
   - type: Icon
-    sprite: _RMC14/Objects/Misc/luggage.rsi
     state: luggage4
 
 - type: entity
-  parent: RMCSecureCase
+  parent: RMCLuggage1
   id: RMCLuggage5
   name: luggage
   description: A stack of luggage.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/luggage.rsi
-    noRot: true
     layers:
     - state: luggage5
       map: ["enum.StorageVisualLayers.Base"]
   - type: Icon
-    sprite: _RMC14/Objects/Misc/luggage.rsi
     state: luggage5
 
 - type: entity
@@ -151,6 +137,8 @@
           False: { state: breakerbox_open }
     sprite: _RMC14/Structures/Wallmounts/breaker_box.rsi
   - type: ItemToggle
+    soundActivate: /Audio/Items/toolbox_close.ogg
+    soundDeactivate: /Audio/Items/toolbox_open.ogg
     activated: true
   - type: Appearance
   - type: WallMount

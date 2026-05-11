@@ -1,10 +1,14 @@
 ﻿- type: entity
-  id: RMCATMMachine
+  id: RMCATMMachineOff
   name: We-Ya Automatic Teller Machine
   description: For all your monetary needs!
+  suffix: Off
   placement:
     mode: SnapgridCenter
   components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Props/atm.rsi
+    state: atm_off
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -18,34 +22,99 @@
         - MobMask
   - type: Clickable
   - type: InteractionOutline
-  - type: Sprite
-    sprite: _RMC14/Structures/Props/atm.rsi
-    state: atm
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
+  - type: Corrodible
+    isCorrodible: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 2
+          RMCCableCoil1:
+            min: 2
+            max: 2
+          CMShardGlass:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
 
 - type: entity
-  parent: RMCATMMachine
-  id: RMCATMMachineOff
-  suffix: "Off"
+  parent: RMCATMMachineOff
+  id: RMCATMMachine
+  suffix: On
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Props/atm.rsi
-    state: atm_off
+    layers:
+    - state: atm_off
+    - state: atm
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: PointLight
+    radius: 1.8
+    energy: 1.6
+    color: "#42e3f5"
+  - type: LitOnPowered
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+  - type: ExtensionCableReceiver
 
 - type: entity
   parent: RMCNewscaster
-  id: RMCATM
+  id: RMCATMOff
   name: We-Ya Automatic Teller Machine
   description: For all your monetary needs!
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Wallmounts/terminals.rsi
-    state: atm
-
-- type: entity
-  parent: RMCATM
-  id: RMCATMOff
-  suffix: "Off"
+  suffix: Off
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/terminals.rsi
     state: atm_off
+
+- type: entity
+  parent: RMCATMOff
+  id: RMCATM
+  suffix: On
+  components:
+  - type: Sprite
+    layers:
+    - state: atm_off
+    - state: atm
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: PointLight
+    radius: 1.8
+    energy: 1.6
+    color: "#42e3f5"
+  - type: LitOnPowered
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+  - type: ExtensionCableReceiver
