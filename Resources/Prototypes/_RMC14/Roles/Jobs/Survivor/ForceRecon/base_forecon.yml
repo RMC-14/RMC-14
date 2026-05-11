@@ -34,7 +34,7 @@
   name: forecon no primary survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
@@ -60,7 +60,7 @@
   name: forecon survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
     primaryWeaponChance: 1
@@ -71,6 +71,6 @@
   name: forecon survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomWeapon:
     - []
