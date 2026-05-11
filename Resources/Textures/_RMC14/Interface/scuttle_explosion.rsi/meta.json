@@ -1,10 +1,10 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/icons/effects/station_explosion.dmi",
+  "copyright": "by GrigoriyGalintano",
   "size": {
-    "x": 512,
-    "y": 512
+    "x": 1280,
+    "y": 720
   },
   "states": [
     {
