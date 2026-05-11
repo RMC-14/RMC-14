@@ -556,7 +556,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     public bool CanPlaceWeedsPopup(EntityUid xeno,
         Entity<MapGridComponent> grid,
         EntityCoordinates coordinates,
-        bool limitDistance)
+        bool limitDistance,
+        EntityCoordinates? popupAt = null)
     {
         if (_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates, out var oldWeeds))
         {
@@ -579,7 +580,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (limitDistance && !HasWeedsNearby(grid, coordinates))
         {
             _popup.PopupClient("We can only plant weed nodes near other weed nodes our hive owns!",
-                xeno,
+                popupAt ?? xeno.ToCoordinates(),
                 xeno,
                 PopupType.SmallCaution);
             return false;
@@ -593,7 +594,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                     HasComp<BarricadeComponent>(entity))
                     continue;
 
-                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), xeno, xeno, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), popupAt ?? xeno.ToCoordinates(), xeno, PopupType.SmallCaution);
                 return false;
             }
         }

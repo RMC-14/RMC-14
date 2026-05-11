@@ -163,6 +163,9 @@ public sealed class QueenEyeSystem : EntitySystem
 
     private void OnQueenEyeMove(Entity<QueenEyeComponent> ent, ref MoveEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (_isRevertingMove)
             return;
 
@@ -204,7 +207,7 @@ public sealed class QueenEyeSystem : EntitySystem
                 var dist = offset.Length();
                 var soft = ent.Comp.SoftWeedDistance;
                 var max = ent.Comp.MaxWeedDistance;
-                if (dist > soft && dist > 0)
+                if (dist > soft)
                 {
                     var t = Math.Clamp((dist - soft) / (max - soft), 0f, 1f);
                     var dampedDist = soft + (max - soft) * t * t;

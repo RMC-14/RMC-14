@@ -323,14 +323,15 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (_queenEye.IsInQueenEye(xeno.Owner) &&
+        var isInQueenEye = _queenEye.IsInQueenEye(xeno.Owner);
+        if (isInQueenEye &&
             !_queenEye.CanSeeTarget(xeno.Owner, coordinates))
         {
             return;
         }
 
         DirectionFlag barricadeFrontDirs = DirectionFlag.None;
-        if (_queenEye.IsInQueenEye(xeno.Owner))
+        if (isInQueenEye)
         {
             var barricadeEnum = _rmcMap.GetAnchoredEntitiesEnumerator<BarricadeComponent>(coordinates);
             while (barricadeEnum.MoveNext(out var barricadeUid))
@@ -377,7 +378,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             foreach (var direction in _rmcMap.CardinalDirections)
             {
-                if ((direction.AsFlag() & barricadeFrontDirs) != 0)
+                if (isInQueenEye && (direction.AsFlag() & barricadeFrontDirs) != 0)
                     continue;
 
                 if (_rmcMap.HasAnchoredEntityEnumerator(coordinates, out adjacent, direction))
@@ -397,16 +398,21 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         var toSpawn = existing == null ? args.Expand : args.Source;
         var tile = _mapSystem.CoordinatesToTile(gridUid, gridComp, coordinates);
-        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, xeno, false, true))
-            return;
+        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, isInQueenEye ? null : (EntityUid?)xeno.Owner, false, true))
+        {
+            if (isInQueenEye)
+                _popup.PopupCoordinates(Loc.GetString("cm-xeno-construction-failed-weeds"), coordinates, xeno.Owner, PopupType.SmallCaution);
 
-        if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false))
+            return;
+        }
+
+        if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false, isInQueenEye ? coordinates : (EntityCoordinates?)null))
             return;
 
         var plasmaCost = existing == null ? args.PlasmaCost : args.SourcePlasmaCost;
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost, popupOn: args.Target))
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost))
         {
-            if (_queenEye.IsInQueenEye(xeno.Owner))
+            if (isInQueenEye)
                 _popup.PopupCoordinates(Loc.GetString("cm-xeno-not-enough-plasma"), coordinates, xeno.Owner, PopupType.MediumCaution);
 
             return;
@@ -427,7 +433,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 _xenoWeeds.AssignSource(newWeeds, adjacent.Comp?.Source ?? adjacent);
         }
 
-        var audioUser = _queenEye.IsInQueenEye(xeno.Owner) ? null : (EntityUid?) xeno.Owner;
+        var audioUser = isInQueenEye ? null : (EntityUid?)xeno.Owner;
         _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, audioUser);
     }
 
@@ -1384,7 +1390,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _rmcMap.HasAnchoredEntityEnumerator<DesignNodeComponent>(target, out _))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), xeno, xeno, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), target, xeno, PopupType.SmallCaution);
 
             return false;
         }
@@ -1439,7 +1445,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                     door.State != DoorState.Open)
                 {
                     if (popup)
-                        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), xeno, xeno, PopupType.SmallCaution);
+                        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), target, xeno, PopupType.SmallCaution);
 
                     return false;
                 }
@@ -1517,7 +1523,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                     node.BlockOtherNodes)
                 {
                     if (popup)
-                        _popup.PopupClient(Loc.GetString("cm-xeno-too-close-to-other-node", ("target", ent.Value)), xeno, xeno);
+                        _popup.PopupClient(Loc.GetString("cm-xeno-too-close-to-other-node", ("target", ent.Value)), target, xeno);
 
                     return false;
                 }
@@ -1535,7 +1541,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                     tileDef is ContentTileDefinition { WeedsSpreadable: false })
                 {
                     if (popup)
-                        _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), xeno, xeno);
+                        _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
 
                     return false;
                 }
