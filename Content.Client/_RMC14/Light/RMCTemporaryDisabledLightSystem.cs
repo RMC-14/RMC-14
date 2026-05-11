@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
@@ -16,18 +17,18 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
-    private static readonly TimeSpan LightCheckInterval = TimeSpan.FromSeconds(1);
-
     private readonly HashSet<Entity<PointLightComponent>> _nearbyLights = new();
     private readonly List<Entity<PointLightComponent>> _nearbyLightsList = new();
-    private readonly List<Entity<PointLightComponent>> _keptLights = new();
+    private readonly List<Vector2> _keptLightPositions = new();
 
     private EntityQuery<ExpendableLightComponent> _expendableLightQuery;
     private EntityQuery<HandheldLightComponent> _handHeldLightQuery;
 
-    private TimeSpan _nextUpdate;
     private int _maxNearbyLights;
     private float _maxNearbyLightCheckRange;
+    private TimeSpan _lightCheckInterval;
+
+    private TimeSpan _nextUpdate;
 
     public override void Initialize()
     {
@@ -36,6 +37,11 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
 
         _maxNearbyLights = _config.GetCVar(RMCCVars.RMCLightningMaxAmountLightNearbyCount);
         _maxNearbyLightCheckRange = _config.GetCVar(RMCCVars.RMCLightningMaxAmountLightNearbyAreaSize);
+        _lightCheckInterval = TimeSpan.FromSeconds(_config.GetCVar(RMCCVars.RMCLightningMaxAmountLightNearbyCheckIntervalSeconds));
+
+        Subs.CVar(_config, RMCCVars.RMCLightningMaxAmountLightNearbyCount, SetMaxNearbyLights);
+        Subs.CVar(_config, RMCCVars.RMCLightningMaxAmountLightNearbyAreaSize, SetMaxNearbyLightsCheckRange);
+        Subs.CVar(_config, RMCCVars.RMCLightningMaxAmountLightNearbyCheckIntervalSeconds, SetLightCheckInterval);
     }
 
     public override void Update(float frameTime)
@@ -46,7 +52,7 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
         if (time < _nextUpdate)
             return;
 
-        _nextUpdate = time + LightCheckInterval;
+        _nextUpdate = time + _lightCheckInterval;
 
         var query = EntityQueryEnumerator<PointLightComponent, ItemComponent>();
         while (query.MoveNext(out var uid, out var light, out _))
@@ -56,7 +62,8 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
 
             _nearbyLights.Clear();
             _entityLookup.GetEntitiesInRange(_transform.GetMapCoordinates(uid), _maxNearbyLightCheckRange, _nearbyLights);
-            _nearbyLights.RemoveWhere(ent => _container.TryGetContainingContainer(ent.Owner, out var container) && container.OccludesLight ||
+            _nearbyLights.RemoveWhere(ent => uid == ent.Owner ||
+                                             _container.TryGetContainingContainer(ent.Owner, out var container) && container.OccludesLight ||
                                              (!_expendableLightQuery.TryComp(ent, out var expendable) || !expendable.Activated) &&
                                              (!_handHeldLightQuery.TryComp(ent, out var toggle) || !toggle.Activated));
 
@@ -74,47 +81,41 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
                 continue;
             }
 
-            _keptLights.Clear();
+            _keptLightPositions.Clear();
             _nearbyLightsList.Clear();
             _nearbyLightsList.AddRange(_nearbyLights);
             _nearbyLightsList.Sort((a, b) => a.Owner.Id.CompareTo(b.Owner.Id));
 
+            var maxDistSq = _maxNearbyLightCheckRange * _maxNearbyLightCheckRange;
             foreach (var nearbyLight in _nearbyLightsList)
             {
                 if (HasComp<RMCTemporaryDisabledLightComponent>(nearbyLight))
                     continue;
 
                 var nearbyLightPosition = _transform.GetWorldPosition(nearbyLight.Owner);
-                var tooCloseToAll = true;
 
-                if (_keptLights.Count == 0)
-                    tooCloseToAll = false;
-                else
+                var nearbyKeptLights = 0;
+                foreach (var keptLightPosition in _keptLightPositions)
                 {
-                    foreach (var kept in _keptLights)
-                    {
-                        var keptLightPosition = _transform.GetWorldPosition(kept.Owner);
-                        var distance = (nearbyLightPosition - keptLightPosition).Length();
+                    var distanceSquared = (nearbyLightPosition - keptLightPosition).LengthSquared();
 
-                        if (!(distance >= _maxNearbyLightCheckRange))
-                            continue;
+                    if (!(distanceSquared < maxDistSq))
+                        continue;
 
-                        tooCloseToAll = false;
-                        break;
-                    }
+                    nearbyKeptLights++;
                 }
 
-                var shouldDisable = _keptLights.Count >= _maxNearbyLights || tooCloseToAll;
+                var shouldDisable = nearbyKeptLights >= _maxNearbyLights;
                 if (shouldDisable)
                 {
                     var disabled = EnsureComp<RMCTemporaryDisabledLightComponent>(nearbyLight);
-                    disabled.NextCheckAt = time + LightCheckInterval;
+                    disabled.NextCheckAt = time + _lightCheckInterval;
 
                     _pointLight.SetEnabled(nearbyLight, false, nearbyLight.Comp);
                 }
                 else
                 {
-                    _keptLights.Add(nearbyLight);
+                    _keptLightPositions.Add(nearbyLightPosition);
                     RemComp<RMCTemporaryDisabledLightComponent>(nearbyLight);
 
                     _pointLight.SetEnabled(nearbyLight, true, nearbyLight.Comp);
@@ -134,5 +135,21 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
             if (light.Enabled)
                 _pointLight.SetEnabled(uid, false, light);
         }
+    }
+
+    private void SetMaxNearbyLights(int amount)
+    {
+        _maxNearbyLights = Math.Max(0, amount);
+    }
+
+    private void SetMaxNearbyLightsCheckRange(float range)
+    {
+        _maxNearbyLightCheckRange = Math.Max(0.01f, range);
+    }
+
+    private void SetLightCheckInterval(float amount)
+    {
+        var interval = TimeSpan.FromSeconds(Math.Max(0, amount));
+        _lightCheckInterval = interval;
     }
 }

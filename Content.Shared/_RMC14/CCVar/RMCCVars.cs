@@ -569,4 +569,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCLightningMaxAmountLightNearbyAreaSize =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_area_size", 2.5f, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> RMCLightningMaxAmountLightNearbyCheckIntervalSeconds =
+        CVarDef.Create("rmc.lighting_max_amount_light_nearby_check_interval_seconds", 1f, CVar.CLIENT | CVar.ARCHIVE);
 }
