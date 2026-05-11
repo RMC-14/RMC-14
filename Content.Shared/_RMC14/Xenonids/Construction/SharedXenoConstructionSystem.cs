@@ -386,9 +386,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         args.Handled = true;
 
-        if (spawnSource)
-            _actions.SetUseDelay(args.Action.Owner, args.NodePlaceCooldown);
-
         if (_net.IsServer)
         {
             var newWeeds = Spawn(toSpawn, coordinates);
