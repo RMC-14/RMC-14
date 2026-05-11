@@ -170,6 +170,7 @@ public sealed partial class CMDistressSignalRuleSystem
             elapsed >= NonNegative(rule.ScuttleFinalCinematicDelay))
         {
             rule.ScuttleFinalCinematicStarted = true;
+            _evacuation.StopEvacuationProgress();
             RaiseNetworkEvent(new RMCScuttleCinematicEvent(NonNegative(rule.ScuttleFinalSequenceDelay)), Filter.Broadcast());
         }
 

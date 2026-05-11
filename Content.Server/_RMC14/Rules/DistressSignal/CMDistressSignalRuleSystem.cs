@@ -32,6 +32,7 @@ using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Light;
@@ -127,6 +128,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly RMCNukeSystem _rmcNuke = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
     [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;

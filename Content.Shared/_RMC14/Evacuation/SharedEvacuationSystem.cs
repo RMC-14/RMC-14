@@ -501,6 +501,18 @@ public abstract class SharedEvacuationSystem : EntitySystem
         return GetEvacuationProgress() >= 100;
     }
 
+    public void StopEvacuationProgress()
+    {
+        if (_net.IsClient)
+            return;
+
+        var query = EntityQueryEnumerator<EvacuationProgressComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            RemCompDeferred<EvacuationProgressComponent>(uid);
+        }
+    }
+
     private void ProcessEvacuation()
     {
         if (_net.IsClient)
