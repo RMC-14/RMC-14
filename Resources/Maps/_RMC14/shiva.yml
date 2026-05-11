@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/06/2026 08:10:31
-  entityCount: 17733
+  time: 05/11/2026 11:02:34
+  entityCount: 17737
 maps:
 - 1
 grids:
@@ -47616,6 +47616,16 @@ entities:
     - type: Transform
       pos: 178.5,146.5
       parent: 1
+  - uid: 13318
+    components:
+    - type: Transform
+      pos: 150.5,145.5
+      parent: 1
+  - uid: 16995
+    components:
+    - type: Transform
+      pos: 151.5,145.5
+      parent: 1
   - uid: 17002
     components:
     - type: Transform
@@ -53679,6 +53689,11 @@ entities:
     components:
     - type: Transform
       pos: 148.5,45.5
+      parent: 1
+  - uid: 17005
+    components:
+    - type: Transform
+      pos: 168.5,125.5
       parent: 1
   - uid: 17131
     components:
@@ -107375,26 +107390,6 @@ entities:
     - type: Transform
       pos: 6.5,147.5
       parent: 1
-  - uid: 13316
-    components:
-    - type: Transform
-      pos: 150.50838,145.36969
-      parent: 1
-  - uid: 13317
-    components:
-    - type: Transform
-      pos: 151.46672,145.26544
-      parent: 1
-  - uid: 13318
-    components:
-    - type: Transform
-      pos: 151.57088,143.8895
-      parent: 1
-    - type: UserInterface
-      actors:
-        enum.StorageUiKey.Key:
-        - invalid
-    - type: ActiveUserInterface
 - proto: RMCBoxShotgunSlugs
   entities:
   - uid: 13319
@@ -111635,6 +111630,21 @@ entities:
     - type: Transform
       pos: 202.5,146.5
       parent: 1
+  - uid: 17734
+    components:
+    - type: Transform
+      pos: 151.5,127.5
+      parent: 1
+  - uid: 17735
+    components:
+    - type: Transform
+      pos: 151.5,130.5
+      parent: 1
+  - uid: 17736
+    components:
+    - type: Transform
+      pos: 152.5,127.5
+      parent: 1
 - proto: RMCFoodGoldenApple
   entities:
   - uid: 13826
@@ -112864,15 +112874,25 @@ entities:
     - type: InsideEntityStorage
 - proto: RMCGrenadeIncendiary
   entities:
+  - uid: 13317
+    components:
+    - type: Transform
+      pos: 150.52666,145.26996
+      parent: 1
   - uid: 14035
     components:
     - type: Transform
-      pos: 150.57529,145.28629
+      pos: 151.56831,145.29774
       parent: 1
-  - uid: 14036
+  - uid: 16283
     components:
     - type: Transform
-      pos: 151.51279,145.36969
+      pos: 150.52666,145.26996
+      parent: 1
+  - uid: 17737
+    components:
+    - type: Transform
+      pos: 151.58221,145.29774
       parent: 1
 - proto: RMCHandcuffs
   entities:
@@ -113416,6 +113436,11 @@ entities:
       parent: 1
 - proto: RMCItemPoolBuckshot
   entities:
+  - uid: 14036
+    components:
+    - type: Transform
+      pos: 151.5,145.5
+      parent: 1
   - uid: 14123
     components:
     - type: Transform
@@ -113645,6 +113670,11 @@ entities:
     components:
     - type: Transform
       pos: 99.5,112.5
+      parent: 1
+  - uid: 16281
+    components:
+    - type: Transform
+      pos: 150.5,145.5
       parent: 1
   - uid: 17012
     components:
@@ -126502,6 +126532,18 @@ entities:
     - type: Transform
       pos: 174.5,47.5
       parent: 1
+- proto: RMCSpawnerRandomGunShotgun
+  entities:
+  - uid: 16992
+    components:
+    - type: Transform
+      pos: 151.5,145.5
+      parent: 1
+  - uid: 16997
+    components:
+    - type: Transform
+      pos: 150.5,145.5
+      parent: 1
 - proto: RMCSpawnerRandomPowercell
   entities:
   - uid: 16228
@@ -126777,20 +126819,10 @@ entities:
     - type: Transform
       pos: 164.67609,153.26534
       parent: 1
-  - uid: 16281
-    components:
-    - type: Transform
-      pos: 150.56683,145.34488
-      parent: 1
   - uid: 16282
     components:
     - type: Transform
       pos: 169.5,151.5
-      parent: 1
-  - uid: 16283
-    components:
-    - type: Transform
-      pos: 151.44183,145.40742
       parent: 1
   - uid: 16284
     components:
@@ -130799,6 +130831,11 @@ entities:
       parent: 1
 - proto: RMCWeaponRevolverSpearhead
   entities:
+  - uid: 13316
+    components:
+    - type: Transform
+      pos: 151.51276,145.42284
+      parent: 1
   - uid: 16990
     components:
     - type: Transform
@@ -130809,19 +130846,6 @@ entities:
     - type: Transform
       pos: 86.5,82.5
       parent: 1
-  - uid: 16992
-    components:
-    - type: Transform
-      pos: 150.50838,143.97289
-      parent: 1
-    - type: RMCWeaponAccuracy
-      modifiedAccuracyMultiplier: 0.85
-    - type: UseDelay
-      delays:
-        RMCWieldDelay:
-          endTime: 89.1916437
-          startTime: 649.7993502
-          length: 0.4
   - uid: 16993
     components:
     - type: Transform
@@ -130832,37 +130856,11 @@ entities:
     - type: Transform
       pos: 167.5,154.5
       parent: 1
-  - uid: 16995
-    components:
-    - type: Transform
-      pos: 150.52968,145.69633
-      parent: 1
-    - type: RMCWeaponAccuracy
-      modifiedAccuracyMultiplier: 0.85
-    - type: UseDelay
-      delays:
-        RMCWieldDelay:
-          endTime: 89.1916437
-          startTime: 645.3660213
-          length: 0.4
   - uid: 16996
     components:
     - type: Transform
       pos: 164.5,154.5
       parent: 1
-  - uid: 16997
-    components:
-    - type: Transform
-      pos: 151.30052,145.73802
-      parent: 1
-    - type: RMCWeaponAccuracy
-      modifiedAccuracyMultiplier: 0.85
-    - type: UseDelay
-      delays:
-        RMCWieldDelay:
-          endTime: 89.1916437
-          startTime: 644.8993551
-          length: 0.4
   - uid: 16998
     components:
     - type: Transform
@@ -130872,6 +130870,11 @@ entities:
     components:
     - type: Transform
       pos: 86.5,94.5
+      parent: 1
+  - uid: 17004
+    components:
+    - type: Transform
+      pos: 150.48499,145.36725
       parent: 1
 - proto: RMCWeaponRifleM54C
   entities:
@@ -130944,32 +130947,6 @@ entities:
       parent: 1
 - proto: RMCWeaponShotgunHG3712
   entities:
-  - uid: 17004
-    components:
-    - type: Transform
-      pos: 150.53107,145.51775
-      parent: 1
-    - type: RMCWeaponAccuracy
-      modifiedAccuracyMultiplier: 0.35
-    - type: UseDelay
-      delays:
-        RMCWieldDelay:
-          endTime: 89.1916437
-          startTime: 630.4660362
-          length: 0.4
-  - uid: 17005
-    components:
-    - type: Transform
-      pos: 151.48941,145.55945
-      parent: 1
-    - type: RMCWeaponAccuracy
-      modifiedAccuracyMultiplier: 0.35
-    - type: UseDelay
-      delays:
-        RMCWieldDelay:
-          endTime: 89.1916437
-          startTime: 632.999367
-          length: 0.4
   - uid: 17006
     components:
     - type: Transform
