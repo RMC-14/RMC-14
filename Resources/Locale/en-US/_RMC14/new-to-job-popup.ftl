@@ -101,13 +101,13 @@ rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of t
 
                                              If you have any other questions, consult the guidebook's Corporate Liaison page.
 
-rmc-new-to-job-fireteam-leader = As a fireteam leader, your role is possibly the most multifaceted in the squad, foremost of which is leading a smaller team and coordinating fire support.
+rmc-new-to-job-fireteam-leader = As a Fireteam Leader, your role is possibly the most multifaceted in the squad, foremost of which is leading smaller teams and coordinating fire support.
 
                                              Your room is found at the very end of the preparations hall, containing many advanced support tools. You also have access to breaching explosives (Breaching charges and plastic explosives) and very affordable signal flare packs.
 
-                                             Your primary duty is communication and small unit leadership aided by a wide range of tools, most importantly your radiotelephone backpack. (For further infromation on communication methods please refer to the "Marine Communications" guidebook entry) Relay and execute your squad leader’s directives and pass on supply requests to requisitions. You are the squad's second-in-command, this means that upon losing your Squad Leader you are first in line to be assgined as Acting Squad Lead (ASL). No one is expecting miracles from you, just listen to your commander and get your jarheads home alive.
+                                             Your primary duty is communication and small unit leadership aided by a wide range of tools, most importantly your radiotelephone backpack. (For further infromation on communication methods please refer to the "Marine Communications" guidebook entry.) Relay and execute your squad leader’s directives and pass on supply requests to requisitions. You are the squad's second-in-command, this means that upon losing your Squad Leader you are first in line to be assgined as Acting Squad Lead (ASL). No one is expecting miracles from you, just listen to your commander and get your jarheads home alive.
 
-                                             You are extensively trained as a Joint Terminal Attack Controller (JTAC), speeding up your laser designator use massively. Use this to mark targets for Close Air Support (CAS) or to obtain coordinates for supply drops (to be transmitted to squad overwatch, preferrably by phone), mortar support, or even an orbital strike. (You can switch the designator's mode between laser designation and rangefinding by alt+left clicking on it.)
+                                             You are extensively trained as a Joint Terminal Attack Controller (JTAC), speeding up your laser designator use massively. Use this to mark targets for Close Air Support (CAS) or to obtain coordinates for supply drops (to be transmitted to squad overwatch, preferrably by phone), mortar support, or even an orbital strike. (You can switch the designator between laser designation [Target] and rangefinding [Coordinate] modes by alt+left clicking on it.)
 
                                              Additionally, your engineering and construction skills rival those of a Combat Technician's; permitting you to do everything they can, only marginally slower. It is recommended that you carry tools with you for this reason.
 
@@ -115,7 +115,7 @@ rmc-new-to-job-fireteam-leader = As a fireteam leader, your role is possibly the
 
 rmc-new-to-job-smart-gun-operator = As a Smart Gun Operator your job is to provide a robust base of fire and occasionally information to your squad by making use of your advanced equipment and training.
 
-                                             You will find all your specialized gear in the preparations room assigned to you, look for the appropriate marking on the floor of the preparations hall. Should you require more ammunition, some can be found in the ColMarTech automated munition squad vendor within the general squad preparations room; or at requisitions, but keep in mind that drums are somewhat expensive to procure.
+                                             You will find all your specialized gear in the preparations room assigned to you, look for the appropriate marking on the floor of the preparations hall. Should you require more ammunition, a few can be found in the ASRS munition squad vendor within the general squad preparations room, and also some at requisitions, but keep in mind that drums are somewhat expensive to procure.
 
                                              A quick summary for the parts of your issued ML66A Smart Gun System:
 
@@ -125,7 +125,7 @@ rmc-new-to-job-smart-gun-operator = As a Smart Gun Operator your job is to provi
 
                                               -Smart gun: The centrepiece of your gear, a high-tech machine gun equipped with an integral motion detector and Identify Friend or Foe (IFF) technology, allowing you to fire from behind your teammates; note that ONLY fellow marines are protected, civilians and other third parties are not. It also has several smaller features, such as an on-demand armor piercing mode (the hotkey for switching ammo types is space by default) and an integrated magnetic harness. 
 
-                                             You have also received basic Joint Terminal Attack Controller (JTAC) training, allowing you to use laser designators and rangefinders faster than the common grunt.
+                                             You should remember that the battery in your weapon has finite charge, though changing it will only be necessary during only the longest and most intense deployments.
 
                                              Stick close to your squad leader, scout with your sight, and provide mobile area denial to your squad. Light ‘em up, Lance Corporal.
 
