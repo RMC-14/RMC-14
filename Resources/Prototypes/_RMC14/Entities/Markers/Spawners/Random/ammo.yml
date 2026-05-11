@@ -3,7 +3,7 @@
   parent: RMCSpawnerRandomGunBase
   id: RMCSpawnerRandomMagazineM54C
   name: m54c magazine spawner
-  description: This is will spawn an M54C magazine
+  description: This will spawn an M54C magazine
   suffix: Guaranteed
   components:
   - type: Sprite
@@ -64,7 +64,7 @@
   parent: RMCSpawnerRandomGunBase
   id: RMCSpawnerRandomMagazineM54CExt
   name: m54c extended magazine spawner
-  description: This is will spawn an M54C extended magazine
+  description: This will spawn an M54C extended magazine
   suffix: Guaranteed
   components:
   - type: Sprite
@@ -119,7 +119,7 @@
   parent: RMCSpawnerRandomGunBase
   id: RMCSpawnerRandomMagazineM63
   name: m63 magazine spawner
-  description: This is will spawn an M63 magazine
+  description: This will spawn an M63 magazine
   suffix: Guaranteed
   components:
   - type: Sprite
@@ -174,7 +174,7 @@
   parent: RMCSpawnerRandomGunBase
   id: RMCSpawnerRandomMagazineM4SPR
   name: m4spr magazine spawner
-  description: This is will spawn an M4SPR magazine
+  description: This will spawn an M4SPR magazine
   suffix: Guaranteed
   components:
   - type: Sprite
