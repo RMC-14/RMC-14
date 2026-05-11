@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Rules;
 using Content.Shared.GameTicking;
+using Robust.Shared.Audio.Components;
 using Robust.Client.Graphics;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -20,6 +21,8 @@ public sealed class RMCScuttleCinematicSystem : EntitySystem
     private RMCScuttleCinematicOverlay? _current;
     private TimeSpan? _cinematicExplosionAt;
     private bool _cinematicExplosionPlayed;
+    private readonly Dictionary<EntityUid, float> _mutedAudio = new();
+    private readonly HashSet<EntityUid> _cinematicAudio = new();
 
     public override void Initialize()
     {
@@ -39,13 +42,16 @@ public sealed class RMCScuttleCinematicSystem : EntitySystem
             return;
         }
 
+        if (_current != null)
+            MuteNonCinematicAudio();
+
         if (_current != null &&
             !_cinematicExplosionPlayed &&
             _cinematicExplosionAt is { } explosionAt &&
             _timing.CurTime >= explosionAt)
         {
             _cinematicExplosionPlayed = true;
-            _audio.PlayGlobal(CinematicExplosionSound, Filter.Local(), true);
+            AllowCinematicAudio(_audio.PlayGlobal(CinematicExplosionSound, Filter.Local(), true));
         }
     }
 
@@ -56,10 +62,12 @@ public sealed class RMCScuttleCinematicSystem : EntitySystem
         if (ev.Duration <= TimeSpan.Zero)
             return;
 
-        _current = new RMCScuttleCinematicOverlay(_timing.CurTime, ev.Duration);
-        _cinematicExplosionAt = _timing.CurTime + GetExplosionOffset(ev.Duration);
+        var startedAt = ev.StartedAt > _timing.CurTime ? _timing.CurTime : ev.StartedAt;
+        _current = new RMCScuttleCinematicOverlay(startedAt, ev.Duration);
+        _cinematicExplosionAt = startedAt + RMCScuttleCinematicTiming.GetExplosionOffset(ev.Duration);
         _cinematicExplosionPlayed = false;
         _overlay.AddOverlay(_current);
+        MuteNonCinematicAudio();
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -69,19 +77,55 @@ public sealed class RMCScuttleCinematicSystem : EntitySystem
 
     private void Clear()
     {
-        if (_current == null)
-            return;
+        RestoreMutedAudio();
 
-        _overlay.RemoveOverlay<RMCScuttleCinematicOverlay>();
+        if (_current != null)
+            _overlay.RemoveOverlay<RMCScuttleCinematicOverlay>();
+
         _current = null;
         _cinematicExplosionAt = null;
         _cinematicExplosionPlayed = false;
+        _cinematicAudio.Clear();
     }
 
-    private static TimeSpan GetExplosionOffset(TimeSpan duration)
+    private void AllowCinematicAudio((EntityUid Entity, AudioComponent Component)? audio)
     {
-        var introShip = TimeSpan.FromSeconds(Math.Min(1.5, duration.TotalSeconds * 0.1));
-        var introNuke = TimeSpan.FromSeconds(Math.Min(3.0, duration.TotalSeconds * 0.2));
-        return introShip + introNuke;
+        if (audio is not { } playing)
+            return;
+
+        _cinematicAudio.Add(playing.Entity);
+        if (_mutedAudio.Remove(playing.Entity, out var volume))
+            _audio.SetVolume(playing.Entity, volume, playing.Component);
+    }
+
+    private void MuteNonCinematicAudio()
+    {
+        var query = EntityQueryEnumerator<AudioComponent>();
+        while (query.MoveNext(out var uid, out var audio))
+        {
+            if (_cinematicAudio.Contains(uid))
+                continue;
+
+            MuteAudio((uid, audio));
+        }
+    }
+
+    private void MuteAudio(Entity<AudioComponent> ent)
+    {
+        if (!_mutedAudio.ContainsKey(ent.Owner))
+            _mutedAudio[ent.Owner] = ent.Comp.Params.Volume;
+
+        _audio.SetGain(ent.Owner, 0f, ent.Comp);
+    }
+
+    private void RestoreMutedAudio()
+    {
+        foreach (var (uid, volume) in _mutedAudio)
+        {
+            if (TryComp(uid, out AudioComponent? audio))
+                _audio.SetVolume(uid, volume, audio);
+        }
+
+        _mutedAudio.Clear();
     }
 }

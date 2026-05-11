@@ -34,8 +34,6 @@ public sealed partial class CMDistressSignalRuleSystem
     private const float ScuttleSuperheatRadius = 5f;
     private const float ScuttleHeatJoules = 45000f;
     private const float ScuttleSuperheatJoules = 75000f;
-    private static readonly TimeSpan ScuttleCinematicDetonationLead = TimeSpan.FromSeconds(1);
-
     private static readonly EntProtoId ScuttleFire = "RMCTileFire";
     private static readonly DamageSpecifier ScuttleHeatDamage = new() { DamageDict = { { "Heat", 5 } } };
     private static readonly DamageSpecifier ScuttleSuperheatDamage = new() { DamageDict = { { "Heat", 10 } } };
@@ -59,7 +57,10 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private bool UpdateScuttle(CMDistressSignalRuleComponent rule, float frameTime)
     {
-        if (rule.Result != null || rule.ScuttleDetonated)
+        if (rule.ScuttleDetonated)
+            return UpdateScuttleRoundEnd(rule);
+
+        if (rule.Result != null)
             return false;
 
         var time = Timing.CurTime;
@@ -127,12 +128,10 @@ public sealed partial class CMDistressSignalRuleSystem
         if (rule.ScuttleFinalSequenceStarted)
             return;
 
+        var finalStartedAt = Timing.CurTime;
         rule.ScuttleFinalSequenceStarted = true;
-        rule.ScuttleFinalStartedAt = Timing.CurTime;
-        rule.ScuttleFinalDetonateAt = Timing.CurTime +
-                                      NonNegative(NonNegative(rule.ScuttleFinalCinematicDelay) +
-                                                  NonNegative(rule.ScuttleFinalSequenceDelay) -
-                                                  ScuttleCinematicDetonationLead);
+        rule.ScuttleFinalStartedAt = finalStartedAt;
+        SetScuttleFinalTimes(rule, finalStartedAt);
 
         _marineAnnounce.AnnounceARESStaging(
             default,
@@ -150,6 +149,8 @@ public sealed partial class CMDistressSignalRuleSystem
         var startedAt = rule.ScuttleFinalStartedAt ?? time;
         if (rule.ScuttleFinalStartedAt == null)
             rule.ScuttleFinalStartedAt = startedAt;
+        if (rule.ScuttleFinalDetonateAt == null || rule.ScuttleRoundEndAt == null)
+            SetScuttleFinalTimes(rule, startedAt);
 
         var elapsed = time - startedAt;
         if (!rule.ScuttleFinalMeltdownAnnounced &&
@@ -166,12 +167,13 @@ public sealed partial class CMDistressSignalRuleSystem
             PlayScuttleNuclearDetonationWarning();
         }
 
+        var cinematicStartedAt = startedAt + NonNegative(rule.ScuttleFinalCinematicDelay);
         if (!rule.ScuttleFinalCinematicStarted &&
-            elapsed >= NonNegative(rule.ScuttleFinalCinematicDelay))
+            time >= cinematicStartedAt)
         {
             rule.ScuttleFinalCinematicStarted = true;
             _evacuation.StopEvacuationProgress();
-            RaiseNetworkEvent(new RMCScuttleCinematicEvent(NonNegative(rule.ScuttleFinalSequenceDelay)), Filter.Broadcast());
+            RaiseNetworkEvent(new RMCScuttleCinematicEvent(cinematicStartedAt, NonNegative(rule.ScuttleFinalSequenceDelay)), Filter.Broadcast());
         }
 
         UpdateScuttleHeatAura(rule);
@@ -184,6 +186,34 @@ public sealed partial class CMDistressSignalRuleSystem
         }
 
         return false;
+    }
+
+    private void SetScuttleFinalTimes(CMDistressSignalRuleComponent rule, TimeSpan finalStartedAt)
+    {
+        var cinematicDelay = NonNegative(rule.ScuttleFinalCinematicDelay);
+        var cinematicDuration = NonNegative(rule.ScuttleFinalSequenceDelay);
+        var cinematicStartedAt = finalStartedAt + cinematicDelay;
+
+        rule.ScuttleFinalDetonateAt = cinematicStartedAt + RMCScuttleCinematicTiming.GetExplosionOffset(cinematicDuration);
+        rule.ScuttleRoundEndAt = cinematicStartedAt + cinematicDuration;
+    }
+
+    private bool UpdateScuttleRoundEnd(CMDistressSignalRuleComponent rule)
+    {
+        if (!rule.AutoEnd || rule.Result != null)
+            return false;
+
+        var time = Timing.CurTime;
+        var roundEndAt = rule.ScuttleRoundEndAt ?? time;
+        rule.ScuttleRoundEndAt = roundEndAt;
+
+        if (time < roundEndAt)
+            return true;
+
+        rule.Result = DistressSignalRuleResult.SelfDestruct;
+        rule.CustomRoundEndMessage = null;
+        _roundEnd.EndRound();
+        return true;
     }
 
     private void AnnounceScuttleDeckCreak()
@@ -249,13 +279,6 @@ public sealed partial class CMDistressSignalRuleSystem
         {
             _rmcNuke.NukeMap(map);
         }
-
-        if (!rule.AutoEnd || rule.Result != null)
-            return;
-
-        rule.Result = DistressSignalRuleResult.SelfDestruct;
-        rule.CustomRoundEndMessage = null;
-        _roundEnd.EndRound();
     }
 
     private void AnnounceScuttleStage(LocId message, int fireRange, int fireIntensity, int fireDuration)

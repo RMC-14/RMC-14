@@ -65,6 +65,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public TimeSpan? ScuttleFinalDetonateAt;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? ScuttleRoundEndAt;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? ScuttleFinalStartedAt;
 
     [DataField]

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Rules;
 using System.Numerics;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -69,9 +70,9 @@ public sealed class RMCScuttleCinematicOverlay : Overlay
 
     private Texture GetFrame(TimeSpan elapsed)
     {
-        var introShip = TimeSpan.FromSeconds(Math.Min(1.5, Duration.TotalSeconds * 0.1));
-        var introNuke = TimeSpan.FromSeconds(Math.Min(3.0, Duration.TotalSeconds * 0.2));
-        var summary = TimeSpan.FromSeconds(Math.Min(1.5, Duration.TotalSeconds * 0.1));
+        var introShip = RMCScuttleCinematicTiming.GetIntroShipDuration(Duration);
+        var introNuke = RMCScuttleCinematicTiming.GetIntroNukeDuration(Duration);
+        var summary = RMCScuttleCinematicTiming.GetSummaryDuration(Duration);
         var destroyedStart = introShip + introNuke;
         var summaryStart = Duration - summary;
 
