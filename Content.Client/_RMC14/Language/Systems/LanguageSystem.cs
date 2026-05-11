@@ -37,19 +37,9 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             OnLanguageLearningChanged?.Invoke();
     }
 
-    public LanguageComponent? GetLocalSpeaker()
-    {
-        return CompOrNull<LanguageComponent>(_player.LocalEntity);
-    }
-
-    public LanguageLearningComponent? GetLocalLearner()
-    {
-        return CompOrNull<LanguageLearningComponent>(_player.LocalEntity);
-    }
-
     public void RequestSetLanguage(ProtoId<LanguagePrototype> language)
     {
-        if (GetLocalSpeaker()?.CurrentLanguage == language)
+        if (CompOrNull<LanguageComponent>(_player.LocalEntity)?.CurrentLanguage == language)
             return;
 
         RaiseNetworkEvent(new LanguagesSetMessage(language));
