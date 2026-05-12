@@ -455,7 +455,7 @@
   parent: CigPackBase
   id: RMCCigarettePackTarasClassic
   name: taras classic pack
-  description: About as iconic as the flag of the SPP itself, this can be found in the hands of every single SPP citizen, from a Kommissar to a General to a Coal miner. Technically considered contriband in the UN.
+  description: About as iconic as the flag of the SPP itself, this can be found in the hands of every single SPP citizen, from a Kommissar to a General to a coal miner. Technically considered contraband in the UN.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/taras_classic.rsi
