@@ -17,8 +17,8 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
-using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
+using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -31,7 +31,6 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -57,10 +56,8 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
     [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
@@ -378,77 +375,12 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
     {
         var userMap = _transform.GetMapCoordinates(user);
         var targetMap = _transform.GetMapCoordinates(target);
-        if (userMap.MapId != targetMap.MapId)
-            return true;
 
-        if (!_mapManager.TryFindGridAt(userMap, out var userGrid, out var grid) ||
-            !_mapManager.TryFindGridAt(targetMap, out var targetGrid, out _) ||
-            userGrid != targetGrid)
-        {
-            return !_examine.InRangeUnOccluded(userMap, targetMap, 0, uid => uid == user || uid == target);
-        }
-
-        var start = _map.WorldToTile(userGrid, grid, userMap.Position);
-        var end = _map.WorldToTile(userGrid, grid, targetMap.Position);
-        var targetIsWall = _tag.HasTag(target, WallTag);
-
-        // The target wall can be opaque, but intermediate opaque walls should block lock-on.
-        foreach (var tile in GetLine(start, end))
-        {
-            if (tile == start || (tile == end && targetIsWall))
-                continue;
-
-            var anchored = _map.GetAnchoredEntitiesEnumerator(userGrid, grid, tile);
-            while (anchored.MoveNext(out var uid))
-            {
-                if (uid == null || uid.Value == user || uid.Value == target)
-                    continue;
-
-                if (IsOpaqueWall(uid.Value))
-                    return true;
-            }
-        }
-
-        return false;
-    }
-
-    private bool IsOpaqueWall(EntityUid target)
-    {
-        return _tag.HasTag(target, WallTag) &&
-               TryComp(target, out OccluderComponent? occluder) &&
-               occluder.Enabled;
-    }
-
-    private static IEnumerable<Vector2i> GetLine(Vector2i start, Vector2i end)
-    {
-        var x = start.X;
-        var y = start.Y;
-        var dx = Math.Abs(end.X - start.X);
-        var dy = Math.Abs(end.Y - start.Y);
-        var sx = start.X < end.X ? 1 : -1;
-        var sy = start.Y < end.Y ? 1 : -1;
-        var err = dx - dy;
-
-        while (true)
-        {
-            yield return new Vector2i(x, y);
-
-            if (x == end.X && y == end.Y)
-                yield break;
-
-            var e2 = 2 * err;
-            if (e2 > -dy)
-            {
-                err -= dy;
-                x += sx;
-            }
-
-            if (e2 < dx)
-            {
-                err += dx;
-                y += sy;
-            }
-        }
+        return !_interaction.InRangeUnobstructed(
+            userMap,
+            targetMap,
+            range: 0,
+            predicate: uid => uid == user || uid == target);
     }
 
     private bool IsWielded(EntityUid launcher)
