@@ -26,7 +26,7 @@ public sealed partial class Cardiostabilizing : RMCChemicalEffect
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         // TODO RMC14 Pain Reduction
-        // TODO RMC14 M.losebreath (Suffocation)
+        // TODO RMC14 M.losebreath (allow breathing in crit)
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
