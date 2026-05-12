@@ -100,3 +100,10 @@ rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of t
                                              You are not an antagonistic role, nor are you a combat role. Do not be antagonistic to other players or take antagonistic action: You are supposed to positively represent Weston-Yamada. Do not deploy to the planet in order to fight xenos. You are not trained to fight, nor are you expected to.
 
                                              If you have any other questions, consult the guidebook's Corporate Liaison page.
+rmc-new-to-job-cc = As a Correspondent, your job is to keep the masses informed on the efforts of the United Nations Marine Corps! Be that through film and broadcast, pen and paper journalism, or any other means.
+
+                                             Head on over to the Correspondents' room, from there, you can get your Correspondent essentials and your TV camera to film the action. This camera broadcasts a live view to any televisions on the ship (audio not included), so make sure to get good shots for the folks back home! The fax machine in the room is also your tool for sending articles around the ship or contacting The Free Press.
+
+                                             Correspondents may deploy or remain on the ship; it's your choice! Plenty of newsworthy events may occur on the ship during an operation, and interviewing the unsung heroes in the supporting departments is always popular back home. But if it's action you or your viewerbase wish for, there's always the frontline.
+
+                                             Deploying Correspondents may carry a sidearm for self-defense; however, you are not a combatant! Time spent fighting or physically assisting the Marines is time not spent filming or writing. Being too helpful may turn your press uniform from a shield to a target for the UNMC's enemies. You can't report when you're dead, so play it safe and stay alive! 
