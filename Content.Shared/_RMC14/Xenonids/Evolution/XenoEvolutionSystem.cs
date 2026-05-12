@@ -89,11 +89,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
     {
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
-        SubscribeNetworkEvent<XenoChangingCasteEvent>(OnXenoChangingCaste);
-
         SubscribeLocalEvent<FixturesComponent, XenoChangingPrototypeEvent>(OnFixturesXenoChangingPrototype);
 
         SubscribeLocalEvent<XenoDevolveComponent, XenoOpenDevolveActionEvent>(OnXenoOpenDevolveAction);
+
+        SubscribeLocalEvent<XenoPrototypeComponent, MapInitEvent>(OnXenoPrototypeMapInit);
 
         SubscribeLocalEvent<XenoEvolutionComponent, MapInitEvent>(OnXenoEvolveMapInit);
         SubscribeLocalEvent<XenoEvolutionComponent, ComponentShutdown>(OnXenoEvolveShutdown);
@@ -141,6 +141,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         args.Handled = true;
         _ui.OpenUi(xeno.Owner, XenoDevolveUIKey.Key, xeno);
+    }
+
+    private void OnXenoPrototypeMapInit(Entity<XenoPrototypeComponent> xeno, ref MapInitEvent args)
+    {
+        xeno.Comp.TargetPrototypeId = MetaData(xeno).EntityPrototype?.ID;
+        Dirty(xeno);
     }
 
     private void OnXenoEvolveMapInit(Entity<XenoEvolutionComponent> ent, ref MapInitEvent args)
@@ -616,15 +622,14 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        RaiseNetworkEvent(new XenoChangingCasteEvent(EntityManager.GetNetEntity(xeno), protoId), Filter.Pvs(xeno));
-
-        var newProto = _prototypes.Index(protoId);
+        var protoComp = EnsureComp<XenoPrototypeComponent>(xeno);
+        protoComp.TargetPrototypeId = protoId;
+        EnsureXenoPrototype(xeno, protoId);
+        Dirty(xeno, protoComp);
 
         var recently = EnsureComp<XenoRecentlyDevolvedComponent>(xeno);
         if (Prototype(xeno)?.ID is { } oldId)
             recently.Recent[oldId] = _timing.CurTime;
-
-        ChangeXenoPrototype(xeno, newProto);
 
         var comp = EnsureComp<XenoNewlyEvolvedComponent>(xeno);
     }
@@ -659,6 +664,25 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        var prototypedXenos = EntityQueryEnumerator<XenoPrototypeComponent, MetaDataComponent>();
+        while (prototypedXenos.MoveNext(out var uid, out var comp, out var meta))
+        {
+            if (!comp.TargetPrototypeId.HasValue)
+                continue;
+
+            if (!comp.CurrentPrototypeId.HasValue)
+            {
+                comp.CurrentPrototypeId = meta.EntityPrototype?.ID;
+            }
+
+            if (comp.CurrentPrototypeId != comp.TargetPrototypeId
+                && !EnsureXenoPrototype(uid, comp.TargetPrototypeId.Value))
+            {
+                // failed to ensure xeno prototype for some reason.
+                comp.TargetPrototypeId = null;
+            }
+        }
+
         var newly = EntityQueryEnumerator<XenoNewlyEvolvedComponent>();
         while (newly.MoveNext(out var uid, out var comp))
         {
@@ -778,43 +802,50 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
     }
 
-    private void OnXenoChangingCaste(XenoChangingCasteEvent args)
+    public bool EnsureXenoPrototype(
+        Entity<XenoPrototypeComponent?> xeno,
+        EntProtoId newProtoId)
     {
-        // Servers must ignore this event to prevent clients from sending it to the server,
-        // because this event can cause any entity to switch over to any prototype.
-        if (_net.IsServer)
-            return;
+        if (!Resolve(xeno.Owner, ref xeno.Comp))
+            return false;
 
-        var newProto = _prototypes.Index(args.NewProtoId);
-        var xeno = EntityManager.GetEntity(args.Xeno);
-        if (xeno != EntityUid.Invalid)
+        var metadata = MetaData(xeno);
+        var oldProtoId = metadata.EntityPrototype?.ID;
+
+        Log.Debug($"Ensuring xeno prototype (currently {oldProtoId}) is {newProtoId} on tick {_timing.CurTick}.");
+
+        if (oldProtoId != null
+            && oldProtoId == newProtoId
+            && xeno.Comp.CurrentPrototypeId == newProtoId)
         {
-            ChangeXenoPrototype(xeno, newProto);
+            // Entity prototype is already what it should be, do nothing.
+            Log.Debug("Xeno is already the correct prototype.");
+            return true;
         }
-    }
 
-    private void ChangeXenoPrototype(
-        EntityUid xeno,
-        EntityPrototype newProto)
-    {
         if (!_prototypes.TryIndex(CloningSettingsId, out var settings))
         {
             Log.Error($"Failed to load cloning prototype {CloningSettingsId}, unable to change xeno prototype.");
-            return;
+            return false;
+        }
+
+        if(!_prototypes.TryIndex(newProtoId, out var newProto))
+        {
+            Log.Error($"Failed to load xeno prototype {newProtoId}, unable to change xeno prototype.");
+            return false;
         }
 
         if (_xenoComponents is not { } includeComponents)
         {
-            Log.Error("Failed to load set of xeno components, unable to change xeno prototype.");
-            return;
+            Log.Error("Xeno components are not loaded, unable to change xeno prototype.");
+            return false;
         }
 
         var excludeComponents = settings.ExcludeComponents;
         var additionalExclusions = new HashSet<string>();
 
-        var metadata = MetaData(xeno);
-        var oldProtoId = metadata.EntityPrototype?.ID;
-
+        xeno.Comp.TargetPrototypeId = newProtoId;
+        xeno.Comp.CurrentPrototypeId = newProtoId;
         metadata.EntityPrototype = newProto;
         _meta.SetEntityName(xeno, newProto.Name);
         _meta.SetEntityDescription(xeno, newProto.Description);
@@ -870,6 +901,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         RaiseLocalEvent(xeno, ref afterEv, true);
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+
+        return true;
     }
 
     /// <summary>

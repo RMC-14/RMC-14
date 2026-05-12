@@ -191,6 +191,7 @@
   - type: Body
     prototype: Xenonid
   - type: Xeno
+  - type: XenoPrototype
   - type: XenoRegen
   - type: XenoStateVisuals
   - type: UserInterface
@@ -548,6 +549,7 @@
   excludeComponents:
   # components that all xenos have defined but must NOT
   # be replaced with fresh versions (keep current state)
+  - XenoPrototype
   - Physics
   - Climbing
   - InputMover
