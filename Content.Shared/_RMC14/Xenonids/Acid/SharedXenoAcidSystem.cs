@@ -31,6 +31,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Physics;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Xenonids.Burrow;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
@@ -136,6 +137,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
                 return;
             }
         }
+
+        if (TryComp<XenoBurrowComponent>(xeno, out var burrow) && burrow.Active)
+            return;
 
         if (xeno.Owner != args.Performer ||
             !CheckCorrodiblePopupsWithReplacement(xeno, target, args.Strength, out var time, out var _))
