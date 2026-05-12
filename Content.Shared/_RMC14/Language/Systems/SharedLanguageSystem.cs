@@ -21,11 +21,6 @@ public abstract class SharedLanguageSystem : EntitySystem
         return GetCurrentLanguage((entity, CompOrNull<LanguageComponent>(entity)));
     }
 
-    public bool TryGetCurrentLanguage(EntityUid entity, out ProtoId<LanguagePrototype> language)
-    {
-        return TryGetCurrentLanguage((entity, CompOrNull<LanguageComponent>(entity)), out language);
-    }
-
     public ProtoId<LanguagePrototype> GetCurrentLanguage(Entity<LanguageComponent?> ent)
     {
         if (!TryGetCurrentLanguage(ent, out var language))
@@ -44,16 +39,6 @@ public abstract class SharedLanguageSystem : EntitySystem
 
         language = ent.Comp.CurrentLanguage ?? ent.Comp.DefaultLanguage ?? CommonLanguage;
         return true;
-    }
-
-    public bool HasLanguageComponent(EntityUid entity)
-    {
-        return HasLanguageComponent((entity, CompOrNull<LanguageComponent>(entity)));
-    }
-
-    public bool HasLanguageComponent(Entity<LanguageComponent?> ent)
-    {
-        return Resolve(ent, ref ent.Comp, false);
     }
 
     public bool CanSpeak(EntityUid entity, ProtoId<LanguagePrototype> language)
@@ -95,37 +80,12 @@ public abstract class SharedLanguageSystem : EntitySystem
         return ent.Comp.SpokenLanguages;
     }
 
-    public IReadOnlySet<ProtoId<LanguagePrototype>> GetUnderstoodLanguages(EntityUid entity)
-    {
-        return GetUnderstoodLanguages((entity, CompOrNull<LanguageComponent>(entity)));
-    }
-
-    public IReadOnlySet<ProtoId<LanguagePrototype>> GetUnderstoodLanguages(Entity<LanguageComponent?> ent)
-    {
-        if (!Resolve(ent, ref ent.Comp, false))
-            return DefaultLanguages;
-
-        return ent.Comp.UnderstoodLanguages;
-    }
-
     public string ObfuscateMessage(string message, ProtoId<LanguagePrototype> language)
     {
         if (!_prototypeManager.TryIndex(language, out var languageProto))
             return message;
 
         return ObfuscateMessageInternal(message, languageProto.ObfuscationMethod, languageProto.RandomizeObfuscation);
-    }
-
-    public string ObfuscateMessageWithComprehension(string message, ProtoId<LanguagePrototype> language, float comprehension)
-    {
-        if (!_prototypeManager.TryIndex(language, out var languageProto))
-            return message;
-
-        return ObfuscateMessageInternalWithComprehension(
-            message,
-            languageProto.ObfuscationMethod,
-            languageProto.RandomizeObfuscation,
-            comprehension);
     }
 
     public string ObfuscateMessageForDisplayWithComprehension(string message, ProtoId<LanguagePrototype> language, float comprehension)
