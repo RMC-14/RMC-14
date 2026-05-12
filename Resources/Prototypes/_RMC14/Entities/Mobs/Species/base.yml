@@ -194,7 +194,6 @@
     critDamage:
       types:
         Asphyxiation: 1
-    stopCritDamageReagent: CMInaprovaline
     nonDeadDamage:
       types:
         Asphyxiation: -0.33

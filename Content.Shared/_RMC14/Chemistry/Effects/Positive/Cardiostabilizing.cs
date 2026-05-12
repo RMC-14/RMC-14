@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chat;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;

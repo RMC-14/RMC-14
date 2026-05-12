@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Armor;
-using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Orders;
@@ -11,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Chat.Prototypes;
@@ -49,7 +49,6 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -324,7 +323,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         if (_mobThresholds.TryGetDeadThreshold(ent.Owner, out var mobThreshold) && TryComp<DamageableComponent>(ent, out var damageable))
         {
             var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
-            var type = _prototypes.Index(LethalDamageType);
+            var type = _prototypes.Index<DamageTypePrototype>(LethalDamageType);
             var damage = new DamageSpecifier(type, lethalAmountOfDamage);
             _damageable.TryChangeDamage(ent.Owner, damage, true);
         }
@@ -548,16 +547,8 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                     break;
                 case MobState.Critical:
                     _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
-
                     var ev = new DamageStateCritBeforeDamageEvent(comp.CritDamage);
                     RaiseLocalEvent(uid, ref ev);
-
-                    if (_rmcBloodstream.TryGetChemicalSolution(uid, out _, out var chemicals)
-                        && chemicals.GetTotalPrototypeQuantity(comp.StopCritDamageReagent) > FixedPoint2.Zero)
-                    {
-                        break;
-                    }
-
                     _damageable.TryChangeDamage(uid, ev.Damage, true, damageable: damageable);
                     break;
             }
