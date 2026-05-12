@@ -606,7 +606,7 @@
   parent: RMCCigarettePackTarasClassic
   id: RMCCigarettePackBoheBlueMenthols
   name: bohe blue menthols
-  description: Strong, filtered menthol cigarettes made out of the finest off-planet mediocre tobacco and coated in as much menthol as possible.
+  description: Strong, filtered menthol cigarettes made out of the finest mediocre off-planet tobacco and coated in as much menthol as possible.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/bohe_blue_menthols.rsi
