@@ -1,9 +1,6 @@
 ﻿using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Chemistry.Effects;
-using Content.Shared._RMC14.Damage;
-using Content.Shared._RMC14.Marines;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
@@ -15,28 +12,14 @@ namespace Content.Shared._RMC14.Chemistry.Reagent;
 public sealed class RMCReagentSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
-
-    private static readonly ProtoId<ReagentPrototype> Inaprovaline = "CMInaprovaline";
 
     private FrozenDictionary<string, Reagent> _reagents = FrozenDictionary<string, Reagent>.Empty;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<MarineComponent, DamageStateCritBeforeDamageEvent>(OnInaprovalineBeforeCritDamage);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         ReloadPrototypes();
-    }
-
-    private void OnInaprovalineBeforeCritDamage(Entity<MarineComponent> ent, ref DamageStateCritBeforeDamageEvent args)
-    {
-        if (_rmcBloodstream.TryGetChemicalSolution(ent, out _, out var chemicals)
-            && chemicals.GetTotalPrototypeQuantity(Inaprovaline) > FixedPoint2.Zero)
-        {
-            // Don't take bleedout damage on Inaprovaline
-            args.Damage.ClampMax(0);
-        }
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
