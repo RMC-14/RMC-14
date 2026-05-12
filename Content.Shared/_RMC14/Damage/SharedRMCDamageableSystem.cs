@@ -540,15 +540,24 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
             switch (state.CurrentState)
             {
+                case MobState.Alive:
+                    if (!HasAnyDamage((uid, damageable), comp.NonDeadDamage))
+                        break;
+
+                    _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
+                    break;
                 case MobState.Critical:
+                    _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
+
+                    var ev = new DamageStateCritBeforeDamageEvent(comp.CritDamage);
+                    RaiseLocalEvent(uid, ref ev);
+
                     if (_rmcBloodstream.TryGetChemicalSolution(uid, out _, out var chemicals)
                         && chemicals.GetTotalPrototypeQuantity(comp.StopCritDamageReagent) > FixedPoint2.Zero)
                     {
                         break;
                     }
 
-                    var ev = new DamageStateCritBeforeDamageEvent(comp.CritDamage);
-                    RaiseLocalEvent(uid, ref ev);
                     _damageable.TryChangeDamage(uid, ev.Damage, true, damageable: damageable);
                     break;
             }
