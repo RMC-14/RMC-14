@@ -571,7 +571,6 @@
       collection: RMCFlamerColonyShoot
 
 # SPP Grenades
-
 - type: entity
   parent: RMCGrenadeWhitePhosphorus
   id: RMCGrenadeWhitePhosphorusSPP
