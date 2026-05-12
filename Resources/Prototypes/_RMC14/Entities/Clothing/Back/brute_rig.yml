@@ -50,6 +50,7 @@
   - type: FixedItemSizeStorage
   - type: CMHolster
     fullEquippedState: equipped-BACKPACK-g
+    fullInhandPrefix: launcher
     whitelist:
       tags:
       - RMCWeaponLauncherM6HBrute

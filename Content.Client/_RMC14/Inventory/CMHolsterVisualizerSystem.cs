@@ -2,6 +2,7 @@ using Content.Client.Clothing;
 using Content.Client.Items.Systems;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared.Clothing;
+using Content.Shared.Hands;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Inventory;
@@ -17,6 +18,7 @@ public sealed class CMHolsterVisualizerSystem : VisualizerSystem<CMHolsterCompon
     {
         base.Initialize();
         SubscribeLocalEvent<CMHolsterComponent, GetEquipmentVisualsEvent>(OnGetEquipmentVisuals, after: [typeof(ClientClothingSystem)]);
+        SubscribeLocalEvent<CMHolsterComponent, GetInhandVisualsEvent>(OnGetInhandVisuals, after: [typeof(ItemSystem)]);
     }
 
     protected override void OnAppearanceChange(EntityUid uid,
@@ -35,22 +37,39 @@ public sealed class CMHolsterVisualizerSystem : VisualizerSystem<CMHolsterCompon
             sprite.LayerSetVisible(layer, visual == CMHolsterVisuals.Full);
         }
 
-        if (component.FullEquippedState != null)
+        if (component.FullEquippedState != null || component.FullInhandPrefix != null)
             _item.VisualsChanged(uid);
     }
 
     private void OnGetEquipmentVisuals(Entity<CMHolsterComponent> ent, ref GetEquipmentVisualsEvent args)
     {
-        if (!AppearanceSystem.TryGetData(ent, CMHolsterLayers.Fill, out CMHolsterVisuals visual) ||
-            visual != CMHolsterVisuals.Full ||
-            ent.Comp.FullEquippedState == null ||
-            args.Layers.Count == 0)
+        if (ent.Comp.FullEquippedState == null ||
+            args.Layers.Count == 0 ||
+            !TryComp<AppearanceComponent>(ent, out var appearance) ||
+            !AppearanceSystem.TryGetData(ent, CMHolsterLayers.Fill, out CMHolsterVisuals visual, appearance) ||
+            visual != CMHolsterVisuals.Full)
         {
             return;
         }
 
         var (key, layer) = args.Layers[0];
         args.Layers[0] = (key, WithState(layer, ent.Comp.FullEquippedState));
+    }
+
+    private void OnGetInhandVisuals(Entity<CMHolsterComponent> ent, ref GetInhandVisualsEvent args)
+    {
+        if (ent.Comp.FullInhandPrefix == null ||
+            args.Layers.Count == 0 ||
+            !TryComp<AppearanceComponent>(ent, out var appearance) ||
+            !AppearanceSystem.TryGetData(ent, CMHolsterLayers.Fill, out CMHolsterVisuals visual, appearance) ||
+            visual != CMHolsterVisuals.Full)
+        {
+            return;
+        }
+
+        var state = $"{ent.Comp.FullInhandPrefix}-inhand-{args.Location.ToString().ToLowerInvariant()}";
+        var (key, layer) = args.Layers[0];
+        args.Layers[0] = (key, WithState(layer, state));
     }
 
     private static PrototypeLayerData WithState(PrototypeLayerData layer, string state)

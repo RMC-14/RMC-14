@@ -842,7 +842,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 return false;
             }
 
-            if (TryComp(item, out StorageComponent? storage) &&
+            if (HasComp<StorageComponent>(item) &&
                 TryGetLastInserted((item, holster), out var weapon))
             {
                 if (!_hands.TryPickup(user, weapon))
