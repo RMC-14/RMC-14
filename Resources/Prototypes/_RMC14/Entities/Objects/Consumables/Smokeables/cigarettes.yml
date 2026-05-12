@@ -577,7 +577,7 @@
   parent: Cigarette
   id: RMCSPPStandardCigarette
   name: SPP Filtered Cigarette
-  description: A simple filtered cigarette. Atleast it's maringally healthier then the UN Unfiltered ones!
+  description: A simple filtered cigarette. At least it's marginally healthier then the UN unfiltered ones!
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/spp_cig.rsi
