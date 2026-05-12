@@ -33,6 +33,90 @@
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
+  id: RMCAttachmentUnderbarrelFlareGun
+  name: M82-F underbarrel flare gun
+  description: A compact underbarrel flare gun. Fires a single flare to signal or illuminate.
+  components:
+  - type: Sprite
+    state: flaregun
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentUnderbarrelFlareGun
+  - type: Gun
+    projectileSpeed: 25
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound:
+      collection: CMShotgunLoad
+      params:
+        variation: 0.2
+  - type: RMCSelectiveFire
+    scatterWielded: 0
+    scatterUnwielded: 0
+    baseFireRate: 10
+    burstScatterMult: 0
+  - type: ShootAtFixedPoint
+    maxFixedRange: 15
+    autoAimClosestObstacle: true
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - Flare
+      - RMCFlare
+      - RMCFlareL96
+      - RMCFlareR44
+      - RMCFlareC18
+    capacity: 1
+    proto: CMFlare
+    soundInsert:
+      collection: CMShotgunLoad
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: [ ]
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.5
+  - type: GunPointBlank
+  - type: GunIFF
+    enabled: true
+  - type: GunIgnorePrediction
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+      params:
+        volume: -2
+    actionName: Switch to the underbarrel flare gun
+    actionDesc: Switch to using the underbarrel flare gun.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flaregun
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flaregun-on
+  - type: AttachableVisuals
+    offset: -0.17, 0.22
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
+
+- type: entity
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
   id: RMCAttachmentBipod
   name: bipod
   description: "A simple set of telescopic poles to keep a weapon stabilized during firing.
@@ -1073,3 +1157,6 @@
 
 - type: Tag
   id: RMCAttachmentL88Grip
+
+- type: Tag
+  id: RMCAttachmentUnderbarrelFlareGun

@@ -598,6 +598,8 @@
 #        amount: 2
       - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 2
+      - id: RMCAttachmentUnderbarrelFlareGun
+        amount: 3
       - id: RMCAttachmentUnderbarrelExtinguisher
         amount: 2
       - id: RMCAttachmentVerticalGrip
