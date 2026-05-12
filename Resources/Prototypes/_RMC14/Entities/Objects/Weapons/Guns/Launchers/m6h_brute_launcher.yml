@@ -10,11 +10,6 @@
     - state: base
       sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m6h/m6h_icon.rsi
       map: ["enum.GunVisualLayers.Base"]
-  - type: Clothing
-    quickEquip: true
-    slots:
-    - suitStorage
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m6h/m6h_inhands.rsi
   - type: Gun
     fireRate: 0.83
     soundGunshot:
@@ -36,6 +31,9 @@
     isCorrodible: false
   - type: ExplosionResistance
     damageCoefficient: 0
+  - type: Clothing
+    quickEquip: false
+    slots: NONE
   - type: Wieldable
   - type: GunRequiresWield
   - type: GunRequiresSkills
@@ -80,7 +78,6 @@
   - type: Tag
     tags:
     - RMCWeaponLauncherM6HBrute
-  - type: RMCMagneticItem
 
 - type: entity
   id: RMCRocketM5510Brute

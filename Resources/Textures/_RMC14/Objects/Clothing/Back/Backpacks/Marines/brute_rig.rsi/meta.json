@@ -11,14 +11,21 @@
       "name": "icon"
     },
     {
+      "name": "launcher"
+    },
+    {
+      "name": "half"
+    },
+    {
+      "name": "full"
+    },
+    {
       "name": "equipped-BACKPACK",
       "directions": 4
     },
     {
-      "name": "open"
-    },
-    {
-      "name": "closed"
+      "name": "equipped-BACKPACK-g",
+      "directions": 4
     }
   ]
 }

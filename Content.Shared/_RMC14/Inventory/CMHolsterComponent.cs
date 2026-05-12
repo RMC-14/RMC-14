@@ -23,6 +23,12 @@ public sealed partial class CMHolsterComponent : Component
     [DataField]
     public EntityWhitelist? Whitelist;
 
+    /// <summary>
+    /// Clothing RSI state used while this holster is worn and contains a holstered item.
+    /// </summary>
+    [DataField]
+    public string? FullEquippedState;
+
     // Variables to mitigate holster spamming
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastEjectAt;

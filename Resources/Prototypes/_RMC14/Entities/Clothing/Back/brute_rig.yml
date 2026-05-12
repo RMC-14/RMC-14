@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMBackpack
+  parent: CMPersonalStorageBase
   id: RMCM271A2BruteLauncherRig
   name: M271A2 pattern launcher rig
   description: A specialized back harness for carrying the M6H-BRUTE breaching launcher and M5510 rockets.
@@ -8,22 +8,48 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/brute_rig.rsi
     layers:
     - state: icon
-    - state: open
-      map: [ "openLayer" ]
-    - state: closed
-      map: [ "closedLayer" ]
+      map: [ "base" ]
+    - state: half
+      map: [ "half" ]
+      visible: false
+    - state: full
+      map: [ "full" ]
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.CMHolsterLayers.Fill:
+        base:
+          Empty: { state: icon }
+          Full: { state: launcher }
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        maxCount: 3
+        whitelist:
+          tags:
+          - RMCRocketAmmoM5510Brute
+      full:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCRocketAmmoM5510Brute
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/brute_rig.rsi
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,15,1
+    - 0,0,13,1 # 7 slots
     whitelist:
       tags:
       - RMCWeaponLauncherM6HBrute
       - RMCRocketAmmoM5510Brute
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
   - type: FixedItemSizeStorage
   - type: CMHolster
+    fullEquippedState: equipped-BACKPACK-g
     whitelist:
       tags:
       - RMCWeaponLauncherM6HBrute
@@ -38,6 +64,9 @@
   id: RMCM271A2BruteLauncherRigFilled
   suffix: Filled
   components:
+  - type: Icon
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/brute_rig.rsi
+    state: launcher
   - type: StorageFill
     contents:
     - id: RMCWeaponLauncherM6HBrute
