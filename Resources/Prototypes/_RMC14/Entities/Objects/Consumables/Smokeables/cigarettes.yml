@@ -426,7 +426,7 @@
   parent: Cigarette
   id: RMCLingxiaoCigarette
   name: Lingxiao Cigarette
-  description: A high-quality roll of Yunnan Tobacco and nictoine. Experts say, this is the best way to get lung cancer. Technically considered contriband in the UN, but can be found anywhere affluent.
+  description: A high-quality roll of Yunnan Tobacco and nicotine. Experts say this is the best way to get lung cancer. Technically considered contraband in the UN, but can be found anywhere affluent.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/langxiaogold_cig.rsi
