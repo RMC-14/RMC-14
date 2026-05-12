@@ -54,7 +54,7 @@ public sealed class XenoConstructionSystem : EntitySystem
 
     private void RefreshSecretionUI(EntityUid entity)
     {
-        if (!_timing.IsFirstTimePredicted)
+        if (_timing.ApplyingState)
             return;
 
         if (!TryComp(entity, out UserInterfaceComponent? ui))
