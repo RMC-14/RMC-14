@@ -74,7 +74,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
             if (!IsValidConstructionLocation(player.Value, coords))
             {
-                if (TryPopupInvalidOrderConstructionClick(player.Value, construction, coords))
+                if (TryShowHiveCoreSetupRestrictionPopup(player.Value, construction, coords))
                     return true;
 
                 return false;
@@ -90,10 +90,9 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         return false;
     }
 
-    private bool TryPopupInvalidOrderConstructionClick(EntityUid player, XenoConstructionComponent construction, EntityCoordinates coords)
+    private bool TryShowHiveCoreSetupRestrictionPopup(EntityUid player, XenoConstructionComponent construction, EntityCoordinates coords)
     {
-        if (!construction.OrderConstructionTargeting ||
-            construction.OrderConstructionChoice?.Id != SharedXenoConstructionSystem.XenoHiveCoreNodeId ||
+        if (construction.OrderConstructionChoice?.Id != SharedXenoConstructionSystem.XenoHiveCoreNodeId ||
             !_area.IsXenoHiveSetupRestricted(coords, out _))
         {
             return false;

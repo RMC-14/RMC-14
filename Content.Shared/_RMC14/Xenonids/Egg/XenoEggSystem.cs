@@ -190,12 +190,6 @@ public sealed class XenoEggSystem : EntitySystem
         }
 
         var attached = TryComp(xeno, out XenoAttachedOvipositorComponent? attachedComp);
-        if (!attached &&
-            !_area.CanXenoHiveSetupPopup(xeno.Owner, xeno.Owner))
-        {
-            return;
-        }
-
         if (!_plasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
             return;
 

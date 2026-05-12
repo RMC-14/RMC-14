@@ -400,10 +400,18 @@ public sealed class AreaSystem : EntitySystem
     private void PopupXenoHiveSetupRestricted(EntityUid user, TimeSpan remaining)
     {
         var message = remaining > TimeSpan.Zero
-            ? Loc.GetString("rmc-xeno-hive-setup-area-restricted-remaining", ("time", remaining.ToString(@"mm\:ss")))
+            ? Loc.GetString("rmc-xeno-hive-setup-area-restricted-remaining", ("time", FormatXenoHiveSetupRestrictionTime(remaining)))
             : Loc.GetString("rmc-xeno-hive-setup-area-restricted");
 
         _popup.PopupClient(message, user, user, PopupType.MediumCaution);
+    }
+
+    private static string FormatXenoHiveSetupRestrictionTime(TimeSpan remaining)
+    {
+        if (remaining.TotalHours >= 1)
+            return $"{(int) remaining.TotalHours}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+
+        return remaining.ToString(@"mm\:ss");
     }
 
     public bool IsXenoHiveSetupRestricted(Entity<AreaComponent> area, TimeSpan roundDuration, out TimeSpan remaining)
