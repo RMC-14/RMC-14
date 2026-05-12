@@ -79,8 +79,6 @@ public sealed class RMCFoldingBarricadeLinkingSystem : EntitySystem
             return;
         }
 
-        args.Handled = true;
-
         if (!ent.Comp.Linkable)
         {
             _popup.PopupClient(Loc.GetString("rmc-folding-barricade-link-no-points", ("barricade", ent.Owner)),
@@ -98,6 +96,8 @@ public sealed class RMCFoldingBarricadeLinkingSystem : EntitySystem
                 PopupType.SmallCaution);
             return;
         }
+
+        args.Handled = true;
 
         ent.Comp.Linked = !ent.Comp.Linked;
         Dirty(ent);
@@ -126,6 +126,13 @@ public sealed class RMCFoldingBarricadeLinkingSystem : EntitySystem
 
     private void OnMove(Entity<RMCFoldingBarricadeLinkingComponent> ent, ref MoveEvent args)
     {
+        if (!_transformQuery.TryGetComponent(ent, out var xform) ||
+            !xform.Anchored)
+        {
+            UpdateVisuals(ent);
+            return;
+        }
+
         UpdateNearby(args.OldPosition);
         UpdateNearby(args.NewPosition);
         UpdateVisuals(ent);
