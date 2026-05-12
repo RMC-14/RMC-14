@@ -4,44 +4,25 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Client._RMC14.UniversalRecorder;
 
-public sealed class UniversalRecorderVisualizerSystem : VisualizerSystem<UniversalRecorderComponent>
+public sealed class UniversalRecorderVisualizerSystem : VisualizerSystem<AppearanceComponent>
 {
-    public override void Initialize()
+    protected override void OnAppearanceChange(EntityUid uid, AppearanceComponent component, ref AppearanceChangeEvent args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<UniversalRecorderComponent, ComponentStartup>(OnComponentStartup);
-    }
-
-    private void OnComponentStartup(Entity<UniversalRecorderComponent> ent, ref ComponentStartup args)
-    {
-        if (!TryComp(ent, out SpriteComponent? sprite))
+        if (args.Sprite == null ||
+            !AppearanceSystem.TryGetData(uid, UniversalRecorderVisuals.State, out UniversalRecorderVisualState state, component))
+        {
             return;
+        }
 
-        UpdateState(ent, sprite, TryComp(ent, out AppearanceComponent? appearance) ? appearance : null);
+        UpdateState(uid, args.Sprite, state);
     }
 
-    protected override void OnAppearanceChange(EntityUid uid, UniversalRecorderComponent component, ref AppearanceChangeEvent args)
-    {
-        if (args.Sprite == null)
-            return;
-
-        UpdateState(uid, args.Sprite, args.Component);
-    }
-
-    private void UpdateState(EntityUid uid, SpriteComponent sprite, AppearanceComponent? appearance)
+    private void UpdateState(EntityUid uid, SpriteComponent sprite, UniversalRecorderVisualState state)
     {
         if (!SpriteSystem.LayerMapTryGet((uid, sprite), UniversalRecorderVisualLayers.Base, out var layer, false))
             return;
 
         SpriteSystem.LayerSetAutoAnimated((uid, sprite), layer, true);
-
-        if (appearance == null ||
-            !AppearanceSystem.TryGetData(uid, UniversalRecorderVisuals.State, out UniversalRecorderVisualState state, appearance))
-        {
-            return;
-        }
-
         SpriteSystem.LayerSetRsiState((uid, sprite), layer, state switch
         {
             UniversalRecorderVisualState.Empty => "taperecorder_empty",

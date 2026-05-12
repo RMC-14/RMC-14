@@ -92,10 +92,10 @@ public sealed class UniversalRecorderSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<UniversalRecorderComponent, UniversalRecorderRuntimeComponent>();
-        while (query.MoveNext(out var uid, out var recorder, out var runtime))
+        var query = EntityQueryEnumerator<ActiveUniversalRecorderComponent, UniversalRecorderComponent, UniversalRecorderRuntimeComponent>();
+        while (query.MoveNext(out var uid, out _, out var recorder, out var runtime))
         {
-            var ent = (uid, recorder);
+            var ent = (uid, recorder, runtime);
             switch (runtime.State)
             {
                 case UniversalRecorderState.Recording:
@@ -546,8 +546,6 @@ public sealed class UniversalRecorderSystem : EntitySystem
             speech = overrideSpeech;
 
         var speechVerb = Loc.GetString(_random.Pick(speech.SpeechVerbStrings));
-        var line = FormatTranscriptLine(currentDuration, nameEv.VoiceName, speechVerb, args.Message);
-
         tapeRuntime.Entries.Add(new RecorderEntry(
             currentDuration,
             nameEv.VoiceName,
@@ -555,8 +553,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
             args.Message,
             speech.FontId,
             speech.FontSize,
-            speech.Bold,
-            line));
+            speech.Bold));
         tapeRuntime.UsedCapacity = currentDuration;
     }
 
@@ -654,6 +651,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         runtime.PlaybackIndex = 0;
         runtime.State = UniversalRecorderState.Recording;
 
+        EnsureComp<ActiveUniversalRecorderComponent>(ent);
         EnsureComp<ActiveListenerComponent>(ent).Range = ent.Comp.ListenRange;
 
         _audio.PlayPvs(ent.Comp.PlaySound, ent);
@@ -703,6 +701,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
             PlaybackHissAudioParams)?.Entity;
         runtime.PlaybackStream = null;
 
+        EnsureComp<ActiveUniversalRecorderComponent>(ent);
         _audio.PlayPvs(ent.Comp.PlaySound, ent);
         SendRecorderNotice(ent, Loc.GetString("rmc-universal-recorder-popup-playback-start"));
         UpdateAppearance(ent);
@@ -719,6 +718,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
             GetTapeRuntime(tape).UsedCapacity = GetCurrentRecordedDuration(tape.Comp, runtime);
 
         RemCompDeferred<ActiveListenerComponent>(ent);
+        RemCompDeferred<ActiveUniversalRecorderComponent>(ent);
         runtime.PlaybackStartStream = _audio.Stop(runtime.PlaybackStartStream);
         runtime.PlaybackStream = _audio.Stop(runtime.PlaybackStream);
 
@@ -745,9 +745,9 @@ public sealed class UniversalRecorderSystem : EntitySystem
         UpdateAppearance(ent);
     }
 
-    private void UpdateRecording(Entity<UniversalRecorderComponent> ent)
+    private void UpdateRecording(Entity<UniversalRecorderComponent, UniversalRecorderRuntimeComponent> ent)
     {
-        var runtime = GetRecorderRuntime(ent);
+        var runtime = ent.Comp2;
         if (!TryGetTape(ent, out var tape))
         {
             Stop(ent, suppressStatus: true);
@@ -765,7 +765,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
         tapeRuntime.UsedCapacity = used;
 
         var remaining = tape.Comp.MaxCapacity - used;
-        if (!runtime.WarningSent && remaining <= ent.Comp.WarningThreshold)
+        if (!runtime.WarningSent && remaining <= ent.Comp1.WarningThreshold)
         {
             runtime.WarningSent = true;
             SendRecorderNotice(ent,
@@ -781,9 +781,9 @@ public sealed class UniversalRecorderSystem : EntitySystem
         Stop(ent);
     }
 
-    private void UpdatePlayback(Entity<UniversalRecorderComponent> ent)
+    private void UpdatePlayback(Entity<UniversalRecorderComponent, UniversalRecorderRuntimeComponent> ent)
     {
-        var runtime = GetRecorderRuntime(ent);
+        var runtime = ent.Comp2;
         if (_timing.CurTime < runtime.NextPlaybackAt)
             return;
 
@@ -831,7 +831,7 @@ public sealed class UniversalRecorderSystem : EntitySystem
 
         var nextEntry = tapeRuntime.Entries[runtime.PlaybackIndex];
         var delta = nextEntry.Timestamp - currentEntry.Timestamp;
-        if (delta > ent.Comp.PlaybackSilenceThreshold)
+        if (delta > ent.Comp1.PlaybackSilenceThreshold)
         {
             runtime.PendingSilenceSeconds = Math.Max(1, (int) Math.Round(delta.TotalSeconds));
             runtime.NextPlaybackAt = _timing.CurTime + TimeSpan.FromSeconds(1);
@@ -879,12 +879,16 @@ public sealed class UniversalRecorderSystem : EntitySystem
             return false;
         }
 
-        var text = new StringBuilder();
-        text.AppendLine(Loc.GetString("rmc-universal-recorder-transcript-header"));
-        text.AppendLine();
+        var text = new StringBuilder(Math.Min(Math.Max(paperComp.ContentSize, 0), 1024));
+        AppendLineLimited(text, Loc.GetString("rmc-universal-recorder-transcript-header"), paperComp.ContentSize);
+        AppendLineLimited(text, string.Empty, paperComp.ContentSize);
         foreach (var entry in tapeRuntime.Entries)
         {
-            text.AppendLine(FormattedMessage.EscapeText(entry.TranscriptLine));
+            if (text.Length >= paperComp.ContentSize)
+                break;
+
+            var line = FormatTranscriptLine(entry.Timestamp, entry.SpeakerName, entry.SpeechVerb, entry.Text);
+            AppendLineLimited(text, FormattedMessage.EscapeText(line), paperComp.ContentSize);
         }
 
         _paper.SetContent((printed, paperComp), text.ToString());
@@ -1113,6 +1117,22 @@ public sealed class UniversalRecorderSystem : EntitySystem
     private static string FormatTranscriptLine(TimeSpan timestamp, string speakerName, string speechVerb, string text)
     {
         return $"{FormatTimestamp(timestamp)} {speakerName} {speechVerb}, \"{text}\"";
+    }
+
+    private static void AppendLineLimited(StringBuilder builder, string line, int maxLength)
+    {
+        if (builder.Length >= maxLength)
+            return;
+
+        var newline = Environment.NewLine;
+        var available = maxLength - builder.Length;
+        if (line.Length + newline.Length <= available)
+        {
+            builder.AppendLine(line);
+            return;
+        }
+
+        builder.Append(line.AsSpan(0, Math.Min(line.Length, available)));
     }
 
     private static string FormatDuration(TimeSpan duration)

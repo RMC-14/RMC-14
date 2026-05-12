@@ -1,11 +1,10 @@
 using Content.Shared.Tools;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.UniversalRecorder;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
 public sealed partial class UniversalRecorderTapeComponent : Component
 {
     [DataField]

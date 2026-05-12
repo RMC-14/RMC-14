@@ -1,12 +1,11 @@
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Paper;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.UniversalRecorder;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
 public sealed partial class UniversalRecorderComponent : Component
 {
     public const string TapeSlotId = "rmc_universal_recorder_tape";

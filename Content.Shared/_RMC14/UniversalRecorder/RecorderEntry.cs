@@ -7,6 +7,5 @@ public readonly record struct RecorderEntry(
     string Text,
     string FontId,
     int FontSize,
-    bool Bold,
-    string TranscriptLine
+    bool Bold
 );
