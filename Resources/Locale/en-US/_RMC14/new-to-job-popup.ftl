@@ -70,13 +70,13 @@ rmc-new-to-job-doctor = As a Doctor you are tasked with providing specialized me
 
                                              Your most important jobs are the production of advanced medicine in the chemistry labs and conducting surgical procedures on evacuated marines in the operating rooms. You should already be familiar with the former, and as a doctor you now have the skillset to properly perform the latter!
 
-                                             Your auxiliary duties involve keeping requisitions supplied with medicine, tending to the medical needs of shipside personnel, teaching junior nurses, field deployments to the FOB, and assorted menial labor related to the medbay, such as cadaver transport and mortuary duties.
+                                             Your auxiliary duties involve ensuring requisitions has enough medicine to supply the corpsmen planetside, tending to the medical needs of shipside personnel, teaching junior nurses, field deployments to the FOB, and assorted menial labor related to the medbay, such as cadaver transport and mortuary duties.
 
-                                             Make sure to pay attention to your radio as it could mean the difference between life and death, be it a dropship arriving with an infested marine, a critical medicine shortage in requisitions, or even combat on deck.
+                                             Make sure to pay attention to your radio as it could mean the difference between life and death, be it a dropship arriving with a marine in critical condition, a medicine shortage in requisitions, or even combat aboard the warship.
 
 rmc-new-to-job-cmo = As the Chief Medical Officer of the ship your job is to provide support to all medical professionals in or outside of the Area of Operations and to manage your shipside medical personnel; all the while liaising with other command staff.
 
-                                             As the highest-ranking medical professional on the ship you are expected to have at least intermediate knowledge of all things medical. Additionally, you are afforded your very own office, located on the upper deck; it is recommended you visit it shortly after waking up to collect your officer’s gear there.
+                                             As the highest-ranking medical professional on the ship you are expected to have at least intermediate knowledge of all things medical. Additionally you are afforded your very own office, located on the upper deck; you may visit it in a quieter moment to collect the senior officer attire stored there.
 
                                              Your primary duties involve managing the medical bay and its staff to ensure tasks are properly prioritized along with being the primary teacher for aspiring medical professionals; though don’t be afraid to involve other willing, experienced, doctors or nurses. To aid in this a medical training dummy can be found in your office, stored in a closet on the wall.
 
@@ -84,7 +84,7 @@ rmc-new-to-job-cmo = As the Chief Medical Officer of the ship your job is to pro
 
                                              As a member of the command staff your skillset is significantly wider than most and this expertise can occasionally be called upon. For example, you can provide overwatch to squads or process intelligence in an emergency. Note that you are still not trained in firearms use.
 
-                                             Make sure to familiarize yourself with the Standard Operating Procedures and Marine Law, especially parts pertaining to the medical bay. One noteworthy point is your right to grant access privileges to medical areas, allowing doctors to access the medical fabricator or containment chambers located in the research labs.
+                                             Make sure to familiarize yourself with the Standard Operating Procedures and Marine Law, especially parts pertaining to the medical bay. One noteworthy point is your right to grant access privileges to medical areas, allowing doctors to access the medical fabricator and containment chambers located in the research labs.
 
 rmc-new-to-job-combat-tech = As a Combat Technician, your job as a frontline engineer is to help your squad by building fortifications, repairing machinery, and performing demolitions.
 
