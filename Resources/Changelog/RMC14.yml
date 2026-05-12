@@ -1,62 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Shotgun Shell Loadrigs have now got more detailed visuals to indicate
-      how full they are.
-    type: Tweak
-  id: 2677
-  time: '2025-12-14T22:29:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8710
-- author: Majkl-J
-  changes:
-  - message: Bipods now check if you are moving before deploying
-    type: Fix
-  id: 2678
-  time: '2025-12-14T22:38:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8700
-- author: Vermidia
-  changes:
-  - message: Fixed King being able to hijack.
-    type: Fix
-  id: 2679
-  time: '2025-12-14T22:41:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8686
-- author: Vermidia
-  changes:
-  - message: Fixed king being able to sometimes move while still in the air.
-    type: Fix
-  id: 2680
-  time: '2025-12-14T22:43:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8691
-- author: PursuitInAshes
-  changes:
-  - message: SEAs now have a stamp accessible through their vendor.
-    type: Add
-  id: 2681
-  time: '2025-12-14T22:45:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8704
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Kutjevo WeYa Corporate security survivor spawning with the incorrect
-      equipment and access.
-    type: Fix
-  id: 2682
-  time: '2025-12-14T22:47:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8677
-- author: Ian321
-  changes:
-  - message: The broiler backpack should no longer delete dropped guns.
-    type: Fix
-  id: 2683
-  time: '2025-12-14T22:48:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8668
-- author: Vermidia
-  changes:
-  - message: Fixed being unable to upgrade corrosive acid on cades
-    type: Fix
-  id: 2684
-  time: '2025-12-14T22:48:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8676
 - author: BarteG44
   changes:
   - message: Boxes of .458 can now be worn on the back
@@ -4480,5 +4422,73 @@
   id: 3176
   time: '2026-05-03T23:35:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9560
+- author: kleinerstation13
+  changes:
+  - message: Fixed attachments being invisible on the M37-17 shotgun
+    type: Fix
+  id: 3177
+  time: '2026-05-04T06:39:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9746
+- author: t0wnshark
+  changes:
+  - message: Added ponchos, which are found in the Uniform Accessories loadout category
+      and can be attached to either a uniform or armor.
+    type: Add
+  - message: Added the cheap digital watch, Seikaku Pulsemeter wristwatch, Seikaku
+      13B6-2000 wristwatch, Seikaku 13B6-3000 wristwatch, Seikaku H487-9098 wristwatch,
+      and Veniti E-338 wristwatch, as well as their respective cases. Most can be
+      found in the new Watches loadout category, and some are locked behind playtime
+      requirements or certain jobs.
+    type: Add
+  id: 3178
+  time: '2026-05-04T16:42:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7083
+- author: Pyromaniac365
+  changes:
+  - message: Removed Valkyrie's ability to retrieve dead xenonids.
+    type: Fix
+  id: 3179
+  time: '2026-05-05T15:00:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9778
+- author: stranthbackup
+  changes:
+  - message: Rebalanced some current OT chems to produce the correct amount. CLF3
+      now produces 3u. High combustion & sticky napalm now produce 2u.
+    type: Tweak
+  id: 3180
+  time: '2026-05-07T02:18:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8637
+- author: IceNoobXD
+  changes:
+  - message: Added five new cassette player variants.
+    type: Add
+  id: 3181
+  time: '2026-05-08T21:03:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9496
+- author: Tuna224
+  changes:
+  - message: Added a tent for Correspondents to take their news on the go!
+    type: Add
+  id: 3182
+  time: '2026-05-10T22:43:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9278
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added the ML66OT, an incredibly effective heavy support gun issued
+      only at the discretion of Company Command.'
+    type: Add
+  - message: '[PVE] Increased the range, fire rate, and impact of heavy support guns,
+      making them significantly more effective.'
+    type: Tweak
+  id: 3183
+  time: '2026-05-11T04:00:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9724
+- author: IceNoobXD
+  changes:
+  - message: Added landing lights to Kutjevo's alternative LZ1 insert!
+    type: Add
+  id: 3184
+  time: '2026-05-11T16:08:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9833
 Name: RMC14
 Order: -1
