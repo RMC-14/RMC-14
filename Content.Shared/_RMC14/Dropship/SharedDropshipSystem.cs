@@ -1,4 +1,4 @@
-using System.Linq;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
@@ -29,6 +30,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Dropship;
 
@@ -36,6 +38,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 {
     [Dependency] protected readonly SharedAudioSystem Audio = default!;
 
+    [Dependency] private readonly AreaSystem _areas = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -48,6 +51,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     private TimeSpan _dropshipInitialDelay;
     private TimeSpan _hijackInitialDelay;
@@ -319,6 +323,12 @@ public abstract class SharedDropshipSystem : EntitySystem
                     FlyTo((computerId, computer), closestDestination.Value, user))
                 {
                     _popup.PopupEntity("You call down one of the dropships to your location", user, user, PopupType.LargeCaution);
+
+                    var locationName = "Unknown";
+                    if (_areas.TryGetArea(closestDestination.Value, out _, out var areaProto))
+                        locationName = areaProto.Name;
+
+                    _xenoAnnounce.AnnounceSameHive(user, $"The Queen has commanded the metal bird to the hive at {locationName}");
                     return;
                 }
             }
