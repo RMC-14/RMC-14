@@ -114,7 +114,8 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                 RMCPlaytimeMedalType.Platinum => "hudxenoupgrade5-ui",
                 RMCPlaytimeMedalType.Ruby => "hudxenoupgrade6-ui",
                 RMCPlaytimeMedalType.Amethyst => "hudxenoupgrade7-ui",
-                _ => "hudxenoupgrade8-ui"
+                RMCPlaytimeMedalType.Emerald => "hudxenoupgrade8-ui",
+                _ => "hudxenoupgrade9-ui"
             };
 
             return new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), iconName);

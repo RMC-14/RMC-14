@@ -1,14 +1,14 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/daac1b70c46480c55b1e93b64f04529d364dd60f/icons/mob/hud/hud.dmi, ayou331 for hudxenoupgrade6 and Miyugi for hudxenoupgrade7/8",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/daac1b70c46480c55b1e93b64f04529d364dd60f/icons/mob/hud/hud.dmi, hudxenoupgrade4-8 edited from ayou331's design and created by thefairykings, hudxenoupgrade9 created by Miyugi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-        "name": "xeno_structure_node_indicator"
+      "name": "xeno_structure_node_indicator"
     },
     {
       "name": "plasma0"
@@ -374,6 +374,12 @@
           0.1,
           0.1,
           0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
           5
         ]
       ]
@@ -382,7 +388,6 @@
       "name": "hudxenoupgrade6",
       "delays": [
         [
-          0.3,
           0.1,
           0.1,
           0.1,
@@ -402,15 +407,7 @@
           0.1,
           0.1,
           0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
+          5
         ]
       ]
     },
@@ -418,40 +415,58 @@
       "name": "hudxenoupgrade7",
       "delays": [
         [
-          0.2,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075,
-          0.075
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          5
         ]
       ]
     },
     {
       "name": "hudxenoupgrade8",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          5
+        ]
+      ]
+    },
+    {
+      "name": "hudxenoupgrade9",
       "delays": [
         [
           0.2,
@@ -741,6 +756,9 @@
     },
     {
       "name": "hudxenoupgrade8-ui"
+    },
+    {
+      "name": "hudxenoupgrade9-ui"
     }
   ]
 }
