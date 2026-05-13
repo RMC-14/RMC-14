@@ -266,6 +266,15 @@
     },
     {
       "name": "laserlight-on"
+    },
+        {
+      "name": "flaregun"
+    },
+    {
+      "name": "flaregun-on"
+    },
+    {
+      "name": "flaregun_a"
     }
   ]
 }
