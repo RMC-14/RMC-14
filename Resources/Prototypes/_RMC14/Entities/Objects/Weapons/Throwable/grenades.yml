@@ -556,7 +556,7 @@
 - type: entity
   parent: RMCGrenadeIncendiary
   id: RMCGrenadeIncendiaryRCM
-  name: L117A1 HIDP grenades
+  name: L117A1 HIDP grenade
   suffix: RCM
   description: The L117A1 HIDP is a small, but deceptively strong incendiary grenade designed to rapidly clear areas with fast-acting potent fire. It is set to detonate in 4 seconds.
   components:
