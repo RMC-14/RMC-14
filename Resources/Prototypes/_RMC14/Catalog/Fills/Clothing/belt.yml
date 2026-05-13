@@ -702,7 +702,7 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCGoldHandcannonBeltFilled
+  id: RMCPolishedHandcannonBeltFilled
   suffix: Filled, Polished Peregrine
   components:
   - type: StorageFill
