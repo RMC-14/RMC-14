@@ -1,6 +1,5 @@
 using System.Numerics;
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -64,15 +63,15 @@ public sealed class XenoBombardSystem : EntitySystem
             var selfMsg = Loc.GetString("rmc-glob-start-self");
             _popup.PopupClient(selfMsg, ent, ent);
 
-            var xenoMsg = Loc.GetString("rmc-glob-start-xenos", ("user", ent));
-            var xenoFilter = Filter.PvsExcept(ent, entityManager: EntityManager)
-                .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<XenoComponent>(uid));
-            _popup.PopupPredicted(xenoMsg, ent, null, xenoFilter, true, PopupType.MediumCaution);
+            foreach (var session in Filter.PvsExcept(ent, entityManager: EntityManager).Recipients)
+            {
+                if (session.AttachedEntity is not { } viewer)
+                    continue;
 
-            var marineMsg = Loc.GetString("rmc-glob-start-marines");
-            var marineFilter = Filter.PvsExcept(ent, entityManager: EntityManager)
-                .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<MarineComponent>(uid));
-            _popup.PopupPredicted(marineMsg, ent, null, marineFilter, true, PopupType.MediumCaution);
+                var name = Identity.Name(ent, EntityManager, viewer);
+                var othersMsg = Loc.GetString("rmc-glob-start-others", ("user", name));
+                _popup.PopupEntity(othersMsg, ent, session, PopupType.MediumCaution);
+            }
         }
     }
 
