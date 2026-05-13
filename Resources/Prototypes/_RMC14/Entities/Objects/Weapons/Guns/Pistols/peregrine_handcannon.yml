@@ -333,7 +333,7 @@
 - type: Tag
   id: RMCWeaponPistolHandcannonCustom
 
-- type: tag
+- type: Tag
   id: RMCWeaponPistolHandcannonPolished
 
 - type: Tag
