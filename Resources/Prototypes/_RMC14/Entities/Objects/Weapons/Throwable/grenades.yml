@@ -535,12 +535,12 @@
 - type: entity
   parent: CMGrenadeHighExplosive
   id: CMGrenadeHighExplosiveRCM
-  name: R2175/A HEDP grenade
+  name: L115A1 HEDP grenade
   suffix: RCM
   description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has recently been added to the arsenal of the RCM.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Grenades/r2175hedp.rsi
+    sprite: _RMC14/Objects/Weapons/Grenades/rcmhedp.rsi
   - type: Explosive
     maxIntensity: 25 # 30 more explosion power, 5 more falloff range than HEDP in CM
     intensitySlope: 6
@@ -556,12 +556,12 @@
 - type: entity
   parent: RMCGrenadeIncendiary
   id: RMCGrenadeIncendiaryRCM
-  name: R2175/B HIDP grenades
+  name: L117A1 HIDP grenades
   suffix: RCM
-  description: The R2175/B HIDP is a small, but deceptively strong incendiary grenade designed to rapidly clear areas with fast-acting potent fire. It is set to detonate in 4 seconds.
+  description: The L117A1 HIDP is a small, but deceptively strong incendiary grenade designed to rapidly clear areas with fast-acting potent fire. It is set to detonate in 4 seconds.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Grenades/r2175hidp.rsi
+    sprite: _RMC14/Objects/Weapons/Grenades/rcmhidp.rsi
   - type: TileFireOnTrigger
     spawn: RMCTileFire
     duration: 10

@@ -373,8 +373,8 @@
 - type: entity
   parent: CMPacketBase
   id: CMPacketGrenadeHighExplosiveRCM
-  name: R2175/A HEDP grenade packet
-  description: It contains three R2175/A high explosive grenades.
+  name: L115A1 HEDP grenade packet
+  description: It contains three L115A1 high explosive grenades.
   components:
   - type: Sprite
     layers:
@@ -396,8 +396,8 @@
 - type: entity
   parent: CMPacketBase
   id: CMPacketGrenadeIncendiaryRCM
-  name: R2175/B HIDP grenade packet
-  description: It contains three R2175/B HIDP incendiary grenades.
+  name: L117A1 HIDP grenade packet
+  description: It contains three L117A1 HIDP incendiary grenades.
   components:
   - type: Sprite
     layers:
