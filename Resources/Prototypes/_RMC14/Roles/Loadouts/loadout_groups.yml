@@ -706,6 +706,7 @@
   name: rmc-loadout-group-role-specific-weapon
   loadouts:
   - MatebaRMC
+  - MatebaSpecialRMC
   - HandcannonRMC
   - HandcannonPolishedRMC
   - GoldMatebaRMC
@@ -913,7 +914,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -936,7 +937,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -948,7 +949,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
