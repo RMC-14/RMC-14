@@ -366,7 +366,8 @@ public sealed class MentorManager : IPostInjectInit
         {
             try
             {
-                _net.ServerSendMessage(receive, recipient);
+                if (recipient.IsConnected)
+                    _net.ServerSendMessage(receive, recipient);
             }
             catch (Exception e)
             {
