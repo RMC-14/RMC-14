@@ -329,6 +329,56 @@
 
 - type: entity
   parent: RMCContainerBase
+  id: RMCContainerHalcyonLeft
+  name: Halcyon Systems Cargo Container
+  description: "A huge industrial shipping container.\nThis one is from Halcyon Systems, a large-scale manufacturer of prosthetics, weapons, and starship parts.\nWe dont talk about their affiliations with the SPP."
+  suffix: Halcyon, Left
+  components:
+  - type: Sprite
+    state: halcyoncontainerleft
+
+- type: entity
+  parent: RMCContainerHalcyonLeft
+  id: RMCContainerHalcyonMiddle
+  suffix: Halcyon, Middle
+  components:
+  - type: Sprite
+    state: halcyoncontainermiddle
+
+- type: entity
+  parent: RMCContainerHalcyonLeft
+  id: RMCContainerHalcyonRight
+  suffix: Halcyon, Right
+  components:
+  - type: Sprite
+    state: halcyoncontainerright
+
+- type: entity
+  parent: RMCContainerHalcyonLeft
+  id: RMCContainerHalcyonAltLeft
+  suffix: Halcyon alt, Left
+  components:
+  - type: Sprite
+    state: halcyonaltcontainerleft
+
+- type: entity
+  parent: RMCContainerHalcyonLeft
+  id: RMCContainerHalcyonAltMiddle
+  suffix: Halcyon alt, Middle
+  components:
+  - type: Sprite
+    state: halcyonaltcontainermiddle
+
+- type: entity
+  parent: RMCContainerHalcyonLeft
+  id: RMCContainerHalcyonAltRight
+  suffix: Halcyon alt, Right
+  components:
+  - type: Sprite
+    state: halcyonaltcontainerright
+
+- type: entity
+  parent: RMCContainerBase
   id: RMCContainerAICMiddle
   name: AIC Cargo Container
   description: "A huge industrial shipping container.\nThis one is from the Asian Industrial Collective, which was absorded into the SPP. Their massive industrial output has ensured that cargo containers bearing their symbols and name won't be disappearing any time soon."
