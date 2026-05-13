@@ -12,6 +12,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -29,6 +30,7 @@ public sealed class XenoCollisionSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly XenoRestSystem _xenoRest = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
@@ -128,6 +130,9 @@ public sealed class XenoCollisionSystem : EntitySystem
                     continue;
                 }
 
+                if (comp.Whitelist != null && _whitelist.IsWhitelistPass(comp.Whitelist, other))
+                    continue;
+
                 var otherTransform = Transform(other);
                 var ourAabb = _entityLookup.GetAABBNoContainer(uid, xform.LocalPosition, xform.LocalRotation);
                 var otherAabb = _entityLookup.GetAABBNoContainer(other, otherTransform.LocalPosition, otherTransform.LocalRotation);
@@ -185,6 +190,9 @@ public sealed class XenoCollisionSystem : EntitySystem
                 {
                     continue;
                 }
+
+                if (comp.Whitelist != null && _whitelist.IsWhitelistPass(comp.Whitelist, other))
+                    continue;
 
                 var otherTransform = Transform(other);
                 var ourAabb = _entityLookup.GetAABBNoContainer(uid, xform.LocalPosition, xform.LocalRotation);

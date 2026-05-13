@@ -73,4 +73,10 @@ public sealed partial class RMCChemMasterComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? PillBottleEjectSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagOut/revolver_magout.ogg");
+
+    [DataField, AutoNetworkedField]
+    public int MaxQuickAccessSlots = 9;
+
+    [DataField, AutoNetworkedField]
+    public bool AutoSelectPillBottles;
 }

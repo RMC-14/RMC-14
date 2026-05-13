@@ -637,6 +637,8 @@
     isBulky: false
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: ClothingRequireEquipped
+    whitelist: null
 
 - type: entity
   parent: CMArmorM3VLBallistics
@@ -785,8 +787,10 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.001
     coolingCoefficient: 0.3
-  - type: RMCImmuneToIgnition
-    immuneToDirectHits: false
+  - type: ClothingGrantComponents
+    components:
+    - type: RMCImmuneToIgnition
+      immuneToDirectHits: false
   - type: FirewalkArmor
     whitelist:
       components:

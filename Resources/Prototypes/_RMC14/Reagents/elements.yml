@@ -477,3 +477,15 @@
         potency: 1
       - !type:Corrosive
         potency: 3
+
+- type: reagent
+  parent: RMCReagentElement
+  id: RMCPlatinum
+  name: reagent-name-rmc-platinum
+  group: Elements
+  desc: reagent-desc-rmc-platinum
+  physicalDesc: reagent-physical-desc-reasonably-metallic
+  flavor: metallic
+  color: "#edf5ff"
+  boilingPoint: 3825.0
+  meltingPoint: 1768.0

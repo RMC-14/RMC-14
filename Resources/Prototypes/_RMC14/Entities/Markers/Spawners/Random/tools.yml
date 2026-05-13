@@ -70,6 +70,24 @@
 
 - type: entity
   parent: MarkerBase
+  id: RMCSpawnerBombSupply
+  name: bomb supply
+  description: This is a random bomb supply
+  components:
+    - type: Sprite
+      layers:
+        - sprite: _RMC14/Markers/landmarks.rsi
+          state: random_bombsupply
+    - type: RandomSpawner
+      prototypes:
+      - Igniter # todo: RMCIgniter
+      - ProximitySensor # todo: RMCProximitySensor
+      - RemoteSignaller # todo: RMCRemoteSignaller
+      - CMMultitool
+      offset: 0
+
+- type: entity
+  parent: MarkerBase
   id: RMCSpawnerRandomTechSupply
   name: random tech supply spawner
   description: This is a random piece of technology supplies.
@@ -83,7 +101,8 @@
         # TODO:
         # technology_scanner x2
         # packageWrap x1
-        # bomb_supply x2
+        - RMCSpawnerBombSupply # x2
+        - RMCSpawnerBombSupply
         - RMCSpawnerRandomPowercell # x3
         - RMCSpawnerRandomPowercell
         - RMCSpawnerRandomPowercell

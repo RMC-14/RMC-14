@@ -15,6 +15,7 @@
     vaporAmount: 3
     sprayDistance: 5
     sprayVelocity: 5
+    pushbackAmount: 0
   - type: SolutionContainerManager
     solutions:
       spray:
@@ -42,6 +43,9 @@
     quickEquip: false
     slots:
     - Belt
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 90
 
 - type: entity
   parent: CMFireExtinguisher
@@ -81,6 +85,20 @@
   id: RMCExtinguisherSpray
   categories: [ HideSpawnMenu ]
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        hard: false
+        mask:
+        - FullTileMask
+        - Opaque
+        - ItemMask
+        - VaporMask
+        layer:
+        - ItemMask
   - type: Undisposable
 
 - type: entity

@@ -1,8 +1,9 @@
+# Added Skrell to the species restrictions list
 - type: marking
   id: ScarEyeRight
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin, Rodentia, Feroxi, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin, Rodentia, Feroxi, SlimePerson, Skrell]
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -12,7 +13,7 @@
   id: ScarEyeLeft
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin, Rodentia, Feroxi, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin, Rodentia, Feroxi, SlimePerson, Skrell]
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -44,7 +45,7 @@
   id: ScarChest
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin, Feroxi, Reptilian, SlimePerson, Moth, Arachnid, Diona]
+  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin, Feroxi, Reptilian, SlimePerson, Moth, Arachnid, Diona, Skrell]
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -54,7 +55,7 @@
   id: ScarNeck
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Skrell]
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -64,7 +65,7 @@
   id: ScarChestBullets
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Arachnid]
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Arachnid, Skrell]
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -74,7 +75,7 @@
   id: ScarStomachBullets
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Arachnid]
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Arachnid, Skrell]
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -84,7 +85,7 @@
   id: ScarFace1
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth]
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Skrell]
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -94,7 +95,7 @@
   id: ScarFace2
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth]
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Skrell]
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi

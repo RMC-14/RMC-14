@@ -162,3 +162,10 @@
   name: signal-port-name-item-detected
   description: signal-port-description-item-detected
   defaultLinks: [ Toggle, Trigger, Timer ]
+
+#RMC
+- type: sourcePort
+  id: SentryControl
+  name: port-sentry-control
+  description: port-sentry-control
+  defaultLinks: [ SentryControl ]
