@@ -140,3 +140,17 @@
     - id: RMCPatchMedic
     - id: CMBootsBlack
     - id: CMMRE
+
+- type: entity
+  parent: RMCLockerMiner
+  id: RMCLockerMinerFilled
+  suffix: Filled, Secure
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHandsBlack
+    - id: RMCShoesJackboots
+    - id: RMCFlashlightLantern
+    - id: RMCShovel
+    - id: RMCPickaxe
+    # TODO: Add Meson Goggles, Analyzer, Orebag

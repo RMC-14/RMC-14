@@ -27,6 +27,11 @@ public sealed partial class XenoDoomSystem : SharedXenoDoomSystem
             //Make it burn out quick with no light
             flare.StateExpiryTime = 0;
             flare.GlowDuration = TimeSpan.FromSeconds(0);
+            flare.PhaseOneDuration = TimeSpan.FromSeconds(0);
+            flare.PhaseTwoDuration = TimeSpan.FromSeconds(0);
+            flare.PhaseThreeDuration = TimeSpan.FromSeconds(0);
+            flare.PhaseFourDuration =  TimeSpan.FromSeconds(0);
+            flare.PhaseFiveDuration =  TimeSpan.FromSeconds(0);
             flare.FadeOutDuration = TimeSpan.FromSeconds(0);
 
             //So off flares burn out - cause thats what happens

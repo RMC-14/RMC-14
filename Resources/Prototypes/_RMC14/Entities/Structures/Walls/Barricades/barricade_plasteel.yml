@@ -45,7 +45,8 @@
     repairableDamageLimit: 675
   - type: NailgunRepairable
     # cm13 max_health%: 0.45
-    repairPlasteel: 400
+    repairValues:
+      CMPlasteel: 400
   - type: Destructible
     thresholds:
     - trigger:
@@ -182,7 +183,8 @@
     repairableDamageLimit: 600
   - type: NailgunRepairable
     # cm13 max_health%: 0.3
-    repairPlasteel: 240
+    repairValues:
+      CMPlasteel: 240
   - type: Destructible
     thresholds:
     - trigger:

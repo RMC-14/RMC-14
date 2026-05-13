@@ -16,6 +16,8 @@
     - type: IntelRescueSurvivorObjective
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-soldier
+    - type: AssignSquad
+      squad: SquadSPP
   hidden: true
 
 - type: entity

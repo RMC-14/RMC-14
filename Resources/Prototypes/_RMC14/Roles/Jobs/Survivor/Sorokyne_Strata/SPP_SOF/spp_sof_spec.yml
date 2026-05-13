@@ -21,6 +21,8 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-spec
     - type: DemoSpecWhitelist
+    - type: AssignSquad
+      squad: SquadSPP
   hidden: true
 
 - type: startingGear
