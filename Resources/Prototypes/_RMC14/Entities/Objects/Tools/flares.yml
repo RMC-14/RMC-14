@@ -431,6 +431,8 @@
       state: overlay
   - type: PointLight
     color: "#FFCCCC"
+  - type: ExpendableLight
+    iconStateSpent: flare_colony_spent
 
 - type: entity
   parent: CMPackFlareBase
