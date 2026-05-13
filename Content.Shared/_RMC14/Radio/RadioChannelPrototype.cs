@@ -8,5 +8,5 @@ public sealed partial class RadioChannelPrototype
     public Color? ColorblindColor;
 
     [DataField]
-    public char RadioPrefix { get; private set; } = ':';
+    public char RadioPrefix = ':';
 }
