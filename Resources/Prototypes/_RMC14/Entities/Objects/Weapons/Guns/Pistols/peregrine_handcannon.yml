@@ -333,6 +333,9 @@
 - type: Tag
   id: RMCWeaponPistolHandcannonCustom
 
+- type: tag
+  id: RMCWeaponPistolHandcannonPolished
+
 - type: Tag
   id: RMCMagazinePistolHandcannon
 
