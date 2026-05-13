@@ -1,6 +1,8 @@
 using System.Numerics;
+using Content.Server.Construction.Components;
 using Content.Server._RMC14.Damage;
 using Content.Server._RMC14.Targeting;
+using Content.Server.Destructible;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines.Skills;
@@ -44,6 +46,8 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
 {
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly EntProtoId DamagedGirderPrototype = "RMCGirderDamaged";
+    private const string GirderConstructionGraph = "CMGirder";
     private static readonly LocId InvalidTarget = "rmc-brute-launcher-invalid-target";
     private static readonly LocId LockInterrupted = "rmc-brute-launcher-lock-interrupted";
     private static readonly LocId NoAmmo = "gun-magazine-fired-empty";
@@ -54,6 +58,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
+    [Dependency] private readonly DestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
@@ -475,6 +480,9 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
                 continue;
 
             var effectiveDamage = GetStructureDamage(component, damageable.Owner, damageAmount);
+            if (TryOverkillWall(damageable, effectiveDamage, coordinates))
+                continue;
+
             var damage = new DamageSpecifier
             {
                 DamageDict =
@@ -537,6 +545,33 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             damage *= component.ResinExplosionDamageMultiplier;
 
         return damage;
+    }
+
+    private bool TryOverkillWall(Entity<DamageableComponent> damageable, float effectiveDamage, MapCoordinates coordinates)
+    {
+        if (!_tag.HasTag(damageable.Owner, WallTag) ||
+            HasComp<XenoConstructComponent>(damageable.Owner) ||
+            !TryComp(damageable.Owner, out ConstructionComponent? construction) ||
+            construction.Graph != GirderConstructionGraph ||
+            !TryComp(damageable.Owner, out DestructibleComponent? destructible))
+        {
+            return false;
+        }
+
+        // CMSS13 overkilled metal walls leave an already-dismantled girder instead of a blocking intact one.
+        var destroyedAt = _destructible.DestroyedAt(damageable.Owner, destructible);
+        if (destroyedAt == FixedPoint2.MaxValue ||
+            damageable.Comp.TotalDamage + effectiveDamage <= destroyedAt * 2)
+        {
+            return false;
+        }
+
+        var spawnCoordinates = _transform.ToCoordinates(coordinates);
+        if (!_destructible.DestroyEntity(damageable.Owner))
+            return false;
+
+        SpawnAtPosition(DamagedGirderPrototype, spawnCoordinates);
+        return true;
     }
 
     private static bool IsDoorOpenForExplosion(DoorComponent door)
