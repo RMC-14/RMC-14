@@ -710,6 +710,13 @@
   - GoldMatebaRMC
   - GoldHandcannonRMC
 
+- type: loadoutGroup
+  id: SurvivorCommandingOfficerWeaponRMC
+  name: rmc-loadout-group-role-specific-weapon
+  loadouts:
+  - SurvivorMatebaRMC
+  - SurvivorWinterWyvernRMC
+
 # Corporate Liaison
 - type: loadoutGroup
   id: LiaisonRoleSpecificRMC

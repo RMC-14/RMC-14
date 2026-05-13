@@ -50,6 +50,7 @@
 
 - type: loadout
   id: GoldMatebaRMC
+  dummyEntity: RMCWeaponRevolverMatebaGold
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -62,6 +63,7 @@
 
 - type: loadout
   id: GoldHandcannonRMC
+  dummyEntity: RMCWeaponPistolHandcannonGold
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -74,12 +76,26 @@
 
 - type: loadout
   id: MatebaRMC
+  dummyEntity: RMCWeaponRevolverMateba
   storage:
     back:
     - RMCMatebaCustomizationCaseWeapon
 
 - type: loadout
   id: HandcannonRMC
+  dummyEntity: RMCWeaponPistolHandcannonWinterWyvern
   storage:
     back:
     - RMCWeaponPistolHandcannonWinterWyvern
+
+- type: loadout
+  id: SurvivorMatebaRMC
+  dummyEntity: RMCWeaponRevolverMateba
+  equipment:
+    belt: RMCMatebaBeltForeconFilled
+
+- type: loadout
+  id: SurvivorWinterWyvernRMC
+  dummyEntity: RMCWeaponPistolHandcannonWinterWyvern
+  equipment:
+    belt: RMCD50WinterWyvernBeltForeconFilled
