@@ -70,7 +70,7 @@
     price: 100
   - type: GuideHelp
     guides:
-    - Medical Doctor
+    - MedicalDoctor
   - type: RequiresSkill
     skills:
       RMCSkillMedical: 2
