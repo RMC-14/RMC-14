@@ -295,7 +295,8 @@ public sealed partial class ChatSystem
                 repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source),
                 languageIcon: languageIcon));
 
-        var ev = new EntitySpokeEvent(source, speakerMessage, channel, null, language);
+        var muffledMessage = ObfuscateMessageReadability(speakerMessage, 0.2f);
+        var ev = new EntitySpokeEvent(source, speakerMessage, channel, muffledMessage, language);
         RaiseLocalEvent(source, ev, true);
 
         if (hideLog)
@@ -431,7 +432,8 @@ public sealed partial class ChatSystem
                 repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source),
                 languageIcon: languageIcon));
 
-        var ev = new EntitySpokeEvent(source, message, null, null, language);
+        var muffledMessage = ObfuscateMessageReadability(message, 0.2f);
+        var ev = new EntitySpokeEvent(source, message, null, muffledMessage, language);
         RaiseLocalEvent(source, ev, true);
     }
 

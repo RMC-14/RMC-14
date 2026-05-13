@@ -65,9 +65,15 @@ public abstract class SharedChatSystem : EntitySystem
 
         foreach (var radioChannel in _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>())
         {
-            var key = $"{radioChannel.RadioPrefix}{char.ToLowerInvariant(radioChannel.KeyCode)}";
-            channelDict[key] = radioChannel;
+            var keyCode = char.ToLowerInvariant(radioChannel.KeyCode);
+            channelDict[$"{radioChannel.RadioPrefix}{keyCode}"] = radioChannel;
             prefixSet.Add(radioChannel.RadioPrefix);
+
+            if (radioChannel.RadioPrefix == RadioChannelPrefix)
+            {
+                channelDict[$"{RadioChannelAltPrefix}{keyCode}"] = radioChannel;
+                prefixSet.Add(RadioChannelAltPrefix);
+            }
         }
 
         _channelLookup = channelDict.ToFrozenDictionary();

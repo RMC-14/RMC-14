@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
+using Content.Shared.Examine;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -13,7 +14,8 @@ namespace Content.Server._RMC14.Language.Systems;
 
 public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 {
-    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly LanguageSystem _languages = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -53,7 +55,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             }
 
             var comprehension = languageData.Progress;
-            if (comprehension >= learningComp.ComprehensionThreshold)
+            if (comprehension >= learningComp.MasteredComprehensionThreshold)
             {
                 args.UnderstoodLanguages.Add(language);
             }
@@ -62,7 +64,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
     private void OnEntitySpoke(EntitySpokeEvent args)
     {
-        if (!_prototypeManager.HasIndex(args.Language))
+        if (!_prototypeManager.TryIndex(args.Language, out var languageProto))
             return;
 
         _potentialLearners.Clear();
@@ -86,6 +88,12 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
                 if (canSpeak && canUnderstand)
                     continue;
+            }
+
+            if (languageProto.NeedsLOS &&
+                !_examine.InRangeUnOccluded(args.Source, potentialLearner, MaxHearingRange))
+            {
+                continue;
             }
 
             TryHandleFirstContact((potentialLearner, learnerComp), args.Language);
@@ -284,7 +292,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
         if (hasLearnedAnyWords)
         {
-            _language.AddLanguage(learner.Owner, language, addSpoken: true, addUnderstood: false);
+            _languages.AddLanguage(learner.Owner, language, addSpoken: true, addUnderstood: false);
         }
 
         if (comprehension >= comp.MasteredComprehensionThreshold && hasLearnedAnyWords)
@@ -292,7 +300,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             if (TryComp<LanguageComponent>(learner.Owner, out var langComp))
             {
                 if (!langComp.UnderstoodLanguages.Contains(language))
-                    _language.AddLanguage(learner.Owner, language, addSpoken: false, addUnderstood: true);
+                    _languages.AddLanguage(learner.Owner, language, addSpoken: false, addUnderstood: true);
             }
         }
         else if (comprehension >= comp.FluentComprehensionThreshold && hasLearnedAnyWords && !languageData.FluentAnnounced)

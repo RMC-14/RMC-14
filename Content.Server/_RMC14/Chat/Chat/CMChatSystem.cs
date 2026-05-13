@@ -1,12 +1,10 @@
 using System.Linq;
-using System.Text.RegularExpressions;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Radio.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Inventory;
@@ -33,8 +31,6 @@ public sealed class CMChatSystem : SharedCMChatSystem
     private static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize = "CMChatSanitize";
     private static readonly ProtoId<ReplacementAccentPrototype> MarineChatSanitize = "CMChatSanitizeMarine";
     private static readonly ProtoId<ReplacementAccentPrototype> XenoChatSanitize = "CMChatSanitizeXeno";
-
-    private readonly List<ICommonSession> _toRemove = new();
 
     public override void Initialize()
     {
@@ -107,33 +103,35 @@ public sealed class CMChatSystem : SharedCMChatSystem
         );
     }
 
-    private bool IsValidRadioPrefix(EntityUid source, string prefixPart)
+    private bool IsValidRadioPrefix(EntityUid headset, string prefixPart)
     {
         if (prefixPart.Length != 2)
             return false;
 
-        var radioQuery = GetEntityQuery<ActiveRadioComponent>();
-        if (!radioQuery.HasComponent(source))
+        if (!TryComp(headset, out EncryptionKeyHolderComponent? keys))
             return false;
 
-        var hasRadio = radioQuery.GetComponent(source);
-        var allChannels = _proto.EnumeratePrototypes<RadioChannelPrototype>();
-
         var prefix = prefixPart[0];
+        if (prefix == SharedChatSystem.RadioChannelAltPrefix)
+            prefix = SharedChatSystem.RadioChannelPrefix;
+
         var keycode = char.ToLowerInvariant(prefixPart[1]);
 
-        foreach (var ch in allChannels)
+        foreach (var ch in _proto.EnumeratePrototypes<RadioChannelPrototype>())
         {
-            if (!hasRadio.Channels.Contains(ch.ID))
+            if (!keys.Channels.Contains(ch.ID))
                 continue;
 
             if (ch.RadioPrefix == prefix && ch.KeyCode == keycode)
-            {
                 return true;
-            }
         }
 
         return false;
+    }
+
+    private bool IsValidRadioKey(EntityUid headset, char prefix, char keycode)
+    {
+        return IsValidRadioPrefix(headset, $"{prefix}{char.ToLowerInvariant(keycode)}");
     }
 
     public List<string>? TryMultiBroadcast(EntityUid source, string message)
@@ -143,13 +141,6 @@ public sealed class CMChatSystem : SharedCMChatSystem
 
         if (!HasComp<InventoryComponent>(source))
             return null;
-
-        var radioQuery = GetEntityQuery<ActiveRadioComponent>();
-        if (!radioQuery.HasComponent(source))
-            return null;
-
-        var hasRadio = radioQuery.GetComponent(source);
-        var allChannels = _proto.EnumeratePrototypes<RadioChannelPrototype>();
 
         var time = _timing.CurTime;
         Entity<HeadsetMultiBroadcastComponent>? headset = null;
@@ -169,57 +160,44 @@ public sealed class CMChatSystem : SharedCMChatSystem
         if (headset == null)
             return null;
 
-        var messages = new List<string>();
         var validPrefixes = new List<string>();
+        var prefixLength = 0;
+        var sharedPrefix = message[0];
 
-        var i = 0;
-        while (i + 1 < message.Length)
+        if (sharedPrefix != SharedChatSystem.RadioChannelPrefix &&
+            sharedPrefix != SharedChatSystem.RadioChannelAltPrefix)
+            return null;
+
+        for (var i = 1; i < message.Length; i++)
         {
-            var prefix = message[i];
-            var keycode = char.ToLowerInvariant(message[i + 1]);
-            var found = false;
-
-            foreach (var ch in allChannels)
+            var keycode = char.ToLowerInvariant(message[i]);
+            if (char.IsWhiteSpace(keycode))
             {
-                if (!hasRadio.Channels.Contains(ch.ID))
-                    continue;
-
-                if (ch.RadioPrefix == prefix && ch.KeyCode == keycode)
-                {
-                    validPrefixes.Add(message.Substring(i, 2));
-                    i += 2;
-                    found = true;
-                    break;
-                }
+                prefixLength = i;
+                break;
             }
 
-            if (!found)
-                i++;
-        }
+            if (!IsValidRadioKey(headset.Value, sharedPrefix, keycode))
+            {
+                prefixLength = i;
+                break;
+            }
 
-        if (validPrefixes.Count < 2)
-            return null;
+            validPrefixes.Add($"{sharedPrefix}{keycode}");
+            prefixLength = i + 1;
+        }
 
         var count = Math.Min(validPrefixes.Count, headset.Value.Comp.Maximum);
         validPrefixes = validPrefixes.Take(count).ToList();
 
-        for (var idx = 0; idx < validPrefixes.Count; idx++)
-        {
-            var subMsg = message;
-            for (var j = 0; j < validPrefixes.Count; j++)
-            {
-                if (idx == j)
-                    continue;
+        if (validPrefixes.Count < 2)
+            return null;
 
-                var toRemove = validPrefixes[j];
-                var index = subMsg.IndexOf(toRemove, StringComparison.Ordinal);
-                if (index >= 0)
-                {
-                    subMsg = subMsg.Remove(index, toRemove.Length);
-                }
-            }
-            messages.Add(subMsg);
-        }
+        var messages = new List<string>(validPrefixes.Count);
+        var messageBody = message[prefixLength..];
+
+        for (var idx = 0; idx < validPrefixes.Count; idx++)
+            messages.Add($"{validPrefixes[idx]}{messageBody}");
 
         if (messages.Count < 2)
             return null;
