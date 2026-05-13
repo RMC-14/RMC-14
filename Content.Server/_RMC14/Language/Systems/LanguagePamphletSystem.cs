@@ -5,8 +5,8 @@ namespace Content.Server._RMC14.Language.Systems;
 
 public sealed class LanguagePamphletSystem : EntitySystem
 {
-    [Dependency] private readonly LanguageLearningSystem _learning = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private readonly LanguageLearningSystem _learning = default!;
 
     public override void Initialize()
     {

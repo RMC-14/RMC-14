@@ -24,7 +24,6 @@ public sealed partial class LanguageLearningComponent : Component
     [AutoNetworkedField]
     public Dictionary<ProtoId<LanguagePrototype>, LanguageLearningStateData> LanguageStates = new();
 
-    [DataField]
     public Dictionary<NetEntity, int> StudiedSources = new();
 
     [DataField]
@@ -47,15 +46,6 @@ public sealed partial class LanguageLearningComponent : Component
 
     [DataField]
     public float MaxFrequencyLearningBonus = 0.2f;
-
-    [DataField]
-    public float ContextLearningBonus = 0.05f;
-
-    [DataField]
-    public float LengthBasedLearningMultiplier = 0.05f;
-
-    [DataField]
-    public float ShortWordPenalty = 0.7f;
 
     [DataField]
     public int MinWordLengthToLearn = 1;
@@ -121,12 +111,6 @@ public sealed partial class LanguageLearningData
 
     [DataField]
     public Dictionary<string, int> WordFrequency = new();
-
-    [DataField]
-    public Dictionary<string, List<string>> WordContext = new();
-
-    [DataField]
-    public Dictionary<string, float> WordPatterns = new();
 }
 
 [Serializable, NetSerializable]

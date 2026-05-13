@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Language;
-using Content.Shared.Chat;
 using Content.Shared.Speech;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -32,7 +31,7 @@ public sealed partial class LanguagePrototype : IPrototype
     public string? Description;
 
     [DataField]
-    public bool IsVisibleLanguage { get; set; }
+    public bool IsVisibleLanguage;
 
     [DataField]
     public string? TypefaceId;
@@ -41,31 +40,28 @@ public sealed partial class LanguagePrototype : IPrototype
     public int? TextSize;
 
     [DataField]
-    public string? BoldTypefaceId;
+    public bool ShowLanguageName;
 
     [DataField]
-    public bool ShowLanguageName { get; set; } = false;
-
-    [DataField]
-    public bool ShowLanguageIcon { get; set; } = true;
+    public bool ShowLanguageIcon = true;
 
     [DataField]
     public SpriteSpecifier? LanguageIcon;
 
     [DataField]
-    public bool CanUseRadio { get; set; } = true;
+    public bool CanUseRadio = true;
 
     [DataField]
-    public bool NeedsSpeech { get; set; } = true;
+    public bool NeedsSpeech = true;
 
     [DataField]
-    public bool NeedsLOS { get; set; } = false;
+    public bool NeedsLOS;
 
     [DataField]
     public ObfuscationMethod ObfuscationMethod = ObfuscationMethod.Default;
 
     [DataField]
-    public bool RandomizeObfuscation { get; set; }
+    public bool RandomizeObfuscation;
 
     [DataField]
     public SpeechOverrideInfo SpeechOverride = new();
@@ -74,40 +70,40 @@ public sealed partial class LanguagePrototype : IPrototype
     public LocId? FirstContactMeaning;
 
     [DataField]
-    public int ExpectedVocabularySize { get; set; } = 100;
+    public int ExpectedVocabularySize = 100;
 
     [DataField]
-    public float DefaultWordComprehension { get; set; } = DefaultWordComprehensionValue;
+    public float DefaultWordComprehension = DefaultWordComprehensionValue;
 
     [DataField]
-    public float ClearComprehensionThreshold { get; set; } = DefaultClearComprehensionThresholdValue;
+    public float ClearComprehensionThreshold = DefaultClearComprehensionThresholdValue;
 
     [DataField]
-    public float PartialComprehensionThreshold { get; set; } = DefaultPartialComprehensionThresholdValue;
+    public float PartialComprehensionThreshold = DefaultPartialComprehensionThresholdValue;
 
     [DataField]
-    public string PartialGarbleCharacters { get; set; } = DefaultPartialGarbleCharactersValue;
+    public string PartialGarbleCharacters = DefaultPartialGarbleCharactersValue;
 
     [DataField]
-    public float MinimumPartialGarbleRate { get; set; } = DefaultMinimumPartialGarbleRateValue;
+    public float MinimumPartialGarbleRate = DefaultMinimumPartialGarbleRateValue;
 
     [DataField]
-    public float PartialGarbleRateMultiplier { get; set; } = DefaultPartialGarbleRateMultiplierValue;
+    public float PartialGarbleRateMultiplier = DefaultPartialGarbleRateMultiplierValue;
 
     [DataField]
-    public int MinimumRequiredLearnedWords { get; set; } = DefaultMinimumRequiredLearnedWordsValue;
+    public int MinimumRequiredLearnedWords = DefaultMinimumRequiredLearnedWordsValue;
 
     [DataField]
-    public float MaximumOverallComprehension { get; set; } = DefaultMaximumOverallComprehensionValue;
+    public float MaximumOverallComprehension = DefaultMaximumOverallComprehensionValue;
 
     [DataField]
-    public float LearnedWordComprehensionWeight { get; set; } = DefaultLearnedWordComprehensionWeightValue;
+    public float LearnedWordComprehensionWeight = DefaultLearnedWordComprehensionWeightValue;
 
     [DataField]
-    public float VocabularyCompletenessWeight { get; set; } = DefaultVocabularyCompletenessWeightValue;
+    public float VocabularyCompletenessWeight = DefaultVocabularyCompletenessWeightValue;
 
     [DataField]
-    public float LearningRateMultiplier { get; set; } = DefaultLearningRateMultiplierValue;
+    public float LearningRateMultiplier = DefaultLearningRateMultiplierValue;
 
     public string LocalizedName => Loc.GetString($"language-{ID}-name");
     public string ChatName => Loc.GetString($"chat-language-{ID}-name");
@@ -119,25 +115,7 @@ public sealed partial class LanguagePrototype : IPrototype
 public sealed partial class SpeechOverrideInfo
 {
     [DataField]
-    public Color? Color = null;
-
-    [DataField]
-    public string? FontId;
-
-    [DataField]
-    public int? FontSize;
-
-    [DataField]
-    public string? BoldFontId;
-
-    [DataField]
-    public bool AllowRadio = true;
-
-    [DataField]
-    public bool RequireSpeech = true;
-
-    [DataField]
-    public bool RequireLOS = false;
+    public Color? Color;
 
     [DataField]
     public InGameICChatType? ChatTypeOverride;

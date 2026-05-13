@@ -162,20 +162,15 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     public string ObfuscateMessageForListener(EntityUid listener, string speakerMessage, ProtoId<LanguagePrototype> language)
     {
-
         if (CanUnderstand(listener, language))
-        {
             return speakerMessage;
-        }
 
         if (TryComp<LanguageLearningComponent>(listener, out var learningComp) &&
             learningComp.Languages.ContainsKey(language))
         {
-            var result = _learning.ProcessMessageForListener(listener, speakerMessage, language);
-            return result;
+            return _learning.ProcessMessageForListener(listener, speakerMessage, language);
         }
 
-        var obfuscated = ObfuscateMessage(speakerMessage, language);
-        return obfuscated;
+        return ObfuscateMessage(speakerMessage, language);
     }
 }
