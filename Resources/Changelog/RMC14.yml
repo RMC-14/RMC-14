@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: BarteG44
-  changes:
-  - message: Boxes of .458 can now be worn on the back
-    type: Tweak
-  id: 2685
-  time: '2025-12-14T22:45:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8667
-- author: Ian321
-  changes:
-  - message: Specialization kits can be chosen again after its specialist entered
-      cryogenic storage.
-    type: Add
-  id: 2686
-  time: '2025-12-14T22:47:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8679
 - author: noctyrnal
   changes:
   - message: The M5-ATL's rockets have been resprited.
@@ -4490,5 +4475,20 @@
   id: 3184
   time: '2026-05-11T16:08:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9833
+- author: Tuna224
+  changes:
+  - message: Added a Correspondent new-to-role popup.
+    type: Add
+  id: 3185
+  time: '2026-05-12T23:19:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9617
+- author: kleinerstation13
+  changes:
+  - message: SPP SOF and SPP Airborne now start with SPP flare pouches instead of
+      UNMC flare pouches.
+    type: Tweak
+  id: 3186
+  time: '2026-05-12T23:27:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9693
 Name: RMC14
 Order: -1
