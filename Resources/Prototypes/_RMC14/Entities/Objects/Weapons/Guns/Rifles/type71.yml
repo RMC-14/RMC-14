@@ -89,8 +89,8 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentBurstFireAssembly
   - type: AttachableHolderVisuals
     offsets:
@@ -152,7 +152,7 @@
         startingAttachable: RMCAttachmentMiniFlamethrower
         whitelist:
           tags:
-          - RMCAttachmentFlamer
+          - RMCAttachmentMiniFlamethrower
 
 - type: entity
   parent: CMMagazineRifleBase
