@@ -41,30 +41,21 @@ public sealed class RMCNukeSystem : EntitySystem
             if (transform.MapID != mapId)
                 continue;
 
-            if (HasComp<MobStateComponent>(uid) || _repairable.HasComp(uid))
-                toDamage.Add(uid);
-            else
-                toDelete.Add(uid);
+            AddNukeTarget(uid, toDamage, toDelete);
         }
         while (tunnels.MoveNext(out var uid, out var _, out var transform))
         {
             if (transform.MapID != mapId)
                 continue;
 
-            if (HasComp<MobStateComponent>(uid) || _repairable.HasComp(uid))
-                toDamage.Add(uid);
-            else
-                toDelete.Add(uid);
+            AddNukeTarget(uid, toDamage, toDelete);
         }
         while (vents.MoveNext(out var uid, out var _, out var transform))
         {
             if (transform.MapID != mapId)
                 continue;
 
-            if (HasComp<MobStateComponent>(uid) || _repairable.HasComp(uid))
-                toDamage.Add(uid);
-            else
-                toDelete.Add(uid);
+            AddNukeTarget(uid, toDamage, toDelete);
         }
 
         toDelete.ExceptWith(toDamage);
@@ -97,6 +88,14 @@ public sealed class RMCNukeSystem : EntitySystem
 
             _power.FullyDestroy(new(uid, generator));
         }
+    }
+
+    private void AddNukeTarget(EntityUid uid, HashSet<EntityUid> toDamage, HashSet<EntityUid> toDelete)
+    {
+        if (HasComp<MobStateComponent>(uid) || _repairable.HasComp(uid))
+            toDamage.Add(uid);
+        else
+            toDelete.Add(uid);
     }
 
     public void NukeMap(MapId mapId)
