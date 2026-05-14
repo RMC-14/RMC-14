@@ -2624,3 +2624,14 @@
     state: bugs_paperboy_swedersson
   - type: PatronFigurine
     id: 9db80593-fca7-46c8-8b59-f6b97933a309
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronErisVoltia
+  name: Eris Voltia figurine
+  description: "A tiny label on the bottom reads:  \"This figurine is not a replacement for a licensed Chemist, Surgeon, or Pilot. Please contact a trained professional if you are in need of life saving treatment or rescue.\""
+  components:
+  - type: Sprite
+    state: eris_voltia
+  - type: PatronFigurine
+    id: 752998c6-4831-4902-a4c1-446fc6ceb002
