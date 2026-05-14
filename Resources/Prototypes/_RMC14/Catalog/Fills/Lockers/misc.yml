@@ -144,8 +144,6 @@
     - id: RMCTelescopicBaton
 
 - type: entity
-  parent: CMLockerBase
-  id: RMCLockerFieldDoctor
   parent: RMCLockerFieldDoctor
   id: RMCLockerFieldDoctorFilled
   suffix: Filled, Field Doctor
