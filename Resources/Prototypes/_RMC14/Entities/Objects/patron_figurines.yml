@@ -2602,3 +2602,14 @@
     state: boris_scavmanchez
   - type: PatronFigurine
     id: effa13df-5875-4437-a454-dbb70ce9f5da
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRodrickRoyal
+  name: Rodrick Royal figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: rodrick_royal
+  - type: PatronFigurine
+    id: c24bc8a5-2b7b-4f86-80ef-d06babdb8c17
