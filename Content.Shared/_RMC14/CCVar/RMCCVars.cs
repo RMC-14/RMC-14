@@ -469,6 +469,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCDistressXenosMinimum =
         CVarDef.Create("rmc.distress_xenos_minimum", 4, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<float> RMCERTConsoleAutoResolveDelaySeconds =
+        CVarDef.Create("rmc.ert_console_auto_resolve_delay_seconds", 60f, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> RMCERTConsoleAutoApproveChance =
+        CVarDef.Create("rmc.ert_console_auto_approve_chance", 0.45f, CVar.SERVER | CVar.SERVERONLY);
+
     public static readonly CVarDef<float> VolumeGainCassettes =
         CVarDef.Create("rmc.volume_gain_cassettes", 0.33f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 

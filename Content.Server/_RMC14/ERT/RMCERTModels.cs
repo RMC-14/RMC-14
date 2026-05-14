@@ -72,6 +72,21 @@ public sealed class RMCERTRequest
     public TimeSpan NextAutoLaunchAttempt;
 
     /// <summary>
+    /// Round time when a pending admin review should be resolved automatically, if configured.
+    /// </summary>
+    public TimeSpan? AutoResolveAt;
+
+    /// <summary>
+    /// Chance that automatic pending-request resolution approves the request.
+    /// </summary>
+    public float AutoApproveChance;
+
+    /// <summary>
+    /// Display/log actor label used when automatic pending-request resolution acts on the request.
+    /// </summary>
+    public string AutoResolveActorName = string.Empty;
+
+    /// <summary>
     /// Call prototype selected for this request after approval.
     /// </summary>
     public ProtoId<RMCERTCallPrototype>? SelectedCall;
@@ -148,6 +163,29 @@ public sealed class RMCERTRequest
 }
 
 /// <summary>
+/// Optional settings for resolving a pending admin-review request when no admin has made a final decision in time.
+/// </summary>
+public sealed class RMCERTAutoResolutionOptions
+{
+    /// <summary>
+    /// How long the request may remain pending before automatic resolution runs.
+    /// A zero or negative delay disables automatic resolution.
+    /// </summary>
+    public TimeSpan Delay;
+
+    /// <summary>
+    /// Chance from 0.0 to 1.0 that automatic resolution approves the request.
+    /// Values outside the range are clamped by the ERT system.
+    /// </summary>
+    public float ApprovalChance;
+
+    /// <summary>
+    /// Optional display/log actor label used for the automatic approve or deny action.
+    /// </summary>
+    public string? ActorName;
+}
+
+/// <summary>
 /// Arguments for creating an ERT request that waits for admin approval.
 /// </summary>
 public sealed class RMCERTCreateRequestArgs
@@ -209,6 +247,11 @@ public sealed class RMCERTCreateRequestArgs
     /// Set true for specific-call or admin-choice requests; set false for random-only requests such as console distress.
     /// </summary>
     public bool AllowSpecificSelection = true;
+
+    /// <summary>
+    /// Optional automatic pending-review resolution. Leave null for fully manual admin approval/denial.
+    /// </summary>
+    public RMCERTAutoResolutionOptions? AutoResolution;
 }
 
 /// <summary>

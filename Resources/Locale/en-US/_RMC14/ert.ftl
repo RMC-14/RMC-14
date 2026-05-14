@@ -71,6 +71,7 @@ rmc-ert-prompt-handheld-reason = State the reason for the {$title}.
 rmc-ert-console-request-announcement = A distress beacon has been launched. High Command is reviewing the request.
 
 rmc-ert-admin-actor-server = server
+rmc-ert-admin-actor-auto-resolve = automatic response timer
 rmc-ert-launcher-automatic = automatic launch timer
 rmc-ert-response-team-fallback = response team
 rmc-ert-cleanup-reason-cancelled = cancelled
