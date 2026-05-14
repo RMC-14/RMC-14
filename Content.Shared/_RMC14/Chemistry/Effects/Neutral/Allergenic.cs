@@ -27,7 +27,7 @@ public sealed partial class Allergenic : RMCChemicalEffect
         {
             var random = IoCManager.Resolve<IRobustRandom>();
             var rmcEmote = System<SharedRMCEmoteSystem>(args);
-            var cmChat = System<SharedCMChatSystem>(args);
+            var chat = System<SharedCMChatSystem>(args);
             switch (random.Next(3))
             {
                 case 0:
@@ -37,7 +37,7 @@ public sealed partial class Allergenic : RMCChemicalEffect
                     rmcEmote.TryEmoteWithChat(args.TargetEntity, CoughEmote);
                     break;
                 case 2:
-                    cmChat.Emote(args.TargetEntity, "blinks");
+                    chat.Emote(args.TargetEntity, "blinks");
                     break;
             }
         }

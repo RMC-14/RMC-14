@@ -65,7 +65,7 @@ public sealed partial class Trichogenic : RMCChemicalEffect
             var popup = System<SharedPopupSystem>(args);
             var net = IoCManager.Resolve<INetManager>();
             if (net.IsServer)
-                popup.PopupClient("You feel itchy all over!", args.TargetEntity, args.TargetEntity, PopupType.MediumCaution);
+                popup.PopupClient("You feel itchy all over!", args.TargetEntity, args.TargetEntity);
         }
     }
 
