@@ -142,9 +142,6 @@ public sealed class GunIFFSystem : EntitySystem
         if (factions.Count == 0)
             return false;
 
-        if (_userIFFQuery.Resolve(user, ref user.Comp, false))
-            user.Comp.Factions.UnionWith(ev.Factions);
-
         return true;
     }
 

@@ -232,3 +232,17 @@
       state: cancel_view
   - type: InstantAction
     event: !type:DismountActionEvent
+
+# CBRN
+- type: entity
+  parent: BaseAction
+  id: ActionToggleCBRNHelmet
+  name: Toggle CBRN Mask
+  description: Raise or lower the integrated MOPP mask to toggle full fire protection.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/marine_firewalk_actions.rsi
+      state: firewalk
+  - type: InstantAction
+    event: !type:ToggleClothingEvent { }

@@ -69,8 +69,8 @@
         points: 18
       - id: RMCPacketGrenadeIncendiaryFilled
         points: 18
-    #- id: CMM40HPDPPhosphorusPacket3
-    #  points: 18
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
@@ -379,9 +379,10 @@
         amount: 2
       - id: RMCLightReplacer
         amount: 4
-    # - name: Utility
-    #   entries:
-    #   - id: Sentry Gun Network Laptop
-    #     amount: 4
+    - name: Utility
+      entries:
+      - id: RMCSentryLaptop
+        name: sentry gun network laptop
+        amount: 4
     #   - id: Sentry Gun Network Encryption KEy
     #     amount: 4

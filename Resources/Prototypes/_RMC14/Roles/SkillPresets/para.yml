@@ -1,0 +1,94 @@
+# Survivor Skills
+- type: entity
+  id: RMCSkillPresetParamarine
+  name: Royal Paramarine Rifleman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 2
+      RMCSkillConstruction: 1
+      RMCSkillFirearms: 2
+      RMCSkillFireman: 2
+      RMCSkillEndurance: 2
+      RMCSkillEngineer: 1
+      RMCSkillMeleeWeapons: 1
+      RMCSkillJtac: 1
+      RMCSkillMedical: 1
+      RMCSkillPolice: 0 #RMC Change: Should be 2
+      RMCSkillVehicles: 1
+        
+- type: entity
+  parent: RMCSkillPresetParamarine
+  id: RMCSkillPresetParaPilot
+  name: Royal Paramarine Pilot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillPilot: 2
+        
+- type: entity
+  parent: RMCSkillPresetParamarine
+  id: RMCSkillPresetParaEngineer
+  name: Royal Paramarine Engineer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillEngineer: 2
+      RMCSkillPowerLoader: 1
+        
+- type: entity
+  parent: RMCSkillPresetParamarine
+  id: RMCSkillPresetParaMedic
+  name: Royal Paramarine Medic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillFireman: 3
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
+        
+- type: entity
+  parent: RMCSkillPresetParamarine
+  id: RMCSkillPresetParaLeader
+  name: Royal Paramarine Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillFireman: 3
+      RMCSkillEngineer: 2
+      RMCSkillJtac: 2
+      RMCSkillLeadership: 1
+      RMCSkillPilot: 1
+      RMCSkillIntel: 1
+        
+- type: entity
+  id: RMCSkillPresetParaSynth
+  name: Royal Paramarine Synthetic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 3
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillFirearms: 2
+      RMCSkillOverwatch: 1
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
+      RMCSkillResearch: 1
+      RMCSkillMeleeWeapons: 2
+      RMCSkillPilot: 2
+      RMCSkillPolice: 2
+      RMCSkillFireman: 3
+      RMCSkillPowerLoader: 2
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 1
+      RMCSkillIntel: 1
+      RMCSkillDomestics: 2
+        

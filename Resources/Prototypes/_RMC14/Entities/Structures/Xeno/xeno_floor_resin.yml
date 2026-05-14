@@ -115,3 +115,42 @@
   - type: ResinSlowdownModifier # Equal to Hive speed debuff
     outsiderSpeedModifier: 0.338
     outsiderSpeedModifierArmor: 0.4856
+
+- type: entity
+  parent: XenoBaseFloorResin
+  id: XenoResinSpikes
+  name: resin spikes
+  description: A small cluster of bone spikes. Ouch.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_resin_spikes.rsi
+    state: resin_spike
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: XenoSecretionLimited
+    id: XenoResinSpikes
+    amount: 15
+  - type: XenoConstructionPlasmaCost
+    plasma: 80
+  - type: DamageOnCollide
+    canRehit: true
+    armorPenetration: 50
+    damage:
+      types:
+        Piercing: 8
+    whitelist:
+      components:
+      - Marine
+      - Xeno
+  - type: XenoConstructionBuildSpeed
+    buildTimeMult: 1
