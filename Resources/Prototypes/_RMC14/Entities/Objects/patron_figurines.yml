@@ -2647,3 +2647,13 @@
   - type: PatronFigurine
     id: 683521ca-1895-4094-8026-9592e0f9b288
 
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMichaelMikeyMcGoggins
+  name: Michael 'Mikey' McGoggins figurine
+  description: "Part of a series of figures meant to boost UNMC recruitment, found at most large Recruiting Centers. The base says \"McGoggins was an ordinary citizen just like you- until he joined the Marines! Enlist today!\" There is a code to call the UNMC recruitment hotline attached."
+  components:
+  - type: Sprite
+    state: michael_mikey_mcgoggins
+  - type: PatronFigurine
+    id: a1118024-80cd-47cb-81c2-b7e516960393
