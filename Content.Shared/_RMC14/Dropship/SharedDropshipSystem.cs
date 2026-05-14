@@ -328,7 +328,7 @@ public abstract class SharedDropshipSystem : EntitySystem
                     if (_areas.TryGetArea(closestDestination.Value, out _, out var areaProto))
                         locationName = areaProto.Name;
 
-                    _xenoAnnounce.AnnounceSameHive(user, $"The Queen has commanded the metal bird to the hive at {locationName}");
+                    _xenoAnnounce.AnnounceSameHiveDefaultSound(user, $"The Queen has commanded the metal bird to the hive at {locationName}");
                     return;
                 }
             }
