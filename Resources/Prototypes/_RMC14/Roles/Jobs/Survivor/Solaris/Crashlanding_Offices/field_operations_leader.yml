@@ -11,7 +11,7 @@
   startingGear: RMCGearSurvivorPMCCommander
   icon: RMCJobIconPMCCommander
   greeting: rmc-job-greeting-solaris-pmc-commander
-  playTimeTracker: RMCJobSurvivorMilitary
+  playTimeTracker: RMCJobSurvivorCO
   spawnMenuRoleName: Survivor — PMC Field Operations Leader (Solaris Ridge special survivor)
   special:
   - !type:AddComponentSpecial
@@ -43,7 +43,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_pmc
-  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer
 
 - type: startingGear
   parent: RMCGearSurvivorPMCBase

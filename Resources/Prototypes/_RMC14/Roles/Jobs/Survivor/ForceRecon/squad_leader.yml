@@ -68,6 +68,6 @@
   name: forecon squad leader survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ WeaponShotgunM42A2, RMCBoxShotgunSlugs ]

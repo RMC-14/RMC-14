@@ -25,6 +25,7 @@
   - CMAccessPress
   - CMAccessCrewman
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
 
 - type: accessGroup

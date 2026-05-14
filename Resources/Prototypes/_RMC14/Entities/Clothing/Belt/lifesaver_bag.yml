@@ -78,7 +78,10 @@
   name: Type 41 pattern lifesaver bag
   description: The Type 41 load rig is the standard load-bearing equipment of the SPP military. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
   components:
-  # TODO RMC14 - Sprites
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_spp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_spp.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
 
@@ -109,14 +112,57 @@
 
 - type: entity
   parent: RMCBeltMedicBagSPP
+  id: RMCBeltMedicBagSPPCrashland
+  suffix: Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMUpgradedTraumaKit10
+      amount: 2
+    - id: CMUpgradedBurnKit10
+      amount: 2
+    # - id: RMCSplint
+    # - id: RMCHyposprayOxycodone
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterInaprovaline
+
+- type: entity
+  parent: RMCBeltMedicBagSPP
+  id: RMCBeltMedicBagSPPSynthFilled
+  suffix: Synthetic, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterKelotane
+    # - id: CMPillCanisterTramadol
+    # - id: CMPillCanisterOxycodone
+    - id: CMPillCanisterDylovene
+    # - id: CMPillCanisterAlkysine
+    - id: RMCPillCanisterImidazoline
+    - id: CMUpgradedTraumaKit10
+      amount: 3
+    - id: CMUpgradedBurnKit10
+      amount: 3
+    # - id: RMCSplints10
+    #   amount: 3
+    - id: CMDexalinPlusAutoInjector
+    #- id: CMOxycodoneAutoInjector
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: RMCBeltMedicBagSPP
   id: RMCBeltMedicBagPMC
   name: WY-TM625 pattern medical bag
   description: The WY-TM625 is the standard load-bearing equipment of the W-Y security forces. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_pmc.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag_pmc.rsi
 
 - type: entity
   parent: RMCBeltMedicBagPMC
@@ -142,29 +188,3 @@
     - id: CMHealthAnalyzer
     - id: RMCPillCanisterImidazoline # you're welcome, whoever was here last. fly high, mercenary
     # TODO RMC: alkysine pills
-
-- type: entity
-  parent: CMBeltMedicBag
-  id: RMCBeltMedicBagRoyal
-  suffix: Filled, Royal
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMPillCanisterBicaridine
-    - id: CMPillCanisterBicaridine
-    - id: CMPillCanisterKelotane
-    - id: CMPillCanisterKelotane
-    # - id: CMPillCanisterTramadol
-    # - id: CMPillCanisterTramadol
-    - id: CMPillCanisterDylovene
-    # - id: CMPillCanisterPeridaxon
-    - id: CMPillCanisterDexalin
-    # - id: CMPillCanisterAlkysine
-    - id: RMCPillCanisterImidazoline
-    - id: CMTraumaKit10
-      amount: 3
-    - id: CMBurnKit10
-      amount: 3
-    # - id: RMCSplint
-    - id: CMDexalinPlusAutoInjector
-    - id: CMHealthAnalyzer
