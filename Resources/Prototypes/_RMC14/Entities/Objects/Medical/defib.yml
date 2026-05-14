@@ -30,6 +30,8 @@
       path: /Audio/_RMC14/Medical/defib_SafetyOn.ogg
     soundDeactivate:
       path: /Audio/_RMC14/Medical/defib_safetyOff.ogg
+  - type: ItemToggleSize
+    activatedSize: Large
   - type: Defibrillator
     zapDelay: 0
     doAfterDuration: 4
