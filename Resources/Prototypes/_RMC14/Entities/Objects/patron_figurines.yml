@@ -2668,3 +2668,14 @@
     state: edith_hesti_b_clausell
   - type: PatronFigurine
     id: 13feb412-430f-4ecc-b279-dc88a628ab28
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGuppyDeBoots
+  name: Guppy DeBoots figurine
+  description: "Goppy, Gupp, Goop... Gop? Gups? You can't quite remember his name, but you know it's something stupid."
+  components:
+  - type: Sprite
+    state: guppy_deboots
+  - type: PatronFigurine
+    id: 2fd7c5bb-6c13-426a-9a6a-af784e9b9209
