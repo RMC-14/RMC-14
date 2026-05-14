@@ -2613,3 +2613,14 @@
     state: rodrick_royal
   - type: PatronFigurine
     id: c24bc8a5-2b7b-4f86-80ef-d06babdb8c17
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBugsPaperboySwedersson
+  name: Bugs 'Paperboy' Swedersson figurine
+  description: "The figurine is warm to the touch."
+  components:
+  - type: Sprite
+    state: bugs_paperboy_swedersson
+  - type: PatronFigurine
+    id: 9db80593-fca7-46c8-8b59-f6b97933a309
