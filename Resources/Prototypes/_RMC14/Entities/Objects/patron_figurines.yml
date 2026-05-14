@@ -2657,3 +2657,14 @@
     state: michael_mikey_mcgoggins
   - type: PatronFigurine
     id: a1118024-80cd-47cb-81c2-b7e516960393
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEdithHestiBClausell
+  name: Edith 'Hesti' B Clausell figurine
+  description: "\"Supply on 30, -197.\"\n\"Contacts rotating northeast.\"\n\nThe figurine, depicting a Delta FTL, wears a cheeky, confident smile that annoys you. You kinda want to throw it out the Alamo.\n\n\"Why does your figurine have an ATL?\"\n\"W-why not..?\"\n\nIt gives you confidence that you'll probably make it to tomorrow's sunrise.\n\nProbably."
+  components:
+  - type: Sprite
+    state: edith_hesti_b_clausell
+  - type: PatronFigurine
+    id: 13feb412-430f-4ecc-b279-dc88a628ab28
