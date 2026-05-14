@@ -27,6 +27,8 @@ public sealed partial class AnnouncementWidget : UIWidget
     public event Action? OnAnnouncementFinished;
 
     public ActiveAnnouncement? ActiveAnnouncement { get; private set; }
+    public bool PreviewMode { get; set; }
+    public Vector2? ForcedScreenSize { get; set; }
 
     private RichTextLabel[] _richTextLabels = Array.Empty<RichTextLabel>();
     private Control? _spriteContainer;
@@ -58,25 +60,35 @@ public sealed partial class AnnouncementWidget : UIWidget
             CleanupCurrentAnnouncement();
 
         ResetLayoutState();
+        var resolvedStyle = AnnouncementStyling.CreateDisplayStyle(announcement.Style, announcement.VisualScale);
+        AnnouncementStyling.ApplyLocalAppearanceOverrides(resolvedStyle, announcement);
 
         ActiveAnnouncement = new ActiveAnnouncement
         {
             Data = announcement,
+            ResolvedStyle = resolvedStyle,
             StartTime = _timing.CurTime,
             CurrentLine = 0,
             CurrentChar = 0,
             State = AnnouncementState.Animating,
             CleanText = PreprocessText(announcement.Text),
-            SlideStartPosition = GetSlideStartPosition(announcement.Style),
-            ZoomCurrentScale = announcement.Style.AnimationConfig.Animation == AnnouncementAnimation.Zoom
-                ? announcement.Style.AnimationConfig.AnimationEnhancements?.ZoomStartScale ?? 0.1f
+            SlideStartPosition = GetSlideStartPosition(resolvedStyle),
+            ZoomCurrentScale = resolvedStyle.AnimationConfig.Animation == AnnouncementAnimation.Zoom
+                ? resolvedStyle.AnimationConfig.AnimationEnhancements?.ZoomStartScale ?? 0.1f
                 : 1.0f,
-            FadeAlpha = announcement.Style.AnimationConfig.Animation == AnnouncementAnimation.Fade ? 0.0f : 1.0f,
+            FadeAlpha = resolvedStyle.AnimationConfig.Animation == AnnouncementAnimation.Fade ? 0.0f : 1.0f,
             PulseScale = 1.0f,
             PulseAlpha = 1.0f
         };
 
         SetupUI();
+        if (PreviewMode)
+        {
+            SetAllLabelsText();
+            Visible = true;
+            return;
+        }
+
         ConfigureAnimationAndEffects();
         Visible = true;
     }
@@ -87,6 +99,12 @@ public sealed partial class AnnouncementWidget : UIWidget
 
         if (ActiveAnnouncement == null)
             return;
+
+        if (PreviewMode)
+        {
+            UpdatePosition();
+            return;
+        }
 
         var deltaTime = (float) args.DeltaSeconds;
         var currentTime = _timing.CurTime;
@@ -179,7 +197,21 @@ public sealed partial class AnnouncementWidget : UIWidget
 
     private Vector2 ResolveScreenSize()
     {
-        return Parent is UIScreen screen ? screen.Size : FallbackScreenSize;
+        if (ForcedScreenSize is { } forcedSize &&
+            forcedSize.X > 0f &&
+            forcedSize.Y > 0f)
+        {
+            return forcedSize;
+        }
+
+        if (Parent is Control control &&
+            control.Size.X > 0f &&
+            control.Size.Y > 0f)
+        {
+            return control.Size;
+        }
+
+        return FallbackScreenSize;
     }
 
 }

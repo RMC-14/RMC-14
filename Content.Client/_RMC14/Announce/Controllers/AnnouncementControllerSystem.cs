@@ -17,6 +17,8 @@ public sealed class AnnouncementControllerSystem : EntitySystem
 
     private AnnouncementDisplayPreference _preference;
     private Dictionary<string, AnnouncementDisplayPreference> _overrides = new();
+    private AnnouncementLayoutOverride? _globalLayoutOverride;
+    private Dictionary<string, AnnouncementLayoutOverride> _layoutOverrides = new();
 
     public override void Initialize()
     {
@@ -24,18 +26,21 @@ public sealed class AnnouncementControllerSystem : EntitySystem
 
         _cfg.OnValueChanged(RMCCVars.RMCAnnouncementStyle, OnPreferenceChanged, true);
         _cfg.OnValueChanged(RMCCVars.RMCAnnouncementStyleOverrides, OnOverridesChanged, true);
+        _cfg.OnValueChanged(RMCCVars.RMCAnnouncementLayout, OnGlobalLayoutChanged, true);
+        _cfg.OnValueChanged(RMCCVars.RMCAnnouncementLayoutOverrides, OnLayoutOverridesChanged, true);
         SubscribeNetworkEvent<AnnouncementNetMessage>(OnAnnouncementMessage);
     }
 
     private void OnAnnouncementMessage(AnnouncementNetMessage msg, EntitySessionEventArgs args)
     {
-        var preference = GetPreference(msg.Data.AnnouncementId);
+        var preference = ResolveDisplayPreference(msg.Data.AnnouncementId);
         if (preference == AnnouncementDisplayPreference.Disabled)
             return;
 
         if (_uiManager.GetUIController<AnnouncementOverlayUIController>() is { } controller &&
             AnnouncementDisplayResolver.TryResolve(_prototypeManager, msg.Data, preference, out var resolved))
         {
+            AnnouncementLayoutResolver.Apply(resolved, ResolveLayoutOverride(msg.Data.AnnouncementId));
             controller.ShowAnnouncement(resolved);
         }
     }
@@ -50,11 +55,41 @@ public sealed class AnnouncementControllerSystem : EntitySystem
         _overrides = AnnouncementPreferenceOverrides.Parse(serializedOverrides);
     }
 
-    private AnnouncementDisplayPreference GetPreference(ProtoId<AnnouncementPresetPrototype> announcementId)
+    private void OnGlobalLayoutChanged(string serializedLayout)
+    {
+        _globalLayoutOverride = AnnouncementLayoutOverrides.ParseSingle(serializedLayout);
+    }
+
+    private void OnLayoutOverridesChanged(string serializedOverrides)
+    {
+        _layoutOverrides = AnnouncementLayoutOverrides.Parse(serializedOverrides);
+    }
+
+    public AnnouncementDisplayPreference ResolveDisplayPreference(ProtoId<AnnouncementPresetPrototype> announcementId)
     {
         if (_overrides.TryGetValue(announcementId.ToString(), out var preference))
             return preference;
 
         return _preference;
+    }
+
+    public AnnouncementLayoutOverride? ResolveLayoutOverride(ProtoId<AnnouncementPresetPrototype> announcementId)
+    {
+        if (_layoutOverrides.TryGetValue(announcementId.ToString(), out var overrideValue))
+            return overrideValue;
+
+        return _globalLayoutOverride;
+    }
+
+    public AnnouncementLayoutOverride? GetGlobalLayoutOverride()
+    {
+        return _globalLayoutOverride;
+    }
+
+    public AnnouncementLayoutOverride? GetPresetLayoutOverride(ProtoId<AnnouncementPresetPrototype> announcementId)
+    {
+        return _layoutOverrides.TryGetValue(announcementId.ToString(), out var overrideValue)
+            ? overrideValue
+            : null;
     }
 }

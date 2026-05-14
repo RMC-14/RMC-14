@@ -15,8 +15,8 @@ public sealed partial class AnnouncementWidget
         if (ActiveAnnouncement == null)
             return;
 
-        var animation = AnnouncementAnimationFactory.Create(ActiveAnnouncement.Data.Style, _random);
-        var effects = AnnouncementEffectsRegistry.BuildEffects(ActiveAnnouncement.Data.Style);
+        var animation = AnnouncementAnimationFactory.Create(ActiveAnnouncement.ResolvedStyle, _random);
+        var effects = AnnouncementEffectsRegistry.BuildEffects(ActiveAnnouncement.ResolvedStyle);
         _animationContext = CreateAnimationContext();
         _playback.Configure(animation, effects, _animationContext);
     }
@@ -31,7 +31,7 @@ public sealed partial class AnnouncementWidget
 
         _playback.Update(
             _animationContext,
-            ActiveAnnouncement.Data.Style,
+            ActiveAnnouncement.ResolvedStyle,
             ActiveAnnouncement,
             _richTextLabels,
             currentTime,
@@ -46,7 +46,7 @@ public sealed partial class AnnouncementWidget
     {
         return new AnnouncementAnimationContext(
             ActiveAnnouncement!,
-            ActiveAnnouncement!.Data.Style,
+            ActiveAnnouncement!.ResolvedStyle,
             ActiveAnnouncement!.Data.Text,
             ActiveAnnouncement!.CleanText,
             _richTextLabels,
@@ -80,7 +80,7 @@ public sealed partial class AnnouncementWidget
             return;
 
         var originalText = ActiveAnnouncement.Data.Text;
-        var style = ActiveAnnouncement.Data.Style;
+        var style = ActiveAnnouncement.ResolvedStyle;
 
         for (var i = _titleOffset; i < _richTextLabels.Length; i++)
         {

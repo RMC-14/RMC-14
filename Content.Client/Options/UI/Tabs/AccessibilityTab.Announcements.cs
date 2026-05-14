@@ -13,6 +13,7 @@ namespace Content.Client.Options.UI.Tabs;
 public sealed partial class AccessibilityTab
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    private AnnouncementLayoutEditorWindow? _announcementLayoutEditorWindow;
 
     private void RegisterAnnouncementOptions()
     {
@@ -26,6 +27,7 @@ public sealed partial class AccessibilityTab
 
         Control.AddOptionDropDown(RMCCVars.RMCAnnouncementStyle, AnnouncementStyleDropDown, announcementEntries);
         AddPerAnnouncementOverrides();
+        RegisterAnnouncementLayoutEditor();
     }
 
     private void AddPerAnnouncementOverrides()
@@ -84,6 +86,46 @@ public sealed partial class AccessibilityTab
         list.Add(AnnouncementDisplayPreference.Disabled);
 
         return list;
+    }
+
+    private void RegisterAnnouncementLayoutEditor()
+    {
+        AnnouncementLayoutEditorButton.OnPressed += _ =>
+        {
+            if (_announcementLayoutEditorWindow != null &&
+                !_announcementLayoutEditorWindow.Disposed)
+            {
+                _announcementLayoutEditorWindow.OpenCentered();
+                return;
+            }
+
+            _announcementLayoutEditorWindow = new AnnouncementLayoutEditorWindow();
+            _announcementLayoutEditorWindow.OnClose += () => _announcementLayoutEditorWindow = null;
+            _announcementLayoutEditorWindow.OpenCentered();
+        };
+
+        AnnouncementLayoutResetButton.OnPressed += _ =>
+        {
+            _cfg.SetCVar(RMCCVars.RMCAnnouncementLayout, string.Empty);
+            _cfg.SetCVar(RMCCVars.RMCAnnouncementLayoutOverrides, string.Empty);
+            UpdateAnnouncementLayoutSummary();
+        };
+
+        _cfg.OnValueChanged(RMCCVars.RMCAnnouncementLayout, _ => UpdateAnnouncementLayoutSummary(), true);
+        _cfg.OnValueChanged(RMCCVars.RMCAnnouncementLayoutOverrides, _ => UpdateAnnouncementLayoutSummary(), true);
+    }
+
+    private void UpdateAnnouncementLayoutSummary()
+    {
+        var globalOverride = AnnouncementLayoutOverrides.ParseSingle(_cfg.GetCVar(RMCCVars.RMCAnnouncementLayout));
+        var overrides = AnnouncementLayoutOverrides.Parse(_cfg.GetCVar(RMCCVars.RMCAnnouncementLayoutOverrides));
+
+        AnnouncementLayoutSummaryLabel.Text = Loc.GetString(
+            "rmc-ui-options-announcements-layout-summary",
+            ("global", globalOverride != null
+                ? Loc.GetString("rmc-ui-options-announcements-layout-summary-custom")
+                : Loc.GetString("rmc-ui-options-announcements-layout-summary-default")),
+            ("count", overrides.Count));
     }
 
     private sealed class AnnouncementPresetOverrideOption : BaseOption

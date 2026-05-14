@@ -14,6 +14,61 @@ namespace Content.Client._RMC14.Announce.Styling;
 
 public static class AnnouncementStyling
 {
+    public static AnnouncementStyle CreateDisplayStyle(AnnouncementStyle baseStyle, float visualScale)
+    {
+        var serialization = IoCManager.Resolve<ISerializationManager>();
+        var style = serialization.CreateCopy(baseStyle, notNullableOverride: true)!;
+        var scale = MathF.Max(0.1f, visualScale);
+
+        style.LayoutConfig.UIScale = baseStyle.LayoutConfig.UIScale;
+        style.LayoutConfig.SpriteSpacing *= scale;
+        style.LayoutConfig.SpriteClipOffset *= scale;
+        style.LayoutConfig.SpriteClipSize *= scale;
+
+        style.TextConfig.FontSize *= scale;
+        style.TextConfig.LineHeight *= scale;
+        style.TextConfig.SpeakerNameFontSize *= scale;
+
+        style.SpriteConfig.SpriteBoxBorderThickness *= scale;
+        style.SpriteConfig.SpriteBoxPadding *= scale;
+        style.SpriteConfig.SpriteScale *= scale;
+
+        style.TitleConfig.TitleFontSize *= scale;
+        style.TitleConfig.TitleUnderlineThickness *= scale;
+
+        style.AnimationConfig.AnimationEnhancements = serialization.CreateCopy(baseStyle.AnimationConfig.AnimationEnhancements, notNullableOverride: true)!;
+        style.AnimationConfig.AnimationEnhancements.BounceHeight *= scale;
+
+        return style;
+    }
+
+    public static void ApplyLocalAppearanceOverrides(AnnouncementStyle style, AnnouncementDisplayData display)
+    {
+        if (display.ShowTitleOverride is { } showTitle)
+            style.TitleConfig.ShowTitle = showTitle;
+
+        if (display.BodyTextScaleOverride is { } bodyTextScale)
+        {
+            style.TextConfig.FontSize *= MathF.Max(0.1f, bodyTextScale);
+            style.TextConfig.LineHeight *= MathF.Max(0.1f, bodyTextScale);
+        }
+
+        if (display.TitleTextScaleOverride is { } titleTextScale)
+        {
+            style.TitleConfig.TitleFontSize *= MathF.Max(0.1f, titleTextScale);
+            style.TitleConfig.TitleUnderlineThickness *= MathF.Max(0.1f, titleTextScale);
+        }
+
+        if (display.TextColorOverride is { } textColor)
+        {
+            style.TextConfig.PrimaryColor = textColor;
+            style.TextConfig.SpeakerNameColor = textColor;
+        }
+
+        if (display.TitleColorOverride is { } titleColor)
+            style.TitleConfig.TitleColor = titleColor;
+    }
+
     public static AnnouncementStyle CreateResponsiveStyle(AnnouncementStyle baseStyle, float responsiveFontSize, Vector2 screenSize)
     {
         var scaleFactor = CalculateScreenScaleFactor(screenSize);

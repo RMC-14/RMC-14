@@ -8,6 +8,7 @@ namespace Content.Client._RMC14.Announce;
 public sealed class ActiveAnnouncement
 {
     public AnnouncementDisplayData Data { get; set; } = default!;
+    public AnnouncementStyle ResolvedStyle { get; set; } = new();
     public TimeSpan StartTime { get; set; }
     public int CurrentLine { get; set; }
     public int CurrentChar { get; set; }
