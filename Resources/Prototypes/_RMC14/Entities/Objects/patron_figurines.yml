@@ -2635,3 +2635,15 @@
     state: eris_voltia
   - type: PatronFigurine
     id: 752998c6-4831-4902-a4c1-446fc6ceb002
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSilasChitterCandlewing
+  name: Silas 'Chitter' Candlewing figurine
+  description: "You get the get the feeling that the gun is likely a lot smarter than he is."
+  components:
+  - type: Sprite
+    state: silas_chitter_candlewing
+  - type: PatronFigurine
+    id: 683521ca-1895-4094-8026-9592e0f9b288
+
