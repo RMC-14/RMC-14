@@ -33,6 +33,10 @@ marking-FelinidEarsWide = Wide Ears
 marking-FelinidEarsWide-wide_outer = Outer ear
 marking-FelinidEarsWide-wide_inner = Inner ear
 
+marking-FelinidEarsFlat = Flat Ears
+marking-FelinidEarsFlat-wide_outer = Outer ear
+marking-FelinidEarsFlat-wide_inner = Inner ear
+
 marking-FelinidTailBasic = Basic Tail
 marking-FelinidTailBasic-basic_tail_tip = Tail tip
 marking-FelinidTailBasic-basic_tail_stripes_even = Tail stripes, even

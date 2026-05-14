@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.NightVision;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 
@@ -113,6 +114,9 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCCorrosiveAcidDamageTimeSeconds =
         CVarDef.Create("rmc.corrosive_acid_damage_time_seconds", 40, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCCorrosiveAcidInstant =
+        CVarDef.Create("rmc.corrosive_acid_instant", false, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCEvolutionPointsRequireOvipositorMinutes =
         CVarDef.Create("rmc.evolution_points_require_ovipositor_minutes", 5, CVar.REPLICATED | CVar.SERVER);
@@ -506,6 +510,9 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCXenoAbilityPreviews =
         CVarDef.Create("rmc.xeno_ability_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCXenoDefaultNightVision =
+        CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 
     public static readonly CVarDef<int> RMCLagCompensationMilliseconds =
         CVarDef.Create("rmc.lag_compensation_milliseconds", 750, CVar.REPLICATED | CVar.SERVER);

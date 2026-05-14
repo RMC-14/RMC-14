@@ -10,6 +10,7 @@
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
+  - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:
     - RMCGuideRoleQueen
@@ -77,15 +78,19 @@
     buildDelay: 2
     canBuild:
     - WallXenoResin
+    - WallXenoResinReflective #TODO should only be available while in ovipositor mode
     - WallXenoMembrane
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoResinSpikes
+    - HiveAcidPillarXeno
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 4
@@ -94,6 +99,7 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4
+    plasmaTransferDelay: 0
   - type: CMArmor
     xenoArmor: 25
     explosionArmor: 100
@@ -268,6 +274,9 @@
   - type: RMCTrackable
   - type: ExcludedFromKingVote
     canVote: true
+  - type: RemoveComponents
+    components:
+    - type: Gibbable
 
 - type: entity
   parent: RMCXenoQueenBase

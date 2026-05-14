@@ -1,15 +1,16 @@
 using System.Numerics;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Emplacements;
+using Content.Shared._RMC14.Overwatch;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Item;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
-using Content.Shared._RMC14.Overwatch;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Components;
@@ -29,6 +30,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -58,7 +60,8 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     private void OnMapInit(Entity<ScopeComponent> ent, ref MapInitEvent args)
     {
-        _actionContainer.EnsureAction(ent.Owner, ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
+        if (ent.Comp.ScopingToggleAction != null)
+            _actionContainer.EnsureAction(ent.Owner, ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
 
         if (ent.Comp.ZoomLevels.Count > 1)
             _actionContainer.EnsureAction(ent.Owner, ref ent.Comp.CycleZoomLevelActionEntity, ent.Comp.CycleZoomLevelAction);
@@ -98,7 +101,8 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     private void OnGetActions(Entity<ScopeComponent> ent, ref GetItemActionsEvent args)
     {
-        args.AddAction(ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
+        if (ent.Comp.ScopingToggleAction != null)
+            args.AddAction(ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
 
         if (ent.Comp.ZoomLevels.Count > 1)
             args.AddAction(ref ent.Comp.CycleZoomLevelActionEntity, ent.Comp.CycleZoomLevelAction);
@@ -206,7 +210,8 @@ public abstract partial class SharedScopeSystem : EntitySystem
             return false;
         }
 
-        if ((!_hands.TryGetActiveItem(user, out var heldItem) || !scope.Comp.Attachment && heldItem != scope.Owner) && !scope.Comp.CanUseInsideContainer)
+        var holdingItem = _hands.TryGetActiveItem(user, out var heldItem) && (scope.Comp.Attachment || heldItem == scope.Owner);
+        if (!holdingItem && !scope.Comp.CanUseInsideContainer)
         {
             var msgError = Loc.GetString("cm-action-popup-scoping-user-must-hold", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
@@ -275,6 +280,12 @@ public abstract partial class SharedScopeSystem : EntitySystem
         scope.Comp.User = user;
         scope.Comp.ScopingDirection = direction;
 
+        if (scope.Comp.ScopedHeldSuffix != null && TryComp(scope, out ItemComponent? item))
+        {
+            scope.Comp.UnscopedHeldPrefix = item.HeldPrefix;
+            _item.SetHeldPrefix(scope, item.HeldPrefix + scope.Comp.ScopedHeldSuffix, component: item);
+        }
+
         Dirty(scope);
 
         scoping = EnsureComp<ScopingComponent>(user);
@@ -322,6 +333,12 @@ public abstract partial class SharedScopeSystem : EntitySystem
             RaiseLocalEvent(scope.Owner, ref interruptEvent);
         }
 
+        if (scope.Comp.ScopedHeldSuffix != null)
+        {
+            _item.SetHeldPrefix(scope, scope.Comp.UnscopedHeldPrefix);
+            scope.Comp.UnscopedHeldPrefix = null;
+        }
+
         scope.Comp.User = null;
         scope.Comp.ScopingDirection = null;
         Dirty(scope);
@@ -345,13 +362,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     private void ToggleScoping(Entity<ScopeComponent> scope, EntityUid user)
     {
-        if (HasComp<ScopingComponent>(user))
+        if (TryComp(user, out ScopingComponent? scoping))
         {
-            Unscope(scope);
-
-            if (TryComp(user, out ScopingComponent? scoping))
-                UserStopScoping((user, scoping));
-
+            UserStopScoping((user, scoping));
             return;
         }
 
@@ -395,22 +408,19 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     private void ValidateCurrentZoomLevel(Entity<ScopeComponent> scope)
     {
-        bool dirty = false;
-
-        if (scope.Comp.ZoomLevels == null || scope.Comp.ZoomLevels.Count <= 0)
+        if (scope.Comp.ZoomLevels is not { Count: > 0 })
         {
-            scope.Comp.ZoomLevels = new List<ScopeZoomLevel>(){ new ScopeZoomLevel(null, 1f, 15, false, TimeSpan.FromSeconds(1)) };
-            dirty = true;
+            scope.Comp.ZoomLevels = new List<ScopeZoomLevel> { new(null, 1f, 15, false, TimeSpan.FromSeconds(1)) };
+            scope.Comp.CurrentZoomLevel = 0;
+            Dirty(scope);
+            return;
         }
 
         if (scope.Comp.CurrentZoomLevel >= scope.Comp.ZoomLevels.Count)
         {
             scope.Comp.CurrentZoomLevel = 0;
-            dirty = true;
-        }
-
-        if (dirty)
             Dirty(scope);
+        }
     }
 
     private void UpdateOffset(EntityUid user)

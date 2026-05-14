@@ -567,7 +567,7 @@
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbMovieTicket
   name: movie ticket
-  description: A pair of red movie tickets. It reminds you of a time you could watch more then the same 5 or so VHS films the Almayer has.
+  description: A pair of red movie tickets. It reminds you of a time you could watch more than the same 5 or so VHS films the Almayer has.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/movie_ticket.rsi

@@ -129,6 +129,20 @@
 
 - type: entity
   parent: RMCMedalGold
+  id: RMCMedalHighCommandHonor
+  name: UNMC High Command Medal of honor
+  description: A star-shaped golden medal bestowed solely by UNMC High Command. It is not earned through valor alone, but granted by command authority for deeds that transcend recognized heroism. As the UNMC’s ultimate distinction, it eclipses every other commendation. Its recipients are known to history, not statistics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/gold_star.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/gold_star.rsi
+      state: equipped_co
+
+- type: entity
+  parent: RMCMedalGold
   id: RMCMedalGoldService
   name: gold service medal
   description: A reflective gold medal awarded for a marine's service within the UNMC. It represents the first major step of many a marine takes in becoming highly qualified in their positions.
@@ -476,6 +490,5 @@
   id: RMCMedalPlatinumNametagService
   name: executive specialist name badge
   description: An engraved gold-and-black badge, containing the wearer's name, rank, and department. The highest rank most executives can reach within their lifetimes, it signifies ones influence, skill, and importance to the Weston-Yamada Corporation.
-
 
 

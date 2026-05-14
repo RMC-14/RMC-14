@@ -13,6 +13,7 @@
     state: binoculars
   - type: Scope
     useInHand: true
+    scopedHeldSuffix: _eyes
     zoomLevels:
     - zoom: 1.6
       offset: 14
@@ -184,9 +185,8 @@
     isCorrodible: false
   - type: Spotting
   - type: TargetingLaser
-    laserColor: orange
-    currentLaserColor: orange
-    laserAlpha: 0.2
+    laserState: laser_beam_spotter
+    laserAlpha: 1
     gradualAlpha: false
 
 - type: entity
@@ -224,6 +224,13 @@
     sprite: _RMC14/Effects/laser.rsi
     state: laser_target2
   - type: LaserDesignatorTarget
+  - type: RMCCamera
+    id: null
+    rename: false
+  - type: RMCStaticZoomLevel
+  - type: Eye
+    zoom: 0.5, 0.5
+    drawFov: false
 
 - type: entity
   parent: RMCRangefinderTarget

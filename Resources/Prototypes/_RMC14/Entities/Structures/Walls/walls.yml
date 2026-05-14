@@ -1,3 +1,11 @@
+- type: examinableDamage
+  id: RMCWallMessages
+  messages:
+    - rmc-wall-integrity-1
+    - rmc-wall-integrity-2
+    - rmc-wall-integrity-3
+    - rmc-wall-integrity-4
+
 # Standard
 - type: entity
   parent: CMBaseWall
@@ -170,8 +178,10 @@
         !type:DamageTrigger
         damage: 9000
       behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
       - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+        acts: [ "Breakage" ]
   - type: IconSmooth
     key: walls
     additionalKeys:
@@ -462,6 +472,24 @@
     sprite: _RMC14/Structures/Walls/almayer_aicore.rsi
   - type: Icon
     sprite: _RMC14/Structures/Walls/almayer_aicore.rsi
+    state: hull
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
+    - windows
+    - doors
+    base: aiwall
+
+- type: entity
+  parent: CMWallReinforcedHeavy
+  id: CMWallReinforcedHeavyAlmayerAINoLights
+  name: heavy reinforced hull
+  description: An extremely reinforced metal wall used to isolate potentially dangerous areas. Looks virtually indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/almayer_aicore_nolights.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/almayer_aicore_nolights.rsi
     state: hull
   - type: IconSmooth
     key: walls

@@ -15,7 +15,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cmo
   accessGroups:
-  - CMMedbay
+  - RMCFieldDoctor
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
