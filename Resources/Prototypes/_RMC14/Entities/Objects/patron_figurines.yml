@@ -2690,3 +2690,14 @@
     state: zoey_killer_grimshaw
   - type: PatronFigurine
     id: 0a34f101-1c8b-4929-b2bd-e5153cc9e4c0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDruMisinputKeller
+  name: Dru 'Misinput' Keller figurine
+  description: "\"It was a missinput, missinput! Calm down, YOU CALM THE FUCK DOWN! IT WAS A MISSINPUT!\""
+  components:
+  - type: Sprite
+    state: dru_misinput_keller
+  - type: PatronFigurine
+    id: ed33b3af-cf5d-4f1f-9fd2-12a6e6720168
