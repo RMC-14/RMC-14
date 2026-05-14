@@ -54,7 +54,7 @@
   parent: RMCGearSPPCrashlandBase
   id: RMCGearSPPCrashlandSL
   equipment:
-    back: RMCSatchelSPP
+    back: RMCSatchelSPPSurvivor
     belt: RMCBeltHolsterRevolverZHNK72Fill
     outerClothing: RMCCoatSPPSurvivorFill
     head: CMHeadCapSPPBeret
