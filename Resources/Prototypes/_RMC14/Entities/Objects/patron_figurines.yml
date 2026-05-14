@@ -2562,8 +2562,8 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKaraHathaway
-  name: Kara Hathaway figurine
-  description: "\"You got a sandwich in there?\""
+  name: Kara 'Wild Boar' Hathaway figurine
+  description: "A figurine of Kara Hathaway, the 'Wild Boar' of Charlie Squad. You can tell by the slightly wonky shape that it's clearly been thrown a lot."
   components:
   - type: Sprite
     state: kara_hathaway
