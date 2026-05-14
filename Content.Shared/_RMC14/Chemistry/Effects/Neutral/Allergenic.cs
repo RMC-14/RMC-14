@@ -1,5 +1,6 @@
-using System.Collections.Immutable;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Emote;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
@@ -10,7 +11,8 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Allergenic : RMCChemicalEffect
 {
-    private static readonly ImmutableArray<string> Emotes = ImmutableArray.Create("sneeze", "blinks", "cough");
+    private static readonly ProtoId<EmotePrototype> SneezeEmote = "Sneeze";
+    private static readonly ProtoId<EmotePrototype> CoughEmote = "Cough";
 
     public override string Abbreviation => "ALG";
 
@@ -23,9 +25,21 @@ public sealed partial class Allergenic : RMCChemicalEffect
     {
         if (ProbHundred(5 * potency))
         {
-            var emote = IoCManager.Resolve<IRobustRandom>().Pick(Emotes);
-            var chat = System<SharedCMChatSystem>(args);
-            chat.Emote(args.TargetEntity, emote);
+            var random = IoCManager.Resolve<IRobustRandom>();
+            var rmcEmote = System<SharedRMCEmoteSystem>(args);
+            var cmChat = System<SharedCMChatSystem>(args);
+            switch (random.Next(3))
+            {
+                case 0:
+                    rmcEmote.TryEmoteWithChat(args.TargetEntity, SneezeEmote);
+                    break;
+                case 1:
+                    rmcEmote.TryEmoteWithChat(args.TargetEntity, CoughEmote);
+                    break;
+                case 2:
+                    cmChat.Emote(args.TargetEntity, "blinks");
+                    break;
+            }
         }
     }
 }
