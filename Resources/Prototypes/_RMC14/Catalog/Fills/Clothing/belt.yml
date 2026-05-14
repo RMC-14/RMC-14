@@ -551,6 +551,20 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMateba
+    - id: RMCMatebaCustomizationCase
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltSpecialFilled
+  suffix: Filled, Mateba
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMatebaSpecial
 
 - type: entity
   parent: RMCMatebaBelt

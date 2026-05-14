@@ -568,11 +568,6 @@
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
         recommended: true # TODO RMC14 Make choices: colour the options brown
-    - name: Commander's Secondary Belt
-      choices: { CMSecondary: 1 }
-      entries:
-      - id: RMCPeregrineHandcannonBeltFilledAmmo
-      - id: RMCMatebaBeltFilledAmmo
     - name: Ceremonial Weapon
       choices: { CMCeremonial: 1 }
       entries:

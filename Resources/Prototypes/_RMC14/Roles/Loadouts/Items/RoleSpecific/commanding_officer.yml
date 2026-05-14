@@ -57,43 +57,41 @@
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
       time: 900000 # 250 hrs
-  storage:
-    back:
-    - RMCMatebaCustomizationCaseLuxuryWeapon
+  equipment:
+    belt: RMCMatebaBeltLuxuriousFilled
 
 - type: loadout
   id: GoldHandcannonRMC
+  dummyEntity: RMCWeaponPistolHandcannonGold
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: CMJobCommandingOfficer
       time: 900000 # 250 hrs
-  storage:
-    back:
-    - RMCWeaponPistolHandcannonGold
+  equipment:
+    belt: RMCGoldHandcannonBeltFilled
 
 - type: loadout
   id: MatebaRMC
   dummyEntity: RMCWeaponRevolverMateba
-  storage:
-    back:
-    - RMCMatebaCustomizationCaseWeapon
+  equipment:
+    belt: RMCMatebaBeltFilled
 
 - type: loadout
   id: MatebaSpecialRMC
-  storage:
-    back:
-    - RMCWeaponRevolverMatebaSpecial
+  dummyEntity: RMCWeaponRevolverMatebaSpecial
+  equipment:
+    belt: RMCMatebaBeltSpecialFilled
 
 - type: loadout
   id: HandcannonRMC
-  storage:
-    back:
-    - RMCWeaponPistolHandcannonCustom
+  dummyEntity: RMCWeaponPistolHandcannonCustom
+  equipment:
+    belt: RMCPeregrineHandcannonBeltFilled
 
 - type: loadout
   id: HandcannonPolishedRMC
-  storage:
-    back:
-    - RMCWeaponPistolHandcannonPolished
+  dummyEntity: RMCWeaponPistolHandcannonPolished
+  equipment:
+    belt: RMCPolishedHandcannonBeltFilled
