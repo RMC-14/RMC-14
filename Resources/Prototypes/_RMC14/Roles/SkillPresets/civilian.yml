@@ -244,3 +244,21 @@
   - type: SkillPreset
     skills:
       RMCSkillVehicles: 1
+
+- type: entity
+  id: RMCSkillPresetPoliceSniper
+  name: Police Sniper
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillPolice: 2
+      RMCSkillCqc: 3
+      RMCSkillFirearms: 2
+      RMCSkillFireman: 2
+      RMCSkillMedical: 1
+      RMCSkillMeleeWeapons: 1
+      RMCSkillConstruction: 2
+      RMCSkillEngineer: 2
+      RMCSkillJtac: 1
+      RMCSkillEndurance: 3
