@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: The M5-ATL's rockets have been resprited.
-    type: Tweak
-  id: 2687
-  time: '2025-12-14T22:46:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8659
 - author: Max_Power
   changes:
   - message: Fixed papers, matchbooks, foldable rocket launcher, XL vests missing
@@ -4490,5 +4483,13 @@
   id: 3186
   time: '2026-05-12T23:27:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9693
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added a Whiskey Troop patch for the Royal Crown Marine contingent
+      aboard the HMS Pratchett.'
+    type: Add
+  id: 3187
+  time: '2026-05-14T02:50:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9720
 Name: RMC14
 Order: -1
