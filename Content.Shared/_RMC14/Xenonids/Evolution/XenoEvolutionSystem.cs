@@ -55,6 +55,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -90,6 +91,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
         SubscribeLocalEvent<FixturesComponent, XenoChangingPrototypeEvent>(OnFixturesXenoChangingPrototype);
+        SubscribeLocalEvent<FixturesComponent, AfterXenoChangedPrototypeEvent>(OnFixturesAfterXenoChangedPrototype);
 
         SubscribeLocalEvent<XenoDevolveComponent, XenoOpenDevolveActionEvent>(OnXenoOpenDevolveAction);
 
@@ -299,16 +301,18 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void OnFixturesXenoChangingPrototype(Entity<FixturesComponent> xeno, ref XenoChangingPrototypeEvent args)
     {
-        var compName = EntityManager.ComponentFactory.GetComponentName<FixturesComponent>();
-        if (args.NewComponents.TryGetComponent(compName, out var c) && c is FixturesComponent { } newComponent)
+        // TODO RMC14 I'm unsure of why the fixtures aren't properly removed when the FixturesComponent is removed,
+        // but it causes some issues in the physics system. We remove them here.
+        foreach (var id in xeno.Comp.Fixtures.Keys)
         {
-            // TODO RMC14 I'm unsure of why the fixtures aren't properly removed when the FixturesComponent is removed,
-            // but it causes some issues in the physics system. We remove them here.
-            foreach (var id in xeno.Comp.Fixtures.Keys)
-            {
-                _fixtures.DestroyFixture(xeno, id);
-            }
+            _fixtures.DestroyFixture(xeno, id);
         }
+    }
+
+    private void OnFixturesAfterXenoChangedPrototype(Entity<FixturesComponent> xeno, ref AfterXenoChangedPrototypeEvent args)
+    {
+        _fixtures.FixtureUpdate(xeno, manager: xeno.Comp);
+        _physics.WakeBody(xeno, manager: xeno.Comp);
     }
 
     private void OnAfterXenoChangedCaste(Entity<XenoEvolutionComponent> xeno, ref AfterXenoChangedCasteEvent args)
