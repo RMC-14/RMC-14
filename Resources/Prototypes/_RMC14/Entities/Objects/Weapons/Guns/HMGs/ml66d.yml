@@ -91,10 +91,9 @@
       sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
       state: all
   - type: MountableWeapon
-  - type: GunUnskilledPenalty
-    firearms: 0
-    angleIncrease: 0
-    accuracyAddMult: 0
+  - type: GunSkilledScatter
+    skilledMinimum: 0
+    unskilledAngleIncrease: 0
   - type: Scope
     scopePopup: null
     unScopePopup: null
