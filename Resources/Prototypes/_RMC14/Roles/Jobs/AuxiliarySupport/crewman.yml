@@ -13,7 +13,7 @@
     time: 18000 # 5 hours
   ranks:
     RMCRankCorporal: []
-  startingGear: CMGearVC
+  startingGear: CMGearVehicleCrewman
   icon: "CMJobIconVehicleCrewman"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
@@ -50,10 +50,10 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_intel
-  hidden: true #TODO RMC14
+  hidden: true #TODO RMC14 - Remove when vehicles are fully added.
 
 - type: startingGear
-  id: CMGearVC
+  id: CMGearVehicleCrewman
   equipment:
     jumpsuit: CMJumpsuitMarineTanker
     shoes: CMBootsBlackFilled

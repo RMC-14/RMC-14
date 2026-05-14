@@ -1,4 +1,4 @@
-﻿# TODO: Vehicle parts delivery system
+﻿# RMC14 TODO: Vehicle parts delivery system
 
 # Weapons rack
 - type: entity
@@ -149,7 +149,7 @@
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchShotgunLarge
       - id: RMCPouchPistol
-        #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+      - id: RMCPouchSling
       - id: RMCPouchToolsFill
     - name: Accessories
       choices: { CMAccessories: 1 }
