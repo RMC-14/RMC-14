@@ -2712,3 +2712,14 @@
     state: renomi
   - type: PatronFigurine
     id: 8626d123-cf10-44ef-a35b-c6ad7233da37
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCarlosKennedy
+  name: Carlos Kennedy figurine
+  description: "Small little thing, a label on the stand says \"MOEW YOU'RE GUNNA GET IT!!!\""
+  components:
+  - type: Sprite
+    state: carlos_kennedy
+  - type: PatronFigurine
+    id: 15901e45-af1b-4671-8818-ad8d0562bbe7
