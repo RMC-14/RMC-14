@@ -458,6 +458,7 @@
   - type: RMCProjectileAccuracy
     accuracy: 185
   - type: XenoHookOnHit
+  - type: RMCTether
   - type: Fixtures
     fixtures:
       projectile:

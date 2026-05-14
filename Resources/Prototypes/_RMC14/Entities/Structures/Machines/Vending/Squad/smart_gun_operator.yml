@@ -32,8 +32,8 @@
         points: 30
       - id: RMCPacketGrenadeIncendiaryFilled
         points: 30
-    #- id: CMM40HPDPWhitePhosphorusPacketx3
-    #  points: 30
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 30
       - id: RMCPacketGrenadeSmokeFilled
         points: 15
       - id: RMCPacketGrenadeM74AGMFFilled
@@ -44,8 +44,8 @@
         points: 10
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 20
-    #- id: CMM20MineBox4
-    #  points: 20
+      - id: RMCBoxClaymoreMineFilled
+        points: 20
     - name: Sidearm Ammunitions
       entries:
       - id: RMCMagazinePistolM13Ext

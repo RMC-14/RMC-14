@@ -622,6 +622,7 @@ public sealed class CMGunSystem : EntitySystem
         RaiseLocalEvent(gun, ref ev);
 
         gun.Comp.ModifiedMultiplier = ev.Multiplier;
+        Dirty(gun);
     }
 
     public bool HasRequiredEquippedPopup(Entity<GunRequireEquippedComponent?> gun, EntityUid user)
@@ -913,3 +914,15 @@ public sealed partial class DelayedAmmoInsertDoAfterEvent : SimpleDoAfterEvent;
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class DelayedCycleDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>
+/// An event raised before a shot attempt is made.
+/// </summary>
+[ByRefEvent]
+public record struct BeforeAttemptShootEvent(EntityCoordinates Origin, Vector2 Offset, bool Handled = false);
+
+/// <summary>
+/// An event raised right before a muzzle flash event is raised.
+/// </summary>
+[ByRefEvent]
+public record struct RMCBeforeMuzzleFlashEvent(EntityUid Weapon, Vector2 Offset = default);

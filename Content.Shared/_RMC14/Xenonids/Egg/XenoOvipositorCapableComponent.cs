@@ -21,7 +21,11 @@ public sealed partial class XenoOvipositorCapableComponent : Component
     public Vector2 Offset = new(-1, -1);
 
     [DataField, AutoNetworkedField]
-    public EntProtoId[] ActionIds = ["ActionXenoLeader", "ActionXenoHeal", "ActionXenoQueenEye"];
+    public EntProtoId[] ActionIds =
+    [
+        "ActionXenoLeader", "ActionXenoHeal", "ActionXenoTransferPlasmaQueen", "ActionXenoExpandWeeds",
+        "ActionXenoQueenEye",
+    ];
 
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, EntityUid> Actions = new();

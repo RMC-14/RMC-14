@@ -372,18 +372,27 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         return AttemptAttack(user, weaponUid, weapon, new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(targetXform.Coordinates)), null);
     }
 
+    // RMC14
+    public bool AttemptLightAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target, bool requireCombatMode)
+    {
+        if (!TryComp(target, out TransformComponent? targetXform))
+            return false;
+
+        return AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(GetNetEntity(target), GetNetEntity(weaponUid), GetNetCoordinates(targetXform.Coordinates)), null, requireCombatMode);
+    }
+
     /// <summary>
     /// Called when a windup is finished and an attack is tried.
     /// </summary>
     /// <returns>True if attack successful</returns>
-    private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session)
+    private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session, bool requireCombatMode = true) //added requireCombatMode param
     {
         var curTime = Timing.CurTime;
 
         if (weapon.NextAttack > curTime)
             return false;
 
-        if (!CombatMode.IsInCombatMode(user))
+        if (requireCombatMode && !CombatMode.IsInCombatMode(user)) // RMC14
             return false;
 
         EntityUid? target = null;
@@ -423,9 +432,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // RMC14
         if (target != null)
         {
-            if  (_rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack))
+            if  (_rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack, out var cancelled))
                 attack = newAttack;
-            else
+            else if (cancelled)
                 return false;
         }
 
@@ -754,10 +763,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             var target = entities.First();
             _meleeSound.PlayHitSound(target, user, GetHighestDamageSound(appliedDamage, _protoManager), hitEvent.HitSoundOverride, component);
         }
-
-        if (appliedDamage.GetTotal() > FixedPoint2.Zero)
+        // RMC14: Checks and returns early for when attacking too fast and target is technically not there
+        if (appliedDamage.GetTotal() > FixedPoint2.Zero && targets.Count > 0)
         {
-            DoDamageEffect(targets, user, Transform(targets[0]));
+            if (!TryComp(targets[0], out TransformComponent? targetXform))
+                return true;
+            DoDamageEffect(targets, user, targetXform);
         }
 
         return true;

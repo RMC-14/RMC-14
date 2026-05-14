@@ -34,6 +34,44 @@
         Slash: 225
 
 - type: entity
+  parent: WallXenoResinThick
+  id: WallXenoResinImpenetrable
+  name: impenetrable resin wall
+  suffix: Invincible, 30 minutes
+  components:
+  - type: InvincibleHiveStructure
+    replace: WallXenoResinThick
+
+- type: entity
+  parent: DoorXenoResinThick
+  id: DoorXenoResinImpenetrable
+  name: impenetrable resin door
+  suffix: Invincible, 30 minutes
+  components:
+  - type: InvincibleHiveStructure
+    replace: DoorXenoResinThick
+    blockerId: RMCBlockerMarine
+
+- type: entity
+  id: RMCBlockerMarine
+  name: marine blocker
+  suffix: DO NOT MAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49" # don't want this colliding with walls or they won't close
+        density: 100
+        mask:
+        - Marine
+  - type: XenoStunnedPreventCollision
+
+- type: entity
   parent: WallXenoResin
   id: WallXenoResinThick
   name: thick resin wall
@@ -178,3 +216,104 @@
     lifetime: 5.0
   - type: XenoStructureUpgradeable
     to: null
+
+- type: entity
+  parent: WallXenoResin
+  id: WallXenoResinWeedbound
+  name: weedbound resin wall
+  description: Weird slime solidified into a wall, bound to weeds.
+  components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/weedbound_resin_walls.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Xenos/weedbound_resin_walls.rsi
+    state: weedboundresin
+  - type: IconSmooth
+    key: walls
+    base: weedboundresin
+  - type: XenoStructureUpgradeable
+    to: WallXenoResinThickWeedbound
+    cost: 50
+  - type: WeedboundWall
+
+- type: entity
+  parent: WallXenoResinThick
+  id: WallXenoResinThickWeedbound
+  name: thick weedbound resin wall
+  description: Weird slime solidified into a thick wall, bound to weeds.
+  components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/weedbound_resin_walls.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Xenos/weedbound_resin_walls.rsi
+    state: thickweedboundresin
+  - type: IconSmooth
+    key: walls
+    base: thickweedboundresin
+  - type: WeedboundWall
+    isThickVariant: true
+
+- type: entity
+  abstract: true
+  parent: WallXenoResin
+  id: BaseWallXenoResinReflective
+  name: reflective resin wall
+  description: Weird hardened slime solidified into a fine, smooth wall.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/bone_resin.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/bone_resin.rsi
+    state: bone_resin
+  - type: IconSmooth
+    key: walls
+    base: bone_resin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: ReflectiveResin
+  - type: XenoConstructionPlasmaCost
+    plasma: 145
+    scalingCost: true
+  - type: RMCReflective
+  - type: ExplosionRandomResistance
+    min: 0.3
+    max: 0.3
+
+- type: entity
+  parent: BaseWallXenoResinReflective
+  id: WallXenoResinReflective
+  components:
+  - type: XenoSecretionLimited
+    id: WallXenoResinReflective
+    amount: 5
+
+- type: entity
+  parent: WallXenoResinReflective
+  id: WallXenoResinReflectiveUnstable
+  name: weakened reflective wall
+  description: Weird slime with strange hardened fragments solidified into a wall. It looks like it last for moment before it will collapse.
+  components:
+  - type: TimedDespawn
+    lifetime: 13.0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
