@@ -2723,3 +2723,14 @@
     state: carlos_kennedy
   - type: PatronFigurine
     id: 15901e45-af1b-4671-8818-ad8d0562bbe7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGunnerWilo
+  name: Gunner Wilo figurine
+  description: "\"Clogging arteries is my hobby. In the Corps, you only live once and not for long, so why not enjoy it?\""
+  components:
+  - type: Sprite
+    state: gunner_wilo
+  - type: PatronFigurine
+    id: e63137eb-1bdf-49cb-9f4c-be29bb2a7e0f
