@@ -2701,3 +2701,14 @@
     state: dru_misinput_keller
   - type: PatronFigurine
     id: ed33b3af-cf5d-4f1f-9fd2-12a6e6720168
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRenomi
+  name: Renomi figurine
+  description: "Typically spotted in medbay or crashing out in the FOB about her friends getting hurt.\n\nTotally normal about hot cocoa."
+  components:
+  - type: Sprite
+    state: renomi
+  - type: PatronFigurine
+    id: 8626d123-cf10-44ef-a35b-c6ad7233da37
