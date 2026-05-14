@@ -197,7 +197,7 @@
   parent: CMArmorHelmetM10Tech
   id: CMArmorHelmetM50
   name: M50 tanker helmet
-  description: The lightweight M50 tanker helmet is designed for use by armored crewmen in the USCM. It offers low weight protection, and allows agile movement inside the confines of an armored vehicle. Features a toggleable welding screen for eye protection.
+  description: The lightweight M50 tanker helmet is designed for use by armored crewmen in the UNMC. It offers low weight protection, and allows agile movement inside the confines of an armored vehicle. Features a toggleable welding screen for eye protection.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m50/jungle.rsi
