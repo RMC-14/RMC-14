@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Max_Power
-  changes:
-  - message: Fixed papers, matchbooks, foldable rocket launcher, XL vests missing
-      their drop sounds and lowered volume
-    type: Fix
-  - message: Fixed pamphlets not sounding like paper when picking up or dropping them
-    type: Fix
-  - message: Fixed screwdrivers playing the incorrect sound when dropped
-    type: Fix
-  id: 2688
-  time: '2025-12-14T22:45:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8682
 - author: Ian321
   changes:
   - message: The fire-immunity examination text now differentiates between direct
@@ -4491,5 +4479,13 @@
   id: 3187
   time: '2026-05-14T02:50:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9720
+- author: Drazamuffin
+  changes:
+  - message: WEYA research personal have uncovered xenoforms hidden with in permafrost
+      of the sector.
+    type: Add
+  id: 3188
+  time: '2026-05-14T10:20:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9659
 Name: RMC14
 Order: -1
