@@ -12,7 +12,7 @@ namespace Content.Server._RMC14.ERT;
 public sealed class RMCERTRequest
 {
     /// <summary>
-    /// Unique runtime id used by admin UI, Discord sync and shuttle/member ownership.
+    /// Unique runtime id used by admin UI and shuttle/member ownership.
     /// </summary>
     public Guid Id = Guid.NewGuid();
 
@@ -37,12 +37,12 @@ public sealed class RMCERTRequest
     public EntityUid? Requester;
 
     /// <summary>
-    /// Display name for the request source shown to admins and webhooks.
+    /// Display name for the request source shown to admins.
     /// </summary>
     public string SourceName = string.Empty;
 
     /// <summary>
-    /// Display name for the requester shown to admins and webhooks.
+    /// Display name for the requester shown to admins.
     /// </summary>
     public string RequesterName = string.Empty;
 
@@ -92,12 +92,12 @@ public sealed class RMCERTRequest
     public bool AllowSpecificSelection = true;
 
     /// <summary>
-    /// Last blocking error shown in admin UI and webhook state.
+    /// Last blocking error shown in admin UI.
     /// </summary>
     public string LastError = string.Empty;
 
     /// <summary>
-    /// Last recoverable warning shown in admin UI and webhook state, typically a preflight block that left the request pending.
+    /// Last recoverable warning shown in admin UI, typically a preflight block that left the request pending.
     /// </summary>
     public string LastWarning = string.Empty;
 
@@ -186,7 +186,7 @@ public sealed class RMCERTCreateRequestArgs
     public string RequesterName = string.Empty;
 
     /// <summary>
-    /// Human-readable reason shown to admins, announcements, logs, webhooks, and responder briefing where applicable.
+    /// Human-readable reason shown to admins, announcements, logs, and responder briefing where applicable.
     /// Validation of whether a reason is required is caller-specific and should be done before calling <c>CreateRequest</c>.
     /// </summary>
     public string Reason = string.Empty;

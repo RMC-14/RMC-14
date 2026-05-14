@@ -75,7 +75,6 @@ public sealed class RMCERTSystem : EntitySystem
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
-    [Dependency] private readonly RMCERTDiscordWebhookSystem _discordWebhook = default!;
     [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
@@ -176,7 +175,6 @@ public sealed class RMCERTSystem : EntitySystem
         _sourceCooldowns.Clear();
         _pendingHandheldDialogs.Clear();
         _queuedPendingAdminNotifications.Clear();
-        _discordWebhook.ClearRequests();
         _ertMap = null;
         _loadedShuttles = 0;
     }
@@ -3314,7 +3312,6 @@ public sealed class RMCERTSystem : EntitySystem
     private void DirtyState(RMCERTRequest request)
     {
         DirtyState();
-        _discordWebhook.SyncRequest(request);
     }
 
     private static bool MatchesAny(IReadOnlyCollection<string> left, IReadOnlyCollection<string> right)
