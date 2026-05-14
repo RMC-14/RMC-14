@@ -2679,3 +2679,14 @@
     state: guppy_deboots
   - type: PatronFigurine
     id: 2fd7c5bb-6c13-426a-9a6a-af784e9b9209
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZoeyKillerGrimshaw
+  name: Zoey 'Killer' Grimshaw figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: zoey_killer_grimshaw
+  - type: PatronFigurine
+    id: 0a34f101-1c8b-4929-b2bd-e5153cc9e4c0
