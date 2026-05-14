@@ -278,8 +278,8 @@
 
 - type: entity
   parent: RMCCrateLarge
-  id: RMCCrateHalyconFireArms
-  name: Halycon firearm crate
+  id: RMCCrateHalyconFireArms   #these IDs are all mispelt, i have no clue if they're mapped so i cant change the ID typo
+  name: Halcyon firearm crate
   description: A hefty wooden crate.
   components:
   - type: SpawnOnTerminate

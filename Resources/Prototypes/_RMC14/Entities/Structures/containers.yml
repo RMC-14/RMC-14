@@ -330,8 +330,8 @@
 - type: entity
   parent: RMCContainerBase
   id: RMCContainerHalcyonLeft
-  name: Halcyon Systems Cargo Container
-  description: "A huge industrial shipping container.\nThis one is from Halcyon Systems, a large-scale manufacturer of prosthetics, weapons, and starship parts.\nWe dont talk about their affiliations with the SPP."
+  name: Halcyon Dynamics Cargo Container
+  description: "A huge industrial shipping container.\nThis one is from Halcyon Dynamics, a large-scale manufacturer of prosthetics, weapons, and starship parts.\nWe dont talk about their affiliations with the SPP."
   suffix: Halcyon, Left
   components:
   - type: Sprite

@@ -642,8 +642,8 @@
 - type: entity
   parent: RMCPatchBase
   id: RMCPatchHalcyon
-  name: Halcyon Systems patch
-  description: A sleek corporate patch bearing the logo of the Halcyon Systems Corporation, a powerful conglomerate. Known for prosthetic manufacturing, weapons development, and ship-manufacturing. Wearing this patch implies ruthlessness and untempered ambition.
+  name: Halcyon Dynamics patch
+  description: A sleek corporate patch bearing the logo of the Halcyon Dynamics Corporation, a powerful conglomerate. Known for prosthetic manufacturing, weapons development, and ship-manufacturing. Wearing this patch implies ruthlessness and untempered ambition.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/halcyon.rsi
