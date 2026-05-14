@@ -3,47 +3,48 @@
   name: "Xeno Queen"
   description: "Queen psychic directive announcements"
   target: Xenos
-  showSprite: false
-  style:
-    animation:
-      animation: Typewriter
-      printSpeed: 0.018
-      holdDuration: 10
-      flickerChance: 0
-      glitchChance: 0.012
-      animationEnhancements:
-        enableCRT: false
-    layout:
-      position: TopCenter
-      speakerNamePosition: Below
-      spritePosition: Left
-      spriteSpacing: 4
-      spriteDisplayMode: TopHalf
-      uIScale: 2.6
-      titlePosition: Above
-    background:
-      showBackground: false
-      backgroundAlpha: 0.6
-      backgroundColor: "#11061a"
-    text:
-      primaryColor: "#f1e6ff"
-      font: "Cozette"
-      fontSize: 20
-      lineHeight: 48
-      showSpeakerName: true
-      speakerNameColor: "#d5b8ff"
-      speakerNameFontSize: 13
-    title:
-      showTitle: true
-      title: ">> QUEEN <<"
-      titleColor: "#9d67ff"
-      titleFontSize: 34
-      titleFont: "CozetteBold"
-      titleUnderline: true
-      titleUnderlineThickness: 2
-    scaling:
-      responsiveScaleFactor: 1.1
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
-
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.018
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.012
+          animationEnhancements:
+            enableCRT: false
+        layout:
+          position: TopCenter
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 4
+          spriteDisplayMode: TopHalf
+          uIScale: 2.6
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.6
+          backgroundColor: "#11061a"
+        text:
+          primaryColor: "#f1e6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: true
+          speakerNameColor: "#d5b8ff"
+          speakerNameFontSize: 13
+        title:
+          showTitle: true
+          title: ">> QUEEN <<"
+          titleColor: "#9d67ff"
+          titleFontSize: 34
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.1

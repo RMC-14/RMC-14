@@ -13,15 +13,27 @@ public sealed class AnnouncementPresetResolver
         _prototypes = prototypes;
     }
 
+    public AnnouncementPresetPrototype? Resolve(ProtoId<AnnouncementPresetPrototype>? presetId)
+    {
+        if (presetId is not { } typedPresetId)
+            return null;
+
+        if (_prototypes.TryIndex(typedPresetId, out AnnouncementPresetPrototype? prototypePreset))
+        {
+            return prototypePreset;
+        }
+
+        var rawPresetId = typedPresetId.ToString();
+        return Resolve(rawPresetId);
+    }
+
     public AnnouncementPresetPrototype? Resolve(string? presetId)
     {
         if (string.IsNullOrEmpty(presetId))
             return null;
 
         if (_prototypes.TryIndex<AnnouncementPresetPrototype>(presetId, out var prototypePreset))
-        {
             return prototypePreset;
-        }
 
         foreach (var preset in _prototypes.EnumeratePrototypes<AnnouncementPresetPrototype>())
         {

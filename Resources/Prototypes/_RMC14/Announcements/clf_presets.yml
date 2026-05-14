@@ -4,80 +4,60 @@
   description: "Unknown encrypted transmission"
   target: All
   visibleInSettings: false
-  showSprite: false
-  style:
-    animation:
-      animation: Glitch
-      printSpeed: 0.018
-      holdDuration: 10
-      flickerChance: 0.01
-      glitchChance: 0.035
-      animationEnhancements:
-        enableCRT: true
-        cRTSettings:
-          # enabled: true
-          # showScanlines: true
-          # scanlineSpacing: 6
-          # scanlineThickness: 6
-          # scanlineAlpha: 0.55
-          # scanlineSpeed: 56
-          # scanlineColor: "#133500"
-          # showNoise: true
-          # noiseIntensity: 8
-          # noiseAlpha: 0.30
-          # showVignette: true
-          # vignetteIntensity: 1.2
-          # vignetteColor: "#0b0b0b"
-          # glowColor: "#a6ff7a"
-          # showChromaticAberration: true
-          # chromaticAmount: 2.4
-          # chromaticParticleCount: 3
-          # chromaticParticleChance: 0.45
-          # chromaticParticleAlpha: 0.35
-          # chromaticAnimationSpeed: 3.0
-    layout:
-      position: TopCenter
-      speakerNamePosition: Below
-      spritePosition: Left
-      spriteSpacing: 2
-      spriteDisplayMode: TopHalf
-      uIScale: 2.6
-      titlePosition: Above
-    background:
-      showBackground: false
-      backgroundAlpha: 0.55
-      backgroundColor: "#10150d"
-    text:
-      primaryColor: "#d7ffd0"
-      font: "Cozette"
-      fontSize: 20
-      lineHeight: 46
-      showSpeakerName: false
-      speakerNameColor: "#b8f2ab"
-      speakerNameFontSize: 13
-    sprite:
-      showSpriteBox: false
-      spriteScale: 1
-    title:
-      showTitle: true
-      title: ">> UNKNOWN BROADCAST <<"
-      titleColor: "#95ff63"
-      titleFontSize: 34
-      titleFont: "CozetteBold"
-      titleUnderline: true
-      titleUnderlineThickness: 2
-    scaling:
-      responsiveScaleFactor: 1.1
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
-  soundVolume: 1.0
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
-  decalRsi: "/Textures/_RMC14/Structures/Wallmounts/banners.rsi"
-  decalState: "clfflag"
-  decalPlacement: ReplaceSprite
-  decalScale: 2.4
-  decalAlpha: 0.95
-  decalOffset: "105,0"
-
+  presentations:
+    stylized:
+      showSprite: false
+      decalRsi: "/Textures/_RMC14/Structures/Wallmounts/banners.rsi"
+      decalState: "clfflag"
+      decalPlacement: ReplaceSprite
+      decalScale: 2.4
+      decalAlpha: 0.95
+      decalOffset: "105,0"
+      style:
+        animation:
+          animation: Glitch
+          printSpeed: 0.018
+          holdDuration: 10
+          flickerChance: 0.01
+          glitchChance: 0.035
+          animationEnhancements:
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopCenter
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 2
+          spriteDisplayMode: TopHalf
+          uIScale: 2.6
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.55
+          backgroundColor: "#10150d"
+        text:
+          primaryColor: "#d7ffd0"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 46
+          showSpeakerName: false
+          speakerNameColor: "#b8f2ab"
+          speakerNameFontSize: 13
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> UNKNOWN BROADCAST <<"
+          titleColor: "#95ff63"
+          titleFontSize: 34
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.1

@@ -4,48 +4,266 @@
   description: "Alert level announcement styling"
   target: All
   visibleInSettings: false
-  showSprite: false
-  style:
-    animation:
-      animation: Typewriter
-      printSpeed: 0.025
-      holdDuration: 10
-      flickerChance: 0
-      glitchChance: 0
-      animationEnhancements:
-        enableCRT: false
-    layout:
-      position: TopLeft
-      spritePosition: Left
-      spriteDisplayMode: FullSprite
-      uIScale: 3
-      titlePosition: Above
-    background:
-      showBackground: false
-      backgroundAlpha: 0.7
-      backgroundColor: "#0a1a2d"
-    text:
-      primaryColor: "#a8d6ff"
-      font: "Cozette"
-      fontSize: 20
-      lineHeight: 48
-      showSpeakerName: false
-    sprite:
-      showSpriteBox: false
-      spriteScale: 1
-    title:
-      showTitle: true
-      title: "ALERT LEVEL"
-      titleColor: "#4a9eff"
-      titleFontSize: 40
-      titleFont: "CozetteBold"
-      titleUnderline: true
-      titleUnderlineThickness: 2
-    scaling:
-      responsiveScaleFactor: 1.15
   priority: 8
   canInterrupt: true
   canBeInterrupted: true
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0
+          animationEnhancements:
+            enableCRT: false
+        layout:
+          position: TopLeft
+          spritePosition: Left
+          spriteDisplayMode: FullSprite
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: "ALERT LEVEL"
+          titleColor: "#4a9eff"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineAlertGreen
+  name: "Green Alert"
+  description: "Green alert announcement styling"
+  target: All
+  visibleInSettings: false
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: true
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0
+          animationEnhancements:
+            enableCRT: false
+        layout:
+          position: TopLeft
+          spritePosition: Left
+          spriteDisplayMode: FullSprite
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#7CFC00"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: "ALERT LEVEL: GREEN"
+          titleColor: "#7CFC00"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineAlertBlue
+  name: "Blue Alert"
+  description: "Blue alert announcement styling"
+  target: All
+  visibleInSettings: false
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: true
+  presentations:
+    stylized:
+      showSprite: false
+      decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
+      decalState: "bluealert"
+      decalPlacement: ReplaceSprite
+      decalScale: 3.0
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0
+          animationEnhancements:
+            enableCRT: false
+        layout:
+          position: TopLeft
+          spritePosition: Left
+          spriteDisplayMode: FullSprite
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#1E90FF"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: "ALERT LEVEL: BLUE"
+          titleColor: "#1E90FF"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineAlertRed
+  name: "Red Alert"
+  description: "Red alert announcement styling"
+  target: All
+  visibleInSettings: false
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: true
+  presentations:
+    stylized:
+      showSprite: false
+      decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
+      decalState: "redalert"
+      decalPlacement: ReplaceSprite
+      decalScale: 3.0
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0
+          animationEnhancements:
+            enableCRT: false
+        layout:
+          position: TopLeft
+          spritePosition: Left
+          spriteDisplayMode: FullSprite
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#FF0000"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: "ALERT LEVEL: RED"
+          titleColor: "#FF0000"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineAlertDelta
+  name: "Delta Alert"
+  description: "Delta alert announcement styling"
+  target: All
+  visibleInSettings: false
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: true
+  presentations:
+    stylized:
+      showSprite: false
+      decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
+      decalState: "evac"
+      decalPlacement: ReplaceSprite
+      decalScale: 3.0
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0
+          animationEnhancements:
+            enableCRT: false
+        layout:
+          position: TopLeft
+          spritePosition: Left
+          spriteDisplayMode: FullSprite
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#8B0000"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: "ALERT LEVEL: DELTA"
+          titleColor: "#8B0000"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
 
 - type: announcementPreset
   id: RedAlertAnimated
@@ -53,51 +271,51 @@
   description: "Animated red alert display"
   target: All
   visibleInSettings: false
-  showSprite: false
-  style:
-    animation:
-      animation: Fade
-      printSpeed: 0.015
-      holdDuration: 8
-      flickerChance: 0.02
-      glitchChance: 0
-      animationEnhancements:
-        enableCRT: false
-    layout:
-      position: TopLeft
-      spritePosition: Left
-      spriteDisplayMode: FullSprite
-      uIScale: 2
-      titlePosition: Above
-    background:
-      showBackground: true
-      backgroundAlpha: 0.6
-      backgroundColor: "#1a0a0a"
-    text:
-      primaryColor: "#ff4d4d"
-      fontSize: 24
-      lineHeight: 46
-      showSpeakerName: false
-    sprite:
-      showSpriteBox: false
-      spriteScale: 1
-    title:
-      title: "RED ALERT"
-      titleColor: "#ff4d4d"
-      titleFontSize: 28
-      titleFont: "DefaultBold"
   sound:
     path: "/Audio/Misc/redalert.ogg"
     params:
       volume: -2
-  soundVolume: 1.0
   priority: 9
   canInterrupt: true
   canBeInterrupted: true
-  decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
-  decalState: "redalert_framed"
-  decalPlacement: Above
-  decalScale: 3.5
-  decalAlpha: 1.0
-  decalOffset: "0,-12"
-
+  presentations:
+    stylized:
+      showSprite: false
+      decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
+      decalState: "redalert_framed"
+      decalPlacement: Above
+      decalScale: 3.5
+      decalAlpha: 1.0
+      decalOffset: "0,-12"
+      style:
+        animation:
+          animation: Fade
+          printSpeed: 0.015
+          holdDuration: 8
+          flickerChance: 0.02
+          glitchChance: 0
+          animationEnhancements:
+            enableCRT: false
+        layout:
+          position: TopLeft
+          spritePosition: Left
+          spriteDisplayMode: FullSprite
+          uIScale: 2
+          titlePosition: Above
+        background:
+          showBackground: true
+          backgroundAlpha: 0.6
+          backgroundColor: "#1a0a0a"
+        text:
+          primaryColor: "#ff4d4d"
+          fontSize: 24
+          lineHeight: 46
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          title: "RED ALERT"
+          titleColor: "#ff4d4d"
+          titleFontSize: 28
+          titleFont: "DefaultBold"

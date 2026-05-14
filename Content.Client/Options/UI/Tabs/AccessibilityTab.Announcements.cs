@@ -63,23 +63,8 @@ public sealed partial class AccessibilityTab
 
     private List<AnnouncementPresetPrototype> GetRootPresets()
     {
-        var presets = _prototypeManager.EnumeratePrototypes<AnnouncementPresetPrototype>().ToList();
-        var variantIds = new HashSet<string>();
-
-        foreach (var preset in presets)
-        {
-            if (!string.IsNullOrWhiteSpace(preset.StylizedVariant))
-                variantIds.Add(preset.StylizedVariant);
-
-            if (!string.IsNullOrWhiteSpace(preset.DefaultVariant))
-                variantIds.Add(preset.DefaultVariant);
-
-            if (!string.IsNullOrWhiteSpace(preset.SimplifiedVariant))
-                variantIds.Add(preset.SimplifiedVariant);
-        }
-
-        return presets
-            .Where(preset => !variantIds.Contains(preset.ID) && preset.VisibleInSettings)
+        return _prototypeManager.EnumeratePrototypes<AnnouncementPresetPrototype>()
+            .Where(preset => preset.VisibleInSettings)
             .ToList();
     }
 
@@ -90,10 +75,10 @@ public sealed partial class AccessibilityTab
             AnnouncementDisplayPreference.Stylized
         };
 
-        if (!string.IsNullOrWhiteSpace(preset.DefaultVariant))
+        if (preset.Presentations.Default != null)
             list.Add(AnnouncementDisplayPreference.Default);
 
-        if (!string.IsNullOrWhiteSpace(preset.SimplifiedVariant))
+        if (preset.Presentations.Simplified != null)
             list.Add(AnnouncementDisplayPreference.Simplified);
 
         list.Add(AnnouncementDisplayPreference.Disabled);

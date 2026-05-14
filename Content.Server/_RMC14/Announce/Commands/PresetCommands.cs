@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Announce;
 using Robust.Shared.Console;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Announce.Commands;
 
@@ -20,7 +21,8 @@ public sealed class AnnouncePresetCommand : IConsoleCommand
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        var announceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<GeneralAnnounceSystem>();
+        var announceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<AnnouncementRouterSystem>();
+        var presetResolver = new Core.AnnouncementPresetResolver(IoCManager.Resolve<IPrototypeManager>());
 
         if (args.Length < 2)
         {
@@ -37,35 +39,42 @@ public sealed class AnnouncePresetCommand : IConsoleCommand
             return;
         }
 
+        var resolvedPreset = presetResolver.Resolve(presetId);
+        if (resolvedPreset == null)
+        {
+            shell.WriteError($"Unknown announcement preset '{presetId}'");
+            return;
+        }
+
         var request = new AnnouncementRequest
         {
             Message = message,
-            Preset = presetId
+            Preset = resolvedPreset.ID
         };
 
         if (options.TryGetValue("entity", out var entityStr) &&
             EntityUid.TryParse(entityStr, out var entityId))
         {
-            request.Speaker = entityId;
+            request.Route.Speaker = entityId;
         }
         else if (shell.Player?.AttachedEntity is { } playerEntity)
         {
-            request.Speaker = playerEntity;
+            request.Route.Speaker = playerEntity;
         }
 
         if (options.TryGetValue("name", out var name))
         {
-            request.SpeakerNameOverride = name;
+            request.Route.SpeakerNameOverride = name;
         }
 
         if (options.TryGetValue("target", out var targetStr) &&
             Enum.TryParse<AnnouncementTarget>(targetStr, true, out var target))
         {
-            request.Target = target;
+            request.Route.Target = target;
         }
 
-        announceSystem.AnnounceAdvanced(request);
-        shell.WriteLine($"Sent announcement preset '{presetId}': {message}");
+        announceSystem.Announce(request);
+        shell.WriteLine($"Sent announcement preset '{resolvedPreset.ID}': {message}");
     }
 
     private (string message, Dictionary<string, string> options) ParseMessageAndOptions(string[] args)

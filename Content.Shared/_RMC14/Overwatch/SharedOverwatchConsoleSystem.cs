@@ -563,8 +563,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad message: {args.Message}");
         if (TryComp(squad.Value, out SquadTeamComponent? squadComp))
         {
-            var squadColor = squadComp.AccessibleColor ?? squadComp.Color;
-            _marineAnnounce.AnnounceOverwatchSquad(args.Actor, message, squad.Value, squadColor, squadProto.Name);
+            _marineAnnounce.AnnounceOverwatchSquad(args.Actor, message, squad.Value);
         }
         else
         {

@@ -3,299 +3,837 @@
   name: "Marine Command"
   description: "Official announcements from Marine Command"
   target: Marines
-  defaultVariant: MarineCommandDefault
-  simplifiedVariant: MarineCommandSimplified
-  style:
-    animation:
-      animation: Typewriter
-      printSpeed: 0.025
-      holdDuration: 10
-      flickerChance: 0
-      glitchChance: 0.01
-      animationEnhancements:
-        slideDuration: 1.0
-        slideFrom: Top
-        zoomStartScale: 0.1
-        zoomDuration: 1.0
-        bounceCount: 3
-        bounceHeight: 15
-        enableCRT: true
-        cRTSettings:
-          # enabled: true
-          # showScanlines: true
-          # scanlineSpacing: 6
-          # scanlineThickness: 10
-          # scanlineAlpha: 0.95
-          # scanlineSpeed: 60
-          # scanlineColor: "#1c99ff"
-          # showNoise: true
-          # noiseIntensity: 4
-          # noiseAlpha: 0.6
-          # showVignette: true
-          # vignetteIntensity: 3
-          # vignetteColor: "#000000"
-          # glowColor: "#4a9eff"
-          # showChromaticAberration: true
-          # chromaticAmount: 1
-    layout:
-      position: TopLeft
-      speakerNamePosition: Below
-      spritePosition: Left
-      spriteSpacing: 0
-      spriteDisplayMode: TopHalf
-      uIScale: 3
-      titlePosition: Above
-    background:
-      showBackground: false
-      backgroundAlpha: 0.7
-      backgroundColor: "#0a1a2d"
-    text:
-      primaryColor: "#a8d6ff"
-      font: "Cozette"
-      fontSize: 20
-      lineHeight: 48
-      showSpeakerName: true
-      speakerNameColor: "#ffffff"
-      speakerNameFontSize: 14
-    sprite:
-      showSpriteBox: true
-      spriteBoxColor: "#0a1a2d"
-      spriteBoxBorderColor: "#4a9eff"
-      spriteBoxBorderThickness: 2
-      spriteBoxPadding: 18
-      spriteGlow: true
-      spriteGlowColor: "#4a9eff"
-      spriteGlowIntensity: 0.6
-      spriteScale: 1
-    title:
-      showTitle: true
-      title: ">> COMMAND <<"
-      titleColor: "#4a9eff"
-      titleFontSize: 40
-      titleFont: "CozetteBold"
-      titleUnderline: true
-      titleUnderlineThickness: 2
-    scaling:
-      responsiveScaleFactor: 1.15
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
-  soundVolume: 1.0
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
-  aliases: ["command", "cmd", "hc", "marine_command"]
+  aliases:
+  - "command"
+  - "cmd"
+  - "hc"
+  - "marine_command"
+  - "MarineCommandDefault"
+  - "MarineCommandSimplified"
+  - "command_default"
+  - "marine_default"
+  presentations:
+    stylized:
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: true
+          speakerNameColor: "#ffffff"
+          speakerNameFontSize: 14
+        sprite:
+          showSpriteBox: true
+          spriteBoxColor: "#0a1a2d"
+          spriteBoxBorderColor: "#4a9eff"
+          spriteBoxBorderThickness: 2
+          spriteBoxPadding: 18
+          spriteGlow: true
+          spriteGlowColor: "#4a9eff"
+          spriteGlowIntensity: 0.6
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> COMMAND <<"
+          titleColor: "#4a9eff"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+    default:
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: false
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: true
+          speakerNameColor: "#ffffff"
+          speakerNameFontSize: 14
+        sprite:
+          showSpriteBox: true
+          spriteBoxColor: "#0a1a2d"
+          spriteBoxBorderColor: "#4a9eff"
+          spriteBoxBorderThickness: 2
+          spriteBoxPadding: 18
+          spriteBoxShader: RMCMarineAnnouncementGrid
+          spriteGlow: false
+          spriteGlowColor: "#4a9eff"
+          spriteGlowIntensity: 0.6
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> COMMAND <<"
+          titleColor: "#4a9eff"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+    simplified:
+      showSprite: false
+      style:
+        animation:
+          animation: None
+          printSpeed: 0.02
+          holdDuration: 8
+          flickerChance: 0
+          glitchChance: 0
+          animationEnhancements:
+            enableCRT: false
+        layout:
+          position: TopLeft
+          spritePosition: Left
+          spriteDisplayMode: FullSprite
+          uIScale: 2
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.35
+          backgroundColor: "#0d1320"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 0.85
+        title:
+          showTitle: true
+          title: ">> COMMAND <<"
+          titleColor: "#4a9eff"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineCommandNoPortrait
+  name: "Marine Command"
+  description: "Official announcements from Marine Command"
+  target: Marines
+  visibleInSettings: false
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> COMMAND <<"
+          titleColor: "#4a9eff"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
 
 - type: announcementPreset
   id: MarineOverwatch
   name: "Marine Overwatch"
   description: "Overwatch squad announcements"
   target: Marines
-  defaultVariant: MarineCommandDefault
-  simplifiedVariant: MarineCommandSimplified
-  style:
-    animation:
-      animation: Typewriter
-      printSpeed: 0.025
-      holdDuration: 10
-      flickerChance: 0
-      glitchChance: 0.01
-      animationEnhancements:
-        slideDuration: 1.0
-        slideFrom: Top
-        zoomStartScale: 0.1
-        zoomDuration: 1.0
-        bounceCount: 3
-        bounceHeight: 15
-        enableCRT: true
-        cRTSettings:
-          # enabled: true
-          # showScanlines: true
-          # scanlineSpacing: 6
-          # scanlineThickness: 10
-          # scanlineAlpha: 0.95
-          # scanlineSpeed: 60
-          # scanlineColor: "#1c99ff"
-          # showNoise: true
-          # noiseIntensity: 4
-          # noiseAlpha: 0.6
-          # showVignette: true
-          # vignetteIntensity: 3
-          # vignetteColor: "#000000"
-          # glowColor: "#4a9eff"
-          # showChromaticAberration: true
-          # chromaticAmount: 1
-    layout:
-      position: TopLeft
-      speakerNamePosition: Below
-      spritePosition: Left
-      spriteSpacing: 0
-      spriteDisplayMode: TopHalf
-      uIScale: 3
-      titlePosition: Above
-    background:
-      showBackground: false
-      backgroundAlpha: 0.7
-      backgroundColor: "#0a1a2d"
-    text:
-      primaryColor: "#a8d6ff"
-      font: "Cozette"
-      fontSize: 20
-      lineHeight: 48
-      showSpeakerName: true
-      speakerNameColor: "#ffffff"
-      speakerNameFontSize: 14
-    sprite:
-      showSpriteBox: true
-      spriteBoxColor: "#0a1a2d"
-      spriteBoxBorderColor: "#4a9eff"
-      spriteBoxBorderThickness: 2
-      spriteBoxPadding: 18
-      spriteGlow: true
-      spriteGlowColor: "#4a9eff"
-      spriteGlowIntensity: 0.6
-      spriteScale: 1
-    title:
-      showTitle: true
-      title: ">> OVERWATCH <<"
-      titleColor: "#4a9eff"
-      titleFontSize: 40
-      titleFont: "CozetteBold"
-      titleUnderline: true
-      titleUnderlineThickness: 2
-    scaling:
-      responsiveScaleFactor: 1.15
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
-  soundVolume: 1.0
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
-  aliases: ["overwatch", "marine_overwatch"]
+  aliases:
+  - "overwatch"
+  - "marine_overwatch"
+  presentations:
+    stylized:
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: true
+          speakerNameColor: "#ffffff"
+          speakerNameFontSize: 14
+        sprite:
+          showSpriteBox: true
+          spriteBoxColor: "#0a1a2d"
+          spriteBoxBorderColor: "#4a9eff"
+          spriteBoxBorderThickness: 2
+          spriteBoxPadding: 18
+          spriteGlow: true
+          spriteGlowColor: "#4a9eff"
+          spriteGlowIntensity: 0.6
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> OVERWATCH <<"
+          titleColor: "#4a9eff"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+    default:
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: false
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: true
+          speakerNameColor: "#ffffff"
+          speakerNameFontSize: 14
+        sprite:
+          showSpriteBox: true
+          spriteBoxColor: "#0a1a2d"
+          spriteBoxBorderColor: "#4a9eff"
+          spriteBoxBorderThickness: 2
+          spriteBoxPadding: 18
+          spriteBoxShader: RMCMarineAnnouncementGrid
+          spriteGlow: false
+          spriteGlowColor: "#4a9eff"
+          spriteGlowIntensity: 0.6
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> OVERWATCH <<"
+          titleColor: "#4a9eff"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+    simplified:
+      showSprite: false
+      style:
+        animation:
+          animation: None
+          printSpeed: 0.02
+          holdDuration: 8
+          flickerChance: 0
+          glitchChance: 0
+          animationEnhancements:
+            enableCRT: false
+        layout:
+          position: TopLeft
+          spritePosition: Left
+          spriteDisplayMode: FullSprite
+          uIScale: 2
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.35
+          backgroundColor: "#0d1320"
+        text:
+          primaryColor: "#a8d6ff"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 0.85
+        title:
+          showTitle: true
+          title: ">> OVERWATCH <<"
+          titleColor: "#4a9eff"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
 
 - type: announcementPreset
-  id: MarineCommandDefault
-  name: "Marine Command (Default)"
-  description: "Standard marine announcements"
+  id: MarineOverwatchAlpha
+  name: "Alpha Overwatch"
+  description: "Overwatch squad announcements"
   target: Marines
-  style:
-    animation:
-      animation: Typewriter
-      printSpeed: 0.025
-      holdDuration: 10
-      flickerChance: 0
-      glitchChance: 0.01
-      animationEnhancements:
-        slideDuration: 1.0
-        slideFrom: Top
-        zoomStartScale: 0.1
-        zoomDuration: 1.0
-        bounceCount: 3
-        bounceHeight: 15
-        enableCRT: false
-    layout:
-      position: TopLeft
-      speakerNamePosition: Below
-      spritePosition: Left
-      spriteSpacing: 0
-      spriteDisplayMode: TopHalf
-      uIScale: 3
-      titlePosition: Above
-    background:
-      showBackground: false
-      backgroundAlpha: 0.7
-      backgroundColor: "#0a1a2d"
-    text:
-      primaryColor: "#a8d6ff"
-      font: "Cozette"
-      fontSize: 20
-      lineHeight: 48
-      showSpeakerName: true
-      speakerNameColor: "#ffffff"
-      speakerNameFontSize: 14
-    sprite:
-      showSpriteBox: true
-      spriteBoxColor: "#0a1a2d"
-      spriteBoxBorderColor: "#4a9eff"
-      spriteBoxBorderThickness: 2
-      spriteBoxPadding: 18
-      spriteBoxShader: RMCMarineAnnouncementGrid
-      spriteGlow: false
-      spriteGlowColor: "#4a9eff"
-      spriteGlowIntensity: 0.6
-      spriteScale: 1
-    title:
-      showTitle: true
-      title: ">> COMMAND <<"
-      titleColor: "#4a9eff"
-      titleFontSize: 40
-      titleFont: "CozetteBold"
-      titleUnderline: true
-      titleUnderlineThickness: 2
-    scaling:
-      responsiveScaleFactor: 1.15
+  visibleInSettings: false
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
-  soundVolume: 1.0
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
-  aliases: ["command_default", "marine_default"]
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#E61919"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> ALPHA OVERWATCH <<"
+          titleColor: "#E61919"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
 
 - type: announcementPreset
-  id: MarineCommandSimplified
-  name: "Marine Command (Simplified)"
-  description: "Clean, low-effect marine announcements"
+  id: MarineOverwatchBravo
+  name: "Bravo Overwatch"
+  description: "Overwatch squad announcements"
   target: Marines
-  showSprite: false
-  style:
-    animation:
-      animation: None
-      printSpeed: 0.02
-      holdDuration: 8
-      flickerChance: 0
-      glitchChance: 0
-      animationEnhancements:
-        enableCRT: false
-    layout:
-      position: TopLeft
-      spritePosition: Left
-      spriteDisplayMode: FullSprite
-      uIScale: 2
-      titlePosition: Above
-    background:
-      showBackground: false
-      backgroundAlpha: 0.35
-      backgroundColor: "#0d1320"
-    text:
-      primaryColor: "#a8d6ff"
-      font: "Cozette"
-      fontSize: 20
-      lineHeight: 48
-      showSpeakerName: false
-    sprite:
-      showSpriteBox: false
-      spriteScale: 0.85
-    title:
-      showTitle: true
-      title: ">> COMMAND <<"
-      titleColor: "#4a9eff"
-      titleFontSize: 40
-      titleFont: "CozetteBold"
-      titleUnderline: true
-      titleUnderlineThickness: 2
-    scaling:
-      responsiveScaleFactor: 1.15
+  visibleInSettings: false
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
-  soundVolume: 0.8
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
-  # decalRsi: "/Textures/_RMC14/Structures/Wallmounts/banners.rsi"
-  # decalState: "unmcflag"
-  # decalPlacement: Above
-  # decalScale: 3.0
-  # decalAlpha: 0.5
-  # decalOffset: "150,0"
-  # textOffset: "-75,0"
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#FFC32D"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> BRAVO OVERWATCH <<"
+          titleColor: "#FFC32D"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
 
+- type: announcementPreset
+  id: MarineOverwatchCharlie
+  name: "Charlie Overwatch"
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#C864C8"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> CHARLIE OVERWATCH <<"
+          titleColor: "#C864C8"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchDelta
+  name: "Delta Overwatch"
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#4148C8"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> DELTA OVERWATCH <<"
+          titleColor: "#4148C8"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchEcho
+  name: "Echo Overwatch"
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#67D692"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> ECHO OVERWATCH <<"
+          titleColor: "#67D692"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchFoxtrot
+  name: "Foxtrot Overwatch"
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#C47A50"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> FOXTROT OVERWATCH <<"
+          titleColor: "#C47A50"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: MarineOverwatchIntel
+  name: "Intel Overwatch"
+  description: "Overwatch squad announcements"
+  target: Marines
+  visibleInSettings: false
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: Typewriter
+          printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+          glitchChance: 0.01
+          animationEnhancements:
+            slideDuration: 1.0
+            slideFrom: Top
+            zoomStartScale: 0.1
+            zoomDuration: 1.0
+            bounceCount: 3
+            bounceHeight: 15
+            enableCRT: true
+            cRTSettings:
+        layout:
+          position: TopLeft
+          speakerNamePosition: Below
+          spritePosition: Left
+          spriteSpacing: 0
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#0a1a2d"
+        text:
+          primaryColor: "#09662B"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> INTEL OVERWATCH <<"
+          titleColor: "#09662B"
+          titleFontSize: 40
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15

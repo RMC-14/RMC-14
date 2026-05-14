@@ -52,7 +52,7 @@ public sealed partial class AnnouncementWidget : UIWidget
         Visible = false;
     }
 
-    public void ShowAnnouncement(AnnouncementNetData announcement)
+    public void ShowAnnouncement(AnnouncementDisplayData announcement)
     {
         if (ActiveAnnouncement != null)
             CleanupCurrentAnnouncement();

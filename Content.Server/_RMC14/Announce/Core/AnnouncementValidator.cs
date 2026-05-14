@@ -54,26 +54,29 @@ public sealed class AnnouncementValidator
 
     private void ValidateEntities(AnnouncementRequest request, ValidationResult result)
     {
-        if (request.Speaker.HasValue && !_entityManager.EntityExists(request.Speaker.Value))
+        if (request.Route.Speaker.HasValue && !_entityManager.EntityExists(request.Route.Speaker.Value))
         {
-            result.AddError($"Speaker entity {request.Speaker.Value} does not exist");
+            result.AddError($"Speaker entity {request.Route.Speaker.Value} does not exist");
         }
 
-        if (request.Source.HasValue && !_entityManager.EntityExists(request.Source.Value))
+        if (request.Route.Source.HasValue && !_entityManager.EntityExists(request.Route.Source.Value))
         {
-            result.AddError($"Source entity {request.Source.Value} does not exist");
+            result.AddError($"Source entity {request.Route.Source.Value} does not exist");
         }
 
     }
 
     private void ValidateParameters(AnnouncementRequest request, ValidationResult result)
     {
-        if (request.VolumeOverride.HasValue)
+        if (request.Route.Channels == AnnouncementChannels.None)
+            result.AddError("Announcement request must target at least one channel");
+
+        if (request.Sound?.Volume.HasValue == true)
         {
-            var volume = request.VolumeOverride.Value;
-            if (volume < 0f || volume > 2f)
+            var volume = request.Sound.Volume.Value;
+            if (volume < -60f || volume > 20f)
             {
-                result.AddError($"Volume must be between 0.0 and 2.0, got {volume}");
+                result.AddError($"Volume must be between -60.0 and 20.0 dB, got {volume}");
             }
         }
 
@@ -84,11 +87,6 @@ public sealed class AnnouncementValidator
             {
                 result.AddError($"Priority must be between 0.0 and 10.0, got {priority}");
             }
-        }
-
-        if (request.SpriteScale < 0.1f || request.SpriteScale > 5f)
-        {
-            result.AddError($"Sprite scale must be between 0.1 and 5.0, got {request.SpriteScale}");
         }
     }
 }

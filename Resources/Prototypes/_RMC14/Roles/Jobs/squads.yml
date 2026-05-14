@@ -22,6 +22,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#E61919"
+    overwatchAnnouncementPreset: MarineOverwatchAlpha
     radio: MarineAlpha
     accessLevels:
     - CMAccessAlpha
@@ -37,6 +38,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#FFC32D"
+    overwatchAnnouncementPreset: MarineOverwatchBravo
     radio: MarineBravo
     accessLevels:
     - CMAccessBravo
@@ -52,6 +54,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#C864C8"
+    overwatchAnnouncementPreset: MarineOverwatchCharlie
     radio: MarineCharlie
     accessLevels:
     - CMAccessCharlie
@@ -67,6 +70,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#4148C8"
+    overwatchAnnouncementPreset: MarineOverwatchDelta
     radio: MarineDelta
     accessLevels:
     - CMAccessDelta
@@ -81,6 +85,7 @@
   components:
   - type: SquadTeam
     color: "#C47A50"
+    overwatchAnnouncementPreset: MarineOverwatchFoxtrot
     radio: MarineFoxtrot
     accessLevels:
     - CMAccessAlpha
@@ -99,6 +104,7 @@
   components:
   - type: SquadTeam
     color: "#67D692"
+    overwatchAnnouncementPreset: MarineOverwatchEcho
     radio: MarineEcho
     accessLevels:
     - CMAccessAlpha
@@ -117,6 +123,7 @@
   - type: SquadTeam
     color: "#053818"
     accessibleColor: "#09662b" # original color is too indistinguishable in most situations
+    overwatchAnnouncementPreset: MarineOverwatchIntel
     blacklistedSquadArmor:
     - Helmet
     - Armor

@@ -23,13 +23,10 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
     public AnnouncementTarget Target { get; private set; } = AnnouncementTarget.All;
 
     [DataField]
-    public AnnouncementStyle Style { get; private set; } = new();
-
-    [DataField]
     public SoundSpecifier? Sound { get; private set; }
 
     [DataField]
-    public float SoundVolume { get; private set; } = 1.0f;
+    public AnnouncementPresentationSet Presentations { get; private set; } = new();
 
     [DataField]
     public float Priority { get; private set; } = 5.0f;
@@ -42,39 +39,6 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
 
     [DataField]
     public List<string> Aliases { get; private set; } = new();
-
-    [DataField]
-    public string? StylizedVariant { get; private set; }
-
-    [DataField]
-    public string? DefaultVariant { get; private set; }
-
-    [DataField]
-    public string? SimplifiedVariant { get; private set; }
-
-    [DataField]
-    public string? DecalRsi { get; private set; }
-
-    [DataField]
-    public string? DecalState { get; private set; }
-
-    [DataField]
-    public AnnouncementDecalPlacement? DecalPlacement { get; private set; }
-
-    [DataField]
-    public bool ShowSprite { get; private set; } = true;
-
-    [DataField]
-    public float DecalScale { get; private set; } = 4f;
-
-    [DataField]
-    public float DecalAlpha { get; private set; } = 1f;
-
-    [DataField]
-    public Vector2 DecalOffset { get; private set; } = Vector2.Zero;
-
-    [DataField]
-    public Vector2 TextOffset { get; private set; } = Vector2.Zero;
 
     [DataField]
     public bool VisibleInSettings { get; private set; } = true;

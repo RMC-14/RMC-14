@@ -105,7 +105,7 @@ public sealed partial class AnnouncementWidget
             if (hasTitle && !string.IsNullOrEmpty(titleText))
             {
                 var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, effectiveTextWidth);
-                var enableAssaultScroll = false;
+                var enableAssaultScroll = style.TitleConfig.Effect.Type == AnnouncementTitleEffectType.AssaultScroll;
                 var titleLabel = CreateTitleLabel(textAlign, effectiveTextWidth);
                 titleLabel.SetMessage(titleMessage);
 

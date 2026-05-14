@@ -5,13 +5,15 @@ using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using System.Collections.Generic;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Announce;
 
-public sealed class GeneralAnnounceSystem : EntitySystem
+public sealed class AnnouncementControllerSystem : EntitySystem
 {
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private AnnouncementDisplayPreference _preference;
     private Dictionary<string, AnnouncementDisplayPreference> _overrides = new();
@@ -27,29 +29,32 @@ public sealed class GeneralAnnounceSystem : EntitySystem
 
     private void OnAnnouncementMessage(AnnouncementNetMessage msg, EntitySessionEventArgs args)
     {
-        if (_preference == AnnouncementDisplayPreference.Disabled)
+        var preference = GetPreference(msg.Data.AnnouncementId);
+        if (preference == AnnouncementDisplayPreference.Disabled)
             return;
 
-        if (_uiManager.GetUIController<GeneralAnnounceUIController>() is { } controller)
+        if (_uiManager.GetUIController<AnnouncementOverlayUIController>() is { } controller &&
+            AnnouncementDisplayResolver.TryResolve(_prototypeManager, msg.Data, preference, out var resolved))
         {
-            controller.ShowAnnouncement(msg.Data);
+            controller.ShowAnnouncement(resolved);
         }
     }
 
     private void OnPreferenceChanged(AnnouncementDisplayPreference preference)
     {
         _preference = preference;
-        SendPreferenceUpdate();
     }
 
     private void OnOverridesChanged(string serializedOverrides)
     {
         _overrides = AnnouncementPreferenceOverrides.Parse(serializedOverrides);
-        SendPreferenceUpdate();
     }
 
-    private void SendPreferenceUpdate()
+    private AnnouncementDisplayPreference GetPreference(ProtoId<AnnouncementPresetPrototype> announcementId)
     {
-        RaiseNetworkEvent(new AnnouncementPreferenceNetMessage(_preference, new Dictionary<string, AnnouncementDisplayPreference>(_overrides)));
+        if (_overrides.TryGetValue(announcementId.ToString(), out var preference))
+            return preference;
+
+        return _preference;
     }
 }

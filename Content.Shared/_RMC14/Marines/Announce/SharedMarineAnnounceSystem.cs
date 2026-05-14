@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.AlertLevel;
@@ -211,13 +212,14 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         EntityUid sender,
         string message,
         EntityUid squad,
-        Color squadColor,
-        string squadName,
         SoundSpecifier? sound = null)
     {
     }
 
-    public virtual void AnnounceAlertLevel(RMCAlertLevels level, string message, Filter? filter = null)
+    public virtual void AnnounceAlertLevel(
+        ProtoId<AnnouncementPresetPrototype> preset,
+        string message,
+        Filter? filter = null)
     {
     }
 
@@ -275,14 +277,14 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
         var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
-        AnnounceToMarines(wrappedMessage, sound, filter, excludeSurvivors);
-        AnnounceSignedUi(sender, message, author, name, sound, filter, excludeSurvivors);
+        DispatchSignedAnnouncement(sender, message, wrappedMessage, author, name, sound, filter, excludeSurvivors);
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
     }
 
-    protected virtual void AnnounceSignedUi(
+    protected virtual void DispatchSignedAnnouncement(
         EntityUid sender,
         string message,
+        string wrappedMessage,
         string author,
         string name,
         SoundSpecifier? sound,

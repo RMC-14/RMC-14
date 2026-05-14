@@ -22,7 +22,7 @@ public sealed partial class AnnouncementWidget
             _decalBuilder = decalBuilder;
         }
 
-        public Control? CreateSpriteContainer(AnnouncementNetData announcement, Vector2 screenSize)
+        public Control? CreateSpriteContainer(AnnouncementDisplayData announcement, Vector2 screenSize)
         {
             var style = announcement.Style;
             Control? decalControl = null;
