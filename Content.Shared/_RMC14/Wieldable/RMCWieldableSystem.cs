@@ -32,6 +32,8 @@ public sealed class RMCWieldableSystem : EntitySystem
     private const string WieldUseDelayId = "RMCWieldDelay";
     private static readonly EntProtoId<SkillDefinitionComponent> WieldSkill = "RMCSkillFirearms";
     private static readonly int MinimumWieldSkill = 1;
+    private static readonly TimeSpan UnskilledWieldDelay = TimeSpan.FromSeconds(0.3);
+    private static readonly TimeSpan SkilledWieldDelayCoefficient = TimeSpan.FromSeconds(0.2);
 
     public override void Initialize()
     {
@@ -191,13 +193,13 @@ public sealed class RMCWieldableSystem : EntitySystem
             var user = container.Owner;
             var wieldSkillAmount = _skills.GetSkill(user, WieldSkill);
 
-            if (HasComp<RMCDazedComponent>(user))
-                skillModifiedDelay += TimeSpan.FromSeconds(0.5);
+            if (TryComp<RMCDazedComponent>(user, out var dazedComp))
+                skillModifiedDelay += dazedComp.WieldDelayAdditional;
 
             if (wieldSkillAmount < MinimumWieldSkill && !HasComp<GunUnskilledUsableComponent>(wieldable)) // unskilled penalty
-                skillModifiedDelay += TimeSpan.FromSeconds(0.3);
+                skillModifiedDelay += UnskilledWieldDelay;
             else
-                skillModifiedDelay -= TimeSpan.FromSeconds(0.2) * wieldSkillAmount;
+                skillModifiedDelay -= SkilledWieldDelayCoefficient * wieldSkillAmount;
         }
 
         _useDelaySystem.SetLength(wieldable.Owner, skillModifiedDelay, WieldUseDelayId);
