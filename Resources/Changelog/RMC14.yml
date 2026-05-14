@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The fire-immunity examination text now differentiates between direct
-      and indirect ignition.
-    type: Tweak
-  id: 2689
-  time: '2025-12-14T22:46:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8680
 - author: J C Denton
   changes:
   - message: Fixed CMB survivors having Civilian access.
@@ -4487,5 +4479,13 @@
   id: 3188
   time: '2026-05-14T10:20:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9659
+- author: MarshesAndMeadows
+  changes:
+  - message: Fixed water tiles not correctly updating the slowdown modifier when stepping
+      onto a catwalk.
+    type: Fix
+  id: 3189
+  time: '2026-05-14T10:22:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9610
 Name: RMC14
 Order: -1
