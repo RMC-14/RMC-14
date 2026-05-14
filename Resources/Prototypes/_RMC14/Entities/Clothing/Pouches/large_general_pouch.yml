@@ -22,13 +22,13 @@
 
 - type: entity
   parent: RMCPouchGeneralLarge
-  id: RMCPouchGeneralLargeFilledRoyalCommando
-  suffix: Filled, RoyalCommando
+  id: RMCPouchGeneralLargeFilledRCM
+  suffix: RCM, Filled
   components:
   - type: StorageFill
     contents:
     - id: RMCHeadRoyalBeret
-    - id: CMMaskGas # TODO RMC14 royal marine gas masks
+    - id: RMCMaskGasRCM
 
 - type: entity
   parent: RMCPouchGeneralLarge
@@ -40,3 +40,14 @@
     - id: CMGrenadeFragOld #TODO rmc14, port SPP grenades.
     - id: CMGrenadeFragOld
 #TODO rmc14, someone please port Phosphorus greandes. I have naught the ability to add those.
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledParaCO
+  suffix: Survivor, Paramarine, Filled, CO
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMClipboard #notepad
+        - id: CMPenFountain 
+          
