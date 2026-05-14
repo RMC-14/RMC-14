@@ -1004,6 +1004,20 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi # TODO cool sprite
   - type: CMHardArmor
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - RMCMagazineShotgun
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
     walkModifier: 0.897
     sprintModifier: 0.897
 
