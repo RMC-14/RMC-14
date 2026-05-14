@@ -19,7 +19,7 @@ public sealed partial class Trichogenic : RMCChemicalEffect
     {
         return $"Causes random and excessive hair growth.\n" +
                $"Overdoses cause [color=red]{PotencyPerSecond}[/color] brute damage with a {PotencyPerSecond * 2.5:F2}% chance.";//\n" +
-               //$"Critical overdoses cause [color=red]{PotencyPerSecond}[/color] brain damage.";
+               //$"Critical overdoses cause [color=red]{PotencyPerSecond}[/color] brain damage";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

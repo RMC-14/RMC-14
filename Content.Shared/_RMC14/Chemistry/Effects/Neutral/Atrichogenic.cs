@@ -17,7 +17,7 @@ public sealed partial class Atrichogenic : RMCChemicalEffect
     {
         return $"Causes extreme alopecia, also referred to as baldness.\n" +
                $"Overdoses cause [color=red]{0.5 * PotencyPerSecond}[/color] genetic damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond}[/color] genetic damage.";
+               $"Critical overdoses cause [color=red]{PotencyPerSecond}[/color] genetic damage";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
