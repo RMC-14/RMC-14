@@ -1,0 +1,90 @@
+- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  id: RMCWeaponShotgunSKG12
+  name: SKG-12 pump shotgun
+  description: A six-round compact pump action shotgun. Though the design was originally created to address the lack of cheap self-defense weapons available to the civilian 3D printing market, the parts have all undergone multiple tweaks, and the company which created it has long since gone under. The SKG-12 is most often used by various mercenary groups on the fringes of the galaxy in various configurations.
+  components:
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 0.625
+    burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    proto: CMShellShotgunBuckshot
+    whitelist:
+      tags:
+      - RMCShellShotgunBuckshot
+      - RMCShellShotgunSlugs
+      - RMCShellShotgunFlechette
+      - RMCShellShotgunIncendiaryBuckshot
+      - RMCShellShotgunIncendiary
+      - RMCShellShotgunBeanbag
+    capacity: 6
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.5
+  - type: GunDamageModifier
+    multiplier: 1.1 # Less capacity than HG, more damage
+  - type: PumpAction
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/skg12.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/skg12.rsi
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_skg12.ogg
+      params:
+        pitch: 0.9
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+        random:
+        - RMCAttachmentS5RedDotSight
+        - RMCAttachmentS6ReflexSight
+        - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+        random:
+        - RMCAttachmentFlashlightGrip
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentSKG12Stock
+        whitelist:
+          tags:
+          - RMCAttachmentSKG12Stock
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.78, .02
+      rmc-aslot-rail: 0.155, 0.09
+      rmc-aslot-stock: 0, 0
+      rmc-aslot-underbarrel: 0.32, -0.31
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunSKG12
+    - RMCWeaponShotgun
+
+- type: Tag
+  id: RMCWeaponShotgunSKG12

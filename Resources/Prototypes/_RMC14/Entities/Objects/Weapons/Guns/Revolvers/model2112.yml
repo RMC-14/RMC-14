@@ -1,0 +1,31 @@
+- type: entity
+  parent: RMCWeaponRevolverM44
+  id: RMCWeaponRevolverModel2112
+  name: AEGIS Model 2112 revolver
+  description: A rather small, but formidable .44 Magnum revolver produced by AEGIS Armaments. This one has a stainless steel frame.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m2112.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m2112.rsi
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_model.ogg
+      params:
+        volume: 3
+  - type: RMCAirShot # shorter doafter but less shake than mateba
+    preparationTime: 1
+    requiresCombat: true
+    doAfterBreakOnMove: false
+    ignoreRoof: true
+    shakeAmount: 2
+    requiredSkills:
+      RMCSkillLeadership: 3
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m2112
+  - type: RMCWeaponAccuracy # better RoF and damage than mateba but has terrible accuracy
+    accuracyMultiplier: 0.8
+  - type: RMCSelectiveFire
+    baseFireRate: 0.9
+  - type: GunDamageModifier
+    multiplier: 1.2

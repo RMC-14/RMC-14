@@ -1,0 +1,82 @@
+- type: job
+  parent: RMCSurvivorSunRidersBase
+  id: RMCSurvivorSunRidersSectionSergeant
+  name: rmc-job-name-sr-section-sergeant
+  icon: "CMJobIconSquadLeader"
+  spawnMenuRoleName: Sun Riders Section Sergeant (Survivor)
+  ranks:
+    RMCRankStaffSergeant: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSunRidersSectionSergeant
+    - type: MarineOrders
+    - type: SquadLeader
+    - type: RMCPointing
+    - type: InnateCommandSpeech
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: leader
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSunRidersPVP
+    - type: EquipSurvivorPreset
+      preset: RMCEntityPresetSunRiderSectionSergeant
+    - type: RMCTrackable
+    - type: RMCAwardRecommendation
+  startingGear: RMCGearSunRidersSectionSergeant
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSunRidersSectionSergeant
+  equipment:
+    jumpsuit: RMCJumpsuitSurvivorMarineDropPouchAlt
+    eyes: RMCWeldingGoggles
+    back: RMCBackpackRTOFilledSurvivor
+    shoes: CMBootsBlackFilled
+    outerClothing: CMArmorB12Damaged
+    id: CMIDCardStandardDogtag
+    ears: RMCHeadsetSunRidersPVP
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCFlashlight
+    gloves: CMHandsBrown
+    belt: CMBeltUtilityFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSunRidersSectionSergeant
+  name: sun riders section sergeant spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSunRidersSectionSergeant
+  - type: Sprite
+    state: marine_spawn
+
+- type: entity
+  id: RMCEntityPresetSunRiderSectionSergeantNoPrimary
+  name: sun riders section sergeant no primary survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ RMCHeadDurag ]
+    - [ CMHeadCapOfficer ]
+    - [ RMCHeadBeanie ]
+    - [ CMHeadBandTan ]
+
+- type: entity
+  parent: RMCEntityPresetSunRiderSectionSergeantNoPrimary
+  id: RMCEntityPresetSunRiderSectionSergeant
+  name: sun riders section sergeant survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons:
+    - [ RMCWeaponRifleM54CFilled, CMMagazineRifleM54C, CMMagazineRifleM54C ]
+    - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
+    primaryWeaponChance: 1

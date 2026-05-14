@@ -499,6 +499,17 @@
     - id: RMCWeaponSMGM63ExtendedFilled
 
 - type: entity
+  parent: RMCBeltHolsterSMGPouch
+  id: RMCHolsterSMGPouchFilledExtendedAlt
+  suffix: Filled, Extended Mag, Alt
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGM63Ext
+      amount: 1
+    - id: RMCWeaponSMGM63ExtendedFilled
+
+- type: entity
   parent: RMCMatebaBeltLuxurious
   id: RMCMatebaBeltLuxuriousFilled
   suffix: Filled
@@ -630,6 +641,17 @@
     - id: RMCWeaponRevolverM44
 
 - type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCM2112BeltFilled
+  suffix: Filled, Model 2112
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderM44
+      amount: 6
+    - id: RMCWeaponRevolverModel2112
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCT73BeltFilled
   suffix: Filled
@@ -719,6 +741,28 @@
     contents:
     - id: RMCMagazineRifleType71
       amount: 5
+
+- type: entity
+  parent: RMCBeltHolsterM13
+  id: RMCBeltHolsterM13FilledSurvivor
+  suffix: Filled, Survivor, Sun Riders
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolM13
+    - id: RMCMagazinePistolM13
+      amount: 2
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCM4SPRBeltFilledSunRidersSurvivor
+  suffix: Filled, Sun Riders, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM4SPR
+      amount: 2
+    - id: CMMagazineRifleM4SPRExt
 
 - type: entity
   parent: CMBeltMarine

@@ -526,3 +526,19 @@
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefRed]
   id: RMCMaskNeckerchiefRedDown
   name: neckerchief
+
+- type: entity
+  parent: RMCBaseScarfMask
+  id: RMCMaskNeckerchiefSunRiders
+  name: neckerchief
+  description: A simple cloth worn around the neck, adjustable between a loose fit or a more tightly secured style.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/sunrider.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/sunrider.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskNeckerchiefSunRiders]
+  id: RMCMaskNeckerchiefSunRidersDown
+  name: neckerchief

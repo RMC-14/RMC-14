@@ -37,6 +37,24 @@
       urban: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/urban.rsi
 
 - type: entity
+  parent: RMCBoonieTan
+  id: RMCBoonieTanGasmaskBlack
+  suffix: Tan, Gasmask Black
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbGasmask
+
+- type: entity
+  parent: RMCBoonieTan
+  id: RMCBoonieTanGasmaskTan
+  suffix: Tan, Gasmask Tan
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbGasmaskDesert
+
+- type: entity
   parent: RMCBoonie
   id: RMCBoonieFisherman
   name: fisherman's boonie hat

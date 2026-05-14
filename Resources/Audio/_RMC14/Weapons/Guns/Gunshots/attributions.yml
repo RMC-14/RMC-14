@@ -327,3 +327,8 @@
   license: "CC0-1.0"
   copyright: "Created by nioczkus (freesound), modified by kleinerstation13 (Github)"
   source: "https://freesound.org/people/nioczkus/sounds/346537/"
+
+- files: ["gun_skg12.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken and modified from Pixabay by kleinerstation13 (Github), Pixabay usage terms at https://pixabay.com/service/terms/"
+  source: "https://pixabay.com/sound-effects/film-special-effects-saiga-12-sound-effect-303483/"

@@ -255,7 +255,7 @@ rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 
-# Sorokyne SOF insert survs 
+# Sorokyne SOF insert survs
 
 rmc-job-greeting-soro-sof = You are a member of an SPP SOF QRF team! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons. You are part of an SOF QRF team of the Socialist Progressive Peoples, deployed alongside the Ministry of Space Colonization to build garrisons on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
 
@@ -388,6 +388,52 @@ rmc-job-name-survivor-kutjevo-goon = Kutjevo Security
 rmc-job-name-survivor-kutjevo-researcher = Kutjevo Researcher
 
 rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
+
+# Kutjevo Sun Riders Survs
+
+rmc-job-greeting-sr = You are a marine hailing from Sun Riders platoon of the UNS Endeavour, stuck on the planet after your team was wiped out while fighting a large CLF cell embedded inside the colony. The Endeavour has mysteriously ceased communications with your Section Sergeant, and with the majority of your unit succumbing to a militia ambush inside the caves before the xenonids even attacked, you retreated to Evac Point Sierra and have spent your days using your skill, wits, and remaining supplies to stem the tide of the outbreak. However, after losing the last few remaining civilians and the rest of the planet's security team to the xenonid horde, only the battered remnants remain...
+
+  One of you brings up a [bold]secondary evac site at the Hydroelectric Dam.[/bold] Is it possible there are still supplies or a fueled ship left there? You must look if you hope to survive.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-sr-spec = You are a marine hailing from Sun Riders platoon of the UNS Endeavour, stuck on the planet after your team was wiped out while fighting a large CLF cell embedded inside the colony. The Endeavour has mysteriously ceased communications with your Section Sergeant, and with the majority of your unit succumbing to a militia ambush inside the caves before the xenonids even attacked, you retreated to Evac Point Sierra and have spent your days using your skill, wits, and remaining supplies to stem the tide of the outbreak. However, after losing the last few remaining civilians and the rest of the planet's security team to the xenonid horde, only the battered remnants remain...
+
+  One of you brings up a [bold]secondary evac site at the Hydroelectric Dam.[/bold] Is it possible there are still supplies or a fueled ship left there? You must look if you hope to survive.
+
+  You remember ditching your thermal cloak to escape an oncoming horde at a small holdout east of the bioplant, inside the cave system. It would be risky to check, but it's likely still there.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-sr-pilot = You are a Dropship Pilot hailing from Sun Riders platoon from the UNS Endeavour. Mid-transit, you receive a distress call on your ship's console. Expecting a regular transmission, you are instead informed the local battalion has been largely wiped out, and that there remains only one combat effective unit on the colony. In a rush, you set course to rescue them. However, during atmospheric entry, your left engine was rendered inoperable by automated anti-air emplacements, and you only managed to survive via a last minute ejection.
+
+  With your chances looking slim, and your supplies minimal, your radio suddenly chimes with a message:
+
+  The squad you were hoping to rescue is still alive, at the auxiliary landing pad west of the Medical Bay. You pull out your compass; you must head east if you hope to survive.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-sr = Sun Riders Survivor
+rmc-job-description-sr = You are a stranded marine from the Sun Riders platoon. Your ship, the UNS Endeavour, has mysteriously disappeared and you are stranded on the planet. Do what it takes to survive!
+
+rmc-job-name-sr-designated-marksman = Designated Marksman
+rmc-job-name-sr-section-sergeant = Section Sergeant
+rmc-job-name-sr-squad-specialist = Squad Specialist
+rmc-job-name-sr-platco = Platoon Commander
+rmc-job-name-sr-pilot = Pilot
+
 
 # Solaris Ridge Survs
 

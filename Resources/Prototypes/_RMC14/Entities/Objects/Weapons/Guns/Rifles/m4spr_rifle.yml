@@ -110,6 +110,67 @@
     tags:
     - RMCWeaponRifleM4SPR
 
+# Sun Riders insert variant
+- type: entity
+  parent: WeaponRifleM4SPR
+  id: WeaponRifleM4SPRDM
+  suffix: Sun Riders, Survivor
+  description: The M4SPR battle rifle is a designated marksman rifle in service with the Marine Corps. This specific rifle has been slightly tweaked to fit the needs of the Sun Riders.
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        locked: true
+        startingAttachable: RMCAttachmentExtendedBarrel
+      rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentVerticalGrip
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleM4SPRWP
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM4SPR
+          - CMMagazineRifleM4SPRAP
+          - CMMagazineRifleM4SPRExt
+          - RMCMagazineRifleM4SPRWP
+          - RMCMagazineRifleM4SPRIncendiary
+          - RMCMagazineRifleM4SPRHEAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4sprdm/desert.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: d_m4spr_barrel
+      offset: 0.65, 0
+      map: [ "barrel" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4sprdm/desert.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m4sprdm/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m4sprdm/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m4sprdm/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m4sprdm/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m4sprdm/urban.rsi
+    layers:
+      barrel:
+        Jungle: m4spr_barrel
+        Desert: d_m4spr_barrel
+        Snow: s_m4spr_barrel
+        Classic: c_m4spr_barrel
+        Urban: u_m4spr_barrel
+
 - type: entity
   parent: WeaponRifleM4SPR
   name: M5SPR battle rifle

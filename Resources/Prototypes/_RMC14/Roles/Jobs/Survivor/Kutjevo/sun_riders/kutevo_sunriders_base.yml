@@ -1,0 +1,90 @@
+- type: job
+  parent: RMCSurvivorMilitary
+  id: RMCSurvivorSunRidersBase
+  name: rmc-job-name-sr
+  description: rmc-job-description-sr
+  ranks:
+    RMCRankPrivateFirstClass: []
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - Colonist
+  joinNotifyCrew: false
+  startingGear: RMCGearSunRidersBase
+  hasIcon: true
+  greeting: rmc-job-greeting-sr
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Sun Riders Survivor (Base)
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSunRidersBase
+  equipment:
+    jumpsuit: RMCJumpsuitSurvivorMarineDropPouchAlt
+    back: RMCSatchelMarineForeconSurvivorFill
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCOuterClothingExternalWebbingForeconSurvivorFill
+    id: CMIDCardStandardDogtag
+    gloves: CMHandsBrown
+    ears: RMCHeadsetSunRidersPVP
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCFlashlight
+
+- type: entity
+  id: RMCEntityPresetSunRidersNoPrimary
+  name: sun riders no primary survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ ArmorHelmetM10Gasmask, RMCMaskTornScarfDesert ]
+    - [ ArmorHelmetM10GasmaskTan, RMCMaskTornScarfDesert ]
+    - [ ArmorHelmetM10Gasmask, RMCMaskScarfTan ]
+    - [ ArmorHelmetM10GasmaskTan, RMCMaskScarfTan ]
+    - [ RMCBoonieTanGasmaskBlack, RMCMaskTornScarfDesert ]
+    - [ RMCBoonieTanGasmaskTan, RMCMaskTornScarfDesert ]
+    - [ RMCBoonieTanGasmaskBlack, RMCMaskScarfTan ]
+    - [ RMCBoonieTanGasmaskTan, RMCMaskScarfTan ]
+    - [ ArmorHelmetM10Gasmask, RMCMaskNeckerchiefSunRiders ]
+    - [ RMCBoonieTanGasmaskBlack, RMCMaskNeckerchiefSunRiders ]
+    - [ RMCBoonieTanGasmaskTan, RMCMaskNeckerchiefSunRiders ]
+    - [ CMMaskGas, RMCMaskNeckerchiefSunRiders ]
+    - [ ArmorHelmetM10, RMCMaskNeckerchiefSunRiders ]
+    - [ ArmorHelmetM10Headband, RMCMaskScarfTan ]
+    - [ ArmorHelmetM10Headband, RMCMaskTornScarfDesert ]
+    - [ ArmorHelmetM10Headband, RMCMaskNeckerchiefSunRiders ]
+    - [ CMMaskGas, RMCMaskScarfTan ]
+    - [ CMMaskGas, RMCMaskTornScarfDesert ]
+    - [ ArmorHelmetM10, RMCMaskTornScarfDesert ]
+    - [ ArmorHelmetM10, RMCMaskScarfTan ]
+    - [ ArmorHelmetM10 ]
+    - [ CMMaskGas ]
+    - [ ArmorHelmetM10Headband ]
+    - [ RMCBoonieTanGasmaskBlack ]
+    - [ RMCBoonieTanGasmaskTan ]
+    - [ RMCMaskScarfTan ]
+    - [ RMCMaskTornScarfDesert ]
+    - [ RMCMaskNeckerchiefSunRiders ]
+    randomGearOther: # 1/4 chance for no flares
+    -
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
+    randomWeapon:
+    - [ RMCM1911BeltFilledForecon ]
+    - [ RMCM1911BeltFilledForecon ]
+    - [ RMCM1911BeltFilledForecon ]
+    - [ RMCMotionDetector ]
+    tryEquipRandomWeapon: true
+
+- type: entity
+  parent: RMCEntityPresetSunRidersNoPrimary
+  id: RMCEntityPresetSunRiders
+  name: sun riders survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons:
+    - [ RMCWeaponRifleM54CFilled, CMMagazineRifleM54C, CMMagazineRifleM54C ]
+    - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
+    primaryWeaponChance: 1

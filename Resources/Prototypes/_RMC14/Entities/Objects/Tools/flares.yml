@@ -903,6 +903,149 @@
         - RMCPackFlareC18
     startingItem: RMCPackFlareC18
 
+- type: entity
+  name: flare
+  parent: BaseItem
+  id: RMCFlareM94BP
+  description: A rarely-issued Marine flare created with an experimental mix of pyrotechnic chemicals, allowing the flare to burn for longer. There are instructions on the side, it reads 'pull cord, make light'.
+  components:
+  - type: Tag
+    tags:
+    - RMCFlareM94BP
+  - type: ExpendableLight
+    spentName: expendable-light-spent-flare-name
+    spentDesc: expendable-light-spent-flare-desc
+    glowDuration: 800
+    fadeOutDuration: 30
+    iconStateSpent: flare_spent
+    turnOnBehaviourID: turn_on
+    fadeOutBehaviourID: fade_out
+    litSound:
+      path: /Audio/_RMC14/Machines/flare_activate_2.ogg
+      params:
+        variation: 0.08
+    loopedSound: /Audio/Items/Flare/flare_burn.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+      state: flare
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      state: flare_flame
+      color: "#56a8c2"
+      visible: false
+    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+      state: overlay
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    state: icon
+  - type: Item
+    size: Small
+    heldPrefix: unlit
+  - type: Appearance
+  - type: PointLight
+    enabled: false
+    color: "#56a8c2"
+    radius: 1
+    energy: 5.0
+    netsync: false
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: turn_on
+      maxDuration: 5.0
+      startValue: 2.5
+      endValue: 7.0
+    - !type:FadeBehaviour
+      id: fade_out
+      maxDuration: 570
+      startValue: 7.0
+      endValue: 1.0
+  - type: RMCNightVisionVisibleOnIgnite
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCFlareM94BP
+  - type: RMCAirProjectile
+    prototype: RMCAirFlareM94BP
+
+- type: entity
+  parent: RMCFlareBullet
+  id: RMCFlareM94BPBullet
+  name: M94-BP flare projectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/airburst_projectiles.rsi
+    layers:
+    - state: flare
+  - type: ScatteringGrenade
+    fillPrototype: RMCFlareM94BP
+  - type: PointLight
+    enabled: true
+    color: "#56a8c2"
+    radius: 2.0
+    energy: 7.0
+
+- type: entity
+  id: RMCAirFlareM94BP
+  name: air flare
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ExpendableLight
+    startsActivated: true
+    glowDuration: 150
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/air_flare.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      state: air_flame
+      color: "#56a8c2"
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: turn_on
+      maxDuration: 5.0
+      startValue: 2.5
+      endValue: 7.0
+    - !type:FadeBehaviour
+      id: fade_out
+      maxDuration: 30
+      startValue: 7.0
+      endValue: 1.0
+  - type: PointLight
+    enabled: true
+    color: "#56a8c2"
+
+- type: entity
+  parent: CMPackFlareBase
+  id: RMCPackFlareM94BP
+  name: M94-BP marking flare pack
+  description: A packet of eight M94 Blue Phosphorous Signal Marking Flares, a special variant of the regular M94 flare which burns for longer. Carried by Marine soldiers to light dark areas that cannot be reached with the usual TNR Shoulder Lamp.
+  suffix: Filled
+  components:
+  - type: Tag
+    tags:
+    - RMCPackFlareM94BP
+  - type: Sprite
+    layers:
+    - state: m94_e
+      map: [ "emptyLayer" ]
+    - state: m94bp
+      map: [ "fullLayer" ]
+  - type: CMItemSlots
+    count: 8
+    startingItem: RMCFlareM94BP
+    slot:
+      whitelist:
+        tags:
+        - RMCFlareM94BP
+
+- type: Tag
+  id: RMCFlareM94BP
+
+- type: Tag
+  id: RMCPackFlareM94BP
+
 - type: Tag
   id: RMCFlare
 

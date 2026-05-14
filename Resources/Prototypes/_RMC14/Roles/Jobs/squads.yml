@@ -481,3 +481,29 @@
 
 - type: Tag
   id: RMCSquadSunRiders
+
+# PVP version of sun riders; for kutjevo insert
+- type: entity
+  parent: SquadBase
+  id: SquadSunRidersPVP
+  name: Sun Riders
+  components:
+  - type: SquadTeam
+    color: "#79fff8"
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: Colony
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_solardevils
+    canSupplyDrop: false
+    group: SunRiders
+  - type: Tag
+    tags:
+    - RMCSquadSunRidersPVP
+
+- type: Tag
+  id: RMCSquadSunRidersPVP

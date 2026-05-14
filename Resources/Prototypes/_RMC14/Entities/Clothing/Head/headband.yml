@@ -209,6 +209,23 @@
       sprite: _RMC14/Objects/Clothing/Head/Hats/headband/foxtrot.rsi
       state: hat
 
+- type: entity
+  parent: CMHeadBandAlpha
+  id: CMHeadBandSunRiders
+  name: sun riders headband
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/sunriders.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/sunriders.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/headband/sunriders.rsi
+      state: helmet
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/headband/sunriders.rsi
+      state: hat
+
 # Role specific
 - type: entity
   parent: CMHeadBandRed

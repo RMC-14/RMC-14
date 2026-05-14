@@ -1,0 +1,53 @@
+- type: job
+  parent: RMCSurvivorSunRidersBase
+  id: RMCSurvivorSunRidersRifleman
+  name: cm-job-name-rifleman
+  icon: "RMCJobIconSunRidersRifleman"
+  spawnMenuRoleName: Sun Riders Rifleman (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSunRidersRifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: private
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSunRidersPVP
+    - type: JobPrefix
+      prefix: cm-job-prefix-rifleman
+    - type: EquipSurvivorPreset
+      preset: RMCEntityPresetSunRidersRifleman
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSunRidersRifleman
+  name: sun riders rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSunRidersRifleman
+  - type: Sprite
+    state: marine_spawn
+
+- type: entity
+  parent: RMCEntityPresetSunRidersNoPrimary
+  id: RMCEntityPresetSunRidersRifleman
+  name: sun riders rifleman survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons:
+    - [ RMCWeaponShotgunSKG12, CMShellShotgunBuckshot, CMShellShotgunBuckshot ]
+    primaryWeaponChance: 1
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSunRidersRifleman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_rifleman

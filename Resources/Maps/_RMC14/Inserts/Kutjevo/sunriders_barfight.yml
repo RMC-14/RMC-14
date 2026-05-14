@@ -1,0 +1,954 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 264.0.2
+  forkId: ""
+  forkVersion: ""
+  time: 02/28/2026 22:05:58
+  entityCount: 141
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  5: RMCFloorKutjevoFloor3
+  4: RMCFloorKutjevoPurple1
+  10: RMCFloorKutjevoPurple3_0
+  19: RMCFloorKutjevoPurple3_1
+  14: RMCFloorKutjevoPurple3_2
+  12: RMCFloorKutjevoPurple3_3
+  17: RMCFloorKutjevoPurple3_6
+  18: RMCFloorKutjevoPurple4_0
+  16: RMCFloorKutjevoPurple4_1
+  11: RMCFloorKutjevoPurple4_3
+  15: RMCFloorKutjevoScorched2
+  13: RMCFloorKutjevoTan1
+  6: RMCFloorPlatingKutjevo
+  7: RMCFloorPlatingKutjevoDamaged1
+  9: RMCFloorPlatingKutjevoDamaged3
+  8: RMCFloorPlatingKutjevoScorched
+  2: RMCPlanetSand0
+  1: RMCPlanetSand1
+  3: RMCPlanetSand1Rock
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: AQAAAAAAAAIAAAAAAAABAAAAAAAAAQAAAAAAAAIAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAQAAAAAAAAFAAAAAAAABQAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAAAcAAAAAAAAIAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAJAAAAAAAABgAAAAAAAAoAAAAAAAAKAAAAAAAACgAAAAAAAAoAAAAAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAADQAAAAAAAA0AAAAAAAANAAAAAAAADQAAAAAAAA0AAAAAAAANAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAA0AAAAAAAAEAAAAAAAADQAAAAAAAA0AAAAAAAAEAAAAAAAADQAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAANAAAAAAAABAAAAAAAAA0AAAAAAAANAAAAAAAABAAAAAAAAA0AAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAADQAAAAAAAAQAAAAAAAANAAAAAAAADQAAAAAAAAkAAAAAAAAGAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAA0AAAAAAAAEAAAAAAAADQAAAAAAAA0AAAAAAAAJAAAAAAAADwAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAANAAAAAAAADQAAAAAAAA0AAAAAAAANAAAAAAAAEQAAAAAAABAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAEwAAAAAAABMAAAAAAAATAAAAAAAAEwAAAAAAABAAAAAAAAAGAAAAAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes: []
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: ImplicitRoof
+- proto: CMAirlockMaintLockedColony
+  entities:
+  - uid: 17
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,3.5
+      parent: 1
+- proto: CMBarricadeMetal
+  entities:
+  - uid: 77
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,11.5
+      parent: 1
+  - uid: 78
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,11.5
+      parent: 1
+  - uid: 79
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,11.5
+      parent: 1
+  - uid: 105
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,5.5
+      parent: 1
+  - uid: 106
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 121
+    components:
+    - type: Transform
+      pos: 4.5,4.5
+      parent: 1
+  - uid: 122
+    components:
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+  - uid: 123
+    components:
+    - type: Transform
+      pos: 6.5,4.5
+      parent: 1
+  - uid: 124
+    components:
+    - type: Transform
+      pos: 7.5,4.5
+      parent: 1
+- proto: CMBarricadeMetalDoor
+  entities:
+  - uid: 76
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,11.5
+      parent: 1
+- proto: CMChair
+  entities:
+  - uid: 74
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,8.5
+      parent: 1
+  - uid: 80
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,6.5
+      parent: 1
+- proto: CMChairFolded
+  entities:
+  - uid: 72
+    components:
+    - type: Transform
+      pos: 4.5,7.5
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 1.5,10.5
+      parent: 1
+- proto: CMDefibrillator
+  entities:
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 7.362465,1.3751171
+      parent: 1
+- proto: CMGirder
+  entities:
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 1
+- proto: CMGrenadeHighExplosive
+  entities:
+  - uid: 29
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.3904314,2.0630953
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.734519,8.85285
+      parent: 1
+- proto: CMMachineFrame
+  entities:
+  - uid: 75
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,11.5
+      parent: 1
+- proto: CMRodMetal1
+  entities:
+  - uid: 107
+    components:
+    - type: Transform
+      pos: 1.368959,4.5884104
+      parent: 1
+  - uid: 108
+    components:
+    - type: Transform
+      pos: 1.4418755,6.610648
+      parent: 1
+  - uid: 111
+    components:
+    - type: Transform
+      pos: 2.0981255,2.7471213
+      parent: 1
+- proto: CMRollerBed
+  entities:
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 6.275158,1.4532955
+      parent: 1
+- proto: CMSandbagFull25
+  entities:
+  - uid: 112
+    components:
+    - type: Transform
+      pos: 6.5356264,2.434404
+      parent: 1
+- proto: CMShardGlass
+  entities:
+  - uid: 25
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.4320979,3.1263335
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.9112647,3.6579528
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.4633479,2.177758
+      parent: 1
+- proto: CMSheetMetal1
+  entities:
+  - uid: 109
+    components:
+    - type: Transform
+      pos: 1.3793755,3.3792372
+      parent: 1
+  - uid: 110
+    components:
+    - type: Transform
+      pos: 2.0981255,4.463324
+      parent: 1
+- proto: CMTableAlmayer
+  entities:
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 1
+  - uid: 56
+    components:
+    - type: Transform
+      pos: 2.5,7.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 2.5,8.5
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      pos: 2.5,9.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 5.5,6.5
+      parent: 1
+- proto: CMVendorSnack
+  entities:
+  - uid: 103
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+- proto: DecalSpawnerBloodSplatters
+  entities:
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 1.5,2.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 3.5,10.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 5.5,1.5
+      parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 4.5,2.5
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 1.5,10.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 0.5,9.5
+      parent: 1
+- proto: RMCBasePropCasing10
+  entities:
+  - uid: 36
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5812144,1.594019
+      parent: 1
+- proto: RMCBasePropCasing11
+  entities:
+  - uid: 37
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5499644,1.1770631
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.8624644,0.62459576
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.6124644,1.7712257
+      parent: 1
+  - uid: 128
+    components:
+    - type: Transform
+      pos: 3.608114,5.8921485
+      parent: 1
+  - uid: 129
+    components:
+    - type: Transform
+      pos: 2.1497808,7.393192
+      parent: 1
+  - uid: 130
+    components:
+    - type: Transform
+      pos: 4.3372808,8.331343
+      parent: 1
+  - uid: 131
+    components:
+    - type: Transform
+      pos: 6.431031,6.6322465
+      parent: 1
+  - uid: 132
+    components:
+    - type: Transform
+      pos: 1.1289473,8.362616
+      parent: 1
+- proto: RMCBasePropCasing4
+  entities:
+  - uid: 127
+    components:
+    - type: Transform
+      pos: 2.5872808,5.5064645
+      parent: 1
+- proto: RMCBasePropCasing7
+  entities:
+  - uid: 35
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.7062144,2.4487796
+      parent: 1
+- proto: RMCCrateAmmo
+  entities:
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 3.5,8.5
+      parent: 1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.4,-0.4
+            - 0.4,-0.4
+            - 0.4,0.29
+            - -0.4,0.29
+          mask:
+          - Impassable
+          - HighImpassable
+          - LowImpassable
+          layer:
+          - Opaque
+          density: 50
+          hard: True
+          restitution: 0
+          friction: 0.4
+    - type: EntityStorage
+      open: True
+      removedMasks: 20
+    - type: PlaceableSurface
+      isPlaceable: True
+- proto: RMCDecalSpawnerAcidBloodSplash
+  entities:
+  - uid: 139
+    components:
+    - type: Transform
+      pos: 6.5,5.5
+      parent: 1
+  - uid: 140
+    components:
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+  - uid: 141
+    components:
+    - type: Transform
+      pos: 7.5,7.5
+      parent: 1
+- proto: RMCDecalSpawnerBloodSplatters
+  entities:
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 6.5,8.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 5.5,7.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 6.5,7.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      pos: 4.5,11.5
+      parent: 1
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 5.5,10.5
+      parent: 1
+  - uid: 83
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 6.5,0.5
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 0.5,10.5
+      parent: 1
+  - uid: 137
+    components:
+    - type: Transform
+      pos: 2.5,5.5
+      parent: 1
+  - uid: 138
+    components:
+    - type: Transform
+      pos: 4.5,6.5
+      parent: 1
+- proto: RMCDecalSpawnerXenoSplatters
+  entities:
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 2.5,11.5
+      parent: 1
+  - uid: 98
+    components:
+    - type: Transform
+      pos: 1.5,11.5
+      parent: 1
+  - uid: 99
+    components:
+    - type: Transform
+      pos: 0.5,11.5
+      parent: 1
+  - uid: 100
+    components:
+    - type: Transform
+      pos: 0.5,8.5
+      parent: 1
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 4.5,10.5
+      parent: 1
+  - uid: 102
+    components:
+    - type: Transform
+      pos: 6.5,10.5
+      parent: 1
+- proto: RMCFlashlight
+  entities:
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 7.066825,0.5047201
+      parent: 1
+- proto: RMCFloodlightBroken
+  entities:
+  - uid: 15
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,2.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 7.5,2.5
+      parent: 1
+- proto: RMCMagazineRifleM54CHEAPEmpty
+  entities:
+  - uid: 113
+    components:
+    - type: Transform
+      pos: 1.8533006,7.5560374
+      parent: 1
+  - uid: 114
+    components:
+    - type: Transform
+      pos: 4.853301,9.286406
+      parent: 1
+  - uid: 115
+    components:
+    - type: Transform
+      pos: 6.697051,6.492799
+      parent: 1
+  - uid: 116
+    components:
+    - type: Transform
+      pos: 7.4678845,8.400373
+      parent: 1
+  - uid: 117
+    components:
+    - type: Transform
+      pos: 2.4158006,10.318373
+      parent: 1
+  - uid: 118
+    components:
+    - type: Transform
+      pos: 4.207467,9.599123
+      parent: 1
+  - uid: 119
+    components:
+    - type: Transform
+      pos: 5.915801,10.182862
+      parent: 1
+  - uid: 120
+    components:
+    - type: Transform
+      pos: 0.6345506,6.951451
+      parent: 1
+  - uid: 125
+    components:
+    - type: Transform
+      pos: 2.3685308,4.9852686
+      parent: 1
+  - uid: 126
+    components:
+    - type: Transform
+      pos: 1.7539473,5.73579
+      parent: 1
+- proto: RMCParasiteProp
+  entities:
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 3.0449853,10.92764
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 0.8366518,9.311934
+      parent: 1
+  - uid: 135
+    components:
+    - type: Transform
+      pos: 4.7682614,9.816892
+      parent: 1
+  - uid: 136
+    components:
+    - type: Transform
+      pos: 2.705761,7.023285
+      parent: 1
+- proto: RMCPlatformKutjevo
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,2.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,2.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,1.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,2.5
+      parent: 1
+  - uid: 133
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,6.5
+      parent: 1
+  - uid: 134
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,7.5
+      parent: 1
+- proto: RMCPlatformKutjevoBroken
+  entities:
+  - uid: 6
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,1.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 11
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 6.5,1.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 12
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 7.5,1.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 20
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,2.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCPlatformKutjevoCornerSmall
+  entities:
+  - uid: 8
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,1.5
+      parent: 1
+- proto: RMCSecureCaseAmmoMini
+  entities:
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 3.3497353,6.837732
+      parent: 1
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 3.610152,7.348503
+      parent: 1
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 3.2455688,7.682068
+      parent: 1
+- proto: RMCSpawnerCorpseCLFNoArmor
+  entities:
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      pos: 6.5,0.5
+      parent: 1
+- proto: RMCSpawnerCorpseSunRidersRifleman
+  entities:
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 6.5,8.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      pos: 4.5,11.5
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      pos: 0.5,10.5
+      parent: 1
+- proto: RMCSpawnerIntelMedium
+  entities:
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+- proto: RMCStairsKutjevoLeft
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 1
+- proto: RMCStairsKutjevoRight
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 4.5,2.5
+      parent: 1
+- proto: RMCTallFloodlight
+  entities:
+  - uid: 13
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.5,2.5
+      parent: 1
+- proto: RMCVendorCoffeeSimple
+  entities:
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 1
+- proto: RMCWallKutjevoReinforced
+  entities:
+  - uid: 22
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 6.5,11.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 7.5,11.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 7.5,10.5
+      parent: 1
+- proto: RMCWeaponRevolverSpearhead
+  entities:
+  - uid: 59
+    components:
+    - type: Transform
+      pos: 2.4747353,9.287365
+      parent: 1
+- proto: RMCWeaponRifleM54C
+  entities:
+  - uid: 60
+    components:
+    - type: Transform
+      pos: 5.1029487,8.076599
+      parent: 1
+    - type: RMCWeaponAccuracy
+      modifiedAccuracyMultiplier: 0.5
+    - type: UseDelay
+      delays:
+        RMCWieldDelay:
+          endTime: 8782.871253
+          startTime: 8868.5577981
+          length: 0.4
+- proto: RMCWeaponRifleM54CStripped
+  entities:
+  - uid: 62
+    components:
+    - type: Transform
+      pos: 2.547652,8.38047
+      parent: 1
+- proto: RMCWeaponRifleMAR30
+  entities:
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 0.78003216,2.1001549
+      parent: 1
+- proto: RMCWindowFrameKutjevo
+  entities:
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
+- proto: RMCWindowKutjevoReinforced
+  entities:
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 6.5,3.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 7.5,3.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+- proto: WeaponRifleMAR40
+  entities:
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 3.7175322,2.569231
+      parent: 1
+...

@@ -1,0 +1,60 @@
+- type: job
+  parent: RMCSurvivorSunRidersBase
+  id: RMCSurvivorSunRidersSquadSpecialist
+  name: rmc-job-name-sr-squad-specialist
+  icon: "CMJobIconWeaponsSpecialist"
+  greeting: rmc-job-greeting-sr-spec
+  ranks:
+    RMCRankCorporal: []
+  spawnMenuRoleName: Sun Riders Squad Specialist (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSunRidersSquadSpecialist
+    - type: ScoutWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spec
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSunRidersPVP
+    - type: EquipSurvivorPreset
+      preset: RMCEntityPresetSunRidersSquadSpecialist
+  startingGear: RMCGearSunRidersSquadSpecialist
+  hidden: true
+
+- type: entity
+  parent: RMCEntityPresetSunRidersNoPrimary
+  id: RMCEntityPresetSunRidersSquadSpecialist
+  name: sun riders squad specialist survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons:
+    - [ WeaponRifleM4SPRFilled, CMMagazineRifleM4SPR, CMMagazineRifleM4SPR ]
+    primaryWeaponChance: 1
+    randomGearOther: # 1/4 chance for no flares
+    -
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSunRidersSquadSpecialist
+  name: sun riders squad specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSunRidersSquadSpecialist
+  - type: Sprite
+    state: marine_spawn
+
+- type: startingGear
+  parent: RMCGearSunRidersBase
+  id: RMCGearSunRidersSquadSpecialist
+  equipment:
+    shoes: RMCScoutShoes

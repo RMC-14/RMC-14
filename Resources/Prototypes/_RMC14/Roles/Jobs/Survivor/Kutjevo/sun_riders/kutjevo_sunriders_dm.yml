@@ -1,0 +1,59 @@
+- type: job
+  parent: RMCSurvivorSunRidersBase
+  id: RMCSurvivorSunRidersDM
+  name: rmc-job-name-sr-designated-marksman
+  icon: "RMCJobIconForeconSniper"
+  spawnMenuRoleName: Sun Riders Designated Marksman (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSunRidersDesignatedMarksman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spec_sniper
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSunRidersPVP
+    - type: EquipSurvivorPreset
+      preset: RMCEntityPresetSunRidersDM
+  startingGear: RMCGearSunRidersDM
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSunRidersDM
+  name: sun riders designated marksman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSunRidersDM
+  - type: Sprite
+    state: marine_spawn
+
+- type: startingGear
+  parent: RMCGearSunRidersBase
+  id: RMCGearSunRidersDM
+  equipment:
+    head: CMArmorHelmetM45Damaged
+    belt: RMCM4SPRBeltFilledSunRidersSurvivor
+
+- type: entity
+  id: RMCEntityPresetSunRidersDM
+  name: sun riders designated marksman survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ RMCMaskScarfTan ]
+    - [ RMCMaskTornScarfDesert ]
+    randomGearOther:
+    -
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
+    primaryWeapons:
+    - [ WeaponRifleM4SPRDM ]
+    primaryWeaponChance: 1

@@ -251,7 +251,29 @@
     trackerModes:
     - SquadLeader
     - FORECONCommandingOfficer
-      
+
+# Survivor Sun Riders
+
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetSunRidersPVP
+  name: damaged UNMC Sun Riders headset
+  description: Issued exclusively to members of the UNMC's Sun Riders battalion. This one is damaged and is missing some frequencies.
+  suffix: Survivor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: echo_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+  - type: GrantSquadLeaderTracker
+    defaultMode: SunRidersSectionSergeant
+    trackerModes:
+      - SunRidersSectionSergeant
+      - SunRidersPlatCo
+
 # Paramarine Hybrisa survivor insert
 - type: entity
   parent: RMCHeadsetIconsPara
@@ -289,7 +311,7 @@
       radioTextIncrease: 2
     - type: GrantSquadLeaderTracker
       defaultMode: ParaCommander
-          
+
 - type: entity
   parent: RMCHeadsetPara
   id: RMCHeadsetParaOfficer

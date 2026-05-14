@@ -19,6 +19,33 @@
 
 - type: entity
   parent: ArmorHelmetM10
+  id: ArmorHelmetM10Gasmask
+  suffix: Gasmask Black
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbGasmask
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: ArmorHelmetM10GasmaskTan
+  suffix: Gasmask Tan
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbGasmaskDesert
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: ArmorHelmetM10Headband
+  suffix: Sun Riders, Headband
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHeadBandSunRiders
+
+- type: entity
+  parent: ArmorHelmetM10
   id: CMArmorHelmetM10MP
   name: M10 helmet MP
   description: A special variant of the M10 Pattern Helmet worn by the Military Police of the Marines.
@@ -117,6 +144,15 @@
     visorsToAdd:
     - RMCVisorMedicalAdvancedIntegrated
     - RMCVisorSquadIntegrated
+
+- type: entity
+  parent: CMArmorHelmetM10Medic
+  id: CMArmorHelmetM10MedicHeadband
+  suffix: Sun Riders, Headband
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHeadBandSunRiders
 
 - type: entity
   parent: CMArmorHelmetM10Medic
@@ -311,6 +347,31 @@
     - RMCVisorSquadIntegrated
     - RMCVisorPilotBlack
 
+# M30PSP
+- type: entity
+  parent: [ArmorHelmetM10, RMCMarineHelmetWithLightBase]
+  id: CMArmorHelmetM30PSP
+  name: M30PSP tactical helmet
+  description: The M30PSP (Pilot Survivability Platform) is an advanced version of the M30 helmet currently undergoing field testing by select UNMC pilots. The visor of this helmet seems to have been violently torn off.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m30psp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m30psp.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: CMArmor
+    melee: 20
+    explosionArmor: 15
+#   internalDamage: 15
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m30psp
+  - type: PointLight
+    color: "#f6983b"
+
 # Press
 - type: entity
   parent: ArmorHelmetM10
@@ -453,6 +514,35 @@
   - type: HideLayerClothing
     slots:
     - Snout
+
+# For Sun Riders insert
+- type: entity
+  parent: CMArmorHelmetM45
+  id: CMArmorHelmetM45Damaged
+  name: blood-soaked M45 ghillie helmet
+  suffix: Survivor
+  description: A lightweight M45 helmet with ghillie coif used by Marine snipers on recon missions. This one seems to have been utterly slathered in blood, soaking the bio-resistant mesh and making it useless.
+  components:
+  - type: CMArmor
+    bio: 0
+  - type: Sprite
+    layers:
+    - state: icon
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/m45_damaged.rsi
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Clothing/Head/Helmets/m45_damaged.rsi
+      state: blood_icon
+      color: "#980002"
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        sprite: _RMC14/Objects/Clothing/Head/Helmets/m45_damaged.rsi
+      - sprite: _RMC14/Objects/Clothing/Head/Helmets/m45_damaged.rsi
+        state: blood
+        color: "#980002"
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # M3-T Demo Spec
 - type: entity

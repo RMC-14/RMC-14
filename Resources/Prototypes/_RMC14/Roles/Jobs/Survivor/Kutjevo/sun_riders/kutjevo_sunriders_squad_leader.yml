@@ -1,0 +1,40 @@
+- type: job
+  parent: RMCSurvivorSunRidersBase
+  id: RMCSurvivorSunRidersSquadLeader
+  name: cm-job-name-squad-leader
+  icon: "CMJobIconFireteamLeader"
+  ranks:
+    RMCRankSergeant: []
+  spawnMenuRoleName: Sun Riders Squad Leader (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSunRidersSquadLeader
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: tl
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSunRidersPVP
+    - type: EquipSurvivorPreset
+      preset: RMCEntityPresetSunRiders
+    - type: RMCTrackable
+    - type: RMCAwardRecommendation
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSunRidersSquadLeader
+  name: sun riders squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSunRidersSquadLeader
+  - type: Sprite
+    state: marine_spawn
+

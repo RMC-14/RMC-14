@@ -1,0 +1,63 @@
+- type: job
+  parent: RMCSurvivorSunRidersBase
+  id: RMCSurvivorSunRidersCorpsman
+  name: cm-job-name-hospital-corpsman
+  icon: "CMJobIconHospitalCorpsman"
+  ranks:
+    RMCRankLanceCorporal: []
+  spawnMenuRoleName: Sun Riders Corpsman (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSunRidersCorpsman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: medic
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSunRidersPVP
+    - type: EquipSurvivorPreset
+      preset: RMCEntityPresetSunRidersCorpsman
+  startingGear: RMCGearSunRidersCorpsman
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSunRidersBase
+  id: RMCGearSunRidersCorpsman
+  equipment:
+    back: CMSatchelMarineMedicFilledSurvivor
+    belt: RMCBeltHolsterM13FilledSurvivor
+    jumpsuit: RMCJumpsuitSurvivorMarineDropPouchSunRidersCorpsman
+
+- type: entity
+  id: RMCEntityPresetSunRidersCorpsman
+  name: sun riders corpsman survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ RMCMaskTornScarfDesert, CMArmorHelmetM10MedicHeadband ]
+    - [ RMCMaskTornScarfDesert, CMArmorHelmetM10Medic ]
+    - [ RMCMaskScarfTan, CMArmorHelmetM10Medic ]
+    - [ RMCMaskScarfTan, CMArmorHelmetM10MedicHeadband ]
+    - [ RMCMaskNeckerchiefSunRiders, CMArmorHelmetM10Medic ]
+    - [ RMCMaskNeckerchiefSunRiders, CMArmorHelmetM10MedicHeadband ]
+    randomGearOther:
+    -
+      - [ RMCPackFlareM94BP, CMUpgradedTraumaKit10 ]
+      - [ RMCPackFlareM94BP, CMUpgradedBurnKit10 ]
+      - [ RMCPackFlareM94BP ]
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSunRidersCorpsman
+  name: sun riders corpsman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSunRidersCorpsman
+  - type: Sprite
+    state: marine_spawn

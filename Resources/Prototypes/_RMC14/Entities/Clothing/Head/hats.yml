@@ -74,6 +74,16 @@
 
 - type: entity
   parent: CMHeadBeret
+  id: CMHeadBeretSR
+  name: UNMC Sun Riders beret
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_sr.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_sr.rsi
+
+- type: entity
+  parent: CMHeadBeret
   id: CMHeadBeretCO
   name: CO's beret
   components:

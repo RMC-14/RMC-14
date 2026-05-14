@@ -1129,6 +1129,21 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
+  id: RMCAttachmentSKG12Stock
+  name: SKG12 stock
+  description: The non-detachable stock of a SKG-12 pump shotgun.
+  components:
+  - type: Sprite
+    state: skg12_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentSKG12Stock
+
+- type: entity
+  parent: RMCStockAttachmentBase
   id: RMCAttachmentHuntingStock
   name: Basira-Armstrong stock
   description: The non-detachable stock of a Basira-Armstrong hunting rifle
@@ -1415,3 +1430,6 @@
 
 - type: Tag
   id: RMCAttachmentL49Stock
+
+- type: Tag
+  id: RMCAttachmentSKG12Stock

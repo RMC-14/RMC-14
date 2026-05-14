@@ -1,0 +1,68 @@
+- type: job
+  parent: RMCSurvivorSunRidersBase
+  id: RMCSurvivorSunRidersPlatCo
+  name: rmc-job-name-sr-platco
+  icon: "RMCJobIconPVEPlatoonCommander"
+  playTimeTracker: RMCJobSurvivorCO
+  spawnMenuRoleName: Sun Riders Platoon Commander (Survivor)
+  ranks:
+    RMCRankFirstLT: []
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSunRidersPlatCo
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: InnateCommandSpeech
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: co_wo
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSunRidersPVP
+    - type: EquipSurvivorPreset
+      preset: RMCEntityPresetSunRidersPlatCo
+    - type: RMCTrackable
+    - type: RMCAwardRecommendation
+  startingGear: RMCGearSunRidersPlatCo
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSunRidersPlatCo
+  equipment:
+    jumpsuit: CMJumpsuitBOWebbingPouchSurvivorSunRiders
+    back: RMCSatchelMarineForeconSurvivorFill
+    shoes: CMBootsBlackFilled
+    belt: RMCM2112BeltFilled
+    head: CMHeadBeretSR
+    outerClothing: RMCJacketWindbreakerBrownFilledSurvivor
+    id: CMIDCardStandardDogtag
+    ears: RMCHeadsetSunRidersPVP
+    gloves: CMHandsBrown
+    pocket1: RMCRangefinderBroken
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCFlashlight
+
+- type: entity
+  id: RMCEntityPresetSunRidersPlatCo
+  name: sun riders platoon commander survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomGearOther: # 1/2 chance for no flares
+    -
+      - [ RMCPackFlareM94BP ]
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSunRidersPlatCo
+  name: sun riders platoon commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSunRidersPlatCo
+  - type: Sprite
+    state: marine_spawn

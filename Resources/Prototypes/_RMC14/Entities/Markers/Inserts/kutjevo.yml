@@ -10,7 +10,6 @@
     clearDecals: true
     replaceAreas: true
 
-
 # Sprinkles
 - type: entity
   parent: RMCMapInsertKutjevoBase
@@ -126,3 +125,171 @@
       probability: 0.2
       nightmareScenario: none
       offset: 0,-44
+
+# Sun Riders inserts (These should all spawn together through nightmare scenarios, non parity)
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersLZ
+  name: Sunriders - Auxiliary LZ Holdout
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_lz.yml"
+      probability: 1
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersM890Gone
+  name: Sunriders - M890 Gone
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_m890gone.yml"
+      probability: 1
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersBotanyCheckpoint
+  name: Sunriders - Botany Checkpoint
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_botany_checkpoint.yml"
+      probability: 1
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersBotanyBridge
+  name: Sunriders - Botany Bridge
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_botany_bridge.yml"
+      probability: 1
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersM37Gone
+  name: Sunriders - M37 Gone
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_m37gone.yml"
+      probability: 1
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersSpecHoldout
+  name: Sunriders - Spec Holdout
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_spec_holdout.yml"
+      probability: 1
+      offset: 1,0
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersFlamerGone
+  name: Sunriders - Flamer Gone
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_flamergone.yml"
+      probability: 1
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersDamHoldEast
+  name: Sunriders - Dam Hold East
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_damhold_east.yml"
+      probability: 1
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersDamHoldSouth
+  name: Sunriders - Dam Hold South
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_damhold_south.yml"
+      probability: 1
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersBarFight
+  name: Sunriders - Bar Fight
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_barfight.yml"
+      probability: 1
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoSunridersPilotLanding
+  name: Sunriders - Pilot Landing
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/sunriders_pilot_landing.yml"
+      probability: 1
+      nightmareScenario: sunriders
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false

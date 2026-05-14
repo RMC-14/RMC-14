@@ -453,6 +453,22 @@
     - state: closed
       map: [ "fullLayer" ]
 
+- type: entity
+  parent: RMCPouchFlare
+  id: RMCPouchFlareM94BP
+  name: M94-BP flare pouch
+  description: A pouch specially designed to hold Blue Phosphorous flares. Refillable with an M94-BP flare pack.
+  components:
+  - type: CMItemSlots
+    cooldown: 1
+    cooldownPopup: You need to wait before taking another flare!
+    count: 16
+    slot:
+      name: RMCFlareM94BP
+      whitelist:
+        tags:
+        - RMCFlareM94BP
+
 # Radio Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]

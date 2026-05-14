@@ -1028,6 +1028,16 @@
       - id: CMMRE
 
 - type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCWebbingPouchSurvivorSunRiders
+  suffix: Filled, Survivor, Sun Riders
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolM13
+      amount: 2
+
+- type: entity
   parent: CMWebbingBase
   id: RMCWebbingSurgicalGreen
   name: surgical webbing vest

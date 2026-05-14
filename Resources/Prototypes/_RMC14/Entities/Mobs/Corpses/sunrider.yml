@@ -1,0 +1,21 @@
+# Rifleman
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseSunridersRifleman
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseSunRidersRifleman ]
+  - type: Rank
+    rank: RMCRankPrivateFirstClass
+
+- type: startingGear
+  id: RMCGearCorpseSunRidersRifleman
+  equipment:
+    jumpsuit: RMCJumpsuitSurvivorMarineDropPouchAlt
+    back: CMSatchelMarine
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardSunRidersRifleman
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
