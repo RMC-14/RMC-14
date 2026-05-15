@@ -13,7 +13,7 @@
   - !type:AddComponentSpecial
     components:
     - type: JobPrefix
-      prefix: rmc-job-prefix-crmp
+      prefix: rmc-job-prefix-rmpl
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
