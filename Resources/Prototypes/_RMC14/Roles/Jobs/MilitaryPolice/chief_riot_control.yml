@@ -24,31 +24,31 @@
 
 - type: startingGear
   parent: RMCGearRiotControl
-  id: RMCGearChiefRiotControl
+  id: RMCGearRiotControlLeader
   equipment:
-    id: RMCIDCardChiefRiotControl
+    id: RMCIDCardRiotControlLeader
 
 - type: entity
-  id: RMCRandomHumanoidChiefRiotControl
-  name: unmc chief riot control ghost role
+  id: RMCRandomHumanoidRiotControlLeader
+  name: riot control leader ghost role
   suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: cmp_spawn
   - type: RandomHumanoidSpawner
-    settings: RMCChiefRiotControl
+    settings: RMCRiotControlLeader
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCChiefRiotControl
+  id: RMCRiotControlLeader
   components:
   - type: GhostRole
-    name: rmc-ghost-name-chief-riot-control
+    name: rmc-ghost-name-riot-control-leader
     description: rmc-ghost-role-information-riot-control-description
     rules: rmc-ghost-role-information-riot-control-rules
     reregister: false
-    job: CMChiefRiotControl
+    job: CMRiotControlLeader
     raffle:
       settings: short
     requirements:
@@ -58,5 +58,5 @@
   - type: GhostRoleApplySpecial
 
 - type: playTimeTracker
-  id: CMJobChiefRiotControl
+  id: CMJobRiotControlLeader
   isHumanoid: true
