@@ -145,6 +145,7 @@
       Brute:
         collection: GlassSmash
   - type: RMCCryoRecoveryConsole
+    excludeWhitelistedRoles: true
   - type: ActivatableUI
     key: enum.RMCCryoRecoveryUiKey.Key
   - type: ActivatableUIRequiresAccess

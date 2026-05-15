@@ -186,12 +186,21 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
 
     private bool IsExcluded(EntityUid player, RMCCryoRecoveryConsoleComponent console)
     {
-        if (console.ExcludedDepartments.Count == 0 ||
-            !TryComp<OriginalRoleComponent>(player, out var role) ||
+        if (!TryComp<OriginalRoleComponent>(player, out var role) ||
             role.Job is not { } job)
         {
             return false;
         }
+
+        if (console.ExcludeWhitelistedRoles &&
+            _prototypes.TryIndex(job, out JobPrototype? jobPrototype) &&
+            jobPrototype.Whitelisted)
+        {
+            return true;
+        }
+
+        if (console.ExcludedDepartments.Count == 0)
+            return false;
 
         if (!_jobs.TryGetAllDepartments(job, out var departments))
             return false;
