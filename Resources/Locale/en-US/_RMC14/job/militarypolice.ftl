@@ -27,7 +27,7 @@ rmc-ghost-name-riot-control = High Command Riot Control
 rmc-ghost-role-information-riot-control-description = Ensure order is restored and Marine Law is maintained.
 
 rmc-job-name-chief-riot-control = Chief Riot Control
-rmc-ghost-name-chief-riot-control = High Command Chief Riot Control
+rmc-ghost-name-chief-riot-control = Riot Control Leader
 
 rmc-job-prefix-rmp = RMP
 rmc-job-prefix-crmp = CRMP
