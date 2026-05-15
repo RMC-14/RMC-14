@@ -30,4 +30,4 @@ rmc-job-name-chief-riot-control = Chief Riot Control
 rmc-ghost-name-chief-riot-control = Riot Control Leader
 
 rmc-job-prefix-rmp = RMP
-rmc-job-prefix-crmp = CRMP
+rmc-job-prefix-rmpl = RMPL
