@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: wheelwrightt
-  changes:
-  - message: SLAW can no longer take more rockets after it fires.
-    type: Fix
-  - message: SLAW no longer drops to the ground upon folding/unfolding
-    type: Fix
-  id: 2703
-  time: '2026-01-08T02:25:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8570
-- author: CatAndHats
-  changes:
-  - message: 'new Trijent Dam insert: mini-evac at western research by the river'
-    type: Add
-  id: 2704
-  time: '2026-01-08T02:34:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8878
 - author: J C Denton
   changes:
   - message: Crashlanding EVA insert for Solaris.
@@ -4472,5 +4456,21 @@
   id: 3202
   time: '2026-05-15T23:32:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9723
+- author: kleinerstation13
+  changes:
+  - message: Added unique colony emergency flares, given to survivors.
+    type: Add
+  - message: Replaced marine flares with SPP flares on Sorokyne Strata
+    type: Tweak
+  id: 3203
+  time: '2026-05-15T23:33:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9761
+- author: kleinerstation13
+  changes:
+  - message: The AP Type 71's on Sorokyne are now AP Type 71C's
+    type: Tweak
+  id: 3204
+  time: '2026-05-15T23:33:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9740
 Name: RMC14
 Order: -1
