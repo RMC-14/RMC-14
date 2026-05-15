@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the CO armor and other officer armor requiring MP jumpsuits.
-    type: Fix
-  id: 2699
-  time: '2025-12-15T02:11:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8736
 - author: Aurallianz
   changes:
   - message: Fixed the under-barrel toggling issue.
@@ -4468,5 +4461,17 @@
   id: 3198
   time: '2026-05-14T10:27:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9798
+- author: SharkSnake98
+  changes:
+  - message: Added the Vehicle Crewman job
+    type: Add
+  - message: Added the M3 Pattern Tanker armor, M50 Tanker helmet, Tanker's jacket,
+      Vehicle Crewman uniform, vehicle crewman headset, and Welding Kit
+    type: Add
+  - message: Added the Vehicle Crewman weapon and equipment racks
+    type: Add
+  id: 3199
+  time: '2026-05-15T05:50:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7555
 Name: RMC14
 Order: -1
