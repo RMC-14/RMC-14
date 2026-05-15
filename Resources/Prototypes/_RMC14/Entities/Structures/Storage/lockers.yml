@@ -313,6 +313,16 @@
   - type: AccessReader
     access: [["CMAccessCMO"]]
 
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerFieldDoctor
+  name: field doctor's locker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/medical.rsi
+  - type: AccessReader
+    access: [["RMCAccessFieldDoctor"]]
+
 # Engineering
 - type: entity
   parent: CMLockerBase
@@ -405,7 +415,7 @@
   - type: AccessReader
     access: [["CMAccessDelta"]]
 
-# new varadero
+# map lockers
 
 - type: entity
   parent: CMLockerBase
@@ -432,6 +442,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/detective.rsi
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerMiner
+  name: miner's equipment
+  suffix: Secure
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/mining.rsi
+
 
 # PVE
 

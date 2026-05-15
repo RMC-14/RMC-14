@@ -101,7 +101,8 @@
         points: 18
       - id: RMCPacketGrenadeIncendiaryFilled
         points: 18
-    #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
@@ -578,7 +579,7 @@
   description: An automated gear rack for specialized chemicals for the medical assistants.
   components:
   - type: CMAutomatedVendor
-    jobs: 
+    jobs:
     - CMRoyalMarinesMedicPVE
     pointsType: Chemicals
     sections:
