@@ -487,6 +487,7 @@
     - 0,0,9,1 # 7 slots
     whitelist:
       tags:
+      - RMCMateba
       - RMCAttachmentMatebaStandard
       - RMCAttachmentMatebaMarksman
       - RMCAttachmentMatebaSnubNose
