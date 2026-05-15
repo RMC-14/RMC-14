@@ -43,17 +43,20 @@
     baseFireModes:
     - Burst
     - FullAuto
-    recoilWielded: 0
-    recoilUnwielded: 0
+    recoilWielded: 1
     scatterWielded: 1
-    scatterUnwielded: 1
     baseFireRate: 3.33
     burstScatterMult: 3
     modifiers:
       Burst:
-        fireDelay: 0.35
+        fireDelay: 0.233
         maxScatterModifier: 10
-        shotsToMaxScatter: 6
+        useBurstScatterMult: true
+      FullAuto:
+        maxScatterModifier: 6
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.65
   - type: ItemSlots
     slots:
       gun_magazine:
