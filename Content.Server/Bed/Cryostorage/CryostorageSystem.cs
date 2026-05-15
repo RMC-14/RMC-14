@@ -79,6 +79,14 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         UpdateCryostorageUIState(ent);
     }
 
+    public void RefreshCryostorageUI(EntityUid uid, CryostorageComponent? component = null)
+    {
+        if (!Resolve(uid, ref component, false))
+            return;
+
+        UpdateCryostorageUIState((uid, component));
+    }
+
     private void OnRemoveItemBuiMessage(Entity<CryostorageComponent> ent, ref CryostorageRemoveItemBuiMessage args)
     {
         var (_, comp) = ent;
@@ -110,6 +118,12 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
         if (entity == null)
             return;
+
+        if (HasComp<RMCCryoUnavailableOnStoreComponent>(entity.Value))
+        {
+            UpdateCryostorageUIState(ent);
+            return;
+        }
 
         AdminLog.Add(LogType.Action, LogImpact.High,
             $"{ToPrettyString(attachedEntity):player} removed item {ToPrettyString(entity)} from cryostorage-contained player " +
@@ -324,12 +338,18 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         var enumerator = _inventory.GetSlotEnumerator(uid);
         while (enumerator.NextItem(out var item, out var slotDef))
         {
+            if (HasComp<RMCCryoUnavailableOnStoreComponent>(item))
+                continue;
+
             data.ItemSlots.Add(slotDef.Name, Name(item));
         }
 
         foreach (var hand in _hands.EnumerateHands(uid))
         {
             if (!_hands.TryGetHeldItem(uid, hand, out var heldEntity))
+                continue;
+
+            if (HasComp<RMCCryoUnavailableOnStoreComponent>(heldEntity.Value))
                 continue;
 
             data.HeldItems.Add(hand, Name(heldEntity.Value));

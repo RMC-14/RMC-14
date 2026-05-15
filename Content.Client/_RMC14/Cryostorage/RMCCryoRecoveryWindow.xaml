@@ -1,0 +1,28 @@
+<DefaultWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    MinSize="640 520">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+            <Label Text="{Loc rmc-cryo-recovery-header}" StyleClasses="LabelKeyText" />
+            <Control HorizontalExpand="True" />
+            <Label Name="SummaryLabel" />
+        </BoxContainer>
+
+        <cc:HSeparator Color="#4972A1" Margin="0 0 0 5" />
+
+        <LineEdit Name="SearchBar" HorizontalExpand="True" />
+
+        <cc:HSeparator Color="#4972A1" Margin="0 5" />
+
+        <BoxContainer Name="EmptyPanel" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+            <Control VerticalExpand="True" />
+            <Label Text="{Loc rmc-cryo-recovery-no-items}" Align="Center" StyleClasses="LabelBig" />
+            <Control VerticalExpand="True" />
+        </BoxContainer>
+
+        <ScrollContainer Name="ResultsScroll" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False" Visible="False">
+            <BoxContainer Name="PlayersContainer" Orientation="Vertical" />
+        </ScrollContainer>
+    </BoxContainer>
+</DefaultWindow>
