@@ -19,6 +19,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Cryostorage;
 
+/// <summary>
+/// RMC requisitions equipment recovery built on top of vanilla cryostorage.
+/// Stored bodies remain owned by <see cref="CryostorageSystem"/>; this system only lists and moves existing items.
+/// </summary>
 public sealed class RMCCryoRecoverySystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
@@ -33,7 +37,10 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
+    // Reused during UI builds and bulk recovery to avoid allocating a fresh list for every stored body.
     private readonly List<RecoverableItem> _recoverableItems = new();
+
+    // Prevents the same item from appearing twice if inventory and hand state briefly overlap during storage.
     private readonly HashSet<EntityUid> _seenItems = new();
 
     public override void Initialize()
@@ -58,6 +65,7 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
         if (!IsAllowed(args.Actor, console.Owner))
             return;
 
+        // The client sends NetEntity handles from a stale snapshot, so resolve and validate against live cryostorage.
         var player = GetEntity(args.Player);
         var item = GetEntity(args.Item);
         if (!TryFindStoredPlayer(console, player, out var cryostorage))
@@ -81,6 +89,7 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
         _recoverableItems.Clear();
         CollectRecoverableItems(player, _recoverableItems);
 
+        // Bulk recovery drops items at the console. Each item is rechecked so concurrent UI/capsule use cannot duplicate it.
         var recovered = false;
         foreach (var item in _recoverableItems.ToArray())
         {
@@ -128,6 +137,8 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
     private void UpdateUI(Entity<RMCCryoRecoveryConsoleComponent> console)
     {
         var players = new List<RMCCryoRecoveryPlayerData>();
+
+        // This is the only full scan. It happens when a console opens or stored items change, not every tick.
         var query = EntityQueryEnumerator<CryostorageComponent>();
         while (query.MoveNext(out var uid, out var cryostorage))
         {
@@ -169,6 +180,7 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
     {
         cryostorage = default;
 
+        // Central gate for both UI listing and BUI actions. Anything excluded here is invisible and unrecoverable.
         if (TerminatingOrDeleted(player) ||
             IsExcluded(player, console.Comp) ||
             !TryComp<CryostorageContainedComponent>(player, out var contained) ||
@@ -252,6 +264,7 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
         List<RecoverableItem> items,
         HashSet<EntityUid> seen)
     {
+        // Unavailable markers intentionally hide stock cryo gear without deleting it from the stored body.
         if (!seen.Add(item) ||
             TerminatingOrDeleted(item) ||
             HasComp<RMCCryoUnavailableOnStoreComponent>(item))
@@ -295,6 +308,7 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
 
         _container.TryRemoveFromContainer(item);
 
+        // Single-item recovery behaves like normal item pickup; bulk recovery uses the console tile for predictability.
         if (tryPickup && HasComp<HandsComponent>(actor))
         {
             _transform.SetCoordinates(item, Transform(actor).Coordinates);

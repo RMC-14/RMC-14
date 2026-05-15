@@ -13,6 +13,7 @@ namespace Content.Client._RMC14.Cryostorage;
 [GenerateTypedNameReferences]
 public sealed partial class RMCCryoRecoveryWindow : DefaultWindow
 {
+    // Matches subdued RMC machine windows while keeping each player row visually distinct.
     private static readonly StyleBoxFlat PlayerPanelStyle = new()
     {
         BackgroundColor = Color.FromHex("#1A1A1A"),
@@ -24,6 +25,8 @@ public sealed partial class RMCCryoRecoveryWindow : DefaultWindow
 
     private RMCCryoRecoveryBui? _bui;
     private RMCCryoRecoveryBuiState? _state;
+
+    // Expansion is client-only presentation state; server state remains the authority for recoverable items.
     private readonly HashSet<NetEntity> _expandedPlayers = new();
 
     public RMCCryoRecoveryWindow()
@@ -61,6 +64,7 @@ public sealed partial class RMCCryoRecoveryWindow : DefaultWindow
             foreach (var player in _state.Players)
             {
                 var playerMatches = Matches(player.Name, filter) || Matches(player.Job, filter);
+                // Hidden item locations still participate in search so Requisitions can find a known slot/cache.
                 var items = string.IsNullOrWhiteSpace(filter) || playerMatches
                     ? player.Items
                     : player.Items

@@ -4,6 +4,10 @@ using Robust.Client.UserInterface;
 
 namespace Content.Client._RMC14.Cryostorage;
 
+/// <summary>
+/// Thin client BUI for the requisitions cryo recovery console.
+/// All item ownership and access checks live on the server.
+/// </summary>
 [UsedImplicitly]
 public sealed class RMCCryoRecoveryBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
