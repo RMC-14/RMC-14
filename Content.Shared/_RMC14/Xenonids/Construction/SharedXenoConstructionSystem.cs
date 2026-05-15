@@ -361,12 +361,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (adjacentNodes.Count == 0)
             {
                 if (isInQueenEye)
-                    _popup.PopupCoordinates("You can only plant weeds if there is a nearby node.",
+                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-weeds-no-nearby-node"),
                         args.Target,
                         xeno,
                         PopupType.MediumCaution);
                 else
-                    _popup.PopupClient("You can only plant weeds if there is a nearby node.",
+                    _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-no-nearby-node"),
                         args.Target,
                         xeno,
                         PopupType.MediumCaution);
