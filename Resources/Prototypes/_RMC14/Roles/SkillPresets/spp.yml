@@ -1,4 +1,8 @@
-﻿- type: entity
+﻿# SPP
+# todo
+
+# Survivor Roles
+- type: entity
   parent: RMCSkillPresetSurvivor
   id: RMCSkillPresetSurvivorSPPPrivate
   name: Survivor SPP Private
@@ -12,6 +16,56 @@
       RMCSkillEndurance: 2
       RMCSkillMedical: 1
       RMCSkillCqc: 1
-      RMCSkillFirearms: 1
+      RMCSkillFirearms: 2
+      RMCSkillFireman: 1
+      RMCSkillJtac: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivorSPPPrivate
+  id: RMCSkillPresetSurvivorSPPSapper
+  name: Survivor SPP Sapper
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivorSPPPrivate
+  id: RMCSkillPresetSurvivorSPPMedic
+  name: Survivor SPP Medic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivorSPPPrivate
+  id: RMCSkillPresetSurvivorSPPSpecialist
+  name: Survivor SPP Specialist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillSpecialistWeapons: 1
+      RMCSkillVehicles: 2
+      RMCSkillLeadership: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivorSPPPrivate
+  id: RMCSkillPresetSurvivorSPPLeader
+  name: Survivor SPP Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      # RMCSkillSpecialistWeapons: 1 TODO SPP specialist weapons whitelist
+      RMCSkillConstruction: 2
+      RMCSkillVehicles: 2
+      RMCSkillLeadership: 2
       RMCSkillFireman: 2
-      RMCSkillJtac: 1
+      RMCSkillJtac: 3
+      RMCSkillOverwatch: 1
+      RMCSkillMedical: 2

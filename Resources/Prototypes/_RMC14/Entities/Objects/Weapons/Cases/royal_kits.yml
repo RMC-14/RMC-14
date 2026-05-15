@@ -81,3 +81,27 @@
   - type: CMChangeUserOnVend
     addComponents:
     - type: SniperWhitelist
+
+# L49 assault shotgun
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCL49Case
+  name: L49 assault shotgun case
+  suffix: PVE, RCM
+  description: A gun case containing the L49 assault shotgun. Contains the L49 weapon, two boxes of L49B breaching ammunition, and an L28-pattern shotgun shell rig.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1 # 4 slots
+    whitelist:
+      tags:
+      - RMCWeaponShotgunL49
+      - RMCBoxShotgunL49B
+      - RMCL49Holster
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponShotgunL49
+    - id: RMCBeltL49
+    - id: RMCBoxShotgunL49B
+      amount: 2

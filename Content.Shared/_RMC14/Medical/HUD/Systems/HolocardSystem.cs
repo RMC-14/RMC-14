@@ -9,6 +9,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -17,6 +18,7 @@ namespace Content.Shared._RMC14.Medical.HUD.Systems;
 public sealed class HolocardSystem : EntitySystem
 {
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -31,7 +33,7 @@ public sealed class HolocardSystem : EntitySystem
         SubscribeLocalEvent<HolocardStateComponent, HolocardChangeEvent>(ChangeHolocard);
         SubscribeLocalEvent<HolocardStateComponent, GetVerbsEvent<ExamineVerb>>(OnHolocardExaminableVerb);
 
-        SubscribeLocalEvent<HealthScannerComponent, OpenChangeHolocardUIEvent>(OpenChangeHolocardUI);
+        SubscribeNetworkEvent<OpenHolocardFromScanEvent>(OnOpenHolocardFromScan);
         SubscribeLocalEvent<HealthScannerComponent, RefreshEquipmentHudEvent<HealthScannerComponent>>(OnRefreshEquipmentHud);
 
         SubscribeLocalEvent<HolocardContainerComponent, HolocardContainerStatusUpdateEvent>(OnHolocardContainerStatusUpdate);
@@ -105,11 +107,15 @@ public sealed class HolocardSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    private void OpenChangeHolocardUI(EntityUid entity, HealthScannerComponent comp, ref OpenChangeHolocardUIEvent args)
+    private void OnOpenHolocardFromScan(OpenHolocardFromScanEvent ev, EntitySessionEventArgs args)
     {
-        var localOwner = GetEntity(args.Owner);
-        var localTarget = GetEntity(args.Target);
+        if (!_net.IsServer)
+            return;
 
+        if (args.SenderSession.AttachedEntity is not { } localOwner)
+            return;
+
+        var localTarget = GetEntity(ev.Target);
         if (HasComp<SynthComponent>(localTarget))
         {
             _popup.PopupClient(Loc.GetString("ui-holocard-change-synth-invalid"), localOwner, localOwner, PopupType.SmallCaution);
