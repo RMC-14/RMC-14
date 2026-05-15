@@ -39,6 +39,7 @@
       preset: RMCSurvivorPresetForeconNoPistol
     - type: JobPrefix
       prefix: cm-job-prefix-gun-operator
+    - type: RMCAllowSuitStorage
     - type: SpotterWhitelist
   hidden: true
 

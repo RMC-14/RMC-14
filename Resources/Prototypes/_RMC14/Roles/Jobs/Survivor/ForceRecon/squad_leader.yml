@@ -47,6 +47,7 @@
       prefix: cm-job-prefix-squad-leader
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconSquadLead
+    - type: RMCAllowSuitStorage
     - type: SpotterWhitelist
     - type: RMCTrackable
     - type: RMCAwardRecommendation
