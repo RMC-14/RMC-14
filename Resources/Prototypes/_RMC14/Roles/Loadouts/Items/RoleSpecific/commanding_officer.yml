@@ -59,6 +59,9 @@
       time: 900000 # 250 hrs
   equipment:
     belt: RMCMatebaBeltLuxuriousFilled
+  storage:
+    back:
+    - RMCMatebaCustomizationCaseLuxury
 
 - type: loadout
   id: SilverMatebaRMC
@@ -71,6 +74,9 @@
       time: 900000 # 250 hrs
   equipment:
     belt: RMCMatebaBeltLuxuriousFilledSilver
+  storage:
+    back:
+    - RMCMatebaCustomizationCaseSilver
 
 - type: loadout
   id: GoldHandcannonRMC
@@ -89,6 +95,9 @@
   dummyEntity: RMCWeaponRevolverMateba
   equipment:
     belt: RMCMatebaBeltFilled
+  storage:
+    back:
+    - RMCMatebaCustomizationCase
 
 - type: loadout
   id: MatebaSpecialRMC

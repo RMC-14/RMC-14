@@ -510,7 +510,6 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMatebaGold
-    - id: RMCMatebaCustomizationCaseLuxury
 
 - type: entity
   parent: RMCMatebaBeltLuxurious
@@ -539,7 +538,6 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMatebaSilver
-    - id: RMCMatebaCustomizationCaseSilver
 
 - type: entity
   parent: RMCMatebaBelt
@@ -565,7 +563,6 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMateba
-    - id: RMCMatebaCustomizationCase
 
 - type: entity
   parent: RMCMatebaBelt
