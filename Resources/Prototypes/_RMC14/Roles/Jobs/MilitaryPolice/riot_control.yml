@@ -11,7 +11,7 @@
   icon: "RMCJobIconRiotMP"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-marine-high-command
-  spawnMenuRoleName: UNMC Riot MP (RMP)
+  spawnMenuRoleName: Riot MP
   accessGroups:
   - MarineMain
   special:
