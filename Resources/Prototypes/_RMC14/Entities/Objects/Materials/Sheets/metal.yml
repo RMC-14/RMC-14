@@ -26,6 +26,11 @@
     - type: Item
       size: Normal
       sprite: _RMC14/Objects/Materials/Sheets/metal.rsi
+      inhandVisuals:
+        left:
+        - state: inhand-left
+        right:
+        - state: inhand-right
     - type: Appearance
 
 - type: entity
@@ -90,6 +95,11 @@
       interfaces:
         enum.RMCConstructionUiKey.Key:
           type: RMCConstructionBui
+    - type: Tag
+      tags:
+      - RMCSheetMetal
+      - Sheet
+      - Metal
 
 - type: entity
   parent: CMSheetMetal
@@ -221,6 +231,11 @@
           map: ["base"]
     - type: Item
       sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi
+      inhandVisuals:
+        left:
+        - state: inhand-left
+        right:
+        - state: inhand-right
       heldPrefix: plasteel
     - type: UserInterface
       interfaces:

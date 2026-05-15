@@ -3,6 +3,9 @@
   abstract: true
   id: RMCBaseTesla
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
   - type: Corrodible
     timeToApply: 4
     structure: true
@@ -49,6 +52,7 @@
     sprite: _RMC14/Objects/Weapons/Sentries/tesla.rsi
     state: normal_tesla_coil_handheld
   - type: Appearance
+  - type: Eye
   - type: GenericVisualizer
     visuals:
       enum.SentryLayers.Layer:
@@ -77,6 +81,9 @@
     interfaces:
       enum.SentryUiKey.Key:
         type: SentryUpgradeBui
+  - type: DeviceNetwork
+  - type: DeviceLinkSink
+    ports: [ SentryControl ]
   - type: HealthExaminable
     locPrefix: sentry
     examinableTypes:
@@ -86,6 +93,10 @@
     - Heat
     - Shock
   - type: ShortExamine
+  - type: SentryTargeting
+    targetedFactions:
+    - RMCXeno
+    - CLF
   - type: Sentry
     upgrades:
     - RMCTeslaMicro
@@ -121,7 +132,8 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
 
 - type: entity
   parent: RMCTesla
@@ -176,7 +188,8 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: Sentry
     deployDelay: 0.75
     undeployDelay: 0.75
@@ -219,7 +232,8 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: Sentry
     upgrades: null
   - type: RMCTeslaCoil
@@ -227,3 +241,13 @@
     stunDuration: 2
     slowDuration: 0
     dazeDuration: 15
+
+- type: entity
+  parent: RMCTesla
+  id: RMCTeslaTSE
+  name: L10D tesla coil
+  suffix: PVE, RCM IFF
+  components:
+  - type: UserIFF
+    factions:
+    - FactionTSE

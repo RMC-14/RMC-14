@@ -135,10 +135,10 @@
     name: rmc-job-name-xeno-king
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xenoking
     background:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xeno_ruler
   - type: StunOnExplosionReceived
     weak: false

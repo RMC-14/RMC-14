@@ -195,7 +195,7 @@ namespace Content.Shared.Damage
                 return damage;
             }
 
-            var before = new BeforeDamageChangedEvent(damage, origin);
+            var before = new BeforeDamageChangedEvent(damage, origin, tool); //RMC14, added a parameter
             RaiseLocalEvent(uid.Value, ref before);
 
             if (before.Cancelled)
@@ -387,7 +387,7 @@ namespace Content.Shared.Damage
     ///     Raised before damage is done, so stuff can cancel it if necessary.
     /// </summary>
     [ByRefEvent]
-    public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid? Origin = null, bool Cancelled = false);
+    public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid? Origin = null, EntityUid? Source = null, bool Cancelled = false); //RMC14
 
     /// <summary>
     ///     Raised on an entity when damage is about to be dealt,

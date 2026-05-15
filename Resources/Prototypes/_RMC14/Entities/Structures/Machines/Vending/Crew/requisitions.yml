@@ -44,15 +44,15 @@
         amount: 20
     - name: Sidearms
       entries:
-      - id: RMCWeaponPistolM77
+      - id: RMCWeaponPistolM77Empty
         amount: 50
-      - id: RMCWeaponRevolverM44
+      - id: RMCWeaponRevolverM44Empty
         amount: 50
-      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM1984Empty
         amount: 50
-      - id: RMCWeaponPistolM13
+      - id: RMCWeaponPistolM13Empty
         amount: 50
-      - id: RMCWeaponPistolM82F
+      - id: RMCWeaponPistolM82FEmpty
         amount: 20
     - name: Restricted Firearms
       entries:
@@ -68,10 +68,10 @@
         amount: 3
       - id: RMCM54CMK1Case
         amount: 3
-      #- id: M56D Heavy Machine Gun
-      #  amount: 2
-      #- id: M2C Heavy Machine Gun
-      #  amount: 2
+      - id: RMCML66DCase
+        amount: 2
+      - id: RMCM2CCase
+        amount: 2
       - id: RMCCaseFlamer
         amount: 2
       - id: RMCM85A1Case
@@ -84,14 +84,14 @@
       entries:
       - id: CMGrenadeFragOld
         amount: 2
-      #- id: M20 Claymore Anti-Personnel Mine
-      #  amount: 4
+      - id: RMCExplosiveClaymoreMine
+        amount: 4
       - id: CMGrenadeHighExplosive
         amount: 25
       - id: RMCGrenadeIncendiary
         amount: 4
-      #- id: M40 HPDP White Phosphorus Smoke Grenade
-      #  amount: 4
+      - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+        amount: 4
       - id: CMGrenadeSmoke
         amount: 5
       - id: RMC40MMGrenadeM74AGMF
@@ -254,8 +254,8 @@
         amount: 1
       - id: RMCFulton20
         amount: 1
-      #- id: Sentry Gun Network Laptop
-      #   amount: 4
+      - id: RMCSentryLaptop
+        amount: 4
       #- id: Spare PDT/L Battle Buddy Kit
       #  amount: 4
     - name: Flare and Light
@@ -302,6 +302,11 @@
         box: CMGrenadeFragOld
         boxAmount: 3
         boxSlots: 3
+      - id: RMCBoxClaymoreMineFilled
+        name: M20 Claymore anti-personnel mine box
+        box: RMCExplosiveClaymoreMine
+        boxAmount: 5
+        boxSlots: 5
       - id: CMPacketGrenadeHighExplosiveFilled
         name: 30mm HEDP grenade packet
         box: CMGrenadeHighExplosive
@@ -444,10 +449,10 @@
         amount: 5
       - id: CMMagazineRifleM54CMK1AP
         amount: 2
-      #- id: M56D Drum Magazine
-      #  amount: 2
-      #- id: M2C Box Magazine
-      #  amount: 2
+      - id: RMCMagazineML66D
+        amount: 2
+      - id: RMCMagazineM2C
+        amount: 2
       - id: RMCMagazineShotgunXM51
         amount: 3
     - name: Magazine Boxes
@@ -456,49 +461,67 @@
       - id: RMCBoxMagazinePistolM13
         name: Magazine Box (M13 x 22)
         box: RMCMagazinePistolM13
+
       - id: RMCBoxMagazinePistolM13Ext
         name: Magazine Box (Ext M13 x 14)
         box: RMCMagazinePistolM13Ext
+
       - id: RMCBoxMagazinePistolM13AP
         name: Magazine Box (M13 AP x 22)
         box: RMCMagazinePistolM13AP
+
       - id: RMCBoxMagazinePistolM13ExtAP
         name: Magazine Box (Ext M13 AP x 14)
         box: RMCMagazinePistolM13ExtAP
+
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
+
       - id: RMCBoxMagazineSMGM63AP
         name: Magazine Box (AP M63 x 12)
         box: CMMagazineSMGM63AP
+
       - id: RMCBoxMagazineSMGM63Ext
         name: Magazine Box (Ext M63 x 10)
         box: CMMagazineSMGM63Ext
+
       - id: RMCBoxMagazineRifleM54C
         name: Magazine Box (M54C x 10)
         box: CMMagazineRifleM54C
+
       - id: RMCBoxMagazineRifleM54CAP
         name: Magazine Box (AP M54C x 10)
         box: CMMagazineRifleM54CAP
+
       - id: RMCBoxMagazineRifleM54CExt
         name: Magazine Box (Ext M54C x 8)
         box: CMMagazineRifleM54CExt
+
       - id: RMCBoxMagazinePistolM1984
         name: Magazine Box (M1984 x 16)
         box: CMMagazinePistolM1984
-#      - name: Magazine Box (AP M1984 x 16)
-#        box: CMMagazinePistolM1984AP
-#      - name: Magazine Box (HP M1984 x 16)
-#        box: CMMagazineSMGM63
+
+      - id: RMCBoxMagazinePistolM1984AP
+        name: Magazine Box (AP M1984 x 16)
+        box: RMCMagazinePistolM1984AP
+
+      - id: RMCBoxMagazinePistolM1984HP
+        name: Magazine Box (HP M1984 x 16)
+        box: RMCMagazinePistolM1984HP
+
       - id: RMCBoxMagazineRifleM4SPR
         name: Magazine Box (M4SPR x 16)
         box: CMMagazineRifleM4SPR
+
       - id: RMCBoxMagazineRifleM4SPRAP
         name: Magazine Box (AP M4SPR x 16)
         box: CMMagazineRifleM4SPRAP
+
       - id: RMCBoxMagazineRifleM4SPRExt
         name: Magazine Box (Ext M4SPR x 16)
         box: CMMagazineRifleM4SPRExt
+
 #      - name: Magazine Box (M54CE2 x 8)
 #        box: RMCCrateMagazineRifleM54CE2
 #      - name: Magazine Box (M54CE2 Holo-Target x 8)
@@ -511,58 +534,71 @@
         name: Magazine Box (Buckshot x 100)
         box: RMCBoxShotgunBuckshot
         boxAmount: 4
+
       - id: RMCBoxShellsFlechette
         name: Magazine Box (Flechette x 100)
         box: RMCBoxShotgunFlechette
         boxAmount: 4
+
       - id: RMCBoxShellsSlugs
         name: Magazine Box (Slugs x 100)
         box: RMCBoxShotgunSlugs
         boxAmount: 4
+
       - id: RMCBoxShellsBreaching
         name: Magazine Box (16g) (Breaching x 120)
         box: RMCBoxShotgunBreaching
         boxAmount: 4
+
       - id: RMCBoxMagazinePistolM77AP
         name: Magazine Box (M77 AP x 16)
         box: CMMagazinePistolM77AP
+
       - id: RMCBoxMagazinePistolSU6
         name: Magazine Box (SU-6 x 16)
         box: RMCMagazinePistolSU6
+
       - id: RMCBoxMagazinePistolMK80
         name: Magazine Box (MK80 x 16)
         box: CMMagazinePistolMK80
+
 #      - name: Magazine Box (XM51 x 8)
 #        box: RMCMagazineShotgunXM51
-#      - name: Magazine Box (.458 SOCOM x 300) # TODO RMC14
-#        box: RMCBox458SOCOM
+      - id: RMCBoxBullets458
+        box: RMCBox458SOCOM
+        boxAmount: 3
+        boxSlots: 3
 #      - name: Magazine Box (M2C x 8)
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (M56B x 8)
 #        box: CMMagazineSMGM63
-#      - name: Magazine Box (M56D x 8)
+#      - name: Magazine Box (ML66D x 8)
 #        box: CMMagazineSMGM63
+
       - id: RMCBoxMagazineRevolverM44
         name: Magazine Box (M44 x 16)
         box: RMCSpeedLoaderM44
+
       - id: RMCBoxMagazineRevolverM44Marksman
         name: Magazine Box (Marksman M44 x 16)
         box: RMCSpeedLoader44Marksman
+
 #      - name: Magazine Box (Heavy M44 x 16)
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (UT-Napthal Fuel x 8)
 #        box: CMMagazineSMGM63
+
     - name: Ammunition Boxes
       hasBoxes: true
       entries:
       - id: RMCBoxBulletsSMG
         name: SMG HV ammunition box (10x20mm) (M63)
         box: CMMagazineSMGM63
-        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+        boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
       - id: RMCBoxBulletsSMGAP
         name: SMG ammunition box (10x20mm AP) (M63)
         box: CMMagazineSMGM63AP
-        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+        boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
       - id: RMCBoxBulletsRifle
         name: rifle ammunition box (10x24mm) (M4SPR)
         box: CMMagazineRifleM4SPR
@@ -763,6 +799,8 @@
     - name: Radio
       entries:
       - id: RMCHeadsetShip
+        amount: 5
+      - id: RMCHeadsetMarine
         amount: 5
       - id: CMEncryptionKeyAlpha
         amount: 5

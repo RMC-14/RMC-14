@@ -43,6 +43,13 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-leader
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_ld
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity

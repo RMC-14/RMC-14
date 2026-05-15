@@ -13,6 +13,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Flag;
 
@@ -29,6 +30,9 @@ public sealed class PlantableFlagSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _userFactions = new();
 
     public override void Initialize()
     {
@@ -81,14 +85,20 @@ public sealed class PlantableFlagSystem : EntitySystem
         {
             sound = ent.Comp.RaisedCombatSound;
             if (TryComp(args.User, out UserIFFComponent? userIff) &&
-                userIff.Faction != null)
+                _gunIFF.TryGetFactions((args.User, userIff), _userFactions))
             {
                 var allies = 0;
                 var inRange = _entityLookup.GetEntitiesInRange<UserIFFComponent>(args.User.ToCoordinates(), ent.Comp.AlliesRange);
                 foreach (var inRangeEnt in inRange)
                 {
-                    if (userIff.Faction == inRangeEnt.Comp.Faction)
+                    foreach (var faction in _userFactions)
+                    {
+                        if (_gunIFF.IsInFaction((inRangeEnt.Owner, inRangeEnt.Comp), faction))
+                        {
                         allies++;
+                            break;
+                        }
+                    }
 
                     if (allies >= ent.Comp.AlliesRequired)
                     {

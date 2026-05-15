@@ -15,6 +15,7 @@ namespace Content.Server._RMC14.Figurines;
 [ToolshedCommand, AdminCommand(AdminFlags.Host)]
 public sealed class FigurineCommand : ToolshedCommand
 {
+    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     [CommandImplementation("openslots")]
@@ -43,11 +44,18 @@ public sealed class FigurineCommand : ToolshedCommand
     }
 
     [CommandImplementation("export")]
-    public void Export([CommandInvocationContext] IInvocationContext ctx, [CommandArgument] string userId)
+    public async void Export([CommandInvocationContext] IInvocationContext ctx, string playerName)
     {
         if (ctx.Session?.AttachedEntity is not { } ent)
         {
             ctx.WriteLine("You have no entity! Join the game.");
+            return;
+        }
+
+        var player = await _playerLocator.LookupIdByNameOrIdAsync(playerName);
+        if (player == null)
+        {
+            ctx.WriteLine($"No player found with id or name {playerName}");
             return;
         }
 
@@ -66,12 +74,12 @@ public sealed class FigurineCommand : ToolshedCommand
   - type: Sprite
     state: {figurine.FormatSpriteName(name)}
   - type: PatronFigurine
-    id: {userId}
+    id: {player.UserId.UserId}
 ";
 
         var resources = figurine.GetResourcesPath();
         var prototypes = Path.Combine(resources, "Prototypes/_RMC14/Entities/Objects/patron_figurines.yml");
 
-        File.AppendAllText(prototypes, yaml);
+        await File.AppendAllTextAsync(prototypes, yaml);
     }
 }

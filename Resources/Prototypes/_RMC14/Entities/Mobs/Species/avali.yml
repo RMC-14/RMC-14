@@ -8,6 +8,7 @@
   - type: HumanoidAppearance
     species: Avali
     hideLayersOnEquip:
+    - UndergarmentTop
     - HeadTop
     - HeadSide
   - type: Sprite
@@ -17,11 +18,12 @@
       Male: RMCMaleAvali
       Unsexed: RMCMaleAvali
       Female: RMCFemaleAvali
-  - type: Wagging 
+  - type: Wagging
     action: ActionToggleAvaliWagging
   - type: Speech
     speechVerb: Parrot # Didn't come with one
     speechSounds: MaleAvali
+    allowedEmotes: [ 'RMCAvaliChirp' ]
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:

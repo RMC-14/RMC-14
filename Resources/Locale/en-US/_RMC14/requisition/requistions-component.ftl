@@ -20,6 +20,7 @@ ui-supply-drop-pad-status = [bold]Supply Pad Status[/bold]
 ui-supply-drop-console-update = Update
 ui-supply-drop-console-ready = Ready to fire!
 ui-supply-drop-console-launch = LAUNCH SUPPLY DROP
+ui-supply-drop-console-launch-confirmation = Confirm Supply Drop?
 ui-supply-drop-console-cooldown = {$time} seconds until next launch
 ui-supply-drop-crate-status =
     { $hasCrate ->
