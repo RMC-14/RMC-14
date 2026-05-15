@@ -41,6 +41,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/icb_armor.rsi
+  - type: CMArmor
+    bullet: 15
 
 - type: entity # RMC14 - reskinned SG harness for ICB surv insert
   parent: CMArmorSmartGunCombatHarness
