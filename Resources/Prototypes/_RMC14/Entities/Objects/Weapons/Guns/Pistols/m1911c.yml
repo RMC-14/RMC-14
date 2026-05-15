@@ -4,6 +4,13 @@
   name: M1911C service pistol
   description: A variant of the legendary M1911 pistol in use by UNMC command elements. Based off the modernized M48A4, it has been modified to more closely resemble a classic M1911 in shape, while retaining modern technology features like a discreet ammo counter. Chambered in .45 ACP.
   components:
+  - type: RMCSelectiveFire
+    scatterWielded: 6
+    scatterUnwielded: 6
+    baseFireRate: 4
+    burstScatterMult: 5
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
   - type: Tag
     tags:
     - Sidearm
