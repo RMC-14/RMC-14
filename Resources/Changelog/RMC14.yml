@@ -1,121 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: The M5-ATL's rockets have been resprited.
-    type: Tweak
-  id: 2687
-  time: '2025-12-14T22:46:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8659
-- author: Max_Power
-  changes:
-  - message: Fixed papers, matchbooks, foldable rocket launcher, XL vests missing
-      their drop sounds and lowered volume
-    type: Fix
-  - message: Fixed pamphlets not sounding like paper when picking up or dropping them
-    type: Fix
-  - message: Fixed screwdrivers playing the incorrect sound when dropped
-    type: Fix
-  id: 2688
-  time: '2025-12-14T22:45:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8682
-- author: Ian321
-  changes:
-  - message: The fire-immunity examination text now differentiates between direct
-      and indirect ignition.
-    type: Tweak
-  id: 2689
-  time: '2025-12-14T22:46:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8680
-- author: J C Denton
-  changes:
-  - message: Fixed CMB survivors having Civilian access.
-    type: Fix
-  - message: Fixed CMB marshal survivor not having a tacmap icon.
-    type: Fix
-  id: 2690
-  time: '2025-12-14T22:50:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8661
-- author: Vermidia
-  changes:
-  - message: Fixed King destroy not gibbing the dead
-    type: Fix
-  - message: Abilities that stop mob collisions (Dancer dodge, King Destroy) prevent
-      the stun from walking into Queen/King
-    type: Tweak
-  id: 2691
-  time: '2025-12-14T22:52:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8656
-- author: PursuitInAshes
-  changes:
-  - message: Provost Inspectors now spawn with a stamp.
-    type: Add
-  id: 2692
-  time: '2025-12-14T22:56:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8714
-- author: PursuitinAshes
-  changes:
-  - message: '[PvE] The Dropships now have a weapons console to use at GM discretion.'
-    type: Tweak
-  - message: '[PvE] Both dropships now have a warp point.'
-    type: Tweak
-  id: 2693
-  time: '2025-12-14T22:58:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8703
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Certain factional armor pieces now require their uniforms to equip.
-    type: Tweak
-  id: 2694
-  time: '2025-12-14T23:00:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8545
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed being able to melt reinforced walls with normal and weak acid.
-      You will need strong acid to melt reinforced walls now. Most reinforced COLONY
-      walls are still acidifable, however.
-    type: Fix
-  id: 2695
-  time: '2025-12-14T23:04:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8474
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added damage examine text for cades.
-    type: Add
-  - message: Cades now have a chance to block projectiles! Make sure you stand flush
-      or at least 4 tiles away so you don't damage your cades.
-    type: Tweak
-  id: 2696
-  time: '2025-12-14T23:04:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8606
-- author: Aurallianz
-  changes:
-  - message: The nuke now has an explosion effect when exploding.
-    type: Add
-  - message: Added a ghost warp point to the nuke.
-    type: Add
-  - message: Fix nuke decryption not being stopped if a communications tower is destroyed.
-    type: Fix
-  - message: Fixed the nuke being able to be rotated upside down.
-    type: Fix
-  - message: Fixed the nuke not deleting hive structures on explosion.
-    type: Fix
-  id: 2697
-  time: '2025-12-14T23:16:49.051000+00:00'
-  url: null
-- author: Aurallianz
-  changes:
-  - message: Added Nuke detonation music.
-    type: Add
-  id: 2698
-  time: '2025-12-14T23:19:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8721
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the CO armor and other officer armor requiring MP jumpsuits.
-    type: Fix
-  id: 2699
-  time: '2025-12-15T02:11:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8736
 - author: Aurallianz
   changes:
   - message: Fixed the under-barrel toggling issue.
@@ -4490,5 +4373,105 @@
   id: 3186
   time: '2026-05-12T23:27:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9693
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added a Whiskey Troop patch for the Royal Crown Marine contingent
+      aboard the HMS Pratchett.'
+    type: Add
+  id: 3187
+  time: '2026-05-14T02:50:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9720
+- author: Drazamuffin
+  changes:
+  - message: WEYA research personal have uncovered xenoforms hidden with in permafrost
+      of the sector.
+    type: Add
+  id: 3188
+  time: '2026-05-14T10:20:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9659
+- author: MarshesAndMeadows
+  changes:
+  - message: Fixed water tiles not correctly updating the slowdown modifier when stepping
+      onto a catwalk.
+    type: Fix
+  id: 3189
+  time: '2026-05-14T10:22:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9610
+- author: yagwog
+  changes:
+  - message: Impenetrable Walls timed added to solaris
+    type: Add
+  id: 3190
+  time: '2026-05-14T10:26:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9787
+- author: '- Simon'
+  changes:
+  - message: Timed Impen Walls to trijent
+    type: Add
+  id: 3191
+  time: '2026-05-14T10:26:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9791
+- author: yagwog
+  changes:
+  - message: Added impenetrable walls to Chances Claim
+    type: Add
+  id: 3192
+  time: '2026-05-14T10:25:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9762
+- author: '- Simon'
+  changes:
+  - message: Timed Impenetrable walls to solaris
+    type: Add
+  id: 3193
+  time: '2026-05-14T10:26:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9786
+- author: '- Simon'
+  changes:
+  - message: Added timed impenetrable resin to sorokyne
+    type: Add
+  id: 3194
+  time: '2026-05-14T10:26:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9788
+- author: '- Simon'
+  changes:
+  - message: Added Impenetrable timed resin to fiorina
+    type: Add
+  id: 3195
+  time: '2026-05-14T10:26:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9789
+- author: Arykh
+  changes:
+  - message: Alerts on the Seperated HUD layout now expand vertically instead of only
+      downwards to infinity and beyond.
+    type: Tweak
+  id: 3196
+  time: '2026-05-14T10:23:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9751
+- author: Thereisabear
+  changes:
+  - message: Squad tracker no longer constantly resets itself to a FTL.
+    type: Fix
+  id: 3197
+  time: '2026-05-14T10:24:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9780
+- author: yagwog
+  changes:
+  - message: timed Impenetrable walls on shivas
+    type: Add
+  id: 3198
+  time: '2026-05-14T10:27:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9798
+- author: SharkSnake98
+  changes:
+  - message: Added the Vehicle Crewman job
+    type: Add
+  - message: Added the M3 Pattern Tanker armor, M50 Tanker helmet, Tanker's jacket,
+      Vehicle Crewman uniform, vehicle crewman headset, and Welding Kit
+    type: Add
+  - message: Added the Vehicle Crewman weapon and equipment racks
+    type: Add
+  id: 3199
+  time: '2026-05-15T05:50:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7555
 Name: RMC14
 Order: -1

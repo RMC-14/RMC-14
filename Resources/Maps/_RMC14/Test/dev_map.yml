@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/05/2026 13:14:22
+  time: 01/16/2026 05:53:21
   entityCount: 1476
 maps:
 - 1
@@ -3949,6 +3949,13 @@ entities:
     components:
     - type: Transform
       pos: -0.5,-2.5
+      parent: 2
+- proto: CMSpawnPointCrewman
+  entities:
+  - uid: 1476
+    components:
+    - type: Transform
+      pos: -0.5,3.5
       parent: 2
 - proto: CMSpawnPointDCC
   entities:
@@ -10038,13 +10045,6 @@ entities:
     components:
     - type: Transform
       pos: 3.5,17.5
-      parent: 2
-- proto: RMCSpawnPointExecutiveBodyguard
-  entities:
-  - uid: 1476
-    components:
-    - type: Transform
-      pos: -0.5,3.5
       parent: 2
 - proto: RMCSpawnPointFieldDoctor
   entities:
