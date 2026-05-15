@@ -61,6 +61,18 @@
     belt: RMCMatebaBeltLuxuriousFilled
 
 - type: loadout
+  id: SilverMatebaRMC
+  dummyEntity: RMCWeaponRevolverMatebaSilver
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 900000 # 250 hrs
+  equipment:
+    belt: RMCMatebaBeltLuxuriousFilledSilver
+
+- type: loadout
   id: GoldHandcannonRMC
   dummyEntity: RMCWeaponPistolHandcannonGold
   effects:

@@ -501,7 +501,7 @@
 - type: entity
   parent: RMCMatebaBeltLuxurious
   id: RMCMatebaBeltLuxuriousFilled
-  suffix: Filled
+  suffix: Filled, Golden
   components:
   - type: StorageFill
     contents:
@@ -515,7 +515,7 @@
 - type: entity
   parent: RMCMatebaBeltLuxurious
   id: RMCMatebaBeltLuxuriousFilledWEYA
-  suffix: Filled, WEYA Director
+  suffix: Filled, Golden, WEYA Director
   components:
   - type: StorageFill
     contents:
@@ -526,6 +526,20 @@
     - id: RMCSpeedLoaderMatebaHE
       amount: 2
     - id: RMCWeaponRevolverMatebaGold
+
+- type: entity
+  parent: RMCMatebaBeltLuxurious
+  id: RMCMatebaBeltLuxuriousFilledSilver
+  suffix: Filled, Silver
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMatebaSilver
+    - id: RMCMatebaCustomizationCaseSilver
 
 - type: entity
   parent: RMCMatebaBelt
@@ -542,7 +556,7 @@
 - type: entity
   parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
-  suffix: Filled, Mateba
+  suffix: Filled, Mateba Custom
   components:
   - type: StorageFill
     contents:
@@ -556,7 +570,7 @@
 - type: entity
   parent: RMCMatebaBelt
   id: RMCMatebaBeltSpecialFilled
-  suffix: Filled, Mateba
+  suffix: Filled, Mateba Special
   components:
   - type: StorageFill
     contents:
