@@ -50,7 +50,7 @@
     gloves: CMHandsBlackInsulated
     shoes: RMCShoesJackboots
     id: CMIDCardLiaisonColony
-    belt: RMCMatebaBeltLuxurious2006MFilled
+    belt: RMCMatebaBeltICBSupervisorFilled
     back: RMCSatchelBlackFillSurvivorICB
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCSpeedLoaderMateba
@@ -76,7 +76,7 @@
   - type: StorageFill
     contents:
     - id: RMCSpeedLoaderMateba
-      amount: 2
+      amount: 3
     - id: RMCWeaponRevolverMatebaSpecial
 
 - type: entity
