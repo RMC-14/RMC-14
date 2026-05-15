@@ -104,7 +104,7 @@
     modifiers:
     - conditions:
         inactiveOnly: true
-      fireDelayFlat: 0.1
+      fireDelayFlat: 0.25
     - conditions:
         wieldedOnly: true
         inactiveOnly: true
