@@ -64,8 +64,8 @@
     # TODO RMC14: M66 teargas grenade (x4)
     - RMCHandcuffs
     - RMCHandcuffs
-  inhand:
-  - RiotShield # TODO RMC14: Port CM riot shield
+  #inhand:
+  #- RMCRiotShield # TODO RMC14: Port riot shield
 
 - type: entity
   id: RMCRandomHumanoidRiotControl
