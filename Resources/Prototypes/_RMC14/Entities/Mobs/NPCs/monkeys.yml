@@ -88,7 +88,7 @@
     drawdepth: Mobs
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
-      sprite: _RMC14/Mobs/Animals/monkeys/frawa.rsi
+      sprite: _RMC14/Mobs/Animals/monkeys/farwa.rsi
       state: frawa
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
       color: "#ffffff"
