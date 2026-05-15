@@ -2,6 +2,7 @@
   parent: CMJobXenoBase
   id: CMXenoQueen
   name: cm-job-name-xeno-queen
+  description: Spawn as a Xenonid Queen! Lead, support, and coordinate the Xenonids to victory!
   playTimeTracker: CMJobXenoQueen
   requirements:
   - !type:TotalJobsTimeRequirement

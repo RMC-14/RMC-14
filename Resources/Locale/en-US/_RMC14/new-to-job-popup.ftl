@@ -32,9 +32,9 @@ rmc-new-to-job-rifleman = As a rifleman, you are the main fighting force of your
 
                                              You can do a left curly bracket at the start of your message to type in 'LOOC', which will let you talk about things outside of your character, which is helpful for telling people you are new or need help.
 
-rmc-new-to-job-staff-officer = As a staff officer, your job is to “overwatch”, monitor and support the squad under your tasking, and relay orders from the operation Commander.
+rmc-new-to-job-staff-officer = As a staff officer, your job is to "overwatch", monitor and support the squad under your tasking, and relay orders from the operation Commander.
 
-                                             Your main posting is in CIC, at one of four terminals marked by coloured metal plating corresponding to one of four squads. The terminal can send a squad message (send a blue, visible message to the squad regardless of comms), swap marines to another squad, assign someone as acting squad leader, and directly watch marines via helmet cameras (clicking on their name, which only works with a helmet or camera gear). You also have access to a live tactical map, which updates live with marine positions and statuses (alongside xenos, if sensors are up), and a telephone, which allows you to call any other telephone and communicate via speaking without the use of radio.
+                                             Your main posting is in CIC, at one of four terminals marked by coloured metal plating corresponding to one of four squads. The terminal can send a squad message (send a blue, visible message to the squad regardless of comms), swap marines to another squad, assign someone as acting squad leader, and directly watch marines via helmet cameras (clicking on their name, which only works with a helmet or camera gear). You also have access to a live tactical map, which updates live with marine positions and statuses (alongside Xenonids, if sensors are up), and a telephone, which allows you to call any other telephone and communicate via speaking without the use of radio.
 
                                              You can also send supply drops via the Supply Drops tab on the left. Communicate with Requisitions to ensure your supply drop has the supplies that are necessary and that the crate is ready over the requisitions radio frequency (u;). Once the crate is sealed, the crate can be sent on coordinates under roof level 0 or 1.
 
@@ -66,6 +66,39 @@ rmc-new-to-job-dcc = As a Dropship Crew Chief, your job is to assist the pilots 
 
                                              You may be required to perform additional tasks, such as retrieving medical supplies, obtaining parachutes, triage of revivable marine personnel, and any other task given by your assigned pilot.
 
+rmc-new-to-job-xenonid = Welcome sister, and glory to the hive! You are now a member of the Xenonid faction. Rejoice!
+
+
+                                             As you wake up, you are in your larva form. In this form, you are weak, and cannot fight. It's best that you move quickly to your Queen for protection! To find your way to the queen, follow the Xenonid Tracker on the right hand side of your screen, it has the appearance of an arrow that will point to certain things, but by default will point to the Xenonid Queen. Follow this tracker to the queen to stay safe for now.
+
+                                             As a member of the Xenos faction, your goal is to help your sisters (other Xenos)  win the fight against the dreaded sky talls! (The Marines). But how can you fight as only a measly larva? By evolution of course! In larva form, you automatically gain points, and once you are full, you are able to evolve to any Xenonid that belongs in Xenonid "Tier 1" using the "evolve" ability in your ability hotbar to open up the evolution menu and selecting the Xenonid you want to become. Later, you might be able to gain even more evolution points and evolve into more powerful/specialized forms, which are dependent on the Tier 1 you chose!
+
+
+                                             The "Tier 1" Xenos include:
+
+                                             Drone
+
+                                             Defender
+
+                                             Sentinel
+
+                                             Runner
+
+
+                                             All Xenos have  a set of abilities unique to them. You can drag the abilities in the hotbar, by clicking and dragging the icon to a different key. You can also change the default keybinds in Options > Controls > Hotbar. There are many types of abilities and many types of Xenos, so it's best to look in the guidebook for what each ability does and how to use each ability.
+
+
+                                             As a Xenonid, your boss is of course, the Queen! Listen to what the queen has to say, they will likely give announcements that show up as large red text in the chatbox, these announcements will likely have crucial information or tasks that need to be done. Make sure to listen to them whenever they appear.
+
+
+                                             Now, you likely don’t know how to navigate the area you are in, not to worry, you have a map that shows your live position (And only your position if the queen is not in something called "Oviposition"). To open the map, click the "tactical map button" on the right hand side of the screen. This will open up a map of the current game map you are on, with your live position being shown as an icon with white rings expanding out of it. Use this marker to help navigate your way around the map.
+
+
+                                              a Xenonid, your job is to help fight the talls, and there are many ways to do so, you can build as a drone, or fight with your sisters as a combat caste. A very important job of Xenos is capturing marines to infect them with parasites, which allows for more Xenos to be born! Look at the drone guidebook entry for more information on capping.
+
+
+                                             This is only a basic guide to get you started. For more information on how to play Xenos, ask for help with the players in game, look up Xenonid entries on the guidebook, or with mentor help using the F1 Key.
+                                             
 rmc-new-to-job-combat-tech = As a Combat Technician, your job as a frontline engineer is to help your squad by building fortifications, repairing machinery, and performing demolitions.
 
                                              You will want a full compliment of tools; make sure to pack a blowtorch, wrench, wirecutters, crowbar, screwdriver, and security access tuner (often called a multitool). Additional tools that you can choose to take are an entrenching tool to fill sandbags and clear tunnels, or a light replacer to replace broken lights. Most tools can be found in tools vendors, including the middle vendor in your preperation room.
@@ -93,6 +126,7 @@ rmc-new-to-job-maint-tech = As a Maintenance Technician, your job is to perform 
                                              Perform a rennovation of an area. Make sure to get permission from both the Chief Engineer and the Department Head of the area you wish to rennovate.
 
                                              Deploy to help construct the FOB alongside Bravo squad, your engineering skills could prove invaluable. Make sure to get deployment permission from the Chief Engineer or Commander.
+                                             
 rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of the Weston-Yamada Corporation, sent to make sure both WEYA has their interests maintained while improving and aiding relations with the UNMC. As a Corporate Liaison, you serve as a roleplay role, intended to create interesting and fun roleplay while not having a major effect on the operation. You are subject to Marine Law and are expected not to break it.
 
                                              Your office contains a large amount of RP-relevant supplies, from papers and pens to clothing and cigars. Make sure to familiarize yourself with your office; it's essentially your home base. Use your fax machine to fax Weston-Yamada to report information or make requests. You will oftentimes not receive a response, and this is normal.
