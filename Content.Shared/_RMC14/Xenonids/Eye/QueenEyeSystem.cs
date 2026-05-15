@@ -93,6 +93,9 @@ public sealed class QueenEyeSystem : EntitySystem
         if (RemoveQueenEye(ent))
             return;
 
+        if (HasComp<XenoAttachedOvipositorComponent>(ent.Owner))
+            SwapPlantWeedsToWorldTarget(ent);
+
         if (_net.IsClient)
             return;
 
@@ -110,9 +113,6 @@ public sealed class QueenEyeSystem : EntitySystem
         _eye.SetTarget(ent, ent.Comp.Eye, eye);
         _eye.SetDrawFov(ent, false);
         _mover.SetRelay(ent, ent.Comp.Eye.Value);
-
-        if (HasComp<XenoAttachedOvipositorComponent>(ent.Owner))
-            SwapPlantWeedsToWorldTarget(ent);
     }
 
     private void OnQueenEyeActionGetVisMask(Entity<QueenEyeActionComponent> ent, ref GetVisMaskEvent args)

@@ -36,9 +36,8 @@ public sealed class SwappableActionSystem : EntitySystem
             targetAction.Repeat = false;
             Dirty(actionId, targetAction);
 
-            var worldTarget = EnsureComp<WorldTargetActionComponent>(actionId);
-            worldTarget.Event = swappedEvent;
-            Dirty(actionId, worldTarget);
+            EnsureComp<WorldTargetActionComponent>(actionId);
+            _actions.SetEvent(actionId, swappedEvent);
 
             _metaData.SetEntityName(actionId, swappedName);
             _metaData.SetEntityDescription(actionId, swappedDescription);
@@ -65,8 +64,8 @@ public sealed class SwappableActionSystem : EntitySystem
             RemComp<WorldTargetActionComponent>(actionId);
             RemComp<TargetActionComponent>(actionId);
 
-            var instant = EnsureComp<InstantActionComponent>(actionId);
-            instant.Event = originalEvent;
+            EnsureComp<InstantActionComponent>(actionId);
+            _actions.SetEvent(actionId, originalEvent);
 
             _metaData.SetEntityName(actionId, swappable.OriginalName);
             _metaData.SetEntityDescription(actionId, swappable.OriginalDescription);
