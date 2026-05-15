@@ -41,23 +41,18 @@
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
     baseFireModes:
-    - SemiAuto
     - Burst
     - FullAuto
     recoilWielded: 0
     recoilUnwielded: 0
     scatterWielded: 1
     scatterUnwielded: 1
-    baseFireRate: 3
+    baseFireRate: 3.33
     burstScatterMult: 3
     modifiers:
       Burst:
         fireDelay: 0.35
         maxScatterModifier: 10
-        shotsToMaxScatter: 6
-      FullAuto:
-        fireDelay: 0.01
-        maxScatterModifier: 3
         shotsToMaxScatter: 6
   - type: ItemSlots
     slots:
@@ -85,6 +80,7 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-underbarrel:
+        locked: true
         startingAttachable: RMCAttachmentBipod
         whitelist:
           tags:
