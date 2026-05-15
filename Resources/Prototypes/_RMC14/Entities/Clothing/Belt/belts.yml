@@ -1067,14 +1067,46 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/mateba_belt.rsi
     layers:
-    - state: cmateba
-      map: [ "enum.CMHolsterLayers.Fill" ]
-      visible: false
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: cmateba
+      map: [ "mateba_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: amateba
+      map: [ "mateba_golden_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: smateba
+      map: [ "mateba_silver_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: cmateba_special
+      map: [ "mateba_special_fill" ]
     - state: icon
     - state: half
       map: [ "openLayer" ]
     - state: full
       map: [ "closedLayer" ]
+  - type: ItemMapper
+    spriteLayers:
+    - mateba_fill
+    - mateba_golden_fill
+    - mateba_silver_fill
+    - mateba_special_fill
+    mapLayers:
+      mateba_fill:
+        whitelist:
+          tags:
+          - RMCMateba
+      mateba_golden_fill:
+        whitelist:
+          tags:
+          - RMCMatebaGolden
+      mateba_silver_fill:
+        whitelist:
+          tags:
+          - RMCMatebaSilver
+      mateba_special_fill:
+        whitelist:
+          tags:
+          - RMCMatebaSpecial
   - type: Clothing
     slots:
     - suitStorage
@@ -1087,6 +1119,9 @@
     whitelist:
       tags:
       - RMCMateba
+      - RMCMatebaGolden
+      - RMCMatebaSilver
+      - RMCMatebaSpecial
       - RMCSpeedLoaderMateba
       - RMCSpeedLoaderMatebaHE
       - RMCSpeedLoaderMatebaHIAP
@@ -1115,9 +1150,18 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/amateba_belt.rsi
     layers:
-    - state: amateba
-      map: [ "enum.CMHolsterLayers.Fill" ]
-      visible: false
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: cmateba
+      map: [ "mateba_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: amateba
+      map: [ "mateba_golden_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: smateba
+      map: [ "mateba_silver_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: cmateba_special
+      map: [ "mateba_special_fill" ]
     - state: icon
     - state: half
       map: [ "openLayer" ]

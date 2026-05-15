@@ -115,6 +115,11 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMatebaGolden
   - type: AttachableHolder
     slots:
       rmc-bslot-barrel:
@@ -154,6 +159,11 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_silver.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_silver.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMatebaSilver
   - type: AttachableHolder
     slots:
       rmc-bslot-barrel:
@@ -193,6 +203,11 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMatebaSpecial
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.2
   - type: AttachableHolder
@@ -634,3 +649,12 @@
 
 - type: Tag
   id: RMCMateba
+
+- type: Tag
+  id: RMCMatebaGolden
+
+- type: Tag
+  id: RMCMatebaSilver
+
+- type: Tag
+  id: RMCMatebaSpecial
