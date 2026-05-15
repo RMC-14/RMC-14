@@ -323,3 +323,17 @@
     id: RMCSpawnMobStok
     prototypes:
     - RMCMobSmallHostStok
+
+
+- type: entity
+  parent: CMSpawnMobMonkey
+  id: RMCSpawnMobYiren
+  components:
+  - type: Sprite
+    layers:
+    - state: monkey_spawn
+      sprite: _RMC14/Markers/landmarks.rsi
+  - type: ProportionalSpawner
+    id: RMCSpawnMobYiren
+    prototypes:
+    - RMCMobSmallHostYiren

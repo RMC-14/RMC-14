@@ -73,7 +73,6 @@
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
     #smallHostVariants:
       #RMCMobSmallHostNeaera
-      #CMMobSmallHostKobold
     nightmareScenarios:
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
@@ -272,7 +271,6 @@
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
     #smallHostVariants:
       #RMCMobSmallHostStok
-      #RMCMobSmallHostKobold
     nightmareScenarios:
     - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF survivors are in
       scenarioProbability: 0.15
@@ -381,7 +379,7 @@
 
       No further information available at this time."
     #smallHostVariants:
-      #RMCMobSmallHostMonkey
+      #CMMobSmallHostKobold
     nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
     - scenarioName: none
       scenarioProbability: 1
@@ -425,7 +423,6 @@
     #smallHostVariants:
       #RMCMobSmallHostNeaera
       #RMCMobSmallHostStok
-      #CMMobSmallHostKobold
     nightmareScenarios:
     - scenarioName: none # Reduce this to 0.9 once CLF survivors are in at 0.1
       scenarioProbability: 1
@@ -457,8 +454,8 @@
     camouflage: Classic
     announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
     #smallHostVariants:
-      #RMCMobNaera
-      #RMCMobStok
+      #RMCSmallHostMobNaera
+      #RMCSmallHostMobStok
     selectRandomSurvivorVariant: false
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
@@ -490,9 +487,7 @@
     camouflage: Urban
     announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
     #smallHostVariants:
-      #RMCMobSmallHostFarwa
       #CMMobSmallHostMonkey
-      #CMMobSmallHostKobold
     nightmareScenarios:
     - scenarioName: tse_airbase
       scenarioProbability: 0.3
