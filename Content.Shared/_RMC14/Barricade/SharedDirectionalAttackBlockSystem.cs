@@ -145,6 +145,6 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         var originPosition = _transform.GetMoverCoordinates(origin).Position;
         var ray = new CollisionRay(originPosition, direction, (int)collisionGroup);
         var intersect = _physics.IntersectRayWithPredicate(Transform(origin).MapID, ray, checkRange, e => !Transform(e).Anchored);
-        return intersect.Select(r => r.HitEntity).ToHashSet().Count > 0;
+        return intersect.Any();
     }
 }
