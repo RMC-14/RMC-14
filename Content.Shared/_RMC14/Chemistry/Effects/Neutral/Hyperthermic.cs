@@ -48,7 +48,7 @@ public sealed partial class Hyperthermic : RMCChemicalEffect
 
         var sys = System<SharedRMCTemperatureSystem>(args);
         var current = sys.GetTemperature(args.TargetEntity);
-        var change = (potency * 2 * args.Scale.Float()).Float();
+        var change = (potency * 2 * args.Scale).Float();
         var temp = Math.Min(TemperatureHelpers.CelsiusToKelvin(120), current + change);
 
         sys.ForceChangeTemperature(args.TargetEntity, temp);
@@ -61,7 +61,7 @@ public sealed partial class Hyperthermic : RMCChemicalEffect
     {
         var sys = System<SharedRMCTemperatureSystem>(args);
         var current = sys.GetTemperature(args.TargetEntity);
-        var change = (potency * 5 * args.Scale.Float()).Float();
+        var change = (potency * 5 * args.Scale).Float();
         var temp = Math.Min(TemperatureHelpers.CelsiusToKelvin(120), current + change);
 
         sys.ForceChangeTemperature(args.TargetEntity, temp);

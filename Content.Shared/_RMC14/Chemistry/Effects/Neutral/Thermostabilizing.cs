@@ -15,7 +15,7 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Stabilizes the temperature of the body to [color=green]{TemperatureHelpers.CelsiusToKelvin(Atmospherics.NormalBodyTemperature)}[/color] kelvins, by [color=green]{40f * PotencyPerSecond * 1.5f}[/color] K at a time.\n" +
+        return $"Stabilizes body temperature to [color=green]{Atmospherics.NormalBodyTemperature}ºC[/color], by [color=green]{40f * PotencyPerSecond * 1.5f}ºC[/color] at a time.\n" +
                $"Overdoses cause [color=red]40[/color] seconds of unconsciousness.\n" +
                $"Critical overdoses cause a [color=red]5%[/color] chance to inflict [color=red]10[/color] seconds of unconsciousness";
     }
@@ -28,7 +28,7 @@ public sealed partial class Thermostabilizing : RMCChemicalEffect
         if (Math.Abs(current - normalBodyTemp) < 0.01)
             return;
 
-        var change = 40f * potency.Float() * 1.5f;
+        var change = (40f * potency * 1.5f * args.Scale).Float();
         var temp = current > normalBodyTemp
             ? Math.Max(normalBodyTemp, current - change)
             : Math.Min(normalBodyTemp, current + change);

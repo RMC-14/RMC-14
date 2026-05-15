@@ -94,8 +94,8 @@ public sealed class CMMobStateSystem : EntitySystem
 
     private void OnInaprovalineBeforeCritDamage(Entity<MarineComponent> ent, ref DamageStateCritBeforeDamageEvent args)
     {
-        if (_rmcBloodstream.TryGetChemicalSolution(ent, out _, out var chemicals)
-            && chemicals.GetTotalPrototypeQuantity(Inaprovaline) > FixedPoint2.Zero)
+        if (_rmcBloodstream.TryGetChemicalSolution(ent, out _, out var chemicals) &&
+            chemicals.GetTotalPrototypeQuantity(Inaprovaline) > FixedPoint2.Zero)
         {
             // Don't take bleedout damage on Inaprovaline
             args.Damage.ClampMax(0);
