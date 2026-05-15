@@ -767,8 +767,8 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Blunt: 25
-        Piercing: 15
+        Blunt: 12
+        Piercing: 8
     maxFixedRange: 0
   - type: TriggerOnFixedDistanceStop
     delay: 0

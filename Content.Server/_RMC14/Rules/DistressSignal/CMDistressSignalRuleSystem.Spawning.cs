@@ -7,6 +7,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Fax;
 using Content.Shared._RMC14.Humanoid;
+using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
@@ -121,10 +122,12 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private void ApplyJobSlotScaling(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev)
     {
-        var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
+        var totalPlayers = ev.PlayerPool.Count;
+        var vehicleThreshold = _config.GetCVar(RMCCVars.RMCVehicleRoundstartThresholdPlayers);
+        var totalXenos = (int) Math.Round(Math.Max(1, totalPlayers / _marinesPerXeno));
         // TODO RMC14 dont count survivors
-        var totalSurvivors = (int) Math.Clamp((int)Math.Round(ev.PlayerPool.Count / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
-        var marines = ev.PlayerPool.Count - totalXenos - totalSurvivors;
+        var totalSurvivors = (int) Math.Clamp((int)Math.Round(totalPlayers / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
+        var marines = totalPlayers - totalXenos - totalSurvivors;
 
         // TODO RMC14: Move to component
         if (!comp.DoJobSlotScaling || marines <= 0 || !_config.GetCVar(RMCCVars.RMCJobSlotScaling))
@@ -138,7 +141,14 @@ public sealed partial class CMDistressSignalRuleSystem
 
             foreach (var (job, scaling) in scalingComp.Jobs)
             {
-                var slots = _rmcStationJobs.GetSlots(marines, scaling.Factor, scaling.C, scaling.Min, scaling.Max);
+                var minimumPlayers = job == "CMVehicleCrewman"
+                    ? vehicleThreshold
+                    : scaling.MinimumPlayers;
+
+                var slots = minimumPlayers > 0 && totalPlayers < minimumPlayers
+                    ? 0
+                    : _rmcStationJobs.GetSlots(marines, scaling.Factor, scaling.C, scaling.Min, scaling.Max);
+
                 if (scaling.Squad)
                 {
                     foreach (var squadId in comp.SquadIds)
@@ -162,6 +172,12 @@ public sealed partial class CMDistressSignalRuleSystem
                 _stationJobs.TrySetJobSlot(stationId, job, slots, stationJobs: stationJobs);
             }
         }
+
+        var roundstartTank = totalPlayers >= vehicleThreshold;
+        _tech.SetVehicleUnlockOptionDisabled("VehicleHumveeARC", roundstartTank);
+
+        if (roundstartTank)
+            RaiseLocalEvent(new TechUnlockVehicleEvent("VehicleTank"));
     }
 
     /// <summary>

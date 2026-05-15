@@ -171,6 +171,7 @@
     state: back_1
   - type: Clickable
   - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
 
 - type: entity
   parent: VehicleBoxVanWallBase
@@ -196,6 +197,7 @@
     state: back_1
   - type: Clickable
   - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
 
 - type: entity
   parent: VehicleBoxVanWallBase
@@ -205,6 +207,7 @@
     state: back_2
   - type: Clickable
   - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
 
 - type: entity
   parent: VehicleBoxVanWallBase
@@ -373,6 +376,7 @@
     state: interior_door
   - type: Clickable
   - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
@@ -390,6 +394,7 @@
     fadeOnSharedGrid: true
   - type: Clickable
   - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
   - type: RemoveComponents
     components:
     - type: InteractionTransparency

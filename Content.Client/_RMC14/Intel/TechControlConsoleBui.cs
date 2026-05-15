@@ -62,9 +62,13 @@ public sealed class TechControlConsoleBui : BoundUserInterface
             _window.Options.AddChild(optionContainer);
 
             var options = console.Tree.Options[i];
+            var addedOption = false;
             for (var j = 0; j < options.Count; j++)
             {
                 var option = options[j];
+                if (option.Disabled)
+                    continue;
+
                 var optionControl = new Control();
                 var texture = option.Icon.DirFrame0().TextureFor(Direction.South);
                 optionControl.AddChild(new TextureButton
@@ -92,9 +96,17 @@ public sealed class TechControlConsoleBui : BoundUserInterface
 
                 optionContainer.AddChild(new Control { HorizontalExpand = true });
                 optionContainer.AddChild(optionControl);
+                addedOption = true;
 
-                if (j == options.Count - 1)
-                    optionContainer.AddChild(new Control { HorizontalExpand = true });
+            }
+
+            if (addedOption)
+            {
+                optionContainer.AddChild(new Control { HorizontalExpand = true });
+            }
+            else
+            {
+                _window.Options.RemoveChild(optionContainer);
             }
         }
     }
@@ -141,6 +153,7 @@ public sealed class TechControlConsoleBui : BoundUserInterface
 
         var canPurchase = points >= option.CurrentCost &&
                           currentTier >= tier &&
+                          !option.Disabled &&
                           (!option.Purchased || option.Repurchasable) &&
                           option.TimeLock  < _ticker.RoundDuration();
 

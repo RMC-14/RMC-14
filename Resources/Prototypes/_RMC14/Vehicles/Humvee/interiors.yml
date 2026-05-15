@@ -108,6 +108,7 @@
     drawdepth: Items
   - type: Clickable
   - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
   - type: RemoveComponents
     components:
     - type: InteractionTransparency

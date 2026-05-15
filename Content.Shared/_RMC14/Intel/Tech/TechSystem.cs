@@ -106,6 +106,9 @@ public sealed class TechSystem : EntitySystem
         if (option.Purchased && !option.Repurchasable)
             return;
 
+        if (option.Disabled)
+            return;
+
         if (!_intel.TryUsePoints(option.CurrentCost))
             return;
 
@@ -122,5 +125,48 @@ public sealed class TechSystem : EntitySystem
         }
 
         _intel.UpdateTree(tree);
+    }
+
+    public bool SetVehicleUnlockOptionDisabled(string unlockId, bool disabled)
+    {
+        if (string.IsNullOrWhiteSpace(unlockId))
+            return false;
+
+        var tree = _intel.EnsureTechTree();
+        var changed = false;
+
+        foreach (var tier in tree.Comp.Tree.Options)
+        {
+            for (var i = 0; i < tier.Count; i++)
+            {
+                var option = tier[i];
+                if (!OptionUnlocksVehicle(option, unlockId) || option.Disabled == disabled)
+                    continue;
+
+                tier[i] = option with { Disabled = disabled };
+                changed = true;
+            }
+        }
+
+        if (!changed)
+            return false;
+
+        Dirty(tree);
+        _intel.UpdateTree(tree);
+        return true;
+    }
+
+    private static bool OptionUnlocksVehicle(TechOption option, string unlockId)
+    {
+        foreach (var ev in option.Events)
+        {
+            if (ev is TechUnlockVehicleEvent unlock &&
+                string.Equals(unlock.Unlock, unlockId, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

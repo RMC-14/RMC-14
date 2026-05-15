@@ -244,6 +244,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCSurvivorsMaximum =
         CVarDef.Create("rmc.survivors_maximum", 7, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCVehicleRoundstartThresholdPlayers =
+        CVarDef.Create("rmc.vehicle_roundstart_threshold_players", 200, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCSpawnerMaxCorpses =
         CVarDef.Create("rmc.spawner_max_corpses", 100, CVar.REPLICATED | CVar.SERVER);
 

@@ -785,13 +785,24 @@ public sealed class VehicleSupplySystem : EntitySystem
                 var key = Normalize(selectedId);
                 var layers = new List<VehicleHardpointLayerState>();
                 var overlays = new List<VehicleSupplyPreviewOverlay>();
+                var previewName = selectedId;
+
+                foreach (var entry in console.Vehicles)
+                {
+                    if (entry.Vehicle.Id != selectedId)
+                        continue;
+
+                    previewName = GetEntryName(entry);
+                    break;
+                }
+
                 if (TryGetStoredEntity(lift.Comp, key, selectedCopyIndex, out var stored))
                 {
                     layers = BuildPreviewLayers(stored);
                     overlays = BuildPreviewOverlays(stored);
                 }
 
-                preview = new VehicleSupplyPreviewState(selectedId, selectedCopyIndex, layers, overlays);
+                preview = new VehicleSupplyPreviewState(selectedId, previewName, selectedCopyIndex, layers, overlays);
             }
         }
 
@@ -1017,15 +1028,15 @@ public sealed class VehicleSupplySystem : EntitySystem
         categoryLabel = string.Empty;
         categoryOrder = int.MaxValue;
 
-        if (!string.Equals(Normalize(vehicleId), "rmcvehicletank", StringComparison.Ordinal))
+        if (!string.Equals(Normalize(vehicleId), "vehicletank", StringComparison.Ordinal))
             return false;
 
         var hardpointKey = Normalize(hardpointId);
-        if (hardpointKey == "rmcvehicletanksnowplow")
+        if (hardpointKey == "vehicletanksnowplow")
         {
             categoryKey = "tank-general";
             categoryLabel = "General";
-            categoryOrder = 3;
+            categoryOrder = 5;
             return true;
         }
 
@@ -1034,24 +1045,29 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         switch (Normalize(hardpointType))
         {
-            case "cannon":
+            case "hardpointtypecannon":
                 categoryKey = "tank-primary";
                 categoryLabel = "Primary";
                 categoryOrder = 0;
                 return true;
-            case "launcher":
+            case "hardpointtypelauncher":
                 categoryKey = "tank-secondary";
                 categoryLabel = "Secondary";
                 categoryOrder = 1;
                 return true;
-            case "armor":
+            case "hardpointtypearmor":
                 categoryKey = "tank-armor";
                 categoryLabel = "Armor";
                 categoryOrder = 2;
                 return true;
-            case "support":
+            case "hardpointtypesupport":
                 categoryKey = "tank-support";
                 categoryLabel = "Support";
+                categoryOrder = 3;
+                return true;
+            case "hardpointtypewheel":
+                categoryKey = "tank-treads";
+                categoryLabel = "Treads";
                 categoryOrder = 4;
                 return true;
             default:
@@ -1165,6 +1181,72 @@ public sealed class VehicleSupplySystem : EntitySystem
         }
 
         AddStored(lift, key);
+
+        Dirty(liftUid, lift);
+        SendConsoleStateAll();
+        UpdateVendorSectionsAll();
+        return true;
+    }
+
+    public bool DebugEnsureVehicleOnAnyLift(string vehicleId, bool forceUnlock, out string? reason)
+    {
+        reason = null;
+
+        if (!TryGetAnyLift(out var lift))
+        {
+            reason = "No vehicle lift found.";
+            return false;
+        }
+
+        var result = DebugEnsureVehicleInStorage(lift.Owner, vehicleId, forceUnlock, out reason);
+        if (result)
+            DebugEnsureVehicleInConsoles(lift.Owner, vehicleId);
+
+        return result;
+    }
+
+    public bool DebugEnsureVehicleInStorage(EntityUid liftUid, string vehicleId, bool forceUnlock, out string? reason)
+    {
+        reason = null;
+
+        if (!TryComp(liftUid, out VehicleSupplyLiftComponent? lift))
+        {
+            reason = $"Entity {liftUid} does not have VehicleSupplyLiftComponent.";
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(vehicleId))
+        {
+            reason = "Vehicle id is empty.";
+            return false;
+        }
+
+        if (!_prototypes.TryIndex<EntityPrototype>(vehicleId, out _))
+        {
+            reason = $"Unknown vehicle prototype '{vehicleId}'.";
+            return false;
+        }
+
+        var key = Normalize(vehicleId);
+
+        if (forceUnlock)
+        {
+            var tech = EnsureSupplyTech();
+            if (!tech.Comp.Unlocked.Contains(key))
+            {
+                tech.Comp.Unlocked.Add(key);
+                Dirty(tech);
+            }
+        }
+
+        var alreadyAvailable =
+            GetStoredCount(lift, key) > 0 ||
+            lift.Deployed.Contains(key) ||
+            (!string.IsNullOrWhiteSpace(lift.PendingVehicle) && Normalize(lift.PendingVehicle) == key) ||
+            (!string.IsNullOrWhiteSpace(lift.ActiveVehicleId) && Normalize(lift.ActiveVehicleId) == key);
+
+        if (!alreadyAvailable)
+            AddStored(lift, key);
 
         Dirty(liftUid, lift);
         SendConsoleStateAll();

@@ -81,7 +81,7 @@ public sealed partial class VehicleSupplyWindow : FancyWindow
             return;
         }
 
-        PreviewTitle.Text = preview.VehicleId;
+        PreviewTitle.Text = string.IsNullOrWhiteSpace(preview.VehicleName) ? preview.VehicleId : preview.VehicleName;
         VehiclePreview.SetPrototype(preview.VehicleId);
         VehiclePreview.OverrideDirection = Direction.South;
 
