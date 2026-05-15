@@ -315,8 +315,10 @@ public sealed class QueenEyeSystem : EntitySystem
             Loc.GetString("rmc-xeno-queen-eye-expand-weeds-desc"));
     }
 
-    private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen) =>
+    private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen)
+    {
         _swappableAction.SwapAllToInstant(queen.Owner, new XenoPlantWeedsActionEvent());
+    }
 
     public bool IsInQueenEye(Entity<QueenEyeActionComponent?> queen)
     {
