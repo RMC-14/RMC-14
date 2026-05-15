@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: XxSWAG-MASTER-OVERLORDxX
-  changes:
-  - message: Fixed synth ranks
-    type: Fix
-  id: 2702
-  time: '2025-12-20T04:16:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8796
 - author: wheelwrightt
   changes:
   - message: SLAW can no longer take more rockets after it fires.
@@ -4472,5 +4465,12 @@
   id: 3201
   time: '2026-05-15T22:07:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8847
+- author: Ian321
+  changes:
+  - message: Rescued survivors can now hear announcements.
+    type: Tweak
+  id: 3202
+  time: '2026-05-15T23:32:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9723
 Name: RMC14
 Order: -1
