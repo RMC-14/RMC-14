@@ -141,7 +141,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
 
             if (TryComp<DoAfterComponent>(burrower, out var doAfterComp))
             {
-                foreach (var (doAfterIndex, doAfter) in doAfterComp.DoAfters)
+                foreach (var doAfterIndex in doAfterComp.DoAfters.Keys)
                 {
                     _doAfter.Cancel(burrower, doAfterIndex, doAfterComp);
                 }
