@@ -274,7 +274,7 @@
 
 - type: entity
   parent: CMSpawnMobMonkey
-  id: RMCSpawnMobKobold
+  id: CMSpawnMobKobold
   components:
   - type: Sprite
     layers:
