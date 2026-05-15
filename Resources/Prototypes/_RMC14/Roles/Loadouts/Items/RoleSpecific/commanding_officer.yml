@@ -104,12 +104,12 @@
   id: COCareerPathIntelRMC
   dummyEntity: RMCLoadoutDummyCareerPathIntel
   cost: 0
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: CMJobIntelOfficer
-      time: 36000 # 10 hours
+  # effects:
+  # - !type:JobRequirementLoadoutEffect
+  #   requirement:
+  #     !type:RoleTimeRequirement
+  #     role: CMJobIntelOfficer
+  #     time: 36000 # 10 hours
   equipment:
     head: CMHeadBeretCOBlack
     gloves: CMHandsBlackMarineColorless
@@ -126,7 +126,7 @@
     requirement:
       !type:TotalJobsTimeRequirement
       group: CMJobsMedical
-      time: 36000 # 10 hours
+      time: 18000 # 5 hours
   equipment:
     head: CMHeadBeretCOWhite
     gloves: CMHandsWhite
@@ -138,12 +138,12 @@
   id: COCareerPathAviationRMC
   dummyEntity: RMCLoadoutDummyCareerPathAviation
   cost: 0
-  # effects:
-  # - !type:JobRequirementLoadoutEffect
-  #   requirement:
-  #     !type:TotalJobsTimeRequirement
-  #     group: CMJobsDropship
-  #     time: 36000 # 10 hours
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:TotalJobsTimeRequirement
+      group: CMJobsDropship
+      time: 18000 # 5 hours
   equipment:
     head: CMHeadBeretCOBlack
     gloves: RMCHandsBlack
@@ -152,7 +152,7 @@
     jumpsuit: RMCJumpsuitCOTurtleneck
     eyes: RMCGlassesAviators
 
-# - type: loadout                          Y'know, wouldn't be right if the Tanker path was available before the role itself comes around
+# - type: loadout                          Wouldn't be right if the Tanker path was available before the role itself comes around
 #   id: COCareerPathTankerRMC
 #   dummyEntity: RMCLoadoutDummyCareerPathTanker
 #   cost: 0
@@ -179,7 +179,7 @@
     requirement:
       !type:TotalJobsTimeRequirement
       group: CMJobsEngineering
-      time: 36000 # 10 hours
+      time: 18000 # 5 hours
   equipment:
     head: CMHeadBeretEngineer
     gloves: CMHandsInsulated
@@ -196,7 +196,7 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: CMRequisitions
-      time: 36000 # 10 hours
+      time: 18000 # 5 hours
   equipment:
     head: CMHeadBeretTan
     gloves: CMHandsInsulated

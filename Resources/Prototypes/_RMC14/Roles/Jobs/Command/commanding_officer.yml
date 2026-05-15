@@ -88,8 +88,6 @@
 - type: startingGear
   id: CMGearCommandingOfficer
   equipment:
-    jumpsuit: CMJumpsuitBO
-    shoes: CMShoesLaceupCommander
     ears: CMHeadsetSeniorCommand
     pocket1: RMCPouchCommand
     pocket2: RMCPouchGeneralLarge
