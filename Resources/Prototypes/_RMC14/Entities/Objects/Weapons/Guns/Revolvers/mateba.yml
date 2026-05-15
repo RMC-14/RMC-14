@@ -609,6 +609,10 @@
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
     state: c_matebacase
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMatebaGolden
   - type: Storage
     whitelist:
       tags:
