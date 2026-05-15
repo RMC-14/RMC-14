@@ -243,8 +243,10 @@
       - id: CMMagazineSMGM63Ext
       - id: CMMagazineSMGM63AP
       - id: CMMagazineSMGM63AP
-      - id: RMCMagazinePistolM13Ext
-      - id: RMCMagazinePistolM13Ext
+      - id: RMCMagazinePistolM13
+      - id: RMCMagazinePistolM13
+      - id: RMCMagazinePistolM13ExtAP
+      - id: RMCMagazinePistolM13Drum
       - id: RMCMagazinePistolM13Ext
       - id: RMCMagazinePistolM13Ext
       - id: RMCSpeedLoaderM44
