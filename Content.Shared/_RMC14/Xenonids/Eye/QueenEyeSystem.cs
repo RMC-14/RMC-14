@@ -61,6 +61,7 @@ public sealed class QueenEyeSystem : EntitySystem
         };
 
         _swappableAction.RegisterEventFactory(() => new XenoExpandWeedsActionEvent());
+        _swappableAction.RegisterInstantEventFactory(() => new XenoPlantWeedsActionEvent());
 
         SubscribeLocalEvent<QueenEyeActionComponent, MapInitEvent>(OnQueenEyeActionMapInit);
         SubscribeLocalEvent<QueenEyeActionComponent, ComponentRemove>(OnQueenEyeActionRemove);
