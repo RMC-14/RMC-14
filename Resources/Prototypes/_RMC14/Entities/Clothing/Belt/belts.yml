@@ -1084,10 +1084,13 @@
     maxItemSize: Normal
     grid:
     - 0,0,13,1 # 7 slots
-    blacklist:
+    whitelist:
       tags:
-      - CMFirstAidKit
-      - RMCEngineerKit
+      - RMCMateba
+      - RMCSpeedLoaderMateba
+      - RMCSpeedLoaderMatebaHE
+      - RMCSpeedLoaderMatebaHIAP
+      - RMCSpeedLoaderMatebaHighImpact
   - type: Tag
     tags:
     - RMCMatebaHolster
