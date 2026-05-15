@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: Fixed the under-barrel toggling issue.
-    type: Fix
-  id: 2700
-  time: '2025-12-15T02:14:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8735
 - author: DrSmugleaf
   changes:
   - message: Fixed Shiva's administration being labelled command centre, and Shiva's
@@ -4473,5 +4466,12 @@
   id: 3199
   time: '2026-05-15T05:50:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7555
+- author: SharkSnake98
+  changes:
+  - message: Changed the Chances Claim Landing Zone Sign to be more Soul
+    type: Tweak
+  id: 3200
+  time: '2026-05-15T15:17:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9775
 Name: RMC14
 Order: -1
