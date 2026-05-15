@@ -1,14 +1,15 @@
 using System;
+using System.Collections.Generic;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class VehicleAmmoLoaderComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntProtoId HardpointType;
+    public EntProtoId? HardpointType;
 
     [DataField, AutoNetworkedField]
     public EntProtoId? BulletType;
@@ -18,4 +19,7 @@ public sealed partial class VehicleAmmoLoaderComponent : Component
 
     [DataField, AutoNetworkedField]
     public float InteractionRange = 2.5f;
+
+    [DataField, AutoNetworkedField]
+    public VehicleAmmoLoaderUiState Ui = new(new List<VehicleAmmoLoaderUiEntry>(), 0, 0, null);
 }

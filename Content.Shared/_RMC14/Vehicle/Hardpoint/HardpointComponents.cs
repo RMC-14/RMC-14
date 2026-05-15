@@ -39,7 +39,7 @@ public sealed partial class HardpointItemComponent : Component
 }
 
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(HardpointSystem), typeof(HardpointSlotSystem))]
 public sealed partial class HardpointSlotsComponent : Component
 {
@@ -54,6 +54,9 @@ public sealed partial class HardpointSlotsComponent : Component
 
     [DataField]
     public ProtoId<ToolQualityPrototype> RemoveToolQuality = "Prying";
+
+    [DataField, AutoNetworkedField]
+    public HardpointUiState Ui = new(new List<HardpointUiEntry>(), 0f, 0f, false, null);
 }
 
 [RegisterComponent]

@@ -584,7 +584,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
 
     private static bool CanUseAmmoProvider(VehicleAmmoLoaderComponent loader, VehicleMountedAmmoProvider provider)
     {
-        return loader.HardpointType == default ||
+        return loader.HardpointType == null ||
                provider.Slot.HardpointType == loader.HardpointType;
     }
 
@@ -644,14 +644,12 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
                 canUnload));
         }
 
-        _ui.SetUiState(
-            loader,
-            VehicleAmmoLoaderUiKey.Key,
-            new VehicleAmmoLoaderUiState(
-                entries,
-                heldBox?.Amount ?? 0,
-                heldBox?.Max ?? 0,
-                heldBox?.BulletType));
+        loaderComp.Ui = new VehicleAmmoLoaderUiState(
+            entries,
+            heldBox?.Amount ?? 0,
+            heldBox?.Max ?? 0,
+            heldBox?.BulletType);
+        Dirty(loader, loaderComp);
     }
 
     private List<VehicleAmmoLoaderUiAmmoSlot> GetAmmoSlotUiEntries(

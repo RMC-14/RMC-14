@@ -11,32 +11,83 @@ public enum VehicleWeaponsUiKey : byte
     Key,
 }
 
-[Serializable, NetSerializable]
-public sealed class VehicleWeaponsUiEntry
+[Serializable, NetSerializable, DataDefinition]
+public sealed partial class VehicleWeaponsUiEntry
 {
-    public readonly string SlotId;
-    public readonly string HardpointType;
-    public readonly NetEntity? MountedEntity;
-    public readonly string? InstalledName;
-    public readonly NetEntity? InstalledEntity;
-    public readonly bool HasItem;
-    public readonly bool Selectable;
-    public readonly bool Selected;
-    public readonly int AmmoCount;
-    public readonly int AmmoCapacity;
-    public readonly bool HasAmmo;
-    public readonly int MagazineSize;
-    public readonly int StoredMagazines;
-    public readonly int MaxStoredMagazines;
-    public readonly bool HasMagazineData;
-    public readonly string? OperatorName;
-    public readonly bool OperatorIsSelf;
-    public readonly float Integrity;
-    public readonly float MaxIntegrity;
-    public readonly bool HasIntegrity;
-    public readonly float CooldownRemaining;
-    public readonly float CooldownTotal;
-    public readonly bool IsOnCooldown;
+    [DataField]
+    public string SlotId;
+
+    [DataField]
+    public string HardpointType;
+
+    [DataField]
+    public NetEntity? MountedEntity;
+
+    [DataField]
+    public string? InstalledName;
+
+    [DataField]
+    public NetEntity? InstalledEntity;
+
+    [DataField]
+    public bool HasItem;
+
+    [DataField]
+    public bool Selectable;
+
+    [DataField]
+    public bool Selected;
+
+    [DataField]
+    public int AmmoCount;
+
+    [DataField]
+    public int AmmoCapacity;
+
+    [DataField]
+    public bool HasAmmo;
+
+    [DataField]
+    public int MagazineSize;
+
+    [DataField]
+    public int StoredMagazines;
+
+    [DataField]
+    public int MaxStoredMagazines;
+
+    [DataField]
+    public bool HasMagazineData;
+
+    [DataField]
+    public string? OperatorName;
+
+    [DataField]
+    public bool OperatorIsSelf;
+
+    [DataField]
+    public float Integrity;
+
+    [DataField]
+    public float MaxIntegrity;
+
+    [DataField]
+    public bool HasIntegrity;
+
+    [DataField]
+    public float CooldownRemaining;
+
+    [DataField]
+    public float CooldownTotal;
+
+    [DataField]
+    public bool IsOnCooldown;
+
+    public VehicleWeaponsUiEntry()
+    {
+        SlotId = string.Empty;
+        HardpointType = string.Empty;
+    }
 
     public VehicleWeaponsUiEntry(
         string slotId,
@@ -89,15 +140,31 @@ public sealed class VehicleWeaponsUiEntry
     }
 }
 
-[Serializable, NetSerializable]
-public sealed class VehicleWeaponsUiState : BoundUserInterfaceState
+[Serializable, NetSerializable, DataDefinition]
+public sealed partial class VehicleWeaponsUiState
 {
-    public readonly NetEntity Vehicle;
-    public readonly List<VehicleWeaponsUiEntry> Hardpoints;
-    public readonly bool CanToggleStabilization;
-    public readonly bool StabilizationEnabled;
-    public readonly bool CanToggleAuto;
-    public readonly bool AutoEnabled;
+    [DataField]
+    public NetEntity Vehicle;
+
+    [DataField]
+    public List<VehicleWeaponsUiEntry> Hardpoints;
+
+    [DataField]
+    public bool CanToggleStabilization;
+
+    [DataField]
+    public bool StabilizationEnabled;
+
+    [DataField]
+    public bool CanToggleAuto;
+
+    [DataField]
+    public bool AutoEnabled;
+
+    public VehicleWeaponsUiState()
+    {
+        Hardpoints = new List<VehicleWeaponsUiEntry>();
+    }
 
     public VehicleWeaponsUiState(
         NetEntity vehicle,

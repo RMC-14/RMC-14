@@ -23,7 +23,7 @@ public sealed partial class VehicleSupplyEntry
     public List<EntProtoId> Hardpoints = new();
 }
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class VehicleSupplyConsoleComponent : Component
 {
     [DataField(required: true)]
@@ -37,6 +37,9 @@ public sealed partial class VehicleSupplyConsoleComponent : Component
 
     [DataField]
     public int SelectedVehicleCopyIndex;
+
+    [DataField, AutoNetworkedField]
+    public VehicleSupplyUiState Ui = new(null, false, null, null, 0, null, new List<VehicleSupplyEntryState>());
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

@@ -31,6 +31,7 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -795,8 +796,19 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         }
     }
 
+    private bool ShouldIgnoreTileFire(EntityUid uid)
+    {
+        return _blockTileFireQuery.HasComp(uid) || HasComp<VehicleRideSurfaceRiderComponent>(uid);
+    }
+
     private void TryIgnite(Entity<RMCIgniteOnCollideComponent> ent, EntityUid other, bool checkIgnited)
     {
+        if (_tileFireQuery.HasComp(ent.Owner) && ShouldIgnoreTileFire(other))
+        {
+            RemCompDeferred<SteppingOnFireComponent>(other);
+            return;
+        }
+
         EnsureComp<SteppingOnFireComponent>(other);
         var flammableEnt = new Entity<FlammableComponent?>(other, null);
         if (!Resolve(flammableEnt, ref flammableEnt.Comp, false))
@@ -839,6 +851,12 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void ApplyTileEffect(Entity<SteppingOnFireComponent> ent, RMCIgniteOnCollideComponent ignite, EntityUid fireEntity)
     {
+        if (ShouldIgnoreTileFire(ent.Owner))
+        {
+            RemCompDeferred<SteppingOnFireComponent>(ent);
+            return;
+        }
+
         var timing = _timing.CurTime;
 
         if (ignite.TileDamage is not { } tile)

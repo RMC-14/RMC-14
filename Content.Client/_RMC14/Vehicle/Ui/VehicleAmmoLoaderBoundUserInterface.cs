@@ -26,6 +26,7 @@ public sealed class VehicleAmmoLoaderBoundUserInterface : BoundUserInterface
         _menu.OnSlotSelected += (slotPath, ammoSlot, action) =>
             SendMessage(new VehicleAmmoLoaderSelectMessage(slotPath, ammoSlot, action));
         _menu.OpenCentered();
+        Refresh();
     }
 
     protected override void Dispose(bool disposing)
@@ -42,13 +43,15 @@ public sealed class VehicleAmmoLoaderBoundUserInterface : BoundUserInterface
         _menu = null;
     }
 
-    protected override void UpdateState(BoundUserInterfaceState state)
+    public void Refresh()
     {
-        base.UpdateState(state);
-
-        if (state is not VehicleAmmoLoaderUiState ammoState)
+        if (_menu is not { IsOpen: true })
             return;
 
+        if (!EntMan.TryGetComponent(Owner, out VehicleAmmoLoaderComponent? loader))
+            return;
+
+        var ammoState = loader.Ui;
         _menu?.Update(ammoState.Hardpoints, ammoState.AmmoAmount, ammoState.AmmoMax, ammoState.AmmoPrototype);
     }
 }

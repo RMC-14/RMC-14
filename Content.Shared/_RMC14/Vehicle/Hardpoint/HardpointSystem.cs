@@ -55,7 +55,6 @@ public sealed partial class HardpointSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly VehicleTopologySystem _topology = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
     [Dependency] private readonly VehicleWheelSystem _wheels = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
@@ -1270,14 +1269,13 @@ public sealed partial class HardpointSystem : EntitySystem
             }
         }
 
-        _ui.SetUiState(uid,
-            HardpointUiKey.Key,
-            new HardpointBoundUserInterfaceState(
-                entries,
-                frameIntegrity,
-                frameMaxIntegrity,
-                hasFrameIntegrity,
-                state.LastUiError));
+        component.Ui = new HardpointUiState(
+            entries,
+            frameIntegrity,
+            frameMaxIntegrity,
+            hasFrameIntegrity,
+            state.LastUiError);
+        Dirty(uid, component);
     }
 
     internal bool HasAttachedHardpoints(EntityUid owner, HardpointSlotsComponent slots, ItemSlotsComponent itemSlots)

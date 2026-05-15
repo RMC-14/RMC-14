@@ -36,7 +36,6 @@ public sealed class VehicleSupplySystem : EntitySystem
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedCMAutomatedVendorSystem _vendor = default!;
     [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
 
@@ -815,8 +814,8 @@ public sealed class VehicleSupplySystem : EntitySystem
             available.Add(new VehicleSupplyEntryState(entry.Vehicle.Id, GetEntryName(entry), 1));
         }
 
-        var state = new VehicleSupplyBuiState(mode, busy, activeId, selectedId, selectedCopyIndex, preview, available);
-        _ui.SetUiState(uid, VehicleSupplyUIKey.Key, state);
+        console.Ui = new VehicleSupplyUiState(mode, busy, activeId, selectedId, selectedCopyIndex, preview, available);
+        Dirty(uid, console);
     }
 
     private void UpdateVendorSectionsAll()
