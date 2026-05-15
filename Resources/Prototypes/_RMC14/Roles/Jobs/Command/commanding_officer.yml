@@ -4,6 +4,7 @@
   id: CMCommandingOfficer
   name: cm-job-name-commanding-officer
   description: cm-job-description-commanding-officer
+  spawnMenuRoleName: UNMC Commanding Officer (Naked unless setup in lobby)
   playTimeTracker: CMJobCommandingOfficer
   requirements:
   - !type:DepartmentTimeRequirement
@@ -86,7 +87,7 @@
     - type: SeeNewPlayers
 
 - type: startingGear
-  id: CMGearCommandingOfficer
+  id: CMGearCommandingOfficer #Main CO gear set is chosen via lobby customization
   equipment:
     ears: CMHeadsetSeniorCommand
     pocket1: RMCPouchCommand
