@@ -1017,6 +1017,11 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi # TODO cool sprite
   - type: CMHardArmor
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 0
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
