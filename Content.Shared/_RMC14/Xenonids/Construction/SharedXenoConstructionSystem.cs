@@ -333,10 +333,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var existing = _xenoWeeds.GetWeedsOnFloor(grid, coordinates);
         if (existing is { Comp.IsSource: true })
         {
-            if (isInQueenEye)
-                _popup.PopupCoordinates(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
-            else
-                _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
+            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
             return;
         }
 
@@ -360,26 +357,17 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (adjacentNodes.Count == 0)
             {
-                if (isInQueenEye)
-                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-weeds-no-nearby-node"),
-                        args.Target,
-                        xeno,
-                        PopupType.MediumCaution);
-                else
-                    _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-no-nearby-node"),
-                        args.Target,
-                        xeno,
-                        PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-no-nearby-node"),
+                    args.Target,
+                    xeno,
+                    PopupType.MediumCaution);
 
                 return;
             }
 
             if (!canSpread)
             {
-                if (isInQueenEye)
-                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-weeds-blocked"), coordinates, xeno.Owner);
-                else
-                    _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), args.Target, xeno.Owner, PopupType.MediumCaution);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), args.Target, xeno.Owner, PopupType.MediumCaution);
 
                 return;
             }
@@ -391,7 +379,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         var plasmaCost = existing == null ? args.PlasmaCost : args.SourcePlasmaCost;
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost, predicted: !isInQueenEye, popupOn: isInQueenEye ? coordinates : args.Target))
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost, popupOn: args.Target))
             return;
 
         if (existing != null)

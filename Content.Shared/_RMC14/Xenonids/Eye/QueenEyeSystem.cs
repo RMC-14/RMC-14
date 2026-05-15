@@ -60,6 +60,8 @@ public sealed class QueenEyeSystem : EntitySystem
             VisibleTiles = _singleTiles,
         };
 
+        _swappableAction.RegisterEventFactory(() => new XenoExpandWeedsActionEvent());
+
         SubscribeLocalEvent<QueenEyeActionComponent, MapInitEvent>(OnQueenEyeActionMapInit);
         SubscribeLocalEvent<QueenEyeActionComponent, ComponentRemove>(OnQueenEyeActionRemove);
         SubscribeLocalEvent<QueenEyeActionComponent, EntityTerminatingEvent>(OnQueenEyeActionTerminating);

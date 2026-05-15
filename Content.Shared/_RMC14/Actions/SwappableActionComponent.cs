@@ -11,4 +11,7 @@ public sealed partial class SwappableActionComponent : Component
 
     [DataField, AutoNetworkedField]
     public string OriginalDescription = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public string? SwappedEventType;
 }

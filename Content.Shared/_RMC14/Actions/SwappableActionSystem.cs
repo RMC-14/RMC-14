@@ -1,5 +1,6 @@
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Actions;
 
@@ -7,6 +8,31 @@ public sealed class SwappableActionSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+
+    private readonly Dictionary<string, Func<WorldTargetActionEvent>> _eventFactories = new();
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<SwappableActionComponent, AfterAutoHandleStateEvent>(OnSwappableHandleState);
+    }
+
+    public void RegisterEventFactory<TEvent>(Func<TEvent> factory) where TEvent : WorldTargetActionEvent
+    {
+        _eventFactories[typeof(TEvent).FullName!] = () => factory();
+    }
+
+    private void OnSwappableHandleState(Entity<SwappableActionComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (ent.Comp.SwappedEventType == null || !HasComp<WorldTargetActionComponent>(ent))
+            return;
+
+        if (!_eventFactories.TryGetValue(ent.Comp.SwappedEventType, out var factory))
+            return;
+
+        _actions.SetEvent(ent, factory());
+    }
 
     public bool SwapInstantToWorldTarget<TOriginalEvent>(
         EntityUid owner,
@@ -25,6 +51,7 @@ public sealed class SwappableActionSystem : EntitySystem
             var swappable = EnsureComp<SwappableActionComponent>(actionId);
             swappable.OriginalName = MetaData(actionId).EntityName;
             swappable.OriginalDescription = MetaData(actionId).EntityDescription;
+            swappable.SwappedEventType = swappedEvent.GetType().FullName;
             Dirty(actionId, swappable);
 
             RemComp<InstantActionComponent>(actionId);
