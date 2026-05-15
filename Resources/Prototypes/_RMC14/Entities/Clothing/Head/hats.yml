@@ -217,6 +217,10 @@
       components:
       - HelmetAccessory
   - type: HelmetAccessoryHolder
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMHeadCapMP
