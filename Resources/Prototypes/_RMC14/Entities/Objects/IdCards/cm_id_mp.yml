@@ -32,8 +32,8 @@
 
 - type: entity
   parent: CMIDCardBase
-  id: RMCIDCardChiefRiotControl
-  name: riot control ID card
+  id: RMCIDCardRiotControlLeader
+  name: riot control leader ID card
   components:
   - type: PresetIdCard
-    job: CMChiefRiotControl
+    job: CMRiotControlLeader
