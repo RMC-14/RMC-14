@@ -2,7 +2,7 @@
   parent: RMCBaseWeaponLMG
   name: QYJ-72 General Purpose Machine Gun
   id: RMCWeaponLMGQYJ72
-  description: The QYJ-72 is the standard GPMG of the Socialists Progressive Peoples, chambered in 7.62x54mmR, it fires a hard-hitting cartridge with a high rate of fire. With an extremely large box at 250 rounds, the QJY-72 is designed with suppressing fire and accuracy by volume of fire at its forefront.
+  description: The QYJ-72 is the standard GPMG of the Socialists Progressive Peoples, chambered in 7.62x54mmR, it fires a hard-hitting cartridge with a high rate of fire. With an extremely large box at 250 rounds, the QYJ-72 is designed with suppressing fire and accuracy by volume of fire at its forefront.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/LMGs/qyj_72/qyj_72_inhands.rsi
@@ -91,6 +91,10 @@
   - type: Wieldable
   - type: GunRequiresWield
   - type: RMCMagneticItem
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - QYJWhitelist
 
 - type: entity
   parent: RMCMagazineLMGBase
