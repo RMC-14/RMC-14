@@ -5,8 +5,6 @@
   name: monkey
   suffix: RMC, Small Host
   components:
-  - type: NameIdentifier
-    group: Monkey
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
@@ -18,8 +16,6 @@
   name: kobold
   suffix: RMC, Small Host
   components:
-  - type: NameIdentifier
-    group: Kobold
   - type: LizardAccent
   - type: ReplacementAccent
     accent: kobold
@@ -88,8 +84,6 @@
   name: farwa
   suffix: RMC, Small Host
   components:
-  - type: NameIdentifier
-    group: frawa
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -136,8 +130,6 @@
   name: neaera
   suffix: RMC, Small Host
   components:
-  - type: NameIdentifier
-    group: Neaera
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -179,8 +171,6 @@
   name: stok
   suffix: RMC, Small Host
   components:
-  - type: NameIdentifier
-    group: Stok
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -228,8 +218,6 @@
   name: yiren
   suffix: RMC, Small Host
   components:
-  - type: NameIdentifier
-    group: Yiren
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -306,7 +294,7 @@
     - state: monkey_spawn
       sprite: _RMC14/Markers/landmarks.rsi
   - type: ProportionalSpawner
-    id: CMSpawnMobFarwa
+    id: RMCSpawnMobFarwa
     prototypes:
     - RMCMobSmallHostFarwa
 
@@ -319,7 +307,7 @@
     - state: monkey_spawn
       sprite: _RMC14/Markers/landmarks.rsi
   - type: ProportionalSpawner
-    id: CMSpawnMobNeaera
+    id: RMCSpawnMobNeaera
     prototypes:
     - RMCMobSmallHostNeaera
 
@@ -332,6 +320,6 @@
     - state: monkey_spawn
       sprite: _RMC14/Markers/landmarks.rsi
   - type: ProportionalSpawner
-    id: CMSpawnMobStok
+    id: RMCSpawnMobStok
     prototypes:
-    - CMMobSmallHostStok
+    - RMCMobSmallHostStok
