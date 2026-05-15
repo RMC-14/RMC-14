@@ -89,7 +89,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       sprite: _RMC14/Mobs/Animals/monkeys/farwa.rsi
-      state: frawa
+      state: farwa
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
       color: "#ffffff"
       sprite: Objects/Misc/handcuffs.rsi
