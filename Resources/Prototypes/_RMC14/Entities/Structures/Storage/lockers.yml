@@ -314,6 +314,16 @@
   - type: AccessReader
     access: [["CMAccessCMO"]]
 
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerFieldDoctor
+  name: field doctor's locker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/medical.rsi
+  - type: AccessReader
+    access: [["RMCAccessFieldDoctor"]]
+
 # Engineering
 - type: entity
   parent: CMLockerBase
