@@ -1,14 +1,14 @@
 - type: job
   parent: CMRiotControl
-  id: CMChiefRiotControl
-  name: rmc-job-name-chief-riot-control
-  description: rmc-job-description-riot-control
-  playTimeTracker: CMJobChiefRiotControl
+  id: CMRiotControlLeader
+  name: rmc-job-name-riot-control-leader
+  description: rmc-job-description-riot-control-leader
+  playTimeTracker: CMJobRiotControlLeader
   ranks:
     RMCRankSecondLT: []
-  startingGear: RMCGearChiefRiotControl
-  spawnMenuRoleName: UNMC Chief Riot MP (CRMP)
-  icon: "RMCJobIconRiotCMP"
+  startingGear: RMCGearRiotControlLeader
+  spawnMenuRoleName: Riot MP Leader
+  icon: "RMCJobIconRiotMPL"
   special:
   - !type:AddComponentSpecial
     components:
