@@ -63,7 +63,7 @@
   name: cmb technician preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomWeapon:
     - [ ]
     primaryWeapons:

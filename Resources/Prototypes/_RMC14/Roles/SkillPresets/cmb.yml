@@ -29,7 +29,7 @@
       RMCSkillConstruction: 2
       RMCSkillCqc: 2
       RMCSkillEndurance: 2
-      RMCSkillEngineer: 2
+      RMCSkillEngineer: 3
       RMCSkillFirearms: 1
       RMCSkillFireman: 2
       RMCSkillMedical: 2
@@ -48,9 +48,9 @@
       RMCSkillCqc: 2
       RMCSkillConstruction: 2
       RMCSkillFirearms: 1
-      RMCSkillFireman: 1
+      RMCSkillFireman: 2
       RMCSkillEndurance: 2
-      RMCSkillEngineer: 1
+      RMCSkillEngineer: 2
       RMCSkillExecution: 1
       RMCSkillLeadership: 3
       RMCSkillMedical: 2
