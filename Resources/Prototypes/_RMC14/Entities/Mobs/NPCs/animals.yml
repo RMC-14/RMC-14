@@ -310,7 +310,7 @@
     attributes:
       gender: epicene
   - type: FixedIdentity
-    name: cm-chatsan-replacement-dog
+    name: cm-chatsan-replacement-cat
 
 - type: entity
   parent: RMCMobCat
