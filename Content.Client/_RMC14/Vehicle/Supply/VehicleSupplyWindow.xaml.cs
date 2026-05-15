@@ -49,6 +49,7 @@ public sealed partial class VehicleSupplyWindow : FancyWindow
     public VehicleSupplyWindow()
     {
         RobustXamlLoader.Load(this);
+        OnClose += ClearPreviewOverlays;
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -65,7 +66,7 @@ public sealed partial class VehicleSupplyWindow : FancyWindow
         UpdateLiftActivity(args.DeltaSeconds);
     }
 
-    public void SetPreview(VehicleSupplyPreviewState? preview)
+    public void SetPreview(VehicleSupplyPreviewState? preview, string? previewName = null)
     {
         if (preview == null || string.IsNullOrWhiteSpace(preview.VehicleId))
         {
@@ -81,7 +82,7 @@ public sealed partial class VehicleSupplyWindow : FancyWindow
             return;
         }
 
-        PreviewTitle.Text = string.IsNullOrWhiteSpace(preview.VehicleName) ? preview.VehicleId : preview.VehicleName;
+        PreviewTitle.Text = string.IsNullOrWhiteSpace(previewName) ? preview.VehicleId : previewName;
         VehiclePreview.SetPrototype(preview.VehicleId);
         VehiclePreview.OverrideDirection = Direction.South;
 
@@ -108,19 +109,20 @@ public sealed partial class VehicleSupplyWindow : FancyWindow
             return;
 
         var sprite = entity.Comp1;
+        var spriteSystem = _entManager.System<SpriteSystem>();
         foreach (var entry in _previewLayers)
         {
-            if (!sprite.LayerMapTryGet(entry.Layer, out var layer))
+            if (!spriteSystem.LayerMapTryGet((entity.Owner, sprite), entry.Layer, out var layer, false))
                 continue;
 
             if (string.IsNullOrWhiteSpace(entry.State))
             {
-                sprite.LayerSetVisible(layer, false);
+                spriteSystem.LayerSetVisible((entity.Owner, sprite), layer, false);
                 continue;
             }
 
-            sprite.LayerSetState(layer, entry.State);
-            sprite.LayerSetVisible(layer, true);
+            spriteSystem.LayerSetRsiState((entity.Owner, sprite), layer, entry.State);
+            spriteSystem.LayerSetVisible((entity.Owner, sprite), layer, true);
         }
 
         _previewDirty = false;
@@ -249,10 +251,7 @@ public sealed partial class VehicleSupplyWindow : FancyWindow
         foreach (var overlay in _previewOverlayViews)
         {
             if (!overlay.View.Disposed)
-            {
                 overlay.View.Orphan();
-                overlay.View.Dispose();
-            }
 
             if (!_entManager.Deleted(overlay.Entity))
                 _entManager.DeleteEntity(overlay.Entity);
@@ -318,12 +317,6 @@ public sealed partial class VehicleSupplyWindow : FancyWindow
             BorderColor = Color.FromHex("#2D5E8E"),
             BorderThickness = new Thickness(1)
         };
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        ClearPreviewOverlays();
     }
 
 }

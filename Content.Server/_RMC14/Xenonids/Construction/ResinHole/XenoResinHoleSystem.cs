@@ -675,7 +675,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private static float GetVehicleWheelDamageForTrapLevel(int trapLevel)
     {
-        // TODO: correct values
+        // TODO RMC14: tune these values against actual vehicle wheel balance.
         return trapLevel switch
         {
             1 => 36.6f,

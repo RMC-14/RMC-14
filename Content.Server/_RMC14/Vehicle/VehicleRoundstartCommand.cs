@@ -5,8 +5,10 @@ using Content.Server.Station.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared.Administration;
+using Content.Shared.Roles;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
 using Robust.Shared.Toolshed.Syntax;
 
@@ -15,6 +17,10 @@ namespace Content.Server._RMC14.Vehicle;
 [ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
 public sealed class VehicleRoundstartCommand : ToolshedCommand
 {
+    private static readonly ProtoId<JobPrototype> VehicleCrewmanJob = "CMVehicleCrewman";
+    private static readonly EntProtoId VehicleHumveeArcUnlock = "VehicleHumveeARC";
+    private static readonly EntProtoId VehicleTankUnlock = "VehicleTank";
+
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
 
@@ -44,20 +50,20 @@ public sealed class VehicleRoundstartCommand : ToolshedCommand
         var query = EntityManager.EntityQueryEnumerator<StationJobsComponent, StationSpawningComponent>();
         while (query.MoveNext(out var stationId, out var jobs, out _))
         {
-            if (!stationJobs.TryGetJobSlot(stationId, "CMVehicleCrewman", out _, jobs))
+            if (!stationJobs.TryGetJobSlot(stationId, VehicleCrewmanJob, out _, jobs))
                 continue;
 
-            stationJobs.TrySetJobSlot(stationId, "CMVehicleCrewman", crewmanSlots, stationJobs: jobs);
+            stationJobs.TrySetJobSlot(stationId, VehicleCrewmanJob, crewmanSlots, stationJobs: jobs);
             stationsUpdated++;
         }
 
         var tankReady = totalPlayers >= threshold;
-        tech.SetVehicleUnlockOptionDisabled("VehicleHumveeARC", tankReady);
+        tech.SetVehicleUnlockOptionDisabled(VehicleHumveeArcUnlock, tankReady);
 
         string tankResult;
         if (tankReady)
         {
-            tankResult = vehicleSupply.DebugEnsureVehicleOnAnyLift("VehicleTank", true, out var reason)
+            tankResult = vehicleSupply.DebugEnsureVehicleOnAnyLift(VehicleTankUnlock, true, out var reason)
                 ? "ensured on vehicle lift"
                 : reason ?? "failed to ensure on vehicle lift";
         }

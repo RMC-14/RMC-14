@@ -1,13 +1,19 @@
+// ReSharper disable CheckNamespace
+
 using System.Linq;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.CombatMode;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.UserInterface.Systems.Actions;
 
 public sealed partial class ActionUIController
 {
+    private static readonly EntProtoId ActionVehicleToggleViewId = "ActionVehicleToggleView";
+    private static readonly EntProtoId ActionVehicleLockId = "ActionVehicleLock";
+
     private readonly List<EntityUid?> _vehicleActions = new();
     private bool _vehicleHotbarOverride;
 
@@ -65,10 +71,7 @@ public sealed partial class ActionUIController
         if (_playerManager.LocalEntity is not { } user)
             return false;
 
-        if (!EntityManager.HasComponent<VehicleWeaponsOperatorComponent>(user))
-            return false;
-
-        return true;
+        return EntityManager.HasComponent<VehicleWeaponsOperatorComponent>(user);
     }
 
     private bool HasVehicleHotbarContext()
@@ -132,60 +135,24 @@ public sealed partial class ActionUIController
             }
         }
 
-        EntityUid? viewToggleAction = null;
-        if (_playerManager.LocalEntity is { } toggleUser &&
-            EntityManager.TryGetComponent<VehicleViewToggleComponent>(toggleUser, out var toggleState) &&
-            toggleState.Action is { } viewAction &&
-            !EntityManager.HasComponent<VehicleHardpointActionComponent>(viewAction))
-        {
-            viewToggleAction = viewAction;
-        }
-
-        if (viewToggleAction == null)
-        {
-            foreach (var action in _actionsSystem.GetClientActions())
-            {
-                var uid = action.Owner;
-                if (EntityManager.HasComponent<VehicleHardpointActionComponent>(uid) ||
-                    !EntityManager.TryGetComponent<MetaDataComponent>(uid, out var metaData) ||
-                    metaData.EntityPrototype?.ID != "ActionVehicleToggleView")
-                {
-                    continue;
-                }
-
-                viewToggleAction = uid;
-                break;
-            }
-        }
+        var viewToggleAction = FindVehicleUtilityAction(
+            ActionVehicleToggleViewId,
+            user => EntityManager.TryGetComponent<VehicleViewToggleComponent>(user, out var toggleState)
+                    && toggleState.Action is { } viewAction
+                    && !EntityManager.HasComponent<VehicleHardpointActionComponent>(viewAction)
+                ? viewAction
+                : null);
 
         if (viewToggleAction is { } ensuredViewAction)
             desiredOrdered.Add(ensuredViewAction);
 
-        EntityUid? vehicleLockAction = null;
-        if (_playerManager.LocalEntity is { } lockUser &&
-            EntityManager.TryGetComponent<VehicleLockActionComponent>(lockUser, out var lockState) &&
-            lockState.Action is { } lockAction &&
-            !EntityManager.HasComponent<VehicleHardpointActionComponent>(lockAction))
-        {
-            vehicleLockAction = lockAction;
-        }
-
-        if (vehicleLockAction == null)
-        {
-            foreach (var action in _actionsSystem.GetClientActions())
-            {
-                var uid = action.Owner;
-                if (EntityManager.HasComponent<VehicleHardpointActionComponent>(uid) ||
-                    !EntityManager.TryGetComponent<MetaDataComponent>(uid, out var metaData) ||
-                    metaData.EntityPrototype?.ID != "ActionVehicleLock")
-                {
-                    continue;
-                }
-
-                vehicleLockAction = uid;
-                break;
-            }
-        }
+        var vehicleLockAction = FindVehicleUtilityAction(
+            ActionVehicleLockId,
+            user => EntityManager.TryGetComponent<VehicleLockActionComponent>(user, out var lockState)
+                    && lockState.Action is { } lockAction
+                    && !EntityManager.HasComponent<VehicleHardpointActionComponent>(lockAction)
+                ? lockAction
+                : null);
 
         if (vehicleLockAction is { } ensuredVehicleLockAction)
             desiredOrdered.Add(ensuredVehicleLockAction);
@@ -228,5 +195,37 @@ public sealed partial class ActionUIController
         }
 
         return false;
+    }
+
+    private EntityUid? FindVehicleUtilityAction(EntProtoId actionPrototype, Func<EntityUid, EntityUid?> componentAction)
+    {
+        if (_actionsSystem == null)
+            return null;
+
+        if (_playerManager.LocalEntity is { } user &&
+            componentAction(user) is { } existing)
+        {
+            return existing;
+        }
+
+        foreach (var action in _actionsSystem.GetClientActions())
+        {
+            var uid = action.Owner;
+            if (EntityManager.HasComponent<VehicleHardpointActionComponent>(uid) ||
+                !MatchesActionPrototype(uid, actionPrototype))
+            {
+                continue;
+            }
+
+            return uid;
+        }
+
+        return null;
+    }
+
+    private bool MatchesActionPrototype(EntityUid actionUid, EntProtoId prototype)
+    {
+        return EntityManager.TryGetComponent(actionUid, out MetaDataComponent? metaData) &&
+               metaData.EntityPrototype?.ID == prototype.ToString();
     }
 }

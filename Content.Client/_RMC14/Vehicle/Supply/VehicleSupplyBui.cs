@@ -51,7 +51,7 @@ public sealed class VehicleSupplyBui : BoundUserInterface
         _suppressEvents = true;
         UpdateStatus(uiState);
         UpdateLists(uiState);
-        _window.SetPreview(uiState.Preview);
+        _window.SetPreview(uiState.Preview, GetSelectedVehicleName(uiState));
         _suppressEvents = false;
     }
 
@@ -297,5 +297,20 @@ public sealed class VehicleSupplyBui : BoundUserInterface
         button.DisabledTextColor = HardpointButton.DefaultDisabledTextColor;
 
         button.RefreshStyle();
+    }
+
+    private string? GetSelectedVehicleName(VehicleSupplyBuiState state)
+    {
+        var selectedId = state.SelectedVehicleId;
+        if (string.IsNullOrWhiteSpace(selectedId))
+            return null;
+
+        foreach (var entry in state.Available)
+        {
+            if (entry.Id == selectedId)
+                return entry.Name;
+        }
+
+        return null;
     }
 }

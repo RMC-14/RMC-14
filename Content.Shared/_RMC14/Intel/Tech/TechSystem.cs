@@ -8,6 +8,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.UserInterface;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -100,7 +101,7 @@ public sealed class TechSystem : EntitySystem
             return;
         }
 
-        if (option.TimeLock  > _ticker.RoundDuration())
+        if (option.TimeLock > _ticker.RoundDuration())
             return;
 
         if (option.Purchased && !option.Repurchasable)
@@ -127,11 +128,8 @@ public sealed class TechSystem : EntitySystem
         _intel.UpdateTree(tree);
     }
 
-    public bool SetVehicleUnlockOptionDisabled(string unlockId, bool disabled)
+    public bool SetVehicleUnlockOptionDisabled(EntProtoId unlockId, bool disabled)
     {
-        if (string.IsNullOrWhiteSpace(unlockId))
-            return false;
-
         var tree = _intel.EnsureTechTree();
         var changed = false;
 
@@ -156,12 +154,12 @@ public sealed class TechSystem : EntitySystem
         return true;
     }
 
-    private static bool OptionUnlocksVehicle(TechOption option, string unlockId)
+    private static bool OptionUnlocksVehicle(TechOption option, EntProtoId unlockId)
     {
         foreach (var ev in option.Events)
         {
             if (ev is TechUnlockVehicleEvent unlock &&
-                string.Equals(unlock.Unlock, unlockId, StringComparison.Ordinal))
+                unlock.Unlock == unlockId)
             {
                 return true;
             }

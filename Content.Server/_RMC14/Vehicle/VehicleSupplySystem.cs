@@ -785,16 +785,6 @@ public sealed class VehicleSupplySystem : EntitySystem
                 var key = Normalize(selectedId);
                 var layers = new List<VehicleHardpointLayerState>();
                 var overlays = new List<VehicleSupplyPreviewOverlay>();
-                var previewName = selectedId;
-
-                foreach (var entry in console.Vehicles)
-                {
-                    if (entry.Vehicle.Id != selectedId)
-                        continue;
-
-                    previewName = GetEntryName(entry);
-                    break;
-                }
 
                 if (TryGetStoredEntity(lift.Comp, key, selectedCopyIndex, out var stored))
                 {
@@ -802,7 +792,7 @@ public sealed class VehicleSupplySystem : EntitySystem
                     overlays = BuildPreviewOverlays(stored);
                 }
 
-                preview = new VehicleSupplyPreviewState(selectedId, previewName, selectedCopyIndex, layers, overlays);
+                preview = new VehicleSupplyPreviewState(selectedId, layers, overlays);
             }
         }
 

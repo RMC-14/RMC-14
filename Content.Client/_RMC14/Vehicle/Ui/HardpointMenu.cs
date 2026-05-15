@@ -68,6 +68,7 @@ public sealed partial class HardpointMenu : FancyWindow
     public HardpointMenu()
     {
         RobustXamlLoader.Load(this);
+        OnClose += ClearPreviewOverlays;
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -518,22 +519,13 @@ public sealed partial class HardpointMenu : FancyWindow
         foreach (var overlay in _previewOverlays)
         {
             if (!overlay.View.Disposed)
-            {
                 overlay.View.Orphan();
-                overlay.View.Dispose();
-            }
 
             if (_entManager.EntityExists(overlay.Entity))
                 _entManager.DeleteEntity(overlay.Entity);
         }
 
         _previewOverlays.Clear();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        ClearPreviewOverlays();
     }
 
     private void UpdateWindowSizing(bool hasFrameIntegrity, bool hasError)

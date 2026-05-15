@@ -172,7 +172,7 @@
   - type: VehicleSound
     collisionSoundCooldown: 0.4
   - type: VehicleEnter
-    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml #TODO ACTUAL CLF INTERIOR
+    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml #TODO RMC14 add a dedicated CLF interior
     enterDoAfter: 1.0
     exitDoAfter: 1.0
     maxPassengers: 10

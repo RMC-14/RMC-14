@@ -10,7 +10,9 @@ using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
 using Content.Shared.Tag;
+// RMC14
 using Content.Shared.Vehicle.Components;
+// RMC14
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
@@ -494,8 +496,10 @@ public sealed partial class ExplosionSystem
             && !xform.Anchored
             && throwForce > 0
             && !EntityManager.IsQueuedForDeletion(uid)
+            // RMC14
             && !HasComp<VehicleComponent>(uid)
             && !HasComp<GridVehicleMoverComponent>(uid)
+            // RMC14
             && _physicsQuery.TryGetComponent(uid, out var physics)
             && physics.BodyType == BodyType.Dynamic)
         {

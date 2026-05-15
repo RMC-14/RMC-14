@@ -13,11 +13,11 @@
   sound:
     collection: CMExplosion # TODO RMC14 bigboom
     params:
-      volume: 1000
+      volume: -3
   smallSound:
     collection: CMExplosion
     params:
-      volume: 0
+      volume: -3
 
 
 - type: explosion

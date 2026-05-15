@@ -62,9 +62,11 @@ public sealed partial class VehicleLockActionComponent : Component
 }
 
 public sealed partial class VehicleLockActionEvent : InstantActionEvent;
- [Serializable, NetSerializable]
+
+[Serializable, NetSerializable]
 public sealed partial class VehicleLockBreakDoAfterEvent : SimpleDoAfterEvent;
- [Serializable, NetSerializable]
+
+[Serializable, NetSerializable]
 public sealed partial class VehicleLockRepairDoAfterEvent : SimpleDoAfterEvent;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

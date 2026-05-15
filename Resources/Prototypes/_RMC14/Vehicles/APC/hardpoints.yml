@@ -94,7 +94,7 @@
     selectedMode: FullAuto
     availableModes:
     - FullAuto
-    soundGunshot: /Audio/_RMC14/Vehicle/weapons/dual_autocannon_fire.ogg #TODO change to mono
+    soundGunshot: /Audio/_RMC14/Vehicle/weapons/dual_autocannon_fire.ogg #TODO RMC14 change to mono
     cameraRecoilScalar: 0
   - type: BallisticAmmoProvider
     cycleable: false
@@ -109,7 +109,7 @@
     bulletType: VehicleAmmoBoxAceAutocannon
   - type: GunMuzzleOffset
     useDirectionalOffsets: true
-    offsetNorth: "0,0" #TODO
+    offsetNorth: "0,0" #TODO RMC14 verify the north-facing muzzle offset
     offsetEast: "0,0"
     offsetSouth: "-0.3,0.9"
     offsetWest: "0,0"
@@ -278,4 +278,3 @@
     muzzleOffset: "0,0"
     angleOffset: -90
     useAimDirection: true
-

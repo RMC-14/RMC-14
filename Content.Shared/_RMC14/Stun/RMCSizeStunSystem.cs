@@ -201,7 +201,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
             var knockBackPower = _random.NextFloat(knockBackPowerMin, knockBackPowerMax);
             var direction = vec.Normalized() * knockBackPower;
 
-            //TODO Camera Shake
+            // TODO RMC14: add camera shake when the effect is implemented.
             if (TryComp(target, out PhysicsComponent? physics))
             {
                 _physics.SetLinearVelocity(target, Vector2.Zero, body: physics);

@@ -61,21 +61,15 @@ public sealed class VehicleSupplyBuiState : BoundUserInterfaceState
 public sealed class VehicleSupplyPreviewState
 {
     public string VehicleId;
-    public string VehicleName;
-    public int CopyIndex;
     public List<VehicleHardpointLayerState> Layers;
     public List<VehicleSupplyPreviewOverlay> Overlays;
 
     public VehicleSupplyPreviewState(
         string vehicleId,
-        string vehicleName,
-        int copyIndex,
         List<VehicleHardpointLayerState> layers,
         List<VehicleSupplyPreviewOverlay> overlays)
     {
         VehicleId = vehicleId;
-        VehicleName = vehicleName;
-        CopyIndex = copyIndex;
         Layers = layers;
         Overlays = overlays;
     }
