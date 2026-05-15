@@ -25,9 +25,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-gunner
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadPMC
+      squad: SquadPMC
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

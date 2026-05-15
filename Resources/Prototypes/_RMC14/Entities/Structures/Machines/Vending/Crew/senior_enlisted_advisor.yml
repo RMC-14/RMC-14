@@ -83,11 +83,6 @@
       - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
-    - name: Tools of the Trade
-      takeAll: RMCSEATrainingTools
-      entries:
-      - id: RMCCPRDummy
-        amount: 5
     - name: Books
       takeAll: RMCBook
       entries:
