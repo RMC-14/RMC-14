@@ -181,7 +181,7 @@
   parent: RMCWeaponRevolverMateba
   id: RMCWeaponRevolverMateba2006M
   name: Spearhead 2006M autorevolver
-  description: A high calibre revolver produced by Spearhead Armaments. This one has a black stainless steel finish.
+  description: The Spearhead 2006M is a powerful, fast-firing revolver that uses its own recoil to rotate the cylinders. It fires heavy .454 rounds. It is compatible with more commonly found Unica 6 speedloaders.
   components:
   - type: Gun
     soundGunshot:
