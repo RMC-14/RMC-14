@@ -2734,3 +2734,14 @@
     state: gunner_wilo
   - type: PatronFigurine
     id: e63137eb-1bdf-49cb-9f4c-be29bb2a7e0f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKhaunami
+  name: Khaunami figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: khaunami
+  - type: PatronFigurine
+    id: 0412dc04-70e3-4ff2-8502-16dff8a09b9c
