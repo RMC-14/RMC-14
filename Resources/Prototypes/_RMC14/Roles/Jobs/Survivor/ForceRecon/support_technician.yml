@@ -3,7 +3,7 @@
   id: RMCSurvivorForeconSupportTech
   name: rmc-job-name-forecon-support-tech
   startingGear: RMCGearForeconSupportTech
-  icon: "CMJobIconCombatTech"
+  icon: "RMCJobIconSupportTech"
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobCombatTech
@@ -35,7 +35,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: engi
+        state: spt
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
       whitelist:
