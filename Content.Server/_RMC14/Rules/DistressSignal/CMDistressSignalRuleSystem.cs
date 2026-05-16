@@ -164,6 +164,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     private float _queenBoostRemoteRange;
 
     private bool _spawnedDropships;
+    private TimeSpan _dropshipPreflight;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -268,6 +269,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostDurationMinutes, v => _queenBoostDuration = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostSpeedMultiplier, v => _queenBoostSpeedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostRemoteRange, v => _queenBoostRemoteRange = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipInitialDelayMinutes, v => _dropshipPreflight = TimeSpan.FromMinutes(v), true);
 
         ReloadPrototypes();
     }
@@ -319,6 +321,16 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
 
             if (component.StartARESAnnouncements)
                 _marineAnnounce.AnnounceARESStaging(default, Loc.GetString("rmc-distress-signal-ares-online"), component.AresGreetingAudio,"rmc-announcement-ares-online");
+        }
+
+        if (!component.AresPreflightDone && announcementTime >= _dropshipPreflight)
+        {
+            component.AresPreflightDone = true;
+
+            var ares = _ares.EnsureARES();
+            _marineAnnounce.AnnounceRadio(ares,
+                Loc.GetString("rmc-distress-signal-preflight-complete"),
+                component.AllClearChannel);
         }
 
         if (!component.AresMapDone && announcementTime >= component.AresMapDelay)
