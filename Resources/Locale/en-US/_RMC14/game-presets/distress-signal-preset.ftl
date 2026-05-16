@@ -38,4 +38,4 @@ rmc-distress-signal-saving-report = Saving operational report to archive.
 rmc-distress-signal-final-scan = Commencing final systems scan in 3 minutes.
 rmc-distress-signal-admin-start-fail = Can't start distress signal. Requires at least {$minimum} xeno player but we have {$candidates}.
 rmc-distress-signal-operation-name = Operation {$name}
-rmc-distress-signal-preflight-complete = The initial fueling of the dropships is complete.
+rmc-distress-signal-preflight-complete = The pre-flight fueling of the dropships is complete.
