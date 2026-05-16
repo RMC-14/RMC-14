@@ -2767,3 +2767,14 @@
     state: riley_tilter_stone
   - type: PatronFigurine
     id: 24dc0608-8cd2-49d6-8d64-6da5e8a25cd3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKalaLightseeker
+  name: Kala Lightseeker figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: kala_lightseeker
+  - type: PatronFigurine
+    id: 2ac9bac3-33f9-447c-8a26-ce07ddc05e0c
