@@ -43,6 +43,7 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         GhostnadoButton.Disabled = true;
         GhostnadoButton.OnPressed += _ => WarpToMostFollowed();
         RefreshButton.OnPressed += _ => OnRefreshClicked?.Invoke();
+        OnClose += ClearContent;
         SetupGhostnadoButtonColors();
         SetupRefreshButtonHover();
     }
@@ -114,6 +115,15 @@ public sealed partial class RMCGhostTargetWindow : DefaultWindow
         _sections = sections
             .OrderBy(section => section.Index)
             .ToList();
+        UpdateGhostnadoButtonState();
+    }
+
+    public void ClearContent()
+    {
+        _sections.Clear();
+        _collapsibleSections.Clear();
+        _buttonSearchTexts.Clear();
+        ContentContainer.DisposeAllChildren();
         UpdateGhostnadoButtonState();
     }
 

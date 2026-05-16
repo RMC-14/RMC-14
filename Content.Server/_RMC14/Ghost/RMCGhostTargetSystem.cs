@@ -26,7 +26,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
-using Content.Shared.NPC.Systems;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Warps;
 using Robust.Server.GameObjects;
@@ -41,7 +40,8 @@ namespace Content.Server._RMC14.Ghost;
 
 public sealed class RMCGhostTargetSystem : EntitySystem
 {
-    private const string MarineFaction = "UNMC";
+    private static readonly ProtoId<NpcFactionPrototype> MarineFaction = "UNMC";
+    private static readonly ProtoId<NpcFactionPrototype> XenoFaction = "RMCXeno";
 
     private static readonly LocId EmptyTitle = string.Empty;
     private static readonly LocId MarinesTitle = "rmc-ghost-target-window-group-marines";
@@ -56,16 +56,15 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly FollowerSystem _followerSystem = default!;
+    [Dependency] private readonly FollowerSystem _follower = default!;
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
 
     private EntityQuery<GhostComponent> _ghostQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -120,7 +119,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             return;
         }
 
-        if (_followerSystem.GetMostGhostFollowed() is not { } target)
+        if (_follower.GetMostGhostFollowed() is not { } target)
             return;
 
         WarpTo(ghost, target);
@@ -203,8 +202,18 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
             if (TryComp<NpcFactionMemberComponent>(uid, out var factionComp))
             {
+                var isMarine = false;
                 foreach (var faction in factionComp.Factions)
                 {
+                    if (faction == MarineFaction)
+                    {
+                        isMarine = true;
+                        continue;
+                    }
+
+                    if (faction == XenoFaction)
+                        continue;
+
                     if (!factionSections.All.TryGetValue(faction, out var factionSection))
                         continue;
 
@@ -212,7 +221,7 @@ public sealed class RMCGhostTargetSystem : EntitySystem
                     goto nextTarget;
                 }
 
-                if (_npcFaction.IsMember((uid, factionComp), MarineFaction))
+                if (isMarine)
                 {
                     AddMarineEntry(marines, uid, entry);
                     continue;
@@ -276,6 +285,9 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         var prototypes = new Dictionary<ProtoId<NpcFactionPrototype>, NpcFactionPrototype>();
         foreach (var proto in _prototypes.EnumeratePrototypes<NpcFactionPrototype>())
         {
+            if (!HasFactionSection(proto))
+                continue;
+
             prototypes[proto.ID] = proto;
         }
 
@@ -295,6 +307,12 @@ public sealed class RMCGhostTargetSystem : EntitySystem
         }
 
         return new FactionSectionCollection(all, roots);
+    }
+
+    private static bool HasFactionSection(NpcFactionPrototype proto)
+    {
+        return proto.Name is { } name && !string.IsNullOrEmpty(name.Id) ||
+               proto.Subgroups is { Count: > 0 };
     }
 
     private SectionBuilder? BuildFactionSectionTree(
@@ -395,8 +413,9 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
     private int? GetMarineAuthorityLevel(EntityUid uid)
     {
-        if (!TryComp<MindContainerComponent>(uid, out var mindContainer) ||
-            !_jobs.MindTryGetJob(mindContainer.Mind, out var job))
+        TryComp<MindContainerComponent>(uid, out var mindContainer);
+
+        if (!_jobs.MindTryGetJob(GetMindId(uid, mindContainer), out var job))
         {
             return null;
         }
@@ -448,15 +467,15 @@ public sealed class RMCGhostTargetSystem : EntitySystem
                 continue;
 
             var displayName = meta.EntityName;
-            var jobName = _jobs.MindTryGetJobName(mindContainer.Mind);
+            var hasJob = TryGetJobName(uid, mindContainer, out var jobName);
             var health = GetHealthStatus(uid);
             var tactical = GetTacticalIcons(uid);
-            var tooltipKind = jobName == null
+            var tooltipKind = !hasJob
                 ? RMCGhostTargetTooltipJobKind.None
                 : HasComp<XenoComponent>(uid)
                     ? RMCGhostTargetTooltipJobKind.Caste
                     : RMCGhostTargetTooltipJobKind.Job;
-            var searchText = jobName != null
+            var searchText = hasJob
                 ? $"{displayName} {jobName}"
                 : displayName;
 
@@ -493,11 +512,11 @@ public sealed class RMCGhostTargetSystem : EntitySystem
 
             var displayName = Name(attached);
             TryComp<MindContainerComponent>(attached, out var mindContainer);
-            var jobName = _jobs.MindTryGetJobName(mindContainer?.Mind);
-            var searchText = jobName != null
+            var hasJob = TryGetJobName(attached, mindContainer, out var jobName);
+            var searchText = hasJob
                 ? $"{displayName} {jobName}"
                 : displayName;
-            var tooltipKind = jobName != null
+            var tooltipKind = hasJob
                 ? RMCGhostTargetTooltipJobKind.Job
                 : RMCGhostTargetTooltipJobKind.None;
 
@@ -514,6 +533,28 @@ public sealed class RMCGhostTargetSystem : EntitySystem
                 null,
                 tooltipKind));
         }
+    }
+
+    private bool TryGetJobName(EntityUid uid, MindContainerComponent? mindContainer, out string? jobName)
+    {
+        if (_jobs.MindTryGetJobName(GetMindId(uid, mindContainer), out var name))
+        {
+            jobName = name;
+            return true;
+        }
+
+        jobName = null;
+        return false;
+    }
+
+    private EntityUid? GetMindId(EntityUid uid, MindContainerComponent? mindContainer)
+    {
+        if (mindContainer?.Mind is { } mind)
+            return mind;
+
+        return TryComp<VisitingMindComponent>(uid, out var visiting)
+            ? visiting.MindId
+            : null;
     }
 
     private (SpriteSpecifier.Rsi? Icon, int Percent) GetHealthStatus(EntityUid uid)
@@ -668,13 +709,13 @@ public sealed class RMCGhostTargetSystem : EntitySystem
             HasComp<MobStateComponent>(target) ||
             _ghostQuery.HasComp(target))
         {
-            _followerSystem.StartFollowingEntity(uid, target);
+            _follower.StartFollowingEntity(uid, target);
             return;
         }
 
         var xform = Transform(uid);
-        _transformSystem.SetCoordinates(uid, xform, Transform(target).Coordinates);
-        _transformSystem.AttachToGridOrMap(uid, xform);
+        _transform.SetCoordinates(uid, xform, Transform(target).Coordinates);
+        _transform.AttachToGridOrMap(uid, xform);
         if (_physicsQuery.TryComp(uid, out var physics))
             _physics.SetLinearVelocity(uid, Vector2.Zero, body: physics);
     }

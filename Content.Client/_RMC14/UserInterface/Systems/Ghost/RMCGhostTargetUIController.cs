@@ -39,7 +39,6 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
         args.Handled = true;
 
         var window = EnsureWindow();
-        window.Populate();
 
         if (!window.IsOpen)
             window.OpenCentered();

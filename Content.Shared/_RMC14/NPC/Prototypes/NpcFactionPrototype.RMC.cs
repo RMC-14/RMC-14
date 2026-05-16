@@ -7,11 +7,11 @@ namespace Content.Shared.NPC.Prototypes;
 public sealed partial class NpcFactionPrototype
 {
     [DataField]
-    public LocId? Name { get; private set; }
+    public LocId? Name;
 
     [DataField]
-    public Color Color { get; private set; } = Color.FromHex("#696969");
+    public Color Color = Color.FromHex("#696969");
 
     [DataField]
-    public List<ProtoId<NpcFactionPrototype>>? Subgroups { get; private set; }
+    public List<ProtoId<NpcFactionPrototype>>? Subgroups;
 }
