@@ -704,7 +704,7 @@
 - type: loadoutGroup
   id: CommandingOfficerCareerPathRMC
   name: rmc-loadout-group-role-specific-career-path
-  minLimit: 0
+  minLimit: 1
   maxLimit: 1
   loadouts:
   - COCareerPathInfantryRMC
