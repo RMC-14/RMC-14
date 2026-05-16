@@ -73,6 +73,16 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/30a083c72320b6cc3c724f98d795385b1080fe6a/sound/soundscape/thunderclap2.ogg"
 
+- files: ["weather_warning.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/weather_warning.ogg"
+
+- files: ["weather_warning_varadero.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/weather_warning_varadero.ogg"
+
 - files: ["gibbed.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

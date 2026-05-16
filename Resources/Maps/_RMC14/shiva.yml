@@ -132,12 +132,18 @@ entities:
       data: {}
     - type: RMCWeatherCycle
       minTimeBetweenEvents: 1200
+      minTimeBetweenChecks: 0
+      minCheckVariance: 0
+      startChance: 1
       weatherEvents:
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
         lightningEffects:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
+        fireSmotheringStrength: 0
+        cleansDecals: false
+        effectMessage: The snow swirls around you.
         weatherType: RMCStrataClearsky
         duration: 600
         name: Snow
@@ -146,6 +152,9 @@ entities:
         lightningEffects:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
+        fireSmotheringStrength: 1
+        cleansDecals: false
+        effectMessage: The snowstorm swirls around you.
         weatherType: RMCStrataSnowing
         duration: 360
         name: Snowstorm
@@ -154,6 +163,9 @@ entities:
         lightningEffects:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
+        fireSmotheringStrength: 2
+        cleansDecals: false
+        effectMessage: The blizzard howls around you.
         weatherType: RMCStrataBlizzard
         duration: 240
         name: Blizzard

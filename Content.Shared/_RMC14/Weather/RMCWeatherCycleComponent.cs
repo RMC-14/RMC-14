@@ -1,4 +1,5 @@
-﻿using Content.Shared.Weather;
+using Content.Shared.Damage;
+using Content.Shared.Weather;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -14,51 +15,124 @@ public sealed partial class RMCWeatherCycleComponent : Component
     public List<RMCWeatherEvent> WeatherEvents = new();
 
     [DataField, AutoNetworkedField]
-    public RMCWeatherEvent? CurrentEvent;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan MinTimeBetweenEvents;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan MinTimeVariance = TimeSpan.FromMinutes(10);
+    public TimeSpan WarnTime = TimeSpan.FromSeconds(30);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan LastEventCooldown;
+    public TimeSpan MinTimeBetweenChecks = TimeSpan.FromMinutes(15);
 
+    [DataField, AutoNetworkedField]
+    public TimeSpan MinCheckVariance = TimeSpan.FromMinutes(10);
+
+    [DataField, AutoNetworkedField]
+    public float StartChance = 1;
+
+    [DataField, AutoNetworkedField]
+    public RMCWeatherCycleState State = RMCWeatherCycleState.Idle;
+
+    [DataField]
+    public int? CurrentEventIndex;
+
+    [DataField]
+    public TimeSpan CheckCooldown;
+
+    [DataField]
+    public TimeSpan WarningRemaining;
+
+    [DataField]
+    public TimeSpan EventRemaining;
+
+    [DataField]
+    public TimeSpan LightningCooldown;
+
+    [DataField]
+    public TimeSpan EffectCooldown;
+
+    [DataField]
+    public TimeSpan CleanCooldown;
+
+    [DataField]
+    public bool FirstDropComplete;
+
+    [DataField]
+    public int EventSequence;
 }
 
-[DataDefinition, Serializable, NetSerializable]
+[DataDefinition]
 public sealed partial class RMCWeatherEvent
 {
     [DataField]
     public string Name = "rmcWeatherEvent";
 
     [DataField]
-    public TimeSpan Duration;
+    public string? DisplayName;
 
     [DataField]
-    public TimeSpan DurationRemaining;
+    public TimeSpan Duration;
 
     [DataField]
     public ProtoId<WeatherPrototype> WeatherType;
 
     [DataField]
-    public float LightningChance = 0.0f;
+    public float LightningChance;
 
     [DataField]
     public TimeSpan LightningDuration = TimeSpan.FromSeconds(2);
 
     [DataField]
-    public TimeSpan LightningCooldown;
-
-    [DataField]
     public TimeSpan LightningCooldownDuration = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public List<string> LightningEffects = new(){"RMCColorSequenceLightningSharpPeak", "RMCColorSequenceLightningFlicker"};
+    public List<string> LightningEffects = new() { "RMCColorSequenceLightningSharpPeak", "RMCColorSequenceLightningFlicker" };
 
     [DataField]
     public SoundSpecifier LightningSound = new SoundCollectionSpecifier("RMCThunder");
+
+    [DataField]
+    public int FireSmotheringStrength;
+
+    [DataField]
+    public bool CleansDecals = true;
+
+    [DataField]
+    public DamageSpecifier ExposureDamage = new();
+
+    [DataField]
+    public string? EffectMessage;
+
+    [DataField]
+    public float EffectMessageChance = 0.10f;
+
+    [DataField]
+    public RMCWeatherWarningMode WarningMode = RMCWeatherWarningMode.Default;
+
+    [DataField]
+    public SoundSpecifier? WarningSound;
 }
 
+[RegisterComponent]
+[Access(typeof(RMCWeatherSystem))]
+public sealed partial class RMCWeatherDilutedAcidComponent : Component
+{
+    [DataField]
+    public int LastWeatherSequence;
+}
 
+[Serializable, NetSerializable]
+public enum RMCWeatherCycleState : byte
+{
+    Idle,
+    Warning,
+    Running,
+    Cooldown,
+}
+
+[Serializable, NetSerializable]
+public enum RMCWeatherWarningMode : byte
+{
+    Default,
+    SirenOnly,
+    None,
+}

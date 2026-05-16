@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoAcidSystem))]
+[Access(typeof(SharedXenoAcidSystem), typeof(Content.Shared._RMC14.Weather.RMCWeatherSystem))]
 public sealed partial class DamageableCorrodingComponent : Component
 {
     [DataField, AutoNetworkedField]
