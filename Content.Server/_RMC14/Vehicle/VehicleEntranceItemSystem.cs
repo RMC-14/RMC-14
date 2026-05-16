@@ -1,12 +1,12 @@
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Tag;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Vehicle;
+namespace Content.Server._RMC14.Vehicle;
 
 public sealed class VehicleEntranceItemSystem : EntitySystem
 {
@@ -14,7 +14,6 @@ public sealed class VehicleEntranceItemSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> GrenadeTag = "Grenade";
 
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly VehicleSystem _vehicle = default!;
@@ -27,7 +26,7 @@ public sealed class VehicleEntranceItemSystem : EntitySystem
 
     private void OnInteractUsing(InteractUsingEvent args)
     {
-        if (_net.IsClient || args.Handled)
+        if (args.Handled)
             return;
 
         args.Handled = TryInsertPrimedGrenade(args.Target, args.User, args.Used);
@@ -35,7 +34,7 @@ public sealed class VehicleEntranceItemSystem : EntitySystem
 
     private void OnAfterInteractUsing(AfterInteractUsingEvent args)
     {
-        if (_net.IsClient || args.Handled)
+        if (args.Handled)
             return;
 
         if (args.Target is not { } target)

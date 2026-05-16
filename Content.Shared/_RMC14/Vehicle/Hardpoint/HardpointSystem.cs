@@ -40,6 +40,12 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed partial class HardpointSystem : EntitySystem
 {
     private static readonly EntProtoId<SkillDefinitionComponent> EngineerSkill = "RMCSkillEngineer";
+    private static readonly EntProtoId HardpointVehicleFamilyTank = "HardpointVehicleFamilyTank";
+
+    private const float IntegrityThresholdGreen = 0.9f;
+    private const float IntegrityThresholdYellow = 0.7f;
+    private const float IntegrityThresholdOrange = 0.4f;
+    private const float IntegrityThresholdRed = 0.15f;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;
@@ -65,6 +71,7 @@ public sealed partial class HardpointSystem : EntitySystem
 
         SubscribeLocalEvent<HardpointSlotsComponent, ComponentInit>(OnSlotsInit);
         SubscribeLocalEvent<HardpointSlotsComponent, MapInitEvent>(OnSlotsMapInit);
+        SubscribeLocalEvent<HardpointSlotsComponent, ComponentShutdown>(OnSlotsShutdown);
         SubscribeLocalEvent<HardpointSlotsComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<HardpointSlotsComponent, EntRemovedFromContainerMessage>(OnRemoved);
         SubscribeLocalEvent<HardpointSlotsComponent, VehicleCanRunEvent>(OnVehicleCanRun);
@@ -85,6 +92,24 @@ public sealed partial class HardpointSystem : EntitySystem
     private void OnSlotsMapInit(Entity<HardpointSlotsComponent> ent, ref MapInitEvent args)
     {
         EnsureSlots(ent.Owner, ent.Comp);
+    }
+
+    private void OnSlotsShutdown(Entity<HardpointSlotsComponent> ent, ref ComponentShutdown args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
+            return;
+
+        foreach (var slot in ent.Comp.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var itemSlot, itemSlots))
+                continue;
+
+            if (itemSlot.Item is { } item && !TerminatingOrDeleted(item))
+                QueueDel(item);
+        }
     }
 
     private void OnInserted(Entity<HardpointSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
@@ -230,6 +255,23 @@ public sealed partial class HardpointSystem : EntitySystem
             }
         }
 
+        ApplyAccumulatedSupportModifiers(
+            vehicle,
+            hasWeaponMods, accuracyMult, fireRateMult,
+            hasSpeedMods, speedMult,
+            hasAccelMods, accelMult,
+            hasViewMods, viewScale, cursorMaxOffset, cursorOffsetSpeed, cursorPvsIncrease);
+
+        RefreshVehicleGunModifiers(vehicle, hardpoints, itemSlots);
+    }
+
+    private void ApplyAccumulatedSupportModifiers(
+        EntityUid vehicle,
+        bool hasWeaponMods, FixedPoint2 accuracyMult, float fireRateMult,
+        bool hasSpeedMods, float speedMult,
+        bool hasAccelMods, float accelMult,
+        bool hasViewMods, float viewScale, float cursorMaxOffset, float cursorOffsetSpeed, float cursorPvsIncrease)
+    {
         if (hasWeaponMods)
         {
             var mods = EnsureComp<VehicleWeaponSupportModifierComponent>(vehicle);
@@ -277,8 +319,6 @@ public sealed partial class HardpointSystem : EntitySystem
         {
             RemCompDeferred<VehicleGunnerViewComponent>(vehicle);
         }
-
-        RefreshVehicleGunModifiers(vehicle, hardpoints, itemSlots);
     }
 
     private void RefreshVehicleGunModifiers(EntityUid vehicle, HardpointSlotsComponent hardpoints, ItemSlotsComponent itemSlots)
@@ -801,7 +841,7 @@ public sealed partial class HardpointSystem : EntitySystem
             return false;
 
         if (TryComp(uid, out HardpointItemComponent? item) &&
-            item.VehicleFamily == "HardpointVehicleFamilyTank" &&
+            item.VehicleFamily == HardpointVehicleFamilyTank &&
             _prototypeManager.TryIndex<DamageModifierSetPrototype>("VehicleFrameTank", out var tankBase))
         {
             ApplyDamageModifierCoefficients(tankBase, ref acid, ref slash, ref bullet, ref explosive, ref blunt);
@@ -909,16 +949,16 @@ public sealed partial class HardpointSystem : EntitySystem
 
     private string GetHardpointIntegrityColor(float percent)
     {
-        if (percent >= 0.9f)
+        if (percent >= IntegrityThresholdGreen)
             return "green";
 
-        if (percent >= 0.7f)
+        if (percent >= IntegrityThresholdYellow)
             return "yellow";
 
-        if (percent >= 0.4f)
+        if (percent >= IntegrityThresholdOrange)
             return "orange";
 
-        if (percent >= 0.15f)
+        if (percent >= IntegrityThresholdRed)
             return "red";
 
         return "crimson";
@@ -926,16 +966,16 @@ public sealed partial class HardpointSystem : EntitySystem
 
     private string GetHardpointConditionString(float percent)
     {
-        if (percent >= 0.9f)
+        if (percent >= IntegrityThresholdGreen)
             return "rmc-hardpoint-condition-pristine";
 
-        if (percent >= 0.7f)
+        if (percent >= IntegrityThresholdYellow)
             return "rmc-hardpoint-condition-good";
 
-        if (percent >= 0.4f)
+        if (percent >= IntegrityThresholdOrange)
             return "rmc-hardpoint-condition-worn";
 
-        if (percent >= 0.15f)
+        if (percent >= IntegrityThresholdRed)
             return "rmc-hardpoint-condition-bad";
 
         return "rmc-hardpoint-condition-critical";

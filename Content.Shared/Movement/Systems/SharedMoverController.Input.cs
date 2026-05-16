@@ -331,10 +331,12 @@ namespace Content.Shared.Movement.Systems
                 RaiseLocalEvent(xform.ParentUid, ref relayMoveEvent);
             }
 
+            // RMC14
             if (!hasMover || entity.Comp == null)
                 return;
 
             SetVelocityDirection(new Entity<InputMoverComponent>(entity.Owner, entity.Comp), dir, subTick, state);
+            // RMC14
         }
 
         private void OnInputInit(Entity<InputMoverComponent> entity, ref ComponentInit args)

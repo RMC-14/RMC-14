@@ -139,7 +139,7 @@ entities:
     - type: Transform
       pos: 1.4487758,-0.24865258
       parent: 2
-- proto: RMCSeatHumveeDriver
+- proto: RMCSeatHumveeARCDriver
   entities:
   - uid: 21
     components:

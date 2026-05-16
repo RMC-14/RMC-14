@@ -27,6 +27,7 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed partial class VehicleWeaponsSystem : EntitySystem
 {
     private const string HardpointSelectActionId = "ActionVehicleSelectHardpoint";
+    private static readonly EntProtoId HardpointTypeSupport = "HardpointTypeSupport";
 
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -140,27 +141,23 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
             return;
 
         var vehicleUid = vehicle.Value;
-        if (TryComp(vehicleUid, out VehicleWeaponsComponent? weapons) &&
-            ent.Comp.IsPrimaryOperatorSeat &&
-            weapons.Operator == args.Buckle.Owner)
+        if (!TryComp(vehicleUid, out VehicleWeaponsComponent? weapons))
+            return;
+
+        if (ent.Comp.IsPrimaryOperatorSeat && weapons.Operator == args.Buckle.Owner)
         {
             weapons.Operator = null;
             ClearOperatorSelections(weapons, args.Buckle.Owner);
-            RecalculateSelectedWeapon(vehicleUid, weapons);
-            Dirty(vehicleUid, weapons);
         }
-        else if (TryComp(vehicleUid, out VehicleWeaponsComponent? otherWeapons))
+        else
         {
-            ClearOperatorSelections(otherWeapons, args.Buckle.Owner);
-            RecalculateSelectedWeapon(vehicleUid, otherWeapons);
-            Dirty(vehicleUid, otherWeapons);
+            ClearOperatorSelections(weapons, args.Buckle.Owner);
         }
 
-        if (TryComp(vehicleUid, out VehicleWeaponsComponent? selectionWeapons))
-            RefreshOperatorSelectedWeapons(vehicleUid, selectionWeapons);
-
-        if (TryComp(vehicleUid, out VehicleWeaponsComponent? refreshedWeapons))
-            UpdateWeaponsUiForAllOperators(vehicleUid, refreshedWeapons);
+        RecalculateSelectedWeapon(vehicleUid, weapons);
+        Dirty(vehicleUid, weapons);
+        RefreshOperatorSelectedWeapons(vehicleUid, weapons);
+        UpdateWeaponsUiForAllOperators(vehicleUid, weapons);
 
         if (TryComp(args.Buckle.Owner, out EyeComponent? eye) && eye.Target == vehicleUid)
             _eye.SetTarget(args.Buckle.Owner, null, eye);
@@ -613,7 +610,7 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
 
     private static bool IsSharedHardpointType(EntProtoId hardpointType)
     {
-        return hardpointType == "HardpointTypeSupport";
+        return hardpointType == HardpointTypeSupport;
     }
 
     private void RefreshOperatorSelectedWeapons(

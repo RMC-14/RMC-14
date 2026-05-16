@@ -1,15 +1,14 @@
-using System;
 using System.Collections.Generic;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.GameStates;
-using Robust.Shared.Network;
+using Robust.Shared.GameObjects;
 
-namespace Content.Shared._RMC14.Vehicle;
+namespace Content.Server._RMC14.Vehicle;
 
 public sealed class VehicleHardpointVisualsSystem : EntitySystem
 {
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -21,25 +20,16 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
 
     private void OnInit(Entity<VehicleHardpointVisualsComponent> ent, ref ComponentInit args)
     {
-        if (_net.IsClient)
-            return;
-
         UpdateAppearance(ent.Owner);
     }
 
     private void OnInit(Entity<VehicleHardpointVisualsComponent> ent, ref MapInitEvent args)
     {
-        if (_net.IsClient)
-            return;
-
         UpdateAppearance(ent.Owner);
     }
 
     private void OnHardpointSlotsChanged(HardpointSlotsChangedEvent args)
     {
-        if (_net.IsClient)
-            return;
-
         if (!HasComp<VehicleHardpointVisualsComponent>(args.Vehicle))
             return;
 
@@ -48,9 +38,6 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
 
     private void OnGetState(Entity<VehicleHardpointVisualsComponent> ent, ref ComponentGetState args)
     {
-        if (_net.IsClient)
-            return;
-
         var layers = new List<VehicleHardpointLayerState>(ent.Comp.Layers);
         args.State = new VehicleHardpointVisualsComponentState(layers);
     }
@@ -73,6 +60,9 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
                 continue;
 
             var layer = slot.VisualLayer;
+            if (string.IsNullOrWhiteSpace(layer))
+                continue;
+
             var layerKey = layer.ToLowerInvariant();
             var state = string.Empty;
             var usesOverlay = false;
@@ -85,15 +75,9 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
                 state = ResolveVisualState(item, out usesOverlay);
             }
 
-            if (string.IsNullOrWhiteSpace(layer))
-            {
-                continue;
-            }
-
             if (usesOverlay)
                 state = string.Empty;
 
-            layerKey = layer.ToLowerInvariant();
             if (indexByLayer.TryGetValue(layerKey, out var existingIndex))
             {
                 if (!string.IsNullOrWhiteSpace(state))
@@ -118,9 +102,7 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
             }
 
             if (unchanged)
-            {
                 return;
-            }
         }
 
         visuals.Layers = newLayers;

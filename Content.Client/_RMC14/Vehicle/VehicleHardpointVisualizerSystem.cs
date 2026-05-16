@@ -14,18 +14,18 @@ public sealed class VehicleHardpointVisualizerSystem : EntitySystem
         SubscribeLocalEvent<VehicleHardpointVisualsComponent, ComponentHandleState>(OnHandleState);
     }
 
-    private void OnStartup(EntityUid uid, VehicleHardpointVisualsComponent component, ref ComponentStartup args)
+    private void OnStartup(Entity<VehicleHardpointVisualsComponent> ent, ref ComponentStartup args)
     {
-        ApplyLayers(uid, component);
+        ApplyLayers(ent, ent.Comp);
     }
 
-    private void OnHandleState(EntityUid uid, VehicleHardpointVisualsComponent component, ref ComponentHandleState args)
+    private void OnHandleState(Entity<VehicleHardpointVisualsComponent> ent, ref ComponentHandleState args)
     {
         if (args.Current is not VehicleHardpointVisualsComponentState state)
             return;
 
-        component.Layers = new List<VehicleHardpointLayerState>(state.Layers);
-        ApplyLayers(uid, component);
+        ent.Comp.Layers = new List<VehicleHardpointLayerState>(state.Layers);
+        ApplyLayers(ent, ent.Comp);
     }
 
     private void ApplyLayers(EntityUid uid, VehicleHardpointVisualsComponent component)
