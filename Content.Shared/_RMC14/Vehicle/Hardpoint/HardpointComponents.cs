@@ -55,7 +55,7 @@ public sealed partial class HardpointSlotsComponent : Component
     [DataField]
     public ProtoId<ToolQualityPrototype> RemoveToolQuality = "Prying";
 
-    [DataField, AutoNetworkedField]
+    [AutoNetworkedField]
     public HardpointUiState Ui = new(new List<HardpointUiEntry>(), 0f, 0f, false, null);
 }
 

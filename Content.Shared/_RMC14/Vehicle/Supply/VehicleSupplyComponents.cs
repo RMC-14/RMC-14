@@ -38,7 +38,7 @@ public sealed partial class VehicleSupplyConsoleComponent : Component
     [DataField]
     public int SelectedVehicleCopyIndex;
 
-    [DataField, AutoNetworkedField]
+    [AutoNetworkedField]
     public VehicleSupplyUiState Ui = new(null, false, null, null, 0, null, new List<VehicleSupplyEntryState>());
 }
 

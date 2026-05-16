@@ -100,3 +100,5 @@ command-description-mobstate = Filter entities by their MobState.
 
 command-description-vehiclesupply-addstorage = Adds a vehicle prototype to the nearest vehicle supply lift storage.
 command-description-vehiclesupply-addstoragelift = Adds a vehicle prototype to a specific vehicle supply lift storage.
+command-description-vehicleroundstart-current = Applies the vehicle roundstart thresholds using the current connected player count.
+command-description-vehicleroundstart-test = Applies the vehicle roundstart thresholds using a supplied player count for testing.

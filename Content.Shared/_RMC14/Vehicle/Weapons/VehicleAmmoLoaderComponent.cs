@@ -20,6 +20,6 @@ public sealed partial class VehicleAmmoLoaderComponent : Component
     [DataField, AutoNetworkedField]
     public float InteractionRange = 2.5f;
 
-    [DataField, AutoNetworkedField]
+    [AutoNetworkedField]
     public VehicleAmmoLoaderUiState Ui = new(new List<VehicleAmmoLoaderUiEntry>(), 0, 0, null);
 }
