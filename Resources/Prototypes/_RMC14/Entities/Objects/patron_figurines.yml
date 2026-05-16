@@ -2538,7 +2538,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronJackieCrateheadTaylor
   name: Jackie 'Cratehead' Taylor figurine
-  description: "SEVEN MEDICS! It took SEVEN to put you back together, Jackie. For gods sake watch the skies!"
+  description: "\"It took seven medics to revive you, Jackie! SEVEN! For god's sake watch the skies!\""
   components:
   - type: Sprite
     state: jackie_cratehead_taylor
