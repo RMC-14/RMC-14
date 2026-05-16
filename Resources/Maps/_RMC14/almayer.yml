@@ -10084,7 +10084,7 @@ entities:
       parent: 1
 - proto: CMSpawnPointCrewman
   entities:
-  - uid: 6479
+  - uid: 120000
     components:
     - type: Transform
       pos: -37.5,-22.5
