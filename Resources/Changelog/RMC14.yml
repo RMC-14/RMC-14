@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Deerstop
-  changes:
-  - message: On Kutjevo Refinery, you can no longer see out-of-bounds in the Hydroelectric
-      Dam
-    type: Fix
-  id: 2707
-  time: '2026-01-08T02:40:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8923
 - author: Dutch-VanDerLinde
   changes:
   - message: The Fog on LV-624 Lazarus Landing has been removed. The map has also
@@ -4472,5 +4464,14 @@
   id: 3206
   time: '2026-05-15T23:35:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9747
+- author: Drazamuffin
+  changes:
+  - message: New Logistics Officer Map blip!
+    type: Add
+  - message: New Support Tech icons!
+    type: Add
+  id: 3207
+  time: '2026-05-16T00:26:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9322
 Name: RMC14
 Order: -1
