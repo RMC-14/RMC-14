@@ -51,7 +51,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] protected readonly SharedDirectionalAttackBlockSystem _directionBlocker = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionBlocker = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;

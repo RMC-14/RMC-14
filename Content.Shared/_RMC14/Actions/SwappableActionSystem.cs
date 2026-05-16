@@ -9,8 +9,8 @@ public sealed class SwappableActionSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
-    private readonly Dictionary<string, Func<WorldTargetActionEvent>> _eventFactories = new();
-    private readonly Dictionary<string, Func<InstantActionEvent>> _instantEventFactories = new();
+    private readonly Dictionary<SwappableActionEvent, Func<WorldTargetActionEvent>> _eventFactories = new();
+    private readonly Dictionary<SwappableActionEvent, Func<InstantActionEvent>> _instantEventFactories = new();
 
     public override void Initialize()
     {
@@ -19,24 +19,24 @@ public sealed class SwappableActionSystem : EntitySystem
         SubscribeLocalEvent<SwappableActionComponent, AfterAutoHandleStateEvent>(OnSwappableHandleState);
     }
 
-    public void RegisterEventFactory<TEvent>(Func<TEvent> factory) where TEvent : WorldTargetActionEvent
+    public void RegisterEventFactory(SwappableActionEvent key, Func<WorldTargetActionEvent> factory)
     {
-        _eventFactories[typeof(TEvent).FullName!] = () => factory();
+        _eventFactories[key] = factory;
     }
 
-    public void RegisterInstantEventFactory<TEvent>(Func<TEvent> factory) where TEvent : InstantActionEvent
+    public void RegisterInstantEventFactory(SwappableActionEvent key, Func<InstantActionEvent> factory)
     {
-        _instantEventFactories[typeof(TEvent).FullName!] = () => factory();
+        _instantEventFactories[key] = factory;
     }
 
     private void OnSwappableHandleState(Entity<SwappableActionComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (ent.Comp.SwappedEventType != null)
+        if (ent.Comp.SwappedEvent != SwappableActionEvent.None)
         {
             if (!HasComp<WorldTargetActionComponent>(ent))
                 return;
 
-            if (!_eventFactories.TryGetValue(ent.Comp.SwappedEventType, out var factory))
+            if (!_eventFactories.TryGetValue(ent.Comp.SwappedEvent, out var factory))
                 return;
 
             _actions.SetEvent(ent, factory());
@@ -46,10 +46,10 @@ public sealed class SwappableActionSystem : EntitySystem
             if (!HasComp<InstantActionComponent>(ent))
                 return;
 
-            if (ent.Comp.OriginalEventType == null)
+            if (ent.Comp.OriginalEvent == SwappableActionEvent.None)
                 return;
 
-            if (!_instantEventFactories.TryGetValue(ent.Comp.OriginalEventType, out var factory))
+            if (!_instantEventFactories.TryGetValue(ent.Comp.OriginalEvent, out var factory))
                 return;
 
             _actions.SetEvent(ent, factory());
@@ -59,6 +59,8 @@ public sealed class SwappableActionSystem : EntitySystem
     public bool SwapInstantToWorldTarget<TOriginalEvent>(
         EntityUid owner,
         WorldTargetActionEvent swappedEvent,
+        SwappableActionEvent swappedKey,
+        SwappableActionEvent originalKey,
         string swappedName,
         string swappedDescription) where TOriginalEvent : InstantActionEvent
     {
@@ -73,8 +75,8 @@ public sealed class SwappableActionSystem : EntitySystem
             var swappable = EnsureComp<SwappableActionComponent>(actionId);
             swappable.OriginalName = MetaData(actionId).EntityName;
             swappable.OriginalDescription = MetaData(actionId).EntityDescription;
-            swappable.SwappedEventType = swappedEvent.GetType().FullName;
-            swappable.OriginalEventType = typeof(TOriginalEvent).FullName;
+            swappable.SwappedEvent = swappedKey;
+            swappable.OriginalEvent = originalKey;
             Dirty(actionId, swappable);
 
             RemComp<InstantActionComponent>(actionId);
@@ -98,7 +100,7 @@ public sealed class SwappableActionSystem : EntitySystem
         return false;
     }
 
-    public void SwapAllToInstant(EntityUid owner, InstantActionEvent originalEvent)
+    public void SwapAllToInstant(EntityUid owner)
     {
         foreach (var (actionId, _) in _actions.GetActions(owner))
         {
@@ -111,16 +113,19 @@ public sealed class SwappableActionSystem : EntitySystem
                 continue;
             }
 
+            if (!_instantEventFactories.TryGetValue(swappable.OriginalEvent, out var factory))
+                continue;
+
             RemComp<WorldTargetActionComponent>(actionId);
             RemComp<TargetActionComponent>(actionId);
 
             EnsureComp<InstantActionComponent>(actionId);
-            _actions.SetEvent(actionId, originalEvent);
+            _actions.SetEvent(actionId, factory());
 
             _metaData.SetEntityName(actionId, swappable.OriginalName);
             _metaData.SetEntityDescription(actionId, swappable.OriginalDescription);
 
-            swappable.SwappedEventType = null;
+            swappable.SwappedEvent = SwappableActionEvent.None;
             Dirty(actionId, swappable);
         }
     }

@@ -111,6 +111,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private TimeSpan _newResinPreventCollideTime;
 
     private readonly HashSet<EntityUid> _intersectingResin = new();
+    private readonly List<Entity<XenoWeedsComponent>> _adjacentNodes = new();
 
     public override void Initialize()
     {
@@ -337,7 +338,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        List<Entity<XenoWeedsComponent>> adjacentNodes = new();
+        _adjacentNodes.Clear();
         if (existing == null)
         {
             var canSpread = false;
@@ -346,7 +347,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 if (!_rmcMap.HasAnchoredEntityEnumerator(coordinates, out Entity<XenoWeedsComponent> adjacent, direction))
                     continue;
 
-                adjacentNodes.Add(adjacent);
+                _adjacentNodes.Add(adjacent);
 
                 if (!_xenoWeeds.CanSpreadWeedsPopup(grid, coordinates.Position, xeno, adjacent, false, true))
                     continue;
@@ -355,7 +356,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 break;
             }
 
-            if (adjacentNodes.Count == 0)
+            if (_adjacentNodes.Count == 0)
             {
                 _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-no-nearby-node"),
                     args.Target,
@@ -394,7 +395,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _hive.SetSameHive(xeno.Owner, newWeeds);
 
             if (existing == null)
-                _xenoWeeds.AssignSource(newWeeds, adjacentNodes.Last().Comp?.Source ?? adjacentNodes.Last());
+                _xenoWeeds.AssignSource(newWeeds, _adjacentNodes.Last().Comp?.Source ?? _adjacentNodes.Last());
         }
 
         var audioUser = isInQueenEye ? null : (EntityUid?)xeno.Owner;

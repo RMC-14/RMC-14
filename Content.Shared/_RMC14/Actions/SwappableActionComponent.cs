@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Actions;
 
@@ -13,8 +14,16 @@ public sealed partial class SwappableActionComponent : Component
     public string OriginalDescription = string.Empty;
 
     [DataField, AutoNetworkedField]
-    public string? SwappedEventType;
+    public SwappableActionEvent SwappedEvent;
 
     [DataField, AutoNetworkedField]
-    public string? OriginalEventType;
+    public SwappableActionEvent OriginalEvent;
+}
+
+[Serializable, NetSerializable]
+public enum SwappableActionEvent : byte
+{
+    None = 0,
+    XenoExpandWeeds = 1,
+    XenoPlantWeeds = 2,
 }
