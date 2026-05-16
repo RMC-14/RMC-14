@@ -398,6 +398,44 @@
 
 - type: entity
   parent: CMPackFlareBase
+  id: CMPackFlareColonist
+  name: CK25 emergency flare pack
+  suffix: Colony, Filled
+  description: A packet of eight CK25 Emergency Flares. Issued to colonists to light dark areas in emergency situations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/boxes.rsi
+    layers:
+    - state: ck25_e
+      map: [ "emptyLayer" ]
+    - state: ck25
+      map: [ "fullLayer" ]
+  - type: CMItemSlots
+    startingItem: CMFlareColonist
+
+- type: entity
+  parent: CMFlare
+  id: CMFlareColonist
+  description: A commonly seen red flare issued to colonists in emergencies. There are some faded drawings on the side instructing the reader on how to ignite it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+      state: flare_colony
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      state: flare_flame
+      color: "#ec4b4b"
+      visible: false
+    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+      state: overlay
+  - type: PointLight
+    color: "#FFCCCC"
+  - type: ExpendableLight
+    iconStateSpent: flare_colony_spent
+
+- type: entity
+  parent: CMPackFlareBase
   id: CMPackFlare
   suffix: Filled
   components:

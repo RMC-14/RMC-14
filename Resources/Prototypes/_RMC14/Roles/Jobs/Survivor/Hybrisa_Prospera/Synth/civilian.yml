@@ -69,7 +69,7 @@
   name: survivor synth hybrisa civilian colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     # WeYa mart employee
     - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, CMSatchel, RMCShoesLaceup ]
