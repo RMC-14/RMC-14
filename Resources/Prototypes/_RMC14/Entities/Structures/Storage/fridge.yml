@@ -94,3 +94,12 @@
       amount: 14
     - id: RMCFoodMeatFish
       amount: 14
+
+- type: entity
+  parent: CMLockerFridge
+  id: CMLockerFridgeAlien
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/alien_fridge.rsi

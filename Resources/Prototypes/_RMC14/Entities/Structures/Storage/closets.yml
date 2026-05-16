@@ -338,3 +338,13 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetRCMSapperFill
+
+# Alien
+- type: entity
+  parent: CMClosetBase
+  id: RMCClosetAlien
+  name: alien closet
+  description: An immobile storage unit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/alien_closet.rsi
