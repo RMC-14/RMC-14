@@ -1,5 +1,6 @@
 ﻿using Content.Client.Gameplay;
 using Content.Client.Ghost;
+using Content.Client._RMC14.UserInterface.Systems.Ghost;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.Ghost.Widgets;
 using Content.Shared.Ghost;
@@ -151,10 +152,10 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
 
     private void RequestWarps()
     {
-        var ev = new GhostWarpsWindowRequestedEvent();
+        var ev = new RMCGhostWarpsWindowRequestedEvent(); // RMC start
         EntityManager.EventBus.RaiseEvent(EventSource.Local, ev);
         if (ev.Handled)
-            return;
+            return; // RMC end
 
         _system?.RequestWarps();
         Gui?.TargetWindow.Populate();
@@ -165,9 +166,4 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
     {
         _system?.OpenGhostRoles();
     }
-}
-
-public sealed class GhostWarpsWindowRequestedEvent : EntityEventArgs
-{
-    public bool Handled;
 }

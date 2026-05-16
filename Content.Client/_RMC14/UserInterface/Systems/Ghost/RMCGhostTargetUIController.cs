@@ -1,5 +1,4 @@
 using Content.Client._RMC14.UserInterface.Systems.Ghost.Controls;
-using Content.Client.UserInterface.Systems.Ghost;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared.Ghost;
 using Robust.Client.UserInterface.Controllers;
@@ -18,7 +17,7 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GhostWarpsWindowRequestedEvent>(OnGhostWarpsWindowRequested);
+        SubscribeLocalEvent<RMCGhostWarpsWindowRequestedEvent>(OnGhostWarpsWindowRequested);
         SubscribeNetworkEvent<RMCGhostWarpsResponseEvent>(OnGhostWarpsResponse);
     }
 
@@ -34,7 +33,7 @@ public sealed class RMCGhostTargetUIController : UIController, IOnSystemChanged<
         system.PlayerRemoved -= OnPlayerRemoved;
     }
 
-    private void OnGhostWarpsWindowRequested(GhostWarpsWindowRequestedEvent args)
+    private void OnGhostWarpsWindowRequested(RMCGhostWarpsWindowRequestedEvent args)
     {
         args.Handled = true;
 
