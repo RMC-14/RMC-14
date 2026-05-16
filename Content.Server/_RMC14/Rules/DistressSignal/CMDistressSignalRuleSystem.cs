@@ -259,6 +259,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
         Subs.CVar(_config, RMCCVars.RMCLandingZoneMiasmaEnabled, v => _landingZoneMiasmaEnabled = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipInitialDelayMinutes, v => _dropshipPreflight = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCSunsetDuration, v => _sunsetDuration = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCSunriseDuration, v => _sunriseDuration = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCForceEndHijackTimeMinutes, v => _forceEndHijackTime = TimeSpan.FromMinutes(v), true);
@@ -269,7 +270,6 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostDurationMinutes, v => _queenBoostDuration = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostSpeedMultiplier, v => _queenBoostSpeedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostRemoteRange, v => _queenBoostRemoteRange = v, true);
-        Subs.CVar(_config, RMCCVars.RMCDropshipInitialDelayMinutes, v => _dropshipPreflight = TimeSpan.FromMinutes(v), true);
 
         ReloadPrototypes();
     }
@@ -323,16 +323,6 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
                 _marineAnnounce.AnnounceARESStaging(default, Loc.GetString("rmc-distress-signal-ares-online"), component.AresGreetingAudio,"rmc-announcement-ares-online");
         }
 
-        if (!component.AresPreflightDone && announcementTime >= _dropshipPreflight)
-        {
-            component.AresPreflightDone = true;
-
-            var ares = _ares.EnsureARES();
-            _marineAnnounce.AnnounceRadio(ares,
-                Loc.GetString("rmc-distress-signal-preflight-complete"),
-                component.AllClearChannel);
-        }
-
         if (!component.AresMapDone && announcementTime >= component.AresMapDelay)
         {
             component.AresMapDone = true;
@@ -343,6 +333,16 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
             {
                 _marineAnnounce.AnnounceARESStaging(default, announcement, announcement: "rmc-announcement-ares-map");
             }
+        }
+
+        if (!component.AresPreflightDone && announcementTime >= _dropshipPreflight)
+        {
+            component.AresPreflightDone = true;
+
+            var ares = _ares.EnsureARES();
+            _marineAnnounce.AnnounceRadio(ares,
+                Loc.GetString("rmc-distress-signal-preflight-complete"),
+                component.AllClearChannel);
         }
 
         if (time >= component.NextCheck)
