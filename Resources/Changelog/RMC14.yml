@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Honor Guard map blip sprite changed to match their hud icon
-    type: Tweak
-  id: 2709
-  time: '2026-01-08T02:47:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8658
-- author: Dygon
-  changes:
-  - message: Sentry guns now light up the nearby area while turned on.
-    type: Tweak
-  id: 2710
-  time: '2026-01-08T02:48:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8797
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the bleeding wound text for examined marines not pushing to a new
@@ -4472,5 +4458,20 @@
   id: 3208
   time: '2026-05-16T00:32:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9354
+- author: kleinerstation13
+  changes:
+  - message: Changed Paramarine Commander to use their own parity skillset
+    type: Tweak
+  id: 3209
+  time: '2026-05-16T15:36:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9809
+- author: kleinerstation13
+  changes:
+  - message: All FORECON survivor roles now have Engineering 2 (1 -> 2) and JTAC 2
+      (1 -> 2)
+    type: Tweak
+  id: 3210
+  time: '2026-05-16T15:37:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9806
 Name: RMC14
 Order: -1
