@@ -80,17 +80,21 @@
   #       enum.BreechVisuals.Open:
   #         True: { state: cover-open }
   #         False: { state: cover-closed }
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 40 # im not kidding, this is correct, bipod brings it down to 30
   - type: AttachableHolder
     slots:
       rmc-aslot-underbarrel:
         locked: true
-        startingAttachable: RMCAttachmentBipod
+        startingAttachable: RMCAttachmentBipodQYJ
         whitelist:
           tags:
-          - RMCAttachmentBipod
+          - RMCAttachmentBipodQYJ
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-underbarrel: 0.418, -0.283
+      rmc-aslot-underbarrel: 0.27, -0.09
   - type: Wieldable
   - type: GunRequiresWield
   - type: RMCMagneticItem
