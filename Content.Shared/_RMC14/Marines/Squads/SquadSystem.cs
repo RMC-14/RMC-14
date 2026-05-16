@@ -488,7 +488,7 @@ public sealed class SquadSystem : EntitySystem
 
         var squadEnt = Spawn(id);
         _rmcPvs.AddForceSend(squadEnt); // The client must always know about the squads in order to be able to work with them.
-        //It looks very strange, but this is the result of the lack of a separate prototype for the squads.
+
         if (!TryComp(squadEnt, out SquadTeamComponent? squadComp))
         {
             Log.Error($"Squad entity prototype {id} had {nameof(SquadTeamComponent)}, but none found on entity {ToPrettyString(squadEnt)}");
