@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/16/2026 20:30:56
-  entityCount: 656
+  time: 05/16/2026 21:32:05
+  entityCount: 650
 maps: []
 grids:
 - 1
@@ -253,14 +253,14 @@ entities:
     - type: Transform
       pos: 41.5,9.5
       parent: 1
-- proto: CMLockerFridgeAlien
+- proto: CMLockerFridge
   entities:
-  - uid: 446
+  - uid: 377
     components:
     - type: Transform
       pos: 26.5,19.5
       parent: 1
-  - uid: 447
+  - uid: 378
     components:
     - type: Transform
       pos: 27.5,19.5
@@ -1281,35 +1281,6 @@ entities:
     - type: Transform
       pos: -0.5,-6.5
       parent: 1
-- proto: RMCAlienCeremonialDagger
-  entities:
-  - uid: 556
-    components:
-    - type: Transform
-      pos: 42.15728,15.484749
-      parent: 1
-  - uid: 557
-    components:
-    - type: Transform
-      pos: 42.518394,15.526416
-      parent: 1
-  - uid: 558
-    components:
-    - type: Transform
-      pos: 42.803116,15.477805
-      parent: 1
-  - uid: 620
-    components:
-    - type: Transform
-      pos: 16.690203,-9.3734255
-      parent: 1
-- proto: RMCAlienHunterSpear
-  entities:
-  - uid: 378
-    components:
-    - type: Transform
-      pos: 17.5,15.5
-      parent: 1
 - proto: RMCAlienTankBroken
   entities:
   - uid: 539
@@ -1333,13 +1304,6 @@ entities:
     components:
     - type: Transform
       pos: 42.5,12.5
-      parent: 1
-- proto: RMCAlienWarGlaiveDamaged
-  entities:
-  - uid: 377
-    components:
-    - type: Transform
-      pos: 0.5,15.5
       parent: 1
 - proto: RMCAutolatheEmpty
   entities:
@@ -1515,18 +1479,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 40.5,20.5
-      parent: 1
-- proto: RMCClosetAlien
-  entities:
-  - uid: 520
-    components:
-    - type: Transform
-      pos: 38.5,12.5
-      parent: 1
-  - uid: 521
-    components:
-    - type: Transform
-      pos: 39.5,12.5
       parent: 1
 - proto: RMCCoffeeCup
   entities:
@@ -2184,6 +2136,18 @@ entities:
       rot: 3.141592653589793 rad
       pos: 23.5,18.5
       parent: 1
+- proto: RMCRackBrown
+  entities:
+  - uid: 446
+    components:
+    - type: Transform
+      pos: 39.5,12.5
+      parent: 1
+  - uid: 447
+    components:
+    - type: Transform
+      pos: 38.5,12.5
+      parent: 1
 - proto: RMCRemains
   entities:
   - uid: 371
@@ -2316,7 +2280,7 @@ entities:
       pos: 17.5,21.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -1793.608
+      secondsUntilStateChange: -1857.1094
       state: Opening
   - uid: 572
     components:
