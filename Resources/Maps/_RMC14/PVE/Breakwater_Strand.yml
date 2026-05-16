@@ -110,7 +110,6 @@ entities:
         - RMCColorSequenceLightningFlicker
         lightningChance: 0.02
         fireSmotheringStrength: 4
-        effectMessage: The heavy rain beats down on you.
         weatherType: RMCStrataStormLight
         duration: 1000
         name: Heavy Rain

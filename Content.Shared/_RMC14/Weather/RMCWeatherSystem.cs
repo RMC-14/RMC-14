@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Dropship;
@@ -60,6 +61,7 @@ public sealed class RMCWeatherSystem : EntitySystem
     [Dependency] private readonly SharedDecalSystem _decals = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
 
@@ -82,6 +84,8 @@ public sealed class RMCWeatherSystem : EntitySystem
 
         ent.Comp.State = RMCWeatherCycleState.Idle;
         ent.Comp.CurrentEventIndex = null;
+        ent.Comp.ForcedEvent = null;
+        ent.Comp.AdminForcedEvent = false;
         ent.Comp.CheckCooldown = ent.Comp.MinTimeBetweenEvents > TimeSpan.Zero
             ? _random.Next(ent.Comp.MinTimeBetweenEvents)
             : TimeSpan.Zero;
@@ -91,6 +95,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         ent.Comp.EffectCooldown = WeatherEffectInterval;
         ent.Comp.CleanCooldown = WeatherCleanInterval;
         ent.Comp.FirstDropComplete = false;
+        ent.Comp.EventStartedAt = TimeSpan.Zero;
         Dirty(ent);
     }
 
@@ -108,6 +113,89 @@ public sealed class RMCWeatherSystem : EntitySystem
 
             cycle.FirstDropComplete = true;
             Dirty(uid, cycle);
+        }
+    }
+
+    public bool TryStartWeatherEvent(MapId mapId, string eventKey, bool skipWarning, bool adminForced, out string message)
+    {
+        if (!TryGetWeatherCycle(mapId, out var ent))
+        {
+            message = Loc.GetString("rmc-weather-command-no-cycle", ("map", mapId));
+            return false;
+        }
+
+        if (ent.Comp.State is RMCWeatherCycleState.Warning or RMCWeatherCycleState.Running)
+        {
+            message = Loc.GetString("rmc-weather-command-already-active",
+                ("state", ent.Comp.State),
+                ("map", mapId));
+            return false;
+        }
+
+        if (!TryGetWeatherEvent(ent.Comp, eventKey, out var weatherEvent, out message))
+            return false;
+
+        StartWarning(ent, weatherEvent, skipWarning, adminForced);
+        message = Loc.GetString("rmc-weather-command-started",
+            ("weather", GetEventDisplayName(weatherEvent)),
+            ("map", mapId));
+        return true;
+    }
+
+    public bool TryEndWeather(MapId mapId, out string message)
+    {
+        if (!TryGetWeatherCycle(mapId, out var ent))
+        {
+            message = Loc.GetString("rmc-weather-command-no-cycle", ("map", mapId));
+            return false;
+        }
+
+        if (ent.Comp.State is not (RMCWeatherCycleState.Warning or RMCWeatherCycleState.Running))
+        {
+            message = Loc.GetString("rmc-weather-command-no-active", ("map", mapId));
+            return false;
+        }
+
+        EndWeather(ent);
+        message = Loc.GetString("rmc-weather-command-ended", ("map", mapId));
+        return true;
+    }
+
+    public string GetWeatherStatus(MapId mapId)
+    {
+        if (!TryGetWeatherCycle(mapId, out var ent))
+            return Loc.GetString("rmc-weather-command-no-cycle", ("map", mapId));
+
+        var status = Loc.GetString("rmc-weather-command-status",
+            ("map", mapId),
+            ("state", ent.Comp.State));
+        if (TryGetCurrentEvent(ent.Comp, out var weatherEvent))
+        {
+            status = Loc.GetString("rmc-weather-command-status-event",
+                ("status", status),
+                ("weather", GetEventDisplayName(weatherEvent)),
+                ("seconds", (int) Math.Max(ent.Comp.EventRemaining.TotalSeconds, 0)));
+        }
+
+        return Loc.GetString(ent.Comp.FirstDropComplete
+                ? "rmc-weather-command-status-first-drop-complete"
+                : "rmc-weather-command-status-waiting-first-drop",
+            ("status", status));
+    }
+
+    public IEnumerable<string> GetWeatherEventOptions(MapId mapId)
+    {
+        if (!TryGetWeatherCycle(mapId, out var ent))
+            yield break;
+
+        for (var i = 0; i < ent.Comp.WeatherEvents.Count; i++)
+        {
+            var weatherEvent = ent.Comp.WeatherEvents[i];
+            yield return i.ToString();
+            yield return weatherEvent.Name;
+
+            if (weatherEvent.DisplayName != null)
+                yield return weatherEvent.DisplayName;
         }
     }
 
@@ -261,9 +349,25 @@ public sealed class RMCWeatherSystem : EntitySystem
     private void StartWarning(Entity<RMCWeatherCycleComponent> ent, int eventIndex)
     {
         ent.Comp.CurrentEventIndex = eventIndex;
+        ent.Comp.ForcedEvent = null;
+        ent.Comp.AdminForcedEvent = false;
         ent.Comp.WarningRemaining = ent.Comp.WarnTime;
         ent.Comp.State = RMCWeatherCycleState.Warning;
         SendWeatherWarning(ent, ent.Comp.WeatherEvents[eventIndex]);
+        Dirty(ent);
+
+        if (ent.Comp.WarningRemaining <= TimeSpan.Zero)
+            StartWeather(ent);
+    }
+
+    private void StartWarning(Entity<RMCWeatherCycleComponent> ent, RMCWeatherEvent weatherEvent, bool skipWarning, bool adminForced)
+    {
+        ent.Comp.CurrentEventIndex = null;
+        ent.Comp.ForcedEvent = weatherEvent;
+        ent.Comp.AdminForcedEvent = adminForced;
+        ent.Comp.WarningRemaining = skipWarning ? TimeSpan.Zero : ent.Comp.WarnTime;
+        ent.Comp.State = RMCWeatherCycleState.Warning;
+        SendWeatherWarning(ent, weatherEvent);
         Dirty(ent);
 
         if (ent.Comp.WarningRemaining <= TimeSpan.Zero)
@@ -280,6 +384,11 @@ public sealed class RMCWeatherSystem : EntitySystem
             return;
         }
 
+        BeginWeather(ent, weatherEvent, ent.Comp.AdminForcedEvent);
+    }
+
+    private void BeginWeather(Entity<RMCWeatherCycleComponent> ent, RMCWeatherEvent weatherEvent, bool adminForced)
+    {
         if (!_proto.TryIndex(weatherEvent.WeatherType, out var weatherProto))
         {
             Log.Error($"Unable to find RMC weather prototype {weatherEvent.WeatherType} for {ToPrettyString(ent)}.");
@@ -289,34 +398,114 @@ public sealed class RMCWeatherSystem : EntitySystem
             return;
         }
 
+        var mapId = Transform(ent).MapID;
         var endTime = _timing.CurTime + weatherEvent.Duration;
         ent.Comp.State = RMCWeatherCycleState.Running;
         ent.Comp.EventRemaining = weatherEvent.Duration;
         ent.Comp.LightningCooldown = TimeSpan.Zero;
         ent.Comp.EffectCooldown = WeatherEffectInterval;
         ent.Comp.CleanCooldown = WeatherCleanInterval;
+        ent.Comp.EventStartedAt = _timing.CurTime;
+        ent.Comp.AdminForcedEvent = adminForced;
         ent.Comp.EventSequence++;
-        _weather.SetWeather(Transform(ent).MapID, weatherProto, endTime);
+        _weather.SetWeather(mapId, weatherProto, endTime);
         Dirty(ent);
+
+        var ev = new RMCWeatherStartedEvent(mapId, GetEventDisplayName(weatherEvent), weatherEvent.Duration, adminForced);
+        RaiseLocalEvent(ref ev);
     }
 
     private void EndWeather(Entity<RMCWeatherCycleComponent> ent)
     {
-        _weather.SetWeather(Transform(ent).MapID, null, null);
+        var mapId = Transform(ent).MapID;
+        var hasEvent = TryGetCurrentEvent(ent.Comp, out var weatherEvent);
+        var elapsed = hasEvent && ent.Comp.EventStartedAt > TimeSpan.Zero
+            ? _timing.CurTime - ent.Comp.EventStartedAt
+            : (TimeSpan?) null;
+        var adminForced = ent.Comp.AdminForcedEvent;
+
+        _weather.SetWeather(mapId, null, null);
         ent.Comp.State = RMCWeatherCycleState.Cooldown;
         ent.Comp.CurrentEventIndex = null;
+        ent.Comp.ForcedEvent = null;
+        ent.Comp.AdminForcedEvent = false;
         ent.Comp.CheckCooldown = ent.Comp.MinTimeBetweenEvents;
         ent.Comp.WarningRemaining = TimeSpan.Zero;
         ent.Comp.EventRemaining = TimeSpan.Zero;
         ent.Comp.LightningCooldown = TimeSpan.Zero;
         ent.Comp.EffectCooldown = WeatherEffectInterval;
         ent.Comp.CleanCooldown = WeatherCleanInterval;
+        ent.Comp.EventStartedAt = TimeSpan.Zero;
         Dirty(ent);
+
+        if (hasEvent)
+        {
+            var ev = new RMCWeatherEndedEvent(mapId, GetEventDisplayName(weatherEvent), elapsed, adminForced);
+            RaiseLocalEvent(ref ev);
+        }
+    }
+
+    private bool TryGetWeatherCycle(MapId mapId, out Entity<RMCWeatherCycleComponent> cycle)
+    {
+        var weatherQuery = EntityQueryEnumerator<RMCWeatherCycleComponent>();
+        while (weatherQuery.MoveNext(out var uid, out var comp))
+        {
+            if (Transform(uid).MapID != mapId)
+                continue;
+
+            cycle = (uid, comp);
+            return true;
+        }
+
+        cycle = default;
+        return false;
+    }
+
+    private bool TryGetWeatherEvent(RMCWeatherCycleComponent cycle, string eventKey, out RMCWeatherEvent weatherEvent, out string message)
+    {
+        weatherEvent = default!;
+        if (int.TryParse(eventKey, out var index))
+        {
+            if (index >= 0 && index < cycle.WeatherEvents.Count)
+            {
+                weatherEvent = cycle.WeatherEvents[index];
+                message = string.Empty;
+                return true;
+            }
+
+            message = Loc.GetString("rmc-weather-command-index-out-of-range", ("index", index));
+            return false;
+        }
+
+        foreach (var candidate in cycle.WeatherEvents)
+        {
+            if (string.Equals(candidate.Name, eventKey, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(candidate.DisplayName, eventKey, StringComparison.OrdinalIgnoreCase))
+            {
+                weatherEvent = candidate;
+                message = string.Empty;
+                return true;
+            }
+        }
+
+        message = Loc.GetString("rmc-weather-command-unknown-event", ("event", eventKey));
+        return false;
+    }
+
+    private static string GetEventDisplayName(RMCWeatherEvent weatherEvent)
+    {
+        return weatherEvent.DisplayName ?? weatherEvent.Name;
     }
 
     private bool TryGetCurrentEvent(RMCWeatherCycleComponent cycle, out RMCWeatherEvent weatherEvent)
     {
         weatherEvent = default!;
+        if (cycle.ForcedEvent != null)
+        {
+            weatherEvent = cycle.ForcedEvent;
+            return true;
+        }
+
         if (cycle.CurrentEventIndex is not { } index ||
             index < 0 ||
             index >= cycle.WeatherEvents.Count)
@@ -349,15 +538,15 @@ public sealed class RMCWeatherSystem : EntitySystem
         if (weatherEvent.WarningMode == RMCWeatherWarningMode.SirenOnly)
             return;
 
-        var displayName = weatherEvent.DisplayName ?? weatherEvent.Name;
-        var marineMessage = $"[bold]Weather Alert:[/bold] Incoming {displayName}. Seek shelter from exterior conditions.";
+        var displayName = GetEventDisplayName(weatherEvent);
+        var marineMessage = Loc.GetString("rmc-weather-warning-marine", ("weather", displayName));
         var marineFilter = Filter.BroadcastMap(mapId).AddWhereAttachedEntity(e =>
             HasComp<MarineComponent>(e) ||
             HasComp<GhostComponent>(e));
 
         _marineAnnounce.AnnounceToMarines(marineMessage, MarineWeatherWarningSound, marineFilter);
 
-        var xenoMessage = $"A distant roar echoes through the hive. {displayName} approaches.";
+        var xenoMessage = Loc.GetString("rmc-weather-warning-xeno", ("weather", displayName));
         var xenoFilter = Filter.BroadcastMap(mapId).AddWhereAttachedEntity(HasComp<XenoComponent>);
         _xenoAnnounce.Announce(default,
             xenoFilter,
@@ -377,7 +566,7 @@ public sealed class RMCWeatherSystem : EntitySystem
             ProcessAcidDilution(mapId, weatherEvent.FireSmotheringStrength, ent.Comp.EventSequence);
         }
 
-        if (!weatherEvent.ExposureDamage.Empty || !string.IsNullOrWhiteSpace(weatherEvent.EffectMessage))
+        if (!weatherEvent.ExposureDamage.Empty || weatherEvent.EffectMessage != null)
             ProcessMobEffects(mapId, weatherEvent);
     }
 
@@ -488,10 +677,10 @@ public sealed class RMCWeatherSystem : EntitySystem
                 _damageable.TryChangeDamage(uid, damage, true, false, damageable);
             }
 
-            if (!string.IsNullOrWhiteSpace(weatherEvent.EffectMessage) &&
+            if (weatherEvent.EffectMessage != null &&
                 _random.Prob(Math.Clamp(weatherEvent.EffectMessageChance, 0, 1)))
             {
-                _popup.PopupEntity(weatherEvent.EffectMessage, uid, uid, PopupType.SmallCaution);
+                _popup.PopupEntity(Loc.GetString(weatherEvent.EffectMessage), uid, uid, PopupType.SmallCaution);
             }
         }
     }
@@ -515,6 +704,9 @@ public sealed class RMCWeatherSystem : EntitySystem
                 }
 
                 var coords = _mapSystem.GridTileToLocal(gridUid, mapGrid, tileRef.GridIndices);
+                if (IsRMCWeatherBlocked(mapId, _transform.ToMapCoordinates(coords).Position))
+                    continue;
+
                 var decals = _decals.GetDecalsInRange(gridUid,
                     coords.Position,
                     0.75f,
@@ -534,7 +726,29 @@ public sealed class RMCWeatherSystem : EntitySystem
         if (!TryGetWeatherTile(uid, mapId, out var grid, out var tile))
             return false;
 
+        if (IsRMCWeatherBlocked(mapId, _transform.GetMapCoordinates(uid).Position))
+            return false;
+
         return _weather.CanWeatherAffect(grid.Owner, grid.Comp, tile);
+    }
+
+    private bool IsRMCWeatherBlocked(MapId mapId, Vector2 position)
+    {
+        var query = EntityQueryEnumerator<RMCBlockWeatherComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (Transform(uid).MapID != mapId)
+                continue;
+
+            var bounds = _lookup.GetAABBNoContainer(uid,
+                _transform.GetWorldPosition(uid),
+                _transform.GetWorldRotation(uid));
+
+            if (bounds.Contains(position))
+                return true;
+        }
+
+        return false;
     }
 
     private bool TryGetWeatherTile(EntityUid uid, MapId mapId, out Entity<MapGridComponent> grid, out TileRef tile)

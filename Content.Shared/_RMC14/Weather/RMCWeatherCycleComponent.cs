@@ -2,6 +2,7 @@ using Content.Shared.Damage;
 using Content.Shared.Weather;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -36,6 +37,12 @@ public sealed partial class RMCWeatherCycleComponent : Component
     public int? CurrentEventIndex;
 
     [DataField]
+    public RMCWeatherEvent? ForcedEvent;
+
+    [DataField]
+    public bool AdminForcedEvent;
+
+    [DataField]
     public TimeSpan CheckCooldown;
 
     [DataField]
@@ -55,6 +62,9 @@ public sealed partial class RMCWeatherCycleComponent : Component
 
     [DataField]
     public bool FirstDropComplete;
+
+    [DataField]
+    public TimeSpan EventStartedAt;
 
     [DataField]
     public int EventSequence;
@@ -100,7 +110,7 @@ public sealed partial class RMCWeatherEvent
     public DamageSpecifier ExposureDamage = new();
 
     [DataField]
-    public string? EffectMessage;
+    public LocId? EffectMessage;
 
     [DataField]
     public float EffectMessageChance = 0.10f;
@@ -136,3 +146,9 @@ public enum RMCWeatherWarningMode : byte
     SirenOnly,
     None,
 }
+
+[ByRefEvent]
+public readonly record struct RMCWeatherStartedEvent(MapId MapId, string Name, TimeSpan? Duration, bool AdminForced);
+
+[ByRefEvent]
+public readonly record struct RMCWeatherEndedEvent(MapId MapId, string Name, TimeSpan? Elapsed, bool AdminForced);
