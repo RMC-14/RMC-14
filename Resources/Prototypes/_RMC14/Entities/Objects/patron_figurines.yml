@@ -2756,3 +2756,14 @@
     state: lyon_surgeon_august
   - type: PatronFigurine
     id: e5831b84-2e3d-4835-beec-860a9a62942a
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRileyTilterStone
+  name: Riley 'Tilter' Stone figurine
+  description: "It appears lightly chewed, with the right side's earpiece missing."
+  components:
+  - type: Sprite
+    state: riley_tilter_stone
+  - type: PatronFigurine
+    id: 24dc0608-8cd2-49d6-8d64-6da5e8a25cd3
