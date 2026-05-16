@@ -1,6 +1,10 @@
 rmc-weather-effect-dust = You feel dust blow into every crevice of your body, annoying.
 rmc-weather-effect-sand = You feel sand scraping the upper layers of your exterior away!
 
+rmc-weather-name-light-rain = Light Rain
+rmc-weather-name-monsoon-warning = Monsoon Warning
+rmc-weather-name-very-light-rain = Very Light Rain
+
 rmc-weather-warning-marine = [bold]Weather Alert:[/bold] Incoming {$weather}. Seek shelter from exterior conditions.
 rmc-weather-warning-xeno = A distant roar echoes through the hive. {$weather} approaches.
 

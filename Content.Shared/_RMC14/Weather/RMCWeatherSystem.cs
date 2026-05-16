@@ -195,7 +195,13 @@ public sealed class RMCWeatherSystem : EntitySystem
             yield return weatherEvent.Name;
 
             if (weatherEvent.DisplayName != null)
+            {
                 yield return weatherEvent.DisplayName;
+
+                var localizedName = GetLocalizedDisplayName(weatherEvent);
+                if (localizedName != weatherEvent.DisplayName)
+                    yield return localizedName;
+            }
         }
     }
 
@@ -480,7 +486,8 @@ public sealed class RMCWeatherSystem : EntitySystem
         foreach (var candidate in cycle.WeatherEvents)
         {
             if (string.Equals(candidate.Name, eventKey, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(candidate.DisplayName, eventKey, StringComparison.OrdinalIgnoreCase))
+                string.Equals(candidate.DisplayName, eventKey, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(GetLocalizedDisplayName(candidate), eventKey, StringComparison.OrdinalIgnoreCase))
             {
                 weatherEvent = candidate;
                 message = string.Empty;
@@ -494,7 +501,17 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private static string GetEventDisplayName(RMCWeatherEvent weatherEvent)
     {
-        return weatherEvent.DisplayName ?? weatherEvent.Name;
+        return GetLocalizedDisplayName(weatherEvent) ?? weatherEvent.Name;
+    }
+
+    private static string? GetLocalizedDisplayName(RMCWeatherEvent weatherEvent)
+    {
+        if (weatherEvent.DisplayName == null)
+            return null;
+
+        return Loc.TryGetString(weatherEvent.DisplayName, out var localized)
+            ? localized
+            : weatherEvent.DisplayName;
     }
 
     private bool TryGetCurrentEvent(RMCWeatherCycleComponent cycle, out RMCWeatherEvent weatherEvent)

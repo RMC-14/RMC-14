@@ -103,6 +103,17 @@
       loop: true
       volume: -6
 
+- type: weather
+  id: RMCStrataStormTropical
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_tropical
+  sound:
+    path: /Audio/_RMC14/Ambience/rainforest.ogg
+    params:
+      loop: true
+      volume: -6
+
 # Sorokyne / Hybrisa rain-and-thunder ambience
 
 - type: weather
@@ -131,7 +142,7 @@
   id: RMCStrataStormVeryLightRainAndThunder
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: strata_storm_very_light
+    state: strata_storm_sorokyne_light
   sound:
     path: /Audio/_RMC14/Ambience/rainandthunderlong.ogg
     params:
@@ -144,7 +155,7 @@
   id: RMCStrataStormVaradero
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: strata_storm
+    state: strata_storm_monsoon
   sound:
     path: /Audio/_RMC14/Ambience/varadero_storm.ogg
     params:
