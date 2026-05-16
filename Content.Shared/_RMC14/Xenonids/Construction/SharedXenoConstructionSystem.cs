@@ -398,8 +398,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 _xenoWeeds.AssignSource(newWeeds, _adjacentNodes.Last().Comp?.Source ?? _adjacentNodes.Last());
         }
 
-        var audioUser = isInQueenEye ? null : (EntityUid?)xeno.Owner;
-        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, audioUser);
+        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno.Owner);
     }
 
     private void OnXenoChooseStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureActionEvent args)
