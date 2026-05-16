@@ -192,9 +192,9 @@
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mateba2006m_speed_loader.ogg
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: AttachableHolder
@@ -204,6 +204,41 @@
         startingAttachable: null
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-mateba-2006m
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMateba
+
+- type: entity
+  parent: RMCWeaponRevolverMateba2006M
+  id: RMCWeaponRevolverMateba2006MGold
+  suffix: Gold
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_gold.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_gold.rsi
+
+- type: entity
+  parent: RMCWeaponRevolverMateba2006M
+  id: RMCWeaponRevolverMateba2006MBlackGold
+  suffix: Black Handle, Gold
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_bgold.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_bgold.rsi
+
+- type: entity
+  parent: RMCWeaponRevolverMateba2006M
+  id: RMCWeaponRevolverMateba2006MSilver
+  suffix: Silver
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_silver.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_silver.rsi
 
 - type: entity
   id: RMCBaseSpeedLoaderMateba
