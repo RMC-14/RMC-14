@@ -90,7 +90,7 @@
   id: COCareerPathInfantryRMC
   dummyEntity: RMCLoadoutDummyCareerPathInfantry
   cost: 0
-  equipment: # Being a default path, this shouldn't be timelocked
+  equipment: # Default, not timelocked.
     head: RMCHeadCapQuartermaster
     gloves: RMCHandsBlack
     shoes: CMBootsBlackFilled
