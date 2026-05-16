@@ -1,35 +1,17 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "The RMC-14 development team. l49-stock and pcac variants by @TadJohnson00 (GitHub).",
+  "copyright": "ak4047_stock, l83a2_a, m54c-solid, m54c-col, and smartgun_harness by @noctyrnal (GitHub). L83A3, L24, and L24B by @RavenCaat (GitHub). l49-stock and pcac variants by @TadJohnson00 (GitHub).",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "m54c-solid"
+      "name": "ak4047_stock"
     },
     {
-      "name": "m54c-col"
-    },
-    {
-      "name": "m54c-col-on"
-    },
-    {
-      "name": "m54c-solid_a"
-    },
-    {
-      "name": "m54c-col_a"
-    },
-    {
-      "name": "m54c-col_a-on"
-    },
-    {
-      "name": "l83a2_a"
-    },
-    {
-      "name": "L83A3"
+      "name": "ak4047_stock-on"
     },
     {
       "name": "L24"
@@ -38,10 +20,49 @@
       "name": "L24B"
     },
     {
-      "name": "ak4047_stock"
+      "name": "l49-stock"
     },
     {
-      "name": "ak4047_stock-on"
+      "name": "l83a2_a"
+    },
+    {
+      "name": "L83A3"
+    },
+    {
+      "name": "m54c-col"
+    },
+    {
+      "name": "m54c-col_a"
+    },
+    {
+      "name": "m54c-col_a-on"
+    },
+    {
+      "name": "m54c-col-on"
+    },
+    {
+      "name": "m54c-solid"
+    },
+    {
+      "name": "m54c-solid_a"
+    },
+    {
+      "name": "pcac_collapsible"
+    },
+    {
+      "name": "pcac_collapsible_a"
+    },
+    {
+      "name": "pcac_collapsible_a-on"
+    },
+    {
+      "name": "pcac_collapsible-on"
+    },
+    {
+      "name": "pcac_solid"
+    },
+    {
+      "name": "pcac_solid_a"
     },
     {
       "name": "smartgun_harness"
@@ -51,27 +72,6 @@
     },
     {
       "name": "smartgun_harness_a-on"
-    },
-    {
-      "name": "l49-stock"
-    },
-    {
-      "name": "pcac_collapsible"
-    },
-    {
-      "name": "pcac_collapsible_a"
-    },
-    {
-      "name": "pcac_collapsible-on"
-    },
-    {
-      "name": "pcac_collapsible_a-on"
-    },
-    {
-      "name": "pcac_solid"
-    },
-    {
-      "name": "pcac_solid_a"
     }
   ]
 }
