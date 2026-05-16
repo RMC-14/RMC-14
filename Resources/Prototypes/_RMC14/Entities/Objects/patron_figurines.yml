@@ -2745,3 +2745,14 @@
     state: khaunami
   - type: PatronFigurine
     id: 0412dc04-70e3-4ff2-8502-16dff8a09b9c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLyonSurgeonAugust
+  name: Lyon 'Surgeon' August figurine
+  description: "Smells awfully like tobacco, cinnamon, and a weird mix of chemicals."
+  components:
+  - type: Sprite
+    state: lyon_surgeon_august
+  - type: PatronFigurine
+    id: e5831b84-2e3d-4835-beec-860a9a62942a
