@@ -21,34 +21,6 @@ namespace Content.IntegrationTests.Tests
     {
         private static readonly ProtoId<EntityCategoryPrototype> SpawnerCategory = "Spawner";
 
-        private static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
-            where TComp : Component
-        {
-            var query = entityMan.AllEntityQueryEnumerator<TComp>();
-            while (query.MoveNext(out var uid, out var comp))
-            {
-                yield return (uid, comp);
-            }
-        }
-
-        private static void DeleteAllEntities(IEntityManager entityMan, int maxPasses = 8)
-        {
-            for (var pass = 0; pass < maxPasses; pass++)
-            {
-                var entityMetas = Query<MetaDataComponent>(entityMan)
-                    .Where(tuple => !tuple.Item2.EntityDeleted)
-                    .ToList();
-
-                if (entityMetas.Count == 0)
-                    return;
-
-                foreach (var (uid, _) in entityMetas)
-                {
-                    entityMan.DeleteEntity(uid);
-                }
-            }
-        }
-
         [Test]
         public async Task SpawnAndDeleteAllEntitiesOnDifferentMaps()
         {
@@ -100,7 +72,22 @@ namespace Content.IntegrationTests.Tests
 
                 await server.WaitPost(() =>
                 {
-                    DeleteAllEntities(entityMan);
+                    static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
+                        where TComp : Component
+                    {
+                        var query = entityMan.AllEntityQueryEnumerator<TComp>();
+                        while (query.MoveNext(out var uid, out var meta))
+                        {
+                            yield return (uid, meta);
+                        }
+                    }
+
+                    var entityMetas = Query<MetaDataComponent>(entityMan).ToList();
+                    foreach (var (uid, meta) in entityMetas)
+                    {
+                        if (!meta.EntityDeleted)
+                            entityMan.DeleteEntity(uid);
+                    }
 
                     Assert.Multiple(() =>
                     {
@@ -239,7 +226,22 @@ namespace Content.IntegrationTests.Tests
 
                 await server.WaitPost(() =>
                 {
-                    DeleteAllEntities(sEntMan);
+                    static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
+                        where TComp : Component
+                    {
+                        var query = entityMan.AllEntityQueryEnumerator<TComp>();
+                        while (query.MoveNext(out var uid, out var meta))
+                        {
+                            yield return (uid, meta);
+                        }
+                    }
+
+                    var entityMetas = Query<MetaDataComponent>(sEntMan).ToList();
+                    foreach (var (uid, meta) in entityMetas)
+                    {
+                        if (!meta.EntityDeleted)
+                            sEntMan.DeleteEntity(uid);
+                    }
 
                     Assert.Multiple(() =>
                     {
@@ -302,10 +304,6 @@ namespace Content.IntegrationTests.Tests
                 "GridSpawner",
                 "CorpseSpawner",
                 "ItemCamouflage",
-                "TriggerOnSpawn",
-                "SpawnOnTrigger",
-                "SpawnOnTerminate",
-                "TileFireOnTrigger",
                 // RMC14
                 "ActivateDropshipWeaponOnSpawn",
                 "AmbientSound",
