@@ -2778,3 +2778,14 @@
     state: kala_lightseeker
   - type: PatronFigurine
     id: 2ac9bac3-33f9-447c-8a26-ce07ddc05e0c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBigWhiskerfield
+  name: Big Whiskerfield figurine
+  description: "A greedy little Fobbit, jumping around the corner, looking for crumbs of scrap metal.."
+  components:
+  - type: Sprite
+    state: big_whiskerfield
+  - type: PatronFigurine
+    id: bc945f99-09ef-408f-94b0-aa2c8e506f43
