@@ -213,6 +213,7 @@
 - type: entity
   parent: RMCWeaponRevolverMateba2006M
   id: RMCWeaponRevolverMateba2006MGold
+  name: golden Spearhead 2006M autorevolver
   suffix: Gold
   components:
   - type: Sprite
@@ -221,7 +222,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_2006m/mateba_2006m_gold.rsi
 
 - type: entity
-  parent: RMCWeaponRevolverMateba2006M
+  parent: RMCWeaponRevolverMateba2006MGold
   id: RMCWeaponRevolverMateba2006MBlackGold
   suffix: Black Handle, Gold
   components:
@@ -233,6 +234,7 @@
 - type: entity
   parent: RMCWeaponRevolverMateba2006M
   id: RMCWeaponRevolverMateba2006MSilver
+  name: silver Spearhead 2006M autorevolver
   suffix: Silver
   components:
   - type: Sprite
