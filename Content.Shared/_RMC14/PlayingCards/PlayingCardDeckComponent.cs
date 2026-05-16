@@ -9,9 +9,6 @@ namespace Content.Shared._RMC14.PlayingCards;
 public sealed partial class PlayingCardDeckComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int CardsRemaining = 52;
-
-    [DataField, AutoNetworkedField]
     public List<int> CardOrder = new();
 
     [DataField]

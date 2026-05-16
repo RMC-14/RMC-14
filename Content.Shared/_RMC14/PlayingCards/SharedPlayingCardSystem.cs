@@ -176,7 +176,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     private void OnDeckExamined(Entity<PlayingCardDeckComponent> ent, ref ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString("rmc-playing-card-deck-examine", ("count", ent.Comp.CardsRemaining)));
+        args.PushMarkup(Loc.GetString("rmc-playing-card-deck-examine", ("count", ent.Comp.CardOrder.Count)));
     }
 
     private void OnDeckGetExamineVerbs(Entity<PlayingCardDeckComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
@@ -319,7 +319,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (ent.Comp.CardsRemaining >= ent.Comp.MaxCards)
+        if (ent.Comp.CardOrder.Count >= ent.Comp.MaxCards)
         {
             _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-full"), ent, args.User);
             return;
@@ -332,35 +332,29 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             if (!Exists(entity))
                 continue;
 
-            if (ent.Comp.CardsRemaining >= ent.Comp.MaxCards)
+            if (ent.Comp.CardOrder.Count >= ent.Comp.MaxCards)
                 break;
 
             if (TryComp<PlayingCardComponent>(entity, out var card))
             {
                 ent.Comp.CardOrder.Add(EncodeCard(card.Suit, card.Rank));
-                ent.Comp.CardsRemaining = ent.Comp.CardOrder.Count;
                 QueueDel(entity);
                 added++;
             }
             else if (TryComp<PlayingCardHandComponent>(entity, out var hand))
             {
-                var cardsToRemove = new List<int>();
+                var handAdded = 0;
                 for (var i = 0; i < hand.Cards.Count; i++)
                 {
-                    if (ent.Comp.CardsRemaining >= ent.Comp.MaxCards)
+                    if (ent.Comp.CardOrder.Count >= ent.Comp.MaxCards)
                         break;
 
                     ent.Comp.CardOrder.Add(hand.Cards[i]);
-                    ent.Comp.CardsRemaining = ent.Comp.CardOrder.Count;
-                    cardsToRemove.Add(i);
+                    handAdded++;
                     added++;
                 }
 
-                // Remove added cards from hand in reverse order
-                for (var i = cardsToRemove.Count - 1; i >= 0; i--)
-                {
-                    hand.Cards.RemoveAt(cardsToRemove[i]);
-                }
+                hand.Cards.RemoveRange(0, handAdded);
 
                 if (hand.Cards.Count == 0)
                     QueueDel(entity);
@@ -589,7 +583,6 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             }
         }
 
-        deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
         Dirty(deck);
     }
 

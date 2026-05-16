@@ -13,6 +13,3 @@ public sealed class PlayingCardHandBuiMsg(int cardIndex) : BoundUserInterfaceMes
 {
     public readonly int CardIndex = cardIndex;
 }
-
-[Serializable, NetSerializable]
-public sealed class PlayingCardHandBuiState : BoundUserInterfaceState;

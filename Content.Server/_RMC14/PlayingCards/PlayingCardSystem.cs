@@ -42,7 +42,6 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         var cardIndex = deck.Comp.CardOrder.Count - 1;
         var (suit, rank) = DecodeCard(deck.Comp.CardOrder[cardIndex]);
         deck.Comp.CardOrder.RemoveAt(cardIndex);
-        deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
         Dirty(deck);
 
         var card = SpawnCard(deck.Comp.CardPrototype, deck, suit, rank, false);
@@ -157,14 +156,13 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     protected override void AddCardToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardComponent> card, EntityUid user)
     {
-        if (deck.Comp.CardsRemaining >= deck.Comp.MaxCards)
+        if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
         {
             _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-full"), deck, user);
             return;
         }
 
         deck.Comp.CardOrder.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
-        deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
         Dirty(deck);
         QueueDel(card);
 
@@ -174,30 +172,23 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     protected override void AddHandToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardHandComponent> hand, EntityUid user)
     {
-        if (deck.Comp.CardsRemaining >= deck.Comp.MaxCards)
+        if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
         {
             _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-full"), deck, user);
             return;
         }
 
         var added = 0;
-        var cardsToRemove = new List<int>();
         for (var i = 0; i < hand.Comp.Cards.Count; i++)
         {
-            if (deck.Comp.CardsRemaining >= deck.Comp.MaxCards)
+            if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
                 break;
 
             deck.Comp.CardOrder.Add(hand.Comp.Cards[i]);
-            deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
-            cardsToRemove.Add(i);
             added++;
         }
 
-        // Remove added cards from hand in reverse order
-        for (var i = cardsToRemove.Count - 1; i >= 0; i--)
-        {
-            hand.Comp.Cards.RemoveAt(cardsToRemove[i]);
-        }
+        hand.Comp.Cards.RemoveRange(0, added);
 
         Dirty(deck);
 

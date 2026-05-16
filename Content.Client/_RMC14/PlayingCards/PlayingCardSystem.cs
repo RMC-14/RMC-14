@@ -101,7 +101,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
             return;
 
         // Update deck visual based on how many cards remain
-        var state = ent.Comp.CardsRemaining switch
+        var state = ent.Comp.CardOrder.Count switch
         {
             0 => "deck_empty",
             52 => "deck",
@@ -153,7 +153,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         for (var i = MaxVisibleCards - 1; i >= 1; i--)
         {
             var key = $"card_{i}";
-            if (_sprite.LayerMapTryGet((ent.Owner, sprite), key, out var layerIndex, false))
+            if (_sprite.LayerMapTryGet((ent.Owner, sprite), key, out _, false))
             {
                 _sprite.RemoveLayer((ent.Owner, sprite), key);
             }
