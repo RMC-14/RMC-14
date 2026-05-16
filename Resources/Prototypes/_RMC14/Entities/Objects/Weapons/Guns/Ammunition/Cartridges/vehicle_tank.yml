@@ -67,7 +67,7 @@
 - type: entity
   id: VehicleLTBCannonImpact
   name: LTB cannon impact
-  categories: [ HideSpawnMenu ]
+  categories: [ HideSpawnMenu, Spawner ]
   components:
   - type: TriggerOnSpawn
   - type: ExplodeOnTrigger
@@ -193,7 +193,7 @@
 - type: entity
   id: VehicleDragonFlameImpact
   name: DRGN flame impact
-  categories: [ HideSpawnMenu ]
+  categories: [ HideSpawnMenu, Spawner ]
   components:
   - type: TriggerOnSpawn
   - type: SpawnOnTrigger
@@ -287,7 +287,7 @@
 - type: entity
   id: VehicleTankFlamerImpact
   name: tank flamer impact
-  categories: [ HideSpawnMenu ]
+  categories: [ HideSpawnMenu, Spawner ]
   components:
   - type: TriggerOnSpawn
   - type: SpawnOnTrigger
