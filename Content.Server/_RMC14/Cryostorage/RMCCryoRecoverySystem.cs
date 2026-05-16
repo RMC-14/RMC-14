@@ -5,6 +5,7 @@ using Content.Server.Inventory;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Roles;
+using Content.Shared._RMC14.Webbing;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Bed.Cryostorage;
@@ -36,6 +37,7 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedWebbingSystem _webbing = default!;
 
     // Reused during UI builds and bulk recovery to avoid allocating a fresh list for every stored body.
     private readonly List<RecoverableItem> _recoverableItems = new();
@@ -265,19 +267,45 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
         HashSet<EntityUid> seen)
     {
         // Unavailable markers intentionally hide stock cryo gear without deleting it from the stored body.
-        if (!seen.Add(item) ||
-            TerminatingOrDeleted(item) ||
-            HasComp<RMCCryoUnavailableOnStoreComponent>(item))
+        if (TerminatingOrDeleted(item))
         {
             return false;
         }
+
+        if (HasComp<RMCCryoUnavailableOnStoreComponent>(item))
+            return TryAddAttachedWebbing(item, location, items, seen);
+
+        if (!seen.Add(item))
+            return false;
 
         items.Add(new RecoverableItem(item, location));
         return true;
     }
 
-    private bool TryGetRecoverableItem(EntityUid player, EntityUid item)
+    private bool TryAddAttachedWebbing(
+        EntityUid clothing,
+        string location,
+        List<RecoverableItem> items,
+        HashSet<EntityUid> seen)
     {
+        if (!TryComp<WebbingClothingComponent>(clothing, out var webbingClothing) ||
+            !_webbing.HasWebbing((clothing, webbingClothing), out var webbing) ||
+            TerminatingOrDeleted(webbing.Owner) ||
+            HasComp<RMCCryoUnavailableOnStoreComponent>(webbing.Owner) ||
+            !seen.Add(webbing.Owner))
+        {
+            return false;
+        }
+
+        items.Add(new RecoverableItem(
+            webbing.Owner,
+            Loc.GetString("rmc-cryo-recovery-location-attached-webbing", ("location", location))));
+        return true;
+    }
+
+    private bool TryGetRecoverableItem(EntityUid player, EntityUid item, out EntityUid? attachedClothing)
+    {
+        attachedClothing = null;
         if (TerminatingOrDeleted(item) || HasComp<RMCCryoUnavailableOnStoreComponent>(item))
             return false;
 
@@ -294,19 +322,68 @@ public sealed class RMCCryoRecoverySystem : EntitySystem
                 return true;
         }
 
+        return TryGetAttachedWebbingClothing(player, item, out attachedClothing);
+    }
+
+    private bool TryGetAttachedWebbingClothing(EntityUid player, EntityUid webbing, out EntityUid? clothing)
+    {
+        clothing = null;
+
+        var enumerator = _inventory.GetSlotEnumerator(player);
+        while (enumerator.NextItem(out var contained, out _))
+        {
+            if (IsAttachedWebbingOnHiddenClothing(contained, webbing))
+            {
+                clothing = contained;
+                return true;
+            }
+        }
+
+        foreach (var hand in _hands.EnumerateHands(player))
+        {
+            if (!_hands.TryGetHeldItem(player, hand, out var held))
+                continue;
+
+            if (IsAttachedWebbingOnHiddenClothing(held.Value, webbing))
+            {
+                clothing = held.Value;
+                return true;
+            }
+        }
+
         return false;
+    }
+
+    private bool IsAttachedWebbingOnHiddenClothing(EntityUid clothing, EntityUid webbing)
+    {
+        return HasComp<RMCCryoUnavailableOnStoreComponent>(clothing) &&
+               TryComp<WebbingClothingComponent>(clothing, out var webbingClothing) &&
+               _webbing.HasWebbing((clothing, webbingClothing), out var attached) &&
+               attached.Owner == webbing;
     }
 
     private bool TryRecoverItem(EntityUid console, EntityUid actor, EntityUid player, EntityUid item, bool tryPickup)
     {
-        if (!TryGetRecoverableItem(player, item))
+        if (!TryGetRecoverableItem(player, item, out var attachedClothing))
             return false;
+
+        if (attachedClothing is { } clothing)
+        {
+            if (!TryComp<WebbingClothingComponent>(clothing, out var webbingClothing) ||
+                !_webbing.TryDetachWebbing((clothing, webbingClothing), out var detached) ||
+                detached.Owner != item)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            _container.TryRemoveFromContainer(item);
+        }
 
         _adminLogger.Add(LogType.Action, LogImpact.High,
             $"{ToPrettyString(actor):player} recovered item {ToPrettyString(item)} from cryostorage-contained player " +
             $"{ToPrettyString(player):player}, using cryo recovery console {ToPrettyString(console)}");
-
-        _container.TryRemoveFromContainer(item);
 
         // Single-item recovery behaves like normal item pickup; bulk recovery uses the console tile for predictability.
         if (tryPickup && HasComp<HandsComponent>(actor))
