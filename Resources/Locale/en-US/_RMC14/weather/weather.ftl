@@ -8,6 +8,9 @@ rmc-weather-name-very-light-rain = Very Light Rain
 rmc-weather-warning-marine = [bold]Weather Alert:[/bold] Incoming {$weather}. Seek shelter from exterior conditions.
 rmc-weather-warning-xeno = A distant roar echoes through the hive. {$weather} approaches.
 
+rmc-weather-siren-message = The {$siren} blares. ATTENTION. POTENTIALLY HAZARDOUS WEATHER ANOMALY DETECTED. SEEK SHELTER IMMEDIATELY.
+rmc-storm-siren-message = The {$siren} blares. ATTENTION. ATTENTION. INCOMING TROPICAL STORM DETECTED. SEEK SHELTER IMMEDIATELY.
+
 rmc-weather-command-description = Controls the RMC gameplay weather cycle.
 rmc-weather-command-help = rmcweather status <mapId> | start <mapId> <event/index> [now] | end <mapId>
 rmc-weather-command-not-enough-arguments = Not enough arguments. Use: rmcweather status <mapId> | start <mapId> <event/index> [now] | end <mapId>

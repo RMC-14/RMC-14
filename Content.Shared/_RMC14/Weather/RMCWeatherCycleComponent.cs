@@ -119,6 +119,9 @@ public sealed partial class RMCWeatherEvent
     public RMCWeatherWarningMode WarningMode = RMCWeatherWarningMode.Default;
 
     [DataField]
+    public RMCWeatherSirenKind? WarningSirenKind;
+
+    [DataField]
     public SoundSpecifier? WarningSound;
 }
 

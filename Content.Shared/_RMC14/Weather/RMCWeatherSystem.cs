@@ -35,6 +35,7 @@ public sealed class RMCWeatherSystem : EntitySystem
     private static readonly TimeSpan WeatherEffectInterval = TimeSpan.FromSeconds(1);
     private static readonly TimeSpan WeatherCleanInterval = TimeSpan.FromSeconds(5);
     private const float CleanDecalChance = 0.05f;
+    private const float WeatherSirenPopupRange = 7f;
 
     private static readonly SoundSpecifier MarineWeatherWarningSound =
         new SoundPathSpecifier("/Audio/_RMC14/Effects/radiostatic.ogg", AudioParams.Default.WithVolume(-4));
@@ -196,10 +197,8 @@ public sealed class RMCWeatherSystem : EntitySystem
 
             if (weatherEvent.DisplayName != null)
             {
-                yield return weatherEvent.DisplayName;
-
                 var localizedName = GetLocalizedDisplayName(weatherEvent);
-                if (localizedName != weatherEvent.DisplayName)
+                if (localizedName != null)
                     yield return localizedName;
             }
         }
@@ -499,12 +498,12 @@ public sealed class RMCWeatherSystem : EntitySystem
         return false;
     }
 
-    private static string GetEventDisplayName(RMCWeatherEvent weatherEvent)
+    private string GetEventDisplayName(RMCWeatherEvent weatherEvent)
     {
         return GetLocalizedDisplayName(weatherEvent) ?? weatherEvent.Name;
     }
 
-    private static string? GetLocalizedDisplayName(RMCWeatherEvent weatherEvent)
+    private string? GetLocalizedDisplayName(RMCWeatherEvent weatherEvent)
     {
         if (weatherEvent.DisplayName == null)
             return null;
@@ -549,11 +548,22 @@ public sealed class RMCWeatherSystem : EntitySystem
             return;
 
         var mapId = Transform(ent).MapID;
+        if (weatherEvent.WarningMode == RMCWeatherWarningMode.SirenOnly)
+        {
+            if (TryPlayPhysicalWeatherSirens(mapId, weatherEvent))
+                return;
+
+            if (weatherEvent.WarningSound is { } fallbackSound)
+            {
+                Log.Warning($"No RMC weather sirens of kind {weatherEvent.WarningSirenKind?.ToString() ?? "<unset>"} found on map {mapId} for {weatherEvent.Name}; playing global fallback warning sound.");
+                _audio.PlayGlobal(_audio.ResolveSound(fallbackSound), Filter.BroadcastMap(mapId), true);
+            }
+
+            return;
+        }
+
         if (weatherEvent.WarningSound is { } warningSound)
             _audio.PlayGlobal(_audio.ResolveSound(warningSound), Filter.BroadcastMap(mapId), true);
-
-        if (weatherEvent.WarningMode == RMCWeatherWarningMode.SirenOnly)
-            return;
 
         var displayName = GetEventDisplayName(weatherEvent);
         var marineMessage = Loc.GetString("rmc-weather-warning-marine", ("weather", displayName));
@@ -570,6 +580,67 @@ public sealed class RMCWeatherSystem : EntitySystem
             xenoMessage,
             _xenoAnnounce.WrapHive(xenoMessage),
             XenoWeatherWarningSound);
+    }
+
+    private bool TryPlayPhysicalWeatherSirens(MapId mapId, RMCWeatherEvent weatherEvent)
+    {
+        if (weatherEvent.WarningSirenKind is not { } sirenKind)
+            return false;
+
+        var played = false;
+        var popupRecipients = new Dictionary<ICommonSession, (EntityUid Recipient, string Message, float DistanceSquared)>();
+        var query = EntityQueryEnumerator<RMCWeatherSirenComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var siren, out var xform))
+        {
+            if (xform.MapID != mapId || siren.Kind != sirenKind)
+                continue;
+
+            _audio.PlayPvs(siren.WarningSound, uid);
+            AddWeatherSirenPopupRecipients(uid, siren, xform, popupRecipients);
+            played = true;
+        }
+
+        foreach (var (session, popup) in popupRecipients)
+        {
+            _popup.PopupEntity(popup.Message,
+                popup.Recipient,
+                session,
+                PopupType.LargeCaution);
+        }
+
+        return played;
+    }
+
+    private void AddWeatherSirenPopupRecipients(
+        EntityUid sirenUid,
+        RMCWeatherSirenComponent siren,
+        TransformComponent sirenXform,
+        Dictionary<ICommonSession, (EntityUid Recipient, string Message, float DistanceSquared)> popupRecipients)
+    {
+        var sirenCoords = _transform.GetMapCoordinates(sirenXform);
+        var sirenPos = sirenCoords.Position;
+        var filter = Filter.Empty().AddInRange(sirenCoords, WeatherSirenPopupRange, entMan: EntityManager);
+        foreach (var session in filter.Recipients)
+        {
+            if (session.AttachedEntity is not { } recipient ||
+                !TryComp(recipient, out TransformComponent? recipientXform) ||
+                recipientXform.MapID != sirenXform.MapID)
+            {
+                continue;
+            }
+
+            var distanceSquared = (_transform.GetWorldPosition(recipientXform) - sirenPos).LengthSquared();
+            if (popupRecipients.TryGetValue(session, out var existing) &&
+                existing.DistanceSquared <= distanceSquared)
+            {
+                continue;
+            }
+
+            popupRecipients[session] = (
+                recipient,
+                Loc.GetString(siren.WarningMessage, ("siren", sirenUid)),
+                distanceSquared);
+        }
     }
 
     private void ProcessGameplayEffects(Entity<RMCWeatherCycleComponent> ent, RMCWeatherEvent weatherEvent)

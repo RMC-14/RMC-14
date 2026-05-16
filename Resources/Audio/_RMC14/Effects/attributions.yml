@@ -78,9 +78,19 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/weather_warning.ogg"
 
+- files: ["weather_warning.wav"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13, converted to mono PCM WAV for positional audio"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/weather_warning.ogg"
+
 - files: ["weather_warning_varadero.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/weather_warning_varadero.ogg"
+
+- files: ["weather_warning_varadero.wav"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13, converted to mono PCM WAV for positional audio"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/weather_warning_varadero.ogg"
 
 - files: ["gibbed.ogg"]
