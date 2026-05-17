@@ -191,10 +191,10 @@
     variations:
     - spawn:  "/Maps/_RMC14/Inserts/LV624/maintemple_intact.yml"
       probability: 0.1
-      offset: 1,10
+      offset: 1,0
     - spawn: "/Maps/_RMC14/Inserts/LV624/maintemple_flooded.yml"
       probability: 0.2
-      offset: 1,10
+      offset: 1,0
     replaceAreas: false
     clearEntities: true
     clearDecals: true
