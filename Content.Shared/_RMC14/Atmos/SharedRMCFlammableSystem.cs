@@ -469,6 +469,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         // Ensure the center tile is ignited as part of the diamond.
         SpawnFire(center, spawn, chain, range, intensity, duration, out _);
         SpawnFires(spawn, center, range, chain, intensity, duration);
+        _onCollide.CleanupChain(chain);
     }
 
     public void SpawnFireLines(EntProtoId spawn, EntityCoordinates center, int cardinalRange, int ordinalRange, int? intensity = null, int? duration = null)
@@ -491,6 +492,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                     break;
             }
         }
+
+        _onCollide.CleanupChain(chain);
     }
 
     public int SpawnFire(EntityCoordinates target, EntProtoId spawn, EntityUid chain, int range, int? intensity, int? duration, out bool cont)
@@ -583,6 +586,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             if (CheckViableTile(ent, ignitionTarget))
                 SpawnFireChain(ent.Comp.Spawn, chain, ignitionTarget, intensity, duration);
         }
+
+        _onCollide.CleanupChain(chain);
     }
 
     private EntityCoordinates ChangeTarget(EntityCoordinates target, Direction direction)

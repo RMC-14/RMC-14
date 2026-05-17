@@ -64,10 +64,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
         if (ent.Comp.Chain is not { } chain || TerminatingOrDeleted(chain))
             return;
 
-        var refs = GetRemainingChainRefs(chain, ent.Owner);
-
-        if (refs.Count == 0)
-            Del(chain);
+        CleanupChain(chain, ent.Owner);
     }
 
     private void OnCollide(Entity<DamageOnCollideComponent> ent, EntityUid other)
@@ -159,13 +156,21 @@ public abstract class SharedOnCollideSystem : EntitySystem
             oldChain != chain &&
             !TerminatingOrDeleted(oldChain))
         {
-            var refs = GetRemainingChainRefs(oldChain, ent.Owner);
-            if (refs.Count == 0)
-                Del(oldChain);
+            CleanupChain(oldChain, ent.Owner);
         }
 
         ent.Comp.Chain = chain;
         Dirty(ent);
+    }
+
+    public void CleanupChain(EntityUid? chain, EntityUid? skip = null)
+    {
+        if (chain == null || TerminatingOrDeleted(chain.Value))
+            return;
+
+        var refs = GetRemainingChainRefs(chain.Value, skip);
+        if (refs.Count == 0)
+            Del(chain.Value);
     }
 
     private List<string> GetRemainingChainRefs(EntityUid chain, EntityUid? skip = null)
