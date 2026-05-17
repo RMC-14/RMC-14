@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
-using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;

@@ -731,7 +731,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     {
         var ghostsToRemove = _ghosts.Where(kvp =>
         {
-            var ghostTransform = EntityManager.GetComponent<TransformComponent>(kvp.Value);
+            var ghostTransform = Transform(kvp.Value);
             if (!ghostTransform.Coordinates.Equals(loc))
                 return false;
 
@@ -869,7 +869,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private bool TryGetGhostEntity(RMCConstructionGhostKey ghostKey, out EntityUid ghost)
     {
-        if (_ghosts.TryGetValue(ghostKey, out ghost) && EntityManager.EntityExists(ghost))
+        if (_ghosts.TryGetValue(ghostKey, out ghost) && Exists(ghost))
             return true;
 
         var query = EntityQueryEnumerator<RMCConstructionGhostComponent, TransformComponent>();
@@ -898,7 +898,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         if (TryGetGhostEntity(ghostKey, out _))
             return;
 
-        if (!_prototypeManager.TryIndex<RMCConstructionPrototype>(ghostKey.Prototype, out var prototype))
+        if (!_prototype.TryIndex<RMCConstructionPrototype>(ghostKey.Prototype, out var prototype))
             return;
 
         var coords = GetCoordinates(ghostKey.Coordinates);
@@ -961,7 +961,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     private string? TryGetGhostPrototypeName(RMCConstructionGhostKey? ghostKey)
     {
         if (ghostKey.HasValue &&
-            _prototypeManager.TryIndex<RMCConstructionPrototype>(ghostKey.Value.Prototype, out var proto))
+            _prototype.TryIndex<RMCConstructionPrototype>(ghostKey.Value.Prototype, out var proto))
             return proto.Name;
 
         if (_currentPrototype != null)
@@ -981,7 +981,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             return;
         }
 
-        var coords = EntityManager.GetComponent<TransformComponent>(ghost).Coordinates;
+        var coords = Transform(ghost).Coordinates;
         var direction = GetGhostDirection(ghost);
         if (ghostComp.Prototype == null)
             return;
@@ -992,11 +992,11 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     public void ClearAllGhosts()
     {
         foreach (var ghost in _ghosts.Values)
-            EntityManager.QueueDeleteEntity(ghost);
+            QueueDel(ghost);
 
         var query = EntityQueryEnumerator<RMCConstructionGhostComponent>();
         while (query.MoveNext(out var uid, out _))
-            EntityManager.QueueDeleteEntity(uid);
+            QueueDel(uid);
 
         _ghosts.Clear();
         _buildingGhosts.Clear();
@@ -1008,7 +1008,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     {
         _buildingGhosts[ghostKey] = new BuildGhostState(_timing.CurTime, duration, user, userStartWorldPosition, clearOnCancel);
 
-        if (_ghosts.TryGetValue(ghostKey, out var ghost) && EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
+        if (_ghosts.TryGetValue(ghostKey, out var ghost) && TryComp<SpriteComponent>(ghost, out var sprite))
             sprite.Color = StaticGhostColor.WithAlpha(0f);
     }
 
