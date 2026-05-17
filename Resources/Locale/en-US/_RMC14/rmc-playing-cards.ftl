@@ -19,7 +19,6 @@ rmc-playing-card-flip = You flip the card face {$direction}.
 rmc-playing-card-draw = You draw the {$rank} of {$suit}.
 rmc-playing-card-draw-hidden = You draw a card.
 rmc-playing-card-draw-deck = You draw a card from the deck.
-rmc-playing-card-combine = You combine the cards into a hand of {$count} cards.
 rmc-playing-card-add-to-hand = You add the card to the hand. ({$count} cards total)
 
 # Deck examination
@@ -56,7 +55,6 @@ rmc-playing-card-hand-examine-flip = [bold][color=cyan]Flip[/color] [color=yello
 rmc-playing-card-hand-flip = You flip the hand face {$direction}.
 rmc-playing-card-hand-shuffle = You shuffle {THE($hand)}.
 rmc-playing-card-hand-empty = The hand is empty!
-rmc-playing-card-hand-full = The stack is full!
 rmc-playing-card-merge-hands = You merge the hands together. ({$count} cards total)
 
 # Verbs

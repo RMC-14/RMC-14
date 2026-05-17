@@ -20,6 +20,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
     // Maximum number of card sprites to show in hand
     private const int MaxVisibleCards = 5;
     private const float CardFanOffset = 2f / 32f;
+    private static readonly ResPath CardRsiPath = new("_RMC14/Objects/Fun/playing_cards.rsi");
 
     public override void Initialize()
     {
@@ -106,8 +107,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
             : count >= ent.Comp.MaxCards ? "deck"
             : "deck_open";
 
-        var rsiPath = new ResPath("_RMC14/Objects/Fun/playing_cards.rsi");
-        _sprite.LayerSetRsi((ent.Owner, sprite), 0, rsiPath);
+        _sprite.LayerSetRsi((ent.Owner, sprite), 0, CardRsiPath);
         _sprite.LayerSetRsiState((ent.Owner, sprite), 0, state);
     }
 
@@ -168,7 +168,6 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
         // Get the cards to display (limit to MaxVisibleCards to avoid visual clutter)
         var cardsToShow = Math.Min(cardCount, MaxVisibleCards);
-        var rsiPath = new ResPath("_RMC14/Objects/Fun/playing_cards.rsi");
 
         // Calculate starting offset to center the fan
         var totalWidth = (cardsToShow - 1) * CardFanOffset;
@@ -203,7 +202,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
             if (i == 0)
             {
                 // Use the base layer for the first card
-                _sprite.LayerSetRsi((ent.Owner, sprite), 0, rsiPath);
+                _sprite.LayerSetRsi((ent.Owner, sprite), 0, CardRsiPath);
                 _sprite.LayerSetRsiState((ent.Owner, sprite), 0, stateName);
                 _sprite.LayerSetOffset((ent.Owner, sprite), 0, new Vector2(startOffset, 0));
             }
@@ -211,7 +210,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
             {
                 // New layer for each additional card
                 var key = $"card_{i}";
-                var layerIndex = _sprite.AddLayer((ent.Owner, sprite), new SpriteSpecifier.Rsi(rsiPath, stateName));
+                var layerIndex = _sprite.AddLayer((ent.Owner, sprite), new SpriteSpecifier.Rsi(CardRsiPath, stateName));
                 _sprite.LayerMapSet((ent.Owner, sprite), key, layerIndex);
                 _sprite.LayerSetOffset((ent.Owner, sprite), layerIndex, new Vector2(startOffset + i * CardFanOffset, 0));
             }

@@ -1,8 +1,4 @@
-using Content.Server.Hands.Systems;
 using Content.Shared._RMC14.PlayingCards;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Popups;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -10,12 +6,12 @@ namespace Content.Server._RMC14.PlayingCards;
 
 public sealed class PlayingCardSystem : SharedPlayingCardSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    private static readonly EntProtoId CardProto = "RMCPlayingCard";
+    private static readonly EntProtoId CardHandProto = "RMCPlayingCardHand";
 
     private const int StackThreshold = 5;
 
@@ -56,7 +52,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
     {
         _hands.IsHolding(user, card2, out var handId);
 
-        var hand = Spawn("RMCPlayingCardHand", _transform.GetMapCoordinates(card1));
+        var hand = Spawn(CardHandProto, _transform.GetMapCoordinates(card1));
         if (!TryComp<PlayingCardHandComponent>(hand, out var handComp))
         {
             QueueDel(hand);
@@ -113,7 +109,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         hand.Comp.Cards.RemoveAt(index);
         Dirty(hand);
 
-        var card = SpawnCard("RMCPlayingCard", hand, suit, rank, hand.Comp.FaceUp);
+        var card = SpawnCard(CardProto, hand, suit, rank, hand.Comp.FaceUp);
         _hands.TryPickupAnyHand(user, card);
 
         if (hand.Comp.FaceUp)
