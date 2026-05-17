@@ -37,7 +37,7 @@ public sealed class RMCWeatherMapDataTest
                     Assert.That(text, Does.Contain("minCheckVariance:"), $"{file} should define weather check variance");
                     Assert.That(text, Does.Contain("startChance:"), $"{file} should define weather start chance");
                     Assert.That(text, Does.Not.Contain("durationRemaining:"), $"{file} must not serialize runtime duration state");
-                    Assert.That(text, Does.Not.Contain("RMCBigRedRocks"), $"{file} must not enable Big Red rockstorms by accident");
+                    Assert.That(text, Does.Not.Contain("RMCSolarisRocks"), $"{file} must not enable Solaris rockstorms by accident");
                 });
 
                 var weatherTypeCount = block.Count(line => line.Contains("weatherType:"));

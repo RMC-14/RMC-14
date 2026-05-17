@@ -1,10 +1,10 @@
-# Solaris / Big Red
+# Solaris
 
 - type: weather
-  id: RMCBigRedDust
+  id: RMCSolarisDust
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: bigred_dust
+    state: solaris_dust
   sound:
     path: /Audio/_RMC14/Ambience/strata_snow.ogg
     params:
@@ -12,10 +12,10 @@
       volume: -6
 
 - type: weather
-  id: RMCBigRedSand
+  id: RMCSolarisSand
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: bigred_sand
+    state: solaris_sand
   sound:
     path: /Audio/_RMC14/Ambience/strata_snowstorm.ogg
     params:
@@ -23,10 +23,10 @@
       volume: -6
 
 - type: weather
-  id: RMCBigRedRocks
+  id: RMCSolarisRocks
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
-    state: bigred_rocks
+    state: solaris_rocks
   sound:
     path: /Audio/_RMC14/Ambience/strata_blizzard.ogg
     params:

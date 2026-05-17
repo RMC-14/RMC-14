@@ -316,7 +316,7 @@
       ]
     },
     {
-      "name": "bigred_rocks",
+      "name": "solaris_rocks",
       "delays": [
         [
           0.1,
@@ -355,7 +355,7 @@
       ]
     },
     {
-      "name": "bigred_dust",
+      "name": "solaris_dust",
       "delays": [
         [
           0.1,
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "name": "bigred_sand",
+      "name": "solaris_sand",
       "delays": [
         [
           0.1,
