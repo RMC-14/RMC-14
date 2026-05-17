@@ -144,6 +144,7 @@ entities:
         fireSmotheringStrength: 0
         cleansDecals: false
         weatherType: RMCStrataClearsky
+        screenOverlay: Low
         duration: 600
         name: Snow
       - lightningSound: !type:SoundCollectionSpecifier
@@ -154,6 +155,7 @@ entities:
         fireSmotheringStrength: 1
         cleansDecals: false
         weatherType: RMCStrataSnowing
+        screenOverlay: Medium
         duration: 360
         name: Snowstorm
       - lightningSound: !type:SoundCollectionSpecifier
@@ -164,6 +166,7 @@ entities:
         fireSmotheringStrength: 2
         cleansDecals: false
         weatherType: RMCStrataBlizzard
+        screenOverlay: High
         duration: 240
         name: Blizzard
     - type: RMCAmbientLightEffects

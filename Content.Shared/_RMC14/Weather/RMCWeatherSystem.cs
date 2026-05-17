@@ -84,6 +84,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         EnsureComp<RMCAmbientLightEffectsComponent>(ent);
 
         ent.Comp.State = RMCWeatherCycleState.Idle;
+        ent.Comp.CurrentScreenOverlay = RMCWeatherScreenOverlay.None;
         ent.Comp.CurrentEventIndex = null;
         ent.Comp.ForcedEvent = null;
         ent.Comp.AdminForcedEvent = false;
@@ -384,6 +385,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         if (!TryGetCurrentEvent(ent.Comp, out var weatherEvent))
         {
             ent.Comp.State = RMCWeatherCycleState.Idle;
+            ent.Comp.CurrentScreenOverlay = RMCWeatherScreenOverlay.None;
             ent.Comp.CheckCooldown = GetCheckDelay(ent.Comp);
             Dirty(ent);
             return;
@@ -398,6 +400,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         {
             Log.Error($"Unable to find RMC weather prototype {weatherEvent.WeatherType} for {ToPrettyString(ent)}.");
             ent.Comp.State = RMCWeatherCycleState.Idle;
+            ent.Comp.CurrentScreenOverlay = RMCWeatherScreenOverlay.None;
             ent.Comp.CheckCooldown = GetCheckDelay(ent.Comp);
             Dirty(ent);
             return;
@@ -406,6 +409,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         var mapId = Transform(ent).MapID;
         var endTime = _timing.CurTime + weatherEvent.Duration;
         ent.Comp.State = RMCWeatherCycleState.Running;
+        ent.Comp.CurrentScreenOverlay = weatherEvent.ScreenOverlay;
         ent.Comp.EventRemaining = weatherEvent.Duration;
         ent.Comp.LightningCooldown = TimeSpan.Zero;
         ent.Comp.EffectCooldown = WeatherEffectInterval;
@@ -431,6 +435,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
         _weather.SetWeather(mapId, null, null);
         ent.Comp.State = RMCWeatherCycleState.Cooldown;
+        ent.Comp.CurrentScreenOverlay = RMCWeatherScreenOverlay.None;
         ent.Comp.CurrentEventIndex = null;
         ent.Comp.ForcedEvent = null;
         ent.Comp.AdminForcedEvent = false;

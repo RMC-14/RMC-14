@@ -33,6 +33,9 @@ public sealed partial class RMCWeatherCycleComponent : Component
     [DataField, AutoNetworkedField]
     public RMCWeatherCycleState State = RMCWeatherCycleState.Idle;
 
+    [DataField, AutoNetworkedField]
+    public RMCWeatherScreenOverlay CurrentScreenOverlay = RMCWeatherScreenOverlay.None;
+
     [DataField]
     public int? CurrentEventIndex;
 
@@ -123,6 +126,9 @@ public sealed partial class RMCWeatherEvent
 
     [DataField]
     public SoundSpecifier? WarningSound;
+
+    [DataField]
+    public RMCWeatherScreenOverlay ScreenOverlay = RMCWeatherScreenOverlay.None;
 }
 
 [RegisterComponent]
@@ -148,6 +154,15 @@ public enum RMCWeatherWarningMode : byte
     Default,
     SirenOnly,
     None,
+}
+
+[Serializable, NetSerializable]
+public enum RMCWeatherScreenOverlay : byte
+{
+    None,
+    Low,
+    Medium,
+    High,
 }
 
 [ByRefEvent]
