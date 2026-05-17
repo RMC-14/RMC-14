@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Admin;
-using Content.Shared._RMC14.Weather;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
@@ -12,7 +11,6 @@ namespace Content.Shared.Verbs
     {
         [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
         [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-        [Dependency] private readonly RMCWeatherVisionSystem _rmcWeatherVision = default!;
         [Dependency] protected readonly SharedContainerSystem ContainerSystem = default!;
 
         public override void Initialize()
@@ -73,14 +71,6 @@ namespace Content.Shared.Verbs
         {
             SortedSet<Verb> verbs = new();
             extraCategories = new();
-
-            if (!force && _rmcWeatherVision.IsWeatherVisionBlocked(user, target))
-            {
-                if (!types.Contains(typeof(RMCAdminVerb)))
-                    return verbs;
-
-                types = new List<Type> { typeof(RMCAdminVerb) };
-            }
 
             // accessibility checks
             var canAccess = force || _interactionSystem.InRangeAndAccessible(user, target);

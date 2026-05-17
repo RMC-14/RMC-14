@@ -78,7 +78,7 @@ public sealed class RMCWeatherSightObstructionTest
     [Test]
     public void StrongerWeatherObscuresAtShorterDepth()
     {
-        const int depth = 6;
+        const int depth = 5;
 
         var low = RMCWeatherSightObstruction.GetAlpha(RMCWeatherScreenOverlay.Low, depth, 1);
         var medium = RMCWeatherSightObstruction.GetAlpha(RMCWeatherScreenOverlay.Medium, depth, 1);
@@ -99,30 +99,20 @@ public sealed class RMCWeatherSightObstructionTest
         Assert.Multiple(() =>
         {
             Assert.That(RMCWeatherSightObstruction.GetProfile(RMCWeatherScreenOverlay.Low),
-                Is.EqualTo(new RMCWeatherSightObstructionProfile(6.5f, 9)));
+                Is.EqualTo(new RMCWeatherSightObstructionProfile(5f, 8)));
             Assert.That(RMCWeatherSightObstruction.GetProfile(RMCWeatherScreenOverlay.Medium),
-                Is.EqualTo(new RMCWeatherSightObstructionProfile(5.5f, 8)));
+                Is.EqualTo(new RMCWeatherSightObstructionProfile(4f, 6.5f)));
             Assert.That(RMCWeatherSightObstruction.GetProfile(RMCWeatherScreenOverlay.High),
-                Is.EqualTo(new RMCWeatherSightObstructionProfile(4.5f, 7)));
+                Is.EqualTo(new RMCWeatherSightObstructionProfile(3f, 5.5f)));
         });
     }
 
     [Test]
     public void WeatherFadeScalesObstructionAlpha()
     {
-        var alpha = RMCWeatherSightObstruction.GetAlpha(RMCWeatherScreenOverlay.High, 7, 0.5f);
+        var alpha = RMCWeatherSightObstruction.GetAlpha(RMCWeatherScreenOverlay.High, 6, 0.5f);
 
         Assert.That(alpha, Is.EqualTo(0.5f));
     }
 
-    [Test]
-    public void VisionBlocksAtConfiguredThreshold()
-    {
-        Assert.Multiple(() =>
-        {
-            Assert.That(RMCWeatherSightObstruction.IsBlocked(RMCWeatherScreenOverlay.High, 7, 1), Is.True);
-            Assert.That(RMCWeatherSightObstruction.IsBlocked(RMCWeatherScreenOverlay.High, 6, 1), Is.False);
-            Assert.That(RMCWeatherSightObstruction.IsBlocked(RMCWeatherScreenOverlay.High, 7, 0.5f), Is.False);
-        });
-    }
 }

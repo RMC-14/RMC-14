@@ -45,8 +45,8 @@ void fragment() {
     highp float cloud = noise(UV * noiseScale + flow * TIME * 0.35);
     highp float streak = smoothstep(0.58, 1.0,
         noise(UV * vec2(noiseScale * 0.35, noiseScale * 2.4) + flow * TIME * 0.85));
-    highp float alpha = clamp(softMask * weatherAlpha * (0.98 + cloud * noiseStrength * 0.18 + streak * 0.04), 0.0, 1.0);
-    highp vec3 color = mix(primaryColor, secondaryColor, clamp(cloud * 0.34 + streak * 0.08, 0.0, 1.0));
+    highp float alpha = clamp(softMask * weatherAlpha * (1.0 + cloud * noiseStrength * 0.08 + streak * 0.02), 0.0, 1.0);
+    highp vec3 color = mix(primaryColor, secondaryColor, clamp(cloud * 0.2 + streak * 0.04, 0.0, 1.0));
 
     COLOR = vec4(color, alpha);
 }

@@ -6,16 +6,13 @@ public readonly record struct RMCWeatherSightObstructionProfile(float ClearDepth
 
 public static class RMCWeatherSightObstruction
 {
-    public const float VisionBlockAlpha = 0.85f;
-
     public static RMCWeatherSightObstructionProfile GetProfile(RMCWeatherScreenOverlay overlay)
     {
         return overlay switch
         {
-            // Based on CMSS13 impairedoverlay1/2/3 on the default 15x15 view.
-            RMCWeatherScreenOverlay.Low => new RMCWeatherSightObstructionProfile(6.5f, 9),
-            RMCWeatherScreenOverlay.Medium => new RMCWeatherSightObstructionProfile(5.5f, 8),
-            RMCWeatherScreenOverlay.High => new RMCWeatherSightObstructionProfile(4.5f, 7),
+            RMCWeatherScreenOverlay.Low => new RMCWeatherSightObstructionProfile(5f, 8),
+            RMCWeatherScreenOverlay.Medium => new RMCWeatherSightObstructionProfile(4f, 6.5f),
+            RMCWeatherScreenOverlay.High => new RMCWeatherSightObstructionProfile(3f, 5.5f),
             _ => new RMCWeatherSightObstructionProfile(float.PositiveInfinity, float.PositiveInfinity),
         };
     }
@@ -27,11 +24,6 @@ public static class RMCWeatherSightObstruction
 
         var profile = GetProfile(overlay);
         return SmoothStepAlpha(weatherDepth, profile) * Math.Clamp(weatherFade, 0, 1);
-    }
-
-    public static bool IsBlocked(RMCWeatherScreenOverlay overlay, int weatherDepth, float weatherFade)
-    {
-        return GetAlpha(overlay, weatherDepth, weatherFade) >= VisionBlockAlpha;
     }
 
     public static float SmoothStepAlpha(float weatherDepth, RMCWeatherSightObstructionProfile profile)

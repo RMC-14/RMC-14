@@ -10,7 +10,6 @@ rmc-weather-warning-xeno = A distant roar echoes through the hive. {$weather} ap
 
 rmc-weather-siren-message = The {$siren} blares. ATTENTION. POTENTIALLY HAZARDOUS WEATHER ANOMALY DETECTED. SEEK SHELTER IMMEDIATELY.
 rmc-storm-siren-message = The {$siren} blares. ATTENTION. ATTENTION. INCOMING TROPICAL STORM DETECTED. SEEK SHELTER IMMEDIATELY.
-rmc-weather-vision-blocked = You cannot see that clearly through the weather.
 
 rmc-weather-command-description = Controls the RMC gameplay weather cycle.
 rmc-weather-command-help = rmcweather status <mapId> | start <mapId> <event/index> [now] | end <mapId>

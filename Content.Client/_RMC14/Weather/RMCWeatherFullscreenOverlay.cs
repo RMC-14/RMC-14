@@ -36,8 +36,8 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
 
     private RMCWeatherScreenOverlay _targetOverlay = RMCWeatherScreenOverlay.None;
     private RMCWeatherScreenOverlay _drawOverlay = RMCWeatherScreenOverlay.None;
-    private float _drawClearRadius;
-    private float _drawFullRadius;
+    private Vector2 _drawClearHalfSize;
+    private Vector2 _drawFullHalfSize;
     private float _drawAlpha;
     private RMCWeatherObstructionStyle _drawStyle = RMCWeatherObstructionStyle.Neutral;
     private readonly HashSet<Entity<RMCBlockWeatherComponent>> _weatherBlockers = new();
@@ -69,14 +69,14 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     {
         var targetAlpha = 0f;
         _targetOverlay = RMCWeatherScreenOverlay.None;
-        if (TryGetOverlay(args, out var overlay, out var style, out var alpha, out var clearRadius, out var fullRadius))
+        if (TryGetOverlay(args, out var overlay, out var style, out var alpha, out var clearHalfSize, out var fullHalfSize))
         {
             _targetOverlay = overlay;
             targetAlpha = alpha;
             _drawOverlay = overlay;
             _drawStyle = style;
-            _drawClearRadius = clearRadius;
-            _drawFullRadius = fullRadius;
+            _drawClearHalfSize = clearHalfSize;
+            _drawFullHalfSize = fullHalfSize;
         }
 
         var frameTime = (float) _timing.FrameTime.TotalSeconds;
@@ -103,8 +103,8 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         _shader.SetParameter("windDirection", Vector2.Normalize(style.Wind));
         _shader.SetParameter("noiseScale", style.NoiseScale);
         _shader.SetParameter("noiseStrength", style.NoiseStrength);
-        _shader.SetParameter("clearRadius", _drawClearRadius);
-        _shader.SetParameter("fullRadius", _drawFullRadius);
+        _shader.SetParameter("clearHalfSize", _drawClearHalfSize);
+        _shader.SetParameter("fullHalfSize", _drawFullHalfSize);
         _shader.SetParameter("overlayAlpha", _drawAlpha);
 
         args.ScreenHandle.UseShader(_shader);
@@ -117,14 +117,14 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         out RMCWeatherScreenOverlay overlay,
         out RMCWeatherObstructionStyle style,
         out float alpha,
-        out float clearRadius,
-        out float fullRadius)
+        out Vector2 clearHalfSize,
+        out Vector2 fullHalfSize)
     {
         overlay = RMCWeatherScreenOverlay.None;
         style = RMCWeatherObstructionStyle.Neutral;
         alpha = 0f;
-        clearRadius = 0f;
-        fullRadius = 0f;
+        clearHalfSize = default;
+        fullHalfSize = default;
 
         if (_player.LocalEntity is not { } player ||
             _entity.HasComponent<GhostComponent>(player) ||
@@ -148,11 +148,13 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
 
         overlay = overlayContext.Overlay;
         style = overlayContext.Style;
-        var profile = RMCWeatherSightObstruction.GetProfile(overlay);
-        clearRadius = TilesToPixels(args, profile.ClearDepth);
-        fullRadius = TilesToPixels(args, profile.FullDepth);
+        (clearHalfSize, fullHalfSize) = GetPersonalOverlayRadii(args, overlay);
         alpha = RMCWeatherOverlayHelpers.GetWeatherAlpha(_entity, _weather, mapUid) * MaxOpacity;
-        return alpha > 0f && clearRadius > 0f && fullRadius > clearRadius;
+        return alpha > 0f &&
+            clearHalfSize.X > 0f &&
+            clearHalfSize.Y > 0f &&
+            fullHalfSize.X > clearHalfSize.X &&
+            fullHalfSize.Y > clearHalfSize.Y;
     }
 
     private bool IsExposedToWeather(EntityUid player, TransformComponent playerXform, EntityUid gridUid)
@@ -202,4 +204,23 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         return tiles * args.Viewport.RenderScale.X / zoom * EyeManager.PixelsPerMeter;
     }
 
+    private static (Vector2 ClearHalfSize, Vector2 FullHalfSize) GetPersonalOverlayRadii(
+        OverlayDrawArgs args,
+        RMCWeatherScreenOverlay overlay)
+    {
+        var viewport = args.ViewportBounds;
+        var halfSize = new Vector2(viewport.Width / 2f, viewport.Height / 2f);
+        var (clearScaleX, clearScaleY, fullScaleX, fullScaleY) = overlay switch
+        {
+            // CMSS13 uses 15x15 fullscreen states and stretches them to the client view.
+            // RMC keeps the same idea, with a slightly stronger vertical frame for widescreen clients.
+            RMCWeatherScreenOverlay.Low => (13f / 15f, 11f / 15f, 13.4f / 15f, 11.6f / 15f),
+            RMCWeatherScreenOverlay.Medium => (11f / 15f, 9f / 15f, 11.5f / 15f, 9.6f / 15f),
+            RMCWeatherScreenOverlay.High => (9f / 15f, 7.5f / 15f, 9.5f / 15f, 8.1f / 15f),
+            _ => (1f, 1f, 1f, 1f),
+        };
+
+        return (new Vector2(halfSize.X * clearScaleX, halfSize.Y * clearScaleY),
+            new Vector2(halfSize.X * fullScaleX, halfSize.Y * fullScaleY));
+    }
 }
