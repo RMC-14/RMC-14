@@ -321,7 +321,6 @@
   solids:
     FoodBreadBun: 1
     FoodMeatRat: 1
-    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeRobotBurger
@@ -2320,7 +2319,6 @@
     FoodTacoShell: 1
     FoodCheeseSlice: 1
     FoodMeatRat: 1
-    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeTacoBeefSupreme
