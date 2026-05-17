@@ -410,7 +410,7 @@ rmc-job-prefix-survivor-solaris-corporate-supervisor = Supervisor
 
 rmc-job-greeting-solaris-pmc = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are aware of the xenomorph threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -420,7 +420,7 @@ rmc-job-greeting-solaris-pmc = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-medic = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are aware of the xenomorph threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -430,7 +430,7 @@ rmc-job-greeting-solaris-pmc-medic = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-engineer = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are aware of the xenomorph threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -440,7 +440,7 @@ rmc-job-greeting-solaris-pmc-engineer = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-leader = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are aware of the xenomorph threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -450,7 +450,7 @@ rmc-job-greeting-solaris-pmc-leader = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-commander = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are aware of the xenomorph threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -460,7 +460,7 @@ rmc-job-greeting-solaris-pmc-commander = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-supervisor = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are aware of the xenomorph threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
