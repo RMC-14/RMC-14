@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Weather;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Watch;
@@ -26,6 +27,7 @@ namespace Content.Shared.Examine
 
         // RMC14
         [Dependency] private readonly QueenEyeSystem _queenEye = default!;
+        [Dependency] private readonly RMCWeatherVisionSystem _rmcWeatherVision = default!;
 
         public const float MaxRaycastRange = 100;
 
@@ -105,6 +107,16 @@ namespace Content.Shared.Examine
             // Ghosts and admins skip examine checks.
             if (examinerComp.SkipChecks)
                 return true;
+
+            if (examined != null)
+            {
+                if (_rmcWeatherVision.IsWeatherVisionBlocked(examiner, examined.Value))
+                    return false;
+            }
+            else if (_rmcWeatherVision.IsWeatherVisionBlocked(examiner, target))
+            {
+                return false;
+            }
 
             if (examined != null)
             {

@@ -36,6 +36,9 @@ public sealed partial class RMCWeatherCycleComponent : Component
     [DataField, AutoNetworkedField]
     public RMCWeatherScreenOverlay CurrentScreenOverlay = RMCWeatherScreenOverlay.None;
 
+    [DataField, AutoNetworkedField]
+    public RMCWeatherObstructionStyle CurrentScreenOverlayStyle = RMCWeatherObstructionStyle.Neutral;
+
     [DataField]
     public int? CurrentEventIndex;
 
@@ -129,6 +132,9 @@ public sealed partial class RMCWeatherEvent
 
     [DataField]
     public RMCWeatherScreenOverlay ScreenOverlay = RMCWeatherScreenOverlay.None;
+
+    [DataField]
+    public RMCWeatherObstructionStyle ScreenOverlayStyle = RMCWeatherObstructionStyle.Neutral;
 }
 
 [RegisterComponent]
@@ -163,6 +169,16 @@ public enum RMCWeatherScreenOverlay : byte
     Low,
     Medium,
     High,
+}
+
+[Serializable, NetSerializable]
+public enum RMCWeatherObstructionStyle : byte
+{
+    Neutral,
+    Rain,
+    Dust,
+    Sand,
+    Snow,
 }
 
 [ByRefEvent]

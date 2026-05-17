@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Movement;
+using Content.Shared._RMC14.Weather;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
@@ -39,6 +40,7 @@ public abstract class SharedActionsSystem : EntitySystem
     // RMC14
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private readonly RMCWeatherVisionSystem _rmcWeatherVision = default!;
 
     private EntityQuery<ActionComponent> _actionQuery;
     private EntityQuery<ActionsComponent> _actionsQuery;
@@ -445,15 +447,16 @@ public abstract class SharedActionsSystem : EntitySystem
         if (targetAction.CheckCanAccess)
         {
             // RMC14
-            return _interaction.InRangeAndAccessible(user, target, range: targetAction.Range, lagCompensated: true) ||
+            var canTarget = _interaction.InRangeAndAccessible(user, target, range: targetAction.Range, lagCompensated: true) ||
                    // if not just checking pure range, let stored entities be targeted by actions
                    // if it's out of range it probably isn't stored anyway...
                    _interaction.CanAccessViaStorage(user, target);
+            return canTarget && !_rmcWeatherVision.IsWeatherVisionBlocked(user, target);
         }
 
         // RMC14 if CheckCanAccess is false the target should still be valid if it's not in a container.
         // CanAccessViaStorage returns false if the target is not in a container.
-        return true;
+        return !_rmcWeatherVision.IsWeatherVisionBlocked(user, target);
     }
 
     public bool ValidateWorldTarget(EntityUid user, EntityCoordinates target, Entity<WorldTargetActionComponent> ent)
@@ -466,7 +469,8 @@ public abstract class SharedActionsSystem : EntitySystem
     {
         var comp = ent.Comp;
         if (comp.CheckCanAccess)
-            return _interaction.InRangeUnobstructed(user, coords, range: comp.Range);
+            return _interaction.InRangeUnobstructed(user, coords, range: comp.Range) &&
+                   !_rmcWeatherVision.IsWeatherVisionBlocked(user, coords);
 
         // even if we don't check for obstructions, we may still need to check the range.
         var xform = Transform(user);
@@ -474,9 +478,10 @@ public abstract class SharedActionsSystem : EntitySystem
             return false;
 
         if (comp.Range <= 0)
-            return true;
+            return !_rmcWeatherVision.IsWeatherVisionBlocked(user, coords);
 
-        return _transform.InRange(coords, xform.Coordinates, comp.Range);
+        return _transform.InRange(coords, xform.Coordinates, comp.Range) &&
+               !_rmcWeatherVision.IsWeatherVisionBlocked(user, coords);
     }
 
     private void OnInstantGetEvent(Entity<InstantActionComponent> ent, ref ActionGetEventEvent args)

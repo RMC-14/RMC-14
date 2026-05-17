@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client.Weather;
+using Content.Shared._RMC14.Admin.AdminGhost;
 using Content.Shared._RMC14.Weather;
 using Content.Shared.Ghost;
 using Content.Shared.Light.Components;
@@ -12,6 +13,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Weather;
@@ -21,8 +23,6 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     private const float MaxOpacity = 1f;
     private const float FadeInPerSecond = 1.8f;
     private const float FadeOutPerSecond = 2.4f;
-    private const float FeatherScale = 0.08f;
-    private const int FeatherSteps = 6;
     private const float WeatherBlockerLookupRadius = 0.05f;
 
     private readonly IEntityManager _entity;
@@ -32,10 +32,14 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     private readonly SharedTransformSystem _transform;
     private readonly EntityLookupSystem _lookup;
     private readonly IGameTiming _timing;
+    private readonly ShaderInstance _shader;
 
     private RMCWeatherScreenOverlay _targetOverlay = RMCWeatherScreenOverlay.None;
     private RMCWeatherScreenOverlay _drawOverlay = RMCWeatherScreenOverlay.None;
+    private float _drawClearRadius;
+    private float _drawFullRadius;
     private float _drawAlpha;
+    private RMCWeatherObstructionStyle _drawStyle = RMCWeatherObstructionStyle.Neutral;
     private readonly HashSet<Entity<RMCBlockWeatherComponent>> _weatherBlockers = new();
 
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
@@ -47,7 +51,8 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         SharedMapSystem map,
         SharedTransformSystem transform,
         EntityLookupSystem lookup,
-        IGameTiming timing)
+        IGameTiming timing,
+        IPrototypeManager prototypes)
     {
         _entity = entity;
         _player = player;
@@ -56,6 +61,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         _transform = transform;
         _lookup = lookup;
         _timing = timing;
+        _shader = prototypes.Index<ShaderPrototype>("RMCWeatherPersonalOverlay").InstanceUnique();
         ZIndex = -1;
     }
 
@@ -63,11 +69,14 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     {
         var targetAlpha = 0f;
         _targetOverlay = RMCWeatherScreenOverlay.None;
-        if (TryGetOverlay(args, out var overlay, out var alpha))
+        if (TryGetOverlay(args, out var overlay, out var style, out var alpha, out var clearRadius, out var fullRadius))
         {
             _targetOverlay = overlay;
             targetAlpha = alpha;
             _drawOverlay = overlay;
+            _drawStyle = style;
+            _drawClearRadius = clearRadius;
+            _drawFullRadius = fullRadius;
         }
 
         var frameTime = (float) _timing.FrameTime.TotalSeconds;
@@ -88,37 +97,38 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     {
         var viewport = args.ViewportBounds;
         var bounds = new UIBox2(viewport.Left, viewport.Top, viewport.Right, viewport.Bottom);
-        var clearScale = GetClearScale(_drawOverlay);
-        var outerScale = Math.Min(1f, clearScale + FeatherScale);
-        var clear = ScaleBox(bounds, clearScale);
-        var featherOuter = ScaleBox(bounds, outerScale);
+        var style = RMCWeatherOverlayHelpers.GetShaderStyle(_drawStyle);
+        _shader.SetParameter("primaryColor", style.Primary);
+        _shader.SetParameter("secondaryColor", style.Secondary);
+        _shader.SetParameter("windDirection", Vector2.Normalize(style.Wind));
+        _shader.SetParameter("noiseScale", style.NoiseScale);
+        _shader.SetParameter("noiseStrength", style.NoiseStrength);
+        _shader.SetParameter("clearRadius", _drawClearRadius);
+        _shader.SetParameter("fullRadius", _drawFullRadius);
+        _shader.SetParameter("overlayAlpha", _drawAlpha);
 
-        DrawRing(args.ScreenHandle, bounds, featherOuter, Color.Black.WithAlpha(_drawAlpha));
-
-        for (var i = FeatherSteps; i > 0; i--)
-        {
-            var bandOuterScale = clearScale + FeatherScale * i / FeatherSteps;
-            var bandInnerScale = clearScale + FeatherScale * (i - 1) / FeatherSteps;
-            bandOuterScale = Math.Min(1f, bandOuterScale);
-            bandInnerScale = Math.Min(bandOuterScale, bandInnerScale);
-
-            var bandOuter = ScaleBox(bounds, bandOuterScale);
-            var bandInner = i == 1 ? clear : ScaleBox(bounds, bandInnerScale);
-            var alpha = _drawAlpha * MathF.Pow(i / (float) FeatherSteps, 1.5f);
-            DrawRing(args.ScreenHandle, bandOuter, bandInner, Color.Black.WithAlpha(alpha));
-        }
+        args.ScreenHandle.UseShader(_shader);
+        args.ScreenHandle.DrawRect(bounds, Color.White);
+        args.ScreenHandle.UseShader(null);
     }
 
     private bool TryGetOverlay(
         OverlayDrawArgs args,
         out RMCWeatherScreenOverlay overlay,
-        out float alpha)
+        out RMCWeatherObstructionStyle style,
+        out float alpha,
+        out float clearRadius,
+        out float fullRadius)
     {
         overlay = RMCWeatherScreenOverlay.None;
+        style = RMCWeatherObstructionStyle.Neutral;
         alpha = 0f;
+        clearRadius = 0f;
+        fullRadius = 0f;
 
         if (_player.LocalEntity is not { } player ||
             _entity.HasComponent<GhostComponent>(player) ||
+            _entity.HasComponent<RMCAdminGhostComponent>(player) ||
             !_entity.HasComponent<MobStateComponent>(player) ||
             !_entity.TryGetComponent(player, out TransformComponent? playerXform) ||
             !_entity.TryGetComponent(player, out EyeComponent? eye) ||
@@ -130,49 +140,19 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
             return false;
         }
 
-        overlay = GetCurrentMapOverlay(playerXform.MapID);
-        if (overlay == RMCWeatherScreenOverlay.None)
+        if (!RMCWeatherOverlayHelpers.TryGetCurrentMapOverlay(_entity, playerXform.MapID, out var overlayContext))
             return false;
 
         if (!IsExposedToWeather(player, playerXform, gridUid))
             return false;
 
-        alpha = GetWeatherAlpha(mapUid) * MaxOpacity;
-        return alpha > 0f;
-    }
-
-    private RMCWeatherScreenOverlay GetCurrentMapOverlay(MapId mapId)
-    {
-        var overlay = RMCWeatherScreenOverlay.None;
-        var query = _entity.EntityQueryEnumerator<RMCWeatherCycleComponent, TransformComponent>();
-        while (query.MoveNext(out _, out var cycle, out var xform))
-        {
-            if (xform.MapID != mapId ||
-                cycle.State != RMCWeatherCycleState.Running ||
-                cycle.CurrentScreenOverlay == RMCWeatherScreenOverlay.None)
-            {
-                continue;
-            }
-
-            if ((byte) cycle.CurrentScreenOverlay > (byte) overlay)
-                overlay = cycle.CurrentScreenOverlay;
-        }
-
-        return overlay;
-    }
-
-    private float GetWeatherAlpha(EntityUid mapUid)
-    {
-        if (!_entity.TryGetComponent(mapUid, out WeatherComponent? weather))
-            return 0f;
-
-        var alpha = 0f;
-        foreach (var data in weather.Weather.Values)
-        {
-            alpha = MathF.Max(alpha, _weather.GetPercent(data, mapUid));
-        }
-
-        return Math.Clamp(alpha, 0f, 1f);
+        overlay = overlayContext.Overlay;
+        style = overlayContext.Style;
+        var profile = RMCWeatherSightObstruction.GetProfile(overlay);
+        clearRadius = TilesToPixels(args, profile.ClearDepth);
+        fullRadius = TilesToPixels(args, profile.FullDepth);
+        alpha = RMCWeatherOverlayHelpers.GetWeatherAlpha(_entity, _weather, mapUid) * MaxOpacity;
+        return alpha > 0f && clearRadius > 0f && fullRadius > clearRadius;
     }
 
     private bool IsExposedToWeather(EntityUid player, TransformComponent playerXform, EntityUid gridUid)
@@ -216,34 +196,10 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         return false;
     }
 
-    private static float GetClearScale(RMCWeatherScreenOverlay overlay)
+    private static float TilesToPixels(OverlayDrawArgs args, float tiles)
     {
-        return overlay switch
-        {
-            RMCWeatherScreenOverlay.Low => 0.8f,
-            RMCWeatherScreenOverlay.Medium => 0.62f,
-            RMCWeatherScreenOverlay.High => 0.45f,
-            _ => 1f,
-        };
+        var zoom = Math.Max(args.Viewport.Eye?.Zoom.X ?? 1f, 0.01f);
+        return tiles * args.Viewport.RenderScale.X / zoom * EyeManager.PixelsPerMeter;
     }
 
-    private static UIBox2 ScaleBox(UIBox2 bounds, float scale)
-    {
-        return bounds.Scale(scale);
-    }
-
-    private static void DrawRing(DrawingHandleScreen handle, UIBox2 outer, UIBox2 inner, Color color)
-    {
-        if (inner.Top > outer.Top)
-            handle.DrawRect(new UIBox2(outer.Left, outer.Top, outer.Right, inner.Top), color);
-
-        if (outer.Bottom > inner.Bottom)
-            handle.DrawRect(new UIBox2(outer.Left, inner.Bottom, outer.Right, outer.Bottom), color);
-
-        if (inner.Left > outer.Left && inner.Bottom > inner.Top)
-            handle.DrawRect(new UIBox2(outer.Left, inner.Top, inner.Left, inner.Bottom), color);
-
-        if (outer.Right > inner.Right && inner.Bottom > inner.Top)
-            handle.DrawRect(new UIBox2(inner.Right, inner.Top, outer.Right, inner.Bottom), color);
-    }
 }
