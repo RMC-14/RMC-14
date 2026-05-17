@@ -18,7 +18,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     private const int StackThreshold = 5;
 
-    private EntityUid SpawnCard(string prototype, EntityUid source, CardSuit suit, CardRank rank, bool faceUp)
+    private EntityUid SpawnCard(EntProtoId prototype, EntityUid source, CardSuit suit, CardRank rank, bool faceUp)
     {
         var card = Spawn(prototype, _transform.GetMapCoordinates(source));
         if (TryComp<PlayingCardComponent>(card, out var comp))
