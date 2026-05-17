@@ -22,6 +22,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -35,6 +36,7 @@ public sealed class RMCWeatherSystem : EntitySystem
     private static readonly TimeSpan WeatherEffectInterval = TimeSpan.FromSeconds(1);
     private static readonly TimeSpan WeatherCleanInterval = TimeSpan.FromSeconds(5);
     private const float CleanDecalChance = 0.05f;
+    private const float WeatherBlockerLookupRadius = 0.05f;
     private const float WeatherSirenPopupRange = 7f;
 
     private static readonly SoundSpecifier MarineWeatherWarningSound =
@@ -65,6 +67,8 @@ public sealed class RMCWeatherSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
+    private readonly HashSet<Entity<RMCBlockWeatherComponent>> _weatherBlockers = new();
+    private readonly List<(EntityUid GridUid, uint DecalId)> _decalsToRemove = new();
 
     public override void Initialize()
     {
@@ -665,10 +669,10 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void ProcessBurningEntities(MapId mapId, int fireSmotheringStrength)
     {
-        var query = EntityQueryEnumerator<FlammableComponent>();
-        while (query.MoveNext(out var uid, out var flammable))
+        var query = EntityQueryEnumerator<FlammableComponent, OnFireComponent>();
+        while (query.MoveNext(out var uid, out var flammable, out _))
         {
-            if (!flammable.OnFire || !IsWeatherExposed(uid, mapId))
+            if (!flammable.OnFire || Transform(uid).MapID != mapId || !IsWeatherExposed(uid, mapId))
                 continue;
 
             _flammable.AdjustStacks((uid, flammable), -fireSmotheringStrength);
@@ -681,7 +685,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         var query = EntityQueryEnumerator<TileFireComponent>();
         while (query.MoveNext(out var uid, out var fire))
         {
-            if (!IsWeatherExposed(uid, mapId))
+            if (Transform(uid).MapID != mapId || !IsWeatherExposed(uid, mapId))
                 continue;
 
             var remaining = fire.SpawnedAt + fire.Duration - _timing.CurTime;
@@ -741,12 +745,19 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private bool TryMarkAcidDiluted(EntityUid uid, MapId mapId, int eventSequence)
     {
+        if (TryComp(uid, out RMCWeatherDilutedAcidComponent? weatherAcid) &&
+            weatherAcid.LastWeatherSequence == eventSequence)
+        {
+            return false;
+        }
+
+        if (Transform(uid).MapID != mapId)
+            return false;
+
         if (!IsWeatherExposed(uid, mapId))
             return false;
 
-        var weatherAcid = EnsureComp<RMCWeatherDilutedAcidComponent>(uid);
-        if (weatherAcid.LastWeatherSequence == eventSequence)
-            return false;
+        weatherAcid ??= EnsureComp<RMCWeatherDilutedAcidComponent>(uid);
 
         weatherAcid.LastWeatherSequence = eventSequence;
         Dirty(uid, weatherAcid);
@@ -758,8 +769,12 @@ public sealed class RMCWeatherSystem : EntitySystem
         var query = EntityQueryEnumerator<MobStateComponent, DamageableComponent>();
         while (query.MoveNext(out var uid, out var mobState, out var damageable))
         {
-            if (!_mobState.IsAlive(uid, mobState) || !IsWeatherExposed(uid, mapId))
+            if (!_mobState.IsAlive(uid, mobState) ||
+                Transform(uid).MapID != mapId ||
+                !IsWeatherExposed(uid, mapId))
+            {
                 continue;
+            }
 
             if (!weatherEvent.ExposureDamage.Empty)
             {
@@ -782,34 +797,35 @@ public sealed class RMCWeatherSystem : EntitySystem
     {
         var mapId = Transform(ent).MapID;
         var grids = EntityQueryEnumerator<MapGridComponent, DecalGridComponent>();
-        while (grids.MoveNext(out var gridUid, out var mapGrid, out _))
+        while (grids.MoveNext(out var gridUid, out var mapGrid, out var decalGrid))
         {
             if (Transform(gridUid).MapID != mapId)
                 continue;
 
-            var tiles = _mapSystem.GetAllTilesEnumerator(gridUid, mapGrid);
-            while (tiles.MoveNext(out var tile))
+            _decalsToRemove.Clear();
+            foreach (var chunk in decalGrid.ChunkCollection.ChunkCollection.Values)
             {
-                if (tile is not { } tileRef ||
-                    !_weather.CanWeatherAffect(gridUid, mapGrid, tileRef))
+                foreach (var (decalId, decal) in chunk.Decals)
                 {
-                    continue;
-                }
+                    if (!decal.Cleanable)
+                        continue;
 
-                var coords = _mapSystem.GridTileToLocal(gridUid, mapGrid, tileRef.GridIndices);
-                if (IsRMCWeatherBlocked(mapId, _transform.ToMapCoordinates(coords).Position))
-                    continue;
+                    var coords = new EntityCoordinates(gridUid, decal.Coordinates);
+                    if (!_mapSystem.TryGetTileRef(gridUid, mapGrid, coords, out var tile) ||
+                        !_weather.CanWeatherAffect(gridUid, mapGrid, tile) ||
+                        IsRMCWeatherBlocked(mapId, _transform.ToMapCoordinates(coords).Position))
+                    {
+                        continue;
+                    }
 
-                var decals = _decals.GetDecalsInRange(gridUid,
-                    coords.Position,
-                    0.75f,
-                    decal => decal.Cleanable);
-
-                foreach (var (decalId, _) in decals)
-                {
                     if (_random.Prob(CleanDecalChance))
-                        _decals.RemoveDecal(gridUid, decalId);
+                        _decalsToRemove.Add((gridUid, decalId));
                 }
+            }
+
+            foreach (var (removeGrid, decalId) in _decalsToRemove)
+            {
+                _decals.RemoveDecal(removeGrid, decalId);
             }
         }
     }
@@ -827,17 +843,23 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private bool IsRMCWeatherBlocked(MapId mapId, Vector2 position)
     {
-        var query = EntityQueryEnumerator<RMCBlockWeatherComponent>();
-        while (query.MoveNext(out var uid, out _))
+        _weatherBlockers.Clear();
+        var bounds = new Box2(
+            position - new Vector2(WeatherBlockerLookupRadius, WeatherBlockerLookupRadius),
+            position + new Vector2(WeatherBlockerLookupRadius, WeatherBlockerLookupRadius));
+        _lookup.GetEntitiesIntersecting(mapId, bounds, _weatherBlockers, LookupFlags.Uncontained);
+
+        foreach (var blocker in _weatherBlockers)
         {
-            if (Transform(uid).MapID != mapId)
+            var uid = blocker.Owner;
+            if (!TryComp(uid, out TransformComponent? xform))
                 continue;
 
-            var bounds = _lookup.GetAABBNoContainer(uid,
-                _transform.GetWorldPosition(uid),
-                _transform.GetWorldRotation(uid));
+            var blockerBounds = _lookup.GetAABBNoContainer(uid,
+                _transform.GetWorldPosition(xform),
+                _transform.GetWorldRotation(xform));
 
-            if (bounds.Contains(position))
+            if (blockerBounds.Contains(position))
                 return true;
         }
 

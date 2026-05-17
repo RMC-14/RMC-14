@@ -23,6 +23,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     private const float FadeOutPerSecond = 2.4f;
     private const float FeatherScale = 0.08f;
     private const int FeatherSteps = 6;
+    private const float WeatherBlockerLookupRadius = 0.05f;
 
     private readonly IEntityManager _entity;
     private readonly IPlayerManager _player;
@@ -35,6 +36,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     private RMCWeatherScreenOverlay _targetOverlay = RMCWeatherScreenOverlay.None;
     private RMCWeatherScreenOverlay _drawOverlay = RMCWeatherScreenOverlay.None;
     private float _drawAlpha;
+    private readonly HashSet<Entity<RMCBlockWeatherComponent>> _weatherBlockers = new();
 
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
 
@@ -191,17 +193,23 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
 
     private bool IsRMCWeatherBlocked(MapId mapId, Vector2 position)
     {
-        var query = _entity.EntityQueryEnumerator<RMCBlockWeatherComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out _, out var xform))
+        _weatherBlockers.Clear();
+        var bounds = new Box2(
+            position - new Vector2(WeatherBlockerLookupRadius, WeatherBlockerLookupRadius),
+            position + new Vector2(WeatherBlockerLookupRadius, WeatherBlockerLookupRadius));
+        _lookup.GetEntitiesIntersecting(mapId, bounds, _weatherBlockers, LookupFlags.Uncontained);
+
+        foreach (var blocker in _weatherBlockers)
         {
-            if (xform.MapID != mapId)
+            var uid = blocker.Owner;
+            if (!_entity.TryGetComponent(uid, out TransformComponent? xform))
                 continue;
 
-            var bounds = _lookup.GetAABBNoContainer(uid,
-                _transform.GetWorldPosition(uid),
-                _transform.GetWorldRotation(uid));
+            var blockerBounds = _lookup.GetAABBNoContainer(uid,
+                _transform.GetWorldPosition(xform),
+                _transform.GetWorldRotation(xform));
 
-            if (bounds.Contains(position))
+            if (blockerBounds.Contains(position))
                 return true;
         }
 
