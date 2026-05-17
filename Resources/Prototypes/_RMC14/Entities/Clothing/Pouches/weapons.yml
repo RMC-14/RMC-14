@@ -77,7 +77,6 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: taser
       map: [ "taser_fill" ]
-      
     - state: icon
     - state: closed
       map: [ "holstered" ]
@@ -163,7 +162,6 @@
         whitelist:
           tags:
           - Taser
-            
   - type: Storage
     maxItemSize: Normal
   - type: CMHolster
@@ -208,6 +206,7 @@
   - type: Tag
     tags:
     - Pouch
+    - RMCMacheteHolder
   - type: CMHolster
   - type: CMItemSlots
   - type: InteractedBlacklist

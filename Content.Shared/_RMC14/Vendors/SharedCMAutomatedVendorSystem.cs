@@ -110,6 +110,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     private static readonly ProtoId<ReagentPrototype> FlamerTankReagent = "RMCNapalmUT";
     private static readonly ProtoId<TagPrototype> FlarePackTag = "CMFlarePack";
     private static readonly ProtoId<TagPrototype> FlarePackCASTag = "RMCPackFlareCAS";
+    private static readonly ProtoId<TagPrototype> MacheteHolderTag = "RMCMacheteHolder";
 
     public override void Initialize()
     {
@@ -1578,7 +1579,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         if (HasComp<CMHolsterComponent>(item) &&
-            MetaData(item).EntityName.Contains("machete", StringComparison.OrdinalIgnoreCase) &&
+            _tags.HasTag(item, MacheteHolderTag) &&
             !ValidateMacheteHolster(item, user, suppressPopup))
         {
             return false;
