@@ -119,7 +119,7 @@ public sealed partial class RMCWeatherEvent
     public LocId? EffectMessage;
 
     [DataField]
-    public float EffectMessageChance = 0.10f;
+    public float EffectMessageChance = 1f / 30f;
 
     [DataField]
     public RMCWeatherWarningMode WarningMode = RMCWeatherWarningMode.Default;
