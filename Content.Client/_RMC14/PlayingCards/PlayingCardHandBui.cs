@@ -20,6 +20,8 @@ public sealed class PlayingCardHandBui : BoundUserInterface
     private readonly SpriteSystem _sprite;
     private readonly SharedPlayingCardSystem _cards;
 
+    private static readonly ResPath CardRsiPath = new("_RMC14/Objects/Fun/playing_cards.rsi");
+
     private PlayingCardHandMenu? _menu;
 
     public PlayingCardHandBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
@@ -52,8 +54,6 @@ public sealed class PlayingCardHandBui : BoundUserInterface
 
         _menu.Cards.Children.Clear();
 
-        var rsiPath = new ResPath("_RMC14/Objects/Fun/playing_cards.rsi");
-
         for (var i = 0; i < hand.Cards.Count; i++)
         {
             var encoded = hand.Cards[i];
@@ -70,7 +70,7 @@ public sealed class PlayingCardHandBui : BoundUserInterface
                 ToolTip = $"{rankName} of {suitName}",
             };
 
-            var specifier = new SpriteSpecifier.Rsi(rsiPath, stateName);
+            var specifier = new SpriteSpecifier.Rsi(CardRsiPath, stateName);
             var texture = new TextureRect
             {
                 TextureScale = new Vector2(2f, 2f),
