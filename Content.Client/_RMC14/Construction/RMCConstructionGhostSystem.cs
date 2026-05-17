@@ -27,16 +27,15 @@ namespace Content.Client._RMC14.Construction;
 public sealed class RMCConstructionGhostSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RMCConstructionSystem _constructionSystem = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly RMCConstructionSystem _construction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-
-    private SharedMapSystem _mapSystem = default!;
 
     private readonly Dictionary<RMCConstructionGhostKey, EntityUid> _ghosts = new();
     private readonly Dictionary<RMCConstructionGhostKey, BuildGhostState> _buildingGhosts = new();
@@ -46,7 +45,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     private EntityUid? _currentConstructionItem;
     private EntityCoordinates _lastPosition = EntityCoordinates.Invalid;
     private bool _isPlacementActive = false;
-    private DateTime _lastRotationTime = DateTime.MinValue;
+    private TimeSpan _lastRotationTime = TimeSpan.MinValue;
     private Direction _currentDirection = Direction.North;
     private bool _isFlashing = false;
     private TimeSpan _flashEndTime;
@@ -67,7 +66,6 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     {
         base.Initialize();
 
-        _mapSystem = EntityManager.System<SharedMapSystem>();
         UpdatesOutsidePrediction = true;
 
         CommandBinds.Builder
@@ -95,7 +93,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         var userEntity = _playerManager.LocalEntity;
         foreach (var (ghostKey, state) in _buildingGhosts.ToList())
         {
-            if (!_ghosts.TryGetValue(ghostKey, out var ghost) || !EntityManager.EntityExists(ghost))
+            if (!_ghosts.TryGetValue(ghostKey, out var ghost) || !Exists(ghost))
             {
                 _ghosts.Remove(ghostKey);
                 _buildingGhosts.Remove(ghostKey);
@@ -110,7 +108,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
                     continue;
                 }
 
-                var currentPos = _transformSystem.GetWorldPosition(userUid);
+                var currentPos = _transform.GetWorldPosition(userUid);
                 if ((currentPos - state.UserStartWorldPosition).LengthSquared() > BuildCancelDistance * BuildCancelDistance)
                 {
                     HandleLocalBuildCancelled(ghostKey, state);
@@ -118,7 +116,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
                 }
             }
 
-            if (!EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
+            if (!TryComp<SpriteComponent>(ghost, out var sprite))
                 continue;
 
             var durationSeconds = Math.Max((float) state.Duration.TotalSeconds, BuildFadeMinDuration);
@@ -143,7 +141,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             return;
         }
 
-        if (_currentPrototype.Type != RMCConstructionType.Structure)
+        if (_currentPrototype.ConstructionType != RMCConstructionType.Structure)
         {
             ClearCurrentGhost();
             return;
@@ -156,13 +154,13 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private void HandleRotate(ICommonSession? session)
     {
-        var now = DateTime.UtcNow;
+        var now = _timing.CurTime;
         if ((now - _lastRotationTime).TotalMilliseconds < 200)
             return;
 
         _lastRotationTime = now;
 
-        if (_currentGhost != null && EntityManager.EntityExists(_currentGhost.Value))
+        if (_currentGhost != null && Exists(_currentGhost.Value))
         {
             RotateCurrentGhost();
             return;
@@ -174,7 +172,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
         foreach (var (_, ghostEntity) in _ghosts)
         {
-            var ghostTransform = EntityManager.GetComponent<TransformComponent>(ghostEntity);
+            var ghostTransform = Transform(ghostEntity);
             if (ghostTransform.Coordinates.Equals(mousePos))
             {
                 RotateGhost(ghostEntity);
@@ -196,7 +194,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             return;
         }
 
-        var xform = EntityManager.GetComponent<TransformComponent>(player);
+        var xform = Transform(player);
         _lastPlayerMapId = xform.MapID;
     }
 
@@ -221,7 +219,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             return;
         }
 
-        var mapId = EntityManager.GetComponent<TransformComponent>(playerUid).MapID;
+        var mapId = Transform(playerUid).MapID;
         if (_lastPlayerMapId != MapId.Nullspace && mapId != _lastPlayerMapId)
             ResetGhostState();
 
@@ -240,11 +238,11 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         if (player == null || _currentPrototype == null || _currentConstructionItem == null)
             return;
 
-        var playerCoords = EntityManager.GetComponent<TransformComponent>(player.Value).Coordinates;
-        var ghost = EntityManager.SpawnEntity("rmcconstructionghost", playerCoords);
+        var playerCoords = Transform(player.Value).Coordinates;
+        var ghost = Spawn("rmcconstructionghost", playerCoords);
 
-        if (EntityManager.TryGetComponent<ClickableComponent>(ghost, out _))
-            EntityManager.RemoveComponent<ClickableComponent>(ghost);
+        if (TryComp<ClickableComponent>(ghost, out _))
+            RemComp<ClickableComponent>(ghost);
 
         ConfigureGhostSprite(ghost, _currentPrototype, true);
         var direction = NormalizeDirection(_currentPrototype, _currentDirection);
@@ -257,7 +255,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     private void UpdateGhostPosition()
     {
         var player = _playerManager.LocalEntity;
-        if (player == null || _currentGhost == null || !EntityManager.EntityExists(_currentGhost.Value))
+        if (player == null || _currentGhost == null || !Exists(_currentGhost.Value))
             return;
 
         var coords = SnapToGrid(_inputManager.MouseScreenPosition);
@@ -266,12 +264,12 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
         if (!coords.Equals(_lastPosition))
         {
-            var ghostTransform = EntityManager.GetComponent<TransformComponent>(_currentGhost.Value);
-            _transformSystem.SetCoordinates(_currentGhost.Value, ghostTransform, coords);
+            var ghostTransform = Transform(_currentGhost.Value);
+            _transform.SetCoordinates(_currentGhost.Value, ghostTransform, coords);
             _lastPosition = coords;
         }
 
-        if (EntityManager.TryGetComponent<SpriteComponent>(_currentGhost.Value, out var sprite))
+        if (TryComp<SpriteComponent>(_currentGhost.Value, out var sprite))
         {
             var overlapsGhost = IsOverlappingPlacedGhost(coords);
             sprite.Scale = overlapsGhost ? CursorGhostOverlapScale : Vector2.One;
@@ -301,7 +299,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         if (mapCoords.MapId == MapId.Nullspace)
         {
             var player = _playerManager.LocalEntity;
-            return player != null ? _transformSystem.GetMoverCoordinates(player.Value) : EntityCoordinates.Invalid;
+            return player != null ? _transform.GetMoverCoordinates(player.Value) : EntityCoordinates.Invalid;
         }
 
         if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid))
@@ -309,9 +307,9 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             var player = _playerManager.LocalEntity;
             if (player != null)
             {
-                var playerTransform = EntityManager.GetComponent<TransformComponent>(player.Value);
-                var playerGrid = _transformSystem.GetGrid(playerTransform.Coordinates);
-                if (playerGrid != null && EntityManager.TryGetComponent<MapGridComponent>(playerGrid.Value, out grid))
+                var playerTransform = Transform(player.Value);
+                var playerGrid = _transform.GetGrid(playerTransform.Coordinates);
+                if (playerGrid != null && TryComp<MapGridComponent>(playerGrid.Value, out grid))
                     gridUid = playerGrid.Value;
                 else
                     return EntityCoordinates.Invalid;
@@ -322,7 +320,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             }
         }
 
-        var gridLocalCoords = _transformSystem.ToCoordinates(gridUid, mapCoords);
+        var gridLocalCoords = _transform.ToCoordinates(gridUid, mapCoords);
         var tileCoords = _mapSystem.CoordinatesToTile(gridUid, grid, gridLocalCoords);
         return _mapSystem.GridTileToLocal(gridUid, grid, tileCoords);
     }
@@ -345,14 +343,14 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private bool IsOverlappingPlacedGhost(EntityCoordinates coords)
     {
-        var targetTile = coords.ToVector2i(EntityManager, _mapManager, _transformSystem);
+        var targetTile = coords.ToVector2i(EntityManager, _mapManager, _transform);
         foreach (var ghost in _ghosts.Values)
         {
-            if (!EntityManager.EntityExists(ghost))
+            if (!Exists(ghost))
                 continue;
 
-            var ghostCoords = EntityManager.GetComponent<TransformComponent>(ghost).Coordinates;
-            var ghostTile = ghostCoords.ToVector2i(EntityManager, _mapManager, _transformSystem);
+            var ghostCoords = Transform(ghost).Coordinates;
+            var ghostTile = ghostCoords.ToVector2i(EntityManager, _mapManager, _transform);
             if (ghostTile == targetTile)
                 return true;
         }
@@ -362,8 +360,8 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private void ClearCurrentGhost()
     {
-        if (_currentGhost is { } ghost && EntityManager.EntityExists(ghost))
-            EntityManager.QueueDeleteEntity(ghost);
+        if (_currentGhost is { } ghost && Exists(ghost))
+            QueueDel(ghost);
 
         _currentGhost = null;
         _lastPosition = EntityCoordinates.Invalid;
@@ -371,7 +369,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private void RotateCurrentGhost()
     {
-        if (_currentPrototype?.NoRotate == true || _currentGhost == null || !EntityManager.EntityExists(_currentGhost.Value))
+        if (_currentPrototype?.NoRotate == true || _currentGhost == null || !Exists(_currentGhost.Value))
             return;
 
         _currentDirection = _currentDirection.GetClockwise90Degrees();
@@ -380,12 +378,12 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private void SetGhostDirection(EntityUid ghost, Direction direction)
     {
-        EntityManager.GetComponent<TransformComponent>(ghost).LocalRotation = direction.ToAngle();
+        Transform(ghost).LocalRotation = direction.ToAngle();
     }
 
     private Direction GetGhostDirection(EntityUid ghost)
     {
-        return EntityManager.GetComponent<TransformComponent>(ghost).LocalRotation.GetCardinalDir();
+        return Transform(ghost).LocalRotation.GetCardinalDir();
     }
 
     private void StartFlash()
@@ -435,7 +433,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         var newDirection = currentDirection.GetClockwise90Degrees();
         SetGhostDirection(ghost, newDirection);
 
-        var coords = EntityManager.GetComponent<TransformComponent>(ghost).Coordinates;
+        var coords = Transform(ghost).Coordinates;
         TryUpdateGhostKey(ghost, ghostComp, coords, newDirection);
     }
 
@@ -466,7 +464,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
         if (_isPlacementActive && _currentPrototype != null && _currentConstructionItem != null)
         {
-            if (_currentPrototype.Type == RMCConstructionType.Item)
+            if (_currentPrototype.ConstructionType == RMCConstructionType.Item)
             {
                 StartItemConstruction();
                 return true;
@@ -497,7 +495,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         if (player == null || _currentPrototype == null || _currentConstructionItem == null)
             return;
 
-        var playerCoords = EntityManager.GetComponent<TransformComponent>(player.Value).Coordinates;
+        var playerCoords = Transform(player.Value).Coordinates;
         var direction = NormalizeDirection(_currentPrototype, _currentDirection);
         var ghostKey = MakeGhostKey(_currentPrototype, playerCoords, direction);
 
@@ -546,17 +544,17 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     public bool TryBuildAtPlayer(RMCConstructionPrototype prototype, EntityUid constructionItem, int amount)
     {
-        if (prototype.Type != RMCConstructionType.Structure)
+        if (prototype.ConstructionType != RMCConstructionType.Structure)
             return false;
 
         var player = _playerManager.LocalEntity;
         if (player == null)
             return false;
 
-        var playerTransform = EntityManager.GetComponent<TransformComponent>(player.Value);
+        var playerTransform = Transform(player.Value);
         var coords = playerTransform.Coordinates;
-        var gridUid = _transformSystem.GetGrid(coords);
-        if (gridUid != null && EntityManager.TryGetComponent<MapGridComponent>(gridUid.Value, out var grid))
+        var gridUid = _transform.GetGrid(coords);
+        if (gridUid != null && TryComp<MapGridComponent>(gridUid.Value, out var grid))
         {
             var tileCoords = _mapSystem.CoordinatesToTile(gridUid.Value, grid, coords);
             coords = _mapSystem.GridTileToLocal(gridUid.Value, grid, tileCoords);
@@ -614,8 +612,8 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         else
             ClearGhostAtLocation(loc, normalizedDirection);
 
-        ghost = EntityManager.SpawnEntity("rmcconstructionghost", loc);
-        var comp = EntityManager.GetComponent<RMCConstructionGhostComponent>(ghost.Value);
+        ghost = Spawn("rmcconstructionghost", loc);
+        var comp = Comp<RMCConstructionGhostComponent>(ghost.Value);
         comp.Prototype = prototype;
         comp.GhostKey = MakeGhostKey(prototype, loc, normalizedDirection);
 
@@ -631,7 +629,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private void ConfigureGhostSprite(EntityUid ghost, RMCConstructionPrototype prototype, bool isCursor)
     {
-        if (!EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
+        if (!TryComp<SpriteComponent>(ghost, out var sprite))
             return;
 
         var color = isCursor ? CursorGhostValidColor : StaticGhostColor;
@@ -641,7 +639,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         sprite.DrawDepth = depth;
         sprite.Visible = true;
 
-        if (!_prototypeManager.TryIndex<EntityPrototype>(prototype.Prototype, out var entityProto))
+        if (!_prototype.TryIndex<EntityPrototype>(prototype.Prototype, out var entityProto))
             return;
 
         if (entityProto.TryGetComponent<SpriteComponent>(out var prototypeSprite, EntityManager.ComponentFactory))
@@ -665,13 +663,13 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             return allowMissingMaterials;
         }
 
-        if (!_constructionSystem.IsValidConstructionItemForPrototype(item, prototype, ignoreStack: true))
+        if (!_construction.IsValidConstructionItemForPrototype(item, prototype, ignoreStack: true))
         {
             reason = RMCConstructionFailureReason.InvalidConstructionItem;
             return false;
         }
 
-        if (_constructionSystem.TryValidateGhostBuild(user, item, prototype, amount, loc, dir, requireSameTile, out reason))
+        if (_construction.TryValidateGhostBuild(user, item, prototype, amount, loc, dir, requireSameTile, out reason))
             return true;
 
         return allowMissingMaterials && reason == RMCConstructionFailureReason.MissingMaterials;
@@ -765,12 +763,12 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             return;
         }
 
-        var transform = EntityManager.GetComponent<TransformComponent>(ghostId);
+        var transform = Transform(ghostId);
         var direction = NormalizeDirection(ghostComp.Prototype, GetGhostDirection(ghostId));
         if (ghostComp.Prototype.NoRotate)
             SetGhostDirection(ghostId, direction);
 
-        var constructionItem = _constructionSystem.FindValidConstructionItem(user.Value, ghostComp.Prototype.ID);
+        var constructionItem = _construction.FindValidConstructionItem(user.Value, ghostComp.Prototype.ID);
         if (constructionItem == null)
         {
             var missingKey = ghostComp.GhostKey ?? MakeGhostKey(ghostComp.Prototype, transform.Coordinates, direction);
@@ -794,13 +792,13 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         var msg = new RMCConstructionGhostBuildMessage(ghostComp.Prototype.Amount, ghostKey);
 
         RaiseNetworkEvent(msg);
-        StartBuildingGhost(ghostKey, user.Value, _transformSystem.GetWorldPosition(user.Value), GetBuildDuration(ghostComp.Prototype), clearOnCancel: false);
+        StartBuildingGhost(ghostKey, user.Value, _transform.GetWorldPosition(user.Value), GetBuildDuration(ghostComp.Prototype), clearOnCancel: false);
     }
 
     public void ClearGhost(RMCConstructionGhostKey ghostKey)
     {
         if (TryGetGhostEntity(ghostKey, out var ghost))
-            EntityManager.QueueDeleteEntity(ghost);
+            QueueDel(ghost);
 
         _ghosts.Remove(ghostKey);
         _buildingGhosts.Remove(ghostKey);
@@ -862,7 +860,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         [NotNullWhen(true)] out SpriteComponent? sprite)
     {
         if (TryGetGhostEntity(ghostKey, out var ghost) &&
-            EntityManager.TryGetComponent(ghost, out sprite))
+            TryComp(ghost, out sprite))
             return true;
 
         sprite = null;

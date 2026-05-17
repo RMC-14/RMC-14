@@ -33,12 +33,9 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
     [DataField]
     public bool NoRotate = false;
 
-    /// <summary>
-    /// The type of construction - Item or Structure
-    /// </summary>
     [AlwaysPushInheritance]
-    [DataField("constructionType")]
-    public RMCConstructionType Type = RMCConstructionType.Item;
+    [DataField]
+    public RMCConstructionType ConstructionType = RMCConstructionType.Item;
 
     /// <summary>
     /// Which other construction prototypes are listed when this button is pressed.

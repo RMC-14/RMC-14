@@ -51,7 +51,7 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -129,7 +129,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             return;
         }
 
-        if (!EntityManager.TryGetComponent<RMCConstructionItemComponent>(constructionItem.Value, out var constructionComp))
+        if (!TryComp<RMCConstructionItemComponent>(constructionItem.Value, out var constructionComp))
         {
             var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostKey, RMCConstructionFailureReason.InvalidConstructionItem);
             RaiseNetworkEvent(failMsg, args.SenderSession);
@@ -167,7 +167,7 @@ public sealed class RMCConstructionSystem : EntitySystem
                 return heldEntity.Value;
         }
 
-        if (_inventorySystem.TryGetContainerSlotEnumerator(user, out var containerSlotEnumerator))
+        if (_inventory.TryGetContainerSlotEnumerator(user, out var containerSlotEnumerator))
         {
             while (containerSlotEnumerator.MoveNext(out var containerSlot))
             {
@@ -238,9 +238,9 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        if (requireSameTile && proto.Type == RMCConstructionType.Structure)
+        if (requireSameTile && proto.ConstructionType == RMCConstructionType.Structure)
         {
-            var userCoords = EntityManager.GetComponent<TransformComponent>(user).Coordinates;
+            var userCoords = Transform(user).Coordinates;
             var userTile = userCoords.ToVector2i(EntityManager, _mapManager, _transform);
             var buildTile = coordinates.ToVector2i(EntityManager, _mapManager, _transform);
 
@@ -257,7 +257,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        if (proto.Type == RMCConstructionType.Structure)
+        if (proto.ConstructionType == RMCConstructionType.Structure)
         {
             if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out _, direction: direction, collision: proto.RestrictedCollisionGroup))
             {
@@ -315,7 +315,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        if (proto.Type == RMCConstructionType.Structure)
+        if (proto.ConstructionType == RMCConstructionType.Structure)
         {
             if (!proto.IgnoreBuildRestrictions &&
                 !CanBuildAt(coordinates, proto.Prototype, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup, user: user))
@@ -361,9 +361,9 @@ public sealed class RMCConstructionSystem : EntitySystem
 
         var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(doAfterTime), ev, ent, ent)
         {
-            BreakOnMove = proto.Type == RMCConstructionType.Structure,
+            BreakOnMove = proto.ConstructionType == RMCConstructionType.Structure,
             BreakOnDamage = false,
-            MovementThreshold = proto.Type == RMCConstructionType.Structure ? 0.5f : float.MaxValue,
+            MovementThreshold = proto.ConstructionType == RMCConstructionType.Structure ? 0.5f : float.MaxValue,
             DuplicateCondition = DuplicateConditions.SameEvent,
             CancelDuplicate = true
         };
@@ -387,7 +387,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (!_prototype.TryIndex<RMCConstructionPrototype>(protoID, out var proto))
             return false;
 
-        if (proto.Type == RMCConstructionType.Item)
+        if (proto.ConstructionType == RMCConstructionType.Item)
         {
             coordinates = transform.Coordinates;
         }
@@ -476,7 +476,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (!Deleted(ent))
             UpdateStackAmountUI(ent);
 
-        if (entry.Type == RMCConstructionType.Item)
+        if (entry.ConstructionType == RMCConstructionType.Item)
         {
             var userTransform = Transform(args.User);
             if (args.Amount > 1)

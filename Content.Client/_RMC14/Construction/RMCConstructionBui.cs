@@ -1,9 +1,7 @@
 ﻿using System.Linq;
 using Content.Client._RMC14.UserInterface;
-using Content.Client.Message;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Construction.Prototypes;
-using Content.Shared.FixedPoint;
 using Content.Shared.Stacks;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
@@ -17,9 +15,7 @@ namespace Content.Client._RMC14.Construction;
 [UsedImplicitly]
 public sealed class RMCConstructionBui : BoundUserInterface
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
 
     [ViewVariables]
     private RMCConstructionWindow? _window;
@@ -35,11 +31,11 @@ public sealed class RMCConstructionBui : BoundUserInterface
     {
         base.Open();
 
-        _ghostSystem = _entityManager.System<RMCConstructionGhostSystem>();
+        _ghostSystem = EntMan.System<RMCConstructionGhostSystem>();
         _window = this.CreateWindow<RMCConstructionWindow>();
         _window.Title = $"Construction using the {EntMan.GetComponent<MetaDataComponent>(Owner).EntityName}";
         _window.ClearGhostsPressed += OnClearGhostsPressed;
-        _window.SearchBar.OnTextChanged += SearchBarOnTextChanged;
+        _window.SearchBar.OnTextChanged += OnSearchBarTextChanged;
 
         if (!EntMan.TryGetComponent(Owner, out RMCConstructionItemComponent? constructionItem))
             return;
@@ -56,7 +52,7 @@ public sealed class RMCConstructionBui : BoundUserInterface
         if (_window != null)
         {
             _window.ClearGhostsPressed -= OnClearGhostsPressed;
-            _window.SearchBar.OnTextChanged -= SearchBarOnTextChanged;
+            _window.SearchBar.OnTextChanged -= OnSearchBarTextChanged;
         }
     }
 
@@ -64,7 +60,7 @@ public sealed class RMCConstructionBui : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (State is RMCConstructionBuiState s)
+        if (State is RMCConstructionBuiState)
             RefreshStackAmount();
     }
 
@@ -115,32 +111,19 @@ public sealed class RMCConstructionBui : BoundUserInterface
                 var button = new Button()
                 {
                     Text = "x" + stack,
-                    StyleClasses = { "OpenBoth" },
                     EnableAllKeybinds = true,
                     SetWidth = 34,
                     SetHeight = 20,
-                    Margin = new Thickness(0, 0, 0, 0),
                     HorizontalAlignment = Control.HAlignment.Center,
                     VerticalAlignment = Control.VAlignment.Center
                 };
 
-                button.StyleClasses.Clear();
-                if (totalStacks == 1)
-                {
-                    button.StyleClasses.Add("OpenBoth");
-                }
-                else if (index == 0)
-                {
+                if (index == 0 && totalStacks > 1)
                     button.StyleClasses.Add("OpenRight");
-                }
-                else if (index == totalStacks - 1)
-                {
+                else if (index == totalStacks - 1 && totalStacks > 1)
                     button.StyleClasses.Add("OpenLeft");
-                }
                 else
-                {
                     button.StyleClasses.Add("OpenBoth");
-                }
 
                 control.StackAmountContainer.AddChild(button);
                 index++;
@@ -178,7 +161,7 @@ public sealed class RMCConstructionBui : BoundUserInterface
 
     private void HandleConstruction(RMCConstructionPrototype prototype, int amount, bool directBuild)
     {
-        if (prototype.Type == RMCConstructionType.Item)
+        if (prototype.ConstructionType == RMCConstructionType.Item)
         {
             _ghostSystem?.StopPlacement();
             SendMessage(new RMCConstructionBuiMsg(prototype.ID, amount));
@@ -272,7 +255,7 @@ public sealed class RMCConstructionBui : BoundUserInterface
         RebuildEntries();
     }
 
-    private void SearchBarOnTextChanged(LineEdit.LineEditEventArgs args)
+    private void OnSearchBarTextChanged(LineEdit.LineEditEventArgs args)
     {
         OnSearchTextChanged(args.Text);
     }
