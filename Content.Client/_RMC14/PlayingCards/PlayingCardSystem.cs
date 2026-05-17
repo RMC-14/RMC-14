@@ -101,12 +101,10 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
             return;
 
         // Update deck visual based on how many cards remain
-        var state = ent.Comp.CardOrder.Count switch
-        {
-            0 => "deck_empty",
-            52 => "deck",
-            _ => "deck_open"
-        };
+        var count = ent.Comp.CardOrder.Count;
+        var state = count == 0 ? "deck_empty"
+            : count >= ent.Comp.MaxCards ? "deck"
+            : "deck_open";
 
         var rsiPath = new ResPath("_RMC14/Objects/Fun/playing_cards.rsi");
         _sprite.LayerSetRsi((ent.Owner, sprite), 0, rsiPath);
