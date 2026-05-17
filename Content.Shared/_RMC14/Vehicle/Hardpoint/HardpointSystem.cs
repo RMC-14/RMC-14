@@ -71,7 +71,6 @@ public sealed partial class HardpointSystem : EntitySystem
 
         SubscribeLocalEvent<HardpointSlotsComponent, ComponentInit>(OnSlotsInit);
         SubscribeLocalEvent<HardpointSlotsComponent, MapInitEvent>(OnSlotsMapInit);
-        SubscribeLocalEvent<HardpointSlotsComponent, ComponentShutdown>(OnSlotsShutdown);
         SubscribeLocalEvent<HardpointSlotsComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<HardpointSlotsComponent, EntRemovedFromContainerMessage>(OnRemoved);
         SubscribeLocalEvent<HardpointSlotsComponent, VehicleCanRunEvent>(OnVehicleCanRun);
@@ -92,24 +91,6 @@ public sealed partial class HardpointSystem : EntitySystem
     private void OnSlotsMapInit(Entity<HardpointSlotsComponent> ent, ref MapInitEvent args)
     {
         EnsureSlots(ent.Owner, ent.Comp);
-    }
-
-    private void OnSlotsShutdown(Entity<HardpointSlotsComponent> ent, ref ComponentShutdown args)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
-            return;
-
-        foreach (var slot in ent.Comp.Slots)
-        {
-            if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var itemSlot, itemSlots))
-                continue;
-
-            if (itemSlot.Item is { } item && !TerminatingOrDeleted(item))
-                QueueDel(item);
-        }
     }
 
     private void OnInserted(Entity<HardpointSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
