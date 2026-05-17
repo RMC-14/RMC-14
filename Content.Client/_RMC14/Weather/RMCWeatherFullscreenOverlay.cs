@@ -42,7 +42,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     private RMCWeatherObstructionStyle _drawStyle = RMCWeatherObstructionStyle.Neutral;
     private readonly HashSet<Entity<RMCBlockWeatherComponent>> _weatherBlockers = new();
 
-    public override OverlaySpace Space => OverlaySpace.ScreenSpace;
+    public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     public RMCWeatherFullscreenOverlay(
         IEntityManager entity,
@@ -95,8 +95,6 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        var viewport = args.ViewportBounds;
-        var bounds = new UIBox2(viewport.Left, viewport.Top, viewport.Right, viewport.Bottom);
         var style = RMCWeatherOverlayHelpers.GetShaderStyle(_drawStyle);
         _shader.SetParameter("primaryColor", style.Primary);
         _shader.SetParameter("secondaryColor", style.Secondary);
@@ -107,9 +105,9 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         _shader.SetParameter("fullHalfSize", _drawFullHalfSize);
         _shader.SetParameter("overlayAlpha", _drawAlpha);
 
-        args.ScreenHandle.UseShader(_shader);
-        args.ScreenHandle.DrawRect(bounds, Color.White);
-        args.ScreenHandle.UseShader(null);
+        args.WorldHandle.UseShader(_shader);
+        args.WorldHandle.DrawRect(args.WorldAABB, Color.White);
+        args.WorldHandle.UseShader(null);
     }
 
     private bool TryGetOverlay(
