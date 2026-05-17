@@ -390,7 +390,6 @@
   solids:
     FoodBreadBun: 1
     FoodMeatXeno: 1
-    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeMothRoachburger
@@ -516,7 +515,6 @@
     FoodDough: 1
     FoodMeatXenoCutlet: 2
     FoodCheeseSlice: 2
-    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 #Slices Only
 
@@ -1053,7 +1051,6 @@
   solids:
     FoodBowlBig: 1
     FoodMeatXenoCutlet: 2
-    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeWingFangChuSoupSpider
@@ -1270,7 +1267,6 @@
     FoodDoughPie: 1
     FoodMeatXeno: 3
     FoodPlateTin: 1
-    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 #Tarts
 
