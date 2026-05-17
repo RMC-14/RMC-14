@@ -84,7 +84,7 @@
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24B
     id: RMCIDRoyalMarinesBreacher
-    belt: RMCBeltUtiliyGeneralFilledRoyal
+    belt: RMCBeltUtilityGeneralRCMFilled
     # back: RMCShieldBallistic // TODO RMC14 proper ballistic shields
     pocket1: RMCPouchToolsSocFilledTactical
     pocket2: RMCPouchMedkitFillRoyal

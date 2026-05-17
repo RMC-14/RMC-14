@@ -2,7 +2,7 @@
   parent: RMCBaseWeaponSniperRifle
   id: RMCL112SniperRifle
   name: L112A2 designated marksman rifle
-  suffix: PVE
+  suffix: PVE, Filled, Royal
   description: The L112A2 DMR, a more modular variation on the A1 model. This one foregoes the integral suppressor in favor of a threaded barrel, and features an attachment rail to install foregrips.
   components:
   - type: Sprite
@@ -111,7 +111,7 @@
   parent: RMCL112SniperRifle
   id: RMCL112SniperRifleSuppressed
   name: L112A1 designated marksman rifle
-  suffix: PVE, Suppressed
+  suffix: Filled, Royal, PVE, Suppressed
   description: The L112A1 DMR, adopted by the TSE's Royal Crown Marines following a recognised need for long-range firepower on reconnaissance and covert operations and developed in tandem with the 7.7x56mmR HESH round.
   components:
   - type: Tag
@@ -147,7 +147,7 @@
 - type: entity
   parent: RMCL112SniperRifle
   id: RMCL112SniperRifleSH
-  suffix: Filled, squash-head
+  suffix: Filled HESH, Royal, PVE 
   components:
   - type: ItemSlots
     slots:
@@ -165,7 +165,7 @@
 - type: entity
   parent: RMCL112SniperRifleSuppressed
   id: RMCL112SniperRifleSuppressedSH
-  suffix: Filled, squash-head
+  suffix: Filled HESH, Royal, PVE, Suppressed
   components:
   - type: ItemSlots
     slots:
@@ -179,6 +179,8 @@
           tags:
           - RMCMagazineSniperL112
           - RMCMagazineSniperL112SH
+
+# Magazines, cartridges, bullets
 
 - type: entity
   parent: CMMagazineSniperM96S
@@ -230,7 +232,7 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
-      color: "#FF744F"
+      color: "#DD4242"
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -288,6 +290,8 @@
       ignoreModifiers: true
   - type: CMArmorPiercing
     amount: 10
+  - type: AimedShotEffect
+    extraHits: 1
 
 - type: entity
   parent: RMCBaseBullet
@@ -311,6 +315,8 @@
       ignoreModifiers: true
   - type: CMArmorPiercing
     amount: 30
+  - type: AimedShotEffect
+    extraHits: 1
 
 - type: Tag
   id: RMCL112SniperRifle
