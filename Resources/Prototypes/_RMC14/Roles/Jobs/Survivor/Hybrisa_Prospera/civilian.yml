@@ -47,7 +47,7 @@
   name: hybrisa civilian preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHeadCapGrey, RMCCoatHoboBlue, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesBlack, CMBackpack]
     - [ RMCCoatHoboBrown, RMCJumpsuitLiaisonPinkWorkwear, RMCShoesBrown, CMBackpackEngineer]

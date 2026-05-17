@@ -119,6 +119,9 @@
   id: RMCScrewdriver
 
 - type: Tag
+  id: LightReplacer
+
+- type: Tag
   id: ThrowingKnife
 
 - type: Tag
@@ -140,6 +143,11 @@
   id: Bacon
 
 - type: Tag
+
+  id: Watch
+
+- type: Tag
+
   id: RMCPinpointer
 
 - type: Tag

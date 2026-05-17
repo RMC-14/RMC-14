@@ -57,7 +57,7 @@
   name: prisoner survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ ArmorHelmetRiot ]
     - [ RMCArmorVestCivilian ]

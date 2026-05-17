@@ -178,7 +178,7 @@
         amount: 15
       - id: RMCHandsGreyMarine
         amount: 15
-      - id: RMCHeadsetShip
+      - id: RMCHeadsetMarine
         amount: 15
       - id: ArmorHelmetM10
         amount: 15
@@ -348,6 +348,9 @@
         amount: 10
       - id: RMCHelmetGarbRainCover
         name: M10 helmet rain cover
+        amount: 10
+      - id: RMCPoncho
+        name: UNMC poncho
         amount: 10
       - id: RMCHelmetGarbGunOil
         name: firearm lubricant

@@ -77,6 +77,18 @@
       rmc-aslot-underbarrel: 0.275, -0.275
 
 - type: entity
+  parent: RMCWeaponPistolL14
+  id: RMCWeaponPistolL14Custom
+  name: L14 custom combat pistol
+  suffix: PVE, Loadout
+  description: The L14 is the standard issue sidearm of the Royal Crown Marines, a compact but accurate high-capacity combat pistol chambered in 9mm. This particular L14 has been modified with aftermarket rubber grip plates to improve handling.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l14custom.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l14custom.rsi
+
+- type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolL14
   name: L14 magazine (9mm)
