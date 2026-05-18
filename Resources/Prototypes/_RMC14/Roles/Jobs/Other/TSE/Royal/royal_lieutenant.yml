@@ -42,8 +42,8 @@
     - type: ViewIntelObjectives
     - type: SquadLeader
       icon:
-       sprite: _RMC14/Interface/cm_job_icons.rsi
-       state: rmc_lieutenant
+       sprite: _RMC14/Interface/Hud_Icons/TSE/rcm.rsi
+       state: rcm_lieutenant
     - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-lieutenant
@@ -53,11 +53,11 @@
         - RMCSquadRoyalMarines
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_lieutenant
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
+        state: rcm_lieutenant
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
+        state: background_tse
   hidden: true
 
 # This lieutenant role is NOT part of the ERT. Omitting ghostrole functionality
@@ -86,5 +86,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalLieutenant
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_lieutenant
+    sprite: _RMC14/Interface/Hud_Icons/TSE/rcm.rsi
+    state: rcm_lieutenant

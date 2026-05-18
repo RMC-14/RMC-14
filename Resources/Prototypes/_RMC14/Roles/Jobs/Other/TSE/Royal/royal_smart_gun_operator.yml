@@ -36,11 +36,11 @@
       prefix: rmc-job-prefix-rcm-sgo
     - type: TacticalMapIcon
       icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_sg
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
+        state: rcm_smartgunner
       background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
+        sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
+        state: background_tse
   hidden: true
 
 - type: entity
@@ -97,5 +97,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalSmartGunOperator
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_smart_gun_operator
+    sprite: _RMC14/Interface/Hud_Icons/TSE/rcm.rsi
+    state: rcm_smartgunner
