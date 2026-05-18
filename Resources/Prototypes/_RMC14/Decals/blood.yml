@@ -5,6 +5,12 @@
   tags: ["station", "markings"]
 
 # Blood
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodDrip
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: drip
 
 - type: decal
   parent: RMCDecalBloodBase
@@ -245,3 +251,32 @@
   sprite:
     sprite: _RMC14/Decals/blood_floor.rsi
     state: xfloor7
+
+# Vomit
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalVomitFloor1
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: vomit_1
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalVomitFloor2
+  sprite:
+      sprite: _RMC14/Decals/blood_floor.rsi
+      state: vomit_2
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalVomitFloor3
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: vomit_3
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalVomitFloor4
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: vomit_4
