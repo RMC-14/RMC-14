@@ -27,7 +27,10 @@ namespace Content.Shared.Examine
 
         // RMC14
         [Dependency] private readonly QueenEyeSystem _queenEye = default!;
+
+        // RMC14 start - weather examine range.
         [Dependency] private readonly RMCWeatherSystem _rmcWeather = default!;
+        // RMC14 end
 
         public const float MaxRaycastRange = 100;
 
@@ -191,9 +194,11 @@ namespace Content.Shared.Examine
                     range = Math.Clamp(ExamineRange - blurry.Magnitude * ExamineBlurrinessMult, 2, ExamineRange);
             }
 
+            // RMC14: Bad weather clamps the normal examine range for exposed mobs.
             return Math.Min(range, GetWeatherExaminerRange(examiner));
         }
 
+        // RMC14 start - weather examine range.
         private float GetWeatherExaminerRange(EntityUid examiner)
         {
             if (!TryComp(examiner, out TransformComponent? xform) ||
@@ -205,6 +210,7 @@ namespace Content.Shared.Examine
 
             return Math.Clamp(range, 0, ExamineRange);
         }
+        // RMC14 end
 
         /// <summary>
         /// True if occluders are drawn for this entity, otherwise false.

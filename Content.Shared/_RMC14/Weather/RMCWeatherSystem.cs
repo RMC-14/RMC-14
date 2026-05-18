@@ -70,6 +70,7 @@ public sealed class RMCWeatherSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
+    // RMC weather blockers can protect only part of a tile, so cache the lookup set for point-in-bounds checks.
     private readonly HashSet<Entity<RMCBlockWeatherComponent>> _weatherBlockers = new();
     private readonly List<(EntityUid GridUid, uint DecalId)> _decalsToRemove = new();
 
@@ -214,6 +215,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     public bool CanWeatherAffectArea(EntityUid uid, MapGridComponent grid, TileRef tileRef, RoofComponent? roofComp = null)
     {
+        // Roofs and area data are the map-level gates; RMC blockers are local props placed on affected tiles.
         if (Resolve(uid, ref roofComp, false) && _roof.IsRooved((uid, grid, roofComp), tileRef.GridIndices))
             return false;
 
@@ -235,6 +237,7 @@ public sealed class RMCWeatherSystem : EntitySystem
     {
         overlay = RMCWeatherScreenOverlay.None;
 
+        // More than one cycle can exist on a map; the strongest active overlay owns the screen restriction.
         var weatherQuery = EntityQueryEnumerator<RMCWeatherCycleComponent>();
         while (weatherQuery.MoveNext(out var uid, out var cycle))
         {
@@ -257,6 +260,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         range = float.MaxValue;
         var found = false;
 
+        // Examine range uses the clear vertical radius so server checks match what the player can see through.
         var weatherQuery = EntityQueryEnumerator<RMCWeatherCycleComponent>();
         while (weatherQuery.MoveNext(out var uid, out var cycle))
         {
@@ -308,6 +312,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        // Weather cycles are server-owned and progress through idle -> warning -> running -> cooldown.
         var delta = TimeSpan.FromSeconds(frameTime);
         var weatherQuery = EntityQueryEnumerator<RMCWeatherCycleComponent>();
 
@@ -336,6 +341,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void UpdateIdle(Entity<RMCWeatherCycleComponent> ent, TimeSpan delta)
     {
+        // Idle waits for the next random check, then rolls one configured map event.
         ent.Comp.CheckCooldown -= delta;
         if (ent.Comp.CheckCooldown > TimeSpan.Zero)
             return;
@@ -352,6 +358,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void UpdateWarning(Entity<RMCWeatherCycleComponent> ent, TimeSpan delta)
     {
+        // Warning gives sirens and faction announcements time to play before the WeatherPrototype starts.
         ent.Comp.WarningRemaining -= delta;
         if (ent.Comp.WarningRemaining > TimeSpan.Zero)
             return;
@@ -361,6 +368,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void UpdateRunning(Entity<RMCWeatherCycleComponent> ent, TimeSpan delta)
     {
+        // Running owns visuals, lightning, gameplay effects, and optional decal cleaning for one event.
         if (!TryGetCurrentEvent(ent.Comp, out var weatherEvent))
         {
             EndWeather(ent);
@@ -401,6 +409,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void UpdateCooldown(Entity<RMCWeatherCycleComponent> ent, TimeSpan delta)
     {
+        // Cooldown keeps random weather from restarting immediately after an event ends.
         ent.Comp.CheckCooldown -= delta;
         if (ent.Comp.CheckCooldown > TimeSpan.Zero)
             return;
@@ -474,6 +483,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         ent.Comp.CleanCooldown = WeatherCleanInterval;
         ent.Comp.EventStartedAt = _timing.CurTime;
         ent.Comp.AdminForcedEvent = adminForced;
+        // One-shot weather interactions, like acid dilution, key off this to avoid shrinking every effect tick.
         ent.Comp.EventSequence++;
         _weather.SetWeather(mapId, weatherProto, endTime);
         Dirty(ent);
@@ -710,6 +720,7 @@ public sealed class RMCWeatherSystem : EntitySystem
     {
         var mapId = Transform(ent).MapID;
 
+        // Gameplay effects are CMSS13-style side effects layered over Robust weather visuals.
         if (weatherEvent.FireSmotheringStrength > 0)
         {
             ProcessBurningEntities(mapId, weatherEvent.FireSmotheringStrength);
@@ -724,6 +735,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void ProcessBurningEntities(MapId mapId, int fireSmotheringStrength)
     {
+        // Burning mobs lose fire stacks each effect tick while exposed.
         var query = EntityQueryEnumerator<FlammableComponent, OnFireComponent>();
         while (query.MoveNext(out var uid, out var flammable, out _))
         {
@@ -736,6 +748,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void ProcessTileFires(MapId mapId, int fireSmotheringStrength)
     {
+        // Tile fires are duration-based, so smothering removes seconds from their remaining burn time.
         var reduction = TimeSpan.FromSeconds(fireSmotheringStrength);
         var query = EntityQueryEnumerator<TileFireComponent>();
         while (query.MoveNext(out var uid, out var fire))
@@ -757,6 +770,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void ProcessCampfires(MapId mapId, int fireSmotheringStrength)
     {
+        // Campfires own their fuel timing; raise an event instead of reaching into that state here.
         var reduction = TimeSpan.FromSeconds(fireSmotheringStrength);
         var query = EntityQueryEnumerator<CampfireComponent>();
         while (query.MoveNext(out var uid, out var campfire))
@@ -771,6 +785,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void ProcessAcidDilution(MapId mapId, int fireSmotheringStrength, int eventSequence)
     {
+        // Acid should be diluted once per weather event, not once per effect tick.
         var multiplier = Math.Clamp(1 - fireSmotheringStrength * 0.1f, 0, 1);
         if (multiplier >= 1)
             return;
@@ -835,6 +850,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private void ProcessMobEffects(MapId mapId, RMCWeatherEvent weatherEvent)
     {
+        // Exposure damage and flavor messages only affect living mobs currently exposed to the storm.
         var query = EntityQueryEnumerator<MobStateComponent, DamageableComponent>();
         while (query.MoveNext(out var uid, out var mobState, out var damageable))
         {
@@ -867,6 +883,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         if (weatherEvent.EffectMessage == null)
             return false;
 
+        // The chance stays low, but the per-mob cooldown prevents back-to-back popup rolls from stacking.
         if (TryComp(uid, out RMCWeatherEffectPopupCooldownComponent? cooldown) &&
             cooldown.NextPopupAt > _timing.CurTime)
         {
@@ -920,6 +937,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private bool IsWeatherExposed(EntityUid uid, MapId mapId)
     {
+        // Exposure combines the entity's mover tile with RMC partial blockers such as weather cover props.
         if (!TryGetWeatherTile(uid, mapId, out var grid, out var tile))
             return false;
 
@@ -931,6 +949,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
     private bool IsRMCWeatherBlocked(MapId mapId, Vector2 position)
     {
+        // RMC blockers use sprite bounds, allowing small shelters to block weather without changing whole tiles.
         _weatherBlockers.Clear();
         var bounds = new Box2(
             position - new Vector2(WeatherBlockerLookupRadius, WeatherBlockerLookupRadius),

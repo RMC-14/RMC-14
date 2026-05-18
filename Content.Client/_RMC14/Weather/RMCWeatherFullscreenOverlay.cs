@@ -66,6 +66,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
+        // Smooth the local personal overlay in and out as Robust weather alpha changes.
         var targetAlpha = 0f;
         _targetOverlay = RMCWeatherScreenOverlay.None;
         if (TryGetOverlay(args, out var overlay, out var alpha, out var clearHalfSize, out var fullHalfSize))
@@ -109,6 +110,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         out Vector2 clearHalfSize,
         out Vector2 fullHalfSize)
     {
+        // The personal overlay only applies to the local living mob on its own viewport.
         overlay = RMCWeatherScreenOverlay.None;
         alpha = 0f;
         clearHalfSize = default;
@@ -146,6 +148,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
 
     private bool IsExposedToWeather(EntityUid player, TransformComponent playerXform, EntityUid gridUid)
     {
+        // Match server exposure checks: Robust weather tile first, then RMC partial blockers.
         if (!_entity.TryGetComponent(gridUid, out MapGridComponent? grid) ||
             !_map.TryGetTileRef(gridUid, grid, playerXform.Coordinates, out var tile))
         {
@@ -162,6 +165,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
 
     private bool IsRMCWeatherBlocked(MapId mapId, Vector2 position)
     {
+        // Client overlay uses the same sprite-bound blockers as server gameplay effects.
         _weatherBlockers.Clear();
         var bounds = new Box2(
             position - new Vector2(WeatherBlockerLookupRadius, WeatherBlockerLookupRadius),
@@ -195,6 +199,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         OverlayDrawArgs args,
         RMCWeatherScreenOverlay overlay)
     {
+        // Scale the shared 15x15 radii into current viewport pixels so widescreen keeps matching clear areas.
         var viewport = args.ViewportBounds;
         var halfSize = new Vector2(viewport.Width / 2f, viewport.Height / 2f);
         var radii = RMCWeatherScreenOverlayData.GetRadii(overlay);

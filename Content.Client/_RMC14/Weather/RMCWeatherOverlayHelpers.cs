@@ -11,6 +11,7 @@ public static class RMCWeatherOverlayHelpers
     {
         context = default;
         var overlay = RMCWeatherScreenOverlay.None;
+        // Use the strongest active cycle so drawing, examine range, and click checks agree.
         var query = entity.EntityQueryEnumerator<RMCWeatherCycleComponent, TransformComponent>();
         while (query.MoveNext(out _, out var cycle, out var xform))
         {

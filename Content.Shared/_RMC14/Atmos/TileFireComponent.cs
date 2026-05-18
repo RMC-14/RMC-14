@@ -5,6 +5,9 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Atmos;
 
+/// <summary>
+///     Duration-based tile fire; weather can shorten the remaining duration while flammable owns normal fire behavior.
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedRMCFlammableSystem), typeof(Content.Shared._RMC14.Weather.RMCWeatherSystem))]
 public sealed partial class TileFireComponent : Component

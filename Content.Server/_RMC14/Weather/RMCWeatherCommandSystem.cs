@@ -8,6 +8,9 @@ using Robust.Shared.Map;
 
 namespace Content.Server._RMC14.Weather;
 
+/// <summary>
+///     Server-side admin command and audit announcements for manually controlling RMC weather cycles.
+/// </summary>
 public sealed class RMCWeatherCommandSystem : EntitySystem
 {
     [Dependency] private readonly IConsoleHost _console = default!;
@@ -31,6 +34,7 @@ public sealed class RMCWeatherCommandSystem : EntitySystem
 
     private void OnWeatherStarted(ref RMCWeatherStartedEvent ev)
     {
+        // Weather start/end events are raised by the shared system; the server layer turns them into admin-visible audit text.
         if (ev.Duration is { } value)
         {
             _chat.SendAdminAnnouncement(Loc.GetString(ev.AdminForced
@@ -109,6 +113,7 @@ public sealed class RMCWeatherCommandSystem : EntitySystem
             return;
         }
 
+        // Event names may contain spaces; only a trailing "now" is treated as the skip-warning flag.
         var eventArgs = args.Skip(2).ToList();
         var skipWarning = eventArgs.Count > 0 &&
                           string.Equals(eventArgs[^1], "now", StringComparison.OrdinalIgnoreCase);
@@ -172,6 +177,7 @@ public sealed class RMCWeatherCommandSystem : EntitySystem
             string.Equals(args[0], "start", StringComparison.OrdinalIgnoreCase) &&
             int.TryParse(args[1], out var mapInt))
         {
+            // Options come from the target map cycle, so admins can use index, prototype name, or localized display name.
             return CompletionResult.FromHintOptions(_weather.GetWeatherEventOptions(new MapId(mapInt)).Distinct(),
                 Loc.GetString("rmc-weather-command-hint-event"));
         }

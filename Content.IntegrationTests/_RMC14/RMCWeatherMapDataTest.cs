@@ -9,6 +9,9 @@ using System.Text.RegularExpressions;
 
 namespace Content.IntegrationTests._RMC14;
 
+/// <summary>
+///     Guards weather authored in map YAML: gameplay data, CM overlay severities, and physical siren placement.
+/// </summary>
 [TestFixture]
 public sealed class RMCWeatherMapDataTest
 {
@@ -23,6 +26,7 @@ public sealed class RMCWeatherMapDataTest
     [Test]
     public void RMCWeatherCyclesHaveGameplayData()
     {
+        // Parse authored map data directly so runtime-only weather fields do not get serialized back into maps.
         foreach (var file in WeatherMapFiles())
         {
             var blocks = ExtractWeatherCycleBlocks(File.ReadAllLines(file));
@@ -64,6 +68,7 @@ public sealed class RMCWeatherMapDataTest
     [Test]
     public void RMCWeatherScreenOverlaysMatchCMFullscreenData()
     {
+        // These severities mirror CM fullscreen visibility data; accidental map edits change examine/click-through ranges too.
         var withOverlay = new[]
         {
             ("Resources/Maps/_RMC14/solaris.yml", "Duststorm", "Low"),
@@ -117,6 +122,7 @@ public sealed class RMCWeatherMapDataTest
     [Test]
     public void RMCWeatherSirenMapsHavePhysicalSirens()
     {
+        // Varadero and Sorokyne use physical alarm props so warning sound and popup position come from the map.
         var rootDir = RootDir();
         var cases = new[]
         {
@@ -143,6 +149,7 @@ public sealed class RMCWeatherMapDataTest
     [Test]
     public void RMCWeatherSirensAreMountedAgainstWalls()
     {
+        // Sirens are visual wall props; this catches map merges that leave them in open space or inside walls.
         var rootDir = RootDir();
         var files = new[]
         {
@@ -243,6 +250,7 @@ public sealed class RMCWeatherMapDataTest
 
     private static Dictionary<(int X, int Y), string> ReadTiles(string[] lines)
     {
+        // Map chunks store tile ids in base64; decode just enough to verify siren cells without loading the full map.
         var tileMap = new Dictionary<int, string>();
         var inTileMap = false;
         foreach (var line in lines)
@@ -298,6 +306,7 @@ public sealed class RMCWeatherMapDataTest
 
     private static List<MapEntity> ReadEntities(string[] lines)
     {
+        // Minimal entity parser for prototype, uid, position, and rotation; enough for siren placement checks.
         var entities = new List<MapEntity>();
         string? proto = null;
         MapEntity? entity = null;

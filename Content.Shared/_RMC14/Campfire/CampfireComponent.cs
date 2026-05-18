@@ -51,5 +51,8 @@ public sealed partial class CampfireExtinguishDoAfterEvent : SimpleDoAfterEvent
 {
 }
 
+/// <summary>
+///     Raised by weather so campfires can advance their own fuel timer instead of weather owning campfire state.
+/// </summary>
 [ByRefEvent]
 public readonly record struct CampfireWeatherSmotherEvent(TimeSpan Reduction);

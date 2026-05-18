@@ -34,8 +34,9 @@ namespace Content.Client.Examine
         [Dependency] private readonly SpriteSystem _sprite = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-        // RMC14
+        // RMC14 start - weather examine click-through.
         [Dependency] private readonly RMCWeatherSystem _rmcWeather = default!;
+        // RMC14 end
 
         private List<Verb> _verbList = new();
 
@@ -102,6 +103,7 @@ namespace Content.Client.Examine
 
             if (examinerComp.CheckInRangeUnOccluded)
             {
+                // RMC14 start - weather examine click-through.
                 // TODO fix this. This should be using the examiner's eye component, not eye manager.
                 var b = _eyeManager.GetWorldViewbounds();
                 if (!b.Contains(target.Position))
@@ -109,11 +111,13 @@ namespace Content.Client.Examine
 
                 if (!CanExamineThroughWeatherOverlay(examiner, target, b))
                     return false;
+                // RMC14 end
             }
 
             return base.CanExamine(examiner, target, predicate, examined, examinerComp);
         }
 
+        // RMC14 start - weather examine click-through.
         private bool CanExamineThroughWeatherOverlay(EntityUid examiner, MapCoordinates target, Box2Rotated viewBounds)
         {
             if (!TryComp(examiner, out TransformComponent? xform) ||
@@ -138,6 +142,7 @@ namespace Content.Client.Examine
             return Math.Abs(delta.X) <= clearHalfSize.X &&
                    Math.Abs(delta.Y) <= clearHalfSize.Y;
         }
+        // RMC14 end
 
         private bool HandleExamine(in PointerInputCmdHandler.PointerInputCmdArgs args)
         {
@@ -153,11 +158,14 @@ namespace Content.Client.Examine
                 return false;
             }
 
+            // RMC14 start - weather examine click-through.
+            // Use clicked map coordinates so large sprites cannot leak info from a visible origin.
             var target = _transform.ToMapCoordinates(args.Coordinates);
             if (!CanExamine(player, target, e => e == player || e == entity, entity))
             {
                 return false;
             }
+            // RMC14 end
 
             DoExamine(entity);
             return true;

@@ -54,6 +54,7 @@ public abstract class SharedCampfireSystem : EntitySystem
 
     private void OnWeatherSmother(Entity<CampfireComponent> ent, ref CampfireWeatherSmotherEvent args)
     {
+        // Weather uses the same fuel consumption path as normal burning, preserving campfire popups and visuals.
         Smother(ent, args.Reduction);
     }
 
@@ -67,6 +68,7 @@ public abstract class SharedCampfireSystem : EntitySystem
         }
 
         ent.Comp.LitAt ??= _timing.CurTime;
+        // Move the start time backwards so the next UpdateFuel consumes fuel as if the fire had burned longer.
         ent.Comp.LitAt -= reduction;
         Dirty(ent);
 
@@ -75,6 +77,7 @@ public abstract class SharedCampfireSystem : EntitySystem
 
     private void UpdateFuel(Entity<CampfireComponent> ent)
     {
+        // Shared burn-out path for natural ticking and weather smothering.
         if (!ent.Comp.Lit || ent.Comp.LitAt == null || !ent.Comp.FuelRequired)
             return;
 

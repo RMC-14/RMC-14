@@ -6,6 +6,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Weather;
 
+/// <summary>
+///     Registers the local fullscreen weather obstruction overlay.
+/// </summary>
 public sealed class RMCWeatherScreenOverlaySystem : EntitySystem
 {
     [Dependency] private readonly IOverlayManager _overlay = default!;
@@ -20,6 +23,7 @@ public sealed class RMCWeatherScreenOverlaySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        // The overlay reads replicated weather cycle state and Robust weather alpha client-side.
         _overlay.AddOverlay(new RMCWeatherFullscreenOverlay(
             EntityManager,
             _player,
