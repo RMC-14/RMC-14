@@ -28,6 +28,13 @@
     - type: AssignSquad
       squad: SquadSPP
     #- type: SPPSpecWhitelist TODO RMC14: SPP special weapons whitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spp_sl
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_spp
   hidden: true
 
 - type: startingGear

@@ -21,6 +21,13 @@
       prefix: rmc-job-prefix-soro-sof-sapper
     - type: AssignSquad
       squad: SquadSPP
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spp_sapper
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_spp
   hidden: true
 
 - type: startingGear

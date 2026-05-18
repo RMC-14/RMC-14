@@ -18,6 +18,13 @@
       prefix: rmc-job-prefix-soro-sof-soldier
     - type: AssignSquad
       squad: SquadSPP
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: spp_pvt
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_spp
   hidden: true
 
 - type: entity

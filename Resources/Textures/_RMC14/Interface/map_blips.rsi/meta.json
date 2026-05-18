@@ -952,6 +952,12 @@
     },
     {
       "name": "background_wy_com"
+    },
+    {
+      "name": "background_spp_civilian"
+    },
+    {
+      "name": "background_spp_medical"
     }
   ]
 }
