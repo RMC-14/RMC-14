@@ -26,6 +26,7 @@ public abstract class SharedCampfireSystem : EntitySystem
         SubscribeLocalEvent<CampfireComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<CampfireComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<CampfireComponent, CampfireExtinguishDoAfterEvent>(OnExtinguishDoAfter);
+        SubscribeLocalEvent<CampfireComponent, CampfireWeatherSmotherEvent>(OnWeatherSmother);
     }
 
     private void OnStartup(Entity<CampfireComponent> ent, ref ComponentStartup args)
@@ -47,29 +48,65 @@ public abstract class SharedCampfireSystem : EntitySystem
         var query = EntityQueryEnumerator<CampfireComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (!comp.Lit || comp.LitAt == null || !comp.FuelRequired)
-                continue;
+            UpdateFuel((uid, comp));
+        }
+    }
 
-            var elapsed = _timing.CurTime - comp.LitAt.Value;
-            if (elapsed >= comp.BurnDuration)
+    private void OnWeatherSmother(Entity<CampfireComponent> ent, ref CampfireWeatherSmotherEvent args)
+    {
+        Smother(ent, args.Reduction);
+    }
+
+    private void Smother(Entity<CampfireComponent> ent, TimeSpan reduction)
+    {
+        if (!ent.Comp.Lit ||
+            !ent.Comp.FuelRequired ||
+            reduction <= TimeSpan.Zero)
+        {
+            return;
+        }
+
+        ent.Comp.LitAt ??= _timing.CurTime;
+        ent.Comp.LitAt -= reduction;
+        Dirty(ent);
+
+        UpdateFuel(ent);
+    }
+
+    private void UpdateFuel(Entity<CampfireComponent> ent)
+    {
+        if (!ent.Comp.Lit || ent.Comp.LitAt == null || !ent.Comp.FuelRequired)
+            return;
+
+        if (ent.Comp.BurnDuration <= TimeSpan.Zero)
+        {
+            ent.Comp.Fuel = 0;
+            Dirty(ent);
+            SetLit(ent, false);
+            if (_net.IsServer)
+                _popup.PopupEntity("The fire goes out.", ent);
+
+            return;
+        }
+
+        var elapsed = _timing.CurTime - ent.Comp.LitAt.Value;
+        while (elapsed >= ent.Comp.BurnDuration)
+        {
+            ent.Comp.Fuel--;
+            if (ent.Comp.Fuel <= 0)
             {
-                // Consume one fuel
-                comp.Fuel--;
-                Dirty(uid, comp);
+                ent.Comp.Fuel = 0;
+                Dirty(ent);
+                SetLit(ent, false);
+                if (_net.IsServer)
+                    _popup.PopupEntity("The fire goes out.", ent);
 
-                if (comp.Fuel > 0)
-                {
-                    // Reset timer for next fuel unit
-                    comp.LitAt = _timing.CurTime;
-                }
-                else
-                {
-                    // Out of fuel, extinguish
-                    SetLit((uid, comp), false);
-                    if (_net.IsServer)
-                        _popup.PopupEntity("The fire goes out.", uid);
-                }
+                return;
             }
+
+            elapsed -= ent.Comp.BurnDuration;
+            ent.Comp.LitAt = _timing.CurTime - elapsed;
+            Dirty(ent);
         }
     }
 

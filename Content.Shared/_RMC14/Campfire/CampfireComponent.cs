@@ -50,3 +50,6 @@ public enum CampfireVisuals : byte
 public sealed partial class CampfireExtinguishDoAfterEvent : SimpleDoAfterEvent
 {
 }
+
+[ByRefEvent]
+public readonly record struct CampfireWeatherSmotherEvent(TimeSpan Reduction);

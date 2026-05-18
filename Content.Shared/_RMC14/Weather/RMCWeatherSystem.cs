@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Campfire;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
@@ -711,6 +712,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         {
             ProcessBurningEntities(mapId, weatherEvent.FireSmotheringStrength);
             ProcessTileFires(mapId, weatherEvent.FireSmotheringStrength);
+            ProcessCampfires(mapId, weatherEvent.FireSmotheringStrength);
             ProcessAcidDilution(mapId, weatherEvent.FireSmotheringStrength, ent.Comp.EventSequence);
         }
 
@@ -748,6 +750,20 @@ public sealed class RMCWeatherSystem : EntitySystem
 
             fire.Duration -= reduction;
             Dirty(uid, fire);
+        }
+    }
+
+    private void ProcessCampfires(MapId mapId, int fireSmotheringStrength)
+    {
+        var reduction = TimeSpan.FromSeconds(fireSmotheringStrength);
+        var query = EntityQueryEnumerator<CampfireComponent>();
+        while (query.MoveNext(out var uid, out var campfire))
+        {
+            if (!campfire.Lit || Transform(uid).MapID != mapId || !IsWeatherExposed(uid, mapId))
+                continue;
+
+            var ev = new CampfireWeatherSmotherEvent(reduction);
+            RaiseLocalEvent(uid, ref ev);
         }
     }
 
