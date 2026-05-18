@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed the base Defender caste being able to use ladders while fortified.
-    type: Fix
-  id: 2712
-  time: '2026-01-08T02:59:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8803
 - author: noctyrnal
   changes:
   - message: CMB Deputy survivors now have a radio prefix.
@@ -4474,5 +4467,13 @@
   id: 3211
   time: '2026-05-17T21:32:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8282
+- author: RangerXVII
+  changes:
+  - message: Xenonid chat highlights no longer highlight other xenonid's names with
+      the same caste as you.
+    type: Tweak
+  id: 3212
+  time: '2026-05-18T00:50:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9756
 Name: RMC14
 Order: -1
