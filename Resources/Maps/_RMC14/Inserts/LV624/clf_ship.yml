@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/17/2026 15:30:26
-  entityCount: 1316
+  time: 05/18/2026 14:35:34
+  entityCount: 1305
 maps: []
 grids:
 - 1
@@ -6429,27 +6429,27 @@ entities:
     - type: Transform
       pos: 15.5,31.5
       parent: 1
-- proto: DoorXenoResin
+- proto: DoorXenoResinImpenetrable
   entities:
   - uid: 1233
     components:
     - type: Transform
-      pos: 44.5,37.5
+      pos: 45.5,37.5
       parent: 1
   - uid: 1234
     components:
     - type: Transform
-      pos: 45.5,37.5
+      pos: 44.5,37.5
       parent: 1
   - uid: 1235
     components:
     - type: Transform
-      pos: 42.5,44.5
+      pos: 45.5,44.5
       parent: 1
   - uid: 1236
     components:
     - type: Transform
-      pos: 43.5,44.5
+      pos: 42.5,44.5
       parent: 1
   - uid: 1237
     components:
@@ -6459,7 +6459,17 @@ entities:
   - uid: 1238
     components:
     - type: Transform
-      pos: 45.5,44.5
+      pos: 43.5,44.5
+      parent: 1
+  - uid: 1299
+    components:
+    - type: Transform
+      pos: 7.5,44.5
+      parent: 1
+  - uid: 1300
+    components:
+    - type: Transform
+      pos: 8.5,44.5
       parent: 1
 - proto: RMCAttachmentBarrelCharger
   entities:
@@ -7890,96 +7900,6 @@ entities:
     - type: Transform
       pos: 34.5,29.5
       parent: 1
-  - uid: 1299
-    components:
-    - type: Transform
-      pos: 7.5,42.5
-      parent: 1
-  - uid: 1300
-    components:
-    - type: Transform
-      pos: 8.5,42.5
-      parent: 1
-  - uid: 1301
-    components:
-    - type: Transform
-      pos: 8.5,41.5
-      parent: 1
-  - uid: 1302
-    components:
-    - type: Transform
-      pos: 9.5,42.5
-      parent: 1
-  - uid: 1303
-    components:
-    - type: Transform
-      pos: 9.5,41.5
-      parent: 1
-  - uid: 1304
-    components:
-    - type: Transform
-      pos: 10.5,42.5
-      parent: 1
-  - uid: 1305
-    components:
-    - type: Transform
-      pos: 10.5,41.5
-      parent: 1
-  - uid: 1306
-    components:
-    - type: Transform
-      pos: 11.5,41.5
-      parent: 1
-  - uid: 1307
-    components:
-    - type: Transform
-      pos: 11.5,42.5
-      parent: 1
-  - uid: 1308
-    components:
-    - type: Transform
-      pos: 12.5,43.5
-      parent: 1
-  - uid: 1309
-    components:
-    - type: Transform
-      pos: 11.5,43.5
-      parent: 1
-  - uid: 1310
-    components:
-    - type: Transform
-      pos: 10.5,43.5
-      parent: 1
-  - uid: 1311
-    components:
-    - type: Transform
-      pos: 9.5,43.5
-      parent: 1
-  - uid: 1312
-    components:
-    - type: Transform
-      pos: 8.5,43.5
-      parent: 1
-  - uid: 1313
-    components:
-    - type: Transform
-      pos: 7.5,43.5
-      parent: 1
-  - uid: 1314
-    components:
-    - type: Transform
-      pos: 6.5,43.5
-      parent: 1
-  - uid: 1315
-    components:
-    - type: Transform
-      pos: 8.5,40.5
-      parent: 1
-  - uid: 1316
-    components:
-    - type: Transform
-      pos: 7.5,40.5
-      parent: 1
 - proto: RMCGirderDisplaced
   entities:
   - uid: 543
@@ -8945,6 +8865,33 @@ entities:
     components:
     - type: Transform
       pos: 12.5,17.5
+      parent: 1
+- proto: WallXenoResinImpenetrable
+  entities:
+  - uid: 1301
+    components:
+    - type: Transform
+      pos: 10.5,44.5
+      parent: 1
+  - uid: 1302
+    components:
+    - type: Transform
+      pos: 9.5,44.5
+      parent: 1
+  - uid: 1303
+    components:
+    - type: Transform
+      pos: 6.5,43.5
+      parent: 1
+  - uid: 1304
+    components:
+    - type: Transform
+      pos: 6.5,44.5
+      parent: 1
+  - uid: 1305
+    components:
+    - type: Transform
+      pos: 5.5,44.5
       parent: 1
 - proto: WeaponRifleM16
   entities:
