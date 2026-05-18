@@ -16,9 +16,9 @@
     - Sidearm
     - RMCWeaponPistolM1911C
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984match.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1911c.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984match.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1911c.rsi
   - type: Gun
     selectedMode: SemiAuto
     availableModes:
