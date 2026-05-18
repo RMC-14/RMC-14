@@ -69,3 +69,30 @@
       RMCSkillJtac: 3
       RMCSkillOverwatch: 1
       RMCSkillMedical: 2
+
+- type: entity # this is just third gen stats but putting it here since spp surv synths are locked to third gen
+  id: RMCSkillPresetSurvivorSPPSynth
+  name: Survivor SPP Synth
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 5
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillFirearms: 3
+      RMCSkillOverwatch: 1
+      RMCSkillMedical: 4
+      RMCSkillSurgery: 3
+      RMCSkillResearch: 1
+      RMCSkillMeleeWeapons: 2
+      RMCSkillPilot: 2
+      RMCSkillPolice: 2
+      RMCSkillFireman: 5
+      RMCSkillPowerLoader: 2
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 3
+      RMCSkillIntel: 2
+      RMCSkillDomestics: 2
+      RMCSkillSpecialistWeapons: 1
+      RMCSkillNavigations: 1

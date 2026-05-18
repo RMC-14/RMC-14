@@ -257,6 +257,29 @@
     grid:
     - 0,0,7,1 # 4 slots
 
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPSOFSynth
+  name: SPP CCC5-L synthetic tactical vest
+  description: A lightweight UPP-issued armor vest designed for space operations forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_vest_synth.rsi
+  - type: CMArmor
+    melee: 0
+    bullet: 0
+    bio: 0
+    explosionArmor: 0
+  - type: CMHardArmor
+  - type: RMCArmorSpeedTier
+    speedTier: super light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
+  - type: Storage
+    grid:
+    - 0,0,7,1 # 4 slots
+
 # SPP coats
 - type: entity
   parent: RMCCoatBureauDeputy
