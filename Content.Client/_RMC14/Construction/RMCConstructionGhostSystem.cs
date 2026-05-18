@@ -586,7 +586,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         var msg = new RMCConstructionGhostBuildMessage(amount, ghostKey);
 
         RaiseNetworkEvent(msg);
-        StartBuildingGhost(ghostKey, player.Value, _transformSystem.GetWorldPosition(player.Value), GetBuildDuration(prototype), clearOnCancel: true);
+        StartBuildingGhost(ghostKey, player.Value, _transform.GetWorldPosition(player.Value), GetBuildDuration(prototype), clearOnCancel: true);
         return true;
     }
 
