@@ -116,6 +116,7 @@
   parent: CMXenoDefenderBase
   id: CMXenoDefender
   components:
+  - type: XenoBaseCaste
   - type: GuideHelp
     guides:
     - RMCGuideRoleDefender

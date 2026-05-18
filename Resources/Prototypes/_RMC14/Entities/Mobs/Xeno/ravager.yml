@@ -145,6 +145,7 @@
   parent: RMCXenoRavagerBase
   id: CMXenoRavager
   components:
+  - type: XenoBaseCaste
   - type: XenoShield
   - type: XenoLeap
     delay: 0

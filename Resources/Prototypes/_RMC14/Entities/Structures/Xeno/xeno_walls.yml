@@ -28,6 +28,8 @@
   - type: XenoStructureUpgradeable
     to: WallXenoResinThick
     cost: 50
+  - type: HiveBoonFortifiableWall
+    heal: 75
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:
@@ -102,6 +104,8 @@
     scalingCost: true
   - type: XenoStructureUpgradeable
     to: null
+  - type: HiveBoonFortifiableWall
+    heal: 100
 
 - type: entity
   parent: CMBaseWallXeno

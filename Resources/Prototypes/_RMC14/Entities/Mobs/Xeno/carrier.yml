@@ -111,6 +111,7 @@
   parent: RMCXenoCarrierBase
   id: CMXenoCarrier
   components:
+  - type: XenoBaseCaste
   - type: GuideHelp
     guides:
     - RMCGuideRoleCarrier

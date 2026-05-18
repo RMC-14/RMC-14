@@ -78,7 +78,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
             _rmcPulling.TryStopAllPullsFromAndOn(mob);
 
             if (xeno.Comp.Damage is { } damage)
-                _damageable.TryChangeDamage(mob, _xeno.TryApplyXenoSlashDamageMultiplier(mob, damage), origin: xeno, tool: xeno);
+                _damageable.TryChangeDamage(mob, _xeno.ApplyXenoMeleeDamageModifiers(xeno, mob, damage), origin: xeno, tool: xeno);
 
             var filter = Filter.Pvs(mob, entityManager: EntityManager);
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { mob }, filter);

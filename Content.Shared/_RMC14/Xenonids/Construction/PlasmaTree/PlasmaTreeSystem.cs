@@ -1,7 +1,11 @@
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -19,6 +23,9 @@ public sealed class PlasmaTreeSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+    [Dependency] private readonly HiveBoonSystem _boon = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -70,6 +77,7 @@ public sealed class PlasmaTreeSystem : EntitySystem
         }
 
         plasmaTree.Comp.NextPlasmaAt = _time.CurTime + plasmaTree.Comp.PlasmaCooldown;
+        HealFortifiedStructure(plasmaTree);
 
         if (possibleTargets.Count == 0)
             return;
@@ -109,6 +117,26 @@ public sealed class PlasmaTreeSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target == null)
             return;
 
-        _plasma.RegenPlasma(args.Target.Value, plasmaTree.Comp.PlasmaAmount);
+        _plasma.RegenPlasma(args.Target.Value, GetPlasmaAmount(plasmaTree));
+    }
+
+    private FixedPoint2 GetPlasmaAmount(Entity<PlasmaTreeComponent> plasmaTree)
+    {
+        return _boon.HasActiveBoon<HiveBoonFortificationComponent>(plasmaTree.Owner)
+            ? plasmaTree.Comp.FortifiedPlasmaAmount
+            : plasmaTree.Comp.PlasmaAmount;
+    }
+
+    private void HealFortifiedStructure(Entity<PlasmaTreeComponent> plasmaTree)
+    {
+        if (!_boon.HasActiveBoon<HiveBoonFortificationComponent>(plasmaTree.Owner) ||
+            !TryComp(plasmaTree.Owner, out DamageableComponent? damageable) ||
+            damageable.TotalDamage <= FixedPoint2.Zero)
+        {
+            return;
+        }
+
+        var heal = -_rmcDamageable.DistributeTypesTotal((plasmaTree.Owner, damageable), plasmaTree.Comp.FortifiedSelfHeal);
+        _damageable.TryChangeDamage(plasmaTree.Owner, heal, true, damageable: damageable);
     }
 }

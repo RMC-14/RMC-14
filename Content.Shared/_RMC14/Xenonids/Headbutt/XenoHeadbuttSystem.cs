@@ -112,14 +112,15 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        var finalDamage = xeno.Comp.Damage;
+        // Copy because ExclusiveAdd mutates the damage specifier below.
+        var finalDamage = new DamageSpecifier(xeno.Comp.Damage);
 
         if (TryComp<XenoCrestComponent>(xeno, out var crest) && crest.Lowered)
         {
             finalDamage.ExclusiveAdd(xeno.Comp.CrestedDamageReduction);
         }
 
-        var damage = _damageable.TryChangeDamage(targetId, _xeno.TryApplyXenoSlashDamageMultiplier(targetId, finalDamage), armorPiercing: xeno.Comp.AP, origin: xeno, tool: xeno);
+        var damage = _damageable.TryChangeDamage(targetId, _xeno.ApplyXenoMeleeDamageModifiers(xeno, targetId, finalDamage), armorPiercing: xeno.Comp.AP, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

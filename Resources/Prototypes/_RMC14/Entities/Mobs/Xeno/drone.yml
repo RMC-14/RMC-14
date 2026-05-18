@@ -111,6 +111,7 @@
   parent: CMXenoDroneBase
   id: CMXenoDrone
   components:
+  - type: XenoBaseCaste
   - type: GuideHelp
     guides:
     - RMCGuideRoleDrone

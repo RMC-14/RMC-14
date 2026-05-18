@@ -117,7 +117,7 @@ public sealed class XenoStompSystem : EntitySystem
                 if (!_standing.IsDown(receiver))
                     continue;
 
-                var damage = _damageable.TryChangeDamage(receiver, _xeno.TryApplyXenoSlashDamageMultiplier(receiver, xeno.Comp.Damage), origin: xeno, tool: xeno);
+                var damage = _damageable.TryChangeDamage(receiver, _xeno.ApplyXenoMeleeDamageModifiers(xeno, receiver, xeno.Comp.Damage), origin: xeno, tool: xeno);
                 if (damage?.GetTotal() > FixedPoint2.Zero)
                 {
                     var filter = Filter.Pvs(receiver, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

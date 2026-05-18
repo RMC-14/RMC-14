@@ -11,6 +11,12 @@ public sealed partial class RecoveryNodeComponent : Component
     public FixedPoint2 HealAmount = 25;
 
     [DataField, AutoNetworkedField]
+    public FixedPoint2 FortifiedHealAmount = 100;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 FortifiedSelfHeal = 25;
+
+    [DataField, AutoNetworkedField]
     public float HealRange = 1.5F;
 
     [DataField, AutoNetworkedField]
