@@ -469,6 +469,8 @@
     nightmareScenarios:
     - scenarioName: tse_airbase
       scenarioProbability: 0.3
+    - scenarioName: none
+      scenarioProbability: 0.7
     minPlayers: 130
     survivorJobVariants:
       CMSurvivor:
