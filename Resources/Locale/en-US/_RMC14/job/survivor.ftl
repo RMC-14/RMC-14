@@ -154,7 +154,7 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
 
 # New Varadero Survs
 
-rmc-job-name-survivor-commander-new-varadero = UNSN Commander
+rmc-job-name-survivor-commander-new-varadero = UNMC Commander
 
 cm-job-name-surivor-beach-bum = Beach Bum
 
