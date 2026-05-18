@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: RMCArcadeBroken
   description: A broken arcade cabinet. You won't be playing much computer with this thing.
-  name: broken arcade
+  name: broken arcade cabinet
   suffix: RMC
   placement:
     mode: SnapgridCenter
@@ -15,14 +15,6 @@
   - type: Icon
     sprite: Structures/Machines/arcade.rsi
     state: arcade
-  - type: TypingIndicator
-    proto: robot
-  - type: Speech
-    speechVerb: Robotic
-    speechSounds: Vending
-  - type: SpookySpeaker
-    messageSet: SpookySpeakerMessagesGeneric
-    speakChance: 0.2
   - type: Anchorable
   - type: Pullable
   - type: Physics
@@ -67,18 +59,15 @@
   parent: RMCArcadeBroken
   id: RMCArcade
   description: An arcade cabinet.
-  name: arcade
+  name: arcade cabinet
   suffix: RMC
   placement:
     mode: SnapgridCenter
   components:
   - type: ApcPowerReceiver
-    powerLoad: 250
-    needsPower: true
   - type: RMCPowerReceiver
     idleLoad: 5
     activeLoad: 10
-  - type: ExtensionCableReceiver
   - type: PointLight
     radius: 1.8
     energy: 1.6
@@ -114,8 +103,6 @@
 - type: entity
   parent: RMCArcade
   id: RMCArcadeBlockGame
-  description: An arcade cabinet.
-  name: arcade
   components:
   - type: Sprite
     sprite: Structures/Machines/arcade.rsi
@@ -127,8 +114,6 @@
 - type: entity
   parent: RMCArcade
   id: RMCArcadeSpaceVillain
-  description: An arcade cabinet.
-  name: arcade
   components:
   - type: Sprite
     sprite: Structures/Machines/arcade.rsi
