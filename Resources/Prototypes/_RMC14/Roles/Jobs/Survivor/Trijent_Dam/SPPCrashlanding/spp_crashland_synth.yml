@@ -17,9 +17,7 @@
       preset: RMCSkillPresetSurvivorSPPSynth
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadSPP
+      squad: SquadSPP
     - type: JobPrefix
       prefix: rmc-job-prefix-crashland-synth
     - type: RMCSurvivor
