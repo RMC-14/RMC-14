@@ -21,6 +21,8 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-crashland-synth
     - type: RMCSurvivor
+    - type: Synth
+      generation: rmc-species-synth-generation-third
   hidden: true
 
 - type: startingGear
