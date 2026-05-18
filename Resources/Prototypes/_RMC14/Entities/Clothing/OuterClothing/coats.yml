@@ -628,6 +628,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: CMArmor
     melee: 10
+    bullet: 10
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
