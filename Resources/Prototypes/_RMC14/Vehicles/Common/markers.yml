@@ -36,6 +36,29 @@
         - Opaque
 
 - type: entity
+  id: RMCBlockerVehicle
+  name: vehicle blocker
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 100
+        mask:
+        - Vehicle
+        layer:
+        - Vehicle
+
+- type: entity
   id: VehiclePeekAnchor
   categories: [ HideSpawnMenu ]
   components:

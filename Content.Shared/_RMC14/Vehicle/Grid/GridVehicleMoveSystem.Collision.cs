@@ -1392,6 +1392,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         const int mobMask = (int) CollisionGroup.MobMask;
         const int mobLayer = (int) CollisionGroup.MobLayer;
+        const int vehicle = (int) CollisionGroup.Vehicle;
+
+        if (fixture.Hard && ((fixture.CollisionMask & vehicle) != 0 || (fixture.CollisionLayer & vehicle) != 0))
+            return false;
 
         return !fixture.Hard ||
                ((fixture.CollisionMask & mobLayer) == 0 &&

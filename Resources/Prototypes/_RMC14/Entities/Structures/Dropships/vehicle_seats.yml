@@ -257,7 +257,7 @@
   - type: VehicleDriverSeat
     skills:
       all:
-        RMCSkillVehicles: 1
+        RMCSkillVehicles: 2
 
 - type: entity
   parent: RMCSeatHumveeBase
@@ -276,7 +276,8 @@
   components:
   - type: VehicleWeaponsSeat
     skills:
-      all: {}
+      all:
+        RMCSkillVehicles: 2
     isPrimaryOperatorSeat: true
     allowUiSelection: true
     allowHotbarSelection: true

@@ -48,8 +48,10 @@
         - HighImpassable
         - LowImpassable
         - LargeMobLayer
+        - Vehicle
         layer:
         - LargeMobLayer
+        - Vehicle
       mob:
         shape:
           !type:PhysShapeAabb
@@ -235,8 +237,10 @@
         - HighImpassable
         - LowImpassable
         - LargeMobLayer
+        - Vehicle
         layer:
         - LargeMobLayer
+        - Vehicle
       mob:
         shape:
           !type:PhysShapeAabb
