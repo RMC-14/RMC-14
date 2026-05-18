@@ -3,6 +3,12 @@
   name: Marine
   prefix: Mne.
   paygrade: E1
+  
+- type: rank #Rank used for Paramarines Rifleman
+  id: RCMRankParamarine
+  name: Paramarine
+  prefix: PMne.
+  paygrade: E1
 
 - type: rank
   id: RMCRankTSELanceCorporal
@@ -104,101 +110,3 @@
   id: RMCRankTSEEmpress
   name: Empress # This needs to be changed to allow it to change dynamically for genders
   prefix: HRM.
-
-# The below ranks are for the Para insert on Hybrisa
-
-- type: rank
-  id: RMCRankParaPrivate
-  name: Private
-  prefix: Pte.
-  paygrade: E1
-
-- type: rank
-  id: RMCRankParaPrivateSecondClass
-  name: Private Second Class
-  prefix: Pte2.
-  paygrade: E2
-
-- type: rank
-  id: RMCRankParaLanceCorporal
-  name: Lance Corporal
-  prefix: LCpl.
-  paygrade: E3
-
-- type: rank
-  id: RMCRankParaCorporal
-  name: Corporal
-  prefix: Cpl.
-  paygrade: E4
-
-- type: rank
-  id: RMCRankParaSergeant
-  name: Sergeant
-  prefix: Sgt.
-  paygrade: E5
-
-- type: rank
-  id: RMCRankParaStaffSergeant
-  name: Staff Sergeant
-  prefix: SSgt.
-  paygrade: E6
-
-- type: rank
-  id: RMCRankParaWarrantOfficerClass2
-  name: Warrant Officer Class 2
-  prefix: WO2.
-  paygrade: E7
-
-- type: rank
-  id: RMCRankParaSecondLieutenant
-  name: Second Lieutenant.
-  prefix: 2Lt.
-  paygrade: O1
-
-- type: rank
-  id: RMCRankParaLieutenant
-  name: Lieutenant
-  prefix: Lt.
-  paygrade: O2
-
-- type: rank
-  id: RMCRankParaCaptain
-  name: Captain
-  prefix: Capt.
-  paygrade: O3
-
-- type: rank
-  id: RMCRankParaMajor
-  name: Major
-  prefix: Maj.
-  paygrade: O4
-
-- type: rank
-  id: RMCRankParaLieutenantColonel
-  name: Lieutenant Colonel
-  prefix: LtCol.
-  paygrade: O5
-
-- type: rank
-  id: RMCRankParaColonel
-  name: Colonel
-  prefix: Col.
-  paygrade: O6
-
-- type: rank
-  id: RMCRankParaBrigadier
-  name: Brigadier
-  prefix: Brig.
-  paygrade: O7
-
-- type: rank
-  id: RMCRankParaMajorGeneral
-  name: Major General
-  prefix: MajGen.
-  paygrade: O8
-
-- type: rank
-  id: RMCRankParaGeneralBrigade
-  name: General of the Brigade
-  prefix: GenBrig.
-  paygrade: O9
