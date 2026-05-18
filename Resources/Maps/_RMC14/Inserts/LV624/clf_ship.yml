@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/18/2026 15:06:42
-  entityCount: 1312
+  time: 05/18/2026 15:10:36
+  entityCount: 1314
 maps: []
 grids:
 - 1
@@ -2619,6 +2619,13 @@ entities:
     components:
     - type: Transform
       pos: 18.5,31.5
+      parent: 1
+- proto: CMFirstAidKit
+  entities:
+  - uid: 1314
+    components:
+    - type: Transform
+      pos: 24.5,31.5
       parent: 1
 - proto: CMFirstAidKitFilled
   entities:
@@ -6552,6 +6559,13 @@ entities:
     components:
     - type: Transform
       pos: 25.353588,23.768476
+      parent: 1
+- proto: RMCBannerCLFWorn
+  entities:
+  - uid: 1313
+    components:
+    - type: Transform
+      pos: 17.5,27.5
       parent: 1
 - proto: RMCBarrelBlue
   entities:
