@@ -153,7 +153,7 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_m60.ogg"
 
-- files: ["gun_DE50.ogg"]
+- files: ["gun_DE50.ogg", "gun_DE50_alt.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_DE50.ogg"
