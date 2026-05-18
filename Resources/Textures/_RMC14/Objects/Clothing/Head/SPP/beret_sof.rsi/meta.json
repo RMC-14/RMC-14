@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/clothing/hats/hats_by_faction/UPP.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/clothing/head/hats_by_faction/UPP.dmi",
+  "copyright": "taken from cmss13 at commit https://github.com/cmss13-devs/cmss13/commit/48e570bd697f2476e28d89cd255d0539a5228228 and https://github.com/cmss13-devs/cmss13/commit/48e570bd697f2476e28d89cd255d0539a5228228",
   "size": {
     "x": 32,
     "y": 32
