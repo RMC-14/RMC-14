@@ -54,6 +54,8 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
     private static readonly LocId RequiresWield = "rmc-brute-launcher-requires-wield";
     private static readonly LocId TargetObscured = "rmc-brute-launcher-target-obscured";
     private static readonly LocId Unskilled = "cm-gun-unskilled";
+    private const double LockFacingMaxDeviation = 45;
+    private const float LockMovementThreshold = 0.1f;
 
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -214,7 +216,15 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             return;
         }
 
-        var coordinates = GetCoordinates(args.Coordinates);
+        if (!IsFacingLockCoordinates(args.User, args.Coordinates))
+        {
+            if (!TerminatingOrDeleted(args.User))
+                _popup.PopupEntity(Loc.GetString(LockInterrupted), args.User, args.User, PopupType.SmallCaution);
+
+            return;
+        }
+
+        var coordinates = _transform.ToCoordinates(args.Coordinates);
         launcher.Comp.LockComplete = true;
         Dirty(launcher);
 
@@ -236,6 +246,7 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             launcher.Comp.LockTarget != target ||
             TerminatingOrDeleted(target) ||
             !IsBruteTarget(target) ||
+            !IsFacingLockCoordinates(args.Event.User, args.Event.Coordinates) ||
             !IsWielded(launcher.Owner) ||
             !HasAmmo(launcher.Owner))
         {
@@ -274,17 +285,19 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             Dirty(launcher.Owner, laser);
         }
 
-        var ev = new RMCBruteLockOnDoAfterEvent(lockId, GetNetEntity(target), GetNetCoordinates(targetCoordinates));
+        var lockedCoordinates = _transform.ToMapCoordinates(targetCoordinates);
+        var ev = new RMCBruteLockOnDoAfterEvent(lockId, GetNetEntity(target), lockedCoordinates);
         var doAfter = new DoAfterArgs(EntityManager, user, launcher.Comp.AimDelay, ev, launcher.Owner, used: launcher.Owner)
         {
             BreakOnDamage = true,
             BreakOnDropItem = true,
             BreakOnHandChange = true,
             BreakOnMove = true,
+            MovementThreshold = LockMovementThreshold,
             NeedHand = true,
             RequireCanInteract = false,
             RangeCheck = false,
-            // Re-check ammo, wield state, and target lifetime continuously while the guided lock is visible.
+            // Re-check ammo, wield state, target lifetime, and facing continuously while the guided lock is visible.
             AttemptFrequency = AttemptFrequency.EveryTick,
             ForceVisible = true,
             CancelDuplicate = false,
@@ -386,6 +399,27 @@ public sealed class RMCBruteLauncherSystem : EntitySystem
             targetMap,
             range: 0,
             predicate: uid => uid == user || uid == target);
+    }
+
+    private bool IsFacingLockCoordinates(EntityUid user, MapCoordinates coordinates)
+    {
+        if (TerminatingOrDeleted(user))
+            return false;
+
+        var userCoordinates = _transform.GetMapCoordinates(user);
+        if (userCoordinates.MapId != coordinates.MapId)
+            return false;
+
+        var targetDirection = coordinates.Position - userCoordinates.Position;
+        if (targetDirection.LengthSquared() <= 0.01f)
+            return true;
+
+        var currentAngle = _transform.GetWorldRotation(user);
+        var targetAngle = targetDirection.ToWorldAngle();
+        var differenceFromTargetAngle = (currentAngle.Degrees - targetAngle.Degrees + 180 + 360) % 360 - 180;
+
+        return differenceFromTargetAngle > -LockFacingMaxDeviation &&
+               differenceFromTargetAngle < LockFacingMaxDeviation;
     }
 
     private bool IsWielded(EntityUid launcher)

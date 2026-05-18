@@ -57,9 +57,9 @@ public sealed partial class RMCBruteLockOnDoAfterEvent : DoAfterEvent
     public NetEntity Target;
 
     [DataField(required: true)]
-    public NetCoordinates Coordinates;
+    public MapCoordinates Coordinates;
 
-    public RMCBruteLockOnDoAfterEvent(uint lockId, NetEntity target, NetCoordinates coordinates)
+    public RMCBruteLockOnDoAfterEvent(uint lockId, NetEntity target, MapCoordinates coordinates)
     {
         LockId = lockId;
         Target = target;
