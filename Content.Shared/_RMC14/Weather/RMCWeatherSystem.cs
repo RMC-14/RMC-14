@@ -36,6 +36,8 @@ public sealed class RMCWeatherSystem : EntitySystem
 {
     private static readonly TimeSpan WeatherEffectInterval = TimeSpan.FromSeconds(1);
     private static readonly TimeSpan WeatherCleanInterval = TimeSpan.FromSeconds(5);
+    private static readonly TimeSpan WeatherEffectMessageMinDelay = TimeSpan.FromSeconds(30);
+    private static readonly TimeSpan WeatherEffectMessageMaxDelay = TimeSpan.FromSeconds(120);
     private const float CleanDecalChance = 0.05f;
     private const float WeatherBlockerLookupRadius = 0.05f;
     private const float WeatherSirenPopupRange = 7f;
@@ -852,12 +854,31 @@ public sealed class RMCWeatherSystem : EntitySystem
                 _damageable.TryChangeDamage(uid, damage, true, false, damageable);
             }
 
-            if (weatherEvent.EffectMessage != null &&
-                _random.Prob(Math.Clamp(weatherEvent.EffectMessageChance, 0, 1)))
+            if (weatherEvent.EffectMessage is { } effectMessage &&
+                CanShowWeatherEffectMessage(uid, weatherEvent))
             {
-                _popup.PopupEntity(Loc.GetString(weatherEvent.EffectMessage), uid, uid, PopupType.SmallCaution);
+                _popup.PopupEntity(Loc.GetString(effectMessage), uid, uid, PopupType.SmallCaution);
             }
         }
+    }
+
+    private bool CanShowWeatherEffectMessage(EntityUid uid, RMCWeatherEvent weatherEvent)
+    {
+        if (weatherEvent.EffectMessage == null)
+            return false;
+
+        if (TryComp(uid, out RMCWeatherEffectPopupCooldownComponent? cooldown) &&
+            cooldown.NextPopupAt > _timing.CurTime)
+        {
+            return false;
+        }
+
+        if (!_random.Prob(Math.Clamp(weatherEvent.EffectMessageChance, 0, 1)))
+            return false;
+
+        cooldown ??= EnsureComp<RMCWeatherEffectPopupCooldownComponent>(uid);
+        cooldown.NextPopupAt = _timing.CurTime + _random.Next(WeatherEffectMessageMinDelay, WeatherEffectMessageMaxDelay);
+        return true;
     }
 
     private void ProcessWeatherCleaning(Entity<RMCWeatherCycleComponent> ent, RMCWeatherEvent weatherEvent)

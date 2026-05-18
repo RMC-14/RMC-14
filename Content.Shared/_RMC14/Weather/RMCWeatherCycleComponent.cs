@@ -139,6 +139,13 @@ public sealed partial class RMCWeatherDilutedAcidComponent : Component
     public int LastWeatherSequence;
 }
 
+[RegisterComponent]
+[Access(typeof(RMCWeatherSystem))]
+public sealed partial class RMCWeatherEffectPopupCooldownComponent : Component
+{
+    public TimeSpan NextPopupAt;
+}
+
 [Serializable, NetSerializable]
 public enum RMCWeatherCycleState : byte
 {
