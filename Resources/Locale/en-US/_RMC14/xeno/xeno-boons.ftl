@@ -12,23 +12,24 @@ rmc-boon-on-cooldown = Our hive has already used {$boon} recently! Wait {$minute
 rmc-boon-duplicate-active = We already have a boon of {$boon} active!
 rmc-boon-not-reusable = Our hive has already used {$boon} and cannot use it again!
 
-rmc-boon-fire-resistance-activate = The Queen has imbued us with flame-resistant chitin.
+rmc-boon-fire-resistance-activate = The Queen has imbued us with flame-resistant chitin for 5 minutes.
 rmc-boon-fire-resistance-expire = The Boon of Fire Resistance has expired.
 
-rmc-boon-larva-surge-activate = The Queen has purchased 5 extra larva to join the hive!
+rmc-boon-larva-surge-activate = The Queen has awakened 5 extra burrowed larva to join the hive!
 
-rmc-boon-evolution-activate = The Queen has blessed us with faster evolution.
+rmc-boon-evolution-activate = The Queen has blessed us with faster evolution for 5 minutes.
+rmc-boon-evolution-major-activate = The Queen has blessed us with faster evolution for 10 minutes.
 rmc-boon-evolution-expire = The Boon of Evolution has expired.
 rmc-boon-evolution-major-expire = The Major Boon of Evolution has expired.
 
 rmc-boon-adaptability-activate = The Queen has blessed us with adaptability.
 
-rmc-boon-aggression-activate = The Queen has imbued us with sharp claws.
-rmc-boon-aggression-major-activate = The Queen has imbued us with razor-sharp claws.
+rmc-boon-aggression-activate = The Queen has imbued us with sharp claws for 5 minutes.
+rmc-boon-aggression-major-activate = The Queen has imbued us with razor-sharp claws for 10 minutes.
 rmc-boon-aggression-expire = The Boon of Aggression has expired.
 rmc-boon-aggression-major-expire = The Major Boon of Aggression has expired.
 
-rmc-boon-fortification-activate = The resin starts moving and shifting...
+rmc-boon-fortification-activate = The resin starts moving and shifting for 5 minutes...
 rmc-boon-fortification-expire = The Boon of Fortification has expired.
 
 rmc-boon-king-activate = The Queen has purchased His Grace.

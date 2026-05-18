@@ -53,7 +53,7 @@
   description: Doubles same-hive xenonid evolution point gain for 10 minutes and bypasses the hive's ovipositor and evolution granter requirements.
   components:
   - type: HiveBoonDefinition
-    activationAnnouncement: rmc-boon-evolution-activate
+    activationAnnouncement: rmc-boon-evolution-major-activate
     expirationAnnouncement: rmc-boon-evolution-major-expire
     cost: 2
     pylons: 2
