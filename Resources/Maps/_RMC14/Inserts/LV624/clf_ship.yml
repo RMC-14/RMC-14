@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/18/2026 14:35:34
-  entityCount: 1305
+  time: 05/18/2026 15:06:42
+  entityCount: 1312
 maps: []
 grids:
 - 1
@@ -8280,6 +8280,31 @@ entities:
     - type: Transform
       pos: 20.5,20.5
       parent: 1
+  - uid: 1306
+    components:
+    - type: Transform
+      pos: 9.5,31.5
+      parent: 1
+  - uid: 1307
+    components:
+    - type: Transform
+      pos: 9.5,31.5
+      parent: 1
+  - uid: 1308
+    components:
+    - type: Transform
+      pos: 9.5,31.5
+      parent: 1
+  - uid: 1309
+    components:
+    - type: Transform
+      pos: 9.5,31.5
+      parent: 1
+  - uid: 1310
+    components:
+    - type: Transform
+      pos: 9.5,31.5
+      parent: 1
 - proto: RMCMagazineSMGFP9000
   entities:
   - uid: 582
@@ -8904,6 +8929,18 @@ entities:
     components:
     - type: Transform
       pos: 19.585241,24.6573
+      parent: 1
+- proto: WeaponRifleMAR40
+  entities:
+  - uid: 1311
+    components:
+    - type: Transform
+      pos: 9.5,31.5
+      parent: 1
+  - uid: 1312
+    components:
+    - type: Transform
+      pos: 9.5,31.5
       parent: 1
 - proto: XenoTunnel
   entities:
