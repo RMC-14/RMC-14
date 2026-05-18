@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "RCM take from https://github.com/cmss13-devs/cmss13/blob/71660f23ed6fdbd87e09ba595212f1693ed8e5cd/icons/mob/hud/factions/twe.dmi, tse icons and pve icons by github noctynral, RCM icons made/modified by MoonlightHollow(Github)",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "rcm_para_bombard"
+        },
+        {
+            "name": "rcm_para_captain"
+        },
+        {
+            "name": "rcm_para_co"
+        },
+        {
+            "name": "rcm_para_engi"
+        },
+        {
+            "name": "rcm_para_lieutenant"
+        },
+        {
+            "name": "rcm_para_marksman"
+        },
+        {
+            "name": "rcm_para_medic"
+        },
+        {
+            "name": "rcm_para_pilot"
+        },
+        {
+            "name": "rcm_para_rifleman"
+        },
+        {
+            "name": "rcm_para_sectionleader"
+        },
+        {
+            "name": "rcm_para_smartgunner"
+        },
+        {
+            "name": "rcm_para_synth"
+        },
+        {
+            "name": "rcm_para_teamleader"
+        },
+        {
+            "name": "rcm_para_troopleader"
+        }
+    ]
+}
