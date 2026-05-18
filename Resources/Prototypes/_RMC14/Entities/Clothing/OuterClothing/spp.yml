@@ -261,7 +261,7 @@
   parent: RMCArmorSPP
   id: RMCArmorSPPSOFSynth
   name: SPP CCC5-L synthetic tactical vest
-  description: A lightweight UPP-issued armor vest designed for space operations forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
+  description: A lightweight SPP-issued armor vest designed for space operations forces. It features polymer-ceramic composite plating for improved protection while allowing greater mobility. Equipped with modular pouches for ammunition and gear, it ensures rapid access to essential supplies.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/sof_vest_synth.rsi
