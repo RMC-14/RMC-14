@@ -94,6 +94,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorRepairDoAfterEvent>(OnFusionReactorRepairWeldingDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorOverloadDoAfterEvent>(OnFusionReactorOverloadDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, InteractHandEvent>(OnFusionReactorInteractHand);
+        SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorStopOverloadDoAfterEvent>(OnFusionReactorStopOverloadDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorDestroyDoAfterEvent>(OnFusionReactorDestroyDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, ExaminedEvent>(OnFusionReactorExamined);
 
@@ -361,6 +362,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         var used = args.Used;
 
         args.Handled = true;
+        if (HasActiveFusionReactorDoAfter(user))
+            return;
+
         var container = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.CellContainerSlot);
         if (HasComp<RMCFusionCellComponent>(used))
         {
@@ -524,17 +528,20 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (!HasComp<XenoComponent>(user) || !HasComp<MeleeWeaponComponent>(user))
             return;
 
+        if (HasActiveFusionReactorDoAfter(user))
+            return;
+
         if (ent.Comp.Overloaded)
         {
             args.Handled = true;
-            SetFusionReactorOverloaded(ent, false, user);
-            _popup.PopupPredicted(
-                Loc.GetString("rmc-fusion-reactor-overload-stop-xeno", ("reactor", ent)),
-                Loc.GetString("rmc-fusion-reactor-overload-stop-xeno-others", ("xeno", user), ("reactor", ent)),
-                ent,
-                user,
-                MediumCaution);
-            _audio.PlayPredicted(ent.Comp.OverloadStopSound, ent, user);
+            var stopOverloadEv = new RMCFusionReactorStopOverloadDoAfterEvent();
+            var stopOverloadDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.XenoOverloadStopDelay, stopOverloadEv, ent, ent)
+            {
+                BreakOnMove = true,
+                DuplicateCondition = DuplicateConditions.SameEvent,
+            };
+
+            _doAfter.TryStartDoAfter(stopOverloadDoAfter);
             return;
         }
 
@@ -552,6 +559,26 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnFusionReactorStopOverloadDoAfter(Entity<RMCFusionReactorComponent> ent, ref RMCFusionReactorStopOverloadDoAfterEvent args)
+    {
+        var user = args.User;
+        if (args.Cancelled || args.Handled)
+            return;
+
+        if (!ent.Comp.Overloaded || !HasComp<XenoComponent>(user) || !HasComp<MeleeWeaponComponent>(user))
+            return;
+
+        args.Handled = true;
+        SetFusionReactorOverloaded(ent, false, user);
+        _popup.PopupPredicted(
+            Loc.GetString("rmc-fusion-reactor-overload-stop-xeno", ("reactor", ent)),
+            Loc.GetString("rmc-fusion-reactor-overload-stop-xeno-others", ("xeno", user), ("reactor", ent)),
+            ent,
+            user,
+            MediumCaution);
+        _audio.PlayPredicted(ent.Comp.OverloadStopSound, ent, user);
     }
 
     private void OnFusionReactorDestroyDoAfter(Entity<RMCFusionReactorComponent> ent, ref RMCFusionReactorDestroyDoAfterEvent args)
@@ -706,6 +733,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (HasActiveFusionReactorDoAfter(user))
+            return;
+
         if (!CanToggleFusionReactorOverload(ent, user, used))
             return;
 
@@ -774,6 +804,32 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     {
         return _container.TryGetContainer(ent, ent.Comp.CellContainerSlot, out var container) &&
                container.ContainedEntities.Count > 0;
+    }
+
+    private bool HasActiveFusionReactorDoAfter(EntityUid user)
+    {
+        if (!TryComp<DoAfterComponent>(user, out var doAfter))
+            return false;
+
+        foreach (var active in doAfter.DoAfters.Values)
+        {
+            if (active.Cancelled || active.Completed)
+                continue;
+
+            if (active.Args.Target is { } target &&
+                HasComp<RMCFusionReactorComponent>(target))
+            {
+                return true;
+            }
+
+            if (active.Args.EventTarget is { } eventTarget &&
+                HasComp<RMCFusionReactorComponent>(eventTarget))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void SetFusionReactorOverloaded(Entity<RMCFusionReactorComponent> ent, bool overloaded, EntityUid? user = null)

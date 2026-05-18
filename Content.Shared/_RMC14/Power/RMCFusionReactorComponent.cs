@@ -42,6 +42,9 @@ public sealed partial class RMCFusionReactorComponent : Component
     public TimeSpan OverloadDelay = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan XenoOverloadStopDelay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> OverloadSkill = "RMCSkillEngineer";
 
     [DataField, AutoNetworkedField]
