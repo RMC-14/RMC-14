@@ -1,27 +1,75 @@
 name: "Labels: Reviewed By Maintainer"
 
 on:
-  pull_request_review:
-    types: [submitted, dismissed]
+  workflow_run:
+    workflows: ["PR Review Relay"]
+    types: [completed]
 
 permissions:
+  actions: read
   issues: write
 
 jobs:
   label:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
+    - name: Download review metadata artifact
+      uses: actions/github-script@v9
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+
+          const { owner, repo } = context.repo;
+
+          const runId = context.payload.workflow_run.id;
+
+          const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+            owner,
+            repo,
+            run_id: runId,
+          });
+
+          const artifact = artifacts.data.artifacts.find(
+          a => a.name === "review-metadata" && !a.expired
+          );
+
+          if (!artifact) {
+            core.setFailed("Artifact 'review-metadata' not found.");
+            return;
+          }
+
+          const download = await github.rest.actions.downloadArtifact({
+            owner,
+            repo,
+            artifact_id: artifact.id,
+            archive_format: 'zip',
+          });
+
+          fs.writeFileSync(
+            path.join(process.env.GITHUB_WORKSPACE, 'review-metadata.zip'),
+            Buffer.from(download.data)
+          );
+
+    - run: unzip review-metadata.zip
+
     - name: Add Label Based On Review Type
       uses: actions/github-script@v9
       with:
         script: |
+          const fs = require('fs');
+
           const { owner, repo } = context.repo;
-          const review = context.payload.review;
-          const pr = context.payload.pull_request;
+
+          const review = JSON.parse(
+            fs.readFileSync('payload/review.json', 'utf8')
+          );
 
           const state = review.state;
-          const username = review.user.login;
+          const username = review.username;
+          const prNumber = review.pr_number;
 
           if (!["approved", "changes_requested", "dismissed"].includes(state)) {
             console.log(`Skipping review type: ${state}.`);
@@ -40,7 +88,7 @@ jobs:
               await github.rest.issues.removeLabel({
                 owner,
                 repo,
-                issue_number: pr.number,
+                issue_number: prNumber,
                 name,
               });
             } catch (e) {
@@ -53,7 +101,7 @@ jobs:
             await github.rest.issues.addLabels({
               owner,
               repo,
-              issue_number: pr.number,
+              issue_number: prNumber,
               labels: [name],
             });
           }
@@ -86,7 +134,7 @@ jobs:
             const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({
               owner,
               repo,
-              issue_number: pr.number,
+              issue_number: prNumber,
             });
 
             const labels = new Set(currentLabels.map(l => l.name));

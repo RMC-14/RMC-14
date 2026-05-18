@@ -1,0 +1,31 @@
+name: PR Review Relay
+
+on:
+  pull_request_review:
+    types: [submitted, dismissed]
+
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Store review data
+      run: |
+        mkdir -p payload
+
+        jq -n \
+          --argjson pr "${{ github.event.pull_request.number }}" \
+          --arg state "${{ github.event.review.state }}" \
+          --arg username "${{ github.event.review.user.login }}" \
+          '{
+            pr_number: $pr,
+            state: $state,
+            username: $username
+          }' > payload/review.json
+
+    - name: Upload review metadata
+      uses: actions/upload-artifact@v4
+      with:
+        name: review-metadata
+        path: payload/review.json
+        retention-days: 1
