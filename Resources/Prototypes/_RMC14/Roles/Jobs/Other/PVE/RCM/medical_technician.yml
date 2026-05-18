@@ -1,18 +1,22 @@
 - type: job
   parent: CMJobBase
-  id: CMRoyalMarinesSmartgunnerPVE
-  name: rmc-job-name-rcm-pve-gpmg-gunner
+  id: CMRoyalMarinesMedicPVE
+  name: rmc-job-name-rcm-pve-medical-technician
   description: rmc-ghost-role-information-rcm-description
-  playTimeTracker: RMCJobRoyalSmartgunnerPVE
+  playTimeTracker: RMCJobRoyalMedicPVE
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
   ranks:
     RMCRankTSELanceCorporal: [ ]
-  startingGear: RMCGearRoyalSmartgunnerPVE
-  icon: "RMCJobIconRoyalSmartgunnerPVE"
+  startingGear: RMCGearRoyalMedicPVE
+  icon: "RMCJobIconRoyalMedicPVE"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-royal-tl
   accessGroups:
-  - SmartGunOperator
-  spawnMenuRoleName: RCM GPMG Gunner (PVE)
+  - HospitalCorpsman
+  spawnMenuRoleName: RCM Medical Technician (PVE)
   special:
   - !type:AddComponentSpecial
     components:
@@ -32,43 +36,45 @@
         RMCSkillMedical: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillPilot: 1
-        RMCSkillSmartGun: 1
-        RMCSkillSurgery: 1
+        RMCSkillSurgery: 2
     - type: JobPrefix
-      prefix: rmc-job-prefix-rcm-pve-gpmg-gunner
+      prefix: rmc-job-prefix-rcm-pve-medical-technician
     - type: AssignSquad
       squad: SquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_smartgunner_pve
+        state: rmc_medic_pve
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_twe
+    - type: CMVendorUser
+      extraPoints:
+        Chemicals: 120
   hidden: true
 
 - type: startingGear
-  id: RMCGearRoyalSmartgunnerPVE
+  id: RMCGearRoyalMedicPVE
   equipment:
-    id: RMCIDRoyalMarinesSmartgunnerPVE
+    id: RMCIDRoyalMarinesMedicPVE
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointRCMPVEGPMGGunner
-  name: RCM gpmg gunner spawn point
+  id: CMSpawnPointRCMPVEMedicalTechnician
+  name: RCM medical technician spawn point
   components:
   - type: SpawnPoint
-    job_id: CMRoyalMarinesSmartgunnerPVE
+    job_id: CMRoyalMarinesMedicPVE
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
     state: icon
 
 - type: playTimeTracker
-  id: RMCJobRoyalSmartgunnerPVE
+  id: RMCJobRoyalMedicPVE
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconRoyalSmartgunnerPVE
+  id: RMCJobIconRoyalMedicPVE
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_smartgunner_pve
+    state: rmc_medic_pve

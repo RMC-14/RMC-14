@@ -11515,14 +11515,14 @@ entities:
     - type: Transform
       pos: 0.5,1.5
       parent: 1
-- proto: CMSpawnPointRCMPVEGPMGGunner
+- proto: CMSpawnPointRCMPVESmartGunner
   entities:
   - uid: 792
     components:
     - type: Transform
       pos: 1.5,1.5
       parent: 1
-- proto: CMSpawnPointRCMPVEMedicalAssistant
+- proto: CMSpawnPointRCMPVEMedicalTechnician
   entities:
   - uid: 793
     components:
@@ -31439,7 +31439,7 @@ entities:
     - type: Transform
       pos: -19.5,-4.5
       parent: 1
-- proto: RMCClosetRCMGPMGGear
+- proto: RMCClosetRCMSGOGear
   entities:
   - uid: 4463
     components:

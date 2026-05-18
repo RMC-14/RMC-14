@@ -128,7 +128,7 @@
 - type: entity
   parent: RMCIDRoyalMarines
   id: RMCIDRoyalMarinesSmartgunnerPVE
-  name: GPMG Gunner's dogtags
+  name: Smart Gun Operator's dogtags
   components:
   - type: PresetIdCard
     job: CMRoyalMarinesSmartgunnerPVE
