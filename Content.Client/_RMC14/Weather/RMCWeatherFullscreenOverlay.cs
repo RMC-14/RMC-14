@@ -197,15 +197,12 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     {
         var viewport = args.ViewportBounds;
         var halfSize = new Vector2(viewport.Width / 2f, viewport.Height / 2f);
-        var (clearScaleX, clearScaleY, fullScaleX, fullScaleY) = overlay switch
-        {
-            // CMSS13 uses 15x15 fullscreen states and stretches them to the client view.
-            // RMC keeps the same idea, with a slightly stronger vertical frame for widescreen clients.
-            RMCWeatherScreenOverlay.Low => (13f / 15f, 11f / 15f, 13.4f / 15f, 11.6f / 15f),
-            RMCWeatherScreenOverlay.Medium => (11f / 15f, 9f / 15f, 11.5f / 15f, 9.6f / 15f),
-            RMCWeatherScreenOverlay.High => (9f / 15f, 7.5f / 15f, 9.5f / 15f, 8.1f / 15f),
-            _ => (1f, 1f, 1f, 1f),
-        };
+        var radii = RMCWeatherScreenOverlayData.GetRadii(overlay);
+        var fullscreenTiles = RMCWeatherScreenOverlayData.FullscreenTiles;
+        var clearScaleX = radii.ClearX / fullscreenTiles;
+        var clearScaleY = radii.ClearY / fullscreenTiles;
+        var fullScaleX = radii.FullX / fullscreenTiles;
+        var fullScaleY = radii.FullY / fullscreenTiles;
 
         return (new Vector2(halfSize.X * clearScaleX, halfSize.Y * clearScaleY),
             new Vector2(halfSize.X * fullScaleX, halfSize.Y * fullScaleY));

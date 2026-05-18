@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Weather;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Eye.Blinding.Components;
@@ -26,6 +27,7 @@ namespace Content.Shared.Examine
 
         // RMC14
         [Dependency] private readonly QueenEyeSystem _queenEye = default!;
+        [Dependency] private readonly RMCWeatherSystem _rmcWeather = default!;
 
         public const float MaxRaycastRange = 100;
 
@@ -175,6 +177,8 @@ namespace Content.Shared.Examine
         /// </summary>
         public float GetExaminerRange(EntityUid examiner, MobStateComponent? mobState = null)
         {
+            var range = ExamineRange;
+
             if (Resolve(examiner, ref mobState, logMissing: false))
             {
                 if (MobStateSystem.IsDead(examiner, mobState))
@@ -184,9 +188,22 @@ namespace Content.Shared.Examine
                     return CritExamineRange;
 
                 if (TryComp<BlurryVisionComponent>(examiner, out var blurry))
-                    return Math.Clamp(ExamineRange - blurry.Magnitude * ExamineBlurrinessMult, 2, ExamineRange);
+                    range = Math.Clamp(ExamineRange - blurry.Magnitude * ExamineBlurrinessMult, 2, ExamineRange);
             }
-            return ExamineRange;
+
+            return Math.Min(range, GetWeatherExaminerRange(examiner));
+        }
+
+        private float GetWeatherExaminerRange(EntityUid examiner)
+        {
+            if (!TryComp(examiner, out TransformComponent? xform) ||
+                !_rmcWeather.TryGetCurrentExamineRange(xform.MapID, out var range) ||
+                !_rmcWeather.IsWeatherExposed(examiner))
+            {
+                return ExamineRange;
+            }
+
+            return Math.Clamp(range, 0, ExamineRange);
         }
 
         /// <summary>

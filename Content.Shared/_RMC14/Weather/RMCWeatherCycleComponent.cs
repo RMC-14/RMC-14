@@ -165,6 +165,31 @@ public enum RMCWeatherScreenOverlay : byte
     High,
 }
 
+public static class RMCWeatherScreenOverlayData
+{
+    public const float FullscreenTiles = 15f;
+
+    public static RMCWeatherScreenOverlayRadii GetRadii(RMCWeatherScreenOverlay overlay)
+    {
+        return overlay switch
+        {
+            // CMSS13 uses 15x15 fullscreen states and stretches them to the client view.
+            // RMC keeps the same idea, with a slightly stronger vertical frame for widescreen clients.
+            RMCWeatherScreenOverlay.Low => new(13f, 11f, 13.4f, 11.6f),
+            RMCWeatherScreenOverlay.Medium => new(11f, 9f, 11.5f, 9.6f),
+            RMCWeatherScreenOverlay.High => new(9f, 7.5f, 9.5f, 8.1f),
+            _ => new(FullscreenTiles, FullscreenTiles, FullscreenTiles, FullscreenTiles),
+        };
+    }
+
+    public static float GetClearRange(RMCWeatherScreenOverlay overlay)
+    {
+        return GetRadii(overlay).ClearY;
+    }
+}
+
+public readonly record struct RMCWeatherScreenOverlayRadii(float ClearX, float ClearY, float FullX, float FullY);
+
 [ByRefEvent]
 public readonly record struct RMCWeatherStartedEvent(MapId MapId, string Name, TimeSpan? Duration, bool AdminForced);
 

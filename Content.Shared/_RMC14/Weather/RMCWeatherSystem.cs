@@ -228,6 +228,57 @@ public sealed class RMCWeatherSystem : EntitySystem
         return true;
     }
 
+    public bool TryGetCurrentScreenOverlay(MapId mapId, out RMCWeatherScreenOverlay overlay)
+    {
+        overlay = RMCWeatherScreenOverlay.None;
+
+        var weatherQuery = EntityQueryEnumerator<RMCWeatherCycleComponent>();
+        while (weatherQuery.MoveNext(out var uid, out var cycle))
+        {
+            if (Transform(uid).MapID != mapId ||
+                cycle.State != RMCWeatherCycleState.Running ||
+                cycle.CurrentScreenOverlay == RMCWeatherScreenOverlay.None ||
+                (byte) cycle.CurrentScreenOverlay <= (byte) overlay)
+            {
+                continue;
+            }
+
+            overlay = cycle.CurrentScreenOverlay;
+        }
+
+        return overlay != RMCWeatherScreenOverlay.None;
+    }
+
+    public bool TryGetCurrentExamineRange(MapId mapId, out float range)
+    {
+        range = float.MaxValue;
+        var found = false;
+
+        var weatherQuery = EntityQueryEnumerator<RMCWeatherCycleComponent>();
+        while (weatherQuery.MoveNext(out var uid, out var cycle))
+        {
+            if (Transform(uid).MapID != mapId ||
+                cycle.State != RMCWeatherCycleState.Running ||
+                cycle.CurrentScreenOverlay == RMCWeatherScreenOverlay.None)
+            {
+                continue;
+            }
+
+            range = Math.Min(range, RMCWeatherScreenOverlayData.GetClearRange(cycle.CurrentScreenOverlay));
+            found = true;
+        }
+
+        return found;
+    }
+
+    public bool IsWeatherExposed(EntityUid uid)
+    {
+        if (!TryComp(uid, out TransformComponent? xform))
+            return false;
+
+        return IsWeatherExposed(uid, xform.MapID);
+    }
+
     public void HandleWeatherEffects(Entity<RMCWeatherCycleComponent> ent, RMCWeatherEvent weatherEvent)
     {
         if (weatherEvent.LightningChance <= 0 || weatherEvent.LightningEffects.Count <= 0)
