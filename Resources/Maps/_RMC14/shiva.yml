@@ -145,7 +145,6 @@ entities:
         cleansDecals: false
         weatherType: RMCStrataClearsky
         screenOverlay: Low
-        screenOverlayStyle: Snow
         duration: 600
         name: Snow
       - lightningSound: !type:SoundCollectionSpecifier
@@ -157,7 +156,6 @@ entities:
         cleansDecals: false
         weatherType: RMCStrataSnowing
         screenOverlay: Medium
-        screenOverlayStyle: Snow
         duration: 360
         name: Snowstorm
       - lightningSound: !type:SoundCollectionSpecifier
@@ -169,7 +167,6 @@ entities:
         cleansDecals: false
         weatherType: RMCStrataBlizzard
         screenOverlay: High
-        screenOverlayStyle: Snow
         duration: 240
         name: Blizzard
     - type: RMCAmbientLightEffects

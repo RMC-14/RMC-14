@@ -1,46 +1,18 @@
 light_mode unshaded;
 
-uniform highp vec3 primaryColor;
-uniform highp vec3 secondaryColor;
-uniform highp vec2 windDirection;
-uniform highp float noiseScale;
-uniform highp float noiseStrength;
 uniform highp vec2 clearHalfSize;
 uniform highp vec2 fullHalfSize;
 uniform highp float overlayAlpha;
 
-highp float hash(highp vec2 p) {
-    p = fract(p * vec2(127.13, 311.71));
-    p += dot(p, p + 37.21);
-    return fract(p.x * p.y);
-}
-
-highp float noise(highp vec2 p) {
-    highp vec2 i = floor(p);
-    highp vec2 f = fract(p);
-    highp float a = hash(i);
-    highp float b = hash(i + vec2(1.0, 0.0));
-    highp float c = hash(i + vec2(0.0, 1.0));
-    highp float d = hash(i + vec2(1.0, 1.0));
-    highp vec2 u = f * f * (3.0 - 2.0 * f);
-    return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
-}
-
 void fragment() {
-    highp vec2 flow = normalize(windDirection);
     highp vec2 pixelSize = vec2(1.0 / SCREEN_PIXEL_SIZE.x, 1.0 / SCREEN_PIXEL_SIZE.y);
     highp vec2 pixelCenter = pixelSize * 0.5;
-    highp vec2 screenUv = FRAGCOORD.xy / pixelSize;
     highp vec2 boxDelta = abs(FRAGCOORD.xy - pixelCenter);
     highp vec2 fadeSize = max(fullHalfSize - clearHalfSize, vec2(1.0, 1.0));
     highp vec2 axisT = clamp((boxDelta - clearHalfSize) / fadeSize, vec2(0.0, 0.0), vec2(1.0, 1.0));
     highp float t = max(axisT.x, axisT.y);
     highp float vignette = t * t * (3.0 - 2.0 * t);
-    highp float cloud = noise(screenUv * noiseScale + flow * TIME * 0.45);
-    highp float streak = smoothstep(0.6, 1.0,
-        noise(screenUv * vec2(noiseScale * 0.35, noiseScale * 2.6) + flow * TIME * 0.9));
-    highp float alpha = clamp(vignette * overlayAlpha * (1.0 + cloud * noiseStrength * 0.08 + streak * 0.02), 0.0, 1.0);
-    highp vec3 color = mix(primaryColor, secondaryColor, clamp(cloud * 0.2 + streak * 0.04, 0.0, 1.0));
+    highp float alpha = clamp(vignette * overlayAlpha, 0.0, 1.0);
 
-    COLOR = vec4(color, alpha);
+    COLOR = vec4(0.0, 0.0, 0.0, alpha);
 }

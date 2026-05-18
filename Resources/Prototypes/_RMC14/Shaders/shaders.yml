@@ -44,11 +44,6 @@
     light_whitepoint: 1.0
 
 - type: shader
-  id: RMCWeatherObstruction
-  kind: source
-  path: "/Textures/_RMC14/Shaders/weather_obstruction.swsl"
-
-- type: shader
   id: RMCWeatherPersonalOverlay
   kind: source
   path: "/Textures/_RMC14/Shaders/weather_personal_overlay.swsl"

@@ -39,7 +39,6 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     private Vector2 _drawClearHalfSize;
     private Vector2 _drawFullHalfSize;
     private float _drawAlpha;
-    private RMCWeatherObstructionStyle _drawStyle = RMCWeatherObstructionStyle.Neutral;
     private readonly HashSet<Entity<RMCBlockWeatherComponent>> _weatherBlockers = new();
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -69,12 +68,11 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     {
         var targetAlpha = 0f;
         _targetOverlay = RMCWeatherScreenOverlay.None;
-        if (TryGetOverlay(args, out var overlay, out var style, out var alpha, out var clearHalfSize, out var fullHalfSize))
+        if (TryGetOverlay(args, out var overlay, out var alpha, out var clearHalfSize, out var fullHalfSize))
         {
             _targetOverlay = overlay;
             targetAlpha = alpha;
             _drawOverlay = overlay;
-            _drawStyle = style;
             _drawClearHalfSize = clearHalfSize;
             _drawFullHalfSize = fullHalfSize;
         }
@@ -95,12 +93,6 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        var style = RMCWeatherOverlayHelpers.GetShaderStyle(_drawStyle);
-        _shader.SetParameter("primaryColor", style.Primary);
-        _shader.SetParameter("secondaryColor", style.Secondary);
-        _shader.SetParameter("windDirection", Vector2.Normalize(style.Wind));
-        _shader.SetParameter("noiseScale", style.NoiseScale);
-        _shader.SetParameter("noiseStrength", style.NoiseStrength);
         _shader.SetParameter("clearHalfSize", _drawClearHalfSize);
         _shader.SetParameter("fullHalfSize", _drawFullHalfSize);
         _shader.SetParameter("overlayAlpha", _drawAlpha);
@@ -113,13 +105,11 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     private bool TryGetOverlay(
         OverlayDrawArgs args,
         out RMCWeatherScreenOverlay overlay,
-        out RMCWeatherObstructionStyle style,
         out float alpha,
         out Vector2 clearHalfSize,
         out Vector2 fullHalfSize)
     {
         overlay = RMCWeatherScreenOverlay.None;
-        style = RMCWeatherObstructionStyle.Neutral;
         alpha = 0f;
         clearHalfSize = default;
         fullHalfSize = default;
@@ -145,7 +135,6 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
             return false;
 
         overlay = overlayContext.Overlay;
-        style = overlayContext.Style;
         (clearHalfSize, fullHalfSize) = GetPersonalOverlayRadii(args, overlay);
         alpha = RMCWeatherOverlayHelpers.GetWeatherAlpha(_entity, _weather, mapUid) * MaxOpacity;
         return alpha > 0f &&
