@@ -119,7 +119,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             PreQueue.GetOrNew(hive).Add(session, larvaWaitTime + ghost.TimeOfDeath.TotalSeconds);
             _popup.PopupEntity(
                 $"You have been added to the Pre-queue, until you have waited the required {larvaWaitTime} seconds",
-                actorEntity.Value);
+                actorEntity.Value, actorEntity.Value);
         }
     }
 
