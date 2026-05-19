@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: You can now change the icon label on pill bottles via the right click
-      menu!
-    type: Add
-  id: 2721
-  time: '2026-01-08T03:11:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8849
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed medical vendors on the colony not having random contents.
-    type: Fix
-  id: 2722
-  time: '2026-01-08T03:15:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8883
 - author: blueDev2
   changes:
   - message: Shot flares should no longer get stuck in walls
@@ -4479,5 +4464,20 @@
   id: 3220
   time: '2026-05-19T22:10:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9874
+- author: CyberTropic
+  changes:
+  - message: Fixed broken pipes on map inserts.
+    type: Fix
+  id: 3221
+  time: '2026-05-19T22:32:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9803
+- author: Drazamuffin
+  changes:
+  - message: The vendor bundle description for Combat Technician, Correspondent, and
+      Corpsman no longer lie about their contents.
+    type: Fix
+  id: 3222
+  time: '2026-05-19T22:33:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9553
 Name: RMC14
 Order: -1
