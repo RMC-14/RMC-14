@@ -112,7 +112,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         {
             Queue.GetOrNew(hive).Add(session);
             _popup.PopupEntity($"You have been added to the queue in the {Queue.GetOrNew(hive).Count} position",
-                actorEntity.Value);
+                actorEntity.Value, actorEntity.Value);
         }
         else
         {
