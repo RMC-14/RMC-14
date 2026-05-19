@@ -3,8 +3,7 @@ name: "Labels: Reviewed By Maintainer"
 on:
   pull_request:
     types:
-      - opened      # Labeler runs when a PR is filed,
-      - reopened    # when the PR is reopened,
+      - opened      # Labeler runs when a PR is filed
       - synchronize # and when commits are added.
 
   pull_request_review:
@@ -97,19 +96,13 @@ jobs:
           fi
 
           # ------------------------------------------------------------
-          # PR opened/reopened, keep the old status if it has one,
+          # PR opened, keep the old status if it has one,
           # otherwise set S: Needs Review.
           # ------------------------------------------------------------
           if [[ "$EVENT_NAME" == "pull_request" ]]; then
-            if [[ "$ACTION" == "opened" || "$ACTION" == "reopened" ]]; then
+            if [[ "$ACTION" == "opened" ]]; then
 
-              if ! has_label "$LABEL_CHANGES_REQUESTED" \
-                && ! has_label "$LABEL_NEEDS_APPROVAL" \
-                && ! has_label "$LABEL_PARTIAL_APPROVAL" \
-                && ! has_label "$LABEL_APPROVED"; then
-
-                set_status "$LABEL_NEEDS_APPROVAL"
-              fi
+              set_status "$LABEL_NEEDS_APPROVAL"
 
               exit 0
             fi
