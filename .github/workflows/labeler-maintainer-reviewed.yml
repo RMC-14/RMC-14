@@ -1,101 +1,169 @@
-name: "Labels: Reviewed By Maintainer"
+name: PR Status Labeler
 
 on:
+  pull_request:
+    types:
+      - opened      # Labeler runs when a PR is filed,
+      - reopened    # when the PR is reopened,
+      - synchronize # and when commits are added.
+
   pull_request_review:
-    types: [submitted, dismissed]
+    types:
+      - submitted   # Labeler also runs when a review is added.
+
+permissions:
+  pull-requests: write # Labeler must be able to read and write the pull request metadata.
 
 jobs:
   label:
-    runs-on: ubuntu-latest
+    # A single-core machine will do: https://docs.github.com/en/actions/reference/runners/github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+    runs-on: ubuntu-slim
+
+    env:
+      GH_TOKEN: ${{ github.token }} # Authenticate gh CLI which is pre-installed, see docs above.
+
+      # These are our label names.
+      LABEL_CHANGES_REQUESTED: "S: Awaiting Changes"
+      LABEL_NEEDS_APPROVAL: "S: Needs Review"
+      LABEL_PRE_APPROVED: "S: Partially Approved"
+      LABEL_APPROVED: "S: Approved"
 
     steps:
-    - name: Add Label Based On Review Type
-      uses: actions/github-script@v9
-      with:
-        script: |
-          const { owner, repo } = context.repo;
-          const review = context.payload.review;
-          const pr = context.payload.pull_request;
+      - name: Update labels
+        shell: bash
+        run: |
+          # Enable bash strict mode.
+          set -euo pipefail
 
-          const state = review.state;
-          const username = review.user.login;
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          EVENT_NAME="${{ github.event_name }}"
+          ACTION="${{ github.event.action }}"
 
-          if (!["approved", "changes_requested", "dismissed"].includes(state)) {
-            console.log(`Skipping review type: ${state}.`);
-            return;
+          ALL_LABELS=(
+            "$LABEL_CHANGES_REQUESTED"
+            "$LABEL_NEEDS_APPROVAL"
+            "$LABEL_PRE_APPROVED"
+            "$LABEL_APPROVED"
+          )
+
+          # ------------------------------------------------------------
+          # Utility functions
+          # ------------------------------------------------------------
+          get_labels() {
+            gh pr view "$PR_NUMBER" \
+              --json labels \
+              --jq '.labels[].name'
           }
 
-          console.log(`Processing review type: ${state}.`);
+          has_label() {
+            local target="$1"
 
-          const approvedLabel = "S: Approved";
-          const partiallyApprovedLabel = "S: Partially Approved";
-          const changesRequestedLabel = "S: Awaiting Changes";
+            while IFS= read -r label; do
+              [[ "$label" == "$target" ]] && return 0
+            done < <(get_labels)
 
-          async function removeLabel(name) {
-            try {
-              console.log(`Removing label: ${name}.`)
-              await github.rest.issues.removeLabel({
-                owner,
-                repo,
-                issue_number: pr.number,
-                name,
-              });
-            } catch (e) {
-              console.log(`removeLabel failed for ${name}: ${e.message}`);
-            }
+            return 1
           }
 
-          async function addLabel(name) {
-            console.log(`Adding label: ${name}.`)
-            await github.rest.issues.addLabels({
-              owner,
-              repo,
-              issue_number: pr.number,
-              labels: [name],
-            });
+          remove_all_status_labels() {
+            local existing=()
+
+            while IFS= read -r label; do
+              existing+=("$label")
+            done < <(get_labels)
+
+            for status in "${ALL_LABELS[@]}"; do
+              for current in "${existing[@]}"; do
+                if [[ "$current" == "$status" ]]; then
+                  gh pr edit "$PR_NUMBER" --remove-label "$status"
+                fi
+              done
+            done
           }
 
-          if (state === "dismissed") {
-            await removeLabel(approvedLabel);
-            await removeLabel(partiallyApprovedLabel);
-            return;
+          set_status() {
+            local label="$1"
+
+            remove_all_status_labels
+
+            gh pr edit "$PR_NUMBER" --add-label "$label"
+
+            echo "Set PR status: $label"
           }
 
-          const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
-            owner,
-            repo,
-            username,
-          });
+          # ------------------------------------------------------------
+          # If a new commit is pushed, set to needs approval.
+          # (GitHub dismisses all reviews on the HEAD commit anyways.)
+          # ------------------------------------------------------------
+          if [[ "$EVENT_NAME" == "pull_request" && "$ACTION" == "synchronize" ]]; then
+            set_status "$LABEL_NEEDS_APPROVAL"
+            exit 0
+          fi
 
-          const permission = data.permission;
-          if (!["write", "maintain", "admin"].includes(permission)) {
-            console.log(`Skipping ${username}, permission: ${permission}`);
-            return;
-          }
+          # ------------------------------------------------------------
+          # PR opened/reopened, keep the old status if it has one,
+          # otherwise set S: Needs Review.
+          # ------------------------------------------------------------
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            if [[ "$ACTION" == "opened" || "$ACTION" == "reopened" ]]; then
 
-          if (state === "changes_requested") {
-            await removeLabel(approvedLabel);
-            await addLabel(changesRequestedLabel);
-            return;
-          }
+              if ! has_label "$LABEL_CHANGES_REQUESTED" \
+                && ! has_label "$LABEL_NEEDS_APPROVAL" \
+                && ! has_label "$LABEL_PRE_APPROVED" \
+                && ! has_label "$LABEL_APPROVED"; then
 
-          if (state === "approved") {
-            const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({
-              owner,
-              repo,
-              issue_number: pr.number,
-            });
+                set_status "$LABEL_NEEDS_APPROVAL"
+              fi
 
-            const labels = new Set(currentLabels.map(l => l.name));
+              exit 0
+            fi
+          fi
 
-            if (!labels.has(partiallyApprovedLabel) && !labels.has(approvedLabel)) {
-              await addLabel(partiallyApprovedLabel);
-              return;
-            }
+          # ------------------------------------------------------------
+          # Review submitted
+          # ------------------------------------------------------------
+          if [[ "$EVENT_NAME" == "pull_request_review" ]]; then
+            REVIEW_AUTHOR_ASSOCIATION="${{ github.event.review.author_association }}"
 
-            if (labels.has(partiallyApprovedLabel) && !labels.has(approvedLabel)) {
-              await removeLabel(changesRequestedLabel);
-              await removeLabel(partiallyApprovedLabel);
-              await addLabel(approvedLabel);
-            }
-          }
+            # Filter for write access
+            case "$REVIEW_AUTHOR_ASSOCIATION" in
+              OWNER|MEMBER|COLLABORATOR)
+                echo "Trusted reviewer (Association: $REVIEW_AUTHOR_ASSOCIATION )"
+                ;;
+              *)
+                echo "Ignoring review from non-writer (Association: $REVIEW_AUTHOR_ASSOCIATION )"
+                exit 0
+                ;;
+            esac
+
+            REVIEW_STATE="${{ github.event.review.state }}"
+
+            # changes_requested
+            if [[ "$REVIEW_STATE" == "changes_requested" ]]; then
+              set_status "$LABEL_CHANGES_REQUESTED"
+              exit 0
+            fi
+
+            # approved
+            if [[ "$REVIEW_STATE" == "approved" ]]; then
+
+              # Never move away from changes requested on a review,
+              # the label is there for a reason
+              if has_label "$LABEL_CHANGES_REQUESTED"; then
+                echo "PR is in Changes requested; ignoring approval"
+                exit 0
+              fi
+
+              # Needs approval -> Pre-approved
+              if has_label "$LABEL_NEEDS_APPROVAL"; then
+                set_status "$LABEL_PRE_APPROVED"
+                exit 0
+              fi
+
+              # Pre-approved -> Approved
+              if has_label "$LABEL_PRE_APPROVED"; then
+                set_status "$LABEL_APPROVED"
+                exit 0
+              fi
+            fi
+          fi
