@@ -638,20 +638,28 @@ public sealed class RMCWeatherSystem : EntitySystem
             _audio.PlayGlobal(_audio.ResolveSound(warningSound), Filter.BroadcastMap(mapId), true);
 
         var displayName = GetEventDisplayName(weatherEvent);
+        bool IsOnWeatherMap(EntityUid uid) =>
+            TryComp(uid, out TransformComponent? xform) &&
+            xform.MapID == mapId;
+
         var marineMessage = Loc.GetString("rmc-weather-warning-marine", ("weather", displayName));
-        var marineFilter = Filter.BroadcastMap(mapId).AddWhereAttachedEntity(e =>
-            HasComp<MarineComponent>(e) ||
-            HasComp<GhostComponent>(e));
+        var marineFilter = Filter.Empty().AddWhereAttachedEntity(e =>
+            IsOnWeatherMap(e) &&
+            HasComp<MarineComponent>(e));
 
         _marineAnnounce.AnnounceToMarines(marineMessage, MarineWeatherWarningSound, marineFilter);
 
         var xenoMessage = Loc.GetString("rmc-weather-warning-xeno", ("weather", displayName));
-        var xenoFilter = Filter.BroadcastMap(mapId).AddWhereAttachedEntity(HasComp<XenoComponent>);
+        var xenoFilter = Filter.Empty().AddWhereAttachedEntity(e =>
+            IsOnWeatherMap(e) &&
+            HasComp<XenoComponent>(e));
+
         _xenoAnnounce.Announce(default,
             xenoFilter,
             xenoMessage,
             _xenoAnnounce.WrapHive(xenoMessage),
-            XenoWeatherWarningSound);
+            XenoWeatherWarningSound,
+            includeGhosts: false);
     }
 
     private bool TryPlayPhysicalWeatherSirens(MapId mapId, RMCWeatherEvent weatherEvent)
