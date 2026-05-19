@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: CMB Deputy survivors now have a radio prefix.
-    type: Add
-  id: 2713
-  time: '2026-01-08T03:00:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8799
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed access granted by the ID console mispredicting by making an access
-      denied sound even if you had the proper access.
-    type: Fix
-  id: 2714
-  time: '2026-01-08T03:01:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8775
 - author: monomethylhydrazine
   changes:
   - message: Fixed WeYa PMC synthetics not being automatically assigned to the PMC
@@ -4475,5 +4460,22 @@
   id: 3212
   time: '2026-05-18T00:50:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9756
+- author: kleinerstation13
+  changes:
+  - message: Survivors now spawn together instead of separately on Sorokyne Strata.
+      Their holdout locations include Security, South Engineering and Aerodrom.
+    type: Tweak
+  id: 3213
+  time: '2026-05-19T15:14:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9870
+- author: kleinerstation13
+  changes:
+  - message: Fixes SPP SOF specialist not spawning in correctly
+    type: Fix
+  - message: Fixes SPP SOF composite helmet and beret using incorrect icon sprites
+    type: Fix
+  id: 3214
+  time: '2026-05-19T15:14:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9882
 Name: RMC14
 Order: -1
