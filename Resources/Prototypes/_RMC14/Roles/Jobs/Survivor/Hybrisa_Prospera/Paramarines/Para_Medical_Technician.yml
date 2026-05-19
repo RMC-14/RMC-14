@@ -24,7 +24,7 @@
       - type: TacticalMapIcon
         icon:
           sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
-          state: rmc_medic
+          state: rcm_medic
         background:
           sprite: /Textures/_RMC14/Interface/TacMap_Icons/tse.rsi
           state: background_para

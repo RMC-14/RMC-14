@@ -70,5 +70,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalSmartgunnerPVE
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/Hud_Icons/PVE/rcm.rsi
     state: rcm_pve_smartgunner
