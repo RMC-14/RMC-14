@@ -967,6 +967,9 @@
     },
     {
       "name": "spp_civ"
+    },
+    {
+      "name": "wy_pilot"
     }
   ]
 }
