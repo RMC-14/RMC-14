@@ -82,6 +82,8 @@ jobs:
 
           set_status() {
             local label="$1"
+            echo $1
+            echo $label
 
             remove_all_status_labels
 
@@ -89,6 +91,12 @@ jobs:
 
             echo "Set PR status: $label"
           }
+
+          ##############################################################
+          # BUSINESS LOGIC STARTS HERE                                 #
+          ##############################################################
+          echo "Processing event type: ${EVENT_NAME}"
+          echo "Processing action: ${ACTION}"
 
           # ------------------------------------------------------------
           # If a new commit is pushed, set to needs approval.
