@@ -97,19 +97,11 @@
     outerClothing: RMCOuterClothingExternalWebbing
     jumpsuit: RMCJumpsuitCOUniformGray
     eyes: RMCSunglasses
-  inhand:
-  - RMCLaserDesignator
 
 - type: loadout
   id: COCareerPathIntelRMC
   dummyEntity: RMCLoadoutDummyCareerPathIntel
   cost: 0
-  # effects:
-  # - !type:JobRequirementLoadoutEffect
-  #   requirement:
-  #     !type:RoleTimeRequirement
-  #     role: CMJobIntelOfficer
-  #     time: 36000 # 10 hours
   equipment:
     head: CMHeadBeretCOBlack
     gloves: CMHandsBlackMarineColorless
@@ -121,12 +113,6 @@
   id: COCareerPathMedicalRMC
   dummyEntity: RMCLoadoutDummyCareerPathMedical
   cost: 0
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:TotalJobsTimeRequirement
-      group: CMJobsMedical
-      time: 18000 # 5 hours
   equipment:
     head: CMHeadBeretCOWhite
     gloves: CMHandsWhite
@@ -138,12 +124,6 @@
   id: COCareerPathAviationRMC
   dummyEntity: RMCLoadoutDummyCareerPathAviation
   cost: 0
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:TotalJobsTimeRequirement
-      group: CMJobsDropship
-      time: 18000 # 5 hours
   equipment:
     head: CMHeadBeretCOBlack
     gloves: RMCHandsBlack
@@ -156,12 +136,6 @@
 #   id: COCareerPathTankerRMC
 #   dummyEntity: RMCLoadoutDummyCareerPathTanker
 #   cost: 0
-#   # effects:
-#   # - !type:JobRequirementLoadoutEffect
-#   #   requirement:
-#   #     !type:TotalJobsTimeRequirement
-#   #     group: CMTanker
-#   #     time: 36000 # 10 hours
 #   equipment:
 #     head: RMCHeadCapQuartermaster
 #     gloves: RMCHandsBlack
@@ -174,12 +148,6 @@
   id: COCareerPathEngineeringRMC
   dummyEntity: RMCLoadoutDummyCareerPathEngineering
   cost: 0
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:TotalJobsTimeRequirement
-      group: CMJobsEngineering
-      time: 18000 # 5 hours
   equipment:
     head: CMHeadBeretEngineer
     gloves: CMHandsInsulated
@@ -191,12 +159,6 @@
   id: COCareerPathLogisticsRMC
   dummyEntity: RMCLoadoutDummyCareerPathLogistics
   cost: 0
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:DepartmentTimeRequirement
-      department: CMRequisitions
-      time: 18000 # 5 hours
   equipment:
     head: CMHeadBeretTan
     gloves: CMHandsInsulated
