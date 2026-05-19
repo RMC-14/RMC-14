@@ -699,7 +699,9 @@ public sealed class RMCWeatherSystem : EntitySystem
     {
         var sirenCoords = _transform.GetMapCoordinates(sirenXform);
         var sirenPos = sirenCoords.Position;
-        var filter = Filter.Empty().AddInRange(sirenCoords, WeatherSirenPopupRange, entMan: EntityManager);
+        var filter = Filter.Empty()
+            .AddInRange(sirenCoords, WeatherSirenPopupRange, entMan: EntityManager)
+            .RemoveWhereAttachedEntity(HasComp<GhostComponent>);
         foreach (var session in filter.Recipients)
         {
             if (session.AttachedEntity is not { } recipient ||
@@ -865,6 +867,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         while (query.MoveNext(out var uid, out var mobState, out var damageable))
         {
             if (!_mobState.IsAlive(uid, mobState) ||
+                HasComp<GhostComponent>(uid) ||
                 Transform(uid).MapID != mapId ||
                 !IsWeatherExposed(uid, mapId))
             {
