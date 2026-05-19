@@ -111,7 +111,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         if ((_gameTiming.CurTime - ghost.TimeOfDeath).TotalSeconds >= larvaWaitTime)
         {
             Queue.GetOrNew(hive).Add(session);
-            _popup.PopupEntity($"You have been added to the queue in the {Queue.GetOrNew(hive).Count} position",
+            _popup.PopupEntity($"You have been added to the queue at position {Queue.GetOrNew(hive).Count}",
                 actorEntity.Value, actorEntity.Value);
         }
         else
@@ -141,14 +141,14 @@ public sealed class LarvaQueueSystem : EntitySystem
     {
         var list = Queue.GetOrNew(hive);
         var originalLength = list.Count;
-        if (list.Count < 0)
+        if (list.Count <= 0)
             return;
 
         BurstLarvaSpawn(hive);
         BurrowedLarvaSpawn(hive);
 
         //Popup to people in queue if the queue length changed.
-        if (originalLength >= list.Count)
+        if (list.Count >= originalLength)
             return;
 
         foreach (var netId in list)
@@ -156,7 +156,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             if (_player.TryGetSessionById(netId, out var session) && session.AttachedEntity != null)
             {
                 _popup.PopupEntity($"You are now in the {Queue.GetOrNew(hive).Count} position for larva queue.",
-                    session.AttachedEntity.Value);
+                    session.AttachedEntity.Value, session.AttachedEntity.Value);
             }
         }
     }
@@ -164,7 +164,7 @@ public sealed class LarvaQueueSystem : EntitySystem
     private void BurstLarvaSpawn(Entity<HiveComponent> hive)
     {
         var list = Queue.GetOrNew(hive);
-        if (list.Count < 0)
+        if (list.Count <= 0)
             return;
 
         var larva = EntityQueryEnumerator<LarvaQueuedComponent>();
@@ -172,11 +172,11 @@ public sealed class LarvaQueueSystem : EntitySystem
         {
             if (_mobState.IsDead(ent))
             {
-                RemComp<LarvaQueuedComponent>(ent);
+                RemCompDeferred<LarvaQueuedComponent>(ent);
                 continue;
             }
 
-            if (!TryComp(ent, out HiveMemberComponent? hiveMember) || hiveMember.Hive != hive.Owner)
+            if (!_hive.IsMember(ent, hive))
                 return;
 
             var tryFind = true;
@@ -191,9 +191,9 @@ public sealed class LarvaQueueSystem : EntitySystem
                     continue;
 
                 var newMind = _mind.CreateMind(session.UserId,
-                    EntityManager.GetComponent<MetaDataComponent>(ent).EntityName);
+                    MetaData(ent).EntityName);
                 _mind.TransferTo(newMind, ent, ghostCheckOverride: true);
-                RemComp<LarvaQueuedComponent>(ent);
+                RemCompDeferred<LarvaQueuedComponent>(ent);
                 tryFind = true;
             }
         }
@@ -202,11 +202,11 @@ public sealed class LarvaQueueSystem : EntitySystem
     private void BurrowedLarvaSpawn(Entity<HiveComponent> hive)
     {
         var list = Queue.GetOrNew(hive);
-        if (list.Count < 0)
+        if (list.Count <= 0)
             return;
 
         var amount = hive.Comp.BurrowedLarva;
-        if (amount < 1)
+        if (amount <= 0)
             return;
 
         for (var i = 0; i <= amount; i++)
@@ -234,7 +234,7 @@ public sealed class LarvaQueueSystem : EntitySystem
     /// <param name="netUserId">ID of the person we are removing</param>
     /// <param name="hive">The hive that we are removing them from the queue of</param>
     /// <returns></returns>
-    private bool RemoveFromQueue(NetUserId netUserId, Entity<HiveComponent> hive)
+    private bool TryRemoveFromQueue(NetUserId netUserId, Entity<HiveComponent> hive)
     {
         if (PreQueue.GetOrNew(hive).Remove(netUserId))
             return true;
@@ -275,25 +275,25 @@ public sealed class LarvaQueueSystem : EntitySystem
         var time = _gameTiming.CurTime;
 
         // Checking each pre queue to see if anyone has finished their timer.
-        foreach (var hive in PreQueue)
+        foreach (var (hive, hivePreQueue) in PreQueue)
         {
-            foreach (var user in hive.Value)
+            foreach (var (userId, userTime) in hivePreQueue)
             {
-                if (user.Value >= time.TotalSeconds)
+                if (userTime >= time.TotalSeconds)
                     continue;
-                Queue.GetOrNew(hive.Key).Add(user.Key);
+                Queue.GetOrNew(hive).Add(userId);
 
-                if (_player.TryGetSessionById(user.Key, out var session) && session.AttachedEntity != null)
+                if (_player.TryGetSessionById(userId, out var session) && session.AttachedEntity != null)
                 {
                     _popup.PopupEntity(
-                        $"You have been added to the queue in the {Queue.GetOrNew(hive.Key).Count} position",
-                        session.AttachedEntity.Value);
+                        $"You have been added to the queue at position {Queue.GetOrNew(hive).Count}",
+                        session.AttachedEntity.Value, session.AttachedEntity.Value);
                 }
 
-                hive.Value.Remove(user.Key);
+                hivePreQueue.Remove(userId);
             }
 
-            SpawnLarva(hive.Key);
+            SpawnLarva(hive);
         }
     }
 }
