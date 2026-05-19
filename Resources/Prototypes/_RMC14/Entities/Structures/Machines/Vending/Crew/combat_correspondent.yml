@@ -19,7 +19,6 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewCombatCorrespondent
-        name: Essential Reporter's Set
       - id: CMSatchel
         name: Leather Satchel
       - id: RMCCameraBroadcasting
