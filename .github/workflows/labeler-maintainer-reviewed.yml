@@ -22,18 +22,17 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }} # Authenticate gh CLI which is pre-installed, see docs above.
 
-      # These are our label names:
-      LABEL_CHANGES_REQUESTED: "S: Awaiting Changes"
-      LABEL_NEEDS_APPROVAL: "S: Needs Review"
-      LABEL_PRE_APPROVED: "S: Partially Approved"
-      LABEL_APPROVED: "S: Approved"
-
     steps:
       - name: Update labels
         shell: bash
         run: |
           # Enable bash strict mode.
           set -euo pipefail
+
+          LABEL_CHANGES_REQUESTED="S: Awaiting Changes"
+          LABEL_NEEDS_APPROVAL="S: Needs Review"
+          LABEL_PARTIAL_APPROVAL="S: Partially Approved"
+          LABEL_APPROVED="S: Approved"
 
           PR_NUMBER="${{ github.event.pull_request.number }}"
           EVENT_NAME="${{ github.event_name }}"
@@ -42,7 +41,7 @@ jobs:
           ALL_LABELS=(
             "$LABEL_CHANGES_REQUESTED"
             "$LABEL_NEEDS_APPROVAL"
-            "$LABEL_PRE_APPROVED"
+            "$LABEL_PARTIAL_APPROVAL"
             "$LABEL_APPROVED"
           )
 
@@ -109,7 +108,7 @@ jobs:
 
               if ! has_label "$LABEL_CHANGES_REQUESTED" \
                 && ! has_label "$LABEL_NEEDS_APPROVAL" \
-                && ! has_label "$LABEL_PRE_APPROVED" \
+                && ! has_label "$LABEL_PARTIAL_APPROVAL" \
                 && ! has_label "$LABEL_APPROVED"; then
 
                 set_status "$LABEL_NEEDS_APPROVAL"
@@ -156,12 +155,12 @@ jobs:
 
               # Needs approval -> Pre-approved
               if has_label "$LABEL_NEEDS_APPROVAL"; then
-                set_status "$LABEL_PRE_APPROVED"
+                set_status "$LABEL_PARTIAL_APPROVAL"
                 exit 0
               fi
 
               # Pre-approved -> Approved
-              if has_label "$LABEL_PRE_APPROVED"; then
+              if has_label "$LABEL_PARTIAL_APPROVAL"; then
                 set_status "$LABEL_APPROVED"
                 exit 0
               fi
