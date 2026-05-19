@@ -60,9 +60,6 @@ public sealed class QueenEyeSystem : EntitySystem
             VisibleTiles = _singleTiles,
         };
 
-        _swappableAction.RegisterEventFactory(SwappableActionEvent.XenoExpandWeeds, () => new XenoExpandWeedsActionEvent());
-        _swappableAction.RegisterInstantEventFactory(SwappableActionEvent.XenoPlantWeeds, () => new XenoPlantWeedsActionEvent());
-
         SubscribeLocalEvent<QueenEyeActionComponent, MapInitEvent>(OnQueenEyeActionMapInit);
         SubscribeLocalEvent<QueenEyeActionComponent, ComponentRemove>(OnQueenEyeActionRemove);
         SubscribeLocalEvent<QueenEyeActionComponent, EntityTerminatingEvent>(OnQueenEyeActionTerminating);
@@ -317,9 +314,6 @@ public sealed class QueenEyeSystem : EntitySystem
     {
         _swappableAction.SwapInstantToWorldTarget<XenoPlantWeedsActionEvent>(
             queen.Owner,
-            new XenoExpandWeedsActionEvent(),
-            SwappableActionEvent.XenoExpandWeeds,
-            SwappableActionEvent.XenoPlantWeeds,
             Loc.GetString("rmc-xeno-queen-eye-expand-weeds-name"),
             Loc.GetString("rmc-xeno-queen-eye-expand-weeds-desc"));
     }
