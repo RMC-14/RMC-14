@@ -1,29 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Corporate Colonists now get badges as playtime awards instead of ribbons.
-    type: Tweak
-  id: 2718
-  time: '2026-01-08T03:06:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8774
-- author: CatoChristopherMrow
-  changes:
-  - message: Admin ghosts filling sandbags no longer crash the server
-    type: Fix
-  id: 2719
-  time: '2026-01-08T03:08:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8836
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fix weya corporate security on hybrisa spawning without armor
-    type: Fix
-  - message: Fixed security survivors not always spawning with a primary weapon.
-    type: Fix
-  - message: Fixed Solaris Trucker survivor having the incorrect skillset.
-    type: Fix
-  id: 2720
-  time: '2026-01-08T03:09:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8750
 - author: Arykh
   changes:
   - message: You can now change the icon label on pill bottles via the right click
@@ -4480,5 +4455,29 @@
   id: 3217
   time: '2026-05-19T22:08:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9812
+- author: Vixting
+  changes:
+  - message: Girders are now full tiles.
+    type: Tweak
+  id: 3218
+  time: '2026-05-19T22:11:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9763
+- author: Vexerot
+  changes:
+  - message: Players can now press E to take their pistol out from their sidearm pouch.
+    type: Fix
+  id: 3219
+  time: '2026-05-19T22:10:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9846
+- author: BlueMoon059
+  changes:
+  - message: Adjusts the s8 4x telescopic scope description to no longer mention Armat.
+    type: Tweak
+  - message: Adjusts the PVE variant of the M42A2 shotgun case to no longer mention
+      Armat Battlefield Systems.
+    type: Tweak
+  id: 3220
+  time: '2026-05-19T22:10:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9874
 Name: RMC14
 Order: -1
