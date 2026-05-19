@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Access;
 using Content.Shared.Alert;
@@ -12,7 +13,7 @@ namespace Content.Shared._RMC14.Xenonids;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoSystem))]
-public sealed partial class XenoComponent : Component
+public sealed partial class XenoComponent : Component, IComponentDebug
 {
     [DataField(required: true), AutoNetworkedField]
     public ProtoId<JobPrototype> Role;
@@ -63,4 +64,27 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public XenoPheromones? IgnorePheromones;
+
+    public string GetDebugString()
+    {
+        return $"""
+            Role: {Role.Id}
+            ActionIds:
+              {string.Join("\r\n  ", ActionIds.Order())}
+            AccessLevels:
+              {string.Join("\r\n  ", AccessLevels.Order())}
+            Tier: {Tier}
+            HudOffset: {HudOffset}
+            ContributesToVictory: {ContributesToVictory}
+            CountedInSlots: {CountedInSlots}
+            BypassTierCount: {BypassTierCount}
+            ArmorAlert: {ArmorAlert.Id}
+            SpawnAtLeaderPoint: {SpawnAtLeaderPoint}
+            EmoteSounds: {EmoteSounds?.Id}
+            Sounds: {Sounds?.ID}
+            MuteOnSpawn: {MuteOnSpawn}
+            Visibility: {Visibility}
+            IgnorePheromones: {IgnorePheromones}
+            """;
+    }
 }

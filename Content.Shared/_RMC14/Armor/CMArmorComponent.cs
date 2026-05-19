@@ -4,7 +4,7 @@ namespace Content.Shared._RMC14.Armor;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(CMArmorSystem))]
-public sealed partial class CMArmorComponent : Component
+public sealed partial class CMArmorComponent : Component, IComponentDebug
 {
     // TODO RMC14 other types of armor
     [DataField, AutoNetworkedField]
@@ -32,4 +32,18 @@ public sealed partial class CMArmorComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool ImmuneToAP = false;
+
+    public string GetDebugString()
+    {
+        return $"""
+            XenoArmor: {XenoArmor}
+            FrontalArmor: {FrontalArmor}
+            SideArmor: {SideArmor}
+            Melee: {Melee}
+            Bullet: {Bullet}
+            Bio: {Bio}
+            ExplosionArmor: {ExplosionArmor}
+            ImmuneToAP: {ImmuneToAP}
+            """;
+    }
 }

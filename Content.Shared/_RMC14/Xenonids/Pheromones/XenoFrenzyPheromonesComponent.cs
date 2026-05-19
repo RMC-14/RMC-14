@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Xenonids.Pheromones;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedXenoPheromonesSystem))]
-public sealed partial class XenoFrenzyPheromonesComponent : Component
+public sealed partial class XenoFrenzyPheromonesComponent : Component, IComponentDebug
 {
     [DataField, AutoNetworkedField]
     public SpriteSpecifier Icon = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones_hud.rsi"), "frenzy");
@@ -28,4 +28,15 @@ public sealed partial class XenoFrenzyPheromonesComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<DamageGroupPrototype> DamageGroup = "Brute";
+
+    public string GetDebugString()
+    {
+        return $"""
+            Multiplier: {Multiplier}
+            AttackDamageAddPerMult: {AttackDamageAddPerMult}
+            MovementSpeedModifier: {MovementSpeedModifier}
+            PullMovementSpeedModifier: {PullMovementSpeedModifier}
+            DamageGroup: {DamageGroup}
+            """;
+    }
 }

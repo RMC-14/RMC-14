@@ -1,7 +1,12 @@
+using System.Data.SqlTypes;
 using System.Numerics;
 using Content.Shared._RMC14.Fireman;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Crest;
+using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
@@ -22,15 +27,12 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
-using Content.Shared._RMC14.Synth;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Dynamics.Joints;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Xenonids.Crest;
-using Content.Shared._RMC14.Xenonids.Fortify;
-using Content.Shared._RMC14.Stun;
-using Content.Shared.IdentityManagement;
 
 namespace Content.Shared._RMC14.Pulling;
 
@@ -64,10 +66,12 @@ public sealed class RMCPullingSystem : EntitySystem
     private const string PullEffect = "CMEffectGrab";
 
     private EntityQuery<FiremanCarriableComponent> _firemanQuery;
+    private EntityQuery<JointComponent> _jointQuery;
 
     public override void Initialize()
     {
         _firemanQuery = GetEntityQuery<FiremanCarriableComponent>();
+        _jointQuery = GetEntityQuery<JointComponent>();
 
         SubscribeLocalEvent<BuckleComponent, RMCGetPullTargetEvent>(OnGetPullTarget);
 
@@ -93,8 +97,12 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStoppedMessage>(OnPreventPulledWhileAliveStop);
 
         SubscribeLocalEvent<PullableComponent, PullStartedMessage>(OnPullAnimation);
+        SubscribeLocalEvent<PullableComponent, XenoChangingPrototypeEvent>(OnPullableXenoChangingPrototype);
+        SubscribeLocalEvent<PullableComponent, AfterXenoChangedPrototypeEvent>(OnPullableAfterXenoChangedPrototype);
 
         SubscribeLocalEvent<PullerComponent, PullStoppedMessage>(OnPullerPullStopped);
+        SubscribeLocalEvent<PullerComponent, XenoChangingPrototypeEvent>(OnPullerXenoChangingPrototype);
+        SubscribeLocalEvent<PullerComponent, AfterXenoChangedPrototypeEvent>(OnPullerAfterXenoChangedPrototype);
 
         SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
     }
@@ -454,6 +462,38 @@ public sealed class RMCPullingSystem : EntitySystem
         PlayPullEffect(args.PullerUid, args.PulledUid);
     }
 
+    private void OnPullableXenoChangingPrototype(Entity<PullableComponent> xeno, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<PullableComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is PullableComponent { } newComponent)
+        {
+            xeno.Comp.FixedRotationOnPull = newComponent.FixedRotationOnPull;
+            xeno.Comp.PrevFixedRotation = newComponent.PrevFixedRotation;
+            xeno.Comp.PulledAlert = newComponent.PulledAlert;
+
+            args.AdditionalExclusions.Add(compName);
+        }
+        else
+        {
+            // Lost pullable component, stop being pulled if applicable
+            _pulling.TryStopPull(xeno, xeno.Comp);
+        }
+    }
+
+    private void OnPullableAfterXenoChangedPrototype(Entity<PullableComponent> xeno, ref AfterXenoChangedPrototypeEvent args)
+    {
+        if (!xeno.Comp.BeingPulled)
+            return;
+
+        // In order to re-check if the pull is allowed and refresh all applicable modifications,
+        // stop being pulled and try to restart it.
+        var puller = xeno.Comp.Puller;
+        if (puller != null)
+        {
+            RestartPull((puller.Value, null), xeno.AsNullable());
+        }
+    }
+
     private void OnBeingPulledPullStopped(Entity<BeingPulledComponent> ent, ref PullStoppedMessage args)
     {
         if (args.PulledUid != ent.Owner)
@@ -472,6 +512,74 @@ public sealed class RMCPullingSystem : EntitySystem
 
         if (!_timing.ApplyingState && !HasComp<MouseRotatorComponent>(ent))
             RemCompDeferred<NoRotateOnMoveComponent>(ent);
+    }
+
+    private void OnPullerXenoChangingPrototype(Entity<PullerComponent> xeno, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<PullerComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is PullerComponent { } newComponent)
+        {
+            xeno.Comp.NeedsHands = newComponent.NeedsHands;
+            xeno.Comp.ThrowCooldown = newComponent.ThrowCooldown;
+
+            args.AdditionalExclusions.Add(compName);
+        }
+        else if(xeno.Comp.Pulling.HasValue
+            && TryComp(xeno.Comp.Pulling, out PullableComponent? pullable))
+        {
+            // Lost puller component, stop pulling.
+            _pulling.TryStopPull(xeno.Comp.Pulling.Value, pullable);
+        }
+    }
+
+    private void OnPullerAfterXenoChangedPrototype(Entity<PullerComponent> xeno, ref AfterXenoChangedPrototypeEvent args)
+    {
+        // In order to re-check if the pull is allowed and refresh all applicable modifications,
+        // stop pulling and try to restart it.
+        var pulling = xeno.Comp.Pulling;
+        if (pulling != null
+            && TryComp(pulling, out PullableComponent? pullable))
+        {
+            RestartPull(xeno.AsNullable(), (pulling.Value, pullable));
+        }
+    }
+
+    /// <summary>
+    /// Stops and starts a pull, retaining the same pull join length.
+    /// </summary>
+    /// <param name="puller"></param>
+    /// <param name="pullable"></param>
+    private void RestartPull(Entity<PullerComponent?> puller, Entity<PullableComponent?> pullable)
+    {
+        if (!Resolve(puller, ref puller.Comp)
+            || !Resolve(pullable, ref pullable.Comp))
+        {
+            return;
+        }
+
+        if(puller.Comp.Pulling == pullable.Owner
+            && pullable.Comp.Puller == puller.Owner
+            && pullable.Comp.PullJointId != null
+            && _jointQuery.TryGetComponent(pullable, out var jointComp)
+            && jointComp.GetJoints.TryGetValue(pullable.Comp.PullJointId, out var joint)
+            && joint is DistanceJoint { } distanceJoint)
+        {
+            var originalLength = distanceJoint.Length;
+            var originalMax = distanceJoint.MaxLength;
+
+            _pulling.TryStopPull(puller.Comp.Pulling.Value, pullable.Comp);
+            if (!_pulling.TryStartPull(puller, pullable, puller, pullable))
+                return;
+
+            if(pullable.Comp.PullJointId != null
+                && _jointQuery.TryGetComponent(pullable, out var newJointComp)
+                && newJointComp.GetJoints.TryGetValue(pullable.Comp.PullJointId, out var newJoint)
+                && newJoint is DistanceJoint { } newDistanceJoint)
+            {
+                newDistanceJoint.Length = originalLength;
+                newDistanceJoint.MaxLength = originalMax;
+            }
+        }
     }
 
     public bool IsPulling(Entity<PullerComponent?> user, Entity<PullableComponent?> target)

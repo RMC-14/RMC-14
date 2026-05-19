@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
@@ -121,6 +122,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         SubscribeLocalEvent<FlammableComponent, IgnitedEvent>(OnFlammableIgnite);
         SubscribeLocalEvent<FlammableComponent, RMCExtinguishedEvent>(OnFlammableExtinguished);
+        SubscribeLocalEvent<FlammableComponent, XenoChangingPrototypeEvent>(OnFlammableChangingCaste);
 
         SubscribeLocalEvent<PlasmaFrenzyComponent, IgnitedEvent>(OnPlasmaFrenzyIgnite);
 
@@ -368,6 +370,18 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         RemCompDeferred<OnFireComponent>(ent);
         RemCompDeferred<RMCFireBypassActiveComponent>(ent);
+    }
+
+    private void OnFlammableChangingCaste(Entity<FlammableComponent> ent, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<FlammableComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is FlammableComponent { } newComponent)
+        {
+            newComponent.FireStacks = ent.Comp.FireStacks;
+            newComponent.OnFire = ent.Comp.OnFire;
+            newComponent.Intensity = ent.Comp.Intensity;
+            newComponent.Duration = ent.Comp.Duration;
+        }
     }
 
     public void UpdateFireAlert(EntityUid ent)

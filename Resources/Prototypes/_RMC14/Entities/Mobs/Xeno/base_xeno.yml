@@ -129,9 +129,27 @@
     noRot: true
     drawdepth: Mobs
     layers:
-    - map: [ "enum.XenoVisualLayers.Base" ]
+    - map: [ "enum.XenoVisualLayers.Base", "enum.ForTheHiveVisualLayers.Base", "enum.XenoShardVisualLayers.Base" ]
       state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
+    - map: [ "enum.XenoHealerVisualLayers.Goop" ]
+      visible: false
+    - map: [ "enum.XenoFruitVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoEggStorageVisualLayers.Base" ]
+      visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoAcidGeneratingVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.RightArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Head" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.LeftArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Back" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
@@ -173,6 +191,7 @@
   - type: Body
     prototype: Xenonid
   - type: Xeno
+  - type: XenoPrototype
   - type: XenoRegen
   - type: XenoStateVisuals
   - type: UserInterface
@@ -458,12 +477,14 @@
     - DoorBumpOpener
   - type: Hands
     examineShowEmpty: false
-  - type: GiveHands
     hands:
-    - name: Right Hand
-      location: Right
-    - name: Left Hand
-      location: Left
+      hand_right:
+        location: Right
+      hand_left:
+        location: Left
+    sortedHands:
+    - hand_right
+    - hand_left
   - type: WhitelistPickup
     whitelist:
       components:
@@ -522,3 +543,34 @@
   name: chat-speech-verb-name-default
   speechVerbStrings:
   - hisses
+
+- type: cloningSettings
+  id: XenoClone
+  excludeComponents:
+  # components that all xenos have defined but must NOT
+  # be replaced with fresh versions (keep current state)
+  - XenoPrototype
+  - Physics
+  - Climbing
+  - InputMover
+  - ActiveInputMover
+  - LagCompensation
+  - MobMover
+  - MindContainer
+  - StatusEffects
+  - HiveTracker
+  - Actions
+  - AffectableByWeeds
+  - Appearance
+  - Alerts
+  - NightVision
+  # hivemind status shouldn't change
+  - IntrinsicRadioReceiver
+  - IntrinsicRadioTransmitter
+  - ActiveRadio
+  - UserInterface
+  - NpcFactionMember
+  - EmoteCooldown
+  - AssignXenoName # don't rename the xeno
+  - TacticalMapUser
+  - Eye

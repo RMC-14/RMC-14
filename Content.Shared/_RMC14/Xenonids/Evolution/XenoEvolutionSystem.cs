@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Announce;
@@ -8,18 +9,18 @@ using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Systems;
+using Content.Shared.Cloning;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
-using Content.Shared.Doors.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Jittering;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
@@ -28,9 +29,12 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Evolution;
@@ -49,7 +53,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -57,10 +63,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly IMapManager _map = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private readonly ISerializationManager _serManager = default!;
+    [Dependency] private readonly FixtureSystem _fixtures = default!;
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
@@ -73,23 +82,35 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
 
+    private FrozenSet<string>? _xenoComponents = null;
+
+    public readonly ProtoId<CloningSettingsPrototype> CloningSettingsId = "XenoClone";
+
     public override void Initialize()
     {
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
+        SubscribeLocalEvent<FixturesComponent, XenoChangingPrototypeEvent>(OnFixturesXenoChangingPrototype);
+        SubscribeLocalEvent<FixturesComponent, AfterXenoChangedPrototypeEvent>(OnFixturesAfterXenoChangedPrototype);
+
         SubscribeLocalEvent<XenoDevolveComponent, XenoOpenDevolveActionEvent>(OnXenoOpenDevolveAction);
 
+        SubscribeLocalEvent<XenoPrototypeComponent, MapInitEvent>(OnXenoPrototypeMapInit);
+
         SubscribeLocalEvent<XenoEvolutionComponent, MapInitEvent>(OnXenoEvolveMapInit);
+        SubscribeLocalEvent<XenoEvolutionComponent, ComponentShutdown>(OnXenoEvolveShutdown);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoOpenEvolutionsActionEvent>(OnXenoEvolveAction);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
-        SubscribeLocalEvent<XenoEvolutionComponent, NewXenoEvolvedEvent>(OnXenoEvolutionNewEvolved);
-        SubscribeLocalEvent<XenoEvolutionComponent, XenoDevolvedEvent>(OnXenoEvolutionDevolved);
+        SubscribeLocalEvent<XenoEvolutionComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
+        SubscribeLocalEvent<XenoEvolutionComponent, AfterXenoChangedCasteEvent>(OnAfterXenoChangedCaste);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
 
-        SubscribeLocalEvent<XenoEvolutionGranterComponent, NewXenoEvolvedEvent>(OnGranterEvolved);
+        SubscribeLocalEvent<XenoEvolutionGranterComponent, AfterXenoChangedCasteEvent>(OnGranterEvolved);
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
+
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
 
         Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key,
             subs =>
@@ -108,6 +129,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v => _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEvolveSameCasteCooldownSeconds, v => _evolveSameCasteCooldown = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEarlyEvoPointBoostBeforeMinutes, v => _earlyEvoBoostBefore = TimeSpan.FromMinutes(v), true);
+
+        ReloadXenoComponents();
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -122,9 +145,20 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _ui.OpenUi(xeno.Owner, XenoDevolveUIKey.Key, xeno);
     }
 
+    private void OnXenoPrototypeMapInit(Entity<XenoPrototypeComponent> xeno, ref MapInitEvent args)
+    {
+        xeno.Comp.TargetPrototypeId = MetaData(xeno).EntityPrototype?.ID;
+        Dirty(xeno);
+    }
+
     private void OnXenoEvolveMapInit(Entity<XenoEvolutionComponent> ent, ref MapInitEvent args)
     {
         _action.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
+    }
+
+    private void OnXenoEvolveShutdown(Entity<XenoEvolutionComponent> ent, ref ComponentShutdown ev)
+    {
+        _action.RemoveAction(ent.Comp.Action);
     }
 
     private void OnXenoEvolveAction(Entity<XenoEvolutionComponent> xeno, ref XenoOpenEvolutionsActionEvent args)
@@ -218,16 +252,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (!DamagedCheckPopup(xeno, false))
             return;
 
-        var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno, newXeno, false);
-        RaiseLocalEvent(newXeno, ref ev, true);
+        var ev = new AfterXenoChangedCasteEvent(xeno, xeno.Comp.Points, false);
+        ChangeCaste(xeno, args.Choice);
+        RaiseLocalEvent(xeno, ref ev, true);
 
-        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {ToPrettyString(newXeno)}");
-
-        Del(xeno.Owner);
-
-        var afterEv = new AfterNewXenoEvolvedEvent();
-        RaiseLocalEvent(newXeno, ref afterEv);
+        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {args.Choice.ToString()}");
     }
 
     private void OnXenoDevolveBui(Entity<XenoDevolveComponent> xeno, ref XenoDevolveBuiMsg args)
@@ -247,41 +276,52 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
         }
 
-        args.Handled = true;
+        var newPointTotal = FixedPoint2.Max(0, xeno.Comp.Points - xeno.Comp.Max);
+        var ev = new AfterXenoChangedCasteEvent(xeno, newPointTotal, false);
+        ChangeCaste(xeno, args.Choice);
+        RaiseLocalEvent(xeno, ref ev, true);
 
-        var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno, newXeno, true);
-        RaiseLocalEvent(newXeno, ref ev, true);
+        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} evolved into proto {args.Choice.ToString()}");
 
-        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} evolved into {ToPrettyString(newXeno)}");
-
-        Del(xeno.Owner);
-
-        _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), newXeno, newXeno);
-
-        var afterEv = new AfterNewXenoEvolvedEvent();
-        RaiseLocalEvent(newXeno, ref afterEv);
+        _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), xeno, xeno);
     }
 
-    private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
+    private void OnXenoChangingPrototype(Entity<XenoEvolutionComponent> xeno, ref XenoChangingPrototypeEvent args)
     {
-        TransferPoints((args.OldXeno, args.OldXeno), xeno, args.SubtractPoints);
-        _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
+        var compName = EntityManager.ComponentFactory.GetComponentName<XenoEvolutionComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoEvolutionComponent { } newComponent)
+        {
+            // transfer points over.
+            // points are deducted when handling AfterXenoChangedCasteEvent, as only the
+            // caller of ChangeCaste knows how many points to deduct.
+            newComponent.Points = xeno.Comp.Points;
+            newComponent.LastPointsAt = xeno.Comp.LastPointsAt;
+        }
     }
 
-    private void OnXenoEvolutionDevolved(Entity<XenoEvolutionComponent> xeno, ref XenoDevolvedEvent args)
+    private void OnFixturesXenoChangingPrototype(Entity<FixturesComponent> xeno, ref XenoChangingPrototypeEvent args)
     {
-        TransferPoints(args.OldXeno, (xeno, xeno), false);
+        // TODO RMC14 I'm unsure of why the fixtures aren't properly removed when the FixturesComponent is removed,
+        // but it causes some issues in the physics system. We remove them here.
+        foreach (var id in xeno.Comp.Fixtures.Keys)
+        {
+            _fixtures.DestroyFixture(xeno, id);
+        }
     }
 
-    private void TransferPoints(Entity<XenoEvolutionComponent?> old, Entity<XenoEvolutionComponent> xeno, bool subtract)
+    private void OnFixturesAfterXenoChangedPrototype(Entity<FixturesComponent> xeno, ref AfterXenoChangedPrototypeEvent args)
     {
-        if (!Resolve(old, ref old.Comp, false))
-            return;
+        _fixtures.FixtureUpdate(xeno, manager: xeno.Comp);
+        _physics.WakeBody(xeno, manager: xeno.Comp);
+    }
 
-        xeno.Comp.Points = subtract ? FixedPoint2.Max(0, old.Comp.Points - old.Comp.Max) : old.Comp.Points;
-
-        Dirty(xeno);
+    private void OnAfterXenoChangedCaste(Entity<XenoEvolutionComponent> xeno, ref AfterXenoChangedCasteEvent args)
+    {
+        xeno.Comp.Points = FixedPoint2.Max(0, args.NewPointTotal);
+        if (!args.Devolved)
+        {
+            _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
+        }
     }
 
     private void OnNewlyEvolvedPreventCollide(Entity<XenoNewlyEvolvedComponent> ent, ref PreventCollideEvent args)
@@ -290,7 +330,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnGranterEvolved(Entity<XenoEvolutionGranterComponent> ent, ref NewXenoEvolvedEvent args)
+    private void OnGranterEvolved(Entity<XenoEvolutionGranterComponent> ent, ref AfterXenoChangedCasteEvent args)
     {
         _xenoAnnounce.AnnounceSameHive(ent.Owner, Loc.GetString("rmc-new-queen"));
     }
@@ -305,6 +345,14 @@ public sealed class XenoEvolutionSystem : EntitySystem
         while (xenos.MoveNext(out var uid, out _, out _))
         {
             _ui.SetUiState(uid, XenoEvolutionUIKey.Key, state);
+        }
+    }
+
+    private void OnPrototypeReload(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<EntityPrototype>() || args.WasModified<CloningSettingsPrototype>())
+        {
+            ReloadXenoComponents();
         }
     }
 
@@ -572,47 +620,22 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return NeedsOvipositor() && !HasOvipositor();
     }
 
-    private EntityUid TransferXeno(EntityUid xeno, EntProtoId proto)
+    private void ChangeCaste(EntityUid xeno, EntProtoId protoId)
     {
-        var coordinates = _transform.GetMoverCoordinates(xeno);
-        var newXeno = Spawn(proto, coordinates);
-        _xenoHive.SetSameHive(xeno, newXeno);
+        // Only server can initiate changing a xeno's caste.
+        if (_net.IsClient)
+            return;
 
-        if (_mind.TryGetMind(xeno, out var mindId, out _))
-        {
-            _mind.TransferTo(mindId, newXeno);
-            _mind.UnVisit(mindId);
-        }
+        var protoComp = EnsureComp<XenoPrototypeComponent>(xeno);
+        protoComp.TargetPrototypeId = protoId;
+        EnsureXenoPrototype(xeno, protoId);
+        Dirty(xeno, protoComp);
 
-        foreach (var held in _hands.EnumerateHeld(xeno))
-        {
-            _hands.TryDrop(xeno, held);
-        }
-
-        // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
-        var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
-
-        _doors.Clear();
-        _entityLookup.GetEntitiesIntersecting(xeno, _doors);
-        foreach (var id in _doors)
-        {
-            if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
-                comp.StopCollide.Add(id);
-        }
-
-        var newRecently = EnsureComp<XenoRecentlyDevolvedComponent>(newXeno);
-        if (TryComp(xeno, out XenoRecentlyDevolvedComponent? oldRecently))
-        {
-            foreach (var (id, time) in oldRecently.Recent)
-            {
-                newRecently.Recent[id] = time;
-            }
-        }
-
+        var recently = EnsureComp<XenoRecentlyDevolvedComponent>(xeno);
         if (Prototype(xeno)?.ID is { } oldId)
-            newRecently.Recent[oldId] = _timing.CurTime;
+            recently.Recent[oldId] = _timing.CurTime;
 
-        return newXeno;
+        var comp = EnsureComp<XenoNewlyEvolvedComponent>(xeno);
     }
 
     private void TryDevolve(Entity<XenoDevolveComponent> xeno, EntProtoId to, bool damagedCheck = true)
@@ -620,34 +643,50 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (damagedCheck && !DamagedCheckPopup(xeno))
             return;
 
-        if (Devolve(xeno, to) is { } newXeno && _net.IsServer)
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
+        if (Devolve(xeno, to) && _net.IsServer)
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", xeno)), xeno, xeno, PopupType.LargeCaution);
     }
 
-    public EntityUid? Devolve(Entity<XenoDevolveComponent> xeno, EntProtoId to)
+    public bool Devolve(Entity<XenoDevolveComponent> xeno, EntProtoId to)
     {
         if (_net.IsClient ||
             !xeno.Comp.DevolvesTo.Contains(to))
         {
-            return null;
+            return false;
         }
 
-        var newXeno = TransferXeno(xeno, to);
-        var ev = new XenoDevolvedEvent(xeno, newXeno);
-        RaiseLocalEvent(newXeno, ref ev, true);
+        TryComp<XenoEvolutionComponent>(xeno, out var evoComp);
 
-        _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
+        var ev = new AfterXenoChangedCasteEvent(xeno.Owner, evoComp?.Points ?? 0, true);
+        ChangeCaste(xeno, to);
+        RaiseLocalEvent(xeno, ref ev, true);
 
-        Del(xeno.Owner);
+        _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {to.Id}");
 
-        var afterEv = new AfterNewXenoEvolvedEvent();
-        RaiseLocalEvent(newXeno, ref afterEv);
-
-        return newXeno;
+        return true;
     }
 
     public override void Update(float frameTime)
     {
+        var prototypedXenos = EntityQueryEnumerator<XenoPrototypeComponent, MetaDataComponent>();
+        while (prototypedXenos.MoveNext(out var uid, out var comp, out var meta))
+        {
+            if (!comp.TargetPrototypeId.HasValue)
+                continue;
+
+            if (!comp.CurrentPrototypeId.HasValue)
+            {
+                comp.CurrentPrototypeId = meta.EntityPrototype?.ID;
+            }
+
+            if (comp.CurrentPrototypeId != comp.TargetPrototypeId
+                && !EnsureXenoPrototype(uid, comp.TargetPrototypeId.Value))
+            {
+                // failed to ensure xeno prototype for some reason.
+                comp.TargetPrototypeId = null;
+            }
+        }
+
         var newly = EntityQueryEnumerator<XenoNewlyEvolvedComponent>();
         while (newly.MoveNext(out var uid, out var comp))
         {
@@ -765,5 +804,151 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 SetPoints((uid, comp), FixedPoint2.Max(comp.Points - gain, comp.Max));
             }
         }
+    }
+
+    public bool EnsureXenoPrototype(
+        Entity<XenoPrototypeComponent?> xeno,
+        EntProtoId newProtoId)
+    {
+        if (!Resolve(xeno.Owner, ref xeno.Comp))
+            return false;
+
+        var metadata = MetaData(xeno);
+        var oldProtoId = metadata.EntityPrototype?.ID;
+
+        Log.Debug($"Ensuring xeno prototype (currently {oldProtoId}) is {newProtoId} on tick {_timing.CurTick}.");
+
+        if (oldProtoId != null
+            && oldProtoId == newProtoId
+            && xeno.Comp.CurrentPrototypeId == newProtoId)
+        {
+            // Entity prototype is already what it should be, do nothing.
+            Log.Debug("Xeno is already the correct prototype.");
+            return true;
+        }
+
+        if (!_prototypes.TryIndex(CloningSettingsId, out var settings))
+        {
+            Log.Error($"Failed to load cloning prototype {CloningSettingsId}, unable to change xeno prototype.");
+            return false;
+        }
+
+        if(!_prototypes.TryIndex(newProtoId, out var newProto))
+        {
+            Log.Error($"Failed to load xeno prototype {newProtoId}, unable to change xeno prototype.");
+            return false;
+        }
+
+        if (_xenoComponents is not { } includeComponents)
+        {
+            Log.Error("Xeno components are not loaded, unable to change xeno prototype.");
+            return false;
+        }
+
+        var excludeComponents = settings.ExcludeComponents;
+        var additionalExclusions = new HashSet<string>();
+
+        xeno.Comp.TargetPrototypeId = newProtoId;
+        xeno.Comp.CurrentPrototypeId = newProtoId;
+        metadata.EntityPrototype = newProto;
+        _meta.SetEntityName(xeno, newProto.Name);
+        _meta.SetEntityDescription(xeno, newProto.Description);
+
+        var registryToAdd = _serManager.CreateCopy(newProto.Components, notNullableOverride: true);
+        foreach (var excluded in excludeComponents)
+        {
+            registryToAdd.Remove(excluded);
+        }
+        Log.Debug("Raising XenoChangingPrototypeEvent...");
+        var changingCasteEvent = new XenoChangingPrototypeEvent(xeno, newProto, registryToAdd, additionalExclusions);
+        RaiseLocalEvent(xeno, ref changingCasteEvent);
+        Log.Debug("Done with XenoChangingPrototypeEvent.");
+
+        Log.Debug("Removing additional exclusions from registry...");
+        foreach (var exclusion in additionalExclusions)
+        {
+            if (registryToAdd.Remove(exclusion))
+            {
+                Log.Debug($"   Removed {exclusion}");
+            }
+        }
+        Log.Debug("Addtional exclusions removed.");
+
+        Log.Debug("Adding components from registry...");
+        foreach (var componentName in registryToAdd.Keys)
+        {
+            Log.Debug($"   {componentName}");
+        }
+        // Add and overwrite components that are in the registry.
+        _entityManager.AddComponents(xeno, registryToAdd, true);
+        Log.Debug("Added components from registry.");
+
+        foreach (var cloneComponent in EntityManager.GetComponents(xeno))
+        {
+            // We have to remove components that the old xeno has defined in their prototype and the new xeno does not.
+            // Components that aren't part of xeno prototypes shouldn't be removed (something else added them),
+            // and components we handled earlier or are explicitly skipped aren't removed either.
+            var componentName = EntityManager.ComponentFactory.GetComponentName(cloneComponent.GetType());
+            if (!includeComponents.Contains(componentName)
+                || excludeComponents.Contains(componentName)
+                || additionalExclusions.Contains(componentName)
+                || registryToAdd.ContainsKey(componentName))
+            {
+                continue;
+            }
+            Log.Debug($"Removing component {componentName}...");
+            RemComp(xeno, cloneComponent);
+            Log.Debug($"Done removing component {componentName}.");
+        }
+
+        var afterEv = new AfterXenoChangedPrototypeEvent(xeno, oldProtoId);
+        RaiseLocalEvent(xeno, ref afterEv, true);
+
+        _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+
+        return true;
+    }
+
+    /// <summary>
+    /// Regenerate the set of all component names that xeno prototypes have defined.
+    /// </summary>
+    private void ReloadXenoComponents()
+    {
+        var components = new HashSet<string>();
+        foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno, _compFactory))
+                continue;
+
+            foreach (var component in entity.Components)
+            {
+                components.Add(component.Key);
+            }
+        }
+        Log.Debug("Loaded xeno components: ");
+        foreach (var component in components)
+        {
+            Log.Debug($"  {component}");
+        }
+        _xenoComponents = components.ToFrozenSet();
+
+        if (!_prototypes.TryIndex(CloningSettingsId, out var settings))
+        {
+            Log.Error($"Failed to load cloning prototype {CloningSettingsId}, xenos will be unable to change prototypes.");
+            return;
+        }
+
+        foreach (var pointlessExclude in settings.ExcludeComponents.Except(_xenoComponents))
+        {
+            if (!EntityManager.ComponentFactory.TryGetRegistration(pointlessExclude, out _))
+            {
+                // We failed to find the component registration of this component name. Most likely means it is
+                // a client or server side exclusive component, and we're on the wrong side. So we don't
+                // have to issue a warning for it.
+                continue;
+            }
+            Log.Warning($"Pointless exclude in clone settings (no xeno prototypes contain it): {pointlessExclude}");
+        }
+        Log.Debug("Xeno components reloaded.");
     }
 }

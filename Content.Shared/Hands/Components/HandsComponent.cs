@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Hands;
 using Content.Shared.DisplacementMap;
 using Content.Shared.Hands.EntitySystems;
 using Robust.Shared.GameStates;
@@ -6,7 +7,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.Hands.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
-[Access(typeof(SharedHandsSystem))]
+[Access(typeof(SharedHandsSystem), typeof(RMCHandsSystem))] // RMC14 added RMCHandsSystem
 public sealed partial class HandsComponent : Component
 {
     /// <summary>

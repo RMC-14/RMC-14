@@ -172,16 +172,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Runner/acider_runner.rsi
-    layers:
-    - map: [ "enum.XenoVisualLayers.Base", "enum.ForTheHiveVisualLayers.Base" ]
-      state: alive
-    - map: [ "enum.RMCDamageVisualLayers.Base" ]
-      visible: false
-    - map: [ "enum.XenoAcidGeneratingVisualLayers.Base" ]
-      visible: false
-    - map: [ "enum.RMCShieldVisuals.Base" ]
-      sprite: _RMC14/Effects/xeno_shields.rsi
-      visible: false
   - type: MobThresholds
     thresholds:
       0: Alive

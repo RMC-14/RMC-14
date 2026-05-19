@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Standing;
 
@@ -12,6 +13,7 @@ public sealed class EvasionSystem : EntitySystem
         SubscribeLocalEvent<EvasionComponent, XenoRestEvent>(CallRefresh);
         SubscribeLocalEvent<EvasionComponent, DownedEvent>(CallRefresh);
         SubscribeLocalEvent<EvasionComponent, StoodEvent>(CallRefresh);
+        SubscribeLocalEvent<EvasionComponent, AfterXenoChangedPrototypeEvent>(CallRefresh);
 
         SubscribeLocalEvent<RMCSizeComponent, EvasionRefreshModifiersEvent>(OnSizeRefreshEvasion);
     }

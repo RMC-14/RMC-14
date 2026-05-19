@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Movement;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -16,6 +17,8 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Client.GameObjects;
+using Robust.Client.ResourceManagement;
+using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Xenonids;
@@ -24,6 +27,8 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private readonly IResourceCache _rescache = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private EntityQuery<XenoAnimateMovementComponent> _animateQuery;
 
@@ -34,6 +39,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         SubscribeLocalEvent<XenoComponent, KnockedDownEvent>(OnXenoKnockedDown);
         SubscribeLocalEvent<XenoComponent, StatusEffectEndedEvent>(OnXenoStatusEffectEnded);
         SubscribeLocalEvent<XenoComponent, GetDrawDepthEvent>(OnXenoGetDrawDepth);
+        SubscribeLocalEvent<SpriteComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
 
         _animateQuery = GetEntityQuery<XenoAnimateMovementComponent>();
     }
@@ -55,6 +61,26 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 
         if (args.DrawDepth > DrawDepth.DeadMobs)
             args.DrawDepth = DrawDepth.DeadMobs;
+    }
+
+    private void OnXenoChangingPrototype(Entity<SpriteComponent> xeno, ref XenoChangingPrototypeEvent args)
+    {
+        var nullableXeno = xeno.AsNullable();
+        var compName = EntityManager.ComponentFactory.GetComponentName<SpriteComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is SpriteComponent { } newComponent)
+        {
+            _sprite.SetBaseRsi(nullableXeno, newComponent.BaseRSI);
+
+            // TODO RMC14 how the hell do you make the sprite recalculate bounds? this is awful
+            _sprite.SetSnapCardinals(nullableXeno, !xeno.Comp.SnapCardinals);
+            _sprite.SetSnapCardinals(nullableXeno, !xeno.Comp.SnapCardinals);
+        }
+        else
+        {
+            Log.Error("Xeno prototype missing a sprite component.");
+        }
+
+        args.AdditionalExclusions.Add(compName);
     }
 
     protected override void OnAppearanceChange(EntityUid uid, XenoComponent component, ref AppearanceChangeEvent args)
@@ -87,6 +113,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         // TODO RMC14 split this up into multiple systems with ordered event subscription
         // TODO RMC14 please god
         string? oviState = null;
+        string? oviSprite = null;
         switch (state)
         {
             case MobState.Critical:
@@ -107,6 +134,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     TryComp(entity, out XenoOvipositorCapableComponent? capable))
                 {
                     oviState = capable.AttachedState;
+                    oviSprite = capable.Sprite;
                     break;
                 }
 
@@ -171,6 +199,14 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             sprite.LayerSetVisible(oviLayer, false);
             sprite.LayerSetVisible(layer, true);
             return;
+        }
+
+        if (
+            oviSprite != null
+            && _rescache.TryGetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / oviSprite, out var res)
+            && _sprite.LayerGetEffectiveRsi((entity, sprite), oviLayer) != res.RSI)
+        {
+            _sprite.LayerSetRsi((entity, sprite), oviLayer, res.RSI);
         }
 
         sprite.LayerSetState(oviLayer, oviState);

@@ -112,6 +112,18 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private readonly HashSet<EntityUid> _intersectingResin = new();
 
+    /// <summary>
+    /// When a xeno that can secrete resin changes castes, this list is used to determine what their
+    /// chosen secretion becomes if it can no longer be secreted, in priority order.
+    /// A selected secretion in any of these lists will become a different secretion in the same list, if possible.
+    /// </summary>
+    private readonly List<List<EntProtoId>> _similarSecretions = new List<List<EntProtoId>>
+    {
+        new() { "WallXenoResin", "WallXenoResinThick", "WallXenoResinReflective" },
+        new() { "WallXenoMembrane", "WallXenoMembraneThick" },
+        new() { "DoorXenoResin", "DoorXenoResinThick" }
+    };
+
     public override void Initialize()
     {
         _blockXenoConstructionQuery = GetEntityQuery<BlockXenoConstructionComponent>();
@@ -125,13 +137,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _xenoTunnelQuery = GetEntityQuery<XenoTunnelComponent>();
         _queenBoostQuery = GetEntityQuery<QueenBuildingBoostComponent>();
 
-        SubscribeLocalEvent<NewXenoEvolvedEvent>(OnNewXenoEvolved);
-        SubscribeLocalEvent<XenoDevolvedEvent>(OnXenoDevolved);
-
         SubscribeLocalEvent<XenoConstructionComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
         SubscribeLocalEvent<XenoConstructionComponent, XenoExpandWeedsActionEvent>(OnXenoExpandWeedsAction);
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoChooseStructureActionEvent>(OnXenoChooseStructureAction);
+        SubscribeLocalEvent<XenoConstructionComponent, XenoChangingPrototypeEvent>(OnConstructorChangingPrototype);
+        SubscribeLocalEvent<XenoConstructionComponent, AfterXenoChangedPrototypeEvent>(OnAfterConstructorChangedPrototype);
 
         SubscribeLocalEvent<DesignerStrainComponent, DesignerSelectedDesignToggleActionEvent>(OnDesignerSelectedDesignToggle);
 
@@ -191,16 +202,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         Subs.CVar(_config, RMCCVars.RMCResinConstructionDensityCostIncreaseThreshold, v => _densityThreshold = v, true);
         Subs.CVar(_config, RMCCVars.RMCNewResinPreventCollideTimeSeconds, v => _newResinPreventCollideTime = TimeSpan.FromSeconds(v), true);
-    }
-
-    private void OnNewXenoEvolved(ref NewXenoEvolvedEvent args)
-    {
-        TransferSecretionsBuilt(args.OldXeno.Owner, args.NewXeno);
-    }
-
-    private void OnXenoDevolved(ref XenoDevolvedEvent args)
-    {
-        TransferSecretionsBuilt(args.OldXeno, args.NewXeno);
     }
 
     private void OnXenoOrderConstructionClick(XenoOrderConstructionClickEvent ev, EntitySessionEventArgs args)
@@ -387,6 +388,40 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         args.Handled = true;
         _ui.TryOpenUi(xeno.Owner, XenoChooseStructureUI.Key, xeno);
+    }
+
+    private void OnConstructorChangingPrototype(Entity<XenoConstructionComponent> xeno, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<XenoConstructionComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is XenoConstructionComponent { } newComponent)
+        {
+            if (xeno.Comp.BuildChoice != null)
+            {
+                if (newComponent.CanBuild.Contains(xeno.Comp.BuildChoice.Value))
+                {
+                    newComponent.BuildChoice = xeno.Comp.BuildChoice;
+                }
+                else
+                {
+                    // try to find the equivalent structure
+                    var options = _similarSecretions.Find(item => item.Contains(xeno.Comp.BuildChoice.Value));
+                    var newSelection = options?.FirstOrNull(item => newComponent.CanBuild.Contains(item));
+                    newComponent.BuildChoice = newSelection;
+                }
+            }
+        }
+    }
+
+    private void OnAfterConstructorChangedPrototype(Entity<XenoConstructionComponent> xeno, ref AfterXenoChangedPrototypeEvent args)
+    {
+        if (xeno.Comp.BuildChoice.HasValue)
+        {
+            var ev = new XenoConstructionChosenEvent(xeno.Comp.BuildChoice.Value, xeno.Owner);
+            foreach (var (id, _) in _actions.GetActions(xeno))
+            {
+                RaiseLocalEvent(id, ref ev);
+            }
+        }
     }
 
     private void OnXenoChooseStructureBui(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureBuiMsg args)
@@ -1781,32 +1816,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             cost = plasma.MaxPlasma;
 
         return cost;
-    }
-
-    private void TransferSecretionsBuilt(Entity<XenoSecretionListComponent?> oldXeno, EntityUid newXeno)
-    {
-        if (!Resolve(oldXeno, ref oldXeno.Comp, false))
-            return;
-
-        var limited = EnsureComp<XenoSecretionListComponent>(newXeno);
-        foreach (var (id, built) in oldXeno.Comp.Built)
-        {
-            limited.Built[id] = built;
-            foreach (var netBuild in built)
-            {
-                if (GetEntity(netBuild) is not { Valid: true } builtId ||
-                    !TryComp(builtId, out XenoSecretionLimitedComponent? secretionLimited))
-                {
-                    continue;
-                }
-
-                secretionLimited.Xeno = newXeno;
-                Dirty(builtId, secretionLimited);
-            }
-        }
-
-        Dirty(newXeno, limited);
-        oldXeno.Comp.Built.Clear();
     }
 
     public override void Update(float frameTime)

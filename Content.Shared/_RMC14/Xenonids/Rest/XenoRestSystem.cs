@@ -1,8 +1,9 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Crest;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Fling;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Gut;
@@ -20,6 +21,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.Rest;
 
@@ -29,6 +31,7 @@ public sealed class XenoRestSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -55,6 +58,7 @@ public sealed class XenoRestSystem : EntitySystem
         SubscribeLocalEvent<XenoRestingComponent, EvasionRefreshModifiersEvent>(OnXenoRestingEvasionRefresh);
         SubscribeLocalEvent<XenoRestingComponent, AttemptMobCollideEvent>(OnXenoRestingMobCollide);
         SubscribeLocalEvent<XenoRestingComponent, AttemptMobTargetCollideEvent>(OnXenoRestingMobTargetCollide);
+        SubscribeLocalEvent<XenoRestingComponent, AfterXenoChangedCasteEvent>(OnResterAfterXenoChangedCasteEvent);
 
         SubscribeLocalEvent<ActionBlockIfRestingComponent, RMCActionUseAttemptEvent>(OnXenoRestingActionUseAttempt);
     }
@@ -208,6 +212,15 @@ public sealed class XenoRestSystem : EntitySystem
     private void OnXenoRestingMobTargetCollide(Entity<XenoRestingComponent> ent, ref AttemptMobTargetCollideEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnResterAfterXenoChangedCasteEvent(Entity<XenoRestingComponent> xeno, ref AfterXenoChangedCasteEvent args)
+    {
+        if (_rmcActions.GetActionsWithEvent<XenoRestActionEvent>(xeno).TryFirstOrNull(out var action))
+        {
+            // We have XenoRestingComponent after changing castes, i.e. we are still resting. Update the toggle state to match.
+            _actions.SetToggled(action?.AsNullable(), true);
+        }
     }
 
     public bool IsResting(Entity<XenoRestingComponent?> ent)

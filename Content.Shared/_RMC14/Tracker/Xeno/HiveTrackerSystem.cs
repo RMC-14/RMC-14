@@ -35,8 +35,6 @@ public sealed class HiveTrackerSystem : EntitySystem
     public override void Initialize()
     {
         // TODO RMC14 resin tracker
-        SubscribeLocalEvent<HiveTrackerComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
-        SubscribeLocalEvent<HiveTrackerComponent, XenoDevolvedEvent>(OnXenoDevolved);
         SubscribeLocalEvent<HiveTrackerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<HiveTrackerComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerClickedAlertEvent>(OnClickedAlert);
@@ -46,44 +44,6 @@ public sealed class HiveTrackerSystem : EntitySystem
 
         SubscribeLocalEvent<RMCTrackableComponent, RequestTrackableNameEvent>(OnRequestTrackableName);
         SubscribeLocalEvent<RMCTrackableComponent, MobStateChangedEvent>(OnMobStateChanged);
-    }
-
-    private void OnNewXenoEvolved(Entity<HiveTrackerComponent> newXeno, ref NewXenoEvolvedEvent args)
-    {
-        if (!TryComp<HiveTrackerComponent>(args.OldXeno, out var oldTracker))
-            return;
-
-        KeepTrackingOnEvolveDevolve(newXeno, new Entity<HiveTrackerComponent>(args.OldXeno.Owner, oldTracker));
-    }
-
-    private void OnXenoDevolved(Entity<HiveTrackerComponent> newXeno, ref XenoDevolvedEvent args)
-    {
-        if (!TryComp<HiveTrackerComponent>(args.OldXeno, out var oldTracker))
-            return;
-
-        KeepTrackingOnEvolveDevolve(newXeno, new Entity<HiveTrackerComponent>(args.OldXeno, oldTracker));
-    }
-
-    private void KeepTrackingOnEvolveDevolve(Entity<HiveTrackerComponent> newXeno, Entity<HiveTrackerComponent> oldTracker)
-    {
-        // When a xeno evolves or devolves, make sure it's tracker continues to track the same target
-        if (oldTracker.Comp.Mode != null)
-            SetMode(newXeno, oldTracker.Comp.Mode.Value);
-
-        SetTarget(newXeno, oldTracker.Comp.Target);
-        Dirty(newXeno);
-
-        // When a xeno evolves or devolves, make sure all trackers pointing towards it continue to track the same target
-        var query = EntityQueryEnumerator<HiveTrackerComponent>();
-        while (query.MoveNext(out var trackerUid, out var tracker))
-        {
-            var trackerEntity = new Entity<HiveTrackerComponent>(trackerUid, tracker);
-
-            if (tracker.Target == oldTracker.Owner)
-            {
-                SetTarget(trackerEntity, newXeno.Owner);
-            }
-        }
     }
 
     private void OnMapInit(Entity<HiveTrackerComponent> ent, ref MapInitEvent args)

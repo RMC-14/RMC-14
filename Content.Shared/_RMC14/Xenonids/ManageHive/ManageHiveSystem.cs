@@ -342,18 +342,18 @@ public sealed class ManageHiveSystem : EntitySystem
             return;
 
         var oldString = ToPrettyString(watched);
-        if (_xenoEvolution.Devolve(watched, args.Choice) is not { } devolution)
+        if (!_xenoEvolution.Devolve(watched, args.Choice))
             return;
 
-        if (TryComp(devolution, out ActorComponent? watchedActor))
+        if (TryComp(watched, out ActorComponent? watchedActor))
         {
             var msg = Loc.GetString("rmc-hivemanagement-queen-deevolving", ("reason", args.Message));
             _rmcChat.ChatMessageToOne(ChatChannel.Local, msg, msg, default, false, watchedActor.PlayerSession.Channel);
-            _popup.PopupEntity(msg, devolution, PopupType.LargeCaution);
+            _popup.PopupEntity(msg, watched, PopupType.LargeCaution);
         }
 
         // TODO RMC14 drop dead acidic heart
-        _adminLog.Add(LogType.RMCDevolve, $"{ToPrettyString(manage)} devolved {oldString} to {ToPrettyString(devolution)}");
+        _adminLog.Add(LogType.RMCDevolve, $"{ToPrettyString(manage)} devolved {oldString} to {ToPrettyString(watched)}");
     }
 
     private bool CanDevolveTargetPopup(Entity<ManageHiveComponent> manage, out Entity<XenoDevolveComponent> watched)

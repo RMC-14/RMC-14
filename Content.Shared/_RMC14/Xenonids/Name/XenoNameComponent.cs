@@ -1,10 +1,10 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Name;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedXenoNameSystem))]
-public sealed partial class XenoNameComponent : Component
+public sealed partial class XenoNameComponent : Component, IComponentDebug
 {
     [DataField, AutoNetworkedField]
     public string Rank = string.Empty;
@@ -17,4 +17,9 @@ public sealed partial class XenoNameComponent : Component
 
     [DataField, AutoNetworkedField]
     public string Postfix = string.Empty;
+
+    public string GetDebugString()
+    {
+        return $"Rank: {Rank}\r\nPrefix: {Prefix}\r\nNumber: {Number}\r\nPostfix: {Postfix}";
+    }
 }

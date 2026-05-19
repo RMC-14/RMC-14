@@ -4,6 +4,7 @@ using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Roles;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Name;
@@ -57,6 +58,7 @@ public sealed class XenoRoleSystem : EntitySystem
         SubscribeLocalEvent<ActorComponent, HiveChangedEvent>(OnHiveChanged);
 
         SubscribeLocalEvent<XenoRankComponent, RefreshNameModifiersEvent>(OnRankRefreshName, before: new[] { typeof(SharedXenoNameSystem) });
+        SubscribeLocalEvent<XenoRankComponent, AfterXenoChangedPrototypeEvent>(OnAfterXenoChangedPrototype);
 
         Subs.CVar(_config, RMCCVars.RMCPlaytimeBronzeMedalTimeHours, v => _rankTwoTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _rankThreeTime = TimeSpan.FromHours(v), true);
@@ -121,6 +123,14 @@ public sealed class XenoRoleSystem : EntitySystem
             return;
 
         args.AddModifier(rank.Value);
+    }
+
+    private void OnAfterXenoChangedPrototype(Entity<XenoRankComponent> xeno, ref AfterXenoChangedPrototypeEvent args)
+    {
+        if (TryComp<XenoComponent>(xeno, out var xenoComp) && xenoComp != null)
+        {
+            _toUpdate.Add((xeno, xenoComp));
+        }
     }
 
     private void UpdateRank(EntityUid xeno, ICommonSession player, string jobId, HumanoidCharacterProfile profile)

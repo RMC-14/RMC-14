@@ -52,6 +52,7 @@ using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -71,7 +72,9 @@ public sealed partial class XenoSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
@@ -79,7 +82,6 @@ public sealed partial class XenoSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
@@ -115,10 +117,10 @@ public sealed partial class XenoSystem : EntitySystem
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
         _victimInfectedQuery = GetEntityQuery<VictimInfectedComponent>();
 
+        SubscribeLocalEvent<XenoComponent, ComponentStartup>(OnXenoStartup);
+        SubscribeLocalEvent<XenoComponent, ComponentShutdown>(OnXenoShutdown);
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
-        SubscribeLocalEvent<XenoComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
-        SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
@@ -158,8 +160,13 @@ public sealed partial class XenoSystem : EntitySystem
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
     }
 
-    private void OnXenoMapInit(Entity<XenoComponent> xeno, ref MapInitEvent args)
+    private void OnXenoStartup(Entity<XenoComponent> xeno, ref ComponentStartup args)
     {
+        if (xeno.Comp.EmoteSounds == null)
+            return;
+
+        _proto.TryIndex(xeno.Comp.EmoteSounds, out xeno.Comp.Sounds);
+
         foreach (var actionId in xeno.Comp.ActionIds)
         {
             if (!xeno.Comp.Actions.ContainsKey(actionId) &&
@@ -168,7 +175,10 @@ public sealed partial class XenoSystem : EntitySystem
                 xeno.Comp.Actions[actionId] = newAction;
             }
         }
+    }
 
+    private void OnXenoMapInit(Entity<XenoComponent> xeno, ref MapInitEvent args)
+    {
         if (!MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
 
@@ -184,16 +194,20 @@ public sealed partial class XenoSystem : EntitySystem
         args.Tags.UnionWith(xeno.Comp.AccessLevels);
     }
 
-    private void OnNewXenoEvolved(Entity<XenoComponent> newXeno, ref NewXenoEvolvedEvent args)
+    private void OnXenoShutdown(Entity<XenoComponent> xeno, ref ComponentShutdown ev)
     {
-        var oldRotation = _transform.GetWorldRotation(args.OldXeno);
-        _transform.SetWorldRotation(newXeno, oldRotation);
-    }
-
-    private void OnXenoDevolved(Entity<XenoComponent> newXeno, ref XenoDevolvedEvent args)
-    {
-        var oldRotation = _transform.GetWorldRotation(args.OldXeno);
-        _transform.SetWorldRotation(newXeno, oldRotation);
+        if (_netManager.IsServer)
+        {
+            // TODO RMC14 adding actions is serverside only, so removing should be too.
+            // For some reason, while AddAction has a check to ensure only the server adds an action,
+            // RemoveAction does not. So we have to check it ourselves here.
+            foreach (var (actionProtoId, actionId) in xeno.Comp.Actions)
+            {
+                _action.RemoveAction(xeno.Owner, actionId);
+            }
+        }
+        _eye.RefreshVisibilityMask(xeno.Owner);
+        Dirty(xeno);
     }
 
     private void OnXenoHealthScannerAttemptTarget(Entity<XenoComponent> ent, ref HealthScannerAttemptTargetEvent args)

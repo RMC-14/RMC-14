@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Xenonids.Pheromones;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedXenoPheromonesSystem))]
-public sealed partial class XenoWardingPheromonesComponent : Component
+public sealed partial class XenoWardingPheromonesComponent : Component, IComponentDebug
 {
     [DataField, AutoNetworkedField]
     public SpriteSpecifier Icon = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones_hud.rsi"), "warding");
@@ -19,4 +19,12 @@ public sealed partial class XenoWardingPheromonesComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 Multiplier;
+
+    public string GetDebugString()
+    {
+        return $"""
+            CritDamageGroup: {CritDamageGroup}
+            Multiplier: {Multiplier}
+            """;
+    }
 }

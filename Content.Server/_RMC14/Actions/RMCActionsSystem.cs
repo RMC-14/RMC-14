@@ -1,7 +1,8 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Linq;
 using Content.Server.Actions;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -26,6 +27,7 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
         SubscribeNetworkEvent<RMCActionOrderChangeEvent>(OnActionOrder);
 
         SubscribeLocalEvent<RMCActionOrderComponent, PlayerAttachedEvent>(OnOrderAttached);
+        SubscribeLocalEvent<RMCActionOrderComponent, AfterXenoChangedPrototypeEvent>(OnAfterXenoChangedPrototype);
     }
 
     public override void Shutdown()
@@ -67,6 +69,16 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
     private void OnOrderAttached(Entity<RMCActionOrderComponent> ent, ref PlayerAttachedEvent args)
     {
         ent.Comp.Order = _manager.GetOrder(args.Player.UserId, ent.Comp.Id);
+        Dirty(ent);
+    }
+
+    private void OnAfterXenoChangedPrototype(Entity<RMCActionOrderComponent> ent, ref AfterXenoChangedPrototypeEvent args)
+    {
+        if (!TryComp(ent, out ActorComponent? actor))
+        {
+            return;
+        }
+        ent.Comp.Order = _manager.GetOrder(actor.PlayerSession.UserId, ent.Comp.Id);
         Dirty(ent);
     }
 

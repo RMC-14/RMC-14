@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Xenonids.Plasma;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoPlasmaSystem))]
-public sealed partial class XenoPlasmaComponent : Component
+public sealed partial class XenoPlasmaComponent : Component, IComponentDebug
 {
     [DataField, AutoNetworkedField]
     public FixedPoint2 Plasma;
@@ -30,4 +30,16 @@ public sealed partial class XenoPlasmaComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> Alert = "XenoPlasma";
+
+    public string GetDebugString()
+    {
+        return $"""
+            Plasma: {Plasma}
+            MaxPlasma: {MaxPlasma}
+            TransferDelay: {PlasmaTransferDelay.TotalSeconds}
+            RegenOnWeeds: {PlasmaRegenOnWeeds}
+            RegenOffWeeds: {PlasmaRegenOffWeeds}
+            Alert: {Alert.Id}
+            """;
+    }
 }

@@ -1,9 +1,10 @@
+using System.Linq;
+using Content.Client._RMC14.UserInterface;
 using Content.Client._RMC14.Xenonids.UI;
 using Content.Shared._RMC14.Xenonids.Construction;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Xenonids.Construction;
@@ -17,6 +18,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
     private readonly SharedXenoConstructionSystem _xenoConstruction;
 
     private readonly Dictionary<EntProtoId, XenoChoiceControl> _buttons = new();
+    private readonly List<EntProtoId> _structureIds = new();
 
     [ViewVariables]
     private XenoChooseStructureWindow? _window;
@@ -32,50 +34,6 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindow<XenoChooseStructureWindow>();
-        _buttons.Clear();
-
-        if (EntMan.TryGetComponent(Owner, out XenoConstructionComponent? xeno))
-        {
-            var hasBoost = EntMan.HasComponent<QueenBuildingBoostComponent>(Owner);
-
-            foreach (var structureId in xeno.CanBuild)
-            {
-                if (!_prototype.TryIndex(structureId, out var structure))
-                    continue;
-
-                var control = new XenoChoiceControl();
-                control.Button.ToggleMode = true;
-
-                var displayId = structureId;
-                var displayName = structure.Name;
-
-                if (hasBoost)
-                {
-                    var queenVariant = GetQueenVariant(structureId);
-                    if (_prototype.TryIndex(queenVariant, out var queenStructure) && queenVariant != structureId)
-                    {
-                        displayId = queenVariant;
-                        displayName = queenStructure.Name;
-                    }
-                    displayName += " (0 plasma)";
-                }
-                else
-                {
-                    if (_xenoConstruction.GetStructurePlasmaCost(structureId) is { } cost)
-                        displayName += $" ({cost} plasma)";
-                }
-
-                control.Set(displayName, _sprite.Frame0(_prototype.Index(displayId)));
-                control.Button.OnPressed += _ =>
-                {
-                    SendPredictedMessage(new XenoChooseStructureBuiMsg(structureId));
-                    UpdateButtonStates(structureId);
-                };
-
-                _window.StructureContainer.AddChild(control);
-                _buttons.Add(structureId, control);
-            }
-        }
 
         Refresh();
     }
@@ -101,6 +59,79 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
 
     public void Refresh()
     {
+        if (_window == null)
+            return;
+
+        _buttons.Clear();
+        _structureIds.Clear();
+        // set up all buttons and create more if necessary
+        if (EntMan.TryGetComponent(Owner, out XenoConstructionComponent? xeno))
+        {
+            var hasBoost = EntMan.HasComponent<QueenBuildingBoostComponent>(Owner);
+
+            foreach (var (structureId, index) in xeno.CanBuild.Select((structureId, index) => (structureId, index)))
+            {
+                if (!_prototype.TryIndex(structureId, out var structure))
+                    continue;
+
+                XenoChoiceControl? control;
+
+                if (index < _window.StructureContainer.ChildCount)
+                {
+                    control = _window.StructureContainer.GetChild(index) as XenoChoiceControl;
+                }
+                else
+                {
+                    control = new XenoChoiceControl();
+                    control.Button.OnPressed += _ =>
+                    {
+                        if (index < _structureIds.Count)
+                        {
+                            SendPredictedMessage(new XenoChooseStructureBuiMsg(_structureIds[index]));
+                            UpdateButtonStates(_structureIds[index]);
+                        }
+                    };
+                    control.Button.ToggleMode = true;
+                    _window.StructureContainer.AddChild(control);
+                }
+
+                if (control == null)
+                    continue;
+
+                var displayId = structureId;
+                var displayName = structure.Name;
+
+                if (hasBoost)
+                {
+                    var queenVariant = GetQueenVariant(structureId);
+                    if (_prototype.TryIndex(queenVariant, out var queenStructure) && queenVariant != structureId)
+                    {
+                        displayId = queenVariant;
+                        displayName = queenStructure.Name;
+                    }
+                    displayName += " (0 plasma)";
+                }
+                else
+                {
+                    if (_xenoConstruction.GetStructurePlasmaCost(structureId) is { } cost)
+                        displayName += $" ({cost} plasma)";
+                }
+
+                control.Set(displayName, _sprite.Frame0(structure));
+
+                _structureIds.Add(structureId);
+                _buttons.Add(structureId, control);
+            }
+
+            // If we have too many buttons, delete the extras
+            _window.StructureContainer.RemoveChildrenAfter(xeno.CanBuild.Count);
+        }
+        else
+        {
+            // there is nothing that can be built, remove all the items
+            _window.StructureContainer.RemoveAllChildren();
+        }
+
         foreach (var (_, control) in _buttons)
         {
             control.Button.Pressed = false;
@@ -112,6 +143,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
             button.Button.Pressed = true;
         }
     }
+
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);

@@ -1,3 +1,4 @@
+using System.Diagnostics.Metrics;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
@@ -5,7 +6,7 @@ namespace Content.Shared._RMC14.Evasion;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(EvasionSystem))]
-public sealed partial class EvasionComponent : Component
+public sealed partial class EvasionComponent : Component, IComponentDebug
 {
     /// <summary>
     /// Base evasion value.
@@ -32,6 +33,16 @@ public sealed partial class EvasionComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public FixedPoint2 ModifiedEvasionFriendly = 0;
+
+    public string GetDebugString()
+    {
+        return $"""
+            Evasion: {Evasion}
+            ModifiedEvasion: {ModifiedEvasion}
+            EvasionFriendly: {EvasionFriendly}
+            ModifiedEvasionFriendly: {ModifiedEvasionFriendly}
+            """;
+    }
 }
 
 public enum EvasionModifiers : int

@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.CriticalGrace;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -83,6 +84,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStoppedMessage>(OnFrenzyPullStopped, after: [typeof(RMCPullingSystem)] );
 
         SubscribeLocalEvent<XenoActivePheromonesComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
+        SubscribeLocalEvent<XenoActivePheromonesComponent, AfterXenoChangedPrototypeEvent>(OnAfterXenoChangedPrototype);
 
         Subs.BuiEvents<XenoPheromonesComponent>(XenoPheromonesUI.Key, subs =>
         {
@@ -94,6 +96,15 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     {
         if (args.NewMobState is MobState.Critical or MobState.Dead)
             DeactivatePheromones(ent.Owner);
+    }
+
+    private void OnAfterXenoChangedPrototype(Entity<XenoActivePheromonesComponent> xeno, ref AfterXenoChangedPrototypeEvent args)
+    {
+        if (!TryComp<XenoPheromonesComponent>(xeno, out _))
+        {
+            // This xeno can no longer emit pheromones, so it should lose its active pheromones component.
+            RemCompDeferred<XenoActivePheromonesComponent>(xeno);
+        }
     }
 
     private void OnXenoPheromonesAction(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesActionEvent args)

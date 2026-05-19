@@ -1,10 +1,12 @@
 using System.Linq;
 using Content.Shared._RMC14.Storage;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -30,10 +32,13 @@ public abstract class RMCHandsSystem : EntitySystem
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<GiveHandsComponent, MapInitEvent>(OnXenoHandsMapInit);
+        SubscribeLocalEvent<HandsComponent, XenoChangingPrototypeEvent>(OnXenoChangingPrototype);
+        SubscribeLocalEvent<HandsComponent, AfterXenoChangedPrototypeEvent>(OnAfterXenoChangedPrototype);
         SubscribeLocalEvent<WhitelistPickupByComponent, GettingPickedUpAttemptEvent>(OnWhitelistGettingPickedUpAttempt);
         SubscribeLocalEvent<WhitelistPickupComponent, PickupAttemptEvent>(OnWhitelistPickUpAttempt);
         SubscribeLocalEvent<DropHeldOnIncapacitateComponent, MobStateChangedEvent>(OnDropMobStateChanged);
@@ -46,6 +51,74 @@ public abstract class RMCHandsSystem : EntitySystem
         foreach (var hand in ent.Comp.Hands)
         {
             _hands.AddHand(ent.Owner, hand.Name, hand.Location);
+        }
+    }
+
+    private void OnXenoChangingPrototype(Entity<HandsComponent> xeno, ref XenoChangingPrototypeEvent args)
+    {
+        var compName = EntityManager.ComponentFactory.GetComponentName<HandsComponent>();
+        if (args.NewComponents.TryGetComponent(compName, out var c) && c is HandsComponent { } newComponent)
+        {
+            // Copy data over to our hands component
+            var newHands = newComponent.Hands.Keys.Except(xeno.Comp.Hands.Keys); // hands that were added
+            var oldHands = xeno.Comp.Hands.Keys.Except(newComponent.Hands.Keys); // hands that were removed
+
+            foreach (var handId in oldHands)
+            {
+                _hands.RemoveHand(xeno.AsNullable(), handId);
+            }
+
+            foreach (var handId in newComponent.SortedHands.Intersect(newHands))
+            {
+                _hands.AddHand(xeno.AsNullable(), handId, newComponent.Hands[handId]);
+            }
+
+            xeno.Comp.SortedHands.Clear();
+            xeno.Comp.SortedHands.AddRange(newComponent.SortedHands);
+
+            foreach (var handId in xeno.Comp.Hands.Keys)
+            {
+                // Put hands that weren't explicitly sorted at the end
+                if (!xeno.Comp.SortedHands.Contains(handId))
+                {
+                    xeno.Comp.SortedHands.Add(handId);
+                }
+            }
+
+            // We try to keep our active hand the same, but if no longer have our active hand, assign a new one.
+            if (!xeno.Comp.SortedHands.Contains(xeno.Comp.ActiveHandId ?? ""))
+                _hands.SetActiveHand(xeno.AsNullable(), xeno.Comp.SortedHands.FirstOrDefault());
+
+            args.AdditionalExclusions.Add(compName);
+        }
+        else
+        {
+            // We are losing our hands, remove all our hands first so that we drop our held items.
+            // (Honestly, removing the hands component should _probably_ cause held items to drop in and of itself,
+            // but that would be upstream code's responsibility and we can handle it here just fine.)
+            _hands.RemoveHands(xeno.AsNullable());
+        }
+    }
+
+    private void OnAfterXenoChangedPrototype(Entity<HandsComponent> xeno, ref AfterXenoChangedPrototypeEvent args)
+    {
+        // drop and re-pickup items if possible. number of hands required and hand whitelists might change between prototypes
+        foreach (var handId in xeno.Comp.SortedHands)
+        {
+            var heldItem = _hands.GetHeldItem(xeno.AsNullable(), handId);
+
+            if (heldItem == null || TryComp(heldItem, out VirtualItemComponent? _))
+            {
+                // ignore virtual items, they will be dropped when their real item is dropped
+                continue;
+            }
+
+            if(heldItem != null && _hands.TryDrop(xeno.AsNullable(), handId, doDropInteraction: false))
+            {
+                // successfully dropped. remove matching virtual items and then try picking up the item again
+                _virtualItem.DeleteInHandsMatching(xeno, heldItem.Value);
+                _hands.TryPickup(xeno.Owner, heldItem.Value, handId, animate: false, handsComp: xeno.Comp);
+            }
         }
     }
 
