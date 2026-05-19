@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Shot flares should no longer get stuck in walls
-    type: Fix
-  id: 2723
-  time: '2026-01-08T03:16:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8826
 - author: YO0teacher
   changes:
   - message: Police skill now allows you to strip dogtags.
@@ -4479,5 +4472,13 @@
   id: 3222
   time: '2026-05-19T22:33:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9553
+- author: Vexerot
+  changes:
+  - message: Fixed xenonids being able to use special characters other than numbers
+      in their postfix.
+    type: Fix
+  id: 3223
+  time: '2026-05-19T22:35:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9885
 Name: RMC14
 Order: -1
