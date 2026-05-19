@@ -151,11 +151,23 @@ public sealed partial class RMCWeatherEvent
     [DataField]
     public int FireSmotheringStrength;
 
+    /// <summary>
+    ///     Acid lifetime and damage reduction applied per fire smothering strength point.
+    /// </summary>
+    [DataField]
+    public float AcidDilutionPerFireSmotheringStrength = 0.1f;
+
     [DataField]
     public bool CleansDecals = true;
 
     [DataField]
     public DamageSpecifier ExposureDamage = new();
+
+    /// <summary>
+    ///     Extra exposure damage multiplier for xenos during damaging weather.
+    /// </summary>
+    [DataField]
+    public float XenoExposureDamageMultiplier = 3f;
 
     [DataField]
     public LocId? EffectMessage;

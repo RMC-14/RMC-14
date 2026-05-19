@@ -94,6 +94,8 @@ public sealed class RMCWeatherMapDataTest
             ("Resources/Maps/_RMC14/kutjevo.yml", "Rainstorm", "Medium"),
             ("Resources/Maps/_RMC14/trijent.yml", "Duststorm", "Low"),
             ("Resources/Maps/_RMC14/trijent.yml", "Rainstorm", "Medium"),
+            ("Resources/Maps/_RMC14/PVE/port_nereid.yml", "Heavy Rain", "Medium"),
+            ("Resources/Maps/_RMC14/PVE/Breakwater_Strand.yml", "Heavy Rain", "Medium"),
         };
 
         foreach (var (relativePath, eventName, overlay) in withOverlay)

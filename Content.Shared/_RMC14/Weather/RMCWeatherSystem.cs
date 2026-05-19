@@ -39,7 +39,6 @@ public sealed class RMCWeatherSystem : EntitySystem
     private static readonly TimeSpan WeatherEffectMessageMinDelay = TimeSpan.FromSeconds(30);
     private static readonly TimeSpan WeatherEffectMessageMaxDelay = TimeSpan.FromSeconds(120);
     private const float CleanDecalChance = 0.05f;
-    private const float WeatherBlockerLookupRadius = 0.05f;
     private const float WeatherSirenPopupRange = 7f;
 
     private static readonly SoundSpecifier MarineWeatherWarningSound =
@@ -726,7 +725,7 @@ public sealed class RMCWeatherSystem : EntitySystem
             ProcessBurningEntities(mapId, weatherEvent.FireSmotheringStrength);
             ProcessTileFires(mapId, weatherEvent.FireSmotheringStrength);
             ProcessCampfires(mapId, weatherEvent.FireSmotheringStrength);
-            ProcessAcidDilution(mapId, weatherEvent.FireSmotheringStrength, ent.Comp.EventSequence);
+            ProcessAcidDilution(mapId, weatherEvent, ent.Comp.EventSequence);
         }
 
         if (!weatherEvent.ExposureDamage.Empty || weatherEvent.EffectMessage != null)
@@ -783,10 +782,13 @@ public sealed class RMCWeatherSystem : EntitySystem
         }
     }
 
-    private void ProcessAcidDilution(MapId mapId, int fireSmotheringStrength, int eventSequence)
+    private void ProcessAcidDilution(MapId mapId, RMCWeatherEvent weatherEvent, int eventSequence)
     {
         // Acid should be diluted once per weather event, not once per effect tick.
-        var multiplier = Math.Clamp(1 - fireSmotheringStrength * 0.1f, 0, 1);
+        var multiplier = Math.Clamp(
+            1 - weatherEvent.FireSmotheringStrength * weatherEvent.AcidDilutionPerFireSmotheringStrength,
+            0,
+            1);
         if (multiplier >= 1)
             return;
 
@@ -863,8 +865,9 @@ public sealed class RMCWeatherSystem : EntitySystem
 
             if (!weatherEvent.ExposureDamage.Empty)
             {
+                var xenoMultiplier = Math.Max(weatherEvent.XenoExposureDamageMultiplier, 0f);
                 var damage = HasComp<XenoComponent>(uid)
-                    ? weatherEvent.ExposureDamage * 3
+                    ? weatherEvent.ExposureDamage * xenoMultiplier
                     : weatherEvent.ExposureDamage;
 
                 _damageable.TryChangeDamage(uid, damage, true, false, damageable);
@@ -951,9 +954,10 @@ public sealed class RMCWeatherSystem : EntitySystem
     {
         // RMC blockers use sprite bounds, allowing small shelters to block weather without changing whole tiles.
         _weatherBlockers.Clear();
+        var radius = RMCWeatherConstants.BlockerLookupRadius;
         var bounds = new Box2(
-            position - new Vector2(WeatherBlockerLookupRadius, WeatherBlockerLookupRadius),
-            position + new Vector2(WeatherBlockerLookupRadius, WeatherBlockerLookupRadius));
+            position - new Vector2(radius, radius),
+            position + new Vector2(radius, radius));
         _lookup.GetEntitiesIntersecting(mapId, bounds, _weatherBlockers, LookupFlags.Uncontained);
 
         foreach (var blocker in _weatherBlockers)

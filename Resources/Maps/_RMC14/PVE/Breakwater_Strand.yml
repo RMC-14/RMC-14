@@ -111,6 +111,7 @@ entities:
         lightningChance: 0.02
         fireSmotheringStrength: 4
         weatherType: RMCStrataStormLight
+        screenOverlay: Medium
         duration: 1000
         name: Heavy Rain
   - uid: 2

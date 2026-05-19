@@ -23,7 +23,6 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     private const float MaxOpacity = 1f;
     private const float FadeInPerSecond = 1.8f;
     private const float FadeOutPerSecond = 2.4f;
-    private const float WeatherBlockerLookupRadius = 0.05f;
 
     private readonly IEntityManager _entity;
     private readonly IPlayerManager _player;
@@ -167,9 +166,10 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     {
         // Client overlay uses the same sprite-bound blockers as server gameplay effects.
         _weatherBlockers.Clear();
+        var radius = RMCWeatherConstants.BlockerLookupRadius;
         var bounds = new Box2(
-            position - new Vector2(WeatherBlockerLookupRadius, WeatherBlockerLookupRadius),
-            position + new Vector2(WeatherBlockerLookupRadius, WeatherBlockerLookupRadius));
+            position - new Vector2(radius, radius),
+            position + new Vector2(radius, radius));
         _lookup.GetEntitiesIntersecting(mapId, bounds, _weatherBlockers, LookupFlags.Uncontained);
 
         foreach (var blocker in _weatherBlockers)
@@ -187,12 +187,6 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         }
 
         return false;
-    }
-
-    private static float TilesToPixels(OverlayDrawArgs args, float tiles)
-    {
-        var zoom = Math.Max(args.Viewport.Eye?.Zoom.X ?? 1f, 0.01f);
-        return tiles * args.Viewport.RenderScale.X / zoom * EyeManager.PixelsPerMeter;
     }
 
     private static (Vector2 ClearHalfSize, Vector2 FullHalfSize) GetPersonalOverlayRadii(
