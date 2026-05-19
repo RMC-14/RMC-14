@@ -80,4 +80,4 @@
   id: RMCJobIconRoyalTroopSargePVE
   icon:
     sprite: _RMC14/Interface/Hud_Icons/PVE/rcm.rsi
-    state: rmc_troopleader_pvercm_pve_troopleader
+    state: rcm_pve_troopleader
