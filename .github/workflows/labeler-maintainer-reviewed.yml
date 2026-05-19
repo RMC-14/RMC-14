@@ -68,7 +68,7 @@ jobs:
             local target_label="$1"
 
             for other_label in "${ALL_LABELS[@]}"; do
-              if [[ $target_label != $other_label && has_label "$other_label" ]]; then
+              if [[ "$target_label" != "$other_label" && has_label "$other_label" ]]; then
                 echo "Removing existing label: $other_label"
                 gh pr -R "${{ github.repository }}" edit "$PR_NUMBER" --remove-label "$other_label"
               fi
