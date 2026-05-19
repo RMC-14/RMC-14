@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: Fixed WeYa PMC synthetics not being automatically assigned to the PMC
-      squad and missing a tracker for PMC squad leaders
-    type: Fix
-  id: 2715
-  time: '2026-01-08T03:03:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8767
 - author: Vermidia
   changes:
   - message: '[PVE] Sound markers are now visible to ghosts.'
@@ -4477,5 +4469,12 @@
   id: 3214
   time: '2026-05-19T15:14:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9882
+- author: IceNoobXD
+  changes:
+  - message: Souto promo on Fiorina has been renamed to Bobda promo!
+    type: Tweak
+  id: 3215
+  time: '2026-05-19T15:22:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9876
 Name: RMC14
 Order: -1
