@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed weapon damage dealt while devoured being too high.
-    type: Fix
-  id: 2717
-  time: '2026-01-08T03:02:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8779
 - author: J C Denton
   changes:
   - message: Corporate Colonists now get badges as playtime awards instead of ribbons.
@@ -4480,5 +4473,12 @@
   id: 3216
   time: '2026-05-19T20:30:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9880
+- author: Dygon
+  changes:
+  - message: Using the suicide verb with a flamethrower no longer deletes the flamethrower.
+    type: Fix
+  id: 3217
+  time: '2026-05-19T22:08:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9812
 Name: RMC14
 Order: -1
