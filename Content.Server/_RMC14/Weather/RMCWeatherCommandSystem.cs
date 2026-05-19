@@ -73,7 +73,7 @@ public sealed class RMCWeatherCommandSystem : EntitySystem
             ("map", ev.MapId)));
     }
 
-    [AdminCommand(AdminFlags.Fun)]
+    [AdminCommand(AdminFlags.Spawn)]
     private void RMCWeather(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length < 2)
