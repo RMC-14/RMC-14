@@ -550,6 +550,14 @@
     - doors
     base: cavewall
 
+- type: entity
+  parent: CMWallRock
+  id: CMWallRock25
+  suffix: 25 minutes
+  components:
+  - type: TimedDespawn
+    lifetime: 1500
+
 # Cult
 - type: entity
   parent: CMBaseWall
