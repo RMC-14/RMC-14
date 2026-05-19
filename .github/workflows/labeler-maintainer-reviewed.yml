@@ -87,6 +87,8 @@ jobs:
 
             remove_all_status_labels
 
+            echo "Label is now: $label"
+
             gh pr -R "${{ github.repository }}" edit "$PR_NUMBER" --add-label "$label"
 
             echo "Set PR status: $label"
