@@ -75,7 +75,7 @@ public sealed class JoinXenoSystem : EntitySystem
         var denyQueuing = _config.GetCVar(RMCCVars.RMCLarvaQueueRoundstartDelaySeconds);
         if (_gameTicker.RoundDuration().TotalSeconds <= denyQueuing)
         {
-            _popup.PopupEntity($"Joining a hive from observer is disabled for {denyQueuing} seconds from the start of the round.", args.Performer);
+            _popup.PopupEntity($"Joining a hive while observing is disabled for the first {denyQueuing} seconds of the round.", args.Performer, args.Performer);
             return;
         }
 
