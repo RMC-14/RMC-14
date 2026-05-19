@@ -34,16 +34,16 @@ jobs:
           LABEL_PARTIAL_APPROVAL="S: Partially Approved"
           LABEL_APPROVED="S: Approved"
 
-          PR_NUMBER="${{ github.event.pull_request.number }}"
-          EVENT_NAME="${{ github.event_name }}"
-          ACTION="${{ github.event.action }}"
-
           ALL_LABELS=(
             "$LABEL_CHANGES_REQUESTED"
             "$LABEL_NEEDS_APPROVAL"
             "$LABEL_PARTIAL_APPROVAL"
             "$LABEL_APPROVED"
           )
+
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          EVENT_NAME="${{ github.event_name }}"
+          ACTION="${{ github.event.action }}"
 
           # ------------------------------------------------------------
           # Utility functions
@@ -64,34 +64,19 @@ jobs:
             return 1
           }
 
-          remove_all_status_labels() {
-            local existing=()
-
-            while IFS= read -r label; do
-              existing+=("$label")
-            done < <(get_labels)
-
-            for status in "${ALL_LABELS[@]}"; do
-              for current in "${existing[@]}"; do
-                if [[ "$current" == "$status" ]]; then
-                  gh pr -R "${{ github.repository }}" edit "$PR_NUMBER" --remove-label "$status"
-                fi
-              done
-            done
-          }
-
           set_status() {
-            local label="$1"
-            echo $1
-            echo $label
+            local target_label="$1"
 
-            remove_all_status_labels
+            for other_label in "${ALL_LABELS[@]}"; do
+              if [[ $target_label -neq $other_label && has_label "$other_label" ]]; then
+                echo "Removing existing label: $other_label"
+                gh pr -R "${{ github.repository }}" edit "$PR_NUMBER" --remove-label "$other_label"
+              fi
+            done
 
-            echo "Label is now: $label"
+            gh pr -R "${{ github.repository }}" edit "$PR_NUMBER" --add-label "$target_label"
 
-            gh pr -R "${{ github.repository }}" edit "$PR_NUMBER" --add-label "$label"
-
-            echo "Set PR status: $label"
+            echo "Set PR status: $target_label"
           }
 
           ##############################################################
