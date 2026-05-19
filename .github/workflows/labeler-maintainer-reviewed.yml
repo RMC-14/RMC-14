@@ -22,7 +22,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }} # Authenticate gh CLI which is pre-installed, see docs above.
 
-      # These are our label names.
+      # These are our label names:
       LABEL_CHANGES_REQUESTED: "S: Awaiting Changes"
       LABEL_NEEDS_APPROVAL: "S: Needs Review"
       LABEL_PRE_APPROVED: "S: Partially Approved"
@@ -50,7 +50,7 @@ jobs:
           # Utility functions
           # ------------------------------------------------------------
           get_labels() {
-            gh pr view "$PR_NUMBER" \
+            gh pr -R "${{ github.repository }}" view "$PR_NUMBER" \
               --json labels \
               --jq '.labels[].name'
           }
@@ -75,7 +75,7 @@ jobs:
             for status in "${ALL_LABELS[@]}"; do
               for current in "${existing[@]}"; do
                 if [[ "$current" == "$status" ]]; then
-                  gh pr edit "$PR_NUMBER" --remove-label "$status"
+                  gh pr -R "${{ github.repository }}" edit "$PR_NUMBER" --remove-label "$status"
                 fi
               done
             done
@@ -86,7 +86,7 @@ jobs:
 
             remove_all_status_labels
 
-            gh pr edit "$PR_NUMBER" --add-label "$label"
+            gh pr -R "${{ github.repository }}" edit "$PR_NUMBER" --add-label "$label"
 
             echo "Set PR status: $label"
           }
