@@ -104,7 +104,7 @@ public sealed class LarvaQueueSystem : EntitySystem
 
         if (RemoveFromQueue(actor.PlayerSession.UserId, hive))
         {
-            _popup.PopupEntity($"You have been removed from the queue", actorEntity.Value);
+            _popup.PopupEntity($"You have been removed from the queue", actorEntity.Value, actorEntity.Value);
             return;
         }
 
