@@ -1499,3 +1499,7 @@ CMBeltMarineMP5: RMCBeltMarinePCAC5
 RMCPouchMagazineFilledMP5: RMCPouchMagazineFilledPCAC5
 RMCPouchMagazineLargeMP5: RMCPouchMagazineLargePCAC5
 RMCAttachmentMP5AltStockCollapsible: RMCAttachmentStockPCAC5Collapsible
+
+#2026-05-20
+RMCHeadCapFerret: RMCHeadCapGrey
+CMPosterRememberIo: CMRandomPosterAny
