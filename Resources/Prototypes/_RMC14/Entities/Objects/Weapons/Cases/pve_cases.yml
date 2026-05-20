@@ -37,7 +37,7 @@
   parent: RMCBasePVEEquipmentCase
   id: RMCPVECaseM42A2
   name: M42A2 shotgun case
-  description: A heavy case for storing an M42A2 pump-action shotgun, an Armat Battlefield Systems modern take on an all-time classic.
+  description: A heavy case for storing an M42A2 pump-action shotgun, an AEGIS Armaments modern take on an all-time classic.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
