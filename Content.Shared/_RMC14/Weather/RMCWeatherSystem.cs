@@ -630,16 +630,22 @@ public sealed class RMCWeatherSystem : EntitySystem
 
             if (weatherEvent.WarningSound is { } fallbackSound)
             {
-                Log.Warning($"No RMC weather sirens of kind {weatherEvent.WarningSirenKind?.ToString() ?? "<unset>"} found on map {mapId} for {weatherEvent.Name}; playing global fallback warning sound.");
+                Log.Warning($"No RMC weather sirens of kind {weatherEvent.WarningSirenKind?.ToString() ?? "<unset>"} found on map {mapId} for {weatherEvent.Name}; playing global fallback warning sound and faction warnings.");
                 _audio.PlayGlobal(_audio.ResolveSound(fallbackSound), Filter.BroadcastMap(mapId), true);
             }
 
+            SendFactionWeatherWarnings(mapId, weatherEvent);
             return;
         }
 
         if (weatherEvent.WarningSound is { } warningSound)
             _audio.PlayGlobal(_audio.ResolveSound(warningSound), Filter.BroadcastMap(mapId), true);
 
+        SendFactionWeatherWarnings(mapId, weatherEvent);
+    }
+
+    private void SendFactionWeatherWarnings(MapId mapId, RMCWeatherEvent weatherEvent)
+    {
         var displayName = GetEventDisplayName(weatherEvent);
         bool IsOnWeatherMap(EntityUid uid) =>
             TryComp(uid, out TransformComponent? xform) &&
