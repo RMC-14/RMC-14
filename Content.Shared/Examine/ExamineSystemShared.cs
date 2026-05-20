@@ -194,21 +194,25 @@ namespace Content.Shared.Examine
                     range = Math.Clamp(ExamineRange - blurry.Magnitude * ExamineBlurrinessMult, 2, ExamineRange);
             }
 
-            // RMC14: Bad weather clamps the normal examine range for exposed mobs.
-            return Math.Min(range, GetWeatherExaminerRange(examiner));
+            // RMC14: Bad weather clamps exposed examine range, scaling with the current eye zoom.
+            return GetWeatherExaminerRange(examiner, range);
         }
 
         // RMC14 start - weather examine range.
-        private float GetWeatherExaminerRange(EntityUid examiner)
+        private float GetWeatherExaminerRange(EntityUid examiner, float baseRange)
         {
             if (!TryComp(examiner, out TransformComponent? xform) ||
-                !_rmcWeather.TryGetCurrentExamineRange(xform.MapID, out var range) ||
+                !_rmcWeather.TryGetCurrentExamineRange(xform.MapID, out var weatherRange) ||
                 !_rmcWeather.IsWeatherExposed(examiner))
             {
-                return ExamineRange;
+                return baseRange;
             }
 
-            return Math.Clamp(range, 0, ExamineRange);
+            var zoomScale = 1f;
+            if (TryComp<EyeComponent>(examiner, out var eye))
+                zoomScale = Math.Max(eye.Zoom.X, eye.Zoom.Y);
+
+            return Math.Min(baseRange, Math.Clamp(weatherRange * zoomScale, 0, baseRange));
         }
         // RMC14 end
 

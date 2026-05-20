@@ -193,7 +193,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         OverlayDrawArgs args,
         RMCWeatherScreenOverlay overlay)
     {
-        // Scale the shared 15x15 radii into current viewport pixels so widescreen keeps matching clear areas.
+        // Scale the shared 15x15 fullscreen data into the current viewport so bigger views stay proportionally obscured.
         var viewport = args.ViewportBounds;
         var halfSize = new Vector2(viewport.Width / 2f, viewport.Height / 2f);
         var radii = RMCWeatherScreenOverlayData.GetRadii(overlay);
