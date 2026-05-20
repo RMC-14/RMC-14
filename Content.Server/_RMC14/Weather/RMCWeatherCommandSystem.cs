@@ -113,7 +113,7 @@ public sealed class RMCWeatherCommandSystem : EntitySystem
             return;
         }
 
-        // Event names may contain spaces; only a trailing "now" is treated as the skip-warning flag.
+        // Only event indexes are accepted; a trailing "now" skips the warning.
         var eventArgs = args.Skip(2).ToList();
         var skipWarning = eventArgs.Count > 0 &&
                           string.Equals(eventArgs[^1], "now", StringComparison.OrdinalIgnoreCase);
@@ -177,8 +177,11 @@ public sealed class RMCWeatherCommandSystem : EntitySystem
             string.Equals(args[0], "start", StringComparison.OrdinalIgnoreCase) &&
             int.TryParse(args[1], out var mapInt))
         {
-            // Options come from the target map cycle, so admins can use index, prototype name, or localized display name.
-            return CompletionResult.FromHintOptions(_weather.GetWeatherEventOptions(new MapId(mapInt)).Distinct(),
+            // Options come from the target map cycle; completion shows the event behind each index.
+            var options = _weather.GetWeatherEventCompletionOptions(new MapId(mapInt))
+                .Select(option => new CompletionOption(option.Value, option.Hint));
+
+            return CompletionResult.FromHintOptions(options,
                 Loc.GetString("rmc-weather-command-hint-event"));
         }
 

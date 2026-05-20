@@ -12,10 +12,10 @@ rmc-weather-siren-message = The {$siren} blares. ATTENTION. POTENTIALLY HAZARDOU
 rmc-storm-siren-message = The {$siren} blares. ATTENTION. ATTENTION. INCOMING TROPICAL STORM DETECTED. SEEK SHELTER IMMEDIATELY.
 
 rmc-weather-command-description = Controls the RMC gameplay weather cycle.
-rmc-weather-command-help = rmcweather status <mapId> | start <mapId> <event/index> [now] | end <mapId>
-rmc-weather-command-not-enough-arguments = Not enough arguments. Use: rmcweather status <mapId> | start <mapId> <event/index> [now] | end <mapId>
+rmc-weather-command-help = rmcweather status <mapId> | start <mapId> <eventIndex> [now] | end <mapId>
+rmc-weather-command-not-enough-arguments = Not enough arguments. Use: rmcweather status <mapId> | start <mapId> <eventIndex> [now] | end <mapId>
 rmc-weather-command-unknown-action = Unknown RMC weather action '{$action}'.
-rmc-weather-command-missing-event = Missing event name or index.
+rmc-weather-command-missing-event = Missing event index.
 rmc-weather-command-map-id-integer = Map id must be an integer.
 rmc-weather-command-map-does-not-exist = Map {$map} does not exist.
 rmc-weather-command-no-cycle = No RMC weather cycle found on map {$map}.
@@ -27,11 +27,11 @@ rmc-weather-command-status = RMC weather on map {$map}: {$state}
 rmc-weather-command-status-event = {$status} - {$weather} ({$seconds}s remaining)
 rmc-weather-command-status-first-drop-complete = {$status}; first drop complete
 rmc-weather-command-status-waiting-first-drop = {$status}; waiting for first drop before decal cleaning
+rmc-weather-command-event-index-integer = RMC weather event index must be an integer.
 rmc-weather-command-index-out-of-range = RMC weather event index {$index} is out of range.
-rmc-weather-command-unknown-event = Unknown RMC weather event '{$event}'.
 rmc-weather-command-hint-action = action
 rmc-weather-command-hint-map-id = Map Id
-rmc-weather-command-hint-event = event/index
+rmc-weather-command-hint-event = event index
 rmc-weather-command-hint-now = now
 
 rmc-weather-admin-started = Weather event {$weather} starting on map {$map} with duration of {$seconds} seconds.

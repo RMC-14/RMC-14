@@ -192,7 +192,7 @@ public sealed class RMCWeatherSystem : EntitySystem
             ("status", status));
     }
 
-    public IEnumerable<string> GetWeatherEventOptions(MapId mapId)
+    public IEnumerable<(string Value, string Hint)> GetWeatherEventCompletionOptions(MapId mapId)
     {
         if (!TryGetWeatherCycle(mapId, out var ent))
             yield break;
@@ -200,16 +200,31 @@ public sealed class RMCWeatherSystem : EntitySystem
         for (var i = 0; i < ent.Comp.WeatherEvents.Count; i++)
         {
             var weatherEvent = ent.Comp.WeatherEvents[i];
-            yield return i.ToString();
-            yield return weatherEvent.Name;
-
-            if (weatherEvent.DisplayName != null)
-            {
-                var localizedName = GetLocalizedDisplayName(weatherEvent);
-                if (localizedName != null)
-                    yield return localizedName;
-            }
+            yield return (i.ToString(), GetWeatherEventCompletionHint(weatherEvent));
         }
+    }
+
+    private string GetWeatherEventCompletionHint(RMCWeatherEvent weatherEvent)
+    {
+        return $"{GetEventDisplayName(weatherEvent)} - {weatherEvent.ScreenOverlay}, {FormatWeatherDuration(weatherEvent.Duration)}";
+    }
+
+    private static string FormatWeatherDuration(TimeSpan duration)
+    {
+        if (duration <= TimeSpan.Zero)
+            return "permanent";
+
+        var totalSeconds = (int) Math.Ceiling(duration.TotalSeconds);
+        var minutes = totalSeconds / 60;
+        var seconds = totalSeconds % 60;
+
+        if (minutes > 0 && seconds > 0)
+            return $"{minutes}m {seconds}s";
+
+        if (minutes > 0)
+            return $"{minutes}m";
+
+        return $"{seconds}s";
     }
 
     public bool CanWeatherAffectArea(EntityUid uid, MapGridComponent grid, TileRef tileRef, RoofComponent? roofComp = null)
@@ -541,32 +556,20 @@ public sealed class RMCWeatherSystem : EntitySystem
     private bool TryGetWeatherEvent(RMCWeatherCycleComponent cycle, string eventKey, out RMCWeatherEvent weatherEvent, out string message)
     {
         weatherEvent = default!;
-        if (int.TryParse(eventKey, out var index))
+        if (!int.TryParse(eventKey, out var index))
         {
-            if (index >= 0 && index < cycle.WeatherEvents.Count)
-            {
-                weatherEvent = cycle.WeatherEvents[index];
-                message = string.Empty;
-                return true;
-            }
-
-            message = Loc.GetString("rmc-weather-command-index-out-of-range", ("index", index));
+            message = Loc.GetString("rmc-weather-command-event-index-integer");
             return false;
         }
 
-        foreach (var candidate in cycle.WeatherEvents)
+        if (index >= 0 && index < cycle.WeatherEvents.Count)
         {
-            if (string.Equals(candidate.Name, eventKey, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(candidate.DisplayName, eventKey, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(GetLocalizedDisplayName(candidate), eventKey, StringComparison.OrdinalIgnoreCase))
-            {
-                weatherEvent = candidate;
-                message = string.Empty;
-                return true;
-            }
+            weatherEvent = cycle.WeatherEvents[index];
+            message = string.Empty;
+            return true;
         }
 
-        message = Loc.GetString("rmc-weather-command-unknown-event", ("event", eventKey));
+        message = Loc.GetString("rmc-weather-command-index-out-of-range", ("index", index));
         return false;
     }
 
