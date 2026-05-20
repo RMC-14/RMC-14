@@ -896,7 +896,7 @@ public sealed class RMCWeatherSystem : EntitySystem
             if (weatherEvent.EffectMessage is { } effectMessage &&
                 CanShowWeatherEffectMessage(uid, weatherEvent))
             {
-                _popup.PopupEntity(Loc.GetString(effectMessage), uid, uid, PopupType.SmallCaution);
+                _popup.PopupEntity(Loc.GetString(effectMessage), uid, uid, PopupType.Small);
             }
         }
     }
