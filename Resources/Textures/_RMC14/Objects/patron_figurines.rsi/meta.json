@@ -720,6 +720,9 @@
     },
     {
       "name": "patches-it-up"
+    },
+    {
+      "name": "lumen_losinfob_lamplight"
     }
   ]
 }

@@ -2811,3 +2811,14 @@
     state: patches-it-up_armory
   - type: PatronFigurine
     id: e744a05a-b40a-4294-9433-84ea428829d1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLumenLosinfobLamplight
+  name: Lumen 'Losinfob' Lamplight figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: lumen_losinfob_lamplight
+  - type: PatronFigurine
+    id: 9c07cea8-55f6-42ee-a1c3-0ef6051942d0
