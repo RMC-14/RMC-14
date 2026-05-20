@@ -322,3 +322,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Created by GreenFireSound, modified by kleinerstation13 (Github)"
   source: "https://freesound.org/people/GreenFireSound/sounds/396271/"
+
+- files: ["gun_m1911.ogg"]
+  license: "CC0-1.0"
+  copyright: "Created by nioczkus (freesound), modified by kleinerstation13 (Github)"
+  source: "https://freesound.org/people/nioczkus/sounds/346537/"

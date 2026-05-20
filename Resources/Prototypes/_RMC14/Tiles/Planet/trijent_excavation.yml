@@ -1,0 +1,303 @@
+# Desert Excavation
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetDesertExcavationBase
+  name: excavation
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/0.png
+  minimapColor: "#9c906dc2"
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation1
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/1.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation12
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/2.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation13
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/3.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation14
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/4.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation15
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/5.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation16
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/6.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation18
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/8.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation19
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/9.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation20
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/10.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation21
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/11.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation22
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/12.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation23
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/16.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation24
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/17.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation25
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/18.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation26
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/19.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation27
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/20.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation28
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/21.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation29
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/22.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation30
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/24.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation31
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/25.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation32
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/26.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation33
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/27.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation34
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/28.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation35
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/29.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation36
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/32.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation37
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/33.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation38
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/34.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation39
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/35.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation40
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/36.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation41
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/37.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation42
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/38.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation43
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/40.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation44
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/41.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation45
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/42.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation46
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/43.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation47
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/44.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation48
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/45.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation49
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/46.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation50
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/48.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation51
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/49.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation52
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/50.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation53
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/51.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation54
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/52.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation55
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/53.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation56
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/54.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation57
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/56.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation58
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/57.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation59
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/58.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation60
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/59.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation61
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/60.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation62
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/61.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation63
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/62.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation64
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/63.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation65
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/64.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation66
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/65.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation67
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/66.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation68
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/67.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation69
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/68.png
+
+- type: tile
+  parent: RMCPlanetDesertExcavationBase
+  id: RMCPlanetDesertExcavation70
+  sprite: /Textures/_RMC14/Tiles/planet/desert_excavation.rsi/69.png

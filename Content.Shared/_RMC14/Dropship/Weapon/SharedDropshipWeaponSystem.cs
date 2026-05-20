@@ -2,6 +2,7 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
@@ -51,6 +52,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -83,6 +85,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerloader = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCCameraSystem _rmcCamera = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCImplosionSystem _rmcImplosion = default!;
@@ -327,6 +330,16 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             targets.Add(new TargetEnt(netEnt, ent.Comp.Abbreviation));
             Dirty(uid, terminal);
         }
+
+        if (!TryComp(ent, out MetaDataComponent? metaData) || metaData.EntityPrototype == null)
+            return;
+
+        var prototype = metaData.EntityPrototype.ID;
+
+        var camera = EnsureComp<RMCCameraComponent>(ent);
+        _rmcCamera.SetCameraName(ent, $"{Name(ent)} [{ent.Comp.Abbreviation}]", camera);
+        _rmcCamera.SetCameraId(ent, prototype, camera);
+        _rmcCamera.RefreshCameras(prototype);
     }
 
     private void OnDropshipTargetRemove<T>(Entity<DropshipTargetComponent> ent, ref T args)
@@ -359,6 +372,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
 
             Dirty(uid, terminal);
+        }
+
+        if (_net.IsServer && TryComp(ent, out MetaDataComponent? metaData) && metaData.EntityPrototype is { } prototype)
+        {
+            RemComp<RMCCameraComponent>(ent);
+            RemComp<EyeComponent>(ent);
+            _rmcCamera.RefreshCameras(prototype);
         }
 
         if (_net.IsClient)
@@ -1256,6 +1276,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         _name.RefreshNameModifiers(ent.Owner);
         _physics.SetBodyType(ent, BodyType.Static);
 
+        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _mapManager);
+
+        if (CasDebug || _area.CanCAS(coordinates))
+        {
+            if (TryComp<AppearanceComponent>(ent, out var appearance))
+                _appearance.SetData(ent, SignalFlareVisuals.BeaconState, true, appearance);
+        }
+
         return true;
     }
 
@@ -1671,3 +1699,9 @@ public record struct DropshipWeaponShotEvent(
     RMCFire? Fire,
     int SoundEveryShots
 );
+
+[Serializable, NetSerializable]
+public enum SignalFlareVisuals : byte
+{
+    BeaconState
+}
