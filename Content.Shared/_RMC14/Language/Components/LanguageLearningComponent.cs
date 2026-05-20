@@ -1,9 +1,9 @@
 using Content.Shared._RMC14.Language.Prototypes;
+using Content.Shared._RMC14.Language.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Content.Shared._RMC14.Language.Systems;
 
 namespace Content.Shared._RMC14.Language.Components;
 
@@ -29,8 +29,7 @@ public sealed partial class LanguageLearningComponent : Component
     [DataField]
     public int MaxStudiedSourcesTracked = 500;
 
-    [DataField]
-    public TimeSpan LastLearningTime = TimeSpan.Zero;
+    public TimeSpan LastLearningTime;
 
     [DataField]
     public float LearningRange = 8.0f;

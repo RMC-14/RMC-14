@@ -120,7 +120,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
         languageData.Encountered = true;
         SyncLanguageState(learner.Comp, language);
-        Dirty(learner.Owner, learner.Comp);
+        Dirty(learner);
     }
 
     private bool ShouldStartEncountered(LanguageLearningComponent comp, ProtoId<LanguagePrototype> language)
@@ -276,7 +276,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             UpdateLanguageProgress(learner, language);
 
             SyncLanguageState(comp, language);
-            Dirty(learner.Owner, comp);
+            Dirty(learner);
         }
     }
 

@@ -14,6 +14,7 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
     [Dependency] protected readonly IRobustRandom _random = default!;
 
     protected static readonly Regex WordRegex = new(@"\b[a-zA-Z']+\b", RegexOptions.Compiled);
+
     public string ProcessMessageForListener(EntityUid listener, string message, ProtoId<LanguagePrototype> language)
     {
         if (_language.CanUnderstand(listener, language))
