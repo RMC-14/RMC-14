@@ -31,7 +31,7 @@ public sealed class XenoAdrenalineSurgeSystem : EntitySystem
 
             if (comp.IsSurging && comp.SurgeEndTime.HasValue && now >= comp.SurgeEndTime.Value)
             {
-                EndSurge(uid, comp);
+                EndSurge((uid, comp));
             }
 
             if (!comp.IsUsable && !comp.IsSurging)
@@ -51,38 +51,40 @@ public sealed class XenoAdrenalineSurgeSystem : EntitySystem
         }
     }
 
-    private void OnDamageTaken(EntityUid uid, XenoAdrenalineSurgeComponent comp, ref DamageModifyAfterResistEvent args)
+    private void OnDamageTaken(Entity<XenoAdrenalineSurgeComponent> xeno, ref DamageModifyAfterResistEvent args)
     {
-        if (!comp.IsUsable)
+        if (!xeno.Comp.IsUsable)
             return;
 
         if (args.Tool == null || !HasComp<ProjectileComponent>(args.Tool))
             return;
 
-        StartSurge(uid, comp);
+        StartSurge(xeno);
     }
 
-    private void StartSurge(EntityUid uid, XenoAdrenalineSurgeComponent comp)
+    private void StartSurge(Entity<XenoAdrenalineSurgeComponent> xeno)
     {
-        comp.IsSurging = true;
-        comp.IsUsable = false;
-        comp.ReadyMessageSent = false;
-        comp.SurgeEndTime = _timing.CurTime + comp.SurgeDuration;
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-adrenaline-surge-start"), uid, uid);
-        _speedModifier.RefreshMovementSpeedModifiers(uid);
+        xeno.Comp.IsSurging = true;
+        xeno.Comp.IsUsable = false;
+        xeno.Comp.ReadyMessageSent = false;
+        xeno.Comp.SurgeEndTime = _timing.CurTime + xeno.Comp.SurgeDuration;
+        Dirty(xeno);
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-adrenaline-surge-start"), xeno, xeno);
+        _speedModifier.RefreshMovementSpeedModifiers(xeno);
     }
 
-    private void EndSurge(EntityUid uid, XenoAdrenalineSurgeComponent comp)
+    private void EndSurge(Entity<XenoAdrenalineSurgeComponent> xeno)
     {
-        comp.IsSurging = false;
-        _speedModifier.RefreshMovementSpeedModifiers(uid);
+        xeno.Comp.IsSurging = false;
+        Dirty(xeno);
+        _speedModifier.RefreshMovementSpeedModifiers(xeno);
     }
 
-    private void OnRefreshSpeed(EntityUid uid, XenoAdrenalineSurgeComponent comp, RefreshMovementSpeedModifiersEvent args)
+    private void OnRefreshSpeed(Entity<XenoAdrenalineSurgeComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!comp.IsSurging)
+        if (!xeno.Comp.IsSurging)
             return;
 
-        args.ModifySpeed(comp.SpeedModifierAmount, comp.SpeedModifierAmount);
+        args.ModifySpeed(xeno.Comp.SpeedModifierAmount, xeno.Comp.SpeedModifierAmount);
     }
 }

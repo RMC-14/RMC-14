@@ -11,11 +11,6 @@ public sealed class XenoInsightSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
-
     public int GetInsight(EntityUid uid)
     {
         if (!TryComp<XenoInsightComponent>(uid, out var insight))

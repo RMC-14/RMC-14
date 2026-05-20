@@ -116,7 +116,6 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             if (orthoTile == Vector2i.Zero)
                 orthoTile = new Vector2i(1, 0);
 
-            var mapSystem = EntityManager.System<SharedMapSystem>();
             var centerTile = _mapSystem.CoordinatesToTile(gridId, grid, targetMap);
 
             var radius = (int) xeno.Comp.DeployTrapsRadius;

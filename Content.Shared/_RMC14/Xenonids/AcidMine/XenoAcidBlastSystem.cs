@@ -21,18 +21,20 @@ namespace Content.Shared._RMC14.Xenonids.AcidMine;
 
 public sealed class XenoAcidBlastSystem : EntitySystem
 {
+    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly MountableWeaponSystem _mg = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly MountableWeaponSystem _mg = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    private readonly HashSet<EntityUid> _targets = new();
 
     public override void Initialize()
     {
@@ -113,8 +115,10 @@ public sealed class XenoAcidBlastSystem : EntitySystem
     {
         var hits = 0;
         var position = _transform.GetMapCoordinates(ent);
+        _targets.Clear();
+        _lookup.GetEntitiesInRange(position.MapId, position.Position, ent.Comp.BlastRadius, _targets);
 
-        foreach (var target in _lookup.GetEntitiesInRange(position, ent.Comp.BlastRadius))
+        foreach (var target in _targets)
         {
             if (target == ent.Comp.Attached)
                 continue;

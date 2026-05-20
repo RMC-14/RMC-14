@@ -1,6 +1,8 @@
-﻿namespace Content.Shared._RMC14.Xenonids.AdrenalineSurge;
+﻿using Robust.Shared.GameStates;
 
-[RegisterComponent]
+namespace Content.Shared._RMC14.Xenonids.AdrenalineSurge;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoAdrenalineSurgeComponent : Component
 {
 
@@ -15,6 +17,7 @@ public sealed partial class XenoAdrenalineSurgeComponent : Component
 
     public TimeSpan? SurgeEndTime;
 
+    [AutoNetworkedField]
     public bool IsSurging;
 
     public bool IsUsable = true;

@@ -13,11 +13,11 @@ namespace Content.Server._RMC14.Xenonids.Construction.DeployedTraps;
 
 public sealed class XenoDeployedTrapsSystem : EntitySystem
 {
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly DestructibleSystem _destructible = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {
@@ -36,19 +36,19 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
             return;
 
         var destroyed = false;
+
         if (_destructible.TryGetDestroyedAt(trap.Owner, out var totalHealth))
-        {
-            destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > totalHealth;
-        }
-        QueueDel(trap);
+            return;
+
+        if (args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > totalHealth)
+            QueueDel(trap);
     }
 
     private void OnStepTriggerAttempt(Entity<XenoDeployedTrapsComponent> trap, ref StepTriggerAttemptEvent args)
     {
         if (_hive.FromSameHive(args.Tripper, trap.Owner))
         {
-            args.Continue = false;
-            return;
+            args.Continue = true;
         }
 
     }
