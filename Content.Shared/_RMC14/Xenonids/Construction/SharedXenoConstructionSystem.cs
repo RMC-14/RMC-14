@@ -612,6 +612,32 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 }
             }
 
+            if (_prototype.TryIndex(structureToSpawn, out var replacementProto) &&
+                replacementProto.HasComponent<DesignNodeComponent>())
+            {
+                var removalCost = 0;
+                foreach (var choiceId in xeno.Comp.CanBuild)
+                {
+                    if (_prototype.TryIndex(choiceId, out var choiceProto) &&
+                        choiceProto.TryGetComponent(out DesignerDeleteDesignNodeComponent? deleteComp, _compFactory))
+                    {
+                        removalCost = deleteComp.PlasmaCost;
+                        break;
+                    }
+                }
+
+                using var existingNodes = _rmcMap.GetAnchoredEntitiesEnumerator<DesignNodeComponent>(coordinates);
+                while (existingNodes.MoveNext(out var existingNodeUid))
+                {
+                    if (TryComp(existingNodeUid, out DesignNodeComponent? existingNodeComp) &&
+                        existingNodeComp.BoundXeno == xeno.Owner &&
+                        !DeleteDesignNode(xeno.Owner, existingNodeUid, existingNodeComp, removalCost))
+                    {
+                        return;
+                    }
+                }
+            }
+
             var structure = Spawn(structureToSpawn, coordinates);
             _hive.SetSameHive(xeno.Owner, structure);
             if (TryComp(structure, out DesignNodeComponent? nodeComp))
@@ -1329,18 +1355,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         target = target.SnapToGrid(EntityManager, _map);
         var hasBoost = _queenBoostQuery.HasComp(xeno.Owner);
 
-        if (checkStructureSelected &&
-            buildChoice is { } nodeChoice &&
-            _prototype.TryIndex(nodeChoice, out var nodeChoiceProto) &&
-            nodeChoiceProto.HasComponent<DesignNodeComponent>() &&
-            _rmcMap.HasAnchoredEntityEnumerator<DesignNodeComponent>(target, out _))
-        {
-            if (popup)
-                _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), xeno, xeno, PopupType.SmallCaution);
-
-            return false;
-        }
-
         if (checkWeeds && !_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
             if (popup)
@@ -2025,6 +2039,25 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         return 1f;
     }
+
+    private bool DeleteDesignNode(EntityUid xeno, EntityUid nodeUid, DesignNodeComponent nodeComp, int plasmaCost)
+    {
+        if (plasmaCost > 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno, plasmaCost))
+            return false;
+
+        if (nodeComp.BoundXeno is { } placer && TryComp(placer, out DesignerStrainComponent? designer))
+        {
+            designer.DesignNodes.Remove(nodeUid);
+            designer.CurrentDesignNodes = designer.DesignNodes.Count;
+            Dirty(placer, designer);
+        }
+
+        if (_net.IsServer)
+            QueueDel(nodeUid);
+
+        return true;
+    }
+
     private bool TryHandleDesignerRemoteDeleteNodeChoice(Entity<XenoConstructionComponent> xeno, EntProtoId choice, EntityCoordinates target)
     {
         if (!_prototype.TryIndex(choice, out var proto) ||
@@ -2070,11 +2103,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return true;
         }
 
-        if (deleteChoice.PlasmaCost > 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, deleteChoice.PlasmaCost))
+        if (!DeleteDesignNode(xeno.Owner, nodeUid.Value, nodeComp, deleteChoice.PlasmaCost))
             return true;
-
-        if (_net.IsServer)
-            QueueDel(nodeUid.Value);
 
         _audio.PlayPredicted(xeno.Comp.BuildSound, snapped, xeno);
         return true;
