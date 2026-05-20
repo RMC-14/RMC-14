@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.DoAfter;
+using Content.Shared.Roles;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 using System;
@@ -21,6 +24,16 @@ public sealed partial class VehicleEntryPoint
     public Vector2? InteriorCoords;
 }
 
+[DataDefinition]
+public sealed partial class VehicleReservedPassengerPool
+{
+    [DataField(required: true)]
+    public int Slots;
+
+    [DataField(required: true)]
+    public HashSet<ProtoId<JobPrototype>> EligibleJobs = new();
+}
+
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(VehicleSystem))]
 public sealed partial class VehicleEnterComponent : Component
@@ -33,6 +46,9 @@ public sealed partial class VehicleEnterComponent : Component
 
     [DataField]
     public int MaxXenos = 0;
+
+    [DataField]
+    public List<VehicleReservedPassengerPool> ReservedPassengerPools = new();
 
     [DataField]
     public List<VehicleEntryPoint> EntryPoints = new();

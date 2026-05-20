@@ -202,6 +202,21 @@
 - type: entity
   parent: VehicleTankBase
   id: VehicleTank
+  components:
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/tank_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 3
+    maxXenos: 2
+    reservedPassengerPools:
+    - slots: 2
+      eligibleJobs:
+      - CMVehicleCrewman
+    entryPoints:
+    - offset: 0,2
+      radius: 1
+      interiorCoords: 0.5,-1
 
 - type: entity
   parent: VehicleTankBase

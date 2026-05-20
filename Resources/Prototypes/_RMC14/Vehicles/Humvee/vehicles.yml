@@ -356,8 +356,19 @@
     interiorPath: /Maps/_RMC14/Vehicles/humvee_arc_interior.yml
     enterDoAfter: 1.0
     exitDoAfter: 1.0
-    maxPassengers: 4
+    maxPassengers: 5
     maxXenos: 2
+    reservedPassengerPools:
+    - slots: 2
+      eligibleJobs:
+      - CMStaffOfficer
+      - CMSeniorEnlistedAdvisor
+      - CMExecutiveOfficer
+      - CMCommandingOfficer
+      - CMUNMCBrigadierGeneral
+    - slots: 1
+      eligibleJobs:
+      - CMIntelOfficer
     entryPoints:
     - offset: -1,-0.1
       radius: 0.5

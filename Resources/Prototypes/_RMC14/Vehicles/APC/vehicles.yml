@@ -182,6 +182,28 @@
 - type: entity
   parent: VehicleAPCBase
   id: VehicleAPC
+  components:
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 18
+    maxXenos: 3
+    reservedPassengerPools:
+    - slots: 2
+      eligibleJobs:
+      - CMVehicleCrewman
+    - slots: 1
+      eligibleJobs:
+      - RMCJobSynthetic
+      - RMCCorporateSynthetic
+    entryPoints:
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.55,2.65
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.55,-1.2
 
 - type: entity
   parent: VehicleAPCBase
@@ -211,8 +233,22 @@
     interiorPath: /Maps/_RMC14/Vehicles/apc_medical_interior.yml
     enterDoAfter: 1.0
     exitDoAfter: 1.0
-    maxPassengers: 10
+    maxPassengers: 11
     maxXenos: 3
+    reservedPassengerPools:
+    - slots: 2
+      eligibleJobs:
+      - CMVehicleCrewman
+    - slots: 1
+      eligibleJobs:
+      - CMHospitalCorpsman
+      - CMDoctor
+      - CMResearcher
+      - CMCMO
+      - CMNurse
+      - RMCFieldDoctor
+      - RMCJobSynthetic
+      - RMCCorporateSynthetic
     entryPoints:
     - offset: 1.5,0
       radius: 0.7
@@ -252,8 +288,23 @@
     interiorPath: /Maps/_RMC14/Vehicles/apc_command_interior.yml
     enterDoAfter: 1.0
     exitDoAfter: 1.0
-    maxPassengers: 10
+    maxPassengers: 12
     maxXenos: 3
+    reservedPassengerPools:
+    - slots: 2
+      eligibleJobs:
+      - CMVehicleCrewman
+    - slots: 1
+      eligibleJobs:
+      - CMStaffOfficer
+      - CMSeniorEnlistedAdvisor
+      - CMExecutiveOfficer
+      - CMCommandingOfficer
+      - CMUNMCBrigadierGeneral
+    - slots: 1
+      eligibleJobs:
+      - RMCJobSynthetic
+      - RMCCorporateSynthetic
     entryPoints:
     - offset: 1.5,0
       radius: 0.7

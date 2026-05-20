@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
@@ -11,8 +12,11 @@ using Content.Shared.DoAfter;
 using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.GameObjects;
@@ -25,6 +29,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Physics;
 using Content.Shared._RMC14.Map;
@@ -39,9 +44,11 @@ public sealed class VehicleSystem : EntitySystem
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -159,7 +166,7 @@ public sealed class VehicleSystem : EntitySystem
         {
             if (ent.Comp.MaxPassengers > 0 &&
                 !interior.Passengers.Contains(user) &&
-                CountLivingOccupants(interior.Passengers) >= ent.Comp.MaxPassengers)
+                !CanEnterAsPassenger(ent, interior, user))
             {
                 _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-passenger-full"), user, user);
                 return false;
@@ -714,6 +721,62 @@ public sealed class VehicleSystem : EntitySystem
         }
 
         return count;
+    }
+
+    private bool CanEnterAsPassenger(Entity<VehicleEnterComponent> ent, VehicleInteriorComponent interior, EntityUid user)
+    {
+        var passengers = CountLivingOccupants(interior.Passengers);
+        if (passengers >= ent.Comp.MaxPassengers)
+            return false;
+
+        if (ent.Comp.ReservedPassengerPools.Count == 0)
+            return true;
+
+        TryGetJobId(user, out var userJob);
+
+        var reservedForOtherJobs = 0;
+        foreach (var pool in ent.Comp.ReservedPassengerPools)
+        {
+            if (userJob is { } job && pool.EligibleJobs.Contains(job))
+                continue;
+
+            reservedForOtherJobs += GetUnfilledReservedPoolSlots(pool, interior.Passengers);
+        }
+
+        return passengers < ent.Comp.MaxPassengers - reservedForOtherJobs;
+    }
+
+    private int GetUnfilledReservedPoolSlots(VehicleReservedPassengerPool pool, HashSet<EntityUid> passengers)
+    {
+        var occupied = 0;
+        foreach (var passenger in passengers)
+        {
+            if (_mobState.IsDead(passenger) ||
+                !TryGetJobId(passenger, out var jobId) ||
+                !pool.EligibleJobs.Contains(jobId))
+            {
+                continue;
+            }
+
+            occupied++;
+        }
+
+        return Math.Max(0, pool.Slots - occupied);
+    }
+
+    private bool TryGetJobId(EntityUid entity, out ProtoId<JobPrototype> jobId)
+    {
+        jobId = default;
+
+        if (!_mind.TryGetMind(entity, out var mindId, out _) ||
+            !_job.MindTryGetJobId(mindId, out var job) ||
+            job is not { } resolvedJob)
+        {
+            return false;
+        }
+
+        jobId = resolvedJob;
+        return true;
     }
 
     private void SpawnVehicleInteriorKey(EntityUid vehicle, MapId mapId)
