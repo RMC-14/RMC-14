@@ -836,6 +836,8 @@
         crate: RMCCrateMagazineM2C
         icon:
           entity: RMCMagazineM2C
+      - cost: 6000
+        crate: RMCCrateMagazineAmmoSurplus
     - name: rmc-requisitions-category-attachments
       entries:
       - cost: 3000
