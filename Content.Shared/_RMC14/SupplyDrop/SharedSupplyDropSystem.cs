@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CameraShake;
+using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Extensions;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
@@ -12,10 +13,13 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.Maps;
+using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -29,12 +33,15 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedParaDropSystem _paradrop = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
@@ -55,6 +62,9 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         SubscribeLocalEvent<BeingSupplyDroppedComponent, StorageOpenAttemptEvent>(OnBeingSupplyDroppedOpenAttempt);
+        SubscribeLocalEvent<BeingSupplyDroppedComponent, ParaDropFinishedEvent>(OnBeingSupplyDroppedLanded);
+        SubscribeLocalEvent<BeingSupplyDroppedComponent, CrashLandedEvent>(OnBeingSupplyDroppedLanded);
+        SubscribeLocalEvent<BeingSupplyDroppedComponent, ComponentRemove>(OnBeingSupplyDroppedRemoved);
 
         Subs.BuiEvents<SupplyDropComputerComponent>(SupplyDropComputerUi.Key,
             subs =>
@@ -75,6 +85,42 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     private void OnBeingSupplyDroppedOpenAttempt(Entity<BeingSupplyDroppedComponent> ent, ref StorageOpenAttemptEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnBeingSupplyDroppedLanded<T>(Entity<BeingSupplyDroppedComponent> ent, ref T args)
+    {
+        if (_net.IsClient)
+            return;
+
+        RemoveWarningMarker(ent);
+
+        if (ent.Comp.LandingDamage is { } landingDamage)
+        {
+            _intersecting.Clear();
+            _entityLookup.GetEntitiesInRange(ent, 0.33f, _intersecting);
+            foreach (var intersecting in _intersecting)
+            {
+                if (_container.TryGetContainingContainer(intersecting, out var container) && (container.Owner == ent.Owner || HasComp<ParaDroppingComponent>(container.Owner) || HasComp<CrashLandingComponent>(container.Owner)))
+                        continue;
+
+                _damageable.TryChangeDamage(intersecting, landingDamage, true);
+            }
+        }
+
+        var mapPos = _transform.GetMapCoordinates(ent);
+        var filter = Filter.Empty().AddInRange(mapPos, 7);
+        foreach (var recipient in filter.Recipients)
+        {
+            if (recipient.AttachedEntity is not { } player)
+                continue;
+
+            _rmcCameraShake.ShakeCamera(player, 4, 5);
+        }
+    }
+
+    private void OnBeingSupplyDroppedRemoved(Entity<BeingSupplyDroppedComponent> ent, ref ComponentRemove args)
+    {
+        RemoveWarningMarker(ent);
     }
 
     private void OnSupplyDropComputerLongitudeMsg(Entity<SupplyDropComputerComponent> ent, ref SupplyDropComputerLongitudeBuiMsg args)
@@ -186,6 +232,14 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             return false;
         }
 
+        SharedEntityStorageComponent? storage = null;
+        if (_entityStorage.ResolveStorage(crate, ref storage) &&
+            storage.Open)
+        {
+            _popup.PopupCursor(Loc.GetString("rmc-supply-drop-crate-open"), user, PopupType.MediumCaution);
+            return false;
+        }
+
         if (!_area.CanSupplyDrop(mapCoordinates))
         {
             _popup.PopupCursor(Loc.GetString("rmc-supply-drop-underground"), user, PopupType.MediumCaution);
@@ -199,36 +253,56 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             return false;
         }
 
-        SharedEntityStorageComponent? storage = null;
-        if (_entityStorage.ResolveStorage(crate, ref storage) &&
-            storage.Open)
-        {
-            _popup.PopupCursor(Loc.GetString("rmc-supply-drop-crate-open"), user, PopupType.MediumCaution);
-            return false;
-        }
-
+        var skyFallDuration = (float) crate.Comp.ArrivingSoundDelay.TotalSeconds;
+        var dropDuration = (float) crate.Comp.DropDuration.TotalSeconds;
+        var dropCoordinates = mapCoordinates.Offset(new Vector2(0.5f, 0.5f));
         var crateCoordinates = _transform.GetMoverCoordinates(crate);
+        var openAt = crate.Comp.ArrivingSoundDelay + crate.Comp.DropDuration + crate.Comp.OpenDelay;
+
+        LaunchSupplyDrop(crate,
+            dropCoordinates,
+            skyFallDuration,
+            dropDuration,
+            openAt,
+            crate.Comp.LandingDamage,
+            crate.Comp.LandingEffectId,
+            crate.Comp.ArrivingSound);
+
         _popup.PopupClient(Loc.GetString("rmc-supply-drop-crate-load", ("crate", crate)), crateCoordinates, user, PopupType.Medium);
-        _audio.PlayPredicted(crate.Comp.LaunchSound, crateCoordinates, user);
         _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-supply-drop-squad-announcement", ("crate", crate)), squad);
-        _rmcpulling.TryStopAllPullsFromAndOn(crate);
-
-        var mapId = EnsureMap();
-        _transform.SetMapCoordinates(crate, new MapCoordinates(_supplyDropCount++ * 50, 0, mapId));
-
-        var dropping = EnsureComp<BeingSupplyDroppedComponent>(crate);
-        dropping.Target = _transform.ToCoordinates(mapCoordinates).Offset(new Vector2(0.5f, -0.5f));
-        dropping.ArrivingSoundAt = time + crate.Comp.ArrivingSoundDelay;
-        dropping.DropAt = time + crate.Comp.DropDelay;
-        dropping.OpenAt = time + crate.Comp.OpenDelay;
-        dropping.LandingEffect = Spawn(crate.Comp.LandingEffectId, dropping.Target);
-        dropping.LandingDamage = crate.Comp.LandingDamage;
-        Dirty(crate, dropping);
+        _audio.PlayPvs(crate.Comp.LaunchSound, crateCoordinates);
 
         computer.Comp.LastLaunchAt = time;
         computer.Comp.NextLaunchAt = time + computer.Comp.Cooldown;
         Dirty(computer);
+
         return true;
+    }
+
+    public void LaunchSupplyDrop(EntityUid droppingEntity, MapCoordinates dropCoordinates, float skyFallDuration, float dropDuration, TimeSpan openDelay, DamageSpecifier? landingDamage = null, EntProtoId? landingEffect = null, SoundSpecifier? arrivingSound = null, int dropScatter = 0, bool useParachute = true)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+
+        _rmcpulling.TryStopAllPullsFromAndOn(droppingEntity);
+
+        var mapId = EnsureMap();
+        _transform.SetMapCoordinates(droppingEntity, new MapCoordinates(_supplyDropCount++ * 50, 0, mapId));
+
+        var dropping = EnsureComp<BeingSupplyDroppedComponent>(droppingEntity);
+        var dropEntityCoordinates = _transform.ToCoordinates(dropCoordinates);
+
+        dropping.OpenAt = time + openDelay;
+        dropping.LandingEffect = Spawn(landingEffect, dropEntityCoordinates);
+        dropping.LandingDamage = landingDamage;
+        Dirty(droppingEntity, dropping);
+
+        if (useParachute)
+            _paradrop.DoParaDrop(droppingEntity, dropEntityCoordinates, skyFallDuration, dropDuration, arrivingSound, dropScatter);
+        else
+            _crashLand.DoCrashLand(droppingEntity, dropEntityCoordinates, skyFallDuration, dropDuration, false, arrivingSound);
     }
 
     private MapId EnsureMap()
@@ -263,6 +337,16 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         return comp.CanSupplyDrop;
     }
 
+    private void RemoveWarningMarker(Entity<BeingSupplyDroppedComponent> ent)
+    {
+        if (!TerminatingOrDeleted(ent.Comp.LandingEffect))
+        {
+            QueueDel(ent.Comp.LandingEffect);
+            ent.Comp.LandingEffect = null;
+            Dirty(ent);
+        }
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -282,55 +366,11 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         var droppingQuery = EntityQueryEnumerator<BeingSupplyDroppedComponent>();
         while (droppingQuery.MoveNext(out var uid, out var dropping))
         {
-            if (!dropping.PlayedArrivingSound &&
-                time > dropping.ArrivingSoundAt &&
-                dropping.LandingEffect != null)
-            {
-                dropping.PlayedArrivingSound = true;
-                _audio.PlayPvs(dropping.ArrivingSound, _transform.GetMoverCoordinates(dropping.LandingEffect.Value));
-                Dirty(uid, dropping);
-            }
-
-            if (time < dropping.DropAt)
-                continue;
-
-            if (!dropping.Landed)
-            {
-                dropping.Landed = true;
-                if (!TerminatingOrDeleted(dropping.LandingEffect))
-                {
-                    QueueDel(dropping.LandingEffect);
-                    dropping.LandingEffect = null;
-                    Dirty(uid, dropping);
-                }
-
-                if (dropping.LandingDamage is { } landingDamage)
-                {
-                    _intersecting.Clear();
-                    _entityLookup.GetEntitiesInRange(dropping.Target, 0.33f, _intersecting);
-                    foreach (var intersecting in _intersecting)
-                    {
-                        _damageable.TryChangeDamage(intersecting, landingDamage, true);
-                    }
-                }
-
-                _transform.SetCoordinates(uid, _transform.GetMoverCoordinates(dropping.Target));
-                var mapPos = _transform.ToMapCoordinates(dropping.Target);
-                var filter = Filter.Empty().AddInRange(mapPos, 7);
-                foreach (var recipient in filter.Recipients)
-                {
-                    if (recipient.AttachedEntity is not { } player)
-                        continue;
-
-                    _rmcCameraShake.ShakeCamera(player, 4, 5);
-                }
-            }
-
             if (time < dropping.OpenAt)
                 continue;
 
             RemCompDeferred<BeingSupplyDroppedComponent>(uid);
-            _audio.PlayPvs(dropping.OpenSound, uid);
+            _audio.PlayPvs(dropping.OpenSound, _transform.GetMoverCoordinates(uid));
         }
     }
 }

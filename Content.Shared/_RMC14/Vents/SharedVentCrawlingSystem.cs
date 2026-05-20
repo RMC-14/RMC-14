@@ -54,7 +54,8 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
 
         SubscribeLocalEvent<VentExitComponent, VentExitDoafterEvent>(OnVentExitDoafter);
 
-        SubscribeLocalEvent<VentCrawlableComponent, MapInitEvent>(OnVentDuctInit);
+        SubscribeLocalEvent<VentCrawlableComponent, ComponentInit>(OnVentDuctInit);
+        SubscribeLocalEvent<VentCrawlableComponent, ReAnchorEvent>(OnVentReanchor);
         SubscribeLocalEvent<VentCrawlableComponent, MoveEvent>(OnVentDuctMove);
         SubscribeLocalEvent<VentCrawlableComponent, AnchorStateChangedEvent>(OnVentAnchorChanged);
         SubscribeLocalEvent<VentCrawlableComponent, RMCContainerDestructionEmptyEvent>(OnVentContainerDeletionEmpty);
@@ -87,12 +88,23 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         if(ent.Comp.Enabled)
             args.VisibilityMask |= (int)VisibilityFlags.Subfloor;
     }
-    private void OnVentDuctInit(Entity<VentCrawlableComponent> vent, ref MapInitEvent args)
+
+    private void OnVentDuctInit(Entity<VentCrawlableComponent> vent, ref ComponentInit args)
     {
+        vent.Comp.OriginalTravelDirection = vent.Comp.TravelDirection;
         if (vent.Comp.TravelDirection == PipeDirection.Fourway)
             return;
 
         vent.Comp.TravelDirection = vent.Comp.TravelDirection.RotatePipeDirection(Transform(vent).LocalRotation);
+        Dirty(vent);
+    }
+
+    private void OnVentReanchor(Entity<VentCrawlableComponent> vent, ref ReAnchorEvent args)
+    {
+        if (vent.Comp.TravelDirection == PipeDirection.Fourway)
+            return;
+
+        vent.Comp.TravelDirection = vent.Comp.OriginalTravelDirection.RotatePipeDirection(Transform(vent).LocalRotation);
         Dirty(vent);
     }
 
