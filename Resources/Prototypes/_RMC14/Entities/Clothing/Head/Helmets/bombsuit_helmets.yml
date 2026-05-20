@@ -5,7 +5,7 @@
   description: Use in case of bomb
   suffix: RMC
   components:
-  - type: Sprite #RMC14 TODO: Make a newer and not silly looking sprite
+  - type: Sprite #RMC14 TODO: Make a new sprite which doesn't look silly
     sprite: _RMC14/Objects/Clothing/Head/Helmets/bombsuit_helmet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/bombsuit_helmet.rsi
@@ -19,6 +19,6 @@
   suffix: Security, RMC
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/bombsuit_helmet_security.rsi
+    sprite: Clothing/Head/Helmets/bombsuit.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/bombsuit_helmet_security.rsi
+    sprite: Clothing/Head/Helmets/bombsuit.rsi

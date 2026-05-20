@@ -5,7 +5,7 @@
   description: A suit designed for safety when handling explosives.
   suffix: RMC
   components:
-  - type: Sprite  #RMC14 TODO: Make a newer and not silly looking sprite
+  - type: Sprite  #RMC14 TODO: Make a new sprite which doesn't look silly
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/bombsuit.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/bombsuit.rsi
