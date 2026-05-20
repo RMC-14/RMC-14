@@ -33,7 +33,7 @@
           False: { visible: true }
   - type: ApcPowerReceiver
   - type: DeviceLinkSource
-  - type: CMSignalSwitch
+  - type: SignalSwitch
   - type: RMCPowerReceiver
     idleLoad: 2
     activeLoad: 4
