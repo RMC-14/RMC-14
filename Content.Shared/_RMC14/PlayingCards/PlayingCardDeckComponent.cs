@@ -20,6 +20,6 @@ public sealed partial class PlayingCardDeckComponent : Component
     [DataField]
     public SoundSpecifier? ShuffleSound = new SoundPathSpecifier("/Audio/_RMC14/Handling/paper_drop.ogg");
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int MaxCards = 52;
 }

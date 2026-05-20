@@ -121,7 +121,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         {
             var (lastSuit, lastRank) = DecodeCard(hand.Comp.Cards[0]);
             _hands.IsHolding(user, hand, out var heldHandSlot);
-            var lastCard = SpawnCard("RMCPlayingCard", hand, lastSuit, lastRank, hand.Comp.FaceUp);
+            var lastCard = SpawnCard(CardProto, hand, lastSuit, lastRank, hand.Comp.FaceUp);
 
             _hands.TryDrop(user, hand);
             QueueDel(hand);

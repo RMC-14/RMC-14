@@ -33,12 +33,18 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     private readonly HashSet<Entity<PlayingCardComponent>> _cardLookup = new();
     private readonly HashSet<Entity<PlayingCardHandComponent>> _handLookup = new();
 
+    protected EntityQuery<PlayingCardComponent> _cardQuery;
+    protected EntityQuery<PlayingCardHandComponent> _handQuery;
+
     private const float AreaPickupRadius = 1f;
     private const float AreaPickupDelayPerCard = 0.1f;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _cardQuery = GetEntityQuery<PlayingCardComponent>();
+        _handQuery = GetEntityQuery<PlayingCardHandComponent>();
 
         // Card events
         SubscribeLocalEvent<PlayingCardComponent, UseInHandEvent>(OnCardUseInHand);
@@ -127,7 +133,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             return;
 
         // Combine cards into a hand
-        if (TryComp<PlayingCardComponent>(args.Used, out var otherCard))
+        if (_cardQuery.TryComp(args.Used, out var otherCard))
         {
             if (_net.IsServer)
                 CombineCards(ent, (args.Used, otherCard), args.User);
@@ -136,7 +142,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         // Add card to existing hand
-        if (TryComp<PlayingCardHandComponent>(args.Used, out var hand))
+        if (_handQuery.TryComp(args.Used, out var hand))
         {
             if (_net.IsServer)
                 AddCardToHand((args.Used, hand), ent, args.User);
@@ -235,7 +241,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             return;
 
         // Add single card to deck
-        if (TryComp<PlayingCardComponent>(args.Used, out var card))
+        if (_cardQuery.TryComp(args.Used, out var card))
         {
             if (_net.IsServer)
                 AddCardToDeck(ent, (args.Used, card), args.User);
@@ -244,7 +250,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         // Add hand of cards to deck
-        if (TryComp<PlayingCardHandComponent>(args.Used, out var hand))
+        if (_handQuery.TryComp(args.Used, out var hand))
         {
             if (_net.IsServer)
                 AddHandToDeck(ent, (args.Used, hand), args.User);
@@ -333,13 +339,13 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             if (ent.Comp.CardOrder.Count >= ent.Comp.MaxCards)
                 break;
 
-            if (TryComp<PlayingCardComponent>(entity, out var card))
+            if (_cardQuery.TryComp(entity, out var card))
             {
                 ent.Comp.CardOrder.Add(EncodeCard(card.Suit, card.Rank));
                 QueueDel(entity);
                 added++;
             }
-            else if (TryComp<PlayingCardHandComponent>(entity, out var hand))
+            else if (_handQuery.TryComp(entity, out var hand))
             {
                 var handAdded = 0;
                 for (var i = 0; i < hand.Cards.Count; i++)
@@ -505,7 +511,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             return;
 
         // Add card to hand
-        if (TryComp<PlayingCardComponent>(args.Used, out var card))
+        if (_cardQuery.TryComp(args.Used, out var card))
         {
             if (_net.IsServer)
                 AddCardToHand(ent, (args.Used, card), args.User);
@@ -514,7 +520,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         // Merge hands
-        if (TryComp<PlayingCardHandComponent>(args.Used, out var otherHand))
+        if (_handQuery.TryComp(args.Used, out var otherHand))
         {
             if (_net.IsServer)
                 MergeHands(ent, (args.Used, otherHand), args.User);

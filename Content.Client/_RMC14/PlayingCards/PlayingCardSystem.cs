@@ -17,14 +17,17 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
-    // Maximum number of card sprites to show in hand
     private const int MaxVisibleCards = 5;
     private const float CardFanOffset = 2f / 32f;
     private static readonly ResPath CardRsiPath = new("_RMC14/Objects/Fun/playing_cards.rsi");
 
+    private EntityQuery<SpriteComponent> _spriteQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _spriteQuery = GetEntityQuery<SpriteComponent>();
 
         SubscribeLocalEvent<PlayingCardComponent, AfterAutoHandleStateEvent>(OnCardStateChanged);
         SubscribeLocalEvent<PlayingCardDeckComponent, AfterAutoHandleStateEvent>(OnDeckStateChanged);
@@ -47,7 +50,14 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     private void OnCardStateChanged(Entity<PlayingCardComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        UpdateCardSprite(ent);
+        try
+        {
+            UpdateCardSprite(ent);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error in OnCardStateChanged: {e}");
+        }
     }
 
     private void OnCardEquippedHand(Entity<PlayingCardComponent> ent, ref GotEquippedHandEvent args)
@@ -62,7 +72,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     private void UpdateCardSprite(Entity<PlayingCardComponent> ent)
     {
-        if (!TryComp<SpriteComponent>(ent, out var sprite))
+        if (!_spriteQuery.TryComp(ent, out var sprite))
             return;
 
         // Check if card sprite should be hidden (when held by someone else)
@@ -93,12 +103,19 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     private void OnDeckStateChanged(Entity<PlayingCardDeckComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        UpdateDeckSprite(ent);
+        try
+        {
+            UpdateDeckSprite(ent);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error in OnDeckStateChanged: {e}");
+        }
     }
 
     private void UpdateDeckSprite(Entity<PlayingCardDeckComponent> ent)
     {
-        if (!TryComp<SpriteComponent>(ent, out var sprite))
+        if (!_spriteQuery.TryComp(ent, out var sprite))
             return;
 
         // Update deck visual based on how many cards remain
@@ -118,17 +135,15 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     private void OnHandStateChanged(Entity<PlayingCardHandComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        UpdateHandSprite(ent);
-        if (_ui.TryGetOpenUi<PlayingCardHandBui>(ent.Owner, PlayingCardHandUi.Key, out var bui))
+        try
         {
-            try
-            {
+            UpdateHandSprite(ent);
+            if (_ui.TryGetOpenUi<PlayingCardHandBui>(ent.Owner, PlayingCardHandUi.Key, out var bui))
                 bui.Refresh();
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Error refreshing PlayingCardHandBui: {e}");
-            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error in OnHandStateChanged: {e}");
         }
     }
 
@@ -144,10 +159,9 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     private void UpdateHandSprite(Entity<PlayingCardHandComponent> ent)
     {
-        if (!TryComp<SpriteComponent>(ent, out var sprite))
+        if (!_spriteQuery.TryComp(ent, out var sprite))
             return;
 
-        // Remove REVERSE order to avoid shifting issues
         for (var i = MaxVisibleCards - 1; i >= 1; i--)
         {
             var key = $"card_{i}";

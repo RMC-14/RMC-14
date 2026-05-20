@@ -42,6 +42,10 @@ public sealed class PlayingCardHandBui : BoundUserInterface
             return;
 
         Refresh();
+
+        var vpSize = _displayManager.ScreenSize;
+        var pos = _eye.WorldToScreen(_transform.GetMapCoordinates(Owner).Position) / vpSize;
+        _menu.OpenCenteredAt(pos);
     }
 
     public void Refresh()
@@ -88,10 +92,6 @@ public sealed class PlayingCardHandBui : BoundUserInterface
             button.AddChild(texture);
             _menu.Cards.AddChild(button);
         }
-
-        var vpSize = _displayManager.ScreenSize;
-        var pos = _eye.WorldToScreen(_transform.GetMapCoordinates(Owner).Position) / vpSize;
-        _menu.OpenCenteredAt(pos);
     }
 
 }
