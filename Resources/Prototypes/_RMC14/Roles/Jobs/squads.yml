@@ -108,6 +108,12 @@
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_echo
+  - type: Tag
+    tags:
+    - RMCSquadEcho
+
+- type: Tag
+  id: RMCSquadEcho
 
 - type: entity
   parent: SquadBase
@@ -138,6 +144,35 @@
 
 - type: Tag
   id: RMCSquadIntel
+
+- type: entity
+  parent: SquadBase
+  id: SquadCBRN
+  name: CBRN
+  components:
+  - type: SquadTeam
+    color: "#4A2070"
+    accessLevels:
+    - CMAccessAlpha
+    - CMAccessBravo
+    - CMAccessCharlie
+    - CMAccessDelta
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    canSupplyDrop: false
+    group: SOF
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_cbrn
+  - type: Tag
+    tags:
+    - RMCSquadCBRN
+
+- type: Tag
+  id: RMCSquadCBRN
 
 - type: entity
   parent: SquadBase
