@@ -21,10 +21,6 @@ namespace Content.Shared._RMC14.Xenonids.AcidMine;
 
 public sealed class XenoAcidBlastSystem : EntitySystem
 {
-    private const float TrappedMobDamageMultiplier = 1.45f;
-    private const float EmpoweredMobDamageMultiplier = 1.25f;
-    private const float EmpoweredStructureDamageMultiplier = 1.70f;
-
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
@@ -173,7 +169,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
     {
         var damageTarget = ResolveDamageTarget(target);
         var structureDamage = ent.Comp.Empowered
-            ? ent.Comp.BaseDamage * EmpoweredStructureDamageMultiplier
+            ? ent.Comp.BaseDamage * ent.Comp.EmpoweredStructureDamageMultiplier
             : ent.Comp.BaseDamage;
         _damage.TryChangeDamage(damageTarget, structureDamage, origin: ent.Comp.Attached);
     }
@@ -183,10 +179,10 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         var mobDamage = ent.Comp.BaseDamage;
 
         if (ent.Comp.Empowered)
-            mobDamage = mobDamage * EmpoweredMobDamageMultiplier;
+            mobDamage = mobDamage * ent.Comp.EmpoweredMobDamageMultiplier;
 
         if (HasComp<XenoCaughtInTrapComponent>(target))
-            mobDamage = mobDamage * TrappedMobDamageMultiplier;
+            mobDamage = mobDamage * ent.Comp.TrappedMobDamageMultiplier;
 
         var change = _damage.TryChangeDamage(target, mobDamage, origin: ent.Comp.Attached);
         if (change?.GetTotal() > FixedPoint2.Zero)

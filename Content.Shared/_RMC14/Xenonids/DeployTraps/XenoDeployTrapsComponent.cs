@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Xenonids.Insight;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -12,6 +13,9 @@ namespace Content.Shared._RMC14.Xenonids.DeployTraps;
 [Access(typeof(XenoDeployTrapsSystem), typeof(XenoInsightSystem))]
 public sealed partial class XenoDeployTrapsComponent : Component
 {
+    [DataField]
+    public FixedPoint2 PlasmaCost = 60;
+
     [DataField, AutoNetworkedField]
     public float DeployTrapsRadius = 2f;
 

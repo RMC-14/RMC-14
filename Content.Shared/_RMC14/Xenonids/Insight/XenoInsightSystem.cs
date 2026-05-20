@@ -31,7 +31,7 @@ public sealed class XenoInsightSystem : EntitySystem
 
         var wasMaxed = xeno.Comp.Insight >= xeno.Comp.MaxInsight;
         xeno.Comp.Insight += amount;
-        xeno.Comp.Insight = Math.Min(xeno.Comp.Insight, xeno.Comp.MaxInsight);
+        xeno.Comp.Insight = Math.Clamp(xeno.Comp.Insight, 0, xeno.Comp.MaxInsight);
         Dirty(xeno);
 
         if (!wasMaxed && xeno.Comp.Insight >= xeno.Comp.MaxInsight)

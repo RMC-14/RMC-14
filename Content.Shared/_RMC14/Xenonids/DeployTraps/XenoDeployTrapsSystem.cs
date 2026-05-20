@@ -31,13 +31,13 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly XenoInsightSystem _insight = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
 
     public override void Initialize()
     {
@@ -83,7 +83,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             return;
         }
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), args.PlasmaCost))
+        if (!_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), xeno.Comp.PlasmaCost))
             return;
 
         if (!_rmcActions.TryUseAction(args))
@@ -117,7 +117,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
                 orthoTile = new Vector2i(1, 0);
 
             var mapSystem = EntityManager.System<SharedMapSystem>();
-            var centerTile = mapSystem.CoordinatesToTile(gridId, grid, targetMap);
+            var centerTile = _mapSystem.CoordinatesToTile(gridId, grid, targetMap);
 
             var radius = (int) xeno.Comp.DeployTrapsRadius;
             var empowered = xeno.Comp.Empowered;
@@ -125,7 +125,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             for (var i = -radius; i <= radius; i++)
             {
                 var tileIndex = centerTile + orthoTile * i;
-                var tileCoords = new EntityCoordinates(gridId, mapSystem.GridTileToLocal(gridId, grid, tileIndex).Position);
+                var tileCoords = new EntityCoordinates(gridId, _mapSystem.GridTileToLocal(gridId, grid, tileIndex).Position);
                 if(!_rmcMap.HasAnchoredEntityEnumerator<DeployTrapsBlockerComponent>(tileCoords, out _))
                     DeployTraps(xeno, tileCoords, empowered);
             }
@@ -179,6 +179,5 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             if (_actions.GetEvent(action) is XenoAcidMineActionEvent)
                 _actions.SetIcon(action.AsNullable(), acidMine?.ActionIconEmpowered);
         }
-
     }
 }

@@ -1,6 +1,4 @@
-﻿using Robust.Shared.GameObjects;
-
-namespace Content.Server._RMC14.Xenonids.AdrenalineSurge;
+﻿namespace Content.Shared._RMC14.Xenonids.AdrenalineSurge;
 
 [RegisterComponent]
 public sealed partial class XenoAdrenalineSurgeComponent : Component

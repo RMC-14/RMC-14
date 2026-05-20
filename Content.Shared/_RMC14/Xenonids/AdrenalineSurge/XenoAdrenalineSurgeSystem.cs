@@ -4,7 +4,7 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Robust.Shared.Timing;
 
-namespace Content.Server._RMC14.Xenonids.AdrenalineSurge;
+namespace Content.Shared._RMC14.Xenonids.AdrenalineSurge;
 
 public sealed class XenoAdrenalineSurgeSystem : EntitySystem
 {
@@ -83,6 +83,6 @@ public sealed class XenoAdrenalineSurgeSystem : EntitySystem
         if (!comp.IsSurging)
             return;
 
-        args.ModifySpeed(1.35f, 1.35f);
+        args.ModifySpeed(comp.SpeedModifierAmount, comp.SpeedModifierAmount);
     }
 }

@@ -13,9 +13,8 @@ namespace Content.Server._RMC14.Xenonids.Construction.DeployedTraps;
 
 public sealed class XenoDeployedTrapsSystem : EntitySystem
 {
-    [Dependency] private readonly RMCSlowSystem _root = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly DestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -52,11 +51,10 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
             return;
         }
 
-        args.Continue = true;
     }
     private void OnStepTriggered(Entity<XenoDeployedTrapsComponent> trap, ref StepTriggeredOnEvent args)
     {
-            _root.TryRoot(args.Tripper, trap.Comp.StunDuration, true);
+            _slow.TryRoot(args.Tripper, trap.Comp.StunDuration, true);
 
             _audio.PlayPredicted(trap.Comp.CatchSound, args.Tripper, trap);
 

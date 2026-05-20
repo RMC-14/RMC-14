@@ -47,6 +47,15 @@ public sealed partial class XenoAcidBlastComponent : Component
     public int AcidArmorPiercing = 40;
 
     [DataField, AutoNetworkedField]
+    public float TrappedMobDamageMultiplier = 1.45f;
+
+    [DataField, AutoNetworkedField]
+    public float EmpoweredMobDamageMultiplier = 1.25f;
+
+    [DataField, AutoNetworkedField]
+    public float EmpoweredStructureDamageMultiplier = 1.70f;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan DeployTrapsCooldownReduction = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]

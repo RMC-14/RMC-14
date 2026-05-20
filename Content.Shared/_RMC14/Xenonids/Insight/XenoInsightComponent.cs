@@ -12,7 +12,7 @@ public sealed partial class XenoInsightComponent : Component
 {
     //min stacks
     [DataField, AutoNetworkedField]
-    public int Insight = 0;
+    public int Insight;
 
     //max stacks
     [DataField, AutoNetworkedField]
