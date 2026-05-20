@@ -1,0 +1,101 @@
+name: "Labels: Reviewed By Maintainer"
+
+on:
+  pull_request_review:
+    types: [submitted, dismissed]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Add Label Based On Review Type
+      uses: actions/github-script@v9
+      with:
+        script: |
+          const { owner, repo } = context.repo;
+          const review = context.payload.review;
+          const pr = context.payload.pull_request;
+
+          const state = review.state;
+          const username = review.user.login;
+
+          if (!["approved", "changes_requested", "dismissed"].includes(state)) {
+            console.log(`Skipping review type: ${state}.`);
+            return;
+          }
+
+          console.log(`Processing review type: ${state}.`);
+
+          const approvedLabel = "S: Approved";
+          const partiallyApprovedLabel = "S: Partially Approved";
+          const changesRequestedLabel = "S: Awaiting Changes";
+
+          async function removeLabel(name) {
+            try {
+              console.log(`Removing label: ${name}.`)
+              await github.rest.issues.removeLabel({
+                owner,
+                repo,
+                issue_number: pr.number,
+                name,
+              });
+            } catch (e) {
+              console.log(`removeLabel failed for ${name}: ${e.message}`);
+            }
+          }
+
+          async function addLabel(name) {
+            console.log(`Adding label: ${name}.`)
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: pr.number,
+              labels: [name],
+            });
+          }
+
+          if (state === "dismissed") {
+            await removeLabel(approvedLabel);
+            await removeLabel(partiallyApprovedLabel);
+            return;
+          }
+
+          const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
+            owner,
+            repo,
+            username,
+          });
+
+          const permission = data.permission;
+          if (!["write", "maintain", "admin"].includes(permission)) {
+            console.log(`Skipping ${username}, permission: ${permission}`);
+            return;
+          }
+
+          if (state === "changes_requested") {
+            await removeLabel(approvedLabel);
+            await addLabel(changesRequestedLabel);
+            return;
+          }
+
+          if (state === "approved") {
+            const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({
+              owner,
+              repo,
+              issue_number: pr.number,
+            });
+
+            const labels = new Set(currentLabels.map(l => l.name));
+
+            if (!labels.has(partiallyApprovedLabel) && !labels.has(approvedLabel)) {
+              await addLabel(partiallyApprovedLabel);
+              return;
+            }
+
+            if (labels.has(partiallyApprovedLabel) && !labels.has(approvedLabel)) {
+              await removeLabel(changesRequestedLabel);
+              await removeLabel(partiallyApprovedLabel);
+              await addLabel(approvedLabel);
+            }
+          }

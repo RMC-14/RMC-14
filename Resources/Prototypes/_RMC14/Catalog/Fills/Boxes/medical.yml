@@ -49,13 +49,13 @@
   - type: StorageFill
     contents:
       - id: CMPillCanister
-        amount: 7
+        amount: 8
   - type: Sprite
     state: pillbox
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,13,1
+    - 0,0,15,1
     areaInsert: true
     areaInsertRadius: 1
     whitelist:

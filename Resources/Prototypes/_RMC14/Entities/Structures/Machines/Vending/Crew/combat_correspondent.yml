@@ -19,7 +19,6 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewCombatCorrespondent
-        name: Essential Reporter's Set
       - id: CMSatchel
         name: Leather Satchel
       - id: RMCCameraBroadcasting
@@ -81,18 +80,3 @@
       - id: CMPaperBin30
         name: Paper Bin
         points: 10
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleCrewCombatCorrespondent
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
-    state: flashlight
-  - type: CMVendorBundle
-    bundle:
-    - RMCFlashlight
-    - CMPen
-    - RMCBinoculars
-    - CMClipboard # notepad
-    - RMCUniversalRecorder

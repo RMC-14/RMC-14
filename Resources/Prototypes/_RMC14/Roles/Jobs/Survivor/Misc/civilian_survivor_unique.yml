@@ -24,7 +24,7 @@
   name: unique civilian colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     # Sleepy Colonist
     - [ RMCJumpsuitBluePjs, RMCShoesSlippers, RMCSatchelSleepyColonistFill ]

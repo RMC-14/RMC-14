@@ -59,7 +59,7 @@
   name: halcyon dynamics liaison preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCCoatBureauTrenchCoatBrown ]
     - [ RMCCoatBureauTrenchCoatGrey ]
