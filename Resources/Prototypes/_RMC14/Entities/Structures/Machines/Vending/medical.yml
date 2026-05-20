@@ -516,7 +516,7 @@
   parent: ColMarTechBaseAnchorable
   id: CMVendorBlood
   name: Avant Blood Dispenser
-  description: The Avant Biomedical Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! Made by Avant Biomedical. #dont update year, that`s a joke from cm13
+  description: The Avant Biomedical Blood Pack Dispensary is the premier, top-of-the-line blood dispenser! Get yours today! Made by Avant Biomedical.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/blood.rsi
