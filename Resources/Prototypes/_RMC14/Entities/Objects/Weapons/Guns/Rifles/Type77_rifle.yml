@@ -175,6 +175,14 @@
 
 - type: entity
   parent: RMCMagazineRifleType77
+  id: RMCMagazineRifleType77Empty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  parent: RMCMagazineRifleType77
   id: RMCMagazineRifleType77AP
   name: "Type77 AP magazine (10x24mm)"
   suffix: AP
