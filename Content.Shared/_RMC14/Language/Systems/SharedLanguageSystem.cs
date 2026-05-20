@@ -1,6 +1,7 @@
 using System.Text;
 using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
+using Content.Shared.Ghost;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -61,6 +62,9 @@ public abstract class SharedLanguageSystem : EntitySystem
 
     public bool CanUnderstand(Entity<LanguageComponent?> ent, ProtoId<LanguagePrototype> language)
     {
+        if (HasComp<GhostComponent>(ent))
+            return true;
+
         if (!Resolve(ent, ref ent.Comp, false))
             return language == CommonLanguage;
 
