@@ -2,6 +2,7 @@
   abstract: true
   id: RMCContainerBase
   name: cargo container
+  description: A huge industrial shipping container.
   placement:
     mode: SnapgridCenter
   components:
@@ -155,7 +156,6 @@
 - type: entity
   parent: RMCContainerBase
   id: RMCContainerPathosLeft
-  description: "A huge industrial shipping container."
   suffix: Pathos, Left
   components:
   - type: Sprite
@@ -406,7 +406,7 @@
   id: RMCContainerUNMCLeft
   suffix: UNMC, Left
   name: United Nations Marine Corps Cargo Container
-  description: "A huge industrial shipping container.\nThis one belongs to the UN's United Nations Marine Corps."
+  description: "A huge industrial shipping container.\nThis one belongs to the United Nations Marine Corps."
   components:
   - type: Sprite
     state: unmccontainerleft
@@ -935,7 +935,6 @@
 - type: entity
   parent: RMCContainerTartarusLeft
   id: RMCContainerAMSLeft
-  description: A huge industrial shipping container.
   suffix: AMS, Left
   components:
   - type: Sprite
