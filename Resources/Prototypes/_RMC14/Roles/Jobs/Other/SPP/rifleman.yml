@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCSPPRifleman
   name: rmc-job-name-spp-rifleman
@@ -9,6 +9,7 @@
   startingGear: RMCGearSPPRifleman
   icon: "RMCJobIconSPPRifleman"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colonist
   spawnMenuRoleName: SPP Conscript

@@ -10,10 +10,11 @@
   startingGear: RMCJobPMCStandardM63B2
   icon: RMCJobIconPMCStandard
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA PMC Operator (M63B2)
+  spawnMenuRoleName: We-Ya PMC Operator (M63B2)
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,7 +43,7 @@
 
 - type: entity
   id: RMCRandomHumanoidPMCStandardM63B2
-  name: weya pmc ghost role standard
+  name: we-ya pmc ghost role standard
   suffix: Spawner, Player, M63B2
   components:
   - type: Sprite
@@ -54,7 +55,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointPMCStandardM63B2
-  name: weya pmc operator spawn point
+  name: we-ya pmc operator spawn point
   suffix: M63B2
   components:
   - type: SpawnPoint
@@ -119,13 +120,14 @@
 - type: job
   parent: RMCPMCStandardM63B2
   id: RMCPMCStandardSSG45
+  access: [ CMAccessERT ]
   playTimeTracker: RMCJobPMCStandardSSG45
   startingGear: RMCJobPMCStandardSSG45
-  spawnMenuRoleName: WEYA PMC Operator (SSG-45)
+  spawnMenuRoleName: We-Ya PMC Operator (SSG-45)
 
 - type: entity
   id: RMCRandomHumanoidPMCStandardSSG45
-  name: weya pmc ghost role standard
+  name: we-ya pmc ghost role standard
   suffix: Spawner, Player, SSG45
   components:
   - type: Sprite
@@ -137,7 +139,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointPMCStandardSSG45
-  name: weya pmc operator spawn point
+  name: we-ya pmc operator spawn point
   suffix: SSG45
   components:
   - type: SpawnPoint
@@ -202,11 +204,11 @@
   id: RMCPMCStandardM54C2
   playTimeTracker: RMCJobPMCStandardM54C2
   startingGear: RMCJobPMCStandardM54C2
-  spawnMenuRoleName: WEYA PMC Operator (M54C2)
+  spawnMenuRoleName: We-Ya PMC Operator (M54C2)
 
 - type: entity
   id: RMCRandomHumanoidPMCStandardM54C2
-  name: weya pmc ghost role standard
+  name: we-ya pmc ghost role standard
   suffix: Spawner, Player, M54C2
   components:
   - type: Sprite
@@ -218,7 +220,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCPMCStandardM54C2
-  name: weya pmc operator spawn point
+  name: we-ya pmc operator spawn point
   suffix: M54C2
   components:
   - type: SpawnPoint

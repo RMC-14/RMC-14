@@ -47,12 +47,18 @@
     requiresRestrictedDestination: true
     shuttleDockingClass: Standard
     dockingBounds: "-3.5,-7,3.5,6"
+    navigationWindowTitle: ERT Flight Computer
+    showFlyByDestination: false
+    showPrimaryDestinationLabel: false
+    showIndividualDoorControls: false
+    showLaunchAlarmControls: false
+    showRemoteControlControls: false
   - type: AccessReader
     access: [["CMAccessERT"]]
   - type: UserInterface
     interfaces:
       enum.DropshipNavigationUiKey.Key:
-        type: DropshipNavigationERTBui
+        type: DropshipNavigationBui
       enum.DropshipHijackerUiKey.Key:
         type: DropshipHijackerBui
 

@@ -10,6 +10,7 @@
   startingGear: RMCGearFreelancerMedic
   icon: RMCJobIconFreelancerMedic
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa

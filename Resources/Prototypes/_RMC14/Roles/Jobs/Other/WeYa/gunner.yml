@@ -10,10 +10,11 @@
   startingGear: RMCJobPMCGunner
   icon: RMCJobIconPMCGunner
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA PMC Support Gunner
+  spawnMenuRoleName: We-Ya PMC Support Gunner
   special:
   - !type:AddComponentSpecial
     components:
@@ -45,7 +46,7 @@
 
 - type: entity
   id: RMCRandomHumanoidPMCGunner
-  name: weya pmc ghost role gunner
+  name: we-ya pmc ghost role gunner
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -57,7 +58,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointPMCGunner
-  name: weya pmc gunner spawn point
+  name: we-ya pmc gunner spawn point
   components:
   - type: SpawnPoint
     job_id: RMCPMCGunner

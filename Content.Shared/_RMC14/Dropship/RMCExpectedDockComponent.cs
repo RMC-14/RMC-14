@@ -1,97 +1,98 @@
-using Content.Server.Shuttles;
-using Content.Shared._RMC14.Dropship;
+using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 
-namespace Content.Server._RMC14.Dropship;
+namespace Content.Shared._RMC14.Dropship;
 
 /// <summary>
 /// Stores the expected dock pairing for a restricted shuttle launch until verification completes.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCExpectedDockComponent : Component
 {
     /// <summary>
     /// Destination marker the shuttle is expected to dock with.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public EntityUid Destination;
 
     /// <summary>
     /// Grid containing the destination dock.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public EntityUid TargetGrid;
 
     /// <summary>
     /// Dock entity on the moving shuttle grid chosen for the launch.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public EntityUid ShuttleDock;
 
     /// <summary>
     /// Dock entity on the target grid chosen for the launch.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public EntityUid TargetDock;
 
     /// <summary>
     /// Expected post-dock coordinates for the shuttle.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public EntityCoordinates Coordinates;
 
     /// <summary>
     /// Expected post-dock shuttle rotation.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public Angle Angle;
 
     /// <summary>
-    /// Docking configuration used to perform the launch.
+    /// Dock pairs that must connect for the restricted docking to verify.
     /// </summary>
-    [ViewVariables]
-    public DockingConfig? Config;
+    [DataField]
+    public List<RMCExpectedDockPair> DockPairs = [];
 
     /// <summary>
     /// Docking profile used when choosing and validating the target destination.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public RMCShuttleDockingClass DockingClass;
 
     /// <summary>
     /// ERT request id that owns this expected dock, when launched by ERT.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public Guid RequestId;
 
     /// <summary>
     /// ERT call prototype id that configured this launch, when available.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public string? Call;
 
     /// <summary>
     /// Whether the actual docked pair has already matched the expected pair.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public bool Confirmed;
 
     /// <summary>
     /// Actual shuttle dock found during verification.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public EntityUid? ActualShuttleDock;
 
     /// <summary>
     /// Actual destination dock found during verification.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public EntityUid? ActualTargetDock;
 
     /// <summary>
     /// Last verification failure reason for diagnostics.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public string? FailureReason;
 }
+
+public readonly record struct RMCExpectedDockPair(EntityUid ShuttleDock, EntityUid TargetDock);

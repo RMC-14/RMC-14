@@ -10,10 +10,11 @@
   startingGear: RMCJobWeYaGoonLead
   icon: CMJobIconLiaison
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA PMC Goon Leader
+  spawnMenuRoleName: We-Ya PMC Goon Leader
   special:
   - !type:AddComponentSpecial
     components:
@@ -80,7 +81,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidWeYaGoonLead
-  name: weya corporate ghost role goon leader
+  name: we-ya corporate ghost role goon leader
   suffix: Spawner, Player
   components:
   - type: Sprite

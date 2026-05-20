@@ -1,16 +1,17 @@
-# Weyland-Yutani Commandos
+# We-Ya Commandos
 - type: job
   parent: RMCPMCLeader
   id: RMCWeYaCommandoLeader
+  access: [ CMAccessERT ]
   name: rmc-job-name-weya-commando-leader
   playTimeTracker: RMCJobWeYaCommandoLeader
   startingGear: RMCGearWeYaCommandoLeader
-  spawnMenuRoleName: WEYA Commando Squad Leader
+  spawnMenuRoleName: We-Ya Commando Squad Leader
 
 - type: entity
   parent: RMCRandomHumanoidPMCLeader
   id: RMCRandomHumanoidWeYaCommandoLeader
-  name: weya commando ghost role leader
+  name: we-ya commando ghost role leader
   suffix: Spawner, Player, Low Threat
   components:
   - type: RandomHumanoidSpawner
@@ -62,15 +63,16 @@
 - type: job
   parent: RMCPMCStandardM63B2
   id: RMCWeYaCommando
+  access: [ CMAccessERT ]
   name: rmc-job-name-weya-commando
   playTimeTracker: RMCJobWeYaCommando
   startingGear: RMCGearWeYaCommando
-  spawnMenuRoleName: WEYA Commando
+  spawnMenuRoleName: We-Ya Commando
 
 - type: entity
   parent: RMCRandomHumanoidPMCStandardM63B2
   id: RMCRandomHumanoidWeYaCommando
-  name: weya commando ghost role standard
+  name: we-ya commando ghost role standard
   suffix: Spawner, Player, Low Threat
   components:
   - type: RandomHumanoidSpawner
@@ -121,15 +123,16 @@
 - type: job
   parent: RMCPMCGunner
   id: RMCWeYaCommandoGunner
+  access: [ CMAccessERT ]
   name: rmc-job-name-weya-commando-gunner
   playTimeTracker: RMCJobWeYaCommandoGunner
   startingGear: RMCGearWeYaCommandoGunner
-  spawnMenuRoleName: WEYA Commando Heavy Gunner
+  spawnMenuRoleName: We-Ya Commando Heavy Gunner
 
 - type: entity
   parent: RMCRandomHumanoidPMCGunner
   id: RMCRandomHumanoidWeYaCommandoGunner
-  name: weya commando ghost role gunner
+  name: we-ya commando ghost role gunner
   suffix: Spawner, Player, Low Threat
   components:
   - type: RandomHumanoidSpawner

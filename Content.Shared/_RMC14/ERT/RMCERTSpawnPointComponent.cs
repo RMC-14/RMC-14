@@ -1,9 +1,11 @@
+using Robust.Shared.GameStates;
+
 namespace Content.Shared._RMC14.ERT;
 
 /// <summary>
 /// Spawn marker metadata used to place responders on the shuttle before seat assignment.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCERTSpawnPointComponent : Component
 {
     /// <summary>

@@ -2,6 +2,7 @@
 - type: job
   parent: CMBureauMarshal
   id: CMBureauRiotLeader
+  access: [ CMAccessERT ]
   name: rmc-job-name-bureau-riot-control-team-leader
   playTimeTracker: RMCJobBureauRiotLeader
   startingGear: RMCGearBureauRiotLeader
@@ -59,6 +60,7 @@
 - type: job
   parent: CMBureauDeputy
   id: CMBureauRiotOfficer
+  access: [ CMAccessERT ]
   name: rmc-job-name-bureau-riot-control-officer
   playTimeTracker: RMCJobBureauRiotOfficer
   startingGear: RMCGearBureauRiotOfficerShotgun
@@ -217,6 +219,7 @@
 - type: job
   parent: CMBureauDeputy
   id: CMBureauRiotMedic
+  access: [ CMAccessERT ]
   name: rmc-job-name-bureau-riot-control-medic
   playTimeTracker: RMCJobBureauRiotMedic
   startingGear: RMCGearBureauRiotMedic
@@ -278,6 +281,7 @@
 - type: job
   parent: CMBureauDeputy
   id: CMBureauRiotEngineer
+  access: [ CMAccessERT ]
   name: rmc-job-name-bureau-riot-control-engineer
   playTimeTracker: RMCJobBureauRiotEngineer
   startingGear: RMCGearBureauRiotEngineer
@@ -336,6 +340,7 @@
 - type: job
   parent: CMBureauDeputy
   id: CMBureauRiotSpecialist
+  access: [ CMAccessERT ]
   name: rmc-job-name-bureau-riot-control-specialist
   playTimeTracker: RMCJobBureauRiotSpecialist
   startingGear: RMCGearBureauRiotSpecialist

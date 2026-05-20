@@ -336,13 +336,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
             return true;
         }
 
-        if (expected.Config == null)
-            return false;
-
-        foreach (var dock in expected.Config.Docks)
+        foreach (var dock in GetExpectedDockPairs(expected))
         {
-            if (dock.DockAUid == actualShuttleDock &&
-                dock.DockBUid == actualTargetDock)
+            if (dock.ShuttleDock == actualShuttleDock &&
+                dock.TargetDock == actualTargetDock)
             {
                 return true;
             }
@@ -358,23 +355,21 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         connected = 0;
 
-        if (expected.Config is { Docks.Count: > 0 } config)
+        var pairs = GetExpectedDockPairs(expected);
+        if (pairs.Count > 0)
         {
-            total = config.Docks.Count;
-            foreach (var dock in config.Docks)
+            total = pairs.Count;
+            foreach (var dock in pairs)
             {
-                if (IsExpectedDockPairConnected(dock.DockAUid, dock.DockBUid))
+                if (IsExpectedDockPairConnected(dock.ShuttleDock, dock.TargetDock))
                     connected++;
             }
 
             return connected == total;
         }
 
-        total = 1;
-        if (IsExpectedDockPairConnected(expected.ShuttleDock, expected.TargetDock))
-            connected = 1;
-
-        return connected == total;
+        total = 0;
+        return true;
     }
 
     private bool IsExpectedDockPairConnected(EntityUid shuttleDockUid, EntityUid targetDockUid)
@@ -519,41 +514,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
             return false;
         }
 
-        var config = expected.Config;
-        if (config == null)
+        if (!TryGetMissingExpectedDockingConfig(ent.Owner, expected, out var missingConfig, out var missingReason))
         {
-            if (!TryComp(expected.ShuttleDock, out DockingComponent? shuttleDock))
-            {
-                expected.FailureReason = $"expected shuttle dock no longer exists: {ToPrettyString(expected.ShuttleDock)}";
-                return false;
-            }
-
-            if (!TryComp(expected.TargetDock, out DockingComponent? targetDock))
-            {
-                expected.FailureReason = $"expected target dock no longer exists: {ToPrettyString(expected.TargetDock)}";
-                return false;
-            }
-
-            config = _docking.GetDockingConfig(
-                ent.Owner,
-                expected.TargetGrid,
-                expected.ShuttleDock,
-                shuttleDock,
-                expected.TargetDock,
-                targetDock);
-
-            if (config == null)
-            {
-                expected.FailureReason =
-                    $"vanilla could not rebuild exact docking config after FTL arrival for shuttleDock={ToPrettyString(expected.ShuttleDock)}, " +
-                    $"targetDock={ToPrettyString(expected.TargetDock)}, targetGrid={ToPrettyString(expected.TargetGrid)}";
-                return false;
-            }
-
-            expected.Config = config;
+            expected.FailureReason = missingReason;
+            return false;
         }
 
-        var missingConfig = GetMissingExpectedDockingConfig(config);
         if (missingConfig.Docks.Count <= 0)
         {
             expected.FailureReason =
@@ -564,7 +530,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         Log.Warning($"RMC restricted docking missed or partially completed vanilla arrival DockEvent; completing missing dock pairs after FTL. " +
                     $"shuttle={ToPrettyString(ent.Owner)}, request={expected.RequestId}, call={expected.Call ?? "none"}, " +
                     $"class={expected.DockingClass}, shuttleDock={ToPrettyString(expected.ShuttleDock)}, " +
-                    $"targetDock={ToPrettyString(expected.TargetDock)}, storedConfig={(expected.Config != null)}, " +
+                    $"targetDock={ToPrettyString(expected.TargetDock)}, dockPairs={expected.DockPairs.Count}, " +
                     $"connectedDocks={connectedDocks}/{totalDocks}, missingDocks={missingConfig.Docks.Count}");
 
         _shuttle.FTLDock((ent.Owner, Transform(ent.Owner)), missingConfig);
@@ -584,19 +550,14 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
     private bool TryGetUnexpectedExpectedDockOccupancy(RMCExpectedDockComponent expected, out string reason)
     {
-        if (expected.Config is { Docks.Count: > 0 } config)
+        foreach (var dock in GetExpectedDockPairs(expected))
         {
-            foreach (var dock in config.Docks)
-            {
-                if (TryGetUnexpectedExpectedDockOccupancy(dock.DockAUid, dock.DockBUid, out reason))
-                    return true;
-            }
-
-            reason = string.Empty;
-            return false;
+            if (TryGetUnexpectedExpectedDockOccupancy(dock.ShuttleDock, dock.TargetDock, out reason))
+                return true;
         }
 
-        return TryGetUnexpectedExpectedDockOccupancy(expected.ShuttleDock, expected.TargetDock, out reason);
+        reason = string.Empty;
+        return false;
     }
 
     private bool TryGetUnexpectedExpectedDockOccupancy(
@@ -638,23 +599,65 @@ public sealed class DropshipSystem : SharedDropshipSystem
         return false;
     }
 
-    private DockingConfig GetMissingExpectedDockingConfig(DockingConfig config)
+    private static IReadOnlyList<RMCExpectedDockPair> GetExpectedDockPairs(RMCExpectedDockComponent expected)
     {
-        var missing = new DockingConfig
+        if (expected.DockPairs.Count > 0)
+            return expected.DockPairs;
+
+        return [new RMCExpectedDockPair(expected.ShuttleDock, expected.TargetDock)];
+    }
+
+    private bool TryGetMissingExpectedDockingConfig(
+        EntityUid shuttle,
+        RMCExpectedDockComponent expected,
+        out DockingConfig config,
+        out string reason)
+    {
+        config = new DockingConfig
         {
-            TargetGrid = config.TargetGrid,
-            Area = config.Area,
-            Coordinates = config.Coordinates,
-            Angle = config.Angle,
+            TargetGrid = expected.TargetGrid,
+            Coordinates = expected.Coordinates,
+            Angle = expected.Angle,
         };
 
-        foreach (var dock in config.Docks)
+        foreach (var dock in GetExpectedDockPairs(expected))
         {
-            if (!IsExpectedDockPairConnected(dock.DockAUid, dock.DockBUid))
-                missing.Docks.Add(dock);
+            if (IsExpectedDockPairConnected(dock.ShuttleDock, dock.TargetDock))
+                continue;
+
+            if (!TryComp(dock.ShuttleDock, out DockingComponent? shuttleDock))
+            {
+                reason = $"expected shuttle dock no longer exists: {ToPrettyString(dock.ShuttleDock)}";
+                return false;
+            }
+
+            if (!TryComp(dock.TargetDock, out DockingComponent? targetDock))
+            {
+                reason = $"expected target dock no longer exists: {ToPrettyString(dock.TargetDock)}";
+                return false;
+            }
+
+            var pairConfig = _docking.GetDockingConfig(
+                shuttle,
+                expected.TargetGrid,
+                dock.ShuttleDock,
+                shuttleDock,
+                dock.TargetDock,
+                targetDock);
+
+            if (pairConfig == null)
+            {
+                reason =
+                    $"vanilla could not rebuild exact docking config after FTL arrival for shuttleDock={ToPrettyString(dock.ShuttleDock)}, " +
+                    $"targetDock={ToPrettyString(dock.TargetDock)}, targetGrid={ToPrettyString(expected.TargetGrid)}";
+                return false;
+            }
+
+            config.Docks.Add((dock.ShuttleDock, dock.TargetDock, shuttleDock, targetDock));
         }
 
-        return missing;
+        reason = string.Empty;
+        return true;
     }
 
     private void OnFTLUpdated(Entity<DropshipComponent> ent, ref FTLUpdatedEvent args)
@@ -1572,7 +1575,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         expected.TargetDock = target.TargetDock;
         expected.Coordinates = exactCoordinates;
         expected.Angle = exactAngle;
-        expected.Config = target.Config;
+        expected.DockPairs.Clear();
+        foreach (var dock in target.Config.Docks)
+        {
+            expected.DockPairs.Add(new RMCExpectedDockPair(dock.DockAUid, dock.DockBUid));
+        }
+
         expected.DockingClass = computer.Comp.ShuttleDockingClass;
         expected.Confirmed = false;
         expected.ActualShuttleDock = null;

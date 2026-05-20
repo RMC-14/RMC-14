@@ -1,4 +1,5 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.ERT;
@@ -6,7 +7,7 @@ namespace Content.Shared._RMC14.ERT;
 /// <summary>
 /// Handheld distress beacon settings that control which specific ERT calls it can request.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCERTDistressBeaconComponent : Component
 {
     /// <summary>

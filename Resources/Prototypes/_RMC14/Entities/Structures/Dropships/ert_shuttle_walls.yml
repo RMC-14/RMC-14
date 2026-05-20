@@ -354,18 +354,18 @@
   - type: Occluder
     enabled: false
 
-#WeYa ERT Shuttle
+# We-Ya ERT Shuttle
 
 - type: entity
   abstract: true
   parent: RMCBaseERTShuttleWall
   id: RMCERTShuttleWallWeYa
-  name: WeYa shuttle wall
+  name: We-Ya shuttle wall
 
 - type: entity
   parent: RMCERTShuttleWallWeYa
   id: RMCERTShuttleWallWeYaEngineLeft
-  name: WeYa shuttle engine
+  name: We-Ya shuttle engine
   suffix: Left
   components:
   - type: Sprite
@@ -376,7 +376,7 @@
 - type: entity
   parent: RMCERTShuttleWallWeYa
   id: RMCERTShuttleWallWeYaEngineRight
-  name: WeYa shuttle engine
+  name: We-Ya shuttle engine
   suffix: Right
   components:
   - type: Sprite

@@ -13,7 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA PMC Site Director
+  spawnMenuRoleName: We-Ya PMC Site Director
   special:
   - !type:AddComponentSpecial
     components:
@@ -49,7 +49,7 @@
 
 - type: entity
   id: RMCRandomHumanoidPMCDirector
-  name: weya pmc ghost role director
+  name: we-ya pmc ghost role director
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -61,7 +61,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointPMCSiteDirector
-  name: weya pmc director spawn point
+  name: we-ya pmc director spawn point
   components:
   - type: SpawnPoint
     job_id: RMCPMCDirector

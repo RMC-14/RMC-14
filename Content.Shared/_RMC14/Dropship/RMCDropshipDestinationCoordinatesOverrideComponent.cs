@@ -1,17 +1,18 @@
+using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 
-namespace Content.Server._RMC14.Dropship;
+namespace Content.Shared._RMC14.Dropship;
 
 /// <summary>
 /// Lets a destination marker stay at a mapper-facing position while FTL uses a different exact grid coordinate.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCDropshipDestinationCoordinatesOverrideComponent : Component
 {
-    [ViewVariables]
+    [DataField]
     public MapCoordinates Coordinates;
 
-    [ViewVariables]
+    [DataField]
     public Angle Rotation;
 }

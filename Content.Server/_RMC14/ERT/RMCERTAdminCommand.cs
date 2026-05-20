@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server._RMC14.ERT;
 
-[AdminCommand(AdminFlags.None)]
+[AdminCommand(AdminFlags.Fun)]
 public sealed class RMCERTAdminCommand : LocalizedCommands
 {
     [Dependency] private readonly IEntityManager _entities = default!;

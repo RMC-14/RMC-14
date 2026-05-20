@@ -10,10 +10,11 @@
   startingGear: RMCJobPMCSniper
   icon: RMCJobIconPMCSniper
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA PMC Sniper Specialist
+  spawnMenuRoleName: We-Ya PMC Sniper Specialist
   special:
   - !type:AddComponentSpecial
     components:
@@ -46,7 +47,7 @@
 
 - type: entity
   id: RMCRandomHumanoidPMCSniper
-  name: weya pmc ghost role sniper
+  name: we-ya pmc ghost role sniper
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -58,7 +59,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointPMCSniper
-  name: weya pmc sniper spawn point
+  name: we-ya pmc sniper spawn point
   components:
   - type: SpawnPoint
     job_id: RMCPMCSniper

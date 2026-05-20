@@ -10,10 +10,11 @@
   startingGear: RMCJobPMCMedic
   icon: RMCJobIconPMCMedic
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA PMC Medic
+  spawnMenuRoleName: We-Ya PMC Medic
   special:
   - !type:AddComponentSpecial
     components:
@@ -37,7 +38,7 @@
 
 - type: entity
   id: RMCRandomHumanoidPMCMedic
-  name: weya pmc ghost role medic
+  name: we-ya pmc ghost role medic
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -49,7 +50,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointPMCMedic
-  name: weya pmc medic spawn point
+  name: we-ya pmc medic spawn point
   components:
   - type: SpawnPoint
     job_id: RMCPMCMedic

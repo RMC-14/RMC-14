@@ -10,10 +10,11 @@
   startingGear: RMCJobPMCEngineer
   icon: RMCJobIconPMCEngineer
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: WEYA PMC Engineer
+  spawnMenuRoleName: We-Ya PMC Engineer
   special:
   - !type:AddComponentSpecial
     components:
@@ -45,7 +46,7 @@
 
 - type: entity
   id: RMCRandomHumanoidPMCEngineer
-  name: weya pmc ghost role engineer
+  name: we-ya pmc ghost role engineer
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -57,7 +58,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointPMCEngineer
-  name: weya pmc engineer spawn point
+  name: we-ya pmc engineer spawn point
   components:
   - type: SpawnPoint
     job_id: RMCPMCEngineer

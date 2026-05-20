@@ -10,6 +10,7 @@
   startingGear: RMCGearBureauMarshal
   icon: "RMCJobIconBureauMarshal"
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - ShipMasterAccess
   special:

@@ -5,7 +5,6 @@ namespace Content.Client._RMC14.Dropship;
 public sealed class DropshipSystem : SharedDropshipSystem
 {
     public readonly List<DropshipNavigationBui> Uis = new();
-    public readonly List<DropshipNavigationERTBui> ERTUis = new();
 
     public override void FrameUpdate(float frameTime)
     {
@@ -14,9 +13,5 @@ public sealed class DropshipSystem : SharedDropshipSystem
             ui.Update();
         }
 
-        foreach (var ui in ERTUis)
-        {
-            ui.Update();
-        }
     }
 }

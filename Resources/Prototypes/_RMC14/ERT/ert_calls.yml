@@ -1541,7 +1541,7 @@
   adminButtonLabel: rmc-ert-admin-button-wy-commando
   randomWeight: 5
   allowedSources: [ Console, Admin ]
-  # TODO RMC14 replace with an exact WeYa commando shuttle once ported.
+  # TODO RMC14 replace with an exact We-Ya commando shuttle once ported.
   shuttleMap: /Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml
   shuttleSpawner: RMCSpawnerERTShuttleWeYa
   shuttleSpawnMarker: RMCERTShuttleStartPadWeYa

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: CMProvostTeamLeader
   name: rmc-job-name-corp-provost-team-leader
@@ -9,6 +9,7 @@
   startingGear: RMCGearProvostTeamLeader
   icon: RMCJobIconProvostTeamLeader
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - ShipMasterAccess
   spawnMenuRoleName: Provost Team Leader

@@ -10,6 +10,7 @@
   startingGear: RMCGearContractorLeader
   icon: RMCJobIconFreelancerLeader
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
@@ -82,6 +83,7 @@
   startingGear: RMCGearContractorStandard
   icon: RMCJobIconFreelancerStandard
   joinNotifyCrew: false
+  access: [ CMAccessERT ]
   accessGroups:
   - Colony
   - RMCWeYa
@@ -237,6 +239,7 @@
 - type: job
   parent: RMCContractorStandard
   id: RMCContractorMedic
+  access: [ CMAccessERT ]
   name: rmc-job-name-contractor-medic
   playTimeTracker: RMCJobContractorMedic
   ranks:
@@ -269,6 +272,7 @@
 - type: job
   parent: RMCContractorStandard
   id: RMCContractorEngineer
+  access: [ CMAccessERT ]
   name: rmc-job-name-contractor-engineer
   playTimeTracker: RMCJobContractorEngineer
   startingGear: RMCGearContractorEngineer
@@ -298,6 +302,7 @@
 - type: job
   parent: RMCContractorStandard
   id: RMCContractorHeavy
+  access: [ CMAccessERT ]
   name: rmc-job-name-contractor-heavy
   playTimeTracker: RMCJobContractorHeavy
   startingGear: RMCGearContractorHeavy
@@ -358,6 +363,7 @@
 - type: job
   parent: RMCContractorLeader
   id: RMCContractorCovertLeader
+  access: [ CMAccessERT ]
   name: rmc-job-name-contractor-covert-leader
   playTimeTracker: RMCJobContractorCovertLeader
   startingGear: RMCGearContractorCovertLeader
@@ -383,6 +389,7 @@
 - type: job
   parent: RMCContractorStandard
   id: RMCContractorCovertStandard
+  access: [ CMAccessERT ]
   name: rmc-job-name-contractor-covert-standard
   playTimeTracker: RMCJobContractorCovertStandard
   startingGear: RMCGearContractorCovertStandard
@@ -508,6 +515,7 @@
 - type: job
   parent: RMCContractorMedic
   id: RMCContractorCovertMedic
+  access: [ CMAccessERT ]
   name: rmc-job-name-contractor-covert-medic
   playTimeTracker: RMCJobContractorCovertMedic
   startingGear: RMCGearContractorCovertMedic
@@ -533,6 +541,7 @@
 - type: job
   parent: RMCContractorEngineer
   id: RMCContractorCovertEngineer
+  access: [ CMAccessERT ]
   name: rmc-job-name-contractor-covert-engineer
   playTimeTracker: RMCJobContractorCovertEngineer
   startingGear: RMCGearContractorCovertEngineer
@@ -558,6 +567,7 @@
 - type: job
   parent: RMCContractorHeavy
   id: RMCContractorCovertHeavy
+  access: [ CMAccessERT ]
   name: rmc-job-name-contractor-covert-heavy
   playTimeTracker: RMCJobContractorCovertHeavy
   startingGear: RMCGearContractorCovertHeavy

@@ -54,8 +54,8 @@
 - type: entity
   parent: RMCHandheldDistressBeaconBase
   id: RMCHandheldDistressBeaconWeYa
-  name: WeYa distress beacon
-  suffix: WeYa
+  name: We-Ya distress beacon
+  suffix: We-Ya
   components:
   - type: AccessReader
     access: [ [ "RMCAccessWeYa" ] ]
@@ -74,8 +74,8 @@
 - type: entity
   parent: RMCHandheldDistressBeaconWeYa
   id: RMCHandheldDistressBeaconWeYaBodyguard
-  name: WeYa bodyguard distress beacon
-  suffix: WeYa, Bodyguard
+  name: We-Ya bodyguard distress beacon
+  suffix: We-Ya, Bodyguard
   components:
   - type: RMCERTDistressBeacon
     recipient: rmc-ert-recipient-weya-security
@@ -90,8 +90,8 @@
 - type: entity
   parent: RMCHandheldDistressBeaconWeYa
   id: RMCHandheldDistressBeaconWeYaLawyer
-  name: WeYa legal distress beacon
-  suffix: WeYa, Lawyer
+  name: We-Ya legal distress beacon
+  suffix: We-Ya, Lawyer
   components:
   - type: RMCERTDistressBeacon
     recipient: rmc-ert-recipient-weya-affairs

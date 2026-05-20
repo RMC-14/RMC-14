@@ -1,9 +1,10 @@
 using Content.Shared.Tag;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._RMC14.Dropship;
+namespace Content.Shared._RMC14.Dropship;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCDockingPortAirlockControlComponent : Component
 {
     [DataField]

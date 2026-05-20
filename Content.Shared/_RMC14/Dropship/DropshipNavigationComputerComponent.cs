@@ -137,4 +137,40 @@ public sealed partial class DropshipNavigationComputerComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? LaunchAlarmForcedShutdownSound = new SoundPathSpecifier("/Audio/_RMC14/Structures/metalhit.ogg");
+
+    /// <summary>
+    /// Title shown on the client navigation window.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public string NavigationWindowTitle = "Flight Computer";
+
+    /// <summary>
+    /// Whether the current-location fly-by destination should be shown.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ShowFlyByDestination = true;
+
+    /// <summary>
+    /// Whether primary destinations should receive the primary suffix.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ShowPrimaryDestinationLabel = true;
+
+    /// <summary>
+    /// Whether individual aft/port/starboard door controls should be shown.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ShowIndividualDoorControls = true;
+
+    /// <summary>
+    /// Whether launch alarm controls should be shown.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ShowLaunchAlarmControls = true;
+
+    /// <summary>
+    /// Whether remote control controls should be shown.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ShowRemoteControlControls = true;
 }
