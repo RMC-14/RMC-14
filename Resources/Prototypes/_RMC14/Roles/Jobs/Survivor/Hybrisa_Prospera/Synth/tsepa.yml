@@ -79,7 +79,7 @@
   name: survivor synth hybrisa tsepa colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCCoatTSEPAHighVisVest, RMCHeadCapTSEPA ]
     - [ RMCCoatTSEPAHighVis, RMCHeadBeretTSEPA ]
