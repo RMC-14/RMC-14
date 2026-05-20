@@ -2800,3 +2800,14 @@
     state: bethany_aw_xiphos
   - type: PatronFigurine
     id: a81ab298-761a-4002-bf3b-e6859646a531
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPatches-It-Up
+  name: Patches-It-Up figurine
+  description: "\"They don't call her Armory for nothing!\"\n\nThis figurine usually comes with a printed Submachine gun, Shotgun and M13 autopistols, with a hidden pistol in her boot. Additionally, it has a clip on the back of her armor to hang onto keychains or to attach an included parachute. Too bad it doesn't have any of those add-ons.\n\nHandle with care!"
+  components:
+  - type: Sprite
+    state: patches-it-up_armory
+  - type: PatronFigurine
+    id: e744a05a-b40a-4294-9433-84ea428829d1
