@@ -860,17 +860,6 @@
 
 - type: entity
   parent: RMCHeadCapGrey
-  id: RMCHeadCapFerret
-  name: ferret heavy industries trucker hat
-  description: It's a trucker hat. They're becoming collector items since Ferret went under in 2080.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
-
-- type: entity
-  parent: RMCHeadCapGrey
   id: RMCHeadCapTruckerRed
   name: red trucker hat
   description: It's a red trucker hat.

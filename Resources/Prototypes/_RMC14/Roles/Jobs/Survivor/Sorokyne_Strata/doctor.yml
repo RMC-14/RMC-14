@@ -58,7 +58,7 @@
   name: ministry of health doctor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGearOther:
     -
       - [ RMCPouchFirstAidSplintsGauzeOintment ]
