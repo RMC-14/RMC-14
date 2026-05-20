@@ -116,12 +116,12 @@ public sealed class RMCWeldEffectSystem : EntitySystem
             ClearActiveEffect(target);
     }
 
-    private void OnWeldableToolDoAfter(EntityUid uid, WeldableComponent _, RMCToolDoAfterEvent args)
+    private void OnWeldableToolDoAfter(Entity<WeldableComponent> ent, RMCToolDoAfterEvent args)
     {
         if (!args.Cancelled || args.WrappedEvent is not WeldFinishedEvent)
             return;
 
-        ClearActiveEffect(uid);
+        ClearActiveEffect(ent.Owner);
     }
 
     private void OnRepairDoAfter(RMCRepairableDoAfterEvent args)
