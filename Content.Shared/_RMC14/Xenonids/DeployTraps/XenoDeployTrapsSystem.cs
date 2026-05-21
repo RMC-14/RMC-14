@@ -57,6 +57,13 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
         var targetMap = _transform.ToMapCoordinates(args.Target);
         var tileBase = new Vector2(targetMap.Position.Floored().X, targetMap.Position.Floored().Y);
         var origin = _transform.GetMapCoordinates(xeno.Owner);
+        var tileCenter = new MapCoordinates(tileBase + new Vector2(0.5f, 0.5f), targetMap.MapId);
+        if ((tileCenter.Position - origin.Position).Length() > xeno.Comp.Range)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-deploy-traps-range-fail"), xeno, xeno);
+            return;
+        }
+
         var offsets = new Vector2[]
         {
             new(0.5f, 0.5f),   // centre

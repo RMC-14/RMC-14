@@ -44,6 +44,13 @@ public sealed class XenoAcidMineSystem : EntitySystem
         };
 
         var tileBase = new Vector2(targetMap.Position.Floored().X, targetMap.Position.Floored().Y);
+        var tileCenter = new MapCoordinates(tileBase + new Vector2(0.5f, 0.5f), targetMap.MapId);
+        if ((tileCenter.Position - origin.Position).Length() > xeno.Comp.Range)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-acid-mine-range-fail"), xeno, xeno);
+            return;
+        }
+
         var hasLos = false;
 
         foreach (var offset in offsets)
