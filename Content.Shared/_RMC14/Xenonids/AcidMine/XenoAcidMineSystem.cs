@@ -69,7 +69,6 @@ public sealed class XenoAcidMineSystem : EntitySystem
             return;
         args.Handled = true;
 
-
         var popupSelf = Loc.GetString("rmc-xeno-acid-mine-self");
         var popupOthers = Loc.GetString("rmc-xeno-acid-mine-others", ("xeno", xeno));
         _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
