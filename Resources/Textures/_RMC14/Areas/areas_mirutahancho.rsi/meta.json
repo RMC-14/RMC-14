@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By Drazamuffin",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mirucommand"
+    },
+    {
+      "name": "mirucommon1"
+    },
+    {
+      "name": "mirucommon2"
+    },
+    {
+      "name": "mirucommon3"
+    },
+    {
+      "name": "mirucommon4"
+    },
+    {
+      "name": "mirucryo"
+    },
+    {
+      "name": "mirucryo2"
+    },
+    {
+      "name": "miruengi"
+    },
+    {
+      "name": "miruhangar"
+    },
+    {
+      "name": "mirumedi"
+    }
+  ]
+}

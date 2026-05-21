@@ -1,0 +1,165 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaMirut
+  name: MSTV Mirutahancho
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_mirutahancho.rsi
+    state: mirucommon1
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#91BDCFE7'
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: true
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutCryo
+  name: Hypersleep vault B3 - MSTV Mirutahancho Bravo deck
+  components:
+  - type: Sprite
+    state: mirucryo
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutCryo2
+  name: Hypersleep vault B4 - MSTV Mirutahancho Bravo deck
+  components:
+  - type: Sprite
+    state: mirucryo2
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutLockers
+  name: Hypersleep disembarkation - MSTV Mirutahancho Bravo deck
+  components:
+  - type: Sprite
+    state: mirucommon4
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutMessHall
+  name: B Shift Mess Hall - MSTV Mirutahancho Bravo deck
+  components:
+  - type: Sprite
+    state: mirucommon3
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutKitchen
+  name: B Shift Mess Kitchen - MSTV Mirutahancho Bravo deck
+  components:
+  - type: Sprite
+    state: mirucommon2
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMiruthallway
+  name: Starboard Beam Access hallways - MSTV Mirutahancho Bravo deck
+  components:
+  - type: Sprite
+    state: mirucommon1
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutDorms
+  name: B shift dorms - MSTV Mirutahancho Bravo deck
+  components:
+  - type: Sprite
+    state: mirucommon4
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutCommand
+  name: MSTV Mirutahancho Navigations Bridge
+  components:
+  - type: Sprite
+    state: mirucommand
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutCCO
+  name: MSTV Mirutahancho Commander's Quaters
+  components:
+  - type: Sprite
+    state: mirucommon2
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutBrief
+  name: Cargo Hold Briefing Hall - MSTV Mirutahancho
+  components:
+  - type: Sprite
+    state: miruengi
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutGearRacks
+  name: Cargo Hold Gear Racks - MSTV Mirutahancho
+  components:
+  - type: Sprite
+    state: mirucommon3
+
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutHangar
+  name: Dock Alpha - MSTV Mirutahancho
+  components:
+  - type: Sprite
+    state: miruhangar
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutMedical
+  name: Dock Alpha Triarge Center - Dock Alpha, MSTV Mirutahancho
+  components:
+  - type: Sprite
+    state: mirumedi
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutCargo
+  name: Dock Alpha Stowage Deck - MSTV Mirutahancho
+  components:
+  - type: Sprite
+    state: miruhangar
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutCargo
+  name: Boiler Room - MSTV Mirutahancho Engine Deck
+  components:
+  - type: Sprite
+    state: miruengi
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutAIcore
+  name: MSTV Mirutahancho HEPH/AES/TUS Core # Heading Estimations Program Handler / Harbour Automated Equipment System / Technological Utilties Strategiser. HEPH/AES/TUS, 3 AIs in a trench coat, orginally designed by WEYA, jailbroken and now used by the CLF as a budget ARES
+  components:
+  - type: Sprite
+    state: mirucryo
+
+- type: entity
+  parent: RMCAreaMirut
+  id: RMCAreaMirutOOB
+  name: space outside the MSTV Mirutahancho
+  components:
+  - type: Sprite
+    state: miruOOB
+  - type: Area
+    alwaysPowered: true
