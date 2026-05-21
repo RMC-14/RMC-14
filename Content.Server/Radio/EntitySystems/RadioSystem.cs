@@ -3,7 +3,6 @@ using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
-// RMC14
 using Content.Server._RMC14.Language.Systems;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Language.Prototypes;
@@ -12,7 +11,6 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Xenonids;
-// RMC14
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;

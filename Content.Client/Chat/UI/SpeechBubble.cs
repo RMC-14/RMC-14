@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
-// RMC14
 using Content.Client.Chat.Managers;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Marines.Squads;
@@ -9,19 +8,13 @@ using Content.Shared._RMC14.Chat;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
-// RMC14
 using Robust.Client.GameObjects;
-// RMC14
 using Robust.Client.Graphics;
-// RMC14
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
-// RMC14
 using Robust.Shared.IoC;
-// RMC14
 using Robust.Shared.Prototypes;
-// RMC14
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 

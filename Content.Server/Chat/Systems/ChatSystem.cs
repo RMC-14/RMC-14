@@ -4,9 +4,7 @@ using System.Text;
 using Content.Server._RMC14.Admin;
 using Content.Server._RMC14.Chat.Chat;
 using Content.Server._RMC14.Emote;
-// RMC14
 using Content.Server._RMC14.Language.Systems;
-// RMC14
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -19,11 +17,9 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
-// RMC14
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
-// RMC14
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.ActionBlocker;
@@ -569,7 +565,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         var playerName = Name(source);
         string wrappedMessage;
         // RMC14
-        if (!_adminManager.IsAdmin(player) && !_DeadchatEnabled)
+        if (!_adminManager.IsAdmin(player) && !_DeadchatEnabled) // RMC14 - Check the status of the "rmc.dead_chat_enabled" CCvar before continuing.
             return;
         // RMC14
 
