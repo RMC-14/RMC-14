@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Sling straps have been added. They store one item and prevent you from
-      dropping it.
-    type: Add
-  id: 2725
-  time: '2026-01-08T22:40:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8694
 - author: Dygon
   changes:
   - message: You can now extinguish yourself using the underbarrel extinguisher.
@@ -4480,5 +4472,13 @@
   id: 3224
   time: '2026-05-20T12:53:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9202
+- author: JustMyselfUwU
+  changes:
+  - message: Shiva survivor parkas can now hold magazines and has a slightly higher
+      balistic armor value
+    type: Fix
+  id: 3225
+  time: '2026-05-21T17:45:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9857
 Name: RMC14
 Order: -1
