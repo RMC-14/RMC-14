@@ -201,7 +201,7 @@
   - 1.0
   - 1.0
   - 1.0
-  edgeSpritePriority: 0
+  edgeSpritePriority: 1
   edgeSprites:
     SouthEast: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_single_edge.png
     NorthEast: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_single_edge.png
@@ -221,6 +221,7 @@
   parent: RMCPlanetShale
   id: RMCPlanetShaleAlt
   sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_2.png
+  edgeSpritePriority: 2
   rmcTerrainLayer: 2
 
 - type: tile

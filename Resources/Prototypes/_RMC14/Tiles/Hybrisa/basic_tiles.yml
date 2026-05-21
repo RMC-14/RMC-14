@@ -24,6 +24,16 @@
   id: RMCPlanetHybrisaShale
   name: shale
   sprite: /Textures/_RMC14/Tiles/hybrisa/hybrisa_1.png
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/hybrisa/layer1_single_edge.png
+    NorthEast: /Textures/_RMC14/Tiles/hybrisa/layer1_single_edge.png
+    NorthWest: /Textures/_RMC14/Tiles/hybrisa/layer1_single_edge.png
+    SouthWest: /Textures/_RMC14/Tiles/hybrisa/layer1_single_edge.png
+    South: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
+    East: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
+    North: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
+    West: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
   rmcDigType: Sand
   rmcTerrainLayer: 1
 
@@ -31,7 +41,7 @@
   parent: RMCPlanetHybrisaShale
   id: RMCPlanetHybrisaShale2
   sprite: /Textures/_RMC14/Tiles/hybrisa/hybrisa_2.png
-  edgeSpritePriority: 0
+  edgeSpritePriority: 2
   edgeSprites:
     SouthEast: /Textures/_RMC14/Tiles/hybrisa/layer1_single_edge.png
     NorthEast: /Textures/_RMC14/Tiles/hybrisa/layer1_single_edge.png
@@ -47,6 +57,7 @@
   parent: RMCPlanetHybrisaShale2
   id: RMCPlanetHybrisaShale3
   sprite: /Textures/_RMC14/Tiles/hybrisa/hybrisa_3.png
+  edgeSpritePriority: 3
   rmcTerrainLayer: 3
 
 - type: tile

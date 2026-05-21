@@ -105,3 +105,41 @@
     digTo: RMCPlanetIce1
     material: None
     diggable: false
+
+- type: rmcTerrainDigGraph
+  id: Snow
+  stages:
+  - tile: RMCPlanetSnow0
+    material: Dirt
+    yield: 5
+  - tile: RMCPlanetSnow1
+    digTo: RMCPlanetSnow0
+    material: Snow
+  - tile: RMCPlanetSnow2
+    digTo: RMCPlanetSnow1
+    material: Snow
+  - tile: RMCPlanetSnow3
+    digTo: RMCPlanetSnow2
+    material: Snow
+  - tile: RMCPlanetSnow4
+    digTo: RMCPlanetSnow3
+    material: Snow
+
+- type: rmcTerrainDigGraph
+  id: BrownSnow
+  stages:
+  - tile: RMCPlanetSnowBrown0
+    material: Dirt
+    yield: 5
+  - tile: RMCPlanetSnowBrown1
+    digTo: RMCPlanetSnowBrown0
+    material: Snow
+  - tile: RMCPlanetSnowBrown2
+    digTo: RMCPlanetSnowBrown1
+    material: Snow
+  - tile: RMCPlanetSnowBrown3
+    digTo: RMCPlanetSnowBrown2
+    material: Snow
+  - tile: RMCPlanetSnowBrown4
+    digTo: RMCPlanetSnowBrown3
+    material: Snow

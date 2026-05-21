@@ -23,10 +23,13 @@ public sealed class RMCTerrainSystem : EntitySystem
 
     private readonly Dictionary<string, RMCTerrainDigStage> _stages = new();
     private readonly Dictionary<string, int> _stageLayers = new();
+    private EntityQuery<RMCTerrainClearableComponent> _clearableQuery;
     private bool _cachedStages;
 
     public override void Initialize()
     {
+        _clearableQuery = GetEntityQuery<RMCTerrainClearableComponent>();
+
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
     }
 
@@ -106,6 +109,7 @@ public sealed class RMCTerrainSystem : EntitySystem
                 return false;
 
             result = new RMCTerrainDigResult(tileDef.RmcDigType, batchSize, 0, tileDef.ID);
+            ClearSurfaceCover(tileRef);
             return true;
         }
 
@@ -120,6 +124,7 @@ public sealed class RMCTerrainSystem : EntitySystem
         if (stage.DigTo == null)
         {
             result = new RMCTerrainDigResult(material, stage.Yield, 0, tileDef.ID);
+            ClearSurfaceCover(tileRef);
             return true;
         }
 
@@ -155,7 +160,10 @@ public sealed class RMCTerrainSystem : EntitySystem
             return false;
 
         if (replacement != null && _net.IsServer)
+        {
             _tile.ReplaceTile(tileRef, replacement);
+            ClearSurfaceCover(tileRef);
+        }
 
         result = new RMCTerrainDigResult(material, digYield, removed, currentTile);
         return true;
@@ -198,7 +206,10 @@ public sealed class RMCTerrainSystem : EntitySystem
             return false;
 
         if (_net.IsServer)
+        {
             _tile.ReplaceTile(tileRef, replacement);
+            ClearSurfaceCover(tileRef);
+        }
 
         return true;
     }
@@ -326,6 +337,22 @@ public sealed class RMCTerrainSystem : EntitySystem
 
         replacement = default!;
         return false;
+    }
+
+    private void ClearSurfaceCover(TileRef tileRef)
+    {
+        if (!_net.IsServer ||
+            !TryComp(tileRef.GridUid, out MapGridComponent? grid))
+        {
+            return;
+        }
+
+        var anchored = _map.GetAnchoredEntitiesEnumerator(tileRef.GridUid, grid, tileRef.GridIndices);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (_clearableQuery.HasComp(uid))
+                QueueDel(uid);
+        }
     }
 
     private void EnsureStageCache()

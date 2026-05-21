@@ -17,6 +17,6 @@ public static class RMCTerrainMaterialExtensions
 {
     public static bool CanFillSandbags(this RMCTerrainMaterial material)
     {
-        return material is RMCTerrainMaterial.Dirt or RMCTerrainMaterial.Mars or RMCTerrainMaterial.Sand or RMCTerrainMaterial.Shale;
+        return material is RMCTerrainMaterial.Dirt or RMCTerrainMaterial.Mars or RMCTerrainMaterial.Snow or RMCTerrainMaterial.Sand or RMCTerrainMaterial.Shale;
     }
 }

@@ -5,6 +5,7 @@
   name: tallgrass
   suffix: Centre
   components:
+  - type: RMCTerrainClearable
   # make this slashable by only machete
   - type: Sprite
     sprite: _RMC14/Structures/Flora/tallgrass.rsi
