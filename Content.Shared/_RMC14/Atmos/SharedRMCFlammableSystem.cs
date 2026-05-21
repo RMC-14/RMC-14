@@ -6,7 +6,6 @@ using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
-using Content.Shared._RMC14.Terrain;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Alert;
@@ -71,7 +70,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly RMCTerrainSystem _rmcTerrain = default!;
 
     private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
@@ -501,8 +499,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             cont = true;
             return range;
         }
-
-        _rmcTerrain.TryLowerSnowLayer(target, 1, out _);
 
         if (_rmcMap.HasAnchoredEntityEnumerator<TileFireComponent>(target, out var oldTileFire))
         {

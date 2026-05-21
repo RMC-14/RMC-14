@@ -1,121 +1,40 @@
-using Content.Shared._RMC14.Slow;
-using Content.Shared._RMC14.Xenonids;
-using Content.Shared.DoAfter;
-using Content.Shared.Interaction;
+using Content.Shared._RMC14.Terrain.Prototypes;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Terrain;
 
 public sealed class RMCTerrainSystem : EntitySystem
 {
-    public const string SnowLayerSet = "Snow";
-    public const string BrownSnowLayerSet = "BrownSnow";
-    public const int SnowHandPlaceMaxLayer = 3;
-    private const float XenoSnowSlowModifier = 3f / 7f;
     private const float ExplosionLightLayerDamageChance = 0.20f;
     private const float ExplosionHeavyLayerDamageChance = 0.60f;
 
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TileSystem _tile = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
 
-    private readonly Dictionary<(string Set, int Layer), ContentTileDefinition> _layerTiles = new();
-    private bool _cachedLayers;
+    private readonly Dictionary<string, RMCTerrainDigStage> _stages = new();
+    private readonly Dictionary<string, int> _stageLayers = new();
+    private bool _cachedStages;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCSpeciesSlowdownModifierComponent, MoveEvent>(OnMove);
-        SubscribeLocalEvent<XenoComponent, AfterInteractEvent>(OnXenoAfterInteract);
-        SubscribeLocalEvent<XenoComponent, XenoClearSnowDoAfterEvent>(OnXenoClearSnowDoAfter);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
     }
 
-    private void OnXenoAfterInteract(Entity<XenoComponent> xeno, ref AfterInteractEvent args)
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
-        if (_net.IsClient ||
-            args.Handled ||
-            !args.CanReach ||
-            args.Target != null ||
-            xeno.Comp.Tier <= 0)
-        {
-            return;
-        }
-
-        if (!CanXenoClearSnow(xeno, args.ClickLocation, out _))
-            return;
-
-        args.Handled = true;
-        StartXenoClearSnowDoAfter(xeno, args.ClickLocation);
-    }
-
-    private void OnXenoClearSnowDoAfter(Entity<XenoComponent> xeno, ref XenoClearSnowDoAfterEvent args)
-    {
-        if (args.Cancelled || args.Handled)
-            return;
-
-        args.Handled = true;
-        if (_net.IsClient)
-            return;
-
-        var coordinates = GetCoordinates(args.Coordinates);
-        if (!CanXenoClearSnow(xeno, coordinates, out var tile) ||
-            !_interaction.InRangeUnobstructed(xeno, coordinates, popup: false) ||
-            !TryLowerLayer(tile, 1, out _, out _))
-        {
-            return;
-        }
-
-        if (CanXenoClearSnow(xeno, coordinates, out _))
-            StartXenoClearSnowDoAfter(xeno, coordinates);
-    }
-
-    private void OnMove(Entity<RMCSpeciesSlowdownModifierComponent> ent, ref MoveEvent args)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (!TryGetTileRef(args.OldPosition, out var oldTile) ||
-            !TryGetTileRef(args.NewPosition, out var newTile))
-        {
-            return;
-        }
-
-        if (oldTile.GridUid == newTile.GridUid &&
-            oldTile.GridIndices == newTile.GridIndices)
-        {
-            return;
-        }
-
-        var tileDef = GetContentTileDefinition(newTile);
-        if (!IsSnow(tileDef) ||
-            tileDef.RmcTerrainLayer <= 0)
-        {
-            return;
-        }
-
-        var isXeno = HasComp<XenoComponent>(ent);
-        var modifier = isXeno ? XenoSnowSlowModifier : 1f;
-        var slow = tileDef.RmcSnowSlowSeconds * modifier;
-        if (slow > 0)
-            _slow.TrySlowdown(ent, TimeSpan.FromSeconds(slow));
-
-        var superSlow = tileDef.RmcSnowSuperSlowSeconds * modifier;
-        if (!isXeno &&
-            superSlow > 0 &&
-            tileDef.RmcSnowSuperSlowChance > 0 &&
-            _random.Prob(tileDef.RmcSnowSuperSlowChance))
-        {
-            _slow.TrySuperSlowdown(ent, TimeSpan.FromSeconds(superSlow));
-        }
+        _cachedStages = false;
+        _stages.Clear();
+        _stageLayers.Clear();
     }
 
     public ContentTileDefinition GetContentTileDefinition(TileRef tile)
@@ -136,33 +55,20 @@ public sealed class RMCTerrainSystem : EntitySystem
         return true;
     }
 
-    public bool IsSnow(ContentTileDefinition tile)
+    public bool CanDigTile(TileRef tileRef, out RMCTerrainMaterial material)
     {
-        return tile.RmcTerrainLayerSet is SnowLayerSet or BrownSnowLayerSet;
+        var tileDef = GetContentTileDefinition(tileRef);
+        return CanDigTile(tileDef, out material);
     }
 
-    public bool TryLowerSnowLayer(EntityCoordinates coordinates, int amount, out int removed)
-    {
-        removed = 0;
-
-        if (!TryGetTileRef(coordinates, out var tile))
-            return false;
-
-        var tileDef = GetContentTileDefinition(tile);
-        if (!IsSnow(tileDef))
-            return false;
-
-        return TryLowerLayer(tile, amount, out removed, out _);
-    }
-
-    public bool TryDamageLayer(TileRef tileRef, int maxTileBreak)
+    public bool TryDamageStages(TileRef tileRef, int maxTileBreak)
     {
         if (maxTileBreak <= 0)
             return false;
 
         var tileDef = GetContentTileDefinition(tileRef);
-        if (tileDef.RmcTerrainLayerSet == null ||
-            tileDef.RmcTerrainLayer <= 0)
+        if (!TryGetStageLayer(tileDef.ID, out var layer) ||
+            layer <= 0)
         {
             return false;
         }
@@ -171,15 +77,96 @@ public sealed class RMCTerrainSystem : EntitySystem
         {
             1 when _random.Prob(ExplosionLightLayerDamageChance) => 1,
             2 when _random.Prob(ExplosionHeavyLayerDamageChance) => 2,
-            >= 3 => tileDef.RmcTerrainLayer,
+            >= 3 => layer,
             _ => 0,
         };
 
         return amount > 0 &&
-               TryLowerLayer(tileRef, amount, out _, out _);
+               TryLowerStage(tileRef, amount, out _, out _);
+    }
+
+    public bool TryDamageLayer(TileRef tileRef, int maxTileBreak)
+    {
+        return TryDamageStages(tileRef, maxTileBreak);
+    }
+
+    public bool TryDigTile(TileRef tileRef, int batchSize, out RMCTerrainDigResult result)
+    {
+        result = default;
+        if (batchSize <= 0)
+            return false;
+
+        var tileDef = GetContentTileDefinition(tileRef);
+        if (!tileDef.CanDig)
+            return false;
+
+        if (!TryGetStage(tileDef.ID, out var stage))
+        {
+            if (tileDef.RmcDigType is RMCTerrainMaterial.None or RMCTerrainMaterial.Snow)
+                return false;
+
+            result = new RMCTerrainDigResult(tileDef.RmcDigType, batchSize, 0, tileDef.ID);
+            return true;
+        }
+
+        if (!stage.Diggable ||
+            stage.Material == RMCTerrainMaterial.None ||
+            stage.Yield <= 0)
+        {
+            return false;
+        }
+
+        var material = stage.Material;
+        if (stage.DigTo == null)
+        {
+            result = new RMCTerrainDigResult(material, stage.Yield, 0, tileDef.ID);
+            return true;
+        }
+
+        var digYield = 0;
+        var removed = 0;
+        var currentTile = tileDef.ID;
+        var current = stage;
+        ContentTileDefinition? replacement = null;
+
+        for (var i = 0; i < batchSize && current.DigTo != null; i++)
+        {
+            if (!current.Diggable ||
+                current.Material != material ||
+                current.Yield <= 0)
+            {
+                break;
+            }
+
+            digYield += current.Yield;
+            var nextTile = current.DigTo;
+            if (!TryGetReplacementTile(nextTile, out replacement) ||
+                !TryGetStage(nextTile, out var next))
+            {
+                break;
+            }
+
+            removed++;
+            currentTile = nextTile;
+            current = next;
+        }
+
+        if (digYield <= 0)
+            return false;
+
+        if (replacement != null && _net.IsServer)
+            _tile.ReplaceTile(tileRef, replacement);
+
+        result = new RMCTerrainDigResult(material, digYield, removed, currentTile);
+        return true;
     }
 
     public bool TryLowerLayer(TileRef tileRef, int amount, out int removed, out RMCTerrainMaterial material)
+    {
+        return TryLowerStage(tileRef, amount, out removed, out material);
+    }
+
+    public bool TryLowerStage(TileRef tileRef, int amount, out int removed, out RMCTerrainMaterial material)
     {
         removed = 0;
         material = RMCTerrainMaterial.None;
@@ -188,19 +175,26 @@ public sealed class RMCTerrainSystem : EntitySystem
             return false;
 
         var tileDef = GetContentTileDefinition(tileRef);
-        material = tileDef.RmcDigType;
-        if (tileDef.RmcTerrainLayerSet == null ||
-            tileDef.RmcTerrainLayer <= 0)
-        {
+        if (!TryGetStage(tileDef.ID, out var stage) ||
+            stage.DigTo == null)
             return false;
+
+        material = stage.Material;
+        var current = stage;
+        ContentTileDefinition? replacement = null;
+        for (var i = 0; i < amount; i++)
+        {
+            if (current.DigTo == null ||
+                !TryGetReplacementTile(current.DigTo, out replacement) ||
+                !TryGetStage(current.DigTo, out current))
+            {
+                break;
+            }
+
+            removed++;
         }
 
-        var targetLayer = Math.Max(0, tileDef.RmcTerrainLayer - amount);
-        if (!TryGetLayerTile(tileDef.RmcTerrainLayerSet, targetLayer, out var replacement))
-            return false;
-
-        removed = tileDef.RmcTerrainLayer - targetLayer;
-        if (removed <= 0)
+        if (removed <= 0 || replacement == null)
             return false;
 
         if (_net.IsServer)
@@ -211,23 +205,40 @@ public sealed class RMCTerrainSystem : EntitySystem
 
     public bool TryRaiseLayer(TileRef tileRef, int amount, int maxLayer, out int added)
     {
+        return TryRaiseStage(tileRef, amount, maxLayer, out added);
+    }
+
+    public bool TryRaiseStage(TileRef tileRef, int amount, int maxLayer, out int added)
+    {
         added = 0;
 
         if (amount <= 0)
             return false;
 
         var tileDef = GetContentTileDefinition(tileRef);
-        if (tileDef.RmcTerrainLayerSet == null)
+        if (!TryGetStage(tileDef.ID, out var stage) ||
+            stage.PlaceTo == null)
             return false;
 
-        var targetLayer = Math.Min(maxLayer, tileDef.RmcTerrainLayer + amount);
-        if (targetLayer <= tileDef.RmcTerrainLayer ||
-            !TryGetLayerTile(tileDef.RmcTerrainLayerSet, targetLayer, out var replacement))
+        var current = stage;
+        ContentTileDefinition? replacement = null;
+        for (var i = 0; i < amount; i++)
         {
-            return false;
+            if (current.PlaceTo == null ||
+                !TryGetStageLayer(current.PlaceTo, out var nextLayer) ||
+                nextLayer > maxLayer ||
+                !TryGetReplacementTile(current.PlaceTo, out replacement) ||
+                !TryGetStage(current.PlaceTo, out current))
+            {
+                break;
+            }
+
+            added++;
         }
 
-        added = targetLayer - tileDef.RmcTerrainLayer;
+        if (added <= 0 || replacement == null)
+            return false;
+
         if (_net.IsServer)
             _tile.ReplaceTile(tileRef, replacement);
 
@@ -260,55 +271,108 @@ public sealed class RMCTerrainSystem : EntitySystem
         return _map.GridTileToLocal(grid, grid, tile.GridIndices);
     }
 
-    private bool CanXenoClearSnow(Entity<XenoComponent> xeno, EntityCoordinates coordinates, out TileRef tile)
+    public bool IsStagedTile(TileRef tileRef)
     {
-        tile = default;
-        if (xeno.Comp.Tier <= 0 ||
-            !TryGetTileRef(coordinates, out tile))
-        {
+        var tileDef = GetContentTileDefinition(tileRef);
+        return TryGetStage(tileDef.ID, out _);
+    }
+
+    public bool IsStageAboveBase(TileRef tileRef)
+    {
+        var tileDef = GetContentTileDefinition(tileRef);
+        return TryGetStageLayer(tileDef.ID, out var layer) &&
+               layer > 0;
+    }
+
+    private bool CanDigTile(ContentTileDefinition tileDef, out RMCTerrainMaterial material)
+    {
+        material = RMCTerrainMaterial.None;
+        if (!tileDef.CanDig)
             return false;
+
+        if (TryGetStage(tileDef.ID, out var stage))
+        {
+            material = stage.Material;
+            return stage.Diggable &&
+                   material != RMCTerrainMaterial.None &&
+                   stage.Yield > 0;
         }
 
-        var tileDef = GetContentTileDefinition(tile);
-        return IsSnow(tileDef) && tileDef.RmcTerrainLayer > 0;
+        material = tileDef.RmcDigType;
+        return material != RMCTerrainMaterial.None &&
+               material != RMCTerrainMaterial.Snow;
     }
 
-    private void StartXenoClearSnowDoAfter(Entity<XenoComponent> xeno, EntityCoordinates coordinates)
+    private bool TryGetStage(string tile, out RMCTerrainDigStage stage)
     {
-        var seconds = Math.Max(0.4f, 1.2f / Math.Max(xeno.Comp.Tier, 1));
-        var ev = new XenoClearSnowDoAfterEvent(GetNetCoordinates(coordinates));
-        var doAfter = new DoAfterArgs(EntityManager, xeno, TimeSpan.FromSeconds(seconds), ev, xeno)
+        EnsureStageCache();
+        return _stages.TryGetValue(tile, out stage!);
+    }
+
+    private bool TryGetStageLayer(string tile, out int layer)
+    {
+        EnsureStageCache();
+        return _stageLayers.TryGetValue(tile, out layer);
+    }
+
+    private bool TryGetReplacementTile(string tile, out ContentTileDefinition replacement)
+    {
+        if (_tiles.TryGetDefinition(tile, out var definition) &&
+            definition is ContentTileDefinition content)
         {
-            BreakOnDamage = true,
-            BreakOnMove = true,
-        };
+            replacement = content;
+            return true;
+        }
 
-        _doAfter.TryStartDoAfter(doAfter);
+        replacement = default!;
+        return false;
     }
 
-    private bool TryGetLayerTile(string set, int layer, out ContentTileDefinition tile)
+    private void EnsureStageCache()
     {
-        EnsureLayerCache();
-        return _layerTiles.TryGetValue((set, layer), out tile!);
-    }
-
-    private void EnsureLayerCache()
-    {
-        if (_cachedLayers)
+        if (_cachedStages)
             return;
 
-        _layerTiles.Clear();
-        foreach (var definition in _tiles)
-        {
-            if (definition is not ContentTileDefinition content ||
-                content.RmcTerrainLayerSet == null)
-            {
-                continue;
-            }
+        _stages.Clear();
+        _stageLayers.Clear();
 
-            _layerTiles.TryAdd((content.RmcTerrainLayerSet, content.RmcTerrainLayer), content);
+        foreach (var graph in _prototypes.EnumeratePrototypes<RMCTerrainDigGraphPrototype>())
+        {
+            foreach (var stage in graph.Stages)
+            {
+                if (!_stages.TryAdd(stage.Tile, stage))
+                    continue;
+            }
         }
 
-        _cachedLayers = true;
+        foreach (var tile in _stages.Keys)
+        {
+            _stageLayers[tile] = CalculateStageLayer(tile);
+        }
+
+        _cachedStages = true;
+    }
+
+    private int CalculateStageLayer(string tile)
+    {
+        var layer = 0;
+        var current = tile;
+        var visited = new HashSet<string>();
+
+        while (_stages.TryGetValue(current, out var stage) &&
+               stage.DigTo != null &&
+               visited.Add(current))
+        {
+            layer++;
+            current = stage.DigTo;
+        }
+
+        return layer;
     }
 }
+
+public readonly record struct RMCTerrainDigResult(
+    RMCTerrainMaterial Material,
+    int Yield,
+    int RemovedStages,
+    string ResultTile);

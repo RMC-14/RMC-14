@@ -1,0 +1,107 @@
+- type: rmcTerrainDigGraph
+  id: Sand
+  stages:
+  - tile: RMCPlanetSand0
+    material: Sand
+    yield: 5
+  - tile: RMCPlanetSand1
+    digTo: RMCPlanetSand0
+    material: Sand
+  - tile: RMCPlanetSand1Rock
+    digTo: RMCPlanetSand0
+    material: Sand
+
+- type: rmcTerrainDigGraph
+  id: VaraderoSand
+  stages:
+  - tile: RMCPlanetSandVaradero
+    material: Sand
+    yield: 5
+  - tile: RMCPlanetSandWet
+    digTo: RMCPlanetSandVaradero
+    material: Sand
+
+- type: rmcTerrainDigGraph
+  id: StrataGrass
+  stages:
+  - tile: CMPlanetMattedGrass
+    material: Dirt
+    yield: 5
+  - tile: CMPlanetMattedGrass2
+    digTo: CMPlanetMattedGrass
+    material: Dirt
+  - tile: CMPlanetMattedGrass3
+    material: Dirt
+    yield: 5
+  - tile: CMPlanetMattedGrass4
+    material: Dirt
+    yield: 5
+
+- type: rmcTerrainDigGraph
+  id: TyrargoGrass
+  stages:
+  - tile: RMCPlanetTyrargoGrass
+    material: Dirt
+    yield: 5
+  - tile: RMCPlanetTyrargoGrass2
+    digTo: RMCPlanetTyrargoGrass
+    material: Dirt
+  - tile: RMCPlanetTyrargoGrassMud
+    material: Dirt
+    yield: 5
+  - tile: RMCPlanetTyrargoGrassMudAlt
+    material: Dirt
+    yield: 5
+
+- type: rmcTerrainDigGraph
+  id: Shale
+  stages:
+  - tile: RMCPlanetShale0
+    material: Shale
+    yield: 5
+  - tile: RMCPlanetShale0Puddle
+    material: Shale
+    yield: 5
+  - tile: RMCPlanetShale0Plate
+    material: Shale
+    yield: 5
+  - tile: RMCPlanetShale
+    digTo: RMCPlanetShale0
+    material: Shale
+  - tile: RMCPlanetShaleAlt
+    digTo: RMCPlanetShale
+    material: Shale
+
+- type: rmcTerrainDigGraph
+  id: HybrisaShale
+  stages:
+  - tile: RMCPlanetHybrisaDirt
+    material: Sand
+    yield: 5
+  - tile: RMCPlanetHybrisaDirtPlating
+    material: Sand
+    yield: 5
+  - tile: RMCPlanetHybrisaShale
+    digTo: RMCPlanetHybrisaDirt
+    material: Sand
+  - tile: RMCPlanetHybrisaShale2
+    digTo: RMCPlanetHybrisaShale
+    material: Sand
+  - tile: RMCPlanetHybrisaShale3
+    digTo: RMCPlanetHybrisaShale2
+    material: Sand
+
+- type: rmcTerrainDigGraph
+  id: Ice
+  stages:
+  - tile: RMCPlanetIce0
+    material: None
+    diggable: false
+  - tile: RMCPlanetIce1
+    digTo: RMCPlanetIce0
+    material: None
+    diggable: false
+  - tile: RMCPlanetIce2
+    digTo: RMCPlanetIce1
+    material: None
+    diggable: false

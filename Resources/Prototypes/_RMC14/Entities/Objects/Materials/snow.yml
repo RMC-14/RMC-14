@@ -11,10 +11,6 @@
     sprite: _RMC14/Objects/Misc/snow.rsi
     layers:
     - state: snow_stack
-  - type: SnowPile
-  - type: FullSandbag
-    stackRequired: 3
-    builds: RMCBarricadeSnow
   - type: Stack
     stackType: RMCSnowPile
     count: 1
@@ -36,7 +32,6 @@
       types:
         Blunt: 0
     hidden: true
-  - type: Snowball
   - type: LandAtCursor
 
 - type: stack

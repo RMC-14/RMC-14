@@ -526,14 +526,13 @@ public sealed partial class ExplosionSystem
         if (_tileDefinitionManager[tileRef.Tile.TypeId] is not ContentTileDefinition tileDef
             || tileDef.Indestructible)
         {
-            _rmcTerrain.TryDamageLayer(tileRef, maxTileBreak);
+            _rmcTerrain.TryDamageStages(tileRef, maxTileBreak);
             return;
         }
 
-        if (tileDef.RmcTerrainLayerSet != null &&
-            tileDef.RmcTerrainLayer > 0)
+        if (_rmcTerrain.IsStageAboveBase(tileRef))
         {
-            _rmcTerrain.TryDamageLayer(tileRef, maxTileBreak);
+            _rmcTerrain.TryDamageStages(tileRef, maxTileBreak);
             return;
         }
 
