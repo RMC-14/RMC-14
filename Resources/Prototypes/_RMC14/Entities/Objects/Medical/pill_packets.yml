@@ -7,17 +7,22 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/pill_packets.rsi
+    layers:
+    - state: pill_packet
+    - state: pill_fill_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffffff" #Pill color goes here
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        Empty: { state: pill_fill_base, visible: false }
+        Low: { state: pill_fill_1, visible: true }
+        Medium: { state: pill_fill_2, visible: true }
+        High: { state: pill_fill_3, visible: true }
+        Full: { state: pill_fill_base, visible: true }
   - type: Item
     size: Small
-  - type: Storage # TODO RMC14 quick-eject
-    maxItemSize: Small
-    grid:
-    - 0,0,7,1 # 4 slots
-    whitelist:
-      components:
-      - Pill
-  - type: RemoveOnlyStorage
-  - type: FixedItemSizeStorage
   - type: Tag
     tags:
     - PillPacket
