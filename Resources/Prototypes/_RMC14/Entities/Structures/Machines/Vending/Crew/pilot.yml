@@ -25,11 +25,9 @@
       - CMPilotGunship
       takeAll: CMEquipment
       entries:
-      - id: CMJumpsuitPilot
       - id: RMCJumpsuitPilotAlt
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
-      - id: CMSatchel
       - id: CMMRE
     # Dropship Crew Chief Section Start
     - name: Standard Equipment
@@ -39,7 +37,6 @@
       entries:
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
-      - id: CMSatchel
       - id: CMMRE
     # Dropship Crew Chief Section End
     - name: Gloves
