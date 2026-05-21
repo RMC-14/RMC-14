@@ -1,6 +1,7 @@
 
 # Survivor Skills
 - type: entity
+  parent: RMCSkillPresetSurvivor
   id: RMCSkillPresetPMCCommando
   name: Survivor We-Ya Commando
   categories: [ HideSpawnMenu ]
