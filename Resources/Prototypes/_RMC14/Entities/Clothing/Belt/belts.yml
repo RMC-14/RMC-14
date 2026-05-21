@@ -1490,6 +1490,7 @@
       - BarbedWire
       - EmptySandbag
       - WeaponMount # Not parity
+      - LightReplacer
   - type: IgnoreContentsSize
     items:
       components:
