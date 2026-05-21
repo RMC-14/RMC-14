@@ -2,7 +2,7 @@
   parent: CMWeaponPistolM1911
   id: RMCWeaponPistolM1911C
   name: M1911C service pistol
-  description: A variant of the legendary M1911 pistol in use by UNMC command elements. Based off the modernized M48A4, it has been modified to more closely resemble a classic M1911 in shape, while retaining modern technology features like a discreet ammo counter. Chambered in .45 ACP.
+  description: A variant of the legendary M1911 pistol in use by UNMC command elements. Based off the modernized M2100, it has been modified to more closely resemble a classic M1911 in shape, while retaining modern technology features like a discreet ammo counter. Chambered in .45 ACP.
   components:
   - type: RMCSelectiveFire
     scatterWielded: 6
