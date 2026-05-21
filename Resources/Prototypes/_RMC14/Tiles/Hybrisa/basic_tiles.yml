@@ -15,12 +15,17 @@
   - 1.0
   - 1.0
   - 1.0
+  rmcTerrainLayerSet: HybrisaShale
+  rmcTerrainLayer: 0
+  rmcDigType: Sand
 
 - type: tile
   parent: RMCPlanetHybrisaDirt
   id: RMCPlanetHybrisaShale
   name: shale
   sprite: /Textures/_RMC14/Tiles/hybrisa/hybrisa_1.png
+  rmcDigType: Sand
+  rmcTerrainLayer: 1
 
 - type: tile
   parent: RMCPlanetHybrisaShale
@@ -36,11 +41,13 @@
     East: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
     North: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
     West: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
+  rmcTerrainLayer: 2
 
 - type: tile
   parent: RMCPlanetHybrisaShale2
   id: RMCPlanetHybrisaShale3
   sprite: /Textures/_RMC14/Tiles/hybrisa/hybrisa_3.png
+  rmcTerrainLayer: 3
 
 - type: tile
   parent: CMPlanetBase
@@ -178,6 +185,7 @@
   name: asphalt
   sprite: /Textures/_RMC14/Tiles/hybrisa/asphalt_old.png
   isSubfloor: false
+  rmcDigType: None
 
 - type: tile
   parent: RMCPlanetHybrisaAsphalt
@@ -225,6 +233,7 @@
   name: cement
   sprite: /Textures/_RMC14/Tiles/hybrisa/cement1.png
   isSubfloor: false
+  rmcDigType: None
 
 - type: tile
   parent: RMCPlanetHybrisaCement
@@ -242,6 +251,7 @@
   name: sidewalk
   sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkfull.png
   isSubfloor: false
+  rmcDigType: None
 
 - type: tile
   parent: RMCPlanetHybrisaSidewalk

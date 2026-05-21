@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Emplacements;
+using Content.Shared._RMC14.Terrain;
 using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -32,6 +33,7 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly RMCConstructionSystem _rmcConstruction = default!;
+    [Dependency] private readonly RMCTerrainSystem _rmcTerrain = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -138,12 +140,33 @@ public sealed class BarricadeSystem : EntitySystem
         }
 
         var coordinates = GetCoordinates(args.Coordinates);
-        if (!CanDig(tool, args.User, coordinates, false, out _, out _))
+        if (!CanDig(tool, args.User, coordinates, false, out _, out var tile, out var material))
             return;
 
         args.Handled = true;
         tool.Comp.TotalLayers = tool.Comp.LayersPerDig;
+        tool.Comp.DigMaterial = material;
+
+        if (_rmcTerrain.TryLowerLayer(tile, tool.Comp.LayersPerDig, out var removed, out var layerMaterial))
+        {
+            tool.Comp.TotalLayers = removed;
+            tool.Comp.DigMaterial = layerMaterial;
+        }
+
+        if (tool.Comp.DigMaterial == RMCTerrainMaterial.Snow)
+        {
+            SpawnSnowPile(coordinates, tool.Comp.TotalLayers);
+            tool.Comp.TotalLayers = 0;
+            tool.Comp.DigMaterial = RMCTerrainMaterial.None;
+        }
+
         Dirty(tool);
+
+        if (tool.Comp.TotalLayers <= 0 ||
+            !tool.Comp.DigMaterial.CanFillSandbags())
+        {
+            return;
+        }
 
         var userCoordinates = _transform.GetMoverCoordinates(args.User);
         var emptyNearby = _lookup.GetEntitiesInRange<EmptySandbagComponent>(userCoordinates, 1.5f);
@@ -163,6 +186,7 @@ public sealed class BarricadeSystem : EntitySystem
     private void OnItemToggled(Entity<EntrenchingToolComponent> tool, ref ItemToggledEvent args)
     {
         tool.Comp.TotalLayers = 0;
+        tool.Comp.DigMaterial = RMCTerrainMaterial.None;
         Dirty(tool);
     }
 
@@ -206,6 +230,12 @@ public sealed class BarricadeSystem : EntitySystem
 
         if (!TryComp(args.Used, out EntrenchingToolComponent? toolComp))
             return;
+
+        if (toolComp.TotalLayers <= 0 ||
+            !toolComp.DigMaterial.CanFillSandbags())
+        {
+            return;
+        }
 
         args.Handled = true;
 
@@ -295,7 +325,7 @@ public sealed class BarricadeSystem : EntitySystem
 
     private bool StartDigging(Entity<EntrenchingToolComponent> tool, EntityUid user, EntityCoordinates clicked)
     {
-        if (!CanDig(tool, user, clicked, true, out var grid, out var tile))
+        if (!CanDig(tool, user, clicked, true, out var grid, out var tile, out _))
             return false;
 
         var coordinates = _mapSystem.GridTileToLocal(grid, grid, tile.GridIndices);
@@ -348,6 +378,9 @@ public sealed class BarricadeSystem : EntitySystem
         }
 
         tool.Comp.TotalLayers -= toRemove;
+        if (tool.Comp.TotalLayers <= 0)
+            tool.Comp.DigMaterial = RMCTerrainMaterial.None;
+
         Dirty(tool);
         _audio.PlayPredicted(tool.Comp.FillSound, user, user);
 
@@ -383,10 +416,12 @@ public sealed class BarricadeSystem : EntitySystem
         EntityCoordinates coordinates,
         bool checkUseDelay,
         out Entity<MapGridComponent> grid,
-        out TileRef tileRef)
+        out TileRef tileRef,
+        out RMCTerrainMaterial material)
     {
         grid = default;
         tileRef = default;
+        material = RMCTerrainMaterial.None;
 
         if (checkUseDelay &&
             TryComp(tool, out UseDelayComponent? useDelay) &&
@@ -406,14 +441,26 @@ public sealed class BarricadeSystem : EntitySystem
 
         tileRef = _mapSystem.GetTileRef(gridId, gridComp, coordinates);
         var tileDef = (ContentTileDefinition) _tiles[tileRef.Tile.TypeId];
-        if (!tileDef.CanDig)
+        if (!tileDef.CanDig ||
+            tileDef.RmcDigType == RMCTerrainMaterial.None)
             return false;
 
         if (!TileSolidAndNotBlocked(tileRef))
             return false;
 
         grid = (gridId, gridComp);
+        material = tileDef.RmcDigType;
         return true;
+    }
+
+    private void SpawnSnowPile(EntityCoordinates coordinates, int amount)
+    {
+        if (_net.IsClient || amount <= 0)
+            return;
+
+        var snow = SpawnAtPosition("RMCSnowPile", coordinates);
+        if (TryComp(snow, out StackComponent? stack))
+            _stack.SetCount(snow, amount, stack);
     }
 
     private bool TileSolidAndNotBlocked(TileRef tile)
@@ -431,7 +478,7 @@ public sealed class BarricadeSystem : EntitySystem
         Direction direction)
     {
         if (!TryComp(full, out StackComponent? stack) ||
-            stack.Count < 5)
+            stack.Count < full.Comp.StackRequired)
         {
             return false;
         }

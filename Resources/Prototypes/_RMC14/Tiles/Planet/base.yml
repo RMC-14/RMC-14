@@ -9,6 +9,7 @@
   weather: true
   indestructible: true
   canDig: true
+  rmcDigType: Dirt
 
 - type: tile
   parent: CMPlanetBase
@@ -21,6 +22,7 @@
   id: CMPlanetSand
   name: tiles-cm-sand
   sprite: /Textures/_RMC14/Tiles/planet/sand.png
+  rmcDigType: Sand
 
 - type: tile
   parent: CMTileBase
@@ -145,12 +147,44 @@
     East: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
     North: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
     West: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
+  rmcDigType: Sand
+  rmcTerrainLayerSet: VaraderoSand
+  rmcTerrainLayer: 1
 
 - type: tile
   parent: CMPlanetBase
   id: RMCPlanetMultiTileDark
   name: multi tile dark
   sprite: /Textures/_RMC14/Tiles/varadero/grey_multi_tiles.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetShale0
+  name: wind blown dirt
+  sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_0.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  rmcDigType: Shale
+  rmcTerrainLayerSet: Shale
+  rmcTerrainLayer: 0
+
+- type: tile
+  parent: RMCPlanetShale0
+  id: RMCPlanetShale0Puddle
+  sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_0_puddle.png
+
+- type: tile
+  parent: RMCPlanetShale0
+  id: RMCPlanetShale0Plate
+  sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_1_alt.png
 
 - type: tile
   parent: CMPlanetBase
@@ -179,11 +213,15 @@
     West: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
   weedsSpreadable: false
   semiWeedable: true
+  rmcDigType: Shale
+  rmcTerrainLayerSet: Shale
+  rmcTerrainLayer: 1
 
 - type: tile
   parent: RMCPlanetShale
   id: RMCPlanetShaleAlt
   sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_2.png
+  rmcTerrainLayer: 2
 
 - type: tile
   parent: CMTileBase

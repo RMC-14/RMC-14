@@ -158,6 +158,7 @@
     collection: FootstepGrass
   itemDrop: FloorTileItemAstroGrass
   canDig: true
+  rmcDigType: Dirt
 
 - type: tile
   parent: CMFloorSteel

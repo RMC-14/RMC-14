@@ -5,6 +5,7 @@
   parent: CMPlanetBase
   id: CMPlanetSolarisBase
   suffix: Solaris
+  rmcDigType: Mars
 
 - type: tile
   parent: CMPlanetSolarisBase
@@ -206,6 +207,7 @@
   semiWeedable: true
   sprite: /Textures/_RMC14/Tiles/planet/bigred/mars_sand_1.png
   minimapColor: "#aa5f44cc"
+  rmcDigType: Sand
 
 - type: tile
   parent: CMPlanetMarsSand

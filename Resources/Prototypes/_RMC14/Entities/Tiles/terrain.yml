@@ -1,0 +1,48 @@
+- type: entity
+  id: RMCSlipperySlope
+  name: sloped roof
+  description: A steep surface that throws anything crossing it down the slope.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: RMCTerrainThrowOnCollide
+    throwSpeed: 10
+    whitelist:
+      components:
+      - Item
+      - MobState
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCSlipperySlope
+  id: RMCTerrainCurrent
+  name: strong current
+  description: Moving water that carries anything crossing it.
+  components:
+  - type: RMCTerrainThrowOnCollide
+    throwSpeed: 6
+    cooldown: 0.75
+    whitelist:
+      components:
+      - Item
+      - MobState

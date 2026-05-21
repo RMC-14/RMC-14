@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.Audio;
+using Content.Shared._RMC14.Terrain;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
@@ -20,6 +21,9 @@ public sealed partial class EntrenchingToolComponent : Component
 
     [DataField, AutoNetworkedField]
     public int TotalLayers;
+
+    [DataField, AutoNetworkedField]
+    public RMCTerrainMaterial DigMaterial = RMCTerrainMaterial.None;
 
     [AutoNetworkedField]
     public EntityCoordinates LastDigLocation;
