@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/583cbcd5d459910c7eac2910cd952be55f95d381/icons/obj/structures/crates.dmi, edited by SharkSnake98 on GitHub",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "base"
+    },
+    {
+      "name": "open"
+    },
+    {
+      "name": "closed"
+    },
+    {
+      "name": "welded"
+    }
+  ]
+}
