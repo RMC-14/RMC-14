@@ -90,6 +90,17 @@
 
 - type: entity
   parent: CMBed
+  id: RMCBedQueen
+  name: queen-size bed
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: queen_bed
+  - type: Construction
+
+- type: entity
+  parent: CMBed
   id: RMCBedBunk
   name: black bunk-bed
   components:
