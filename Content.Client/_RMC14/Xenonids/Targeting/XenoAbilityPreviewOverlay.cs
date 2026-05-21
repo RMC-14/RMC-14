@@ -318,13 +318,21 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             orthoTile = new Vector2i(1, 0);
 
         var radius = (int) deployTraps.DeployTrapsRadius;
-        var tiles = new HashSet<Vector2i>();
+        var rangeSquared = deployTraps.Range * deployTraps.Range;
+        var validTiles = new HashSet<Vector2i>();
+        var invalidTiles = new HashSet<Vector2i>();
         for (var i = -radius; i <= radius; i++)
         {
-            tiles.Add(centerTile + orthoTile * i);
+            var tile = centerTile + orthoTile * i;
+            var tileCenter = _mapSystem.GridTileToWorld(gridUid, grid, tile);
+            if ((tileCenter.Position - originMap.Position).LengthSquared() <= rangeSquared)
+                validTiles.Add(tile);
+            else
+                invalidTiles.Add(tile);
         }
 
-        DrawTileBorder(args.WorldHandle, gridUid, grid, tiles, color);
+        DrawTileBorder(args.WorldHandle, gridUid, grid, validTiles, color);
+        DrawTileBorder(args.WorldHandle, gridUid, grid, invalidTiles, InvalidOutlineColor.WithAlpha(OutlineAlpha));
     }
 
     private void DrawAbduct(
