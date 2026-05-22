@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: You can now extinguish yourself using the underbarrel extinguisher.
-    type: Fix
-  id: 2726
-  time: '2026-01-08T22:42:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8809
 - author: YO0teacher
   changes:
   - message: Acider runners can now fill resin traps with acid.
@@ -4480,5 +4473,13 @@
   id: 3225
   time: '2026-05-21T17:45:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9857
+- author: CatAndHats
+  changes:
+  - message: 'Removed two Communications Relay spawns on Fiorina: LZ2 Engi Rings Comms
+      and LZ1 Comms Relay Comms'
+    type: Remove
+  id: 3226
+  time: '2026-05-22T19:15:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9920
 Name: RMC14
 Order: -1
