@@ -411,6 +411,15 @@
     state: horizon
 
 - type: entity
+  parent: CMPosterBase
+  id: CMPosterTartarus
+  name: "Tartarus Mining co. poster"
+  description: "A simplified version of the Tartarus Mining co. logo. The Tartarus Mining Company is sub-division of the Weston-Yamada Corporation."
+  components:
+  - type: Sprite
+    state: tartarus
+
+- type: entity
   parent: CMPosterElectro
   id: CMPosterElectroMan
   description: "Electro Golds - lovingly machine rolled for YOUR pleasure."
