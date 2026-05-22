@@ -193,7 +193,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         OverlayDrawArgs args,
         RMCWeatherScreenOverlay overlay)
     {
-        // Scale the shared 15x15 fullscreen data from a square viewport reference so widescreen clients do not see farther horizontally.
+        // Keep the clean center on the shared 15x15 square reference, while letting the fade cover the real viewport.
         var viewport = args.ViewportBounds;
         return RMCWeatherOverlayHelpers.GetOverlayHalfSizes(overlay, viewport.Width, viewport.Height);
     }

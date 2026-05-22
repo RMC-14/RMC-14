@@ -13,16 +13,20 @@ public static class RMCWeatherOverlayHelpers
         float width,
         float height)
     {
+        if (overlay == RMCWeatherScreenOverlay.None)
+            return default;
+
         var referenceHalf = MathF.Min(width, height) / 2f;
         var radii = RMCWeatherScreenOverlayData.GetRadii(overlay);
         var fullscreenTiles = RMCWeatherScreenOverlayData.FullscreenTiles;
+        var viewportHalf = new Vector2(width, height) / 2f;
 
         return (new Vector2(
                 referenceHalf * radii.ClearX / fullscreenTiles,
                 referenceHalf * radii.ClearY / fullscreenTiles),
             new Vector2(
-                referenceHalf * radii.FullX / fullscreenTiles,
-                referenceHalf * radii.FullY / fullscreenTiles));
+                viewportHalf.X * radii.FullX / fullscreenTiles,
+                viewportHalf.Y * radii.FullY / fullscreenTiles));
     }
 
     public static bool TryGetCurrentMapOverlay(IEntityManager entity, MapId mapId, out RMCWeatherOverlayContext context)
