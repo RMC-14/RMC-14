@@ -1,28 +1,6 @@
 ﻿Entries:
 - author: YO0teacher
   changes:
-  - message: Police skill now allows you to strip dogtags.
-    type: Tweak
-  id: 2724
-  time: '2026-01-08T22:38:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8578
-- author: Ian321
-  changes:
-  - message: Sling straps have been added. They store one item and prevent you from
-      dropping it.
-    type: Add
-  id: 2725
-  time: '2026-01-08T22:40:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8694
-- author: Dygon
-  changes:
-  - message: You can now extinguish yourself using the underbarrel extinguisher.
-    type: Fix
-  id: 2726
-  time: '2026-01-08T22:42:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8809
-- author: YO0teacher
-  changes:
   - message: Acider runners can now fill resin traps with acid.
     type: Tweak
   - message: Fixed a popup with non-xenoids clicking on resin traps.
@@ -4480,5 +4458,28 @@
   id: 3223
   time: '2026-05-19T22:35:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9885
+- author: CrystalClover
+  changes:
+  - message: Helmets with Lights no longer hide accessories when the Light is On
+    type: Tweak
+  id: 3224
+  time: '2026-05-20T12:53:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9202
+- author: JustMyselfUwU
+  changes:
+  - message: Shiva survivor parkas can now hold magazines and has a slightly higher
+      balistic armor value
+    type: Fix
+  id: 3225
+  time: '2026-05-21T17:45:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9857
+- author: CatAndHats
+  changes:
+  - message: 'Removed two Communications Relay spawns on Fiorina: LZ2 Engi Rings Comms
+      and LZ1 Comms Relay Comms'
+    type: Remove
+  id: 3226
+  time: '2026-05-22T19:15:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9920
 Name: RMC14
 Order: -1
