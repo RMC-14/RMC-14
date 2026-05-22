@@ -10,6 +10,28 @@ rmc-intel-manuals = Manuals
 rmc-intel-data = Data
 rmc-intel-misc = Miscellaneous
 
+ent-RMCIntelBase = intel item
+ent-RMCIntelPaperScrap = paper scrap
+    .desc = A scrap of paper. You think some of the words might still be readable.
+ent-RMCIntelProgressReport = progress report
+    .desc = A written report from someone to their supervisor about the status of some kind of project.
+ent-RMCIntelFolder = intel folder
+    .desc = A folder with some documents inside.
+ent-RMCIntelTechnicalManual = technical manual
+    .desc = A highly specified technical manual. It may be of use to someone in the relevant field.
+ent-RMCTechTreeConsole = tech tree console
+    .desc = A console used to make tech purchases.
+ent-RMCComputerIntel = intel computer
+    .desc = An Intel Computer for data cataloguing and distribution.
+ent-RMCIntelTechTree = intel tech tree
+ent-RMCActionViewIntelObjectives = View Intel Objectives
+ent-RMCSpawnerIntelBase = intel spawner
+ent-RMCSpawnerIntelClose = objective landmark close
+ent-RMCSpawnerIntelMedium = objective landmark medium
+ent-RMCSpawnerIntelFar = objective landmark far
+ent-RMCSpawnerIntelScience = objective landmark science
+ent-RMCRandomComputerDisk = random computer disk spawner
+
 ent-RMCComputerDisk = computer disk
     .desc = A boring looking computer disk. The name label is just a gibberish collection of letters and numbers.
 ent-RMCIntelComputerDisk1 = grey computer disk
@@ -109,6 +131,15 @@ rmc-intel-disk-reader-disk-complete = This disk has already been uploaded.
 rmc-intel-safe-code-prompt = Enter the safe combination.
 rmc-intel-safe-wrong-code = The safe does not open.
 rmc-intel-safe-complete = The safe unlocks.
+rmc-intel-reading-start = You start reading the {$thing}.
+rmc-intel-reading-cancelled = You get distracted and lose your train of thought. You'll have to start over reading this.
+rmc-intel-reading-inactive = You don't notice anything useful. You probably need to find its instructions on a paper scrap.
+rmc-intel-reading-finished = You finish reading the {$thing}.
+rmc-intel-console-typing-start = You start typing intel into the computer...
+rmc-intel-console-typing-no-new = You start typing intel into the computer... and you have nothing new to add...
+rmc-intel-console-typing-cancelled = You get distracted and lose your train of thought. You'll have to start the typing over...
+rmc-intel-console-submit-no-new = ...and you have nothing new to add...
+rmc-intel-console-submit-done = ...and done! You uploaded {$amount} entries!
 rmc-intel-survivor-pickup = I have no use for the {$thing}.
     I should focus on getting help first.
 rmc-intel-survivor-read = I have no need to read the {$thing}.
@@ -159,3 +190,41 @@ rmc-ui-tech-name-label = [color=#5B88B0]Name:[/color]
 rmc-ui-tech-description-label = [color=#5B88B0]Description:[/color]
 rmc-ui-tech-cost-label = [color=#5B88B0]Cost:[/color]
 rmc-ui-tech-statistics-label = [color=#5B88B0]Statistics:[/color]
+
+## Tech Tree Options
+rmc-intel-tech-unlock-tier-1-name = Unlock Tier 1
+rmc-intel-tech-unlock-tier-2-name = Unlock Tier 2
+rmc-intel-tech-unlock-tier-3-name = Unlock Tier 3
+rmc-intel-tech-unlock-tier-4-name = Unlock Tier 4
+rmc-intel-tech-unlock-tier-description = Transitions the tree to another tier.
+rmc-intel-tech-requisition-budget-name = Requisition Budget Increase
+rmc-intel-tech-requisition-budget-description = Distributes resources to requisitions for spending.
+rmc-intel-tech-dropship-budget-name = Dropship Budget Increase
+rmc-intel-tech-dropship-budget-description = Distributes resources to the dropship fabricator.
+rmc-intel-tech-ob-he-name = Additional OB projectiles - HE
+rmc-intel-tech-ob-he-description = Highly explosive bombardment ammo, to be loaded into the orbital cannon.
+rmc-intel-tech-ob-incendiary-name = Additional OB projectiles - Incendiary
+rmc-intel-tech-ob-incendiary-description = Highly flammable bombardment ammo, to be loaded into the orbital cannon.
+rmc-intel-tech-ob-cluster-name = Additional OB projectiles - Cluster
+rmc-intel-tech-ob-cluster-description = Highly explosive bombardment ammo that fragments, to be loaded into the orbital cannon.
+rmc-intel-tech-wake-troops-name = Wake Up Additional Troops
+rmc-intel-tech-wake-troops-description = Wakes up additional troops to fight against any threats.
+rmc-intel-tech-wake-specialist-name = Wake Up Additional Specialist
+rmc-intel-tech-wake-specialist-description = Wakes up an additional specialist to fight against any threats.
+rmc-intel-tech-nuclear-device-name = Nuclear Device
+rmc-intel-tech-nuclear-device-description = Purchase a nuclear device. Only purchasable 116 minutes into the operation. It's the only way to be sure.
+
+## Tech Tree Announcements
+rmc-intel-tech-announcement-special-assets-author = ALMAYER SPECIAL ASSETS AUTHORIZED
+rmc-intel-tech-announcement-defcon-author = ALMAYER DEFCON LEVEL INCREASED
+rmc-intel-tech-announcement-requisition-budget = Additional supply budget has been authorised for this operation.
+rmc-intel-tech-announcement-dropship-budget = Additional dropship part fabricator points have been authorised for this operation.
+rmc-intel-tech-announcement-tier-2 = THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 2. LEVEL 2 assets have been authorised to handle the situation.
+rmc-intel-tech-announcement-ob-he = Additional Orbital Bombardment warheads (HE) have been delivered to Requisitions' ASRS.
+rmc-intel-tech-announcement-ob-incendiary = Additional Orbital Bombardment warheads (Incendiary) have been delivered to Requisitions' ASRS.
+rmc-intel-tech-announcement-ob-cluster = Additional Orbital Bombardment warheads (Cluster) have been delivered to Requisitions' ASRS.
+rmc-intel-tech-announcement-tier-3 = THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 3. LEVEL 3 assets have been authorised to handle the situation.
+rmc-intel-tech-announcement-wake-troops = Additional troops are being taken out of cryo.
+rmc-intel-tech-announcement-wake-specialist = An additional specialist is being taken out of cryo.
+rmc-intel-tech-announcement-tier-4 = THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 4. LEVEL 4 assets have been authorised to handle the situation.
+rmc-intel-tech-announcement-nuclear-device = The deployment of Nuclear Ordnance has been authorized and will be delivered to the Requisitions Department via ASRS.

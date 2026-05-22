@@ -43,7 +43,9 @@ public sealed class TechSystem : EntitySystem
 
     private void OnTechAnnounce(TechAnnounceEvent ev)
     {
-        var msg = Loc.GetString("rmc-announcement-message-raw", ("author", ev.Author), ("message", ev.Message));
+        var author = Localize(ev.Author);
+        var message = Localize(ev.Message);
+        var msg = Loc.GetString("rmc-announcement-message-raw", ("author", author), ("message", message));
         _marineAnnounce.AnnounceToMarines(msg, ev.Sound);
     }
 
@@ -122,5 +124,10 @@ public sealed class TechSystem : EntitySystem
         }
 
         _intel.UpdateTree(tree);
+    }
+
+    private string Localize(string text)
+    {
+        return Loc.TryGetString(text, out var localized) ? localized : text;
     }
 }
