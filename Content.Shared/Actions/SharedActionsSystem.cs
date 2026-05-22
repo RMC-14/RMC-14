@@ -445,11 +445,10 @@ public abstract class SharedActionsSystem : EntitySystem
         if (targetAction.CheckCanAccess)
         {
             // RMC14
-            var canTarget = _interaction.InRangeAndAccessible(user, target, range: targetAction.Range, lagCompensated: true) ||
+            return _interaction.InRangeAndAccessible(user, target, range: targetAction.Range, lagCompensated: true) ||
                    // if not just checking pure range, let stored entities be targeted by actions
                    // if it's out of range it probably isn't stored anyway...
                    _interaction.CanAccessViaStorage(user, target);
-            return canTarget;
         }
 
         // RMC14 if CheckCanAccess is false the target should still be valid if it's not in a container.

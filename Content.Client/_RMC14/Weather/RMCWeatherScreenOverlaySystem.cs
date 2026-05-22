@@ -11,14 +11,14 @@ namespace Content.Client._RMC14.Weather;
 /// </summary>
 public sealed class RMCWeatherScreenOverlaySystem : EntitySystem
 {
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly WeatherSystem _weather = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly WeatherSystem _weather = default!;
 
     public override void Initialize()
     {
