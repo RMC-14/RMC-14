@@ -37,7 +37,7 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
-  - type: RMCRepairable #Damages eyes
+  - type: RMCRepairable #ToDo: Make this actually damage your eyes
     heal: 40
     skill: RMCSkillConstruction
     delay: 8
