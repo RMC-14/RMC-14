@@ -4,12 +4,12 @@ rmc-xeno-trapper-name = Sapper
 rmc-xeno-trapper-description = You trade your bombard, neurotoxin, acid shroud, acid spray, some speed and a little health to gain the ability to create acid explosions and restrain enemies within them.
    You gain the ability to:
    - Fire a close ranged shotgun of acid that deals high damage, further increased against trapped targets.
-   - - Gain stacks of Insight when you strike enemies with your shotgun, at 10 stacks you empower your next trap deployment.
+   - - Gain stacks of Insight when you strike enemies with your shotgun. At 10 stacks, you empower your next trap deployment.
    - - - Hitting a trapped enemy will instantly give you max stacks of Insight.
    - Place a line of restraining traps at a distance to set up ambushes or disrupt enemies.
    - - When empowered, the traps restrain for longer and empower your next Acid Mine explosion.
-   - Remotely detonate hidden Acid Mines, causing a delayed explosion of acid that will burn enemies and corrode through structures.
-   - - When empowered, deals greatly increased damage to structures and slightly increased damage against enemies but also applying a lingering acid to them.
+   - Remotely detonate hidden Acid Mines, causing a delayed explosion of acid that burns enemies and corrodes through structures.
+   - - When empowered, deals greatly increased damage to structures and slightly increased damage to enemies. It also applies a lingering acid to enemies.
    - Gain a temporary speed boost when hurt, allowing a swifter escape.
 rmc-xeno-trapper-popup = The battlefield is my canvas, this one, my painter. Melt them where they stand.
 

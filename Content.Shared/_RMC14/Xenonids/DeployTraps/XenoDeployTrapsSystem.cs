@@ -35,7 +35,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
 
@@ -70,8 +70,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
         foreach (var offset in offsets)
         {
             var point = new MapCoordinates(tileBase + offset, targetMap.MapId);
-            if (_interaction.InRangeUnobstructed(origin, point, xeno.Comp.Range, CollisionGroup.InteractImpassable,
-                    e => e == xeno.Owner || !Transform(e).Anchored))
+            if (_examine.InRangeUnOccluded(xeno, point, xeno.Comp.Range))
             {
                 hasLos = true;
                 break;
