@@ -246,16 +246,14 @@ public sealed class XenoSpitSystem : EntitySystem
         if (!_xeno.CanAbilityAttackTarget(shooter, args.Target))
             return;
 
-        if (HasComp<XenoCaughtInTrapComponent>(args.Target))
+        if (TryComp<XenoCaughtInTrapComponent>(args.Target, out var caught) && caught.Applier == shooter)
         {
-            //TODO RMC14 unclear if this is bugged in CM13 or deliberately disabled; disabled here until clarified.
-            //args.Damage *= 1.75;
+            _damageable.TryChangeDamage(args.Target, ent.Comp.BonusDamage, origin: ent.Owner);
             _insight.IncrementInsight(shooter, 10);
         }
         else
         {
-            //TODO RMC14 same as above.
-            //_slow.TrySlowdown(args.Target, TimeSpan.FromSeconds(3.5));
+            _slow.TrySlowdown(args.Target, TimeSpan.FromSeconds(2.0), false);
             _insight.IncrementInsight(shooter, 1);
         }
     }

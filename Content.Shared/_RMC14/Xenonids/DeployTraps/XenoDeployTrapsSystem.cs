@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.AcidMine;
+using Content.Shared._RMC14.Xenonids.Construction.DeployedTraps;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Insight;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -29,7 +30,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoInsightSystem _insight = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -58,7 +59,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
         var tileBase = new Vector2(targetMap.Position.Floored().X, targetMap.Position.Floored().Y);
         var origin = _transform.GetMapCoordinates(xeno.Owner);
         var tileCenter = new MapCoordinates(tileBase + new Vector2(0.5f, 0.5f), targetMap.MapId);
-        if ((tileCenter.Position - origin.Position).Length() > xeno.Comp.Range)
+        if ((tileCenter.Position - origin.Position).LengthSquared() > xeno.Comp.Range * xeno.Comp.Range)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-deploy-traps-range-fail"), xeno, xeno);
             return;
@@ -77,8 +78,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
         foreach (var offset in offsets)
         {
             var point = new MapCoordinates(tileBase + offset, targetMap.MapId);
-            if (_interaction.InRangeUnobstructed(origin, point, xeno.Comp.Range, CollisionGroup.InteractImpassable,
-                    e => e == xeno.Owner || !Transform(e).Anchored))
+            if (_examine.InRangeUnOccluded(xeno, point, xeno.Comp.Range))
             {
                 hasLos = true;
                 break;
@@ -163,11 +163,13 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             {
                 var traps = SpawnAtPosition(xeno.Comp.DeployEmpoweredTrapsId, target);
                 _hive.SetSameHive(xeno.Owner, traps);
+                EnsureComp<XenoDeployedTrapsComponent>(traps).PlacedBy = xeno.Owner;
             }
             else
             {
                 var traps = SpawnAtPosition(xeno.Comp.DeployTrapsId, target);
                 _hive.SetSameHive(xeno.Owner, traps);
+                EnsureComp<XenoDeployedTrapsComponent>(traps).PlacedBy = xeno.Owner;
             }
         }
     }

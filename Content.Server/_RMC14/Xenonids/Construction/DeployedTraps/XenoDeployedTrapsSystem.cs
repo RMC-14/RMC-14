@@ -54,6 +54,7 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
 
         var caught = EnsureComp<XenoCaughtInTrapComponent>(args.Tripper);
         caught.ExpireTime = _timing.CurTime + trap.Comp.StunDuration;
+        caught.Applier = trap.Comp.PlacedBy;
 
         QueueDel(trap);
     }

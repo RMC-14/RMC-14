@@ -7,4 +7,7 @@ public sealed partial class XenoCaughtInTrapComponent : Component
 {
     [DataField, AutoNetworkedField]
     public TimeSpan ExpireTime;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Applier;
 }

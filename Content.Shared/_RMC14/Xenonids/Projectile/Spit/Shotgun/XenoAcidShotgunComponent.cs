@@ -1,4 +1,5 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -13,6 +14,9 @@ public sealed partial class XenoAcidShotgunComponent : Component
     public FixedPoint2 PlasmaCost = 60;
 
     [DataField, AutoNetworkedField]
+    public DamageSpecifier BonusDamage = new();
+
+    [DataField, AutoNetworkedField]
     public float Speed = 40;
 
     [DataField, AutoNetworkedField]
@@ -22,7 +26,7 @@ public sealed partial class XenoAcidShotgunComponent : Component
     public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoSpitAcid", AudioParams.Default.WithVolume(-5f));
 
     [DataField, AutoNetworkedField]
-    public int MaxProjectiles = 9;
+    public int MaxProjectiles = 10;
 
     [DataField, AutoNetworkedField]
     public Angle MaxDeviation = Angle.FromDegrees(30);

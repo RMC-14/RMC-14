@@ -11,5 +11,8 @@ public sealed partial class XenoDeployedTrapsComponent : Component
     public TimeSpan StunDuration = TimeSpan.FromSeconds(1.75);
 
     [DataField, AutoNetworkedField]
+    public EntityUid? PlacedBy;
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier CatchSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_claw_block.ogg");
 }

@@ -164,11 +164,15 @@
     - state: xeno_acid_strong
       shader: unshaded
   - type: XenoAcidShotgun
+    bonusDamage:
+      types:
+        Heat: 7.5
   - type: Projectile
     impactEffect: null
+    ignoreResistances: true
     damage:
       types:
-        Heat: 10
+        Heat: 9
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
   - type: ProjectileMaxRange
