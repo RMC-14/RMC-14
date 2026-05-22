@@ -193,17 +193,8 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         OverlayDrawArgs args,
         RMCWeatherScreenOverlay overlay)
     {
-        // Scale the shared 15x15 fullscreen data into the current viewport so bigger views stay proportionally obscured.
+        // Scale the shared 15x15 fullscreen data from a square viewport reference so widescreen clients do not see farther horizontally.
         var viewport = args.ViewportBounds;
-        var halfSize = new Vector2(viewport.Width / 2f, viewport.Height / 2f);
-        var radii = RMCWeatherScreenOverlayData.GetRadii(overlay);
-        var fullscreenTiles = RMCWeatherScreenOverlayData.FullscreenTiles;
-        var clearScaleX = radii.ClearX / fullscreenTiles;
-        var clearScaleY = radii.ClearY / fullscreenTiles;
-        var fullScaleX = radii.FullX / fullscreenTiles;
-        var fullScaleY = radii.FullY / fullscreenTiles;
-
-        return (new Vector2(halfSize.X * clearScaleX, halfSize.Y * clearScaleY),
-            new Vector2(halfSize.X * fullScaleX, halfSize.Y * fullScaleY));
+        return RMCWeatherOverlayHelpers.GetOverlayHalfSizes(overlay, viewport.Width, viewport.Height);
     }
 }

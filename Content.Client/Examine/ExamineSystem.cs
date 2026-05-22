@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using System.Threading;
+using Content.Client._RMC14.Weather;
 using Content.Client.Verbs;
 using Content.Shared._RMC14.Weather;
 using Content.Shared.Examine;
@@ -128,11 +129,8 @@ namespace Content.Client.Examine
                 return true;
             }
 
-            var radii = RMCWeatherScreenOverlayData.GetRadii(overlay);
             var box = viewBounds.Box;
-            var clearHalfSize = new Vector2(
-                box.Width * 0.5f * radii.ClearX / RMCWeatherScreenOverlayData.FullscreenTiles,
-                box.Height * 0.5f * radii.ClearY / RMCWeatherScreenOverlayData.FullscreenTiles);
+            var (clearHalfSize, _) = RMCWeatherOverlayHelpers.GetOverlayHalfSizes(overlay, box.Width, box.Height);
             var center = new Vector2(
                 (box.Left + box.Right) * 0.5f,
                 (box.Bottom + box.Top) * 0.5f);

@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Client.Weather;
 using Content.Shared._RMC14.Weather;
 using Content.Shared.Weather;
@@ -7,6 +8,23 @@ namespace Content.Client._RMC14.Weather;
 
 public static class RMCWeatherOverlayHelpers
 {
+    public static (Vector2 ClearHalfSize, Vector2 FullHalfSize) GetOverlayHalfSizes(
+        RMCWeatherScreenOverlay overlay,
+        float width,
+        float height)
+    {
+        var referenceHalf = MathF.Min(width, height) / 2f;
+        var radii = RMCWeatherScreenOverlayData.GetRadii(overlay);
+        var fullscreenTiles = RMCWeatherScreenOverlayData.FullscreenTiles;
+
+        return (new Vector2(
+                referenceHalf * radii.ClearX / fullscreenTiles,
+                referenceHalf * radii.ClearY / fullscreenTiles),
+            new Vector2(
+                referenceHalf * radii.FullX / fullscreenTiles,
+                referenceHalf * radii.FullY / fullscreenTiles));
+    }
+
     public static bool TryGetCurrentMapOverlay(IEntityManager entity, MapId mapId, out RMCWeatherOverlayContext context)
     {
         context = default;
