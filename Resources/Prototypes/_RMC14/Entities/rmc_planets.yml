@@ -218,6 +218,8 @@
     nightmareScenarios:
     - scenarioName: riot_in_progress
       scenarioProbability: 0.15
+    - scenarioName: none
+      scenarioProbability: 0.85
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
