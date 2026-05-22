@@ -76,6 +76,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: IntelSafeCandidate
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
 
 - type: entity
   parent: RMCLockerSecureSafe

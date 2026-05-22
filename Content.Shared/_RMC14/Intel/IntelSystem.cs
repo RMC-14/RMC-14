@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared._RMC14.Marines.Announce;
@@ -15,8 +16,10 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Lock;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Events;
@@ -44,14 +47,19 @@ public sealed class IntelSystem : EntitySystem
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -68,10 +76,29 @@ public sealed class IntelSystem : EntitySystem
     private static readonly EntProtoId ProgressReportProto = "RMCIntelProgressReport";
     private static readonly EntProtoId FolderProto = "RMCIntelFolder";
     private static readonly EntProtoId TechnicalManualProto = "RMCIntelTechnicalManual";
-    // private static readonly EntProtoId DiskProto = "RMCIntelDisk";
+    private static readonly EntProtoId DataTerminalProto = "RMCIntelDataTerminal";
     private static readonly EntProtoId ExperimentalDevicesProto = "RMCIntelRetrieveHealthAnalyzer";
     // private static readonly EntProtoId ResearchPaperProto = "RMCIntelResearchPaper";
     // private static readonly EntProtoId VialBoxProto = "RMCIntelVialBox";
+
+    private static readonly EntProtoId[] DiskProtos =
+    [
+        "RMCIntelDataDisk1",
+        "RMCIntelDataDisk2",
+        "RMCIntelDataDisk3",
+        "RMCIntelDataDisk4",
+        "RMCIntelDataDisk5",
+        "RMCIntelDataDisk6",
+        "RMCIntelDataDisk7",
+        "RMCIntelDataDisk8",
+        "RMCIntelDataDisk9",
+        "RMCIntelDataDisk10",
+        "RMCIntelDataDisk11",
+        "RMCIntelDataDisk12",
+        "RMCIntelDataDisk13",
+        "RMCIntelDataDisk14",
+        "RMCIntelDataDisk15",
+    ];
 
     private readonly Dictionary<IntelSpawnerType, float> _paperScrapChances = new()
     {
@@ -118,6 +145,8 @@ public sealed class IntelSystem : EntitySystem
     private int _folders;
     private int _technicalManuals;
     private int _disks;
+    private int _dataTerminals;
+    private int _safes;
     private int _experimentalDevices;
     private int _researchPapers;
     private int _vialBoxes;
@@ -159,6 +188,7 @@ public sealed class IntelSystem : EntitySystem
 
         SubscribeLocalEvent<ViewIntelObjectivesComponent, MapInitEvent>(OnViewIntelObjectivesMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<ViewIntelObjectivesComponent, ViewIntelObjectivesActionEvent>(OnViewIntelObjectivesAction);
+        SubscribeLocalEvent<ViewIntelObjectivesComponent, InteractHandEvent>(OnViewIntelObjectivesInteractHand, before: [typeof(LockSystem)]);
 
         SubscribeLocalEvent<IntelHasUnlockedComponent, RefreshNameModifiersEvent>(OnHasUnlockedRefreshName);
 
@@ -176,16 +206,32 @@ public sealed class IntelSystem : EntitySystem
         SubscribeLocalEvent<IntelReadComponent, ComponentRemove>(OnReadRemove);
         SubscribeLocalEvent<IntelReadComponent, EntityTerminatingEvent>(OnReadRemove);
 
-        SubscribeLocalEvent<IntelConsoleComponent, InteractHandEvent>(OnConsoleInteractHand);
+        SubscribeLocalEvent<IntelConsoleComponent, InteractHandEvent>(OnConsoleInteractHand, before: [typeof(LockSystem)]);
         SubscribeLocalEvent<IntelConsoleComponent, IntelSubmitDoAfterEvent>(OnConsoleSubmitDoAfter);
 
         SubscribeLocalEvent<IntelCluesComponent, MapInitEvent>(OnIntelCluesMapInit, after: [typeof(AreaSystem)]);
+
+        SubscribeLocalEvent<IntelDataDiskComponent, MapInitEvent>(OnDataDiskMapInit, after: [typeof(AreaSystem)]);
+        SubscribeLocalEvent<IntelDataDiskComponent, RefreshNameModifiersEvent>(OnDataDiskRefreshName);
+        SubscribeLocalEvent<IntelDataTerminalComponent, MapInitEvent>(OnDataTerminalMapInit, after: [typeof(AreaSystem)]);
+        SubscribeLocalEvent<IntelDataTerminalComponent, InteractHandEvent>(OnDataTerminalInteractHand, before: [typeof(LockSystem)]);
+        SubscribeLocalEvent<IntelDataTerminalComponent, IntelDataTerminalPasswordInputEvent>(OnDataTerminalPasswordInput);
+        SubscribeLocalEvent<IntelDiskReaderComponent, MapInitEvent>(OnDiskReaderMapInit, after: [typeof(AreaSystem)]);
+        SubscribeLocalEvent<IntelDiskReaderComponent, InteractUsingEvent>(OnDiskReaderInteractUsing);
+        SubscribeLocalEvent<IntelDiskReaderComponent, InteractHandEvent>(OnDiskReaderInteractHand, before: [typeof(LockSystem)]);
+        SubscribeLocalEvent<IntelDiskReaderComponent, IntelDiskReaderKeyInputEvent>(OnDiskReaderKeyInput);
+        SubscribeLocalEvent<IntelSafeObjectiveComponent, InteractHandEvent>(OnSafeInteractHand, before: [typeof(LockSystem)]);
+        SubscribeLocalEvent<IntelSafeObjectiveComponent, IntelSafeCodeInputEvent>(OnSafeCodeInput);
+        SubscribeLocalEvent<IntelSafeObjectiveComponent, ComponentRemove>(OnSafeObjectiveRemove);
+        SubscribeLocalEvent<IntelSafeObjectiveComponent, EntityTerminatingEvent>(OnSafeObjectiveRemove);
 
         Subs.CVar(_config, RMCCVars.RMCIntelPaperScraps, v => _paperScraps = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelProgressReports, v => _progressReports = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelFolders, v => _folders = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelTechnicalManuals, v => _technicalManuals = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelDisks, v => _disks = v, true);
+        Subs.CVar(_config, RMCCVars.RMCIntelDataTerminals, v => _dataTerminals = v, true);
+        Subs.CVar(_config, RMCCVars.RMCIntelSafes, v => _safes = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelExperimentalDevices, v => _experimentalDevices = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelResearchPapers, v => _researchPapers = v, true);
         Subs.CVar(_config, RMCCVars.RMCIntelVialBoxes, v => _vialBoxes = v, true);
@@ -200,6 +246,8 @@ public sealed class IntelSystem : EntitySystem
         _spawners.Clear();
         _activePositionIntels.Clear();
         _activeSurvivorIntels.Clear();
+        _activeCorpseIntels.Clear();
+        _nearby.Clear();
     }
 
     private void OnDropshipLandedOnPlanet(ref DropshipLandedOnPlanetEvent ev)
@@ -309,8 +357,6 @@ public sealed class IntelSystem : EntitySystem
             return;
         }
 
-        // TODO RMC14 clues
-
         _popup.PopupClient($"You finish reading the {Name(ent)}", ent, user);
         if (ent.Comp.State == IntelObjectiveState.Complete)
             return;
@@ -333,6 +379,8 @@ public sealed class IntelSystem : EntitySystem
         read.Readers.Add(user);
         Dirty(ent, read);
 
+        ShowObjectiveClues(ent, user, false);
+
         if (TryComp(ent, out IntelRetrieveItemObjectiveComponent? retrieve) &&
             retrieve.State == IntelObjectiveState.Inactive)
         {
@@ -353,10 +401,25 @@ public sealed class IntelSystem : EntitySystem
 
     private void OnViewIntelObjectivesMapInit(Entity<ViewIntelObjectivesComponent> ent, ref MapInitEvent args)
     {
-        _actions.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
+        if (ent.Comp.AddAction)
+            _actions.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
     }
 
     private void OnViewIntelObjectivesAction(Entity<ViewIntelObjectivesComponent> ent, ref ViewIntelObjectivesActionEvent args)
+    {
+        OpenIntelObjectives(ent, ent);
+    }
+
+    private void OnViewIntelObjectivesInteractHand(Entity<ViewIntelObjectivesComponent> ent, ref InteractHandEvent args)
+    {
+        if (ent.Comp.AddAction)
+            return;
+
+        OpenIntelObjectives(ent, args.User);
+        args.Handled = true;
+    }
+
+    private void OpenIntelObjectives(Entity<ViewIntelObjectivesComponent> ent, EntityUid actor)
     {
         if (_net.IsServer)
         {
@@ -365,7 +428,7 @@ public sealed class IntelSystem : EntitySystem
             Dirty(ent);
         }
 
-        _ui.OpenUi(ent.Owner, ViewIntelObjectivesUI.Key, ent);
+        _ui.OpenUi(ent.Owner, ViewIntelObjectivesUI.Key, actor);
     }
 
     private void OnHasUnlockedRefreshName(Entity<IntelHasUnlockedComponent> ent, ref RefreshNameModifiersEvent args)
@@ -520,34 +583,26 @@ public sealed class IntelSystem : EntitySystem
                 !unlocks.Unlocks.TryFirstOrNull(out unlock))
             {
                 knowledge.Read.Remove(intel.Value);
+                Dirty(args.User, knowledge);
                 args.Repeat = true;
                 return;
             }
         }
 
         if (TryComp(unlock, out IntelCluesComponent? cluesComp))
-        {
-            var msg = Loc.GetString(cluesComp.Clue, ("intel", unlock), ("area", cluesComp.InitialArea));
-            _rmcChat.ChatMessageToOne(msg, args.User);
-            _popup.PopupEntity(msg, ent, args.User, PopupType.Medium);
-
-            if (TryComp(unlock, out IntelRetrieveItemObjectiveComponent? retrieve) &&
-                retrieve.State != IntelObjectiveState.Complete &&
-                cluesComp.Category is { } category)
-            {
-                var tree = EnsureTechTree();
-                var clues = tree.Comp.Tree.Clues.GetOrNew(category);
-                clues[GetNetEntity(unlock.Value)] = msg;
-            }
-        }
+            ShowClue(unlock.Value, cluesComp, args.User, true);
 
         unlocks.Unlocks.Remove(unlock.Value);
+        Dirty(intel.Value, unlocks);
         ActivateIntel(intel.Value, unlock.Value);
         args.Amount++;
         _audio.PlayPvs(ent.Comp.TypingSound, ent);
 
-        if (unlocks.Unlocks.Count == 0)
-            knowledge.Read.Remove(intel.Value);
+        if (unlocks.Unlocks.Count == 0 &&
+            knowledge.Read.Remove(intel.Value))
+        {
+            Dirty(args.User, knowledge);
+        }
 
         if (knowledge.Read.Count > 0)
             args.Repeat = true;
@@ -555,17 +610,437 @@ public sealed class IntelSystem : EntitySystem
             StopPopup(ref args);
     }
 
-    private void OnIntelCluesMapInit(Entity<IntelCluesComponent> ent, ref MapInitEvent args)
+    private void ShowObjectiveClues(EntityUid source, EntityUid user, bool storeGlobal)
     {
-        if (!_area.TryGetArea(ent, out var area, out _))
+        if (!TryComp(source, out IntelUnlocksComponent? unlocks))
             return;
 
-        ent.Comp.InitialArea = Name(area.Value);
+        foreach (var unlock in unlocks.Unlocks)
+        {
+            if (TryComp(unlock, out IntelCluesComponent? clues))
+                ShowClue(unlock, clues, user, storeGlobal);
+        }
+    }
+
+    private void ShowClue(EntityUid target, IntelCluesComponent clues, EntityUid user, bool storeGlobal)
+    {
+        var msg = GetClueMessage(target, clues);
+        _rmcChat.ChatMessageToOne(msg, user);
+        _popup.PopupEntity(msg, target, user, PopupType.Medium);
+
+        if (!storeGlobal ||
+            clues.Category is not { } category)
+        {
+            return;
+        }
+
+        var tree = EnsureTechTree();
+        var clueGroup = tree.Comp.Tree.Clues.GetOrNew(category);
+        clueGroup[GetNetEntity(target)] = msg;
+        Dirty(tree);
+        UpdateTree(tree);
+    }
+
+    private string GetClueMessage(EntityUid target, IntelCluesComponent clues)
+    {
+        var args = new List<(string, object)>
+        {
+            ("intel", target),
+            ("area", clues.InitialArea),
+        };
+
+        if (TryComp(target, out IntelDataDiskComponent? disk))
+            args.Add(("key", disk.EncryptionKey));
+
+        if (TryComp(target, out IntelDataTerminalComponent? terminal))
+            args.Add(("password", terminal.Password));
+
+        if (TryComp(target, out IntelSafeObjectiveComponent? safe))
+            args.Add(("code", safe.Code));
+
+        return Loc.GetString(clues.Clue, args.ToArray());
+    }
+
+    private void OnIntelCluesMapInit(Entity<IntelCluesComponent> ent, ref MapInitEvent args)
+    {
+        SetInitialArea(ent);
+    }
+
+    private void SetInitialArea(Entity<IntelCluesComponent> ent)
+    {
+        if (_area.TryGetArea(ent, out var area, out _))
+        {
+            ent.Comp.InitialArea = Name(area.Value);
+            Dirty(ent);
+        }
+    }
+
+    private void OnDataDiskMapInit(Entity<IntelDataDiskComponent> ent, ref MapInitEvent args)
+    {
+        if (string.IsNullOrWhiteSpace(ent.Comp.EncryptionKey))
+            ent.Comp.EncryptionKey = GenerateAccessKey();
+
+        Dirty(ent);
+    }
+
+    private void OnDataDiskRefreshName(Entity<IntelDataDiskComponent> ent, ref RefreshNameModifiersEvent args)
+    {
+        if (ent.Comp.Completed)
+            args.AddModifier("rmc-intel-data-disk-uploaded");
+    }
+
+    private void OnDataTerminalMapInit(Entity<IntelDataTerminalComponent> ent, ref MapInitEvent args)
+    {
+        if (string.IsNullOrWhiteSpace(ent.Comp.Password))
+            ent.Comp.Password = GenerateAccessKey();
+
+        Dirty(ent);
+    }
+
+    private void OnDataTerminalInteractHand(Entity<IntelDataTerminalComponent> ent, ref InteractHandEvent args)
+    {
+        if (ent.Comp.Completed)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-intel-data-terminal-complete"), ent, args.User);
+            args.Handled = true;
+            return;
+        }
+
+        if (ent.Comp.Uploading)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-intel-data-terminal-uploading"), ent, args.User);
+            args.Handled = true;
+            return;
+        }
+
+        if (!CanUploadData(ent, args.User, out _))
+        {
+            args.Handled = true;
+            return;
+        }
+
+        _dialog.OpenInput(
+            ent,
+            args.User,
+            Loc.GetString("rmc-intel-data-terminal-password-prompt"),
+            new IntelDataTerminalPasswordInputEvent(GetNetEntity(args.User)),
+            characterLimit: 16,
+            minCharacterLimit: 1);
+        args.Handled = true;
+    }
+
+    private void OnDataTerminalPasswordInput(Entity<IntelDataTerminalComponent> ent, ref IntelDataTerminalPasswordInputEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.User, out var user))
+            return;
+
+        if (ent.Comp.Completed)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-intel-data-terminal-complete"), ent, user.Value);
+            return;
+        }
+
+        if (!CanUploadData(ent, user.Value, out _))
+            return;
+
+        if (!AccessMatches(args.Message, ent.Comp.Password))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-intel-data-terminal-wrong-password"), ent, user.Value, PopupType.MediumCaution);
+            return;
+        }
+
+        ent.Comp.Uploading = true;
+        ent.Comp.LastUser = user.Value;
+        Dirty(ent);
+        _popup.PopupEntity(Loc.GetString("rmc-intel-data-terminal-started"), ent, user.Value);
+    }
+
+    private void OnDiskReaderMapInit(Entity<IntelDiskReaderComponent> ent, ref MapInitEvent args)
+    {
+        _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
+    }
+
+    private void OnDiskReaderInteractUsing(Entity<IntelDiskReaderComponent> ent, ref InteractUsingEvent args)
+    {
+        if (!TryComp(args.Used, out IntelDataDiskComponent? disk))
+            return;
+
+        args.Handled = true;
+
+        if (disk.Completed)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-intel-disk-reader-disk-complete"), ent, args.User);
+            return;
+        }
+
+        if (!_power.IsPowered(ent))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-intel-disk-reader-no-power"), ent, args.User, PopupType.MediumCaution);
+            return;
+        }
+
+        if (TryGetReaderDisk(ent, out _))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-intel-disk-reader-occupied"), ent, args.User, PopupType.MediumCaution);
+            return;
+        }
+
+        _dialog.OpenInput(
+            ent,
+            args.User,
+            Loc.GetString("rmc-intel-disk-reader-key-prompt"),
+            new IntelDiskReaderKeyInputEvent(GetNetEntity(args.User), GetNetEntity(args.Used)),
+            characterLimit: 16,
+            minCharacterLimit: 1);
+    }
+
+    private void OnDiskReaderInteractHand(Entity<IntelDiskReaderComponent> ent, ref InteractHandEvent args)
+    {
+        if (!TryGetReaderDisk(ent, out var disk))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-intel-disk-reader-empty"), ent, args.User);
+            args.Handled = true;
+            return;
+        }
+
+        EjectDisk(ent, disk.Value, args.User);
+        args.Handled = true;
+    }
+
+    private void OnDiskReaderKeyInput(Entity<IntelDiskReaderComponent> ent, ref IntelDiskReaderKeyInputEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.User, out var user) ||
+            !TryGetEntity(args.Disk, out var diskId) ||
+            !TryComp(diskId, out IntelDataDiskComponent? disk))
+        {
+            return;
+        }
+
+        if (disk.Completed)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-disk-complete"), ent, user.Value);
+            return;
+        }
+
+        if (!_power.IsPowered(ent))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-no-power"), ent, user.Value, PopupType.MediumCaution);
+            return;
+        }
+
+        if (TryGetReaderDisk(ent, out _))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-occupied"), ent, user.Value, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!AccessMatches(args.Message, disk.EncryptionKey))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-wrong-key"), ent, user.Value, PopupType.MediumCaution);
+            return;
+        }
+
+        var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
+        if (!_container.Insert(diskId.Value, slot))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-insert-failed"), ent, user.Value, PopupType.MediumCaution);
+            return;
+        }
+
+        disk.Uploading = true;
+        disk.LastUser = user.Value;
+        Dirty(diskId.Value, disk);
+
+        ent.Comp.LastUser = user.Value;
+        Dirty(ent);
+        _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-started"), ent, user.Value);
+    }
+
+    private void OnSafeInteractHand(Entity<IntelSafeObjectiveComponent> ent, ref InteractHandEvent args)
+    {
+        if (ent.Comp.Completed)
+            return;
+
+        if (string.IsNullOrWhiteSpace(ent.Comp.Code))
+        {
+            ent.Comp.Code = GenerateSafeCode();
+            Dirty(ent);
+        }
+
+        _dialog.OpenInput(
+            ent,
+            args.User,
+            Loc.GetString("rmc-intel-safe-code-prompt"),
+            new IntelSafeCodeInputEvent(GetNetEntity(args.User)),
+            characterLimit: 8,
+            minCharacterLimit: 1);
+        args.Handled = true;
+    }
+
+    private void OnSafeCodeInput(Entity<IntelSafeObjectiveComponent> ent, ref IntelSafeCodeInputEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.User, out var user))
+            return;
+
+        if (ent.Comp.Completed)
+            return;
+
+        if (!AccessMatches(args.Message, ent.Comp.Code))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-intel-safe-wrong-code"), ent, user.Value, PopupType.MediumCaution);
+            return;
+        }
+
+        ent.Comp.Completed = true;
+        Dirty(ent);
+
+        var tree = EnsureTechTree();
+        tree.Comp.Tree.Miscellaneous.Current++;
+        RemoveClue(tree, ent);
+        AddPoints(tree, ent.Comp.Value);
+
+        _lock.Unlock(ent, user.Value);
+        _entityStorage.TryOpenStorage(user.Value, ent);
+        _popup.PopupEntity(Loc.GetString("rmc-intel-safe-complete"), ent, user.Value);
+    }
+
+    private void OnSafeObjectiveRemove<T>(Entity<IntelSafeObjectiveComponent> ent, ref T args)
+    {
+        if (_net.IsClient || ent.Comp.Completed || !TryGetTechTree(out var tree))
+            return;
+
+        tree.Value.Comp.Tree.Miscellaneous.Total = Math.Max(0, tree.Value.Comp.Tree.Miscellaneous.Total - 1);
+        RemoveClue(tree.Value, ent);
+        Dirty(tree.Value);
+        UpdateTree(tree.Value);
+    }
+
+    private bool CanUploadData(Entity<IntelDataTerminalComponent> terminal, EntityUid user, out string reason)
+    {
+        if (!_power.IsPowered(terminal))
+        {
+            reason = Loc.GetString("rmc-intel-data-terminal-no-power");
+            _popup.PopupEntity(reason, terminal, user, PopupType.MediumCaution);
+            return false;
+        }
+
+        if (!TryGetTechTree(out var tree) ||
+            !tree.Value.Comp.Tree.ColonyCommunications)
+        {
+            reason = Loc.GetString("rmc-intel-data-terminal-no-comms");
+            _popup.PopupEntity(reason, terminal, user, PopupType.MediumCaution);
+            return false;
+        }
+
+        reason = string.Empty;
+        return true;
+    }
+
+    private bool TryGetReaderDisk(Entity<IntelDiskReaderComponent> reader, [NotNullWhen(true)] out Entity<IntelDataDiskComponent>? disk)
+    {
+        disk = null;
+        if (!_container.TryGetContainer(reader, reader.Comp.ContainerId, out var container) ||
+            !container.ContainedEntities.TryFirstOrNull(out var first) ||
+            !TryComp(first.Value, out IntelDataDiskComponent? diskComp))
+        {
+            return false;
+        }
+
+        disk = (first.Value, diskComp);
+        return true;
+    }
+
+    private void EjectDisk(Entity<IntelDiskReaderComponent> reader, Entity<IntelDataDiskComponent> disk, EntityUid? user)
+    {
+        if (_container.TryGetContainer(reader, reader.Comp.ContainerId, out var container))
+            _container.Remove(disk.Owner, container);
+
+        disk.Comp.Uploading = false;
+        Dirty(disk);
+
+        if (user is { Valid: true } userId && _hands.TryPickupAnyHand(userId, disk.Owner))
+            return;
+
+        _transform.DropNextTo(disk.Owner, reader.Owner);
+    }
+
+    private void CompleteUpload(EntityUid target, FixedPoint2 value)
+    {
+        var tree = EnsureTechTree();
+        tree.Comp.Tree.UploadData.Current++;
+        RemoveClue(tree, target);
+        AddPoints(tree, value);
+    }
+
+    private void RemoveClue(Entity<IntelTechTreeComponent> tree, EntityUid target)
+    {
+        if (!TryComp(target, out IntelCluesComponent? clues) ||
+            clues.Category is not { } category ||
+            !tree.Comp.Tree.Clues.TryGetValue(category, out var clueGroup))
+        {
+            return;
+        }
+
+        clueGroup.Remove(GetNetEntity(target));
+        Dirty(tree);
+    }
+
+    private bool AccessMatches(string input, string expected)
+    {
+        return string.Equals(NormalizeAccess(input), NormalizeAccess(expected), StringComparison.OrdinalIgnoreCase);
+    }
+
+    private string NormalizeAccess(string value)
+    {
+        return value.Trim().Replace(" ", string.Empty);
+    }
+
+    private string GenerateAccessKey()
+    {
+        return $"{RandomUppercase()}{RandomUppercase()}-{RandomDigit()}{RandomDigit()}{RandomDigit()}{RandomDigit()}";
+    }
+
+    private string GenerateSafeCode()
+    {
+        return $"{RandomDigit()}{RandomDigit()}-{RandomDigit()}{RandomDigit()}";
+    }
+
+    private char RandomUppercase()
+    {
+        return _random.Pick(UppercaseLetters);
+    }
+
+    private int RandomDigit()
+    {
+        return _random.Next(0, 10);
     }
 
     private List<EntityUid> SpawnIntel(EntProtoId proto, int count, Dictionary<IntelSpawnerType, float> chances)
     {
+        return SpawnIntel([proto], count, chances);
+    }
+
+    private List<EntityUid> SpawnIntel(
+        IReadOnlyList<EntProtoId> protos,
+        int count,
+        Dictionary<IntelSpawnerType, float> chances,
+        bool activePosition = true,
+        bool randomNumber = true,
+        bool insertNearby = true)
+    {
         var items = new List<EntityUid>();
+        if (protos.Count == 0)
+            return items;
+
         for (var i = 0; i < count; i++)
         {
             var type = _random.Pick(chances);
@@ -577,15 +1052,23 @@ public sealed class IntelSystem : EntitySystem
 
             var spawner = _random.Pick(spawners);
             var coords = _transform.GetMoverCoordinates(spawner);
+            var proto = _random.Pick(protos);
             var intel = Spawn(proto, coords);
             items.Add(intel);
 
-            EnsureComp<ActiveIntelPositionComponent>(intel);
+            if (activePosition)
+                EnsureComp<ActiveIntelPositionComponent>(intel);
 
-            var number = EnsureComp<IntelNumberComponent>(intel);
-            number.Number = _random.Next(100, 1000);
-            Dirty(intel, number);
-            _nameModifier.RefreshNameModifiers(intel);
+            if (randomNumber)
+            {
+                var number = EnsureComp<IntelNumberComponent>(intel);
+                number.Number = _random.Next(100, 1000);
+                Dirty(intel, number);
+                _nameModifier.RefreshNameModifiers(intel);
+            }
+
+            if (!insertNearby)
+                continue;
 
             _nearby.Clear();
             _entityLookup.GetEntitiesInRange(coords, 0.5f, _nearby, LookupFlags.Uncontained);
@@ -671,14 +1154,18 @@ public sealed class IntelSystem : EntitySystem
             var mediums = SpawnIntel(ProgressReportProto, _progressReports, _progressReportChances);
             mediums.AddRange(SpawnIntel(FolderProto, _folders, _folderChances));
             var highs = SpawnIntel(TechnicalManualProto, _technicalManuals, _technicalManualChances);
-            // SpawnIntel(DiskProto, _disks, _diskChances);
-            SpawnIntel(ExperimentalDevicesProto, _experimentalDevices, _experimentalDeviceChances);
+            var disks = SpawnIntel(DiskProtos, _disks, _diskChances);
+            var dataTerminals = SpawnIntel([DataTerminalProto], _dataTerminals, _diskChances, activePosition: false, insertNearby: false);
+            var devices = SpawnIntel(ExperimentalDevicesProto, _experimentalDevices, _experimentalDeviceChances);
+            var safes = ActivateSafeObjectives(_safes);
             // SpawnIntel(ResearchPaperProto, _researchPapers, _researchPaperChances);
             // SpawnIntel(VialBoxProto, _vialBoxes, _vialBoxChances);
 
-            tree.Comp.Tree.Documents.Total = _paperScraps + _progressReports + _folders + _technicalManuals;
-            tree.Comp.Tree.UploadData.Total = _disks;
-            tree.Comp.Tree.RetrieveItems.Total = tree.Comp.Tree.Documents.Total + tree.Comp.Tree.UploadData.Total - _disks; // TODO RMC14 remove - disks
+            tree.Comp.Tree.Documents.Total = lows.Count + mediums.Count + highs.Count;
+            tree.Comp.Tree.UploadData.Total = disks.Count + dataTerminals.Count;
+            tree.Comp.Tree.RetrieveItems.Total = tree.Comp.Tree.Documents.Total + disks.Count + devices.Count;
+            tree.Comp.Tree.Miscellaneous.Total = safes.Count;
+            Dirty(tree);
 
             if (mediums.Count > 0)
             {
@@ -706,10 +1193,97 @@ public sealed class IntelSystem : EntitySystem
                     AddRequires(high, mediums);
                 }
             }
+
+            var clueSources = new List<EntityUid>();
+            clueSources.AddRange(lows);
+            clueSources.AddRange(mediums);
+            clueSources.AddRange(highs);
+
+            var clueTargets = new List<EntityUid>();
+            clueTargets.AddRange(disks);
+            clueTargets.AddRange(dataTerminals);
+            clueTargets.AddRange(devices);
+            clueTargets.AddRange(safes);
+            AddObjectiveClues(clueTargets, clueSources);
+
+            UpdateTree(tree);
         }
         finally
         {
             _spawners.Clear();
+        }
+    }
+
+    private List<EntityUid> ActivateSafeObjectives(int count)
+    {
+        var candidates = new List<EntityUid>();
+        var query = EntityQueryEnumerator<IntelSafeCandidateComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (HasComp<IntelSafeObjectiveComponent>(uid))
+                continue;
+
+            if (_area.TryGetArea(uid, out var area, out _) &&
+                area.Value.Comp.RetrieveItemObjective)
+            {
+                continue;
+            }
+
+            candidates.Add(uid);
+        }
+
+        _random.Shuffle(candidates);
+        var safes = new List<EntityUid>();
+        foreach (var safe in candidates)
+        {
+            if (safes.Count >= count)
+                break;
+
+            var objective = EnsureComp<IntelSafeObjectiveComponent>(safe);
+            objective.Code = GenerateSafeCode();
+            Dirty(safe, objective);
+
+            var clues = EnsureComp<IntelCluesComponent>(safe);
+            clues.Clue = "rmc-intel-clue-safe";
+            clues.Category = "rmc-intel-misc";
+            clues.Clues = 2;
+            SetInitialArea((safe, clues));
+
+            safes.Add(safe);
+        }
+
+        return safes;
+    }
+
+    private void AddObjectiveClues(List<EntityUid> targets, List<EntityUid> sources)
+    {
+        if (sources.Count == 0)
+            return;
+
+        foreach (var target in targets)
+        {
+            if (!TryComp(target, out IntelCluesComponent? clues) ||
+                clues.Clues <= 0)
+            {
+                continue;
+            }
+
+            for (var i = 0; i < clues.Clues; i++)
+            {
+                _random.Shuffle(sources);
+                foreach (var source in sources)
+                {
+                    if (source == target ||
+                        TryComp(target, out IntelRequiresComponent? requires) &&
+                        requires.Requires.Contains(source))
+                    {
+                        continue;
+                    }
+
+                    ConnectObjectives(source, target);
+                    break;
+                }
+            }
         }
     }
 
@@ -790,7 +1364,8 @@ public sealed class IntelSystem : EntitySystem
         }
 
         if (TryComp(toActivate, out IntelRetrieveItemObjectiveComponent? retrieve) &&
-            retrieve.State == IntelObjectiveState.Inactive)
+            retrieve.State == IntelObjectiveState.Inactive &&
+            (!TryComp(toActivate, out IntelDataDiskComponent? disk) || disk.Completed))
         {
             retrieve.State = IntelObjectiveState.Active;
             Dirty(toActivate, retrieve);
@@ -840,6 +1415,13 @@ public sealed class IntelSystem : EntitySystem
             console.Tree = tree.Comp.Tree;
             Dirty(uid, console);
         }
+
+        var viewQuery = EntityQueryEnumerator<ViewIntelObjectivesComponent>();
+        while (viewQuery.MoveNext(out var uid, out var view))
+        {
+            view.Tree = tree.Comp.Tree;
+            Dirty(uid, view);
+        }
     }
 
     public override void Update(float frameTime)
@@ -870,6 +1452,80 @@ public sealed class IntelSystem : EntitySystem
 
                 _marineAnnounce.AnnounceRadio(ares, announcement, channel);
             }
+        }
+
+        var terminalQuery = EntityQueryEnumerator<IntelDataTerminalComponent>();
+        while (terminalQuery.MoveNext(out var uid, out var terminal))
+        {
+            if (!terminal.Uploading || terminal.Completed)
+                continue;
+
+            if (terminal.LastUser is not { Valid: true } terminalUser ||
+                !CanUploadData((uid, terminal), terminalUser, out _))
+            {
+                terminal.Uploading = false;
+                Dirty(uid, terminal);
+                continue;
+            }
+
+            terminal.UploadProgress += frameTime;
+            if (terminal.UploadProgress < terminal.UploadTime)
+            {
+                Dirty(uid, terminal);
+                continue;
+            }
+
+            terminal.Uploading = false;
+            terminal.Completed = true;
+            Dirty(uid, terminal);
+            CompleteUpload(uid, terminal.Value);
+            _popup.PopupEntity(Loc.GetString("rmc-intel-data-terminal-finished"), uid, terminalUser);
+        }
+
+        var readerQuery = EntityQueryEnumerator<IntelDiskReaderComponent>();
+        while (readerQuery.MoveNext(out var uid, out var reader))
+        {
+            if (!TryGetReaderDisk((uid, reader), out var disk))
+                continue;
+
+            if (!_power.IsPowered(uid))
+            {
+                var diskUser = disk.Value.Comp.LastUser ?? reader.LastUser;
+                EjectDisk((uid, reader), disk.Value, diskUser);
+                if (diskUser is { Valid: true } diskUserId)
+                    _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-power-lost"), uid, diskUserId, PopupType.MediumCaution);
+
+                continue;
+            }
+
+            if (!disk.Value.Comp.Uploading || disk.Value.Comp.Completed)
+                continue;
+
+            disk.Value.Comp.UploadProgress += frameTime;
+            if (disk.Value.Comp.UploadProgress < disk.Value.Comp.UploadTime)
+            {
+                Dirty(disk.Value);
+                continue;
+            }
+
+            disk.Value.Comp.Uploading = false;
+            disk.Value.Comp.Completed = true;
+            Dirty(disk.Value);
+            _nameModifier.RefreshNameModifiers(disk.Value.Owner);
+            CompleteUpload(disk.Value.Owner, disk.Value.Comp.UploadValue);
+
+            if (TryComp(disk.Value.Owner, out IntelRetrieveItemObjectiveComponent? retrieve) &&
+                retrieve.State == IntelObjectiveState.Inactive)
+            {
+                retrieve.State = IntelObjectiveState.Active;
+                Dirty(disk.Value.Owner, retrieve);
+                EnsureComp<ActiveIntelPositionComponent>(disk.Value.Owner);
+            }
+
+            var completedUser = disk.Value.Comp.LastUser ?? reader.LastUser;
+            EjectDisk((uid, reader), disk.Value, completedUser);
+            if (completedUser is { Valid: true } completedUserId)
+                _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-finished"), uid, completedUserId);
         }
 
         if (_activePositionIntels.Count > 0)

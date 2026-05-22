@@ -30,9 +30,9 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         _window.CurrentTierLabel.Text = Loc.GetString("rmc-ui-intel-tier-value", ("value", tree.Tier));
         _window.TotalPointsLabel.Text = Loc.GetString("rmc-ui-intel-total-credits", ("value", tree.TotalEarned.Double().ToString("F1")));
         _window.DocumentsLabel.Text = Loc.GetString("rmc-ui-intel-progress", ("current", tree.Documents.Current), ("total", tree.Documents.Total));
-        // _window.UploadDataLabel.Text = Loc.GetString("rmc-ui-intel-progress", ("current", tree.UploadData.Current), ("total", tree.UploadData.Total));
+        _window.UploadDataLabel.Text = Loc.GetString("rmc-ui-intel-progress", ("current", tree.UploadData.Current), ("total", tree.UploadData.Total));
         _window.RetrieveItemsLabel.Text = Loc.GetString("rmc-ui-intel-progress", ("current", tree.RetrieveItems.Current), ("total", tree.RetrieveItems.Total));
-        // _window.MiscellaneousLabel.Text = Loc.GetString("rmc-ui-intel-progress", ("current", tree.Miscellaneous.Current), ("total", tree.Miscellaneous.Total));
+        _window.MiscellaneousLabel.Text = Loc.GetString("rmc-ui-intel-progress", ("current", tree.Miscellaneous.Current), ("total", tree.Miscellaneous.Total));
         // _window.AnalyzeChemicalsLabel.Text = Loc.GetString("rmc-ui-intel-infinite-progress", ("current", tree.AnalyzeChemicals));
         _window.RescueSurvivorsLabel.Text = Loc.GetString("rmc-ui-intel-infinite-progress", ("current", tree.RescueSurvivors));
         _window.RecoverCorpsesLabel.Text = Loc.GetString("rmc-ui-intel-infinite-progress", ("current", tree.RecoverCorpses));

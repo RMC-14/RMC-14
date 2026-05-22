@@ -45329,6 +45329,22 @@ entities:
       parent: 2
     missingComponents:
     - IntelConsole
+- proto: RMCIntelDatabaseComputer
+  entities:
+  - uid: 7905
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 17.5,36.5
+      parent: 2
+- proto: RMCSigintTerminal
+  entities:
+  - uid: 7906
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 17.5,38.5
+      parent: 2
 - proto: RMCContainerBlueRight
   entities:
   - uid: 2236

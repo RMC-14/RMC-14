@@ -1,0 +1,354 @@
+- type: entity
+  parent: BaseItem
+  id: RMCComputerDisk
+  abstract: true
+  description: "A boring looking computer disk. The name label is just gibberish collection of letters and numbers."
+  components:
+  - type: Tag
+    tags:
+    - RMCDataDisk
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk1
+  name: Grey computer disk
+  suffix: Disk, 1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk1
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk1-inhand-left
+      right:
+      - state: disk1-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk2
+  name: Grey computer disk
+  suffix: Disk, 2
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk2
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk2-inhand-left
+      right:
+      - state: disk2-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk3
+  name: White computer disk
+  suffix: Disk, 3
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk3
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk3-inhand-left
+      right:
+      - state: disk3-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk4
+  name: White computer disk
+  suffix: Disk, 4
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk4
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk4-inhand-left
+      right:
+      - state: disk4-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk5
+  name: White computer disk
+  suffix: Disk, 5
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk5
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk5-inhand-left
+      right:
+      - state: disk5-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk6
+  name: Green computer disk
+  suffix: Disk, 6
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk6
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk6-inhand-left
+      right:
+      - state: disk6-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk7
+  name: Green computer disk
+  suffix: Disk, 7
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk7
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk7-inhand-left
+      right:
+      - state: disk7-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk8
+  name: Red computer disk
+  suffix: Disk, 8
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk8
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk8-inhand-left
+      right:
+      - state: disk8-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk9
+  name: Red computer disk
+  suffix: Disk, 9
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk9
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk9-inhand-left
+      right:
+      - state: disk9-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk10
+  name: Red computer disk
+  suffix: Disk, 10
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk10
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk10-inhand-left
+      right:
+      - state: disk10-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk11
+  name: Blue computer disk
+  suffix: Disk, 11
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk11
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk11-inhand-left
+      right:
+      - state: disk11-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk12
+  name: Blue computer disk
+  suffix: Disk, 12
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk12
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk12-inhand-left
+      right:
+      - state: disk12-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk13
+  name: Cracked blue computer disk
+  suffix: Disk, 13
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk13
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk13-inhand-left
+      right:
+      - state: disk13-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk14
+  name: Cracked blue computer disk
+  suffix: Disk, 14
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk14
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk14-inhand-left
+      right:
+      - state: disk14-inhand-right
+
+- type: entity
+  parent: RMCComputerDisk
+  id: RMCIntelComputerDisk15
+  name: Bloodied blue computer disk
+  suffix: Disk, 15
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    state: disk15
+  - type: Item
+    sprite: _RMC14/Objects/Misc/computer_disks.rsi
+    inhandVisuals:
+      left:
+      - state: disk15-inhand-left
+      right:
+      - state: disk15-inhand-right
+
+- type: entity
+  parent: RMCIntelBase
+  id: RMCIntelDataDiskBase
+  abstract: true
+  components:
+  - type: IntelDataDisk
+  - type: IntelRetrieveItemObjective
+    value: 0.1
+  - type: IntelClues
+    clue: rmc-intel-clue-data-disk
+    category: rmc-intel-data
+    clues: 3
+
+- type: entity
+  parent: [RMCIntelComputerDisk1, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk1
+  suffix: Intel Disk, 1
+
+- type: entity
+  parent: [RMCIntelComputerDisk2, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk2
+  suffix: Intel Disk, 2
+
+- type: entity
+  parent: [RMCIntelComputerDisk3, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk3
+  suffix: Intel Disk, 3
+
+- type: entity
+  parent: [RMCIntelComputerDisk4, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk4
+  suffix: Intel Disk, 4
+
+- type: entity
+  parent: [RMCIntelComputerDisk5, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk5
+  suffix: Intel Disk, 5
+
+- type: entity
+  parent: [RMCIntelComputerDisk6, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk6
+  suffix: Intel Disk, 6
+
+- type: entity
+  parent: [RMCIntelComputerDisk7, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk7
+  suffix: Intel Disk, 7
+
+- type: entity
+  parent: [RMCIntelComputerDisk8, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk8
+  suffix: Intel Disk, 8
+
+- type: entity
+  parent: [RMCIntelComputerDisk9, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk9
+  suffix: Intel Disk, 9
+
+- type: entity
+  parent: [RMCIntelComputerDisk10, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk10
+  suffix: Intel Disk, 10
+
+- type: entity
+  parent: [RMCIntelComputerDisk11, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk11
+  suffix: Intel Disk, 11
+
+- type: entity
+  parent: [RMCIntelComputerDisk12, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk12
+  suffix: Intel Disk, 12
+
+- type: entity
+  parent: [RMCIntelComputerDisk13, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk13
+  suffix: Intel Disk, 13
+
+- type: entity
+  parent: [RMCIntelComputerDisk14, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk14
+  suffix: Intel Disk, 14
+
+- type: entity
+  parent: [RMCIntelComputerDisk15, RMCIntelDataDiskBase]
+  id: RMCIntelDataDisk15
+  suffix: Intel Disk, 15

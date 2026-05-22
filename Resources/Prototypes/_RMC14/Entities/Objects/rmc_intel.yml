@@ -160,6 +160,68 @@
   - type: IntelConsole
 
 - type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCIntelDatabaseComputer
+  name: intel database computer
+  description: An UNMC Intel Database Computer used to review catalogued intelligence objectives.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: terminal1_old
+  - type: InteractionOutline
+  - type: UserInterface
+    interfaces:
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
+  - type: ViewIntelObjectives
+    addAction: false
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCSigintTerminal
+  name: SIGINT terminal
+  description: A signals intelligence terminal used to decrypt and upload recovered data disks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: terminal1
+  - type: InteractionOutline
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
+  - type: IntelDiskReader
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCIntelDataTerminal
+  name: data terminal
+  description: A colony data terminal containing encrypted intelligence files.
+  suffix: Intel
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: terminal1_old
+  - type: InteractionOutline
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
+  - type: IntelDataTerminal
+  - type: IntelClues
+    clue: rmc-intel-clue-data-terminal
+    category: rmc-intel-data
+    clues: 3
+  - type: IntelDetectorTracked
+
+- type: entity
   id: RMCIntelTechTree
   name: intel tech tree
   categories: [ HideSpawnMenu ]
