@@ -158,17 +158,6 @@ entities:
         screenOverlay: Medium
         duration: 360
         name: Snowstorm
-      - lightningSound: !type:SoundCollectionSpecifier
-          collection: RMCThunder
-        lightningEffects:
-        - RMCColorSequenceLightningSharpPeak
-        - RMCColorSequenceLightningFlicker
-        fireSmotheringStrength: 2
-        cleansDecals: false
-        weatherType: RMCStrataBlizzard
-        screenOverlay: High
-        duration: 240
-        name: Blizzard
     - type: RMCAmbientLightEffects
       sunset: RMCColorSequenceSunsetCold
     - type: MapGrid
