@@ -189,6 +189,19 @@
     drawdepth: WallTops
   - type: RMCFoldingBarricadeLinking
     linkable: true
+    connectionStates:
+      North:
+        Closed: folding_plasteel_connection_1
+        Open: folding_plasteel_closed_connection_1
+      South:
+        Closed: folding_plasteel_connection_2
+        Open: folding_plasteel_closed_connection_2
+      East:
+        Closed: folding_plasteel_connection_4
+        Open: folding_plasteel_closed_connection_4
+      West:
+        Closed: folding_plasteel_connection_8
+        Open: folding_plasteel_closed_connection_8
   - type: RMCRepairable
     heal: 200
     skill: RMCSkillConstruction

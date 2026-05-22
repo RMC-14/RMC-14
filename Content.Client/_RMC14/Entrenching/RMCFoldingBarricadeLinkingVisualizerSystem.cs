@@ -41,9 +41,9 @@ public sealed class RMCFoldingBarricadeLinkingVisualizerSystem : EntitySystem
         _lastEyeDirection = eyeDirection;
 
         var query = EntityQueryEnumerator<RMCFoldingBarricadeLinkingComponent, AppearanceComponent, SpriteComponent>();
-        while (query.MoveNext(out var uid, out _, out var appearance, out var sprite))
+        while (query.MoveNext(out var uid, out var linking, out var appearance, out var sprite))
         {
-            UpdateVisuals((uid, sprite), appearance);
+            UpdateVisuals((uid, sprite), linking, appearance);
         }
     }
 
@@ -52,10 +52,13 @@ public sealed class RMCFoldingBarricadeLinkingVisualizerSystem : EntitySystem
         if (args.Sprite == null)
             return;
 
-        UpdateVisuals((ent.Owner, args.Sprite), args.Component);
+        UpdateVisuals((ent.Owner, args.Sprite), ent.Comp, args.Component);
     }
 
-    private void UpdateVisuals(Entity<SpriteComponent> ent, AppearanceComponent? appearance)
+    private void UpdateVisuals(
+        Entity<SpriteComponent> ent,
+        RMCFoldingBarricadeLinkingComponent linking,
+        AppearanceComponent? appearance)
     {
         var eyeRotation = _eye.CurrentEye.Rotation;
         var sprite = ent.AsNullable();
@@ -78,12 +81,13 @@ public sealed class RMCFoldingBarricadeLinkingVisualizerSystem : EntitySystem
 
             // Connection states are keyed by screen-facing side, while linking data is stored in world directions.
             var screenDirection = (direction.ToAngle() + eyeRotation).GetCardinalDir();
-            var connection = GetConnectionSuffix(screenDirection);
-            var statePrefix = state == RMCFoldingBarricadeLinkingVisualState.Open
-                ? "folding_plasteel_closed_connection"
-                : "folding_plasteel_connection";
+            if (!linking.TryGetConnectionState(screenDirection, state, out var stateId))
+            {
+                _sprite.LayerSetVisible(sprite, layerIndex, false);
+                continue;
+            }
 
-            _sprite.LayerSetRsiState(sprite, layerIndex, new StateId($"{statePrefix}_{connection}"));
+            _sprite.LayerSetRsiState(sprite, layerIndex, new StateId(stateId));
             _sprite.LayerSetVisible(sprite, layerIndex, true);
         }
     }
@@ -91,17 +95,5 @@ public sealed class RMCFoldingBarricadeLinkingVisualizerSystem : EntitySystem
     private Direction GetEyeDirection()
     {
         return _eye.CurrentEye.Rotation.GetCardinalDir();
-    }
-
-    private static int GetConnectionSuffix(Direction direction)
-    {
-        return direction switch
-        {
-            Direction.North => 1,
-            Direction.South => 2,
-            Direction.East => 4,
-            Direction.West => 8,
-            _ => 1,
-        };
     }
 }
