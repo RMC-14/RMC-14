@@ -51,6 +51,7 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly XenoInsightSystem _insight = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -67,7 +68,6 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoInsightSystem _insight = default!;
 
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
 
@@ -216,7 +216,6 @@ public sealed class XenoSpitSystem : EntitySystem
         );
     }
 
-    //Trapper additions - Shotgun, Insight onhit.
     private void OnXenoShotgunSpitAction(Entity<XenoAcidShotgunComponent> xeno, ref XenoAcidShotgunActionEvent args)
     {
         if (args.Handled)

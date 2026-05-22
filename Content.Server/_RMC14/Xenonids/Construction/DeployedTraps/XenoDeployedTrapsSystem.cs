@@ -13,11 +13,11 @@ namespace Content.Server._RMC14.Xenonids.Construction.DeployedTraps;
 
 public sealed class XenoDeployedTrapsSystem : EntitySystem
 {
-    [Dependency] private readonly DestructibleSystem _destructible = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly DestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -35,9 +35,7 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
         if (args.DamageDelta == null)
             return;
 
-        var destroyed = false;
-
-        if (_destructible.TryGetDestroyedAt(trap.Owner, out var totalHealth))
+        if (!_destructible.TryGetDestroyedAt(trap.Owner, out var totalHealth))
             return;
 
         if (args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > totalHealth)
@@ -46,22 +44,18 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
 
     private void OnStepTriggerAttempt(Entity<XenoDeployedTrapsComponent> trap, ref StepTriggerAttemptEvent args)
     {
-        if (_hive.FromSameHive(args.Tripper, trap.Owner))
-        {
-            args.Continue = true;
-        }
-
+        args.Continue = !_hive.FromSameHive(args.Tripper, trap.Owner);
     }
+
     private void OnStepTriggered(Entity<XenoDeployedTrapsComponent> trap, ref StepTriggeredOnEvent args)
     {
-            _slow.TryRoot(args.Tripper, trap.Comp.StunDuration, true);
+        _slow.TryRoot(args.Tripper, trap.Comp.StunDuration, true);
+        _audio.PlayPredicted(trap.Comp.CatchSound, args.Tripper, trap);
 
-            _audio.PlayPredicted(trap.Comp.CatchSound, args.Tripper, trap);
+        var caught = EnsureComp<XenoCaughtInTrapComponent>(args.Tripper);
+        caught.ExpireTime = _timing.CurTime + trap.Comp.StunDuration;
 
-            var caught = EnsureComp<XenoCaughtInTrapComponent>(args.Tripper);
-            caught.ExpireTime = _timing.CurTime + trap.Comp.StunDuration;
-
-            QueueDel(trap);
+        QueueDel(trap);
     }
 
     public override void Update(float frameTime)

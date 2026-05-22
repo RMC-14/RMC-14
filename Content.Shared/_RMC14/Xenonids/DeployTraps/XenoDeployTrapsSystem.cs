@@ -24,20 +24,20 @@ namespace Content.Shared._RMC14.Xenonids.DeployTraps;
 
 public sealed class XenoDeployTrapsSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly XenoInsightSystem _insight = default!;
-    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly XenoInsightSystem _insight = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {
@@ -57,6 +57,13 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
         var targetMap = _transform.ToMapCoordinates(args.Target);
         var tileBase = new Vector2(targetMap.Position.Floored().X, targetMap.Position.Floored().Y);
         var origin = _transform.GetMapCoordinates(xeno.Owner);
+        var tileCenter = new MapCoordinates(tileBase + new Vector2(0.5f, 0.5f), targetMap.MapId);
+        if ((tileCenter.Position - origin.Position).Length() > xeno.Comp.Range)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-deploy-traps-range-fail"), xeno, xeno);
+            return;
+        }
+
         var offsets = new Vector2[]
         {
             new(0.5f, 0.5f),   // centre
@@ -70,7 +77,8 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
         foreach (var offset in offsets)
         {
             var point = new MapCoordinates(tileBase + offset, targetMap.MapId);
-            if (_examine.InRangeUnOccluded(xeno, point, xeno.Comp.Range))
+            if (_interaction.InRangeUnobstructed(origin, point, xeno.Comp.Range, CollisionGroup.InteractImpassable,
+                    e => e == xeno.Owner || !Transform(e).Anchored))
             {
                 hasLos = true;
                 break;

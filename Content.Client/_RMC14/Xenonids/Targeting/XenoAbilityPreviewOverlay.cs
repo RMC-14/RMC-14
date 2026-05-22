@@ -196,7 +196,11 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             case XenoAcidMineActionEvent:
                 if (!_acidMineQ.TryComp(player.Value, out var acidMine))
                     return;
-                DrawSquareAoE(args, mousePos, acidMine.AcidMineRadius, AcidMineOutlineColor.WithAlpha(OutlineAlpha));
+
+                if (!TryGetTileIndices(mousePos, out var acidMineTile))
+                    return;
+
+                DrawAcidMineSquare(args.WorldHandle, originMap, acidMineTile, acidMine.AcidMineRadius, acidMine.Range);
                 break;
             case XenoDeployTrapsActionEvent:
                 if (!_deployTrapsQ.TryComp(player.Value, out var deployTraps))
@@ -314,13 +318,21 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             orthoTile = new Vector2i(1, 0);
 
         var radius = (int) deployTraps.DeployTrapsRadius;
-        var tiles = new HashSet<Vector2i>();
+        var rangeSquared = deployTraps.Range * deployTraps.Range;
+        var validTiles = new HashSet<Vector2i>();
+        var invalidTiles = new HashSet<Vector2i>();
         for (var i = -radius; i <= radius; i++)
         {
-            tiles.Add(centerTile + orthoTile * i);
+            var tile = centerTile + orthoTile * i;
+            var tileCenter = _mapSystem.GridTileToWorld(gridUid, grid, tile);
+            if ((tileCenter.Position - originMap.Position).LengthSquared() <= rangeSquared)
+                validTiles.Add(tile);
+            else
+                invalidTiles.Add(tile);
         }
 
-        DrawTileBorder(args.WorldHandle, gridUid, grid, tiles, color);
+        DrawTileBorder(args.WorldHandle, gridUid, grid, validTiles, color);
+        DrawTileBorder(args.WorldHandle, gridUid, grid, invalidTiles, InvalidOutlineColor.WithAlpha(OutlineAlpha));
     }
 
     private void DrawAbduct(
@@ -620,6 +632,29 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         }
 
         DrawTileBorder(handle, center.GridUid, center.Grid, validTiles, ResinSurgeOutlineColor.WithAlpha(OutlineAlpha));
+        DrawTileBorder(handle, center.GridUid, center.Grid, invalidTiles, InvalidOutlineColor.WithAlpha(OutlineAlpha));
+    }
+
+    private void DrawAcidMineSquare(DrawingHandleWorld handle, MapCoordinates originMap, TileInfo center, int radius, float range)
+    {
+        var validTiles = new HashSet<Vector2i>();
+        var invalidTiles = new HashSet<Vector2i>();
+        var rangeSquared = range * range;
+
+        for (var x = -radius; x <= radius; x++)
+        {
+            for (var y = -radius; y <= radius; y++)
+            {
+                var tile = center.Indices + new Vector2i(x, y);
+                var tileCenter = _mapSystem.GridTileToWorld(center.GridUid, center.Grid, tile);
+                if ((tileCenter.Position - originMap.Position).LengthSquared() <= rangeSquared)
+                    validTiles.Add(tile);
+                else
+                    invalidTiles.Add(tile);
+            }
+        }
+
+        DrawTileBorder(handle, center.GridUid, center.Grid, validTiles, AcidMineOutlineColor.WithAlpha(OutlineAlpha));
         DrawTileBorder(handle, center.GridUid, center.Grid, invalidTiles, InvalidOutlineColor.WithAlpha(OutlineAlpha));
     }
 

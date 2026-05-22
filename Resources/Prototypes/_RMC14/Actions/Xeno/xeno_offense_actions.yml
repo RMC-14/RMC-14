@@ -1545,6 +1545,7 @@
   - type: TargetAction
     deselectOnMiss: false
     checkCanAccess: false
+    repeat: true
     range: 15 #Actual range on the AcidMine component.
   - type: WorldTargetAction
     event: !type:XenoAcidMineActionEvent
@@ -1598,7 +1599,8 @@
   - type: TargetAction
     checkCanAccess: false
     deselectOnMiss: false
-    range: 15 #Actual range on the AcidMine component.
+    repeat: true
+    range: 13
   - type: WorldTargetAction
     event: !type:XenoDeployTrapsActionEvent
   - type: XenoActionPlasma

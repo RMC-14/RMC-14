@@ -3,9 +3,9 @@
 namespace Content.Shared._RMC14.Xenonids.AdrenalineSurge;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(XenoAdrenalineSurgeSystem))]
 public sealed partial class XenoAdrenalineSurgeComponent : Component
 {
-
     [DataField]
     public float SpeedModifierAmount = 1.65f;
 
@@ -17,10 +17,10 @@ public sealed partial class XenoAdrenalineSurgeComponent : Component
 
     public TimeSpan? SurgeEndTime;
 
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool IsSurging;
 
     public bool IsUsable = true;
 
-    public bool ReadyMessageSent = false;
+    public bool ReadyMessageSent;
 }

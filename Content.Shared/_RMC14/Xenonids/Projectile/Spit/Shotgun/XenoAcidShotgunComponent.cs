@@ -7,7 +7,6 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Shotgun;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoSpitSystem))]
-
 public sealed partial class XenoAcidShotgunComponent : Component
 {
     [DataField, AutoNetworkedField]
