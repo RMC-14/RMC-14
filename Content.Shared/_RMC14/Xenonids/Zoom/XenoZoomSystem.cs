@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
 using Content.Shared.DoAfter;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 
 namespace Content.Shared._RMC14.Xenonids.Zoom;
@@ -32,12 +33,22 @@ public sealed class XenoZoomSystem : EntitySystem
 
     private void OnXenoZoomComponentStartup(Entity<XenoZoomComponent> xeno, ref ComponentStartup args)
     {
-        _contentEye.UpdatePvsScale(xeno);
+        if (!TryComp<ContentEyeComponent>(xeno, out var contentEye))
+            return;
+        if (!TryComp<EyeComponent>(xeno, out var eye))
+            return;
+
+        _contentEye.UpdatePvsScale(xeno, contentEye, eye);
     }
 
     private void OnXenoZoomComponentShutdown(Entity<XenoZoomComponent> xeno, ref ComponentShutdown args)
     {
-        _contentEye.UpdatePvsScale(xeno);
+        if (!TryComp<ContentEyeComponent>(xeno, out var contentEye))
+            return;
+        if (!TryComp<EyeComponent>(xeno, out var eye))
+            return;
+
+        _contentEye.UpdatePvsScale(xeno, contentEye, eye);
     }
 
     private void OnXenoZoomAction(Entity<XenoZoomComponent> xeno, ref XenoZoomActionEvent args)
