@@ -1,4 +1,4 @@
-﻿# Temporary until we get actual vehicle code
+# Temporary until we get actual vehicle code
 
 - type: entity
   id: RMCCarPileup
@@ -82,7 +82,7 @@
   id: RMCPropVehicleMonoSupronOrange
   suffix: Orange
   name: Mono-Supron
-  description: The 'Mono-Supron', a mass-produced civilian vehicle for the colonial markets, in and outside of the United Nations. Produced by 'Mizutani' a car marque and associated operating division of the Weston-Yamada Corporation.
+  description: The 'Mono-Supron', a mass-produced civilian vehicle for the colonial markets, in and outside of the United Nations. Produced by 'Miyahira' a car marque and associated operating division of the Weston-Yamada Corporation.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/vehicles.rsi

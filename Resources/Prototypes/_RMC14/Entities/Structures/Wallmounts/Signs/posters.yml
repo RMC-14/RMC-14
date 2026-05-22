@@ -414,7 +414,7 @@
   parent: CMPosterBase
   id: CMPosterTartarus
   name: "Tartarus Mining co. poster"
-  description: "A simplified version of the Tartarus Mining co. logo. The Tartarus Mining Company is sub-division of the Weston-Yamada Corporation."
+  description: "A simplified version of the Tartarus Mining co. logo. The Tartarus Mining Company is of course a subsidiary company of the Weston-Yamada Corporation, what did you expect?."
   components:
   - type: Sprite
     state: tartarus

@@ -1,107 +1,107 @@
 - type: decal
-  id: RMCDecalmizutaniTile1
+  id: RMCDecalmiyahiraTile1
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 1
 
 - type: decal
-  id: RMCDecalmizutaniTile2
+  id: RMCDecalmiyahiraTile2
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 2
 
 - type: decal
-  id: RMCDecalmizutaniTile3
+  id: RMCDecalmiyahiraTile3
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 3
 
 - type: decal
-  id: RMCDecalmizutaniTile4
+  id: RMCDecalmiyahiraTile4
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 4
 
 - type: decal
-  id: RMCDecalmizutaniTile5
+  id: RMCDecalmiyahiraTile5
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 5
 
 - type: decal
-  id: RMCDecalmizutaniTile6
+  id: RMCDecalmiyahiraTile6
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 6
 
 - type: decal
-  id: RMCDecalmizutaniTile7
+  id: RMCDecalmiyahiraTile7
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 7
 
 - type: decal
-  id: RMCDecalmizutaniTile8
+  id: RMCDecalmiyahiraTile8
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 8
 
 - type: decal
-  id: RMCDecalmizutaniTile9
+  id: RMCDecalmiyahiraTile9
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 9
 
 - type: decal
-  id: RMCDecalmizutaniTile10
+  id: RMCDecalmiyahiraTile10
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 10
 
 - type: decal
-  id: RMCDecalmizutaniTile11
+  id: RMCDecalmiyahiraTile11
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 11
 
 - type: decal
-  id: RMCDecalmizutaniTile12
+  id: RMCDecalmiyahiraTile12
   parent: CMDecalBase
   tags: ["station"]
   defaultCustomColor: true
   sprite:
-    sprite: _RMC14/Decals/mizutani.rsi
+    sprite: _RMC14/Decals/miyahira.rsi
     state: 12

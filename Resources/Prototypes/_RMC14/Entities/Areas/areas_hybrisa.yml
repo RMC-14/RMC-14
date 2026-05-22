@@ -1274,68 +1274,68 @@
 - type: entity
   abstract: true
   parent: RMCAreaLv759Indoors
-  id: RMCAreaLv759IndoorsMizutani
+  id: RMCAreaLv759IndoorsMiyahira
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMizutani
-  id: RMCAreaLv759IndoorsMizutaniFoyer
-  name: Mizutani - Foyer
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraFoyer
+  name: Miyahira - Foyer
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMizutani
-  id: RMCAreaLv759IndoorsMizutaniShowroom
-  name: Mizutani - Showroom
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraShowroom
+  name: Miyahira - Showroom
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMizutani
-  id: RMCAreaLv759IndoorsMizutaniOffice
-  name: Mizutani - Offices
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraOffice
+  name: Miyahira - Offices
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMizutani
-  id: RMCAreaLv759IndoorsMizutaniManagersoffice
-  name: Mizutani - Manager's Office
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraManagersoffice
+  name: Miyahira - Manager's Office
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMizutani
-  id: RMCAreaLv759IndoorsMizutaniFactory
-  name: Mizutani - Factory Floor
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraFactory
+  name: Miyahira - Factory Floor
   components:
   - type: Sprite
     state: meridian_factory
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMizutani
-  id: RMCAreaLv759IndoorsMizutaniRestroom
-  name: Mizutani - Restroom
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraRestroom
+  name: Miyahira - Restroom
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMizutani
-  id: RMCAreaLv759IndoorsMizutaniMaintenance
-  name: Mizutani - Maintenance
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraMaintenance
+  name: Miyahira - Maintenance
   components:
   - type: Sprite
     state: meridian
 
 - type: entity
-  parent: RMCAreaLv759IndoorsMizutani
-  id: RMCAreaLv759IndoorsMizutaniMaintenanceEast
-  name: Mizutani - Factory Floor - Maintenance
+  parent: RMCAreaLv759IndoorsMiyahira
+  id: RMCAreaLv759IndoorsMiyahiraMaintenanceEast
+  name: Miyahira - Factory Floor - Maintenance
   components:
   - type: Sprite
     state: meridian
