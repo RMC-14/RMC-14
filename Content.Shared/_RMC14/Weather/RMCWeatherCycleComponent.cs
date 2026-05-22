@@ -277,3 +277,6 @@ public readonly record struct RMCWeatherStartedEvent(MapId MapId, string Name, T
 
 [ByRefEvent]
 public readonly record struct RMCWeatherEndedEvent(MapId MapId, string Name, TimeSpan? Elapsed, bool AdminForced);
+
+[ByRefEvent]
+public readonly record struct RMCWeatherFactionWarningEvent(MapId MapId, string WeatherName);

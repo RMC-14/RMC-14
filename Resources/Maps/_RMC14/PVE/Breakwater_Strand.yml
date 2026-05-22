@@ -114,6 +114,7 @@ entities:
         screenOverlay: Medium
         duration: 1000
         name: Heavy Rain
+        displayName: rmc-weather-name-heavy-rain
   - uid: 2
     components:
     - type: MetaData

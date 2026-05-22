@@ -647,6 +647,9 @@ public sealed class RMCWeatherSystem : EntitySystem
     private void SendFactionWeatherWarnings(MapId mapId, RMCWeatherEvent weatherEvent)
     {
         var displayName = GetEventDisplayName(weatherEvent);
+        var ev = new RMCWeatherFactionWarningEvent(mapId, displayName);
+        RaiseLocalEvent(ref ev);
+
         bool IsOnWeatherMap(EntityUid uid) =>
             TryComp(uid, out TransformComponent? xform) &&
             xform.MapID == mapId;

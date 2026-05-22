@@ -2,6 +2,13 @@ rmc-weather-effect-dust = You feel dust blow into every crevice of your body, an
 rmc-weather-effect-sand = You feel sand scraping the upper layers of your exterior away!
 
 rmc-weather-name-light-rain = Light Rain
+rmc-weather-name-heavy-rain = Heavy Rain
+rmc-weather-name-snow = Snow
+rmc-weather-name-snowstorm = Snowstorm
+rmc-weather-name-duststorm = Duststorm
+rmc-weather-name-sandstorm = Sandstorm
+rmc-weather-name-rainstorm = Rainstorm
+rmc-weather-name-tropical-storm = Tropical Storm
 rmc-weather-name-monsoon-warning = Monsoon Warning
 rmc-weather-name-very-light-rain = Very Light Rain
 

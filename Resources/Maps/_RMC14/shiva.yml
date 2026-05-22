@@ -147,6 +147,7 @@ entities:
         screenOverlay: Low
         duration: 600
         name: Snow
+        displayName: rmc-weather-name-snow
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
         lightningEffects:
@@ -158,6 +159,7 @@ entities:
         screenOverlay: Medium
         duration: 360
         name: Snowstorm
+        displayName: rmc-weather-name-snowstorm
     - type: RMCAmbientLightEffects
       sunset: RMCColorSequenceSunsetCold
     - type: MapGrid
