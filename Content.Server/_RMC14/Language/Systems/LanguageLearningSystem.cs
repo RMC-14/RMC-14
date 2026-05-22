@@ -1,5 +1,3 @@
-using System.Numerics;
-using Content.Server._RMC14.Language.Systems;
 using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Components;
@@ -67,8 +65,9 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         if (!_prototypeManager.TryIndex(args.Language, out var languageProto))
             return;
 
+        var sourceCoordinates = Transform(args.Source).Coordinates;
         _potentialLearners.Clear();
-        _lookup.GetEntitiesInRange(Transform(args.Source).Coordinates, MaxHearingRange, _potentialLearners);
+        _lookup.GetEntitiesInRange(sourceCoordinates, MaxHearingRange, _potentialLearners);
 
         foreach (var potentialLearner in _potentialLearners)
         {
@@ -98,7 +97,8 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
             TryHandleFirstContact((potentialLearner, learnerComp), args.Language);
 
-            var distance = Vector2.Distance(Transform(args.Source).WorldPosition, Transform(potentialLearner).WorldPosition);
+            if (!sourceCoordinates.TryDistance(EntityManager, Transform(potentialLearner).Coordinates, out var distance))
+                continue;
 
             if (distance > learnerComp.LearningRange)
                 continue;
@@ -235,7 +235,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             if (wordsLearned >= comp.MaxWordsToLearnPerMessage)
                 break;
 
-            var wordLower = word.ToLower();
+            var wordLower = word.ToLowerInvariant();
             var currentComprehension = languageData.LearnedWords.GetValueOrDefault(wordLower, 0f);
 
             if (currentComprehension == 0f &&
@@ -317,7 +317,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
             return;
 
         var languageData = EnsureLanguageTracking(comp, language);
-        var wordLower = word.ToLower();
+        var wordLower = word.ToLowerInvariant();
         languageData.LearnedWords[wordLower] = Math.Clamp(level, 0.0f, comp.MaxWordComprehension);
 
         if (ShouldStartEncountered(comp, language))

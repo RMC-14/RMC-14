@@ -64,7 +64,7 @@ public abstract class SharedLanguageLearningSystem : EntitySystem
             result.Append(message, lastIndex, match.Index - lastIndex);
 
             var word = match.Value;
-            var wordLower = word.ToLower();
+            var wordLower = word.ToLowerInvariant();
 
             var wordComprehension = 0f;
             if (learnedWords?.ContainsKey(wordLower) == true)

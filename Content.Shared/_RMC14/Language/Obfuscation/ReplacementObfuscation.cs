@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Language.Systems;
 
 namespace Content.Shared._RMC14.Language;
 
+[Virtual]
 public partial class ReplacementObfuscation : ObfuscationMethod
 {
     [DataField(required: true)]
@@ -24,7 +25,8 @@ public partial class ReplacementObfuscation : ObfuscationMethod
         bool randomize,
         float comprehension)
     {
-        if (Replacement.Count == 0) return;
+        if (Replacement.Count == 0)
+            return;
 
         var wordBeginIndex = 0;
         var hashCode = 0;

@@ -53,13 +53,6 @@ public sealed partial class ChatSystem
         bool ignoreActionBlocker,
         ProtoId<LanguagePrototype> language)
     {
-        if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
-            return;
-
-        var message = TransformSpeech(source, originalMessage);
-        if (message.Length == 0)
-            return;
-
         LanguagePrototype? languagePrototype = null;
         if (!_prototypeManager.TryIndex(language, out languagePrototype))
         {
@@ -71,6 +64,10 @@ public sealed partial class ChatSystem
         var needsSpeech = languagePrototype?.NeedsSpeech ?? true;
 
         if (needsSpeech && !_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
+            return;
+
+        var message = TransformSpeech(source, originalMessage);
+        if (message.Length == 0)
             return;
 
         var speakerProcessedMessage = _language.ObfuscateMessageForSpeaker(source, message, language);
@@ -150,13 +147,6 @@ public sealed partial class ChatSystem
         ProtoId<LanguagePrototype> language,
         bool ignoreXenos = false)
     {
-        if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
-            return;
-
-        var message = TransformSpeech(source, FormattedMessage.RemoveMarkupOrThrow(originalMessage));
-        if (message.Length == 0)
-            return;
-
         LanguagePrototype? languagePrototype = null;
         if (!_prototypeManager.TryIndex(language, out languagePrototype))
         {
@@ -168,6 +158,10 @@ public sealed partial class ChatSystem
         var needsSpeech = languagePrototype?.NeedsSpeech ?? true;
 
         if (needsSpeech && !_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
+            return;
+
+        var message = TransformSpeech(source, FormattedMessage.RemoveMarkupOrThrow(originalMessage));
+        if (message.Length == 0)
             return;
 
         var speakerMessage = _language.ObfuscateMessageForSpeaker(source, message, language);

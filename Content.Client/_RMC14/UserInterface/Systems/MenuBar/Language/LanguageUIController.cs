@@ -55,7 +55,7 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
             _languageSystem.OnLanguageLearningChanged -= OnLanguageLearningChanged;
         }
 
-        _window?.Dispose();
+        _window?.Close();
         _window = null;
         UnloadButton();
         CommandBinds.Unregister<LanguageUIController>();
@@ -103,7 +103,7 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
             return;
 
         _languageButton.OnPressed -= LanguageButtonPressed;
-        _languageButton.Dispose();
+        _languageButton.Orphan();
         _languageButton = null;
     }
 

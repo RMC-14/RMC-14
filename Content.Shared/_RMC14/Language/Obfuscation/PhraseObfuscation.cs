@@ -27,7 +27,8 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
         bool randomize,
         float comprehension)
     {
-        if (Replacement.Count == 0) return;
+        if (Replacement.Count == 0)
+            return;
 
         var sentenceProcessor = new SentenceProcessor(
             message,
@@ -67,7 +68,7 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
 
             for (var i = 0; i < _message.Length; i++)
             {
-                var ch = char.ToLower(_message[i]);
+                var ch = char.ToLowerInvariant(_message[i]);
 
                 if (!IsSentenceEndPunctuation(ch) && i != _message.Length - 1)
                 {
@@ -89,7 +90,8 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
             int hashCode, int minPhrases, int maxPhrases, string separator, float proportion)
         {
             var length = sentenceEndIndex - sentenceBeginIndex;
-            if (length < 0) return;
+            if (length < 0)
+                return;
 
             var sentence = _message.Substring(sentenceBeginIndex, length);
 
@@ -101,14 +103,14 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
 
             var obfuscationIntensity = (1.0f - _comprehension) * (1.0f - _comprehension);
             var basePhrases = CalculateBasePhraseCount(length, minPhrases, maxPhrases, proportion);
-            var adjustedPhrases = Math.Max(1, (int)(basePhrases * obfuscationIntensity));
+            var adjustedPhrases = Math.Max(1, (int) (basePhrases * obfuscationIntensity));
 
             AppendObfuscatedPhrases(builder, hashCode, adjustedPhrases, separator);
         }
 
         private static int CalculateBasePhraseCount(int length, int minPhrases, int maxPhrases, float proportion)
         {
-            return (int)Math.Clamp(Math.Pow(length, proportion) - 1, minPhrases, maxPhrases);
+            return (int) Math.Clamp(Math.Pow(length, proportion) - 1, minPhrases, maxPhrases);
         }
 
         private void AppendObfuscatedPhrases(StringBuilder builder, int hashCode, int phraseCount, string separator)

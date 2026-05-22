@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Server.Chat.Managers;
-using Content.Server.Chat.Systems;
 using Content.Server.Radio.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
@@ -21,7 +20,6 @@ namespace Content.Server._RMC14.Chat.Chat;
 public sealed class CMChatSystem : SharedCMChatSystem
 {
     [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -31,12 +29,6 @@ public sealed class CMChatSystem : SharedCMChatSystem
     private static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize = "CMChatSanitize";
     private static readonly ProtoId<ReplacementAccentPrototype> MarineChatSanitize = "CMChatSanitizeMarine";
     private static readonly ProtoId<ReplacementAccentPrototype> XenoChatSanitize = "CMChatSanitizeXeno";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
-
 
     public override string SanitizeMessageReplaceWords(EntityUid source, string msg)
     {

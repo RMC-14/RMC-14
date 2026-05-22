@@ -29,7 +29,8 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
         bool randomize,
         float comprehension)
     {
-        if (Replacement.Count == 0) return;
+        if (Replacement.Count == 0)
+            return;
 
         var wordProcessor = new WordProcessor(
             message,
@@ -79,7 +80,7 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
 
             for (var i = 0; i <= _message.Length; i++)
             {
-                var ch = i < _message.Length ? char.ToLower(_message[i]) : EndOfFile;
+                var ch = i < _message.Length ? char.ToLowerInvariant(_message[i]) : EndOfFile;
                 var isWordEnd = char.IsWhiteSpace(ch) || IsPunctuation(ch) || ch == EndOfFile;
 
                 if (!isWordEnd)
@@ -102,7 +103,8 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
             int hashCode, int minSyllables, int maxSyllables)
         {
             var wordLength = wordEndIndex - wordBeginIndex;
-            if (wordLength <= 0) return;
+            if (wordLength <= 0)
+                return;
 
             var word = _message.Substring(wordBeginIndex, wordLength);
             var wordComprehension = CalculateWordComprehension(
@@ -131,7 +133,7 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
         {
             builder.Append(word[0]);
 
-            var syllableCount = Math.Max(1, (int)((1.0f - wordComprehension) * maxSyllables));
+            var syllableCount = Math.Max(1, (int) ((1.0f - wordComprehension) * maxSyllables));
             AppendRandomSyllables(builder, hashCode, syllableCount);
 
             builder.Append(word[^1]);
@@ -142,7 +144,7 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
         {
             var obfuscationIntensity = (1.0f - wordComprehension) * (1.0f - wordComprehension);
             var baseSyllables = _context.PseudoRandomNumber(hashCode, minSyllables, maxSyllables, _randomize);
-            var adjustedSyllables = Math.Max(1, (int)(baseSyllables * obfuscationIntensity));
+            var adjustedSyllables = Math.Max(1, (int) (baseSyllables * obfuscationIntensity));
 
             AppendRandomSyllables(builder, hashCode, adjustedSyllables);
         }
