@@ -30,4 +30,15 @@ public sealed class RMCDoAfterSystem : EntitySystem
 
         _doAfter.Cancel(ent, doAfterIndex.Value, ent);
     }
+
+    public void TryCancelAll(Entity<DoAfterComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        foreach (var doAfter in ent.Comp.DoAfters)
+        {
+            _doAfter.Cancel(ent, doAfter.Key, ent);
+        }
+    }
 }

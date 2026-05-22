@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorEngineer
+  icon: "RMCJobIconGenericColonistEngi"
   accessGroups:
   - ColonistEngi
   basePlaytimeTracker: true
@@ -69,7 +70,7 @@
   name: engineer colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGearOther:
     -
       - [ CMBeltUtilityFilled ]
