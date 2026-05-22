@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.ComponentModel;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
@@ -8,7 +9,7 @@ namespace Content.Shared._RMC14.HealthExaminable;
 
 public sealed class RMCHealthExaminableSystem : EntitySystem
 {
-    private readonly ImmutableArray<FixedPoint2> _thresholds = ImmutableArray.Create<FixedPoint2>(25, 50, 75);
+    private readonly ImmutableArray<FixedPoint2> _thresholds = ImmutableArray.Create<FixedPoint2>(25, 50, 75, 100, 200, 300);
 
     public override void Initialize()
     {
@@ -33,7 +34,7 @@ public sealed class RMCHealthExaminableSystem : EntitySystem
                     if (groupDamage < threshold)
                         continue;
 
-                    var id = $"rmc-health-examinable-{group}-{threshold.Int()}";
+                    var id = $"rmc-health-examinable-{ent.Comp.SpeciesType}-{group}-{threshold.Int()}";
                     if (!Loc.TryGetString(id, out var msg, ("target", Identity.Entity(ent, EntityManager, args.Examiner))))
                         continue;
 

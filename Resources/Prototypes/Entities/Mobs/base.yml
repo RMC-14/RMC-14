@@ -109,7 +109,8 @@
 #    - Caustic
 #    - Asphyxiation
 #    - Radiation
-  - type: RMCHealthExaminable # RMC14
+  - type: RMCHealthExaminable
+    speciesType: Humanoid
   - type: DamageOnHighSpeedImpact
     damage:
       types:

@@ -37,7 +37,7 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
-  - type: RMCRepairable
+  - type: RMCRepairable #Damages eyes
     heal: 40
     skill: RMCSkillConstruction
     delay: 8
@@ -75,6 +75,8 @@
   - type: XenoCrusherChargable
   - type: Physics
     bodyType: Dynamic
+  - type: RMCHealthExaminable
+    speciesType: Mechanical
 
 - type: entity
   parent: RMCBaseWeaponMount
