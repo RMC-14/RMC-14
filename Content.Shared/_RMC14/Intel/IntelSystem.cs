@@ -6,6 +6,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Intel.Detector;
 using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Skills;
@@ -76,7 +77,6 @@ public sealed class IntelSystem : EntitySystem
     private static readonly EntProtoId ProgressReportProto = "RMCIntelProgressReport";
     private static readonly EntProtoId FolderProto = "RMCIntelFolder";
     private static readonly EntProtoId TechnicalManualProto = "RMCIntelTechnicalManual";
-    private static readonly EntProtoId DataTerminalProto = "RMCIntelDataTerminal";
     private static readonly EntProtoId ExperimentalDevicesProto = "RMCIntelRetrieveHealthAnalyzer";
     // private static readonly EntProtoId ResearchPaperProto = "RMCIntelResearchPaper";
     // private static readonly EntProtoId VialBoxProto = "RMCIntelVialBox";
@@ -216,6 +216,8 @@ public sealed class IntelSystem : EntitySystem
         SubscribeLocalEvent<IntelDataTerminalComponent, MapInitEvent>(OnDataTerminalMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<IntelDataTerminalComponent, InteractHandEvent>(OnDataTerminalInteractHand, before: [typeof(LockSystem)]);
         SubscribeLocalEvent<IntelDataTerminalComponent, IntelDataTerminalPasswordInputEvent>(OnDataTerminalPasswordInput);
+        SubscribeLocalEvent<IntelDataTerminalComponent, ComponentRemove>(OnDataTerminalObjectiveRemove);
+        SubscribeLocalEvent<IntelDataTerminalComponent, EntityTerminatingEvent>(OnDataTerminalObjectiveRemove);
         SubscribeLocalEvent<IntelDiskReaderComponent, MapInitEvent>(OnDiskReaderMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<IntelDiskReaderComponent, InteractUsingEvent>(OnDiskReaderInteractUsing);
         SubscribeLocalEvent<IntelDiskReaderComponent, InteractHandEvent>(OnDiskReaderInteractHand, before: [typeof(LockSystem)]);
@@ -924,6 +926,17 @@ public sealed class IntelSystem : EntitySystem
         UpdateTree(tree.Value);
     }
 
+    private void OnDataTerminalObjectiveRemove<T>(Entity<IntelDataTerminalComponent> ent, ref T args)
+    {
+        if (_net.IsClient || ent.Comp.Completed || !TryGetTechTree(out var tree))
+            return;
+
+        tree.Value.Comp.Tree.UploadData.Total = Math.Max(0, tree.Value.Comp.Tree.UploadData.Total - 1);
+        RemoveClue(tree.Value, ent);
+        Dirty(tree.Value);
+        UpdateTree(tree.Value);
+    }
+
     private bool CanUploadData(Entity<IntelDataTerminalComponent> terminal, EntityUid user, out string reason)
     {
         if (!_power.IsPowered(terminal))
@@ -1155,7 +1168,7 @@ public sealed class IntelSystem : EntitySystem
             mediums.AddRange(SpawnIntel(FolderProto, _folders, _folderChances));
             var highs = SpawnIntel(TechnicalManualProto, _technicalManuals, _technicalManualChances);
             var disks = SpawnIntel(DiskProtos, _disks, _diskChances);
-            var dataTerminals = SpawnIntel([DataTerminalProto], _dataTerminals, _diskChances, activePosition: false, insertNearby: false);
+            var dataTerminals = ActivateDataTerminalObjectives(_dataTerminals);
             var devices = SpawnIntel(ExperimentalDevicesProto, _experimentalDevices, _experimentalDeviceChances);
             var safes = ActivateSafeObjectives(_safes);
             // SpawnIntel(ResearchPaperProto, _researchPapers, _researchPaperChances);
@@ -1212,6 +1225,52 @@ public sealed class IntelSystem : EntitySystem
         {
             _spawners.Clear();
         }
+    }
+
+    private List<EntityUid> ActivateDataTerminalObjectives(int count)
+    {
+        var candidates = new List<EntityUid>();
+        var query = EntityQueryEnumerator<IntelDataTerminalCandidateComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (HasComp<IntelDataTerminalComponent>(uid))
+                continue;
+
+            if (_area.TryGetArea(uid, out var area, out _) &&
+                area.Value.Comp.RetrieveItemObjective)
+            {
+                continue;
+            }
+
+            candidates.Add(uid);
+        }
+
+        _random.Shuffle(candidates);
+        var terminals = new List<EntityUid>();
+        foreach (var terminalId in candidates)
+        {
+            if (terminals.Count >= count)
+                break;
+
+            var terminal = EnsureComp<IntelDataTerminalComponent>(terminalId);
+            terminal.Password = GenerateAccessKey();
+            terminal.UploadProgress = 0;
+            terminal.Uploading = false;
+            terminal.Completed = false;
+            terminal.LastUser = null;
+            Dirty(terminalId, terminal);
+
+            var clues = EnsureComp<IntelCluesComponent>(terminalId);
+            clues.Clue = "rmc-intel-clue-data-terminal";
+            clues.Category = "rmc-intel-data";
+            clues.Clues = 3;
+            SetInitialArea((terminalId, clues));
+
+            EnsureComp<IntelDetectorTrackedComponent>(terminalId);
+            terminals.Add(terminalId);
+        }
+
+        return terminals;
     }
 
     private List<EntityUid> ActivateSafeObjectives(int count)

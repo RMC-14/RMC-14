@@ -186,6 +186,13 @@
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: terminal1
   - type: InteractionOutline
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
   - type: UserInterface
     interfaces:
       enum.DialogUiKey.Key:
@@ -214,12 +221,7 @@
     interfaces:
       enum.DialogUiKey.Key:
         type: DialogBui
-  - type: IntelDataTerminal
-  - type: IntelClues
-    clue: rmc-intel-clue-data-terminal
-    category: rmc-intel-data
-    clues: 3
-  - type: IntelDetectorTracked
+  - type: IntelDataTerminalCandidate
 
 - type: entity
   id: RMCIntelTechTree

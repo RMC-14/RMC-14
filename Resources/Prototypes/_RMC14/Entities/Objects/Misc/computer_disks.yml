@@ -2,7 +2,7 @@
   parent: BaseItem
   id: RMCComputerDisk
   abstract: true
-  description: "A boring looking computer disk. The name label is just gibberish collection of letters and numbers."
+  description: A boring looking computer disk. The name label is just a gibberish collection of letters and numbers.
   components:
   - type: Tag
     tags:
@@ -13,7 +13,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk1
-  name: Grey computer disk
+  name: grey computer disk
   suffix: Disk, 1
   components:
   - type: Sprite
@@ -30,7 +30,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk2
-  name: Grey computer disk
+  name: grey computer disk
   suffix: Disk, 2
   components:
   - type: Sprite
@@ -47,7 +47,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk3
-  name: White computer disk
+  name: white computer disk
   suffix: Disk, 3
   components:
   - type: Sprite
@@ -64,7 +64,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk4
-  name: White computer disk
+  name: white computer disk
   suffix: Disk, 4
   components:
   - type: Sprite
@@ -81,7 +81,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk5
-  name: White computer disk
+  name: white computer disk
   suffix: Disk, 5
   components:
   - type: Sprite
@@ -98,7 +98,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk6
-  name: Green computer disk
+  name: green computer disk
   suffix: Disk, 6
   components:
   - type: Sprite
@@ -115,7 +115,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk7
-  name: Green computer disk
+  name: green computer disk
   suffix: Disk, 7
   components:
   - type: Sprite
@@ -132,7 +132,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk8
-  name: Red computer disk
+  name: red computer disk
   suffix: Disk, 8
   components:
   - type: Sprite
@@ -149,7 +149,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk9
-  name: Red computer disk
+  name: red computer disk
   suffix: Disk, 9
   components:
   - type: Sprite
@@ -166,7 +166,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk10
-  name: Red computer disk
+  name: red computer disk
   suffix: Disk, 10
   components:
   - type: Sprite
@@ -183,7 +183,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk11
-  name: Blue computer disk
+  name: blue computer disk
   suffix: Disk, 11
   components:
   - type: Sprite
@@ -200,7 +200,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk12
-  name: Blue computer disk
+  name: blue computer disk
   suffix: Disk, 12
   components:
   - type: Sprite
@@ -217,7 +217,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk13
-  name: Cracked blue computer disk
+  name: cracked blue computer disk
   suffix: Disk, 13
   components:
   - type: Sprite
@@ -234,7 +234,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk14
-  name: Cracked blue computer disk
+  name: cracked blue computer disk
   suffix: Disk, 14
   components:
   - type: Sprite
@@ -251,7 +251,7 @@
 - type: entity
   parent: RMCComputerDisk
   id: RMCIntelComputerDisk15
-  name: Bloodied blue computer disk
+  name: bloodied blue computer disk
   suffix: Disk, 15
   components:
   - type: Sprite

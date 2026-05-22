@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 05/14/2026 20:33:34
-  entityCount: 17722
+  entityCount: 17725
 maps:
 - 1
 grids:
@@ -132793,5 +132793,22 @@ entities:
     components:
     - type: Transform
       pos: 148.5,9.5
+      parent: 1
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 17738
+    components:
+    - type: Transform
+      pos: 109.5,75.5
+      parent: 1
+  - uid: 17739
+    components:
+    - type: Transform
+      pos: 123.5,11.5
+      parent: 1
+  - uid: 17740
+    components:
+    - type: Transform
+      pos: 183.5,140.5
       parent: 1
 ...
