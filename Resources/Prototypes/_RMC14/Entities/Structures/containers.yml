@@ -520,11 +520,14 @@
 
 - type: entity
   parent: RMCContainerGraf3Left
-  id: RMCContainerGraf3Right      
+  id: RMCContainerGraf3Right
   suffix: Graffiti, Right
   components:
   - type: Sprite
     state: grafcontain3_r
+
+- type: entity
+  parent: RMCContainerBase
   id: RMCContainerAvantLeft
   name: Avant Biomedical Cargo Container
   description: "A huge industrial shipping container. This one is from Avant Biomedical, a producer of biotechnology and medical goods. Despite being renowned for making high-quality products, rumors of shady projects seem to follow them."
