@@ -8,8 +8,20 @@
   },
   "states": [
     {
-      "name": "small_wire",
-      "directions": 4
+        "name": "small_wire",
+        "directions": 4
+    },
+    {
+        "name": "flamingo_santa",
+        "directions": 4
+    },
+    {
+        "name": "flamingo_snow",
+        "directions": 4
+    },
+    {
+        "name": "flamingo",
+        "directions": 4
     }
   ]
 }

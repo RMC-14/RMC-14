@@ -8,3 +8,29 @@
   - type: Sprite
     sprite: _RMC14/Structures/shiva_props.rsi
     state: small_wire
+
+- type: entity
+  id: RMCPropLawnFlamingoSnow
+  name: lawn flamingo
+  description: For ornamenting your suburban lawn... or your ice colony.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/shiva_props.rsi
+    state: flamingo_snow
+
+- type: entity
+  parent: RMCPropLawnFlamingoSnow
+  id: RMCPropLawnFlamingo
+  description: For ornamenting your suburban lawn.
+  components:
+  - type: Sprite
+    state: flamingo
+
+- type: entity
+  parent: RMCPropLawnFlamingoSnow
+  id: RMCPropLawnFlamingoFestive
+  name: festive lawn flamingo
+  description: For ornamenting your suburban lawn... or your ice colony during the festive season. Not that anyone has an Earth calendar out here.
+  components:
+  - type: Sprite
+    state: flamingo_santa
