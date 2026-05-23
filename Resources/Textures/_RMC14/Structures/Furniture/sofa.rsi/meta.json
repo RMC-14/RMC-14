@@ -8,15 +8,15 @@
   },
   "states": [
     {
-      "name": "couch_mid",
+      "name": "sofa",
       "directions": 4
     },
     {
-      "name": "couch_end_lower",
+      "name": "sofa_red",
       "directions": 4
     },
     {
-      "name": "couch_end_upper",
+      "name": "sofa_black",
       "directions": 4
     }
   ]

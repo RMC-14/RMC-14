@@ -51,6 +51,25 @@
     sprite: _RMC14/Structures/Furniture/couch.rsi
     state: couch_end
 
+# Alt Couch
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchMidAlt
+  suffix: Mid, Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/couch_alt.rsi
+    state: couch_mid
+
+- type: entity
+  parent: RMCCouchMidAlt
+  id: RMCCouchEndAlt
+  suffix: End, Alt
+  components:
+  - type: Sprite
+    state: couch_end
+
+# Red Couch
 - type: entity
   parent: RMCCouchMid
   id: RMCCouchMidRed
@@ -62,25 +81,51 @@
     state: couch_mid
 
 - type: entity
-  parent: RMCCouchMid
+  parent: RMCCouchMidRed
   id: RMCCouchEndLowerRed
   name: red couch
   suffix: End, Lower
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Furniture/red_couch.rsi
     state: couch_end_lower
 
 - type: entity
-  parent: RMCCouchMid
+  parent: RMCCouchMidRed
   id: RMCCouchEndUpperRed
   name: red couch
   suffix: End, Upper
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Furniture/red_couch.rsi
     state: couch_end_upper
 
+# Black Couch
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchMidBlack
+  name: black couch
+  suffix: Mid
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/black_couch.rsi
+    state: couch_mid
+
+- type: entity
+  parent: RMCCouchMidBlack
+  id: RMCCouchEndLowerBlack
+  suffix: End, Lower
+  components:
+  - type: Sprite
+    state: couch_end_lower
+
+- type: entity
+  parent: RMCCouchMidBlack
+  id: RMCCouchEndUpperBlack
+  suffix: End, Upper
+  components:
+  - type: Sprite
+    state: couch_end_upper
+
+# Bar Booth
 - type: entity
   parent: RMCCouchMid
   id: RMCCouchLeftBar
