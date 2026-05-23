@@ -78,6 +78,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly QueenEyeSystem _queenEye = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly VehicleSystem _vehicle = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tags = default!;
@@ -1314,6 +1315,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     public bool CanSecreteOnTilePopup(Entity<XenoConstructionComponent> xeno, EntProtoId? buildChoice, EntityCoordinates target, bool checkStructureSelected, bool checkWeeds, bool popup = true)
     {
         if (HasComp<VehicleInteriorOccupantComponent>(xeno.Owner))
+        {
+            if (popup)
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+
+            return false;
+        }
+
+        if (_vehicle.TryGetVehicleFromInterior(target.EntityId, out _))
         {
             if (popup)
                 _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);

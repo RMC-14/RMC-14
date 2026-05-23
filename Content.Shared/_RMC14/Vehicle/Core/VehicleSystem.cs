@@ -251,6 +251,7 @@ public sealed class VehicleSystem : EntitySystem
 
         var link = EnsureComp<VehicleInteriorLinkComponent>(mapUid);
         link.Vehicle = ent.Owner;
+        Dirty(mapUid, link);
 
         SpawnVehicleInteriorKey(ent.Owner, mapId);
 
@@ -635,6 +636,7 @@ public sealed class VehicleSystem : EntitySystem
 
         occupant.Vehicle = vehicle;
         occupant.IsXeno = isXeno;
+        Dirty(user, occupant);
         RegisterTrackedOccupant(vehicle, user, isXeno);
     }
 

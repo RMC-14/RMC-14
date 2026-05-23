@@ -6,6 +6,7 @@
   components:
   - type: Vehicle
     movementKind: Grid
+  - type: LagCompensation
   - type: Clickable
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget

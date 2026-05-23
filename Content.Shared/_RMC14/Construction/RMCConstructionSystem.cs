@@ -39,6 +39,7 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly VehicleSystem _vehicle = default!;
     [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -442,6 +443,13 @@ public sealed class RMCConstructionSystem : EntitySystem
     public bool CanBuildAt(EntityCoordinates coordinates, string? prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision = null)
     {
         popup = default;
+
+        if (_vehicle.TryGetVehicleFromInterior(coordinates.EntityId, out _))
+        {
+            popup = Loc.GetString("construction-system-inside-container");
+            return false;
+        }
+
         if (_transform.GetGrid(coordinates) is not { } gridId)
             return true;
 

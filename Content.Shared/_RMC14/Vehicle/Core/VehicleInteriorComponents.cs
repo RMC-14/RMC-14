@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Vehicle;
@@ -18,17 +19,21 @@ public sealed partial class VehicleInteriorComponent : Component
     public HashSet<EntityUid> Xenos = new();
 }
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(VehicleSystem))]
 public sealed partial class VehicleInteriorLinkComponent : Component
 {
+    [AutoNetworkedField]
     public EntityUid Vehicle = EntityUid.Invalid;
 }
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(VehicleSystem))]
 public sealed partial class VehicleInteriorOccupantComponent : Component
 {
+    [AutoNetworkedField]
     public EntityUid Vehicle = EntityUid.Invalid;
+
+    [AutoNetworkedField]
     public bool IsXeno;
 }
