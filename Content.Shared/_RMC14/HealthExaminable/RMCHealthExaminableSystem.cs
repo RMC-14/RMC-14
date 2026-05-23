@@ -17,6 +17,9 @@ public sealed class RMCHealthExaminableSystem : EntitySystem
 
     private void OnExamined(Entity<RMCHealthExaminableComponent> ent, ref ExaminedEvent args)
     {
+        if (ent.Comp.SpeciesType == null)
+            return;
+
         if (!TryComp(ent, out DamageableComponent? damageable))
             return;
 
