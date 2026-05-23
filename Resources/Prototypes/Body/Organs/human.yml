@@ -16,10 +16,12 @@
         - ReagentId: Nutriment
           Quantity: 10
       food:
-        maxVol: 5
+        maxVol: 35 # RMC14 - Increase Max Vol for CarpoToxin
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
+        - ReagentId: CarpoToxin # RMC14 - Add Carpotoxin to mechanically discourage eating organs.
+          Quantity: 30 # This is enough to deal 150 damage, after vomiting this will be slightly lower.
   - type: FlavorProfile
     flavors:
       - people
