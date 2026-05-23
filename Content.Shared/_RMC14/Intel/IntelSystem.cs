@@ -27,6 +27,7 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Sprite;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Audio.Systems;
@@ -70,6 +71,40 @@ public sealed class IntelSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private static readonly ImmutableArray<char> UppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToImmutableArray();
+    private static readonly ImmutableArray<string> GreekLetters =
+    [
+        "Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta",
+        "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho",
+        "Sigma", "Tau", "Upsilon", "Phi", "Chi", "Psi", "Omega",
+    ];
+
+    private static readonly ImmutableArray<(string State, LocId Color)> FolderColors =
+    [
+        ("folder_red", "rmc-intel-color-red"),
+        ("folder_black", "rmc-intel-color-black"),
+        ("folder_blue", "rmc-intel-color-blue"),
+        ("folder_yellow", "rmc-intel-color-yellow"),
+        ("folder", "rmc-intel-color-white"),
+    ];
+
+    private static readonly ImmutableDictionary<string, LocId> DiskColors = new Dictionary<string, LocId>
+    {
+        ["RMCIntelDataDisk1"] = "rmc-intel-color-grey",
+        ["RMCIntelDataDisk2"] = "rmc-intel-color-grey",
+        ["RMCIntelDataDisk3"] = "rmc-intel-color-white",
+        ["RMCIntelDataDisk4"] = "rmc-intel-color-white",
+        ["RMCIntelDataDisk5"] = "rmc-intel-color-white",
+        ["RMCIntelDataDisk6"] = "rmc-intel-color-green",
+        ["RMCIntelDataDisk7"] = "rmc-intel-color-green",
+        ["RMCIntelDataDisk8"] = "rmc-intel-color-red",
+        ["RMCIntelDataDisk9"] = "rmc-intel-color-red",
+        ["RMCIntelDataDisk10"] = "rmc-intel-color-red",
+        ["RMCIntelDataDisk11"] = "rmc-intel-color-blue",
+        ["RMCIntelDataDisk12"] = "rmc-intel-color-blue",
+        ["RMCIntelDataDisk13"] = "rmc-intel-color-cracked-blue",
+        ["RMCIntelDataDisk14"] = "rmc-intel-color-cracked-blue",
+        ["RMCIntelDataDisk15"] = "rmc-intel-color-bloodied-blue",
+    }.ToImmutableDictionary();
 
     private static readonly EntProtoId<IntelTechTreeComponent> TechTreeProto = "RMCIntelTechTree";
 
@@ -171,6 +206,7 @@ public sealed class IntelSystem : EntitySystem
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
 
         SubscribeLocalEvent<IntelNumberComponent, RefreshNameModifiersEvent>(OnNumberRefreshNameModifiers);
+        SubscribeLocalEvent<IntelClueDetailsComponent, RefreshNameModifiersEvent>(OnClueDetailsRefreshName);
 
         SubscribeLocalEvent<IntelUnlocksComponent, ComponentRemove>(OnUnlocksRemove);
         SubscribeLocalEvent<IntelUnlocksComponent, EntityTerminatingEvent>(OnUnlocksRemove);
@@ -261,7 +297,25 @@ public sealed class IntelSystem : EntitySystem
 
     private void OnNumberRefreshNameModifiers(Entity<IntelNumberComponent> ent, ref RefreshNameModifiersEvent args)
     {
+        if (TryComp(ent, out IntelClueDetailsComponent? details) &&
+            !string.IsNullOrWhiteSpace(details.Label))
+        {
+            return;
+        }
+
         args.AddModifier("rmc-intel-suffix", extraArgs: ("number", ent.Comp.Number));
+    }
+
+    private void OnClueDetailsRefreshName(Entity<IntelClueDetailsComponent> ent, ref RefreshNameModifiersEvent args)
+    {
+        if (string.IsNullOrWhiteSpace(ent.Comp.Label))
+            return;
+
+        var loc = HasComp<IntelDataDiskComponent>(ent) || HasComp<IntelDataTerminalComponent>(ent)
+            ? "rmc-intel-label-name"
+            : "rmc-intel-label-name-parenthetical";
+
+        args.AddModifier(loc, extraArgs: ("label", ent.Comp.Label));
     }
 
     private void OnUnlocksRemove<T>(Entity<IntelUnlocksComponent> ent, ref T args)
@@ -625,9 +679,10 @@ public sealed class IntelSystem : EntitySystem
 
     private void ShowClue(EntityUid target, IntelCluesComponent clues, EntityUid user, bool storeGlobal)
     {
-        var msg = GetClueMessage(target, clues);
+        var clue = GetClueMessage(target, clues);
+        var msg = Loc.GetString("rmc-intel-clue-found", ("clue", clue));
         _rmcChat.ChatMessageToOne(msg, user);
-        _popup.PopupEntity(msg, target, user, PopupType.Medium);
+        _popup.PopupEntity(clue, target, user, PopupType.Medium);
 
         if (!storeGlobal ||
             clues.Category is not { } category)
@@ -637,7 +692,7 @@ public sealed class IntelSystem : EntitySystem
 
         var tree = EnsureTechTree();
         var clueGroup = tree.Comp.Tree.Clues.GetOrNew(category);
-        clueGroup[GetNetEntity(target)] = msg;
+        clueGroup[GetNetEntity(target)] = clue;
         Dirty(tree);
         UpdateTree(tree);
     }
@@ -648,6 +703,8 @@ public sealed class IntelSystem : EntitySystem
         {
             ("intel", target),
             ("area", clues.InitialArea),
+            ("label", GetClueLabel(target)),
+            ("color", GetClueColor(target)),
         };
 
         if (TryComp(target, out IntelDataDiskComponent? disk))
@@ -660,6 +717,40 @@ public sealed class IntelSystem : EntitySystem
             args.Add(("code", safe.Code));
 
         return Loc.GetString(clues.Clue, args.ToArray());
+    }
+
+    private string GetClueLabel(EntityUid target)
+    {
+        if (TryComp(target, out IntelClueDetailsComponent? details) &&
+            !string.IsNullOrWhiteSpace(details.Label))
+        {
+            return details.Label;
+        }
+
+        if (TryComp(target, out IntelNumberComponent? number) &&
+            number.Number > 0)
+        {
+            return Loc.GetString("rmc-intel-clue-label-number", ("number", number.Number));
+        }
+
+        if (TryComp(target, out IntelSerialComponent? serial) &&
+            !string.IsNullOrWhiteSpace(serial.Serial))
+        {
+            return Loc.GetString("rmc-intel-clue-label-serial", ("serial", serial.Serial));
+        }
+
+        return Loc.GetString("rmc-intel-clue-label-unmarked");
+    }
+
+    private string GetClueColor(EntityUid target)
+    {
+        if (TryComp(target, out IntelClueDetailsComponent? details) &&
+            details.ColorName is { } color)
+        {
+            return Loc.GetString(color);
+        }
+
+        return Loc.GetString("rmc-intel-color-unknown");
     }
 
     private void OnIntelCluesMapInit(Entity<IntelCluesComponent> ent, ref MapInitEvent args)
@@ -681,6 +772,18 @@ public sealed class IntelSystem : EntitySystem
         if (string.IsNullOrWhiteSpace(ent.Comp.EncryptionKey))
             ent.Comp.EncryptionKey = GenerateAccessKey();
 
+        var details = EnsureComp<IntelClueDetailsComponent>(ent);
+        if (string.IsNullOrWhiteSpace(details.Label))
+            details.Label = GenerateDataLabel();
+
+        if (MetaData(ent).EntityPrototype is { } proto &&
+            DiskColors.TryGetValue(proto.ID, out var color))
+        {
+            details.ColorName = color;
+        }
+
+        Dirty(ent, details);
+        _nameModifier.RefreshNameModifiers(ent.Owner);
         Dirty(ent);
     }
 
@@ -1018,12 +1121,22 @@ public sealed class IntelSystem : EntitySystem
 
     private string GenerateAccessKey()
     {
-        return $"{RandomUppercase()}{RandomUppercase()}-{RandomDigit()}{RandomDigit()}{RandomDigit()}{RandomDigit()}";
+        return $"{RandomUppercase()}{_random.Next(100, 1000)}{RandomUppercase()}{_random.Next(10, 100)}";
+    }
+
+    private string GenerateDocumentLabel()
+    {
+        return $"{RandomUppercase()}{_random.Next(100, 1000)}";
+    }
+
+    private string GenerateDataLabel()
+    {
+        return $"{_random.Pick(GreekLetters)}-{_random.Next(100, 1000)}";
     }
 
     private string GenerateSafeCode()
     {
-        return $"{RandomDigit()}{RandomDigit()}-{RandomDigit()}{RandomDigit()}";
+        return $"{_random.Next(0, 11) * 5}|{_random.Next(0, 11) * 5}";
     }
 
     private char RandomUppercase()
@@ -1163,8 +1276,8 @@ public sealed class IntelSystem : EntitySystem
 
             var tree = EnsureTechTree();
             var lows = SpawnIntel(PaperScrapProto, _paperScraps, _paperScrapChances);
-            var mediums = SpawnIntel(ProgressReportProto, _progressReports, _progressReportChances);
-            mediums.AddRange(SpawnIntel(FolderProto, _folders, _folderChances));
+            var reports = SpawnIntel(ProgressReportProto, _progressReports, _progressReportChances);
+            var folders = SpawnIntel(FolderProto, _folders, _folderChances);
             var highs = SpawnIntel(TechnicalManualProto, _technicalManuals, _technicalManualChances);
             var disks = SpawnIntel(DiskProtos, _disks, _diskChances);
             var dataTerminals = ActivateDataTerminalObjectives(_dataTerminals);
@@ -1172,6 +1285,13 @@ public sealed class IntelSystem : EntitySystem
             var safes = ActivateSafeObjectives(_safes);
             // SpawnIntel(ResearchPaperProto, _researchPapers, _researchPaperChances);
             // SpawnIntel(VialBoxProto, _vialBoxes, _vialBoxChances);
+
+            AddFolderDetails(folders);
+            AddDocumentLabels(highs, true);
+
+            var mediums = new List<EntityUid>();
+            mediums.AddRange(reports);
+            mediums.AddRange(folders);
 
             tree.Comp.Tree.Documents.Total = lows.Count + mediums.Count + highs.Count;
             tree.Comp.Tree.UploadData.Total = disks.Count + dataTerminals.Count;
@@ -1226,6 +1346,42 @@ public sealed class IntelSystem : EntitySystem
         }
     }
 
+    private void AddDocumentLabels(IEnumerable<EntityUid> documents, bool refreshNames = false)
+    {
+        foreach (var document in documents)
+        {
+            var details = EnsureComp<IntelClueDetailsComponent>(document);
+            if (string.IsNullOrWhiteSpace(details.Label))
+                details.Label = GenerateDocumentLabel();
+
+            Dirty(document, details);
+            if (refreshNames)
+                _nameModifier.RefreshNameModifiers(document);
+        }
+    }
+
+    private void AddFolderDetails(IEnumerable<EntityUid> folders)
+    {
+        foreach (var folder in folders)
+        {
+            var details = EnsureComp<IntelClueDetailsComponent>(folder);
+            if (string.IsNullOrWhiteSpace(details.Label))
+                details.Label = GenerateDocumentLabel();
+
+            var color = _random.Pick(FolderColors);
+            details.ColorName = color.Color;
+            Dirty(folder, details);
+
+            if (TryComp(folder, out RandomSpriteComponent? randomSprite))
+            {
+                randomSprite.Selected["base"] = (color.State, null);
+                Dirty(folder, randomSprite);
+            }
+
+            _nameModifier.RefreshNameModifiers(folder);
+        }
+    }
+
     private List<EntityUid> ActivateDataTerminalObjectives(int count)
     {
         var candidates = new List<EntityUid>();
@@ -1258,6 +1414,13 @@ public sealed class IntelSystem : EntitySystem
             terminal.Completed = false;
             terminal.LastUser = null;
             Dirty(terminalId, terminal);
+
+            var details = EnsureComp<IntelClueDetailsComponent>(terminalId);
+            if (string.IsNullOrWhiteSpace(details.Label))
+                details.Label = GenerateDataLabel();
+
+            Dirty(terminalId, details);
+            _nameModifier.RefreshNameModifiers(terminalId);
 
             var clues = EnsureComp<IntelCluesComponent>(terminalId);
             clues.Clue = "rmc-intel-clue-data-terminal";
@@ -1429,10 +1592,12 @@ public sealed class IntelSystem : EntitySystem
             Dirty(toActivate, retrieve);
         }
 
-        if (TryComp(toActivate, out IntelNumberComponent? number))
+        var label = GetClueLabel(toActivate);
+        if (!string.IsNullOrWhiteSpace(label) &&
+            label != Loc.GetString("rmc-intel-clue-label-unmarked"))
         {
             var unlocked = EnsureComp<IntelHasUnlockedComponent>(activatedBy);
-            unlocked.Unlocked.Add(number.Number);
+            unlocked.Unlocked.Add(label);
             Dirty(activatedBy, unlocked);
 
             _nameModifier.RefreshNameModifiers(activatedBy);
