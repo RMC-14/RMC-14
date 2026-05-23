@@ -93,6 +93,9 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
         }
 
+        var toolUseAttempt = new ToolUseAttemptEvent(user, (float) repairable.Comp.FuelUsed);
+        RaiseLocalEvent(used, toolUseAttempt);
+
         var hasReplace = TryComp(repairable, out RMCRepairableReplaceComponent? replace);
 
         if (!TryComp(repairable, out DamageableComponent? damageable))
