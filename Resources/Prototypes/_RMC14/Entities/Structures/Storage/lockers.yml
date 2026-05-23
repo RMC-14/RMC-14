@@ -104,6 +104,26 @@
     access: [["RMCAccessWeYa"]]
 
 - type: entity
+  parent: CMBaseStructure
+  id: RMCFloorSafe
+  name: floor safe
+  description: A concealed floor safe for storing valuables and confidential material.
+  suffix: Intel
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/floor_safe.rsi
+    state: closed
+  - type: InteractionOutline
+  - type: Physics
+    canCollide: false
+  - type: Lock
+  - type: IntelSafeCandidate
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
+
+- type: entity
   parent: CMLockerBase
   id: CMLockerStaff
   name: staff officer's locker

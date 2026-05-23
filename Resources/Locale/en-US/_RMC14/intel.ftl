@@ -102,6 +102,8 @@ ent-RMCSigintTerminal = SIGINT terminal
     .desc = A signals intelligence terminal used to decrypt and upload recovered data disks.
 ent-RMCIntelDataTerminal = data terminal
     .desc = A colony data terminal containing encrypted intelligence files.
+ent-RMCFloorSafe = floor safe
+    .desc = A concealed floor safe for storing valuables and confidential material.
 
 rmc-intel-data-disk-uploaded = {$baseName} (uploaded)
 rmc-intel-color-red = red
