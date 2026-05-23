@@ -312,6 +312,12 @@
     slots:
     - MASK
     - EYES
+  - type: Tag
+    tags:
+    - RMCPrescriptionGlasses
+
+- type: Tag
+  id: RMCPrescriptionGlasses
 
 - type: entity
   parent: RMCGlassesMarineRpg
