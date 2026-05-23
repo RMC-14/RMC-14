@@ -389,11 +389,14 @@ public sealed class RMCWeatherSystem : EntitySystem
             return;
         }
 
-        ent.Comp.EventRemaining -= delta;
-        if (ent.Comp.EventRemaining <= TimeSpan.Zero)
+        if (weatherEvent.Duration > TimeSpan.Zero)
         {
-            EndWeather(ent);
-            return;
+            ent.Comp.EventRemaining -= delta;
+            if (ent.Comp.EventRemaining <= TimeSpan.Zero)
+            {
+                EndWeather(ent);
+                return;
+            }
         }
 
         ent.Comp.LightningCooldown -= delta;
@@ -440,7 +443,8 @@ public sealed class RMCWeatherSystem : EntitySystem
         ent.Comp.AdminForcedEvent = false;
         ent.Comp.WarningRemaining = ent.Comp.WarnTime;
         ent.Comp.State = RMCWeatherCycleState.Warning;
-        SendWeatherWarning(ent, ent.Comp.WeatherEvents[eventIndex]);
+        if (ent.Comp.WarningRemaining > TimeSpan.Zero)
+            SendWeatherWarning(ent, ent.Comp.WeatherEvents[eventIndex]);
         Dirty(ent);
 
         if (ent.Comp.WarningRemaining <= TimeSpan.Zero)
@@ -454,7 +458,8 @@ public sealed class RMCWeatherSystem : EntitySystem
         ent.Comp.AdminForcedEvent = adminForced;
         ent.Comp.WarningRemaining = skipWarning ? TimeSpan.Zero : ent.Comp.WarnTime;
         ent.Comp.State = RMCWeatherCycleState.Warning;
-        SendWeatherWarning(ent, weatherEvent);
+        if (ent.Comp.WarningRemaining > TimeSpan.Zero)
+            SendWeatherWarning(ent, weatherEvent);
         Dirty(ent);
 
         if (ent.Comp.WarningRemaining <= TimeSpan.Zero)
@@ -488,7 +493,9 @@ public sealed class RMCWeatherSystem : EntitySystem
         }
 
         var mapId = Transform(ent).MapID;
-        var endTime = _timing.CurTime + weatherEvent.Duration;
+        var endTime = weatherEvent.Duration > TimeSpan.Zero
+            ? _timing.CurTime + weatherEvent.Duration
+            : (TimeSpan?) null;
         ent.Comp.State = RMCWeatherCycleState.Running;
         ent.Comp.CurrentScreenOverlay = weatherEvent.ScreenOverlay;
         ent.Comp.EventRemaining = weatherEvent.Duration;
@@ -502,7 +509,11 @@ public sealed class RMCWeatherSystem : EntitySystem
         _weather.SetWeather(mapId, weatherProto, endTime);
         Dirty(ent);
 
-        var ev = new RMCWeatherStartedEvent(mapId, GetEventDisplayName(weatherEvent), weatherEvent.Duration, adminForced);
+        var ev = new RMCWeatherStartedEvent(
+            mapId,
+            GetEventDisplayName(weatherEvent),
+            weatherEvent.Duration > TimeSpan.Zero ? weatherEvent.Duration : null,
+            adminForced);
         RaiseLocalEvent(ref ev);
     }
 

@@ -148,8 +148,12 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
     private bool IsExposedToWeather(EntityUid player, TransformComponent playerXform, EntityUid gridUid)
     {
         // Match server exposure checks: Robust weather tile first, then RMC partial blockers.
-        if (!_entity.TryGetComponent(gridUid, out MapGridComponent? grid) ||
-            !_map.TryGetTileRef(gridUid, grid, playerXform.Coordinates, out var tile))
+        var moverCoords = _transform.GetMoverCoordinates(player, playerXform);
+
+        if (_transform.GetGrid(moverCoords) is not { } moverGridUid ||
+            moverGridUid != gridUid ||
+            !_entity.TryGetComponent(gridUid, out MapGridComponent? grid) ||
+            !_map.TryGetTileRef(gridUid, grid, moverCoords, out var tile))
         {
             return false;
         }
@@ -158,7 +162,7 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         if (!_weather.CanWeatherAffect(gridUid, grid, tile, roof))
             return false;
 
-        var playerMapPos = _transform.GetMapCoordinates(player, playerXform).Position;
+        var playerMapPos = _transform.ToMapCoordinates(moverCoords).Position;
         return !IsRMCWeatherBlocked(playerXform.MapID, playerMapPos);
     }
 
