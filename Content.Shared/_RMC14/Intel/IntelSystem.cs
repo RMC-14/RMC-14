@@ -692,7 +692,7 @@ public sealed class IntelSystem : EntitySystem
     private void ShowClue(EntityUid target, IntelCluesComponent clues, EntityUid user, bool storeGlobal)
     {
         var clue = GetClueMessage(target, clues);
-        var msg = Loc.GetString("rmc-intel-clue-found", ("clue", clue));
+        var msg = Loc.GetString(storeGlobal ? "rmc-intel-clue-uploaded" : "rmc-intel-clue-found", ("clue", clue));
         _rmcChat.ChatMessageToOne(msg, user);
         _popup.PopupEntity(clue, target, user, PopupType.Medium);
 
