@@ -19,6 +19,7 @@ public sealed partial class XenoAcidBlastComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan Activation = TimeSpan.Zero;
 
+    // TODO RMC14 remove this field and implement prediction properly in XenoAcidBlastSystem.
     [DataField, AutoNetworkedField]
     public bool Activated;
 
@@ -35,7 +36,7 @@ public sealed partial class XenoAcidBlastComponent : Component
     public TimeSpan AcidDuration = TimeSpan.FromSeconds(20);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan AcidProlongDuration = TimeSpan.FromSeconds(5);
+    public TimeSpan AcidProlongDuration = TimeSpan.FromSeconds(10);
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier AcidDamage = new();
@@ -45,6 +46,9 @@ public sealed partial class XenoAcidBlastComponent : Component
 
     [DataField, AutoNetworkedField]
     public int AcidArmorPiercing = 40;
+
+    [DataField, AutoNetworkedField]
+    public float StructureDamageMultiplier = 1.15f;
 
     [DataField, AutoNetworkedField]
     public float TrappedMobDamageMultiplier = 1.45f;
@@ -65,7 +69,7 @@ public sealed partial class XenoAcidBlastComponent : Component
     public SoundSpecifier SizzleSound = new SoundCollectionSpecifier("XenoAcidSizzle");
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier ExplosionSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/meteorimpact.ogg");
+    public SoundSpecifier? ExplosionSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/meteorimpact.ogg");
 
     [DataField, AutoNetworkedField]
     public EntProtoId SmokeEffect = "XenoAcidExplosionEffect";

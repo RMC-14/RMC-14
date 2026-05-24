@@ -38,14 +38,11 @@ public sealed class XenoAcidBlastSystem : EntitySystem
 
     public override void Initialize()
     {
-        base.Initialize();
         SubscribeLocalEvent<XenoAcidBlastComponent, ComponentInit>(OnBlastInit);
     }
 
     public override void Update(float frameTime)
     {
-        base.Update(frameTime);
-
         var query = EntityQueryEnumerator<XenoAcidBlastComponent>();
         while (query.MoveNext(out var uid, out var blast))
         {
@@ -65,7 +62,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         Dirty(ent.Owner, ent.Comp);
         if (!_net.IsClient)
         {
-            var telegraph = PredictedSpawnAtPosition(ent.Comp.TelegraphEffect, Transform(ent.Owner).Coordinates);
+            var telegraph = SpawnAtPosition(ent.Comp.TelegraphEffect, Transform(ent.Owner).Coordinates);
             _transform.SetParent(telegraph, ent.Owner);
         }
     }
@@ -82,11 +79,8 @@ public sealed class XenoAcidBlastSystem : EntitySystem
 
         if (!_net.IsClient)
         {
-            _audio.PlayPredicted(ent.Comp.ExplosionSound,
-                coords,
-                ent.Owner,
-                ent.Comp.ExplosionSound.Params.WithVolume(-10f));
-            PredictedSpawnAtPosition(ent.Comp.SmokeEffect, coords);
+            _audio.PlayPvs(ent.Comp.ExplosionSound, coords);
+            SpawnAtPosition(ent.Comp.SmokeEffect, coords);
         }
 
         var hits = ProcessBlastHits(ent);
@@ -94,13 +88,6 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         if (!_net.IsClient && hits > 0 && ent.Comp.Attached is { } attachedXeno)
         {
             RefreshCooldowns(attachedXeno, hits, ent.Comp);
-
-            // Reset action icon and apply cooldown on the caster
-            foreach (var action in _actions.GetActions(attachedXeno))
-            {
-                if (_actions.GetEvent(action) is XenoAcidMineActionEvent)
-                    _actions.SetIcon(action.AsNullable(), GetActionIcon(attachedXeno));
-            }
         }
 
         if (_net.IsClient && !IsClientSide(ent))
@@ -129,7 +116,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
 
             _audio.PlayPredicted(
                 ent.Comp.SizzleSound,
-                Transform(target).Coordinates,
+                target,
                 null,
                 ent.Comp.SizzleSound.Params.WithVolume(-10f));
 
@@ -172,7 +159,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         var damageTarget = ResolveDamageTarget(target);
         var structureDamage = ent.Comp.Empowered
             ? ent.Comp.BaseDamage * ent.Comp.EmpoweredStructureDamageMultiplier
-            : ent.Comp.BaseDamage;
+            : ent.Comp.BaseDamage * ent.Comp.StructureDamageMultiplier;
         _damage.TryChangeDamage(damageTarget, structureDamage, origin: ent.Comp.Attached);
     }
 
@@ -183,7 +170,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         if (ent.Comp.Empowered)
             mobDamage = mobDamage * ent.Comp.EmpoweredMobDamageMultiplier;
 
-        if (HasComp<XenoCaughtInTrapComponent>(target))
+        if (TryComp<XenoCaughtInTrapComponent>(target, out var caught) && caught.Applier == ent.Comp.Attached)
             mobDamage = mobDamage * ent.Comp.TrappedMobDamageMultiplier;
 
         var change = _damage.TryChangeDamage(target, mobDamage, origin: ent.Comp.Attached);
@@ -230,16 +217,6 @@ public sealed class XenoAcidBlastSystem : EntitySystem
             else
                 _actions.SetCooldown(action.AsNullable(), action.Comp.Cooldown.Value.Start, cooldownEnd);
         }
-    }
-
-    private SpriteSpecifier GetActionIcon(EntityUid xeno)
-    {
-        if (TryComp(xeno, out XenoAcidMineComponent? comp))
-            return comp.ActionIcon;
-
-        return new SpriteSpecifier.Rsi(
-            new ResPath("_RMC14/Actions/xeno_actions.rsi"),
-            "acid_mine");
     }
 
     private EntityUid ResolveDamageTarget(EntityUid target)

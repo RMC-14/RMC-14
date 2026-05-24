@@ -2,11 +2,13 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.Actions;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.AcidMine;
 
@@ -19,6 +21,8 @@ public sealed class XenoAcidMineSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+
 
     public override void Initialize()
     {
@@ -74,6 +78,7 @@ public sealed class XenoAcidMineSystem : EntitySystem
 
         if (!_rmcActions.TryUseAction(args))
             return;
+
         args.Handled = true;
 
         var popupSelf = Loc.GetString("rmc-xeno-acid-mine-self");
@@ -83,7 +88,7 @@ public sealed class XenoAcidMineSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var protoId = xeno.Comp.BlastProto;
+        var protoId = xeno.Comp.Empowered ? xeno.Comp.EmpoweredBlastProto : xeno.Comp.BlastProto;
         var center = args.Target.Position.Floored() + Vector2.One / 2;
         var alreadyHit = new HashSet<EntityUid>();
 
@@ -93,15 +98,49 @@ public sealed class XenoAcidMineSystem : EntitySystem
             {
                 var blastUid = Spawn(protoId, new EntityCoordinates(args.Target.EntityId, center + new Vector2(x, y)));
                 var blast = EnsureComp<XenoAcidBlastComponent>(blastUid);
+                if (x != 0 || y != 0)
+                    blast.ExplosionSound = null;
                 blast.Attached = xeno.Owner;
-                blast.Empowered = xeno.Comp.Empowered;
                 blast.AlreadyHit = alreadyHit;
                 Dirty(blastUid, blast);
                 _hive.SetSameHive(xeno.Owner, blastUid);
             }
         }
-
-        xeno.Comp.Empowered = false;
+        UnEmpowerAcidMine(xeno);
         Dirty(xeno);
+    }
+
+
+    //Need a method to empower/unempower the ability on use.
+    private SpriteSpecifier GetActionIcon(EntityUid xeno)
+    {
+        if (TryComp(xeno, out XenoAcidMineComponent? comp))
+            return comp.ActionIcon;
+
+        return new SpriteSpecifier.Rsi(
+            new ResPath("_RMC14/Actions/xeno_actions.rsi"),
+            "acid_mine");
+    }
+
+    public void UnEmpowerAcidMine(Entity<XenoAcidMineComponent> xeno)
+    {
+        xeno.Comp.Empowered = false;
+        // Reset action icon
+        foreach (var action in _actions.GetActions(xeno.Owner))
+        {
+            if (_actions.GetEvent(action) is XenoAcidMineActionEvent)
+                _actions.SetIcon(action.AsNullable(), xeno.Comp.ActionIcon);
+        }
+    }
+
+    public void EmpowerAcidMine(Entity<XenoAcidMineComponent> xeno)
+    {
+        xeno.Comp.Empowered = true;
+        Dirty(xeno);
+        foreach (var action in _actions.GetActions(xeno.Owner))
+        {
+            if (_actions.GetEvent(action) is XenoAcidMineActionEvent)
+                _actions.SetIcon(action.AsNullable(), xeno.Comp.ActionIconEmpowered);
+        }
     }
 }

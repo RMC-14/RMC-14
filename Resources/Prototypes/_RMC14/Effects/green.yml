@@ -37,12 +37,15 @@
 
 - type: entity
   parent: RMCEffectXenoTelegraphGreen
-  id: RMCEffectXenoTelegraphRedSlow
+  id: RMCEffectXenoTelegraphRedPulse
   categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
     lifetime: 1.2
   - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/xeno_boiler_telegraph.rsi
+    state: boiler_telegraph
     color: "#A50824"
 
 - type: entity

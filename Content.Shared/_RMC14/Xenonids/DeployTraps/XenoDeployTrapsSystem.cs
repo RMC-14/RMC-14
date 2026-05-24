@@ -39,6 +39,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly XenoAcidMineSystem _acidMine = default!;
 
     public override void Initialize()
     {
@@ -91,9 +92,6 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
         }
 
         if (!_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), xeno.Comp.PlasmaCost))
-            return;
-
-        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -180,12 +178,8 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             return;
 
         if (TryComp(xeno.Owner, out XenoAcidMineComponent? acidMine))
-            acidMine.Empowered = true;
+            _acidMine.EmpowerAcidMine((xeno.Owner, acidMine));
+
         _popup.PopupPredicted(Loc.GetString("rmc-xeno-deploy-traps-empower"), xeno, xeno, PopupType.Medium);
-        foreach (var action in _actions.GetActions(xeno.Owner))
-        {
-            if (_actions.GetEvent(action) is XenoAcidMineActionEvent)
-                _actions.SetIcon(action.AsNullable(), acidMine?.ActionIconEmpowered);
-        }
     }
 }

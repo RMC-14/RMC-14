@@ -21,7 +21,6 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
 
     public override void Initialize()
     {
-        base.Initialize();
         SubscribeLocalEvent<XenoDeployedTrapsComponent, DamageChangedEvent>(OnTrapDamaged);
         SubscribeLocalEvent<XenoDeployedTrapsComponent, StepTriggerAttemptEvent>(OnStepTriggerAttempt);
         SubscribeLocalEvent<XenoDeployedTrapsComponent, StepTriggeredOnEvent>(OnStepTriggered);
@@ -65,7 +64,7 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
         while (query.MoveNext(out var uid, out var caught))
         {
             if (_timing.CurTime >= caught.ExpireTime)
-                RemComp<XenoCaughtInTrapComponent>(uid);
+                RemCompDeferred<XenoCaughtInTrapComponent>(uid);
         }
     }
 }

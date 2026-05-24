@@ -14,16 +14,12 @@ public sealed class XenoAdrenalineSurgeSystem : EntitySystem
 
     public override void Initialize()
     {
-        base.Initialize();
-
         SubscribeLocalEvent<XenoAdrenalineSurgeComponent, DamageModifyAfterResistEvent>(OnDamageTaken);
         SubscribeLocalEvent<XenoAdrenalineSurgeComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
     }
 
     public override void Update(float frameTime)
     {
-        base.Update(frameTime);
-
         var query = EntityQueryEnumerator<XenoAdrenalineSurgeComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -41,11 +37,7 @@ public sealed class XenoAdrenalineSurgeSystem : EntitySystem
                 {
                     comp.IsUsable = true;
 
-                    if (!comp.ReadyMessageSent)
-                    {
-                        comp.ReadyMessageSent = true;
-                        _popup.PopupEntity(Loc.GetString("rmc-xeno-adrenaline-surge-ready"), uid, uid);
-                    }
+                    _popup.PopupClient(Loc.GetString("rmc-xeno-adrenaline-surge-ready"), uid, uid);
                 }
             }
         }
@@ -66,7 +58,6 @@ public sealed class XenoAdrenalineSurgeSystem : EntitySystem
     {
         xeno.Comp.IsSurging = true;
         xeno.Comp.IsUsable = false;
-        xeno.Comp.ReadyMessageSent = false;
         xeno.Comp.SurgeEndTime = _timing.CurTime + xeno.Comp.SurgeDuration;
         Dirty(xeno);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-adrenaline-surge-start"), xeno, xeno);
