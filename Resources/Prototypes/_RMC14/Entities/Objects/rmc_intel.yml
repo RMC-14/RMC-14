@@ -184,7 +184,7 @@
   parent: RMCCommunicationsConsoleBase
   id: RMCComputerIntel
   name: intel computer
-  description: An UNMC Intel Computer for data cataloguing and distribution.
+  description: An intel computer for data cataloguing and distribution.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
@@ -196,7 +196,7 @@
   parent: RMCCommunicationsConsoleBase
   id: RMCIntelDatabaseComputer
   name: intel database computer
-  description: An UNMC Intel Database Computer used to review catalogued intelligence objectives.
+  description: An intel database computer used for consulting the current intel database.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
@@ -213,7 +213,7 @@
   parent: RMCCommunicationsConsoleBase
   id: RMCSigintTerminal
   name: SIGINT terminal
-  description: A signals intelligence terminal used to decrypt and upload recovered data disks.
+  description: A computer capable of uploading data to the intelligence database. It has a disk reader slot built into the bottom, as well.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
@@ -236,7 +236,7 @@
   parent: RMCCommunicationsConsoleBase
   id: RMCIntelDataTerminal
   name: data terminal
-  description: A colony data terminal containing encrypted intelligence files.
+  description: A computer data terminal with an incomprehensible label.
   suffix: Intel
   components:
   - type: Sprite
