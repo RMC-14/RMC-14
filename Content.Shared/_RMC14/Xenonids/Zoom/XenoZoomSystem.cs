@@ -101,12 +101,18 @@ public sealed class XenoZoomSystem : EntitySystem
 
     private void OnXenoZoomGetEyePvsScale(Entity<XenoZoomComponent> ent, ref GetEyePvsScaleEvent args)
     {
-        // Scale is additive, i.e. adding .2 would increase PVS by 20%, so we subtract 1 from the zoom levels first.
-        // TODO RMC14 For now we divide by 2 in order to reduce how much "extra" overhead PVS we have outside of viewport range,
-        // because scale also scales up the default overhead amount, and we don't actually want the overhead scaled.
-        // Dividing by 2 only works for lower zoom levels (under 2). If we get higher zoom levels, come back to this and fix it.
+        // We try to scale up the PVS radius while leaving the same amount of tiles as overhead.
+        // pvsOverheadEstimate estimates what portion of the viewport is added on as "overhead" for PVS purposes.
+        // i.e. an estimate of 0.25 means the PVS radius is 25% larger than the actual viewport radius.
+        // A smaller estimate results in a LARGER pvs radius scale up, because there's less overhead proportionally.
+        // TODO RMC14 calculate the overhead from CVars instead of hardcoding it here.
         if (ent.Comp.Running)
-            args.Scale += Math.Max(0, Math.Max(ent.Comp.Zoom.X - 1, ent.Comp.Zoom.Y - 1)) / 2;
+        {
+            const float pvsOverheadEstimate = 0.25f;
+            var scale = (Math.Max(ent.Comp.Zoom.X, ent.Comp.Zoom.Y) + pvsOverheadEstimate) / (1 + pvsOverheadEstimate);
+            // args.Scale is added to the scale, not multiplied, so we have to subtract 1 and make sure we don't scale down.
+            args.Scale = Math.Max(0, scale - 1);
+        }
     }
 
     private void OnXenoZoomRefreshSpeed(Entity<XenoZoomComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
