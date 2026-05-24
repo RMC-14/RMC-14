@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/22/2026 18:07:36
-  entityCount: 46
+  time: 05/24/2026 17:10:20
+  entityCount: 57
 maps: []
 grids:
 - 1
@@ -100,6 +100,42 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
+- proto: CMBarricadeSandbag
+  entities:
+  - uid: 56
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,4.5
+      parent: 1
+- proto: CMChair
+  entities:
+  - uid: 54
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,4.5
+      parent: 1
+- proto: CMIV
+  entities:
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 5.5,4.5
+      parent: 1
+- proto: CMRollerBed
+  entities:
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 6.490823,4.517371
+      parent: 1
 - proto: CMSpawnPointSurvivor
   entities:
   - uid: 31
@@ -194,6 +230,13 @@ entities:
     - type: Transform
       pos: 1.5,1.5
       parent: 1
+- proto: RMCBarrelWhite
+  entities:
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 8.667906,3.9440558
+      parent: 1
 - proto: RMCBarricadeWood
   entities:
   - uid: 8
@@ -219,12 +262,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,1.5
-      parent: 1
-  - uid: 12
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.5,4.5
       parent: 1
   - uid: 13
     components:
@@ -355,6 +392,44 @@ entities:
     components:
     - type: Transform
       pos: 1.8009164,3.908195
+      parent: 1
+- proto: RMCPlankWood1
+  entities:
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 6.0949893,0.27484083
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 6.5637393,0.900275
+      parent: 1
+- proto: RMCSecureCaseDouble
+  entities:
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 8.178323,4.2463493
+      parent: 1
+- proto: RMCSecureCaseSmall
+  entities:
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 7.5,4.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 8.542906,4.725849
+      parent: 1
+- proto: RMCSecureCaseStrapped
+  entities:
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 0.5,3.5
       parent: 1
 - proto: RMCSpawnerCorpse
   entities:
