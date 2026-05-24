@@ -2833,3 +2833,14 @@
     state: vera_williams
   - type: PatronFigurine
     id: e27855b4-b1a5-48a5-8d25-2feede95fb8e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAutumnCocktailSheauvern
+  name: Autumn 'Cocktail' Sheauvern figurine
+  description: "Try Cocktail's Cocktail™ today! Just add gauze, and they'll be walking in no time!"
+  components:
+  - type: Sprite
+    state: autumn_cocktail_sheauvern
+  - type: PatronFigurine
+    id: 5a057ad2-5f45-41fd-8104-14d0ef3cf715
