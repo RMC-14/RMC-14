@@ -2844,3 +2844,14 @@
     state: autumn_cocktail_sheauvern
   - type: PatronFigurine
     id: 5a057ad2-5f45-41fd-8104-14d0ef3cf715
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTraces-The-Constellations
+  name: Traces-The-Constellations figurine
+  description: "\"If this is the lesson, it’s a rough one.\""
+  components:
+  - type: Sprite
+    state: traces-the-constellations
+  - type: PatronFigurine
+    id: d74bcdc9-2eb2-4a95-b6fb-a0b9f15de807
