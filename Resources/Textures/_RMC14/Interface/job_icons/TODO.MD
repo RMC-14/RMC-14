@@ -41,7 +41,7 @@ xeno
 ~~CLF~~
 ~~CMB~~
 ~~Colonist Lobby~~
-Freelancer
+~~Freelancer~~
 Halcyon
 Marsoc
 MISC

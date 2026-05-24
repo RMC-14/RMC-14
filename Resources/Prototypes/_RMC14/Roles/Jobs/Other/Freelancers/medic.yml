@@ -117,5 +117,5 @@
   parent: CMJobIconBase
   id: RMCJobIconFreelancerMedic
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/freelancer
     state: free_med
