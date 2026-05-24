@@ -61,7 +61,7 @@ public sealed class MutinySystem : SharedMutinySystem
             {
                 Text = "Make mutineer",
                 Category = VerbCategory.Antag,
-                Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/job_icons"),
+                Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/job_icons/Misc/mutiny.rsi"),
                     "hudmutineer"),
                 Act = () => { EnsureComp<MutineerComponent>(args.Target); },
                 Impact = LogImpact.High,
@@ -77,7 +77,7 @@ public sealed class MutinySystem : SharedMutinySystem
                 Text = "Make mutineer leader",
                 Category = VerbCategory.Antag,
                 // Use the regular mutineer icon for the admin verb until a unique leader icon exists
-                Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/job_icons"),
+                Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/job_icons/Misc/mutiny.rsi"),
                     "hudmutineerleader"),
                 Act = () => { EnsureComp<MutineerLeaderComponent>(args.Target); },
                 Impact = LogImpact.High,
