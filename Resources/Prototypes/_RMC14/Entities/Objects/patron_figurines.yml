@@ -2822,3 +2822,14 @@
     state: lumen_losinfob_lamplight
   - type: PatronFigurine
     id: 9c07cea8-55f6-42ee-a1c3-0ef6051942d0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVeraWilliams
+  name: Vera Williams figurine
+  description: "Captured in her finest outdoors attire, this figurine reminds everyone that looking like a leader is far more cost-effective than actually managing the situation."
+  components:
+  - type: Sprite
+    state: vera_williams
+  - type: PatronFigurine
+    id: e27855b4-b1a5-48a5-8d25-2feede95fb8e
