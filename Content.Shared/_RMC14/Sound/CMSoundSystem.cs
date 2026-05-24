@@ -126,43 +126,6 @@ public sealed class CMSoundSystem : EntitySystem
         ent.Comp.LastSoundTime = _timing.CurTime;
     }
 
-    public override void Update(float frameTime)
-    {
-        if (_net.IsClient)
-            return;
-
-        var time = _timing.CurTime;
-        var random = EntityQueryEnumerator<RandomSoundComponent>();
-        while (random.MoveNext(out var uid, out var comp))
-        {
-            if (_mobState.IsDead(uid) || time <= comp.PlayAt)
-                continue;
-
-            comp.PlayAt = time + _random.Next(comp.Min, comp.Max);
-            Dirty(uid, comp);
-
-            _audio.PlayPvs(comp.Sound, uid);
-        }
-
-        var soundOnDrag = EntityQueryEnumerator<SoundOnDragComponent, BeingPulledComponent>();
-        while (soundOnDrag.MoveNext(out var uid, out var comp, out var _))
-        {
-            if (!TryGetSound(uid, comp, Transform(uid), out var sound))
-                continue;
-
-            var timeFromLastSound = _timing.CurTime - comp.LastSoundTime;
-            // Pitch up or down slightly based on roughly how fast the drag is.
-            var pitchAdjustment = (float)Math.Clamp(13 / (12 + timeFromLastSound.TotalSeconds) - 1, -.05, .05);
-
-            comp.LastSoundTime = _timing.CurTime;
-
-            var audioParams = sound.Params
-                .WithPitchScale(1 + pitchAdjustment);
-
-            _audio.PlayPredicted(sound, uid, uid, audioParams);
-        }
-    }
-
     private bool TryGetSound(
         EntityUid uid,
         SoundOnDragComponent soundOnDrag,
@@ -199,5 +162,42 @@ public sealed class CMSoundSystem : EntitySystem
 
         sound = soundOnDrag.Sound;
         return sound != null;
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+        var random = EntityQueryEnumerator<RandomSoundComponent>();
+        while (random.MoveNext(out var uid, out var comp))
+        {
+            if (_mobState.IsDead(uid) || time <= comp.PlayAt)
+                continue;
+
+            comp.PlayAt = time + _random.Next(comp.Min, comp.Max);
+            Dirty(uid, comp);
+
+            _audio.PlayPvs(comp.Sound, uid);
+        }
+
+        var soundOnDrag = EntityQueryEnumerator<SoundOnDragComponent, BeingPulledComponent>();
+        while (soundOnDrag.MoveNext(out var uid, out var comp, out var _))
+        {
+            if (!TryGetSound(uid, comp, Transform(uid), out var sound))
+                continue;
+
+            var timeFromLastSound = _timing.CurTime - comp.LastSoundTime;
+            // Pitch up or down slightly based on roughly how fast the drag is.
+            var pitchAdjustment = (float)Math.Clamp(13 / (12 + timeFromLastSound.TotalSeconds) - 1, -.05, .05);
+
+            comp.LastSoundTime = _timing.CurTime;
+
+            var audioParams = sound.Params
+                .WithPitchScale(1 + pitchAdjustment);
+
+            _audio.PlayPredicted(sound, uid, uid, audioParams);
+        }
     }
 }
