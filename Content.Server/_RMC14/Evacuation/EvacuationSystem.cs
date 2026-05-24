@@ -58,7 +58,7 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
         if (GetEvacuationProgress() < 100 &&
             crashLandChance > 0 &&
             _random.Prob(crashLandChance) &&
-            _crashLand.TryGetCrashLandLocation(out var location))
+            _crashLand.TryGetCrashLandLocation(true, out var location))
         {
             children = gridTransform.ChildEnumerator;
             while (children.MoveNext(out var child))
