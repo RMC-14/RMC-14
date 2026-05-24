@@ -3,6 +3,7 @@
 ~~X~~ means its done
 The list will mimic file path. If you change something update it here please.
 
+decide final file structure (run through Whisper most likely)
 Make sure no unneeded .rsi ending
 test and test and test (I will spawn every role in if I have to)
 
@@ -37,7 +38,7 @@ whiskey_outpost
 xeno
 
 **CODE SIDE RENAME/UPDATE NEEDS DONE FOR EACH PNG**
-CLF
+~~CLF~~
 CMB
 Colonist Lobby
 Freelancer

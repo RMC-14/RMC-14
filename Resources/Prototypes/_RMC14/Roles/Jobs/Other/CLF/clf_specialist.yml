@@ -111,5 +111,5 @@
   parent: CMJobIconBase
   id: RMCJobIconCLFSpecialist
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/CLF
     state: clf_spec

@@ -443,7 +443,7 @@
     canSupplyDrop: false
     group: CLF
     leaderIcon:
-      sprite: _RMC14/Interface/job_icons
+      sprite: _RMC14/Interface/job_icons/CLF
       state: clf_sl
 
 - type: entity
