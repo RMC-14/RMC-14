@@ -12,6 +12,7 @@ rmc-intel-manuals = Manuals
 rmc-intel-data = Data
 rmc-intel-retrieve = Retrieve
 rmc-intel-misc = Miscellaneous
+rmc-intel-personal = Personal Clues
 
 ent-RMCIntelBase = intel item
 ent-RMCIntelPaperScrap = paper scrap
@@ -125,6 +126,7 @@ rmc-intel-color-bloodied-blue = bloodied blue
 rmc-intel-color-unknown = unmarked
 rmc-intel-clue-found = You make out something about {$clue}.
 rmc-intel-clue-uploaded = ...something about "{$clue}"...
+rmc-intel-personal-clues-added = New clues have been added to your personal clues.
 rmc-intel-clue-label-number = #{$number}
 rmc-intel-clue-label-serial = serial #{$serial}
 rmc-intel-clue-label-unmarked = no visible label

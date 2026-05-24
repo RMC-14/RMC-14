@@ -146,6 +146,8 @@ public sealed class IntelSystem : EntitySystem
         "RMCIntelDataDisk15",
     ];
 
+    private static readonly TimeSpan PersonalCluePopupDelay = TimeSpan.FromSeconds(1.25);
+
     private readonly Dictionary<IntelSpawnerType, float> _paperScrapChances = new()
     {
         [Close] = 20, [Medium] = 5, [Far] = 2, [Science] = 10,
@@ -447,7 +449,8 @@ public sealed class IntelSystem : EntitySystem
         read.Readers.Add(user);
         Dirty(ent, read);
 
-        ShowObjectiveClues(ent, user, false);
+        if (ShowObjectiveClues(ent, user, false) > 0)
+            Timer.Spawn(PersonalCluePopupDelay, () => ShowPersonalCluesAddedPopup(user));
 
         if (TryComp(ent, out IntelRetrieveItemObjectiveComponent? retrieve) &&
             retrieve.State == IntelObjectiveState.Inactive)
@@ -493,6 +496,7 @@ public sealed class IntelSystem : EntitySystem
         {
             var tree = EnsureTechTree().Comp.Tree;
             ent.Comp.Tree = tree;
+            ent.Comp.PersonalClues = GetPersonalClues(actor);
             Dirty(ent);
         }
 
@@ -677,29 +681,37 @@ public sealed class IntelSystem : EntitySystem
             StopPopup(ref args);
     }
 
-    private void ShowObjectiveClues(EntityUid source, EntityUid user, bool storeGlobal)
+    private int ShowObjectiveClues(EntityUid source, EntityUid user, bool storeGlobal)
     {
         if (!TryComp(source, out IntelUnlocksComponent? unlocks))
-            return;
+            return 0;
 
+        var shown = 0;
         foreach (var unlock in unlocks.Unlocks)
         {
             if (TryComp(unlock, out IntelCluesComponent? clues))
-                ShowClue(unlock, clues, user, storeGlobal);
+                shown += ShowClue(unlock, clues, user, storeGlobal) ? 1 : 0;
         }
+
+        return shown;
     }
 
-    private void ShowClue(EntityUid target, IntelCluesComponent clues, EntityUid user, bool storeGlobal)
+    private bool ShowClue(EntityUid target, IntelCluesComponent clues, EntityUid user, bool storeGlobal)
     {
         var clue = GetClueMessage(target, clues);
-        var msg = Loc.GetString(storeGlobal ? "rmc-intel-clue-uploaded" : "rmc-intel-clue-found", ("clue", clue));
+
+        if (!storeGlobal)
+            return AddPersonalClue(user, target, clue);
+
+        var msg = Loc.GetString("rmc-intel-clue-uploaded", ("clue", clue));
         _rmcChat.ChatMessageToOne(msg, user);
         _popup.PopupEntity(clue, target, user, PopupType.Medium);
 
-        if (!storeGlobal ||
-            clues.Category is not { } category)
+        RemovePersonalClueFromAll(target);
+
+        if (clues.Category is not { } category)
         {
-            return;
+            return false;
         }
 
         var tree = EnsureTechTree();
@@ -707,6 +719,65 @@ public sealed class IntelSystem : EntitySystem
         clueGroup[GetNetEntity(target)] = clue;
         Dirty(tree);
         UpdateTree(tree);
+        return true;
+    }
+
+    private Dictionary<NetEntity, string> GetPersonalClues(EntityUid user)
+    {
+        if (!TryComp(user, out IntelKnowledgeComponent? knowledge))
+            return new Dictionary<NetEntity, string>();
+
+        return new Dictionary<NetEntity, string>(knowledge.PersonalClues);
+    }
+
+    private bool AddPersonalClue(EntityUid user, EntityUid target, string clue)
+    {
+        var knowledge = EnsureComp<IntelKnowledgeComponent>(user);
+        var targetNet = GetNetEntity(target);
+        var added = !knowledge.PersonalClues.TryGetValue(targetNet, out var existing) ||
+                    existing != clue;
+
+        knowledge.PersonalClues[targetNet] = clue;
+        Dirty(user, knowledge);
+        SyncPersonalClues(user, knowledge);
+        return added;
+    }
+
+    private void SyncPersonalClues(EntityUid user, IntelKnowledgeComponent knowledge)
+    {
+        if (!TryComp(user, out ViewIntelObjectivesComponent? view))
+            return;
+
+        view.PersonalClues = new Dictionary<NetEntity, string>(knowledge.PersonalClues);
+        Dirty(user, view);
+    }
+
+    private void RemovePersonalClueFromAll(EntityUid target)
+    {
+        var targetNet = GetNetEntity(target);
+        var query = EntityQueryEnumerator<IntelKnowledgeComponent>();
+        while (query.MoveNext(out var uid, out var knowledge))
+        {
+            if (!knowledge.PersonalClues.Remove(targetNet))
+                continue;
+
+            Dirty(uid, knowledge);
+            SyncPersonalClues(uid, knowledge);
+        }
+    }
+
+    private void ShowPersonalCluesAddedPopup(EntityUid user)
+    {
+        if (TerminatingOrDeleted(user))
+            return;
+
+        if (!TryComp(user, out IntelKnowledgeComponent? knowledge) ||
+            knowledge.PersonalClues.Count == 0)
+        {
+            return;
+        }
+
+        _popup.PopupEntity(Loc.GetString("rmc-intel-personal-clues-added"), user, user, PopupType.Medium);
     }
 
     private string GetClueMessage(EntityUid target, IntelCluesComponent clues)
@@ -1112,6 +1183,8 @@ public sealed class IntelSystem : EntitySystem
 
     private void RemoveClue(Entity<IntelTechTreeComponent> tree, EntityUid target)
     {
+        RemovePersonalClueFromAll(target);
+
         if (!TryComp(target, out IntelCluesComponent? clues) ||
             clues.Category is not { } category ||
             !tree.Comp.Tree.Clues.TryGetValue(category, out var clueGroup))
@@ -1832,13 +1905,7 @@ public sealed class IntelSystem : EntitySystem
 
                     tree ??= EnsureTechTree();
                     tree.Value.Comp.Tree.RetrieveItems.Current++;
-                    if (TryComp(intel, out IntelCluesComponent? cluesComp) &&
-                        cluesComp.Category is { } category &&
-                        tree.Value.Comp.Tree.Clues.TryGetValue(category, out var clues))
-                    {
-                        clues.Remove(GetNetEntity(intel));
-                    }
-
+                    RemoveClue(tree.Value, intel);
                     AddPoints(tree.Value, intel.Comp.Value);
 
                     RemComp<ActiveIntelPositionComponent>(intel);

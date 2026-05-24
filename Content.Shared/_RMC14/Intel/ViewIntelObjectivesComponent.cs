@@ -17,4 +17,7 @@ public sealed partial class ViewIntelObjectivesComponent : Component
 
     [DataField, AutoNetworkedField]
     public IntelTechTree Tree = new();
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<NetEntity, string> PersonalClues = new();
 }

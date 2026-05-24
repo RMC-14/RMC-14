@@ -40,33 +40,42 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         _window.ColonyPowerLabel.Text = Loc.GetString("rmc-ui-intel-colony-status", ("online", tree.ColonyPower));
 
         _window.CluesContainer.DisposeAllChildren();
+        if (comp.PersonalClues.Count > 0)
+            AddClueTab("rmc-intel-personal", comp.PersonalClues.Values);
+
         foreach (var (category, clues) in comp.Tree.Clues)
+            AddClueTab(category, clues.Values);
+    }
+
+    private void AddClueTab(string category, IEnumerable<string> clues)
+    {
+        if (_window is not { IsOpen: true })
+            return;
+
+        var scroll = new ScrollContainer
         {
-            var scroll = new ScrollContainer
-            {
-                HScrollEnabled = false,
-                VScrollEnabled = true,
-            };
+            HScrollEnabled = false,
+            VScrollEnabled = true,
+        };
 
-            var container = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
-                Margin = new Thickness(4),
-            };
+        var container = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            Margin = new Thickness(4),
+        };
 
-            foreach (var (_, clue) in clues)
+        foreach (var clue in clues)
+        {
+            container.AddChild(new Label
             {
-                container.AddChild(new Label
-                {
-                    Text = clue,
-                    Margin = new Thickness(2, 1, 2, 1),
-                    StyleClasses = { "Label" }
-                });
-            }
-
-            scroll.AddChild(container);
-            _window.CluesContainer.AddChild(scroll);
-            TabContainer.SetTabTitle(scroll, Loc.GetString(category));
+                Text = clue,
+                Margin = new Thickness(2, 1, 2, 1),
+                StyleClasses = { "Label" }
+            });
         }
+
+        scroll.AddChild(container);
+        _window.CluesContainer.AddChild(scroll);
+        TabContainer.SetTabTitle(scroll, Loc.GetString(category));
     }
 }
