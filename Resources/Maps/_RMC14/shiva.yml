@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 05/14/2026 20:33:34
-  entityCount: 17725
+  entityCount: 17726
 maps:
 - 1
 grids:
@@ -50585,6 +50585,11 @@ entities:
     components:
     - type: Transform
       pos: 150.5,153.5
+      parent: 1
+  - uid: 17741
+    components:
+    - type: Transform
+      pos: 125.5,11.5
       parent: 1
 - proto: CMTableWoodenFancy
   entities:
@@ -132799,16 +132804,19 @@ entities:
   - uid: 17738
     components:
     - type: Transform
-      pos: 109.5,75.5
+      rot: 3.141592653589793
+      pos: 112.5,79.5
       parent: 1
   - uid: 17739
     components:
     - type: Transform
-      pos: 123.5,11.5
+      rot: -1.5707963267948966
+      pos: 125.5,11.5
       parent: 1
   - uid: 17740
     components:
     - type: Transform
-      pos: 183.5,140.5
+      rot: 0
+      pos: 188.5,142.5
       parent: 1
 ...

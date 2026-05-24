@@ -200,7 +200,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: terminal1_old
+    state: comm
   - type: InteractionOutline
   - type: UserInterface
     interfaces:
@@ -217,7 +217,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: terminal1
+    state: medlaptop
   - type: InteractionOutline
   - type: ApcPowerReceiver
     powerLoad: 250
@@ -241,7 +241,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: terminal1_old
+    state: medlaptop
   - type: InteractionOutline
   - type: ApcPowerReceiver
     powerLoad: 250

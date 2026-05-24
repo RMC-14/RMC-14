@@ -1,4 +1,3 @@
-﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
@@ -70,24 +69,29 @@ public sealed class IntelSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
-    private static readonly ImmutableArray<char> UppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToImmutableArray();
-    private static readonly ImmutableArray<string> GreekLetters =
-    [
+    private static readonly char[] UppercaseLetters =
+    {
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    };
+
+    private static readonly string[] GreekLetters =
+    {
         "Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta",
         "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho",
         "Sigma", "Tau", "Upsilon", "Phi", "Chi", "Psi", "Omega",
-    ];
+    };
 
-    private static readonly ImmutableArray<(string State, LocId Color)> FolderColors =
-    [
+    private static readonly (string State, LocId Color)[] FolderColors =
+    {
         ("folder_red", "rmc-intel-color-red"),
         ("folder_black", "rmc-intel-color-black"),
         ("folder_blue", "rmc-intel-color-blue"),
         ("folder_yellow", "rmc-intel-color-yellow"),
         ("folder", "rmc-intel-color-white"),
-    ];
+    };
 
-    private static readonly ImmutableDictionary<string, LocId> DiskColors = new Dictionary<string, LocId>
+    private static readonly Dictionary<string, LocId> DiskColors = new()
     {
         ["RMCIntelDataDisk1"] = "rmc-intel-color-grey",
         ["RMCIntelDataDisk2"] = "rmc-intel-color-grey",
@@ -104,7 +108,7 @@ public sealed class IntelSystem : EntitySystem
         ["RMCIntelDataDisk13"] = "rmc-intel-color-cracked-blue",
         ["RMCIntelDataDisk14"] = "rmc-intel-color-cracked-blue",
         ["RMCIntelDataDisk15"] = "rmc-intel-color-bloodied-blue",
-    }.ToImmutableDictionary();
+    };
 
     private static readonly EntProtoId<IntelTechTreeComponent> TechTreeProto = "RMCIntelTechTree";
 
@@ -824,8 +828,9 @@ public sealed class IntelSystem : EntitySystem
             return;
         }
 
-        if (!CanUploadData(ent, args.User, out _))
+        if (!CanUploadData(ent, args.User, out var reason))
         {
+            _popup.PopupClient(reason, ent, args.User, PopupType.MediumCaution);
             args.Handled = true;
             return;
         }
@@ -854,8 +859,11 @@ public sealed class IntelSystem : EntitySystem
             return;
         }
 
-        if (!CanUploadData(ent, user.Value, out _))
+        if (!CanUploadData(ent, user.Value, out var reason))
+        {
+            _popup.PopupEntity(reason, ent, user.Value, PopupType.MediumCaution);
             return;
+        }
 
         if (!AccessMatches(args.Message, ent.Comp.Password))
         {
@@ -1051,7 +1059,6 @@ public sealed class IntelSystem : EntitySystem
         if (!_power.IsPowered(terminal))
         {
             reason = Loc.GetString("rmc-intel-data-terminal-no-power");
-            _popup.PopupEntity(reason, terminal, user, PopupType.MediumCaution);
             return false;
         }
 
@@ -1059,7 +1066,6 @@ public sealed class IntelSystem : EntitySystem
             !tree.Value.Comp.Tree.ColonyCommunications)
         {
             reason = Loc.GetString("rmc-intel-data-terminal-no-comms");
-            _popup.PopupEntity(reason, terminal, user, PopupType.MediumCaution);
             return false;
         }
 
