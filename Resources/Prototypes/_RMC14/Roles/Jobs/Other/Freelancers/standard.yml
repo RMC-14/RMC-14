@@ -114,5 +114,5 @@
   parent: CMJobIconBase
   id: RMCJobIconFreelancerStandard
   icon:
-    sprite: _RMC14/Interface/job_icons/freelancer
+    sprite: _RMC14/Interface/job_icons/freelancer.rsi
     state: free_rfn

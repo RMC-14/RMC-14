@@ -255,7 +255,7 @@
     canSupplyDrop: false
     group: Freelancer
     leaderIcon:
-      sprite: _RMC14/Interface/job_icons/freelancer
+      sprite: _RMC14/Interface/job_icons/freelancer.rsi
       state: free_sl
 
 - type: entity
@@ -443,7 +443,7 @@
     canSupplyDrop: false
     group: CLF
     leaderIcon:
-      sprite: _RMC14/Interface/job_icons/CLF
+      sprite: _RMC14/Interface/job_icons/CLF.rsi
       state: clf_sl
 
 - type: entity

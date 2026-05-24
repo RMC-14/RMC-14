@@ -102,5 +102,5 @@
   parent: CMJobIconBase
   id: RMCJobIconCLFEngineer
   icon:
-    sprite: _RMC14/Interface/job_icons/CLF
+    sprite: _RMC14/Interface/job_icons/CLF.rsi
     state: clf_engi

@@ -41,7 +41,7 @@
       prefix: rmc-job-prefix-freelancer-leader
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/job_icons/freelancer
+        sprite: _RMC14/Interface/job_icons/freelancer.rsi
         state: free_sl
     - type: RMCPointing
     - type: RMCTrackable
@@ -131,5 +131,5 @@
   parent: CMJobIconBase
   id: RMCJobIconFreelancerLeader
   icon:
-    sprite: _RMC14/Interface/job_icons/freelancer
+    sprite: _RMC14/Interface/job_icons/freelancer.rsi
     state: free_sl

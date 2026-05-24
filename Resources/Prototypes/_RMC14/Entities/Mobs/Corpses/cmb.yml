@@ -10,7 +10,7 @@
     rank: RMCRankCMBDeputy
   - type: Marine
     icon:
-      sprite: _RMC14/Interface/job_icons/CMB
+      sprite: _RMC14/Interface/job_icons/CMB.rsi
       state: cmb_dep
   - type: NpcFactionMember
     factions:

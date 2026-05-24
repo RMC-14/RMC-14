@@ -9,56 +9,56 @@
   parent: CMJobIconBase
   id: RMCJobIconCorrespondent
   icon:
-    sprite: _RMC14/Interface/job_icons/UNMC/other
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
     state: hudsquad_correspondent
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconSynth
   icon:
-    sprite: _RMC14/Interface/job_icons/UNMC/other
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
     state: hudsquad_syn
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonist
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby
+    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
     state: generic_colonist
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistCO
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby
+    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
     state: generic_colonist_co
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistDoctor
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby
+    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
     state: generic_colonist_doctor
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistEngi
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby
+    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
     state: generic_colonist_engi
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistMP
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby
+    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
     state: generic_colonist_mp
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistResearcher
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby
+    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
     state: generic_colonist_researcher
 
 - type: jobIcon

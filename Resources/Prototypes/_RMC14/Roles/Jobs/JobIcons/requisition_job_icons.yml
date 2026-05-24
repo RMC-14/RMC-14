@@ -16,5 +16,5 @@
   parent: CMJobIconBase
   id: CMJobIconMessTech
   icon:
-    sprite: _RMC14/Interface/job_icons/UNMC/other
+    sprite: _RMC14/Interface/job_icons/UNMC/other.rsi
     state: hudsquad_messtech
