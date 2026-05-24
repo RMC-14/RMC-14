@@ -39,7 +39,7 @@ xeno
 
 **CODE SIDE RENAME/UPDATE NEEDS DONE FOR EACH PNG**
 ~~CLF~~
-CMB
+~~CMB~~
 Colonist Lobby
 Freelancer
 Halcyon

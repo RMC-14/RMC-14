@@ -102,5 +102,5 @@
   parent: CMJobIconBase
   id: RMCJobIconBureauMarshal
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/CMB
     state: cmb_mar
