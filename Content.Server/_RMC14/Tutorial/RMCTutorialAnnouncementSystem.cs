@@ -29,7 +29,7 @@ public sealed partial class RMCTutorialAnnouncementSystem : EntitySystem
             return;
         var subject = args.OtherEntity;
         // Ensure entity has a faction.
-        if (!TryComp<RMCTutorialDummyComponent>(subject, out var tutComp) || !TryComp<NpcFactionMemberComponent>(subject, out var factionComp))
+        if (!TryComp<RMCTutorialDummyComponent>(uid, out var tutComp) || !TryComp<NpcFactionMemberComponent>(subject, out var factionComp))
             return;
         // Ensures triggering entity is a member of the wanted faction
         if (!factionComp.Factions.Any(faction => tutComp.Factions.Contains(faction)))

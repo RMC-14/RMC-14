@@ -14,5 +14,6 @@ public sealed partial class RMCTutorialAnnouncementComponent: Component
     [DataField]
     public string Sender = "Lt. Urist R. McHands";
 
+    [DataField]
     public bool HasTriggered = false;
 }

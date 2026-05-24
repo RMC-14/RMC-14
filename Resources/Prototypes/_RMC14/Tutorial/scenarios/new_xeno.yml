@@ -18,10 +18,11 @@
   components:
   - type: DropshipAmmo
     travelTime: 0
+
     explosion:
-      total: 400
+      total: 200
       slope: 10
-      max: 55
+      max: 4
 
 - type: entity
   parent: RMCDropshipMissileExplosionNapalm
@@ -39,7 +40,7 @@
       range: 1
       cardinalRange: 2
 
-# Visual CAS flare, does not work
+# Scripted CAS flare, fires "fake" missile when entered
 - type: entity
   id: RMCTutorialCASFlare
   name: signal flare
@@ -71,13 +72,29 @@
     bodyType: Static
   - type: AmbientSound
     enabled: true
-    volume: 1
-    range: 5
+    volume: 0.5
+    range: 4
     sound:
       path: /Audio/Items/Flare/flare_burn.ogg
       params:
         loop: true
-
+  - type: RMCTutorialSpawner
+    spawnPrototype: RMCTutorialWidowmakerExplosion
+    spawnOffsetY: 0
+  - type: RMCTutorialDummy
+    factions:
+    - RMCXeno
+  - type: Fixtures
+    fixtures:
+      tutorialTrigger:
+        shape:
+          !type:PhysShapeCircle
+          radius: 2
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        hard: false
 
 # Dummy Hivelord that should be really easy to kill
 - type: entity
