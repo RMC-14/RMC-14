@@ -1306,44 +1306,33 @@ public sealed class IntelSystem : EntitySystem
             tree.Comp.Tree.Miscellaneous.Total = safes.Count;
             Dirty(tree);
 
-            if (mediums.Count > 0)
+            var highTargets = new List<EntityUid>();
+            highTargets.AddRange(highs);
+            highTargets.AddRange(disks);
+            highTargets.AddRange(safes);
+
+            var extremeTargets = new List<EntityUid>();
+            extremeTargets.AddRange(dataTerminals);
+            extremeTargets.AddRange(devices);
+
+            ConnectEachSourceToRandomTarget(lows, mediums);
+            foreach (var medium in mediums)
             {
-                foreach (var low in lows)
-                {
-                    var medium = _random.Pick(mediums);
-                    ConnectObjectives(low, medium);
-                }
+                AddRequires(medium, lows);
             }
 
-            if (highs.Count > 0)
+            ConnectEachSourceToRandomTarget(mediums, highTargets);
+            foreach (var high in highs)
             {
-                foreach (var medium in mediums)
-                {
-                    AddRequires(medium, lows);
-                    var high = _random.Pick(highs);
-                    ConnectObjectives(medium, high);
-                }
+                AddRequires(high, mediums);
             }
 
-            if (mediums.Count > 0)
-            {
-                foreach (var high in highs)
-                {
-                    AddRequires(high, mediums);
-                }
-            }
+            AddObjectiveClues(disks, mediums);
+            AddObjectiveClues(safes, mediums);
 
-            var clueSources = new List<EntityUid>();
-            clueSources.AddRange(lows);
-            clueSources.AddRange(mediums);
-            clueSources.AddRange(highs);
-
-            var clueTargets = new List<EntityUid>();
-            clueTargets.AddRange(disks);
-            clueTargets.AddRange(dataTerminals);
-            clueTargets.AddRange(devices);
-            clueTargets.AddRange(safes);
-            AddObjectiveClues(clueTargets, clueSources);
+            ConnectEachSourceToRandomTarget(highs, extremeTargets);
+            AddObjectiveClues(dataTerminals, highs);
+            AddObjectiveClues(devices, highs);
 
             UpdateTree(tree);
         }
@@ -1432,7 +1421,7 @@ public sealed class IntelSystem : EntitySystem
             var clues = EnsureComp<IntelCluesComponent>(terminalId);
             clues.Clue = "rmc-intel-clue-data-terminal";
             clues.Category = "rmc-intel-data";
-            clues.Clues = 3;
+            clues.Clues = 2;
             SetInitialArea((terminalId, clues));
 
             EnsureComp<IntelDetectorTrackedComponent>(terminalId);
@@ -1496,23 +1485,74 @@ public sealed class IntelSystem : EntitySystem
                 continue;
             }
 
-            for (var i = 0; i < clues.Clues; i++)
+            var existing = 0;
+            if (TryComp(target, out IntelRequiresComponent? requires))
+                existing = requires.Requires.Count;
+
+            var left = clues.Clues - existing;
+            for (var i = 0; i < left; i++)
             {
                 _random.Shuffle(sources);
+                var added = false;
                 foreach (var source in sources)
                 {
-                    if (source == target ||
-                        TryComp(target, out IntelRequiresComponent? requires) &&
-                        requires.Requires.Contains(source))
+                    if (source == target || HasObjectiveLink(source, target))
                     {
                         continue;
                     }
 
                     ConnectObjectives(source, target);
+                    added = true;
                     break;
                 }
+
+                if (!added)
+                    break;
             }
         }
+    }
+
+    private void ConnectEachSourceToRandomTarget(List<EntityUid> sources, List<EntityUid> targets)
+    {
+        if (targets.Count == 0)
+            return;
+
+        foreach (var source in sources)
+        {
+            _random.Shuffle(targets);
+            foreach (var target in targets)
+            {
+                if (source == target ||
+                    HasObjectiveLink(source, target) ||
+                    HasEnoughObjectiveLinks(target))
+                {
+                    continue;
+                }
+
+                ConnectObjectives(source, target);
+                break;
+            }
+        }
+    }
+
+    private bool HasObjectiveLink(EntityUid unlocksId, EntityUid requiresId)
+    {
+        return TryComp(requiresId, out IntelRequiresComponent? requires) &&
+               requires.Requires.Contains(unlocksId);
+    }
+
+    private bool HasEnoughObjectiveLinks(EntityUid requiresId)
+    {
+        if (!TryComp(requiresId, out IntelRequiresComponent? requires))
+            return false;
+
+        if (TryComp(requiresId, out IntelCluesComponent? clues) &&
+            clues.Clues > 0)
+        {
+            return requires.Requires.Count >= clues.Clues;
+        }
+
+        return requires.Requires.Count >= requires.RequiresCount;
     }
 
     public void RestoreColonyCommunications()

@@ -276,7 +276,7 @@
   - type: IntelClues
     clue: rmc-intel-clue-data-disk
     category: rmc-intel-data
-    clues: 3
+    clues: 2
 
 - type: entity
   parent: [RMCIntelComputerDisk1, RMCIntelDataDiskBase]
