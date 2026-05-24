@@ -2855,3 +2855,14 @@
     state: traces-the-constellations
   - type: PatronFigurine
     id: d74bcdc9-2eb2-4a95-b6fb-a0b9f15de807
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSlyeWelding
+  name: Slye Welding figurine
+  description: "\"God where's a good bottle of Vodka when you need one...\""
+  components:
+  - type: Sprite
+    state: slye_welding
+  - type: PatronFigurine
+    id: 13fee242-b6bc-485e-8e89-868c7de21450
