@@ -67,7 +67,7 @@ public sealed class XenoCrestSystem : EntitySystem
 
     private void OnXenoCrestPlayerDetached(Entity<XenoCrestComponent> xeno, ref PlayerDetachedEvent args)
     {
-        if (xeno.Comp.Lowered)
+        if (!TerminatingOrDeleted(xeno) && xeno.Comp.Lowered)
             ToggleCrest(xeno);
     }
 

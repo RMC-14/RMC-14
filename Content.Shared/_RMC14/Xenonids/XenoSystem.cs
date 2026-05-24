@@ -374,8 +374,10 @@ public sealed partial class XenoSystem : EntitySystem
 
     private void OnXenoPlayerDetached(Entity<XenoComponent> ent, ref PlayerDetachedEvent args)
     {
-        if (!_rest.IsResting(ent.Owner))
-            _rest.TryRestAction(ent.AsNullable(), true, true);
+        if (TerminatingOrDeleted(ent) || _rest.IsResting(ent.Owner))
+            return;
+
+        _rest.TryRestAction(ent.AsNullable(), true, true);
     }
 
     private void OnXenoRegenMapInit(Entity<XenoRegenComponent> ent, ref MapInitEvent args)

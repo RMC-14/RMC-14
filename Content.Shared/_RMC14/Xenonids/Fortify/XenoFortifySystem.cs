@@ -90,7 +90,7 @@ public sealed class XenoFortifySystem : EntitySystem
 
     private void OnXenoFortifyPlayerDetached(Entity<XenoFortifyComponent> ent, ref PlayerDetachedEvent args)
     {
-        if (ent.Comp.Fortified)
+        if (!TerminatingOrDeleted(ent) && ent.Comp.Fortified)
             Unfortify(ent);
     }
 
