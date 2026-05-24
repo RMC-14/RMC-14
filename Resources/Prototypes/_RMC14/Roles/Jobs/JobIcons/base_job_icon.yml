@@ -3,6 +3,6 @@
   id: CMJobIconBase
   abstract: true
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons
   locationPreference: Left
   offset: 3

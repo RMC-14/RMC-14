@@ -277,7 +277,7 @@
     rank: RMCRankWeYaExecutive
   - type: Marine
     icon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/We-Ya/other.rsi
       state: hudsquad_liaison
 
 - type: startingGear
@@ -484,7 +484,7 @@
     rank: RMCRankWeYaExecutiveSupervisor
   - type: Marine
     icon:
-      sprite: _RMC14/Interface/cm_job_icons.rsi
+      sprite: _RMC14/Interface/job_icons/We-Ya/liaison_ranks.rsi
       state: weya_execsuper
 
 - type: startingGear

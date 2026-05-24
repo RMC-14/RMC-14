@@ -2,19 +2,19 @@
   parent: CMJobIconBase
   id: CMJobIconChiefEngineer
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/engineering
     state: hudsquad_ce
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconOrdnanceTech
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/engineering
     state: hudsquad_ot
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconMaintTech
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/engineering
     state: hudsquad_mt

@@ -37,7 +37,7 @@
       prefix: rmc-job-prefix-crashland-sl
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
+        sprite: _RMC14/Interface/job_icons
         state: upp_sl_a
     - type: RMCTrackable
     - type: EquipSurvivorPreset

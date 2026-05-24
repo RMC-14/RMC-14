@@ -39,8 +39,8 @@
     - type: CommandAccent
     - type: ViewIntelObjectives
     - type: SquadLeader
-      icon: 
-        sprite: _RMC14/Interface/cm_job_icons.rsi
+      icon:
+        sprite: _RMC14/Interface/job_icons
         state: rmc_teamleader
     - type: RMCTrackable
     - type: JobPrefix
@@ -83,7 +83,7 @@
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadRoyalMarines
-  
+
 - type: startingGear
   id: RMCGearRoyalTeamlead
   equipment:
@@ -107,5 +107,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalTeamlead
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons
     state: rmc_teamleader

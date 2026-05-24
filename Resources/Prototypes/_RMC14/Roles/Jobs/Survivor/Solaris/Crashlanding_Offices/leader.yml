@@ -23,7 +23,7 @@
     - type: InnateCommandSpeech
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
+        sprite: _RMC14/Interface/job_icons/We-Ya/pmc.rsi
         state: pmc_ld
     - type: RMCSurvivor
     - type: MotionDetectorTracked

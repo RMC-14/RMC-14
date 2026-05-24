@@ -2,33 +2,33 @@
   parent: CMJobIconBase
   id: CMJobIconCMO
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/medical
     state: hudsquad_cmo
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconDoctor
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/medical
     state: hudsquad_doctor
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconNurse
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/medical
     state: hudsquad_nurse
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconResearcher
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/medical
     state: hudsquad_researcher
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconFieldDoctor
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/medical
     state: hudsquad_fielddoctor

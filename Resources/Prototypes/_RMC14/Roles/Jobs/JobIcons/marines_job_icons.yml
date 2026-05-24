@@ -2,75 +2,75 @@
   parent: CMJobIconBase
   id: CMJobIconCombatTech
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_engi
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconFireteamLeader
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_tl
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconHospitalCorpsman
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_med
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconSmartGunOperator
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_gun
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconSquadLeader
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_leader_a
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconWeaponsSpecialist
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_spec
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconMortarOperator
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_mortar
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconLoader
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_load
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconRifleman
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_rifleman
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconRTO
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_rto
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconSupportTech
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/marine
     state: hudsquad_spttech

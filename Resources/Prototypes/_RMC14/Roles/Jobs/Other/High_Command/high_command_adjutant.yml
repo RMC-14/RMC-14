@@ -78,6 +78,6 @@
   parent: CMJobIconBase
   id: RMCJobIconUNMCAdjutant
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/high_command
     state: rmc_adjutant
 

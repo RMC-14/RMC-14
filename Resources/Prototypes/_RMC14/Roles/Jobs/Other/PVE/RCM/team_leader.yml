@@ -75,5 +75,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalTeamLeaderPVE
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons
     state: rmc_teamleader_pve

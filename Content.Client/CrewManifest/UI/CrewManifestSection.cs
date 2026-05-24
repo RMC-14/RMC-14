@@ -12,7 +12,7 @@ namespace Content.Client.CrewManifest.UI;
 public sealed class CrewManifestSection : BoxContainer
 {
     // RMC14 start
-    private static readonly SpriteSpecifier.Rsi SquadBackgroundRsi = new(new ResPath("_RMC14/Interface/cm_job_icons.rsi"), "hudsquad");
+    private static readonly SpriteSpecifier.Rsi SquadBackgroundRsi = new(new ResPath("_RMC14/Interface/job_icons"), "hudsquad");
 
     public CrewManifestSection(
         IPrototypeManager prototypeManager,

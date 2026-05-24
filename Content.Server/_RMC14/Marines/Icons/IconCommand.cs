@@ -45,7 +45,7 @@ public sealed class IconCommand : ToolshedCommand
     {
         _marineSystem ??= GetSys<SharedMarineSystem>();
 
-        var icon = new SpriteSpecifier.Rsi(new("_RMC14/Interface/cm_job_icons.rsi"), rsiState);
+        var icon = new SpriteSpecifier.Rsi(new("_RMC14/Interface/job_icons"), rsiState);
 
         // TODO RMC14: Make this idiot proof. Right now it's very easy to cause this command to render a big ol' error on everyone's screen.
 

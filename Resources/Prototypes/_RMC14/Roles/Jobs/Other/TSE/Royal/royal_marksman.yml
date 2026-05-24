@@ -71,7 +71,7 @@
       time: 36000 # 10 Hours
   - type: GhostRoleApplySpecial
     squad: SquadRoyalMarines
-  
+
 - type: startingGear
   id: RMCGearRoyalMarksman
   equipment:
@@ -97,5 +97,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalMarinesMarksman
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons
     state: rmc_marksman

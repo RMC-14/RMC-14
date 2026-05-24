@@ -36,7 +36,7 @@
       prefix: rmc-job-prefix-clf-cell-commander
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
+        sprite: _RMC14/Interface/job_icons
         state: clf_cellcom
     - type: RMCPointing
     - type: MarineOrders
@@ -99,5 +99,5 @@
   parent: CMJobIconBase
   id: RMCJobIconCLFCellCommander
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/job_icons
     state: clf_cellcom
