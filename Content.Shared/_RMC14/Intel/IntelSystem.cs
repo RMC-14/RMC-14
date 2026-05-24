@@ -436,6 +436,7 @@ public sealed class IntelSystem : EntitySystem
 
         var tree = EnsureTechTree();
         tree.Comp.Tree.Documents.Current++;
+        RemoveClue(tree, ent);
         AddPoints(tree, ent.Comp.Value);
 
         var knowledge = EnsureComp<IntelKnowledgeComponent>(user);
