@@ -85,13 +85,21 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Fiorina/surv_spawn_lowsec.yml"
-      probability: 0.33
+      probability: 0.2
       nightmareScenario: none
-    - spawn: "/Maps/_RMC14/Inserts/Fiorina/surv_spawn_armory.yml"
-      probability: 0.33
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/surv_spawn_research.yml"
+      probability: 0.2
       nightmareScenario: none
-      offset: -9,-23
+      offset: 18,43
     - spawn: "/Maps/_RMC14/Inserts/Fiorina/surv_spawn_garden.yml"
-      probability: 0.34
+      probability: 0.2
       nightmareScenario: none
       offset: 6,23
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/surv_spawn_engi_ring.yml"
+      probability: 0.2
+      nightmareScenario: none
+      offset: 16,-28
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/surv_spawn_bobda.yml"
+      probability: 0.2
+      nightmareScenario: none
+      offset: -42,-36
