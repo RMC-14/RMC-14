@@ -238,7 +238,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
     /// </summary>
     /// <param name="blocking">Is the thing crashing a grid (evacuation pod/shuttle)?</param>
     /// <param name="location"></param>
-    /// <returns></returns>
+    /// <returns>True if a valid location has been found.</returns>
     public bool TryGetCrashLandLocation(bool blocking, out EntityCoordinates location)
     {
         location = default;
