@@ -2866,3 +2866,14 @@
     state: slye_welding
   - type: PatronFigurine
     id: 13fee242-b6bc-485e-8e89-868c7de21450
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMathewMothewLampyris
+  name: Mathew 'Mothew' Lampyris figurine
+  description: "He's a green moth that is fuzzy, he has a scar on his lip."
+  components:
+  - type: Sprite
+    state: mathew_mothew_lampyris
+  - type: PatronFigurine
+    id: 78bba465-2b9d-4f44-a8f7-52e80f94c378
