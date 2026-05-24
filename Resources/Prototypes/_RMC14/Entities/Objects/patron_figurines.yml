@@ -2505,7 +2505,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSethXi
   name: Seth Xi figurine
-  description: "Calm under pressure. Evil beyond measure.\n\nBuilt for operations without clear objectives, clean endings, or any hope.\n\nWhen others followed orders, he followed information. Where others followed the path, he operated beyond it.\n\nNormally found beyond the frontline - questioning the plan, not the outcome."
+  description: "Calm under pressure. Evil beyond measure.\n\nBuilt for operations where hope was optional and success was necessary.\n\nWhen others followed orders, he followed instinct. Where others followed the path, he forged his own.\n\nNormally found beyond the frontline - questioning the plan, not the outcome."
   components:
   - type: Sprite
     state: seth_xi
@@ -2808,7 +2808,7 @@
   description: "\"They don't call her Armory for nothing!\"\n\nThis figurine usually comes with a printed Submachine gun, Shotgun and M13 autopistols, with a hidden pistol in her boot. Additionally, it has a clip on the back of her armor to hang onto keychains or to attach an included parachute. Too bad it doesn't have any of those add-ons.\n\nHandle with care!"
   components:
   - type: Sprite
-    state: patches-it-up_armory
+    state: patches-it-up
   - type: PatronFigurine
     id: e744a05a-b40a-4294-9433-84ea428829d1
 
