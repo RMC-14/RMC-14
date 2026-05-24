@@ -112,9 +112,16 @@ public sealed class IntelSystem : EntitySystem
     private static readonly EntProtoId ProgressReportProto = "RMCIntelProgressReport";
     private static readonly EntProtoId FolderProto = "RMCIntelFolder";
     private static readonly EntProtoId TechnicalManualProto = "RMCIntelTechnicalManual";
-    private static readonly EntProtoId ExperimentalDevicesProto = "RMCIntelRetrieveHealthAnalyzer";
     // private static readonly EntProtoId ResearchPaperProto = "RMCIntelResearchPaper";
     // private static readonly EntProtoId VialBoxProto = "RMCIntelVialBox";
+
+    private static readonly EntProtoId[] ExperimentalDeviceProtos =
+    [
+        "RMCIntelRetrieveMassSpectrometer",
+        "RMCIntelRetrieveReagentScanner",
+        "RMCIntelRetrieveHealthAnalyzer",
+        "RMCIntelRetrieveAutopsyScanner",
+    ];
 
     private static readonly EntProtoId[] DiskProtos =
     [
@@ -1281,7 +1288,7 @@ public sealed class IntelSystem : EntitySystem
             var highs = SpawnIntel(TechnicalManualProto, _technicalManuals, _technicalManualChances);
             var disks = SpawnIntel(DiskProtos, _disks, _diskChances);
             var dataTerminals = ActivateDataTerminalObjectives(_dataTerminals);
-            var devices = SpawnIntel(ExperimentalDevicesProto, _experimentalDevices, _experimentalDeviceChances);
+            var devices = SpawnIntel(ExperimentalDeviceProtos, _experimentalDevices, _experimentalDeviceChances, randomNumber: false);
             var safes = ActivateSafeObjectives(_safes);
             // SpawnIntel(ResearchPaperProto, _researchPapers, _researchPaperChances);
             // SpawnIntel(VialBoxProto, _vialBoxes, _vialBoxChances);

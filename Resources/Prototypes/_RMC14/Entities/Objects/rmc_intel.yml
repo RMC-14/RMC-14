@@ -118,10 +118,43 @@
   - type: IntelSerial
 
 - type: entity
+  parent: RMCIntelRetrieveDeviceBase
+  id: RMCIntelRetrieveMassSpectrometer
+  suffix: Intel, Experimental Device
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/experimental_devices.rsi
+    state: adv_spectrometer
+  - type: IntelClues
+    clue: rmc-intel-clue-experimental-device
+
+- type: entity
+  parent: RMCIntelRetrieveDeviceBase
+  id: RMCIntelRetrieveReagentScanner
+  suffix: Intel, Experimental Device
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/experimental_devices.rsi
+    state: adv_spectrometer
+  - type: IntelClues
+    clue: rmc-intel-clue-experimental-device
+
+- type: entity
   parent: [CMHealthAnalyzer, RMCIntelRetrieveDeviceBase]
   id: RMCIntelRetrieveHealthAnalyzer
   suffix: Intel, Experimental Device
   components:
+  - type: IntelClues
+    clue: rmc-intel-clue-experimental-device
+
+- type: entity
+  parent: RMCIntelRetrieveDeviceBase
+  id: RMCIntelRetrieveAutopsyScanner
+  suffix: Intel, Experimental Device
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/experimental_devices.rsi
+    state: autopsy_scanner
   - type: IntelClues
     clue: rmc-intel-clue-experimental-device
 
