@@ -92,13 +92,12 @@
 
   <Box>
     <GuideEntityEmbed Entity="RMCComputerIntel" />
-    <GuideEntityEmbed Entity="RMCIntelDatabaseComputer" />
     <GuideEntityEmbed Entity="RMCSigintTerminal" />
     <GuideEntityEmbed Entity="RMCTechTreeConsole" />
   </Box>
 
   After getting geared up you should make yourself familiar with the devices in the intel room and CIC.
-  The intel computer is used to write down what you have read in documents, the database computer shows shared objective progress, the SIGINT terminal processes data disks, and the tech tree console allows you to spend collected intelligence.
+  The intel computer is used to write down what you have read in documents, the SIGINT terminal processes data disks, and the tech tree console allows you to spend collected intelligence. The View Intel Objectives action shows shared objective progress.
 
   [color=#A88B5E][bold]Deployment[/bold][/color]
 

@@ -194,23 +194,6 @@
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
-  id: RMCIntelDatabaseComputer
-  name: intel database computer
-  description: An intel database computer used for consulting the current intel database.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/computer.rsi
-    state: comm
-  - type: InteractionOutline
-  - type: UserInterface
-    interfaces:
-      enum.ViewIntelObjectivesUI.Key:
-        type: ViewIntelObjectivesBui
-  - type: ViewIntelObjectives
-    addAction: false
-
-- type: entity
-  parent: RMCCommunicationsConsoleBase
   id: RMCSigintTerminal
   name: SIGINT terminal
   description: A computer capable of uploading data to the intelligence database. It has a disk reader slot built into the bottom, as well.
