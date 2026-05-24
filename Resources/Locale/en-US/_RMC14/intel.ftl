@@ -10,6 +10,7 @@ rmc-intel-reports = Reports
 rmc-intel-folders = Folders
 rmc-intel-manuals = Manuals
 rmc-intel-data = Data
+rmc-intel-retrieve = Retrieve
 rmc-intel-misc = Miscellaneous
 
 ent-RMCIntelBase = intel item

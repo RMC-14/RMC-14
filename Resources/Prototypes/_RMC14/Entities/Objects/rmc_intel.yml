@@ -115,6 +115,7 @@
     value: 0.7
   - type: IntelClues
     clues: 8
+    category: rmc-intel-retrieve
   - type: IntelSerial
 
 - type: entity
