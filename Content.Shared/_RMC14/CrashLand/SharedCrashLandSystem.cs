@@ -322,8 +322,6 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
         var ev = new CrashLandStartedEvent();
         RaiseLocalEvent(crashLandable, ref ev);
-
-        SpawnAtPosition(_crashLandingBlocker, location);
     }
 
     public void DoCrashLand(EntityUid crashing, EntityCoordinates crashLocation, float skyFallDuration = 1.5f, float crashDuration = 0.75f, bool doDamage = true, SoundSpecifier? dropSound = null, SoundSpecifier? crashSound = null)
