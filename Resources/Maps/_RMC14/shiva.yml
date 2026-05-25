@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/14/2026 20:33:34
-  entityCount: 17722
+  time: 05/25/2026 04:53:20
+  entityCount: 17730
 maps:
 - 1
 grids:
@@ -46316,6 +46316,31 @@ entities:
     - type: Transform
       pos: 170.69115,158.7224
       parent: 1
+  - uid: 1788
+    components:
+    - type: Transform
+      pos: 55.5,144.5
+      parent: 1
+  - uid: 1798
+    components:
+    - type: Transform
+      pos: 112.5,121.5
+      parent: 1
+  - uid: 1799
+    components:
+    - type: Transform
+      pos: 112.5,120.5
+      parent: 1
+  - uid: 1800
+    components:
+    - type: Transform
+      pos: 120.5,119.5
+      parent: 1
+  - uid: 1801
+    components:
+    - type: Transform
+      pos: 120.5,120.5
+      parent: 1
 - proto: CMPaperBin5
   entities:
   - uid: 1787
@@ -46323,11 +46348,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 190.48666,127.71262
-      parent: 1
-  - uid: 1788
-    components:
-    - type: Transform
-      pos: 55.5,144.5
       parent: 1
   - uid: 1789
     components:
@@ -46373,26 +46393,6 @@ entities:
     components:
     - type: Transform
       pos: 118.5,70.5
-      parent: 1
-  - uid: 1798
-    components:
-    - type: Transform
-      pos: 112.5,120.5
-      parent: 1
-  - uid: 1799
-    components:
-    - type: Transform
-      pos: 112.5,121.5
-      parent: 1
-  - uid: 1800
-    components:
-    - type: Transform
-      pos: 120.5,119.5
-      parent: 1
-  - uid: 1801
-    components:
-    - type: Transform
-      pos: 120.5,120.5
       parent: 1
   - uid: 1802
     components:
@@ -107780,6 +107780,11 @@ entities:
       parent: 1
 - proto: RMCCableCoil
   entities:
+  - uid: 3029
+    components:
+    - type: Transform
+      pos: 59.5,144.5
+      parent: 1
   - uid: 13376
     components:
     - type: Transform
@@ -113619,6 +113624,13 @@ entities:
     - type: Transform
       pos: 123.5,20.5
       parent: 1
+- proto: RMCJumpsuitBluePjs
+  entities:
+  - uid: 3022
+    components:
+    - type: Transform
+      pos: 118.5,102.5
+      parent: 1
 - proto: RMCJumpsuitMarsoc
   entities:
   - uid: 14175
@@ -113644,6 +113656,13 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: RMCJumpsuitRedPjs
+  entities:
+  - uid: 3026
+    components:
+    - type: Transform
+      pos: 115.5,102.5
+      parent: 1
 - proto: RMCKitchenKnifeButcher
   entities:
   - uid: 14176
@@ -117798,6 +117817,14 @@ entities:
     - type: Transform
       pos: 107.5,95.5
       parent: 1
+- proto: RMCMagazineML66D
+  entities:
+  - uid: 3025
+    components:
+    - type: Transform
+      parent: 3024
+    - type: Physics
+      canCollide: False
 - proto: RMCMagazinePistolHoldout
   entities:
   - uid: 14798
@@ -118356,6 +118383,66 @@ entities:
     - type: Transform
       pos: 212.4322,14.814944
       parent: 1
+- proto: RMCML66DMount
+  entities:
+  - uid: 3023
+    components:
+    - type: Transform
+      anchored: True
+      rot: 1.5707963267948966 rad
+      pos: 98.5,95.5
+      parent: 1
+    - type: Item
+      size: Huge
+    - type: Foldable
+      isLocked: True
+      folded: False
+    - type: CollisionWake
+      enabled: False
+    - type: WeaponMount
+      mountedEntity: 3024
+    - type: Fixtures
+      fixtures:
+        mount:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.49,-0.49
+            - 0.49,-0.49
+            - 0.49,0.05
+            - -0.49,0.05
+          mask:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - InteractImpassable
+          layer:
+          - BulletImpassable
+          - BarricadeImpassable
+          density: 5
+          hard: True
+          restitution: 0
+          friction: 0.4
+        fix1:
+          shape: !type:PhysShapeCircle
+            radius: 0.25
+            position: 0,0
+          mask:
+          - Impassable
+          - HighImpassable
+          layer: []
+          density: 20
+          hard: True
+          restitution: 0.3
+          friction: 0.2
+    - type: Physics
+      bodyType: Static
+    - type: ContainerContainer
+      containers:
+        weapon: !type:ContainerSlot
+          occludes: False
+          ent: 3024
 - proto: RMCMonitorCameraAlmayer
   entities:
   - uid: 14867
@@ -118454,6 +118541,11 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 195.5,18.5
+      parent: 1
+  - uid: 3027
+    components:
+    - type: Transform
+      pos: 57.5,147.5
       parent: 1
   - uid: 14882
     components:
@@ -124837,6 +124929,32 @@ entities:
     - type: Transform
       pos: 122.5,58.5
       parent: 1
+- proto: RMCSmartGunMounted
+  entities:
+  - uid: 3024
+    components:
+    - type: Transform
+      parent: 3023
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 3025
+        gun_chamber: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+    - type: MountableWeapon
+      mountedTo: 3023
+    - type: UseDelay
+      delays:
+        RMCWieldDelay:
+          endTime: 339.2997298
+          startTime: 350.0329833
+          length: 0.4
+    - type: Physics
+      canCollide: False
 - proto: RMCSoilNet
   entities:
   - uid: 15930
@@ -125390,16 +125508,6 @@ entities:
     - type: Transform
       pos: 118.5,151.5
       parent: 1
-  - uid: 16019
-    components:
-    - type: Transform
-      pos: 53.5,22.5
-      parent: 1
-  - uid: 16020
-    components:
-    - type: Transform
-      pos: 63.5,20.5
-      parent: 1
 - proto: RMCSpawnerCorpseColonistBust
   entities:
   - uid: 16021
@@ -125506,6 +125614,16 @@ entities:
       parent: 1
 - proto: RMCSpawnerCorpseWeYaGoon
   entities:
+  - uid: 3019
+    components:
+    - type: Transform
+      pos: 53.5,22.5
+      parent: 1
+  - uid: 3020
+    components:
+    - type: Transform
+      pos: 63.5,20.5
+      parent: 1
   - uid: 16039
     components:
     - type: Transform
@@ -127283,6 +127401,14 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 56.5,44.5
+      parent: 1
+- proto: RMCStationAlertComputer
+  entities:
+  - uid: 3028
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 58.5,146.5
       parent: 1
 - proto: RMCStool
   entities:
@@ -130869,9 +130995,9 @@ entities:
     - type: Transform
       pos: 66.5,14.5
       parent: 1
-- proto: RMCWeaponRifleM54CStripped
+- proto: RMCWeaponRifleM54CWhiteNoLock
   entities:
-  - uid: 17003
+  - uid: 3021
     components:
     - type: Transform
       pos: 53.5,21.5
