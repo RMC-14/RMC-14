@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel.Detector;
@@ -62,7 +61,6 @@ public sealed class IntelSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCPowerSystem _power = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -703,8 +701,6 @@ public sealed class IntelSystem : EntitySystem
         if (!storeGlobal)
             return AddPersonalClue(user, target, clue);
 
-        var msg = Loc.GetString("rmc-intel-clue-uploaded", ("clue", clue));
-        _rmcChat.ChatMessageToOne(msg, user);
         _popup.PopupEntity(clue, target, user, PopupType.Medium);
 
         RemovePersonalClueFromAll(target);
@@ -784,7 +780,7 @@ public sealed class IntelSystem : EntitySystem
     {
         var args = new List<(string, object)>
         {
-            ("intel", target),
+            ("name", GetClueName(target)),
             ("area", clues.InitialArea),
             ("label", GetClueLabel(target)),
             ("color", GetClueColor(target)),
@@ -800,6 +796,17 @@ public sealed class IntelSystem : EntitySystem
             args.Add(("code", safe.Code));
 
         return Loc.GetString(clues.Clue, args.ToArray());
+    }
+
+    private string GetClueName(EntityUid target)
+    {
+        if (MetaData(target).EntityPrototype is { } proto &&
+            Loc.TryGetString($"ent-{proto.ID}", out var localized))
+        {
+            return localized;
+        }
+
+        return Name(target);
     }
 
     private string GetClueLabel(EntityUid target)
@@ -886,24 +893,25 @@ public sealed class IntelSystem : EntitySystem
 
     private void OnDataTerminalInteractHand(Entity<IntelDataTerminalComponent> ent, ref InteractHandEvent args)
     {
+        args.Handled = true;
+        if (_net.IsClient)
+            return;
+
         if (ent.Comp.Completed)
         {
             _popup.PopupClient(Loc.GetString("rmc-intel-data-terminal-complete"), ent, args.User);
-            args.Handled = true;
             return;
         }
 
         if (ent.Comp.Uploading)
         {
             _popup.PopupClient(Loc.GetString("rmc-intel-data-terminal-uploading"), ent, args.User);
-            args.Handled = true;
             return;
         }
 
         if (!CanUploadData(ent, args.User, out var reason))
         {
             _popup.PopupClient(reason, ent, args.User, PopupType.MediumCaution);
-            args.Handled = true;
             return;
         }
 
@@ -914,7 +922,6 @@ public sealed class IntelSystem : EntitySystem
             new IntelDataTerminalPasswordInputEvent(GetNetEntity(args.User)),
             characterLimit: 16,
             minCharacterLimit: 1);
-        args.Handled = true;
     }
 
     private void OnDataTerminalPasswordInput(Entity<IntelDataTerminalComponent> ent, ref IntelDataTerminalPasswordInputEvent args)
@@ -960,6 +967,8 @@ public sealed class IntelSystem : EntitySystem
             return;
 
         args.Handled = true;
+        if (_net.IsClient)
+            return;
 
         if (disk.Completed)
         {
@@ -990,15 +999,17 @@ public sealed class IntelSystem : EntitySystem
 
     private void OnDiskReaderInteractHand(Entity<IntelDiskReaderComponent> ent, ref InteractHandEvent args)
     {
+        args.Handled = true;
+        if (_net.IsClient)
+            return;
+
         if (!TryGetReaderDisk(ent, out var disk))
         {
             _popup.PopupClient(Loc.GetString("rmc-intel-disk-reader-empty"), ent, args.User);
-            args.Handled = true;
             return;
         }
 
         EjectDisk(ent, disk.Value, args.User);
-        args.Handled = true;
     }
 
     private void OnDiskReaderKeyInput(Entity<IntelDiskReaderComponent> ent, ref IntelDiskReaderKeyInputEvent args)
@@ -1058,6 +1069,10 @@ public sealed class IntelSystem : EntitySystem
         if (ent.Comp.Completed)
             return;
 
+        args.Handled = true;
+        if (_net.IsClient)
+            return;
+
         if (string.IsNullOrWhiteSpace(ent.Comp.Code))
         {
             ent.Comp.Code = GenerateSafeCode();
@@ -1071,7 +1086,6 @@ public sealed class IntelSystem : EntitySystem
             new IntelSafeCodeInputEvent(GetNetEntity(args.User)),
             characterLimit: 8,
             minCharacterLimit: 1);
-        args.Handled = true;
     }
 
     private void OnSafeCodeInput(Entity<IntelSafeObjectiveComponent> ent, ref IntelSafeCodeInputEvent args)
@@ -1545,6 +1559,13 @@ public sealed class IntelSystem : EntitySystem
             clues.Category = "rmc-intel-misc";
             clues.Clues = 2;
             SetInitialArea((safe, clues));
+
+            var details = EnsureComp<IntelClueDetailsComponent>(safe);
+            if (string.IsNullOrWhiteSpace(details.Label))
+                details.Label = GenerateDocumentLabel();
+
+            Dirty(safe, details);
+            _nameModifier.RefreshNameModifiers(safe);
 
             safes.Add(safe);
         }
