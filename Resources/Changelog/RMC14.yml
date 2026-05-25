@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Fixes Bravo Neckerchief colour when folded, it now represents Bravo as
-      intended.
-    type: Fix
-  id: 2729
-  time: '2026-01-11T10:41:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8761
 - author: Ian321
   changes:
   - message: The dropship terminal can now be used by the marines to summon a dropship.
@@ -4485,5 +4477,13 @@
   id: 3228
   time: '2026-05-22T22:07:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9599
+- author: BlueMoon059
+  changes:
+  - message: Fixed a small formatting error with the M74AGM grenade packets, to make
+      sure they match.
+    type: Fix
+  id: 3229
+  time: '2026-05-25T05:57:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9918
 Name: RMC14
 Order: -1
