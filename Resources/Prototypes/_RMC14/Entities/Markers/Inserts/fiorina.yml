@@ -47,6 +47,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Fiorina/nogear.yml"
       probability: 0.15
+      nightmareScenario: none
 
 # Standalone
 
