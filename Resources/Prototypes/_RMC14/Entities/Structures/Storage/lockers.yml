@@ -112,7 +112,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/floor_safe.rsi
-    state: closed
+    layers:
+    - state: closed
+      map: ["enum.LockVisualLayers.Lock"]
+  - type: Appearance
+  - type: LockVisuals
+    stateLocked: closed
+    stateUnlocked: open
   - type: InteractionOutline
   - type: Physics
     canCollide: false

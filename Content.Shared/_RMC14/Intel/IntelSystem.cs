@@ -585,6 +585,11 @@ public sealed class IntelSystem : EntitySystem
 
     private void OnConsoleInteractHand(Entity<IntelConsoleComponent> ent, ref InteractHandEvent args)
     {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
         if (!TryComp(args.User, out IntelKnowledgeComponent? knowledge) ||
             !knowledge.Read.TryFirstOrNull(out var read))
         {
@@ -894,24 +899,25 @@ public sealed class IntelSystem : EntitySystem
     private void OnDataTerminalInteractHand(Entity<IntelDataTerminalComponent> ent, ref InteractHandEvent args)
     {
         args.Handled = true;
+
         if (_net.IsClient)
             return;
 
         if (ent.Comp.Completed)
         {
-            _popup.PopupClient(Loc.GetString("rmc-intel-data-terminal-complete"), ent, args.User);
+            _popup.PopupEntity(Loc.GetString("rmc-intel-data-terminal-complete"), ent, args.User);
             return;
         }
 
         if (ent.Comp.Uploading)
         {
-            _popup.PopupClient(Loc.GetString("rmc-intel-data-terminal-uploading"), ent, args.User);
+            _popup.PopupEntity(Loc.GetString("rmc-intel-data-terminal-uploading"), ent, args.User);
             return;
         }
 
         if (!CanUploadData(ent, args.User, out var reason))
         {
-            _popup.PopupClient(reason, ent, args.User, PopupType.MediumCaution);
+            _popup.PopupEntity(reason, ent, args.User, PopupType.MediumCaution);
             return;
         }
 
@@ -967,24 +973,25 @@ public sealed class IntelSystem : EntitySystem
             return;
 
         args.Handled = true;
+
         if (_net.IsClient)
             return;
 
         if (disk.Completed)
         {
-            _popup.PopupClient(Loc.GetString("rmc-intel-disk-reader-disk-complete"), ent, args.User);
+            _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-disk-complete"), ent, args.User);
             return;
         }
 
         if (!_power.IsPowered(ent))
         {
-            _popup.PopupClient(Loc.GetString("rmc-intel-disk-reader-no-power"), ent, args.User, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-no-power"), ent, args.User, PopupType.MediumCaution);
             return;
         }
 
         if (TryGetReaderDisk(ent, out _))
         {
-            _popup.PopupClient(Loc.GetString("rmc-intel-disk-reader-occupied"), ent, args.User, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-occupied"), ent, args.User, PopupType.MediumCaution);
             return;
         }
 
@@ -999,13 +1006,17 @@ public sealed class IntelSystem : EntitySystem
 
     private void OnDiskReaderInteractHand(Entity<IntelDiskReaderComponent> ent, ref InteractHandEvent args)
     {
+        if (args.Handled || HasComp<IntelConsoleComponent>(ent))
+            return;
+
         args.Handled = true;
+
         if (_net.IsClient)
             return;
 
         if (!TryGetReaderDisk(ent, out var disk))
         {
-            _popup.PopupClient(Loc.GetString("rmc-intel-disk-reader-empty"), ent, args.User);
+            _popup.PopupEntity(Loc.GetString("rmc-intel-disk-reader-empty"), ent, args.User);
             return;
         }
 
@@ -1070,6 +1081,7 @@ public sealed class IntelSystem : EntitySystem
             return;
 
         args.Handled = true;
+
         if (_net.IsClient)
             return;
 
@@ -1084,8 +1096,8 @@ public sealed class IntelSystem : EntitySystem
             args.User,
             Loc.GetString("rmc-intel-safe-code-prompt"),
             new IntelSafeCodeInputEvent(GetNetEntity(args.User)),
-            characterLimit: 8,
-            minCharacterLimit: 1);
+            characterLimit: 4,
+            minCharacterLimit: 4);
     }
 
     private void OnSafeCodeInput(Entity<IntelSafeObjectiveComponent> ent, ref IntelSafeCodeInputEvent args)
@@ -1237,7 +1249,7 @@ public sealed class IntelSystem : EntitySystem
 
     private string GenerateSafeCode()
     {
-        return $"{_random.Next(0, 11) * 5}|{_random.Next(0, 11) * 5}";
+        return _random.Next(1000, 10000).ToString();
     }
 
     private char RandomUppercase()

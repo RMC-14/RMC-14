@@ -214,6 +214,7 @@
     interfaces:
       enum.DialogUiKey.Key:
         type: DialogBui
+  - type: IntelConsole
   - type: IntelDiskReader
 
 - type: entity
