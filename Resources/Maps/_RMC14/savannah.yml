@@ -59132,13 +59132,6 @@ entities:
     - type: Transform
       pos: -40.5,-22.5
       parent: 1
-- proto: RMCSigintTerminal
-  entities:
-  - uid: 17425
-    components:
-    - type: Transform
-      pos: -35.5,-30.5
-      parent: 1
 - proto: RMCCouchEnd
   entities:
   - uid: 661
