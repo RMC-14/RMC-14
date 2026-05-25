@@ -110,6 +110,8 @@
     - CMPosterSPP11
     - CMPosterSPP12
     - CMPosterSPP13
+    - RMCPosterHalcyonShip
+    - RMCPosterMCT
     chance: 0.95
     rarePrototypes:
     - PosterBroken
@@ -214,6 +216,8 @@
     - RMCPosterTSEPA1
     - RMCPosterTSEPA2
     - RMCPosterTSEPA3
+    - RMCPosterHalcyonShip
+    - RMCPosterMCT
     chance: 0.95
     rarePrototypes:
     - PosterBroken
@@ -258,6 +262,7 @@
     - CMPosterSPP11
     - CMPosterSPP12
     - CMPosterSPP13
+    - RMCPosterHalcyonShip
     chance: 0.95
     rarePrototypes:
     - PosterBroken

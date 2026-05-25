@@ -126,6 +126,21 @@
 
 - type: entity
   parent: RMCCoffeeCup
+  id: RMCHalcyonCup
+  name: Halcyon Dynamics mug
+  description: A well-crafted, brutal mug adorned with the logo of the Halcyon Dynamics corporation. Made for those who pursue relentless progress and industry.
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _RMC14/Objects/Consumable/Drinks/halcyoncup.rsi
+        state: base
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
+        state: icon-3
+        visible: false
+
+- type: entity
+  parent: RMCCoffeeCup
   id: RMCThreeSunEmpireCup
   name: TSE mug
   description: A well-crafted, sleek mug with the icon of the Three Sun Empire on it's side. Excellent for those who serve and live under the Empress and her Empire.

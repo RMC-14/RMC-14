@@ -517,6 +517,24 @@
   - type: Sprite
     state: bobda_lime
 
+- type: entity
+  parent: CMPosterBase
+  id: RMCPosterHalcyonShip
+  name: "Halcyon Frigate"
+  description: "A posted adorned with the Halcyon logo: Below it is a large starship cruising through a starfield. Looks like a pretty intimidating vessel."
+  components:
+  - type: Sprite
+    state: halcyon_ship
+
+- type: entity
+  parent: CMPosterBase
+  id: RMCPosterMCT
+  name: "MCT3 Hand Welder"
+  description: "The Mechanical Cutting Torch; Cheap, Reliable, Novaris."
+  components:
+  - type: Sprite
+    state: mct
+
 # Safety Posters
 - type: entity
   parent: CMPosterBase
