@@ -251,7 +251,54 @@
     trackerModes:
     - SquadLeader
     - FORECONCommandingOfficer
-      
+
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetArmy
+  name: UNMC Devil Dogs headset
+  description: Issued to UNMC Devil Dogs Marines.
+  suffix: Survivor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: soc_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+  - type: RMCHeadset
+    channels:
+    - MarineArmy
+  - type: RMCStaticDefaultChannel
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineArmy
+  - type: GrantSquadLeaderTracker
+    defaultMode: SquadLeader
+    trackerModes:
+    - SquadLeader
+
+- type: entity
+  parent: RMCHeadsetArmy
+  id: RMCHeadsetArmyLeader
+  name: UNMC Devil Dogs leader headset
+  suffix: Survivor
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineArmy
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetArmy
+  id: RMCHeadsetArmyCommander
+  name: UNMC Devil Dogs commander headset
+  suffix: Survivor
+  components:
+  - type: RMCHeadset
+    channels:
+    - MarineArmy
+    radioTextIncrease: 3
+
 # Paramarine Hybrisa survivor insert
 - type: entity
   parent: RMCHeadsetIconsPara
@@ -289,7 +336,7 @@
       radioTextIncrease: 2
     - type: GrantSquadLeaderTracker
       defaultMode: ParaCommander
-          
+
 - type: entity
   parent: RMCHeadsetPara
   id: RMCHeadsetParaOfficer
@@ -339,7 +386,7 @@
 - type: entity
   parent: RMCHeadsetColonyIcons
   id: RMCHeadsetSPPCrashland
-  name: SPP 173/Airborne headset 
+  name: SPP 173/Airborne headset
   description: A headset used by members of the 173rd Airborne Reconnaissance unit.
   components:
   - type: ContainerFill

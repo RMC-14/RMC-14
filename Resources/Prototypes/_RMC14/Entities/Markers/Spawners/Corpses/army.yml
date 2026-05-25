@@ -1,0 +1,17 @@
+# Tyrargo Rift corpses
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseArmyTrooper
+  name: Corpse Spawner - UNMC Devil Dogs Rifleman
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseArmyTrooper
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseArmyMedic
+  name: Corpse Spawner - UNMC Devil Dogs Medic
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseArmyMedic

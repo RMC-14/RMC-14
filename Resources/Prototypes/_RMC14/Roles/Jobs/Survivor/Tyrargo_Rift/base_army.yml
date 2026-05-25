@@ -1,0 +1,81 @@
+- type: job
+  parent: RMCSurvivorMilitary
+  id: RMCSurvivorArmyBase
+  name: rmc-job-name-army
+  description: rmc-job-description-army
+  ranks:
+    RMCRankArmyPrivateSecondClass: []
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - ColonistEngi
+  joinNotifyCrew: false
+  startingGear: RMCGearArmyBase
+  hasIcon: true
+  greeting: rmc-job-greeting-army
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: UNMC Devil Dogs - Survivor (Tyrargo Rift Survivor Base)
+  hidden: true
+
+- type: startingGear
+  id: RMCGearArmyBase
+  equipment:
+    jumpsuit: RMCJumpsuitMarineArmy
+    back: RMCSatchelArmySurvivorFill
+    shoes: CMBootsBlackFilled
+    outerClothing: CMArmorM4ArmySurvivorFill
+    id: CMIDCardStandardDogtag
+    ears: RMCHeadsetArmy
+    gloves: CMHandsBlackMarine
+    pocket1: RMCPouchFirstAidInjectors # todo randomized med pouches?
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+
+- type: entity
+  id: RMCSurvivorPresetArmyNoPrimary
+  name: army no primary survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomOutfits:
+    - [ RMCHeadCapFlippable, RMCGlassesTriMaxBlack ]
+    - [ RMCHeadBeretSquad, RMCGlassesTriMaxBlack ] # todo army beret
+    - [ RMCArmorHelmetTyrargo, RMCGogglesBallisticPolarizedBlue ]
+    - [ RMCArmorHelmetTyrargo, RMCGogglesBallisticPolarizedBlue ]
+    - [ RMCArmorHelmetTyrargo, RMCGogglesBallisticPolarizedBlue ]
+    randomGearOther:
+    -
+      - [ RMCCigarettePackLuckySloths ]
+      - [ CMDrinkCanBobdaClassic ]
+      - [ CMDrinkCanMountainWind ]
+    randomWeapon:
+    - [ RMCMK80BeltSurvivorFill ]
+    - [ RMCMK80BeltSurvivorFill ]
+    - [ RMCMK80BeltSurvivorFill ]
+    - [ RMCHolsterSMGPouchFilledArmy ]
+    - [ RMCHolsterSMGPouchFilledArmy ]
+    - [ RMCMotionDetector ]
+    tryEquipRandomWeapon: true
+
+- type: entity
+  parent: RMCSurvivorPresetArmyNoPrimary
+  id: RMCSurvivorPresetArmyFull
+  name: army survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    primaryWeapons: # 1/5 M4SPR, 4/5 MK2
+    - [ RMCWeaponRifleM54CArmy, CMMagazineRifleM54C, RMCMagazineRifleM54CHEAPEmpty, RMCMagazineRifleM54CHEAPEmpty ]
+    - [ RMCWeaponRifleM54CArmy, CMMagazineRifleM54C, RMCMagazineRifleM54CHEAPEmpty, RMCMagazineRifleM54CHEAPEmpty ]
+    - [ RMCWeaponRifleM54CArmy, CMMagazineRifleM54C, RMCMagazineRifleM54CHEAPEmpty, RMCMagazineRifleM54CHEAPEmpty ]
+    - [ RMCWeaponRifleM54CArmy, CMMagazineRifleM54C, RMCMagazineRifleM54CHEAPEmpty, RMCMagazineRifleM54CHEAPEmpty ]
+    - [ WeaponRifleM4SPRArmy, CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, RMCMagazineRifleM4SPRHEAPEmpty ]
+    primaryWeaponChance: 1
+
+- type: entity
+  parent: RMCSurvivorPresetArmyFull
+  id: RMCSurvivorPresetArmyNoPistol
+  name: army survivor no pistol preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityPreset
+    randomWeapon:
+    - []

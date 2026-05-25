@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "license": "CC-BY-3.0",
+  "copyright": "taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/vehices/humvee_prop.dmi",
+  "size": {
+    "x": 96,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "humvee",
+      "directions": 4
+    },
+    {
+      "name": "humvee_broken",
+      "directions": 4
+    },
+    {
+      "name": "humvee_carrier",
+      "directions": 4
+    },
+    {
+      "name": "humvee_carrier_broken",
+      "directions": 4
+    },
+    {
+      "name": "humvee_med",
+      "directions": 4
+    },
+    {
+      "name": "humvee_med_broken",
+      "directions": 4
+    },
+    {
+      "name": "humvee_gun",
+      "directions": 4
+    },
+    {
+      "name": "humvee_gun_broken",
+      "directions": 4
+    }
+  ]
+}

@@ -147,6 +147,16 @@
   longRange: true
   tower: true
 
+# Tyrargo Survs
+- type: radioChannel
+  id: MarineArmy
+  name: chat-radio-marine-army
+  keycode: "@"
+  frequency: 1724
+  color: "#349c30"
+  longRange: true
+  tower: true
+
 # Non Marine
 - type: radioChannel
   id: Colony

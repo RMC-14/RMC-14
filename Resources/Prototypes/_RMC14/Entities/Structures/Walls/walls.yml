@@ -662,6 +662,66 @@
     - doors
     base: strata_jungle
 
+# Forest
+- type: entity
+  parent: CMWallJungle
+  id: CMWallForest
+  name: forest vegetation
+  description: Exceptionally dense vegetation that you can't see through.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/forest.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/forest.rsi
+    state: forest_veg
+  - type: Tag
+    tags:
+    - Wall
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
+    - windows
+    - doors
+    base: forest_veg
+
+# Forest Rock
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallRockForest
+  name: rock columns
+  description: Exceptionally dense rock formations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/rock_forest.rsi
+    state: rock_forest
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/rock_forest.rsi
+    state: rock_forest
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
+    - windows
+    - doors
+    base: rock_forest
+
+- type: entity
+  parent: RMCWallRockForest
+  id: RMCWallRockForestDirty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/rock_forest_dirty.rsi
+    state: rock_forest_dirty
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/rock_forest_dirty.rsi
+    state: rock_forest_dirty
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
+    - windows
+    - doors
+    base: rock_forest_dirty
+
 # Elevator
 
 - type: entity
