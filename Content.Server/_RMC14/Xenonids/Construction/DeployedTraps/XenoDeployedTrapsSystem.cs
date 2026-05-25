@@ -1,8 +1,11 @@
 ﻿using Content.Server.Destructible;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.DeployedTraps;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Damage;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
@@ -18,6 +21,7 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {
@@ -43,7 +47,9 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
 
     private void OnStepTriggerAttempt(Entity<XenoDeployedTrapsComponent> trap, ref StepTriggerAttemptEvent args)
     {
-        args.Continue = !_hive.FromSameHive(args.Tripper, trap.Owner);
+        args.Continue = !_hive.FromSameHive(args.Tripper, trap.Owner)
+                        && !_mobState.IsDead(args.Tripper)
+                        && (HasComp<XenoComponent>(args.Tripper) || HasComp<MarineComponent>(args.Tripper));
     }
 
     private void OnStepTriggered(Entity<XenoDeployedTrapsComponent> trap, ref StepTriggeredOnEvent args)

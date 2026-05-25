@@ -63,14 +63,14 @@ rmc-xeno-insight-empower = We have gained sufficient insight in our prey to empo
 
 # Deploy Traps
 rmc-xeno-deploy-traps-self = We create a sudden surge of traps!
-rmc-xeno-deploy-traps-others = {$xeno} creates a sudden surge of traps!
+rmc-xeno-deploy-traps-others = The sapper creates a sudden surge of traps!
 rmc-xeno-deploy-traps-empower = We have tapped into our reserves to prepare a stronger Acid Mine!
-rmc-xeno-deploy-traps-see-fail = There's something in the way!
+rmc-xeno-deploy-traps-range-fail = That target is too far away!
 
 # Acid Mine
 rmc-xeno-acid-mine-self = We coax a hidden mine to detonate!
-rmc-xeno-acid-mine-others = {$xeno} coaxes a hidden mine to detonate!
-rmc-xeno-acid-mine-see-fail = There's something in the way!
+rmc-xeno-acid-mine-others = The sapper coaxes a hidden mine to detonate!
+rmc-xeno-acid-mine-range-fail = That target is too far away!
 
 # Adrenaline Surge
 rmc-xeno-adrenaline-surge-ready = You feel your adrenaline glands refill! Your speed boost will activate again.

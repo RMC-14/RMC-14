@@ -110,21 +110,10 @@ public sealed class XenoAcidMineSystem : EntitySystem
         Dirty(xeno);
     }
 
-
-    //Need a method to empower/unempower the ability on use.
-    private SpriteSpecifier GetActionIcon(EntityUid xeno)
-    {
-        if (TryComp(xeno, out XenoAcidMineComponent? comp))
-            return comp.ActionIcon;
-
-        return new SpriteSpecifier.Rsi(
-            new ResPath("_RMC14/Actions/xeno_actions.rsi"),
-            "acid_mine");
-    }
-
     public void UnEmpowerAcidMine(Entity<XenoAcidMineComponent> xeno)
     {
         xeno.Comp.Empowered = false;
+        Dirty(xeno);
         // Reset action icon
         foreach (var action in _actions.GetActions(xeno.Owner))
         {
@@ -136,7 +125,6 @@ public sealed class XenoAcidMineSystem : EntitySystem
     public void EmpowerAcidMine(Entity<XenoAcidMineComponent> xeno)
     {
         xeno.Comp.Empowered = true;
-        Dirty(xeno);
         foreach (var action in _actions.GetActions(xeno.Owner))
         {
             if (_actions.GetEvent(action) is XenoAcidMineActionEvent)
