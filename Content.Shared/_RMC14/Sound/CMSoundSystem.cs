@@ -121,7 +121,6 @@ public sealed class CMSoundSystem : EntitySystem
 
     private void OnSoundOnDragPullStarted(Entity<SoundOnDragComponent> ent, ref PullStartedMessage args)
     {
-        ent.Comp.DragSoundDistance = 0;
         ent.Comp.LastPosition = Transform(ent).Coordinates;
         ent.Comp.LastSoundTime = _timing.CurTime;
     }
@@ -140,7 +139,7 @@ public sealed class CMSoundSystem : EntitySystem
             return false;
 
         var coordinates = xform.Coordinates;
-        var distanceNeeded = 1.0f; // TODO RMC14
+        var distanceNeeded = 1.0f; // Whatever sounds good.
 
         // Can happen when teleporting between grids.
         if (!coordinates.TryDistance(EntityManager, soundOnDrag.LastPosition, out var distance) ||
@@ -190,12 +189,13 @@ public sealed class CMSoundSystem : EntitySystem
 
             var timeFromLastSound = _timing.CurTime - comp.LastSoundTime;
             // Pitch up or down slightly based on roughly how fast the drag is.
-            var pitchAdjustment = (float)Math.Clamp(13 / (12 + timeFromLastSound.TotalSeconds) - 1, -.05, .05);
+            // Linear decrease from 1.05 at 0.5 seconds to 0.95 at 1.5 seconds.
+            var pitchAdjustment = (float)Math.Clamp(-timeFromLastSound.TotalSeconds / 10 + 1.1, .95, 1.05);
 
             comp.LastSoundTime = _timing.CurTime;
 
             var audioParams = sound.Params
-                .WithPitchScale(1 + pitchAdjustment);
+                .WithPitchScale(pitchAdjustment);
 
             _audio.PlayPredicted(sound, uid, uid, audioParams);
         }
