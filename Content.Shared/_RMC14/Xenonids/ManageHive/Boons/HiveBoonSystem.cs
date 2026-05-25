@@ -72,6 +72,7 @@ public sealed class HiveBoonSystem : EntitySystem
     private static readonly EntProtoId<HiveBoonDefinitionComponent> KingBoonId = "RMCHiveBoonKing";
     private static readonly EntProtoId<HiveKingCocoonComponent> KingCocoonId = "RMCHiveCocoonKing";
     private static readonly EntProtoId TransmuteActionId = "ActionXenoTransmute";
+    private static readonly TimeSpan FortifiedStructuresUpdateEvery = TimeSpan.FromSeconds(1);
 
     public ImmutableArray<(EntityPrototype Prototype, HiveBoonDefinitionComponent Component)> Boons
     {
@@ -88,10 +89,12 @@ public sealed class HiveBoonSystem : EntitySystem
     private TimeSpan _kingVoteAskCandidatesTime;
     private TimeSpan _kingVoteStartHatchingTime;
     private TimeSpan _earlyEvoBoostBefore;
+    private TimeSpan _nextFortifiedStructuresUpdate;
 
     private EntityQuery<ExcludedFromKingVoteComponent> _excludedFromKingVoteQuery;
 
     private readonly HashSet<ProtoId<PlayTimeTrackerPrototype>> _xenoJobs = new();
+    private readonly HashSet<EntityUid> _fortifiedStructureHives = new();
 
     public override void Initialize()
     {
@@ -113,9 +116,12 @@ public sealed class HiveBoonSystem : EntitySystem
 
         SubscribeLocalEvent<HiveClusterComponent, ExaminedEvent>(OnClusterExamined);
         SubscribeLocalEvent<HiveClusterComponent, AfterEntityWeedingEvent>(OnClusterAfterWeeding);
+        SubscribeLocalEvent<HiveClusterComponent, DamageChangedEvent>(OnClusterDamageChanged);
 
         SubscribeLocalEvent<HivePylonComponent, ExaminedEvent>(OnPylonExamined);
         SubscribeLocalEvent<HivePylonComponent, EntityTerminatingEvent>(OnPylonTerminating);
+
+        SubscribeLocalEvent<HiveBoonFortifiableWallComponent, DamageChangedEvent>(OnFortifiableWallDamageChanged);
 
         SubscribeLocalEvent<CommunicationsTowerComponent, CommunicationsTowerStateChangedEvent>(OnTowerBreak);
         SubscribeLocalEvent<CommunicationsTowerComponent, RMCRepairableTargetAttemptEvent>(OnTowerRepairAttempt);
@@ -250,6 +256,8 @@ public sealed class HiveBoonSystem : EntitySystem
     private void OnActivateFortification(HiveBoonActivateFortificationEvent ev)
     {
         EnsureComp<HiveBoonFortificationComponent>(ev.Boon);
+        _nextFortifiedStructuresUpdate = TimeSpan.Zero;
+        QueueDamagedFortifiedStructures(ev.Boon);
         AnnounceBoonActivation(ev.Boon);
     }
 
@@ -370,6 +378,16 @@ public sealed class HiveBoonSystem : EntitySystem
         ReplaceCluster(ent, (args.CoveredEntity, tower));
     }
 
+    private void OnClusterDamageChanged(Entity<HiveClusterComponent> ent, ref DamageChangedEvent args)
+    {
+        QueueFortificationRepair(ent.Owner, args);
+    }
+
+    private void OnFortifiableWallDamageChanged(Entity<HiveBoonFortifiableWallComponent> ent, ref DamageChangedEvent args)
+    {
+        QueueFortificationRepair(ent.Owner, args);
+    }
+
     private void OnTowerBreak(Entity<CommunicationsTowerComponent> ent, ref CommunicationsTowerStateChangedEvent args)
     {
         if (ent.Comp.State != CommunicationsTowerState.Broken)
@@ -413,6 +431,12 @@ public sealed class HiveBoonSystem : EntitySystem
     {
         if (_hive.GetHive(ent.Owner) is not { } hive)
             return;
+
+        if (HasComp<HiveBoonFortificationComponent>(ent.Owner) &&
+            !HasOtherActiveFortificationBoon(hive, ent.Owner))
+        {
+            ClearFortificationRepairing(hive);
+        }
 
         var boons = EnsureBoons(hive);
         foreach (var (id, active) in boons.Comp.Active.ToArray())
@@ -909,12 +933,24 @@ public sealed class HiveBoonSystem : EntitySystem
     private void UpdateFortifiedStructures()
     {
         var time = _timing.CurTime;
+        if (time < _nextFortifiedStructuresUpdate)
+            return;
 
-        var walls = EntityQueryEnumerator<HiveBoonFortifiableWallComponent, DamageableComponent>();
-        while (walls.MoveNext(out var uid, out var wall, out var damageable))
+        _nextFortifiedStructuresUpdate = time + FortifiedStructuresUpdateEvery;
+
+        if (!TryGetFortifiedStructureHives(_fortifiedStructureHives))
+            return;
+
+        var walls = EntityQueryEnumerator<HiveBoonFortificationRepairingComponent, HiveBoonFortifiableWallComponent, DamageableComponent>();
+        while (walls.MoveNext(out var uid, out _, out var wall, out var damageable))
         {
-            if (!HasActiveBoon<HiveBoonFortificationComponent>(uid))
+            if (_hive.GetHive(uid) is not { } hive ||
+                !_fortifiedStructureHives.Contains(hive.Owner) ||
+                damageable.TotalDamage <= FixedPoint2.Zero)
+            {
+                RemCompDeferred<HiveBoonFortificationRepairingComponent>(uid);
                 continue;
+            }
 
             if (time < wall.NextHealAt)
                 continue;
@@ -922,13 +958,21 @@ public sealed class HiveBoonSystem : EntitySystem
             wall.NextHealAt = time + wall.HealEvery;
             Dirty(uid, wall);
             HealDamage(uid, damageable, wall.Heal);
+
+            if (damageable.TotalDamage <= FixedPoint2.Zero)
+                RemCompDeferred<HiveBoonFortificationRepairingComponent>(uid);
         }
 
-        var clusters = EntityQueryEnumerator<HiveClusterComponent, DamageableComponent>();
-        while (clusters.MoveNext(out var uid, out var cluster, out var damageable))
+        var clusters = EntityQueryEnumerator<HiveBoonFortificationRepairingComponent, HiveClusterComponent, DamageableComponent>();
+        while (clusters.MoveNext(out var uid, out _, out var cluster, out var damageable))
         {
-            if (!HasActiveBoon<HiveBoonFortificationComponent>(uid))
+            if (_hive.GetHive(uid) is not { } hive ||
+                !_fortifiedStructureHives.Contains(hive.Owner) ||
+                damageable.TotalDamage <= FixedPoint2.Zero)
+            {
+                RemCompDeferred<HiveBoonFortificationRepairingComponent>(uid);
                 continue;
+            }
 
             if (time < cluster.NextFortificationRepairAt)
                 continue;
@@ -939,7 +983,132 @@ public sealed class HiveBoonSystem : EntitySystem
             HealDamage(uid, damageable, damageable.TotalDamage);
             var ev = new XenoStructureRepairedEvent();
             RaiseLocalEvent(uid, ev);
+            RemCompDeferred<HiveBoonFortificationRepairingComponent>(uid);
         }
+    }
+
+    private bool TryGetFortifiedStructureHives(HashSet<EntityUid> hives)
+    {
+        hives.Clear();
+
+        var boons = EntityQueryEnumerator<HiveBoonFortificationComponent>();
+        while (boons.MoveNext(out var uid, out _))
+        {
+            if (TerminatingOrDeleted(uid) ||
+                _hive.GetHive(uid) is not { } hive)
+            {
+                continue;
+            }
+
+            hives.Add(hive.Owner);
+        }
+
+        return hives.Count > 0;
+    }
+
+    private void QueueFortificationRepair(EntityUid uid, DamageChangedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (args.Damageable.TotalDamage <= FixedPoint2.Zero)
+        {
+            RemCompDeferred<HiveBoonFortificationRepairingComponent>(uid);
+            return;
+        }
+
+        if (!args.DamageIncreased &&
+            args.DamageDelta != null)
+        {
+            return;
+        }
+
+        if (!HasActiveBoon<HiveBoonFortificationComponent>(uid))
+            return;
+
+        var wasQueued = HasComp<HiveBoonFortificationRepairingComponent>(uid);
+        EnsureComp<HiveBoonFortificationRepairingComponent>(uid);
+
+        if (!wasQueued)
+            StartFortificationRepairCooldown(uid);
+
+        _nextFortifiedStructuresUpdate = TimeSpan.Zero;
+    }
+
+    private void StartFortificationRepairCooldown(EntityUid uid)
+    {
+        var time = _timing.CurTime;
+
+        if (TryComp(uid, out HiveBoonFortifiableWallComponent? wall) &&
+            time >= wall.NextHealAt)
+        {
+            wall.NextHealAt = time + wall.HealEvery;
+            Dirty(uid, wall);
+        }
+
+        if (TryComp(uid, out HiveClusterComponent? cluster) &&
+            time >= cluster.NextFortificationRepairAt)
+        {
+            cluster.NextFortificationRepairAt = time + cluster.FortificationRepairEvery;
+            Dirty(uid, cluster);
+        }
+    }
+
+    private void QueueDamagedFortifiedStructures(EntityUid boon)
+    {
+        var walls = EntityQueryEnumerator<HiveBoonFortifiableWallComponent, DamageableComponent>();
+        while (walls.MoveNext(out var uid, out _, out var damageable))
+        {
+            if (damageable.TotalDamage <= FixedPoint2.Zero ||
+                !_hive.FromSameHive(uid, boon))
+            {
+                continue;
+            }
+
+            EnsureComp<HiveBoonFortificationRepairingComponent>(uid);
+        }
+
+        var clusters = EntityQueryEnumerator<HiveClusterComponent, DamageableComponent>();
+        while (clusters.MoveNext(out var uid, out _, out var damageable))
+        {
+            if (damageable.TotalDamage <= FixedPoint2.Zero ||
+                !_hive.FromSameHive(uid, boon))
+            {
+                continue;
+            }
+
+            EnsureComp<HiveBoonFortificationRepairingComponent>(uid);
+        }
+    }
+
+    private void ClearFortificationRepairing(Entity<HiveComponent> hive)
+    {
+        var repairing = EntityQueryEnumerator<HiveBoonFortificationRepairingComponent>();
+        while (repairing.MoveNext(out var uid, out _))
+        {
+            if (!_hive.IsMember(uid, hive.Owner))
+                continue;
+
+            RemCompDeferred<HiveBoonFortificationRepairingComponent>(uid);
+        }
+    }
+
+    private bool HasOtherActiveFortificationBoon(Entity<HiveComponent> hive, EntityUid terminating)
+    {
+        var boons = EntityQueryEnumerator<HiveBoonFortificationComponent>();
+        while (boons.MoveNext(out var uid, out _))
+        {
+            if (uid == terminating ||
+                TerminatingOrDeleted(uid) ||
+                !_hive.IsMember(uid, hive.Owner))
+            {
+                continue;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     public override void Update(float frameTime)
