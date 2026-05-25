@@ -103,12 +103,13 @@ public sealed class XenoZoomSystem : EntitySystem
     {
         // We try to scale up the PVS radius while leaving the same amount of tiles as overhead.
         // pvsOverheadEstimate estimates what portion of the viewport is added on as "overhead" for PVS purposes.
-        // i.e. an estimate of 0.25 means the PVS radius is 25% larger than the actual viewport radius.
+        // i.e. an estimate of 0.2 means the PVS radius is 20% larger than the actual viewport radius.
         // A smaller estimate results in a LARGER pvs radius scale up, because there's less overhead proportionally.
-        // TODO RMC14 calculate the overhead from CVars instead of hardcoding it here.
+        // TODO RMC14 calculate the overhead from CVars instead of hardcoding it here. I calculated the default viewport
+        // as 21 tiles wide while the PVS bound appears to be 25 tiles wide. That's about 20% overhead.
         if (ent.Comp.Running)
         {
-            const float pvsOverheadEstimate = 0.25f;
+            const float pvsOverheadEstimate = 0.2f;
             var scale = (Math.Max(ent.Comp.Zoom.X, ent.Comp.Zoom.Y) + pvsOverheadEstimate) / (1 + pvsOverheadEstimate);
             // args.Scale is added to the scale, not multiplied, so we have to subtract 1 and make sure we don't scale down.
             args.Scale = Math.Max(0, scale - 1);
