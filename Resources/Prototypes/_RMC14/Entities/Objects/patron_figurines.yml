@@ -1624,16 +1624,16 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSoft-pawsLiona
-  name: Soft-paws Liona figurine
-  description: "Huh, seems like this squirrel action figure comes with its own miniature sentry gun as well."
+  name: Rano figurine
+  description: "A small Avali figurine, it's quite well made, written underneath the base is the word; \"Wacky.\""
   components:
   - type: Sprite
-    state: soft-paws_liona
+    state: rano
   - type: PatronFigurine
     id: e216a101-4951-462a-98c4-2b7de17585cb
   - type: EmitSoundOnUse
     sound:
-      path: /Audio/Animals/mouse_squeak.ogg
+      path: /Audio/_RMC14/Voice/Avali/avali_scream.ogg
       params:
         volume: 5
         maxDistance: 1
