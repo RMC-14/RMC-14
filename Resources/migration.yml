@@ -1507,4 +1507,3 @@ RMCBoxMagazineRifleM16: RMCBoxMagazineRifleCR16
 RMCAttachmentM16Stock: RMCAttachmentCR16Stock
 RMCAttachmentM16StockCollapsible: RMCAttachmentCR16StockCollapsible
 RMCCartridgeRifleM16: RMCCartridgeRifleCR16
-RMCBoxMagazineRifleM16EmptyBuild: RMCBoxMagazineRifleCR16EmptyBuild
