@@ -4791,7 +4791,7 @@ entities:
     - type: Transform
       pos: 24.4889,20.332848
       parent: 1
-- proto: RMCMagazineRifleM16
+- proto: RMCMagazineRifleCR16
   entities:
   - uid: 369
     components:
@@ -6249,7 +6249,7 @@ entities:
     - type: Transform
       pos: 19.5,20.5
       parent: 1
-- proto: WeaponRifleM16
+- proto: RMCWeaponRifleCR16
   entities:
   - uid: 382
     components:

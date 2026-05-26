@@ -3684,7 +3684,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCMagazineRifleM16
+- proto: RMCMagazineRifleCR16
   entities:
   - uid: 943
     components:
@@ -7000,7 +7000,7 @@ entities:
     - type: Transform
       pos: 10.287774,22.18379
       parent: 1
-- proto: WeaponRifleM16
+- proto: RMCWeaponRifleCR16
   entities:
   - uid: 942
     components:

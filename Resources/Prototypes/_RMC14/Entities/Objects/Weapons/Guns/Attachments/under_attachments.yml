@@ -629,12 +629,16 @@
   parent: RMCAttachmentU1GrenadeLauncher
   id: RMCAttachmentM203GrenadeLauncher
   name: M203 grenade launcher
-  description: An antique underbarrel grenade launcher. Adopted in 1969 for the M16, it was made obsolete centuries ago; how its ended up here is a mystery to you. Holds only one propriatary 40mm grenade, does not have modern IFF systems, it won't pass through your friends.
+  description: An antique underbarrel grenade launcher. Originally designed for the CR16, it since fell out of production; how it ended up here is a mystery. Holds only one proprietary 40mm grenade, lacks modern IFF systems, and won't pass through your friends.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
     layers:
-      - state: grenade-m203
+      - state: grenade-cr16
         map: [ "enum.BreechVisuals.Open" ]
+  - type: AttachableVisuals
+    suffix: ""
+    offset: -0.1, 0.218
   - type: GunIFF
     enabled: false
   - type: BallisticAmmoProvider
@@ -647,18 +651,16 @@
     visuals:
       enum.BreechVisuals.Open:
         enum.BreechVisuals.Open:
-          True: { state: grenade-m203-open }
-          False: { state: grenade-m203 }
+          True: { state: grenade-cr16-open }
+          False: { state: grenade-cr16 }
   - type: AttachableToggleable
     actionName: Switch to the MK1 Underslung Grenade Launcher
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: grenade-m203
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: grenade-cr16
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
-      state: grenade-m203-on
-  - type: AttachableVisuals
-    offset: -0.1, 0.218
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: grenade-cr16-on
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel

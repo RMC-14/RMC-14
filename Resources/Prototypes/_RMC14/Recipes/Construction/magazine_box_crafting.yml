@@ -701,8 +701,8 @@
         amount: 1
         doAfter: 0.25
 
-    # M16
-    - to: RMCBoxMagazineRifleM16Empty
+    # CR16
+    - to: RMCBoxMagazineRifleCR16Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -911,9 +911,9 @@
   - node: RMCBoxBulletsPistolAPEmpty
     entity: RMCBoxBulletsPistolAPEmpty
 
-  # M16
-  - node: RMCBoxMagazineRifleM16Empty
-    entity: RMCBoxMagazineRifleM16Empty
+  # CR16
+  - node: RMCBoxMagazineRifleCR16Empty
+    entity: RMCBoxMagazineRifleCR16Empty
 
   # M1984
   - node: RMCBoxMagazinePistolM1984Empty

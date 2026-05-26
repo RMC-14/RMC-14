@@ -288,12 +288,12 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: CMBeltMarineM16
-  suffix: Filled, M16
+  id: RMCBeltMarineCR16
+  suffix: Filled, CR16
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM16
+    - id: RMCMagazineRifleCR16
       amount: 5
 
 - type: entity
@@ -699,16 +699,6 @@
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
     - id: RMCWeaponPistolHandcannonGold
-
-- type: entity
-  parent: CMBeltMarine
-  id: RMCM17BeltFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCMagazineRifleM16
-      amount: 5
 
 - type: entity
   parent: CMBeltMarine
