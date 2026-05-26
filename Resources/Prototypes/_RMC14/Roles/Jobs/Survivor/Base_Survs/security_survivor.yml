@@ -74,7 +74,7 @@
     - [ RMCBeltMarineMAR, RMCWeaponRifleMAR30 ]
     - [ CMBeltMarineMP5, WeaponSMGMP5 ]
     - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
-    - [ CMBeltMarineCR16, RMCWeaponRifleCR16 ]
+    - [ RMCBeltMarineCR16, RMCWeaponRifleCR16 ]
     primaryWeaponChance: 1
 
 - type: entity
