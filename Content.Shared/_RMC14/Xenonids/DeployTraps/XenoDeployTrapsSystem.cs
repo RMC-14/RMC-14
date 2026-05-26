@@ -101,7 +101,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
         _audio.PlayPredicted(xeno.Comp.DeploySound, coords, xeno);
 
         var popupSelf = Loc.GetString("rmc-xeno-deploy-traps-self");
-        var popupOthers = Loc.GetString("rmc-xeno-deploy-traps-others", ("xeno", xeno));
+        var popupOthers = Loc.GetString("rmc-xeno-deploy-traps-others");
         _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
 
         if (_net.IsServer)
