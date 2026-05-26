@@ -112,7 +112,7 @@ public sealed class XenoZoomSystem : EntitySystem
             const float pvsOverheadEstimate = 0.2f;
             var scale = (Math.Max(ent.Comp.Zoom.X, ent.Comp.Zoom.Y) + pvsOverheadEstimate) / (1 + pvsOverheadEstimate);
             // args.Scale is added to the scale, not multiplied, so we have to subtract 1 and make sure we don't scale down.
-            args.Scale = Math.Max(0, scale - 1);
+            args.Scale += Math.Max(0, scale - 1);
         }
     }
 
