@@ -60,6 +60,7 @@
     - CMSurgicalLine
     - CMSynthGraft
     - CMSurgicalCaseFilled
+    - RMCSyringeCase
     - CMBloodPackFull # TODO RMC14 O-
     - CMBloodPackFull # TODO RMC14 O-
     - RMCFlashlightPen
