@@ -55,8 +55,9 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
     private EntityQuery<CrashLandableComponent> _crashLandableQuery;
 
-    private EntProtoId<CrashLandingBlockedComponent> _crashLandingBlocker = "RMCCrashLandingBlocker";
-    private float _crashLandingBlockerRadius = 10;
+    private readonly EntProtoId<CrashLandingBlockedComponent> _crashLandingBlocker = "RMCCrashLandingBlocker";
+    private readonly float _crashLandingBlockerRadius = 10;
+    private readonly HashSet<Entity<CrashLandingBlockedComponent>> _crashLandingBlockers = new();
 
     public override void Initialize()
     {
@@ -266,8 +267,9 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
                 if (blocking)
                 {
-                    var blockers = _entityLookup.GetEntitiesInRange<CrashLandingBlockedComponent>(location, _crashLandingBlockerRadius);
-                    if (blockers.Count > 0)
+                    _crashLandingBlockers.Clear();
+                    _entityLookup.GetEntitiesInRange(location, _crashLandingBlockerRadius, _crashLandingBlockers);
+                    if (_crashLandingBlockers.Count > 0)
                         continue;
 
                     SpawnAtPosition(_crashLandingBlocker, location);
