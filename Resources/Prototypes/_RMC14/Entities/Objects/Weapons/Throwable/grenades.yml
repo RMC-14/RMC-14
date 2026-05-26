@@ -146,7 +146,6 @@
     id: RMCSmokeAcid
     spreadDelay: 0.1
   - type: EvenSmoke
-    spawn: RMCSmoke
     range: 3
 
 - type: entity
@@ -154,7 +153,6 @@
   id: RMCSmokeExplosionProofSmall
   components:
   - type: EvenSmoke
-    spawn: RMCSmoke
     range: 1
 
 - type: entity

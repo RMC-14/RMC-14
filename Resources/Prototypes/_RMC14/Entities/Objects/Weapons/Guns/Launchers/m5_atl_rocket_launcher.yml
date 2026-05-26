@@ -295,8 +295,8 @@
 
 - type: entity
   parent: Smoke
-  id: RMCSmokeWhitePhosphorusNoSpread
-  categories: [ HideSpawnMenu ]
+  id: RMCSmokeWhitePhosphorus
+  suffix: White Phosphorus
   components:
   - type: Transform
     anchored: true
@@ -317,12 +317,6 @@
     burnColor: "#00b8ff"
   - type: EdgeSpreader
     id: Smoke
-
-- type: entity
-  parent: RMCSmokeWhitePhosphorusNoSpread
-  id: RMCSmokeWhitePhosphorus
-  components:
   - type: EvenSmoke
-    spawn: RMCSmokeWhitePhosphorusNoSpread
     initialSpread: 3
     range: 3

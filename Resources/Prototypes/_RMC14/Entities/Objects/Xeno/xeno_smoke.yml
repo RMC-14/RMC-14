@@ -33,7 +33,6 @@
     id: RMCSmokeAcid
     spreadDelay: 0.6
   - type: EvenSmoke
-    spawn: RMCSmokeAcid
     range: 3
     rangeMultipliesRegularDamage: true
   - type: DamageOverTime
@@ -90,7 +89,6 @@
     id: RMCSmokeNeurotoxin
     spreadDelay: 0.5
   - type: EvenSmoke
-    spawn: RMCSmokeNeurotoxin
     range: 4
   - type: NeurotoxinInjector
     neuroPerSecond: 6
@@ -182,7 +180,6 @@
     id: RMCSmokeKingDoom
   - type: ActiveEdgeSpreader
   - type: EvenSmoke
-    spawn: RMCSmokeKingDoom
     range: 7
 
 
@@ -194,7 +191,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
-    spawn: RMCSmokeAcidShroud
     range: 1
 
 - type: entity
@@ -204,7 +200,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
-    spawn: RMCSmokeNeurotoxinShroud
     range: 1
 
 - type: entity
@@ -214,7 +209,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
-    spawn: RMCSmokeAcidDeathcloud
     range: 2
 
 - type: edgeSpreader
