@@ -96,34 +96,14 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
             if (blockSmoke)
                 continue;
 
-            // To prevent infinite loops due to every spawn having the same InitialSpread, we have to make
-            // the entity WITHOUT map initialization, set the InitialSpread properly, and THEN map initialize.
-            var smoke = EntityManager.CreateEntityUninitialized(prototype.ID, coords);
-            EntityManager.InitializeAndStartEntity(smoke, false);
-
-            _hive.SetSameHive(ent.Owner, smoke);
-            if (_evenSmokeQuery.TryComp(smoke, out var smokeComp))
-            {
-                smokeComp.Range = ent.Comp.Range - 1;
-                smokeComp.InitialSpread = 0; // We are spreading normally in this function, do NOT burst spread.
-                TryRefreshDamage((smoke, smokeComp));
-            }
-
-            if (selfDespawn != null &&
-                _timedDespawnQuery.TryComp(smoke, out var otherDespawn))
-            {
-                otherDespawn.Lifetime = selfDespawn.Lifetime;
-            }
-
-            EnsureComp<ActiveEdgeSpreaderComponent>(smoke);
-
-            // Finally map initialize the entity.
-            EntityManager.RunMapInit(smoke, MetaData(smoke));
+            TrySpreadTo(ent, coords, out _);
         }
     }
 
     private void OnEvenSmokeMapInit(Entity<EvenSmokeComponent> ent, ref MapInitEvent args)
     {
+        TryRefreshDamage(ent);
+
         if (ent.Comp.InitialSpread > 0)
             SpreadBurst(ent);
     }
@@ -222,35 +202,49 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
 
                 var coords = _map.GridTileToLocal(curTile.GridUid, curGrid, curTile.GridIndices);
 
-                // To prevent infinite loops due to every spawn having the same InitialSpread, we have to make
-                // the entity WITHOUT map initialization, set the InitialSpread properly, and THEN map init it.
-                var smoke = EntityManager.CreateEntityUninitialized(prototype.ID, coords);
-                EntityManager.InitializeAndStartEntity(smoke, false);
-
-                _hive.SetSameHive(parent.Owner, smoke);
-
-                if (_timedDespawnQuery.TryComp(parent.Owner, out var selfDespawn) &&
-                    _timedDespawnQuery.TryComp(smoke, out var otherDespawn))
-                {
-                    otherDespawn.Lifetime = selfDespawn.Lifetime;
-                }
-
-                var smokeComp = EnsureComp<EvenSmokeComponent>(smoke);
-                smokeComp.Range = parent.Comp.Range - gen;
-                smokeComp.InitialSpread = 0; // we are handling the whole burst, we do NOT want new bursts.
-
-                // Only the last generation spreads normally
-                if (gen == generations)
-                {
-                    EnsureComp<ActiveEdgeSpreaderComponent>(smoke);
-                }
-
-                // Finally map-init the entity
-                EntityManager.RunMapInit(smoke, MetaData(smoke));
+                TrySpreadTo(parent, coords, out _, activateSpreading: gen == generations, newRange: parent.Comp.Range - gen);
             }
 
             frontier = nextFrontier;
         }
+    }
+
+    private bool TrySpreadTo(Entity<EvenSmokeComponent> source, EntityCoordinates coords, out EntityUid? newSmokeUid, bool activateSpreading = true, int? newRange = null)
+    {
+        newSmokeUid = null;
+        var prototype = Prototype(source);
+        if (prototype == null)
+            return false;
+
+        // To prevent infinite loops due to every spawn having the same InitialSpread, we have to make
+        // the entity WITHOUT map initialization, set the InitialSpread properly, and THEN map init it.
+        // Additionally, some calculations based on range are done on init, so we need to set range before
+        // the entity is initialized as well.
+        var newSmoke = EntityManager.CreateEntityUninitialized(prototype.ID, coords);
+        EntityManager.InitializeAndStartEntity(newSmoke, false);
+
+        _hive.SetSameHive(source.Owner, newSmoke);
+
+        if (_timedDespawnQuery.TryComp(source.Owner, out var selfDespawn) &&
+            _timedDespawnQuery.TryComp(newSmoke, out var otherDespawn))
+        {
+            otherDespawn.Lifetime = selfDespawn.Lifetime;
+        }
+
+        var newSmokeComp = EnsureComp<EvenSmokeComponent>(newSmoke);
+        newSmokeComp.Range = newRange ?? source.Comp.Range - 1;
+        newSmokeComp.InitialSpread = 0; // spreads should never burst, that is handled by the initially created entity.
+
+        if (activateSpreading)
+        {
+            EnsureComp<ActiveEdgeSpreaderComponent>(newSmoke);
+        }
+
+        // Finally map-init the entity
+        EntityManager.RunMapInit(newSmoke, MetaData(newSmoke));
+
+        newSmokeUid = newSmoke;
+        return true;
     }
 
     private bool TryRefreshDamage(Entity<EvenSmokeComponent> ent)
