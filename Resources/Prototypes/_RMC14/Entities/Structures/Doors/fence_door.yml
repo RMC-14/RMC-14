@@ -69,6 +69,11 @@
   - type: IconSmooth
     key: fences
     mode: NoSprite
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    percentageDamage: 0.25
+  - type: XenoCrusherChargable
+    instantDestroy: true
 
 - type: entity
   parent: CMBaseStructureCorrodible
