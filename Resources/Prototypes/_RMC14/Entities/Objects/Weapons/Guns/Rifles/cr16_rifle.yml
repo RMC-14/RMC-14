@@ -131,7 +131,7 @@
 - type: entity
   parent: RMCWeaponRifleCR16
   id: RMCWeaponRifleCR16A5
-  name: CR16A3 Rifle
+  name: CR16A5 Rifle
   description: A modernised version of the Combat Rifle, Model 16. Chambered in 5.56x45mm.
 
 - type: entity
