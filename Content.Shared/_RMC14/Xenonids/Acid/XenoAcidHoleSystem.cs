@@ -18,12 +18,15 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
+using Content.Shared.Tools.Components;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
@@ -36,6 +39,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly OccluderSystem _occluder = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly RMCRepairableSystem _repairable = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly RMCPullingSystem _pulling = default!;
@@ -55,6 +59,10 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
     private static readonly ProtoId<StackPrototype> PlasteelStack = "CMPlasteel";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private const CollisionGroup HoleBlockMask = CollisionGroup.FullTileMask |
+                                                 CollisionGroup.TableLayer |
+                                                 CollisionGroup.BarricadeImpassable |
+                                                 CollisionGroup.BarbedBarricade;
 
     public override void Initialize()
     {
@@ -120,10 +128,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             wallComp.PendingDirection = null;
             return true;
         }
-
-        var direction = wallComp.PendingDirection ?? Direction.South;
-        if (!TryCreateHole((wall, wallComp), direction))
-            return false;
 
         wallComp.PendingDirection = null;
         return true;
@@ -258,6 +262,12 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (TryComp(args.Used, out WelderComponent? _))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-repair-requires-nailgun"), hole.Owner, args.User, PopupType.MediumCaution);
+            return;
+        }
+
         if (TryComp(args.Used, out NailgunComponent? _))
         {
             TryStartRepair(args.User, args.Used, hole);
@@ -387,6 +397,9 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return false;
         }
 
+        if (!CanCrossHoleSide(user, hole, wall.Owner))
+            return false;
+
         var wallCoords = _transform.GetMoverCoordinates(wall.Owner);
         exit = wallCoords.Offset(exitDirection.ToVec());
 
@@ -396,9 +409,44 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return false;
         }
 
-        if (_turf.IsTileBlocked(tile.Value, CollisionGroup.Impassable))
+        if (_turf.IsTileBlocked(tile.Value, HoleBlockMask) || IsHoleSideBlocked(wallCoords.Position, exit.Position, user, hole, wall.Owner))
         {
             _popup.PopupEntity(Loc.GetString("rmc-acid-hole-blocked"), hole.Owner, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool CanReachHole(EntityUid user, Entity<XenoAcidHoleComponent> hole)
+    {
+        if (!TryGetHoleWall(hole, out var wall))
+            return false;
+
+        if (!TryGetHoleSide(user, wall.Owner, hole.Comp.EntranceDirection, out _))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-wrong-side"), hole.Owner, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        return CanCrossHoleSide(user, hole, wall.Owner);
+    }
+
+    private bool CanCrossHoleSide(EntityUid user, Entity<XenoAcidHoleComponent> hole, EntityUid wall)
+    {
+        var userCoords = _transform.GetMoverCoordinates(user);
+        var wallCoords = _transform.GetMoverCoordinates(wall);
+
+        if (!userCoords.TryDistance(EntityManager, _transform, wallCoords, out var distance) ||
+            distance > SharedInteractionSystem.InteractionRange)
+        {
+            _popup.PopupClient(Loc.GetString("interaction-system-user-interaction-cannot-reach"), user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (IsHoleSideBlocked(userCoords.Position, wallCoords.Position, user, hole, wall))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-entrance-blocked"), hole.Owner, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -408,46 +456,65 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private bool TryGetCrawlExitDirection(EntityUid user, EntityUid wall, Direction entrance, out Direction exitDirection)
     {
         exitDirection = default;
-        var userCoords = _transform.GetMoverCoordinates(user);
-        var wallCoords = _transform.GetMoverCoordinates(wall);
-
-        if (!userCoords.TryDelta(EntityManager, _transform, wallCoords, out var delta))
+        if (!TryGetHoleSide(user, wall, entrance, out var approach))
             return false;
 
-        if (delta == Vector2.Zero)
-            return false;
-
-        var approach = delta.GetDir();
         var opposite = entrance.GetOpposite();
 
-        if (approach.IsCardinal())
-        {
-            if (approach == entrance)
-            {
-                exitDirection = opposite;
-                return true;
-            }
-
-            if (approach == opposite)
-            {
-                exitDirection = entrance;
-                return true;
-            }
-
-            return false;
-        }
-
-        var flags = approach.AsFlag();
-        if (flags.HasFlag(entrance.AsFlag()))
+        if (approach == entrance)
         {
             exitDirection = opposite;
             return true;
         }
 
-        if (flags.HasFlag(opposite.AsFlag()))
+        if (approach == opposite)
         {
             exitDirection = entrance;
             return true;
+        }
+
+        return false;
+    }
+
+    private bool TryGetHoleSide(EntityUid user, EntityUid wall, Direction entrance, out Direction side)
+    {
+        side = default;
+        var userCoords = _transform.GetMoverCoordinates(user);
+        var wallCoords = _transform.GetMoverCoordinates(wall);
+
+        if (!userCoords.TryDelta(EntityManager, _transform, wallCoords, out var delta) ||
+            delta == Vector2.Zero)
+        {
+            return false;
+        }
+
+        var approach = delta.GetDir();
+        var opposite = entrance.GetOpposite();
+        if (approach != entrance && approach != opposite)
+            return false;
+
+        side = approach;
+        return true;
+    }
+
+    private bool IsHoleSideBlocked(Vector2 start, Vector2 end, EntityUid user, Entity<XenoAcidHoleComponent> hole, EntityUid wall)
+    {
+        var direction = end - start;
+        if (direction == Vector2.Zero)
+            return false;
+
+        var ray = new CollisionRay(start, direction.Normalized(), (int) HoleBlockMask);
+        var hits = _physics.IntersectRayWithPredicate(
+            Transform(user).MapID,
+            ray,
+            direction.Length(),
+            uid => !Transform(uid).Anchored || uid == user || uid == hole.Owner || uid == wall,
+            false);
+
+        foreach (var hit in hits)
+        {
+            if (hit.HitEntity != user && hit.HitEntity != hole.Owner && hit.HitEntity != wall)
+                return true;
         }
 
         return false;
@@ -535,8 +602,10 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         var holeComp = EnsureComp<XenoAcidHoleComponent>(hole);
         holeComp.Wall = wall.Owner;
         holeComp.EntranceDirection = direction;
+        Dirty(hole, holeComp);
 
         wall.Comp.Hole = hole;
+        Dirty(wall);
 
         if (_occluderQuery.TryComp(wall, out var occluder))
             _occluder.SetEnabled(wall.Owner, false, occluder);
@@ -550,6 +619,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return true;
 
         wall.Comp.Hole = null;
+        Dirty(wall);
         return false;
     }
 
@@ -558,6 +628,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         var hole = wall.Comp.Hole;
         wall.Comp.Hole = null;
         wall.Comp.PendingDirection = null;
+        Dirty(wall);
 
         if (!TerminatingOrDeleted(wall.Owner) &&
             _occluderQuery.TryComp(wall, out var occluder))
@@ -601,6 +672,12 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (TryComp(args.Used, out WelderComponent? _))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-repair-requires-nailgun"), wall.Owner, args.User, PopupType.MediumCaution);
+            return;
+        }
+
         if (TryComp(args.Used, out NailgunComponent? _))
         {
             TryStartRepair(args.User, args.Used, hole);
@@ -619,7 +696,9 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return;
 
         args.Cancelled = true;
-        args.Popup = Loc.GetString("rmc-acid-hole-repair-blocked");
+        args.Popup = _xenoQuery.HasComp(args.User)
+            ? Loc.GetString("rmc-acid-hole-repair-blocked")
+            : Loc.GetString("rmc-acid-hole-repair-requires-nailgun");
     }
 
     private bool TryGetActiveHole(Entity<XenoAcidHoleWallComponent> wall, out Entity<XenoAcidHoleComponent> hole)
@@ -641,9 +720,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (!CanCrawl(user, hole))
             return;
 
-        if (!TryGetCrawlExit(user, hole, out _))
-            return;
-
         var ev = new XenoAcidHoleCrawlDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, hole.Comp.CrawlDelay, ev, hole, hole)
         {
@@ -658,15 +734,21 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     {
         if (!_xenoQuery.TryComp(user, out _))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-only-small-xenos"), hole.Owner, user, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-too-large-non-xeno"), hole.Owner, user, PopupType.SmallCaution);
             return false;
         }
 
         if (!_size.TryGetSize(user, out var size) || size > RMCSizes.Xeno)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-too-large"), hole.Owner, user, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-acid-hole-only-small-xenos"), hole.Owner, user, PopupType.SmallCaution);
             return false;
         }
+
+        if (!CanReachHole(user, hole))
+            return false;
+
+        if (!TryGetCrawlExit(user, hole, out _))
+            return false;
 
         return true;
     }

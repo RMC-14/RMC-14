@@ -1,8 +1,9 @@
+using Robust.Shared.GameStates;
 using Robust.Shared.Maths;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoAcidHoleSystem))]
 public sealed partial class XenoAcidHoleComponent : Component
 {
@@ -27,6 +28,9 @@ public sealed partial class XenoAcidHoleComponent : Component
     [DataField]
     public int BigXenoDamageMax = 3500;
 
+    [DataField, AutoNetworkedField]
     public EntityUid? Wall;
+
+    [DataField, AutoNetworkedField]
     public Direction EntranceDirection = Direction.South;
 }
