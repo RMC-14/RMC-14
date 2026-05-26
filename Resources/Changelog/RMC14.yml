@@ -1,53 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Sling straps have been added. They store one item and prevent you from
-      dropping it.
-    type: Add
-  id: 2725
-  time: '2026-01-08T22:40:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8694
-- author: Dygon
-  changes:
-  - message: You can now extinguish yourself using the underbarrel extinguisher.
-    type: Fix
-  id: 2726
-  time: '2026-01-08T22:42:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8809
-- author: YO0teacher
-  changes:
-  - message: Acider runners can now fill resin traps with acid.
-    type: Tweak
-  - message: Fixed a popup with non-xenoids clicking on resin traps.
-    type: Fix
-  id: 2727
-  time: '2026-01-09T15:19:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8439
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the Stripped Corporate M54C MK2 being unable to take barrel and
-      underbarrel attachments.
-    type: Fix
-  id: 2728
-  time: '2026-01-11T10:38:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8805
-- author: Thereisabear
-  changes:
-  - message: Fixes Bravo Neckerchief colour when folded, it now represents Bravo as
-      intended.
-    type: Fix
-  id: 2729
-  time: '2026-01-11T10:41:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8761
-- author: Ian321
-  changes:
-  - message: The dropship terminal can now be used by the marines to summon a dropship.
-    type: Add
-  - message: The queen can now lock a dropships for 10 minutes before hijacking.
-    type: Add
-  id: 2730
-  time: '2026-01-11T10:45:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8345
 - author: Bobert-Brockson
   changes:
   - message: Praetorian sizzle no longer does 0 damage if the 5th stack is applied
@@ -4480,5 +4431,58 @@
   id: 3224
   time: '2026-05-20T12:53:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9202
+- author: JustMyselfUwU
+  changes:
+  - message: Shiva survivor parkas can now hold magazines and has a slightly higher
+      balistic armor value
+    type: Fix
+  id: 3225
+  time: '2026-05-21T17:45:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9857
+- author: CatAndHats
+  changes:
+  - message: 'Removed two Communications Relay spawns on Fiorina: LZ2 Engi Rings Comms
+      and LZ1 Comms Relay Comms'
+    type: Remove
+  id: 3226
+  time: '2026-05-22T19:15:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9920
+- author: SharkSnake98
+  changes:
+  - message: Added the Avant Biomedical container
+    type: Add
+  - message: Changed the descriptions of the Hypospray, Blood Vendor, & Handheld cutting
+      torch to reference specific corporations
+    type: Tweak
+  - message: Changed the Novaris Logo
+    type: Tweak
+  - message: Changed the name of the "NanoMed" to "QuickMed"
+    type: Tweak
+  id: 3227
+  time: '2026-05-22T22:07:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9190
+- author: kleinerstation13
+  changes:
+  - message: Resprited the MP27
+    type: Tweak
+  id: 3228
+  time: '2026-05-22T22:07:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9599
+- author: BlueMoon059
+  changes:
+  - message: Fixed a small formatting error with the M74AGM grenade packets, to make
+      sure they match.
+    type: Fix
+  id: 3229
+  time: '2026-05-25T05:57:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9918
+- author: BlueMoon059
+  changes:
+  - message: The M804 Heavygunner Rig has had its whitelisted items adjusted to remove
+      unintended additions.
+    type: Fix
+  id: 3230
+  time: '2026-05-25T19:09:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9916
 Name: RMC14
 Order: -1
