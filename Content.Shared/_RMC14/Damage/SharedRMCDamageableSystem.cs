@@ -10,7 +10,6 @@ using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
-using Content.Shared._RMC14.Projectiles;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Chat.Prototypes;
@@ -34,6 +33,8 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Smoke;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Damage;
 
@@ -70,6 +71,12 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<VictimInfectedComponent> _victimInfectedQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
+
+    private DamageSpecifier _mergedDamage = new DamageSpecifier();
+    private DamageSpecifier _mergedArmorPiercingDamage = new DamageSpecifier();
+    private HashSet<ProtoId<EmotePrototype>> _mergedEmotes = new HashSet<ProtoId<EmotePrototype>>();
+    private HashSet<string> _mergedPopups = new HashSet<string>();
+    private List<SoundSpecifier> _collectedSounds = new List<SoundSpecifier>();
 
     public override void Initialize()
     {
@@ -519,6 +526,48 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         return false;
     }
 
+    /// <summary>
+    /// This copies any damage values in other than are higher than mergeTarget into mergeTarget.
+    /// Supports scaling the other damage first (more efficient than allocating a new DamageSpecifier)
+    /// </summary>
+    public void MergeHigherSpecifiers(DamageSpecifier mergeTarget, DamageSpecifier? other, float otherScaleFactor = 1.0f)
+    {
+        if (other == null)
+            return;
+
+        var damageDict = mergeTarget.DamageDict;
+        foreach (var (type, value) in other.DamageDict)
+        {
+            var otherDamage = value * otherScaleFactor;
+            if (damageDict.TryGetValue(type, out var existing))
+            {
+                damageDict[type] = FixedPoint2.Max(existing, otherDamage);
+            }
+            else
+            {
+                damageDict[type] = otherDamage;
+            }
+        }
+    }
+
+    public bool TryScaleDamageOverTimeDamage(Entity<DamageOverTimeComponent?> ent, float scale)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return false;
+
+        if (ent.Comp.Damage == null)
+            return true; // treat this as scaling 0 damage, which is valid.
+
+        if (1f - float.Epsilon * 100f < scale && scale < 1f + float.Epsilon * 100f)
+            return true; // scaling by 1, effectively. Don't do anything and consider it done.
+
+        ent.Comp.Damage *= scale;
+
+        DirtyField(ent, ent.Comp, nameof(ent.Comp.Damage));
+
+        return true;
+    }
+
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
@@ -626,6 +675,16 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 continue;
             }
 
+            var damagingContacts = 0;
+            _mergedDamage.DamageDict.Clear();
+            _mergedArmorPiercingDamage.DamageDict.Clear();
+            _mergedEmotes.Clear();
+            _mergedPopups.Clear();
+            _collectedSounds.Clear();
+
+            // We go over every contact and keep the highest damage for EVERY category.
+            // That is, if one contact does 5 brute and 10 heat, and another does 10 brute and 5 heat,
+            // we take 10 brute and 10 heat.
             foreach (var contact in contacts)
             {
                 if (!_damageOverTimeQuery.TryComp(contact, out var damage))
@@ -650,26 +709,74 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 if (_hive.FromSameHive(contact, user))
                     continue;
 
-                userDamage.NextDamageAt = time + userDamage.DamageEvery;
+                damagingContacts += 1;
 
-                if (damage.Damage != null)
-                    DoDamage((contact, damage), user, damage.Damage);
+                var scale = 1.0f;
 
-                if (damage.ArmorPiercingDamage != null)
-                    DoDamage((contact, damage), user, damage.ArmorPiercingDamage, true, acidic: damage.Acidic);
+                if (damage.Acidic && HasComp<XenoComponent>(user))
+                    scale *= XenoSystem.XENO_ACID_DAMAGE_MULT;
+
+                if (damage.Multipliers is { } multipliers)
+                {
+                    foreach (var multiplier in multipliers)
+                    {
+                        if (_entityWhitelist.IsWhitelistPass(multiplier.Whitelist, user))
+                        {
+                            scale *= (float)multiplier.Multiplier;
+                        }
+                    }
+                }
+
+                MergeHigherSpecifiers(_mergedDamage, damage.Damage, scale);
+                MergeHigherSpecifiers(_mergedArmorPiercingDamage, damage.ArmorPiercingDamage, scale);
 
                 if (damage.Emotes is { Count: > 0 } emotes)
                 {
-                    var emote = _random.Pick(emotes);
+                    _mergedEmotes.UnionWith(emotes);
+                }
+
+                if (damage.Popup is { } popup)
+                {
+                    _mergedPopups.Add(popup);
+                }
+
+                if (damage.Sound is { } sound)
+                {
+                    _collectedSounds.Add(sound);
+                }
+
+                // Try to prevent/mitigate performance degredation from unexpectedly high counts of damaging contacts.
+                if (damagingContacts >= 20)
+                    break;
+            }
+
+            if (damagingContacts > 0)
+            {
+                userDamage.NextDamageAt = time + userDamage.DamageEvery;
+
+                if (_mergedDamage.AnyPositive())
+                    _damageable.TryChangeDamage(user, _mergedDamage);
+
+                if (_mergedArmorPiercingDamage.AnyPositive())
+                    _damageable.TryChangeDamage(user, _mergedArmorPiercingDamage, true);
+
+                if (_mergedEmotes.Count > 0)
+                {
+                    var emote = _random.Pick(_mergedEmotes);
                     DoEmote(user, emote);
                 }
 
-                if (damage.Popup is { } popup && _random.Prob(0.5f))
+                if (_mergedPopups.Count > 0 && _random.Prob(0.5f))
+                {
+                    var popup = _random.Pick(_mergedPopups);
                     _popup.PopupEntity(popup, user, user, PopupType.SmallCaution);
+                }
 
-                _audio.PlayPvs(damage.Sound, user);
-
-                break;
+                if (_collectedSounds.Count > 0)
+                {
+                    var sound = _random.Pick(_collectedSounds);
+                    _audio.PlayPvs(sound, user);
+                }
             }
         }
     }

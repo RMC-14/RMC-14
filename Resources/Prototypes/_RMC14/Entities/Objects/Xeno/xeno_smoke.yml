@@ -35,6 +35,7 @@
   - type: EvenSmoke
     spawn: RMCSmokeAcid
     range: 3
+    rangeMultipliesRegularDamage: true
   - type: DamageOverTime
     affectsDead: false
     affectsInfectedNested: false
@@ -44,7 +45,7 @@
         Asphyxiation: 3
     damage:
       types:
-        Heat: 35
+        Heat: 17.5
     barricadeDamage:
       types:
         Heat: 8.5
@@ -107,7 +108,7 @@
   - type: DamageOverTime
     affectsDead: false
     affectsInfectedNested: false
-    damage:
+    armorPiercingDamage:
       types:
         Asphyxiation: 5
     whitelist:

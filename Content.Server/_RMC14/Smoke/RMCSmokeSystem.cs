@@ -1,25 +1,23 @@
-using System.Diagnostics;
 using Content.Server.Atmos.Components;
 using Content.Server.Spreader;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Smoke;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
-using Content.Shared.Prototypes;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
 namespace Content.Server._RMC14.Smoke;
 
 public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
 {
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _damageable = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
 
     private readonly List<(MapGridComponent Grid, TileRef Tile)> _tiles = new();
 
@@ -39,9 +37,11 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
 
     private void OnEvenSmokeSpreadNeighbors(Entity<EvenSmokeComponent> ent, ref SpreadNeighborsEvent args)
     {
+        // once we've spread, do not spread anymore
+        RemCompDeferred<ActiveEdgeSpreaderComponent>(ent);
+
         if (ent.Comp.Range == 0)
         {
-            RemCompDeferred<ActiveEdgeSpreaderComponent>(ent);
             return;
         }
 
@@ -57,6 +57,11 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
                 _tiles.Add(neighborTile);
         }
 
+        if (Prototype(ent) is not { } prototype)
+            return;
+
+        var selfDespawn = _timedDespawnQuery.CompOrNull(ent);
+
         foreach (var tile in _tiles)
         {
             var coords = _map.GridTileToLocal(tile.Tile.GridUid, tile.Grid, tile.Tile.GridIndices);
@@ -65,22 +70,46 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
             var blockSmoke = false;
             while (smokeEnumerator.MoveNext(out var uid))
             {
-                if (TryComp<EvenSmokeComponent>(uid, out var evenSmoke) && evenSmoke.Spawn == ent.Comp.Spawn)
+                if (Prototype(uid)?.ID == prototype.ID && TryComp<EvenSmokeComponent>(uid, out var uidSmokeComp))
                 {
-                    blockSmoke = true;
-                    break;
+                    if (uidSmokeComp.Range < ent.Comp.Range - 1)
+                    {
+                        // "weaker" smoke gets replaced
+                        QueueDel(uid);
+                    }
+                    else if (uidSmokeComp.Range == ent.Comp.Range - 1
+                        && selfDespawn != null
+                        && _timedDespawnQuery.TryComp(uid, out var uidDespawn)
+                        && uidDespawn.Lifetime < selfDespawn.Lifetime)
+                    {
+                        // equal smoke that doesn't last as long gets replaced
+                        QueueDel(uid);
+                    }
+                    else
+                    {
+                        blockSmoke = true;
+                        break;
+                    }
                 }
             }
 
             if (blockSmoke)
                 continue;
 
-            var smoke = SpawnAtPosition(ent.Comp.Spawn, coords);
+            // To prevent infinite loops due to every spawn having the same InitialSpread, we have to make
+            // the entity WITHOUT map initialization, set the InitialSpread properly, and THEN map initialize.
+            var smoke = EntityManager.CreateEntityUninitialized(prototype.ID, coords);
+            EntityManager.InitializeAndStartEntity(smoke, false);
+
             _hive.SetSameHive(ent.Owner, smoke);
             if (_evenSmokeQuery.TryComp(smoke, out var smokeComp))
+            {
                 smokeComp.Range = ent.Comp.Range - 1;
+                smokeComp.InitialSpread = 0; // We are spreading normally in this function, do NOT burst spread.
+                TryRefreshDamage((smoke, smokeComp));
+            }
 
-            if (_timedDespawnQuery.TryComp(ent, out var selfDespawn) &&
+            if (selfDespawn != null &&
                 _timedDespawnQuery.TryComp(smoke, out var otherDespawn))
             {
                 otherDespawn.Lifetime = selfDespawn.Lifetime;
@@ -88,27 +117,15 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
 
             EnsureComp<ActiveEdgeSpreaderComponent>(smoke);
 
-            if (ent.Comp.InitialSpread > 0)
-            {
-                var childSmokeComponent = EnsureComp<EvenSmokeComponent>(smoke);
-                childSmokeComponent.Range = ent.Comp.Range - 1;
-                childSmokeComponent.Spawn = ent.Comp.Spawn;
-            }
+            // Finally map initialize the entity.
+            EntityManager.RunMapInit(smoke, MetaData(smoke));
         }
     }
 
     private void OnEvenSmokeMapInit(Entity<EvenSmokeComponent> ent, ref MapInitEvent args)
     {
-        if (ent.Comp.InitialSpread <= 0)
-            return;
-
-        if (_prototype.TryIndex(ent.Comp.Spawn, out var spawnProto) && spawnProto.HasComponent<EvenSmokeComponent>())
-        {
-            Debug.Assert(!spawnProto.HasComponent<EvenSmokeComponent>()); // This would cause an infinite loop, so we return.
-            return;
-        }
-
-        SpreadBurst(ent);
+        if (ent.Comp.InitialSpread > 0)
+            SpreadBurst(ent);
     }
 
     private void SpreadBurst(Entity<EvenSmokeComponent> parent)
@@ -116,68 +133,131 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
         if (!_rmcMap.TryGetTileRefForEnt(parent.Owner.ToCoordinates(), out var grid, out var tile))
             return;
 
+        if (Prototype(parent) is not { } prototype)
+            return;
+
         var generations = parent.Comp.InitialSpread;
-        var frontier = new List<(MapGridComponent Grid, TileRef Tile)>();
-        frontier.Add((grid.Comp, tile));
+        var frontier = new List<(MapGridComponent Grid, TileRef Tile, AtmosDirection FromDir)>();
+        frontier.Add((grid.Comp, tile, AtmosDirection.Invalid));
 
-        for (var gen = 1; gen <= generations; gen++)
+        var parentDespawn = _timedDespawnQuery.CompOrNull(parent);
+
+        for (var gen = 0; gen <= generations; gen++)
         {
-            var nextFrontier = new List<(MapGridComponent Grid, TileRef Tile)>();
-            foreach (var (currGrid, currTile) in frontier)
+            var nextFrontier = new List<(MapGridComponent Grid, TileRef Tile, AtmosDirection FromDir)>();
+            foreach (var (curGrid, curTile, fromDir) in frontier)
             {
-                var anchoredEnumerator = _rmcMap.GetAnchoredEntitiesEnumerator((currTile.GridUid, currGrid), currTile.GridIndices);
+                var blocked = false;
+                var anchoredEnumerator = _rmcMap.GetAnchoredEntitiesEnumerator((curTile.GridUid, curGrid), curTile.GridIndices);
                 var blockedDirs = AtmosDirection.Invalid;
-                var existingSmokes = new HashSet<Vector2i>();
 
+                // check objects that exist on our current tile
                 while (anchoredEnumerator.MoveNext(out var ent))
                 {
                     if (TryComp<AirtightComponent>(ent, out var airtight) && airtight.AirBlocked)
-                        blockedDirs |= airtight.AirBlockedDirection;
+                    {
+                        if ((airtight.AirBlockedDirection & fromDir) != 0)
+                        {
+                            // this tile blocks spreading from the direction we are trying to spread from
+                            blocked = true;
+                            break;
+                        }
 
-                    if (TryComp<EvenSmokeComponent>(ent, out var evenSmoke) && evenSmoke.Spawn == parent.Comp.Spawn)
-                        existingSmokes.Add(currTile.GridIndices);
+                        blockedDirs |= airtight.AirBlockedDirection;
+                    }
+
+                    if (Prototype(ent)?.ID == prototype.ID)
+                    {
+                        if (TryComp<EvenSmokeComponent>(ent, out var entSmokeComp)
+                            && entSmokeComp.Range < parent.Comp.Range - gen)
+                        {
+                            // "weaker" smoke gets replaced
+                            QueueDel(ent);
+                        }
+                        else if (parentDespawn != null
+                            && entSmokeComp != null
+                            && entSmokeComp.Range == parent.Comp.Range - gen
+                            && _timedDespawnQuery.TryComp(ent, out var entDespawn)
+                            && parentDespawn.Lifetime > entDespawn.Lifetime)
+                        {
+                            // same "strength" but doesn't last as long gets replaced.
+                            QueueDel(ent);
+                        }
+                        else
+                        {
+                            blocked = true;
+                        }
+                    }
                 }
 
+                // gen 0 is the progenator and can't be blocked
+                if (gen != 0 && blocked)
+                    continue;
+
+                // collect the next frontier
                 foreach (var direction in RMCDirectionExtensions.GetCardinals())
                 {
+                    // don't try spreading into the direction we came from
+                    if (direction.ToAtmosDirection() == fromDir)
+                        continue;
+
+                    // don't spread if something on our tile blocks spreading that direction
                     if ((blockedDirs & direction.ToAtmosDirection()) != 0)
                         continue;
 
-                    var neighborIndices = currTile.GridIndices + direction.ToIntVec();
+                    var neighborIndices = curTile.GridIndices + direction.ToIntVec();
 
-                    if (existingSmokes.Contains(neighborIndices))
-                        continue;
-
-                    if (!_map.TryGetTileRef(currTile.GridUid, currGrid, neighborIndices, out var neighborTile))
+                    if (!_map.TryGetTileRef(curTile.GridUid, curGrid, neighborIndices, out var neighborTile))
                         continue;
 
                     if (neighborTile.Tile.IsEmpty)
                         continue;
 
-                    var coords = _map.GridTileToLocal(neighborTile.GridUid, currGrid, neighborTile.GridIndices);
-                    var smoke = SpawnAtPosition(parent.Comp.Spawn, coords);
-                    _hive.SetSameHive(parent.Owner, smoke);
-
-                    if (_timedDespawnQuery.TryComp(parent.Owner, out var selfDespawn) &&
-                        _timedDespawnQuery.TryComp(smoke, out var otherDespawn))
-                    {
-                        otherDespawn.Lifetime = selfDespawn.Lifetime;
-                    }
-
-                    // Only the last generation tries to spread normally
-                    if (gen == generations)
-                    {
-                        EnsureComp<ActiveEdgeSpreaderComponent>(smoke);
-                        var smokeComp = EnsureComp<EvenSmokeComponent>(smoke);
-                        smokeComp.Range = parent.Comp.Range - parent.Comp.InitialSpread;
-                        smokeComp.Spawn = parent.Comp.Spawn;
-                    }
-
-                    nextFrontier.Add((currGrid, neighborTile));
+                    nextFrontier.Add((curGrid, neighborTile, direction.ToAtmosDirection().GetOpposite()));
                 }
+
+                // gen 0 is the progenator, don't create smoke for it
+                if (gen == 0)
+                    continue;
+
+                var coords = _map.GridTileToLocal(curTile.GridUid, curGrid, curTile.GridIndices);
+
+                // To prevent infinite loops due to every spawn having the same InitialSpread, we have to make
+                // the entity WITHOUT map initialization, set the InitialSpread properly, and THEN map init it.
+                var smoke = EntityManager.CreateEntityUninitialized(prototype.ID, coords);
+                EntityManager.InitializeAndStartEntity(smoke, false);
+
+                _hive.SetSameHive(parent.Owner, smoke);
+
+                if (_timedDespawnQuery.TryComp(parent.Owner, out var selfDespawn) &&
+                    _timedDespawnQuery.TryComp(smoke, out var otherDespawn))
+                {
+                    otherDespawn.Lifetime = selfDespawn.Lifetime;
+                }
+
+                var smokeComp = EnsureComp<EvenSmokeComponent>(smoke);
+                smokeComp.Range = parent.Comp.Range - gen;
+                smokeComp.InitialSpread = 0; // we are handling the whole burst, we do NOT want new bursts.
+
+                // Only the last generation spreads normally
+                if (gen == generations)
+                {
+                    EnsureComp<ActiveEdgeSpreaderComponent>(smoke);
+                }
+
+                // Finally map-init the entity
+                EntityManager.RunMapInit(smoke, MetaData(smoke));
             }
 
             frontier = nextFrontier;
         }
+    }
+
+    private bool TryRefreshDamage(Entity<EvenSmokeComponent> ent)
+    {
+        if (!ent.Comp.RangeMultipliesRegularDamage)
+            return true;
+
+        return _damageable.TryScaleDamageOverTimeDamage(ent.Owner, ent.Comp.Range);
     }
 }
