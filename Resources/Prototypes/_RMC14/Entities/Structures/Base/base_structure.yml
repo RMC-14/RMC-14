@@ -158,7 +158,6 @@
     structure: true
     meltTimeMult: 3
   - type: XenoAcidHoleWall
-    breakResultPrototype: RMCGirderDamaged
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
