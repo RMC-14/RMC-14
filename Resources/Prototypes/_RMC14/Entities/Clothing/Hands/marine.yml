@@ -93,10 +93,6 @@
 
 - type: entity
   parent: CMHandsBlackMarine
-  id: RMCHandsBlackFireResistance
+  id: RMCHandsBlackFireResistance # TODO RMC14 fire protection
   name: fire resistant black gloves
   description: "These gloves are fire-resistant."
-  components:
-  - type: TemperatureProtection
-    heatingCoefficient: 0.01
-    coolingCoefficient: 1
