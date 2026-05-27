@@ -26,14 +26,14 @@
     id: RMCIDSPP
     ears: RMCHeadsetSPPCrashland
     pocket1: RMCPouchFirstAidSplintsGauzeOintment
-    pocket2: RMCPouchFlareFilled
+    pocket2: RMCPouchFlareR44Filled
 
 - type: entity
   id: RMCSurvivorPresetSPPCrashlandWeaponOnly
   name: spp crashland survivor weapon only preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
@@ -47,7 +47,7 @@
   name: spp crashland survivor no belt preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
@@ -63,7 +63,7 @@
       - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ] # 3/5ths chance for webbing
       - [ RMCArmorSPPSupportSurvivorFill ]
     - # Headwear // TODO RMC14 implement random chance here in a less ugly way
-      - [ ArmorHelmetSPP ] # 2/9 chance 
+      - [ ArmorHelmetSPP ] # 2/9 chance
       - [ CMHeadCapSPP ] # 3/9 chance
       - [ CMHeadCapSPPBeret ] # 2/9 chance
       - [ CMHeadCapSPPUshanka ] # 2/9 chance
@@ -73,7 +73,7 @@
   name: spp crashland survivor all random preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ]
     - [ RMCMagazineRifleType71, RMCMagazineRifleType71, RMCWeaponRifleType71 ] # 2/5 chance for Type 71
@@ -89,7 +89,7 @@
       - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ] # 3/5ths chance for webbing
       - [ RMCArmorSPPSupportSurvivorFill ]
     - # Headwear // TODO RMC14 implement random chance here in a less ugly way
-      - [ ArmorHelmetSPP ] # 2/9 chance 
+      - [ ArmorHelmetSPP ] # 2/9 chance
       - [ CMHeadCapSPP ] # 3/9 chance
       - [ CMHeadCapSPPBeret ] # 2/9 chance
       - [ CMHeadCapSPPUshanka ] # 2/9 chance
