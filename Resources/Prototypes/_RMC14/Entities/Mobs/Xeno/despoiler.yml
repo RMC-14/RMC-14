@@ -1,0 +1,177 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  id: RMCMobXenoDespoiler
+  name: Despoiler
+  description: A massive, hunched xenomorph with hyper-pressurized acid sacs lining its spine. Steam hisses from cracks in its carapace.
+  components:
+  - type: GhostRole
+    name: rmc-xeno-despoiler-name
+    description: rmc-xeno-despoiler-description
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Despoiler/despoiler.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
+      visible: false
+    - map: [ "enum.XenoAcidAnimationVisualLayers.Base" ]
+      state: spit
+      visible: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 200
+        mask:
+        - MobMask
+        - BarbedBarricade
+        - BarricadeImpassable
+        layer:
+        - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 200
+        layer:
+        - BulletImpassable
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      650: Critical
+      750: Dead
+  - type: Xeno
+    role: RMCXenoDespoiler
+    tier: 3
+    hudOffset: 0,0
+    unlockAt: 900
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidStrong
+    - RMCActionXenoDespoilerAcidBarrage
+    - RMCActionXenoDespoilerCausticEmbrace
+    - RMCActionXenoDespoilerOozingWounds
+    - RMCActionXenoDespoilerCatalyze
+    - ActionXenoDevolve
+  - type: XenoHeavy
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoSpitter
+  - type: XenoPlasma
+    plasma: 500
+    maxPlasma: 500
+    plasmaRegenOnWeeds: 4
+  - type: XenoAcid
+  - type: CMArmor
+    xenoArmor: 25
+    explosionArmor: 20
+  - type: XenoDevour
+  - type: XenoTailStab
+    toggle: false
+    tailDamage:
+      groups:
+        Brute: 20
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 18
+        Heat: 7
+  - type: XenoDespoiler
+    finishingStabBonusByTier:
+    - types:
+        Heat: 10
+    - types:
+        Heat: 20
+    - types:
+        Heat: 30
+    - types:
+        Heat: 40
+    acidComponents:
+    - type: UserAcided
+      armorPiercing: 40
+      duration: 12
+      damageEvery: 1
+      damage:
+        types:
+          Heat: 1
+  - type: XenoDespoilerHypertension
+    maxStacks: 4
+    pointsPerStack: 200
+    pointsPerSlash: 100
+    decayDelay: 10
+    decayPerSecond: 200
+    bonusBurnPerStack: 10
+  - type: XenoDespoilerSlashOnHit
+    enhanceStacksThreshold: 3
+  - type: Tackle
+    chance: 0.2
+    stunMin: 2
+    stunMax: 3
+  - type: AcidBloodSplash
+    isActivateSplashOnGib: false
+  - type: RMCGibOnDeath
+    gibChance: 1.0
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.4
+    baseSprintSpeed: 4.2
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6375
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7075
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: PointLight
+    enabled: true
+    radius: 1.7
+    softness: 1
+    color: "#83ff66"
+    autoRot: true
+  - type: RMCSize
+    size: Big
+  - type: RMCXenoDamageVisuals
+    prefix: despoiler
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: boiler
+  - type: Flammable
+    damage:
+      types:
+        Heat: 3
+  - type: FixedIdentity
+    name: rmc-xeno-despoiler-name
+  - type: RMCActionOrder
+    id: RMCXenoDespoiler
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.3

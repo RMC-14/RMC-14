@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/xenos/effects.dmi (acid_puddle, xeno_acid_lingering states), repacked into SS14 strip format.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "puddle",
+      "delays": [ [ 0.18, 0.18, 0.18, 0.18, 0.18, 0.18 ] ]
+    },
+    {
+      "name": "xeno_acid_lingering"
+    }
+  ]
+}
