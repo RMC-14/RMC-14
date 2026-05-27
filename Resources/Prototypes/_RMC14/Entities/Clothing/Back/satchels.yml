@@ -344,7 +344,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCProvostPen
+    - id: CMPenFountain
     - id: CMStampApproved
     - id: CMStampDenied
 
