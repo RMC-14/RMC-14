@@ -62,7 +62,7 @@
     evolvesTo:
     - CMXenoBoiler
     - CMXenoPraetorian
-    - RMCMobXenoDespoiler
+    - RMCXenoDespoiler
   - type: XenoSpit
   - type: XenoChargeSpit
   - type: XenoScatteredSpit
