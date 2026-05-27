@@ -27,9 +27,6 @@
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
-    - map: [ "enum.XenoAcidAnimationVisualLayers.Base" ]
-      state: spit
-      visible: false
   - type: Fixtures
     fixtures:
       fix1:
