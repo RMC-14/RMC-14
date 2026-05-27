@@ -12,9 +12,6 @@ public sealed partial class XenoAcidHoleWallComponent : Component
     public EntProtoId HolePrototype = "RMCAcidHole";
 
     [DataField]
-    public EntProtoId BreakResultPrototype = "RMCGirderDamaged";
-
-    [DataField]
     public float DamageNearCapRatio = 0.9f;
 
     [DataField, AutoNetworkedField]
