@@ -9,7 +9,7 @@
   startingGear: RMCGearProvostEnforcer
   icon: RMCJobIconProvostEnforcer
   joinNotifyCrew: false
-  supervisors: rmc-job-supervisors-provost-marshal
+  supervisors: rmc-job-supervisors-provost-team-leader
   accessGroups:
   - ShipMasterAccess
   spawnMenuRoleName: Provost Enforcer
