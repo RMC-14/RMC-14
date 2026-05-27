@@ -54,7 +54,7 @@
   parent: CMPenFountain
   id: RMCProvostPen
   name: provost pen
-  description: A sleek black shell pen with the Provost Office sigil engraved into the side. It can change colors as needed for various functions within the Provost and Military Police.
+  description: A sleek black shell pen with the Provost Office sigil engraved into the side.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/paper.rsi
