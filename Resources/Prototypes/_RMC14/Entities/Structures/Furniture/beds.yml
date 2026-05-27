@@ -97,7 +97,7 @@
     anchored: true
     noRot: false
   - type: Physics
-    bodyType: Dynamic
+    bodyType: Static
 
 - type: entity
   parent: RMCBedBunkBase
