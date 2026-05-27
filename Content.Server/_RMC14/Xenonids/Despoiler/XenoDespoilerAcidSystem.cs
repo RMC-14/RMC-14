@@ -36,6 +36,7 @@ public sealed class XenoDespoilerAcidSystem : SharedXenoDespoilerAcidSystem
         SubscribeLocalEvent<XenoDespoilerSlashOnHitComponent, MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<XenoDespoilerSlashOnHitComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<XenoDespoilerSlashOnHitComponent, RMCGetTailStabBonusDamageEvent>(OnGetTailStabBonusDamage);
+        SubscribeLocalEvent<XenoDespoilerHypertensionComponent, DamageChangedEvent>(OnDamageTaken);
     }
 
     private void OnGetMeleeDamage(EntityUid uid, XenoDespoilerSlashOnHitComponent comp, ref GetMeleeDamageEvent args)
@@ -48,6 +49,14 @@ public sealed class XenoDespoilerAcidSystem : SharedXenoDespoilerAcidSystem
     {
         if (TryGetHyperBurn(uid, out var burn))
             args.Damage += burn;
+    }
+
+    private void OnDamageTaken(EntityUid uid, XenoDespoilerHypertensionComponent comp, DamageChangedEvent args)
+    {
+        if (!args.DamageIncreased || args.DamageDelta is not { } delta)
+            return;
+
+        _hyper.AddPoints(uid, comp, (float) delta.GetTotal() * comp.PointsPerDamageTaken);
     }
 
     private bool TryGetHyperBurn(EntityUid uid, out DamageSpecifier burn)

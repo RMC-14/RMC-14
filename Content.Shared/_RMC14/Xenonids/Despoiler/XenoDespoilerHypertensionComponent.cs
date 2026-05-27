@@ -22,6 +22,9 @@ public sealed partial class XenoDespoilerHypertensionComponent : Component
     public float PointsPerSlash = 100f;
 
     [DataField]
+    public float PointsPerDamageTaken = 0.5f;
+
+    [DataField]
     public TimeSpan DecayDelay = TimeSpan.FromSeconds(10);
 
     [DataField]
