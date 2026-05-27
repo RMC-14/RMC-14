@@ -14,7 +14,8 @@ public sealed partial class XenoAcidHoleWallComponent : Component
     [DataField]
     public float DamageNearCapRatio = 0.9f;
 
-    [DataField, AutoNetworkedField]
+    [AutoNetworkedField]
     public EntityUid? Hole;
+
     public Direction? PendingDirection;
 }

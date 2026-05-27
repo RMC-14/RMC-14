@@ -44,18 +44,18 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly OccluderSystem _occluder = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly RMCPullingSystem _pulling = default!;
     [Dependency] private readonly RMCRepairableSystem _repairable = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
-    [Dependency] private readonly RMCPullingSystem _pulling = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly XenoClawsSystem _xenoClaws = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly XenoClawsSystem _xenoClaws = default!;
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<OccluderComponent> _occluderQuery;
@@ -113,7 +113,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!TryComp(wall, out XenoAcidHoleWallComponent? wallComp))
+        if (!TryComp<XenoAcidHoleWallComponent>(wall, out var wallComp))
             return;
 
         if (!TryGetHoleDirection(wall, attacker, out var direction))
@@ -127,7 +127,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return false;
 
-        if (!TryComp(wall, out XenoAcidHoleWallComponent? wallComp))
+        if (!TryComp<XenoAcidHoleWallComponent>(wall, out var wallComp))
             return false;
 
         if (TerminatingOrDeleted(wall))
@@ -221,7 +221,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (wall.Comp.Hole is not { } hole ||
+        if (wall.Comp.Hole is not { Valid: true } hole ||
             TerminatingOrDeleted(hole))
         {
             return;
@@ -232,9 +232,9 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
     private void OnHoleTerminating(Entity<XenoAcidHoleComponent> hole, ref EntityTerminatingEvent args)
     {
-        if (hole.Comp.Wall is not { } wall ||
+        if (hole.Comp.Wall is not { Valid: true } wall ||
             TerminatingOrDeleted(wall) ||
-            !TryComp(wall, out XenoAcidHoleWallComponent? wallComp))
+            !TryComp<XenoAcidHoleWallComponent>(wall, out var wallComp))
         {
             return;
         }
@@ -286,13 +286,13 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (TryComp(args.Used, out WelderComponent? _))
+        if (TryComp<WelderComponent>(args.Used, out _))
         {
             _popup.PopupEntity(Loc.GetString("rmc-acid-hole-repair-requires-nailgun"), hole.Owner, args.User, PopupType.MediumCaution);
             return;
         }
 
-        if (TryComp(args.Used, out NailgunComponent? _))
+        if (TryComp<NailgunComponent>(args.Used, out _))
         {
             TryStartRepair(args.User, args.Used, hole);
             return;
@@ -312,10 +312,10 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (args.Used is not { } used)
             return;
 
-        if (!TryComp(used, out NailgunComponent? nailgun))
+        if (!TryComp<NailgunComponent>(used, out var nailgun))
             return;
 
-        if (!TryComp(args.User, out HandsComponent? hands))
+        if (!TryComp<HandsComponent>(args.User, out var hands))
             return;
 
         if (!_repairable.TryGetNailgunRepairStack((args.User, hands), hole.Comp.RepairMaterialCost, out var stackUid, out var stack, PlasteelStack))
@@ -376,7 +376,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (!TryGetHoleWall(hole, out var wall))
             return;
 
-        if (!TryGetBreakData(args.User, wall, out _))
+        if (!CanBreakHole(args.User, wall))
             return;
 
         args.Handled = true;
@@ -395,9 +395,9 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private bool TryGetHoleWall(Entity<XenoAcidHoleComponent> hole, out Entity<XenoAcidHoleWallComponent> wall)
     {
         wall = default;
-        if (hole.Comp.Wall is not { } wallUid ||
+        if (hole.Comp.Wall is not { Valid: true } wallUid ||
             TerminatingOrDeleted(wallUid) ||
-            !TryComp(wallUid, out XenoAcidHoleWallComponent? wallComp))
+            !TryComp<XenoAcidHoleWallComponent>(wallUid, out var wallComp))
         {
             return false;
         }
@@ -531,7 +531,13 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             mapId,
             ray,
             direction.Length(),
-            uid => !Transform(uid).Anchored || uid == user || uid == hole.Owner || uid == wall,
+            uid =>
+            {
+                if (uid == user || uid == hole.Owner || uid == wall)
+                    return true;
+
+                return TryComp(uid, out TransformComponent? xform) && !xform.Anchored;
+            },
             false);
 
         foreach (var hit in hits)
@@ -549,7 +555,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private bool ShouldIgnoreHoleBlocker(EntityUid blocker)
     {
         if (HasComp<BarricadeComponent>(blocker))
-            return !TryComp(blocker, out BarbedComponent? barbed) || !barbed.IsBarbed;
+            return !TryComp<BarbedComponent>(blocker, out var barbed) || !barbed.IsBarbed;
 
         if (HasComp<DirectionalAttackBlockerComponent>(blocker))
             return false;
@@ -668,7 +674,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
     private bool HasActiveHole(Entity<XenoAcidHoleWallComponent> wall)
     {
-        if (wall.Comp.Hole is { } hole && !TerminatingOrDeleted(hole))
+        if (wall.Comp.Hole is { Valid: true } hole && !TerminatingOrDeleted(hole))
             return true;
 
         wall.Comp.Hole = null;
@@ -689,8 +695,12 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             _occluder.SetEnabled(wall.Owner, true, occluder);
         }
 
-        if (deleteHole && hole != null && !TerminatingOrDeleted(hole.Value))
-            QueueDel(hole.Value);
+        if (deleteHole &&
+            hole is { Valid: true } holeUid &&
+            !TerminatingOrDeleted(holeUid))
+        {
+            QueueDel(holeUid);
+        }
     }
 
     private void OnWallInteractHand(Entity<XenoAcidHoleWallComponent> wall, ref InteractHandEvent args)
@@ -725,13 +735,13 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (TryComp(args.Used, out WelderComponent? _))
+        if (TryComp<WelderComponent>(args.Used, out _))
         {
             _popup.PopupEntity(Loc.GetString("rmc-acid-hole-repair-requires-nailgun"), wall.Owner, args.User, PopupType.MediumCaution);
             return;
         }
 
-        if (TryComp(args.Used, out NailgunComponent? _))
+        if (TryComp<NailgunComponent>(args.Used, out _))
         {
             TryStartRepair(args.User, args.Used, hole);
             return;
@@ -757,9 +767,9 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private bool TryGetActiveHole(Entity<XenoAcidHoleWallComponent> wall, out Entity<XenoAcidHoleComponent> hole)
     {
         hole = default;
-        if (wall.Comp.Hole is not { } holeUid ||
+        if (wall.Comp.Hole is not { Valid: true } holeUid ||
             TerminatingOrDeleted(holeUid) ||
-            !TryComp(holeUid, out XenoAcidHoleComponent? holeComp))
+            !TryComp<XenoAcidHoleComponent>(holeUid, out var holeComp))
         {
             return false;
         }
@@ -811,7 +821,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (!TryGetHoleWall(hole, out var wall))
             return false;
 
-        if (!TryGetBreakData(user, wall, out _))
+        if (!CanBreakHole(user, wall))
             return false;
 
         var ev = new XenoAcidHoleBreakDoAfterEvent();
@@ -826,25 +836,15 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         return _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private bool TryGetBreakData(EntityUid user, Entity<XenoAcidHoleWallComponent> wall, out ReceiverXenoClawsComponent receiver)
+    private bool CanBreakHole(EntityUid user, Entity<XenoAcidHoleWallComponent> wall)
     {
-        receiver = null!;
-
         if (!HasActiveHole(wall.Owner))
             return false;
 
-        if (!_receiverClawsQuery.TryComp(wall, out var tempReceiver))
+        if (!_xenoQuery.TryComp(user, out _))
             return false;
 
-        receiver = tempReceiver!;
-
-        if (!_xenoQuery.TryComp(user, out var xeno) ||
-            !HasRequiredClaws(receiver, user, xeno))
-        {
-            return false;
-        }
-
-        if (!_size.TryGetSize(user, out var size) || size <= RMCSizes.SmallXeno)
+        if (!_size.TryGetSize(user, out var size) || size < RMCSizes.Big)
             return false;
 
         return true;
@@ -852,7 +852,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
     private void TryStartRepair(EntityUid user, EntityUid used, Entity<XenoAcidHoleComponent> hole)
     {
-        if (!TryComp(user, out HandsComponent? hands))
+        if (!TryComp<HandsComponent>(user, out var hands))
             return;
 
         if (!_repairable.TryGetNailgunRepairStack((user, hands), hole.Comp.RepairMaterialCost, out _, out _, PlasteelStack))

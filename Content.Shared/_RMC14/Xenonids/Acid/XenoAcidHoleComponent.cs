@@ -22,15 +22,9 @@ public sealed partial class XenoAcidHoleComponent : Component
     [DataField]
     public int RepairNailCost = 4;
 
-    [DataField]
-    public int BigXenoDamageMin = 2000;
-
-    [DataField]
-    public int BigXenoDamageMax = 3500;
-
-    [DataField, AutoNetworkedField]
+    [AutoNetworkedField]
     public EntityUid? Wall;
 
-    [DataField, AutoNetworkedField]
+    [AutoNetworkedField]
     public Direction EntranceDirection = Direction.South;
 }
