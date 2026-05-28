@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Bobert-Brockson
-  changes:
-  - message: Praetorian sizzle no longer does 0 damage if the 5th stack is applied
-      by spray acid.
-    type: Fix
-  id: 2731
-  time: '2026-01-11T10:43:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8843
 - author: CatAndHats
   changes:
   - message: Flamethowers now warn you when you are out of fuel
@@ -4484,5 +4476,14 @@
   id: 3230
   time: '2026-05-25T19:09:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9916
+- author: kleinerstation13
+  changes:
+  - message: Survivors now spawn together instead of separately on Fiorina. Their
+      holdout locations include the Lowsec Cellblock, Garden, Engineering Ring, and
+      Bobda Promo. Credit to Sharksnake98 for mapping the Engineering Ring insert.
+    type: Tweak
+  id: 3231
+  time: '2026-05-28T20:39:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9924
 Name: RMC14
 Order: -1
