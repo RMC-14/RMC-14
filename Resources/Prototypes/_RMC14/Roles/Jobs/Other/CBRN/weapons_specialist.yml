@@ -85,7 +85,6 @@
 - type: startingGear
   id: RMCGearCBRNWS
   equipment:
-    head: RMCArmorHelmetCBRN
     ears: CMHeadsetCBRN
     eyes: RMCGlassesMedicalHUDGlasses
     jumpsuit: RMCCBRNSuitSL
