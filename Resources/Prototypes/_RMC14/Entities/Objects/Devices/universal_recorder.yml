@@ -59,7 +59,14 @@
   components:
   - type: UniversalRecorder
     tapeSlot:
+      name: rmc-universal-recorder-slot-name
       startingItem: RMCUniversalRecorderTape
+      insertSuccessPopup: rmc-universal-recorder-popup-insert-generic
+      insertSound: /Audio/Items/taperecorder/taperecorder_close.ogg
+      ejectSound: /Audio/Items/taperecorder/taperecorder_open.ogg
+      whitelist:
+        components:
+        - UniversalRecorderTape
 
 - type: entity
   abstract: true
