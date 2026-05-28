@@ -62,6 +62,10 @@
     - id: RMCCigarettePackWeYaGold
     - id: RMCKitchenKnifeButcher
     - id: RMCBeerPack
+    - id: RMCFishingPole
+    - id: RMCFishingBait
+    - id: RMCFishingBait
+    - id: RMCFishingBait
 
 - type: entity
   parent: CMSpawnPointJobBase
