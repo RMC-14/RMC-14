@@ -74,6 +74,7 @@ rmc-ert-admin-actor-server = server
 rmc-ert-admin-actor-auto-resolve = automatic response timer
 rmc-ert-launcher-automatic = automatic launch timer
 rmc-ert-response-team-fallback = response team
+rmc-ert-ship-fallback = ship
 rmc-ert-admin-request = ERT request {$id} from {$requester} via {$source}: {$reason}
 rmc-ert-admin-request-with-extra = {$base} {$extra}
 
@@ -285,7 +286,7 @@ rmc-ert-announcement-message = [font size=16][bold][color=#CECECE]{$title}[/colo
 
     {$message}[/color][/font]
 
-rmc-ert-announcement-priority-alert = A distress beacon has been launched from the UNS Almayer.
+rmc-ert-announcement-priority-alert = A distress beacon has been launched from the {$ship}.
 rmc-ert-announcement-distress-dispatch = An encrypted signal has been received from a nearby vessel. Stand by.
 rmc-ert-announcement-distress-no-response = The distress signal has not received a response, the launch tubes are now recalibrating.
 
@@ -299,10 +300,10 @@ rmc-ert-announcement-cbrn-failed = High Command reports that {$team} deployment 
 rmc-ert-announcement-cbrn-denied = High Command has denied the distress request.
 
 rmc-ert-announcement-pmc-dispatch = A corporate emergency contract has been accepted. {$team} is preparing to deploy.
-rmc-ert-announcement-pmc-arrival = UNS Almayer, this is USCSS Royce responding to your distress call. We are boarding. Any hostile actions will be met with lethal force.
+rmc-ert-announcement-pmc-arrival = {$ship}, this is USCSS Royce responding to your distress call. We are boarding. Any hostile actions will be met with lethal force.
 rmc-ert-announcement-pmc-denied = Corporate response channels have declined the request.
 
-rmc-ert-announcement-bodyguard-dispatch = UNS Almayer, this is a We-Ya Corporate Security Protection Detail shuttle inbound to the Liaison's Beacon.
+rmc-ert-announcement-bodyguard-dispatch = {$ship}, this is a We-Ya Corporate Security Protection Detail shuttle inbound to the Liaison's Beacon.
 rmc-ert-announcement-bodyguard-arrival = {$team} has docked aboard the warship and is moving to secure the principal.
 rmc-ert-announcement-bodyguard-denied = Corporate security declined the executive protection request.
 
@@ -311,27 +312,27 @@ rmc-ert-announcement-lawyers-arrival = {$team} has docked aboard the warship and
 rmc-ert-announcement-lawyers-denied = Corporate Affairs declined the legal assistance request.
 
 rmc-ert-announcement-cmb-dispatch = A Colonial Marshal Bureau patrol has accepted the distress request.
-rmc-ert-announcement-cmb-arrival = Incoming Transmission: UNS Almayer, this is Anchorpoint Station with the Colonial Marshal Bureau. We are receiving your distress signal and are dispatching a nearby team to board with you now. Standby.
-rmc-ert-announcement-cmb-riot-arrival = Incoming Transmission: UNS Almayer, this is Anchorpoint Station with the Colonial Marshal Bureau. We are receiving your distress signal and are dispatching a nearby riot control team to board with you now. Standby.
+rmc-ert-announcement-cmb-arrival = Incoming Transmission: {$ship}, this is Anchorpoint Station with the Colonial Marshal Bureau. We are receiving your distress signal and are dispatching a nearby team to board with you now. Standby.
+rmc-ert-announcement-cmb-riot-arrival = Incoming Transmission: {$ship}, this is Anchorpoint Station with the Colonial Marshal Bureau. We are receiving your distress signal and are dispatching a nearby riot control team to board with you now. Standby.
 
 rmc-ert-announcement-spp-dispatch = Foreign response traffic has been detected. {$team} is preparing to deploy.
-rmc-ert-announcement-spp-arrival = This is SPP dispatch. UNS Almayer, we are responding to your distress call, we will render aid as able, do not fire.
-rmc-ert-announcement-spp-hostile-arrival = This is an SPP boarding force. UNS Almayer, stand down and prepare to be seized.
+rmc-ert-announcement-spp-arrival = This is SPP dispatch. {$ship}, we are responding to your distress call, we will render aid as able, do not fire.
+rmc-ert-announcement-spp-hostile-arrival = This is an SPP boarding force. {$ship}, stand down and prepare to be seized.
 
 rmc-ert-announcement-tse-dispatch = {$team} has accepted the distress request.
 rmc-ert-announcement-tse-arrival = {$team} has docked aboard the warship and is entering the operation area.
-rmc-ert-announcement-tse-arrival-patna = UNS Almayer, this is HMS Patna; we are responding to your distress call and boarding in accordance with the Military Aid Act of 2177, Authentication code Lima-18153.
-rmc-ert-announcement-tse-arrival-thunderchild = UNS Almayer, this is HMS Thunderchild; we are responding to your distress call and boarding in accordance with the Military Aid Act of 2177, Authentication code Lima-18153.
+rmc-ert-announcement-tse-arrival-patna = {$ship}, this is HMS Patna; we are responding to your distress call and boarding in accordance with the Military Aid Act of 2177, Authentication code Lima-18153.
+rmc-ert-announcement-tse-arrival-thunderchild = {$ship}, this is HMS Thunderchild; we are responding to your distress call and boarding in accordance with the Military Aid Act of 2177, Authentication code Lima-18153.
 
 rmc-ert-announcement-provost-dispatch = Provost command has approved a response team.
 rmc-ert-announcement-provost-arrival = {$team} has docked aboard the warship and is assuming Provost jurisdiction.
 
 rmc-ert-announcement-clf-arrival = 'Attention, you are trespassing on our sovereign territory. Expect no forgiveness.'
-rmc-ert-announcement-contractors-arrival = UNS Almayer, this is USCSS Inheritor with Vanguard's Arrow Incorporated, Primary Operations; we are responding to your distress call and boarding in accordance with the Military Aid Act of 2177, authentication code Lima-18153.
-rmc-ert-announcement-contractors-covert-arrival = UNS Almayer, this is USCSS Samburan with Vanguard's Arrow Incorporated, Special Operations; we are boarding in accordance with the 2177 Military Aid Act, authorization code X-Ray 19601.
-rmc-ert-announcement-freelancers-friendly-arrival = UNS Almayer, this is a Freelancer shuttle responding to your distress call. Prepare for boarding.
-rmc-ert-announcement-freelancers-hostile-arrival = UNS Almayer, this is a Freelancer shuttle. We are boarding; anyone in the way is fair game.
-rmc-ert-announcement-wy-commando-arrival = UNS Almayer, this is USCSS Nisshoku responding to your distress call. We are boarding. Any hostile actions will be met with lethal force.
+rmc-ert-announcement-contractors-arrival = {$ship}, this is USCSS Inheritor with Vanguard's Arrow Incorporated, Primary Operations; we are responding to your distress call and boarding in accordance with the Military Aid Act of 2177, authentication code Lima-18153.
+rmc-ert-announcement-contractors-covert-arrival = {$ship}, this is USCSS Samburan with Vanguard's Arrow Incorporated, Special Operations; we are boarding in accordance with the 2177 Military Aid Act, authorization code X-Ray 19601.
+rmc-ert-announcement-freelancers-friendly-arrival = {$ship}, this is a Freelancer shuttle responding to your distress call. Prepare for boarding.
+rmc-ert-announcement-freelancers-hostile-arrival = {$ship}, this is a Freelancer shuttle. We are boarding; anyone in the way is fair game.
+rmc-ert-announcement-wy-commando-arrival = {$ship}, this is USCSS Nisshoku responding to your distress call. We are boarding. Any hostile actions will be met with lethal force.
 rmc-ert-announcement-xenos-arrival = Unidentified hostile life-signs have breached the warship.
 rmc-ert-announcement-feral-xenos-arrival = Unidentified feral life-signs have breached the warship.
 

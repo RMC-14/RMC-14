@@ -93,6 +93,7 @@ public sealed partial class RMCERTSystem
     {
         var title = Loc.GetString("rmc-ert-announcement-title-priority-alert");
         var message = Loc.GetString("rmc-ert-announcement-priority-alert",
+            ("ship", GetRequestShipName(request)),
             ("team", Loc.GetString("rmc-ert-response-team-fallback")),
             ("requester", request.RequesterName),
             ("reason", request.Reason));
@@ -317,12 +318,42 @@ public sealed partial class RMCERTSystem
         return builder.ToString().TrimEnd();
     }
 
-    private static string FormatCallText(LocId text, RMCERTRequest request, RMCERTCallPrototype call)
+    private string FormatCallText(LocId text, RMCERTRequest request, RMCERTCallPrototype call)
     {
-        return Robust.Shared.Localization.Loc.GetString(text,
+        return Loc.GetString(text,
+            ("ship", GetRequestShipName(request)),
             ("team", call.Name),
             ("requester", request.RequesterName),
             ("reason", request.Reason));
+    }
+
+    private string GetRequestShipName(RMCERTRequest request)
+    {
+        if (TryGetRequestStation(request.SourceEntity, out var station) ||
+            TryGetRequestStation(request.Requester, out station))
+        {
+            return Name(station);
+        }
+
+        foreach (var stationUid in _station.GetStations())
+        {
+            return Name(stationUid);
+        }
+
+        return Loc.GetString("rmc-ert-ship-fallback");
+    }
+
+    private bool TryGetRequestStation(EntityUid? entity, out EntityUid station)
+    {
+        station = default;
+        if (entity is not { Valid: true } uid || !Exists(uid))
+            return false;
+
+        if (_station.GetOwningStation(uid) is not { } owningStation)
+            return false;
+
+        station = owningStation;
+        return true;
     }
 
     private static string GetOrganizationLabel(RMCERTCallPrototype call)
