@@ -9,12 +9,8 @@ public sealed partial class Hypermetabolic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        var multiplier = Level * 0.25;
-        var metabolism = Math.Abs(multiplier - 1) > 0.001f
-            ? $"\nThe chemical lasts {multiplier} times less time in the bloodstream."
-            : string.Empty;
-
-        return $"The chemical lasts {multiplier} times less time in the bloodstream.";
+        var multiplier = 1 + Level * 0.25;
+        return $"The chemical lasts {multiplier} times shorter in the bloodstream.";
     }
 
     public override FixedPoint2 GetMetabolismModifier()
