@@ -51,6 +51,8 @@
     mask: RMCCigarette
     shoes: RMCShoesSandals
     gloves: CMHandsBrown
+  inhand:
+  - RMCFishingPole
 
 - type: entity
   parent: CMSatchelFillSurvivor
@@ -62,7 +64,6 @@
     - id: RMCCigarettePackWeYaGold
     - id: RMCKitchenKnifeButcher
     - id: RMCBeerPack
-    - id: RMCFishingPole
     - id: RMCFishingBait
     - id: RMCFishingBait
     - id: RMCFishingBait
