@@ -2877,3 +2877,14 @@
     state: mathew_mothew_lampyris
   - type: PatronFigurine
     id: 78bba465-2b9d-4f44-a8f7-52e80f94c378
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAmbroseMommaBearHelichrysum
+  name: Ambrose 'Momma Bear' Helichrysum figurine
+  description: "The everyday MP Ambrose. Just like the real one! Doesn't includes battle scars, PTSD and sweetness... or height."
+  components:
+  - type: Sprite
+    state: ambrose_momma_bear_helichrysum
+  - type: PatronFigurine
+    id: 9e2b0828-6696-412f-9e4c-32379b3ce5ca
