@@ -57,11 +57,6 @@ public sealed class RMCERTRequest
     public TimeSpan CreatedAt;
 
     /// <summary>
-    /// Round time when dispatch was approved or scheduled.
-    /// </summary>
-    public TimeSpan? DispatchAt;
-
-    /// <summary>
     /// Round time when ghost-role recruitment should close.
     /// </summary>
     public TimeSpan? RecruitmentEndsAt;

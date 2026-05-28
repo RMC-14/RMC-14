@@ -303,18 +303,10 @@ public sealed partial class RMCERTSystem
 
         request.State = RMCERTRequestState.PendingDispatch;
         request.SelectedCall = callId;
-        request.DispatchAt = _timing.CurTime + TimeSpan.FromSeconds(call.LaunchDelay);
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
 
         var adminText = GetAdminActorText(admin, adminName);
-        _chat.SendAdminAnnouncement(forced
-            ? GetForceCallAnnouncement(request, call, adminText)
-            : Loc.GetString("rmc-ert-admin-approved",
-                ("admin", adminText),
-                ("id", request.Id),
-                ("call", call.Name),
-                ("delay", (int)call.LaunchDelay)));
         Log.Info($"ERT request {request.Id} approved as {call.ID} by {adminText}");
         AddERTRequestLog(forced ? LogImpact.High : LogImpact.Medium,
             forced ? "force approved" : "approved",
@@ -360,10 +352,6 @@ public sealed partial class RMCERTSystem
         UpdateSourceVisual(request, false);
 
         var adminText = GetAdminActorText(args.Actor, args.ActorName);
-        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-denied",
-            ("admin", adminText),
-            ("id", request.Id),
-            ("requester", request.RequesterName)));
         AddERTRequestLog(LogImpact.Medium, "denied", request, adminText);
 
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
@@ -393,12 +381,9 @@ public sealed partial class RMCERTSystem
         request.LastError = string.Empty;
         request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
-        CleanupRequestContent(request, Loc.GetString("rmc-ert-cleanup-reason-cancelled"));
+        CleanupRequestContent(request);
         UpdateSourceVisual(request, false);
         var adminText = GetAdminActorText(args.Actor, args.ActorName);
-        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cancelled",
-            ("admin", adminText),
-            ("id", request.Id)));
         AddERTRequestLog(LogImpact.High, "cancelled", request, adminText);
 
         if (request.SelectedCall is { } callId && _prototypes.TryIndex(callId, out var call))
@@ -448,11 +433,6 @@ public sealed partial class RMCERTSystem
         UpdateSourceVisual(request, false);
 
         var adminText = GetAdminActorText(args.Actor, args.ActorName);
-        var selected = GetSelectedCallLabel(request) ?? Loc.GetString("rmc-ert-response-team-fallback");
-        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-completed",
-            ("admin", adminText),
-            ("id", request.Id),
-            ("team", selected)));
         AddERTRequestLog(LogImpact.Medium, "completed", request, adminText);
         DirtyState(request);
         return ResultSuccess(request);

@@ -66,17 +66,13 @@ public sealed partial class RMCERTSystem
     {
         var previousState = request.State;
         Log.Warning($"ERT request {request.Id} failed: {error}. " +
-                    $"State={request.State}, SelectedCall={request.SelectedCall?.Id}, " +
-                    $"Shuttle={FormatEntity(request.Shuttle)}, {GetShuttleDiagnostics(request, request.Shuttle)}");
+                    $"State={request.State}, SelectedCall={request.SelectedCall?.Id}");
         request.State = RMCERTRequestState.Failed;
         request.LastError = error;
         request.LastWarning = string.Empty;
         request.RecruitmentEndsAt = null;
-        CleanupRequestContent(request, Loc.GetString("rmc-ert-cleanup-reason-failed"));
+        CleanupRequestContent(request);
         UpdateSourceVisual(request, false);
-        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-failed",
-            ("id", request.Id),
-            ("error", error)));
         AddERTRequestLog(LogImpact.High,
             "failed",
             request,
@@ -217,25 +213,6 @@ public sealed partial class RMCERTSystem
             return fallbackName;
 
         return Loc.GetString("rmc-ert-admin-actor-server");
-    }
-
-    private string GetForceCallAnnouncement(RMCERTRequest request, RMCERTCallPrototype call, string adminText)
-    {
-        if (!string.IsNullOrWhiteSpace(request.Reason))
-        {
-            return Loc.GetString("rmc-ert-admin-force-called-reason",
-                ("admin", adminText),
-                ("id", request.Id),
-                ("call", call.Name),
-                ("delay", (int)call.LaunchDelay),
-                ("reason", request.Reason));
-        }
-
-        return Loc.GetString("rmc-ert-admin-force-called",
-            ("admin", adminText),
-            ("id", request.Id),
-            ("call", call.Name),
-            ("delay", (int)call.LaunchDelay));
     }
 
     private string BuildAdminRequestAnnouncement(RMCERTRequest request)

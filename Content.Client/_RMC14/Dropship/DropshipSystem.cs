@@ -12,6 +12,5 @@ public sealed class DropshipSystem : SharedDropshipSystem
         {
             ui.Update();
         }
-
     }
 }

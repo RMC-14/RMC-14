@@ -96,7 +96,6 @@ public sealed partial class RMCERTSystem : EntitySystem
 
     private readonly Dictionary<Guid, RMCERTRequest> _requests = new();
     private readonly Dictionary<EntityUid, TimeSpan> _sourceCooldowns = new();
-    private readonly Dictionary<EntityUid, EntityUid> _pendingHandheldDialogs = new();
     private readonly HashSet<ICommonSession> _queuedPendingAdminNotifications = [];
     private readonly HashSet<EntityUid> _shuttleSpawnObstacles = [];
 
@@ -118,7 +117,6 @@ public sealed partial class RMCERTSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<DropshipArrivedAtDestinationEvent>(OnDropshipArrivedAtDestination);
-        SubscribeLocalEvent<RMCDockingVerificationFailedEvent>(OnDockingVerificationFailed);
 
         SubscribeLocalEvent<RMCERTDistressBeaconComponent, UseInHandEvent>(OnHandheldUse);
         SubscribeLocalEvent<ActorComponent, RMCERTHandheldDistressReasonEvent>(OnHandheldReason);
@@ -174,7 +172,6 @@ public sealed partial class RMCERTSystem : EntitySystem
     {
         _requests.Clear();
         _sourceCooldowns.Clear();
-        _pendingHandheldDialogs.Clear();
         _queuedPendingAdminNotifications.Clear();
         _ertMap = null;
         _loadedShuttles = 0;

@@ -75,7 +75,7 @@ public sealed partial class RMCERTSystem
             {
                 if (request.ShuttleHomeIsFallback)
                 {
-                    CleanupRequestContent(request, Loc.GetString("rmc-ert-cleanup-reason-fallback-return"));
+                    CleanupRequestContent(request);
                     DirtyState(request);
                     return;
                 }
@@ -102,37 +102,12 @@ public sealed partial class RMCERTSystem
                 request.LastWarning = string.Empty;
                 MakeReturnRouteAvailable(request);
                 UpdateSourceVisual(request, false);
-                _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-arrived-missing-call", ("id", request.Id)));
                 AddERTRequestLog(LogImpact.Medium, "arrived with missing call prototype", request, "system");
                 DirtyState(request);
             }
 
             return;
         }
-    }
-
-    private void OnDockingVerificationFailed(ref RMCDockingVerificationFailedEvent ev)
-    {
-        foreach (var request in _requests.Values)
-        {
-            if (request.State != RMCERTRequestState.Launching ||
-                request.Shuttle != ev.Shuttle)
-            {
-                continue;
-            }
-
-            Log.Warning($"ERT request {request.Id} docking verification failed: {ev.Reason}. " +
-                        $"eventRequest={ev.RequestId}, call={ev.Call ?? "none"}, class={ev.DockingClass}, " +
-                        $"shuttle={FormatEntity(ev.Shuttle)}, destination={FormatEntity(ev.Destination)}, " +
-                        $"targetGrid={FormatEntity(ev.TargetGrid)}, shuttleDock={FormatEntity(ev.ShuttleDock)}, " +
-                        $"targetDock={FormatEntity(ev.TargetDock)}, actualShuttleDock={FormatEntity(ev.ActualShuttleDock)}, " +
-                        $"actualTargetDock={FormatEntity(ev.ActualTargetDock)}");
-            FailRequest(request, Loc.GetString("rmc-ert-error-docking-verification-failed"));
-            return;
-        }
-
-        Log.Warning($"ERT docking verification failed for {FormatEntity(ev.Shuttle)}, but no launching ERT request matched it. " +
-                    $"eventRequest={ev.RequestId}, reason={ev.Reason}");
     }
 
     private void OnERTShuttleFTLRequested(Entity<RMCERTShuttleComponent> ent, ref FTLRequestEvent args)
@@ -236,8 +211,7 @@ public sealed partial class RMCERTSystem
         var acceptedCount = FinalizeRecruitment(request);
         Log.Info($"ERT request {request.Id} launching {call.ID}: accepted={acceptedCount}, " +
                  $"required={call.Requirements.MinRequiredSlots}, planned={request.PlannedRoster.Count}, " +
-                 $"spawnedGhostRoles={request.SpawnedGhostRoles.Count}, launcher={launcher}, " +
-                 $"Shuttle={FormatEntity(request.Shuttle)}, {GetShuttleDiagnostics(request, request.Shuttle)}");
+                 $"spawnedGhostRoles={request.SpawnedGhostRoles.Count}, launcher={launcher}");
 
         if (acceptedCount < call.Requirements.MinRequiredSlots)
         {
@@ -273,7 +247,6 @@ public sealed partial class RMCERTSystem
 
         if (!TryFindLandingZone(request, call, computer, out var destination, out var landingZoneError))
         {
-            LogLandingZoneDiagnostics(request, computer);
             FailRequest(request, !string.IsNullOrWhiteSpace(landingZoneError)
                 ? landingZoneError
                 : Loc.GetString("rmc-ert-error-no-landing-zone"));
@@ -292,10 +265,6 @@ public sealed partial class RMCERTSystem
 
         request.State = RMCERTRequestState.Launching;
         AnnounceDispatch(request, call);
-        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-launched",
-            ("id", request.Id),
-            ("call", call.Name),
-            ("launcher", launcher)));
         AddERTRequestLog(LogImpact.High,
             "launched",
             request,
@@ -422,19 +391,6 @@ public sealed partial class RMCERTSystem
         MakeReturnRouteAvailable(request);
         UpdateSourceVisual(request, false);
         Announce(call.Announcements.Arrival, request, call);
-
-        var text = Loc.GetString("rmc-ert-admin-arrived",
-            ("id", request.Id),
-            ("call", call.Name));
-        if (!string.IsNullOrWhiteSpace(detail))
-        {
-            text = Loc.GetString("rmc-ert-admin-arrived-detail",
-                ("id", request.Id),
-                ("call", call.Name),
-                ("detail", detail));
-        }
-
-        _chat.SendAdminAnnouncement(text);
         AddERTRequestLog(LogImpact.Medium,
             "arrived",
             request,

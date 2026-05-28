@@ -136,18 +136,13 @@ public sealed partial class RMCERTSystem
         request.NextAutoLaunchAttempt = request.RecruitmentEndsAt.Value;
         Log.Info($"ERT request {request.Id} recruiting {request.PlannedRoster.Count} slots for {call.ID}. " +
                  $"RecruitmentDuration={call.Requirements.RecruitmentDuration}, " +
-                 $"AutoLaunch={call.AutoLaunch}, MinRequiredSlots={call.Requirements.MinRequiredSlots}, " +
-                 $"Shuttle={FormatEntity(shuttle)}, {GetShuttleDiagnostics(request, shuttle)}");
+                 $"AutoLaunch={call.AutoLaunch}, MinRequiredSlots={call.Requirements.MinRequiredSlots}");
         AddERTRequestLog(LogImpact.Medium,
             "recruiting started",
             request,
             "system",
             call,
             $"slots={request.PlannedRoster.Count}, recruitmentDuration={call.Requirements.RecruitmentDuration.TotalSeconds:0}s, autoLaunch={call.AutoLaunch}");
-        _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-recruiting",
-            ("id", request.Id),
-            ("slots", request.PlannedRoster.Count),
-            ("call", call.Name)));
 
         if (request.SourceEntity is { Valid: true } beacon &&
             TryComp(beacon, out RMCERTDistressBeaconComponent? beaconComp) &&
@@ -186,8 +181,7 @@ public sealed partial class RMCERTSystem
         if (!TryFindNavigationComputer(shuttleUid, out var computer))
         {
             error = Loc.GetString("rmc-ert-error-no-navigation-computer");
-            Log.Warning($"ERT request {request.Id} preflight failed for {call.ID}: no navigation computer. " +
-                        $"Shuttle={FormatEntity(shuttleUid)}, {GetShuttleDiagnostics(request, shuttleUid)}");
+            Log.Warning($"ERT request {request.Id} preflight failed for {call.ID}: no navigation computer.");
 
             if (loadedForPreflight)
                 DiscardPreflightShuttle(request, shuttleUid);
@@ -197,7 +191,6 @@ public sealed partial class RMCERTSystem
 
         if (!TryFindLandingZone(request, call, computer, out _, out var landingZoneError))
         {
-            LogLandingZoneDiagnostics(request, computer);
             error = !string.IsNullOrWhiteSpace(landingZoneError)
                 ? landingZoneError
                 : approving
@@ -546,16 +539,7 @@ public sealed partial class RMCERTSystem
     {
         var shuttleComp = EnsureComp<RMCERTShuttleComponent>(shuttle);
         shuttleComp.RequestId = request.Id;
-        shuttleComp.Call = call.ID;
-        shuttleComp.Organization = GetOrganizationLabel(call);
-        shuttleComp.NpcFactions = call.NpcFactions.ToList();
-        shuttleComp.IffFaction = call.IffFaction;
-        shuttleComp.LandingTags = call.LandingTags.ToList();
         Dirty(shuttle, shuttleComp);
-
-        var restrictedShuttle = EnsureComp<RMCRestrictedShuttleComponent>(shuttle);
-        restrictedShuttle.RequestId = request.Id;
-        restrictedShuttle.Call = call.ID;
 
         CreateReturnDestination(request, shuttle);
         SetShuttlePlayerRouteLock(shuttle, null);
@@ -574,9 +558,8 @@ public sealed partial class RMCERTSystem
                 call.DeniedLandingTags);
         }
 
-        var lockedDoors = ApplyShuttleDoorConsoleLocks(shuttle);
-        Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle)} for {call.ID}. " +
-                 $"prelaunchLockedDoors:{lockedDoors}, {GetShuttleDiagnostics(request, shuttle)}");
+        ApplyShuttleDoorConsoleLocks(shuttle);
+        Log.Info($"ERT request {request.Id} loaded shuttle {ToPrettyString(shuttle)} for {call.ID}.");
     }
 
     private int ApplyShuttleDoorConsoleLocks(EntityUid shuttle)

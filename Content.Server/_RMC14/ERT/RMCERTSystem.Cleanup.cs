@@ -100,11 +100,10 @@ public sealed partial class RMCERTSystem
         return accepted;
     }
 
-    private void CleanupRequestContent(RMCERTRequest request, string reason)
+    private void CleanupRequestContent(RMCERTRequest request)
     {
         // Failed and cancelled requests need to unwind both the staged roster and any destination reservation held by the shuttle.
         var ghostCoordinates = _gameTicker.GetObserverSpawnPoint();
-        var ghostedMembers = 0;
         foreach (var member in request.SpawnedGhostRoles)
         {
             if (!Exists(member))
@@ -115,10 +114,7 @@ public sealed partial class RMCERTSystem
             _ui.CloseUserUis(member);
 
             if (_mind.TryGetMind(member, out var mindId, out var mind))
-            {
-                if (TryGhostMindForCleanup(request, member, mindId, mind, ghostCoordinates, reason))
-                    ghostedMembers++;
-            }
+                _ghost.SpawnGhost((mindId, mind), ghostCoordinates, canReturn: false);
 
             QueueDel(member);
         }
@@ -131,8 +127,6 @@ public sealed partial class RMCERTSystem
             ReleasePrelaunchShuttleDoorLocks(shuttle);
             ClearShuttlePlayerRouteLock(shuttle);
             RemComp<RMCERTShuttleComponent>(shuttle);
-            RemComp<RMCRestrictedShuttleComponent>(shuttle);
-            RemComp<RMCExpectedDockComponent>(shuttle);
 
             if (TryComp(shuttle, out DropshipComponent? dropship) &&
                 dropship.Destination is { } destination &&
@@ -142,32 +136,9 @@ public sealed partial class RMCERTSystem
                 _dropship.SetDestinationShip((destination, destinationComp), null);
             }
 
-            var actorsGhosted = TryGhostActorsOffShuttle(request, shuttle, ghostCoordinates, reason, out var actorsOnShuttle, out var ghostedActors);
-            var remainingActors = CountActorsOnShuttle(shuttle);
-            var unhandledActors = Math.Max(0, actorsOnShuttle - ghostedActors);
-            Log.Info($"ERT request {request.Id} cleanup '{reason}' for {ToPrettyString(shuttle)}. " +
-                      $"GhostedMembers={ghostedMembers}, ActorsOnShuttle={actorsOnShuttle}, " +
-                      $"GhostedActors={ghostedActors}, UnhandledActors={unhandledActors}, RemainingActors={remainingActors}, " +
-                      GetShuttleDiagnostics(request, shuttle));
-
-            if (actorsGhosted && unhandledActors == 0)
-            {
-                QueueDel(shuttle);
-                request.Shuttle = null;
-                request.ShuttleSpawnMarker = null;
-                _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cleanup",
-                    ("id", request.Id),
-                    ("reason", reason)));
-            }
-            else
-            {
-                Log.Warning($"ERT request {request.Id} left shuttle {ToPrettyString(shuttle)} in world after cleanup '{reason}' " +
-                            $"because {remainingActors} actor(s) could not be ghosted safely.");
-                _chat.SendAdminAnnouncement(Loc.GetString("rmc-ert-admin-cleanup-deferred",
-                    ("id", request.Id),
-                    ("reason", reason),
-                    ("actors", remainingActors)));
-            }
+            QueueDel(shuttle);
+            request.Shuttle = null;
+            request.ShuttleSpawnMarker = null;
         }
         else
         {
@@ -178,96 +149,4 @@ public sealed partial class RMCERTSystem
         DeleteReturnDestination(request);
     }
 
-    private bool TryGhostActorsOffShuttle(
-        RMCERTRequest request,
-        EntityUid shuttle,
-        EntityCoordinates ghostCoordinates,
-        string reason,
-        out int actorsOnShuttle,
-        out int ghostedActors)
-    {
-        var actors = new List<EntityUid>();
-        var query = EntityQueryEnumerator<ActorComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out _, out var xform))
-        {
-            if (TerminatingOrDeleted(uid))
-                continue;
-
-            if (xform.GridUid != shuttle)
-                continue;
-
-            actors.Add(uid);
-        }
-
-        actorsOnShuttle = actors.Count;
-        ghostedActors = 0;
-
-        if (actors.Count == 0)
-            return true;
-
-        foreach (var actor in actors)
-        {
-            if (!Exists(actor) || TerminatingOrDeleted(actor))
-            {
-                ghostedActors++;
-                continue;
-            }
-
-            // Close all UIs before the mind is moved away and this shuttle actor is queued for deletion.
-            _ui.CloseUserUis(actor);
-
-            if (!_mind.TryGetMind(actor, out var mindId, out var mind) &&
-                (!TryComp(actor, out ActorComponent? actorComp) ||
-                 !_mind.TryGetMind(actorComp.PlayerSession, out mindId, out mind)))
-            {
-                Log.Warning($"ERT request {request.Id} cleanup '{reason}' found actor {ToPrettyString(actor)} " +
-                            $"on shuttle {ToPrettyString(shuttle)} but could not find a mind to ghost.");
-                continue;
-            }
-
-            if (!TryGhostMindForCleanup(request, actor, mindId, mind, ghostCoordinates, reason))
-                continue;
-
-            QueueDel(actor);
-            ghostedActors++;
-        }
-
-        // QueueDel(actor) is processed later, so an immediate entity query can still see
-        // actors that were already safely ghosted and queued for deletion.
-        return ghostedActors >= actorsOnShuttle;
-    }
-
-    private bool TryGhostMindForCleanup(
-        RMCERTRequest request,
-        EntityUid actor,
-        EntityUid mindId,
-        MindComponent mind,
-        EntityCoordinates ghostCoordinates,
-        string reason)
-    {
-        var ghost = _ghost.SpawnGhost((mindId, mind), ghostCoordinates, canReturn: false);
-        if (ghost == null)
-        {
-            Log.Warning($"ERT request {request.Id} cleanup '{reason}' failed to ghost " +
-                        $"{ToPrettyString(actor)} from cleanup shuttle.");
-            return false;
-        }
-
-        Log.Info($"ERT request {request.Id} cleanup '{reason}' ghosted {ToPrettyString(actor)} " +
-                 $"as {ToPrettyString(ghost.Value)}.");
-        return true;
-    }
-
-    private int CountActorsOnShuttle(EntityUid shuttle)
-    {
-        var count = 0;
-        var query = EntityQueryEnumerator<ActorComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out _, out var xform))
-        {
-            if (!TerminatingOrDeleted(uid) && xform.GridUid == shuttle)
-                count++;
-        }
-
-        return count;
-    }
 }

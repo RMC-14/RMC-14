@@ -146,10 +146,7 @@ public sealed partial class RMCERTSystem
 
         if (ent.Comp.ReasonRequired)
         {
-            // Attach the dialog to the user, not the held item. Keep the beacon association server-side so the
-            // networked dialog state does not need to serialize an inventory-entity reference back to the client.
-            _pendingHandheldDialogs[args.User] = ent;
-            var ev = new RMCERTHandheldDistressReasonEvent();
+            var ev = new RMCERTHandheldDistressReasonEvent(GetNetEntity(ent.Owner));
             _dialog.OpenInput(args.User, Loc.GetString("rmc-ert-prompt-handheld-reason", ("title", ent.Comp.RequestTitle)), ev, true, ent.Comp.ReasonLimit);
         }
         else
@@ -162,16 +159,11 @@ public sealed partial class RMCERTSystem
 
     private void OnHandheldReason(Entity<ActorComponent> ent, ref RMCERTHandheldDistressReasonEvent args)
     {
-        if (_timing.ApplyingState)
+        if (!TryGetEntity(args.Beacon, out var beaconUid) ||
+            !TryComp(beaconUid.Value, out RMCERTDistressBeaconComponent? beacon))
             return;
 
-        if (!_pendingHandheldDialogs.Remove(ent.Owner, out var beaconUid) ||
-            !TryComp(beaconUid, out RMCERTDistressBeaconComponent? beacon))
-        {
-            return;
-        }
-
-        CreateHandheldDistressRequest((beaconUid, beacon), ent.Owner, args.Message);
+        CreateHandheldDistressRequest((beaconUid.Value, beacon), ent.Owner, args.Message);
     }
 
     private void CreateConsoleDistressRequest(EntityUid console, EntityUid user, string reason)

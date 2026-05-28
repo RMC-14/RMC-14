@@ -97,91 +97,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
     private const float DepartureLocationSearchRange = 12;
 
-    public bool CanUseDestinationForShuttle(
-        Entity<DropshipNavigationComputerComponent> computer,
-        EntityUid destination,
-        out string reason)
-    {
-        if (!CanUseDestination(computer, destination, out reason))
-            return false;
-
-        if (!computer.Comp.RequiresRestrictedDestination)
-            return true;
-
-        if (TryComp(destination, out DropshipDestinationComponent? destinationComp) &&
-            Transform(computer).GridUid is { } currentGrid &&
-            destinationComp.Ship == currentGrid)
-        {
-            return true;
-        }
-
-        if (!TryComp(destination, out DockingComponent? destinationDock))
-            return true;
-
-        return TryGetDockingTravelTarget(
-            computer,
-            destination,
-            destinationDock,
-            out _,
-            out reason);
-    }
-
-    public void SetPlayerRouteLock(EntityUid shuttle, EntityUid? destination)
-    {
-        var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
-        while (computerQuery.MoveNext(out var uid, out var computer, out var xform))
-        {
-            if (xform.GridUid != shuttle)
-                continue;
-
-            computer.PlayerDestinationLockEnabled = true;
-            computer.PlayerAllowedDestination = destination;
-            Dirty(uid, computer);
-        }
-
-        if (Exists(shuttle))
-            RaiseUpdate(shuttle);
-    }
-
-    public void ClearPlayerRouteLock(EntityUid shuttle)
-    {
-        var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
-        while (computerQuery.MoveNext(out var uid, out var computer, out var xform))
-        {
-            if (xform.GridUid != shuttle)
-                continue;
-
-            computer.PlayerDestinationLockEnabled = false;
-            computer.PlayerAllowedDestination = null;
-            Dirty(uid, computer);
-        }
-
-        if (Exists(shuttle))
-            RaiseUpdate(shuttle);
-    }
-
-    public void SetCurrentDestination(EntityUid shuttle, EntityUid? destination)
-    {
-        var dropship = EnsureComp<DropshipComponent>(shuttle);
-        dropship.Destination = destination;
-        dropship.DepartureLocation = destination;
-        Dirty(shuttle, dropship);
-    }
-
-    public void ClearCurrentDestinationIf(EntityUid shuttle, EntityUid destination)
-    {
-        if (!TryComp(shuttle, out DropshipComponent? dropship))
-            return;
-
-        if (dropship.Destination == destination)
-            dropship.Destination = null;
-
-        if (dropship.DepartureLocation == destination)
-            dropship.DepartureLocation = null;
-
-        Dirty(shuttle, dropship);
-    }
-
     public override void Initialize()
     {
         base.Initialize();
@@ -202,8 +117,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnFTLUpdated);
         SubscribeLocalEvent<DropshipComponent, BeforeFTLStartedEvent>(OnBeforeFTLStarted);
 
-        SubscribeLocalEvent<DockEvent>(OnDocked);
-        SubscribeLocalEvent<DockingComponent, DockEvent>(OnDockingPortDocked);
         SubscribeLocalEvent<DropshipDestinationComponent, MapInitEvent>(OnRestrictedDestinationMapInit);
         SubscribeLocalEvent<RMCShuttleMobileDockComponent, MapInitEvent>(OnRestrictedDockMapInit);
 
@@ -226,9 +139,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
         Subs.CVar(_config, RMCCVars.RMCDropshipHijackTravelTimeSeconds, v => _hijackTravelTime = TimeSpan.FromSeconds(v), true);
     }
 
-    private void OnRestrictedDockMapInit<T>(EntityUid uid, T component, MapInitEvent args) where T : Component
+    private void OnRestrictedDockMapInit(Entity<RMCShuttleMobileDockComponent> ent, ref MapInitEvent args)
     {
-        AnchorRestrictedDock(uid);
+        AnchorRestrictedDock(ent);
     }
 
     private void OnRestrictedDestinationMapInit(Entity<DropshipDestinationComponent> ent, ref MapInitEvent args)
@@ -252,132 +165,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         if (_transform.AnchorEntity(uid, xform))
-        {
-            Log.Info($"Anchored RMC restricted shuttle destination {ToPrettyString(uid)} on map init.");
-            return;
-        }
-
-        Log.Warning($"Unable to anchor RMC restricted shuttle destination {ToPrettyString(uid)} on map init. " +
-                    $"grid={xform.GridUid?.ToString() ?? "null"}, pos={xform.LocalPosition}, parent={xform.ParentUid}");
-    }
-
-    private void OnDocked(DockEvent args)
-    {
-        TryConfirmExpectedDock(args);
-    }
-
-    private void OnDockingPortDocked(Entity<DockingComponent> ent, ref DockEvent args)
-    {
-        TryConfirmExpectedDock(args);
-    }
-
-    private void TryConfirmExpectedDock(DockEvent args)
-    {
-        TryConfirmExpectedDock(args.GridAUid, args.GridBUid, args.DockA.Owner, args.DockB.Owner);
-        TryConfirmExpectedDock(args.GridBUid, args.GridAUid, args.DockB.Owner, args.DockA.Owner);
-    }
-
-    private void TryConfirmExpectedDock(
-        EntityUid candidateShuttle,
-        EntityUid actualTargetGrid,
-        EntityUid actualShuttleDock,
-        EntityUid actualTargetDock)
-    {
-        if (!TryComp(candidateShuttle, out RMCExpectedDockComponent? expected))
             return;
 
-        if (expected.Confirmed)
-            return;
-
-        expected.ActualShuttleDock = actualShuttleDock;
-        expected.ActualTargetDock = actualTargetDock;
-
-        if (IsExpectedDockPair(expected, actualTargetGrid, actualShuttleDock, actualTargetDock))
-        {
-            expected.FailureReason = null;
-            if (AreAllExpectedDockPairsConnected(expected, out var connectedDocks, out var totalDocks))
-            {
-                expected.Confirmed = true;
-                Log.Info($"RMC restricted docking verified: shuttle={ToPrettyString(candidateShuttle)}, " +
-                         $"request={expected.RequestId}, call={expected.Call ?? "none"}, class={expected.DockingClass}, " +
-                         $"shuttleDock={ToPrettyString(actualShuttleDock)}, targetDock={ToPrettyString(actualTargetDock)}, " +
-                         $"connectedDocks={connectedDocks}/{totalDocks}");
-                return;
-            }
-
-            Log.Info($"RMC restricted docking partially verified: shuttle={ToPrettyString(candidateShuttle)}, " +
-                     $"request={expected.RequestId}, call={expected.Call ?? "none"}, class={expected.DockingClass}, " +
-                     $"shuttleDock={ToPrettyString(actualShuttleDock)}, targetDock={ToPrettyString(actualTargetDock)}, " +
-                     $"connectedDocks={connectedDocks}/{totalDocks}");
-            return;
-        }
-
-        expected.FailureReason =
-            $"unexpected dock pair: expected shuttleDock={ToPrettyString(expected.ShuttleDock)}, " +
-            $"targetDock={ToPrettyString(expected.TargetDock)}, targetGrid={ToPrettyString(expected.TargetGrid)}; " +
-            $"actual shuttleDock={ToPrettyString(actualShuttleDock)}, " +
-            $"targetDock={ToPrettyString(actualTargetDock)}, targetGrid={ToPrettyString(actualTargetGrid)}";
-
-        Log.Warning($"RMC restricted docking mismatch for {ToPrettyString(candidateShuttle)}: {expected.FailureReason}");
-    }
-
-    private static bool IsExpectedDockPair(
-        RMCExpectedDockComponent expected,
-        EntityUid actualTargetGrid,
-        EntityUid actualShuttleDock,
-        EntityUid actualTargetDock)
-    {
-        if (expected.TargetGrid != actualTargetGrid)
-            return false;
-
-        if (expected.ShuttleDock == actualShuttleDock &&
-            expected.TargetDock == actualTargetDock)
-        {
-            return true;
-        }
-
-        foreach (var dock in GetExpectedDockPairs(expected))
-        {
-            if (dock.ShuttleDock == actualShuttleDock &&
-                dock.TargetDock == actualTargetDock)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private bool AreAllExpectedDockPairsConnected(
-        RMCExpectedDockComponent expected,
-        out int connected,
-        out int total)
-    {
-        connected = 0;
-
-        var pairs = GetExpectedDockPairs(expected);
-        if (pairs.Count > 0)
-        {
-            total = pairs.Count;
-            foreach (var dock in pairs)
-            {
-                if (IsExpectedDockPairConnected(dock.ShuttleDock, dock.TargetDock))
-                    connected++;
-            }
-
-            return connected == total;
-        }
-
-        total = 0;
-        return true;
-    }
-
-    private bool IsExpectedDockPairConnected(EntityUid shuttleDockUid, EntityUid targetDockUid)
-    {
-        return TryComp(shuttleDockUid, out DockingComponent? shuttleDock) &&
-               TryComp(targetDockUid, out DockingComponent? targetDock) &&
-               shuttleDock.DockedWith == targetDockUid &&
-               targetDock.DockedWith == shuttleDockUid;
+        Log.Warning($"Unable to anchor RMC restricted shuttle destination {ToPrettyString(uid)} on map init.");
     }
 
     private void OnFTLStarted(Entity<DropshipComponent> ent, ref FTLStartedEvent args)
@@ -443,10 +233,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         RelayToMountedEntities(ent, args);
         CleanupDestinationArrival(ent);
-
-        if (TryFailUnverifiedRestrictedDocking(ent))
-            return;
-
         RelayToDropshipDestination(ent, args);
 
         var arrived = new DropshipArrivedAtDestinationEvent(ent, ent.Comp.Destination);
@@ -454,210 +240,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         ent.Comp.DepartureLocation = ent.Comp.Destination;
         Dirty(ent);
-    }
-
-    private bool TryFailUnverifiedRestrictedDocking(Entity<DropshipComponent> ent)
-    {
-        if (!TryComp(ent, out RMCExpectedDockComponent? expected))
-            return false;
-
-        if (expected.Confirmed || TryCompleteExpectedDocking(ent, expected))
-        {
-            RemCompDeferred<RMCExpectedDockComponent>(ent);
-            return false;
-        }
-
-        var reason = expected.FailureReason ??
-                     "no matching DockEvent was received before FTL completion";
-
-        Log.Warning($"RMC restricted docking verification failed for {ToPrettyString(ent.Owner)}: {reason}. " +
-                    $"request={expected.RequestId}, call={expected.Call ?? "none"}, class={expected.DockingClass}, " +
-                    $"destination={ToPrettyString(expected.Destination)}, targetGrid={ToPrettyString(expected.TargetGrid)}, " +
-                    $"expectedShuttleDock={ToPrettyString(expected.ShuttleDock)}, expectedTargetDock={ToPrettyString(expected.TargetDock)}, " +
-                    $"actualShuttleDock={ToPrettyString(expected.ActualShuttleDock)}, actualTargetDock={ToPrettyString(expected.ActualTargetDock)}");
-
-        var ev = new RMCDockingVerificationFailedEvent(
-            ent.Owner,
-            expected.Destination,
-            expected.TargetGrid,
-            expected.ShuttleDock,
-            expected.TargetDock,
-            expected.ActualShuttleDock,
-            expected.ActualTargetDock,
-            expected.RequestId,
-            expected.Call,
-            expected.DockingClass,
-            reason);
-
-        RemCompDeferred<RMCExpectedDockComponent>(ent);
-        RaiseLocalEvent(ref ev);
-        return true;
-    }
-
-    private bool TryCompleteExpectedDocking(Entity<DropshipComponent> ent, RMCExpectedDockComponent expected)
-    {
-        if (AreAllExpectedDockPairsConnected(expected, out var connectedDocks, out var totalDocks))
-        {
-            expected.Confirmed = true;
-            expected.ActualShuttleDock = expected.ShuttleDock;
-            expected.ActualTargetDock = expected.TargetDock;
-            Log.Info($"RMC restricted docking verified by dock state: shuttle={ToPrettyString(ent.Owner)}, " +
-                     $"request={expected.RequestId}, call={expected.Call ?? "none"}, class={expected.DockingClass}, " +
-                     $"shuttleDock={ToPrettyString(expected.ShuttleDock)}, targetDock={ToPrettyString(expected.TargetDock)}, " +
-                     $"connectedDocks={connectedDocks}/{totalDocks}");
-            return true;
-        }
-
-        if (TryGetUnexpectedExpectedDockOccupancy(expected, out var occupiedReason))
-        {
-            expected.FailureReason = occupiedReason;
-            return false;
-        }
-
-        if (!TryGetMissingExpectedDockingConfig(ent.Owner, expected, out var missingConfig, out var missingReason))
-        {
-            expected.FailureReason = missingReason;
-            return false;
-        }
-
-        if (missingConfig.Docks.Count <= 0)
-        {
-            expected.FailureReason =
-                $"expected docking config has no missing pairs but is not fully connected: connectedDocks={connectedDocks}/{totalDocks}";
-            return false;
-        }
-
-        Log.Warning($"RMC restricted docking missed or partially completed vanilla arrival DockEvent; completing missing dock pairs after FTL. " +
-                    $"shuttle={ToPrettyString(ent.Owner)}, request={expected.RequestId}, call={expected.Call ?? "none"}, " +
-                    $"class={expected.DockingClass}, shuttleDock={ToPrettyString(expected.ShuttleDock)}, " +
-                    $"targetDock={ToPrettyString(expected.TargetDock)}, dockPairs={expected.DockPairs.Count}, " +
-                    $"connectedDocks={connectedDocks}/{totalDocks}, missingDocks={missingConfig.Docks.Count}");
-
-        _shuttle.FTLDock((ent.Owner, Transform(ent.Owner)), missingConfig);
-
-        if (AreAllExpectedDockPairsConnected(expected, out connectedDocks, out totalDocks))
-        {
-            expected.Confirmed = true;
-            expected.ActualShuttleDock = expected.ShuttleDock;
-            expected.ActualTargetDock = expected.TargetDock;
-            return true;
-        }
-
-        expected.FailureReason =
-            $"exact docking fallback ran but ports are still not fully connected: connectedDocks={connectedDocks}/{totalDocks}";
-        return false;
-    }
-
-    private bool TryGetUnexpectedExpectedDockOccupancy(RMCExpectedDockComponent expected, out string reason)
-    {
-        foreach (var dock in GetExpectedDockPairs(expected))
-        {
-            if (TryGetUnexpectedExpectedDockOccupancy(dock.ShuttleDock, dock.TargetDock, out reason))
-                return true;
-        }
-
-        reason = string.Empty;
-        return false;
-    }
-
-    private bool TryGetUnexpectedExpectedDockOccupancy(
-        EntityUid shuttleDockUid,
-        EntityUid targetDockUid,
-        out string reason)
-    {
-        if (!TryComp(shuttleDockUid, out DockingComponent? shuttleDock))
-        {
-            reason = $"expected shuttle dock no longer exists: {ToPrettyString(shuttleDockUid)}";
-            return true;
-        }
-
-        if (!TryComp(targetDockUid, out DockingComponent? targetDock))
-        {
-            reason = $"expected target dock no longer exists: {ToPrettyString(targetDockUid)}";
-            return true;
-        }
-
-        if (shuttleDock.DockedWith != null &&
-            shuttleDock.DockedWith != targetDockUid)
-        {
-            reason =
-                $"expected shuttle dock was occupied after FTL arrival: shuttleDock={ToPrettyString(shuttleDockUid)}, " +
-                $"expectedTargetDock={ToPrettyString(targetDockUid)}, actualTargetDock={ToPrettyString(shuttleDock.DockedWith)}";
-            return true;
-        }
-
-        if (targetDock.DockedWith != null &&
-            targetDock.DockedWith != shuttleDockUid)
-        {
-            reason =
-                $"expected target dock was occupied after FTL arrival: targetDock={ToPrettyString(targetDockUid)}, " +
-                $"expectedShuttleDock={ToPrettyString(shuttleDockUid)}, actualShuttleDock={ToPrettyString(targetDock.DockedWith)}";
-            return true;
-        }
-
-        reason = string.Empty;
-        return false;
-    }
-
-    private static IReadOnlyList<RMCExpectedDockPair> GetExpectedDockPairs(RMCExpectedDockComponent expected)
-    {
-        if (expected.DockPairs.Count > 0)
-            return expected.DockPairs;
-
-        return [new RMCExpectedDockPair(expected.ShuttleDock, expected.TargetDock)];
-    }
-
-    private bool TryGetMissingExpectedDockingConfig(
-        EntityUid shuttle,
-        RMCExpectedDockComponent expected,
-        out DockingConfig config,
-        out string reason)
-    {
-        config = new DockingConfig
-        {
-            TargetGrid = expected.TargetGrid,
-            Coordinates = expected.Coordinates,
-            Angle = expected.Angle,
-        };
-
-        foreach (var dock in GetExpectedDockPairs(expected))
-        {
-            if (IsExpectedDockPairConnected(dock.ShuttleDock, dock.TargetDock))
-                continue;
-
-            if (!TryComp(dock.ShuttleDock, out DockingComponent? shuttleDock))
-            {
-                reason = $"expected shuttle dock no longer exists: {ToPrettyString(dock.ShuttleDock)}";
-                return false;
-            }
-
-            if (!TryComp(dock.TargetDock, out DockingComponent? targetDock))
-            {
-                reason = $"expected target dock no longer exists: {ToPrettyString(dock.TargetDock)}";
-                return false;
-            }
-
-            var pairConfig = _docking.GetDockingConfig(
-                shuttle,
-                expected.TargetGrid,
-                dock.ShuttleDock,
-                shuttleDock,
-                dock.TargetDock,
-                targetDock);
-
-            if (pairConfig == null)
-            {
-                reason =
-                    $"vanilla could not rebuild exact docking config after FTL arrival for shuttleDock={ToPrettyString(dock.ShuttleDock)}, " +
-                    $"targetDock={ToPrettyString(dock.TargetDock)}, targetGrid={ToPrettyString(expected.TargetGrid)}";
-                return false;
-            }
-
-            config.Docks.Add((dock.ShuttleDock, dock.TargetDock, shuttleDock, targetDock));
-        }
-
-        reason = string.Empty;
-        return true;
     }
 
     private void OnFTLUpdated(Entity<DropshipComponent> ent, ref FTLUpdatedEvent args)
@@ -868,6 +450,91 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
     }
 
+    public bool CanUseDestinationForShuttle(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        out string reason)
+    {
+        if (!CanUseDestination(computer, destination, out reason))
+            return false;
+
+        if (!computer.Comp.RequiresRestrictedDestination)
+            return true;
+
+        if (TryComp(destination, out DropshipDestinationComponent? destinationComp) &&
+            Transform(computer).GridUid is { } currentGrid &&
+            destinationComp.Ship == currentGrid)
+        {
+            return true;
+        }
+
+        if (!TryComp(destination, out DockingComponent? destinationDock))
+            return true;
+
+        return TryGetDockingTravelTarget(
+            computer,
+            destination,
+            destinationDock,
+            out _,
+            out reason);
+    }
+
+    public void SetPlayerRouteLock(EntityUid shuttle, EntityUid? destination)
+    {
+        var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+        while (computerQuery.MoveNext(out var uid, out var computer, out var xform))
+        {
+            if (xform.GridUid != shuttle)
+                continue;
+
+            computer.PlayerDestinationLockEnabled = true;
+            computer.PlayerAllowedDestination = destination;
+            Dirty(uid, computer);
+        }
+
+        if (Exists(shuttle))
+            RaiseUpdate(shuttle);
+    }
+
+    public void ClearPlayerRouteLock(EntityUid shuttle)
+    {
+        var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+        while (computerQuery.MoveNext(out var uid, out var computer, out var xform))
+        {
+            if (xform.GridUid != shuttle)
+                continue;
+
+            computer.PlayerDestinationLockEnabled = false;
+            computer.PlayerAllowedDestination = null;
+            Dirty(uid, computer);
+        }
+
+        if (Exists(shuttle))
+            RaiseUpdate(shuttle);
+    }
+
+    public void SetCurrentDestination(EntityUid shuttle, EntityUid? destination)
+    {
+        var dropship = EnsureComp<DropshipComponent>(shuttle);
+        dropship.Destination = destination;
+        dropship.DepartureLocation = destination;
+        Dirty(shuttle, dropship);
+    }
+
+    public void ClearCurrentDestinationIf(EntityUid shuttle, EntityUid destination)
+    {
+        if (!TryComp(shuttle, out DropshipComponent? dropship))
+            return;
+
+        if (dropship.Destination == destination)
+            dropship.Destination = null;
+
+        if (dropship.DepartureLocation == destination)
+            dropship.DepartureLocation = null;
+
+        Dirty(shuttle, dropship);
+    }
+
     public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null, bool offset = false)
     {
         if (user != null &&
@@ -1062,7 +729,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         var finalHyperspaceTime = hyperspaceTime.Value;
 
         if (dockingTarget is { } target)
-            StartRestrictedDockingFTL(dropshipId.Value, shuttleComp, computer, destination, target, startupTime, finalHyperspaceTime);
+            StartRestrictedDockingFTL(dropshipId.Value, shuttleComp, target, startupTime, finalHyperspaceTime);
         else
             _shuttle.FTLToCoordinates(dropshipId.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: finalHyperspaceTime);
 
@@ -1136,16 +803,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (Transform(computer).GridUid is not { } shuttle)
         {
             reason = Loc.GetString("rmc-dropship-no-compatible-docking-port");
-            Log.Warning($"RMC restricted docking target rejected: computer={ToPrettyString(computer)}, " +
-                        $"destination={ToPrettyString(destination)}, reason=computer is not on a shuttle grid");
             return false;
         }
 
         if (Transform(destination).GridUid is not { } targetGrid)
         {
             reason = Loc.GetString("rmc-dropship-no-compatible-docking-port");
-            Log.Warning($"RMC restricted docking target rejected: computer={ToPrettyString(computer)}, " +
-                        $"destination={ToPrettyString(destination)}, reason=destination is not on a grid");
             return false;
         }
 
@@ -1158,9 +821,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         var shuttleDocks = GetRestrictedShuttleDockCandidates(allShuttleDocks, preferredDocks);
         var targetDocks = GetRestrictedDockingTargetCluster(destination, destinationDock, targetGrid);
 
-        var usingPreferredDocks = preferredDocks.Count > 0;
         var targetGridAngle = _transform.GetWorldRotation(targetGrid).Reduced();
-        var attempts = new List<string>();
         RMCRestrictedDockingCandidate? bestCandidate = null;
 
         foreach (var shuttleDock in shuttleDocks)
@@ -1176,10 +837,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                     targetDock.Comp);
 
                 if (pairConfig == null)
-                {
-                    attempts.Add($"{DescribeDockForLog(shuttleDock.Owner, shuttleDock.Comp)} -> {DescribeDockForLog(targetDock.Owner, targetDock.Comp)} null");
                     continue;
-                }
 
                 var config = BuildRestrictedDockingConfig(
                     shuttle,
@@ -1191,29 +849,16 @@ public sealed class DropshipSystem : SharedDropshipSystem
                     targetDocks);
 
                 if (!TryGetRestrictedDockingAnchor(config, destination, out var anchorShuttleDock, out var anchorTargetDock))
-                {
-                    attempts.Add($"{DescribeDockForLog(shuttleDock.Owner, shuttleDock.Comp)} -> {DescribeDockForLog(targetDock.Owner, targetDock.Comp)} " +
-                                 $"no config containing selected destination");
                     continue;
-                }
 
                 var stagedCoordinates = GetRestrictedDockingStagedGridCoordinates(anchorShuttleDock, anchorTargetDock, config);
-                if (TryGetRestrictedDockingObstacle(shuttle, targetGrid, destination, stagedCoordinates, config.Angle, out var obstacle))
-                {
-                    attempts.Add($"{DescribeDockForLog(shuttleDock.Owner, shuttleDock.Comp)} -> {DescribeDockForLog(targetDock.Owner, targetDock.Comp)} " +
-                                 $"blocked by {DescribeRestrictedDockingObstacle(obstacle)} docks={config.Docks.Count} " +
-                                 $"exactCoords={config.Coordinates} stagedCoords={stagedCoordinates} angle={config.Angle}");
+                if (TryGetRestrictedDockingObstacle(shuttle, targetGrid, destination, stagedCoordinates, config.Angle))
                     continue;
-                }
 
                 var candidate = new RMCRestrictedDockingCandidate(
                     config,
                     anchorShuttleDock,
-                    anchorTargetDock,
-                    stagedCoordinates);
-
-                attempts.Add($"{DescribeDockForLog(shuttleDock.Owner, shuttleDock.Comp)} -> {DescribeDockForLog(targetDock.Owner, targetDock.Comp)} " +
-                             $"valid docks={config.Docks.Count} exactCoords={config.Coordinates} stagedCoords={stagedCoordinates} angle={config.Angle}");
+                    anchorTargetDock);
 
                 if (bestCandidate is not { } best ||
                     IsBetterRestrictedDockingCandidate(candidate, best, targetGridAngle))
@@ -1225,34 +870,13 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         if (bestCandidate is { } selected)
         {
-            Log.Info($"RMC restricted docking config selected: computer={ToPrettyString(computer)}, " +
-                     $"shuttle={ToPrettyString(shuttle)}, destination={ToPrettyString(destination)}, " +
-                     $"targetGrid={ToPrettyString(targetGrid)}, anchorShuttleDock={ToPrettyString(selected.ShuttleDock)}, " +
-                     $"anchorTargetDock={ToPrettyString(selected.TargetDock)}, dockCount={selected.Config.Docks.Count}, " +
-                     $"shuttleDocks=[{string.Join(" | ", shuttleDocks.Select(d => DescribeDockForLog(d.Owner, d.Comp)))}], " +
-                     $"targetDocks=[{string.Join(" | ", targetDocks.Select(d => DescribeDockForLog(d.Owner, d.Comp)))}], " +
-                     $"attempts=[{string.Join(" | ", attempts)}], " +
-                     $"exactCoords={selected.Config.Coordinates}, stagedCoords={selected.StagedCoordinates}, angle={selected.Config.Angle}");
-
             target = new RMCRestrictedDockingTravelTarget(
                 selected.Config,
-                shuttle,
-                targetGrid,
-                destination,
                 selected.ShuttleDock,
                 selected.TargetDock);
             reason = string.Empty;
             return true;
         }
-
-        Log.Warning($"RMC restricted docking config failed: computer={ToPrettyString(computer)}, " +
-                    $"shuttle={ToPrettyString(shuttle)}, destination={ToPrettyString(destination)}, " +
-                    $"targetGrid={ToPrettyString(targetGrid)}, targetDock={DescribeDockForLog(destination, destinationDock)}, " +
-                    $"totalShuttleDocks={allShuttleDocks.Count}, selectedShuttleDocks={shuttleDocks.Count}, " +
-                    $"preferredOnly={usingPreferredDocks}, targetClusterDocks={targetDocks.Count}, " +
-                    $"shuttleDocks=[{string.Join(" | ", shuttleDocks.Select(d => DescribeDockForLog(d.Owner, d.Comp)))}], " +
-                    $"targetDocks=[{string.Join(" | ", targetDocks.Select(d => DescribeDockForLog(d.Owner, d.Comp)))}], " +
-                    $"attempts=[{string.Join(" | ", attempts)}]");
 
         reason = Loc.GetString("rmc-dropship-no-compatible-docking-port");
         return false;
@@ -1450,11 +1074,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         EntityUid targetGrid,
         EntityUid destination,
         EntityCoordinates coordinates,
-        Angle angle,
-        out EntityUid obstacle)
+        Angle angle)
     {
-        obstacle = default;
-
         if (!_fixturesQuery.TryComp(shuttle, out var fixtures))
             return false;
 
@@ -1496,7 +1117,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
                     continue;
                 }
 
-                obstacle = ent;
                 return true;
             }
         }
@@ -1530,29 +1150,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
         return config.Coordinates.Offset(awayFromTarget * RestrictedDockingStagingOffset);
     }
 
-    private string DescribeDockForLog(EntityUid uid, DockingComponent dock)
-    {
-        var xform = Transform(uid);
-        var proto = MetaData(uid).EntityPrototype?.ID ?? "none";
-        return $"{ToPrettyString(uid)} proto:{proto} grid:{ToPrettyString(xform.GridUid)} " +
-               $"pos:{xform.LocalPosition} rot:{xform.LocalRotation} anchored:{xform.Anchored} " +
-               $"docked:{dock.Docked} dockedWith:{ToPrettyString(dock.DockedWith)} " +
-               $"mobile:{HasComp<RMCShuttleMobileDockComponent>(uid)}";
-    }
-
-    private string DescribeRestrictedDockingObstacle(EntityUid uid)
-    {
-        var xform = Transform(uid);
-        var proto = MetaData(uid).EntityPrototype?.ID ?? "none";
-        return $"{ToPrettyString(uid)} proto:{proto} grid:{ToPrettyString(xform.GridUid)} " +
-               $"pos:{xform.LocalPosition} rot:{xform.LocalRotation}";
-    }
-
     private void StartRestrictedDockingFTL(
         EntityUid dropshipId,
         ShuttleComponent shuttle,
-        Entity<DropshipNavigationComputerComponent> computer,
-        EntityUid destination,
         RMCRestrictedDockingTravelTarget target,
         float? startupTime,
         float? hyperspaceTime)
@@ -1568,43 +1168,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
         var stagedCoordinates = new EntityCoordinates(stagedMap, stagedMapCoordinates.Position);
         var stagedAngle = exactAngle + _transform.GetWorldRotation(exactCoordinates.EntityId);
 
-        var expected = EnsureComp<RMCExpectedDockComponent>(dropshipId);
-        expected.Destination = destination;
-        expected.TargetGrid = target.TargetGrid;
-        expected.ShuttleDock = target.ShuttleDock;
-        expected.TargetDock = target.TargetDock;
-        expected.Coordinates = exactCoordinates;
-        expected.Angle = exactAngle;
-        expected.DockPairs.Clear();
-        foreach (var dock in target.Config.Docks)
-        {
-            expected.DockPairs.Add(new RMCExpectedDockPair(dock.DockAUid, dock.DockBUid));
-        }
-
-        expected.DockingClass = computer.Comp.ShuttleDockingClass;
-        expected.Confirmed = false;
-        expected.ActualShuttleDock = null;
-        expected.ActualTargetDock = null;
-        expected.FailureReason = null;
-
-        if (TryComp(dropshipId, out RMCRestrictedShuttleComponent? restrictedShuttle))
-        {
-            expected.RequestId = restrictedShuttle.RequestId;
-            expected.Call = restrictedShuttle.Call;
-        }
-        else
-        {
-            expected.RequestId = Guid.Empty;
-            expected.Call = null;
-        }
-
-        Log.Info($"RMC restricted docking FTL started: shuttle={ToPrettyString(dropshipId)}, " +
-                 $"request={expected.RequestId}, call={expected.Call ?? "none"}, class={expected.DockingClass}, " +
-                 $"destination={ToPrettyString(destination)}, targetGrid={ToPrettyString(target.TargetGrid)}, " +
-                 $"shuttleDock={ToPrettyString(target.ShuttleDock)}, targetDock={ToPrettyString(target.TargetDock)}, " +
-                 $"dockCount={target.Config.Docks.Count}, exactCoordinates={exactCoordinates}, exactAngle={exactAngle}, " +
-                 $"stagedCoordinates={stagedCoordinates}, stagedAngle={stagedAngle}, stagingOffset={RestrictedDockingStagingOffset}");
-
         _shuttle.FTLToCoordinates(
             dropshipId,
             shuttle,
@@ -1617,14 +1180,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private readonly record struct RMCRestrictedDockingCandidate(
         DockingConfig Config,
         EntityUid ShuttleDock,
-        EntityUid TargetDock,
-        EntityCoordinates StagedCoordinates);
+        EntityUid TargetDock);
 
     private readonly record struct RMCRestrictedDockingTravelTarget(
         DockingConfig Config,
-        EntityUid Shuttle,
-        EntityUid TargetGrid,
-        EntityUid Destination,
         EntityUid ShuttleDock,
         EntityUid TargetDock);
 

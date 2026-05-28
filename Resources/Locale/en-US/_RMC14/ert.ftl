@@ -74,26 +74,8 @@ rmc-ert-admin-actor-server = server
 rmc-ert-admin-actor-auto-resolve = automatic response timer
 rmc-ert-launcher-automatic = automatic launch timer
 rmc-ert-response-team-fallback = response team
-rmc-ert-cleanup-reason-cancelled = cancelled
-rmc-ert-cleanup-reason-failed = failed
-rmc-ert-cleanup-reason-fallback-return = returned to fallback base
-
-rmc-ert-admin-approved = {$admin} approved ERT request {$id} as {$call}. Dispatching in {$delay} seconds.
-rmc-ert-admin-denied = {$admin} denied ERT request {$id} from {$requester}.
-rmc-ert-admin-cancelled = {$admin} cancelled ERT request {$id}.
-rmc-ert-admin-completed = {$admin} completed ERT request {$id} for {$team}.
-rmc-ert-admin-arrived-missing-call = ERT request {$id} arrived, but its call prototype is no longer available.
-rmc-ert-admin-recruiting = ERT request {$id} is recruiting {$slots} ghost-role slots for {$call}.
-rmc-ert-admin-cleanup = ERT request {$id} {$reason}; shuttle content cleaned up.
-rmc-ert-admin-cleanup-deferred = ERT request {$id} {$reason}; shuttle cleanup deferred because {$actors} actor(s) remain aboard.
-rmc-ert-admin-launched = ERT request {$id} for {$call} launched by {$launcher}.
-rmc-ert-admin-failed = ERT request {$id} failed: {$error}
 rmc-ert-admin-request = ERT request {$id} from {$requester} via {$source}: {$reason}
 rmc-ert-admin-request-with-extra = {$base} {$extra}
-rmc-ert-admin-arrived = ERT request {$id} for {$call} arrived.
-rmc-ert-admin-arrived-detail = ERT request {$id} for {$call} arrived via {$detail}.
-rmc-ert-admin-force-called = {$admin} forced ERT request {$id} as {$call}. Dispatching in {$delay} seconds.
-rmc-ert-admin-force-called-reason = {$admin} forced ERT request {$id} as {$call}. Dispatching in {$delay} seconds. Reason: {$reason}
 
 rmc-ert-success-handheld = A distress beacon request has been sent to {$recipient}.
 rmc-ert-success-console = The distress beacon has been transmitted to High Command.
