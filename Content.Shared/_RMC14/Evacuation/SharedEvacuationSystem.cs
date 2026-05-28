@@ -115,13 +115,10 @@ public abstract class SharedEvacuationSystem : EntitySystem
         {
             door.Locked = false;
             Dirty(uid, door);
-
-            if (TryEnableHijackDockedOpen(uid) &&
-                _doorQuery.TryComp(uid, out var doorComp))
-            {
-                _door.TryOpen(uid, doorComp);
-            }
         }
+
+        if (IsEvacuationEnabled())
+            OpenEvacuationDoors();
 
         _config.SetCVar(CCVars.GameDisallowLateJoins, true);
     }
@@ -134,6 +131,8 @@ public abstract class SharedEvacuationSystem : EntitySystem
             computer.Enabled = true;
             Dirty(uid, computer);
         }
+
+        OpenEvacuationDoors();
 
         var evacuation = EntityQueryEnumerator<EvacuationComputerComponent>();
         while (evacuation.MoveNext(out var computerId, out var computer))
@@ -227,8 +226,8 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
     private void OnEvacuationDoorBeforeClosed(Entity<EvacuationDoorComponent> ent, ref BeforeDoorClosedEvent args)
     {
-        if (TryComp(ent, out RMCOpenOnHijackDockedComponent? openOnHijack) &&
-            openOnHijack.Enabled)
+        if (TryComp(ent, out RMCOpenOnEvacuationComponent? openOnEvacuation) &&
+            openOnEvacuation.Enabled)
         {
             args.Cancel();
             return;
@@ -397,29 +396,44 @@ public abstract class SharedEvacuationSystem : EntitySystem
     {
     }
 
-    protected bool TryDisableHijackDockedOpen(EntityUid uid)
+    private void OpenEvacuationDoors()
     {
-        if (!TryComp(uid, out RMCOpenOnHijackDockedComponent? openOnHijack) ||
-            !openOnHijack.Enabled)
+        var doors = EntityQueryEnumerator<RMCOpenOnEvacuationComponent, DoorComponent>();
+        while (doors.MoveNext(out var uid, out _, out var door))
+        {
+            if (door.State is not DoorState.Open and not DoorState.Opening &&
+                !_door.TryOpen(uid, door))
+            {
+                continue;
+            }
+
+            TryEnableEvacuationOpen(uid);
+        }
+    }
+
+    protected bool TryDisableEvacuationOpen(EntityUid uid)
+    {
+        if (!TryComp(uid, out RMCOpenOnEvacuationComponent? openOnEvacuation) ||
+            !openOnEvacuation.Enabled)
         {
             return false;
         }
 
-        openOnHijack.Enabled = false;
-        Dirty(uid, openOnHijack);
+        openOnEvacuation.Enabled = false;
+        Dirty(uid, openOnEvacuation);
         return true;
     }
 
-    private bool TryEnableHijackDockedOpen(EntityUid uid)
+    private bool TryEnableEvacuationOpen(EntityUid uid)
     {
-        if (!TryComp(uid, out RMCOpenOnHijackDockedComponent? openOnHijack))
+        if (!TryComp(uid, out RMCOpenOnEvacuationComponent? openOnEvacuation))
             return false;
 
-        if (openOnHijack.Enabled)
+        if (openOnEvacuation.Enabled)
             return true;
 
-        openOnHijack.Enabled = true;
-        Dirty(uid, openOnHijack);
+        openOnEvacuation.Enabled = true;
+        Dirty(uid, openOnEvacuation);
         return true;
     }
 
