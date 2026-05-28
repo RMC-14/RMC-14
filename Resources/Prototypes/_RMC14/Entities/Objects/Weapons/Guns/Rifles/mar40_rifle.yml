@@ -114,6 +114,17 @@
       rmc-aslot-underbarrel: 0.35, -0.3
 
 - type: entity
+  parent: WeaponRifleMAR40
+  id: RMCWeaponRifleMAR40FilledStripped
+  suffix: Filled, Semi Stripped
+  components:
+  - type: AttachableHolder
+    randomAttachmentChance: 0
+  - type: Tag
+    tags:
+    - WeaponRifleMAR40
+
+- type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleMAR40
   name: MAR magazine (7.62x39mm)

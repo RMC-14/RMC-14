@@ -91,6 +91,9 @@
       rmc-aslot-rail: 0.2, 0.219
   - type: GunDamageModifier
     multiplier: 1.2
+  - type: Tag
+    tags:
+    - RMCWeaponSMGPDW90
 
 - type: entity
   parent: RMCWeaponSMGPDW90
@@ -248,6 +251,9 @@
           falloff: 5
     - type: CMArmorPiercing
       amount: 20
+
+- type: Tag
+  id: RMCWeaponSMGPDW90
 
 - type: Tag
   id: RMCWeaponSMGPDW90TSE

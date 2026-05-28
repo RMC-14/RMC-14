@@ -88,6 +88,15 @@
   - type: Tag
     tags:
     - RMCTankFlamerColony
+    - RMCWeaponIncineratorColony
+
+- type: entity
+  parent: RMCWeaponFlamerColony
+  id: RMCWeaponFlamerColonyPVE
+  suffix: PVE
+  components:
+  - type: Gun
+    fireRate: 2
 
 - type: entity
   parent: RMCBaseTankFlamer

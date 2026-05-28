@@ -574,9 +574,9 @@
   description: A stylish grey-green jumpsuit - standard issue for colonists. This version appears to have the symbol of the Colonial Liberation Front emblazoned in select areas.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/clf.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/CLF/clf.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/clf.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/CLF/clf.rsi
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCCLFArmband

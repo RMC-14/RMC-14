@@ -86,6 +86,9 @@
         Blunt: 5
     soundHit:
       collection: GenericHit
+  - type: Tag
+    tags:
+    - RMCWeaponLauncherDisposableFolded
 
 - type: entity
   parent: RMCWeaponLauncherDisposable
@@ -131,3 +134,6 @@
     foldedEntity: RMCWeaponLauncherDisposableHE
     examineText: rmc-gun-foldable-launcher-examine-unfold
     onActivate: true
+
+- type: Tag
+  id: RMCWeaponLauncherDisposableFolded

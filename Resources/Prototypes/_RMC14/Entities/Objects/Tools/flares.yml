@@ -450,6 +450,50 @@
     startingItem: CMFlare
 
 - type: entity
+  parent: RMCBoxMagazineSupplySmallBase
+  id: RMCBoxPackFlareColonistEmpty
+  name: box of CK25 emergency flare pack (x10)
+  description: A box of CK25 emergency flare pack, commonly kept in bulk for well, emergencies.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxPackFlareEmpty
+  - type: Item
+    size: Huge
+  - type: CMItemSlots
+    count: 10
+    slot:
+      name: FlarePack
+      whitelist:
+        tags:
+        - CMFlareColonist
+  - type: Sprite
+    layers:
+    - state: supply_box_small
+      color: "#846a6a"
+    - state: supply_ammo_small_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#8f8383"
+    - state: supply_box_small_flare
+      color: "#d24e4e"
+    - state: supply_box_small_flare_colour
+      color: "#562b2b"
+    - state: supply_lid_small_closed
+      map: [ "lid" ]
+      color: "#846a6a"
+    - state: supply_lid_small_closed_marking
+      map: [ "lid_marking" ]
+      color: "#d24e4e"
+
+- type: entity
+  parent:  RMCBoxPackFlareColonistEmpty
+  id: RMCBoxPackFlareColonist
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMPackFlare
+
+- type: entity
   parent: CMPackFlareBase
   id: RMCPackFlareCAS
   name: M89-S signal flare pack

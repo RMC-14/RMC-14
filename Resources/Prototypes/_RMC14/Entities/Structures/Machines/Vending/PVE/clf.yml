@@ -14,14 +14,14 @@
     sections:
     - name: Standard Equipment
       entries:
-      - id: RMCShoesJackboots
-        name: Jackboots
+      - id: RMCShoesCombat
+        name: Combat Boots
         amount: 15
       - id: RMCJumpsuitCLFSoldier
         name: CLF Jumpsuit
         amount: 15
-      - id: RMCHandsLeatherBlack
-        name: Leather Gloves
+      - id: RMCHandsBlack
+        name: Black Gloves
         amount: 15
       - id: RMCHeadsetDistressCLF
         name: Radio Headset

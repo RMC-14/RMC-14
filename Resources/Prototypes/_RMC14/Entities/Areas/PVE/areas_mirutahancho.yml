@@ -140,8 +140,8 @@
 
 - type: entity
   parent: RMCAreaMirut
-  id: RMCAreaMirutCargo
-  name: Boiler Room - MSTV Mirutahancho Engine Deck
+  id: RMCAreaMirutEngine
+  name: Engine Deck - MSTV Mirutahancho
   components:
   - type: Sprite
     state: miruengi
@@ -157,7 +157,7 @@
 - type: entity
   parent: RMCAreaMirut
   id: RMCAreaMirutOOB
-  name: space outside the MSTV Mirutahancho
+  name: space near the Mirutahancho
   components:
   - type: Sprite
     state: miruOOB
