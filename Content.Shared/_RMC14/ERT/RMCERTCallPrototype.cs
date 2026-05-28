@@ -298,6 +298,13 @@ public sealed partial class RMCERTWeightedGhostRoleEntity
 public sealed partial class RMCERTAnnouncementSet
 {
     /// <summary>
+    /// Optional marine-facing announcement played when a request is created.
+    /// Falls back to the default distress beacon announcement when unset.
+    /// </summary>
+    [DataField]
+    public RMCERTStageAnnouncement? Request;
+
+    /// <summary>
     /// Optional admin-facing announcement text shown when a request is created.
     /// </summary>
     [DataField]

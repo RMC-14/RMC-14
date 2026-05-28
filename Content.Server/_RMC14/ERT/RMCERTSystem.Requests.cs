@@ -125,7 +125,7 @@ public sealed partial class RMCERTSystem
 
         var text = BuildAdminRequestAnnouncement(request);
         _chat.SendAdminAnnouncement(text);
-        AnnounceDistressLaunched(request);
+        AnnounceRequestCreated(request, GetRequestAnnouncementCall(request));
 
         NotifyAdminsOfRequest();
 
@@ -316,7 +316,7 @@ public sealed partial class RMCERTSystem
             $"selection={(randomSelection ? "random" : "specific")}, dispatchDelay={call.LaunchDelay:0}s");
 
         if (request.Source == RMCERTRequestSource.Admin)
-            AnnounceDistressLaunched(request);
+            AnnounceRequestCreated(request, call);
 
         DirtyState(request);
         Timer.Spawn(TimeSpan.FromSeconds(call.LaunchDelay), () => Dispatch(request.Id));

@@ -54,6 +54,7 @@
 # - roles.priority: higher values are planned, spawned and seated first.
 #
 # Announcement field guide:
+# - announcements.request: optional public loc announcement used instead of the default distress beacon launch text.
 # - announcements.requestAdmin: optional admin-facing loc id sent when a request is created.
 # - announcements.dispatch/arrival/denied/cancelled/failed: stage-specific public announcements.
 # - title: optional loc id for the announcement title.
@@ -703,15 +704,88 @@
     roleTags: [ support, medic ]
     seatTags: [ troop, medic ]
   announcements:
+    request:
+      title: rmc-ert-announcement-title-priority-alert
+      message: rmc-ert-announcement-cmb-inspection-request
     arrival:
       title: rmc-ert-announcement-title-intercepted-transmission
-      message: rmc-ert-announcement-cmb-arrival
+      message: rmc-ert-announcement-cmb-inspection-arrival
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s
     maxCallsPerRound: 1
     minRequiredSlots: 3
     maxSlots: 5
+
+- type: rmcERTCall
+  id: RMCERTCallCMBBlackMarket
+  name: rmc-ert-call-cmb-black-market-name
+  organization: rmc-ert-organization-cmb
+  npcFactions: [ Bureau ]
+  category: rmc-ert-category-law
+  enabled: true
+  adminSelectable: true
+  adminButtonLabel: rmc-ert-admin-button-cmb-black-market
+  randomWeight: 0
+  allowedSources: [ Admin, Ares ]
+  shuttleMap: /Maps/_RMC14/Shuttles/ert_cmb_shuttle.yml
+  shuttleSpawner: RMCSpawnerERTShuttleCMB
+  shuttleSpawnMarker: RMCERTShuttleStartPadLaw
+  autoLaunch: true
+  shuttleTravelTime: 40s
+  landingTags: [ mainship ]
+  roles:
+  - id: marshal
+    name: rmc-ert-role-cmb-marshal
+    job: CMBureauMarshal
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauMarshal
+      weight: 100
+    min: 1
+    max: 1
+    leader: true
+    roleTags: [ leader, police ]
+    seatTags: [ command ]
+    priority: 100
+  - id: deputy
+    name: rmc-ert-role-cmb-deputy
+    job: CMBureauDeputy
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidBureauDeputy
+      weight: 100
+    min: 1
+    max: 1
+    roleTags: [ police ]
+    seatTags: [ troop ]
+  - id: liaison
+    name: rmc-ert-role-cmb-liaison
+    job: CMICBLiaison
+    ghostRoleEntityPool:
+    - entity: RMCRandomHumanoidICBLiaison
+      weight: 100
+    min: 0
+    max: 1
+    required: false
+    roleTags: [ support ]
+    seatTags: [ troop ]
+  announcements:
+    request:
+      title: rmc-ert-announcement-title-priority-alert
+      message: rmc-ert-announcement-cmb-black-market-request
+    dispatch:
+      title: rmc-ert-announcement-title-distress-beacon
+      message: rmc-ert-announcement-cmb-black-market-dispatch
+      sound:
+        path: /Audio/_RMC14/AI/distressreceived.ogg
+    arrival:
+      title: rmc-ert-announcement-title-intercepted-transmission
+      message: rmc-ert-announcement-cmb-black-market-arrival
+  requirements:
+    cooldown: 10m
+    recruitmentDuration: 30s
+    maxCallsPerRound: 1
+    minRequiredSlots: 2
+    maxSlots: 3
 
 - type: rmcERTCall
   id: RMCERTCallCMBRiot
@@ -1095,6 +1169,8 @@
   autoLaunch: true
   shuttleTravelTime: 40s
   landingTags: [ mainship ]
+  objectives:
+  - rmc-ert-objective-provost-enforce-marine-law
   roles:
   - id: leader
     name: rmc-ert-role-provost-leader
@@ -1118,6 +1194,10 @@
     max: 4
     roleTags: [ police ]
     seatTags: [ troop ]
+  announcements:
+    request:
+      title: rmc-ert-announcement-title-priority-alert
+      message: rmc-ert-announcement-provost-request
   requirements:
     cooldown: 10m
     recruitmentDuration: 30s

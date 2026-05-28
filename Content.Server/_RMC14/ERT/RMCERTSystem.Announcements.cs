@@ -89,7 +89,18 @@ public sealed partial class RMCERTSystem
         DirtyState(request);
     }
 
-    private void AnnounceDistressLaunched(RMCERTRequest request)
+    private void AnnounceRequestCreated(RMCERTRequest request, RMCERTCallPrototype? call = null)
+    {
+        if (call?.Announcements.Request != null)
+        {
+            Announce(call.Announcements.Request, request, call);
+            return;
+        }
+
+        AnnounceDefaultRequestCreated(request);
+    }
+
+    private void AnnounceDefaultRequestCreated(RMCERTRequest request)
     {
         var title = Loc.GetString("rmc-ert-announcement-title-priority-alert");
         var message = Loc.GetString("rmc-ert-announcement-priority-alert",
@@ -233,6 +244,23 @@ public sealed partial class RMCERTSystem
 
         var extra = FormatCallText(call.Announcements.RequestAdmin.Value, request, call);
         return Loc.GetString("rmc-ert-admin-request-with-extra", ("base", baseText), ("extra", extra));
+    }
+
+    private RMCERTCallPrototype? GetRequestAnnouncementCall(RMCERTRequest request)
+    {
+        if (request.SelectedCall is { } selectedCallId &&
+            _prototypes.TryIndex(selectedCallId, out var selectedCall))
+        {
+            return selectedCall;
+        }
+
+        if (request.AllowedCalls.Count == 1 &&
+            _prototypes.TryIndex(request.AllowedCalls[0], out var onlyCall))
+        {
+            return onlyCall;
+        }
+
+        return null;
     }
 
     private string GetRequestSuccessText(EntityUid sourceEntity, RMCERTRequestSource source)
