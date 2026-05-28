@@ -115,6 +115,12 @@ public abstract class SharedEvacuationSystem : EntitySystem
         {
             door.Locked = false;
             Dirty(uid, door);
+
+            if (TryEnableHijackDockedOpen(uid) &&
+                _doorQuery.TryComp(uid, out var doorComp))
+            {
+                _door.TryOpen(uid, doorComp);
+            }
         }
 
         _config.SetCVar(CCVars.GameDisallowLateJoins, true);
@@ -221,6 +227,13 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
     private void OnEvacuationDoorBeforeClosed(Entity<EvacuationDoorComponent> ent, ref BeforeDoorClosedEvent args)
     {
+        if (TryComp(ent, out RMCOpenOnHijackDockedComponent? openOnHijack) &&
+            openOnHijack.Enabled)
+        {
+            args.Cancel();
+            return;
+        }
+
         if (ent.Comp.Locked)
             args.PerformCollisionCheck = false;
     }
@@ -382,6 +395,32 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
     protected virtual void LaunchEvacuationFTL(EntityUid grid, float crashLandChance, SoundSpecifier? launchSound)
     {
+    }
+
+    protected bool TryDisableHijackDockedOpen(EntityUid uid)
+    {
+        if (!TryComp(uid, out RMCOpenOnHijackDockedComponent? openOnHijack) ||
+            !openOnHijack.Enabled)
+        {
+            return false;
+        }
+
+        openOnHijack.Enabled = false;
+        Dirty(uid, openOnHijack);
+        return true;
+    }
+
+    private bool TryEnableHijackDockedOpen(EntityUid uid)
+    {
+        if (!TryComp(uid, out RMCOpenOnHijackDockedComponent? openOnHijack))
+            return false;
+
+        if (openOnHijack.Enabled)
+            return true;
+
+        openOnHijack.Enabled = true;
+        Dirty(uid, openOnHijack);
+        return true;
     }
 
     private void SetPumpAppearance(EvacuationPumpVisuals visual)

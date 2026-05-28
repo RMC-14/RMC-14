@@ -43,6 +43,7 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
             {
                 door.Locked = true;
                 Dirty(child, door);
+                TryDisableHijackDockedOpen(child);
 
                 _doors.Clear();
                 _entityLookup.GetEntitiesInRange(child.ToCoordinates(), 2.5f, _doors);
@@ -50,6 +51,7 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
                 {
                     nearbyDoor.Comp.Locked = true;
                     Dirty(nearbyDoor);
+                    TryDisableHijackDockedOpen(nearbyDoor);
                 }
             }
         }
