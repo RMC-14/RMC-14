@@ -2888,3 +2888,22 @@
     state: ambrose_momma_bear_helichrysum
   - type: PatronFigurine
     id: 9e2b0828-6696-412f-9e4c-32379b3ce5ca
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronReikaSweetToothInazuma
+  name: Reika 'SweetTooth' Inazuma figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: reika_sweettooth_inazuma
+  - type: PatronFigurine
+    id: 64b7e8a8-e4d8-44ad-8a50-75a671d816a0
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_RMC14/Binoculars/nightvision.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
