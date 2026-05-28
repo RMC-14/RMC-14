@@ -2907,3 +2907,14 @@
         maxDistance: 1
   - type: UseDelay
     delay: 30
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNezuni-Arksai
+  name: Nezuni-Arksai figurine
+  description: "Intel? Pending. Order of operations? By the seat of their pants. Touching groundside? As if. Running around the Almayer doing a million jobs? 100%. This short bird does it all! (kinda)"
+  components:
+  - type: Sprite
+    state: nezuni-arksai
+  - type: PatronFigurine
+    id: da113641-3154-41f6-9a32-24bb265fc0ac
