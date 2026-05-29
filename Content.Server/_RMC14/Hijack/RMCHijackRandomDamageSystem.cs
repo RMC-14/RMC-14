@@ -13,6 +13,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Hijack;
 
+/// <summary>
+///     Applies shipwide randomized structural damage after a hijacked dropship lands.
+///     Percentages are calculated from the currently existing targets on the landing map.
+/// </summary>
 public sealed class RMCHijackRandomDamageSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -31,6 +35,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     private static readonly TimeSpan PipeBarrageInterval = TimeSpan.FromSeconds(15);
     private static readonly TimeSpan PipeWarningDelay = TimeSpan.FromSeconds(5);
 
+    // These ranges intentionally select a small random subset of existing map targets instead of wiping categories.
     private const float WallMinPercent = 0.03f;
     private const float WallMaxPercent = 0.06f;
     private const float WindowMinPercent = 0.30f;
@@ -95,6 +100,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         _windowTargets.Clear();
         _windoorTargets.Clear();
 
+        // Build pools from the landing map only; hijack damage must never spill into other maps.
         var query = EntityQueryEnumerator<RMCHijackRandomDamageTargetComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var comp, out var xform))
         {
@@ -122,6 +128,10 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         DoPipeBarrage(ev.Map, PipeInitialMinPercent, PipeInitialMaxPercent);
     }
 
+    /// <summary>
+    ///     Shuffles a target pool, selects a random percentage of it, and splits the selected targets
+    ///     between damage-only and break outcomes.
+    /// </summary>
     private void ApplyRandomDamage(
         List<(EntityUid Uid, RMCHijackRandomDamageTargetComponent Comp)> targets,
         float minPercent,
@@ -144,6 +154,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    ///     Applies either the damage-only or breaking damage target for a selected entity.
+    /// </summary>
     private void ApplyOutcome(EntityUid uid, RMCHijackRandomDamageTargetComponent comp, bool shouldBreak)
     {
         if (Deleted(uid))
@@ -156,6 +169,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         ApplyDamageUpToTarget(uid, damage);
     }
 
+    /// <summary>
+    ///     Applies enough damage to reach the requested target total without stacking repeated hijack damage.
+    /// </summary>
     private void ApplyDamageUpToTarget(EntityUid uid, DamageSpecifier targetDamage)
     {
         if (!TryComp(uid, out DamageableComponent? damageable))
@@ -179,6 +195,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    ///     Allows mapped targets to be indestructible outside hijack while preserving normal damage flow for hijack.
+    /// </summary>
     private void OnBeforeDamageChanged(Entity<RMCHijackRandomDamageTargetComponent> ent, ref BeforeDamageChangedEvent args)
     {
         if (!ent.Comp.HijackDamageOnly ||
@@ -191,6 +210,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         args.Cancelled = true;
     }
 
+    /// <summary>
+    ///     Selects a random percentage of remaining pipe targets and schedules their delayed explosions.
+    /// </summary>
     private void DoPipeBarrage(EntityUid map, float minPercent = PipeMinPercent, float maxPercent = PipeMaxPercent)
     {
         _pipeTargets.Clear();
@@ -225,6 +247,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         _nextPipeBarrage[map] = _timing.CurTime + PipeBarrageInterval;
     }
 
+    /// <summary>
+    ///     Telegraphs a pipe explosion before bursting it, matching CM-SS13's delayed hijack barrage.
+    /// </summary>
     private void StartPipeWarning(EntityUid pipe)
     {
         if (Deleted(pipe) || !TryComp(pipe, out TransformComponent? xform) || !_usedPipeTargets.Add(pipe))
@@ -237,6 +262,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         Timer.Spawn(PipeWarningDelay, () => BurstPipe(pipe));
     }
 
+    /// <summary>
+    ///     Explodes a warned pipe, starts local fire, and leaves a broken pipe visual in its place.
+    /// </summary>
     private void BurstPipe(EntityUid pipe)
     {
         _pendingPipeTargets.Remove(pipe);
@@ -264,6 +292,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         _transform.SetLocalRotation(brokenPipe, rotation);
     }
 
+    /// <summary>
+    ///     Returns at least one selected target when a non-empty pool exists.
+    /// </summary>
     private int GetRandomCount(int poolCount, float minPercent, float maxPercent)
     {
         if (poolCount == 0)
