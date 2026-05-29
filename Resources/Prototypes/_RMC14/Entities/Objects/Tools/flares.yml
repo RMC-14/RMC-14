@@ -419,10 +419,14 @@
       map: [ "fullLayer" ]
   - type: CMItemSlots
     startingItem: CMFlareColonist
+  - type: Tag
+    tags:
+    - CMFlarePackColonist
 
 - type: entity
   parent: CMFlare
   id: CMFlareColonist
+  name: emergency flare
   description: A commonly seen red flare issued to colonists in emergencies. There are some faded drawings on the side instructing the reader on how to ignite it.
   components:
   - type: Sprite
@@ -437,9 +441,14 @@
     - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
       state: overlay
   - type: PointLight
-    color: "#FFCCCC"
+    color: "#ff8080"
   - type: ExpendableLight
     iconStateSpent: flare_colony_spent
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCFlareColonistBullet
+  - type: RMCAirProjectile
+    prototype: RMCAirFlareColonist
 
 - type: entity
   parent: CMPackFlareBase
@@ -463,14 +472,14 @@
   - type: CMItemSlots
     count: 10
     slot:
-      name: FlarePack
+      name: Flare Pack
       whitelist:
         tags:
-        - CMFlareColonist
+        - CMFlarePackColonist
   - type: Sprite
     layers:
     - state: supply_box_small
-      color: "#846a6a"
+      color: "#c6cdd3"
     - state: supply_ammo_small_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#8f8383"
@@ -480,7 +489,7 @@
       color: "#562b2b"
     - state: supply_lid_small_closed
       map: [ "lid" ]
-      color: "#846a6a"
+      color: "#c6cdd3"
     - state: supply_lid_small_closed_marking
       map: [ "lid_marking" ]
       color: "#d24e4e"
@@ -491,7 +500,40 @@
   suffix: Filled
   components:
   - type: CMItemSlots
-    startingItem: CMPackFlare
+    startingItem: CMPackFlareColonist
+
+
+- type: entity
+  parent: RMCFlareBullet
+  id: RMCFlareColonistBullet
+  name: emergency flare projectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ScatteringGrenade
+    fillPrototype: CMFlareColonist
+  - type: PointLight
+    enabled: true
+    color: "#ff8080"
+    radius: 2.0
+    energy: 7.0
+
+- type: entity
+  parent: RMCAirFlare
+  id: RMCAirFlareColonist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ExpendableLight
+    startsActivated: true
+    glowDuration: 150
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/air_flare.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      state: air_flame
+      color: "#ec4b4b"
+  - type: PointLight
+    enabled: true
+    color: "#ff6060"
 
 - type: entity
   parent: CMPackFlareBase
@@ -1018,3 +1060,9 @@
 
 - type: Tag
   id: RMCPackFlareC18
+
+- type: Tag
+  id: RMCFlareColonist
+
+- type: Tag
+  id: RMCPackFlareColonist

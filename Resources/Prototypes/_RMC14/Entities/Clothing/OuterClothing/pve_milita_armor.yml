@@ -1,0 +1,164 @@
+# cell captain
+- type: entity
+  parent: RMCArmorVest
+  id: RMCArmorCLFPVECaptain
+  suffix: PVE, CLF
+  name: CLF Armored Duster
+  description: An armored duster coat, padded and reinforced with boiled leather, workshopped metal and some modern armored plates, this one has had the CLF flag etched onto the back.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/CLF/militacelllead.rsi
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+  - type: CMArmor
+    melee: 20
+    bullet: 35 #protag aura
+    bio: 25
+    explosionArmor: 20
+  - type: CMHardArmor
+  - type: RMCNameItemOnVend
+    item: Armor
+  - type: Corrodible
+    isCorrodible: false
+  - type: Storage
+    grid:
+    - 0,0,3,1
+  - type: Item
+    size: Normal
+    storedRotation: 0
+
+# hauberk
+- type: entity
+  parent: [RMCBaseArmorPVE, RMCBaseUniformAccessoryItemArmorPVE]
+  id: RMCArmorCLFPVE
+  suffix: PVE, CLF
+  name: colonial militia hauberk
+  description: The hauberk of a colonist militia member, created from boiled leather, workshopped metal and some modern armored plates. This one apperas to have had a TNR shoulder lamp welded onto it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/CLF/militaarmor.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 20
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: Corrodible
+    isCorrodible: false
+  - type: Item
+    size: Normal
+    storedRotation: 0
+
+- type: entity
+  parent: RMCArmorCLFPVE
+  id: RMCArmorCLFPVEVest
+  name: colonial militia vest
+  description: The armored vest of a colonist militia member, created from boiled leather, workshopped metal and some modern armored plates. This one apperas to have had a TNR shoulder lamp welded onto it.
+  suffix: PVE, CLF, Vest
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/CLF/militavest.rsi
+
+# Armour Cases
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseCLF
+  name: colonial militia hauberk armor crate
+  description: A wooden crate containing a colonial militia hauberk, and attachable armor pieces.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/clf.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_h
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_h}
+  - type: StorageFill
+    contents:
+    - id: RMCArmorCLFPVE
+    - id: RMCPVEArmorPadsCLF
+    - id: RMCPVEArmorBracersCLF
+    - id: RMCPVEArmorNeckGuardCLF
+    - id: RMCPVEArmorGroinPlateCLF
+    - id: RMCPVEArmorShinGuardCLF
+    - id: RMCPVEArmorKneeGuardCLF
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/armorequip_1.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/matchbox_drop.ogg
+      params:
+        volume: -6
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/matchbox_drop.ogg
+      params:
+        volume: -6
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseCLFVest
+  name: colonial militia armored vest crate
+  description: A wooden crate containing a colonial militia armored vest, and attachable armor pieces.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/clf.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_v
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_v}
+  - type: StorageFill
+    contents:
+    - id: RMCArmorCLFPVEVest
+    - id: RMCPVEArmorPadsCLF
+    - id: RMCPVEArmorBracersCLF
+    - id: RMCPVEArmorNeckGuardCLF
+    - id: RMCPVEArmorGroinPlateCLF
+    - id: RMCPVEArmorShinGuardCLF
+    - id: RMCPVEArmorKneeGuardCLF
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/armorequip_1.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/matchbox_drop.ogg
+      params:
+        volume: -6
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/matchbox_drop.ogg
+      params:
+        volume: -6

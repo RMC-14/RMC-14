@@ -307,7 +307,7 @@
     proto: RMCCartridgeRifleM16
     capacity: 30
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m16e.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m16ext.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]

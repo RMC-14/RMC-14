@@ -47,9 +47,8 @@
   id: RMCJobCLFDoctorPVE
   equipment:
     id: RMCIDCardCLFDoctorPVE
-    jumpsuit: RMCJumpsuitCLFSoldier
-    shoes: RMCShoesJackbootsFilled
-    outerClothing: RMCLabcoat
+    jumpsuit: RMCJumpsuitCLFPVEDoctor
+    shoes: RMCShoesCombat
     ears: RMCHeadsetDistressCLF
 
 - type: playTimeTracker

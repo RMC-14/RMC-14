@@ -47,9 +47,6 @@
   id: RMCJobCLFStandardPVE
   equipment:
     id: RMCIDCardCLFStandardPVE
-    jumpsuit: RMCJumpsuitCLFSoldier
-    shoes: RMCShoesJackbootsFilled
-    ears: RMCHeadsetDistressCLF
 
 - type: playTimeTracker
   id: CMJobCLFStandardPVE

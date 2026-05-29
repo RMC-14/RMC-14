@@ -119,12 +119,12 @@
         name: LC9 Incinerator
         whitelist:
           tags:
-          - RMCWeaponFlamerColony
+          - RMCWeaponFlamerColonyPVE
       item_2:
         name: LC9 Incinerator
         whitelist:
           tags:
-          - RMCWeaponFlamerColony
+          - RMCWeaponFlamerColonyPVE
   - type: ItemMapper
     mapLayers:
       fill_1:

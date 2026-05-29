@@ -47,9 +47,6 @@
   id: RMCJobCLFHeavyGunnerPVE
   equipment:
     id: RMCIDCardCLFHeavyGunnerPVE
-    jumpsuit: RMCJumpsuitCLFSoldier
-    shoes: RMCShoesJackbootsFilled
-    ears: RMCHeadsetDistressCLF
 
 - type: playTimeTracker
   id: CMJobCLFHeavyGunnerPVE

@@ -58,10 +58,18 @@
 - type: entity
   parent: RMCIDCardCLFBase
   id: RMCIDCardCLFCommanderPVE
-  name: clf commander's ID card
+  name: clf captain's ID card
   components:
   - type: PresetIdCard
     job: RMCCLFCommanderPVE
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFLeaderPVE
+  name: clf first mates's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFLeaderPVE
 
 - type: entity
   parent: RMCIDCardCLFBase
@@ -82,7 +90,7 @@
 - type: entity
   parent: RMCIDCardCLFBase
   id: RMCIDCardCLFStandardPVE
-  name: clf standard's ID card
+  name: clf soldier's ID card
   components:
   - type: PresetIdCard
     job: RMCCLFStandardPVE

@@ -32,6 +32,9 @@
       - id: RMCHeadBeanie
         name: Beanie
         amount: 15
+      - id: CMHeadBandRebel
+        name: Headband
+        amount: 15
     - name: Webbings
       entries:
       - id: CMWebbingBlack
@@ -53,9 +56,32 @@
       - id: RMCHeadMilitiaHood
         name: Militia Hood
         amount: 15
-      - id: RMCCoatMilitia
-        name: Militia Armor
+      - id: RMCHeadMilitiaBucket
+        name: Militia Bucket
         amount: 15
+      - id: RMCPVEArmorCaseCLF
+        name: Militia Armor Crate
+        amount: 15
+      - id: RMCPVEArmorCaseCLFVest
+        name: Militia Vest Crate
+        amount: 15
+    - name: Armor Webbings
+      entries:
+      - id: RMCArmorWebbingDrum
+        name: Armor Drum Webbing
+        amount: 5
+      - id: RMCArmorWebbingMag
+        name: Pattern Magazine Webbing
+        amount: 5
+      - id: RMCArmorWebbingGrenade
+        name: Armor Grenadier Webbing
+        amount: 5
+      - id: RMCArmorWebbingPouch
+        name: Pattern Pouch Webbing
+        amount: 5
+      - id: RMCArmorWebbingShell
+        name: Pattern Shotgun Shell Webbing
+        amount: 5
     - name: Backpack
       entries:
       - id: CMBackpack
@@ -68,7 +94,7 @@
         amount: 15
     - name: Restricted Backpack
       entries:
-      - id: RMCBackpackRTO
+      - id: RMCBackpackRTO #todo: replace with makeshift HAM radio pack
         amount: 1
     - name: Belts
       entries:
@@ -155,12 +181,9 @@
     sections:
     - name: Food
       entries:
-      - id: CMMRE
+      - id: RMCMRECLF
         name: MRE
-        amount: 5
-      - id: RMCBoxMRE
-        name: MRE Box
-        amount: 1
+        amount: 15 #I cant be arsed to make a box for these
     - name: Medical
       entries:
       - id: CMGauze10
@@ -206,13 +229,11 @@
       - id: RMCBoxFlashlights
         name: Box of Flashlights
         amount: 1
-      - id: RMCBoxPackFlare
+      - id: RMCBoxPackFlareColonist
         name: Box of Flares
         amount: 1
-      - id: CMPackFlare
+      - id: CMPackFlareColonist
         amount: 10
-      - id: RMCBoxPackFlareCAS
-        amount: 1
     - name: Sidearms
       entries:
       - id: RMCWeaponPistolMK45
@@ -231,12 +252,14 @@
         amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 2
-      - id: RMCScabbardMacheteFilled
-        name: Machete Scabbard (Full)
+      - id: RMCScabbardKatanaFilled
+        name: Katana Sheath (Full)
         amount: 5
       - id: RMCAttachmentRailFlashlight
         amount: 5
       - id: RMCAttachmentTwoPointSling
         amount: 5
-      - id: RMCM5Bayonet
-        amount: 25
+      - id: RMCCombatUtilityKnifeA
+        amount: 12
+      - id: RMCSawtoothDaggerA
+        amount: 12

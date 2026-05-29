@@ -615,6 +615,49 @@
   - type: WebbingClothing
     startingWebbing: RMCWebbingSurgicalGreen
 
+#CLF - PVE
+- type: entity
+  parent: RMCJumpsuitCLFSoldier
+  id: RMCJumpsuitCLFPVESoldier
+  name: Colonial Liberation Front uniform
+  description: A stylish grey-green jumpsuit - standard issue for colonists. This version appears to have the symbol of the Colonial Liberation Front emblazoned in select areas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/CLF/clf.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/CLF/clf.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCCLFArmband
+
+- type: entity
+  parent: RMCJumpsuitCLFPVESoldier
+  id: RMCJumpsuitCLFPVELead
+  name: Colonial Liberation Front Leader's uniform
+  description: A grey boiler suit, sometimes worn by some commercial ship bridge crew of the frontier. This version appears to have had green cuffs sewn on with the symbol of the Colonial Liberation Front emblazoned onto them.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/CLF/clfpvelead.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/CLF/clfpvelead.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCCLFArmband
+
+- type: entity
+  parent: RMCJumpsuitCLFPVESoldier
+  id: RMCJumpsuitCLFPVEDoctor
+  name: Colonial Liberation Front Doctor's uniform
+  description: Blue medical scrubs and a set of green EMT - Paramedic fatigues, the jacket of the fatigues has been tied around the waist. This version appears to have the symbol of the Colonial Liberation Front emblazoned in select areas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/CLF/clfpvemed.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/CLF/clfpvemed.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCCLFArmband
+
 # Frontier
 - type: entity
   parent: RMCUniformBase

@@ -527,8 +527,8 @@
 - type: entity
   parent: RMCColMarTechMedicalEquipmentPVE
   id: RMCCLFMedicalEquipmentPVE
-  name: CLF squad medical equipment rack
-  description: A sturdy metal rack made by local friends of the front, filled to the brim with all the medical gear that the front could sorce that a rebel medic may need.
+  name: CLF cell doctor equipment rack
+  description: A sturdy metal rack made by local friends of the front, filled to the brim with all the medical gear that a rebel medic may need, at least; all the front could sorce.
   suffix: PVE, CLF
   components:
   - type: CMAutomatedVendor
@@ -539,9 +539,7 @@
       - id: CMHandsLatex
         name: combat sterile gloves
       - id: CMMaskSterile
-      - id: CMSatchel #TODO: CLF medical satchel
-        recommended: true
-      - id: ArmorHelmetPMC
+      - id: RMCSatchelMedicpack #TODO: CLF medical satchel
         recommended: true
     - name: Eyewear
       choices: { CMEyewear: 1 }
@@ -551,7 +549,9 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltMedicBagPMCFilled
+      - id: CMBeltMedicBagFilled
+        name: M276 lifesaver bag (Full)
+      - id: CMBeltMedicalFilled
         name: M276 medical storage rig (Full)
     - name: Pouches
       choices: { RMCPouch: 2 }

@@ -51,9 +51,14 @@
   id: RMCJobCLFCommanderPVE
   equipment:
     id: RMCIDCardCLFCommanderPVE
-    jumpsuit: RMCJumpsuitCLFSoldier
-    shoes: RMCShoesJackbootsFilled
+    head: RMCHeadCapCellCap
+    eyes: RMCGlassesHUDSecurity
+    jumpsuit: RMCJumpsuitCLFPVELead
+    back: RMCSatchelNorm
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCShoesCombat
     ears: RMCHeadsetDistressCLF
+    outerClothing: RMCArmorCLFPVECaptain
 
 - type: playTimeTracker
   id: CMJobCLFCommanderPVE
