@@ -341,6 +341,14 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
         args.Handled = true;
 
+        var selfMsg = Loc.GetString("rmc-nailgun-finish-self", ("material", stackUid), ("target", hole.Owner));
+        var othersMsg = Loc.GetString("rmc-repairable-finish-others", ("user", args.User), ("material", stackUid), ("target", hole.Owner));
+        _popup.PopupPredicted(selfMsg, othersMsg, args.User, args.User);
+        _audio.PlayPredicted(nailgun.RepairSound, wall.Owner, args.User);
+
+        if (_net.IsClient)
+            return;
+
         if (!_stack.Use(stackUid, hole.Comp.RepairMaterialCost, stack))
             return;
 
@@ -361,11 +369,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         }
 
         ClearHole(wall, deleteHole: true);
-
-        var selfMsg = Loc.GetString("rmc-nailgun-finish-self", ("material", stackUid), ("target", hole.Owner));
-        var othersMsg = Loc.GetString("rmc-repairable-finish-others", ("user", args.User), ("material", stackUid), ("target", hole.Owner));
-        _popup.PopupPredicted(selfMsg, othersMsg, args.User, args.User);
-        _audio.PlayPredicted(nailgun.RepairSound, wall.Owner, args.User);
     }
 
     private void OnHoleBreakDoAfter(Entity<XenoAcidHoleComponent> hole, ref XenoAcidHoleBreakDoAfterEvent args)
