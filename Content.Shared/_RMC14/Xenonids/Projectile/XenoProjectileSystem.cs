@@ -54,6 +54,7 @@ public sealed class XenoProjectileSystem : EntitySystem
 
     private int _limitHitsId;
     private bool _logPrediction = false;
+    private List<(EntityUid Shooter, GameTick ArrivalTick, XenoProjectilePredictedHitEvent Message, EntitySessionEventArgs Args)> _earlyMessages = [];
 
     public override void Initialize()
     {
@@ -81,7 +82,9 @@ public sealed class XenoProjectileSystem : EntitySystem
         _limitHitsId = 0;
     }
 
-    private void OnPredictedHit(XenoProjectilePredictedHitEvent msg, EntitySessionEventArgs args)
+    private void OnPredictedHit(XenoProjectilePredictedHitEvent msg, EntitySessionEventArgs args) => OnPredictedHit(msg, args, true);
+
+    private void OnPredictedHit(XenoProjectilePredictedHitEvent msg, EntitySessionEventArgs args, bool saveEarlyMessage)
     {
         if (_net.IsClient || !_gunPrediction.GunPrediction)
             return;
@@ -92,21 +95,23 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (GetEntity(msg.Target) is not { Valid: true } target)
             return;
 
-        if (!TryComp(ent, out XenoProjectileShooterComponent? shooter) ||
-            shooter.Shot.Count == 0)
-        {
-            return;
-        }
-
-        if (!shooter.Shot.TryFirstOrNull(e => CompOrNull<XenoProjectileShotComponent>(e)?.Id == msg.Id, out var shot))
+        if (!TryComp(ent, out XenoProjectileShooterComponent? shooter)
+            || shooter.Shot.Count == 0
+            || !shooter.Shot.TryFirstOrNull(e => CompOrNull<XenoProjectileShotComponent>(e)?.Id == msg.Id, out var shot))
         {
             if (_logPrediction)
-                Log.Warning($"Predicted shot ID {msg.Id} not found!");
+                Log.Debug($"Predicted shot ID {msg.Id} not found! Saving it? {saveEarlyMessage} (Tick {_timing.CurTick})");
+            if (saveEarlyMessage)
+                _earlyMessages.Add((ent, _timing.CurTick, msg, args));
             return;
         }
 
         if (TerminatingOrDeleted(shot))
+        {
+            if (_logPrediction)
+                Log.Warning($"Predicted shot ID {msg.Id} already deleted! (Tick {_timing.CurTick})");
             return;
+        }
 
         _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
         var coordinates = _transform.ToMapCoordinates(_rmcLagCompensation.GetCoordinates(target, args.SenderSession));
@@ -356,6 +361,31 @@ public sealed class XenoProjectileSystem : EntitySystem
         }
 
         RaiseLocalEvent(xeno, ammoShotEvent);
+
+        // Client may have already predicted hits, check for them here.
+        if (_net.IsServer && predicted && _earlyMessages.Count > 0)
+        {
+            for (var i = 0; i < _earlyMessages.Count; ++i)
+            {
+                var item = _earlyMessages[i];
+                if (item.ArrivalTick < _timing.CurTick)
+                {
+                    if (_logPrediction)
+                        Log.Warning($"Removed expired prediction message: Shooter {item.Shooter}, Shot ID {item.Message.Id}");
+                    _earlyMessages[i] = _earlyMessages[_earlyMessages.Count - 1];
+                    _earlyMessages.RemoveAt(_earlyMessages.Count - 1);
+                    --i;
+                }
+                else if (item.Shooter == xeno)
+                {
+                    OnPredictedHit(item.Message, item.Args, false);
+                    _earlyMessages[i] = _earlyMessages[_earlyMessages.Count - 1];
+                    _earlyMessages.RemoveAt(_earlyMessages.Count - 1);
+                    --i;
+                }
+            }
+        }
+
         return true;
     }
 }
