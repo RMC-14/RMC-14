@@ -60,6 +60,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 2100
+    breakDamage:
+      types:
+        Structural: 3000
 
 - type: entity
   parent: CMWallMetal
@@ -75,6 +83,14 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 2100
+    breakDamage:
+      types:
+        Structural: 3000
 
 - type: entity
   parent: RMCWallAlmayerDeco1
@@ -153,6 +169,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 2100
+    breakDamage:
+      types:
+        Structural: 3000
 
 # Reinforced
 - type: entity
@@ -218,6 +242,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCBaseWallReinforced
@@ -233,6 +265,14 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCWallAlmayerReinforcedDeco1
@@ -311,6 +351,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCBaseWallReinforced
@@ -329,6 +377,14 @@
     - windows
     - doors
     base: aiwall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 # Indestructible
 - type: entity
@@ -368,6 +424,34 @@
     - windows
     - doors
     base: wall
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: ExaminableDamage
+    messages: RMCWallMessages
+  - type: RMCIntegrityExamine
+  - type: Construction
+    graph: CMGirder
+    node: reinforcedWall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    hijackDamageOnly: true
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: CMWallReinforcedHeavyAlmayer
@@ -383,6 +467,15 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    hijackDamageOnly: true
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCWallAlmayerReinforcedHeavyDeco1
@@ -395,6 +488,15 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    hijackDamageOnly: true
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCWallAlmayerReinforcedHeavyDeco1
@@ -407,6 +509,15 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    hijackDamageOnly: true
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCWallAlmayerReinforcedHeavyDeco1
@@ -419,6 +530,15 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    hijackDamageOnly: true
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCWallAlmayerReinforcedHeavyDeco1
@@ -431,6 +551,15 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    hijackDamageOnly: true
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCWallAlmayerReinforcedHeavyDeco1
@@ -443,6 +572,15 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    hijackDamageOnly: true
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: CMWallReinforcedHeavy
@@ -461,6 +599,34 @@
     - windows
     - doors
     base: wall
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: ExaminableDamage
+    messages: RMCWallMessages
+  - type: RMCIntegrityExamine
+  - type: Construction
+    graph: CMGirder
+    node: reinforcedWall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    hijackDamageOnly: true
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: CMWallReinforcedHeavy
@@ -479,6 +645,34 @@
     - windows
     - doors
     base: aiwall
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: ExaminableDamage
+    messages: RMCWallMessages
+  - type: RMCIntegrityExamine
+  - type: Construction
+    graph: CMGirder
+    node: reinforcedWall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    hijackDamageOnly: true
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: CMWallReinforcedHeavy
@@ -497,6 +691,34 @@
     - windows
     - doors
     base: aiwall
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: ExaminableDamage
+    messages: RMCWallMessages
+  - type: RMCIntegrityExamine
+  - type: Construction
+    graph: CMGirder
+    node: reinforcedWall
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    hijackDamageOnly: true
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 # TODO RMC14 temp hull, breakable only after hijack
 
