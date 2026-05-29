@@ -65,7 +65,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private EntityQuery<XenoAcidHoleWallComponent> _holeWallQuery;
 
     private static readonly ProtoId<StackPrototype> PlasteelStack = "CMPlasteel";
-    private static readonly ProtoId<DamageTypePrototype> AcidHoleDamage = "Blunt";
+    private static readonly ProtoId<DamageGroupPrototype> AcidHoleDamage = "Brute";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
     private static readonly EntProtoId DamagedGirderPrototype = "RMCGirderDamaged";
     private const CollisionGroup HoleBlockMask = CollisionGroup.Impassable |
@@ -873,6 +873,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         var ev = new XenoAcidHoleRepairDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, hole.Comp.RepairDelay, ev, hole, used: used)
         {
+            NeedHand = true,
             BreakOnMove = true,
             BreakOnDropItem = true,
             BreakOnHandChange = true,
