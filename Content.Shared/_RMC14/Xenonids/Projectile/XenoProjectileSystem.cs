@@ -53,6 +53,7 @@ public sealed class XenoProjectileSystem : EntitySystem
     private EntityQuery<PreventAttackLightOffComponent> _preventAttackLightOffQuery;
 
     private int _limitHitsId;
+    private bool _logPrediction = false;
 
     public override void Initialize()
     {
@@ -68,7 +69,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         SubscribeLocalEvent<XenoProjectileShotComponent, ComponentRemove>(OnShotRemove);
         SubscribeLocalEvent<XenoProjectileShotComponent, EntityTerminatingEvent>(OnShotRemove);
 
-        SubscribeLocalEvent<XenoClientProjectileShotComponent, StartCollideEvent>(OnShotCollide);
+        SubscribeLocalEvent<XenoClientProjectileShotComponent, ProjectileHitEvent>(OnShotHit);
 
         SubscribeLocalEvent<XenoProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<XenoProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
@@ -112,7 +113,7 @@ public sealed class XenoProjectileSystem : EntitySystem
             return;
         }
 
-        if (!_rmcLagCompensation.Collides(target, (shot.Value, physics), coordinates))
+        if (!_rmcLagCompensation.Collides(target, (shot.Value, physics), coordinates, msg.Substep))
             return;
 
         _projectile.ProjectileCollide((shot.Value, projectile, physics), target, true);
@@ -144,7 +145,10 @@ public sealed class XenoProjectileSystem : EntitySystem
         }
     }
 
-    private void OnShotCollide(Entity<XenoClientProjectileShotComponent> ent, ref StartCollideEvent args)
+    // TODO RMC14 There is a bug with clients trying to predict StartCollideEvent on our version of RT.
+    // This should be fixed in the newest versions of RT (2026 or later), and then we can change this back
+    // to react to StartCollideEvent.
+    private void OnShotHit(Entity<XenoClientProjectileShotComponent> ent, ref ProjectileHitEvent args)
     {
         if (_net.IsServer || !IsClientSide(ent))
             return;
@@ -152,10 +156,28 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (!TryComp(ent, out XenoProjectileShotComponent? shot))
             return;
 
+        var substep = _rmcLagCompensation.GetClientSubstep();
+
+        if (_logPrediction)
+        {
+            TryComp(args.Target, out TransformComponent? targetTransform);
+            TryComp(ent, out TransformComponent? shotTransform);
+            Log.Debug($"""
+                SENDING PREDICTED PROJECTILE HIT!!
+                  CurTick: {_timing.CurTick}
+                  ClientLastRealTick: {_rmcLagCompensation.GetLastRealTick(null)}
+                  In physics? {_rmcLagCompensation.GetCurrentSubstep().HasValue}
+                  Substep: {substep}
+                  ShotCoords: {shotTransform?.Coordinates}
+                  Target Coords: {targetTransform?.Coordinates}
+                """);
+        }
+
         var ev = new XenoProjectilePredictedHitEvent(
             shot.Id,
-            GetNetEntity(args.OtherEntity),
-            _rmcLagCompensation.GetLastRealTick(null)
+            GetNetEntity(args.Target),
+            _rmcLagCompensation.GetLastRealTick(null),
+            substep
         );
         RaiseNetworkEvent(ev);
     }

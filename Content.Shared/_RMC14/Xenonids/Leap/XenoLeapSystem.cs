@@ -126,7 +126,7 @@ public sealed class XenoLeapSystem : EntitySystem
                 return;
 
             _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
-            if (!_rmcLagCompensation.Collides(target, ent, args.SenderSession))
+            if (!_rmcLagCompensation.Collides(target, ent, args.SenderSession, msg.Substep))
                 return;
         }
 
@@ -597,7 +597,10 @@ public sealed class XenoLeapSystem : EntitySystem
 
         if (_net.IsClient)
         {
-            var predictedEv = new XenoLeapPredictedHitEvent(GetNetEntity(target), _rmcLagCompensation.GetLastRealTick(null));
+            var predictedEv = new XenoLeapPredictedHitEvent(
+                GetNetEntity(target),
+                _rmcLagCompensation.GetLastRealTick(null),
+                _rmcLagCompensation.GetClientSubstep());
             RaiseNetworkEvent(predictedEv);
             if (_timing.InPrediction && _timing.IsFirstTimePredicted)
             {
