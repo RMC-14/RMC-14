@@ -65,7 +65,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
     private EntityQuery<XenoAcidHoleWallComponent> _holeWallQuery;
 
     private static readonly ProtoId<StackPrototype> PlasteelStack = "CMPlasteel";
-    private static readonly ProtoId<DamageTypePrototype> StructuralDamage = "Structural";
+    private static readonly ProtoId<DamageTypePrototype> AcidHoleDamage = "Blunt";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
     private static readonly EntProtoId DamagedGirderPrototype = "RMCGirderDamaged";
     private const CollisionGroup HoleBlockMask = CollisionGroup.Impassable |
@@ -286,13 +286,13 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (TryComp<WelderComponent>(args.Used, out _))
+        if (HasComp<WelderComponent>(args.Used))
         {
             _popup.PopupEntity(Loc.GetString("rmc-acid-hole-repair-requires-nailgun"), hole.Owner, args.User, PopupType.MediumCaution);
             return;
         }
 
-        if (TryComp<NailgunComponent>(args.Used, out _))
+        if (HasComp<NailgunComponent>(args.Used))
         {
             TryStartRepair(args.User, args.Used, hole);
             return;
@@ -641,7 +641,8 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (HasActiveHole(wall))
             return false;
 
-        var hole = SpawnAttachedTo(wall.Comp.HolePrototype, wall.Owner.ToCoordinates(), rotation: direction.ToAngle());
+        var holeRotation = direction.ToAngle() - Transform(wall).WorldRotation;
+        var hole = SpawnAttachedTo(wall.Comp.HolePrototype, wall.Owner.ToCoordinates(), rotation: holeRotation);
         var holeComp = EnsureComp<XenoAcidHoleComponent>(hole);
         holeComp.Wall = wall.Owner;
         holeComp.EntranceDirection = direction;
@@ -658,7 +659,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
     private void SetWallDamage(Entity<DamageableComponent> wall, FixedPoint2 damage)
     {
-        var damageSpecifier = new DamageSpecifier(_prototype.Index(StructuralDamage), damage);
+        var damageSpecifier = new DamageSpecifier(_prototype.Index(AcidHoleDamage), damage);
         _damageable.SetDamage(wall.Owner, wall.Comp, damageSpecifier);
     }
 
@@ -735,13 +736,13 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (TryComp<WelderComponent>(args.Used, out _))
+        if (HasComp<WelderComponent>(args.Used))
         {
             _popup.PopupEntity(Loc.GetString("rmc-acid-hole-repair-requires-nailgun"), wall.Owner, args.User, PopupType.MediumCaution);
             return;
         }
 
-        if (TryComp<NailgunComponent>(args.Used, out _))
+        if (HasComp<NailgunComponent>(args.Used))
         {
             TryStartRepair(args.User, args.Used, hole);
             return;
