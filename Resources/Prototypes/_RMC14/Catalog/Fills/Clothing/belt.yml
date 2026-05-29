@@ -152,12 +152,13 @@
   - type: StorageFill
     contents:
     - id: CMGrenadeHighExplosive
-      amount: 5
-    - id: CMGrenadeFrag
-      amount: 1
+      amount: 3
+    - id: RMC40MMGrenadeM74AGMF
+      amount: 2
     - id: RMCGrenadeIncendiary
       amount: 2
-    # TODO Original is 3 HEDP, 2 HIDP incen, 2 airburst frag, 1 airburst incen
+    - id: RMC40MMGrenadeM74AGMI
+      amount: 1
 
 - type: entity
   parent: RMCBeltGrenadeLarge
@@ -167,12 +168,13 @@
   - type: StorageFill
     contents:
     - id: CMGrenadeHighExplosive
-      amount: 12
-    - id: CMGrenadeFrag
-      amount: 3
+      amount: 6
+    - id: RMC40MMGrenadeM74AGMF
+      amount: 6
     - id: RMCGrenadeIncendiary
       amount: 3
-    # TODO Original is 6 HEDP, 3 HIDP incen, 6 airburst frag, 3 airburst incen
+    - id: RMC40MMGrenadeM74AGMI
+      amount: 3
 
 - type: entity
   parent: RMCBeltGrenadeLarge
