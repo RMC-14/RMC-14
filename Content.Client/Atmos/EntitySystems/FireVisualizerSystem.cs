@@ -23,6 +23,7 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
         _fireColorQuery = GetEntityQuery<RMCFireColorComponent>(); // RMC14
 
         SubscribeLocalEvent<FireVisualsComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<FireVisualsComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<FireVisualsComponent, ComponentShutdown>(OnShutdown);
     }
 
@@ -53,6 +54,12 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
         sprite.LayerSetShader(FireVisualLayers.Fire, "unshaded");
         if (component.Sprite != null)
             SpriteSystem.LayerSetRsi((uid, sprite), FireVisualLayers.Fire, new ResPath(component.Sprite));
+    }
+
+    private void OnComponentStartup(EntityUid uid, FireVisualsComponent component, ComponentStartup args)
+    {
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || !TryComp(uid, out AppearanceComponent? appearance))
+            return;
 
         UpdateAppearance(uid, component, sprite, appearance);
     }
@@ -96,6 +103,9 @@ public sealed class FireVisualizerSystem : VisualizerSystem<FireVisualsComponent
             SpriteSystem.LayerSetColor((uid, sprite), index, fireColor);
         }
         // RMC14 end
+
+        if (!MetaData(uid).EntityInitialized)
+            return;
 
         component.LightEntity ??= Spawn(null, new EntityCoordinates(uid, default));
         var light = EnsureComp<PointLightComponent>(component.LightEntity.Value);

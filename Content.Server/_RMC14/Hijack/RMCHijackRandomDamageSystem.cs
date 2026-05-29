@@ -37,9 +37,10 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     private const float WindowMaxPercent = 0.50f;
     private const float WindoorMinPercent = 0.50f;
     private const float WindoorMaxPercent = 1.00f;
-    private const float PipeInitialPercent = 0.10f;
-    private const float PipeMinPercent = 0.007f;
-    private const float PipeMaxPercent = 0.012f;
+    private const float PipeInitialMinPercent = 0.03f;
+    private const float PipeInitialMaxPercent = 0.05f;
+    private const float PipeMinPercent = 0.01f;
+    private const float PipeMaxPercent = 0.015f;
 
     private const float PipeExplosionTotal = 300f;
     private const float PipeExplosionSlope = 25f;
@@ -118,7 +119,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         ApplyRandomDamage(_windowTargets, WindowMinPercent, WindowMaxPercent);
         ApplyRandomDamage(_windoorTargets, WindoorMinPercent, WindoorMaxPercent);
 
-        DoPipeBarrage(ev.Map, PipeInitialPercent, PipeInitialPercent);
+        DoPipeBarrage(ev.Map, PipeInitialMinPercent, PipeInitialMaxPercent);
     }
 
     private void ApplyRandomDamage(
