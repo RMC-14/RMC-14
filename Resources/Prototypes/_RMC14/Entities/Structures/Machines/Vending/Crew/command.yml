@@ -36,6 +36,8 @@
       entries:
       - id: RMCCoatService
         recommended: true
+      - id: RMCCoatAllWeather # RMC Addition
+        recommended: true
     - name: Hat
       choices: { CMHat: 1 }
       entries:
@@ -395,6 +397,7 @@
       - id: CMJumpsuitCOFormalWhite
       - id: CMJumpsuitCOFormalBlack
       - id: RMCCoatService
+      - id: RMCCoatAllWeather # RMC Addition
       - id: CMCoatMP
       - id: RMCShoesLaceup
       - id: RMCShoesLaceupBrown # RMC Addition
@@ -1060,6 +1063,7 @@
       - id: RMCHazardVest
       - id: RMCHazardVestYellow
       - id: RMCCoatService
+      - id: RMCCoatAllWeather # RMC Addition
     - name: Backpack
       jobs:
       - CMChiefEngineer
