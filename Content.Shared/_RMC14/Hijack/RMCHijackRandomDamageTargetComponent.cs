@@ -33,12 +33,6 @@ public sealed partial class RMCHijackRandomDamageTargetComponent : Component
     /// </summary>
     [DataField]
     public DamageSpecifier? BreakDamage;
-
-    /// <summary>
-    ///     Blocks ordinary damage while still allowing damage applied by the hijack system.
-    /// </summary>
-    [DataField]
-    public bool HijackDamageOnly;
 }
 
 /// <summary>

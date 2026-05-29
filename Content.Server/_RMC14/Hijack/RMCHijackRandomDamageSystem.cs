@@ -1,3 +1,4 @@
+using Content.Server.Destructible;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Explosion;
@@ -58,14 +59,12 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     private readonly List<EntityUid> _pipeTargets = new();
     private readonly List<EntityUid> _barrageMaps = new();
     private readonly Dictionary<EntityUid, TimeSpan> _nextPipeBarrage = new();
-    private readonly HashSet<EntityUid> _applyingHijackDamage = new();
     private readonly HashSet<EntityUid> _usedPipeTargets = new();
     private readonly HashSet<EntityUid> _pendingPipeTargets = new();
 
     public override void Initialize()
     {
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
-        SubscribeLocalEvent<RMCHijackRandomDamageTargetComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
     }
 
     public override void Update(float frameTime)
@@ -106,6 +105,13 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         {
             if (!comp.Enabled || xform.MapUid != ev.Map)
                 continue;
+
+            // Structural hijack damage only uses prototypes with a normal damage/destructible flow.
+            if (comp.Category != RMCHijackRandomDamageCategory.Pipe &&
+                (!HasComp<DamageableComponent>(uid) || !HasComp<DestructibleComponent>(uid)))
+            {
+                continue;
+            }
 
             switch (comp.Category)
             {
@@ -184,30 +190,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         var remaining = targetTotal - damageable.TotalDamage;
         var damage = targetDamage * (remaining / targetTotal);
 
-        _applyingHijackDamage.Add(uid);
-        try
-        {
-            _damageable.TryChangeDamage(uid, damage, true, damageable: damageable);
-        }
-        finally
-        {
-            _applyingHijackDamage.Remove(uid);
-        }
-    }
-
-    /// <summary>
-    ///     Allows mapped targets to be indestructible outside hijack while preserving normal damage flow for hijack.
-    /// </summary>
-    private void OnBeforeDamageChanged(Entity<RMCHijackRandomDamageTargetComponent> ent, ref BeforeDamageChangedEvent args)
-    {
-        if (!ent.Comp.HijackDamageOnly ||
-            _applyingHijackDamage.Contains(ent.Owner) ||
-            !args.Damage.AnyPositive())
-        {
-            return;
-        }
-
-        args.Cancelled = true;
+        _damageable.TryChangeDamage(uid, damage, true, damageable: damageable);
     }
 
     /// <summary>
