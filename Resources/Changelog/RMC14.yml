@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Flamethowers now warn you when you are out of fuel
-    type: Fix
-  id: 2732
-  time: '2026-01-11T10:44:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8599
 - author: Dygon
   changes:
   - message: Alt-clicking a target dummy allows adjusting its armor values.
@@ -4485,5 +4478,12 @@
   id: 3231
   time: '2026-05-28T20:39:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9924
+- author: IceNoobXD
+  changes:
+  - message: Added the intact (10%) and flooded (20%) sand temple inserts to LV-624
+    type: Add
+  id: 3232
+  time: '2026-05-29T00:51:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9875
 Name: RMC14
 Order: -1
