@@ -7,10 +7,12 @@
     camouflage: Jungle
     announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
     nightmareScenarios:
-    - scenarioName: fallen_ship
-      scenarioProbability: 0.1
+#   - scenarioName: clf_ship
+#     scenarioProbability: 0.1
     - scenarioName: asset_protection
       scenarioProbability: 0.1
+    - scenarioName: none
+      scenarioProbability: 0.9
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
@@ -216,6 +218,8 @@
     nightmareScenarios:
     - scenarioName: riot_in_progress
       scenarioProbability: 0.15
+    - scenarioName: none
+      scenarioProbability: 0.85
     survivorJobVariants:
       RMCSurvivorCommandingOfficer:
       - CMSurvivorFiorinaWarden: 1
@@ -542,6 +546,8 @@
     nightmareScenarios:
     - scenarioName: spp_sof
       scenarioProbability: 0.4
+    - scenarioName: none # reduce by 0.1 once clf survs are in
+      scenarioProbability: 0.6
     survivorJobVariants:
       CMSurvivor:
       - CMJobSurvivorSoroCivilian: -1

@@ -317,6 +317,20 @@
   - type: CMArmor
     melee: 10
 
+# Tanker
+- type: entity
+  parent: [RMCBaseJacketButtonable, RMCBaseJacket]
+  id: RMCCoatTanker
+  name: tanker jacket
+  description: A comfortable jacket provided to anyone expected to operate near or inside heavy machinery. Special material within the arms jams up any machinery it gets caught up in, protecting the wearer from injury.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/tanker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/tanker.rsi
+  - type: CMArmor
+    melee: 10
+
 # Auxiliary Supply Officer
 - type: entity
   parent: RMCBaseJacket
@@ -998,11 +1012,30 @@
   name: robust snow suit
   description: A snow suit. It can protect the wearer from extreme cold. This one seems to have been modified somewhat, and can both holster a gun and fit magazines.
   components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - RMCMagazineShotgun
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/normal.rsi # TODO cool sprite
   - type: CMHardArmor
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 0
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
