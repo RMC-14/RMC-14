@@ -168,15 +168,16 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         {
             Log.Debug($"""
                 Lag comp collide data:
-                  Pre-Substep Projectile Coords: {projectileCoordinates}
-                  Substep: {substep}
+                  Pre-Substep
+                    Proj Coords:  {projectileCoordinates}
+                  CurTick:        {_timing.CurTick}
+                  Substep:        {substep}
                   Projectile Pos: {substeppedProjectilePos}
                   Target Pos:     {targetCoordinates.Position}
-                  Target AABB:
-                    {bounds.BottomLeft}
-                    {bounds.TopRight}
-                  Contained in AABB? {bounds.Contains(substeppedProjectilePos)}
-                  Closest point diff: {(bounds.ClosestPoint(substeppedProjectilePos) - substeppedProjectilePos).Length()}
+                  Target AABB:    {bounds.BottomLeft}
+                                  {bounds.TopRight}
+                  Inside AABB?    {bounds.Contains(substeppedProjectilePos)}
+                  AABB closest:   {(bounds.ClosestPoint(substeppedProjectilePos) - substeppedProjectilePos).Length()}
                 """);
         }
 

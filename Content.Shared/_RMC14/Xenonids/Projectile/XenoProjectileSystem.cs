@@ -99,7 +99,11 @@ public sealed class XenoProjectileSystem : EntitySystem
         }
 
         if (!shooter.Shot.TryFirstOrNull(e => CompOrNull<XenoProjectileShotComponent>(e)?.Id == msg.Id, out var shot))
+        {
+            if (_logPrediction)
+                Log.Warning($"Predicted shot ID {msg.Id} not found!");
             return;
+        }
 
         if (TerminatingOrDeleted(shot))
             return;
@@ -164,11 +168,12 @@ public sealed class XenoProjectileSystem : EntitySystem
             TryComp(ent, out TransformComponent? shotTransform);
             Log.Debug($"""
                 SENDING PREDICTED PROJECTILE HIT!!
-                  CurTick: {_timing.CurTick}
-                  ClientLastRealTick: {_rmcLagCompensation.GetLastRealTick(null)}
-                  In physics? {_rmcLagCompensation.GetCurrentSubstep().HasValue}
-                  Substep: {substep}
-                  ShotCoords: {shotTransform?.Coordinates}
+                  CurTick:       {_timing.CurTick}
+                  LastRealTick:  {_rmcLagCompensation.GetLastRealTick(null)}
+                  In physics?    {_rmcLagCompensation.GetCurrentSubstep().HasValue}
+                  ShotId:        {shot.Id}
+                  Substep:       {substep}
+                  ShotCoords:    {shotTransform?.Coordinates}
                   Target Coords: {targetTransform?.Coordinates}
                 """);
         }
