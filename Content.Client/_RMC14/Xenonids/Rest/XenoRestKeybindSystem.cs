@@ -1,5 +1,6 @@
 using Content.Client.Actions;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Rest;
@@ -14,6 +15,7 @@ public sealed class XenoRestKeybindSystem : EntitySystem
     [Dependency] private readonly ActionsSystem _actionsSystem = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCGameStateSystem _rmcGameState = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -26,6 +28,9 @@ public sealed class XenoRestKeybindSystem : EntitySystem
                     var ent = _playerManager.LocalEntity;
                     if (ent == null || !ent.Value.IsValid() || !HasComp<XenoComponent>(ent.Value))
                         return;
+
+                    // Cursed workaround to put the client into "in simulation" state.
+                    using var enforcedSim = _rmcGameState.EnforceSimulation();
 
                     foreach (var (actionId, actionComp) in _rmcActions.GetActionsWithEvent<XenoRestActionEvent>(ent.Value))
                     {

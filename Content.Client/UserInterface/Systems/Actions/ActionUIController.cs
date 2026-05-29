@@ -13,6 +13,7 @@ using Content.Client.UserInterface.Systems.Actions.Widgets;
 using Content.Client.UserInterface.Systems.Actions.Windows;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.GameStates;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Systems;
@@ -52,6 +53,9 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
     [UISystemDependency] private readonly InteractionOutlineSystem? _interactionOutline = default;
     [UISystemDependency] private readonly TargetOutlineSystem? _targetOutline = default;
     [UISystemDependency] private readonly SpriteSystem _spriteSystem = default!;
+
+    // RMC14
+    [UISystemDependency] private readonly SharedRMCGameStateSystem _rmcGameState = default!;
 
     private ActionButtonContainer? _container;
     private readonly List<EntityUid?> _actions = new();
@@ -173,6 +177,10 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         {
             return false;
         }
+
+        // RMC14
+        // Cursed workaround to put the client into "in simulation" state.
+        using var enforcedSim = _rmcGameState.EnforceSimulation();
 
         // Is the action currently valid?
         if (!_actionsSystem.ValidAction(action))

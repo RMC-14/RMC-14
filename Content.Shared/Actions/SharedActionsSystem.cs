@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Movement;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Components;
@@ -38,6 +38,7 @@ public abstract class SharedActionsSystem : EntitySystem
 
     // RMC14
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCGameStateSystem _rmcGameState = default!;
     [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
 
     private EntityQuery<ActionComponent> _actionQuery;
@@ -269,6 +270,10 @@ public abstract class SharedActionsSystem : EntitySystem
     /// </summary>
     private void OnActionRequest(RequestPerformActionEvent ev, EntitySessionEventArgs args)
     {
+        // RMC14
+        // Cursed workaround to put the client into "in simulation" state.
+        using var enforcedSim = _rmcGameState.EnforceSimulation();
+
         _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, ev.LastRealTick);
         if (args.SenderSession.AttachedEntity is not { } user)
             return;
