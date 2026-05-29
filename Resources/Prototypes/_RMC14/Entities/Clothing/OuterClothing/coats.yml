@@ -295,12 +295,14 @@
   parent: RMCBaseJacket
   id: RMCQuartermasterJacket
   name: Logistics Officer jacket
-  description: A green jacket worn by UNMC personnel. The back has the flag of the United Nations on it.
+  description: A green jacket issued to logistics officers of the UNMC.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/qm.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/qm.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RMCPatchUnitedNationsBack ]
 
 
 # Mess Seargeant/Tech

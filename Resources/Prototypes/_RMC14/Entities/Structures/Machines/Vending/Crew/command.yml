@@ -60,6 +60,8 @@
         name: United Nations flag shoulder patch
       - id: RMCPatchUnitedNations
         name: United Nations shoulder patch
+      - id: RMCPatchUnitedNationsBack # RMC Addition
+        name: United Nations flag back patch
     - name: Personal Sidearm
       choices: { CMWeapon: 1 }
       entries:
@@ -542,6 +544,8 @@
         name: United Nations flag shoulder patch
       - id: RMCPatchUnitedNations
         name: United Nations shoulder patch
+      - id: RMCPatchUnitedNationsBack # RMC Addition
+        name: United Nations flag back patch
 
 
 # Weapon Vend
@@ -835,6 +839,8 @@
         name: United Nations flag shoulder patch
       - id: RMCPatchUnitedNations
         name: United Nations shoulder patch
+      - id: RMCPatchUnitedNationsBack # RMC Addition
+        name: United Nations flag back patch
     - name: Pouches
       jobs:
       - CMExecutiveOfficer
@@ -960,6 +966,8 @@
         name: United Nations flag shoulder patch
       - id: RMCPatchUnitedNations
         name: United Nations shoulder patch
+      - id: RMCPatchUnitedNationsBack # RMC Addition
+        name: United Nations flag back patch
     - name: Pouches
       jobs:
       - CMChiefMP
@@ -1094,6 +1102,8 @@
         name: United Nations flag shoulder patch
       - id: RMCPatchUnitedNations
         name: United Nations shoulder patch
+      - id: RMCPatchUnitedNationsBack # RMC Addition
+        name: United Nations flag back patch
     - name: Pouches
       jobs:
       - CMChiefEngineer
@@ -1259,6 +1269,8 @@
         name: United Nations flag shoulder patch
       - id: RMCPatchUnitedNations
         name: United Nations shoulder patch
+      - id: RMCPatchUnitedNationsBack # RMC Addition
+        name: United Nations flag back patch
     - name: Pouches
       jobs:
       - CMQuartermaster
@@ -1406,6 +1418,8 @@
         name: United Nations flag shoulder patch
       - id: RMCPatchUnitedNations
         name: United Nations shoulder patch
+      - id: RMCPatchUnitedNationsBack # RMC Addition
+        name: United Nations flag back patch
     - name: Pouches
       jobs:
       - CMCMO
@@ -1559,6 +1573,8 @@
         name: United Nations flag shoulder patch
       - id: RMCPatchUnitedNations
         name: United Nations shoulder patch
+      - id: RMCPatchUnitedNationsBack # RMC Addition
+        name: United Nations flag back patch
     - name: Pouches
       jobs:
       - CMAuxiliarySupportOfficer

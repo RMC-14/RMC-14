@@ -862,6 +862,9 @@
       - id: RMCPatchFallingFalconsLarge
         name: Falling Falcons large chest patch
         amount: 15
+      - id: RMCPatchUnitedNationsBack # RMC Addition
+        name: United Nations flag back patch
+        amount: 15
       - id: RMCPatchUNMC
         name: UNMC shoulder patch
         amount: 15
