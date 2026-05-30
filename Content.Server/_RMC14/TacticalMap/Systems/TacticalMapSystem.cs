@@ -3,35 +3,35 @@ using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Overwatch;
+using Content.Server._RMC14.Xenonids.Watch;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
-using Content.Server._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
-using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
-using Content.Server._RMC14.Overwatch;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Sensor;
 using Content.Shared._RMC14.TacticalMap;
-using Content.Shared.Popups;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
-using Content.Shared.Ghost;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
+using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.UserInterface;
@@ -41,9 +41,9 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -61,19 +61,19 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly OverwatchConsoleSystem _overwatch = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly TacticalMapReplaySystem _replay = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly TacticalMapReplaySystem _replay = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly XenoWatchSystem _xenoWatch = default!;
-    [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
 
     private EntityQuery<ActiveTacticalMapTrackedComponent> _activeTacticalMapTrackedQuery;
     private EntityQuery<TacticalMapLayerTrackedComponent> _tacticalMapLayerTrackedQuery;
@@ -2278,8 +2278,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var status = TacticalMapBlipStatus.Alive;
         if (_mobState.IsDead(ent))
         {
-            var stage = _unrevivableSystem.GetUnrevivableStage(ent.Owner, 5);
-            if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent))
+            var stage = _unrevivable.GetUnrevivableStage(ent.Owner, 5);
+            if (_rottingQuery.HasComp(ent) || _unrevivable.IsUnrevivable(ent))
                 status = TacticalMapBlipStatus.Undefibabble;
             else if (stage <= 1)
                 status = TacticalMapBlipStatus.Defibabble;
@@ -2354,7 +2354,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             AddMarineBlipsFromVisibleSquads(user.Owner, map, visibleLayers, blips, user.Comp.LiveUpdate);
         }
 
-        user.Comp.Blips = blips;
+        user.Comp.Blips = ToNetworkBlips(blips);
         // clients fade stale snapshots from the layer update time.
         user.Comp.LastBlipUpdateAt = GetLastBlipUpdateAt(map, blipLayers);
 
@@ -2510,7 +2510,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         var blips = BuildBlipsFromLayers(map, blipLayers, useLastUpdateBlips: false);
         AddRangedSensorTowerBlips(map, blipLayers, blips, useLastUpdateBlips: false);
-        computer.Comp.Blips = blips;
+        computer.Comp.Blips = ToNetworkBlips(blips);
         Dirty(computer);
 
         var lines = EnsureComp<TacticalMapLinesComponent>(computer);

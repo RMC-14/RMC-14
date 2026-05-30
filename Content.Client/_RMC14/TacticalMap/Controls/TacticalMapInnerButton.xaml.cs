@@ -83,15 +83,15 @@ public sealed partial class TacticalMapInnerButton : Button
             var safeText = FormattedMessage.EscapeText(text);
             if (Disabled)
             {
-                Label.SetMarkup($"[color={color.ToHex()}]{safeText}[/color]");
+                TextLabel.SetMarkup($"[color={color.ToHex()}]{safeText}[/color]");
             }
             else if (IsHovered)
             {
-                Label.SetMarkup($"[color={color.ToHex()}][bold][underline]{safeText}[/underline][/bold][/color]");
+                TextLabel.SetMarkup($"[color={color.ToHex()}][bold][underline]{safeText}[/underline][/bold][/color]");
             }
             else
             {
-                Label.SetMarkup($"[color={color.ToHex()}][bold]{safeText}[/bold][/color]");
+                TextLabel.SetMarkup($"[color={color.ToHex()}][bold]{safeText}[/bold][/color]");
             }
         }
     }

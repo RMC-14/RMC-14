@@ -172,7 +172,7 @@ public sealed class SensorTowerSystem : EntitySystem
 
         using (args.PushGroup(nameof(SensorTowerComponent)))
         {
-            // TODO: localize
+            // TODO RMC14 localize
             var text = ent.Comp.State switch
             {
                 SensorTowerState.Weld => "This one is heavily damaged. Use a blowtorch, wirecutters, then a wrench to repair it.",

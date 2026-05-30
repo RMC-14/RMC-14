@@ -42,7 +42,7 @@ namespace Content.Shared._RMC14.Overwatch;
 public abstract class SharedOverwatchConsoleSystem : EntitySystem
 {
     [Dependency] protected readonly ISharedPlayerManager Player = default!;
-    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
+    [Dependency] protected readonly SharedTransformSystem Xform = default!;
 
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly AreaSystem _area = default!;
@@ -584,7 +584,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad message: {args.Message}");
         _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-message", ("operatorName", Name(args.Actor)), ("message", message)), squadProto.ID);
 
-        var coordinates = TransformSystem.GetMapCoordinates(ent);
+        var coordinates = Xform.GetMapCoordinates(ent);
         var players = Filter.Empty().AddInRange(coordinates, 12, Player, EntityManager);
         players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
 
@@ -629,7 +629,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-objective-updated", ("operatorName", Name(args.Actor)), ("objectiveType", objectiveTypeName), ("objective", objective)), squadProto.ID);
 
-        var coordinates = TransformSystem.GetMapCoordinates(ent);
+        var coordinates = Xform.GetMapCoordinates(ent);
         var players = Filter.Empty().AddInRange(coordinates, 12, Player, EntityManager);
         players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
 
@@ -677,7 +677,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-objective-cancelled", ("operatorName", Name(args.Actor)), ("objectiveType", objectiveTypeName), ("objective", cancelledObjective)), squadProto.ID);
 
-        var coordinates = TransformSystem.GetMapCoordinates(ent);
+        var coordinates = Xform.GetMapCoordinates(ent);
         var players = Filter.Empty().AddInRange(coordinates, 12, Player, EntityManager);
         players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
 
@@ -765,7 +765,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
                     MapCoordinates? leaderCoords = null;
                     if (_squad.TryGetSquadLeader(squadId, out var leader))
-                        leaderCoords = TransformSystem.GetMapCoordinates(leader);
+                        leaderCoords = Xform.GetMapCoordinates(leader);
 
                     while (membersQueue.TryDequeue(out var member))
                     {
@@ -783,7 +783,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                             continue;
                         }
 
-                        var coords = TransformSystem.GetMapCoordinates(member);
+                        var coords = Xform.GetMapCoordinates(member);
                         var name = Identity.Name(member, EntityManager);
                         var mobState = _mobStateQuery.CompOrNull(member)?.CurrentState ?? MobState.Alive;
                         var ssd = !_actor.HasComp(member);

@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 using System.Numerics;
+using Content.Client._RMC14.TacticalMap.UI;
 using Content.Client._RMC14.UserInterface;
-using Robust.Client.Player;
-using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Localization;
-using Robust.Shared.Maths;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Network;
 using JetBrains.Annotations;
-using Content.Client._RMC14.TacticalMap.UI;
+using Robust.Client.Player;
+using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Maths;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.TacticalMap;
 
@@ -23,7 +22,6 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
     private static readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
 
     protected override TacticalMapWindow? Window { get; set; }
-    private bool _refreshed;
     private string? _lastCanvasLayerId;
     private readonly List<ProtoId<TacticalMapLayerPrototype>> _lastLayerOptions = new();
     private readonly List<ProtoId<TacticalMapLayerPrototype>> _lastVisibleLayers = new();
@@ -197,7 +195,6 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
             if (_lastCanvasLayerId != activeLayerId)
             {
                 _lastCanvasLayerId = activeLayerId;
-                _refreshed = false;
                 Window.Wrapper.Canvas.Lines.Clear();
                 Window.Wrapper.Canvas.TacticalLabels.Clear();
             }
@@ -316,8 +313,6 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         Window.Wrapper.UpdateCanvasBackground();
         var user = EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner);
         Window.Wrapper.SetCanvasAccess(user?.CanDraw ?? false);
-
-        _refreshed = true;
     }
 
     private void UpdateBlips()
@@ -373,7 +368,6 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         }
     }
 
-
     private void UpdateTimestamps()
     {
         if (Window == null)
@@ -382,7 +376,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         if (!EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user))
             return;
 
-        // stale fading follows blip snapshot time, not the draw cooldow
+        // stale fading follows blip snapshot time, not the draw cooldown
         Window.Wrapper.LastUpdateAt = user.LastAnnounceAt;
         Window.Wrapper.NextUpdateAt = user.NextAnnounceAt;
         Window.Wrapper.SetBlipStaleState(!user.LiveUpdate, user.LastBlipUpdateAt);

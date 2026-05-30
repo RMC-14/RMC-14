@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Numerics;
+using Content.Client._RMC14.TacticalMap.UI;
 using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Announce;
@@ -7,11 +8,10 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
-using Robust.Shared.Prototypes;
 using JetBrains.Annotations;
 using Robust.Client.Player;
 using Robust.Shared.Network;
-using Content.Client._RMC14.TacticalMap.UI;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.TacticalMap;
 
@@ -21,7 +21,6 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
     [Dependency] private readonly IPlayerManager _player = default!;
 
     protected override TacticalMapWindow? Window { get; set; }
-    private bool _refreshed;
     private string? _lastCanvasLayerId;
     private readonly List<ProtoId<TacticalMapLayerPrototype>> _lastLayerOptions = new();
     private readonly List<ProtoId<TacticalMapLayerPrototype>> _lastVisibleLayers = new();
@@ -111,7 +110,6 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
         base.Dispose(disposing);
     }
-
 
     private void OnMapSelected(NetEntity map)
     {
@@ -218,7 +216,6 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             if (_lastCanvasLayerId != activeLayerId)
             {
                 _lastCanvasLayerId = activeLayerId;
-                _refreshed = false;
                 Window.Wrapper.Canvas.Lines.Clear();
                 Window.Wrapper.Canvas.TacticalLabels.Clear();
             }
@@ -344,7 +341,6 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         }
 
         Window.Wrapper.UpdateCanvasBackground();
-        _refreshed = true;
     }
 
     private void UpdateBlips()

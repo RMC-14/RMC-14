@@ -16,10 +16,10 @@ namespace Content.Server._RMC14.TacticalMap;
 
 public sealed class TacticalMapReplaySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private const int MaxFramesPerMap = 2000;
     private static readonly TimeSpan KeyframeInterval = TimeSpan.FromSeconds(10);

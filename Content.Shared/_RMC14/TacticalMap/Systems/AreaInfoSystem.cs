@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared.Alert;
@@ -8,19 +9,17 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
 public sealed class AreaInfoSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly InventorySystem _inv = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly InventorySystem _inv = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly Queue<Entity<AreaInfoComponent>> _marineAlertCopyQueue = new();
@@ -56,9 +55,11 @@ public sealed class AreaInfoSystem : EntitySystem
 
         if ((ent.Comp.Slots & args.SlotFlags) == 0)
             return;
+
         if (!_inv.TryGetInventoryEntity<GrantAreaInfoComponent>(args.Equipee, out _))
             RemCompDeferred<AreaInfoComponent>(args.Equipee);
     }
+
     private void OnMapInit(Entity<AreaInfoComponent> ent, ref MapInitEvent args)
     {
         var (areaName, ceilingLevel, restrictions) = GetAreaInfo(ent);
@@ -69,6 +70,7 @@ public sealed class AreaInfoSystem : EntitySystem
                 ("ceilingLevel", ceilingLevel),
                 ("restrictions", restrictions)));
     }
+
     private void OnRemove(Entity<AreaInfoComponent> ent, ref ComponentRemove args)
     {
         _alerts.ClearAlert(ent, ent.Comp.Alert);
@@ -78,6 +80,7 @@ public sealed class AreaInfoSystem : EntitySystem
     {
         if (_timing.ApplyingState)
             return;
+
         // update the alert when they move to a new area
         var (areaName, ceilingLevel, restrictions) = GetAreaInfo(ent);
         _alerts.ShowAlert(ent, ent.Comp.Alert,
@@ -144,7 +147,7 @@ public sealed class AreaInfoSystem : EntitySystem
         else
             restrictedActions.Add("Close Air Support");
 
-        if (_area.CanSupplyDrop(coordinates.ToMap(_entityManager, _transform)))
+        if (_area.CanSupplyDrop(coordinates.ToMap(EntityManager, _transform)))
             allowedActions.Add("Supply Drops");
         else
             restrictedActions.Add("Supply Drops");
@@ -213,7 +216,7 @@ public sealed class AreaInfoSystem : EntitySystem
             if (!predicate((uid, roof)))
                 continue;
 
-            if (coordinates.TryDistance(_entityManager, uid.ToCoordinates(), out var distance) &&
+            if (coordinates.TryDistance(EntityManager, uid.ToCoordinates(), out var distance) &&
                 distance <= roof.Range)
             {
                 return true;

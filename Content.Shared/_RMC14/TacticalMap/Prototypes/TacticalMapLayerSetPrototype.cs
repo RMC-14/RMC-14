@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
-[Prototype(TacticalMapPrototypeIds.LayerSet), Serializable, NetSerializable]
+[Prototype(TacticalMapPrototypeIds.LayerSet)]
 public sealed partial class TacticalMapLayerSetPrototype : IPrototype
 {
     [IdDataField]
