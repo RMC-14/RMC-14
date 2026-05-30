@@ -1,5 +1,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -39,7 +40,7 @@ public sealed partial class TacticalMapUserComponent : Component
     public ProtoId<TacticalMapLayerPrototype>? ActiveLayer;
 
     [DataField, AutoNetworkedField]
-    public Dictionary<int, TacticalMapBlip> Blips = new();
+    public Dictionary<NetEntity, TacticalMapBlip> Blips = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastBlipUpdateAt;

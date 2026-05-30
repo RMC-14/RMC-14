@@ -162,12 +162,12 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         SendPredictedMessage(new TacticalMapSetVisibleLayersMsg(ids));
     }
 
-    private void OnOverwatchBlipClicked(Vector2i indices, int? entityId)
+    private void OnOverwatchBlipClicked(Vector2i indices, NetEntity? entityId)
     {
-        if (entityId is null || entityId.Value <= 0)
+        if (entityId is null || entityId.Value == NetEntity.Invalid)
             return;
 
-        SendPredictedMessage(new TacticalMapOverwatchBlipMsg(new NetEntity(entityId.Value)));
+        SendPredictedMessage(new TacticalMapOverwatchBlipMsg(entityId.Value));
     }
 
     private void ApplyMapState()
@@ -355,23 +355,23 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         }
 
         var blips = new TacticalMapBlip[computer.Blips.Count];
-        var entityIds = new int[computer.Blips.Count];
+        var entities = new NetEntity[computer.Blips.Count];
         var i = 0;
 
-        foreach (var (entityId, blip) in computer.Blips)
+        foreach (var (entity, blip) in computer.Blips)
         {
             blips[i] = blip;
-            entityIds[i] = entityId;
+            entities[i] = entity;
             i++;
         }
 
-        Window.Wrapper.UpdateBlips(blips, entityIds);
+        Window.Wrapper.UpdateBlips(blips, entities);
 
-        int? localPlayerId = _player.LocalEntity != null
-            ? (int?)EntMan.GetNetEntity(_player.LocalEntity.Value)
+        NetEntity? localPlayer = _player.LocalEntity != null
+            ? EntMan.GetNetEntity(_player.LocalEntity.Value)
             : null;
-        Window.Wrapper.Map.SetLocalPlayerEntityId(localPlayerId);
-        Window.Wrapper.Canvas.SetLocalPlayerEntityId(localPlayerId);
+        Window.Wrapper.Map.SetLocalPlayerEntity(localPlayer);
+        Window.Wrapper.Canvas.SetLocalPlayerEntity(localPlayer);
     }
 
     private void UpdateLabels()

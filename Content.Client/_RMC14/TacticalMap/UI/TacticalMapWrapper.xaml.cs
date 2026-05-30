@@ -128,7 +128,7 @@ public sealed partial class TacticalMapWrapper : Control
     private float _followUpdateTimer;
 
     private EntityUid? _cachedPlayerEntity;
-    private int? _cachedPlayerNetId;
+    private NetEntity? _cachedPlayerNet;
     private TacticalMapUserComponent? _cachedUserComponent;
 
     private bool _settingsVisible = false;
@@ -702,7 +702,7 @@ public sealed partial class TacticalMapWrapper : Control
         InvalidatePlayerCache();
     }
 
-    public void UpdateBlips(TacticalMapBlip[]? blips, int[]? entityIds)
+    public void UpdateBlips(TacticalMapBlip[]? blips, NetEntity[]? entityIds)
     {
         Map.UpdateBlips(blips, entityIds);
         Canvas.UpdateBlips(blips, entityIds);
@@ -2371,11 +2371,11 @@ public sealed partial class TacticalMapWrapper : Control
     private void InvalidatePlayerCache()
     {
         _cachedPlayerEntity = null;
-        _cachedPlayerNetId = null;
+        _cachedPlayerNet = null;
         _cachedUserComponent = null;
     }
 
-    private bool TryGetCachedPlayerData(out int playerNetId, out TacticalMapUserComponent userComponent)
+    private bool TryGetCachedPlayerData(out NetEntity playerNetId, out TacticalMapUserComponent userComponent)
     {
         playerNetId = default;
         userComponent = default!;
@@ -2397,14 +2397,14 @@ public sealed partial class TacticalMapWrapper : Control
             }
 
             _cachedPlayerEntity = currentPlayer;
-            _cachedPlayerNetId = (int)entMan.GetNetEntity(currentPlayer.Value);
+            _cachedPlayerNet = entMan.GetNetEntity(currentPlayer.Value);
             _cachedUserComponent = newUserComp;
         }
 
-        if (_cachedPlayerNetId == null || _cachedUserComponent == null)
+        if (_cachedPlayerNet == null || _cachedUserComponent == null)
             return false;
 
-        playerNetId = _cachedPlayerNetId.Value;
+        playerNetId = _cachedPlayerNet.Value;
         userComponent = _cachedUserComponent;
         return true;
     }
@@ -2413,12 +2413,12 @@ public sealed partial class TacticalMapWrapper : Control
     {
         playerIndices = default;
 
-        if (!TryGetCachedPlayerData(out int playerNetId, out TacticalMapUserComponent userComp))
+        if (!TryGetCachedPlayerData(out var playerNet, out TacticalMapUserComponent userComp))
             return false;
 
-        foreach ((int id, TacticalMapBlip blip) in userComp.Blips)
+        foreach ((NetEntity entity, TacticalMapBlip blip) in userComp.Blips)
         {
-            if (id == playerNetId)
+            if (entity == playerNet)
             {
                 playerIndices = blip.Indices;
                 return true;

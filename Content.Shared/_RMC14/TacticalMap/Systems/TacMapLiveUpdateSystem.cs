@@ -12,17 +12,11 @@ public sealed class TacMapLiveUpdateSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<TacticalMapUserComponent, ComponentStartup>(OnTacticalMapUserStartup);
-        SubscribeLocalEvent<TacticalMapUserComponent, MapInitEvent>(OnTacticalMapUserMapInit);
         SubscribeLocalEvent<GrantTacMapLiveUpdateComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantTacMapLiveUpdateComponent, GotUnequippedEvent>(OnGotUnequipped);
     }
 
     private void OnTacticalMapUserStartup(Entity<TacticalMapUserComponent> ent, ref ComponentStartup args)
-    {
-        RefreshLiveUpdate(ent);
-    }
-
-    private void OnTacticalMapUserMapInit(Entity<TacticalMapUserComponent> ent, ref MapInitEvent args)
     {
         RefreshLiveUpdate(ent);
     }

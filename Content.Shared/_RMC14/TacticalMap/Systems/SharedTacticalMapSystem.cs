@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Robust.Shared.Configuration;
 using Robust.Shared.Maths;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.TacticalMap;
@@ -73,6 +74,21 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         var ev = new TacticalMapModifyVisibleLayersEvent(viewer, visible);
         RaiseLocalEvent(ref ev);
         return visible;
+    }
+
+    protected Dictionary<NetEntity, TacticalMapBlip> ToNetworkBlips(Dictionary<int, TacticalMapBlip> blips)
+    {
+        var netBlips = new Dictionary<NetEntity, TacticalMapBlip>(blips.Count);
+        foreach (var (entityId, blip) in blips)
+        {
+            var uid = new EntityUid(entityId);
+            if (TerminatingOrDeleted(uid))
+                continue;
+
+            netBlips[GetNetEntity(uid)] = blip;
+        }
+
+        return netBlips;
     }
 
     private IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> GetDefaultLayers()
@@ -146,7 +162,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
             }
         }
 
-        computer.Comp.Blips = blips;
+        computer.Comp.Blips = ToNetworkBlips(blips);
 
         Dirty(computer);
 

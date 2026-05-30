@@ -10,6 +10,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -488,15 +489,15 @@ public sealed partial class TacticalMapControl
         _blipEntityIds = null;
     }
 
-    public void UpdateBlips(TacticalMapBlip[]? blips, int[]? entityIds)
+    public void UpdateBlips(TacticalMapBlip[]? blips, NetEntity[]? entityIds)
     {
         _blips = blips;
         _blipEntityIds = entityIds;
     }
 
-    public void SetLocalPlayerEntityId(int? entityId)
+    public void SetLocalPlayerEntity(NetEntity? entity)
     {
-        _localPlayerEntityId = entityId;
+        _localPlayerEntity = entity;
     }
 
     public void UpdateTacticalLabels(Dictionary<Vector2i, TacticalMapLabelData> labels)

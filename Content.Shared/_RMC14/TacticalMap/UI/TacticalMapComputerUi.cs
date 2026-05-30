@@ -41,34 +41,6 @@ public sealed class TacticalMapQueenEyeMoveMsg(Vector2i position) : BoundUserInt
     public readonly Vector2i Position = position;
 }
 
-[Serializable, NetSerializable]
-public sealed class TacticalMapCreateLabelMsg(Vector2i position, string text, Color color) : BoundUserInterfaceMessage
-{
-    public readonly Vector2i Position = position;
-    public readonly string Text = text;
-    public readonly Color Color = color;
-}
-
-[Serializable, NetSerializable]
-public sealed class TacticalMapEditLabelMsg(Vector2i position, string newText) : BoundUserInterfaceMessage
-{
-    public readonly Vector2i Position = position;
-    public readonly string NewText = newText;
-}
-
-[Serializable, NetSerializable]
-public sealed class TacticalMapDeleteLabelMsg(Vector2i position) : BoundUserInterfaceMessage
-{
-    public readonly Vector2i Position = position;
-}
-
-[Serializable, NetSerializable]
-public sealed class TacticalMapMoveLabelMsg(Vector2i oldPosition, Vector2i newPosition) : BoundUserInterfaceMessage
-{
-    public readonly Vector2i OldPosition = oldPosition;
-    public readonly Vector2i NewPosition = newPosition;
-}
-
 [DataRecord]
 [Serializable, NetSerializable]
 public readonly record struct TacticalMapLine(Vector2 Start, Vector2 End, Color Color, float Thickness = 2.0f, bool Smooth = true);
