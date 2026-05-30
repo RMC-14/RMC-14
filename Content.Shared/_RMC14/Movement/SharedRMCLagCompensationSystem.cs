@@ -25,10 +25,6 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
     private EntityQuery<ActorComponent> _actorQuery;
     private int _substeps;
     private float _substepTime;
-    // This contains _substeps + 1 items and is just an array of ratios
-    // representing how far into a frame each substep is. E.g. if there are four substeps
-    // the array would be [0.0f, 0.25f, 0.5f, 0.75f, 1.0f]
-    private float[] _substepMults = [];
     private bool _logPrediction = false;
 
     private readonly Dictionary<NetUserId, GameTick> _lastRealTicks = new();
@@ -59,11 +55,6 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         var serverTickrate = (float)_config.GetCVar(CVars.NetTickrate);
         _substeps = (int)Math.Ceiling(targetMinTickrate / serverTickrate);
         _substepTime = 1.0f / serverTickrate / _substeps;
-
-        // Division is slow so we pre-calculate the multipliers we need here.
-        _substepMults = new float[_substeps + 1];
-        for (var i = 0; i <= _substeps; i++)
-            _substepMults[i] = (float)i / _substeps;
     }
 
     public virtual (EntityCoordinates Coordinates, Angle Angle) GetCoordinatesAngle(EntityUid uid,
@@ -143,11 +134,11 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
             return false;
         }
 
-        substep = Math.Clamp(substep, 0, _substeps);
+        substep = Math.Clamp(substep, -_substeps, _substeps);
 
         var projectileCoordinates = _transform.GetMapCoordinates(projectile);
         var projectileVelocity = _physics.GetLinearVelocity(projectile, projectile.Comp.LocalCenter);
-        var substeppedProjectilePos = projectileCoordinates.Position + (projectileVelocity / _timing.TickRate) * _substepMults[substep];
+        var substeppedProjectilePos = projectileCoordinates.Position + (projectileVelocity / _timing.TickRate) * (substep / (float)_substeps);
 
         var transform = new Transform(targetCoordinates.Position, 0);
         var bounds = new Box2(transform.Position, transform.Position);
@@ -226,18 +217,13 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
     /// <summary>
     /// Gets the client's physics substep for purposes of telling the server how much work we've done.
     /// </summary>
-    /// <returns>0 if physics isn't running. 1 to GetSubsteps() if physics is running.</returns>
+    /// <returns>0 if physics isn't running. Current physics substep if it is.</returns>
     public int GetClientSubstep()
     {
         var substep = GetCurrentSubstep();
 
-        // I know this is necessary from testing but I can't explain why. For some reason
-        // the server is a full physics step behind us but only for the very first substep.
-        // If we're not in a physics substep the server will be aligned with us.
         if (!substep.HasValue)
             substep = 0; // not in a physics substep
-        else if (substep == 0)
-            substep = _substeps; // first physics substep special case
 
         return substep.Value;
     }
