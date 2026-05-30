@@ -58,7 +58,6 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly HiveLeaderSystem _hiveLeader = default!;
 
     private const float BarricadeCheckRange = 2.5f;
 
