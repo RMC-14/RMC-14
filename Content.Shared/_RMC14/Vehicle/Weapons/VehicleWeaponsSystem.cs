@@ -80,6 +80,8 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
 
         if (args.Popup)
             _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", ent)), args.Buckle, args.User);
+
+        args.Cancelled = true;
     }
 
     private void OnWeaponSeatStrapped(Entity<VehicleWeaponsSeatComponent> ent, ref StrappedEvent args)
@@ -751,4 +753,3 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
                _topology.TryGetMountedSlotByItem(vehicle, mountedWeapon, out _, hardpoints, itemSlots);
     }
 }
-

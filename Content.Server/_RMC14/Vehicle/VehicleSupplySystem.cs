@@ -778,6 +778,8 @@ public sealed class VehicleSupplySystem : EntitySystem
             mode = lift.Comp.Mode;
             busy = lift.Comp.Busy;
             activeId = string.IsNullOrWhiteSpace(lift.Comp.ActiveVehicleId) ? null : lift.Comp.ActiveVehicleId;
+            selectedId = SanitizeSelectedVehicle(console, lift.Comp, unlocked);
+            selectedCopyIndex = console.SelectedVehicleCopyIndex;
 
             if (!string.IsNullOrWhiteSpace(selectedId))
             {
@@ -816,6 +818,44 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         console.Ui = new VehicleSupplyUiState(mode, busy, activeId, selectedId, selectedCopyIndex, preview, available);
         Dirty(uid, console);
+    }
+
+    private string? SanitizeSelectedVehicle(
+        VehicleSupplyConsoleComponent console,
+        VehicleSupplyLiftComponent lift,
+        HashSet<string> unlocked)
+    {
+        if (!string.IsNullOrWhiteSpace(console.SelectedVehicle) &&
+            TryGetEntry(console, console.SelectedVehicle, out var selectedEntry) &&
+            IsEntryUnlocked(selectedEntry, unlocked))
+        {
+            var selectedKey = Normalize(selectedEntry.Vehicle.Id);
+            var selectedCount = GetStoredCount(lift, selectedKey);
+            if (selectedCount > 0)
+            {
+                console.SelectedVehicle = selectedEntry.Vehicle.Id;
+                console.SelectedVehicleCopyIndex = Math.Clamp(console.SelectedVehicleCopyIndex, 0, selectedCount - 1);
+                return console.SelectedVehicle;
+            }
+        }
+
+        foreach (var entry in console.Vehicles)
+        {
+            if (!IsEntryUnlocked(entry, unlocked))
+                continue;
+
+            var key = Normalize(entry.Vehicle.Id);
+            if (GetStoredCount(lift, key) <= 0)
+                continue;
+
+            console.SelectedVehicle = entry.Vehicle.Id;
+            console.SelectedVehicleCopyIndex = 0;
+            return console.SelectedVehicle;
+        }
+
+        console.SelectedVehicle = string.Empty;
+        console.SelectedVehicleCopyIndex = 0;
+        return null;
     }
 
     private void UpdateVendorSectionsAll()
