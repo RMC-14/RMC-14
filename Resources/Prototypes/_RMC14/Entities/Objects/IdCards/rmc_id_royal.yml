@@ -13,9 +13,202 @@
   name: royal marine dogtags
   components:
   - type: ItemIFF
-    faction: FactionRoyalMarines
-
+    factions:
+    - FactionRoyalMarines
 - type: entity
   parent: [ RMCIDCardStandardDogtagHidden, RMCIDRoyalMarines ]
   id: RMCIDRoyalMarinesHidden
   categories: [ HideSpawnMenu ]
+  
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardGoldRoyalMarines
+  name: royal marine commanding officer ID card
+  components:
+  - type: ItemIFF
+    factions:
+    - FactionRoyalMarines
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesCommando
+  name: Commando's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesCommando
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesBreacher
+  name: Breacher's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesBreacher
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesSGO
+  name: SGO's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesSGO
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesMarksman
+  name: Marksman's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesMarksman
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesMedic
+  name: Medic's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesMedic
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesTeamlead
+  name: Team Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesTeamlead
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesRiflemanPVE
+  name: Rifleman's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesRiflemanPVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesBombSpecPVE
+  name: Bombardment Specialist's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesBombSpecPVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesMedicPVE
+  name: Medical Assistant's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesMedicPVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesTroopSargePVE
+  name: Troop Sergeant's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesTroopSargePVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesSectionLeaderPVE
+  name: Section Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesSectionLeaderPVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesTeamLeaderPVE
+  name: Team Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesSectionLeaderPVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesSmartgunnerPVE
+  name: GPMG Gunner's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesSmartgunnerPVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesScoutSniperPVE
+  name: Scout Sniper's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesScoutSniperPVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesAssaultEngineerPVE
+  name: Assault Engineer's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesAssaultEngineerPVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalMarinesTroopCommanderPVE
+  name: Troop Commander's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMRoyalMarinesTroopCommanderPVE
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalParamarinesRifleman
+  name: Rifleman's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorParamarine
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalParamarinesCombatEngineer
+  name: Combat Engineer's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorParaAssaultEngineer
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalParamarinesMedicalTechnician
+  name: Medical Technician's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorParaMedicalTechnician
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalParamarinesPilot
+  name: Pilot's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorParaPilot
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalParamarinesTeamLeader
+  name: Team Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorParaTeamLeader
+
+- type: entity
+  parent: RMCIDRoyalMarines
+  id: RMCIDRoyalParamarinesSupportSynthetic
+  name: Support Synthetic's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorParaSupportSynthetic
+
+- type: entity
+  parent: RMCIDCardGoldRoyalMarines
+  id: RMCIDRoyalParamarinesCommander
+  name: Commander ID Card
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorParaCommander

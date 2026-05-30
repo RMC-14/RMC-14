@@ -16,6 +16,10 @@
         type: SupplyDropComputerBui
   - type: SupplyDropComputer
     squad: SquadEcho
+    cooldown: 300
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessRequisitions" ] ]
   - type: ActivatableUIBlacklist
     blacklist:
       components:

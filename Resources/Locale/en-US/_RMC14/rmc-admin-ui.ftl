@@ -9,7 +9,7 @@ rmc-ui-weapons-specialist-skills = Weapons Specialist Skills
 rmc-ui-create-squad = Create Squad
 rmc-ui-members = Members: {$members} alive
 rmc-ui-add-to-squad = Add to Squad
-rmc-ui-xeno-tab = Xeno
+rmc-ui-xeno-tab = Xenonid
 rmc-ui-xeno-hive = Hive:
 rmc-ui-create-new-hive = Create new hive
 rmc-ui-create-hive-title = New hive name
@@ -18,3 +18,5 @@ rmc-ui-tier = Tier {$tier}
 
 rmc-ui-admin = RMC Admin UI
 rmc-ui-rejuvenate-nearby-marines = Rejuvenate all nearby marines
+rmc-ui-chat-bans = Chat Bans
+rmc-ui-delay-round-end = Delay round end

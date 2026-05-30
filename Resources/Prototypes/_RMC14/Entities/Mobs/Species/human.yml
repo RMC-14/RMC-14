@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobHuman
   name: Urist C.M. McHands
   suffix: RMC14

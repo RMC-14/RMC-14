@@ -5,7 +5,7 @@
   stackEntity: CMSheetMetal
   name: materials-metal
   icon: { sprite: _RMC14/Objects/Materials/Sheets/metal.rsi, state: metal }
-  price: 0.05
+  price: 0.00133
 
 - type: stack
   id: CMSteel
@@ -26,6 +26,11 @@
     - type: Item
       size: Normal
       sprite: _RMC14/Objects/Materials/Sheets/metal.rsi
+      inhandVisuals:
+        left:
+        - state: inhand-left
+        right:
+        - state: inhand-right
     - type: Appearance
 
 - type: entity
@@ -52,11 +57,11 @@
       # Airlock assembly
       # large airlock assembly
       - RMCDividerConstruction
-      # Bed
-      # Chair
+      - RMCBedBuild
+      - RMCChairBuild
       - RMCComfyChairList
-      # squad chairs
-      # office chairs
+      - RMCSquadChairList
+      - RMCOfficeChairList
       # stool
       - RMCDividerConstruction
       # computer frame
@@ -72,7 +77,7 @@
     - type: Material
     - type: PhysicalComposition
       materialComposition:
-        CMSteel: 100
+        CMSteel: 3750
     - type: Stack
       count: 50
       stackType: CMSteel
@@ -90,6 +95,11 @@
       interfaces:
         enum.RMCConstructionUiKey.Key:
           type: RMCConstructionBui
+    - type: Tag
+      tags:
+      - RMCSheetMetal
+      - Sheet
+      - Metal
 
 - type: entity
   parent: CMSheetMetal
@@ -176,7 +186,7 @@
   name: materials-plasteel
   icon: { sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
   color: "#696969"
-  price: 0.28
+  price: 0.00746
 
 - type: stack
   id: CMPlasteel
@@ -189,7 +199,7 @@
   parent: CMSheetMetalBase
   id: CMSheetPlasteel
   name: plasteel sheet
-  description: Plasteel is an expensive, durable material made from combining platinum, steel, and advanced polymers to create a metal that is corrosion-resistant, highly durable, and lightweight. The only reason this isn't used more often is because of how damn costly it is."
+  description: Plasteel is an expensive, durable material made from combining platinum, steel, and advanced polymers to create a metal that is corrosion-resistant, highly durable, and lightweight. The only reason this isn't used more often is because of how damn costly it is.
   suffix: Filled
   components:
     - type: RMCConstructionItem
@@ -204,7 +214,7 @@
     - type: Material
     - type: PhysicalComposition
       materialComposition:
-        CMPlasteel: 100
+        CMPlasteel: 3750
     - type: Stack
       count: 40
       stackType: CMPlasteel
@@ -221,6 +231,11 @@
           map: ["base"]
     - type: Item
       sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi
+      inhandVisuals:
+        left:
+        - state: inhand-left
+        right:
+        - state: inhand-right
       heldPrefix: plasteel
     - type: UserInterface
       interfaces:

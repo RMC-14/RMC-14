@@ -56,11 +56,13 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
         locked: true
@@ -77,6 +79,29 @@
     tags:
     - Sidearm
     - RMCMK80
+
+- type: entity
+  parent: RMCMK80
+  id: RMCMK80RCM
+  name: L189 offensive handgun
+  suffix: PVE, Filled, Royal # RMC14 TODO: remove PVE suffix when added for RCM ERT
+  description: "A large-frame, semi-automatic 9mm offensive handgun in limited use by members of the TSE's military. Although commercially produced by We-Ya and sold as the MK80, this handgun has been produced under contract specifically for the TSE's military and designated the L189 offensive handgun. The slide is engraved with the Three Suns flag, location of manufacture, and serial number."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l189.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l189.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolMK80
+        startingItem: CMMagazinePistolMK80
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -102,6 +127,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMMagazinePistolMK80
+  id: RMCMagazinePistolMK80Empty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
 
 - type: entity
   id: RMCCartridgePistol9mmSquashHead

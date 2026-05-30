@@ -33,6 +33,10 @@ marking-FelinidEarsWide = Wide Ears
 marking-FelinidEarsWide-wide_outer = Outer ear
 marking-FelinidEarsWide-wide_inner = Inner ear
 
+marking-FelinidEarsFlat = Flat Ears
+marking-FelinidEarsFlat-wide_outer = Outer ear
+marking-FelinidEarsFlat-wide_inner = Inner ear
+
 marking-FelinidTailBasic = Basic Tail
 marking-FelinidTailBasic-basic_tail_tip = Tail tip
 marking-FelinidTailBasic-basic_tail_stripes_even = Tail stripes, even
@@ -77,3 +81,11 @@ marking-FelinidLeopard-m_tail_leopard_tertiary = Spots
 
 marking-FelinidCatBig = Big Cat tail
 marking-FelinidCatBig-m_tail_catbig_primary = Primary
+
+marking-FelinidTigerDouble = Double Tiger Tail
+marking-FelinidTigerDouble-m_tail_tiger2_ = Primary
+marking-FelinidTigerDouble-m_tail_tiger2_secondary = Tip
+marking-FelinidTigerDouble-m_tail_tiger2_tertiary = Stripes
+
+marking-FelinidDouble = Double Cat Tail
+marking-FelinidDouble-m_tail_twocat = Primary

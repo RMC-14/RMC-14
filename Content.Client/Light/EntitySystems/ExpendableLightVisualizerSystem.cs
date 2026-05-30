@@ -25,8 +25,6 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
 
     protected override void OnAppearanceChange(EntityUid uid, ExpendableLightComponent comp, ref AppearanceChangeEvent args)
     {
-        if (args.Sprite == null)
-            return;
 
         if (AppearanceSystem.TryGetData<string>(uid, ExpendableLightVisuals.Behavior, out var lightBehaviourID, args.Component)
             && TryComp<LightBehaviourComponent>(uid, out var lightBehaviour))
@@ -42,6 +40,10 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
                 _pointLightSystem.SetEnabled(uid, false, light);
             }
         }
+
+		// RMC14
+        if (args.Sprite == null || !SpriteSystem.LayerExists((uid, args.Sprite), ExpendableLightVisualLayers.Overlay))
+            return;
 
         if (!AppearanceSystem.TryGetData<ExpendableLightState>(uid, ExpendableLightVisuals.State, out var state, args.Component))
             return;
@@ -73,7 +75,14 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
                 break;
             case ExpendableLightState.Dead:
                 comp.PlayingStream = _audioSystem.Stop(comp.PlayingStream);
-                if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), ExpendableLightVisualLayers.Overlay, out layerIdx, true))
+
+                //RMC14
+                var spentLayer = ExpendableLightVisualLayers.Base;
+                if (comp.UsesOverlay)
+                    spentLayer = ExpendableLightVisualLayers.Overlay;
+                //RMC14
+
+                if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), spentLayer, out layerIdx, true))
                 {
                     if (!string.IsNullOrWhiteSpace(comp.IconStateSpent))
                         SpriteSystem.LayerSetRsiState((uid, args.Sprite), layerIdx, comp.IconStateSpent);

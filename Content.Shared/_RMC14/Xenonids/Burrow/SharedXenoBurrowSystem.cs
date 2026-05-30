@@ -51,7 +51,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
@@ -137,6 +137,8 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         if (args.burrowed)
         {
             _transform.AnchorEntity(burrower);
+            if (_net.IsServer)
+                _audio.PlayPvs(burrower.Comp.BurrowDownSound, burrower);
         }
         else
         {
@@ -225,10 +227,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
                 burrower.Comp.Tunneling = true;
                 Dirty(burrower);
             }
-
             Dirty(burrower);
-            if (_net.IsServer)
-                _audio.PlayPvs(burrower.Comp.BurrowDownSound, burrower);
         }
         else
         {

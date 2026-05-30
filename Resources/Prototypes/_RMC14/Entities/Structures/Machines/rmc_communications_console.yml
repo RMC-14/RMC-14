@@ -75,6 +75,8 @@
     interfaces:
       enum.MarineControlComputerUi.Key:
         type: MarineControlComputerBui
+      enum.MarineControlComputerUi.MedalsPanel:
+        type: MedalsPanelBui
       enum.DialogUiKey.Key:
         type: DialogBui
   - type: MarineControlComputer
@@ -130,6 +132,15 @@
   - type: Sprite
     overrideDir: South
     enableOverrideDir: false
+
+- type: entity
+  parent: RMCOverwatchConsoleRotating
+  id: RMCOverwatchConsoleRotatingPowered
+  suffix: Rotating, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -236,6 +247,27 @@
         - LowImpassable
 
 - type: entity
+  parent: RMCTacticalMapTableLarge
+  id: RMCTacticalMapTableLargeSquare
+  suffix: 2x2
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/2x2_map_table.rsi
+    offset: 0.5, 0.5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,1.4,1.4"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+
+- type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCEscapePodController
   name: escape pod controller
@@ -264,6 +296,9 @@
   components:
   - type: EvacuationComputer
     earlyCrashChance: 0
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -282,6 +317,7 @@
       enum.LifeboatComputerUi.Key:
         type: LifeboatComputerBui
   - type: LifeboatComputer
+  - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "CMAccessDropship" ], [ "RMCAccessSeniorCommand" ] ]
   - type: ActivatableUIBlacklist

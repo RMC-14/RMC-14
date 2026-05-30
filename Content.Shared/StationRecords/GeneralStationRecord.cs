@@ -1,3 +1,4 @@
+using Color = Robust.Shared.Maths.Color;
 using Robust.Shared.Enums;
 using Robust.Shared.Serialization;
 
@@ -35,6 +36,18 @@ public sealed record GeneralStationRecord
 
     [DataField]
     public string JobPrototype = string.Empty;
+
+    /// <summary>
+    ///     RMC - Squad of the marine that this station record represents, if applicable.
+    /// </summary>
+    [DataField]
+    public string? Squad;
+
+    /// <summary>
+    ///     RMC - Squad color of the marine, if applicable.
+    /// </summary>
+    [DataField]
+    public Color? SquadColor;
 
     /// <summary>
     ///     Species tied to this station record.

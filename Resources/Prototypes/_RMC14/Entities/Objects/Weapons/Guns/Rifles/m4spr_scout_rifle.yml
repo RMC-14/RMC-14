@@ -273,11 +273,14 @@
   - type: CMArmorPiercing
     amount: 50
   - type: RMCStunOnHit
-    maxRange: 32
-    losesEffectWithRange: true
-    stunTime: 1
-    superSlowTime: 4
-    slowTime: 10
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 32
+      losesEffectWithRange: true
+      stunTime: 1
+      superSlowTime: 4
+      slowTime: 10
   - type: RMCProjectileAccuracy
     accuracy: 75
     thresholds:

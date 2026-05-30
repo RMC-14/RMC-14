@@ -9,13 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
-        RMCSkillFireman: 1
-        RMCSkillEngineer: 2
-        RMCSkillConstruction: 2
-        RMCSkillVehicles: 3
+      preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -39,7 +33,7 @@
   name: hybrisa vehicle operator colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomStartingGear:
       shoes:
       - RMCShoesJackboots
@@ -54,7 +48,7 @@
     - [ RMCJumpsuitLiaisonGreenWorkwear, RMCHandsVeteranInsulated, RMCVestBrown, RMCHeadCapTruckerRed ]
     - [ RMCJumpsuitCivilian, RMCCoatBomberGrey, RMCHeadCapTruckerBlue, RMCGlassesAviatorsSilver ]
     - [ RMCJumpsuitCivilianFrontier, RMCHandsVeteranInsulated, RMCCoatBomberKhaki, RMCSunglassesBig, RMCCassettePlayer ]
-    - [ RMCJumpsuitNormCivilianBlackWebbing, RMCGlassesAviators, RMCCoatBomberGrey, RMCHeadCapFerret, RMCHandsCombat ]
+    - [ RMCJumpsuitNormCivilianBlackWebbing, RMCGlassesAviators, RMCCoatBomberGrey, RMCHeadCapTruckerRed, RMCHandsCombat ]
     randomGearOther:
     -
       - [ CMSheetMetal20, CMBeltUtilityFilled ]

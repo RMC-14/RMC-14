@@ -14,3 +14,154 @@
     back:
     - RMCSquadArmband
 
+- type: loadout
+  id: WatchCheapRMC
+  storage:
+    back:
+    - RMCWatchCheap
+
+- type: loadout
+  id: WatchBasicRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobRifleman
+        time: 90000 # 25 hrs
+  storage:
+    back:
+    - RMCWatchCaseBasic
+
+- type: loadout
+  id: WatchSurvRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobSurvivor
+        time: 36000 # 10 hrs
+  storage:
+    back:
+    - RMCWatchCaseSurv
+
+- type: loadout
+  id: WatchPilotRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobPilotDropship
+        time: 43200 # 12 hrs
+  storage:
+    back:
+    - RMCWatchCasePilot
+
+- type: loadout
+  id: WatchLiaisonRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobLiaison
+        time: 126000 # 35 hrs
+  storage:
+    back:
+    - RMCWatchCaseLiaison
+
+- type: loadout
+  id: WatchSynthRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: RMCJobSynthetic
+        time: 126000 # 35 hrs
+  storage:
+    back:
+    - RMCWatchCaseSynth
+
+- type: loadout
+  id: PatchPeaceRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPatchPeace
+
+# Paint (FOR PVE)
+
+- type: loadout
+  id: PaintSkullRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintSkull
+
+- type: loadout
+  id: PaintHeartRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintHeart
+
+- type: loadout
+  id: PaintMedicRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintMedic
+
+- type: loadout
+  id: PaintUNRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintUN
+
+- type: loadout
+  id: PaintTSERMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintTSE
+
+- type: loadout
+  id: PaintTargetRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintTarget
+
+- type: loadout
+  id: PaintSmileyFaceRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintSmileyFace
+
+- type: loadout
+  id: PaintNeutralFaceRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintNeutralFace
+
+- type: loadout
+  id: PaintCrossRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintCross
+
+- type: loadout
+  id: PaintInscriptionRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintInscription
+
+- type: loadout
+  id: PaintMixtapeRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintMixtape

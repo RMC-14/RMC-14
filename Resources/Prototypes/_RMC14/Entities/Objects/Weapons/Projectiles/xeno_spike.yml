@@ -1,0 +1,32 @@
+- type: entity
+  id: XenoSpikeProjectile
+  name: spike shard
+  description: A sharp spike shard.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Materials/shards.rsi
+    layers:
+    - state: bonechips
+      shader: unshaded
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0
+    angularDamping: 0
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 1
+        mask:
+        - Impassable
+        - BulletImpassable
+        layer:
+        - Opaque
+  - type: Projectile
+    damage:
+      types:
+        Brute: 5
+  - type: TimedDespawn
+    lifetime: 10

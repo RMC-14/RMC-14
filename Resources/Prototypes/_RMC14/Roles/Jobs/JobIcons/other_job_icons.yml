@@ -4,6 +4,13 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_liaison
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCorrespondent
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_correspondent
 
 - type: jobIcon
   parent: CMJobIconBase
@@ -11,6 +18,48 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_syn
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconGenericColonist
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: generic_colonist
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconGenericColonistCO
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: generic_colonist_co
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconGenericColonistDoctor
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: generic_colonist_doctor
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconGenericColonistEngi
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: generic_colonist_engi
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconGenericColonistMP
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: generic_colonist_mp  
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconGenericColonistResearcher
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: generic_colonist_researcher
 
 - type: jobIcon
   parent: CMJobIconBase
@@ -25,3 +74,67 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hc_exec
+
+# WEYA Job Icons
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconExecSpec
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_execspec
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconExecSuper
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_execsuper
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconExecAssMan
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_assman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconExecDivMan
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_divman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconExecChief
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_chiefman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconDepDirector
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_depdirector
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconDirector
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_director
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCSynthetic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_syn
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSynth
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_synth

@@ -63,6 +63,12 @@
   description: Some empty sandbags, best to fill them up if you want to use them.
   components:
   - type: Item
+    sprite: _RMC14/Objects/Misc/sandbags.rsi
+    inhandVisuals:
+      left:
+      - state: stack-inhand-left
+      right:
+      - state: stack-inhand-right
     size: Small
   - type: Sprite
     sprite: _RMC14/Objects/Misc/sandbags.rsi
@@ -93,12 +99,27 @@
     count: 25
 
 - type: entity
+  parent: CMSandbagEmpty
+  id: CMSandbagEmpty10
+  suffix: "10"
+  components:
+  - type: Stack
+    stackType: CMSandbagEmpty
+    count: 10
+
+- type: entity
   parent: BaseItem
   id: CMSandbagFull
   name: sandbags
   description: Some bags filled with sand. For now, just cumbersome, but soon to be used for fortifications.
   components:
   - type: Item
+    sprite: _RMC14/Objects/Misc/sandbags.rsi
+    inhandVisuals:
+      left:
+      - state: pile-inhand-left
+      right:
+      - state: pile-inhand-right
     size: Large
   - type: Sprite
     sprite: _RMC14/Objects/Misc/sandbags.rsi
@@ -131,6 +152,15 @@
   - type: Stack
     stackType: CMSandbagFull
     count: 25
+
+- type: entity
+  parent: CMSandbagFull
+  id: CMSandbagFull5
+  suffix: "5"
+  components:
+  - type: Stack
+    stackType: CMSandbagFull
+    count: 5
 
 - type: stack
   id: CMSandbagEmpty

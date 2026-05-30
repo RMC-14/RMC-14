@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Bubberstation at https://github.com/Bubberstation/Bubberstation/blob/ae8d35f963c8526ed52612f95a9f18c3f361aae8/modular_skyrat/master_files/icons/mob/sprite_accessory/snouts.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m_snout_fscanid_FRONT_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_snout_fscanid_FRONT_secondary",
+      "directions": 4
+    },
+    {
+      "name": "m_snout_fscanid_FRONT_tertiary",
+      "directions": 4
+    },
+    {
+      "name": "m_snout_fscanidalt_FRONT_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_snout_fscanidalt_FRONT_secondary",
+      "directions": 4
+    },
+    {
+      "name": "m_snout_fscanidalt_FRONT_tertiary",
+      "directions": 4
+    },
+    {
+      "name": "m_snout_fscanidalt2_FRONT_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_snout_fscanidalt2_FRONT_secondary",
+      "directions": 4
+    },
+    {
+      "name": "m_snout_fscanidalt3_FRONT_primary",
+      "directions": 4
+    },
+    {
+      "name": "m_snout_fscanidalt3_FRONT_secondary",
+      "directions": 4
+    },
+    {
+      "name": "m_snout_fscanidalt3_FRONT_tertiary",
+      "directions": 4
+    }
+  ]
+}

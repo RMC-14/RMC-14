@@ -10,3 +10,243 @@
       amount: 1
   products:
     RMCCherryJelly: 2
+
+- type: reaction
+  id: RMCBatter
+  reactants:
+    Flour:
+      amount: 5
+    OilOlive:
+      amount: 5
+    Egg:
+      amount: 6
+    Milk:
+      amount: 5
+  products:
+    RMCBatter: 20
+
+- type: reaction
+  id: CookingMayoOliveOil
+  reactants:
+    Vinegar:
+      amount: 5
+    OilOlive:
+      amount: 5
+    Egg:
+      amount: 6
+  products:
+    Mayo: 15
+
+- type: reaction
+  id: Grenadine
+  reactants:
+    Enzyme:
+      amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
+    JuiceBerry:
+      amount: 1
+  products:
+    Grenadine: 2
+
+- type: reaction
+  id: BlueCuracao
+  reactants:
+    Enzyme:
+      amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
+    JuiceOrange:
+      amount: 1
+  products:
+    BlueCuracao: 2
+
+- type: reaction
+  id: RMCVodka
+  reactants:
+    Enzyme:
+      amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
+    JuicePotato:
+      amount: 1
+  products:
+    Vodka: 2
+
+- type: reaction
+  id: Sake
+  reactants:
+    Enzyme:
+      amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
+    Rice:
+      amount: 1
+  products:
+    Sake: 2
+
+- type: reaction
+  id: CoffeeLiqueur
+  reactants:
+    Enzyme:
+      amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
+    Coffee:
+      amount: 1
+    Sugar:
+      amount: 1
+  products:
+    CoffeeLiqueur: 2
+
+- type: reaction
+  id: MelonLiquor
+  reactants:
+    Enzyme:
+      amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
+    JuiceWatermelon:
+      amount: 1
+  products:
+    MelonLiquor: 2
+
+- type: reaction
+  id: Wine
+  reactants:
+    Enzyme:
+      amount: 1
+    RMCBlackGoo: # TODO RMC14 remove this later
+      amount: 0.5
+    JuiceGrape:
+      amount: 1
+  products:
+    Wine: 2
+
+- type: reaction
+  id: RMCMilkshake
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    Milk:
+      amount: 1
+    IceCream:
+      amount: 1
+  products:
+    RMCMilkshake: 2
+
+- type: reaction
+  id: MangoAguaFresca
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    Water:
+      amount: 2
+    Sugar:
+      amount: 1
+    RMCJuiceMango:
+      amount: 2
+  products:
+    MangoAguaFresca: 5
+
+- type: reaction
+  id: MangoCooler
+  reactants:
+    Vodka:
+      amount: 1
+    LemonLime:
+      amount: 1
+    RMCJuiceMango:
+      amount: 1
+  products:
+    MangoCooler: 3
+
+- type: reaction
+  id: Sidecar
+  reactants:
+    Cognac:
+      amount: 2
+    JuiceOrange:
+      amount: 1
+    JuiceLemon:
+      amount: 1
+  products:
+    Sidecar: 4
+
+- type: reaction
+  id: Gunfire
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    Tea:
+      amount: 4
+    Rum:
+      amount: 1
+  products:
+    Gunfire: 5
+
+- type: reaction
+  id: RMCGrapeSoda
+  reactants:
+    JuiceGrape:
+      amount: 2
+    Cola:
+      amount: 1
+  products:
+    RMCGrapeSoda: 3
+
+- type: reaction
+  id: IceCafe
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    IcedCoffee:
+      amount: 3
+    Milk:
+      amount: 2
+  products:
+    IceCafe: 5
+
+- type: reaction
+  id: SwissLemonade
+  requiredMixerCategories:
+  - Shake
+  reactants:
+    JuiceLime:
+      amount: 1
+    Cream:
+      amount: 2
+    Water:
+      amount: 2
+  products:
+    SwissLemonade: 5
+
+- type: reaction
+  id: CreateMeat
+  impact: Low
+  quantized: true
+  conserveEnergy: false
+  reactants:
+    CMClonexadone:
+      amount: 1
+    Blood:
+      amount: 5
+  effects:
+  - !type:CreateEntityReactionEffect
+    entity: FoodMeat
+
+- type: reaction
+  id: CreateFriedEgg
+  impact: Low
+  quantized: true
+  conserveEnergy: false
+  reactants:
+    TableSalt:
+      amount: 1
+    Blackpepper:
+      amount: 1
+    EggCooked:
+      amount: 5
+  effects:
+  - !type:CreateEntityReactionEffect
+    entity: FoodMealFriedegg

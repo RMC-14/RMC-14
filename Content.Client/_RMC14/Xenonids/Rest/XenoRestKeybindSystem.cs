@@ -13,7 +13,7 @@ public sealed class XenoRestKeybindSystem : EntitySystem
 {
     [Dependency] private readonly ActionsSystem _actionsSystem = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()

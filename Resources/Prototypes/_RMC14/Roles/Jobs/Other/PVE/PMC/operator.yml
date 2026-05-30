@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCOperatorPVE
   name: rmc-job-name-pmc-standard
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-standard
   playTimeTracker: CMJobPMCOperativePVE
   ranks:
     RMCRankWeYaOperator: []
@@ -20,25 +20,23 @@
       factions:
       - WeYa
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillSmartGun: 1
-    - type: SquadArmorWearer
+      preset: RMCSkillPresetPVERifleman
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-standard
+    - type: AssignSquad
+      squad: SquadPMC
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_gun
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity

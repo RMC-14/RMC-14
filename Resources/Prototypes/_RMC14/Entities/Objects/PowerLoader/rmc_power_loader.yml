@@ -1,15 +1,17 @@
-﻿- type: entity
+﻿# Base
+- type: entity
   abstract: true
   id: RMCMechBase
   components:
   - type: Corrodible
-    isCorrodible: false
+    isCorrodible: true
   - type: Sprite
     drawdepth: Mobs
     noRot: true
     sprite: _RMC14/Objects/power_loader.rsi
     layers:
-    - state: powerloader
+    - state: powerloader_open
+      map: [ "buckledLayer" ]
   - type: MobMover
   - type: DoAfter
   - type: MeleeWeapon
@@ -54,10 +56,28 @@
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: RMCAllowStrapMovement
   - type: Strap
+    buckleSound:
+      path: /Audio/_RMC14/Mecha/powerloader_buckle.ogg
+      params:
+        variation: 0.1
+    unbuckleSound:
+      path: /Audio/_RMC14/Mecha/powerloader_unbuckle.ogg
+      params:
+        variation: 0.1
     blacklist:
       components:
       - Xeno
+  - type: RMCStrapDrawDepth
+    unstrappedDepth: Mobs
+    strappedDepth: OverMobs
+  - type: GenericVisualizer
+    visuals:
+      enum.StrapVisuals.State:
+        buckledLayer:
+          True: { state: powerloader_overlay }
+          False: { state: powerloader_open }
   - type: Destructible
     thresholds:
     - trigger:
@@ -67,16 +87,85 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:DoActsBehavior # TODO RMC14 spawn wreckage
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCPowerCellAPC:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+# Wreckages
+- type: entity
+  id: RMCMechPowerLoaderWreckage
+  name: LU-50 Power Loader wreckage
+  description: The wreckage of a LU-50 Power Loader.
+  components:
+  - type: Corrodible
+    isCorrodible: true
+  - type: Sprite
+    drawdepth: BelowMobs
+    noRot: true
+    sprite: _RMC14/Objects/power_loader.rsi
+    layers:
+    - state: wreck
+  - type: Clickable
+  - type: InputMover
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: Strap
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
         acts: ["Destruction"]
 
 - type: entity
+  parent: RMCMechPowerLoaderWreckage
+  id: RMCMechPowerLoaderWreckageGreen
+  name: LU-43 Power loader wreckage
+  description: The wreckage of a LU-43 Power loader.
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    noRot: true
+    sprite: _RMC14/Objects/power_loader.rsi
+    layers:
+    - state: wreck_jd
+
+- type: entity
+  parent: RMCMechPowerLoaderWreckage
+  id: RMCMechPowerLoaderWreckageBlue
+  name: LU-52 Power loader wreckage
+  description: The wreckage of a LU-52 Power loader.
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    noRot: true
+    sprite: _RMC14/Objects/power_loader.rsi
+    layers:
+    - state: wreck_ft
+
+# Powerloaders
+- type: entity
   parent: RMCMechBase
   id: RMCMechPowerLoader
-  name: power loader # TODO RMC14 name
-  description: An old but trusted design used in warehouses, constructions and military ships everywhere. # TODO RMC14 description
+  name: LU-50 Power loader
+  description: An old design refurbished by Weston-Yamada used in warehouses, constructions and military ships everywhere. # TODO RMC14 BETTER DESCRIPTION
   components:
-  - type: RMCAllowStrapMovement
   - type: PowerLoader
     skills:
       all:
@@ -93,3 +182,43 @@
       tags:
       - RMCDropshipEnginePoint
     range: 2
+  - type: SpawnOnTerminate
+    spawn: RMCMechPowerLoaderWreckage
+
+- type: entity
+  parent: RMCMechPowerLoader
+  id: RMCMechPowerLoaderGreen
+  name: LU-43 Power loader
+  description: A really old but trusted design used in warehouses, constructions and military ships everywhere.
+  components:
+  - type: Sprite
+    layers:
+    - state: powerloader_open_jd
+      map: [ "buckledLayer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StrapVisuals.State:
+        buckledLayer:
+          True: { state: powerloader_overlay_jd }
+          False: { state: powerloader_open_jd }
+  - type: SpawnOnTerminate
+    spawn: RMCMechPowerLoaderWreckageGreen
+
+- type: entity
+  parent: RMCMechPowerLoader
+  id: RMCMechPowerLoaderBlue
+  name: LU-52 Power loader
+  description: A modernized design made to outdo the older models, once used in fancy ports and facilities.
+  components:
+  - type: Sprite
+    layers:
+    - state: powerloader_open_ft
+      map: [ "buckledLayer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StrapVisuals.State:
+        buckledLayer:
+          True: { state: powerloader_overlay_ft }
+          False: { state: powerloader_open_ft }
+  - type: SpawnOnTerminate
+    spawn: RMCMechPowerLoaderWreckageBlue

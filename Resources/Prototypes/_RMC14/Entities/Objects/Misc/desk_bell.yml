@@ -1,9 +1,12 @@
 ﻿- type: entity
   parent: DeskBell
-  id: RMCDeskBell # TODO RMC14
+  id: RMCDeskBell
   name: desk bell
   description: The cornerstone of any customer service job. You feel an unending urge to ring it.
   components:
+  - type: Sprite
+    sprite: _RMC14/Structures/objects.rsi
+    state: desk_bell
   - type: Transform
     anchored: false
   - type: Physics

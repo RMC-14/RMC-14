@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Client._RMC14.Movement;
+using Content.Client._RMC14.Weapons.Melee;
 using Content.Client.Gameplay;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Tackle;
@@ -37,6 +39,10 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     private EntityQuery<TransformComponent> _xformQuery;
 
     private const string MeleeLungeKey = "melee-lunge";
+
+    // RMC14
+    [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private readonly RMCMeleeWeaponSystem _rmcMeleeWeapon = default!;
 
     public override void Initialize()
     {
@@ -198,6 +204,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         // This should really be improved. GetEntitiesInArc uses pos instead of bounding boxes.
         // Server will validate it with InRangeUnobstructed.
         var entities = GetNetEntityList(ArcRayCast(userPos, direction.ToWorldAngle(), component.Angle, distance, userXform.MapID, user).ToList());
+        _rmcLagCompensation.SendLastRealTick(); // RMC14
         RaisePredictiveEvent(new HeavyAttackEvent(GetNetEntity(meleeUid), entities.GetRange(0, Math.Min(MaxTargets, entities.Count)), GetNetCoordinates(coordinates)));
     }
 
@@ -212,6 +219,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > meleeComponent.Range)
             return;
 
+        _rmcLagCompensation.SendLastRealTick(); // RMC14
         RaisePredictiveEvent(new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(coordinates)));
     }
 
@@ -219,7 +227,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     {
         var attackerPos = TransformSystem.GetMapCoordinates(attacker);
 
-        if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > meleeComponent.Range)
+        if (mousePos.MapId != attackerPos.MapId) // RMC14
             return;
 
         EntityUid? target = null;
@@ -227,10 +235,16 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         if (_stateManager.CurrentState is GameplayStateBase screen)
             target = screen.GetClickedEntity(mousePos);
 
+        // RMC14
+        if ((attackerPos.Position - mousePos.Position).Length() > _rmcMeleeWeapon.GetUserLightAttackRange(attacker, target, meleeComponent))
+            return;
+        // RMC14
+
         // Don't light-attack if interaction will be handling this instead
         if (Interaction.CombatModeCanHandInteract(attacker, target))
             return;
 
+        _rmcLagCompensation.SendLastRealTick(); // RMC14
         RaisePredictiveEvent(new LightAttackEvent(GetNetEntity(target), GetNetEntity(weaponUid), GetNetCoordinates(coordinates)));
     }
 

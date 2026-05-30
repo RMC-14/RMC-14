@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Fireman;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
@@ -53,6 +54,9 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
+
+    // RMC14
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
     {
@@ -140,6 +144,13 @@ public sealed class PullingSystem : EntitySystem
 
     private void OnGotBuckled(Entity<PullableComponent> ent, ref BuckledEvent args)
     {
+        if (ent.Comp.Puller is { } puller &&
+            _rmcPulling.TryRetargetPull(puller, ent) is { } retarget)
+        {
+            TryStartPull(puller, retarget);
+            return;
+        }
+
         StopPulling(ent, ent);
     }
 
@@ -484,6 +495,15 @@ public sealed class PullingSystem : EntitySystem
     public bool TryStartPull(EntityUid pullerUid, EntityUid pullableUid,
         PullerComponent? pullerComp = null, PullableComponent? pullableComp = null)
     {
+        var ev = new RMCGetPullTargetEvent(pullerUid, pullableUid);
+        RaiseLocalEvent(pullableUid, ref ev);
+
+        if (pullableUid != ev.Target)
+        {
+            pullableUid = ev.Target;
+            pullableComp = CompOrNull<PullableComponent>(pullableUid);
+        }
+
         if (!Resolve(pullerUid, ref pullerComp, false) ||
             !Resolve(pullableUid, ref pullableComp, false))
         {

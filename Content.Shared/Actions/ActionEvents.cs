@@ -4,6 +4,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Actions;
 
@@ -85,29 +86,34 @@ public sealed class RequestPerformActionEvent : EntityEventArgs
     public readonly NetEntity Action;
     public readonly NetEntity? EntityTarget;
     public readonly NetCoordinates? EntityCoordinatesTarget;
+    public readonly GameTick LastRealTick;
 
-    public RequestPerformActionEvent(NetEntity action)
+    public RequestPerformActionEvent(NetEntity action, GameTick lastRealTick)
     {
         Action = action;
+        LastRealTick = lastRealTick;
     }
 
-    public RequestPerformActionEvent(NetEntity action, NetEntity entityTarget)
+    public RequestPerformActionEvent(NetEntity action, NetEntity entityTarget, GameTick lastRealTick)
     {
         Action = action;
         EntityTarget = entityTarget;
+        LastRealTick = lastRealTick;
     }
 
-    public RequestPerformActionEvent(NetEntity action, NetCoordinates entityCoordinatesTarget)
+    public RequestPerformActionEvent(NetEntity action, NetCoordinates entityCoordinatesTarget, GameTick lastRealTick)
     {
         Action = action;
         EntityCoordinatesTarget = entityCoordinatesTarget;
+        LastRealTick = lastRealTick;
     }
 
-    public RequestPerformActionEvent(NetEntity action, NetEntity? entityTarget, NetCoordinates entityCoordinatesTarget)
+    public RequestPerformActionEvent(NetEntity action, NetEntity? entityTarget, NetCoordinates entityCoordinatesTarget, GameTick lastRealTick)
     {
         Action = action;
         EntityTarget = entityTarget;
         EntityCoordinatesTarget = entityCoordinatesTarget;
+        LastRealTick = lastRealTick;
     }
 }
 

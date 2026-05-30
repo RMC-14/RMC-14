@@ -519,7 +519,7 @@
   components:
   - type: Sprite
     state: away3
-    
+
 - type: entity
   parent: RMCAreaLv624GroundCaves
   id: RMCAreaLv624GroundCavesNorthCentralCavesLakeHouseTower
@@ -570,6 +570,8 @@
   components:
   - type: Sprite
     state: green
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv624
@@ -898,6 +900,8 @@
   components:
   - type: Sprite
     state: tcomsatcham
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv624Landing
@@ -906,6 +910,8 @@
   components:
   - type: Sprite
     state: tcomsatcham
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv624Lazarus

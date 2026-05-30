@@ -28,6 +28,10 @@
       0: Alive
       500: Critical
       600: Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoSentinel
     actionIds:
@@ -98,3 +102,5 @@
     item: RMCOrganXenoHeartT1
   - type: VentCrawler
     ventCrawlIcon: sentinel
+  - type: RMCActionOrder
+    id: CMXenoSentinel

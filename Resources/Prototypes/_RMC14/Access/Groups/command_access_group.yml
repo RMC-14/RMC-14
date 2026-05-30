@@ -25,11 +25,12 @@
   - CMAccessMaint # maints
   - CMAccessMarinePrep # access to the basic areas of marine prep, where marines exit cryo and get food.
   - CMAccessMedical # the medical department locked doors, like surgery rooms and the supply closet
+  - RMCAccessMorgue # morgue access
   - CMAccessMedPrep # hospital corpsman
   - CMAccessOT # ordnance tech
   - CMAccessPilot # dropship pilot door access
   - CMAccessPress # correspondent access
-  - CMAccessQM # quartermaster
+  - CMAccessQM # Logistics Officer
   - CMAccessRequisitions # (cargo)
   - CMAccessResearch # research access
   - CMAccessSEA # senior enlisted
@@ -41,6 +42,7 @@
   - RMCAccessTSEPABrig # tsepa brig / senior constables
   - RMCAccessTSEPA # tsepa
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
 
 - type: accessGroup
@@ -70,11 +72,12 @@
   - CMAccessMaint # maints
   - CMAccessMarinePrep # access to the basic areas of marine prep, where marines exit cryo and get food.
   - CMAccessMedical # the medical department locked doors, like surgery rooms and the supply closet
+  - RMCAccessMorgue # morgue access
   - CMAccessMedPrep # hospital corpsman
   - CMAccessOT # ordnance tech
   - CMAccessPilot # dropship pilot door access
   - CMAccessPress # correspondent access
-  - CMAccessQM # quartermaster
+  - CMAccessQM # Logistics Officer
   - CMAccessRequisitions # (cargo)
   - CMAccessResearch # research access
   - CMAccessSEA # senior enlisted
@@ -86,6 +89,7 @@
   - RMCAccessTSEPABrig # tsepa brig / senior constables
   - RMCAccessTSEPA # tsepa
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
 
 # all ship-side access that is not CO
@@ -117,6 +121,7 @@
   - CMAccessMaint
   - CMAccessMarinePrep
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessMedPrep
   - CMAccessOT
   - CMAccessPilot
@@ -130,6 +135,7 @@
   - CMAccessSquadLeaderPrep
   - CMAccessMarineRifleman
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
 
 - type: accessGroup
@@ -158,6 +164,7 @@
   - CMAccessMaint
   - CMAccessMarinePrep
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessMedPrep
   - CMAccessOT
   - CMAccessPilot
@@ -171,6 +178,7 @@
   - CMAccessSquadLeaderPrep
   - CMAccessMarineRifleman
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
 
 - type: accessGroup
@@ -189,7 +197,7 @@
   tags:
   - CMAccessCorp
 
-# Synth access
+# UNMC Synth access
 - type: accessGroup
   id: Synth
   parent: RMCBaseMiscellaneousJob

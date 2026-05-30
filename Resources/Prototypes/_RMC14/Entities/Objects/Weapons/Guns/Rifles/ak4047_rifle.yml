@@ -61,6 +61,7 @@
           tags:
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
@@ -171,6 +172,14 @@
   - type: Appearance
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: RMCMagazineRifleAK4047
+  id: RMCMagazineRifleAK4047Empty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
 
 - type: entity
   parent: RMCMagazineRifleAK4047

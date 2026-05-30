@@ -1,0 +1,47 @@
+﻿- type: job
+  parent: CMSurvivorEngineer
+  id: CMSurvivorSolarisEngineer
+  name: rmc-job-name-survivor-solaris-engineer
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorSolarisEngineer
+  spawnMenuRoleName: Solaris Engineer (Solaris Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetEngineer
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorEngineer
+  id: RMCGearSurvivorSolarisEngineer
+  equipment:
+    jumpsuit: RMCJumpsuitLiaisonPinkWorkwear
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisEngineer
+  name: survivor solaris engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorSolarisEngineer
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

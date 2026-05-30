@@ -20,19 +20,7 @@
       factions:
       - CLF
     - type: Skills
-      skills:
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
-        RMCSkillEndurance: 1
-        RMCSkillCqc: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillSmartGun: 1
+      preset: RMCSkillPresetPVECLFDoctor
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-pve-doctor

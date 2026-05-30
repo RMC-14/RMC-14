@@ -27,6 +27,7 @@
         - MachineMask
         layer:
         - MachineLayer
+        - BulletImpassable #TODO Remove this after vendor tipping is added
         density: 200
   - type: Repairable
     doAfterDelay: 8
@@ -86,6 +87,9 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
   - type: ActivatableUIBlacklist
     blacklist:
       components:
@@ -94,14 +98,14 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: ["Breakage"]
       - !type:EjectVendorItems
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 100
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -131,6 +135,19 @@
   - type: VendingMachine
     pack: CMVendorCoffee
     ejectState: eject-unshaded
+
+- type: entity
+  parent: CMVendorCoffee
+  id: CMVendorCoffeeLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
 
 - type: vendingMachineInventory
   id: CMVendorCoffee
@@ -285,6 +302,43 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/spp_cola.rsi
 
+- type: entity
+  parent: RMCVendorColaSPP
+  id: RMCVendorNutriCoDrinkSPP
+  name: drink dispenser
+  suffix: SPP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/drink.rsi
+    offset: 0, 0.5
+
+- type: entity
+  parent: CMVendor
+  id: RMCVendorSoda
+  name: Cold Drinks machine
+  description: A vending machine that contains cold drinks. This one appears to be produced by Tsumetai-Umi, a subsidairy of Neterai Foods International, which itself is subsidiary of Weston-Yamada.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/sodavend.rsi
+  - type: VendingMachine
+    pack: RMCVendorSoda
+
+- type: vendingMachineInventory
+  id: RMCVendorSoda
+  startingInventory: # TODO RMC14
+    CMDrinkCanCola: 10
+    CMDrinkCanMountainWind: 10
+    CMDrinkCanThirteenLoko: 10
+    CMDrinkCanDrGibb: 10
+    CMDrinkCanStarkist: 10
+    CMDrinkCanSpaceUp: 10
+    CMDrinkCanLemonLime: 10
+    CMDrinkCanIcedTea: 10
+    CMDrinkCanGrape: 10
+    CMDrinkCanTonic: 10
+    CMDrinkCanSoda: 10
+    CMDrinkCanFruitBeer: 10
+
 # Cigarettes
 - type: entity
   parent: CMVendor
@@ -388,6 +442,7 @@
     RMCCigarettePackArcturianAce: 10
     #BalajiImperialCigPack: 10
     RMCCigarettePackExecutiveSelect: 0 #Random between 0-2
+    RMCShioRoyalsTube: 10
     RMCMatchboxFull: 5
     CMExecutiveSelectMatchbook: 10
     #BalajiImperialMatchbook: 10
@@ -478,6 +533,7 @@
     RMCMagazinePistolM1984Rubber: 40
     RMCMagazinePistolM77Rubber: 40
     RMCMagazineRifleM54CRubber: 40
+    RMCMagazineRifleM54CMK1Rubber: 10
     RMCMagazineRifleM4SPRRubber: 40
     CMArmorHelmetM10MP: 8
     RMCExplosiveBreachingChargeRubber: 6
@@ -513,6 +569,7 @@
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2
     RMCRadiationAidKitFilled: 1
+    RMCCPRDummy: 5
     # Crew Monitor
 
 
@@ -538,7 +595,7 @@
     ChemistryBottleRobustHarvest: 15
     PestSpray: 20
     Syringe: 5
-    PlantBag: 5
+    RMCStoragePlantBag: 5
     RMCToolSpade: 3
     RMCToolHatchet: 3
     # AmmoniaBottle: 10 #Premium
@@ -571,6 +628,7 @@
     ChanterelleSeeds: 2
     ChiliSeeds: 3
     CornSeeds: 3
+    CottonSeeds: 3
     EggplantSeeds: 3
     PotatoSeeds: 3
     SoybeanSeeds: 3
@@ -598,7 +656,7 @@
     RiceSeeds: 3
     # LibertyMycelium: 1 #Contraband
     # MessaTearSeeds: 1 #Contraband
-    AmbrosiaVulgarisSeeds: 1 #Contraband
+    # AmbrosiaVulgarisSeeds: 1 #Contraband
     NettleSeeds: 1 #Contraband
     LingzhiSeeds: 1 #ReishiMycelium #Contraband
     # WaterFlower: 1 #Premium
@@ -636,6 +694,9 @@
     layoutId: Vending
   - type: WiresPanel
   - type: WiresVisuals
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     scaling: false
     sections:
@@ -708,6 +769,20 @@
       - id: DrinkMugRed
         amount: 2
 
+- type: entity
+  parent: CMVendorDinnerware
+  id: CMVendorDinnerwareLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+
+
 # BODA
 - type: entity
   parent: CMVendor
@@ -746,11 +821,15 @@
       - id: FoodMeatChicken
         amount: 24
       - id: FoodMeatFish
+        amount: 18
+      - id: RMCFoodMeatFish
         amount: 12
       - id: FoodMeat
         amount: 24
       - id: FoodMeatBacon
         amount: 24
+      - id: FoodMeatSausage
+        amount: 18
       - id: DrinkMilkCarton
         amount: 24
       - id: DrinkSoyMilkCarton
@@ -814,6 +893,20 @@
         amount: 12
       - id: ReagentContainerMayo
         amount: 12
+
+- type: entity
+  parent: CMVendorIngredients
+  id: CMVendorIngredientsLockedPowered
+  suffix: Locked, Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+
 
 # PVE
 

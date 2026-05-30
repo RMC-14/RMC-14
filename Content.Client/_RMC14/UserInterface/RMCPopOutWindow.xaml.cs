@@ -24,12 +24,11 @@ public partial class RMCPopOutWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
         OnClose += FinalClose;
+        AddButton();
     }
 
-    public void SetBui(BoundUserInterface bui)
+    private void AddButton()
     {
-        OnFinalClose += bui.Close;
-
         var button = new Button { Text = "Pop Out", StyleClasses = { "OpenBoth" }};
         button.Margin = new Thickness(5, 0);
         if (!WindowHeader.Children.OfType<BoxContainer>().TryFirstOrDefault(out var header))

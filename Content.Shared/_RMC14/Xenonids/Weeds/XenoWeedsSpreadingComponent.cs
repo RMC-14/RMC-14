@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Xenonids.Weeds;
 public sealed partial class XenoWeedsSpreadingComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan SpreadDelay = TimeSpan.FromSeconds(3.33f);
+    public TimeSpan SpreadDelay = TimeSpan.FromSeconds(3.33);
 
     [DataField, AutoNetworkedField]
     public TimeSpan RepairedSpreadDelay = TimeSpan.FromSeconds(15);

@@ -1,0 +1,17 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Sprites by github noctyrnal",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "maptable"
+    },
+    {
+      "name": "maptable-on"
+    }
+  ]
+}

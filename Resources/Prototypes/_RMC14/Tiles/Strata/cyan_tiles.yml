@@ -3,6 +3,7 @@
   parent: CMTileBase
   id: CMFloorStrataCyanBase
   name: tiles-cm-default-cyan
+  suffix: Sorokyne
 
 - type: tile
   parent: CMFloorStrataCyanBase

@@ -3,6 +3,7 @@
   id: CMLiaison
   name: cm-job-name-liaison
   description: cm-job-description-liaison
+  newToJobInfo: rmc-new-to-job-cl
   requirements:
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
@@ -54,6 +55,9 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cl
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
     - type: RMCTrackable
 
 - type: startingGear

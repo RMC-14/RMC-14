@@ -1,7 +1,7 @@
 ﻿- type: entity
-  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  name: M54C/2 assault rifle MK2
+  parent: RMCWeaponRifleM54C
   id: RMCWeaponRifleM54C2
+  name: M54C/2 assault rifle MK2
   description: A modified version M54C assault rifle MK2, re-engineered for better weight, handling and accuracy. Fires precise two-round bursts. Given only to elite units.
   components:
   - type: Sprite
@@ -56,8 +56,72 @@
           - CMMagazineRifleM54CAP
           - CMMagazineRifleM54CExt
           - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
   - type: GunDamageModifier
     multiplier: 1.25
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54C2StockCollapsible
+        whitelist:
+          tags:
+          - RMCAttachmentM54C2StockCollapsible
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM54C2
+
+- type: entity
+  parent: RMCWeaponRifleM54C2
+  id: RMCWeaponRifleM54C2Whiteout
+  suffix: Whiteout
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleM54CHEAP
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -97,17 +161,6 @@
           - RMCAttachmentVerticalGrip
           - RMCAttachmentExtinguisher
           - RMCAttachmentFlamer
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-barrel: 0.8425, 0.001
-      rmc-aslot-rail: 0.1, 0.16
-      rmc-aslot-stock: -0.78, 0.0325
-      rmc-aslot-underbarrel: 0.349, -0.375
-  - type: ItemCamouflage
-    camouflageVariations: {}
-  - type: Tag
-    tags:
-    - RMCWeaponRifleM54C2
 
 - type: Tag
   id: RMCWeaponRifleM54C2

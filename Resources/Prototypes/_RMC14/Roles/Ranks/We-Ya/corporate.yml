@@ -69,11 +69,13 @@
   id: RMCRankWeYaLegalSpecialist
   name: Legal Specialist
   prefix: Legal Spc.
+  paygrade: WYC5
 
 - type: rank
   id: RMCRankWeYaLegalSupervisor
   name: Legal Supervisor
   prefix: Legal Spvsr.
+  paygrade: WYC6
 
 # Pilots
 - type: rank
@@ -81,3 +83,23 @@
   name: Captain
   prefix: Capt
   paygrade: WYPO2
+
+# Synthetics
+# A/N: probably not particularly useful, but I want some variety 
+- type: rank
+  id: RMCRankWeYaUtilitySynth # Simple labor synths (drivers, cargo haulers, repairmen)
+  name: Utility Synthetic
+  prefix: U. Syn.
+  paygrade: WYS1
+  
+- type: rank
+  id: RMCRankWeYaAssistantSynth # Secretaries, data entry, analysis, PR, etc.
+  name: Assistant Synthetic
+  prefix: Assis. Syn.
+  paygrade: WYS2
+  
+- type: rank
+  id: RMCRankWeYaAdministrativeSynth # Project managers, directors, overseers (with organic oversight obv)
+  name: Administrative Synthetic
+  prefix: Adm. Syn.
+  paygrade: WYS3

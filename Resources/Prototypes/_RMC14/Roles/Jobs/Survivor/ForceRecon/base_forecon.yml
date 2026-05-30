@@ -1,11 +1,11 @@
 - type: job
-  parent: CMSurvivor
+  parent: RMCSurvivorMilitary
   id: RMCSurvivorForeconBase
   name: rmc-job-name-forecon
   description: rmc-job-description-forecon
   ranks:
     RMCRankSergeant: []
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - ColonistEngi
   joinNotifyCrew: false
@@ -14,12 +14,6 @@
   greeting: rmc-job-greeting-forecon
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: FORECON Survivor (Base)
-  useLoadoutOfJob: CMSurvivor
-  medals:
-    Bronze: RMCMedalBronzeService
-    Silver: RMCMedalSilverService
-    Gold: RMCMedalGoldService
-    Platinum: RMCMedalPlatinumService
   hidden: true
 
 - type: startingGear
@@ -33,18 +27,14 @@
     ears: RMCHeadsetForecon
     pocket1: RMCPouchFirstAidInjectors
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
-
-- type: playTimeTracker
-  id: RMCJobSurvivorMilitary
-  name: rmc-playtime-tracker-job-name-survivor-military
-  isHumanoid: true
+    suitstorage: RMCFlashlight
 
 - type: entity
   id: RMCSurvivorPresetForeconNoPrimary
   name: forecon no primary survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
@@ -57,11 +47,12 @@
     # todo walkman and casette
     # todo deck of cards
     randomWeapon:
-    - [ RMCM1984BeltFilled ]
-    - [ RMCM1984BeltFilled ]
-    - [ RMCM1984BeltFilled ]
+    - [ RMCM1911BeltFilledForecon ]
+    - [ RMCM1911BeltFilledForecon ]
+    - [ RMCM1911BeltFilledForecon ]
     - [ RMCHolsterSMGPouchFilledExtended ]
     - [ RMCMotionDetector ]
+    tryEquipRandomWeapon: true
 
 - type: entity
   parent: RMCSurvivorPresetForeconNoPrimary
@@ -69,7 +60,7 @@
   name: forecon survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
     primaryWeaponChance: 1
@@ -80,6 +71,6 @@
   name: forecon survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomWeapon:
     - []

@@ -68,8 +68,6 @@ public sealed class FigurineSystem : EntitySystem
             return;
 
         var figurine = Spawn(figurineId, MapCoordinates.Nullspace);
-        if (_hands.TryPickupAnyHand(ev.Mob, figurine, false))
-            return;
 
         var backs = _inventory.GetSlotEnumerator(ev.Mob, SlotFlags.BACK);
         while (backs.MoveNext(out var slot))
@@ -80,6 +78,9 @@ public sealed class FigurineSystem : EntitySystem
             if (_storage.Insert(slot.ContainedEntity.Value, figurine, out _, storageComp: storage))
                 return;
         }
+
+        if (_hands.TryPickupAnyHand(ev.Mob, figurine, false))
+            return;
     }
 
     private void ReloadAllFigurines()

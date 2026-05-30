@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHandsBase
+  parent: [ClothingHandsBase, RMCBaseUniformAccessoryItemGloves]
   id: CMHandsBlackMarine # TODO RMC14 armor
   name: marine combat gloves
   description: "Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'."
@@ -43,7 +43,7 @@
   parent: CMHandsBlackMarine
   id: RMCHandsDeluxeMarine
   name: deluxe combat gloves
-  description: Combat gloves finished in an almost golden-looking fabric. Insulated, fasionable, and capable of protecting the soft hands it's likely wrapped around.
+  description: Combat gloves finished in an almost golden-looking fabric. Insulated, fashionable, and capable of protecting the soft hands it's likely wrapped around.
   components:
   - type: Insulated
   - type: Sprite

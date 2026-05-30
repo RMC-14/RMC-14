@@ -6,6 +6,7 @@ using Content.Server.Radio.Components;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
@@ -115,8 +116,17 @@ public sealed class RadioSystem : EntitySystem
             }
             else
             {
+                if (TryComp(messageSource, out FireteamMemberComponent? fireteamMember) && fireteamMember.Fireteam >= 0)
+                {
+                    prefixText += $" FT{fireteamMember.Fireteam + 1}" + (TryComp(messageSource, out FireteamLeaderComponent? fireteamLeader) ? " TL" : "");
+                }
                 name = $"({prefixText}) {name}";
             }
+        }
+        else if (TryComp(messageSource, out RMCRadioPrefixComponent? radioPrefix))
+        {
+            var prefixText = Loc.GetString(radioPrefix.Prefix);
+            name = $"{prefixText} {name}";
         }
 
         SpeechVerbPrototype speech;
@@ -135,6 +145,10 @@ public sealed class RadioSystem : EntitySystem
             TryComp<RMCHeadsetComponent>(wearingHeadset.Headset, out var headsetComp))
         {
             radioFontSize += headsetComp.RadioTextIncrease ?? 0;
+        }
+        else if (TryComp<RMCInnateRadioTextIncreaseComponent>(messageSource, out var innateRadioIncrease))
+        {
+            radioFontSize += innateRadioIncrease.RadioTextIncrease;
         }
 
         var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",

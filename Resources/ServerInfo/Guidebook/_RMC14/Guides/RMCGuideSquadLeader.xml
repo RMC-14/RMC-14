@@ -1,0 +1,140 @@
+<Document>
+  # Squad leading 101
+  [italic]Guide written by UnicornOnLSD on GitHub [/italic]
+
+  <Box>
+    [italic]"Alright, alpha, we’re pushing nort- wait, where is everyone? Is my squad only made of 5 people? Did they all get kidnapped? Where did everything go wrong?"[/italic]
+  </Box>
+
+  You might have found yourself in that scenario, wanting to be a charismatic leader and either ending up as one of the first squad casualties or just as lost as every other member of your squad.
+
+  This guide is here to teach YOU how to become the squad leader you've always dreamt to be.
+
+  ## Gear and Features
+
+  As a squad leader, you have access to a lot of limited, better gear and skills for free, contrary to the humble rifleman. Some of note are:
+
+  - A free B12 armor. Upmost robustness.
+  <GuideEntityEmbed Entity="CMArmorB12"/>
+  - Cheap access to an RTO pack, grab it.
+  <GuideEntityEmbed Entity="RMCBackpackRTO"/>
+  - Cheap access to a whistle, grab it.
+  <GuideEntityEmbed Entity="RMCWhistle"/>
+  - A 25P cost pair of NVG optics, with a battery of 10 minutes. Rechargeable at any powered recharger, once screwed out of the helmet
+  <GuideEntityEmbed Entity="RMCVisorNightVision"/>
+  - A Medical skill of 1, letting you use auto-injectors instantly.
+  - Large pouches for days.
+
+  Along with that, you have the most basic leading skill of one. Which is granted to whoever is assigned as the aSL. These grant minor buffs on use:
+
+  - [bold]Issue order - Move[/bold]: grants a small movement speed bonus
+
+  - [bold]Issue order - Hold[/bold]: grants a small damage resistance bonus
+
+  - [bold]Issue order - Focus[/bold]: grants a small accuracy bonus
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookActionMove"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionHold"/>
+	<GuideEntityEmbed Entity="RMCGuidebookActionFocus"/>
+  </Box>
+
+  # How to lead
+
+  Right, all is well, we are geared, what about the actual job, what do we do?
+
+  You're leading a squad of 20 crayon eating maggots that will do their best to ignore you. And thus, the crucial part of being a squad leader is to be heard. Once people listen to you and your orders, everything should go well, normally.
+
+  Good thing is, because you're a leader, you talk BIG. and when I mean BIG. I MEAN IT. You can speak in [bold]ALL CAPS WITH !![/bold] to have better visibility when talking, along with having innately larger text when speaking.
+
+  ## How to be heard
+  Then, how do we take advantage of our GRAVE voice? Here's how:
+
+  - Use LOCAL chat. It ensures people see orders easily.
+  - Give SHORT orders, ones that can be [bold]read in a pinch[/bold] and understand, such as the holy SL trinity: "[bold]HOLD[/bold]","[bold]BACK[/bold]" and "[bold]PUSH[/bold]"
+  - Use your whistle as an [bold]audio cue for people to LISTEN[/bold]
+  - Repeat the order if needed. Better twice than never.
+
+
+  Now you know how to make the goons hear what you want. But how do you make them [bold]truly LISTEN[/bold] ?
+
+  ## Charisma and You
+  You know what to say, but that's not all. You need to gather an invisible resource called "squad cohesion". Imagine it as a permanently depleting morale bar that you want as HIGH as possible at ALL times.
+
+  To keep it up you'll can:
+
+  - Talk with your squaddies, don't leave them hanging, ever.
+  - Hype them up pre-drop. A hyped squad is a deadly squad. [bold]A squad brief is perfect for that. Do it before brief, in dropship, or on ground, -but then keep it short.[/bold]
+  - Compliment your squaddies, if they know they're doing a good job, they'll keep doing it.
+  - Have regulars stick to you, that will come with time by sticking to a squad. The more with you, the more will stay, through sheep mentality.
+
+  Alright, that's cool and all but how to be the bold charismatic guy? Don't worry, I also got you:
+
+  - Stay in character, stick to a personality (as one should). Be that one cold spec ops dude, or a caring father to his unsuspecting, crayon eating children. You get the idea.
+  - Skill brings trust. If you show marines you are good at your job, be it getting kills, communicating well or doing good rotations, people will naturally follow you.
+
+  ## God's finger (Point spamming)
+
+  <Box>
+    [italic]"I POINT, you KILL, BREACH and MOVE. CLEAR CHARLIE?!"[/italic]
+  </Box>
+
+
+  If you never noticed, most "leadership" roles have a special pointing arrow. By base, it's green. As a Squad Leader, yours will be BIG and of the color of your squad.
+
+  Why is this important, you may ask?
+
+  Because this is the biggest tool to make people do what you want, go where you want to go. The tech humbly called "Point spam".
+
+  It consists of getting people's attention, then just pointing where you want to: go, shoot, or destroy. It works all the time, is very visual (WAY better than trying to get people to listen).
+
+  You see resin? Point at it and go CHOP IT!
+
+  You want your squad to go there? Point the path nonstop to them.
+
+  You see big evil bad you want to push? Charge and point, or charge and shoot.
+
+  # Strategy planning
+  This part will cover the more "strategic" part of playing squad leader. Whilst than the previously given basics, it is the key to ensuring you're doing your part to turn that crashing operation into a GLORIOUS MARINE MAJOR, OORAH!
+
+  ## Orders and you
+
+  A single squad going AWOL and pushing a spot away from others without being ordered to can and has on many occasions ruined operations.
+
+  As a squad leader you are one of the five major pillars that may shift game's outcome in the marine's favor. The four others are composed of the other SLs AND the [bold]commander[/bold].
+  Said [bold]commander[/bold] will give your squad orders that are made for the operation's sake. No matter your rank, you SHOULD follow it. Unless it is unlawful, such as a suicide charge, if so per Marine Law you may refuse the unlawful order by stating why.
+
+  ## Comms - communication? The talk.
+  Just as it is important you talk to your squad, it is important you talk to the eyes in the squad, the CIC. They have the big picture (most of the time), and if they know what you're doing, they will (hopefully) adjust things to ensure that you can kill those dirty bugs, together. Together? As in every marine. Because you're not alone. There are three other squads with three others leaders (not as good as you, because you've read this and they haven't, obviously.) but still.
+
+  Use a phonepack if comms are down, else give regular status reports in the command channel or in your squad channel. Hell, Queen's dead thanks to your men?
+
+  ":v Charlie got the queen kill. Pushing further."
+
+  Along with this, as the squad leader, you're generally expected to know better how to call Orbital Bombardments. You spawn with a laser designator which when switched mode, can turn into rangefinder mode. Use it where you want the entire area to be flattened and share the coordinates.
+
+  [bold]BE VERY CAUTIOUS WHEN ADJUSTING COORDINATES YOURSELF. [/bold]
+
+  ## Pushing? Backing? What, how and why.
+
+  Those dirty 'nids are smart, but you're smarter. You want to know when it's the right time to go in and fuck shit up. Obviously you have your squad orders given by the CIC. Execute them at priority, but make sure it doesn't wipe your squad.
+
+  Using your MOVE order is most appropriate when having to do direct maneuvers.
+
+  Ultimately, the placement of your squad depends on you. The gut feeling of knowing where to do, when to and not to push will come with time. But a few things can help:
+
+  - Using your binoculars when rotating to know where the enemy is and isn't
+  - Using your NVGs at appropriate timings (so you don't run into darkness where john lurker is waiting)
+  - Listening to comms, focus on important messages within the lines of "OH GOD QUEEN ON DELTA PLEASE [insert your squad here] GO SAVE THEM EAST"
+  - MAP KNOWLEDGE. Know the place, don't be lost, use tacmap.
+
+  # Conclusion
+  Squad leader is both the heart, brain and voice of the squad, along with one of the most game decisive role. It's up to you to be the ruthless operation finisher through your tactics and formations. Do not forget to communicate, keep your squad together and adjust to threats best you can to keep your lovely gunners in one piece.
+
+  Truth is, anyone can lead. But this role is for those who want to shine brighter at it.
+
+  And always remember.
+
+  [bold]You're here to lead your marines to victory, or peril together. Be humble and always seek to improve.[/bold]
+
+</Document>

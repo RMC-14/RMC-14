@@ -1,0 +1,33 @@
+﻿<controls:RMCAdminChatBanWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Admin.ChatBans"
+    Title="{Loc rmc-chat-bans-add-title}"
+    MinSize="550 300">
+    <BoxContainer Orientation="Vertical" SeparationOverride="5">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc rmc-chat-bans-player}" MinWidth="90" />
+            <LineEdit Name="PlayerEdit" Access="Public" MinWidth="250" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc rmc-chat-bans-type}" MinWidth="90" />
+            <CheckButton Name="DeadButton" Access="Public" Text="{Loc rmc-chat-bans-dead}"
+                         StyleClasses="OpenBoth" ToggleMode="True" />
+            <CheckButton Name="LoocButton" Access="Public" Text="{Loc rmc-chat-bans-looc}"
+                         StyleClasses="OpenBoth" ToggleMode="True" />
+            <CheckButton Name="OocButton" Access="Public" Text="{Loc rmc-chat-bans-ooc}"
+                         StyleClasses="OpenBoth" ToggleMode="True" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc rmc-chat-bans-duration}" MinWidth="90" />
+            <LineEdit Name="TimeEdit" Access="Public" MinWidth="75" />
+            <OptionButton Name="TimeOption" StyleClasses="OpenBoth" />
+            <Control MinWidth="10" />
+            <Label Name="ExpiresLabel" Access="Public" />
+        </BoxContainer>
+        <Label Text="{Loc rmc-chat-bans-reason}" />
+        <TextEdit Name="ReasonEdit" Access="Public" VerticalExpand="True" />
+        <RichTextLabel Name="ErrorLabel" Access="Public" />
+        <Button Name="SubmitButton" Access="Public" Text="{Loc rmc-chat-bans-submit}"
+                StyleClasses="OpenBoth" />
+    </BoxContainer>
+</controls:RMCAdminChatBanWindow>

@@ -1,4 +1,5 @@
 using Content.Shared.Chat;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 
@@ -19,4 +20,10 @@ public sealed partial class EncryptionKeyComponent : Component
     /// </summary>
     [DataField("defaultChannel", customTypeSerializer: typeof(PrototypeIdSerializer<RadioChannelPrototype>))]
     public string? DefaultChannel;
+
+    /// <summary>
+    ///     A list of radio channels that are ReadOnly, you must still include the channel in the channels list.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<RadioChannelPrototype>> ReadOnlyChannels = new();
 }

@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
@@ -22,6 +23,7 @@ public sealed class SkillPamphletSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<SkillPamphletComponent, UseInHandEvent>(OnUse);
+        SubscribeLocalEvent<SkillPamphletComponent, ExaminedEvent>(OnExamined);
 
         SubscribeLocalEvent<UsedSkillPamphletComponent, GetMarineIconEvent>(OnGetMarineIcon, after: [typeof(SharedMarineSystem), typeof(SquadSystem)]);
         SubscribeLocalEvent<UsedSkillPamphletComponent, GetMarineSquadNameEvent>(OnGetSquadTitle, after: [typeof(SquadSystem)]);
@@ -96,23 +98,37 @@ public sealed class SkillPamphletSystem : EntitySystem
             ent.Comp.GaveSkill = true;
         }
 
-        if (ent.Comp.GaveSkill)
+        if (ent.Comp.GaveSkill || ent.Comp.BypassSkill)
         {
             _popup.PopupClient(Loc.GetString("rmc-pamphlets-reading"), args.User, args.User);
 
             var usedSkillComp = EnsureComp<UsedSkillPamphletComponent>(args.User);
-            usedSkillComp.Icon = ent.Comp.GiveIcon;
-            usedSkillComp.JobTitle = ent.Comp.GiveJobTitle;
+            if (ent.Comp.GiveIcon != null)
+                usedSkillComp.Icon = ent.Comp.GiveIcon;
+            if (ent.Comp.GiveJobTitle != null)
+                usedSkillComp.JobTitle = ent.Comp.GiveJobTitle;
             if (!ent.Comp.BypassLimit)
                 usedSkillComp.Used = true;
 
             Dirty(args.User, usedSkillComp);
 
             var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(args.User);
-            mapBlip.Icon = ent.Comp.GiveMapBlip;
+            if (ent.Comp.GiveMapBlip != null)
+                mapBlip.Icon = ent.Comp.GiveMapBlip;
             Dirty(args.User, mapBlip);
 
             _squads.UpdateSquadTitle(args.User);
+
+            if (ent.Comp.GivePrefix != null)
+            {
+                var jobPrefix = EnsureComp<JobPrefixComponent>(args.User);
+                if (ent.Comp.IsAppendPrefix)
+                    jobPrefix.AdditionalPrefix = ent.Comp.GivePrefix.Value;
+                else
+                    jobPrefix.Prefix = ent.Comp.GivePrefix.Value;
+
+                Dirty(args.User, jobPrefix);
+            }
 
             if (!_net.IsClient)
                 QueueDel(ent);
@@ -120,18 +136,15 @@ public sealed class SkillPamphletSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.GivePrefix != null)
-        {
-            var jobPrefix = EnsureComp<JobPrefixComponent>(args.User);
-            if (ent.Comp.IsAppendPrefix)
-                jobPrefix.AdditionalPrefix = ent.Comp.GivePrefix.Value;
-            else
-                jobPrefix.Prefix = ent.Comp.GivePrefix.Value;
-
-            Dirty(args.User, jobPrefix);
-        }
-
         _popup.PopupClient(Loc.GetString("rmc-pamphlets-already-know"), ent, args.User);
+    }
+
+    private void OnExamined(Entity<SkillPamphletComponent> ent, ref ExaminedEvent args)
+    {
+        if (ent.Comp.BypassLimit)
+            return;
+
+        args.PushMarkup(Loc.GetString("rmc-pamphlets-changes-job"), 1);
     }
 
     private void OnGetMarineIcon(Entity<UsedSkillPamphletComponent> ent, ref GetMarineIconEvent args)

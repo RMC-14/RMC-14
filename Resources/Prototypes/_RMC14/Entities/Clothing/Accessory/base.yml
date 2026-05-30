@@ -20,6 +20,7 @@
     - Patch
     - Medal
     - Armband
+    - PridePin
     - Rank
     - Decor
     - Poncho
@@ -37,11 +38,28 @@
     - Patch
     - Medal
     - Armband
+    - PridePin
     - Rank
     - Decor
     - Poncho
     - Mask
     - Utility
+
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessoryItemBase
+  id: RMCBaseUniformAccessoryItemArmorPVE
+  components:
+  - type: UniformAccessoryHolder
+    allowedCategories:
+    - Medal
+    - Pads
+    - Bracers
+    - NeckGuard
+    - GroinPlate
+    - ShinGuard
+    - KneeGuard
+    - Paint
 
 - type: entity
   abstract: true

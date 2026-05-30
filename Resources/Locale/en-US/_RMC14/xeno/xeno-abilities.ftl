@@ -14,8 +14,12 @@ rmc-xeno-not-enough-fury = We're not angry enough for this!
 rmc-xeno-fury-increase-user = We are overcome with rage!
 
 # Acid reserves
-rmc-xeno-not-enough-acid = Your don't have enough acid built up!
-rmc-xeno-acid-increase-user = You feel your acid reserves increase!
+rmc-xeno-not-enough-acid = We don't have enough acid built up!
+rmc-xeno-acid-increase-user = We feel your acid reserves increase!
+
+# Shards
+rmc-xeno-not-enough-shards = We don't have enough shards!
+rmc-xeno-shards-increase-user = We grow more shards!
 
 # Construction
 cm-xeno-choose-resin-structure = Choose Resin Structure
@@ -40,7 +44,7 @@ cm-xeno-evolution-ready = Our carapace crackles and our tendons strengthen. We a
 cm-xeno-evolution-failed-already-have = There already is a living {$prototype}!
 cm-xeno-evolution-failed-hive-shaken = The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.
 cm-xeno-evolution-failed-cannot-support = The Hive cannot support this caste yet!
-cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more aliens to be born or someone to die.
+cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more sisters to be born or someone to die.
 rmc-xeno-evolution-devolve-title = De-Evolve To
 rmc-xeno-evolution-devolve = You devolve to {$xeno}!
 rmc-xeno-evolution-cant-evolve-damaged = We must be at full health to evolve.
@@ -73,8 +77,17 @@ rmc-xeno-weeds-blocked = We can't do that here.
 
 # Corrosive acid
 cm-xeno-acid-not-corrodible = We cannot dissolve {THE($target)}!
-cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it!
+cm-xeno-acid-already-corroding = {CAPITALIZE(THE($target))} already has corrosive acid on it!
 rmc-xeno-acid-structure-unmeltable = We can only melt barricades and items!
+rmc-xeno-acid-too-weak = {CAPITALIZE(THE($target))} is too tough to be melted by our weak acid.
+rmc-acid-pickup-blocked = {CAPITALIZE(THE($target))} is covered in corrosive acid!
+rmc-acid-hole-already-weakened = It's already been weakened.
+rmc-acid-hole-only-small-xenos = Only small xenos can fit through this hole.
+rmc-acid-hole-too-large = We are too large to squeeze through this hole.
+rmc-acid-hole-wrong-side = We need to approach the hole from the entrance side!
+rmc-acid-hole-no-exit = There's no space to crawl through there.
+rmc-acid-hole-blocked = Something is blocking the other side.
+rmc-acid-hole-repair-blocked = The wall is breached and must be patched first.
 
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
@@ -379,7 +392,25 @@ rmc-xeno-fling-too-big = {CAPITALIZE(THE($target))} is too big for us to fling!
 
 # Gut
 rmc-gut-start-self = We plunge our claws into the body of this unfortunate host, starting to tear them in half!
-rmc-gut-start-others = {$user} plunges their claws into the body of {$target}, starting to tear them in half!
+rmc-gut-start-xenos = {$user} plunges their claws into the body of this unfortunate host, starting to tear them in half!
+rmc-gut-start-marines = The Queen plunges their claws into the body of {$target}, starting to tear them in half!
 
 rmc-gut-finish-self = We tear this pathetic host in half!!
-rmc-gut-finish-others = {$user} tears {$target} in half!!
+rmc-gut-finish-xenos = {$user} tears the pathetic host in half!!
+rmc-gut-finish-marines = The Queen tears {$target} in half!!
+
+# Shed Spikes
+rmc-shed-spikes = We have shed our shards and cannot gain any more for 30 seconds!
+rmc-shed-spikes-back = We can gain shards again!
+
+# Spike Shield
+rmc-spike-shield-self = We ruffle our bone-shard quills, forming a defensive shell!
+rmc-spike-shield-others = {$user} ruffles its bone-shard quills, forming a defensive shell!
+rmc-spike-shield-hit = {$user} sprays bone quills everywhere!
+
+# Doomed
+rmc-doomed-fail = It's not working...
+
+# Destroy
+rmc-destroy-cant-reach = We don't have a clear path to that location!
+rmc-destroy-cant-area = We can't leap to that area!

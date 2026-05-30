@@ -1,7 +1,12 @@
-﻿using Content.Shared.Mobs;
+using System.Linq;
+using System.Numerics;
+using Content.Shared.Climbing.Events;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
-using Robust.Shared.Network;
+using Content.Shared.Physics;
+using Content.Shared.Popups;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 
@@ -11,7 +16,12 @@ public sealed class RMCMovementSystem : EntitySystem
 {
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    private const CollisionGroup ClimbCheckGroup = CollisionGroup.Impassable | CollisionGroup.HighImpassable |
+                                              CollisionGroup.MidImpassable | CollisionGroup.LowImpassable;
 
     public override void Initialize()
     {
@@ -63,5 +73,44 @@ public sealed class RMCMovementSystem : EntitySystem
                 _fixture.DestroyFixture(ent, ent.Comp.FixtureId);
                 break;
         }
+    }
+
+    public bool CanClimbOver(EntityUid? user, EntityUid movingEntity, EntityUid target, bool includeTarget = true, bool popup = true)
+    {
+        if (user is null)
+        {
+            user = movingEntity;
+        }
+
+        var userPosition = _transform.GetMoverCoordinates(user.Value).Position;
+        var targetPosition = _transform.GetMoverCoordinates(target).Position;
+        var direction = targetPosition - userPosition;
+
+        if (direction == Vector2.Zero)
+            return true;
+
+        var ray = new CollisionRay(userPosition, direction.Normalized(), (int)ClimbCheckGroup);
+        var intersect = _physics.IntersectRayWithPredicate(Transform(user.Value).MapID, ray, direction.Length(), e => !Transform(e).Anchored);
+        var results = intersect.Select(r => r.HitEntity).ToHashSet();
+
+        if (!includeTarget)
+            results.Remove(target);
+
+        foreach (var entity in results)
+        {
+            var ev = new AttemptClimbEvent(user.Value, movingEntity, entity);
+            RaiseLocalEvent(entity, ref ev);
+            if (!ev.Cancelled)
+            {
+                continue;
+            }
+
+            if (popup && !ev.PopupHandled)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-climb-prevented-by-obstacles"), user, PopupType.MediumCaution);
+            }
+            return false;
+        }
+        return true;
     }
 }

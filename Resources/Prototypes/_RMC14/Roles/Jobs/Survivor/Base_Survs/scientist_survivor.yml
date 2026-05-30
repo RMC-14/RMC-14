@@ -7,8 +7,10 @@
   ranks:
     RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorScientist
+  icon: "RMCJobIconGenericColonistResearcher"
   accessGroups:
   - ColonistMedical
+  basePlaytimeTracker: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -65,14 +67,14 @@
   name: scientist colonist preset # TODO RMC14 random research notes and vial
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGearOther:
     -
       - [ RMCMotionDetector ]
       - [ RMCGrenadeCustomMetalFoam ]
       - [ RMCGrenadeCustomWeedkiller ]
       - [ RMCThermalTarpV2Folded ]
-     
+
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidSurvivorScientist

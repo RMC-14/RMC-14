@@ -2,8 +2,12 @@
   parent: CMJobBase
   id: RMCSPPCorpsmanPVE
   name: rmc-job-name-spp-corpsman
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-corpsman-pve
   playTimeTracker: RMCJobSPPCorpsmanPVE
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
   ranks:
     RMCRankSPPMladshiySerzhant: []
   startingGear: RMCJobSPPCorpsmanPVEGear
@@ -19,22 +23,17 @@
       factions:
       - SPP
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
-        RMCSkillEndurance: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillSmartGun: 1
+      preset: RMCSkillPresetPVECorpsman
+    - type: CMVendorUser
+      id: RMCSPPCorpsmanPVE
+      points: 0
+      extraPoints:
+        Chemicals: 120
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-corpsman
+    - type: AssignSquad
+      squad: SquadSPP
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -58,9 +57,6 @@
   id: RMCJobSPPCorpsmanPVEGear
   equipment:
     id: RMCIDSPP
-    ears: RMCHeadsetSPP
-    jumpsuit: CMJumpsuitSPP
-    shoes: CMBootsBlackFilled
 
 - type: playTimeTracker
   id: RMCJobSPPCorpsmanPVE

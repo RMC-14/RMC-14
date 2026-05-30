@@ -1,0 +1,31 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorShivasILRCPeacekeeper
+  name: cm-job-name-survivor-un-peacekeeper
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorShivasILRCPeacekeeper
+  spawnMenuRoleName: ILRC peacekeeper (Shivas Survivor)
+  camouflageStartingGear: null
+
+- type: startingGear
+  parent: RMCGearSurvivorILRCPeacekeeper
+  id: RMCGearSurvivorShivasILRCPeacekeeper
+  equipment:
+    head: RMCHeadUshanka
+    mask: CMMaskCoif
+    outerClothing: RMCCoatSnowSurvivorSecurity
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsPMC
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorShivasILRCPeacekeeper
+  name: survivor shivas ILRC peacekeeper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorShivasILRCPeacekeeper
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

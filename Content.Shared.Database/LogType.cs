@@ -521,4 +521,8 @@ public enum LogType
     RMCExecution =  RMCMarineAnnounce + 39,
     RMCAdminCommandLogging = RMCMarineAnnounce + 40,
     RMCIdModify = RMCMarineAnnounce + 41,
+    RMCTelephone = RMCMarineAnnounce + 42,
+    RMCIconLabel = RMCMarineAnnounce + 43,
+    RMCMedalRecommendation = RMCMarineAnnounce + 44,
+    RMCAutodocSurgeryAbort = RMCMarineAnnounce + 45,
 }

@@ -11,3 +11,20 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  id: RMCActiveAlertEffect
+  name: exclamation
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: Structures/Storage/closet.rsi
+      state: cardboard_special
+      drawdepth: Effects
+      offset: 0, 1
+      noRot: true
+    - type: Transform
+      noRot: true
+    - type: Tag
+      tags:
+        - HideContextMenu

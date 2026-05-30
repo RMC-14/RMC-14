@@ -31,7 +31,7 @@ CMJobHospitalCorpsman = Hospital Corpsman
 
 cm-job-name-combat-tech = Combat Technician
 cm-job-description-combat-tech = Build or remove fortifications. Establish and maintain FOB and Power. Gain access to blocked off areas.
-cm-job-prefix-combat-tech = ComTech
+cm-job-prefix-combat-tech = CT
 CMJobCombatTech = Combat Tech
 
 rmc-job-name-mortar-operator = Mortar Operator
@@ -57,6 +57,9 @@ rmc-job-prefix-weapons-specialist-anti-materiel-sniper = AMR
 
 rmc-job-name-weapons-specialist-scout = Scout Specialist
 rmc-job-prefix-weapons-specialist-scout = SCT
+
+rmc-job-name-weapons-specialist-pyro = Pyrotechnical Specialist
+rmc-job-prefix-weapons-specialist-pyro = PYRO
 
 rmc-job-name-forecon-spotter = Recon Spotter
 

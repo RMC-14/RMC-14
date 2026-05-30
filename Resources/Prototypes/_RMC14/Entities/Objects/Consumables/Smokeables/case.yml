@@ -116,3 +116,36 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: RMCTarbackCase
+  id: RMCShioRoyalsCase
+  name: shio royals case
+  description: A wooden cigar box made to hold Shio Royals. The golden lettering is incredibly ostentatious for cigars best described by the word "OK". Rolled in Japan.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/shio_royal_box.rsi
+    layers:
+    - state: closed
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: cig1
+      map: ["cig1"]
+      visible: false
+    - state: cig2
+      map: ["cig2"]
+      visible: false
+    - state: cig3
+      map: ["cig3"]
+      visible: false
+    - state: cig4
+      map: ["cig4"]
+      visible: false
+    - state: cig5
+      map: ["cig5"]
+      visible: false
+  - type: StorageFill
+    contents:
+    - id: RMCShioCigar
+      amount: 5

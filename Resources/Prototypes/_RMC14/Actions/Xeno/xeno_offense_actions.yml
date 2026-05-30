@@ -11,12 +11,15 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidNormal
+      strength: Normal
       plasmaCost: 100
       time: 50 # seconds
-      dps: 8
+      dps: 7.2
       expendableLightDps: 2.5
 
 - type: entity
@@ -40,13 +43,16 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidWeak
+      strength: Weak
       plasmaCost: 75
       time: 125 # seconds or 2~ minutes
-      dps: 4
-      expendableLightDps: 0.3
+      dps: 3.6
+      expendableLightDps: 0.8
 
 - type: entity
   parent: ActionXenoAcidNormal
@@ -61,13 +67,16 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
+      strength: Strong
       plasmaCost: 125
       time: 20 # seconds
-      dps: 20
-      expendableLightDps: 23.4375
+      dps: 18
+      expendableLightDps: 35
 
 - type: entity
   parent: ActionXenoAcidNormal
@@ -82,15 +91,18 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
+      strength: Strong
       plasmaCost: 0
       energyCost: 100
       applyTimeMultiplier: 0.25
       time: 20 # seconds
-      dps: 20
-      expendableLightDps: 23.4375
+      dps: 18
+      expendableLightDps: 35
 
 - type: entity
   id: ActionXenoRegurgitate
@@ -265,7 +277,7 @@
 - type: entity
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
-  name: Headbutt (10) # TODO RMC14 proper plasma costs
+  name: Headbutt
   description: Charge towards the targeted enemy and push back the first enemy hit, piercing armor slightly. Does less damage but has more knockback when crest is lowered.
   components:
   - type: Action
@@ -273,15 +285,17 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: headbutt
-    useDelay: 6
+    useDelay: 4
   - type: TargetAction
     range: 3.5
     deselectOnMiss: false
   - type: EntityTargetAction
     event: !type:XenoHeadbuttActionEvent
+    whitelist:
+      components:
+      - Marine
+      - Xeno
   - type: XenoOffensiveAction
-  - type: XenoActionPlasma
-    cost: 10
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -294,7 +308,7 @@
 - type: entity
   id: ActionXenoTailSweep
   parent: ActionXenoBase
-  name: Tail Sweep (10) # TODO RMC14 proper plasma costs
+  name: Tail Sweep (10) # See XenoTailSweepComponent.cs for cost
   description: Knock down any enemies close to you.
   components:
   - type: Action
@@ -302,7 +316,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: tail_sweep
-    useDelay: 15
+    useDelay: 11
   - type: InstantAction
     event: !type:XenoTailSweepActionEvent
   - type: RMCDazeableAction
@@ -328,6 +342,7 @@
       state: xeno_spit
     useDelay: 2
   - type: TargetAction
+    repeat: true
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
@@ -348,6 +363,7 @@
       state: acid_shotgun
     useDelay: 7
   - type: TargetAction
+    repeat: true
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
@@ -376,6 +392,7 @@
       state: xeno_spit
     useDelay: 2.5
   - type: TargetAction
+    repeat: true
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
@@ -593,6 +610,7 @@
     deselectOnMiss: false
   - type: EntityTargetAction
     event: !type:XenoPunchActionEvent
+    toggleOutline: false
   - type: XenoOffensiveAction
 
 - type: entity
@@ -620,6 +638,7 @@
     deselectOnMiss: false
   - type: EntityTargetAction
     event: !type:XenoFlingActionEvent
+    toggleOutline: false
   - type: XenoOffensiveAction
   - type: RMCDazeableAction
 
@@ -647,6 +666,8 @@
     range: 5
     deselectOnMiss: false
   - type: EntityTargetAction
+    toggleOutline: false
+  - type: WorldTargetAction
     event: !type:XenoLungeActionEvent
   - type: XenoOffensiveAction
   - type: RMCDazeableAction
@@ -797,7 +818,7 @@
       state: bombard
     useDelay: 1
   - type: TargetAction
-    range: 10
+    range: 15 # the actual range is in XenoBombardComponent
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoBombardActionEvent
@@ -1163,7 +1184,7 @@
   parent: ActionXenoBase
   id: ActionXenoTailSeize
   name: Tail Seize
-  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival.
+  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival. [color=red]Has a 3-tile range![/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -1201,7 +1222,7 @@
       state: abduct
     useDelay: 15
   - type: TargetAction
-    range: 6
+    range: 15 # the actual range is in XenoAbductComponent
     deselectOnMiss: false
     checkCanAccess: false
   - type: EntityTargetAction
@@ -1429,3 +1450,77 @@
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 25
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoFireSpikes
+  name: Fire Spikes (75 shards)
+  description: Launch 8 small shards of spikes in the direction you click.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_spike
+    useDelay: 10
+  - type: TargetAction
+    range: 15
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoScatteredSpitActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionEnergy
+    cost: 75
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSpikeShed
+  name: Spike Shed (all shards)
+  description: Shred all of your shards to launch them all in all directions around yourself. Lose the bonus armor in the process while also gaining a speed boost. This will disable you from gaining any shards for 30 seconds. Requires 50 shards minimum
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_shard_shed
+    useDelay: 30
+  - type: InstantAction
+    event: !type:ActionXenoSpikeShedEvent
+  - type: ActionBlockIfResting
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoRend
+  name: Rend (25)
+  description: Claw at enemies around you.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+    useDelay: 2.5
+  - type: InstantAction
+    event: !type:XenoRendActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 50
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoDestroy
+  name: Destroy
+  description: After a short time, jump to the targeted location, destroying structures and gibbing hostiles within a 3x3 range. Works over barricades and other short barriers.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: charge
+    useDelay: 60
+  - type: TargetAction
+    range: 7
+    deselectOnMiss: false
+  - type: WorldTargetAction
+    event: !type:XenoDestroyActionEvent

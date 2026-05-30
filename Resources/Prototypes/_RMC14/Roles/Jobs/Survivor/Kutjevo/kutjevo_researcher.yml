@@ -1,0 +1,39 @@
+﻿- type: job
+  parent: CMSurvivorScientist
+  id: RMCSurvivorKutjevoResearcher
+  name: rmc-job-name-survivor-kutjevo-researcher
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorKutjevoResearcher
+  spawnMenuRoleName: Kutjevo Researcher (Kutjevo Survivor)
+  accessGroups:
+  - ColonistMedical
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorScientist
+  id: RMCGearSurvivorKutjevoResearcher
+  equipment:
+    head: ArmorHelmetPMCKutjevo
+    mask: RMCMaskKutjevoRespirator
+    jumpsuit: RMCJumpsuitKutjevoDrysuit
+    outerClothing: RMCLabcoat
+    shoes: RMCShoesLaceupBrown
+    back: RMCSatchelChemistryFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorKutjevoResearcher
+  name: survivor kutjevo researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorKutjevoResearcher
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetScientist
+  id: RMCSurvivorPresetKutjevoResearcher
+  name: kutjevo researcher colonist preset # TODO RMC14 random research notes
+  categories: [ HideSpawnMenu ]

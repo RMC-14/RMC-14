@@ -122,6 +122,9 @@ public sealed class RMCSuicideSystem : EntitySystem
 
         foreach (var (bullet, _) in ev.Ammo)
         {
+            if (HasComp<GunComponent>(bullet))
+                continue;
+
             QueueDel(bullet);
         }
 
@@ -130,6 +133,7 @@ public sealed class RMCSuicideSystem : EntitySystem
         _mobState.ChangeMobState(user, MobState.Dead);
         _unrevivable.MakeUnrevivable(user);
         _audio.PlayPredicted(gun.SoundGunshot, held, ent);
+        _unrevivable.MakeUnrevivable(user, false);
         EnsureComp<RMCHasSuicidedComponent>(user);
     }
 

@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Radio; // RMC14
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -66,16 +67,25 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             return;
 
         component.Channels.Clear();
-        component.DefaultChannel = null;
+
+        if (!HasComp<RMCStaticDefaultChannelComponent>(uid))
+            component.DefaultChannel = null; // RMC14
+
+        //RMC14
+        component.ReadOnlyChannels.Clear();
 
         foreach (var ent in component.KeyContainer.ContainedEntities)
         {
             if (TryComp<EncryptionKeyComponent>(ent, out var key))
             {
                 component.Channels.UnionWith(key.Channels);
-                component.DefaultChannel ??= key.DefaultChannel;
+                component.ReadOnlyChannels.UnionWith(key.ReadOnlyChannels);
+
+                if (!HasComp<RMCStaticDefaultChannelComponent>(uid))
+                    component.DefaultChannel ??= key.DefaultChannel;
             }
         }
+        //RMC14
 
         RaiseLocalEvent(uid, new EncryptionChannelsChangedEvent(component));
         Dirty(uid, component);
@@ -186,7 +196,8 @@ public sealed partial class EncryptionKeySystem : EntitySystem
                     component.DefaultChannel,
                     args,
                     _protoManager,
-                    "examine-encryption-channel");
+                    "examine-encryption-channel",
+                    component.ReadOnlyChannels);
             }
         }
     }
@@ -196,10 +207,10 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
-        if(component.Channels.Count > 0)
+        if (component.Channels.Count > 0)
         {
             args.PushMarkup(Loc.GetString("examine-encryption-channels-prefix"));
-            AddChannelsExamine(component.Channels, component.DefaultChannel, args, _protoManager, "examine-encryption-channel");
+            AddChannelsExamine(component.Channels, component.DefaultChannel, args, _protoManager, "examine-encryption-channel", component.ReadOnlyChannels);
         }
     }
 
@@ -209,22 +220,30 @@ public sealed partial class EncryptionKeySystem : EntitySystem
     /// <param name="channels">HashSet of channels in headset, encryptionkey or etc.</param>
     /// <param name="protoManager">IPrototypeManager for getting prototypes of channels with their variables.</param>
     /// <param name="channelFTLPattern">String that provide id of pattern in .ftl files to format channel with variables of it.</param>
-    public void AddChannelsExamine(HashSet<string> channels, string? defaultChannel, ExaminedEvent examineEvent, IPrototypeManager protoManager, string channelFTLPattern)
+    public void AddChannelsExamine(HashSet<string> channels, string? defaultChannel, ExaminedEvent examineEvent, IPrototypeManager protoManager, string channelFTLPattern, HashSet<ProtoId<RadioChannelPrototype>>? ReadonlyChannels)
     {
         RadioChannelPrototype? proto;
         foreach (var id in channels)
         {
+            if (string.IsNullOrEmpty(id) || !_protoManager.TryIndex(id, out proto))
+                continue;
+
             proto = _protoManager.Index<RadioChannelPrototype>(id);
 
             var key = id == SharedChatSystem.CommonChannel
                 ? SharedChatSystem.RadioCommonPrefix.ToString()
                 : $"{SharedChatSystem.RadioChannelPrefix}{proto.KeyCode}";
 
+
+            var readOnlyMarkup = "";
+            if (ReadonlyChannels != null && ReadonlyChannels.Contains(id))
+                readOnlyMarkup = " Read Only";
+
             examineEvent.PushMarkup(Loc.GetString(channelFTLPattern,
                 ("color", proto.Color),
                 ("key", key),
                 ("id", proto.LocalizedName),
-                ("freq", proto.Frequency / 10f)));
+                ("freq", proto.Frequency / 10f)) + $"{readOnlyMarkup}");
         }
 
         if (defaultChannel != null && _protoManager.TryIndex(defaultChannel, out proto))

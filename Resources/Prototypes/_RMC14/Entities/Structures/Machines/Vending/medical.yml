@@ -16,7 +16,6 @@
   - type: CMMedicalSupplyLink
   - type: RMCMesonsNonviewable
 
-
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorMedicalAllAccess
@@ -61,33 +60,37 @@
     - name: Field supplies
       entries:
       - id: CMBurnKit10
-        amount: 6
+        amount: 10
       - id: CMTraumaKit10
-        amount: 6
+        amount: 10
       - id: CMOintment10
-        amount: 6
+        amount: 10
       - id: CMGauze10
-        amount: 6
+        amount: 10
 #      - id: CMSplints10 # TODO RMC14
-#        amount: 6
+#        amount: 10
     - name: Autoinjectors
       entries:
       - id: CMBicaridineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMDexalinPlusAutoInjector
-        amount: 3
+        amount: 5
+      - id: RMCDyloveneAutoInjector
+        amount: 5
       - id: CMEpinephrineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMInaprovalineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMKelotaneAutoInjector
-        amount: 3
+        amount: 5
       - id: CMOxycodoneAutoInjector
-        amount: 3
+        amount: 5
       - id: CMTramadolAutoInjector
-        amount: 3
+        amount: 5
+#      - id: CMPeridaxonAutoinjector # TODO RMC14
+#        amount: 5
       - id: CMTricordrazineAutoInjector
-        amount: 3
+        amount: 5
     - name: Liquid bottles
       entries:
       - id: CMBottleBicaridine
@@ -109,19 +112,21 @@
     - name: Pill bottles
       entries:
       - id: CMPillCanisterBicaridine
-        amount: 2
+        amount: 4
       - id: CMPillCanisterDexalin
-        amount: 2
+        amount: 4
       - id: CMPillCanisterDylovene
-        amount: 2
+        amount: 4
       - id: CMPillCanisterInaprovaline
-        amount: 2
+        amount: 4
       - id: CMPillCanisterKelotane
-        amount: 2
-      # - id: CMPillCanisterPeridaxon
-      #  amount: 2
+        amount: 4
+#      - id: CMPillCanisterOxycodone # TODO RMC14
+#        amount: 3
+      # - id: CMPillCanisterPeridaxon # TODO RMC14
+      #  amount: 3
       - id: CMPillCanisterTramadol
-        amount: 2
+        amount: 4
     - name: Medical utilities
       entries:
       - id: CMDefibrillator
@@ -130,8 +135,10 @@
         amount: 2
       - id: CMSynthGraft
         amount: 2
-      - id: CMHyposprayFilledTricord
-        amount: 2
+      - id: CMHyposprayWithVial
+        amount: 3
+      - id: RMCVialTricordrazine
+        amount: 3
       - id: CMHealthAnalyzer
         amount: 5
       - id: CMBeltMedical
@@ -139,7 +146,7 @@
       - id: RMCGlassesMedicalHUDGlasses
         amount: 3
       - id: CMStasisBagFolded
-        amount: 2
+        amount: 3
       - id: CMSyringe
         amount: 7
 
@@ -150,6 +157,108 @@
   components:
   - type: AccessReader
     access: [["CMAccessMedical"]]
+
+- type: entity
+  parent: CMVendorMedical
+  id: RMCVendorMedicalPVE
+  suffix: PVE
+  components:
+  - type: CMAutomatedVendor # TODO RMC14 different ui style
+    sections:
+    - name: Field supplies
+      entries:
+      - id: CMBurnKit10
+        amount: 10
+      - id: CMTraumaKit10
+        amount: 10
+      - id: CMOintment10
+        amount: 10
+      - id: CMGauze10
+        amount: 10
+#      - id: CMSplints10 # TODO RMC14
+#        amount: 10
+    - name: Autoinjectors
+      entries:
+      - id: CMBicaridineAutoInjector
+        amount: 5
+      - id: CMDexalinPlusAutoInjector
+        amount: 5
+      - id: RMCDyloveneAutoInjector
+        amount: 5
+      - id: CMEpinephrineAutoInjector
+        amount: 5
+      - id: CMInaprovalineAutoInjector
+        amount: 5
+      - id: CMKelotaneAutoInjector
+        amount: 5
+#      - id: CMOxycodoneAutoinjector # TODO RMC14
+#        amount: 5
+#      - id: CMPeridaxonAutoinjector # TODO RMC14
+#        amount: 5
+#      - id: CMTramadolAutoinjector # TODO RMC14
+#        amount: 5
+      - id: CMTricordrazineAutoInjector
+        amount: 5
+    - name: Liquid bottles
+      entries:
+      - id: CMBottleBicaridine
+        amount: 3
+      - id: CMBottleDylovene
+        amount: 3
+      - id: CMBottleDexalin
+        amount: 3
+      - id: CMBottleInaprovaline
+        amount: 3
+      - id: CMBottleKelotane
+        amount: 3
+#      - id: CMBottleOxycodone # TODO RMC14
+#        amount: 3
+#      - id: CMBottlePeridaxon # TODO RMC14
+#        amount: 3
+#      - id: CMBottleTramadol # TODO RMC14
+#        amount: 3
+    - name: Pill bottles
+      entries:
+      - id: RMCPillCanisterMeralyneBicaridine
+        amount: 4
+      - id: CMPillCanisterKelotaneDermaline
+        amount: 4
+      - id: CMPillCanisterTricordrazine
+        amount: 4
+      - id: CMPillCanisterBicaridine
+        amount: 4
+      - id: CMPillCanisterDexalin
+        amount: 4
+      - id: CMPillCanisterDylovene
+        amount: 4
+      - id: CMPillCanisterInaprovaline
+        amount: 4
+      - id: CMPillCanisterKelotane
+        amount: 4
+#      - id: CMPillCanisterOxycodone # TODO RMC14
+#        amount: 3
+#      - id: CMPillCanisterPeridaxon # TODO RMC14
+#        amount: 3
+#      - id: CMPillCanisterTramadol # TODO RMC14
+#        amount: 4
+    - name: Medical utilities
+      entries:
+      - id: CMSurgicalLine
+        amount: 2
+      - id: CMSynthGraft
+        amount: 2
+      - id: CMHyposprayFilledTricord
+        amount: 3
+      - id: CMHealthAnalyzer
+        amount: 5
+      - id: CMBeltMedical
+        amount: 2
+      - id: RMCGlassesMedicalHUDGlasses
+        amount: 3
+      - id: CMStasisBagFolded
+        amount: 3
+      - id: CMSyringe
+        amount: 7
 
 - type: entity
   parent: CMVendorMedical
@@ -258,16 +367,27 @@
       - id: CMFireExtinguisherPortable
         amount: 5
       - id: CMOintment10
-        amount: 7
+        amount: 8
       - id: CMGauze10
-        amount: 7
+        amount: 8
 #      - id: CMMedicalSplints5
-#        amount: 7
+#        amount: 8
+
+- type: entity
+  parent: ColMarTechMarineMedical
+  id: ColMarTechMarineMedicalPowered
+  suffix: Powered
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
+  - type: CMAutomatedVendor
+    ejectContentsOnDestruction: true # Players should not be afraid that everything they put into vending machines for storage will disappear when the tent is destroyed
 
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: RMCNanoMed
-  name: NanoMed
+  name: QuickMed
   description: A wall-mounted medical equipment dispenser.
   components:
   - type: Fixtures
@@ -308,21 +428,23 @@
         amount: 2
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 2
+#      - id: CMPainStopAutoinjector
+#        amount: 2
       - id: CMGauze10
         amount: 4
       - id: CMOintment10
         amount: 4
-      # - id: CMMedicalSplints5
-      #   amount: 4
+#      - id: CMMedicalSplints5
+#        amount: 4
     - name: Utility
       entries:
       - id: CMHealthAnalyzer
-        amount: 3
+        amount: 2
 
 - type: entity
   parent: RMCNanoMed
   id: RMCNanoMedLimited
-  description: A wall-mounted medical equipment dispenser. This version is more limited than standard UNMC NanoMeds.
+  description: A wall-mounted medical equipment dispenser. This version is more limited than standard UNMC QuickMeds.
   suffix: Limited
   components:
   - type: CMSolutionRefiller
@@ -354,9 +476,9 @@
       - id: CMTricordrazineAutoInjectorNoSkill
         name: First-Aid Autoinjector
         amount: 2
-      #- id: CMPainStopAutoinjector
-      #  name: Pain-Stop Autoinjector
-      #  amount: 2
+#      - id: CMPainStopAutoinjector
+#        name: Pain-Stop Autoinjector
+#        amount: 2
       - id: CMGauze10
         name: Roll of Gauze
         amount: 4
@@ -395,8 +517,8 @@
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorBlood
-  name: MM Blood Dispenser
-  description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
+  name: Avant Blood Dispenser
+  description: The Avant Biomedical Blood Pack Dispensary is the premier, top-of-the-line blood dispenser! Get yours today! Made by Avant Biomedical.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/blood.rsi
@@ -422,10 +544,9 @@
     - name: Blood Packs
       entries:
       - id: CMBloodPackFull
-        amount: 30
+        amount: 30 # 6 blood types, 5 each
     - name: Miscellaneous
       entries:
       - id: CMBloodPack
         amount: 5
         name: empty blood pack
-

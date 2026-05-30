@@ -1,0 +1,51 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCDropshipMaintsComputer
+  name: dropship maintenance computer
+  description: An opened dropship maintenance computer, it seems to be off however. It's used by technicians and pilots to find damaged or broken systems on a dropship. It has various outlets for different systems.
+  suffix: Open
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/dropship_maint_comp.rsi
+    layers:
+    - state: hangar_comp
+      map: [ "enum.ToggleableVisuals.Enabled" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Enabled:
+          True: { state: hangar_comp }
+          False: { state: hangar_comp_open }
+    sprite: _RMC14/Objects/Devices/dropship_maint_comp.rsi
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/Devices/dropship_maint_comp.rsi
+  - type: ItemToggle
+    activated: false
+  - type: Appearance
+
+- type: entity
+  parent: RMCDropshipMaintsComputer
+  id: RMCDropshipMaintsComputerOpen
+  name: dropship maintenance computer
+  description: A closed dropship maintenance computer that technicians and pilots use to find out what's wrong with a dropship. It has various outlets for different systems.
+  suffix: Closed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/dropship_maint_comp.rsi
+    layers:
+    - state: hangar_comp
+      map: [ "enum.ToggleableVisuals.Enabled" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Enabled:
+          True: { state: hangar_comp }
+          False: { state: hangar_comp_open }
+    sprite: _RMC14/Objects/Devices/dropship_maint_comp.rsi
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/Devices/dropship_maint_comp.rsi
+  - type: ItemToggle
+    activated: true
+  - type: Appearance

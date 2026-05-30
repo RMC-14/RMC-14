@@ -16,6 +16,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.Coordinates;
 using Robust.Shared.Random;
 
 namespace Content.Server.Weapons.Melee;
@@ -84,7 +85,12 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         if (session is { } pSession)
         {
             (targetCoordinates, targetLocalAngle) = _lag.GetCoordinatesAngle(target, pSession);
-            return Interaction.InRangeUnobstructed(user, target, targetCoordinates, targetLocalAngle, range, overlapCheck: false);
+            if (Interaction.InRangeUnobstructed(user, target, targetCoordinates, targetLocalAngle, range, overlapCheck: false))
+                return true;
+
+            // The client might be pulling the target, in which case the target's movement is predicted
+            // In that case, we want to use the server's position, since it will match with the client's
+            return Interaction.InRangeUnobstructed(user, target, target.ToCoordinates(), targetLocalAngle, range, overlapCheck: false);
         }
 
         return Interaction.InRangeUnobstructed(user, target, range);
@@ -98,6 +104,9 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
     public override void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, bool predicted = true)
     {
+        if (localPos == Vector2.Zero) // RMC14
+            return;
+
         Filter filter;
 
         if (predicted)

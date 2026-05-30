@@ -10,7 +10,9 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:Antitoxic #TODO removes 0.125u toxin/s 0.13u?
+      - !type:Antitoxic
+        potency: 2
+      - !type:Antihallucinogenic
         potency: 2
 
 # TODO add another alcohols to decrease
@@ -26,58 +28,8 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:GenericStatusEffect
-        key: Drunk
-        time: 1.5
-        type: Remove
-      - !type:GenericStatusEffect
-        key: Jitter
-        time: 1.5
-        type: Remove
-      - !type:GenericStatusEffect
-        key: ForcedSleep
-        time: 1.5
-        type: Remove
-      - !type:GenericStatusEffect
-        key: Stutter
-        time: 1.5
-        type: Remove
-      - !type:GenericStatusEffect
-        key: SlurredSpeech
-        time: 1.5
-        type: Remove
-      - !type:GenericStatusEffect
-        key: Drowsiness
-        time: 1.5
-        type: Remove
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCEthanol
-          min: 0.75
-        reagent: RMCEthanol
-        amount: -0.75
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: Ethanol
-          min: 0.75
-        reagent: Ethanol
-        amount: -0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Toxin: 0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Toxin: 2.25
+      - !type:Focusing
+        potency: 3
 
 # TODO RMC14 eye damage
 - type: reagent
@@ -92,37 +44,10 @@
     Medicine:
       metabolismRate: 0.03
       effects:
-      - !type:EqualHealthChange #TODO removes 0.03125 toxin/s?
-        damage:
-        - Toxin: -0.5
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15 #TODO 0.25 eye damage/s at 15 OD
-        damage:
-          groups:
-            Brute: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        damage:
-          groups:
-            Brute: 1.25
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 10
-        type: Add
-        refresh: false
+      - !type:Antitoxic
+        potency: 1
+      - !type:Biocidic
+        potency: 1
 
 - type: reagent
   parent: [ CMReagentMedicine, Bicaridine ]
@@ -139,7 +64,7 @@
       - !type:Neogenetic
         potency: 2
 
-# TODO RMC14 other effects (remove toxic reagents)
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Cryoxadone ]
   id: CMCryoxadone
@@ -150,7 +75,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
+      - !type:EqualHealthChange
         conditions:
         - !type:Temperature
           max: 170
@@ -217,50 +142,14 @@
   color: "#6bd43c"
   overdose: 10.5
   criticalOverdose: 20
-  worksOnTheDead: true
   metabolisms:
     Medicine:
       metabolismRate: 0.2
       effects:
-      - !type:DecreasePain
+      - !type:DecreasePain # TODO move to electogenetic property
         strength: 15
-      - !type:EqualHealthChange
-        conditions:
-        - !type:RecentlyDefibrillated
-        damage:
-        - Brute: -20
-        - Burn: -20
-        - Toxin: -20
-      - !type:AdjustReagent
-        conditions:
-        - !type:RecentlyDefibrillated
-        reagent: CMEpinephrine
-        amount: -1
-      - !type:RemoveRecentDefibrillation
-        conditions:
-        - !type:RecentlyDefibrillated
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 10.5
-        damage:
-          groups:
-            Toxin: 0.38
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 10.5
-        key: SeeingRainbows # TODO change to hallucinations
-        component: SeeingRainbows
-        type: Add
-        time: 60
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 20
-        damage:
-          groups:
-            Airloss: 1.5
+      - !type:Electrogenetic
+        potency: 2
 
 # TODO heart damage over 100u
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
@@ -296,20 +185,21 @@
         - !type:ReagentThreshold
           min: 60
         key: Unconscious
-        component: RMCUnconscious
-        time: 20 #Yes, it's this much.
+        component: RMCUnconscious # Change to Knockdown+Stun refresh: true
+        time: 40
         type: Add
-        refresh: false
+        refresh: true
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold #0.25 heart damage/s
           min: 100               #5% chance emote twitch, blink_r, shiver
+        # TODO RMC14 Drowsiness. if drowsiness > 10 5% change to paralyze(knockout) for 10 seconds.
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
         time: 10
         type: Add
-        refresh: false
+        refresh: true
 
 - type: reagent
   parent: [ CMReagentMedicine, Kelotane ]
@@ -338,28 +228,8 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:StabilizeTemperature
-        stable: 310
-        change: 30
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: Unconscious
-        component: RMCUnconscious
-        time: 20 #Yes, it's this much.
-        type: Add
-        refresh: false
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 10
-        type: Add
-        refresh: false
+      - !type:Thermostabilizing
+        potency: 2
 
 - type: reagent
   parent: [ CMReagentMedicine, Tricordrazine ]
@@ -442,7 +312,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
+      - !type:EqualHealthChange
         conditions:
         - !type:Temperature
           max: 170
@@ -465,37 +335,10 @@
     Medicine:
       metabolismRate: 0.5
       effects:
-      - !type:EqualHealthChange #TODO removes 0.625u toxin/s?
-        damage:
-        - Toxin: -0.5
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 20 #TODO 0.25 eye damage/s at 20 OD
-        damage:
-          groups:
-            Brute: 1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Brute: 2.5
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 10
-        type: Add
-        refresh: false
+      - !type:Antitoxic
+        potency: 1
+      - !type:Biocidic
+        potency: 2
 
 # Antidepressants/ADHD meds
 - type: reagent
@@ -616,4 +459,19 @@
       metabolismRate: 0.05
       effects:
       - !type:Painkilling
+        potency: 4
+
+- type: reagent
+  parent: [ CMReagentMedicine, Lipozine ]
+  id: RMCLipozine
+  name: reagent-name-rmclipozine
+  desc: reagent-desc-rmclipozine
+  color: "#BBEDA4"
+  overdose: 30
+  criticalOverdose: 50
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:Ketogenic
         potency: 4

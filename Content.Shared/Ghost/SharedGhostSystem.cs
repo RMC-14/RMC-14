@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Ghost;
 using Content.Shared.Emoting;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
@@ -28,7 +29,7 @@ namespace Content.Shared.Ghost
 
         private void OnAttemptInteract(Entity<GhostComponent> ent, ref InteractionAttemptEvent args)
         {
-            if (!ent.Comp.CanGhostInteract)
+            if (!ent.Comp.CanGhostInteract && !HasComp<RMCIgnoreGhostInteractionLimitsComponent>(args.Target)) // RMC14
                 args.Cancelled = true;
         }
 

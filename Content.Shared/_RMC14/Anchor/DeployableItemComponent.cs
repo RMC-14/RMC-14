@@ -16,6 +16,12 @@ public sealed partial class DeployableItemComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 HalfFullThreshold = FixedPoint2.New(0.66);
+
+    [DataField, AutoNetworkedField]
+    public bool LeftClickPickup;
+
+    [DataField, AutoNetworkedField]
+    public bool MagazineExamine;
 }
 
 [Serializable, NetSerializable]

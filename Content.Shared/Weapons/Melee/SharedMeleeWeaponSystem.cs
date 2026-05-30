@@ -75,6 +75,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
     private static readonly EntProtoId DisarmEffect = "RMCWeaponArcDisarm"; // RMC14
+    private const float ArtificialMeleeDelay = 0.1f; //RMC14
 
     /// <summary>
     /// Maximum amount of targets allowed for a wide-attack.
@@ -153,7 +154,18 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         // If someone swaps to this weapon then reset its cd.
         var curTime = Timing.CurTime;
-        var minimum = curTime + TimeSpan.FromSeconds(1 / attackRate);
+        var minimum = curTime + TimeSpan.FromSeconds(ArtificialMeleeDelay); // RMC14 No attack delay reset, A tiny delay is still needed so you don't attack and grab a weapon at the same time while in harm mode.
+
+        // RMC14, Prevent dual wielded melee weapons from having separate attack delays when swapping hands.
+        var heldItems = _hands.EnumerateHeld(args.User);
+        foreach (var item in heldItems)
+        {
+            if (item == uid || !TryComp(item, out MeleeWeaponComponent? weapon))
+                continue;
+
+            if (minimum < weapon.NextAttack)
+                minimum = weapon.NextAttack;
+        }
 
         if (minimum < component.NextAttack)
             return;
@@ -360,18 +372,27 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         return AttemptAttack(user, weaponUid, weapon, new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(targetXform.Coordinates)), null);
     }
 
+    // RMC14
+    public bool AttemptLightAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target, bool requireCombatMode)
+    {
+        if (!TryComp(target, out TransformComponent? targetXform))
+            return false;
+
+        return AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(GetNetEntity(target), GetNetEntity(weaponUid), GetNetCoordinates(targetXform.Coordinates)), null, requireCombatMode);
+    }
+
     /// <summary>
     /// Called when a windup is finished and an attack is tried.
     /// </summary>
     /// <returns>True if attack successful</returns>
-    private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session)
+    private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session, bool requireCombatMode = true) //added requireCombatMode param
     {
         var curTime = Timing.CurTime;
 
         if (weapon.NextAttack > curTime)
             return false;
 
-        if (!CombatMode.IsInCombatMode(user))
+        if (requireCombatMode && !CombatMode.IsInCombatMode(user)) // RMC14
             return false;
 
         EntityUid? target = null;
@@ -411,9 +432,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // RMC14
         if (target != null)
         {
-            if  (_rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack))
+            if  (_rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack, out var cancelled))
                 attack = newAttack;
-            else
+            else if (cancelled)
                 return false;
         }
 
@@ -452,11 +473,13 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         {
             string animation;
 
+            var range = weapon.Range; // RMC14
             switch (attack)
             {
                 case LightAttackEvent light:
                     DoLightAttack(user, light, weaponUid, weapon, session);
                     animation = weapon.Animation;
+                    range = _rmcMelee.GetUserLightAttackRange(user, target, weapon); // RMC14
                     break;
                 case DisarmAttackEvent disarm:
                     if (!DoDisarm(user, disarm, weaponUid, weapon, session))
@@ -474,7 +497,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     throw new NotImplementedException();
             }
 
-            DoLungeAnimation(user, weaponUid, weapon.Angle, TransformSystem.ToMapCoordinates(GetCoordinates(attack.Coordinates)), weapon.Range, animation);
+            // RMC14
+            DoLungeAnimation(user, weaponUid, weapon.Angle, TransformSystem.ToMapCoordinates(GetCoordinates(attack.Coordinates)), range, animation);
         }
 
         var attackEv = new MeleeAttackEvent(weaponUid);
@@ -499,7 +523,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             !HasComp<DamageableComponent>(target) ||
             !TryComp(target, out TransformComponent? targetXform) ||
             // Not in LOS.
-            !InRange(user, target.Value, component.Range, session))
+            !InRange(user, target.Value, _rmcMelee.GetUserLightAttackRange(user, target, component), session))
         {
             // Leave IsHit set to true, because the only time it's set to false
             // is when a melee weapon is examined. Misses are inferred from an
@@ -739,10 +763,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             var target = entities.First();
             _meleeSound.PlayHitSound(target, user, GetHighestDamageSound(appliedDamage, _protoManager), hitEvent.HitSoundOverride, component);
         }
-
-        if (appliedDamage.GetTotal() > FixedPoint2.Zero)
+        // RMC14: Checks and returns early for when attacking too fast and target is technically not there
+        if (appliedDamage.GetTotal() > FixedPoint2.Zero && targets.Count > 0)
         {
-            DoDamageEffect(targets, user, Transform(targets[0]));
+            if (!TryComp(targets[0], out TransformComponent? targetXform))
+                return true;
+            DoDamageEffect(targets, user, targetXform);
         }
 
         return true;

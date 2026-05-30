@@ -83,6 +83,18 @@
       path: /Audio/Effects/woodenclosetclose.ogg
     openSound:
       path: /Audio/Effects/woodenclosetopen.ogg
+
+- type: entity
+  parent: RMCCabinetBase
+  id: RMCCabinetBaseUnanchored
+  suffix: Unanchored
+  components:
+  - type: Anchorable
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Dynamic
+
 # Colored
 - type: entity
   parent: CMClosetBase
@@ -209,6 +221,15 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/acloset.rsi
 
+# Jobs
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: RMCClosetMiner
+  name: miner's equipment
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/mining.rsi
+
 # PVE
 - type: entity
   parent: CMClosetBaseUnanchored
@@ -231,3 +252,89 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetPMCGearFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetSPPGear
+  suffix: PvE, SPP
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetSPPGearFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMGear
+  suffix: PVE, RCM
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMTroopSgtGear
+  name: troop sergeant locker
+  suffix: PVE, RCM, Troop Sergeant
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMTroopSgtFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMSectionLeaderGear
+  name: section leader locker
+  suffix: PVE, RCM, Section Leader
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMSectionLeaderFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMGPMGGear
+  name: GPMG gunner locker
+  suffix: PVE, RCM, GPMG Gunner
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMGPMGFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMTeamLeaderGear
+  name: team leader locker
+  suffix: PVE, RCM, Team Leader
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMTeamLeaderFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMTroopCommanderGear
+  name: troop commander locker
+  suffix: PVE, RCM, Troop Commander
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMTroopCommanderFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMSapperGear
+  name: sapper locker
+  suffix: PVE, RCM, Sapper
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMSapperFill

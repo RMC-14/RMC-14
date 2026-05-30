@@ -1,0 +1,18 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e0f06e0a3383e56331e9315b3aed1c8c2041ebd0/icons/obj/items/clothing/hats/formal_hats.dmi and https://github.com/cmss13-devs/cmss13/blob/e0f06e0a3383e56331e9315b3aed1c8c2041ebd0/icons/mob/humans/onmob/clothing/head/formal_hats.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "equipped-HELMET",
+            "directions": 4
+        }
+    ]
+}

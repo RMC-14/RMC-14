@@ -34,7 +34,7 @@
   parent: RMCMagazineBootsN160
   id: RMCMagazineBootsN54
   name: Boots! Issue No.54.
-  description: The only official UNMC magazine, the headline reads 'Aegis strikes back against litigants in M54C-MK2 self cleaning case'.
+  description: The only official UNMC magazine, the headline reads 'AEGIS strikes back against litigants in M54C-MK2 self cleaning case'.
 
 - type: entity
   parent: RMCMagazineBootsN160

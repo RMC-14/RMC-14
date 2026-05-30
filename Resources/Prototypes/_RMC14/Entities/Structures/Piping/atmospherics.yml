@@ -9,7 +9,7 @@
   - type: Item
     size: Large
   - type: Sprite
-    drawdepth: FloorTiles # TODO RMC14 draw over weeds, below traps
+    drawdepth: FloorObjects # TODO RMC14 draw below traps?
     sprite: _RMC14/Structures/Piping/Atmospherics/vent_pump.rsi
     layers:
     - state: pipeFourway
@@ -68,7 +68,6 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    drawdepth: FloorObjects
     sprite: _RMC14/Structures/Piping/Atmospherics/vent_scrubber.rsi
   - type: Appearance
   - type: AmbientSound

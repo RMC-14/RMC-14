@@ -30,6 +30,7 @@
           tags:
           - CMMagazinePistolM1984
           - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984HP
           - RMCMagazinePistolM1984Rubber
         startingItem: CMMagazinePistolM1984
   - type: AttachableHolder
@@ -41,11 +42,13 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
         whitelist:
@@ -77,6 +80,8 @@
           tags:
           - CMMagazinePistolM1984
           - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984HP
+          - RMCMagazinePistolM1984Rubber
 
 #9mm
 - type: entity
@@ -171,6 +176,10 @@
   name: M1984 hollowpoint magazine (9mm)
   description: A hollow-point 9mm pistol magazine for the M1984. These hollow-point bullets have noticeably higher stopping power on unarmored targets, and noticeably less on armored targets.
   components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM1984HP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -186,6 +195,9 @@
     - state: ammo_band
       color: "#BA5D00"
 
+- type: Tag
+  id: RMCMagazinePistolM1984HP
+
 - type: entity
   parent: CMCartridgePistol9mm
   id: RMCCartridgePistol9mmHP
@@ -194,12 +206,13 @@
   - type: Tag
     tags:
     - Cartridge
+    - CMCartridgePistol9mm
     - RMCCartridgePistol9mmHP
   - type: CartridgeAmmo
     proto: RMCBulletPistol9mmHP
 
 - type: entity
-  parent: CMBulletPistol9mm
+  parent: CMBulletBase
   id: RMCBulletPistol9mmHP
   name: bullet (9mm HP)
   components:

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Ingame screenshot",
+  "size": {
+    "x": 35,
+    "y": 35
+  },
+  "states": [
+    {
+      "name": "pitrased"
+    },
+    {
+      "name": "pitlowerd"
+    }
+  ]
+}

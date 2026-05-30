@@ -49,9 +49,19 @@
   - type: StorageFill
     contents:
       - id: CMPillCanister
-        amount: 7
+        amount: 8
   - type: Sprite
     state: pillbox
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,15,1
+    areaInsert: true
+    areaInsertRadius: 1
+    whitelist:
+      tags:
+      - PillCanister
+  - type: RMCPillBottleTransfer
   - type: IgnoreContentsSize
     items:
       tags:
@@ -67,6 +77,24 @@
     contents:
       - id: CMSyringe
         amount: 7
+  - type: Sprite
+    state: syringe
+
+- type: entity
+  name: box of syringes
+  parent: RMCBoxCardboard
+  id: RMCBoxSyringeCBRN
+  description: A biohazard alert warning is printed on the box
+  suffix: CBRN, Small
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMSyringe
+        amount: 7
+  - type: Storage
+    maxItemSize: Tiny
+  - type: Item
+    size: Small
   - type: Sprite
     state: syringe
 

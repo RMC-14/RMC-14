@@ -22,7 +22,7 @@ public sealed class XenoBombardSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -49,7 +49,7 @@ public sealed class XenoBombardSystem : EntitySystem
 
         var direction = target.Position - source.Position;
         if (direction.Length() > ent.Comp.Range)
-            target = target.Offset(direction.Normalized() * ent.Comp.Range);
+            target = source.Offset(direction.Normalized() * ent.Comp.Range);
 
         _audio.PlayPredicted(ent.Comp.PrepareSound, ent, ent);
 
@@ -102,8 +102,7 @@ public sealed class XenoBombardSystem : EntitySystem
         var projectile = Spawn(ent.Comp.Projectile, source);
         _hive.SetSameHive(ent.Owner, projectile);
 
-        var max = EnsureComp<ProjectileMaxRangeComponent>(projectile);
-        _rmcProjectile.SetMaxRange((projectile, max), direction.Length());
+        _rmcProjectile.SetMaxRange(projectile, direction.Length());
 
         _gun.ShootProjectile(projectile, direction, Vector2.Zero, ent, ent, speed: 7.5f);
         _audio.PlayEntity(ent.Comp.ShootSound, ent, ent);
