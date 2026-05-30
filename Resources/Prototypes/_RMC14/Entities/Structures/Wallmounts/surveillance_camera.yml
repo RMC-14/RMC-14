@@ -22,7 +22,7 @@
     idleLoad: 5
     activeLoad: 10
     channel: Equipment
-    RMCPowerMode: Active # Unsure if it's needed, but CM does use_power:2 specifically with cams
+    mode: Active # Unsure if it's needed, but CM does use_power:2 specifically with cams
   - type: ExtensionCableReceiver
   - type: Eye
     zoom: 0.5, 0.5
