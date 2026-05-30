@@ -208,6 +208,61 @@
   - type: RMCDazeableAction
 
 - type: entity
+  id: ActionXenoPsychicWhisper
+  parent: ActionXenoBase
+  name: Psychic Whisper
+  description: Whisper a psychic message to a nearby mind.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: psychic_whisper
+    useDelay: 10
+  - type: TargetAction
+    range: 7
+  - type: EntityTargetAction
+    event: !type:XenoPsychicWhisperActionEvent
+    canTargetSelf: false
+    toggleOutline: false
+    whitelist:
+      components:
+      - MobState
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoPsychicRadiance
+  parent: ActionXenoBase
+  name: Psychic Radiance (100)
+  description: Radiate a psychic message to nearby minds.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: psychic_radiance
+    useDelay: 10
+  - type: InstantAction
+    event: !type:XenoPsychicRadianceActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoGiveOrder
+  parent: ActionXenoBase
+  name: Give Order (100)
+  description: Send a psychic order to the xenonid you are watching.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: queen_order
+    useDelay: 10
+  - type: InstantAction
+    event: !type:XenoGiveOrderActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
   name: Grow Ovipositor (700) # TODO RMC14 proper plasma costs

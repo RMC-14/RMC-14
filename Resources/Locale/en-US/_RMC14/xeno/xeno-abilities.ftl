@@ -13,6 +13,24 @@ rmc-xeno-internal-health-increase-user = We feel our internal health reserves in
 rmc-xeno-not-enough-fury = We're not angry enough for this!
 rmc-xeno-fury-increase-user = We are overcome with rage!
 
+# Queen psychic communication
+rmc-xeno-psychic-whisper-message = Whisper to {$target}.
+rmc-xeno-psychic-whisper-sent = We whisper to {$target}.
+rmc-xeno-psychic-target-unknown = that mind
+rmc-xeno-psychic-radiance-message = Radiate a psychic message.
+rmc-xeno-psychic-radiance-no-targets = There are no nearby minds to radiate to.
+rmc-xeno-psychic-radiance-sent = We radiate our thoughts to {$count} nearby minds.
+rmc-xeno-psychic-give-order-message = Give an order to {$target}.
+rmc-xeno-psychic-give-order-must-watch = We must be watching a sister to give an order.
+rmc-xeno-psychic-give-order-sent = We give an order to {$target}.
+rmc-xeno-psychic-target-invalid = That mind is no longer within our reach.
+rmc-xeno-psychic-message-xeno = [color=#921992][font size=14][bold]The voice of {$queen} resonates in your head:[/bold] "{$message}"[/font][/color]
+rmc-xeno-psychic-message-alien = [color=#921992][font size=14][bold]You hear a strange, alien voice in your head:[/bold] "{$message}"[/font][/color]
+rmc-xeno-psychic-message-order = [color=#921992][font size=14][bold]{$queen} commands you:[/bold] "{$message}"[/font][/color]
+rmc-xeno-psychic-ghost-whisper = [color=#921992][font size=14][bold]Psychic Whisper ({$queen} -> {$target}):[/bold] "{$message}"[/font][/color]
+rmc-xeno-psychic-ghost-radiance = [color=#921992][font size=14][bold]Psychic Radiance ({$queen}, {$count} recipients):[/bold] "{$message}"[/font][/color]
+rmc-xeno-psychic-ghost-order = [color=#921992][font size=14][bold]Psychic Order ({$queen} -> {$target}):[/bold] "{$message}"[/font][/color]
+
 # Acid reserves
 rmc-xeno-not-enough-acid = We don't have enough acid built up!
 rmc-xeno-acid-increase-user = We feel your acid reserves increase!
