@@ -11,7 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - Colony
-  - SO
+  - ShipMasterAccess #cant be assed to check what the ipad is under
   - Rifleman
   spawnMenuRoleName: CLF Commander (PVE)
   special:
