@@ -11,7 +11,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects;
 
 public sealed partial class Painkilling : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageGroupPrototype> PoisonGroup = "Poison";
+    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
     private static readonly ProtoId<DamageGroupPrototype> AirlossGroup = "Airloss";
 
     private static readonly EntProtoId<StatusEffectComponent> SeeingRainbows = "StatusEffectSeeingRainbow";
@@ -41,7 +41,7 @@ public sealed partial class Painkilling : RMCChemicalEffect
         status.TrySetStatusEffectDuration(args.TargetEntity, SeeingRainbows, TimeSpan.FromSeconds(ActualPotency * 2));
 
         var damage = new DamageSpecifier();
-        damage.DamageDict[PoisonGroup] = potency * 2; // potency * delta_time at 13, delta_time cancels the effect that ticks at 13 are 2 times slower than at 14
+        damage.DamageDict[ToxinGroup] = potency * 2; // potency * delta_time at 13, delta_time cancels the effect that ticks at 13 are 2 times slower than at 14
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 

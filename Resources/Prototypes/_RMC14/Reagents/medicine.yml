@@ -150,6 +150,20 @@
         strength: 15
       - !type:Electrogenetic
         potency: 2
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 10.5
+        damage:
+          groups:
+            Toxin: 0.38
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        damage:
+          types:
+            Asphyxiation: 1.5
 
 # TODO heart damage over 100u
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
@@ -181,6 +195,10 @@
           types:
             Asphyxiation: -1
       - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+      - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 60

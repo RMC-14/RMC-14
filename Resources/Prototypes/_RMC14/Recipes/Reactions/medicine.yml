@@ -259,7 +259,7 @@
   products:
     CMOxycodone: 1
 
-- type:
+- type: reaction
   id: RMCLipozine
   reactants:
     TableSalt:
