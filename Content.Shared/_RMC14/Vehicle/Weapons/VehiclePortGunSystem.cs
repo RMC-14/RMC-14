@@ -55,6 +55,8 @@ public sealed class VehiclePortGunSystem : EntitySystem
 
         if (args.Popup)
             _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", ent)), args.Buckle, args.User);
+
+        args.Cancelled = true;
     }
 
     private void OnPortGunSeatUnstrapped(Entity<VehiclePortGunSeatComponent> ent, ref UnstrappedEvent args)
