@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using Content.Client._RMC14.Vehicle.Ui;
+using Content.Shared._RMC14.UserInterface;
 using Content.Shared._RMC14.Vehicle.Supply;
 using Robust.Client.Graphics;
 using Robust.Client.GameObjects;
@@ -12,7 +13,7 @@ using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Vehicle.Supply;
 
-public sealed class VehicleSupplyBui : BoundUserInterface
+public sealed class VehicleSupplyBui : BoundUserInterface, IRefreshableBui
 {
     private VehicleSupplyWindow? _window;
     private VehicleSupplyWindowController? _windowController;
