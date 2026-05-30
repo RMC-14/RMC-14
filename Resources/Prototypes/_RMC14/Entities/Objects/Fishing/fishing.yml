@@ -44,7 +44,7 @@
   components:
   - type: RMCFishingRod
   - type: Sprite
-    sprite: _RMC14/Objects/Fishing/fishing.rsi
+    sprite: _RMC14/Objects/Fishing/Rod/fishing_rod.rsi
     noRot: true
     layers:
     - state: pole_inhand
@@ -58,7 +58,7 @@
           False: { state: pole_inhand }
   - type: Item
     size: Large
-    sprite: _RMC14/Objects/Fishing/fishing.rsi
+    sprite: _RMC14/Objects/Fishing/Rod/fishing_rod.rsi
   - type: MeleeWeapon
     damage:
       types:
@@ -77,7 +77,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Fishing/fishing_line_visuals.rsi
+    sprite: _RMC14/Objects/Fishing/Effects/fishing_line.rsi
     drawdepth: Effects
   - type: Transform
     anchored: true
@@ -146,11 +146,11 @@
   components:
   - type: RMCFishBait
   - type: Sprite
-    sprite: _RMC14/Objects/Fishing/fishing_atoms.rsi
+    sprite: _RMC14/Objects/Fishing/Bait/bait.rsi
     state: worm_meat
   - type: Item
     size: Tiny
-    sprite: _RMC14/Objects/Fishing/fishing_atoms.rsi
+    sprite: _RMC14/Objects/Fishing/Bait/bait.rsi
 
 - type: entity
   parent: CMFoodBase
@@ -159,7 +159,7 @@
   components:
   - type: RMCFish
   - type: Sprite
-    sprite: _RMC14/Objects/Fishing/fishing_atoms.rsi
+    sprite: _RMC14/Objects/Fishing/Fish/fish.rsi
   - type: Appearance
   - type: Food
     transferAmount: 3
@@ -475,11 +475,11 @@
   description: A small pearl from a clam.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Fishing/fishing_atoms.rsi
+    sprite: _RMC14/Objects/Fishing/Loot/pearl.rsi
     state: pearl
   - type: Item
     size: Tiny
-    sprite: _RMC14/Objects/Fishing/fishing_atoms.rsi
+    sprite: _RMC14/Objects/Fishing/Loot/pearl.rsi
 
 - type: entity
   parent: TreasureDatadiskEncrypted

@@ -14,8 +14,8 @@
   - type: Food
     transferAmount: 3 # 3 bites
   - type: Sprite
-    sprite: _RMC14/Objects/Fishing/fish.rsi
-    state: fishfillet
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: rawfish
   - type: SolutionContainerManager
     solutions:
       food:
@@ -27,7 +27,7 @@
           Quantity: 1
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Fishing/fish.rsi
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -42,6 +42,7 @@
   description: Delicious crab meat.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: crab_meat
 
 - type: entity
@@ -51,6 +52,7 @@
   description: Delicious crab meat still attached to bits of shell.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: crab_meat_2
 
 - type: entity
@@ -60,6 +62,7 @@
   description: Mmm, calamari.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: squid_meat
 
 - type: entity
@@ -69,6 +72,7 @@
   description: Pink squishy meat from a squid-like creature.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: squid_meat_2
 
 - type: entity
@@ -78,6 +82,7 @@
   description: Sizeable hunks of cooking fish.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: bass_meat
 
 - type: entity
@@ -87,6 +92,7 @@
   description: Small strips of pan frying meat.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: bluegill_meat
 
 - type: entity
@@ -96,6 +102,7 @@
   description: Considered a fancy cut of fish.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: salmon_meat
 
 - type: entity
@@ -105,6 +112,7 @@
   description: Meat of an invasive fish, a little oily.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: white_perch_meat
 
 - type: entity
@@ -162,7 +170,7 @@
   - type: Food
     transferAmount: 5
   - type: Sprite
-    sprite: _RMC14/Objects/Fishing/fish.rsi
+    sprite: Objects/Consumable/Food/meals.rsi
     state: fishandchips
   - type: SolutionContainerManager
     solutions:
@@ -175,7 +183,7 @@
           Quantity: 5
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Fishing/fish.rsi
+    sprite: Objects/Consumable/Food/meals.rsi
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -195,7 +203,7 @@
   - type: Food
     transferAmount: 3
   - type: Sprite
-    sprite: _RMC14/Objects/Fishing/fish.rsi
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: fishfingers
   - type: SolutionContainerManager
     solutions:
@@ -206,7 +214,7 @@
           Quantity: 4
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Fishing/fish.rsi
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -227,7 +235,7 @@
   - type: Food
     transferAmount: 3
   - type: Sprite
-    sprite: _RMC14/Objects/Fishing/fish.rsi
+    sprite: Objects/Consumable/Food/meals.rsi
     state: cubancarp
   - type: SolutionContainerManager
     solutions:
@@ -240,7 +248,7 @@
           Quantity: 3
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Fishing/fish.rsi
+    sprite: Objects/Consumable/Food/meals.rsi
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -260,7 +268,7 @@
   - type: Food
     transferAmount: 2
   - type: Sprite
-    sprite: _RMC14/Objects/Fishing/fish.rsi
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
     state: fish_snacks_meat
   - type: SolutionContainerManager
     solutions:
@@ -271,7 +279,7 @@
           Quantity: 2
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Fishing/fish.rsi
+    sprite: _RMC14/Objects/Fishing/Food/fish.rsi
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
