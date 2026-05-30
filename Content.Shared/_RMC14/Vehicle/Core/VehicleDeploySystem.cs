@@ -107,16 +107,34 @@ public sealed class VehicleDeploySystem : EntitySystem
         if (actionComp.Vehicle != vehicle)
             return;
 
-        if (actionComp.Action != null)
-            _actions.RemoveAction(user, actionComp.Action.Value);
+        if (actionComp.Action is { } action)
+        {
+            RemoveAndDeleteDeployAction(user, action);
+            actionComp.Action = null;
+        }
 
         RemCompDeferred<VehicleDeployActionComponent>(user);
     }
 
     private void OnDeployActionShutdown(Entity<VehicleDeployActionComponent> ent, ref ComponentShutdown args)
     {
-        if (ent.Comp.Action != null)
-            _actions.RemoveAction(ent.Owner, ent.Comp.Action.Value);
+        if (ent.Comp.Action is { } action)
+            RemoveAndDeleteDeployAction(ent.Owner, action);
+    }
+
+    private void RemoveAndDeleteDeployAction(EntityUid user, EntityUid action)
+    {
+        if (TerminatingOrDeleted(action))
+            return;
+
+        _actions.RemoveAction(user, action);
+
+        // The action entity is networked; client-side queued deletion causes prediction errors.
+        if (_net.IsClient)
+            return;
+
+        if (Exists(action))
+            QueueDel(action);
     }
 
     private void OnDeployAction(Entity<VehicleDeployActionComponent> ent, ref VehicleDeployActionEvent args)
