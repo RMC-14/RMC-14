@@ -91,6 +91,7 @@
       components:
       - RMCWallExplosionDeletable
       - XenoTunnel
+      - MobState
   - type: RMCExplosiveDelete
     delay: 10
     beepSound:
