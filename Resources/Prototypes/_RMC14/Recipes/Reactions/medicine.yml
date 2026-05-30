@@ -258,6 +258,8 @@
       catalyst: true
   products:
     CMOxycodone: 1
+
+- type:
   id: RMCLipozine
   reactants:
     TableSalt:
