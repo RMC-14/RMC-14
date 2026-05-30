@@ -63,8 +63,12 @@
     radius: 1.5
   - type: LitOnPowered
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 10
+    activeLoad: 0
+    channel: Equipment # TODO RMC14 vend_power_usage: 150
   - type: Appearance
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/generic.rsi
@@ -680,13 +684,18 @@
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
     - state: "normal-unshaded"
-      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
       shader: unshaded
     - state: "panel"
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0
+    needsPower: true # TODO RMC14
+    powerLoad: 250
+  - type: RMCPowerReceiver
+    idleLoad: 10
+    activeLoad: 0
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Appearance
   - type: LitOnPowered
   - type: Wires
