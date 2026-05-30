@@ -1,5 +1,4 @@
 # Fiorina
-# TODO RMC14 missing sprinkles: Basketball (20%) Research Pristine (25%) Pool Party (20%) Pizza Time (30%) Repair Panels LZ (30%) Scav Ship Holder (10%) Engineer Office (30%) Warden Office Decorated (15%) Gamer Time (20%)
 
 - type: entity
   abstract: true
@@ -48,6 +47,108 @@
     - spawn: "/Maps/_RMC14/Inserts/Fiorina/nogear.yml"
       probability: 0.15
       nightmareScenario: none
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaRepairPanelsLZ
+  name: Repair Panels LZ
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/repairpanelslz.yml"
+      probability: 0.3
+      offset: -1, 0
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaYardBasketball
+  name: Yard Basketball
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/yardbasketball.yml"
+      probability: 0.2
+      offset: 1, 0
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaResearchPristine
+  name: Research Pristine
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/researchprestine.yml"
+      probability: 0.25
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaPizzaTime
+  name: Pizza Time
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/pizzatime.yml"
+      probability: 0.3
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaScavShipHolder
+  name: Scav Ship Holder
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/scavshipholder.yml"
+      probability: 0.1
+      offset: -1, -1
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaPoolParty
+  name: Pool Party
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/poolparty.yml"
+      probability: 0.2
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaEngineerOffice
+  name: Engineer Office
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/engineeroffice.yml"
+      probability: 0.3
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaWardenOfficeDecorated
+  name: Warden Office Decorated
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/wardenofficedecorated.yml"
+      probability: 0.15
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaGamerTime
+  name: Gamer Time
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/gamertime.yml"
+      probability: 0.2
 
 # Standalone
 
