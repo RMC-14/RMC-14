@@ -388,7 +388,7 @@ public sealed class RMCPullingSystem : EntitySystem
         if (!HasComp<XenoComponent>(currentPuller) ||
             HasComp<XenoComponent>(args.Pulled) ||
             !_xenoHive.FromSameHive(args.Puller, currentPuller) ||
-            _hiveLeader.IsLeader(args.Puller, out _) ||
+            HasComp<HiveLeaderComponent>(args.Puller) ||
             HasComp<XenoEvolutionGranterComponent>(args.Puller))
         {
             return;
