@@ -412,6 +412,7 @@
   - type: StorageSkillRequired
     skills:
       RMCSkillMedical: 2
+
 - type: entity
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterImidazolineNoSkill
