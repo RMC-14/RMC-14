@@ -71,16 +71,8 @@
     nightmareScenarios:
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
-    - scenarioName: solaris_surv_spawn_admin # 80% chance of regular surv. Reduce to 70% (0.14 each) once CLF survs are in.
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_bar
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_office
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_south_marshals
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_storage
-      scenarioProbability: 0.16
+    - scenarioName: none # 80% chance of regular surv. Reduce to 70% once CLF survs are in.
+      scenarioProbability: 0.8
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
@@ -264,14 +256,8 @@
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
     nightmareScenarios:
-    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF survivors are in
-      scenarioProbability: 0.15
-    - scenarioName: trijent_surv_spawn_hospital
-      scenarioProbability: 0.15
-    - scenarioName: trijent_surv_spawn_dam
-      scenarioProbability: 0.15
-    - scenarioName: trijent_surv_spawn_tunneldorm
-      scenarioProbability: 0.15
+    - scenarioName: none # Reduce this to 0.5 once CLF survivors are in
+      scenarioProbability: 0.6
     - scenarioName: spp_bar
       scenarioProbability: 0.4
     survivorJobVariants:
