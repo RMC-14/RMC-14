@@ -7,6 +7,7 @@
   ranks:
     RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorScientist
+  icon: "RMCJobIconGenericColonistResearcher"
   accessGroups:
   - ColonistMedical
   basePlaytimeTracker: true
@@ -71,7 +72,7 @@
   name: scientist colonist preset # TODO RMC14 random research notes and vial
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGearOther:
     -
       - [ RMCMotionDetector ]

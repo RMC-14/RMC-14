@@ -70,7 +70,7 @@
   name: infrastructure engineer preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCJumpsuitCivilian ]
     - [ RMCJumpsuitCivilianBrown ]

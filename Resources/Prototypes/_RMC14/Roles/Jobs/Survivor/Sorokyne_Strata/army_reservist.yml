@@ -73,7 +73,7 @@
   name: people's armed police officer preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGear:
     - [ RMCGrenadeMolotov ]
     - [ CMPackFlare ]

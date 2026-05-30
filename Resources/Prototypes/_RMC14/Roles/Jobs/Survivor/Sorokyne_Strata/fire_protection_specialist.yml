@@ -69,7 +69,7 @@
   name: fire protection specialist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCFireAxe ]
     - [ CMFireExtinguisherPortable ]

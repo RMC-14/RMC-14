@@ -58,7 +58,7 @@
   name: emt paramedic preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
     - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
