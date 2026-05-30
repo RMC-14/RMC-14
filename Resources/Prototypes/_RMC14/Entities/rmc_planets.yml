@@ -221,6 +221,8 @@
     - scenarioName: none
       scenarioProbability: 0.85
     survivorJobVariants:
+      RMCSurvivorCommandingOfficer:
+      - CMSurvivorFiorinaWarden: 1
       CMSurvivor:
       - CMSurvivor: -1
       - CMSurvivorISR: -1
@@ -253,6 +255,7 @@
         CMSurvivorEngineer: CMSurvivor
         CMSurvivorDoctor: CMSurvivor
         CMSurvivorScientist: CMSurvivor
+        RMCSurvivorCommandingOfficer: CMSurvivorSecurity
 
 - type: entity
   id: RMCPlanetTrijent

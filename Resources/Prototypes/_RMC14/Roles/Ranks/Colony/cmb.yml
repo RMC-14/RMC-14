@@ -5,6 +5,12 @@
   paygrade: CMBD
 
 - type: rank
+  id: RMCRankCMBWarden
+  name: CMB Warden
+  prefix: Ward.
+  paygrade: CMBW
+
+- type: rank
   id: RMCRankCMBMarshal
   name: CMB Marshal
   prefix: Marshal

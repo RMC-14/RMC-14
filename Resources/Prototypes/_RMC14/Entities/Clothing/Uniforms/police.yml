@@ -81,6 +81,18 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/corporate.rsi
 
 - type: entity
+  parent: CMJumpsuitWardenCorporate
+  id: CMJumpsuitWardenCorporateRSH9
+  suffix: RSH-9
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackRSH9
+  - type: Tag
+    tags:
+    - RMCUniformMarine
+    - RMCUniformUNSecurity
+
+- type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitWardenNavy
   name: navy warden uniform

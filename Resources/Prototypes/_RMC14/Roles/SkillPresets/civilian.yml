@@ -50,6 +50,26 @@
       RMCSkillFireman: 2
 
 - type: entity
+  id: RMCSkillPresetSurvivorFiorinaWarden
+  name: Survivor Fiorina Prison Warden
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 1
+      RMCSkillCqc: 2
+      RMCSkillEndurance: 3
+      RMCSkillEngineer: 1
+      RMCSkillMeleeWeapons: 1
+      RMCSkillMedical: 1
+      RMCSkillFirearms: 2
+      RMCSkillFireman: 2
+      RMCSkillLeadership: 1
+      RMCSkillOverwatch: 1
+      RMCSkillPolice: 1
+      RMCSkillExecution: 1
+
+- type: entity
   parent: RMCSkillPresetSurvivorMarshal
   id: RMCSkillPresetSurvivorRiotControlTeamLeader
   name: Survivor CMB Riot Control Team Leader
