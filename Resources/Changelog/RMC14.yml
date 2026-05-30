@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Fixed the stethoscope falsely claiming that larva burst victims were
-      still alive.
-    type: Fix
-  id: 2734
-  time: '2026-01-11T10:42:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8846
 - author: XxSWAG-MASTER-OVERLORDxX
   changes:
   - message: Executive Bodyguard Synth now says its a synth in "Spawn here as job"
@@ -4484,5 +4476,13 @@
   id: 3233
   time: '2026-05-30T18:24:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9860
+- author: kleinerstation13
+  changes:
+  - message: Ported the Bobda Vending Machine Bag. The yummy portable treat dispenser
+      can be found somewhere in your local orbital penitentiary.
+    type: Add
+  id: 3234
+  time: '2026-05-30T21:43:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9961
 Name: RMC14
 Order: -1
