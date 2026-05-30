@@ -175,3 +175,27 @@
   - type: Construction
     graph: RMCFenceOvergrown
     node: rmcFenceBroken
+
+- type: entity
+  parent: CMFence
+  id: RMCFenceSPP
+  suffix: SPP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fences_spp.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceSPP
+    node: fenceMetal
+
+- type: entity
+  parent: RMCFenceBroken
+  id: RMCFenceSPPBroken
+  suffix: SPP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fences_spp.rsi
+    state: brokenfence0
+  - type: Construction
+    graph: RMCFenceSPP
+    node: rmcFenceBroken
