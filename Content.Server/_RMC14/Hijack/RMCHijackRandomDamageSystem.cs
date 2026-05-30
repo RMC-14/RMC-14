@@ -206,6 +206,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
             if (!comp.Enabled ||
                 comp.Category != RMCHijackRandomDamageCategory.Pipe ||
                 xform.MapUid != map ||
+                !xform.Anchored ||
                 _usedPipeTargets.Contains(uid) ||
                 _pendingPipeTargets.Contains(uid))
             {
@@ -235,8 +236,13 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     /// </summary>
     private void StartPipeWarning(EntityUid pipe)
     {
-        if (Deleted(pipe) || !TryComp(pipe, out TransformComponent? xform) || !_usedPipeTargets.Add(pipe))
+        if (Deleted(pipe) ||
+            !TryComp(pipe, out TransformComponent? xform) ||
+            !xform.Anchored ||
+            !_usedPipeTargets.Add(pipe))
+        {
             return;
+        }
 
         _pendingPipeTargets.Add(pipe);
         Spawn(PipeExplosionWarning, _transform.GetMoverCoordinates(pipe, xform));
@@ -252,8 +258,13 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     {
         _pendingPipeTargets.Remove(pipe);
 
-        if (Deleted(pipe) || !TryComp(pipe, out TransformComponent? xform) || xform.MapUid == null)
+        if (Deleted(pipe) ||
+            !TryComp(pipe, out TransformComponent? xform) ||
+            xform.MapUid == null ||
+            !xform.Anchored)
+        {
             return;
+        }
 
         var coordinates = _transform.GetMoverCoordinates(pipe, xform);
         var mapCoordinates = _transform.GetMapCoordinates(pipe, xform);
