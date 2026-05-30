@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Alt-clicking a target dummy allows adjusting its armor values.
-    type: Add
-  - message: Hitting a target dummy or humanoid with the XM88 now grants a stack.
-    type: Tweak
-  - message: Target dummies can now be lit on fire and extinguished.
-    type: Tweak
-  id: 2733
-  time: '2026-01-11T10:45:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8662
 - author: Arykh
   changes:
   - message: Fixed the stethoscope falsely claiming that larva burst victims were
@@ -4485,5 +4474,15 @@
   id: 3232
   time: '2026-05-29T00:51:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9875
+- author: JustMyselfUwU
+  changes:
+  - message: Fixed xenos being able to interact with defibrillators, health analyzers,
+      briefcases, blowtorches, potted plants, weapons, magazines, MDs and DDs, T-ray
+      scanners, bibles and other holy texts, welding goggles and masks, chairs, caps
+      and headbands.
+    type: Fix
+  id: 3233
+  time: '2026-05-30T18:24:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9860
 Name: RMC14
 Order: -1
