@@ -95,7 +95,7 @@ public sealed class XenoPsychicCommunicationSystem : EntitySystem
         SendQueenConfirmation(queen, Loc.GetString("rmc-xeno-psychic-whisper-sent", ("target", QueenTargetName(queen, target.Value))));
         var escaped = FormattedMessage.EscapeText(text);
         SendGhostCopy(queen, text, Loc.GetString("rmc-xeno-psychic-ghost-whisper", ("queen", queen.Owner), ("target", target.Value), ("message", escaped)));
-        _adminLog.Add(LogType.Chat, LogImpact.Low, $"Psychic whisper from {ToPrettyString(queen):user} to {ToPrettyString(target.Value):target}: {text}");
+        _adminLog.Add(LogType.RMCXenoPsychic, LogImpact.Low, $"Psychic whisper from {ToPrettyString(queen):user} to {ToPrettyString(target.Value):target}: {text}");
         _actions.StartUseDelay(action);
     }
 
@@ -147,7 +147,7 @@ public sealed class XenoPsychicCommunicationSystem : EntitySystem
         SendQueenConfirmation(queen, Loc.GetString("rmc-xeno-psychic-radiance-sent", ("count", recipients.Count)));
         var escaped = FormattedMessage.EscapeText(text);
         SendGhostCopy(queen, text, Loc.GetString("rmc-xeno-psychic-ghost-radiance", ("queen", queen.Owner), ("count", recipients.Count), ("message", escaped)));
-        _adminLog.Add(LogType.Chat, LogImpact.Low, $"Psychic radiance from {ToPrettyString(queen):user} to {recipients.Count} recipients: {text}");
+        LogPsychicRadiance(queen, recipients, text);
         _actions.StartUseDelay(action);
     }
 
@@ -197,7 +197,7 @@ public sealed class XenoPsychicCommunicationSystem : EntitySystem
         SendQueenConfirmation(queen, Loc.GetString("rmc-xeno-psychic-give-order-sent", ("target", target.Value)));
         var escaped = FormattedMessage.EscapeText(text);
         SendGhostCopy(queen, text, Loc.GetString("rmc-xeno-psychic-ghost-order", ("queen", queen.Owner), ("target", target.Value), ("message", escaped)));
-        _adminLog.Add(LogType.Chat, LogImpact.Low, $"Psychic order from {ToPrettyString(queen):user} to {ToPrettyString(target.Value):target}: {text}");
+        _adminLog.Add(LogType.RMCXenoPsychic, LogImpact.Low, $"Psychic order from {ToPrettyString(queen):user} to {ToPrettyString(target.Value):target}: {text}");
         _actions.StartUseDelay(action);
     }
 
@@ -363,6 +363,17 @@ public sealed class XenoPsychicCommunicationSystem : EntitySystem
             colorOverride: PsychicColor,
             recordReplay: true,
             author: author);
+    }
+
+    private void LogPsychicRadiance(Entity<XenoPsychicCommunicationComponent> queen, List<EntityUid> recipients, string message)
+    {
+        foreach (var recipient in recipients)
+        {
+            _adminLog.Add(
+                LogType.RMCXenoPsychic,
+                LogImpact.Low,
+                $"Psychic radiance from {ToPrettyString(queen):user} to {ToPrettyString(recipient):target} ({recipients.Count} recipients total): {message}");
+        }
     }
 
     private bool IsSameHiveXeno(Entity<XenoPsychicCommunicationComponent> queen, EntityUid target)
