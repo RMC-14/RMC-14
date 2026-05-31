@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TheBlueYowie
-  changes:
-  - message: Updated recommendations and ordering in CT gear vendor
-    type: Tweak
-  id: 2757
-  time: '2026-01-13T08:51:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8944
 - author: Dygon
   changes:
   - message: Xeno projectiles no longer have slightly more range than intended.
@@ -4500,5 +4493,15 @@
   id: 3256
   time: '2026-05-31T03:36:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9922
+- author: kleinerstation13
+  changes:
+  - message: All survivor variants (FORECON, SPP SOF) now have suit storage whitelist.
+    type: Tweak
+  - message: SPP Airborne survivor variants are now correctly assigned to the SPP
+      squad upon spawning in.
+    type: Fix
+  id: 3257
+  time: '2026-05-31T03:45:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9621
 Name: RMC14
 Order: -1
