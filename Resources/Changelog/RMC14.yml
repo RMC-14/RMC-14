@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added roundstart briefings for liaisons on certain planets! Check your
-      fax machine, liaisons.
-    type: Add
-  - message: Added a paper with the Weston-Yamada logo to the Liaison vendor briefcase.
-    type: Add
-  id: 2751
-  time: '2026-01-13T08:47:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8707
 - author: texas1234567889
   changes:
   - message: Added the two missing black market crates to Chance's Claim.
@@ -4497,5 +4487,14 @@
   id: 3250
   time: '2026-05-31T03:07:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9913
+- author: IceNoobXD
+  changes:
+  - message: Added medical, science, security, and virology biosuit variants!
+    type: Add
+  - message: Added OT and security EOD suit variants!
+    type: Add
+  id: 3251
+  time: '2026-05-31T03:10:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9604
 Name: RMC14
 Order: -1
