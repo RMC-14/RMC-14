@@ -30,9 +30,7 @@
     - type: MarineOrders
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadSPP
+      squad: SquadSPP
     - type: JobPrefix
       prefix: rmc-job-prefix-crashland-sl
     - type: SquadLeader
@@ -47,7 +45,9 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: QYJWhitelist
     - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
   hidden: true
 
 - type: startingGear
