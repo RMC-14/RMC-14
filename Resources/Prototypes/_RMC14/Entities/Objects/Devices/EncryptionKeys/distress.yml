@@ -42,6 +42,19 @@
   - type: Sprite
     state: cap_key
 
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyCLF
+  name: Milita encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - CLF
+    - Colony
+    defaultChannel: CLF
+  - type: Sprite
+    state: cap_key
+
 # ERT
 - type: entity
   parent: CMEncryptionKey

@@ -9,6 +9,7 @@
   startingGear: RMCJobCLFStandardPVE
   icon: CMJobIconEmpty
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-clf-capt-deckoff
   accessGroups:
   - Colony
   - Rifleman
@@ -21,6 +22,8 @@
       - CLF
     - type: Skills
       preset: RMCSkillPresetPVERifleman
+    - type: AssignSquad
+      squad: SquadCLF
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-pve-standard

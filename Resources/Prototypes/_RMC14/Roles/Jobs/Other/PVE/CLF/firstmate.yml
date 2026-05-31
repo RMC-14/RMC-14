@@ -1,19 +1,22 @@
 - type: job
   parent: CMJobBase
-  id: RMCCLFDoctorPVE
-  name: rmc-job-name-clf-pve-doctor
+  id: RMCCLFLeaderPVE
+  name: rmc-job-name-clf-pve-leader
   description: rmc-ghost-role-information-clf-pve-description
-  playTimeTracker: CMJobCLFDoctorPVE
+  playTimeTracker: RMCJobCLFLeaderPVE
   ranks:
-    RMCRankCivilianDoctor: []
-  startingGear: RMCJobCLFDoctorPVE
-  icon: RMCJobIconCLFMedic
+    RMCRankPVECLFLeader: []
+  startingGear: RMCJobCLFLeaderPVE
+  icon: RMCJobIconCLFCellLeader
+  supervisors: cm-job-supervisors-royal-captain
+  marineAuthorityLevel: 1
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-clf-capt-deckoff
   accessGroups:
   - Colony
-  - HospitalCorpsman
-  spawnMenuRoleName: CLF Doctor (PVE)
+  - SquadLeader
+  - Rifleman
+  spawnMenuRoleName: CLF Ship Cell Leader (PVE)
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,12 +24,15 @@
       factions:
       - CLF
     - type: Skills
-      preset: RMCSkillPresetPVECLFDoctor
+      preset: RMCSkillPresetPVESquadLeader
     - type: SquadArmorWearer
     - type: AssignSquad
       squad: SquadCLF
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-pve-doctor
+      prefix: rmc-job-prefix-clf-pve-leader
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -36,23 +42,23 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointCLFDoctorPVE
-  name: clf doctor spawn point
+  id: RMCSpawnPointCLFleaderPVE
+  name: clf leader spawn point
   suffix: PVE
   components:
   - type: SpawnPoint
-    job_id: RMCCLFDoctorPVE
+    job_id: RMCCLFLeaderPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: clf_spawn
 
 - type: startingGear
-  id: RMCJobCLFDoctorPVE
+  id: RMCJobCLFLeaderPVE
   equipment:
-    id: RMCIDCardCLFDoctorPVE
-    jumpsuit: RMCJumpsuitCLFPVEDoctor
+    id: RMCIDCardCLFLeaderPVE
+    jumpsuit: RMCJumpsuitCLFPVELead
     shoes: RMCShoesCombat
     ears: RMCHeadsetDistressCLFPVE
 
 - type: playTimeTracker
-  id: CMJobCLFDoctorPVE
+  id: CMJobCLFLeaderPVE

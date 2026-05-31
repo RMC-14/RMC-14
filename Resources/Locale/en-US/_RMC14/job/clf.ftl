@@ -35,8 +35,8 @@ rmc-job-name-clf-pve-commander = Cell Captain
 rmc-job-prefix-clf-pve-commander = Capt.
 
 rmc-ghost-role-clf-pve-leader = CLF Cell Leader (PVE)
-rmc-job-name-clf-pve-leader = Cell First Mate
-rmc-job-prefix-clf-clf-pve-leader = 1/O
+rmc-job-name-clf-pve-leader = Cell Deck Officer
+rmc-job-prefix-clf-clf-pve-leader = CDO
 
 rmc-ghost-role-clf-pve-doctor = CLF Doctor (PVE)
 rmc-job-name-clf-pve-doctor = Doctor
@@ -46,6 +46,6 @@ rmc-ghost-role-clf-pve-heavy-gunner = CLF Heavy Gunner (PVE)
 rmc-job-name-clf-pve-heavy-gunner = Heavy Gunner
 rmc-job-prefix-clf-pve-heavy-gunner = Hvy. Gnr.
 
-rmc-ghost-role-clf-pve-standard = CLF Standard (PVE)
+rmc-ghost-role-clf-pve-standard = CLF Soldier (PVE)
 rmc-job-name-clf-pve-standard = Irregular Soldier
 rmc-job-prefix-clf-pve-standard = GRL

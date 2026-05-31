@@ -202,6 +202,15 @@
   tower: true
 
 - type: radioChannel
+  id: CLF
+  name: chat-radio-CLF
+  keycode: "!"
+  frequency: 2891
+  color: "#3aeb34"
+  longRange: true
+  tower: true
+
+- type: radioChannel
   id: Hivemind
   name: chat-radio-hivemind
   keycode: "h"

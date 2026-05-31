@@ -9,6 +9,7 @@
   startingGear: RMCJobCLFHeavyGunnerPVE
   icon: RMCJobIconCLFSpecialist
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-clf-capt-deckoff
   accessGroups:
   - Colony
   - SmartGunOperator
@@ -22,6 +23,8 @@
     - type: Skills
       preset: RMCSkillPresetPVESGO
     - type: SquadArmorWearer
+    - type: AssignSquad
+      squad: SquadCLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-pve-heavy-gunner
     - type: DemoSpecWhitelist

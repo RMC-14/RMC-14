@@ -28,6 +28,24 @@
   id: RMCHeadsetDistressCLF
   name: CLF headset
   description: A special headset used by small groups of trained operatives. Or terrorists.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyCLF
+
+- type: entity
+  parent: RMCHeadsetDistressCLF
+  id: RMCHeadsetDistressCLFPVE
+  name: Cell headset
+  description: A special headset used by crew members of a certain transort ship.
+  components:
+  - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+    defaultMode: PVECLFCapt
+    trackerModes:
+    - PVECLFCapt
+    - PVECLFDeckOff
 
 # For Bureau Marshals
 - type: entity
@@ -251,7 +269,7 @@
     trackerModes:
     - SquadLeader
     - FORECONCommandingOfficer
-      
+
 # Paramarine Hybrisa survivor insert
 - type: entity
   parent: RMCHeadsetIconsPara
@@ -289,7 +307,7 @@
       radioTextIncrease: 2
     - type: GrantSquadLeaderTracker
       defaultMode: ParaCommander
-          
+
 - type: entity
   parent: RMCHeadsetPara
   id: RMCHeadsetParaOfficer
@@ -339,7 +357,7 @@
 - type: entity
   parent: RMCHeadsetColonyIcons
   id: RMCHeadsetSPPCrashland
-  name: SPP 173/Airborne headset 
+  name: SPP 173/Airborne headset
   description: A headset used by members of the 173rd Airborne Reconnaissance unit.
   components:
   - type: ContainerFill
