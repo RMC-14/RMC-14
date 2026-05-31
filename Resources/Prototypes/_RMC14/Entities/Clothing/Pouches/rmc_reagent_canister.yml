@@ -2,7 +2,7 @@
   parent: RMCPouchStorage
   id: RMCPouchReagentCanister
   name: pressurized reagent canister pouch
-  description: A pressurized reagent canister pouch. It is used to refill custom injectors, and can also store one. May be refilled with a reagent tank or a Chemical Dispenser. Can be worn by attaching it to a pocket.
+  description: A pressurized reagent canister pouch. It is used to refill custom injectors, and can also store one. May be refilled with a reagent tank or a Chemical Dispenser. Can be worn by attaching it to a pocket. Requires medical training to use.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/pressurized_reagent_canister.rsi
@@ -66,6 +66,9 @@
       RMCPlastic: 2000
   - type: StaticPrice
     price: 24
+  - type: EquipRequiresSkill
+    skills:
+      RMCSkillMedical: 2
 
 - type: entity
   parent: RMCPouchReagentCanister
@@ -174,3 +177,73 @@
           tags:
           - PressurizedCanister
         insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchStorage
+  id: RMCPouchSmartTankAdapter
+  name: EZ smart refill tank adapter pouch
+  description: An Adapter for the EZ Smart refill tank, Allowing it to be used with Custom Injectors it would otherwise not be compatible with. Once a Smart Refill Tank is clipped into the adapter, it can be used to refill custom injectors, and can also store one. Can be worn by attaching it to a pocket. 
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/smart_tank_adapter.rsi
+    layers:
+    - state: icon
+    - state: closed
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: loaded
+      map: [ "loaded" ]
+    - state: reagent
+      map: [ "enum.SolutionContainerStoreVisuals.Base" ]
+      visible: false
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCAutoInjectorMedical
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorEZ15
+  - type: ContainerContainer
+    containers:
+      mini_canister: !type:ContainerSlot
+      storagebase: !type:Container
+  - type: ItemSlots
+    slots:
+      mini_canister:
+        name: Canister
+        startingItem: CMMiniTank
+        whitelist:
+          tags:
+          - RMCMiniTank
+        insertOnInteract: true
+  - type: ItemMapper
+    mapLayers:
+      loaded:
+        whitelist:
+          tags:
+          - RMCMiniTank
+  - type: RMCStorageEjectHand
+    state: Last
+  - type: RMCRefillSolutionOnStore
+  - type: RMCRefillSolutionFromContainerOnStore
+    containerId: mini_canister
+    canFlush: true
+  - type: ReagentExaminationRequiresSkill
+    containerId: mini_canister
+    noContainerExamine: rmc-reagent-pouch-no-canister
+    unskilledExamine: rmc-reagent-pouch-unskilled
+    skilledExamineContains: rmc-reagent-pouch-examine-contains
+    skilledExamineNone: rmc-reagent-pouch-examine-empty
+    skills:
+      RMCSkillMedical: 1
+  - type: Appearance
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+  - type: PhysicalComposition
+    materialComposition: # Generates glass if canister is ejected and recycled. Parity behavior btw.
+      CMGlass: 2000 # +0.4 glass -0.25 plastic sheets.
+      RMCPlastic: 2000
+  - type: StaticPrice
+    price: 24
