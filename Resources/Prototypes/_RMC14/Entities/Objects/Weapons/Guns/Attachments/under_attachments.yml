@@ -52,7 +52,7 @@
       - RMCFlareL96
       - RMCFlareR44
       - RMCFlareC18
-    capacity: 1
+    capacity: 3
     proto: CMFlare
     soundInsert:
       collection: CMShotgunLoad
