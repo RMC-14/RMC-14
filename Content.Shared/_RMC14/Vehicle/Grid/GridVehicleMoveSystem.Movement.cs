@@ -185,7 +185,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             }
             else if (TryApplyFacing(uid, mover, grid, gridComp, inputDir, startDelay: true, blockAfterTurn: false, allowMoveClearance: true))
             {
-                facing = mover.CurrentDirection;
             }
             else if (MathF.Abs(mover.CurrentSpeed) <= MinVehicleSpeed)
             {
@@ -360,11 +359,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 if (!_bypassInitialBlockers.Contains(blocker))
                     return false;
             }
-
-            if (_bypassSampleBlockers.Count > 0)
-                continue;
-
-            return false;
         }
 
         return false;
@@ -841,6 +835,20 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         HashSet<EntityUid>? ignoredEntities = null)
     {
         blocked = false;
+        var start = mover.Position;
+        var delta = target - start;
+        var distance = delta.Length();
+
+        if (applyBlockEffects && distance > MinMoveDistance)
+        {
+            var probeStep = Math.Clamp(mover.MovementProbeStep, 0.02f, 0.5f);
+            var steps = Math.Max(1, (int)MathF.Ceiling(distance / probeStep));
+            for (var i = 1; i < steps; i++)
+            {
+                var candidate = start + delta * (i / (float)steps);
+                CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: true, debug: false, ignoredEntities: ignoredEntities);
+            }
+        }
 
         if (applyBlockEffects &&
             !CanOccupyTransform(uid, mover, grid, target, rotation, Clearance, applyEffects: true, debug: false, ignoredEntities: ignoredEntities))

@@ -191,7 +191,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         TrySyncMoverToCurrentGrid(ent, centerOnTile: false);
     }
 
-    // Vehicle traversal can change grids through several engine paths. Keep all resync logic in one place.
     private bool TrySyncMoverToCurrentGrid(
         Entity<GridVehicleMoverComponent> ent,
         bool centerOnTile,
@@ -212,7 +211,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             ent.Comp.IsCommittedToMove = false;
             ent.Comp.IsPushMove = false;
             ent.Comp.IsMoving = false;
-                _movementAccumulator[uid] = 0f;
+            _movementAccumulator[uid] = 0f;
             Dirty(uid, ent.Comp);
             return true;
         }
