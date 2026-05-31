@@ -83,6 +83,8 @@ public sealed class XenoLeapSystem : EntitySystem
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<FixturesComponent> _fixturesQuery;
 
+    private bool _logPrediction = false;
+
     public override void Initialize()
     {
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
@@ -597,6 +599,25 @@ public sealed class XenoLeapSystem : EntitySystem
 
         if (_net.IsClient)
         {
+            if (_logPrediction)
+            {
+                // Leap code causes this to spam the console a bit
+                TryComp(xeno, out TransformComponent? leaperTransform);
+                TryComp(target, out TransformComponent? targetTransform);
+                Log.Debug($"""
+                    SENDING PREDICTED LEAP HIT!!
+                      CurTick:        {_timing.CurTick}
+                      LastRealTick:   {_rmcLagCompensation.GetLastRealTick(null)}
+                      Phys Substep:   {_rmcLagCompensation.GetCurrentSubstep()}
+                      In simulation?  {_timing.InSimulation}
+                      ApplyingState?  {_timing.ApplyingState}
+                      FirstTimePred?  {_timing.IsFirstTimePredicted}
+                      Substep:        {_rmcLagCompensation.GetClientSubstep()}
+                      Leaper Coords:  {leaperTransform?.Coordinates}
+                      Target Coords:  {targetTransform?.Coordinates}
+                    """);
+            }
+
             var predictedEv = new XenoLeapPredictedHitEvent(
                 GetNetEntity(target),
                 _rmcLagCompensation.GetLastRealTick(null),

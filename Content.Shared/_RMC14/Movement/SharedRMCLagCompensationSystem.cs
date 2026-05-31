@@ -23,6 +23,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
     public float MarginTiles { get; private set; }
 
     private EntityQuery<ActorComponent> _actorQuery;
+    private EntityQuery<FixturesComponent> _fixturesQuery;
     private int _substeps;
     private float _substepTime;
     private bool _logPrediction = false;
@@ -35,6 +36,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         base.Initialize();
 
         _actorQuery = GetEntityQuery<ActorComponent>();
+        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         SubscribeNetworkEvent<RMCSetLastRealTickEvent>(OnSetLastRealTick);
 
@@ -55,6 +57,17 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         var serverTickrate = (float)_config.GetCVar(CVars.NetTickrate);
         _substeps = (int)Math.Ceiling(targetMinTickrate / serverTickrate);
         _substepTime = 1.0f / serverTickrate / _substeps;
+    }
+
+    private float AABBDistanceSquared(Box2 a, Box2 b)
+    {
+        var xDist = Math.Max(a.Left - b.Right, b.Left - a.Right);
+        var yDist = Math.Max(a.Bottom - b.Top, b.Bottom - a.Top);
+
+        xDist = Math.Max(0, xDist);
+        yDist = Math.Max(0, yDist);
+
+        return xDist * xDist + yDist * yDist;
     }
 
     public virtual (EntityCoordinates Coordinates, Angle Angle) GetCoordinatesAngle(EntityUid uid,
@@ -141,7 +154,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         var substeppedProjectilePos = projectileCoordinates.Position + (projectileVelocity / _timing.TickRate) * (substep / (float)_substeps);
 
         var transform = new Transform(targetCoordinates.Position, 0);
-        var bounds = new Box2(transform.Position, transform.Position);
+        var targetBounds = new Box2(transform.Position, transform.Position);
 
         foreach (var fixture in target.Comp.Fixtures.Values)
         {
@@ -151,7 +164,24 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
             for (var i = 0; i < fixture.Shape.ChildCount; i++)
             {
                 var boundy = fixture.Shape.ComputeAABB(transform, i);
-                bounds = bounds.Union(boundy);
+                targetBounds = targetBounds.Union(boundy);
+            }
+        }
+
+        var projectileTransform = new Transform(substeppedProjectilePos, 0);
+        var projectileBounds = new Box2(projectileTransform.Position, projectileTransform.Position);
+
+        if (_fixturesQuery.TryComp(projectile, out var projFixtureComp))
+        {
+            foreach (var fixture in projFixtureComp.Fixtures.Values)
+            {
+                // TODO RMC14 maybe be more selective on which fixtures to include?
+                // Don't think it's a problem right now though.
+                for (var i = 0; i < fixture.Shape.ChildCount; i++)
+                {
+                    var boundy = fixture.Shape.ComputeAABB(projectileTransform, i);
+                    projectileBounds = projectileBounds.Union(boundy);
+                }
             }
         }
 
@@ -165,20 +195,21 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
                   Substep:        {substep}
                   Projectile Pos: {substeppedProjectilePos}
                   Target Pos:     {targetCoordinates.Position}
-                  Target AABB:    {bounds.BottomLeft}
-                                  {bounds.TopRight}
-                  Inside AABB?    {bounds.Contains(substeppedProjectilePos)}
-                  AABB closest:   {(bounds.ClosestPoint(substeppedProjectilePos) - substeppedProjectilePos).Length()}
+                  Proj AABB:      {projectileBounds.BottomLeft}
+                                  {projectileBounds.TopRight}
+                  Target AABB:    {targetBounds.BottomLeft}
+                                  {targetBounds.TopRight}
+                  AABB Intersect? {targetBounds.Intersects(projectileBounds)}
+                  AABB Distance:  {Math.Sqrt(AABBDistanceSquared(targetBounds, projectileBounds))}
                 """);
         }
 
-        if (bounds.Contains(substeppedProjectilePos))
+        if (targetBounds.Intersects(projectileBounds))
         {
             return true;
         }
 
-        var closest = bounds.ClosestPoint(substeppedProjectilePos);
-        if ((closest - substeppedProjectilePos).LengthSquared() <= MarginTiles * MarginTiles)
+        if (AABBDistanceSquared(targetBounds, projectileBounds) <= MarginTiles * MarginTiles)
         {
             return true;
         }
