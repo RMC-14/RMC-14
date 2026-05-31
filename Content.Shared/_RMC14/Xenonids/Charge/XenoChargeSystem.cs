@@ -56,6 +56,7 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly SharedDestructibleSystem _destruct = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private readonly ProtoId<DamageTypePrototype> _blunt = "Blunt";
 
@@ -172,8 +173,14 @@ public sealed class XenoChargeSystem : EntitySystem
         XenoCrusherChargableComponent? crush = null;
         var isValidTarget = _xeno.CanAbilityAttackTarget(xeno, targetId);
 
-        if (!isValidTarget && !TryComp(targetId, out crush) && !HasComp<DamageableComponent>(targetId))
-            return;
+        if (!isValidTarget)
+        {
+            TryComp(targetId, out crush);
+            if (crush == null && !HasComp<DamageableComponent>(targetId))
+                return;
+            if (HasComp<XenoComponent>(targetId))
+                return;
+        }
 
         StopCrusherCharge(xeno);
 
@@ -265,6 +272,14 @@ public sealed class XenoChargeSystem : EntitySystem
 
         if (TerminatingOrDeleted(args.OtherEntity))
             return;
+
+        // Pass through friendly/invalid mob targets
+        if (_hive.FromSameHive(xeno.Owner, args.OtherEntity)
+            && HasComp<XenoComponent>(args.OtherEntity))
+        {
+            args.Cancelled = true;
+            return;
+        }
 
         if (!TryComp(args.OtherEntity, out XenoCrusherChargableComponent? crush))
             return;
