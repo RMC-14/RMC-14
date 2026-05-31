@@ -3950,6 +3950,13 @@ entities:
     - type: Transform
       pos: -0.5,-2.5
       parent: 2
+- proto: CMSpawnPointCombatCorrespondent
+  entities:
+  - uid: 1477
+    components:
+    - type: Transform
+      pos: 0.5,-2.5
+      parent: 2
 - proto: CMSpawnPointCrewman
   entities:
   - uid: 1476
