@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: Marine Radiophones now stack the same messages in chatbox.
-    type: Tweak
-  id: 2738
-  time: '2026-01-11T10:52:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8865
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed accessories not fitting on armor.
@@ -4489,5 +4482,13 @@
   id: 3237
   time: '2026-05-31T01:43:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9867
+- author: Shromply
+  changes:
+  - message: '[PVE] Added the Syracuse pump-action shotgun, a quick firing shotgun
+      with a capacity of five shells.'
+    type: Add
+  id: 3238
+  time: '2026-05-31T02:07:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9852
 Name: RMC14
 Order: -1
