@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: '"submachinegun stock" renamed to "submachinegun solid stock"'
-    type: Tweak
-  id: 2747
-  time: '2026-01-13T08:39:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8617
 - author: SirChopwood
   changes:
   - message: Added the "His Highness" Lobby Art by ShiroSh_kun
@@ -4492,5 +4485,19 @@
   id: 3246
   time: '2026-05-31T02:41:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9868
+- author: JustMyselfUwU
+  changes:
+  - message: Added a health indicator to the m2c and ml66d, you will now have a rough
+      idea of how damaged they are.
+    type: Add
+  - message: Fixed sentries missing most of their damage indicator text, you can once
+      again determine how much damage your sentry has.
+    type: Fix
+  - message: Changed xeno damage examines from 25, 50, and 75 damage to 100, 200,
+      and 300 damage.
+    type: Tweak
+  id: 3247
+  time: '2026-05-31T02:46:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9926
 Name: RMC14
 Order: -1
