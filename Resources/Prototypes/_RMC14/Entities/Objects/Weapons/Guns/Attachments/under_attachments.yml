@@ -188,7 +188,7 @@
     modifiers:
     - conditions:
         inactiveOnly: true
-      fireDelayFlat: 0.1
+      fireDelayFlat: 0.25
     - conditions:
         wieldedOnly: true
         inactiveOnly: true
@@ -222,6 +222,26 @@
           tags:
           - RMCWeaponLMGM60
       fireDelayFlat: -0.1
+
+- type: entity
+  parent: RMCAttachmentBipod
+  id: RMCAttachmentBipodQYJ
+  name: QYJ-72 bipod
+  description: Integrated into the QYJ-72. You shouldn't have this.
+  components:
+  - type: Sprite
+    state: qyj72_bipod
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentBipodQYJ
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: qyj72_bipod
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: qyj72_bipod-on
 
 - type: entity
   parent: RMCUnderAttachmentBase

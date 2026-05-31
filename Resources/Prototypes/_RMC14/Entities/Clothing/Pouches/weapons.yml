@@ -227,9 +227,6 @@
         whitelist:
           tags:
           - Taser
-
-  - type: Storage
-    maxItemSize: Normal
   - type: CMHolster
   - type: CMItemSlots
 
