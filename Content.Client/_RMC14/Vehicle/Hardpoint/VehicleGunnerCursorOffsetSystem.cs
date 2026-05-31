@@ -27,6 +27,12 @@ public sealed class VehicleGunnerCursorOffsetSystem : EntitySystem
         UpdatesBefore.Add(typeof(Content.Client._RMC14.Vehicle.VehicleTurretInputSystem));
         UpdatesBefore.Add(typeof(Content.Client.Weapons.Ranged.Systems.GunSystem));
         SubscribeLocalEvent<VehicleGunnerViewUserComponent, GetEyeOffsetEvent>(OnGetEyeOffset);
+        SubscribeLocalEvent<VehicleGunnerViewUserComponent, ComponentShutdown>(OnGunnerShutdown);
+    }
+
+    private void OnGunnerShutdown(EntityUid uid, VehicleGunnerViewUserComponent comp, ComponentShutdown args)
+    {
+        _currentPositions.Remove(uid);
     }
 
     public override void Update(float frameTime)

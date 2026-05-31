@@ -27,6 +27,17 @@ public sealed class VehicleTurretInputSystem : EntitySystem
     private readonly Dictionary<EntityUid, (Angle Angle, TimeSpan Time)> _lastAims = new();
     private readonly Dictionary<EntityUid, MapCoordinates> _lastAimCoordinates = new();
 
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<VehicleTurretComponent, EntityTerminatingEvent>(OnTurretTerminating);
+    }
+
+    private void OnTurretTerminating(EntityUid uid, VehicleTurretComponent comp, ref EntityTerminatingEvent args)
+    {
+        _lastAims.Remove(uid);
+        _lastAimCoordinates.Remove(uid);
+    }
+
     public override void Update(float frameTime)
     {
         if (!_timing.IsFirstTimePredicted)
@@ -56,7 +67,7 @@ public sealed class VehicleTurretInputSystem : EntitySystem
         if (!targetTurret.RotateToCursor)
             return;
 
-        if (!_turrets.TryGetTurretOrigin(targetUid, targetTurret, out var originCoords))
+        if (!_turrets.TryGetTurretOrigin(targetUid, out var originCoords))
             return;
 
         var mousePos = _eye.PixelToMap(_input.MouseScreenPosition);
