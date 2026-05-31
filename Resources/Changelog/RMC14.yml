@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Shotgun choke now has a special fire sound.
-    type: Add
-  id: 2740
-  time: '2026-01-11T10:52:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8872
 - author: kleinerstation13
   changes:
   - message: Fixed grammar in some clothing descriptions
@@ -4490,5 +4483,13 @@
   id: 3239
   time: '2026-05-31T02:19:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8932
+- author: Rainbeon
+  changes:
+  - message: The buttons for choose structures have been restored to be more responsive,
+      and will immediately select the option you click on once again.
+    type: Fix
+  id: 3240
+  time: '2026-05-31T02:23:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9807
 Name: RMC14
 Order: -1
