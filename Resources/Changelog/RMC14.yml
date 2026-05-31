@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The logistics officer can now also vend filled pistol and bullet boxes
-      from the vendors in the squad preparation areas.
-    type: Add
-  id: 2754
-  time: '2026-01-13T08:49:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8948
-- author: Thereisabear
-  changes:
-  - message: 'IMP Ammo Racks do not slow down as much, still stacks the slowdown if
-      you are holding multiple. Running: 29% -> 12% slowdown'
-    type: Tweak
-  id: 2755
-  time: '2026-01-13T08:48:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8924
 - author: J C Denton
   changes:
   - message: Added Morgue access.
@@ -4499,5 +4483,22 @@
   id: 3253
   time: '2026-05-31T03:25:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9504
+- author: kleinerstation13
+  changes:
+  - message: Fixed some survivor roles having incorrect skills (Solaris FCO, Solaris
+      COSurv)
+    type: Fix
+  - message: FORECON SL no longer has police skill
+    type: Tweak
+  id: 3254
+  time: '2026-05-31T03:29:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9898
+- author: BlueMoon059
+  changes:
+  - message: The recharger no longer breaks down into an upstream machine frame.
+    type: Fix
+  id: 3255
+  time: '2026-05-31T03:30:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9921
 Name: RMC14
 Order: -1
