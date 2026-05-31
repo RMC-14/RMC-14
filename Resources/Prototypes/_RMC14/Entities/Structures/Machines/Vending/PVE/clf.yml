@@ -94,7 +94,7 @@
         amount: 15
     - name: Restricted Backpack
       entries:
-      - id: RMCBackpackRTO #todo: replace with makeshift HAM radio pack
+      - id: RMCBackpackRTOBagPhone #todo: replace with makeshift HAM radio pack
         amount: 1
     - name: Belts
       entries:
