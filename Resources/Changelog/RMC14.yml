@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: XxSWAG-MASTER-OVERLORDxX
-  changes:
-  - message: Executive Bodyguard Synth now says its a synth in "Spawn here as job"
-    type: Tweak
-  id: 2735
-  time: '2026-01-11T10:48:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8829
-- author: MortalBaguette
-  changes:
-  - message: CMP chat highlights now autofill
-    type: Fix
-  id: 2736
-  time: '2026-01-11T10:49:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8864
 - author: Thereisabear
   changes:
   - message: Fixed the underbarrel flashlight grip being toggleable without being
@@ -4484,5 +4470,24 @@
   id: 3234
   time: '2026-05-30T21:43:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9961
+- author: kleinerstation13
+  changes:
+  - message: Buffed Marine Service Jacket to have 10 ballistic protection
+    type: Tweak
+  - message: Renamed New Varadero 'Commander' to 'UNMC Commander'
+    type: Tweak
+  - message: Fixed New Varadero commander getting a M1984 belt instead of a M1911
+      belt
+    type: Fix
+  id: 3235
+  time: '2026-05-31T01:38:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9890
+- author: Vexerot
+  changes:
+  - message: Echo and Foxtrot SLs can now track the XO / CO.
+    type: Fix
+  id: 3236
+  time: '2026-05-31T01:39:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9887
 Name: RMC14
 Order: -1
