@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Added Morgue access.
-    type: Add
-  id: 2756
-  time: '2026-01-13T08:48:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8925
 - author: TheBlueYowie
   changes:
   - message: Updated recommendations and ordering in CT gear vendor
@@ -4500,5 +4493,12 @@
   id: 3255
   time: '2026-05-31T03:30:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9921
+- author: CyberTropic
+  changes:
+  - message: Updated pill packets to show pills.
+    type: Tweak
+  id: 3256
+  time: '2026-05-31T03:36:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9922
 Name: RMC14
 Order: -1
