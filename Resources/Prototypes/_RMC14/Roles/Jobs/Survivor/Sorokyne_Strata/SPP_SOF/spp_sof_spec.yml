@@ -21,6 +21,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-spec
     - type: DemoSpecWhitelist
+    - type: QYJWhitelist
     - type: AssignSquad
       squad: SquadSPP
   hidden: true
