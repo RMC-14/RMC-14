@@ -1495,6 +1495,11 @@ CMUpgradedTraumaKit: CMUpgradedTraumaKit10
 RMCHeadCapFerret: RMCHeadCapGrey
 CMPosterRememberIo: CMRandomPosterAny
 
+#2026-05-22
+DrinkGlass: RMCDrinkGlass
+FoodDonkpocket: RMCFoodDonkpocket
+FoodBoxDonkpocket: RMCBoxDonkpockets
+
 #2026-05-26
 WeaponRifleM16: RMCWeaponRifleCR16
 RMCWeaponRifleM16A5: RMCWeaponRifleCR16A5

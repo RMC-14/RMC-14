@@ -74,6 +74,10 @@
   - type: RequiresSkill
     skills:
       RMCSkillMedical: 2
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: CMDefibrillator

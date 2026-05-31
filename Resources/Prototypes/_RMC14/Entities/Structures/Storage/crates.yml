@@ -87,6 +87,9 @@
   - type: StaticPrice
     price: 50
   - type: Weldable
+  - type: RMCWeldEffectSource
+    startingOffset: -0.45, 0
+    endingOffset: 0.45, 0
   - type: ResistLocker
   - type: RequireProjectileTarget
   - type: InteractedBlacklist

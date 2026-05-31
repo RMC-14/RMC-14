@@ -609,6 +609,17 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCM1911BeltFilledNVCommander
+  suffix: Filled, NV Commander
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1911
+      amount: 6
+    - id: CMWeaponPistolM1911
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCM1911BeltFilledForecon
   suffix: Filled, Forecon
   components:
