@@ -154,7 +154,7 @@ rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technic
 
 # New Varadero Survs
 
-rmc-job-name-survivor-commander-new-varadero = Commander
+rmc-job-name-survivor-commander-new-varadero = UNMC Commander
 
 cm-job-name-surivor-beach-bum = Beach Bum
 
@@ -255,7 +255,7 @@ rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 
-# Sorokyne SOF insert survs 
+# Sorokyne SOF insert survs
 
 rmc-job-greeting-soro-sof = You are a member of an SPP SOF QRF team! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons. You are part of an SOF QRF team of the Socialist Progressive Peoples, deployed alongside the Ministry of Space Colonization to build garrisons on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
 
@@ -303,7 +303,7 @@ cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
 CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
-# Trijent crashland insert survs 
+# Trijent crashland insert survs
 
 rmc-job-greeting-crashland = You are a member of an SPP recon force! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons. Your orders were simple, Recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
 
