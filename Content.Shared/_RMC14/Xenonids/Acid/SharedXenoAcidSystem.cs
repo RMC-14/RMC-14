@@ -137,8 +137,20 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             }
         }
 
-        if (xeno.Owner != args.Performer ||
-            !CheckCorrodiblePopupsWithReplacement(xeno, target, args.Strength, out var time, out var _))
+        if (xeno.Owner != args.Performer)
+            return;
+
+        var attempt = new BeforeXenoCorrosiveAcidEvent(args, target);
+        RaiseLocalEvent(xeno.Owner, ref attempt);
+        if (attempt.Handled)
+        {
+            args.Handled = true;
+            return;
+        }
+
+        target = attempt.Target;
+
+        if (!CheckCorrodiblePopupsWithReplacement(xeno, target, args.Strength, out var time, out var _))
         {
             return;
         }
@@ -590,4 +602,10 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         corrodible.IsCorrodible = isCorrodible;
         Dirty(entity, corrodible);
     }
+}
+
+[ByRefEvent]
+public record struct BeforeXenoCorrosiveAcidEvent(XenoCorrosiveAcidEvent Acid, EntityUid Target)
+{
+    public bool Handled;
 }
