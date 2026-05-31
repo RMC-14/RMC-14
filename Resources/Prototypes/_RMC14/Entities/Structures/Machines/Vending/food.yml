@@ -281,6 +281,8 @@
         name: metal flask (empty)
         amount: 5
       - id: DrinkGlass
+        amount: 10
+      - id: RMCDrinkGlass
         amount: 30
       - id: CMMarineFlask
         amount: 5
