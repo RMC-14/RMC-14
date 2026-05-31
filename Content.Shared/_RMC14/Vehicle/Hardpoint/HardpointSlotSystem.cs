@@ -19,6 +19,8 @@ public sealed class HardpointSlotSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
+    private readonly HashSet<(EntityUid Owner, string SlotId)> _completingRemovals = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -30,6 +32,7 @@ public sealed class HardpointSlotSystem : EntitySystem
         SubscribeLocalEvent<HardpointSlotsComponent, BoundUIClosedEvent>(OnHardpointUiClosed);
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointRemoveMessage>(OnHardpointRemoveMessage);
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointRemoveDoAfterEvent>(OnHardpointRemoveDoAfter);
+        SubscribeLocalEvent<HardpointSlotsComponent, ItemSlotEjectAttemptEvent>(OnHardpointEjectAttempt);
     }
 
     private void OnInsertAttempt(Entity<HardpointSlotsComponent> ent, ref ItemSlotInsertAttemptEvent args)
@@ -189,6 +192,18 @@ public sealed class HardpointSlotSystem : EntitySystem
         state.LastUiError = null;
     }
 
+    private void OnHardpointEjectAttempt(Entity<HardpointSlotsComponent> ent, ref ItemSlotEjectAttemptEvent args)
+    {
+        if (args.Slot.ID is not { } slotId)
+            return;
+
+        if (!_hardpoints.TryGetSlot(ent.Comp, slotId, out _))
+            return;
+
+        if (!_completingRemovals.Contains((ent.Owner, slotId)))
+            args.Cancelled = true;
+    }
+
     private void OnHardpointRemoveMessage(Entity<HardpointSlotsComponent> ent, ref HardpointRemoveMessage args)
     {
         if (!Equals(args.UiKey, HardpointUiKey.Key))
@@ -238,13 +253,18 @@ public sealed class HardpointSlotSystem : EntitySystem
             return;
         }
 
-        if (finalLocation.Slot.Item is not { } installed)
+        if (!finalLocation.Slot.HasItem)
         {
             SetErrorAndRefresh("No hardpoint is installed in that slot.");
             return;
         }
 
-        if (!_itemSlots.TryEjectToHands(finalLocation.Owner, finalLocation.Slot, args.User, true))
+        var key = (finalLocation.Owner, finalLocation.Definition.Id);
+        _completingRemovals.Add(key);
+        var ejected = _itemSlots.TryEjectToHands(finalLocation.Owner, finalLocation.Slot, args.User, true);
+        _completingRemovals.Remove(key);
+
+        if (!ejected)
         {
             SetErrorAndRefresh("Couldn't remove the hardpoint. Free a hand and try again.");
             return;
