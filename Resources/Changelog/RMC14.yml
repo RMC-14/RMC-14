@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Sorokyne civilian roles having medical 3 and surgery 2.
-    type: Fix
-  id: 2753
-  time: '2026-01-13T08:50:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8833
 - author: Ian321
   changes:
   - message: The logistics officer can now also vend filled pistol and bullet boxes
@@ -4498,5 +4491,13 @@
   id: 3252
   time: '2026-05-31T03:11:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9929
+- author: IceNoobXD
+  changes:
+  - message: Added inhand sprites for the computer disks and added them to the document
+      pouch whitelist
+    type: Add
+  id: 3253
+  time: '2026-05-31T03:25:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9504
 Name: RMC14
 Order: -1
