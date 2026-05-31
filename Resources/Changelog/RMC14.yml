@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: SirChopwood
-  changes:
-  - message: Added the "His Highness" Lobby Art by ShiroSh_kun
-    type: Add
-  id: 2748
-  time: '2026-01-13T08:39:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8967
 - author: CatAndHats
   changes:
   - message: Added chat highlights for the Provost Inspector
@@ -4499,5 +4492,14 @@
   id: 3247
   time: '2026-05-31T02:46:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9926
+- author: MidZik
+  changes:
+  - message: Leap, Pounce, Dash, Rush, Assault, and Headbutt no longer overshoot,
+      undershoot, or miss the target position due to your movement at the moment you
+      used them.
+    type: Tweak
+  id: 3248
+  time: '2026-05-31T02:48:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9904
 Name: RMC14
 Order: -1
