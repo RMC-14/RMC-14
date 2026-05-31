@@ -715,10 +715,11 @@
   id: LiaisonRoleSpecificRMC
   name: rmc-loadout-group-role-specific
   minLimit: 0
-  maxLimit: 3
+  maxLimit: 4
   loadouts:
   - RMCWeYaClipboard
   - RMCWeYaThermos
+  - WEYABagPhoneSatchel
   - RMCJacketWindbreakerWEYA
 
 # Chief MP
