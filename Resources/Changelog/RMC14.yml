@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: MoonlightHollow
-  changes:
-  - message: Vulpkanins have started to roll their R's and yip.
-    type: Add
-  id: 2744
-  time: '2026-01-11T10:58:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8906
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Survival pouches will now automatically open when you spawn in to assist
-      new survivor players.
-    type: Tweak
-  id: 2745
-  time: '2026-01-11T11:01:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8913
-- author: XxSWAG-MASTER-OVERLORDxX
-  changes:
-  - message: CLF Leader (ERT)
-    type: Add
-  id: 2746
-  time: '2026-01-12T02:00:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8825
 - author: CatAndHats
   changes:
   - message: '"submachinegun stock" renamed to "submachinegun solid stock"'
@@ -4492,5 +4470,27 @@
   id: 3243
   time: '2026-05-31T02:37:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9588
+- author: CatAndHats
+  changes:
+  - message: Fixed Hedgehog Ravager's resting while injured sprites
+    type: Fix
+  id: 3244
+  time: '2026-05-31T02:42:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9927
+- author: SharkSnake98
+  changes:
+  - message: Added parity boxes, donk pockets, and drink glasses
+    type: Add
+  id: 3245
+  time: '2026-05-31T02:42:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9928
+- author: JustMyselfUwU
+  changes:
+  - message: Fixed the QYJ not requiring a skill to use it, fixed some of its stats
+      and added its integrated bipod.
+    type: Fix
+  id: 3246
+  time: '2026-05-31T02:41:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9868
 Name: RMC14
 Order: -1
