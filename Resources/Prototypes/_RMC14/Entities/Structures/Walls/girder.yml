@@ -20,7 +20,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
+          bounds: "-0.5,-0.5,0.5,0.5"
         density: 60
         mask:
         - MachineMask
@@ -153,7 +153,7 @@
     state: displaced
   - type: Icon
     state: displaced
-    
+
 - type: entity
   id: RMCGirderDamaged
   name: damaged girder

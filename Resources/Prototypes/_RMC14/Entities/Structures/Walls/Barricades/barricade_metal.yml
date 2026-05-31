@@ -493,3 +493,5 @@
     delay: 0.3
   - type: Climbable
   - type: RMCOpenOnlyWhenUnanchored
+  - type: RMCFoldingBarricadeLinking
+    linkable: false

@@ -217,6 +217,10 @@
       components:
       - HelmetAccessory
   - type: HelmetAccessoryHolder
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMHeadCapMP
@@ -868,17 +872,6 @@
     sprite: Clothing/Head/Soft/greysoft.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
-
-- type: entity
-  parent: RMCHeadCapGrey
-  id: RMCHeadCapFerret
-  name: ferret heavy industries trucker hat
-  description: It's a trucker hat. They're becoming collector items since Ferret went under in 2080.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
 
 - type: entity
   parent: RMCHeadCapGrey

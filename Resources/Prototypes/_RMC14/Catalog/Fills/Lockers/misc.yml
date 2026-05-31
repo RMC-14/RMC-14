@@ -127,6 +127,7 @@
     - id: RMCWeaponPistolPK7
     - id: RMCMagazinePistolPK7
     - id: RMCMagazinePistolPK7
+    - id: RMCBackpackRTOBagPhone
 
 - type: entity
   parent: RMCLockerSecureSafeCO

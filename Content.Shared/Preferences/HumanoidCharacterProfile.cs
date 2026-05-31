@@ -758,7 +758,7 @@ namespace Content.Shared.Preferences
                 for (var i = 0; i < xenoName.Length; i++)
                 {
                     var c = xenoName[i];
-                    if (i > 0 && numberEndingAllowed && (c > '0' || c < '9'))
+                    if (i > 0 && numberEndingAllowed && c >= '0' && c <= '9')
                         continue;
 
                     if (c < 'A' || c > 'Z')
