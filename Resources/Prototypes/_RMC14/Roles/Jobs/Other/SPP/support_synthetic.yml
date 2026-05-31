@@ -48,6 +48,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: QYJWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-synth
     - type: MeleeWeapon
