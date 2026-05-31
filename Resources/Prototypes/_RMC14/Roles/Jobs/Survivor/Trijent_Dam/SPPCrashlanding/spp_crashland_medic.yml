@@ -27,14 +27,13 @@
         RMCSkillEndurance: 2
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadSPP
+      squad: SquadSPP
     - type: JobPrefix
       prefix: rmc-job-prefix-crashland-medic
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSPPCrashlandNoBelt
     - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi

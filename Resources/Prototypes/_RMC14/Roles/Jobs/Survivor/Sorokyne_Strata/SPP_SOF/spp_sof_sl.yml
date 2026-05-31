@@ -10,6 +10,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
@@ -25,6 +26,7 @@
         sprite: _RMC14/Interface/cm_job_icons.rsi
         state: upp_sl_a
     - type: RMCTrackable
+    - type: QYJWhitelist
     - type: AssignSquad
       squad: SquadSPP
     #- type: SPPSpecWhitelist TODO RMC14: SPP special weapons whitelist

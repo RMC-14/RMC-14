@@ -28,9 +28,7 @@
     - type: MarineOrders
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadSPP
+      squad: SquadSPP
     - type: JobPrefix
       prefix: rmc-job-prefix-crashland-spec
     - type: DemoSpecWhitelist
@@ -38,7 +36,9 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: QYJWhitelist
     - type: RMCSurvivor
+    - type: RMCAllowSuitStorage
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -56,7 +56,7 @@
     belt: RMCBeltHolsterPistolSPPT73
     outerClothing: RMCArmorSPPHeavySurvivorFill
     head: ArmorHelmetSPPHeavy
-  inhand: 
+  inhand:
   - RMCWeaponRifleType71Flamer
 
 - type: entity
