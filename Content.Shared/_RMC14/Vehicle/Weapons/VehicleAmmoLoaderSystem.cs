@@ -43,7 +43,6 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         SubscribeLocalEvent<VehicleAmmoLoaderComponent, BoundUIOpenedEvent>(OnUiOpened);
         SubscribeLocalEvent<VehicleAmmoLoaderComponent, BoundUIClosedEvent>(OnUiClosed);
         SubscribeLocalEvent<VehicleAmmoLoaderComponent, VehicleAmmoLoaderSelectMessage>(OnUiSelect);
-        SubscribeLocalEvent<HandsComponent, ComponentShutdown>(OnHandsShutdown);
         SubscribeLocalEvent<HandsComponent, DidEquipHandEvent>(OnHandItemChanged);
         SubscribeLocalEvent<HandsComponent, DidUnequipHandEvent>(OnHandItemChanged);
         SubscribeLocalEvent<BulletBoxComponent, HandSelectedEvent>(OnBulletBoxHandSelected);
@@ -184,11 +183,6 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         ClearActiveAmmoBox(ent.Owner, args.Actor);
     }
 
-    private void OnHandsShutdown(Entity<HandsComponent> ent, ref ComponentShutdown args)
-    {
-        ClearTrackedUser(ent.Owner);
-    }
-
     private void OnHandItemChanged(Entity<HandsComponent> ent, ref DidEquipHandEvent args)
     {
         UpdateOpenLoaderUis(args.User);
@@ -317,7 +311,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         return true;
     }
 
-    private bool TrySetActiveAmmoBox(EntityUid loader, EntityUid user, EntityUid boxUid)
+    private void TrySetActiveAmmoBox(EntityUid loader, EntityUid user, EntityUid boxUid)
     {
         if (!_activeAmmoBoxes.TryGetValue(loader, out var userBoxes))
         {
@@ -326,7 +320,6 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         }
 
         userBoxes[user] = boxUid;
-        return true;
     }
 
     private void TrySetActiveAmmoBoxFromHeld(Entity<VehicleAmmoLoaderComponent> loader, EntityUid user)
