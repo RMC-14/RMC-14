@@ -160,7 +160,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         var range = TryComp<ParasiteAIComponent>(parasite, out var ai) ? ai.MaxInfectRange : parasite.Comp.InfectRange;
 
         if (_transform.InRange(coordinates, args.Leaping.Origin, range))
-            Infect(parasite, args.Hit, false);
+            Infect(parasite, args.Hit, false, true);
     }
 
     private void OnParasiteAfterInteract(Entity<XenoParasiteComponent> ent, ref AfterInteractEvent args)
