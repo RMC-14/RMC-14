@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: texas1234567889
-  changes:
-  - message: Added the two missing black market crates to Chance's Claim.
-    type: Add
-  id: 2752
-  time: '2026-01-13T08:50:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8743
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Sorokyne civilian roles having medical 3 and surgery 2.
@@ -4496,5 +4489,14 @@
   id: 3251
   time: '2026-05-31T03:10:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9604
+- author: SharkSnake98
+  changes:
+  - message: Added a new double couch, 3 new couches, and 3 new sofas
+    type: Add
+  - message: Gave the single-direction couch sprites a back
+    type: Tweak
+  id: 3252
+  time: '2026-05-31T03:11:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9929
 Name: RMC14
 Order: -1
