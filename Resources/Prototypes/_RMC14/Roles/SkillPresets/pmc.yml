@@ -99,6 +99,7 @@
 
 # Shiva's Snowball panic room commando
 - type: entity
+  parent: RMCSkillPresetSurvivor
   id: RMCSkillPresetPMCCommando
   name: Survivor We-Ya Commando
   categories: [ HideSpawnMenu ]

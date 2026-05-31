@@ -38,6 +38,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: QYJWhitelist
     - type: RMCSurvivor
   hidden: true
 
@@ -49,7 +50,7 @@
     belt: RMCBeltHolsterPistolSPPT73
     outerClothing: RMCArmorSPPHeavySurvivorFill
     head: ArmorHelmetSPPHeavy
-  inhand: 
+  inhand:
   - RMCWeaponRifleType71Flamer
 
 - type: entity
