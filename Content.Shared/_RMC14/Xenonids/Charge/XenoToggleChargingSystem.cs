@@ -554,14 +554,18 @@ public sealed class XenoToggleChargingSystem : EntitySystem
 
             _damageable.TryChangeDamage(target, damage * stage * mult);
 
-            _popup.PopupEntity(
-                Loc.GetString("rmc-xeno-charge-smashes", ("xeno", crusher), ("target", target)),
-                target,
-                PopupType.SmallCaution
-            );
+            // Target may have been deleted by the damage call
+            if (!TerminatingOrDeleted(target))
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("rmc-xeno-charge-smashes", ("xeno", crusher), ("target", target)),
+                    target,
+                    PopupType.SmallCaution
+                );
 
             if (defaults.Sound != null)
                 _audio.PlayPvs(defaults.Sound, target);
+            }
         }
 
         ResetCharging(crusher, false);
@@ -592,9 +596,12 @@ public sealed class XenoToggleChargingSystem : EntitySystem
 
                 if (ev.Handled)
                 {
-                    recently = EnsureComp<XenoToggleChargingRecentlyHitComponent>(hit.Target);
-                    recently.LastHitAt = time;
-                    Dirty(hit.Target, recently);
+                    if (!TerminatingOrDeleted(hit.Target))
+                    {
+                        recently = EnsureComp<XenoToggleChargingRecentlyHitComponent>(hit.Target);
+                        recently.LastHitAt = time;
+                        Dirty(hit.Target, recently);
+                    }
 
                     if (hit.Crusher.Comp.Stage == 0)
                     {

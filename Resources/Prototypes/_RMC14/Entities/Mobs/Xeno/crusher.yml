@@ -215,7 +215,7 @@
         Structural: 40
     maxStageDamageMultiplier: 1.0
     sound:
-      path: Audio\RMC-14\Resources\Audio\_RMC14\Effects\metal_crash.ogg
+      path: /Audio/_RMC14/Effects/metal_crash.ogg
   - type: XenoHidden
   - type: RMCActionOrder
     id: RMCXenoCrusherCharger
