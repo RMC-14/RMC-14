@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Changed the loadouts of the miner corpse.
-    type: Tweak
-  - message: Fixed corpses not having their correct ranks, factions, or icons.
-    type: Fix
-  - message: Fixed the M3-VL vests having an uniform whitelist. You can now use them
-      with any uniform.
-    type: Fix
-  - message: Fixed some Hybrisa corpses not being Hybrisa weya goons.
-    type: Fix
-  id: 2742
-  time: '2026-01-11T10:59:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8777
 - author: noctyrnal
   changes:
   - message: Added sprites for the colony power generators.
@@ -4494,5 +4480,13 @@
   id: 3241
   time: '2026-05-31T02:31:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9905
+- author: Arykh
+  changes:
+  - message: Medbay's chemical dispensers now scale with the marine population. Scaling
+      affects the recharge rate and max energy.
+    type: Add
+  id: 3242
+  time: '2026-05-31T02:35:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9044
 Name: RMC14
 Order: -1
