@@ -28,16 +28,18 @@ public sealed class VehicleSupplySystem : EntitySystem
     private readonly record struct HardpointItemInfo(string ProtoId, HashSet<ProtoId<TagPrototype>> Tags);
     private const int VendedHardpointAmmoCount = 3;
 
+
     [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly VehicleHardpointVisualsSystem _hardpointVisuals = default!;
+    [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedCMAutomatedVendorSystem _vendor = default!;
-    [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
 
     private readonly Dictionary<string, List<HardpointItemInfo>> _hardpointItemsByType = new();
     private readonly Dictionary<string, string> _hardpointTypeByProto = new();
@@ -249,7 +251,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             if (!proto.TryGetComponent(out HardpointItemComponent? hardpointItem, _compFactory))
                 continue;
 
-            _hardpointTypeByProto[Normalize(proto.ID)] = hardpointItem.HardpointType.Id;
+            _hardpointTypeByProto[Normalize(proto.ID)] = Normalize(hardpointItem.HardpointType.Id);
 
             var key = Normalize(hardpointItem.HardpointType.Id);
             if (!_hardpointItemsByType.TryGetValue(key, out var list))
@@ -922,7 +924,7 @@ public sealed class VehicleSupplySystem : EntitySystem
                 var sectionName = vehicleName;
                 var sectionOrder = int.MaxValue;
 
-                if (TryGetTankSharedCategory(entry.Vehicle.Id, hardpoint, out var categoryKey, out var categoryLabel, out var categoryOrder))
+                if (TryGetHardpointCategory(entry, hardpoint, out var categoryKey, out var categoryLabel, out var categoryOrder))
                 {
                     sharedKey = categoryKey;
                     order = categoryOrder;
@@ -1046,8 +1048,8 @@ public sealed class VehicleSupplySystem : EntitySystem
         _vendor.SetSections((uid, automated), sections);
     }
 
-    private bool TryGetTankSharedCategory(
-        string vehicleId,
+    private bool TryGetHardpointCategory(
+        VehicleSupplyEntry entry,
         string hardpointId,
         out string categoryKey,
         out string categoryLabel,
@@ -1057,51 +1059,41 @@ public sealed class VehicleSupplySystem : EntitySystem
         categoryLabel = string.Empty;
         categoryOrder = int.MaxValue;
 
-        if (!string.Equals(Normalize(vehicleId), "vehicletank", StringComparison.Ordinal))
+        if (entry.HardpointCategories.Count == 0)
             return false;
 
-        var hardpointKey = Normalize(hardpointId);
-        if (hardpointKey == "vehicletanksnowplow")
+        foreach (var category in entry.HardpointCategories)
         {
-            categoryKey = "tank-general";
-            categoryLabel = "General";
-            categoryOrder = 5;
-            return true;
+            foreach (var item in category.HardpointItems)
+            {
+                if (string.Equals(hardpointId, item.Id, StringComparison.OrdinalIgnoreCase))
+                {
+                    categoryKey = category.Key;
+                    categoryLabel = category.Label;
+                    categoryOrder = category.SortOrder;
+                    return true;
+                }
+            }
         }
 
         if (!_hardpointTypeByProto.TryGetValue(Normalize(hardpointId), out var hardpointType))
             return false;
 
-        switch (Normalize(hardpointType))
+        foreach (var category in entry.HardpointCategories)
         {
-            case "hardpointtypecannon":
-                categoryKey = "tank-primary";
-                categoryLabel = "Primary";
-                categoryOrder = 0;
-                return true;
-            case "hardpointtypelauncher":
-                categoryKey = "tank-secondary";
-                categoryLabel = "Secondary";
-                categoryOrder = 1;
-                return true;
-            case "hardpointtypearmor":
-                categoryKey = "tank-armor";
-                categoryLabel = "Armor";
-                categoryOrder = 2;
-                return true;
-            case "hardpointtypesupport":
-                categoryKey = "tank-support";
-                categoryLabel = "Support";
-                categoryOrder = 3;
-                return true;
-            case "hardpointtypewheel":
-                categoryKey = "tank-treads";
-                categoryLabel = "Treads";
-                categoryOrder = 4;
-                return true;
-            default:
-                return false;
+            foreach (var type in category.HardpointTypes)
+            {
+                if (string.Equals(hardpointType, type.Id, StringComparison.OrdinalIgnoreCase))
+                {
+                    categoryKey = category.Key;
+                    categoryLabel = category.Label;
+                    categoryOrder = category.SortOrder;
+                    return true;
+                }
+            }
         }
+
+        return false;
     }
 
     private bool TryGetLiftForVendor(
@@ -1110,7 +1102,6 @@ public sealed class VehicleSupplySystem : EntitySystem
         out Entity<VehicleSupplyLiftComponent> lift)
     {
         lift = default;
-        var found = false;
 
         var vendorCoords = _transform.GetMapCoordinates(vendorUid);
         var maxDistance = vendor.ConsoleSearchRange * vendor.ConsoleSearchRange;
@@ -1127,7 +1118,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             return true;
         }
 
-        return found;
+        return false;
     }
 
     private bool TryFindLiftForVendor(
@@ -1586,45 +1577,7 @@ public sealed class VehicleSupplySystem : EntitySystem
 
     private string ResolveVisualState(EntityUid item, out bool usesOverlay, int depth = 0)
     {
-        usesOverlay = false;
-        if (depth > 2)
-            return string.Empty;
-
-        if (TryComp(item, out VehicleTurretComponent? turretOverlay) && turretOverlay.ShowOverlay)
-            usesOverlay = true;
-
-        if (TryComp(item, out HardpointSlotsComponent? attachedSlots) &&
-            TryComp(item, out ItemSlotsComponent? attachedItemSlots))
-        {
-            foreach (var slot in attachedSlots.Slots)
-            {
-                if (string.IsNullOrWhiteSpace(slot.Id))
-                    continue;
-
-                if (!_itemSlots.TryGetSlot(item, slot.Id, out var itemSlot, attachedItemSlots) || !itemSlot.HasItem)
-                    continue;
-
-                var child = itemSlot.Item!.Value;
-                var childState = ResolveVisualState(child, out var childOverlay, depth + 1);
-                usesOverlay |= childOverlay;
-                if (!string.IsNullOrWhiteSpace(childState))
-                    return childState;
-            }
-        }
-
-        if (TryComp(item, out HardpointVisualComponent? visual) &&
-            !string.IsNullOrWhiteSpace(visual.VehicleState))
-        {
-            return visual.VehicleState;
-        }
-
-        if (TryComp(item, out VehicleTurretComponent? turret) &&
-            !string.IsNullOrWhiteSpace(turret.OverlayState))
-        {
-            return turret.OverlayState;
-        }
-
-        return string.Empty;
+        return _hardpointVisuals.ResolveVisualState(item, out usesOverlay, depth);
     }
 
     private HashSet<string> BuildUnlockedSet()

@@ -92,7 +92,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private readonly HashSet<EntityUid> _intersecting = new();
     private readonly Dictionary<EntityUid, TimeSpan> _lastMobCollision = new();
-    private readonly Dictionary<EntityUid, bool> _hardState = new();
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
     private readonly Dictionary<EntityUid, float> _movementAccumulator = new();
     private readonly Dictionary<EntityUid, EntityUid> _activeXenoPushers = new();
@@ -169,7 +168,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private void OnMoverShutdown(Entity<GridVehicleMoverComponent> ent, ref ComponentShutdown args)
     {
-        _hardState.Remove(ent.Owner);
         _movementAccumulator.Remove(ent.Owner);
         _activeXenoPushers.Remove(ent.Owner);
     }
@@ -208,8 +206,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             ent.Comp.IsCommittedToMove = false;
             ent.Comp.IsPushMove = false;
             ent.Comp.IsMoving = false;
-            _hardState[uid] = true;
-            _movementAccumulator[uid] = 0f;
+                _movementAccumulator[uid] = 0f;
             Dirty(uid, ent.Comp);
             return true;
         }
@@ -235,7 +232,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         ent.Comp.IsCommittedToMove = false;
         ent.Comp.IsPushMove = false;
         ent.Comp.IsMoving = false;
-        _hardState[uid] = true;
         _movementAccumulator[uid] = 0f;
 
         Dirty(uid, ent.Comp);

@@ -109,7 +109,7 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
         Dirty(vehicle, visuals);
     }
 
-    private string ResolveVisualState(EntityUid item, out bool usesOverlay, int depth = 0)
+    internal string ResolveVisualState(EntityUid item, out bool usesOverlay, int depth = 0)
     {
         usesOverlay = false;
         if (depth > 2)

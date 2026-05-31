@@ -22,11 +22,11 @@ public sealed class VehiclePortGunSystem : EntitySystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly VehicleSystem _vehicle = default!;
     [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
-    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -39,8 +39,6 @@ public sealed class VehiclePortGunSystem : EntitySystem
         SubscribeLocalEvent<VehiclePortGunControllerComponent, GetVerbsEvent<AlternativeVerb>>(OnPortGunVerbs);
 
         SubscribeLocalEvent<VehiclePortGunComponent, ComponentShutdown>(OnPortGunShutdown);
-        SubscribeLocalEvent<VehiclePortGunComponent, GunShotEvent>(OnPortGunShot);
-        SubscribeLocalEvent<VehiclePortGunComponent, EntInsertedIntoContainerMessage>(OnPortGunContainerInserted);
         SubscribeLocalEvent<VehiclePortGunComponent, EntRemovedFromContainerMessage>(OnPortGunContainerRemoved);
         SubscribeLocalEvent<VehiclePortGunOperatorComponent, ComponentShutdown>(OnPortGunOperatorShutdown);
     }
@@ -127,13 +125,10 @@ public sealed class VehiclePortGunSystem : EntitySystem
             return;
         }
 
-        var ejected = false;
         if (magSlot.HasItem)
         {
             if (!_itemSlots.TryEjectToHands(gunUid, magSlot, args.User))
                 return;
-
-            ejected = true;
         }
 
         if (!_itemSlots.CanInsert(gunUid, args.Used, args.User, magSlot))
@@ -156,25 +151,13 @@ public sealed class VehiclePortGunSystem : EntitySystem
         ClearOperator(ent.Comp.Operator.Value);
     }
 
-    private void OnPortGunShot(Entity<VehiclePortGunComponent> ent, ref GunShotEvent args)
-    {
-        if (_net.IsClient)
-            return;
-
-    }
-
-    private void OnPortGunContainerInserted(Entity<VehiclePortGunComponent> ent, ref EntInsertedIntoContainerMessage args)
-    {
-        if (_net.IsClient)
-            return;
-
-    }
-
     private void OnPortGunContainerRemoved(Entity<VehiclePortGunComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         if (_net.IsClient)
             return;
 
+        if (ent.Comp.Operator is { } user)
+            ClearOperator(user);
     }
 
     private void OnPortGunOperatorShutdown(Entity<VehiclePortGunOperatorComponent> ent, ref ComponentShutdown args)

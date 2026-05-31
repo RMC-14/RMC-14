@@ -119,7 +119,6 @@ public sealed class VehicleLockSystem : EntitySystem
 
         _actions.RemoveAction(user, action);
 
-        // The action entity is networked; client-side queued deletion causes prediction errors.
         if (_net.IsClient)
             return;
 

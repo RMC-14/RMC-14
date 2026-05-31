@@ -965,26 +965,24 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private float GetModifiedMaxSpeed(EntityUid uid, GridVehicleMoverComponent mover)
     {
-        var maxSpeed = mover.MaxSpeed * GetSmashSlowdownMultiplier(mover);
-
-        if (TryComp<VehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
-            maxSpeed *= overcharge.SpeedMultiplier;
-        if (TryComp<VehicleSpeedModifierComponent>(uid, out var speedMod))
-            maxSpeed *= speedMod.SpeedMultiplier;
-
-        return maxSpeed;
+        return GetModifiedSpeed(uid, mover, mover.MaxSpeed);
     }
 
     private float GetModifiedMaxReverseSpeed(EntityUid uid, GridVehicleMoverComponent mover)
     {
-        var maxSpeed = mover.MaxReverseSpeed * GetSmashSlowdownMultiplier(mover);
+        return GetModifiedSpeed(uid, mover, mover.MaxReverseSpeed);
+    }
+
+    private float GetModifiedSpeed(EntityUid uid, GridVehicleMoverComponent mover, float baseSpeed)
+    {
+        var speed = baseSpeed * GetSmashSlowdownMultiplier(mover);
 
         if (TryComp<VehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
-            maxSpeed *= overcharge.SpeedMultiplier;
+            speed *= overcharge.SpeedMultiplier;
         if (TryComp<VehicleSpeedModifierComponent>(uid, out var speedMod))
-            maxSpeed *= speedMod.SpeedMultiplier;
+            speed *= speedMod.SpeedMultiplier;
 
-        return maxSpeed;
+        return speed;
     }
 
     private float GetAccelerationModifier(EntityUid uid)

@@ -43,18 +43,21 @@ public sealed partial class HardpointSystem
     {
         location = default;
 
+        if (!TryComp(owner, out HardpointStateComponent? state) ||
+            !TryComp(owner, out ItemSlotsComponent? itemSlots))
+        {
+            return false;
+        }
+
         foreach (var slot in hardpoints.Slots)
         {
             if (string.IsNullOrWhiteSpace(slot.Id))
                 continue;
 
-            var path = parentPath?.Append(slot.Id) ?? new VehicleSlotPath(slot.Id);
-            if (!TryComp(owner, out HardpointStateComponent? state) ||
-                !TryComp(owner, out ItemSlotsComponent? itemSlots) ||
-                !_itemSlots.TryGetSlot(owner, slot.Id, out var itemSlot, itemSlots))
-            {
+            if (!_itemSlots.TryGetSlot(owner, slot.Id, out var itemSlot, itemSlots))
                 continue;
-            }
+
+            var path = parentPath?.Append(slot.Id) ?? new VehicleSlotPath(slot.Id);
 
             if (path == targetPath)
             {

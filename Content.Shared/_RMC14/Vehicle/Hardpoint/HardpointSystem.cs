@@ -41,11 +41,16 @@ public sealed partial class HardpointSystem : EntitySystem
 {
     private static readonly EntProtoId<SkillDefinitionComponent> EngineerSkill = "RMCSkillEngineer";
     private static readonly EntProtoId HardpointVehicleFamilyTank = "HardpointVehicleFamilyTank";
+    private static readonly ProtoId<DamageModifierSetPrototype> DamageModifierSetVehicleFrameTank = "VehicleFrameTank";
 
     private const float IntegrityThresholdGreen = 0.9f;
     private const float IntegrityThresholdYellow = 0.7f;
     private const float IntegrityThresholdOrange = 0.4f;
     private const float IntegrityThresholdRed = 0.15f;
+
+    private readonly List<(EntityUid Item, HardpointIntegrityComponent Integrity)> _topLevelHardpoints = new();
+    private readonly HashSet<EntityUid> _visitedHardpoints = new();
+
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;
@@ -559,17 +564,17 @@ public sealed partial class HardpointSystem : EntitySystem
         if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
             return;
 
-        var topLevelHardpoints = new List<(EntityUid Item, HardpointIntegrityComponent Integrity)>();
-        CollectIntactTopLevelHardpoints(ent.Owner, ent.Comp, itemSlots, topLevelHardpoints);
+        _topLevelHardpoints.Clear();
+        CollectIntactTopLevelHardpoints(ent.Owner, ent.Comp, itemSlots, _topLevelHardpoints);
 
-        var anyTopLevelIntact = topLevelHardpoints.Count > 0;
+        var anyTopLevelIntact = _topLevelHardpoints.Count > 0;
 
         if (anyTopLevelIntact)
         {
-            var visited = new HashSet<EntityUid>();
-            foreach (var (item, integrity) in topLevelHardpoints)
+            _visitedHardpoints.Clear();
+            foreach (var (item, integrity) in _topLevelHardpoints)
             {
-                ApplyDamageToHardpointTree(ent.Owner, item, integrity, args.Damage, visited);
+                ApplyDamageToHardpointTree(ent.Owner, item, integrity, args.Damage, _visitedHardpoints);
             }
         }
 
@@ -823,7 +828,7 @@ public sealed partial class HardpointSystem : EntitySystem
 
         if (TryComp(uid, out HardpointItemComponent? item) &&
             item.VehicleFamily == HardpointVehicleFamilyTank &&
-            _prototypeManager.TryIndex<DamageModifierSetPrototype>("VehicleFrameTank", out var tankBase))
+            _prototypeManager.TryIndex(DamageModifierSetVehicleFrameTank, out var tankBase))
         {
             ApplyDamageModifierCoefficients(tankBase, ref acid, ref slash, ref bullet, ref explosive, ref blunt);
         }
@@ -997,7 +1002,7 @@ public sealed partial class HardpointSystem : EntitySystem
 
     private void OnHardpointRepair(Entity<HardpointIntegrityComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled || args.User == null)
+        if (args.Handled)
             return;
 
         var used = args.Used;

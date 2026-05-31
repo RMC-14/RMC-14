@@ -26,7 +26,7 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed partial class VehicleWeaponsSystem : EntitySystem
 {
-    private const string HardpointSelectActionId = "ActionVehicleSelectHardpoint";
+    private static readonly EntProtoId HardpointSelectActionId = "ActionVehicleSelectHardpoint";
     private static readonly EntProtoId HardpointTypeSupport = "HardpointTypeSupport";
 
     [Dependency] private readonly SharedActionsSystem _actions = default!;
@@ -147,14 +147,9 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
             return;
 
         if (ent.Comp.IsPrimaryOperatorSeat && weapons.Operator == args.Buckle.Owner)
-        {
             weapons.Operator = null;
-            ClearOperatorSelections(weapons, args.Buckle.Owner);
-        }
-        else
-        {
-            ClearOperatorSelections(weapons, args.Buckle.Owner);
-        }
+
+        ClearOperatorSelections(weapons, args.Buckle.Owner);
 
         RecalculateSelectedWeapon(vehicleUid, weapons);
         Dirty(vehicleUid, weapons);

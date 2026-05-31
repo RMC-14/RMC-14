@@ -9,9 +9,9 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed class VehicleRunoverSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
 
     public static readonly TimeSpan StandUpGrace = TimeSpan.FromSeconds(0.6);
 

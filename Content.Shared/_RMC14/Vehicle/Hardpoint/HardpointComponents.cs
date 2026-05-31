@@ -64,16 +64,13 @@ public sealed partial class HardpointSlotsComponent : Component
 public sealed partial class HardpointStateComponent : Component
 {
     [NonSerialized]
-    public HashSet<string> PendingInserts = new();
+    public Dictionary<string, EntityUid> PendingInserts = new();
 
     [NonSerialized]
     public HashSet<string> CompletingInserts = new();
 
     [NonSerialized]
     public HashSet<string> PendingRemovals = new();
-
-    [NonSerialized]
-    public HashSet<EntityUid> PendingInsertUsers = new();
 
     [NonSerialized]
     public string? LastUiError;

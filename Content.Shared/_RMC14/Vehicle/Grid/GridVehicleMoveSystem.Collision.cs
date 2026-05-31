@@ -1122,10 +1122,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             target = _transform.ToCoordinates(mapCoords);
         }
 
-        if (target == EntityCoordinates.Invalid)
-            return false;
-
-        return true;
+        return target != EntityCoordinates.Invalid;
     }
 
     private bool IsPushTileBlocked(

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Buckle.Components;
@@ -30,6 +31,10 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleDeploySystem : EntitySystem
 {
+    private static readonly EntProtoId HardpointTypeCannon = "HardpointTypeCannon";
+
+    private readonly List<VehicleMountedSlot> _mountedSlotsBuffer = new();
+
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly SharedGunSystem _guns = default!;
@@ -129,7 +134,6 @@ public sealed class VehicleDeploySystem : EntitySystem
 
         _actions.RemoveAction(user, action);
 
-        // The action entity is networked; client-side queued deletion causes prediction errors.
         if (_net.IsClient)
             return;
 
@@ -311,7 +315,7 @@ public sealed class VehicleDeploySystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (ent.Comp.HardpointType != "HardpointTypeCannon")
+        if (ent.Comp.HardpointType != HardpointTypeCannon)
             return;
 
         if (!TryGetVehicleFromContained(ent.Owner, out var vehicle))
@@ -475,7 +479,8 @@ public sealed class VehicleDeploySystem : EntitySystem
         EntityUid? fallbackGun = null;
         GunComponent? fallbackComp = null;
 
-        foreach (var mountedSlot in _topology.GetMountedSlots(vehicle))
+        _topology.GetMountedSlots(vehicle, _mountedSlotsBuffer);
+        foreach (var mountedSlot in _mountedSlotsBuffer)
         {
             if (mountedSlot.Item is not { } installed)
                 continue;
