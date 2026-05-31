@@ -43,10 +43,13 @@ public sealed class RMCInputSystem : EntitySystem
     private void ClearRelativeEntity(EntityUid uid)
     {
         var query = EntityQueryEnumerator<InputMoverComponent>();
-        while (query.MoveNext(out _, out var mover))
+        while (query.MoveNext(out var moverUid, out var mover))
         {
             if (mover.RelativeEntity == uid)
+            {
                 mover.RelativeEntity = null;
+                Dirty(moverUid, mover);
+            }
         }
     }
 
