@@ -80,7 +80,7 @@ UNMC
     ~~military_police~~
     ~~other~~
     ~~provost~~ # (Move this somewhere else?)
-    ~~requsitions~~
+    requsitions
     Marsoc
 ~~WE-YA~~
     ~~goon~~
