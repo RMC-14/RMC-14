@@ -76,11 +76,6 @@
       icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi
         state: hudsquad_cmp
-    - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadMP
-    - type: SquadArmorWearer
 
 
 - type: startingGear
