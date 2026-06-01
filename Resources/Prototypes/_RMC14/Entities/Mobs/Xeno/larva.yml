@@ -61,7 +61,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.2
+          radius: 0.25
         density: 185
         mask:
         - SmallMobMask

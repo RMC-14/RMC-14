@@ -51,6 +51,27 @@
     lifetime: 900
 
 - type: entity
+  parent: RMCFogWallPermanent
+  id: RMCFogWallWeedPermanent
+  name: impenetrable weeds
+  description: These weeds look much thicker than any other xenonid structure.
+  suffix: Permanent, weed wall
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/weedwall.rsi
+    state: weedwall
+
+- type: entity
+  parent: RMCFogWallWeedPermanent
+  id: RMCFogWallWeed30
+  description: These weeds look much thicker than any other xenonid structure, it looks like it is slowly wilting.
+  suffix: 30 minutes, weed wall
+  components:
+  - type: TimedDespawn
+    lifetime: 1800
+
+- type: entity
   parent: MarkerBase
   id: RMCFogWallRemoverOne
   name: random fog remover

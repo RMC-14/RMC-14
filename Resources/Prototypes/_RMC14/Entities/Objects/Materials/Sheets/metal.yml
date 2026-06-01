@@ -26,6 +26,11 @@
     - type: Item
       size: Normal
       sprite: _RMC14/Objects/Materials/Sheets/metal.rsi
+      inhandVisuals:
+        left:
+        - state: inhand-left
+        right:
+        - state: inhand-right
     - type: Appearance
     - type: GuideHelp
       guides:
@@ -229,6 +234,11 @@
           map: ["base"]
     - type: Item
       sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi
+      inhandVisuals:
+        left:
+        - state: inhand-left
+        right:
+        - state: inhand-right
       heldPrefix: plasteel
     - type: UserInterface
       interfaces:

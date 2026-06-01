@@ -65,3 +65,65 @@ rmc-new-to-job-dcc = As a Dropship Crew Chief, your job is to assist the pilots 
                                              In the case of a medevac, go to the back of the ship and interact with the red medevac module. This will bring the patient up onto your ship from the ground. Inform the Almayer's medical staff that they are coming aboard and make sure they are brought into their care.
 
                                              You may be required to perform additional tasks, such as retrieving medical supplies, obtaining parachutes, triage of revivable marine personnel, and any other task given by your assigned pilot.
+
+rmc-new-to-job-doctor = As a Doctor you are tasked with providing specialized medical supplies and advanced care to the company.
+
+                                             Your most important jobs are the production of advanced medicine in the chemistry labs and conducting surgical procedures on evacuated marines in the operating rooms. You should already be familiar with the former, and as a doctor you now have the skillset to properly perform the latter!
+
+                                             Your auxiliary duties involve ensuring requisitions has enough medicine to supply the corpsmen planetside, tending to the medical needs of shipside personnel, teaching junior nurses, field deployments to the FOB, and assorted menial labor related to the medbay, such as cadaver transport and mortuary duties.
+
+                                             Make sure to pay attention to your radio as it could mean the difference between life and death, be it a dropship arriving with a marine in critical condition, a medicine shortage in requisitions, or even combat aboard the warship.
+
+rmc-new-to-job-cmo = As the Chief Medical Officer of the ship your job is to provide support to all medical professionals in or outside of the Area of Operations and to manage your shipside medical personnel; all the while liaising with other command staff.
+
+                                             As the highest-ranking medical professional on the ship you are expected to have at least intermediate knowledge of all things medical. Additionally you are afforded your very own office, located on the upper deck; you may visit it in a quieter moment to collect the senior officer attire stored there.
+
+                                             Your primary duties involve managing the medical bay and its staff to ensure tasks are properly prioritized along with being the primary teacher for aspiring medical professionals; though don’t be afraid to involve other willing, experienced, doctors or nurses. To aid in this a medical training dummy can be found in your office, stored in a closet on the wall.
+
+                                             Your secondary tasks involve filling gaps in the chem lab or operating rooms should your subordinates become overwhelmed due to excessive demand and/or manpower shortages, communicating with other departments, and providing specialized services such as psychological evaluations.
+
+                                             As a member of the command staff your skillset is significantly wider than most and this expertise can occasionally be called upon. For example, you can provide overwatch to squads or process intelligence in an emergency. Note that you are still not trained in firearms use.
+
+                                             Make sure to familiarize yourself with the Standard Operating Procedures and Marine Law, especially parts pertaining to the medical bay. One noteworthy point is your right to grant access privileges to medical areas, allowing doctors to access the medical fabricator and containment chambers located in the research labs.
+
+rmc-new-to-job-combat-tech = As a Combat Technician, your job as a frontline engineer is to help your squad by building fortifications, repairing machinery, and performing demolitions.
+
+                                             You will want a full compliment of tools; make sure to pack a blowtorch, wrench, wirecutters, crowbar, screwdriver, and security access tuner (often called a multitool). Additional tools that you can choose to take are an entrenching tool to fill sandbags and clear tunnels, or a light replacer to replace broken lights. Most tools can be found in tools vendors, including the middle vendor in your preperation room.
+
+                                             Your turret is a valuable bit of equipment, pick it up by using your multitool and keep it safe by repairing it with your blowtorch, you can inspect your turret to see if it needs repairs. Always remember to wear eye protection before welding, otherwise you will blind yourself! Welding goggles, welding helmets, or welding visors will all keep your eyes safe.
+
+                                             You are a skilled engineer, so by using your tools you can perform a number of useful repairs in the field: generators, APCs, static communications towers, and the experimental sensor tower all might need your expertise to fix. If you are unsure how to repair something, you can always inspect it and the tooltip will tell you the next required step.
+
+                                             Use the metal and plasteel in your possession to build barricades to keep your squad safe, you can open any material's construction menu by pressing Z with it in your hand. Always remember to put barbed wires on your cades!
+
+                                             You can help deconstruct the area of operations to remove obstacles blocking your squad. You can purchase plastic explosives and breaching charges in your vendor to provide quick explosive openings, or you can use your tools to slowly deconstruct the walls.
+
+rmc-new-to-job-maint-tech = As a Maintenance Technician, your job is to perform any required shipside engineering tasks and busy yourself with projects.
+
+                                             One of the most important engineering duties is preparing the orbital cannon. Assist the Chief Engineer with fueling and loading the cannon at CIC's direction.
+
+                                             Enter the maintenance tunnels to scrap barrels and crates with your crowbar. Make sure to only scrap barrels and crates, everything else is off limits for scrapping... unless the Commander calls for shipside deconstruction: this allows you to begin deconstructing more parts of the ship for metal to help the battle. If you are unsure, you can ask your Chief Engineer. Bring any metal and wood you salvage to Requisitions so they can make good use of it!
+
+                                             You have the time and freedom to do other things like:
+
+                                             Explore the ship and learn its layout, there are interesting things to be found in out-of-the-way places.
+
+                                             Build televisions and lathes. Construct a machine frame out of metal sheet and complete the construction steps shown when you inspect it, the required circuit boards can be found inside vendors in the engineering section.
+
+                                             Perform a rennovation of an area. Make sure to get permission from both the Chief Engineer and the Department Head of the area you wish to rennovate.
+
+                                             Deploy to help construct the FOB alongside Bravo squad, your engineering skills could prove invaluable. Make sure to get deployment permission from the Chief Engineer or Commander.
+rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of the Weston-Yamada Corporation, sent to make sure both WEYA has their interests maintained while improving and aiding relations with the UNMC. As a Corporate Liaison, you serve as a roleplay role, intended to create interesting and fun roleplay while not having a major effect on the operation. You are subject to Marine Law and are expected not to break it.
+
+                                             Your office contains a large amount of RP-relevant supplies, from papers and pens to clothing and cigars. Make sure to familiarize yourself with your office; it's essentially your home base. Use your fax machine to fax Weston-Yamada to report information or make requests. You will oftentimes not receive a response, and this is normal.
+
+                                             You are not an antagonistic role, nor are you a combat role. Do not be antagonistic to other players or take antagonistic action: You are supposed to positively represent Weston-Yamada. Do not deploy to the planet in order to fight xenos. You are not trained to fight, nor are you expected to.
+
+                                             If you have any other questions, consult the guidebook's Corporate Liaison page.
+rmc-new-to-job-cc = As a Correspondent, your job is to keep the masses informed on the efforts of the United Nations Marine Corps! Be that through film and broadcast, pen and paper journalism, or any other means.
+
+                                             Head on over to the Correspondents' room, from there, you can get your Correspondent essentials and your TV camera to film the action. This camera broadcasts a live view to any televisions on the ship (audio not included), so make sure to get good shots for the folks back home! The fax machine in the room is also your tool for sending articles around the ship or contacting The Free Press.
+
+                                             Correspondents may deploy or remain on the ship; it's your choice! Plenty of newsworthy events may occur on the ship during an operation, and interviewing the unsung heroes in the supporting departments is always popular back home. But if it's action you or your viewerbase wish for, there's always the frontline.
+
+                                             Deploying Correspondents may carry a sidearm for self-defense; however, you are not a combatant! Time spent fighting or physically assisting the Marines is time not spent filming or writing. Being too helpful may turn your press uniform from a shield to a target for the UNMC's enemies. You can't report when you're dead, so play it safe and stay alive! 
