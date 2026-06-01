@@ -81,6 +81,8 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentRailFlashlight
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -91,7 +93,7 @@
     offsets:
       rmc-aslot-barrel: 0.8, 0.095
       rmc-aslot-rail: -0.125, 0.15
-      rmc-aslot-underbarrel: 0.475, -0.19
+      rmc-aslot-underbarrel: 0.43, -0.1885
   - type: GunDamageModifier
     multiplier: 1.2
   - type: ItemMapper
