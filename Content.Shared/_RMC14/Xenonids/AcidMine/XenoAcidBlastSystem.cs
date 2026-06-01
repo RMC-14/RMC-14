@@ -38,7 +38,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoAcidBlastComponent, ComponentInit>(OnBlastInit);
+        SubscribeLocalEvent<XenoAcidBlastComponent, MapInitEvent>(OnBlastInit);
     }
 
     public override void Update(float frameTime)
@@ -56,7 +56,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         }
     }
 
-    private void OnBlastInit(Entity<XenoAcidBlastComponent> ent, ref ComponentInit args)
+    private void OnBlastInit(Entity<XenoAcidBlastComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.Activation = _timing.CurTime + ent.Comp.Delay;
         Dirty(ent.Owner, ent.Comp);
