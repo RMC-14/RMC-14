@@ -53,7 +53,7 @@
     - Colony
     defaultChannel: CLF
   - type: Sprite
-    state: cap_key
+    state: echo_key
 
 # ERT
 - type: entity

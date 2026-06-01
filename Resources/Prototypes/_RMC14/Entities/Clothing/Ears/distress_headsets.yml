@@ -38,14 +38,38 @@
   parent: RMCHeadsetDistressCLF
   id: RMCHeadsetDistressCLFPVE
   name: Cell headset
-  description: A special headset used by crew members of a certain transort ship.
+  description: A commercial ship crew headset, its been modified to allow for use with colony long range subspace communications relays.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: eng_headset
   - type: GrantTacMapAlert
   - type: GrantSquadLeaderTracker
     defaultMode: PVECLFCapt
     trackerModes:
     - PVECLFCapt
     - PVECLFDeckOff
+
+- type: entity
+  parent: RMCHeadsetDistressCLFPVE
+  id: RMCHeadsetDistressCLFPVELead
+  name: Cell Leader headset
+  description: A commercial deck officer headset, its been modified to allow for use with colony long range subspace communications relays.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: ce_headset
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetDistressCLFPVELead
+  id: RMCHeadsetDistressCLFPVECapt
+  name: Cell Captain headset
+  description: A commercial ship captain headset, its been modified to allow for use with colony long range subspace communications relays.
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
 
 # For Bureau Marshals
 - type: entity

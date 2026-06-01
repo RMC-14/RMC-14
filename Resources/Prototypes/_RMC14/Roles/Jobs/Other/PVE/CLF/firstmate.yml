@@ -58,7 +58,7 @@
     id: RMCIDCardCLFLeaderPVE
     jumpsuit: RMCJumpsuitCLFPVELead
     shoes: RMCShoesCombat
-    ears: RMCHeadsetDistressCLFPVE
+    ears: RMCHeadsetDistressCLFPVELead
 
 - type: playTimeTracker
   id: CMJobCLFLeaderPVE
