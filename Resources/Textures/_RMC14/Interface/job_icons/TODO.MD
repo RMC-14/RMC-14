@@ -14,7 +14,8 @@ Delete `interface/marine_hud` and move any usages to either just base interface 
 File search claims orders and fireteams aren't used in code, check and delete them?
 File search claims that the external faction icons aren't used here, check and delete them?
 File Search claims hudmarineboardercommand is unused, remove it?
-Do we want to move the provost folder outside of UNMC?
+Do we want to move the provost folder outside of UNMC one?
+Update the meta needs created a bunch have the copyright done but aren't useable because I didn't make the states
 
 **META NEEDS CREATED**
 ~~CLF~~
