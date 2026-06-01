@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added the CPR dummy! Press Z in hand to deploy and Alt click/E to pick
-      it up or reset the counter.
-    type: Add
-  - message: Added the CPR dummy to the Senior Enlisted Advisor's equipment rack!
-    type: Add
-  id: 2760
-  time: '2026-01-13T08:57:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8942
 - author: Dygon
   changes:
   - message: Old Queen eyes no longer show up in the ghost warp menu.
@@ -4503,5 +4493,16 @@
   id: 3259
   time: '2026-06-01T08:14:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9663
+- author: Drazamuffin
+  changes:
+  - message: You can now pick up pet cats and Mr. Wiggles
+    type: Add
+  - message: added Farwa, Stok, Yiren and Neaera as small hosts
+    type: Add
+  - message: changed some xeno chatsans to be more vauge for flexibility
+    type: Tweak
+  id: 3260
+  time: '2026-06-01T09:16:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9820
 Name: RMC14
 Order: -1
