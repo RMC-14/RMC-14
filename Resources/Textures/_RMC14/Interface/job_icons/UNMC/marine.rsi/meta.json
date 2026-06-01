@@ -1,2 +1,23 @@
-spttech icon by Drazamuffin
-
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "hudsquad, hudsquad_leader_a, hudsquad_leader, hudsquad_tl, hudsquad_spec, hudsquad_gun, hudsquad_engi, hudsquad_med, hudsquad_ass taken from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi. ,spttech by Drazamuffin (Github)",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudsquad_soc"
+        },
+        {
+            "name": "hudsquad_soccmd"
+        },
+        {
+            "name": "hudsquad_soctl"
+        },
+        {
+            "name": "hudsquad_soctl_a"
+        }
+    ]
+}
