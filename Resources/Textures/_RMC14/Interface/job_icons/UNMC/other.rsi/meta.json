@@ -1,1 +1,20 @@
-correspondent by @IceNoobXD on Github, messtech and syn from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Correspondent by @IceNoobXD on Github, messtech and syn from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudsquad_correspondent"
+        },
+        {
+            "name": "hudsquad_messtech"
+        },
+        {
+            "name": "hudsquad_syn"
+        }
+    ]
+}

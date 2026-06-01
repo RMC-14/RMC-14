@@ -1,1 +1,32 @@
-hudsquad cmp, crmp, mp, mpcadet, rmp, warden from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, hudsquad_hgmp.png taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e7df18b4f22a55044502ecbf54c646e1ff68c03d/icons/mob/hud/factions/marine.dmi
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "hudsquad cmp, crmp, mp, mpcadet, rmp, warden from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, hudsquad_hgmp.png taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e7df18b4f22a55044502ecbf54c646e1ff68c03d/icons/mob/hud/factions/marine.dmi",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudsquad_cmp"
+        },
+        {
+            "name": "hudsquad_crmp"
+        },
+        {
+            "name": "hudsquad_hgmp"
+        },
+        {
+            "name": "hudsquad_mp"
+        },
+        {
+            "name": "hudsquad_mpcadet"
+        },
+        {
+            "name": "hudsquad_rmp"
+        },
+        {
+            "name": "hudsquad_warden"
+        }
+    ]
+}

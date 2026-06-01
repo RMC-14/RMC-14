@@ -35,16 +35,16 @@ Go through and make sure we delete the "faction icons" from here because we use 
         ~~standard~~
     ~~TSEPA~~
 UNMC
-    auxilary_support
-    command
-    engineering
+    ~~auxilary_support~~
+    ~~command~~
+    ~~engineering~~
     ~~high_command~~
     marine
     medical
-    military_police
-    other
+    ~~military_police~~
+    ~~other~~
     provost
-    requsitions
+    ~~requsitions~~
     Marsoc
 WE-YA
     goon
