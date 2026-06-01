@@ -110,7 +110,6 @@
       visible: false
   - type: Item
     sprite: _RMC14/Objects/Misc/Janitorial/bucket.rsi
-    size: Normal
   - type: SolutionContainerVisuals
     fillBaseName: janibucket-
   - type: SolutionContainerManager
@@ -179,3 +178,10 @@
         enum.OpenableVisuals.Layer:
           True: {visible: false}
           False: {visible: true}
+  - type: StorageNestedOpenSkillRequired
+    skills:
+      all:
+        RMCSkillMedical: 2
+  - type: Tag
+    tags:
+    - CMFirstAidKit
