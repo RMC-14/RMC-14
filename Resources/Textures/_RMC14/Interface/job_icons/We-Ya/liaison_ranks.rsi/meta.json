@@ -1,1 +1,38 @@
-All from https://github.com/cmss13-devs/cmss13/blob/e453200c58c7fe247d5fa039da42c3b71c2a4b6e/icons/mob/hud/factions/wy.dmi
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/e453200c58c7fe247d5fa039da42c3b71c2a4b6e/icons/mob/hud/factions/wy.dmi",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "weya_assman"
+        },
+        {
+            "name": "weya_chiefman"
+        },
+        {
+            "name": "weya_depdirector"
+        },
+        {
+            "name": "weya_director"
+        },
+        {
+            "name": "weya_divman"
+        },
+        {
+            "name": "weya_execspec"
+        },
+        {
+            "name": "weya_execsuper"
+        },
+        {
+            "name": "weya_jrexec"
+        },
+        {
+            "name": "weya_seniorexec"
+        }
+    ]
+}

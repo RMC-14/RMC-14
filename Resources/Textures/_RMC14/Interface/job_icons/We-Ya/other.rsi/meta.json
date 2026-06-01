@@ -1,1 +1,17 @@
-wo_op and hudsquad_liaison taken from https://github.com/cmss13-devs/cmss13/blob/e453200c58c7fe247d5fa039da42c3b71c2a4b6e/icons/mob/hud/factions/wy.dmi
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "wo_op and hudsquad_liaison taken from https://github.com/cmss13-devs/cmss13/blob/e453200c58c7fe247d5fa039da42c3b71c2a4b6e/icons/mob/hud/factions/wy.dmi",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "wo_op"
+        },
+        {
+            "name": "hudsquad_liaison"
+        }
+    ]
+}
