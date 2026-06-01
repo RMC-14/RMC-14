@@ -19,7 +19,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _RMC14/Interface/job_icons/UNMC/requisitions.rsi
+    sprite: _RMC14/Interface/job_icons/UNMC/requisition.rsi
     state: hudsquad_ct
 
 - type: entity
