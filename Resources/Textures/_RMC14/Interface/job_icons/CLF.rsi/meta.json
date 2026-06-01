@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "CLF Cellcom,Engi,Med,Mil,SL,SL_A,Spec,Synth are taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, hudCLF taken from TODO",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "clf_cellcomm"
+        },
+        {
+            "name": "clf_engi"
+        },
+        {
+            "name": "clf_med"
+        },
+        {
+            "name": "clf_mil"
+        },
+        {
+            "name": "clf_sl"
+        },
+        {
+            "name": "clf_sl_a"
+        },
+        {
+            "name": "clf_spec"
+        },
+        {
+            "name": "clf_synth"
+        },
+        {
+            "name": "hudCLF"
+        }
+    ]
+}
+

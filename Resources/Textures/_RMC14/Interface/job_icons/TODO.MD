@@ -5,13 +5,12 @@ The list will mimic file path. If you change something update it here please.
 
 Icon Command is probabblyyy broken now `Content.Server/_RMC14/Marines/Icons/IconCommand.cs`
 decide final file structure (run through Whisper most likely)
-Make sure no unneeded .rsi ending
+Make sure no unneeded .rsi ending AND that everything works
 test and test and test (I will spawn every role in if I have to)
 
 **META NEEDS CREATED**
-CLF
+CLF - hudCLF needs attrib
 CMB
-Colonist Lobby
 Freelancer
 Halcyon
 Marsoc
@@ -19,6 +18,7 @@ MISC
     fireteam
     mutiny
     orders
+    ~~Colonist Lobby~~
 other
 SPP
 TSE
@@ -36,20 +36,18 @@ WE-YA
     pmc
     other
 whiskey_outpost
-xeno
+~~xeno~~
 
 **CODE SIDE RENAME/UPDATE NEEDS DONE FOR EACH PNG**
 ~~CLF~~
 ~~CMB~~
-~~Colonist Lobby~~
 ~~Freelancer~~
 Halcyon
-Marsoc
 MISC
     fireteam
     mutiny
     orders
-other
+    Colonist Lobby
 SPP
 TSE
     RCM
@@ -69,6 +67,7 @@ UNMC
     ~~other~~
     provost # (Move this somewhere else?)
     ~~requsitions~~
+    Marsoc
 ~~WE-YA~~
     ~~goon~~
     ~~liaison_ranks~~
