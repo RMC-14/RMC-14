@@ -97,6 +97,7 @@
                                                      Margin="1" BackgroundColor="#004E25"
                                                      BorderColor="#02E74E" BorderThickness="1"
                                                      Text="Enable"
+                                                     TextHorizontalAlignment="Center"
                                                      HorizontalExpand="True" />
                         </BoxContainer>
                         <BoxContainer Orientation="Horizontal" HorizontalExpand="True">

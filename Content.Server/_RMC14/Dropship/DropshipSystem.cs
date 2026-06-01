@@ -24,7 +24,6 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Access.Systems;
-using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
@@ -90,6 +89,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private bool _hijack;
 
     private const float DepartureLocationSearchRange = 12;
+    private const float DropshipStartupTimeSeconds = 10;
+    private const float DropshipTravelTimeSeconds = 100;
+    private const float DropshipPrearrivalTimeSeconds = 10;
+    private const float DropshipRechargeTimeSeconds = 120;
 
     public override void Initialize()
     {
@@ -1332,6 +1335,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
             Dirty(destination, newDestination);
         }
 
+        if (!hijack)
+            startupTime ??= DropshipStartupTimeSeconds;
+
         if (hyperspaceTime == null)
         {
             if (hijack)
@@ -1351,12 +1357,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 }
                 else
                 {
-                    hyperspaceTime = _shuttle.DefaultTravelTime;
+                    hyperspaceTime = DropshipTravelTimeSeconds;
                     if (hasSkill)
                         hyperspaceTime *= computer.Comp.SkillTravelMultiplier;
                 }
 
-                dropship.RechargeTime = TimeSpan.FromSeconds(_config.GetCVar(CCVars.FTLCooldown) * rechargeMultiplier);
+                dropship.RechargeTime = TimeSpan.FromSeconds(DropshipRechargeTimeSeconds * rechargeMultiplier);
 
                 foreach (var point in dropship.AttachmentPoints)
                 {
@@ -1379,7 +1385,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                     }
                 }
 
-                hyperspaceTime += _config.GetCVar(CCVars.FTLArrivalTime);
+                hyperspaceTime += DropshipPrearrivalTimeSeconds;
             }
         }
 
