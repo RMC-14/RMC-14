@@ -2,14 +2,14 @@
   parent: CMJobIconBase
   id: CMJobIconQuartermaster
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/UNMC/requisitions.rsi
     state: hudsquad_ro
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconCargoTech
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/UNMC/requisitions.rsi
     state: hudsquad_ct
 
 - type: jobIcon

@@ -10,6 +10,7 @@ Ensure end of tree files do have .rsi
 This all errors out but kinda expected since its not done
 test and test and test (I will spawn every role in if I have to) - Bailey
 The "other" folder here is terrible and we maybe want to find a better solution for it
+Delete `interface/marine_hud` and move any usages to either just base interface or into job_icons. Its entirely depreciated
 
 **META NEEDS CREATED**
 ~~CLF~~
