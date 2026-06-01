@@ -23,13 +23,13 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: rmc-job-prefix-fire-protection-specialist
-    - type: TacticalMapIcon
-      icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: spp_civ
-      background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_spp_civilian
+#    - type: TacticalMapIcon # TODO: tacmap of diff factions mechanic
+#      icon:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: spp_civ
+#      background:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: background_spp_civilian
   useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear

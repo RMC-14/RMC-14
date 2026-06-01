@@ -30,13 +30,13 @@
       preset: RMCSurvivorPresetSPPCrashland
     - type: RMCSurvivor
     - type: RMCAllowSuitStorage
-    - type: TacticalMapIcon
-      icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: spp_pvt
-      background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_spp
+  #    - type: TacticalMapIcon # TODO: tacmap of diff factions mechanic
+  #      icon:
+  #        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+  #        state: spp_pvt
+  #      background:
+  #        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+  #        state: background_spp
   hidden: true
 
 - type: entity
