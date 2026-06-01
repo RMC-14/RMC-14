@@ -7,7 +7,7 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Interface/job_icons
+      sprite: _RMC14/Interface/job_icons/Misc/mutiny.rsi
       state: hudmutineer
     useDelay: 2
   - type: TargetAction

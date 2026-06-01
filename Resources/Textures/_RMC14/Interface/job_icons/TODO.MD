@@ -20,7 +20,7 @@ MISC
     orders
     ~~Colonist Lobby~~
 other
-SPP
+SPP - Some of this has been moved over but states need done and the copyright needs done too
 TSE
     RCM
         paramarine
@@ -42,11 +42,11 @@ whiskey_outpost
 ~~CLF~~
 ~~CMB~~
 ~~Freelancer~~
-Halcyon
+~~Halcyon~~
 MISC
-    fireteam
-    mutiny
-    orders
+    ~~fireteam~~ # These aren't used anywhere in code, we can probably remove these from this folder, add to the todo later?
+    ~~mutiny~~
+    ~~orders~~ # Thesse aren't used anywhere from this folder but that seems wrong? Maybe its fine to remove these too
     Colonist Lobby
 SPP
 TSE

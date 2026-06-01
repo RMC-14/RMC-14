@@ -23,42 +23,42 @@
   parent: CMJobIconBase
   id: RMCJobIconGenericColonist
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
+    sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
     state: generic_colonist
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistCO
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
+    sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
     state: generic_colonist_co
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistDoctor
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
+    sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
     state: generic_colonist_doctor
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistEngi
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
+    sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
     state: generic_colonist_engi
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistMP
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
+    sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
     state: generic_colonist_mp
 
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconGenericColonistResearcher
   icon:
-    sprite: _RMC14/Interface/job_icons/colonist_lobby.rsi
+    sprite: _RMC14/Interface/job_icons/Misc/colonist_lobby.rsi
     state: generic_colonist_researcher
 
 - type: jobIcon
@@ -72,7 +72,7 @@
   parent: CMJobIconBase
   id: RMCJobIconHalcyonExec
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/halcyon.rsi
     state: hc_exec
 
 # WEYA Job Icons
