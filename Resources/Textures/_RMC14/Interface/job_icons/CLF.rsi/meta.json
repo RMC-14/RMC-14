@@ -8,7 +8,7 @@
   },
     "states": [
         {
-            "name": "clf_cellcomm"
+            "name": "clf_cellcom"
         },
         {
             "name": "clf_engi"
