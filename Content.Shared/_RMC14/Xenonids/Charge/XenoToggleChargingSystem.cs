@@ -160,7 +160,7 @@ public sealed class XenoToggleChargingSystem : EntitySystem
             }
 
             if (damage.Comp.Damage != null)
-                _damageable.TryChangeDamage(damage, damage.Comp.Damage * stage, damageable: damageable);
+                _damageable.TryChangeDamage(damage, damage.Comp.Damage * stage, damageable: damageable, shouldIgnoreClawLogic: true);
 
             if (damage.Comp.ArmorPiercingDamage != null)
             {
@@ -168,7 +168,8 @@ public sealed class XenoToggleChargingSystem : EntitySystem
                     damage,
                     damage.Comp.ArmorPiercingDamage * stage,
                     damageable: damageable,
-                    armorPiercing: damage.Comp.ArmorPiercing
+                    armorPiercing: damage.Comp.ArmorPiercing,
+                    shouldIgnoreClawLogic: true
                 );
             }
 
@@ -177,7 +178,7 @@ public sealed class XenoToggleChargingSystem : EntitySystem
             {
                 var bluntDamage = new DamageSpecifier();
                 bluntDamage.DamageDict[_blunt] = destroyed.Value * damage.Comp.PercentageDamage * stage;
-                _damageable.TryChangeDamage(damage, bluntDamage, damageable: damageable);
+                _damageable.TryChangeDamage(damage, bluntDamage, damageable: damageable, shouldIgnoreClawLogic: true);
             }
         }
 
@@ -552,7 +553,7 @@ public sealed class XenoToggleChargingSystem : EntitySystem
             else
                 damage = defaults.StructureDamagePerStage;
 
-            _damageable.TryChangeDamage(target, damage * stage * mult);
+            _damageable.TryChangeDamage(target, damage * stage * mult, shouldIgnoreClawLogic: true);
 
             // Target may have been deleted by the damage call
             if (!TerminatingOrDeleted(target))

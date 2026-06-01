@@ -53,7 +53,7 @@ public sealed class XenoClawsSystem : EntitySystem
         var xeno = args.Tool;
         var receiver = ent.Comp;
 
-        if (!_xenoChargingQuery.HasComp(xeno))
+        if (args.ShouldIgnoreClawLogic)
             return;
 
         if (!_meleeWeaponQuery.HasComp(xeno) || !_xenoClawsQuery.TryComp(xeno, out var claws))
@@ -90,7 +90,7 @@ public sealed class XenoClawsSystem : EntitySystem
         var xeno = args.Tool;
         var receiver = ent.Comp;
 
-        if (!_xenoChargingQuery.HasComp(xeno))
+        if (args.ShouldIgnoreClawLogic)
             return;
 
         if (!_meleeWeaponQuery.HasComp(xeno))

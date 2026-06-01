@@ -195,8 +195,8 @@ public sealed class XenoChargeSystem : EntitySystem
                 structDamage = crush.SetDamage;
         }
 
-        var finalDamage = _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage);
-        var damage = _damageable.TryChangeDamage(targetId, finalDamage, origin: xeno, tool: xeno);
+        //var finalDamage = _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage);
+        var damage = _damageable.TryChangeDamage(targetId, structDamage, origin: xeno, tool: xeno, shouldIgnoreClawLogic: true);
 
         if (damage?.GetTotal() > FixedPoint2.Zero && !TerminatingOrDeleted(targetId))
         {
