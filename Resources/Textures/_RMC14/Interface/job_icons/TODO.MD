@@ -7,7 +7,9 @@ Icon Command is probabblyyy broken now `Content.Server/_RMC14/Marines/Icons/Icon
 decide final file structure (run through Whisper most likely)
 Make sure no unneeded .rsi ending
 Ensure end of tree files do have .rsi
+This all errors out but kinda expected since its not done
 test and test and test (I will spawn every role in if I have to) - Bailey
+The "other" folder here is terrible and we maybe want to find a better solution for it
 
 **META NEEDS CREATED**
 CLF - hudCLF needs attrib
