@@ -1287,6 +1287,26 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         return true;
     }
 
+    public void UpdateSignalFlareVisuals(EntityUid ent)
+    {
+        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _mapManager);
+
+        if (!IsFlareLit(ent))
+            return;
+
+        if (!TryComp<AppearanceComponent>(ent, out var appearance))
+            return;
+
+        if (CasDebug || _area.CanCAS(coordinates))
+        {
+            _appearance.SetData(ent, SignalFlareVisuals.BeaconState, true, appearance);
+        }
+        else
+        {
+            _appearance.SetData(ent, SignalFlareVisuals.BeaconState, false, appearance);
+        }
+    }
+
     public int ComputeNextId()
     {
         return _nextId++;

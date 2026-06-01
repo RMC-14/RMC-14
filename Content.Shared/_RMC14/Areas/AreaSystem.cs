@@ -1,20 +1,25 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Components;
+using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.GameStates;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Warps;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.GameTicking;
+using Content.Shared.Item.ItemToggle;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Lidgren.Network;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Areas;
 
@@ -32,6 +37,9 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedDropshipWeaponSystem _weapon = default!;
+    [Dependency] private readonly RMCComponentsSystem _toggle = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
@@ -44,6 +52,7 @@ public sealed class AreaSystem : EntitySystem
     private EntityQuery<XenoConstructComponent> _xenoConstruct;
 
     private readonly List<EntityUid> _toRender = new();
+    private readonly HashSet<Entity<FlareSignalComponent>> _roofEnts = new();
 
     private TimeSpan _earlySpreadHiveTime;
 
@@ -58,10 +67,46 @@ public sealed class AreaSystem : EntitySystem
         _xenoConstruct = GetEntityQuery<XenoConstructComponent>();
 
         SubscribeLocalEvent<AreaGridComponent, MapInitEvent>(OnAreaGridMapInit);
+        SubscribeLocalEvent<RoofingEntityComponent, MapInitEvent>(OnRoofMapInit);
+        SubscribeLocalEvent<RoofingEntityComponent, EntityTerminatingEvent>(OnRoofRemoved);
 
         Subs.CVar(_config, RMCCVars.RMCHiveSpreadEarlyMinutes, v => _earlySpreadHiveTime = TimeSpan.FromMinutes(v), true);
     }
 
+
+    /// <summary>
+    ///     Raised when entity is destroyed and about to be deleted.
+    /// </summary>
+    public sealed class UpdateRoofEvent : EntityEventArgs
+    {
+        
+    }
+    private void UpdateRoof(Entity<RoofingEntityComponent> ent)
+    {
+        _roofEnts.Clear();
+        var roofCoords = _transform.GetMoverCoordinates(ent);
+        //var update_roof_event = new UpdateRoofEvent();
+        //RaiseLocalEvent(update_roof_event);
+        _lookup.GetEntitiesInRange(roofCoords, ent.Comp.Range, _roofEnts);
+        //ent.Comp.Range = 0;
+        _roofEnts.ToString();
+        foreach (var foundEnt in _roofEnts)
+        {
+            foundEnt.ToString();
+            if (HasComp<ActiveFlareSignalComponent>(foundEnt))
+                continue;
+            _weapon.UpdateSignalFlareVisuals(foundEnt);
+        }
+    }
+    private void OnRoofMapInit(Entity<RoofingEntityComponent> ent, ref MapInitEvent args)
+    {
+        UpdateRoof(ent);
+    }
+    private void OnRoofRemoved(Entity<RoofingEntityComponent> ent, ref EntityTerminatingEvent args)
+    {
+        ent.Comp.CanCAS = true;
+        UpdateRoof(ent);
+    }
     private void OnAreaGridMapInit(Entity<AreaGridComponent> ent, ref MapInitEvent args)
     {
         _toRender.Add(ent);
