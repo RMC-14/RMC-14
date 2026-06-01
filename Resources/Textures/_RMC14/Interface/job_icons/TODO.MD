@@ -8,7 +8,6 @@ decide final file structure (run through Whisper most likely)
 test and test and test (I will spawn every role in if I have to) - Bailey
 Delete `interface/marine_hud` and move any usages to either just base interface or into job_icons. Its entirely depreciated
 Do we want to move the provost folder outside of UNMC one?
-Hudsquad_vo lacks attribution
 Go through and make sure we delete the "faction icons" from here because we use the ones in the interface folder directly
 
 **META NEEDS CREATED**
