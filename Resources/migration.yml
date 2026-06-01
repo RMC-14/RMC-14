@@ -1499,3 +1499,7 @@ CMPosterRememberIo: CMRandomPosterAny
 DrinkGlass: RMCDrinkGlass
 FoodDonkpocket: RMCFoodDonkpocket
 FoodBoxDonkpocket: RMCBoxDonkpockets
+
+#2026-06-01
+DrinkSoyMilkCarton: RMCDrinkSoyMilkCarton
+DrinkMilkCarton: RMCDrinkMilkCarton
