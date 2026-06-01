@@ -18,7 +18,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-
 namespace Content.Shared._RMC14.Areas;
 
 public sealed class AreaSystem : EntitySystem
@@ -78,8 +77,7 @@ public sealed class AreaSystem : EntitySystem
 
         foreach (var foundEnt in _flareEnts)
         {
-            foundEnt.ToString();
-            if (HasComp<ActiveFlareSignalComponent>(foundEnt)) //This Component indicates that the flare is arming, so we wait for that to update the visuals instead
+            if (HasComp<ActiveFlareSignalComponent>(foundEnt)) //This component indicates that the flare is arming, so we wait for that to update the visuals instead
                 continue;
             _weapon.UpdateSignalFlareVisuals(foundEnt);
         }
