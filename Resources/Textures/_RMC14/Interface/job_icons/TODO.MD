@@ -16,18 +16,19 @@ File search claims that the external faction icons aren't used here, check and d
 File Search claims hudmarineboardercommand is unused, remove it?
 Do we want to move the provost folder outside of UNMC one?
 Update the meta needs created a bunch have the copyright done but aren't useable because I didn't make the states
+Hudsquad_vo lacks attribution
 
 **META NEEDS CREATED**
 ~~CLF~~
-CMB
-Freelancer
-Halcyon
+~~CMB~~
+~~Freelancer~~
+~~Halcyon~~
 MISC
     fireteam
     mutiny
     orders # - Not even partially done like some of the others now
     ~~Colonist Lobby~~ # Maybe needs clarification on if they are based off anything
-other
+~~other~~
 SPP - Some of this has been moved over but states need done and the copyright needs done too
     Kommissar
     Standard # Rename UPP to SPP and update meta too

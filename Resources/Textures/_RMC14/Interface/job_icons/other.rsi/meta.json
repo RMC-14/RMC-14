@@ -1,3 +1,29 @@
-Made by noctyrnal
-4.0
-TODO: Find out if this is based on anything
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "pve_dynaengi and pve_novameddoc made by noctrynal (Github), hudsquad_nv_co made by Dutch-VanDerLine (Github), hudsquad_syn_forecon by Sigma Draconis (Github), hudsquad_vo TODO",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "empty"
+        },
+        {
+            "name": "hudsquad_nv_co"
+        },
+        {
+            "name": "hudsquad_syn_forecon"
+        },
+        {
+            "name": "hudsquad_vo"
+        },
+        {
+            "name": "pve_dynaengi"
+        },
+        {
+            "name": "pve_novameddoc"
+        }
+    ]
+}
