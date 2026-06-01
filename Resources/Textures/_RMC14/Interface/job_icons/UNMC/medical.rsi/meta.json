@@ -1,1 +1,26 @@
-Who made the crosses blue?
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/a46fad702be27fedec2b0bca69ed3b316e482095/icons/mob/hud/factions/marine.dmi with CMO, Doctor, and Researcher being changed from red to blue by UnicornOnLSD (Github).",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudsquad_cmo"
+        },
+        {
+            "name": "hudsquad_doctor"
+        },
+        {
+            "name": "hudsquad_fielddoctor"
+        },
+        {
+            "name": "hudsquad_nurse"
+        },
+        {
+            "name": "hudsquad_researcher"
+        }
+    ]
+}

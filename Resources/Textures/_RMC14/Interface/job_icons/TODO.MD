@@ -14,6 +14,5 @@ Run final file structure through Whisper
 **META NEEDS CREATED**
 UNMC
     marine
-    medical
 WE-YA
     pmc
