@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Overwatch;
 public sealed partial class OverwatchCameraComponent : Component, IClothingSlots
 {
     [DataField, AutoNetworkedField]
-    public SlotFlags Slots { get; set; } = SlotFlags.HEAD | SlotFlags.EARS;
+    public SlotFlags Slots { get; set; } = SlotFlags.HEAD | SlotFlags.EARS | SlotFlags.EYES;
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Watching = new();
