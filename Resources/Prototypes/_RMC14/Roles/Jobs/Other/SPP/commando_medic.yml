@@ -113,5 +113,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPCommandoMedic
   icon:
-    sprite: _RMC14/Interface/job_icons
-    state: upp_commed
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_commed

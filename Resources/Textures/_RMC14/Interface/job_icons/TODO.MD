@@ -12,14 +12,14 @@ test and test and test (I will spawn every role in if I have to) - Bailey
 The "other" folder here is terrible and we maybe want to find a better solution for it
 
 **META NEEDS CREATED**
-CLF - hudCLF needs attrib
+~~CLF~~
 CMB
 Freelancer
 Halcyon
 MISC
     fireteam
     mutiny
-    orders
+    orders # - Not even partially done like some of the others now
     ~~Colonist Lobby~~ # Maybe needs clarification on if they are based off anything
 other
 SPP - Some of this has been moved over but states need done and the copyright needs done too
@@ -36,7 +36,7 @@ UNMC
     auxilary_support
     command
     engineering
-    high_command
+    ~~high_command~~
     marine
     medical
     military_police

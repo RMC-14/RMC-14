@@ -136,5 +136,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPSynth
   icon:
-    sprite: _RMC14/Interface/job_icons
-    state: upp_synth
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_synth

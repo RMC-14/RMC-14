@@ -39,8 +39,8 @@
       leader: true
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/job_icons
-        state: upp_sl_a
+        sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+        state: spp_sl_a
     - type: RMCPointing
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-leader
@@ -131,5 +131,5 @@
   parent: CMJobIconBase
   id: RMCJobIconSPPLeader
   icon:
-    sprite: _RMC14/Interface/job_icons
-    state: upp_sl
+    sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+    state: spp_sl

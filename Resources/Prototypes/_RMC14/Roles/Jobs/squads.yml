@@ -196,8 +196,8 @@
     canSupplyDrop: false
     group: SPP
     leaderIcon:
-      sprite: _RMC14/Interface/job_icons
-      state: upp_sl_a
+      sprite: _RMC14/Interface/job_icons/SPP/standard.rsi
+      state: spp_sl_a
 
 - type: Tag
   id: RMCSquadSPP
