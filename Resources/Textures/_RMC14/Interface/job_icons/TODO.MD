@@ -13,12 +13,11 @@ CLF - hudCLF needs attrib
 CMB
 Freelancer
 Halcyon
-Marsoc
 MISC
     fireteam
     mutiny
     orders
-    ~~Colonist Lobby~~
+    ~~Colonist Lobby~~ # Maybe needs clarification on if they are based off anything
 other
 SPP - Some of this has been moved over but states need done and the copyright needs done too
 TSE
@@ -26,10 +25,20 @@ TSE
         paramarine
         pve
         standard
-    ZSPA
+    TSEPA
     other
 UNMC
-    A
+    auxilary_support
+    command
+    engineering
+    high_command
+    marine
+    medical
+    military_police
+    other
+    provost
+    requsitions
+    Marsoc
 WE-YA
     goon
     liaison_ranks
@@ -47,14 +56,14 @@ MISC
     ~~fireteam~~ # These aren't used anywhere in code, we can probably remove these from this folder, add to the todo later?
     ~~mutiny~~
     ~~orders~~ # Thesse aren't used anywhere from this folder but that seems wrong? Maybe its fine to remove these too
-    Colonist Lobby
+    ~~Colonist Lobby~~
 SPP
 TSE
     RCM
         paramarine
         pve
         standard
-    ZSPA
+    TSEPA
     other
 UNMC
     ~~auxilary_support~~
@@ -65,7 +74,7 @@ UNMC
     ~~medical~~
     ~~military_police~~
     ~~other~~
-    provost # (Move this somewhere else?)
+    ~~provost~~ # (Move this somewhere else?)
     ~~requsitions~~
     Marsoc
 ~~WE-YA~~

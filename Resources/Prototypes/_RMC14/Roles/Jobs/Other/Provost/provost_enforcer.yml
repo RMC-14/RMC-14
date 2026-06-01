@@ -84,5 +84,5 @@
   parent: CMJobIconBase
   id: RMCJobIconProvostEnforcer
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/UNMC/provost.rsi
     state: hudsquad_pve

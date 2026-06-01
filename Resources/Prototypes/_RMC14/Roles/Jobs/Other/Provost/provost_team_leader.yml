@@ -33,7 +33,7 @@
     - type: MarineOrders
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/job_icons
+        sprite: _RMC14/Interface/job_icons/UNMC/provost.rsi
         state: hudsquad_pvl
     - type: RMCPointing
     - type: JobPrefix
@@ -98,5 +98,5 @@
   parent: CMJobIconBase
   id: RMCJobIconProvostTeamLeader
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/UNMC/provost.rsi
     state: hudsquad_pvl

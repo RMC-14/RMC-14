@@ -373,7 +373,7 @@
     canSupplyDrop: false
     group: Provost
     leaderIcon:
-      sprite: _RMC14/Interface/job_icons
+      sprite: _RMC14/Interface/job_icons/UNMC/provost.rsi
       state: hudsquad_pvl
 
 - type: entity
