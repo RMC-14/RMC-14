@@ -55,6 +55,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/dropship_nav_computer.rsi
     state: on
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: ActivatableUI
     key: enum.DropshipRemoteControlUiKey.Key
   - type: AccessReader

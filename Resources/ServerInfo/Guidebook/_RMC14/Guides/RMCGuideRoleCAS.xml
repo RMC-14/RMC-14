@@ -7,7 +7,7 @@
 
   [bold]Both the [color=#D2B48C]Alamo[/color] and [color=#808080]Normandy[/color] are engineered to perform essential troop transport and devastating Close Air Support (CAS) missions[/bold], adapting to the dynamic needs of any operation.
 
-  This guide will cover the general aspects of troop transport, attachment overview and then provide a more in-depth look at executing effective Close Air Support.
+  This guide will cover the general aspects of troop transport, flight control, attachment overview and then provide a more in-depth look at executing effective Close Air Support.
 
 
 
@@ -21,7 +21,62 @@
   -   [bold]Departure Callouts:[/bold] Be sure to announce departure times on [color=#808080]common warship radio[/color] to reduce the chance of leaving any marine behind on warship.
   -   [bold]Have the Pilot Fly:[/bold] Having [color=#FFFF00]Piloting Skill 2[/color] (standard for Dropship/Gunship Pilots and ASOs) [color=#ADD8E6]reduces dropship refuel time by 25%[/color]. [bold]This stacks with the Cooling System.[/bold]
 
-  ## II. Dropship Armaments & Engine Attachments
+  ## II. Flight Controls & Automated Routes
+
+  <Box>
+    <GuideEntityEmbed Entity="CMComputerDropshipNavigation" Caption="Onboard Flight Computer"/>
+    <GuideEntityEmbed Entity="CMComputerDropshipNavigationRemote" Caption="Remote Flight Computer"/>
+    <GuideEntityEmbed Entity="CMComputerDropshipNavigationPlanetside" Caption="Planetside Flight Computer"/>
+  </Box>
+
+  Dropship movement is coordinated through flight computers. Some are used by the pilot from inside the cockpit, while others are used remotely by flight control or from a landing zone.
+
+  ### A. Onboard Flight Computer
+
+  The [bold]onboard flight computer[/bold] is the pilot's direct control console inside the dropship cockpit.
+
+  -   [bold]Manual flight:[/bold] Select the destination you want, then press [bold]Launch[/bold]. This is the normal way to fly when a pilot is aboard.
+  -   [bold]Crew control:[/bold] The onboard console also handles dropship doors, launch announcement alarms, and fly-by runs when available.
+  -   [bold]Autopilot status:[/bold] If an automated route is active, the cockpit console will show its status and allow the pilot to disable it.
+
+  <Box>[color=#FFD700][bold]Pilot's Note[/bold][/color]: A cockpit launch is a manual override. If autopilot was active, it will be disabled when the manual launch succeeds.</Box>
+
+  ### B. Remote Flight Computer
+
+  The [bold]remote flight computer[/bold] controls dropships without requiring a pilot to stand in the cockpit. It is intended for flight control, command staff, and authorized dropship crew.
+
+  -   [bold]Select the dropship:[/bold] Choose the dropship from the [bold]Dropships[/bold] list first. The status panel will show its current location, route hangar, and autopilot state.
+  -   [bold]Send it manually:[/bold] Under [bold]Manual Launch[/bold], select a valid destination and press [bold]Send to destination[/bold].
+  -   [bold]Watch occupied pads:[/bold] Occupied destinations are shown, but another dropship cannot be sent into them.
+
+  Remote flight computers placed planetside use the same remote interface, but are positioned near landing zones for local control. Xenonids do not use the marine remote interface; their linked-LZ summon behavior is handled by interacting with the landing zone console directly.
+
+  ### C. Automated Routes
+
+  Automated routes are simple shuttle orders for moving a dropship between a chosen hangar and a chosen landing zone.
+
+  -   [bold]Cycle:[/bold] The dropship will continue running [color=#00FF00]hangar -> landing zone -> hangar[/color] until disabled.
+  -   [bold]Recall only:[/bold] The dropship will return from the landing zone to its selected hangar, then hold there.
+  -   [bold]Delay:[/bold] The route delay is the time the dropship waits before launching the next automated leg.
+
+  To set a route, select [bold]Cycle[/bold] or [bold]Recall only[/bold], choose the route [bold]Hangar[/bold], choose the route [bold]Landing Zone[/bold], set the delay, then press [bold]Enable autopilot[/bold].
+
+  <Box>
+    [bold]Launch now[/bold] immediately attempts the next automated leg.
+    [bold]Recall now[/bold] immediately attempts to send the dropship back to its route hangar.
+    When autopilot is active, the enable button becomes [bold]Disable autopilot[/bold].
+  </Box>
+
+  ### D. Safety Rules
+
+  -   Autopilot will not launch a crashed, hijacked, refueling, or in-flight dropship.
+  -   Autopilot will not launch into an occupied destination.
+  -   Door controls and launch alarms do not disable autopilot. Cockpit launch, remote launch, linked-LZ summon, and successful hijacks do.
+  -   Always announce automated launch timing over warship radio.
+
+  <Box>[color=#FF0000][bold]Warning[/bold][/color]: Autopilot moves the dropship. It does not check whether every Marine is seated, buckled, or ready.</Box>
+
+  ## III. Dropship Armaments & Engine Attachments
 
   Understanding the available hardware is crucial before engaging in CAS. Both the [color=#D2B48C]Alamo[/color] and [color=#808080]Normandy[/color] can be outfitted with 4 weapon systems, 2 performance-enhancing engine attachments and 3 utility mounts.
 
