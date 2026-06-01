@@ -3,11 +3,11 @@
 ~~X~~ means its done
 The list will mimic file path. If you change something update it here please.
 
-Run final file structure through Whisper
+Finish making metas
 See if the Icon command in `Content.Server/_RMC14/Marines/Icons/IconCommand.cs` is broken
 Test every single role in the Spawn here as Job UI
-Finish making metas
 Do a check over once each folder is done for copyright correctness
+Run final file structure through Whisper
 
 **META NEEDS CREATED**
 UNMC
@@ -23,7 +23,7 @@ UNMC
     ~~requsitions~~
     Marsoc
 WE-YA
-    goon
+    ~~goon~~
     liaison_ranks
     pmc
     other
