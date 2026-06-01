@@ -66,5 +66,5 @@
   parent: CMJobIconBase
   id: RMCJobIconPVENovaMedicaDoctor
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/other.rsi
     state: pve_novameddoc

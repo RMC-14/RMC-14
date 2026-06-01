@@ -37,7 +37,7 @@
     - type: MarineOrders
     - type: SquadLeader
       icon:
-        sprite: _RMC14/Interface/job_icons
+        sprite: _RMC14/Interface/job_icons/UNMC/marsoc.rsi
         state: hudsquad_soctl_a
     - type: RMCPointing
   hidden: true
@@ -99,7 +99,7 @@
   parent: CMJobIconBase
   id: RMCJobIconMarineRaiderLeader
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/UNMC/marsoc.rsi
     state: hudsquad_soctl
 
 - type: entity

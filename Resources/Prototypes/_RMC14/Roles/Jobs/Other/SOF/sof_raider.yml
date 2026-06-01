@@ -92,7 +92,7 @@
   parent: CMJobIconBase
   id: RMCJobIconMarineRaider
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/UNMC/marsoc.rsi
     state: hudsquad_soc
 
 - type: entity

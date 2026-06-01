@@ -377,7 +377,7 @@
     givePrefix: rmc-job-prefix-honor-guard
     isAppendPrefix: false
     giveIcon:
-      sprite: _RMC14/Interface/job_icons
+      sprite: _RMC14/Interface/job_icons/UNMC/military_police.rsi
       state: hudsquad_hgmp
     giveMapBlip:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
