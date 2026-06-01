@@ -223,6 +223,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         RefreshUI();
+        RefreshRemoteControlConsoles();
     }
 
     private void OnBeforeFTLStarted(Entity<DropshipComponent> ent, ref BeforeFTLStartedEvent args)
@@ -233,6 +234,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
     {
         RefreshUI();
+        RefreshRemoteControlConsoles();
     }
 
     private void OnFtlRequested<T>(Entity<DropshipComponent> ent, ref T args)
@@ -569,7 +571,19 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         if (!TryGetNextAutopilotTarget(dropship, autopilot, out var target, out var reason))
         {
-            SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Error, reason);
+            var holdingAtRouteHangar = Loc.GetString("rmc-dropship-autopilot-status-detail-holding-hangar");
+            if (reason == holdingAtRouteHangar)
+            {
+                autopilot.NextDepartureAt = null;
+                autopilot.RetryAt = null;
+                Dirty(dropship.Owner, autopilot);
+                SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Ready, reason);
+            }
+            else
+            {
+                SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Error, reason);
+            }
+
             RefreshRemoteControlConsoles();
             return;
         }
@@ -1414,6 +1428,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         _adminLog.Add(LogType.RMCDropshipLaunch,
             $"{ToPrettyString(user):player} {(hijack ? "hijacked" : "launched")} {ToPrettyString(dropshipId):dropship} to {ToPrettyString(destination):destination}");
 
+        RefreshUI(computer);
+        RefreshRemoteControlConsoles();
         return true;
     }
 
