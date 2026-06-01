@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Ghosts can use ladders even when another player is climbing.
-    type: Fix
-  id: 2759
-  time: '2026-01-13T08:54:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8961
 - author: Arykh
   changes:
   - message: Added the CPR dummy! Press Z in hand to deploy and Alt click/E to pick
@@ -4502,5 +4495,13 @@
   id: 3258
   time: '2026-06-01T08:11:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8671
+- author: Ilysssa
+  changes:
+  - message: Light fixtures not offsetting while map is paused. They now offset without
+      running mapinit.
+    type: Fix
+  id: 3259
+  time: '2026-06-01T08:14:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9663
 Name: RMC14
 Order: -1
