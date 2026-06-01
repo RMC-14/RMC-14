@@ -210,6 +210,17 @@
       gender: epicene
   - type: FixedIdentity
     name: cm-chatsan-replacement-dog
+  - type: Inventory
+    templateId: RMCCorgi
+    speciesId: dog
+  - type: DropHatOnDeadOrCrit
+  - type: InventorySlots
+  - type: Strippable
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  - type: InteractionPopup
 
 - type: entity
   parent: RMCMobCorgi
@@ -318,6 +329,14 @@
   - type: Inventory
     templateId: RMCCat
     speciesId: cat
+  - type: DropHatOnDeadOrCrit
+  - type: InventorySlots
+  - type: Strippable
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  - type: InteractionPopup
 
 - type: entity
   parent: RMCMobCat
@@ -366,13 +385,6 @@
   - type: WarpPoint
     follow: true
     location: Jones
-  - type: CrashLandable
-  - type: PressureImmunity
-  - type: Respirator
-    minSaturation: 5.0
-  - type: Temperature
-    heatDamageThreshold: 423
-    coldDamageThreshold: 0
   - type: Inventory
     templateId: RMCCat
     speciesId: cat
@@ -387,13 +399,6 @@
   - type: WarpPoint
     follow: true
     location: Orion
-  - type: CrashLandable
-  - type: PressureImmunity
-  - type: Respirator
-    minSaturation: 5.0
-  - type: Temperature
-    heatDamageThreshold: 423
-    coldDamageThreshold: 0
   - type: Inventory
     templateId: RMCCat
     speciesId: cat
