@@ -42,7 +42,7 @@
     - type: ViewIntelObjectives
     - type: SquadLeader
       icon:
-       sprite: _RMC14/Interface/job_icons
+       sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
        state: rmc_lieutenant
     - type: RMCTrackable
     - type: JobPrefix
@@ -86,5 +86,5 @@
   parent: CMJobIconBase
   id: RMCJobIconRoyalLieutenant
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
     state: rmc_lieutenant

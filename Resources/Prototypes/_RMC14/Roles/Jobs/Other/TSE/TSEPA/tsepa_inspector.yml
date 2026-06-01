@@ -72,5 +72,5 @@
   parent: CMJobIconBase
   id: RMCJobIconTSEPAInspector
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/TSE/TSEPA.rsi
     state: tse_painspector

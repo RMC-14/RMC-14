@@ -280,7 +280,7 @@
     canSupplyDrop: false
     group: Royal Marines
     leaderIcon:
-      sprite: _RMC14/Interface/job_icons
+      sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
       state: rmc_teamleader
   - type: Tag
     tags:
@@ -311,7 +311,7 @@
     canSupplyDrop: false
     group: Whiskey Troop
     leaderIcon:
-      sprite: _RMC14/Interface/job_icons
+      sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
       state: rmc_troopleader_pve
   - type: Tag
     tags:
@@ -342,7 +342,7 @@
     canSupplyDrop: false
     group: Paramarine
     leaderIcon:
-      sprite: _RMC14/Interface/job_icons
+      sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
       state: para_teamleader_alt
   - type: Tag
     tags:

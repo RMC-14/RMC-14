@@ -28,7 +28,7 @@
         - type: RMCTrackable
         - type: SquadLeader
           icon:
-            sprite: _RMC14/Interface/job_icons
+            sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
             state: para_teamleader_alt
         - type: TacticalMapIcon
           icon:
@@ -67,5 +67,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaTeamLeader
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
     state: para_teamleader_alt

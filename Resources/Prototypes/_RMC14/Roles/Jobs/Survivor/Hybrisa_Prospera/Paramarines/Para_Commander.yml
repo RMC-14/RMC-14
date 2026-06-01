@@ -71,5 +71,5 @@
   parent: CMJobIconBase
   id: RMCJobIconParaCommander
   icon:
-    sprite: _RMC14/Interface/job_icons
+    sprite: _RMC14/Interface/job_icons/TSE/RCM/paramarine.rsi
     state: para_commander_alt

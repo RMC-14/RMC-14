@@ -5,8 +5,9 @@ The list will mimic file path. If you change something update it here please.
 
 Icon Command is probabblyyy broken now `Content.Server/_RMC14/Marines/Icons/IconCommand.cs`
 decide final file structure (run through Whisper most likely)
-Make sure no unneeded .rsi ending AND that everything works
-test and test and test (I will spawn every role in if I have to)
+Make sure no unneeded .rsi ending
+Ensure end of tree files do have .rsi
+test and test and test (I will spawn every role in if I have to) - Bailey
 
 **META NEEDS CREATED**
 CLF - hudCLF needs attrib
@@ -20,6 +21,8 @@ MISC
     ~~Colonist Lobby~~ # Maybe needs clarification on if they are based off anything
 other
 SPP - Some of this has been moved over but states need done and the copyright needs done too
+    Kommissar
+    Standard # Rename UPP to SPP and update meta too
 TSE
     RCM
         paramarine
@@ -52,19 +55,21 @@ whiskey_outpost
 ~~CMB~~
 ~~Freelancer~~
 ~~Halcyon~~
-MISC
+~~MISC~~
     ~~fireteam~~ # These aren't used anywhere in code, we can probably remove these from this folder, add to the todo later?
     ~~mutiny~~
     ~~orders~~ # Thesse aren't used anywhere from this folder but that seems wrong? Maybe its fine to remove these too
     ~~Colonist Lobby~~
 SPP
-TSE
-    RCM
-        paramarine
-        pve
-        standard
-    TSEPA
-    other
+    ~~Kommissar~~
+    Standard # Rename from UPP to SPP before doing, probably do the meta alongside to prevent confusion
+~~TSE~~
+    ~~RCM~~
+        ~~paramarine~~
+        ~~pve~~
+        ~~standard~~
+    ~~TSEPA~~
+    ~~other~~ # File search claims this isn't used anywhere but I don't buy it
 UNMC
     ~~auxilary_support~~
     ~~command~~
