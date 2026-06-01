@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudsquad_soc"
+        },
+        {
+            "name": "hudsquad_soccmd"
+        },
+        {
+            "name": "hudsquad_soctl"
+        },
+        {
+            "name": "hudsquad_soctl_a"
+        }
+    ]
+}
