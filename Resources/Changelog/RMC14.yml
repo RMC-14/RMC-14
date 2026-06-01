@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Xeno projectiles no longer have slightly more range than intended.
-    type: Fix
-  - message: The Oppressor's tail seize ability now pulls targets closer to the Oppressor's
-      position.
-    type: Fix
-  id: 2758
-  time: '2026-01-13T08:53:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8955
-- author: Dygon
-  changes:
   - message: Ghosts can use ladders even when another player is climbing.
     type: Fix
   id: 2759
@@ -4503,5 +4493,14 @@
   id: 3257
   time: '2026-05-31T03:45:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9621
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Smoke reactions have been properly tuned and have been re-enabled. They
+      now inject 10 units divided by the amount of different agents in the solution,
+      every 6 seconds.
+    type: Tweak
+  id: 3258
+  time: '2026-06-01T08:11:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8671
 Name: RMC14
 Order: -1
