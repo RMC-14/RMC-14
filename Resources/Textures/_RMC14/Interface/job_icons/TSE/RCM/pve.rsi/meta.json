@@ -1,1 +1,44 @@
-all from https://github.com/cmss13-devs/cmss13-pve/blob/d393d64e20ab878b476dd43900e32b0fbb4cb484/icons/mob/hud/marine_hud.dmi
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13-pve/blob/d393d64e20ab878b476dd43900e32b0fbb4cb484/icons/mob/hud/marine_hud.dmi",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "rmc_breacher_pve"
+        },
+        {
+            "name": "rmc_commander_pve"
+        },
+        {
+            "name": "rmc_engi_pve"
+        },
+        {
+            "name": "rmc_lieutenant_pve"
+        },
+        {
+            "name": "rmc_marksman_pve"
+        },
+        {
+            "name": "rmc_medic_pve"
+        },
+        {
+            "name": "rmc_rifleman_pve"
+        },
+        {
+            "name": "rmc_sectionleader_pve"
+        },
+        {
+            "name": "rmc_smartgunner_pve"
+        },
+        {
+            "name": "rmc_teamleader_pve"
+        },
+        {
+            "name": "rmc_troopleader_pve"
+        }
+    ]
+}

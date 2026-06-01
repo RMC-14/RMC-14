@@ -182,7 +182,7 @@
   - type: SquadTeam
     color: "#9b0612"
     background:
-      sprite: _RMC14/Interface/job_icons/other.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -210,7 +210,7 @@
   - type: SquadTeam
     color: "#C0C0C0"
     background:
-      sprite: _RMC14/Interface/job_icons/other.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -241,7 +241,7 @@
   - type: SquadTeam
     color: "#4559F5"
     background:
-      sprite: _RMC14/Interface/job_icons/other.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -266,7 +266,7 @@
   - type: SquadTeam
     color: "#3D6F43"
     background:
-      sprite: _RMC14/Interface/job_icons/other.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -297,7 +297,7 @@
   - type: SquadTeam
     color: "#AA740F"
     background:
-      sprite: _RMC14/Interface/job_icons/other.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -328,7 +328,7 @@
   - type: SquadTeam
     color: "#3D6F43"
     background:
-      sprite: _RMC14/Interface/job_icons/other.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -359,7 +359,7 @@
   - type: SquadTeam
     color: "#990218"
     background:
-      sprite: _RMC14/Interface/job_icons/other.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet
@@ -409,7 +409,7 @@
   - type: SquadTeam
     color: "#400000"
     background:
-      sprite: _RMC14/Interface/job_icons/other.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     radio: MarineSOF
     accessLevels: []
@@ -429,7 +429,7 @@
   - type: SquadTeam
     color: "#3aeb34"
     background:
-      sprite: _RMC14/Interface/job_icons/other.rsi
+      sprite: _RMC14/Interface/job_icons/Misc/other.rsi
       state: empty
     blacklistedSquadArmor:
     - Helmet

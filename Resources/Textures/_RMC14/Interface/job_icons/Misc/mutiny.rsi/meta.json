@@ -1,1 +1,17 @@
-hudmutineer from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi hudmutineerleader by noctyrnal (github) based off hudmutineer
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "hudmutineer from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi hudmutineerleader by noctyrnal (github) based off hudmutineer",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "hudmutineer"
+        },
+        {
+            "name": "hudmutineerleader"
+        }
+    ]
+}

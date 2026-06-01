@@ -1,14 +1,62 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "hudUPP from https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, upp_co upp_com upp_commed upp_comsl upp_doc upp_lt upp_med upp_mp upp_pvt upp_sapper upp_sl upp_sl_a upp_slt upp_spec upp_synth upp_vc upp_xo based on https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi edited by Sigma Draconis. Rename all previous UPP to SPP by PursuitinAshes (Github)",
+  "copyright": "upp_co upp_com upp_commed upp_comsl upp_doc upp_lt upp_med upp_mp upp_pvt upp_sapper upp_sl upp_sl_a upp_slt upp_spec upp_synth upp_vc upp_xo based on https://github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi edited by Sigma Draconis. Rename all previous UPP to SPP by PursuitinAshes (Github)",
   "size": {
     "x": 16,
     "y": 16
   },
     "states": [
         {
-            "name": "todo"
+            "name": "spp_co"
+        },
+        {
+            "name": "spp_com"
+        },
+        {
+            "name": "spp_commed"
+        },
+        {
+            "name": "spp_comsl"
+        },
+        {
+            "name": "spp_doc"
+        },
+        {
+            "name": "spp_lt"
+        },
+        {
+            "name": "spp_med"
+        },
+        {
+            "name": "spp_mp"
+        },
+        {
+            "name": "spp_pvt"
+        },
+        {
+            "name": "spp_sapper"
+        },
+        {
+            "name": "spp_sl"
+        },
+        {
+            "name": "spp_sl_a"
+        },
+        {
+            "name": "spp_slt"
+        },
+        {
+            "name": "spp_spec"
+        },
+        {
+            "name": "spp_synth"
+        },
+        {
+            "name": "spp_vc"
+        },
+        {
+            "name": "spp_xo"
         }
     ]
 }

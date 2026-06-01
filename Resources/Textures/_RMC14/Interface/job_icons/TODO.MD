@@ -11,34 +11,29 @@ This all errors out but kinda expected since its not done
 test and test and test (I will spawn every role in if I have to) - Bailey
 The "other" folder in root is terrible and we maybe want to find a better solution for it
 Delete `interface/marine_hud` and move any usages to either just base interface or into job_icons. Its entirely depreciated
-File search claims orders and fireteams aren't used in code, check and delete them?
-File search claims that the external faction icons aren't used here, check and delete them?
-File Search claims hudmarineboardercommand is unused, remove it?
 Do we want to move the provost folder outside of UNMC one?
 Update the meta needs created a bunch have the copyright done but aren't useable because I didn't make the states
 Hudsquad_vo lacks attribution
+Go through and make sure we delete the "faction icons" from here because we use the ones elsewhere
 
 **META NEEDS CREATED**
 ~~CLF~~
 ~~CMB~~
 ~~Freelancer~~
 ~~Halcyon~~
-MISC
-    fireteam
-    mutiny
-    orders # - Not even partially done like some of the others now
+~~MISC~~
+    ~~mutiny~~
     ~~Colonist Lobby~~ # Maybe needs clarification on if they are based off anything
-~~other~~
-SPP - Some of this has been moved over but states need done and the copyright needs done too
-    Kommissar
-    Standard # Rename UPP to SPP and update meta too
-TSE
-    RCM
-        paramarine
-        pve
-        standard
-    TSEPA
-    other
+    ~~other~~
+~~SPP~~
+    ~~Kommissar~~
+    ~~Standard~~
+~~TSE~~
+    ~~RCM~~
+        ~~paramarine~~
+        ~~pve~~
+        ~~standard~~
+    ~~TSEPA~~
 UNMC
     auxilary_support
     command

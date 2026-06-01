@@ -65,7 +65,7 @@
   parent: CMJobIconBase
   id: RMCJobIconReconSynthetic
   icon:
-    sprite: _RMC14/Interface/job_icons/other.rsi
+    sprite: _RMC14/Interface/job_icons/Misc/other.rsi
     state: hudsquad_syn_forecon
 
 - type: jobIcon

@@ -1,1 +1,56 @@
-para_<x> taken from https://github.com/cmss13-devs/cmss13/blob/71660f23ed6fdbd87e09ba595212f1693ed8e5cd/icons/mob/hud/factions/twe.dmi
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/71660f23ed6fdbd87e09ba595212f1693ed8e5cd/icons/mob/hud/factions/twe.dmi",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "para_commander"
+        },
+        {
+            "name": "para_commander_alt"
+        },
+        {
+            "name": "para_engi"
+        },
+        {
+            "name": "para_general"
+        },
+        {
+            "name": "para_lieutenant"
+        },
+        {
+            "name": "para_lieutenant_alt"
+        },
+        {
+            "name": "para_medic"
+        },
+        {
+            "name": "para_pilot"
+        },
+        {
+            "name": "para_rifleman"
+        },
+        {
+            "name": "para_smartgunner"
+        },
+        {
+            "name": "para_sniper"
+        },
+        {
+            "name": "para_spec"
+        },
+        {
+            "name": "para_synth"
+        },
+        {
+            "name": "para_teamleader"
+        },
+        {
+            "name": "para_teamleader_alt"
+        }
+    ]
+}

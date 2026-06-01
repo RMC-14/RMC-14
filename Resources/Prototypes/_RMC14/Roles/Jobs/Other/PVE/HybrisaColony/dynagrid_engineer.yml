@@ -69,5 +69,5 @@
   parent: CMJobIconBase
   id: RMCJobIconPVEDynagridEngineer
   icon:
-    sprite: _RMC14/Interface/job_icons/other.rsi
+    sprite: _RMC14/Interface/job_icons/Misc/other.rsi
     state: pve_dynaengi

@@ -1,3 +1,23 @@
-Made by noctyrnal
-4.0
-TODO Find if this was based off anything
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by noctyrnal (Github)",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "tse_paconstable"
+        },
+        {
+            "name": "tse_painspector"
+        },
+        {
+            "name": "tse_paseniorconstable"
+        },
+        {
+            "name": "tse_pasynth"
+        }
+    ]
+}
