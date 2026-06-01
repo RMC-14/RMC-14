@@ -48,6 +48,11 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_mp
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMP
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearMilitaryPolice

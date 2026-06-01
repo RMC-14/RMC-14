@@ -55,6 +55,11 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_mp
     - type: RMCTrackable
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMP
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearMilitaryWarden
