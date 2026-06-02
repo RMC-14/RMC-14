@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Bipods now instantly deploy even when standing really close to a deployable
-      surface.
-    type: Fix
-  - message: Bipods can now instantly deploy on window frames, racks, crates, and
-      most machines.
-    type: Fix
-  id: 2764
-  time: '2026-01-13T09:00:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8963
 - author: QuietlyWhisper
   changes:
   - message: Fixed hive structures like the hive cluster not giving the Queen Eye
@@ -4516,5 +4505,12 @@
   id: 3263
   time: '2026-06-02T18:52:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9964
+- author: monomethylhydrazine
+  changes:
+  - message: Added powdered instant drink mixes to MREs.
+    type: Add
+  id: 3264
+  time: '2026-06-02T19:12:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9577
 Name: RMC14
 Order: -1
