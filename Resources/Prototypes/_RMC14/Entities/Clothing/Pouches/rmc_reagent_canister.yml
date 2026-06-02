@@ -181,8 +181,8 @@
 - type: entity
   parent: RMCPouchStorage
   id: RMCPouchSmartTankAdapter
-  name: EZ smart refill tank adapter pouch
-  description: An Adapter for the EZ Smart refill tank, Allowing it to be used with Custom Injectors it would otherwise not be compatible with. Once a Smart Refill Tank is clipped into the adapter, it can be used to refill custom injectors, and can also store one. Can be worn by attaching it to a pocket. 
+  name: EZ-11A Smart Tank Pouch
+  description: The EZ-11A Smart Refill Tank Adapter Pouch bridges the Gap between the MS-11 Smart Refill Tank and custom injectors, allowing the smart refill tank to be used to refill custom injectors it would otherwise be incompatible with. An MS-11 Tank can clip into the adapter, and can be worn by attaching it to a pocket. Requires no medical training to use.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/smart_tank_adapter.rsi
