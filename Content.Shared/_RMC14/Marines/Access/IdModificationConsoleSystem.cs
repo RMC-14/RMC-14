@@ -508,6 +508,12 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         if (args.Squad is not { } squadNetEnt)
         {
+            if (ent.Comp.DisallowSquadUnassignment.Contains(job.Id))
+            {
+                _popup.PopupCursor($"You cannot unassign a {jobName}!", actor, PopupType.LargeCaution);
+                return;
+            }
+
             _squad.RemoveSquad(marineId, null);
             _metaData.SetEntityName(uid.Value,
                 $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({jobName})");
