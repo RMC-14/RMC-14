@@ -19,12 +19,16 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewCombatCorrespondent
-        name: Essential Reporter's Set
-      - id: CMSatchel
-        name: Leather Satchel
       - id: RMCCameraBroadcasting
         name: Press Broadcasting Camera
         recommended: true
+    - name: Satchel
+      choices: { CMSatchel: 1 }
+      entries:
+      - id: CMSatchel
+        name: Leather Satchel
+      - id: RMCBackpackRTOBagPhone
+        name: Portable Phone Bag
     #- name: Civilian Equipment TODO - Some way to ensure only the civilian correspondent can buy this
     #  takeAll: CMStandard
     #  entries:
@@ -81,18 +85,3 @@
       - id: CMPaperBin30
         name: Paper Bin
         points: 10
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleCrewCombatCorrespondent
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
-    state: flashlight
-  - type: CMVendorBundle
-    bundle:
-    - RMCFlashlight
-    - CMPen
-    - RMCBinoculars
-    - CMClipboard # notepad
-    #- taperecorder

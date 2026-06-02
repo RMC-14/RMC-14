@@ -385,6 +385,7 @@
       - Folder
       - Write
       - RMCIntelItem
+      - RMCDataDisk
   - type: FixedItemSizeStorage
   - type: Dumpable
 

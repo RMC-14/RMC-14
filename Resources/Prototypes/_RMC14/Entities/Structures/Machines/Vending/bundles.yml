@@ -32,7 +32,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleSquadMedicalApparel
   name: standard marine apparel
-  description: Contains a corpsman jumpsuit, a M10 helmet, a headset and combat boots.
+  description: Contains a corpsman jumpsuit, a headset and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
@@ -69,7 +69,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianApparel
   name: standard marine apparel
-  description: Contains a marine jumpsuit, a headset, and combat boots.
+  description: Contains a combat technician jumpsuit, a headset, and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
@@ -125,6 +125,7 @@
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
+#Non-squad
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleMilitaryPoliceApparel
@@ -200,6 +201,24 @@
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCrewCombatCorrespondent
+  name: Essential Reporter's Set
+  description: Contains a flashlight, binoculars, a clipboard, and a pen. #TODO a tape recorder, a notepad, and a pen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
+    state: flashlight
+  - type: CMVendorBundle
+    bundle:
+    - RMCFlashlight
+    - CMPen
+    - RMCBinoculars
+    - CMClipboard # notepad
+    #- taperecorder
+
+# PVE
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleRCMPVEAssaultEngi
   name: Essential Engineering Set
   description: Contains an engineer kit, tool pouch, and webbing with a variety of items to engineer and/or assault with.
@@ -234,7 +253,6 @@
     - RMCBruteAidKitFilledPVE
     - RMCStandardAidKitFilledPVE
 
-# PVE
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleRCMPVEMGL
