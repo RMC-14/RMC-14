@@ -218,6 +218,11 @@ public sealed class XenoLeapSystem : EntitySystem
         leaping.LeapEndTime = _timing.CurTime + TimeSpan.FromSeconds(direction.Length() / xeno.Comp.Strength);
 
         _obstacleSlamming.MakeImmune(xeno, 0.5f);
+
+        // Prevent leap from having longer/shorter range or skewed direction
+        // based on the xeno's movement when using it.
+        _physics.ResetDynamics(xeno, physics);
+
         _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
         _physics.SetBodyStatus(xeno, physics, BodyStatus.InAir);
 
