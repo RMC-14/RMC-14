@@ -8,37 +8,37 @@
   },
     "states": [
         {
-            "name": "rmc_breacher_pve"
+            "name": "rcm_breacher_pve"
         },
         {
-            "name": "rmc_commander_pve"
+            "name": "rcm_commander_pve"
         },
         {
-            "name": "rmc_engi_pve"
+            "name": "rcm_engi_pve"
         },
         {
-            "name": "rmc_lieutenant_pve"
+            "name": "rcm_lieutenant_pve"
         },
         {
-            "name": "rmc_marksman_pve"
+            "name": "rcm_marksman_pve"
         },
         {
-            "name": "rmc_medic_pve"
+            "name": "rcm_medic_pve"
         },
         {
-            "name": "rmc_rifleman_pve"
+            "name": "rcm_rifleman_pve"
         },
         {
-            "name": "rmc_sectionleader_pve"
+            "name": "rcm_sectionleader_pve"
         },
         {
-            "name": "rmc_smartgunner_pve"
+            "name": "rcm_smartgunner_pve"
         },
         {
-            "name": "rmc_teamleader_pve"
+            "name": "rcm_teamleader_pve"
         },
         {
-            "name": "rmc_troopleader_pve"
+            "name": "rcm_troopleader_pve"
         }
     ]
 }
