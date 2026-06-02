@@ -64,16 +64,6 @@
         name: Combat Correspondent's Helmet
       - id: CMArmorPress
         name: Combat Correspondent's Armor
-    - name: Pouches
-      choices: { RMCPouch: 2 }
-      entries:
-      - id: RMCPouchFirstAidPMCFill
-        name: first-aid pouch (refillable injectors)
-        recommended: true
-      - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
-        recommended: true
-      - id: RMCPouchGeneralLarge
     - name: Refills
       entries:
       #- id: /obj/item/device/camera
