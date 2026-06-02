@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills.Pamphlets;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -503,7 +504,9 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             return;
 
         var jobName = job.Id;
-        if (_prototype.TryIndex(job, out var jobProto))
+        if (TryComp<UsedSkillPamphletComponent>(marineId, out var usedSkillPamphlet) && usedSkillPamphlet.JobTitle is { } title)
+            jobName = Loc.GetString(title);
+        else if (_prototype.TryIndex(job, out var jobProto))
             jobName = Loc.GetString(jobProto.Name);
 
         if (args.Squad is not { } squadNetEnt)
