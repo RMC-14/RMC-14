@@ -633,8 +633,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private bool MarinesHaveLanded()
     {
-        var query = EntityQueryEnumerator<ActiveGameRuleComponent, CMDistressSignalRuleComponent, GameRuleComponent>();
-        while (query.MoveNext(out _, out var distress, out _))
+        var query = EntityQueryEnumerator<ActiveGameRuleComponent, CMDistressSignalRuleComponent>();
+        while (query.MoveNext(out _, out var distress))
         {
             return distress.MarinesLanded;
         }
