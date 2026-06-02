@@ -327,3 +327,8 @@
   license: "CC0-1.0"
   copyright: "Created by nioczkus (freesound), modified by kleinerstation13 (Github)"
   source: "https://freesound.org/people/nioczkus/sounds/346537/"
+
+- files: ["gun_mp27.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken from Pixabay and modified by kleinerstation13 (Github) (content license at https://pixabay.com/service/license-summary/)"
+  source: "https://pixabay.com/sound-effects/film-special-effects-9mm-pistol-shoot-short-reverb-7152/"

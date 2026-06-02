@@ -85,6 +85,7 @@
     - CMAccessRequisitions
     - CMAccessMarinePrep
     - CMAccessResearch
+    - RMCAccessFieldDoctor
     - CMAccessCE
     accessGroups:
     - RMCBaseMarineAccess
