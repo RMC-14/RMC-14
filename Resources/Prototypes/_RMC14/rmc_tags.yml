@@ -140,6 +140,11 @@
   id: Bacon
 
 - type: Tag
+
+  id: Watch
+
+- type: Tag
+
   id: RMCPinpointer
 
 - type: Tag
@@ -180,3 +185,6 @@
 
 - type: Tag
   id: RMCSentryLaptop
+
+- type: Tag
+  id: RMCDataDisk

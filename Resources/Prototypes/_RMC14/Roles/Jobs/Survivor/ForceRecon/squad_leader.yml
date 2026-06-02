@@ -17,20 +17,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
-      skills:
-        RMCSkillEngineer: 1
-        RMCSkillConstruction: 0
-        RMCSkillMeleeWeapons: 1
-        RMCSkillCqc: 2
-        RMCSkillFireman: 2
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 1
-        RMCSkillJtac: 1
-        RMCSkillMedical: 1
-        RMCSkillEndurance: 2
-        RMCSkillLeadership: 1
-        RMCSkillVehicles: 0
+      preset: RMCSkillPresetReconSquadLeader
     - type: MarineOrders
     - type: SquadLeader
     - type: RMCPointing
@@ -68,6 +57,6 @@
   name: forecon squad leader survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons:
     - [ WeaponShotgunM42A2, RMCBoxShotgunSlugs ]

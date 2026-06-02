@@ -732,6 +732,70 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCBackpackRTO
+  id: RMCBackpackRTOWEYABagPhone
+  name: WEYA T70 portable bag phone
+  description: The T70 is the latest and greatest in portable telephone technology for the consumer market. Often seen on Corporate Executives, day-traders, and those who require a quick-dial to the buisness world.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/PMC/bag_phone.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Storage
+    grid:
+    - 0,0,14,1 # 15
+  - type: RotaryPhone
+    category: Weston-Yamada
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: icon }
+          Ring: { state: ring }
+          Ear: { state: ear }
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-t70-bag-phone
+
+- type: entity
+  parent: RMCBackpackRTO
+  id: RMCBackpackRTOBagPhone
+  name: RT-8000 portable bag phone
+  description: A fairly basic satchel with a phone attached to it, containing an interior battery for continued use. This model is fairly old, and has seen reproduction by practically every technology corporation around since the patent expired.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/bag_phone.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Storage
+    grid:
+    - 0,0,14,1 # 15
+  - type: RotaryPhone
+    category: Marine
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: icon }
+          Ring: { state: ring }
+          Ear: { state: ear }
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-bag-phone
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelLightpack #ERT pack
   name: lightweight combat pack
