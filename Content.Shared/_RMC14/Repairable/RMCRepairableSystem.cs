@@ -33,14 +33,15 @@ public sealed class RMCRepairableSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly RMCWeldEffectSystem _weldEffect = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
     private static readonly ProtoId<StackPrototype> SteelStack = "CMSteel";
@@ -48,8 +49,8 @@ public sealed class RMCRepairableSystem : EntitySystem
     private static readonly ProtoId<StackPrototype> WoodStack = "RMCWood";
     private static readonly EntProtoId<SkillDefinitionComponent> ConstructionSkill = "RMCSkillConstruction";
 
-    const string SOLUTION_WELDER = "Welder";
-    const string REAGENT_WELDER = "WeldingFuel";
+    private const string SolutionWelder = "Welder";
+    private const string ReagentWelder = "WeldingFuel";
 
     private EntityUid? _forceRepairUser;
     private EntityUid? _forceRepairTarget;
@@ -152,6 +153,7 @@ public sealed class RMCRepairableSystem : EntitySystem
             var selfMsg = Loc.GetString("rmc-repairable-start-self", ("target", repairable));
             var othersMsg = Loc.GetString("rmc-repairable-start-others", ("user", user), ("target", repairable));
             _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+            _weldEffect.SpawnWeldEffect(repairable, TimeSpan.FromSeconds(delay));
         }
     }
 
@@ -291,10 +293,10 @@ public sealed class RMCRepairableSystem : EntitySystem
             return false;
         }
 
-        if (!_solution.TryGetSolution((tool, welderCon), SOLUTION_WELDER, out var solutionComp, out var solution))
+        if (!_solution.TryGetSolution((tool, welderCon), SolutionWelder, out var solutionComp, out var solution))
             return false;
 
-        if (solution.GetTotalPrototypeQuantity(REAGENT_WELDER) == 0 || solution.GetTotalPrototypeQuantity(REAGENT_WELDER) < fuelUsed)
+        if (solution.GetTotalPrototypeQuantity(ReagentWelder) == 0 || solution.GetTotalPrototypeQuantity(ReagentWelder) < fuelUsed)
         {
             _popup.PopupClient(Loc.GetString("welder-component-no-fuel-message"), user, PopupType.SmallCaution);
             return false;
@@ -302,7 +304,7 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         if (!attempt && _net.IsServer)
         {
-            _solution.RemoveReagent(solutionComp.Value, REAGENT_WELDER, fuelUsed);
+            _solution.RemoveReagent(solutionComp.Value, ReagentWelder, fuelUsed);
             Dirty(solutionComp.Value);
         }
 
