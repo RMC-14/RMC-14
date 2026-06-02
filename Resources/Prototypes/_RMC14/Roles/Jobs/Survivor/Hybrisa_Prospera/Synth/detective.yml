@@ -6,6 +6,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -72,7 +73,7 @@
   name: survivor synth hybrisa detective colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCGlassesSecurityBlue, RMCCoatBureauTrenchCoatBrown, RMCHeadCapFedoraBrown, ClothingUniformJumpsuitDetective ]
     - [ CMGlassesSecurity, RMCCoatBureauTrenchCoatGrey, RMCHeadCapFedoraGrey, ClothingUniformJumpsuitDetectiveGrey ]
