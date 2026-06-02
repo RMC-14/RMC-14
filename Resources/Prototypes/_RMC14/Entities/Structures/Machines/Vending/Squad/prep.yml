@@ -521,8 +521,8 @@
         amount: 1
       #- id: CMFoldingBarricadesMB6x3
       #  amount: 2
-      #- id: CMSparePDTLBattleBuddyKit
-      #  amount: 3
+      - id: CMSparePDTLBattleBuddyKit
+        amount: 3
       - id: RMCPowerCellCrap
         amount: 2
       - id: RMCMagazineSMGNailgun

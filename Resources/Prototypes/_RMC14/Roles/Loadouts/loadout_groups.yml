@@ -399,6 +399,7 @@
   - PonchoUrbanRMC
   - PonchoSnowRMC
   - PatchPeaceRMC
+  - PDTLKitRMC
 
 - type: loadoutGroup
   id: AccessoriesRMCPVE
