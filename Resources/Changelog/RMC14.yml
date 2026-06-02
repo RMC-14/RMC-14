@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Old Queen eyes no longer show up in the ghost warp menu.
-    type: Fix
-  id: 2761
-  time: '2026-01-13T08:57:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8806
 - author: SharkSnake98
   changes:
   - message: Added the New Varadero Nightmare Insert "CLF Raid" (Not Playable)
@@ -4504,5 +4497,13 @@
   id: 3260
   time: '2026-06-01T09:16:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9820
+- author: IceNoobXD
+  changes:
+  - message: Kutjevo has recived a minor map parity passover which adds toxic water
+      and new props to the map!
+    type: Tweak
+  id: 3261
+  time: '2026-06-02T05:17:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9925
 Name: RMC14
 Order: -1
