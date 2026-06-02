@@ -505,6 +505,7 @@
       - id: CMBeltUtilityCombat
       - id: RMCM82FHolsterFilled
       - id: RMCM276ShotgunShellLoadingRig
+      - id: RMCBeltBrowne
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
@@ -945,6 +946,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
+      - id: RMCBeltBrowne
     - name: Patches
       jobs:
       - CMChiefMP
