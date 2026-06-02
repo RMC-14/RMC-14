@@ -10,6 +10,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
@@ -19,6 +20,8 @@
     - type: IntelRescueSurvivorObjective # TODO RMC14 assign squad
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-sapper
+    - type: AssignSquad
+      squad: SquadSPP
   hidden: true
 
 - type: startingGear

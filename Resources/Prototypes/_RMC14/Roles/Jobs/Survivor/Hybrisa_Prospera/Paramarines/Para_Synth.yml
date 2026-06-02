@@ -1,7 +1,7 @@
 - type: job
   parent: RMCSurvivorParaBase
   id: RMCSurvivorParaSupportSynthetic
-  name: rmc-job-name-para-synth 
+  name: rmc-job-name-para-synth
   ranks:
     RMCRankSyntheticColonist: [ ]
   startingGear: RMCGearParaSupportSynthetic
@@ -34,9 +34,7 @@
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
             state: background_para
         - type: AssignSquad
-          whitelist:
-            tags:
-              - SquadPara
+          squad: SquadPara
         - type: JobPrefix
           prefix: rmc-job-prefix-para-synth
         - type: MeleeWeapon
@@ -53,7 +51,7 @@
               Blunt: 35
         - type: Synth
           generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
   hidden: true
 
 - type: startingGear

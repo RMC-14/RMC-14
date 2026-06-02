@@ -26,9 +26,7 @@
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: background_para
       - type: AssignSquad
-        whitelist:
-          tags:
-            - SquadPara
+        squad: SquadPara
       - type: JobPrefix
         prefix: rmc-job-prefix-paramarine
       - type: EquipSurvivorPreset

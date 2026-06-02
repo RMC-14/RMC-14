@@ -569,6 +569,7 @@
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2
     RMCRadiationAidKitFilled: 1
+    RMCCPRDummy: 5
     # Crew Monitor
 
 
@@ -709,8 +710,10 @@
         amount: 5
       - id: DrinkShaker
         amount: 5
-      - id: DrinkGlass
+      - id: RMCDrinkGlass
         amount: 8
+      - id: DrinkGlass
+        amount: 4
       - id: ClothingOuterApronChef
         amount: 2
       - id: RMCCondimentSmallSalt

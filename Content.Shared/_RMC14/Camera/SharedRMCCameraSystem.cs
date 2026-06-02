@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared.GameTicking;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -23,11 +24,11 @@ public abstract class SharedRMCCameraSystem : EntitySystem
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
-        SubscribeLocalEvent<RMCCameraComponent, MapInitEvent>(OnCameraMapInit, after: new [] { typeof(AreaSystem) });
+        SubscribeLocalEvent<RMCCameraComponent, MapInitEvent>(OnCameraMapInit, after: new [] { typeof(AreaSystem), typeof(SharedDropshipWeaponSystem) });
         SubscribeLocalEvent<RMCCameraComponent, ComponentRemove>(OnCameraRemove);
         SubscribeLocalEvent<RMCCameraComponent, EntityTerminatingEvent>(OnCameraTerminating);
 
-        SubscribeLocalEvent<RMCCameraComputerComponent, MapInitEvent>(OnComputerMapInit, after: new [] { typeof(AreaSystem) });
+        SubscribeLocalEvent<RMCCameraComputerComponent, MapInitEvent>(OnComputerMapInit, after: new [] { typeof(AreaSystem), typeof(SharedDropshipWeaponSystem) });
 
         SubscribeLocalEvent<RMCCameraWatcherComponent, ComponentRemove>(OnWatcherRemove);
         SubscribeLocalEvent<RMCCameraWatcherComponent, EntityTerminatingEvent>(OnWatcherTerminating);
@@ -66,6 +67,9 @@ public abstract class SharedRMCCameraSystem : EntitySystem
         else
         {
             var name = Name(ent);
+            if (ent.Comp.NameOverride != null)
+                name = ent.Comp.NameOverride;
+
             var count = _cameraNames.GetValueOrDefault(name);
             _cameraNames[name] = count;
         }
@@ -95,7 +99,12 @@ public abstract class SharedRMCCameraSystem : EntitySystem
                     continue;
 
                 ent.Comp.CameraIds.Add(GetNetEntity(uid));
-                ent.Comp.CameraNames.Add(Name(uid));
+
+                var name = Name(uid);
+                if (camera.NameOverride != null)
+                    name = camera.NameOverride;
+
+                ent.Comp.CameraNames.Add(name);
             }
         }
 
@@ -269,13 +278,36 @@ public abstract class SharedRMCCameraSystem : EntitySystem
                 continue;
 
             computer.CameraIds.Remove(GetNetEntity(uid));
-            computer.CameraNames.Remove(Name(uid));
+
+            var name = Name(uid);
+            if (camera.NameOverride != null)
+                name = camera.NameOverride;
+
+            computer.CameraNames.Remove(name);
         }
     }
 
     public void RefreshCameras(EntProtoId protoId)
     {
         _refresh.Add(protoId);
+    }
+
+    public void SetCameraId(EntityUid camera,  EntProtoId protoId, RMCCameraComponent? cameraComponent)
+    {
+        if (!Resolve(camera, ref cameraComponent, false))
+            return;
+
+        cameraComponent.Id = protoId;
+        Dirty(camera, cameraComponent);
+    }
+
+    public void SetCameraName(EntityUid camera,  string name, RMCCameraComponent? cameraComponent)
+    {
+        if (!Resolve(camera, ref cameraComponent, false))
+            return;
+
+        cameraComponent.NameOverride = name;
+        Dirty(camera, cameraComponent);
     }
 
     public override void Update(float frameTime)
@@ -316,7 +348,12 @@ public abstract class SharedRMCCameraSystem : EntitySystem
                     continue;
 
                 cameraIds.Add(GetNetEntity(uid));
-                cameraNames.Add(Name(uid));
+
+                var name = Name(uid);
+                if (camera.NameOverride != null)
+                    name = camera.NameOverride;
+
+                cameraNames.Add(name);
             }
 
             foreach (var monitor in monitors)

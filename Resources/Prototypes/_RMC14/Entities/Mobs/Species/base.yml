@@ -21,6 +21,7 @@
         layer:
         - Opaque
         - XenoProjectileImpassable
+        - Marine
       fix2:
         shape:
           !type:PhysShapeCircle
