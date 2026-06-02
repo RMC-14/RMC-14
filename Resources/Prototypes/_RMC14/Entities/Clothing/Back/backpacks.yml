@@ -284,6 +284,7 @@
       components:
       - EmptySandbag
       - FullSandbag
+      - RMCFoldingBarricadeStack
   - type: CMStorageVisualizer
     storageClosed: null
     storageOpen: null
@@ -305,6 +306,7 @@
       components:
       - EmptySandbag
       - FullSandbag
+      - RMCFoldingBarricadeStack
       - MortarShell
 
 - type: entity
