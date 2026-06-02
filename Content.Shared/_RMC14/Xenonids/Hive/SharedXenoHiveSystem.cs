@@ -42,8 +42,8 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private EntityQuery<HiveComponent> _query;
     private EntityQuery<HiveMemberComponent> _memberQuery;
@@ -63,6 +63,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         SubscribeLocalEvent<HiveComponent, MapInitEvent>(OnMapInit);
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MobStateChangedEvent>(OnGranterMobStateChanged);
+        SubscribeLocalEvent<XenoEvolutionGranterComponent, EntityTerminatingEvent>(OnGranterTerminating);
 
         SubscribeLocalEvent<AutoAssignHiveComponent, ComponentStartup>(OnAutoAssignHiveAdded);
 
@@ -112,14 +113,15 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        if (GetHive(ent.Owner) is { } hive)
-        {
-            hive.Comp.LastQueenDeath = _timing.CurTime;
-            hive.Comp.CurrentQueen = null;
-            hive.Comp.AnnouncedQueenDeathCooldownOver = false;
-            hive.Comp.NewQueenAt = _timing.CurTime + hive.Comp.NewQueenCooldown;
-            Dirty(hive);
-        }
+        ClearHiveQueen(ent.Owner, died: true);
+    }
+
+    private void OnGranterTerminating(Entity<XenoEvolutionGranterComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (_mobState.IsDead(ent))
+            return;
+
+        ClearHiveQueen(ent.Owner);
     }
 
     private void OnMapInit(Entity<HiveComponent> ent, ref MapInitEvent args)
@@ -214,6 +216,14 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         comp.Hive = hive;
         Dirty(member, comp);
 
+        if (HasComp<XenoEvolutionGranterComponent>(member) &&
+            old is { } oldHiveUid &&
+            _query.TryComp(oldHiveUid, out var oldHiveComp) &&
+            oldHiveComp.CurrentQueen == member.Owner)
+        {
+            ClearHiveQueen((oldHiveUid, oldHiveComp));
+        }
+
         if (HasComp<XenoEvolutionGranterComponent>(member) && hiveEnt.HasValue)
             SetHiveQueen(member, hiveEnt.Value);
 
@@ -263,9 +273,40 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
     public bool SetHiveQueen(EntityUid queen, Entity<HiveComponent> hive)
     {
+        if (hive.Comp.CurrentQueen == queen)
+            return true;
+
         hive.Comp.CurrentQueen = queen;
         Dirty(hive);
+
+        var ev = new XenoHiveQueenChangedEvent();
+        RaiseLocalEvent(hive.Owner, ref ev);
         return true;
+    }
+
+    private void ClearHiveQueen(EntityUid queen, bool died = false)
+    {
+        if (GetHive(queen) is not { } hive || hive.Comp.CurrentQueen != queen)
+            return;
+
+        ClearHiveQueen(hive, died);
+    }
+
+    private void ClearHiveQueen(Entity<HiveComponent> hive, bool died = false)
+    {
+        hive.Comp.CurrentQueen = null;
+
+        if (died)
+        {
+            hive.Comp.LastQueenDeath = _timing.CurTime;
+            hive.Comp.AnnouncedQueenDeathCooldownOver = false;
+            hive.Comp.NewQueenAt = _timing.CurTime + hive.Comp.NewQueenCooldown;
+        }
+
+        Dirty(hive);
+
+        var ev = new XenoHiveQueenChangedEvent();
+        RaiseLocalEvent(hive.Owner, ref ev);
     }
 
     public bool HasHiveCore(Entity<HiveComponent> hive)

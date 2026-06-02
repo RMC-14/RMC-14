@@ -246,6 +246,14 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
+        if (TryGetActiveRuleEntity() is { } rule && rule.Comp.MarinesLanded)
+        {
+            rule.Comp.MarinesLanded = false;
+            Dirty(rule);
+            var landedEv = new MarinesLandedChangedEvent(false);
+            RaiseLocalEvent(ref landedEv);
+        }
+
         InvalidateActiveRule();
         StartPlanetVote();
         ResetSelectedPlanet();
