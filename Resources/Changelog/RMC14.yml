@@ -1,31 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added the New Varadero Nightmare Insert "CLF Raid" (Not Playable)
-    type: Add
-  - message: Added CLF-aligned Gauss Sentries.
-    type: Add
-  id: 2762
-  time: '2026-01-13T08:59:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8909
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Refilling autoinjectors from a medvend now plays a sound
-    type: Tweak
-  id: 2763
-  time: '2026-01-13T08:59:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8977
-- author: Dygon
-  changes:
-  - message: Bipods now instantly deploy even when standing really close to a deployable
-      surface.
-    type: Fix
-  - message: Bipods can now instantly deploy on window frames, racks, crates, and
-      most machines.
-    type: Fix
-  id: 2764
-  time: '2026-01-13T09:00:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8963
 - author: QuietlyWhisper
   changes:
   - message: Fixed hive structures like the hive cluster not giving the Queen Eye
@@ -4505,5 +4478,39 @@
   id: 3261
   time: '2026-06-02T05:17:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9925
+- author: SharkSnake98
+  changes:
+  - message: Added many different books, some guidebooks, others for decoration.
+    type: Add
+  - message: Added the WEYA Excavator, Laptops, and Notice Board.
+    type: Add
+  - message: Added La Voz, an SPP Magazine equivalent to Orrery and Boots!
+    type: Add
+  - message: Added Packaged samosas as an option in the Hot Foods vendor.
+    type: Add
+  id: 3262
+  time: '2026-06-02T18:50:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8323
+- author: CatAndHats
+  changes:
+  - message: Added CCDP Chemical Compound grenades to the weapon specialist vendor
+    type: Add
+  - message: Changed the contents of the weapon specialist and regular grenade belts.
+      They no longer feature HEFA grenades, and have lost some of their HEDP in exchange
+      for fragmentation and incendiary airburst grenades.
+    type: Tweak
+  - message: Fixed the filled grenade belt on Sorokyne Strata to now be a regular
+      grenade belt not a weapon specialist grenade belt.
+    type: Fix
+  id: 3263
+  time: '2026-06-02T18:52:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9964
+- author: monomethylhydrazine
+  changes:
+  - message: Added powdered instant drink mixes to MREs.
+    type: Add
+  id: 3264
+  time: '2026-06-02T19:12:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9577
 Name: RMC14
 Order: -1
