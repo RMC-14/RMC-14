@@ -77,4 +77,4 @@
   id: RMCJobIconRoyalMedicPVE
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
-    state: rmc_medic_pve
+    state: rcm_medic_pve

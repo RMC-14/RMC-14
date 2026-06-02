@@ -41,7 +41,7 @@
     - type: SquadLeader
       icon:
         sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
-        state: rmc_troopleader_pve
+        state: rcm_troopleader_pve
     - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-troop-sergeant
@@ -80,4 +80,4 @@
   id: RMCJobIconRoyalTroopSargePVE
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
-    state: rmc_troopleader_pve
+    state: rcm_troopleader_pve

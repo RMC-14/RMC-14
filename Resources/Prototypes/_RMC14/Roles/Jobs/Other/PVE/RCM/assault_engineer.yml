@@ -73,4 +73,4 @@
   id: RMCJobIconRoyalAssaultEngineerPVE
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
-    state: rmc_engi_pve
+    state: rcm_engi_pve

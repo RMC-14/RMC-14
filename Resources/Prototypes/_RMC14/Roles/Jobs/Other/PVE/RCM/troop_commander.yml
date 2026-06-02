@@ -88,4 +88,4 @@
   id: RMCJobIconRoyalTroopCommanderPVE
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
-    state: rmc_lieutenant_pve
+    state: rcm_lieutenant_pve

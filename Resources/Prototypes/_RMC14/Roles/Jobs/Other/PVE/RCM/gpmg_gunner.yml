@@ -71,4 +71,4 @@
   id: RMCJobIconRoyalSmartgunnerPVE
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
-    state: rmc_smartgunner_pve
+    state: rcm_smartgunner_pve

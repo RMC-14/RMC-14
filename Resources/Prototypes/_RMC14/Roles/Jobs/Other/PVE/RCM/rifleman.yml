@@ -67,4 +67,4 @@
   id: RMCJobIconRoyalRiflemanPVE
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
-    state: rmc_rifleman_pve
+    state: rcm_rifleman_pve

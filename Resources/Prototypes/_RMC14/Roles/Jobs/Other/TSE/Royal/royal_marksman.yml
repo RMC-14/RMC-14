@@ -98,4 +98,4 @@
   id: RMCJobIconRoyalMarinesMarksman
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
-    state: rmc_marksman
+    state: rcm_marksman

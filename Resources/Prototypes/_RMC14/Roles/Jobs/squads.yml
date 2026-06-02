@@ -281,7 +281,7 @@
     group: Royal Marines
     leaderIcon:
       sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
-      state: rmc_teamleader
+      state: rcm_teamleader
   - type: Tag
     tags:
     - RMCSquadRoyalMarines
@@ -312,7 +312,7 @@
     group: Whiskey Troop
     leaderIcon:
       sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
-      state: rmc_troopleader_pve
+      state: rcm_troopleader_pve
   - type: Tag
     tags:
     - RMCSquadRoyalMarinesPVE

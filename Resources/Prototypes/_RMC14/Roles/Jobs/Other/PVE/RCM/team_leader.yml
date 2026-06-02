@@ -76,4 +76,4 @@
   id: RMCJobIconRoyalTeamLeaderPVE
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
-    state: rmc_teamleader_pve
+    state: rcm_teamleader_pve

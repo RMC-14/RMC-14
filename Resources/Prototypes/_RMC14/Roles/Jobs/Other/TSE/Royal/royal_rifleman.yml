@@ -96,4 +96,4 @@
   id: RMCJobIconRoyalCommando
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
-    state: rmc_rifleman
+    state: rcm_rifleman

@@ -72,4 +72,4 @@
   id: RMCJobIconRoyalScoutSniperPVE
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/pve.rsi
-    state: rmc_marksman_pve
+    state: rcm_marksman_pve

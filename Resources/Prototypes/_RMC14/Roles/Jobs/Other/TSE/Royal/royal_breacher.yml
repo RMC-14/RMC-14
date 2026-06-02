@@ -97,4 +97,4 @@
   id: RMCJobIconRoyalBreacher
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
-    state: rmc_breacher
+    state: rcm_breacher

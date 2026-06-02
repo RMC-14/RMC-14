@@ -43,7 +43,7 @@
     - type: SquadLeader
       icon:
        sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
-       state: rmc_lieutenant
+       state: rcm_lieutenant
     - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-lieutenant
@@ -87,4 +87,4 @@
   id: RMCJobIconRoyalLieutenant
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
-    state: rmc_lieutenant
+    state: rcm_lieutenant

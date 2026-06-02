@@ -98,4 +98,4 @@
   id: RMCJobIconRoyalSmartGunOperator
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
-    state: rmc_smart_gun_operator
+    state: rcm_smart_gun_operator

@@ -83,5 +83,5 @@
   id: RMCJobIconRoyalMajor
   icon:
     sprite: _RMC14/Interface/job_icons/TSE/RCM/standard.rsi
-    state: rmc_major
+    state: rcm_major
 
