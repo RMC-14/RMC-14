@@ -298,12 +298,14 @@ public sealed class XenoProjectileSystem : EntitySystem
         for (var i = _earlyMessages.Count - 1; i >= 0; --i)
         {
             var item = _earlyMessages[i];
+            var lastIndex = _earlyMessages.Count - 1;
             if (item.PredictedHitTick < _timing.CurTick)
             {
                 if (_logPrediction)
                     Log.Warning($"Removed expired prediction message: Shooter {item.Shooter}, Shot ID {item.Message.Id}");
-                _earlyMessages[i] = _earlyMessages[_earlyMessages.Count - 1];
-                _earlyMessages.RemoveAt(_earlyMessages.Count - 1);
+                if (i != lastIndex)
+                    _earlyMessages[i] = _earlyMessages[lastIndex];
+                _earlyMessages.RemoveAt(lastIndex);
             }
             else if (item.PredictedHitTick == _timing.CurTick)
             {
@@ -311,8 +313,9 @@ public sealed class XenoProjectileSystem : EntitySystem
                     continue;
 
                 OnPredictedHit(item.Message, item.Args, false);
-                _earlyMessages[i] = _earlyMessages[_earlyMessages.Count - 1];
-                _earlyMessages.RemoveAt(_earlyMessages.Count - 1);
+                if (i != lastIndex)
+                    _earlyMessages[i] = _earlyMessages[lastIndex];
+                _earlyMessages.RemoveAt(lastIndex);
             }
         }
     }
