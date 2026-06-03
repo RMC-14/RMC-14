@@ -6,6 +6,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -71,7 +72,7 @@
   name: survivor synth hybrisa Xenoarch preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ CMSatchel, RMCLabcoatScience, RMCShoesBrown ]
     - [ RMCSatchelLightpack, RMCSuitBioWeYa, RMCHoodBioWeYa, RMCShoesBrown, RMCGlassesReagentHUDGlasses ]

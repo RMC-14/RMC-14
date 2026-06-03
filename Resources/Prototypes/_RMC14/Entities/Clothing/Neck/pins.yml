@@ -11,7 +11,20 @@
     hiddenByJacketRolling: true
   - type: Corrodible
     isCorrodible: false
-
+    
+- type: entity
+  parent: [ ClothingNeckAllyPin, RMCPridePinBase ]
+  id: ClothingNeckAllyPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: ally
+  - type: UniformAccessory
+    playerSprite:
+      sprite: Clothing/Neck/Misc/pins.rsi
+      state: ally-equipped-NECK
+      
 - type: entity
   parent: [ ClothingNeckLGBTPin, RMCPridePinBase ]
   id: RMCClothingNeckLGBTPin

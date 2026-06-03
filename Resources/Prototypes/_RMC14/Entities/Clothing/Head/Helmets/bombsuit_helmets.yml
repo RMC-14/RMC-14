@@ -1,0 +1,24 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCClothingHeadHelmetBombSuit
+  name: bomb hood
+  description: Use in case of bomb
+  suffix: RMC
+  components:
+  - type: Sprite #RMC14 TODO: Make a new sprite which doesn't look silly
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/bombsuit_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/bombsuit_helmet.rsi
+  - type: CMArmor
+    explosionArmor: 50
+  - type: RMCEarProtection
+
+- type: entity
+  parent: RMCClothingHeadHelmetBombSuit
+  id: RMCClothingHeadHelmetBombSuitSecurity
+  suffix: Security, RMC
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Helmets/bombsuit.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Helmets/bombsuit.rsi
