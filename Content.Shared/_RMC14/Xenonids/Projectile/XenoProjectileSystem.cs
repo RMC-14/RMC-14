@@ -82,6 +82,7 @@ public sealed class XenoProjectileSystem : EntitySystem
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _limitHitsId = 0;
+        _earlyMessages.Clear();
     }
 
     private void OnPredictedHit(XenoProjectilePredictedHitEvent msg, EntitySessionEventArgs args) => OnPredictedHit(msg, args, true);
