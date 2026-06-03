@@ -122,35 +122,12 @@
         - ReagentId: RMCNapalmEX
           Quantity: 300
 
-- type: entity
+- type: entity # todo rmc14: unique sprites
   parent: RMCWeaponFL3Flamer
   id: RMCWeaponFL3FlamerColony
   name: Flammenwerfer 3 Heavy DE-cineration Unit
   description: A civilian modification of the heavy incineration unit produced by the Weston Corporation and later by Weston-Yamada Corporation. Normally, these would be found on frontier colonies, for burning down forests and foliage. In this case, this seems to be a reclaimed model used by the local firefighters.
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_inhands.rsi
-    layers:
-    - state: base
-      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
-    - state: mag-0
-      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
-      map: [ "enum.GunVisualLayers.Mag" ]
-    - state: strip
-      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
-      color: "#DD9B00"
-      map: ["enum.RMCFlamerVisualLayers.Strip"]
-    - state: lit
-      sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_icon.rsi
-      map: ["enum.RMCIgniterVisuals.Ignited"]
-  - type: Item
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_inhands.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/FL3/fl3_inhands.rsi
-    slots:
-    - suitStorage
-    - Back
-    - Belt
   - type: ItemSlots
     slots:
       gun_magazine:
