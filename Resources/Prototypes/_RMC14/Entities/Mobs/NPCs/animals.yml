@@ -252,6 +252,7 @@
   name: cat
   description: It's a black cat
   components:
+  - type: RMCCatHunter
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/cat.rsi

@@ -1,0 +1,17 @@
+- type: entity
+  id: RMCActionGiantLizardPounce
+  parent: BaseAction
+  name: Pounce
+  description: Leap forward and knock down prey.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: pounce
+    useDelay: 9
+  - type: TargetAction
+    range: 5
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:RMCGiantLizardPounceActionEvent

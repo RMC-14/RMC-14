@@ -1,0 +1,11 @@
+- type: soundCollection
+  id: RMCGiantLizardGrowl
+  files:
+  - /Audio/_RMC14/Animals/GiantLizard/giant_lizard_growl1.ogg
+  - /Audio/_RMC14/Animals/GiantLizard/giant_lizard_growl2.ogg
+
+- type: soundCollection
+  id: RMCGiantLizardHiss
+  files:
+  - /Audio/_RMC14/Animals/GiantLizard/giant_lizard_hiss1.ogg
+  - /Audio/_RMC14/Animals/GiantLizard/giant_lizard_hiss2.ogg

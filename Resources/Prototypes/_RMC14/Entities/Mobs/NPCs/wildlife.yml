@@ -1,0 +1,595 @@
+- type: entity
+  id: RMCMobGiantLizard
+  parent: RMCSimpleMob
+  name: giant lizard
+  description: A huge territorial reptile with a heavy jaw and patient eyes.
+  suffix: RMC
+  components:
+  - type: RMCGiantLizard
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCGiantLizardVisuals.Body:
+        enum.RMCGiantLizardVisualLayers.Base:
+          Running: { state: running }
+          Sleeping: { state: sleeping }
+          KnockedDown: { state: knocked-down }
+          Dead: { state: dead }
+      enum.RMCGiantLizardVisuals.Wounds:
+        enum.RMCGiantLizardVisualLayers.Wounds:
+          None: { visible: false }
+          Small: { state: wounds-small, visible: true }
+          Big: { state: wounds-big, visible: true }
+          SmallRest: { state: wounds-small-rest, visible: true }
+          BigRest: { state: wounds-big-rest, visible: true }
+          SmallStun: { state: wounds-small-stun, visible: true }
+          BigStun: { state: wounds-big-stun, visible: true }
+      enum.RMCGiantLizardVisuals.Tongue:
+        enum.RMCGiantLizardVisualLayers.Tongue:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Mobs/Animals/giant_lizard.rsi
+    layers:
+    - map: ["enum.RMCGiantLizardVisualLayers.Base"]
+      state: running
+    - map: ["enum.RMCGiantLizardVisualLayers.Wounds"]
+      state: wounds-small
+      visible: false
+    - map: ["enum.RMCGiantLizardVisualLayers.Tongue"]
+      state: tongue
+      visible: false
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.6
+        density: 250
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      350: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 4.5
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: FactionException
+  - type: NPCRetaliation
+    attackMemoryLength: 30
+  - type: HTN
+    rootTask:
+      task: RMCGiantLizardCompound
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      groups:
+        Brute: 22
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatLizard
+      amount: 8
+    - id: FoodMeat
+      amount: 4
+  - type: SoundOnDeath
+    sound:
+      path: /Audio/_RMC14/Animals/GiantLizard/giant_lizard_death.ogg
+  - type: Flammable
+  - type: CanBeFirePatted
+  - type: Tag
+    tags:
+    - FootstepSound
+    - Meat
+
+- type: entity
+  id: RMCMobTinyLizard
+  parent: MobLizard
+  name: lizard
+  description: A small quick lizard. It looks offended by your height.
+  suffix: RMC
+  components:
+  - type: RMCTinyLizard
+  - type: RMCAnimalPrey
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      5: Dead
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 1
+  - type: InteractionPopup
+    successChance: 0.35
+    interactSuccessString: petting-success-reptile
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactFailureSound:
+      path: /Audio/Animals/snake_hiss.ogg
+
+- type: entity
+  id: RMCMobBat
+  parent: [ SimpleMobBase, FlyingMobBase, MobCombat ]
+  name: bat
+  description: A jittery cave bat looking for somewhere dark to hang.
+  suffix: RMC
+  components:
+  - type: RMCBatHanging
+  - type: RMCAnimalPrey
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCBatVisuals.Hanging:
+        enum.DamageStateVisualLayers.Base:
+          True: { state: bat_hanging }
+          False: { state: bat }
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 6
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: bat
+      sprite: _RMC14/Mobs/Animals/bat.rsi
+  - type: Speech
+    speechSounds: Squeak
+    speechVerb: SmallMob
+    allowedEmotes: ['Squeak']
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 10
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: bat
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 1
+  - type: InteractionPopup
+    successChance: 0.2
+    interactSuccessString: petting-success-soft-floofy
+    interactFailureString: petting-failure-bat
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/fox_squeak.ogg
+  - type: Bloodstream
+    bloodMaxVolume: 50
+  - type: ReplacementAccent
+    accent: mouse
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 5
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      30: Critical
+      60: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 120
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+  - type: Tag
+    tags:
+    - VimPilot
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+
+- type: entity
+  id: RMCMobSpiderBase
+  parent: MobGiantSpider
+  abstract: true
+  suffix: RMC
+  components:
+  - type: RMCSpiderNestMember
+  - type: NpcFactionMember
+    factions:
+    - RMCDumb
+  - type: HTN
+    rootTask:
+      task: RMCSpiderCompound
+  - type: InputMover
+  - type: MobMover
+  - type: FactionException
+  - type: Spider
+    webPrototype: RMCSpiderWeb
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 4
+  - type: IgnoreSpiderWeb
+
+- type: entity
+  id: RMCMobSpiderGuard
+  parent: RMCMobSpiderBase
+  name: guard spider
+  description: A broad, venomous spider that waits where the colony needs it.
+  components:
+  - type: RMCSpiderVenom
+    prickPopupChance: 0.05
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 30
+        reagents:
+        - ReagentId: Toxin
+          Quantity: 30
+  - type: SolutionRegeneration
+    solution: melee
+    generated:
+      reagents:
+      - ReagentId: Toxin
+        Quantity: 5
+  - type: MeleeChemicalInjector
+    transferAmount: 5
+    solution: melee
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      groups:
+        Brute: 18
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.4
+    baseSprintSpeed: 3.8
+
+- type: entity
+  id: RMCMobSpiderHunter
+  parent: RMCMobSpiderBase
+  name: hunter spider
+  description: A lean spider with restless legs and worse intentions.
+  components:
+  - type: RMCSpiderVenom
+    prickPopupChance: 0.05
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 30
+        reagents:
+        - ReagentId: Toxin
+          Quantity: 30
+  - type: SolutionRegeneration
+    solution: melee
+    generated:
+      reagents:
+      - ReagentId: Toxin
+        Quantity: 5
+  - type: MeleeChemicalInjector
+    transferAmount: 5
+    solution: melee
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      120: Dead
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      groups:
+        Brute: 15
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 5
+
+- type: entity
+  id: RMCMobSpiderNurse
+  parent: RMCMobSpiderBase
+  name: nurse spider
+  description: A smaller spider that tends the webbed nest.
+  components:
+  - type: RMCSpiderNurse
+  - type: RMCSpiderVenom
+    prickPopupChance: 0.10
+    dazeTime: 2
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 40
+        reagents:
+        - ReagentId: Toxin
+          Quantity: 30
+        - ReagentId: Nocturine
+          Quantity: 10
+  - type: SolutionRegeneration
+    solution: melee
+    duration: 2
+    generated:
+      reagents:
+      - ReagentId: Toxin
+        Quantity: 5
+      - ReagentId: Nocturine
+        Quantity: 1
+  - type: MeleeChemicalInjector
+    transferAmount: 5
+    solution: melee
+  - type: HTN
+    rootTask:
+      task: RMCSpiderNurseCompound
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Dead
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      groups:
+        Brute: 8
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.4
+    baseSprintSpeed: 3.5
+
+- type: entity
+  id: RMCMobSpiderling
+  parent: RMCMobSpiderBase
+  name: spiderling
+  description: A newly hatched spider, already too fast.
+  components:
+  - type: RMCSpiderlingGrowth
+  - type: Sprite
+    drawdepth: SmallMobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: spiderling
+      sprite: _RMC14/Effects/effects.rsi
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: spiderling
+      Critical:
+        Base: spiderling
+      Dead:
+        Base: spiderling
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 25
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      25: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.6
+    baseSprintSpeed: 4.2
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 4
+
+- type: entity
+  id: RMCMobSpiderlingNoGrow
+  parent: RMCMobSpiderling
+  name: spiderling
+  suffix: RMC, No Grow
+  components:
+  - type: RMCSpiderlingGrowth
+    noGrow: true
+
+- type: entity
+  id: RMCMobChicken
+  parent: MobChicken
+  name: chicken
+  suffix: RMC
+  components:
+  - type: RMCChicken
+  - type: RemoveComponents
+    components:
+    - type: EggLayer
+      eggSpawn:
+      - id: FoodEgg
+  - type: Reproductive
+    breedChance: 0.05
+    birthPopup: reproductive-laid-egg-popup
+    makeOffspringInfant: false
+    partnerWhitelist:
+      tags:
+      - Chicken
+    offspring:
+    - id: RMCFoodEggChickenFertilized
+      maxAmount: 3
+  - type: RMCChickenFedEggLayer
+  - type: RMCAnimalPrey
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+
+- type: entity
+  id: RMCMobChicken1
+  parent: MobChicken1
+  name: chicken
+  suffix: RMC
+  components:
+  - type: RMCChicken
+  - type: RemoveComponents
+    components:
+    - type: EggLayer
+      eggSpawn:
+      - id: FoodEgg
+  - type: RMCChickenFedEggLayer
+  - type: RMCAnimalPrey
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+
+- type: entity
+  id: RMCMobChicken2
+  parent: MobChicken2
+  name: chicken
+  suffix: RMC
+  components:
+  - type: RMCChicken
+  - type: RemoveComponents
+    components:
+    - type: EggLayer
+      eggSpawn:
+      - id: FoodEgg
+  - type: RMCChickenFedEggLayer
+  - type: RMCAnimalPrey
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+
+- type: entity
+  id: RMCMobChick
+  parent: MobChicken
+  name: chick
+  description: Adorable. It is already making too much noise.
+  suffix: RMC
+  components:
+  - type: RMCChicken
+  - type: RMCChickGrowth
+  - type: RMCAnimalPrey
+  - type: RemoveComponents
+    components:
+    - type: EggLayer
+      eggSpawn:
+      - id: FoodEgg
+    - type: Reproductive
+      partnerWhitelist:
+        tags:
+        - Chicken
+      offspring:
+      - id: RMCFoodEggChickenFertilized
+  - type: Sprite
+    scale: 0.55, 0.55
+    drawdepth: SmallMobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+      state: chicken-0
+      sprite: Mobs/Animals/chicken.rsi
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: chicken-moving-0
+    noMovementLayers:
+      movement:
+        state: chicken-0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      1: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 3.2
+
+- type: entity
+  id: RMCFoodEggChickenFertilized
+  parent: FoodEgg
+  name: egg
+  suffix: RMC, Fertilized, Chicken
+  components:
+  - type: RMCChickenEggHatch
+
+- type: entity
+  id: RMCMobCow
+  parent: MobCow
+  name: cow
+  suffix: RMC
+  components:
+  - type: RMCCowTippable
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+
+- type: entity
+  id: RMCMobGoat
+  parent: MobGoat
+  name: goat
+  suffix: RMC
+  components:
+  - type: RMCGoatTemper
+  - type: Reproductive
+    partnerWhitelist:
+      tags:
+      - Goat
+    offspring:
+    - id: RMCMobGoat
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+
+- type: entity
+  id: RMCMobParrot
+  parent: MobParrot
+  name: parrot
+  suffix: RMC
+  components:
+  - type: RMCParrot
+  - type: RMCAnimalPrey
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCParrotVisuals.Perched:
+        enum.DamageStateVisualLayers.Base:
+          True: { state: sit }
+          False: { state: parrot }
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral

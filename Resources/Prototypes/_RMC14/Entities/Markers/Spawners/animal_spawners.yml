@@ -1,0 +1,224 @@
+- type: entity
+  id: RMCSpawnerGiantLizard
+  parent: MarkerBase
+  name: giant lizard spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Mobs/Animals/giant_lizard.rsi
+      state: running
+    - state: timed
+  - type: RMCAnimalSpawner
+    prototype: RMCMobGiantLizard
+    initialChance: 0.66
+    maxAlive: 4
+    lateSpawnMin: 35m
+    lateSpawnMax: 50m
+    retryMin: 15m
+    retryMax: 25m
+    witnessRange: 7
+
+- type: entity
+  id: RMCSpawnerBat
+  parent: MarkerBase
+  name: bat spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Mobs/Animals/bat.rsi
+      state: bat
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobBat
+
+- type: entity
+  id: RMCSpawnerTinyLizard
+  parent: MarkerBase
+  name: lizard spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Animals/lizard.rsi
+      state: lizard
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobTinyLizard
+
+- type: entity
+  id: RMCSpawnerSpiderColony
+  parent: MarkerBase
+  name: spider colony spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Animals/spider.rsi
+      state: tarantula
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobSpiderGuard
+    - RMCMobSpiderHunter
+    - RMCMobSpiderNurse
+
+- type: entity
+  id: RMCSpawnerSpiderNurse
+  parent: RMCSpawnerSpiderColony
+  name: nurse spider spawner
+  suffix: RMC
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobSpiderNurse
+
+- type: entity
+  id: RMCSpawnerSpiderWeb
+  parent: MarkerBase
+  name: spider web spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Effects/effects.rsi
+      state: stickyweb1
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCSpiderWeb
+
+- type: entity
+  id: RMCSpawnerSpiderEgg
+  parent: MarkerBase
+  name: spider egg spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Effects/effects.rsi
+      state: eggs
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCSpiderEgg
+
+- type: entity
+  id: RMCSpawnerSpiderCocoon
+  parent: MarkerBase
+  name: spider cocoon spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Effects/effects.rsi
+      state: cocoon_large1
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCSpiderCocoon
+
+- type: entity
+  id: RMCSpawnerSpiderlingNoGrow
+  parent: MarkerBase
+  name: spiderling spawner
+  suffix: RMC, No Grow
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Effects/effects.rsi
+      state: spiderling
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobSpiderlingNoGrow
+
+- type: entity
+  id: RMCSpawnerChicken
+  parent: MarkerBase
+  name: chicken spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Animals/chicken.rsi
+      state: icon-0
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobChicken
+    - RMCMobChicken1
+    - RMCMobChicken2
+
+- type: entity
+  id: RMCSpawnerCow
+  parent: MarkerBase
+  name: cow spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Animals/cow.rsi
+      state: cow
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobCow
+
+- type: entity
+  id: RMCSpawnerGoat
+  parent: MarkerBase
+  name: goat spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Animals/goat.rsi
+      state: goat
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobGoat
+
+- type: entity
+  id: RMCSpawnerParrot
+  parent: MarkerBase
+  name: parrot spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Animals/parrot/parrot.rsi
+      state: parrot
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobParrot

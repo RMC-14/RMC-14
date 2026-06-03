@@ -94,6 +94,8 @@
   abstract: true
   suffix: CM
   components:
+  - type: RMCAnimalPrey
+  - type: RMCRodentBehavior
   - type: Body
     prototype: Mouse
   - type: Speech
