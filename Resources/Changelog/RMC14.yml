@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: QuietlyWhisper
-  changes:
-  - message: Fixed hive structures like the hive cluster not giving the Queen Eye
-      vision.
-    type: Fix
-  id: 2765
-  time: '2026-01-13T09:01:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8973
 - author: SharkSnake98
   changes:
   - message: Fixed weeds and areas in the Repaired Chance's Claim map.
@@ -4512,5 +4504,15 @@
   id: 3264
   time: '2026-06-02T19:12:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9577
+- author: MoonlightHollow
+  changes:
+  - message: Split the Flight Crew vendors
+    type: Tweak
+  - message: Added the M70 Flak Vest for both Pilot and DCC with it's storage. Added
+      M70B1 and Tactical Flight Suit for Pilots.
+    type: Add
+  id: 3265
+  time: '2026-06-03T10:03:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9903
 Name: RMC14
 Order: -1
