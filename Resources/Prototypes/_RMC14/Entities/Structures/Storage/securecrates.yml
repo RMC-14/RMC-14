@@ -286,6 +286,79 @@
     spawn: RMCSpawnerRandomHalyconGuns
 #Todo RMC14: Make it so it does it 3 times
 
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateLargeLisa
+  name: Lisa crate
+  description: A hefty wooden crate. Something inside it is scratching at the wood.
+  suffix: RMC
+  components:
+  - type: RemoveComponents
+    components:
+    - type: SpawnOnTerminate
+      spawn: RMCSpawnerRandomCrateLoot
+  - type: CrateOpenable
+    spawn:
+    - id: RMCPlankWood2
+      amount: 1
+    - id: RMCMobLisa
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateLargeCow
+  name: cow crate
+  description: A hefty wooden crate. It smells faintly of hay.
+  suffix: RMC
+  components:
+  - type: RemoveComponents
+    components:
+    - type: SpawnOnTerminate
+      spawn: RMCSpawnerRandomCrateLoot
+  - type: CrateOpenable
+    spawn:
+    - id: RMCPlankWood2
+      amount: 1
+    - id: RMCMobCow
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateLargeGoat
+  name: goat crate
+  description: A hefty wooden crate. It keeps shifting with offended energy.
+  suffix: RMC
+  components:
+  - type: RemoveComponents
+    components:
+    - type: SpawnOnTerminate
+      spawn: RMCSpawnerRandomCrateLoot
+  - type: CrateOpenable
+    spawn:
+    - id: RMCPlankWood2
+      amount: 1
+    - id: RMCMobGoat
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateLargeChick
+  name: chicken crate
+  description: A hefty wooden crate. A chorus of tiny peeps comes from inside.
+  suffix: RMC
+  components:
+  - type: RemoveComponents
+    components:
+    - type: SpawnOnTerminate
+      spawn: RMCSpawnerRandomCrateLoot
+  - type: CrateOpenable
+    spawn:
+    - id: RMCPlankWood2
+      amount: 1
+    - id: RMCMobChick
+      amount: 4
+    - id: RMCMobChick
+      prob: 0.67
+    - id: RMCMobChick
+      prob: 0.33
+
 # Black market
 - type: entity
   parent: RMCCrateLarge

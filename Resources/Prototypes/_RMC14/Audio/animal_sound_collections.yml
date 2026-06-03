@@ -9,3 +9,18 @@
   files:
   - /Audio/_RMC14/Animals/GiantLizard/giant_lizard_hiss1.ogg
   - /Audio/_RMC14/Animals/GiantLizard/giant_lizard_hiss2.ogg
+
+- type: soundCollection
+  id: RMCGiantLizardBite
+  files:
+  - /Audio/_RMC14/Xeno/alien_bite1.ogg
+  - /Audio/_RMC14/Xeno/alien_bite2.ogg
+
+- type: soundCollection
+  id: RMCGiantLizardSlash
+  files:
+  - /Audio/_RMC14/Xeno/alien_claw_flesh1.ogg
+  - /Audio/_RMC14/Xeno/alien_claw_flesh2.ogg
+  - /Audio/_RMC14/Xeno/alien_claw_flesh3.ogg
+  - /Audio/_RMC14/Xeno/alien_claw_flesh4.ogg
+  - /Audio/_RMC14/Xeno/alien_claw_flesh5.ogg

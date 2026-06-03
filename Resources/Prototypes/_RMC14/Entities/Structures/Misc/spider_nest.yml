@@ -11,6 +11,21 @@
     sprite: _RMC14/Effects/effects.rsi
     state: stickyweb1
     color: "#ffffffdd"
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWebSilk:
+            min: 0
+            max: 1
   - type: RandomSprite
     available:
     - 0:
@@ -47,10 +62,15 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 35
+        damage: 15
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 5
 
 - type: entity
   id: RMCSpiderCocoon
@@ -61,8 +81,14 @@
   - type: RMCSpiderCocoon
   - type: Sprite
     sprite: _RMC14/Effects/effects.rsi
-    state: cocoon_large1
+    state: cocoon1
     drawdepth: Mobs
+  - type: RandomSprite
+    available:
+    - 0:
+        cocoon1: ""
+        cocoon2: ""
+        cocoon3: ""
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood

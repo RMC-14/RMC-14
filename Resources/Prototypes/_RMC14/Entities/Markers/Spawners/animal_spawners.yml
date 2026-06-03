@@ -57,6 +57,57 @@
     - RMCMobTinyLizard
 
 - type: entity
+  id: RMCSpawnerAlienSlug
+  parent: MarkerBase
+  name: odd slug spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Animals/slug.rsi
+      state: slug
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobAlienSlug
+
+- type: entity
+  id: RMCSpawnerBunny
+  parent: MarkerBase
+  name: bunny spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Mobs/Animals/bunny.rsi
+      state: bunny
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobBunny
+
+- type: entity
+  id: RMCSpawnerBunnyDave
+  parent: MarkerBase
+  name: Dave spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Mobs/Animals/bunny.rsi
+      state: dave
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobBunnyDave
+
+- type: entity
   id: RMCSpawnerSpiderColony
   parent: MarkerBase
   name: spider colony spawner
@@ -207,6 +258,74 @@
     - RMCMobGoat
 
 - type: entity
+  id: RMCSpawnMobChicken
+  parent: RMCSpawnerChicken
+  name: chicken spawner
+  suffix: RMC
+
+- type: entity
+  id: RMCSpawnMobCow
+  parent: RMCSpawnerCow
+  name: cow spawner
+  suffix: RMC
+
+- type: entity
+  id: RMCSpawnMobGoat
+  parent: RMCSpawnerGoat
+  name: goat spawner
+  suffix: RMC
+
+- type: entity
+  id: RMCSpawnerCarp
+  parent: MarkerBase
+  name: space carp spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Aliens/Carps/space.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobCarp
+
+- type: entity
+  id: RMCSpawnMobCarp
+  parent: RMCSpawnerCarp
+  name: space carp spawner
+  suffix: RMC
+
+- type: entity
+  id: RMCSpawnerTomato
+  parent: MarkerBase
+  name: tomato spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Demons/tomatokiller.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobTomato
+
+- type: entity
+  id: RMCSpawnMobTomato
+  parent: RMCSpawnerTomato
+  name: tomato spawner
+  suffix: RMC
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobTomato
+
+- type: entity
   id: RMCSpawnerParrot
   parent: MarkerBase
   name: parrot spawner
@@ -222,3 +341,23 @@
   - type: ConditionalSpawner
     prototypes:
     - RMCMobParrot
+
+- type: entity
+  id: RMCSpawnMobParrot
+  parent: RMCSpawnerParrot
+  name: parrot spawner
+  suffix: RMC
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobParrot
+
+- type: entity
+  id: RMCSpawnMobParrotPoly
+  parent: RMCSpawnerParrot
+  name: Poly spawner
+  suffix: RMC
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobParrotPoly

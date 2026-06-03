@@ -128,6 +128,145 @@
       path: /Audio/Animals/snake_hiss.ogg
 
 - type: entity
+  id: RMCMobAlienSlug
+  parent: MobSlug
+  name: odd slug
+  description: A weird looking slug-like creature with tiny limbs.
+  suffix: RMC
+  components:
+  - type: RMCAlienSlug
+  - type: RMCAnimalPrey
+  - type: VentCrawler
+    ventCrawlIcon: unknown
+    ventCrawlExamine: rmc-vent-crawling-entrance
+  - type: RMCTrayCrawler
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.8
+    baseSprintSpeed: 2.6
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      5: Dead
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 1
+  - type: InteractionPopup
+    successChance: 0.35
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+  - type: ReplacementAccent
+    accent: mouse
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+
+- type: entity
+  id: RMCMobBunny
+  parent: SimpleMobBase
+  name: bunny
+  description: A little white bunny rabbit. Likes carrots, allegedly.
+  suffix: RMC
+  components:
+  - type: RMCBunny
+  - type: Sprite
+    drawdepth: SmallMobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: bunny
+      sprite: _RMC14/Mobs/Animals/bunny.rsi
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.3
+        density: 5
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Speech
+    speechSounds: Squeak
+    speechVerb: SmallMob
+    allowedEmotes: ['Squeak']
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: bunny
+      Critical:
+        Base: bunny_dead
+      Dead:
+        Base: bunny_dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      20: Dead
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 1
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 1
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+
+- type: entity
+  id: RMCMobBunnyDave
+  parent: RMCMobBunny
+  name: Dave
+  description: Dave. The coolest bunny rabbit in town.
+  suffix: RMC
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: dave
+      sprite: _RMC14/Mobs/Animals/bunny.rsi
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: dave
+      Critical:
+        Base: dave_dead
+      Dead:
+        Base: dave_dead
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male
+  - type: WarpPoint
+    follow: true
+    location: Dave
+
+- type: entity
   id: RMCMobBat
   parent: [ SimpleMobBase, FlyingMobBase, MobCombat ]
   name: bat
@@ -382,6 +521,9 @@
   description: A newly hatched spider, already too fast.
   components:
   - type: RMCSpiderlingGrowth
+  - type: HTN
+    rootTask:
+      task: IdleCompound
   - type: Sprite
     drawdepth: SmallMobs
     layers:
@@ -410,18 +552,10 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      25: Dead
+      3: Dead
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.6
     baseSprintSpeed: 4.2
-  - type: MeleeWeapon
-    soundHit:
-      path: /Audio/Effects/bite.ogg
-    angle: 0
-    animation: WeaponArcBite
-    damage:
-      types:
-        Piercing: 4
 
 - type: entity
   id: RMCMobSpiderlingNoGrow
@@ -439,6 +573,11 @@
   suffix: RMC
   components:
   - type: RMCChicken
+  - type: RMCFarmAnimalEmote
+    emotes:
+    - rmc-farm-chicken-clucks
+    - rmc-farm-chicken-pecks
+    - rmc-farm-chicken-flaps
   - type: RemoveComponents
     components:
     - type: EggLayer
@@ -467,6 +606,11 @@
   suffix: RMC
   components:
   - type: RMCChicken
+  - type: RMCFarmAnimalEmote
+    emotes:
+    - rmc-farm-chicken-clucks
+    - rmc-farm-chicken-pecks
+    - rmc-farm-chicken-flaps
   - type: RemoveComponents
     components:
     - type: EggLayer
@@ -485,6 +629,11 @@
   suffix: RMC
   components:
   - type: RMCChicken
+  - type: RMCFarmAnimalEmote
+    emotes:
+    - rmc-farm-chicken-clucks
+    - rmc-farm-chicken-pecks
+    - rmc-farm-chicken-flaps
   - type: RemoveComponents
     components:
     - type: EggLayer
@@ -505,6 +654,14 @@
   components:
   - type: RMCChicken
   - type: RMCChickGrowth
+  - type: RMCFarmAnimalEmote
+    emoteChance: 0.55
+    emoteCooldownMin: 15
+    emoteCooldownMax: 35
+    emotes:
+    - rmc-farm-chick-cheeps
+    - rmc-farm-chick-chirps
+    - rmc-farm-chick-pecks
   - type: RMCAnimalPrey
   - type: RemoveComponents
     components:
@@ -554,6 +711,14 @@
   suffix: RMC
   components:
   - type: RMCCowTippable
+  - type: RMCFarmAnimalEmote
+    emoteChance: 0.35
+    emoteCooldownMin: 30
+    emoteCooldownMax: 70
+    emotes:
+    - rmc-farm-cow-moos
+    - rmc-farm-cow-chews
+    - rmc-farm-cow-stares
   - type: NpcFactionMember
     factions:
     - SimpleNeutral
@@ -565,6 +730,14 @@
   suffix: RMC
   components:
   - type: RMCGoatTemper
+  - type: RMCFarmAnimalEmote
+    emoteChance: 0.4
+    emoteCooldownMin: 25
+    emoteCooldownMax: 60
+    emotes:
+    - rmc-farm-goat-bleats
+    - rmc-farm-goat-chews
+    - rmc-farm-goat-stamps
   - type: Reproductive
     partnerWhitelist:
       tags:
@@ -574,6 +747,103 @@
   - type: NpcFactionMember
     factions:
     - SimpleNeutral
+
+- type: entity
+  id: RMCMobCarp
+  parent: BaseMobCarp
+  name: space carp
+  description: A ferocious, fang-bearing creature that resembles a fish.
+  suffix: RMC
+  components:
+  - type: RMCCarp
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Carps/space.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: mouth
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+        BaseUnshaded: mouth
+      Dead:
+        Base: dead
+        BaseUnshaded: dead_mouth
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      25: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 4
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      groups:
+        Brute: 15
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
+  - type: NpcFactionMember
+    factions:
+    - RMCDumb
+
+- type: entity
+  id: RMCMobTomato
+  parent: MobTomatoKiller
+  name: tomato
+  description: It's a horrifyingly enormous beef tomato, and it's packing extra beef!
+  suffix: RMC
+  components:
+  - type: RemoveComponents
+    components:
+    - type: GhostRole
+    - type: GhostTakeoverAvailable
+    - type: CanEscapeInventory
+    - type: NPCImprintingOnSpawnBehaviour
+    - type: Item
+    - type: MultiHandedItem
+    - type: Produce
+    - type: PassiveDamage
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      15: Dead
+  - type: MeleeWeapon
+    hidden: true
+    damage:
+      groups:
+        Brute: 12.5
+    animation: WeaponArcBite
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 20
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeatTomato:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
 
 - type: entity
   id: RMCMobParrot
@@ -593,3 +863,18 @@
   - type: NpcFactionMember
     factions:
     - SimpleNeutral
+
+- type: entity
+  id: RMCMobParrotPoly
+  parent: RMCMobParrot
+  name: Poly
+  description: Poly the Parrot. An expert on quantum cracker theory.
+  suffix: RMC
+  components:
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male
+  - type: WarpPoint
+    follow: true
+    location: Poly
