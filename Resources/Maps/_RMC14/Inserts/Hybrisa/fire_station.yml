@@ -2091,14 +2091,14 @@ entities:
     - type: Transform
       pos: 1.5,28.5
       parent: 1
-- proto: RMCPropVehicleLoaderTruckBlueFilled
+- proto: RMCPropVehicleFiretruck
   entities:
   - uid: 255
     components:
     - type: Transform
       pos: 2.5628257,23.835209
       parent: 1
-- proto: RMCPropVehicleLoaderTruckWhiteF
+- proto: RMCPropVehicleFireTruckF
   entities:
   - uid: 254
     components:
