@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Fixed weeds and areas in the Repaired Chance's Claim map.
-    type: Fix
-  id: 2766
-  time: '2026-01-13T09:00:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8978
 - author: wheelwrightt
   changes:
   - message: Visors with power cells will now display their charge when examining
@@ -4514,5 +4507,13 @@
   id: 3265
   time: '2026-06-03T10:03:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9903
+- author: JustMyselfUwU
+  changes:
+  - message: Fixed Not being able to melt radiators and extinguisher cabinets, and
+      make extinguisher cabinets uninteractable for xenos
+    type: Fix
+  id: 3266
+  time: '2026-06-03T10:10:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9936
 Name: RMC14
 Order: -1
