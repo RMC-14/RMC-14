@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/26/2026 06:49:57
-  entityCount: 1013
+  time: 06/03/2026 15:38:05
+  entityCount: 1014
 maps: []
 grids:
 - 1
@@ -2515,40 +2515,40 @@ entities:
     - type: Transform
       pos: 37.5,16.5
       parent: 1
-  - uid: 803
-    components:
-    - type: Transform
-      pos: 23.5,12.5
-      parent: 1
-  - uid: 804
-    components:
-    - type: Transform
-      pos: 24.5,12.5
-      parent: 1
-  - uid: 805
-    components:
-    - type: Transform
-      pos: 20.5,11.5
-      parent: 1
-  - uid: 806
-    components:
-    - type: Transform
-      pos: 21.5,11.5
-      parent: 1
-  - uid: 807
-    components:
-    - type: Transform
-      pos: 23.5,11.5
-      parent: 1
-  - uid: 808
+  - uid: 779
     components:
     - type: Transform
       pos: 23.5,10.5
       parent: 1
-  - uid: 809
+  - uid: 803
+    components:
+    - type: Transform
+      pos: 23.5,11.5
+      parent: 1
+  - uid: 804
+    components:
+    - type: Transform
+      pos: 20.5,11.5
+      parent: 1
+  - uid: 805
+    components:
+    - type: Transform
+      pos: 21.5,11.5
+      parent: 1
+  - uid: 806
     components:
     - type: Transform
       pos: 24.5,10.5
+      parent: 1
+  - uid: 807
+    components:
+    - type: Transform
+      pos: 24.5,12.5
+      parent: 1
+  - uid: 808
+    components:
+    - type: Transform
+      pos: 23.5,12.5
       parent: 1
   - uid: 811
     components:
@@ -3907,10 +3907,10 @@ entities:
       parent: 1
 - proto: RMCCouchEndLowerRed
   entities:
-  - uid: 779
+  - uid: 809
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
+      rot: -1.5707963267948966 rad
       pos: 30.5,18.5
       parent: 1
 - proto: RMCCouchEndUpperRed
@@ -4680,6 +4680,15 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 27.475403,25.477036
+      parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 955
+    components:
+    - type: MetaData
+      name: Administrative Records Bureau Complex
+    - type: Transform
+      pos: 27.5,10.5
       parent: 1
 - proto: RMCPaperScrapProp
   entities:

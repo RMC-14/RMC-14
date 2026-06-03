@@ -2229,6 +2229,16 @@
 
 - type: entity
   parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsFireStation
+  name: Fire Station
+  components:
+  - type: Sprite
+    state: security_hub
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759Indoors
   id: RMCAreaLv759IndoorsSouthPublicRestroom
   name: Public Restroom - South
   components:

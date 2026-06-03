@@ -87,6 +87,22 @@
       RMCSkillConstruction: 1
     bypassLimit: true
 
+# gives fireman skill
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletFireman
+  name: fireman carry instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a figure carrying another person on their shoulders on it.
+  components:
+  - type: Sprite
+    state: pamphlet_medical # todo: fireman pamphlet sprite
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFireman: 1
+    skillCap:
+      RMCSkillFireman: 2
+    bypassLimit: true
+
 # gives jtac skill
 - type: entity
   parent: CMPamphlet
