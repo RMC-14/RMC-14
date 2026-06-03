@@ -20,9 +20,11 @@
       entries:
       - id: CMHandsBlackMarine
       - id: CMHeadsetMPO
+      - id: CMJumpsuitMP
       - id: CMBootsBlackFilled
-      - id: CMGlassesSecurity
       - id: CMBeltSecurityMPFilled
+      - id: CMGlassesSecurity
+      - id: RMCVisorMedical
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
@@ -114,8 +116,11 @@
       takeAll: CMStandard
       entries:
       - id: CMHandsBlackMarine
+      - id: CMJumpsuitWarden
       - id: RMCHeadsetMW
       - id: CMBootsBlackFilled
+      - id: RMCVisorMedical
+      - id: CMStampMW
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:

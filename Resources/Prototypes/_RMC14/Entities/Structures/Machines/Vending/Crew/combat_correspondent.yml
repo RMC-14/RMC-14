@@ -36,37 +36,58 @@
     #    name: Portable Press Fax Machine
     #    recommended: true
     - name: Uniform
-      choices: { CMUniform: 1 }
       entries:
       - id: RMCJumpsuitCorrespondentBlack
         name: Black Uniform
+        amount: 1
       - id: RMCJumpsuitCorrespondentOrange
         name: Orange Uniform
+        amount: 1
       - id: RMCJumpsuitCorrespondentRed
         name: Red Uniform
+        amount: 1
     - name: Armor
-      choices: { CMArmor: 1 }
+      takeAll: CMStandard
       entries:
       - id: CMArmorPress
         name: Combat Correspondent's Armor
         recommended: true
-      - id: RMCCoatCorrespondentBlue
-        name: Blue Vest
-      - id: RMCHazardVestBlack
-        name: Black Vest
-      - id: RMCCoatCorrespondentBlack
-        name: Black Coat
-      - id: RMCCoatCorrespondentGreen
-        name: Green Coat
-    - name: Helmet
-      choices: { CMHelmet: 1 }
-      entries:
       - id: CMArmorHelmetPress
         name: Combat Correspondent's Helmet
         recommended: true
+    - name: Outer Wear
+      entries:
+      - id: RMCCoatCorrespondentBlue
+        name: Blue Vest
+        amount: 1
+      - id: RMCHazardVestBlack
+        name: Black Vest
+        amount: 1
+      - id: RMCCoatCorrespondentBlack
+        name: Black Coat
+        amount: 1
+      - id: RMCCoatCorrespondentGreen
+        name: Green Coat
+        amount: 1
+      - id: RMCCoatCorrespondentGreenJacket
+        name: Green Jacket
+        amount: 1
+      - id: RMCCoatCorrespondentBlueJacket
+        name: Blue Jacket
+        amount: 1
+      - id: RMCCoatCorrespondentTanJacket
+        name: Tan Jacket
+        amount: 1
+      - id: RMCCoatCorrespondentBrownJacket
+        name: Brown Jacket
+        amount: 1
+    - name: Helmet
+      entries:
       - id: RMCHeadCapCorrespondent
         name: Combat Correspondent's Cap
+        amount: 1
       - id: RMCHeadCapFedoraGrey
+        amount: 1
         name: Fedora
     - name: Refills
       entries:

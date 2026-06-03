@@ -24,3 +24,21 @@
   - type: Whistle
     distance: 15 # Let your enemies hear the sound of death approaching
   - type: RMCWhistle
+
+- type: entity
+  parent: RMCWhistle
+  id: RMCWhistleTrench
+  name: trench whistle
+  description: A metallic field whistle, popularized back in the early 20th century. Can be blown while held, or worn in the mouth.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/whistle.rsi
+    state: trench_whistle
+  - type: EmitSoundOnUse
+    sound:
+      collection: RMCTrenchWhistle
+  - type: EmitSoundOnAction
+    sound:
+      collection: RMCTrenchWhistle
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-trench-whistle 

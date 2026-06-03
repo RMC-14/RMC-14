@@ -45,14 +45,27 @@
       - id: RMCGlassesMedicalHUDGlasses
 #      - id: Prescription Medical HUD Glasses
     - name: Uniform
-      choices: { CMUniform: 1 }
       entries:
-      - id: CMScrubsGreen
-      - id: CMScrubsBlue
       - id: RMCScrubsLightBlue
+        amount: 1
+      - id: CMScrubsBlue
+        amount: 1
+      - id: CMScrubsGreen
+        amount: 1
+      - id: RMCScrubsPharm
+        amount: 1
       - id: CMScrubsPurple
+        amount: 1
       - id: RMCScrubsOlive
+        amount: 1
       - id: RMCScrubsGrey
+        amount: 1
+      - id: RMCScrubsBrown
+        amount: 1
+      - id: RMCScrubsWhite
+        amount: 1
+      - id: RMCScrubsBlack
+        amount: 1
     - name: Suit
       jobs:
       - CMNurse
@@ -62,10 +75,14 @@
     - name: Suit
       jobs:
       - CMDoctor
-      choices: { CMSuit: 1 }
+      - RMCFieldDoctor
+      - CMResearcher
+      - CMCMO
       entries:
       - id: RMCLabcoat
+        amount: 1
       - id: RMCMedicalApron
+        amount: 1
 #    - name: Snow gear (Snow use only)
 #      takeall: CMSnowgear
 #      entries:
@@ -73,12 +90,27 @@
 #      - id: Balaclava
 #      - id: Snow Scarf
     - name: Headwear
-      choices: { CMHeadwear: 1 }
       entries:
-      - id: CMHeadCapSurgOrange
+      - id: CMHeadCapSurgLightBlue
+        amount: 1
       - id: CMHeadCapSurgBlue
-      - id: CMHeadCapSurgPurple
+        amount: 1
       - id: CMHeadCapSurgGreen
+        amount: 1
+      - id: CMHeadCapSurgPharm
+        amount: 1
+      - id: CMHeadCapSurgPurple
+        amount: 1
+      - id: CMHeadCapSurgOlive
+        amount: 1
+      - id: CMHeadCapSurgGrey
+        amount: 1
+      - id: CMHeadCapSurgBrown
+        amount: 1
+      - id: CMHeadCapSurgWhite
+        amount: 1
+      - id: CMHeadCapSurgBlack
+        amount: 1
     - name: Belt
       choices: { CMBelt: 1 }
       entries:

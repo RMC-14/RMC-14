@@ -16,10 +16,14 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMSatchel
+      - id: CMHeadCapDrill
+      - id: CMJumpsuitBO
+      - id: RMCCoatService
       - id: CMBootsBlackFilled
+      - id: CMSatchel
       - id: CMMRE
       - id: RMCStampSEA
+      - id: RMCWhistleTrench
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:
@@ -57,10 +61,7 @@
       - id: CMArmorM3VLBallistics
       - id: RMCArmorM3LightPadded
       - id: RMCArmorM3MediumVariants
-    - name: Jacket
-      choices: { CMCoat: 1 }
-      entries:
-      - id: RMCCoatService
+      - id: RMCArmorBulletproof
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:

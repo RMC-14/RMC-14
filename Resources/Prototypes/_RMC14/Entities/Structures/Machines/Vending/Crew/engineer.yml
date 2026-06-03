@@ -30,20 +30,27 @@
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Helmet
-      choices: { CMHelmet: 1 }
       entries:
       - id: CMHeadBeretEngineer
+        amount: 1
       - id: RMCHardhatWhite
+        amount: 1
       - id: RMCHardhatOrange
+        amount: 1
       - id: RMCHardhatBlue
+        amount: 1
       - id: RMCHelmetWelding
+        amount: 1
     - name: Suit
-      choices: { CMSuit: 1 }
       entries:
       - id: RMCHazardVestBlack
+        amount: 1
       - id: RMCHazardVestBlue
+        amount: 1
       - id: RMCHazardVest
+        amount: 1
       - id: RMCHazardVestYellow
+        amount: 1
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:

@@ -1,0 +1,7 @@
+- type: soundCollection
+  id: RMCTrenchWhistle
+  files:
+    - /Audio/_RMC14/Items/whistles_trench.ogg
+    - /Audio/_RMC14/Items/whistles_trench_focus.ogg
+    - /Audio/_RMC14/Items/whistles_trench_hold.ogg
+    - /Audio/_RMC14/Items/whistles_trench_move.ogg

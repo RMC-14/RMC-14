@@ -37,16 +37,19 @@
       - id: RMCCoatService
         recommended: true
     - name: Hat
-      choices: { CMHat: 1 }
       entries:
       - id: RMCHeadBeret
         recommended: true
+        amount: 1
       - id: RMCHeadCapFlippable
         recommended: true
+        amount: 1
       - id: CMHeadCapOfficer
         recommended: true
+        amount: 1
       - id: CMHeadCapPeakedService
         recommended: true
+        amount: 1
     - name: Patches
       takeAll: RMCPatch
       entries:
@@ -756,14 +759,17 @@
       - id: CMHeadsetSeniorCommand
       - id: CMSatchel
       - id: CMMRE
+      - id: CMStampXO
     - name: Uniform # TODO: Port this.
       jobs:
       - CMExecutiveOfficer
-      choices: { CMUniform: 1 }
       entries:
       - id: CMJumpsuitBO
+        amount: 1
       - id: CMJumpsuitOperations
+        amount: 1
       - id: RMCVendorBundleXOFormal
+        amount: 1
     - name: Personal Weapon
       jobs:
       - CMExecutiveOfficer
@@ -820,6 +826,18 @@
       - id: RMCSunglassesBig
         recommended: true
       - id: RMCGlassesAviators
+    - name: Hats
+      jobs:
+      - CMExecutiveOfficer
+      entries:
+      - id: RMCHeadBeretChiefOfficer
+        amount: 1
+      - id: CMHeadCapPeakedService
+        amount: 1
+      - id: RMCHeadCapFlippable # TODO: Port Patrol Cap
+        amount: 1
+      - id: CMHeadCapOfficer
+        amount: 1
     - name: Patches
       jobs:
       - CMExecutiveOfficer
@@ -876,15 +894,6 @@
       - id: CMWebbing
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
-    - name: Hats
-      jobs:
-      - CMExecutiveOfficer
-      choices: { CMHat: 1 }
-      entries:
-      - id: RMCHeadBeret # TODO: Port Officer Beret
-      - id: CMHeadCapPeakedService
-      - id: RMCHeadCapFlippable # TODO: Port Patrol Cap
-      - id: CMHeadCapOfficer
     # ////////////////////////////////////
     # Chief MP
     # ////////////////////////////////////
@@ -903,6 +912,8 @@
       - id: CMJumpsuitWO
       - id: CMHeadsetCMP
       - id: CMBootsBlackFilled
+      - id: RMCVisorMedical
+      - id: CMStampCMP
     - name: Helmet
       jobs:
       - CMChiefMP
@@ -1025,6 +1036,7 @@
       - id: CMBootsBlack
       - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
       - id: RMCNailgunTactical
+      - id: CMStampCE
       # TODO KN5500/2 PDA
     - name: Uniform
       jobs:
@@ -1044,22 +1056,29 @@
     - name: Helmet
       jobs:
       - CMChiefEngineer
-      choices: { CMHelmet: 1 }
       entries:
       - id: CMHeadBeretEngineer
+        amount: 1
       - id: RMCHardhatWhite
+        amount: 1
       - id: RMCHeadCapFlippable
+        amount: 1
       - id: RMCHelmetWelding
+        amount: 1
     - name: Suit
       jobs:
       - CMChiefEngineer
-      choices: { CMSuit: 1 }
       entries:
       - id: RMCHazardVestBlack
+        amount: 1
       - id: RMCHazardVestBlue
+        amount: 1
       - id: RMCHazardVest
+        amount: 1
       - id: RMCHazardVestYellow
+        amount: 1
       - id: RMCCoatService
+        amount: 1
     - name: Backpack
       jobs:
       - CMChiefEngineer
@@ -1206,22 +1225,26 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
+      - id: CMJumpsuitQM
       - id: CMSatchel
       - id: RMCQuartermasterJacket
+      - id: CMStampQM
     - name: Gloves
       jobs:
       - CMQuartermaster
       choices: { CMHands: 1 }
       entries:
+      - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Headgear
       jobs:
       - CMQuartermaster
-      choices: { CMHelmet: 1 }
       entries:
       - id: RMCHeadBeretQuartermaster
         recommended: true
+        amount: 1
       - id: CMHeadCapCargo
+        amount: 1
     - name: Personal Sidearm
       jobs:
       - CMQuartermaster
@@ -1308,6 +1331,7 @@
       entries:
       - id: CMHandsLatex
       - id: CMHeadsetCMO
+      - id: CMStampCMO
     - name: Eyewear
       jobs:
       - CMCMO
@@ -1320,36 +1344,83 @@
     - name: Uniform
       jobs:
       - CMCMO
-      choices: { CMUniform: 1 }
       entries:
       - id: CMJumpsuitCMO
         recommended: true
-      - id: CMScrubsGreen
+        amount: 1
+      - id: RMCScrubsCMO
+        amount: 1
+      - id: RMCJumpsuitDoctor
+        amount: 1
       - id: CMScrubsBlue
+        amount: 1
+      - id: CMScrubsGreen
+        amount: 1
+      - id: RMCScrubsPharm
+        amount: 1
       - id: RMCScrubsLightBlue
+        amount: 1
       - id: CMScrubsPurple
+        amount: 1
       - id: RMCScrubsOlive
+        amount: 1
       - id: RMCScrubsGrey
+        amount: 1
+      - id: RMCScrubsBrown
+        amount: 1
+      - id: RMCScrubsWhite
+        amount: 1
+      - id: RMCScrubsBlack
+        amount: 1
     - name: Suit
       jobs:
       - CMCMO
-      choices: { CMSuit: 1 }
       entries:
       - id: RMCLabcoatCMO
         recommended: true
+        amount: 1
       - id: RMCLabcoat
-        recommended: true
+        amount: 1
+      - id: RMCLabcoatPharm
+        amount: 1
+      - id: RMCLabcoatShort
+        name: High-Cut Lab Coat
+        amount: 1
+      - id: RMCLabcoatLong
+        name: Low-Cut Lab Coat
+        amount: 1
       - id: RMCMedicalApron
+        amount: 1
     - name: Headwear
       jobs:
       - CMCMO
-      choices: { CMHelmet: 1 }
       entries:
       - id: CMHeadCapCMO
-      - id: CMHeadCapSurgOrange
+        recommended: true
+        amount: 1
+      - id: CMHeadCapSurgCMO
+        recommended: true
+        amount: 1
       - id: CMHeadCapSurgBlue
-      - id: CMHeadCapSurgPurple
+        amount: 1
       - id: CMHeadCapSurgGreen
+        amount: 1
+      - id: CMHeadCapSurgPharm
+        amount: 1
+      - id: CMHeadCapSurgLightBlue
+        amount: 1
+      - id: CMHeadCapSurgPurple
+        amount: 1
+      - id: CMHeadCapSurgOlive
+        amount: 1
+      - id: CMHeadCapSurgGrey
+        amount: 1
+      - id: CMHeadCapSurgBrown
+        amount: 1
+      - id: CMHeadCapSurgWhite
+        amount: 1
+      - id: CMHeadCapSurgBlack
+        amount: 1
     - name: Bag
       jobs:
       - CMCMO
@@ -1470,24 +1541,33 @@
     - name: Uniform
       jobs:
       - CMAuxiliarySupportOfficer
-      choices: { CMUniform: 1 }
       entries:
       - id: CMJumpsuitBO
+        amount: 1
       - id: RMCJumpsuitASOBlack
+        amount: 1
       - id: RMCJumpsuitASOFormal
+        amount: 1
       - id: RMCJumpsuitASOFormalAlt
+        amount: 1
       - id: RMCJumpsuitASOBlackAlt
+        amount: 1
       - id: RMCJumpsuitASOOperations
+        amount: 1
     - name: Outer Wear
       jobs:
       - CMAuxiliarySupportOfficer
-      choices: { CMSuit: 1 }
       entries:
       - id: CMCoatASO
+        amount: 1
       - id: RMCCoatASOBlack
+        amount: 1
       - id: RMCCoatASOWhite
+        amount: 1
       - id: RMCCoatASOBlackAlt
+        amount: 1
       - id: RMCCoatASOWhiteAlt
+        amount: 1
     - name: Headset
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1525,16 +1605,24 @@
     - name: Hat
       jobs:
       - CMAuxiliarySupportOfficer
-      choices: { CMHelmet: 1 }
       entries:
       - id: RMCHeadCapASO
+        amount: 1
       - id: RMCHeadCapPeakedASO
+        amount: 1
       - id: RMCHeadBeretASO
+        amount: 1
       - id: RMCHeadBeret
-      # TODO patrol and officer cap
+        amount: 1
+      # TODO patrol
       - id: RMCHeadCapFlippable
+        amount: 1
+      - id: CMHeadCapOfficer
+        amount: 1
       - id: CMHeadCapPeakedService
+        amount: 1
       - id: CMHeadBeretTan
+        amount: 1
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1591,3 +1679,9 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
+    - name: Spare Equipment
+      jobs:
+      - CMAuxiliarySupportOfficer
+      entries:
+      - id: CMStampASO
+        amount: 1

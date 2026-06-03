@@ -62,6 +62,8 @@
         amount: 10
       - id: RMCMagazinePistolM1984AP
         amount: 6
+      - id: RMCMagazinePistolM1984HP
+        amount: 6
       - id: CMMagazinePistolMK80
         amount: 8
       - id: RMCMagazinePistolM13

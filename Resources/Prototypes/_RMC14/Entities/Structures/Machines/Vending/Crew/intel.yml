@@ -29,6 +29,8 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 10
+      - id: CMMagazineRifleM4SPRExt
+        points: 10
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -37,13 +39,15 @@
         points: 10
       - id: CMMagazineRifleM54CExt
         points: 10
+      - id: RMCMagazinePistolM13Ext
+        points: 10
     - name: Sidearm Ammunition
       entries:
       - id: RMCSpeedLoader44Marksman
         points: 10 # TODO RMC14 heavy speed revolver
-      - id: RMCMagazinePistolM1984AP
-        points: 5
       - id: RMCMagazinePistolM1984HP
+        points: 5
+      - id: RMCMagazinePistolM1984AP
         points: 5
       - id: CMMagazinePistolMK80
         points: 10
@@ -164,11 +168,13 @@
       - id: RMCArmorHelmetM12Intel
         recommended: true
     - name: Hat
-      choices: { CMHat: 1 }
       entries:
       - id: RMCHeadBeretGreen
+        amount: 1
       - id: CMHeadBeretTan
+        amount: 1
       - id: CMHeadCapOfficer
+        amount: 1
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -272,8 +278,14 @@
         amount: 4
       - id: CMWeaponPistolM1984Empty
         amount: 4
+      - id: RMCWeaponPistolM13Empty
+        amount: 4
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13
+        amount: 20
+      - id: RMCMagazinePistolM13Ext
+        amount: 8
       - id: CMMagazinePistolM77AP
         amount: 20
       - id: RMCSpeedLoaderM44
@@ -285,7 +297,7 @@
       - id: RMCMagazinePistolM1984HP
         amount: 8
       - id: CMMagazinePistolMK80
-        amount: 20
+        amount: 16
     - name: Attachments
       entries:
       - id: RMCAttachmentRailFlashlight

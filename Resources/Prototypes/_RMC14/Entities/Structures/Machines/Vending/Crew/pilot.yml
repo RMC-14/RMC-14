@@ -283,13 +283,17 @@
       - id: CMMagazinePistolM1984
         amount: 20
       - id: RMCMagazinePistolM1984AP
-        amount: 14
+        amount: 12
+      - id: RMCMagazinePistolM1984HP
+        amount: 12
       #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
       # amount: 14
       - id: CMMagazinePistolMK80
         amount: 16
       - id: RMCMagazinePistolM13
-        amount: 10
+        amount: 12
+      - id: RMCMagazinePistolM13Ext
+        amount: 4
     - name: Attachments
       entries:
       - id: RMCAttachmentRailFlashlight
