@@ -139,7 +139,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         RaiseNetworkEvent(new RMCSetLastRealTickEvent(GetLastRealTick(null)));
     }
 
-    public bool Collides(Entity<FixturesComponent?> target, Entity<PhysicsComponent?> projectile, MapCoordinates targetCoordinates, int substep = 0)
+    public bool Collides(Entity<FixturesComponent?> target, Entity<PhysicsComponent?> projectile, ICommonSession? perspectiveSession, int substep = 0)
     {
         if (!Resolve(target, ref target.Comp, false) ||
             !Resolve(projectile, ref projectile.Comp, false))
@@ -153,6 +153,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         var projectileVelocity = _physics.GetLinearVelocity(projectile, projectile.Comp.LocalCenter);
         var substeppedProjectilePos = projectileCoordinates.Position + (projectileVelocity / _timing.TickRate) * (substep / (float)_substeps);
 
+        var targetCoordinates = _transform.ToMapCoordinates(GetCoordinates(target, perspectiveSession));
         var transform = new Transform(targetCoordinates.Position, 0);
         var targetBounds = new Box2(transform.Position, transform.Position);
 
@@ -189,6 +190,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         {
             Log.Debug($"""
                 Lag comp collide data:
+                  Session Name:   {perspectiveSession}
                   Pre-Substep
                     Proj Coords:  {projectileCoordinates}
                   CurTick:        {_timing.CurTick}
@@ -215,15 +217,9 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         }
 
         if (_logPrediction)
-            Log.Warning("Predicted hit denied.");
+            Log.Warning($"Predicted hit denied for session '{perspectiveSession}'");
 
         return false;
-    }
-
-    public bool Collides(Entity<FixturesComponent?> target, Entity<PhysicsComponent?> projectile, ICommonSession session, int substep = 0)
-    {
-        var coordinates = _transform.ToMapCoordinates(GetCoordinates(target, session));
-        return Collides(target, projectile, coordinates, substep);
     }
 
     /// <summary>

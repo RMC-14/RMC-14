@@ -139,7 +139,6 @@ public sealed class XenoProjectileSystem : EntitySystem
         }
 
         _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
-        var coordinates = _transform.ToMapCoordinates(_rmcLagCompensation.GetCoordinates(target, args.SenderSession));
 
         if (!TryComp(shot, out ProjectileComponent? projectile) ||
             !TryComp(shot, out PhysicsComponent? physics))
@@ -147,7 +146,7 @@ public sealed class XenoProjectileSystem : EntitySystem
             return;
         }
 
-        if (!_rmcLagCompensation.Collides(target, (shot.Value, physics), coordinates, substep))
+        if (!_rmcLagCompensation.Collides(target, (shot.Value, physics), args.SenderSession, substep))
             return;
 
         _projectile.ProjectileCollide((shot.Value, projectile, physics), target, true);
@@ -191,7 +190,9 @@ public sealed class XenoProjectileSystem : EntitySystem
             return;
 
         // If a collision happens during a re-predicted frame, the projectile is actually at substep 0
-        // for the next frame. Not 100% sure why this is the case, but it's very accurate during testing.
+        // for the next frame. This is because on tick x, after the physics system runs, objects will
+        // actually be at their starting positions for tick x + 1. This includes our projectile.
+        // We don't have an up-to-date value for LatestPredictedTick because tick x + 1 hasn't run yet.
         var tick = ent.Comp.LatestPredictedTick;
         var substep = _rmcLagCompensation.GetClientSubstep();
         if (!_timing.IsFirstTimePredicted)
@@ -293,7 +294,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        for (var i = 0; i < _earlyMessages.Count; ++i)
+        for (var i = _earlyMessages.Count - 1; i >= 0; --i)
         {
             var item = _earlyMessages[i];
             if (item.PredictedHitTick < _timing.CurTick)
@@ -302,7 +303,6 @@ public sealed class XenoProjectileSystem : EntitySystem
                     Log.Warning($"Removed expired prediction message: Shooter {item.Shooter}, Shot ID {item.Message.Id}");
                 _earlyMessages[i] = _earlyMessages[_earlyMessages.Count - 1];
                 _earlyMessages.RemoveAt(_earlyMessages.Count - 1);
-                --i;
             }
             else if (item.PredictedHitTick == _timing.CurTick)
             {
@@ -312,7 +312,6 @@ public sealed class XenoProjectileSystem : EntitySystem
                 OnPredictedHit(item.Message, item.Args, false);
                 _earlyMessages[i] = _earlyMessages[_earlyMessages.Count - 1];
                 _earlyMessages.RemoveAt(_earlyMessages.Count - 1);
-                --i;
             }
         }
     }
