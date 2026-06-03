@@ -12,6 +12,12 @@
     },
     {
       "name": "suppressor_l112_a"
+    },
+    {
+      "name": "suppressor_pcac"
+    },
+    {
+      "name": "suppressor_pcac_a"
     }
   ]
 }

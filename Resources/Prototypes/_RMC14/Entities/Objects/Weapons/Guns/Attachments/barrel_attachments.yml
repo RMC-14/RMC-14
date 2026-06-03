@@ -364,6 +364,26 @@
 
 - type: entity
   parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentSuppressorPCAC5
+  name: PCAC5SD integrated suppressor
+  description: Uh... guess we go loud, then.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_barrel.rsi
+    state: suppressor_pcac
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentSuppressorPCAC5
+  - type: AttachableVisuals
+  - type: AttachableSilencer
+    sound:
+      collection: RMCSilencedShootAlt
+      params:
+        maxDistance: 6
+
+- type: entity
+  parent: RMCBarrelAttachmentBase
   id: RMCAttachmentMatebaStandard
   name: Standard Mateba Barrel
   description: A standard mateba barrel. Offers a balance between accuracy and fire rate.
@@ -510,6 +530,9 @@
 
 - type: Tag
   id: RMCAttachmentSuppressorL112
+
+- type: Tag
+  id: RMCAttachmentSuppressorPCAC5
 
 - type: Tag
   id: RMCAttachmentBarrelCharger

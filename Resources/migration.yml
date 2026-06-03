@@ -1491,6 +1491,15 @@ CMWebbingSurgicalBlue: RMCWebbingSurgicalBlue
 # 2026-03-21
 CMUpgradedTraumaKit: CMUpgradedTraumaKit10
 
+# 2026-05-10
+WeaponSMGMP5: RMCWeaponSMGPCAC5A4
+WeaponSMGMP5Alt: RMCWeaponSMGPCAC5A5
+CMMagazineSMGMP5: RMCMagazineSMGPCAC5
+CMBeltMarineMP5: RMCBeltMarinePCAC5
+RMCPouchMagazineFilledMP5: RMCPouchMagazineFilledPCAC5
+RMCPouchMagazineLargeMP5: RMCPouchMagazineLargePCAC5
+RMCAttachmentMP5AltStockCollapsible: RMCAttachmentStockPCAC5Collapsible
+
 #2026-05-20
 RMCHeadCapFerret: RMCHeadCapGrey
 CMPosterRememberIo: CMRandomPosterAny

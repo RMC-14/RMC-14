@@ -908,24 +908,25 @@
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
-  id: RMCAttachmentMP5AltStockCollapsible
-  name: MP5A5 folding stock
-  description: MP5A5 folding stock for Alternate MP5
+  id: RMCAttachmentStockPCAC5Collapsible
+  name: PCAC5 collapsible stock
+  description: Collapsible stock for the PCAC5A5 and PCAC5SD6.
   components:
   - type: Sprite
-    state: mp5_stock
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: pcac_collapsible
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentMP5AltStockCollapsible
+    - RMCAttachmentStockPCAC5Collapsible
   - type: AttachableToggleable
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
-      state: mp5_stock
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: pcac_collapsible
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
-      state: mp5_stock-on
-    actionName: Toggle Submachinegun Folding Stock
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: pcac_collapsible-on
+    actionName: Toggle PCAC5 Collapsible Stock
   - type: AttachableSizeMods
     modifiers:
     - conditions:
@@ -1232,6 +1233,22 @@
     - RMCAttachmentL83A3Stock
 
 - type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentStockPCAC5Solid
+  name: PCAC5 solid stock
+  description: Collapsible stock for the PCAC5A4.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: pcac_solid
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentStockPCAC5Solid
+
+- type: entity
   parent: RMCAttachmentM54CStockCollapsible
   id: RMCAttachmentAK4047StockCollapsible
   name: AK-4047 folding stock
@@ -1399,7 +1416,10 @@
   id: RMCAttachmentAK4047StockCollapsible
 
 - type: Tag
-  id: RMCAttachmentMP5AltStockCollapsible
+  id: RMCAttachmentStockPCAC5Collapsible
+
+- type: Tag
+  id: RMCAttachmentStockPCAC5Solid
 
 - type: Tag
   id: RMCAttachmentM54CE2Stock

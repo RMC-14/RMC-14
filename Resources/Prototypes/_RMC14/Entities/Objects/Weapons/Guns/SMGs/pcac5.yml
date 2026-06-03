@@ -1,0 +1,308 @@
+﻿- type: entity
+  parent: CMBaseWeaponSMG
+  id: RMCWeaponSMGPCAC5A4
+  name: PCAC5A4 submachine gun
+  description: A Pistol-Caliber Automatic Carbine, Model 5 - a timeless classic. The A4 variant features a solid stock, and can be occasionally found in the hands of collectors and gun fanatics.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/pcac5.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/pcac5.rsi
+  - type: Gun
+    shotsPerBurst: 3
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/smg_light.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 1
+    recoilUnwielded: 1
+    scatterWielded: 6
+    scatterUnwielded: 12
+    baseFireRate: 4
+    burstScatterMult: 3
+    modifiers:
+      Burst:
+        fireDelay: 0.0999
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 3
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.8
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSMGPCAC5
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSMGPCAC5
+          - RMCMagazineSMGPCAC5AP
+          - RMCMagazineSMGPCAC5Rubber
+  - type: AttachableHolder
+    randomAttachmentChance: 0.1
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentBipod
+          - RMCAttachmentM203GrenadeLauncher
+          - RMCAttachmentExtinguisher
+        random:
+        - RMCAttachmentM203GrenadeLauncher
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentStockPCAC5Solid
+        whitelist:
+          tags:
+          - RMCAttachmentStockPCAC5Solid
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.715, 0
+      rmc-aslot-rail: -0.16, 0.09
+      rmc-aslot-underbarrel: 0.25, -0.34
+      rmc-aslot-stock: -0.53, 0
+  - type: GunDamageModifier
+    multiplier: 1.2
+
+- type: entity
+  parent: RMCWeaponSMGPCAC5A4
+  id: RMCWeaponSMGPCAC5A5
+  name: PCAC5A5 submachine gun
+  description: A Pistol-Caliber Automatic Carbine, Model 5 - a timeless classic. The A5 variant features a collapsible stock, and can be found in limited use by local security forces or the Colony Marshal Bureau.
+  suffix: Filled
+  components:
+  - type: AttachableHolder
+    randomAttachmentChance: 0.1
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentBipod
+          - RMCAttachmentM203GrenadeLauncher
+          - RMCAttachmentExtinguisher
+        random:
+        - RMCAttachmentM203GrenadeLauncher
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentStockPCAC5Collapsible
+        whitelist:
+          tags:
+          - RMCAttachmentStockPCAC5Collapsible
+
+# MAGAZINES
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSMGPCAC5
+  name: "PCAC5 magazine (9mm SMG)"
+  description: "A 9mm SMG magazine for the PCAC5."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGPCAC5
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridge9mmSMG
+    proto: CMCartridge9mmSMG
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/pcac5.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineSMGPCAC5
+  id: RMCMagazineSMGPCAC5AP
+  name: "PCAC5 AP magazine (9mm SMG)"
+  suffix: PVE # TODO RMC14: Remove PVE suffix when the 9mm cartridge situation is fixed.
+  description: "A 9mm SMG magazine for the PCAC5, loaded with armor-piercing rounds."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGPCAC5AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge9mmSMGAP
+    proto: RMCCartridge9mmSMGAP
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/pcac5.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+
+- type: entity
+  parent: RMCMagazineSMGPCAC5
+  id: RMCMagazineSMGPCAC5Rubber
+  name: "PCAC5 rubber magazine (9mm SMG)"
+  suffix: PVE # TODO RMC14: Remove PVE suffix when the 9mm cartridge situation is fixed.
+  description: "A 9mm SMG magazine for the PCAC5, loaded with less-lethal rubber rounds."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGPCAC5AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge9mmSMGRubber
+    proto: RMCCartridge9mmSMGRubber
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/pcac5.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#0A00C8"
+
+# CARTRIDGES        # TODO RMC14: Fix having a half-dozen duplicate 9mm cartridges.
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: CMCartridge9mmSMG
+  name: cartridge (9mm SMG)
+  description: A 9mm SMG cartridge for the PCAC5 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridge9mmSMG
+  - type: CartridgeAmmo
+    proto: CMBullet9mmSMG
+
+- type: entity
+  parent: CMCartridge9mmSMG
+  id: RMCCartridge9mmSMGAP
+  name: AP cartridge (9mm SMG)
+  description: A 9mm SMG armor-piercing cartridge for the PCAC5 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge9mmSMGAP
+  - type: CartridgeAmmo
+    proto: CMBulletPistolM77AP
+
+- type: entity
+  parent: CMCartridge9mmSMG
+  id: RMCCartridge9mmSMGRubber
+  name: rubber cartridge (9mm SMG)
+  description: A 9mm SMG less-lethal rubber cartridge for the PCAC5 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge9mmSMGRubber
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmRubber
+
+# BULLETS
+
+- type: entity
+  parent: Bullet10x20mm
+  id: CMBullet9mmSMG
+  categories: [ HideSpawnMenu ]
+
+- type: Tag
+  id: RMCMagazineSMGPCAC5
+
+- type: Tag
+  id: RMCMagazineSMGPCAC5AP
+
+- type: Tag
+  id: RMCMagazineSMGPCAC5Rubber
+
+- type: Tag
+  id: CMCartridge9mmSMG
+
+- type: Tag
+  id: RMCCartridge9mmSMGAP
+
+- type: Tag
+  id: RMCCartridge9mmSMGRubber
