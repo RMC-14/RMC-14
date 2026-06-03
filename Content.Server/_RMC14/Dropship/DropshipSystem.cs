@@ -19,19 +19,23 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Administration.Logs;
-using Content.Shared.CCVar;
+using Content.Shared.Access.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
+using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Timing;
+using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -75,11 +79,20 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private TimeSpan _lzPrimaryAutoDelay;
     private TimeSpan _flyByTime;
     private TimeSpan _hijackTravelTime;
+    private TimeSpan _autopilotDefaultDelay;
+    private TimeSpan _autopilotMinDelay;
+    private TimeSpan _autopilotMaxDelay;
+    private TimeSpan _autopilotRetryDelay;
+    private TimeSpan _nextAutopilotUiRefresh;
 
     private EntityUid _dropshipId;
     private bool _hijack;
 
     private const float DepartureLocationSearchRange = 12;
+    private const float DropshipStartupTimeSeconds = 10;
+    private const float DropshipTravelTimeSeconds = 100;
+    private const float DropshipPrearrivalTimeSeconds = 10;
+    private const float DropshipRechargeTimeSeconds = 120;
 
     public override void Initialize()
     {
@@ -90,6 +103,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
         _doorBoltQuery = GetEntityQuery<DoorBoltComponent>();
 
         SubscribeLocalEvent<DropshipNavigationComputerComponent, DropshipLockoutDoAfterEvent>(OnNavigationLockout);
+        SubscribeLocalEvent<DropshipRemoteControlConsoleComponent, ActivateInWorldEvent>(OnRemoteControlActivateInWorld, before: [typeof(ActivatableUISystem), typeof(ActivatableUIRequiresAccessSystem)]);
+        SubscribeLocalEvent<DropshipRemoteControlConsoleComponent, ActivatableUIOpenAttemptEvent>(OnRemoteControlOpenAttempt);
+        SubscribeLocalEvent<DropshipRemoteControlConsoleComponent, AfterActivatableUIOpenEvent>(OnRemoteControlConsoleOpen);
 
         SubscribeLocalEvent<DropshipComponent, FTLRequestEvent>(OnFtlRequested);
         SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnFTLStarted);
@@ -107,13 +123,27 @@ public sealed class DropshipSystem : SharedDropshipSystem
             subs =>
             {
                 subs.Event<DropshipLockdownMsg>(OnDropshipNavigationLockdownMsg);
-                subs.Event<DropshipRemoteControlToggleMsg>(OnDropshipRemoteControlToggleMsg);
                 subs.Event<DropshipLaunchAlarmToggleMsg>(OnDropshipLaunchAlarmToggleMsg);
+                subs.Event<DropshipNavigationAutopilotDisableMsg>(OnDropshipNavigationAutopilotDisableMsg);
+            });
+
+        Subs.BuiEvents<DropshipRemoteControlConsoleComponent>(DropshipRemoteControlUiKey.Key,
+            subs =>
+            {
+                subs.Event<DropshipRemoteLaunchMsg>(OnDropshipRemoteLaunchMsg);
+                subs.Event<DropshipRemoteAutopilotConfigureMsg>(OnDropshipRemoteAutopilotConfigureMsg);
+                subs.Event<DropshipRemoteAutopilotDisableMsg>(OnDropshipRemoteAutopilotDisableMsg);
+                subs.Event<DropshipRemoteAutopilotLaunchNowMsg>(OnDropshipRemoteAutopilotLaunchNowMsg);
+                subs.Event<DropshipRemoteAutopilotRecallNowMsg>(OnDropshipRemoteAutopilotRecallNowMsg);
             });
 
         Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipFlyByTimeSeconds, v => _flyByTime = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipHijackTravelTimeSeconds, v => _hijackTravelTime = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipAutopilotDefaultDelaySeconds, v => _autopilotDefaultDelay = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipAutopilotMinDelaySeconds, v => _autopilotMinDelay = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipAutopilotMaxDelaySeconds, v => _autopilotMaxDelay = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipAutopilotRetrySeconds, v => _autopilotRetryDelay = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnFTLStarted(Entity<DropshipComponent> ent, ref FTLStartedEvent args)
@@ -196,6 +226,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         RefreshUI();
+        RefreshRemoteControlConsoles();
     }
 
     private void OnBeforeFTLStarted(Entity<DropshipComponent> ent, ref BeforeFTLStartedEvent args)
@@ -206,6 +237,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
     {
         RefreshUI();
+        RefreshRemoteControlConsoles();
     }
 
     private void OnFtlRequested<T>(Entity<DropshipComponent> ent, ref T args)
@@ -257,13 +289,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
         OnRefreshUI((grid, dropship), ref args);
     }
 
-    private void OnDropshipRemoteControlToggleMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipRemoteControlToggleMsg args)
-    {
-        ent.Comp.RemoteControl = !ent.Comp.RemoteControl;
-        Dirty(ent, ent.Comp);
-        RefreshUI();
-    }
-
     private void OnDropshipLaunchAlarmToggleMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipLaunchAlarmToggleMsg args)
     {
         if (!TryGetGridDropship(ent, out var dropship))
@@ -304,6 +329,862 @@ public sealed class DropshipSystem : SharedDropshipSystem
         UnlockAllDoors(ent);
 
         _popup.PopupEntity(Loc.GetString("rmc-dropship-locked", ("minutes", (int)ent.Comp.LockoutDuration.TotalMinutes)), ent, args.User, PopupType.Medium);
+    }
+
+    private void OnRemoteControlActivateInWorld(Entity<DropshipRemoteControlConsoleComponent> ent, ref ActivateInWorldEvent args)
+    {
+        var user = args.User;
+        if (!HasComp<XenoComponent>(user))
+            return;
+
+        args.Handled = true;
+
+        if (!ent.Comp.AllowQuickSummon)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-xeno-clueless", ("console", ent.Owner)), user, user);
+            return;
+        }
+
+        if (!HasComp<DropshipHijackerComponent>(user))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-xeno-clueless", ("console", ent.Owner)), user, user);
+            return;
+        }
+
+        if (!TryDropshipLaunchPopup(ent, user, false))
+            return;
+
+        if (!TryDropshipHijackPopup(ent, user, false))
+            return;
+
+        if (!TryResolveRemoteLinkedLandingZone(ent, out var landingZone))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-error-no-lz"), user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (landingZone.Comp.Ship != null)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-error-destination-occupied"), user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (Count<PrimaryLandingZoneComponent>() > 0 &&
+            !HasComp<PrimaryLandingZoneComponent>(landingZone))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-error-not-primary"), user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        if (TrySummonAnyAvailableDropship(user, landingZone))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-xeno-called"), user, user, PopupType.LargeCaution);
+            return;
+        }
+
+        _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-error-no-dropships"), user, user, PopupType.LargeCaution);
+    }
+
+    private void OnRemoteControlOpenAttempt(Entity<DropshipRemoteControlConsoleComponent> ent, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (HasComp<XenoComponent>(args.User))
+            args.Cancel();
+    }
+
+    private void OnRemoteControlConsoleOpen(Entity<DropshipRemoteControlConsoleComponent> ent, ref AfterActivatableUIOpenEvent args)
+    {
+        if (!_ui.IsUiOpen(ent.Owner, DropshipRemoteControlUiKey.Key, args.Actor))
+            return;
+
+        RefreshRemoteControlConsole(ent);
+    }
+
+    private void OnDropshipNavigationAutopilotDisableMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipNavigationAutopilotDisableMsg args)
+    {
+        if (!TryGetGridDropship(ent, out var dropship) ||
+            !TryComp(dropship, out DropshipAutopilotComponent? autopilot))
+        {
+            return;
+        }
+
+        SetAutopilotDisabled(dropship, autopilot, args.Actor, Loc.GetString("rmc-dropship-autopilot-status-detail-disabled-flight-computer"));
+        RefreshUI();
+        RefreshRemoteControlConsoles();
+    }
+
+    private void OnDropshipRemoteLaunchMsg(Entity<DropshipRemoteControlConsoleComponent> console, ref DropshipRemoteLaunchMsg args)
+    {
+        if (!_ui.IsUiOpen(console.Owner, DropshipRemoteControlUiKey.Key, args.Actor))
+            return;
+
+        if (!TryGetAutopilotDropship(args.Computer, out var computer, out var dropship))
+        {
+            Log.Warning($"{ToPrettyString(args.Actor)} tried to remotely pilot an invalid dropship computer {args.Computer}");
+            return;
+        }
+
+        if (!TryGetEntity(args.Destination, out var destination) ||
+            !TryComp(destination, out DropshipDestinationComponent? destinationComp))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-error-invalid-destination"), console, args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!CanRemoteLaunchTo(computer, dropship, (destination.Value, destinationComp), out var reason))
+        {
+            _popup.PopupEntity(reason, console, args.Actor, PopupType.MediumCaution);
+            RefreshRemoteControlConsoles();
+            return;
+        }
+
+        if (!FlyTo(computer, destination.Value, args.Actor, source: DropshipLaunchSource.RemoteNavigation))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-error-busy"), console, args.Actor, PopupType.MediumCaution);
+            RefreshRemoteControlConsoles();
+            return;
+        }
+
+        _popup.PopupEntity(Loc.GetString("rmc-dropship-remote-launched", ("destination", Name(destination.Value))), console, args.Actor, PopupType.Medium);
+        RefreshUI(computer);
+        RefreshRemoteControlConsoles();
+    }
+
+    private void OnDropshipRemoteAutopilotConfigureMsg(Entity<DropshipRemoteControlConsoleComponent> console, ref DropshipRemoteAutopilotConfigureMsg args)
+    {
+        if (!_ui.IsUiOpen(console.Owner, DropshipRemoteControlUiKey.Key, args.Actor))
+            return;
+
+        if (!TryGetAutopilotDropship(args.Computer, out var computer, out var dropship))
+        {
+            Log.Warning($"{ToPrettyString(args.Actor)} tried to configure autopilot for invalid dropship computer {args.Computer}");
+            return;
+        }
+
+        var autopilot = EnsureComp<DropshipAutopilotComponent>(dropship);
+        autopilot.Delay = ClampAutopilotDelay(TimeSpan.FromSeconds(args.DelaySeconds));
+
+        if (args.Mode == DropshipAutopilotMode.Disabled)
+        {
+            SetAutopilotDisabled(dropship, autopilot, args.Actor, Loc.GetString("rmc-dropship-autopilot-status-detail-disabled-remote"));
+            RefreshUI(computer);
+            RefreshRemoteControlConsoles();
+            return;
+        }
+
+        if (args.RouteHangar == null ||
+            !TryGetEntity(args.RouteHangar.Value, out var routeHangar) ||
+            !TryComp(routeHangar, out DropshipDestinationComponent? routeHangarDestination) ||
+            !CanUseDestinationForRemoteOrAutopilot(
+                computer,
+                dropship,
+                (routeHangar.Value, routeHangarDestination),
+                DropshipDestinationKind.Hangar,
+                false,
+                out _))
+        {
+            autopilot.Mode = DropshipAutopilotMode.Disabled;
+            autopilot.NextDepartureAt = null;
+            autopilot.RetryAt = null;
+            SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Error, Loc.GetString("rmc-dropship-autopilot-status-detail-select-hangar"));
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-autopilot-error-no-home"), console, args.Actor, PopupType.MediumCaution);
+            RefreshUI(computer);
+            RefreshRemoteControlConsoles();
+            return;
+        }
+
+        if (IsDestinationOccupiedByOther(dropship, routeHangarDestination))
+        {
+            SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Blocked, Loc.GetString("rmc-dropship-autopilot-status-detail-hangar-occupied"));
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-autopilot-error-hangar-occupied"), console, args.Actor, PopupType.MediumCaution);
+            RefreshRemoteControlConsoles();
+            return;
+        }
+
+        if (args.LandingZone == null ||
+            !TryGetEntity(args.LandingZone.Value, out var lz) ||
+            !TryComp(lz, out DropshipDestinationComponent? lzDestination) ||
+            !CanUseDestinationForRemoteOrAutopilot(
+                computer,
+                dropship,
+                (lz.Value, lzDestination),
+                DropshipDestinationKind.LandingZone,
+                false,
+                out _))
+        {
+            autopilot.Mode = DropshipAutopilotMode.Disabled;
+            autopilot.NextDepartureAt = null;
+            autopilot.RetryAt = null;
+            SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Error, Loc.GetString("rmc-dropship-autopilot-status-detail-select-lz"));
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-autopilot-error-invalid-lz"), console, args.Actor, PopupType.MediumCaution);
+            RefreshUI(computer);
+            RefreshRemoteControlConsoles();
+            return;
+        }
+
+        if (IsDestinationOccupiedByOther(dropship, lzDestination))
+        {
+            SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Blocked, Loc.GetString("rmc-dropship-autopilot-status-detail-lz-occupied"));
+            _popup.PopupEntity(Loc.GetString("rmc-dropship-autopilot-error-occupied"), console, args.Actor, PopupType.MediumCaution);
+            RefreshRemoteControlConsoles();
+            return;
+        }
+
+        autopilot.RouteHangar = routeHangar.Value;
+        autopilot.LandingZone = lz.Value;
+        autopilot.Mode = args.Mode;
+        autopilot.NextDepartureAt = null;
+        autopilot.RetryAt = null;
+        SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Ready, Loc.GetString("rmc-dropship-autopilot-status-detail-route-armed"));
+
+        _adminLog.Add(LogType.RMCDropshipAutopilot,
+            $"{ToPrettyString(args.Actor):player} configured autopilot on {ToPrettyString(dropship):dropship} for {args.Mode} between {ToPrettyString(routeHangar):hangar} and {ToPrettyString(lz):landingzone}");
+
+        RefreshUI(computer);
+        RefreshRemoteControlConsoles();
+    }
+
+    private void OnDropshipRemoteAutopilotDisableMsg(Entity<DropshipRemoteControlConsoleComponent> console, ref DropshipRemoteAutopilotDisableMsg args)
+    {
+        if (!_ui.IsUiOpen(console.Owner, DropshipRemoteControlUiKey.Key, args.Actor))
+            return;
+
+        if (!TryGetAutopilotDropship(args.Computer, out var computer, out var dropship))
+            return;
+
+        if (TryComp(dropship, out DropshipAutopilotComponent? autopilot))
+            SetAutopilotDisabled(dropship, autopilot, args.Actor, Loc.GetString("rmc-dropship-autopilot-status-detail-disabled-remote"));
+
+        RefreshUI(computer);
+        RefreshRemoteControlConsoles();
+    }
+
+    private void OnDropshipRemoteAutopilotLaunchNowMsg(Entity<DropshipRemoteControlConsoleComponent> console, ref DropshipRemoteAutopilotLaunchNowMsg args)
+    {
+        if (!_ui.IsUiOpen(console.Owner, DropshipRemoteControlUiKey.Key, args.Actor))
+            return;
+
+        if (!TryGetAutopilotDropship(args.Computer, out var computer, out var dropship) ||
+            !TryComp(dropship, out DropshipAutopilotComponent? autopilot))
+        {
+            return;
+        }
+
+        if (!TryGetNextAutopilotTarget(dropship, autopilot, out var target, out var reason))
+        {
+            var holdingAtRouteHangar = Loc.GetString("rmc-dropship-autopilot-status-detail-holding-hangar");
+            if (reason == holdingAtRouteHangar)
+            {
+                autopilot.NextDepartureAt = null;
+                autopilot.RetryAt = null;
+                Dirty(dropship.Owner, autopilot);
+                SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Ready, reason);
+            }
+            else
+            {
+                SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Error, reason);
+            }
+
+            RefreshRemoteControlConsoles();
+            return;
+        }
+
+        TryLaunchAutopilotNow(dropship, autopilot, computer, target);
+        RefreshUI(computer);
+        RefreshRemoteControlConsoles();
+    }
+
+    private void OnDropshipRemoteAutopilotRecallNowMsg(Entity<DropshipRemoteControlConsoleComponent> console, ref DropshipRemoteAutopilotRecallNowMsg args)
+    {
+        if (!_ui.IsUiOpen(console.Owner, DropshipRemoteControlUiKey.Key, args.Actor))
+            return;
+
+        if (!TryGetAutopilotDropship(args.Computer, out var computer, out var dropship) ||
+            !TryComp(dropship, out DropshipAutopilotComponent? autopilot))
+        {
+            return;
+        }
+
+        if (!TryResolveRouteHangar(dropship, autopilot, out var routeHangar))
+        {
+            SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Error, Loc.GetString("rmc-dropship-autopilot-status-detail-select-hangar"));
+            RefreshRemoteControlConsoles();
+            return;
+        }
+
+        if (dropship.Comp.Destination == routeHangar)
+        {
+            autopilot.NextDepartureAt = null;
+            autopilot.RetryAt = null;
+            SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Ready, Loc.GetString("rmc-dropship-autopilot-status-detail-holding-hangar"));
+        }
+        else
+        {
+            TryLaunchAutopilotNow(dropship, autopilot, computer, routeHangar);
+        }
+
+        RefreshUI(computer);
+        RefreshRemoteControlConsoles();
+    }
+
+    private bool TryResolveRemoteLinkedLandingZone(
+        Entity<DropshipRemoteControlConsoleComponent> console,
+        out Entity<DropshipDestinationComponent> landingZone)
+    {
+        if (console.Comp.LinkedLandingZone is { } linked &&
+            !TerminatingOrDeleted(linked) &&
+            TryComp(linked, out DropshipDestinationComponent? linkedDestination) &&
+            ResolveDestinationKind((linked, linkedDestination)) == DropshipDestinationKind.LandingZone)
+        {
+            landingZone = (linked, linkedDestination);
+            return true;
+        }
+
+        if (FindClosestRemoteLandingZone(console.Owner) is { } closest)
+        {
+            landingZone = (closest.Owner, closest.Comp);
+            return true;
+        }
+
+        landingZone = default;
+        return false;
+    }
+
+    private Entity<DropshipDestinationComponent>? FindClosestRemoteLandingZone(EntityUid console)
+    {
+        if (!TryComp(console, out TransformComponent? consoleTransform))
+            return null;
+
+        Entity<DropshipDestinationComponent>? closestLandingZone = null;
+        float closestDistance = 0;
+        var destinations = EntityQueryEnumerator<DropshipDestinationComponent, TransformComponent>();
+        while (destinations.MoveNext(out var uid, out var destination, out var transform))
+        {
+            if (transform.MapID != consoleTransform.MapID ||
+                ResolveDestinationKind((uid, destination)) != DropshipDestinationKind.LandingZone ||
+                !consoleTransform.Coordinates.TryDistance(EntityManager, transform.Coordinates, out var distance))
+            {
+                continue;
+            }
+
+            if (closestLandingZone == null || distance < closestDistance)
+            {
+                closestLandingZone = (uid, destination);
+                closestDistance = distance;
+            }
+        }
+
+        return closestLandingZone;
+    }
+
+    private bool TrySummonAnyAvailableDropship(
+        EntityUid user,
+        Entity<DropshipDestinationComponent> destination)
+    {
+        var dropships = EntityQueryEnumerator<DropshipComponent, TransformComponent>();
+        while (dropships.MoveNext(out var uid, out var dropship, out var xform))
+        {
+            if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                continue;
+
+            if (!TryGetDropshipComputer(uid, out var computer) ||
+                !CanUseDestinationForRemoteOrAutopilot(
+                    computer,
+                    (uid, dropship),
+                    destination,
+                    DropshipDestinationKind.LandingZone,
+                    true,
+                    out _))
+            {
+                continue;
+            }
+
+            if (FlyTo(computer, destination.Owner, user, source: DropshipLaunchSource.PlanetsideTerminal))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool TryGetAutopilotDropship(
+        NetEntity computerNet,
+        out Entity<DropshipNavigationComputerComponent> computer,
+        out Entity<DropshipComponent> dropship)
+    {
+        computer = default;
+        dropship = default;
+
+        if (!TryGetEntity(computerNet, out var computerId) ||
+            !TryComp(computerId, out DropshipNavigationComputerComponent? computerComp) ||
+            !computerComp.Hijackable)
+        {
+            return false;
+        }
+
+        computer = (computerId.Value, computerComp);
+        return TryGetGridDropship(computer, out dropship);
+    }
+
+    private bool TryGetDropshipComputer(EntityUid dropship, out Entity<DropshipNavigationComputerComponent> computer)
+    {
+        var children = Transform(dropship).ChildEnumerator;
+        while (children.MoveNext(out var child))
+        {
+            if (!TryComp(child, out DropshipNavigationComputerComponent? computerComp) ||
+                !computerComp.Hijackable)
+            {
+                continue;
+            }
+
+            computer = (child, computerComp);
+            return true;
+        }
+
+        computer = default;
+        return false;
+    }
+
+    private DropshipDestinationKind ResolveDestinationKind(Entity<DropshipDestinationComponent> destination)
+    {
+        if (destination.Comp.Kind != DropshipDestinationKind.Auto)
+            return destination.Comp.Kind;
+
+        if (destination.Comp.Spawn != null)
+            return DropshipDestinationKind.Hangar;
+
+        var xform = Transform(destination);
+        if (HasComp<RMCPlanetComponent>(xform.GridUid) ||
+            HasComp<RMCPlanetComponent>(xform.MapUid))
+        {
+            return DropshipDestinationKind.LandingZone;
+        }
+
+        if (HasComp<AlmayerComponent>(xform.GridUid) ||
+            HasComp<AlmayerComponent>(xform.MapUid))
+        {
+            return DropshipDestinationKind.Hangar;
+        }
+
+        return DropshipDestinationKind.Auto;
+    }
+
+    private bool TryResolveRouteHangar(
+        Entity<DropshipComponent> dropship,
+        DropshipAutopilotComponent autopilot,
+        out EntityUid routeHangar)
+    {
+        if (TryResolveDestinationKind(autopilot.RouteHangar, DropshipDestinationKind.Hangar, out routeHangar))
+            return true;
+
+        if (TryResolveDestinationKind(dropship.Comp.Destination, DropshipDestinationKind.Hangar, out routeHangar))
+        {
+            autopilot.RouteHangar = routeHangar;
+            Dirty(dropship.Owner, autopilot);
+            return true;
+        }
+
+        var query = EntityQueryEnumerator<DropshipDestinationComponent>();
+        while (query.MoveNext(out var uid, out var destination))
+        {
+            if (destination.Ship != dropship.Owner ||
+                ResolveDestinationKind((uid, destination)) != DropshipDestinationKind.Hangar)
+            {
+                continue;
+            }
+
+            routeHangar = uid;
+            autopilot.RouteHangar = routeHangar;
+            Dirty(dropship.Owner, autopilot);
+            return true;
+        }
+
+        routeHangar = default;
+        return false;
+    }
+
+    private bool TryResolveLandingZone(DropshipAutopilotComponent autopilot, out EntityUid landingZone)
+    {
+        return TryResolveDestinationKind(autopilot.LandingZone, DropshipDestinationKind.LandingZone, out landingZone);
+    }
+
+    private bool TryResolveDestinationKind(EntityUid? destination, DropshipDestinationKind kind, out EntityUid resolved)
+    {
+        if (destination is { } uid &&
+            !TerminatingOrDeleted(uid) &&
+            TryComp(uid, out DropshipDestinationComponent? destinationComp) &&
+            ResolveDestinationKind((uid, destinationComp)) == kind)
+        {
+            resolved = uid;
+            return true;
+        }
+
+        resolved = default;
+        return false;
+    }
+
+    private TimeSpan ClampAutopilotDelay(TimeSpan delay)
+    {
+        var min = Math.Min(_autopilotMinDelay.TotalSeconds, _autopilotMaxDelay.TotalSeconds);
+        var max = Math.Max(_autopilotMinDelay.TotalSeconds, _autopilotMaxDelay.TotalSeconds);
+        var seconds = Math.Clamp(delay.TotalSeconds, min, max);
+        return TimeSpan.FromSeconds(seconds);
+    }
+
+    private bool SetAutopilotStatus(
+        EntityUid dropship,
+        DropshipAutopilotComponent autopilot,
+        DropshipAutopilotStatus status,
+        string details)
+    {
+        if (autopilot.Status == status && autopilot.StatusDetails == details)
+            return false;
+
+        autopilot.Status = status;
+        autopilot.StatusDetails = details;
+        Dirty(dropship, autopilot);
+        return true;
+    }
+
+    private void SetAutopilotDisabled(
+        Entity<DropshipComponent> dropship,
+        DropshipAutopilotComponent autopilot,
+        EntityUid? actor,
+        string reason)
+    {
+        var wasActive = autopilot.Mode != DropshipAutopilotMode.Disabled;
+        autopilot.Mode = DropshipAutopilotMode.Disabled;
+        autopilot.NextDepartureAt = null;
+        autopilot.RetryAt = null;
+        autopilot.Status = DropshipAutopilotStatus.Offline;
+        autopilot.StatusDetails = reason;
+        Dirty(dropship.Owner, autopilot);
+
+        if (!wasActive)
+            return;
+
+        _adminLog.Add(LogType.RMCDropshipAutopilot,
+            $"{ToPrettyString(actor):player} disabled autopilot on {ToPrettyString(dropship):dropship}: {reason}");
+    }
+
+    private void DisableAutopilotForManualOverride(
+        Entity<DropshipComponent> dropship,
+        DropshipAutopilotComponent autopilot,
+        DropshipLaunchSource source,
+        EntityUid? actor)
+    {
+        if (source is not (DropshipLaunchSource.ManualNavigation or DropshipLaunchSource.RemoteNavigation or DropshipLaunchSource.PlanetsideTerminal or DropshipLaunchSource.Hijack))
+            return;
+
+        SetAutopilotDisabled(dropship, autopilot, actor,
+            GetAutopilotOverrideReason(source));
+    }
+
+    private string GetAutopilotOverrideReason(DropshipLaunchSource source)
+    {
+        return source switch
+        {
+            DropshipLaunchSource.ManualNavigation => Loc.GetString("rmc-dropship-autopilot-status-detail-override-manual"),
+            DropshipLaunchSource.RemoteNavigation => Loc.GetString("rmc-dropship-autopilot-status-detail-override-remote"),
+            DropshipLaunchSource.PlanetsideTerminal => Loc.GetString("rmc-dropship-autopilot-status-detail-override-planetside"),
+            DropshipLaunchSource.Hijack => Loc.GetString("rmc-dropship-autopilot-status-detail-override-hijack"),
+            _ => Loc.GetString("rmc-dropship-autopilot-status-detail-disabled"),
+        };
+    }
+
+    private bool TryGetNextAutopilotTarget(
+        Entity<DropshipComponent> dropship,
+        DropshipAutopilotComponent autopilot,
+        out EntityUid target,
+        out string reason)
+    {
+        target = default;
+        reason = string.Empty;
+
+        if (autopilot.Mode == DropshipAutopilotMode.Disabled)
+        {
+            reason = Loc.GetString("rmc-dropship-autopilot-status-detail-disabled");
+            return false;
+        }
+
+        if (!TryResolveRouteHangar(dropship, autopilot, out var routeHangar))
+        {
+            reason = Loc.GetString("rmc-dropship-autopilot-status-detail-select-hangar");
+            return false;
+        }
+
+        if (autopilot.Mode == DropshipAutopilotMode.RecallOnly)
+        {
+            if (dropship.Comp.Destination == routeHangar)
+            {
+                reason = Loc.GetString("rmc-dropship-autopilot-status-detail-holding-hangar");
+                return false;
+            }
+
+            target = routeHangar;
+            return true;
+        }
+
+        if (!TryResolveLandingZone(autopilot, out var landingZone))
+        {
+            reason = Loc.GetString("rmc-dropship-autopilot-status-detail-lz-invalid");
+            return false;
+        }
+
+        target = dropship.Comp.Destination == routeHangar ? landingZone : routeHangar;
+        return true;
+    }
+
+    private bool TryLaunchAutopilotNow(
+        Entity<DropshipComponent> dropship,
+        DropshipAutopilotComponent autopilot,
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid target)
+    {
+        autopilot.NextDepartureAt = null;
+        autopilot.RetryAt = null;
+
+        if (!CanAutopilotLaunchTo(computer, dropship, target, out var reason))
+        {
+            autopilot.RetryAt = _timing.CurTime + _autopilotRetryDelay;
+            Dirty(dropship.Owner, autopilot);
+            SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Blocked, reason);
+            return false;
+        }
+
+        if (FlyTo(computer, target, null, source: DropshipLaunchSource.Autopilot))
+        {
+            Dirty(dropship.Owner, autopilot);
+            SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.InFlight,
+                Loc.GetString("rmc-dropship-autopilot-status-detail-launching", ("destination", Name(target))));
+            return true;
+        }
+
+        autopilot.RetryAt = _timing.CurTime + _autopilotRetryDelay;
+        Dirty(dropship.Owner, autopilot);
+        SetAutopilotStatus(dropship, autopilot, DropshipAutopilotStatus.Blocked,
+            Loc.GetString("rmc-dropship-autopilot-status-detail-busy"));
+        return false;
+    }
+
+    private bool CanAutopilotLaunchTo(
+        Entity<DropshipNavigationComputerComponent> computer,
+        Entity<DropshipComponent> dropship,
+        EntityUid target,
+        out string reason)
+    {
+        if (!TryComp(target, out DropshipDestinationComponent? destination))
+        {
+            reason = Loc.GetString("rmc-dropship-autopilot-status-detail-target-invalid");
+            return false;
+        }
+
+        var kind = ResolveDestinationKind((target, destination));
+        if (kind is not (DropshipDestinationKind.Hangar or DropshipDestinationKind.LandingZone))
+        {
+            reason = Loc.GetString("rmc-dropship-autopilot-status-detail-target-invalid");
+            return false;
+        }
+
+        return CanUseDestinationForRemoteOrAutopilot(
+            computer,
+            dropship,
+            (target, destination),
+            kind,
+            true,
+            out reason);
+    }
+
+    private bool CanRemoteLaunchTo(
+        Entity<DropshipNavigationComputerComponent> computer,
+        Entity<DropshipComponent> dropship,
+        Entity<DropshipDestinationComponent> target,
+        out string reason)
+    {
+        var kind = ResolveDestinationKind(target);
+        if (kind is not (DropshipDestinationKind.Hangar or DropshipDestinationKind.LandingZone))
+        {
+            reason = Loc.GetString("rmc-dropship-remote-error-invalid-destination");
+            return false;
+        }
+
+        return CanUseDestinationForRemoteOrAutopilot(
+            computer,
+            dropship,
+            target,
+            kind,
+            true,
+            out reason);
+    }
+
+    private bool CanUseDestinationForRemoteOrAutopilot(
+        Entity<DropshipNavigationComputerComponent> computer,
+        Entity<DropshipComponent> dropship,
+        Entity<DropshipDestinationComponent> destination,
+        DropshipDestinationKind requiredKind,
+        bool requireLaunchReady,
+        out string reason)
+    {
+        var kind = ResolveDestinationKind(destination);
+        if (requiredKind != DropshipDestinationKind.Auto && kind != requiredKind)
+        {
+            reason = Loc.GetString("rmc-dropship-remote-error-invalid-destination");
+            return false;
+        }
+
+        if (kind is not (DropshipDestinationKind.Hangar or DropshipDestinationKind.LandingZone))
+        {
+            reason = Loc.GetString("rmc-dropship-remote-error-invalid-destination");
+            return false;
+        }
+
+        if (Transform(computer.Owner).GridUid != dropship.Owner)
+        {
+            reason = Loc.GetString("rmc-dropship-remote-error-invalid-destination");
+            return false;
+        }
+
+        if (!IsDestinationAllowedForDropshipComputer(computer, dropship, destination, out reason))
+            return false;
+
+        if (!requireLaunchReady)
+        {
+            reason = string.Empty;
+            return true;
+        }
+
+        return CanLaunchToDestinationNow(dropship, destination, out reason);
+    }
+
+    private bool IsDestinationAllowedForDropshipComputer(
+        Entity<DropshipNavigationComputerComponent> computer,
+        Entity<DropshipComponent> dropship,
+        Entity<DropshipDestinationComponent> destination,
+        out string reason)
+    {
+        // Keep the policy merge point in one place: ert-system restricted docks/tags/bounds
+        // should be wired here, while autopilot remains only a route scheduler.
+        reason = string.Empty;
+        return true;
+    }
+
+    private bool CanLaunchToDestinationNow(
+        Entity<DropshipComponent> dropship,
+        Entity<DropshipDestinationComponent> destination,
+        out string reason)
+    {
+        if (dropship.Comp.Crashed)
+        {
+            reason = Loc.GetString("rmc-dropship-autopilot-status-detail-crashed");
+            return false;
+        }
+
+        if (HasComp<FTLComponent>(dropship.Owner))
+        {
+            reason = Loc.GetString("rmc-dropship-autopilot-status-detail-ftl");
+            return false;
+        }
+
+        if (IsDropshipPreFlightFueling(out var remaining))
+        {
+            reason = Loc.GetString("rmc-dropship-autopilot-status-detail-preflight",
+                ("minutes", Math.Max(1, (int)remaining.TotalMinutes)));
+            return false;
+        }
+
+        if (dropship.Comp.Destination == destination.Owner)
+        {
+            reason = Loc.GetString("rmc-dropship-autopilot-status-detail-target-same");
+            return false;
+        }
+
+        if (IsDestinationOccupiedByOther(dropship, destination.Comp))
+        {
+            reason = Loc.GetString("rmc-dropship-autopilot-status-detail-target-occupied");
+            return false;
+        }
+
+        reason = string.Empty;
+        return true;
+    }
+
+    private static bool IsDestinationOccupiedByOther(Entity<DropshipComponent> dropship, DropshipDestinationComponent destination)
+    {
+        return destination.Ship is { } occupiedBy && occupiedBy != dropship.Owner;
+    }
+
+    private bool UpdateAutopilot(EntityUid uid, DropshipComponent dropship, DropshipAutopilotComponent autopilot, TimeSpan time)
+    {
+        if (autopilot.Mode == DropshipAutopilotMode.Disabled)
+            return false;
+
+        if (dropship.Crashed)
+        {
+            SetAutopilotDisabled((uid, dropship), autopilot, null, Loc.GetString("rmc-dropship-autopilot-status-detail-crashed-disabled"));
+            return true;
+        }
+
+        if (HasComp<FTLComponent>(uid))
+        {
+            return SetAutopilotStatus(uid, autopilot, DropshipAutopilotStatus.InFlight,
+                Loc.GetString("rmc-dropship-autopilot-status-detail-waiting-ftl"));
+        }
+
+        if (IsDropshipPreFlightFueling(out var remaining))
+        {
+            autopilot.NextDepartureAt = null;
+            autopilot.RetryAt = time + _autopilotRetryDelay;
+            Dirty(uid, autopilot);
+            return SetAutopilotStatus(uid, autopilot, DropshipAutopilotStatus.Waiting,
+                Loc.GetString("rmc-dropship-autopilot-status-detail-preflight",
+                    ("minutes", Math.Max(1, (int)remaining.TotalMinutes))));
+        }
+
+        if (autopilot.RetryAt is { } retryAt && retryAt > time)
+            return false;
+
+        if (!TryGetNextAutopilotTarget((uid, dropship), autopilot, out var target, out var reason))
+        {
+            autopilot.NextDepartureAt = null;
+            autopilot.RetryAt = time + _autopilotRetryDelay;
+            Dirty(uid, autopilot);
+            var holdingAtRouteHangar = Loc.GetString("rmc-dropship-autopilot-status-detail-holding-hangar");
+            return SetAutopilotStatus(uid, autopilot,
+                reason == holdingAtRouteHangar ? DropshipAutopilotStatus.Ready : DropshipAutopilotStatus.Error,
+                reason);
+        }
+
+        if (!TryGetDropshipComputer(uid, out var computer))
+        {
+            autopilot.NextDepartureAt = null;
+            autopilot.RetryAt = time + _autopilotRetryDelay;
+            Dirty(uid, autopilot);
+            return SetAutopilotStatus(uid, autopilot, DropshipAutopilotStatus.Error,
+                Loc.GetString("rmc-dropship-autopilot-status-detail-no-computer"));
+        }
+
+        if (!CanAutopilotLaunchTo(computer, (uid, dropship), target, out reason))
+        {
+            autopilot.NextDepartureAt = null;
+            autopilot.RetryAt = time + _autopilotRetryDelay;
+            Dirty(uid, autopilot);
+            return SetAutopilotStatus(uid, autopilot, DropshipAutopilotStatus.Blocked, reason);
+        }
+
+        if (autopilot.NextDepartureAt == null)
+        {
+            autopilot.NextDepartureAt = time + ClampAutopilotDelay(autopilot.Delay);
+            autopilot.RetryAt = null;
+            Dirty(uid, autopilot);
+            return SetAutopilotStatus(uid, autopilot, DropshipAutopilotStatus.Waiting,
+                Loc.GetString("rmc-dropship-autopilot-status-detail-waiting-launch", ("destination", Name(target))));
+        }
+
+        if (autopilot.NextDepartureAt > time)
+            return false;
+
+        return TryLaunchAutopilotNow((uid, dropship), autopilot, computer, target);
     }
 
     private void OnDepartureLocationFTLStarted(Entity<DropshipDestinationComponent> ent, ref DropshipRelayedEvent<FTLStartedEvent> args)
@@ -375,9 +1256,17 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
     }
 
-    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null, bool offset = false)
+    public override bool FlyTo(
+        Entity<DropshipNavigationComputerComponent> computer,
+        EntityUid destination,
+        EntityUid? user,
+        bool hijack = false,
+        float? startupTime = null,
+        float? hyperspaceTime = null,
+        bool offset = false,
+        DropshipLaunchSource source = DropshipLaunchSource.ManualNavigation)
     {
-        base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime);
+        base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime, offset, source);
 
         _hijack = hijack;
         var dropshipId = Transform(computer).GridUid;
@@ -413,10 +1302,26 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
             EnsureComp<DropshipInFlyByComponent>(dropshipId.Value);
         }
-        else if (!hijack && newDestination != null && newDestination.Ship != null)
+        else if (!hijack &&
+                 newDestination != null &&
+                 newDestination.Ship != null &&
+                 newDestination.Ship != dropshipId.Value)
         {
             Log.Warning($"{ToPrettyString(user)} tried to launch to occupied dropship destination {ToPrettyString(destination)}");
+            return false;
         }
+
+        var autopilot = EnsureComp<DropshipAutopilotComponent>(dropshipId.Value);
+        if (source == DropshipLaunchSource.RoundInit &&
+            newDestination != null &&
+            ResolveDestinationKind((destination, newDestination)) == DropshipDestinationKind.Hangar)
+        {
+            autopilot.RouteHangar ??= destination;
+            autopilot.Delay = ClampAutopilotDelay(autopilot.Delay == TimeSpan.Zero ? _autopilotDefaultDelay : autopilot.Delay);
+            Dirty(dropshipId.Value, autopilot);
+        }
+
+        DisableAutopilotForManualOverride((dropshipId.Value, dropship), autopilot, source, user);
 
         if (TryComp(dropship.Destination, out DropshipDestinationComponent? oldDestination))
         {
@@ -429,6 +1334,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
             newDestination.Ship = dropshipId;
             Dirty(destination, newDestination);
         }
+
+        if (!hijack)
+            startupTime ??= DropshipStartupTimeSeconds;
 
         if (hyperspaceTime == null)
         {
@@ -449,12 +1357,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 }
                 else
                 {
-                    hyperspaceTime = _shuttle.DefaultTravelTime;
+                    hyperspaceTime = DropshipTravelTimeSeconds;
                     if (hasSkill)
                         hyperspaceTime *= computer.Comp.SkillTravelMultiplier;
                 }
 
-                dropship.RechargeTime = TimeSpan.FromSeconds(_config.GetCVar(CCVars.FTLCooldown) * rechargeMultiplier);
+                dropship.RechargeTime = TimeSpan.FromSeconds(DropshipRechargeTimeSeconds * rechargeMultiplier);
 
                 foreach (var point in dropship.AttachmentPoints)
                 {
@@ -477,7 +1385,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                     }
                 }
 
-                hyperspaceTime += _config.GetCVar(CCVars.FTLArrivalTime);
+                hyperspaceTime += DropshipPrearrivalTimeSeconds;
             }
         }
 
@@ -526,6 +1434,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         _adminLog.Add(LogType.RMCDropshipLaunch,
             $"{ToPrettyString(user):player} {(hijack ? "hijacked" : "launched")} {ToPrettyString(dropshipId):dropship} to {ToPrettyString(destination):destination}");
 
+        RefreshUI(computer);
+        RefreshRemoteControlConsoles();
         return true;
     }
 
@@ -538,6 +1448,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             return;
 
         var doorLockStatus = GetDoorLockStatus(grid);
+        var autopilotStatus = GetNavigationAutopilotStatus(grid);
 
         if (!TryComp(grid, out FTLComponent? ftl) ||
             !ftl.Running ||
@@ -564,7 +1475,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 destinations.Add(destination);
             }
 
-            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations, doorLockStatus, computer.Comp.RemoteControl, computer.Comp.LaunchAlarmStatus);
+            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations, doorLockStatus, computer.Comp.LaunchAlarmStatus, autopilotStatus);
             _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
             return;
         }
@@ -586,8 +1497,171 @@ public sealed class DropshipSystem : SharedDropshipSystem
             }
         }
 
-        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName, departureName, doorLockStatus, computer.Comp.RemoteControl, computer.Comp.LaunchAlarmStatus);
+        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName, departureName, doorLockStatus, computer.Comp.LaunchAlarmStatus, autopilotStatus);
         _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, travelState);
+    }
+
+    private DropshipNavigationAutopilotStatus? GetNavigationAutopilotStatus(EntityUid dropship)
+    {
+        if (!TryComp(dropship, out DropshipAutopilotComponent? autopilot) ||
+            autopilot.Mode == DropshipAutopilotMode.Disabled)
+        {
+            return null;
+        }
+
+        return new DropshipNavigationAutopilotStatus(
+            autopilot.Mode,
+            autopilot.Status,
+            autopilot.StatusDetails,
+            GetAutopilotDepartInSeconds(autopilot));
+    }
+
+    private int? GetAutopilotDepartInSeconds(DropshipAutopilotComponent autopilot)
+    {
+        if (autopilot.NextDepartureAt is not { } departAt)
+            return null;
+
+        return Math.Max(0, (int)Math.Ceiling((departAt - _timing.CurTime).TotalSeconds));
+    }
+
+    private void RefreshRemoteControlConsoles()
+    {
+        var consoles = EntityQueryEnumerator<DropshipRemoteControlConsoleComponent>();
+        while (consoles.MoveNext(out var uid, out var console))
+        {
+            RefreshRemoteControlConsole((uid, console));
+        }
+    }
+
+    private void RefreshRemoteControlConsole(Entity<DropshipRemoteControlConsoleComponent> console)
+    {
+        if (!_ui.IsUiOpen(console.Owner, DropshipRemoteControlUiKey.Key))
+            return;
+
+        var controllableDropships = new List<(EntityUid Uid, DropshipComponent Dropship, Entity<DropshipNavigationComputerComponent> Computer)>();
+        var dropships = new List<DropshipRemoteControlDropshipEntry>();
+        var dropshipQuery = EntityQueryEnumerator<DropshipComponent>();
+        while (dropshipQuery.MoveNext(out var uid, out var dropship))
+        {
+            if (!TryGetDropshipComputer(uid, out var computer))
+                continue;
+
+            controllableDropships.Add((uid, dropship, computer));
+            TryComp(uid, out DropshipAutopilotComponent? autopilot);
+
+            var location = dropship.Destination is { } destination && Exists(destination)
+                ? Name(destination)
+                : Loc.GetString("rmc-dropship-remote-location-unknown");
+
+            if (TryComp(uid, out FTLComponent? ftl) &&
+                ftl.State is FTLState.Starting or FTLState.Travelling or FTLState.Arriving)
+            {
+                location = Loc.GetString("rmc-dropship-remote-location-in-flight", ("location", location));
+            }
+            else if (ftl != null && ftl.State == FTLState.Cooldown)
+            {
+                location = Loc.GetString("rmc-dropship-remote-location-refueling", ("location", location));
+            }
+
+            NetEntity? routeHangar = null;
+            var routeHangarName = Loc.GetString("rmc-dropship-remote-route-not-set");
+            if (autopilot != null && TryResolveRouteHangar((uid, dropship), autopilot, out var routeHangarUid))
+            {
+                routeHangar = GetNetEntity(routeHangarUid);
+                routeHangarName = Name(routeHangarUid);
+            }
+            else if (TryResolveDestinationKind(dropship.Destination, DropshipDestinationKind.Hangar, out routeHangarUid))
+            {
+                routeHangar = GetNetEntity(routeHangarUid);
+                routeHangarName = Name(routeHangarUid);
+            }
+
+            var mode = autopilot?.Mode ?? DropshipAutopilotMode.Disabled;
+            var delay = autopilot?.Delay ?? _autopilotDefaultDelay;
+            var lz = autopilot?.LandingZone is { } selectedLz && Exists(selectedLz)
+                ? GetNetEntity(selectedLz)
+                : (NetEntity?)null;
+
+            dropships.Add(new DropshipRemoteControlDropshipEntry(
+                GetNetEntity(computer.Owner),
+                GetNetEntity(uid),
+                Name(uid),
+                location,
+                routeHangar,
+                routeHangarName,
+                lz,
+                mode,
+                (int)Math.Round(delay.TotalSeconds),
+                autopilot == null ? null : GetAutopilotDepartInSeconds(autopilot),
+                autopilot?.Status ?? DropshipAutopilotStatus.Offline,
+                autopilot?.StatusDetails ?? string.Empty,
+                HasComp<FTLComponent>(uid),
+                dropship.Crashed));
+        }
+
+        var destinations = new List<DropshipRemoteControlDestinationEntry>();
+        var hangars = new List<DropshipRemoteControlDestinationEntry>();
+        var landingZones = new List<DropshipRemoteControlDestinationEntry>();
+        var destinationQuery = EntityQueryEnumerator<DropshipDestinationComponent>();
+        while (destinationQuery.MoveNext(out var uid, out var destination))
+        {
+            var kind = ResolveDestinationKind((uid, destination));
+            if (kind is not (DropshipDestinationKind.Hangar or DropshipDestinationKind.LandingZone))
+                continue;
+
+            var availableDropships = new List<NetEntity>();
+            foreach (var candidate in controllableDropships)
+            {
+                if (CanUseDestinationForRemoteOrAutopilot(
+                        candidate.Computer,
+                        (candidate.Uid, candidate.Dropship),
+                        (uid, destination),
+                        kind,
+                        false,
+                        out _))
+                {
+                    availableDropships.Add(GetNetEntity(candidate.Uid));
+                }
+            }
+
+            if (availableDropships.Count == 0)
+                continue;
+
+            var entry = new DropshipRemoteControlDestinationEntry(
+                GetNetEntity(uid),
+                Name(uid),
+                destination.Ship is { } ship ? GetNetEntity(ship) : null,
+                HasComp<PrimaryLandingZoneComponent>(uid),
+                availableDropships);
+
+            destinations.Add(entry);
+            if (kind == DropshipDestinationKind.Hangar)
+                hangars.Add(entry);
+            else
+                landingZones.Add(entry);
+        }
+
+        NetEntity? linkedLandingZone = null;
+        var linkedLandingZoneName = Loc.GetString("rmc-dropship-remote-linked-lz-none");
+        if (TryResolveRemoteLinkedLandingZone(console, out var linked))
+        {
+            linkedLandingZone = GetNetEntity(linked.Owner);
+            linkedLandingZoneName = Name(linked.Owner);
+        }
+
+        var state = new DropshipRemoteControlBuiState(
+            console.Comp.Kind,
+            linkedLandingZone,
+            linkedLandingZoneName,
+            dropships,
+            destinations,
+            hangars,
+            landingZones,
+            (int)Math.Round(_autopilotDefaultDelay.TotalSeconds),
+            (int)Math.Round(_autopilotMinDelay.TotalSeconds),
+            (int)Math.Round(_autopilotMaxDelay.TotalSeconds));
+
+        _ui.SetUiState(console.Owner, DropshipRemoteControlUiKey.Key, state);
     }
 
     protected override bool IsShuttle(EntityUid dropship)
@@ -848,6 +1922,29 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
                 continue;
             }
+        }
+
+        var autopilotChanged = false;
+        var autopilotActive = false;
+        var autopilotQuery = EntityQueryEnumerator<DropshipComponent, DropshipAutopilotComponent>();
+        while (autopilotQuery.MoveNext(out var uid, out var dropship, out var autopilot))
+        {
+            if (autopilot.Mode != DropshipAutopilotMode.Disabled)
+                autopilotActive = true;
+
+            autopilotChanged |= UpdateAutopilot(uid, dropship, autopilot, time);
+        }
+
+        if (autopilotChanged)
+        {
+            RefreshUI();
+            RefreshRemoteControlConsoles();
+        }
+        else if (autopilotActive && time >= _nextAutopilotUiRefresh)
+        {
+            _nextAutopilotUiRefresh = time + TimeSpan.FromSeconds(1);
+            RefreshUI();
+            RefreshRemoteControlConsoles();
         }
 
         if (Count<PrimaryLandingZoneComponent>() > 0)

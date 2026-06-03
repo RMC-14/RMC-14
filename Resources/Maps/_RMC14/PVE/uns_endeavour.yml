@@ -11672,8 +11672,6 @@ entities:
     - type: Transform
       pos: 57.5,-15.5
       parent: 2
-    missingComponents:
-    - DropshipTerminal
 - proto: CMDisposalUnit
   entities:
   - uid: 533
