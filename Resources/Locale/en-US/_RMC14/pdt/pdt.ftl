@@ -1,6 +1,3 @@
-rmc-pdt-locator-toggle-on = Enable tracking beeper
-rmc-pdt-locator-toggle-off = Disable tracking beeper
-
 rmc-pdt-locator-no-link = The locator tube has no linked PDT bracelet.
 rmc-pdt-locator-no-signal = The locator tube cannot establish a signal to the linked PDT bracelet.
 rmc-pdt-locator-scan-readout = {$distance}-{$direction}

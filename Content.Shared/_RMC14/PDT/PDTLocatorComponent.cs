@@ -16,15 +16,6 @@ public sealed partial class PDTLocatorComponent : Component
     public float PingCharge = 35f;
 
     [DataField]
-    public float BeepRange = 60f;
-
-    [DataField]
-    public TimeSpan BeepUpdateInterval = TimeSpan.FromSeconds(0.5);
-
-    [DataField]
-    public TimeSpan NextBeepUpdate;
-
-    [DataField]
     public SoundSpecifier PingSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/tick.ogg", AudioParams.Default.WithMaxDistance(5f));
 }
 

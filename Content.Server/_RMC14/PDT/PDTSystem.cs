@@ -4,14 +4,9 @@ using Content.Shared._RMC14.Maths;
 using Content.Shared._RMC14.PDT;
 using Content.Shared._RMC14.Storage;
 using Content.Shared._RMC14.UniformAccessories;
-using Content.Shared.Beeper.Components;
-using Content.Shared.Beeper.Systems;
 using Content.Shared.Examine;
-using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Item.ItemToggle;
-using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Popups;
@@ -31,13 +26,10 @@ public sealed class PDTSystem : EntitySystem
 
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BeeperSystem _beeper = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
@@ -88,19 +80,11 @@ public sealed class PDTSystem : EntitySystem
 
     private void OnLocatorPowerCellChanged(Entity<PDTLocatorComponent> ent, ref PowerCellChangedEvent args)
     {
-        if (args.Ejected)
-        {
-            _beeper.SetMute(ent, true);
-            _toggle.TryDeactivate(ent.Owner, predicted: false);
-        }
-
         UpdateLocatorVisuals(ent);
     }
 
     private void OnLocatorPowerCellEmpty(Entity<PDTLocatorComponent> ent, ref PowerCellSlotEmptyEvent args)
     {
-        _beeper.SetMute(ent, true);
-        _toggle.TryDeactivate(ent.Owner, predicted: false);
         UpdateLocatorVisuals(ent);
     }
 
@@ -148,9 +132,6 @@ public sealed class PDTSystem : EntitySystem
 
         _audio.PlayPvs(ent.Comp.PingSound, ent);
         _audio.PlayPvs(bracelet.Comp.PingSound, bracelet.Owner);
-
-        _toggle.TryActivate(ent.Owner, args.User, predicted: false);
-        UpdateBeeper(ent, distance);
     }
 
     private void OnLocatorInteractUsing(Entity<PDTLocatorComponent> ent, ref InteractUsingEvent args)
@@ -212,38 +193,6 @@ public sealed class PDTSystem : EntitySystem
             args.PushMarkup(IsLinkedToLiveLocator(ent)
                 ? Loc.GetString("rmc-pdt-bracelet-examine-linked")
                 : Loc.GetString("rmc-pdt-bracelet-examine-unlinked"));
-        }
-    }
-
-    public override void Update(float frameTime)
-    {
-        var time = _timing.CurTime;
-        var locators = EntityQueryEnumerator<PDTLocatorComponent, ItemToggleComponent>();
-        while (locators.MoveNext(out var uid, out var locator, out var toggle))
-        {
-            if (!toggle.Activated || time < locator.NextBeepUpdate)
-                continue;
-
-            locator.NextBeepUpdate = time + locator.BeepUpdateInterval;
-
-            if (!TryGetSignal((uid, locator), out _, out var locatorCoords, out var braceletCoords, null))
-            {
-                _beeper.SetMute(uid, true);
-                UpdateLocatorVisuals((uid, locator));
-                continue;
-            }
-
-            if (!_cell.HasCharge(uid, 1f))
-            {
-                _beeper.SetMute(uid, true);
-                _toggle.TryDeactivate(uid, predicted: false);
-                UpdateLocatorVisuals((uid, locator));
-                continue;
-            }
-
-            var distance = Vector2.Distance(locatorCoords.Position, braceletCoords.Position);
-            UpdateBeeper((uid, locator), distance);
-            UpdateLocatorVisuals((uid, locator));
         }
     }
 
@@ -361,15 +310,6 @@ public sealed class PDTSystem : EntitySystem
             return PDTLocatorScreenVisuals.Yellow;
 
         return PDTLocatorScreenVisuals.Normal;
-    }
-
-    private void UpdateBeeper(Entity<PDTLocatorComponent> locator, float distance)
-    {
-        if (!TryComp(locator, out BeeperComponent? beeper))
-            return;
-
-        _beeper.SetMute(locator, false, beeper);
-        _beeper.SetIntervalScaling(locator, beeper, FixedPoint2.New(distance / locator.Comp.BeepRange));
     }
 
     private bool IsLinkedToLiveBracelet(Entity<PDTLocatorComponent> locator)

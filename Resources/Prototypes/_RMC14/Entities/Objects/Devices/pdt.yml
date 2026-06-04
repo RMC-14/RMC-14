@@ -35,31 +35,6 @@
           Hidden: { visible: false }
           Linked: { state: linked, visible: true }
           Unlinked: { state: unlinked, visible: true }
-  - type: ItemToggle
-    onUse: false
-    predictable: false
-    verbToggleOn: rmc-pdt-locator-toggle-on
-    verbToggleOff: rmc-pdt-locator-toggle-off
-    soundActivate:
-      path: /Audio/_RMC14/Machines/click.ogg
-    soundDeactivate:
-      path: /Audio/_RMC14/Machines/click.ogg
-    soundFailToActivate:
-      path: /Audio/Machines/button.ogg
-  - type: PowerCellDraw
-    enabled: false
-    drawRate: 1
-    useRate: 0
-  - type: ToggleCellDraw
-  - type: Beeper
-    isMuted: true
-    minBeepInterval: 0.25
-    maxBeepInterval: 1.5
-    beepSound:
-      path: /Audio/Items/locator_beep.ogg
-      params:
-        maxDistance: 2
-        volume: -8
   - type: PDTLocator
   - type: UseDelay
     delay: 1
