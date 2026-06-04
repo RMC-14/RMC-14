@@ -69,6 +69,7 @@ public sealed partial class RMCGiantLizardSystem
         }
 
         WakeRest(ent);
+        StopRoam(ent, false);
 
         ent.Comp.NextPounceAt = now + ent.Comp.PounceCooldown;
         ent.Comp.Leaping = true;

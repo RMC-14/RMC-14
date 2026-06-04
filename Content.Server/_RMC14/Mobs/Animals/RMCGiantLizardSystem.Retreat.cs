@@ -43,6 +43,7 @@ public sealed partial class RMCGiantLizardSystem
         }
 
         WakeRest(ent);
+        StopRoam(ent, false);
         if (ent.Comp.Skirmishing)
             StopSkirmish(ent);
 

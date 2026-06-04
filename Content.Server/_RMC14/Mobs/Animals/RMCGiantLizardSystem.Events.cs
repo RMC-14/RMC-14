@@ -47,6 +47,7 @@ public sealed partial class RMCGiantLizardSystem
             return;
 
         ent.Comp.LastHitAt = Timing.CurTime;
+        StopRoam(ent, false);
         WakeRest(ent);
         TryStartBleedTrail(ent, args.DamageDelta);
         UpdateLizardVisuals(ent);
@@ -97,6 +98,7 @@ public sealed partial class RMCGiantLizardSystem
         if (args.Handled || !IsAcceptedLizardFood(args.Used))
             return;
 
+        StopRoam(ent, false);
         WakeRest(ent);
         HealFraction(ent.Owner, ent.Comp.DirectFeedHealFraction);
         TryTameToFeeder(ent.Owner, args.User, ent.Comp);
@@ -120,6 +122,7 @@ public sealed partial class RMCGiantLizardSystem
 
         args.Handled = true;
         args.IsStunned = true;
+        StopRoam(ent, false);
         WakeRest(ent);
         Stun.TryKnockdown(ent.Owner, ent.Comp.DisarmKnockdown, true);
         _audio.PlayPvs(ent.Comp.DisarmKnockdownSound, ent.Owner);

@@ -33,6 +33,9 @@ public sealed partial class RMCGiantLizardSystem
             return true;
         }
 
+        if (ent.Comp1.Roaming)
+            StopRoam((ent.Owner, ent.Comp1), false);
+
         if (TryHandleFoodHolder((ent.Owner, ent.Comp1), foodTarget))
             return true;
 

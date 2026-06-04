@@ -24,6 +24,7 @@ public sealed partial class RMCGiantLizardSystem
             return false;
 
         WakeRest(ent);
+        StopRoam(ent, false);
         StopMovement(ent.Owner);
         ent.Comp.RavageTarget = target;
         ent.Comp.RavageHitsLeft = ent.Comp.RavageHitCount;

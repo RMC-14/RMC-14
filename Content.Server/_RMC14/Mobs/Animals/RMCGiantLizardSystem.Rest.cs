@@ -46,6 +46,7 @@ public sealed partial class RMCGiantLizardSystem
 
     private void StartRest(Entity<RMCGiantLizardComponent> ent)
     {
+        StopRoam(ent, false);
         StopMovement(ent.Owner);
         EnsureRestSleep(ent);
 

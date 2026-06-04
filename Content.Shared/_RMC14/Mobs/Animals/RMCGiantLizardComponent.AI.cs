@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Mobs.Animals;
 
@@ -109,4 +110,58 @@ public sealed partial class RMCGiantLizardComponent
 
     [ViewVariables]
     public TimeSpan NextObstacleAttackAt;
+
+    [DataField]
+    public float RoamSpeed = 1.6f;
+
+    [DataField]
+    public TimeSpan RoamRepathCooldown = TimeSpan.FromSeconds(0.5);
+
+    [DataField]
+    public TimeSpan RoamMoveDurationMin = TimeSpan.FromSeconds(1.25);
+
+    [DataField]
+    public TimeSpan RoamMoveDurationMax = TimeSpan.FromSeconds(3.25);
+
+    [DataField]
+    public TimeSpan RoamPauseMin = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public TimeSpan RoamPauseMax = TimeSpan.FromSeconds(5);
+
+    [DataField]
+    public float RoamSoloRadius = 4f;
+
+    [DataField]
+    public float RoamPackSearchRange = 7f;
+
+    [DataField]
+    public float RoamPackJoinDistance = 5f;
+
+    [DataField]
+    public float RoamPackSeparationDistance = 1.35f;
+
+    [DataField]
+    public float RoamPackTargetJitter = 1.5f;
+
+    [DataField]
+    public float RoamPackCenterChance = 0.55f;
+
+    [DataField]
+    public float RoamArriveRange = 0.8f;
+
+    [ViewVariables]
+    public bool Roaming;
+
+    [ViewVariables]
+    public TimeSpan RoamUntil;
+
+    [ViewVariables]
+    public TimeSpan NextRoamAt;
+
+    [ViewVariables]
+    public TimeSpan NextRoamMoveAt;
+
+    [ViewVariables]
+    public EntityCoordinates? RoamTarget;
 }

@@ -156,14 +156,22 @@ public sealed partial class RMCGiantLizardSystem : RMCAnimalSystem
             if (target == null)
             {
                 if (WarnOrAggroCloseThreat(ent))
+                {
+                    StopRoam((uid, lizard), false);
                     continue;
+                }
 
                 if (TryAiFeed(ent))
                     continue;
 
                 UpdateIdleRest(ent);
+                if (!lizard.Resting)
+                    UpdateCalmRoam(ent);
+
                 continue;
             }
+
+            StopRoam((uid, lizard), false);
 
             if (lizard.FoodTarget != null || lizard.EatingFood)
                 LoseFoodTarget((uid, lizard));

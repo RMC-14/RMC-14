@@ -15,6 +15,7 @@ public sealed partial class RMCGiantLizardSystem
         }
 
         WakeRest(ent);
+        StopRoam(ent, false);
         ent.Comp.Skirmishing = true;
         ent.Comp.SkirmishTarget = target;
         ent.Comp.SkirmishUntil = Timing.CurTime + ent.Comp.SkirmishDuration;
