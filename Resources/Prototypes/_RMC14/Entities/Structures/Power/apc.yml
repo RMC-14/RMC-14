@@ -11,7 +11,7 @@
   - type: Transform
     anchored: true
   - type: AccessReader
-    access: [ [ "CMAccessEngineering" ] ]
+    access: [ [ "CMAccessEngineering" ], [ "CMAccessColonyEngineering" ] ]
   - type: Clickable
   - type: InteractionOutline
   - type: Sprite
@@ -44,12 +44,23 @@
   - type: Appearance
   - type: WallMount
     arc: 360
+  - type: WiresPanel
+  - type: Wires
+    alwaysRandomize: true
+    boardName: wires-board-name-apc
+    layoutId: RMCAPC
+  - type: WiresVisuals
   - type: UserInterface
     interfaces:
       enum.RMCApcUiKey.Key:
         type: RMCApcBui
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
   - type: ActivatableUI
     key: enum.RMCApcUiKey.Key
+  - type: Construction
+    graph: CMApc
+    node: apc
   - type: Corrodible
     isCorrodible: false
   - type: RMCApc
@@ -79,43 +90,111 @@
           WiresExposed: { state: apcewires }
           CoverOpenBattery: { state: apc2 }
           CoverOpenNoBattery: { state: apc1 }
+          CoverRemovedBattery: { state: apc2-nocover }
+          CoverRemovedNoBattery: { state: apc1-nocover }
+          Broken: { state: apc-b }
+          BrokenCoverRemovedBattery: { state: apc2-b-nocover }
+          BrokenCoverRemovedNoBattery: { state: apc1-b-nocover }
+          Maintenance: { state: apcmaint }
         enum.WiresVisualLayers.MaintenancePanel: # TODO RMC14
           Working: { visible: false }
           WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+          CoverRemovedBattery: { visible: false }
+          CoverRemovedNoBattery: { visible: false }
+          Broken: { visible: false }
+          BrokenCoverRemovedBattery: { visible: false }
+          BrokenCoverRemovedNoBattery: { visible: false }
+          Maintenance: { visible: false }
         enum.ApcVisualLayers.ChargeState: # TODO RMC14
           Working: { visible: true }
           WiresExposed: { visible: false }
           CoverOpenBattery: { visible: false }
           CoverOpenNoBattery: { visible: false }
+          CoverRemovedBattery: { visible: false }
+          CoverRemovedNoBattery: { visible: false }
+          Broken: { visible: false }
+          BrokenCoverRemovedBattery: { visible: false }
+          BrokenCoverRemovedNoBattery: { visible: false }
+          Maintenance: { visible: false }
         enum.ApcVisualLayers.InterfaceLock:
           Working: { visible: true }
           WiresExposed: { visible: false }
           CoverOpenBattery: { visible: false }
           CoverOpenNoBattery: { visible: false }
+          CoverRemovedBattery: { visible: false }
+          CoverRemovedNoBattery: { visible: false }
+          Broken: { visible: false }
+          BrokenCoverRemovedBattery: { visible: false }
+          BrokenCoverRemovedNoBattery: { visible: false }
+          Maintenance: { visible: false }
         enum.ApcVisualLayers.PanelLock:
           Working: { visible: true }
           WiresExposed: { visible: false }
           CoverOpenBattery: { visible: false }
           CoverOpenNoBattery: { visible: false }
+          CoverRemovedBattery: { visible: false }
+          CoverRemovedNoBattery: { visible: false }
+          Broken: { visible: false }
+          BrokenCoverRemovedBattery: { visible: false }
+          BrokenCoverRemovedNoBattery: { visible: false }
+          Maintenance: { visible: false }
         enum.ApcVisualLayers.Equipment:
           Working: { visible: true }
           WiresExposed: { visible: false }
           CoverOpenBattery: { visible: false }
           CoverOpenNoBattery: { visible: false }
+          CoverRemovedBattery: { visible: false }
+          CoverRemovedNoBattery: { visible: false }
+          Broken: { visible: false }
+          BrokenCoverRemovedBattery: { visible: false }
+          BrokenCoverRemovedNoBattery: { visible: false }
+          Maintenance: { visible: false }
         enum.ApcVisualLayers.Lighting:
           Working: { visible: true }
           WiresExposed: { visible: false }
           CoverOpenBattery: { visible: false }
           CoverOpenNoBattery: { visible: false }
+          CoverRemovedBattery: { visible: false }
+          CoverRemovedNoBattery: { visible: false }
+          Broken: { visible: false }
+          BrokenCoverRemovedBattery: { visible: false }
+          BrokenCoverRemovedNoBattery: { visible: false }
+          Maintenance: { visible: false }
         enum.ApcVisualLayers.Environment:
           Working: { visible: true }
           WiresExposed: { visible: false }
           CoverOpenBattery: { visible: false }
           CoverOpenNoBattery: { visible: false }
+          CoverRemovedBattery: { visible: false }
+          CoverRemovedNoBattery: { visible: false }
+          Broken: { visible: false }
+          BrokenCoverRemovedBattery: { visible: false }
+          BrokenCoverRemovedNoBattery: { visible: false }
+          Maintenance: { visible: false }
       enum.RMCApcVisualsLayers.Lock:
         enum.ApcVisualLayers.InterfaceLock:
           true: { state: apcox-1 }
           false: { state: apcox-0 }
+      enum.RMCApcVisualsLayers.EquipmentChannel:
+        enum.ApcVisualLayers.Equipment:
+          ManualOff: { state: apco0-0 }
+          AutoOff: { state: apco0-1 }
+          ManualOn: { state: apco0-2 }
+          AutoOn: { state: apco0-3 }
+      enum.RMCApcVisualsLayers.LightingChannel:
+        enum.ApcVisualLayers.Lighting:
+          ManualOff: { state: apco1-0 }
+          AutoOff: { state: apco1-1 }
+          ManualOn: { state: apco1-2 }
+          AutoOn: { state: apco1-3 }
+      enum.RMCApcVisualsLayers.EnvironmentChannel:
+        enum.ApcVisualLayers.Environment:
+          ManualOff: { state: apco2-0 }
+          AutoOff: { state: apco2-1 }
+          ManualOn: { state: apco2-2 }
+          AutoOn: { state: apco2-3 }
 #        enum.ApcVisualLayers.PanelLock: # TODO RMC14
 #          Working: { visible: false }
 #          Broken: { visible: false }
@@ -146,6 +225,7 @@
     state: panel
   - type: Construction
     graph: CMApc
+    node: apcFrame
   - type: Destructible
     thresholds:
     - trigger:
@@ -166,10 +246,40 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: CMApcFrame
+  id: CMApcFrameWired
+  name: wired APC frame
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/apc.rsi
+    state: apcmaint
+  - type: Construction
+    graph: CMApc
+    node: apcFrameWired
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: CMApcFrame
+  id: CMApcFrameElectronics
+  name: APC frame with electronics
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/apc.rsi
+    state: apc1
+  - type: Construction
+    graph: CMApc
+    node: apcFrameElectronics
+
 # Constructed APC
 - type: entity
   parent: CMApcBase
   id: CMApcConstructed
+  suffix: Open
+  components:
+  - type: RMCApc
+    cover: Open
 
 - type: entity
   parent: CMApcBase
@@ -206,6 +316,8 @@
   id: CMApcLowCapacity
   suffix: APC, Small powercell, 50kW
   components: # TODO RMC14 / TODO RMC14 make apc use powercells
+  - type: RMCApc
+    startingCell: RMCPowerCellAPC
   - type: Battery
     maxCharge: 50000
     startingCharge: 50000
@@ -215,6 +327,8 @@
   id: CMApcMediumCapacity
   suffix: APC, Medium powercell, 100kW
   components:
+  - type: RMCApc
+    startingCell: RMCPowerCellHigh
   - type: Battery
     maxCharge: 100000
     startingCharge: 100000
@@ -224,6 +338,8 @@
   id: CMApcHighCapacity
   suffix: APC, High powercell, 150kW
   components:
+  - type: RMCApc
+    startingCell: RMCPowerCellSuper
   - type: Battery
     maxCharge: 150000
     startingCharge: 150000

@@ -28,11 +28,16 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         _window = this.CreateWindow<RMCApcWindow>();
 
         _window.CoverButton.OnPressed += _ => SendPredictedMessage(new RMCApcCoverBuiMsg());
+        _window.MainBreakerButton.OnPressed += _ => SendPredictedMessage(new RMCApcMainBreakerBuiMsg());
+        _window.ChargeModeButton.OnPressed += _ => SendPredictedMessage(new RMCApcChargeModeBuiMsg());
 
         foreach (var channel in Enum.GetValues<RMCPowerChannel>())
         {
             var row = new RMCApcChannelRow();
             row.Label.SetMarkupPermissive($"[color=#5B88B0]{channel}:[/color]");
+            row.Auto.OnPressed += _ => SendPredictedMessage(new RMCApcSetChannelBuiMsg(channel, RMCApcButtonState.Auto));
+            row.On.OnPressed += _ => SendPredictedMessage(new RMCApcSetChannelBuiMsg(channel, RMCApcButtonState.On));
+            row.Off.OnPressed += _ => SendPredictedMessage(new RMCApcSetChannelBuiMsg(channel, RMCApcButtonState.Off));
             _window.Channels.AddChild(row);
         }
 
@@ -93,9 +98,9 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         {
             var row = (RMCApcChannelRow) _window.Channels.GetChild(channel);
             SetButtons(row, apc.Channels[channel]);
-            row.Auto.OnPressed += _ => SendPredictedMessage(new RMCApcSetChannelBuiMsg((RMCPowerChannel) channel, RMCApcButtonState.Auto));
-            // row.Off.OnPressed += _ => SendPredictedMessage(new RMCApcSetChannelBuiMsg((RMCPowerChannel) channel, RMCApcButtonState.Off));
-            row.Off.Visible = false;
+            row.Auto.Disabled = apc.Locked;
+            row.On.Disabled = apc.Locked;
+            row.Off.Disabled = apc.Locked;
         }
 
         var multiplier = _config.GetCVar(RMCCVars.RMCPowerLoadMultiplier);
@@ -104,6 +109,8 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
         _window.CoverButton.Text = apc.CoverLockedButton ? "Engaged" : "Disengaged";
         _window.CoverButton.Disabled = apc.Locked;
+        _window.MainBreakerButton.Disabled = apc.Locked;
+        _window.ChargeModeButton.Disabled = apc.Locked;
     }
 
     private string Header(string header)
@@ -131,7 +138,6 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         var multiplier = _config.GetCVar(RMCCVars.RMCPowerLoadMultiplier);
         row.Auto.Pressed = channel.Button == RMCApcButtonState.Auto;
         row.On.Pressed = channel.Button == RMCApcButtonState.On;
-        row.On.Visible = false; // TODO RMC14
         row.Off.Pressed = channel.Button == RMCApcButtonState.Off;
         row.Watts.SetMarkupPermissive($"{channel.Watts / multiplier} W");
         row.Status.SetMarkupPermissive(channel.On ? $"{Green("On")}" : $"{Red("Off")}");

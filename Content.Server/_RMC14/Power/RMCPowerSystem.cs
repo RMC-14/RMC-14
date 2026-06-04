@@ -213,7 +213,6 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                 var apcComp = apc.Comp1;
                 if (cell == null)
                 {
-                    apcComp.ExternalPower = false;
                     apcComp.ChargeStatus = RMCApcChargeStatus.NotCharging;
                     var channels = apcComp.Channels.AsSpan();
                     foreach (ref var channel in channels)
@@ -228,12 +227,15 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                     continue;
 
                 var area = new Entity<RMCAreaPowerComponent>(apcComp.Area.Value, areaComp);
-                if (apcComp.Broken)
+                if (!CanApcOperate(apc.Owner, apcComp))
                 {
+                    apcComp.ExternalPower = false;
+                    apcComp.ChargeStatus = RMCApcChargeStatus.NotCharging;
                     UpdateApcChannel(apc, area, RMCPowerChannel.Equipment, false);
                     UpdateApcChannel(apc, area, RMCPowerChannel.Lighting, false);
                     UpdateApcChannel(apc, area, RMCPowerChannel.Environment, false);
                     _light.SetEnabled(apc, false);
+                    Dirty(apc, apcComp);
                     continue;
                 }
 
@@ -249,16 +251,22 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                 if (cell == null)
                 {
                     apcComp.ChargePercentage = 0;
+                    apcComp.ExternalPower = wattsPer >= totalLoad && wattsPer > 0;
                 }
                 else
                 {
                     var battery = new Entity<BatteryComponent>(cell.Value, cell.Value.Comp);
                     var drawn = wattsPer;
                     drawn -= totalLoad;
+                    apcComp.ExternalPower = wattsPer >= totalLoad && wattsPer > 0;
                     if (drawn <= 0)
                     {
                         apcComp.ChargeStatus = RMCApcChargeStatus.NotCharging;
                         _battery.UseCharge(battery, -drawn, battery);
+                    }
+                    else if (!apcComp.ChargeModeButton)
+                    {
+                        apcComp.ChargeStatus = RMCApcChargeStatus.NotCharging;
                     }
                     else
                     {
@@ -272,22 +280,26 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                     apcComp.ChargePercentage = battery.Comp.CurrentCharge / battery.Comp.MaxCharge;
                 }
 
-                switch (apcComp.ChargePercentage)
+                var effectiveCharge = cell == null && apcComp.ExternalPower
+                    ? 1f
+                    : apcComp.ChargePercentage;
+                var channelAvailable = effectiveCharge > 0.01f || apcComp.ExternalPower;
+                switch (effectiveCharge)
                 {
-                    case > 0.33f:
-                        UpdateApcChannel(apc, area, RMCPowerChannel.Equipment, true);
-                        UpdateApcChannel(apc, area, RMCPowerChannel.Lighting, true);
-                        UpdateApcChannel(apc, area, RMCPowerChannel.Environment, true);
+                    case > 0.30f:
+                        UpdateApcChannel(apc, area, RMCPowerChannel.Equipment, GetChannelTarget(apcComp, RMCPowerChannel.Equipment, true, channelAvailable));
+                        UpdateApcChannel(apc, area, RMCPowerChannel.Lighting, GetChannelTarget(apcComp, RMCPowerChannel.Lighting, true, channelAvailable));
+                        UpdateApcChannel(apc, area, RMCPowerChannel.Environment, GetChannelTarget(apcComp, RMCPowerChannel.Environment, true, channelAvailable));
                         break;
-                    case > 0.16f:
-                        UpdateApcChannel(apc, area, RMCPowerChannel.Equipment, false);
-                        UpdateApcChannel(apc, area, RMCPowerChannel.Lighting, true);
-                        UpdateApcChannel(apc, area, RMCPowerChannel.Environment, true);
+                    case > 0.15f:
+                        UpdateApcChannel(apc, area, RMCPowerChannel.Equipment, GetChannelTarget(apcComp, RMCPowerChannel.Equipment, false, channelAvailable));
+                        UpdateApcChannel(apc, area, RMCPowerChannel.Lighting, GetChannelTarget(apcComp, RMCPowerChannel.Lighting, true, channelAvailable));
+                        UpdateApcChannel(apc, area, RMCPowerChannel.Environment, GetChannelTarget(apcComp, RMCPowerChannel.Environment, true, channelAvailable));
                         break;
                     case > 0.01f:
-                        UpdateApcChannel(apc, area, RMCPowerChannel.Equipment, false);
-                        UpdateApcChannel(apc, area, RMCPowerChannel.Lighting, false);
-                        UpdateApcChannel(apc, area, RMCPowerChannel.Environment, true);
+                        UpdateApcChannel(apc, area, RMCPowerChannel.Equipment, GetChannelTarget(apcComp, RMCPowerChannel.Equipment, false, channelAvailable));
+                        UpdateApcChannel(apc, area, RMCPowerChannel.Lighting, GetChannelTarget(apcComp, RMCPowerChannel.Lighting, false, channelAvailable));
+                        UpdateApcChannel(apc, area, RMCPowerChannel.Environment, GetChannelTarget(apcComp, RMCPowerChannel.Environment, true, channelAvailable));
                         break;
                     default:
                         UpdateApcChannel(apc, area, RMCPowerChannel.Equipment, false);
@@ -357,5 +369,12 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
             return TimeSpan.FromSeconds(min);
 
         return TimeSpan.FromSeconds(_random.NextFloat((float) min, (float) max));
+    }
+
+    private static bool GetChannelTarget(RMCApcComponent apc, RMCPowerChannel channel, bool automatic, bool available)
+    {
+        return apc.Channels[(int) channel].Button == RMCApcButtonState.On
+            ? available
+            : automatic;
     }
 }

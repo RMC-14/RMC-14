@@ -10,7 +10,7 @@
         </s:StripeBack>
         <RichTextLabel Name="PowerStatusLabel" Access="Public" Margin="0 10 0 0" />
         <ui:BlueHorizontalSeparator />
-        <BoxContainer Orientation="Horizontal" Visible="False">
+        <BoxContainer Orientation="Horizontal">
             <RichTextLabel Text="[color=#5B88B0]Main Breaker:[/color]" MinWidth="120" />
             <RichTextLabel Name="MainBreakerStatus" Access="Public" />
             <Control HorizontalExpand="True" />
@@ -23,7 +23,7 @@
                        Margin="0 3 5 3" />
             </ProgressBar>
         </BoxContainer>
-        <BoxContainer Orientation="Horizontal" Visible="False">
+        <BoxContainer Orientation="Horizontal">
             <RichTextLabel Text="[color=#5B88B0]Charge Mode:[/color]" MinWidth="120" />
             <RichTextLabel Name="ChargeMode" Access="Public" />
             <Control HorizontalExpand="True" />
