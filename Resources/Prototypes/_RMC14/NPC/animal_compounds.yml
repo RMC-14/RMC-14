@@ -3,7 +3,7 @@
   branches:
   - tasks:
     - !type:HTNCompoundTask
-      task: MeleeCombatCompound
+      task: RMCGiantLizardMeleeCombatCompound
   - tasks:
     - !type:HTNCompoundTask
       task: FoodCompound
@@ -12,21 +12,60 @@
       task: IdleCompound
 
 - type: htnCompound
-  id: RMCSpiderCompound
+  id: RMCGiantLizardMeleeCombatCompound
   branches:
   - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: RMCGiantLizardMeleeTargets
     - !type:HTNCompoundTask
-      task: MeleeCombatCompound
-  - tasks:
-    - !type:HTNCompoundTask
-      task: IdleCompound
+      task: RMCGiantLizardMeleeAttackTargetCompound
 
 - type: htnCompound
-  id: RMCSpiderNurseCompound
+  id: RMCGiantLizardMeleeAttackTargetCompound
   branches:
-  - tasks:
-    - !type:HTNCompoundTask
-      task: MeleeCombatCompound
-  - tasks:
-    - !type:HTNCompoundTask
-      task: IdleCompound
+  - preconditions:
+    - !type:KeyExistsPrecondition
+      key: Target
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        shutdownState: PlanFinished
+        pathfindInPlanning: true
+        removeKeyOnFinish: false
+        targetKey: TargetCoordinates
+        pathfindKey: TargetPathfind
+        rangeKey: MeleeRange
+    - !type:HTNPrimitiveTask
+      operator: !type:JukeOperator
+        jukeType: Away
+    - !type:HTNPrimitiveTask
+      operator: !type:MeleeOperator
+        targetKey: Target
+        targetState: Critical
+      preconditions:
+      - !type:KeyExistsPrecondition
+        key: Target
+      - !type:TargetInRangePrecondition
+        targetKey: Target
+        rangeKey: MeleeRange
+      services:
+      - !type:UtilityService
+        id: MeleeService
+        proto: RMCGiantLizardMeleeTargets
+        key: Target
+
+- type: utilityQuery
+  id: RMCGiantLizardMeleeTargets
+  query:
+  - !type:NearbyHostilesQuery
+  considerations:
+  - !type:TargetIsNotDeadCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve

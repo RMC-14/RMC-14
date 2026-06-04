@@ -1,4 +1,3 @@
-# THE SHIT I NEED TO DO JUST SO WE DONT HAVE TO FUCKING SPECIFY A GHOST ROLE CHANCE OF 0 AND TO REMOVE FUCKASS PERISHABLE
 #-- MICE AND RATS --
 - type: entity
   parent: RMCRodent
@@ -16,6 +15,10 @@
   - type: Item
     size: Tiny
     heldPrefix: 0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      5: Dead
   - type: Clothing
     quickEquip: false
     sprite: Mobs/Animals/mouse.rsi
@@ -37,6 +40,9 @@
   name: mouse
   suffix: RMC
   components:
+  - type: RMCRodentBehavior
+    awakeState: mouse-1
+    sleepingState: sleep-1
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
@@ -61,6 +67,9 @@
   name: mouse
   suffix: RMC
   components:
+  - type: RMCRodentBehavior
+    awakeState: mouse-2
+    sleepingState: sleep-2
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
@@ -134,6 +143,9 @@
   description: It's a small laboratory rat.
   suffix: RMC
   components:
+  - type: RMCRodentBehavior
+    awakeState: rat-0
+    sleepingState: rat-sleep-0
   - type: Sprite
     drawdepth: SmallMobs
     sprite: _RMC14/Mobs/Animals/rat.rsi
@@ -175,6 +187,9 @@
   name: rat
   description: It's a big, disease-ridden rodent.
   components:
+  - type: RMCRodentBehavior
+    awakeState: rat-1
+    sleepingState: rat-sleep-1
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -217,6 +232,9 @@
   parent: RMCMobRatBrown
   id: RMCMobRatGray
   components:
+  - type: RMCRodentBehavior
+    awakeState: rat-2
+    sleepingState: rat-sleep-2
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -239,6 +257,9 @@
   parent: RMCMobRatBrown
   id: RMCMobRatBlack
   components:
+  - type: RMCRodentBehavior
+    awakeState: rat-3
+    sleepingState: rat-sleep-3
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -277,39 +298,7 @@
   id: CMMobRatWhiteMilky
   suffix: RMC
 
-- type: entity
-  parent: RMCMobRat
-  id: RMCMobRatPet
-  name: Pet Rat
-  description: This is someone's pet rat. I wonder what it's doing here.
-  suffix: RMC
-
-- type: entity
-  parent: RMCMobRatBlack
-  id: RMCMobRatPetMarvin
-  name: Marvin
-  description: A sleek well kept rat with a tiny collar around its neck, it must belong to someone. For a rodent it appears remarkably clean and hygienic.
-  suffix: RMC
-  components:
-  - type: Grammar
-    attributes:
-      proper: true
-      gender: male
-
-- type: entity
-  parent: RMCMobRat
-  id: RMCMobRatPetIkit
-  name: Ikit
-  description: An albino rat with a tiny collar around its neck, it must belong to someone. Hope it doesn't have some sort of genetically engineered disease or something...
-  suffix: RMC
-  components:
-  - type: Grammar
-    attributes:
-      proper: true
-      gender: male
-
 #-- Pets --
-# TODO: Fill pets with tungston cubes to prevent animal abuse, add way to pat and pickup. Obfuscate name for xeno to refer to them as Fuzzys/Pet
 - type: entity
   parent: RMCSimpleMob
   id: RMCMobCorgi
@@ -317,6 +306,7 @@
   description: It's a corgi.
   abstract: true
   components:
+  - type: RMCCorgi
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -356,12 +346,15 @@
       path: /Audio/Animals/small_dog_bark_happy.ogg
 
 - type: entity
-  parent: RMCMobCorgi
+  parent: [RMCMobCorgi, StripableInventoryBase]
   id: CMMobCorgi
   name: corgi
   description: It's a corgi.
   suffix: RMC
   components:
+  - type: Inventory
+    speciesId: dog
+    templateId: pet
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/corgi.rsi
@@ -384,6 +377,8 @@
   description: It's a corgi puppy.
   suffix: RMC
   components:
+  - type: RMCCorgi
+    isPuppy: true
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/corgi.rsi
@@ -411,40 +406,12 @@
 
 - type: entity
   parent: RMCMobCorgi
-  id: RMCMobIan
-  name: Ian
-  description: It's a corgi.
-  suffix: RMC
-  components:
-  - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Pets/corgi.rsi
-    layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
-      state: ian
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: ian
-      Critical:
-        Base: ian_dead
-      Dead:
-        Base: ian_dead
-  - type: Grammar
-    attributes:
-      proper: true
-      gender: male
-  - type: WarpPoint
-    follow: true
-    location: Ian
-
-- type: entity
-  parent: RMCMobCorgi
   id: RMCMobLisa
   name: Lisa
   description: It's a corgi with a cute pink bow.
   suffix: RMC
   components:
+  - type: RMCLisaCorgi
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/corgi.rsi
@@ -602,7 +569,7 @@
     thresholds:
       0: Alive
       45: Critical
-      50: Dead # A TOUGH old stray, yes this is parity reasoning
+      50: Dead
   - type: Grammar
     attributes:
       proper: true
@@ -651,6 +618,21 @@
     location: Garry
 
 - type: entity
+  parent: CMMobCatBlack
+  id: RMCMobBernard
+  name: Bernard
+  description: His fur has the look and feel of velvet, and his tail quivers occasionally.
+  suffix: RMC
+  components:
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male
+  - type: WarpPoint
+    follow: true
+    location: Bernard
+
+- type: entity
   parent: RMCMobCat
   id: CMMobCatKitten
   name: kitten
@@ -687,32 +669,6 @@
   - type: Grammar
     attributes:
       gender: neuter
-
-- type: entity
-  parent: MobCrab
-  id: RMCMobCrab
-  name: crab
-  description: A hard-shelled crustacean. Seems quite content to lounge around all the time.
-  suffix: RMC
-  components:
-  - type: NpcFactionMember
-    factions:
-    - SimpleNeutral
-
-- type: entity
-  parent: RMCMobCrab
-  id: RMCMobCrabCoffee
-  name: Coffee
-  description: It's Coffee, the other pet!
-  suffix: RMC
-  components:
-  - type: Grammar
-    attributes:
-      proper: true
-      gender: neuter
-  - type: WarpPoint
-    follow: true
-    location: Coffee
 
 # Spawners
 - type: entity
@@ -814,101 +770,6 @@
     - RMCMobRatMilky
 
 - type: entity
-  parent: RMCSpawnRatBlack
-  id: RMCSpawnMobRatPet
-  name: pet rat spawner
-  suffix: RMC
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - state: icon-2
-      sprite: _RMC14/Mobs/Animals/rat.rsi
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCMobRatPet
-
-- type: entity
-  parent: RMCSpawnRatBlack
-  id: RMCSpawnMobRatPetMarvin
-  name: Marvin spawner
-  suffix: RMC
-  components:
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCMobRatPetMarvin
-
-- type: entity
-  parent: RMCSpawnRatWhite
-  id: RMCSpawnMobRatPetIkit
-  name: Ikit spawner
-  suffix: RMC
-  components:
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCMobRatPetIkit
-
-- type: entity
-  parent: MarkerBase
-  id: CMSpawnMobCorgi
-  name: corgi spawner
-  suffix: RMC
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - state: corgi
-      sprite: Mobs/Pets/corgi.rsi
-  - type: ConditionalSpawner
-    prototypes:
-    - CMMobCorgi
-
-- type: entity
-  parent: MarkerBase
-  id: CMSpawnMobCorgiPuppy
-  name: corgi puppy spawner
-  suffix: RMC
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - state: puppy
-      sprite: Mobs/Pets/corgi.rsi
-  - type: ConditionalSpawner
-    prototypes:
-    - CMMobCorgiPuppy
-
-- type: entity
-  parent: MarkerBase
-  id: RMCSpawnMobIan
-  name: Ian spawner
-  suffix: RMC
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - state: ian
-      sprite: Mobs/Pets/corgi.rsi
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCMobIan
-
-- type: entity
-  parent: MarkerBase
-  id: RMCSpawnMobLisa
-  name: Lisa spawner
-  suffix: RMC
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - state: lisa
-      sprite: Mobs/Pets/corgi.rsi
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCMobLisa
-
-- type: entity
   parent: MarkerBase
   id: CMSpawnMobWiggles
   name: Mr. Wiggles Spawner
@@ -970,21 +831,6 @@
 
 - type: entity
   parent: MarkerBase
-  id: CMSpawnMobRuntime
-  name: Runtime spawner
-  suffix: RMC
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - state: cat
-      sprite: Mobs/Pets/cat.rsi
-  - type: ConditionalSpawner
-    prototypes:
-    - CMMobRuntime
-
-- type: entity
-  parent: MarkerBase
   id: CMSpawnMobOrion
   name: Orion Spawner
   suffix: RMC
@@ -1015,6 +861,21 @@
 
 - type: entity
   parent: MarkerBase
+  id: RMCSpawnMobBernard
+  name: Bernard Spawner
+  suffix: RMC
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cat
+      sprite: Mobs/Pets/cat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobBernard
+
+- type: entity
+  parent: MarkerBase
   id: CMSpawnMobCatKitten
   name: kitten spawner
   suffix: RMC
@@ -1027,26 +888,6 @@
   - type: ConditionalSpawner
     prototypes:
     - CMMobCatKitten
-
-- type: entity
-  parent: SpawnMobCrab
-  id: RMCSpawnMobCrab
-  name: crab spawner
-  suffix: RMC
-  components:
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCMobCrab
-
-- type: entity
-  parent: RMCSpawnMobCrab
-  id: RMCSpawnMobCrabCoffee
-  name: Coffee spawner
-  suffix: RMC
-  components:
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCMobCrabCoffee
 
 - type: entity
   parent: SpawnMobMouse

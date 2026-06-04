@@ -96,6 +96,25 @@
   components:
   - type: RMCAnimalPrey
   - type: RMCRodentBehavior
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCRodentVisuals.State:
+        enum.DamageStateVisualLayers.Base:
+          mouse-0: { sprite: Mobs/Animals/mouse.rsi, state: mouse-0 }
+          mouse-1: { sprite: Mobs/Animals/mouse.rsi, state: mouse-1 }
+          mouse-2: { sprite: Mobs/Animals/mouse.rsi, state: mouse-2 }
+          rat-0: { sprite: _RMC14/Mobs/Animals/rat.rsi, state: rat-0 }
+          rat-1: { sprite: _RMC14/Mobs/Animals/rat.rsi, state: rat-1 }
+          rat-2: { sprite: _RMC14/Mobs/Animals/rat.rsi, state: rat-2 }
+          rat-3: { sprite: _RMC14/Mobs/Animals/rat.rsi, state: rat-3 }
+          sleep-0: { sprite: _RMC14/Mobs/Animals/mouse.rsi, state: sleep-0 }
+          sleep-1: { sprite: _RMC14/Mobs/Animals/mouse.rsi, state: sleep-1 }
+          sleep-2: { sprite: _RMC14/Mobs/Animals/mouse.rsi, state: sleep-2 }
+          rat-sleep-0: { sprite: _RMC14/Mobs/Animals/rat.rsi, state: sleep-0 }
+          rat-sleep-1: { sprite: _RMC14/Mobs/Animals/rat.rsi, state: sleep-1 }
+          rat-sleep-2: { sprite: _RMC14/Mobs/Animals/rat.rsi, state: sleep-2 }
+          rat-sleep-3: { sprite: _RMC14/Mobs/Animals/rat.rsi, state: sleep-3 }
   - type: Body
     prototype: Mouse
   - type: Speech
@@ -196,10 +215,9 @@
   - type: FixedIdentity
     name: cm-chatsan-replacement-rat
 
-#TODO: Emotes: "chimper","scratch","jump","roll","tail","rocks about", "creaks", "chimpers". chance 80 to use, equip or throw nearby objects. chance 50 volcalise/emote. What tf do those chance values mean? beats me check 13
 - type: entity
   id: RMCSmallHost
-  parent: [RMCSimpleMob, StripableInventoryBase] #TODO: Just parent this to BaseOranic at some point down the line if it doesn't prove to be catastrophic
+  parent: [RMCSimpleMob, StripableInventoryBase]
   name: abstract small host
   abstract: true
   components:
@@ -278,12 +296,12 @@
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Monkey_burning
-  - type: MobThresholds # CM13 uses damage multipliers instead of setting a unique health for em. All small hosts use a 1.5 brute and burn mult so just doing this instead
+  - type: MobThresholds
     thresholds:
       0: Alive
-      120: Critical # They get a crit state, not parity, just for anti code reasonance cascadey reasons
+      120: Critical
       130: Dead
-  - type: MeleeWeapon # TODO: give them a secondary attack method which is bite. Parity
+  - type: MeleeWeapon
     soundHit:
       collection: Punch
     angle: 0

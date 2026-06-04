@@ -16,10 +16,12 @@
       "directions": 4
     },
     {
-      "name": "dead"
+      "name": "dead",
+      "directions": 4
     },
     {
-      "name": "knocked-down"
+      "name": "knocked-down",
+      "directions": 4
     },
     {
       "name": "tongue",
@@ -64,10 +66,12 @@
       "directions": 4
     },
     {
-      "name": "wounds-small-stun"
+      "name": "wounds-small-stun",
+      "directions": 4
     },
     {
-      "name": "wounds-big-stun"
+      "name": "wounds-big-stun",
+      "directions": 4
     },
     {
       "name": "wounds-small-rest",

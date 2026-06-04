@@ -79,8 +79,6 @@ public sealed partial class NPCLeapSystem : EntitySystem
                 var worldPos = _transform.GetMoverCoordinates(uid);
                 var targetPos = _transform.GetMoverCoordinates(comp.Target);
 
-                var destinationPos = comp.Destination;
-;
                 if (!worldPos.TryDistance(EntityManager, targetPos, out var range))
                 {
                     comp.Status = LeapStatus.Unspecified;
@@ -95,8 +93,19 @@ public sealed partial class NPCLeapSystem : EntitySystem
                     continue;
                 }
 
-                var targetDir = (targetPos.Position - worldPos.Position).Normalized();
-                var destDir = (destinationPos.Position - worldPos.Position).Normalized();
+                var worldMap = _transform.ToMapCoordinates(worldPos);
+                var targetMap = _transform.ToMapCoordinates(targetPos);
+                var destinationMap = _transform.ToMapCoordinates(comp.Destination, false);
+                if (worldMap.MapId != targetMap.MapId || worldMap.MapId != destinationMap.MapId)
+                {
+                    _doafter.Cancel(comp.CurrentDoAfter.Value);
+                    comp.CurrentDoAfter = null;
+                    comp.Status = LeapStatus.TargetUnreachable;
+                    continue;
+                }
+
+                var targetDir = (targetMap.Position - worldMap.Position).Normalized();
+                var destDir = (destinationMap.Position - worldMap.Position).Normalized();
                 var angle = Angle.ShortestDistance(new Angle(targetDir), new Angle(destDir));
 
                 if (angle > Angle.FromDegrees(comp.MaxAngleDegrees))
@@ -119,10 +128,16 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
                 var worldPos = _transform.GetMoverCoordinates(uid);
                 var targetPos = _transform.GetMoverCoordinates(comp.Target);
+                var worldMap = _transform.ToMapCoordinates(worldPos);
+                var targetMap = _transform.ToMapCoordinates(targetPos);
+                if (worldMap.MapId != targetMap.MapId)
+                {
+                    comp.Status = LeapStatus.TargetUnreachable;
+                    continue;
+                }
 
-                var addedDis = (targetPos.Position - worldPos.Position).Normalized() * comp.LeapDistance;
-
-                var destination = worldPos.WithPosition(worldPos.Position + addedDis);
+                var addedDis = (targetMap.Position - worldMap.Position).Normalized() * comp.LeapDistance;
+                var destination = _transform.ToCoordinates(worldMap.Offset(addedDis));
 
                 comp.Destination = destination;
 

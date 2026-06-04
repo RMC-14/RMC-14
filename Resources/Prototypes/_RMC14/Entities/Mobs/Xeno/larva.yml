@@ -9,6 +9,7 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleDrone
+  - type: RMCAnimalPrey
   - type: GhostRole
     name: cm-job-name-xeno-larva
   - type: Sprite
