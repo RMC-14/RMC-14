@@ -23,6 +23,11 @@
                 <BoxContainer Orientation="Vertical" Margin="4">
                     <RichTextLabel Text="{Loc 'rmc-dropship-fabricator-title'}" HorizontalAlignment="Center" />
                     <Label Name="PointsLabel" Access="Public" Margin="4 2" HorizontalAlignment="Center" />
+                    <ui:BlueHorizontalSeparator />
+                    <RichTextLabel Name="CurrentLabel" Access="Public" Margin="4 2" />
+                    <RichTextLabel Name="QueueLabel" Access="Public" Margin="4 2 4 0" />
+                    <BoxContainer Name="QueueContainer" Access="Public" Orientation="Vertical"
+                                  HorizontalExpand="True" />
                 </BoxContainer>
             </PanelContainer>
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
