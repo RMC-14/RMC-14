@@ -68,7 +68,6 @@
 # - minRoundTime: optional minimum round time before approval is allowed.
 # - recruitmentDuration: how long ghost roles remain open.
 # - disallowDuringEvacuation: blocks the call during evacuation.
-# - disallowDuringHijack: blocks the call during hijack.
 # - maxCallsPerRound: maximum requests of this call per round.
 # - minRequiredSlots: minimum recruited required slots before launch.
 # - maxSlots: maximum planned roster slots for this call.

@@ -2,7 +2,6 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using Content.Server._RMC14.Dropship;
-using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server._RMC14.Marines;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -75,7 +74,6 @@ public sealed partial class RMCERTSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;

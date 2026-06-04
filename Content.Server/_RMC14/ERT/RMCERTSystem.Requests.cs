@@ -2,7 +2,6 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using Content.Server._RMC14.Dropship;
-using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server._RMC14.Marines;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -446,13 +445,6 @@ public sealed partial class RMCERTSystem
             _evacuation.IsEvacuationInProgress())
         {
             error = Loc.GetString("rmc-ert-error-unavailable-evacuation", ("call", call.Name));
-            return false;
-        }
-
-        if (call.Requirements.DisallowDuringHijack &&
-            _distressSignal.IsHijackActive())
-        {
-            error = Loc.GetString("rmc-ert-error-unavailable-hijack", ("call", call.Name));
             return false;
         }
 

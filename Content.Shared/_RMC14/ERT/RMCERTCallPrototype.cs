@@ -409,12 +409,6 @@ public sealed partial class RMCERTRequirementSet
     public bool DisallowDuringEvacuation = true;
 
     /// <summary>
-    /// Whether this call is blocked while hijack is active.
-    /// </summary>
-    [DataField]
-    public bool DisallowDuringHijack = true;
-
-    /// <summary>
     /// Maximum number of non-terminal requests for this call allowed in one round.
     /// </summary>
     [DataField]
