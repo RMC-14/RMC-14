@@ -37,6 +37,8 @@
   - type: StackLayerThreshold
     thresholds: [2, 3]
   - type: RMCFoldingBarricadeStack
+    storedDamage:
+    - 0
   - type: Appearance
   - type: Clickable
 
@@ -50,3 +52,8 @@
   - type: Stack
     stackType: CMFoldingBarricade
     count: 3
+  - type: RMCFoldingBarricadeStack
+    storedDamage:
+    - 0
+    - 0
+    - 0
