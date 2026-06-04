@@ -12,6 +12,8 @@ namespace Content.Client._RMC14.Dropship.Fabricator;
 [UsedImplicitly]
 public sealed class DropshipFabricatorBui : BoundUserInterface
 {
+    private const int QueueRowHeight = 28;
+
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
@@ -111,6 +113,7 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
                 Text = Loc.GetString("rmc-dropship-fabricator-queue-empty"),
                 Margin = new Thickness(4, 2),
                 HorizontalExpand = true,
+                SetHeight = QueueRowHeight,
             };
             _window.QueueContainer.AddChild(empty);
             return;
@@ -129,6 +132,7 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
                     ("cost", entry.Cost)),
                 Margin = new Thickness(4, 2),
                 HorizontalExpand = false,
+                VerticalAlignment = Control.VAlignment.Center,
             };
 
             var cancel = new Button
@@ -136,6 +140,7 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
                 Text = Loc.GetString("rmc-dropship-fabricator-cancel"),
                 StyleClasses = { "OpenBoth" },
                 MinWidth = 90,
+                SetHeight = 24,
             };
             cancel.OnPressed += _ => SendPredictedMessage(new DropshipFabricatorCancelQueueMsg(index));
 
@@ -150,6 +155,7 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
                     cancel
                 },
                 HorizontalExpand = true,
+                SetHeight = QueueRowHeight,
             };
             _window.QueueContainer.AddChild(container);
         }
