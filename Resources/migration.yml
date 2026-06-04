@@ -1499,3 +1499,8 @@ RMCGlassesMedicalHUDGlasses: RMCGlassesMedicalHUDGlassesAdvanced
 #2026-05-20
 RMCHeadCapFerret: RMCHeadCapGrey
 CMPosterRememberIo: CMRandomPosterAny
+
+#2026-05-22
+DrinkGlass: RMCDrinkGlass
+FoodDonkpocket: RMCFoodDonkpocket
+FoodBoxDonkpocket: RMCBoxDonkpockets
