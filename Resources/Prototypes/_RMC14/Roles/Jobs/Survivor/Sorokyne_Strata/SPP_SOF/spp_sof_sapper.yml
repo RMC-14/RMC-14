@@ -22,7 +22,7 @@
       prefix: rmc-job-prefix-soro-sof-sapper
     - type: AssignSquad
       squad: SquadSPP
-#    - type: TacticalMapIcon # TODO: tacmap of diff factions mechanic
+#    - type: TacticalMapIcon # TODO RMC14: tacmap of diff factions mechanic
 #      icon:
 #        sprite: /Textures/_RMC14/Interface/map_blips.rsi
 #        state: spp_sapper
