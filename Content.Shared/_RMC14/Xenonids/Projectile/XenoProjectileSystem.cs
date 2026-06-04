@@ -106,9 +106,9 @@ public sealed class XenoProjectileSystem : EntitySystem
             Log.Debug($"""
                 Received predicted hit:
                   Session:  {args.SenderSession}
-                  CurTick:  {_timing.CurTick}
+                  Cur Tick: {_timing.CurTick}
                   Target:   {msg.Target}
-                  ShotID:   {msg.Id}
+                  Shot ID:  {msg.Id}
                   Shot At:  {msg.ShotAtTick}
                   Hit Tick: {msg.Tick}
                   Substep:  {msg.Substep}
@@ -306,17 +306,17 @@ public sealed class XenoProjectileSystem : EntitySystem
             TryComp(ent, out TransformComponent? shotTransform);
             Log.Debug($"""
                 SENDING PREDICTED PROJECTILE HIT!!
-                  ShotId:         {shot.Id}
-                  ShotAtTick:     {shot.ShotAtTick}
-                  CurTick:        {_timing.CurTick}
+                  Shot ID:        {shot.Id}
+                  Cur Tick:       {_timing.CurTick}
                   LastRealTick:   {_rmcLag.GetLastRealTick(null)}
                   Phys Substep:   {_rmcLag.GetCurrentSubstep()}
                   In simulation?  {_timing.InSimulation}
                   ApplyingState?  {_timing.ApplyingState}
                   FirstTimePred?  {_timing.IsFirstTimePredicted}
-                  PredictedTick:  {tick}
+                  Shot At Tick:   {shot.ShotAtTick}
+                  Pred Hit Tick:  {tick}
                   Substep:        {substep}
-                  ShotCoords:     {shotTransform?.Coordinates}
+                  Shot Coords:    {shotTransform?.Coordinates}
                   Target Coords:  {targetTransform?.Coordinates}
                 """);
         }
