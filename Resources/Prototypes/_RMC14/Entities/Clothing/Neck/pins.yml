@@ -14,7 +14,7 @@
     
 - type: entity
   parent: [ ClothingNeckAllyPin, RMCPridePinBase ]
-  id: ClothingNeckAllyPin
+  id: RMCAllyPinBase
   components:
   - type: HelmetAccessory
     rsi:
