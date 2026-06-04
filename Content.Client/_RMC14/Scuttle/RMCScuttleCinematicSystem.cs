@@ -1,7 +1,10 @@
+using Content.Client.Popups;
+using Content.Client.UserInterface.Systems.Chat;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.GameTicking;
 using Robust.Shared.Audio.Components;
 using Robust.Client.Graphics;
+using Robust.Client.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
@@ -17,6 +20,8 @@ public sealed class RMCScuttleCinematicSystem : EntitySystem
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly IUserInterfaceManager _ui = default!;
 
     private RMCScuttleCinematicOverlay? _current;
     private TimeSpan? _cinematicExplosionAt;
@@ -65,6 +70,7 @@ public sealed class RMCScuttleCinematicSystem : EntitySystem
         _cinematicExplosionAt = startedAt + RMCScuttleCinematicTiming.GetExplosionOffset(ev.Duration);
         _cinematicExplosionPlayed = false;
         _overlay.AddOverlay(_current);
+        SetCinematicUiSuppressed(true);
         MuteExistingAudio();
     }
 
@@ -83,6 +89,7 @@ public sealed class RMCScuttleCinematicSystem : EntitySystem
 
     private void Clear()
     {
+        SetCinematicUiSuppressed(false);
         RestoreMutedAudio();
 
         if (_current != null)
@@ -92,6 +99,12 @@ public sealed class RMCScuttleCinematicSystem : EntitySystem
         _cinematicExplosionAt = null;
         _cinematicExplosionPlayed = false;
         _cinematicAudio.Clear();
+    }
+
+    private void SetCinematicUiSuppressed(bool suppressed)
+    {
+        _ui.GetUIController<ChatUIController>().SetSpeechBubblesSuppressed(suppressed);
+        _popup.SetPopupsSuppressed(suppressed);
     }
 
     private void AllowCinematicAudio((EntityUid Entity, AudioComponent Component)? audio)
