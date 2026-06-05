@@ -37,6 +37,7 @@ public sealed class XenoRoleSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private TimeSpan _disconnectedXenoGhostRoleTime;
+    private float _larvaRankScaleFactor = 1.0f;
 
     // TODO RMC14 you know what you have to do
     private TimeSpan _rankTwoTime;
@@ -66,6 +67,7 @@ public sealed class XenoRoleSystem : EntitySystem
 
         SubscribeLocalEvent<XenoRankComponent, RefreshNameModifiersEvent>(OnRankRefreshName, before: new[] { typeof(SharedXenoNameSystem) });
 
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeLarvaRankScaleFactor, v => _larvaRankScaleFactor = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeBronzeMedalTimeHours, v => _rankTwoTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _rankThreeTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeGoldMedalTimeHours, v => _rankFourTime = TimeSpan.FromHours(v), true);
@@ -142,10 +144,10 @@ public sealed class XenoRoleSystem : EntitySystem
         var time = TimeSpan.Zero;
         if (jobId == _larvaJobProtoId)
         {
-            // Larva's rank is determined by TOTAL xeno playtime, NOT larva playtime.
+            // Larva's rank is determined by TOTAL xeno playtime, NOT larva playtime, adjusted by scale factor
             try
             {
-                time = _rmcPlaytime.GetTotalXenoPlaytime(player);
+                time = _rmcPlaytime.GetTotalXenoPlaytime(player) / _larvaRankScaleFactor;
             }
             catch (Exception e)
             {
