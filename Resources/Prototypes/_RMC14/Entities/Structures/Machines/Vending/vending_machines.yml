@@ -320,6 +320,8 @@
     RMCCigarettePackElectroGolds: 50
     RMCCigarettePackSolRedsTurquoise: 25
     RMCCigarettePackSolRedsYellow: 25
+    RMCCigarettePackTarasClassic: 50
+    RMCCigarettePackBoheBlueMenthols: 50
     RMCTarbackTube: 20
     RMCMatchboxFull: 15
     RMCLighter: 25
@@ -354,6 +356,11 @@
     RMCMatchboxFull: 99
     RMCLighter: 99
     RMCZippo: 99
+    RMCMonteComunePack: 99
+    RMCCigarettePackLingxiaoGolds: 99
+    RMCCigarettePackTarasClassic: 99
+    RMCCigarettePackBoheBlueMenthols: 99
+    RMCLighterSPP: 99
 
 - type: entity
   parent: CMVendorCigs
@@ -374,6 +381,8 @@
     RMCCigarettePackLadyFingers: 20
     RMCCigarettePackSolRedsTurquoise: 10
     RMCCigarettePackSolRedsYellow: 10
+    RMCCigarettePackTarasClassic: 20
+    RMCCigarettePackBoheBlueMenthols: 20
     RMCTarbackTube: 10
     RMCMatchboxFull: 5
     CMElectroMatchbook: 5
@@ -386,7 +395,7 @@
   parent: CMVendorCigs
   id: RMCVendorCigsWeYa
   name: Weston-Yamada Brand Cigarette Machine
-  description: A Weston-Yamada Brand cigarette vending machine, looks like a We-Ya Gold pack. Comes with Emerald Greens, We-Ya Golds of course, Arcturian Aces, and some Three Suns Empire brand you've barely heard of. Executive Selects are still out of stock due to shipping issues...
+  description: A Weston-Yamada Brand cigarette vending machine, looks like a We-Ya Gold pack. Comes with Emerald Greens, We-Ya Golds of course, Arcturian Aces, some Three Suns Empire brand you've barely heard of, and some rare SPP imports. Executive Selects are still out of stock due to shipping issues...
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/weya_cigs.rsi
@@ -402,6 +411,8 @@
     #BalajiImperialCigPack: 10
     RMCCigarettePackExecutiveSelect: 0 #Random between 0-2
     RMCShioRoyalsTube: 10
+    RMCMonteComunePack: 10
+    RMCCigarettePackLingxiaoGolds: 10
     RMCMatchboxFull: 5
     CMExecutiveSelectMatchbook: 10
     #BalajiImperialMatchbook: 10
