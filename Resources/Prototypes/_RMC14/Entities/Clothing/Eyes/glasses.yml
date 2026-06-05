@@ -135,7 +135,6 @@
     guides:
     - RMCGuideRoleSGO
 
-
 - type: entity
   parent: ClothingEyesBase
   id: RMCGlassesExperimentalMeson
