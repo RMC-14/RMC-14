@@ -188,6 +188,13 @@ public sealed class XenoProjectileSystem : EntitySystem
             return true;
         }
 
+        if (projectile.ProjectileSpent)
+        {
+            if (_logPrediction)
+                Log.Debug($"Predicted hit from '{args.SenderSession}' shot {msg.Id} is spent and cannot hit anything anymore.");
+            return true;
+        }
+
         // server shot later than predicted, adjust the shot forward to try and hit
         if (xenoShot.ShotAtTick > msg.ShotAtTick)
         {
