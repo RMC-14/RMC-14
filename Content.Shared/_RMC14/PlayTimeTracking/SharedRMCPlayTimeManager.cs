@@ -12,7 +12,7 @@ public abstract class SharedRMCPlayTimeManager : IPostInjectInit
     [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    private bool _jobsDataLoaded = false;
+    private bool _jobsDataLoaded;
     private FrozenSet<ProtoId<PlayTimeTrackerPrototype>> _xenoJobs = [];
     private FrozenSet<ProtoId<PlayTimeTrackerPrototype>> _humanJobs = [];
 
@@ -49,11 +49,13 @@ public abstract class SharedRMCPlayTimeManager : IPostInjectInit
 
     public bool IsHumanJob(string jobId)
     {
+        EnsurePrototypesLoaded();
         return _humanJobs.Contains(jobId);
     }
 
     public bool IsXenoJob(string jobId)
     {
+        EnsurePrototypesLoaded();
         return _xenoJobs.Contains(jobId);
     }
 
@@ -68,9 +70,7 @@ public abstract class SharedRMCPlayTimeManager : IPostInjectInit
     {
         EnsurePrototypesLoaded();
 
-        IReadOnlyDictionary<string, TimeSpan> playTimes;
-
-        playTimes = _playtime.GetPlayTimes(playerSession);
+        var playTimes = _playtime.GetPlayTimes(playerSession);
 
         var totalTime = TimeSpan.Zero;
         foreach (var (jobId, jobTime) in playTimes)
@@ -98,21 +98,19 @@ public abstract class SharedRMCPlayTimeManager : IPostInjectInit
 
     private void ReloadPrototypes()
     {
-        var jobs = new HashSet<ProtoId<PlayTimeTrackerPrototype>>();
+        var humanJobs = new HashSet<ProtoId<PlayTimeTrackerPrototype>>();
+        var xenoJobs = new HashSet<ProtoId<PlayTimeTrackerPrototype>>();
+
         foreach (var job in _prototype.EnumeratePrototypes<PlayTimeTrackerPrototype>())
         {
             if (job.IsHumanoid)
-                jobs.Add(job.ID);
-        }
-        _humanJobs = jobs.ToFrozenSet();
-
-        jobs.Clear();
-        foreach (var job in _prototype.EnumeratePrototypes<PlayTimeTrackerPrototype>())
-        {
+                humanJobs.Add(job.ID);
             if (job.IsXeno)
-                jobs.Add(job.ID);
+                xenoJobs.Add(job.ID);
         }
-        _xenoJobs = jobs.ToFrozenSet();
+
+        _humanJobs = humanJobs.ToFrozenSet();
+        _xenoJobs = xenoJobs.ToFrozenSet();
 
         _jobsDataLoaded = true;
     }
