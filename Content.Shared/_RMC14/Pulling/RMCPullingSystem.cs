@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids;
@@ -23,6 +24,7 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Content.Shared._RMC14.Synth;
+using Robust.Shared.Configuration;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
@@ -42,6 +44,7 @@ public sealed class RMCPullingSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -69,10 +72,13 @@ public sealed class RMCPullingSystem : EntitySystem
     private const string PullEffect = "CMEffectGrab";
 
     private EntityQuery<FiremanCarriableComponent> _firemanQuery;
+    private bool _xenoPullBlockOverride = true;
 
     public override void Initialize()
     {
         _firemanQuery = GetEntityQuery<FiremanCarriableComponent>();
+
+        Subs.CVar(_config, RMCCVars.RMCXenoPullBlockOverride, v => _xenoPullBlockOverride = v, true);
 
         SubscribeLocalEvent<BuckleComponent, RMCGetPullTargetEvent>(OnGetPullTarget);
 
@@ -379,6 +385,9 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private void OnXenoStartPullAttempt(Entity<XenoComponent> ent, ref StartPullAttemptEvent args)
     {
+        if (!_xenoPullBlockOverride)
+            return;
+
         if (!TryComp(args.Pulled, out PullableComponent? pullable) ||
             pullable.Puller is not { } currentPuller)
         {
