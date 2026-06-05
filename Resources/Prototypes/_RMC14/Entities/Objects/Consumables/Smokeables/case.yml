@@ -155,7 +155,7 @@
   parent: RMCTarbackCase
   id: RMCMonteComunePack
   name: Montecomune Pack
-  description: A well-designed pack of premium SPP pack-cigars, outclasses anything on the UN's market, but also technically counts as UN contraband. Rolled somewhere.
+  description: A well-designed pack of premium SPP pack-cigars, outclasses anything on the UN's market, but also rarer then anything on the UN's market. Rolled somewhere undisclosed.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/montecomune.rsi
