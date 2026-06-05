@@ -36,6 +36,9 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
             if (ShouldStartEncountered(ent.Comp, language))
                 languageData.Encountered = true;
+
+            if (languageData.LearnedWords.Count > 0)
+                UpdateLanguageProgress(ent, language);
         }
 
         SyncLanguageStates(ent.Comp);
@@ -47,16 +50,11 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
         foreach (var (language, languageData) in learningComp.Languages)
         {
-            if (languageData.LearnedWords.Count > 0)
-            {
-                args.SpokenLanguages.Add(language);
-            }
-
-            var comprehension = languageData.Progress;
-            if (comprehension >= learningComp.MasteredComprehensionThreshold)
-            {
+            if (HasUnlockedComprehension(learningComp, language, languageData))
                 args.UnderstoodLanguages.Add(language);
-            }
+
+            if (HasUnlockedSpeech(learningComp, language, languageData))
+                args.SpokenLanguages.Add(language);
         }
     }
 
@@ -288,22 +286,15 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
         languageData.Progress = comprehension;
 
-        var hasLearnedAnyWords = languageData.LearnedWords.Count > 0;
+        var canUnderstand = HasUnlockedComprehension(comp, language, languageData);
+        var canSpeak = HasUnlockedSpeech(comp, language, languageData);
 
-        if (hasLearnedAnyWords)
-        {
-            _languages.AddLanguage(learner.Owner, language, addSpoken: true, addUnderstood: false);
-        }
+        if (canUnderstand || canSpeak)
+            _languages.AddLanguage(learner.Owner, language, addSpoken: canSpeak, addUnderstood: canUnderstand);
 
-        if (comprehension >= comp.MasteredComprehensionThreshold && hasLearnedAnyWords)
-        {
-            if (TryComp<LanguageComponent>(learner.Owner, out var langComp))
-            {
-                if (!langComp.UnderstoodLanguages.Contains(language))
-                    _languages.AddLanguage(learner.Owner, language, addSpoken: false, addUnderstood: true);
-            }
-        }
-        else if (comprehension >= comp.FluentComprehensionThreshold && hasLearnedAnyWords && !languageData.FluentAnnounced)
+        if (comprehension >= comp.FluentComprehensionThreshold &&
+            languageData.LearnedWords.Count > 0 &&
+            !languageData.FluentAnnounced)
         {
             languageData.FluentAnnounced = true;
         }
@@ -323,8 +314,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         if (ShouldStartEncountered(comp, language))
             languageData.Encountered = true;
 
-        languageData.Progress = CalculateOverallComprehension(comp, language);
-        SyncLanguageState(comp, language);
+        UpdateLanguageProgress((entity, comp), language);
         Dirty(entity, comp);
     }
 
@@ -351,5 +341,32 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         comp.Languages.Remove(language);
         comp.LanguageStates.Remove(language);
         Dirty(entity, comp);
+    }
+
+    private bool HasUnlockedComprehension(
+        LanguageLearningComponent comp,
+        ProtoId<LanguagePrototype> language,
+        LanguageLearningData languageData)
+    {
+        if (languageData.LearnedWords.Count == 0)
+            return false;
+
+        var clearThreshold = GetComprehensionThresholds(language).Clear;
+        var requiredThreshold = Math.Max(comp.ComprehensionThreshold, clearThreshold);
+        return languageData.Progress >= requiredThreshold;
+    }
+
+    private bool HasUnlockedSpeech(
+        LanguageLearningComponent comp,
+        ProtoId<LanguagePrototype> language,
+        LanguageLearningData languageData)
+    {
+        if (languageData.LearnedWords.Count == 0)
+            return false;
+
+        var requiredThreshold = Math.Max(
+            comp.MasteredComprehensionThreshold,
+            GetComprehensionThresholds(language).Clear);
+        return languageData.Progress >= requiredThreshold;
     }
 }
