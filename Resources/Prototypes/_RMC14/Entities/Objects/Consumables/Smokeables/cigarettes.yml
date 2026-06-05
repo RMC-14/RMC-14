@@ -304,7 +304,7 @@
   parent: CigPackBase
   id: RMCCigarettePackLingxiaoGolds
   name: lingxiao golds pack
-  description: The shining jewel in the SPP tobacco industry, and rated highly. Incredibly expensive, and considered to be contraband in the UN, but people who can afford them typically get away with it.
+  description: The shining jewel in the SPP tobacco industry, and rated highly. Incredibly expensive, and considered to be rare in the UN, but people who can afford them typically can be found with them.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/liangxiao_golds.rsi
@@ -426,7 +426,7 @@
   parent: Cigarette
   id: RMCLingxiaoCigarette
   name: Lingxiao Cigarette
-  description: A high-quality roll of Yunnan Tobacco and nicotine. Experts say this is the best way to get lung cancer. Technically considered contraband in the UN, but can be found anywhere affluent.
+  description: A high-quality roll of Yunnan Tobacco and nicotine. Experts say this is the best way to get lung cancer. They can be found anywhere affluent enough to handle the expensive import duties.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/langxiaogold_cig.rsi
@@ -455,7 +455,7 @@
   parent: CigPackBase
   id: RMCCigarettePackTarasClassic
   name: taras classic pack
-  description: About as iconic as the flag of the SPP itself, this can be found in the hands of every single SPP citizen, from a Kommissar to a General to a coal miner. Technically considered contraband in the UN.
+  description: About as iconic as the flag of the SPP itself, this can be found in the hands of every single SPP citizen, from a Kommissar to a General to a coal miner. 
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/taras_classic.rsi
