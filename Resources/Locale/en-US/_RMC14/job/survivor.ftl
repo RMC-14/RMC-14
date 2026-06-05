@@ -255,7 +255,7 @@ rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 
-# Sorokyne SOF insert survs 
+# Sorokyne SOF insert survs
 
 rmc-job-greeting-soro-sof = You are a member of an SPP SOF QRF team! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons. You are part of an SOF QRF team of the Socialist Progressive Peoples, deployed alongside the Ministry of Space Colonization to build garrisons on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
 
@@ -303,7 +303,7 @@ cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
 CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
-# Trijent crashland insert survs 
+# Trijent crashland insert survs
 
 rmc-job-greeting-crashland = You are a member of an SPP recon force! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south east, which was carrying additional weapons. Your orders were simple, Recon the site, ascertain if there is a biological weapons program in the area, and if so to secure the colony and retrieve a sample. However your team failed to account for an active anti-air battery near the area. Both your craft and your sister ship crashed. Barely having a chance to catch your breath, you found yourself being assailed by vile xenonids! You and your team have barely held your ground, at the cost of four of your own, but more are coming and ammo is low. You believe a United Nations rescue force is en route.
 
@@ -410,7 +410,7 @@ rmc-job-prefix-survivor-solaris-corporate-supervisor = Supervisor
 
 rmc-job-greeting-solaris-pmc = You are a survivor of a crash landing!
 
-  You are aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -420,7 +420,7 @@ rmc-job-greeting-solaris-pmc = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-medic = You are a survivor of a crash landing!
 
-  You are aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -430,7 +430,7 @@ rmc-job-greeting-solaris-pmc-medic = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-engineer = You are a survivor of a crash landing!
 
-  You are aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -440,7 +440,7 @@ rmc-job-greeting-solaris-pmc-engineer = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-leader = You are a survivor of a crash landing!
 
-  You are aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -450,7 +450,7 @@ rmc-job-greeting-solaris-pmc-leader = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-commander = You are a survivor of a crash landing!
 
-  You are aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -460,7 +460,7 @@ rmc-job-greeting-solaris-pmc-commander = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-supervisor = You are a survivor of a crash landing!
 
-  You are aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -480,7 +480,7 @@ rmc-job-name-survivor-shivas-assman = Assistant Operations Manager
 
 rmc-job-greeting-shivas-assistant-manager = You are the last alive Senior Administrator on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -490,7 +490,7 @@ rmc-job-greeting-shivas-assistant-manager = You are the last alive Senior Admini
 
 rmc-job-greeting-shivas-commando = You are the last living security element on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -500,7 +500,7 @@ rmc-job-greeting-shivas-commando = You are the last living security element on t
 
 rmc-job-greeting-shivas-panic-room-researcher = You are a Weston-Yamada Scientist on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -510,7 +510,7 @@ rmc-job-greeting-shivas-panic-room-researcher = You are a Weston-Yamada Scientis
 
 rmc-job-greeting-shivas-panic-room-doctor = You are a Medical Doctor on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -520,7 +520,7 @@ rmc-job-greeting-shivas-panic-room-doctor = You are a Medical Doctor on the Colo
 
 rmc-job-greeting-shivas-panic-room-engineer = You are an Engineer on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
