@@ -59,8 +59,11 @@ public sealed class RMCSlowSystem : EntitySystem
 
         if (refresh && expire > slowdown.ExpiresAt)
             slowdown.ExpiresAt = expire;
-        else if (!refresh) // Stacks
-            slowdown.ExpiresAt += duration;
+        else if (!refresh)
+        {
+            var baseline = slowdown.ExpiresAt > _timing.CurTime ? slowdown.ExpiresAt : _timing.CurTime;
+            slowdown.ExpiresAt = baseline + duration;
+        }
 
         return true;
     }
