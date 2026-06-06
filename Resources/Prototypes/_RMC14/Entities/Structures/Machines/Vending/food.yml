@@ -206,6 +206,9 @@
     access:
     - [ "CMAccessKitchen" ]
     - [ "CMAccessColonyPublic" ]
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     access:
     - "CMAccessKitchen"
@@ -278,6 +281,8 @@
         name: metal flask (empty)
         amount: 5
       - id: DrinkGlass
+        amount: 10
+      - id: RMCDrinkGlass
         amount: 30
       - id: CMMarineFlask
         amount: 5
@@ -293,6 +298,9 @@
     layers:
     - state: "off"
     - state: "normal-unshaded"
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     hackable: true
     sections:

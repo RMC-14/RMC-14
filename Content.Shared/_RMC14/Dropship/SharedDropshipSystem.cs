@@ -1,4 +1,4 @@
-using System.Linq;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
@@ -18,20 +19,26 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.UserInterface;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Dropship;
 
 public abstract class SharedDropshipSystem : EntitySystem
 {
+    [Dependency] protected readonly SharedAudioSystem Audio = default!;
+
+    [Dependency] private readonly AreaSystem _areas = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -44,6 +51,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     private TimeSpan _dropshipInitialDelay;
     private TimeSpan _hijackInitialDelay;
@@ -56,6 +64,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<DropshipNavigationComputerComponent, AfterActivatableUIOpenEvent>(OnNavigationOpen);
         SubscribeLocalEvent<DropshipNavigationComputerComponent, DropshipLockoutOverrideDoAfterEvent>(OnNavigationLockoutOverride);
+        SubscribeLocalEvent<DropshipNavigationComputerComponent, GettingAttackedAttemptEvent>(OnGettingAttackedAttempt);
 
         SubscribeLocalEvent<DropshipTerminalComponent, ActivateInWorldEvent>(OnDropshipTerminalActivateInWorld, before: [typeof(ActivatableUISystem), typeof(ActivatableUIRequiresAccessSystem)]);
         SubscribeLocalEvent<DropshipTerminalComponent, ActivatableUIOpenAttemptEvent>(OnTerminalOpenAttempt);
@@ -237,6 +246,18 @@ public abstract class SharedDropshipSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("rmc-dropship-locked-out-bypass"), ent, args.User, PopupType.Medium);
     }
 
+    private void OnGettingAttackedAttempt(Entity<DropshipNavigationComputerComponent> ent, ref GettingAttackedAttemptEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Attacker))
+            return;
+
+        if (!TryStopLaunchAlarm(ent))
+            return;
+
+        Audio.PlayPvs(ent.Comp.LaunchAlarmForcedShutdownSound, ent);
+        _popup.PopupEntity( Loc.GetString("rmc-dropship-launch-alarm-xeno-shutdown", ("console", ent)), args.Attacker);
+    }
+
     private void OnDropshipTerminalActivateInWorld(Entity<DropshipTerminalComponent> ent, ref ActivateInWorldEvent args)
     {
         var user = args.User;
@@ -302,6 +323,12 @@ public abstract class SharedDropshipSystem : EntitySystem
                     FlyTo((computerId, computer), closestDestination.Value, user))
                 {
                     _popup.PopupEntity("You call down one of the dropships to your location", user, user, PopupType.LargeCaution);
+
+                    var locationName = "Unknown";
+                    if (_areas.TryGetArea(closestDestination.Value, out _, out var areaProto))
+                        locationName = areaProto.Name;
+
+                    _xenoAnnounce.AnnounceSameHiveDefaultSound(user, $"The Queen has commanded the metal bird to the hive at {locationName}");
                     return;
                 }
             }
@@ -536,6 +563,47 @@ public abstract class SharedDropshipSystem : EntitySystem
             var ev = new DropshipHijackStartEvent(xform.ParentUid);
             RaiseLocalEvent(ref ev);
         }
+    }
+
+    protected bool TryStopLaunchAlarm(Entity<DropshipComponent> dropship, DropshipNavigationComputerComponent? navigationComputerComponent = null)
+    {
+        if (dropship.Comp.LaunchAlarmEntity == null)
+            return false;
+
+        Del(dropship.Comp.LaunchAlarmEntity);
+        dropship.Comp.LaunchAlarmEntity = null;
+        Dirty(dropship);
+
+        if (navigationComputerComponent != null)
+            return false;
+
+        var query = Transform(dropship).ChildEnumerator;
+        while (query.MoveNext(out var child))
+        {
+            if (!TryComp(child, out DropshipNavigationComputerComponent? navigationComputer))
+                continue;
+
+            navigationComputer.LaunchAlarmStatus = false;
+            Dirty(child, navigationComputer);
+            break;
+        }
+
+        return true;
+    }
+
+    protected bool TryStopLaunchAlarm(Entity<DropshipNavigationComputerComponent> navigationComputer)
+    {
+        if (!TryGetGridDropship(navigationComputer, out var dropship) || dropship.Comp.LaunchAlarmEntity == null)
+            return false;
+
+        Del(dropship.Comp.LaunchAlarmEntity);
+        dropship.Comp.LaunchAlarmEntity = null;
+        Dirty(dropship);
+
+        navigationComputer.Comp.LaunchAlarmStatus = false;
+        Dirty(navigationComputer);
+
+        return true;
     }
 
     /// <summary>

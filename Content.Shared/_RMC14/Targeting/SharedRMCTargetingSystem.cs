@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rangefinder.Spotting;
@@ -13,8 +14,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
 
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -44,6 +46,8 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         {
             StopTargeting((targeting, targeting), targeting.Comp.Targets[0]);
         }
+
+        _rmcPvs.RemoveGlobalOverride(targeting);
     }
 
     /// <summary>
@@ -72,6 +76,8 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             targetingComp.OriginalLaserDurations.Remove(ent);
             Dirty(targeting, targetingComp);
         }
+
+        _rmcPvs.RemoveGlobalOverride(ent);
     }
 
     /// <summary>
@@ -164,6 +170,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         targeting.User = user;
         targeting.LaserType = targetedEffect;
         Dirty(equipment, targeting);
+
+        _rmcPvs.AddGlobalOverride(target);
+        _rmcPvs.AddGlobalOverride(equipment);
     }
 
     /// <summary>

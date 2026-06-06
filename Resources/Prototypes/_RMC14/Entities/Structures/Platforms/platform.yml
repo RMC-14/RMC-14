@@ -40,13 +40,13 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 150 # Excessive damage
+          damage: 110 # Excessive damage
         behaviors:
           - !type:DoActsBehavior
             acts: ["Destruction"]
       - trigger:
           !type:DamageTrigger
-          damage: 100
+          damage: 90
         behaviors:
           - !type:ChangeConstructionNodeBehavior
             node: platformBroken
@@ -133,7 +133,7 @@
   - type: Climbable
 
 - type: entity
-  parent: CMPlatformBaseDestructible
+  parent: CMPlatformBase
   id: RMCPlatformCornerSmall
   name: platform
   description: A square metal surface resting on four legs.
@@ -143,6 +143,24 @@
     - Wall
   components:
   - type: Physics
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 45 # Excessive damage
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 30
+        behaviors:
+          - !type:ChangeConstructionNodeBehavior
+            node: platformBroken
+          - !type:DoActsBehavior
+            acts: ["Breakage"]
   - type: Fixtures
     fixtures:
       fix1:
@@ -169,6 +187,24 @@
     - Wall
   components:
   - type: Physics
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 135 # Excessive damage
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 110
+        behaviors:
+          - !type:ChangeConstructionNodeBehavior
+            node: platformBroken
+          - !type:DoActsBehavior
+            acts: ["Breakage"]
   - type: Fixtures
     fixtures:
       fix1:

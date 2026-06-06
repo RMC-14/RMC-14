@@ -433,7 +433,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
     }
 
-    private EntProtoId GetQueenAnimationVariant(EntProtoId originalId)
+    private EntProtoId GetResinUpgradeTarget(EntProtoId originalId)
     {
         return originalId.Id switch
         {
@@ -477,7 +477,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (_net.IsClient)
                 return;
 
-            QueueDel(upgradeable);
+            Del(upgradeable);
             var spawn = Spawn(to, snapped);
             _hive.SetSameHive(xeno.Owner, spawn);
             args.Handled = true;
@@ -508,7 +508,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        var animationChoice = hasBoost ? GetQueenAnimationVariant(choice) : choice;
+        var animationChoice = hasBoost ? GetResinUpgradeTarget(choice) : choice;
         var effectId = XenoStructuresAnimation + animationChoice;
         var coordinates = GetNetCoordinates(args.Target);
         var entityCoords = GetCoordinates(coordinates);
@@ -1370,6 +1370,15 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
+            if (_hiveConstructionNodeQuery.TryGetComponent(uid, out var node) &&
+                node.BlockOtherNodes)
+            {
+                if (popup)
+                    _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+
+                return false;
+            }
+
             if (_xenoConstructQuery.HasComp(uid) ||
                 _xenoEggQuery.HasComp(uid) ||
                 _xenoTunnelQuery.HasComp(uid) ||
@@ -1706,6 +1715,13 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         while (anchored.MoveNext(out var uid))
         {
             if (HasComp<XenoEggComponent>(uid))
+            {
+                popupType = "rmc-xeno-construction-blocked";
+                return false;
+            }
+
+            if (_hiveConstructionNodeQuery.TryGetComponent(uid, out var node) &&
+                node.BlockOtherNodes)
             {
                 popupType = "rmc-xeno-construction-blocked";
                 return false;

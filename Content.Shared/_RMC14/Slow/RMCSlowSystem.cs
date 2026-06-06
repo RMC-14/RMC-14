@@ -234,16 +234,13 @@ public sealed class RMCSlowSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        if (_net.IsClient)
-            return;
-
         var time = _timing.CurTime;
 
         var slowQuery = EntityQueryEnumerator<RMCSlowdownComponent>();
 
         while (slowQuery.MoveNext(out var uid, out var slow))
         {
-            if (time < slow.ExpiresAt)
+            if (!slow.Running || time < slow.ExpiresAt)
                 continue;
 
             RemCompDeferred<RMCSlowdownComponent>(uid);
@@ -254,7 +251,7 @@ public sealed class RMCSlowSystem : EntitySystem
 
         while (superSlowQuery.MoveNext(out var uid, out var slow))
         {
-            if (time < slow.ExpiresAt)
+            if (!slow.Running || time < slow.ExpiresAt)
                 continue;
 
             RemCompDeferred<RMCSuperSlowdownComponent>(uid);
@@ -265,7 +262,7 @@ public sealed class RMCSlowSystem : EntitySystem
 
         while (rootQuery.MoveNext(out var uid, out var root))
         {
-            if (time < root.ExpiresAt)
+            if (!root.Running || time < root.ExpiresAt)
                 continue;
 
             RemCompDeferred<RMCRootedComponent>(uid);
