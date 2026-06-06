@@ -47,6 +47,9 @@ public sealed partial class EggMorpherComponent : Component
     public TimeSpan OviSpawnCooldown = TimeSpan.FromSeconds(60);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan FortifiedSpawnCooldown = TimeSpan.FromSeconds(30);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan? NextSpawnAt;
 
     [DataField, AutoNetworkedField]

@@ -112,7 +112,7 @@ public sealed class XenoBlitzSystem : EntitySystem
 
             hits++;
 
-            var myDamage = _damage.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, xeno.Comp.Damage), origin: xeno, tool: xeno);
+            var myDamage = _damage.TryChangeDamage(hit, _xeno.ApplyXenoMeleeDamageModifiers(xeno, hit, xeno.Comp.Damage), origin: xeno, tool: xeno);
             if (myDamage?.GetTotal() > FixedPoint2.Zero)
             {
                 var filter = Filter.Pvs(hit, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

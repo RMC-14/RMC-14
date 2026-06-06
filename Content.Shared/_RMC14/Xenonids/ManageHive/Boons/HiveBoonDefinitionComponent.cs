@@ -5,9 +5,15 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(ManageHiveSystem))]
+[Access(typeof(HiveBoonSystem), typeof(ManageHiveSystem))]
 public sealed partial class HiveBoonDefinitionComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public LocId? ActivationAnnouncement;
+
+    [DataField, AutoNetworkedField]
+    public LocId? ExpirationAnnouncement;
+
     [DataField, AutoNetworkedField]
     public int Cost = 1;
 

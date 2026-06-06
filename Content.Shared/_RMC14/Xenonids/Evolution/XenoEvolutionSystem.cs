@@ -1,8 +1,15 @@
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Xenonids.Burrow;
+using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Invisibility;
+using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
+using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -43,6 +50,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly ClimbSystem _climb = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
@@ -56,6 +64,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly HiveBoonSystem _xenoBoon = default!;
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -90,6 +99,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         SubscribeLocalEvent<XenoEvolutionGranterComponent, NewXenoEvolvedEvent>(OnGranterEvolved);
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
+        SubscribeLocalEvent<XenoComponent, XenoTransmuteActionEvent>(OnXenoTransmuteAction);
+        SubscribeLocalEvent<XenoComponent, XenoTransmuteChosenEvent>(OnXenoTransmuteChosen);
 
         Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key,
             subs =>
@@ -135,7 +146,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         args.Handled = true;
         _ui.OpenUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
 
-        var state = new XenoEvolveBuiState(LackingOvipositor());
+        var state = new XenoEvolveBuiState(LackingOvipositor(xeno.Owner));
         _ui.SetUiState(xeno.Owner, XenoEvolutionUIKey.Key, state);
     }
 
@@ -301,11 +312,48 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
 
         var xenos = EntityQueryEnumerator<ActorComponent, XenoEvolutionComponent>();
-        var state = new XenoEvolveBuiState(LackingOvipositor());
         while (xenos.MoveNext(out var uid, out _, out _))
         {
+            var state = new XenoEvolveBuiState(LackingOvipositor(uid));
             _ui.SetUiState(uid, XenoEvolutionUIKey.Key, state);
         }
+    }
+
+    private void OnXenoTransmuteAction(Entity<XenoComponent> xeno, ref XenoTransmuteActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (!CanTransmutePopup(xeno))
+            return;
+
+        var current = Prototype(xeno.Owner)?.ID;
+        var choices = new List<DialogOption>();
+        foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (prototype.ID == current ||
+                !IsBaseTransmuteCaste(prototype) ||
+                !prototype.TryGetComponent(out XenoComponent? xenoComp, _compFactory) ||
+                xenoComp.Tier != xeno.Comp.Tier)
+            {
+                continue;
+            }
+
+            choices.Add(new DialogOption(prototype.Name, new XenoTransmuteChosenEvent(prototype.ID)));
+        }
+
+        choices.Sort((a, b) => string.Compare(a.Text, b.Text, StringComparison.InvariantCultureIgnoreCase));
+        _dialog.OpenOptions(xeno.Owner,
+            Loc.GetString("rmc-xeno-transmute-title"),
+            choices,
+            Loc.GetString("rmc-xeno-transmute-prompt"));
+    }
+
+    private void OnXenoTransmuteChosen(Entity<XenoComponent> xeno, ref XenoTransmuteChosenEvent args)
+    {
+        Transmute(xeno, args.Choice);
     }
 
     private bool ContainedCheckPopup(EntityUid xeno, bool doPopup = true)
@@ -333,6 +381,98 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
+    private bool CanTransmutePopup(Entity<XenoComponent> xeno, bool doPopup = true)
+    {
+        if (xeno.Comp.Tier is <= 0 or > 3)
+        {
+            if (doPopup)
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-transmute-failed-tier"), xeno, xeno, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        if (_mobState.IsDead(xeno.Owner))
+            return false;
+
+        if (!ContainedCheckPopup(xeno.Owner, doPopup))
+            return false;
+
+        if (!DamagedCheckPopup(xeno.Owner, false, doPopup))
+            return false;
+
+        if (TryComp(xeno.Owner, out TransformComponent? xform) &&
+            xform.MapID == MapId.Nullspace)
+        {
+            return false;
+        }
+
+        if (IsInTransmuteBlockingStance(xeno.Owner))
+        {
+            if (doPopup)
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-transmute-failed-stance"), xeno, xeno, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool IsInTransmuteBlockingStance(EntityUid xeno)
+    {
+        return TryComp(xeno, out XenoFortifyComponent? fortify) && fortify.Fortified ||
+               TryComp(xeno, out XenoCrestComponent? crest) && crest.Lowered ||
+               TryComp(xeno, out XenoBurrowComponent? burrow) && (burrow.Active || burrow.Tunneling) ||
+               HasComp<XenoActiveInvisibleComponent>(xeno);
+    }
+
+    public EntityUid? Transmute(Entity<XenoComponent> xeno, EntProtoId to)
+    {
+        if (_net.IsClient ||
+            !CanTransmutePopup(xeno) ||
+            !TryComp(xeno.Owner, out XenoEvolutionComponent? evolution))
+        {
+            return null;
+        }
+
+        if (!_prototypes.TryIndex(to, out var prototype) ||
+            !IsBaseTransmuteCaste(prototype) ||
+            !prototype.TryGetComponent(out XenoComponent? newXenoComp, _compFactory) ||
+            newXenoComp.Tier != xeno.Comp.Tier ||
+            prototype.ID == Prototype(xeno.Owner)?.ID)
+        {
+            return null;
+        }
+
+        var newXeno = TransferXeno(xeno.Owner, to);
+        var ev = new NewXenoEvolvedEvent((xeno.Owner, evolution), newXeno, false);
+        RaiseLocalEvent(newXeno, ref ev, true);
+
+        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} transmuted into {ToPrettyString(newXeno)}");
+
+        Del(xeno.Owner);
+
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-transmute-end"), newXeno, newXeno);
+
+        var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
+
+        return newXeno;
+    }
+
+    private bool IsBaseTransmuteCaste(EntityPrototype prototype)
+    {
+        if (prototype.Abstract ||
+            !prototype.TryGetComponent(out XenoBaseCasteComponent? baseCaste, _compFactory) ||
+            !baseCaste.Enabled ||
+            prototype.HasComponent<XenoStrainComponent>(_compFactory) ||
+            prototype.HasComponent<XenoHiddenComponent>(_compFactory))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno, bool doPopup = true)
     {
         if (!xeno.Comp.EvolvesTo.Contains(newXeno) && !xeno.Comp.EvolvesToWithoutPoints.Contains(newXeno))
@@ -355,7 +495,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         // TODO RMC14 only allow evolving towards Queen if none is alive
-        if (!xeno.Comp.CanEvolveWithoutGranter && !HasLiving<XenoEvolutionGranterComponent>(1))
+        if (!xeno.Comp.CanEvolveWithoutGranter && !HasLivingGranterForEvolution(xeno.Owner))
         {
             if (doPopup)
             {
@@ -539,6 +679,36 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
+    private bool HasLivingInHive<T>(EntityUid hiveMember, int count, Predicate<Entity<T>>? predicate = null) where T : IComponent
+    {
+        if (count <= 0)
+            return true;
+
+        var total = 0;
+        var query = EntityQueryEnumerator<T>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (!_xenoHive.FromSameHive(uid, hiveMember))
+                continue;
+
+            if (_mobStateQuery.TryComp(uid, out var mobState) &&
+                _mobState.IsDead(uid, mobState))
+            {
+                continue;
+            }
+
+            if (predicate != null && !predicate((uid, comp)))
+                continue;
+
+            total++;
+
+            if (total >= count)
+                return true;
+        }
+
+        return false;
+    }
+
     public FixedPoint2 AddPointsCapped(Entity<XenoEvolutionComponent?> evolution, FixedPoint2 points)
     {
         if (!Resolve(evolution, ref evolution.Comp, false))
@@ -567,9 +737,39 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return HasLiving<XenoEvolutionGranterComponent>(1, e => HasComp<XenoAttachedOvipositorComponent>(e));
     }
 
+    public bool HasOvipositor(EntityUid hiveMember)
+    {
+        return HasLivingInHive<XenoEvolutionGranterComponent>(hiveMember,
+            1,
+            e => HasComp<XenoAttachedOvipositorComponent>(e));
+    }
+
     public bool LackingOvipositor()
     {
         return NeedsOvipositor() && !HasOvipositor();
+    }
+
+    public bool LackingOvipositor(EntityUid hiveMember)
+    {
+        return NeedsOvipositor() &&
+               !HasOvipositor(hiveMember) &&
+               !HasEvolutionBypass(hiveMember);
+    }
+
+    private bool HasLivingGranterForEvolution(EntityUid hiveMember)
+    {
+        if (HasEvolutionBypass(hiveMember))
+            return true;
+
+        return NeedsOvipositor()
+            ? HasOvipositor(hiveMember)
+            : HasLivingInHive<XenoEvolutionGranterComponent>(hiveMember, 1);
+    }
+
+    private bool HasEvolutionBypass(EntityUid hiveMember)
+    {
+        return _xenoBoon.TryGetActiveBoon<HiveBoonEvolutionComponent>(hiveMember, out var boon) &&
+               boon.Comp.BypassOvipositor;
     }
 
     private EntityUid TransferXeno(EntityUid xeno, EntProtoId proto)
@@ -692,9 +892,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         var time = _timing.CurTime;
         var roundDuration = _gameTicker.RoundDuration();
         var needsOvipositor = NeedsOvipositor();
-        var hasGranter = needsOvipositor
-            ? HasOvipositor()
-            : HasLiving<XenoEvolutionGranterComponent>(1);
         if (needsOvipositor)
         {
             var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent>();
@@ -706,7 +903,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 granter.GotOvipositorPopup = true;
                 Dirty(uid, granter);
 
-                _popup.PopupEntity("It is time to settle down and let your children grow.",
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-ovipositor-needed"),
                     uid,
                     uid,
                     PopupType.LargeCaution
@@ -753,17 +950,38 @@ public sealed class XenoEvolutionSystem : EntitySystem
             }
             var points = (_earlyEvoBoostBefore > _gameTicker.RoundDuration()) ? comp.EarlyPointsPerSecond : comp.PointsPerSecond;
             var gain = evoOverride ?? points + evoBonus;
+            var hasEvolutionBoon = _xenoBoon.TryGetActiveBoon<HiveBoonEvolutionComponent>(uid, out var evolutionBoon);
+
             if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
-                if (needsOvipositor && comp.RequiresGranter && !hasGranter)
+                var hasGranter = needsOvipositor
+                    ? HasOvipositor(uid)
+                    : HasLivingInHive<XenoEvolutionGranterComponent>(uid, 1);
+
+                var bypassesGranter = hasEvolutionBoon && evolutionBoon.Comp.BypassOvipositor;
+                if (comp.RequiresGranter && !hasGranter && !bypassesGranter)
                     continue;
 
-                SetPoints((uid, comp), comp.Points + gain);
+                var gainToApply = hasEvolutionBoon
+                    ? GetFrozenEvolutionBoonGain((uid, comp), evolutionBoon) * evolutionBoon.Comp.Multiplier
+                    : gain;
+                SetPoints((uid, comp), comp.Points + gainToApply);
             }
             else if (comp.Points > comp.Max)
             {
                 SetPoints((uid, comp), FixedPoint2.Max(comp.Points - gain, comp.Max));
             }
         }
+    }
+
+    private FixedPoint2 GetFrozenEvolutionBoonGain(Entity<XenoEvolutionComponent> xeno, Entity<HiveBoonEvolutionComponent> boon)
+    {
+        var points = boon.Comp.FrozenEarlyEvolutionBoost
+            ? xeno.Comp.EarlyPointsPerSecond
+            : xeno.Comp.PointsPerSecond;
+
+        return boon.Comp.HasFrozenOverride
+            ? boon.Comp.FrozenOverride
+            : points + boon.Comp.FrozenBonus;
     }
 }

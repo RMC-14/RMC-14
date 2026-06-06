@@ -12,6 +12,12 @@ public sealed partial class PlasmaTreeComponent : Component
     public FixedPoint2 PlasmaAmount = 75;
 
     [DataField, AutoNetworkedField]
+    public FixedPoint2 FortifiedPlasmaAmount = 200;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 FortifiedSelfHeal = 25;
+
+    [DataField, AutoNetworkedField]
     public float PlasmaRange = 1.5F;
 
     [DataField, AutoNetworkedField]

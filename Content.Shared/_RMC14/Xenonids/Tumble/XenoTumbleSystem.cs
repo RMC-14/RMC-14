@@ -124,7 +124,7 @@ public sealed class XenoTumbleSystem : EntitySystem
 
         _damageable.TryChangeDamage(
             args.Target,
-            _xeno.TryApplyXenoSlashDamageMultiplier(args.Target, xeno.Comp.Damage),
+            _xeno.ApplyXenoMeleeDamageModifiers(xeno, args.Target, xeno.Comp.Damage),
             origin: xeno,
             tool: xeno,
             armorPiercing: xeno.Comp.ArmorPiercing

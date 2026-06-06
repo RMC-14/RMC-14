@@ -103,6 +103,7 @@
   parent: CMXenoHivelordBase
   id: CMXenoHivelord
   components:
+  - type: XenoBaseCaste
   - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:

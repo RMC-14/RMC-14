@@ -12,6 +12,8 @@
   - type: XenoEvolution
     max: 200
     evolvesTo: [ ]
+  - type: XenoBaseCaste
+    enabled: false
   - type: XenoHidden
   - type: FixedIdentity
     name: rmc-rouny
@@ -29,6 +31,8 @@
   - type: XenoEvolution
     max: 200
     evolvesTo: [ ]
+  - type: XenoBaseCaste
+    enabled: false
   - type: XenoHidden
   - type: FixedIdentity
     name: rmc-wehny

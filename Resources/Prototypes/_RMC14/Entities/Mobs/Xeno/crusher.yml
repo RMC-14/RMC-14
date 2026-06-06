@@ -117,6 +117,7 @@
   parent: CMXenoCrusherBase
   id: RMCXenoCrusher
   components:
+  - type: XenoBaseCaste
   - type: Xeno
     actionIds:
     - ActionXenoRest

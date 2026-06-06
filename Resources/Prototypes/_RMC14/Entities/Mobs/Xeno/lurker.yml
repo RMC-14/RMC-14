@@ -108,6 +108,7 @@
   id: CMXenoLurker
   suffix: Base
   components:
+  - type: XenoBaseCaste
   - type: GuideHelp
     guides:
     - RMCGuideRoleLurker

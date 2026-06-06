@@ -1,9 +1,12 @@
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -26,8 +29,10 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedXenoHealSystem _heal = default!;
+    [Dependency] private readonly HiveBoonSystem _boon = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
@@ -78,6 +83,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         }
 
         recoveryNode.Comp.NextHealAt = _time.CurTime + recoveryNode.Comp.HealCooldown;
+        HealFortifiedStructure(recoveryNode);
 
         if (possibleTargets.Count == 0)
             return;
@@ -106,6 +112,26 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target == null)
             return;
 
-        _heal.Heal(args.Target.Value, recoveryNode.Comp.HealAmount);
+        _heal.Heal(args.Target.Value, GetHealAmount(recoveryNode));
+    }
+
+    private FixedPoint2 GetHealAmount(Entity<RecoveryNodeComponent> recoveryNode)
+    {
+        return _boon.HasActiveBoon<HiveBoonFortificationComponent>(recoveryNode.Owner)
+            ? recoveryNode.Comp.FortifiedHealAmount
+            : recoveryNode.Comp.HealAmount;
+    }
+
+    private void HealFortifiedStructure(Entity<RecoveryNodeComponent> recoveryNode)
+    {
+        if (!_boon.HasActiveBoon<HiveBoonFortificationComponent>(recoveryNode.Owner) ||
+            !TryComp(recoveryNode.Owner, out DamageableComponent? damageable) ||
+            damageable.TotalDamage <= FixedPoint2.Zero)
+        {
+            return;
+        }
+
+        var heal = -_rmcDamageable.DistributeTypesTotal((recoveryNode.Owner, damageable), recoveryNode.Comp.FortifiedSelfHeal);
+        _damageable.TryChangeDamage(recoveryNode.Owner, heal, true, damageable: damageable);
     }
 }

@@ -119,7 +119,7 @@ public sealed class XenoEviscerateSystem : EntitySystem
 
             _rmcPulling.TryStopAllPullsFromAndOn(mob);
 
-            _damageable.TryChangeDamage(mob, _xeno.TryApplyXenoSlashDamageMultiplier(mob, damage), origin: xeno, tool: xeno);
+            _damageable.TryChangeDamage(mob, _xeno.ApplyXenoMeleeDamageModifiers(xeno, mob, damage), origin: xeno, tool: xeno);
 
             var filter = Filter.Pvs(mob, entityManager: EntityManager);
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { mob }, filter);

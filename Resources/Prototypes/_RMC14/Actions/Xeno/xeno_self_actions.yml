@@ -233,6 +233,20 @@
       state: grow_ovipositor
 
 - type: entity
+  id: ActionXenoTransmute
+  parent: ActionXenoBase
+  name: Transmute
+  description: Change into another caste of the same tier.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: evolve
+  - type: InstantAction
+    event: !type:XenoTransmuteActionEvent
+
+- type: entity
   id: ActionXenoTurnInvisible
   parent: ActionXenoBase
   name: Turn Invisible (20) # TODO RMC14 proper plasma costs

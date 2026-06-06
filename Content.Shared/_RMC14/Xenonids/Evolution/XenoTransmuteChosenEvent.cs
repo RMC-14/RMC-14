@@ -1,0 +1,8 @@
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared._RMC14.Xenonids.Evolution;
+
+[ByRefEvent]
+[Serializable, NetSerializable]
+public sealed record XenoTransmuteChosenEvent(EntProtoId Choice);

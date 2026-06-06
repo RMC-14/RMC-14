@@ -11,6 +11,7 @@
   name: Sentinel
   description: A slithery, spitting kind of alien.
   components:
+  - type: XenoBaseCaste
   - type: GuideHelp
     guides:
     - RMCGuideRoleSentinel

@@ -125,6 +125,7 @@
   parent: CMXenoPraetorianBase
   id: CMXenoPraetorian
   components:
+  - type: XenoBaseCaste
   - type: GuideHelp
     guides:
     - RMCGuideRolePraetorian

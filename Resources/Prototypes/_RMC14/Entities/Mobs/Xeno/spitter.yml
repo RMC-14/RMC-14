@@ -11,6 +11,7 @@
   name: Spitter
   description: A gross, oozing alien of some kind.
   components:
+  - type: XenoBaseCaste
   - type: GuideHelp
     guides:
     - RMCGuideRoleSpitter

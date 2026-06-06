@@ -390,7 +390,7 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
 
         }
 
-        var damage = _damageable.TryChangeDamage(targetId, _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage), origin: xeno, tool: xeno);
+        var damage = _damageable.TryChangeDamage(targetId, _xeno.ApplyXenoMeleeDamageModifiers(xeno, targetId, structDamage), origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

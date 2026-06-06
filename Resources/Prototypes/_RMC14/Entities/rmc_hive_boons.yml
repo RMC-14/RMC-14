@@ -13,6 +13,8 @@
   description: Makes all xenonids immune to fire for 5 minutes.
   components:
   - type: HiveBoonDefinition
+    activationAnnouncement: rmc-boon-fire-resistance-activate
+    expirationAnnouncement: rmc-boon-fire-resistance-expire
     duration: 5m
     duplicateId: RMCHiveBoonFireResistance
     event: !type:HiveBoonActivateFireResistanceEvent
@@ -24,10 +26,98 @@
   description: Provides 5 larva instantly to the hive.
   components:
   - type: HiveBoonDefinition
+    activationAnnouncement: rmc-boon-larva-surge-activate
     cost: 5
     reusable: false
     duplicateId: RMCHiveBoonLarvaSurge
     event: !type:HiveBoonActivateLarvaSurgeEvent
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonEvolution
+  name: Boon of Evolution
+  description: Doubles same-hive xenonid evolution point gain for 5 minutes.
+  components:
+  - type: HiveBoonDefinition
+    activationAnnouncement: rmc-boon-evolution-activate
+    expirationAnnouncement: rmc-boon-evolution-expire
+    duration: 5m
+    duplicateId: RMCHiveBoonEvolution
+    event: !type:HiveBoonActivateEvolutionEvent
+      multiplier: 2
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonEvolutionMajor
+  name: Major Boon of Evolution
+  description: Doubles same-hive xenonid evolution point gain for 10 minutes and bypasses the hive's ovipositor and evolution granter requirements.
+  components:
+  - type: HiveBoonDefinition
+    activationAnnouncement: rmc-boon-evolution-major-activate
+    expirationAnnouncement: rmc-boon-evolution-major-expire
+    cost: 2
+    pylons: 2
+    duration: 10m
+    duplicateId: RMCHiveBoonEvolution
+    event: !type:HiveBoonActivateEvolutionEvent
+      multiplier: 2
+      bypassOvipositor: true
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonAdaptability
+  name: Boon of Adaptability
+  description: Grants same-hive xenonids a one-use transmute action into another base caste of the same tier.
+  components:
+  - type: HiveBoonDefinition
+    activationAnnouncement: rmc-boon-adaptability-activate
+    cost: 2
+    pylons: 2
+    duplicateId: RMCHiveBoonAdaptability
+    event: !type:HiveBoonActivateAdaptabilityEvent
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonAggression
+  name: Boon of Aggression
+  description: Adds 5 damage to same-hive xenonid melee attacks and physical abilities for 5 minutes.
+  components:
+  - type: HiveBoonDefinition
+    activationAnnouncement: rmc-boon-aggression-activate
+    expirationAnnouncement: rmc-boon-aggression-expire
+    duration: 5m
+    duplicateId: RMCHiveBoonAggression
+    event: !type:HiveBoonActivateAggressionEvent
+      damage: 5
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonAggressionMajor
+  name: Major Boon of Aggression
+  description: Adds 10 damage to same-hive xenonid melee attacks and physical abilities for 10 minutes.
+  components:
+  - type: HiveBoonDefinition
+    activationAnnouncement: rmc-boon-aggression-major-activate
+    expirationAnnouncement: rmc-boon-aggression-major-expire
+    cost: 2
+    pylons: 2
+    duration: 10m
+    duplicateId: RMCHiveBoonAggression
+    event: !type:HiveBoonActivateAggressionEvent
+      damage: 10
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonFortification
+  name: Boon of Fortification
+  description: Repairs and empowers same-hive resin walls, hive clusters, recovery nodes, plasma trees, and egg morphers for 5 minutes.
+  components:
+  - type: HiveBoonDefinition
+    activationAnnouncement: rmc-boon-fortification-activate
+    expirationAnnouncement: rmc-boon-fortification-expire
+    duration: 5m
+    duplicateId: RMCHiveBoonFortification
+    event: !type:HiveBoonActivateFortificationEvent
 
 - type: entity
   parent: RMCHiveBoonBase
@@ -36,6 +126,7 @@
   description: A huge behemoth of a Xenonid which can tear its way through defences and flesh alike. Requires open space around the hive core to spawn.
   components:
   - type: HiveBoonDefinition
+    activationAnnouncement: rmc-boon-king-activate
     cost: 0
     pylons: 2
     cooldown: 15m

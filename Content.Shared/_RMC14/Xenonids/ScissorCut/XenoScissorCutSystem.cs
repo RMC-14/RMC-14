@@ -127,7 +127,7 @@ public sealed class XenoScissorCutSystem : EntitySystem
             if (hitEnt == null)
                 hitEnt = victim;
 
-            var change = _damage.TryChangeDamage(victim, xeno.Comp.Damage, origin: xeno, tool: xeno);
+            var change = _damage.TryChangeDamage(victim, _xeno.ApplyXenoMeleeDamageModifiers(xeno, victim, xeno.Comp.Damage), origin: xeno, tool: xeno);
 
             if (change?.GetTotal() > FixedPoint2.Zero)
             {

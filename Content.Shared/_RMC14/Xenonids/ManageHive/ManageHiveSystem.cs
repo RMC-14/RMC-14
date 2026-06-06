@@ -244,8 +244,9 @@ public sealed class ManageHiveSystem : EntitySystem
         var choices = new List<DialogOption>();
         foreach (var boon in _hiveBoon.Boons)
         {
+            var boonName = _hiveBoon.GetBoonName(boon.Prototype);
             var text = Loc.GetString("rmc-boon-name-cost",
-                ("boon", boon.Prototype.Name),
+                ("boon", boonName),
                 ("cost", boon.Component.Cost),
                 ("pylons", boon.Component.Pylons)
             );

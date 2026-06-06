@@ -53,7 +53,7 @@ public sealed class XenoRendSystem : EntitySystem
             if (!_interact.InRangeUnobstructed(xeno.Owner, ent.Owner, xeno.Comp.Range))
                 continue;
 
-            var myDamage = _damage.TryChangeDamage(ent, xeno.Comp.Damage, origin: xeno, tool: xeno);
+            var myDamage = _damage.TryChangeDamage(ent, _xeno.ApplyXenoMeleeDamageModifiers(xeno, ent, xeno.Comp.Damage), origin: xeno, tool: xeno);
             if (myDamage?.GetTotal() > FixedPoint2.Zero)
             {
                 var filter = Filter.Pvs(ent, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
