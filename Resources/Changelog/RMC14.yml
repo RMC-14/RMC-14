@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Sorokyne Fire Protection Survivor not spawning with a rare item
-    type: Fix
-  id: 2784
-  time: '2026-01-15T08:41:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8984
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fix MOU53 not coming pre-equipped with flechette shells.
-    type: Fix
-  id: 2785
-  time: '2026-01-15T08:43:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8852
-- author: J C Denton
-  changes:
-  - message: Fixed Basira spawning with wrong mini-scope, as well as not allowing
-      S8 4x scope.
-    type: Fix
-  id: 2786
-  time: '2026-01-15T08:42:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8851
 - author: J C Denton
   changes:
   - message: Added WY Survivors insert on Solaris Ridge.
@@ -4521,5 +4499,46 @@
   id: 3283
   time: '2026-06-06T22:46:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9914
+- author: vixting
+  changes:
+  - message: fix interaction range being high than intended
+    type: Fix
+  id: 3284
+  time: '2026-06-06T22:48:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9600
+- author: SharkSnake98
+  changes:
+  - message: Added more CL Roundstart Map Briefings
+    type: Add
+  id: 3285
+  time: '2026-06-06T22:48:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9041
+- author: MarshesAndMeadows
+  changes:
+  - message: Added the Trapper boiler strain, a further specialized boiler focusing
+      on ambushes and rapidly chewing through marine static defenses.
+    type: Add
+  - message: Added the Deploy Traps ability, a rapid deployment of snaring traps to
+      snare prey, able to even be deployed right under their feet, though easily destroyed
+      by shooting or with a melee attack. Includes SFX for getting snared. Deploy
+      Traps can also be empowered by Insight, and will in turn empower Acid Mine when
+      cast this way.
+    type: Add
+  - message: Added the Acid Mine attack, a remote detonation of acid that has a short
+      delay before dealing damage. Deals increased damage to structures, includes
+      VFX and SFX. Also reduces the cooldown of Deploy Traps when you hit mobs.
+    type: Add
+  - message: Added the Acid Shotgun attack, a close range blast of acid that does
+      high damage, further increased if the victim is snared in a trap.
+    type: Add
+  - message: Added the Insight mechanic; hitting pellets of the Acid Shotgun grants
+      you Insight stacks, potentially empowering your next use of Deploy Traps
+    type: Add
+  - message: Added Adrenaline Surge, after getting hit, you get a speed boost for
+      a short duration.
+    type: Add
+  id: 3286
+  time: '2026-06-06T22:48:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9433
 Name: RMC14
 Order: -1
