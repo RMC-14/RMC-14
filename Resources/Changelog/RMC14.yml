@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Monotheonist
-  changes:
-  - message: Gave skrell even longer and shorter haircuts, as well as optional tails
-      and headdresses.
-    type: Add
-  - message: Gave skrell access to gauze (on the body.)
-    type: Tweak
-  id: 2794
-  time: '2026-01-15T09:03:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8101
 - author: Arykh
   changes:
   - message: Added the portable dialysis machine!
@@ -4537,5 +4527,14 @@
   id: 3293
   time: '2026-06-06T23:23:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9878
+- author: SharkSnake98
+  changes:
+  - message: Added the Corporate Bodyguard role and all their gear.
+    type: Add
+  - message: Added the Weston-Yamada Restricted Area sign for the CL's office.
+    type: Add
+  id: 3294
+  time: '2026-06-06T23:33:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8362
 Name: RMC14
 Order: -1
