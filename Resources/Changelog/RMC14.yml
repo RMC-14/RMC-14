@@ -1,30 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added the breath mask, emergency, double emergency, and extended-capacity
-      oxygen tanks!
-    type: Add
-  - message: Repalced the fire-safety closet's gas mask and fire first-aid kit with
-      a firefighter helmet, firesuit, and a M94 marking flare pack.
-    type: Tweak
-  - message: Emergency closets now have a randomized set of oxygen related items with
-      a very small chance of containing nothing.
-    type: Tweak
-  id: 2778
-  time: '2026-01-15T08:34:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8758
-- author: Dutch-VanDerLinde
-  changes:
-  - message: FORECON survivors now spawn with a tactical prybar in their webbing instead
-      of a normal crowbar.
-    type: Tweak
-  - message: Fixed FORECON survivors not spawning with flashlights on their suit storage.
-    type: Fix
-  - message: Fixed FORECON survivors not counting towards global survivor time.
-    type: Fix
-  id: 2779
-  time: '2026-01-15T08:34:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8811
 - author: Dutch-VanDerLinde
   changes:
   - message: You can now flush reagents from the colony flamer tank with a verb, like
@@ -4518,5 +4492,37 @@
   id: 3277
   time: '2026-06-06T22:38:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9592
+- author: SharkSnake98
+  changes:
+  - message: Added a CLF ERT Ship
+    type: Add
+  - message: Changed all existing ERT Ships apart from the generic ERT Shuttle to
+      have new designs, each fitting the faction
+    type: Tweak
+  - message: Fixed issues with the CMB Ship spawnpoints
+    type: Fix
+  - message: Fixed the CMB shuttle having incorrect door placement
+    type: Fix
+  id: 3278
+  time: '2026-06-06T22:41:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9091
+- author: Thereisabear
+  changes:
+  - message: Queen Eye now leashed to edge of weeds + 3 tiles.
+    type: Add
+  - message: Expand Weed now has a 7 second cooldown when planting a node.
+    type: Add
+  - message: Queen Eye tactical map teleport will now check if there is weeds present.
+    type: Add
+  - message: Queen's _Plant Weed_ now dynamically changes to _Expand Weed_ in Queen
+      eye.
+    type: Add
+  - message: Queen Eye being able to be weed directly on barricades by Arendian.
+    type: Fix
+  - message: Queen Ovi plasma cost being slightly too high.
+    type: Fix
+  id: 3279
+  time: '2026-06-06T22:40:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9258
 Name: RMC14
 Order: -1
