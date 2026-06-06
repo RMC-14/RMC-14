@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 
@@ -425,6 +426,9 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCDamageYourself =
         CVarDef.Create("rmc.damage_yourself", false, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCAkimboMode =
+        CVarDef.Create("rmc.akimbo_mode", (int) GunAkimboMode.FireBoth, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
     public static readonly CVarDef<float> RMCOverwatchMaxProcessTimeMilliseconds =
         CVarDef.Create("rmc.overwatch_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);

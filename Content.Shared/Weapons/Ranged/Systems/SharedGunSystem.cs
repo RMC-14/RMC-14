@@ -23,6 +23,7 @@ using Content.Shared.Effects;
 using Content.Shared.Examine;
 using Content.Shared.Gravity;
 using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -162,16 +163,28 @@ public abstract partial class SharedGunSystem : EntitySystem
         var gunUid = GetEntity(ev.Gun);
 
         if (args.SenderSession.AttachedEntity == null ||
-            !TryComp<GunComponent>(gunUid, out var gun) ||
-            !TryGetGun(args.SenderSession.AttachedEntity.Value, out _, out var userGun))
+            !TryComp<GunComponent>(gunUid, out var gun))
         {
             return;
         }
 
-        if (userGun != gun)
+        var user = args.SenderSession.AttachedEntity.Value;
+        if (!CanStopGun(user, gunUid, gun))
             return;
 
         StopShooting(gunUid, gun);
+    }
+
+    private bool CanStopGun(EntityUid user, EntityUid gunUid, GunComponent gun)
+    {
+        if (TryGetGun(user, out _, out var activeGun) &&
+            activeGun == gun)
+        {
+            return true;
+        }
+
+        return TryComp(user, out HandsComponent? hands) &&
+               _hands.IsHolding((user, hands), gunUid);
     }
 
     public bool CanShoot(GunComponent component)
@@ -227,6 +240,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.ShootCoordinates = null;
         gun.Target = null;
         DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
+    }
+
+    public void StopShooting(Entity<GunComponent> gun)
+    {
+        StopShooting(gun.Owner, gun.Comp);
     }
 
     // RMC14 Needed to check if the attempted shot actually shot any projectiles.
