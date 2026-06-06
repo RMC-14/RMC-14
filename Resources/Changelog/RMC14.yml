@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added the Shiva's Snowball CLF Raid Scenario Nightmare Insert (Not Playable
-      yet)
-    type: Add
-  id: 2768
-  time: '2026-01-13T08:58:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8936
 - author: MoonlightHollow
   changes:
   - message: Replace the headset in the Command Tablet Cabinet
@@ -4525,5 +4517,12 @@
   id: 3267
   time: '2026-06-06T22:10:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9744
+- author: CatAndHats
+  changes:
+  - message: Fixed being able to paradrop/fall into the credits room on Solaris
+    type: Fix
+  id: 3268
+  time: '2026-06-06T22:14:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9996
 Name: RMC14
 Order: -1
