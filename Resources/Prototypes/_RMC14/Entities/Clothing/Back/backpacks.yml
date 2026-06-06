@@ -608,3 +608,19 @@
         - id: CMFireExtinguisherPortable
         - id: CMDefibrillator
         - id: CMHealthAnalyzer
+
+- type: entity
+  parent: RMCSatchelPMC
+  id: RMCBackpackBobda
+  name: back mounted Bobda vending machine
+  description: The loading mechanism for the Bobda Slinger Supremo and a portable Bobda vendor!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Civilians/bobda.rsi
+  - type: Storage
+    grid:
+    - 0,0,29,1 # 30
+    storageOpenSound:
+      path:  /Audio/Machines/machine_vend.ogg
+      params:
+        volume: -7

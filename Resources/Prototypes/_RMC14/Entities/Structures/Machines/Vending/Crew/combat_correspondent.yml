@@ -19,11 +19,16 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewCombatCorrespondent
-      - id: CMSatchel
-        name: Leather Satchel
       - id: RMCCameraBroadcasting
         name: Press Broadcasting Camera
         recommended: true
+    - name: Satchel
+      choices: { CMSatchel: 1 }
+      entries:
+      - id: CMSatchel
+        name: Leather Satchel
+      - id: RMCBackpackRTOBagPhone
+        name: Portable Phone Bag
     #- name: Civilian Equipment TODO - Some way to ensure only the civilian correspondent can buy this
     #  takeAll: CMStandard
     #  entries:

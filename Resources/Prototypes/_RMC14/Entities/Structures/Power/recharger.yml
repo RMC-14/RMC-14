@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseRecharger
+  parent: [ BaseRecharger, RMCConstructibleMachine ]
   id: RMCRecharger
   name: recharger
   components:
@@ -60,6 +60,14 @@
         whitelist:
           components:
             - Stunbaton
+  - type: Construction
+    graph: CMMachineFrame
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: Machine
+    board: RMCRechargerCircuitboard
 
 - type: entity
   parent: RMCRecharger

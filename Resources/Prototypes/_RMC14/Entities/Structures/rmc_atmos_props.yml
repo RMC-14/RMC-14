@@ -156,6 +156,7 @@
             collection: MetalBreak
         - !type:DoActsBehavior
           acts: ["Destruction"]
+  - type: Corrodible
 
 - type: entity
   id: RMCRadiatorRed
