@@ -66,6 +66,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 2100
+    breakDamage:
+      types:
+        Structural: 3000
 
 - type: entity
   parent: CMWallMetal
@@ -81,6 +89,14 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 2100
+    breakDamage:
+      types:
+        Structural: 3000
 
 - type: entity
   parent: RMCWallAlmayerDeco1
@@ -159,6 +175,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 2100
+    breakDamage:
+      types:
+        Structural: 3000
 
 # Reinforced
 - type: entity
@@ -230,6 +254,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCBaseWallReinforced
@@ -245,6 +277,14 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCWallAlmayerReinforcedDeco1
@@ -323,6 +363,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCBaseWallReinforced
@@ -341,6 +389,14 @@
     - windows
     - doors
     base: aiwall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 # Indestructible
 - type: entity
