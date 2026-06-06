@@ -831,7 +831,7 @@
 
 - type: entity
   parent: RMCCrateBase
-  id: RMCFoodCart1
+  id: RMCFoodCart
   name: food cart
   description: A heavy, metal foodcart with wheels.
   components:
@@ -853,8 +853,8 @@
     sprite: _RMC14/Structures/Storage/Crates/foodcart_1.rsi
 
 - type: entity
-  parent: RMCFoodCart1
-  id: RMCFoodCart2
+  parent: RMCFoodCart
+  id: RMCFoodCartalt
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Crates/foodcart_2.rsi
