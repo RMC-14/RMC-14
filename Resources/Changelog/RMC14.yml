@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added the presets system to the ChemMaster! Presets let you save, edit,
-      and apply frequently used pill bottle labels, bottle colors, and pill types/colors.
-    type: Add
-  - message: Added the missing Select/Deselect All button to the ChemMaster!
-    type: Add
-  id: 2783
-  time: '2026-01-15T08:39:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8957
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Sorokyne Fire Protection Survivor not spawning with a rare item
@@ -4524,5 +4514,12 @@
   id: 3282
   time: '2026-06-06T22:42:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8897
+- author: SharkSnake98
+  changes:
+  - message: Added food carts
+    type: Add
+  id: 3283
+  time: '2026-06-06T22:46:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9914
 Name: RMC14
 Order: -1
