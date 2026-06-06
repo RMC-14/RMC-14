@@ -49,6 +49,7 @@
     targetSpread: 1
     bulletSpread: 0
     travelTime: 1
+    fireMissionDelay: 3
     weapon: RMCDropshipAttachmentLaserCannon
     soundEveryShots: 1
     soundCockpit: /Audio/Machines/phasein.ogg
