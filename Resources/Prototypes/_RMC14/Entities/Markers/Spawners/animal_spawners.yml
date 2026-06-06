@@ -1,0 +1,57 @@
+- type: entity
+  id: RMCSpawnerGiantLizard
+  parent: MarkerBase
+  name: giant lizard spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Mobs/Animals/giant_lizard.rsi
+      state: running
+    - state: timed
+  - type: RMCAnimalSpawner
+    prototype: RMCMobGiantLizard
+    initialChance: 0.66
+    maxAlive: 4
+    lateSpawnMin: 35m
+    lateSpawnMax: 50m
+    retryMin: 15m
+    retryMax: 25m
+    witnessRange: 7
+
+- type: entity
+  id: RMCSpawnerBat
+  parent: MarkerBase
+  name: bat spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Mobs/Animals/bat.rsi
+      state: bat
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobBat
+
+- type: entity
+  id: RMCSpawnerBunnyDave
+  parent: MarkerBase
+  name: Dave spawner
+  suffix: RMC
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _RMC14/Mobs/Animals/bunny.rsi
+      state: dave
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobBunnyDave

@@ -286,6 +286,23 @@
     spawn: RMCSpawnerRandomHalyconGuns
 #Todo RMC14: Make it so it does it 3 times
 
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateLargeLisa
+  name: Lisa crate
+  description: A hefty wooden crate. Something inside it is scratching at the wood.
+  suffix: RMC
+  components:
+  - type: RemoveComponents
+    components:
+    - type: SpawnOnTerminate
+      spawn: RMCSpawnerRandomCrateLoot
+  - type: CrateOpenable
+    spawn:
+    - id: RMCPlankWood2
+      amount: 1
+    - id: RMCMobLisa
+
 # Black market
 - type: entity
   parent: RMCCrateLarge

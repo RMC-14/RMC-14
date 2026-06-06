@@ -1,0 +1,294 @@
+- type: entity
+  id: RMCMobGiantLizard
+  parent: RMCSimpleMob
+  name: giant lizard
+  description: A huge territorial reptile with a heavy jaw and patient eyes.
+  suffix: RMC
+  components:
+  - type: RMCGiantLizard
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCGiantLizardVisuals.Body:
+        enum.RMCGiantLizardVisualLayers.Base:
+          Running: { state: running }
+          Sleeping: { state: sleeping }
+          KnockedDown: { state: knocked-down }
+          Dead: { state: dead }
+      enum.RMCGiantLizardVisuals.Wounds:
+        enum.RMCGiantLizardVisualLayers.Wounds:
+          None: { visible: false }
+          Small: { state: wounds-small, visible: true }
+          Big: { state: wounds-big, visible: true }
+          SmallRest: { state: wounds-small-rest, visible: true }
+          BigRest: { state: wounds-big-rest, visible: true }
+          SmallStun: { state: wounds-small-stun, visible: true }
+          BigStun: { state: wounds-big-stun, visible: true }
+      enum.RMCGiantLizardVisuals.Tongue:
+        enum.RMCGiantLizardVisualLayers.Tongue:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Mobs/Animals/giant_lizard.rsi
+    layers:
+    - map: ["enum.RMCGiantLizardVisualLayers.Base"]
+      state: running
+    - map: ["enum.RMCGiantLizardVisualLayers.Wounds"]
+      state: wounds-small
+      visible: false
+    - map: ["enum.RMCGiantLizardVisualLayers.Tongue"]
+      state: tongue
+      visible: false
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.6
+        density: 250
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      350: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 4.5
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: FactionException
+  - type: NPCRetaliation
+    attackMemoryLength: 30
+  - type: HTN
+    rootTask:
+      task: RMCGiantLizardCompound
+    blackboard:
+      VisionRadius: !type:Single
+        16
+      AggroVisionRadius: !type:Single
+        16
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      groups:
+        Brute: 22
+  - type: Speech
+    allowedEmotes: [ "Growl", "Hiss", "RMCGiantLizardFlickTongue" ]
+  - type: Vocal
+    sounds:
+      Unsexed: RMCGiantLizardEmoteSounds
+    screamAction: null
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatLizard
+      amount: 8
+    - id: FoodMeat
+      amount: 4
+  - type: SoundOnDeath
+    sound:
+      path: /Audio/_RMC14/Animals/GiantLizard/giant_lizard_death.ogg
+  - type: Flammable
+  - type: CanBeFirePatted
+  - type: Tag
+    tags:
+    - FootstepSound
+    - Meat
+
+- type: entity
+  id: RMCMobBunny
+  parent: SimpleSpaceMobBase
+  name: bunny
+  description: A little white bunny rabbit. Likes carrots, allegedly.
+  suffix: RMC
+  components:
+  - type: RMCBunny
+  - type: Sprite
+    drawdepth: SmallMobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: bunny
+      sprite: _RMC14/Mobs/Animals/bunny.rsi
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.3
+        density: 5
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Speech
+    speechSounds: Squeak
+    speechVerb: SmallMob
+    allowedEmotes: ['Squeak']
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: bunny
+      Critical:
+        Base: bunny_dead
+      Dead:
+        Base: bunny_dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      20: Dead
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 1
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 1
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+
+- type: entity
+  id: RMCMobBunnyDave
+  parent: RMCMobBunny
+  name: Dave
+  description: Dave. The coolest bunny rabbit in town.
+  suffix: RMC
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: dave
+      sprite: _RMC14/Mobs/Animals/bunny.rsi
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: dave
+      Critical:
+        Base: dave_dead
+      Dead:
+        Base: dave_dead
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male
+  - type: WarpPoint
+    follow: true
+    location: Dave
+
+- type: entity
+  id: RMCMobBat
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
+  name: bat
+  description: A jittery cave bat looking for somewhere dark to hang.
+  suffix: RMC
+  components:
+  - type: RMCBatHanging
+  - type: RMCAnimalPrey
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCBatVisuals.Hanging:
+        enum.DamageStateVisualLayers.Base:
+          True: { state: bat_hanging }
+          False: { state: bat }
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 6
+  - type: Sprite
+    noRot: true
+    overrideDir: South
+    enableOverrideDir: true
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: bat
+      sprite: _RMC14/Mobs/Animals/bat.rsi
+  - type: Speech
+    speechSounds: Squeak
+    speechVerb: SmallMob
+    allowedEmotes: [ "Squeak", "Scream" ]
+  - type: Vocal
+    sounds:
+      Unsexed: RMCBatEmoteSounds
+    screamAction: null
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 10
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: bat
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 1
+  - type: InteractionPopup
+    successChance: 0.2
+    interactSuccessString: petting-success-soft-floofy
+    interactFailureString: petting-failure-bat
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/fox_squeak.ogg
+  - type: Bloodstream
+    bloodMaxVolume: 50
+  - type: ReplacementAccent
+    accent: mouse
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      20: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 120
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+  - type: Tag
+    tags:
+    - VimPilot
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: HTN
+    rootTask:
+      task: IdleCompound

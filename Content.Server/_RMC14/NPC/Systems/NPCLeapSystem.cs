@@ -1,10 +1,10 @@
 using Content.Server._RMC14.NPC.Components;
 using Content.Server.DoAfter;
 using Content.Server.Interaction;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.NPC.Systems;
@@ -79,8 +79,6 @@ public sealed partial class NPCLeapSystem : EntitySystem
                 var worldPos = _transform.GetMoverCoordinates(uid);
                 var targetPos = _transform.GetMoverCoordinates(comp.Target);
 
-                var destinationPos = comp.Destination;
-;
                 if (!worldPos.TryDistance(EntityManager, targetPos, out var range))
                 {
                     comp.Status = LeapStatus.Unspecified;
@@ -95,8 +93,19 @@ public sealed partial class NPCLeapSystem : EntitySystem
                     continue;
                 }
 
-                var targetDir = (targetPos.Position - worldPos.Position).Normalized();
-                var destDir = (destinationPos.Position - worldPos.Position).Normalized();
+                var worldMap = _transform.ToMapCoordinates(worldPos);
+                var targetMap = _transform.ToMapCoordinates(targetPos);
+                var destinationMap = _transform.ToMapCoordinates(comp.Destination, false);
+                if (worldMap.MapId != targetMap.MapId || worldMap.MapId != destinationMap.MapId)
+                {
+                    _doafter.Cancel(comp.CurrentDoAfter.Value);
+                    comp.CurrentDoAfter = null;
+                    comp.Status = LeapStatus.TargetUnreachable;
+                    continue;
+                }
+
+                var targetDir = (targetMap.Position - worldMap.Position).Normalized();
+                var destDir = (destinationMap.Position - worldMap.Position).Normalized();
                 var angle = Angle.ShortestDistance(new Angle(targetDir), new Angle(destDir));
 
                 if (angle > Angle.FromDegrees(comp.MaxAngleDegrees))
@@ -111,17 +120,7 @@ public sealed partial class NPCLeapSystem : EntitySystem
             }
             else
             {
-                if (!TryComp<XenoComponent>(uid, out var xeno))
-                {
-                    comp.Status = LeapStatus.Unspecified;
-                    continue;
-                }
-
-                var actions = xeno.Actions;
-                if (!actions.TryGetValue(comp.ActionId, out var actionId) ||
-                    !HasComp<WorldTargetActionComponent>(actionId) ||
-                    !TryComp(actionId, out ActionComponent? action) ||
-                    !_actions.ValidAction((actionId, action)))
+                if (!TryGetLeapAction(uid, comp.ActionId, out var action))
                 {
                     comp.Status = LeapStatus.Unspecified;
                     continue;
@@ -129,18 +128,24 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
                 var worldPos = _transform.GetMoverCoordinates(uid);
                 var targetPos = _transform.GetMoverCoordinates(comp.Target);
+                var worldMap = _transform.ToMapCoordinates(worldPos);
+                var targetMap = _transform.ToMapCoordinates(targetPos);
+                if (worldMap.MapId != targetMap.MapId)
+                {
+                    comp.Status = LeapStatus.TargetUnreachable;
+                    continue;
+                }
 
-                var addedDis = (targetPos.Position - worldPos.Position).Normalized() * comp.LeapDistance;
-
-                var destination = worldPos.WithPosition(worldPos.Position + addedDis);
+                var addedDis = (targetMap.Position - worldMap.Position).Normalized() * comp.LeapDistance;
+                var destination = _transform.ToCoordinates(worldMap.Offset(addedDis));
 
                 comp.Destination = destination;
 
-                var actionEvent = _actions.GetEvent(actionId);
+                var actionEvent = _actions.GetEvent(action.Owner);
                 if (actionEvent != null)
                 {
                     actionEvent.Performer = uid;
-                    actionEvent.Action = (actionId, action);
+                    actionEvent.Action = action;
 
                     if (actionEvent is WorldTargetActionEvent worldTarget)
                         worldTarget.Target = destination;
@@ -148,7 +153,7 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
                 var doafter = after.NextId;
 
-                _actions.PerformAction(uid, (actionId, action), actionEvent);
+                _actions.PerformAction(uid, action, actionEvent);
 
                 // Means the action was cancelled for some reason
                 if (doafter == after.NextId)
@@ -160,5 +165,28 @@ public sealed partial class NPCLeapSystem : EntitySystem
                 }
             }
         }
+    }
+
+    private bool TryGetLeapAction(
+        EntityUid uid,
+        EntProtoId<WorldTargetActionComponent> actionProto,
+        out Entity<ActionComponent> action)
+    {
+        action = default;
+
+        foreach (var candidate in _actions.GetActions(uid))
+        {
+            if (MetaData(candidate.Owner).EntityPrototype?.ID != actionProto.Id)
+                continue;
+
+            if (!HasComp<WorldTargetActionComponent>(candidate.Owner) ||
+                !_actions.ValidAction(candidate))
+                continue;
+
+            action = candidate;
+            return true;
+        }
+
+        return false;
     }
 }

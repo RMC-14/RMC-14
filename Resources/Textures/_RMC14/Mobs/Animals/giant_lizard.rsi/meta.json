@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/icons/mob/mob_64.dmi",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "running",
+      "directions": 4
+    },
+    {
+      "name": "sleeping",
+      "directions": 4
+    },
+    {
+      "name": "dead",
+      "directions": 4
+    },
+    {
+      "name": "knocked-down",
+      "directions": 4
+    },
+    {
+      "name": "tongue",
+      "directions": 4,
+      "delays": [
+        [
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        [
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        [
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ],
+        [
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ]
+      ]
+    },
+    {
+      "name": "wounds-small",
+      "directions": 4
+    },
+    {
+      "name": "wounds-big",
+      "directions": 4
+    },
+    {
+      "name": "wounds-small-stun",
+      "directions": 4
+    },
+    {
+      "name": "wounds-big-stun",
+      "directions": 4
+    },
+    {
+      "name": "wounds-small-rest",
+      "directions": 4
+    },
+    {
+      "name": "wounds-big-rest",
+      "directions": 4
+    }
+  ]
+}
