@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: "Swapping to a melee weapon now lets you attack immediately if you haven\u2019\
-      t attacked recently."
-    type: Fix
-  id: 2777
-  time: '2026-01-15T08:30:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8807
 - author: Arykh
   changes:
   - message: Added the breath mask, emergency, double emergency, and extended-capacity
@@ -4519,5 +4511,12 @@
   id: 3276
   time: '2026-06-06T22:35:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9677
+- author: Vixting
+  changes:
+  - message: Fix double resin wall stacking
+    type: Fix
+  id: 3277
+  time: '2026-06-06T22:38:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9592
 Name: RMC14
 Order: -1
