@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added the portable dialysis machine!
-    type: Add
-  - message: Added the field doctor crate(replacement gear) to the requisitions catalog!
-    type: Add
-  - message: Removed the experimental meson goggles from the Experimental Tools Vendor.
-    type: Remove
-  - message: Medical crates now cost a little less budget to buy!
-    type: Tweak
-  id: 2795
-  time: '2026-01-15T09:13:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8174
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the MRE being given to marines being the WeYa one instead of the
@@ -4536,5 +4523,14 @@
   id: 3294
   time: '2026-06-06T23:33:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8362
+- author: Vixting
+  changes:
+  - message: Added drones can now evolve to any tier 2 before marines drop (same restrictions)
+    type: Add
+  - message: Fixed queen evo option no longer displays if she is still alive
+    type: Fix
+  id: 3295
+  time: '2026-06-06T23:37:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9998
 Name: RMC14
 Order: -1
