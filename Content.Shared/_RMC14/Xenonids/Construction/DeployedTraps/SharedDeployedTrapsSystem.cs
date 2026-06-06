@@ -30,8 +30,11 @@ public sealed class SharedDeployedTrapsSystem : EntitySystem
     {
         _slow.TryRoot(args.Tripper, trap.Comp.StunDuration, true);
 
-        if(!_net.IsClient)
-            _audio.PlayPredicted(trap.Comp.CatchSound, args.Tripper, trap);
+        if (!trap.Comp.SoundPlayed)
+        {
+            _audio.PlayEntity(trap.Comp.CatchSound, Filter.Local(), args.Tripper, false);
+        }
+        trap.Comp.SoundPlayed = true;
 
         var caught = EnsureComp<XenoCaughtInTrapComponent>(args.Tripper);
         caught.ExpireTime = _timing.CurTime + trap.Comp.StunDuration;
