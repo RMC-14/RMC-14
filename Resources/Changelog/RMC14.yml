@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed names of a few shoreline and sand tiles.
-    type: Fix
-  id: 2789
-  time: '2026-01-15T08:50:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8982
 - author: CatAndHats
   changes:
   - message: Added bomb supply random spawner for mapping
@@ -4540,5 +4533,14 @@
   id: 3288
   time: '2026-06-06T22:57:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9931
+- author: Ian321
+  changes:
+  - message: Rifleman can no longer be squadless.
+    type: Tweak
+  - message: The id console now respects titles granted by pamphlets.
+    type: Fix
+  id: 3289
+  time: '2026-06-06T22:59:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9997
 Name: RMC14
 Order: -1
