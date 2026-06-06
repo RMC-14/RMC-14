@@ -342,8 +342,14 @@
     - rattles his tail
     - rattles its tail
 
+# Average Joe
+- type: emote
+  id: RMCAverageJoeDeathGasp
+  name: chat-emote-name-deathgasp
+  icon: Interface/Emotes/deathgasp.png
+  chatMessages: ["rmc-species-synth-joe-death-emote"]
+  
 # Slime
-
 - type: emote
   id: RMCSlimeBubble
   name: rmc-emote-name-slime-bubble

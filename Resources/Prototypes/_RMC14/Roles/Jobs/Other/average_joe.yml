@@ -1,0 +1,71 @@
+- type: job
+  parent: CMJobBase
+  id: RMCAverageJoe
+  name: rmc-job-name-average-joe
+  description: rmc-job-description-average-joe
+  playTimeTracker: RMCJobSynthetic
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  whitelisted: true
+  supervisors: rmc-job-supervisors-robotic
+  accessGroups:
+  - ShipMasterAccess
+  - Synth
+  roleWeight: 0.1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: joe
+    - type: Loadout
+      prototypes: [ RMCGearAverageJoe ] # Needs to be done this way because JobEntity doesn't support starting gear
+  whitelistParent: RMCJobSynthetic
+  applyTraits: false
+  jobEntity: RMCMobAverageJoe
+  jobPreviewEntity: RMCMobAverageJoeDummy
+  dummyStartingGear: RMCGearAverageJoe
+  hidden: true
+  hasIcon: false
+
+- type: startingGear
+  id: RMCGearAverageJoe # TODO maintenance jacket on suit storage and Joe PDA in sling pouch
+  equipment:
+    ears: CMHeadsetEngineer
+    jumpsuit: RMCJumpsuitAverageJoePouch
+    belt: RMCBeltUtilityJoeFilled
+    back: CMSatchelMarine
+    shoes: RMCShoesLaceup
+    id: RMCIDCardAverageJoe
+    pocket1: RMCPouchSling
+    pocket2: RMCPouchConstruction
+  storage:
+    back:
+    - RMCSprayBottleSpaceCleaner
+    - RMCSprayBottleSpaceCleaner
+    - RMCBucketJanitorial
+    - CMMop
+    pocket2:
+    - CMSheetMetal30
+    - CMSheetGlassReinforced30
+  inhand:
+    - TrashBag
+
+- type: entity
+  parent: CMJumpsuitAverageJoe
+  id: RMCJumpsuitAverageJoePouch
+  suffix: Drop Pouch, Filled
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPouchAverageJoe
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointAverageJoe
+  name: average joe spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCAverageJoe
+  - type: Sprite
+    state: syn_spawn

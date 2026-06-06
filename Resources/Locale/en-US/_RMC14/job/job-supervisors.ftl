@@ -21,6 +21,7 @@ cm-job-supervisors-royal-tl = the Team Leader
 cm-job-supervisors-royal-lieutenant = the Lieutenant
 cm-job-supervisors-royal-captain = the Captain
 cm-job-supervisors-royal-major = the Major
+rmc-job-supervisors-robotic = ARES and HERMES
 cm-job-supervisors-royal-section-leader = the Section Leader
 cm-job-supervisors-royal-troop-sergeant = the Troop Sergeant
 cm-job-supervisors-royal-troop-commander = the Troop Commander
