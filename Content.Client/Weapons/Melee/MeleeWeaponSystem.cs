@@ -4,6 +4,7 @@ using Content.Client._RMC14.Weapons.Melee;
 using Content.Client.Gameplay;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Tackle;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.CombatMode;
 using Content.Shared.Effects;
 using Content.Shared.Hands.Components;
@@ -35,14 +36,13 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-
     private EntityQuery<TransformComponent> _xformQuery;
 
     private const string MeleeLungeKey = "melee-lunge";
 
     // RMC14
     [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
-    [Dependency] private readonly RMCMeleeWeaponSystem _rmcMeleeWeapon = default!;
+    [Dependency] private readonly RMCMeleeWeaponSystem _RMCMelee = default!;
 
     public override void Initialize()
     {
@@ -213,7 +213,16 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         EntityUid? target = null;
 
         if (_stateManager.CurrentState is GameplayStateBase screen)
+        {
             target = screen.GetClickedEntity(mousePos);
+
+            //RMC14
+            if (HasComp<XenoComponent>(attacker) &&
+            _RMCMelee.TryGetAlternativeXenoAttackTarget(attacker, mousePos, screen.GetClickableEntities(mousePos).ToList(), out var altTarget))
+            {
+                target = altTarget;
+            }
+        }
 
         var attackerPos = TransformSystem.GetMapCoordinates(attacker);
         if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > meleeComponent.Range)
@@ -233,10 +242,18 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         EntityUid? target = null;
 
         if (_stateManager.CurrentState is GameplayStateBase screen)
+        {
             target = screen.GetClickedEntity(mousePos);
 
+            //RMC14
+            if (HasComp<XenoComponent>(attacker) &&
+            _RMCMelee.TryGetAlternativeXenoAttackTarget(attacker, mousePos, screen.GetClickableEntities(mousePos).ToList(), out var altTarget))
+            {
+                target = altTarget;
+            }
+        }
         // RMC14
-        if ((attackerPos.Position - mousePos.Position).Length() > _rmcMeleeWeapon.GetUserLightAttackRange(attacker, target, meleeComponent))
+        if ((attackerPos.Position - mousePos.Position).Length() > _RMCMelee.GetUserLightAttackRange(attacker, target, meleeComponent))
             return;
         // RMC14
 
