@@ -738,43 +738,44 @@
 
 - type: entity
   parent: RMCAttachableBase
-  id: RMCAttachmentM16Stock
-  name: M16 bump stock
-  description: Technically illegal in the state of California.
+  id: RMCAttachmentCR16Stock
+  name: CR16 solid stock
+  description: A solid polymer stock for the CR16.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
-    state: m16-stock
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: cr16_solid
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentM16Stock
+    - RMCAttachmentCR16Stock
 
 - type: entity
-  parent: RMCStockAttachmentBase
-  id: RMCAttachmentM16StockCollapsible
-  name: collapsible M16 stock
-  description: Very illegal in the state of California.
+  parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentCR16StockCollapsible
+  name: collapsible CR16 stock
+  description: A collapsible polymer stock for the CR16.
   components:
   - type: Sprite
-    state: m16-folding
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: cr16_collapsible
   - type: AttachableVisuals
     suffix: ""
   - type: AttachableToggleable
     doAfter: 0.5
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
-      state: m16-folding
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: cr16_collapsible
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
-      state: m16-folding-on
-    actionName: Toggle Collapsible M16 Stock
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: cr16_collapsible-on
+    actionName: Toggle Collapsible CR16 Stock
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentM16StockCollapsible
+    - RMCAttachmentCR16StockCollapsible
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -795,21 +796,6 @@
       accuracyAddMult: 0.10
       recoilFlat: -1
       scatterFlat: -4
-
-- type: entity
-  parent: RMCAttachableBase
-  id: RMCAttachmentM16A5Stock
-  name: M16A5 bump stock
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
-    state: m16a5-stock
-  - type: AttachableVisuals
-    suffix: ""
-  - type: Tag
-    tags:
-    - RMCAttachmentStock
-    - RMCAttachmentM16A5Stock
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -1339,13 +1325,10 @@
   id: RMCAttachmentM54CStockCollapsible
 
 - type: Tag
-  id: RMCAttachmentM16Stock
+  id: RMCAttachmentCR16Stock
 
 - type: Tag
-  id: RMCAttachmentM16StockCollapsible
-
-- type: Tag
-  id: RMCAttachmentM16A5Stock
+  id: RMCAttachmentCR16StockCollapsible
 
 - type: Tag
   id: RMCAttachmentM63Stock

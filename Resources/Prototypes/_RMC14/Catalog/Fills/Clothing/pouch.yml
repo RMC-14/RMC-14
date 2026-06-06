@@ -87,12 +87,12 @@
 
 - type: entity
   parent: RMCPouchMagazine
-  id: RMCPouchMagazineFilledM16
-  suffix: Filled, M16
+  id: RMCPouchMagazineFilledCR16
+  suffix: Filled, CR16
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM16
+    - id: RMCMagazineRifleCR16
       amount: 3
 
 - type: entity

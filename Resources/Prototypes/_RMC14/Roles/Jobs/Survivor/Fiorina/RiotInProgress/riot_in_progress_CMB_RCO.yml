@@ -65,12 +65,12 @@
   components:
   - type: EntityPreset
     primaryWeapons:
-    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledCR16, RMCWeaponRifleCR16, ArmorHelmetPMCRiotShield ]
     - [ RMCJumpsuitRiotControlMK45, RMCPouchShotgunFilledBeanbag, RMCWeaponShotgunM890Riot, RMCHeadCapBureau ]
     - [ RMCJumpsuitRiotControlM1984, RMCPouchExplosiveFilledHIRR, RMCWeaponLauncherM85A1, RMCHeadBeanieGray ]
     - [ RMCJumpsuitRiotControlMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, ArmorHelmetPMCRiotShield ]

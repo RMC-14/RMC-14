@@ -1512,3 +1512,16 @@ CMPosterRememberIo: CMRandomPosterAny
 DrinkGlass: RMCDrinkGlass
 FoodDonkpocket: RMCFoodDonkpocket
 FoodBoxDonkpocket: RMCBoxDonkpockets
+
+#2026-05-26
+WeaponRifleM16: RMCWeaponRifleCR16
+RMCWeaponRifleM16A5: RMCWeaponRifleCR16A5
+RMCMagazineRifleM16: RMCMagazineRifleCR16
+CMBeltMarineM16: RMCBeltMarineCR16
+RMCM17BeltFilled: RMCBeltMarineCR16
+RMCPouchMagazineFilledM16: RMCPouchMagazineFilledCR16
+RMCBoxMagazineRifleM16Empty: RMCBoxMagazineRifleCR16Empty
+RMCBoxMagazineRifleM16: RMCBoxMagazineRifleCR16
+RMCAttachmentM16Stock: RMCAttachmentCR16Stock
+RMCAttachmentM16StockCollapsible: RMCAttachmentCR16StockCollapsible
+RMCCartridgeRifleM16: RMCCartridgeRifleCR16

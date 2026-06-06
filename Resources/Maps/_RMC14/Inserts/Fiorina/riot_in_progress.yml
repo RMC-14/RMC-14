@@ -1981,7 +1981,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCMagazineRifleM16
+- proto: RMCMagazineRifleCR16
   entities:
   - uid: 351
     components:
@@ -3625,7 +3625,7 @@ entities:
     - type: Transform
       pos: 9.5,-23.5
       parent: 1
-- proto: WeaponRifleM16
+- proto: RMCWeaponRifleCR16
   entities:
   - uid: 519
     components:

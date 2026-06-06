@@ -3025,7 +3025,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 12.5,1.5
       parent: 1
-- proto: RMCMagazineRifleM16
+- proto: RMCMagazineRifleCR16
   entities:
   - uid: 513
     components:
@@ -3954,7 +3954,7 @@ entities:
     - type: Transform
       pos: 26.5,5.5
       parent: 1
-- proto: WeaponRifleM16
+- proto: RMCWeaponRifleCR16
   entities:
   - uid: 503
     components:

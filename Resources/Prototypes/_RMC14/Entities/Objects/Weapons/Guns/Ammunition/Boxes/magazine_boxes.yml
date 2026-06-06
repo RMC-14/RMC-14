@@ -1069,15 +1069,15 @@
   - type: CMItemSlots
     startingItem: RMCCartridge458SOCOM
 
-# M16
+# CR16
 - type: entity
   parent: RMCBoxMagazineRifleBase
-  id: RMCBoxMagazineRifleM16Empty
-  name: magazine box (M16 x 12)
+  id: RMCBoxMagazineRifleCR16Empty
+  name: magazine box (CR16 x 12)
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleM16Empty
+    node: RMCBoxMagazineRifleCR16Empty
   - type: Sprite
     layers:
     - state: rifle_box
@@ -1102,15 +1102,15 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazineRifleM16
+        - RMCMagazineRifleCR16
 
 - type: entity
-  parent: RMCBoxMagazineRifleM16Empty
-  id: RMCBoxMagazineRifleM16
+  parent: RMCBoxMagazineRifleCR16Empty
+  id: RMCBoxMagazineRifleCR16
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: RMCMagazineRifleM16
+    startingItem: RMCMagazineRifleCR16
     count: 12
 
 # L83A3 REG

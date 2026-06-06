@@ -114,7 +114,7 @@
     - RMCWeaponSMGType19: RMCMagazineSMGType19
     - RMCWeaponRifleABR40: RMCMagazineRifleABR40
     - WeaponSMGMP5: CMMagazineSMGMP5
-    - WeaponRifleM16: RMCMagazineRifleM16
+    - RMCWeaponRifleCR16: RMCMagazineRifleCR16
     - WeaponRifleAR10: RMCMagazineRifleAR10
     - RMCWeaponRifleType71: RMCMagazineRifleType71
     - RMCWeaponSMGFP9000: RMCMagazineSMGFP9000
