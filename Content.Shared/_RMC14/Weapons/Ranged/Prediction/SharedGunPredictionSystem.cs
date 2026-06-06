@@ -38,7 +38,7 @@ public abstract class SharedGunPredictionSystem : EntitySystem
         gun.ShootCoordinates = GetCoordinates(coordinates);
         gun.Target = GetEntity(target);
 #pragma warning restore RA0002
-        if (continuous)
+        if (continuous && !HasComp<GunClickToFireComponent>(ent))
             _gun.ResetShotCounter(ent, gun);
         return _gun.AttemptShoot(user.Value, ent, gun, projectiles, session);
     }
