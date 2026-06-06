@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Client._RMC14.Camera;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.NewPlayer;
 using Robust.Client.GameObjects;
@@ -12,6 +13,7 @@ public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelC
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IConfigurationManager _configManager = default!;
+    [Dependency] private readonly RMCPhotoCameraSystem _photoCamera = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private EntityQuery<SeeNewPlayersComponent> _seeNewPlayersQuery;
@@ -47,7 +49,7 @@ public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelC
         UpdateAppearance((uid, args.Component, args.Sprite));
     }
 
-    private void UpdateAllAppearance()
+    public void UpdateAllAppearance()
     {
         var query = AllEntityQuery<NewPlayerLabelComponent, AppearanceComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out _, out var appearance, out var sprite))
@@ -65,7 +67,8 @@ public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelC
 
         if (!_seeNewPlayersQuery.TryComp(_player.LocalEntity, out var see) ||
             !AppearanceSystem.TryGetData(ent, NewPlayerLayers.Layer, out NewPlayerVisuals visual, ent) ||
-            !_showPlayerIcons)
+            !_showPlayerIcons ||
+            _photoCamera.InPhotoRange(ent))
         {
             _sprite.LayerSetVisible(spriteEntity, layer, false);
             return;

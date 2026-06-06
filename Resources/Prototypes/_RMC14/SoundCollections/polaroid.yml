@@ -1,0 +1,5 @@
+- type: soundCollection
+  id: RMCPolaroid
+  files:
+  - /Audio/_RMC14/Items/polaroid1.ogg
+  - /Audio/_RMC14/Items/polaroid2.ogg

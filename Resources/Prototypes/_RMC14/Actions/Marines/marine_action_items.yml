@@ -184,7 +184,7 @@
   parent: ActionMarineBase
   id: RMCActionToggleLaser
   name: Toggle Laser
-  description: Toggles your laser on or off
+  description: Toggles your laser on or off.
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -223,7 +223,7 @@
   parent: ActionMarineBase
   id: RMCActionDismount
   name: Dismount
-  description: Stop using the weapon
+  description: Stop using the weapon.
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -232,6 +232,36 @@
       state: cancel_view
   - type: InstantAction
     event: !type:DismountActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionCycleCameraZoom
+  name: Cycle Zoom
+  description: Cycles between the available zoom modes.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Objects/Devices/photo_camera.rsi
+      state: icon
+    useDelay: 0.25
+  - type: InstantAction
+    event: !type:CycleCameraZoomActionEvent
+
+- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionToggleCameraAutoCenter
+  name: Toggle Auto Center
+  description: Toggles whether your photo will be focused on the center of the targeted tile.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi #TODO RMC14 find a better icon for this action.
+      state: autofire
+    useDelay: 0.25
+  - type: InstantAction
+    event: !type:ToggleCameraAutoCenter
 
 # CBRN
 - type: entity

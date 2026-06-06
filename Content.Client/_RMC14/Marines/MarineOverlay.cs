@@ -1,5 +1,5 @@
-using System.Linq;
 using System.Numerics;
+using Content.Client._RMC14.Camera;
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stealth;
@@ -33,6 +33,7 @@ public sealed class MarineOverlay : Overlay
     private readonly MarineSystem _marine;
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
+    private readonly RMCPhotoCameraSystem _photoCamera;
 
     private readonly ShaderInstance _shader;
 
@@ -55,6 +56,7 @@ public sealed class MarineOverlay : Overlay
         _marine = _entity.System<MarineSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
+        _photoCamera = _entity.System<RMCPhotoCameraSystem>();
 
         _npcFactionMemberQuery = _entity.GetEntityQuery<NpcFactionMemberComponent>();
         _fireteamLeaderQuery = _entity.GetEntityQuery<FireteamLeaderComponent>();
@@ -104,6 +106,9 @@ public sealed class MarineOverlay : Overlay
                 continue;
 
             if (_invisQuery.HasComp(uid))
+                continue;
+
+            if (_photoCamera.InPhotoRange(uid))
                 continue;
 
             var worldMatrix = Matrix3x2.CreateTranslation(worldPos);

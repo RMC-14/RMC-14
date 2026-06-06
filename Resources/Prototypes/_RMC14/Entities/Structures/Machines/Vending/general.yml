@@ -121,3 +121,7 @@
         amount: 10
       - id: d20Dice
         amount: 10
+      - id: RMCPhotoCamera
+        amount: 5
+      - id: RMCPhotoCameraFilmCartridge
+        amount: 10

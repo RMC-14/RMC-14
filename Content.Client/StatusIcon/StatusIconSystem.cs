@@ -1,3 +1,4 @@
+using Content.Client._RMC14.Camera;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared.CCVar;
 using Content.Shared.Ghost;
@@ -21,6 +22,9 @@ public sealed class StatusIconSystem : SharedStatusIconSystem
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+
+    //RMC14
+    [Dependency] private readonly RMCPhotoCameraSystem _photoCamera = default!;
 
     private bool _globalEnabled;
     private bool _localEnabled;
@@ -60,6 +64,9 @@ public sealed class StatusIconSystem : SharedStatusIconSystem
             return list;
 
         if (meta.EntityLifeStage >= EntityLifeStage.Terminating)
+            return list;
+
+        if (_photoCamera.InPhotoRange(uid) || _playerManager.LocalEntity == null) // RMC14
             return list;
 
         var ev = new GetStatusIconsEvent(list);

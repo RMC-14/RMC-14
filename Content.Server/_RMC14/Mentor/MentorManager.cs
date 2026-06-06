@@ -427,6 +427,17 @@ public sealed class MentorManager : IPostInjectInit
         return _activeMentors;
     }
 
+    public IEnumerable<ICommonSession> GetAllMentors()
+    {
+        var mentors = new HashSet<ICommonSession>();
+        foreach (var mentor in _mentors)
+        {
+            mentors.Add(_player.GetSessionById(mentor.Key));
+        }
+
+        return mentors;
+    }
+
     public void ReMentor(NetUserId user)
     {
         if (!_player.TryGetSessionById(user, out var session) ||

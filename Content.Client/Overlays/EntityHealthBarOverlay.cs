@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._RMC14.Camera;
 using Content.Client.StatusIcon;
 using Content.Client.UserInterface.Systems;
 using Content.Shared._RMC14.CrashLand;
@@ -32,10 +33,10 @@ public sealed class EntityHealthBarOverlay : Overlay
     private readonly StatusIconSystem _statusIconSystem;
     private readonly SpriteSystem _spriteSystem;
     private readonly ProgressColorSystem _progressColor;
+    private readonly RMCPhotoCameraSystem _photoCamera;
 
     private readonly EntityQuery<CrashLandingComponent> _crashLandingQuery;
     private readonly EntityQuery<ParaDroppingComponent> _paraDroppingQuery;
-
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
     public HashSet<string> DamageContainers = new();
@@ -51,6 +52,7 @@ public sealed class EntityHealthBarOverlay : Overlay
         _statusIconSystem = _entManager.System<StatusIconSystem>();
         _spriteSystem = _entManager.System<SpriteSystem>();
         _progressColor = _entManager.System<ProgressColorSystem>();
+        _photoCamera = _entManager.System<RMCPhotoCameraSystem>();
         _crashLandingQuery = _entManager.GetEntityQuery<CrashLandingComponent>();
         _paraDroppingQuery = _entManager.GetEntityQuery<ParaDroppingComponent>();
     }
@@ -74,6 +76,9 @@ public sealed class EntityHealthBarOverlay : Overlay
             out var spriteComponent))
         {
             if (statusIcon != null && !_statusIconSystem.IsVisible((uid, _entManager.GetComponent<MetaDataComponent>(uid)), statusIcon))
+                continue;
+
+            if (_photoCamera.InPhotoRange(uid))
                 continue;
 
             // We want the stealth user to still be able to see his health bar himself

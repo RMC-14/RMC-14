@@ -2,10 +2,13 @@ using System.Linq;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
+using Content.Shared.Localizations;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -309,6 +312,31 @@ public abstract class RMCHandsSystem : EntitySystem
 
         _hands.TryPickupAnyHand(user, pickUpItem.Value);
         return true;
+    }
+
+    public string GetExamineText(EntityUid uid, EntityUid examiner,List<EntityUid>? heldItems = null, HandsComponent? hands = null)
+    {
+        var text = string.Empty;
+        if (!Resolve(uid, ref hands, false))
+            return text;
+
+        var items = heldItems ?? _hands.EnumerateHeld((uid, hands));
+        var heldItemNames = items
+            .Where(entity => !HasComp<VirtualItemComponent>(entity))
+            .Select(item => FormattedMessage.EscapeText(Identity.Name(item, EntityManager)))
+            .Select(itemName => Loc.GetString("comp-hands-examine-wrapper", ("item", itemName)))
+            .ToList();
+
+        if (heldItemNames.Count == 0 && !hands.ExamineShowEmpty)
+            return text;
+
+        var locKey = heldItemNames.Count != 0 ? "comp-hands-examine" : "";
+        var locUser = ("user", Identity.Entity(examiner, EntityManager));
+        var locItems = ("items", ContentLocalizationManager.FormatList(heldItemNames));
+
+        text = Loc.GetString(locKey, locUser, locItems);
+
+        return text;
     }
 
     public virtual void ThrowHeldItem(EntityUid player, EntityCoordinates coordinates, float minDistance = 0.1f) { }

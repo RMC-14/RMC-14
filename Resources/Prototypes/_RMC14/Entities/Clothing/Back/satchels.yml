@@ -593,7 +593,8 @@
   suffix: Bureau Observer, Filled
   components:
   - type: StorageFill
-    contents: # TODO RMC14 film cartridge
+    contents:
+    - id: RMCPhotoCameraFilmCartridge
     - id: RMCBinoculars
     - id: CMPaper
     - id: CMFolderWhite
