@@ -1,21 +1,6 @@
 ﻿Entries:
 - author: J C Denton
   changes:
-  - message: Added WY Survivors insert on Solaris Ridge.
-    type: Add
-  id: 2787
-  time: '2026-01-15T08:44:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8832
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You will no longer roll FORECON Support Technician on Chance's Claim
-      as a survivor if you do not have Doctor Survivor or Engineer Survivor enabled.
-    type: Tweak
-  id: 2788
-  time: '2026-01-15T08:46:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8856
-- author: J C Denton
-  changes:
   - message: Fixed names of a few shoreline and sand tiles.
     type: Fix
   id: 2789
@@ -4540,5 +4525,20 @@
   id: 3286
   time: '2026-06-06T22:48:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9433
+- author: PursuitinAshes
+  changes:
+  - message: Removed OCP-583.
+    type: Remove
+  id: 3287
+  time: '2026-06-06T22:58:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9769
+- author: PursuitinAshes
+  changes:
+  - message: Organs will now cause 75 units of grey matter to appear in your system,
+      best to avoid eating them now.
+    type: Tweak
+  id: 3288
+  time: '2026-06-06T22:57:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9931
 Name: RMC14
 Order: -1
