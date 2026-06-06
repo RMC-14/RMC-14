@@ -32,9 +32,13 @@
       machine_parts: !type:Container
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
-    powerLoad: 0 #15 kW
+    powerLoad: 0
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 1500
+    channel: Equipment
   - type: Charger
-    chargeRate: 1000
+    chargeRate: 10
     chargeLevelSteps: 6
   - type: ItemSlots
     slots:

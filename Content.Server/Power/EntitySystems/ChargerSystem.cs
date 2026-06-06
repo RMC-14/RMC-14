@@ -28,6 +28,7 @@ internal sealed class ChargerSystem : EntitySystem
     {
         SubscribeLocalEvent<ChargerComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ChargerComponent, PowerChangedEvent>(OnPowerChanged);
+        SubscribeLocalEvent<ChargerComponent, AnchorStateChangedEvent>(OnAnchorChanged);
         SubscribeLocalEvent<ChargerComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<ChargerComponent, EntRemovedFromContainerMessage>(OnRemoved);
         SubscribeLocalEvent<ChargerComponent, ContainerIsInsertingAttemptEvent>(OnInsertAttempt);
@@ -98,6 +99,11 @@ internal sealed class ChargerSystem : EntitySystem
     }
 
     private void OnPowerChanged(EntityUid uid, ChargerComponent component, ref PowerChangedEvent args)
+    {
+        UpdateStatus(uid, component);
+    }
+
+    private void OnAnchorChanged(EntityUid uid, ChargerComponent component, ref AnchorStateChangedEvent args)
     {
         UpdateStatus(uid, component);
     }

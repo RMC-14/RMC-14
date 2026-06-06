@@ -320,13 +320,18 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
     private void OnReceiverRemove<T>(Entity<RMCPowerReceiverComponent> ent, ref T args)
     {
-        if (!TryGetPowerArea(ent, out var area) ||
-            TerminatingOrDeleted(area))
+        if (ent.Comp.Area is not { } areaId ||
+            TerminatingOrDeleted(areaId) ||
+            !_areaPowerQuery.TryComp(areaId, out var areaPower))
         {
             return;
         }
 
+        var area = new Entity<RMCAreaPowerComponent>(areaId, areaPower);
         GetAreaReceivers(area, ent.Comp.Channel).Remove(ent);
+        area.Comp.Load[(int) ent.Comp.Channel] -= ent.Comp.LastLoad;
+        ent.Comp.Area = null;
+        Dirty(areaId, areaPower);
     }
 
     private void OnFusionReactorMapInit(Entity<RMCFusionReactorComponent> ent, ref MapInitEvent args)

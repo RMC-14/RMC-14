@@ -52,6 +52,8 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
         SubscribeLocalEvent<RMCPowerReceiverComponent, PowerChangedEvent>(OnReceiverPowerChanged);
         SubscribeLocalEvent<RMCPowerUsageDisplayComponent, ExaminedEvent>(OnUsageDisplayEvent);
+        SubscribeLocalEvent<ActiveChargerComponent, ComponentStartup>(OnActiveChargerStartup);
+        SubscribeLocalEvent<ActiveChargerComponent, ComponentShutdown>(OnActiveChargerShutdown);
 
         Subs.CVar(_config, RMCCVars.RMCPowerUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCPowerLoadMultiplier, v => _powerLoadMultiplier = v, true);
@@ -70,8 +72,30 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
     private void OnReceiverPowerChanged(Entity<RMCPowerReceiverComponent> ent, ref PowerChangedEvent args)
     {
-        ent.Comp.Mode = args.Powered ? RMCPowerMode.Active : RMCPowerMode.Off;
+        if (args.Powered && HasComp<ChargerComponent>(ent))
+            ent.Comp.Mode = RMCPowerMode.Idle;
+        else
+            ent.Comp.Mode = args.Powered ? RMCPowerMode.Active : RMCPowerMode.Off;
+
         ToUpdate.Add(ent);
+    }
+
+    private void OnActiveChargerStartup(EntityUid uid, ActiveChargerComponent comp, ComponentStartup args)
+    {
+        if (!TryComp<RMCPowerReceiverComponent>(uid, out var receiver))
+            return;
+
+        receiver.Mode = RMCPowerMode.Active;
+        ToUpdate.Add(uid);
+    }
+
+    private void OnActiveChargerShutdown(EntityUid uid, ActiveChargerComponent comp, ComponentShutdown args)
+    {
+        if (!TryComp<RMCPowerReceiverComponent>(uid, out var receiver))
+            return;
+
+        receiver.Mode = RMCPowerMode.Idle;
+        ToUpdate.Add(uid);
     }
 
     protected override void OnReceiverMapInit(Entity<RMCPowerReceiverComponent> ent, ref MapInitEvent args)
