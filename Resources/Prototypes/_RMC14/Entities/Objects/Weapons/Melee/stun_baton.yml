@@ -87,6 +87,7 @@
   - type: UseDelay
   - type: DisarmMalus
     malus: 0.225
+  - type: RMCPolicingTool
 
 # TODO RMC14: Actually implement the telescopic baton
 - type: entity

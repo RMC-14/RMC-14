@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.Components;
+using Content.Shared._RMC14.Policing;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Coordinates;
@@ -244,6 +245,10 @@ public sealed partial class CMDistressSignalRuleSystem
         _playTime.PlayerRolesChanged(player);
 
         RaiseLocalEvent(survivorMob, new PlayerSpawnCompleteEvent(survivorMob, player, spawnAsJob, false, true, 0, default, profile), true);
+
+        // Non-hostile survivors can be policed by the marines
+        if (_prototypes.TryIndex(spawnAsJob, out var jobProto) && !jobProto.Hostile)
+            RemCompDeferred<RMCImmuneToInterFactionPolicingComponent>(survivorMob);
 
         spawnedId = playerId;
         return true;

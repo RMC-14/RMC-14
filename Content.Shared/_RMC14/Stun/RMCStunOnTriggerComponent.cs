@@ -1,6 +1,5 @@
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Stun;
 
@@ -12,46 +11,29 @@ public sealed partial class RMCStunOnTriggerComponent : Component
     public float Range = 7;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Stun;
+    public TimeSpan Stun = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
     public TimeSpan Paralyze = TimeSpan.FromSeconds(6);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan Deafen = TimeSpan.FromSeconds(10);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan Flash = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan FlashAdditionalStunTime = TimeSpan.FromSeconds(20);
+    public float FlashSlowTo = 0.8f;
 
     [DataField, AutoNetworkedField]
-    public float Probability = 1;
+    public float EarProtectionMultiplier = 0.85f;
 
     [DataField, AutoNetworkedField]
-    public List<RMCStunOnTriggerFilter>? Filters;
-}
+    public TimeSpan FlashAdditionalStunTime = TimeSpan.FromSeconds(4);
 
-[DataDefinition]
-[Serializable, NetSerializable]
-public sealed partial class RMCStunOnTriggerFilter
-{
-    [DataField]
-    public float? Range;
+    [DataField, AutoNetworkedField]
+    public TimeSpan FlashAdditionalParalyzeTime = TimeSpan.FromSeconds(20);
 
     [DataField]
-    public TimeSpan? Stun;
-
-    [DataField]
-    public TimeSpan? Paralyze;
-
-    [DataField]
-    public TimeSpan? Flash;
-
-    [DataField]
-    public TimeSpan? FlashAdditionalStunTime;
-
-    [DataField]
-    public float? Probability;
-
-    [DataField]
-    public EntityWhitelist Whitelist;
+    public EntityWhitelist? TrainedWhitelist;
 }

@@ -30,3 +30,4 @@
   - type: MeleeRequiresSkill
     skills:
       RMCSkillPolice: 1
+  - type: RMCPolicingTool

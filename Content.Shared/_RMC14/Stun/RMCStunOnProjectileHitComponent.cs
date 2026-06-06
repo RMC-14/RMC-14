@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Stun;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(RMCSizeStunSystem))]
-public sealed partial class RMCStunOnHitComponent : Component
+public sealed partial class RMCStunOnProjectileHitComponent : Component
 {
     [DataField, AutoNetworkedField]
     public MapCoordinates? ShotFrom;

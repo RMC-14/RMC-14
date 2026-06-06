@@ -377,3 +377,4 @@
     hideLayersOnEquip:
     - UndergarmentTop
     - Hair
+  - type: RMCImmuneToInterFactionPolicing

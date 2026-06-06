@@ -142,7 +142,7 @@
         Piercing: 42
   - type: CMArmorPiercing
     amount: 30
-  - type: RMCStunOnHit
+  - type: RMCStunOnProjectileHit
     stuns:
     - whitelist:
         minMobSize: VerySmallXeno

@@ -21,7 +21,7 @@ public sealed class ProjectileStunAdjustSystem : EntitySystem
     {
         foreach (var projectile in args.FiredProjectiles)
         {
-            if (!TryComp(projectile, out RMCStunOnHitComponent? stunComp))
+            if (!TryComp(projectile, out RMCStunOnProjectileHitComponent? stunComp))
                 continue;
 
             var stuns = CollectionsMarshal.AsSpan(stunComp.Stuns);

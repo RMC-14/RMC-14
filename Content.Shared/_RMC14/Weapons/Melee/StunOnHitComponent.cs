@@ -10,6 +10,9 @@ public sealed partial class StunOnHitComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan Duration = TimeSpan.FromSeconds(12);
 
+    [DataField, AutoNetworkedField]
+    public bool UsableInterfaction = false;
+
     [DataField(required: true), AutoNetworkedField]
     public EntityWhitelist Whitelist = new();
 }
