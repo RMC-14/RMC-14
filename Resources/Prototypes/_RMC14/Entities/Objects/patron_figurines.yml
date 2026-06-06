@@ -2918,3 +2918,14 @@
     state: nezuni-arksai
   - type: PatronFigurine
     id: da113641-3154-41f6-9a32-24bb265fc0ac
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSpits-The-Fire
+  name: Spits-The-Fire figurine
+  description: "It's Spits! He lives to set things on fire!\n\nHand this figurine to your squad SL to redeem for a B-gel tank!"
+  components:
+  - type: Sprite
+    state: spits-the-fire
+  - type: PatronFigurine
+    id: 502c8c14-0287-45cc-bc21-a342867dfc4d
