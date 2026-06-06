@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Added bomb supply random spawner for mapping
-    type: Add
-  id: 2790
-  time: '2026-01-15T08:50:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8889
 - author: SharkSnake98
   changes:
   - message: Added the Field Doctor role, intended for surgeries and other medical
@@ -4542,5 +4535,12 @@
   id: 3289
   time: '2026-06-06T22:59:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9997
+- author: J C Denton
+  changes:
+  - message: Fixed a lot of entities working off infinite inner power.
+    type: Fix
+  id: 3290
+  time: '2026-06-06T23:20:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9975
 Name: RMC14
 Order: -1
