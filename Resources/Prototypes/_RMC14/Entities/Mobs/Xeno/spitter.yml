@@ -28,6 +28,10 @@
       0: Alive
       550: Critical
       650: Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoSpitter
     actionIds:
@@ -56,7 +60,7 @@
   - type: XenoEvolution
     max: 500
     evolvesTo:
-    - CMXenoBoiler
+    - RMCXenoBoiler
     - CMXenoPraetorian
   - type: XenoSpit
   - type: XenoChargeSpit

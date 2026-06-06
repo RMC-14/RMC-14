@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 using Content.Client._RMC14.TacticalMap;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Eye;
@@ -7,6 +8,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Utility.Components;
+using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.ParaDrop;
@@ -26,6 +28,7 @@ namespace Content.Client._RMC14.Dropship.Weapon;
 public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 {
     private readonly ContainerSystem _container;
+    private readonly SharedRMCEquipmentDeployerSystem _equipmentDeployer;
     private readonly EyeLerpingSystem _eyeLerping;
     private readonly DropshipSystem _system;
     private readonly DropshipWeaponSystem _weaponSystem;
@@ -44,6 +47,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         _system = EntMan.System<DropshipSystem>();
         _weaponSystem = EntMan.System<DropshipWeaponSystem>();
         _tacticalMapSystem = EntMan.System<TacticalMapSystem>();
+        _equipmentDeployer = EntMan.System<SharedRMCEquipmentDeployerSystem>();
     }
 
     protected override void Open()
@@ -231,10 +235,19 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         var paraDropUnTarget = ButtonAction("clear",
             _ => SendPredictedMessage(new DropShipTerminalWeaponsParaDropTargetSelectMsg(false)));
         var spotlightToggleOn = ButtonAction("enable",
-            _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(true)));
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(first, true)));
         var spotlightToggleOff = ButtonAction("disable",
-            _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(false)));
-
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(first, false)));
+        var equipmentDeploy = ButtonAction("deploy",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentDeployToggleMsg(first, true)));
+        var equipmentRetract = ButtonAction("retract",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentDeployToggleMsg(first, false)));
+        var equipmentAutoDeployOn = ButtonAction("auto-deploy",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(first, true)));
+        var equipmentAutoDeployOff = ButtonAction("auto-deploy",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(first, false)));
+        var launch = ButtonAction("fire",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsLaunchOrdnanceMsg(first)));
 
         screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-weapons-main-screen-text");
         screen.ScreenLabel.VerticalAlignment = VAlignment.Stretch;
@@ -276,6 +289,13 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                     }
 
                     var rounds = _weaponSystem.GetWeaponRounds(weaponEnt.Value);
+                    if (EntMan.TryGetComponent(weaponEnt.Value, out RMCEquipmentDeployerComponent? deployer) &&
+                        deployer.DeployEntity != null &&
+                        _equipmentDeployer.TryGetDeployedAmmo(EntMan.GetEntity(deployer.DeployEntity.Value), out var deployAmmo, out _))
+                    {
+                        rounds = deployAmmo.Value;
+                    }
+
                     text.AppendLine(Loc.GetString("rmc-dropship-weapons-equip-weapon-ammo",
                         ("weapon", weaponEnt),
                         ("rounds", rounds)));
@@ -403,6 +423,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 screen.TopRow.SetData(equip);
                 screen.BottomRow.SetData(exit);
                 screen.RightRow.SetData(one: previous, five: next);
+                screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-medevac-system-screen-text");
                 break;
             }
             case Fulton:
@@ -420,6 +441,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 screen.TopRow.SetData(equip);
                 screen.BottomRow.SetData(exit);
                 screen.RightRow.SetData(one: previous, five: next);
+                screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-fulton-system-screen-text");
                 break;
             }
             case Paradrop:
@@ -454,10 +476,91 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             {
                 screen.TopRow.SetData(equip);
                 screen.BottomRow.SetData(exit);
-                if (!EntMan.TryGetComponent(EntMan.GetEntity(terminal.SelectedSystem), out DropshipSpotlightComponent? spotlight))
+                if (!EntMan.TryGetComponent(EntMan.GetEntity(compScreen.System), out DropshipSpotlightComponent? spotlight))
                     break;
 
                 screen.LeftRow.SetData(!spotlight.Enabled ? spotlightToggleOn : spotlightToggleOff);
+                break;
+            }
+            case EquipmentDeployer:
+            {
+                var equipmentPoint = EntMan.GetEntity(compScreen.System);
+                screen.TopRow.SetData(equip);
+                screen.BottomRow.SetData(exit);
+
+                if (equipmentPoint == null)
+                    break;
+
+                if (!_equipmentDeployer.TryGetContainer(equipmentPoint.Value, out var equipmentContainer))
+                    break;
+
+                EntityUid? deployerEntity = null;
+                if (equipmentContainer.Count > 0)
+                    deployerEntity = equipmentContainer.ContainedEntities[0];
+
+                if (EntMan.TryGetComponent(deployerEntity, out RMCEquipmentDeployerComponent? equipmentDeployer) &&
+                    EntMan.TryGetComponent(deployerEntity, out MetaDataComponent? metaData))
+                {
+                    var ammoText = "";
+                    var healthText = "";
+                    var deployedEntity = EntMan.GetEntity(equipmentDeployer.DeployEntity);
+
+                    if (deployedEntity != null && !EntMan.Deleted(deployedEntity))
+                    {
+                        if (_equipmentDeployer.TryGetDeployedAmmo(deployedEntity.Value, out var ammoCount, out var ammoCapacity))
+                        {
+                            ammoText = Loc.GetString("rmc-dropship-equipment-deployer-ammo", ("ammoCount", ammoCount), ("totalAmmoCount", ammoCapacity)) + "\n";
+                        }
+
+                        var damaged = _equipmentDeployer.TryGetDeployedDamage(deployedEntity.Value, out _);
+
+                        healthText = Loc.GetString("rmc-dropship-equipment-deployer-health",
+                            ("status", damaged
+                                ? Loc.GetString("rmc-dropship-equipment-damaged")
+                                : Loc.GetString("rmc-dropship-equipment-operational"))) + "\n";
+                    }
+                    else
+                    {
+                        healthText = Loc.GetString("rmc-dropship-equipment-deployer-health", ("status", Loc.GetString("rmc-dropship-equipment-destroyed"))) + "\n";
+                    }
+
+                    screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-equipment-deployer-text", ("deployName", metaData.EntityName)) + "\n" +
+                                              healthText +
+                                              ammoText +
+                                              Loc.GetString("rmc-dropship-equipment-deployer-status",
+                                                  ("deployed", equipmentDeployer.IsDeployed
+                                                      ? Loc.GetString("rmc-dropship-equipment-deployed")
+                                                      : Loc.GetString("rmc-dropship-equipment-undeployed"))) + "\n" +
+                                              Loc.GetString("rmc-dropship-equipment-deployer-auto-deploy",
+                                                  ("autoDeploy", equipmentDeployer.AutoDeploy
+                                                      ? Loc.GetString("rmc-dropship-equipment-enabled")
+                                                      : Loc.GetString("rmc-dropship-equipment-disabled")));
+
+                    screen.LeftRow.SetData(one: !equipmentDeployer.IsDeployed ? equipmentDeploy : equipmentRetract,
+                        two: !equipmentDeployer.AutoDeploy ? equipmentAutoDeployOn : equipmentAutoDeployOff);
+                }
+                break;
+            }
+            case Launch:
+            {
+                screen.TopRow.SetData(equip);
+                screen.LeftRow.SetData(launch);
+                screen.BottomRow.SetData(exit);
+
+                var selectedSystem = EntMan.GetEntity(compScreen.System);
+                if (selectedSystem == null)
+                    break;
+
+                var point = _container.TryGetContainingContainer(selectedSystem.Value, out var pointCointainer);
+                if (!EntMan.TryGetComponent(selectedSystem, out RMCOrbitalDeployerComponent? deployer) ||
+                    pointCointainer == null ||
+                    !_container.TryGetContainer(pointCointainer.Owner, deployer.DeployableContainerSlotId, out var deployedContainer))
+                    break;
+
+                var deployedEntity = deployedContainer.ContainedEntities.Count > 0 ? deployedContainer.ContainedEntities[0] : default;
+                screen.ScreenLabel.Text = deployedEntity == default || !EntMan.TryGetComponent(deployedEntity, out RMCOrbitalDeployableComponent? deployable)
+                    ? Loc.GetString("rmc-dropship-launch-bay-screen-text")
+                    : Loc.GetString("rmc-dropship-launch-bay-screen-text-loaded", ("loaded", deployedEntity), ("current", deployable.RemainingDeployCount), ("max", deployable.MaxDeployCount));
                 break;
             }
             default:
@@ -577,6 +680,16 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                     text = "PDS";
                     msg = new DropshipTerminalWeaponsChooseParaDropMsg(first);
                 }
+                else if (EntMan.HasComponent<RMCOrbitalDeployerComponent>(utilityMount))
+                {
+                    text = "LCH";
+                    msg = new DropshipTerminalWeaponsChooseLaunchBayMsg(first, EntMan.GetNetEntity(utilityMount));
+                }
+                else if (EntMan.TryGetComponent(utilityMount, out RMCEquipmentDeployerComponent? deployer))
+                {
+                    text = deployer.DropShipWindowButtonText;
+                    msg = new DropshipTerminalWeaponsChooseEquipmentDeployerMsg(first, EntMan.GetNetEntity(pointId));
+                }
                 else
                 {
                     continue;
@@ -625,13 +738,23 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 
             foreach (var contained in container.ContainedEntities)
             {
-                if (!EntMan.TryGetComponent(contained, out DropshipWeaponComponent? weapon))
+                EntMan.TryGetComponent(contained, out DropshipWeaponComponent? weapon);
+                EntMan.TryGetComponent(contained, out RMCEquipmentDeployerComponent? deployer);
+
+                if (weapon == null && deployer == null)
                     continue;
+
+                var abbreviation = string.Empty;
+
+                if (weapon != null)
+                    abbreviation = weapon.Abbreviation;
+                else if (deployer != null)
+                    abbreviation = deployer.DropShipWindowButtonText;
 
                 var netEnt = EntMan.GetNetEntity(contained);
                 var msg = new DropshipTerminalWeaponsChooseWeaponMsg(first, netEnt);
                 var data = new DropshipWeaponsButtonData(
-                    weapon.Abbreviation,
+                    abbreviation,
                     _ => SendPredictedMessage(msg),
                     netEnt
                 );

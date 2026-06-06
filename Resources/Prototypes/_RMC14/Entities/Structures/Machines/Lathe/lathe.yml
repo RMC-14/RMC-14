@@ -5,8 +5,13 @@
   description: It produces items using metal and glass.
   components:
   - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 100
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Sprite
     sprite: _RMC14/Structures/Machines/autolathe.rsi
     layers:
@@ -38,8 +43,8 @@
     - RMCRecipesLathe
   - type: MaterialStorage
     storage:
-      CMSteel: 800
-      CMGlass: 53
+      CMSteel: 30000
+      CMGlass: 2000
     whitelist:
       components:
       - FloorTile
@@ -50,11 +55,14 @@
       - RMCRackParts
       - RMCTablePartMetalReinforced
       - RodMetal1
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 400
+        damage: 100
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -66,7 +74,6 @@
   - type: WiresPanel
   - type: ActivatableUI
     key: enum.LatheUiKey.Key
-  - type: ActivatableUIRequiresPower
   - type: UserInterface
     interfaces:
       enum.LatheUiKey.Key:
@@ -104,7 +111,7 @@
   - CMCrowbar
   - CMMultitool
   - CMTRayScanner
-  - CMWelderSmall
+  - RMCWelderEmpty
   - CMScrewdriver
   - CMWirecutter
   - CMWrench

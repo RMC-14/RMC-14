@@ -9,6 +9,8 @@
         Asphyxiation: 44
         Slash: 77
         Blunt: 43
+  - type: Rank
+    rank: RMCRankCivilian
 #  - type: Loadout # it seems that cm-ss13 doesnt use this loadout
 #    prototypes: [ RMCGearCorpse ]
 

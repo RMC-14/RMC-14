@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server._RMC14.Marines;
 
-[AdminCommand(AdminFlags.Moderator)]
+[AdminCommand(AdminFlags.Fun)]
 public sealed class MarineAnnounceCommand : IConsoleCommand
 {
     public string Command => "marineannounce";

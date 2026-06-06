@@ -1,9 +1,12 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
-using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.TrainingDummy;
 using Content.Shared._RMC14.Vents;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -32,6 +35,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
@@ -54,11 +58,11 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly EntityManager _entManager = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
@@ -291,14 +295,33 @@ public sealed class XenoDevourSystem : EntitySystem
             !TryComp<MeleeWeaponComponent>(weapon, out var melee))
             return;
 
-        //Do all melee weapon logic with our stuff - note it does not take into account melee multipliers - it just uses the damage from the item directly
-        var weaponDamage = _meleeWeapon.GetDamage(weapon.Value, devoured) * usuable.DamageMult;
+        var totalDamage = new DamageSpecifier(_meleeWeapon.GetDamage(weapon.Value, devoured));
+        if (TryComp<BonusMeleeDamageComponent>(weapon.Value, out var bonusDamageComp))
+        {
+            if (bonusDamageComp.BonusDamage != null)
+                totalDamage += bonusDamageComp.BonusDamage;
+        }
+
+        var weaponTransform = Transform(weapon.Value);
+        var children = weaponTransform.ChildEnumerator;
+        while (children.MoveNext(out var childUid))
+        {
+            if (!TryComp<AttachableWeaponMeleeModsComponent>(childUid, out var modsComp))
+                continue;
+            foreach (var set in modsComp.Modifiers)
+            {
+                if (set.BonusDamage != null)
+                    totalDamage += set.BonusDamage;
+            }
+        }
+
+        totalDamage *= usuable.DamageMult;
 
         //Reset attack cooldown so we don't like, go crazy
         melee.NextAttack = devoured.Comp.NextDevouredAttackTimeAllowed;
         Dirty(weapon.Value, melee);
 
-        var damage = _damage.TryChangeDamage(container.Owner, weaponDamage, true, false, origin: devoured, tool: weapon);
+        var damage = _damage.TryChangeDamage(container.Owner, totalDamage, true, false, origin: devoured, tool: weapon);
 
         _audio.PlayPredicted(melee.HitSound, container.Owner.ToCoordinates(), devoured);
 
@@ -479,6 +502,7 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private bool CanDevour(EntityUid xeno, EntityUid victim, [NotNullWhen(true)] out XenoDevourComponent? devour, bool popup = false)
     {
+        var targetName = Identity.Name(victim, EntityManager, xeno);
         devour = default;
         if (xeno == victim ||
             !TryComp(xeno, out devour) ||
@@ -497,6 +521,14 @@ public sealed class XenoDevourSystem : EntitySystem
             return false;
         }
 
+        if (HasComp<SynthComponent>(victim) || HasComp<RMCTrainingDummyComponent>(victim))
+        {
+            if (popup)
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-fake-host"), victim, xeno);
+
+            return false;
+        }
+
         if (HasComp<XenoComponent>(victim))
         {
             if (popup)
@@ -509,7 +541,7 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             if (popup)
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-roting", ("target", victim)), victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-roting", ("target", targetName)), victim, xeno);
             }
 
             return false;
@@ -530,8 +562,17 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             if (popup)
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-buckled", ("strap", strap), ("target", victim)), victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-buckled", ("strap", strap), ("target", targetName)), victim, xeno);
             }
+        }
+
+        if (!_rmcPulling.IsPulling(xeno, victim))
+        {
+            if (popup)
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-not-grabbed", ("target", targetName)), victim, xeno);
+            }
+            return false;
         }
 
         return true;

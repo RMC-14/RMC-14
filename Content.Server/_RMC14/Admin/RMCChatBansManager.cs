@@ -104,8 +104,11 @@ public sealed class RMCChatBansManager : IPostInjectInit
             if (!ban.Type.HasFlag(type))
                 continue;
 
-            if (ban.ExpiresAt > DateTimeOffset.UtcNow.UtcDateTime)
+            if (ban.ExpiresAt == null ||
+                ban.ExpiresAt > DateTimeOffset.UtcNow.UtcDateTime)
+            {
                 return true;
+            }
         }
 
         return false;

@@ -132,6 +132,15 @@
   - type: Foldable
     folded: true
 
+# Open Body bag
+- type: entity
+  parent: CMBodyBag
+  id: RMCBodyBagOpen
+  suffix: Open
+  components:
+  - type: EntityStorage
+    open: True
+
 # Stasis bag
 - type: entity
   parent: RMCBaseStorageBag
@@ -230,6 +239,7 @@
     whitelist:
       components:
       - Marine
+  - type: RMCHideParasiteInfectionContainerPopup
   - type: EntityStorageVisuals
     stateDoorOpen: reactivetarp_open
 
@@ -273,6 +283,7 @@
     whitelist:
       components:
       - ScoutWhitelist
+  - type: RMCHideParasiteInfectionContainerPopup
   - type: EntityStorageVisuals
     stateDoorOpen: scouttarp_open
 

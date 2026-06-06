@@ -4,6 +4,7 @@
   name: rmc-job-name-survivor-co
   description: rmc-job-description-survivor-co
   playTimeTracker: RMCJobSurvivorCO
+  icon: "RMCJobIconGenericColonistCO"
   startingGear: CMGearCommandingOfficer
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
@@ -11,6 +12,7 @@
   spawnMenuRoleName: Survivor CO (Base)
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
   basePlaytimeTracker: true
+  whitelistParent: CMCommandingOfficer
 
 - type: playTimeTracker
   id: RMCJobSurvivorCO

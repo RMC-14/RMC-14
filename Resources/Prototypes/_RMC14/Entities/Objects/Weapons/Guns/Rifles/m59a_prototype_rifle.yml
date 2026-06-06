@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: M59A prototype rifle
   id: RMCWeaponRifleM59A
@@ -75,7 +75,7 @@
           - CMMagazineRifleM54CMK1AP
           - RMCMagazineRifleM54CIncendiary
           - RMCMagazineRifleM54CMK1Incendiary
-        startingItem: CMMagazineRifleM54CMK1
+        startingItem: CMMagazineRifleM54CMK1AP
   - type: GunDamageModifier
     multiplier: 1.1
   - type: RMCMagneticItem
@@ -128,3 +128,9 @@
       Snow: _RMC14/Objects/Weapons/Guns/Rifles/m59a/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Rifles/m59a/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Rifles/m59a/urban.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM59A
+
+- type: Tag
+  id: RMCWeaponRifleM59A

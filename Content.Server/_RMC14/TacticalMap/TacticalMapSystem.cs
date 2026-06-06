@@ -2,7 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
-using Content.Server._RMC14.Rules;
+using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
 using Content.Shared._RMC14.CCVar;
@@ -15,6 +15,7 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
@@ -22,6 +23,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.UserInterface;
@@ -45,11 +47,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
 
@@ -116,6 +120,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, HiveLeaderStatusChangedEvent>(OnHiveLeaderStatusChanged);
 
         SubscribeLocalEvent<MapBlipIconOverrideComponent, MapInitEvent>(OnMapBlipOverrideMapInit);
+
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
@@ -363,7 +368,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
     {
         var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
-        var state = new TacticalMapBuiState(mapName);
+
+        // Get squad objectives if player is in a squad
+        Dictionary<SquadObjectiveType, string>? squadObjectives = null;
+        if (TryComp<SquadMemberComponent>(ent, out var squadMember) &&
+            _squad.TryGetMemberSquad((ent, squadMember), out var squad))
+        {
+            squadObjectives = _squad.GetSquadObjectives((squad.Owner, squad.Comp));
+        }
+
+        var state = new TacticalMapBuiState(mapName, squadObjectives);
         _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
     }
 
@@ -591,7 +605,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         var tileCoords = new Vector2(position.X, position.Y);
-        var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
+        var targetCoords = new EntityCoordinates(map.Owner, tileCoords * grid.TileSize);
+
+        if (!_weeds.IsOnWeeds((map.Owner, grid), targetCoords))
+        {
+            _popup.PopupCursor(Loc.GetString("rmc-xeno-queen-eye-no-weeds"), user, PopupType.MediumCaution);
+            return;
+        }
+
+        var worldPos = _transform.ToMapCoordinates(targetCoords);
 
         _transform.SetWorldPosition(eye, worldPos.Position);
     }
@@ -872,11 +894,20 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         var lines = EnsureComp<TacticalMapLinesComponent>(user);
         var labels = EnsureComp<TacticalMapLabelsComponent>(user);
+        var playerId = user.Owner.Id;
 
         if (user.Comp.Xenos)
         {
-            user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips;
-            user.Comp.XenoStructureBlips = user.Comp.LiveUpdate ? map.XenoStructureBlips : map.LastUpdateXenoStructureBlips;
+            user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips.ToDictionary();
+            user.Comp.XenoStructureBlips = user.Comp.LiveUpdate ? map.XenoStructureBlips : map.LastUpdateXenoStructureBlips.ToDictionary();
+
+            if (!user.Comp.LiveUpdate)
+            {
+                if (map.XenoBlips.TryGetValue(playerId, out var playerXenoBlip))
+                    user.Comp.XenoBlips[playerId] = playerXenoBlip;
+                else if (map.XenoStructureBlips.TryGetValue(playerId, out var playerXenoStructureBlip)) // Shouldn't happen but just in case
+                    user.Comp.XenoStructureBlips[playerId] = playerXenoStructureBlip;
+            }
 
             var alwaysVisible = EntityQueryEnumerator<TacticalMapAlwaysVisibleComponent>();
             while (alwaysVisible.MoveNext(out var uid, out var comp))
@@ -905,7 +936,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         if (user.Comp.Marines)
         {
-            user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips;
+            user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips.ToDictionary();
+
+            if (!user.Comp.LiveUpdate && map.MarineBlips.TryGetValue(playerId, out var playerMarineBlip))
+                user.Comp.MarineBlips[playerId] = playerMarineBlip;
 
             var alwaysVisible = EntityQueryEnumerator<TacticalMapAlwaysVisibleComponent>();
             while (alwaysVisible.MoveNext(out var uid, out var comp))

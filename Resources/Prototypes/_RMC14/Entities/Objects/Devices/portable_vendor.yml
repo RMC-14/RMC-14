@@ -73,7 +73,7 @@
         points: 5
       - id: CMDrinkCanBeerLite
         points: 5
-      - id: DrinkGlass
+      - id: RMCDrinkGlass
         points: 1
       - id: RMCWestonYamadaCup
         points: 1
@@ -83,8 +83,9 @@
         points: 1
       - id: CMPaper
         points: 1
-      #- id: WeYa paper
-      #  points: 1
+      - id: RMCPaperWeYaLiaison
+        name: We-Ya paper
+        points: 1
       #- id: Carbon paper
       #  points: 1
       - id: CMClipboard

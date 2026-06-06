@@ -15,7 +15,14 @@
         mask:
         - MachineMask
         layer:
-        - BulletImpassable
+        - MachineLayer
+  # - type: ApcPowerReceiver  TODO RMC14 power figure out the unpowered visuals
+  #   powerLoad: 250
+  #   needsPower: true
+  # - type: RMCPowerReceiver
+  #   idleLoad: 0
+  #   activeLoad: 0
+  #   channel: Equipment
   - type: Anchorable
   - type: Pullable
   - type: Destructible

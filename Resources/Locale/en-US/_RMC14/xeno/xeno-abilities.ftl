@@ -44,7 +44,7 @@ cm-xeno-evolution-ready = Our carapace crackles and our tendons strengthen. We a
 cm-xeno-evolution-failed-already-have = There already is a living {$prototype}!
 cm-xeno-evolution-failed-hive-shaken = The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.
 cm-xeno-evolution-failed-cannot-support = The Hive cannot support this caste yet!
-cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more aliens to be born or someone to die.
+cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more sisters to be born or someone to die.
 rmc-xeno-evolution-devolve-title = De-Evolve To
 rmc-xeno-evolution-devolve = You devolve to {$xeno}!
 rmc-xeno-evolution-cant-evolve-damaged = We must be at full health to evolve.
@@ -57,6 +57,27 @@ rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
+
+# Insight
+rmc-xeno-insight-empower = We have gained sufficient insight in our prey to empower our next Deploy Traps!
+
+# Deploy Traps
+rmc-xeno-deploy-traps-self = We create a sudden surge of traps!
+rmc-xeno-deploy-traps-others = The sapper creates a sudden surge of traps!
+rmc-xeno-deploy-traps-empower = We have tapped into our reserves to prepare a stronger Acid Mine!
+rmc-xeno-deploy-traps-range-fail = That target is too far away!
+rmc-xeno-deploy-traps-see-fail = There's something in the way!
+
+
+# Acid Mine
+rmc-xeno-acid-mine-self = We coax a hidden mine to detonate!
+rmc-xeno-acid-mine-others = The sapper coaxes a hidden mine to detonate!
+rmc-xeno-acid-mine-range-fail = That target is too far away!
+rmc-xeno-acid-mine-see-fail = There's something in the way!
+
+# Adrenaline Surge
+rmc-xeno-adrenaline-surge-ready = You feel your adrenaline glands refill! Your speed boost will activate again.
+rmc-xeno-adrenaline-surge-start = Your adrenaline surges to enhance your speed!
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = We can't headbutt while fortifying!
@@ -77,8 +98,19 @@ rmc-xeno-weeds-blocked = We can't do that here.
 
 # Corrosive acid
 cm-xeno-acid-not-corrodible = We cannot dissolve {THE($target)}!
-cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it!
+cm-xeno-acid-already-corroding = {CAPITALIZE(THE($target))} already has corrosive acid on it!
 rmc-xeno-acid-structure-unmeltable = We can only melt barricades and items!
+rmc-xeno-acid-too-weak = {CAPITALIZE(THE($target))} is too tough to be melted by our weak acid.
+rmc-acid-pickup-blocked = {CAPITALIZE(THE($target))} is covered in corrosive acid!
+rmc-acid-hole-already-weakened = It's already been weakened.
+rmc-acid-hole-only-small-xenos = Only sisters small enough can fit through this hole.
+rmc-acid-hole-too-large-non-xeno = You are too large to squeeze through this hole.
+rmc-acid-hole-wrong-side = We need to approach the hole from the entrance side!
+rmc-acid-hole-entrance-blocked = Something is blocking this side of the hole.
+rmc-acid-hole-no-exit = There's no space to crawl through there.
+rmc-acid-hole-blocked = Something is blocking the other side.
+rmc-acid-hole-repair-blocked = The wall is breached and must be patched first.
+rmc-acid-hole-repair-requires-nailgun = You need a nailgun to fix this breach.
 
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
@@ -383,10 +415,12 @@ rmc-xeno-fling-too-big = {CAPITALIZE(THE($target))} is too big for us to fling!
 
 # Gut
 rmc-gut-start-self = We plunge our claws into the body of this unfortunate host, starting to tear them in half!
-rmc-gut-start-others = {$user} plunges their claws into the body of {$target}, starting to tear them in half!
+rmc-gut-start-xenos = {$user} plunges their claws into the body of this unfortunate host, starting to tear them in half!
+rmc-gut-start-marines = The Queen plunges their claws into the body of {$target}, starting to tear them in half!
 
 rmc-gut-finish-self = We tear this pathetic host in half!!
-rmc-gut-finish-others = {$user} tears {$target} in half!!
+rmc-gut-finish-xenos = {$user} tears the pathetic host in half!!
+rmc-gut-finish-marines = The Queen tears {$target} in half!!
 
 # Shed Spikes
 rmc-shed-spikes = We have shed our shards and cannot gain any more for 30 seconds!
@@ -396,3 +430,15 @@ rmc-shed-spikes-back = We can gain shards again!
 rmc-spike-shield-self = We ruffle our bone-shard quills, forming a defensive shell!
 rmc-spike-shield-others = {$user} ruffles its bone-shard quills, forming a defensive shell!
 rmc-spike-shield-hit = {$user} sprays bone quills everywhere!
+
+# Doomed
+rmc-doomed-fail = It's not working...
+
+# Destroy
+rmc-destroy-cant-reach = We don't have a clear path to that location!
+rmc-destroy-cant-area = We can't leap to that area!
+
+rmc-xeno-weeds-no-nearby-node = We require weeds to be closer!
+rmc-xeno-queen-eye-no-weeds = We can't move our eye there, there are no weeds!
+rmc-xeno-queen-eye-expand-weeds-name = Expand Weeds (50)
+rmc-xeno-queen-eye-expand-weeds-desc = Expand existing weeds or turn a weed tile into a node.

@@ -75,6 +75,7 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentExtendedCompensator
       rmc-aslot-rail:
         whitelist:
           tags:
@@ -89,6 +90,7 @@
           tags:
           - RMCAttachmentM54CE2Stock
       rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentBipod
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
@@ -216,6 +218,72 @@
       map: [ "enum.GunVisualLayers.Mag" ]
     - state: ammo_band
       color: "#1F951F"
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: RMCMagazineRifleM54CE2HEAP
+  name: "M54CE2 HEAP magazine (10x24mm)"
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmHEAP
+    proto: RMCCartridgeRifle10x24mmHEAP
+    capacity: 300
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#9C9A19"
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: RMCMagazineRifleM54CE2WP
+  name: "M54CE2 WP magazine (10x24mm)"
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmWP
+    proto: RMCCartridgeRifle10x24mmWP
+    capacity: 300
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#6365E6"
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: RMCMagazineRifleM54CE2Incendiary
+  name: "M54CE2 incendiary magazine (10x24mm)"
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmIncendiary
+    proto: RMCCartridgeRifle10x24mmIncendiary
+    capacity: 300
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#771A10"
 
 - type: Tag
   id: RMCWeaponRifleM54CE2

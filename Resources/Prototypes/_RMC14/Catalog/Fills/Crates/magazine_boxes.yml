@@ -122,6 +122,15 @@
     contents:
     - id: RMCBoxMagazinePistolM1984AP
 
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM1984HP
+  name: Magazine box (M1984, 16x HP mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM1984HP
+
 # M77
 - type: entity
   parent: RMCCrateAmmo
@@ -163,6 +172,7 @@
     - id: RMCMagazineSmartGun
       amount: 2
 
+# Flamer
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateMagazineNapthalUT
@@ -172,6 +182,95 @@
     contents:
     - id: RMCTankFlamer
       amount: 4
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineBGel
+  name: M34 B-Gel fuel (4x)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamerBGel
+      amount: 4
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineFlamerMixed
+  name: M34 Mixed fuel (2x UT-Napthal, 2x B-Gel)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamerBGel
+      amount: 2
+    - id: RMCTankFlamer
+      amount: 2
+
+# Casino crate
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineAmmoSurplus
+  name: Surplus ammo crate (various UNMC magazines x10)
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCCrateMagazineAmmoSurplusLoot
+
+- type: entityTable
+  id: RMCCrateMagazineAmmoSurplusLoot
+  table: !type:AllSelector
+    children:
+    - !type:NestedSelector
+      tableId: RMCCrateMagazineAmmoSurplusTable
+      rolls: !type:ConstantNumberSelector
+        value: 10
+
+- type: entityTable
+  id: RMCCrateMagazineAmmoSurplusTable
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54CExt
+      - id: CMMagazineRifleM54CAP
+      - id: RMCMagazineRifleM54CIncendiary
+      - id: CMMagazineRifleM4SPR
+      - id: RMCMagazineRifleM4SPRIncendiary
+      - id: CMMagazineRifleM54CMK1
+      - id: CMMagazineRifleM54CMK1AP
+      - id: CMMagazineRifleM54CE2
+      - id: CMMagazinePistolM1984
+      - id: CMMagazinePistolM1984
+      - id: CMMagazinePistolM1984
+      # - id: CMMagazinePistolM1984Incendiary TODO RMC14: Incend mag
+      - id: CMMagazineSMGM63
+      - id: CMMagazineSMGM63
+      - id: CMMagazineSMGM63
+      - id: CMMagazineSMGM63Ext
+      - id: CMMagazineSMGM63AP
+      - id: CMMagazineSMGM63AP
+      - id: RMCMagazinePistolM13
+      - id: RMCMagazinePistolM13
+      - id: RMCMagazinePistolM13ExtAP
+      - id: RMCMagazinePistolM13Drum
+      - id: RMCMagazinePistolM13Ext
+      - id: RMCMagazinePistolM13Ext
+      - id: RMCSpeedLoaderM44
+      - id: RMCSpeedLoaderM44
+      - id: RMCSpeedLoaderM44
+      - id: RMCSpeedLoader44Marksman
+      # - id: RMCSpeedLoader44Heavy # TODO RMC14: Heavy m44 speedloader
+      - id: RMCBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
+      - id: RMCBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
+      - id: RMCBoxShotgunIncendiary
+      - id: CMMagazineRifleM4SPRAP
+      - id: CMMagazineRifleM4SPRExt
+      - id: CMMagazineRifleM4SPR
 
 # Smart Pistol
 - type: entity
@@ -236,7 +335,7 @@
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineSentryFire
-  name: UN 42-FM sentry flamer ammunition (x2)
+  name: UN 45-FM sentry flamer ammunition (x2)
   components:
   - type: StorageFill
     contents:
@@ -302,3 +401,23 @@
   - type: StorageFill
     contents:
     - id: RMCBoxMagazinePistolM13Drum
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineML66DDrum
+  name: ML66D drum magazine crate (x1)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineML66D
+      amount: 1
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM2C
+  name: M2C ammunition crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineM2C
+      amount: 2

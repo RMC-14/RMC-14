@@ -1,8 +1,9 @@
-﻿- type: job
+- type: job
   parent: RMCJobRibbonBase
   id: CMCorrespondent
   name: cm-job-name-correspondent
   description: cm-job-description-correspondent
+  newToJobInfo: rmc-new-to-job-cc
   playTimeTracker: CMJobCorrespondent
   requirements:
   - !type:TotalDepartmentsTimeRequirement
@@ -11,7 +12,7 @@
   ranks:
     RMCRankCivilian: []
   startingGear: CMGearCorrespondent
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconCorrespondent"
   joinNotifyCrew: false
   supervisors: rmc-job-supervisors-commander
   accessGroups:
@@ -35,6 +36,9 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: correspondent
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_civillian
   hasIcon: false
 
 - type: startingGear

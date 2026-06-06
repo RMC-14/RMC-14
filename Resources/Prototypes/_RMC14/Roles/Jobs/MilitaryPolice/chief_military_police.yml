@@ -58,7 +58,12 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cmp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
     - type: RMCTrackable
+    - type: RMCAwardRecommendation
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearChiefMP

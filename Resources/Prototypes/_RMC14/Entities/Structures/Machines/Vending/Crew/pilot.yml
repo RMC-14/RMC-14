@@ -18,23 +18,51 @@
     - CMPilotDropship
     - CMPilotGunship
     sections:
+    # Pilots Section
     - name: Standard Equipment
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      takeAll: CMEquipment
+      entries:
+      - id: RMCJumpsuitPilotAlt
+      - id: CMArmorHelmetM30
+      - id: RMCHeadCapPatrol
+      - id: CMMRE
+    # Dropship Crew Chief Section Start
+    - name: Standard Equipment
+      jobs:
+      - CMDropshipCrewChief
       takeAll: CMEquipment
       entries:
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
-      - id: CMSatchel
       - id: CMMRE
+    # Dropship Crew Chief Section End
     - name: Gloves
       choices: { CMHands: 1 }
       entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
+    # Pilots Section
     - name: Armour
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
       choices: { CMArmour: 1 }
       entries:
+      - id: RMCArmorVestFlak
       - id: CMArmorM3VLFlakVest
-      - id: CMArmorM3VLBallistics
+      - id: RMCCoatPilot
+    # Dropship Crew Chief Section Start
+    - name: Armour
+      jobs:
+      - CMDropshipCrewChief
+      choices: { CMArmour: 1 }
+      entries:
+      - id: RMCArmorVestFlak
+      - id: CMArmorM3VLFlakVest
+    # Dropship Crew Chief Section End
     - name: Personal Sidearm
       choices: { CMSidearm: 1 }
       entries:
@@ -79,8 +107,7 @@
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
-          #- id: RMCPouchSling # TODO RMC14 Sling Pouch
-        # This has a comment saying "implement this", going to leave it commented out.
+      - id: RMCPouchSling
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -101,8 +128,17 @@
       entries:
       - id: RMCSunglasses
       - id: RMCGlassesMedicalHUDGlasses
-        recommended: true
+      - id: RMCGlassesAviatorsSilver
       - id: RMCGlassesAviators
+    - name: Flight Visor
+      choices: { CMFlightVisor: 1 }
+      entries:
+      - id: RMCVisorPilotBlack
+      - id: RMCVisorPilotDarkblue
+      - id: RMCVisorPilotLightblue
+      - id: RMCVisorPilotPurple
+      - id: RMCVisorPilotRed
+      - id: RMCVisorPilotYellow
     - name: Masks
       choices: { CMMasks: 1 }
       entries:
@@ -126,6 +162,8 @@
       - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
         points: 10
       - id: RMCAttachmentM13StockSolid
+        points: 10
+      - id: RMCAttachmentM13StockCollapsible
         points: 10
       - id: RMCAttachmentM42A2CollapsibleStock
         points: 10
@@ -228,15 +266,15 @@
         amount: 24
     - name: Sidearms
       entries:
-      - id: RMCWeaponPistolM77
+      - id: RMCWeaponPistolM77Empty
         amount: 4
-      - id: RMCWeaponRevolverM44
+      - id: RMCWeaponRevolverM44Empty
         amount: 4
-      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM1984Empty
         amount: 4
-      - id: RMCWeaponPistolM13
+      - id: RMCWeaponPistolM13Empty
         amount: 4
-      - id: RMCWeaponPistolM82F
+      - id: RMCWeaponPistolM82FEmpty
         amount: 4
     - name: Sidearm Ammunition
       entries:
@@ -253,6 +291,8 @@
       - id: CMMagazinePistolMK80
         amount: 16
       - id: RMCMagazinePistolM13
+        amount: 10
+      - id: RMCMagazinePistolM13Ext
         amount: 10
     - name: Attachments
       entries:

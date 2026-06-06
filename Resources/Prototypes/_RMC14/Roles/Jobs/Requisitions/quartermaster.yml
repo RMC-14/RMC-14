@@ -51,9 +51,14 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: cargo
+        state: ro
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
     - type: RMCTrackable
     - type: MutinyEligible
+    - type: RMCAwardRecommendation
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearQuartermaster

@@ -153,6 +153,32 @@
     max: 4
 
 - type: entity
+  id: XenoAcidShotgunProjectile
+  parent: XenoBaseProjectile
+  name: shotgun spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_strong
+      shader: unshaded
+  - type: XenoAcidShotgun
+    bonusDamage:
+      types:
+        Heat: 7.5
+  - type: Projectile
+    impactEffect: null
+    ignoreResistances: true
+    damage:
+      types:
+        Heat: 9
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: ProjectileMaxRange
+    max: 5
+
+- type: entity
   id: XenoBoneChipsProjectile
   parent: XenoBaseProjectile
   name: bone chips
@@ -246,6 +272,12 @@
       - Marine
   - type: RMCProjectileAccuracy
     accuracy: 95
+  - type: Ammo
+    muzzleFlash: null
+  - type: IgnorePredictionHide
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: DeleteOnTrigger
 
 - type: entity
   id: CMGuidebookXenoBombardAcidProjectile
@@ -299,6 +331,12 @@
         Brute: 5
   - type: RMCProjectileAccuracy
     accuracy: 95
+  - type: Ammo
+    muzzleFlash: null
+  - type: IgnorePredictionHide
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: DeleteOnTrigger
 
 - type: entity
   id: CMGuidebookXenoBombardNeurotoxinProjectile
@@ -446,6 +484,7 @@
   - type: RMCProjectileAccuracy
     accuracy: 185
   - type: XenoHookOnHit
+  - type: RMCTether
   - type: Fixtures
     fixtures:
       projectile:

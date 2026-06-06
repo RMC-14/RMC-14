@@ -13,7 +13,9 @@ using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Robust.Shared.Audio.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared.Coordinates;
 using Content.Shared.Projectiles;
+using Content.Shared._RMC14.Xenonids.Sweep;
 
 namespace Content.Shared._RMC14.Xenonids.Hedgehog;
 
@@ -136,6 +138,7 @@ public sealed class XenoShardSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("rmc-shed-spikes"), ent, ent);
 
         _audio.PlayPredicted(ent.Comp.Sound, ent, ent);
+        EnsureComp<XenoSweepingComponent>(ent);
 
         // Fire projectiles in all directions (40 like CM13 shrapnel_amount)
         _xenoProjectile.TryShoot(
@@ -175,6 +178,7 @@ public sealed class XenoShardSystem : EntitySystem
         var othersMsg = Loc.GetString("rmc-spike-shield-others", ("user", ent));
         _popup.PopupPredicted(selfMsg, othersMsg, ent, ent);
         _aura.GiveAura(ent, Color.Blue, ent.Comp.ShieldDuration, 2);
+        Spawn(ent.Comp.EffectId, ent.Owner.ToCoordinates());
 
         args.Handled = true;
     }

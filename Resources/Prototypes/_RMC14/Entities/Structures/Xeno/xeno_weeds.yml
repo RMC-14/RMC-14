@@ -174,6 +174,30 @@
     tags:
     - XenoWeedNode
 
+- type: entity
+  parent: XenoWeeds
+  id: XenoWeedsSourceHidden
+  suffix: Hidden Node
+  components:
+  - type: Sprite
+    layers:
+    - state: weed0
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: weednode
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: RMCDeleteAnchoredOnInit
+    enabled: true
+    whitelist:
+      tags:
+      - XenoWeedNode
+      - XenoWeedTile
+  - type: QueenEyeVision
+  - type: Tag
+    tags:
+    - XenoWeedNode
+    - XenoWeedTile
+  - type: RMCVisibleToGhostsOnly
+
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
   id: XenoHiveWeeds
@@ -288,8 +312,47 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RMCDeleteAnchoredOnInit
+    enabled: true
+    whitelist:
+      tags:
+      - XenoWeedNode
+      - XenoWeedTile
+  - type: QueenEyeVision
+  - type: XenoWeeds
+    healOnStopSpreading:
+      groups:
+        Brute: -6
   - type: XenoConstructionPlasmaCost
     plasma: 75
+  - type: Tag
+    tags:
+    - XenoWeedNode
+
+- type: entity
+  parent: XenoHiveWeeds
+  id: XenoHiveWeedsSourceHidden
+  suffix: Hidden Node
+  components:
+  - type: Sprite
+    layers:
+    - state: hive_weed0
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: weednode
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: RMCDeleteAnchoredOnInit
+    enabled: true
+    whitelist:
+      tags:
+      - XenoWeedNode
+      - XenoWeedTile
+  - type: QueenEyeVision
+  - type: Tag
+    tags:
+    - XenoWeedNode
+    - XenoWeedTile
+  - type: RMCVisibleToGhostsOnly
+
 
 - type: entity
   id: XenoWeedsWall
@@ -380,6 +443,13 @@
     layers:
     - state: weed0
     - state: constructionnode
+  - type: RMCDeleteAnchoredOnInit
+    enabled: true
+    whitelist:
+      tags:
+      - XenoWeedNode
+      - XenoWeedTile
+  - type: QueenEyeVision
   - type: Destructible
     thresholds:
     - trigger:
@@ -388,6 +458,31 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: XenoWeeds
+    healOnStopSpreading:
+      groups:
+        Brute: -6
+  - type: Tag
+    tags:
+    - XenoWeedNode
+    
+
+- type: entity
+  parent: XenoHardyWeeds
+  id: XenoHardyWeedsSourceHidden
+  suffix: Hidden Node
+  components:
+  - type: Sprite
+    layers:
+    - state: weed0
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: weednode
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: Tag
+    tags:
+    - XenoWeedNode
+    - XenoWeedTile
+  - type: RMCVisibleToGhostsOnly
 
 - type: Tag
   id: XenoWeedTile

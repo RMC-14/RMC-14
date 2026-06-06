@@ -2,7 +2,7 @@
   id: ActionXenoRest
   parent: ActionXenoBase
   name: Rest
-  description: Lie down to regenerate health more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -17,7 +17,7 @@
   parent: CMGuidebookActionXenoBase
   id: RMCGuidebookActionXenoRest
   name: Rest
-  description: Lie down to regenerate health more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -210,7 +210,7 @@
 - type: entity
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
-  name: Grow Ovipositor (700) # TODO RMC14 proper plasma costs
+  name: Grow Ovipositor (500)
   description: Become immobile and start laying eggs which will produce children. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
   components:
   - type: Action

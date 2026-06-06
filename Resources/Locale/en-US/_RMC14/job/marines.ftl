@@ -58,6 +58,9 @@ rmc-job-prefix-weapons-specialist-anti-materiel-sniper = AMR
 rmc-job-name-weapons-specialist-scout = Scout Specialist
 rmc-job-prefix-weapons-specialist-scout = SCT
 
+rmc-job-name-weapons-specialist-pyro = Pyrotechnical Specialist
+rmc-job-prefix-weapons-specialist-pyro = PYRO
+
 rmc-job-name-forecon-spotter = Recon Spotter
 
 rmc-job-name-recruit = Recruit
