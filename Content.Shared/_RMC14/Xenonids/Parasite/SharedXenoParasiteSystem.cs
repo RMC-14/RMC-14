@@ -391,10 +391,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (TryComp(ent, out FixturesComponent? fixtures))
         {
             var fixture = fixtures.Fixtures.First();
-            if ((fixture.Value.CollisionMask & (int) CollisionGroup.AirlockLayer & (int) CollisionGroup.BarricadeImpassable) != 0)
-                return;
-
-            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ (int) ThrownCollisionGroup);
+            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask & ~(int) ThrownCollisionGroup);
         }
     }
 

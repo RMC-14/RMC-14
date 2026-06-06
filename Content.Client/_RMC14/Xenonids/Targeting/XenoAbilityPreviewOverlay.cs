@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Systems.Actions;
@@ -7,8 +8,10 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Smoke;
+using Content.Shared._RMC14.Xenonids.AcidMine;
 using Content.Shared._RMC14.Xenonids.Bombard;
 using Content.Shared._RMC14.Xenonids.Burrow;
+using Content.Shared._RMC14.Xenonids.DeployTraps;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.ResinSurge;
 using Content.Shared._RMC14.Xenonids.Spray;
@@ -49,6 +52,9 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private static readonly Color ResinSurgeOutlineColor = new Color(0.34f, 0.87f, 0.57f);
     private static readonly Color InvalidOutlineColor = new Color(0.95f, 0.24f, 0.24f);
     private static readonly Color BlockerOutlineColor = new Color(0.65f, 0.65f, 0.65f);
+    private static readonly Color AcidMineOutlineColor = new Color(0.6f, 0.9f, 0.2f);
+    private static readonly Color DeployTrapsOutlineColor = new Color(0.8f, 0.6f, 0.2f);
+
     private const float OutlineAlpha = 0.8f;
     private const float OutlineThickness = 0.1f;
     private const int BombardDefaultRadius = 3;
@@ -72,6 +78,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly EntityQuery<XenoSprayAcidComponent> _sprayQ;
     private readonly EntityQuery<XenoBombardComponent> _bombardQ;
     private readonly EntityQuery<XenoBurrowComponent> _burrowQ;
+    private readonly EntityQuery<XenoAcidMineComponent> _acidMineQ;
+    private readonly EntityQuery<XenoDeployTrapsComponent> _deployTrapsQ;
     private readonly EntityQuery<XenoResinSurgeComponent> _resinSurgeQ;
     private readonly EntityQuery<ResinSurgeReinforcableComponent> _reinforcableQ;
     private readonly EntityQuery<XenoFruitComponent> _fruitQ;
@@ -101,6 +109,8 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _sprayQ = ents.GetEntityQuery<XenoSprayAcidComponent>();
         _bombardQ = ents.GetEntityQuery<XenoBombardComponent>();
         _burrowQ = ents.GetEntityQuery<XenoBurrowComponent>();
+        _acidMineQ = ents.GetEntityQuery<XenoAcidMineComponent>();
+        _deployTrapsQ = ents.GetEntityQuery<XenoDeployTrapsComponent>();
         _resinSurgeQ = ents.GetEntityQuery<XenoResinSurgeComponent>();
         _reinforcableQ = ents.GetEntityQuery<ResinSurgeReinforcableComponent>();
         _fruitQ = ents.GetEntityQuery<XenoFruitComponent>();
@@ -183,6 +193,20 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
                 DrawResinSurge(args, originMap, mousePos, resinSurge);
                 break;
+            case XenoAcidMineActionEvent:
+                if (!_acidMineQ.TryComp(player.Value, out var acidMine))
+                    return;
+
+                if (!TryGetTileIndices(mousePos, out var acidMineTile))
+                    return;
+
+                DrawAcidMineSquare(args.WorldHandle, originMap, acidMineTile, acidMine.AcidMineRadius, acidMine.Range);
+                break;
+            case XenoDeployTrapsActionEvent:
+                if (!_deployTrapsQ.TryComp(player.Value, out var deployTraps))
+                    return;
+                DrawDeployTraps(args, originMap, mousePos, deployTraps, DeployTrapsOutlineColor.WithAlpha(OutlineAlpha));
+                break;
 
             case XenoAbductActionEvent:
                 if (!_abductQ.TryComp(player.Value, out var abduct))
@@ -238,6 +262,77 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
         var color = SprayOutlineColor.WithAlpha(OutlineAlpha);
         DrawLinePreview(args, player, xform.Coordinates, mousePos, spray.Range, color);
+    }
+
+    private void DrawSquareAoE(
+        in OverlayDrawArgs args,
+        MapCoordinates mousePos,
+        float radius,
+        Color color)
+    {
+        if (!_mapManager.TryFindGridAt(mousePos, out var gridUid, out var grid))
+            return;
+
+        var center = _mapSystem.CoordinatesToTile(gridUid, grid, mousePos);
+        var tileRadius = (int) MathF.Ceiling(radius);
+        var tiles = new HashSet<Vector2i>();
+        for (var x = -tileRadius; x <= tileRadius; x++)
+        {
+            for (var y = -tileRadius; y <= tileRadius; y++)
+            {
+                tiles.Add(center + new Vector2i(x, y));
+            }
+        }
+
+        DrawTileBorder(args.WorldHandle, gridUid, grid, tiles, color);
+    }
+
+    private void DrawDeployTraps(
+        in OverlayDrawArgs args,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoDeployTrapsComponent deployTraps,
+        Color color)
+    {
+        if (!_mapManager.TryFindGridAt(mousePos, out var gridUid, out var grid))
+            return;
+
+        var centerTile = _mapSystem.CoordinatesToTile(gridUid, grid, mousePos);
+        var snappedPos = _mapSystem.GridTileToWorld(gridUid, grid, centerTile).Position;
+
+        var direction = (snappedPos - originMap.Position);
+        if (direction.LengthSquared() <= 0f)
+            return;
+
+        direction = direction.Normalized();
+        var ortho = new Vector2(-direction.Y, direction.X);
+
+        // Convert the orthogonal world vector to a tile-space step
+        // by seeing which tile neighbour it points most toward
+        var orthoTile = new Vector2i(
+            (int) MathF.Round(ortho.X),
+            (int) MathF.Round(ortho.Y)
+        );
+
+        if (orthoTile == Vector2i.Zero)
+            orthoTile = new Vector2i(1, 0);
+
+        var radius = (int) deployTraps.DeployTrapsRadius;
+        var rangeSquared = deployTraps.Range * deployTraps.Range;
+        var validTiles = new HashSet<Vector2i>();
+        var invalidTiles = new HashSet<Vector2i>();
+        for (var i = -radius; i <= radius; i++)
+        {
+            var tile = centerTile + orthoTile * i;
+            var tileCenter = _mapSystem.GridTileToWorld(gridUid, grid, tile);
+            if ((tileCenter.Position - originMap.Position).LengthSquared() <= rangeSquared)
+                validTiles.Add(tile);
+            else
+                invalidTiles.Add(tile);
+        }
+
+        DrawTileBorder(args.WorldHandle, gridUid, grid, validTiles, color);
+        DrawTileBorder(args.WorldHandle, gridUid, grid, invalidTiles, InvalidOutlineColor.WithAlpha(OutlineAlpha));
     }
 
     private void DrawAbduct(
@@ -537,6 +632,29 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         }
 
         DrawTileBorder(handle, center.GridUid, center.Grid, validTiles, ResinSurgeOutlineColor.WithAlpha(OutlineAlpha));
+        DrawTileBorder(handle, center.GridUid, center.Grid, invalidTiles, InvalidOutlineColor.WithAlpha(OutlineAlpha));
+    }
+
+    private void DrawAcidMineSquare(DrawingHandleWorld handle, MapCoordinates originMap, TileInfo center, int radius, float range)
+    {
+        var validTiles = new HashSet<Vector2i>();
+        var invalidTiles = new HashSet<Vector2i>();
+        var rangeSquared = range * range;
+
+        for (var x = -radius; x <= radius; x++)
+        {
+            for (var y = -radius; y <= radius; y++)
+            {
+                var tile = center.Indices + new Vector2i(x, y);
+                var tileCenter = _mapSystem.GridTileToWorld(center.GridUid, center.Grid, tile);
+                if ((tileCenter.Position - originMap.Position).LengthSquared() <= rangeSquared)
+                    validTiles.Add(tile);
+                else
+                    invalidTiles.Add(tile);
+            }
+        }
+
+        DrawTileBorder(handle, center.GridUid, center.Grid, validTiles, AcidMineOutlineColor.WithAlpha(OutlineAlpha));
         DrawTileBorder(handle, center.GridUid, center.Grid, invalidTiles, InvalidOutlineColor.WithAlpha(OutlineAlpha));
     }
 
