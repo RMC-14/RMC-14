@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added the Field Doctor role, intended for surgeries and other medical
-      procedures in the FOB.
-    type: Add
-  - message: Added the Field Doctor locker, containing an MRE, marine combat boots,
-      M3-VL Ballistic Vest, Field Medic patch, and a Medic's helmet
-    type: Add
-  - message: Added the M10-L field doctor helmet for Field Doctor Usage in the field.
-    type: Add
-  id: 2791
-  time: '2026-01-15T08:51:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7897
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Alien cryo tanks on the colonies will now release the aliens contained
-      inside them.
-    type: Tweak
-  id: 2792
-  time: '2026-01-15T08:55:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8815
-- author: PursuitInAshes
-  changes:
-  - message: The CMB Observer and Liaison icons have been swapped.
-    type: Tweak
-  id: 2793
-  time: '2026-01-15T08:56:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7403
 - author: Monotheonist
   changes:
   - message: Gave skrell even longer and shorter haircuts, as well as optional tails
@@ -4542,5 +4514,28 @@
   id: 3290
   time: '2026-06-06T23:20:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9975
+- author: kleinerstation13
+  changes:
+  - message: Security colonist job preference no longer rolls for Riot in Progress
+      Riot Control Team Lead on Fiorina, that role is now picked randomly
+    type: Tweak
+  id: 3291
+  time: '2026-06-06T23:24:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9940
+- author: kleinerstation13
+  changes:
+  - message: Fixed Type 64, UZI, Type 19, MP27, MAC15 and MP5 being the incorrect
+      size, they are now small in inventories as intended
+    type: Fix
+  id: 3292
+  time: '2026-06-06T23:24:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9990
+- author: kleinerstation13
+  changes:
+  - message: Replaced mention of 'xenomorph' with 'xenonid' in survivor briefings
+    type: Tweak
+  id: 3293
+  time: '2026-06-06T23:23:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9878
 Name: RMC14
 Order: -1
