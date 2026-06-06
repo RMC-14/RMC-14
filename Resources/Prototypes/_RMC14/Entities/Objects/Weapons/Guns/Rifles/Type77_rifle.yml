@@ -150,7 +150,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleType77
-  name: "Type77 magazine (10x24mm)"
+  name: "Type 77 magazine (10x24mm)"
   components:
   - type: Tag
     tags:
@@ -185,7 +185,7 @@
 - type: entity
   parent: RMCMagazineRifleType77
   id: RMCMagazineRifleType77AP
-  name: "Type77 AP magazine (10x24mm)"
+  name: "Type 77 AP magazine (10x24mm)"
   suffix: AP
   components:
   - type: Tag
@@ -212,7 +212,7 @@
 - type: entity
   parent: RMCMagazineRifleType77
   id: RMCMagazineRifleType77Incendiary
-  name: "Type77 Incendiary magazine (10x24mm)"
+  name: "Type 77 Incendiary magazine (10x24mm)"
   suffix: Incendiary
   components:
   - type: Tag
@@ -239,7 +239,7 @@
 - type: entity
   parent: RMCMagazineRifleType77
   id: RMCMagazineRifleType77HEAP
-  name: "Type77 HEAP magazine (10x24mm)"
+  name: "Type 77 HEAP magazine (10x24mm)"
   suffix: HEAP
   components:
   - type: Tag
@@ -266,7 +266,7 @@
 - type: entity
   parent: RMCMagazineRifleType77
   id: RMCMagazineRifleType77Rubber
-  name: "Type77 rubber magazine (10x24mm)"
+  name: "Type 77 rubber magazine (10x24mm)"
   components:
   - type: Tag
     tags:

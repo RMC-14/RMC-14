@@ -877,7 +877,7 @@
   - node: RMCBoxMagazineRifleSSG45APEmpty
     entity: RMCBoxMagazineRifleSSG45APEmpty
 
-  #Type77
+  # Type77
   - node: RMCBoxMagazineRifleType77Empty
     entity: RMCBoxMagazineRifleType77Empty
   - node: RMCBoxMagazineRifleType77APEmpty
