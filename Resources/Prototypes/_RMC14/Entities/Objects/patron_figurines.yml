@@ -2940,3 +2940,14 @@
     state: spits-the-fire
   - type: PatronFigurine
     id: 502c8c14-0287-45cc-bc21-a342867dfc4d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDrejaScrapsKel
+  name: Dreja 'Scraps' Kel figurine
+  description: "Sometimes a point-man, sometimes a QRF, but most of the time support infantry. Stars save our precious Queen, wof!"
+  components:
+  - type: Sprite
+    state: dreja_scraps_kel
+  - type: PatronFigurine
+    id: 0c38014d-646a-494d-90ba-ee7900acaabb
