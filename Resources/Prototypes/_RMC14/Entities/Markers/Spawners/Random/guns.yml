@@ -450,3 +450,196 @@
   components:
   - type: RandomSpawner
     chance: 0 # disposable rocket don't spawn with any
+
+# CMB gun loot spawner
+- type: entity
+  parent: RMCSpawnerRandomGunBase
+  id: RMCSpawnerRandomGunCMB
+  name: cmb gun loot spawner
+  description: spawns a surv cmb gun and some ammo
+  suffix: Guaranteed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_shotgun
+  - type: GunSpawner
+    minMagazines: 1
+    maxMagazines: 5
+    prototypes:
+    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
+    - WeaponSMGMP5: CMMagazineSMGMP5
+    - WeaponSMGMP5: CMMagazineSMGMP5
+    - WeaponSMGMP5: CMMagazineSMGMP5
+    - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
+    - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
+    - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
+    - RMCWeaponShotgunM3717: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponSMGMP5Alt: CMMagazineSMGMP5
+    - RMCWeaponRevolverSpearheadCustom: RMCSpeedLoader357
+
+- type: entity
+  parent: RMCSpawnerRandomGunCMB
+  id: RMCSpawnerRandomGunCMBLow
+  suffix: Low Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_shotgun_20
+  - type: GunSpawner
+    chanceToSpawn: 0.2
+
+- type: entity
+  parent: RMCSpawnerRandomGunCMB
+  id: RMCSpawnerRandomGunCMBMed
+  suffix: Medium Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_shotgun_50
+  - type: GunSpawner
+    chanceToSpawn: 0.5
+
+- type: entity
+  parent: RMCSpawnerRandomGunCMB
+  id: RMCSpawnerRandomGunCMBHigh
+  suffix: High Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_shotgun_80
+  - type: GunSpawner
+    chanceToSpawn: 0.8
+
+# Civilian gun 
+- type: entity
+  parent: RMCSpawnerRandomGunBase
+  id: RMCSpawnerRandomGunCiv
+  name: civilian gun loot spawner
+  description: spawns a surv civ gun and some ammo
+  suffix: Guaranteed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_rifle
+  - type: GunSpawner
+    minMagazines: 1
+    maxMagazines: 5
+    prototypes:
+    - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
+    - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
+    - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
+    - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
+    - RMCWeaponBoltActionRifle: RMCMagazineRifleHunting
+    - WeaponShotgunM357: RMCSpawnerRandomShotgunBoxes
+    - WeaponShotgunM357Sawn: RMCSpawnerRandomShotgunBoxes
+    - WeaponShotgunM357: RMCSpawnerRandomShotgunBoxes
+    - WeaponShotgunM357: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
+    - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
+    - RMCWeaponRifleABR40: RMCMagazineRifleABR40
+
+- type: entity
+  parent: RMCSpawnerRandomGunCiv
+  id: RMCSpawnerRandomGunCivLow
+  suffix: Low Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_rifle_20
+  - type: GunSpawner
+    chanceToSpawn: 0.2
+
+- type: entity
+  parent: RMCSpawnerRandomGunCiv
+  id: RMCSpawnerRandomGunCivMed
+  suffix: Medium Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_rifle_50
+  - type: GunSpawner
+    chanceToSpawn: 0.5
+
+- type: entity
+  parent: RMCSpawnerRandomGunCiv
+  id: RMCSpawnerRandomGunCivHigh
+  suffix: High Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_rifle_80
+  - type: GunSpawner
+    chanceToSpawn: 0.8
+
+# corporate gun 
+- type: entity
+  parent: RMCSpawnerRandomGunBase
+  id: RMCSpawnerRandomGunCorp
+  name: corporate gun loot spawner
+  description: spawns a surv corporate gun and some ammo
+  suffix: Guaranteed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_smg
+  - type: GunSpawner
+    minMagazines: 1
+    maxMagazines: 5
+    prototypes:
+    - RMCWeaponRifleM54CWhiteNoLock: CMMagazineRifleM54C
+    - RMCWeaponRifleM54CWhiteNoLock: CMMagazineRifleM54C
+    - RMCWeaponRifleSSG45NoLockStripped: RMCMagazineRifleSSG45
+    - RMCWeaponRifleSSG45NoLockStripped: RMCMagazineRifleSSG45
+    - RMCWeaponSMGM63WhiteNoLock: CMMagazineSMGM63
+    - RMCWeaponSMGM63WhiteNoLock: CMMagazineSMGM63
+    - RMCWeaponSMGPDW90: RMCMagazineSMGPDW90
+    - RMCWeaponPistolM77: CMMagazinePistolM77AP
+    - RMCWeaponPistolM77: CMMagazinePistolM77AP
+    - RMCMK80: CMMagazinePistolMK80
+
+- type: entity
+  parent: RMCSpawnerRandomGunCorp
+  id: RMCSpawnerRandomGunCorpLow
+  suffix: Low Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_smg_20
+  - type: GunSpawner
+    chanceToSpawn: 0.2
+
+- type: entity
+  parent: RMCSpawnerRandomGunCorp
+  id: RMCSpawnerRandomGunCorpMed
+  suffix: Medium Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_smg_50
+  - type: GunSpawner
+    chanceToSpawn: 0.5
+
+- type: entity
+  parent: RMCSpawnerRandomGunCorp
+  id: RMCSpawnerRandomGunCorpHigh
+  suffix: High Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_smg_80
+  - type: GunSpawner
+    chanceToSpawn: 0.8

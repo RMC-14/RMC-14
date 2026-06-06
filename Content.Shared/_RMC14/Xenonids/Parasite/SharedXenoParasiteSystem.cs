@@ -160,7 +160,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         var range = TryComp<ParasiteAIComponent>(parasite, out var ai) ? ai.MaxInfectRange : parasite.Comp.InfectRange;
 
         if (_transform.InRange(coordinates, args.Leaping.Origin, range))
-            Infect(parasite, args.Hit, false);
+            Infect(parasite, args.Hit, false, true);
     }
 
     private void OnParasiteAfterInteract(Entity<XenoParasiteComponent> ent, ref AfterInteractEvent args)
@@ -391,10 +391,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (TryComp(ent, out FixturesComponent? fixtures))
         {
             var fixture = fixtures.Fixtures.First();
-            if ((fixture.Value.CollisionMask & (int) CollisionGroup.AirlockLayer & (int) CollisionGroup.BarricadeImpassable) != 0)
-                return;
-
-            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ (int) ThrownCollisionGroup);
+            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask & ~(int) ThrownCollisionGroup);
         }
     }
 

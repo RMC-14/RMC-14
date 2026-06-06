@@ -1490,3 +1490,15 @@ CMWebbingSurgicalBlue: RMCWebbingSurgicalBlue
 
 # 2026-03-21
 CMUpgradedTraumaKit: CMUpgradedTraumaKit10
+
+# 2026-05-19
+RMCFogWallWeed30: RMCFogWallWeed
+
+#2026-05-20
+RMCHeadCapFerret: RMCHeadCapGrey
+CMPosterRememberIo: CMRandomPosterAny
+
+#2026-05-22
+DrinkGlass: RMCDrinkGlass
+FoodDonkpocket: RMCFoodDonkpocket
+FoodBoxDonkpocket: RMCBoxDonkpockets

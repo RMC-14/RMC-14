@@ -433,7 +433,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
     }
 
-    private EntProtoId GetQueenAnimationVariant(EntProtoId originalId)
+    private EntProtoId GetResinUpgradeTarget(EntProtoId originalId)
     {
         return originalId.Id switch
         {
@@ -477,7 +477,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (_net.IsClient)
                 return;
 
-            QueueDel(upgradeable);
+            Del(upgradeable);
             var spawn = Spawn(to, snapped);
             _hive.SetSameHive(xeno.Owner, spawn);
             args.Handled = true;
@@ -508,7 +508,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        var animationChoice = hasBoost ? GetQueenAnimationVariant(choice) : choice;
+        var animationChoice = hasBoost ? GetResinUpgradeTarget(choice) : choice;
         var effectId = XenoStructuresAnimation + animationChoice;
         var coordinates = GetNetCoordinates(args.Target);
         var entityCoords = GetCoordinates(coordinates);
