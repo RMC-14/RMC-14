@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added the Rocinante CLF Nightmare Insert (Not Playable)
-    type: Add
-  - message: Added a CLF Soldier corpse spawner
-    type: Add
-  id: 2774
-  time: '2026-01-13T23:41:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8934
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added sounds and effects for being hit by a stun baton
-    type: Tweak
-  id: 2775
-  time: '2026-01-13T23:46:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8882
 - author: Arykh
   changes:
   - message: Added missing animations as well as the cannon tray to the Orbital Bombardment
@@ -4511,5 +4495,25 @@
   id: 3273
   time: '2026-06-06T22:26:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9765
+- author: Pepsros
+  changes:
+  - message: Removed ghost boo ability.
+    type: Remove
+  id: 3274
+  time: '2026-06-06T22:31:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9709
+- author: Vixting
+  changes:
+  - message: Added examine text to damaged girders.
+    type: Add
+  - message: Fixed all walls becoming damaged girders when destroyed.
+    type: Fix
+  - message: Fixed acid holes not being blocked by objects.
+    type: Fix
+  - message: Breaking acid holes now spawns a damaged girder.
+    type: Tweak
+  id: 3275
+  time: '2026-06-06T22:31:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9750
 Name: RMC14
 Order: -1
