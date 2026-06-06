@@ -430,7 +430,7 @@ public sealed class ManageHiveSystem : EntitySystem
             return;
 
         // Handled by HiveTeamSystem on the server via UI open
-        // We raise a local event so the server HiveTeamSystem can open the UI
+        // Have to raise a local event so the server HiveTeamSystem can open the UI
         var ev = new OpenHiveTeamsUIEvent();
         RaiseLocalEvent(manage.Owner, ref ev);
     }

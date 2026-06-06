@@ -55,7 +55,6 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         Action<int, NetEntity> onRemoveMember,
         Action<int, int> onSetRole)
     {
-        // Outer panel — no background, just a border to group the team
         var outer = new PanelContainer
         {
             HorizontalExpand = true,
@@ -71,7 +70,6 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         };
         outer.AddChild(vbox);
 
-        // Team title
         vbox.AddChild(new Label
         {
             Text = $"HiveTeam {team.Index + 1}",
@@ -79,7 +77,6 @@ public sealed partial class HiveTeamWindow : DefaultWindow
             Margin = new Thickness(0, 4, 0, 2),
         });
 
-        // Role dropdown
         var roleBox = new OptionButton
         {
             HorizontalExpand = true,
@@ -93,7 +90,6 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         roleBox.OnItemSelected += args => onSetRole(capturedIndex, args.Id);
         vbox.AddChild(roleBox);
 
-        // Leader section — matches squad window style
         var leaderPanel = new PanelContainer
         {
             HorizontalExpand = true,
@@ -157,7 +153,6 @@ public sealed partial class HiveTeamWindow : DefaultWindow
 
         vbox.AddChild(leaderPanel);
 
-        // Members section — matches squad window style
         var membersPanel = new PanelContainer
         {
             HorizontalExpand = true,
@@ -208,7 +203,6 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         membersScroll.AddChild(membersGrid);
         membersVbox.AddChild(membersScroll);
 
-        // Add member button inside the members panel
         var addMemberBtn = new Button
         {
             Text = "+ Add Member",

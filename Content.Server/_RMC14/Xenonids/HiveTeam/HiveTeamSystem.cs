@@ -23,11 +23,11 @@ namespace Content.Server._RMC14.Xenonids.HiveTeam;
 
 public sealed class HiveTeamSystem : EntitySystem
 {
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly HiveLeaderSystem _hiveLeader = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly HiveTrackerSystem _tracker = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;

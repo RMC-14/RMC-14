@@ -154,7 +154,6 @@ public sealed class XenoHudOverlay : Overlay
     }
 
     private static readonly ResPath MarineHudRsi = new("/Textures/_RMC14/Interface/marine_hud.rsi");
-    // Charlie squad purple
     private static readonly Color HiveTeamColor = Color.FromHex("#7B2FBE");
 
     private void DrawHiveTeamNumbers(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
