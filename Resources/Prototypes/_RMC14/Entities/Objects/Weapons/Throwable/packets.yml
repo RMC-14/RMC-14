@@ -57,6 +57,29 @@
 
 - type: entity
   parent: CMPacketBase
+  id: RMCPacketGrenadeMetalFoam
+  name: MFHS Grenade Packet
+  description: It contains three HFHS Metal Foam Grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: mfhs_packet
+      map: [ "closedLayer" ]
+    - state: mfhs_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+
+- type: entity
+  parent: RMCPacketGrenadeMetalFoam
+  id: RMCPacketGrenadeMetalFoamFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeMFHS
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
   id: CMPacketGrenadeFrag
   name: HEFA grenade packet
   description: It contains three HEFA grenades. Don't tell the HEFA order.

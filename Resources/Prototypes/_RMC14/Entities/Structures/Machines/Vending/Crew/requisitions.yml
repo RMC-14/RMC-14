@@ -106,8 +106,8 @@
         amount: 4
       - id: RMCBatonSlugHIRR
         amount: 8
-      #- id: M40 MFHS Metal Foam Grenade
-      #  amount: 6
+      - id: RMCGrenadeMFHS
+        amount: 6
       - id: RMCExplosivePlastic
         amount: 3
       - id: RMCExplosiveBreachingCharge
@@ -350,6 +350,11 @@
       - id: RMCPacketGrenadeBatonSlugHIRRFilled
         name: HIRR Baton Slug packet
         box: RMCBatonSlugHIRR
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeMetalFoamFilled
+        name: MFHS Grenade Packet
+        box: RMCPacketGrenadeMetalFoam
         boxAmount: 3
         boxSlots: 3
 
