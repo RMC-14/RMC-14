@@ -1,0 +1,152 @@
+- type: entity
+  id: RMCProjectileDespoilerAcidShot
+  name: acid shot
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/despoiler_acid_puddle.rsi
+    drawdepth: Effects
+    layers:
+    - state: xeno_acid_lingering
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Heat: 20
+        Piercing: 0
+    deleteOnCollide: true
+  - type: XenoDespoilerAcidBarrageProjectile
+    lingeringAcidChance: 0.25
+    lingeringAcidProto: RMCEffectDespoilerLingeringAcid
+  - type: PointLight
+    enabled: true
+    radius: 1.2
+    color: "#83ff66"
+  - type: TimedDespawn
+    lifetime: 3
+
+- type: entity
+  id: RMCEffectDespoilerLingeringAcid
+  name: lingering acid
+  description: A bubbling pool of corrosive acid.
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/despoiler_acid_puddle.rsi
+    state: puddle
+    drawdepth: BelowMobs
+  - type: PointLight
+    enabled: true
+    radius: 1
+    color: "#83ff66"
+  - type: XenoDespoilerLingeringAcid
+    minLifetime: 15
+    maxLifetime: 20
+    crossBurnDamage: 20
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        hard: false
+        layer:
+        - SlipLayer
+        mask:
+        - MobMask
+
+- type: entity
+  id: RMCEffectDespoilerAcidSpray
+  name: acid spray
+  description: A hissing burst of acid.
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/despoiler_acid_puddle.rsi
+    state: puddle
+    drawdepth: BelowMobs
+  - type: PointLight
+    enabled: true
+    radius: 0.9
+    color: "#83ff66"
+  - type: XenoDespoilerAcidSpray
+    damage:
+      types:
+        Heat: 30
+  - type: TimedDespawn
+    lifetime: 2
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        hard: false
+        layer:
+        - SlipLayer
+        mask:
+        - MobMask
+
+- type: entity
+  id: RMCEffectDespoilerAcidSprayEmpowered
+  parent: RMCEffectDespoilerAcidSpray
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: XenoDespoilerAcidSpray
+    damage:
+      types:
+        Heat: 30
+    stunsOnEmpowered: true
+
+- type: entity
+  id: RMCEffectDespoilerCausticTelegraph
+  parent: RMCEffectXenoTelegraphGreen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.25
+  - type: Sprite
+    color: "#799657"
+
+- type: entity
+  id: RMCEffectDespoilerOozingTelegraph
+  parent: RMCEffectXenoTelegraphGreen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    color: "#c4a23d"
+
+- type: entity
+  id: RMCEffectDespoilerCatalyze
+  name: hypertension burst
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+  - type: Sprite
+    sprite: _RMC14/Effects/despoiler_catalyze.rsi
+    state: bubbles
+    drawdepth: BelowMobs
+    noRot: true
+  - type: PointLight
+    enabled: true
+    radius: 1.6
+    softness: 1
+    energy: 1.2
+    color: "#83ff66"
+  - type: TimedDespawn
+    lifetime: 10

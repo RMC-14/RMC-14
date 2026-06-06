@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Stacks;
+using Content.Shared._RMC14.Xenonids.Despoiler;
 using Content.Shared._RMC14.Xenonids.Rank;
 using Content.Shared.Damage;
 using Content.Shared.Ghost;
@@ -61,6 +62,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly EntityQuery<XenoShieldComponent> _xenoShieldQuery;
     private readonly EntityQuery<EntityActiveInvisibleComponent> _invisQuery;
     private readonly EntityQuery<XenoComponent> _xenoQuery;
+    private readonly EntityQuery<XenoDespoilerHypertensionComponent> _hyperQuery;
 
     private readonly ShaderInstance _shader;
 
@@ -71,6 +73,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly ResPath _rsiPath = new("/Textures/_RMC14/Interface/xeno_hud.rsi");
     private readonly ResPath _rsiPathSlow = new("/Textures/_RMC14/Effects/xeno_stomp.rsi");
     private readonly ResPath _rsiPathFreeze = new("/Textures/_RMC14/Effects/xeno_freeze.rsi");
+    private readonly ResPath _rsiPathHypertension = new("/Textures/_RMC14/Interface/Alerts/hypertension.rsi");
 
     public XenoHudOverlay()
     {
@@ -94,6 +97,7 @@ public sealed class XenoHudOverlay : Overlay
         _xenoShieldQuery = _entity.GetEntityQuery<XenoShieldComponent>();
         _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
         _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
+        _hyperQuery = _entity.GetEntityQuery<XenoDespoilerHypertensionComponent>();
 
         _shader = _prototype.Index<ShaderPrototype>("unshaded").Instance();
         ZIndex = 1;
@@ -182,6 +186,7 @@ public sealed class XenoHudOverlay : Overlay
             UpdatePlasma((uid, xeno, sprite), handle);
             UpdateShields((uid, xeno, sprite), handle);
             UpdateEnergy((uid, xeno, sprite), handle);
+            UpdateHypertension((uid, xeno, sprite), handle);
         }
     }
 
@@ -585,6 +590,23 @@ public sealed class XenoHudOverlay : Overlay
 
         var position = new Vector2(xOffset, yOffset);
         handle.DrawTexture(texture, position);
+    }
+
+    private void UpdateHypertension(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
+    {
+        var (uid, xeno, sprite) = ent;
+        if (!_hyperQuery.TryComp(uid, out var hyper))
+            return;
+
+        var level = Math.Clamp(hyper.Stacks, 0, hyper.MaxStacks);
+        var icon = new Rsi(_rsiPathHypertension, $"level_{level}");
+        var texture = _sprite.GetFrame(icon, _timing.CurTime);
+
+        var bounds = sprite.Bounds;
+        var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height + xeno.HudOffset.Y;
+        var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter * bounds.Width + xeno.HudOffset.X + (float) texture.Width / EyeManager.PixelsPerMeter;
+
+        handle.DrawTexture(texture, new Vector2(xOffset, yOffset));
     }
 
     private void UpdateShields(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)

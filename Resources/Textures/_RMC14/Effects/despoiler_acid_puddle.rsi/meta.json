@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Placeholder using existing RMC xeno_acid sprites. Pending proper Despoiler acid puddle sprites.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    { "name": "puddle" },
+    { "name": "xeno_acid_lingering" }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Placeholder using existing RMC xeno_actions sprites by Aleksh. Pending proper Despoiler action icons.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    { "name": "acid_barrage" },
+    { "name": "caustic_embrace" },
+    { "name": "oozing_wounds" },
+    { "name": "catalyze" }
+  ]
+}

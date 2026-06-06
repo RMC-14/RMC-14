@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Placeholder using Boiler sprite. Pending proper Despoiler catalyze effect.",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    { "name": "bubbles" }
+  ]
+}

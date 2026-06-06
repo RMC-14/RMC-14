@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Placeholder using existing RMC xeno_acid sprites. Pending proper Despoiler hypertension HUD icons.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    { "name": "level_0" },
+    { "name": "level_1" },
+    { "name": "level_2" },
+    { "name": "level_3" },
+    { "name": "level_4" }
+  ]
+}

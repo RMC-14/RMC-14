@@ -1,0 +1,121 @@
+- type: entity
+  parent: ActionXenoBase
+  id: RMCActionXenoDespoilerAcidBarrage
+  name: rmc-action-despoiler-acid-barrage-name
+  description: rmc-action-despoiler-acid-barrage-desc
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Interface/Actions/despoiler.rsi
+      state: acid_barrage
+    checkCanInteract: false
+  - type: InstantAction
+    event: !type:XenoDespoilerAcidBarrageActionEvent
+  - type: XenoDespoilerAcidBarrageAction
+    maxChargeSeconds: 3
+    minProjectiles: 1
+    maxProjectiles: 8
+    empowerBonusProjectiles: 6
+    scatterDegrees: 30
+    chargingSpeedMultiplier: 0.5
+    projectileId: RMCProjectileDespoilerAcidShot
+    lingeringAcidChance: 0.25
+    projectileSpeed: 12
+    minRangeTiles: 1
+    maxRangeTiles: 6
+    minProjectileScale: 0.9
+    maxProjectileScale: 1.33
+    postFireCooldown: 12
+    chargeSound:
+      path: /Audio/_RMC14/Xeno/acid_sizzle1.ogg
+    fireSound:
+      path: /Audio/_RMC14/Xeno/alien_spitacid2.ogg
+  - type: XenoActionPlasma
+    cost: 100
+
+- type: entity
+  parent: ActionXenoBase
+  id: RMCActionXenoDespoilerCausticEmbrace
+  name: rmc-action-despoiler-caustic-embrace-name
+  description: rmc-action-despoiler-caustic-embrace-desc
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Interface/Actions/despoiler.rsi
+      state: caustic_embrace
+    checkCanInteract: false
+    useDelay: 12
+  - type: TargetAction
+    range: 5
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoDespoilerCausticEmbraceActionEvent
+  - type: XenoDespoilerCausticEmbraceAction
+    normalRange: 1
+    empoweredRange: 5
+    splashDamage:
+      types:
+        Heat: 30
+    empoweredDamage:
+      types:
+        Heat: 30
+    lingeringAcidChance: 0.3
+    empoweredWeakenDuration: 1
+    telegraphProto: RMCEffectDespoilerCausticTelegraph
+    lingeringAcidProto: RMCEffectDespoilerLingeringAcid
+    pounceSound:
+      path: /Audio/_RMC14/Xeno/alien_roar1.ogg
+  - type: XenoActionPlasma
+    cost: 100
+
+- type: entity
+  parent: ActionXenoBase
+  id: RMCActionXenoDespoilerOozingWounds
+  name: rmc-action-despoiler-oozing-wounds-name
+  description: rmc-action-despoiler-oozing-wounds-desc
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Interface/Actions/despoiler.rsi
+      state: oozing_wounds
+    checkCanInteract: false
+    useDelay: 25
+  - type: InstantAction
+    event: !type:XenoDespoilerOozingWoundsActionEvent
+  - type: XenoDespoilerOozingWoundsAction
+    baseRadius: 1
+    severityHpThreshold1: 0.7
+    severityHpThreshold2: 0.3
+    lingeringAcidChance: 0.2
+    distanceDelayPerTile: 0.2
+    telegraphProto: RMCEffectDespoilerOozingTelegraph
+    acidSprayProto: RMCEffectDespoilerAcidSpray
+    acidSprayEmpoweredProto: RMCEffectDespoilerAcidSprayEmpowered
+    lingeringAcidProto: RMCEffectDespoilerLingeringAcid
+    castSound:
+      path: /Audio/_RMC14/Xeno/acid_sizzle3.ogg
+  - type: XenoActionPlasma
+    cost: 100
+
+- type: entity
+  parent: ActionXenoBase
+  id: RMCActionXenoDespoilerCatalyze
+  name: rmc-action-despoiler-catalyze-name
+  description: rmc-action-despoiler-catalyze-desc
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Interface/Actions/despoiler.rsi
+      state: catalyze
+    checkCanInteract: false
+    useDelay: 20
+  - type: InstantAction
+    event: !type:XenoDespoilerCatalyzeActionEvent
+  - type: XenoDespoilerCatalyzeAction
+    hypertensionCost: 1
+    buffDuration: 10
+    visualProto: RMCEffectDespoilerCatalyze
