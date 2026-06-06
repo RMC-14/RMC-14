@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MoonlightHollow
-  changes:
-  - message: Replace the headset in the Command Tablet Cabinet
-    type: Tweak
-  id: 2769
-  time: '2026-01-13T09:02:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8756
 - author: CatAndHats
   changes:
   - message: 'Added five new Map Inserts for Solaris: Cargo Containers, Lz1 Containers
@@ -4524,5 +4517,16 @@
   id: 3268
   time: '2026-06-06T22:14:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9996
+- author: MidZik
+  changes:
+  - message: Xeno projectile abilities should hit their targets much more reliably.
+      (Spike Shed, Bone Spurs, Tail Seize, and all spit abilities.)
+    type: Fix
+  - message: Leap-like abilities should hit their targets more reliably. (Leap, Pounce,
+      Dash, Rush, Assault)
+    type: Fix
+  id: 3269
+  time: '2026-06-06T22:19:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9963
 Name: RMC14
 Order: -1
