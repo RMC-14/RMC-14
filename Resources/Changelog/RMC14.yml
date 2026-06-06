@@ -1,71 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Added WY Survivors insert on Solaris Ridge.
-    type: Add
-  id: 2787
-  time: '2026-01-15T08:44:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8832
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You will no longer roll FORECON Support Technician on Chance's Claim
-      as a survivor if you do not have Doctor Survivor or Engineer Survivor enabled.
-    type: Tweak
-  id: 2788
-  time: '2026-01-15T08:46:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8856
-- author: J C Denton
-  changes:
-  - message: Fixed names of a few shoreline and sand tiles.
-    type: Fix
-  id: 2789
-  time: '2026-01-15T08:50:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8982
-- author: CatAndHats
-  changes:
-  - message: Added bomb supply random spawner for mapping
-    type: Add
-  id: 2790
-  time: '2026-01-15T08:50:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8889
-- author: SharkSnake98
-  changes:
-  - message: Added the Field Doctor role, intended for surgeries and other medical
-      procedures in the FOB.
-    type: Add
-  - message: Added the Field Doctor locker, containing an MRE, marine combat boots,
-      M3-VL Ballistic Vest, Field Medic patch, and a Medic's helmet
-    type: Add
-  - message: Added the M10-L field doctor helmet for Field Doctor Usage in the field.
-    type: Add
-  id: 2791
-  time: '2026-01-15T08:51:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7897
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Alien cryo tanks on the colonies will now release the aliens contained
-      inside them.
-    type: Tweak
-  id: 2792
-  time: '2026-01-15T08:55:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8815
-- author: PursuitInAshes
-  changes:
-  - message: The CMB Observer and Liaison icons have been swapped.
-    type: Tweak
-  id: 2793
-  time: '2026-01-15T08:56:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7403
-- author: Monotheonist
-  changes:
-  - message: Gave skrell even longer and shorter haircuts, as well as optional tails
-      and headdresses.
-    type: Add
-  - message: Gave skrell access to gauze (on the body.)
-    type: Tweak
-  id: 2794
-  time: '2026-01-15T09:03:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8101
 - author: Arykh
   changes:
   - message: Added the portable dialysis machine!
@@ -4540,5 +4473,68 @@
   id: 3286
   time: '2026-06-06T22:48:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9433
+- author: PursuitinAshes
+  changes:
+  - message: Removed OCP-583.
+    type: Remove
+  id: 3287
+  time: '2026-06-06T22:58:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9769
+- author: PursuitinAshes
+  changes:
+  - message: Organs will now cause 75 units of grey matter to appear in your system,
+      best to avoid eating them now.
+    type: Tweak
+  id: 3288
+  time: '2026-06-06T22:57:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9931
+- author: Ian321
+  changes:
+  - message: Rifleman can no longer be squadless.
+    type: Tweak
+  - message: The id console now respects titles granted by pamphlets.
+    type: Fix
+  id: 3289
+  time: '2026-06-06T22:59:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9997
+- author: J C Denton
+  changes:
+  - message: Fixed a lot of entities working off infinite inner power.
+    type: Fix
+  id: 3290
+  time: '2026-06-06T23:20:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9975
+- author: kleinerstation13
+  changes:
+  - message: Security colonist job preference no longer rolls for Riot in Progress
+      Riot Control Team Lead on Fiorina, that role is now picked randomly
+    type: Tweak
+  id: 3291
+  time: '2026-06-06T23:24:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9940
+- author: kleinerstation13
+  changes:
+  - message: Fixed Type 64, UZI, Type 19, MP27, MAC15 and MP5 being the incorrect
+      size, they are now small in inventories as intended
+    type: Fix
+  id: 3292
+  time: '2026-06-06T23:24:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9990
+- author: kleinerstation13
+  changes:
+  - message: Replaced mention of 'xenomorph' with 'xenonid' in survivor briefings
+    type: Tweak
+  id: 3293
+  time: '2026-06-06T23:23:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9878
+- author: SharkSnake98
+  changes:
+  - message: Added the Corporate Bodyguard role and all their gear.
+    type: Add
+  - message: Added the Weston-Yamada Restricted Area sign for the CL's office.
+    type: Add
+  id: 3294
+  time: '2026-06-06T23:33:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8362
 Name: RMC14
 Order: -1
