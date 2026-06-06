@@ -678,9 +678,6 @@
       state: b92fs
       map: [ "b92fs_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m13
-      map: [ "m13_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: highpower
       map: [ "mk45_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -719,6 +716,7 @@
       - CMMagazinePistol
     blacklist:
       tags:
+      - RMCWeaponPistolM13
       - RMCSmartPistol
       - RMCMagazinePistolSU6
       - RMCRevolver
@@ -750,7 +748,6 @@
     - b92fs_fill
     - mk45_fill
     - t73_fill
-    - m13_fill
     - l54_fill
     - handcannon_fill
     - g_handcannon_fill
@@ -781,10 +778,6 @@
         whitelist:
           tags:
           - RMCMK45
-      m13_fill:
-        whitelist:
-          tags:
-          - RMCWeaponPistolM13
       t73_fill:
         whitelist:
           tags:
@@ -1218,7 +1211,7 @@
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
+  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and three spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
@@ -1242,7 +1235,7 @@
     size: Large
   - type: Storage
     grid:
-    - 0,0,15,1 # 7 slots
+    - 0,0,7,1 # 4 slots
     whitelist:
       tags:
       - RMCMagazinePistolM13
@@ -1259,7 +1252,7 @@
         tags:
         - RMCWeaponPistolM13
     - popup: rmc-storage-limit-max-mags
-      count: 7
+      count: 3
       whitelist:
         tags:
         - RMCMagazinePistolM13
@@ -1477,23 +1470,15 @@
       - CMFireExtinguisherPortable
       - RMCMagazineML66D
       - RMCMagazineM2C
-      - CableCoil
-      - Multitool
       - RMCExplosiveBreachingCharge
-      - RMCNailgunCompact
-      - RMCNailgunTactical
       - RMCExplosiveClaymoreMine
       - RMCSmartGunMounted # Not parity
       components:
       - Welder
-      - EntrenchingTool
-      - BarbedWire
-      - EmptySandbag
       - WeaponMount # Not parity
   - type: IgnoreContentsSize
     items:
       components:
-      - EntrenchingTool
       - MountableWeapon # Not parity
   - type: Tag
     tags:

@@ -1478,7 +1478,6 @@ CMPosterZSPA1: RMCPosterTSEPA1
 CMPosterZSPA2: RMCPosterTSEPA2
 CMPosterZSPA3: RMCPosterTSEPA3
 RMCSpawnerERTShuttleZSPA: RMCSpawnerERTShuttleTSEPA
-RMCSpawnerShuttleZSPA: RMCSpawnerShuttleTSEPA
 
 # 2026-02-05
 RMCWeaponSMGP90: RMCWeaponSMGPDW90
@@ -1491,6 +1490,14 @@ CMWebbingSurgicalBlue: RMCWebbingSurgicalBlue
 # 2026-03-21
 CMUpgradedTraumaKit: CMUpgradedTraumaKit10
 
+# 2026-05-19
+RMCFogWallWeed30: RMCFogWallWeed
+
 #2026-05-20
 RMCHeadCapFerret: RMCHeadCapGrey
 CMPosterRememberIo: CMRandomPosterAny
+
+#2026-05-22
+DrinkGlass: RMCDrinkGlass
+FoodDonkpocket: RMCFoodDonkpocket
+FoodBoxDonkpocket: RMCBoxDonkpockets
