@@ -55,6 +55,8 @@
       amount: 1
     - id: CMPillCanisterInaprovaline
       amount: 1
+    - id: CMPillCanisterTricordrazine
+      amount: 1
     # TODO RMC14 tramadol and perixadon pills, splint
     - id: CMBurnKit10
       amount: 1
@@ -77,6 +79,8 @@
     - id: CMPillCanisterKelotane
       amount: 1
     - id: CMPillCanisterInaprovaline
+      amount: 1
+    - id: CMPillCanisterTricordrazine
       amount: 1
     # TODO RMC14 tramadol and perixadon pills, splint
     - id: CMBurnKit10
@@ -113,6 +117,8 @@
     - id: CMPillCanisterKelotane
       amount: 1
     - id: CMPillCanisterInaprovaline
+      amount: 1
+    - id: CMPillCanisterTricordrazine
       amount: 1
     # TODO RMC14 tramadol and perixadon pills, splint
 
