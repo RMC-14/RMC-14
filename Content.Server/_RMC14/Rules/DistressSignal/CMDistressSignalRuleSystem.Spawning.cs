@@ -45,7 +45,7 @@ public sealed partial class CMDistressSignalRuleSystem
         var comp = rule.Value.Comp;
 
         if (OperationName == null && TryComp<RandomMetadataComponent>(rule.Value, out var metadata) && metadata.NameSegments != null)
-            OperationName = _randomMetadata.GetRandomFromSegments(metadata.NameSegments, metadata.NameFormat);
+            OperationName = MetaData(rule.Value).EntityName;
 
         if (!InitializeXenoMap(rule.Value, comp))
             return;
