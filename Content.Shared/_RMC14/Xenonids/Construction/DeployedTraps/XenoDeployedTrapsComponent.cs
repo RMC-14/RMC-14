@@ -15,4 +15,6 @@ public sealed partial class XenoDeployedTrapsComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier CatchSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_claw_block.ogg");
+    
+    public bool SoundPlayed = false;
 }
