@@ -2962,3 +2962,14 @@
     state: elle
   - type: PatronFigurine
     id: 350cb9a4-9299-458a-ac33-420e27b3a529
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLiamPropertyDamageHarper
+  name: Liam 'Property Damage' Harper figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: liam_property_damage_harper
+  - type: PatronFigurine
+    id: 77123fd0-952d-4460-9910-bb49a31af632
