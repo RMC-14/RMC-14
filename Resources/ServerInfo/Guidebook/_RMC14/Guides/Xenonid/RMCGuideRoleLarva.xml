@@ -1,0 +1,55 @@
+﻿<Document>
+  #Welcome to the Hive
+
+  - Rejoice! We've just joined our Hive as a Larva. We can't do very much right now, but our potential is limitless!
+  <GuideEntityEmbed Entity="CMXenoLarva"/>
+  - Before we start talking about your action keys, you'll see a new bar on your HUD with a lot of new buttons. Let's cover them quickly.
+
+  ##HUD Icons:
+  - [bold]Night Vision[/bold]: As a Xeno, you have access to night vision, and the ability to see living allies and enemies through walls. There are three levels of night vision which can be toggled between by clicking the icon. Full Vision mode gives you perfect full-bright view of your surroundings, Half Vision gives you low-light vision and lets you see where nearby sources of light are coming from, and No Vision turns off your night vision entirely, allowing you to see the world like a Marine would.
+  - [bold]Xenonid Tracker[/bold]: A tracker that allows you to set a target to follow. By default, it will be set to track the Queen. You can right click the tracker to change your target, and can choose between the Queen, a Hive Leader designated by the Queen, a Tunnel, or the Hive Core. You can only change your tracker if the Queen is alive.
+  - [bold]Health[/bold]: Your health bar. Don't allow it to reach zero. To recover health, you must be standing on weeds of any sort. Resting on weeds will heal you faster.
+  - [bold]Plasma[/bold]: Your plasma bar. Plasma is used for a variety of abilities, including unique combat abilities, building abilities, and most utilities. Plasma is regenerated while standing on weeds.
+  - [bold]Armor[/bold]: Your current armor value. Armor reduces incoming damage from most guns, provided they aren't using armor-piercing rounds.
+  - [bold]Tactical Map[/bold]: Opens your tactical map. The map is constantly updated while the Queen is producing eggs, and can be manually updated by the Queen when she is on the move.
+
+  #Evolving out of Larva
+  - It's time to get to work! As soon as we can, we should try to evolve. This will require us to gain evolution points by waiting however. View your evolution points by clicking your evolve action. Once you have 60 stored up, you can evolve to a Tier 1 caste.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoEvolve"/>
+  - For beginners, becoming a [textlink="Drone" link="RMCGuideRoleDrone.xml"] is recommended. Drones are responsible for building the Hive's defenses. Consult the Drone guide for more informations on the basics of building - the rest of this guide will cover the basics of general Xeno gameplay.
+  <GuideEntityEmbed Entity="CMXenoDrone"/>
+
+  #Communication and Navigation
+  - To speak with the rest of the Hive, use the :h prefix to speak over the Hivemind channel. Feel free to introduce yourself. The Hivemind will only be available while the Queen is alive.
+  - Tunnels can be used to quickly move across huge distances as a Xeno. Tunnels will appear on your tactical map as large T icons. Click a tunnel to enter it, and once inside a map will pop up on your screen. Just click and confirm the tunnel you want to head to on the map and you'll head there after a short doafter.
+  <GuideEntityEmbed Entity="XenoTunnel"/>
+  - Remember to use your xenonid tracker and update it regularly. Try to find a Hive Leader and follow them. This way, you'll always be around at least a few other Xenos, allowing you to coordinate and help one another.
+
+  #Combat
+  - Combat as a Xeno is very different to combat as a Marine. Almost all of your abilities will only work in melee range, meaning you want to prioritize ambushes and attacks in tighter spaces to avoid long lines of fire.
+  - Support your fellow Xenos when you're fighting together. If a Xeno is caught on fire, they can be extinguished more quickly by having other Xenos pat them. Simply left click a burning Xeno with harm mode off to pat them. If a Xeno ends up in critical condition while fighting, drag them to a safer place with weeds so they can recover in safety.
+  - Learn when to kill and when to capture. Dead or critical Marines cannot be moved, and therefore cannot be taken to the Hive to infect and safely transform into new Xenos. But trying to capture a Marine takes time and can leave you vulnerable, so always try to gauge your opportunities and speak with other Xenos about what your plan should be.
+  - Above all, remember that the life of one Xeno is worth much more than the life of one Marine. Dead Marines can be revived quickly and easily by their Medics, but a dead Xeno is dead for good.
+
+  #Capturing and Infecting a Host
+  - Any Xeno that's evolved past Larva is able to fight and capture hosts, but their effectiveness varies depending on caste. Always try to work together and communicate with other Xenos when trying to capture a host - Remember, you're part of a Hivemind for a reason!
+  - To capture a host, find a target and tackle them by right clicking on them with harm mode enabled. After enough tackles, they will be stunned and fall prone.
+  - Once a host is stunned, grab them. Mouse over your own sprite and press E to being devouring them once they're grabbed. After you start devouring them, make sure you continue tackling them to prevent them from getting back up!
+  - After devouring, either walk to the nearest Hive or find a tunnel to quickly burrow to one. You want to look for areas with Hive Clusters and Egg morphers on the map, represented on the map by the symbols below.
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCClusterMapIcon"/>
+    <GuideEntityEmbed Entity="RMCMorpherMapIcon"/>
+  </Box>\n
+
+  - Once you reach a Hive, move on top of the nearest egg morpher or planted egg and use your regurgitate action to spit out the devoured host. They will quickly be infected, and fall prone once again. After infection, hosts will be unconcious for 90 seconds, giving you lots of time to safely move and secure them.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoRegurgitate"/>
+
+  - After the host has been infected, drag them to a resin wall or membrane that's built on the Hive Weeds produced by a Hive Cluster or Core. Simply click and drag their sprite onto the wall, and you will affix them to it after a short doafter. Once they've been secured in this way, they are completely helpless! They'll also progress through their infection and burst much faster.
+  - Your capture was a success! You can return to your duties. After a few minutes attached to the wall, the host will burst and produce a new Larva ready to join the Hive! Rejoice!
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookCorpseColonistBurst"/>
+    <GuideEntityEmbed Entity="CMXenoLarva"/>
+  </Box>\n
+
+</Document>

@@ -1,0 +1,28 @@
+﻿<Document>
+  #Healer, Tier 1 Strain
+  <GuideEntityEmbed Entity="CMXenoDroneHealer"/>
+  ##Playing as a Healer
+  By evolving to a Healer Drone, you give up most of your capacity to build and fight in exchange for extremely powerful and quick healing options. You are able to act as a Paramedic for your fellow Xenos, quickly healing them from serious injuries and allowing them to return to the fight in seconds.
+
+  As a Healer, you should try to identify a section of the front that lacks healing support and attach yourself to it. Your sisters will thank you for your support, and with your aid any group of combat Xenos become a much more difficult threat to dislodge. You're also still able to spread weeds and transfer your plasma to other builders, both of which are vital for maintaining a position.
+
+  As you heal others, you will notice a purple health transfer meter beginning to fill on your HUD. Keep track of it's progress, as it's important to know if it's been filled before using your Sacrifice ability.
+
+  ##Abilities:
+  - [bold]Apply Salve[/bold]: Applies a fast-acting healing salve to whichever Xeno you target with it, at the cost of some plasma and damage to yourself. You can stack multiple salves on a single target to rapidly heal them. [italic]Be warned, this ability can push you into crit if used at low health[/italic].
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoApplySalve"/>
+  - [bold]Plant Resin Fruit[/bold]: Plants a lesser resin fruit if used on weeds, which can be eaten when matured for a small boost in health. You can maintain up to 3 fruits at a time.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoFruitPlant"/>
+  - [bold]Sacrifice[/bold]: Sacrifice your life to give the targeted Xeno a massive burst of healing. If you have filled your health transfer bar before using this ability, you will respawn immediately as a Larva.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSacrifice"/>
+  - [bold]Transfer Plasma[/bold]: Transfers plasma from yourself to a sister, provided you both remain still. You transfer plasma more efficiently than a regular Drone, making it easier to support more plasma-hungry Xenos.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTransferPlasma"/>
+  - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones to provide buffs to yourself and nearby Xenos. Your emitted pheromones are a tier higher than a regular Drone.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPheromones" Caption=""/>
+
+  ##Additional Information:
+  - As a Healer, it is often best to prioritize the apply salve ability above your other healing options, as it transfers more health to your allies than it costs you to use, allowing you to heal more efficiently. Ensure that you are always emitting some form of pheromones as yours are more powerful than normal and will empower your allies greatly. Additionally, if resources such as recovery nodes or lesser/greater resin fruits are available, use them! They allow you more opportunities to use your healing abilities and therefore increase the total amount of healing the Hive is able to output.
+
+  - When considering if it is worth it to use your sacrifice ability, take into account whether your transferred health bar is full and consider if the target is worth the self-sacrifice. Sacrificing to save another tier one is rarely worth it, but sacrificing to heal the Queen or a Hive Leader can save the Hive from potential disaster.
+
+</Document>

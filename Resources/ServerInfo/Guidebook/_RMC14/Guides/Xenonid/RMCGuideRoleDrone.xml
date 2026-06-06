@@ -1,59 +1,31 @@
 ﻿<Document>
+  #Drone, Tier 1
+  <GuideEntityEmbed Entity="CMXenoDrone"/>
+  ##Playing as a Drone
+  Drones are the core of any Hive, a versatile caste that can perform many of the critical tasks needed to keep a Hive running smoothly. As Drones are the first caste unlocked for evolution each round, they often form the backbone of the initial efforts to build up a Hive in anticipation of the coming round.
 
-  #So you've just been born into the hive!
-  #Now what?
+  Drones are well suited to being a starter caste for new Xeno players, as they have the tools necessary to introduce players to building, supporting the team, and basic backline support. Drones should strive to avoid combat where possible unless it's part of a larger strategy, as they lack the means to defend themselves against most threats.
 
-  - Rejoice! We've just joined our hive as a larva. We can't do very much right now, but our potential is limitless!
-  <Box>
-    <GuideEntityEmbed Entity="CMXenoLarva"/>
-  </Box>\n
-  - It's time to get to work! As soon as we can, we should try to evolve. This will require us to gain some age by waiting however.
-  - For beginners, becoming a drone is recommended. Drones are responsible for building the hive defenses.
+  ##Abilities:
+  - [bold]Plant Weeds[/bold]: Places a resin node which spreads weeds across a large area. Weeds are essential for controlling space and allow the Hive to build resin structures.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPlantWeeds"/>
+  - [bold]Choose Resin Structure[/bold]: Chooses what resin structure to make, to then be used by Secrete Resin. When creating solid structures, Drones only have access to standard (Non-thick) Resin variants.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoChooseResinStructure"/>
+  - [bold]Secrete Resin[/bold]: Secretes the chosen resin structure on any tile you click, provided it has weeds.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSecreteResin"/>
+  - [bold]Order Construction[/bold]: Orders the construction of a [textlink="Hive Structure" link="RMCGuideHiveStructures.xml"].
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoOrderConstruction" Caption=""/>
+  - [bold]Transfer Plasma[/bold]: Transfers plasma from yourself to a sister, provided you both remain still.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTransferPlasma"/>
+  - [bold]Weak Corrosive Acid[/bold]: Secretes a glob of weak acid on items or structures to be dissolved at the cost of Plasma.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCorrosiveAcid"/>
+  - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones to provide buffs to yourself and nearby Xenos. The strength of pheromones is dependent on caste and does not stack with pheromones of the same type.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPheromones" Caption=""/>
 
-  <Box>
-    <GuideEntityEmbed Entity="RMCGuidebookActionXenoEvolve"/>
-    <GuideEntityEmbed Entity="CMXenoDrone"/>
-  </Box>\n
+  ##Additional Information:
 
-  - Here are a few of the things we can construct!
+  - As a Drone, you'll be able to carry out a lot of the basic tasks required to transform colony structures into Xenonid Hives. Use your weak corrosive acid to melt windows, airlocks, obstructing furniture, and any items that could be useful to Survivors or Marines. When building, try to design areas with Xenos in mind - always try to build doorways at least two tiles wide, and avoid building narrow hallways or 1-tile chokes that can cause traffic jams. Above all, remember to weed everywhere you can! The more weeds, the better.
 
-  <Box>
-    <GuideEntityEmbed Entity="WallXenoResin"/>
-    <GuideEntityEmbed Entity="WallXenoMembrane"/>
-    <GuideEntityEmbed Entity="DoorXenoResin"/>
-  </Box>\n
-
-  - Another important job of the Drone is to plant weeds.
-  - Weeds allow us to rest to regain our health and energy!
-  - We can also only construct the hive on weeds.
-  <GuideEntityEmbed Entity="RMCGuidebookActionXenoRest"/>
-  <Box>
-    <GuideEntityEmbed Entity="XenoWeeds"/>
-    <GuideEntityEmbed Entity="XenoWeedsSource"/>
-    <GuideEntityEmbed Entity="XenoWeeds"/>
-  </Box>\n
-
-  - Our final goal is to protect the Queen and plant her eggs so our hive may grow!
-  - Eggs can be placed on hive weeds, and contain parasites.
-  - Parasites can be extracted from the eggs, but be wary that parasites have short lifespans away from the weeds!
-
-  <Box>
-    <GuideEntityEmbed Entity="CMXenoQueen"/>
-    <GuideEntityEmbed Entity="XenoEgg"/>
-    <GuideEntityEmbed Entity="XenoHiveWeeds"/>
-    <GuideEntityEmbed Entity="CMXenoParasite"/>
-  </Box>\n
-
-  - We can also devour captures and transport them to the hive for nesting!
-  - Find a tall and tackle them by right clicking on them with harm mode enabled.
-  - Once they are restrained, click and drag their sprite into yours to start devouring them, remember to keep tackling after!
-  - After devouring, walk to the closest hive to infect them on a egg, then to nest them do the same motion onto a wall.
-
-  - When a parasite is placed on a living host, a new larva will be born! Rejoice!
-  - Hosts that hold the growing larva are very precious, and should be secured to a resin wall supported by hive weeds as soon as possible.
-  <Box>
-    <GuideEntityEmbed Entity="RMCGuidebookCorpseColonistBurst"/>
-    <GuideEntityEmbed Entity="CMXenoLarva"/>
-  </Box>\n
+  - Drones are able to provide basic support in managing captures and preparing for infections. All Drones (even lessers!) are able to pick up and plant eggs from the Queen on Hive Weeds, which can be used to infect a Host after a short growth time. Drones can also pick up Parasites from egg morphers or eggs and place them into resin holes or use them to infect stunned or restrained hosts. Be quick if using Parasites in this way, as they die if they're outside a safe 'home' for 30 seconds.
 
 </Document>

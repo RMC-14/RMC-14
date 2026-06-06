@@ -1,0 +1,40 @@
+﻿<Document>
+  #Gardener, Tier 1 Strain
+  <GuideEntityEmbed Entity="CMXenoDroneGardener"/>
+  ##Playing as a Gardener
+  By evolving to a Gardener Drone, you give up most of your capacity to build and your corrosive acid in exchange for a variety of abilities focused on growing and administering powerful resin fruits. You are able to act as a Pharmacist for your fellow Xenos, growing a stock of fruits that can give them the healing or buffs necessary to succeed under pressure.
+
+  As a Gardener, you should try to identify a section of the front that's seeing heavy contact and attach yourself to it. The more nearby Xenos there are, the more allies there are to benefit from your fruits. You're also still able to spread weeds and construct Hive structures, both of which are vital for maintaining a position.
+
+  When growing and using your fruits, remember that as a Gardener you naturally harvest and administer fruits much faster than other Xenos. You can use this to feed others fruits if they are resting and recovering, or quickly harvest and toss fruits to Xenos on the move.
+
+  ##Abilities:
+  - [bold]Plant Hardy Weeds[/bold]: Plants a hardy weed node on the ground when used. Hardy weeds are tougher than regular weeds, slow Marines more than regular weeds, increase the growth of any resin fruits planted on them, and can be placed in certain areas regular weeds cannot.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPlantWeedsHardy"/>
+  - [bold]Change Fruit[/bold]: Opens a selection menu that allows you to change what fruit is planted with your plant resin fruit ability. Options listed in the next section.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoFruitChoose"/>
+  - [bold]Plant Resin Fruit[/bold]: Plants whichever fruit was chosen with change fruit if used on weeds, which will mature over a short time. You can maintain up to 6 fruit total at any time.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoFruitPlant"/>
+  - [bold]Resin Surge[/bold]: If used on an immature resin fruit, immediately brings the fruit to full maturity. If used on weeds, surges a resin wall into place on the specified tile. If used on an existing resin wall, the wall gains a massive health boost for the next 15 seconds. If used on any other targets, creates a 3x3 pad of weak sticky resin after a short doafter.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoResinSurge"/>
+
+  ##Resin Fruits:
+  As a Gardener, you have access to five varieties of fruits that can be selected with your change fruit ability and planted with your plant resin fruit ability. They are:
+  - [bold]Greater Resin Fruit[/bold]: A green fruit that provides the user a burst of healing immediately and an even greater gradual healing over the next 5 seconds.
+  <GuideEntityEmbed Entity="XenoFruitGreater"/>
+  - [bold]Cruror Resin Fruit[/bold]: A blue fruit that provides the user rapid plasma regeneration for the next 15 seconds.
+  <GuideEntityEmbed Entity="XenoFruitPlasma"/>
+  - [bold]Alacrit Resin Fruit[/bold]: A purple fruit that provides the user increased movement speed for the next 15 seconds.
+  <GuideEntityEmbed Entity="XenoFruitSpeed"/>
+  - [bold]Spore Resin Fruit[/bold]: An orange fruit that provides the user increased ability cooldown after performing attacks for the next 90 seconds. Additionally, while planted the spore resin fruit emits weak recovery pheremones to nearby Xenos.
+  <GuideEntityEmbed Entity="XenoFruitSpore"/>
+  - [bold]Unstable Resin Fruit[/bold]: A turquoise fruit that provides the user with an overshield that scales with their max health. The shield decays over the course of the next 60 seconds. Additionally, the user gains minor healing over time for the next 15 seconds.
+  <GuideEntityEmbed Entity="XenoFruitUnstable"/>
+
+
+  ##Additional Information:
+  - Compared to Healer, Gardener Drones have a lot more abilities to juggle and a lot more options for support at any time. When preparing to plant and grow fruits anywhere, it's good to try and set up a hardy weed node beforehand in order to maximize your growth speed. The question of what fruit to grow will always have multiple right answers, but having a few greater resin fruits available for general healing is never a bad idea. The other fruits are more specialized, and should be grown if you see a nearby Xeno that would benefit from them.
+  - Hivelords, Burrowers and Carriers can greatly benefit from the increased plasma regeneration a cruror fruit provides, while Ravagers and Crushers can make the most of the overshield provided by unstable fruits. Don't be afraid to plant fruits as often as possible - remember, you can have a max of six down at once, and having extras is never a bad thing. Always try to use your resin surge whenever it's off cooldown to further increase your output.
+  - Remember that your abilities outside of fruit growth can also be useful. You are every bit as effective at spreading regular weeds as a normal Drone, and your hardy weeds can be used to weed areas that resist regular resin. Your resin surge can temporarily maintain walls that are under heavy enemy fire, and ensnaring out of position marines with the sticky weed patch can make them vulnerable to other Xenos.
+
+</Document>
