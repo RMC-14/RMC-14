@@ -2951,3 +2951,14 @@
     state: dreja_scraps_kel
   - type: PatronFigurine
     id: 0c38014d-646a-494d-90ba-ee7900acaabb
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronElle
+  name: Elle figurine
+  description: "Ratcket launcher!"
+  components:
+  - type: Sprite
+    state: elle
+  - type: PatronFigurine
+    id: 350cb9a4-9299-458a-ac33-420e27b3a529
