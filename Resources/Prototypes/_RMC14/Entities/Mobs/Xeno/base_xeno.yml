@@ -176,6 +176,7 @@
   - type: Xeno
   - type: XenoRegen
   - type: XenoStateVisuals
+  - type: XenoPing
   - type: UserInterface
     interfaces:
       enum.CMSurgeryUIKey.Key:
@@ -196,6 +197,8 @@
         type: XenoFruitChooseBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.XenoResinMarkUIKey.Key:
+        type: XenoResinMarkBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:
@@ -205,6 +208,7 @@
         requireInputValidation: false
       enum.DialogUiKey.Key:
         type: DialogBui
+
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure
@@ -309,6 +313,7 @@
     - HiveLeader
     - Tunnel
     - HiveCore
+  - type: ResinMarkerTracker
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked

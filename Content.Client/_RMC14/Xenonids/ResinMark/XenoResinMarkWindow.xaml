@@ -1,0 +1,39 @@
+<cc:XenoResinMarkWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.ResinMark"
+    MinSize="500 360"
+    Title="Hive Resin Marks">
+    <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="4 4 4 4">
+        <PanelContainer>
+            <Label Name="InstructionLabel" Access="Public"
+                   Margin="4 4 4 4"
+                   HorizontalExpand="True"
+                   ClipText="False" />
+        </PanelContainer>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="4" HorizontalExpand="True" VerticalExpand="True">
+            <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" SeparationOverride="3" Margin="4 4 4 4">
+                    <Label Name="SelectedMarkLabel" Access="Public" />
+                    <Label Text="Available Marker Types" />
+                    <ScrollContainer HorizontalExpand="True" VerticalExpand="True" MinSize="220 210">
+                        <BoxContainer Name="MarkTypeContainer" Access="Public" Orientation="Vertical" SeparationOverride="1" />
+                    </ScrollContainer>
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" SeparationOverride="3" Margin="4 4 4 4">
+                    <Label Name="SelectedPlacedLabel" Access="Public" />
+                    <Label Text="Placed Markers" />
+                    <ScrollContainer HorizontalExpand="True" VerticalExpand="True" MinSize="220 210">
+                        <BoxContainer Name="PlacedMarksContainer" Access="Public" Orientation="Vertical" SeparationOverride="1" />
+                    </ScrollContainer>
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                        <Button Name="WatchSelectedButton" Access="Public" Text="Watch" HorizontalExpand="True" />
+                        <Button Name="DestroySelectedButton" Access="Public" Text="Destroy" HorizontalExpand="True" />
+                        <Button Name="ForceTrackSelectedButton" Access="Public" Text="Force Track" HorizontalExpand="True" />
+                    </BoxContainer>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </BoxContainer>
+</cc:XenoResinMarkWindow>

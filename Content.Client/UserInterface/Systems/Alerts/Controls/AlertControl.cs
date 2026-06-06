@@ -5,6 +5,7 @@ using Content.Shared.Alert;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Graphics.RSI;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -13,6 +14,8 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
     public sealed class AlertControl : BaseButton
     {
         [Dependency] private readonly IEntityManager _entityManager = default!;
+        private static readonly SpriteSpecifier.Rsi ResinMarkerCenterGlow =
+            new(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "center_glow");
 
         private readonly SpriteSystem _sprite;
 
@@ -112,7 +115,17 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
                 return;
             var icon = Alert.GetIcon(_severity);
             if (_sprite.LayerMapTryGet((_spriteViewEntity, sprite), AlertVisualLayers.Base, out var layer, false))
-                _sprite.LayerSetSprite((_spriteViewEntity, sprite), layer, icon);
+            {
+                if (UseResinMarkerDirectionalOverlay())
+                    _sprite.LayerSetSprite((_spriteViewEntity, sprite), layer, Alert.Icons[0]);
+                else
+                    _sprite.LayerSetSprite((_spriteViewEntity, sprite), layer, icon);
+            }
+
+            if (UseResinMarkerDirectionalOverlay())
+                UpdateResinMarkerDirectionalOverlay((_spriteViewEntity, sprite), icon);
+
+            UpdateIconDirection(icon);
         }
 
         protected override void FrameUpdate(FrameEventArgs args)
@@ -140,10 +153,77 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
             {
                 var icon = Alert.GetIcon(_severity);
                 if (_sprite.LayerMapTryGet((_spriteViewEntity, sprite), AlertVisualLayers.Base, out var layer, false))
-                    _sprite.LayerSetSprite((_spriteViewEntity, sprite), layer, icon);
+                {
+                    if (UseResinMarkerDirectionalOverlay())
+                        _sprite.LayerSetSprite((_spriteViewEntity, sprite), layer, Alert.Icons[0]);
+                    else
+                        _sprite.LayerSetSprite((_spriteViewEntity, sprite), layer, icon);
+                }
+
+                if (UseResinMarkerDirectionalOverlay())
+                    UpdateResinMarkerDirectionalOverlay((_spriteViewEntity, sprite), icon);
+
+                UpdateIconDirection(icon);
             }
 
             _icon.SetEntity(_spriteViewEntity);
+        }
+
+        private void UpdateIconDirection(SpriteSpecifier icon)
+        {
+            if (icon is not SpriteSpecifier.Rsi rsi)
+            {
+                _icon.OverrideDirection = null;
+                return;
+            }
+
+            var state = _sprite.GetState(rsi);
+            if (state.RsiDirections == RsiDirectionType.Dir1)
+            {
+                _icon.OverrideDirection = null;
+                return;
+            }
+
+            _icon.OverrideDirection = _severity switch
+            {
+                2 => Direction.South,
+                3 => Direction.SouthEast,
+                4 => Direction.East,
+                5 => Direction.NorthEast,
+                6 => Direction.North,
+                7 => Direction.NorthWest,
+                8 => Direction.West,
+                9 => Direction.SouthWest,
+                _ => null
+            };
+        }
+
+        private bool UseResinMarkerDirectionalOverlay()
+        {
+            return Alert.ID == "ResinMarkerTracker";
+        }
+
+        private void UpdateResinMarkerDirectionalOverlay(Entity<SpriteComponent> spriteEnt, SpriteSpecifier icon)
+        {
+            var ent = spriteEnt.AsNullable();
+
+            if (!_sprite.LayerMapTryGet(ent, AlertVisualLayers.CenterGlow, out var centerGlowLayer, false))
+                centerGlowLayer = _sprite.LayerMapReserve(ent, AlertVisualLayers.CenterGlow);
+
+            if (!_sprite.LayerMapTryGet(ent, AlertVisualLayers.Direction, out var directionLayer, false))
+                directionLayer = _sprite.LayerMapReserve(ent, AlertVisualLayers.Direction);
+
+            if (!_severity.HasValue || _severity.Value <= 0)
+            {
+                _sprite.LayerSetVisible(ent, centerGlowLayer, false);
+                _sprite.LayerSetVisible(ent, directionLayer, false);
+                return;
+            }
+
+            _sprite.LayerSetSprite(ent, centerGlowLayer, ResinMarkerCenterGlow);
+            _sprite.LayerSetVisible(ent, centerGlowLayer, true);
+            _sprite.LayerSetSprite(ent, directionLayer, icon);
+            _sprite.LayerSetVisible(ent, directionLayer, true);
         }
 
         protected override void EnteredTree()
@@ -171,6 +251,8 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
 
     public enum AlertVisualLayers : byte
     {
-        Base
+        Base,
+        CenterGlow,
+        Direction
     }
 }

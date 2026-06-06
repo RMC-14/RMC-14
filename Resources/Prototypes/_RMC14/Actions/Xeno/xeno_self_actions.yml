@@ -208,6 +208,21 @@
   - type: RMCDazeableAction
 
 - type: entity
+  id: ActionXenoMarkResin
+  parent: ActionXenoBase
+  name: Mark Resin Menu
+  description: Open the resin mark menu and select a marker type.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: mark
+  - type: InstantAction
+    event: !type:XenoResinMarkActionEvent
+  - type: XenoResinMarkAction
+
+- type: entity
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
   name: Grow Ovipositor (500)

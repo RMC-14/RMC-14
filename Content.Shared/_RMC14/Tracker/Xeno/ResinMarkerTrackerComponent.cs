@@ -1,0 +1,18 @@
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+
+namespace Content.Shared._RMC14.Tracker.Xeno;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[Access(typeof(ResinMarkerTrackerSystem))]
+public sealed partial class ResinMarkerTrackerComponent : Component
+{
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan UpdateAt;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan UpdateEvery = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Target;
+}

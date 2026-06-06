@@ -511,6 +511,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCXenoAbilityPreviews =
         CVarDef.Create("rmc.xeno_ability_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCShowPings =
+        CVarDef.Create("rmc.show_pings", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<int> RMCXenoDefaultNightVision =
         CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 

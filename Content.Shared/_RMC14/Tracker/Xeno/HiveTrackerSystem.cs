@@ -216,6 +216,17 @@ public sealed class HiveTrackerSystem : EntitySystem
         Dirty(ent);
     }
 
+    public void ForceTrackTarget(EntityUid trackerUid, EntityUid target, ProtoId<TrackerModePrototype> mode)
+    {
+        if (!TryComp(trackerUid, out HiveTrackerComponent? tracker))
+            return;
+
+        var ent = (trackerUid, tracker);
+        SetMode(ent, mode);
+        SetTarget(ent, target);
+        UpdateDirection(ent, _transform.GetMapCoordinates(target));
+    }
+
     private void UpdateDirection(Entity<HiveTrackerComponent> ent, MapCoordinates? coordinates = null)
     {
         _alerts.ClearAlertCategory(ent, HiveTrackerCategory);

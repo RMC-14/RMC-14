@@ -64,10 +64,10 @@
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
+    - ActionXenoMarkResin
     - ActionXenoGrowOvipositor
     - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
-#    - ActionXenoMarkResin
     tier: 0
     bypassTierCount: true
     unlockAt: 0
@@ -104,6 +104,7 @@
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
+  - type: XenoResinMark
   - type: InnateCommandSpeech
   - type: RMCInnateRadioTextIncrease
     radioTextIncrease: 3

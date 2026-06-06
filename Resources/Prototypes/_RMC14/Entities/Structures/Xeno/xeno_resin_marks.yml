@@ -1,0 +1,44 @@
+- type: entity
+  id: XenoResinMarkerNub
+  name: resin marker
+  description: A permanent hive marker. Destroying this removes the associated mark.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.15
+        density: 50
+        hard: false
+        mask:
+        - ItemMask
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Markers/xeno_markers.rsi
+    drawdepth: Effects
+    layers:
+    - state: marker_nub
+  - type: XenoFriendly
+  - type: XenoResinMarker
+  - type: RMCTrackable
+  - type: Damageable
+    damageContainer: StructuralXeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 35
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Tag
+    tags:
+    - HideContextMenu
