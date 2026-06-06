@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "pa_[role], para_[role], rcm_[role] states taken from https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/hud/factions/twe.dmi. rcm_[role]_pve states taken from https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/mob/hud/marine_hud.dmi. All states modified in design by @TadJohnson00 (GitHub).",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+    "states": [
+        {
+            "name": "pa_constable"
+        },
+        {
+            "name": "pa_inspector"
+        },
+        {
+            "name": "pa_seniorconstable"
+        },
+        {
+            "name": "pa_synth"
+        },
+        {
+            "name": "para_co"
+        },
+        {
+            "name": "para_xo"
+        },
+        {
+            "name": "para_engi"
+        },
+        {
+            "name": "para_general"
+        },
+        {
+            "name": "para_lt"
+        },
+        {
+            "name": "para_medic"
+        },
+        {
+            "name": "para_pilot"
+        },
+        {
+            "name": "para_rifleman"
+        },
+        {
+            "name": "para_smartgunner"
+        },
+        {
+            "name": "para_marksman"
+        },
+        {
+            "name": "para_spec"
+        },
+        {
+            "name": "para_synth"
+        },
+        {
+            "name": "para_squadleader"
+        },
+        {
+            "name": "para_teamleader"
+        },
+        {
+            "name": "rcm_bombardier_pve"
+        },
+        {
+            "name": "rcm_breacher"
+        },
+        {
+            "name": "rcm_breacher_pve"
+        },
+        {
+            "name": "rcm_co"
+        },
+        {
+            "name": "rcm_engi_pve"
+        },
+        {
+            "name": "rcm_lt"
+        },
+        {
+            "name": "rcm_lt_pve"
+        },
+        {
+            "name": "rcm_marksman"
+        },
+        {
+            "name": "rcm_marksman_pve"
+        },
+        {
+            "name": "rcm_medic"
+        },
+        {
+            "name": "rcm_medic_pve"
+        },
+        {
+            "name": "rcm_rifleman"
+        },
+        {
+            "name": "rcm_rifleman_pve"
+        },
+        {
+            "name": "rcm_sectionleader_pve"
+        },
+        {
+            "name": "rcm_smartgunner"
+        },
+        {
+            "name": "rcm_smartgunner_pve"
+        },
+        {
+            "name": "rcm_teamleader"
+        },
+        {
+            "name": "rcm_teamleader_pve"
+        },
+        {
+            "name": "rcm_troopleader_pve"
+        },
+        {
+            "name": "rcm_xo"
+        },
+        {
+            "name": "rcm_xo_pve"
+        }
+    ]
+}

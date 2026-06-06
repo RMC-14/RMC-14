@@ -98,5 +98,5 @@
   parent: CMJobIconBase
   id: RMCJobIconTSEPASynth
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: tse_pasynth
+    sprite: _RMC14/Interface/JobIcons/tse.rsi
+    state: pa_synth
