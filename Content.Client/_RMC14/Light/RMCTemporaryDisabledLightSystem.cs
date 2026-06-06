@@ -27,6 +27,7 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
     private int _maxNearbyLights;
     private float _maxNearbyLightCheckRange;
     private TimeSpan _lightCheckInterval;
+    private bool _maxNearbyLightsEnabled;
 
     private TimeSpan _nextUpdate;
 
@@ -38,15 +39,20 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
         _maxNearbyLights = _config.GetCVar(RMCCVars.RMCLightningMaxAmountLightNearbyCount);
         _maxNearbyLightCheckRange = _config.GetCVar(RMCCVars.RMCLightningMaxAmountLightNearbyAreaSize);
         _lightCheckInterval = TimeSpan.FromSeconds(_config.GetCVar(RMCCVars.RMCLightningMaxAmountLightNearbyCheckIntervalSeconds));
+        _maxNearbyLightsEnabled = _config.GetCVar(RMCCVars.RMCLightningMaxAmountLightNearbyEnabled);
 
         Subs.CVar(_config, RMCCVars.RMCLightningMaxAmountLightNearbyCount, SetMaxNearbyLights);
         Subs.CVar(_config, RMCCVars.RMCLightningMaxAmountLightNearbyAreaSize, SetMaxNearbyLightsCheckRange);
         Subs.CVar(_config, RMCCVars.RMCLightningMaxAmountLightNearbyCheckIntervalSeconds, SetLightCheckInterval);
+        Subs.CVar(_config, RMCCVars.RMCLightningMaxAmountLightNearbyEnabled, SetMaxNearbyLightsEnabled);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (!_maxNearbyLightsEnabled)
+            return;
 
         var time = _timing.CurTime;
         if (time < _nextUpdate)
@@ -151,5 +157,10 @@ public sealed class RMCTemporaryDisabledLightSystem : EntitySystem
     {
         var interval = TimeSpan.FromSeconds(Math.Max(0, amount));
         _lightCheckInterval = interval;
+    }
+
+    private void SetMaxNearbyLightsEnabled(bool enabled)
+    {
+        _maxNearbyLightsEnabled = enabled;
     }
 }
