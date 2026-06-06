@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added missing animations as well as the cannon tray to the Orbital Bombardment
-      Cannon!
-    type: Add
-  - message: Orbital warheads and solid fuel must now be loaded by clicking on the
-      tray instead of the cannon!
-    type: Tweak
-  id: 2776
-  time: '2026-01-15T08:31:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8814
 - author: Dygon
   changes:
   - message: "Swapping to a melee weapon now lets you attack immediately if you haven\u2019\
@@ -4515,5 +4504,20 @@
   id: 3275
   time: '2026-06-06T22:31:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9750
+- author: MidZik
+  changes:
+  - message: Dead bodies no longer get hit by or block wide swings.
+    type: Fix
+  - message: Open containers (lockers, crates, etc) no longer get hit by or block
+      wide swings.
+    type: Fix
+  - message: Xenos no longer block each others' wide swings.
+    type: Tweak
+  - message: Wide swings now prioritize hitting mobs (xenos, marines, rats, etc) if
+      it is possible to hit them.
+    type: Tweak
+  id: 3276
+  time: '2026-06-06T22:35:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9677
 Name: RMC14
 Order: -1
