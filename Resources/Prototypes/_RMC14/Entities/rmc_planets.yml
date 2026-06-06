@@ -168,9 +168,9 @@
       #RMCMobSmallHostYiren
     nightmareScenarios:
     - scenarioName: panic_room_hold
-      scenarioProbability: 0.1
-    - scenarioName: none # 90% chance of regular surv. Reduce to 80% (0.8) once CLF survs are in.
-      scenarioProbability: 0.9
+      scenarioProbability: 0.15
+    - scenarioName: none # 85% chance of regular surv. Reduce to 75% (0.75) once CLF survs are in.
+      scenarioProbability: 0.85
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
