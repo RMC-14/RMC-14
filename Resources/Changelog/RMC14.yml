@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: SharkSnake98
   changes:
-  - message: Changed some lockers, geiger counters and added WEYA Decals to Port Nereid
-    type: Tweak
-  id: 2773
-  time: '2026-01-13T23:41:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8905
-- author: SharkSnake98
-  changes:
   - message: Added the Rocinante CLF Nightmare Insert (Not Playable)
     type: Add
   - message: Added a CLF Soldier corpse spawner
@@ -4510,5 +4503,13 @@
   id: 3272
   time: '2026-06-06T22:24:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9854
+- author: Thereisabear
+  changes:
+  - message: Fixed parasites not being able to walk through doors after colliding
+      with barbed metal barricades.
+    type: Fix
+  id: 3273
+  time: '2026-06-06T22:26:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9765
 Name: RMC14
 Order: -1
