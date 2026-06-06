@@ -34,7 +34,10 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         foreach (var channel in Enum.GetValues<RMCPowerChannel>())
         {
             var row = new RMCApcChannelRow();
-            row.Label.SetMarkupPermissive($"[color=#5B88B0]{channel}:[/color]");
+            row.Label.SetMarkupPermissive(Label(GetChannelNameId(channel)));
+            row.Auto.Text = Loc.GetString("rmc-apc-ui-button-auto");
+            row.On.Text = Loc.GetString("rmc-apc-ui-button-on");
+            row.Off.Text = Loc.GetString("rmc-apc-ui-button-off");
             row.Auto.OnPressed += _ => SendPredictedMessage(new RMCApcSetChannelBuiMsg(channel, RMCApcButtonState.Auto));
             row.On.OnPressed += _ => SendPredictedMessage(new RMCApcSetChannelBuiMsg(channel, RMCApcButtonState.On));
             row.Off.OnPressed += _ => SendPredictedMessage(new RMCApcSetChannelBuiMsg(channel, RMCApcButtonState.Off));
@@ -52,47 +55,53 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         if (!EntMan.TryGetComponent(Owner, out RMCApcComponent? apc))
             return;
 
-        var lockedMsg = apc.Locked
-            ? "[italic]Swipe an ID card or dogtags to unlock this interface.[/italic]"
-            : "[italic]Swipe an ID card or dogtags to lock this interface.[/italic]";
-        _window.LockedLabel.SetMarkupPermissive(lockedMsg);
+        _window.Title = Loc.GetString("rmc-apc-ui-title");
+        _window.LockedLabel.SetMarkupPermissive(Loc.GetString(apc.Locked
+            ? "rmc-apc-ui-locked"
+            : "rmc-apc-ui-unlocked"));
 
-        _window.PowerStatusLabel.SetMarkupPermissive(Header("Power Status"));
-        _window.PowerChannelsLabel.SetMarkupPermissive(Header("Power Channels"));
-        _window.MiscLabel.SetMarkupPermissive(Header("Misc"));
+        _window.PowerStatusLabel.SetMarkupPermissive(Header("rmc-apc-ui-power-status"));
+        _window.PowerChannelsLabel.SetMarkupPermissive(Header("rmc-apc-ui-power-channels"));
+        _window.MiscLabel.SetMarkupPermissive(Header("rmc-apc-ui-misc"));
+        _window.MainBreakerLabel.SetMarkupPermissive(Label("rmc-apc-ui-main-breaker"));
+        _window.PowerCellLabel.SetMarkupPermissive(Label("rmc-apc-ui-power-cell"));
+        _window.ChargeModeLabel.SetMarkupPermissive(Label("rmc-apc-ui-charge-mode"));
+        _window.TotalLoadLabel.SetMarkupPermissive(Label("rmc-apc-ui-total-load"));
+        _window.CoverLockLabel.SetMarkupPermissive(Label("rmc-apc-ui-cover-lock"));
 
-        _window.MainBreakerButton.Text = apc.MainBreakerButton ? "On" : "Off";
         if (apc.MainBreakerButton)
         {
-            _window.MainBreakerButton.Text = "On";
+            _window.MainBreakerButton.Text = Loc.GetString("rmc-apc-ui-button-on");
             _window.MainBreakerButton.Pressed = true;
         }
         else
         {
-            _window.MainBreakerButton.Text = "Off";
+            _window.MainBreakerButton.Text = Loc.GetString("rmc-apc-ui-button-off");
             _window.MainBreakerButton.Pressed = false;
         }
 
         _window.MainBreakerStatus.SetMarkupPermissive(apc.ExternalPower
-            ? Green("[ External Power ]")
-            : Red("[ No External Power ]")
+            ? Green(Loc.GetString("rmc-apc-ui-external-power"))
+            : Red(Loc.GetString("rmc-apc-ui-no-external-power"))
         );
 
         _window.PowerBar.MinValue = 0;
         _window.PowerBar.MaxValue = 1;
         _window.PowerBar.Value = apc.ChargePercentage;
-        _window.PowerBarLabel.Text = $"{apc.ChargePercentage * 100:F0}%";
+        _window.PowerBarLabel.Text = Loc.GetString("rmc-apc-ui-percent", ("percent", (int)MathF.Round(apc.ChargePercentage * 100)));
 
         var chargeMode = apc.ChargeStatus switch
         {
-            RMCApcChargeStatus.NotCharging => Red("[ Not Charging ]"),
-            RMCApcChargeStatus.Charging => Orange("[ Charging ]"),
-            RMCApcChargeStatus.FullCharge => Green("[ Fully Charged ]"),
+            RMCApcChargeStatus.NotCharging => Red(Loc.GetString("rmc-apc-ui-not-charging")),
+            RMCApcChargeStatus.Charging => Orange(Loc.GetString("rmc-apc-ui-charging")),
+            RMCApcChargeStatus.FullCharge => Green(Loc.GetString("rmc-apc-ui-fully-charged")),
             _ => throw new ArgumentOutOfRangeException(),
         };
 
         _window.ChargeMode.SetMarkupPermissive(chargeMode);
-        _window.ChargeModeButton.Text = apc.ChargeModeButton ? "Auto" : "Off";
+        _window.ChargeModeButton.Text = apc.ChargeModeButton
+            ? Loc.GetString("rmc-apc-ui-button-auto")
+            : Loc.GetString("rmc-apc-ui-button-off");
 
         foreach (int channel in Enum.GetValues<RMCPowerChannel>())
         {
@@ -105,17 +114,24 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
         var multiplier = _config.GetCVar(RMCCVars.RMCPowerLoadMultiplier);
         var totalWatts = apc.Channels.Sum(c => c.Watts);
-        _window.TotalLoadWatts.SetMarkupPermissive($"[bold]{totalWatts / multiplier} W[/bold]");
+        _window.TotalLoadWatts.SetMarkupPermissive(Loc.GetString("rmc-apc-ui-total-load-watts", ("watts", totalWatts / multiplier)));
 
-        _window.CoverButton.Text = apc.CoverLockedButton ? "Engaged" : "Disengaged";
+        _window.CoverButton.Text = apc.CoverLockedButton
+            ? Loc.GetString("rmc-apc-ui-cover-engaged")
+            : Loc.GetString("rmc-apc-ui-cover-disengaged");
         _window.CoverButton.Disabled = apc.Locked;
         _window.MainBreakerButton.Disabled = apc.Locked;
         _window.ChargeModeButton.Disabled = apc.Locked;
     }
 
-    private string Header(string header)
+    private string Header(string locId)
     {
-        return $"[bold]{header}[/bold]";
+        return $"[bold]{Loc.GetString(locId)}[/bold]";
+    }
+
+    private string Label(string locId)
+    {
+        return $"[color=#5B88B0]{Loc.GetString(locId)}[/color]";
     }
 
     private string Green(string str)
@@ -139,7 +155,20 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         row.Auto.Pressed = channel.Button == RMCApcButtonState.Auto;
         row.On.Pressed = channel.Button == RMCApcButtonState.On;
         row.Off.Pressed = channel.Button == RMCApcButtonState.Off;
-        row.Watts.SetMarkupPermissive($"{channel.Watts / multiplier} W");
-        row.Status.SetMarkupPermissive(channel.On ? $"{Green("On")}" : $"{Red("Off")}");
+        row.Watts.SetMarkupPermissive(Loc.GetString("rmc-apc-ui-channel-watts", ("watts", channel.Watts / multiplier)));
+        row.Status.SetMarkupPermissive(channel.On
+            ? Green(Loc.GetString("rmc-apc-ui-button-on"))
+            : Red(Loc.GetString("rmc-apc-ui-button-off")));
+    }
+
+    private string GetChannelNameId(RMCPowerChannel channel)
+    {
+        return channel switch
+        {
+            RMCPowerChannel.Equipment => "rmc-apc-ui-channel-equipment",
+            RMCPowerChannel.Lighting => "rmc-apc-ui-channel-lighting",
+            RMCPowerChannel.Environment => "rmc-apc-ui-channel-environment",
+            _ => throw new ArgumentOutOfRangeException(nameof(channel), channel, null),
+        };
     }
 }

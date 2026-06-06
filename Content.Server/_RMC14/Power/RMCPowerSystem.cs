@@ -373,8 +373,11 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
     private static bool GetChannelTarget(RMCApcComponent apc, RMCPowerChannel channel, bool automatic, bool available)
     {
-        return apc.Channels[(int) channel].Button == RMCApcButtonState.On
-            ? available
-            : automatic;
+        return apc.Channels[(int) channel].Button switch
+        {
+            RMCApcButtonState.Off => false,
+            RMCApcButtonState.On => available,
+            _ => automatic,
+        };
     }
 }

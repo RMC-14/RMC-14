@@ -115,6 +115,9 @@ public sealed partial class RMCApcComponent : Component
     public TimeSpan RemoveElectronicsDelay = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan SecureElectronicsDelay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan RepairFrameDelay = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
@@ -197,6 +200,7 @@ public enum RMCApcState
     Broken,
     BrokenCoverRemovedBattery,
     BrokenCoverRemovedNoBattery,
+    TerminalMissing,
     Maintenance,
 }
 
@@ -252,6 +256,9 @@ public sealed class RMCApcChargeModeBuiMsg : BoundUserInterfaceMessage;
 [RegisterComponent]
 public sealed partial class RMCApcFrameComponent : Component;
 
+[RegisterComponent, NetworkedComponent]
+public sealed partial class RMCApcConstructionFrameComponent : Component;
+
 [Serializable, NetSerializable]
 public sealed partial class RMCApcInstallTerminalDoAfterEvent : SimpleDoAfterEvent;
 
@@ -263,6 +270,12 @@ public sealed partial class RMCApcInstallElectronicsDoAfterEvent : SimpleDoAfter
 
 [Serializable, NetSerializable]
 public sealed partial class RMCApcRemoveElectronicsDoAfterEvent : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class RMCApcSecureElectronicsDoAfterEvent : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class RMCApcUnsecureElectronicsDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
 public sealed partial class RMCApcRepairFrameDoAfterEvent : SimpleDoAfterEvent;

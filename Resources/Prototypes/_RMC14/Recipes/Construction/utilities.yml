@@ -9,4 +9,7 @@
   description: "Area Power Controller (APC). Controls power. In an area."
   objectType: Structure
   placementMode: SnapgridCenter
+  canRotate: true
   canBuildInImpassable: true
+  conditions:
+  - !type:WallmountCondition {}

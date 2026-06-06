@@ -28,3 +28,8 @@ rmc-fusion-reactor-overload-examine-available = ARES scuttle authorization is ac
 rmc-fusion-reactor-overload-eta-never = Never
 rmc-fusion-reactor-overload-eta-imminent = imminent
 rmc-fusion-reactor-overload-eta-time = {$minutes}m {$seconds}s
+
+rmc-fusion-reactor-examine-repair-wrench = Use a [color=cyan]Wrench[/color] to repair it!
+rmc-fusion-reactor-examine-repair-wirecutters = Use [color=cyan]Wirecutters[/color] to repair it!
+rmc-fusion-reactor-examine-repair-welder = Use a [color=cyan]Welder[/color] to repair it!
+rmc-fusion-reactor-examine-needs-cell = It needs a [color=cyan]fuel cell[/color]!
