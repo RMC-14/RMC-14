@@ -395,10 +395,6 @@
         amount: 100
     - name: Armor-piercing ammunition
       entries:
-      - id: RMCMagazinePistolM13AP
-        amount: 14
-      - id: RMCMagazinePistolM13ExtAP
-        amount: 6
       - id: CMMagazinePistolM77AP
         amount: 50
       - id: CMMagazineRifleM4SPRAP
@@ -411,14 +407,14 @@
         amount: 2
     - name: Extended ammunition
       entries:
-      - id: RMCMagazinePistolM13Ext
-        amount: 10
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM4SPRExt
         amount: 10
       - id: CMMagazineRifleM54CExt
         amount: 8
+      - id: RMCMagazinePistolM13Ext
+        amount: 5
     - name: Special ammunition
       entries:
       - id: RMCPowerCellSmartgun
@@ -459,20 +455,12 @@
       hasBoxes: true
       entries:
       - id: RMCBoxMagazinePistolM13
-        name: Magazine Box (M13 x 22)
+        name: Magazine Box (M13 x 16)
         box: RMCMagazinePistolM13
 
       - id: RMCBoxMagazinePistolM13Ext
-        name: Magazine Box (Ext M13 x 14)
+        name: Magazine Box (Ext M13 x 10)
         box: RMCMagazinePistolM13Ext
-
-      - id: RMCBoxMagazinePistolM13AP
-        name: Magazine Box (M13 AP x 22)
-        box: RMCMagazinePistolM13AP
-
-      - id: RMCBoxMagazinePistolM13ExtAP
-        name: Magazine Box (Ext M13 AP x 14)
-        box: RMCMagazinePistolM13ExtAP
 
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
@@ -699,9 +687,9 @@
     - name: Stock
       entries:
       - id: RMCAttachmentM13StockSolid
-        amount: 5
+        amount: 3
       - id: RMCAttachmentM13StockCollapsible
-        amount: 5
+        amount: 2
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace

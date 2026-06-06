@@ -401,10 +401,6 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         amount: 4
-      - id: RMCMagazinePistolM13AP
-        amount: 4
-      - id: RMCMagazinePistolM13ExtAP
-        amount: 2
       - id: CMMagazineSMGM63AP
         amount: 3
       - id: CMMagazineRifleM54CAP
