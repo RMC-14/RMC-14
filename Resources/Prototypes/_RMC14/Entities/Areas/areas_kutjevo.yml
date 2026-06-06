@@ -144,6 +144,8 @@
   components:
   - type: Sprite
     state: lz_river
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaKutjevoExterior
@@ -232,6 +234,8 @@
   components:
   - type: Sprite
     state: construction
+  - type: Area
+    xenoHiveSetupRestriction: null
 
 - type: entity
   parent: RMCAreaKutjevoExterior
@@ -523,6 +527,7 @@
   - type: Sprite
     state: construction_int
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: true
     fulton: true
     mortarPlacement: false
@@ -565,6 +570,7 @@
   - type: Sprite
     state: foremans
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: true
     fulton: true
     mortarPlacement: false
@@ -637,6 +643,7 @@
   - type: Sprite
     state: colony_caves_0
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: true
     fulton: false
     mortarPlacement: false
@@ -656,6 +663,7 @@
   - type: Sprite
     state: colony_caves_0
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: true
     fulton: false
     mortarPlacement: false
@@ -674,6 +682,7 @@
   - type: Sprite
     state: colony_caves_1
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -692,6 +701,7 @@
   - type: Sprite
     state: colony_caves_2
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -710,6 +720,7 @@
   - type: Sprite
     state: colony_caves_2
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -746,6 +757,7 @@
   - type: Sprite
     state: colony_caves_3
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false
@@ -765,6 +777,7 @@
   - type: Sprite
     state: colony_caves_3
   - type: Area
+    xenoHiveSetupRestriction: null
     CAS: false
     fulton: false
     lasing: false

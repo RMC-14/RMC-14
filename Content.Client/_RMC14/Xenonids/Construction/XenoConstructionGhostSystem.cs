@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Client.IconSmoothing;
 using Content.Client.UserInterface.Systems.Actions;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared.DoAfter;
@@ -21,6 +22,7 @@ namespace Content.Client._RMC14.Xenonids.Construction;
 public sealed class XenoConstructionGhostSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -71,7 +73,12 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
                 return false;
 
             if (!IsValidConstructionLocation(player.Value, coords))
+            {
+                if (TryShowHiveCoreSetupRestrictionPopup(player.Value, construction, coords))
+                    return true;
+
                 return false;
+            }
 
             var netCoords = GetNetCoordinates(coords);
             var clickEvent = new XenoOrderConstructionClickEvent(netCoords, construction.OrderConstructionChoice.Value);
@@ -81,6 +88,18 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         }
 
         return false;
+    }
+
+    private bool TryShowHiveCoreSetupRestrictionPopup(EntityUid player, XenoConstructionComponent construction, EntityCoordinates coords)
+    {
+        if (construction.OrderConstructionChoice?.Id != SharedXenoConstructionSystem.XenoHiveCoreNodeId ||
+            !_area.IsXenoHiveSetupRestricted(coords, out _))
+        {
+            return false;
+        }
+
+        _area.CanXenoHiveSetupPopup(coords, player);
+        return true;
     }
 
     private bool HandleRightClick(in PointerInputCmdHandler.PointerInputCmdArgs args)

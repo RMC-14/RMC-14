@@ -102,6 +102,9 @@ rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glow
 rmc-xeno-construction-no-map-structure = The ground isn't solid.
 rmc-xeno-construction-must-have-weeds-structure = We can only make this on weeds!
 
+rmc-xeno-hive-setup-area-restricted = This area does not feel right for the hive yet.
+rmc-xeno-hive-setup-area-restricted-remaining = This area does not feel right for the hive yet. Try again in {$time}.
+
 rmc-xeno-designer-ui-nodes-count = Design nodes: {$count}/{$max}
 
 rmc-designnode-human-interact = You don't understand how to interact with this strange node.

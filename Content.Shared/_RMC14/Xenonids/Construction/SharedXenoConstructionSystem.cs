@@ -105,7 +105,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<QueenBuildingBoostComponent> _queenBoostQuery;
 
     private const string XenoStructuresAnimation = "RMCEffect";
-    private const string XenoHiveCoreNodeId = "HiveCoreXenoConstructionNode";
+    public const string XenoHiveCoreNodeId = "HiveCoreXenoConstructionNode";
 
     private float _densityThreshold;
     private TimeSpan _newResinPreventCollideTime;
@@ -1573,12 +1573,18 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return false;
             }
 
-            if (choiceProto.ID == XenoHiveCoreNodeId && _hive.GetHive(xeno.Owner) is { } hive && hive.Comp.NewCoreAt > _timing.CurTime)
+            if (choiceProto.ID == XenoHiveCoreNodeId)
             {
-                if (_net.IsServer && popup)
-                    _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-build-new-yet", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+                if (!_area.CanXenoHiveSetupPopup((gridId, grid, null), tile, xeno, popup))
+                    return false;
 
-                return false;
+                if (_hive.GetHive(xeno.Owner) is { } hive && hive.Comp.NewCoreAt > _timing.CurTime)
+                {
+                    if (_net.IsServer && popup)
+                        _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-build-new-yet", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+
+                    return false;
+                }
             }
         }
 

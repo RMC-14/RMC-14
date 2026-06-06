@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -54,6 +55,7 @@ namespace Content.Shared._RMC14.Xenonids.Egg;
 public sealed class XenoEggSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
@@ -148,6 +150,12 @@ public sealed class XenoEggSystem : EntitySystem
             return;
         }
 
+        if (!hasOvipositor &&
+            !_area.CanXenoHiveSetupPopup(xeno.Owner, xeno.Owner))
+        {
+            return;
+        }
+
         args.Handled = true;
 
         var ev = new XenoGrowOvipositorDoAfterEvent { PlasmaCost = args.AttachPlasmaCost };
@@ -176,16 +184,19 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoGrowOvipositorDoAfter(Entity<XenoComponent> xeno, ref XenoGrowOvipositorDoAfterEvent args)
     {
         if (args.Cancelled ||
-            args.Handled ||
-            !_plasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+            args.Handled)
         {
             return;
         }
 
+        var attached = TryComp(xeno, out XenoAttachedOvipositorComponent? attachedComp);
+        if (!_plasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+            return;
+
         args.Handled = true;
 
-        if (TryComp(xeno, out XenoAttachedOvipositorComponent? attached))
-            DetachOvipositor((xeno, attached));
+        if (attached)
+            DetachOvipositor((xeno, attachedComp!));
         else
             AttachOvipositor(xeno.Owner);
     }
