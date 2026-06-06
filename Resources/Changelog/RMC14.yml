@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You can now flush reagents from the colony flamer tank with a verb, like
-      the M34 incinerator tank.
-    type: Tweak
-  id: 2780
-  time: '2026-01-15T08:37:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8939
-- author: Arykh
-  changes:
-  - message: Fixes the ChemMaster leaving no remainder in the buffer when making pills.
-    type: Fix
-  id: 2781
-  time: '2026-01-15T08:36:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8858
-- author: Ian321
-  changes:
-  - message: Dropships, escape pods and boats should no longer start to shake after
-      using extinguishers on them.
-    type: Fix
-  id: 2782
-  time: '2026-01-15T08:37:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8937
 - author: Arykh
   changes:
   - message: Added the presets system to the ChemMaster! Presets let you save, edit,
@@ -4524,5 +4501,28 @@
   id: 3279
   time: '2026-06-06T22:40:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9258
+- author: CyberTropic
+  changes:
+  - message: Added ability to remove barricade upgrades using an access tuner.
+    type: Add
+  id: 3280
+  time: '2026-06-06T22:42:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8296
+- author: CatoChristopherMrow
+  changes:
+  - message: Missiles now destroy any wall that they are directly fired into.
+    type: Tweak
+  - message: Missiles can no longer fire into indestructible walls.
+    type: Fix
+  id: 3281
+  time: '2026-06-06T22:43:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8860
+- author: PursuitInAshes
+  changes:
+  - message: Recipes relating to xeno meat or humanoid organs have been disabled.
+    type: Fix
+  id: 3282
+  time: '2026-06-06T22:42:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8897
 Name: RMC14
 Order: -1
