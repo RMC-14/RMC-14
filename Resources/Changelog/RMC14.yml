@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added more turrets to both of Trijent's LZs
-    type: Add
-  id: 2797
-  time: '2026-01-16T01:12:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8778
 - author: Dutch-VanDerLinde
   changes:
   - message: The WeYa PMC corpse now has a 50% chance to spawn with a bulletproof
@@ -4529,5 +4522,13 @@
   id: 3296
   time: '2026-06-06T23:51:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9173
+- author: Utmanarn
+  changes:
+  - message: Changed the playtime rank system to allow players to select a preference
+      for what type of playtime rank they want to use.
+    type: Tweak
+  id: 3297
+  time: '2026-06-06T23:53:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6306
 Name: RMC14
 Order: -1
