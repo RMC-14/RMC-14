@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the MRE being given to marines being the WeYa one instead of the
-      UNMC one
-    type: Fix
-  - message: Added the bulletproof vest to the liaison's vest
-    type: Add
-  id: 2796
-  time: '2026-01-16T01:04:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8972
 - author: noctyrnal
   changes:
   - message: Added more turrets to both of Trijent's LZs
@@ -4532,5 +4522,12 @@
   id: 3295
   time: '2026-06-06T23:37:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9998
+- author: Thereisabear
+  changes:
+  - message: Added Playing cards!
+    type: Add
+  id: 3296
+  time: '2026-06-06T23:51:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9173
 Name: RMC14
 Order: -1
