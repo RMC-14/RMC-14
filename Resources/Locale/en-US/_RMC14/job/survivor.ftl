@@ -410,7 +410,7 @@ rmc-job-prefix-survivor-solaris-corporate-supervisor = Supervisor
 
 rmc-job-greeting-solaris-pmc = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -420,7 +420,7 @@ rmc-job-greeting-solaris-pmc = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-medic = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -430,7 +430,7 @@ rmc-job-greeting-solaris-pmc-medic = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-engineer = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -440,7 +440,7 @@ rmc-job-greeting-solaris-pmc-engineer = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-leader = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -450,7 +450,7 @@ rmc-job-greeting-solaris-pmc-leader = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-commander = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -460,7 +460,7 @@ rmc-job-greeting-solaris-pmc-commander = You are a survivor of a crash landing!
 
 rmc-job-greeting-solaris-pmc-supervisor = You are a survivor of a crash landing!
 
-  You are NOT aware of the xenomorph threat.
+  You are NOT aware of the xenonid threat.
 
   Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
 
@@ -480,7 +480,7 @@ rmc-job-name-survivor-shivas-assman = Assistant Operations Manager
 
 rmc-job-greeting-shivas-assistant-manager = You are the last alive Senior Administrator on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -490,7 +490,7 @@ rmc-job-greeting-shivas-assistant-manager = You are the last alive Senior Admini
 
 rmc-job-greeting-shivas-commando = You are the last living security element on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -500,7 +500,7 @@ rmc-job-greeting-shivas-commando = You are the last living security element on t
 
 rmc-job-greeting-shivas-panic-room-researcher = You are a Weston-Yamada Scientist on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -510,7 +510,7 @@ rmc-job-greeting-shivas-panic-room-researcher = You are a Weston-Yamada Scientis
 
 rmc-job-greeting-shivas-panic-room-doctor = You are a Medical Doctor on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 
@@ -520,7 +520,7 @@ rmc-job-greeting-shivas-panic-room-doctor = You are a Medical Doctor on the Colo
 
 rmc-job-greeting-shivas-panic-room-engineer = You are an Engineer on the Colony!
 
-  You are aware of the xenomorph threat.
+  You are aware of the xenonid threat.
 
   Your primary objective is to survive the outbreak.
 

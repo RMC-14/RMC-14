@@ -54,7 +54,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
 
         SubscribeLocalEvent<VentExitComponent, VentExitDoafterEvent>(OnVentExitDoafter);
 
-        SubscribeLocalEvent<VentCrawlableComponent, ComponentInit>(OnVentDuctInit);
+        SubscribeLocalEvent<VentCrawlableComponent, MapInitEvent>(OnVentDuctInit);
         SubscribeLocalEvent<VentCrawlableComponent, ReAnchorEvent>(OnVentReanchor);
         SubscribeLocalEvent<VentCrawlableComponent, MoveEvent>(OnVentDuctMove);
         SubscribeLocalEvent<VentCrawlableComponent, AnchorStateChangedEvent>(OnVentAnchorChanged);
@@ -89,8 +89,11 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
             args.VisibilityMask |= (int)VisibilityFlags.Subfloor;
     }
 
-    private void OnVentDuctInit(Entity<VentCrawlableComponent> vent, ref ComponentInit args)
+    private void OnVentDuctInit(Entity<VentCrawlableComponent> vent, ref MapInitEvent args)
     {
+        if (_net.IsClient)
+            return;
+
         vent.Comp.OriginalTravelDirection = vent.Comp.TravelDirection;
         if (vent.Comp.TravelDirection == PipeDirection.Fourway)
             return;
@@ -101,6 +104,9 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
 
     private void OnVentReanchor(Entity<VentCrawlableComponent> vent, ref ReAnchorEvent args)
     {
+        if (_net.IsClient)
+            return;
+
         if (vent.Comp.TravelDirection == PipeDirection.Fourway)
             return;
 
