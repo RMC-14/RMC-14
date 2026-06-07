@@ -1136,9 +1136,10 @@ namespace Content.Client.Lobby.UI
                     {
                         rankOptions.AddItem("Auto");
 
-                        foreach (var rank in job.Ranks)
+                        var availableRanks = job.Ranks.Take(job.Ranks.Count - 1);
+                        foreach (var rank in availableRanks)
                         {
-                            if (_prototypeManager.TryIndex(rank.Key, out RankPrototype? rankPrototype) && rankPrototype != null)
+                            if (_prototypeManager.TryIndex(rank.Key, out var rankPrototype))
                             {
                                 rankOptions.AddItem(rankPrototype.Name);
                                 rankProtoIds.Add(rank.Key);
