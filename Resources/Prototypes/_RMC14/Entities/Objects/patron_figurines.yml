@@ -1364,7 +1364,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronGregorCain
   name: Gregor Cain figurine
-  description: ""
+  #description: ""
   components:
   - type: Sprite
     state: gregor_cain
