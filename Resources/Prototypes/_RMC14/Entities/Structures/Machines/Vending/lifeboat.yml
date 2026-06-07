@@ -67,8 +67,8 @@
         amount: 8
       - id: RMCRadioHandheldAlmayer
         amount: 5
-#      - id: # deck of playing cards
-#        amount: 5
+      - id: RMCPlayingCardDeck
+        amount: 5
     - name: Clothing
       entries:
       - id: CMMaskGas

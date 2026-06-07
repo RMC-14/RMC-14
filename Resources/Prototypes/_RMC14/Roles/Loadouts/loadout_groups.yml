@@ -18,6 +18,14 @@
   - MarineLeatherSatchel
 
 - type: loadoutGroup
+  id: LiaisonBackpackRMC
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LiaisonSecureSatchel
+
+- type: loadoutGroup
   id: MarineTechnicianBackpack
   name: rmc-loadout-group-backpack
   minLimit: 1
@@ -399,6 +407,7 @@
   - PonchoUrbanRMC
   - PonchoSnowRMC
   - PatchPeaceRMC
+  - PDTLKitRMC
 
 - type: loadoutGroup
   id: AccessoriesRMCPVE

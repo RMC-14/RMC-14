@@ -1,6 +1,7 @@
 ﻿using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Nuke;
 using Content.Server._RMC14.Power;
 using Content.Server._RMC14.Stations;
 using Content.Server._RMC14.Xenonids.Hive;
@@ -20,14 +21,18 @@ using Content.Server.Shuttles.Systems;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Station.Systems;
 using Content.Server.Stunnable;
+using Content.Server.Temperature.Systems;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
 using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Armor.Ghillie;
 using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Light;
@@ -35,10 +40,12 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
@@ -47,6 +54,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
+using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
@@ -93,6 +101,9 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly ContainerSystem _containers = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly TemperatureSystem _temperature = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MindSystem _mind = default!;
@@ -111,8 +122,13 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly ARESSystem _ares = default!;
+    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly RMCAlertLevelSystem _alertLevelSystem = default!;
+    [Dependency] private readonly RMCNukeSystem _rmcNuke = default!;
+    [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
     [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;
@@ -234,8 +250,12 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
              before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEndMessage);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
+        SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
         SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
+        SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorCanOverloadEvent>(OnFusionReactorCanOverload);
+        SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorOverloadStatusEvent>(OnFusionReactorOverloadStatus);
+        SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorOverloadChangedEvent>(OnFusionReactorOverloadChanged);
 
         SubscribeLocalEvent<MarineComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<MarineComponent, ComponentRemove>(OnCompRemove);
@@ -294,6 +314,9 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
 
         var time = Timing.CurTime;
         component.StartTime ??= time;
+
+        if (UpdateScuttle(component, frameTime))
+            return;
 
         _scaling.TryStartScaling(component.MarineFaction);
 
