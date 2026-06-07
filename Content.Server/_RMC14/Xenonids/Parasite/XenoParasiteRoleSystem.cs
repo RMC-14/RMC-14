@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Ghost;
+using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -29,6 +30,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {
@@ -116,7 +118,9 @@ public sealed class XenoEggRoleSystem : EntitySystem
 
         if (_actor.TryGetSession(user, out var session) && session != null)
         {
-            _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, ent.Owner, ent.Owner);
+            //Uses seperate system due to parasites not having an inherent ghost role
+            var newMind = _mind.CreateMind(session.UserId, Name(ent));
+            _mind.TransferTo(newMind, ent);
         }
     }
 
