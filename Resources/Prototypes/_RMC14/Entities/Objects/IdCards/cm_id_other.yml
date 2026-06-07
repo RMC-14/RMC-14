@@ -232,6 +232,15 @@
     - RMCWeYa
 
 - type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardExecutiveBodyguard
+  components:
+  - type: ItemIFF
+    factions:
+    - FactionMarine
+    - FactionWeYa
+
+- type: entity
   parent: CMIDCardLanyard
   id: RMCIDCardBureauObserver
   name: bureau observer ID card

@@ -70,7 +70,7 @@
 - type: startingGear
   id: RMCJobWeYaExecutiveBodyguard
   equipment:
-    id: RMCIDCardPMC
+    id: RMCIDCardExecutiveBodyguard
     ears: RMCHeadsetExecutiveBodyguard
     jumpsuit: RMCJumpsuitLiaisonBlackExecutiveBodyguard
     outerClothing: RMCJacketCorporateBlack
