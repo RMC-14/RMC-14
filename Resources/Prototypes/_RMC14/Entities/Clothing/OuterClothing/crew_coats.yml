@@ -37,6 +37,15 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/blue.rsi
 
+- type: entity
+  parent: RMCCoatCorrespondent
+  id: RMCCoatCorrespondentTan
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/tan.rsi
+
 # Hazard vests
 - type: entity
   parent: [RMCAllowSuitStorageClothingHazardVest, RMCBaseJacket]
