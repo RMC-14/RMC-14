@@ -310,6 +310,10 @@
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
 
 - type: entity
   parent: RMCEscapePodController
@@ -320,9 +324,6 @@
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "RMCAccessWeYa" ] ]
-  - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
