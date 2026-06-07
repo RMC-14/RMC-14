@@ -46,7 +46,7 @@
       Jungle: /Textures/_RMC14/Objects/Clothing/Uniforms/MP/Warden/jungle.rsi
       Desert: /Textures/_RMC14/Objects/Clothing/Uniforms/MP/Warden/desert.rsi
       Snow: /Textures/_RMC14/Objects/Clothing/Uniforms/MP/Warden/snow.rsi
-      Classic: /Textures_RMC14/Objects/Clothing/Uniforms/MP/Warden/classic.rsi
+      Classic: /Textures/_RMC14/Objects/Clothing/Uniforms/MP/Warden/classic.rsi
       Urban: /Textures/_RMC14/Objects/Clothing/Uniforms/MP/Warden/urban.rsi
   - type: Tag
     tags:
