@@ -14,7 +14,6 @@ public sealed class RMCDefibrillatorSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<DefibrillatorComponent, PowerCellChangedEvent>(OnChangeCharge);
-        //SubscribeLocalEvent<DefibrillatorComponent, PowerCellChangedEvent>(OnChangeCharge);
     }
 
     private void OnChangeCharge(Entity<DefibrillatorComponent> entity, ref PowerCellChangedEvent args)
@@ -27,14 +26,11 @@ public sealed class RMCDefibrillatorSystem : EntitySystem
         level = (byte)Math.Ceiling(frac * (int)DefibrillatorChargeVisuals.Full);
         if (battery.CurrentCharge < draw.UseRate)
             level = 0;
-        //if (battery.CurrentCharge == battery.MaxCharge)
-        //level = (int)DefibrillatorChargeVisuals.Full;
 
 
         if (!TryComp<AppearanceComponent>(entity, out var appearance))
             return;
         _appearance.SetData(entity, DefibrillatorVisuals.DefibrillatorCharge, (DefibrillatorChargeVisuals)level, appearance);
-        //_appearance.QueueUpdate(entity, appearance);
 
     }
 }
