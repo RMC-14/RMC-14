@@ -76,7 +76,8 @@
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostInspector
-    #    pocket1: # TODO RMC14 tape recorder
+    belt: RMCBeltHolsterPistolHandcannonFilled
+    pocket1: RMCUniversalRecorder
     pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
 
 - type: playTimeTracker

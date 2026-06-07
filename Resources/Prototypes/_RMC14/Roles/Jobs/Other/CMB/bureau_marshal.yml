@@ -94,6 +94,9 @@
     pocket1: RMCPouchFirstAidERTFill
     pocket2: RMCPouchShotgunLargeBuckshot
     suitstorage: RMCWeaponShotgunM3717
+  storage:
+    back:
+    - RMCUniversalRecorder
 
 - type: playTimeTracker
   id: RMCJobBureauMarshal
