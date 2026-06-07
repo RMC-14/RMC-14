@@ -42,6 +42,7 @@
   - RMCAccessTSEPABrig # tsepa brig / senior constables
   - RMCAccessTSEPA # tsepa
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
   - RMCAccessLogs
 
@@ -89,6 +90,7 @@
   - RMCAccessTSEPABrig # tsepa brig / senior constables
   - RMCAccessTSEPA # tsepa
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
   - RMCAccessLogs
 
@@ -135,6 +137,7 @@
   - CMAccessSquadLeaderPrep
   - CMAccessMarineRifleman
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
   - RMCAccessLogs
 
@@ -178,6 +181,7 @@
   - CMAccessSquadLeaderPrep
   - CMAccessMarineRifleman
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
   - RMCAccessLogs
 

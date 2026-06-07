@@ -234,6 +234,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
              before: [typeof(ArrivalsSystem), typeof(SpawnPointSystem)]);
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEndMessage);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
+        SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
         SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
 

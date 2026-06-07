@@ -104,7 +104,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
 
             hive.LateJoinMarines -= lateJoinsPer;
-            IncreaseBurrowedLarva((uid, hive), 1);
+            ChangeBurrowedLarva((uid, hive), 1);
         }
     }
 
@@ -244,7 +244,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
             }
 
-            IncreaseBurrowedLarva(1);
+            ChangeBurrowedLarva(1);
             burrowed.PooledLarva--;
             if (burrowed.PooledLarva < 1)
                 RemCompDeferred<HijackBurrowedSurgeComponent>(id);

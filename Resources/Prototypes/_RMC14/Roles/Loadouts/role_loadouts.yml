@@ -124,6 +124,28 @@
   - MiscellaneousRMC
   - MeleeWeaponsRMC
 
+- type: roleLoadout
+  id: JobCMVehicleCrewman
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+
 # Command
 - type: roleLoadout
   id: JobCMCommandingOfficer
@@ -710,7 +732,7 @@
   id: JobCMLiaison
   points: 7
   groups:
-  - MarineLeatherBackpack
+  - LiaisonBackpackRMC
   - LiaisonRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
@@ -718,6 +740,29 @@
   - HelmetGarbsRMC
   - AccessoriesRMC
   - WatchesLiaisonRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
+  id: JobRMCWeYaExecutiveBodyguard
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
   - PaperworkRMC
   - RecreationalRMC
   - WeaponsRMC

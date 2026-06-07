@@ -16,6 +16,13 @@
     - RMCGuideRoleQueen
   - type: GhostRole
     name: cm-job-name-xeno-queen
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    description: cm-xeno-description
+    raffle:
+      settings: short
+    rules: cm-xeno-rules
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi
     layers:
@@ -277,6 +284,7 @@
   - type: RemoveComponents
     components:
     - type: Gibbable
+    - type: CanBeLarvaQueued
 
 - type: entity
   parent: RMCXenoQueenBase

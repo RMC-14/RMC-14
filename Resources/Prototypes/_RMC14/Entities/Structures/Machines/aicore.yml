@@ -173,6 +173,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
     state: console
+    layers: []
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false # Intentional
@@ -187,6 +188,7 @@
     sprite: _RMC14/Structures/Machines/AIStuff/aiconsoleinterface.rsi
     state: console
     offset: 0, -0.55
+    layers: []
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -198,7 +200,7 @@
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
     state: console
-    layers: [ ]
+    layers: []
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false # Intentional
