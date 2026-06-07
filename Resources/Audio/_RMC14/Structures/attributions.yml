@@ -2,3 +2,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/41109aa6eebf87892e41b61418b7b06b279d04b6/sound/effects/metalhit.ogg"
+
+- files: ["fenceopen.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/bf57b8c68061a90464919623d680eb3c7f4aa083/sound/effects/fenceopen.ogg"

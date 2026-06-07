@@ -353,9 +353,6 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             if (!(crashLanding.RemainingTime <= 0))
                 continue;
 
-            if (crashLanding.DoDamage)
-                ApplyFallingDamage(uid);
-
             var ev = new CrashLandedEvent(crashLanding.DoDamage);
             RaiseLocalEvent(uid, ref ev);
 
@@ -363,6 +360,10 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
                 _audio.PlayPvs(crashLandable.CrashSound, uid);
 
             RemComp<CrashLandingComponent>(uid);
+
+            if (crashLanding.DoDamage)
+                ApplyFallingDamage(uid);
+
             Blocker.UpdateCanMove(uid);
         }
     }
