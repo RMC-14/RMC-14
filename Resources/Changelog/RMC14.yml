@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added the TSE Airbase Nightmare Insert
-    type: Add
-  - message: Changed the paper cups in the RMC water cooler to use specific RMC paper
-      cups instead of upstream
-    type: Tweak
-  id: 2801
-  time: '2026-01-16T01:31:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8914
 - author: Dutch-VanDerLinde
   changes:
   - message: The FTL tracker now has a special sprite when you switch to that mode.
@@ -4518,5 +4508,20 @@
   id: 3300
   time: '2026-06-07T00:47:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9559
+- author: Vermidia
+  changes:
+  - message: Fixed Janibuckets and Mop buckets not being huge.
+    type: Fix
+  - message: Fixed Janibuckets storing too much (500u->300u)
+    type: Fix
+  - message: High-Capacity Beakers have been replaced with Reagent Jugs
+    type: Tweak
+  - message: Fixed Reagent Jugs storing too little (300u->500u), costs being wrong
+      (2.6~ metal sheets -> 10 glass sheets), and being printable in normal lathes
+      instead of the medilathe
+    type: Fix
+  id: 3301
+  time: '2026-06-07T00:48:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8316
 Name: RMC14
 Order: -1
