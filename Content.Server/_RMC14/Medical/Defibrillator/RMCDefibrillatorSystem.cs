@@ -6,6 +6,7 @@ using Content.Shared.PowerCell.Components;
 using Content.Shared.Rounding;
 
 namespace Content.Server._RMC14.Medical.Defibrillator;
+
 public sealed class RMCDefibrillatorSystem : SharedRMCDefibrillatorSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -13,6 +14,7 @@ public sealed class RMCDefibrillatorSystem : SharedRMCDefibrillatorSystem
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<DefibrillatorComponent, PowerCellChangedEvent>(OnChangeCharge);
     }
 
