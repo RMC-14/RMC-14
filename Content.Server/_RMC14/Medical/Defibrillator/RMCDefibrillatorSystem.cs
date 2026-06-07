@@ -15,6 +15,7 @@ public sealed class RMCDefibrillatorSystem : SharedRMCDefibrillatorSystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<DefibrillatorComponent, PowerCellChangedEvent>(OnChangeCharge);
     }
 
