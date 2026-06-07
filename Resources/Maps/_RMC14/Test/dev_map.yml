@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 05/15/2026 12:22:23
-  entityCount: 1478
+  entityCount: 1479
 maps:
 - 1
 grids:
@@ -3961,7 +3961,7 @@ entities:
       parent: 2
 - proto: CMSpawnPointCombatCorrespondent
   entities:
-  - uid: 1477
+  - uid: 1478
     components:
     - type: Transform
       pos: 0.5,-2.5
@@ -4125,7 +4125,7 @@ entities:
   - uid: 684
     components:
     - type: Transform
-      pos: 0.5,-2.5
+      pos: -2.5,0.5
       parent: 2
 - proto: CMSpawnPointSurvivor
   entities:
@@ -10066,7 +10066,7 @@ entities:
       parent: 2
 - proto: RMCSpawnPointExecutiveBodyguard
   entities:
-  - uid: 1478
+  - uid: 1479
     components:
     - type: Transform
       pos: -1.5,3.5
