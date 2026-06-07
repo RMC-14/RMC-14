@@ -85,7 +85,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _holeWallQuery = GetEntityQuery<XenoAcidHoleWallComponent>();
 
-        SubscribeLocalEvent<XenoAcidHoleComponent, InteractHandEvent>(OnHoleInteractHand);
+        SubscribeLocalEvent<XenoAcidHoleComponent, ActivateInWorldEvent>(OnHoleActivateInWorld);
         SubscribeLocalEvent<XenoAcidHoleComponent, XenoAcidHoleCrawlDoAfterEvent>(OnHoleCrawlDoAfter);
         SubscribeLocalEvent<XenoAcidHoleComponent, InteractUsingEvent>(OnHoleInteractUsing);
         SubscribeLocalEvent<XenoAcidHoleComponent, XenoAcidHoleRepairDoAfterEvent>(OnHoleRepairDoAfter);
@@ -96,7 +96,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidHoleWallComponent, DamageChangedEvent>(OnWallDamageChanged);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, DamageModifyEvent>(OnWallDamageModify);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, GettingAttackedAttemptEvent>(OnWallAttacked);
-        SubscribeLocalEvent<XenoAcidHoleWallComponent, InteractHandEvent>(OnWallInteractHand);
+        SubscribeLocalEvent<XenoAcidHoleWallComponent, ActivateInWorldEvent>(OnWallActivateInWorld);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, InteractUsingEvent>(OnWallInteractUsing);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, RMCRepairableTargetAttemptEvent>(OnWallRepairAttempt);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, EntityTerminatingEvent>(OnWallTerminating);
@@ -245,7 +245,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         ClearHole((wall, wallComp), deleteHole: false);
     }
 
-    private void OnHoleInteractHand(Entity<XenoAcidHoleComponent> hole, ref InteractHandEvent args)
+    private void OnHoleActivateInWorld(Entity<XenoAcidHoleComponent> hole, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
             return;
@@ -707,7 +707,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         }
     }
 
-    private void OnWallInteractHand(Entity<XenoAcidHoleWallComponent> wall, ref InteractHandEvent args)
+    private void OnWallActivateInWorld(Entity<XenoAcidHoleWallComponent> wall, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
             return;
