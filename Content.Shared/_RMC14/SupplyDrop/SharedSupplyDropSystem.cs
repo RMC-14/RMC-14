@@ -106,7 +106,13 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             _entityLookup.GetEntitiesInRange(ent, 0.33f, _intersecting);
             foreach (var intersecting in _intersecting)
             {
-                if (_container.TryGetContainingContainer(intersecting, out var container) && (container.Owner == ent.Owner || HasComp<ParaDroppingComponent>(container.Owner) || HasComp<CrashLandingComponent>(container.Owner)))
+                if (!TryComp(intersecting, out TransformComponent? xform))
+                    return;
+
+                if (_container.TryGetContainingContainer((intersecting, xform, null), out var container) && (container.Owner == ent.Owner || HasComp<ParaDroppingComponent>(container.Owner) || HasComp<CrashLandingComponent>(container.Owner)))
+                        continue;
+
+                if (_container.TryGetOuterContainer(intersecting, xform, out var outer) && (outer.Owner == ent.Owner || HasComp<ParaDroppingComponent>(outer.Owner) || HasComp<CrashLandingComponent>(outer.Owner)))
                         continue;
 
                 _damageable.TryChangeDamage(intersecting, landingDamage, true);
