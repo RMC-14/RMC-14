@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared._RMC14.Xenonids.Hide;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Actions;
@@ -160,7 +161,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         var range = TryComp<ParasiteAIComponent>(parasite, out var ai) ? ai.MaxInfectRange : parasite.Comp.InfectRange;
 
         if (_transform.InRange(coordinates, args.Leaping.Origin, range))
-            Infect(parasite, args.Hit, false);
+            Infect(parasite, args.Hit, false, true);
     }
 
     private void OnParasiteAfterInteract(Entity<XenoParasiteComponent> ent, ref AfterInteractEvent args)
@@ -391,10 +392,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (TryComp(ent, out FixturesComponent? fixtures))
         {
             var fixture = fixtures.Fixtures.First();
-            if ((fixture.Value.CollisionMask & (int) CollisionGroup.AirlockLayer & (int) CollisionGroup.BarricadeImpassable) != 0)
-                return;
-
-            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ (int) ThrownCollisionGroup);
+            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask & ~(int) ThrownCollisionGroup);
         }
     }
 
@@ -492,6 +490,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = true,
+            CancelDuplicate = false,
             DuplicateCondition = DuplicateConditions.SameEvent,
             AttemptFrequency = AttemptFrequency.EveryTick
         };
@@ -1035,6 +1034,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
         spawned = SpawnInContainerOrDrop(victim.Comp.BurstSpawn, victim.Owner, larvaContainer.ID);
+        EnsureComp<LarvaQueuedComponent>(spawned);
         LinkLarvaToVictim(victim, spawned);
     }
 
@@ -1042,6 +1042,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
         _container.InsertOrDrop(spawned, larvaContainer);
+        EnsureComp<LarvaQueuedComponent>(spawned);
         LinkLarvaToVictim(victim, spawned);
     }
 

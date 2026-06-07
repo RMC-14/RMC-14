@@ -47,8 +47,6 @@
     - type: CMVendorUser
       id: RMCJobSynthetic
       points: 45
-      extraPoints:
-        ExperimentalTools: 30
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -83,6 +81,7 @@
     id: RMCIDCardSynth
     ears: RMCHeadsetSynth
     belt: CMBeltUtilityFilled
+    pocket1: RMCUniversalRecorder
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -117,6 +116,14 @@
     whitelist:
       tags:
       - RMCSynthGrabbable
+
+- type: entity
+  id: RMCSynthHudComponents
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ShowHealthBars
+  - type: ShowHealthIcons
+  - type: HolocardScanner
 
 - type: entity
   id: RMCSynthRemoveComponents
