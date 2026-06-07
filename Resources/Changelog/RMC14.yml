@@ -1,25 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: The FTL tracker now has a special sprite when you switch to that mode.
-    type: Add
-  - message: Fixed FORECON Squad leader tracker not being functional.
-    type: Fix
-  - message: Fixed Xenos hive tracker resetting each time you evolve. The hive tracker
-      not automatically setting to queen has also been fixed.
-    type: Fix
-  id: 2802
-  time: '2026-01-17T13:17:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8855
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Hybrisa pizza driver survivor not having vehicles 1.
-    type: Fix
-  id: 2803
-  time: '2026-01-19T01:00:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9018
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed the PMC crashed ship on solaris insert not deleting walls.
     type: Fix
   - message: Fixed the Lazarus Landing corporate dome scenario not allowing scientist
@@ -4523,5 +4504,20 @@
   id: 3301
   time: '2026-06-07T00:48:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8316
+- author: MoonlightHollow
+  changes:
+  - message: Added 25 & 50 options for dispensing materials
+    type: Add
+  id: 3302
+  time: '2026-06-07T00:50:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9984
+- author: kleinerstation13
+  changes:
+  - message: Added sprites for alternate magazines on the AK-4047, PDW90, L57 SMG
+      and SSG45
+    type: Add
+  id: 3303
+  time: '2026-06-07T00:49:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9959
 Name: RMC14
 Order: -1
