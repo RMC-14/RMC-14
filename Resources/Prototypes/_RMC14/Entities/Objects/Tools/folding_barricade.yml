@@ -41,6 +41,11 @@
     - 0
   - type: Appearance
   - type: Clickable
+  - type: InteractedBlacklist
+    anchoredOnly: true
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMFoldingBarricade
