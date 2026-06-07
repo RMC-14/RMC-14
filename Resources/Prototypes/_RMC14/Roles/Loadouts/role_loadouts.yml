@@ -781,7 +781,7 @@
   id: JobRMCWeYaExecutiveBodyguard
   points: 7
   groups:
-  - MarineLeatherBackpack
+  - ExecutiveSecurityGuardBackpack
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
