@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
+using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Tackle;
@@ -68,6 +69,7 @@ public sealed partial class XenoSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly HiveLeaderSystem _hiveLeader = default!;
+    [Dependency] private readonly SharedImaginaryFriendSystem _imaginaryFriend = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -188,12 +190,16 @@ public sealed partial class XenoSystem : EntitySystem
     {
         var oldRotation = _transform.GetWorldRotation(args.OldXeno);
         _transform.SetWorldRotation(newXeno, oldRotation);
+
+        _imaginaryFriend.TryTransferFriends(args.OldXeno, newXeno);
     }
 
     private void OnXenoDevolved(Entity<XenoComponent> newXeno, ref XenoDevolvedEvent args)
     {
         var oldRotation = _transform.GetWorldRotation(args.OldXeno);
         _transform.SetWorldRotation(newXeno, oldRotation);
+
+        _imaginaryFriend.TryTransferFriends(args.OldXeno, newXeno);
     }
 
     private void OnXenoHealthScannerAttemptTarget(Entity<XenoComponent> ent, ref HealthScannerAttemptTargetEvent args)
