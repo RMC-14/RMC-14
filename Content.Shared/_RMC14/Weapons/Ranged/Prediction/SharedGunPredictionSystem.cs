@@ -1,6 +1,5 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared.CombatMode;
-using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -39,15 +38,9 @@ public abstract class SharedGunPredictionSystem : EntitySystem
         gun.ShootCoordinates = GetCoordinates(coordinates);
         gun.Target = GetEntity(target);
 #pragma warning restore RA0002
-        var shouldRearmSemiAuto =
-            rearmSemiAuto &&
-            gun.SelectedMode == SelectiveFire.SemiAuto &&
-            !HasComp<GunClickToFireComponent>(ent);
-
-        if (shouldRearmSemiAuto)
+        if (rearmSemiAuto)
             _gun.ResetShotCounter(ent, gun);
 
-        // Dont snapp the cooldown forward to the current frame on every generated rearm
-        return _gun.AttemptShoot(user.Value, ent, gun, projectiles, session, shouldRearmSemiAuto);
+        return _gun.AttemptShoot(user.Value, ent, gun, projectiles, session, rearmSemiAuto);
     }
 }
