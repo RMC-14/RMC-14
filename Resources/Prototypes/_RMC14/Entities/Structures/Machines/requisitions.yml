@@ -100,7 +100,7 @@
     - OrderSender
   - type: GuideHelp
     guides:
-    - Cargo
+    - RMCRequisitions
   - type: CargoSellBlacklist
   - type: LitOnPowered
   - type: EmitSoundOnUIOpen

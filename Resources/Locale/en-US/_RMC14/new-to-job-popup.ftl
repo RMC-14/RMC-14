@@ -121,6 +121,7 @@ rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of t
 
                                              If you have any other questions, consult the guidebook's Corporate Liaison page.
 rmc-new-to-job-cc = As a Correspondent, your job is to keep the masses informed on the efforts of the United Nations Marine Corps! Be that through film and broadcast, pen and paper journalism, or any other means.
+rmc-new-to-job-combat-correspondent = As a Combat Correspondent, you are embedded with the United Nations Marine Corps. Report from the field, follow the operation, and bring the story home.
 
                                              Head on over to the Correspondents' room, from there, you can get your Correspondent essentials and your TV camera to film the action. This camera broadcasts a live view to any televisions on the ship (audio not included), so make sure to get good shots for the folks back home! The fax machine in the room is also your tool for sending articles around the ship or contacting The Free Press.
 
