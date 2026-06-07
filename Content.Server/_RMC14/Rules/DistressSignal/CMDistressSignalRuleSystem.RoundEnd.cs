@@ -323,7 +323,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 _rmcAmbientLight.SetColor((xenoMap, rmcAmbientComp), colorSequence, _sunriseDuration);
             }
 
-            var ares = _ares.EnsureARES();
+            var ares = _aresCore.EnsureMarineARES();
             _marineAnnounce.AnnounceRadio(ares,
                 Loc.GetString("rmc-distress-signal-bioscan-complete"),
                 rule.AllClearChannel);
