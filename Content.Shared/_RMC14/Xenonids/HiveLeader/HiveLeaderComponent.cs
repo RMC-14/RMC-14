@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.HiveLeader;
 
@@ -20,4 +21,10 @@ public sealed partial class HiveLeaderComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId LeaderPrefix = "rmc-xeno-name-leader";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId SquadActionId = "ActionXenoHiveLeaderSquad";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? SquadAction;
 }

@@ -201,6 +201,9 @@
   - type: DirectionalTileFireOnTrigger
     range: 3
     spawn: RMCTileFire
+    sound: /Audio/_RMC14/Effects/hit_on_shattered_glass.ogg
+    intensity: 20
+    duration: 15
 
 - type: entity
   parent: RMCBaseAirBurstProjectile
@@ -273,7 +276,6 @@
       path: /Audio/Effects/gen_hit.ogg
   - type: SpawnOnTerminate
     spawn: RMCSmoke
-    projectileAdjust: false
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger

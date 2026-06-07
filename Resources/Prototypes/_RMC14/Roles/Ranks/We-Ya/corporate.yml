@@ -103,3 +103,28 @@
   name: Administrative Synthetic
   prefix: Adm. Syn.
   paygrade: WYS3
+
+# Executive Bodyguard
+- type: rank
+  id: RMCRankWeYaBodyguardTPPO
+  name: Trainee Personal Protection Officer
+  prefix: TPPO.
+  paygrade: WY-SEC-1
+
+- type: rank
+  id: RMCRankWeYaBodyguardPPO
+  name: Personal Protection Officer
+  prefix: PPO.
+  paygrade: WY-SEC-2
+
+- type: rank
+  id: RMCRankWeYaBodyguardPPS
+  name: Personal Protection Specialist
+  prefix: PPS.
+  paygrade: WY-SEC-3
+
+- type: rank
+  id: RMCRankWeYaBodyguardPPC
+  name: Personal Protection Coordinator
+  prefix: PPC.
+  paygrade: WY-SEC-4

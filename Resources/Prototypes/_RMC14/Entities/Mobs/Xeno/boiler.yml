@@ -1,4 +1,5 @@
 - type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -13,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleBoiler
-  - type: GhostRole
-    name: cm-job-name-xeno-boiler
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Boiler/boiler.rsi
   - type: Fixtures
@@ -165,3 +164,86 @@
     name: cm-job-name-xeno-boiler
   - type: RMCActionOrder
     id: CMXenoBoiler
+
+    #CMXenoBoiler
+- type: entity
+  parent: CMXenoBoiler
+  id: RMCXenoBoiler
+  components:
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStabBoiler
+    - ActionXenoAcidStrong
+    - ActionXenoBombard
+    - ActionXenoToggleGasType
+    - ActionXenoSprayAcidBoiler
+    - ActionXenoZoom
+    - ActionXenoAcidShroud
+    - ActionXenoDevolve
+  - type: XenoDeathcloud
+  - type: NeurotoxinInjector
+  - type: XenoEvolution
+    strains:
+      - RMCXenoBoilerSapper
+  - type: RMCActionOrder
+    id: RMCXenoBoiler
+
+    # Sapper strain
+- type: entity
+  parent: CMXenoBoiler
+  id: RMCXenoBoilerSapper
+  suffix: Sapper
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Boiler/boiler_sapper.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoTailStabBoiler
+    - ActionXenoWatch
+    - ActionXenoAcidStrong
+    - ActionXenoAcidMine
+    - ActionXenoAcidShotgun
+    - ActionXenoDeployTraps
+    - ActionXenoZoom
+    - ActionXenoDevolve
+  - type: XenoStrain
+    name: rmc-xeno-trapper-name
+    description: rmc-xeno-trapper-description
+    popup: rmc-xeno-trapper-popup
+  - type: CMArmor
+    xenoArmor: 0
+    explosionArmor: 20
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.50
+    baseSprintSpeed: 3.00
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      590: Critical
+      690: Dead
+  - type: XenoZoom
+    zoom: 1.9, 1.9
+    offsetLength: 0
+    speed: 1
+    doAfter: 0
+  - type: XenoTailStab
+    toggle: true
+    inject:
+      RMCMolecularAcid: 6
+    tailDamage:
+      groups:
+        Brute: 30
+  - type: XenoAcidMine
+  - type: XenoAcidShotgun
+  - type: XenoDeployTraps
+  - type: XenoInsight
+  - type: XenoAdrenalineSurge
+  - type: RMCActionOrder
+    id: RMCXenoBoilerSapper
+
+

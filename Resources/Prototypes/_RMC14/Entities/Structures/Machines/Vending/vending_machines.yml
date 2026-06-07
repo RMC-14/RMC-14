@@ -63,8 +63,12 @@
     radius: 1.5
   - type: LitOnPowered
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 10
+    activeLoad: 0
+    channel: Equipment # TODO RMC14 vend_power_usage: 150
   - type: Appearance
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/generic.rsi
@@ -87,6 +91,9 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
   - type: ActivatableUIBlacklist
     blacklist:
       components:
@@ -95,14 +102,14 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: ["Breakage"]
       - !type:EjectVendorItems
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 100
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -188,6 +195,7 @@
     RMCFoodSnackCheeseburgerPackaged: 12
     RMCFoodSnackBurritoPackaged: 12
     RMCFoodSnackHotdogPackaged: 12
+    RMCFoodSnackSamosaPackaged: 12
     RMCFoodSnackKeplarCrisps: 12
     RMCFoodSnackKeplarFlamehotCrisps: 12
     RMCFoodSnackChipsPepper: 12
@@ -210,6 +218,7 @@
     RMCFoodSnackCheeseburgerPackaged: 40
     RMCFoodSnackBurritoPackaged: 40
     RMCFoodSnackHotdogPackaged: 40
+    RMCFoodSnackSamosaPackaged: 40
 
 - type: entity
   parent: CMVendorSnack
@@ -530,6 +539,7 @@
     RMCMagazinePistolM1984Rubber: 40
     RMCMagazinePistolM77Rubber: 40
     RMCMagazineRifleM54CRubber: 40
+    RMCMagazineRifleM54CMK1Rubber: 10
     RMCMagazineRifleM4SPRRubber: 40
     CMArmorHelmetM10MP: 8
     RMCExplosiveBreachingChargeRubber: 6
@@ -565,6 +575,7 @@
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2
     RMCRadiationAidKitFilled: 1
+    RMCCPRDummy: 5
     # Crew Monitor
 
 
@@ -675,13 +686,18 @@
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
     - state: "normal-unshaded"
-      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
       shader: unshaded
     - state: "panel"
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0
+    needsPower: true # TODO RMC14
+    powerLoad: 250
+  - type: RMCPowerReceiver
+    idleLoad: 10
+    activeLoad: 0
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Appearance
   - type: LitOnPowered
   - type: Wires
@@ -689,6 +705,9 @@
     layoutId: Vending
   - type: WiresPanel
   - type: WiresVisuals
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     scaling: false
     sections:
@@ -702,8 +721,10 @@
         amount: 5
       - id: DrinkShaker
         amount: 5
-      - id: DrinkGlass
+      - id: RMCDrinkGlass
         amount: 8
+      - id: DrinkGlass
+        amount: 4
       - id: ClothingOuterApronChef
         amount: 2
       - id: RMCCondimentSmallSalt

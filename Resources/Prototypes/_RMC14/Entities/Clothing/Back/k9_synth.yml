@@ -1,0 +1,63 @@
+- type: entity
+  parent: CMPersonalStorageBase
+  id: RMCK9SynthHarnessBase
+  abstract: true
+  name: K9 carry harness
+  description: A form-fitted carry harness for synthetic K9 units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/K9Synth/harnesses.rsi
+    layers:
+    - state: marinepack_k9
+    - state: marinepack_k9
+      map: [ "openLayer" ]
+      visible: false
+    - state: marinepack_k9
+      map: [ "closedLayer" ]
+      visible: true
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/K9Synth/harnesses.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,20,1
+
+- type: entity
+  parent: RMCK9SynthHarnessBase
+  id: RMCK9SynthCargoHarness
+  name: M209 portable K9 backpack
+  description: Form fitted for the K9 Rescue Unit line of synthetics. Designed to lug gear into the battlefield.
+
+- type: entity
+  parent: RMCK9SynthHarnessBase
+  id: RMCK9SynthMedicalHarness
+  name: M210 portable K9 medical backpack
+  description: Form fitted for the K9 Rescue Unit line of synthetics. For carrying medical supplies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/K9Synth/harnesses.rsi
+    layers:
+    - state: marinepack_medic_k9
+    - state: marinepack_medic_k9
+      map: [ "openLayer" ]
+      visible: false
+    - state: marinepack_medic_k9
+      map: [ "closedLayer" ]
+      visible: true
+
+- type: entity
+  parent: RMCK9SynthHarnessBase
+  id: RMCK9SynthMPHarness
+  name: M553 portable K9 police backpack
+  description: Form fitted for the K9 Rescue Unit line of synthetics. For carrying MP Equipment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/K9Synth/harnesses.rsi
+    layers:
+    - state: mppack_k9
+    - state: mppack_k9
+      map: [ "openLayer" ]
+      visible: false
+    - state: mppack_k9
+      map: [ "closedLayer" ]
+      visible: true
