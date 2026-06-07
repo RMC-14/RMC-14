@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: wheelwrightt
-  changes:
-  - message: Recharger sprite now changes corresponding to the charge level of the
-      item inside.
-    type: Add
-  - message: NV visor now displays charge level upon examining in the recharger.
-    type: Fix
-  id: 2807
-  time: '2026-01-19T03:22:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8557
-- author: SharkSnake98
-  changes:
-  - message: Fixed testfails from TSE Airbase Insert
-    type: Fix
-  id: 2808
-  time: '2026-01-23T03:40:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9007
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Hybrisa has received a passover. Changed up loot, new props, more soul.
-    type: Add
-  id: 2809
-  time: '2026-01-23T03:41:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9020
-- author: Whisper
-  changes:
-  - message: Xenonids, by default, are immune to becoming zombies. This can change
-      during a round, however.
-    type: Tweak
-  id: 2810
-  time: '2026-01-23T03:56:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9042
 - author: Whisper
   changes:
   - message: All airlocks should now be able to be properly deconstructed into metal.
@@ -4515,5 +4483,35 @@
   id: 3306
   time: '2026-06-07T01:47:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9387
+- author: Tuna224
+  changes:
+  - message: Made Parasite Infects not Cancelable via Double Click
+    type: Tweak
+  id: 3307
+  time: '2026-06-07T02:08:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9832
+- author: Aurallianz
+  changes:
+  - message: In game ARES Logs
+    type: Add
+  id: 3308
+  time: '2026-06-07T02:07:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8493
+- author: J C Denton
+  changes:
+  - message: Added Riot Control jobs and ghost roles.
+    type: Add
+  id: 3309
+  time: '2026-06-07T02:12:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8819
+- author: Aurallianz
+  changes:
+  - message: crit xenos ghosting kills them
+    type: Fix
+  - message: vertical scroll bar for new to job popup
+    type: Fix
+  id: 3310
+  time: '2026-06-07T03:09:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10030
 Name: RMC14
 Order: -1
