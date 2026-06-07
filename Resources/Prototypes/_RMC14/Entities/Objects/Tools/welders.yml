@@ -225,8 +225,8 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 200
-        maxVol: 200 # TODO RMC14 80 when welders are fixed
+          Quantity: 80
+        maxVol: 80
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 70
@@ -244,8 +244,8 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 100
-        maxVol: 100 # TODO RMC14 40 when welders are fixed
+          Quantity: 40
+        maxVol: 40
 
 - type: entity
   parent: RMCWelderIndustrial
