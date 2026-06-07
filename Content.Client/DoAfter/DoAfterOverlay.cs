@@ -139,7 +139,6 @@ public sealed class DoAfterOverlay : Overlay
                 if (!doAfter.Args.ForceVisible)
                 {
                     // Don't show the doafter bar to other clients if the entity's sprite isn't visible.
-                    // Also checks if the entity isn't a xeno
                     if(!sprite.Visible && uid != localEnt)
                        continue;
 
