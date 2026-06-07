@@ -9,6 +9,7 @@ using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -77,6 +78,7 @@ namespace Content.Server.Ghost
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
         private static readonly ProtoId<DamageTypePrototype> AsphyxiationDamageType = "Asphyxiation";
+        private static readonly ProtoId<DamageTypePrototype> BluntDamageType = "Blunt";
 
         public override void Initialize()
         {
@@ -600,6 +602,11 @@ namespace Content.Server.Ghost
                     }
 
                     DamageSpecifier damage = new(_prototypeManager.Index(AsphyxiationDamageType), dealtDamage);
+
+                    if (HasComp<XenoComponent>(playerEntity))
+                    {
+                        damage = new(_prototypeManager.Index(BluntDamageType), dealtDamage);
+                    }
 
                     _damageable.TryChangeDamage(playerEntity, damage, true);
                 }
