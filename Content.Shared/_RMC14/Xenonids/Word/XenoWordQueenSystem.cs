@@ -4,11 +4,13 @@ using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.Word;
@@ -18,6 +20,7 @@ public sealed class XenoWordQueenSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedCMChatSystem _cmChat = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -45,7 +48,6 @@ public sealed class XenoWordQueenSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = true;
         _ui.TryOpenUi(queen.Owner, XenoWordQueenUI.Key, queen);
     }
 
@@ -55,6 +57,9 @@ public sealed class XenoWordQueenSystem : EntitySystem
 
         var text = args.Text.Trim();
         if (string.IsNullOrWhiteSpace(text))
+            return;
+
+        if (!CanSend(queen))
             return;
 
         if (!_xenoPlasma.HasPlasmaPopup(queen.Owner, queen.Comp.PlasmaCost))
@@ -98,5 +103,21 @@ public sealed class XenoWordQueenSystem : EntitySystem
             if (HasComp<XenoWordQueenActionComponent>(actionId))
                 _actions.StartUseDelay(actionId);
         }
+    }
+
+    private bool CanSend(EntityUid queen)
+    {
+        foreach (var (actionId, action) in _actions.GetActions(queen))
+        {
+            if (!HasComp<XenoWordQueenActionComponent>(actionId))
+                continue;
+
+            if (!action.Enabled || _actions.IsCooldownActive(action, _timing.CurTime))
+                return false;
+
+            return true;
+        }
+
+        return false;
     }
 }

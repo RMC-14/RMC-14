@@ -90,8 +90,8 @@
         amount: 25
       - id: RMCGrenadeIncendiary
         amount: 4
-      #- id: M40 HPDP White Phosphorus Smoke Grenade
-      #  amount: 4
+      - id: RMCPacketGrenadeWhitePhosphorusCompoundFilled
+        amount: 4
       - id: CMGrenadeSmoke
         amount: 5
       - id: RMC40MMGrenadeM74AGMF
@@ -256,8 +256,8 @@
         amount: 1
       - id: RMCSentryLaptop
         amount: 4
-      #- id: Spare PDT/L Battle Buddy Kit
-      #  amount: 4
+      - id: CMSparePDTLBattleBuddyKit
+        amount: 4
     - name: Flare and Light
       entries:
       - id: RMCFlashlight # Combat Flashlight
@@ -274,8 +274,8 @@
         amount: 10
       - id: RMCScabbardMacheteFilled
         amount: 6
-      #- id: MB-6 Folding Barricades (x3)
-      #   amount: 3
+      - id: CMFoldingBarricadesMB6x3
+        amount: 3
       - id: RMCWeldingGoggles
         amount: 3
       - id: CMFireExtinguisherPortable
@@ -302,6 +302,11 @@
         box: CMGrenadeFragOld
         boxAmount: 3
         boxSlots: 3
+      - id: RMCBoxClaymoreMineFilled
+        name: M20 Claymore anti-personnel mine box
+        box: RMCExplosiveClaymoreMine
+        boxAmount: 5
+        boxSlots: 5
       - id: CMPacketGrenadeHighExplosiveFilled
         name: 30mm HEDP grenade packet
         box: CMGrenadeHighExplosive
@@ -347,6 +352,9 @@
         box: RMCBatonSlugHIRR
         boxAmount: 3
         boxSlots: 3
+  - type: GuideHelp
+    guides:
+    - RMCRequisitions
 
 #AMMUNITION VENDOR
 - type: entity
@@ -390,10 +398,6 @@
         amount: 100
     - name: Armor-piercing ammunition
       entries:
-      - id: RMCMagazinePistolM13AP
-        amount: 14
-      - id: RMCMagazinePistolM13ExtAP
-        amount: 6
       - id: CMMagazinePistolM77AP
         amount: 50
       - id: CMMagazineRifleM4SPRAP
@@ -406,14 +410,14 @@
         amount: 2
     - name: Extended ammunition
       entries:
-      - id: RMCMagazinePistolM13Ext
-        amount: 10
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM4SPRExt
         amount: 10
       - id: CMMagazineRifleM54CExt
         amount: 8
+      - id: RMCMagazinePistolM13Ext
+        amount: 5
     - name: Special ammunition
       entries:
       - id: RMCPowerCellSmartgun
@@ -454,20 +458,12 @@
       hasBoxes: true
       entries:
       - id: RMCBoxMagazinePistolM13
-        name: Magazine Box (M13 x 22)
+        name: Magazine Box (M13 x 16)
         box: RMCMagazinePistolM13
 
       - id: RMCBoxMagazinePistolM13Ext
-        name: Magazine Box (Ext M13 x 14)
+        name: Magazine Box (Ext M13 x 10)
         box: RMCMagazinePistolM13Ext
-
-      - id: RMCBoxMagazinePistolM13AP
-        name: Magazine Box (M13 AP x 22)
-        box: RMCMagazinePistolM13AP
-
-      - id: RMCBoxMagazinePistolM13ExtAP
-        name: Magazine Box (Ext M13 AP x 14)
-        box: RMCMagazinePistolM13ExtAP
 
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
@@ -559,8 +555,10 @@
 
 #      - name: Magazine Box (XM51 x 8)
 #        box: RMCMagazineShotgunXM51
-#      - name: Magazine Box (.458 SOCOM x 300) # TODO RMC14
-#        box: RMCBox458SOCOM
+      - id: RMCBoxBullets458
+        box: RMCBox458SOCOM
+        boxAmount: 3
+        boxSlots: 3
 #      - name: Magazine Box (M2C x 8)
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (M56B x 8)
@@ -608,6 +606,9 @@
         name: rifle ammunition box (10x24mm AP) (M54C)
         box: CMMagazineRifleM54CAP
         boxSlots: 15 # 600 / 40
+  - type: GuideHelp
+    guides:
+    - RMCRequisitions
 
 #ATTACHMENTS VENDOR
 - type: entity
@@ -692,9 +693,9 @@
     - name: Stock
       entries:
       - id: RMCAttachmentM13StockSolid
-        amount: 5
+        amount: 3
       - id: RMCAttachmentM13StockCollapsible
-        amount: 5
+        amount: 2
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
@@ -709,6 +710,9 @@
         amount: 5
       - id: RMCAttachmentM44MagnumSharpshooterStock
         amount: 5
+  - type: GuideHelp
+    guides:
+    - RMCRequisitions
 
 #UNIFORM VENDOR
 - type: entity
@@ -870,3 +874,6 @@
         amount: 10
       - id: RMCGuidebookSOP
         amount: 10
+  - type: GuideHelp
+    guides:
+    - RMCRequisitions

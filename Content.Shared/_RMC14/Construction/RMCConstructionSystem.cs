@@ -84,15 +84,20 @@ public sealed class RMCConstructionSystem : EntitySystem
         var query = EntityQueryEnumerator<RMCReplaceOnHijackLandComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            if (!TryComp(uid, out TransformComponent? xform) || xform.MapUid != ev.Map)
+                continue;
+
             if (comp.Id is not { } id)
             {
                 Del(uid);
                 continue;
             }
 
-            var coordinates = _transform.GetMoverCoordinates(uid);
+            var coordinates = _transform.GetMoverCoordinates(uid, xform);
+            var rotation = xform.LocalRotation;
             Del(uid);
-            Spawn(id, coordinates);
+            var spawned = Spawn(id, coordinates);
+            _transform.SetLocalRotation(spawned, rotation);
         }
     }
 

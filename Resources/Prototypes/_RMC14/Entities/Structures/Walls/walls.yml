@@ -1,3 +1,11 @@
+- type: examinableDamage
+  id: RMCWallMessages
+  messages:
+    - rmc-wall-integrity-1
+    - rmc-wall-integrity-2
+    - rmc-wall-integrity-3
+    - rmc-wall-integrity-4
+
 # Standard
 - type: entity
   parent: CMBaseWall
@@ -16,6 +24,12 @@
     maxHealth: 3000
   - type: Destructible
     thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3125
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 3000
@@ -52,6 +66,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 2100
+    breakDamage:
+      types:
+        Structural: 3000
 
 - type: entity
   parent: CMWallMetal
@@ -67,6 +89,14 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 2100
+    breakDamage:
+      types:
+        Structural: 3000
 
 - type: entity
   parent: RMCWallAlmayerDeco1
@@ -145,6 +175,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 2100
+    breakDamage:
+      types:
+        Structural: 3000
 
 # Reinforced
 - type: entity
@@ -168,10 +206,18 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 9000
+        damage: 9500
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
   - type: IconSmooth
     key: walls
     additionalKeys:
@@ -208,6 +254,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCBaseWallReinforced
@@ -223,6 +277,14 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCWallAlmayerReinforcedDeco1
@@ -301,6 +363,14 @@
     - windows
     - doors
     base: wall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 - type: entity
   parent: RMCBaseWallReinforced
@@ -319,6 +389,14 @@
     - windows
     - doors
     base: aiwall
+  - type: RMCHijackRandomDamageTarget
+    category: Wall
+    damage:
+      types:
+        Structural: 6300
+    breakDamage:
+      types:
+        Structural: 9000
 
 # Indestructible
 - type: entity
@@ -539,6 +617,14 @@
     - windows
     - doors
     base: cavewall
+
+- type: entity
+  parent: CMWallRock
+  id: CMWallRock25
+  suffix: 25 minutes
+  components:
+  - type: TimedDespawn
+    lifetime: 1500
 
 # Cult
 - type: entity

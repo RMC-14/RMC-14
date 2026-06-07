@@ -513,10 +513,16 @@
       "name": "surv_wy"
     },
     {
+      "name": "vc_spawn"
+    },
+    {
       "name": "recruit_spawn"
     },
     {
       "name": "clf_spawn"
+    },
+    {
+      "name": "eb_spawn"
     },
     {
       "name": "unmc_spawn"

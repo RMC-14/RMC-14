@@ -414,6 +414,17 @@
     state: holster
 
 - type: entity
+  parent: RMCWebbingHolsterRCM
+  id: RMCWebbingHolsterRCML189
+  suffix: RCM, Filled L189
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMK80RCM
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
+
+- type: entity
   parent: RMCWebbingHolsterBlack
   id: RMCWebbingHolsterBlackB92FS
   suffix: Filled, B92FS
@@ -764,6 +775,7 @@
       - RMCNailgunTactical
       - RMCSynthResetKey
       - RodMetal1
+      - LightReplacer
       components:
       - Welder
       - PowerCell
@@ -983,24 +995,24 @@
       amount: 5
 
 - type: entity
-  parent: RMCWebbingDropPouch
-  id: RMCWebbingDropPouchRoyal
-  suffix: Filled, Royal
+  parent: RMCWebbingDropPouchRCM
+  id: RMCWebbingDropPouchRCMFilled
+  suffix: RCM, Filled
   components:
   - type: StorageFill
     contents:
-      - id: CMMaskGas # TODO RMC14 l7 gasmask
+      - id: RMCMaskGasRCM
       - id: RMCHeadRoyalBeret
       - id: RMCMRETSE
 
 - type: entity
-  parent: RMCWebbingDropPouch
-  id: RMCWebbingDropPouchRoyalTeamlead
-  suffix: Filled, Royal Team Leader
+  parent: RMCWebbingDropPouchRCM
+  id: RMCWebbingDropPouchRCMFilledTeamlead
+  suffix: RCM, Filled Teamlead
   components:
   - type: StorageFill
     contents:
-      - id: CMMaskGas # TODO RMC14 l7 gasmask
+      - id: RMCMaskGasRCM
       - id: RMCHeadRoyalHelmetBallistic
       - id: RMCMRETSE
 
@@ -1078,6 +1090,38 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
     state: webbing
+
+- type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCToolDropPouchFilled
+  name: tool drop pouch
+  description: A drop pouch loaded with essential field repair tools.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,13,1
+    whitelist:
+      tags:
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - PowerCell
+      components:
+      - Welder
+      - PowerCell
+      - EntrenchingTool
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: RMCCableCoil30
+    - id: CMMultitool
 
 - type: entity
   parent: CMWebbingBase
