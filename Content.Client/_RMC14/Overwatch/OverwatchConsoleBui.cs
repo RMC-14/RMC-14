@@ -220,65 +220,30 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 monitor.OffsetUpButton.Text = "^";
                 monitor.OffsetUpButton.OnPressed += _ =>
                 {
-                    var player = _overwatchConsole._player.LocalPlayer;
-                    var mob = player?.ControlledEntity;
-                    if (mob != null)
-                    {
-                        var actor = EntMan.GetNetEntity(mob.Value);
-                        _overwatchConsole.ApplyCameraOffset(actor, OverwatchDirection.North);
-                        SendPredictedMessage(new OverwatchCameraAdjustOffsetMsg(actor, OverwatchDirection.North));
-                    }
+                    _overwatchConsole.RequestCameraOffset(OverwatchDirection.North);
                 };
 
                 monitor.OffsetLeftButton.Text = "<";
                 monitor.OffsetLeftButton.OnPressed += _ =>
                 {
-                    var player = _overwatchConsole._player.LocalPlayer;
-                    var mob = player?.ControlledEntity;
-                    if (mob != null)
-                    {
-                        var actor = EntMan.GetNetEntity(mob.Value);
-                        _overwatchConsole.ApplyCameraOffset(actor, OverwatchDirection.West);
-                        SendPredictedMessage(new OverwatchCameraAdjustOffsetMsg(actor, OverwatchDirection.West));
-                    }
+                    _overwatchConsole.RequestCameraOffset(OverwatchDirection.West);
                 };
 
                 monitor.OffsetRightButton.Text = ">";
                 monitor.OffsetRightButton.OnPressed += _ =>
                 {
-                    var player = _overwatchConsole._player.LocalPlayer;
-                    var mob = player?.ControlledEntity;
-                    if (mob != null)
-                    {
-                        var actor = EntMan.GetNetEntity(mob.Value);
-                        _overwatchConsole.ApplyCameraOffset(actor, OverwatchDirection.East);
-                        SendPredictedMessage(new OverwatchCameraAdjustOffsetMsg(actor, OverwatchDirection.East));
-                    }
+                    _overwatchConsole.RequestCameraOffset(OverwatchDirection.East);
                 };
 
                 monitor.OffsetDownButton.Text = "v";
                 monitor.OffsetDownButton.OnPressed += _ =>
                 {
-                    var player = _overwatchConsole._player.LocalPlayer;
-                    var mob = player?.ControlledEntity;
-                    if (mob != null)
-                    {
-                        var actor = EntMan.GetNetEntity(mob.Value);
-                        _overwatchConsole.ApplyCameraOffset(actor, OverwatchDirection.South);
-                        SendPredictedMessage(new OverwatchCameraAdjustOffsetMsg(actor, OverwatchDirection.South));
-                    }
+                    _overwatchConsole.RequestCameraOffset(OverwatchDirection.South);
                 };
 
                 monitor.ResetOffsetButton.OnPressed += _ =>
                 {
-                    var player = _overwatchConsole._player.LocalPlayer;
-                    var mob = player?.ControlledEntity;
-                    if (mob != null)
-                    {
-                        var actor = EntMan.GetNetEntity(mob.Value);
-                        _overwatchConsole.ApplyCameraOffset(actor, OverwatchDirection.Reset);
-                        SendPredictedMessage(new OverwatchCameraAdjustOffsetMsg(actor, OverwatchDirection.Reset));
-                    }
+                    _overwatchConsole.RequestCameraOffset(OverwatchDirection.Reset);
                 };
 
                 monitor.MessageSquadButton.OnPressed += _ =>

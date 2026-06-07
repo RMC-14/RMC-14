@@ -80,7 +80,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private TimeSpan _updateEvery;
     private readonly Dictionary<Entity<SquadTeamComponent>, Queue<EntityUid>> _toProcess = new();
     private readonly HashSet<Entity<SquadTeamComponent>> _toRemove = new();
-    private float offsetAmount = OverwatchWatchingComponent.offsetAmount;
+    private float _offsetAmount = OverwatchWatchingComponent.OffsetAmount;
 
     public override void Initialize()
     {
@@ -115,7 +115,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleTransferMarineBuiMsg>(OnOverwatchTransferMarineBui);
             subs.Event<OverwatchConsoleWatchBuiMsg>(OnOverwatchWatchBui);
             subs.Event<OverwatchConsoleHideBuiMsg>(OnOverwatchHideBui);
-            subs.Event<OverwatchCameraAdjustOffsetMsg>(OnCameraAdjustOffset);
             subs.Event<OverwatchConsolePromoteLeaderBuiMsg>(OnOverwatchPromoteLeaderBui);
             subs.Event<OverwatchConsoleSupplyDropLongitudeBuiMsg>(OnOverwatchSupplyDropLongitudeBui);
             subs.Event<OverwatchConsoleSupplyDropLatitudeBuiMsg>(OnOverwatchSupplyDropLatitudeBui);
@@ -691,11 +690,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _eye.SetTarget(watcher, null);
     }
 
-    private void OnCameraAdjustOffset(Entity<OverwatchConsoleComponent> ent, ref OverwatchCameraAdjustOffsetMsg args)
-    {
-        OnCameraAdjustOffsetEvent(new OverwatchCameraAdjustOffsetEvent(args.Actor, args.Direction));
-    }
-
     protected virtual void OnCameraAdjustOffsetEvent(OverwatchCameraAdjustOffsetEvent args)
     {
         ApplyCameraOffset(args.Actor, args.Direction);
@@ -710,10 +704,10 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         Vector2 offsetDelta = direction switch
         {
-            OverwatchDirection.North => new Vector2(0, offsetAmount),
-            OverwatchDirection.South => new Vector2(0, -offsetAmount),
-            OverwatchDirection.East => new Vector2(offsetAmount, 0),
-            OverwatchDirection.West => new Vector2(-offsetAmount, 0),
+            OverwatchDirection.North => new Vector2(0, _offsetAmount),
+            OverwatchDirection.South => new Vector2(0, -_offsetAmount),
+            OverwatchDirection.East => new Vector2(_offsetAmount, 0),
+            OverwatchDirection.West => new Vector2(-_offsetAmount, 0),
             _ => Vector2.Zero
         };
 
@@ -723,7 +717,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
         }
 
-        var offsetLimit = new Vector2(offsetAmount, offsetAmount);
+        var offsetLimit = new Vector2(_offsetAmount, _offsetAmount);
         offsetDelta = new Vector2(
             Math.Clamp(offsetDelta.X, -offsetLimit.X, offsetLimit.X),
             Math.Clamp(offsetDelta.Y, -offsetLimit.Y, offsetLimit.Y)

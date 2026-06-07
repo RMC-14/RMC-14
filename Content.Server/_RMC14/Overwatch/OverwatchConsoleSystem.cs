@@ -22,7 +22,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
-    private float cameraRadius = OverwatchWatchingComponent.cameraRadius;
+    private readonly float _cameraRadius = OverwatchWatchingComponent.CameraRadius;
 
     public override void Initialize()
     {
@@ -125,14 +125,14 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         RemoveWatcher(watcher);
         var watchingComp = EnsureComp<OverwatchWatchingComponent>(watcher);
         watchingComp.Watching = toWatch;
-        watchingComp.isOverridden = isCameraOverridden;
+        watchingComp.IsOverridden = isCameraOverridden;
 
         var overridden = new List<EntityUid>();
 
         try
         {
             var mapCoords = _transform.GetMapCoordinates(toWatch.Owner);
-            var nearby = _lookup.GetEntitiesInRange(mapCoords, cameraRadius);
+            var nearby = _lookup.GetEntitiesInRange(mapCoords, _cameraRadius);
             foreach (var ent in nearby)
             {
                 if (ent == watcher.Owner)
@@ -171,7 +171,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         if (oldTarget != null && oldTarget != watcher.Owner)
         {
             _viewSubscriber.RemoveViewSubscriber(oldTarget.Value, player);
-            if (TryComp(watcher, out OverwatchWatchingComponent? watchingComp) && watchingComp.isOverridden)
+            if (TryComp(watcher, out OverwatchWatchingComponent? watchingComp) && watchingComp.IsOverridden)
             {
                 try
                 {
@@ -202,7 +202,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             {
                 try
                 {
-                    if (watching.isOverridden)
+                    if (watching.IsOverridden)
                         _pvsOverride.RemoveSessionOverride(watched.Owner, session);
                 }
                 catch
@@ -232,9 +232,9 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     protected override void OnCameraAdjustOffsetEvent(OverwatchCameraAdjustOffsetEvent args)
     {
         base.OnCameraAdjustOffsetEvent(args);
-        
+
         if (!TryGetEntity(args.Actor, out var watcherEntity) ||
-            !TryComp(watcherEntity, out OverwatchWatchingComponent? watcherComp) || 
+            !TryComp(watcherEntity, out OverwatchWatchingComponent? watcherComp) ||
             watcherComp.Watching == null)
             return;
 
@@ -255,7 +255,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             try
             {
                 var mapCoords = _transform.GetMapCoordinates(watched);
-                var nearby = _lookup.GetEntitiesInRange(mapCoords, cameraRadius);
+                var nearby = _lookup.GetEntitiesInRange(mapCoords, _cameraRadius);
                 foreach (var ent in nearby)
                 {
                     if (ent == watcher)
