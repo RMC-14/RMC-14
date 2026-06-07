@@ -12,187 +12,90 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._RMC14.Xenonids.HiveTeam;
 
 [GenerateTypedNameReferences]
-public sealed partial class HiveTeamWindow : DefaultWindow
+public sealed partial class HiveLeaderSquadWindow : DefaultWindow
 {
-    public HiveTeamWindow()
+    private Action<string>? _onAnnounce;
+    private Action<NetEntity>? _onAddMember;
+    private Action<NetEntity>? _onRemoveMember;
+
+    public HiveLeaderSquadWindow()
     {
         RobustXamlLoader.Load(this);
+
+        LeaderPanel.PanelOverride = new StyleBoxFlat
+        {
+            BorderColor = Color.FromHex("#6b3fa0"),
+            BorderThickness = new Thickness(2),
+            BackgroundColor = Color.FromHex("#2a1a3e"),
+        };
+        MembersPanel.PanelOverride = new StyleBoxFlat
+        {
+            BorderColor = Color.FromHex("#4a2870"),
+            BorderThickness = new Thickness(2),
+            BackgroundColor = Color.FromHex("#221530"),
+        };
+
+        AnnounceButton.OnPressed += _ =>
+        {
+            var msg = AnnounceBox.Text.Trim();
+            if (!string.IsNullOrWhiteSpace(msg))
+            {
+                _onAnnounce?.Invoke(msg);
+                AnnounceBox.Clear();
+            }
+        };
     }
 
     public void UpdateState(
-        HiveTeamsComponent teams,
+        HiveTeamEntry entry,
+        int teamIndex,
+        string roleName,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
         Func<EntProtoId?, Texture?> getTexture,
-        Action<int, NetEntity> onSetLeader,
-        Action<int> onRemoveLeader,
-        Action<int, NetEntity> onAddMember,
-        Action<int, NetEntity> onRemoveMember,
-        Action<int, int> onSetRole)
+        Action<string> onAnnounce,
+        Action<NetEntity> onAddMember,
+        Action<NetEntity> onRemoveMember)
     {
-        TeamsGrid.DisposeAllChildren();
+        _onAnnounce = onAnnounce;
+        _onAddMember = onAddMember;
+        _onRemoveMember = onRemoveMember;
 
-        for (var i = 0; i < HiveTeamsComponent.TeamCount; i++)
-        {
-            HiveTeamEntry? entry = i < teams.Teams.Count ? teams.Teams[i] : null;
-            var panel = BuildTeamPanel(i, entry, allXenos, getTexture, onSetLeader, onRemoveLeader, onAddMember, onRemoveMember, onSetRole);
-            TeamsGrid.AddChild(panel);
-        }
-    }
+        Title = roleName;
+        AnnounceBox.PlaceHolder = $"Announce to {roleName}...";
 
-    private static StyleBoxFlat MakeBox(string borderHex, string bgHex) => new()
-    {
-        BorderColor = Color.FromHex(borderHex),
-        BorderThickness = new Thickness(2),
-        BackgroundColor = Color.FromHex(bgHex),
-    };
-
-    private static Control BuildTeamPanel(
-        int index,
-        HiveTeamEntry? entry,
-        List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
-        Func<EntProtoId?, Texture?> getTexture,
-        Action<int, NetEntity> onSetLeader,
-        Action<int> onRemoveLeader,
-        Action<int, NetEntity> onAddMember,
-        Action<int, NetEntity> onRemoveMember,
-        Action<int, int> onSetRole)
-    {
-        var outer = new PanelContainer
-        {
-            HorizontalExpand = true,
-            VerticalExpand = true,
-            Margin = new Thickness(4),
-            PanelOverride = MakeBox("#6b3fa0", "#00000000"),
-        };
-
-        var vbox = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-            Margin = new Thickness(6),
-        };
-        outer.AddChild(vbox);
-
-        vbox.AddChild(new Label
-        {
-            Text = $"HiveTeam {index + 1}",
-            HorizontalAlignment = HAlignment.Center,
-            Margin = new Thickness(0, 4, 0, 2),
-        });
-
-        var roleBox = new OptionButton
-        {
-            HorizontalExpand = true,
-            StyleClasses = { "ButtonSquare" },
-            Margin = new Thickness(0, 0, 0, 4),
-        };
-        for (var i = 0; i < HiveTeamsComponent.RoleNames.Length; i++)
-            roleBox.AddItem(HiveTeamsComponent.RoleNames[i], i);
-        roleBox.SelectId(entry?.Role ?? 0);
-        var capturedIndex = index;
-        roleBox.OnItemSelected += args => onSetRole(capturedIndex, args.Id);
-        vbox.AddChild(roleBox);
-
-        var leaderPanel = new PanelContainer
-        {
-            HorizontalExpand = true,
-            Margin = new Thickness(0, 0, 0, 4),
-            PanelOverride = MakeBox("#6b3fa0", "#2a1a3e"),
-        };
-        var leaderVbox = new BoxContainer
-        {
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-            Margin = new Thickness(4),
-        };
-        leaderPanel.AddChild(leaderVbox);
-
-        leaderVbox.AddChild(new Label
-        {
-            Text = "Hive Leader",
-            HorizontalAlignment = HAlignment.Center,
-            FontColorOverride = Color.FromHex("#aaaaaa"),
-            Margin = new Thickness(0, 0, 0, 4),
-        });
-
-        if (entry?.Leader is { } leaderNet)
+        LeaderSlot.DisposeAllChildren();
+        if (entry.Leader is { } leaderNet)
         {
             var leaderXeno = allXenos.Find(x => x.Entity == leaderNet);
-            var btn = new Button
-            {
-                HorizontalExpand = true,
-                MinHeight = 56,
-                StyleClasses = { "ButtonSquare" },
-            };
-            var hbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
-            hbox.AddChild(new TextureRect
-            {
-                Texture = getTexture(leaderXeno.ProtoId),
-                MinSize = new Vector2(48, 48),
-                Stretch = TextureRect.StretchMode.KeepAspectCentered,
-                Margin = new Thickness(4),
-            });
-            hbox.AddChild(new Label { Text = leaderXeno.Name, VerticalAlignment = VAlignment.Center });
-            btn.AddChild(hbox);
-            btn.OnPressed += _ => onRemoveLeader(index);
-            btn.ToolTip = "Click to remove as leader";
-            leaderVbox.AddChild(btn);
+            var leaderControl = new XenoChoiceControl();
+            leaderControl.Set(leaderXeno.Name, getTexture(leaderXeno.ProtoId));
+            leaderControl.HorizontalExpand = true;
+            leaderControl.Button.Disabled = true;
+            LeaderSlot.AddChild(leaderControl);
         }
         else
         {
-            var addLeaderBtn = new Button
+            LeaderSlot.AddChild(new Label
             {
-                Text = "+",
-                HorizontalExpand = true,
-                MinHeight = 56,
-                StyleClasses = { "ButtonSquare" },
-            };
-            addLeaderBtn.OnPressed += _ =>
-            {
-                var picker = new XenoPickerWindow();
-                picker.Populate(allXenos, getTexture, xeno => onSetLeader(capturedIndex, xeno));
-                picker.OpenCentered();
-            };
-            leaderVbox.AddChild(addLeaderBtn);
+                Text = "No leader assigned",
+                HorizontalAlignment = HAlignment.Center,
+                FontColorOverride = Color.FromHex("#666666"),
+            });
         }
 
-        vbox.AddChild(leaderPanel);
-
-        var membersPanel = new PanelContainer
+        MembersSlot.DisposeAllChildren();
+        if (entry.Members.Count == 0)
         {
-            HorizontalExpand = true,
-            VerticalExpand = true,
-            Margin = new Thickness(0, 0, 0, 4),
-            PanelOverride = MakeBox("#4a2870", "#221530"),
-        };
-        var membersVbox = new BoxContainer
+            MembersSlot.AddChild(new Label
+            {
+                Text = "No members assigned",
+                HorizontalAlignment = HAlignment.Center,
+                FontColorOverride = Color.FromHex("#666666"),
+            });
+        }
+        else
         {
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-            Margin = new Thickness(4),
-        };
-        membersPanel.AddChild(membersVbox);
-
-        membersVbox.AddChild(new Label
-        {
-            Text = "Members",
-            HorizontalAlignment = HAlignment.Center,
-            FontColorOverride = Color.FromHex("#aaaaaa"),
-            Margin = new Thickness(0, 0, 0, 4),
-        });
-
-        var membersScroll = new ScrollContainer
-        {
-            HorizontalExpand = true,
-            VerticalExpand = true,
-            MinSize = new Vector2(0, 80),
-        };
-
-        var membersGrid = new GridContainer
-        {
-            Columns = 2,
-            HorizontalExpand = true,
-        };
-
-        if (entry != null)
-        {
+            var membersGrid = new GridContainer { Columns = 2, HorizontalExpand = true };
             foreach (var memberNet in entry.Members)
             {
                 var memberXeno = allXenos.Find(x => x.Entity == memberNet);
@@ -200,31 +103,21 @@ public sealed partial class HiveTeamWindow : DefaultWindow
                 control.Set(memberXeno.Name, getTexture(memberXeno.ProtoId));
                 control.HorizontalExpand = true;
                 var capturedMember = memberNet;
-                control.Button.OnPressed += _ => onRemoveMember(capturedIndex, capturedMember);
+                control.Button.OnPressed += _ => _onRemoveMember?.Invoke(capturedMember);
                 control.Button.ToolTip = "Click to remove from team";
                 membersGrid.AddChild(control);
             }
+            MembersSlot.AddChild(membersGrid);
         }
 
-        membersScroll.AddChild(membersGrid);
-        membersVbox.AddChild(membersScroll);
+        AddMemberButton.OnPressed -= OnAddMemberPressed;
+        AddMemberButton.OnPressed += OnAddMemberPressed;
 
-        var addMemberBtn = new Button
-        {
-            Text = "+ Add Member",
-            HorizontalExpand = true,
-            Margin = new Thickness(0, 4, 0, 0),
-            StyleClasses = { "ButtonSquare" },
-        };
-        addMemberBtn.OnPressed += _ =>
+        void OnAddMemberPressed(BaseButton.ButtonEventArgs _)
         {
             var picker = new XenoPickerWindow();
-            picker.Populate(allXenos, getTexture, xeno => onAddMember(capturedIndex, xeno));
+            picker.Populate(allXenos, getTexture, xeno => _onAddMember?.Invoke(xeno));
             picker.OpenCentered();
-        };
-        membersVbox.AddChild(addMemberBtn);
-        vbox.AddChild(membersPanel);
-
-        return outer;
+        }
     }
 }
