@@ -256,8 +256,8 @@
         amount: 1
       - id: RMCSentryLaptop
         amount: 4
-      #- id: Spare PDT/L Battle Buddy Kit
-      #  amount: 4
+      - id: CMSparePDTLBattleBuddyKit
+        amount: 4
     - name: Flare and Light
       entries:
       - id: RMCFlashlight # Combat Flashlight
