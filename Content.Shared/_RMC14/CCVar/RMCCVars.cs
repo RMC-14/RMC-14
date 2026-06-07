@@ -569,5 +569,4 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<string> RMCChemMasterPresets =
         CVarDef.Create("rmc.chemmaster_presets", "", CVar.CLIENT | CVar.ARCHIVE);
-
 }
