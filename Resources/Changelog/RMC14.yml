@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: Replaced placeholder PVE role descriptions with proper ones.
-    type: Tweak
-  - message: Fixed PVE PMC vendors having some marine gear instead of PMC equivalents.
-    type: Fix
-  - message: Fixed PVE PMC medics not having corpsman vendor access.
-    type: Fix
-  - message: Fixed PVE PMC and SPP roles needing manual squad assignment. They now
-      spawn in their respective squads.
-    type: Fix
-  - message: Added surgery 2 skill to both SPP and PMC overwatches, to allow them
-      to conduct larva surgery.
-    type: Add
-  id: 2800
-  time: '2026-01-16T01:23:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8525
 - author: SharkSnake98
   changes:
   - message: Added the TSE Airbase Nightmare Insert
@@ -4528,5 +4511,12 @@
   id: 3299
   time: '2026-06-07T00:38:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8788
+- author: Dygon
+  changes:
+  - message: Explosion now have a chance to destroy signal flares.
+    type: Fix
+  id: 3300
+  time: '2026-06-07T00:47:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9559
 Name: RMC14
 Order: -1
