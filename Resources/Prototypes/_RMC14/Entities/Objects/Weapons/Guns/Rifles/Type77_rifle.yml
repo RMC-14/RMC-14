@@ -106,12 +106,18 @@
         whitelist:
           tags:
           - RMCMagazineRifleType77
-          - RMCMagazineRifleType77Incendiary
-          - RMCMagazineRifleType77HEAP
       mag-1:
         whitelist:
           tags:
           - RMCMagazineRifleType77AP
+      mag-2:
+        whitelist:
+          tags:
+          - RMCMagazineRifleType77Incendiary
+      mag-3:
+        whitelist:
+          tags:
+          - RMCMagazineRifleType77HEAP
 
 - type: entity
   parent: RMCWeaponRifleType77
