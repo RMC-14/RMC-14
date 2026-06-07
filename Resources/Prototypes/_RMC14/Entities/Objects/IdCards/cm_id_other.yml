@@ -232,7 +232,7 @@
     - RMCWeYa
 
 - type: entity
-  parent: CMIDCardSilver
+  parent: RMCIDCardPMC
   id: RMCIDCardExecutiveBodyguard
   components:
   - type: ItemIFF
