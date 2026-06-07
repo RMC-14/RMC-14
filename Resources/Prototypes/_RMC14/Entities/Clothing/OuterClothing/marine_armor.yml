@@ -918,6 +918,9 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/urban.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 # M2
 - type: entity

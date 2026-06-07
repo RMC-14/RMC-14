@@ -13,9 +13,9 @@
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
   - type: FlashImmunity
-#  - type: GuideHelp # TODO RMC14
-#    guides:
-#    - Security
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
 
 - type: entity
   parent: CMGlassesSecurity
@@ -131,6 +131,9 @@
         icon:
           True: { state: icon_on }
           False: { state: icon }
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: ClothingEyesBase

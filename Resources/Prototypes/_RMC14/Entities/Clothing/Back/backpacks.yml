@@ -200,6 +200,9 @@
       Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/jungle-desert-classic.rsi
       Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/snow-urban.rsi
       Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/snow-urban.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMortar
 
 - type: entity
   parent: CMBackpack
