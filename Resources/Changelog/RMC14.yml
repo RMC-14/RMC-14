@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the PMC crashed ship on solaris insert not deleting walls.
-    type: Fix
-  - message: Fixed the Lazarus Landing corporate dome scenario not allowing scientist
-      survivors. They will roll as a medic goon now.
-    type: Fix
-  id: 2804
-  time: '2026-01-19T01:02:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8997
-- author: SharkSnake98
-  changes:
-  - message: Added PMC Premade Meals and their vendor
-    type: Add
-  - message: Changed the Hauchefant's premade meal vendor to the PMC one.
-    type: Tweak
-  id: 2805
-  time: '2026-01-19T01:03:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8990
 - author: Ian321
   changes:
   - message: Hospital Corpsman can now acquire the "MS-11 Smart Refill Tank" that
@@ -4519,5 +4500,21 @@
   id: 3303
   time: '2026-06-07T00:49:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9959
+- author: BreakpointDebug1234
+  changes:
+  - message: Added an alert for xenonids when no queen has been picked and the hive
+      is close to collapse
+    type: Add
+  id: 3304
+  time: '2026-06-07T01:32:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9235
+- author: Vixting
+  changes:
+  - message: Can now hold down left click to continually melee / fire. Can be disabled
+      in settings. (ported from upstream)
+    type: Add
+  id: 3305
+  time: '2026-06-07T01:33:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9141
 Name: RMC14
 Order: -1
