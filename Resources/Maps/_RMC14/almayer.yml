@@ -30211,6 +30211,7 @@ entities:
       pos: -47.5,-31.5
       parent: 1
 - proto: CMSpawnPointCombatCorrespondent
+  entities:
   - uid: 2776
     components:
     - type: Transform
