@@ -81,6 +81,7 @@
     id: RMCIDCardSynth
     ears: RMCHeadsetSynth
     belt: CMBeltUtilityFilled
+    pocket1: RMCUniversalRecorder
 
 - type: entity
   parent: CMSpawnPointJobBase
