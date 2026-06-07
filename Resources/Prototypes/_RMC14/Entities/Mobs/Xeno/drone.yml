@@ -24,6 +24,7 @@
       600: Dead
   - type: Tag
     tags:
+    - DoorBumpOpener
     - RMCSynthGrabbable
   - type: MeleeWeapon
     damage:
@@ -91,6 +92,10 @@
     - CMXenoCarrier
     - CMXenoBurrower
     - CMXenoHivelord
+    earlyEvolvesTo:
+    - CMXenoLurker
+    - CMXenoSpitter
+    - CMXenoWarrior
     evolvesToWithoutPoints:
     - CMXenoQueen
   - type: Evasion
@@ -143,6 +148,7 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoResinSpikes
   - type: VentCrawler
     ventCrawlIcon: drone
   - type: RMCActionOrder

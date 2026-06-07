@@ -21,7 +21,7 @@ public sealed partial class HiveComponent : Component
     };
 
     [DataField, AutoNetworkedField]
-    public Dictionary<EntProtoId, int> FreeSlots = new() {["CMXenoHivelord"] = 1, ["CMXenoCarrier"] = 1, ["CMXenoBurrower"] = 1};
+    public Dictionary<EntProtoId, int> FreeSlots = new() { ["CMXenoHivelord"] = 1, ["CMXenoCarrier"] = 1, ["CMXenoBurrower"] = 1 };
 
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, int> HiveStructureSlots = new() { ["HiveCoreXeno"] = 1, ["HiveClusterXeno"] = 8, ["HivePylonXeno"] = 2, ["HiveEggMorpherXeno"] = 6, ["HiveRecoveryNodeXeno"] = 6, ["HivePlasmaTreeXeno"] = 3 };
@@ -37,6 +37,9 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool AnnouncedQueenDeathCooldownOver;
+
+    [DataField, AutoNetworkedField]
+    public bool AnnouncedNoQueenCooldownOver;
 
     [DataField, AutoNetworkedField]
     public bool AnnouncedHiveCoreCooldownOver;
@@ -58,6 +61,9 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan NewQueenCooldown = TimeSpan.FromMinutes(5);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan NoQueenAlertTime = TimeSpan.FromMinutes(4);
 
     [DataField, AutoNetworkedField]
     public bool GotOvipositorPopup;

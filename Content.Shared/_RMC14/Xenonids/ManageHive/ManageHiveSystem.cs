@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.HiveTeam;
 using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -66,6 +67,7 @@ public sealed class ManageHiveSystem : EntitySystem
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveJellyMessageEvent>(OnManageHiveJellyMessage);
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveDevolveConfirmEvent>(OnManageHiveDevolveConfirm);
         SubscribeLocalEvent<ManageHiveComponent, ManageHiveDevolveMessageEvent>(OnManageHiveDevolveMessage);
+        SubscribeLocalEvent<ManageHiveComponent, ManageHiveTeamsEvent>(OnManageHiveTeams);
 
         Subs.CVar(_config, RMCCVars.RMCJelliesPerQueen, v => _jelliesPerQueen = v, true);
         Subs.CVar(_config, RMCCVars.RMCBurrowedLarvaSacrificeTimeMinutes, v => _burrowedLarvaSacrificeTime = TimeSpan.FromMinutes(v), true);
@@ -90,8 +92,7 @@ public sealed class ManageHiveSystem : EntitySystem
 
         options.Add(new DialogOption(Loc.GetString("rmc-hivemanagement-exchange-larva"), new ManageHiveSacrificeBurrowedEvent()));
         options.Add(new DialogOption(Loc.GetString("rmc-boon-activate"), new ManageHiveActivateBoonsEvent()));
-        options.Add(new DialogOption(Loc.GetString("rmc-banish-button"), new ManageHiveBanishEvent()));
-        options.Add(new DialogOption(Loc.GetString("rmc-readmit-button"), new ManageHiveReadmitEvent()));
+        options.Add(new DialogOption(Loc.GetString("rmc-hivemanagement-manage-teams"), new ManageHiveTeamsEvent()));
 
         _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-hive-management"), options, Loc.GetString("rmc-hivemanagement-manage-the-hive"));
     }
@@ -422,6 +423,17 @@ public sealed class ManageHiveSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private void OnManageHiveTeams(Entity<ManageHiveComponent> manage, ref ManageHiveTeamsEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        // Handled by HiveTeamSystem on the server via UI open
+        // Have to raise a local event so the server HiveTeamSystem can open the UI
+        var ev = new OpenHiveTeamsUIEvent();
+        RaiseLocalEvent(manage.Owner, ref ev);
     }
 
     private bool CanSacrificeBurrowedPopup(Entity<ManageHiveComponent> user, out Entity<HiveComponent> hive)

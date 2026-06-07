@@ -217,6 +217,10 @@
       components:
       - HelmetAccessory
   - type: HelmetAccessoryHolder
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMHeadCapMP
@@ -358,6 +362,15 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/drill_hat.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/drill_hat.rsi
+
+- type: entity
+  parent: CMHeadCapDrill
+  id: RMCHeadCapDrillXippy
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/xippy_hat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/xippy_hat.rsi
 
 - type: entity
   parent: RMCHeadCapFlippable
@@ -860,17 +873,6 @@
 
 - type: entity
   parent: RMCHeadCapGrey
-  id: RMCHeadCapFerret
-  name: ferret heavy industries trucker hat
-  description: It's a trucker hat. They're becoming collector items since Ferret went under in 2080.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
-
-- type: entity
-  parent: RMCHeadCapGrey
   id: RMCHeadCapTruckerRed
   name: red trucker hat
   description: It's a red trucker hat.
@@ -1072,3 +1074,12 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Hats/horizons_wreath.rsi
       state: helmet
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadFoil
+  name: foil hat
+  description: Keeps the government, aliens, and your in-laws from reading your thoughts. Probably.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/foil.rsi

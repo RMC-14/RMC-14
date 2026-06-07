@@ -23,6 +23,7 @@
     - Dead
   - type: Tag
     tags:
+    - DoorBumpOpener
     - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoRunner

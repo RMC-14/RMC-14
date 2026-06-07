@@ -11,13 +11,15 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidNormal
       strength: Normal
       plasmaCost: 100
       time: 50 # seconds
-      dps: 8
+      dps: 7.2
       expendableLightDps: 2.5
 
 - type: entity
@@ -41,14 +43,16 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidWeak
       strength: Weak
       plasmaCost: 75
       time: 125 # seconds or 2~ minutes
-      dps: 4
-      expendableLightDps: 0.3
+      dps: 3.6
+      expendableLightDps: 0.8
 
 - type: entity
   parent: ActionXenoAcidNormal
@@ -63,14 +67,16 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       strength: Strong
       plasmaCost: 125
       time: 20 # seconds
-      dps: 20
-      expendableLightDps: 23.4375
+      dps: 18
+      expendableLightDps: 35
 
 - type: entity
   parent: ActionXenoAcidNormal
@@ -85,7 +91,9 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       strength: Strong
@@ -93,8 +101,8 @@
       energyCost: 100
       applyTimeMultiplier: 0.25
       time: 20 # seconds
-      dps: 20
-      expendableLightDps: 23.4375
+      dps: 18
+      expendableLightDps: 35
 
 - type: entity
   id: ActionXenoRegurgitate
@@ -269,7 +277,7 @@
 - type: entity
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
-  name: Headbutt (10) # TODO RMC14 proper plasma costs
+  name: Headbutt
   description: Charge towards the targeted enemy and push back the first enemy hit, piercing armor slightly. Does less damage but has more knockback when crest is lowered.
   components:
   - type: Action
@@ -277,15 +285,17 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: headbutt
-    useDelay: 6
+    useDelay: 4
   - type: TargetAction
     range: 3.5
     deselectOnMiss: false
   - type: EntityTargetAction
     event: !type:XenoHeadbuttActionEvent
+    whitelist:
+      components:
+      - Marine
+      - Xeno
   - type: XenoOffensiveAction
-  - type: XenoActionPlasma
-    cost: 10
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -298,7 +308,7 @@
 - type: entity
   id: ActionXenoTailSweep
   parent: ActionXenoBase
-  name: Tail Sweep (10) # TODO RMC14 proper plasma costs
+  name: Tail Sweep (10) # See XenoTailSweepComponent.cs for cost
   description: Knock down any enemies close to you.
   components:
   - type: Action
@@ -306,7 +316,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: tail_sweep
-    useDelay: 15
+    useDelay: 11
   - type: InstantAction
     event: !type:XenoTailSweepActionEvent
   - type: RMCDazeableAction
@@ -332,6 +342,7 @@
       state: xeno_spit
     useDelay: 2
   - type: TargetAction
+    repeat: true
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
@@ -352,6 +363,7 @@
       state: acid_shotgun
     useDelay: 7
   - type: TargetAction
+    repeat: true
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
@@ -380,6 +392,7 @@
       state: xeno_spit
     useDelay: 2.5
   - type: TargetAction
+    repeat: true
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
@@ -1171,7 +1184,7 @@
   parent: ActionXenoBase
   id: ActionXenoTailSeize
   name: Tail Seize
-  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival.
+  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival. [color=red]Has a 3-tile range![/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -1463,7 +1476,7 @@
   parent: ActionXenoBase
   id: ActionXenoSpikeShed
   name: Spike Shed (all shards)
-  description: Shred all of your shards to launch them all in all directions around yourself. Lose the bonus armor in the process while also gaining a speed boost. This will disable you from gaining any shards for 30 seconds. Requires 150 shards minimum
+  description: Shred all of your shards to launch them all in all directions around yourself. Lose the bonus armor in the process while also gaining a speed boost. This will disable you from gaining any shards for 30 seconds. Requires 50 shards minimum
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -1511,3 +1524,92 @@
     deselectOnMiss: false
   - type: WorldTargetAction
     event: !type:XenoDestroyActionEvent
+
+# Trapper Actions
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAcidMine
+  name: Acid Mine (40)
+  description: Cause an acid explosion at the targeted location. Each hit reduces Deploy Traps' cooldown. Empowered mines deal more damage and coat enemies in acid.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_mine
+    useDelay: 5.5
+  - type: XenoAcidMine
+    actionIconEmpowered:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_mine_empowered
+  - type: TargetAction
+    deselectOnMiss: false
+    checkCanAccess: false
+    repeat: true
+    range: 14 #Actual range on the AcidMine component.
+  - type: WorldTargetAction
+    event: !type:XenoAcidMineActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoAcidMine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: acid_mine
+
+- type: entity
+  id: ActionXenoAcidShotgun
+  parent: ActionXenoBase
+  name: Acid Shotgun (40)
+  description: Launches multiple acid projectiles that deal increased damage to trapped targets. Each hit grants a stack of insight that can empower Deploy Traps. Hitting a trapped target grants 10 stacks.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_shotgun
+    useDelay: 13
+  - type: TargetAction
+    range: 15
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoAcidShotgunActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 40
+
+- type: entity
+  id: ActionXenoDeployTraps
+  parent: ActionXenoBase
+  name: Deploy Traps (60)
+  description: Deploys a line of snaring traps. Becomes empowered at 10 stacks of insight. Empowered traps snare longer and empower your Acid Mine.
+  components:
+  - type: Action
+    useDelay: 20.5
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gas_mine
+  - type: XenoDeployTraps
+    actionIconEmpowered:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gas_mine_empowered
+  - type: TargetAction
+    checkCanAccess: false
+    deselectOnMiss: false
+    repeat: true
+    range: 14
+  - type: WorldTargetAction
+    event: !type:XenoDeployTrapsActionEvent
+  - type: XenoActionPlasma
+    cost: 60
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDeployTraps
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: gas_mine

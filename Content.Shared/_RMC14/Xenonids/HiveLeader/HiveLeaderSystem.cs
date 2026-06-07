@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Radio;
@@ -6,8 +6,10 @@ using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.HiveTeam;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared.Actions;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -19,6 +21,7 @@ namespace Content.Shared._RMC14.Xenonids.HiveLeader;
 
 public sealed class HiveLeaderSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -48,6 +51,7 @@ public sealed class HiveLeaderSystem : EntitySystem
         SubscribeLocalEvent<HiveLeaderComponent, ComponentRemove>(OnLeaderRemove);
         SubscribeLocalEvent<HiveLeaderComponent, EntityTerminatingEvent>(OnLeaderRemove);
         SubscribeLocalEvent<HiveLeaderComponent, MobStateChangedEvent>(OnLeaderMobStateChanged);
+        SubscribeLocalEvent<HiveLeaderComponent, HiveLeaderStatusChangedEvent>(OnLeaderStatusChanged);
 
         SubscribeLocalEvent<HiveLeaderGranterComponent, ComponentRemove>(OnGranterRemove);
         SubscribeLocalEvent<HiveLeaderGranterComponent, EntityTerminatingEvent>(OnGranterRemove);
@@ -57,6 +61,17 @@ public sealed class HiveLeaderSystem : EntitySystem
         SubscribeLocalEvent<HiveLeaderGranterComponent, XenoPheromonesActivatedEvent>(OnGranterPheromonesActivated);
         SubscribeLocalEvent<HiveLeaderGranterComponent, XenoPheromonesDeactivatedEvent>(OnGranterPheromonesDeactivated);
         SubscribeLocalEvent<HiveLeaderGranterComponent, XenoOvipositorChangedEvent>(OnGranterOvipositorChanged);
+    }
+
+    private void OnLeaderStatusChanged(Entity<HiveLeaderComponent> ent, ref HiveLeaderStatusChangedEvent args)
+    {
+        if (args.BecameLeader)
+            _actions.AddAction(ent.Owner, ref ent.Comp.SquadAction, ent.Comp.SquadActionId);
+        else
+        {
+            _actions.RemoveAction(ent.Owner, ent.Comp.SquadAction);
+            ent.Comp.SquadAction = null;
+        }
     }
 
     private void OnLeaderRemove<T>(Entity<HiveLeaderComponent> ent, ref T args)
@@ -148,6 +163,7 @@ public sealed class HiveLeaderSystem : EntitySystem
         Dirty(watching, leaderComp);
 
         ent.Comp.Leaders.Add(watching);
+        SyncPheromones(ent);
         Dirty(ent);
 
         msg = $"You've selected {Name(watching)} as a Hive Leader.";
@@ -293,6 +309,10 @@ public sealed class HiveLeaderSystem : EntitySystem
             RemComp<XenoActivePheromonesComponent>(first.Value);
         }
 
+        // Remove the squad action before deferring component removal
+        _actions.RemoveAction(leader.Owner, leader.Comp.SquadAction);
+        leader.Comp.SquadAction = null;
+
         RemCompDeferred<HiveLeaderComponent>(leader);
 
         if (TryComp<RMCInnateRadioTextIncreaseComponent>(leader.Owner, out var radioIncrease) && !radioIncrease.Instrinsic)
@@ -304,6 +324,9 @@ public sealed class HiveLeaderSystem : EntitySystem
         granter.Leaders.Remove(leader);
         Dirty(leader.Comp.Granter.Value, granter);
         SyncPheromones((leader.Comp.Granter.Value, granter));
+
+        var removedEv = new HiveLeaderRemovedEvent(leader.Owner);
+        RaiseLocalEvent(leader.Owner, ref removedEv);
     }
 
     private void Transfer(EntityUid oldXeno, EntityUid newXeno)
@@ -325,5 +348,34 @@ public sealed class HiveLeaderSystem : EntitySystem
     public bool IsLeader(EntityUid leader, [NotNullWhen(true)] out HiveLeaderComponent? leaderComp)
     {
         return TryComp(leader, out leaderComp);
+    }
+
+    public void GrantLeader(EntityUid granter, EntityUid target)
+    {
+        if (!_hiveLeaderGranterQuery.TryComp(granter, out var granterComp))
+            return;
+
+        if (_hiveLeaderQuery.HasComp(target))
+            return;
+
+        if (granterComp.Leaders.Count >= granterComp.MaxLeaders)
+            return;
+
+        var leaderComp = EnsureComp<HiveLeaderComponent>(target);
+        leaderComp.Granter = granter;
+        Dirty(target, leaderComp);
+
+        granterComp.Leaders.Add(target);
+        Dirty(granter, granterComp);
+
+        AddLeader((target, leaderComp), (granter, granterComp));
+    }
+
+    public void RevokeLeader(EntityUid target)
+    {
+        if (!_hiveLeaderQuery.TryComp(target, out var leaderComp))
+            return;
+
+        RemoveLeader((target, leaderComp));
     }
 }

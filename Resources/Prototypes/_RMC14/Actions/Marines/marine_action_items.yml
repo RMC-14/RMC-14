@@ -47,6 +47,23 @@
     event: !type:ToggleActionEvent
 
 - type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleExperimentalMesons
+  name: Toggle experimental meson goggles
+  description: Enables synthetic meson-assisted terrain imaging.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/experimental_meson_hud.rsi
+      state: icon
+    iconOn:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/experimental_meson_hud.rsi
+      state: icon-on
+    useDelay: 0.25
+  - type: InstantAction
+    event: !type:ToggleActionEvent
+
+- type: entity
   parent: ActionMarineToggleable
   id: RMCActionToggleIDLock
   name: Toggle ID lock
@@ -115,6 +132,18 @@
   - type: InstantAction
     event: !type:RMCTelephoneActionEvent
 
+- type: entity
+  parent: RMCActionTelephone
+  id: RMCActionTelephoneScout
+  name: Use Helmet Microphone
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Objects/phone.rsi
+      state: scout_microphone
+    useDelay: 0.5
+
 - type: Tag
   id: RMCActionCycleZoomLevel
 
@@ -128,6 +157,23 @@
     itemIconStyle: BigItem
   - type: InstantAction
     event: !type:ToggleActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleSynthHud
+  name: Toggle Synthetic HUD
+  description: Toggle the integrated synthetic medical HUD.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+      state: icon
+    iconOn:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+      state: icon-on
+    useDelay: 0.25
+  - type: InstantAction
+    event: !type:RMCToggleSynthHudActionEvent
 
 - type: entity
   parent: ActionMarineBase
@@ -232,3 +278,17 @@
       state: cancel_view
   - type: InstantAction
     event: !type:DismountActionEvent
+
+# CBRN
+- type: entity
+  parent: BaseAction
+  id: ActionToggleCBRNHelmet
+  name: Toggle CBRN Mask
+  description: Raise or lower the integrated MOPP mask to toggle full fire protection.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/marine_firewalk_actions.rsi
+      state: firewalk
+  - type: InstantAction
+    event: !type:ToggleClothingEvent { }

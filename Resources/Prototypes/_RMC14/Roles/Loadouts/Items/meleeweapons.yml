@@ -40,3 +40,10 @@
   storage:
     back:
     - RMCSawtoothDaggerB
+
+- type: loadout
+  id: CommandoKnifeRMC
+  cost: 4
+  storage:
+    back:
+    - RMCFSKnife

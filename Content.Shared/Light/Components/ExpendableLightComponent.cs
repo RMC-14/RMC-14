@@ -49,6 +49,14 @@ public sealed partial class ExpendableLightComponent : Component
     [DataField]
     public Color? GlowColorLit = null;
 
+    //RMC14
+    /// <summary>
+    /// Whether the sprite uses the overlay for animation in addition to the base sprite
+    /// </summary>
+    [DataField]
+    public bool UsesOverlay = true;
+    //RMC14
+
     /// <summary>
     /// The sound that plays when the expendable light is lit.
     /// </summary>
@@ -59,7 +67,7 @@ public sealed partial class ExpendableLightComponent : Component
     ///     Status of light, whether or not it is emitting light.
     /// </summary>
     [ViewVariables]
-    public bool Activated => CurrentState is ExpendableLightState.Lit or ExpendableLightState.Fading;
+    public bool Activated => CurrentState is ExpendableLightState.Lit or ExpendableLightState.PhaseOne or ExpendableLightState.PhaseTwo or ExpendableLightState.PhaseThree or ExpendableLightState.PhaseFour or ExpendableLightState.PhaseFive or ExpendableLightState.Fading;
 
     [DataField, AutoNetworkedField]
     public float StateExpiryTime;
@@ -116,6 +124,11 @@ public enum ExpendableLightState
 {
     BrandNew,
     Lit,
+    PhaseOne, // RMC14
+    PhaseTwo, // RMC14
+    PhaseThree, // RMC14
+    PhaseFour, // RMC14
+    PhaseFive, // RMC14
     Fading,
     Dead
 }

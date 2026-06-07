@@ -23,11 +23,11 @@
         - ReagentId: Vitamin
           Quantity: 5
   - type: SliceableFood
-    count: 8
-  - type: Item
-    size: Normal
-    shape:
-    - 0,0,2,1
+    count: 6
+  #- type: Item -Disabled for RMC to make it consistant with our Pizzas.
+  #  size: Normal
+  #  shape:
+  #  - 0,0,2,1
   - type: Tag
     tags:
     - Pizza

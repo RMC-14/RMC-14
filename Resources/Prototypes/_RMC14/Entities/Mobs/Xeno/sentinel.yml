@@ -28,6 +28,7 @@
       600: Dead
   - type: Tag
     tags:
+    - DoorBumpOpener
     - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoSentinel

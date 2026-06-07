@@ -65,8 +65,9 @@
     - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoWordQueen
-#    - ActionXenoPsychicWhisper
-#    - ActionXenoPsychicRadiance
+    - ActionXenoPsychicWhisper
+    - ActionXenoPsychicRadiance
+    - ActionXenoGiveOrder
     - ActionXenoGut
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
@@ -85,10 +86,13 @@
     buildDelay: 2
     canBuild:
     - WallXenoResin
+    - WallXenoResinReflective #TODO should only be available while in ovipositor mode
     - WallXenoMembrane
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoResinSpikes
+    - HiveAcidPillarXeno
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
@@ -103,10 +107,12 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4
+    plasmaTransferDelay: 0
   - type: CMArmor
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
+  - type: XenoPsychicCommunication
   - type: InnateCommandSpeech
   - type: RMCInnateRadioTextIncrease
     radioTextIncrease: 3
@@ -277,6 +283,10 @@
   - type: RMCTrackable
   - type: ExcludedFromKingVote
     canVote: true
+  - type: RemoveComponents
+    components:
+    - type: Gibbable
+    - type: CanBeLarvaQueued
 
 - type: entity
   parent: RMCXenoQueenBase

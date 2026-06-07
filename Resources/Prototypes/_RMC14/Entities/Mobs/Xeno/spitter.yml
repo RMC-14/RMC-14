@@ -28,6 +28,7 @@
       650: Dead
   - type: Tag
     tags:
+    - DoorBumpOpener
     - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoSpitter
@@ -57,7 +58,7 @@
   - type: XenoEvolution
     max: 500
     evolvesTo:
-    - CMXenoBoiler
+    - RMCXenoBoiler
     - CMXenoPraetorian
   - type: XenoSpit
   - type: XenoChargeSpit

@@ -26,9 +26,9 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
         if (TryComp(ent, out TargetingLaserComponent? targetingLaser))
         {
             if (focusCounter == 2)
-                targetingLaser.CurrentLaserColor = ent.Comp.LaserColor;
+                targetingLaser.LaserType = TargetingLaserType.Intense;
             else
-                targetingLaser.CurrentLaserColor = targetingLaser.LaserColor;
+                targetingLaser.LaserType = TargetingLaserType.Normal;
 
             Dirty(ent, targetingLaser);
         }

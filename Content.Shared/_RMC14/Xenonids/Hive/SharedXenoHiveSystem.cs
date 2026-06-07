@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -9,12 +10,15 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
@@ -26,20 +30,25 @@ namespace Content.Shared._RMC14.Xenonids.Hive;
 public abstract class SharedXenoHiveSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private EntityQuery<HiveComponent> _query;
     private EntityQuery<HiveMemberComponent> _memberQuery;
+
+    private readonly HashSet<EntityUid> _contacting = new();
 
     public override void Initialize()
     {
@@ -48,13 +57,19 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
 
+        SubscribeLocalEvent<MarineComponent, StunnedEvent>(OnStunned);
+        SubscribeLocalEvent<MarineComponent, KnockedDownEvent>(OnStunned);
+
         SubscribeLocalEvent<HiveComponent, MapInitEvent>(OnMapInit);
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MobStateChangedEvent>(OnGranterMobStateChanged);
+        SubscribeLocalEvent<XenoEvolutionGranterComponent, EntityTerminatingEvent>(OnGranterTerminating);
 
         SubscribeLocalEvent<AutoAssignHiveComponent, ComponentStartup>(OnAutoAssignHiveAdded);
 
         SubscribeLocalEvent<HiveGunComponent, AmmoShotEvent>(OnHiveGunShot);
+
+        SubscribeLocalEvent<XenoStunnedPreventCollisionComponent, PreventCollideEvent>(OnStunnedPreventCollide);
     }
 
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
@@ -78,19 +93,35 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         }
     }
 
+    private void OnStunned<T>(Entity<MarineComponent> marine, ref T ev)
+    {
+        _contacting.Clear();
+        _physics.GetContactingEntities(marine.Owner, _contacting);
+
+        foreach (var contacting in _contacting)
+        {
+            if (!HasComp<XenoStunnedPreventCollisionComponent>(contacting))
+                continue;
+
+            _broadphase.RegenerateContacts(marine.Owner);
+            break;
+        }
+    }
+
     private void OnGranterMobStateChanged(Entity<XenoEvolutionGranterComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState != MobState.Dead)
             return;
 
-        if (GetHive(ent.Owner) is {} hive)
-        {
-            hive.Comp.LastQueenDeath = _timing.CurTime;
-            hive.Comp.CurrentQueen = null;
-            hive.Comp.AnnouncedQueenDeathCooldownOver = false;
-            hive.Comp.NewQueenAt = _timing.CurTime + hive.Comp.NewQueenCooldown;
-            Dirty(hive);
-        }
+        ClearHiveQueen(ent.Owner, died: true);
+    }
+
+    private void OnGranterTerminating(Entity<XenoEvolutionGranterComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (_mobState.IsDead(ent))
+            return;
+
+        ClearHiveQueen(ent.Owner);
     }
 
     private void OnMapInit(Entity<HiveComponent> ent, ref MapInitEvent args)
@@ -129,7 +160,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (!_memberQuery.Resolve(member, ref member.Comp, false))
             return null;
 
-        if (member.Comp.Hive is not {} uid || TerminatingOrDeleted(uid))
+        if (member.Comp.Hive is not { } uid || TerminatingOrDeleted(uid))
             return null;
 
         if (!_query.TryComp(uid, out var comp))
@@ -185,6 +216,14 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         comp.Hive = hive;
         Dirty(member, comp);
 
+        if (HasComp<XenoEvolutionGranterComponent>(member) &&
+            old is { } oldHiveUid &&
+            _query.TryComp(oldHiveUid, out var oldHiveComp) &&
+            oldHiveComp.CurrentQueen == member.Owner)
+        {
+            ClearHiveQueen((oldHiveUid, oldHiveComp));
+        }
+
         if (HasComp<XenoEvolutionGranterComponent>(member) && hiveEnt.HasValue)
             SetHiveQueen(member, hiveEnt.Value);
 
@@ -199,7 +238,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// </summary>
     public void SetSameHive(Entity<HiveMemberComponent?> src, Entity<HiveMemberComponent?> dest)
     {
-        if (GetHive(src) is {} hive)
+        if (GetHive(src) is { } hive)
             SetHive(dest, hive);
     }
 
@@ -209,7 +248,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// </summary>
     public bool FromSameHive(Entity<HiveMemberComponent?> a, Entity<HiveMemberComponent?> b)
     {
-        if (GetHive(a) is not {} aHive)
+        if (GetHive(a) is not { } aHive)
             return false;
 
         return IsMember(b, aHive);
@@ -221,7 +260,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// </summary>
     public bool IsMember(Entity<HiveMemberComponent?> member, EntityUid? hive)
     {
-        if (hive == null || GetHive(member) is not {} memberHive)
+        if (hive == null || GetHive(member) is not { } memberHive)
             return false;
 
         return memberHive.Owner == hive;
@@ -231,11 +270,44 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     {
         return (hive.Comp.CurrentQueen is not null);
     }
+
     public bool SetHiveQueen(EntityUid queen, Entity<HiveComponent> hive)
     {
+        if (hive.Comp.CurrentQueen == queen)
+            return true;
+
         hive.Comp.CurrentQueen = queen;
         Dirty(hive);
+
+        var ev = new XenoHiveQueenChangedEvent();
+        RaiseLocalEvent(hive.Owner, ref ev);
         return true;
+    }
+
+    private void ClearHiveQueen(EntityUid queen, bool died = false)
+    {
+        if (GetHive(queen) is not { } hive || hive.Comp.CurrentQueen != queen)
+            return;
+
+        ClearHiveQueen(hive, died);
+    }
+
+    private void ClearHiveQueen(Entity<HiveComponent> hive, bool died = false)
+    {
+        hive.Comp.CurrentQueen = null;
+
+        if (died)
+        {
+            hive.Comp.LastQueenDeath = _timing.CurTime;
+            hive.Comp.AnnouncedQueenDeathCooldownOver = false;
+            hive.Comp.AnnouncedNoQueenCooldownOver = false;
+            hive.Comp.NewQueenAt = _timing.CurTime + hive.Comp.NewQueenCooldown;
+        }
+
+        Dirty(hive);
+
+        var ev = new XenoHiveQueenChangedEvent();
+        RaiseLocalEvent(hive.Owner, ref ev);
     }
 
     public bool HasHiveCore(Entity<HiveComponent> hive)
@@ -253,6 +325,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
                 return hiveCoreEnt;
             }
         }
+
         return null;
     }
 
@@ -266,6 +339,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     {
         return hive.Comp.HiveStructureSlots.TryGetValue(structureProtoId, out limit);
     }
+
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)
     {
         if (!_query.Resolve(hive, ref hive.Comp, false))
@@ -284,7 +358,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
     public void AnnounceNeedsOvipositorToSameHive(Entity<HiveMemberComponent?> xeno)
     {
-        if (GetHive(xeno) is not {} hive || hive.Comp.GotOvipositorPopup)
+        if (GetHive(xeno) is not { } hive || hive.Comp.GotOvipositorPopup)
             return;
 
         hive.Comp.GotOvipositorPopup = true;
@@ -399,9 +473,11 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         _xeno.MakeXeno(larva.Value);
         SetHive(larva.Value, hive);
 
-        var newMind = _mind.CreateMind(session.UserId, EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);
+        var newMind = _mind.CreateMind(session.UserId,
+            EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);
         _mind.TransferTo(newMind, larva, ghostCheckOverride: true);
-        _adminLog.Add(LogType.RMCBurrowedLarva, $"{session.Name:player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
+        _adminLog.Add(LogType.RMCBurrowedLarva,
+            $"{session.Name:player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
 
         return true;
     }
@@ -425,6 +501,33 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         {
             SetSameHive(ent.Owner, bullet);
         }
+    }
+
+    private void OnStunnedPreventCollide(Entity<XenoStunnedPreventCollisionComponent> ent, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!HasComp<StunnedComponent>(args.OtherEntity) &&
+            !HasComp<KnockedDownComponent>(args.OtherEntity))
+        {
+            return;
+        }
+
+        // This will make it so explosions and warrior punches do not throw someone through the door, for example
+        if (_pulling.GetPuller(args.OtherEntity) is not { } puller ||
+            !HasComp<XenoComponent>(puller))
+        {
+            return;
+        }
+
+        args.Cancelled = true;
+    }
+
+    public bool FromSameHiveOrAlly(Entity<HiveMemberComponent?> a, Entity<HiveMemberComponent?> b)
+    {
+        // TODO RMC14
+        return FromSameHive(a, b);
     }
 }
 
