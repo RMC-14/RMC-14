@@ -67,8 +67,8 @@
   equipment:
     eyes: RMCSunglasses
     head: RMCHardhatWhite
-    ears: RMCHeadsetDistressICBLiaison
-    back: RMCSatchelICBLiaisonFill # TODO RMC14 secure leather satchel
+    ears: RMCHeadsetDistressICBLiaison # TODO RMC14 tape recorder
+    back: RMCSatchelICBLiaisonFill
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCHazardVestYellow
     gloves: CMHandsInsulated
