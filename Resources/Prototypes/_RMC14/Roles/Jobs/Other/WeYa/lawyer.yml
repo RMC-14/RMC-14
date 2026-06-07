@@ -48,7 +48,7 @@
     outerClothing: RMCJacketCorporateBlue
     back: CMSatchel
     shoes: RMCShoesLaceup
-    # TODO RMC14 "pocket1: tape recorder"
+    pocket1: RMCUniversalRecorder
     # TODO RMC14 "pocket2: blue notepad"
   storage:
     back:

@@ -292,6 +292,13 @@ public sealed class GunIFFSystem : EntitySystem
         projectileIFFComponent.Enabled = enabled && projectileIFFComponent.Factions.Count > 0;
         Dirty(uid, projectileIFFComponent);
     }
+
+    public bool HasFaction(EntityUid uid, EntProtoId<IFFFactionComponent> faction)
+    {
+        if (!TryComp<ItemIFFComponent>(uid, out var itemIff))
+            return false;
+        return itemIff.Factions.Contains(faction);
+    }
 }
 
 [ByRefEvent]

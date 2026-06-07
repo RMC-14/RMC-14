@@ -48,7 +48,7 @@
     outerClothing: RMCJacketCorporateBlack
     back: CMSatchel
     shoes: RMCShoesLaceup
-    # TODO RMC14 "pocket1: tape recorder"
+    pocket1: RMCUniversalRecorder
     # TODO RMC14 "pocket2: black notepad"
   inhand:
   - RMCBriefcasePaperPen # TODO RMC14 secure briefcase
