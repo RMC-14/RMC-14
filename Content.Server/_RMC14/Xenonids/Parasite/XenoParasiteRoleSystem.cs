@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
+using Robust.Server.Containers;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -31,6 +32,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -116,7 +118,8 @@ public sealed class XenoEggRoleSystem : EntitySystem
         if (!SharedChecks(ent, user))
             return;
 
-        if (!(HasComp<ParasiteAIComponent>(ent) || HasComp<ParasiteAIDelayAddComponent>(ent)))
+        if (!(HasComp<ParasiteAIComponent>(ent) || HasComp<ParasiteAIDelayAddComponent>(ent)) ||
+            _container.IsEntityInContainer(ent))
             return;
 
         if (_actor.TryGetSession(user, out var session) && session != null)
