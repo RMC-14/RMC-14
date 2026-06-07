@@ -224,19 +224,6 @@
 
 - type: entity
   parent: RMCSynthResetKeySMART
-  id: RMCSynthResetKeyNovaris
-  name: Novaris Working Joe reboot key
-  description: A rugged reboot key designed for Novaris Working Joe synthetic units. It must be recharged after use.
-  components:
-  - type: Sprite
-    layers:
-    - state: seeg_reset_key
-    - state: seeg_reset_key_on
-      map: [ "enum.ToggleableVisuals.Layer" ]
-      visible: false
-
-- type: entity
-  parent: RMCSynthResetKeySMART
   id: RMCSynthResetKeyMakeshift
   name: makeshift synthetic sparker
   description: A crude synthetic reboot device assembled from scavenged sparking electronics. It must be recharged after use.
@@ -253,9 +240,16 @@
   id: RMCSynthResetKeyNovaris
   name: Novaris synthetic reset key
   description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use.
+  components:
+  - type: Sprite
+    layers:
+    - state: seeg_reset_key
+    - state: seeg_reset_key_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
 
 - type: entity
-  parent: RMCSynthResetKey
+  parent: RMCSynthResetKeyNovaris
   id: RMCSynthResetKeyNovarisSMART
   name: SMART Novaris synthetic reset key
   description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It must be recharged after use. This one has a micro-function AI and can be operated by anyone.
