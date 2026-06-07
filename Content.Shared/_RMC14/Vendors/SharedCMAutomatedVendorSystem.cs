@@ -291,6 +291,15 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
     {
+        // Let RMC-specific token systems consume the interaction before the normal multitool hacking path.
+        var tokenEv = new RMCVendorPointsTokenInteractEvent(args.User, args.Used);
+        RaiseLocalEvent(ent, ref tokenEv);
+        if (tokenEv.Handled)
+        {
+            args.Handled = true;
+            return;
+        }
+
         if (!HasComp<MultitoolComponent>(args.Used))
             return;
 

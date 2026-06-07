@@ -50,6 +50,7 @@ public sealed class DropshipFabricatorSystem : EntitySystem
             subs =>
             {
                 subs.Event<DropshipFabricatorPrintMsg>(OnPrintMsg);
+                subs.Event<DropshipFabricatorCancelQueueMsg>(OnCancelQueueMsg);
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipFabricatorStartingPoints, v => _startingPoints = v, true);
@@ -89,6 +90,7 @@ public sealed class DropshipFabricatorSystem : EntitySystem
 
         points.Points += (int) (refund * printable.RecycleMultiplier);
         Dirty(ent.Comp.Account.Value, points);
+        SendUIStateAll(points.Points);
         Del(args.Used);
 
         _audio.PlayPvs(ent.Comp.RecycleSound, ent);
@@ -104,29 +106,91 @@ public sealed class DropshipFabricatorSystem : EntitySystem
             return;
 
         var actor = args.Actor;
-        if (ent.Comp.Printing != null)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-dropship-fabricator-busy"), actor, actor, PopupType.SmallCaution);
-            return;
-        }
-
         if (!TryComp(ent.Comp.Account, out DropshipFabricatorPointsComponent? points))
             return;
 
-        if (printable.Cost > points.Points)
+        if (ent.Comp.Queue.Count >= ent.Comp.MaxQueue)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-dropship-fabricator-queue-full"), actor, actor, PopupType.SmallCaution);
             return;
+        }
+
+        if (printable.Cost > points.Points)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-dropship-fabricator-insufficient-points"), actor, actor, PopupType.SmallCaution);
+            return;
+        }
 
         points.Points -= printable.Cost;
         Dirty(ent.Comp.Account.Value, points);
+        SendUIStateAll(points.Points);
 
-        ent.Comp.Points = points.Points;
-        ent.Comp.Printing = proto.ID;
-        ent.Comp.PrintAt = _timing.CurTime + printable.Delay;
+        ent.Comp.Queue.Add(new DropshipFabricatorQueueEntry(proto.ID, printable.Cost));
         Dirty(ent);
-
-        _appearance.SetData(ent, DropshipFabricatorVisuals.State, DropshipFabricatorState.Fabricating);
+        TryStartNextPrint(ent);
 
         _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} printed {proto.Name} for {printable.Cost} points at the dropship lathe");
+    }
+
+    private void OnCancelQueueMsg(Entity<DropshipFabricatorComponent> ent, ref DropshipFabricatorCancelQueueMsg args)
+    {
+        if (args.Index < 0 || args.Index >= ent.Comp.Queue.Count)
+            return;
+
+        var entry = ent.Comp.Queue[args.Index];
+        ent.Comp.Queue.RemoveAt(args.Index);
+
+        if (TryComp(ent.Comp.Account, out DropshipFabricatorPointsComponent? points))
+        {
+            points.Points += entry.Cost;
+            Dirty(ent.Comp.Account.Value, points);
+            SendUIStateAll(points.Points);
+        }
+
+        Dirty(ent);
+    }
+
+    private bool TryStartNextPrint(Entity<DropshipFabricatorComponent> ent)
+    {
+        if (ent.Comp.Printing != null)
+            return false;
+
+        var changed = false;
+        while (ent.Comp.Queue.Count > 0)
+        {
+            changed = true;
+            var entry = ent.Comp.Queue[0];
+            ent.Comp.Queue.RemoveAt(0);
+
+            if (!_prototypes.TryIndex(entry.Id, out var proto) ||
+                !proto.TryGetComponent(out DropshipFabricatorPrintableComponent? printable, _compFactory))
+            {
+                RefundQueuedCost(ent, entry.Cost);
+                continue;
+            }
+
+            ent.Comp.Printing = entry.Id;
+            ent.Comp.PrintAt = _timing.CurTime + printable.Delay;
+            Dirty(ent);
+
+            _appearance.SetData(ent, DropshipFabricatorVisuals.State, DropshipFabricatorState.Fabricating);
+            return true;
+        }
+
+        if (changed)
+            Dirty(ent);
+
+        return false;
+    }
+
+    private void RefundQueuedCost(Entity<DropshipFabricatorComponent> ent, int cost)
+    {
+        if (!TryComp(ent.Comp.Account, out DropshipFabricatorPointsComponent? points))
+            return;
+
+        points.Points += cost;
+        Dirty(ent.Comp.Account.Value, points);
+        SendUIStateAll(points.Points);
     }
 
     private Entity<DropshipFabricatorPointsComponent> EnsurePoints()
@@ -187,10 +251,13 @@ public sealed class DropshipFabricatorSystem : EntitySystem
         var allFabricatorQuery = EntityQueryEnumerator<DropshipFabricatorComponent, TransformComponent>();
         while (allFabricatorQuery.MoveNext(out var uid, out var comp, out var xform))
         {
-            if (time < comp.PrintAt)
-                continue;
-
             if (comp.Printing == null)
+            {
+                TryStartNextPrint((uid, comp));
+                continue;
+            }
+
+            if (time < comp.PrintAt)
                 continue;
 
             var rotation = _transform.GetWorldRotation(xform);
@@ -200,7 +267,8 @@ public sealed class DropshipFabricatorSystem : EntitySystem
             comp.Printing = null;
             Dirty(uid, comp);
 
-            _appearance.SetData(uid, DropshipFabricatorVisuals.State, DropshipFabricatorState.Idle);
+            if (!TryStartNextPrint((uid, comp)))
+                _appearance.SetData(uid, DropshipFabricatorVisuals.State, DropshipFabricatorState.Idle);
         }
 
         var pointsQuery = EntityQueryEnumerator<DropshipFabricatorPointsComponent>();
