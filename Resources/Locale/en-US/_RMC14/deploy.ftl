@@ -4,4 +4,6 @@ rmc-deploy-popup-acid = The { $entity } is covered in acid!
 rmc-deploy-popup-start = You begin deployment...
 rmc-deployable-examine-hint = Use this item in your hand to deploy.
 rmc-deployed-collapse-hint = Use the [color=yellow]{ $tool }[/color] to collapse it.
+rmc-deployed-collapse-without-tool-hint = Use the context menu to collapse it.
+rmc-deployed-collapse-verb = Collapse
 rmc-deployable-collapse-start = You start collapsing...

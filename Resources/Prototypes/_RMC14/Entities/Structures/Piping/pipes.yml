@@ -5,6 +5,8 @@
   - type: Item
     size: Small
     shape: null
+  - type: RMCHijackRandomDamageTarget
+    category: Pipe
   - type: VentExit
   - type: RMCContainerEmptyOnDestruction
   - type: ContainerContainer

@@ -10,6 +10,9 @@ rmc-vending-machine-hack-start = You start tweaking access restrictions in {THE(
 rmc-vending-machine-hack-finish-remove = You have successfully removed access restrictions in {THE($vendor)}
 rmc-vending-machine-hack-finish-restore = You have restored access restrictions in {THE($vendor)}
 
+rmc-vendor-points-token-redeem = You insert {THE($token)} into {THE($vendor)}. {$points} points are added to your account.
+rmc-vendor-points-token-wrong-vendor = {CAPITALIZE(THE($token))} does not fit into {THE($vendor)}.
+
 rmc-vending-machine-restock-bulk-verb = Restock from container
 rmc-vending-machine-restock-single-verb = Restock item
 rmc-vending-machine-restock-empty = {THE($container)} is empty.
