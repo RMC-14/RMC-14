@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Hospital Corpsman can now acquire the "MS-11 Smart Refill Tank" that
-      can be used to refill injectors in the field.
-    type: Add
-  id: 2806
-  time: '2026-01-19T01:03:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8386
 - author: wheelwrightt
   changes:
   - message: Recharger sprite now changes corresponding to the charge level of the
@@ -4516,5 +4508,12 @@
   id: 3305
   time: '2026-06-07T01:33:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9141
+- author: BreakpointDebug1234
+  changes:
+  - message: Guidebook links to various items and structures
+    type: Add
+  id: 3306
+  time: '2026-06-07T01:47:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9387
 Name: RMC14
 Order: -1
