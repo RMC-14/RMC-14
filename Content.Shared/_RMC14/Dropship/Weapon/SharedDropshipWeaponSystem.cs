@@ -1128,6 +1128,17 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (!IsValidTarget(target))
                 return;
 
+            if (!TryComp(dropship, out FTLComponent? ftl) ||
+                ftl.State != FTLState.Travelling)
+            {
+                if (_net.IsClient)
+                {
+                    var msg = Loc.GetString("rmc-dropship-launch-bay-fire-not-flying");
+                    _popup.PopupCursor(msg, args.Actor, PopupType.SmallCaution);
+                }
+                return;
+            }
+
             if (!_area.CanCAS(target.ToCoordinates()))
             {
                 var msg = Loc.GetString("rmc-laser-designator-not-cas");
