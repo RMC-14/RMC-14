@@ -184,7 +184,7 @@
 - type: entity
   parent: ColMarTechBase
   id: WeYaK9SynthVendor
-  name: We-Ya Synthetic K9 Equipment Requisitions
+  name: Wey-Yu Synthetic K9 Equipment Requisitions
   description: A vendor specially designed to dispense Synthetic K9 equipment.
   components:
   - type: AccessReader
