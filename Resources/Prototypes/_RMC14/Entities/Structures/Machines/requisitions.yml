@@ -43,10 +43,19 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/asrs_console.rsi
     layers:
-    - map: ["computerLayerBody"]
+    - map: ["base"]
       state: off
-    - map: ["computerLayerScreen"]
-      state: on
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "on"
+  - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -93,10 +102,6 @@
     guides:
     - Cargo
   - type: CargoSellBlacklist
-  - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
-  - type: Appearance
   - type: LitOnPowered
   - type: EmitSoundOnUIOpen
     sound:
