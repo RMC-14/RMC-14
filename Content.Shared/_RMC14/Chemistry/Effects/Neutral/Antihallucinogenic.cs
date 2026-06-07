@@ -7,7 +7,7 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Chemistry.Effects.neutral;
+namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Antihallucinogenic : RMCChemicalEffect
 {
