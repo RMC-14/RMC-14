@@ -652,7 +652,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         {
             maxRange = distance;
         }
-        _projectile.SetMaxRange(ball, maxRange - 1);
+        _projectile.SetMaxRange(ball, maxRange);
         _projectile.ModifyDamage(ball, reagent.Intensity);
         _rmcFlammable.IgniteOnProjectileHit(ball, reagent);
 

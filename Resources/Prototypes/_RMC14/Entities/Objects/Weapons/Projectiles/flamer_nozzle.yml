@@ -34,4 +34,4 @@
         - BulletImpassable
   - type: SpawnOnTerminate
     spawn: RMCTileFire # Gets set to `ReagentPrototype.FireEntity`.
-  - type: RMCFireProjectile
+    spawnOffset: 0.5
