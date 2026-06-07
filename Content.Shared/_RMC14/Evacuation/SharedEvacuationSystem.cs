@@ -117,6 +117,9 @@ public abstract class SharedEvacuationSystem : EntitySystem
             Dirty(uid, door);
         }
 
+        if (IsEvacuationEnabled())
+            OpenEvacuationDoors();
+
         _config.SetCVar(CCVars.GameDisallowLateJoins, true);
     }
 
@@ -128,6 +131,8 @@ public abstract class SharedEvacuationSystem : EntitySystem
             computer.Enabled = true;
             Dirty(uid, computer);
         }
+
+        OpenEvacuationDoors();
 
         var evacuation = EntityQueryEnumerator<EvacuationComputerComponent>();
         while (evacuation.MoveNext(out var computerId, out var computer))
@@ -221,6 +226,13 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
     private void OnEvacuationDoorBeforeClosed(Entity<EvacuationDoorComponent> ent, ref BeforeDoorClosedEvent args)
     {
+        if (TryComp(ent, out RMCOpenOnEvacuationComponent? openOnEvacuation) &&
+            openOnEvacuation.Enabled)
+        {
+            args.Cancel();
+            return;
+        }
+
         if (ent.Comp.Locked)
             args.PerformCollisionCheck = false;
     }
@@ -382,6 +394,47 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
     protected virtual void LaunchEvacuationFTL(EntityUid grid, float crashLandChance, SoundSpecifier? launchSound)
     {
+    }
+
+    private void OpenEvacuationDoors()
+    {
+        var doors = EntityQueryEnumerator<RMCOpenOnEvacuationComponent, DoorComponent>();
+        while (doors.MoveNext(out var uid, out _, out var door))
+        {
+            if (door.State is not DoorState.Open and not DoorState.Opening &&
+                !_door.TryOpen(uid, door))
+            {
+                continue;
+            }
+
+            TryEnableEvacuationOpen(uid);
+        }
+    }
+
+    protected bool TryDisableEvacuationOpen(EntityUid uid)
+    {
+        if (!TryComp(uid, out RMCOpenOnEvacuationComponent? openOnEvacuation) ||
+            !openOnEvacuation.Enabled)
+        {
+            return false;
+        }
+
+        openOnEvacuation.Enabled = false;
+        Dirty(uid, openOnEvacuation);
+        return true;
+    }
+
+    private bool TryEnableEvacuationOpen(EntityUid uid)
+    {
+        if (!TryComp(uid, out RMCOpenOnEvacuationComponent? openOnEvacuation))
+            return false;
+
+        if (openOnEvacuation.Enabled)
+            return true;
+
+        openOnEvacuation.Enabled = true;
+        Dirty(uid, openOnEvacuation);
+        return true;
     }
 
     private void SetPumpAppearance(EvacuationPumpVisuals visual)

@@ -163,6 +163,8 @@
         points: 10
       - id: RMCAttachmentM13StockSolid
         points: 10
+      - id: RMCAttachmentM13StockCollapsible
+        points: 10
       - id: RMCAttachmentM42A2CollapsibleStock
         points: 10
       - id: RMCAttachmentM63Stock
@@ -289,6 +291,8 @@
       - id: CMMagazinePistolMK80
         amount: 16
       - id: RMCMagazinePistolM13
+        amount: 10
+      - id: RMCMagazinePistolM13Ext
         amount: 10
     - name: Attachments
       entries:

@@ -761,3 +761,75 @@
       state: 82
     - type: Icon
       state: 82
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWallCornerRightSouth
+  components:
+    - type: Sprite
+      state: corner_right_south
+    - type: Icon
+      state: corner_right_south
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWallCornerLeftSouth
+  components:
+    - type: Sprite
+      state: corner_left_south
+    - type: Icon
+      state: corner_left_south
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWallCornerRightNorth
+  components:
+    - type: Sprite
+      state: corner_right_north
+    - type: Icon
+      state: corner_right_north
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWallCornerLeftNorth
+  components:
+    - type: Sprite
+      state: corner_left_north
+    - type: Icon
+      state: corner_left_north
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWallConnector1
+  components:
+    - type: Sprite
+      state: connector_1
+    - type: Icon
+      state: connector_1
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWallConnector2
+  components:
+    - type: Sprite
+      state: connector_2
+    - type: Icon
+      state: connector_2
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWallEngine1
+  components:
+    - type: Sprite
+      state: engine_1
+    - type: Icon
+      state: engine_1
+
+- type: entity
+  parent: RMCBaseTSEDropshipWall
+  id: RMCTSEDropshipWallEngine2
+  components:
+    - type: Sprite
+      state: engine_2
+    - type: Icon
+      state: engine_2

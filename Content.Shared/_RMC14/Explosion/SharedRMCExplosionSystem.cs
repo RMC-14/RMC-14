@@ -3,6 +3,7 @@ using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
@@ -17,6 +18,7 @@ using Content.Shared.Sticky.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -26,7 +28,9 @@ namespace Content.Shared._RMC14.Explosion;
 
 public abstract class SharedRMCExplosionSystem : EntitySystem
 {
+    [Dependency] private readonly SharedXenoAcidSystem _acid = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -58,6 +62,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         SubscribeLocalEvent<StunOnExplosionReceivedComponent, ExplosionReceivedEvent>(OnStunOnExplosionReceivedBeforeExplode);
 
         SubscribeLocalEvent<DestroyedByExplosionTypeComponent, ExplosionReceivedEvent>(OnDestroyedByExplosionReceived);
+
+        SubscribeLocalEvent<DestroyedByExplosionComponent, ExplosionReceivedEvent>(OnDestroyedByExplosionReceived);
 
         SubscribeLocalEvent<MobGibbedByExplosionTypeComponent, ExplosionReceivedEvent>(OnMobGibbedByExplosionReceived);
     }
@@ -192,6 +198,34 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         if (!TerminatingOrDeleted(ent))
             QueueDel(ent);
+    }
+
+    private void OnDestroyedByExplosionReceived(Entity<DestroyedByExplosionComponent> ent, ref ExplosionReceivedEvent args)
+    {
+        if (!ent.Comp.IsExplodable || TryComp(ent, out CorrodibleComponent? corrodible) && !corrodible.IsCorrodible)
+            return;
+
+        if (_container.IsEntityInContainer(ent))
+            return;
+
+        var deleteEntity = false;
+        var damage = args.Damage.GetTotal();
+        var destroyChance =
+            damage > ent.Comp.HighIntensityDamageThreshold ? ent.Comp.HighIntensityDestroyChance :
+            damage > ent.Comp.LowIntensityDamageThreshold  ? ent.Comp.MediumIntensityDestroyChance :
+            ent.Comp.LowIntensityDestroyChance;
+
+        if (_random.NextFloat() < destroyChance)
+            deleteEntity = true;
+
+
+        if (!deleteEntity || TerminatingOrDeleted(ent))
+            return;
+
+        if (_acid.TryConsumeGunSecondWind(ent))
+            return;
+
+        QueueDel(ent);
     }
 
     private void OnMobGibbedByExplosionReceived(Entity<MobGibbedByExplosionTypeComponent> ent, ref ExplosionReceivedEvent args)
