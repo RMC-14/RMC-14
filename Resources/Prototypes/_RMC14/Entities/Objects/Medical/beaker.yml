@@ -578,3 +578,5 @@
   - type: PhysicalComposition
     materialComposition:
       CMGlass: 30000
+  - type: StaticPrice
+    price: 60
