@@ -55,8 +55,31 @@ rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {
 rmc-xeno-evolution-cant-evolve-caste-cooldown = We cannot evolve into this caste again yet! ({$minutes} minutes and {$seconds} seconds remaining)
 rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for you to evolve off weeds!
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
+rmc-xeno-evolution-failed-marines-dropped = The sky talls have already landed, we can no longer evolve into this form.
+rmc-xeno-evolution-failed-queen-exists = The hive already has a Queen!
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
+
+# Insight
+rmc-xeno-insight-empower = We have gained sufficient insight in our prey to empower our next Deploy Traps!
+
+# Deploy Traps
+rmc-xeno-deploy-traps-self = We create a sudden surge of traps!
+rmc-xeno-deploy-traps-others = The sapper creates a sudden surge of traps!
+rmc-xeno-deploy-traps-empower = We have tapped into our reserves to prepare a stronger Acid Mine!
+rmc-xeno-deploy-traps-range-fail = That target is too far away!
+rmc-xeno-deploy-traps-see-fail = There's something in the way!
+
+
+# Acid Mine
+rmc-xeno-acid-mine-self = We coax a hidden mine to detonate!
+rmc-xeno-acid-mine-others = The sapper coaxes a hidden mine to detonate!
+rmc-xeno-acid-mine-range-fail = That target is too far away!
+rmc-xeno-acid-mine-see-fail = There's something in the way!
+
+# Adrenaline Surge
+rmc-xeno-adrenaline-surge-ready = You feel your adrenaline glands refill! Your speed boost will activate again.
+rmc-xeno-adrenaline-surge-start = Your adrenaline surges to enhance your speed!
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = We can't headbutt while fortifying!
@@ -82,12 +105,14 @@ rmc-xeno-acid-structure-unmeltable = We can only melt barricades and items!
 rmc-xeno-acid-too-weak = {CAPITALIZE(THE($target))} is too tough to be melted by our weak acid.
 rmc-acid-pickup-blocked = {CAPITALIZE(THE($target))} is covered in corrosive acid!
 rmc-acid-hole-already-weakened = It's already been weakened.
-rmc-acid-hole-only-small-xenos = Only small xenos can fit through this hole.
-rmc-acid-hole-too-large = We are too large to squeeze through this hole.
+rmc-acid-hole-only-small-xenos = Only sisters small enough can fit through this hole.
+rmc-acid-hole-too-large-non-xeno = You are too large to squeeze through this hole.
 rmc-acid-hole-wrong-side = We need to approach the hole from the entrance side!
+rmc-acid-hole-entrance-blocked = Something is blocking this side of the hole.
 rmc-acid-hole-no-exit = There's no space to crawl through there.
 rmc-acid-hole-blocked = Something is blocking the other side.
 rmc-acid-hole-repair-blocked = The wall is breached and must be patched first.
+rmc-acid-hole-repair-requires-nailgun = You need a nailgun to fix this breach.
 
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
@@ -414,3 +439,8 @@ rmc-doomed-fail = It's not working...
 # Destroy
 rmc-destroy-cant-reach = We don't have a clear path to that location!
 rmc-destroy-cant-area = We can't leap to that area!
+
+rmc-xeno-weeds-no-nearby-node = We require weeds to be closer!
+rmc-xeno-queen-eye-no-weeds = We can't move our eye there, there are no weeds!
+rmc-xeno-queen-eye-expand-weeds-name = Expand Weeds (50)
+rmc-xeno-queen-eye-expand-weeds-desc = Expand existing weeds or turn a weed tile into a node.

@@ -20,8 +20,6 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewCombatCorrespondent
-      - id: CMSatchel
-        name: Leather Satchel
       - id: RMCCameraBroadcasting
         name: Press Broadcasting Camera
         recommended: true
@@ -35,6 +33,15 @@
         recommended: true
       - id: RMCTentUNMCExtendedCorrespondentFolded
         name: Correspondent Field Tent
+    - name: Satchel
+      jobs:
+      - CMCorrespondent
+      choices: { CMSatchel: 1 }
+      entries:
+      - id: CMSatchel
+        name: Leather Satchel
+      - id: RMCBackpackRTOBagPhone
+        name: Portable Phone Bag
     - name: Combat Backpack
       jobs:
       - CMCombatCorrespondent
