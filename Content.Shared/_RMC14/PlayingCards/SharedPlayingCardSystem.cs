@@ -243,8 +243,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         // Add single card to deck
         if (_cardQuery.TryComp(args.Used, out var card))
         {
-            if (_net.IsServer)
-                AddCardToDeck(ent, (args.Used, card), args.User);
+            AddCardToDeck(ent, (args.Used, card), args.User);
             args.Handled = true;
             return;
         }
@@ -252,8 +251,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         // Add hand of cards to deck
         if (_handQuery.TryComp(args.Used, out var hand))
         {
-            if (_net.IsServer)
-                AddHandToDeck(ent, (args.Used, hand), args.User);
+            AddHandToDeck(ent, (args.Used, hand), args.User);
             args.Handled = true;
         }
     }
@@ -619,10 +617,50 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     protected virtual void AddCardToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardComponent> card, EntityUid user)
     {
+        if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
+        {
+            _popup.PopupPredicted(Loc.GetString("rmc-playing-card-deck-full"), deck, user);
+            return;
+        }
+
+        deck.Comp.CardOrder.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
+        Dirty(deck);
+        QueueDel(card);
+
+        _popup.PopupPredicted(Loc.GetString("rmc-playing-card-added-to-deck"), deck, user);
+        _audio.PlayPredicted(deck.Comp.DrawSound, deck, user);
     }
 
     protected virtual void AddHandToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardHandComponent> hand, EntityUid user)
     {
+        if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
+        {
+            _popup.PopupPredicted(Loc.GetString("rmc-playing-card-deck-full"), deck, user);
+            return;
+        }
+
+        var added = 0;
+        for (var i = 0; i < hand.Comp.Cards.Count; i++)
+        {
+            if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
+                break;
+            deck.Comp.CardOrder.Add(hand.Comp.Cards[i]);
+            added++;
+        }
+
+        hand.Comp.Cards.RemoveRange(0, added);
+        Dirty(deck);
+
+        if (hand.Comp.Cards.Count == 0)
+            QueueDel(hand);
+        else
+            Dirty(hand);
+
+        if (added > 0)
+        {
+            _popup.PopupPredicted(Loc.GetString("rmc-playing-card-added-cards-to-deck", ("count", added)), deck, user);
+            _audio.PlayPredicted(deck.Comp.DrawSound, deck, user);
+        }
     }
 
     #endregion
