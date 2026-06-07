@@ -35,6 +35,9 @@
   id: CMOintment
 
 - type: Tag
+  id: CMSplint
+
+- type: Tag
   id: CMFirstAidKit
 
 - type: Tag
@@ -95,6 +98,15 @@
   id: RMCGlass
 
 - type: Tag
+  id: RMCHelmet
+
+- type: Tag
+  id: RMCPVEArmor
+
+- type: Tag
+  id: RMCPVEArmorAccessory
+
+- type: Tag
   id: Scabbard
 
 - type: Tag
@@ -105,6 +117,9 @@
 
 - type: Tag
   id: RMCScrewdriver
+
+- type: Tag
+  id: LightReplacer
 
 - type: Tag
   id: ThrowingKnife
@@ -128,6 +143,11 @@
   id: Bacon
 
 - type: Tag
+
+  id: Watch
+
+- type: Tag
+
   id: RMCPinpointer
 
 - type: Tag
@@ -165,3 +185,9 @@
 
 - type: Tag
   id: RMCSynthGrabbable # whitelist tag for synths being able to grab particular xenos
+
+- type: Tag
+  id: RMCSentryLaptop
+
+- type: Tag
+  id: RMCDataDisk

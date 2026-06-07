@@ -20,6 +20,7 @@ using Content.Shared.Toggleable;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -32,7 +33,10 @@ namespace Content.Shared._RMC14.Power;
 
 public abstract class SharedRMCPowerSystem : EntitySystem
 {
+    [Dependency] protected readonly SharedPointLightSystem Pointlight = default!;
+
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -40,7 +44,6 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -89,7 +92,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorCellDoAfterEvent>(OnFusionReactorCellDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorRemoveCellDoAfterEvent>(OnFusionReactorRemoveCellDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorRepairDoAfterEvent>(OnFusionReactorRepairWeldingDoAfter);
+        SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorOverloadDoAfterEvent>(OnFusionReactorOverloadDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, InteractHandEvent>(OnFusionReactorInteractHand);
+        SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorStopOverloadDoAfterEvent>(OnFusionReactorStopOverloadDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, RMCFusionReactorDestroyDoAfterEvent>(OnFusionReactorDestroyDoAfter);
         SubscribeLocalEvent<RMCFusionReactorComponent, ExaminedEvent>(OnFusionReactorExamined);
 
@@ -357,6 +362,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         var used = args.Used;
 
         args.Handled = true;
+        if (HasActiveFusionReactorDoAfter(user))
+            return;
+
         var container = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.CellContainerSlot);
         if (HasComp<RMCFusionCellComponent>(used))
         {
@@ -405,6 +413,10 @@ public abstract class SharedRMCPowerSystem : EntitySystem
                     ("reactor", ent));
                 _popup.PopupClient(msg, ent, user);
             }
+        }
+        else if (_tool.HasQuality(used, ent.Comp.OverloadQuality))
+        {
+            TryStartFusionReactorOverload(ent, user, used);
         }
         else if (_tool.HasQuality(used, ent.Comp.WeldingQuality))
         {
@@ -477,6 +489,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (_container.Remove(cell, container))
             _hands.TryPickupAnyHand(user, cell);
 
+        SetFusionReactorOverloaded(ent, false, user);
+
         msg = Loc.GetString("rmc-fusion-reactor-remove-finish-self", ("cell", cell), ("reactor", ent));
         _popup.PopupClient(msg, ent, user);
 
@@ -492,6 +506,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         if (ent.Comp.State != args.State)
             return;
+
+        SetFusionReactorOverloaded(ent, false, args.User);
 
         ent.Comp.State = args.State switch
         {
@@ -512,6 +528,23 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (!HasComp<XenoComponent>(user) || !HasComp<MeleeWeaponComponent>(user))
             return;
 
+        if (HasActiveFusionReactorDoAfter(user))
+            return;
+
+        if (ent.Comp.Overloaded)
+        {
+            args.Handled = true;
+            var stopOverloadEv = new RMCFusionReactorStopOverloadDoAfterEvent();
+            var stopOverloadDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.XenoOverloadStopDelay, stopOverloadEv, ent, ent)
+            {
+                BreakOnMove = true,
+                DuplicateCondition = DuplicateConditions.SameEvent,
+            };
+
+            _doAfter.TryStartDoAfter(stopOverloadDoAfter);
+            return;
+        }
+
         if (ent.Comp.State == RMCFusionReactorState.Weld)
         {
             _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-already-destroyed", ("reactor", ent)), ent, user);
@@ -526,6 +559,26 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnFusionReactorStopOverloadDoAfter(Entity<RMCFusionReactorComponent> ent, ref RMCFusionReactorStopOverloadDoAfterEvent args)
+    {
+        var user = args.User;
+        if (args.Cancelled || args.Handled)
+            return;
+
+        if (!ent.Comp.Overloaded || !HasComp<XenoComponent>(user) || !HasComp<MeleeWeaponComponent>(user))
+            return;
+
+        args.Handled = true;
+        SetFusionReactorOverloaded(ent, false, user);
+        _popup.PopupPredicted(
+            Loc.GetString("rmc-fusion-reactor-overload-stop-xeno", ("reactor", ent)),
+            Loc.GetString("rmc-fusion-reactor-overload-stop-xeno-others", ("xeno", user), ("reactor", ent)),
+            ent,
+            user,
+            MediumCaution);
+        _audio.PlayPredicted(ent.Comp.OverloadStopSound, ent, user);
     }
 
     private void OnFusionReactorDestroyDoAfter(Entity<RMCFusionReactorComponent> ent, ref RMCFusionReactorDestroyDoAfterEvent args)
@@ -549,6 +602,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
     public void DestroyReactor(Entity<RMCFusionReactorComponent> ent, EntityUid? user)
     {
+        SetFusionReactorOverloaded(ent, false, user);
+
         ent.Comp.State = ent.Comp.State switch
         {
             RMCFusionReactorState.Working => RMCFusionReactorState.Wrench,
@@ -567,6 +622,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
     public void FullyDestroy(Entity<RMCFusionReactorComponent> ent)
     {
+        SetFusionReactorOverloaded(ent, false);
+
         ent.Comp.State = RMCFusionReactorState.Weld;
         Dirty(ent);
         UpdateAppearance(ent);
@@ -599,6 +656,13 @@ public abstract class SharedRMCPowerSystem : EntitySystem
                 // TODO: localize
                 args.PushMarkup("It needs a [color=cyan]fuel cell[/color]!");
             }
+
+            var overload = new RMCFusionReactorOverloadStatusEvent(ent, args.Examiner);
+            RaiseLocalEvent(ent.Owner, ref overload, true);
+            if (overload.Text != null)
+                args.PushMarkup(overload.Text);
+            else if (ent.Comp.Overloaded)
+                args.PushMarkup(Loc.GetString("rmc-fusion-reactor-overload-examine"));
         }
     }
 
@@ -654,9 +718,133 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
         }
 
-        // TODO RMC14 overloaded
+        if (ent.Comp.Overloaded)
+        {
+            _appearance.SetData(ent, RMCFusionReactorLayers.Layer, RMCFusionReactorVisuals.Overloaded);
+            return;
+        }
+
         // TODO RMC14 fuel use
         _appearance.SetData(ent, RMCFusionReactorLayers.Layer, RMCFusionReactorVisuals.Hundred);
+    }
+
+    private void TryStartFusionReactorOverload(Entity<RMCFusionReactorComponent> ent, EntityUid user, EntityUid used)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (HasActiveFusionReactorDoAfter(user))
+            return;
+
+        if (!CanToggleFusionReactorOverload(ent, user, used))
+            return;
+
+        var ev = new RMCFusionReactorOverloadDoAfterEvent();
+        var delay = ent.Comp.OverloadDelay * _skills.GetSkillDelayMultiplier(user, ent.Comp.OverloadSkill);
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, used: used)
+        {
+            BreakOnMove = true,
+            BreakOnHandChange = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
+        if (!_doAfter.TryStartDoAfter(doAfter))
+            return;
+
+        var msg = Loc.GetString(ent.Comp.Overloaded
+                ? "rmc-fusion-reactor-overload-start-disable"
+                : "rmc-fusion-reactor-overload-start-enable",
+            ("reactor", ent));
+        _popup.PopupClient(msg, ent, user);
+    }
+
+    private void OnFusionReactorOverloadDoAfter(Entity<RMCFusionReactorComponent> ent, ref RMCFusionReactorOverloadDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || args.Used is not { } used)
+            return;
+
+        args.Handled = true;
+
+        if (!CanToggleFusionReactorOverload(ent, args.User, used))
+            return;
+
+        var overloaded = !ent.Comp.Overloaded;
+        SetFusionReactorOverloaded(ent, overloaded, args.User);
+
+        var msg = Loc.GetString(overloaded
+                ? "rmc-fusion-reactor-overload-enabled"
+                : "rmc-fusion-reactor-overload-disabled",
+            ("reactor", ent));
+        _popup.PopupClient(msg, ent, args.User);
+    }
+
+    private bool CanToggleFusionReactorOverload(Entity<RMCFusionReactorComponent> ent, EntityUid user, EntityUid used)
+    {
+        if (!_tool.HasQuality(used, ent.Comp.OverloadQuality))
+            return false;
+
+        if (!_skills.HasSkill(user, ent.Comp.OverloadSkill, ent.Comp.OverloadSkillLevel))
+            return false;
+
+        if (ent.Comp.State != RMCFusionReactorState.Working)
+            return false;
+
+        if (!HasFusionReactorCell(ent))
+            return false;
+
+        var ev = new RMCFusionReactorCanOverloadEvent(ent, user);
+        RaiseLocalEvent(ent.Owner, ref ev, true);
+        if (!ev.CanOverload)
+            return false;
+
+        return true;
+    }
+
+    private bool HasFusionReactorCell(Entity<RMCFusionReactorComponent> ent)
+    {
+        return _container.TryGetContainer(ent, ent.Comp.CellContainerSlot, out var container) &&
+               container.ContainedEntities.Count > 0;
+    }
+
+    private bool HasActiveFusionReactorDoAfter(EntityUid user)
+    {
+        if (!TryComp<DoAfterComponent>(user, out var doAfter))
+            return false;
+
+        foreach (var active in doAfter.DoAfters.Values)
+        {
+            if (active.Cancelled || active.Completed)
+                continue;
+
+            if (active.Args.Target is { } target &&
+                HasComp<RMCFusionReactorComponent>(target))
+            {
+                return true;
+            }
+
+            if (active.Args.EventTarget is { } eventTarget &&
+                HasComp<RMCFusionReactorComponent>(eventTarget))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void SetFusionReactorOverloaded(Entity<RMCFusionReactorComponent> ent, bool overloaded, EntityUid? user = null)
+    {
+        if (ent.Comp.Overloaded == overloaded)
+            return;
+
+        ent.Comp.Overloaded = overloaded;
+        ent.Comp.OverloadNextFeedbackAt = TimeSpan.Zero;
+        Dirty(ent);
+        UpdateAppearance(ent);
+        ReactorUpdated(ent);
+
+        var ev = new RMCFusionReactorOverloadChangedEvent(ent, overloaded);
+        RaiseLocalEvent(ent.Owner, ref ev, true);
     }
 
     private void TryRepair(
@@ -890,12 +1078,14 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             {
                 var powered = AnyReactorsOn(map);
                 var lights = EntityQueryEnumerator<RMCReactorPoweredLightComponent, TransformComponent>();
-                while (lights.MoveNext(out var uid, out _, out var xform))
+                while (lights.MoveNext(out var uid, out var poweredLight, out var xform))
                 {
                     if (xform.MapID == map)
                     {
+                        poweredLight.Enabled = powered;
+                        Dirty(uid, poweredLight);
                         _appearance.SetData(uid, ToggleableVisuals.Enabled, powered);
-                        _pointLight.SetEnabled(uid, powered);
+                        Pointlight.SetEnabled(uid, powered);
                     }
                 }
             }

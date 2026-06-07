@@ -22,6 +22,7 @@
     - Dead
   - type: Tag
     tags:
+    - DoorBumpOpener
     - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
@@ -122,3 +123,6 @@
   - type: RMCActionOrder
     id: CMXenoLesserDrone
   - type: ExcludedFromKingVote
+  - type: RemoveComponents
+    components:
+    - type: CanBeLarvaQueued

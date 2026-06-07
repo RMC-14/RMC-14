@@ -171,7 +171,7 @@
         amount: 15
       - id: RMCHandsGreyMarine
         amount: 15
-      - id: RMCHeadsetShip
+      - id: RMCHeadsetMarine
         amount: 15
       - id: ArmorHelmetM10
         amount: 15
@@ -342,6 +342,9 @@
       - id: RMCHelmetGarbRainCover
         name: M10 helmet rain cover
         amount: 10
+      - id: RMCPoncho
+        name: UNMC poncho
+        amount: 10
       - id: RMCHelmetGarbGunOil
         name: firearm lubricant
         amount: 15
@@ -398,10 +401,6 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         amount: 4
-      - id: RMCMagazinePistolM13AP
-        amount: 4
-      - id: RMCMagazinePistolM13ExtAP
-        amount: 2
       - id: CMMagazineSMGM63AP
         amount: 3
       - id: CMMagazineRifleM54CAP
@@ -516,10 +515,12 @@
         amount: 5
       - id: RMCBinoculars
         amount: 1
+      - id: CMFoldingBarricadesMB6x3
+        amount: 2
       #- id: CMFoldingBarricadesMB6x3
       #  amount: 2
-      #- id: CMSparePDTLBattleBuddyKit
-      #  amount: 3
+      - id: CMSparePDTLBattleBuddyKit
+        amount: 3
       - id: RMCPowerCellCrap
         amount: 2
       - id: RMCMagazineSMGNailgun

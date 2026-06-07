@@ -37,6 +37,15 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/blue.rsi
 
+- type: entity
+  parent: RMCCoatCorrespondent
+  id: RMCCoatCorrespondentTan
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/tan.rsi
+
 # Hazard vests
 - type: entity
   parent: [RMCAllowSuitStorageClothingHazardVest, RMCBaseJacket]
@@ -253,6 +262,22 @@
   parent: [RMCBaseJacketButtonableOpened, RMCLabcoatScience]
   id: RMCLabcoatScienceOpened
   name: researcher's labcoat
+
+- type: entity
+  parent: RMCLabcoat
+  id: RMCLabcoatGreen
+  name: green labcoat
+  description: A suit that protects against minor chemical spills. This one is green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/green.rsi
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCLabcoatGreen]
+  id: RMCLabcoatGreenOpened
+  name: labcoat
 
 - type: entity
   parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]

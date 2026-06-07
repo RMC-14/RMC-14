@@ -11,6 +11,7 @@
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
   abstract: true
   components:
+  - type: CanBuildThickFromConstructNode
   - type: GhostRole
     name: cm-job-name-xeno-carrier
   - type: MobState
@@ -38,6 +39,7 @@
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoPheromones
     pheromonesMultiplier: 2
   - type: XenoPlasma
@@ -131,6 +133,9 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
+      visible: false
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -157,6 +162,7 @@
   id: RMCXenoCarrierEggsac
   suffix: Eggsac
   components:
+  - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:
     - RMCGuideRoleEggsac

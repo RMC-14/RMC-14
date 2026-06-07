@@ -185,6 +185,21 @@
 
 - type: entity
   parent: ActionXenoBase
+  id: ActionXenoHiveLeaderSquad
+  name: View Hive Squad
+  description: Opens your hive squad panel, showing your team members and allowing you to send announcements to them.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_lead
+    useDelay: 1
+  - type: InstantAction
+    event: !type:HiveLeaderSquadActionEvent
+
+- type: entity
+  parent: ActionXenoBase
   id: ActionXenoLeader
   name: Choose/Follow Xenonid Leaders
   description: Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
@@ -229,6 +244,24 @@
     event: !type:XenoHealActionEvent
   - type: XenoActionPlasma
     cost: 600
+
+- type: entity
+  parent: ActionXenoTransferPlasma
+  id: ActionXenoTransferPlasmaQueen
+  name: Give Plasma (400) # TODO RMC14 proper plasma costs
+  description: Remotely restores 75% of a single xenonid's max plasma.
+  components:
+  - type: Action
+    useDelay: 12
+  - type: TargetAction
+    checkCanAccess: false
+    range: -1
+  - type: EntityTargetAction
+    event: !type:XenoTransferPlasmaActionEvent
+      cost: 400
+      amount: 0
+      targetPercentage: 0.75
+      range: null
 
 - type: entity
   parent: ActionXenoBase
@@ -367,7 +400,7 @@
   parent: ActionXenoBase
   id: ActionXenoSpikeShield
   name: Spike Shield (150 shards)
-  description: Expend shards to gain a temporary shield that lasts for a short amount of time. Whenever the shield is damaged, spray bone shards around you in a 5x5 AoE centered on yourself. Shield lasts for 2 seconds. 
+  description: Expend shards to gain a temporary shield that lasts for a short amount of time. Whenever the shield is damaged, spray bone shards around you in a 5x5 AoE centered on yourself. Shield lasts for 2 seconds.
   components:
   - type: Action
     itemIconStyle: NoItem

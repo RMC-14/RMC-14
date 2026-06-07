@@ -207,9 +207,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
 
         //RMC14
-        if (_rmcSharedWeaponController.TryGetControlledWeapon(entity, out var weapon, out gunComp))
+        if (_rmcSharedWeaponController.TryGetControlledWeapon(entity, out var weapon, out gun))
         {
             gunEntity = weapon.Value;
+            gunComp = gun;
             return true;
         }
         //
@@ -225,6 +226,15 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.ShotCounter = 0;
         gun.ShootCoordinates = null;
         gun.Target = null;
+        DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
+    }
+
+    public void ResetShotCounter(EntityUid uid, GunComponent gun)
+    {
+        if (gun.ShotCounter == 0)
+            return;
+
+        gun.ShotCounter = 0;
         DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
     }
 

@@ -152,6 +152,21 @@
   - type: AccessReader
     access: [ [ "CMAccessCMO" ] ]
 
+- type: entity
+  parent: CMAirlockMedical
+  id: RMCAirlockMedicalFieldDoctorLocked
+  suffix: Field Doctor, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessFieldDoctor" ] ]
+
+- type: entity
+  parent: CMAirlockGlassMedical
+  id: RMCAirlockGlassMedicalFieldDoctorLocked
+  suffix: Field Doctor, Locked, Glass
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessFieldDoctor" ] ]
 
 # Correspondent
 - type: entity

@@ -9,6 +9,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Rounding;
 using Content.Shared.Toggleable;
+using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -41,6 +42,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         SubscribeLocalEvent<NightVisionItemComponent, ActionRemovedEvent>(OnNightVisionItemActionRemoved);
         SubscribeLocalEvent<NightVisionItemComponent, ComponentRemove>(OnNightVisionItemRemove);
         SubscribeLocalEvent<NightVisionItemComponent, EntityTerminatingEvent>(OnNightVisionItemTerminating);
+        SubscribeLocalEvent<NightVisionItemComponent, GetVerbsEvent<AlternativeVerb>>(OnNightVisionItemGetAltVerbs);
 
         SubscribeLocalEvent<NightVisionVisorComponent, ActivateVisorEvent>(OnNightVisionActivate);
         SubscribeLocalEvent<NightVisionVisorComponent, DeactivateVisorEvent>(OnNightVisionDeactivate);
@@ -131,6 +133,29 @@ public abstract class SharedNightVisionSystem : EntitySystem
         DisableNightVisionItem(ent, ent.Comp.User);
     }
 
+    private void OnNightVisionItemGetAltVerbs(Entity<NightVisionItemComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        if (ent.Comp.User != null && ent.Comp.User != args.User)
+            return;
+
+        var nextState = GetNextItemNightVisionState(ent.Comp.DefaultState);
+        var nextStateText = Loc.GetString(nextState == NightVisionState.Full
+            ? "rmc-ui-xeno-night-vision-default-full"
+            : "rmc-ui-xeno-night-vision-default-half");
+
+        var user = args.User;
+        var verb = new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-night-vision-mode-verb", ("mode", nextStateText)),
+            Act = () => ToggleNightVisionItemMode(ent, user),
+        };
+
+        args.Verbs.Add(verb);
+    }
+
     private void OnNightVisionActivate(Entity<NightVisionVisorComponent> ent, ref ActivateVisorEvent args)
     {
         if (args.User != null && HasComp<ScopingComponent>(args.User))
@@ -177,6 +202,9 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void OnNightVisionScoped(Entity<NightVisionVisorComponent> ent, ref VisorRelayedEvent<ScopedEvent> args)
     {
+        if (args.Event.Scope.Comp.CanUseNightVision)
+            return;
+
         _visor.DeactivateVisor(args.CycleableVisor, ent.Owner, args.Event.User);
     }
 
@@ -247,28 +275,54 @@ public abstract class SharedNightVisionSystem : EntitySystem
         }
 
         item.Comp.User = user;
-        Dirty(item);
 
         _appearance.SetData(item, NightVisionItemVisuals.Active, true);
 
         if (!_timing.ApplyingState)
         {
+            var defaultState = item.Comp.DefaultState;
             if (TryComp(user, out NightVisionComponent? nightVision))
             {
                 nightVision = EnsureComp<NightVisionComponent>(user);
-                nightVision.State = NightVisionState.Full;
+
+                if (item.Comp.ExperimentalMesonFov)
+                {
+                    // Experimental mesons temporarily override innate synth vision and must restore it on disable.
+                    item.Comp.HadNightVision = true;
+                    item.Comp.PreviousState = nightVision.State;
+                    item.Comp.PreviousGreen = nightVision.Green;
+                    item.Comp.PreviousMesons = nightVision.Mesons;
+                    item.Comp.PreviousExperimentalMesonFov = nightVision.ExperimentalMesonFov;
+                    item.Comp.PreviousBlockScopes = nightVision.BlockScopes;
+                }
+                else
+                {
+                    item.Comp.HadNightVision = false;
+                }
+
+                if (!item.Comp.IgnoreUserOnlyHalf &&
+                    nightVision.OnlyHalf &&
+                    defaultState == NightVisionState.Full)
+                {
+                    defaultState = NightVisionState.Half;
+                }
+
+                nightVision.State = defaultState;
                 nightVision.Green = item.Comp.Green;
                 nightVision.Mesons = item.Comp.Mesons;
+                nightVision.ExperimentalMesonFov = item.Comp.ExperimentalMesonFov;
                 nightVision.BlockScopes = item.Comp.BlockScopes;
                 Dirty(user, nightVision);
             }
             else
             {
+                item.Comp.HadNightVision = false;
                 nightVision = new NightVisionComponent()
                 {
-                    State = NightVisionState.Full,
+                    State = defaultState,
                     Green = item.Comp.Green,
                     Mesons = item.Comp.Mesons,
+                    ExperimentalMesonFov = item.Comp.ExperimentalMesonFov,
                     BlockScopes = item.Comp.BlockScopes,
                 };
 
@@ -277,6 +331,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
             }
         }
 
+        Dirty(item);
         _actions.SetToggled(item.Comp.Action, true);
     }
 
@@ -293,15 +348,54 @@ public abstract class SharedNightVisionSystem : EntitySystem
         _actions.SetToggled(item.Comp.Action, false);
 
         item.Comp.User = null;
-        Dirty(item);
 
         _appearance.SetData(item, NightVisionItemVisuals.Active, false);
 
-        if (TryComp(user, out NightVisionComponent? nightVision) &&
-            !nightVision.Innate)
+        if (TryComp(user, out NightVisionComponent? nightVision))
         {
-            RemCompDeferred<NightVisionComponent>(user.Value);
+            if (item.Comp.ExperimentalMesonFov && item.Comp.HadNightVision)
+            {
+                // Restore the previous component state so innate synth night vision survives item toggles.
+                nightVision.State = item.Comp.PreviousState;
+                nightVision.Green = item.Comp.PreviousGreen;
+                nightVision.Mesons = item.Comp.PreviousMesons;
+                nightVision.ExperimentalMesonFov = item.Comp.PreviousExperimentalMesonFov;
+                nightVision.BlockScopes = item.Comp.PreviousBlockScopes;
+                Dirty(user.Value, nightVision);
+                UpdateAlert((user.Value, nightVision));
+            }
+            else if (!nightVision.Innate)
+            {
+                RemCompDeferred<NightVisionComponent>(user.Value);
+            }
         }
+
+        item.Comp.HadNightVision = false;
+        item.Comp.PreviousState = NightVisionState.Off;
+        item.Comp.PreviousGreen = false;
+        item.Comp.PreviousMesons = false;
+        item.Comp.PreviousExperimentalMesonFov = false;
+        item.Comp.PreviousBlockScopes = false;
+        Dirty(item);
+    }
+
+    private void ToggleNightVisionItemMode(Entity<NightVisionItemComponent> item, EntityUid user)
+    {
+        var nextState = GetNextItemNightVisionState(item.Comp.DefaultState);
+        item.Comp.DefaultState = nextState;
+        Dirty(item);
+
+        if (item.Comp.User is { } activeUser && TryComp(activeUser, out NightVisionComponent? nightVision))
+            SetState((activeUser, nightVision), nextState);
+    }
+
+    private static NightVisionState GetNextItemNightVisionState(NightVisionState current)
+    {
+        return current switch
+        {
+            NightVisionState.Full => NightVisionState.Half,
+            _ => NightVisionState.Full,
+        };
     }
 
     public void SetSeeThroughContainers(Entity<NightVisionComponent?> ent, bool see)
@@ -311,5 +405,21 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
         ent.Comp.SeeThroughContainers = see;
         Dirty(ent);
+    }
+
+    public void SetState(Entity<NightVisionComponent?> ent, NightVisionState state)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        if (ent.Comp.OnlyHalf && state == NightVisionState.Full)
+            state = NightVisionState.Half;
+
+        if (ent.Comp.State == state)
+            return;
+
+        ent.Comp.State = state;
+        Dirty(ent);
+        UpdateAlert((ent, ent.Comp));
     }
 }
