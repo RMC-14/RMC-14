@@ -69,4 +69,10 @@ public sealed partial class DamageOnCollideComponent : Component
 
     [DataField]
     public bool IgnoreResistances;
+
+    [DataField]
+    public int ArmorPenetration;
+
+    [DataField]
+    public bool CanRehit;
 }
