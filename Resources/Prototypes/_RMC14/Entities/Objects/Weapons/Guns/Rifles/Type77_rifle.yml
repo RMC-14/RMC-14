@@ -119,6 +119,10 @@
         whitelist:
           tags:
           - RMCMagazineRifleType77HEAP
+      mag-4:
+        whitelist:
+          tags:
+          - RMCMagazineRifleType77Rubber
 
 - type: entity
   parent: RMCWeaponRifleType77
