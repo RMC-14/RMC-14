@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: monomethylhydrazine
   changes:
-  - message: Added prepared meals, a survival ration bar, and a food vendor for the
-      SPP.
-    type: Add
-  id: 2799
-  time: '2026-01-16T01:20:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8873
-- author: monomethylhydrazine
-  changes:
   - message: Replaced placeholder PVE role descriptions with proper ones.
     type: Tweak
   - message: Fixed PVE PMC vendors having some marine gear instead of PMC equivalents.
@@ -4527,5 +4519,14 @@
   id: 3298
   time: '2026-06-06T23:55:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10022
+- author: Aurallianz
+  changes:
+  - message: Added Larva Queue, players will not be able to ghost and join Xeno from
+      round start until after 15 minutes. You must have been dead for at least 5 minutes
+      before you can join the queue.
+    type: Add
+  id: 3299
+  time: '2026-06-07T00:38:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8788
 Name: RMC14
 Order: -1
