@@ -2984,3 +2984,14 @@
     state: petra_meow_meow_york
   - type: PatronFigurine
     id: 0e6adc84-9560-4ef8-b8b8-fec55d0a434f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAriaShark-Scale
+  name: Aria Shark-Scale figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: aria_shark-scale
+  - type: PatronFigurine
+    id: 69c1ef81-edac-4d18-913d-43b5cd781747
