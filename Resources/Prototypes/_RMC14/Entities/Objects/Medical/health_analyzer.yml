@@ -38,6 +38,10 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 200
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMHealthAnalyzer

@@ -14,23 +14,70 @@
   - type: CMAutomatedVendor
     jobs:
     - CMCorrespondent
+    - CMCombatCorrespondent
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewCombatCorrespondent
-        name: Essential Reporter's Set
-      - id: CMSatchel
-        name: Leather Satchel
       - id: RMCCameraBroadcasting
         name: Press Broadcasting Camera
         recommended: true
-    #- name: Civilian Equipment TODO - Some way to ensure only the civilian correspondent can buy this
-    #  takeAll: CMStandard
-    #  entries:
-    #  - id: PortableFaxMachine
-    #    name: Portable Press Fax Machine
-    #    recommended: true
+    - name: Civilian Equipment
+      jobs:
+      - CMCorrespondent
+      takeAll: CMCivilian
+      entries:
+      - id: RMCPortablePressFax
+        name: Portable Press Fax Machine
+        recommended: true
+      - id: RMCTentUNMCExtendedCorrespondentFolded
+        name: Correspondent Field Tent
+    - name: Satchel
+      jobs:
+      - CMCorrespondent
+      choices: { CMSatchel: 1 }
+      entries:
+      - id: CMSatchel
+        name: Leather Satchel
+      - id: RMCBackpackRTOBagPhone
+        name: Portable Phone Bag
+    - name: Combat Backpack
+      jobs:
+      - CMCombatCorrespondent
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMBackpackMarine
+        replaceSlot: back
+        name: Marine Backpack
+      - id: CMSatchelMarine
+        replaceSlot: back
+        name: Marine Satchel
+        recommended: true
+    - name: Combat Sidearm
+      jobs:
+      - CMCombatCorrespondent
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCM1984BeltFilled
+        name: M1984 Pistol Holster Rig
+        recommended: true
+    - name: Combat Webbing
+      jobs:
+      - CMCombatCorrespondent
+      choices: { CMWebbing: 1 }
+      entries:
+      - id: CMWebbingBrown
+        name: Brown Webbing
+        recommended: true
+    - name: Combat Pouches
+      jobs:
+      - CMCombatCorrespondent
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchGeneralMedium
+        name: Medium General Pouch
+        recommended: true
     - name: Uniform
       choices: { CMUniform: 1 }
       entries:
@@ -54,6 +101,10 @@
         name: Black Coat
       - id: RMCCoatCorrespondentGreen
         name: Green Coat
+      - id: RMCCoatCorrespondent
+        name: Brown Coat
+      - id: RMCCoatCorrespondentTan
+        name: Tan Coat
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
@@ -75,24 +126,9 @@
       #- id: /obj/item/device/toner
       #  name: Toner
       # points: 5
-      #- id: /obj/item/storage/box/tapes
-      #  name: Regulation Tapes
-      #  points: 15
+      - id: RMCBoxRegulationTapes
+        name: Regulation Tapes
+        points: 15
       - id: CMPaperBin30
         name: Paper Bin
         points: 10
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleCrewCombatCorrespondent
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
-    state: flashlight
-  - type: CMVendorBundle
-    bundle:
-    - RMCFlashlight
-    - CMPen
-    - RMCBinoculars
-    - CMClipboard # notepad
-    #- taperecorder

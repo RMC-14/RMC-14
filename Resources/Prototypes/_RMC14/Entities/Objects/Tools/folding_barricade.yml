@@ -1,0 +1,59 @@
+- type: stack
+  id: CMFoldingBarricade
+  name: MB-6 folding barricade
+  icon: { sprite: _RMC14/Objects/Tools/folding_barricade.rsi, state: folding-1 }
+  spawn: CMFoldingBarricade
+  maxCount: 3
+
+- type: entity
+  parent: BaseItem
+  id: CMFoldingBarricade
+  name: MB-6 folding barricade
+  description: A portable composite barricade that can be rapidly deployed into a defensive position.
+  suffix: Single
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/folding_barricade.rsi
+    layers:
+    - state: folding-1
+      map: [ "base" ]
+  - type: Item
+    sprite: _RMC14/Objects/Tools/folding_barricade.rsi
+    size: Large
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitStorage
+    - Back
+  - type: Stack
+    stackType: CMFoldingBarricade
+    count: 1
+    baseLayer: base
+    layerStates:
+    - folding-1
+    - folding-2
+    - folding-3
+    layerFunction: Threshold
+  - type: StackLayerThreshold
+    thresholds: [2, 3]
+  - type: RMCFoldingBarricadeStack
+    storedDamage:
+    - 0
+  - type: Appearance
+  - type: Clickable
+
+- type: entity
+  parent: CMFoldingBarricade
+  id: CMFoldingBarricadesMB6x3
+  suffix: Three
+  components:
+  - type: Sprite
+    state: folding-3
+  - type: Stack
+    stackType: CMFoldingBarricade
+    count: 3
+  - type: RMCFoldingBarricadeStack
+    storedDamage:
+    - 0
+    - 0
+    - 0
