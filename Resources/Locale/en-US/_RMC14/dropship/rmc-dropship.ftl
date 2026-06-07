@@ -18,6 +18,8 @@ rmc-dropship-weapons-target-strike = Target Acquisition
 
   Strike mode: {$mode}
 
+  Target mode: {$targetMode}
+
   Strike configuration {$weapon}
 
   Target selected: {$target}
@@ -55,6 +57,14 @@ rmc-dropship-weapons-offset-calibration-does-not-affect-direct-bombardment = Doe
 rmc-dropship-weapons-fire = FIRE
 rmc-dropship-weapons-strike = STRIKE
 rmc-dropship-weapons-vector = VECTOR
+rmc-dropship-weapons-quick = QUICK
+# TODO RMC14 fire missions: restore these labels with fire mission vector controls.
+# rmc-dropship-weapons-north = NORTH
+# rmc-dropship-weapons-south = SOUTH
+# rmc-dropship-weapons-east = EAST
+# rmc-dropship-weapons-west = WEST
+rmc-dropship-weapons-target-mode-quick = QUICK
+rmc-dropship-weapons-target-mode-standard = STANDARD
 
 rmc-dropship-weapons-night-vision-on = NV-ON
 rmc-dropship-weapons-night-vision-off = NV-OFF
@@ -104,6 +114,8 @@ rmc-dropship-paradrop-target-screen-target-targeting = Locked to {$dropTarget}.
 rmc-dropship-paradrop-lock-no-target = No target selected.
 rmc-dropship-paradrop-lock-target-not-flying = You can only enable the paradrop module while in flight.
 
+rmc-dropship-paradrop-failed = Your harness got stuck and is preventing you from jumping
+
 rmc-dropship-medevac-system-screen-text = RMU-4M Medevac System
 
 rmc-dropship-fulton-system-screen-text = RMU-19 Fulton Recovery System
@@ -126,3 +138,12 @@ rmc-dropship-equipment-undeployed = UNDEPLOYED
 rmc-dropship-equipment-operational = OPERATIONAL
 rmc-dropship-equipment-damaged = DAMAGED
 rmc-dropship-equipment-destroyed = DESTROYED
+
+rmc-dropship-launch-bay-screen-text = LAG-14 Internal Sentry Launcher
+rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
+
+    Loaded: {$loaded}
+
+    Ammo: {$current} / {$max}
+
+rmc-dropship-launch-alarm-xeno-shutdown = We slash at {$console}, silencing its squawking!

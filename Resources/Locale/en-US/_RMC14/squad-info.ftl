@@ -62,6 +62,8 @@ rmc-squad-info-SeniorConstableTSEPA = TSEPA Senior Constable
 
 rmc-squad-info-PrimaryLandingZone = Primary Landing Zone
 
+rmc-squad-info-SPPAirborneSL = Airborne Squad Leader
+
 rmc-squad-info-RCMPVESectionLead = Section Leader
 rmc-squad-info-RCMPVETeamLead = Team Leader
 rmc-squad-info-RCMPVETroopSergeant = Troop Sergeant

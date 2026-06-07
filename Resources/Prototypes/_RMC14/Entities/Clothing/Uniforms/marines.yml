@@ -111,13 +111,20 @@
 
 # Tanker
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: JumpsuitMarine
   id: CMJumpsuitMarineTanker
-  name: UNMC tanker uniform
+  name: vehicle crewman uniform
+  description: A uniform worn by vehicle crewmen of the UNMC. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
-
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/urban.rsi
 # CBRN
 
 - type: entity
@@ -133,6 +140,53 @@
     melee: 10
     bio: 100
     explosionArmor: 10
+  - type: ToggleableClothing
+    action: ActionToggleCBRNHelmet
+    clothingPrototype: RMCArmorHelmetCBRN
+    slot: head
+    requiredSlot: INNERCLOTHING
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitHEDP
+  suffix: Webbing, 2 HEDP
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNHedp
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitTool
+  suffix: Webbing, Tools
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbingFilled
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitFTL
+  suffix: Webbing, FTL
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNFTL
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitSL
+  suffix: Webbing, SL
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNSL
+
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitMedic
+  suffix: Webbing, Medic
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNMedic
+
+
 
 # Sun Riders
 
@@ -406,6 +460,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/intel/jungle.rsi
+  - type: Appearance
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold

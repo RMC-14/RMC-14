@@ -44,6 +44,7 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         SubscribeLocalEvent<SpawnOnTerminateComponent, MapInitEvent>(OnSpawnOnTerminatingMapInit);
         SubscribeLocalEvent<SpawnOnTerminateComponent, EntityTerminatingEvent>(OnSpawnOnTerminatingTerminate);
+        SubscribeLocalEvent<SpawnOnTerminateComponent, ProjectileHitEvent>(OnSpawnOnTerminateProjectileHit);
 
         SubscribeLocalEvent<PreventCollideWithDeadComponent, PreventCollideEvent>(OnPreventCollideWithDead);
     }
@@ -212,16 +213,25 @@ public sealed class RMCProjectileSystem : EntitySystem
             return;
 
         var coordinates = transform.Coordinates;
-        if (ent.Comp.ProjectileAdjust &&
-            ent.Comp.Origin is { } origin &&
-            coordinates.TryDelta(EntityManager, _transform, origin, out var delta) &&
-            delta.Length() > 0)
+        if (ent.Comp.Origin is { } origin &&
+            coordinates.TryDelta(EntityManager, _transform, origin, out var delta))
         {
-            coordinates = coordinates.Offset(delta.Normalized() / -2);
+            var deltaLength = delta.Length();
 
-            if (HasComp<RMCFireProjectileComponent>(ent))
+            if (deltaLength > 0f)
             {
-                coordinates = coordinates.Offset(delta.Normalized()); // Apparently that works...
+                var direction = delta / deltaLength;
+
+                if (TryComp(ent, out ProjectileMaxRangeComponent? projectileMaxRange) &&
+                    deltaLength > projectileMaxRange.Max)
+                {
+                    deltaLength = projectileMaxRange.Max;
+                    delta = direction * deltaLength;
+                    coordinates = origin.Offset(delta);
+                }
+
+                if (ent.Comp.AdjustSpawn && ent.Comp.SpawnOffset != 0f)
+                    coordinates = coordinates.Offset(direction * ent.Comp.SpawnOffset);
             }
         }
 
@@ -230,6 +240,18 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         if (ent.Comp.Popup is { } popup)
             _popup.PopupCoordinates(Loc.GetString(popup), coordinates, ent.Comp.PopupType ?? PopupType.Small);
+    }
+
+    private void OnSpawnOnTerminateProjectileHit(Entity<SpawnOnTerminateComponent> ent, ref ProjectileHitEvent args)
+    {
+        ent.Comp.AdjustSpawn = true;
+        Dirty(ent);
+    }
+
+    public void SetSpawnOffset(Entity<SpawnOnTerminateComponent> ent, float offset)
+    {
+        ent.Comp.SpawnOffset = offset;
+        Dirty(ent);
     }
 
     private void OnPreventCollideWithDead(Entity<PreventCollideWithDeadComponent> ent, ref PreventCollideEvent args)
@@ -241,10 +263,12 @@ public sealed class RMCProjectileSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    public void SetMaxRange(Entity<ProjectileMaxRangeComponent> ent, float max)
+    public void SetMaxRange(EntityUid projectile, float max)
     {
-        ent.Comp.Max = max;
-        Dirty(ent);
+        var maxRange = EnsureComp<ProjectileMaxRangeComponent>(projectile);
+
+        maxRange.Max = max;
+        Dirty(projectile, maxRange);
     }
 
     private void StopProjectile(Entity<ProjectileMaxRangeComponent> ent)
@@ -277,6 +301,14 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         args.Cancelled = true;
         StopProjectile(ent);
+    }
+
+    public void SetProjectileAccuracy(EntityUid projectile, float accuracy)
+    {
+        var accuracyComponent = EnsureComp<RMCProjectileAccuracyComponent>(projectile);
+
+        accuracyComponent.Accuracy = accuracy;
+        Dirty(projectile, accuracyComponent);
     }
 
     public override void Update(float frameTime)

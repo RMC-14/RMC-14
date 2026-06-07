@@ -77,6 +77,8 @@
       - id: CMWebbingBlack
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
       - id: CMWebbing
@@ -168,9 +170,12 @@
       - id: CMWebbingBlack
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
     - name: Books
       entries:
       - id: RMCGuidebookLawMarine

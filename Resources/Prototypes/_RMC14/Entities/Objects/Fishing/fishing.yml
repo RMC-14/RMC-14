@@ -1,0 +1,488 @@
+- type: rmcFishingLoot
+  id: RMCFishingLootGeneric
+  common:
+  - ClothingShoesLeather
+  - RMCFoodFishCrab
+  - RMCFoodFishSeaWorm
+  - RMCFoodFishClam
+  - RMCFoodFishSockSquid
+  - RMCCoal1
+  - RMCFishingSlag
+  - RMCFoodFishUrchinPurple
+  - RMCFoodFishBluegill
+  - RMCFoodFishSalmon
+  - RMCFoodFishWhitePerch
+  uncommon:
+  - RMCPowerCellHigh
+  - CMMultitool
+  - RMCFoodFishQuadtopus
+  - RMCFoodFishWhorlSquid
+  - RMCFoodFishBass
+  - RMCFoodFishCatfish
+  - RMCIronOre1
+  - RMCFishingBait
+  - RMCBeerPack
+  - CMSheetMetal1
+  rare:
+  - RMCFoodSnackBurritoPackaged
+  - RMCSilverOre1
+  - RMCGoldOre1
+  - RMCDiamondOre1
+  - RMCFoodFishUrchinRed
+  ultraRare:
+  - RMCClownDataCard
+  - FoodBurgerClown
+  - RMCPillUltrazineUnmarked
+  - RMCOsmiumOre1
+  - RMCUraniumOre1
+
+- type: entity
+  parent: BaseItem
+  id: RMCFishingPole
+  name: fishing pole
+  description: A fishing pole. You reckon you might need water for this.
+  components:
+  - type: RMCFishingRod
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Rod/fishing_rod.rsi
+    noRot: true
+    layers:
+    - state: pole_inhand
+      map: [ "base" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishingRodVisuals.Deployed:
+        base:
+          True: { state: pole }
+          False: { state: pole_inhand }
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/Fishing/Rod/fishing_rod.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 15
+    soundHit:
+      collection: MetalThud
+  - type: PhysicalComposition
+    materialComposition:
+      RMCWood: 50
+
+- type: entity
+  id: RMCFishingLineVisualBase
+  abstract: true
+  name: fishing line
+  description: A taut fishing line with a bobber at the end.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Effects/fishing_line.rsi
+    drawdepth: Effects
+  - type: Transform
+    anchored: true
+
+- type: entity
+  parent: RMCFishingLineVisualBase
+  id: RMCFishingLineVisualCastNorth
+  components:
+  - type: Sprite
+    state: cast_north
+
+- type: entity
+  parent: RMCFishingLineVisualBase
+  id: RMCFishingLineVisualCastSouth
+  components:
+  - type: Sprite
+    state: cast_south
+
+- type: entity
+  parent: RMCFishingLineVisualBase
+  id: RMCFishingLineVisualCastEast
+  components:
+  - type: Sprite
+    state: cast_east
+
+- type: entity
+  parent: RMCFishingLineVisualBase
+  id: RMCFishingLineVisualCastWest
+  components:
+  - type: Sprite
+    state: cast_west
+
+- type: entity
+  parent: RMCFishingLineVisualBase
+  id: RMCFishingLineVisualBiteNorth
+  components:
+  - type: Sprite
+    state: bite_north
+
+- type: entity
+  parent: RMCFishingLineVisualBase
+  id: RMCFishingLineVisualBiteSouth
+  components:
+  - type: Sprite
+    state: bite_south
+
+- type: entity
+  parent: RMCFishingLineVisualBase
+  id: RMCFishingLineVisualBiteEast
+  components:
+  - type: Sprite
+    state: bite_east
+
+- type: entity
+  parent: RMCFishingLineVisualBase
+  id: RMCFishingLineVisualBiteWest
+  components:
+  - type: Sprite
+    state: bite_west
+
+- type: entity
+  parent: BaseItem
+  id: RMCFishingBait
+  name: fish bait
+  description: A tasty piece of... meat? Whatever it is, fish love this.
+  components:
+  - type: RMCFishBait
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Bait/bait.rsi
+    state: worm_meat
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Fishing/Bait/bait.rsi
+
+- type: entity
+  parent: CMFoodBase
+  id: RMCFoodFishBase
+  abstract: true
+  components:
+  - type: RMCFish
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Fish/fish.rsi
+  - type: Appearance
+  - type: Food
+    transferAmount: 3
+  - type: FlavorProfile
+    flavors:
+    - fishy
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 1
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
+  - type: DrawableSolution
+    solution: food
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishCrab
+  name: spindle crab
+  description: Looks like a little crab.
+  components:
+  - type: RMCFish
+    minLength: 4
+    maxLength: 8
+    baseGutSpawns:
+    - id: RMCFoodMeatFishCrab
+    extraGutSpawns:
+    - id: RMCFoodMeatFishCrab
+  - type: Sprite
+    layers:
+    - state: crab
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishVisuals.Gutted:
+        base:
+          False: { state: crab }
+          True: { state: crab_gutted }
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishSeaWorm
+  name: sea worm
+  description: Could be useful as bait?
+  components:
+  - type: RMCFish
+    baseGutSpawns:
+    - id: RMCFishingBait
+    extraGutSpawns:
+    - id: RMCFoodMeatFish
+  - type: Sprite
+    layers:
+    - state: worm_redring
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishVisuals.Gutted:
+        base:
+          False: { state: worm_redring }
+          True: { state: worm_redring_gutted }
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishClam
+  name: clam
+  description: A shellfish with a tough shell.
+  components:
+  - type: RMCFish
+    baseGutSpawns:
+    - id: RMCPearl
+    extraGutSpawns:
+    - id: RMCFoodMeatFish
+  - type: Sprite
+    layers:
+    - state: shell_clam
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishVisuals.Gutted:
+        base:
+          False: { state: shell_clam }
+          True: { state: shell_clam_gutted }
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishSockSquid
+  name: sock squid
+  description: A small squid with a vivid pattern.
+  components:
+  - type: RMCFish
+    baseGutSpawns:
+    - id: RMCFoodMeatFishSockSquid
+    extraGutSpawns:
+    - id: RMCFoodMeatFishSockSquid
+  - type: Sprite
+    layers:
+    - state: squid_sock
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishVisuals.Gutted:
+        base:
+          False: { state: squid_sock }
+          True: { state: squid_sock_gutted }
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishWhorlSquid
+  name: whorl squid
+  description: A colorful squid with odd markings.
+  components:
+  - type: RMCFish
+    minLength: 4
+    maxLength: 14
+    baseGutSpawns:
+    - id: RMCFoodMeatFishSquid
+    extraGutSpawns:
+    - id: RMCFoodMeatFishSquid
+  - type: Sprite
+    layers:
+    - state: squid_whorl
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishVisuals.Gutted:
+        base:
+          False: { state: squid_whorl }
+          True: { state: squid_whorl_gutted }
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishQuadtopus
+  name: quadtopus
+  description: Like an octopus, but there are four of them.
+  components:
+  - type: Sprite
+    layers:
+    - state: quadtopus
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishVisuals.Gutted:
+        base:
+          False: { state: quadtopus }
+          True: { state: quadtopus_gutted }
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishBluegill
+  name: bluegill
+  description: A common freshwater fish.
+  components:
+  - type: RMCFish
+    minLength: 5
+    maxLength: 16
+    baseGutSpawns:
+    - id: RMCFoodMeatFishBluegill
+    extraGutSpawns:
+    - id: RMCFoodMeatFishBluegill
+  - type: Sprite
+    layers:
+    - state: bluegill
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishVisuals.Gutted:
+        base:
+          False: { state: bluegill }
+          True: { state: bluegill_gutted }
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishBass
+  name: bass
+  description: A big-mouthed fish.
+  components:
+  - type: RMCFish
+    minLength: 8
+    maxLength: 32
+    baseGutSpawns:
+    - id: RMCFoodMeatFishBass
+    extraGutSpawns:
+    - id: RMCFoodMeatFishBass
+  - type: Sprite
+    layers:
+    - state: bass
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishVisuals.Gutted:
+        base:
+          False: { state: bass }
+          True: { state: bass_gutted }
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishCatfish
+  name: catfish
+  description: A whiskered fish that looks like it knows something.
+  components:
+  - type: RMCFish
+    minLength: 10
+    maxLength: 108
+    guttable: false
+  - type: Sprite
+    state: catfish
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishSalmon
+  name: salmon
+  description: A silver fish known for swimming upstream.
+  components:
+  - type: RMCFish
+    minLength: 12
+    maxLength: 44
+    baseGutSpawns:
+    - id: RMCFoodMeatFishSalmon
+    extraGutSpawns:
+    - id: RMCFoodMeatFishSalmon
+  - type: Sprite
+    layers:
+    - state: salmon
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishVisuals.Gutted:
+        base:
+          False: { state: salmon }
+          True: { state: salmon_gutted }
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishWhitePerch
+  name: white perch
+  description: A small pale fish.
+  components:
+  - type: RMCFish
+    minLength: 6
+    maxLength: 22
+    baseGutSpawns:
+    - id: RMCFoodMeatFishWhitePerch
+    extraGutSpawns:
+    - id: RMCFoodMeatFishWhitePerch
+  - type: Sprite
+    layers:
+    - state: white_perch
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFishVisuals.Gutted:
+        base:
+          False: { state: white_perch }
+          True: { state: white_perch_gutted }
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishUrchinPurple
+  name: purple sea urchin
+  description: A spiny purple sea urchin.
+  components:
+  - type: RMCFish
+    minLength: 2
+    maxLength: 9
+    guttable: false
+  - type: Sprite
+    state: urchin_purple
+
+- type: entity
+  parent: RMCFoodFishBase
+  id: RMCFoodFishUrchinRed
+  name: red sea urchin
+  description: A spiny red sea urchin.
+  components:
+  - type: RMCFish
+    minLength: 2
+    maxLength: 9
+    guttable: false
+  - type: Sprite
+    state: urchin_red
+
+- type: entity
+  parent: RMCOreBase
+  id: RMCFishingSlag
+  name: slag
+  description: A lump of mostly useless slag.
+  components:
+  - type: Sprite
+    state: coal
+
+- type: entity
+  parent: RMCOreBase
+  id: RMCOsmiumOre1
+  name: raw osmium
+  description: A small chunk of dense osmium ore.
+  components:
+  - type: Sprite
+    state: platinum
+  - type: Item
+    heldPrefix: silver
+
+- type: entity
+  parent: BaseItem
+  id: RMCPearl
+  name: pearl
+  description: A small pearl from a clam.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fishing/Loot/pearl.rsi
+    state: pearl
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Fishing/Loot/pearl.rsi
+
+- type: entity
+  parent: TreasureDatadiskEncrypted
+  id: RMCClownDataCard
+  name: clown data card
+  description: A suspicious data card with a bright clown label.
