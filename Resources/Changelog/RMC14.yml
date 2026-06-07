@@ -1,142 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added more turrets to both of Trijent's LZs
-    type: Add
-  id: 2797
-  time: '2026-01-16T01:12:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8778
-- author: Dutch-VanDerLinde
-  changes:
-  - message: The WeYa PMC corpse now has a 50% chance to spawn with a bulletproof
-      PMC vest or light PMC vest.
-    type: Tweak
-  - message: Fixed the lower-capacity light combat pack having 5 slots instead of
-      15 storage slots.
-    type: Fix
-  id: 2798
-  time: '2026-01-16T01:19:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8969
-- author: monomethylhydrazine
-  changes:
-  - message: Added prepared meals, a survival ration bar, and a food vendor for the
-      SPP.
-    type: Add
-  id: 2799
-  time: '2026-01-16T01:20:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8873
-- author: monomethylhydrazine
-  changes:
-  - message: Replaced placeholder PVE role descriptions with proper ones.
-    type: Tweak
-  - message: Fixed PVE PMC vendors having some marine gear instead of PMC equivalents.
-    type: Fix
-  - message: Fixed PVE PMC medics not having corpsman vendor access.
-    type: Fix
-  - message: Fixed PVE PMC and SPP roles needing manual squad assignment. They now
-      spawn in their respective squads.
-    type: Fix
-  - message: Added surgery 2 skill to both SPP and PMC overwatches, to allow them
-      to conduct larva surgery.
-    type: Add
-  id: 2800
-  time: '2026-01-16T01:23:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8525
-- author: SharkSnake98
-  changes:
-  - message: Added the TSE Airbase Nightmare Insert
-    type: Add
-  - message: Changed the paper cups in the RMC water cooler to use specific RMC paper
-      cups instead of upstream
-    type: Tweak
-  id: 2801
-  time: '2026-01-16T01:31:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8914
-- author: Dutch-VanDerLinde
-  changes:
-  - message: The FTL tracker now has a special sprite when you switch to that mode.
-    type: Add
-  - message: Fixed FORECON Squad leader tracker not being functional.
-    type: Fix
-  - message: Fixed Xenos hive tracker resetting each time you evolve. The hive tracker
-      not automatically setting to queen has also been fixed.
-    type: Fix
-  id: 2802
-  time: '2026-01-17T13:17:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8855
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Hybrisa pizza driver survivor not having vehicles 1.
-    type: Fix
-  id: 2803
-  time: '2026-01-19T01:00:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9018
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the PMC crashed ship on solaris insert not deleting walls.
-    type: Fix
-  - message: Fixed the Lazarus Landing corporate dome scenario not allowing scientist
-      survivors. They will roll as a medic goon now.
-    type: Fix
-  id: 2804
-  time: '2026-01-19T01:02:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8997
-- author: SharkSnake98
-  changes:
-  - message: Added PMC Premade Meals and their vendor
-    type: Add
-  - message: Changed the Hauchefant's premade meal vendor to the PMC one.
-    type: Tweak
-  id: 2805
-  time: '2026-01-19T01:03:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8990
-- author: Ian321
-  changes:
-  - message: Hospital Corpsman can now acquire the "MS-11 Smart Refill Tank" that
-      can be used to refill injectors in the field.
-    type: Add
-  id: 2806
-  time: '2026-01-19T01:03:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8386
-- author: wheelwrightt
-  changes:
-  - message: Recharger sprite now changes corresponding to the charge level of the
-      item inside.
-    type: Add
-  - message: NV visor now displays charge level upon examining in the recharger.
-    type: Fix
-  id: 2807
-  time: '2026-01-19T03:22:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8557
-- author: SharkSnake98
-  changes:
-  - message: Fixed testfails from TSE Airbase Insert
-    type: Fix
-  id: 2808
-  time: '2026-01-23T03:40:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9007
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Hybrisa has received a passover. Changed up loot, new props, more soul.
-    type: Add
-  id: 2809
-  time: '2026-01-23T03:41:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9020
-- author: Whisper
-  changes:
-  - message: Xenonids, by default, are immune to becoming zombies. This can change
-      during a round, however.
-    type: Tweak
-  id: 2810
-  time: '2026-01-23T03:56:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9042
-- author: Whisper
-  changes:
-  - message: All airlocks should now be able to be properly deconstructed into metal.
-    type: Fix
-  id: 2811
-  time: '2026-01-23T03:58:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9050
 - author: YO0teacher
   changes:
   - message: Fixed being able to use optics while viewing overwatch cameras.
@@ -4529,5 +4391,144 @@
   id: 3296
   time: '2026-06-06T23:51:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9173
+- author: Utmanarn
+  changes:
+  - message: Changed the playtime rank system to allow players to select a preference
+      for what type of playtime rank they want to use.
+    type: Tweak
+  id: 3297
+  time: '2026-06-06T23:53:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6306
+- author: Bagietens
+  changes:
+  - message: Fixed do-after bars not drawing over xeno and other sprites while using
+      xeno night vision.
+    type: Fix
+  id: 3298
+  time: '2026-06-06T23:55:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10022
+- author: Aurallianz
+  changes:
+  - message: Added Larva Queue, players will not be able to ghost and join Xeno from
+      round start until after 15 minutes. You must have been dead for at least 5 minutes
+      before you can join the queue.
+    type: Add
+  id: 3299
+  time: '2026-06-07T00:38:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8788
+- author: Dygon
+  changes:
+  - message: Explosion now have a chance to destroy signal flares.
+    type: Fix
+  id: 3300
+  time: '2026-06-07T00:47:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9559
+- author: Vermidia
+  changes:
+  - message: Fixed Janibuckets and Mop buckets not being huge.
+    type: Fix
+  - message: Fixed Janibuckets storing too much (500u->300u)
+    type: Fix
+  - message: High-Capacity Beakers have been replaced with Reagent Jugs
+    type: Tweak
+  - message: Fixed Reagent Jugs storing too little (300u->500u), costs being wrong
+      (2.6~ metal sheets -> 10 glass sheets), and being printable in normal lathes
+      instead of the medilathe
+    type: Fix
+  id: 3301
+  time: '2026-06-07T00:48:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8316
+- author: MoonlightHollow
+  changes:
+  - message: Added 25 & 50 options for dispensing materials
+    type: Add
+  id: 3302
+  time: '2026-06-07T00:50:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9984
+- author: kleinerstation13
+  changes:
+  - message: Added sprites for alternate magazines on the AK-4047, PDW90, L57 SMG
+      and SSG45
+    type: Add
+  id: 3303
+  time: '2026-06-07T00:49:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9959
+- author: BreakpointDebug1234
+  changes:
+  - message: Added an alert for xenonids when no queen has been picked and the hive
+      is close to collapse
+    type: Add
+  id: 3304
+  time: '2026-06-07T01:32:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9235
+- author: Vixting
+  changes:
+  - message: Can now hold down left click to continually melee / fire. Can be disabled
+      in settings. (ported from upstream)
+    type: Add
+  id: 3305
+  time: '2026-06-07T01:33:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9141
+- author: BreakpointDebug1234
+  changes:
+  - message: Guidebook links to various items and structures
+    type: Add
+  id: 3306
+  time: '2026-06-07T01:47:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9387
+- author: Tuna224
+  changes:
+  - message: Made Parasite Infects not Cancelable via Double Click
+    type: Tweak
+  id: 3307
+  time: '2026-06-07T02:08:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9832
+- author: Aurallianz
+  changes:
+  - message: In game ARES Logs
+    type: Add
+  id: 3308
+  time: '2026-06-07T02:07:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8493
+- author: J C Denton
+  changes:
+  - message: Added Riot Control jobs and ghost roles.
+    type: Add
+  id: 3309
+  time: '2026-06-07T02:12:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8819
+- author: Aurallianz
+  changes:
+  - message: crit xenos ghosting kills them
+    type: Fix
+  - message: vertical scroll bar for new to job popup
+    type: Fix
+  id: 3310
+  time: '2026-06-07T03:09:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10030
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a source of server-side lag, specially in high pop.
+    type: Fix
+  - message: Fixed correspondents not getting universal recorders in their vendor
+      bundle.
+    type: Fix
+  - message: Fixed xenos being able to interact with M-6 folding barricades.
+    type: Fix
+  - message: Fixed not being able to open the storage UI on the scout helmet.
+    type: Fix
+  - message: Fixed dropship consoles, evacuation pod computers, and quickmeds being
+      unpowered.
+    type: Fix
+  - message: Fixed the Warden jumpsuit being invisible.
+    type: Fix
+  - message: Fixed nested contents within supply drop crates being destroyed upon
+      landing, such as shells inside shell boxes, or XM88 bullets inside their kits.
+    type: Fix
+  - message: Fixed Almayer hangar bay destinations not being named.
+    type: Fix
+  id: 3311
+  time: '2026-06-07T07:44:46.438058+00:00'
+  url: null
 Name: RMC14
 Order: -1

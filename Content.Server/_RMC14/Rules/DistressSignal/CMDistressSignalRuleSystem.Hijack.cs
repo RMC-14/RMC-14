@@ -149,7 +149,7 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         var hiveComp = EnsureComp<HiveComponent>(rule.Hive);
-        _hive.IncreaseBurrowedLarva(larva);
+        _hive.ChangeBurrowedLarva(larva);
         _hive.ResetHiveCoreCooldown((rule.Hive, hiveComp));
         var surge = EnsureComp<HijackBurrowedSurgeComponent>(rule.Hive);
         surge.PooledLarva = surgeAmount;
@@ -166,6 +166,13 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         var time = Timing.CurTime;
+        if (!rule.ScuttleUnlocked &&
+            rule.ScuttleUnlockAt == null &&
+            !rule.ScuttleDetonated)
+        {
+            rule.ScuttleUnlockAt = time + rule.ScuttleUnlockDelay;
+        }
+
         if (!rule.HijackSongPlayed)
         {
             rule.HijackSongPlayed = true;

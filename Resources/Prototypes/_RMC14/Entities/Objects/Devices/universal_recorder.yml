@@ -1,0 +1,138 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCUniversalRecorderBase
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/cassette_player.rsi
+    layers:
+    - map: ["enum.UniversalRecorderVisualLayers.Base"]
+      state: taperecorder_idle
+  - type: Item
+    size: Small
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Handling/taperecorder_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Handling/taperecorder_drop.ogg
+  - type: Appearance
+  - type: UniversalRecorder
+    tapeSlot:
+      name: rmc-universal-recorder-slot-name
+      insertSuccessPopup: rmc-universal-recorder-popup-insert-generic
+      insertSound: /Audio/Items/taperecorder/taperecorder_close.ogg
+      ejectSound: /Audio/Items/taperecorder/taperecorder_open.ogg
+      whitelist:
+        components:
+        - UniversalRecorderTape
+  - type: ContainerContainer
+    containers:
+      rmc_universal_recorder_tape: !type:ContainerSlot {}
+  - type: ItemSlots
+  - type: UserInterface
+    interfaces:
+      enum.UniversalRecorderUiKey.Recorder:
+        type: UniversalRecorderRecorderBui
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 60
+      CMGlass: 30
+
+- type: entity
+  parent: RMCUniversalRecorderBase
+  id: RMCUniversalRecorderEmpty
+  name: universal recorder
+  description: A device that can record dialogue on magnetic tape and play it back. Good for appeals or witness statements.
+  suffix: Empty
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.UniversalRecorderVisualLayers.Base"]
+      state: taperecorder_empty
+
+- type: entity
+  parent: RMCUniversalRecorderBase
+  id: RMCUniversalRecorder
+  name: universal recorder
+  description: A device that can record dialogue on magnetic tape and play it back. Good for appeals or witness statements.
+  components:
+  - type: UniversalRecorder
+    tapeSlot:
+      name: rmc-universal-recorder-slot-name
+      startingItem: RMCUniversalRecorderTape
+      insertSuccessPopup: rmc-universal-recorder-popup-insert-generic
+      insertSound: /Audio/Items/taperecorder/taperecorder_close.ogg
+      ejectSound: /Audio/Items/taperecorder/taperecorder_open.ogg
+      whitelist:
+        components:
+        - UniversalRecorderTape
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCUniversalRecorderTapeBase
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/cassette_player.rsi
+    layers:
+    - map: ["enum.UniversalRecorderTapeVisualLayers.Base"]
+      state: cassette_regulation
+    - map: ["enum.UniversalRecorderTapeVisualLayers.Ribbon"]
+      state: ribbon_overlay
+      visible: false
+  - type: Item
+    size: Small
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Handling/tape_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Handling/tape_drop.ogg
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.UniversalRecorderTapeVisuals.Side:
+        enum.UniversalRecorderTapeVisualLayers.Base:
+          enum.UniversalRecorderTapeSide.Front:
+            state: cassette_regulation
+          enum.UniversalRecorderTapeSide.Back:
+            state: cassette_flip
+      enum.UniversalRecorderTapeVisuals.Unspooled:
+        enum.UniversalRecorderTapeVisualLayers.Ribbon:
+          True: { visible: true }
+          False: { visible: false }
+  - type: UniversalRecorderTape
+  - type: UserInterface
+    interfaces:
+      enum.UniversalRecorderUiKey.Tape:
+        type: UniversalRecorderTapeBui
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 20
+      CMGlass: 5
+
+- type: entity
+  parent: RMCUniversalRecorderTapeBase
+  id: RMCUniversalRecorderTape
+  name: regulation tape
+  description: A magnetic tape that can hold up to twenty minutes of content on either side.
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxRegulationTapesEmpty
+  name: box of regulation tapes (x5)
+  description: A box of regulation tapes for universal recorders.
+  components:
+  - type: Sprite
+    state: box
+
+- type: entity
+  parent: RMCBoxRegulationTapesEmpty
+  id: RMCBoxRegulationTapes
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCUniversalRecorderTape
+      amount: 5

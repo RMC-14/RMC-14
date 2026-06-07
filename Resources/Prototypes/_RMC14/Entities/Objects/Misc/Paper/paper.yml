@@ -244,6 +244,9 @@
     headerImagePath: "/Textures/_RMC14/Interface/Paper/paper_heading_requisition_invoice.svg.96dpi.png"
     headerMargin: 0.0, 12.0, 0.0, 0.0
   - type: RequisitionsInvoice
+  - type: GuideHelp
+    guides:
+    - RMCRequisitions
 
 - type: entity
   parent: CMPaper
