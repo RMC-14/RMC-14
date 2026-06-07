@@ -5,10 +5,12 @@ using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Audio;
 using Content.Shared.Database;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
+using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
@@ -53,6 +55,9 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
         SubscribeLocalEvent<RMCTelephoneComponent, ComponentShutdown>(OnTelephoneTerminating);
         SubscribeLocalEvent<RMCTelephoneComponent, EntityTerminatingEvent>(OnTelephoneTerminating);
+
+        SubscribeLocalEvent<RMCPickedUpPhoneComponent, GettingPickedUpAttemptEvent>(OnPickedUpPhoneGettingPickedUpAttempt);
+        SubscribeLocalEvent<RMCPickedUpPhoneComponent, ContainerGettingInsertedAttemptEvent>(OnPickedUpPhoneGettingInsertedAttempt);
 
         SubscribeLocalEvent<RotaryPhoneBackpackComponent, GetItemActionsEvent>(OnBackpackGetItemActions);
         SubscribeLocalEvent<RotaryPhoneBackpackComponent, RMCTelephoneActionEvent>(OnBackpackTelephoneAction);
@@ -135,6 +140,36 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
             phone.Phone = null;
             Dirty(ent.Comp.RotaryPhone.Value, phone);
         }
+    }
+
+    private void OnPickedUpPhoneGettingPickedUpAttempt(Entity<RMCPickedUpPhoneComponent> ent, ref GettingPickedUpAttemptEvent args)
+    {
+        if (CanTransferPickedUpPhone(ent, args.User))
+            return;
+
+        args.Cancel();
+    }
+
+    private void OnPickedUpPhoneGettingInsertedAttempt(Entity<RMCPickedUpPhoneComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
+    {
+        if (ent.Comp.CanTransfer)
+            return;
+
+        if (TryComp(ent, out RMCTelephoneComponent? phone) &&
+            phone.RotaryPhone == args.Container.Owner)
+        {
+            return;
+        }
+
+        if (ent.Comp.OriginalHolder is { } holder &&
+            args.Container.Owner == holder &&
+            TryComp(holder, out HandsComponent? hands) &&
+            _hands.TryGetHand((holder, hands), args.Container.ID, out _))
+        {
+            return;
+        }
+
+        args.Cancel();
     }
 
     private void OnBackpackGetItemActions(Entity<RotaryPhoneBackpackComponent> ent, ref GetItemActionsEvent args)
@@ -289,11 +324,15 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
     protected virtual void PickupPhone(Entity<RotaryPhoneComponent> rotary, EntityUid telephone, EntityUid user)
     {
+        var pickedUp = EnsureComp<RMCPickedUpPhoneComponent>(telephone);
+        pickedUp.CanTransfer = rotary.Comp.PhoneCanBeTransferred;
+        pickedUp.OriginalHolder = user;
+        Dirty(telephone, pickedUp);
+
         if (_container.TryGetContainer(rotary, rotary.Comp.ContainerId, out var container))
             _container.Remove(telephone, container);
 
         _hands.TryPickupAnyHand(user, telephone);
-        EnsureComp<RMCPickedUpPhoneComponent>(telephone);
         PlayGrabSound(rotary);
     }
 
@@ -405,6 +444,60 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
             return false;
 
         holder = container.Owner;
+        return true;
+    }
+
+    private bool TryGetPhoneHandHolder(EntityUid phone, out EntityUid holder)
+    {
+        holder = default;
+        if (!_container.TryGetContainingContainer((phone, null, null), out var container))
+            return false;
+
+        if (!_hands.IsHolding(container.Owner, phone))
+            return false;
+
+        holder = container.Owner;
+        return true;
+    }
+
+    private bool CanTransferPickedUpPhone(Entity<RMCPickedUpPhoneComponent> pickedUp, EntityUid user)
+    {
+        return pickedUp.Comp.CanTransfer ||
+               pickedUp.Comp.OriginalHolder == null ||
+               pickedUp.Comp.OriginalHolder == user;
+    }
+
+    private bool IsStoredInRotaryPhone(EntityUid rotary, EntityUid phone, RotaryPhoneComponent? rotaryPhone = null)
+    {
+        if (!Resolve(rotary, ref rotaryPhone, false))
+            return false;
+
+        return _container.TryGetContainer(rotary, rotaryPhone.ContainerId, out var container) &&
+               container.Contains(phone);
+    }
+
+    private bool ShouldReturnPickedUpPhone(EntityUid phone, RMCPickedUpPhoneComponent pickedUp, EntityUid rotary)
+    {
+        if (pickedUp.CanTransfer)
+            return false;
+
+        if (IsStoredInRotaryPhone(rotary, phone))
+            return false;
+
+        return pickedUp.OriginalHolder == null ||
+               !TryGetPhoneHandHolder(phone, out var holder) ||
+               holder != pickedUp.OriginalHolder;
+    }
+
+    private bool ReturnPickedUpPhone(EntityUid rotary, EntityUid phone, EntityUid? user)
+    {
+        if (TryComp(rotary, out RotaryPhoneDialingComponent? dialing))
+            return HangUpDialing((rotary, dialing), phone, user);
+
+        if (TryComp(rotary, out RotaryPhoneReceivingComponent? receiving))
+            return HangUpReceiving((rotary, receiving), phone, user);
+
+        ReturnPhone(rotary, phone, user);
         return true;
     }
 
@@ -600,6 +693,14 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         {
             if (telephone.RotaryPhone is not { } rotary)
                 continue;
+
+            if (ShouldReturnPickedUpPhone(uid, pickedUp, rotary))
+            {
+                if (ReturnPickedUpPhone(rotary, uid, null))
+                    _popup.PopupEntity($"The {Name(uid)} snaps back to the {Name(rotary)}!", uid, PopupType.MediumCaution);
+
+                continue;
+            }
 
             void PhoneSnapBackPopup()
             {
