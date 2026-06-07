@@ -41,7 +41,6 @@
     - type: NpcFactionMember
       factions:
       - WeYa
-      - UNMC
     - type: JobPrefix
       prefix: rmc-job-prefix-executive-bodyguard
     - type: Skills
