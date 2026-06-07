@@ -68,7 +68,7 @@
     eyes: RMCSunglasses
     head: RMCHardhatWhite
     ears: RMCHeadsetDistressICBLiaison # TODO RMC14 tape recorder
-    back: RMCSatchelICBLiaisonSecureFill
+    back: RMCSatchelICBLiaisonFill
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCHazardVestYellow
     gloves: CMHandsInsulated

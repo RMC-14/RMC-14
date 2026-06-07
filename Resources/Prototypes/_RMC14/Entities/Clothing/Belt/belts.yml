@@ -463,6 +463,9 @@
       Desert: _RMC14/Objects/Clothing/Belt/mortar/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMortar
 
 - type: entity
   parent: CMBeltMarine
@@ -500,6 +503,9 @@
       Desert: _RMC14/Objects/Clothing/Belt/smart_gun_operator/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/smart_gun_operator/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: CMBeltMarine
@@ -562,6 +568,9 @@
     - RMCSmartGunSidearmHolster
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: CMBeltMarine

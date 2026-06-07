@@ -62,8 +62,8 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        //Ignore people moving around ghost bodies.
-        if (HasComp<GhostComponent>(ev.Entity))
+        //Ignore people moving around ghost bodies and parasites.
+        if (HasComp<GhostComponent>(ev.Entity) || HasComp<XenoParasiteComponent>(ev.Entity))
             return;
 
         RemoveFromAllQueues(ev.Player.UserId);
