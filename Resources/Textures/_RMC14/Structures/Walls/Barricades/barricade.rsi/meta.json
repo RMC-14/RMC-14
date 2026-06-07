@@ -44,6 +44,38 @@
       "directions": 4
     },
     {
+      "name": "folding_plasteel_connection_1",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_connection_2",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_connection_4",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_connection_8",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_closed_connection_1",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_closed_connection_2",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_closed_connection_4",
+      "directions": 4
+    },
+    {
+      "name": "folding_plasteel_closed_connection_8",
+      "directions": 4
+    },
+    {
       "name": "folding_plasteel",
       "directions": 4
     },
