@@ -33,7 +33,10 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
     }
 
     public void UpdateState(
-        HiveLeaderSquadBuiState state,
+        HiveTeamEntry entry,
+        int teamIndex,
+        string roleName,
+        List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
         Func<EntProtoId?, Texture?> getTexture,
         Action<string> onAnnounce,
         Action<NetEntity> onAddMember,
@@ -43,10 +46,6 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
         _onAddMember = onAddMember;
         _onRemoveMember = onRemoveMember;
         TeamContainer.DisposeAllChildren();
-
-        var team = state.Team;
-        var roleName = state.RoleName;
-        var allXenos = state.AllXenos;
 
         Title = roleName;
         AnnounceBox.PlaceHolder = $"Announce to {roleName}...";
@@ -78,10 +77,11 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
             Margin = new Thickness(0, 0, 0, 4),
         });
 
-        if (team.Leader is { } leader)
+        if (entry.Leader is { } leaderNet)
         {
+            var leaderXeno = allXenos.Find(x => x.Entity == leaderNet);
             var leaderControl = new XenoChoiceControl();
-            leaderControl.Set(leader.Name, getTexture(leader.Id));
+            leaderControl.Set(leaderXeno.Name, getTexture(leaderXeno.ProtoId));
             leaderControl.HorizontalExpand = true;
             leaderControl.Button.Disabled = true;
             leaderVbox.AddChild(leaderControl);
@@ -131,18 +131,19 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
             HorizontalExpand = true,
         };
 
-        foreach (var member in team.Members)
+        foreach (var memberNet in entry.Members)
         {
+            var memberXeno = allXenos.Find(x => x.Entity == memberNet);
             var control = new XenoChoiceControl();
-            control.Set(member.Name, getTexture(member.Id));
+            control.Set(memberXeno.Name, getTexture(memberXeno.ProtoId));
             control.HorizontalExpand = true;
-            var capturedMember = member;
-            control.Button.OnPressed += _ => _onRemoveMember?.Invoke(capturedMember.Entity);
+            var capturedMember = memberNet;
+            control.Button.OnPressed += _ => _onRemoveMember?.Invoke(capturedMember);
             control.Button.ToolTip = "Click to remove from team";
             membersGrid.AddChild(control);
         }
 
-        if (team.Members.Count == 0)
+        if (entry.Members.Count == 0)
         {
             membersVbox.AddChild(new Label
             {
@@ -165,7 +166,8 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
         };
         addMemberBtn.OnPressed += _ =>
         {
-            var picker = new XenoPickerWindow(allXenos, getTexture, xeno => _onAddMember?.Invoke(xeno));
+            var picker = new XenoPickerWindow();
+            picker.Populate(allXenos, getTexture, xeno => _onAddMember?.Invoke(xeno));
             picker.OpenCentered();
         };
         membersVbox.AddChild(addMemberBtn);

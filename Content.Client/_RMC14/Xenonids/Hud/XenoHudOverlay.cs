@@ -153,9 +153,6 @@ public sealed class XenoHudOverlay : Overlay
         handle.SetTransform(Matrix3x2.Identity);
     }
 
-    private static readonly ResPath MarineHudRsi = new("/Textures/_RMC14/Interface/marine_hud.rsi");
-    private static readonly Color HiveTeamColor = Color.FromHex("#7B2FBE");
-
     private void DrawHiveTeamNumbers(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
     {
         var handle = args.WorldHandle;
@@ -171,17 +168,7 @@ public sealed class XenoHudOverlay : Overlay
             if (_invisQuery.HasComp(uid))
                 continue;
 
-            var state = member.TeamNumber switch
-            {
-                1 => "hudsquad_ft1",
-                2 => "hudsquad_ft2",
-                3 => "hudsquad_ft3",
-                4 => "hudsquad_ft4",
-                _ => "hudsquad_ft4",
-            };
-
-            var icon = new SpriteSpecifier.Rsi(MarineHudRsi, state);
-            var texture = _sprite.Frame0(icon);
+            var texture = _sprite.Frame0(member.Icon);
 
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
@@ -197,7 +184,7 @@ public sealed class XenoHudOverlay : Overlay
             var offset = (float) texture.Height / EyeManager.PixelsPerMeter;
             var yOffset = -(bounds.Height / 2f) - sprite.Offset.Y;
             var xOffset = (bounds.Width / 2f) + sprite.Offset.X - (float) texture.Width / EyeManager.PixelsPerMeter;
-            handle.DrawTexture(texture, new Vector2(xOffset, yOffset), HiveTeamColor);
+            handle.DrawTexture(texture, new Vector2(xOffset, yOffset), member.IconColor);
         }
     }
 

@@ -32,6 +32,8 @@ public sealed class HiveTeamSystem : EntitySystem
     [Dependency] private readonly HiveTrackerSystem _tracker = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
+    private static readonly SoundSpecifier TeamAnnounceSound = new SoundCollectionSpecifier("XenoQueenCommand", AudioParams.Default.WithVolume(-6));
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoComponent, OpenHiveTeamsUIEvent>(OnOpenUI);
@@ -52,16 +54,20 @@ public sealed class HiveTeamSystem : EntitySystem
 
         Subs.BuiEvents<XenoComponent>(HiveLeaderSquadUIKey.Key, subs =>
         {
-            subs.Event<BoundUIOpenedEvent>(OnSquadBuiOpened);
             subs.Event<HiveLeaderSquadAnnounceMsg>(OnSquadAnnounce);
             subs.Event<HiveLeaderAddMemberMsg>(OnLeaderAddMember);
             subs.Event<HiveLeaderRemoveMemberMsg>(OnLeaderRemoveMember);
         });
     }
 
+    private void DirtyTeams(Entity<HiveComponent> hive)
+    {
+        if (TryComp(hive.Owner, out HiveTeamsComponent? teams))
+            Dirty(hive.Owner, teams);
+    }
+
     private void RefreshTeamMemberComponents(HiveTeamsComponent teams)
     {
-        // Clear all existing team member components first
         var query = EntityQueryEnumerator<HiveTeamMemberComponent>();
         while (query.MoveNext(out var uid, out _))
             RemCompDeferred<HiveTeamMemberComponent>(uid);
@@ -71,20 +77,22 @@ public sealed class HiveTeamSystem : EntitySystem
             var team = teams.Teams[i];
             var number = i + 1;
 
-            if (team.Leader != null && !TerminatingOrDeleted(team.Leader.Value))
+            if (team.Leader != null && TryGetEntity(team.Leader.Value, out var leaderUid) && !TerminatingOrDeleted(leaderUid))
             {
-                var comp = EnsureComp<HiveTeamMemberComponent>(team.Leader.Value);
+                var comp = EnsureComp<HiveTeamMemberComponent>(leaderUid.Value);
                 comp.TeamNumber = number;
-                Dirty(team.Leader.Value, comp);
+                comp.Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/marine_hud.rsi"), $"hudsquad_ft{number}");
+                Dirty(leaderUid.Value, comp);
             }
 
-            foreach (var member in team.Members)
+            foreach (var memberNet in team.Members)
             {
-                if (TerminatingOrDeleted(member))
+                if (!TryGetEntity(memberNet, out var memberUid) || TerminatingOrDeleted(memberUid.Value))
                     continue;
-                var comp = EnsureComp<HiveTeamMemberComponent>(member);
+                var comp = EnsureComp<HiveTeamMemberComponent>(memberUid.Value);
                 comp.TeamNumber = number;
-                Dirty(member, comp);
+                comp.Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/marine_hud.rsi"), $"hudsquad_ft{number}");
+                Dirty(memberUid.Value, comp);
             }
         }
     }
@@ -97,20 +105,11 @@ public sealed class HiveTeamSystem : EntitySystem
     public void OpenForQueen(EntityUid queen)
     {
         _ui.OpenUi(queen, HiveTeamUIKey.Key, queen);
-        RefreshState(queen);
-    }
-
-    private void RefreshState(EntityUid queen)
-    {
-        if (_hive.GetHive(queen) is not { } hive)
-            return;
-
-        var teamsComp = EnsureTeams(hive);
-        var allXenos = BuildXenoList(queen, hive);
-        var teamData = BuildTeamData(teamsComp, allXenos);
-
-        _ui.SetUiState(queen, HiveTeamUIKey.Key, new HiveTeamBuiState(teamData, allXenos));
-        RefreshTeamMemberComponents(teamsComp);
+        if (_hive.GetHive(queen) is { } hive)
+        {
+            EnsureTeams(hive);
+            DirtyTeams(hive);
+        }
     }
 
     private void OnMemberMobStateChanged(Entity<HiveTeamMemberComponent> ent, ref MobStateChangedEvent args)
@@ -124,22 +123,13 @@ public sealed class HiveTeamSystem : EntitySystem
         if (!TryComp(hive.Owner, out HiveTeamsComponent? teams))
             return;
 
+        var netEnt = GetNetEntity(ent.Owner);
         foreach (var team in teams.Teams)
-            team.Members.Remove(ent.Owner);
+            team.Members.Remove(netEnt);
 
         RemCompDeferred<HiveTeamMemberComponent>(ent.Owner);
         RefreshTeamMemberComponents(teams);
-        RefreshAllQueens(hive);
-
-        // Refresh any open leader squad windows in this hive
-        var leaderQuery = EntityQueryEnumerator<HiveLeaderComponent, HiveMemberComponent>();
-        while (leaderQuery.MoveNext(out var leaderUid, out _, out var member))
-        {
-            if (member.Hive != hive.Owner)
-                continue;
-            if (_ui.IsUiOpen(leaderUid, HiveLeaderSquadUIKey.Key))
-                RefreshSquadState(leaderUid);
-        }
+        DirtyTeams(hive);
     }
 
     private void OnLeaderRemoved(Entity<XenoComponent> xeno, ref HiveLeaderRemovedEvent args)
@@ -150,116 +140,58 @@ public sealed class HiveTeamSystem : EntitySystem
         if (!TryComp(hive.Owner, out HiveTeamsComponent? teams))
             return;
 
+        var netLeader = GetNetEntity(args.Leader);
         foreach (var team in teams.Teams)
         {
-            if (team.Leader == args.Leader)
+            if (team.Leader == netLeader)
             {
                 RemCompDeferred<HiveTeamMemberComponent>(args.Leader);
                 team.Leader = null;
             }
         }
-    }
 
-    // --- Evolve/Devolve: update stored EntityUids in team entries ---
+        Dirty(hive.Owner, teams);
+    }
 
     private void OnXenoEvolved(Entity<HiveTeamsComponent> hive, ref NewXenoEvolvedEvent args)
     {
-        UpdateTeamUids(hive.Comp, args.OldXeno, args.NewXeno);
+        UpdateTeamNetEntities(hive.Comp, args.OldXeno, args.NewXeno);
+        Dirty(hive);
     }
 
     private void OnXenoDevolved(Entity<HiveTeamsComponent> hive, ref XenoDevolvedEvent args)
     {
-        UpdateTeamUids(hive.Comp, args.OldXeno, args.NewXeno);
+        UpdateTeamNetEntities(hive.Comp, args.OldXeno, args.NewXeno);
+        Dirty(hive);
     }
 
-    private void UpdateTeamUids(HiveTeamsComponent teams, EntityUid oldUid, EntityUid newUid)
+    private void UpdateTeamNetEntities(HiveTeamsComponent teams, EntityUid oldUid, EntityUid newUid)
     {
+        var oldNet = GetNetEntity(oldUid);
+        var newNet = GetNetEntity(newUid);
         foreach (var team in teams.Teams)
         {
-            if (team.Leader == oldUid)
-                team.Leader = newUid;
+            if (team.Leader == oldNet)
+                team.Leader = newNet;
 
             for (var i = 0; i < team.Members.Count; i++)
             {
-                if (team.Members[i] == oldUid)
-                    team.Members[i] = newUid;
+                if (team.Members[i] == oldNet)
+                    team.Members[i] = newNet;
             }
         }
     }
-
-    // --- Squad window ---
 
     private void OnSquadAction(Entity<HiveLeaderComponent> leader, ref HiveLeaderSquadActionEvent args)
     {
         _ui.OpenUi(leader.Owner, HiveLeaderSquadUIKey.Key, leader.Owner);
-        RefreshSquadState(leader.Owner);
+        if (_hive.GetHive(leader.Owner) is { } hive)
+        {
+            EnsureTeams(hive);
+            DirtyTeams(hive);
+        }
     }
 
-    private void OnSquadBuiOpened(Entity<XenoComponent> xeno, ref BoundUIOpenedEvent args)
-    {
-        RefreshSquadState(xeno.Owner);
-    }
-
-    private void RefreshSquadState(EntityUid leader)
-    {
-        if (_hive.GetHive(leader) is not { } hive)
-            return;
-
-        var teamsComp = EnsureTeams(hive);
-        var allXenos = BuildXenoListFull(hive);
-        var netMap = new Dictionary<EntityUid, Xeno>();
-        foreach (var x in allXenos)
-        {
-            if (TryGetEntity(x.Entity, out var uid))
-                netMap[uid.Value] = x;
-        }
-
-        HiveTeamEntry? myEntry = null;
-        var myIndex = 0;
-        for (var i = 0; i < teamsComp.Teams.Count; i++)
-        {
-            if (teamsComp.Teams[i].Leader == leader)
-            {
-                myEntry = teamsComp.Teams[i];
-                myIndex = i;
-                break;
-            }
-        }
-
-        if (myEntry == null)
-            return;
-
-        Xeno? leaderXeno = netMap.TryGetValue(leader, out var lx) ? lx : null;
-        var members = new List<Xeno>();
-        foreach (var m in myEntry.Members)
-        {
-            if (netMap.TryGetValue(m, out var mx))
-                members.Add(mx);
-        }
-
-        var roleName = myEntry.Role >= 0 && myEntry.Role < HiveTeamsComponent.RoleNames.Length
-            ? HiveTeamsComponent.RoleNames[myEntry.Role]
-            : "?";
-        var teamData = new HiveTeamData(myIndex, leaderXeno, members, myEntry.Role);
-        _ui.SetUiState(leader, HiveLeaderSquadUIKey.Key, new HiveLeaderSquadBuiState(teamData, roleName, allXenos));
-    }
-
-    private List<Xeno> BuildXenoListFull(Entity<HiveComponent> hive)
-    {
-        var xenos = new List<Xeno>();
-        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
-        while (query.MoveNext(out var uid, out _, out var member, out var meta))
-        {
-            if (member.Hive != hive.Owner)
-                continue;
-            if (_mobState.IsDead(uid))
-                continue;
-            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, meta), meta.EntityPrototype?.ID));
-        }
-        return xenos;
-    }
-
-    private static readonly SoundSpecifier TeamAnnounceSound = new SoundCollectionSpecifier("XenoQueenCommand", AudioParams.Default.WithVolume(-6));
     private void OnSquadAnnounce(Entity<XenoComponent> xeno, ref HiveLeaderSquadAnnounceMsg args)
     {
         if (string.IsNullOrWhiteSpace(args.Message))
@@ -269,11 +201,12 @@ public sealed class HiveTeamSystem : EntitySystem
             return;
 
         var teamsComp = EnsureTeams(hive);
+        var netLeader = GetNetEntity(xeno.Owner);
 
         HiveTeamEntry? myEntry = null;
         foreach (var entry in teamsComp.Teams)
         {
-            if (entry.Leader == xeno.Owner)
+            if (entry.Leader == netLeader)
             {
                 myEntry = entry;
                 break;
@@ -284,18 +217,17 @@ public sealed class HiveTeamSystem : EntitySystem
             return;
 
         var recipients = new HashSet<EntityUid> { xeno.Owner };
-        foreach (var member in myEntry.Members)
-            recipients.Add(member);
-
-        // Also include the hive queen
-        if (_hive.GetHive(xeno.Owner) is { } hiveForQueen)
+        foreach (var memberNet in myEntry.Members)
         {
-            var queenQuery = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, HiveLeaderGranterComponent>();
-            while (queenQuery.MoveNext(out var queenUid, out _, out var hiveMember, out _))
-            {
-                if (hiveMember.Hive == hiveForQueen.Owner)
-                    recipients.Add(queenUid);
-            }
+            if (TryGetEntity(memberNet, out var memberUid))
+                recipients.Add(memberUid.Value);
+        }
+
+        var queenQuery = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, HiveLeaderGranterComponent>();
+        while (queenQuery.MoveNext(out var queenUid, out _, out var hiveMember, out _))
+        {
+            if (hiveMember.Hive == hive.Owner)
+                recipients.Add(queenUid);
         }
 
         var roleName = myEntry.Role >= 0 && myEntry.Role < HiveTeamsComponent.RoleNames.Length
@@ -326,11 +258,13 @@ public sealed class HiveTeamSystem : EntitySystem
             return;
 
         var teams = EnsureTeams(hive);
+        var netLeader = GetNetEntity(leaderUid);
+        var netXeno = GetNetEntity(xeno.Value);
 
         HiveTeamEntry? myEntry = null;
         for (var i = 0; i < teams.Teams.Count; i++)
         {
-            if (teams.Teams[i].Leader == leaderUid)
+            if (teams.Teams[i].Leader == netLeader)
             {
                 myEntry = teams.Teams[i];
                 break;
@@ -340,21 +274,20 @@ public sealed class HiveTeamSystem : EntitySystem
         if (myEntry == null)
             return;
 
-        if (teams.Teams.Any(t => t.Leader == xeno.Value))
+        if (teams.Teams.Any(t => t.Leader == netXeno))
             return;
 
         foreach (var t in teams.Teams)
-            t.Members.Remove(xeno.Value);
+            t.Members.Remove(netXeno);
 
-        if (!myEntry.Members.Contains(xeno.Value))
-            myEntry.Members.Add(xeno.Value);
+        if (!myEntry.Members.Contains(netXeno))
+            myEntry.Members.Add(netXeno);
 
-        if (myEntry.Leader != null)
-            _tracker.SetTrackerTarget(xeno.Value, myEntry.Leader, "HiveLeader");
+        if (myEntry.Leader != null && TryGetEntity(myEntry.Leader.Value, out var leaderEnt))
+            _tracker.SetTrackerTarget(xeno.Value, leaderEnt.Value, "HiveLeader");
 
         RefreshTeamMemberComponents(teams);
-        RefreshSquadState(leaderUid);
-        RefreshAllQueens(hive);
+        DirtyTeams(hive);
     }
 
     private void RemoveMemberFromLeaderTeam(EntityUid leaderUid, NetEntity xenoNet)
@@ -362,78 +295,15 @@ public sealed class HiveTeamSystem : EntitySystem
         if (_hive.GetHive(leaderUid) is not { } hive)
             return;
 
-        if (!TryGetEntity(xenoNet, out var xeno))
-            return;
-
         var teams = EnsureTeams(hive);
         foreach (var t in teams.Teams)
-            t.Members.Remove(xeno.Value);
+            t.Members.Remove(xenoNet);
+
+        if (TryGetEntity(xenoNet, out var xeno))
+            RemCompDeferred<HiveTeamMemberComponent>(xeno.Value);
 
         RefreshTeamMemberComponents(teams);
-        RefreshSquadState(leaderUid);
-        RefreshAllQueens(hive);
-    }
-
-    private void RefreshAllQueens(Entity<HiveComponent> hive)
-    {
-        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
-        while (query.MoveNext(out var uid, out _, out var member))
-        {
-            if (member.Hive != hive.Owner)
-                continue;
-            if (!_ui.IsUiOpen(uid, HiveTeamUIKey.Key))
-                continue;
-            RefreshState(uid);
-        }
-    }
-
-    // --- Queen UI message handlers ---
-
-    private void OnSetLeader(Entity<XenoComponent> queen, ref HiveTeamSetLeaderMsg args)
-    {
-        if (_hive.GetHive(queen.Owner) is not { } hive)
-            return;
-
-        if (!TryGetEntity(args.Xeno, out var xeno))
-            return;
-
-        var teams = EnsureTeams(hive);
-        var team = GetOrCreateTeam(teams, args.TeamIndex);
-
-        // Revoke leadership if already a leader of another team
-        foreach (var t in teams.Teams)
-        {
-            if (t.Leader == xeno)
-            {
-                _hiveLeader.RevokeLeader(t.Leader.Value);
-                t.Leader = null;
-            }
-        }
-
-        // Remove from any team's member list
-        foreach (var t in teams.Teams)
-            t.Members.Remove(xeno.Value);
-
-        team.Leader = xeno;
-        _hiveLeader.GrantLeader(queen, xeno.Value);
-
-        foreach (var member in team.Members)
-            _tracker.SetTrackerTarget(member, xeno.Value, "HiveLeader");
-
-        RefreshState(queen);
-    }
-
-    private void OnRemoveLeader(Entity<XenoComponent> queen, ref HiveTeamRemoveLeaderMsg args)
-    {
-        if (_hive.GetHive(queen.Owner) is not { } hive)
-            return;
-
-        var teams = EnsureTeams(hive);
-        var team = GetOrCreateTeam(teams, args.TeamIndex);
-        if (team.Leader != null)
-            _hiveLeader.RevokeLeader(team.Leader.Value);
-        team.Leader = null;
-        RefreshState(queen);
+        DirtyTeams(hive);
     }
 
     private void OnLeaderAddMember(Entity<XenoComponent> leader, ref HiveLeaderAddMemberMsg args)
@@ -446,6 +316,58 @@ public sealed class HiveTeamSystem : EntitySystem
         RemoveMemberFromLeaderTeam(leader.Owner, args.Xeno);
     }
 
+    private void OnSetLeader(Entity<XenoComponent> queen, ref HiveTeamSetLeaderMsg args)
+    {
+        if (_hive.GetHive(queen.Owner) is not { } hive)
+            return;
+
+        if (!TryGetEntity(args.Xeno, out var xeno))
+            return;
+
+        var teams = EnsureTeams(hive);
+        var team = GetOrCreateTeam(teams, args.TeamIndex);
+        var netXeno = GetNetEntity(xeno.Value);
+
+        foreach (var t in teams.Teams)
+        {
+            if (t.Leader == netXeno && TryGetEntity(t.Leader.Value, out var oldLeader))
+            {
+                _hiveLeader.RevokeLeader(oldLeader.Value);
+                t.Leader = null;
+            }
+        }
+
+        foreach (var t in teams.Teams)
+            t.Members.Remove(netXeno);
+
+        team.Leader = netXeno;
+        _hiveLeader.GrantLeader(queen, xeno.Value);
+
+        foreach (var memberNet in team.Members)
+        {
+            if (TryGetEntity(memberNet, out var memberUid))
+                _tracker.SetTrackerTarget(memberUid.Value, xeno.Value, "HiveLeader");
+        }
+
+        RefreshTeamMemberComponents(teams);
+        DirtyTeams(hive);
+    }
+
+    private void OnRemoveLeader(Entity<XenoComponent> queen, ref HiveTeamRemoveLeaderMsg args)
+    {
+        if (_hive.GetHive(queen.Owner) is not { } hive)
+            return;
+
+        var teams = EnsureTeams(hive);
+        var team = GetOrCreateTeam(teams, args.TeamIndex);
+        if (team.Leader != null && TryGetEntity(team.Leader.Value, out var leaderUid))
+            _hiveLeader.RevokeLeader(leaderUid.Value);
+        team.Leader = null;
+
+        RefreshTeamMemberComponents(teams);
+        DirtyTeams(hive);
+    }
+
     private void OnAddMember(Entity<XenoComponent> queen, ref HiveTeamAddMemberMsg args)
     {
         if (_hive.GetHive(queen.Owner) is not { } hive)
@@ -455,21 +377,23 @@ public sealed class HiveTeamSystem : EntitySystem
             return;
 
         var teams = EnsureTeams(hive);
+        var netXeno = GetNetEntity(xeno.Value);
 
-        if (teams.Teams.Any(t => t.Leader == xeno.Value))
+        if (teams.Teams.Any(t => t.Leader == netXeno))
             return;
 
         foreach (var t in teams.Teams)
-            t.Members.Remove(xeno.Value);
+            t.Members.Remove(netXeno);
 
         var team = GetOrCreateTeam(teams, args.TeamIndex);
-        if (!team.Members.Contains(xeno.Value))
-            team.Members.Add(xeno.Value);
+        if (!team.Members.Contains(netXeno))
+            team.Members.Add(netXeno);
 
-        if (team.Leader != null)
-            _tracker.SetTrackerTarget(xeno.Value, team.Leader, "HiveLeader");
+        if (team.Leader != null && TryGetEntity(team.Leader.Value, out var leaderUid))
+            _tracker.SetTrackerTarget(xeno.Value, leaderUid.Value, "HiveLeader");
 
-        RefreshState(queen);
+        RefreshTeamMemberComponents(teams);
+        DirtyTeams(hive);
     }
 
     private void OnRemoveMember(Entity<XenoComponent> queen, ref HiveTeamRemoveMemberMsg args)
@@ -477,13 +401,15 @@ public sealed class HiveTeamSystem : EntitySystem
         if (_hive.GetHive(queen.Owner) is not { } hive)
             return;
 
-        if (!TryGetEntity(args.Xeno, out var xeno))
-            return;
-
         var teams = EnsureTeams(hive);
         var team = GetOrCreateTeam(teams, args.TeamIndex);
-        team.Members.Remove(xeno.Value);
-        RefreshState(queen);
+        team.Members.Remove(args.Xeno);
+
+        if (TryGetEntity(args.Xeno, out var xeno))
+            RemCompDeferred<HiveTeamMemberComponent>(xeno.Value);
+
+        RefreshTeamMemberComponents(teams);
+        DirtyTeams(hive);
     }
 
     private void OnSetRole(Entity<XenoComponent> queen, ref HiveTeamSetRoleMsg args)
@@ -494,7 +420,7 @@ public sealed class HiveTeamSystem : EntitySystem
         var teams = EnsureTeams(hive);
         var team = GetOrCreateTeam(teams, args.TeamIndex);
         team.Role = Math.Clamp(args.Role, 0, HiveTeamsComponent.RoleNames.Length - 1);
-        RefreshState(queen);
+        DirtyTeams(hive);
     }
 
     private HiveTeamsComponent EnsureTeams(Entity<HiveComponent> hive)
@@ -510,54 +436,5 @@ public sealed class HiveTeamSystem : EntitySystem
         while (teams.Teams.Count <= index)
             teams.Teams.Add(new HiveTeamEntry());
         return teams.Teams[index];
-    }
-
-    private List<Xeno> BuildXenoList(EntityUid queen, Entity<HiveComponent> hive)
-    {
-        var xenos = new List<Xeno>();
-        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
-        while (query.MoveNext(out var uid, out _, out var member, out var meta))
-        {
-            if (uid == queen || member.Hive != hive.Owner)
-                continue;
-            if (_mobState.IsDead(uid))
-                continue;
-            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, meta), meta.EntityPrototype?.ID));
-        }
-        xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
-        return xenos;
-    }
-
-    private List<HiveTeamData> BuildTeamData(HiveTeamsComponent teams, List<Xeno> allXenos)
-    {
-        var netMap = new Dictionary<EntityUid, Xeno>();
-        foreach (var x in allXenos)
-        {
-            if (TryGetEntity(x.Entity, out var uid))
-                netMap[uid.Value] = x;
-        }
-
-        var result = new List<HiveTeamData>();
-        for (var i = 0; i < HiveTeamsComponent.TeamCount; i++)
-        {
-            HiveTeamEntry? entry = i < teams.Teams.Count ? teams.Teams[i] : null;
-
-            Xeno? leader = null;
-            if (entry?.Leader != null && netMap.TryGetValue(entry.Leader.Value, out var lx))
-                leader = lx;
-
-            var members = new List<Xeno>();
-            if (entry != null)
-            {
-                foreach (var m in entry.Members)
-                {
-                    if (netMap.TryGetValue(m, out var mx))
-                        members.Add(mx);
-                }
-            }
-
-            result.Add(new HiveTeamData(i, leader, members, entry?.Role ?? 0));
-        }
-        return result;
     }
 }

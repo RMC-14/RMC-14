@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Xenonids.Watch;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.HiveTeam;
@@ -13,30 +12,6 @@ public enum HiveTeamUIKey : byte
 public enum HiveLeaderSquadUIKey : byte
 {
     Key
-}
-
-[Serializable, NetSerializable]
-public sealed class HiveTeamBuiState(List<HiveTeamData> teams, List<Xeno> allXenos) : BoundUserInterfaceState
-{
-    public readonly List<HiveTeamData> Teams = teams;
-    public readonly List<Xeno> AllXenos = allXenos;
-}
-
-[Serializable, NetSerializable]
-public sealed class HiveLeaderSquadBuiState(HiveTeamData team, string roleName, List<Xeno> allXenos) : BoundUserInterfaceState
-{
-    public readonly HiveTeamData Team = team;
-    public readonly string RoleName = roleName;
-    public readonly List<Xeno> AllXenos = allXenos;
-}
-
-[Serializable, NetSerializable]
-public sealed class HiveTeamData(int index, Xeno? leader, List<Xeno> members, int role = 0)
-{
-    public readonly int Index = index;
-    public Xeno? Leader = leader;
-    public readonly List<Xeno> Members = members;
-    public int Role = role;
 }
 
 [Serializable, NetSerializable]
