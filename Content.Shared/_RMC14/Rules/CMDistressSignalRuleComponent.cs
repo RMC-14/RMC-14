@@ -197,6 +197,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     };
 
     [DataField]
+    public bool MarinesLanded;
+
+    [DataField]
     public ProtoId<JobPrototype> QueenJob = "CMXenoQueen";
 
     [DataField]

@@ -24,6 +24,19 @@ public sealed partial class CMDistressSignalRuleSystem
     private const int HijackCameraShakeIntensity = 10;
     private const int HijackCameraShakeDuration = 2;
 
+    private void OnDropshipLandedOnPlanet(ref DropshipLandedOnPlanetEvent ev)
+    {
+        var rule = TryGetActiveRuleEntity();
+        if (rule == null || rule.Value.Comp.MarinesLanded)
+            return;
+
+        rule.Value.Comp.MarinesLanded = true;
+        Dirty(rule.Value);
+
+        var landedEv = new MarinesLandedChangedEvent(true);
+        RaiseLocalEvent(ref landedEv);
+    }
+
     /// <summary>
     /// Handles the start of a dropship hijack: destroys xeno structures on the planet,
     /// evacuates living xenos to the dropship, and calculates xeno surge based on marine weights.
@@ -136,7 +149,7 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         var hiveComp = EnsureComp<HiveComponent>(rule.Hive);
-        _hive.IncreaseBurrowedLarva(larva);
+        _hive.ChangeBurrowedLarva(larva);
         _hive.ResetHiveCoreCooldown((rule.Hive, hiveComp));
         var surge = EnsureComp<HijackBurrowedSurgeComponent>(rule.Hive);
         surge.PooledLarva = surgeAmount;
