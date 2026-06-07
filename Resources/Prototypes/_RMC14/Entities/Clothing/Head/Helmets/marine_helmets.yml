@@ -363,6 +363,23 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/urban.rsi
+  - type: RotaryPhone
+    category: Marine
+    canDnd: true
+    phoneId: RMCTelephoneScout
+    phoneCanBeTransferred: false
+  - type: RotaryPhoneDnd
+  - type: RotaryPhoneBackpack
+    slot: HEAD
+    actionId: RMCActionTelephoneScout
+  - type: UserInterface
+    interfaces:
+      enum.RMCTelephoneUiKey.Key:
+        type: RMCTelephoneBui
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 # M3-G4 Grenadier Spec
 - type: entity
