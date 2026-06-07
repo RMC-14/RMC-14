@@ -462,6 +462,9 @@
       entries:
       - id: CMHealthAnalyzer
         amount: 2
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
 
 - type: entity
   parent: RMCNanoMed
