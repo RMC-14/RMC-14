@@ -2995,3 +2995,14 @@
     state: aria_shark-scale
   - type: PatronFigurine
     id: 69c1ef81-edac-4d18-913d-43b5cd781747
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronWyattHossCross
+  name: Wyatt 'Hoss' Cross figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: wyatt_hoss_cross
+  - type: PatronFigurine
+    id: b9428c37-5698-4eab-8b7a-d59094b8cf81
