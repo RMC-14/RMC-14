@@ -359,6 +359,7 @@
   - type: EmoteCooldown
   - type: RMCMesonsNonviewable
     xenoVisible: true
+  - type: CanBeLarvaQueued
 
 - type: entity
   abstract: true

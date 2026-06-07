@@ -34,13 +34,11 @@ public sealed class LarvaQueueSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-    private static readonly EntProtoId Lesser = "CMXenoLesserDrone";
+    [ViewVariables]
+    public static readonly Dictionary<EntityUid, List<NetUserId>> Queue = new();
 
     [ViewVariables]
-    public static readonly Dictionary<Entity<HiveComponent>, List<NetUserId>> Queue = new();
-
-    [ViewVariables]
-    public static readonly Dictionary<Entity<HiveComponent>, Dictionary<NetUserId, double>> PreQueue = new();
+    public static readonly Dictionary<EntityUid, Dictionary<NetUserId, double>> PreQueue = new();
 
     public override void Initialize()
     {
@@ -48,16 +46,12 @@ public sealed class LarvaQueueSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnCleanup);
         SubscribeLocalEvent<BurrowedLarvaAddedEvent>(OnBurrowedLarvaAdded);
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<HiveMemberComponent, MindRemovedMessage>(OnMindRemoved);
+        SubscribeLocalEvent<CanBeLarvaQueuedComponent, MindRemovedMessage>(OnMindRemoved);
     }
 
-    private void OnMindRemoved(Entity<HiveMemberComponent> ent, ref MindRemovedMessage args)
+    private void OnMindRemoved(Entity<CanBeLarvaQueuedComponent> ent, ref MindRemovedMessage args)
     {
-        if (!TryComp(ent, out XenoComponent? xeno))
-            return;
-
-        if (HasComp<XenoParasiteComponent>(ent) || !TryPrototype(ent, out var lesserProto) ||
-            lesserProto.ID == Lesser || HasComp<DropshipHijackerComponent>(ent))
+        if (!HasComp<XenoComponent>(ent))
             return;
 
         EnsureComp<LarvaQueuedComponent>(ent);
@@ -102,7 +96,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (actorEntity == null)
             return;
 
-        if (RemoveFromQueue(actor.PlayerSession.UserId, hive))
+        if (TryRemoveFromQueue(actor.PlayerSession.UserId, hive))
         {
             _popup.PopupEntity($"You have been removed from the queue", actorEntity.Value, actorEntity.Value);
             return;
@@ -117,8 +111,9 @@ public sealed class LarvaQueueSystem : EntitySystem
         else
         {
             PreQueue.GetOrNew(hive).Add(session, larvaWaitTime + ghost.TimeOfDeath.TotalSeconds);
+            var timeLeft = TimeSpan.FromSeconds(larvaWaitTime) + ghost.TimeOfDeath - _gameTiming.CurTime;
             _popup.PopupEntity(
-                $"You have been added to the Pre-queue, until you have waited the required {larvaWaitTime} seconds",
+                $"You died too recently, and will be added to the queue in {timeLeft} seconds.",
                 actorEntity.Value, actorEntity.Value);
         }
     }
@@ -130,33 +125,37 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void SpawnLarva(NetEntity hiveNet)
     {
-        var hiveEntity = GetEntity(hiveNet);
-        if (!TryComp(hiveEntity, out HiveComponent? hiveComp))
+        if (GetEntity(hiveNet) is not { Valid: true } hiveEntity)
             return;
-        var hive = (hiveEntity, hiveComp);
-        SpawnLarva(hive);
+
+        SpawnLarva(hiveEntity);
     }
 
-    private void SpawnLarva(Entity<HiveComponent> hive)
+    private void SpawnLarva(Entity<HiveComponent?> hive)
     {
+        if (!Resolve(hive, ref hive.Comp))
+            return;
+
         var list = Queue.GetOrNew(hive);
         var originalLength = list.Count;
         if (list.Count <= 0)
             return;
 
-        BurstLarvaSpawn(hive);
-        BurrowedLarvaSpawn(hive);
+        BurstLarvaSpawn((hive, hive.Comp));
+        BurrowedLarvaSpawn((hive, hive.Comp));
 
         //Popup to people in queue if the queue length changed.
         if (list.Count >= originalLength)
             return;
 
-        foreach (var netId in list)
+        for (var i = 0; i < list.Count; i++)
         {
+            var netId = list[i];
             if (_player.TryGetSessionById(netId, out var session) && session.AttachedEntity != null)
             {
-                _popup.PopupEntity($"You are now in the {Queue.GetOrNew(hive).Count} position for larva queue.",
-                    session.AttachedEntity.Value, session.AttachedEntity.Value);
+                _popup.PopupEntity($"You are now in the {list.Count - i} position for larva queue.",
+                    session.AttachedEntity.Value,
+                    session.AttachedEntity.Value);
             }
         }
     }
@@ -179,22 +178,18 @@ public sealed class LarvaQueueSystem : EntitySystem
             if (!_hive.IsMember(ent, hive))
                 return;
 
-            var tryFind = true;
-            while (tryFind)
+            for (var i = list.Count - 1; i >= 0; i--)
             {
-                if (list.Count == 0)
-                    return;
-                var netId = list.Last();
-                list.RemoveAt(list.Count - 1);
+                var netId = list[i];
+                list.RemoveAt(i);
 
                 if (!_player.TryGetSessionById(netId, out var session) || session.AttachedEntity == null)
                     continue;
 
-                var newMind = _mind.CreateMind(session.UserId,
-                    MetaData(ent).EntityName);
+                var newMind = _mind.CreateMind(session.UserId, Name(ent));
                 _mind.TransferTo(newMind, ent, ghostCheckOverride: true);
                 RemCompDeferred<LarvaQueuedComponent>(ent);
-                tryFind = true;
+                break;
             }
         }
     }
@@ -209,22 +204,14 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (amount <= 0)
             return;
 
-        for (var i = 0; i <= amount; i++)
+        // TODO RMC14 keep spot of disconnected players
+        for (var i = amount; i >= 0; i--)
         {
-            if (list.Count == 0)
-                return;
-
-            var netId = list.Last();
-            list.RemoveAt(list.Count - 1);
+            var netId = list[i];
+            list.RemoveAt(i);
 
             if (_player.TryGetSessionById(netId, out var session) && session.AttachedEntity != null)
-            {
                 _hive.JoinBurrowedLarva(hive, session);
-            }
-            else
-            {
-                i--;
-            }
         }
     }
 
@@ -254,7 +241,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var hiveId, out var hive))
         {
-            RemoveFromQueue(actor.PlayerSession.UserId, (hiveId, hive));
+            TryRemoveFromQueue(actor.PlayerSession.UserId, (hiveId, hive));
         }
     }
 
@@ -263,7 +250,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var hiveId, out var hive))
         {
-            RemoveFromQueue(netUserId, (hiveId, hive));
+            TryRemoveFromQueue(netUserId, (hiveId, hive));
         }
     }
 
