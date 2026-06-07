@@ -113,7 +113,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             PreQueue.GetOrNew(hive).Add(session, larvaWaitTime + ghost.TimeOfDeath.TotalSeconds);
             var timeLeft = TimeSpan.FromSeconds(larvaWaitTime) + ghost.TimeOfDeath - _gameTiming.CurTime;
             _popup.PopupEntity(
-                $"You died too recently, and will be added to the queue in {timeLeft} seconds.",
+                $"You died too recently, and will be added to the queue in {timeLeft.TotalSeconds:F0} seconds.",
                 actorEntity.Value, actorEntity.Value);
         }
     }
