@@ -300,6 +300,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         {
             hive.Comp.LastQueenDeath = _timing.CurTime;
             hive.Comp.AnnouncedQueenDeathCooldownOver = false;
+            hive.Comp.AnnouncedNoQueenCooldownOver = false;
             hive.Comp.NewQueenAt = _timing.CurTime + hive.Comp.NewQueenCooldown;
         }
 

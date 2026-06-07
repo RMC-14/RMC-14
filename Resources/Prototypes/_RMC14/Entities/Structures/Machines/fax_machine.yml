@@ -131,6 +131,15 @@
     name: "Correspondent Tent"
 
 - type: entity
+  parent: CMFaxPress
+  id: CMFaxPressPortable
+  name: portable press fax machine
+  suffix: Portable Press
+  components:
+  - type: FaxMachine
+    name: "Correspondent Portable"
+
+- type: entity
   parent: CMFax
   id: RMCFaxColony #todo for RMC: Colony Fax machine that can only fax We-Ya and cannot be faxed by Marines.
   suffix: Colony, Unusable
