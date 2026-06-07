@@ -112,6 +112,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private readonly HashSet<EntityUid> _intersectingResin = new();
     private readonly List<Entity<XenoWeedsComponent>> _adjacentNodes = new();
+    private readonly HashSet<EntityUid> _upgradingStructures = new();
 
     public override void Initialize()
     {
@@ -495,8 +496,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (_net.IsClient)
                 return;
 
+            BeginStructureUpgrade(upgradeable);
             Del(upgradeable);
             var spawn = Spawn(to, snapped);
+            EndStructureUpgrade(upgradeable);
             _hive.SetSameHive(xeno.Owner, spawn);
             args.Handled = true;
             return;
@@ -1146,8 +1149,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
     }
 
+    public void BeginStructureUpgrade(EntityUid uid) => _upgradingStructures.Add(uid);
+    public void EndStructureUpgrade(EntityUid uid) => _upgradingStructures.Remove(uid);
+
     private void OnCheckAdjacentCollapse<T>(Entity<XenoConstructionSupportComponent> ent, ref T args)
     {
+        if (_upgradingStructures.Contains(ent.Owner))
+            return;
+
         if (!_transformQuery.TryComp(ent, out var xform) ||
             _transform.GetGrid((ent, xform)) is not { Valid: true } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
