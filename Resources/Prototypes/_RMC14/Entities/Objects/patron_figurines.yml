@@ -2973,3 +2973,14 @@
     state: liam_property_damage_harper
   - type: PatronFigurine
     id: 77123fd0-952d-4460-9910-bb49a31af632
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPetraMeowMeowYork
+  name: Petra 'Meow Meow' York figurine
+  description: "Nyanyame nyanyajyuunyanya-do no nyarabi de nyakunyaku inyanyaku nyanyahan nyanyadai nyanynaku nyarabete nyaganyagame."
+  components:
+  - type: Sprite
+    state: petra_meow_meow_york
+  - type: PatronFigurine
+    id: 0e6adc84-9560-4ef8-b8b8-fec55d0a434f
