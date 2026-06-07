@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Client._RMC14.NightVision;
 using Content.Shared.DoAfter;
 using Content.Client.UserInterface.Systems;
 using Content.Shared._RMC14.Stealth;
@@ -21,7 +20,6 @@ public sealed class DoAfterOverlay : Overlay
     private readonly IEntityManager _entManager;
     private readonly IGameTiming _timing;
     private readonly IPlayerManager _player;
-    private readonly IOverlayManager _overlay;
     private readonly SharedTransformSystem _transform;
     private readonly MetaDataSystem _meta;
     private readonly ProgressColorSystem _progressColor;
@@ -40,17 +38,13 @@ public sealed class DoAfterOverlay : Overlay
     private const float StartX = 2;
     private const float EndX = 22f;
 
-    public override OverlaySpace Space => _overlay.HasOverlay<NightVisionOverlay>()
-        ? OverlaySpace.WorldSpace
-        : OverlaySpace.WorldSpaceBelowFOV;
+    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
-    public DoAfterOverlay(IEntityManager entManager, IPrototypeManager protoManager, IGameTiming timing, IPlayerManager player, IOverlayManager overlay)
+    public DoAfterOverlay(IEntityManager entManager, IPrototypeManager protoManager, IGameTiming timing, IPlayerManager player)
     {
         _entManager = entManager;
         _timing = timing;
         _player = player;
-        _overlay = overlay;
-        ZIndex = 1;
         _transform = _entManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
         _meta = _entManager.EntitySysManager.GetEntitySystem<MetaDataSystem>();
         _container = _entManager.EntitySysManager.GetEntitySystem<SharedContainerSystem>();
@@ -58,6 +52,7 @@ public sealed class DoAfterOverlay : Overlay
         _sprite = _entManager.System<SpriteSystem>();
         var sprite = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/progress_bar.rsi"), "icon");
         _barTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
+
         _unshadedShader = protoManager.Index(UnshadedShader).Instance();
     }
 
