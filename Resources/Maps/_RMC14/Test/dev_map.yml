@@ -10066,7 +10066,7 @@ entities:
       parent: 2
 - proto: RMCSpawnPointExecutiveBodyguard
   entities:
-  - uid: 1477
+  - uid: 1478
     components:
     - type: Transform
       pos: -1.5,3.5
