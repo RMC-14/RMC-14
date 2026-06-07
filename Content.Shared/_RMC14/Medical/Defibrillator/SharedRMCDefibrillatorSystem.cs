@@ -12,7 +12,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Medical.Defibrillator;
 
-public sealed class RMCDefibrillatorSystem : EntitySystem
+public abstract class SharedRMCDefibrillatorSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
