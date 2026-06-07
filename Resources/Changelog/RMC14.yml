@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: YO0teacher
-  changes:
-  - message: Fixed being able to use optics while viewing overwatch cameras.
-    type: Fix
-  id: 2812
-  time: '2026-01-23T04:01:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8215
 - author: RosySaturniidae
   changes:
   - message: new slime noises!
@@ -4530,5 +4523,20 @@
   id: 3311
   time: '2026-06-07T07:44:46.438058+00:00'
   url: null
+- author: BlueMoon059
+  changes:
+  - message: The Executive Bodyguard gear locker new stocks EB headsets and not Liason
+      headsets.
+    type: Fix
+  - message: the Executive Bodyguard now starts the round with marine IFF.
+    type: Fix
+  - message: Executive Bodyguards can now select watches
+    type: Tweak
+  - message: Updated wording of the Executive Bodyguard welcome message to better
+      align with SOP/Mlaw wording.
+    type: Tweak
+  id: 3312
+  time: '2026-06-07T20:54:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10048
 Name: RMC14
 Order: -1
