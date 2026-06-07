@@ -49,7 +49,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
             subs.Event<XenoParasiteGhostBuiMsg>(OnEggMorpherGhostBuiChosen);
         });
 
-        Subs.BuiEvents<ParasiteAIComponent>(XenoParasiteGhostUI.Key, subs =>
+        Subs.BuiEvents<XenoParasiteComponent>(XenoParasiteGhostUI.Key, subs =>
         {
             subs.Event<XenoParasiteGhostBuiMsg>(OnParasiteGhostBuiChosen);
         });
@@ -109,11 +109,14 @@ public sealed class XenoEggRoleSystem : EntitySystem
         }
     }
 
-    private void OnParasiteGhostBuiChosen(Entity<ParasiteAIComponent> ent, ref XenoParasiteGhostBuiMsg args)
+    private void OnParasiteGhostBuiChosen(Entity<XenoParasiteComponent> ent, ref XenoParasiteGhostBuiMsg args)
     {
         var user = args.Actor;
 
         if (!SharedChecks(ent, user))
+            return;
+
+        if (!(HasComp<ParasiteAIComponent>(ent) || HasComp<ParasiteAIDelayAddComponent>(ent)))
             return;
 
         if (_actor.TryGetSession(user, out var session) && session != null)

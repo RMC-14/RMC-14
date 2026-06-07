@@ -50,7 +50,7 @@ public sealed partial class FindParasiteSystem : EntitySystem
         var eggs = EntityQueryEnumerator<XenoEggComponent>();
         var eggMorphers = EntityQueryEnumerator<EggMorpherComponent>();
         var parasiteThrowers = EntityQueryEnumerator<XenoParasiteThrowerComponent>();
-        var parasites = EntityQueryEnumerator<ParasiteAIComponent>();
+        var parasites = EntityQueryEnumerator<XenoParasiteComponent>();
 
         var spawners = new List<NetEntity>();
         while (eggs.MoveNext(out var eggEnt, out var egg))
@@ -99,7 +99,7 @@ public sealed partial class FindParasiteSystem : EntitySystem
 
         while (parasites.MoveNext(out var paraEnt, out var parasite))
         {
-            if (!_mob.IsAlive(paraEnt))
+            if (!_mob.IsAlive(paraEnt) || !(HasComp<ParasiteAIComponent>(paraEnt) || HasComp<ParasiteAIDelayAddComponent>(paraEnt)))
             {
                 continue;
             }
