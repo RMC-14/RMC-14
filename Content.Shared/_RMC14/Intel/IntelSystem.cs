@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
@@ -9,7 +10,9 @@ using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Power;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Access.Systems;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -44,7 +47,7 @@ public sealed class IntelSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly ARESSystem _ares = default!;
+    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -53,6 +56,7 @@ public sealed class IntelSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -208,6 +212,8 @@ public sealed class IntelSystem : EntitySystem
     private readonly HashSet<Entity<IntelContainerComponent>> _nearby = new();
 
     private EntityQuery<IntelReadObjectiveComponent> _readObjectiveQuery;
+
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabIntelLogs";
 
     public override void Initialize()
     {
@@ -634,6 +640,14 @@ public sealed class IntelSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("rmc-intel-console-submit-no-new"), ent, args.User, PopupType.Medium);
             else
                 _popup.PopupEntity(Loc.GetString("rmc-intel-console-submit-done", ("amount", args.Amount)), ent, args.User, PopupType.Medium);
+
+            if (_idCard.TryFindIdCard(args.User, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF))
+            {
+                foreach (var faction in idCardIFF.Factions)
+                {
+                    _aresCore.CreateARESLog(faction, LogCat, (string)$"{Name(args.User)} processed {args.Amount} intel entries");
+                }
+            }
         }
 
         if (!TryComp(args.User, out IntelKnowledgeComponent? knowledge))
@@ -1820,7 +1834,7 @@ public sealed class IntelSystem : EntitySystem
             tree.Value.Comp.LastAnnounceAt = time + _announceEvery;
             Dirty(tree.Value);
 
-            var ares = _ares.EnsureARES();
+            var ares = _aresCore.EnsureMarineARES();
             var points = tree.Value.Comp.Tree.Points;
             var last = tree.Value.Comp.LastAnnouncePoints;
             tree.Value.Comp.LastAnnouncePoints = points;

@@ -20,6 +20,9 @@
   - type: Tag
     tags:
     - RMCIntelItem
+  - type: GuideHelp
+    guides:
+    - RMCIntel
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -117,6 +120,9 @@
     clues: 8
     category: rmc-intel-retrieve
   - type: IntelSerial
+  - type: GuideHelp
+    guides:
+    - RMCIntel
 
 - type: entity
   parent: RMCIntelRetrieveDeviceBase
@@ -167,7 +173,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: techweb
+    layers:
+    - map: ["base"]
+      state: "techweb0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "techweb"
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.TechControlConsoleUI.Key
@@ -190,8 +200,12 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: terminal1_old
+    layers: []
   - type: InteractionOutline
   - type: IntelConsole
+  - type: GuideHelp
+    guides:
+    - RMCIntel
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -202,6 +216,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: medlaptop
+    layers: []
   - type: InteractionOutline
   - type: ApcPowerReceiver
     powerLoad: 250
@@ -227,6 +242,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: medlaptop
+    layers: []
   - type: InteractionOutline
   - type: ApcPowerReceiver
     powerLoad: 250

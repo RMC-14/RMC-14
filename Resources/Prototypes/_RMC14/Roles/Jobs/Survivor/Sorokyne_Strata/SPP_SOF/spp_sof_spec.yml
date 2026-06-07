@@ -10,6 +10,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
@@ -21,6 +22,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-spec
     - type: DemoSpecWhitelist
+    - type: QYJWhitelist
     - type: AssignSquad
       squad: SquadSPP
   hidden: true
@@ -35,8 +37,8 @@
     - CMSheetMetal20
     outerClothing:
     - RMCTacticalPrybar
-    - RMCMagazineRifleAK4047
-    - RMCMagazineRifleAK4047
+    - RMCMagazineRifleType77
+    - RMCMagazineRifleType77
     - RMCRadioHandheldColony
 
 - type: entity

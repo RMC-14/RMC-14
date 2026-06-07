@@ -30208,6 +30208,8 @@ entities:
     - type: Transform
       pos: -47.5,-31.5
       parent: 1
+- proto: CMSpawnPointCombatCorrespondent
+  entities:
   - uid: 8307
     components:
     - type: Transform
