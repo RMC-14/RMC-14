@@ -62,8 +62,13 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        //Ignore people moving around ghost bodies and parasites.
-        if (HasComp<GhostComponent>(ev.Entity) || HasComp<XenoParasiteComponent>(ev.Entity))
+        //Ignore people moving around ghost bodies.
+        if (HasComp<GhostComponent>(ev.Entity))
+            return;
+
+        //Don't eject from queue if entity is configured not to.
+        if (TryComp<MindTakeoverBehaviorComponent>(ev.Entity, out var takeoverBehavior)
+            && !takeoverBehavior.EjectFromLarvaQueues)
             return;
 
         RemoveFromAllQueues(ev.Player.UserId);
@@ -252,6 +257,19 @@ public sealed class LarvaQueueSystem : EntitySystem
         {
             TryRemoveFromQueue(netUserId, (hiveId, hive));
         }
+    }
+
+    public bool IsQueuedFor(NetUserId netUserId, EntityUid hiveId)
+    {
+        if (PreQueue.TryGetValue(hiveId, out var preQueueUsers)
+            && preQueueUsers.ContainsKey(netUserId))
+            return true;
+
+        if (Queue.TryGetValue(hiveId, out var queueUsers)
+            && queueUsers.Contains(netUserId))
+            return true;
+
+        return false;
     }
 
     public override void Update(float frameTime)
