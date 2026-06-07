@@ -368,8 +368,6 @@
     canDnd: true
     phoneId: RMCTelephoneScout
     phoneCanBeTransferred: false
-    receivingSound:
-      path: /Audio/_RMC14/Phone/telephone_ring_scout.ogg
   - type: RotaryPhoneDnd
   - type: RotaryPhoneBackpack
     slot: HEAD
