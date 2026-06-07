@@ -478,7 +478,7 @@ public sealed class RMCFoldingBarricadeSystem : EntitySystem
             BreakOnDamage = true,
             BreakOnHandChange = used != null,
             BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameTarget
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
