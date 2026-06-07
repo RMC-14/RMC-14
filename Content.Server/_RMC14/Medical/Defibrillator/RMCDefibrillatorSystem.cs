@@ -27,10 +27,8 @@ public sealed class RMCDefibrillatorSystem : EntitySystem
         if (battery.CurrentCharge < draw.UseRate)
             level = 0;
 
-
         if (!TryComp<AppearanceComponent>(entity, out var appearance))
             return;
         _appearance.SetData(entity, DefibrillatorVisuals.DefibrillatorCharge, (DefibrillatorChargeVisuals)level, appearance);
-
     }
 }
