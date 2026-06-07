@@ -13,6 +13,7 @@ namespace Content.Client._RMC14.Xenonids.HiveTeam;
 [GenerateTypedNameReferences]
 public sealed partial class HiveTeamPanelControl : BoxContainer
 {
+    private XenoPickerWindow? _picker;
     public HiveTeamPanelControl()
     {
         RobustXamlLoader.Load(this);
@@ -90,9 +91,10 @@ public sealed partial class HiveTeamPanelControl : BoxContainer
             };
             addLeaderBtn.OnPressed += _ =>
             {
-                var picker = new XenoPickerWindow();
-                picker.Populate(allXenos, getTexture, xeno => onSetLeader(index, xeno));
-                picker.OpenCentered();
+                _picker?.Close();
+                _picker = new XenoPickerWindow();
+                _picker.Populate(allXenos, getTexture, xeno => onSetLeader(index, xeno));
+                _picker.OpenCentered();
             };
             LeaderSlot.AddChild(addLeaderBtn);
         }
@@ -119,9 +121,10 @@ public sealed partial class HiveTeamPanelControl : BoxContainer
 
         void OnAddMemberPressed(BaseButton.ButtonEventArgs _)
         {
-            var picker = new XenoPickerWindow();
-            picker.Populate(allXenos, getTexture, xeno => onAddMember(index, xeno));
-            picker.OpenCentered();
+            _picker?.Close();
+            _picker = new XenoPickerWindow();
+            _picker.Populate(allXenos, getTexture, xeno => onAddMember(index, xeno));
+            _picker.OpenCentered();
         }
     }
 }

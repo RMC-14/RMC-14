@@ -16,6 +16,7 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
     private Action<string>? _onAnnounce;
     private Action<NetEntity>? _onAddMember;
     private Action<NetEntity>? _onRemoveMember;
+    private XenoPickerWindow? _picker;
 
     public HiveLeaderSquadWindow()
     {
@@ -113,9 +114,10 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
 
         void OnAddMemberPressed(BaseButton.ButtonEventArgs _)
         {
-            var picker = new XenoPickerWindow();
-            picker.Populate(allXenos, getTexture, xeno => _onAddMember?.Invoke(xeno));
-            picker.OpenCentered();
+            _picker?.Close();
+            _picker = new XenoPickerWindow();
+            _picker.Populate(allXenos, getTexture, xeno => _onAddMember?.Invoke(xeno));
+            _picker.OpenCentered();
         }
     }
 }
