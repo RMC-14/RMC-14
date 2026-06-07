@@ -27,6 +27,7 @@
   - RMCAccessDatabase
   - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
+  - RMCAccessLogs
 
 - type: accessGroup
   id: Pilot
