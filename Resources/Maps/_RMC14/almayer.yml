@@ -1,3 +1,5 @@
+# Copy of savannah.yml
+# Only difference is the BecomesStationComponent has to have the id "Almayer".
 meta:
   format: 7
   category: Map
@@ -2036,7 +2038,7 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: BecomesStation
-      id: Savannah
+      id: Almayer
     - type: RadiationGridResistance
     - type: FootstepModifier
       footstepSoundCollection: !type:SoundCollectionSpecifier
