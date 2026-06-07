@@ -447,9 +447,12 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
     }
 
-    private bool TryConsumeGunSecondWind(EntityUid uid)
+    public bool TryConsumeGunSecondWind(EntityUid uid, GunSecondWindComponent? secondWind = null)
     {
-        if (!TryComp(uid, out GunSecondWindComponent? secondWind) || !secondWind.HasSecondWind)
+        if (!Resolve(uid, ref secondWind, false))
+            return false;
+
+        if (!secondWind.HasSecondWind)
             return false;
 
         secondWind.HasSecondWind = false;
