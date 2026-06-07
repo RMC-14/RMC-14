@@ -1,0 +1,24 @@
+- type: entity
+  parent: BaseItem
+  id: RMCK9NameImplanter
+  name: K9 name implanter
+  description: Syncs the implantedWeYaSerial Chip to the unit's preferred name.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/k9_name_implanter.rsi
+    state: efundcard
+  - type: Item
+    size: Tiny
+  - type: RMCK9NameChanger
+
+- type: entity
+  parent: BaseItem
+  id: RMCK9SerialIdTags
+  name: WeYa K9 serial identification collar
+  description: Contains a serialized manufacturing number related to this unit's manufacturing date and time.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Synthetic/k9_tags.rsi
+    state: k9_dogtags
+  - type: Item
+    size: Tiny

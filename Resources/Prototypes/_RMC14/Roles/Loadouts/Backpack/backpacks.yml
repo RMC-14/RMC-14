@@ -10,6 +10,11 @@
     back: CMSatchel
 
 - type: loadout
+  id: LiaisonSecureSatchel
+  equipment:
+    back: CMSatchelLiaisonSecure
+
+- type: loadout
   id: MarineTechnicianSatchel
   equipment:
     back: CMSatchelMarineTech
