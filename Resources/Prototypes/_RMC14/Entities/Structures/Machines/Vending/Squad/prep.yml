@@ -401,10 +401,6 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         amount: 4
-      - id: RMCMagazinePistolM13AP
-        amount: 4
-      - id: RMCMagazinePistolM13ExtAP
-        amount: 2
       - id: CMMagazineSMGM63AP
         amount: 3
       - id: CMMagazineRifleM54CAP
@@ -521,8 +517,10 @@
         amount: 1
       - id: CMFoldingBarricadesMB6x3
         amount: 2
-      #- id: CMSparePDTLBattleBuddyKit
-      #  amount: 3
+      #- id: CMFoldingBarricadesMB6x3
+      #  amount: 2
+      - id: CMSparePDTLBattleBuddyKit
+        amount: 3
       - id: RMCPowerCellCrap
         amount: 2
       - id: RMCMagazineSMGNailgun
