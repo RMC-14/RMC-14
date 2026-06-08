@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: CatAndHats
   changes:
-  - message: The Kutjevo south LZ alternative layout map insert now has turrets on
-      the south-eastern side.
-    type: Fix
-  id: 2832
-  time: '2026-01-27T22:02:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9074
-- author: CatAndHats
-  changes:
   - message: Removed the policing skill pamphlet on Sorokyne Strata
     type: Remove
   id: 2833
@@ -4525,5 +4517,12 @@
   id: 3331
   time: '2026-06-08T02:01:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10058
+- author: J C Denton
+  changes:
+  - message: Fixed dropships, evac pods and lifeboats having no areas and no power.
+    type: Fix
+  id: 3332
+  time: '2026-06-08T02:03:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10043
 Name: RMC14
 Order: -1
