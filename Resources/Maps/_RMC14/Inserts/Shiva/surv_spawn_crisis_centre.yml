@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/17/2026 00:09:25
-  entityCount: 53
+  time: 06/08/2026 06:49:34
+  entityCount: 54
 maps: []
 grids:
 - 1
@@ -118,6 +118,13 @@ entities:
     components:
     - type: Transform
       pos: 0.5,2.5
+      parent: 1
+- proto: CMFoldingBarricade
+  entities:
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 2.5,4.5
       parent: 1
 - proto: CMLockerBase
   entities:

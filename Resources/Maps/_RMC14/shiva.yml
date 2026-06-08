@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/03/2026 07:11:22
-  entityCount: 17735
+  time: 06/08/2026 06:43:53
+  entityCount: 17745
 maps:
 - 1
 grids:
@@ -40180,30 +40180,31 @@ entities:
   - uid: 712
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
+      rot: -1.5707963267948966 rad
       pos: 55.5,49.5
       parent: 1
   - uid: 713
     components:
     - type: Transform
-      pos: 53.5,48.5
+      rot: 1.5707963267948966 rad
+      pos: 52.5,49.5
       parent: 1
   - uid: 714
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 52.5,49.5
+      rot: 3.141592653589793 rad
+      pos: 53.5,48.5
       parent: 1
   - uid: 715
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: 68.5,54.5
       parent: 1
   - uid: 716
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
+      rot: -1.5707963267948966 rad
       pos: 70.5,54.5
       parent: 1
   - uid: 717
@@ -40833,68 +40834,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 144.5,158.5
       parent: 1
-- proto: CMChairComfy
-  entities:
-  - uid: 827
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 55.5,54.5
-      parent: 1
-  - uid: 828
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 55.5,56.5
-      parent: 1
-  - uid: 829
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 55.5,57.5
-      parent: 1
-  - uid: 830
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 55.5,58.5
-      parent: 1
-  - uid: 831
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 55.5,55.5
-      parent: 1
-  - uid: 832
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 58.5,58.5
-      parent: 1
-  - uid: 833
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 58.5,56.5
-      parent: 1
-  - uid: 834
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 58.5,55.5
-      parent: 1
-  - uid: 835
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 58.5,54.5
-      parent: 1
-  - uid: 836
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 58.5,57.5
-      parent: 1
 - proto: CMChairComfyBeige
   entities:
   - uid: 837
@@ -41339,13 +41278,13 @@ entities:
   - uid: 910
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 3.141592653589793 rad
       pos: 64.5,58.5
       parent: 1
   - uid: 911
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
+      rot: -1.5707963267948966 rad
       pos: 62.5,56.5
       parent: 1
   - uid: 912
@@ -42997,7 +42936,6 @@ entities:
       parent: 1
     - type: ApcPowerReceiver
       powerLoad: 5
-      needsPower: True
   - uid: 1171
     components:
     - type: Transform
@@ -43005,9 +42943,9 @@ entities:
       parent: 1
     missingComponents:
     - ApcPowerReceiver
+    - ActivatableUIRequiresPower
     - FaxMachine
     - ActivatableUI
-    - ActivatableUIRequiresPower
     - UserInterface
     - Faxecute
     - ItemSlots
@@ -44952,6 +44890,13 @@ entities:
     components:
     - type: Transform
       pos: 206.5,126.5
+      parent: 1
+- proto: CMFoldingBarricade
+  entities:
+  - uid: 17520
+    components:
+    - type: Transform
+      pos: 115.5,71.5
       parent: 1
 - proto: CMFortuneCookie
   entities:
@@ -47848,44 +47793,6 @@ entities:
     components:
     - type: Transform
       pos: 158.5,25.5
-      parent: 1
-- proto: CMSeatPassenger
-  entities:
-  - uid: 2080
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 46.5,47.5
-      parent: 1
-  - uid: 2081
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 46.5,46.5
-      parent: 1
-  - uid: 2082
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 46.5,45.5
-      parent: 1
-  - uid: 2083
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 44.5,47.5
-      parent: 1
-  - uid: 2084
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 44.5,46.5
-      parent: 1
-  - uid: 2085
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 44.5,45.5
       parent: 1
 - proto: CMSeatPilot
   entities:
@@ -53624,6 +53531,11 @@ entities:
     - type: Transform
       pos: 174.5,19.5
       parent: 1
+  - uid: 15517
+    components:
+    - type: Transform
+      pos: 207.5,42.5
+      parent: 1
   - uid: 15970
     components:
     - type: Transform
@@ -53653,6 +53565,16 @@ entities:
     components:
     - type: Transform
       pos: 172.5,15.5
+      parent: 1
+  - uid: 17142
+    components:
+    - type: Transform
+      pos: 207.5,43.5
+      parent: 1
+  - uid: 17143
+    components:
+    - type: Transform
+      pos: 207.5,44.5
       parent: 1
   - uid: 17458
     components:
@@ -107211,12 +107133,17 @@ entities:
     - type: Transform
       pos: 121.5,56.5
       parent: 1
-- proto: RMCBeakerHighCapacity
+- proto: RMCBodyScanner
   entities:
-  - uid: 13299
+  - uid: 17738
     components:
     - type: Transform
-      pos: 192.65205,153.83629
+      pos: 187.5,147.5
+      parent: 1
+  - uid: 17739
+    components:
+    - type: Transform
+      pos: 207.5,138.5
       parent: 1
 - proto: RMCBookcase
   entities:
@@ -108435,6 +108362,70 @@ entities:
     - type: Transform
       pos: 123.5,31.5
       parent: 1
+- proto: RMCCouchEndAlt
+  entities:
+  - uid: 827
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 55.5,54.5
+      parent: 1
+  - uid: 830
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 55.5,58.5
+      parent: 1
+  - uid: 832
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 58.5,54.5
+      parent: 1
+  - uid: 835
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 58.5,58.5
+      parent: 1
+- proto: RMCCouchMidAlt
+  entities:
+  - uid: 828
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 55.5,56.5
+      parent: 1
+  - uid: 829
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 55.5,57.5
+      parent: 1
+  - uid: 831
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 55.5,55.5
+      parent: 1
+  - uid: 833
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 58.5,56.5
+      parent: 1
+  - uid: 834
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 58.5,57.5
+      parent: 1
+  - uid: 836
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 58.5,55.5
+      parent: 1
 - proto: RMCCrateAmmo
   entities:
   - uid: 2149
@@ -108691,10 +108682,10 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 293.14673
+        temperature: 147.92336
         moles:
-        - 1.7459903
-        - 6.568249
+        - 0
+        - 0
         - 0
         - 0
         - 0
@@ -108725,10 +108716,10 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 293.14673
+        temperature: 147.92336
         moles:
-        - 1.7459903
-        - 6.568249
+        - 0
+        - 0
         - 0
         - 0
         - 0
@@ -110627,7 +110618,7 @@ entities:
     - type: Transform
       pos: 37.5,124.5
       parent: 1
-- proto: RMCFogWallWeed30
+- proto: RMCFogWallWeed
   entities:
   - uid: 17137
     components:
@@ -110958,21 +110949,6 @@ entities:
     components:
     - type: Transform
       pos: 205.5,50.5
-      parent: 1
-  - uid: 17520
-    components:
-    - type: Transform
-      pos: 207.5,44.5
-      parent: 1
-  - uid: 17521
-    components:
-    - type: Transform
-      pos: 207.5,43.5
-      parent: 1
-  - uid: 17522
-    components:
-    - type: Transform
-      pos: 207.5,42.5
       parent: 1
   - uid: 17570
     components:
@@ -122349,10 +122325,10 @@ entities:
     - type: Transform
       pos: 131.5,128.5
       parent: 1
-  - uid: 15517
+  - uid: 17745
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
+      rot: -1.5707963267948966 rad
       pos: 74.5,40.5
       parent: 1
 - proto: RMCPropGroundWire
@@ -123387,6 +123363,13 @@ entities:
     - type: Transform
       pos: 176.64398,39.7107
       parent: 1
+- proto: RMCReagentJug
+  entities:
+  - uid: 13299
+    components:
+    - type: Transform
+      pos: 192.65205,153.83629
+      parent: 1
 - proto: RMCRollingPin
   entities:
   - uid: 15695
@@ -123396,6 +123379,42 @@ entities:
       parent: 1
 - proto: RMCSeatDark
   entities:
+  - uid: 2080
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,47.5
+      parent: 1
+  - uid: 2081
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,46.5
+      parent: 1
+  - uid: 2082
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,45.5
+      parent: 1
+  - uid: 2083
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 44.5,47.5
+      parent: 1
+  - uid: 2084
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 44.5,46.5
+      parent: 1
+  - uid: 2085
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 44.5,45.5
+      parent: 1
   - uid: 15696
     components:
     - type: Transform
@@ -123694,6 +123713,11 @@ entities:
     components:
     - type: Transform
       pos: 17.20085,53.708206
+      parent: 1
+  - uid: 17744
+    components:
+    - type: Transform
+      pos: 32.764538,74.26331
       parent: 1
 - proto: RMCSecureCaseMini
   entities:
@@ -124817,6 +124841,18 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: nlz_shutters
+- proto: RMCSleeper
+  entities:
+  - uid: 17521
+    components:
+    - type: Transform
+      pos: 204.5,138.5
+      parent: 1
+  - uid: 17522
+    components:
+    - type: Transform
+      pos: 187.5,151.5
+      parent: 1
 - proto: RMCSmallChestBlue
   entities:
   - uid: 15919
@@ -130985,6 +131021,30 @@ entities:
     components:
     - type: Transform
       pos: 71.497215,42.803844
+      parent: 1
+- proto: RMCWheelchair
+  entities:
+  - uid: 17740
+    components:
+    - type: Transform
+      pos: 216.5,157.5
+      parent: 1
+  - uid: 17741
+    components:
+    - type: Transform
+      pos: 217.5,157.5
+      parent: 1
+  - uid: 17742
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 206.5,128.5
+      parent: 1
+  - uid: 17743
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 207.5,128.5
       parent: 1
 - proto: RMCWhistle
   entities:
