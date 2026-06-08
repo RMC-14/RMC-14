@@ -1,8 +1,0 @@
-﻿author: DrSmugleaf
-changes:
-- type: Fix
-  message: Fixed two large performance issues causing server rubberbanding during hijack.
-- type: Fix
-  message: Fixed server rubberbanding when large amounts of tile fire are present.
-- type: Tweak
-  message: Modified impenetrable resin to mention that it degrades into a vulnerable form with time.

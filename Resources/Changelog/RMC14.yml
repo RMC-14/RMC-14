@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Removed the policing skill pamphlet on Sorokyne Strata
-    type: Remove
-  id: 2833
-  time: '2026-01-27T22:04:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9077
 - author: Arykh
   changes:
   - message: Added missing armor values to multiple helmets. This will not make you
@@ -4524,5 +4517,18 @@
   id: 3332
   time: '2026-06-08T02:03:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10043
+- author: DrSmugleaf
+  changes:
+  - message: Fixed two large performance issues causing server rubberbanding during
+      hijack.
+    type: Fix
+  - message: Fixed server rubberbanding when large amounts of tile fire are present.
+    type: Fix
+  - message: Modified impenetrable resin to mention that it degrades into a vulnerable
+      form with time.
+    type: Tweak
+  id: 3333
+  time: '2026-06-08T02:13:16.310248+00:00'
+  url: null
 Name: RMC14
 Order: -1
