@@ -30,6 +30,7 @@ public sealed class AutodocSystem : SharedAutodocSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -41,6 +42,7 @@ public sealed class AutodocSystem : SharedAutodocSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
+    private readonly HashSet<EntityUid> _intersecting = [];
     private readonly List<ProtoId<ReagentPrototype>> _reagentRemovalBuffer = [];
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
@@ -516,6 +518,22 @@ public sealed class AutodocSystem : SharedAutodocSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<OutsideAutodocComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Autodoc is not { } autodoc)
+            {
+                RemCompDeferred<OutsideAutodocComponent>(uid);
+                continue;
+            }
+
+            _intersecting.Clear();
+            _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
+
+            if (!_intersecting.Contains(autodoc))
+                RemCompDeferred<OutsideAutodocComponent>(uid);
+        }
 
         var time = _timing.CurTime;
         var consoles = EntityQueryEnumerator<AutodocConsoleComponent>();

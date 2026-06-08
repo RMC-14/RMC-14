@@ -18,15 +18,12 @@ public abstract class SharedSleeperSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private readonly HashSet<EntityUid> _intersecting = [];
 
     public override void Initialize()
     {
@@ -250,24 +247,5 @@ public abstract class SharedSleeperSystem : EntitySystem
     {
         if (ent.Comp.Sleeper == args.OtherEntity)
             args.Cancelled = true;
-    }
-
-    public override void Update(float frameTime)
-    {
-        var query = EntityQueryEnumerator<OutsideSleeperComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (comp.Sleeper is not { } sleeper)
-            {
-                RemCompDeferred<OutsideSleeperComponent>(uid);
-                continue;
-            }
-
-            _intersecting.Clear();
-            _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
-
-            if (!_intersecting.Contains(sleeper))
-                RemCompDeferred<OutsideSleeperComponent>(uid);
-        }
     }
 }

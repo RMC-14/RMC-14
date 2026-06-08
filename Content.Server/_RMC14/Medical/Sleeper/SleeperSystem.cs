@@ -25,6 +25,7 @@ namespace Content.Server._RMC14.Medical.Sleeper;
 public sealed class SleeperSystem : SharedSleeperSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
@@ -35,8 +36,9 @@ public sealed class SleeperSystem : SharedSleeperSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
-    private readonly List<ProtoId<ReagentPrototype>> _reagentRemovalBuffer = [];
     private readonly List<SleeperChemicalData> _chemicalListBuffer = [];
+    private readonly HashSet<EntityUid> _intersecting = [];
+    private readonly List<ProtoId<ReagentPrototype>> _reagentRemovalBuffer = [];
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -274,6 +276,22 @@ public sealed class SleeperSystem : SharedSleeperSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<OutsideSleeperComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Sleeper is not { } sleeper)
+            {
+                RemCompDeferred<OutsideSleeperComponent>(uid);
+                continue;
+            }
+
+            _intersecting.Clear();
+            _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
+
+            if (!_intersecting.Contains(sleeper))
+                RemCompDeferred<OutsideSleeperComponent>(uid);
+        }
 
         var time = _timing.CurTime;
         var consoles = EntityQueryEnumerator<SleeperConsoleComponent>();

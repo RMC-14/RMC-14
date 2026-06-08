@@ -19,14 +19,11 @@ public abstract class SharedBodyScannerSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private readonly HashSet<EntityUid> _intersecting = [];
 
     public override void Initialize()
     {
@@ -244,24 +241,5 @@ public abstract class SharedBodyScannerSystem : EntitySystem
     {
         if (ent.Comp.BodyScanner == args.OtherEntity)
             args.Cancelled = true;
-    }
-
-    public override void Update(float frameTime)
-    {
-        var query = EntityQueryEnumerator<OutsideBodyScannerComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (comp.BodyScanner is not { } scanner)
-            {
-                RemCompDeferred<OutsideBodyScannerComponent>(uid);
-                continue;
-            }
-
-            _intersecting.Clear();
-            _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
-
-            if (!_intersecting.Contains(scanner))
-                RemCompDeferred<OutsideBodyScannerComponent>(uid);
-        }
     }
 }

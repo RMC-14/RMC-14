@@ -26,7 +26,6 @@ public abstract class SharedAutodocSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -34,8 +33,6 @@ public abstract class SharedAutodocSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private readonly HashSet<EntityUid> _intersecting = [];
 
     public override void Initialize()
     {
@@ -305,24 +302,5 @@ public abstract class SharedAutodocSystem : EntitySystem
     {
         if (ent.Comp.Autodoc == args.OtherEntity)
             args.Cancelled = true;
-    }
-
-    public override void Update(float frameTime)
-    {
-        var query = EntityQueryEnumerator<OutsideAutodocComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (comp.Autodoc is not { } autodoc)
-            {
-                RemCompDeferred<OutsideAutodocComponent>(uid);
-                continue;
-            }
-
-            _intersecting.Clear();
-            _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
-
-            if (!_intersecting.Contains(autodoc))
-                RemCompDeferred<OutsideAutodocComponent>(uid);
-        }
     }
 }
