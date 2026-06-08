@@ -94,8 +94,6 @@ public sealed class DoAfterOverlay : Overlay
             if (comp.DoAfters.Count == 0)
                 continue;
 
-
-
             var worldPosition = _transform.GetWorldPosition(xform, xformQuery);
             if (!bounds.Contains(worldPosition))
                 continue;
