@@ -72,7 +72,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
     private void OnShootRequest(RequestShootEvent ev, EntitySessionEventArgs args)
     {
-        ShootRequested(ev.Gun, ev.Coordinates, ev.Target, null, args.SenderSession, ev.Continuous);
+        ShootRequested(ev.Gun, ev.Coordinates, ev.Target, null, args.SenderSession, ev.RearmSemiAuto);
     }
 
     private void OnClientProjectileUpdateIsPredicted(Entity<PredictedProjectileClientComponent> ent, ref UpdateIsPredictedEvent args)

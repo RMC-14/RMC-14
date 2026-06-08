@@ -38,3 +38,8 @@
   id: SatchelRoyalMOLS
   equipment:
     back: RMCSatchelRoyalMOLS
+
+- type: loadout
+  id: ExecutiveSecurityGuardSatchel
+  equipment:
+    back: RMCSatchelBlack

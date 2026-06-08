@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.GameTicking;
 using Content.Shared._RMC14.Rules;
@@ -21,6 +21,7 @@ public sealed class JoinXenoSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly LarvaQueueSystem _larvaQueue = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCGameTickerSystem _rmcGameTicker = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -79,11 +80,18 @@ public sealed class JoinXenoSystem : EntitySystem
             return;
         }
 
+        TryComp<ActorComponent>(ent, out var actor);
+
         var options = new List<DialogOption>();
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var hiveId, out var hive))
         {
-            options.Add(new DialogOption($"(Join/Leave) Larva Queue for ({Name(hiveId)})", new JoinLarvaQueueEvent(GetNetEntity(hiveId))));
+            var inQueue = actor != null && _larvaQueue.IsQueuedFor(actor.PlayerSession.UserId, hiveId);
+            var optionText = inQueue ?
+                $"Leave Larva Queue for ({Name(hiveId)})" :
+                $"Join Larva Queue for ({Name(hiveId)})";
+
+            options.Add(new DialogOption(optionText, new JoinLarvaQueueEvent(GetNetEntity(hiveId))));
         }
 
         _dialog.OpenOptions(ent, "Join as Xeno", options, "Available Hives");
