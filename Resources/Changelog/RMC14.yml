@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added missing armor values to multiple helmets. This will not make you
-      any tankier than before, it is in preparation for limb damage.
-    type: Fix
-  - message: Fixed Combat Technician helmets missing their hearing protection.
-    type: Fix
-  - message: Fixed SPP helmets missing their hearing protection.
-    type: Fix
-  id: 2834
-  time: '2026-01-28T01:43:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9001
 - author: CatAndHats
   changes:
   - message: Fixed xenos being able to interact with or open the storages of; toolboxes,
@@ -4530,5 +4518,15 @@
   id: 3333
   time: '2026-06-08T02:13:16.310248+00:00'
   url: null
+- author: MidZik
+  changes:
+  - message: Sapper traps no longer trigger on marines that were standing on them
+      when they were created.
+    type: Fix
+  - message: Sapper trap radius reduced to prevent odd behavior with the above change.
+    type: Fix
+  id: 3334
+  time: '2026-06-08T02:22:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10067
 Name: RMC14
 Order: -1
