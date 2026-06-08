@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Vixting
   changes:
-  - message: Adds overlay to flamers to visualize which tiles you will set on fire,
-      using solution color.
-    type: Add
-  id: 2818
-  time: '2026-01-23T08:42:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8987
-- author: Vixting
-  changes:
   - message: Adds overlay to bombard, spray acid, burrow
     type: Add
   id: 2819
@@ -4544,5 +4536,19 @@
   id: 3317
   time: '2026-06-08T01:43:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10057
+- author: kleinerstation13
+  changes:
+  - message: Added unique NVG sight variants for the PMC Sniper, RCM Marksman, and
+      UNMC Spotter
+    type: Add
+  - message: Infiltrator boots have their own sprite
+    type: Tweak
+  - message: Infiltrator boots now completely silence footsteps
+    type: Tweak
+  - message: Fixed PMC Sniper having some wrong equipment
+    type: Fix
+  id: 3318
+  time: '2026-06-08T01:44:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10064
 Name: RMC14
 Order: -1
