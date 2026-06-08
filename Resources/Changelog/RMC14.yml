@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: CL Escape Pod Controller now requires WeYa access.
-    type: Tweak
-  id: 2824
-  time: '2026-01-27T21:38:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8251
 - author: Vixting
   changes:
   - message: Sentry Laptop accessible to Engineers. Sentries can be connected to a
@@ -4540,5 +4533,13 @@
   id: 3323
   time: '2026-06-08T01:53:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10050
+- author: Ian321
+  changes:
+  - message: ARES now notifies command that the dropships have completed their initial
+      fueling.
+    type: Add
+  id: 3324
+  time: '2026-06-08T01:55:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9872
 Name: RMC14
 Order: -1
