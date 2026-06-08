@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Data detectors and motion detectors can now be toggled with the interact
-      key.
-    type: Fix
-  id: 2815
-  time: '2026-01-23T04:05:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9015
 - author: Arykh
   changes:
   - message: Tweaked status effect duration applied by reagents to match parity. Notably,
@@ -4539,5 +4531,12 @@
   id: 3314
   time: '2026-06-08T01:39:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10060
+- author: CatAndHats
+  changes:
+  - message: Fixed some podlocks on Fiorina being openable allowing access into space
+    type: Fix
+  id: 3315
+  time: '2026-06-08T01:40:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10063
 Name: RMC14
 Order: -1
