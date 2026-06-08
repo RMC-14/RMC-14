@@ -501,12 +501,13 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 BeginStructureUpgrade(upgradeable);
                 Del(upgradeable);
                 var spawn = Spawn(to, snapped);
+                _hive.SetSameHive(xeno.Owner, spawn);
             }
             finally
             {
                 EndStructureUpgrade(upgradeable);
             }
-            _hive.SetSameHive(xeno.Owner, spawn);
+
             args.Handled = true;
             return;
         }

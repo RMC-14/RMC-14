@@ -88,7 +88,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         _holeWallQuery = GetEntityQuery<XenoAcidHoleWallComponent>();
 
         SubscribeLocalEvent<XenoAcidHoleComponent, ActivateInWorldEvent>(OnHoleActivateInWorld);
-        SubscribeLocalEvent<XenoAcidHoleComponent, InteractHandEvent>(OnHoleInteractHand, before: [typeof(XenoNestSystem)]);
         SubscribeLocalEvent<XenoAcidHoleComponent, XenoAcidHoleCrawlDoAfterEvent>(OnHoleCrawlDoAfter);
         SubscribeLocalEvent<XenoAcidHoleComponent, InteractUsingEvent>(OnHoleInteractUsing, before: [typeof(XenoNestSystem)]);
         SubscribeLocalEvent<XenoAcidHoleComponent, XenoAcidHoleRepairDoAfterEvent>(OnHoleRepairDoAfter);
@@ -100,7 +99,6 @@ public sealed class XenoAcidHoleSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidHoleWallComponent, DamageModifyEvent>(OnWallDamageModify);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, GettingAttackedAttemptEvent>(OnWallAttacked);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, ActivateInWorldEvent>(OnWallActivateInWorld);
-        SubscribeLocalEvent<XenoAcidHoleWallComponent, InteractHandEvent>(OnWallInteractHand, before: [typeof(XenoNestSystem)]);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, InteractUsingEvent>(OnWallInteractUsing, before: [typeof(XenoNestSystem)]);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, RMCRepairableTargetAttemptEvent>(OnWallRepairAttempt);
         SubscribeLocalEvent<XenoAcidHoleWallComponent, EntityTerminatingEvent>(OnWallTerminating);

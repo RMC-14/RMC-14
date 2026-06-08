@@ -69,13 +69,13 @@ public sealed class DesignerRemoteThickenResinSystem : EntitySystem
             _xenoConstruction.BeginStructureUpgrade(target);
             Del(target);
             var thickened = Spawn(upgradeable.To.Value, coords);
+            _transform.SetLocalRotation(thickened, rotation);
+            _hive.SetSameHive(ent.Owner, thickened);
         }
         finally
         {
             _xenoConstruction.EndStructureUpgrade(target);
         }
-        _transform.SetLocalRotation(thickened, rotation);
-        _hive.SetSameHive(ent.Owner, thickened);
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-designer-thicken-success"), ent.Owner, ent.Owner);
     }
