@@ -1,40 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Sentry Laptop accessible to Engineers. Sentries can be connected to a
-      laptop using a tuner. Laptop must be placed onto a table to access. Connected
-      sentries can be viewed from the laptop, have their IFF settings changed, display
-      ammo & health bars, will show text popup alerts when engaging enemies & when
-      being damaged.
-    type: Add
-  - message: Sentry laptop to engineering & requisition vendors
-    type: Add
-  - message: Many survivor jobs that only had marine IFF now have both survivor &
-      marine IFF.
-    type: Add
-  - message: Sentries will now only inherit the IFF / targeting of the Item IFF of
-      the person who placed it.
-    type: Tweak
-  - message: Identification console IFF will add / remove the marine faction without
-      removing existing faction(s).
-    type: Tweak
-  - message: Sentry targeting is now based on itemIFF (id cards)
-    type: Tweak
-  - message: People with IFF blocking a sentries LOS
-    type: Fix
-  - message: corpses no longer block sentry LOS
-    type: Fix
-  id: 2825
-  time: '2026-01-27T21:45:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8566
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Swapped the flash's direct hit paralyze time and stun baton's paralyze
-      time. The flash now stuns for 12 seconds and the baton for 20 seconds.
-    type: Tweak
-  id: 2826
-  time: '2026-01-27T21:47:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8999
 - author: TadJohnson00
   changes:
   - message: SPP and RCM uniforms can now be folded - sleeves and jackets.
@@ -4541,5 +4505,28 @@
   id: 3324
   time: '2026-06-08T01:55:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9872
+- author: MidZik
+  changes:
+  - message: Lessers do not remove you from the larva queue.
+    type: Fix
+  - message: Join larva queue dialog box makes it clear if you are joining or leaving
+      a queue.
+    type: Fix
+  - message: Fixed larva queue sometimes skipping people in the queue.
+    type: Fix
+  id: 3325
+  time: '2026-06-08T01:58:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10032
+- author: GrigoriyGalintano
+  changes:
+  - message: Fixed MB-6 folding barricades not fitting in the armor suit storage slot.
+    type: Fix
+  - message: Fixed MB-6 folding barricades missing their worn and inhand sprites.
+    type: Fix
+  - message: Fixed folding barricades needing to be collapsed one by one.
+    type: Fix
+  id: 3326
+  time: '2026-06-08T01:57:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10046
 Name: RMC14
 Order: -1
