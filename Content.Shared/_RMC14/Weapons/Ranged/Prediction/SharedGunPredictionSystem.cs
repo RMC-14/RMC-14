@@ -20,7 +20,7 @@ public abstract class SharedGunPredictionSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCGunPrediction, v => GunPrediction = v, true);
     }
 
-    public List<EntityUid>? ShootRequested(NetEntity netGun, NetCoordinates coordinates, NetEntity? target, List<int>? projectiles, ICommonSession session, bool continuous = false)
+    public List<EntityUid>? ShootRequested(NetEntity netGun, NetCoordinates coordinates, NetEntity? target, List<int>? projectiles, ICommonSession session, bool rearmSemiAuto = false)
     {
         var user = session.AttachedEntity;
 
@@ -38,8 +38,9 @@ public abstract class SharedGunPredictionSystem : EntitySystem
         gun.ShootCoordinates = GetCoordinates(coordinates);
         gun.Target = GetEntity(target);
 #pragma warning restore RA0002
-        if (continuous && !HasComp<GunClickToFireComponent>(ent))
+        if (rearmSemiAuto)
             _gun.ResetShotCounter(ent, gun);
-        return _gun.AttemptShoot(user.Value, ent, gun, projectiles, session);
+
+        return _gun.AttemptShoot(user.Value, ent, gun, projectiles, session, rearmSemiAuto);
     }
 }

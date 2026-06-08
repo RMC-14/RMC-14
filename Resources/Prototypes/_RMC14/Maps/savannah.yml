@@ -24,6 +24,7 @@
             CMChiefMP: [1, 1]
             CMMilitaryWarden: [1, 1]
             CMMilitaryPolice: [5, 8]
+            CMProvostInspector: [1, 1]
 
             # Auxiliary
             CMAuxiliarySupportOfficer: [1, 1]
@@ -63,3 +64,4 @@
 
             # Other
             CMLiaison: [1, 1]
+            RMCWeYaExecutiveBodyguard: [1, 1]
