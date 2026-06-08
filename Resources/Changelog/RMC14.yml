@@ -1,40 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed the M13 autopistol having a lower damage multiplier than intended,
-      of 0.65 times instead of 0.75 times. The extended recoil compensator now gives
-      the correct amount of plus 0.05, instead of plus 0.10, for a total of 0.75 without,
-      and 0.8 with, instead of 0.65 without, and 0.75 with.
-    type: Fix
-  - message: Fixed the M13 autopistol having a higher damage fall-off range than intended,
-      falling off at 4 tiles instead of the intended 3 tiles.
-    type: Fix
-  - message: Fixed the M13 autopistol having a higher accurate range than intended,
-      losing accuracy at 4 tiles instead of the intended 2 tiles.
-    type: Fix
-  - message: M13 ammo is now stored in a pistol ammunition box (10x20-APC) with 984
-      bullets, instead of the standard smg ammunition box (10x20).
-    type: Tweak
-  - message: Fixed being able to transfer ammo between M63 and M13 magazines via (10x20)
-      ammunition box.
-    type: Fix
-  id: 2829
-  time: '2026-01-27T21:59:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8808
-- author: noctyrnal
-  changes:
-  - message: You can now put RMC plushies on your head!
-    type: Add
-  id: 2830
-  time: '2026-01-27T22:00:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8862
-- author: CatAndHats
-  changes:
-  - message: Placed an extra turret to the south-eastern side of the north shiva LZ
-    type: Tweak
-  id: 2831
-  time: '2026-01-27T22:03:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9073
 - author: CatAndHats
   changes:
   - message: The Kutjevo south LZ alternative layout map insert now has turrets on
@@ -4539,5 +4503,27 @@
   id: 3328
   time: '2026-06-08T01:59:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10039
+- author: Thereisabear
+  changes:
+  - message: Fixed Resin Spikes and Acid Pillar having no build animations.
+    type: Fix
+  id: 3329
+  time: '2026-06-08T02:01:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10047
+- author: Ian321
+  changes:
+  - message: Escape pods and lifeboats should no longer crash land on top of each
+      other.
+    type: Fix
+  id: 3330
+  time: '2026-06-08T02:02:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9943
+- author: Vixting
+  changes:
+  - message: Fix upgrading resin wall attached to sinle door causing door to delete
+    type: Fix
+  id: 3331
+  time: '2026-06-08T02:01:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10058
 Name: RMC14
 Order: -1
