@@ -9,7 +9,9 @@
     group: CMJobsMedical
     time: 10800 # 3 hours
   ranks:
+    RMCRankPrivateFirstClass: []
     RMCRankLanceCorporal: []
+    RMCRankCorporal: []
   spawnMenuRoleName: Sun Rider Hospital Corpsman (PVE)
   startingGear: RMCGearPVEHospitalCorpsman
   dummyStartingGear: CMGearHospitalCorpsmanEquipped
