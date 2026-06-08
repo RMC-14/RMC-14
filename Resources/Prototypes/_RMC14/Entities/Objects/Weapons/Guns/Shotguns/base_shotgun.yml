@@ -68,6 +68,7 @@
   - type: Tag
     tags:
     - RMCWeaponShotgun
+  - type: GunClickToFire
   - type: RMCFireGroup
     group: Shotgun
     delay: 4
