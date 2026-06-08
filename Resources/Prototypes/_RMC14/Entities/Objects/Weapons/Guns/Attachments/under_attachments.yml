@@ -370,7 +370,6 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
       params:
         volume: -2
-  - type: GunClickToFire
   - type: RMCSelectiveFire
     baseFireRate: 0.476
   - type: GunDamageModifier
@@ -930,7 +929,6 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
       params:
         volume: -2
-  - type: GunClickToFire
   - type: GunDamageModifier
     multiplier: 0.66
   - type: RMCWeaponDamageFalloff
