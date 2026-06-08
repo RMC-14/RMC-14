@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Adds overlay to bombard, spray acid, burrow
-    type: Add
-  id: 2819
-  time: '2026-01-23T08:46:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9005
-- author: SharkSnake98
-  changes:
-  - message: Added the Cold Drinks vendor
-    type: Add
-  - message: Added WEYA Sequoia Beer to the Booze-O-Mat
-    type: Add
-  - message: Edited the sprite of the WEYA Cap
-    type: Tweak
-  id: 2820
-  time: '2026-01-23T09:51:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8817
 - author: BadaBoomie
   changes:
   - message: Fixed grinding phoron in a mixer giving half the intended amount.
@@ -4550,5 +4532,19 @@
   id: 3318
   time: '2026-06-08T01:44:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10064
+- author: Thereisabear
+  changes:
+  - message: Playing card actions are predicted now.
+    type: Fix
+  id: 3319
+  time: '2026-06-08T01:46:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10044
+- author: IceNoobXD
+  changes:
+  - message: Toxic water now respects catwalks!
+    type: Fix
+  id: 3320
+  time: '2026-06-08T01:47:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10054
 Name: RMC14
 Order: -1
