@@ -71,7 +71,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         SubscribeLocalEvent<XenoResinHoleComponent, XenoPlaceParasiteInHoleDoAfterEvent>(OnPlaceParasiteInXenoResinHoleDoAfter);
 
-        SubscribeLocalEvent<XenoResinHoleComponent, InteractHandEvent>(OnEmptyHandInteract);
+        SubscribeLocalEvent<XenoResinHoleComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<XenoResinHoleComponent, XenoPlaceFluidInHoleDoAfterEvent>(OnPlaceFluidInResinHole);
 
         SubscribeLocalEvent<XenoResinHoleComponent, DamageChangedEvent>(OnXenoResinHoleTakeDamage);
@@ -168,7 +168,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         args.Handled = true;
     }
 
-    private void OnEmptyHandInteract(Entity<XenoResinHoleComponent> resinHole, ref InteractHandEvent args)
+    private void OnActivateInWorld(Entity<XenoResinHoleComponent> resinHole, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
             return;
@@ -203,7 +203,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 if (!_xenoEnergy.HasEnergyPopup(args.User, ourAcid.Cost, false))
                     return;
             }
-            else 
+            else
             {
                 if (!_xenoPlasma.HasPlasmaPopup(args.User, ourAcid.Cost, false))
                     return;
