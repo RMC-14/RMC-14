@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Fixed xenos being able to interact with or open the storages of; toolboxes,
-      hazard vests, jackets, dice bags, snap pop boxes, pizza boxes, donut boxes,
-      water coolers, SMESs, portable air scrubbers, and reagent tanks. They can still
-      break or melt these items.
-    type: Fix
-  id: 2835
-  time: '2026-02-02T02:10:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8755
 - author: Bobert-Brockson
   changes:
   - message: Added labels, dosage, and overdose information for all stock pills. Even
@@ -4528,5 +4518,15 @@
   id: 3334
   time: '2026-06-08T02:22:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10067
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Sapper Boilers not getting a popup when they are empowered.
+    type: Fix
+  - message: Fixed Sapper Boiler acid mine damaging and destroying items in your inventory
+      such as sentries and anything contained within closets or crates.
+    type: Fix
+  id: 3335
+  time: '2026-06-08T02:35:02.002310+00:00'
+  url: null
 Name: RMC14
 Order: -1

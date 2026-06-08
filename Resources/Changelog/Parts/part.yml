@@ -1,6 +1,0 @@
-author: DrSmugleaf
-changes:
-  - type: Fix
-    message: Fixed Sapper Boilers not getting a popup when they are empowered.
-  - type: Fix
-    message: Fixed Sapper Boiler acid mine damaging and destroying items in your inventory such as sentries and anything contained within closets or crates.
