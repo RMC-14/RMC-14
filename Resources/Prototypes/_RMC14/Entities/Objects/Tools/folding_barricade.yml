@@ -22,6 +22,7 @@
     size: Large
   - type: Clothing
     quickEquip: false
+    sprite: _RMC14/Objects/Tools/folding_barricade.rsi
     slots:
     - suitStorage
     - Back
@@ -46,6 +47,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - RMCFoldingBarricade
 
 - type: entity
   parent: CMFoldingBarricade
