@@ -102,17 +102,12 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 
     private void OnBUIClosed(Entity<OverwatchConsoleComponent> ent, ref BoundUIClosedEvent args)
     {
-        if (_player.LocalEntity is not { } local)
+        if (_player.LocalEntity is not { } local || _player.LocalSession is not { } session)
             return;
 
-        if (args.Actor != local)
-            return;
-
-        // Make sure eye zoom is reset when pulled away from an overwatch console
-        if (HasComp<BeingPulledComponent>(local) && _player.LocalSession is { } session)
-        {
+        // Reset camera zoom/offset if pulled away from the overwatch console
+        if (HasComp<BeingPulledComponent>(local))
             Unwatch(local, session);
-        }
     }
 
     protected override void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)
