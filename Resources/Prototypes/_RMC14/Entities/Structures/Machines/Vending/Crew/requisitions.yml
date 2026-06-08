@@ -23,6 +23,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
+    layers:
+    - map: ["base"]
+      state: "off"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "base"
   - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
     baseSprite:
@@ -365,6 +370,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
+    layers:
+    - map: ["base"]
+      state: "off"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "base"
   - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
     baseSprite:
@@ -619,6 +629,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/attachments.rsi
+    layers:
+    - map: ["base"]
+      state: "off"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "base"
   - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
     baseSprite:
