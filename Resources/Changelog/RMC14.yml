@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: BadaBoomie
-  changes:
-  - message: Fixed grinding phoron in a mixer giving half the intended amount.
-    type: Fix
-  id: 2821
-  time: '2026-01-23T10:08:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8771
 - author: Ian321
   changes:
   - message: Moved the label on pills and injectors to the left.
@@ -4546,5 +4539,12 @@
   id: 3320
   time: '2026-06-08T01:47:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10054
+- author: Vixting
+  changes:
+  - message: Target dummies now have a DPS popup & examine text
+    type: Add
+  id: 3321
+  time: '2026-06-08T01:49:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10045
 Name: RMC14
 Order: -1
