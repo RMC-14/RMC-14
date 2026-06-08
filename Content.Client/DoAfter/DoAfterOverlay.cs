@@ -138,7 +138,7 @@ public sealed class DoAfterOverlay : Overlay
                     if(!sprite.Visible && uid != localEnt)
                        continue;
 
-                    //If the entity is a xeno and the target isn't, and target is hidden behind FOV shadow, don't show the doafter bar.
+                    // RMC:14 If the entity is a xeno and the target isn't, and target is hidden behind FOV shadow, don't show the doafter bar.
                     if(_entManager.HasComponent<XenoComponent>(localEnt) && !_entManager.HasComponent<XenoComponent>(uid) && !_examine.InRangeUnOccluded(uid, localEnt.Value))
                         continue;
 
