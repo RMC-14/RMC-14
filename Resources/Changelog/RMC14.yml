@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: SPP and RCM uniforms can now be folded - sleeves and jackets.
-    type: Tweak
-  id: 2827
-  time: '2026-01-27T21:46:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8900
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Survivor liaisons, ICB liaisons, ILRO observers, PMCs, WeYa goons, ERT
-      CMB, and ERT WeYa Execs now have tactical map icons.
-    type: Tweak
-  id: 2828
-  time: '2026-01-27T21:56:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9004
 - author: J C Denton
   changes:
   - message: Fixed the M13 autopistol having a lower damage multiplier than intended,
@@ -4528,5 +4513,31 @@
   id: 3326
   time: '2026-06-08T01:57:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10046
+- author: Vermidia
+  changes:
+  - message: Microwaves can now store huge items.
+    type: Tweak
+  id: 3327
+  time: '2026-06-08T02:00:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10036
+- author: Dygon
+  changes:
+  - message: Air dropped sentries no longer target resin.
+    type: Fix
+  - message: You're no longer able to set the lowest rank of a role as your rank preference.
+    type: Fix
+  - message: Parasites no longer need to use the verb menu to enter tunnels, vents
+      or to pass through acid holes.
+    type: Fix
+  - message: The sniper overlay no longer shows on a different map than that of the
+      sniper.
+    type: Fix
+  - message: Imaginary friends now have new player vision.
+    type: Fix
+  - message: Imaginary friends can now always use LOOC chat.
+    type: Fix
+  id: 3328
+  time: '2026-06-08T01:59:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10039
 Name: RMC14
 Order: -1
