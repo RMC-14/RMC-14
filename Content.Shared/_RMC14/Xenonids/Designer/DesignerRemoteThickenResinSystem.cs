@@ -64,10 +64,16 @@ public sealed class DesignerRemoteThickenResinSystem : EntitySystem
         var coords = Transform(target).Coordinates;
         var rotation = Transform(target).LocalRotation;
 
-        _xenoConstruction.BeginStructureUpgrade(target);
-        Del(target);
-        var thickened = Spawn(upgradeable.To.Value, coords);
-        _xenoConstruction.EndStructureUpgrade(target);
+        try
+        {
+            _xenoConstruction.BeginStructureUpgrade(target);
+            Del(target);
+            var thickened = Spawn(upgradeable.To.Value, coords);
+        }
+        finally
+        {
+            _xenoConstruction.EndStructureUpgrade(target);
+        }
         _transform.SetLocalRotation(thickened, rotation);
         _hive.SetSameHive(ent.Owner, thickened);
 

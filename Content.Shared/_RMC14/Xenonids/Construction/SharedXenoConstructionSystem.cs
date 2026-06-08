@@ -496,10 +496,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (_net.IsClient)
                 return;
 
-            BeginStructureUpgrade(upgradeable);
-            Del(upgradeable);
-            var spawn = Spawn(to, snapped);
-            EndStructureUpgrade(upgradeable);
+            try
+            {
+                BeginStructureUpgrade(upgradeable);
+                Del(upgradeable);
+                var spawn = Spawn(to, snapped);
+            }
+            finally
+            {
+                EndStructureUpgrade(upgradeable);
+            }
             _hive.SetSameHive(xeno.Owner, spawn);
             args.Handled = true;
             return;
