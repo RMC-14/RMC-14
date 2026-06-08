@@ -82,8 +82,6 @@ public sealed class DoAfterOverlay : Overlay
         var bounds = args.WorldAABB.Enlarged(5f);
         var localEnt = _player.LocalSession?.AttachedEntity;
 
-
-
         var metaQuery = _entManager.GetEntityQuery<MetaDataComponent>();
         var enumerator = _entManager.AllEntityQueryEnumerator<ActiveDoAfterComponent, DoAfterComponent, SpriteComponent, TransformComponent>();
         while (enumerator.MoveNext(out var uid, out _, out var comp, out var sprite, out var xform))
