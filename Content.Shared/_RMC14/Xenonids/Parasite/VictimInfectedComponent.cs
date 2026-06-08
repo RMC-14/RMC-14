@@ -86,9 +86,6 @@ public sealed partial class VictimInfectedComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? Hive;
 
-    /// <summary>
-    ///     The player who infected this victim with the parasite, if player-controlled. Server-only.
-    /// </summary>
     [DataField]
     public NetUserId? InfectorUserId;
 

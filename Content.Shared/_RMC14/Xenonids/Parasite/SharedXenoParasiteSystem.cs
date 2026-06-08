@@ -477,7 +477,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (!CanInfectPopup(parasite, victim, user))
             return false;
 
-        if (TryComp<ActorComponent>(user, out var actor))
+        if (_net.IsServer && TryComp<ActorComponent>(user, out var actor))
             parasite.Comp.PendingInfectorUserId = actor.PlayerSession.UserId;
 
         var ev = new AttachParasiteDoAfterEvent();
@@ -929,7 +929,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", victim)), victim, shakeFilter, true, PopupType.LargeCaution);
                 _jitter.DoJitter(victim, comp.JitterTime / 1.2, true, 14f, 5f, true); // violent jitter
-
             }
 
             var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
@@ -967,7 +966,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         }
 
         Dirty(ent);
-
         RemCompDeferred<VictimInfectedComponent>(ent);
 
         _audio.PlayPvs(ent.Comp.BurstSound, args.User);

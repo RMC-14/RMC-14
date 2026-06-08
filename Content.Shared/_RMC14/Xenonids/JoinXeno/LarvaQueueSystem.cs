@@ -582,19 +582,6 @@ public sealed class LarvaQueueSystem : EntitySystem
         return false;
     }
 
-    /// <summary>
-    /// This will remove them from all queues.
-    /// </summary>
-    /// <param name="actor">The actor component of the entity</param>
-    private void RemoveFromAllQueues(ActorComponent actor)
-    {
-        var hives = EntityQueryEnumerator<HiveComponent>();
-        while (hives.MoveNext(out var hiveId, out var hive))
-        {
-            TryRemoveFromQueue(actor.PlayerSession.UserId, (hiveId, hive));
-        }
-    }
-
     private void RemoveFromAllQueues(NetUserId netUserId)
     {
         var hives = EntityQueryEnumerator<HiveComponent>();
@@ -668,7 +655,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         foreach (var uid in readyXenos)
         {
             _pendingXenoOffer.Remove(uid);
-            if (TerminatingOrDeleted(uid) || _mobState.IsDead(uid))
+            if (TerminatingOrDeleted(uid))
                 continue;
 
             EnsureComp<LarvaQueuedComponent>(uid);
