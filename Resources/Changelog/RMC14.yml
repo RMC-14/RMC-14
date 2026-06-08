@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: RosySaturniidae
-  changes:
-  - message: new slime noises!
-    type: Add
-  id: 2813
-  time: '2026-01-23T04:03:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9047
 - author: shibechef
   changes:
   - message: Xenonid leaps are no longer stopped by boiler fog
@@ -4538,5 +4531,13 @@
   id: 3312
   time: '2026-06-07T20:54:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10048
+- author: Vixting
+  changes:
+  - message: Fixed fire rate being slightly lower with high fire rate weapons using
+      continuous fire
+    type: Fix
+  id: 3313
+  time: '2026-06-08T01:15:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10041
 Name: RMC14
 Order: -1
