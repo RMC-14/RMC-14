@@ -58,6 +58,14 @@
   - ProvostSecuritySatchel
 
 - type: loadoutGroup
+  id: ExecutiveSecurityGuardBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - ExecutiveSecurityGuardSatchel
+
+- type: loadoutGroup
   id: RoyalBackpack
   name: rmc-loadout-group-backpack
   minLimit: 1
@@ -922,7 +930,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -945,7 +953,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -957,7 +965,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
