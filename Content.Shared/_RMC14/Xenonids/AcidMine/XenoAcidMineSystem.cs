@@ -125,6 +125,8 @@ public sealed class XenoAcidMineSystem : EntitySystem
     public void EmpowerAcidMine(Entity<XenoAcidMineComponent> xeno)
     {
         xeno.Comp.Empowered = true;
+        Dirty(xeno);
+
         foreach (var action in _actions.GetActions(xeno.Owner))
         {
             if (_actions.GetEvent(action) is XenoAcidMineActionEvent)

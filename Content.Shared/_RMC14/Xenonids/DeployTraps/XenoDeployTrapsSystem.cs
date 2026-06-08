@@ -163,9 +163,6 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
 
     private void DeployTrapsEmpower(Entity<XenoDeployTrapsComponent> xeno)
     {
-        if (!_net.IsServer)
-            return;
-
         if (TryComp(xeno.Owner, out XenoAcidMineComponent? acidMine))
             _acidMine.EmpowerAcidMine((xeno.Owner, acidMine));
 
