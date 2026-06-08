@@ -100,7 +100,6 @@ public sealed class LarvaQueueSystem : EntitySystem
                 if (Queue.TryGetValue(hiveEntity, out var nq)) nq.Remove(victimId);
                 if (PreQueue.TryGetValue(hiveEntity, out var pq)) pq.Remove(victimId);
                 BurstVictimSet.GetOrNew(hive).Add(victimId);
-                NotifyPlayer(victimId, "You have been added to the xeno queue with burst-victim priority.");
             }
         }
 
@@ -115,7 +114,6 @@ public sealed class LarvaQueueSystem : EntitySystem
                 if (Queue.TryGetValue(hiveEntity, out var nq)) nq.Remove(infectorId);
                 if (PreQueue.TryGetValue(hiveEntity, out var pq)) pq.Remove(infectorId);
                 InfectorSet.GetOrNew(hive).Add(infectorId);
-                NotifyPlayer(infectorId, "You have been added to the xeno queue with infector priority.");
             }
         }
 
@@ -630,12 +628,6 @@ public sealed class LarvaQueueSystem : EntitySystem
         }
 
         return -1;
-    }
-
-    private void NotifyPlayer(NetUserId userId, string message)
-    {
-        if (_player.TryGetSessionById(userId, out var session) && session.AttachedEntity != null)
-            _popup.PopupEntity(message, session.AttachedEntity.Value, session.AttachedEntity.Value);
     }
 
     public override void Update(float frameTime)
