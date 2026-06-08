@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Moved the label on pills and injectors to the left.
-    type: Tweak
-  id: 2822
-  time: '2026-01-23T10:15:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8321
 - author: to4no_fix
   changes:
   - message: Squads now have a Primary and Secondary objective, which can be changed
@@ -4546,5 +4539,13 @@
   id: 3321
   time: '2026-06-08T01:49:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10045
+- author: Vixting
+  changes:
+  - message: Fix weeds on acid hole blocking going through the hole (had to use context
+      menu)
+    type: Fix
+  id: 3322
+  time: '2026-06-08T01:51:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10038
 Name: RMC14
 Order: -1
