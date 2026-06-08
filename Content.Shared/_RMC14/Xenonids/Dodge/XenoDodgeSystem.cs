@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Mobs.Components;
@@ -7,6 +8,7 @@ using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using System.Security.Cryptography;
 
 namespace Content.Shared._RMC14.Xenonids.Dodge;
 
@@ -38,23 +40,21 @@ public sealed class XenoDodgeSystem : EntitySystem
 
     private void OnXenoActionDodge(Entity<XenoDodgeComponent> xeno, ref XenoDodgeActionEvent args)
     {
-        if (args.Handled)
-            return;
-
-        if (!_plasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
-            return;
-
-        args.Handled = true;
-
-        if (_net.IsClient)
-            return;
-
-        EnsureComp<XenoActiveDodgeComponent>(xeno).ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
-        _speed.RefreshMovementSpeedModifiers(xeno);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-dodge-self"), xeno, xeno, PopupType.Medium);
-        foreach (var action in _rmcActions.GetActionsWithEvent<XenoDodgeActionEvent>(xeno))
+        if (TryComp<XenoActiveDodgeComponent>(xeno, out var dodge))
         {
-            _actions.SetToggled(action.AsNullable(), true);
+            var refundedCooldown = GetCooldown(xeno, dodge, xeno.Comp.RefundMultiplier);
+            StartCooldown((xeno, dodge), refundedCooldown, false);
+            RemCompDeferred<XenoActiveDodgeComponent>(xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-dodge-end-manual"), xeno, xeno, PopupType.MediumCaution);
+        }
+        else
+        {
+            var dodging = EnsureComp<XenoActiveDodgeComponent>(xeno);
+            dodging.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
+            _speed.RefreshMovementSpeedModifiers(xeno);
+            //Half a second cooldown to prevent double clicks - longer than lurkers
+            StartCooldown((xeno, dodging), xeno.Comp.ToggleLockoutTime, true);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-dodge-self"), xeno, xeno, PopupType.Medium);
         }
     }
 
@@ -93,12 +93,14 @@ public sealed class XenoDodgeSystem : EntitySystem
 
         var time = _timing.CurTime;
 
-        var dodgeQuery = EntityQueryEnumerator<XenoActiveDodgeComponent>();
+        var dodgeQuery = EntityQueryEnumerator<XenoActiveDodgeComponent, XenoDodgeComponent>();
 
-        while (dodgeQuery.MoveNext(out var uid, out var speed))
+        while (dodgeQuery.MoveNext(out var uid, out var speed, out var dodge))
         {
             if (speed.ExpiresAt < time)
             {
+                var cooldown = GetCooldown((uid, dodge), speed, dodge.RefundMultiplier);
+                StartCooldown((uid, speed), dodge.Duration, false);
                 RemCompDeferred<XenoActiveDodgeComponent>(uid);
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-dodge-end"), uid, uid, PopupType.MediumCaution);
                 continue;
@@ -122,6 +124,25 @@ public sealed class XenoDodgeSystem : EntitySystem
 
             speed.InCrowd = crowd;
             _speed.RefreshMovementSpeedModifiers(uid);
+        }
+    }
+
+    private TimeSpan GetCooldown(Entity<XenoDodgeComponent> xeno, XenoActiveDodgeComponent active, float refundMultiplier)
+    {
+        var remainingRatio = 1 - (active.ExpiresAt - _timing.CurTime) / xeno.Comp.Duration; // Current Time - StartTime / Duration
+        //Should be double it's duration if it runs out naturally
+        var refundedCooldown = Math.Max((int)(xeno.Comp.Duration * remainingRatio * refundMultiplier).TotalSeconds, (int)xeno.Comp.MinimumCooldown.TotalSeconds);
+
+        return new TimeSpan(0, 0, refundedCooldown);
+    }
+
+    private void StartCooldown(Entity<XenoActiveDodgeComponent> xeno, TimeSpan cooldownTime, bool toggledStatus)
+    {
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoDodgeActionEvent>(xeno))
+        {
+            var actionEnt = action.AsNullable();
+            _actions.SetCooldown(actionEnt, cooldownTime);
+            _actions.SetToggled(actionEnt, toggledStatus);
         }
     }
 }

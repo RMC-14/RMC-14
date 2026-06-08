@@ -1,4 +1,4 @@
-﻿using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -24,6 +24,13 @@ public sealed class XenoFinesseSystem : EntitySystem
                 continue;
 
             var comp = EnsureComp<XenoMarkedComponent>(ent);
+
+            if (comp.IsSpreadTag)
+            {
+                //Consume it
+                comp.IsSpreadTag = false;
+            }
+
             comp.WearOffAt = _timing.CurTime + xeno.Comp.MarkedTime;
             comp.TimeAdded = _timing.CurTime;
 

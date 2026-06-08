@@ -336,8 +336,9 @@ rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge 
 rmc-xeno-sacrifice-heal-announce = ;OUR SISTER WILL NOT DIE!!!
 
 # Dodge
-rmc-xeno-dodge-self = We can now weave through our enemies!
-rmc-xeno-dodge-end = We can no longer weave through our enemies!
+rmc-xeno-dodge-self = We can now weave through our enemies and allies!
+rmc-xeno-dodge-end = We can no longer weave through our enemies and allies!
+rmc-xeno-dodge-end-manual = We end our dance early!
 
 # Vanguard Shield
 rmc-xeno-shield-vanguard-hit = Our shield took the hit!

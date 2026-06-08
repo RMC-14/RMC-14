@@ -427,15 +427,15 @@
 - type: entity
   id: ActionXenoDodge
   parent: ActionXenoBase
-  name: Dodge (200)
-  description: Gain a speed boost for 7 seconds and move through allies and enemies unimpeded. Your speed is doubled near standing enemies.
+  name: Dodge
+  description: Gain a speed boost for 7 seconds and move through allies and enemies unimpeded. You dodge every 3rd bullet that would hit you. Can be toggled off early to stop dodging, cooldown is equal to twice the duration used.
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_dodge
-    useDelay: 19
+    useDelay: 13
   - type: InstantAction
     event: !type:XenoDodgeActionEvent
 

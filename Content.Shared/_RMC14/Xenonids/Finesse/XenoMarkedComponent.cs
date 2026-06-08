@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Finesse;
 
@@ -11,4 +11,7 @@ public sealed partial class XenoMarkedComponent : Component
 
     [DataField]
     public TimeSpan WearOffAt;
+
+    [DataField]
+    public bool IsSpreadTag = false;
 }

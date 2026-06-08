@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Dodge;
 
@@ -7,8 +7,14 @@ namespace Content.Shared._RMC14.Xenonids.Dodge;
 public sealed partial class XenoDodgeComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int PlasmaCost = 200;
+    public TimeSpan Duration = TimeSpan.FromSeconds(7);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Duration = TimeSpan.FromSeconds(7);
+    public float RefundMultiplier = 2f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ToggleLockoutTime = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan MinimumCooldown = TimeSpan.FromSeconds(5);
 }
