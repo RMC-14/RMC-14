@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Generator locations now have an icon on the tactical map
-    type: Add
-  id: 2817
-  time: '2026-01-23T07:02:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8992
 - author: Vixting
   changes:
   - message: Adds overlay to flamers to visualize which tiles you will set on fire,
@@ -4544,5 +4537,12 @@
   id: 3316
   time: '2026-06-08T01:41:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10061
+- author: Ian321
+  changes:
+  - message: Fultoned creates and bodies no longer get renamed.
+    type: Fix
+  id: 3317
+  time: '2026-06-08T01:43:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10057
 Name: RMC14
 Order: -1
