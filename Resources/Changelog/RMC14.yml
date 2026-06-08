@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Tweaked status effect duration applied by reagents to match parity. Notably,
-      Inaprovaline OD won't completely round remove you.
-    type: Tweak
-  id: 2816
-  time: '2026-01-23T05:35:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9052
 - author: CatAndHats
   changes:
   - message: Generator locations now have an icon on the tactical map
@@ -4538,5 +4530,19 @@
   id: 3315
   time: '2026-06-08T01:40:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10063
+- author: Simon
+  changes:
+  - message: Fixed incorrect populating method
+    type: Fix
+  - message: Members keep their hiveteam when evolving/devolving
+    type: Fix
+  - message: Queen Panels and Hiveleader Panels more uniform and slightly cleaner
+    type: Fix
+  - message: Hiveleader UI now will correctly de-populate dead or removed xenonids
+      from their panel.
+    type: Fix
+  id: 3316
+  time: '2026-06-08T01:41:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10061
 Name: RMC14
 Order: -1
