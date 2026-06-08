@@ -13,6 +13,7 @@ using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -25,6 +26,7 @@ public abstract class SharedAutodocSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -32,6 +34,8 @@ public abstract class SharedAutodocSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    private readonly HashSet<EntityUid> _intersecting = [];
 
     public override void Initialize()
     {
@@ -50,6 +54,8 @@ public abstract class SharedAutodocSystem : EntitySystem
         SubscribeLocalEvent<AutodocConsoleComponent, InteractUsingEvent>(OnConsoleInteractUsing);
 
         SubscribeLocalEvent<InsideAutodocComponent, MoveInputEvent>(OnInsideAutodocMoveInput);
+
+        SubscribeLocalEvent<OutsideAutodocComponent, PreventCollideEvent>(OnOutsideAutodocPreventCollide);
     }
 
     private void OnAutodocInit(Entity<AutodocComponent> autodoc, ref ComponentInit args)
@@ -232,11 +238,18 @@ public abstract class SharedAutodocSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
-        if (_net.IsServer)
-            _audio.PlayPvs(autodoc.Comp.EjectSound, autodoc);
+
+        var outside = EnsureComp<OutsideAutodocComponent>(occupant);
+        outside.Autodoc = autodoc;
+        Dirty(occupant, outside);
 
         if (autodoc.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(autodoc))
             _stun.TryStun(occupant, autodoc.Comp.ExitStun, true);
+
+        if (_net.IsClient)
+            return;
+
+        _audio.PlayPvs(autodoc.Comp.EjectSound, autodoc);
     }
 
     protected void UpdateAutodocVisuals(Entity<AutodocComponent> autodoc)
@@ -286,5 +299,30 @@ public abstract class SharedAutodocSystem : EntitySystem
             return;
 
         EjectOccupant((autodocId, autodoc), ent);
+    }
+
+    private void OnOutsideAutodocPreventCollide(Entity<OutsideAutodocComponent> ent, ref PreventCollideEvent args)
+    {
+        if (ent.Comp.Autodoc == args.OtherEntity)
+            args.Cancelled = true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<OutsideAutodocComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Autodoc is not { } autodoc)
+            {
+                RemCompDeferred<OutsideAutodocComponent>(uid);
+                continue;
+            }
+
+            _intersecting.Clear();
+            _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
+
+            if (!_intersecting.Contains(autodoc))
+                RemCompDeferred<OutsideAutodocComponent>(uid);
+        }
     }
 }

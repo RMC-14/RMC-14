@@ -9,6 +9,7 @@ using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.BodyScanner;
@@ -18,11 +19,14 @@ public abstract class SharedBodyScannerSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    private readonly HashSet<EntityUid> _intersecting = [];
 
     public override void Initialize()
     {
@@ -38,6 +42,8 @@ public abstract class SharedBodyScannerSystem : EntitySystem
         SubscribeLocalEvent<BodyScannerConsoleComponent, ActivateInWorldEvent>(OnConsoleActivateInWorld);
 
         SubscribeLocalEvent<InsideBodyScannerComponent, MoveInputEvent>(OnInsideBodyScannerMoveInput);
+
+        SubscribeLocalEvent<OutsideBodyScannerComponent, PreventCollideEvent>(OnOutsideBodyScannerPreventCollide);
     }
 
     private void OnBodyScannerInit(Entity<BodyScannerComponent> scanner, ref ComponentInit args)
@@ -196,11 +202,17 @@ public abstract class SharedBodyScannerSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
+
+        var outside = EnsureComp<OutsideBodyScannerComponent>(occupant);
+        outside.BodyScanner = scanner;
+        Dirty(occupant, outside);
+
         if (scanner.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(scanner))
             _stun.TryStun(occupant, scanner.Comp.ExitStun, true);
 
-        if (!_net.IsServer)
+        if (_net.IsClient)
             return;
+
         _audio.PlayPvs(scanner.Comp.EjectSound, scanner);
         _popup.PopupEntity(Loc.GetString("rmc-body-scanner-ejected", ("entity", occupant)), scanner);
     }
@@ -226,5 +238,30 @@ public abstract class SharedBodyScannerSystem : EntitySystem
             return;
 
         EjectOccupant((scannerId, scanner), ent);
+    }
+
+    private void OnOutsideBodyScannerPreventCollide(Entity<OutsideBodyScannerComponent> ent, ref PreventCollideEvent args)
+    {
+        if (ent.Comp.BodyScanner == args.OtherEntity)
+            args.Cancelled = true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<OutsideBodyScannerComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.BodyScanner is not { } scanner)
+            {
+                RemCompDeferred<OutsideBodyScannerComponent>(uid);
+                continue;
+            }
+
+            _intersecting.Clear();
+            _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
+
+            if (!_intersecting.Contains(scanner))
+                RemCompDeferred<OutsideBodyScannerComponent>(uid);
+        }
     }
 }
