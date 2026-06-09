@@ -48,7 +48,8 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     public record struct Screen(
         DropshipTerminalWeaponsScreen State,
         NetEntity? Weapon,
-        NetEntity? System
+        NetEntity? System,
+        bool QuickMode
     );
 
     [DataRecord]

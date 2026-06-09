@@ -6,6 +6,9 @@
   id: CMDoubleDoorBase
   components:
   - type: CMDoubleDoor
+  - type: RMCWeldEffectSource
+    startingOffset: 0.45, -0.5
+    endingOffset: -0.45, -0.5
   - type: Door
     openSpriteState: door_open
     closedSpriteState: door_closed
