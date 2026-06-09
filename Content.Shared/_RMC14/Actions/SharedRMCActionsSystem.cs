@@ -164,7 +164,7 @@ public abstract class SharedRMCActionsSystem : EntitySystem
         if (args.Target is not { } target)
             return;
 
-        if (!_interaction.InRangeUnobstructed(args.User, target, ent.Comp.Range))
+        if (!_interaction.InRangeUnobstructed(args.User, target, ent.Comp.Range, logPrefix: "OnInRangeUnobstructedUseAttempt"))
             args.Cancelled = true;
     }
 

@@ -878,7 +878,27 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!comp.Enabled)
             return false;
 
-        var curTime = GameTiming.CurTime;
+        // RMC start
+        TimeSpan curTime;
+        if (GameTiming.InSimulation)
+        {
+            curTime = GameTiming.CurTime;
+        }
+        else
+        {
+            // When we're not in simulation, we need to check if the action will be
+            // on cooldown at the start of the NEXT tick, because actions we do out
+            // of simulation should be queued to run at the start of the next tick.
+
+            // We calculate CurTime for the next tick manually here, instead of
+            // using GameTime.CurTime directly. The calculation should be exactly
+            // the same as GameTiming.CurTime, code is copied from it.
+            var (time, lastTimeTick) = GameTiming.TimeBase;
+            var ticks = GameTiming.CurTick.Value - lastTimeTick.Value + 1; // the +1 makes it the next tick.
+            curTime = time + GameTiming.TickPeriod.Mul(ticks);
+        }
+        // RMC end
+
         if (comp.Cooldown.HasValue && comp.Cooldown.Value.End > curTime)
             return false;
 
