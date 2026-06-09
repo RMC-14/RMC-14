@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the honor guard M890 not starting with buckshot.
-    type: Fix
-  - message: Fixed the M890 tactical shotgun not starting with slugs.
-    type: Fix
-  - message: Fixed the M890 riot shotgun not starting with beanbags
-    type: Fix
-  id: 2837
-  time: '2026-02-02T02:17:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8895
 - author: Thereisabear
   changes:
   - message: Synthetics ability to grab certain Xenos, large Xenos will knock back
@@ -4528,5 +4517,12 @@
   id: 3336
   time: '2026-06-09T10:16:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9847
+- author: Vermidia
+  changes:
+  - message: Fixed acid being extinguishable off of non-guns
+    type: Fix
+  id: 3337
+  time: '2026-06-09T16:48:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10082
 Name: RMC14
 Order: -1
