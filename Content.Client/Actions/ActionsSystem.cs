@@ -83,9 +83,6 @@ namespace Content.Client.Actions
             if (!GameTiming.IsFirstTimePredicted)
                 return;
 
-            if (_requested.Count > 0)
-                _rmcLagCompensation.SendLastRealTick();
-
             RequestPerformActionEvent ev;
             while (_requested.TryDequeue(out var request))
             {
