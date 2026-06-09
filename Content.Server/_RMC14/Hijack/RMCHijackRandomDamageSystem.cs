@@ -4,10 +4,10 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Hijack;
 using Content.Shared.Damage;
+using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
-using Robust.Shared.Audio;
+using Content.Shared.GameTicking;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -31,10 +31,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     private static readonly EntProtoId BrokenPipe = "GasPipeBroken";
     private static readonly EntProtoId PipeFire = "RMCHijackPipeFire";
     private static readonly EntProtoId PipeExplosionWarning = "RMCHijackPipeExplosionWarning";
-    private static readonly SoundSpecifier PipeHiss = new SoundPathSpecifier("/Audio/Ambience/Objects/gas_hiss.ogg");
-
-    private static readonly TimeSpan PipeBarrageInterval = TimeSpan.FromSeconds(15);
-    private static readonly TimeSpan PipeWarningDelay = TimeSpan.FromSeconds(5);
+    private static readonly ProtoId<ExplosionPrototype> Explosion = "RMC";
 
     // These ranges intentionally select a small random subset of existing map targets instead of wiping categories.
     private const float WallMinPercent = 0.03f;
@@ -56,41 +53,22 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     private readonly List<(EntityUid Uid, RMCHijackRandomDamageTargetComponent Comp)> _wallTargets = new();
     private readonly List<(EntityUid Uid, RMCHijackRandomDamageTargetComponent Comp)> _windowTargets = new();
     private readonly List<(EntityUid Uid, RMCHijackRandomDamageTargetComponent Comp)> _windoorTargets = new();
-    private readonly List<EntityUid> _pipeTargets = new();
-    private readonly List<EntityUid> _barrageMaps = new();
-    private readonly Dictionary<EntityUid, TimeSpan> _nextPipeBarrage = new();
-    private readonly HashSet<EntityUid> _usedPipeTargets = new();
-    private readonly HashSet<EntityUid> _pendingPipeTargets = new();
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
+
+        SubscribeLocalEvent<RMCHijackActivePipeComponent, ComponentRemove>(OnPipeRemove);
+        SubscribeLocalEvent<RMCHijackActivePipeComponent, EntityTerminatingEvent>(OnPipeRemove);
+        SubscribeLocalEvent<RMCHijackActivePipeComponent, AnchorStateChangedEvent>(OnPipeAnchorChanged);
     }
 
-    public override void Update(float frameTime)
+    private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
-        if (_nextPipeBarrage.Count == 0)
-            return;
-
-        var now = _timing.CurTime;
-        _barrageMaps.Clear();
-
-        foreach (var (map, nextBarrage) in _nextPipeBarrage)
-        {
-            if (nextBarrage <= now)
-                _barrageMaps.Add(map);
-        }
-
-        foreach (var map in _barrageMaps)
-        {
-            if (Deleted(map))
-            {
-                _nextPipeBarrage.Remove(map);
-                continue;
-            }
-
-            DoPipeBarrage(map);
-        }
+        _wallTargets.Clear();
+        _windowTargets.Clear();
+        _windoorTargets.Clear();
     }
 
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
@@ -99,12 +77,23 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         _windowTargets.Clear();
         _windoorTargets.Clear();
 
+        var map = EnsureComp<RMCHijackActiveMapComponent>(ev.Map);
+
         // Build pools from the landing map only; hijack damage must never spill into other maps.
         var query = EntityQueryEnumerator<RMCHijackRandomDamageTargetComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var comp, out var xform))
         {
             if (!comp.Enabled || xform.MapUid != ev.Map)
                 continue;
+
+            if (comp.Category == RMCHijackRandomDamageCategory.Pipe)
+            {
+                var pipe = EnsureComp<RMCHijackActivePipeComponent>(uid);
+                pipe.Map = ev.Map;
+
+                if (xform.Anchored)
+                    map.Pipes.Add(uid);
+            }
 
             // Structural hijack damage only uses prototypes with a normal damage/destructible flow.
             if (comp.Category != RMCHijackRandomDamageCategory.Pipe &&
@@ -132,6 +121,30 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         ApplyRandomDamage(_windoorTargets, WindoorMinPercent, WindoorMaxPercent);
 
         DoPipeBarrage(ev.Map, PipeInitialMinPercent, PipeInitialMaxPercent);
+    }
+
+    private void OnPipeRemove<T>(Entity<RMCHijackActivePipeComponent> ent, ref T args)
+    {
+        if (TerminatingOrDeleted(ent.Comp.Map))
+            return;
+
+        if (TryComp(ent.Comp.Map, out RMCHijackActiveMapComponent? map))
+            map.Pipes.Remove(ent);
+    }
+
+    private void OnPipeAnchorChanged(Entity<RMCHijackActivePipeComponent> ent, ref AnchorStateChangedEvent args)
+    {
+        if (TerminatingOrDeleted(ent.Comp.Map) ||
+            !TryComp(ent.Comp.Map, out RMCHijackActiveMapComponent? map) ||
+            args.Detaching)
+        {
+            return;
+        }
+
+        if (args.Anchored)
+            map.Pipes.Add(ent);
+        else
+            map.Pipes.Remove(ent);
     }
 
     /// <summary>
@@ -196,59 +209,46 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     /// <summary>
     ///     Selects a random percentage of remaining pipe targets and schedules their delayed explosions.
     /// </summary>
-    private void DoPipeBarrage(EntityUid map, float minPercent = PipeMinPercent, float maxPercent = PipeMaxPercent)
+    private void DoPipeBarrage(Entity<RMCHijackActiveMapComponent?> map, float minPercent = PipeMinPercent, float maxPercent = PipeMaxPercent)
     {
-        _pipeTargets.Clear();
+        if (!Resolve(map, ref map.Comp, false))
+            return;
 
-        var query = EntityQueryEnumerator<RMCHijackRandomDamageTargetComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var xform))
-        {
-            if (!comp.Enabled ||
-                comp.Category != RMCHijackRandomDamageCategory.Pipe ||
-                xform.MapUid != map ||
-                !xform.Anchored ||
-                _usedPipeTargets.Contains(uid) ||
-                _pendingPipeTargets.Contains(uid))
-            {
-                continue;
-            }
-
-            _pipeTargets.Add(uid);
-        }
-
-        var count = GetRandomCount(_pipeTargets.Count, minPercent, maxPercent);
+        var count = GetRandomCount(map.Comp.Pipes.Count, minPercent, maxPercent);
         if (count == 0)
         {
-            _nextPipeBarrage.Remove(map);
+            RemCompDeferred<RMCHijackActiveMapComponent>(map);
             return;
         }
 
-        _random.Shuffle(_pipeTargets);
+        while (count > 0 && map.Comp.Pipes.Count > 0)
+        {
+            count--;
+            var pipe = _random.Pick(map.Comp.Pipes);
+            map.Comp.Pipes.Remove(pipe);
+            StartPipeWarning((map, map.Comp), pipe);
+        }
 
-        for (var i = 0; i < count; i++)
-            StartPipeWarning(_pipeTargets[i]);
-
-        _nextPipeBarrage[map] = _timing.CurTime + PipeBarrageInterval;
+        map.Comp.Next = _timing.CurTime + map.Comp.NextDelay;
     }
 
     /// <summary>
     ///     Telegraphs a pipe explosion before bursting it, matching CM-SS13's delayed hijack barrage.
     /// </summary>
-    private void StartPipeWarning(EntityUid pipe)
+    private void StartPipeWarning(Entity<RMCHijackActiveMapComponent> map, EntityUid pipe)
     {
         if (Deleted(pipe) ||
             !TryComp(pipe, out TransformComponent? xform) ||
-            !xform.Anchored ||
-            !_usedPipeTargets.Add(pipe))
+            !xform.Anchored)
         {
             return;
         }
 
-        _pendingPipeTargets.Add(pipe);
         Spawn(PipeExplosionWarning, _transform.GetMoverCoordinates(pipe, xform));
-        _audio.PlayPvs(PipeHiss, pipe);
+        _audio.PlayPvs(map.Comp.PipeHiss, pipe);
 
-        Timer.Spawn(PipeWarningDelay, () => BurstPipe(pipe));
+        map.Comp.Explode.Add(pipe);
+        map.Comp.ExplodeAt = _timing.CurTime + map.Comp.ExplodeDelay;
     }
 
     /// <summary>
@@ -256,8 +256,6 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     /// </summary>
     private void BurstPipe(EntityUid pipe)
     {
-        _pendingPipeTargets.Remove(pipe);
-
         if (Deleted(pipe) ||
             !TryComp(pipe, out TransformComponent? xform) ||
             xform.MapUid == null ||
@@ -272,7 +270,7 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
 
         _rmcExplosion.QueueExplosion(
             mapCoordinates,
-            "RMC",
+            Explosion,
             PipeExplosionTotal,
             PipeExplosionSlope,
             PipeExplosionMax,
@@ -296,5 +294,35 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
 
         var percent = _random.NextFloat(minPercent, maxPercent);
         return Math.Clamp((int) MathF.Round(poolCount * percent), 1, poolCount);
+    }
+
+    public override void Update(float frameTime)
+    {
+        var time = _timing.CurTime;
+        var query = EntityQueryEnumerator<RMCHijackActiveMapComponent>();
+        while (query.MoveNext(out var uid, out var active))
+        {
+            if (active.ExplodeAt != null && time >= active.ExplodeAt.Value)
+            {
+                active.ExplodeAt = null;
+
+                try
+                {
+                    foreach (var explode in active.Explode)
+                    {
+                        BurstPipe(explode);
+                    }
+                }
+                finally
+                {
+                    active.Explode.Clear();
+                }
+            }
+
+            if (time < active.Next)
+                continue;
+
+            DoPipeBarrage((uid, active));
+        }
     }
 }

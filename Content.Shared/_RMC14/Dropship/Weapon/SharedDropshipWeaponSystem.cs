@@ -344,9 +344,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var prototype = metaData.EntityPrototype.ID;
 
-        var camera = EnsureComp<RMCCameraComponent>(ent);
-        _rmcCamera.SetCameraName(ent, $"{Name(ent)} [{ent.Comp.Abbreviation}]", camera);
-        _rmcCamera.SetCameraId(ent, prototype, camera);
+        AddComp(ent, new RMCCameraComponent
+        {
+            Id = prototype,
+            Rename = false,
+            NameOverride = $"{Name(ent)} [{ent.Comp.Abbreviation}]",
+        }, true);
+
         _rmcCamera.RefreshCameras(prototype);
     }
 
@@ -1127,6 +1131,17 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         {
             if (!IsValidTarget(target))
                 return;
+
+            if (!TryComp(dropship, out FTLComponent? ftl) ||
+                ftl.State != FTLState.Travelling)
+            {
+                if (_net.IsClient)
+                {
+                    var msg = Loc.GetString("rmc-dropship-launch-bay-fire-not-flying");
+                    _popup.PopupCursor(msg, args.Actor, PopupType.SmallCaution);
+                }
+                return;
+            }
 
             if (!_area.CanCAS(target.ToCoordinates()))
             {
