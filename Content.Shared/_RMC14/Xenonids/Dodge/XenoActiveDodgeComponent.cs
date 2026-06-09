@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Dodge;
@@ -11,6 +11,9 @@ public sealed partial class XenoActiveDodgeComponent : Component
     public FixedPoint2 SpeedMult = FixedPoint2.New(0.25);
 
     [DataField]
+    public int SwiftStepsMod = -3;
+
+    [DataField]
     public FixedPoint2 CrowdSpeedAddMult = FixedPoint2.New(0.25);
 
     [DataField]
@@ -21,4 +24,7 @@ public sealed partial class XenoActiveDodgeComponent : Component
 
     [DataField]
     public bool InCrowd = false;
+
+    [DataField]
+    public bool CheckCrowd = false;
 }

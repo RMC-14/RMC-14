@@ -17,4 +17,7 @@ public sealed partial class XenoDodgeComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan MinimumCooldown = TimeSpan.FromSeconds(5);
+
+    [DataField, AutoNetworkedField]
+    public bool CheckCrowd = false;
 }

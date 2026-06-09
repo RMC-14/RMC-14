@@ -1,6 +1,6 @@
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.SwiftSteps;
 using Content.Shared.Actions;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
@@ -8,7 +8,6 @@ using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using System.Security.Cryptography;
 
 namespace Content.Shared._RMC14.Xenonids.Dodge;
 
@@ -36,6 +35,7 @@ public sealed class XenoDodgeSystem : EntitySystem
         SubscribeLocalEvent<XenoActiveDodgeComponent, ComponentRemove>(OnActiveDodgeRemove);
         SubscribeLocalEvent<XenoActiveDodgeComponent, AttemptMobCollideEvent>(OnActiveDodgeAttemptMobCollide);
         SubscribeLocalEvent<XenoActiveDodgeComponent, AttemptMobTargetCollideEvent>(OnActiveDodgeAttemptMobTargetCollide);
+        SubscribeLocalEvent<XenoActiveDodgeComponent, RMCGetSwiftStepsThresholdEvent>(OnActiveDodgeGetDodgeThreshold);
     }
 
     private void OnXenoActionDodge(Entity<XenoDodgeComponent> xeno, ref XenoDodgeActionEvent args)
@@ -51,6 +51,7 @@ public sealed class XenoDodgeSystem : EntitySystem
         {
             var dodging = EnsureComp<XenoActiveDodgeComponent>(xeno);
             dodging.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
+            dodging.CheckCrowd = xeno.Comp.CheckCrowd;
             _speed.RefreshMovementSpeedModifiers(xeno);
             //Half a second cooldown to prevent double clicks - longer than lurkers
             StartCooldown((xeno, dodging), xeno.Comp.ToggleLockoutTime, true);
@@ -62,6 +63,11 @@ public sealed class XenoDodgeSystem : EntitySystem
     {
         var modifier = (1.0 + xeno.Comp.SpeedMult + (xeno.Comp.InCrowd ? xeno.Comp.CrowdSpeedAddMult : 0)).Float();
         args.ModifySpeed(modifier, modifier);
+    }
+
+    private void OnActiveDodgeGetDodgeThreshold(Entity<XenoActiveDodgeComponent> xeno, ref RMCGetSwiftStepsThresholdEvent args)
+    {
+        args.Threshold += xeno.Comp.SwiftStepsMod;
     }
 
     private void OnActiveDodgeRemove(Entity<XenoActiveDodgeComponent> xeno, ref ComponentRemove args)
@@ -106,6 +112,9 @@ public sealed class XenoDodgeSystem : EntitySystem
                 continue;
             }
 
+            if (!speed.CheckCrowd)
+                continue;
+
             _crowd.Clear();
             _lookup.GetEntitiesInRange(Transform(uid).Coordinates, speed.CrowdRange, _crowd);
 
@@ -133,7 +142,7 @@ public sealed class XenoDodgeSystem : EntitySystem
         //Should be double it's duration if it runs out naturally
         var refundedCooldown = Math.Max((int)(xeno.Comp.Duration * remainingRatio * refundMultiplier).TotalSeconds, (int)xeno.Comp.MinimumCooldown.TotalSeconds);
 
-        return new TimeSpan(0, 0, refundedCooldown);
+        return TimeSpan.FromSeconds(refundedCooldown);
     }
 
     private void StartCooldown(Entity<XenoActiveDodgeComponent> xeno, TimeSpan cooldownTime, bool toggledStatus)
