@@ -214,6 +214,7 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCToolWebbingSmallFilled
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
