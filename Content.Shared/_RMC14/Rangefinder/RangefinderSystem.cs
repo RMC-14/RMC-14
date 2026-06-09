@@ -41,8 +41,6 @@ public sealed class RangefinderSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
-    private static readonly TimeSpan LosCheckInterval = TimeSpan.FromSeconds(5);
-    private TimeSpan _nextLosCheck = TimeSpan.Zero;
 
     public override void Initialize()
     {
