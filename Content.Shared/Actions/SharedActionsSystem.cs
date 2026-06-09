@@ -878,26 +878,18 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!comp.Enabled)
             return false;
 
-        // RMC start
-        TimeSpan curTime;
-        if (GameTiming.InSimulation)
-        {
-            curTime = GameTiming.CurTime;
-        }
-        else
-        {
-            // When we're not in simulation, we need to check if the action will be
-            // on cooldown at the start of the NEXT tick, because actions we do out
-            // of simulation should be queued to run at the start of the next tick.
+        // RMC14
+        // When we're not in simulation, such as when using actions, CurTime might be a value
+        // that's between ticks. We queue actions for the next update cycle, so we also have
+        // to make sure CurTime will have the same value here as during that cycle. We can do
+        // this by temporarily setting InSimulation to true, which changes how CurTime is
+        // calculated so that it matches what it WILL be during the updates.
+        var oldInSim = GameTiming.InSimulation; // RMC14
+        GameTiming.InSimulation = true; // RMC14
 
-            // We calculate CurTime for the next tick manually here, instead of
-            // using GameTime.CurTime directly. The calculation should be exactly
-            // the same as GameTiming.CurTime, code is copied from it.
-            var (time, lastTimeTick) = GameTiming.TimeBase;
-            var ticks = GameTiming.CurTick.Value - lastTimeTick.Value + 1; // the +1 makes it the next tick.
-            curTime = time + GameTiming.TickPeriod.Mul(ticks);
-        }
-        // RMC end
+        var curTime = GameTiming.CurTime;
+
+        GameTiming.InSimulation = oldInSim; // RMC14
 
         if (comp.Cooldown.HasValue && comp.Cooldown.Value.End > curTime)
             return false;
