@@ -364,6 +364,15 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/drill_hat.rsi
 
 - type: entity
+  parent: CMHeadCapDrill
+  id: RMCHeadCapDrillXippy
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/xippy_hat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/xippy_hat.rsi
+
+- type: entity
   parent: RMCHeadCapFlippable
   id: CMHeadCapOfficer
   name: UNMC officer cap

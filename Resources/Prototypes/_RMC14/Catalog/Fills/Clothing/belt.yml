@@ -447,6 +447,28 @@
     - id: RMCMK80
 
 - type: entity
+  parent: RMCBeltHolsterPistolWeYa
+  id: RMCBeltHolsterPistolWeYaM77Fill
+  suffix: Filled, M77
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: RMCWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterPistolWeYa
+  id: RMCBeltHolsterPistolWeYaPK7Fill
+  suffix: Filled, PK7
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolPK7
+      amount: 6
+    - id: RMCWeaponPistolPK7
+
+- type: entity
   parent: RMCM276ShotgunShellLoadingRig
   id: RMCM276ShotgunShellLoadingRigFill
   suffix: Filled
@@ -846,7 +868,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleType77
       amount: 2
 
 - type: entity

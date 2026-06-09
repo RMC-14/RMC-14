@@ -13,9 +13,9 @@
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
   - type: FlashImmunity
-#  - type: GuideHelp # TODO RMC14
-#    guides:
-#    - Security
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
 
 - type: entity
   parent: CMGlassesSecurity
@@ -66,6 +66,24 @@
 
 - type: entity
   parent: CMGlassesM42ScoutSight
+  id: CMGlassesM42SpotterSight
+  name: M96 spotter sight
+  description: A companion headset and night vision goggles system for UNMC spotters. Allows highlighted imaging of surroundings.
+
+- type: entity
+  parent: CMGlassesM42ScoutSight
+  id: CMGlassesM96CSight
+  name: M96C special operations sight
+  description: A specialized variation of the M96 scout sight system, intended for use with the high-power M96C anti-tank sniper rifle. Allows for highlighted imaging of surroundings, as well as detection of thermal signatures even from a great distance.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ml66a_sight.rsi
+    layers:
+    - state: icon
+      map: [ "icon" ]
+
+- type: entity
+  parent: CMGlassesM42ScoutSight
   id: RMCGlassesSPPCommandoNightVision
   name: Type 9 commando goggles
   description: A headset and night vision goggles system used by SPP forces. Allows highlighted imaging of surroundings.
@@ -102,6 +120,12 @@
           False: { state: icon }
 
 - type: entity
+  parent: RMCGlassesM4SPRBattleSight
+  id: RMCGlassesM4SPRBattleSightRCM
+  name: Royal Crown Marine marksman's goggles
+  description: A headset and night vision goggles system used by RMC Marksmen. Allows highlighted imaging of surroundings.
+
+- type: entity
   parent: ClothingEyesBase
   id: RMCGlassesSmartGunSight
   name: ML66A head mounted sight # TODO RMC14 meson tile vision see description below
@@ -131,12 +155,15 @@
         icon:
           True: { state: icon_on }
           False: { state: icon }
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: ClothingEyesBase
   id: RMCGlassesExperimentalMeson
-  name: experimental meson goggles # TODO RMC14 meson tile vision see description below
-  description: An improved but experimental version of the standard issue meson goggles, due to increased complexity these can only be worn by synthetics. Allows for full night vision. # TODO RMC14 and viewing of the surroundings. Click it to toggle.
+  name: experimental meson goggles
+  description: An improved but experimental version of the standard issue meson goggles. Due to increased complexity these can only be worn by synthetics. Allows for full night vision and meson-assisted viewing of surroundings. Click it to toggle.
   components:
   - type: Item
     storedRotation: 0
@@ -147,27 +174,21 @@
       map: [ "icon" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/experimental_meson_hud.rsi
-  - type: ItemToggle
-    activated: true
-    soundActivate:
-      path: /Audio/_RMC14/Machines/click.ogg
-      params:
-        variation: 0.250
-    soundDeactivate:
-      path: /Audio/_RMC14/Machines/click.ogg
-      params:
-        variation: 0.250
-  - type: ComponentToggler
-    components:
-    - type: NightVisionItem
+  - type: NightVisionItem
+    actionId: RMCActionToggleExperimentalMesons
+    mesons: true
+    experimentalMesonFov: true
+    defaultState: Full
+    ignoreUserOnlyHalf: true
+  - type: RMCSynthItemRestriction
+    checkPickup: false
   - type: Appearance
-  - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
-      enum.ToggleableVisuals.Enabled:
-        enum.ToggleableVisuals.Layer:
-          True: {state: icon-on}
-          False: {state: icon}
+      enum.NightVisionItemVisuals.Active:
+        icon:
+          True: { state: icon-on }
+          False: { state: icon }
 
 - type: entity
   parent: [ClothingEyesHudMedical, BaseToggleClothing]

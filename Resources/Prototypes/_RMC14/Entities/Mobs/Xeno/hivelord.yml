@@ -11,8 +11,6 @@
   name: Hivelord
   description: A builder of really big hives.
   components:
-  - type: GhostRole
-    name: cm-job-name-xeno-hivelord
   - type: MobState
     allowedStates:
     - Alive

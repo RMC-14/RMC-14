@@ -1,0 +1,384 @@
+﻿
+  #Clothes Rack
+- type: entity
+  parent: ColMarTechWardrobeCorp
+  id: ColMarTechWardrobeExecutiveBodyguard
+  name: executive bodyguard clothes rack
+  description: An automated rack hooked up to a colossal storage of Security Division standard-issue clothing.
+  components:
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCWeYaExecutiveBodyguard
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: RMCBootsPMCFilled
+      - id: RMCHeadsetExecutiveBodyguard
+      - id: RMCGlassesSecurityBlue
+      # RMC14 TODO: Blue SecHud Perscription
+    - name: Uniforms
+      choices: { CMUniform: 5 }
+      entries:
+      - id: CMJumpsuitLiaisonBlack
+      - id: RMCJumpsuitLiaisonBlackSuitskirt
+      - id: CMJumpsuitLiaisonBlue
+      - id: CMJumpsuitLiaisonBrown
+      - id: CMJumpsuitLiaisonCorporateFormal
+    - name: Jackets
+      choices: { CMArmor: 5 }
+      entries:
+      - id: RMCJacketCorporateBlack
+      - id: RMCJacketCorporateBlue
+      - id: RMCJacketCorporateBrown
+      - id: RMCJacketCorporateFormal
+      - id: RMCCoatBureauTrenchCoatBeige
+      - id: RMCCoatBureauTrenchCoatBrown
+      - id: RMCCoatBureauTrenchCoatGrey
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSatchelBlack
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+      - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbing
+      - id: RMCWebbingBlackSmall
+      - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechGearRackExecutiveBodyguard
+  name: executive bodyguard gear rack
+  description: An automated rack hooked up to a colossal storage of Security Division standard-issue gear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+      - RMCWeYaExecutiveBodyguard
+    sections:
+    # ////////////////////////////////////
+    # JR PPO
+    # ////////////////////////////////////
+      - name: Headgear
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMHelmet: 1 }
+        entries:
+        - id: RMCHeadCapExecutiveBodyguard
+      - name: Mask
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMMask: 1 }
+        entries:
+        - id: CMMaskGas
+        - id: RMCMaskRebreather
+      - name: Jackets
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMArmor: 1 }
+        entries:
+        - id: RMCArmorM1ExecutiveBodyguard
+      - name: Backpack
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMBackpack: 1 }
+        entries:
+        - id: RMCSatchelBlack
+      - name: Gloves
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMHands: 1 }
+        entries:
+        - id: RMCHandsVeteranExecutiveBodyguard
+      - name: Pouches
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { CMPouches: 2 }
+        entries:
+        - id: RMCPouchFirstAidInjectors
+          name: first-aid pouch (refillable injectors)
+        - id: RMCPouchFirstAidSplintsGauzeOintment
+          name: first-aid pouch (gauze, ointment)
+        - id: RMCPouchFirstAidPills
+          name: first-aid pouch (pills)
+        - id: RMCPouchMagazine
+        - id: RMCPouchGeneralMedium
+      - name: Sidearm
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { RMCBeltHolsterPistol: 1 }
+        entries:
+        - id: RMCBeltHolsterPistolWeYaPK7Fill
+          name: PK-7 electrostatic pistol
+      - name: Ammunition
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        entries:
+        - id: RMCMagazinePistolPK7
+          points: 4
+      - name: Attachments
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { RMCAttachableBase: 2 }
+        entries:
+        - id: RMCAttachmentS5RedDotSight
+        - id: RMCAttachmentS6ReflexSight
+        - id: RMCAttachmentS42xTelescopicMiniscope
+        - id: RMCAttachmentMagneticHarness
+        - id: RMCAttachmentLaserSight
+        - id: RMCAttachmentAngledGrip
+        - id: RMCAttachmentVerticalGrip
+        - id: RMCAttachmentExtendedBarrel
+        - id: RMCAttachmentSuppressor
+      - name: Spare Equipment
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        entries:
+        - id: CMFlash
+          points: 2
+        # Pepper Spray
+        - id: CMStunbaton
+          points: 4
+        - id: RMCBoxZiptie
+          points: 4
+    # ////////////////////////////////////
+    # PPO
+    # ////////////////////////////////////
+      - name: Headgear
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMHelmet: 1 }
+        entries:
+        - id: RMCHeadCapExecutiveBodyguard
+      - name: Mask
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMMask: 1 }
+        entries:
+        - id: CMMaskGas
+        - id: RMCMaskRebreather
+      - name: Jackets
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMArmor: 1 }
+        entries:
+        - id: RMCArmorM1ExecutiveBodyguard
+      - name: Backpack
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMBackpack: 1 }
+        entries:
+        - id: RMCSatchelBlack
+      - name: Gloves
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMHands: 1 }
+        entries:
+        - id: RMCHandsVeteranExecutiveBodyguard
+      - name: Pouches
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { CMPouches: 2 }
+        entries:
+        - id: RMCPouchFirstAidInjectors
+          name: first-aid pouch (refillable injectors)
+        - id: RMCPouchFirstAidSplintsGauzeOintment
+          name: first-aid pouch (gauze, ointment)
+        - id: RMCPouchFirstAidPills
+          name: first-aid pouch (pills)
+        - id: RMCPouchMagazine
+        - id: RMCPouchGeneralMedium
+      - name: Sidearm
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { RMCBeltHolsterPistol: 1 }
+        entries:
+        - id: RMCBeltHolsterPistolWeYaPK7Fill
+          name: PK-7 electrostatic pistol
+        - id: RMCBeltHolsterPistolWeYaM77Fill
+          name: M77 combat pistol
+        - id: RMCBeltHolsterPistolWeYaMK80Fill
+          points: 8
+          name: MK80 pistol
+      - name: Ammunition
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        entries:
+        - id: RMCMagazinePistolPK7
+          points: 4
+        - id: CMMagazinePistolMK80
+          points: 6
+        - id: CMMagazinePistolM77AP
+          points: 4
+      - name: Attachments
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { RMCAttachableBase: 2 }
+        entries:
+        - id: RMCAttachmentS5RedDotSight
+        - id: RMCAttachmentS6ReflexSight
+        - id: RMCAttachmentS42xTelescopicMiniscope
+        - id: RMCAttachmentMagneticHarness
+        - id: RMCAttachmentLaserSight
+        - id: RMCAttachmentAngledGrip
+        - id: RMCAttachmentVerticalGrip
+        - id: RMCAttachmentExtendedBarrel
+        - id: RMCAttachmentSuppressor
+      - name: Spare Equipment
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        entries:
+        - id: CMFlash
+          points: 2
+        # Pepper Spray
+        - id: CMStunbaton
+          points: 4
+        - id: RMCBoxZiptie
+          points: 4
+    # ////////////////////////////////////
+    # PPS / PPC
+    # ////////////////////////////////////
+      - name: Headgear
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMHelmet: 1 }
+        entries:
+        - id: RMCHeadCapExecutiveBodyguard
+        - id: RMCArmorHelmetExecutiveBodyguard
+      - name: Mask
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMMask: 1 }
+        entries:
+        - id: CMMaskGas
+        - id: RMCMaskRebreather
+      - name: Jackets
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMArmor: 1 }
+        entries:
+        - id: RMCArmorM1ExecutiveBodyguard
+        - id: RMCArmorM4ExecutiveBodyguard
+      - name: Backpack
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMBackpack: 1 }
+        entries:
+        - id: RMCSatchelBlack
+      - name: Gloves
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMHands: 1 }
+        entries:
+        - id: RMCHandsVeteranExecutiveBodyguard
+      - name: Pouches
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMPouches: 2 }
+        entries:
+        - id: RMCPouchFirstAidInjectors
+          name: first-aid pouch (refillable injectors)
+        - id: RMCPouchFirstAidSplintsGauzeOintment
+          name: first-aid pouch (gauze, ointment)
+        - id: RMCPouchFirstAidPills
+          name: first-aid pouch (pills)
+        - id: RMCPouchMagazine
+        - id: RMCPouchGeneralMedium
+      - name: Primary
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { CMPrimary: 1 }
+        entries:
+        # RMC14 TODO: Shock Shotgun 15p
+        - id: RMCWeaponRifleM54CWhite
+        - id: RMCWeaponSMGM63WhiteNoLock
+        - id: RMCWeaponRifleSSG45Stripped
+      - name: Sidearm
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { RMCBeltHolsterPistol: 1 }
+        entries:
+        - id: RMCBeltHolsterPistolWeYaPK7Fill
+          name: PK-7 electrostatic pistol
+        - id: RMCBeltHolsterPistolWeYaM77Fill
+          name: M77 combat pistol
+        - id: RMCBeltHolsterPistolWeYaMK80Fill
+          points: 8
+          name: MK80 pistol
+      - name: Primary Ammunition
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        entries:
+        #RMC14 TODO: Shock Shotgun lethal 15p & Stun shells 10p
+        - id: CMMagazineSMGM63
+          points: 6
+        - id: CMMagazineSMGM63Ext
+          points: 8
+        - id: CMMagazineSMGM63AP
+          points: 10
+        - id: CMMagazineRifleM54C
+          points: 6
+        - id: CMMagazineRifleM54CExt
+          points: 8
+        - id: CMMagazineRifleM54CAP
+          points: 10
+        - id: RMCMagazineRifleSSG45
+          points: 6
+        - id: RMCMagazineRifleSSG45Extended
+          points: 8
+        - id: RMCMagazineRifleSSG45AP
+          points: 10
+      - name: Sidearm Ammunition
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        entries:
+        - id: RMCMagazinePistolPK7
+          points: 4
+        - id: CMMagazinePistolMK80
+          points: 6
+        - id: CMMagazinePistolM77AP
+          points: 4
+      - name: Attachments
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { RMCAttachableBase: 2 }
+        entries:
+        - id: RMCAttachmentS5RedDotSight
+        - id: RMCAttachmentS6ReflexSight
+        - id: RMCAttachmentS42xTelescopicMiniscope
+        - id: RMCAttachmentMagneticHarness
+        - id: RMCAttachmentLaserSight
+        - id: RMCAttachmentAngledGrip
+        - id: RMCAttachmentVerticalGrip
+        - id: RMCAttachmentExtendedBarrel
+        - id: RMCAttachmentSuppressor
+      - name: Spare Equipment
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        entries:
+        - id: CMFlash
+          points: 2
+        # RMC14 TODO: Pepper Spray
+        - id: CMStunbaton
+          points: 4
+        - id: RMCBoxZiptie
+          points: 4

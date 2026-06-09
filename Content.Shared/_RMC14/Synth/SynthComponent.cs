@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Medical.HUD.Components;
+using Content.Shared.Actions;
 using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
@@ -21,6 +22,18 @@ public sealed partial class SynthComponent : Component
 
     [DataField]
     public EntProtoId RemoveComponents = "RMCSynthRemoveComponents";
+
+    [DataField]
+    public EntProtoId HudComponents = "RMCSynthHudComponents";
+
+    [DataField]
+    public EntProtoId ToggleHudAction = "RMCActionToggleSynthHud";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? ToggleHudActionEntity;
+
+    [DataField, AutoNetworkedField]
+    public bool HudActive = true;
 
     /// <summary>
     /// The final stun duration (after endurance skill) is divided by this number.
@@ -131,4 +144,6 @@ public sealed partial class SynthComponent : Component
     public TimeSpan NextUnableUsePopup;
 
 }
+
+public sealed partial class RMCToggleSynthHudActionEvent : InstantActionEvent;
 
