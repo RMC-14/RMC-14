@@ -7,6 +7,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Radio.Components;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
+using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -193,6 +194,9 @@ public sealed class RadioDeviceSystem : EntitySystem
             return; // no feedback loops please.
 
         if (component.IgnoreXenos && HasComp<XenoComponent>(args.Source))
+            return;
+
+        if (HasComp<ImaginaryFriendComponent>(args.Source))
             return;
 
         var channel = _protoMan.Index<RadioChannelPrototype>(component.BroadcastChannel)!;
