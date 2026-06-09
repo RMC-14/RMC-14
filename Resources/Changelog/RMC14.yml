@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Bobert-Brockson
-  changes:
-  - message: Added labels, dosage, and overdose information for all stock pills. Even
-      for the MB, KD, and FN for admins and mappers!
-    type: Add
-  id: 2836
-  time: '2026-02-02T02:14:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8822
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the honor guard M890 not starting with buckshot.
@@ -4528,5 +4520,13 @@
   id: 3335
   time: '2026-06-08T02:35:02.002310+00:00'
   url: null
+- author: Dygon
+  changes:
+  - message: Fixed guns not always losing their dual wielding penalty after dropping
+      one of the guns.
+    type: Fix
+  id: 3336
+  time: '2026-06-09T10:16:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9847
 Name: RMC14
 Order: -1
