@@ -47,7 +47,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
   - type: CMArmor
-    melee: 15
+    melee: 15 # CLOTHING_ARMOR_MEDIUMLOW
     bullet: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
@@ -284,8 +284,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/ppo_armor.rsi
   - type: CMArmor
-    melee: 15 # CLOTHING_ARMOR_MEDIUMLOW
-    bullet: 20 # CLOTHING_ARMOR_MEDIUM
+    melee: 20 # CLOTHING_ARMOR_MEDIUM
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 10 # CLOTHING_ARMOR_LOW
     explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
   - type: RemoveComponents
@@ -305,11 +305,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/ppo_light.rsi
-  - type: CMArmor
-    melee: 15
-    bullet: 20 # CLOTHING_ARMOR_MEDIUM
-    explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
-    bio: 0 # CLOTHING_ARMOR_NONE
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
     walkModifier: 0.949
     sprintModifier: 0.949
