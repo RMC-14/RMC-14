@@ -196,9 +196,6 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (component.IgnoreXenos && HasComp<XenoComponent>(args.Source))
             return;
 
-        if (HasComp<ImaginaryFriendComponent>(args.Source))
-            return;
-
         var channel = _protoMan.Index<RadioChannelPrototype>(component.BroadcastChannel)!;
         if (_recentlySent.Add((args.Message, args.Source, channel)))
             _radio.SendRadioMessage(args.Source, args.Message, channel, uid);
