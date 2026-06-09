@@ -359,45 +359,30 @@ public sealed class RangefinderSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var curTime = _timing.CurTime;
-        if (curTime < _nextLosCheck)
-            return;
-
-        _nextLosCheck = curTime + LosCheckInterval;
-
-        // Check LOS for active rangefinder doafter
-        var doAfterQuery = EntityQueryEnumerator<DoAfterComponent>();
-        while (doAfterQuery.MoveNext(out var userUid, out var doAfterComp))
+        var rangefinderQuery = EntityQueryEnumerator<RangefinderComponent>();
+        while (rangefinderQuery.MoveNext(out var rangefinderUid, out var rangefinderComp))
         {
-            foreach (var doAfter in doAfterComp.DoAfters.Values)
+            if (rangefinderComp.DoAfter is not { } doAfter)
+                continue;
+
+            if (!_doAfter.IsRunning(doAfter.Id))
+                continue;
+
+            if (doAfter.Args.Event is not LaserDesignatorDoAfterEvent laserEvent)
+                continue;
+
+            var coordinates = GetCoordinates(laserEvent.Coordinates);
+            if (!coordinates.IsValid(EntityManager))
+                continue;
+
+            var user = doAfter.Args.User;
+            var userCoords = _transform.GetMapCoordinates(user);
+            var targetCoords = _transform.ToMapCoordinates(coordinates);
+
+            if (userCoords.MapId != targetCoords.MapId ||
+                !_examine.InRangeUnOccluded(userCoords, targetCoords, rangefinderComp.Range, uid => uid == user || uid == rangefinderUid))
             {
-                // Skip if already cancelled or completed
-                if (doAfter.Cancelled || doAfter.Completed)
-                    continue;
-
-                if (doAfter.Args.Event is not LaserDesignatorDoAfterEvent laserEvent)
-                    continue;
-
-                var coordinates = GetCoordinates(laserEvent.Coordinates);
-                if (!coordinates.IsValid(EntityManager))
-                    continue;
-
-                var userCoords = _transform.GetMapCoordinates(userUid);
-                var targetCoords = _transform.ToMapCoordinates(coordinates);
-
-                // Check if on same map
-                if (userCoords.MapId != targetCoords.MapId)
-                {
-                    _doAfter.Cancel(userUid, doAfter.Index, doAfterComp);
-                    continue;
-                }
-
-                // Check line of sight, ignoring the user and rangefinder
-                SharedInteractionSystem.Ignored predicate = (EntityUid uid) => uid == userUid || uid == doAfter.Args.Used;
-                if (!_examine.InRangeUnOccluded(userCoords, targetCoords, float.MaxValue, predicate))
-                {
-                    _doAfter.Cancel(userUid, doAfter.Index, doAfterComp);
-                }
+                _doAfter.Cancel(doAfter.Id);
             }
         }
 
