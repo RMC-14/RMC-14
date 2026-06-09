@@ -342,7 +342,7 @@
 - type: entity
   parent: CMSemioticBase
   id: CMSemioticMaint
-  name: maintenace semiotic
+  name: maintenance semiotic
   description: "Semiotic Standard denoting the nearby presence of maintenance access."
   components:
   - type: Sprite

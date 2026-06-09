@@ -1,3 +1,5 @@
+# Case
+
 - type: entity
   parent: RMCSecureCase
   id: RMCSecureCaseM54CMag
@@ -20,6 +22,8 @@
     - id: CMMagazineRifleM54C
       amount: 10
 
+# Strapped
+
 - type: entity
   parent: RMCSecureCaseStrapped
   id: RMCSecureCaseStrappedMetal
@@ -30,3 +34,92 @@
     spawn:
     - id: CMSheetMetal50
       amount: 4
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedWater
+  name: We-Ya Bottled Water crate (x50)
+  description: A crate containing fifty Weston-Yamada Bottled Spring Water bottles.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMDrinkWEYAWaterBottle30
+      amount: 50
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedMRE
+  name: UNMC MRE crate (x60)
+  description: A supply crate containing sixty UNMC MRE packets.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMMRE
+      amount: 60
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedSandbag
+  name: sandbag supply crate (x100)
+  description: A supply crate containing four piles of twenty-five sandbags.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMSandbagFull25
+      amount: 4
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedFlare
+  name: flare supply crate (x320)
+  description: A supply crate containing two crates of flares.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCCrateGearPackFlare
+      amount: 2
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedTripod
+  name: Tripod light crate (x8)
+  description: A supply crate containing eight tripod lights.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCLampTripodGrey
+      amount: 8
+
+# Medical Big
+
+- type: entity
+  parent: RMCSecureCaseMedicalBig
+  id: RMCSecureCaseMedicalBigIV
+  name: IV stand crate (x3)
+  description: A medical supply crate containing three IV drips.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMIV
+      amount: 3
+
+- type: entity
+  parent: RMCSecureCaseMedicalBig
+  id: RMCSecureCaseMedicalBigFirstAid
+  name: first aid supply crate (x20)
+  description: A medical supply crate containing six advanced, three standard, three burn, two toxin, two oxygen, and two radiation first aid kits.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMAdvFirstAidKitFilled
+      amount: 6
+    - id: CMFirstAidKitFilled
+      amount: 3
+    - id: CMBurnAidKitFilled
+      amount: 3
+    - id: CMToxinAidKitFilled
+      amount: 2
+    - id: CMFirstAidO2KitFilled
+      amount: 2
+    - id: RMCRadiationAidKitFilled
+      amount: 2

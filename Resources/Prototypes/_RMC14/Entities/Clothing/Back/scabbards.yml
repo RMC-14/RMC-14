@@ -186,6 +186,20 @@
     - RMCShotgunScabbard
 
 - type: entity
+  parent: RMCScabbardShotgun
+  id: RMCScabbardShotgunWaist
+  name: L44 M42A2 shotgun waist scabbard
+  description: A large leather holster fitted for UNMC-issue shotguns. It has harnesses that allow it to be secured to the waist for easy storage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun_waist.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun_waist.rsi
+    slots:
+    - belt
+
+- type: entity
   parent: RMCScabbardBase
   id: RMCScabbardCeremonial
   name: ceremonial sabre scabbard

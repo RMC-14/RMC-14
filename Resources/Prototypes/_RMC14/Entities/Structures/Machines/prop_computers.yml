@@ -120,3 +120,11 @@
   components:
   - type: Sprite
     state: atmos
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCSystemsComputer
+  name: systems computer
+  components:
+  - type: Sprite
+    state: terminal

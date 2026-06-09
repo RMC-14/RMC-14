@@ -189,7 +189,7 @@
   tags:
   - CMAccessCorp
 
-# Synth access
+# UNMC Synth access
 - type: accessGroup
   id: Synth
   parent: RMCBaseMiscellaneousJob

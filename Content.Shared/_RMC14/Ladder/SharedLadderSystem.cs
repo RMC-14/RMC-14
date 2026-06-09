@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
@@ -64,6 +64,36 @@ public abstract class SharedLadderSystem : EntitySystem
 
     private void OnLadderMapInit(Entity<LadderComponent> ent, ref MapInitEvent args)
     {
+        _toUpdate.Add(ent);
+    }
+
+    public bool LadderIdInUse(string id)
+    {
+        if (_toUpdateIds.ContainsKey(id))
+            return true;
+        return false;
+    }
+
+    public void ReassignLadderId(Entity<LadderComponent> ent, string? newId)
+    {
+        if (ent.Comp.Other != null)
+        {
+            if (TryComp<LadderComponent>(ent.Comp.Other, out var ladder))
+            {
+                var other = ent.Comp.Other.Value;
+                //Remove other ladder connect
+                ent.Comp.Other = null;
+                ladder.Id = null;
+                ladder.Other = null;
+                Dirty(other, ladder);
+            }
+        }
+
+        if (ent.Comp.Id != null)
+            _toUpdateIds.Remove(ent.Comp.Id);
+
+        ent.Comp.Id = newId;
+        Dirty(ent);
         _toUpdate.Add(ent);
     }
 

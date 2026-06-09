@@ -28,6 +28,7 @@
         RMCSkillEndurance: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillFirearms: 1
+        RMCSkillVehicles: 1
 
 - type: playTimeTracker
   id: RMCJobWeYaGoon
@@ -54,7 +55,7 @@
     - RMCZipties
     - RMCZipties
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     pocket1:
     - CMMagazineRifleM54C
     - CMMagazineRifleM54C

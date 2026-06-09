@@ -62,3 +62,9 @@
   id: XenoEnergyHealer
   name: Transferred health
   description: Your total health transferred. If full you'll revive after using sacrifice.
+
+- type: alert
+  parent: XenoEnergyBase
+  id: XenoEnergyShards
+  name: Shards
+  description: Your built-up shards. Used by different abilities. You gain more armor with more shards.

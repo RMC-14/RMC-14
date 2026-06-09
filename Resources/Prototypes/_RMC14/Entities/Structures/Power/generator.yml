@@ -137,6 +137,8 @@
   components:
     - type: Sprite
       state: portgen0
+    - type: Machine
+      board: RMCPortableGeneratorPacmanMachineCircuitBoard
 
 - type: entity
   parent: RMCPortableGeneratorBase
@@ -146,3 +148,5 @@
   components:
     - type: Sprite
       state: portgen1
+    - type: Machine
+      board: RMCPortableGeneratorSuperPacmanMachineCircuitboard

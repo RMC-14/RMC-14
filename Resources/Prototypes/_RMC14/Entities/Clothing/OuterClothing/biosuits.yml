@@ -1,5 +1,17 @@
 - type: entity
-  parent: ClothingOuterBaseLarge
+  parent: RMCBaseArmor
+  id: RMCBaseBioSuit
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit.rsi
+  - type: CMArmor
+    bio: 100 # CLOTHING_ARMOR_HARDCORE
+
+- type: entity
+  parent: RMCBaseBioSuit
   id: RMCSuitBioGeneral
   name: bio suit
   description: A suit that protects against biological contamination.
@@ -9,8 +21,12 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit.rsi
-  - type: CMArmor
-    bio: 100 # CLOTHING_ARMOR_HARDCORE
+  - type: CMHardArmor
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: RMCArmorSpeedTier
+    speedTier: light
 
 - type: entity
   parent: [RMCAllowSuitStorageClothingArmorVest, RMCBaseArmor]
@@ -25,13 +41,17 @@
     bio: 15
     bullet: 10
     explosionArmor: 10
+  - type: CMHardArmor
   - type: RMCArmorSpeedTier
     speedTier: heavy
   - type: ClothingSpeedModifier # slowdown = 1 (SLOWDOWN_ARMOR_HEAVY)
     walkModifier: 0.62
     sprintModifier: 0.62
-  - type: FireProtection
-    reduction: 0.3
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.3
+  - type: RMCImmuneToIgnition
+    immuneToDirectHits: false
    # TODO gas_transfer_coefficient = 0.90
 
 - type: entity
@@ -46,7 +66,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/firefighter.rsi
 
 - type: entity
-  parent: RMCSuitBioGeneral
+  parent: RMCBaseBioSuit
   id: RMCSuitBioWeYa
   name: WeYa-TSS MK I - bio suit
   description: The 'Weston-Yamada TerraScientia bio-suit MK I'. An advanced light-weight bio-suit developed in-house by Weston-Yamada. It's a suit that protects against biological contamination.

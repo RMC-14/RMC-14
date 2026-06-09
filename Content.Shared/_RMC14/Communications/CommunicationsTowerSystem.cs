@@ -1,8 +1,9 @@
-﻿using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -28,6 +29,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly HiveBoonSystem _hiveBoon = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -76,11 +78,13 @@ public sealed class CommunicationsTowerSystem : EntitySystem
 
     private void OnTowerExamined(Entity<CommunicationsTowerComponent> ent, ref ExaminedEvent args)
     {
-        if (ent.Comp.State != CommunicationsTowerState.Broken)
-            return;
-
         using (args.PushGroup(nameof(CommunicationsTowerComponent)))
         {
+            var msg = $"[color=cyan]If placed {(int) _hiveBoon.CommunicationTowerXenoTakeoverTime.TotalMinutes} minutes into the round, a hive cluster will turn into a hive pylon when its weeds take over this![/color]";
+            args.PushMarkup(msg);
+            if (ent.Comp.State != CommunicationsTowerState.Broken)
+                return;
+
             args.PushMarkup("[color=red]It is damaged and needs a welder for repairs![/color]");
         }
     }
@@ -89,6 +93,20 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     {
         if (ent.Comp.State == CommunicationsTowerState.Broken)
             return;
+
+        if (TryComp<RMCDeviceBreakerComponent>(args.Used, out var breaker) && ent.Comp.State != CommunicationsTowerState.Broken)
+        {
+            var doafter = new DoAfterArgs(EntityManager, args.User, breaker.DoAfterTime, new RMCDeviceBreakerDoAfterEvent(), args.Used, args.Target, args.Used)
+            {
+                BreakOnMove = true,
+                RequireCanInteract = true,
+                BreakOnHandChange = true,
+                DuplicateCondition = DuplicateConditions.SameTool
+            };
+
+            _doAfter.TryStartDoAfter(doafter);
+            return;
+        }
 
         if (!HasComp<MultitoolComponent>(args.Used))
             return;

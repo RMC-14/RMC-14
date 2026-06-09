@@ -18,6 +18,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -38,6 +39,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private static readonly ProtoId<DamageTypePrototype> StructuralDamage = "Structural";
     private static readonly ProtoId<StatusEffectPrototype> FlashedKey = "Flashed";
@@ -209,8 +211,11 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         if (total < ent.Comp.Threshold)
             return;
 
+        if (_net.IsClient)
+            return;
+
         if (!TerminatingOrDeleted(ent))
-            _body.GibBody(ent);
+            _body.GibBody(ent, true);
     }
 
     public void DoEffect(Entity<CMExplosionEffectComponent> ent)

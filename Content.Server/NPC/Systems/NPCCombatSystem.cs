@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Weapons.Melee;
 using Content.Server.Interaction;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Melee;
@@ -25,6 +26,9 @@ public sealed partial class NPCCombatSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    // RMC14
+    [Dependency] private readonly RMCMeleeWeaponSystem _rmcMeleeWeapon = default!;
 
     /// <summary>
     /// If disabled we'll move into range but not attack.

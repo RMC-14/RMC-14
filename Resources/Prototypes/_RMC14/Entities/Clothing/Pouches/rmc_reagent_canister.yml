@@ -48,6 +48,14 @@
   - type: RMCRefillSolutionOnStore
   - type: RMCRefillSolutionFromContainerOnStore
     canFlush: true
+  - type: ReagentExaminationRequiresSkill
+    containerId: pressurized_reagent_canister
+    noContainerExamine: rmc-reagent-pouch-no-canister
+    unskilledExamine: rmc-reagent-pouch-unskilled
+    skilledExamineContains: rmc-reagent-pouch-examine-contains
+    skilledExamineNone: rmc-reagent-pouch-examine-empty
+    skills:
+      RMCSkillMedical: 1
   - type: Appearance
   - type: CMStorageVisualizer
     storageClosed: closedLayer

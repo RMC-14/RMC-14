@@ -1,10 +1,11 @@
 - type: constructionGraph
+  parent: RMC
   id: RMCGrilleElectrified
   start: start
   graph:
   - node: start
     edges:
-    - to: GrilleElectrified
+    - to: grilleElectrified
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -13,10 +14,10 @@
         amount: 4
         doAfter: 1
 
-  - node: GrilleElectrified
+  - node: grilleElectrified
     entity: RMCGrilleElectrified
     edges:
-    - to: start
+    - to: grilleBrokenElectrified
       completed:
       - !type:SpawnPrototype
         prototype: CMRodMetal1
@@ -38,7 +39,7 @@
       steps:
       - tool: Cutting
         doAfter: 0.25
-    - to: GrilleElectrified
+    - to: grilleElectrified
       steps:
       - material: CMRodMetal
         amount: 1

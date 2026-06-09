@@ -29,24 +29,8 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:GenericStatusEffect
-        key: Drunk
-        time: 1.5
-        type: Remove
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Toxin: 0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Toxin: 2.25
+      - !type:Focusing
+        potency: 3
 
 # TODO RMC14 other effects
 - type: reagent
@@ -252,28 +236,8 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:StabilizeTemperature
-        stable: 310
-        change: 30
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: Unconscious
-        component: RMCUnconscious
-        time: 20 #Yes, it's this much.
-        type: Add
-        refresh: false
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 10
-        type: Add
-        refresh: false
+      - !type:Thermostabilizing
+        potency: 2
 
 # TODO RMC14 other effects
 - type: reagent
@@ -459,3 +423,18 @@
           conditions:
             - !type:ReagentThreshold
               min: 5
+
+- type: reagent
+  parent: [ CMReagentMedicine, Lipozine ]
+  id: RMCLipozine
+  name: reagent-name-rmclipozine
+  desc: reagent-desc-rmclipozine
+  color: "#BBEDA4"
+  overdose: 30
+  criticalOverdose: 50
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:Ketogenic
+        potency: 4

@@ -1,0 +1,11 @@
+- type: loadout
+  id: ProvostJacketFilledRMC
+  cost: 1
+  equipment:
+    outerClothing: RMCProvostJacketFilled
+
+- type: loadout
+  id: ProvostCoatFilledRMC
+  cost: 1
+  equipment:
+    outerClothing: RMCProvostCoatFilled

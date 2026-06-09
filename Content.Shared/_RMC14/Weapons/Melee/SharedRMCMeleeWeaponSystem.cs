@@ -272,4 +272,11 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 
         return true;
     }
+
+    public float GetUserLightAttackRange(EntityUid user, EntityUid? target, MeleeWeaponComponent melee)
+    {
+        var ev = new RMCMeleeUserGetRangeEvent(target, melee.Range);
+        RaiseLocalEvent(user, ref ev);
+        return ev.Range;
+    }
 }

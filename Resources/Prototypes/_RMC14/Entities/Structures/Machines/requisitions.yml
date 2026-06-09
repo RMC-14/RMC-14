@@ -26,8 +26,8 @@
       - RMCCrateBoxMagazineBreaching
       - RMCCrateMagazineSmartGun
       - RMCCrateMagazineNapthalUT
-#      - RMCCrateMagazineNapalmGel
-#      - RMCCrateMagazineFlamerMixed
+      - RMCCrateMagazineBGel
+      - RMCCrateMagazineFlamerMixed
       - RMCCrateGearPackFlare
       - RMCCrateFoodMRE
       - RMCCrateFlashlights

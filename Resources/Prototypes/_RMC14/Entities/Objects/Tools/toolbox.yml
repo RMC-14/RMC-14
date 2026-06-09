@@ -11,6 +11,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/toolbox_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/toolbox_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/toolbox_drop.ogg
+      params:
+        volume: -4
 
 - type: entity
   name: emergency toolbox

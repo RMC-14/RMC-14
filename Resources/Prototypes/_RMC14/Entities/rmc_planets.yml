@@ -1,6 +1,6 @@
 - type: entity
   id: RMCPlanetLV624
-  name: LV-624
+  name: LV-624 Lazarus Landing
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/lv624.yml
@@ -57,6 +57,37 @@
       scenarioProbability: 0.1
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
+    survivorJobs:
+    - RMCSurvivorCommandingOfficer: 1
+    - CMSurvivor: -1
+    - CMSurvivorCorporate: 2
+    - CMSurvivorDoctor: 3
+    - CMSurvivorEngineer: 4
+    - CMSurvivorSecurity: 2
+    - CMSurvivorScientist: 2
+    survivorJobInserts:
+      RMCSurvivorCommandingOfficer:
+      - CMSurvivorSolarisCMBMarshal: 1
+      CMSurvivor:
+      - CMSurvivor: -1
+      - CMSurvivorSolarisChaplain: -1
+      - CMSurvivorUNMCRecruiter: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
+      - RMCSurvivorHybrisaFireProtectionSpecialist: -1
+      - CMSurvivorFlightOperator: -1
+      CMSurvivorCorporate:
+      - CMSurvivorSolarisCorporateLiaison: -1
+      CMSurvivorDoctor:
+      - CMSurvivorSolarisDoctor: -1
+      - RMCSurvivorHybrisaEMTParamedic: -1
+      CMSurvivorEngineer:
+      - CMSurvivorSolarisTrucker: -1
+      - CMSurvivorSolarisEngineer: -1
+      CMSurvivorSecurity:
+      - CMSurvivorSolarisCMBDeputy: -1
+      - CMSurvivorSolarisUNPeacekeeper: -1
+      CMSurvivorScientist:
+      - CMSurvivorSolarisScientist: -1
 #    survivorJobScenarios:
 #      clfmining:
 #        CMSurvivor:
@@ -104,6 +135,18 @@
     map: /Maps/_RMC14/shiva.yml
     camouflage: Snow
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    survivorJobInserts: # Civ survivor is default one
+      CMSurvivorCorporate:
+      - RMCSurvivorShivasCorporateLiaison: -1
+      CMSurvivorDoctor:
+      - RMCSurvivorShivasDoctor: -1
+      CMSurvivorEngineer:
+      - RMCSurvivorShivasEngineer: -1
+      CMSurvivorSecurity:
+      - RMCSurvivorShivasCMBDeputy: -1
+      - RMCSurvivorShivasUNPeacekeeper: -1
+      CMSurvivorScientist:
+      - RMCSurvivorShivasResearcher: -1
 
 - type: entity
   id: RMCPlanetFiorina
@@ -141,26 +184,22 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
-    survivorJobs:
-    - CMSurvivor: -1
-    - CMSurvivorCorporate: 2
-    - CMSurvivorDoctor: 3
-    - CMSurvivorEngineer: 4
-    - CMSurvivorSecurity: 2
-    - CMSurvivorScientist: 2
     survivorJobInserts:
       CMSurvivor:
-      - CMSurvivorTrijentTrucker: -1
+      - CMSurvivor: -1
       - CMSurvivorMiner: -1
       - CMSurvivorTrijentChaplain: 1
+      - RMCSurvivorHybrisaFireProtectionSpecialist: 1
       CMSurvivorCorporate:
       - CMSurvivorICB: 1
       - CMSurvivorTrijentCorporate: 1
       CMSurvivorDoctor:
+      - RMCSurvivorHybrisaEMTParamedic: 3
       - CMSurvivorTrijentDoctor: 3
       CMSurvivorEngineer:
       - CMSurvivorTrijentEngiHydro: 2
       - CMSurvivorTrijentDamTech: 2
+      - CMSurvivorTrijentTrucker: 2
       CMSurvivorSecurity:
       - CMSurvivorTrijentGoon: 1
       - CMSurvivorCMBDeputy: 1
@@ -257,14 +296,15 @@
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
     survivorJobInserts:
       CMSurvivor:
+      - CMSurvivor: -1
       - RMCSurvivorKutjevoChaplain: 1
-      - RMCSurvivorKutjevoTrucker: -1
       CMSurvivorCorporate:
       - RMCSurvivorKutjevoCorporate: 2
       CMSurvivorDoctor:
       - RMCSurvivorKutjevoDoctor: 3
       CMSurvivorEngineer:
       - RMCSurvivorKutjevoEngineer: 4
+      - RMCSurvivorKutjevoTrucker: 4
       CMSurvivorSecurity:
       - RMCSurvivorKutjevoCMBDeputy: 1
       - RMCSurvivorKutjevoGoon: 1
@@ -390,6 +430,15 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/PVE/arctic_valley.yml
     camouflage: Snow
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetJungleDelta
+  name: Jungle Delta
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/PVE/jungle_delta.yml
+    camouflage: Jungle
     inRotation: false
 
 - type: entity

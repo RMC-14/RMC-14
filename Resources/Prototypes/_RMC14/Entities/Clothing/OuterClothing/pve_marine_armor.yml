@@ -1,0 +1,106 @@
+# m3
+- type: entity
+  parent: [RMCBaseMarineArmorLightNoAccessory, RMCBaseUniformAccessoryItemArmorPVE]
+  id: RMCArmorM3PVE
+  suffix: PVE, Standard
+  name: M3 pattern marine armor
+  description: Standard UNMC issue M3 Pattern Personal Armor. Composite ballistic armor, integral biomonitoring system, and brackets for the IMP system as well as the TNR Shoulder Lamp.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/standard/jungle.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 20
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .725
+    sprintModifier: .725
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: Corrodible
+    isCorrodible: false
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/standard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/standard/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/standard/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/standard/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/standard/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3PVE
+  id: RMCArmorM3PVESmooth
+  suffix: PVE, Smooth
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/smooth/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/smooth/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/smooth/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/smooth/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/smooth/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/smooth/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3PVE
+  id: RMCArmorM3PVERidged
+  suffix: PVE, Ridged
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/ridged/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/ridged/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/ridged/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/ridged/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/ridged/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/ridged/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3PVE
+  id: RMCArmorB12PVE
+  suffix: PVE, B12
+  name: B12 pattern marine armor
+  description: Semi-experimental body armor system similar to M3, incorporating primarily carbon fiber instead of boron carbide.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/b12/jungle.rsi
+  - type: CMArmor
+    melee: 25
+    bio: 25
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier
+    walkModifier: 0.666
+    sprintModifier: 0.666
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/b12/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/b12/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/b12/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/b12/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/b12/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3PVE
+  id: RMCArmorM3PVESGO
+  suffix: PVE, Smart Gun harness
+  name: ML66A combat harness
+  description: Lightweight vest composed of ballistic micromesh and a ceramic composite chestplate for practical protection, as well as the computers, straps, and armature required for operating the ML66A Smart Gun itself.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/sg/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/sg/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/sg/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/sg/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/sg/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/sg/urban.rsi
+  - type: ClothingBlockBackpack
+  - type: SmartGunArmor

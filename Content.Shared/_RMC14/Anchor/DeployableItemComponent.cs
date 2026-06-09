@@ -19,6 +19,9 @@ public sealed partial class DeployableItemComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool LeftClickPickup;
+
+    [DataField, AutoNetworkedField]
+    public bool MagazineExamine;
 }
 
 [Serializable, NetSerializable]

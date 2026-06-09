@@ -61,7 +61,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_shipside
-  hidden: false
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearDCC

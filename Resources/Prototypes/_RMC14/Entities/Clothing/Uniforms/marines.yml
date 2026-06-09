@@ -28,55 +28,6 @@
   id: RMCJumpsuitMarinePatch
   suffix: Patch
 
-# Royal
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyal # TODO RMC14 sprite
-  suffix: Filled, Royal
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyal
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalMK80 # TODO RMC14 sprite
-  suffix: Filled, Royal, MK80
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCShoulderHolsterMK80
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalMedic # TODO RMC14 sprite
-  suffix: Filled, Royal, Medic
-  components:
-  - type: WebbingClothing
-    startingWebbing: CMWebbingSurgicalBlue
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarineRoyalTeamlead # TODO RMC14 sprite
-  suffix: Filled, Royal, Teamlead
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingDropPouchRoyalTeamlead
-  - type: UniformAccessoryHolder
-    startingAccessories:
-    - RMCPatchTSEMarines
-    - RMCPatchTSE
-
 # Formal
 - type: entity
   parent: RMCMarineUniformBase
@@ -241,18 +192,6 @@
   - type: CMArmor
     bio: 15
 
-# Ordnance Technician / OT
-- type: entity
-  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
-  id: CMJumpsuitOrdnanceTech
-  name: ordnance engineer uniform
-  description: A uniform for a professional bomb maker. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. Padded with extra plates to take the brunt force of an explosion.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ot.rsi
-  - type: CMArmor
-    explosionArmor: 10
-
 # Maintenance Technician / MT
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
@@ -264,6 +203,18 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/mt.rsi
   - type: CMArmor
     bio: 10
+
+# Ordnance Technician / OT
+- type: entity
+  parent: CMJumpsuitMaintTech
+  id: CMJumpsuitOrdnanceTech
+  name: ordnance engineer uniform
+  description: A uniform for a professional bomb maker. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. Padded with extra plates to take the brunt force of an explosion.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ot.rsi
+  - type: CMArmor
+    explosionArmor: 10
 
 # Command
 
@@ -467,6 +418,7 @@
       Urban: _RMC14/Objects/Clothing/Uniforms/intel/urban.rsi
   - type: Tag
     tags:
+    - RMCUniformMarine
     - RMCUniformIntel
 
 - type: Tag

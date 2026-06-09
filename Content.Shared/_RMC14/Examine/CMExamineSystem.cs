@@ -1,4 +1,5 @@
-﻿using Content.Shared.Access.Components;
+﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -10,15 +11,36 @@ namespace Content.Shared._RMC14.Examine;
 
 public sealed class CMExamineSystem : EntitySystem
 {
+    [Dependency] private readonly SkillsSystem _skillsSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly HealthExaminableSystem _healthExaminable = default!;
     [Dependency] private readonly IdExaminableSystem _idExaminable = default!;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RMCGenericExamineComponent, ExaminedEvent>(OnGenericExamined);
+
         SubscribeLocalEvent<ShortExamineComponent, GetVerbsEvent<ExamineVerb>>(OnGetExaminedVerbs, after: [typeof(HealthExaminableSystem), typeof(IdExaminableSystem)]);
+
         SubscribeLocalEvent<IdExaminableComponent, ExaminedEvent>(OnIdExamined);
+
         SubscribeLocalEvent<HealthExaminableComponent, ExaminedEvent>(OnHealthExamined);
+    }
+
+    private void OnGenericExamined(Entity<RMCGenericExamineComponent> ent, ref ExaminedEvent args)
+    {
+        var user = args.Examiner;
+
+        if (ent.Comp.SkillsRequired is { } skillsRequired && !_skillsSystem.HasSkills(user, skillsRequired))
+            return;
+
+        if (!_entityWhitelist.CheckBoth(user, ent.Comp.Blacklist, ent.Comp.Whitelist))
+            return;
+
+        using (args.PushGroup(nameof(CMExamineSystem), ent.Comp.ExaminePriority))
+        {
+            args.PushMarkup(Loc.GetString(ent.Comp.MessageId));
+        }
     }
 
     private void OnGetExaminedVerbs(Entity<ShortExamineComponent> ent, ref GetVerbsEvent<ExamineVerb> args)

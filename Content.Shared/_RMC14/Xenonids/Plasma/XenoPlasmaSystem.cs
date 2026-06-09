@@ -248,7 +248,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
         return true;
     }
 
-    public bool TryRemovePlasmaPopup(Entity<XenoPlasmaComponent?> xeno, FixedPoint2 plasma)
+    public bool TryRemovePlasmaPopup(Entity<XenoPlasmaComponent?> xeno, FixedPoint2 plasma, bool predicted = true)
     {
         if (!Resolve(xeno, ref xeno.Comp, false))
             return false;
@@ -256,7 +256,11 @@ public sealed class XenoPlasmaSystem : EntitySystem
         if (TryRemovePlasma((xeno, xeno.Comp), plasma))
             return true;
 
-        _popup.PopupClient(Loc.GetString("cm-xeno-not-enough-plasma"), xeno, xeno);
+        if (predicted)
+            _popup.PopupClient(Loc.GetString("cm-xeno-not-enough-plasma"), xeno, xeno);
+        else
+            _popup.PopupEntity(Loc.GetString("cm-xeno-not-enough-plasma"), xeno, xeno);
+
         return false;
     }
 }

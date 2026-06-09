@@ -30,15 +30,15 @@
     CMSteel: 267 # 10000
 
 - type: latheRecipe
-  id: CMLightTube
-  result: CMLightTube
+  id: RMCLightTube
+  result: RMCLightTube
   completetime: 4
   materials:
     CMGlass: 3 # 125
 
 - type: latheRecipe
-  id: CMLightBulb
-  result: CMLightBulb
+  id: RMCLightBulb
+  result: RMCLightBulb
   completetime: 4
   materials:
     CMGlass: 3 # 125

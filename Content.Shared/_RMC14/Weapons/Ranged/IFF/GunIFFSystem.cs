@@ -139,6 +139,7 @@ public sealed class GunIFFSystem : EntitySystem
     public void SetIdFaction(Entity<ItemIFFComponent> card, EntProtoId<IFFFactionComponent> faction)
     {
         card.Comp.Faction = faction;
+        Dirty(card);
     }
 
     public void SetUserFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)

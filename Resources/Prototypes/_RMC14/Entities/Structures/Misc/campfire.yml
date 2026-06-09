@@ -1,11 +1,34 @@
 - type: entity
+  parent: CMBaseStructure
+  id: RMCBrazier
+  name: brazier
+  description: A burning pile of wood in a metal plate.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/brazier.rsi
+    layers:
+      - state: brazier
+      - state: burning
+  - type: RMCMesonsNonviewable
+  - type: PointLight
+    radius: 10
+    energy: 3
+    color: "#FFC90C"
+  - type: AmbientSound
+    volume: -5
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/fireplace.ogg
+  - type: AlwaysHot
+
+- type: entity
+  parent: RMCBrazier
   id: RMCCampfire
-  parent: Bonfire
   name: campfire
   description: A useful tool to turn fellow marines into lifelong friends. Pull up a chair!
   components:
   - type: Sprite
-    noRot: true
     sprite: _RMC14/Structures/campfire.rsi
     layers:
       - state: campfire
@@ -13,4 +36,7 @@
   - type: Construction
     graph: RMCCampfire
     node: start
+  - type: PointLight
+    radius: 5
+    node: Campfire
   - type: RMCMesonsNonviewable

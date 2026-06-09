@@ -9,6 +9,7 @@
   - type: AreaLabel # RMC14
   - type: NavMapBeacon
     color: "#66D966"
+  - type: WarpPoint
 
 - type: entity
   parent: RMCMarkerAreaLabel

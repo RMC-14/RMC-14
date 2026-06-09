@@ -17,6 +17,9 @@ public sealed partial class AcidBloodSplashComponent : Component
     public FixedPoint2 MinimalTriggerDamage = 12;
 
     [DataField]
+    public bool WorksWhileDead = true;
+
+    [DataField]
     public bool IsActivateSplashOnGib = true;
 
     [DataField]
@@ -29,16 +32,18 @@ public sealed partial class AcidBloodSplashComponent : Component
     public float GibSplashRadius = RMCMathExtensions.CircleAreaFromSquareSide(5);
 
     /// <summary>
-    /// Probability of trigger acid splash after minimal damage check, may be increased
+    /// Probability of trigger acid splash after minimal damage check, may be increased.
+    /// This value is in percents.
     /// </summary>
     [DataField]
-    public float BaseSplashTriggerProbability = 0.2f;
+    public float BaseSplashTriggerProbability = 20f;
 
     /// <summary>
     /// Probability that target will be hit after splash is activated, decreases with the number of targets
+    /// This value is in percents.
     /// </summary>
     [DataField]
-    public float BaseHitProbability = 0.65f;
+    public float BaseHitProbability = 65f;
 
     /// <summary>
     /// Probability that target will scream after hit
@@ -47,30 +52,17 @@ public sealed partial class AcidBloodSplashComponent : Component
     public float TargetScreamProbability = 0.6f;
 
     /// <summary>
-    /// Substitution of base gib chance
-    /// </summary>
-    // TODO: remove when xeno can be gibbed
-    [DataField]
-    public float BaseGibSplashProbability = 0.05f;
-
-    /// <summary>
     /// How much probability increase if damage type is brute
+    /// This value is in percents.
     /// </summary>
     [DataField]
-    public float BruteDamageProbabilityModificator = 0.05f;
+    public float BruteDamageProbabilityModificator = 5f;
 
     /// <summary>
     /// How much probability of trigger acid splash increase with additional damage
     /// </summary>
     [DataField]
     public float DamageTriggerProbabilityMultiplier = 0.33f;
-
-    /// <summary>
-    /// Substitution of coefficient that increases chance of gib depending on health after death
-    /// </summary>
-    // TODO: remove when xeno can be gibbed
-    [DataField]
-    public float DamageSplashGibMultiplier = 0.005f; // * 0.01 to get probability, / 2 by parity
 
     [DataField]
     public TimeSpan SplashCooldown = TimeSpan.FromSeconds(3);

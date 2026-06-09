@@ -1,7 +1,7 @@
 - type: entity
   parent: RMCCrateExplosives
   id: RMCCrateGrenadesHighExplosive
-  name: M40 HEDP blast grenades crate (x6)
+  name: 30mm HEDP blast grenades crate (x6)
   components:
   - type: StorageFill
     contents:
@@ -11,7 +11,7 @@
 - type: entity
   parent: RMCCrateExplosives
   id: RMCCrateGrenadesIncendiary
-  name: M40 HIDP incendiary grenades crate (x6)
+  name: 30mm HIDP incendiary grenades crate (x6)
   components:
   - type: StorageFill
     contents:
@@ -21,7 +21,7 @@
 - type: entity
   parent: RMCCrateExplosives
   id: RMCCrateGrenadesFrag
-  name: M40 HEFA fragmentation grenades crate (x6)
+  name: 30mm HEFA fragmentation grenades crate (x6)
   components:
   - type: StorageFill
     contents:
@@ -31,7 +31,7 @@
 - type: entity
   parent: RMCCrateExplosives
   id: RMCCrateGrenadesSmoke
-  name: M40 HSDP smoke grenades crate (x6)
+  name: 30mm HSDP smoke grenades crate (x6)
   components:
   - type: StorageFill
     contents:
@@ -71,7 +71,7 @@
 - type: entity
   parent: RMCCrateExplosives
   id: RMCCrateGrenadesHighExplosiveBox
-  name: M40 HEDP blast grenade box crate (x25)
+  name: 30mm HEDP blast grenade box crate (x25)
   components:
   - type: StorageFill
     contents:
@@ -80,7 +80,7 @@
 - type: entity
   parent: RMCCrateExplosives
   id: RMCCrateGrenadesBoxHEFA
-  name: M40 HEFA fragmentation grenade box crate (x25)
+  name: 30mm HEFA fragmentation grenade box crate (x25)
   components:
   - type: StorageFill
     contents:

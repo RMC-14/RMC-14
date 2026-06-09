@@ -9,8 +9,6 @@
   - type: Physics
     bodyType: Static
   - type: Anchorable
-    flags:
-    - Anchorable
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
@@ -62,6 +60,18 @@
         layer:
         - WallLayer
   - type: Appearance
+
+- type: entity
+  parent: RMCSmallFloodlight
+  id: RMCSmallFloodlightUnanchored
+  name: small floodlight
+  description: A small bit of light in the darkness.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Transform
+      anchored: False
+    - type: Physics
+      bodyType: Dynamic
 
 - type: entity
   parent: BaseStructure

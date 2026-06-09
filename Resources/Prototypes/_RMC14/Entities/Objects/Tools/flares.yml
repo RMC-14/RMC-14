@@ -156,7 +156,7 @@
       endValue: 1.0
 
 - type: entity
-  parent: RMCBoxMagazineSupplyBase
+  parent: RMCBoxMagazineSupplySmallBase
   id: RMCBoxPackFlareEmpty
   name: box of M94 flare packs (x10)
   description: A box of M94 marking flare packs, to brighten up your day.
@@ -175,17 +175,20 @@
         - CMFlarePack
   - type: Sprite
     layers:
-    - state: supply_box
+    - state: supply_box_small
       color: "#646a3c"
-    - state: supply_ammo_full
+    - state: supply_ammo_small_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#867872"
-    - state: supply_box_flare
+    - state: supply_box_small_flare
       color: "#646a3c"
-    - state: supply_box_flare_colour
+    - state: supply_box_small_flare_colour
       color: "#f0c16f"
-    - state: supply_lid_closed
+    - state: supply_lid_small_closed
       map: [ "lid" ]
+      color: "#646a3c"
+    - state: supply_lid_small_closed_marking
+      map: [ "lid_marking" ]
       color: "#646a3c"
 
 - type: entity
@@ -197,7 +200,7 @@
     startingItem: CMPackFlare
 
 - type: entity
-  parent: RMCBoxMagazineSupplyBase
+  parent: RMCBoxMagazineSupplySmallBase
   id: RMCBoxPackFlareCASEmpty
   name: box of M89-S flare packs (x10)
   description: A box of M89 signal flare packs, to mark up the way.
@@ -216,17 +219,20 @@
         - RMCPackFlareCAS
   - type: Sprite
     layers:
-    - state: supply_box
+    - state: supply_box_small
       color: "#646a3c"
-    - state: supply_ammo_full
+    - state: supply_ammo_small_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#867872"
-    - state: supply_box_flare
+    - state: supply_box_small_flare
       color: "#646a3c"
-    - state: supply_box_flare_colour
+    - state: supply_box_small_flare_colour
       color: "#f06f6f"
-    - state: supply_lid_closed
+    - state: supply_lid_small_closed
       map: [ "lid" ]
+      color: "#646a3c"
+    - state: supply_lid_small_closed_marking
+      map: [ "lid_marking" ]
       color: "#646a3c"
 
 - type: entity
@@ -386,27 +392,72 @@
   name: air flare
   categories: [ HideSpawnMenu ]
   components:
+  - type: ExpendableLight
+    startsActivated: true
+    glowDuration: 150
+    fadeOutDuration: 30
+    turnOnBehaviourID: turn_on
+    fadeOutBehaviourID: fade_out
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: turn_on
+        maxDuration: 5.0
+        startValue: 2.5
+        endValue: 7.0
+      - !type:FadeBehaviour
+        id: fade_out
+        maxDuration: 30
+        startValue: 7.0
+        endValue: 1.0
+  - type: Appearance
   - type: PointLight
-    enabled: true
+    enabled: false
+    netsync: false
     color: "#FFCCCC"
     radius: 8.0
     energy: 0.6
   - type: TimedDespawn
-    lifetime: 300
+    lifetime: 180
 
 - type: entity
+  parent: RMCAirFlare
   id: RMCAirFlareCAS
   name: air signal flare
   categories: [ HideSpawnMenu ]
   components:
+  - type: Tag
+    tags:
+    - RMCFlareCAS
+  - type: ExpendableLight
+    startsActivated: true
+    glowDuration: 150
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/air_flare.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      state: air_flame
+      color: "#A7FFA7"
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+       id: turn_on
+       maxDuration: 5.0
+       startValue: 2.5
+       endValue: 7.0
+      - !type:FadeBehaviour
+       id: fade_out
+       maxDuration: 30
+       startValue: 7.0
+       endValue: 1.0
   - type: PointLight
-    enabled: true
     color: "#A7FFA7"
     radius: 8.0
     energy: 0.6
   - type: FlareSignal
+  - type: RMCNightVisionVisibleOnIgnite
   - type: TimedDespawn
-    lifetime: 300
+    lifetime: 180
 
 - type: Tag
   id: RMCFlare

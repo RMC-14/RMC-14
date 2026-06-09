@@ -1,12 +1,15 @@
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Atmos.Components;
+using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Atmos;
 
 public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
 {
     [Dependency] private readonly FlammableSystem _flammable = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
 
     public override void Initialize()
     {
@@ -64,5 +67,25 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
             return;
 
         _flammable.AdjustFireStacks(flammable, stacks, flammable);
+    }
+
+    public override void AdjustStacks(Entity<FlammableComponent?> flammable, int stacks)
+    {
+        if (!Resolve(flammable, ref flammable.Comp, false))
+            return;
+
+        flammable.Comp.Intensity = 30;
+        flammable.Comp.Duration = 20;
+        Dirty(flammable);
+
+        _flammable.AdjustFireStacks(flammable, stacks, flammable);
+    }
+
+    public override void DoStopDropRollAnimation(EntityUid uid)
+    {
+        if (!_actionBlocker.CanInteract(uid, null))
+            return;
+
+        RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(uid)), Filter.Pvs(uid)); // RMC14
     }
 }

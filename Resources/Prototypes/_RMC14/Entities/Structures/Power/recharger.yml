@@ -54,3 +54,13 @@
         whitelist:
           components:
             - Stunbaton
+
+- type: entity
+  parent: RMCRecharger
+  id: RMCRechargerLocked
+  suffix: locked
+  components:
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None

@@ -686,7 +686,7 @@ entities:
     - type: Transform
       pos: 18.5,16.5
       parent: 1
-- proto: CMLightFixture
+- proto: RMCLightFixture
   entities:
   - uid: 103
     components:

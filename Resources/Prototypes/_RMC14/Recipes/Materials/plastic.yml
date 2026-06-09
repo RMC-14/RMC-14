@@ -1,0 +1,50 @@
+# Plastic Item Base
+- type: rmcConstruction
+  id: RMCPlasticItemBase
+  prototype: RMCForkPlastic
+  abstract: true
+  noRotate: true
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+
+# Plastic Crate
+- type: rmcConstruction
+  id: RMCCratePlasticBuild
+  name: plastic crate
+  prototype: RMCCratePlasticBuildable
+  noRotate: true
+  doAfterTime: 2
+  materialCost: 10
+
+# Ashtray
+- type: rmcConstruction
+  parent: RMCPlasticItemBase
+  id: RMCAshtrayBuild
+  name: plastic ashtray
+  prototype: RMCAshtray
+  materialCost: 2
+
+# Utensils
+# Fork
+- type: rmcConstruction
+  parent: RMCPlasticItemBase
+  id: RMCForkPlasticBuild
+  name: plastic fork
+  prototype: RMCForkPlastic
+  materialCost: 1
+
+# Spoon
+- type: rmcConstruction
+  parent: RMCPlasticItemBase
+  id: RMCSpoonPlasticBuild
+  name: plastic spoon
+  prototype: RMCSpoonPlastic
+  materialCost: 1
+
+# Knife
+- type: rmcConstruction
+  parent: RMCPlasticItemBase
+  id: RMCKitchenKnifePlasticBuild
+  name: plastic knife
+  prototype: RMCKitchenKnifePlastic
+  materialCost: 1

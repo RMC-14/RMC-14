@@ -7,7 +7,7 @@
   ranks:
    RMCRankLanceCorporal: []
   startingGear: RMCJobFORECONPVERifleman
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconRifleman"
   joinNotifyCrew: false
   accessGroups:
   - Rifleman
@@ -33,6 +33,14 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-rifleman
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: private
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -40,14 +48,13 @@
     - type: PyroWhitelist
   hidden: true
 
-
 - type: entity
+  parent: CMSpawnPointJobBase
   id: RMCSpawnPointFORECONPVERifleman
   name: forecon rifleman spawn point
   suffix: PVE
   components:
   - type: Sprite
-    sprite: _RMC14/Markers/landmarks.rsi
     state: marine_spawn
   - type: SpawnPoint
     job_id: RMCFORECONPVERifleman

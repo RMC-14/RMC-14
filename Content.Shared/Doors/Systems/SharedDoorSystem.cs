@@ -15,6 +15,7 @@ using Content.Shared.Prying.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
+using Content.Shared._RMC14.Doors;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
@@ -224,6 +225,14 @@ public abstract partial class SharedDoorSystem : EntitySystem
     {
         if (door.State == DoorState.Welded || !door.CanPry)
             args.Cancelled = true;
+
+         // RMC14
+        var beforepry = new RMCBeforePryEvent(args.User);
+        RaiseLocalEvent(uid, ref beforepry);
+
+        if (beforepry.Cancelled)
+            args.Cancelled = true;
+        // RMC14
     }
 
     /// <summary>

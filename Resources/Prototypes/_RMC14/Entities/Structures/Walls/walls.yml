@@ -26,6 +26,9 @@
           acts: ["Breakage"]
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: metal
   - type: Construction
     graph: CMGirder
@@ -45,6 +48,9 @@
     state: wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
@@ -135,14 +141,18 @@
     state: wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 # Reinforced
 - type: entity
   parent: CMBaseWall
-  id: CMWallReinforced
+  id: RMCBaseWallReinforced
   name: reinforced wall
   description: A huge chunk of reinforced metal used to separate rooms.
+  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/rwall.rsi
@@ -164,6 +174,9 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rwall
   - type: Construction
     graph: CMGirder
@@ -172,36 +185,14 @@
     price: 150
 
 - type: entity
-  parent: CMBaseWall
-  name: reinforced wall
-  id: CMWallSuperReinforced
-  description: A huge chunk of reinforced metal used to separate rooms. Looks very robust.
-  suffix: Super Reinforced
+  parent: RMCBaseWallReinforced
+  id: CMWallReinforced
   components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Walls/rwall.rsi
-  - type: Icon
-    sprite: _RMC14/Structures/Walls/rwall.rsi
-  - type: Tag
-    tags:
-    - Wall
-  - type: ReceiverXenoClaws
-    maxHealth: 9000
-    minimumClawStrength: VerySharp
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 9000
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: IconSmooth
-    key: walls
-    base: rwall
+  - type: Corrodible
+    minimumAcidStrength: Strong
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: CMWallReinforcedAlmayer
   name: reinforced hull
   description: A reinforced metal wall used to separate rooms and make up the ship.
@@ -213,10 +204,13 @@
     state: reinforced
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: RMCWallAlmayerReinforcedDeco1
   name: reinforced hull
   components:
@@ -291,7 +285,7 @@
     mode: NoSprite
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: CMWallReinforcedAlmayerWhite
   name: reinforced hull
   description: A reinforced metal wall used to separate rooms and make up the ship.
@@ -303,10 +297,13 @@
     state: reinforced
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: CMWallReinforcedAlmayerAI
   name: reinforced hull
   description: A reinforced metal wall used to isolate potentially dangerous areas.
@@ -318,6 +315,9 @@
     state: reinforced
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: aiwall
 
 # Indestructible
@@ -336,6 +336,9 @@
       - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -351,6 +354,9 @@
     state: hull
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
@@ -441,6 +447,9 @@
     state: hull
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
@@ -456,6 +465,9 @@
     state: hull
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: aiwall
 
 # TODO RMC14 temp hull, breakable only after hijack
@@ -505,6 +517,9 @@
     state: cavewall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: cavewall
 
 # Cult
@@ -535,6 +550,9 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: cult
 
 # Wood
@@ -564,6 +582,9 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wood
 
 # Jungle
@@ -583,11 +604,15 @@
     - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: jungle_veg
 
 - type: entity
   parent: CMWallJungle
   id: RMCWallJungleStrata
+  suffix: Strata
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/strata_jungle.rsi
@@ -596,6 +621,9 @@
     state: strata_jungle0
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: strata_jungle
 
 # Elevator
@@ -615,6 +643,9 @@
     - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: wall
 
 - type: entity
@@ -1003,6 +1034,9 @@
     - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: metal
 
 - type: entity
@@ -1018,6 +1052,9 @@
     state: metal
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: metal
   - type: Tag
     tags:

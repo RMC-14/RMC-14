@@ -141,7 +141,7 @@
   parent: CMTarbackCigar
   id: RMCMontecomuneCigar
   name: montecomune cigar
-  description: Montecomune. A symbol of the SPP. Said to be the favorite cigar of a famous original revolutionary of the SPP. High-quality, but hard to find, due to the UN's embargo on SPP tobacco.
+  description: Montecomune. A symbol of the SPP. Said to be the favorite cigar of a famous original revolutionary of the SPP. High-quality, but hard to find, due to the UN's heavy import duties on SPP tobacco.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/montecomune_cig.rsi
