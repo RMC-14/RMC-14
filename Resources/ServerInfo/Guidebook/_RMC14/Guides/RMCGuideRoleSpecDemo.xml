@@ -20,8 +20,8 @@
   ### The M5-ATL: Handheld Devastation
   The M5-ATL (often referred to as the SADAR) is the Demolitionist's primary tool and the source of their fearsome reputation. It is designed for one purpose: extreme destruction.
 
-  -   [bold]Overwhelming Firepower[/bold]: The M5-ATL launches rockets that are among the strongest single-shot explosives in the game. A direct hit from any rocket type will kill most human targets and lower-caste Xenomorphs. Higher-caste Xenos will be knocked down or put into critical condition.
-  -   [bold]Psychological Impact[/bold]: The mere sight and sound of an ATL can cause panic and disarray among enemy ranks. Xenomorphs, in particular, are often wary of a Demolitionist's presence.
+  -   [bold]Overwhelming Firepower[/bold]: The M5-ATL launches rockets that are among the strongest single-shot explosives in the game. A direct hit from any rocket type will kill most human targets and lower-caste Xenonids. Higher-caste Xenos will be knocked down or put into critical condition.
+  -   [bold]Psychological Impact[/bold]: The mere sight and sound of an ATL can cause panic and disarray among enemy ranks. Xenonids, in particular, are often wary of a Demolitionist's presence.
 
   [bold]Operational Considerations & Risks:[/bold]
 
@@ -33,9 +33,9 @@
   The M5-RPG utilizes two main types of rockets:
   <Box>   <GuideEntityEmbed Entity="RMCRocket84mm"/> </Box>
   -Detonates with a large explosion (approx. 3-tile radius), dealing significant splash damage and inflicting additional damage to anything directly hit by the rocket.
-  - This rocket excels against unarmored Xenomorphs, using it against lower tiered Xenomorphs should not be taken out of the equation. HE rockets are excellent for crowd control.
+  - This rocket excels against unarmored Xenonids, using it against lower tiered Xenonids should not be taken out of the equation. HE rockets are excellent for crowd control.
   <Box>   <GuideEntityEmbed Entity="RMCRocket84mmAntiArmor"/> </Box>
-  -Features almost no splash damage but inflicts [italic]massive direct damage[/italic] with a long stun if the rocket physically strikes the target. Ideal for engaging heavily armored single targets like T3 Xenomorphs or enemy vehicles. Surprisingly viable at close ranges against specific targets due to its focused impact.
+  -Features almost no splash damage but inflicts [italic]massive direct damage[/italic] with a long stun if the rocket physically strikes the target. Ideal for engaging heavily armored single targets like T3 Xenonids or enemy vehicles. Surprisingly viable at close ranges against specific targets due to its focused impact.
 
   ### The Loader: Multiplying Your Might
 
@@ -63,8 +63,8 @@
                                                                                     <Box> [bold]Key Considerations for Effective Operations:[/bold]</Box>
   -  [bold]Ammunition is Gold[/bold]: [color=#FFD700]Your rockets are incredibly potent but also extremely scarce and difficult to resupply.[/color] Make every single shot count. Conserve your ammunition strictly for high-value targets or situations where no other asset can achieve the desired effect. You are effectively an "alpha strike" specialist.
                                                                                        <Box>  [bold]Target Prioritization is Paramount[/bold]:</Box>
-  <Box> [color=#DAA520]Save your AP (Anti-Armor) rockets primarily for higher-tier Xenomorphs[/color] like T3s (Crushers, Praetorians, Ravagers, Queens) or other heavily armored singular threats.</Box>
-  <Box> [color=#FFA500]Utilize your HE (High Explosive) rockets against dangerous clusters of smaller Xenomorphs with inadequate armor[/color] (T1s-T2s such as Warriors, Drones, Runners), The HE rocket's splash damage is excellent for crowd control and disrupting these enemy groups.</Box>
+  <Box> [color=#DAA520]Save your AP (Anti-Armor) rockets primarily for higher-tier Xenonids[/color] like T3s (Crushers, Praetorians, Ravagers, Queens) or other heavily armored singular threats.</Box>
+  <Box> [color=#FFA500]Utilize your HE (High Explosive) rockets against dangerous clusters of smaller Xenonids with inadequate armor[/color] (T1s-T2s such as Warriors, Drones, Runners), The HE rocket's splash damage is excellent for crowd control and disrupting these enemy groups.</Box>
 
   -  [bold]Anticipate Being Hunted[/bold]: [color=#FF0000]Hostiles will go to extreme lengths to eliminate you.[/color] Maintain high situational awareness, work closely with your squad for protection, and avoid isolated positions.
   -  [bold]Mind Your Trajectory[/bold]: Ensure a clear line of fire. Rockets, like grenades, can be blocked by terrain. Do not fire if marines are between you and the target.

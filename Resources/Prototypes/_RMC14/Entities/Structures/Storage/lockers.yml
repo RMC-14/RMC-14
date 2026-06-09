@@ -33,6 +33,18 @@
   - type: Lock
   - type: XenoCrusherChargable
     instantDestroy: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
 
 - type: entity
   parent: CMLockerBase
@@ -136,6 +148,24 @@
       components:
       - Xeno
       - Marine
+
+- type: entity
+  parent: RMCLockerGunBase
+  id: RMCLockerGunStorageBrig
+  name: Storage Cabinet
+  description: It's an immobile card-locked storage unit.
+  components:
+  - type: AccessReader
+    access: [["CMAccessBrig"]]
+
+- type: entity
+  parent: RMCLockerGunBase
+  id: RMCLockerGunStorageCommand
+  name: Storage Cabinet
+  description: It's an immobile card-locked storage unit.
+  components:
+  - type: AccessReader
+    access: [["RMCAccessCommand"]]
 
 - type: entity
   parent: RMCLockerGunBase
@@ -283,6 +313,16 @@
   - type: AccessReader
     access: [["CMAccessCMO"]]
 
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerFieldDoctor
+  name: field doctor's locker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/medical.rsi
+  - type: AccessReader
+    access: [["RMCAccessFieldDoctor"]]
+
 # Engineering
 - type: entity
   parent: CMLockerBase
@@ -375,7 +415,7 @@
   - type: AccessReader
     access: [["CMAccessDelta"]]
 
-# new varadero
+# map lockers
 
 - type: entity
   parent: CMLockerBase
@@ -402,6 +442,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/detective.rsi
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerMiner
+  name: miner's equipment
+  suffix: Secure
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/mining.rsi
+
 
 # PVE
 

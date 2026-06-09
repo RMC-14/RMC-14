@@ -8,6 +8,7 @@ namespace Content.Server.Maps;
 /// <summary>
 /// Toggles GridDragging on the system.
 /// </summary>
+[AdminCommand(AdminFlags.RMCMaintainer)]
 [AdminCommand(AdminFlags.Fun)]
 public sealed class GridDraggingCommand : LocalizedEntityCommands
 {

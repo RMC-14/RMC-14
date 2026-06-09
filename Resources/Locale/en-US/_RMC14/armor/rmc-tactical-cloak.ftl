@@ -7,3 +7,4 @@ rmc-cloak-forced-deactivate-others = {$user}'s cloak fizzles out!
 
 rmc-cloak-attempt-shoot = Your cloak prevents you from shooting!
 rmc-cloak-attempt-prime = Your cloak prevents you from arming the grenade!
+rmc-cloak-attempt-mount-weapon = Your cloak prevents you from mounting the weapon!

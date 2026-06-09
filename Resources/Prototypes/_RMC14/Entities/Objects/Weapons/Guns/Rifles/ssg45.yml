@@ -115,6 +115,23 @@
     - RMCWeaponRifleSSG45
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-ssg-45
+  - type: ItemMapper
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_icon.rsi
+    mapLayers:
+      mag-0:
+        whitelist:
+          tags:
+          - RMCMagazineRifleSSG45
+          - RMCMagazineRifleSSG45HEAP
+          - RMCMagazineRifleSSG45Incend
+      mag-1:
+        whitelist:
+          tags:
+          - RMCMagazineRifleSSG45AP
+      mag-2:
+        whitelist:
+          tags:
+          - RMCMagazineRifleSSG45Ext
 
 - type: entity
   parent: RMCWeaponRifleSSG45NoLock
@@ -169,7 +186,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleSSG45
-  name: "SSG45 magazine (7x62mm)"
+  name: "SSG45 magazine (10x24mm)"
   components:
   - type: Tag
     tags:
@@ -196,7 +213,7 @@
 - type: entity
   parent: RMCMagazineRifleSSG45
   id: RMCMagazineRifleSSG45Extended
-  name: "SSG45 extended magazine (7x62mm)"
+  name: "SSG45 extended magazine (10x24mm)"
   components:
   - type: Tag
     tags:
@@ -224,7 +241,7 @@
 - type: entity
   parent: RMCMagazineRifleSSG45
   id: RMCMagazineRifleSSG45AP
-  name: "SSG45 AP magazine (7x62mm)"
+  name: "SSG45 AP magazine (10x24mm)"
   components:
   - type: Tag
     tags:
@@ -250,7 +267,7 @@
 - type: entity
   parent: RMCMagazineRifleSSG45
   id: RMCMagazineRifleSSG45HEAP
-  name: "SSG45 HEAP magazine (7x62mm)"
+  name: "SSG45 HEAP magazine (10x24mm)"
   components:
   - type: Tag
     tags:
@@ -274,9 +291,17 @@
       color: "#9C9A19"
 
 - type: entity
+  parent: RMCMagazineRifleSSG45HEAP
+  id: RMCMagazineRifleSSG45HEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
   parent: RMCMagazineRifleSSG45
   id: RMCMagazineRifleSSG45Incend
-  name: "SSG45 Incendiary magazine (7x62mm)"
+  name: "SSG45 Incendiary magazine (10x24mm)"
   components:
   - type: Tag
     tags:

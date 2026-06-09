@@ -35,6 +35,9 @@
   id: CMOintment
 
 - type: Tag
+  id: CMSplint
+
+- type: Tag
   id: CMFirstAidKit
 
 - type: Tag
@@ -54,6 +57,9 @@
 
 - type: Tag
   id: Pouch
+
+- type: Tag
+  id: SurvivalPouch
 
 - type: Tag
   id: LauncherCompatibleGrenade
@@ -86,7 +92,22 @@
   id: RMCWeaponRevolverM44
 
 - type: Tag
+  id: RMCSheetMetal
+
+- type: Tag
   id: RMCGlass
+
+- type: Tag
+  id: RMCFoldingBarricade
+
+- type: Tag
+  id: RMCHelmet
+
+- type: Tag
+  id: RMCPVEArmor
+
+- type: Tag
+  id: RMCPVEArmorAccessory
 
 - type: Tag
   id: Scabbard
@@ -99,6 +120,9 @@
 
 - type: Tag
   id: RMCScrewdriver
+
+- type: Tag
+  id: LightReplacer
 
 - type: Tag
   id: ThrowingKnife
@@ -122,11 +146,51 @@
   id: Bacon
 
 - type: Tag
+
+  id: Watch
+
+- type: Tag
+
   id: RMCPinpointer
 
 - type: Tag
   id: RMCSynthResetKey
 
+- type: Tag
+  id: RMCUniformMarine
+
+- type: Tag
+  id: RMCUniformUNSecurity
+
+- type: Tag
+  id: RMCUniformMP
+
+- type: Tag
+  id: RMCUniformWarden
+
+- type: Tag
+  id: RMCUniformCMP
+
+- type: Tag
+  id: RMCUniformPMC
+
+- type: Tag
+  id: RMCUniformSPP
+
+- type: Tag
+  id: RMCUniformCMB
+
+- type: Tag
+  id: RMCUniformTSE
 
 - type: Tag
   id: RMCXenoParasitePreparingLeap
+
+- type: Tag
+  id: RMCSynthGrabbable # whitelist tag for synths being able to grab particular xenos
+
+- type: Tag
+  id: RMCSentryLaptop
+
+- type: Tag
+  id: RMCDataDisk

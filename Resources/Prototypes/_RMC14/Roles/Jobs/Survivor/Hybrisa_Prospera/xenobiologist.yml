@@ -9,14 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
-        RMCSkillResearch: 1
+      preset: RMCSkillPresetSurvivorResearcher
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaXenobiologist
     - type: RMCSurvivor
@@ -50,11 +43,11 @@
   name: xenobiologist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesReagentHUDGlasses, RMCShoesLaceup ]
     - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesReagentHUDGlasses, RMCShoesLaceup ]
     - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesMarineRpg, RMCShoesLaceup ]
     - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesMarineRpg, RMCShoesLaceup ]
-    - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCHandsVeteranCBRN, RMCArmorVestCivilian, RMCGlassesReagentHUDGlasses, RMCShoesBrown, CMHeadBandTan, RMCWeaponFlamerImprovised ]
+    - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCHandsVeteranCBRN, RMCArmorVestCivilian, RMCGlassesReagentHUDGlasses, RMCShoesBrown, CMHeadBandTan, RMCWeaponFlamerColony ]
 

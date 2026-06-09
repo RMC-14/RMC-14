@@ -1,5 +1,6 @@
 using Content.Client._RMC14.NightVision;
 using Content.Client.Movement.Systems;
+using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared.Actions;
 using Content.Shared.Ghost;
 using Robust.Client.Console;
@@ -40,7 +41,7 @@ namespace Content.Client.Ghost
                 var query = AllEntityQuery<GhostComponent, SpriteComponent>();
                 while (query.MoveNext(out var uid, out _, out var sprite))
                 {
-                    _sprite.SetVisible((uid, sprite), value || uid == _playerManager.LocalEntity);
+                    _sprite.SetVisible((uid, sprite), value || uid == _playerManager.LocalEntity || HasComp<ImaginaryFriendComponent>(uid)); //RMC14
                 }
             }
         }
@@ -152,6 +153,8 @@ namespace Content.Client.Ghost
             if (uid != _playerManager.LocalEntity)
                 return;
 
+            _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>(); //RMC14
+
             GhostVisibility = false;
             PlayerRemoved?.Invoke(component);
         }
@@ -177,6 +180,7 @@ namespace Content.Client.Ghost
         {
             GhostVisibility = false;
             PlayerDetached?.Invoke();
+            _overlay.RemoveOverlay<HalfNightVisionBrightnessOverlay>(); //RMC14
         }
 
         private void OnGhostWarpsResponse(GhostWarpsResponseEvent msg)

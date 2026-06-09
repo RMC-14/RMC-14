@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivor
+  parent: RMCSurvivorMilitary
   id: CMSurvivorUNMC
   name: cm-job-name-survivor-unmc
   description: cm-job-description-survivor
@@ -14,11 +14,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivorMarshal
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian
     - type: RMCSurvivor

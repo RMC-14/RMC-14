@@ -1,0 +1,16 @@
+﻿- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectShieldBlue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/xeno_shield.rsi
+    noRot: true
+    state: shield
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: TimedDespawn
+    lifetime: 2

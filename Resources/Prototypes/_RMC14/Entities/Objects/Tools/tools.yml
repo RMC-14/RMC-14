@@ -19,12 +19,27 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/screwdriver_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/screwdriver_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/screwdriver_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
     - Ears
     - Suitstorage
     - Mask
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 75
 
 - type: entity
   parent: Wirecutter
@@ -47,10 +62,25 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
     - Suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 80
 
 - type: entity
   parent: Wrench
@@ -69,10 +99,25 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wrench_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wrench_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wrench_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
     - Suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 150
 
 - type: entity
   parent: Multitool
@@ -92,11 +137,27 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/multitool_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
   - type: Multitool
   - type: Clothing
     quickEquip: false
     slots:
     - Suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
+      CMGlass: 20
 
 - type: entity
   parent: trayScanner
@@ -125,14 +186,33 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/multitool_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+      params:
+        volume: -4
   - type: Multitool
   - type: Clothing
     quickEquip: false
     slots:
     - Suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 150
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
-  parent: Crowbar
+  parent: [Crowbar, RMCBaseMeleeWeapon]
   id: CMCrowbar
   components:
   - type: Sprite
@@ -147,6 +227,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/crowbar_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/crowbar_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -156,6 +248,9 @@
     speedModifier: 100000
   - type: ToolTileCompatible
     delay: 0
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
 
 - type: entity
   parent: CMCrowbar
@@ -171,6 +266,73 @@
   - type: Item
     heldPrefix: red
     storedSprite: null
+
+- type: entity
+  parent: CMCrowbar
+  id: RMCTacticalPrybar
+  name: tactical prybar
+  description: Holding this makes you want to raid a townhouse filled with terrorists. Also doubles as a blunt weapon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/tac_prybar.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tools/crowbar.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Tools/crowbar.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 25
+    soundHit:
+      path: /Audio/_RMC14/Weapons/genhit3.ogg
+
+- type: entity
+  parent: [BaseItem, RMCBaseMeleeWeapon]
+  id: RMCMaintenanceJack
+  name: maintenance jack
+  description: A heavy synthetic-grade maintenance tool that can pry doors and work as a wrench.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/maintenance_jack.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Tools/maintenance_jack.rsi
+    storedRotation: 0
+  - type: Clothing
+    quickEquip: false
+    sprite: _RMC14/Objects/Tools/maintenance_jack.rsi
+    slots:
+    - Back
+    - Suitstorage
+  - type: Tool
+    qualities:
+    - Prying
+    - Anchoring
+    useSound:
+      path: /Audio/Items/jaws_pry.ogg
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 2
+    useSound:
+      path: /Audio/Items/jaws_pry.ogg
+  - type: ToolTileCompatible
+    delay: 0
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 0.8
+    damage:
+      types:
+        Blunt: 20
+        Structural: 30
+    soundHit:
+      collection: MetalThud
+  - type: RMCSynthItemRestriction
+    checkPickup: false
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 200
 
 - type: entity
   parent: HandLabeler
@@ -191,6 +353,9 @@
           type: HandLabelerBoundUserInterface
         enum.RMCHandLabelerUiKey.PillBottleColor:
           type: RMCHandLabelerPillBottleColorBui
+    - type: PhysicalComposition
+      materialComposition:
+        CMSteel: 125
 
 - type: entity
   parent: Shovel
@@ -213,6 +378,9 @@
   - type: Appearance
   - type: XenoTunnelFiller
   - type: Shovel
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
 
 #PVE Tool
 - type: entity
@@ -242,6 +410,18 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:
@@ -262,4 +442,3 @@
   components:
   - type: RMCDeviceBreaker
     doAfterTime: 7
-  

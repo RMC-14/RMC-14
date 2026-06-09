@@ -1,7 +1,8 @@
-using System.Linq;
 using System.Numerics;
 using Content.Server.Atmos.Components;
 using Content.Server.Spreader;
+using Content.Shared._RMC14.Barricade;
+using Content.Shared._RMC14.Communications;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -14,7 +15,6 @@ using Content.Shared.Physics;
 using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -28,11 +28,10 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionBlocker = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
 
     private static readonly ProtoId<TagPrototype> IgnoredTag = "SpreaderIgnore";
 
@@ -119,13 +118,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     }
                 }
 
-                // Do a raycast to see if any entities with offset fixtures are blocking the spread
-                var weedPosition = _transform.GetMoverCoordinates(uid).Position;
-                var ray = new CollisionRay(weedPosition, cardinal.CardinalToIntVec(), (int)CollisionGroup.BarricadeImpassable);
-                var intersect = _physics.IntersectRayWithPredicate(Transform(uid).MapID, ray, 0.6f, e => !Transform(e).Anchored);
-                var results = intersect.Select(r => r.HitEntity).ToHashSet();
-
-                if (results.Count > 0)
+                if (_directionBlocker.IsDirectionBlocked(uid, cardinal, collisionGroup: CollisionGroup.BarricadeImpassable))
                     blocked = true;
 
                 if (blocked)
@@ -158,7 +151,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     break;
                 }
 
-                if (!CanSpreadWeedsPopup(grid, neighbor, null, weeds.SpreadsOnSemiWeedable))
+                if (!CanSpreadWeedsPopup(grid, neighbor, null, null, weeds.SpreadsOnSemiWeedable))
                     continue;
 
                 if (weedsToReplace != null)
@@ -166,15 +159,9 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
                 var coords = _map.GridTileToLocal(grid, grid, neighbor);
                 var neighborWeeds = Spawn(prototype, coords);
-                var neighborWeedsComp = EnsureComp<XenoWeedsComponent>(neighborWeeds);
-
-                neighborWeedsComp.IsSource = false;
-                neighborWeedsComp.Source = source;
-                sourceWeeds?.Spread.Add(neighborWeeds);
+                var neighborWeedsEnt = AssignSource(neighborWeeds, (source.Value, sourceWeeds));
 
                 _hive.SetSameHive(uid, neighborWeeds);
-
-                Dirty(neighborWeeds, neighborWeedsComp);
 
                 EnsureComp<ActiveEdgeSpreaderComponent>(neighborWeeds);
 
@@ -197,19 +184,19 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                             continue;
                         }
 
-                        var ev = new AfterEntityWeedingEvent(_entities.GetNetEntity(neighborWeeds), _entities.GetNetEntity(anchoredId));
-                        RaiseLocalEvent(anchoredId, ev);
-
-                        if (source is not null)
-                            RaiseLocalEvent(source.Value, ev);
-
-                        neighborWeedsComp.LocalWeeded.Add(anchoredId);
-                        _appearance.SetData(anchoredId, WeededEntityLayers.Layer, true);
-
-                        if (weedable.Spawn is null)
+                        if (source != null)
                         {
-                            continue;
+                            var ev = new AfterEntityWeedingEvent(neighborWeeds, anchoredId);
+                            RaiseLocalEvent(source.Value, ref ev);
                         }
+
+                        neighborWeedsEnt.Comp.LocalWeeded.Add(anchoredId);
+
+                        if (!HasComp<CommunicationsTowerComponent>(anchoredId))
+                            _appearance.SetData(anchoredId, WeededEntityLayers.Layer, true);
+
+                        if (weedable.Spawn == null)
+                            continue;
 
                         weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
                         var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);

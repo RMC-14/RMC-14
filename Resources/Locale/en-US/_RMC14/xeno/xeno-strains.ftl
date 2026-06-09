@@ -1,5 +1,18 @@
 rmc-xeno-strain-specialized-into = It has specialized into {INDEFINITE($strain)} {$strain}.
 
+rmc-xeno-trapper-name = Sapper
+rmc-xeno-trapper-description = You trade your bombard, neurotoxin, acid shroud, acid spray, some speed and a little health to gain the ability to create acid explosions and restrain enemies within them.
+   You gain the ability to:
+   - Fire a close ranged shotgun of acid that deals high damage, further increased against trapped targets.
+   - - Gain stacks of Insight when you strike enemies with your shotgun. At 10 stacks, you empower your next trap deployment.
+   - - - Hitting a trapped enemy will instantly give you max stacks of Insight.
+   - Place a line of restraining traps at a distance to set up ambushes or disrupt enemies.
+   - - When empowered, the traps restrain for longer and empower your next Acid Mine explosion.
+   - Remotely detonate hidden Acid Mines, causing a delayed explosion of acid that burns enemies and corrodes through structures.
+   - - When empowered, deals greatly increased damage to structures and slightly increased damage to enemies. It also applies a lingering acid to enemies.
+   - Gain a temporary speed boost when hurt, allowing a swifter escape.
+rmc-xeno-trapper-popup = The battlefield is my canvas, this one, my painter. Melt them where they stand.
+
 rmc-xeno-dancer-name = Dancer
 rmc-xeno-dancer-description = You trade your spit, acid ball, acid spray, corrosive acid, dash, and a small bit of armor for high single-target damage.
    You gain the ability to:
@@ -158,4 +171,22 @@ rmc-xeno-hedgehog-popup = This one's hide bristles with deadly spines. Let them 
 
 rmc-xeno-watcher-name = Watcher
 rmc-xeno-watcher-description = You lose your ability to hide, but gain enhanced vision. You can toggle between normal enhanced vision and greatly enhanced vision.
-rmc-xeno-watcher-popup = You are now a Watcher. You have enhanced vision but cannot hide.
+rmc-xeno-watcher-popup = My witness in the dark; watch, wait, and strike.
+
+rmc-xeno-designer-name = Designer
+rmc-xeno-designer-description = You lose:
+    - Direct resin building
+    - Lose some plasma and health
+    You gain:
+    - A bit of speed and stronger pheromones
+    - Longer vision
+    - The ability to place up to 36 design nodes:
+        - Optimized nodes boost building speed by 50%
+        - Flexible nodes reduce plasma cost by 50%
+        - Construct nodes allow anyone to donate plasma to build weedbound resin walls or doors
+        - Drone evolutions create thick weedbound variants
+    - Can mark nodes as walls or doors
+    - Remotely upgrade resin
+    - Greater Resin Surge turns design nodes into weaker reflective walls
+    - Slightly stronger tackle
+rmc-xeno-designer-popup = You are hive's designer, go and expand the hive beyond its limit.

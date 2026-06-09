@@ -47,8 +47,8 @@
     - RMCRecipesMedilathe
   - type: MaterialStorage
     storage:
-      CMGlass: 533
-      RMCPlastic: 2000
+      CMGlass: 20000
+      RMCPlastic: 40000
     whitelist:
       tags:
       - Plastic
@@ -141,7 +141,8 @@
   - RMCMedicAutoInjector30
   - CMHypospray
   - CMBloodPack
-  - RMCBeakerHighCapacity
+  # - RMCBeakerHighCapacity replaced in RMC by RMCReagentJug
+  - RMCReagentJug
   - CMBonesetter
   #    - FixOVein (5000 Plastic)->(6250)
   - CMStasisBag
