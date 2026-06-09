@@ -102,7 +102,7 @@ public sealed partial class XenoRespawnSystem : EntitySystem
 
             if (TryComp(ghost, out actor))
             {
-                _hive.IncreaseBurrowedLarva((respawn.Hive.Value, hiveComp), 1);
+                _hive.ChangeBurrowedLarva((respawn.Hive.Value, hiveComp), 1);
                 _hive.JoinBurrowedLarva((respawn.Hive.Value, hiveComp), actor.PlayerSession);
             }
 

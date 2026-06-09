@@ -87,6 +87,13 @@
     back:
     - RMCPatchPeace
 
+- type: loadout
+  id: PDTLKitRMC
+  cost: 3
+  storage:
+    back:
+    - CMSparePDTLBattleBuddyKit
+
 # Paint (FOR PVE)
 
 - type: loadout
