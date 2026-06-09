@@ -405,8 +405,7 @@ public sealed class RangefinderSystem : EntitySystem
             }
 
             // Check line of sight, ignoring the rangefinder and target entities
-            SharedInteractionSystem.Ignored predicate = (EntityUid uid) => uid == rangefinderUid || uid == active.Target.Value;
-            if (!_examine.InRangeUnOccluded(originCoords, targetCoords, rangefinder.Range, predicate))
+            if (!_examine.InRangeUnOccluded(originCoords, targetCoords, rangefinder.Range, uid => uid == rangefinderUid || uid == active.Target.Value))
             {
                 RemCompDeferred<ActiveLaserDesignatorComponent>(rangefinderUid);
             }
