@@ -394,7 +394,7 @@ public sealed class RangefinderSystem : EntitySystem
                 continue;
 
             // Get origin and target coordinates
-            var originCoords = _transform.ToMapCoordinates(active.Origin);
+            var originCoords = _transform.GetMapCoordinates(rangefinderUid);
             var targetCoords = _transform.GetMapCoordinates(active.Target.Value);
 
             // Check if on same map
