@@ -10,6 +10,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Network;
@@ -19,6 +20,7 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehiclePortGunSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
@@ -139,6 +141,7 @@ public sealed class VehiclePortGunSystem : EntitySystem
 
         if (_itemSlots.TryInsert(gunUid, magSlot, args.Used, args.User))
         {
+            _audio.PlayPredicted(magSlot.InsertSound, ent, null);
             args.Handled = true;
         }
     }
