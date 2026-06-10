@@ -44,7 +44,7 @@ public sealed partial class XenoActiveDodgeComponent : Component
     public List<RMCAfterImage> AfterImages = new();
 
     [DataField]
-    public float MaxAfterimageOpacity = 0.75f;
+    public float AfterImageOpacityMult = 0.75f;
 }
 
 public struct RMCAfterImage

@@ -54,7 +54,7 @@ public sealed class XenoDodgeOverlay : Overlay
         {
             if (time < dodge.NextOffsetChange)
             {
-                RenderAfterimage((uid, dodge), sprite, time, args.WorldHandle, eyeRot);
+                RenderAfterImage((uid, dodge), sprite, time, args.WorldHandle, eyeRot);
                 continue;
             }
 
@@ -81,11 +81,11 @@ public sealed class XenoDodgeOverlay : Overlay
             dodge.LastPosition = _transform.GetWorldPositionRotation(uid);
             dodge.NextOffsetChange = time + dodge.TimeBetweenOffsets;
 
-            RenderAfterimage((uid, dodge), sprite, time, args.WorldHandle, eyeRot);
+            RenderAfterImage((uid, dodge), sprite, time, args.WorldHandle, eyeRot);
         }
     }
 
-    private void RenderAfterimage(Entity<XenoActiveDodgeComponent> xeno, SpriteComponent sprite, TimeSpan currTime, DrawingHandleWorld handle, Angle eye)
+    private void RenderAfterImage(Entity<XenoActiveDodgeComponent> xeno, SpriteComponent sprite, TimeSpan currTime, DrawingHandleWorld handle, Angle eye)
     {
         var offset = sprite.Offset;
         var colorCache = sprite.Color;
@@ -100,7 +100,7 @@ public sealed class XenoDodgeOverlay : Overlay
                 continue;
             }
 
-            var color = sprite.Color * Color.White.WithAlpha(Math.Min((float)((afterimage.DisappearTime - currTime) / xeno.Comp.AfterImageDuration), xeno.Comp.MaxAfterimageOpacity));
+            var color = sprite.Color * Color.White.WithAlpha((float)(((afterimage.DisappearTime - currTime) / xeno.Comp.AfterImageDuration) * xeno.Comp.AfterImageOpacityMult));
             _sprite.SetColor((xeno, sprite), color);
 
             _sprite.SetOffset((xeno, sprite), afterimage.Offset);
