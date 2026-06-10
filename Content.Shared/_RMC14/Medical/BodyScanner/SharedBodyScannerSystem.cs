@@ -114,6 +114,10 @@ public abstract class SharedBodyScannerSystem : EntitySystem
 
         UpdateBodyScannerVisuals(scanner);
         RemCompDeferred<InsideBodyScannerComponent>(args.Entity);
+
+        var outside = EnsureComp<OutsideBodyScannerComponent>(args.Entity);
+        outside.BodyScanner = scanner;
+        Dirty(args.Entity, outside);
     }
 
     private void OnBodyScannerInteractHand(Entity<BodyScannerComponent> scanner, ref InteractHandEvent args)
@@ -199,10 +203,6 @@ public abstract class SharedBodyScannerSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
-
-        var outside = EnsureComp<OutsideBodyScannerComponent>(occupant);
-        outside.BodyScanner = scanner;
-        Dirty(occupant, outside);
 
         if (scanner.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(scanner))
             _stun.TryStun(occupant, scanner.Comp.ExitStun, true);

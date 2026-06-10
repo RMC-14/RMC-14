@@ -118,6 +118,10 @@ public abstract class SharedSleeperSystem : EntitySystem
 
         UpdateSleeperVisuals(sleeper);
         RemCompDeferred<InsideSleeperComponent>(args.Entity);
+
+        var outside = EnsureComp<OutsideSleeperComponent>(args.Entity);
+        outside.Sleeper = sleeper;
+        Dirty(args.Entity, outside);
     }
 
     private void OnSleeperInteractHand(Entity<SleeperComponent> sleeper, ref InteractHandEvent args)
@@ -174,10 +178,6 @@ public abstract class SharedSleeperSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
-
-        var outside = EnsureComp<OutsideSleeperComponent>(occupant);
-        outside.Sleeper = sleeper;
-        Dirty(occupant, outside);
 
         if (sleeper.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(sleeper))
             _stun.TryStun(occupant, sleeper.Comp.ExitStun, true);

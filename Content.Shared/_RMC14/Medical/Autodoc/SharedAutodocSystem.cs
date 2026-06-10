@@ -130,6 +130,10 @@ public abstract class SharedAutodocSystem : EntitySystem
 
         UpdateAutodocVisuals(autodoc);
         RemCompDeferred<InsideAutodocComponent>(args.Entity);
+
+        var outside = EnsureComp<OutsideAutodocComponent>(args.Entity);
+        outside.Autodoc = autodoc;
+        Dirty(args.Entity, outside);
     }
 
     private void OnAutodocInteractHand(Entity<AutodocComponent> autodoc, ref InteractHandEvent args)
@@ -235,10 +239,6 @@ public abstract class SharedAutodocSystem : EntitySystem
             return;
 
         _container.Remove(occupant, container);
-
-        var outside = EnsureComp<OutsideAutodocComponent>(occupant);
-        outside.Autodoc = autodoc;
-        Dirty(occupant, outside);
 
         if (autodoc.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(autodoc))
             _stun.TryStun(occupant, autodoc.Comp.ExitStun, true);
