@@ -8,12 +8,14 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._RMC14.Movement;
 
 public sealed class RMCMovementSystem : EntitySystem
 {
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -23,10 +25,14 @@ public sealed class RMCMovementSystem : EntitySystem
     private const CollisionGroup ClimbCheckGroup = CollisionGroup.Impassable | CollisionGroup.HighImpassable |
                                               CollisionGroup.MidImpassable | CollisionGroup.LowImpassable;
 
+    private readonly HashSet<EntityUid> _intersecting = [];
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCMobCollisionComponent, MapInitEvent>(OnMobCollisionMapInit);
         SubscribeLocalEvent<RMCMobCollisionComponent, MobStateChangedEvent>(OnMobCollisionMobStateChanged);
+
+        SubscribeLocalEvent<RMCOutsideChamberComponent, PreventCollideEvent>(OnPreventCollide);
     }
 
     private void OnMobCollisionMapInit(Entity<RMCMobCollisionComponent> ent, ref MapInitEvent args)
@@ -112,5 +118,37 @@ public sealed class RMCMovementSystem : EntitySystem
             return false;
         }
         return true;
+    }
+
+    public void SuppressCollisionOnExit(EntityUid ent, EntityUid chamber)
+    {
+        var outside = EnsureComp<RMCOutsideChamberComponent>(ent);
+        outside.Chamber = chamber;
+        Dirty(ent, outside);
+    }
+
+    private void OnPreventCollide(Entity<RMCOutsideChamberComponent> ent, ref PreventCollideEvent args)
+    {
+        if (ent.Comp.Chamber == args.OtherEntity)
+            args.Cancelled = true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<RMCOutsideChamberComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Chamber is not { } chamber)
+            {
+                RemCompDeferred<RMCOutsideChamberComponent>(uid);
+                continue;
+            }
+
+            _intersecting.Clear();
+            _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
+
+            if (!_intersecting.Contains(chamber))
+                RemCompDeferred<RMCOutsideChamberComponent>(uid);
+        }
     }
 }

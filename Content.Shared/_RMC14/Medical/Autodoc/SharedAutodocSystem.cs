@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Containers;
@@ -13,7 +14,6 @@ using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -29,6 +29,7 @@ public abstract class SharedAutodocSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -51,8 +52,6 @@ public abstract class SharedAutodocSystem : EntitySystem
         SubscribeLocalEvent<AutodocConsoleComponent, InteractUsingEvent>(OnConsoleInteractUsing);
 
         SubscribeLocalEvent<InsideAutodocComponent, MoveInputEvent>(OnInsideAutodocMoveInput);
-
-        SubscribeLocalEvent<OutsideAutodocComponent, PreventCollideEvent>(OnOutsideAutodocPreventCollide);
     }
 
     private void OnAutodocInit(Entity<AutodocComponent> autodoc, ref ComponentInit args)
@@ -107,11 +106,7 @@ public abstract class SharedAutodocSystem : EntitySystem
         UpdateAutodocVisuals(autodoc);
 
         if (!_timing.ApplyingState)
-        {
-            var inside = EnsureComp<InsideAutodocComponent>(args.Entity);
-            inside.Autodoc = autodoc;
-            Dirty(args.Entity, inside);
-        }
+            EnsureComp<InsideAutodocComponent>(args.Entity).Chamber = autodoc;
     }
 
     private void OnAutodocEntRemoved(Entity<AutodocComponent> autodoc, ref EntRemovedFromContainerMessage args)
@@ -130,10 +125,7 @@ public abstract class SharedAutodocSystem : EntitySystem
 
         UpdateAutodocVisuals(autodoc);
         RemCompDeferred<InsideAutodocComponent>(args.Entity);
-
-        var outside = EnsureComp<OutsideAutodocComponent>(args.Entity);
-        outside.Chamber = autodoc;
-        Dirty(args.Entity, outside);
+        _rmcMovement.SuppressCollisionOnExit(args.Entity, autodoc.Owner);
     }
 
     private void OnAutodocInteractHand(Entity<AutodocComponent> autodoc, ref InteractHandEvent args)
@@ -285,7 +277,7 @@ public abstract class SharedAutodocSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        if (ent.Comp.Autodoc is not { } autodocId)
+        if (ent.Comp.Chamber is not { } autodocId)
             return;
 
         if (!TryComp<AutodocComponent>(autodocId, out var autodoc))
@@ -296,11 +288,5 @@ public abstract class SharedAutodocSystem : EntitySystem
             return;
 
         EjectOccupant((autodocId, autodoc), ent);
-    }
-
-    private void OnOutsideAutodocPreventCollide(Entity<OutsideAutodocComponent> ent, ref PreventCollideEvent args)
-    {
-        if (ent.Comp.Chamber == args.OtherEntity)
-            args.Cancelled = true;
     }
 }

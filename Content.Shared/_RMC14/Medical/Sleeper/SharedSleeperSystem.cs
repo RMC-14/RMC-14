@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
@@ -8,7 +9,6 @@ using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.Sleeper;
@@ -21,6 +21,7 @@ public abstract class SharedSleeperSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -40,8 +41,6 @@ public abstract class SharedSleeperSystem : EntitySystem
         SubscribeLocalEvent<SleeperConsoleComponent, InteractUsingEvent>(OnConsoleInteractUsing);
 
         SubscribeLocalEvent<InsideSleeperComponent, MoveInputEvent>(OnInsideSleeperMoveInput);
-
-        SubscribeLocalEvent<OutsideSleeperComponent, PreventCollideEvent>(OnOutsideSleeperPreventCollide);
     }
 
     private void OnSleeperInit(Entity<SleeperComponent> sleeper, ref ComponentInit args)
@@ -96,11 +95,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         UpdateSleeperVisuals(sleeper);
 
         if (!_timing.ApplyingState)
-        {
-            var inside = EnsureComp<InsideSleeperComponent>(args.Entity);
-            inside.Sleeper = sleeper;
-            Dirty(args.Entity, inside);
-        }
+            EnsureComp<InsideSleeperComponent>(args.Entity).Chamber = sleeper;
     }
 
     private void OnSleeperEntRemoved(Entity<SleeperComponent> sleeper, ref EntRemovedFromContainerMessage args)
@@ -118,10 +113,7 @@ public abstract class SharedSleeperSystem : EntitySystem
 
         UpdateSleeperVisuals(sleeper);
         RemCompDeferred<InsideSleeperComponent>(args.Entity);
-
-        var outside = EnsureComp<OutsideSleeperComponent>(args.Entity);
-        outside.Chamber = sleeper;
-        Dirty(args.Entity, outside);
+        _rmcMovement.SuppressCollisionOnExit(args.Entity, sleeper.Owner);
     }
 
     private void OnSleeperInteractHand(Entity<SleeperComponent> sleeper, ref InteractHandEvent args)
@@ -234,18 +226,12 @@ public abstract class SharedSleeperSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        if (ent.Comp.Sleeper is not { } sleeperId)
+        if (ent.Comp.Chamber is not { } sleeperId)
             return;
 
         if (!TryComp<SleeperComponent>(sleeperId, out var sleeper))
             return;
 
         EjectOccupant((sleeperId, sleeper), ent);
-    }
-
-    private void OnOutsideSleeperPreventCollide(Entity<OutsideSleeperComponent> ent, ref PreventCollideEvent args)
-    {
-        if (ent.Comp.Chamber == args.OtherEntity)
-            args.Cancelled = true;
     }
 }
