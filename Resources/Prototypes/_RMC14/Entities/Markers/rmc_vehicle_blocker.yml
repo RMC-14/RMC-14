@@ -1,5 +1,39 @@
 - type: entity
+  id: RMCBlockerVehicle
+  parent: MarkerBase
+  name: vehicle blocker
+  suffix: RMC, Blocker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: vehicle_blocker
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 100
+        mask:
+        - Vehicle
+        layer:
+        - Vehicle
+
+- type: entity
+  id: VehiclePeekAnchor
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+
+- type: entity
   id: VehicleExitArea
+  parent: MarkerBase
   name: vehicle exit marker
   description: A clickable marker used for vehicle exits.
   placement:
@@ -13,9 +47,7 @@
     texture: /Textures/_RMC14/Tiles/floors/void.png
   - type: VehicleExit
   - type: Vehicle
-  - type: Clickable
   - type: RMCIgnoreGhostInteractionLimits
-  - type: InteractionOutline
   - type: Physics
     bodyType: Static
     canCollide: true
@@ -34,36 +66,3 @@
         - MidImpassable
         - LowImpassable
         - Opaque
-
-- type: entity
-  id: RMCBlockerVehicle
-  name: vehicle blocker
-  suffix: DO NOT MAP
-  components:
-  - type: Sprite
-    sprite: _RMC14/Markers/landmarks.rsi
-    state: invisible_wall
-    drawdepth: Overdoors
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        density: 100
-        mask:
-        - Vehicle
-        layer:
-        - Vehicle
-
-- type: entity
-  id: VehiclePeekAnchor
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
-    canCollide: false
