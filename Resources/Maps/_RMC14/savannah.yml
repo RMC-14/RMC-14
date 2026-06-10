@@ -31896,11 +31896,6 @@ entities:
     - type: Transform
       pos: -36.5,-31.5
       parent: 1
-  - uid: 17426
-    components:
-    - type: Transform
-      pos: -35.5,-30.5
-      parent: 1
   - uid: 3067
     components:
     - type: Transform

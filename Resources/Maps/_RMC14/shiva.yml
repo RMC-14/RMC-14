@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 06/03/2026 07:11:22
-  entityCount: 17739
+  entityCount: 17735
 maps:
 - 1
 grids:
@@ -50580,11 +50580,6 @@ entities:
     components:
     - type: Transform
       pos: 150.5,153.5
-      parent: 1
-  - uid: 17741
-    components:
-    - type: Transform
-      pos: 125.5,11.5
       parent: 1
 - proto: CMTableWoodenFancy
   entities:
@@ -132863,25 +132858,5 @@ entities:
     components:
     - type: Transform
       pos: 148.5,9.5
-      parent: 1
-- proto: RMCIntelDataTerminal
-  entities:
-  - uid: 17738
-    components:
-    - type: Transform
-      rot: 3.141592653589793
-      pos: 112.5,79.5
-      parent: 1
-  - uid: 17739
-    components:
-    - type: Transform
-      rot: -1.5707963267948966
-      pos: 125.5,11.5
-      parent: 1
-  - uid: 17740
-    components:
-    - type: Transform
-      rot: 0
-      pos: 188.5,142.5
       parent: 1
 ...

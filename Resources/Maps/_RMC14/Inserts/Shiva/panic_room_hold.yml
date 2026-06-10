@@ -3113,19 +3113,4 @@ entities:
     - type: Transform
       pos: 13.5,2.5
       parent: 2
-- proto: RMCTablePrison
-  entities:
-  - uid: 487
-    components:
-    - type: Transform
-      pos: 3.5,7.5
-      parent: 2
-- proto: RMCIntelDataTerminal
-  entities:
-  - uid: 486
-    components:
-    - type: Transform
-      rot: 0
-      pos: 3.5,7.5
-      parent: 2
 ...

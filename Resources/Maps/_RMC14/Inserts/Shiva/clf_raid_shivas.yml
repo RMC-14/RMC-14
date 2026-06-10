@@ -5744,12 +5744,4 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCIntelDataTerminal
-  entities:
-  - uid: 740
-    components:
-    - type: Transform
-      rot: 0
-      pos: 6.5,12.5
-      parent: 1
 ...
