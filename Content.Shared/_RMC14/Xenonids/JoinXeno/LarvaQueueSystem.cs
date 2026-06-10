@@ -118,22 +118,14 @@ public sealed class LarvaQueueSystem : EntitySystem
         TryOfferToQueue(hiveEntity);
     }
 
-    private void OnMindRemoved(Entity<CanBeLarvaQueuedComponent> ent, ref MindRemovedMessage args)
+    private void OnMindRemoved(Entity<CanBeLarvaQueuedComponent> ent, ref MindRemovedMessage _)
     {
         if (_net.IsClient || !HasComp<XenoComponent>(ent))
             return;
 
-        if (_mobState.IsDead(ent))
-        {
-            EnsureComp<LarvaQueuedComponent>(ent);
-            if (_hive.GetHive(ent.Owner) is { } hive)
-                TryOfferToQueue(hive.Owner);
-            return;
-        }
-
         EnsureComp<LarvaQueuedComponent>(ent);
-        if (_hive.GetHive(ent.Owner) is { } hiveEnt)
-            TryOfferToQueue(hiveEnt.Owner);
+        if (_hive.GetHive(ent.Owner) is { } hive)
+            TryOfferToQueue(hive.Owner);
     }
 
     private void OnMindAdded(Entity<CanBeLarvaQueuedComponent> ent, ref MindAddedMessage _)
