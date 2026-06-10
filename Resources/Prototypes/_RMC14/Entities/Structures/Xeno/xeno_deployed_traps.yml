@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: XenoTrapperTrap
   name: xeno trap
   description: A resin trap laid by a Sapper.
@@ -29,7 +29,7 @@
       trap_trigger:
         shape:
           !type:PhysShapeCircle
-          radius: 0.5
+          radius: 0.25
         hard: false
         layer:
         - Opaque

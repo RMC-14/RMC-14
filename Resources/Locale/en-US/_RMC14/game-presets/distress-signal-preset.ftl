@@ -39,6 +39,7 @@ rmc-distress-signal-saving-report = Saving operational report to archive.
 rmc-distress-signal-final-scan = Commencing final systems scan in 3 minutes.
 rmc-distress-signal-admin-start-fail = Can't start distress signal. Requires at least {$minimum} xeno player but we have {$candidates}.
 rmc-distress-signal-operation-name = Operation {$name}
+rmc-distress-signal-preflight-complete = The pre-flight fueling of the dropships is complete.
 
 rmc-distress-signal-scuttle-unlocked = ARES emergency scuttle authorization is now active. Engineering fusion reactor overload safeties have been released. Qualified engineering personnel may configure working fueled reactors with a multitool.
 rmc-distress-signal-scuttle-first-overload = Emergency reactor overload detected. ARES has begun tracking Almayer engine-core instability.
