@@ -47,7 +47,6 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
 
     private void OnSetLastRealTick(RMCSetLastRealTickEvent msg, EntitySessionEventArgs args)
     {
-        Log.Debug($"Received last real tick from {args.SenderSession}: {msg.Tick} (CurTick {_timing.CurTick}");
         SetLastRealTick(args.SenderSession.UserId, msg.Tick);
     }
 
@@ -137,7 +136,6 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         if (_net.IsServer || !_timing.IsFirstTimePredicted)
             return;
 
-        Log.Debug($"Sending last real tick: {GetLastRealTick(null)}");
         RaiseNetworkEvent(new RMCSetLastRealTickEvent(GetLastRealTick(null)));
     }
 

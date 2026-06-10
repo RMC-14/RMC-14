@@ -333,18 +333,7 @@ namespace Content.Shared.Interaction
                 return true;
             }
 
-            if (_gameTiming.IsFirstTimePredicted)
-                Log.Debug($"""
-                    Handling interaction:
-                      Session:       {session}
-                      Entity:        {uid}
-                      Cur Tick:      {_gameTiming.CurTick}
-                      Substep:       {_rmcLagCompensation.GetCurrentSubstep()}
-                      SessionCoords: {_transform.GetMoverCoordinates(userEntity.Value)}
-                      EntityCoords:  {coords}
-                    """);
-
-            UserInteraction(userEntity!.Value, coords, !Deleted(uid) ? uid : null, checkAccess: ShouldCheckAccess(userEntity.Value));
+            UserInteraction(userEntity.Value, coords, !Deleted(uid) ? uid : null, checkAccess: ShouldCheckAccess(userEntity.Value));
 
             return false;
         }
@@ -455,7 +444,7 @@ namespace Content.Shared.Interaction
 
             var inRangeUnobstructed = target == null
                 ? !checkAccess || InRangeUnobstructed(user, coordinates)
-                : !checkAccess || InRangeUnobstructed(user, target.Value, logPrefix: "UserInteraction"); // permits interactions with wall mounted entities
+                : !checkAccess || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
 
             // empty-hand interactions
             // combat mode hand interactions will always be true here -- since
@@ -710,8 +699,7 @@ namespace Content.Shared.Interaction
             bool popup = false,
             bool overlapCheck = true,
             EntityUid? user = null,
-            bool lagCompensate = true,
-            string? logPrefix = null)
+            bool lagCompensate = true)
         {
             if (!Resolve(other, ref other.Comp))
                 return false;
@@ -727,24 +715,8 @@ namespace Content.Shared.Interaction
             // RMC14
             var otherCoordinates = other.Comp.Coordinates;
             var otherAngle = other.Comp.LocalRotation;
-            TryComp(user ?? origin, out ActorComponent? originActor);
-            if (logPrefix != null && _gameTiming.IsFirstTimePredicted)
-            {
-                Log.Debug($"""
-                    {logPrefix} InRangeUnobstructed:
-                      Session       {originActor?.PlayerSession}
-                      CurTick:      {_gameTiming.CurTick}
-                      Substep:      {_rmcLagCompensation.GetCurrentSubstep()}
-                      LastRealTick: {_rmcLagCompensation.GetLastRealTick(originActor?.PlayerSession.UserId)}
-                      Diff:         {_gameTiming.CurTick.Value - _rmcLagCompensation.GetLastRealTick(originActor?.PlayerSession.UserId).Value}
-                      Original
-                         Coords:    {otherCoordinates}
-                    """);
-            }
-            if (lagCompensate && originActor != null)
+            if (lagCompensate && TryComp(user ?? origin, out ActorComponent? originActor))
                 (otherCoordinates, otherAngle) = _rmcLagCompensation.GetCoordinatesAngle(other, originActor.PlayerSession);
-            if (logPrefix != null && _gameTiming.IsFirstTimePredicted)
-                Log.Debug($"{logPrefix} New coords: {otherCoordinates} for session {originActor?.PlayerSession}");
             // RMC14
 
             return InRangeUnobstructed(origin,
@@ -1227,7 +1199,7 @@ namespace Content.Shared.Interaction
             if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, used))
                 return false;
 
-            if (checkAccess && !InRangeUnobstructed(user, used, logPrefix: "InteractionActivate"))
+            if (checkAccess && !InRangeUnobstructed(user, used))
                 return false;
 
             // Check if interacted entity is in the same container, the direct child, or direct parent of the user.
@@ -1367,7 +1339,7 @@ namespace Content.Shared.Interaction
             if (!Resolve(target, ref target.Comp))
                 return false;
 
-            return IsAccessible(user, target) && InRangeUnobstructed(user, target, range, collisionMask, predicate, logPrefix: "InRangeAndAccessible");
+            return IsAccessible(user, target) && InRangeUnobstructed(user, target, range, collisionMask, predicate);
         }
 
         /// <summary>
