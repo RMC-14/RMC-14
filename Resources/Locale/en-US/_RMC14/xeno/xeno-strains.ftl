@@ -15,12 +15,18 @@ rmc-xeno-trapper-popup = The battlefield is my canvas, this one, my painter. Mel
 
 rmc-xeno-dancer-name = Dancer
 rmc-xeno-dancer-description = You trade your spit, acid ball, acid spray, corrosive acid, dash, and a small bit of armor for high single-target damage.
+   You lose:
+   - Your dash and acid abilities
+   - The ability to benefit from recovery pheromones any better than 'strong'
    You gain the ability to:
+   - Better health regen overtime.
+   - The ability to dodge every 6th projectile that would hit you (note: you can still be hit by snipers and rockets).
    - Break walls and other simple structures with your slash attack.
-   - Cause enemies to be marked on slash and tail stab hits which effects your other abilities.
-   - Impale an enemy for your base slash damage and pierce some armor, hitting twice on marked.
-   - Trip an enemy to disarm them, or stun them if marked.
-   - Gain a temporary speed boost thats doubled around your enemies.
+   - Cause enemies to be marked on slash and tail stab hits which effects your other abilities. Critting or killing an enemy will apply critical marks to nearby enemies that are up and awake, though you can't apply critical marks again for a short duration, or use the same target to apply more for longer.
+   - Tail Lance, which can be used as a normal tail stab or one that has 1/3rd the cooldown, much less damage, but ignores armor.
+   - Impale an enemy for your base slash damage and pierce some armor, hitting twice on marked. If Critical Marked this has no cooldown, and hitting an enemy with your normal slash will also remove any cooldown.
+   - Trip an enemy to disarm them, or stun them if marked. If Critical Marked this has no cooldown, and hitting an enemy with your normal slash will also remove any cooldown.
+   - Gain a temporary speed boost that allows you to move through enemies and allies, as well as dodge every 3rd projectile instead of every 6th.
 rmc-xeno-dancer-popup = A performance fit for a Queen, this one will become my instrument of death.
 
 rmc-xeno-oppressor-name = Oppressor

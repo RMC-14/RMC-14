@@ -35,16 +35,17 @@ public sealed class XenoTailTripSystem : EntitySystem
         if (!_rmcActions.TryUseAction(args))
             return;
 
-        args.Handled = true;
-
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.TailEffect, args.Target.ToCoordinates());
 
         EnsureComp<XenoSweepingComponent>(xeno);
         _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
 
-        if (HasComp<XenoMarkedComponent>(args.Target))
+        var criticalMark = false;
+
+        if (TryComp<XenoMarkedComponent>(args.Target, out var mark))
         {
+            criticalMark = mark.IsCriticalTag;
             if (!_size.TryGetSize(args.Target, out var size) || size < RMCSizes.Big)
                 _stun.TryParalyze(args.Target, xeno.Comp.MarkedStunTime, true);
 
@@ -57,5 +58,7 @@ public sealed class XenoTailTripSystem : EntitySystem
                 _stun.TryParalyze(args.Target, xeno.Comp.StunTime, true);
             _slow.TrySlowdown(args.Target, xeno.Comp.SlowTime, ignoreDurationModifier: true);
         }
+
+        args.Handled = criticalMark;
     }
 }

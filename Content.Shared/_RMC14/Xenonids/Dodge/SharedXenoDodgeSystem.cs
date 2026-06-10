@@ -11,11 +11,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Dodge;
 
-public sealed class XenoDodgeSystem : EntitySystem
+public abstract class SharedXenoDodgeSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] protected readonly IGameTiming _timing = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
@@ -52,6 +51,7 @@ public sealed class XenoDodgeSystem : EntitySystem
             var dodging = EnsureComp<XenoActiveDodgeComponent>(xeno);
             dodging.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
             dodging.CheckCrowd = xeno.Comp.CheckCrowd;
+            Dirty(xeno, dodging);
             _speed.RefreshMovementSpeedModifiers(xeno);
             //Half a second cooldown to prevent double clicks - longer than lurkers
             StartCooldown((xeno, dodging), xeno.Comp.ToggleLockoutTime, true);
@@ -70,7 +70,7 @@ public sealed class XenoDodgeSystem : EntitySystem
         args.Threshold += xeno.Comp.SwiftStepsMod;
     }
 
-    private void OnActiveDodgeRemove(Entity<XenoActiveDodgeComponent> xeno, ref ComponentRemove args)
+    protected virtual void OnActiveDodgeRemove(Entity<XenoActiveDodgeComponent> xeno, ref ComponentRemove args)
     {
         if (!TerminatingOrDeleted(xeno))
         {
@@ -132,6 +132,7 @@ public sealed class XenoDodgeSystem : EntitySystem
                 continue;
 
             speed.InCrowd = crowd;
+            Dirty(uid, speed);
             _speed.RefreshMovementSpeedModifiers(uid);
         }
     }

@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Xenonids.Dodge;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(XenoDodgeSystem))]
+[Access(typeof(SharedXenoDodgeSystem))]
 public sealed partial class XenoDodgeComponent : Component
 {
     [DataField, AutoNetworkedField]

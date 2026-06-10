@@ -5,6 +5,7 @@ using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -17,7 +18,8 @@ public sealed class XenoSwiftStepsSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standingState = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    //[Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -101,7 +103,7 @@ public sealed class XenoSwiftStepsSystem : EntitySystem
         List<NetEntity> toRemove = new();
         foreach (var bullet in xeno.Comp.IgnoreBullets)
         {
-            if (bullet.Value < currTime)
+            if (bullet.Value >= currTime)
                 continue;
 
             toRemove.Add(bullet.Key);
