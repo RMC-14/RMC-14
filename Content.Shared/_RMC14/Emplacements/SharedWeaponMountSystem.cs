@@ -962,6 +962,9 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     private void OnDamageModified(Entity<WeaponMountComponent> ent, ref BeforeDamageChangedEvent args)
     {
+        if (args.Damage.GetTotal() < 0)
+            return;
+
         // Receive no damage while folded.
         if (TryComp(ent, out FoldableComponent? foldable) && foldable.IsFolded)
             args.Cancelled = true;
