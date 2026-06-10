@@ -10,6 +10,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Movement;
 
@@ -20,6 +21,7 @@ public sealed class RMCMovementSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private const CollisionGroup ClimbCheckGroup = CollisionGroup.Impassable | CollisionGroup.HighImpassable |
@@ -122,6 +124,9 @@ public sealed class RMCMovementSystem : EntitySystem
 
     public void SuppressCollisionOnExit(EntityUid ent, EntityUid chamber)
     {
+        if (_timing.ApplyingState)
+            return;
+
         var outside = EnsureComp<RMCOutsideChamberComponent>(ent);
         outside.Chamber = chamber;
         Dirty(ent, outside);

@@ -108,6 +108,10 @@ public abstract class SharedBodyScannerSystem : EntitySystem
         }
 
         UpdateBodyScannerVisuals(scanner);
+
+        if (_timing.ApplyingState)
+            return;
+
         RemCompDeferred<InsideBodyScannerComponent>(args.Entity);
         _rmcMovement.SuppressCollisionOnExit(args.Entity, scanner.Owner);
     }
