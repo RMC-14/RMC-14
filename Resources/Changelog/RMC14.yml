@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Xenonids, by default, are immune to becoming zombies. This can change
-      during a round, however.
-    type: Tweak
-  id: 2810
-  time: '2026-01-23T03:56:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9042
-- author: Whisper
-  changes:
-  - message: All airlocks should now be able to be properly deconstructed into metal.
-    type: Fix
-  id: 2811
-  time: '2026-01-23T03:58:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9050
 - author: YO0teacher
   changes:
   - message: Fixed being able to use optics while viewing overwatch cameras.
@@ -4512,5 +4497,38 @@
   id: 3309
   time: '2026-06-07T02:12:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8819
+- author: Aurallianz
+  changes:
+  - message: crit xenos ghosting kills them
+    type: Fix
+  - message: vertical scroll bar for new to job popup
+    type: Fix
+  id: 3310
+  time: '2026-06-07T03:09:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10030
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a source of server-side lag, specially in high pop.
+    type: Fix
+  - message: Fixed correspondents not getting universal recorders in their vendor
+      bundle.
+    type: Fix
+  - message: Fixed xenos being able to interact with M-6 folding barricades.
+    type: Fix
+  - message: Fixed not being able to open the storage UI on the scout helmet.
+    type: Fix
+  - message: Fixed dropship consoles, evacuation pod computers, and quickmeds being
+      unpowered.
+    type: Fix
+  - message: Fixed the Warden jumpsuit being invisible.
+    type: Fix
+  - message: Fixed nested contents within supply drop crates being destroyed upon
+      landing, such as shells inside shell boxes, or XM88 bullets inside their kits.
+    type: Fix
+  - message: Fixed Almayer hangar bay destinations not being named.
+    type: Fix
+  id: 3311
+  time: '2026-06-07T07:44:46.438058+00:00'
+  url: null
 Name: RMC14
 Order: -1

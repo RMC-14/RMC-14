@@ -157,6 +157,7 @@ rmc-dropship-equipment-operational = OPERATIONAL
 rmc-dropship-equipment-damaged = DAMAGED
 rmc-dropship-equipment-destroyed = DESTROYED
 
+rmc-dropship-launch-bay-fire-not-flying = You can only launch equipment while in flight.
 rmc-dropship-launch-bay-screen-text = LAG-14 Internal Sentry Launcher
 rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
 
