@@ -17,7 +17,7 @@ rmc-xeno-dancer-name = Dancer
 rmc-xeno-dancer-description = You trade your spit, acid ball, acid spray, corrosive acid, dash, and a small bit of armor for high single-target damage.
    You lose:
    - Your dash and acid abilities
-   - The ability to benefit from recovery pheromones any better than 'strong'
+   - The ability to fully benefit from recovery pheromones better than 'strong'
    You gain the ability to:
    - Better health regen overtime.
    - The ability to dodge every 6th projectile that would hit you (note: you can still be hit by snipers and rockets).
@@ -135,7 +135,7 @@ rmc-xeno-berserker-name = Berserker
 rmc-xeno-berserker-description = You lose:
   - Your empower, charge, and scissor cut.
   - Some health.
-  - A bit of your influence under frenzy pheromones.
+  - The ability to fully benefit from 'strong' or better frenzy pheromones 
   You gain:
   - Movement speed, a slight increase in armor, and gain a new set of abilities that make you a terrifying melee monster.
   - The ability to heal when you slash and gain a stack of rage that increases your armor, movement speed, and your heals per slash, to a maximum of six rage.
