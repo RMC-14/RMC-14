@@ -60,7 +60,8 @@ public sealed class RMCWeatherFullscreenOverlay : Overlay
         _lookup = lookup;
         _timing = timing;
         _shader = prototypes.Index<ShaderPrototype>("RMCWeatherPersonalOverlay").InstanceUnique();
-        ZIndex = -1;
+        // Draw above night vision and xeno world-info overlays so weather limits their visibility.
+        ZIndex = 3;
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
