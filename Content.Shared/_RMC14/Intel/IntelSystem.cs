@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Access.Systems;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
@@ -46,6 +47,7 @@ namespace Content.Shared._RMC14.Intel;
 public sealed class IntelSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedXenoAcidSystem _acid = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly ARESCoreSystem _aresCore = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -95,21 +97,21 @@ public sealed class IntelSystem : EntitySystem
 
     private static readonly Dictionary<string, LocId> DiskColors = new()
     {
-        ["RMCIntelDataDisk1"] = "rmc-intel-color-grey",
-        ["RMCIntelDataDisk2"] = "rmc-intel-color-grey",
-        ["RMCIntelDataDisk3"] = "rmc-intel-color-white",
-        ["RMCIntelDataDisk4"] = "rmc-intel-color-white",
-        ["RMCIntelDataDisk5"] = "rmc-intel-color-white",
-        ["RMCIntelDataDisk6"] = "rmc-intel-color-green",
-        ["RMCIntelDataDisk7"] = "rmc-intel-color-green",
-        ["RMCIntelDataDisk8"] = "rmc-intel-color-red",
-        ["RMCIntelDataDisk9"] = "rmc-intel-color-red",
-        ["RMCIntelDataDisk10"] = "rmc-intel-color-red",
-        ["RMCIntelDataDisk11"] = "rmc-intel-color-blue",
-        ["RMCIntelDataDisk12"] = "rmc-intel-color-blue",
-        ["RMCIntelDataDisk13"] = "rmc-intel-color-cracked-blue",
-        ["RMCIntelDataDisk14"] = "rmc-intel-color-cracked-blue",
-        ["RMCIntelDataDisk15"] = "rmc-intel-color-bloodied-blue",
+        ["RMCIntelComputerDisk1"] = "rmc-intel-color-grey",
+        ["RMCIntelComputerDisk2"] = "rmc-intel-color-grey",
+        ["RMCIntelComputerDisk3"] = "rmc-intel-color-white",
+        ["RMCIntelComputerDisk4"] = "rmc-intel-color-white",
+        ["RMCIntelComputerDisk5"] = "rmc-intel-color-white",
+        ["RMCIntelComputerDisk6"] = "rmc-intel-color-green",
+        ["RMCIntelComputerDisk7"] = "rmc-intel-color-green",
+        ["RMCIntelComputerDisk8"] = "rmc-intel-color-red",
+        ["RMCIntelComputerDisk9"] = "rmc-intel-color-red",
+        ["RMCIntelComputerDisk10"] = "rmc-intel-color-red",
+        ["RMCIntelComputerDisk11"] = "rmc-intel-color-blue",
+        ["RMCIntelComputerDisk12"] = "rmc-intel-color-blue",
+        ["RMCIntelComputerDisk13"] = "rmc-intel-color-cracked-blue",
+        ["RMCIntelComputerDisk14"] = "rmc-intel-color-cracked-blue",
+        ["RMCIntelComputerDisk15"] = "rmc-intel-color-bloodied-blue",
     };
 
     private static readonly EntProtoId<IntelTechTreeComponent> TechTreeProto = "RMCIntelTechTree";
@@ -131,21 +133,21 @@ public sealed class IntelSystem : EntitySystem
 
     private static readonly EntProtoId[] DiskProtos =
     [
-        "RMCIntelDataDisk1",
-        "RMCIntelDataDisk2",
-        "RMCIntelDataDisk3",
-        "RMCIntelDataDisk4",
-        "RMCIntelDataDisk5",
-        "RMCIntelDataDisk6",
-        "RMCIntelDataDisk7",
-        "RMCIntelDataDisk8",
-        "RMCIntelDataDisk9",
-        "RMCIntelDataDisk10",
-        "RMCIntelDataDisk11",
-        "RMCIntelDataDisk12",
-        "RMCIntelDataDisk13",
-        "RMCIntelDataDisk14",
-        "RMCIntelDataDisk15",
+        "RMCIntelComputerDisk1",
+        "RMCIntelComputerDisk2",
+        "RMCIntelComputerDisk3",
+        "RMCIntelComputerDisk4",
+        "RMCIntelComputerDisk5",
+        "RMCIntelComputerDisk6",
+        "RMCIntelComputerDisk7",
+        "RMCIntelComputerDisk8",
+        "RMCIntelComputerDisk9",
+        "RMCIntelComputerDisk10",
+        "RMCIntelComputerDisk11",
+        "RMCIntelComputerDisk12",
+        "RMCIntelComputerDisk13",
+        "RMCIntelComputerDisk14",
+        "RMCIntelComputerDisk15",
     ];
 
     private static readonly TimeSpan PersonalCluePopupDelay = TimeSpan.FromSeconds(1.25);
@@ -1287,7 +1289,8 @@ public sealed class IntelSystem : EntitySystem
         Dictionary<IntelSpawnerType, float> chances,
         bool activePosition = true,
         bool randomNumber = true,
-        bool insertNearby = true)
+        bool insertNearby = true,
+        Action<EntityUid>? onSpawn = null)
     {
         var items = new List<EntityUid>();
         if (protos.Count == 0)
@@ -1318,6 +1321,8 @@ public sealed class IntelSystem : EntitySystem
                 Dirty(intel, number);
                 _nameModifier.RefreshNameModifiers(intel);
             }
+
+            onSpawn?.Invoke(intel);
 
             if (!insertNearby)
                 continue;
@@ -1406,7 +1411,7 @@ public sealed class IntelSystem : EntitySystem
             var reports = SpawnIntel(ProgressReportProto, _progressReports, _progressReportChances);
             var folders = SpawnIntel(FolderProto, _folders, _folderChances);
             var highs = SpawnIntel(TechnicalManualProto, _technicalManuals, _technicalManualChances);
-            var disks = SpawnIntel(DiskProtos, _disks, _diskChances);
+            var disks = SpawnDataDisks(_disks);
             var dataTerminals = ActivateDataTerminalObjectives(_dataTerminals);
             var devices = SpawnIntel(ExperimentalDeviceProtos, _experimentalDevices, _experimentalDeviceChances, randomNumber: false);
             var safes = ActivateSafeObjectives(_safes);
@@ -1496,6 +1501,50 @@ public sealed class IntelSystem : EntitySystem
 
             _nameModifier.RefreshNameModifiers(folder);
         }
+    }
+
+    private List<EntityUid> SpawnDataDisks(int count)
+    {
+        return SpawnIntel(DiskProtos, count, _diskChances, onSpawn: SetupDataDisk);
+    }
+
+    private void SetupDataDisk(EntityUid diskId)
+    {
+        var disk = EnsureComp<IntelDataDiskComponent>(diskId);
+        disk.EncryptionKey = GenerateAccessKey();
+        disk.UploadProgress = 0;
+        disk.Uploading = false;
+        disk.Completed = false;
+        disk.LastUser = null;
+        Dirty(diskId, disk);
+
+        var retrieve = EnsureComp<IntelRetrieveItemObjectiveComponent>(diskId);
+        retrieve.State = IntelObjectiveState.Inactive;
+        retrieve.Value = FixedPoint2.New(0.1);
+        Dirty(diskId, retrieve);
+
+        var clues = EnsureComp<IntelCluesComponent>(diskId);
+        clues.Clue = "rmc-intel-clue-data-disk";
+        clues.Category = "rmc-intel-data";
+        clues.Clues = 2;
+        SetInitialArea((diskId, clues));
+        Dirty(diskId, clues);
+
+        var details = EnsureComp<IntelClueDetailsComponent>(diskId);
+        if (string.IsNullOrWhiteSpace(details.Label))
+            details.Label = GenerateDataLabel();
+
+        if (MetaData(diskId).EntityPrototype is { } proto &&
+            DiskColors.TryGetValue(proto.ID, out var color))
+        {
+            details.ColorName = color;
+        }
+
+        Dirty(diskId, details);
+
+        EnsureComp<IntelDetectorTrackedComponent>(diskId);
+        _acid.SetCorrodible(diskId, false);
+        _nameModifier.RefreshNameModifiers(diskId);
     }
 
     private List<EntityUid> ActivateDataTerminalObjectives(int count)

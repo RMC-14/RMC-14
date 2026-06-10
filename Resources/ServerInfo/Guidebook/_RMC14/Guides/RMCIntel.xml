@@ -52,13 +52,13 @@
 
   <Box>
     <GuideEntityEmbed Entity="RMCIntelRetrieveHealthAnalyzer" />
-    <GuideEntityEmbed Entity="RMCIntelDataDisk1" />
+    <GuideEntityEmbed Entity="RMCIntelComputerDisk1" />
     <GuideEntityEmbed Entity="RMCIntelDataTerminal" />
   </Box>
 
   - These devices must be stored in the intel room.
   - Data disks must be brought to a SIGINT terminal, decrypted with the key found in your clues, and uploaded before they can be stored for retrieval credit.
-  - Data terminals are uploaded planetside. They require the password from your clues, restored communications, and working colony power.
+  - Data terminals are located planetside. They require the password from your clues, restored communications, and working colony power.
   - Some safes may contain miscellaneous intelligence. Their combinations are found through document clues.
 
   ## Working in intelligence
