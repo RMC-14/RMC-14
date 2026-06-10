@@ -12,6 +12,8 @@
     sprite: _RMC14/Objects/Clothing/Belt/inflatable.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/inflatable.rsi
+  - type: BlackMarketValue
+    value: 20
 
 # Storage
 - type: entity
@@ -926,6 +928,23 @@
     - RMCGeneralRevolverHolster
   - type: ItemCamouflage
     camouflageVariations: { }
+
+- type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCBeltGunslinger
+  name: custom-tooled gunslinger's belt
+  description: A custom-tooled gunbelt with matching revolver holsters. It looks like it belongs in a duel nobody should be having aboard a warship.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/gunslinger_holster.rsi
+    layers:
+    - state: icon
+    - state: icon
+      map: [ "openLayer" ]
+    - state: icon
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/gunslinger_holster.rsi
 
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one

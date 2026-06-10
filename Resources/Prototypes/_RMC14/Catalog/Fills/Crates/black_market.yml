@@ -1,0 +1,1280 @@
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketScanner
+  name: black market scanner crate
+  description: A wooden crate. Something about it seems a little too deliberately ordinary.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBlackMarketScanner
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketType77
+  name: Type 77 pulse assault rifle crate
+  description: Includes a Type 77 pulse assault rifle and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleType77
+    - id: RMCMagazineRifleType77
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketM16
+  name: M16 rifle crate
+  description: Includes an M16 rifle and four magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM16
+    - id: RMCMagazineRifleM16
+      amount: 4
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAR10
+  name: AR10 rifle crate
+  description: Includes an AR10 rifle and four magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleAR10
+    - id: RMCMagazineRifleAR10
+      amount: 4
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMAR30
+  name: MAR-30 battle carbine crate
+  description: Includes a MAR-30 battle carbine and five MAR magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleMAR30
+    - id: RMCMagazineRifleMAR40
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketHuntingRifle
+  name: Basira-Armstrong bolt-action hunting rifle crate
+  description: Includes a Basira-Armstrong bolt-action hunting rifle and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponBoltActionRifle
+    - id: RMCMagazineRifleHunting
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketCustomShotgun
+  name: damaged custom-built shotgun crate
+  description: Includes a damaged custom-built shotgun and one slug shell box.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunCustomBuiltDamaged
+    - id: RMCBoxShotgunSlugs
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketFP9000
+  name: FN FP9000 submachine gun crate
+  description: Includes an FN FP9000 submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGFP9000
+    - id: RMCMagazineSMGFP9000
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketPDW90
+  name: PDW90 submachine gun crate
+  description: Includes a PDW90 submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGPDW90
+    - id: RMCMagazineSMGPDW90
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMP27
+  name: MP-27 submachine gun crate
+  description: Includes an MP-27 submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGMP27
+    - id: RMCMagazineSMGMP27
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMP5
+  name: MP5 submachine gun crate
+  description: Includes an MP5 submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSMGMP5
+    - id: CMMagazineSMGMP5
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketUZI
+  name: UZI submachine gun crate
+  description: Includes a UZI submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGUZI
+    - id: RMCMagazineSMGUZI
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMAC15
+  name: MAC-15 submachine gun crate
+  description: Includes a MAC-15 submachine gun and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSMGMAC15
+    - id: RMCMagazineSMGMAC15
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketType19
+  name: Type-19 submachine gun crate
+  description: Includes a Type-19 submachine gun, two drum magazines, and three stick magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGType19
+    - id: RMCMagazineSMGType19Drum
+      amount: 2
+    - id: RMCMagazineSMGType19
+      amount: 3
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketB92FS
+  name: Beretta pistol crate
+  description: Includes a Beretta 92FS pistol and six magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolB92FS
+    - id: RMCMagazinePistolB92FS
+      amount: 6
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketPeregrineHandcannon
+  name: Peregrine handcannon crate
+  description: Includes a Peregrine handcannon and four magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolHandcannon
+    - id: RMCMagazinePistolHandcannon
+      amount: 4
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketType73
+  name: Type 73 pistol crate
+  description: Includes a Type 73 pistol and six magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolT73
+    - id: RMCMagazinePistolT73
+      amount: 6
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketKT42
+  name: KT-42 Automag pistol crate
+  description: Includes a KT-42 Automag pistol and five magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolKT42
+    - id: RMCMagazinePistolKT42
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketHoldout
+  name: holdout pistol crate
+  description: Includes a holdout pistol and seven magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolHoldout
+    - id: RMCMagazinePistolHoldout
+      amount: 7
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketType64
+  name: Type 64 submachine gun crate
+  description: Includes a Type 64 submachine gun and four magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponSMGType64
+    - id: RMCMagazineSMGType64
+      amount: 4
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSpearhead
+  name: CMB Spearhead revolver crate
+  description: Includes a CMB Spearhead revolver and five speed loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSpearhead
+    - id: RMCSpeedLoader357
+      amount: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketM37
+  name: M37 revolver crate
+  description: Includes an M37 revolver and six speed loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverM37
+    - id: RMCSpeedLoaderM37
+      amount: 6
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketZHNK72
+  name: ZHNK-72 revolver crate
+  description: Includes a ZHNK-72 revolver and six speed loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverZHNK72
+    - id: RMCSpeedLoaderZHNK72
+      amount: 6
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketR4T
+  name: R4T hunting rifle case
+  description: Includes an R4T lever-action rifle, scouting stock, two 45-70 ammo boxes, and one 45-70 blank box.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleR4T
+    - id: RMCAttachmentR4TStock
+    - id: RMCBox4570
+      amount: 2
+    - id: RMCBox4570Training
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketShipsideAlcohol
+  name: confiscated alcohol crate
+  description: Contains five random bottles of confiscated shipside alcohol.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCBlackMarketShipsideAlcoholTable
+        rolls: !type:ConstantNumberSelector
+          value: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketShipsideMedicine
+  name: confiscated medicinal supplies crate
+  description: Contains five random batches of confiscated shipside medicinal supplies.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCBlackMarketShipsideMedicineTable
+        rolls: !type:ConstantNumberSelector
+          value: 5
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketShipsideCuisine
+  name: confiscated cuisine supplies crate
+  description: Contains seven random pieces of confiscated shipside cuisine.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCBlackMarketShipsideCuisineTable
+        rolls: !type:ConstantNumberSelector
+          value: 7
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketShipsideNicotine
+  name: confiscated nicotine items crate
+  description: Contains two random confiscated nicotine items.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCBlackMarketShipsideNicotineTable
+        rolls: !type:ConstantNumberSelector
+          value: 2
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketShipsideMiscellaneous
+  name: confiscated miscellaneous items crate
+  description: Contains six random miscellaneous confiscated shipside items.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCBlackMarketShipsideMiscellaneousTable
+        rolls: !type:ConstantNumberSelector
+          value: 6
+
+- type: entityTable
+  id: RMCBlackMarketShipsideAlcoholTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCDrinkAlcoholGin
+    - id: RMCDrinkAlcoholWhiskey
+    - id: RMCDrinkAlcoholSake
+    - id: RMCDrinkAlcoholVodka
+    - !type:GroupSelector
+      children:
+      - id: RMCDrinkAlcoholVodkaChessBlackBishop
+      - id: RMCDrinkAlcoholVodkaChessBlackKing
+      - id: RMCDrinkAlcoholVodkaChessBlackKnight
+      - id: RMCDrinkAlcoholVodkaChessBlackPawn
+      - id: RMCDrinkAlcoholVodkaChessBlackQueen
+      - id: RMCDrinkAlcoholVodkaChessBlackRook
+      - id: RMCDrinkAlcoholVodkaChessWhiteBishop
+      - id: RMCDrinkAlcoholVodkaChessWhiteKing
+      - id: RMCDrinkAlcoholVodkaChessWhiteKnight
+      - id: RMCDrinkAlcoholVodkaChessWhitePawn
+      - id: RMCDrinkAlcoholVodkaChessWhiteQueen
+      - id: RMCDrinkAlcoholVodkaChessWhiteRook
+    - id: RMCDrinkAlcoholTequila
+    - id: RMCDrinkAlcoholDavenport
+    - id: RMCDrinkAlcoholNothing
+    - id: RMCDrinkAlcoholPatron
+    - id: RMCDrinkAlcoholRum
+    - id: RMCDrinkAlcoholVermouth
+    - id: RMCDrinkAlcoholKahlua
+    - id: RMCDrinkAlcoholGoldschlager
+    - id: RMCDrinkAlcoholCognac
+    - id: RMCDrinkAlcoholWine
+    - id: RMCDrinkAlcoholAbsinthe
+    - id: RMCDrinkAlcoholMelonLiquor
+    - id: RMCDrinkAlcoholBlueCuracao
+    - id: RMCDrinkAlcoholGrenadine
+    - id: RMCDrinkAlcoholPurpleWine
+    - id: RMCDrinkAlcoholCraftBeer
+    - id: RMCDrinkAlcoholTuxedo
+    - id: RMCDrinkAlcoholGanucci
+    - id: RMCDrinkAlcoholBlueMalt
+    - id: RMCDrinkAlcoholPartyPopper
+    - id: RMCDrinkAlcoholTazhushka
+    - id: RMCDrinkAlcoholReaper
+    - id: RMCDrinkAlcoholMono
+
+- type: entityTable
+  id: RMCBlackMarketShipsideMedicineTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCPillCanisterHappy
+    - id: RMCPillCanisterMystery
+    - id: RMCPillCanisterRussianRedNoSkill
+    - id: RMCDrinkFlaskWeYaPoisoned
+    - id: RMCDrinkFlaskHippieWater
+    # TODO RMC14: port paracetamol once pain/painkiller mechanics exist.
+
+- type: entityTable
+  id: RMCBlackMarketShipsideCuisineTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCDrinkAlcoholAbsinthe
+    - id: RMCDrinkAlcoholPurpleWine
+    - id: RMCFoodStew
+    - id: RMCFoodDonutChaos
+    - id: FoodEgg
+    - id: FoodEgg
+    - id: RMCFoodXenoMeatPie
+    - id: RMCMRESPP
+    - id: RMCMarinePreparedMealCookies
+    - id: RMCMarinePreparedMealGingerbread
+    - id: RMCMarinePreparedMealFruitcake
+    - id: RMCFoodSnackHUNK
+    - id: RMCFoodMeatCorgi
+    - id: RMCFoodMeatXeno
+    - id: RMCFoodPoisonedApple
+    - id: RMCFoodPoisonBerries
+    - id: RMCFoodDeathBerries
+    - id: RMCFoodCarpFillet
+    - id: RMCFoodCandyCorn
+    - id: RMCFoodBurgerMonkey
+    - id: RMCFoodBurgerXeno
+    - id: RMCFoodAmanitaJelly
+    - id: RMCFoodSpacyLibertyDuff
+    - id: RMCFoodMonkeysDelight
+    - id: RMCFoodResinFruit
+    - id: RMCCondimentHotsauceFranksMacho
+
+- type: entityTable
+  id: RMCBlackMarketShipsideNicotineTable
+  table: !type:GroupSelector
+    children:
+    - id: RMCCigarettePackExecutiveSelect
+    - id: RMCCigarettePackWeYaGold
+    - id: RMCCigarettePackKoorlanderGold
+    - id: RMCCigarettePackArcturianAce
+    - id: RMCCigarettePackLadyFingers
+    - id: RMCTarbackCase
+    - id: RMCTarbackTube
+
+- type: entityTable
+  id: RMCBlackMarketShipsideMiscellaneousTable
+  table: !type:GroupSelector
+    children:
+    - id: BikeHorn
+    - id: RMCPacketGrenadeHEFAToyFilled
+    - id: CMBeltInflatable
+    - id: BeachBall
+    - id: CMPlushieFarwa
+    - id: RMCWaterFlower
+    - id: RMCSpinningToy
+    - id: SnapPopBox
+    - id: RMCCrayonBox
+    - id: BalloonNT
+    - id: RMCWallet
+    - id: ClothingBeltChampion
+    - id: RMCClothingMaskLuchador
+    - id: CMSoapDeluxe
+    # TODO RMC14: port K92 Maintenance Jack and add RMCMaintenanceJack here.
+    - id: CMGrenadeSmoke
+    - id: FoodCornTrash
+    - id: RMCRolledPoster
+    - id: ToyRipley
+    - id: ToyFireRipley
+    - id: ToyDeathRipley
+    - id: FoodAmbrosiaDeus
+    - id: FoodAmbrosiaVulgaris
+    - id: RMCTieHorrible
+    - id: CMBeltInflatable
+    # TODO RMC14: uncomment pamphlets once their black-market functionality is implemented.
+    # - id: CMPamphletPowerloader
+    # - id: CMPamphletLanguageRussian
+    # - id: CMPamphletLanguageJapanese
+    # - id: CMPamphletLanguageChinese
+    # - id: CMPamphletLanguageGerman
+    # - id: CMPamphletLanguageSpanish
+    # - id: CMPamphletLanguageScandinavian
+    # - id: CMPamphletLanguageFrench
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusPoncho
+  name: surplus UNMC poncho crate (x2)
+  description: An ASRS crate containing a failure note instead of surplus UNMC ponchos.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPaperBlackMarketPonchoFailure
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusHEAP
+  name: surplus high-explosive armor-piercing M54C magazine crate (x3)
+  description: An ASRS crate containing a failure note instead of surplus HEAP magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPaperBlackMarketHEAPFailure
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusRiotControl
+  name: surplus riot control equipment
+  description: Contains three random pieces of surplus riot control equipment.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCStunBatonDamaged
+      orGroup: SurplusRiotOne
+    - id: RMCPepperSpray
+      orGroup: SurplusRiotOne
+    - id: RMCStunprod
+      orGroup: SurplusRiotOne
+    - id: RMCBoxShotgunBeanbag
+      orGroup: SurplusRiotOne
+    - id: RMCPacketGrenadeM15RubberFilled
+      orGroup: SurplusRiotOne
+    - id: RMCM85A1Case
+      orGroup: SurplusRiotOne
+    - id: CMArmorHelmetM10MP
+      orGroup: SurplusRiotOne
+    - id: RMCRC6RiotShield
+      orGroup: SurplusRiotOne
+    - id: RMCStunBatonDamaged
+      orGroup: SurplusRiotTwo
+    - id: RMCPepperSpray
+      orGroup: SurplusRiotTwo
+    - id: RMCStunprod
+      orGroup: SurplusRiotTwo
+    - id: RMCBoxShotgunBeanbag
+      orGroup: SurplusRiotTwo
+    - id: RMCPacketGrenadeM15RubberFilled
+      orGroup: SurplusRiotTwo
+    - id: RMCM85A1Case
+      orGroup: SurplusRiotTwo
+    - id: CMArmorHelmetM10MP
+      orGroup: SurplusRiotTwo
+    - id: RMCRC6RiotShield
+      orGroup: SurplusRiotTwo
+    - id: RMCStunBatonDamaged
+      orGroup: SurplusRiotThree
+    - id: RMCPepperSpray
+      orGroup: SurplusRiotThree
+    - id: RMCStunprod
+      orGroup: SurplusRiotThree
+    - id: RMCBoxShotgunBeanbag
+      orGroup: SurplusRiotThree
+    - id: RMCPacketGrenadeM15RubberFilled
+      orGroup: SurplusRiotThree
+    - id: RMCM85A1Case
+      orGroup: SurplusRiotThree
+    - id: CMArmorHelmetM10MP
+      orGroup: SurplusRiotThree
+    - id: RMCRC6RiotShield
+      orGroup: SurplusRiotThree
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusNonLethalAmmo
+  name: surplus non-lethal ammunition
+  description: Contains two random batches of surplus non-lethal ammunition.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGM63Rubber
+      orGroup: SurplusNonLethalOne
+    - id: RMCMagazinePistolM1984Rubber
+      orGroup: SurplusNonLethalOne
+    - id: RMCMagazinePistolM77Rubber
+      orGroup: SurplusNonLethalOne
+    - id: RMCMagazineRifleM54CRubber
+      orGroup: SurplusNonLethalOne
+    - id: RMCMagazineRifleM4SPRRubber
+      orGroup: SurplusNonLethalOne
+    - id: RMCBoxShotgunBeanbag
+      orGroup: SurplusNonLethalOne
+    - id: RMCMagazineSMGM63Rubber
+      orGroup: SurplusNonLethalTwo
+    - id: RMCMagazinePistolM1984Rubber
+      orGroup: SurplusNonLethalTwo
+    - id: RMCMagazinePistolM77Rubber
+      orGroup: SurplusNonLethalTwo
+    - id: RMCMagazineRifleM54CRubber
+      orGroup: SurplusNonLethalTwo
+    - id: RMCMagazineRifleM4SPRRubber
+      orGroup: SurplusNonLethalTwo
+    - id: RMCBoxShotgunBeanbag
+      orGroup: SurplusNonLethalTwo
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusMK45
+  name: surplus MK-45 Automagnum case
+  description: Contains a MK-45 Automagnum gun case.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMK45AutomagCase
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusSSG45
+  name: surplus SSG45 assault rifle case
+  description: Contains an SSG45 assault rifle gun case.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSSG45Case
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusM3717
+  name: surplus M37-17 pump shotgun case
+  description: Contains a M37-17 pump shotgun gun case.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCM3717Case
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusM1911
+  name: surplus M1911 service pistol case
+  description: Contains a M1911 service pistol gun case.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCM1911Case
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketSurplusM1911SOCOM
+  name: surplus SOCOM M1911 service pistol case
+  description: Contains a SOCOM M1911 service pistol gun case.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCM1911SOCOMCase
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmo4570
+  name: 45-70 bullet box crate
+  description: Contains one 45-70 bullet bundle box with 300 rounds.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBox4570
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmo4570Training
+  name: 45-70 training bullet box crate
+  description: Contains one 45-70 blank bullet bundle box with 300 training rounds.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBox4570Training
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType23Slugs
+  name: Type 23 slug shell box crate
+  description: Contains one Type 23 8g slug shell box with 100 shells.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxShellsType23Slugs
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType23Buckshot
+  name: Type 23 buckshot shell box crate
+  description: Contains one Type 23 8g buckshot shell box with 100 shells.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxShellsType23Buckshot
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType23Flechette
+  name: Type 23 flechette shell box crate
+  description: Contains one Type 23 8g flechette shell box with 100 shells.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxShellsType23Flechette
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType77
+  name: Type 77 magazine box crate
+  description: Contains one Type 77 magazine box with 10 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleType77
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType77AP
+  name: Type 77 AP magazine box crate
+  description: Contains one Type 77 AP magazine box with 10 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleType77AP
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoM16
+  name: M16 magazine box crate
+  description: Contains one M16 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleM16
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoAR10
+  name: AR10 magazine box crate
+  description: Contains one AR10 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleAR10
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoPeregrineHandcannon
+  name: Peregrine handcannon magazine box crate
+  description: Contains one Peregrine handcannon magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolHandcannon
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoPeregrineHandcannonHIAP
+  name: Peregrine handcannon HIAP magazine box crate
+  description: Contains one empty Peregrine handcannon HIAP magazine box.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolHandcannonHIAPEmpty
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType73
+  name: Type 73 magazine box crate
+  description: Contains one Type 73 magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolType73
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoSSG45
+  name: SSG45 magazine box crate
+  description: Contains one SSG45 magazine box with 10 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleSSG45
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoMAR30
+  name: MAR30/40 magazine box crate
+  description: Contains one MAR30/40 magazine box with 10 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRifleMAR30
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoFP9000
+  name: FN FP9000 magazine box crate
+  description: Contains one FN FP9000 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGFP9000
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoPDW90
+  name: PDW90 magazine box crate
+  description: Contains one PDW90 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGPDW90
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoMP27
+  name: MP27 magazine box crate
+  description: Contains one MP27 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGMP27
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoUZI
+  name: UZI magazine box crate
+  description: Contains one UZI magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGUZI
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoMAC15
+  name: MAC-15 magazine box crate
+  description: Contains one MAC-15 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGMAC15
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType19
+  name: Type-19 magazine box crate
+  description: Contains one Type-19 magazine box with 12 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGType19
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoB92FS
+  name: Beretta 92FS magazine box crate
+  description: Contains one Beretta 92FS magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolB92FS
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoKT42
+  name: KT-42 magazine box crate
+  description: Contains one KT-42 magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolKT42
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoType64
+  name: Type 64 magazine box crate
+  description: Contains one Type 64 magazine box with 10 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineSMGType64
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoM1911
+  name: M1911 magazine box crate
+  description: Contains one M1911 magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM1911
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoMK45
+  name: MK-45 Automagnum magazine box crate
+  description: Contains one MK-45 Automagnum magazine box with 16 magazines.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolMK45
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoSpearhead
+  name: CMB Spearhead HP speedloader box crate
+  description: Contains one CMB Spearhead hollowpoint speedloader box with 12 loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRevolverSpearheadHP
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoM37
+  name: M37 speedloader box crate
+  description: Contains one M37 .38 speedloader box with 12 loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRevolverM37
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketAmmoZHNK72
+  name: ZHNK-72 speedloader box crate
+  description: Contains one ZHNK-72 speedloader box with 12 loaders.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRevolverZHNK72
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageSpaceJam
+  name: Tickets to Space Jam crate
+  description: Contains two original tickets to Space Jam.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbSpaceJamTickets
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageNightVision
+  name: broken night vision goggles crate
+  description: Contains a cosmetic set of broken M2 night vision goggles.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbNightVision
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageXM43E1
+  name: 10x99mm XM43E1 casing crate
+  description: Contains a spent XM43E1 casing converted into helmet garb.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbBulletPipe
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageWire
+  name: trimmed barbed wire crate
+  description: Contains a piece of trimmed barbed wire for helmet decoration.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbWire
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageLuckyFeather
+  name: lucky feather crate
+  description: Contains one randomly colored lucky feather.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbFeatherRed
+      orGroup: DeepStorageLuckyFeather
+    - id: RMCHelmetGarbFeatherBlue
+      orGroup: DeepStorageLuckyFeather
+    - id: RMCHelmetGarbFeatherPurple
+      orGroup: DeepStorageLuckyFeather
+    - id: RMCHelmetGarbFeatherYellow
+      orGroup: DeepStorageLuckyFeather
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageRosary
+  name: rosary crate
+  description: Contains a rosary for helmet decoration.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbRosary
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageRabbitFoot
+  name: rabbit's foot crate
+  description: Contains a lucky rabbit's foot.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbRabbitFoot
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageTacticalMask
+  name: tactical mask crate
+  description: Contains one randomly colored tactical mask.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMaskScarfGray
+      orGroup: DeepStorageTacticalMask
+    - id: RMCMaskScarfRed
+      orGroup: DeepStorageTacticalMask
+    - id: RMCMaskScarfGreen
+      orGroup: DeepStorageTacticalMask
+    - id: RMCMaskScarfTan
+      orGroup: DeepStorageTacticalMask
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageSkullBalaclava
+  name: skull balaclava crate
+  description: Contains one randomly colored skull balaclava.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMaskBalaclavaSkullBlack
+      orGroup: DeepStorageSkullBalaclava
+    - id: RMCMaskBalaclavaSkullBlue
+      orGroup: DeepStorageSkullBalaclava
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageAviators
+  name: aviator shades crate
+  description: Contains a pair of aviator sunglasses.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesAviators
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageBallisticGoggles
+  name: ballistic goggles crate
+  description: Contains one randomly colored pair of ballistic goggles.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGogglesBallistic
+      orGroup: DeepStorageBallisticGoggles
+    - id: RMCGogglesBallisticOrange
+      orGroup: DeepStorageBallisticGoggles
+    - id: RMCGogglesBallisticBlack
+      orGroup: DeepStorageBallisticGoggles
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageTriMaxShades
+  name: TriMax personal shades crate
+  description: Contains a pair of TriMax personal shades.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesTriMaxPersonal
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageUNMCBandana
+  name: UNMC bandana crate
+  description: Contains one randomly colored UNMC bandana.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHeadBandana
+      orGroup: DeepStorageUNMCBandana
+    - id: RMCHeadBandanaTan
+      orGroup: DeepStorageUNMCBandana
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageUNMCEarpiece
+  name: UNMC earpiece crate
+  description: Contains a UNMC headset earpiece.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHeadUNMCHeadset
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageUNMCHeadband
+  name: UNMC headband crate
+  description: Contains one randomly colored UNMC headband.
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHeadBandGreen
+      orGroup: DeepStorageUNMCHeadband
+    - id: CMHeadBandBrown
+      orGroup: DeepStorageUNMCHeadband
+    - id: CMHeadBandGray
+      orGroup: DeepStorageUNMCHeadband
+    - id: CMHeadBandRed
+      orGroup: DeepStorageUNMCHeadband
+    - id: CMHeadBandTan
+      orGroup: DeepStorageUNMCHeadband
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageUNMCBoonieHat
+  name: UNMC boonie hat crate
+  description: Contains one randomly colored UNMC boonie hat.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoonieTan
+      orGroup: DeepStorageUNMCBoonie
+    - id: RMCBoonie
+      orGroup: DeepStorageUNMCBoonie
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageFrozenLime
+  name: frozen lime crate
+  description: Contains one lime from deep storage.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFoodLime
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageJungleBoots
+  name: jungle pattern combat boots crate
+  description: Contains one pair of jungle pattern combat boots.
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBootsJungle
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageType80Bayonet
+  name: Type 80 bayonet replica crate
+  description: Contains a dulled Type 80 bayonet replica.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCType80BayonetReplica
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageD18
+  name: D18 holdout pistol crate
+  description: Contains a CLF D18 box with a D18 Hummingbird and one magazine.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCLFD18Box
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageM1984Custom
+  name: M4A3 custom pistol crate
+  description: Contains one custom M4A3 service pistol.
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMWeaponPistolM1984Custom
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageM44Custom
+  name: M44 custom revolver crate
+  description: Contains one custom M44 revolver.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverM44Custom
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketDeepStorageGunslingerBelts
+  name: Red Ranger cowboy gunbelt crate
+  description: Contains two empty custom-tooled gunslinger's belts.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBeltGunslinger
+      amount: 2
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMiscSecuredWildlife
+  name: secured wildlife container
+  description: Contains one secured wildlife specimen.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/lisacrate.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      sprite: _RMC14/Structures/Storage/Crates/woodcrate.rsi
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/lisacrate.rsi
+    state: closed
+  - type: EntityStorageVisuals
+    stateDoorOpen: base
+    stateDoorClosed: closed
+  - type: StorageFill
+    contents:
+    - id: CMMobMonkey
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobFarwa
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobStok
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobYiren
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobNeaera
+      orGroup: BlackMarketSecuredWildlife
+    - id: CMMobKobold
+      orGroup: BlackMarketSecuredWildlife
+    - id: CMMobMouse
+      orGroup: BlackMarketSecuredWildlife
+    - id: CMMobMouse1
+      orGroup: BlackMarketSecuredWildlife
+    - id: CMMobMouse2
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobRat
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobRatBrown
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobRatGray
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobRatBlack
+      orGroup: BlackMarketSecuredWildlife
+    - id: CMMobWiggles
+      orGroup: BlackMarketSecuredWildlife
+    - id: CMMobJones
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobOrion
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobGarry
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobGoat
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobBear
+      orGroup: BlackMarketSecuredWildlife
+    - id: RMCMobGiantSpider
+      orGroup: BlackMarketSecuredWildlife
+
+- type: entity
+  parent: RMCCrateWoodenBuildable
+  id: RMCCrateBlackMarketMiscPottedPlant
+  name: potted plant crate
+  description: Contains one unanchored potted plant.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPottedPlantRandomUnanchored

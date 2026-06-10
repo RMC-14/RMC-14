@@ -137,3 +137,46 @@
 
 - type: Tag
   id: RMCMK45
+
+- type: entity
+  parent: RMCWeaponPistolMK45
+  id: RMCWeaponPistolMK45Black
+  suffix: Black, Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk45_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk45_black.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazinePistolMK45Black
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolMK45
+          - RMCMagazinePistolMK45Black
+
+- type: entity
+  parent: RMCMagazinePistolMK45
+  id: RMCMagazinePistolMK45Black
+  suffix: Black
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolMK45
+    - RMCMagazinePistolMK45Black
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk45_black.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+
+- type: Tag
+  id: RMCMagazinePistolMK45Black

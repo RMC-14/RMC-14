@@ -1291,6 +1291,46 @@
     startingItem: RMCMagazineRifleType77
     count: 10
 
+- type: entity
+  parent: RMCBoxMagazineRifleType77Empty
+  id: RMCBoxMagazineRifleType77APEmpty
+  name: magazine box (Type 77 AP x 10)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#515237"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#1f951f"
+    - state: rifle_box_54
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#318b11"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#515237"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType77AP
+
+- type: entity
+  parent: RMCBoxMagazineRifleType77APEmpty
+  id: RMCBoxMagazineRifleType77AP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleType77AP
+    count: 10
+
 # SSG45
 
 - type: entity

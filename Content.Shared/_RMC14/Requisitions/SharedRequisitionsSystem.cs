@@ -20,7 +20,6 @@ public abstract class SharedRequisitionsSystem : EntitySystem
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
 
     public int Starting { get; private set; }
@@ -100,12 +99,16 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         UpdateRailing(railing);
     }
 
-    public void ChangeBudget(int amount)
+    public void ChangeBudget(int amount, RequisitionsBudgetAccount account = RequisitionsBudgetAccount.Cargo)
     {
         var accountQuery = EntityQueryEnumerator<RequisitionsAccountComponent>();
         while (accountQuery.MoveNext(out var uid, out var comp))
         {
-            comp.Balance += amount;
+            if (account == RequisitionsBudgetAccount.Cargo)
+                comp.Balance += amount;
+            else if (account == RequisitionsBudgetAccount.BlackMarket)
+                comp.BlackMarketBalance += amount;
+
             Dirty(uid, comp);
         }
 
@@ -126,11 +129,93 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         var elevator = GetElevator(computer);
         var mode = elevator?.Comp.NextMode ?? elevator?.Comp.Mode;
         var busy = elevator?.Comp.Busy ?? false;
-        var balance = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account)?.Balance ?? 0;
-        var full = elevator != null && IsFull(elevator.Value);
+        var account = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account);
+        var balance = account?.Balance ?? 0;
+        var blackMarketBalance = account?.BlackMarketBalance ?? 0;
+        var blackMarketStatus = GetBlackMarketStatus(account);
+        var orderCount = elevator?.Comp.Orders.Count ?? 0;
+        var capacity = elevator != null ? GetElevatorCapacity(elevator.Value) : 0;
+        var full = elevator != null && orderCount >= capacity;
+        var pendingOrders = elevator != null
+            ? GetPendingOrders(elevator.Value.Comp.Orders)
+            : new List<RequisitionsPendingOrder>();
 
-        var state = new RequisitionsBuiState(mode, busy, balance, full);
-        _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);
+        computer.Comp.PlatformLowered = mode;
+        computer.Comp.Busy = busy;
+        computer.Comp.Balance = balance;
+        computer.Comp.Full = full;
+        computer.Comp.OrderCount = orderCount;
+        computer.Comp.Capacity = capacity;
+        computer.Comp.BlackMarketBalance = blackMarketBalance;
+        computer.Comp.BlackMarketStatus = blackMarketStatus;
+        computer.Comp.PendingOrders = pendingOrders;
+        Dirty(computer);
+    }
+
+    protected static RequisitionsBlackMarketStatus GetBlackMarketStatus(RequisitionsAccountComponent? account)
+    {
+        if (account == null)
+            return RequisitionsBlackMarketStatus.Available;
+
+        if (account.BlackMarketLockedOut)
+            return RequisitionsBlackMarketStatus.LockedOut;
+
+        if (account.BlackMarketMendozaDead)
+            return RequisitionsBlackMarketStatus.MendozaDead;
+
+        return RequisitionsBlackMarketStatus.Available;
+    }
+
+    protected static bool CanUseBlackMarket(RequisitionsAccountComponent account)
+    {
+        return GetBlackMarketStatus(account) == RequisitionsBlackMarketStatus.Available;
+    }
+
+    private static List<RequisitionsPendingOrder> GetPendingOrders(List<RequisitionsEntry> orders)
+    {
+        var pendingOrders = new List<RequisitionsPendingOrder>();
+        foreach (var order in orders)
+        {
+            var found = false;
+            foreach (var pending in pendingOrders)
+            {
+                if (!SamePendingOrder(pending.Entry, order))
+                    continue;
+
+                pending.Amount++;
+                found = true;
+                break;
+            }
+
+            if (!found)
+                pendingOrders.Add(new RequisitionsPendingOrder(order, 1));
+        }
+
+        return pendingOrders;
+    }
+
+    private static bool SamePendingOrder(RequisitionsEntry a, RequisitionsEntry b)
+    {
+        if (a.Crate != b.Crate ||
+            a.Cost != b.Cost ||
+            a.BlackMarket != b.BlackMarket ||
+            a.BlackMarketCost != b.BlackMarketCost ||
+            a.BlackMarketHeat != b.BlackMarketHeat ||
+            a.Name != b.Name ||
+            a.Description != b.Description ||
+            !Equals(a.Icon, b.Icon) ||
+            a.Entities.Count != b.Entities.Count)
+        {
+            return false;
+        }
+
+        for (var i = 0; i < a.Entities.Count; i++)
+        {
+            if (a.Entities[i] != b.Entities[i])
+                return false;
+        }
+
+        return true;
     }
 
     protected bool IsFull(Entity<RequisitionsElevatorComponent> elevator)

@@ -32,6 +32,8 @@
     blacklist:
       components:
       - Xeno
+  - type: BlackMarketValue
+    value: 25
 
 - type: entity
   parent: RMCBlackGooGlass

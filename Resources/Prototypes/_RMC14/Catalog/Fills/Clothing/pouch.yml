@@ -70,7 +70,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCSpaceCash1000
+    - id: RMCSpaceCash1000Counterfeit
     - id: RMCSpeedLoader38
       amount: 2
 

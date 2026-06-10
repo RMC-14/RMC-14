@@ -18,6 +18,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/handling/gun_mar40_unload.ogg"
 
+- files: ["gun_lever_action_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/handling/gun_lever_action_reload.ogg"
+
 - files: ["grenade_insert.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13, converted to .ogg"
@@ -162,3 +167,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/handling/gun_m10_auto_pistol_unload.ogg"
+
+- files: ["nsg23_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/handling/nsg23_reload.ogg"
+
+- files: ["nsg23_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/handling/nsg23_unload.ogg"

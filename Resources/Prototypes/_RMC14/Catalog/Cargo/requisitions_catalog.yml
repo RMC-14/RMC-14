@@ -5,136 +5,922 @@
   - type: Speech
     speechVerb: Robotic
   - type: RequisitionsComputer
+    blackMarketCategories:
+    - name: rmc-requisitions-black-market-category-seized-items
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: 0
+        crate: RMCCrateBlackMarketScanner
+        icon:
+          entity: RMCBlackMarketScanner
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 70
+        blackMarketHeat: 10
+        crate: RMCCrateBlackmarketConfiscatedEquipment
+        icon:
+          entity: RMCCrateBlackmarketConfiscatedEquipment
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 15
+        crate: RMCCrateBlackmarketConfiscatedWeaponry
+        icon:
+          entity: RMCCrateBlackmarketConfiscatedWeaponry
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 20
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketType77
+        icon:
+          entity: RMCWeaponRifleType77
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketM16
+        icon:
+          entity: WeaponRifleM16
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAR10
+        icon:
+          entity: WeaponRifleAR10
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketMAR30
+        icon:
+          entity: RMCWeaponRifleMAR30
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketHuntingRifle
+        icon:
+          entity: RMCWeaponBoltActionRifle
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 50
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketCustomShotgun
+        icon:
+          entity: WeaponShotgunCustomBuiltDamaged
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 25
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketFP9000
+        icon:
+          entity: RMCWeaponSMGFP9000
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 20
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketPDW90
+        icon:
+          entity: RMCWeaponSMGPDW90
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 20
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketMP27
+        icon:
+          entity: RMCWeaponSMGMP27
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 25
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketMP5
+        icon:
+          entity: WeaponSMGMP5
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketUZI
+        icon:
+          entity: RMCWeaponSMGUZI
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketMAC15
+        icon:
+          entity: WeaponSMGMAC15
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketType19
+        icon:
+          entity: RMCWeaponSMGType19
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketB92FS
+        icon:
+          entity: RMCWeaponPistolB92FS
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketPeregrineHandcannon
+        icon:
+          entity: RMCWeaponPistolHandcannon
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketType73
+        icon:
+          entity: RMCWeaponPistolT73
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketKT42
+        icon:
+          entity: RMCWeaponPistolKT42
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: 2
+        crate: RMCCrateBlackMarketHoldout
+        icon:
+          entity: RMCWeaponPistolHoldout
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketType64
+        icon:
+          entity: RMCWeaponSMGType64
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 20
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSpearhead
+        icon:
+          entity: RMCWeaponRevolverSpearhead
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketM37
+        icon:
+          entity: RMCWeaponRevolverM37
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketZHNK72
+        icon:
+          entity: RMCWeaponRevolverZHNK72
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 75
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketR4T
+        icon:
+          entity: RMCWeaponRifleR4T
+    - name: rmc-requisitions-black-market-category-shipside-contraband
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketShipsideAlcohol
+        icon:
+          entity: RMCDrinkAlcoholWhiskey
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 25
+        blackMarketHeat: 3
+        crate: RMCCrateBlackMarketShipsideMedicine
+        icon:
+          entity: RMCPillCanisterHappy
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketShipsideCuisine
+        icon:
+          entity: RMCFoodSnackHUNK
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketShipsideNicotine
+        icon:
+          entity: RMCCigarettePackWeYaGold
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: -2
+        crate: RMCCrateBlackMarketShipsideMiscellaneous
+        icon:
+          entity: BikeHorn
+    - name: rmc-requisitions-black-market-category-surplus-equipment
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: -2
+        crate: RMCCrateBlackMarketSurplusPoncho
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: -2
+        crate: RMCCrateBlackMarketSurplusHEAP
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 55
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusRiotControl
+        icon:
+          entity: RMCPepperSpray
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 50
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusNonLethalAmmo
+        icon:
+          entity: RMCMagazineSMGM63Rubber
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusMK45
+        icon:
+          entity: RMCMK45AutomagCase
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusSSG45
+        icon:
+          entity: RMCWeaponRifleSSG45NoLock
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 80
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusM3717
+        icon:
+          entity: RMCWeaponShotgunM3717
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusM1911
+        icon:
+          entity: CMWeaponPistolM1911
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 25
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketSurplusM1911SOCOM
+        icon:
+          entity: RMCWeaponPistolM1911SOCOM
+    - name: rmc-requisitions-black-market-category-contraband-ammo
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 135
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmo4570
+        icon:
+          entity: RMCBox4570
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmo4570Training
+        icon:
+          entity: RMCBox4570Training
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 115
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType23Slugs
+        icon:
+          entity: RMCBoxShellsType23Slugs
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 115
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType23Buckshot
+        icon:
+          entity: RMCBoxShellsType23Buckshot
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 115
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType23Flechette
+        icon:
+          entity: RMCBoxShellsType23Flechette
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType77
+        icon:
+          entity: RMCBoxMagazineRifleType77
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 80
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType77AP
+        icon:
+          entity: RMCBoxMagazineRifleType77AP
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 100
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoM16
+        icon:
+          entity: RMCBoxMagazineRifleM16
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 115
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoAR10
+        icon:
+          entity: RMCBoxMagazineRifleAR10
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 180
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoPeregrineHandcannon
+        icon:
+          entity: RMCBoxMagazinePistolHandcannon
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 260
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoPeregrineHandcannonHIAP
+        icon:
+          entity: RMCBoxMagazinePistolHandcannonHIAPEmpty
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 60
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType73
+        icon:
+          entity: RMCBoxMagazinePistolType73
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 140
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoSSG45
+        icon:
+          entity: RMCBoxMagazineRifleSSG45
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 60
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoMAR30
+        icon:
+          entity: RMCBoxMagazineRifleMAR30
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoFP9000
+        icon:
+          entity: RMCBoxMagazineSMGFP9000
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoPDW90
+        icon:
+          entity: RMCBoxMagazineSMGPDW90
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoMP27
+        icon:
+          entity: RMCBoxMagazineSMGMP27
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 25
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoUZI
+        icon:
+          entity: RMCBoxMagazineSMGUZI
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoMAC15
+        icon:
+          entity: RMCBoxMagazineSMGMAC15
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType19
+        icon:
+          entity: RMCBoxMagazineSMGType19
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoB92FS
+        icon:
+          entity: RMCBoxMagazinePistolB92FS
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoKT42
+        icon:
+          entity: RMCBoxMagazinePistolKT42
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoType64
+        icon:
+          entity: RMCBoxMagazineSMGType64
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 40
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoM1911
+        icon:
+          entity: RMCBoxMagazinePistolM1911
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 80
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoMK45
+        icon:
+          entity: RMCBoxMagazinePistolMK45
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 70
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoSpearhead
+        icon:
+          entity: RMCBoxMagazineRevolverSpearheadHP
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoM37
+        icon:
+          entity: RMCBoxMagazineRevolverM37
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 30
+        blackMarketHeat: 5
+        crate: RMCCrateBlackMarketAmmoZHNK72
+        icon:
+          entity: RMCBoxMagazineRevolverZHNK72
+    - name: rmc-requisitions-black-market-category-deep-storage
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: -2
+        crate: RMCCrateBlackMarketDeepStorageSpaceJam
+        icon:
+          entity: RMCHelmetGarbSpaceJamTickets
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageNightVision
+        icon:
+          entity: RMCHelmetGarbNightVision
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageXM43E1
+        icon:
+          entity: RMCHelmetGarbBulletPipe
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageWire
+        icon:
+          entity: RMCHelmetGarbWire
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageLuckyFeather
+        icon:
+          entity: RMCHelmetGarbFeatherRed
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageRosary
+        icon:
+          entity: RMCHelmetGarbRosary
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageRabbitFoot
+        icon:
+          entity: RMCHelmetGarbRabbitFoot
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageTacticalMask
+        icon:
+          entity: RMCMaskScarfGray
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageSkullBalaclava
+        icon:
+          entity: RMCMaskBalaclavaSkullBlack
+      # TODO RMC14: Port Skull Facepaint behavior before enabling this Deep Storage entry.
+      # TODO RMC14: Skull Facepaint, cost 10, heat -5.
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageAviators
+        icon:
+          entity: RMCGlassesAviators
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageBallisticGoggles
+        icon:
+          entity: RMCGogglesBallistic
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 15
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageTriMaxShades
+        icon:
+          entity: RMCGlassesTriMaxPersonal
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageUNMCBandana
+        icon:
+          entity: RMCHeadBandana
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageUNMCEarpiece
+        icon:
+          entity: RMCHeadUNMCHeadset
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageUNMCHeadband
+        icon:
+          entity: CMHeadBandGreen
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageUNMCBoonieHat
+        icon:
+          entity: RMCBoonie
+      # TODO RMC14: Port CMSS PDT/L Kit behavior before enabling this Deep Storage entry.
+      # TODO RMC14: PDT/L Kit, cost 10, heat -5.
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 5
+        blackMarketHeat: -2
+        crate: RMCCrateBlackMarketDeepStorageFrozenLime
+        icon:
+          entity: RMCFoodLime
+      # TODO RMC14: Port CMSS Uno Reverse Card behavior/assets before enabling this Deep Storage entry.
+      # TODO RMC14: Uno Reverse Card, cost 10, heat -5.
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageJungleBoots
+        icon:
+          entity: CMBootsJungle
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: -5
+        crate: RMCCrateBlackMarketDeepStorageType80Bayonet
+        icon:
+          entity: RMCType80BayonetReplica
+      # TODO RMC14: Port CMSS M8 Cartridge Bayonet Kit behavior before enabling this Deep Storage entry.
+      # TODO RMC14: M8 Cartridge Bayonet Kit, cost 10, heat -5.
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 10
+        blackMarketHeat: 2
+        crate: RMCCrateBlackMarketDeepStorageD18
+        icon:
+          entity: RMCCLFD18Box
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 35
+        blackMarketHeat: 4
+        crate: RMCCrateBlackMarketDeepStorageM1984Custom
+        icon:
+          entity: CMWeaponPistolM1984Custom
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 70
+        blackMarketHeat: 4
+        crate: RMCCrateBlackMarketDeepStorageM44Custom
+        icon:
+          entity: RMCWeaponRevolverM44Custom
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 20
+        blackMarketHeat: 4
+        crate: RMCCrateBlackMarketDeepStorageGunslingerBelts
+        icon:
+          entity: RMCBeltGunslinger
+    - name: rmc-requisitions-black-market-category-miscellaneous
+      entries:
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 45
+        blackMarketHeat: 7
+        crate: RMCCrateBlackMarketMiscSecuredWildlife
+        icon:
+          entity: RMCCrateBlackMarketMiscSecuredWildlife
+      - cost: 0
+        blackMarket: true
+        blackMarketCost: 50
+        blackMarketHeat: -10
+        crate: RMCCrateBlackMarketMiscPottedPlant
+        icon:
+          entity: RMCPottedPlantRandomUnanchored
+      # TODO RMC14: Port cargo tug behavior before enabling this Miscellaneous entry.
+      # TODO RMC14: Cargo Tug Crate, cost 50, heat 0.
+      # TODO RMC14: Port unmarked CLF supply crate behavior before enabling this Miscellaneous entry.
+      # TODO RMC14: Unmarked CLF Supply Crate, cost 40, heat 25.
     categories:
-    - name: Ammo
+    - name: rmc-requisitions-category-ammo
       entries:
       - cost: 2000
         crate: RMCCrateBoxBulletsSMG
+        icon:
+          entity: RMCBoxBulletsSMG
       - cost: 4000
         crate: RMCCrateBoxBulletsSMGAP
+        icon:
+          entity: RMCBoxBulletsSMGAP
       - cost: 2000
         crate: RMCCrateBoxBulletsRifle
+        icon:
+          entity: RMCBoxBulletsRifle
       - cost: 4000
         crate: RMCCrateBoxBulletsRifleAP
+        icon:
+          entity: RMCBoxBulletsRifleAP
       - cost: 4000
         crate: RMCCrateBoxAmmo458
+        icon:
+          entity: RMCBoxBullets458
       - cost: 2000
         crate: RMCCrateBoxMagazineRifleM54C
+        icon:
+          entity: RMCBoxMagazineRifleM54C
       - cost: 4000
         crate: RMCCrateBoxMagazineRifleM54CAP
+        icon:
+          entity: RMCBoxMagazineRifleM54CAP
       - cost: 3000
         crate: RMCCrateBoxMagazineRifleM54CExt
+        icon:
+          entity: RMCBoxMagazineRifleM54CExt
       - cost: 2000
         crate: RMCCrateMagazineRifleM54CE2
+        icon:
+          entity: CMMagazineRifleM54CE2
       - cost: 3000
         crate: RMCCrateMagazineRifleM54CE2HT
+        icon:
+          entity: CMMagazineRifleM54CE2HT
       - cost: 2000
         crate: RMCCrateBoxMagazineRifleM4SPR
+        icon:
+          entity: RMCBoxMagazineRifleM4SPR
       - cost: 4000
         crate: RMCCrateBoxMagazineRifleM4SPRAP
+        icon:
+          entity: RMCBoxMagazineRifleM4SPRAP
       - cost: 2000
         crate: RMCCrateBoxMagazineSMGM63
+        icon:
+          entity: RMCBoxMagazineSMGM63
       - cost: 4000
         crate: RMCCrateBoxMagazineSMGM63AP
+        icon:
+          entity: RMCBoxMagazineSMGM63AP
       - cost: 2000
         crate: RMCCrateBoxMagazinePistolM1984
+        icon:
+          entity: RMCBoxMagazinePistolM1984
       - cost: 3000
         crate: RMCCrateBoxMagazinePistolM1984AP
+        icon:
+          entity: RMCBoxMagazinePistolM1984AP
       - cost: 3000
         crate: RMCCrateBoxMagazinePistolM1984HP
+        icon:
+          entity: RMCBoxMagazinePistolM1984HP
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunSlugs
+        icon:
+          entity: RMCBoxShellsSlugs
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunBuckshot
+        icon:
+          entity: RMCBoxShellsBuckshot
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunFlechette
+        icon:
+          entity: RMCBoxShellsFlechette
       - cost: 4000
         crate: RMCCrateBoxShellsShotgunBreaching
+        icon:
+          entity: RMCBoxShellsBreaching
       - cost: 2000
         crate: RMCCrateBoxMagazinePistolM77AP
+        icon:
+          entity: RMCBoxMagazinePistolM77AP
       - cost: 4000
         crate: RMCCrateBoxMagazinePistolMK80
+        icon:
+          entity: RMCBoxMagazinePistolMK80
       - cost: 4000
         crate: RMCCrateBatterySmartGun
+        icon:
+          entity: RMCPowerCellSmartgun
       - cost: 3000
         crate: RMCCrateMagazineSmartGun
+        icon:
+          entity: RMCMagazineSmartGun
       - cost: 4000
         crate: RMCCrateBoxMagazineSmartPistol
+        icon:
+          entity: RMCBoxMagazinePistolSU6
       - cost: 2000
         crate: RMCCrateBoxMagazineBreaching
       - cost: 2000
         crate: RMCCrateBoxMagazineM54CE2
+        icon:
+          entity: CMMagazineRifleM54CE2
       - cost: 2000
         crate: RMCCrateBoxMagazineM44Revolver
+        icon:
+          entity: RMCBoxMagazineRevolverM44
       - cost: 3000
         crate: RMCCrateBoxMagazineRevolverM44Marksman
+        icon:
+          entity: RMCBoxMagazineRevolverM44Marksman
       - cost: 4000
         crate: RMCCrateBoxMagazineSentry
+        icon:
+          entity: RMCMagazineSentry
       - cost: 4000
         crate: RMCCrateMagazineNapthalUT
+        icon:
+          entity: RMCTankFlamer
       - cost: 4000
         crate: RMCCrateMagazineBGel
+        icon:
+          entity: RMCTankFlamerBGel
       - cost: 4000
         crate: RMCCrateMagazineFlamerMixed
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
+        icon:
+          entity: RMCMagazineSentryShotgun
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFire
+        icon:
+          entity: RMCMagazineSentryFire
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFireBlue
+        icon:
+          entity: RMCMagazineSentryFireBlue
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFireSmoke
+        icon:
+          entity: RMCMagazineSentryFireSmoke
       - cost: 2500
         crate: RMCCrateMagazineML66DDrum
+        icon:
+          entity: RMCMagazineML66D
       - cost: 2500
         crate: RMCCrateMagazineM2C
+        icon:
+          entity: RMCMagazineM2C
       - cost: 6000
         crate: RMCCrateMagazineAmmoSurplus
-    - name: Attachments
+    - name: rmc-requisitions-category-attachments
       entries:
       - cost: 3000
         crate: RMCCrateAttachmentSmartScope
+        icon:
+          entity: RMCAttachmentB8SmartScope
       - cost: 2000
         crate: RMCCrateAttachmentRailFlashlight
+        icon:
+          entity: RMCAttachmentRailFlashlight
       - cost: 3000
         crate: RMCCrateAttachmentRedDot
+        icon:
+          entity: RMCAttachmentS5RedDotSight
       - cost: 3000
         crate: RMCCrateAttachmentTelescopicScope
+        icon:
+          entity: RMCAttachmentS84xTelescopicScope
       - cost: 3000
         crate: RMCCrateAttachmentMiniScope
+        icon:
+          entity: RMCAttachmentS42xTelescopicMiniscope
       - cost: 3000
         crate: RMCCrateAttachmentMagneticHarness
+        icon:
+          entity: RMCAttachmentMagneticHarness
       - cost: 3000
         crate: RMCCrateAttachmentSuppressor
+        icon:
+          entity: RMCAttachmentSuppressor
       - cost: 3000
         crate: RMCCrateAttachmentExtendedBarrel
+        icon:
+          entity: RMCAttachmentExtendedBarrel
       - cost: 3000
         crate: RMCCrateAttachmentCompensator
+        icon:
+          entity: RMCAttachmentRecoilCompensator
       - cost: 3000
         crate: RMCCrateAttachmentForegrip
       - cost: 3000
         crate: RMCCrateAttachmentGyro
+        icon:
+          entity: RMCAttachmentGyroscopicStabilizer
       - cost: 3000
         crate: RMCCrateAttachmentBipod
+        icon:
+          entity: RMCAttachmentBipod
       - cost: 3000
         crate: RMCCrateAttachmentUnderbarrelShotgun
+        icon:
+          entity: RMCAttachmentU7UnderbarrelShotgun
       - cost: 3000
         crate: RMCCrateAttachmentUnderbarrelExtinguisher
+        icon:
+          entity: RMCAttachmentUnderbarrelExtinguisher
       - cost: 3000
         crate: RMCCrateAttachmentUnderbarrelFlamer
+        icon:
+          entity: RMCAttachmentMiniFlamethrower
       - cost: 3000
         crate: RMCCrateAttachmentBurstfire
+        icon:
+          entity: RMCAttachmentBurstFireAssembly
       - cost: 6000
         crate: RMCCrateAttachmentAllStocks
       - cost: 3000
         crate: RMCCrateAttachmentRevolverStock
+        icon:
+          entity: RMCAttachmentM44MagnumSharpshooterStock
       - cost: 3000
         crate: RMCCrateAttachmentRifleStock
+        icon:
+          entity: RMCAttachmentM54CStockSolid
       - cost: 3000
         crate: RMCCrateAttachmentShotgunStock
+        icon:
+          entity: RMCAttachmentM42A2CollapsibleStock
       - cost: 3000
         crate: RMCCrateAttachmentSmgStock
-    - name: Clothing
+        icon:
+          entity: RMCAttachmentM63Stock
+    - name: rmc-requisitions-category-clothing
       entries:
       - cost: 2000
         crate: RMCCrateClothingLargePouches
@@ -142,36 +928,60 @@
         crate: RMCCrateClothingMedicalPouches
       - cost: 2000
         crate: RMCCrateClothingWebbing
+        icon:
+          entity: CMWebbing
       - cost: 2000
         crate: RMCCrateClothingWebbingBlack
+        icon:
+          entity: RMCWebbingBlackSmall
       - cost: 2000
         crate: RMCCrateClothingWebbingVest
       - cost: 2000
         crate: RMCCrateClothingWebbingKnife
+        icon:
+          entity: CMWebbingKnivesFilled
       - cost: 3000
         crate: RMCCrateClothingWebbingHolster
+        icon:
+          entity: CMWebbingHolster
       - cost: 2000
         crate: RMCCrateClothingWebbingHolsterBlack
+        icon:
+          entity: RMCWebbingHolsterBlack
       - cost: 2000
         crate: RMCCrateClothingDropPouch
+        icon:
+          entity: RMCWebbingDropPouch
       - cost: 3000
         crate: RMCCrateClothingDropPouchBlack
+        icon:
+          entity: RMCWebbingDropPouchBlack
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit
-    - name: Engineering
+    - name: rmc-requisitions-category-engineering
       entries:
       - cost: 2000
         crate: RMCCrateEmptySandbags
+        icon:
+          entity: CMSandbagEmpty50
       - cost: 3000
         crate: RMCCrateSandbagsConstructionKit
       - cost: 2000
         crate: RMCCrateMetalSheets
+        icon:
+          entity: CMSheetMetal
       - cost: 3000
         crate: RMCCratePlasteelSheets
+        icon:
+          entity: CMSheetPlasteel
       - cost: 2000
         crate: RMCCrateGlassSheets
+        icon:
+          entity: CMSheetGlass
       - cost: 2000
         crate: RMCCrateWoodenPlanks
+        icon:
+          entity: RMCPlankWood
       - cost: 2000
         crate: RMCCrateFoldingBarricades
 #      - cost: 3000
@@ -184,84 +994,168 @@
         crate: RMCCrateInflatableBarriers
       - cost: 2000
         crate: RMCCrateReplacementLights
+        icon:
+          entity: RMCBoxLightsMixed
       - cost: 3000
         crate: RMCCratePacmanParts
+        icon:
+          entity: RMCPortableGeneratorPacmanMachineCircuitBoard
       - cost: 4000
         crate: RMCCrateSuperPacmanParts
+        icon:
+          entity: RMCPortableGeneratorSuperPacmanMachineCircuitboard
       - cost: 1000
         crate: RMCCrateFlashlights
+        icon:
+          entity: RMCFlashlight
       - cost: 1000
         crate: RMCCrateHighCapacityPowerCell
-    - name: Explosives
+        icon:
+          entity: RMCPowerCellHigh
+    - name: rmc-requisitions-category-explosives
       entries:
       - cost: 3000
         crate: RMCCrateGrenadesHighExplosive
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: hedp_packet
       - cost: 4000
         crate: RMCCrateGrenadesIncendiary
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: hidp_packet
       - cost: 3000
         crate: RMCCrateGrenadesFrag
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: hefa_packet
       # leaving this commented, as it is not parity, but we might want it in the future
       #- cost: 2000
       #  crate: RMCCrateGrenadesSmoke
       - cost: 3200
         crate: RMCCrateExplosiveWhitePhosphorusCompound
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: ccdp_packet
       - cost: 10800
         crate: RMCCrateExplosiveWhitePhosphorusCompoundBox
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: d_nade_placeholder
       - cost: 4000
         crate: RMCCrateGrenadesFragOld
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: m15_packet
       - cost: 3000
         crate: RMCCratePlasticExplosives
+        icon:
+          entity: RMCExplosivePlastic
       - cost: 4000
         crate: RMCCrateBreachingCharges
+        icon:
+          entity: RMCExplosiveBreachingCharge
       - cost: 10000
         crate: RMCCrateGrenadesHighExplosiveBox
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: d_nade_placeholder
       - cost: 10000
         crate: RMCCrateGrenadesBoxHEFA
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: d_nade_placeholder
       - cost: 10000
         crate: RMCCrateGrenadesAirburstFragBox
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: d_nade_placeholder
       - cost: 10000
         crate: RMCCrateBoxAGMI
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: d_nade_placeholder
       - cost: 4000
         crate: RMCCrateGrenadesAirburstFrag
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: agmf_packet
       - cost: 4000
         crate: RMCCrateGrenadesAirburstIncendiary
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: agmi_packet
       - cost: 3000
         crate: RMCCrateGrenadesAirburstSmoke
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: agms_packet
       - cost: 4000
         crate: RMCCrateGrenadesAirburstHornet
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: hornet_packet
       - cost: 4000
         crate: RMCCrateGrenadesAirburstStarShell
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: starshell_packet
       - cost: 1000
         crate: RMCCrateGrenadesBatonSlug
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: baton_packet
       - cost: 3000
         crate: RMCCrateExplosiveClaymoreMine
+        icon:
+          sprite: _RMC14/Objects/Storage/packets.rsi
+          state: minebox
       - cost: 4000
         crate: RMCCrateExplosivesSurplus
-    - name: Food
+    - name: rmc-requisitions-category-food
       entries:
       - cost: 1000
         crate: RMCCrateFoodDonuts
+        icon:
+          entity: RMCBoxDonut
       - cost: 1000
         crate: RMCCrateFoodMRE
+        icon:
+          entity: CMMRE
       - cost: 3000
         crate: RMCCrateFoodPizza
+        icon:
+          entity: CMMarinePreparedMealPizza
       - cost: 1000
         crate: RMCCrateFoodIngredients
-    - name: Gear
+        icon:
+          entity: RMCBoxIngredients
+    - name: rmc-requisitions-category-gear
       entries:
       - cost: 2000
         crate: RMCCrateGearBinoculars
       - cost: 4000
         crate: RMCCrateGearPackFlare
+        icon:
+          entity: RMCBoxPackFlare
       - cost: 4000
         crate: RMCCrateGearMotionDetector
+        icon:
+          entity: RMCMotionDetector
       - cost: 6000
         crate: RMCCrateGearPackFlareCAS
+        icon:
+          sprite: _RMC14/Objects/Storage/boxes.rsi
+          state: m89
       - cost: 2000
         crate: RMCCrateGearFulton
+        icon:
+          entity: RMCFulton20
       - cost: 4000
         crate: RMCCrateGearParachute
-    - name: Medical
+        icon:
+          entity: RMCParachute
+    - name: rmc-requisitions-category-medical
       entries:
       - cost: 2500
         crate: RMCCrateMedicalSurgery
@@ -271,37 +1165,51 @@
         - CMIV # TODO RMC14 Make IV fit in crate.
       - cost: 700
         crate: RMCCrateMedicalBodyBag
+        icon:
+          entity: RMCBoxBodyBag
       - cost: 1500
         crate: RMCCrateMedicalStasisBag
+        icon:
+          entity: CMStasisBagFolded
       - cost: 1100
         crate: RMCCrateMedicalFirstAid
       - cost: 1500
         crate: RMCCrateMedicalFilled
       - cost: 1500
         crate: RMCCrateMedicalPill
-    - name: Mortar
+    - name: rmc-requisitions-category-mortar
       entries:
       - cost: 6000
         crate: RMCCrateMortarKit
       - cost: 1500
         crate: RMCCrateMortarShellHE
+        icon:
+          entity: RMCMortarShellHE
       - cost: 1500
         crate: RMCCrateMortarShellIncendiary
+        icon:
+          entity: RMCMortarShellIncendiary
       - cost: 1000
         crate: RMCCrateMortarShellFlare
-#    - name: Operations
+        icon:
+          entity: RMCMortarShellFlare
+#    - name: rmc-requisitions-category-operations
 #      entries: []
-    - name: Reagent tanks
+    - name: rmc-requisitions-category-reagent-tanks
       entries:
       - cost: 2000
         crate: RMCTankReagentFuel
-    - name: Research
+    - name: rmc-requisitions-category-research
       entries:
       - cost: 3000
         crate: RMCCrateResearchPhoron
+        icon:
+          entity: CMSheetPhoron30
       - cost: 2000
         crate: RMCCrateResearchPlastic
-    - name: Restricted Equipment
+        icon:
+          entity: RMCSheetPlastic10
+    - name: rmc-requisitions-category-restricted-equipment
       entries:
       - cost: 2000
         crate: RMCCrateRestrictedEquipmentArmorM4
@@ -309,7 +1217,9 @@
         crate: RMCCrateRestrictedEquipmentArmorB12
       - cost: 2000
         crate: RMCCrateRestrictedEquipmentIntelSupportKit
-    - name: Supplies
+        icon:
+          entity: RMCKitIntel
+    - name: rmc-requisitions-category-supplies
       entries:
       - cost: 2000
         crate: RMCCrateSupplyInternals
@@ -317,75 +1227,116 @@
         crate: RMCCrateSupplyEvacuation
       - cost: 1000
         crate: RMCCrateSuppliesBoxes
+        icon:
+          entity: RMCSheetCardboard
       - cost: 1000
         crate: RMCCrateSupplyJanitor
       - cost: 2000
         crate: RMCCrateSuppliesCrayons
-#    - name: Vehicle Ammo
+        icon:
+          entity: RMCCrayonBox
+#    - name: rmc-requisitions-category-vehicle-ammo
 #      entries: []
-    - name: Weapons
+    - name: rmc-requisitions-category-weapons
       entries:
       - cost: 4000
         crate: RMCCrateM54CE2
+        icon:
+          entity: RMCGunCaseRifleM54CE2
       - cost: 3000
         crate: RMCCrateMK80
       - cost: 4000
         crate: RMCCrateM54CMK1
       - cost: 4000
         crate: RMCCrateXM88
+        icon:
+          entity: RMCCaseXM88
       - cost: 3000
         crate: RMCCrateSU6
+        icon:
+          entity: RMCGunCasePistolSmart
       - cost: 4000
         crate: RMCCrateM34
       - cost: 3000
         crate: RMCCrateMOU53
+        icon:
+          entity: RMCMOU53Case
       - cost: 3000
         crate: RMCCrateXM51
+        icon:
+          entity: RMCXM51Case
       - cost: 4000
         crate: RMCCrateM85A1
+        icon:
+          entity: RMCM85A1Case
       - cost: 6000
         crate: RMCCrateML66D
+        icon:
+          entity: RMCML66DCase
       - cost: 6000
         crate: RMCCrateM2C
-    - name: Weapons Specialist Ammo
+        icon:
+          entity: RMCM2CCase
+    - name: rmc-requisitions-category-weapons-specialist-ammo
       entries:
       - cost: 4000
         crate: RMCCrateMagazineM96SMixed
       - cost: 3000
         crate: RMCCrateMagazineM96SStandard
+        icon:
+          entity: CMMagazineSniperM96S
       - cost: 3000
         crate: RMCCrateMagazineM96SFlak
+        icon:
+          entity: CMMagazineSniperM96SFlak
       - cost: 3000
         crate: RMCCrateMagazineM96SIncendiary
+        icon:
+          entity: CMMagazineSniperM96SIncendiary
       - cost: 3000
         crate: RMCCrateMagazineXM43E1Standard
+        icon:
+          entity: RMCMagazineSniperXM43E1AntiMateriel
       - cost: 3000
         crate: RMCCrateM5DemoSpecMixed
       - cost: 3000
         crate: RMCCrateM5DemoSpecHighExplosive
+        icon:
+          entity: RMCRocket84mm
       - cost: 3000
         crate: RMCCrateM5DemoSpecAntiArmor
+        icon:
+          entity: RMCRocket84mmAntiArmor
       - cost: 3000
         crate: RMCCrateM5DemoSpecWhitePhosphorus
+        icon:
+          entity: RMCRocket84mmWhitePhosphorus
       - cost: 4000
         crate: RMCCrateMagazineM4SPRCustomMixed
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomStandard
+        icon:
+          entity: RMCMagazineRifleM4SPRA19
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomImpact
+        icon:
+          entity: RMCMagazineRifleM4SPRA19Impact
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomIncendiary
+        icon:
+          entity: RMCMagazineRifleM4SPRA19Incendiary
       - cost: 6000
         crate: RMCCratePyroTankMixed
       - cost: 3000
         crate: RMCCratePyroTankExtended
+        icon:
+          entity: RMCTankFlamerLarge
       - cost: 3000
         crate: RMCCratePyroTankTypeB
+        icon:
+          entity: RMCTankFlamerLargeB
       - cost: 4000
         crate: RMCCratePyroTankTypeX
+        icon:
+          entity: RMCTankFlamerLargeX
 
-
-
-#        Black Market Orders
-#      - cost: 5 We-Ya Funnybucks
-#        crate: RMCCrateD18

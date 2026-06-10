@@ -428,6 +428,24 @@
   name: America Latina - A Quick Translation Guide
   description: This pamphlet was designed for Intelligence Officers to interact with the local populaces, but only for IOs who managed to sleep through Dialects and Mannerisms Class.
 
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageRussian
+  name: Printed Copy of Pari
+  description: A printed copy of the old Russian novel Pari. The margins are covered in notes about Chekhov, grammar, and why you are even in the UNCM if you cannot read it.
+
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageScandinavian
+  name: Treatise of the Scandinavian frontiers
+  description: A scholarly-looking pamphlet that tries to explain how the Scandinavian frontier dialects drifted together. It is mostly footnotes and polite disagreement.
+
+- type: entity
+  parent: CMPamphletLanguage
+  id: CMPamphletLanguageFrench
+  name: Records of the Napoleonic 22nd Century
+  description: A short selection of records about Napoleonise Bonaparte the XIII and the language of the old French sphere.
+
 
 # RESTRICTED LANGUAGES
 

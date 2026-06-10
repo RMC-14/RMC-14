@@ -222,6 +222,8 @@
     blacklist:
       components:
       - Xeno
+  - type: BlackMarketValue
+    value: 5
 
 - type: entity
   abstract: true

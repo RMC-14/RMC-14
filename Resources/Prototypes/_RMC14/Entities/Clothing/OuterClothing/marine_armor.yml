@@ -313,6 +313,8 @@
     whitelist:
       tags:
       - RMCUniformCMP
+  - type: BlackMarketValue
+    value: 30
 
 - type: entity
   parent: CMArmorM3Medium
@@ -355,6 +357,8 @@
     whitelist:
       tags:
       - RMCUniformMarine
+  - type: BlackMarketValue
+    value: 20
 
 - type: entity
   parent: CMArmorM2MP
@@ -384,6 +388,8 @@
     whitelist:
       tags:
       - RMCUniformMarine
+  - type: BlackMarketValue
+    value: 35
 
 - type: entity
   parent: CMArmorM2MP
@@ -411,6 +417,8 @@
     whitelist:
       tags:
       - RMCUniformMarine
+  - type: BlackMarketValue
+    value: 20
 
 - type: entity
   parent: CMArmorM3Medium
@@ -957,6 +965,8 @@
     whitelist:
       tags:
       - RMCUniformMP
+  - type: BlackMarketValue
+    value: 20
 
 - type: entity
   parent: CMArmorM4

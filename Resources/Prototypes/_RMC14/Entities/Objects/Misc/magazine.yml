@@ -11,6 +11,8 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Misc/boots_magazine.rsi
+  - type: BlackMarketValue
+    value: 15
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -46,7 +48,7 @@
   parent: RMCMagazineBootsN160
   id: RMCMagazineBootsN58
   name: Boots! Issue No.58.
-  description: "The only official USCM magazine, the headline reads 'Swift, Silent, Deadly: Tientsin'."
+  description: "The only official UNCM magazine, the headline reads 'Swift, Silent, Deadly: Tientsin'."
   components:
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-boots-58
@@ -120,6 +122,8 @@
     sprite: _RMC14/Objects/Misc/boots_magazine.rsi
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-orrery-65
+  - type: BlackMarketValue
+    value: 15
 
 - type: entity
   parent: RMCMagazineWeYaOrrery

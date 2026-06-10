@@ -34,6 +34,8 @@
   - type: PhysicalComposition
     materialComposition:
       Dollar: 1
+  - type: BlackMarketValue
+    value: 1
   - type: Appearance
 
 - type: entity
@@ -130,3 +132,12 @@
   - type: Stack
     stackType: Dollar
     count: 1000
+
+- type: entity
+  parent: RMCSpaceCash1000
+  id: RMCSpaceCash1000Counterfeit
+  suffix: Counterfeit
+  components:
+  - type: RMCBlackMarketCounterfeitCash
+  - type: BlackMarketValue
+    value: 0
