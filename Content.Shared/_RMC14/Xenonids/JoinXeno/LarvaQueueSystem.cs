@@ -44,7 +44,7 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void OnMindRemoved(Entity<CanBeLarvaQueuedComponent> ent, ref MindRemovedMessage args)
     {
-        if (!HasComp<XenoComponent>(ent) || HasComp<IgnoreQueueComponent>(ent))
+        if (!HasComp<XenoComponent>(ent))
             return;
 
         EnsureComp<LarvaQueuedComponent>(ent);
