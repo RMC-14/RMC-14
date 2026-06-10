@@ -522,7 +522,7 @@ public sealed class AutodocSystem : SharedAutodocSystem
         var query = EntityQueryEnumerator<OutsideAutodocComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (comp.Autodoc is not { } autodoc)
+            if (comp.Chamber is not { } chamber)
             {
                 RemCompDeferred<OutsideAutodocComponent>(uid);
                 continue;
@@ -531,7 +531,7 @@ public sealed class AutodocSystem : SharedAutodocSystem
             _intersecting.Clear();
             _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
 
-            if (!_intersecting.Contains(autodoc))
+            if (!_intersecting.Contains(chamber))
                 RemCompDeferred<OutsideAutodocComponent>(uid);
         }
 

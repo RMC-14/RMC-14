@@ -116,7 +116,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
         RemCompDeferred<InsideBodyScannerComponent>(args.Entity);
 
         var outside = EnsureComp<OutsideBodyScannerComponent>(args.Entity);
-        outside.BodyScanner = scanner;
+        outside.Chamber = scanner;
         Dirty(args.Entity, outside);
     }
 
@@ -239,7 +239,7 @@ public abstract class SharedBodyScannerSystem : EntitySystem
 
     private void OnOutsideBodyScannerPreventCollide(Entity<OutsideBodyScannerComponent> ent, ref PreventCollideEvent args)
     {
-        if (ent.Comp.BodyScanner == args.OtherEntity)
+        if (ent.Comp.Chamber == args.OtherEntity)
             args.Cancelled = true;
     }
 }

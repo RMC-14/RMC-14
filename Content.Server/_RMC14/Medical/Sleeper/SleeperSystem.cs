@@ -280,7 +280,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var query = EntityQueryEnumerator<OutsideSleeperComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (comp.Sleeper is not { } sleeper)
+            if (comp.Chamber is not { } chamber)
             {
                 RemCompDeferred<OutsideSleeperComponent>(uid);
                 continue;
@@ -289,7 +289,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             _intersecting.Clear();
             _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
 
-            if (!_intersecting.Contains(sleeper))
+            if (!_intersecting.Contains(chamber))
                 RemCompDeferred<OutsideSleeperComponent>(uid);
         }
 

@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Medical.Autodoc;
 public sealed partial class OutsideAutodocComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityUid? Autodoc;
+    public EntityUid? Chamber;
 }

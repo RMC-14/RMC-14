@@ -132,7 +132,7 @@ public abstract class SharedAutodocSystem : EntitySystem
         RemCompDeferred<InsideAutodocComponent>(args.Entity);
 
         var outside = EnsureComp<OutsideAutodocComponent>(args.Entity);
-        outside.Autodoc = autodoc;
+        outside.Chamber = autodoc;
         Dirty(args.Entity, outside);
     }
 
@@ -300,7 +300,7 @@ public abstract class SharedAutodocSystem : EntitySystem
 
     private void OnOutsideAutodocPreventCollide(Entity<OutsideAutodocComponent> ent, ref PreventCollideEvent args)
     {
-        if (ent.Comp.Autodoc == args.OtherEntity)
+        if (ent.Comp.Chamber == args.OtherEntity)
             args.Cancelled = true;
     }
 }

@@ -120,7 +120,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         RemCompDeferred<InsideSleeperComponent>(args.Entity);
 
         var outside = EnsureComp<OutsideSleeperComponent>(args.Entity);
-        outside.Sleeper = sleeper;
+        outside.Chamber = sleeper;
         Dirty(args.Entity, outside);
     }
 
@@ -245,7 +245,7 @@ public abstract class SharedSleeperSystem : EntitySystem
 
     private void OnOutsideSleeperPreventCollide(Entity<OutsideSleeperComponent> ent, ref PreventCollideEvent args)
     {
-        if (ent.Comp.Sleeper == args.OtherEntity)
+        if (ent.Comp.Chamber == args.OtherEntity)
             args.Cancelled = true;
     }
 }

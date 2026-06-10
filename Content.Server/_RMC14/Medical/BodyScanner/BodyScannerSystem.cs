@@ -26,7 +26,7 @@ public sealed class BodyScannerSystem : SharedBodyScannerSystem
         var query = EntityQueryEnumerator<OutsideBodyScannerComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (comp.BodyScanner is not { } scanner)
+            if (comp.Chamber is not { } chamber)
             {
                 RemCompDeferred<OutsideBodyScannerComponent>(uid);
                 continue;
@@ -35,7 +35,7 @@ public sealed class BodyScannerSystem : SharedBodyScannerSystem
             _intersecting.Clear();
             _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
 
-            if (!_intersecting.Contains(scanner))
+            if (!_intersecting.Contains(chamber))
                 RemCompDeferred<OutsideBodyScannerComponent>(uid);
         }
     }
