@@ -59,7 +59,6 @@ public sealed class XenoImpaleSystem : EntitySystem
 
             var secondHit = EnsureComp<XenoSecondImpaleComponent>(args.Target);
             secondHit.ExtraImpales.Add((_timing.CurTime + xeno.Comp.SecondImpaleTime, xeno.Comp.Damage, xeno));
-            
 
             RemCompDeferred<XenoMarkedComponent>(args.Target);
         }
