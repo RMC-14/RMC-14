@@ -28,7 +28,7 @@
     runningSoundCooldown: 2
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
-    collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
+    #collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
     collisionSoundCooldown: 0.5
     mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: VehicleSpotlight

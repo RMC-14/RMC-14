@@ -11,10 +11,10 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleSpotlightSystem : EntitySystem
 {
+    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly SharedPointLightSystem _lights = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
 
     public override void Initialize()
     {

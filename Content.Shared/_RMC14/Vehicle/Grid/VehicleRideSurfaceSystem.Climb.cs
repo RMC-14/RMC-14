@@ -277,10 +277,7 @@ public sealed partial class VehicleRideSurfaceSystem
         if (!CanRide(vehicle, surface, user, Transform(vehicle).MapID, out var userXform))
             return false;
 
-        if (!TryGetValidRideSurface((user, rider), userXform, out _, out _))
-            return false;
-
-        return true;
+        return TryGetValidRideSurface((user, rider), userXform, out _, out _);
     }
 
     private bool TryGetRunningClimbDownDoAfter(

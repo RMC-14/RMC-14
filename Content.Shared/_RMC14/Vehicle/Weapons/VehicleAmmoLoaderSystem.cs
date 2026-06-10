@@ -38,6 +38,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
     {
         SubscribeLocalEvent<VehicleAmmoLoaderComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<VehicleAmmoLoaderComponent, InteractHandEvent>(OnInteractHand);
+        SubscribeLocalEvent<VehicleAmmoLoaderComponent, ComponentShutdown>(OnLoaderShutdown);
         SubscribeLocalEvent<VehicleAmmoLoaderComponent, VehicleAmmoLoaderDoAfterEvent>(OnLoadDoAfter);
         SubscribeLocalEvent<VehicleAmmoLoaderComponent, BoundUIOpenedEvent>(OnUiOpened);
         SubscribeLocalEvent<VehicleAmmoLoaderComponent, BoundUIClosedEvent>(OnUiClosed);
@@ -61,7 +62,10 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         TrySetActiveAmmoBox(ent.Owner, args.User, args.Used);
 
         if (!TryOpenUi(ent, args.User))
+        {
+            ClearActiveAmmoBox(ent.Owner, args.User);
             return;
+        }
 
         args.Handled = true;
     }
@@ -106,6 +110,22 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         _ui.OpenUi(ent.Owner, VehicleAmmoLoaderUiKey.Key, user);
         UpdateUi(ent.Owner, user);
         return true;
+    }
+
+    private void OnLoaderShutdown(Entity<VehicleAmmoLoaderComponent> ent, ref ComponentShutdown args)
+    {
+        _activeAmmoBoxes.Remove(ent.Owner);
+
+        var staleUsers = new List<EntityUid>();
+        foreach (var (user, loaders) in _openLoadersByUser)
+        {
+            loaders.Remove(ent.Owner);
+            if (loaders.Count == 0)
+                staleUsers.Add(user);
+        }
+
+        foreach (var user in staleUsers)
+            _openLoadersByUser.Remove(user);
     }
 
     private void OnLoadDoAfter(Entity<VehicleAmmoLoaderComponent> ent, ref VehicleAmmoLoaderDoAfterEvent args)
@@ -291,7 +311,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         return true;
     }
 
-    private bool TrySetActiveAmmoBox(EntityUid loader, EntityUid user, EntityUid boxUid)
+    private void TrySetActiveAmmoBox(EntityUid loader, EntityUid user, EntityUid boxUid)
     {
         if (!_activeAmmoBoxes.TryGetValue(loader, out var userBoxes))
         {
@@ -300,7 +320,6 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         }
 
         userBoxes[user] = boxUid;
-        return true;
     }
 
     private void TrySetActiveAmmoBoxFromHeld(Entity<VehicleAmmoLoaderComponent> loader, EntityUid user)
@@ -330,6 +349,22 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
 
         userBoxes.Remove(user);
         if (userBoxes.Count == 0)
+            _activeAmmoBoxes.Remove(loader);
+    }
+
+    private void ClearTrackedUser(EntityUid user)
+    {
+        _openLoadersByUser.Remove(user);
+
+        var staleLoaders = new List<EntityUid>();
+        foreach (var (loader, userBoxes) in _activeAmmoBoxes)
+        {
+            userBoxes.Remove(user);
+            if (userBoxes.Count == 0)
+                staleLoaders.Add(loader);
+        }
+
+        foreach (var loader in staleLoaders)
             _activeAmmoBoxes.Remove(loader);
     }
 
@@ -386,6 +421,12 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         var staleUsers = new List<EntityUid>();
         foreach (var (user, loaders) in _openLoadersByUser)
         {
+            if (!Exists(user))
+            {
+                staleUsers.Add(user);
+                continue;
+            }
+
             var staleLoaders = new List<EntityUid>();
             foreach (var loader in loaders)
             {

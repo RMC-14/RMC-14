@@ -21,6 +21,29 @@ public sealed partial class VehicleSupplyEntry
 
     [DataField]
     public List<EntProtoId> Hardpoints = new();
+
+    [DataField]
+    public List<VehicleHardpointCategory> HardpointCategories = new();
+}
+
+[DataDefinition]
+[Serializable, NetSerializable]
+public sealed partial class VehicleHardpointCategory
+{
+    [DataField(required: true)]
+    public string Key = string.Empty;
+
+    [DataField(required: true)]
+    public string Label = string.Empty;
+
+    [DataField]
+    public int SortOrder;
+
+    [DataField]
+    public List<EntProtoId> HardpointTypes = new();
+
+    [DataField]
+    public List<EntProtoId> HardpointItems = new();
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]

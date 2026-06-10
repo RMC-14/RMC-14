@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -19,6 +19,8 @@ public sealed class HardpointSlotSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
+    private readonly HashSet<(EntityUid Owner, string SlotId)> _completingRemovals = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -30,26 +32,7 @@ public sealed class HardpointSlotSystem : EntitySystem
         SubscribeLocalEvent<HardpointSlotsComponent, BoundUIClosedEvent>(OnHardpointUiClosed);
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointRemoveMessage>(OnHardpointRemoveMessage);
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointRemoveDoAfterEvent>(OnHardpointRemoveDoAfter);
-    }
-
-    private HardpointStateComponent EnsureState(EntityUid uid)
-    {
-        return EnsureComp<HardpointStateComponent>(uid);
-    }
-
-    private void CleanupStaleInsertTracking(EntityUid vehicle, HardpointStateComponent state, string reason)
-    {
-        if (state.CompletingInserts.Count > 0)
-            return;
-
-        if (state.PendingInserts.Count == 0 && state.PendingInsertUsers.Count == 0)
-            return;
-
-        if (state.PendingInserts.Count > 0 && state.PendingInsertUsers.Count > 0)
-            return;
-
-        state.PendingInserts.Clear();
-        state.PendingInsertUsers.Clear();
+        SubscribeLocalEvent<HardpointSlotsComponent, ItemSlotEjectAttemptEvent>(OnHardpointEjectAttempt);
     }
 
     private void OnInsertAttempt(Entity<HardpointSlotsComponent> ent, ref ItemSlotInsertAttemptEvent args)
@@ -57,8 +40,7 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (args.User == null)
             return;
 
-        var state = EnsureState(ent.Owner);
-        CleanupStaleInsertTracking(ent.Owner, state, "insert-attempt");
+        var state = EnsureComp<HardpointStateComponent>(ent.Owner);
 
         if (!_hardpoints.TryGetSlot(ent.Comp, args.Slot.ID, out var slot))
             return;
@@ -85,15 +67,10 @@ public sealed class HardpointSlotSystem : EntitySystem
         {
             resolvedLocation = location;
             location.State.PendingInserts.Remove(location.Definition.Id);
-            location.State.PendingInsertUsers.Remove(args.User);
-            CleanupStaleInsertTracking(location.Owner, location.State, "insert-doafter");
         }
         else
         {
-            var state = EnsureState(ent.Owner);
-            state.PendingInserts.Remove(args.SlotId);
-            state.PendingInsertUsers.Remove(args.User);
-            CleanupStaleInsertTracking(ent.Owner, state, "insert-doafter-fallback");
+            EnsureComp<HardpointStateComponent>(ent.Owner).PendingInserts.Remove(args.SlotId);
         }
 
         if (args.Cancelled || args.Handled)
@@ -116,12 +93,11 @@ public sealed class HardpointSlotSystem : EntitySystem
         finalLocation.State.CompletingInserts.Add(finalLocation.Definition.Id);
         _itemSlots.TryInsert(finalLocation.Owner, finalLocation.Slot, item, args.User, excludeUserAudio: false);
         finalLocation.State.CompletingInserts.Remove(finalLocation.Definition.Id);
-        CleanupStaleInsertTracking(finalLocation.Owner, finalLocation.State, "insert-finished");
     }
 
     private void OnSlotsInteractUsing(Entity<HardpointSlotsComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled || args.User == null)
+        if (args.Handled)
             return;
 
         if (TryStartHardpointInsert(ent, args.User, args.Used))
@@ -153,9 +129,6 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (!HasComp<HardpointItemComponent>(used))
             return false;
 
-        var state = EnsureState(ent.Owner);
-        CleanupStaleInsertTracking(ent.Owner, state, "interact-using");
-
         if (!_hardpoints.TryFindEmptyInstallLocation(ent.Owner, ent.Comp, used, out var targetLocation))
             return false;
 
@@ -164,20 +137,17 @@ public sealed class HardpointSlotSystem : EntitySystem
             targetLocation.State.CompletingInserts.Add(targetLocation.Definition.Id);
             _itemSlots.TryInsertFromHand(targetLocation.Owner, targetLocation.Slot, user);
             targetLocation.State.CompletingInserts.Remove(targetLocation.Definition.Id);
-            CleanupStaleInsertTracking(targetLocation.Owner, targetLocation.State, "instant-insert");
             return true;
         }
 
         if (EntityManager.IsClientSide(ent.Owner))
             return true;
 
-        if (targetLocation.State.PendingInsertUsers.Contains(user))
+        if (targetLocation.State.PendingInserts.ContainsValue(user))
             return true;
 
-        if (!targetLocation.State.PendingInserts.Add(targetLocation.Definition.Id))
+        if (!targetLocation.State.PendingInserts.TryAdd(targetLocation.Definition.Id, user))
             return true;
-
-        targetLocation.State.PendingInsertUsers.Add(user);
 
         var slotId = targetLocation.Path.ToCompositeId();
         var doAfter = new DoAfterArgs(EntityManager, user, targetLocation.Definition.InsertDelay, new HardpointInsertDoAfterEvent(slotId), ent.Owner, ent.Owner, used)
@@ -196,7 +166,6 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
             targetLocation.State.PendingInserts.Remove(targetLocation.Definition.Id);
-            targetLocation.State.PendingInsertUsers.Remove(user);
             return true;
         }
 
@@ -208,7 +177,7 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (!Equals(args.UiKey, HardpointUiKey.Key))
             return;
 
-        var state = EnsureState(ent.Owner);
+        var state = EnsureComp<HardpointStateComponent>(ent.Owner);
         state.LastUiError = null;
         _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
     }
@@ -218,9 +187,21 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (!Equals(args.UiKey, HardpointUiKey.Key))
             return;
 
-        var state = EnsureState(ent.Owner);
+        var state = EnsureComp<HardpointStateComponent>(ent.Owner);
         state.PendingRemovals.Clear();
         state.LastUiError = null;
+    }
+
+    private void OnHardpointEjectAttempt(Entity<HardpointSlotsComponent> ent, ref ItemSlotEjectAttemptEvent args)
+    {
+        if (args.Slot.ID is not { } slotId)
+            return;
+
+        if (!_hardpoints.TryGetSlot(ent.Comp, slotId, out _))
+            return;
+
+        if (!_completingRemovals.Contains((ent.Owner, slotId)))
+            args.Cancelled = true;
     }
 
     private void OnHardpointRemoveMessage(Entity<HardpointSlotsComponent> ent, ref HardpointRemoveMessage args)
@@ -236,7 +217,16 @@ public sealed class HardpointSlotSystem : EntitySystem
 
     private void OnHardpointRemoveDoAfter(Entity<HardpointSlotsComponent> ent, ref HardpointRemoveDoAfterEvent args)
     {
-        var state = EnsureState(ent.Owner);
+        var state = EnsureComp<HardpointStateComponent>(ent.Owner);
+
+        void SetErrorAndRefresh(string? error)
+        {
+            state.LastUiError = error;
+            _hardpoints.SetContainingVehicleUiError(ent.Owner, error);
+            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
+            _hardpoints.UpdateContainingVehicleUi(ent.Owner);
+        }
+
         HardpointSlotLocation? resolvedLocation = null;
         if (_hardpoints.TryResolveSlotLocation(ent.Owner, ent.Comp, args.SlotId, out var location))
         {
@@ -250,14 +240,7 @@ public sealed class HardpointSlotSystem : EntitySystem
 
         if (args.Cancelled || args.Handled)
         {
-            if (args.Cancelled)
-            {
-                state.LastUiError = "Hardpoint removal cancelled.";
-                _hardpoints.SetContainingVehicleUiError(ent.Owner, state.LastUiError);
-            }
-
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
-            _hardpoints.UpdateContainingVehicleUi(ent.Owner);
+            SetErrorAndRefresh(args.Cancelled ? "Hardpoint removal cancelled." : null);
             return;
         }
 
@@ -266,35 +249,28 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (resolvedLocation is not { } finalLocation &&
             !_hardpoints.TryResolveSlotLocation(ent.Owner, ent.Comp, args.SlotId, out finalLocation))
         {
-            state.LastUiError = "Unable to access hardpoint slots.";
-            _hardpoints.SetContainingVehicleUiError(ent.Owner, state.LastUiError);
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
-            _hardpoints.UpdateContainingVehicleUi(ent.Owner);
+            SetErrorAndRefresh("Unable to access hardpoint slots.");
             return;
         }
 
-        if (finalLocation.Slot.Item is not { } installed)
+        if (!finalLocation.Slot.HasItem)
         {
-            state.LastUiError = "No hardpoint is installed in that slot.";
-            _hardpoints.SetContainingVehicleUiError(ent.Owner, state.LastUiError);
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
-            _hardpoints.UpdateContainingVehicleUi(ent.Owner);
+            SetErrorAndRefresh("No hardpoint is installed in that slot.");
             return;
         }
 
-        if (!_itemSlots.TryEjectToHands(finalLocation.Owner, finalLocation.Slot, args.User, true))
+        var key = (finalLocation.Owner, finalLocation.Definition.Id);
+        _completingRemovals.Add(key);
+        var ejected = _itemSlots.TryEjectToHands(finalLocation.Owner, finalLocation.Slot, args.User, true);
+        _completingRemovals.Remove(key);
+
+        if (!ejected)
         {
-            state.LastUiError = "Couldn't remove the hardpoint. Free a hand and try again.";
-            _hardpoints.SetContainingVehicleUiError(ent.Owner, state.LastUiError);
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
-            _hardpoints.UpdateContainingVehicleUi(ent.Owner);
+            SetErrorAndRefresh("Couldn't remove the hardpoint. Free a hand and try again.");
             return;
         }
 
-        state.LastUiError = null;
-        _hardpoints.SetContainingVehicleUiError(ent.Owner, null);
-        _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
-        _hardpoints.UpdateContainingVehicleUi(ent.Owner);
+        SetErrorAndRefresh(null);
         _hardpoints.RefreshCanRun(ent.Owner);
     }
 
@@ -306,16 +282,16 @@ public sealed class HardpointSlotSystem : EntitySystem
         EntityUid? uiOwnerUid = null)
     {
         uiOwnerUid ??= uid;
-        var uiOwnerState = EnsureState(uiOwnerUid.Value);
-
-        void RefreshUi()
-        {
-            _hardpoints.UpdateHardpointUi(uiOwnerUid.Value, state: uiOwnerState);
-        }
+        var uiOwnerState = EnsureComp<HardpointStateComponent>(uiOwnerUid.Value);
 
         void SetError(string error)
         {
             uiOwnerState.LastUiError = error;
+        }
+
+        void RefreshUi()
+        {
+            _hardpoints.UpdateHardpointUi(uiOwnerUid.Value, state: uiOwnerState);
         }
 
         uiOwnerState.LastUiError = null;
@@ -361,7 +337,7 @@ public sealed class HardpointSlotSystem : EntitySystem
             return;
         }
 
-        if (location.State.PendingInserts.Contains(location.Definition.Id) ||
+        if (location.State.PendingInserts.ContainsKey(location.Definition.Id) ||
             location.State.CompletingInserts.Contains(location.Definition.Id))
         {
             const string error = "Finish installing that hardpoint before removing it.";
@@ -412,5 +388,4 @@ public sealed class HardpointSlotSystem : EntitySystem
         uiOwnerState.LastUiError = null;
         RefreshUi();
     }
-
 }

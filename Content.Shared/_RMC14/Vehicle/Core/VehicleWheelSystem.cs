@@ -1,31 +1,23 @@
 using System;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Popups;
 using Content.Shared.Tools.Components;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
-using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Interaction;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Localization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-// I initally thought each wheel was its own thing for some reason, hence this supporting multiple wheels even though its not necessary
 public sealed class VehicleWheelSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCRepairableSystem _repairable = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly HardpointSystem _hardpoints = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
 
     public override void Initialize()
     {
@@ -178,7 +170,6 @@ public sealed class VehicleWheelSystem : EntitySystem
         return count;
     }
 
-    // For some reason I thought each wheels was its own thing, so did this. but at least it supports it if that ever is a thing
     private float GetAverageWheelIntegrityFraction(EntityUid uid, VehicleWheelSlotsComponent component, ItemSlotsComponent? itemSlots = null)
     {
         if (!Resolve(uid, ref itemSlots, false))
@@ -252,7 +243,7 @@ public sealed class VehicleWheelSystem : EntitySystem
                 slot.Item is not { } wheel)
                 continue;
 
-            if (_hardpoints.DamageHardpoint(vehicle, wheel, amount))
+            if (_hardpoints.DamageHardpoint(vehicle, wheel, amount, skipWheelUpdate: true))
                 changed = true;
         }
 

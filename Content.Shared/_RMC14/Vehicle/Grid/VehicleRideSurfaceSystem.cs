@@ -28,12 +28,12 @@ public sealed partial class VehicleRideSurfaceSystem : EntitySystem
     private const float RiderLocalPositionEpsilon = 0.0001f;
     private const float RiderProjectileTargetRadius = 0.75f;
 
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly Dictionary<EntityUid, RideSurfaceTransform> _lastTransforms = new();

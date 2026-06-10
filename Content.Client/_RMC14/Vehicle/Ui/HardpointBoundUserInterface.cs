@@ -1,11 +1,12 @@
 using System;
+using Content.Shared._RMC14.UserInterface;
 using Content.Shared._RMC14.Vehicle;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 
 namespace Content.Client._RMC14.Vehicle.Ui;
 
-public sealed class HardpointBoundUserInterface : BoundUserInterface
+public sealed class HardpointBoundUserInterface : BoundUserInterface, IRefreshableBui
 {
     private HardpointMenu? _menu;
 

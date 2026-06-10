@@ -91,13 +91,18 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     public static bool MovementDebugEnabled { get; set; }
 
     private readonly HashSet<EntityUid> _intersecting = new();
+    private readonly List<EntityUid>[] _hitsBuffers = { new(), new(), new() };
+    private int _hitsDepth;
     private readonly Dictionary<EntityUid, TimeSpan> _lastMobCollision = new();
-    private readonly Dictionary<EntityUid, bool> _hardState = new();
+    private readonly DamageSpecifier _mobCollisionDamage = new() { DamageDict = { [CollisionDamageType] = MobCollisionDamage } };
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
     private readonly Dictionary<EntityUid, float> _movementAccumulator = new();
     private readonly Dictionary<EntityUid, EntityUid> _activeXenoPushers = new();
     private readonly HashSet<EntityUid> _directMoveBlockers = new();
     private readonly HashSet<EntityUid> _pushIgnoredEntities = new();
+    private readonly HashSet<EntityUid> _vehiclePushIgnored = new();
+    private readonly HashSet<EntityUid> _bypassInitialBlockers = new();
+    private readonly HashSet<EntityUid> _bypassSampleBlockers = new();
 
     private enum VehicleCollisionClass : byte
     {
@@ -169,7 +174,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private void OnMoverShutdown(Entity<GridVehicleMoverComponent> ent, ref ComponentShutdown args)
     {
-        _hardState.Remove(ent.Owner);
         _movementAccumulator.Remove(ent.Owner);
         _activeXenoPushers.Remove(ent.Owner);
     }
@@ -187,7 +191,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         TrySyncMoverToCurrentGrid(ent, centerOnTile: false);
     }
 
-    // Vehicle traversal can change grids through several engine paths. Keep all resync logic in one place.
     private bool TrySyncMoverToCurrentGrid(
         Entity<GridVehicleMoverComponent> ent,
         bool centerOnTile,
@@ -208,7 +211,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             ent.Comp.IsCommittedToMove = false;
             ent.Comp.IsPushMove = false;
             ent.Comp.IsMoving = false;
-            _hardState[uid] = true;
             _movementAccumulator[uid] = 0f;
             Dirty(uid, ent.Comp);
             return true;
@@ -235,7 +237,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         ent.Comp.IsCommittedToMove = false;
         ent.Comp.IsPushMove = false;
         ent.Comp.IsMoving = false;
-        _hardState[uid] = true;
         _movementAccumulator[uid] = 0f;
 
         Dirty(uid, ent.Comp);

@@ -31,8 +31,7 @@ public sealed class VehicleTurretMuzzleSystem : EntitySystem
         if (!ent.Comp.Alternate || args.Ammo.Count == 0)
             return;
 
-        for (var i = 0; i < args.Ammo.Count; i++)
-            ent.Comp.UseRightNext = !ent.Comp.UseRightNext;
+        ent.Comp.UseRightNext = !ent.Comp.UseRightNext;
 
         Dirty(ent);
     }

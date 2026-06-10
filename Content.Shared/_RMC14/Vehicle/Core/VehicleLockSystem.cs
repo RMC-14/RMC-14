@@ -97,9 +97,9 @@ public sealed class VehicleLockSystem : EntitySystem
             return;
         }
 
-        if (actionComp.Action != null)
+        if (actionComp.Action is { } action)
         {
-            _actions.RemoveAction(user, actionComp.Action.Value);
+            RemoveAndDeleteLockAction(user, action);
             actionComp.Action = null;
         }
 
@@ -109,7 +109,21 @@ public sealed class VehicleLockSystem : EntitySystem
     private void OnLockActionShutdown(Entity<VehicleLockActionComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Comp.Action is { } action)
-            _actions.RemoveAction(action);
+            RemoveAndDeleteLockAction(ent.Owner, action);
+    }
+
+    private void RemoveAndDeleteLockAction(EntityUid user, EntityUid action)
+    {
+        if (TerminatingOrDeleted(action))
+            return;
+
+        _actions.RemoveAction(user, action);
+
+        if (_net.IsClient)
+            return;
+
+        if (Exists(action))
+            QueueDel(action);
     }
 
     private void OnLockAction(Entity<VehicleLockActionComponent> ent, ref VehicleLockActionEvent args)

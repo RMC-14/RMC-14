@@ -13,10 +13,10 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleHornSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {

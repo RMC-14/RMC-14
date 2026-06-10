@@ -45,8 +45,8 @@ public sealed class GridVehicleMoverOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
     public bool DebugEnabled { get; set; }
-    public bool CollisionsEnabled { get; set; } = true;
-    public bool MovementEnabled { get; set; } = true;
+    public bool CollisionsEnabled { get; set; }
+    public bool MovementEnabled { get; set; }
 
     private readonly IEntityManager _ents;
     private readonly IGameTiming _timing;

@@ -32,7 +32,6 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Physics;
-using Content.Shared._RMC14.Map;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -40,6 +39,7 @@ public sealed class VehicleSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -48,8 +48,6 @@ public sealed class VehicleSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -87,15 +85,13 @@ public sealed class VehicleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (args.Handled)
+            return;
+
         if (IsEntryBlockedByLock(ent.Owner, args.User))
         {
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), args.User, args.User, PopupType.SmallCaution);
             args.Handled = true;
-            return;
-        }
-
-        if (args.Handled)
-        {
             return;
         }
 
@@ -230,6 +226,7 @@ public sealed class VehicleSystem : EntitySystem
 
         var entryCoords = new EntityCoordinates(entryParent, Vector2.Zero);
 
+        var foundExit = false;
         var exitQuery = EntityQueryEnumerator<VehicleExitComponent, TransformComponent>();
         while (exitQuery.MoveNext(out _, out _, out var xform))
         {
@@ -238,8 +235,12 @@ public sealed class VehicleSystem : EntitySystem
 
             entryCoords = xform.Coordinates;
             entryParent = xform.ParentUid.IsValid() ? xform.ParentUid : entryParent;
+            foundExit = true;
             break;
         }
+
+        if (!foundExit)
+            Log.Warning($"[VehicleEnter] No VehicleExitComponent found in interior for {ToPrettyString(ent.Owner)} at {ent.Comp.InteriorPath}, using grid origin as fallback entry coordinates.");
 
         interior.Map = mapUid;
         interior.MapId = mapId;
@@ -356,7 +357,7 @@ public sealed class VehicleSystem : EntitySystem
         if (!TryComp(vehicleUid, out VehicleEnterComponent? enter))
             return;
 
-        if (IsExitBlockedByLock(vehicleUid, args.User))
+        if (IsEntryBlockedByLock(vehicleUid, args.User))
         {
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), args.User, args.User, PopupType.SmallCaution);
             args.Handled = true;
@@ -466,7 +467,7 @@ public sealed class VehicleSystem : EntitySystem
         if (!TryComp(vehicleUid, out VehicleEnterComponent? enter))
             return false;
 
-        if (IsExitBlockedByLock(vehicleUid, user))
+        if (IsEntryBlockedByLock(vehicleUid, user))
         {
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), user, user, PopupType.SmallCaution);
             return false;
@@ -924,17 +925,6 @@ public sealed class VehicleSystem : EntitySystem
         return !CanBypassLockWithDestroyedFrame(vehicle, user);
     }
 
-    private bool IsExitBlockedByLock(EntityUid vehicle, EntityUid user)
-    {
-        if (HasComp<GhostComponent>(user))
-            return false;
-
-        if (!TryComp(vehicle, out VehicleLockComponent? vehicleLock) || !vehicleLock.Locked)
-            return false;
-
-        return !CanBypassLockWithDestroyedFrame(vehicle, user);
-    }
-
     private bool CanBypassLockWithDestroyedFrame(EntityUid vehicle, EntityUid user)
     {
         if (!HasComp<XenoComponent>(user))
@@ -1022,8 +1012,10 @@ public sealed class VehicleSystem : EntitySystem
         target = EntityUid.Invalid;
 
         if (_net.IsClient ||
-            !TryComp(vehicle, out VehicleEnterComponent? enter) ||
-            !EnsureInterior((vehicle, enter), out var interior))
+            !TryComp(vehicle, out VehicleEnterComponent? _) ||
+            !TryComp(vehicle, out VehicleInteriorComponent? interior) ||
+            interior.MapId == MapId.Nullspace ||
+            !_mapManager.MapExists(interior.MapId))
         {
             return false;
         }

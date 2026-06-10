@@ -252,6 +252,18 @@ public sealed partial class GridVehicleMoverComponent : Component
     public EntityUid? SyncedGrid;
 
     /// <summary>
+    /// number of fixed steps to skip turn nudge queries after a failed search
+    /// </summary>
+    [NonSerialized]
+    public int TurnNudgeSkipSteps;
+
+    /// <summary>
+    /// desired facing direction that triggered the current turn nudge skip
+    /// </summary>
+    [NonSerialized]
+    public Vector2i TurnNudgeCacheDir;
+
+    /// <summary>
     /// active multiplier applied to movement speed after smashing objects
     /// </summary>
     [AutoNetworkedField]

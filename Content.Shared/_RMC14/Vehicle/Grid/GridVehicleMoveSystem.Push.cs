@@ -134,10 +134,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             }
         }
 
-        if (bestScore > 0f)
-            return true;
-
-        return false;
+        return bestScore > 0f;
     }
 
     private Vector2i GetPushDirection(EntityUid uid, EntityUid pusher)

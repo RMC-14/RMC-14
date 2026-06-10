@@ -116,6 +116,37 @@
       - VehicleTankArtilleryModule
       - VehicleTankReinforcedTreads
       - VehicleTankTreads
+      hardpointCategories:
+      - key: tank-primary
+        label: Primary
+        sortOrder: 0
+        hardpointTypes:
+        - HardpointTypeCannon
+      - key: tank-secondary
+        label: Secondary
+        sortOrder: 1
+        hardpointTypes:
+        - HardpointTypeLauncher
+      - key: tank-armor
+        label: Armor
+        sortOrder: 2
+        hardpointTypes:
+        - HardpointTypeArmor
+      - key: tank-support
+        label: Support
+        sortOrder: 3
+        hardpointTypes:
+        - HardpointTypeSupport
+      - key: tank-treads
+        label: Treads
+        sortOrder: 4
+        hardpointTypes:
+        - HardpointTypeWheel
+      - key: tank-general
+        label: General
+        sortOrder: 5
+        hardpointItems:
+        - VehicleTankSnowplow
     - name: humvee (arc)
       vehicle: VehicleHumveeARC
       unlock: VehicleHumveeARC
