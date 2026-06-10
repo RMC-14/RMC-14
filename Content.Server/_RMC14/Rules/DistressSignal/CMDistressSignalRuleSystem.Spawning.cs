@@ -297,7 +297,7 @@ public sealed partial class CMDistressSignalRuleSystem
         }
 
         if (totalXenos - selectedXenos > 0)
-            _hive.IncreaseBurrowedLarva(totalXenos - selectedXenos);
+            _hive.ChangeBurrowedLarva(totalXenos - selectedXenos);
     }
 
     private EntityUid SpawnXenoEnt(EntProtoId ent, ICommonSession player, bool doBurst,

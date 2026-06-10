@@ -293,6 +293,7 @@
   - type: DeleteOnTrigger
   - type: SpawnOnTerminate
     spawn: RMCSmokeWhitePhosphorus
+    spawnOffset: -0.5
   - type: RMCAreaDamage
     damageArea: 3.5
     falloffDistance: 3.5

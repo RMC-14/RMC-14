@@ -116,6 +116,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private TimeSpan _newResinPreventCollideTime;
 
     private readonly HashSet<EntityUid> _intersectingResin = new();
+    private readonly List<Entity<XenoWeedsComponent>> _adjacentNodes = new();
+    private readonly HashSet<EntityUid> _upgradingStructures = new();
 
     public override void Initialize()
     {
@@ -298,8 +300,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        var tile = _mapSystem.CoordinatesToTile(gridUid, gridComp, coordinates);
-        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, xeno, args.UseOnSemiWeedable, true))
+        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, coordinates.Position, xeno, null, args.UseOnSemiWeedable, true))
             return;
 
         if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, args.LimitDistance))
@@ -328,7 +329,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (_queenEye.IsInQueenEye(xeno.Owner) &&
+        var isInQueenEye = _queenEye.IsInQueenEye(xeno.Owner);
+        if (isInQueenEye &&
             !_queenEye.CanSeeTarget(xeno.Owner, coordinates))
         {
             return;
@@ -342,39 +344,56 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        Entity<XenoWeedsComponent> adjacent = default;
+        _adjacentNodes.Clear();
         if (existing == null)
         {
+            var canSpread = false;
             foreach (var direction in _rmcMap.CardinalDirections)
             {
-                if (_rmcMap.HasAnchoredEntityEnumerator(coordinates, out adjacent, direction))
-                    break;
+                if (!_rmcMap.HasAnchoredEntityEnumerator(coordinates, out Entity<XenoWeedsComponent> adjacent, direction))
+                    continue;
+
+                _adjacentNodes.Add(adjacent);
+
+                if (!_xenoWeeds.CanSpreadWeedsPopup(grid, coordinates.Position, xeno, adjacent, false, true))
+                    continue;
+
+                canSpread = true;
+                break;
             }
 
-            if (adjacent == default)
+            if (_adjacentNodes.Count == 0)
             {
-                _popup.PopupClient("You can only plant weeds if there is a nearby node.",
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-no-nearby-node"),
                     args.Target,
                     xeno,
                     PopupType.MediumCaution);
 
                 return;
             }
+
+            if (!canSpread)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), args.Target, xeno.Owner, PopupType.MediumCaution);
+
+                return;
+            }
         }
 
         var toSpawn = existing == null ? args.Expand : args.Source;
-        var tile = _mapSystem.CoordinatesToTile(gridUid, gridComp, coordinates);
-        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, xeno, false, true))
-            return;
 
-        if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false))
+        if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false, isInQueenEye ? coordinates : (EntityCoordinates?)null))
             return;
 
         var plasmaCost = existing == null ? args.PlasmaCost : args.SourcePlasmaCost;
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost, popupOn: args.Target))
             return;
 
-        args.Handled = true;
+        if (existing != null)
+            _actions.SetCooldown(args.Action.AsNullable(), args.SourceCooldown);
+        else
+            args.Handled = true;
+
         if (_net.IsServer)
         {
             var newWeeds = Spawn(toSpawn, coordinates);
@@ -382,10 +401,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _hive.SetSameHive(xeno.Owner, newWeeds);
 
             if (existing == null)
-                _xenoWeeds.AssignSource(newWeeds, adjacent.Comp?.Source ?? adjacent);
+                _xenoWeeds.AssignSource(newWeeds, _adjacentNodes.Last().Comp?.Source ?? _adjacentNodes.Last());
         }
 
-        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
+        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno.Owner);
     }
 
     private void OnXenoChooseStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureActionEvent args)
@@ -438,7 +457,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
     }
 
-    private EntProtoId GetQueenAnimationVariant(EntProtoId originalId)
+    private EntProtoId GetResinUpgradeTarget(EntProtoId originalId)
     {
         return originalId.Id switch
         {
@@ -482,9 +501,18 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (_net.IsClient)
                 return;
 
-            QueueDel(upgradeable);
-            var spawn = Spawn(to, snapped);
-            _hive.SetSameHive(xeno.Owner, spawn);
+            try
+            {
+                BeginStructureUpgrade(upgradeable);
+                Del(upgradeable);
+                var spawn = Spawn(to, snapped);
+                _hive.SetSameHive(xeno.Owner, spawn);
+            }
+            finally
+            {
+                EndStructureUpgrade(upgradeable);
+            }
+
             args.Handled = true;
             return;
         }
@@ -513,7 +541,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        var animationChoice = hasBoost ? GetQueenAnimationVariant(choice) : choice;
+        var animationChoice = hasBoost ? GetResinUpgradeTarget(choice) : choice;
         var effectId = XenoStructuresAnimation + animationChoice;
         var coordinates = GetNetCoordinates(args.Target);
         var entityCoords = GetCoordinates(coordinates);
@@ -1133,8 +1161,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
     }
 
+    public void BeginStructureUpgrade(EntityUid uid) => _upgradingStructures.Add(uid);
+    public void EndStructureUpgrade(EntityUid uid) => _upgradingStructures.Remove(uid);
+
     private void OnCheckAdjacentCollapse<T>(Entity<XenoConstructionSupportComponent> ent, ref T args)
     {
+        if (_upgradingStructures.Contains(ent.Owner))
+            return;
+
         if (!_transformQuery.TryComp(ent, out var xform) ||
             _transform.GetGrid((ent, xform)) is not { Valid: true } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
@@ -1359,7 +1393,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _rmcMap.HasAnchoredEntityEnumerator<DesignNodeComponent>(target, out _))
         {
             if (popup)
-                _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), xeno, xeno, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), target, xeno, PopupType.SmallCaution);
 
             return false;
         }
@@ -1423,7 +1457,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                     door.State != DoorState.Open)
                 {
                     if (popup)
-                        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), xeno, xeno, PopupType.SmallCaution);
+                        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), target, xeno, PopupType.SmallCaution);
 
                     return false;
                 }
@@ -1501,7 +1535,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                     node.BlockOtherNodes)
                 {
                     if (popup)
-                        _popup.PopupClient(Loc.GetString("cm-xeno-too-close-to-other-node", ("target", ent.Value)), xeno, xeno);
+                        _popup.PopupClient(Loc.GetString("cm-xeno-too-close-to-other-node", ("target", ent.Value)), target, xeno);
 
                     return false;
                 }
@@ -1519,7 +1553,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                     tileDef is ContentTileDefinition { WeedsSpreadable: false })
                 {
                     if (popup)
-                        _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), xeno, xeno);
+                        _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
 
                     return false;
                 }

@@ -59,8 +59,13 @@
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
   - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 100
+    activeLoad: 3500
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
 #  - type: Construction | TODO RMC14: Construction graph for steps to unanchor
   - type: DisposalUnit
   - type: ThrowInsertContainer

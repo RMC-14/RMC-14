@@ -1,0 +1,109 @@
+- type: entity
+  parent: FenceMetalGate
+  id: RMCFenceDoor
+  name: fence door
+  description: A sturdy chainlink door set between two metal poles. A cheap way to section off areas while still allowing visibility through it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/fence_door.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Door
+    openSpriteState: open
+    closedSpriteState: closed
+    openTimeOne: 0.2
+    openTimeTwo: 0.3
+    openingAnimationTime: 0.5
+    closeTimeOne: 0.2
+    closeTimeTwo: 0.3
+    closingAnimationTime: 0.5
+    canPry: false
+    occludes: false
+    bumpOpen: false
+    clickOpen: true
+    canCrush: false
+    openSound:
+      path: /Audio/_RMC14/Structures/fenceopen.ogg
+    closeSound:
+      path: /Audio/_RMC14/Structures/fenceopen.ogg
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.1,0.5,0.1"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Items/wirecutter.ogg
+      - !type:ChangeConstructionNodeBehavior
+        node: gateBroken
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: CMFence
+    node: gate
+  - type: MinimapColor
+    color: "#8d2294ad"
+  - type: IconSmooth
+    key: fences
+    mode: NoSprite
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    percentageDamage: 0.25
+  - type: XenoCrusherChargable
+    instantDestroy: true
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCFenceDoorBroken
+  name: broken fence door
+  description: Someone really didn't want to use the door.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/fence_door.rsi
+    layers:
+    - state: broken
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+    fixtures: {}
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: CMFence
+    node: gateBroken
+  - type: IconSmooth
+    key: fences
+    mode: NoSprite

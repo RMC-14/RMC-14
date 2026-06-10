@@ -16,6 +16,13 @@
     - RMCGuideRoleQueen
   - type: GhostRole
     name: cm-job-name-xeno-queen
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    description: cm-xeno-description
+    raffle:
+      settings: short
+    rules: cm-xeno-rules
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi
     layers:
@@ -58,8 +65,9 @@
     - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoWordQueen
-#    - ActionXenoPsychicWhisper
-#    - ActionXenoPsychicRadiance
+    - ActionXenoPsychicWhisper
+    - ActionXenoPsychicRadiance
+    - ActionXenoGiveOrder
     - ActionXenoGut
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
@@ -106,6 +114,7 @@
   - type: XenoWordQueen
   - type: VehicleDamageMultiplier
     multiplier: 2
+  - type: XenoPsychicCommunication
   - type: InnateCommandSpeech
   - type: RMCInnateRadioTextIncrease
     radioTextIncrease: 3
@@ -279,6 +288,7 @@
   - type: RemoveComponents
     components:
     - type: Gibbable
+    - type: CanBeLarvaQueued
 
 - type: entity
   parent: RMCXenoQueenBase

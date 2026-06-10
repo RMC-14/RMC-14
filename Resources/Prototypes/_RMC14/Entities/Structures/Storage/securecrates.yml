@@ -455,9 +455,9 @@
     spawn: CMPamphletPowerloader
 
 - type: entity
-  parent: RMCSecureCaseStrapped #Powerloader Fujin
+  parent: RMCSecureCaseStrapped #Powerloader LU-43
   id: RMCCratePowerLoaderGreen
-  name: Fujin Powerloader crate
+  name: Powerloader crate
   description: A crate containing one folded, but fully assembled, LU-43 Power Loader and included pamphlet for quick training.
   components:
   - type: CrateOpenable
@@ -468,10 +468,10 @@
     spawn: CMPamphletPowerloader
 
 - type: entity
-  parent: RMCSecureCaseStrapped #Powerloader Ferret
+  parent: RMCSecureCaseStrapped #Powerloader LU-52
   id: RMCCratePowerLoaderBlue
-  name: Ferret Powerloader crate
-  description: A crate containing one folded, but fully assembled, LU-52 Power Loader and included pamphlet for quick training.
+  name: powerloader crate
+  description: A crate containing one blue, folded, but fully assembled, LU-52 Power Loader and included pamphlet for quick training.
   components:
   - type: CrateOpenable
     spawn:

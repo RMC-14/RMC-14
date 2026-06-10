@@ -119,6 +119,11 @@
   categories: [ HideSpawnMenu ]
 
 - type: entity
+  parent: RMCEffectXenoStickyResin
+  id: RMCEffectXenoResinSpikes
+  categories: [ HideSpawnMenu ]
+
+- type: entity
   parent: RMCBaseEffectXenoStructure
   id: RMCEffectXenoWeedsSource
   categories: [ HideSpawnMenu ]
@@ -128,6 +133,11 @@
     layers:
     - state: alert_greyscale
       color: "#A800FF7F"
+
+- type: entity
+  parent: RMCEffectXenoWeedsSource
+  id: RMCEffectHiveAcidPillarXeno
+  categories: [ HideSpawnMenu ]
 
 #Surge
 - type: entity

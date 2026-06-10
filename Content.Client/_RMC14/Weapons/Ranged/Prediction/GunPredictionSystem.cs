@@ -75,7 +75,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         if (_timing.IsFirstTimePredicted)
             return;
 
-        ShootRequested(ev.Gun, ev.Coordinates, ev.Target, ev.Shot, args.SenderSession);
+        ShootRequested(ev.Gun, ev.Coordinates, ev.Target, ev.Shot, args.SenderSession, ev.RearmSemiAuto);
     }
 
     private void OnClientProjectileUpdateIsPredicted(Entity<PredictedProjectileClientComponent> ent, ref UpdateIsPredictedEvent args)

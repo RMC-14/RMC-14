@@ -20,6 +20,9 @@
   - type: Tag
     tags:
     - RMCIntelItem
+  - type: GuideHelp
+    guides:
+    - RMCIntel
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -116,6 +119,9 @@
   - type: IntelClues
     clues: 8
   - type: IntelSerial
+  - type: GuideHelp
+    guides:
+    - RMCIntel
 
 - type: entity
   parent: [CMHealthAnalyzer, RMCIntelRetrieveDeviceBase]
@@ -133,7 +139,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: techweb
+    layers:
+    - map: ["base"]
+      state: "techweb0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "techweb"
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.TechControlConsoleUI.Key
@@ -156,8 +166,12 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: terminal1_old
+    layers: []
   - type: InteractionOutline
   - type: IntelConsole
+  - type: GuideHelp
+    guides:
+    - RMCIntel
 
 - type: entity
   id: RMCIntelTechTree

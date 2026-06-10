@@ -30,11 +30,14 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 
 namespace Content.Shared._RMC14.Damage;
 
@@ -56,6 +59,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -631,6 +635,31 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             {
                 if (!_damageOverTimeQuery.TryComp(contact, out var damage))
                     continue;
+
+                if (damage.Cover != null)
+                {
+                    var userCoordinates = Transform(user).Coordinates;
+                    var covered = false;
+
+                    if (_transform.GetGrid(userCoordinates) is { } gridUid &&
+                        TryComp<MapGridComponent>(gridUid, out var grid))
+                    {
+                        var tileIndices = _mapSystem.TileIndicesFor(gridUid, grid, userCoordinates);
+                        var anchoredEntities = _mapSystem.GetAnchoredEntities(gridUid, grid, tileIndices);
+
+                        foreach (var anchored in anchoredEntities)
+                        {
+                            if (_entityWhitelist.IsWhitelistPass(damage.Cover, anchored))
+                            {
+                                covered = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (covered)
+                        continue;
+                }
 
                 if (!damage.AffectsDead && _mobState.IsDead(user))
                     continue;
