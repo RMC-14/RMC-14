@@ -1,9 +1,10 @@
-﻿using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Doors;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
-using Content.Shared._RMC14.Announce;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
@@ -23,7 +24,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly ARESSystem _ares = default!;
+    [Dependency] private readonly ARESCoreSystem _aresCore = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
@@ -32,6 +33,8 @@ public sealed class RMCAlertLevelSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
 
     private EntityQuery<GhostComponent> _ghostQuery;
+
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
 
     public override void Initialize()
     {
@@ -79,7 +82,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
 
     public bool IsRedOrDeltaAlert()
     {
-        return Get() == RMCAlertLevels.Red || Get() ==  RMCAlertLevels.Delta;
+        return Get() == RMCAlertLevels.Red || Get() == RMCAlertLevels.Delta;
     }
 
     public ProtoId<AnnouncementPresetPrototype> EnsureAlertAnnouncementPreset(RMCAlertLevels level)
@@ -117,6 +120,14 @@ public sealed class RMCAlertLevelSystem : EntitySystem
             almayers.Add(uid);
         }
 
+        if (user != null)
+        {
+            foreach (var almayer in almayers)
+            {
+                _aresCore.CreateARESLog(almayer, LogCat, (string) $"{Name(user.Value)} set the alert level to: {level}");
+            }
+        }
+
         var transformQuery = EntityManager.TransformQuery;
         var filter = Filter.Empty()
             .AddWhereAttachedEntity(entity =>
@@ -130,13 +141,9 @@ public sealed class RMCAlertLevelSystem : EntitySystem
                 return false;
             });
 
-        // Play alarm sound if playSound == true
         if (playSound && _net.IsServer)
-        {
             _audio.PlayGlobal(sound, filter, true);
-        }
 
-        // Send announcement if sendAnnouncement == true
         if (sendAnnouncement)
         {
             var preset = ent.Comp.GetAnnouncementPreset(level);
@@ -148,7 +155,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
             }
             else if (message != null)
             {
-                var ares = _ares.EnsureARES();
+                var ares = _aresCore.EnsureMarineARES();
                 var text = Loc.GetString(message.Value);
                 _marineAnnounce.AnnounceRadio(ares, text, ent.Comp.RadioChannel);
                 _marineAnnounce.AnnounceAlertLevel(preset, text, filter);
@@ -166,7 +173,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
             {
                 SharedEntityStorageComponent? entityStorageComp = null;
                 if (_entityStorage.ResolveStorage(uid, ref entityStorageComp))
-                    _entityStorage.CloseStorage(uid, entityStorageComp); // Close a locker before locking it.
+                    _entityStorage.CloseStorage(uid, entityStorageComp);
                 _lock.Lock(uid, null, lockComp);
             }
         }

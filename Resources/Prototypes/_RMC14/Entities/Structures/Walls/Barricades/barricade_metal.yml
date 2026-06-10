@@ -31,8 +31,9 @@
     repairableDamageLimit: 340
   - type: NailgunRepairable
     # cm13 max_health%: 0.3, 0.45
-    repairMetal: 135
-    repairPlasteel: 200
+    repairValues:
+      CMSteel: 135
+      CMPlasteel: 200
   - type: Destructible
     thresholds:
     - trigger:
@@ -102,6 +103,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCBiohazardUpgrade
     - type: Flammable
       damage:
         types:
@@ -129,6 +131,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCBruteUpgrade
 
 - type: entity
   parent: CMBarricadeMetal
@@ -151,6 +154,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCExplosiveUpgrade
     - type: Flammable
       damage:
         types:
@@ -359,7 +363,7 @@
       - state: centerroadbarrier1
       - map: [ "acided" ]
 
-
+# Plastic Handrails
 - type: entity
   parent: RMCBarricadeHandrail
   id: RMCBarricadeHybrisaPlasticRoadBarrier
@@ -370,7 +374,7 @@
       - state: plasticroadbarrierred
       - map: [ "acided" ]
     - type: Construction
-      graph: BarricadeHandrailGraph
+      graph: RMCBarricadeHandrailPlasticGraph
       node: nodeHandrail
 
 - type: entity
@@ -419,8 +423,9 @@
     repairableDamageLimit: 300
   - type: NailgunRepairable
     # cm13 max_health%: 0.3, 0.45
-    repairMetal: 120
-    repairPlasteel: 180
+    repairValues:
+      CMSteel: 120
+      CMPlasteel: 180
   - type: Destructible
     thresholds:
     - trigger:
@@ -491,3 +496,5 @@
     delay: 0.3
   - type: Climbable
   - type: RMCOpenOnlyWhenUnanchored
+  - type: RMCFoldingBarricadeLinking
+    linkable: false

@@ -1464,6 +1464,17 @@ CMM77BeltFilled: RMCM77BeltFilled
 CMGasTankOxygen: RMCGasTankOxygenFilled
 RMCGasTankPhoron: RMCGasTankPhoronFilled
 
+# 2026-1-13
+RMCBoxMagazineRifleAK4047Empty: RMCBoxMagazineRifleType77Empty
+RMCBoxMagazineRifleAK4047: RMCBoxMagazineRifleType77
+RMCAttachmentAK4047StockCollapsible: RMCAttachmentType77StockCollapsible
+RMCWeaponRifleAK4047: RMCWeaponRifleType77
+RMCWeaponRifleAK4047Tactical: RMCWeaponRifleType77Tactical
+RMCMagazineRifleAK4047: RMCMagazineRifleType77
+RMCMagazineRifleAK4047AP: RMCMagazineRifleType77AP
+RMCMagazineRifleAK4047Incendiary: RMCMagazineRifleType77Incendiary
+RMCMagazineRifleAK4047HEAP: RMCMagazineRifleType77HEAP
+
 # 2026-1-15
 ClothingUniformJumpsuitPrisoner: RMCJumpsuitOrange
 
@@ -1478,8 +1489,29 @@ CMPosterZSPA1: RMCPosterTSEPA1
 CMPosterZSPA2: RMCPosterTSEPA2
 CMPosterZSPA3: RMCPosterTSEPA3
 RMCSpawnerERTShuttleZSPA: RMCSpawnerERTShuttleTSEPA
-RMCSpawnerShuttleZSPA: RMCSpawnerShuttleTSEPA
 
 # 2026-02-05
 RMCWeaponSMGP90: RMCWeaponSMGPDW90
 RMCMagazineSMGP90: RMCMagazineSMGPDW90
+
+# 2026-03-18
+CMWebbingSurgicalGreen: RMCWebbingSurgicalGreen
+CMWebbingSurgicalBlue: RMCWebbingSurgicalBlue
+
+# 2026-03-21
+CMUpgradedTraumaKit: CMUpgradedTraumaKit10
+
+# 2026-05-19
+RMCFogWallWeed30: RMCFogWallWeed
+
+#2026-05-20
+RMCHeadCapFerret: RMCHeadCapGrey
+CMPosterRememberIo: CMRandomPosterAny
+
+#2026-05-22
+DrinkGlass: RMCDrinkGlass
+FoodDonkpocket: RMCFoodDonkpocket
+FoodBoxDonkpocket: RMCBoxDonkpockets
+
+#2026-06-06
+RMCBeakerHighCapacity: RMCReagentJug

@@ -37,7 +37,7 @@
   parent: RMCBasePVEEquipmentCase
   id: RMCPVECaseM42A2
   name: M42A2 shotgun case
-  description: A heavy case for storing an M42A2 pump-action shotgun, an Armat Battlefield Systems modern take on an all-time classic.
+  description: A heavy case for storing an M42A2 pump-action shotgun, an AEGIS Armaments modern take on an all-time classic.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
@@ -64,6 +64,38 @@
         whitelist:
           tags:
           - RMCWeaponShotgunM42A2
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseSyracuseShotgun
+  name: Syracuse shotgun case
+  description: A heavy case for storing a Syracuse pump-action shotgun, an all-time classic.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponShotgunSyracuse
+      - RMCHandful
+      - RMCAttachmentM42A1WoodenStock
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponShotgunSyracuse
+    - id: RMCAttachmentM42A1WoodenStock
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponShotgunSyracuse
 
 - type: entity
   parent: RMCBasePVEEquipmentCase
@@ -422,6 +454,134 @@
         whitelist:
           tags:
           - RMCTankFlamer
+
+- type: entity
+  parent: RMCPVECaseFlamerFuel
+  id: RMCPVECaseFlamerFuelLPO80
+  name: LPO80 fuel canister case
+  description: A heavy case containing six fuel canisters for the LPO80 incinerator unit.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCTankFlamerSPP
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamerSPP
+    - id: RMCTankFlamerSPP
+    - id: RMCTankFlamerSPP
+    - id: RMCTankFlamerSPP
+    - id: RMCTankFlamerSPP
+    - id: RMCTankFlamerSPP
+  - type: ItemMapper
+    mapLayers:
+      ammo_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+      ammo_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+      ammo_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+      ammo_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+      ammo_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+      ammo_6:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseL104Fuel
+  name: L104 incinerator fuel tank case
+  description: A heavy case containing six fuel tanks for the L104 incinerator.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/l104_fuel.rsi
+    layers:
+    - state: base
+    - state: ammo_1
+      map: [ ammo_1 ]
+      visible: false
+    - state: ammo_2
+      map: [ ammo_2 ]
+      visible: false
+    - state: ammo_3
+      map: [ ammo_3 ]
+      visible: false
+    - state: ammo_4
+      map: [ ammo_4 ]
+      visible: false
+    - state: ammo_5
+      map: [ ammo_5 ]
+      visible: false
+    - state: ammo_6
+      map: [ ammo_6 ]
+      visible: false
+    - state: lid_closed
+      map: [ lid ]
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCTankIncineratorL104
+  - type: StorageFill
+    contents:
+    - id: RMCTankIncineratorL104
+      amount: 6
+  - type: ItemMapper
+    mapLayers:
+      ammo_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCTankIncineratorL104
+      ammo_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCTankIncineratorL104
+      ammo_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCTankIncineratorL104
+      ammo_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCTankIncineratorL104
+      ammo_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCTankIncineratorL104
+      ammo_6:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCTankIncineratorL104
 
 - type: entity
   parent: RMCBasePVEEquipmentCase

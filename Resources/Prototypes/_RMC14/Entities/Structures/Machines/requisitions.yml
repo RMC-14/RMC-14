@@ -15,7 +15,7 @@
       - RMCCrateBoxMagazineM54CE2
       - RMCCrateBoxMagazinePistolM1984
       - RMCCrateBoxMagazinePistolM1984AP
-#      - RMCCrateBoxMagazinePistolM1984HP
+      - RMCCrateBoxMagazinePistolM1984HP
       - RMCCrateBoxMagazineRifleM54C
       - RMCCrateBoxMagazineRifleM54CAP
       - RMCCrateBoxMagazineRifleM4SPRAP
@@ -43,10 +43,19 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/asrs_console.rsi
     layers:
-    - map: ["computerLayerBody"]
+    - map: ["base"]
       state: off
-    - map: ["computerLayerScreen"]
-      state: on
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "on"
+  - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -89,6 +98,74 @@
     range: 200
     ports:
     - OrderSender
+  - type: GuideHelp
+    guides:
+    - RMCRequisitions
+  - type: CargoSellBlacklist
+  - type: LitOnPowered
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: RMCKeyboardTyping
+      params:
+        volume: -1
+  - type: RequireProjectileTarget
+  - type: InteractionOutline
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+        ents: []
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCCryoRecoveryConsole
+  name: hypersleep recovery console
+  description: A requisitions console used to recover equipment from marines who have entered long-term hypersleep.
+  suffix: Requisitions
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: cellconsole
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.35,0.25,0.35"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmash
+  - type: RMCCryoRecoveryConsole
+    excludeWhitelistedRoles: true
+  - type: ActivatableUI
+    key: enum.RMCCryoRecoveryUiKey.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessRequisitions" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.RMCCryoRecoveryUiKey.Key:
+        type: RMCCryoRecoveryBui
+  - type: Computer
+    board: CargoRequestComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
   - type: GuideHelp
     guides:
     - Cargo

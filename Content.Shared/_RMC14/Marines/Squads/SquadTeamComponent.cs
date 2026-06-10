@@ -26,7 +26,7 @@ public sealed partial class SquadTeamComponent : Component
     [DataField]
     public Color? AccessibleColor;
 
-    [DataField(required: true)]
+    [DataField]
     public ProtoId<RadioChannelPrototype>? Radio;
 
     [DataField(required: true)]

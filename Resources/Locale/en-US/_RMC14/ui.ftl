@@ -38,6 +38,7 @@ rmc-ui-audio-emotes-feroxi = Play emotes for feroxis
 rmc-ui-audio-emotes-skrell = Play emotes for skrells
 
 cm-ui-roadmap = Roadmap
+rmc-ui-roadmap-orbital-bombardment = Orbital bombardment
 
 rmc-ui-link-discord-account = Link Discord
 rmc-ui-link-discord-account-text = Click the button below to copy your code.
