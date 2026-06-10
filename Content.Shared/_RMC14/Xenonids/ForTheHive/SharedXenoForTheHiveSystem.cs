@@ -247,7 +247,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                     }
 
                     if (GetHiveCore(xeno, out var core))
-                        ForTheHiveRespawn(xeno, active.CoreSpawnTime);
+                        ForTheHiveRespawn(xeno, active.CoreSpawnTime, true, _transform.GetMoverCoordinates(core));
                     else
                         ForTheHiveRespawn(xeno, active.CorpseSpawnTime, true, origin);
 
@@ -259,7 +259,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
         }
     }
 
-    protected bool GetHiveCore(EntityUid xeno, out EntityUid? core)
+    protected bool GetHiveCore(EntityUid xeno, out EntityUid core)
     {
         var cores = EntityQueryEnumerator<HiveCoreComponent, HiveMemberComponent>();
         while (cores.MoveNext(out var uid, out var _, out var _))
@@ -274,7 +274,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
             return true;
         }
 
-        core = null;
+        core = default;
         return false;
     }
 

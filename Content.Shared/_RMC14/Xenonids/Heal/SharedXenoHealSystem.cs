@@ -337,8 +337,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
         {
             var corpsePosition = _transform.GetMoverCoordinates(ent);
 
-            if (GetHiveCore(ent))
-                SacrificialHealRespawn(ent, args.RespawnDelay);
+            if (GetHiveCore(ent, out var core))
+                SacrificialHealRespawn(ent, args.RespawnDelay, true, _transform.GetMoverCoordinates(core));
             else
                 SacrificialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
         }
@@ -382,7 +382,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
         heal.ParallizeHealing = true;
     }
 
-    private bool GetHiveCore(EntityUid xeno)
+    private bool GetHiveCore(EntityUid xeno, out EntityUid core)
     {
         var cores = EntityQueryEnumerator<HiveCoreComponent, HiveMemberComponent>();
         while (cores.MoveNext(out var uid, out _, out _))
@@ -393,9 +393,11 @@ public abstract class SharedXenoHealSystem : EntitySystem
             if (_mobState.IsDead(uid))
                 continue;
 
+            core = uid;
             return true;
         }
 
+        core = default;
         return false;
     }
 
