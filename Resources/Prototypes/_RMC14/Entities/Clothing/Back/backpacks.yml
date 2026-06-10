@@ -631,3 +631,5 @@
         volume: -7
   - type: Corrodible
     isCorrodible: false
+  - type: RMCUnstrippable
+    policeCanStrip: false
