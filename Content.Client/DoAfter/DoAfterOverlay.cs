@@ -1,7 +1,9 @@
 using System.Numerics;
+using Content.Client._RMC14.NightVision;
 using Content.Shared.DoAfter;
 using Content.Client.UserInterface.Systems;
 using Content.Shared._RMC14.Stealth;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
@@ -10,6 +12,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
+using Content.Client.Examine;
 
 namespace Content.Client.DoAfter;
 
@@ -25,6 +28,8 @@ public sealed class DoAfterOverlay : Overlay
     private readonly ProgressColorSystem _progressColor;
     private readonly SharedContainerSystem _container;
     private readonly SpriteSystem _sprite;
+    private readonly IOverlayManager _overlay;
+    private readonly ExamineSystem _examine;
 
     private readonly Texture _barTexture;
     private readonly ShaderInstance _unshadedShader;
@@ -38,13 +43,18 @@ public sealed class DoAfterOverlay : Overlay
     private const float StartX = 2;
     private const float EndX = 22f;
 
-    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
+    public override OverlaySpace Space => _overlay.HasOverlay<NightVisionOverlay>()
+        ? OverlaySpace.WorldSpace
+        : OverlaySpace.WorldSpaceBelowFOV;
 
-    public DoAfterOverlay(IEntityManager entManager, IPrototypeManager protoManager, IGameTiming timing, IPlayerManager player)
+    public DoAfterOverlay(IEntityManager entManager, IPrototypeManager protoManager, IGameTiming timing, IPlayerManager player, IOverlayManager overlay, ExamineSystem examine)
     {
         _entManager = entManager;
         _timing = timing;
         _player = player;
+        _overlay = overlay;
+        _examine = examine;
+        ZIndex = 1;
         _transform = _entManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
         _meta = _entManager.EntitySysManager.GetEntitySystem<MetaDataSystem>();
         _container = _entManager.EntitySysManager.GetEntitySystem<SharedContainerSystem>();
@@ -126,6 +136,10 @@ public sealed class DoAfterOverlay : Overlay
                 {
                     // Don't show the doafter bar to other clients if the entity's sprite isn't visible.
                     if(!sprite.Visible && uid != localEnt)
+                       continue;
+
+                    // RMC:14 If the entity is a xeno and the target isn't, and target is hidden behind FOV shadow, don't show the doafter bar.
+                    if(_entManager.HasComponent<XenoComponent>(localEnt) && !_entManager.HasComponent<XenoComponent>(uid) && !_examine.InRangeUnOccluded(uid, localEnt.Value))
                         continue;
 
                     // Set the doafter bar alpha to the alpha of the sprite.
