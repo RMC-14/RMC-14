@@ -25,15 +25,6 @@ public enum OverwatchConsoleUI
 }
 
 [Serializable, NetSerializable]
-public sealed class OverwatchConsoleBuiState(
-    List<OverwatchSquad> squads,
-    Dictionary<NetEntity, List<OverwatchMarine>> marines) : BoundUserInterfaceState
-{
-    public readonly List<OverwatchSquad> Squads = squads;
-    public readonly Dictionary<NetEntity, List<OverwatchMarine>> Marines = marines;
-}
-
-[Serializable, NetSerializable]
 public sealed class OverwatchConsoleSelectSquadBuiMsg(NetEntity squad) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Squad = squad;

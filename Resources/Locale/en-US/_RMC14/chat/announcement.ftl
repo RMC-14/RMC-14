@@ -61,3 +61,10 @@ rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Uni
     Unidentified lifesigns ({$count}) detected onboard the dropship {$name}. Recommendation: lockdown of exterior access ports, including ducting and ventilation.[/bold][/font][/color]
 
 rmc-announcement-shipside-header = Please write a message to announce to the crew
+rmc-announcement-echo-confirm-title = Confirm Activation
+rmc-announcement-echo-confirm-message = Confirm activation of Echo Squad for {$message}
+rmc-announcement-echo-reason-title = What is the purpose of Echo Squad?
+rmc-announcement-overwatch-untrained = You are not trained in overwatch!
+rmc-announcement-evacuation-confirm = Confirm?
+rmc-announcement-evacuation-cancel = Cancel Evacuation
+rmc-announcement-evacuation-initiate = Initiate Evacuation

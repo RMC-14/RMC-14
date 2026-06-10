@@ -39,6 +39,15 @@ public sealed partial class MarineCommunicationsComputerComponent : Component
     [DataField, AutoNetworkedField]
     public string? AnnounceName;
 
+    [DataField, AutoNetworkedField]
+    public string Planet = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public string Operation = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public List<LandingZone> LandingZones = new();
+
     /*
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");

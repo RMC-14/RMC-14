@@ -10,13 +10,6 @@
   canBeInterrupted: false
   aliases:
   - "command"
-  - "cmd"
-  - "hc"
-  - "marine_command"
-  - "MarineCommandDefault"
-  - "MarineCommandSimplified"
-  - "command_default"
-  - "marine_default"
   presentations:
     stylized:
       style:
@@ -69,7 +62,7 @@
           showTitle: true
           title: ">> COMMAND <<"
           titleColor: "#4a9eff"
-          titleFontSize: 40
+          titleFontSize: 10
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -126,7 +119,7 @@
           showTitle: true
           title: ">> COMMAND <<"
           titleColor: "#4a9eff"
-          titleFontSize: 40
+          titleFontSize: 10
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -166,7 +159,7 @@
           showTitle: true
           title: ">> COMMAND <<"
           titleColor: "#4a9eff"
-          titleFontSize: 40
+          titleFontSize: 10
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -228,7 +221,7 @@
           showTitle: true
           title: ">> COMMAND <<"
           titleColor: "#4a9eff"
-          titleFontSize: 40
+          titleFontSize: 10
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2

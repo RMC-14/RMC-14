@@ -33,11 +33,7 @@ public sealed partial class AnnouncementOverlaySystem
         if (!normalized.Contains('\n') && normalized.Contains("\\n"))
             normalized = normalized.Replace("\\n", "\n");
 
-        return normalized
-            .Split('\n')
-            .Select(line => line.Trim())
-            .Where(line => !string.IsNullOrWhiteSpace(line))
-            .ToArray();
+        return normalized.Split('\n');
     }
 
     private string? ResolveSpeakerName(AnnouncementRequest request)

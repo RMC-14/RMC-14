@@ -66,6 +66,7 @@ public sealed partial class AnnouncementWidget
             var labels = new RichTextLabel[totalLabels];
 
             var scaleFactor = screenScaleFactor;
+            var bodyLineHeight = MathF.Max(1f, style.TextConfig.LineHeight);
             var labelIndex = 0;
             RichTextLabel? titleLabelRef = null;
             RichTextLabel[] titleLabels = Array.Empty<RichTextLabel>();
@@ -305,9 +306,10 @@ public sealed partial class AnnouncementWidget
                 var label = new RichTextLabel
                 {
                     HorizontalAlignment = textAlign,
-                    VerticalAlignment = VAlignment.Center,
+                    VerticalAlignment = VAlignment.Top,
                     MaxWidth = effectiveTextWidth,
-                    HorizontalExpand = false
+                    HorizontalExpand = false,
+                    MinHeight = bodyLineHeight
                 };
 
                 textContainer.AddChild(label);
