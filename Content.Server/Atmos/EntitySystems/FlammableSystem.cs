@@ -4,6 +4,7 @@ using Content.Server.Damage.Components;
 using Content.Server.Stunnable;
 using Content.Server.Temperature.Systems;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Water;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.ActionBlocker;
@@ -54,6 +55,7 @@ namespace Content.Server.Atmos.EntitySystems
         [Dependency] private readonly AudioSystem _audio = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
+        [Dependency] private readonly RMCWaterSystem _rmcWater = default!; // RMC14
         [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
         [Dependency] private readonly IPrototypeManager _prototype = default!;
 
@@ -279,11 +281,35 @@ namespace Content.Server.Atmos.EntitySystems
             if (args.Handled)
                 return;
 
+            // RMC14 use the normal stop-drop-roll resist before active water extinguishes.
             _rmcFlammable.DoStopDropRollAnimation(ent.Owner);
             Resist(ent, ent);
+            if (ent.Comp.Resisting)
+                TryExtinguishWithWater(ent.Owner, ent.Comp);
+            // RMC14 end
+
             _xenoSpit.Resist(ent.Owner);
             args.Handled = true;
         }
+
+        // RMC14 water extinguishing helper. Active water reuses RMCWaterSystem.CanCollide so catwalk-covered
+        // water does not count.
+        private bool TryExtinguishWithWater(EntityUid uid, FlammableComponent flammable)
+        {
+            if (!CanWaterExtinguish(uid, flammable) || !_rmcWater.IsInWater(uid))
+                return false;
+
+            Extinguish(uid, flammable);
+            return true;
+        }
+
+        private bool CanWaterExtinguish(EntityUid uid, FlammableComponent flammable)
+        {
+            return !TerminatingOrDeleted(uid) &&
+                   flammable.OnFire &&
+                   flammable.CanExtinguish;
+        }
+        // RMC14 end
 
         public void UpdateAppearance(EntityUid uid, FlammableComponent? flammable = null, AppearanceComponent? appearance = null)
         {

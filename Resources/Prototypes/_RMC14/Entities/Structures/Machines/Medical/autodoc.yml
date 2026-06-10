@@ -30,8 +30,12 @@
         layer:
         - MachineLayer
   - type: ApcPowerReceiver
-    powerLoad: 450 # 15 idle, 450 active
-    needsPower: false # TODO RMC14 power
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 15
+    activeLoad: 450
+    channel: Equipment
   - type: Autodoc
   - type: DragInsertContainer
     containerId: autodoc
@@ -102,8 +106,12 @@
     key: enum.AutodocUIKey.Key
   - type: ActivatableUIRequiresPower
   - type: ApcPowerReceiver
-    powerLoad: 40
-    needsPower: false # TODO RMC14 power
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 40
+    activeLoad: 0
+    channel: Equipment
   - type: Appearance
   - type: GenericVisualizer
     visuals:
