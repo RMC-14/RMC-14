@@ -6,6 +6,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -26,6 +27,7 @@ public sealed class XenoImpaleSystem : EntitySystem
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
 
     public override void Initialize()
@@ -49,11 +51,15 @@ public sealed class XenoImpaleSystem : EntitySystem
         {
             criticalMark = mark.IsCriticalTag;
 
+            if (criticalMark)
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-marked-critical-consumed"), args.Target, args.Target, PopupType.SmallCaution);
+
             if (xeno.Comp.Emote is { } emote)
                 _emote.TryEmoteWithChat(xeno, emote, cooldown: xeno.Comp.EmoteCooldown);
 
             var secondHit = EnsureComp<XenoSecondImpaleComponent>(args.Target);
             secondHit.ExtraImpales.Add((_timing.CurTime + xeno.Comp.SecondImpaleTime, xeno.Comp.Damage, xeno));
+            
 
             RemCompDeferred<XenoMarkedComponent>(args.Target);
         }
