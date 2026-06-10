@@ -14,6 +14,13 @@
 
 - type: jobIcon
   parent: CMJobIconBase
+  id: RMCJobIconExecutiveBodyguard
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_bodyguard_ppo
+
+- type: jobIcon
+  parent: CMJobIconBase
   id: RMCJobIconSynth
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
@@ -124,14 +131,14 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: weya_director
-    
+
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconPMCSynthetic
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: pmc_syn
-    
+
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconSPPSynth

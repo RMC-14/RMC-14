@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 09/19/2025 12:07:16
-  entityCount: 1013
+  entityCount: 1006
 maps: []
 grids:
 - 1
@@ -7027,43 +7027,5 @@ entities:
     components:
     - type: Transform
       pos: 15.5,17.5
-      parent: 1
-- proto: RMCWeatherSiren
-  entities:
-  - uid: 1007
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 15.5,21.5
-      parent: 1
-  - uid: 1008
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 16.5,8.5
-      parent: 1
-  - uid: 1009
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 16.5,5.5
-      parent: 1
-  - uid: 1010
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 22.5,20.5
-      parent: 1
-  - uid: 1011
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 23.5,12.5
-      parent: 1
-  - uid: 1012
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 29.5,1.5
       parent: 1
 ...

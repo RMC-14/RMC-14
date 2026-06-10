@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 04/20/2026 03:10:39
-  entityCount: 168
+  entityCount: 165
 maps: []
 grids:
 - 1
@@ -1182,13 +1182,5 @@ entities:
     components:
     - type: Transform
       pos: 4.496785,4.651054
-      parent: 1
-- proto: RMCStormSiren
-  entities:
-  - uid: 167
-    components:
-    - type: Transform
-      rot: 0 rad
-      pos: 5.5,8.5
       parent: 1
 ...

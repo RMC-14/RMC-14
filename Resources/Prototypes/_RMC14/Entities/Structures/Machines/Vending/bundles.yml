@@ -214,7 +214,7 @@
     - CMPen
     - RMCBinoculars
     - CMClipboard # notepad
-    #- taperecorder
+    - RMCUniversalRecorder
 
 # PVE
 - type: entity
