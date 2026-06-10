@@ -1,12 +1,9 @@
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.Rest;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.SwiftSteps;
@@ -18,7 +15,7 @@ public sealed class XenoSwiftStepsSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standingState = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    //[Dependency] private readonly INetManager _net = default!;
     //[Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()

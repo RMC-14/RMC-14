@@ -4,12 +4,10 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Numerics;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Content.Client._RMC14.Xenonids.Dodge;
 
@@ -69,8 +67,6 @@ public sealed class XenoDodgeOverlay : Overlay
 
             if (!xformQuery.TryGetComponent(uid, out var xform))
                 continue;
-
-            var currPosition = _transform.GetWorldPositionRotation(uid).WorldPosition;
 
             if (dodge.LastPosition != null)
             {

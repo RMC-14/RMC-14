@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.SwiftSteps;
 using Content.Shared.Actions;
 using Content.Shared.Mobs.Components;

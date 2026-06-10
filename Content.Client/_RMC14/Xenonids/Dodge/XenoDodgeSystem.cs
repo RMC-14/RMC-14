@@ -1,13 +1,7 @@
 using Content.Shared._RMC14.Xenonids.Dodge;
-using Content.Shared._RMC14.Xenonids.Rest;
-using Content.Shared.Coordinates;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Standing;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Client.Player;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 using System.Numerics;
 
 namespace Content.Client._RMC14.Xenonids.Dodge;
