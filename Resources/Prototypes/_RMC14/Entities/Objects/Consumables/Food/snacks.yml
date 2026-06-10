@@ -616,3 +616,13 @@
   components:
   - type: Sprite
     state: eat
+
+- type: entity
+  parent: FoodDonkpocket
+  id: RMCFoodDonkpocket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/donk_pocket.rsi
+    state: donkpocket
+  - type: Item
+    size: Small
