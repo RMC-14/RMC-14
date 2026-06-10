@@ -37,6 +37,9 @@ reagent-desc-cmleporazine = A drug used to treat hypothermia and hyperthermia. S
 reagent-name-cmtricordrazine = Tricordrazine
 reagent-desc-cmtricordrazine = Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries.
 
+reagent-name-rmcultrazine = Ultrazine
+reagent-desc-rmcultrazine = A highly-potent, long-lasting combination CNS and muscle stimulant. Extremely addictive.
+
 reagent-name-cmmeralyne = Meralyne
 reagent-desc-cmmeralyne = Advanced analgesic medication used to treat extremely severe blunt trauma. Allows the body to quickly repair damaged tissue. Overdosing on Meralyne can cause severe corrosion to cell membranes.
 

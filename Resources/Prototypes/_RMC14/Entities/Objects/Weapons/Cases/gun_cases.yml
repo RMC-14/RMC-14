@@ -355,7 +355,7 @@
   parent: RMCGunCaseBase
   id: RMCGunCasePistolM13
   name: M13 auto-pistol case
-  description: A gun case containing the necessary attachments to assemble a custom M13 auto-pistol. Comes with two extended & two extended (AP) magazines.
+  description: A gun case containing the necessary attachments to assemble a custom M13 auto-pistol. Comes with four extended magazines.
   components:
   - type: Storage
     maxItemSize: Huge
@@ -365,7 +365,6 @@
       tags:
       - RMCWeaponPistolM13
       - RMCMagazinePistolM13Ext
-      - RMCMagazinePistolM13ExtAP
       - RMCAttachmentS5MicroRedDotSight
       - RMCAttachmentSuppressorCompact
       - RMCAttachmentRecoilCompensatorM13Spiked
@@ -376,9 +375,7 @@
     contents:
     - id: RMCWeaponPistolM13
     - id: RMCMagazinePistolM13Ext
-      amount: 2
-    - id: RMCMagazinePistolM13ExtAP
-      amount: 2
+      amount: 4
     - id: RMCAttachmentS5MicroRedDotSight
     - id: RMCAttachmentSuppressorCompact
     - id: RMCAttachmentRecoilCompensatorM13Spiked

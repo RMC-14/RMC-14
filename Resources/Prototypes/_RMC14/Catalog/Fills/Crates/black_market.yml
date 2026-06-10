@@ -10,14 +10,14 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketAK4047
-  name: AK-4047 pulse assault rifle crate
-  description: Includes an AK-4047 pulse assault rifle and five magazines.
+  id: RMCCrateBlackMarketType77
+  name: Type 77 pulse assault rifle crate
+  description: Includes a Type 77 pulse assault rifle and five magazines.
   components:
   - type: StorageFill
     contents:
-    - id: RMCWeaponRifleAK4047
-    - id: RMCMagazineRifleAK4047
+    - id: RMCWeaponRifleType77
+    - id: RMCMagazineRifleType77
       amount: 5
 
 - type: entity
@@ -703,23 +703,23 @@
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketAmmoAK4047
-  name: AK-4047 magazine box crate
-  description: Contains one AK-4047 magazine box with 14 magazines.
+  id: RMCCrateBlackMarketAmmoType77
+  name: Type 77 magazine box crate
+  description: Contains one Type 77 magazine box with 10 magazines.
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazineRifleAK4047
+    - id: RMCBoxMagazineRifleType77
 
 - type: entity
   parent: RMCCrateWoodenBuildable
-  id: RMCCrateBlackMarketAmmoAK4047AP
-  name: AK-4047 AP magazine box crate
-  description: Contains one AK-4047 AP magazine box with 14 magazines.
+  id: RMCCrateBlackMarketAmmoType77AP
+  name: Type 77 AP magazine box crate
+  description: Contains one Type 77 AP magazine box with 10 magazines.
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazineRifleAK4047AP
+    - id: RMCBoxMagazineRifleType77AP
 
 - type: entity
   parent: RMCCrateWoodenBuildable

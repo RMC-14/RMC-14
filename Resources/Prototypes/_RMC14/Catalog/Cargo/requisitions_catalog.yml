@@ -33,9 +33,9 @@
         blackMarket: true
         blackMarketCost: 20
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketAK4047
+        crate: RMCCrateBlackMarketType77
         icon:
-          entity: RMCWeaponRifleAK4047
+          entity: RMCWeaponRifleType77
       - cost: 0
         blackMarket: true
         blackMarketCost: 35
@@ -329,16 +329,16 @@
         blackMarket: true
         blackMarketCost: 40
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketAmmoAK4047
+        crate: RMCCrateBlackMarketAmmoType77
         icon:
-          entity: RMCBoxMagazineRifleAK4047
+          entity: RMCBoxMagazineRifleType77
       - cost: 0
         blackMarket: true
         blackMarketCost: 80
         blackMarketHeat: 5
-        crate: RMCCrateBlackMarketAmmoAK4047AP
+        crate: RMCCrateBlackMarketAmmoType77AP
         icon:
-          entity: RMCBoxMagazineRifleAK4047AP
+          entity: RMCBoxMagazineRifleType77AP
       - cost: 0
         blackMarket: true
         blackMarketCost: 100
@@ -982,8 +982,8 @@
         crate: RMCCrateWoodenPlanks
         icon:
           entity: RMCPlankWood
-#      - cost: 2000
-#        crate: RMCCrateFoldingBarricades
+      - cost: 2000
+        crate: RMCCrateFoldingBarricades
 #      - cost: 3000
 #        crate: RMCCrateSuperconductingMagneticCoil
       - cost: 2000

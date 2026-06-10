@@ -32,3 +32,6 @@
       RMCSkillPolice: 1
   - type: BlackMarketValue
     value: 10
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
