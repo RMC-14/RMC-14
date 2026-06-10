@@ -19,6 +19,9 @@
     - state: shallow_toxic
   - type: DamageOverTime
     affectsDead: false
+    cover:
+      tags:
+      - Catwalk
     armorPiercingDamage:
       groups:
         Burn: 15

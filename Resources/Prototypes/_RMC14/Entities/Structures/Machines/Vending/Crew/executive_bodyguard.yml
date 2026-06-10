@@ -14,7 +14,7 @@
       takeAll: CMStandard
       entries:
       - id: RMCBootsPMCFilled
-      - id: RMCHeadsetLiaison
+      - id: RMCHeadsetExecutiveBodyguard
       - id: RMCGlassesSecurityBlue
       # RMC14 TODO: Blue SecHud Perscription
     - name: Uniforms
