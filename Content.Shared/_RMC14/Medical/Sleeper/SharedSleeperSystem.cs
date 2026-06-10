@@ -112,10 +112,6 @@ public abstract class SharedSleeperSystem : EntitySystem
         }
 
         UpdateSleeperVisuals(sleeper);
-
-        if (_timing.ApplyingState)
-            return;
-
         RemCompDeferred<InsideSleeperComponent>(args.Entity);
         _rmcMovement.SuppressCollisionOnExit(args.Entity, sleeper.Owner);
     }

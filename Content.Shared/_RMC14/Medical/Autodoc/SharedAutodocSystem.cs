@@ -124,10 +124,6 @@ public abstract class SharedAutodocSystem : EntitySystem
         }
 
         UpdateAutodocVisuals(autodoc);
-
-        if (_timing.ApplyingState)
-            return;
-
         RemCompDeferred<InsideAutodocComponent>(args.Entity);
         _rmcMovement.SuppressCollisionOnExit(args.Entity, autodoc.Owner);
     }
