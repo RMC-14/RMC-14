@@ -1,6 +1,6 @@
 - type: entity
-  id: RMCBlockerVehicle
   parent: MarkerBase
+  id: RMCBlockerVehicle
   name: vehicle blocker
   suffix: RMC, Blocker
   components:
