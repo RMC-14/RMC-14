@@ -88,6 +88,8 @@
         crate: RMCCrateMagazineML66DDrum
       - cost: 2500
         crate: RMCCrateMagazineM2C
+      - cost: 6000
+        crate: RMCCrateMagazineAmmoSurplus
     - name: Attachments
       entries:
       - cost: 3000
@@ -170,8 +172,8 @@
         crate: RMCCrateGlassSheets
       - cost: 2000
         crate: RMCCrateWoodenPlanks
-#      - cost: 2000
-#        crate: RMCCrateFoldingBarricades
+      - cost: 2000
+        crate: RMCCrateFoldingBarricades
 #      - cost: 3000
 #        crate: RMCCrateSuperconductingMagneticCoil
       - cost: 2000
@@ -233,6 +235,8 @@
         crate: RMCCrateGrenadesBatonSlug
       - cost: 3000
         crate: RMCCrateExplosiveClaymoreMine
+      - cost: 4000
+        crate: RMCCrateExplosivesSurplus
     - name: Food
       entries:
       - cost: 1000

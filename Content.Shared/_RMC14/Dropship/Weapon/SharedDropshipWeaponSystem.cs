@@ -2,6 +2,7 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.ElectronicSystem;
@@ -38,12 +39,14 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
+using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -51,6 +54,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -83,6 +87,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerloader = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCCameraSystem _rmcCamera = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCImplosionSystem _rmcImplosion = default!;
@@ -91,7 +96,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly TagSystem _tagSystem = default!;
+
+    private EntityQuery<RMCWallExplosionDeletableComponent> _wallDeletableQuery;
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
     private const string SpotlightState = "spotlights_";
@@ -132,11 +141,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<DropshipAmmoComponent, PowerLoaderInteractEvent>(OnAmmoInteract);
 
         SubscribeLocalEvent<ActivateDropshipWeaponOnSpawnComponent, MapInitEvent>(OnDropshipWeaponOnSpawnFire);
+        _wallDeletableQuery = GetEntityQuery<RMCWallExplosionDeletableComponent>();
 
         Subs.BuiEvents<DropshipTerminalWeaponsComponent>(DropshipTerminalWeaponsUi.Key,
             subs =>
             {
                 subs.Event<DropshipTerminalWeaponsChangeScreenMsg>(OnWeaponsChangeScreenMsg);
+                subs.Event<DropshipTerminalWeaponsQuickModeMsg>(OnWeaponsQuickModeMsg);
                 subs.Event<DropshipTerminalWeaponsChooseWeaponMsg>(OnWeaponsChooseWeaponMsg);
                 subs.Event<DropshipTerminalWeaponsChooseMedevacMsg>(OnWeaponsChooseMedevacMsg);
                 subs.Event<DropshipTerminalWeaponsChooseFultonMsg>(OnWeaponsChooseFultonMsg);
@@ -327,6 +338,20 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             targets.Add(new TargetEnt(netEnt, ent.Comp.Abbreviation));
             Dirty(uid, terminal);
         }
+
+        if (!TryComp(ent, out MetaDataComponent? metaData) || metaData.EntityPrototype == null)
+            return;
+
+        var prototype = metaData.EntityPrototype.ID;
+
+        AddComp(ent, new RMCCameraComponent
+        {
+            Id = prototype,
+            Rename = false,
+            NameOverride = $"{Name(ent)} [{ent.Comp.Abbreviation}]",
+        }, true);
+
+        _rmcCamera.RefreshCameras(prototype);
     }
 
     private void OnDropshipTargetRemove<T>(Entity<DropshipTargetComponent> ent, ref T args)
@@ -359,6 +384,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
 
             Dirty(uid, terminal);
+        }
+
+        if (_net.IsServer && TryComp(ent, out MetaDataComponent? metaData) && metaData.EntityPrototype is { } prototype)
+        {
+            RemComp<RMCCameraComponent>(ent);
+            RemComp<EyeComponent>(ent);
+            _rmcCamera.RefreshCameras(prototype);
         }
 
         if (_net.IsClient)
@@ -480,6 +512,19 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         if (args.Screen == StrikeWeapon)
             screen.Weapon = null;
+
+        Dirty(ent);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnWeaponsQuickModeMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsQuickModeMsg args)
+    {
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        if (screen.State is not (Target or Strike or StrikeWeapon))
+            return;
+
+        screen.QuickMode = args.Enabled;
+        screen.State = Target;
 
         Dirty(ent);
         RefreshWeaponsUI(ent);
@@ -667,6 +712,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (spread != 0)
             targetCoords = targetCoords.Offset(_random.NextVector2(-spread, spread + 1));
 
+        if (ev.Explosion != null && HasNonDeletableWallOnTile(targetCoords))
+            targetCoords = FindAlternateLandingTile(targetCoords, 3);
         var inFlight = Spawn(null, MapCoordinates.Nullspace);
         var inFlightComp = new AmmoInFlightComponent
         {
@@ -706,10 +753,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var time = _timing.CurTime;
 
+        var spawnTarget = _transform.GetMoverCoordinates(active).SnapToGrid(EntityManager, _mapManager);
+        if (ammo.Explosion != null && HasNonDeletableWallOnTile(spawnTarget))
+            spawnTarget = FindAlternateLandingTile(spawnTarget, 3);
+
         var inFlight = Spawn(null, MapCoordinates.Nullspace);
         var inFlightComp = new AmmoInFlightComponent
         {
-            Target = _transform.GetMoverCoordinates(active).SnapToGrid(EntityManager, _mapManager),
+            Target = spawnTarget,
             MarkerAt = time + ammo.TravelTime,
             ShotsLeft = ammo.RoundsPerShot,
             ShotsPerVolley = ammo.ShotsPerVolley,
@@ -1081,6 +1132,17 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (!IsValidTarget(target))
                 return;
 
+            if (!TryComp(dropship, out FTLComponent? ftl) ||
+                ftl.State != FTLState.Travelling)
+            {
+                if (_net.IsClient)
+                {
+                    var msg = Loc.GetString("rmc-dropship-launch-bay-fire-not-flying");
+                    _popup.PopupCursor(msg, args.Actor, PopupType.SmallCaution);
+                }
+                return;
+            }
+
             if (!_area.CanCAS(target.ToCoordinates()))
             {
                 var msg = Loc.GetString("rmc-laser-designator-not-cas");
@@ -1107,6 +1169,19 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void UpdateTarget(Entity<DropshipTerminalWeaponsComponent> ent, EntityUid target)
     {
+        if (ent.Comp.Target == target)
+        {
+            if (EnsureTargetEye(ent, ent.Comp.Target) is { } currentTargetEye)
+            {
+                _eye.SetOffset(currentTargetEye, ent.Comp.Offset);
+                _eye.SetDrawLight(currentTargetEye, !ent.Comp.NightVision);
+            }
+
+            RefreshWeaponsUI(ent);
+            Dirty(ent);
+            return;
+        }
+
         RemovePvsActors(ent);
         SetTarget(ent, target);
 
@@ -1256,7 +1331,29 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         _name.RefreshNameModifiers(ent.Owner);
         _physics.SetBodyType(ent, BodyType.Static);
 
+        UpdateSignalFlareVisuals(ent);
+
         return true;
+    }
+
+    public void UpdateSignalFlareVisuals(EntityUid ent)
+    {
+        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _mapManager);
+
+        if (!IsFlareLit(ent))
+            return;
+
+        if (!TryComp<AppearanceComponent>(ent, out var appearance))
+            return;
+
+        if (CasDebug || _area.CanCAS(coordinates))
+        {
+            _appearance.SetData(ent, SignalFlareVisuals.BeaconState, true, appearance);
+        }
+        else
+        {
+            _appearance.SetData(ent, SignalFlareVisuals.BeaconState, false, appearance);
+        }
     }
 
     public int ComputeNextId()
@@ -1376,17 +1473,20 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 if (flight.BulletSpread > 0)
                     spread = _random.NextVector2(-flight.BulletSpread, flight.BulletSpread + 1);
 
-                var target = _transform.ToMapCoordinates(flight.Target).Offset(spread);
+                var landing = flight.Target.Offset(spread);
+
+                var targetMap = _transform.ToMapCoordinates(landing.SnapToGrid(EntityManager, _mapManager));
+
                 foreach (var effect in flight.ImpactEffects)
                 {
-                    Spawn(effect, target, rotation: _random.NextAngle());
+                    Spawn(effect, targetMap, rotation: _random.NextAngle());
                 }
 
                 if (flight.Damage != null)
                 {
                     _damageables.Clear();
+                    _entityLookup.GetEntitiesInRange(targetMap, 0.49f, _damageables, LookupFlags.Uncontained);
 
-                    _entityLookup.GetEntitiesInRange(target, 0.49f, _damageables, LookupFlags.Uncontained);
                     foreach (var damageable in _damageables)
                     {
                         _damageable.TryChangeDamage(
@@ -1400,7 +1500,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
                 if (flight.Implosion != null)
                 {
-                    _rmcImplosion.Implode(flight.Implosion, target);
+                    _rmcImplosion.Implode(flight.Implosion, targetMap);
                 }
 
                 if (flight.Fire != null)
@@ -1463,7 +1563,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
                 if (flight.Explosion != null)
                 {
-                    _rmcExplosion.QueueExplosion(target,
+                    TryDeleteDestructibleWallAt(landing);
+                    _rmcExplosion.QueueExplosion(targetMap,
                         flight.Explosion.Type,
                         flight.Explosion.Total,
                         flight.Explosion.Slope,
@@ -1499,6 +1600,75 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (!_transform.InRange(xform.Coordinates, active.Origin, active.BreakRange))
                 RemCompDeferred<ActiveLaserDesignatorComponent>(uid);
         }
+    }
+
+    private bool IsWall(EntityUid uid)
+    {
+        return _tagSystem.HasTag(uid, "Wall");
+    }
+
+    private bool HasNonDeletableWallOnTile(EntityCoordinates impactCoords)
+    {
+        if (_transform.GetGrid(impactCoords) is not { } gridUid ||
+            !TryComp(gridUid, out MapGridComponent? grid))
+            return false;
+
+        var tile = _map.LocalToTile(gridUid, grid, impactCoords);
+        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+
+        var foundWall = false;
+        while (anchored.MoveNext(out var uid))
+        {
+            if (!IsWall(uid.Value))
+                continue;
+
+            foundWall = true;
+            if (_wallDeletableQuery.HasComp(uid.Value))
+                return false;
+        }
+        return foundWall;
+    }
+
+    private EntityCoordinates FindAlternateLandingTile(EntityCoordinates desired, int maxRadius = 3)
+    {
+        var origin = desired.SnapToGrid(EntityManager, _mapManager);
+
+        for (var r = 1; r <= maxRadius; r++)
+        {
+            for (var x = -r; x <= r; x++)
+            for (var y = -r; y <= r; y++)
+            {
+                if (Math.Abs(x) != r && Math.Abs(y) != r)
+                    continue;
+
+                var candidate = origin.Offset(new Vector2i(x, y));
+                if (!HasNonDeletableWallOnTile(candidate))
+                    return candidate;
+            }
+        }
+
+        return origin;
+    }
+
+    private bool TryDeleteDestructibleWallAt(EntityCoordinates impactCoords)
+    {
+        if (_transform.GetGrid(impactCoords) is not { } gridUid ||
+            !TryComp(gridUid, out MapGridComponent? grid))
+            return false;
+
+        var tile = _map.LocalToTile(gridUid, grid, impactCoords);
+        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+
+        while (anchored.MoveNext(out var uid))
+        {
+            if (!_wallDeletableQuery.HasComp(uid.Value))
+                continue;
+
+            QueueDel(uid.Value);
+            return true;
+        }
+
+        return false;
     }
 
     public void TargetUpdated(Entity<DropshipTargetComponent> ent)
@@ -1671,3 +1841,9 @@ public record struct DropshipWeaponShotEvent(
     RMCFire? Fire,
     int SoundEveryShots
 );
+
+[Serializable, NetSerializable]
+public enum SignalFlareVisuals : byte
+{
+    BeaconState
+}

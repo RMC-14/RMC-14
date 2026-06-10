@@ -6,6 +6,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -70,7 +71,7 @@
   name: survivor synth hybrisa EMT preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
     - [ RMCCoatParamedicGreen, RMCJumpsuitEMTGreen, CMHandsLatex ]

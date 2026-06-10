@@ -39,6 +39,9 @@ public sealed partial class CMDistressSignalRuleSystem
 
         distress.NextCheck ??= Timing.CurTime + distress.CheckEvery;
 
+        if (distress.ScuttleFinalSequenceStarted || distress.ScuttleDetonated)
+            return;
+
         if (distress.ForceEndAt != null && Timing.CurTime >= distress.ForceEndAt)
         {
             EndRound(distress, DistressSignalRuleResult.MinorXenoVictory, "rmc-distress-signal-minorxenovictory-timeout");
@@ -237,6 +240,7 @@ public sealed partial class CMDistressSignalRuleSystem
             DistressSignalRuleResult.MinorMarineVictory => distress.MinorMarineAudio,
             DistressSignalRuleResult.MajorXenoVictory => distress.MajorXenoAudio,
             DistressSignalRuleResult.MinorXenoVictory => distress.MinorXenoAudio,
+            DistressSignalRuleResult.SelfDestruct => distress.SelfDestructAudio,
             _ => null,
         };
 
@@ -268,6 +272,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 DistressSignalRuleResult.MajorXenoVictory => 1,
                 DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die or timeout happens
                 DistressSignalRuleResult.AllDied => 0,
+                DistressSignalRuleResult.SelfDestruct => 0,
                 null => 0,
                 _ => throw new ArgumentOutOfRangeException(),
             };
@@ -317,7 +322,7 @@ public sealed partial class CMDistressSignalRuleSystem
                 _rmcAmbientLight.SetColor((xenoMap, rmcAmbientComp), colorSequence, _sunriseDuration);
             }
 
-            var ares = _ares.EnsureARES();
+            var ares = _aresCore.EnsureMarineARES();
             _marineAnnounce.AnnounceRadio(ares,
                 Loc.GetString("rmc-distress-signal-bioscan-complete"),
                 rule.AllClearChannel);

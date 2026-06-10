@@ -769,8 +769,12 @@ namespace Content.Shared.Interaction
             bool popup = false,
             bool overlapCheck = true)
         {
-            if (_net.IsServer)
+            if (_net.IsServer &&
+                Resolve(other, ref other.Comp, false) &&
+                !_transform.InRange(otherCoordinates, other.Comp.Coordinates, 0.01f))
+            {
                 range += _rmcLagCompensation.MarginTiles;
+            }
 
             if (origin.Owner == other.Owner && Resolve(other, ref other.Comp, false))
             {

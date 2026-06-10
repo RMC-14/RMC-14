@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/01/2025 22:17:20
-  entityCount: 1475
+  time: 05/15/2026 12:22:23
+  entityCount: 1479
 maps:
 - 1
 grids:
@@ -26,7 +26,6 @@ tilemap:
   136: CMFloorWhite
   305: FloorTechMaint
   321: Lattice
-  322: Plating
 entities:
 - proto: ""
   entities:
@@ -1471,6 +1470,13 @@ entities:
         path: /Audio/_RMC14/Announcements/ARES/unidentified_lifesigns.ogg
       lastLocked: {}
       attachmentPoints: []
+      launchAlarmSound: !type:SoundPathSpecifier
+        params:
+          loop: True
+          referenceDistance: 10
+          maxDistance: 30
+          volume: 2
+        path: /Audio/_RMC14/Machines/Shuttle/dropship_launch_alarm.ogg
       crashWarningSound: !type:SoundPathSpecifier
         params:
           volume: -5
@@ -1483,6 +1489,8 @@ entities:
         params:
           volume: -1
         path: /Audio/_RMC14/Dropship/dropship_incoming.ogg
+      arrivalSound: !type:SoundPathSpecifier
+        path: /Audio/_RMC14/Machines/Shuttle/engine_landing.ogg
     - type: GridAtmosphere
       version: 2
       data:
@@ -3951,6 +3959,20 @@ entities:
     - type: Transform
       pos: -0.5,-2.5
       parent: 2
+- proto: CMSpawnPointCombatCorrespondent
+  entities:
+  - uid: 1478
+    components:
+    - type: Transform
+      pos: 0.5,-2.5
+      parent: 2
+- proto: CMSpawnPointCrewman
+  entities:
+  - uid: 1476
+    components:
+    - type: Transform
+      pos: -0.5,3.5
+      parent: 2
 - proto: CMSpawnPointDCC
   entities:
   - uid: 663
@@ -3971,13 +3993,6 @@ entities:
     components:
     - type: Transform
       pos: -1.5,0.5
-      parent: 2
-- proto: RMCSpawnPointFieldDoctor
-  entities:
-  - uid: 1475
-    components:
-    - type: Transform
-      pos: 2.5,-1.5
       parent: 2
 - proto: CMSpawnPointFireteamLeader
   entities:
@@ -4110,7 +4125,7 @@ entities:
   - uid: 684
     components:
     - type: Transform
-      pos: 0.5,-2.5
+      pos: -2.5,0.5
       parent: 2
 - proto: CMSpawnPointSurvivor
   entities:
@@ -9434,6 +9449,8 @@ entities:
     - type: Transform
       pos: 0.7198646,4.374314
       parent: 2
+    missingComponents:
+    - IngestionBlocker
 - proto: RMCKitchenReagentGrinder
   entities:
   - uid: 1203
@@ -10046,6 +10063,20 @@ entities:
     components:
     - type: Transform
       pos: 3.5,17.5
+      parent: 2
+- proto: RMCSpawnPointExecutiveBodyguard
+  entities:
+  - uid: 1479
+    components:
+    - type: Transform
+      pos: -1.5,3.5
+      parent: 2
+- proto: RMCSpawnPointFieldDoctor
+  entities:
+  - uid: 1475
+    components:
+    - type: Transform
+      pos: 2.5,-1.5
       parent: 2
 - proto: RMCSpawnPointProvostInspector
   entities:
