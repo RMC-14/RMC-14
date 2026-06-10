@@ -45,7 +45,6 @@ public sealed class LarvaQueueSystem : EntitySystem
     private readonly Dictionary<NetUserId, PendingOffer> _pendingOffers = new();
     private readonly HashSet<EntityUid> _reservedBurstLarva = new();
     private readonly Dictionary<EntityUid, int> _pendingBurrowedCount = new();
-    private readonly Dictionary<EntityUid, TimeSpan> _pendingXenoOffer = new();
     private readonly Dictionary<NetUserId, TimeSpan> _disconnectedAt = new();
 
     private sealed class PendingOffer
@@ -55,10 +54,8 @@ public sealed class LarvaQueueSystem : EntitySystem
         public required double ExpiresAt;
     }
 
-    private static readonly TimeSpan XenoReconnectGracePeriod = TimeSpan.FromMinutes(5);
-    private static readonly TimeSpan DisconnectGracePeriod = TimeSpan.FromMinutes(5);
-
     private int _offerTimeoutSeconds;
+    private TimeSpan _disconnectGracePeriod;
 
     public override void Initialize()
     {
@@ -78,6 +75,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         }
 
         Subs.CVar(_config, RMCCVars.RMCLarvaQueueOfferTimeoutSeconds, v => _offerTimeoutSeconds = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDisconnectedXenoGhostRoleTimeSeconds, v => _disconnectGracePeriod = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnXenoBurstPriority(ref XenoBurstPriorityEvent ev)
@@ -133,15 +131,16 @@ public sealed class LarvaQueueSystem : EntitySystem
             return;
         }
 
-        _pendingXenoOffer[ent] = _gameTiming.CurTime + XenoReconnectGracePeriod;
+        EnsureComp<LarvaQueuedComponent>(ent);
+        if (_hive.GetHive(ent.Owner) is { } hiveEnt)
+            TryOfferToQueue(hiveEnt.Owner);
     }
 
-    private void OnMindAdded(Entity<CanBeLarvaQueuedComponent> ent, ref MindAddedMessage args)
+    private void OnMindAdded(Entity<CanBeLarvaQueuedComponent> ent, ref MindAddedMessage _)
     {
         if (_net.IsClient)
             return;
 
-        _pendingXenoOffer.Remove(ent);
         RemCompDeferred<LarvaQueuedComponent>(ent);
     }
 
@@ -184,7 +183,6 @@ public sealed class LarvaQueueSystem : EntitySystem
         _pendingOffers.Clear();
         _reservedBurstLarva.Clear();
         _pendingBurrowedCount.Clear();
-        _pendingXenoOffer.Clear();
         _disconnectedAt.Clear();
     }
 
@@ -503,7 +501,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             if (!_player.TryGetSessionById(netId, out var s) || s.AttachedEntity == null)
             {
                 if (!_disconnectedAt.ContainsKey(netId))
-                    _disconnectedAt[netId] = _gameTiming.CurTime + DisconnectGracePeriod;
+                    _disconnectedAt[netId] = _gameTiming.CurTime + _disconnectGracePeriod;
                 continue;
             }
 
@@ -540,7 +538,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             if (!_player.TryGetSessionById(netId, out var s) || s.AttachedEntity == null)
             {
                 if (!_disconnectedAt.ContainsKey(netId))
-                    _disconnectedAt[netId] = _gameTiming.CurTime + DisconnectGracePeriod;
+                    _disconnectedAt[netId] = _gameTiming.CurTime + _disconnectGracePeriod;
                 node = next;
                 continue;
             }
@@ -636,24 +634,6 @@ public sealed class LarvaQueueSystem : EntitySystem
             return;
 
         var time = _gameTiming.CurTime;
-
-        var readyXenos = new List<EntityUid>();
-        foreach (var (uid, offerAt) in _pendingXenoOffer)
-        {
-            if (time >= offerAt)
-                readyXenos.Add(uid);
-        }
-
-        foreach (var uid in readyXenos)
-        {
-            _pendingXenoOffer.Remove(uid);
-            if (TerminatingOrDeleted(uid))
-                continue;
-
-            EnsureComp<LarvaQueuedComponent>(uid);
-            if (_hive.GetHive(uid) is { } hive)
-                TryOfferToQueue(hive.Owner);
-        }
 
         var expiredDisconnected = new List<NetUserId>();
         foreach (var (userId, expiry) in _disconnectedAt)
