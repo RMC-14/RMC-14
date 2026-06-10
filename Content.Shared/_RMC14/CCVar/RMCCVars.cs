@@ -569,4 +569,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<string> RMCChemMasterPresets =
         CVarDef.Create("rmc.chemmaster_presets", "", CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCLoadoutLowestRankSelectable =
+        CVarDef.Create("rmc.loadout_lowest_rank_selectable", false, CVar.REPLICATED | CVar.SERVER);
 }

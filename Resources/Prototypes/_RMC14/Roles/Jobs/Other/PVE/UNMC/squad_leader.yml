@@ -5,8 +5,8 @@
   description: cm-job-description-fireteam-leader
   playTimeTracker: CMJobPVESquadLeader
   ranks:
-    RMCRankCorporal: []
     RMCRankSergeant: []
+    RMCRankCorporal: []
   spawnMenuRoleName: Sun Rider Squad Leader (PVE)
   startingGear: RMCGearPVESquadLeader
   dummyStartingGear: CMGearFireteamLeaderEquipped
