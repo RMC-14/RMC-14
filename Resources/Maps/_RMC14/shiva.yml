@@ -132,31 +132,34 @@ entities:
       data: {}
     - type: RMCWeatherCycle
       minTimeBetweenEvents: 1200
+      minTimeBetweenChecks: 0
+      minCheckVariance: 0
+      startChance: 1
       weatherEvents:
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
         lightningEffects:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
+        fireSmotheringStrength: 0
+        cleansDecals: false
         weatherType: RMCStrataClearsky
+        screenOverlay: Low
         duration: 600
         name: Snow
+        displayName: rmc-weather-name-snow
       - lightningSound: !type:SoundCollectionSpecifier
           collection: RMCThunder
         lightningEffects:
         - RMCColorSequenceLightningSharpPeak
         - RMCColorSequenceLightningFlicker
+        fireSmotheringStrength: 1
+        cleansDecals: false
         weatherType: RMCStrataSnowing
+        screenOverlay: Medium
         duration: 360
         name: Snowstorm
-      - lightningSound: !type:SoundCollectionSpecifier
-          collection: RMCThunder
-        lightningEffects:
-        - RMCColorSequenceLightningSharpPeak
-        - RMCColorSequenceLightningFlicker
-        weatherType: RMCStrataBlizzard
-        duration: 240
-        name: Blizzard
+        displayName: rmc-weather-name-snowstorm
     - type: RMCAmbientLightEffects
       sunset: RMCColorSequenceSunsetCold
     - type: MapGrid
