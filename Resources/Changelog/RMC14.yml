@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The medevac system cooldown now starts after you successfully grab a
-      target, instead of when you activate it.
-    type: Fix
-  - message: Fixed the medevac system sometimes grabbing a different target than the
-      one originally selected.
-    type: Fix
-  - message: Fixed the medevac stretcher sometimes playing its lift animation when
-      no medevac was in progress.
-    type: Fix
-  id: 2879
-  time: '2026-02-06T00:06:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9145
 - author: TadJohnson00
   changes:
   - message: '[PVE] Added the L14 combat pistol for use by Royal Crown Marines.'
@@ -4535,5 +4521,12 @@
   id: 3378
   time: '2026-06-11T22:43:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9948
+- author: Vermidia
+  changes:
+  - message: Fixed Designer Hivelord pheromones not being strong enough (3 -> 3.5)
+    type: Fix
+  id: 3379
+  time: '2026-06-11T22:45:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10094
 Name: RMC14
 Order: -1
