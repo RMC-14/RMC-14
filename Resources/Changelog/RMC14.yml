@@ -1,39 +1,4 @@
 ﻿Entries:
-- author: blackknight954
-  changes:
-  - message: XX-121 and XX121 automatically turn into the word Xenonids when spoken
-      by Marines.
-    type: Tweak
-  id: 2865
-  time: '2026-02-02T03:33:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8993
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Added the L112 marksman rifle for use by Royal Crown Marine scout
-      snipers.'
-    type: Add
-  id: 2866
-  time: '2026-02-02T03:35:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8962
-- author: Ian321
-  changes:
-  - message: The identification computer can now also be used to assign someone to
-      a squad.
-    type: Add
-  id: 2867
-  time: '2026-02-02T03:39:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8863
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed TSEPA constables Survivors on hybrisa not having Survivor IFF aswell
-      as TSE IFF.
-    type: Fix
-  - message: Fixed the Corporate Liaison not having Marine IFF. They now have both
-      Marine and WEYA IFF.
-    type: Fix
-  id: 2868
-  time: '2026-02-02T03:41:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9093
 - author: Neved4
   changes:
   - message: Roadmap header year now uses the current UTC year automatically.
@@ -4529,5 +4494,70 @@
   id: 3364
   time: '2026-06-11T22:31:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9983
+- author: Arykh
+  changes:
+  - message: Fixed getting stuck when exiting a Sleeper, Autodoc, or Body Scanner!
+    type: Fix
+  id: 3365
+  time: '2026-06-11T22:33:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10072
+- author: Arykh
+  changes:
+  - message: "Added the \u201Cresist\u201D keybind. Press B instead of clicking the\
+      \ fire icon to stop, drop and roll. Also unbuckles, remove cuffs, etc."
+    type: Add
+  id: 3366
+  time: '2026-06-11T22:33:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9734
+- author: Vermidia
+  changes:
+  - message: Fixed Impale and Tail Trip miss cooldowns being too long (1.5s -> 0.7s)
+    type: Fix
+  - message: Fixed Impale having less range than Tail Trip. They're both 2 now.
+    type: Fix
+  - message: Fixed Impale and Tail Trip deselecting on hit.
+    type: Fix
+  - message: Fixed Berserk Ravager not capping its applied Frenzy pheros to 2.9, and
+      Dancer Praetorian not capping its Recovery pheros to 3.
+    type: Fix
+  - message: Fixed Dancer Praetorian's general health regen not being higher than
+      a base xeno. It's now 35% better.
+    type: Fix
+  - message: Fixed Dodge still giving a speed boost while in a crowd.
+    type: Fix
+  - message: Fixed Impale rarely not stabbing twice if multiple Dancers are attempting
+      to do so in a short span of time.
+    type: Fix
+  - message: Corrected various ability descriptions (mostly involving tail stabs and
+      Dancer Praetorian)
+    type: Fix
+  - message: Critting/killing an enemy (or just attacking them if they're crit) as
+      a Dancer Praetorian now spreads critical marks, which look different and refresh
+      the Dancer's ability cooldowns if hit.
+    type: Add
+  - message: Dancer Praetorian now has Tail Lance Stab and Tail Lance Slam, they share
+      cooldowns. The former is a normal tailstab, while the latter deals much less
+      damage, has less cooldown, but fully pierces armor.
+    type: Add
+  - message: Dancer Praetorians by default now dodge every 6th projectile that would
+      hit them (in a short span of time, and not while resting or crit/unconscious).
+      When dodge is active this is every 3rd projectile instead. This doesn't count
+      rockets or sniper bullets.
+    type: Add
+  - message: Dodge creates afterimages of the praetorian while active.
+    type: Add
+  - message: Fixed impale having an orange square on the icon
+    type: Fix
+  id: 3367
+  time: '2026-06-11T22:32:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10102
+- author: Thereisabear
+  changes:
+  - message: Rechargers and other machines that require power will now be able to
+      be re-anchored and powered at different APC areas.
+    type: Fix
+  id: 3368
+  time: '2026-06-11T22:34:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10120
 Name: RMC14
 Order: -1
