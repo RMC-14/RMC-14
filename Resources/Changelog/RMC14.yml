@@ -1,63 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Projectiles now pass through most machines, except for vending machines.
-    type: Tweak
-  id: 2871
-  time: '2026-02-02T03:50:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8965
-- author: Arykh
-  changes:
-  - message: Added Dylovene autoinjectors to the We-Ya-Med Plus vendor.
-    type: Add
-  - message: Fixed the stock of some items in medical vendors being too low.
-    type: Fix
-  - message: Fixed the FOB Supplies Vendor having the wrong entries. (requisition
-      tent)
-    type: Fix
-  - message: Fixed sidearms in the pilot and requisitions weapon vendors having pre-loaded
-      ammo. They now vend empty.
-    type: Fix
-  id: 2872
-  time: '2026-02-02T03:52:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9000
-- author: to4no_fix
-  changes:
-  - message: Added a marine medal recommendation system. Marines can be recommended
-      for awards via right-clicking a headset. The Commanding Officer can review grouped
-      recommendations per marine using a new Medals Panel on the command tablet or
-      console, and either approve them by issuing a medal or reject them to remove
-      the recommendation. Recommendation access is available to SLs (including acting
-      leaders and FORECON), SEA, CMO, CMP, CE, LO, ASO, SO, and CO (including FORECON).
-      All listed roles may submit up to two recommendations, except CO and XO, who
-      may submit up to four.
-    type: Add
-  - message: Using the new Medals Panel, the View Medals tab allows you to review
-      all medals awarded during the round and print them at the console as named physical
-      medals that can be physically presented to the recipient.
-    type: Add
-  - message: "Now, when selecting a medal to award, its sprite is displayed, and when\
-      \ specifying the reason for the award, the medal\u2019s description is shown."
-    type: Tweak
-  - message: Awarding medals or royal jelly now requires at least 130 characters in
-      the reason text.
-    type: Tweak
-  - message: Round-end results now display the rank of those who received a medal,
-      as well as the name and rank of the person who awarded the medal.
-    type: Tweak
-  - message: Commendations windows in the personalization settings have been redesigned
-      and now look significantly better. They display sprites of received/issued medals
-      with a tooltip showing the medal description on hover, separate received/issued
-      jelly and medals into tabs (previously mixed together), and show the ranks of
-      both the recipient and the issuer of a commendation (new commendations only).
-    type: Tweak
-  - message: Accessory owners are now listed in description.
-    type: Tweak
-  id: 2873
-  time: '2026-02-02T03:54:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8820
-- author: Dygon
-  changes:
   - message: Fixed the AGR-59-I creating a smaller fire area than intended, it now
       extends one extra tile in each cardinal direction.
     type: Fix
@@ -4574,5 +4517,27 @@
   id: 3370
   time: '2026-06-11T22:36:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10119
+- author: GrigoriyGalintano
+  changes:
+  - message: Delayed hijack pipe explosions until after the dropship crash stun ends.
+    type: Fix
+  id: 3371
+  time: '2026-06-11T22:37:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10126
+- author: Dygon
+  changes:
+  - message: Fixed the Boiler Sapper's "Acid Mine" ability damaging sentry guns and
+      weapon mounts.
+    type: Fix
+  id: 3372
+  time: '2026-06-11T22:38:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10129
+- author: ThataKat
+  changes:
+  - message: '[PVE] The PVE variant of the Type 71 gun rack now functions properly'
+    type: Fix
+  id: 3373
+  time: '2026-06-11T22:38:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10128
 Name: RMC14
 Order: -1
