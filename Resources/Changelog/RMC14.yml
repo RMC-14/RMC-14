@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: snebl
-  changes:
-  - message: Fixed layering for the Vulpkanin neck clothing slot.
-    type: Fix
-  id: 2860
-  time: '2026-02-02T03:26:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9006
-- author: NikidodikYT
-  changes:
-  - message: Paper can no longer be accidentally eaten via hotkeys/use
-    type: Fix
-  id: 2861
-  time: '2026-02-02T03:28:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9087
 - author: Dygon
   changes:
   - message: Fixed LZ, Almayer and flame sentries projectiles not homing in on their
@@ -4530,5 +4516,24 @@
   id: 3359
   time: '2026-06-11T22:24:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10108
+- author: Ian321
+  changes:
+  - message: The planetside dropship navigation computers should now work on all maps
+      again.
+    type: Fix
+  id: 3360
+  time: '2026-06-11T22:27:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10098
+- author: Vermidia
+  changes:
+  - message: Fixed AI parasites on the ground not being takeoverable by ghosts
+    type: Fix
+  - message: Changed the criteria for parasites that can be ghostrolable - they must
+      not be held/in a container, and recently ghosted parasites can also be taken
+      over now.
+    type: Tweak
+  id: 3361
+  time: '2026-06-11T22:28:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10034
 Name: RMC14
 Order: -1
