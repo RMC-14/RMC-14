@@ -152,7 +152,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
         var max = Math.Max(2, livingXenos / 4);
         if (livingParasites >= max)
         {
-            _popup.PopupEntity(Loc.GetString("rmx-xeno-egg-ghost-too-many"), user, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-too-many"), user, user, PopupType.MediumCaution);
             return false;
         }
 

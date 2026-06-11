@@ -21,7 +21,7 @@ rmc-xeno-egg-ghost-need-time = You ghosted too recently. You cannot become a par
 rmc-xeno-egg-ghost-need-time-round = You cannot become a parasite until enough time has passed passed in the round ({$seconds} seconds remaining).
 rmc-xeno-egg-ghost-bypass-time = You successfully infected your target. You may become a parasite again.
 rmc-xeno-egg-ghost-confirm = Are you sure you want to become a parasite?
-rmx-xeno-egg-ghost-too-many = The hive cannot support another parasite.
+rmc-xeno-egg-ghost-too-many = The hive cannot support another parasite.
 
 rmc-xeno-egg-throw-xeno = Throwing the egg would break it!
 rmc-xeno-egg-throw = That's a bad idea.
