@@ -224,7 +224,8 @@ public sealed partial class GunSystem : SharedGunSystem
         var rearmSemiAuto =
             _cfg.GetCVar(CCVars.ControlHoldToAttackRanged) &&
             gun.SelectedMode == SelectiveFire.SemiAuto &&
-            !HasComp<GunClickToFireComponent>(gunUid);
+            !HasComp<GunClickToFireComponent>(gunUid) &&
+            (gun.AvailableModes & SelectiveFire.FullAuto) == 0;
         var projectiles = _gunPrediction.ShootRequested(GetNetEntity(gunUid), GetNetCoordinates(coordinates), target, null, session, rearmSemiAuto);
 
         RaisePredictiveEvent(new RequestShootEvent()
