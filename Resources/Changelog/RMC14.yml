@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: PursuitinAshes
-  changes:
-  - message: '[PvE] Added an SPP and Generic EVA Suit.'
-    type: Add
-  id: 2853
-  time: '2026-02-02T03:18:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9014
 - author: Dygon
   changes:
   - message: Aimed shot direction indicators now accurately point toward the shooter.
@@ -4521,5 +4514,24 @@
   id: 3352
   time: '2026-06-11T22:13:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10096
+- author: SharkSnake98
+  changes:
+  - message: Fixed the Executive Bodyguard not having medical 1 skill
+    type: Fix
+  - message: Changed the Executive Bodyguard's watch category to that of the Liaisons
+    type: Tweak
+  - message: Fixed the Executive Bodyguard not having the same access as the CL
+    type: Fix
+  - message: Fixed the Executive Bodyguard not being part of the UNMC faction like
+      the Liaison
+    type: Fix
+  - message: Fixed the Executive Bodyguard's firearms not being the unlocked variants
+      and not spawning with 3 additional magazines
+    type: Fix
+  - message: Fixed the Executive Bodyguard's armour and cap being incorrect
+    type: Fix
+  id: 3353
+  time: '2026-06-11T22:17:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10070
 Name: RMC14
 Order: -1
