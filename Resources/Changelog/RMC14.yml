@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: PursuitinAshes
-  changes:
-  - message: Playtime Service Medals have received reworked descriptions to be more
-      in line with the universe and what the medals represent.
-    type: Tweak
-  id: 2857
-  time: '2026-02-02T03:19:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9051
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Chaplain survivors not spawning with metal sheets in their backpack.
-    type: Fix
-  id: 2858
-  time: '2026-02-02T03:17:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9076
-- author: Dygon
-  changes:
-  - message: Fixed fire dealing too much damage to barricades, now dealing 47% less
-      damage over time to them.
-    type: Fix
-  id: 2859
-  time: '2026-02-02T03:26:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9082
 - author: snebl
   changes:
   - message: Fixed layering for the Vulpkanin neck clothing slot.
@@ -4531,5 +4508,27 @@
   id: 3356
   time: '2026-06-11T22:22:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10091
+- author: Dygon
+  changes:
+  - message: Fixed undeployed sentries and weapon mounts being damageable.
+    type: Fix
+  id: 3357
+  time: '2026-06-11T22:25:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10092
+- author: Vixting
+  changes:
+  - message: Overwatch chat no longer gets sent to the chatbox (chat bubble still
+      visible)
+    type: Tweak
+  id: 3358
+  time: '2026-06-11T22:24:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10109
+- author: SharkSnake98
+  changes:
+  - message: Fixed the PK7's Underbarrel Offset
+    type: Fix
+  id: 3359
+  time: '2026-06-11T22:24:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10108
 Name: RMC14
 Order: -1
