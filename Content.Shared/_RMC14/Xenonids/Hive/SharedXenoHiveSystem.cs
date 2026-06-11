@@ -316,7 +316,6 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return GetHiveCore(hive) is not null;
     }
 
-
     public bool TryGetHiveCore(EntityUid xeno, [NotNullWhen(true)] out EntityUid? core)
     {
         if (GetHive(xeno) is not { } hive || GetHiveCore(hive) is not { } coreEnt)
