@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed the AGR-59-I creating a smaller fire area than intended, it now
-      extends one extra tile in each cardinal direction.
-    type: Fix
-  id: 2874
-  time: '2026-02-02T03:55:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9106
-- author: Dygon
-  changes:
-  - message: Fixed grab attempts not being blocked by barricades between a grabber
-      and its target at the same rate as melee attacks.
-    type: Fix
-  - message: Fixed xenonids being able to start devouring a target without grabbing
-      them first.
-    type: Fix
-  id: 2875
-  time: '2026-02-02T03:57:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9109
-- author: x5tink
-  changes:
-  - message: Pvi can spawn loadout drip
-    type: Fix
-  id: 2876
-  time: '2026-02-02T03:59:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9111
-- author: Dygon
-  changes:
-  - message: Neurotoxin gas no longer affects entities that are paradropping.
-    type: Fix
-  id: 2877
-  time: '2026-02-02T04:00:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9115
 - author: Dutch-VanDerLinde
   changes:
   - message: KMCC areas on hybrisa has been renamed to TMCC.
@@ -4539,5 +4506,34 @@
   id: 3373
   time: '2026-06-11T22:38:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10128
+- author: Dygon
+  changes:
+  - message: The amount of light emitted in small areas is now limited.
+    type: Tweak
+  id: 3374
+  time: '2026-06-11T22:41:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9827
+- author: Bagietens
+  changes:
+  - message: Fixed healer drone and acid runner sacrifices being taken by larva queue.
+    type: Fix
+  id: 3375
+  time: '2026-06-11T22:40:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10100
+- author: Dygon
+  changes:
+  - message: Dropship camera feeds now remain active for 5 seconds after the selected
+      target disappears, instead of cutting out instantly.
+    type: Tweak
+  id: 3376
+  time: '2026-06-11T22:41:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10125
+- author: Vermidia
+  changes:
+  - message: Xenos grabbing a pulled target now starts devouring them.
+    type: Tweak
+  id: 3377
+  time: '2026-06-11T22:42:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10127
 Name: RMC14
 Order: -1
