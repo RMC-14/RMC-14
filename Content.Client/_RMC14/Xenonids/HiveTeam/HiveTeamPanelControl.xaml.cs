@@ -42,6 +42,7 @@ public sealed partial class HiveTeamPanelControl : BoxContainer
         int index,
         HiveTeamEntry? entry,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
+        List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> pickerXenos,
         Func<EntProtoId?, Texture?> getTexture,
         Action<int, NetEntity> onSetLeader,
         Action<int> onRemoveLeader,
@@ -93,7 +94,7 @@ public sealed partial class HiveTeamPanelControl : BoxContainer
             {
                 _picker?.Close();
                 _picker = new XenoPickerWindow();
-                _picker.Populate(allXenos, getTexture, xeno => onSetLeader(index, xeno));
+                _picker.Populate(pickerXenos, getTexture, xeno => onSetLeader(index, xeno));
                 _picker.OpenCentered();
             };
             LeaderSlot.AddChild(addLeaderBtn);
@@ -123,7 +124,7 @@ public sealed partial class HiveTeamPanelControl : BoxContainer
         {
             _picker?.Close();
             _picker = new XenoPickerWindow();
-            _picker.Populate(allXenos, getTexture, xeno => onAddMember(index, xeno));
+            _picker.Populate(pickerXenos, getTexture, xeno => onAddMember(index, xeno));
             _picker.OpenCentered();
         }
     }
