@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Walking ignores slows until sprint speed drops below the base walk speed.
-    type: Tweak
-  - message: Walking is no longer slower than sprinting while sprint speed is lower
-      than the base walk speed.
-    type: Tweak
-  id: 2841
-  time: '2026-02-02T02:27:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9037
-- author: noctyrnal
-  changes:
-  - message: Added the missing SPP soldier corpses to Sorokyne.
-    type: Add
-  id: 2842
-  time: '2026-02-02T02:32:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9085
 - author: PursuitinAshes
   changes:
   - message: PvIs now spawn with a Peregrine Handcannon instead of a M1984.
@@ -4519,5 +4502,21 @@
   id: 3340
   time: '2026-06-09T21:52:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10079
+- author: MidZik
+  changes:
+  - message: Sensor towers will no longer break immediately after being turned on.
+    type: Fix
+  - message: Sensor towers will break more frequently.
+    type: Tweak
+  id: 3341
+  time: '2026-06-11T21:50:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9391
+- author: SharkSnake98
+  changes:
+  - message: Added the samosa for the WEYA colony ration pack
+    type: Add
+  id: 3342
+  time: '2026-06-11T21:50:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10031
 Name: RMC14
 Order: -1
