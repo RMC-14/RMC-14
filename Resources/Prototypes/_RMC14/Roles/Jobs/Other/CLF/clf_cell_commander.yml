@@ -75,20 +75,23 @@
 - type: startingGear
   id: RMCGearCLFCellCommander
   equipment:
-    head: RMCArmorHelmetMercenaryMiner
-    mask: RMCCombatUtilityKnifeB
+    head: RMCHeadBeretCLF
+    mask: RMCCarbonMask
     ears: RMCHeadsetDistressCLF
+    neck: RMCtornCLFflag
     jumpsuit: RMCJumpsuitCLFSoldier
     outerClothing: RMCCoatMilitiaHarness
     gloves: CMHandsBlackMarine
     shoes: RMCShoesCombat
-    suitstorage: RMCSmartGunCLF
+    back: RMCSmartGunCLF
+    suitstorage: RMCCombatUtilityKnifeB
     id: RMCIDCardCLFCellCommander # TODO RMC14
     belt: RMCBeltSmartGunOperatorPistolCLF
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchFirstAidInjectors
   storage:
     outerClothing:
+    - RMCSpeedLoaderMatebaHighImpact
     - RMCSpeedLoaderMatebaHighImpact
     - RMCSpeedLoaderMatebaHighImpact
 

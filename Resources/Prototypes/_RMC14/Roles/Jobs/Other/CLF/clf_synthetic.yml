@@ -1,0 +1,92 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCLFSynthetic
+  name: rmc-clf-synthetic
+  description: rmc-ghost-role-information-clf-description
+  playTimeTracker: RMCJobSyntheticCLF
+  ranks:
+    RMCRankSyntheticColonist: [ ]
+  startingGear: RMCGearSyntheticCLF
+  icon: "RMCJobIconCLFSynthetic"
+  joinNotifyCrew: false
+  spawnMenuRoleName: CLF Multipurpose Synthetic
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        # RMCSkillFirearms: 3
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 1
+        RMCSkillIntel: 1
+        RMCSkillDomestics: 2
+        RMCSkillEndurance: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      generation: rmc-species-synth-generation-first
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSyntheticCLF
+  equipment:
+    head: RMCHeadBeretPurple
+    mask: RMCCombatUtilityKnifeA
+    ears: RMCHeadsetDistressCLF
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCJumpsuitCLFSoldier
+    outerClothing: RMCCoatMilitia
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesCombat
+    id: RMCIDCardCLFSynthetic
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    back: RMCSatchelLightpackWelder
+    pocket1: RMCPouchToolsFill
+    pocket2: RMCPouchConstructionFillLowGrade
+  storage:
+    back:
+    - CMFireExtinguisherPortable
+    - CMRollerBedSpawnFolded
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
+    - CMCrowbar
+    - RMCSynthResetKeyMakeshift
+    - CMSurgicalLine
+    - CMSynthGraft
+
+- type: playTimeTracker
+  id: RMCJobSyntheticCLF
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFSynthetic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_synth

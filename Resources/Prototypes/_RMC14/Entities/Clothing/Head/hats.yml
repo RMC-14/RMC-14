@@ -178,6 +178,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_hos.rsi
 
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretCLF
+  name: Colony Liberation Front beret
+  description: A repurposed captured police beret, with a CLF insignia mounted on a place where police cockade would usally sit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_CLF.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_CLF.rsi
+
 # Caps
 - type: entity
   parent: ClothingHeadBase

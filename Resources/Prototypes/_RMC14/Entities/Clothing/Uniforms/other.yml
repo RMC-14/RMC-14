@@ -601,6 +601,14 @@
 
 - type: entity
   parent: RMCJumpsuitCLFSoldier
+  id: RMCJumpsuitCLFWebbingFP9000
+  suffix: Webbing, FP9000
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCLFFP9000
+
+- type: entity
+  parent: RMCJumpsuitCLFSoldier
   id: RMCJumpsuitCLFWebbingBuckshot
   suffix: Webbing, Buckshot
   components:

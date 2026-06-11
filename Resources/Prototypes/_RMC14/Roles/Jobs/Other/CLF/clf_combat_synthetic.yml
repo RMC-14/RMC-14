@@ -1,0 +1,87 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCLFSyntheticCombat
+  name: rmc-clf-synthetic-combat
+  description: rmc-ghost-role-information-clf-description
+  playTimeTracker: RMCJobSyntheticCLF
+  ranks:
+    RMCRankSyntheticColonist: [ ]
+  icon: "RMCJobIconCLFSynthetic"
+  joinNotifyCrew: false
+  spawnMenuRoleName: CLF Combat Synthetic
+  startingGear: RMCGearSyntheticCLFCombat
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 3
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 1
+        RMCSkillIntel: 1
+        RMCSkillDomestics: 2
+        RMCSkillEndurance: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      canUseGuns: true
+      generation: rmc-species-synth-generation-first
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSyntheticCLFCombat
+  equipment:
+    head: RMCHeadBeretPurple
+    mask: RMCCombatUtilityKnifeA
+    ears: RMCHeadsetDistressCLF
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCJumpsuitCLFWebbing
+    outerClothing: RMCCoatMilitia
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesCombat
+    suitstorage: WeaponRifleMAR40
+    id: RMCIDCardCLFSyntheticCombat
+    belt: RMCBeltMedicalDefibAnalyzerFilled
+    back: RMCSatchelLightpackWelder
+    pocket1: RMCPouchToolsFill
+    pocket2: RMCPouchConstructionFillLowGrade
+  storage:
+    back:
+    - CMFireExtinguisherPortable
+    - CMRollerBedSpawnFolded
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
+    - CMCrowbar
+    - RMCSynthResetKeyMakeshift
+    - CMSurgicalLine
+    - CMSynthGraft
+    outerClothing:
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40

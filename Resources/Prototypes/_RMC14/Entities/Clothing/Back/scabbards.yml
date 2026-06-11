@@ -335,6 +335,48 @@
     - RMCScabbardKatana
 
 - type: entity
+  parent: RMCScabbardBase
+  id: RMCScabbardDragonKatana
+  name: dragon katana scabbard
+  description: A large, cherry colored katana scabbard with an illustration of a dragon on it. It can be strapped to the back or worn at the belt. Because of the sturdy wood casing of the scabbard, it makes an okay defensive weapon in a pinch.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/dragon_katana_sheath.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/dragon_katana_sheath.rsi
+    quickEquip: false
+    slots:
+    - back
+    - belt
+    - suitstorage
+  - type: ItemSlots
+    slots:
+      item:
+        name: Katana
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCKatana
+  - type: ItemMapper
+    mapLayers:
+      sheath-katana:
+        whitelist:
+          tags:
+          - RMCKatana
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+  - type: Tag
+    tags:
+    - Scabbard
+    - RMCScabbardKatana
+
+- type: entity
   parent: RMCScabbardKatana
   id: RMCScabbardKatanaFilled
   suffix: Filled
@@ -343,6 +385,16 @@
     containers:
       item:
       - RMCKatana
+
+- type: entity
+  parent: RMCScabbardDragonKatana
+  id: RMCScabbardDragonKatanaFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - RMCDragonKatana
 
 - type: entity
   parent: RMCScabbardKatana

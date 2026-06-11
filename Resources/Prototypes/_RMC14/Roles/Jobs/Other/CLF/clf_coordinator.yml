@@ -1,0 +1,114 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCLFCoordinator
+  name: rmc-clf-coordinator
+  description: rmc-ghost-role-information-clf-description
+  playTimeTracker: CMJobCLFCoordinator
+  ranks:
+    RMCRankCLFRebel: [ ]
+  startingGear: RMCGearCLFCoordinator
+  icon: RMCJobIconCLFCoordinator
+  joinNotifyCrew: false
+  spawnMenuRoleName: CLF Coordinator
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPolice: 1 # RMC14 disallow use of flashbangs
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMedical: 2
+        RMCSkillVehicles: 2
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 1
+        RMCSkillCqc: 2
+        RMCSkillOverwatch: 1
+        RMCSkillSurgery: 1
+    - type: NpcFactionMember     
+      factions:
+      - CLF
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-coordinator
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: clf_cr
+    - type: RMCPointing
+
+- type: entity
+  id: RMCRandomHumanoidCLFCoordinator
+  name: clf ghost role coordinator
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCLFCoordinator
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCLFCoordinator
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-clf-coordinator
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
+    job: RMCCLFCoordinator
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 36000 # 10 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadCLF
+
+- type: startingGear
+  id: RMCGearCLFCoordinator
+  equipment:
+    head: RMCHeadGreyMilitiaHood
+    mask: RMCCarbonMask
+    ears: RMCHeadsetDistressCLF
+    neck: RMCtornCLFflag
+    jumpsuit: RMCJumpsuitCLFWebbingFP9000
+    outerClothing: RMCCoatMilitiaFullArmor
+    gloves: CMHandsBrown
+    shoes: RMCBootsSPPFilled
+    back: RMCSatchelLightpack
+    suitstorage: RMCWeaponSMGFP9000
+    id: RMCIDCardCLFCoordinator # TODO RMC14
+    belt: RMCScabbardDragonKatanaFilled
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchFirstAidInjectors
+  storage:
+    back:
+    - CMAdvFirstAidKitFilled
+    - RMCMRECLF
+    - CMHealthAnalyzer
+    - CMPaper
+    - RMCMotionDetector
+    - RMCBinoculars
+    - RMCGrenadeMolotov
+    - RMCMagazineSMGFP9000
+    - RMCMagazineSMGFP9000
+    - CMPen
+    outerClothing:
+    - RMCMagazineSMGFP9000
+    - RMCMagazineSMGFP9000
+    - RMCMagazineSMGFP9000
+
+- type: playTimeTracker
+  id: CMJobCLFCoordinator
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFCoordinator
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_cr
