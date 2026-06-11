@@ -153,7 +153,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
     private void TryAcid(Entity<XenoSprayAcidComponent> acid, EntityUid target)
     {
         var time = _timing.CurTime;
-        if (!_barricadeQuery.HasComp(target))
+        if (!HasComp<SprayAcidVulnerableComponent>(target))
             return;
 
         var comp = EnsureComp<SprayAcidedComponent>(target);

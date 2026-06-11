@@ -1,6 +1,6 @@
 - type: entity
   id: Cigarette
-  parent: BaseCigar
+  parent: RMCBaseCigar
   name: cigarette
   description: A roll of tobacco and nicotine.
   components:
@@ -28,7 +28,7 @@
 
 - type: entity
   id: SoakedCigarette
-  parent: BaseCigar
+  parent: RMCBaseCigar
   name: cigarette
   suffix: Soaked
   description: A roll of tobacco and nicotine soaked in some chemical.

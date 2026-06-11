@@ -18,6 +18,7 @@
         layer:
         - MobMask
         hard: false
+  - type: AlwaysHot 
   - type: Sprite
     sprite: _RMC14/Effects/fire.rsi
     noRot: true

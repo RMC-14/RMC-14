@@ -19,6 +19,7 @@
     tags:
     - Flare
     - RMCFlare
+  - type: IgnitionSource
   - type: ExpendableLight
     spentName: expendable-light-spent-flare-name
     spentDesc: expendable-light-spent-flare-desc

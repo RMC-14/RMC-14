@@ -60,6 +60,7 @@
             visible: false
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: SprayAcidVulnerable
   - type: InvulnerabilityTime
     whitelist:
       components:
