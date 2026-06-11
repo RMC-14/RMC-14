@@ -1,4 +1,4 @@
-- type: department
+﻿- type: department
   parent: CMDepartmentBase
   id: CMSurvivor
   name: department-CMSurvivor
