@@ -16,7 +16,13 @@
   - type: InteractionOutline
   - type: WallMount
   - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14 power
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+    mode: Active # Unsure if it's needed, but CM does use_power:2 specifically with cams
   - type: ExtensionCableReceiver
   - type: Eye
     zoom: 0.5, 0.5
@@ -73,9 +79,19 @@
     bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: security_cam
-    layers: []
+    layers:
+    - state: "security_cam0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "security_cam"
     drawdepth: SmallObjects
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.RMCCameraUiKey.Key
