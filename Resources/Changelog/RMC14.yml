@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: TadJohnson00
   changes:
-  - message: '[PVE] Added the L14 combat pistol for use by Royal Crown Marines.'
-    type: Add
-  id: 2880
-  time: '2026-02-07T22:14:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8899
-- author: TadJohnson00
-  changes:
   - message: '[PVE] Adds armour webbing for use by the UNMC Sun Riders.'
     type: Add
   - message: '[PVE] Adds Kestrel modular vests for use by the TSE''s RCM.'
@@ -4528,5 +4521,40 @@
   id: 3379
   time: '2026-06-11T22:45:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10094
+- author: MarshesAndMeadows
+  changes:
+  - message: FIxed crusher charge sometimes phasing through barricades. It should
+      now stop at the barricade and still deal damage. Keep an eye out and report
+      it if the bug returns.
+    type: Fix
+  - message: Fixed handrails being treated like barricades for crushers charge.
+    type: Fix
+  - message: Fixed crushers charge stopping when hitting friendly hive structures
+      like recovery nodes, clusters and so on.
+    type: Fix
+  - message: Fixed crushers charge not dealing damage to many very specific objects
+      (Wey-Ya vendors, certain machines, directional windows, many more)
+    type: Fix
+  - message: Fixed crushers charge stopping on the first table it hits, it now continues
+      through tables while destroying them.
+    type: Fix
+  - message: Fixed crushers charge dealing lower damage than intended to walls and
+      Rwalls, it now deals the correct 750 structural damage.
+    type: Fix
+  - message: "Fixed crushers knockback not matching parity (1\xBD -> 3 tiles)"
+    type: Fix
+  - message: Fixed crusher charge not being targetable, causing it to always travel
+      the full length, regardless of targeting.
+    type: Fix
+  - message: Fixed crusher charge range being longer than it should be.
+    type: Fix
+  - message: Fixed crusher charge not correctly destroying window frames.
+    type: Fix
+  - message: Added a fallback damage logic path to Charger that should catch interactions
+      that otherwise would take no damage.
+    type: Add
+  id: 3380
+  time: '2026-06-11T23:03:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9541
 Name: RMC14
 Order: -1
