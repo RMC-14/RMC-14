@@ -4,6 +4,7 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared._RMC14.Xenonids.Respawn;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
@@ -30,6 +31,7 @@ public sealed partial class XenoRespawnSystem : EntitySystem
             return;
 
         RemComp<GhostTakeoverAvailableComponent>(xeno);
+        RemComp<CanBeLarvaQueuedComponent>(xeno);
 
         var session = actor.PlayerSession;
 
