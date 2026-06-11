@@ -10,6 +10,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
+      state: helmet
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
   - type: FlashImmunity
@@ -26,6 +30,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses_blue.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses_blue.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses_blue.rsi
+      state: helmet
 
 - type: entity
   parent: CMGlassesSecurity
@@ -339,6 +347,10 @@
     slots:
     - MASK
     - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rpglasses.rsi
+      state: helmet
   - type: Tag
     tags:
     - RMCPrescriptionGlasses
@@ -355,6 +367,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
+      state: helmet
 
 - type: entity
   parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
@@ -546,6 +562,12 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
       state: helmet-down
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
+      state: hat
+    hatToggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
+      state: hat-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -564,6 +586,12 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
       state: helmet-down
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
+      state: hat
+    hatToggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
+      state: hat-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -582,6 +610,12 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
       state: helmet-down
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+      state: hat
+    hatToggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+      state: hat-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -606,6 +640,12 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
       state: helmet-down
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
+      state: hat
+    hatToggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
+      state: hat-down
 
 - type: entity
   parent: ClothingEyesBase
@@ -734,6 +774,10 @@
     slots:
     - MASK
     - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/sunglasses.rsi
+      state: helmet
 
 - type: entity
   parent: RMCSunglasses
@@ -756,6 +800,10 @@
     slots:
     - MASK
     - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/eyepatch.rsi
+      state: helmet
 
 - type: entity
   parent: RMCSunglasses
@@ -773,6 +821,11 @@
     - MASK
     - EYES
   - type: FlashImmunity
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses.rsi
+      state: helmet
+
 
 - type: entity
   parent: RMCSunglassesBig
@@ -786,6 +839,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_yellow_glasses.rsi
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-trimax-polarized-shades
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_yellow_glasses.rsi
+      state: helmet
 
 - type: entity
   parent: RMCGlassesTriMaxYellow
@@ -795,6 +852,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_bronze_glasses.rsi
+      state: helmet
 
 - type: entity
   parent: RMCGlassesTriMaxYellow
@@ -805,6 +866,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/trimax_black_glasses.rsi
+      state: helmet
 
 - type: entity
   parent: RMCSunglasses
@@ -869,6 +934,11 @@
     slots:
     - EYES
     - MASK
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators.rsi
+      state: helmet
+
 
 - type: entity
   parent: RMCGlassesAviators
@@ -880,6 +950,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
+      state: helmet
 
 - type: entity
   parent: ClothingEyesBase
@@ -896,6 +970,10 @@
     slots:
     - MASK
     - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hipster.rsi
+      state: helmet
 
 # Hippie Glasses
 
@@ -908,6 +986,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlasses
@@ -919,6 +1001,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_bloodred.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -929,6 +1015,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_green.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_green.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -939,6 +1029,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_midnight.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_midnight.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_midnight.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -949,6 +1043,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_nightblue.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_nightblue.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_nightblue.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -959,6 +1057,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_pink.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_pink.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_pink.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -969,6 +1071,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunrise.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunrise.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunrise.rsi
+      state: helmet
 
 - type: entity
   parent: RMCHippieGlassesBloodred
@@ -979,6 +1085,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunset.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunset.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Hippie/hippie_sunset.rsi
+      state: helmet
 
 - type: entity
   parent: ClothingEyesBase
