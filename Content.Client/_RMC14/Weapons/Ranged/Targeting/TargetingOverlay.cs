@@ -59,6 +59,10 @@ public sealed class TargetingOverlay : Overlay
                 if (xform.MapID != gunXform.MapID)
                     continue;
 
+                var viewportEye = args.Viewport.Eye;
+                if (viewportEye != null && viewportEye.Position.MapId != xform.MapID)
+                    continue;
+
                 var worldPos = _transform.GetWorldPosition(xform, xformQuery);
                 var gunWorldPos = _transform.GetWorldPosition(gunXform, xformQuery);
                 var diff = worldPos - gunWorldPos;

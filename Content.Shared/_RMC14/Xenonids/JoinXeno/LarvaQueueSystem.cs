@@ -1,22 +1,15 @@
-using System.Collections;
-using System.Linq;
-using Content.Shared._RMC14.Admin.AdminGhost;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Dropship;
-using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Players;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -35,7 +28,7 @@ public sealed class LarvaQueueSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     [ViewVariables]
-    public static readonly Dictionary<EntityUid, List<NetUserId>> Queue = new();
+    public static readonly Dictionary<EntityUid, LinkedList<NetUserId>> Queue = new();
 
     [ViewVariables]
     public static readonly Dictionary<EntityUid, Dictionary<NetUserId, double>> PreQueue = new();
@@ -62,8 +55,13 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        //Ignore people moving around ghost bodies and parasites.
-        if (HasComp<GhostComponent>(ev.Entity) || HasComp<XenoParasiteComponent>(ev.Entity))
+        //Ignore people moving around ghost bodies.
+        if (HasComp<GhostComponent>(ev.Entity))
+            return;
+
+        //Don't eject from queue if entity is configured not to.
+        if (TryComp<MindTakeoverBehaviorComponent>(ev.Entity, out var takeoverBehavior)
+            && !takeoverBehavior.EjectFromLarvaQueues)
             return;
 
         RemoveFromAllQueues(ev.Player.UserId);
@@ -104,7 +102,7 @@ public sealed class LarvaQueueSystem : EntitySystem
 
         if ((_gameTiming.CurTime - ghost.TimeOfDeath).TotalSeconds >= larvaWaitTime)
         {
-            Queue.GetOrNew(hive).Add(session);
+            Queue.GetOrNew(hive).AddLast(session);
             _popup.PopupEntity($"You have been added to the queue at position {Queue.GetOrNew(hive).Count}",
                 actorEntity.Value, actorEntity.Value);
         }
@@ -148,15 +146,16 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (list.Count >= originalLength)
             return;
 
-        for (var i = 0; i < list.Count; i++)
+        var position = 1;
+        foreach (var userId in list)
         {
-            var netId = list[i];
-            if (_player.TryGetSessionById(netId, out var session) && session.AttachedEntity != null)
+            if (_player.TryGetSessionById(userId, out var session) && session.AttachedEntity != null)
             {
-                _popup.PopupEntity($"You are now in the {list.Count - i} position for larva queue.",
+                _popup.PopupEntity($"You are now in position {position} of the larva queue for ({Name(hive)}).",
                     session.AttachedEntity.Value,
                     session.AttachedEntity.Value);
             }
+            ++position;
         }
     }
 
@@ -178,18 +177,15 @@ public sealed class LarvaQueueSystem : EntitySystem
             if (!_hive.IsMember(ent, hive))
                 return;
 
-            for (var i = list.Count - 1; i >= 0; i--)
+            if (TryPopNextSessionInQueue(hive, out var session))
             {
-                var netId = list[i];
-                list.RemoveAt(i);
-
-                if (!_player.TryGetSessionById(netId, out var session) || session.AttachedEntity == null)
-                    continue;
-
                 var newMind = _mind.CreateMind(session.UserId, Name(ent));
                 _mind.TransferTo(newMind, ent, ghostCheckOverride: true);
                 RemCompDeferred<LarvaQueuedComponent>(ent);
-                break;
+            }
+            else
+            {
+                break; // no more players in queue
             }
         }
     }
@@ -204,15 +200,43 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (amount <= 0)
             return;
 
-        // TODO RMC14 keep spot of disconnected players
         for (var i = amount; i >= 0; i--)
         {
-            var netId = list[i];
-            list.RemoveAt(i);
+            if (TryPopNextSessionInQueue(hive, out var session))
+            {
+                _hive.JoinBurrowedLarva(hive, session);
+            }
+            else
+            {
+                break; // no more players in queue
+            }
+        }
+    }
+
+    private bool TryPopNextSessionInQueue(Entity<HiveComponent> hive, [NotNullWhen(true)] out ICommonSession? nextSession)
+    {
+        nextSession = null;
+        var list = Queue.GetOrNew(hive);
+        if (list.Count <= 0)
+            return false;
+
+        // TODO RMC14 keep spot of disconnected players
+        for (var node = list.First; node != null;)
+        {
+            var next = node.Next;
+            var netId = node.Value;
+            list.Remove(node);
 
             if (_player.TryGetSessionById(netId, out var session) && session.AttachedEntity != null)
-                _hive.JoinBurrowedLarva(hive, session);
+            {
+                nextSession = session;
+                return true;
+            }
+
+            node = next;
         }
+
+        return false;
     }
 
     /// <summary>
@@ -254,6 +278,19 @@ public sealed class LarvaQueueSystem : EntitySystem
         }
     }
 
+    public bool IsQueuedFor(NetUserId netUserId, EntityUid hiveId)
+    {
+        if (PreQueue.TryGetValue(hiveId, out var preQueueUsers)
+            && preQueueUsers.ContainsKey(netUserId))
+            return true;
+
+        if (Queue.TryGetValue(hiveId, out var queueUsers)
+            && queueUsers.Contains(netUserId))
+            return true;
+
+        return false;
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -268,7 +305,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             {
                 if (userTime >= time.TotalSeconds)
                     continue;
-                Queue.GetOrNew(hive).Add(userId);
+                Queue.GetOrNew(hive).AddLast(userId);
 
                 if (_player.TryGetSessionById(userId, out var session) && session.AttachedEntity != null)
                 {

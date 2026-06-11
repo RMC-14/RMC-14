@@ -32,6 +32,7 @@
     sprite: _RMC14/Objects/Fun/playing_cards.rsi
     state: back_deck
   - type: Item
+    size: Tiny
   - type: UseDelay
     delay: 0.1
   - type: UserInterface
@@ -53,5 +54,6 @@
     sprite: _RMC14/Objects/Fun/playing_cards.rsi
     state: deck
   - type: Item
+    size: Tiny
   - type: UseDelay
     delay: 0.1
