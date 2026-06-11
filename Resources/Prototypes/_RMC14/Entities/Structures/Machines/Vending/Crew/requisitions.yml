@@ -712,6 +712,8 @@
         amount: 10
       - id: RMCAttachmentVerticalGrip
         amount: 10
+      - id: RMCAttachmentUnderbarrelFlareGun
+        amount: 10
     - name: Stock
       entries:
       - id: RMCAttachmentM13StockSolid

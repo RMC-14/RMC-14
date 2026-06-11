@@ -268,16 +268,13 @@
       "name": "laserlight-on"
     },
     {
-      "name": "qyj72_bipod"
+      "name": "flaregun"
     },
     {
-      "name": "qyj72_bipod-on"
+      "name": "flaregun-on"
     },
     {
-      "name": "qyj72_bipod_a"
-    },
-    {
-      "name": "qyj72_bipod_a-on"
+      "name": "flaregun_a"
     }
   ]
 }
