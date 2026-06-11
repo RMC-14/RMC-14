@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Department heads can now see new player icons like Senior enlisted advisors.
-      These icons can be toggled off, check your settings.
-    type: Tweak
-  id: 2847
-  time: '2026-02-02T02:59:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8929
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed SPP Army Reservist on sorokyne not having the correct ranks. They
       now have E1 at <70 hours, and E2 at 70+ hours.
     type: Fix
@@ -4522,5 +4514,13 @@
   id: 3346
   time: '2026-06-11T22:01:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9897
+- author: MidZik
+  changes:
+  - message: The cooldown reduction effect of a spore fruit should be easier to see
+      now. (No mechanical changes.)
+    type: Tweak
+  id: 3347
+  time: '2026-06-11T22:02:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10018
 Name: RMC14
 Order: -1
