@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: KMCC areas on hybrisa has been renamed to TMCC.
-    type: Tweak
-  id: 2878
-  time: '2026-02-02T04:25:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9117
 - author: Dygon
   changes:
   - message: The medevac system cooldown now starts after you successfully grab a
@@ -4535,5 +4528,12 @@
   id: 3377
   time: '2026-06-11T22:42:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10127
+- author: Vixting
+  changes:
+  - message: Changed backpack sprites to layer above hair
+    type: Tweak
+  id: 3378
+  time: '2026-06-11T22:43:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9948
 Name: RMC14
 Order: -1
