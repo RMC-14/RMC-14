@@ -796,7 +796,7 @@
       state: ready_charge
     useDelay: 14
   - type: TargetAction
-    range: 9
+    range: 7
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoChargeActionEvent
