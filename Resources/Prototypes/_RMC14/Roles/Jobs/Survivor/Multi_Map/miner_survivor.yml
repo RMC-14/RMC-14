@@ -71,5 +71,3 @@
   components:
   - type: RMCJobSpawner
     job: CMSurvivorMiner
-
-

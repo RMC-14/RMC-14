@@ -3,35 +3,35 @@ using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Overwatch;
+using Content.Server._RMC14.Xenonids.Watch;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
-using Content.Server._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
-using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
-using Content.Server._RMC14.Overwatch;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Sensor;
 using Content.Shared._RMC14.TacticalMap;
-using Content.Shared.Popups;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
-using Content.Shared.Ghost;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
+using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.UserInterface;
@@ -41,9 +41,9 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -61,20 +61,20 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly OverwatchConsoleSystem _overwatch = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly TacticalMapReplaySystem _replay = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly TacMapLiveUpdateSystem _tacMapLiveUpdate = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly TacticalMapReplaySystem _replay = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly XenoWatchSystem _xenoWatch = default!;
-    [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
 
     private EntityQuery<ActiveTacticalMapTrackedComponent> _activeTacticalMapTrackedQuery;
     private EntityQuery<TacticalMapLayerTrackedComponent> _tacticalMapLayerTrackedQuery;
@@ -1554,169 +1554,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateCanvas(map, lines, labels, layer, user, updateBlips);
     }
 
-    private void OnUserCreateLabelMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapCreateLabelMsg args)
-    {
-        var user = args.Actor;
-        if (!ent.Comp.CanDraw)
-            return;
-
-        if (!TryResolveUserMap(ent, out var map))
-            return;
-
-        RefreshUserVisibleLayers(ent);
-        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
-            return;
-
-        if (!TryStartUserUpdateCooldown(ent))
-            return;
-
-        UpdateIndividualLabel(map, layer, args.Position, args.Text, args.Color, user, LabelOperation.Create);
-    }
-
-    private void OnUserEditLabelMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapEditLabelMsg args)
-    {
-        var user = args.Actor;
-        if (!ent.Comp.CanDraw)
-            return;
-
-        if (!TryResolveUserMap(ent, out var map))
-            return;
-
-        RefreshUserVisibleLayers(ent);
-        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
-            return;
-
-        if (!TryStartUserUpdateCooldown(ent))
-            return;
-
-        UpdateIndividualLabel(map, layer, args.Position, args.NewText, null, user, LabelOperation.Edit);
-    }
-
-    private void OnUserDeleteLabelMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapDeleteLabelMsg args)
-    {
-        var user = args.Actor;
-        if (!ent.Comp.CanDraw)
-            return;
-
-        if (!TryResolveUserMap(ent, out var map))
-            return;
-
-        RefreshUserVisibleLayers(ent);
-        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
-            return;
-
-        if (!TryStartUserUpdateCooldown(ent))
-            return;
-
-        UpdateIndividualLabel(map, layer, args.Position, string.Empty, null, user, LabelOperation.Delete);
-    }
-
-    private void OnUserMoveLabelMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapMoveLabelMsg args)
-    {
-        var user = args.Actor;
-        if (!ent.Comp.CanDraw)
-            return;
-
-        if (!TryResolveUserMap(ent, out var map))
-            return;
-
-        RefreshUserVisibleLayers(ent);
-        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
-            return;
-
-        if (!TryStartUserUpdateCooldown(ent))
-            return;
-
-        UpdateMoveLabel(map, layer, args.OldPosition, args.NewPosition, user);
-    }
-
-    private void OnComputerCreateLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapCreateLabelMsg args)
-    {
-        var user = args.Actor;
-        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
-            return;
-
-        if (!TryResolveComputerMap(ent, out var map))
-            return;
-
-        RefreshComputerVisibleLayers(ent);
-        var time = _timing.CurTime;
-        if (time < ent.Comp.NextAnnounceAt)
-            return;
-
-        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
-            return;
-
-        UpdateIndividualLabel(map, layer, args.Position, args.Text, args.Color, user, LabelOperation.Create);
-    }
-
-    private void OnComputerEditLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapEditLabelMsg args)
-    {
-        var user = args.Actor;
-        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
-            return;
-
-        if (!TryResolveComputerMap(ent, out var map))
-            return;
-
-        RefreshComputerVisibleLayers(ent);
-        var time = _timing.CurTime;
-        if (time < ent.Comp.NextAnnounceAt)
-            return;
-
-        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
-            return;
-
-        UpdateIndividualLabel(map, layer, args.Position, args.NewText, null, user, LabelOperation.Edit);
-    }
-
-    private void OnComputerDeleteLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapDeleteLabelMsg args)
-    {
-        var user = args.Actor;
-        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
-            return;
-
-        if (!TryResolveComputerMap(ent, out var map))
-            return;
-
-        RefreshComputerVisibleLayers(ent);
-        var time = _timing.CurTime;
-        if (time < ent.Comp.NextAnnounceAt)
-            return;
-
-        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
-            return;
-
-        UpdateIndividualLabel(map, layer, args.Position, string.Empty, null, user, LabelOperation.Delete);
-    }
-
-    private void OnComputerMoveLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapMoveLabelMsg args)
-    {
-        var user = args.Actor;
-        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
-            return;
-
-        if (!TryResolveComputerMap(ent, out var map))
-            return;
-
-        RefreshComputerVisibleLayers(ent);
-        var time = _timing.CurTime;
-        if (time < ent.Comp.NextAnnounceAt)
-            return;
-
-        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
-            return;
-
-        UpdateMoveLabel(map, layer, args.OldPosition, args.NewPosition, user);
-    }
-
-    private enum LabelOperation
-    {
-        Create,
-        Edit,
-        Delete
-    }
-
     private void OnUserQueenEyeMoveMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapQueenEyeMoveMsg args)
     {
         HandleQueenEyeMove(ent, args.Actor, args.Position);
@@ -1822,57 +1659,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         if (TryResolveComputerMap((computer, mapComp), out var map))
             UpdateMapData((computer, mapComp), map.Comp);
-    }
-
-    private void UpdateIndividualLabel(
-        Entity<TacticalMapComponent> map,
-        ProtoId<TacticalMapLayerPrototype> layer,
-        Vector2i position,
-        string text,
-        Color? color,
-        EntityUid user,
-        LabelOperation operation)
-    {
-        var layerData = EnsureLayer(map.Comp, layer);
-        map.Comp.MapDirty = true;
-
-        switch (operation)
-        {
-            case LabelOperation.Create:
-            case LabelOperation.Edit:
-                if (string.IsNullOrWhiteSpace(text))
-                {
-                    layerData.Labels.Remove(position);
-                    break;
-                }
-
-                var labelColor = color ?? (layerData.Labels.TryGetValue(position, out var existing)
-                    ? existing.Color
-                    : Color.White);
-                layerData.Labels[position] = new TacticalMapLabelData(text, labelColor);
-                break;
-            case LabelOperation.Delete:
-                layerData.Labels.Remove(position);
-                break;
-        }
-
-        _adminLog.Add(LogType.RMCTacticalMapUpdated,
-            $"{ToPrettyString(user)} {operation.ToString().ToLower()}d a {GetLayerLogName(layer)} tactical map label at {position} for {ToPrettyString(map.Owner)}");
-    }
-
-    private void UpdateMoveLabel(Entity<TacticalMapComponent> map, ProtoId<TacticalMapLayerPrototype> layer, Vector2i oldPosition, Vector2i newPosition, EntityUid user)
-    {
-        var layerData = EnsureLayer(map.Comp, layer);
-        map.Comp.MapDirty = true;
-
-        if (!layerData.Labels.TryGetValue(oldPosition, out var data))
-            return;
-
-        layerData.Labels.Remove(oldPosition);
-        layerData.Labels[newPosition] = data;
-
-        _adminLog.Add(LogType.RMCTacticalMapUpdated,
-            $"{ToPrettyString(user)} moved a {GetLayerLogName(layer)} tactical map label from {oldPosition} to {newPosition} for {ToPrettyString(map.Owner)}");
     }
 
     private TacticalMapLayerData EnsureLayer(TacticalMapComponent map, ProtoId<TacticalMapLayerPrototype> layer)
@@ -2280,8 +2066,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var status = TacticalMapBlipStatus.Alive;
         if (_mobState.IsDead(ent))
         {
-            var stage = _unrevivableSystem.GetUnrevivableStage(ent.Owner, 5);
-            if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent))
+            var stage = _unrevivable.GetUnrevivableStage(ent.Owner, 5);
+            if (_rottingQuery.HasComp(ent) || _unrevivable.IsUnrevivable(ent))
                 status = TacticalMapBlipStatus.Undefibabble;
             else if (stage <= 1)
                 status = TacticalMapBlipStatus.Defibabble;
@@ -2356,7 +2142,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             AddMarineBlipsFromVisibleSquads(user.Owner, map, visibleLayers, blips, user.Comp.LiveUpdate);
         }
 
-        user.Comp.Blips = blips;
+        user.Comp.Blips = ToNetworkBlips(blips);
         // clients fade stale snapshots from the layer update time.
         user.Comp.LastBlipUpdateAt = GetLastBlipUpdateAt(map, blipLayers);
 
@@ -2512,7 +2298,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         var blips = BuildBlipsFromLayers(map, blipLayers, useLastUpdateBlips: false);
         AddRangedSensorTowerBlips(map, blipLayers, blips, useLastUpdateBlips: false);
-        computer.Comp.Blips = blips;
+        computer.Comp.Blips = ToNetworkBlips(blips);
         Dirty(computer);
 
         var lines = EnsureComp<TacticalMapLinesComponent>(computer);

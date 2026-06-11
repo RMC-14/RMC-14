@@ -23,6 +23,18 @@
       map: [ "enum.DisposalUnitVisualLayers.OverlayFull" ]
     - state: dispover-handle
       map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 55
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable # Required for throwing items into it.
   - type: Destructible
     thresholds:
     - trigger:

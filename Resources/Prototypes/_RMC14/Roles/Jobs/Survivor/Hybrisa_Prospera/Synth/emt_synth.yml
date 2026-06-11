@@ -70,11 +70,9 @@
   name: survivor synth hybrisa EMT preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
     - [ RMCCoatParamedicGreen, RMCJumpsuitEMTGreen, CMHandsLatex ]
     - [ RMCJumpsuitEMTGreen, RMCHazardVestEMTGreen, RMCBeltMedicalDefibAnalyzerFilled, CMHandsLatex ]
     - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCArmorHelmetParamedic, RMCBeltMedicalDefibAnalyzerFilled, RMCHandsCombat ]
-
-

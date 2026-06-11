@@ -49,14 +49,10 @@
   name: hybrisa fire protection specialist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHeadCapCargo, CMMaskGas, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, RMCFireAxe]
     - [ RMCHeadCapCargo, CMMaskGas, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, RMCFireAxe]
     - [ RMCHeadCapCargo, CMMaskGas, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, RMCFireAxe]
     - [ RMCArmorHelmetFirefighter, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, CMFireExtinguisherPortable]
     - [ RMCArmorHelmetFirefighter, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, CMFireExtinguisherPortable]
-
-
-
-

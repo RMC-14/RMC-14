@@ -349,8 +349,8 @@ public sealed partial class TacticalMapControl
             UIBox2 rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));
 
             var staleAlpha = Math.Clamp(BlipStaleAlpha, 0f, 1f);
-            if (_localPlayerEntityId.HasValue && _blipEntityIds != null && i < _blipEntityIds.Length &&
-                _blipEntityIds[i] == _localPlayerEntityId.Value)
+            if (_localPlayerEntity != null && _blipEntityIds != null && i < _blipEntityIds.Length &&
+                _blipEntityIds[i] == _localPlayerEntity.Value)
             {
                 staleAlpha = 1f;
             }
@@ -360,9 +360,9 @@ public sealed partial class TacticalMapControl
             handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, blipColor);
             handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect, overlayColor);
 
-            if (_localPlayerEntityId.HasValue && _blipEntityIds != null && i < _blipEntityIds.Length)
+            if (_localPlayerEntity != null && _blipEntityIds != null && i < _blipEntityIds.Length)
             {
-                if (_blipEntityIds[i] == _localPlayerEntityId.Value)
+                if (_blipEntityIds[i] == _localPlayerEntity.Value)
                 {
                     DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, blipColor);
                 }

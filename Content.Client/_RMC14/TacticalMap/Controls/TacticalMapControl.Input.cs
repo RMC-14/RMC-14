@@ -4,6 +4,7 @@ using Content.Shared._RMC14.TacticalMap;
 using Robust.Client.UserInterface;
 using Robust.Shared.Input;
 using Robust.Shared.Maths;
+using Robust.Shared.Network;
 
 namespace Content.Client._RMC14.TacticalMap.Controls;
 
@@ -79,7 +80,7 @@ public sealed partial class TacticalMapControl
             OnBlipClicked?.Invoke(blip.Indices);
             var entityId = _blipEntityIds != null && blipIndex.Value < _blipEntityIds.Length
                 ? _blipEntityIds[blipIndex.Value]
-                : (int?)null;
+                : (NetEntity?) null;
             OnBlipEntityClicked?.Invoke(blip.Indices, entityId);
             args.Handle();
             return true;

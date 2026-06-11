@@ -75,12 +75,10 @@
   name: survivor synth hybrisa engineer colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHardhatOrange, RMCJumpsuitCivilianEngineerWorker, RMCHazardVest ]
     - [ RMCOuterEngineeringUtilityOversuit, RMCJumpsuitCivilianEngineerWorker, CMSheetPlasteel10 ]
     - [ RMCJumpsuitCivilianEngineerWorkerAlt, RMCHardhatBlue, RMCHazardVestGreen ]
     - [ RMCJumpsuitCivilianEngineerWorkerAlt, RMCHardhatBlue, RMCHazardVestBlue ]
     - [ RMCJumpsuitCivilianEngineerWorkerAlt, RMCOuterEngineeringUtilityOversuitAlt, CMSheetPlasteel10 ]
-
-

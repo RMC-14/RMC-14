@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using Content.Client._RMC14.TacticalMap.Controls;
 using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
@@ -16,7 +17,6 @@ using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Range = Robust.Client.UserInterface.Controls.Range;
-using Content.Client._RMC14.TacticalMap.Controls;
 
 namespace Content.Client._RMC14.TacticalMap.UI;
 
@@ -82,12 +82,6 @@ public sealed partial class TacticalMapReplayWindow : RMCPopOutWindow
         Wrapper.CloseRequested += Close;
         Wrapper.LabelsButton.Visible = false;
         OnPopout += () => Wrapper.PopoutButton.Visible = false;
-        OnFinalClose += () =>
-        {
-            if (!Disposed)
-                Dispose();
-        };
-
         PlayButton.Button.OnPressed += _ => TogglePlayback();
         TimelineSlider.OnValueChanged += OnSliderChanged;
         SpeedSlider.OnValueChanged += OnSpeedChanged;

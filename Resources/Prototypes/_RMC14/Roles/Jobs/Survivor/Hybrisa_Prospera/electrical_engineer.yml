@@ -45,10 +45,8 @@
   name: hybrisa engineer colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ CMHandsInsulated, RMCShoesJackboots, RMCHardhatBlue, RMCHazardVestGreen, CMSheetPlasteel10 ]
     - [ CMHandsInsulated, RMCShoesJackboots, RMCHardhatBlue, RMCHazardVestBlue, CMSheetPlasteel10 ]
     - [ RMCHandsVeteranInsulated, CMBootsBlackFilled, RMCWeldingGoggles, RMCOuterEngineeringUtilityOversuitAlt, CMSheetPlasteel20 ]
-
-

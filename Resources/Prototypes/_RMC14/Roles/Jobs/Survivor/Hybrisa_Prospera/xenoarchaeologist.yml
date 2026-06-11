@@ -52,12 +52,10 @@
   name: xenoarchaeologist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ CMSatchel, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
     - [ CMSatchel, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
     - [ RMCSatchelLightpack, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
     - [ RMCSatchelLightpack, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
     - [ RMCSatchelLightpack, RMCSuitBioWeYa, RMCHandsVeteranCBRN, RMCBootsCBRN, RMCHoodBioWeYa, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCToolSpade, RMCFlashlightLantern ]
-
-

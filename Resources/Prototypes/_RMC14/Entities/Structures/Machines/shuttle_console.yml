@@ -85,6 +85,9 @@
   - type: RMCCameraComputer
     protoIds:
     - RMCMonitorCameraAlamo
+    - RMCFlareCAS
+    - RMCAirFlareCAS
+    - RMCLaserDesignatorTarget
   - type: ActivatableUI
     key: enum.RMCCameraUiKey.Key
 
@@ -98,6 +101,9 @@
   - type: RMCCameraComputer
     protoIds:
     - RMCMonitorCameraNormandy
+    - RMCFlareCAS
+    - RMCAirFlareCAS
+    - RMCLaserDesignatorTarget
 
 - type: entity
   parent: CMComputerDropship

@@ -312,15 +312,15 @@ public sealed class TacticalMapSettingsManager
 
             foreach (var setting in modifiedSettings)
             {
-                writer.WriteLine("  - Key: \"" + setting.Key + "\"");
-                writer.WriteLine("    Value: " + FormatValueForYaml(setting.Value));
+                writer.WriteLine("  - key: \"" + setting.Key + "\"");
+                writer.WriteLine("    value: " + FormatValueForYaml(setting.Value));
                 if (!string.IsNullOrEmpty(setting.PlanetId))
                 {
-                    writer.WriteLine("    PlanetId: \"" + setting.PlanetId + "\"");
+                    writer.WriteLine("    planetId: \"" + setting.PlanetId + "\"");
                 }
                 else
                 {
-                    writer.WriteLine("    PlanetId: null");
+                    writer.WriteLine("    planetId: null");
                 }
             }
 
@@ -616,9 +616,9 @@ public sealed class TacticalMapSettingsManager
 [Serializable, DataDefinition]
 public partial struct TacticalMapSettingRegistration
 {
-    [DataField("Key")] public string? Key { get; set; }
-    [DataField("Value")] public object? Value { get; set; }
-    [DataField("PlanetId")] public string? PlanetId { get; set; }
+    [DataField] public string? Key { get; set; }
+    [DataField] public object? Value { get; set; }
+    [DataField] public string? PlanetId { get; set; }
 }
 
 public struct TacticalMapSettings()

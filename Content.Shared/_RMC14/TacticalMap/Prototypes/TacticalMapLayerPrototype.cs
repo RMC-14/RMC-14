@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Content.Shared._RMC14.Marines.Squads;
 using Robust.Shared.Prototypes;
@@ -5,7 +6,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
-[Prototype(TacticalMapPrototypeIds.Layer), Serializable, NetSerializable]
+[Prototype(TacticalMapPrototypeIds.Layer)]
 public sealed partial class TacticalMapLayerPrototype : IPrototype
 {
     [IdDataField]
@@ -49,7 +50,6 @@ public sealed partial class TacticalMapLayerPrototype : IPrototype
 
     [DataField]
     public TacticalMapLayerAnnouncementTarget AnnouncementTarget = TacticalMapLayerAnnouncementTarget.None;
-
 }
 
 [Serializable, NetSerializable]

@@ -11,6 +11,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Robust.Shared.Maths;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Color = Robust.Shared.Maths.Color;
@@ -105,8 +106,8 @@ public sealed partial class TacticalMapControl : TextureRect
     public readonly Dictionary<Vector2i, TacticalMapLabelData> BackgroundLabels = new();
 
     private TacticalMapBlip[]? _blips;
-    private int[]? _blipEntityIds;
-    private int? _localPlayerEntityId;
+    private NetEntity[]? _blipEntityIds;
+    private NetEntity? _localPlayerEntity;
     private Dictionary<Vector2i, string> _areaLabels = new();
     private bool[]? _tileMask;
     private Texture? _backgroundTexture;
@@ -177,7 +178,7 @@ public sealed partial class TacticalMapControl : TextureRect
     public bool QueenEyeMode { get; set; }
 
     public Action<Vector2i>? OnBlipClicked;
-    public Action<Vector2i, int?>? OnBlipEntityClicked;
+    public Action<Vector2i, NetEntity?>? OnBlipEntityClicked;
     public Action<Vector2i, string>? OnBlipRightClicked;
     public Action<TacticalMapControl, Vector2i, Vector2>? OnContextMenuRequested;
     public Action? OnUserInteraction;
