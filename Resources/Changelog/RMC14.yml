@@ -1,28 +1,4 @@
 ﻿Entries:
-- author: TadJohnson00
-  changes:
-  - message: '[PVE] Adds armour webbing for use by the UNMC Sun Riders.'
-    type: Add
-  - message: '[PVE] Adds Kestrel modular vests for use by the TSE''s RCM.'
-    type: Add
-  id: 2881
-  time: '2026-02-07T22:14:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8946
-- author: RavenCaat
-  changes:
-  - message: Added Glory to the RCM!
-    type: Add
-  - message: Added L7A3 RCM SMG and its Squash head 9mm ammo
-    type: Add
-  - message: Removed fun for SPP!
-    type: Remove
-  - message: Changed  the power levels between SPP and RCM what fun!
-    type: Tweak
-  - message: Fixed  SPP having fun!
-    type: Fix
-  id: 2882
-  time: '2026-02-07T22:16:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8754
 - author: monomethylhydrazine
   changes:
   - message: Added vendors and some equipment for RCM PVE roles.
@@ -4556,5 +4532,24 @@
   id: 3380
   time: '2026-06-11T23:03:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9541
+- author: Dygon
+  changes:
+  - message: Fixed grenade launchers not having enough range, increased from 7 to
+      8.463.
+    type: Fix
+  - message: Increased the firerate of the Grenadier's M83 grenade launcher from 0.3125
+      to 0.675
+    type: Tweak
+  id: 3381
+  time: '2026-06-11T23:37:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10135
+- author: Drazamuffin
+  changes:
+  - message: The M85's rate of fire is now on par with the Grenadier Specialist's
+      M83
+    type: Tweak
+  id: 3382
+  time: '2026-06-11T23:36:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9632
 Name: RMC14
 Order: -1
