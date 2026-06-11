@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -6,15 +6,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Content.Server.Database.Migrations.Postgres
 {
     /// <inheritdoc />
-    public partial class RMCRankPreference : Migration
+    public partial class RMCFix : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "rank_preference",
-                table: "profile");
-
             migrationBuilder.CreateTable(
                 name: "rank",
                 columns: table => new
@@ -47,13 +43,6 @@ namespace Content.Server.Database.Migrations.Postgres
         {
             migrationBuilder.DropTable(
                 name: "rank");
-
-            migrationBuilder.AddColumn<string>(
-                name: "rank_preference",
-                table: "profile",
-                type: "text",
-                nullable: false,
-                defaultValue: "");
         }
     }
 }

@@ -1138,7 +1138,7 @@ namespace Content.Client.Lobby.UI
 
                         foreach (var rank in job.Ranks)
                         {
-                            if (_prototypeManager.TryIndex(rank.Key, out RankPrototype? rankPrototype) && rankPrototype != null)
+                            if (_prototypeManager.TryIndex(rank.Key, out var rankPrototype))
                             {
                                 rankOptions.AddItem(rankPrototype.Name);
                                 rankProtoIds.Add(rank.Key);
@@ -1148,6 +1148,7 @@ namespace Content.Client.Lobby.UI
                             }
                         }
 
+                        rankOptions.SetItemDisabled(rankOptions.ItemCount - 1, true);
                         // If the job only has 1 rank there is nothing to choose.
                         if (rankProtoIds.Count <= 2)
                             rankOptions.Disabled = true;
@@ -1650,6 +1651,7 @@ namespace Content.Client.Lobby.UI
 
         private void UpdatePlaytimeRankPreferenceControls()
         {
+            var preferenceAdjusted = false;
             foreach (var (jobID, optionsButton, rankIds) in _rankPriorities)
             {
                 if (!_prototypeManager.TryIndex(jobID, out JobPrototype? job) || job == null)
@@ -1664,8 +1666,17 @@ namespace Content.Client.Lobby.UI
                 if (selectedIndex < 0)
                     selectedIndex = 0;
 
+                if (preferredRank is { } rank && rank == rankIds.Last())
+                {
+                    Profile = Profile?.WithRankPreference(jobID, null);
+                    preferenceAdjusted = true;
+                }
+
                 optionsButton.Select(selectedIndex);
             }
+
+            if (preferenceAdjusted)
+                Save?.Invoke();
         }
 
         private void UpdateSquadPreferenceControls()
