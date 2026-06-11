@@ -41,6 +41,9 @@
         type: DropshipNavigationBui
       enum.DropshipHijackerUiKey.Key:
         type: DropshipHijackerBui
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
 
 - type: entity
   parent: CMComputerDropshipNavigation
@@ -131,6 +134,8 @@
     - RMCLaserDesignatorTarget
   - type: ActivatableUI
     key: enum.RMCCameraUiKey.Key
+  - type: ApcPowerReceiver
+    needsPower: false
 
 - type: entity
   parent: CMComputerDropshipCamerasAlamo
@@ -171,6 +176,9 @@
   - type: RequiresSkill
     skills:
       RMCSkillPilot: 1
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
 
 - type: entity
   parent: CMBaseStructure
@@ -191,8 +199,8 @@
     - map: ["enum.PowerDeviceVisualLayers.Powered"]
       state: "security_cam"
   - type: ApcPowerReceiver
-    powerLoad: 250
-    needsPower: true
+    powerLoad: 0
+    needsPower: false
   - type: RMCPowerReceiver
     idleLoad: 300
     activeLoad: 300

@@ -101,7 +101,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         var hits = 0;
         var position = _transform.GetMapCoordinates(ent);
         _targets.Clear();
-        _lookup.GetEntitiesInRange(position.MapId, position.Position, ent.Comp.BlastRadius, _targets);
+        _lookup.GetEntitiesInRange(position.MapId, position.Position, ent.Comp.BlastRadius, _targets, LookupFlags.Uncontained);
 
         foreach (var target in _targets)
         {

@@ -98,6 +98,9 @@
   id: RMCGlass
 
 - type: Tag
+  id: RMCFoldingBarricade
+
+- type: Tag
   id: RMCHelmet
 
 - type: Tag
