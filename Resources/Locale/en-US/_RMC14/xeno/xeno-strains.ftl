@@ -178,7 +178,6 @@ rmc-xeno-designer-description = You lose:
     - Direct resin building
     - Lose some plasma and health
     You gain:
-    - Stronger pheromones
     - A bit of speed and stronger pheromones
     - Longer vision
     - The ability to place up to 36 design nodes:
