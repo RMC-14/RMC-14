@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: YO0teacher
-  changes:
-  - message: Fixed motion detectors and data detectors turning off when equipped using
-      a keybind
-    type: Fix
-  id: 2844
-  time: '2026-02-02T02:40:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9009
-- author: Arykh
-  changes:
-  - message: Added the Auto-Select toggle button to the ChemMaster! It lets you automatically
-      select inserted pill bottles.
-    type: Add
-  id: 2845
-  time: '2026-02-02T02:43:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9053
 - author: Dutch-VanDerLinde
   changes:
   - message: Queen and hive leader now have big text in hivemind.
@@ -4518,5 +4502,26 @@
   id: 3343
   time: '2026-06-11T21:52:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9825
+- author: Ian321
+  changes:
+  - message: '[PVE] Added rubber magazines for the Type-64, Type-71 and Type-77.'
+    type: Add
+  id: 3344
+  time: '2026-06-11T21:57:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10016
+- author: Arykh
+  changes:
+  - message: You can put items back into some vendors via alt + left click or right
+      click verb menu(You can use left click for medical vendors). Containers such
+      as satchels, belts, pill bottles, etc. can't be restocked, but can be used to
+      bulk restock other items into the vendor.
+    type: Add
+  - message: Medical vendors can now slowly restock over time if anchored onto a Medical
+      Supply Link port! This will only go into effect after 20 minutes from round
+      start. Each vendor entry has a 20% chance to increase by 1 every 30 seconds.
+    type: Add
+  id: 3345
+  time: '2026-06-11T21:56:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8462
 Name: RMC14
 Order: -1
