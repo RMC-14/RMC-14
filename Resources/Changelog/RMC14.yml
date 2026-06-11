@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: efzapa
-  changes:
-  - message: POWs may now lose their POW status if they attempt escape several times
-      after a warning.
-    type: Tweak
-  id: 2851
-  time: '2026-02-02T03:11:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9054
 - author: PursuitInAshes
   changes:
   - message: '[PvE] All roles have received a cleanup and tweak to their skills to
@@ -4523,5 +4515,12 @@
   id: 3350
   time: '2026-06-11T22:08:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8287
+- author: Dygon
+  changes:
+  - message: You no longer occasionally hear in-game sound effects while in the lobby.
+    type: Fix
+  id: 3351
+  time: '2026-06-11T22:09:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10085
 Name: RMC14
 Order: -1
