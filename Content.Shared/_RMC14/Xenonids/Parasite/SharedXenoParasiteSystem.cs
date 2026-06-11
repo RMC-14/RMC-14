@@ -744,11 +744,12 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             // spawn the larva
             if (infected.BurstAt <= time && infected.SpawnedLarva == null)
             {
-                SpawnLarva((uid, infected), out _);
+                SpawnLarva((uid, infected), out var spawnedLarva);
                 var priorityEv = new XenoBurstPriorityEvent(
                     infected.VictimUserId,
                     infected.InfectorUserId,
-                    GetNetEntity(infected.Hive));
+                    GetNetEntity(infected.Hive),
+                    GetNetEntity(spawnedLarva));
                 RaiseLocalEvent(ref priorityEv);
             }
 

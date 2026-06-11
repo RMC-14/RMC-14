@@ -31,9 +31,6 @@ public sealed class LarvaQueueSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     [ViewVariables]
-    public static readonly Dictionary<EntityUid, HashSet<NetUserId>> BurstVictimSet = new();
-
-    [ViewVariables]
     public static readonly Dictionary<EntityUid, HashSet<NetUserId>> InfectorSet = new();
 
     [ViewVariables]
@@ -92,26 +89,33 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (ev.BurstVictimUserId.HasValue)
         {
             var victimId = ev.BurstVictimUserId.Value;
-            if (!BurstVictimSet.TryGetValue(hiveEntity, out var bvs) || !bvs.Contains(victimId))
+            var larvaEntity = ev.SpawnedLarva.HasValue ? GetEntity(ev.SpawnedLarva.Value) : EntityUid.Invalid;
+
+            if (larvaEntity.IsValid()
+                && TryComp<BursterComponent>(larvaEntity, out var burster)
+                && _player.TryGetSessionByEntity(burster.BurstFrom, out var victimSession)
+                && victimSession.UserId == victimId)
             {
                 if (InfectorSet.TryGetValue(hiveEntity, out var iq)) iq.Remove(victimId);
                 if (Queue.TryGetValue(hiveEntity, out var nq)) nq.Remove(victimId);
                 if (PreQueue.TryGetValue(hiveEntity, out var pq)) pq.Remove(victimId);
-                BurstVictimSet.GetOrNew(hive).Add(victimId);
+                _reservedBurstLarva.Add(larvaEntity);
+                SendOffer(victimSession, larvaEntity, hive, "Burst Victim", 1);
             }
         }
 
         if (ev.InfectorUserId.HasValue)
         {
             var infectorId = ev.InfectorUserId.Value;
-            var inBurstVictim = BurstVictimSet.TryGetValue(hiveEntity, out var bvs2) && bvs2.Contains(infectorId);
             var inInfector = InfectorSet.TryGetValue(hiveEntity, out var iq2) && iq2.Contains(infectorId);
 
-            if (!inBurstVictim && !inInfector)
+            if (!inInfector)
             {
-                if (Queue.TryGetValue(hiveEntity, out var nq)) nq.Remove(infectorId);
-                if (PreQueue.TryGetValue(hiveEntity, out var pq)) pq.Remove(infectorId);
-                InfectorSet.GetOrNew(hive).Add(infectorId);
+                var removedFromQueue = Queue.TryGetValue(hiveEntity, out var nq) && nq.Remove(infectorId);
+                var removedFromPreQueue = PreQueue.TryGetValue(hiveEntity, out var pq) && pq.Remove(infectorId);
+
+                if (removedFromQueue || removedFromPreQueue)
+                    InfectorSet.GetOrNew(hive).Add(infectorId);
             }
         }
 
@@ -148,8 +152,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             var hives = EntityQueryEnumerator<HiveComponent>();
             while (hives.MoveNext(out var hiveId, out _))
             {
-                if (BurstVictimSet.TryGetValue(hiveId, out var bvs) && bvs.Contains(ev.Player.UserId)
-                    || InfectorSet.TryGetValue(hiveId, out var iqSet) && iqSet.Contains(ev.Player.UserId)
+                if (InfectorSet.TryGetValue(hiveId, out var iqSet) && iqSet.Contains(ev.Player.UserId)
                     || Queue.TryGetValue(hiveId, out var nq) && nq.Contains(ev.Player.UserId))
                 {
                     TryOfferToQueue(hiveId);
@@ -168,7 +171,6 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void OnCleanup(RoundRestartCleanupEvent ev)
     {
-        BurstVictimSet.Clear();
         InfectorSet.Clear();
         Queue.Clear();
         PreQueue.Clear();
@@ -247,8 +249,10 @@ public sealed class LarvaQueueSystem : EntitySystem
                 return;
             }
 
-            var newMind = _mind.CreateMind(args.SenderSession.UserId, Name(larvaEnt));
-            _mind.TransferTo(newMind, larvaEnt, ghostCheckOverride: true);
+            var mindId = _mind.TryGetMind(args.SenderSession.UserId, out var existingMindId, out var existingMindComp)
+                ? existingMindId!.Value
+                : (EntityUid) _mind.CreateMind(args.SenderSession.UserId, Name(larvaEnt));
+            _mind.TransferTo(mindId, larvaEnt, ghostCheckOverride: true);
             RemCompDeferred<LarvaQueuedComponent>(larvaEnt);
         }
         else
@@ -431,8 +435,6 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private bool HasAnyQueued(EntityUid hive)
     {
-        if (BurstVictimSet.TryGetValue(hive, out var bvs) && bvs.Count > 0)
-            return true;
         if (InfectorSet.TryGetValue(hive, out var iqSet) && iqSet.Count > 0)
             return true;
         if (Queue.TryGetValue(hive, out var nq) && nq.Count > 0)
@@ -450,29 +452,19 @@ public sealed class LarvaQueueSystem : EntitySystem
         tier = "Normal";
         position = 0;
 
-        BurstVictimSet.TryGetValue(hive, out var bvs);
         InfectorSet.TryGetValue(hive, out var iqSet);
         Queue.TryGetValue(hive, out var nq);
-
-        if (bvs != null && TryPopFromSet(bvs, out nextSession))
-        {
-            tier = "Burst Victim";
-            position = 1;
-            return true;
-        }
-
-        var bvCount = bvs?.Count ?? 0;
 
         if (iqSet != null && TryPopFromSet(iqSet, out nextSession))
         {
             tier = "Infector";
-            position = bvCount + 1;
+            position = 1;
             return true;
         }
 
         var iqCount = iqSet?.Count ?? 0;
 
-        if (nq != null && TryPopFromList(nq, bvCount + iqCount, out nextSession, out position))
+        if (nq != null && TryPopFromList(nq, iqCount, out nextSession, out position))
         {
             tier = "Normal";
             return true;
@@ -561,8 +553,6 @@ public sealed class LarvaQueueSystem : EntitySystem
     {
         if (PreQueue.TryGetValue(hive, out var pq) && pq.Remove(netUserId))
             return true;
-        if (BurstVictimSet.TryGetValue(hive, out var bvs) && bvs.Remove(netUserId))
-            return true;
         if (InfectorSet.TryGetValue(hive, out var iqSet) && iqSet.Remove(netUserId))
             return true;
         if (Queue.TryGetValue(hive, out var nq) && nq.Remove(netUserId))
@@ -583,8 +573,6 @@ public sealed class LarvaQueueSystem : EntitySystem
     {
         if (PreQueue.TryGetValue(hiveId, out var pq) && pq.ContainsKey(userId))
             return true;
-        if (BurstVictimSet.TryGetValue(hiveId, out var bvs) && bvs.Contains(userId))
-            return true;
         if (InfectorSet.TryGetValue(hiveId, out var iqSet) && iqSet.Contains(userId))
             return true;
         if (Queue.TryGetValue(hiveId, out var nq) && nq.Contains(userId))
@@ -594,22 +582,16 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     public int GetQueuePosition(NetUserId userId, EntityUid hiveId)
     {
-        BurstVictimSet.TryGetValue(hiveId, out var bvs);
         InfectorSet.TryGetValue(hiveId, out var iqSet);
 
-        if (bvs != null && bvs.Contains(userId))
-            return 1;
-
-        var bvCount = bvs?.Count ?? 0;
-
         if (iqSet != null && iqSet.Contains(userId))
-            return bvCount + 1;
+            return 1;
 
         var iqCount = iqSet?.Count ?? 0;
 
         if (Queue.TryGetValue(hiveId, out var nq))
         {
-            var pos = bvCount + iqCount + 1;
+            var pos = iqCount + 1;
             foreach (var id in nq)
             {
                 if (id == userId) return pos;
