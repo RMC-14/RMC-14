@@ -39,6 +39,8 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10 # TODO RMC14 heavy speed revolver
       - id: RMCMagazinePistolM1984AP
@@ -178,6 +180,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterM13
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
@@ -272,8 +275,14 @@
         amount: 4
       - id: CMWeaponPistolM1984Empty
         amount: 4
+      - id: RMCWeaponPistolM13Empty
+        amount: 4
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13
+        amount: 20
+      - id: RMCMagazinePistolM13Ext
+        amount: 8
       - id: CMMagazinePistolM77AP
         amount: 20
       - id: RMCSpeedLoaderM44
