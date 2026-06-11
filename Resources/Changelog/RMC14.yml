@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: PursuitInAshes
-  changes:
-  - message: '[PvE] All roles have received a cleanup and tweak to their skills to
-      make them more consistent unless there is intentional deviation on a per faction
-      basis.'
-    type: Tweak
-  id: 2852
-  time: '2026-02-02T03:12:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9035
 - author: PursuitinAshes
   changes:
   - message: '[PvE] Added an SPP and Generic EVA Suit.'
@@ -4522,5 +4513,13 @@
   id: 3351
   time: '2026-06-11T22:09:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10085
+- author: wheelwrightt
+  changes:
+  - message: Correspondent, combat correspondent, liason and liason bodyguard now
+      have plushies in their loadout options.
+    type: Tweak
+  id: 3352
+  time: '2026-06-11T22:13:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10096
 Name: RMC14
 Order: -1
