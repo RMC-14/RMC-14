@@ -9,6 +9,7 @@
         <tabs:KeyRebindTab Name="KeyRebindTab" />
         <tabs:AudioTab Name="AudioTab" />
         <options:VoicelinesTab Name="VoicelinesTab" />
+        <options:EmoteBindingTab Name="EmoteBindingTab" />
         <tabs:AccessibilityTab Name="AccessibilityTab" />
         <tabs:AdminOptionsTab Name="AdminOptionsTab" />
     </TabContainer>

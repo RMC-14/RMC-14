@@ -1,0 +1,41 @@
+﻿<options:EmoteBindingTab
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:ctrls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:options="clr-namespace:Content.Client._RMC14.UserInterface.Options"
+    xmlns:ui="clr-namespace:Content.Client.Options.UI"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:Content.Client.Stylesheets"
+    VerticalExpand="True">
+    <BoxContainer Orientation="Vertical">
+        <ScrollContainer VerticalExpand="True"
+                         HorizontalExpand="True"
+                         HScrollEnabled="False"
+                         Margin="8 8 8 8" >
+            <BoxContainer Orientation="Vertical">
+                <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-header'}"
+                   FontColorOverride="{x:Static s:StyleNano.NanoGold}"
+                   StyleClasses="LabelKeyText" />
+                <cc:HSeparator Margin="0 5" />
+                <Label Text="{Loc 'rmc-ui-emote-binding-humanoid-explain'}" StyleClasses="LabelSubText" />
+                <BoxContainer Name="HumanoidDropDowns" Orientation="Vertical">
+                </BoxContainer>
+
+                <Label Text="{Loc 'rmc-ui-emote-binding-xeno-header'}"
+                       FontColorOverride="{x:Static s:StyleNano.NanoGold}"
+                       StyleClasses="LabelKeyText"
+                       Margin="0 2 0 0"/>
+                <cc:HSeparator Margin="0 5" />
+                <BoxContainer Name="XenoDropDowns" Orientation="Vertical">
+                </BoxContainer>
+            </BoxContainer>
+        </ScrollContainer>
+        <ctrls:StripeBack HasBottomEdge="False" HasMargins="False">
+            <BoxContainer Orientation="Vertical" Margin="4 4">
+                <Label Text="{Loc 'rmc-ui-emote-binding-footer1'}" StyleClasses="LabelSubText" />
+                <Label Text="{Loc 'rmc-ui-emote-binding-footer2'}" StyleClasses="LabelSubText" />
+            </BoxContainer>
+        </ctrls:StripeBack>
+        <ui:OptionsTabControlRow Name="Control" Access="Public" />
+    </BoxContainer>
+</options:EmoteBindingTab>
