@@ -3000,8 +3000,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronMixes-the-Fuel
   name: Mixes-the-Fuel figurine
-  description: "Mixes is a small kobold with a positive attitude that always speaks in third person, but always tries to follow their duties to the letter. They always like be as friendly as they can be, and they are a bit silly and goofy at times, although they tend to be quite happy about completing their assigned tasks.\n\nWarning: Do not give them a flamer under any circumstance. It will only end up in a disaster.
-"
+  description: "Mixes is a small kobold with a positive attitude that always speaks in third person, but always tries to follow their duties to the letter. They always like be as friendly as they can be, and they are a bit silly and goofy at times, although they tend to be quite happy about completing their assigned tasks.\n\nWarning: Do not give them a flamer under any circumstance. It will only end up in a disaster."
   components:
   - type: Sprite
     state: mixes-the-fuel
