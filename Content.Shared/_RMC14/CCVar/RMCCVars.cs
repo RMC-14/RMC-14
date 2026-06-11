@@ -454,6 +454,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCForceEndHijackTimeMinutes =
         CVarDef.Create("rmc.force_hijack_end_time_minutes", 25, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCHijackCrashStunTimeSeconds =
+        CVarDef.Create("rmc.hijack_crash_stun_time_seconds", 5, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> RMCMovementPenCapSubtract =
         CVarDef.Create("rmc.movement_pen_cap_subtract", 0.8f, CVar.REPLICATED | CVar.SERVER);
 
