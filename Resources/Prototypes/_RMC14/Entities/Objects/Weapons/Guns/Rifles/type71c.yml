@@ -54,6 +54,7 @@
           - RMCMagazineRifleType71
           - RMCMagazineRifleType71AP
           - RMCMagazineRifleType71HEAP
+          - RMCMagazineRifleType71Rubber
         startingItem: RMCMagazineRifleType71AP
   - type: GunDamageModifier
     multiplier: 0.8

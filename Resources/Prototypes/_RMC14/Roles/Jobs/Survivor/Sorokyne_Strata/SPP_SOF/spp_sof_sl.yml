@@ -45,8 +45,8 @@
     - CMSheetMetal20
     outerClothing:
     - RMCTacticalPrybar
-    - RMCMagazineRifleAK4047
-    - RMCMagazineRifleAK4047
+    - RMCMagazineRifleType77
+    - RMCMagazineRifleType77
     - RMCRadioHandheldColony
 
 - type: entity
