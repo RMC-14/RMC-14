@@ -55,6 +55,7 @@
           - RMCMagazineRifleType71
           - RMCMagazineRifleType71AP
           - RMCMagazineRifleType71HEAP
+          - RMCMagazineRifleType71Rubber
   - type: GunDamageModifier
     multiplier: 1
   - type: AttachableHolder
@@ -108,6 +109,7 @@
           - RMCMagazineRifleType71
           - RMCMagazineRifleType71AP
           - RMCMagazineRifleType71HEAP
+          - RMCMagazineRifleType71Rubber
         startingItem: RMCMagazineRifleType71AP
 
 - type: Tag
