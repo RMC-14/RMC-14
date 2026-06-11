@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: CMJobSurvivorFireProtectionSpecialist
   name: rmc-job-name-survivor-fire-protection-specialist
@@ -10,11 +10,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivorFireProtectionSpecialist
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetFireProtectionSpecialist
     - type: RMCSurvivor
@@ -68,3 +64,5 @@
     randomOutfits:
     - [ RMCFireAxe ]
     - [ CMFireExtinguisherPortable ]
+
+

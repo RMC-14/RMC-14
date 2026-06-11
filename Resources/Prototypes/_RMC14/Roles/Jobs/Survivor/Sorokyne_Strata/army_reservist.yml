@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: CMJobSurvivorArmyReservist
   name: rmc-job-name-survivor-army-reservist
@@ -37,7 +37,7 @@
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorArmyReservist
   equipment:
-    suitstorage: RMCWeaponRifleAK4047
+    suitstorage: RMCWeaponRifleType77
     jumpsuit: RMCJumpsuitSPPArmy
     shoes: CMBootsBlackFilled
     gloves: RMCHandsVeteran
@@ -71,7 +71,7 @@
   - type: EntityPreset
     randomGear:
     - [ RMCGrenadeMolotov ]
-    - [ CMPackFlare ]
+    - [ RMCPackFlareR44 ]
     - [ WeaponNailgun ]
     - [ RMCFireAxe ]
     - [ RMCWelderIndustrial ]
@@ -81,3 +81,4 @@
     - [ RMCArmorHelmetSPPArmy, RMCOuterClothingExternalWebbingBrown, RMCMaskBalaclava]
     - [ RMCArmorHelmetSPPArmy, RMCMaskGasSPP]
     - [ RMCHeadCapSPPBeretArmy, RMCMaskGasSPP]
+

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorILRCPeacekeeper
   name: cm-job-name-survivor-un-peacekeeper

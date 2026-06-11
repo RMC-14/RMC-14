@@ -1,4 +1,4 @@
-﻿# used in NV and LV-624
+# used in NV and LV-624
 - type: job
   parent: CMSurvivor
   id: CMSurvivorPriest

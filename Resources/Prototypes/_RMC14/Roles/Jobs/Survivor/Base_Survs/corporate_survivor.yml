@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: [ RMCJobNametagBase, CMSurvivor ]
   id: CMSurvivorCorporate
   name: cm-job-name-survivor-corporate
@@ -55,7 +55,7 @@
     jumpsuit: CMJumpsuitLiaisonField
     outerClothing: RMCArmorVest
     shoes: RMCShoesLaceup
-    back: CMSatchelFillSurvivor # TODO RMC14 secure leather satchel
+    back: CMSatchelLiaisonSecureFillSurvivor
     id: CMIDCardLiaisonColony
     pocket1: RMCPouchSurvivalFill
     pocket2: CMClipboard # RMC14, replace with document pouch when fixed

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: CMJobSurvivorSoroCivilian
   name: rmc-job-name-survivor-soro-civilian

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: RMCSurvivorPMCBase
   id: RMCSurvivorSolarisPMCCommander
   name: rmc-job-name-pmc-field-operations-leader
@@ -12,7 +12,7 @@
   icon: RMCJobIconPMCCommander
   greeting: rmc-job-greeting-solaris-pmc-commander
   playTimeTracker: RMCJobSurvivorCO
-  spawnMenuRoleName: Survivor â€” PMC Field Operations Leader (Solaris Ridge special survivor)
+  spawnMenuRoleName: Survivor — PMC Field Operations Leader (Solaris Ridge special survivor)
   special:
   - !type:AddComponentSpecial
     components:

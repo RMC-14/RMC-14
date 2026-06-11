@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: RMCSurvivorPMCBase
   id: RMCSurvivorSolarisPMCMedic
   name: rmc-job-name-pmc-medic
@@ -11,7 +11,7 @@
   icon: RMCJobIconPMCMedic
   greeting: rmc-job-greeting-solaris-pmc-medic
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Survivor â€” PMC Medic (Solaris Ridge special survivor)
+  spawnMenuRoleName: Survivor — PMC Medic (Solaris Ridge special survivor)
   special:
   - !type:AddComponentSpecial
     components:

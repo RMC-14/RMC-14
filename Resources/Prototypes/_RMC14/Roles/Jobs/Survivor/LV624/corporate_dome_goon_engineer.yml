@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorLV624CorporateDomeGoonEngineer
   name: rmc-job-name-pmc-corporate-goon-engi

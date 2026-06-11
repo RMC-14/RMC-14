@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorCorporate
   id: RMCSurvivorSolarisCorporateSupervisor
   name: rmc-job-name-survivor-solaris-corporate-supervisor
@@ -10,7 +10,7 @@
   - CMAccessIllegal
   icon: "CMJobIconExecAssMan"
   greeting: rmc-job-greeting-solaris-pmc-supervisor
-  spawnMenuRoleName: Survivor â€” Corporate Supervisor (Solaris Ridge special survivor)
+  spawnMenuRoleName: Survivor — Corporate Supervisor (Solaris Ridge special survivor)
   startingGear: RMCGearSurvivorSolarisCorporateSupervisor
   special:
   - !type:AddComponentSpecial

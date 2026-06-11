@@ -1,4 +1,4 @@
-﻿# Base surv as its used by multiple maps, but some maps have minor differences. + parity.
+# Base surv as its used by multiple maps, but some maps have minor differences. + parity.
 # Base marshal, this file, should be used on LV624, Trijent, and Solaris.
 
 - type: job

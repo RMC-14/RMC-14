@@ -1,4 +1,4 @@
-﻿- type: job # Basically same as NV version, should that one just be moved to multi-map?
+- type: job # Basically same as NV version, should that one just be moved to multi-map?
   parent: CMSurvivorSecurity
   id: CMSurvivorSolarisILRCPeacekeeper
   name: cm-job-name-survivor-un-peacekeeper

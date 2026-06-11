@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconCommander
   name: rmc-job-name-forecon-commander
@@ -16,6 +16,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
       preset: RMCSkillPresetCommander
     - type: MarineOrders

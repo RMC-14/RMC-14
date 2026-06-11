@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorScientist
   id: RMCSurvivorHybrisaXenobiologist
   name: rmc-job-name-survivor-xenobiologist
@@ -9,14 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
-        RMCSkillResearch: 1
+      preset: RMCSkillPresetSurvivorResearcher
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaXenobiologist
     - type: RMCSurvivor
@@ -57,3 +50,4 @@
     - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesMarineRpg, RMCShoesLaceup ]
     - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesMarineRpg, RMCShoesLaceup ]
     - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCHandsVeteranCBRN, RMCArmorVestCivilian, RMCGlassesReagentHUDGlasses, RMCShoesBrown, CMHeadBandTan, RMCWeaponFlamerColony ]
+

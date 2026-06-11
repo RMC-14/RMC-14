@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorMiner
   id: RMCSurvivorHybrisaTMCCMiner
   name: rmc-job-name-survivor-tmcc-miner

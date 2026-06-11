@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorDoctor
   id: RMCSurvivorHybrisaMedicalDoctor
   name: rmc-job-name-survivor-medical-doctor
@@ -9,13 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
+      preset: RMCSkillPresetSurvivorDoctor
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaMedicalDoctor
     - type: RMCSurvivor

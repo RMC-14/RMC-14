@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorEngineer
   id: CMSurvivorCargoTechnician
   name: cm-job-name-survivor-cargo-technician

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: RMCSurvivorPMCBase
   name: rmc-job-name-pmc-standard
@@ -15,7 +15,7 @@
   joinNotifyCrew: false
   greeting: rmc-job-greeting-solaris-pmc
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Survivor â€” PMC (Base)
+  spawnMenuRoleName: Survivor — PMC (Base)
   special:
   - !type:AddComponentSpecial
     components:

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaTSEPA
   startingGear: RMCGearSyntheticColonistHybrisaTSEPA
@@ -9,6 +9,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
       skills:
         RMCSkillCqc: 3

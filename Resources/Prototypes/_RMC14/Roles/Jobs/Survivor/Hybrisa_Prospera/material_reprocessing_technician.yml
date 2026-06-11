@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: RMCSurvivorHybrisaMaterialReprocessingTechnician
   name: rmc-job-name-survivor-material-reprocessing-technician
@@ -9,11 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaMaterialReprocessingTechnician
     - type: RMCSurvivor

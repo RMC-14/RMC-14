@@ -70,3 +70,4 @@
   components:
   - type: RMCJobSpawner
     job: CMSurvivorTrucker
+

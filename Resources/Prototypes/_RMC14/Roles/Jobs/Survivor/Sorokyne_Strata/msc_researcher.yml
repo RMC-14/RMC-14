@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: CMJobSurvivorMSCResearcher
   name: rmc-job-name-survivor-msc-researcher
@@ -14,14 +14,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
-        RMCSkillResearch: 1
+      preset: RMCSkillPresetSurvivorResearcher
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetMSCResearcher
     - type: RMCSurvivor

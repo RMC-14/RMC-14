@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivorCorporate
   id: CMSurvivorTrijentCorporate
   name: cm-job-name-survivor-trijent-corporate
@@ -11,6 +11,7 @@
   id: RMCGearSurvivorTrijentCorporate
   equipment:
     jumpsuit: CMJumpsuitLiaisonIvy
+    back: CMSatchelSecureFillSurvivor
 
 - type: entity
   parent: CMSpawnPointJobBase
