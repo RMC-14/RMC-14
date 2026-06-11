@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Neved4
-  changes:
-  - message: Roadmap header year now uses the current UTC year automatically.
-    type: Tweak
-  id: 2869
-  time: '2026-02-02T03:48:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9067
-- author: AlexisMoonlight
-  changes:
-  - message: Added time limit to NJPs.
-    type: Add
-  id: 2870
-  time: '2026-02-02T03:49:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9097
 - author: Dygon
   changes:
   - message: Projectiles now pass through most machines, except for vending machines.
@@ -4559,5 +4545,34 @@
   id: 3368
   time: '2026-06-11T22:34:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10120
+- author: Vixting
+  changes:
+  - message: Larvae queue now offers priority to the burst victim provided they are
+      within their body when the burst occurs.
+    type: Add
+  - message: Larvae queue priotises a player parasite if they infected the victim
+      being burst (has to be within the queue)
+    type: Add
+  - message: Parasites / lessers will now be offered the larvae (don't have to be
+      a ghost)
+    type: Add
+  - message: Disconnected players now have a 5 minute grace period before being removed
+      from the queue
+    type: Add
+  - message: New popup & sound effect on queue being popped for you, accept / decline.
+      Follow button to see where you are spawning.
+    type: Add
+  - message: You can now see your position in queue in the menu.
+    type: Add
+  id: 3369
+  time: '2026-06-11T22:35:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10077
+- author: CyberTropic
+  changes:
+  - message: Fish are scaled based on length.
+    type: Add
+  id: 3370
+  time: '2026-06-11T22:36:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10119
 Name: RMC14
 Order: -1
