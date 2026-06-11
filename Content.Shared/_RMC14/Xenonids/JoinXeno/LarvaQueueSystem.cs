@@ -146,8 +146,11 @@ public sealed class LarvaQueueSystem : EntitySystem
             return;
 
         _disconnectedAt.Remove(ev.Player.UserId);
-        //Ignore people moving around ghost bodies.
-        if (HasComp<GhostComponent>(ev.Entity))
+
+        var isQueueEligible = HasComp<GhostComponent>(ev.Entity)
+            || TryComp<MindTakeoverBehaviorComponent>(ev.Entity, out var takeoverBehavior) && !takeoverBehavior.EjectFromLarvaQueues;
+
+        if (isQueueEligible)
         {
             var hives = EntityQueryEnumerator<HiveComponent>();
             while (hives.MoveNext(out var hiveId, out _))
@@ -160,11 +163,6 @@ public sealed class LarvaQueueSystem : EntitySystem
             }
             return;
         }
-
-        //Don't eject from queue if entity is configured not to.
-        if (TryComp<MindTakeoverBehaviorComponent>(ev.Entity, out var takeoverBehavior)
-            && !takeoverBehavior.EjectFromLarvaQueues)
-            return;
 
         RemoveFromAllQueues(ev.Player.UserId);
     }
@@ -479,6 +477,7 @@ public sealed class LarvaQueueSystem : EntitySystem
     {
         session = null;
         NetUserId? found = null;
+        List<NetUserId>? reembodied = null;
 
         foreach (var netId in set)
         {
@@ -490,7 +489,18 @@ public sealed class LarvaQueueSystem : EntitySystem
             }
 
             if (!HasComp<GhostComponent>(s.AttachedEntity.Value))
+            {
+                if (TryComp<MindTakeoverBehaviorComponent>(s.AttachedEntity.Value, out var takeover) && !takeover.EjectFromLarvaQueues)
+                {
+                    session = s;
+                    found = netId;
+                    break;
+                }
+
+                reembodied ??= new List<NetUserId>();
+                reembodied.Add(netId);
                 continue;
+            }
 
             session = s;
             found = netId;
@@ -499,6 +509,10 @@ public sealed class LarvaQueueSystem : EntitySystem
 
         if (found.HasValue)
             set.Remove(found.Value);
+
+        if (reembodied != null)
+            foreach (var id in reembodied)
+                set.Remove(id);
 
         return session != null;
     }
@@ -529,6 +543,14 @@ public sealed class LarvaQueueSystem : EntitySystem
 
             if (!HasComp<GhostComponent>(s.AttachedEntity.Value))
             {
+                if (TryComp<MindTakeoverBehaviorComponent>(s.AttachedEntity.Value, out var takeover) && !takeover.EjectFromLarvaQueues)
+                {
+                    absolutePosition = offset + indexInList;
+                    list.Remove(node);
+                    session = s;
+                    return true;
+                }
+
                 list.Remove(node);
                 node = next;
                 continue;
