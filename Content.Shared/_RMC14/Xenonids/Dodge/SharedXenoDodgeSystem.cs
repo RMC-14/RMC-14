@@ -1,5 +1,5 @@
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.SwiftSteps;
 using Content.Shared.Actions;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
@@ -10,11 +10,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Dodge;
 
-public sealed class XenoDodgeSystem : EntitySystem
+public abstract class SharedXenoDodgeSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] protected readonly IGameTiming _timing = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
@@ -34,27 +33,28 @@ public sealed class XenoDodgeSystem : EntitySystem
         SubscribeLocalEvent<XenoActiveDodgeComponent, ComponentRemove>(OnActiveDodgeRemove);
         SubscribeLocalEvent<XenoActiveDodgeComponent, AttemptMobCollideEvent>(OnActiveDodgeAttemptMobCollide);
         SubscribeLocalEvent<XenoActiveDodgeComponent, AttemptMobTargetCollideEvent>(OnActiveDodgeAttemptMobTargetCollide);
+        SubscribeLocalEvent<XenoActiveDodgeComponent, RMCGetSwiftStepsThresholdEvent>(OnActiveDodgeGetDodgeThreshold);
     }
 
     private void OnXenoActionDodge(Entity<XenoDodgeComponent> xeno, ref XenoDodgeActionEvent args)
     {
-        if (args.Handled)
-            return;
-
-        if (!_plasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
-            return;
-
-        args.Handled = true;
-
-        if (_net.IsClient)
-            return;
-
-        EnsureComp<XenoActiveDodgeComponent>(xeno).ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
-        _speed.RefreshMovementSpeedModifiers(xeno);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-dodge-self"), xeno, xeno, PopupType.Medium);
-        foreach (var action in _rmcActions.GetActionsWithEvent<XenoDodgeActionEvent>(xeno))
+        if (TryComp<XenoActiveDodgeComponent>(xeno, out var dodge))
         {
-            _actions.SetToggled(action.AsNullable(), true);
+            var refundedCooldown = GetCooldown(xeno, dodge, xeno.Comp.RefundMultiplier);
+            StartCooldown((xeno, dodge), refundedCooldown, false);
+            RemCompDeferred<XenoActiveDodgeComponent>(xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-dodge-end-manual"), xeno, xeno, PopupType.MediumCaution);
+        }
+        else
+        {
+            var dodging = EnsureComp<XenoActiveDodgeComponent>(xeno);
+            dodging.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
+            dodging.CheckCrowd = xeno.Comp.CheckCrowd;
+            Dirty(xeno, dodging);
+            _speed.RefreshMovementSpeedModifiers(xeno);
+            //Half a second cooldown to prevent double clicks - longer than lurkers
+            StartCooldown((xeno, dodging), xeno.Comp.ToggleLockoutTime, true);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-dodge-self"), xeno, xeno, PopupType.Medium);
         }
     }
 
@@ -64,7 +64,12 @@ public sealed class XenoDodgeSystem : EntitySystem
         args.ModifySpeed(modifier, modifier);
     }
 
-    private void OnActiveDodgeRemove(Entity<XenoActiveDodgeComponent> xeno, ref ComponentRemove args)
+    private void OnActiveDodgeGetDodgeThreshold(Entity<XenoActiveDodgeComponent> xeno, ref RMCGetSwiftStepsThresholdEvent args)
+    {
+        args.Threshold += xeno.Comp.SwiftStepsMod;
+    }
+
+    protected virtual void OnActiveDodgeRemove(Entity<XenoActiveDodgeComponent> xeno, ref ComponentRemove args)
     {
         if (!TerminatingOrDeleted(xeno))
         {
@@ -93,16 +98,21 @@ public sealed class XenoDodgeSystem : EntitySystem
 
         var time = _timing.CurTime;
 
-        var dodgeQuery = EntityQueryEnumerator<XenoActiveDodgeComponent>();
+        var dodgeQuery = EntityQueryEnumerator<XenoActiveDodgeComponent, XenoDodgeComponent>();
 
-        while (dodgeQuery.MoveNext(out var uid, out var speed))
+        while (dodgeQuery.MoveNext(out var uid, out var speed, out var dodge))
         {
             if (speed.ExpiresAt < time)
             {
+                var cooldown = GetCooldown((uid, dodge), speed, dodge.RefundMultiplier);
+                StartCooldown((uid, speed), dodge.Duration, false);
                 RemCompDeferred<XenoActiveDodgeComponent>(uid);
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-dodge-end"), uid, uid, PopupType.MediumCaution);
                 continue;
             }
+
+            if (!speed.CheckCrowd)
+                continue;
 
             _crowd.Clear();
             _lookup.GetEntitiesInRange(Transform(uid).Coordinates, speed.CrowdRange, _crowd);
@@ -121,7 +131,27 @@ public sealed class XenoDodgeSystem : EntitySystem
                 continue;
 
             speed.InCrowd = crowd;
+            Dirty(uid, speed);
             _speed.RefreshMovementSpeedModifiers(uid);
+        }
+    }
+
+    private TimeSpan GetCooldown(Entity<XenoDodgeComponent> xeno, XenoActiveDodgeComponent active, float refundMultiplier)
+    {
+        var remainingRatio = 1 - (active.ExpiresAt - _timing.CurTime) / xeno.Comp.Duration; // Current Time - StartTime / Duration
+        //Should be double it's duration if it runs out naturally
+        var refundedCooldown = Math.Max((int)(xeno.Comp.Duration * remainingRatio * refundMultiplier).TotalSeconds, (int)xeno.Comp.MinimumCooldown.TotalSeconds);
+
+        return TimeSpan.FromSeconds(refundedCooldown);
+    }
+
+    private void StartCooldown(Entity<XenoActiveDodgeComponent> xeno, TimeSpan cooldownTime, bool toggledStatus)
+    {
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoDodgeActionEvent>(xeno))
+        {
+            var actionEnt = action.AsNullable();
+            _actions.SetCooldown(actionEnt, cooldownTime);
+            _actions.SetToggled(actionEnt, toggledStatus);
         }
     }
 }
