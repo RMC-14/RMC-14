@@ -1,53 +1,4 @@
 ﻿Entries:
-- author: Bobert-Brockson
-  changes:
-  - message: Added labels, dosage, and overdose information for all stock pills. Even
-      for the MB, KD, and FN for admins and mappers!
-    type: Add
-  id: 2836
-  time: '2026-02-02T02:14:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8822
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the honor guard M890 not starting with buckshot.
-    type: Fix
-  - message: Fixed the M890 tactical shotgun not starting with slugs.
-    type: Fix
-  - message: Fixed the M890 riot shotgun not starting with beanbags
-    type: Fix
-  id: 2837
-  time: '2026-02-02T02:17:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8895
-- author: Thereisabear
-  changes:
-  - message: Synthetics ability to grab certain Xenos, large Xenos will knock back
-      the Synth however.
-    type: Add
-  id: 2838
-  time: '2026-02-02T02:16:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8857
-- author: Dutch-VanDerLinde
-  changes:
-  - message: As a marine, you can now right click on your tacmap to bring up a crew
-      manifest of everyone on your ship.
-    type: Tweak
-  - message: The crew manifest now shows the colored background for squad marines.
-    type: Tweak
-  id: 2839
-  time: '2026-02-02T02:23:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8940
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Girders now have a tooltip telling you how to construct or deconstruct
-      it
-    type: Tweak
-  - message: Fixed reinforced girder having less health than intended
-    type: Tweak
-  - message: Fixed girder having more health than intended
-    type: Tweak
-  id: 2840
-  time: '2026-02-02T02:26:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9026
 - author: Dygon
   changes:
   - message: Walking ignores slows until sprint speed drops below the base walk speed.
@@ -4528,5 +4479,45 @@
   id: 3335
   time: '2026-06-08T02:35:02.002310+00:00'
   url: null
+- author: Dygon
+  changes:
+  - message: Fixed guns not always losing their dual wielding penalty after dropping
+      one of the guns.
+    type: Fix
+  id: 3336
+  time: '2026-06-09T10:16:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9847
+- author: Vermidia
+  changes:
+  - message: Fixed acid being extinguishable off of non-guns
+    type: Fix
+  id: 3337
+  time: '2026-06-09T16:48:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10082
+- author: Vixting
+  changes:
+  - message: Fixed weld time not scaling with skill correctly
+    type: Fix
+  id: 3338
+  time: '2026-06-09T21:53:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10071
+- author: Vixting
+  changes:
+  - message: Fixed the blocked cade acid popup displaying even when the interaction
+      wasn't blocked
+    type: Fix
+  id: 3339
+  time: '2026-06-09T21:53:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10090
+- author: Vixting
+  changes:
+  - message: Fixed guns sometimes firing twice
+    type: Fix
+  - message: Disabled weapons that have full auto capability from using continuous
+      fire (no more laser beam)
+    type: Remove
+  id: 3340
+  time: '2026-06-09T21:52:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10079
 Name: RMC14
 Order: -1
