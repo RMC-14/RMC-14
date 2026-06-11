@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: monomethylhydrazine
   changes:
-  - message: Added vendors and some equipment for RCM PVE roles.
-    type: Add
-  id: 2883
-  time: '2026-02-07T22:24:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8265
-- author: monomethylhydrazine
-  changes:
   - message: Added a TSE Captain role.
     type: Add
   - message: Fixed tool pouches for various TSE roles and the Lieutenant having the
@@ -4551,5 +4544,17 @@
   id: 3382
   time: '2026-06-11T23:36:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9632
+- author: Simon
+  changes:
+  - message: Add Member UI only shows xenonids not in your or others teams.
+    type: Fix
+  - message: Xenonids should now show up fully in the add member window.
+    type: Fix
+  - message: Fixed another way entities were possibly being missed by the UI update
+      and FT updating.
+    type: Fix
+  id: 3383
+  time: '2026-06-11T23:47:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10134
 Name: RMC14
 Order: -1
