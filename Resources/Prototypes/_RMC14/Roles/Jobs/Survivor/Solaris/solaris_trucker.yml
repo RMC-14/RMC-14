@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivorTrucker
   id: CMSurvivorSolarisTrucker
   name: rmc-job-name-survivor-solaris-trucker
@@ -8,11 +8,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor

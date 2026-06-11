@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: RMCSurvivorPMCBase
   id: RMCSurvivorSolarisPMCMedic
   name: rmc-job-name-pmc-medic
@@ -11,15 +11,10 @@
   icon: RMCJobIconPMCMedic
   greeting: rmc-job-greeting-solaris-pmc-medic
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Survivor — PMC Medic (Solaris Ridge special survivor)
+  spawnMenuRoleName: Survivor â€” PMC Medic (Solaris Ridge special survivor)
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCMedic
     - type: RMCSurvivor

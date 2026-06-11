@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivor
   id: CMJobSurvivorInfrastructureEngineer
   name: rmc-job-name-survivor-infrastructure-engineer
@@ -11,11 +11,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEndurance: 2

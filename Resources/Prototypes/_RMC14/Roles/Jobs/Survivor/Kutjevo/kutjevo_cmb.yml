@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivorSecurity
   id: RMCSurvivorKutjevoCMBDeputy
   name: rmc-job-name-survivor-cmb-deputy
@@ -10,11 +10,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: RMCSurvivor

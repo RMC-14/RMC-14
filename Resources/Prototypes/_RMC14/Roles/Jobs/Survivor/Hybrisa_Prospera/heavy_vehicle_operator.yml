@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivorEngineer
   id: RMCSurvivorHybrisaHeavyVehicleOperator
   name: rmc-job-name-survivor-heavy-vehicle-operator
@@ -8,11 +8,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor

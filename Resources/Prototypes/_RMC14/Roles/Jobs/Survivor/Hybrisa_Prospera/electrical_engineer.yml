@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivorEngineer
   id: RMCSurvivorHybrisaEngineer
   name: rmc-job-name-survivor-hybrisa-engineer
@@ -8,11 +8,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEndurance: 2

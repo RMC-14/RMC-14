@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivorScientist
   id: CMSurvivorFiorinaResearcher
   name: cm-job-name-survivor-fiorina-researcher
@@ -11,11 +11,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1

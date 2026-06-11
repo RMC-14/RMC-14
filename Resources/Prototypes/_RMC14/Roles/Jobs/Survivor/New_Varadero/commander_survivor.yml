@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivor
   id: RMCSurvivorCommanderNewVaradero
   name: rmc-job-name-survivor-commander-new-varadero
@@ -15,11 +15,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor, Marines]
     - type: Skills
       preset: RMCSkillPresetCommander
     - type: MarineOrders

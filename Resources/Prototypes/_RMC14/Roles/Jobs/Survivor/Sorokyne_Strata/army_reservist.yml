@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivor
   id: CMJobSurvivorArmyReservist
   name: rmc-job-name-survivor-army-reservist
@@ -17,11 +17,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorSPPPrivate
     - type: EquipSurvivorPreset

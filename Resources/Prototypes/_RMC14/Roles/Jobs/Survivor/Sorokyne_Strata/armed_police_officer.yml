@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivor
   id: CMJobSurvivorArmedPoliceOfficer
   name: rmc-job-name-survivor-armed-police-officer
@@ -21,11 +21,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: EquipSurvivorPreset

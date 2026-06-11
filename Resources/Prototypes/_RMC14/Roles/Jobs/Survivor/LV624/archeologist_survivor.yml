@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivorScientist
   id: CMSurvivorLV624Archeologist
   name: rmc-job-name-survivor-lv624-archeologist
@@ -8,11 +8,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1

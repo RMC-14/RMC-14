@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivorEngineer
   id: CMSurvivorCargoTechnician
   name: cm-job-name-survivor-cargo-technician
@@ -9,11 +9,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor

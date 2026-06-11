@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaXenoarch
   startingGear: RMCGearSyntheticColonistHybrisaXenoarch
@@ -6,11 +6,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillCqc: 3

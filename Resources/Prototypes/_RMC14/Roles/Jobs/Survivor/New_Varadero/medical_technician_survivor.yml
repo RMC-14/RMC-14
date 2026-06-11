@@ -1,4 +1,4 @@
-- type: job
+﻿- type: job
   parent: CMSurvivorDoctor
   id: CMSurvivorMedicalTechnician
   name: cm-job-name-survivor-medical-technician
@@ -9,11 +9,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
