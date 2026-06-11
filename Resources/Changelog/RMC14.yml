@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: PursuitinAshes
-  changes:
-  - message: '[SOP] Non-Modifiable Deployment now mandates some staff remain shipside,
-      which can be overwritten if required by the commander.'
-    type: Tweak
-  id: 2850
-  time: '2026-02-02T03:09:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8725
 - author: efzapa
   changes:
   - message: POWs may now lose their POW status if they attempt escape several times
@@ -4524,5 +4516,12 @@
   id: 3349
   time: '2026-06-11T22:06:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10083
+- author: ExponentialWizard
+  changes:
+  - message: Added charge indicator lights to defibs
+    type: Add
+  id: 3350
+  time: '2026-06-11T22:08:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8287
 Name: RMC14
 Order: -1
