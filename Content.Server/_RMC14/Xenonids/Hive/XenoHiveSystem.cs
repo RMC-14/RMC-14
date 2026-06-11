@@ -59,6 +59,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     {
         base.Initialize();
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+        SubscribeLocalEvent<JoinBurrowedLarvaAttemptEvent>(OnJoinBurrowedLarvaAttempt);
 
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentStartup>(OnBurrowedSurgeStartup);
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentShutdown>(OnBurrowedSurgeShutdown);
