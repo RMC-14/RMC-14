@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed LZ, Almayer and flame sentries projectiles not homing in on their
-      target.
-    type: Fix
-  id: 2862
-  time: '2026-02-02T03:30:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8983
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Lazarus Corporate Dome Insert liaison not having the exec spec
-      icon
-    type: Fix
-  id: 2863
-  time: '2026-02-02T03:32:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8998
-- author: BreakpointDebug1234
-  changes:
-  - message: Update guidebook role sprites
-    type: Tweak
-  - message: Minor updates to the Combat Technician and Maintenance technician guidebook
-      entries.
-    type: Tweak
-  - message: Minor visual updates to Requisitions guidebook.
-    type: Tweak
-  id: 2864
-  time: '2026-02-02T03:33:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8921
 - author: blackknight954
   changes:
   - message: XX-121 and XX121 automatically turn into the word Xenonids when spoken
@@ -4535,5 +4507,27 @@
   id: 3361
   time: '2026-06-11T22:28:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10034
+- author: Dygon
+  changes:
+  - message: Fixed the Sapper Boiler's view range increase from "Long Range Sight"
+      being too high, reduced it by 11.1%.
+    type: Fix
+  id: 3362
+  time: '2026-06-11T22:30:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10110
+- author: Dygon
+  changes:
+  - message: Fixed the reflective wall not having a build animation.
+    type: Fix
+  id: 3363
+  time: '2026-06-11T22:30:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10113
+- author: BarteG44
+  changes:
+  - message: Most glasses work as helmet and hat garbs now
+    type: Tweak
+  id: 3364
+  time: '2026-06-11T22:31:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9983
 Name: RMC14
 Order: -1
