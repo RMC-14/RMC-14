@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.StatusEffect;
-using Content.Shared.Actions;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
@@ -16,7 +15,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Overlays;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tools.Components;
@@ -35,7 +33,6 @@ public abstract class SharedSynthSystem : EntitySystem
     private static readonly TimeSpan UnableUsePopupCooldown = TimeSpan.FromSeconds(1);
 
     [Dependency] private readonly RMCRepairableSystem _repairable = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
@@ -53,8 +50,6 @@ public abstract class SharedSynthSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SynthComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedBloodstreamSystem)]);
-        SubscribeLocalEvent<SynthComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<SynthComponent, RMCToggleSynthHudActionEvent>(OnToggleSynthHud);
         SubscribeLocalEvent<SynthComponent, AttackAttemptEvent>(OnMeleeAttempted);
         SubscribeLocalEvent<SynthComponent, ShotAttemptedEvent>(OnShotAttempted);
         SubscribeLocalEvent<SynthComponent, TryingToSleepEvent>(OnSleepAttempt);
@@ -69,24 +64,6 @@ public abstract class SharedSynthSystem : EntitySystem
         MakeSynth(ent);
     }
 
-    private void OnShutdown(Entity<SynthComponent> ent, ref ComponentShutdown args)
-    {
-        _actions.RemoveAction(ent.Owner, ent.Comp.ToggleHudActionEntity);
-    }
-
-    private void OnToggleSynthHud(Entity<SynthComponent> ent, ref RMCToggleSynthHudActionEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
-        if (args.Performer != ent.Owner)
-            return;
-
-        SetSynthHud(ent, !ent.Comp.HudActive);
-    }
-
     protected virtual void MakeSynth(Entity<SynthComponent> ent)
     {
         if (_prototypes.TryIndex(ent.Comp.AddComponents, out var addComponents))
@@ -94,10 +71,6 @@ public abstract class SharedSynthSystem : EntitySystem
 
         if (_prototypes.TryIndex(ent.Comp.RemoveComponents, out var removeComponents))
             EntityManager.RemoveComponents(ent.Owner, removeComponents.Components);
-
-        SetSynthHud(ent, ent.Comp.HudActive);
-        _actions.AddAction(ent.Owner, ref ent.Comp.ToggleHudActionEntity, ent.Comp.ToggleHudAction);
-        _actions.SetToggled(ent.Comp.ToggleHudActionEntity, ent.Comp.HudActive);
 
         if (ent.Comp.StunResistance != null)
             _rmcStatusEffects.GiveStunResistance(ent.Owner, ent.Comp.StunResistance.Value);
@@ -119,26 +92,6 @@ public abstract class SharedSynthSystem : EntitySystem
 
         RemCompDeferred<RMCRevivableComponent>(ent.Owner);
         RemCompDeferred<SlowOnDamageComponent>(ent.Owner);
-    }
-
-    private void SetSynthHud(Entity<SynthComponent> ent, bool active)
-    {
-        ent.Comp.HudActive = active;
-        Dirty(ent);
-
-        if (!_prototypes.TryIndex(ent.Comp.HudComponents, out var hudComponents))
-            return;
-
-        if (active)
-        {
-            EntityManager.AddComponents(ent.Owner, hudComponents.Components);
-        }
-        else
-        {
-            EntityManager.RemoveComponents(ent.Owner, hudComponents.Components);
-        }
-
-        _actions.SetToggled(ent.Comp.ToggleHudActionEntity, active);
     }
 
     private void OnMeleeAttempted(Entity<SynthComponent> ent, ref AttackAttemptEvent args)

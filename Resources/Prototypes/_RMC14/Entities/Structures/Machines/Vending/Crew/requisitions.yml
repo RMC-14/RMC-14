@@ -8,6 +8,7 @@
     access:
     - [ "CMAccessRequisitions" ]
   - type: CMAutomatedVendor
+    canManualRestock: true
     sound:
       path: /Audio/_RMC14/Machines/vending_drop.ogg
       params:
@@ -377,6 +378,12 @@
       state: "base"
   - type: RMCRequisitionsVendor
   - type: CMAutomatedVendor
+    ignoreBulkRestockById:
+    - RMCBoxShotgunBuckshot
+    - RMCBoxShotgunFlechette
+    - RMCBoxShotgunSlugs
+    - RMCBoxShotgunBreaching
+    - RMCBox458SOCOM
     baseSprite:
       sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
       state: base
@@ -743,6 +750,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
     sections:
     - name: Uniform
       entries:
