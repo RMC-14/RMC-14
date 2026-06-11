@@ -1,22 +1,17 @@
-using System.Collections;
-using System.Linq;
-using Content.Shared._RMC14.Admin.AdminGhost;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Dropship;
-using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Follower;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Players;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -25,6 +20,7 @@ namespace Content.Shared._RMC14.Xenonids.JoinXeno;
 public sealed class LarvaQueueSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly FollowerSystem _follower = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -35,10 +31,28 @@ public sealed class LarvaQueueSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     [ViewVariables]
-    public static readonly Dictionary<EntityUid, List<NetUserId>> Queue = new();
+    public static readonly Dictionary<EntityUid, HashSet<NetUserId>> InfectorSet = new();
+
+    [ViewVariables]
+    public static readonly Dictionary<EntityUid, LinkedList<NetUserId>> Queue = new();
 
     [ViewVariables]
     public static readonly Dictionary<EntityUid, Dictionary<NetUserId, double>> PreQueue = new();
+
+    private readonly Dictionary<NetUserId, PendingOffer> _pendingOffers = new();
+    private readonly HashSet<EntityUid> _reservedBurstLarva = new();
+    private readonly Dictionary<EntityUid, int> _pendingBurrowedCount = new();
+    private readonly Dictionary<NetUserId, TimeSpan> _disconnectedAt = new();
+
+    private sealed class PendingOffer
+    {
+        public required EntityUid? TargetLarva;
+        public required Entity<HiveComponent> Hive;
+        public required double ExpiresAt;
+    }
+
+    private int _offerTimeoutSeconds;
+    private TimeSpan _disconnectGracePeriod;
 
     public override void Initialize()
     {
@@ -47,14 +61,83 @@ public sealed class LarvaQueueSystem : EntitySystem
         SubscribeLocalEvent<BurrowedLarvaAddedEvent>(OnBurrowedLarvaAdded);
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<CanBeLarvaQueuedComponent, MindRemovedMessage>(OnMindRemoved);
+        SubscribeLocalEvent<CanBeLarvaQueuedComponent, MindAddedMessage>(OnMindAdded);
+        SubscribeLocalEvent<XenoBurstPriorityEvent>(OnXenoBurstPriority);
+
+        if (!_net.IsClient)
+        {
+            SubscribeNetworkEvent<LarvaQueueAcceptOfferEvent>(OnAcceptOffer);
+            SubscribeNetworkEvent<LarvaQueueDeclineOfferEvent>(OnDeclineOffer);
+            SubscribeNetworkEvent<LarvaQueueFollowTargetEvent>(OnFollowTarget);
+        }
+
+        Subs.CVar(_config, RMCCVars.RMCLarvaQueueOfferTimeoutSeconds, v => _offerTimeoutSeconds = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDisconnectedXenoGhostRoleTimeSeconds, v => _disconnectGracePeriod = TimeSpan.FromSeconds(v), true);
     }
 
-    private void OnMindRemoved(Entity<CanBeLarvaQueuedComponent> ent, ref MindRemovedMessage args)
+    private void OnXenoBurstPriority(ref XenoBurstPriorityEvent ev)
     {
-        if (!HasComp<XenoComponent>(ent))
+        if (_net.IsClient || ev.Hive == null)
+            return;
+
+        if (GetEntity(ev.Hive.Value) is not { Valid: true } hiveEntity
+            || !TryComp(hiveEntity, out HiveComponent? hiveComp))
+            return;
+
+        var hive = new Entity<HiveComponent>(hiveEntity, hiveComp);
+
+        if (ev.BurstVictimUserId.HasValue)
+        {
+            var victimId = ev.BurstVictimUserId.Value;
+            var larvaEntity = ev.SpawnedLarva.HasValue ? GetEntity(ev.SpawnedLarva.Value) : EntityUid.Invalid;
+
+            if (larvaEntity.IsValid()
+                && TryComp<BursterComponent>(larvaEntity, out var burster)
+                && _player.TryGetSessionByEntity(burster.BurstFrom, out var victimSession)
+                && victimSession.UserId == victimId)
+            {
+                if (InfectorSet.TryGetValue(hiveEntity, out var iq)) iq.Remove(victimId);
+                if (Queue.TryGetValue(hiveEntity, out var nq)) nq.Remove(victimId);
+                if (PreQueue.TryGetValue(hiveEntity, out var pq)) pq.Remove(victimId);
+                _reservedBurstLarva.Add(larvaEntity);
+                SendOffer(victimSession, larvaEntity, hive, "Burst Victim", 1);
+            }
+        }
+
+        if (ev.InfectorUserId.HasValue)
+        {
+            var infectorId = ev.InfectorUserId.Value;
+            var inInfector = InfectorSet.TryGetValue(hiveEntity, out var iq2) && iq2.Contains(infectorId);
+
+            if (!inInfector)
+            {
+                var removedFromQueue = Queue.TryGetValue(hiveEntity, out var nq) && nq.Remove(infectorId);
+                var removedFromPreQueue = PreQueue.TryGetValue(hiveEntity, out var pq) && pq.Remove(infectorId);
+
+                if (removedFromQueue || removedFromPreQueue)
+                    InfectorSet.GetOrNew(hive).Add(infectorId);
+            }
+        }
+
+        TryOfferToQueue(hiveEntity);
+    }
+
+    private void OnMindRemoved(Entity<CanBeLarvaQueuedComponent> ent, ref MindRemovedMessage _)
+    {
+        if (_net.IsClient || !HasComp<XenoComponent>(ent))
             return;
 
         EnsureComp<LarvaQueuedComponent>(ent);
+        if (_hive.GetHive(ent.Owner) is { } hive)
+            TryOfferToQueue(hive.Owner);
+    }
+
+    private void OnMindAdded(Entity<CanBeLarvaQueuedComponent> ent, ref MindAddedMessage _)
+    {
+        if (_net.IsClient)
+            return;
+
+        RemCompDeferred<LarvaQueuedComponent>(ent);
     }
 
     private void OnPlayerAttached(PlayerAttachedEvent ev)
@@ -62,17 +145,37 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        //Ignore people moving around ghost bodies and parasites.
-        if (HasComp<GhostComponent>(ev.Entity) || HasComp<XenoParasiteComponent>(ev.Entity))
+        _disconnectedAt.Remove(ev.Player.UserId);
+
+        var isQueueEligible = HasComp<GhostComponent>(ev.Entity)
+            || TryComp<MindTakeoverBehaviorComponent>(ev.Entity, out var takeoverBehavior) && !takeoverBehavior.EjectFromLarvaQueues;
+
+        if (isQueueEligible)
+        {
+            var hives = EntityQueryEnumerator<HiveComponent>();
+            while (hives.MoveNext(out var hiveId, out _))
+            {
+                if (InfectorSet.TryGetValue(hiveId, out var iqSet) && iqSet.Contains(ev.Player.UserId)
+                    || Queue.TryGetValue(hiveId, out var nq) && nq.Contains(ev.Player.UserId))
+                {
+                    TryOfferToQueue(hiveId);
+                }
+            }
             return;
+        }
 
         RemoveFromAllQueues(ev.Player.UserId);
     }
 
     private void OnCleanup(RoundRestartCleanupEvent ev)
     {
+        InfectorSet.Clear();
         Queue.Clear();
         PreQueue.Clear();
+        _pendingOffers.Clear();
+        _reservedBurstLarva.Clear();
+        _pendingBurrowedCount.Clear();
+        _disconnectedAt.Clear();
     }
 
     private void OnJoinLarvaQueue(Entity<JoinXenoComponent> ent, ref JoinLarvaQueueEvent args)
@@ -96,17 +199,21 @@ public sealed class LarvaQueueSystem : EntitySystem
         if (actorEntity == null)
             return;
 
-        if (TryRemoveFromQueue(actor.PlayerSession.UserId, hive))
+        if (TryRemoveFromQueue(session, hive))
         {
-            _popup.PopupEntity($"You have been removed from the queue", actorEntity.Value, actorEntity.Value);
+            _popup.PopupEntity("You have been removed from the queue.", actorEntity.Value, actorEntity.Value);
             return;
         }
 
         if ((_gameTiming.CurTime - ghost.TimeOfDeath).TotalSeconds >= larvaWaitTime)
         {
-            Queue.GetOrNew(hive).Add(session);
-            _popup.PopupEntity($"You have been added to the queue at position {Queue.GetOrNew(hive).Count}",
+            Queue.GetOrNew(hive).AddLast(session);
+            var position = GetQueuePosition(session, hive);
+            _popup.PopupEntity(
+                $"You have been added to the queue at position {position}.",
                 actorEntity.Value, actorEntity.Value);
+
+            TryOfferToQueue(hiveUid.Value);
         }
         else
         {
@@ -120,54 +227,105 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void OnBurrowedLarvaAdded(BurrowedLarvaAddedEvent ev)
     {
-        SpawnLarva(ev.Hive);
+        TryOfferToQueue(ev.Hive);
     }
 
-    private void SpawnLarva(NetEntity hiveNet)
+    private void OnAcceptOffer(LarvaQueueAcceptOfferEvent _, EntitySessionEventArgs args)
+    {
+        if (!_pendingOffers.TryGetValue(args.SenderSession.UserId, out var offer))
+            return;
+
+        _pendingOffers.Remove(args.SenderSession.UserId);
+
+        if (offer.TargetLarva is { } larvaEnt)
+        {
+            _reservedBurstLarva.Remove(larvaEnt);
+
+            if (!EntityManager.EntityExists(larvaEnt) || _mobState.IsDead(larvaEnt))
+            {
+                SendOfferExpired(args.SenderSession);
+                return;
+            }
+
+            var mindId = _mind.TryGetMind(args.SenderSession.UserId, out var existingMindId, out var existingMindComp)
+                ? existingMindId!.Value
+                : (EntityUid) _mind.CreateMind(args.SenderSession.UserId, Name(larvaEnt));
+            _mind.TransferTo(mindId, larvaEnt, ghostCheckOverride: true);
+            RemCompDeferred<LarvaQueuedComponent>(larvaEnt);
+        }
+        else
+        {
+            DecrementPendingBurrowed(offer.Hive);
+            _hive.JoinBurrowedLarva(offer.Hive, args.SenderSession);
+        }
+    }
+
+    private void OnDeclineOffer(LarvaQueueDeclineOfferEvent _, EntitySessionEventArgs args)
+    {
+        ExpireOffer(args.SenderSession.UserId, notifyPlayer: false);
+    }
+
+    private void OnFollowTarget(LarvaQueueFollowTargetEvent _, EntitySessionEventArgs args)
+    {
+        if (!_pendingOffers.TryGetValue(args.SenderSession.UserId, out var offer)
+            || offer.TargetLarva == null)
+            return;
+
+        var ghost = args.SenderSession.AttachedEntity;
+        if (ghost == null || !HasComp<GhostComponent>(ghost.Value))
+            return;
+
+        if (EntityManager.EntityExists(offer.TargetLarva.Value))
+            _follower.StartFollowingEntity(ghost.Value, offer.TargetLarva.Value);
+    }
+
+    private void TryOfferToQueue(NetEntity hiveNet)
     {
         if (GetEntity(hiveNet) is not { Valid: true } hiveEntity)
             return;
 
-        SpawnLarva(hiveEntity);
+        TryOfferToQueue(hiveEntity);
     }
 
-    private void SpawnLarva(Entity<HiveComponent?> hive)
+    private void TryOfferToQueue(EntityUid hiveId)
     {
-        if (!Resolve(hive, ref hive.Comp))
+        if (!TryComp(hiveId, out HiveComponent? hiveComp))
             return;
 
-        var list = Queue.GetOrNew(hive);
-        var originalLength = list.Count;
-        if (list.Count <= 0)
+        if (_net.IsClient)
             return;
 
-        BurstLarvaSpawn((hive, hive.Comp));
-        BurrowedLarvaSpawn((hive, hive.Comp));
+        var hive = new Entity<HiveComponent>(hiveId, hiveComp);
+        var originalNormalCount = Queue.TryGetValue(hiveId, out var nqBefore) ? nqBefore.Count : 0;
 
-        //Popup to people in queue if the queue length changed.
-        if (list.Count >= originalLength)
+        TryOfferQueuedEntities(hive);
+        TryOfferBurrowedLarva(hive);
+
+        var newCount = Queue.TryGetValue(hiveId, out var nqAfter) ? nqAfter.Count : 0;
+        if (newCount >= originalNormalCount || nqAfter == null)
             return;
 
-        for (var i = 0; i < list.Count; i++)
+        var position = 1;
+        foreach (var userId in nqAfter)
         {
-            var netId = list[i];
-            if (_player.TryGetSessionById(netId, out var session) && session.AttachedEntity != null)
+            if (_player.TryGetSessionById(userId, out var session) && session.AttachedEntity != null)
             {
-                _popup.PopupEntity($"You are now in the {list.Count - i} position for larva queue.",
+                _popup.PopupEntity(
+                    $"You are now in position {position} of the larva queue for ({Name(hiveId)}).",
                     session.AttachedEntity.Value,
                     session.AttachedEntity.Value);
             }
+            ++position;
         }
     }
 
-    private void BurstLarvaSpawn(Entity<HiveComponent> hive)
+    private void TryOfferQueuedEntities(Entity<HiveComponent> hive)
     {
-        var list = Queue.GetOrNew(hive);
-        if (list.Count <= 0)
+        if (!HasAnyQueued(hive.Owner))
             return;
 
         var larva = EntityQueryEnumerator<LarvaQueuedComponent>();
-        while (larva.MoveNext(out var ent, out var comp))
+        while (larva.MoveNext(out var ent, out _))
         {
             if (_mobState.IsDead(ent))
             {
@@ -176,43 +334,235 @@ public sealed class LarvaQueueSystem : EntitySystem
             }
 
             if (!_hive.IsMember(ent, hive))
-                return;
+                continue;
 
-            for (var i = list.Count - 1; i >= 0; i--)
-            {
-                var netId = list[i];
-                list.RemoveAt(i);
+            if (_reservedBurstLarva.Contains(ent))
+                continue;
 
-                if (!_player.TryGetSessionById(netId, out var session) || session.AttachedEntity == null)
-                    continue;
-
-                var newMind = _mind.CreateMind(session.UserId, Name(ent));
-                _mind.TransferTo(newMind, ent, ghostCheckOverride: true);
-                RemCompDeferred<LarvaQueuedComponent>(ent);
+            if (!HasAnyQueued(hive.Owner))
                 break;
+
+            if (TryPopNextSessionForOffer(hive, out var session, out var tier, out var pos))
+            {
+                _reservedBurstLarva.Add(ent);
+                SendOffer(session, ent, hive, tier, pos);
+            }
+            else
+            {
+                break; // no more players in queue
             }
         }
     }
 
-    private void BurrowedLarvaSpawn(Entity<HiveComponent> hive)
+    private void TryOfferBurrowedLarva(Entity<HiveComponent> hive)
     {
-        var list = Queue.GetOrNew(hive);
-        if (list.Count <= 0)
+        if (!HasAnyQueued(hive.Owner))
             return;
 
-        var amount = hive.Comp.BurrowedLarva;
-        if (amount <= 0)
-            return;
+        var available = hive.Comp.BurrowedLarva
+            - _pendingBurrowedCount.GetValueOrDefault(hive, 0);
 
-        // TODO RMC14 keep spot of disconnected players
-        for (var i = amount; i >= 0; i--)
+        for (var i = 0; i < available; i++)
         {
-            var netId = list[i];
-            list.RemoveAt(i);
+            if (!HasAnyQueued(hive.Owner))
+                break;
 
-            if (_player.TryGetSessionById(netId, out var session) && session.AttachedEntity != null)
-                _hive.JoinBurrowedLarva(hive, session);
+            if (TryPopNextSessionForOffer(hive, out var session, out var tier, out var pos))
+            {
+                _pendingBurrowedCount[hive] = _pendingBurrowedCount.GetValueOrDefault(hive, 0) + 1;
+                SendOffer(session, null, hive, tier, pos);
+            }
+            else
+            {
+                break; // no more players in queue
+            }
         }
+    }
+
+    private void SendOffer(ICommonSession session, EntityUid? targetLarva, Entity<HiveComponent> hive, string tier, int position)
+    {
+        var expiresAt = _gameTiming.CurTime.TotalSeconds + _offerTimeoutSeconds;
+        _pendingOffers[session.UserId] = new PendingOffer
+        {
+            TargetLarva = targetLarva,
+            Hive = hive,
+            ExpiresAt = expiresAt,
+        };
+
+        RaiseNetworkEvent(new LarvaQueueOfferEvent
+        {
+            TargetEntity = targetLarva.HasValue ? GetNetEntity(targetLarva.Value) : null,
+            ExpiresAt = expiresAt,
+            HiveName = Name(hive),
+            OfferType = tier,
+            QueuePosition = position,
+        }, session);
+    }
+
+    private void SendOfferExpired(ICommonSession session)
+    {
+        RaiseNetworkEvent(new LarvaQueueOfferExpiredEvent(), session);
+    }
+
+    private void ExpireOffer(NetUserId userId, bool notifyPlayer)
+    {
+        if (!_pendingOffers.TryGetValue(userId, out var offer))
+            return;
+
+        _pendingOffers.Remove(userId);
+
+        if (offer.TargetLarva is { } larvaEnt)
+            _reservedBurstLarva.Remove(larvaEnt);
+        else
+            DecrementPendingBurrowed(offer.Hive);
+
+        if (notifyPlayer && _player.TryGetSessionById(userId, out var session))
+            SendOfferExpired(session);
+
+        TryOfferToQueue(offer.Hive.Owner);
+    }
+
+    private void DecrementPendingBurrowed(Entity<HiveComponent> hive)
+    {
+        var current = _pendingBurrowedCount.GetValueOrDefault(hive, 0);
+        if (current > 1)
+            _pendingBurrowedCount[hive] = current - 1;
+        else
+            _pendingBurrowedCount.Remove(hive);
+    }
+
+    private bool HasAnyQueued(EntityUid hive)
+    {
+        if (InfectorSet.TryGetValue(hive, out var iqSet) && iqSet.Count > 0)
+            return true;
+        if (Queue.TryGetValue(hive, out var nq) && nq.Count > 0)
+            return true;
+        return false;
+    }
+
+    private bool TryPopNextSessionForOffer(
+        Entity<HiveComponent> hive,
+        [NotNullWhen(true)] out ICommonSession? nextSession,
+        out string tier,
+        out int position)
+    {
+        nextSession = null;
+        tier = "Normal";
+        position = 0;
+
+        InfectorSet.TryGetValue(hive, out var iqSet);
+        Queue.TryGetValue(hive, out var nq);
+
+        if (iqSet != null && TryPopFromSet(iqSet, out nextSession))
+        {
+            tier = "Infector";
+            position = 1;
+            return true;
+        }
+
+        var iqCount = iqSet?.Count ?? 0;
+
+        if (nq != null && TryPopFromList(nq, iqCount, out nextSession, out position))
+        {
+            tier = "Normal";
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TryPopFromSet(
+        HashSet<NetUserId> set,
+        [NotNullWhen(true)] out ICommonSession? session)
+    {
+        session = null;
+        NetUserId? found = null;
+        List<NetUserId>? reembodied = null;
+
+        foreach (var netId in set)
+        {
+            if (!_player.TryGetSessionById(netId, out var s) || s.AttachedEntity == null)
+            {
+                if (!_disconnectedAt.ContainsKey(netId))
+                    _disconnectedAt[netId] = _gameTiming.CurTime + _disconnectGracePeriod;
+                continue;
+            }
+
+            if (!HasComp<GhostComponent>(s.AttachedEntity.Value))
+            {
+                if (TryComp<MindTakeoverBehaviorComponent>(s.AttachedEntity.Value, out var takeover) && !takeover.EjectFromLarvaQueues)
+                {
+                    session = s;
+                    found = netId;
+                    break;
+                }
+
+                reembodied ??= new List<NetUserId>();
+                reembodied.Add(netId);
+                continue;
+            }
+
+            session = s;
+            found = netId;
+            break;
+        }
+
+        if (found.HasValue)
+            set.Remove(found.Value);
+
+        if (reembodied != null)
+            foreach (var id in reembodied)
+                set.Remove(id);
+
+        return session != null;
+    }
+
+    private bool TryPopFromList(
+        LinkedList<NetUserId> list,
+        int offset,
+        [NotNullWhen(true)] out ICommonSession? session,
+        out int absolutePosition)
+    {
+        session = null;
+        absolutePosition = 0;
+        var indexInList = 0;
+
+        for (var node = list.First; node != null;)
+        {
+            var next = node.Next;
+            var netId = node.Value;
+            indexInList++;
+
+            if (!_player.TryGetSessionById(netId, out var s) || s.AttachedEntity == null)
+            {
+                if (!_disconnectedAt.ContainsKey(netId))
+                    _disconnectedAt[netId] = _gameTiming.CurTime + _disconnectGracePeriod;
+                node = next;
+                continue;
+            }
+
+            if (!HasComp<GhostComponent>(s.AttachedEntity.Value))
+            {
+                if (TryComp<MindTakeoverBehaviorComponent>(s.AttachedEntity.Value, out var takeover) && !takeover.EjectFromLarvaQueues)
+                {
+                    absolutePosition = offset + indexInList;
+                    list.Remove(node);
+                    session = s;
+                    return true;
+                }
+
+                list.Remove(node);
+                node = next;
+                continue;
+            }
+
+            absolutePosition = offset + indexInList;
+            list.Remove(node);
+            session = s;
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -223,26 +573,13 @@ public sealed class LarvaQueueSystem : EntitySystem
     /// <returns></returns>
     private bool TryRemoveFromQueue(NetUserId netUserId, Entity<HiveComponent> hive)
     {
-        if (PreQueue.GetOrNew(hive).Remove(netUserId))
+        if (PreQueue.TryGetValue(hive, out var pq) && pq.Remove(netUserId))
             return true;
-
-        if (Queue.GetOrNew(hive).Remove(netUserId))
+        if (InfectorSet.TryGetValue(hive, out var iqSet) && iqSet.Remove(netUserId))
             return true;
-
+        if (Queue.TryGetValue(hive, out var nq) && nq.Remove(netUserId))
+            return true;
         return false;
-    }
-
-    /// <summary>
-    /// This will remove them from all queues.
-    /// </summary>
-    /// <param name="actor">The actor component of the entity</param>
-    private void RemoveFromAllQueues(ActorComponent actor)
-    {
-        var hives = EntityQueryEnumerator<HiveComponent>();
-        while (hives.MoveNext(out var hiveId, out var hive))
-        {
-            TryRemoveFromQueue(actor.PlayerSession.UserId, (hiveId, hive));
-        }
     }
 
     private void RemoveFromAllQueues(NetUserId netUserId)
@@ -254,6 +591,39 @@ public sealed class LarvaQueueSystem : EntitySystem
         }
     }
 
+    public bool IsAlreadyQueued(NetUserId userId, EntityUid hiveId)
+    {
+        if (PreQueue.TryGetValue(hiveId, out var pq) && pq.ContainsKey(userId))
+            return true;
+        if (InfectorSet.TryGetValue(hiveId, out var iqSet) && iqSet.Contains(userId))
+            return true;
+        if (Queue.TryGetValue(hiveId, out var nq) && nq.Contains(userId))
+            return true;
+        return false;
+    }
+
+    public int GetQueuePosition(NetUserId userId, EntityUid hiveId)
+    {
+        InfectorSet.TryGetValue(hiveId, out var iqSet);
+
+        if (iqSet != null && iqSet.Contains(userId))
+            return 1;
+
+        var iqCount = iqSet?.Count ?? 0;
+
+        if (Queue.TryGetValue(hiveId, out var nq))
+        {
+            var pos = iqCount + 1;
+            foreach (var id in nq)
+            {
+                if (id == userId) return pos;
+                pos++;
+            }
+        }
+
+        return -1;
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -261,26 +631,66 @@ public sealed class LarvaQueueSystem : EntitySystem
 
         var time = _gameTiming.CurTime;
 
-        // Checking each pre queue to see if anyone has finished their timer.
+        var expiredDisconnected = new List<NetUserId>();
+        foreach (var (userId, expiry) in _disconnectedAt)
+        {
+            if (time >= expiry)
+                expiredDisconnected.Add(userId);
+        }
+
+        foreach (var userId in expiredDisconnected)
+        {
+            _disconnectedAt.Remove(userId);
+            RemoveFromAllQueues(userId);
+        }
+
         foreach (var (hive, hivePreQueue) in PreQueue)
         {
+            if (!TryComp(hive, out HiveComponent? hiveComp))
+                continue;
+
+            var toPromote = new List<NetUserId>();
             foreach (var (userId, userTime) in hivePreQueue)
             {
-                if (userTime >= time.TotalSeconds)
-                    continue;
-                Queue.GetOrNew(hive).Add(userId);
+                if (userTime <= time.TotalSeconds)
+                    toPromote.Add(userId);
+            }
+
+            foreach (var userId in toPromote)
+            {
+                hivePreQueue.Remove(userId);
+                Queue.GetOrNew(hive).AddLast(userId);
 
                 if (_player.TryGetSessionById(userId, out var session) && session.AttachedEntity != null)
                 {
+                    var pos = GetQueuePosition(userId, hive);
                     _popup.PopupEntity(
-                        $"You have been added to the queue at position {Queue.GetOrNew(hive).Count}",
+                        $"You have been added to the queue at position {pos}.",
                         session.AttachedEntity.Value, session.AttachedEntity.Value);
                 }
-
-                hivePreQueue.Remove(userId);
             }
 
-            SpawnLarva(hive);
+            if (toPromote.Count > 0)
+                TryOfferToQueue(hive);
         }
+
+        var expiredOffers = new List<NetUserId>();
+        foreach (var (userId, offer) in _pendingOffers)
+        {
+            if (time.TotalSeconds >= offer.ExpiresAt)
+            {
+                expiredOffers.Add(userId);
+                continue;
+            }
+
+            if (offer.TargetLarva is { } larvaEnt
+                && (!EntityManager.EntityExists(larvaEnt) || _mobState.IsDead(larvaEnt)))
+            {
+                expiredOffers.Add(userId);
+            }
+        }
+
+        foreach (var userId in expiredOffers)
+            ExpireOffer(userId, notifyPlayer: true);
     }
 }

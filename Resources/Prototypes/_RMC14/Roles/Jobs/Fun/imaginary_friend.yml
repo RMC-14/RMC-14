@@ -17,6 +17,7 @@
   - type: Appearance
   - type: Speech
     speechSounds: Alto
+  - type: SeeNewPlayers
 
 - type: entity
   parent: RMCImaginaryFriend
