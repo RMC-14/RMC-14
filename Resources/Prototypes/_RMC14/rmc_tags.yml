@@ -116,6 +116,9 @@
   id: RMCMacheteScabbard
 
 - type: Tag
+  id: RMCMacheteHolder
+
+- type: Tag
   id: RMCScalpel
 
 - type: Tag
