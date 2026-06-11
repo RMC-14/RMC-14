@@ -90,8 +90,7 @@ public sealed partial class XenoRespawnSystem : EntitySystem
                 _mind.TransferTo(mindId, spawn);
 
 
-                if (TryComp<HiveComponent>(respawn.Hive, out var coreComp) &&
-                    !_hive.HasHiveCore((respawn.Hive.Value, coreComp)))
+                if (!_hive.TryGetHiveCore(spawn, out _))
                 {
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-respawn-corpse-self"), spawn, spawn, PopupType.MediumCaution);
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-respawn-corpse-others"), spawn, Filter.PvsExcept(spawn), true, PopupType.MediumCaution);
