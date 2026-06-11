@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Flames no longer ignite barricades when hitting one from the front.
-    type: Fix
-  id: 2855
-  time: '2026-02-02T03:20:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9081
-- author: x5tink
-  changes:
-  - message: Pill packets now fit in various medical storages
-    type: Fix
-  id: 2856
-  time: '2026-02-02T03:21:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9079
 - author: PursuitinAshes
   changes:
   - message: Playtime Service Medals have received reworked descriptions to be more
@@ -4531,5 +4517,19 @@
   id: 3354
   time: '2026-06-11T22:19:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10078
+- author: kleinerstation13
+  changes:
+  - message: Changed custom built shotgun firing sound
+    type: Tweak
+  id: 3355
+  time: '2026-06-11T22:22:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10106
+- author: Thereisabear
+  changes:
+  - message: Hive Core or Queen being available will have an announcement now.
+    type: Fix
+  id: 3356
+  time: '2026-06-11T22:22:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10091
 Name: RMC14
 Order: -1
