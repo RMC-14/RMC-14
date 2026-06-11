@@ -1,4 +1,3 @@
-# Welding fuel amounts are parity with CM now
 - type: entity
   parent: [BaseItem, RMCBaseMeleeWeapon]
   id: RMCWelderBase
