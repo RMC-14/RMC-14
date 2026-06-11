@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Queen and hive leader now have big text in hivemind.
-    type: Tweak
-  - message: Added leader hivemind prefix for hive leaders.
-    type: Add
-  id: 2846
-  time: '2026-02-02T02:45:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9060
-- author: Dutch-VanDerLinde
-  changes:
   - message: Department heads can now see new player icons like Senior enlisted advisors.
       These icons can be toggled off, check your settings.
     type: Tweak
@@ -4523,5 +4514,13 @@
   id: 3345
   time: '2026-06-11T21:56:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8462
+- author: CatAndHats
+  changes:
+  - message: Added an option to disable "Marine Equipment Previews" (the flamer overlay)
+      in the Accessibility options
+    type: Add
+  id: 3346
+  time: '2026-06-11T22:01:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9897
 Name: RMC14
 Order: -1
