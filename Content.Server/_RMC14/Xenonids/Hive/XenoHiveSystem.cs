@@ -253,7 +253,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
             }
 
-            ChangeBurrowedLarva(1);
+            ChangeBurrowedLarva((id, hive), 1);
             burrowed.PooledLarva--;
             if (burrowed.PooledLarva < 1)
                 RemCompDeferred<HijackBurrowedSurgeComponent>(id);
