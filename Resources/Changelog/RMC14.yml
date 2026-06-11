@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: PursuitinAshes
-  changes:
-  - message: PvIs now spawn with a Peregrine Handcannon instead of a M1984.
-    type: Tweak
-  id: 2843
-  time: '2026-02-02T02:35:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8956
 - author: YO0teacher
   changes:
   - message: Fixed motion detectors and data detectors turning off when equipped using
@@ -4518,5 +4511,12 @@
   id: 3342
   time: '2026-06-11T21:50:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10031
+- author: SharkSnake98
+  changes:
+  - message: Added RMC Arcade Machines
+    type: Add
+  id: 3343
+  time: '2026-06-11T21:52:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9825
 Name: RMC14
 Order: -1
