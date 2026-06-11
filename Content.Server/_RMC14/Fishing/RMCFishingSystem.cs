@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Fishing;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Water;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Directions;
 using Content.Shared.DoAfter;
@@ -110,6 +111,9 @@ public sealed class RMCFishingSystem : EntitySystem
             return;
 
         args.Handled = true;
+        if (TryBlockXenoFishing(args.User, args.User))
+            return;
+
         var direction = Transform(args.User).LocalRotation.GetCardinalDir();
         if (!TryGetRodWater(args.User, direction, args.User, out _, out _))
         {
@@ -133,6 +137,9 @@ public sealed class RMCFishingSystem : EntitySystem
 
         args.Handled = true;
         var user = args.User;
+        if (TryBlockXenoFishing(user, ent.Owner))
+            return;
+
         if (ent.Comp.Deployed ||
             !TryGetRodWater(user, args.Direction, user, out _, out _))
         {
@@ -161,6 +168,9 @@ public sealed class RMCFishingSystem : EntitySystem
             return;
 
         args.Handled = true;
+        if (TryBlockXenoFishing(args.User, ent.Owner))
+            return;
+
         if (!_container.TryGetContainer(ent.Owner, ent.Comp.BaitSlotId, out var baseContainer) ||
             baseContainer is not ContainerSlot slot)
         {
@@ -191,6 +201,14 @@ public sealed class RMCFishingSystem : EntitySystem
             return;
 
         args.Handled = true;
+        if (TryBlockXenoFishing(args.User, ent.Owner))
+        {
+            if (ent.Comp.CurrentFisher == args.User)
+                ClearRodState(ent);
+
+            return;
+        }
+
         switch (ent.Comp.State)
         {
             case RMCFishingRodState.Waiting:
@@ -208,7 +226,7 @@ public sealed class RMCFishingSystem : EntitySystem
 
     private void OnRodGetAlternativeVerbs(Entity<RMCFishingRodComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || !ent.Comp.Deployed)
+        if (!args.CanAccess || !args.CanInteract || !ent.Comp.Deployed || HasComp<XenoComponent>(args.User))
             return;
 
         var user = args.User;
@@ -223,6 +241,9 @@ public sealed class RMCFishingSystem : EntitySystem
     private void StartPack(Entity<RMCFishingRodComponent> ent, EntityUid user)
     {
         if (!ent.Comp.Deployed)
+            return;
+
+        if (TryBlockXenoFishing(user, ent.Owner))
             return;
 
         if (ent.Comp.State != RMCFishingRodState.Idle)
@@ -245,6 +266,9 @@ public sealed class RMCFishingSystem : EntitySystem
             return;
 
         args.Handled = true;
+        if (TryBlockXenoFishing(args.User, ent.Owner))
+            return;
+
         if (!ent.Comp.Deployed || ent.Comp.State != RMCFishingRodState.Idle)
             return;
 
@@ -312,6 +336,12 @@ public sealed class RMCFishingSystem : EntitySystem
             return;
         }
 
+        if (TryBlockXenoFishing(args.User, ent.Owner))
+        {
+            ClearRodState(ent);
+            return;
+        }
+
         if (args.Cancelled ||
             TerminatingOrDeleted(args.User) ||
             !TryGetRodWater(ent, args.User, out var adjacent, out _))
@@ -334,6 +364,14 @@ public sealed class RMCFishingSystem : EntitySystem
 
     private void TryHookFish(Entity<RMCFishingRodComponent> ent, EntityUid user)
     {
+        if (TryBlockXenoFishing(user, ent.Owner))
+        {
+            if (ent.Comp.CurrentFisher == user)
+                ClearRodState(ent);
+
+            return;
+        }
+
         if (ent.Comp.CurrentFisher != user)
         {
             _popup.PopupEntity(Loc.GetString("rmc-fishing-not-owner"), ent.Owner, user, PopupType.SmallCaution);
@@ -367,6 +405,15 @@ public sealed class RMCFishingSystem : EntitySystem
             QueueDel(baitUid);
 
         ClearRodState(ent);
+    }
+
+    private bool TryBlockXenoFishing(EntityUid user, EntityUid popupAt)
+    {
+        if (!HasComp<XenoComponent>(user))
+            return false;
+
+        _popup.PopupEntity(Loc.GetString("rmc-fishing-xeno-cannot"), popupAt, user, PopupType.SmallCaution);
+        return true;
     }
 
     private void FailBite(Entity<RMCFishingRodComponent> ent, EntityUid? user, string locId)
@@ -602,6 +649,12 @@ public sealed class RMCFishingSystem : EntitySystem
         if (args.Handled || !args.CanReach || ent.Comp.Busy)
             return;
 
+        if (TryBlockXenoFishing(args.User, ent.Owner))
+        {
+            args.Handled = true;
+            return;
+        }
+
         if (!IsFishableWater(args.ClickLocation.SnapToGrid(EntityManager), args.User))
             return;
 
@@ -635,6 +688,9 @@ public sealed class RMCFishingSystem : EntitySystem
         Dirty(ent);
 
         if (args.Cancelled)
+            return;
+
+        if (TryBlockXenoFishing(args.User, ent.Owner))
             return;
 
         var coordinates = GetCoordinates(args.Coordinates);

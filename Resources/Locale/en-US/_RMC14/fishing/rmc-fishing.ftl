@@ -1,5 +1,6 @@
 rmc-fishing-need-water = You need clear water two tiles ahead to fish.
 rmc-fishing-invalid-water = The fishing line is no longer over clear water.
+rmc-fishing-xeno-cannot = We have no interest in fishing.
 rmc-fishing-deploy-finish = You finish setting up the fishing pole.
 rmc-fishing-pack-verb = Pack up
 rmc-fishing-pack-busy = It is extremely disrespectful to pack up a rod while someone's fishing!
