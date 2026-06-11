@@ -6,6 +6,7 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Targeting;
@@ -16,6 +17,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -47,7 +49,10 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             StopTargeting((targeting, targeting), targeting.Comp.Targets[0]);
         }
 
-        _rmcPvs.RemoveGlobalOverride(targeting);
+        foreach (var session in _player.Sessions)
+        {
+            _rmcPvs.RemoveSessionOverride(targeting.Owner, session);
+        }
     }
 
     /// <summary>
@@ -77,7 +82,10 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             Dirty(targeting, targetingComp);
         }
 
-        _rmcPvs.RemoveGlobalOverride(ent);
+        foreach (var session in _player.Sessions)
+        {
+            _rmcPvs.RemoveSessionOverride(ent, session);
+        }
     }
 
     /// <summary>
@@ -171,8 +179,14 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         targeting.LaserType = targetedEffect;
         Dirty(equipment, targeting);
 
-        _rmcPvs.AddGlobalOverride(target);
-        _rmcPvs.AddGlobalOverride(equipment);
+        foreach (var session in _player.Sessions)
+        {
+            if (session.AttachedEntity == null)
+                continue;
+
+            _rmcPvs.AddSessionOverride(target, session);
+            _rmcPvs.AddSessionOverride(user, session);
+        }
     }
 
     /// <summary>

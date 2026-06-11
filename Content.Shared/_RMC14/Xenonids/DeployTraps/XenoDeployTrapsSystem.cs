@@ -1,7 +1,5 @@
-﻿using System.Numerics;
-using Content.Shared._RMC14.Actions;
+using System.Numerics;
 using Content.Shared._RMC14.Emote;
-using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.AcidMine;
 using Content.Shared._RMC14.Xenonids.Construction.DeployedTraps;
@@ -11,10 +9,7 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
-using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.Interaction;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -35,7 +30,6 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -157,26 +151,18 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            if (empowered)
-            {
-                var traps = SpawnAtPosition(xeno.Comp.DeployEmpoweredTrapsId, target);
-                _hive.SetSameHive(xeno.Owner, traps);
-                EnsureComp<XenoDeployedTrapsComponent>(traps).PlacedBy = xeno.Owner;
-            }
-            else
-            {
-                var traps = SpawnAtPosition(xeno.Comp.DeployTrapsId, target);
-                _hive.SetSameHive(xeno.Owner, traps);
-                EnsureComp<XenoDeployedTrapsComponent>(traps).PlacedBy = xeno.Owner;
-            }
+            var deployId = empowered ? xeno.Comp.DeployEmpoweredTrapsId : xeno.Comp.DeployTrapsId;
+            var traps = SpawnAtPosition(deployId, target);
+            _hive.SetSameHive(xeno.Owner, traps);
+            EnsureComp<XenoNewlyDeployedTrapsComponent>(traps);
+            var comp = EnsureComp<XenoDeployedTrapsComponent>(traps);
+            comp.PlacedBy = xeno.Owner;
+            Dirty(traps, comp);
         }
     }
 
     private void DeployTrapsEmpower(Entity<XenoDeployTrapsComponent> xeno)
     {
-        if (!_net.IsServer)
-            return;
-
         if (TryComp(xeno.Owner, out XenoAcidMineComponent? acidMine))
             _acidMine.EmpowerAcidMine((xeno.Owner, acidMine));
 

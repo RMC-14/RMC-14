@@ -66,6 +66,24 @@
 
 - type: entity
   parent: CMGlassesM42ScoutSight
+  id: CMGlassesM42SpotterSight
+  name: M96 spotter sight
+  description: A companion headset and night vision goggles system for UNMC spotters. Allows highlighted imaging of surroundings.
+
+- type: entity
+  parent: CMGlassesM42ScoutSight
+  id: CMGlassesM96CSight
+  name: M96C special operations sight
+  description: A specialized variation of the M96 scout sight system, intended for use with the high-power M96C anti-tank sniper rifle. Allows for highlighted imaging of surroundings, as well as detection of thermal signatures even from a great distance.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ml66a_sight.rsi
+    layers:
+    - state: icon
+      map: [ "icon" ]
+
+- type: entity
+  parent: CMGlassesM42ScoutSight
   id: RMCGlassesSPPCommandoNightVision
   name: Type 9 commando goggles
   description: A headset and night vision goggles system used by SPP forces. Allows highlighted imaging of surroundings.
@@ -100,6 +118,12 @@
         icon:
           True: { state: icon_on }
           False: { state: icon }
+
+- type: entity
+  parent: RMCGlassesM4SPRBattleSight
+  id: RMCGlassesM4SPRBattleSightRCM
+  name: Royal Crown Marine marksman's goggles
+  description: A headset and night vision goggles system used by RMC Marksmen. Allows highlighted imaging of surroundings.
 
 - type: entity
   parent: ClothingEyesBase

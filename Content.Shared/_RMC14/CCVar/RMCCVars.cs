@@ -38,7 +38,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 3f, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.marines_per_xeno", 4f, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<bool> RMCAutoBalance =
         CVarDef.Create("rmc.auto_balance", true, CVar.SERVER | CVar.SERVERONLY);
@@ -510,6 +510,8 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCXenoAbilityPreviews =
         CVarDef.Create("rmc.xeno_ability_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+    public static readonly CVarDef<bool> RMCMarineEquipmentPreviews =
+        CVarDef.Create("rmc.marine_equipment_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<int> RMCXenoDefaultNightVision =
         CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
