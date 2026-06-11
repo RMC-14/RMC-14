@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Aimed shot direction indicators now accurately point toward the shooter.
-    type: Fix
-  - message: The AMR's focusing indicator now always disappears when the target is
-      no longer being focused.
-    type: Fix
-  id: 2854
-  time: '2026-02-02T03:19:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9078
-- author: Dygon
-  changes:
   - message: Flames no longer ignite barricades when hitting one from the front.
     type: Fix
   id: 2855
@@ -4533,5 +4523,13 @@
   id: 3353
   time: '2026-06-11T22:17:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10070
+- author: IceNoobXD
+  changes:
+  - message: The damage per second of the toxic water has been greatly reduced to
+      only be 7.5 for marines, 17 for xenonids and 1 for larvae!
+    type: Fix
+  id: 3354
+  time: '2026-06-11T22:19:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10078
 Name: RMC14
 Order: -1
