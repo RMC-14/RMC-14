@@ -333,7 +333,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         // If dead player LOOC is disabled, unless you are an admin with Moderator perms, send dead messages to dead chat
         if ((_adminManager.IsAdmin(player) && _adminManager.HasAdminFlag(player, AdminFlags.Moderator)) // Override if admin
             || _deadLoocEnabled
-            || (!HasComp<GhostComponent>(source) && !_mobStateSystem.IsDead(source))) // Check that player is not dead
+            || (!HasComp<GhostComponent>(source) && !_mobStateSystem.IsDead(source)) // Check that player is not dead
+            || HasComp<ImaginaryFriendComponent>(player.AttachedEntity)) // RMC14
         {
         }
         else
@@ -930,6 +931,11 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             var observer = ghostHearing.HasComponent(playerEntity);
 
+            /*if (playerEntity == source && HasComp<ImaginaryFriendComponent>(source))
+            {
+                recipients[player] = new ICChatRecipientData(0, false, false);
+                continue;
+            }*/
             // even if they are a ghost hearer, in some situations we still need the range
             if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceGetRange)
             {

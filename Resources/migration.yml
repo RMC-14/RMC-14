@@ -1504,6 +1504,10 @@ CMUpgradedTraumaKit: CMUpgradedTraumaKit10
 # 2026-05-19
 RMCFogWallWeed30: RMCFogWallWeed
 
+# 2026-05-09
+SpaceVillainArcade: RMCArcadeSpaceVillain
+BlockGameArcade: RMCArcadeBlockGame
+
 #2026-05-20
 RMCHeadCapFerret: RMCHeadCapGrey
 CMPosterRememberIo: CMRandomPosterAny
