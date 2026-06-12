@@ -1,31 +1,4 @@
 ﻿Entries:
-- author: Miyugi and Pgriha
-  changes:
-  - message: New xenonids structure, Plasma Tree! It replenishes plasma to nearby
-      xenos every few seconds, works like the Recovery Node.
-    type: Add
-  id: 2887
-  time: '2026-02-09T00:42:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8830
-- author: Ian321
-  changes:
-  - message: The SOCOM box can now also be crafted from the construction menu.
-    type: Tweak
-  id: 2888
-  time: '2026-02-09T05:36:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9168
-- author: Dygon
-  changes:
-  - message: "The M20 Claymore anti-personnel mine is now available through requisitions\
-      \ and squad role vendors. It inherits the placer\u2019s IFF signal and detonates\
-      \ when anyone without a matching IFF steps in front of it, releasing shrapnel\
-      \ in a forward cone."
-    type: Add
-  - message: Shrapnel grenades spawn shrapnel again.
-    type: Fix
-  id: 2889
-  time: '2026-02-09T05:36:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8683
 - author: LeoKarz
   changes:
   - message: The designer hivelord strain is here! A cooperative support/anti-push
@@ -4542,5 +4515,31 @@
   id: 3386
   time: '2026-06-12T05:44:26.046587+00:00'
   url: null
+- author: Vermidia
+  changes:
+  - message: Examining gloves with a watch now also shows the time.
+    type: Tweak
+  id: 3387
+  time: '2026-06-12T23:25:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10146
+- author: Arykh
+  changes:
+  - message: Left clicking no longer restocks medical vendors, use alt+left-click
+      or right-click verb menu instead. For all my left-click spamming chemists out
+      there. <3
+    type: Tweak
+  id: 3388
+  time: '2026-06-12T23:26:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10143
+- author: Vixting
+  changes:
+  - message: Larva queue, if the larvae dies before you can accept it you will no
+      longer be removed from the queue
+    type: Tweak
+  - message: Pre queue time is now displayed
+    type: Add
+  id: 3389
+  time: '2026-06-12T23:26:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10138
 Name: RMC14
 Order: -1
