@@ -41,7 +41,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
             // don't divide by total entities since it's a big grill
             // excess would just be wasted in the air but that's not worth simulating
             // if you want a heater thermomachine just use that...
-            var energy = _grillpower * deltaTime / 10; //Changed for RMC
+            var energy = _grillpower * deltaTime; //Changed for RMC
             foreach (var ent in placer.PlacedEntities)
             {
                 _temperature.ChangeHeat(ent, energy);
