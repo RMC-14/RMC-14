@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: Thereisabear
-  changes:
-  - message: The campfires can now be lit, Bravo calls for Aid. They can be lit, extinguished
-      and require fuel to maintain.
-    type: Add
-  id: 2891
-  time: '2026-02-09T05:39:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8869
-- author: Dygon
-  changes:
-  - message: Landing pads now have lights that light up when a dropship is arriving
-      from FTL or preparing to enter FTL. Stay clear of the pad while the lights are
-      on.
-    type: Tweak
-  - message: Dropships arriving from FTL no longer create a visual effect on the tiles
-      where they will land.
-    type: Tweak
-  id: 2892
-  time: '2026-02-09T05:38:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9162
-- author: RerBreab
-  changes:
-  - message: Fixed incinerator fire initial burst of damage on direct hit dealing
-      3 times less damage than intended.
-    type: Fix
-  id: 2893
-  time: '2026-02-09T05:45:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8911
 - author: to4no_fix
   changes:
   - message: Added the rmcgivecommendation, rmclistcommendations, and rmcdeletcommendations
@@ -4530,5 +4502,34 @@
   id: 3390
   time: '2026-06-12T23:27:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10139
+- author: Dygon
+  changes:
+  - message: Fixed the sniper targeting visual appearing on a different map.
+    type: Fix
+  id: 3391
+  time: '2026-06-12T23:29:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10142
+- author: IceNoobXD
+  changes:
+  - message: Examining a gun now displays its currently equipped attachments per slot
+      in the tooltip!
+    type: Add
+  - message: Added a new QoL feature that displays all compatible attachments for
+      each slot when examining a gun!
+    type: Add
+  id: 3392
+  time: '2026-06-12T23:29:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9850
+- author: Vermidia
+  changes:
+  - message: Fixed Dancer Praetorian's critical mark spreading not being predicted
+      and not prioritizing nearest targets to the dancer first.
+    type: Fix
+  - message: Fixed Tail Trip having no cooldown when used off a normal mark or no
+      mark.
+    type: Fix
+  id: 3393
+  time: '2026-06-12T23:28:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10140
 Name: RMC14
 Order: -1
