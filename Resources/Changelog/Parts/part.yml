@@ -1,0 +1,4 @@
+author: DrSmugleaf
+changes:
+  - type: Fix
+    message: Fixed Charger Crusher colliding with weeds on the floor.
