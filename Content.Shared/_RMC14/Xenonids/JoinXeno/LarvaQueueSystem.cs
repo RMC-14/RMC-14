@@ -633,6 +633,15 @@ public sealed class LarvaQueueSystem : EntitySystem
         return false;
     }
 
+    public TimeSpan? GetPreQueueTimeRemaining(NetUserId userId, EntityUid hiveId)
+    {
+        if (!PreQueue.TryGetValue(hiveId, out var pq) || !pq.TryGetValue(userId, out var promotionTime))
+            return null;
+
+        var remaining = promotionTime - _gameTiming.CurTime.TotalSeconds;
+        return TimeSpan.FromSeconds(remaining > 0 ? remaining : 0);
+    }
+
     public int GetQueuePosition(NetUserId userId, EntityUid hiveId)
     {
         InfectorSet.TryGetValue(hiveId, out var iqSet);
