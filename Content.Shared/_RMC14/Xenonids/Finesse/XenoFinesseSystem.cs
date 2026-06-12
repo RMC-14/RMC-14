@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Impale;
 using Content.Shared._RMC14.Xenonids.TailTrip;
 using Content.Shared.Actions;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Mobs.Systems;
@@ -69,9 +70,6 @@ public sealed class XenoFinesseSystem : EntitySystem
 
     private void OnXenoMarkedDamageChanged(Entity<XenoSpreadMarkAttemptComponent> marked, ref DamageChangedEvent args)
     {
-        if (_net.IsClient)
-            return;
-
         if (!TryComp<XenoFinesseComponent>(marked.Comp.Origin, out var finesse))
             return;
 
@@ -96,9 +94,9 @@ public sealed class XenoFinesseSystem : EntitySystem
         EnsureComp<XenoCriticalMarkSpreadImmunityComponent>(hit).WearOffAt = currTime + xeno.Comp.CriticalMarkSpreadImmuneDuration;
 
         var spreadEffected = 0;
-        _marines.Clear();
 
-        _entityLookup.GetEntitiesInRange(Transform(xeno).Coordinates, xeno.Comp.SpreadCriticalMarkRange, _marines);
+        _marines.Clear();
+        _entityLookup.GetEntitiesInRange(xeno.Owner.ToCoordinates(), xeno.Comp.SpreadCriticalMarkRange, _marines);
 
         foreach (var marine in _marines)
         {
@@ -125,7 +123,10 @@ public sealed class XenoFinesseSystem : EntitySystem
         }
 
         if (spreadEffected > 0)
+        {
             xeno.Comp.NextCriticalMarkSpreadTime = currTime + xeno.Comp.CritcalMarkSpreadCooldown;
+            Dirty(xeno);
+        }
     }
 
     public override void Update(float frameTime)
