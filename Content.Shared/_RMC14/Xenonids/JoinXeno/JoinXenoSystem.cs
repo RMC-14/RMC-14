@@ -91,9 +91,17 @@ public sealed class JoinXenoSystem : EntitySystem
             if (inQueue && actor != null)
             {
                 var pos = _larvaQueue.GetQueuePosition(actor.PlayerSession.UserId, hiveId);
-                optionText = pos > 0
-                    ? $"Leave Larva Queue for ({Name(hiveId)})\n[Position: {pos}]"
-                    : $"Leave Larva Queue for ({Name(hiveId)})";
+                if (pos > 0)
+                {
+                    optionText = $"Leave Larva Queue for ({Name(hiveId)})\n[Position: {pos}]";
+                }
+                else
+                {
+                    var remaining = _larvaQueue.GetPreQueueTimeRemaining(actor.PlayerSession.UserId, hiveId);
+                    optionText = remaining.HasValue
+                        ? $"Leave Larva Queue for ({Name(hiveId)})\n[Waiting: {remaining.Value.TotalSeconds:F0}s remaining]"
+                        : $"Leave Larva Queue for ({Name(hiveId)})";
+                }
             }
             else
             {
