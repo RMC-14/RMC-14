@@ -29,8 +29,8 @@ public sealed class LarvaQueueOfferSystem : EntitySystem
 
     private void OnOfferReceived(LarvaQueueOfferEvent ev)
     {
-        _currentOffer = ev;
         CloseWindow();
+        _currentOffer = ev;
 
         _window = new LarvaQueueOfferWindow();
 
