@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
@@ -69,7 +70,8 @@ public sealed class HiveLeaderSquadBui : BoundUserInterface
             : "?";
 
         var allXenos = BuildAllXenos(hive.Owner);
-        _window.UpdateState(myEntry, myIndex, roleName, allXenos, GetTexture, OnAnnounce, OnAddMember, OnRemoveMember);
+        var pickerXenos = BuildPickerXenos(allXenos, teams);
+        _window.UpdateState(myEntry, myIndex, roleName, allXenos, pickerXenos, GetTexture, OnAnnounce, OnAddMember, OnRemoveMember);
     }
 
     private List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> BuildAllXenos(EntityUid hiveOwner)
@@ -83,6 +85,21 @@ public sealed class HiveLeaderSquadBui : BoundUserInterface
             result.Add((Entity: EntMan.GetNetEntity(uid), Name: meta.EntityName, ProtoId: meta.EntityPrototype?.ID));
         }
         return result;
+    }
+
+    private static List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> BuildPickerXenos(
+        List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
+        HiveTeamsComponent teams)
+    {
+        var assigned = new HashSet<NetEntity>();
+        foreach (var team in teams.Teams)
+        {
+            if (team.Leader != null)
+                assigned.Add(team.Leader.Value);
+            foreach (var m in team.Members)
+                assigned.Add(m);
+        }
+        return allXenos.Where(x => !assigned.Contains(x.Entity)).ToList();
     }
 
     private Texture? GetTexture(EntProtoId? id)
