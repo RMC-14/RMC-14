@@ -170,6 +170,13 @@
       Dead:
         Base: splat-3
 
+- type: entity
+  parent: RMCMobRat
+  id: RMCMobRatMilkyHybrisa
+  name: Milky
+  description: An escaped test rat from the Weston-Yamada Research Facility. Hope it doesn't have some sort of genetically engineered disease or something...
+
+
 #-- Pets --
 # TODO: Fill pets with tungston cubes to prevent animal abuse, add way to pat and pickup. Obfuscate name for xeno to refer to them as Fuzzys/Pet
 - type: entity
@@ -452,6 +459,15 @@
   - type: ConditionalSpawner
     prototypes:
     - RMCMobRat
+
+- type: entity
+  parent: RMCSpawnRatWhite
+  id: RMCSpawnRatWhiteMilkyHybrisa
+  suffix: Milky
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobRatMilkyHybrisa
 
 - type: entity
   parent: MarkerBase
