@@ -46,13 +46,13 @@ namespace Content.Server._RMC14.Dropship;
 public sealed class DropshipSystem : SharedDropshipSystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DoorSystem _door = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly PointLightSystem _pointLight = default!;

@@ -6,7 +6,6 @@ using Robust.Shared.IoC;
 using Robust.Shared.Maths;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Utility;
-using System.Linq;
 using System.Numerics;
 using static Robust.Client.UserInterface.Control;
 
@@ -133,11 +132,18 @@ public static class AnnouncementStyling
         if (style?.ScalingConfig.EnableResponsiveScaling == false)
             return baseFontSize;
 
-        var totalWordCount = text.Sum(line => CountWords(line));
-        var totalCharCount = text.Sum(line => line.Length);
+        var totalWordCount = 0;
+        var totalCharCount = 0;
+        var longestLineLength = 0;
+        foreach (var line in text)
+        {
+            totalWordCount += CountWords(line);
+            totalCharCount += line.Length;
+            if (line.Length > longestLineLength)
+                longestLineLength = line.Length;
+        }
 
-        var longestLine = text.OrderByDescending(line => line.Length).First();
-        var estimatedWidth = longestLine.Length * baseFontSize * 0.6f;
+        var estimatedWidth = longestLineLength * baseFontSize * 0.6f;
 
         var widthScaleFactor = 1.0f;
         if (estimatedWidth > maxWidth)
@@ -169,6 +175,8 @@ public static class AnnouncementStyling
         return MathHelper.Clamp(finalFontSize, minFontSize, maxFontSize);
     }
 
+    private static readonly char[] WordSeparators = { ' ', '\t', '\n', '\r' };
+
     private static float CalculateWordCountScaleFactor(int wordCount, int charCount)
     {
         if (wordCount <= 0 || charCount <= 0)
@@ -187,14 +195,14 @@ public static class AnnouncementStyling
         if (string.IsNullOrWhiteSpace(text))
             return 0;
 
-        var words = text.Split(new char[] { ' ', '\t', '\n', '\r' },
-            StringSplitOptions.RemoveEmptyEntries);
-        return words.Length;
+        return text.Split(WordSeparators, StringSplitOptions.RemoveEmptyEntries).Length;
     }
 
     public static float CalculateOptimalTextWidth(string[] text, AnnouncementStyle style, Vector2 screenSize)
     {
-        var totalWordCount = text.Sum(line => CountWords(line));
+        var totalWordCount = 0;
+        foreach (var line in text)
+            totalWordCount += CountWords(line);
         var maxLineWidth = CalculateMaxTextWidth(screenSize, style.LayoutConfig.Position);
 
         if (totalWordCount <= 5)

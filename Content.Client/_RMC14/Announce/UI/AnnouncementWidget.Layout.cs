@@ -5,8 +5,8 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Maths;
 using System.Linq;
+using Robust.Shared.Maths;
 using Robust.Shared.Utility;
 using Robust.Shared.Log;
 

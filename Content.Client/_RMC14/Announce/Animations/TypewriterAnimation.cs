@@ -1,6 +1,6 @@
+using System;
 using Content.Shared._RMC14.Announce;
 using Robust.Shared.Utility;
-using System;
 
 namespace Content.Client._RMC14.Announce.Animations;
 
@@ -68,7 +68,7 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
             {
                 var currentLineText = cleanText[textIndex];
                 var maxLength = Math.Min(context.State.CurrentChar, currentLineText.Length);
-                var partialText = currentLineText.Substring(0, maxLength);
+                var partialText = currentLineText[..maxLength];
                 var message = context.FormatMessage(partialText, style);
                 context.Labels[i].SetMessage(message);
             }

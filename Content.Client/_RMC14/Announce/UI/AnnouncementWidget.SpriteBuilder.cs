@@ -171,9 +171,6 @@ public sealed partial class AnnouncementWidget
 
                 container = nameContainer;
             }
-            else
-            {
-            }
 
             return container;
         }

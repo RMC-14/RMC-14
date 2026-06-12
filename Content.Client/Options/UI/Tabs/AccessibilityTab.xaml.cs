@@ -10,12 +10,12 @@ namespace Content.Client.Options.UI.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class AccessibilityTab : Control
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!; // RMC14
 
     public AccessibilityTab()
     {
         RobustXamlLoader.Load(this);
-        IoCManager.InjectDependencies(this);
+        IoCManager.InjectDependencies(this); // RMC14
 
         Control.AddOptionCheckBox(CCVars.ChatEnableColorName, EnableColorNameCheckBox);
         Control.AddOptionCheckBox(CCVars.AccessibilityColorblindFriendly, ColorblindFriendlyCheckBox);
@@ -29,7 +29,7 @@ public sealed partial class AccessibilityTab : Control
 
         Control.AddOptionCheckBox(RMCCVars.RMCUseAlternateSprites, RMCUseAlternateSpritesCheckBox); // RMC14
         Control.AddOptionCheckBox(RMCCVars.RMCChatSquadColorMode, RMCChatSquadColorModeCheckBox); // RMC14
-        RegisterAnnouncementOptions();
+        RegisterAnnouncementOptions(); // RMC14
         Control.AddOptionCheckBox(RMCCVars.RMCXenoAbilityPreviews, XenoAbilityPreviewsCheckBox); // RMC14
 
         Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);

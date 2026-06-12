@@ -1,8 +1,8 @@
+using System.Linq;
 using System.Numerics;
 using Content.Client.Resources;
 using Content.Client._RMC14.Announce.Styling;
 using Content.Shared._RMC14.Announce;
-using System.Linq;
 using Robust.Client.Graphics;
 using Robust.Shared.Prototypes;
 using Robust.Client.UserInterface;

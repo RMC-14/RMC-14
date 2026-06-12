@@ -1,7 +1,7 @@
+using System;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using System;
 
 namespace Content.Shared._RMC14.Announce;
 

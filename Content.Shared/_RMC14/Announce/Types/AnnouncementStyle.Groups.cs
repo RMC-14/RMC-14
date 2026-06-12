@@ -1,6 +1,6 @@
+using System.Numerics;
 using Robust.Shared.Maths;
 using Robust.Shared.Serialization;
-using System.Numerics;
 
 namespace Content.Shared._RMC14.Announce;
 

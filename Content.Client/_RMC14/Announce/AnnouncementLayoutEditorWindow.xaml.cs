@@ -354,7 +354,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
             return null;
 
         var trimmed = value.Trim();
-        return Robust.Shared.Maths.Color.TryFromHex(trimmed) != null ? trimmed : null;
+        return Color.TryFromHex(trimmed) != null ? trimmed : null;
     }
 
     private void CommitAppearanceInputs()
@@ -551,8 +551,9 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 
     private void OnControllerPreviewPositionChanged(Vector2 position)
     {
-        SaveEditedLayout(CreateEditedLayout(position, ScaleSlider.Value));
-        RefreshValueLabels(CreateEditedLayout(position, ScaleSlider.Value), true);
+        var layout = CreateEditedLayout(position, ScaleSlider.Value);
+        SaveEditedLayout(layout);
+        RefreshValueLabels(layout, true);
     }
 
     private void OnControllerPreviewScaleChanged(float scale)

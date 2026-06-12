@@ -55,6 +55,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, EchoSquadReasonEvent>(OnEchoSquadReason);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, EchoSquadConfirmEvent>(OnEchoSquadConfirm);
 
@@ -278,7 +280,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         {
             foreach (var faction in idCardIff.Factions)
             {
-                _core.CreateARESLog(faction, LogCat, (string) $"{Name(sender)} sent an announcement: {message}");
+                _core.CreateARESLog(faction, LogCat, $"{Name(sender)} sent an announcement: {message}");
             }
         }
     }

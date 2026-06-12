@@ -89,6 +89,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         _actor = GetEntityQuery<ActorComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _originalRoleQuery = GetEntityQuery<OriginalRoleComponent>();

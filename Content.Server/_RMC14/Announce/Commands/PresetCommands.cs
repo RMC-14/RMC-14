@@ -11,7 +11,6 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Announce.Commands;
 
-
 [AdminCommand(AdminFlags.Moderator)]
 public sealed class AnnouncePresetCommand : IConsoleCommand
 {
@@ -82,7 +81,7 @@ public sealed class AnnouncePresetCommand : IConsoleCommand
         var options = new Dictionary<string, string>();
         var messageParts = new List<string>();
         var inQuotes = false;
-        var currentMessage = "";
+        var currentMessage = string.Empty;
 
         foreach (var arg in args)
         {

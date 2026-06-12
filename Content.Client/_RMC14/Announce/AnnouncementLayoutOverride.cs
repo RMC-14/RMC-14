@@ -107,7 +107,7 @@ public static class AnnouncementLayoutOverrides
             if (string.IsNullOrWhiteSpace(key))
                 continue;
 
-            entries.Add(new KeyValuePair<string, AnnouncementLayoutOverride>(key, value.Clamp()));
+            entries.Add(new KeyValuePair<string, AnnouncementLayoutOverride>(key, value));
         }
 
         if (entries.Count == 0)
@@ -134,7 +134,7 @@ public static class AnnouncementLayoutOverrides
         layout = default;
 
         var parts = serialized.Split(',', StringSplitOptions.TrimEntries);
-        if (parts.Length != 3 && parts.Length != 7 && parts.Length != 9 && parts.Length != 10)
+        if (parts.Length != 3 && parts.Length != 7 && parts.Length != 9)
             return false;
 
         if (!float.TryParse(parts[0], NumberStyles.Float, Culture, out var x) ||

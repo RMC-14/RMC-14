@@ -1,4 +1,6 @@
 using System;
+using Robust.Shared.Maths;
+
 namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class HeartbeatAnimation : IAnnouncementAnimation
@@ -46,7 +48,7 @@ public sealed class HeartbeatAnimation : IAnnouncementAnimation
             var phase = lineIndex * 0.8f;
             var x = MathF.Sin(cycleTime * 4f + phase) * 1.5f;
             var y = wobble;
-            context.Labels[i].Margin = new Robust.Shared.Maths.Thickness(x, y, 0, 0);
+            context.Labels[i].Margin = new Thickness(x, y, 0, 0);
         }
     }
 

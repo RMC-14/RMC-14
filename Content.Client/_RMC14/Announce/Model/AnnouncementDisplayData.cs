@@ -1,8 +1,8 @@
+using System.Numerics;
 using Content.Shared._RMC14.Announce;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
-using System.Numerics;
 
 namespace Content.Client._RMC14.Announce;
 

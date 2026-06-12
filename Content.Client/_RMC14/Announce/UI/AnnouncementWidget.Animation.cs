@@ -1,7 +1,7 @@
+using System.Numerics;
 using Content.Client._RMC14.Announce.Animations;
 using Content.Client._RMC14.Announce.Effects;
 using Content.Shared._RMC14.Announce;
-using System.Numerics;
 
 namespace Content.Client._RMC14.Announce;
 

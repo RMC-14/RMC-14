@@ -1,20 +1,18 @@
-using Content.Server._RMC14.Announce.Core;
 using Content.Shared._RMC14.Announce;
 using Robust.Shared.GameObjects;
-using Robust.Shared.IoC;
 
-namespace Content.Server._RMC14.Announce.Validation;
+namespace Content.Server._RMC14.Announce.Core;
 
 public sealed class AnnouncementValidator
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    private readonly IEntityManager _entityManager;
 
     private const int MaxMessageLength = 1000;
     private const int MaxLineCount = 10;
 
-    public AnnouncementValidator()
+    public AnnouncementValidator(IEntityManager entityManager)
     {
-        IoCManager.InjectDependencies(this);
+        _entityManager = entityManager;
     }
 
     public ValidationResult ValidateRequest(AnnouncementRequest request)
@@ -37,33 +35,20 @@ public sealed class AnnouncementValidator
         }
 
         if (message.Length > MaxMessageLength)
-        {
             result.AddError($"Message too long. Maximum {MaxMessageLength} characters, got {message.Length}");
-        }
 
-        var normalized = message.Replace("\r\n", "\n").Replace('\r', '\n');
-        if (!normalized.Contains('\n') && normalized.Contains("\\n"))
-            normalized = normalized.Replace("\\n", "\n");
-
-        var lines = normalized.Split('\n');
+        var lines = AnnouncementLineHelper.NormalizeAndSplit(message);
         if (lines.Length > MaxLineCount)
-        {
             result.AddError($"Too many lines. Maximum {MaxLineCount} lines, got {lines.Length}");
-        }
     }
 
     private void ValidateEntities(AnnouncementRequest request, ValidationResult result)
     {
         if (request.Route.Speaker.HasValue && !_entityManager.EntityExists(request.Route.Speaker.Value))
-        {
             result.AddError($"Speaker entity {request.Route.Speaker.Value} does not exist");
-        }
 
         if (request.Route.Source.HasValue && !_entityManager.EntityExists(request.Route.Source.Value))
-        {
             result.AddError($"Source entity {request.Route.Source.Value} does not exist");
-        }
-
     }
 
     private void ValidateParameters(AnnouncementRequest request, ValidationResult result)
@@ -75,18 +60,14 @@ public sealed class AnnouncementValidator
         {
             var volume = request.Sound.Volume.Value;
             if (volume < -60f || volume > 20f)
-            {
                 result.AddError($"Volume must be between -60.0 and 20.0 dB, got {volume}");
-            }
         }
 
         if (request.PriorityOverride.HasValue)
         {
             var priority = request.PriorityOverride.Value;
             if (priority < 0f || priority > 10f)
-            {
                 result.AddError($"Priority must be between 0.0 and 10.0, got {priority}");
-            }
         }
     }
 }
@@ -100,19 +81,8 @@ public sealed class ValidationResult
     public IReadOnlyList<string> Errors => _errors;
     public IReadOnlyList<string> Warnings => _warnings;
 
-    public void AddError(string error)
-    {
-        _errors.Add(error);
-    }
+    public void AddError(string error) => _errors.Add(error);
+    public void AddWarning(string warning) => _warnings.Add(warning);
 
-    public void AddWarning(string warning)
-    {
-        _warnings.Add(warning);
-    }
-
-    public string GetErrorSummary()
-    {
-        if (IsValid) return "Valid";
-        return string.Join(", ", _errors);
-    }
+    public string GetErrorSummary() => IsValid ? "Valid" : string.Join(", ", _errors);
 }

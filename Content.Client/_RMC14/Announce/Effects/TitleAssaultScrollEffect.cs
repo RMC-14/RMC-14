@@ -36,7 +36,7 @@ public sealed class TitleAssaultScrollEffect : IAnnouncementVisualEffect
             loop += titleText + spacer;
         }
 
-        var visible = loop.Substring(startIndex, approxVisibleChars).Replace(' ', '\u00A0');
+        var visible = loop[startIndex..(startIndex + approxVisibleChars)].Replace(' ', '\u00A0');
         titleLabel.SetMessage(AnnouncementStyling.CreateFormattedMessage(
             visible,
             fontSize,

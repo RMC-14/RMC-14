@@ -1,5 +1,4 @@
 using Content.Server._RMC14.Announce.Core;
-using Content.Server._RMC14.Announce.Validation;
 using Content.Server.Chat.Managers;
 using Content.Shared._RMC14.Announce;
 using Content.Shared.Chat;
@@ -26,7 +25,8 @@ public sealed partial class AnnouncementRouterSystem : EntitySystem
 
     public override void Initialize()
     {
-        _validator = new AnnouncementValidator();
+        base.Initialize();
+        _validator = new AnnouncementValidator(EntityManager);
         _presetResolver = new AnnouncementPresetResolver(_prototypes);
         _targetFilter = new AnnouncementTargetFilter(EntityManager);
     }

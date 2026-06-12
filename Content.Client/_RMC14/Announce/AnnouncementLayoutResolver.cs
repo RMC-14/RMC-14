@@ -1,3 +1,5 @@
+using Robust.Shared.Maths;
+
 namespace Content.Client._RMC14.Announce;
 
 public static class AnnouncementLayoutResolver
@@ -18,11 +20,11 @@ public static class AnnouncementLayoutResolver
         display.TitleTextScaleOverride = clamped.TitleTextScale;
     }
 
-    private static Robust.Shared.Maths.Color? ParseColor(string? hex)
+    private static Color? ParseColor(string? hex)
     {
         if (string.IsNullOrWhiteSpace(hex))
             return null;
 
-        return Robust.Shared.Maths.Color.TryFromHex(hex.Trim());
+        return Color.TryFromHex(hex.Trim());
     }
 }

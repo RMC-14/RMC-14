@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Content.Shared._RMC14.Announce;
 
 namespace Content.Client._RMC14.Announce;
@@ -55,7 +56,7 @@ public static class AnnouncementPreferenceOverrides
 
         entries.Sort(static (a, b) => string.CompareOrdinal(a.Key, b.Key));
 
-        var serialized = new System.Text.StringBuilder();
+        var serialized = new StringBuilder();
         for (var i = 0; i < entries.Count; i++)
         {
             if (i > 0)

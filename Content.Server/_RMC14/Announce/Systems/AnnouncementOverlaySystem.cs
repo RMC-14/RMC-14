@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Announce.Core;
 using Content.Server.Administration.Logs;
 using Content.Shared._RMC14.Announce;
 using Content.Shared.Database;
@@ -31,7 +32,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
         if (_net.IsClient || filter.Count == 0)
             return;
 
-        var lines = BuildLines(request.Message);
+        var lines = AnnouncementLineHelper.NormalizeAndSplit(request.Message);
         var speakerName = ResolveSpeakerName(request);
         var clientData = BuildClientData(request, preset, lines, speakerName);
 
@@ -55,7 +56,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
             Priority = request.PriorityOverride ?? preset.Priority,
             CanInterrupt = request.CanInterrupt ?? preset.CanInterrupt,
             CanBeInterrupted = request.CanBeInterrupted ?? preset.CanBeInterrupted,
-            SpeakerEntity = EntityManager.GetNetEntity(request.Route.Speaker),
+            SpeakerEntity = GetNetEntity(request.Route.Speaker),
             SpeakerName = speakerName
         };
     }
@@ -66,7 +67,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
             return;
 
         var speaker = request.Route.Speaker.Value;
-        if (!EntityManager.EntityExists(speaker))
+        if (!Exists(speaker))
             return;
 
         _pvsOverride.AddSessionOverrides(speaker, filter);
@@ -78,7 +79,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
 
     private void RemoveSpeakerOverrides(EntityUid speaker, Filter filter)
     {
-        if (!EntityManager.EntityExists(speaker))
+        if (!Exists(speaker))
             return;
 
         foreach (var session in filter.Recipients)

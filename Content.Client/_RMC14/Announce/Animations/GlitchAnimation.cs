@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Content.Shared._RMC14.Announce;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Maths;
-using Robust.Shared.Utility;
 using Robust.Shared.Random;
-using System;
-using System.Collections.Generic;
+using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Announce.Animations;
 
@@ -132,7 +132,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
             {
                 var currentLineText = cleanText[textIndex];
                 var maxLength = Math.Min(context.State.CurrentChar, currentLineText.Length);
-                var partialText = currentLineText.Substring(0, maxLength);
+                var partialText = currentLineText[..maxLength];
                 if (maxLength > 0 && RandomChance(context.Random, lineGlitchChance + 0.10f))
                     partialText = CreateGlitchedText(partialText, context.Random, charGlitchChance);
 

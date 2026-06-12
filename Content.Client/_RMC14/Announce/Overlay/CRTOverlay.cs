@@ -2,9 +2,9 @@ using System.Numerics;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.IoC;
 using Robust.Shared.Maths;
 using Robust.Shared.Timing;
-using Robust.Shared.IoC;
 using Content.Shared._RMC14.Announce;
 
 namespace Content.Client._RMC14.Announce;
@@ -116,7 +116,7 @@ public sealed class CRTOverlay : Control
         _noiseTimer = 0f;
         var noiseCount = (int)(rect.Width * rect.Height * Settings.NoiseIntensity * 0.001f);
 
-        for (int i = 0; i < noiseCount; i++)
+        for (var i = 0; i < noiseCount; i++)
         {
             var x = rect.Left + _random.NextSingle() * rect.Width;
             var y = rect.Top + _random.NextSingle() * rect.Height;
@@ -183,13 +183,10 @@ public sealed class CRTOverlay : Control
 
     private void DrawChromaticAberration(DrawingHandleScreen handle, UIBox2 rect)
     {
-        if (!Settings.ShowChromaticAberration)
-            return;
-
         var aberrationAmount = Settings.ChromaticAmount;
         var intensity = MathF.Sin(_chromaticTimer) * 0.5f + 0.5f;
 
-        for (int i = 0; i < Settings.ChromaticParticleCount; i++)
+        for (var i = 0; i < Settings.ChromaticParticleCount; i++)
         {
             if (_random.NextSingle() < Settings.ChromaticParticleChance)
             {
