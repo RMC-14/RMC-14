@@ -480,7 +480,6 @@ public sealed class LarvaQueueSystem : EntitySystem
         [NotNullWhen(true)] out ICommonSession? session)
     {
         session = null;
-        NetUserId? found = null;
         List<NetUserId>? reembodied = null;
 
         foreach (var netId in set)
@@ -500,7 +499,6 @@ public sealed class LarvaQueueSystem : EntitySystem
                 if (TryComp<MindTakeoverBehaviorComponent>(s.AttachedEntity.Value, out var takeover) && !takeover.EjectFromLarvaQueues)
                 {
                     session = s;
-                    found = netId;
                     break;
                 }
 
@@ -510,7 +508,6 @@ public sealed class LarvaQueueSystem : EntitySystem
             }
 
             session = s;
-            found = netId;
             break;
         }
 
