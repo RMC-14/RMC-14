@@ -1,0 +1,74 @@
+﻿# Double Doors
+- type: entity
+  parent: CMAlamoDoorPort
+  id: RMCERTDoorPort
+  name: ERT crew hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/ert_doubledoor.rsi
+
+- type: entity
+  parent: CMAlamoDoorPort
+  id: RMCSPPDoorPort
+  name: SPP crew hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/spp_doubledoor.rsi
+
+# Cargo Doors
+- type: entity
+  parent: CMAlamoDoorAft
+  id: RMCERTDoorAft
+  name: ERT cargo door
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/ert_cargo.rsi
+
+- type: entity
+  parent: CMAlamoDoorAft
+  id: RMCSPPDoorAft
+  name: SPP cargo door
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/spp_cargo.rsi
+
+- type: entity
+  parent: CMAlamoDoorAft
+  id: RMCTSEDoorAft
+  name: TSE cargo door
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/tse_cargo.rsi
+
+- type: entity
+  parent: CMAlamoDoorAft
+  id: RMCPMCDoorAft
+  name: PMC cargo door
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/pmc_cargo.rsi
+
+# Single Doors
+- type: entity
+  parent: CMAlamoDoor
+  id: RMCTSECrewHatch
+  name: TSE crew hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/tse_airlock.rsi
+
+- type: entity
+  parent: CMAlamoDoor
+  id: RMCCLFCrewHatch
+  name: CLF crew hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/clf_airlock.rsi
+
+- type: entity
+  parent: CMAlamoDoor
+  id: RMCPMCCrewHatch
+  name: PMC crew hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/pmc_airlock.rsi

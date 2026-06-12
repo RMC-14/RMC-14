@@ -1,11 +1,12 @@
 - type: job
   parent: RMCSurvivorParaBase
   id: RMCSurvivorParaSupportSynthetic
-  name: rmc-job-name-para-synth 
+  name: rmc-job-name-para-synth
   ranks:
     RMCRankSyntheticColonist: [ ]
   startingGear: RMCGearParaSupportSynthetic
   icon: RMCJobIconParaSupportSynthetic
+  playTimeTracker: RMCJobSyntheticColony
   spawnMenuRoleName: Royal Paramarine Support Synthetic (Survivor)
   special:
     - !type:AddComponentSpecial
@@ -14,6 +15,7 @@
           factions:
             - RoyalMarines
             - TSE
+        - type: RMCSurvivor
         - type: RMCAllowSuitStorage
         - type: IntelRescueSurvivorObjective
         - type: MotionDetectorTracked
@@ -32,9 +34,7 @@
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
             state: background_para
         - type: AssignSquad
-          whitelist:
-            tags:
-              - SquadPara
+          squad: SquadPara
         - type: JobPrefix
           prefix: rmc-job-prefix-para-synth
         - type: MeleeWeapon
@@ -51,13 +51,14 @@
               Blunt: 35
         - type: Synth
           generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
   hidden: true
 
 - type: startingGear
   parent: RMCGearParaBase
   id: RMCGearParaSupportSynthetic
   equipment:
+    id: RMCIDRoyalParamarinesSupportSynthetic
     jumpsuit: RMCJumpsuitMarinePara
     back: RMCSatchelLightpackFilledParaSynth
     belt: RMCMedicalL75RCMFillPara
@@ -82,4 +83,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: para_synth
-    

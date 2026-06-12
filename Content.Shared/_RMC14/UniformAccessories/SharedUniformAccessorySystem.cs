@@ -1,10 +1,13 @@
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
+using Content.Shared.Roles;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -18,11 +21,14 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<HandsComponent, StartingGearEquippedEvent>(OnStartingGearEquipped);
+
         SubscribeLocalEvent<UniformAccessoryHolderComponent, MapInitEvent>(OnHolderMapInit);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, InteractUsingEvent>(OnHolderInteractUsing);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GotEquippedEvent>(OnHolderGotEquipped);
@@ -35,6 +41,11 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
             {
                 subs.Event<UniformAccessoriesBuiMsg>(OnAccessoriesBuiMsg);
             });
+    }
+
+    private void OnStartingGearEquipped(Entity<HandsComponent> ent, ref StartingGearEquippedEvent args)
+    {
+        TryInsertInhandAccessories(ent.Owner);
     }
 
     private void OnHolderMapInit(Entity<UniformAccessoryHolderComponent> ent, ref MapInitEvent args)
@@ -55,46 +66,11 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
 
     private void OnHolderInteractUsing(Entity<UniformAccessoryHolderComponent> ent, ref InteractUsingEvent args)
     {
-        if (!TryComp(args.Used, out UniformAccessoryComponent? accessory))
+        if (!HasComp<UniformAccessoryComponent>(args.Used))
             return;
 
-        var container = _container.EnsureContainer<Container>(ent, ent.Comp.ContainerId);
         args.Handled = true;
-
-        if (accessory.User is { } accessoryUser && !BelongsToUser(accessoryUser, args.User))
-        {
-            _popup.PopupClient(Loc.GetString("rmc-uniform-accessory-fail"), args.User, args.User, PopupType.SmallCaution);
-            _hands.TryDrop(args.User, ent, checkActionBlocker: false);
-            return;
-        }
-
-        if (!ent.Comp.AllowedCategories.Contains(accessory.Category))
-        {
-            _popup.PopupClient(Loc.GetString("rmc-uniform-accessory-fail-not-allowed"), args.User, args.User, PopupType.SmallCaution);
-            return;
-        }
-
-        var accessoryDictionary = new Dictionary<string, int>();
-
-        foreach (var inserted in container.ContainedEntities)
-        {
-            if (TryComp<UniformAccessoryComponent>(inserted, out var insertedComp))
-            {
-                if (accessoryDictionary.TryGetValue(insertedComp.Category, out var count))
-                    accessoryDictionary[insertedComp.Category] = count + 1;
-                else
-                    accessoryDictionary[insertedComp.Category] = 1;
-            }
-        }
-
-        if (accessoryDictionary.TryGetValue(accessory.Category, out var amount) && accessory.Limit <= amount)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-uniform-accessory-fail-limit"), args.User, args.User, PopupType.SmallCaution);
-            return;
-        }
-
-        _container.Insert(args.Used, container);
-        _item.VisualsChanged(ent);
+        TryInsertUniformAccessory(args.Used, ent, args.User);
     }
 
     private void OnHolderGotEquipped(Entity<UniformAccessoryHolderComponent> ent, ref GotEquippedEvent args)
@@ -188,6 +164,78 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
 
         var ownerName = Name(owner.Value);
         args.PushMarkup(Loc.GetString("rmc-uniform-accessory-owner", ("owner", ownerName)));
+    }
+
+    public void TryInsertInhandAccessories(EntityUid target)
+    {
+        foreach (var held in _hands.EnumerateHeld(target))
+        {
+            if (!HasComp<UniformAccessoryComponent>(held))
+                continue;
+
+            TryInsertToValidSlot(held, target);
+        }
+    }
+
+    public bool TryInsertToValidSlot(EntityUid accessory, EntityUid user)
+    {
+        var slots = _inventory.GetSlotEnumerator(user, SlotFlags.INNERCLOTHING | SlotFlags.OUTERCLOTHING);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity == null || !HasComp<UniformAccessoryHolderComponent>(slot.ContainedEntity))
+                continue;
+
+            if (TryInsertUniformAccessory(accessory, slot.ContainedEntity.Value, user))
+                return true;
+        }
+
+        return false;
+    }
+
+    public bool TryInsertUniformAccessory(EntityUid accessory, EntityUid holder, EntityUid user)
+    {
+        if (!TryComp(accessory, out UniformAccessoryComponent? accessoryComp))
+            return false;
+
+        if (!TryComp(holder, out UniformAccessoryHolderComponent? holderComp))
+            return false;
+
+        var container = _container.EnsureContainer<Container>(holder, holderComp.ContainerId);
+
+        if (accessoryComp.User is { } accessoryUser && !BelongsToUser(accessoryUser, user))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-uniform-accessory-fail"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (!holderComp.AllowedCategories.Contains(accessoryComp.Category))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-uniform-accessory-fail-not-allowed"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        var accessoryDictionary = new Dictionary<string, int>();
+
+        foreach (var inserted in container.ContainedEntities)
+        {
+            if (TryComp<UniformAccessoryComponent>(inserted, out var insertedComp))
+            {
+                if (accessoryDictionary.TryGetValue(insertedComp.Category, out var count))
+                    accessoryDictionary[insertedComp.Category] = count + 1;
+                else
+                    accessoryDictionary[insertedComp.Category] = 1;
+            }
+        }
+
+        if (accessoryDictionary.TryGetValue(accessoryComp.Category, out var amount) && accessoryComp.Limit <= amount)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-uniform-accessory-fail-limit"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        _container.Insert(accessory, container);
+        _item.VisualsChanged(holder);
+        return true;
     }
 
     public bool BelongsToUser(NetEntity user, EntityUid target)

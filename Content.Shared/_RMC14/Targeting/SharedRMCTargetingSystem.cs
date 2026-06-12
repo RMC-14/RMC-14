@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rangefinder.Spotting;
@@ -5,6 +6,7 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Targeting;
@@ -13,8 +15,10 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
 
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -44,6 +48,11 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         {
             StopTargeting((targeting, targeting), targeting.Comp.Targets[0]);
         }
+
+        foreach (var session in _player.Sessions)
+        {
+            _rmcPvs.RemoveSessionOverride(targeting.Owner, session);
+        }
     }
 
     /// <summary>
@@ -71,6 +80,11 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             targetingComp.LaserDurations.Remove(ent);
             targetingComp.OriginalLaserDurations.Remove(ent);
             Dirty(targeting, targetingComp);
+        }
+
+        foreach (var session in _player.Sessions)
+        {
+            _rmcPvs.RemoveSessionOverride(ent, session);
         }
     }
 
@@ -164,6 +178,15 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         targeting.User = user;
         targeting.LaserType = targetedEffect;
         Dirty(equipment, targeting);
+
+        foreach (var session in _player.Sessions)
+        {
+            if (session.AttachedEntity == null)
+                continue;
+
+            _rmcPvs.AddSessionOverride(target, session);
+            _rmcPvs.AddSessionOverride(user, session);
+        }
     }
 
     /// <summary>

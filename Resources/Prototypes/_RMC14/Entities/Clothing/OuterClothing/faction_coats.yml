@@ -1,7 +1,7 @@
 # Bureau
 
 - type: entity
-  parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
+  parent: RMCCoatBureauDeputy
   id: RMCCoatBureauTrenchCoatBrown
   name: brown trench-coat
   description: A worn, brown, old style trench-coat. When a bum sees a cop coming, he don't stick around.

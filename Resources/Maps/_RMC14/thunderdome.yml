@@ -50553,7 +50553,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -36.526535,-42.335327
       parent: 1
-- proto: RMCBeltMedicBagRoyal
+- proto: RMCMedicalL75RCMFilled
   entities:
   - uid: 854
     components:

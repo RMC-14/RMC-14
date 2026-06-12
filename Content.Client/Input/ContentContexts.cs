@@ -148,6 +148,7 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCPickUpDroppedItems);
             human.AddFunction(CMKeyFunctions.RMCInteractWithOtherHand);
             human.AddFunction(CMKeyFunctions.RMCRest);
+            human.AddFunction(CMKeyFunctions.RMCResist);
 
             //Xenonid
             var xenonid = contexts.New("xenonid", "human");

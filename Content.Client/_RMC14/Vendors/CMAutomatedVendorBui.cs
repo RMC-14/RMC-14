@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared.Mind;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Stacks;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -281,7 +282,10 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 }
                 else
                 {
-                    uiEntry.Amount.Text = entry.Amount.ToString();
+                    var hasPartialStack = HasPartialStack(entry.Id, vendor.PartialProductStacks);
+                    uiEntry.Amount.Text = hasPartialStack
+                        ? $"{entry.Amount}*" // Display asterisk (*) for items with partial stacks
+                        : entry.Amount.ToString();
                 }
 
                 uiEntry.Amount.Modulate = disabled ? Color.Red : Color.White;
@@ -368,5 +372,16 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
         name.Pop();
         return name;
+    }
+
+    private bool HasPartialStack(EntProtoId entryId, Dictionary<string, int> partialStacks)
+    {
+        if (!_prototype.TryIndex(entryId, out var entryProto))
+            return false;
+
+        if (!entryProto.TryGetComponent<StackComponent>("Stack", out var stackComp))
+            return false;
+
+        return partialStacks.TryGetValue(stackComp.StackTypeId, out var partialAmount) && partialAmount > 0;
     }
 }

@@ -82,7 +82,7 @@
     id: RMCIDCardProvostDeputyMarshal
     belt: RMCMatebaBeltLuxuriousFilled
     back: CMSatchelSecurityFilledProvostDeputyMarshal
-#    pocket1: # TODO RMC14 tape recorder
+    pocket1: RMCUniversalRecorder
     pocket2: RMCPouchMagazinePistolFilledMateba # TODO RMC14 3 listening devices
 
 - type: playTimeTracker

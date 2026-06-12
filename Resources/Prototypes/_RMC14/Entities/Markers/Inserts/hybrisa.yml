@@ -33,4 +33,35 @@
       probability: 1
       nightmareScenario: tse_airbase
 
-# todo: fix the TSE non-surv airbase map insert (armoury is wrong) and make it work with the surv spawn together system
+- type: entity
+  parent: RMCMapInsertHybrisaBase
+  id: RMCMapInsertHybrisaTSEAirbaseIntact
+  name: TSE Airbase Intact
+  suffix: Insert Hybrisa
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Hybrisa/tse_airbase.yml"
+      probability: 0.28
+      nightmareScenario: none
+      offset: 0,1
+
+- type: entity
+  parent: RMCMapInsertHybrisaBase
+  id: RMCMapInsertHybrisaSurvivorSpawns
+  name: Survivor Spawns
+  suffix: Insert Hybrisa
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Hybrisa/surv_spawn_apartments.yml"
+      probability: 0.33
+      nightmareScenario: none
+    - spawn: "/Maps/_RMC14/Inserts/Hybrisa/surv_spawn_meridian.yml"
+      probability: 0.34
+      nightmareScenario: none
+      offset: 5,-20
+    - spawn: "/Maps/_RMC14/Inserts/Hybrisa/surv_spawn_bar.yml"
+      probability: 0.33
+      nightmareScenario: none
+      offset: 16,36

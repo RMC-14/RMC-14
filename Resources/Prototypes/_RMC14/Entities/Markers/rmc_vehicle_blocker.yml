@@ -1,0 +1,23 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCBlockerVehicle
+  name: vehicle blocker
+  suffix: RMC, Blocker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: vehicle_blocker
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 100
+        mask:
+        - Vehicle
+        layer:
+        - Vehicle

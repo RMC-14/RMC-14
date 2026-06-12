@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Server._RMC14.Shuttles;
 using Content.Server.Shuttles.Events;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
@@ -11,11 +12,11 @@ public sealed class RMCEquipmentDeployerSystem : SharedRMCEquipmentDeployerSyste
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RMCEquipmentDeployerComponent, DropshipRelayedEvent<FTLStartedEvent>>(OnFTLStarted);
+        SubscribeLocalEvent<RMCEquipmentDeployerComponent, DropshipRelayedEvent<BeforeFTLStartedEvent>>(OnFTLStarted);
         SubscribeLocalEvent<RMCEquipmentDeployerComponent, DropshipRelayedEvent<FTLCompletedEvent>>(OnFTLCompleted);
     }
 
-    private void OnFTLStarted(Entity<RMCEquipmentDeployerComponent> ent, ref DropshipRelayedEvent<FTLStartedEvent> args)
+    private void OnFTLStarted(Entity<RMCEquipmentDeployerComponent> ent, ref DropshipRelayedEvent<BeforeFTLStartedEvent> args)
     {
         if (!ent.Comp.AutoUnDeploy)
             return;

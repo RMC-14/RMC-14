@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.PowerCell;
 using Content.Shared._RMC14.Visor;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared.Examine;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
@@ -36,18 +37,25 @@ public sealed class ServerVisorSystem : EntitySystem
 
                 var visorEntity = currentContainer.ContainedEntities.FirstOrDefault();
                 args.PushMarkup(Loc.GetString("rmc-visor-down", ("visor", visorEntity)));
+            }
 
-                // Show power cell charge if the visor has one
-                if (visorEntity != null && HasComp<PowerCellSlotComponent>(visorEntity))
+            // Show power cell charge for visors even if not "on"
+            foreach (var containerId in ent.Comp.Containers)
+            {
+                if (_container.TryGetContainer(ent, containerId, out var container))
                 {
-                    if (_powerCell.TryGetBatteryFromSlot(visorEntity, out var battery))
+                    var visorEntity = container.ContainedEntities.FirstOrDefault();
+                    if (visorEntity != EntityUid.Invalid && HasComp<NightVisionVisorComponent>(visorEntity) && HasComp<PowerCellSlotComponent>(visorEntity))
                     {
-                        var charge = battery.CurrentCharge / battery.MaxCharge * 100;
-                        args.PushMarkup(Loc.GetString("power-cell-component-examine-details", ("currentCharge", $"{charge:F0}")));
-                    }
-                    else
-                    {
-                        args.PushMarkup(Loc.GetString("power-cell-component-examine-details-no-battery"));
+                        if (_powerCell.TryGetBatteryFromSlot(visorEntity, out var battery))
+                        {
+                            var charge = battery.CurrentCharge / battery.MaxCharge * 100;
+                            args.PushMarkup(Loc.GetString("power-cell-component-examine-details", ("currentCharge", $"{charge:F0}")));
+                        }
+                        else
+                        {
+                            args.PushMarkup(Loc.GetString("power-cell-component-examine-details-no-battery"));
+                        }
                     }
                 }
             }

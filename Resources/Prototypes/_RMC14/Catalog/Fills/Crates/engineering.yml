@@ -54,15 +54,14 @@
     contents:
      - id: RMCPlankWood
 
-#- type: entity # TODO RMC14 add folding barricades
-#  id: RMCCrateFoldingBarricades
-#  parent: RMCCrateConstruction
-#  name: folding metal barricades crate
-#  components:
-#  - type: StorageFill
-#    contents:
-#      - id: CMFoldingBarricade
-#        amount: 3
+- type: entity
+  id: RMCCrateFoldingBarricades
+  parent: RMCCrateConstruction
+  name: MB-6 folding barricades crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMFoldingBarricadesMB6x3
 
 - type: entity
   parent: RMCCrateConstruction

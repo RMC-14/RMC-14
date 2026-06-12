@@ -288,3 +288,25 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/strata_door.rsi
+
+# SPP
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockSPPGrey
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/SPP/spp_grey_airlock.rsi
+
+- type: entity
+  parent: RMCAirlockSPPGrey
+  id: RMCAirlockSPPUtility
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/SPP/spp_utility_airlock.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: RMCAirlockSPPGreyGlass
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/SPP/spp_grey_airlock_glass.rsi

@@ -203,7 +203,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 if (!_xenoEnergy.HasEnergyPopup(args.User, ourAcid.Cost, false))
                     return;
             }
-            else 
+            else
             {
                 if (!_xenoPlasma.HasPlasmaPopup(args.User, ourAcid.Cost, false))
                     return;

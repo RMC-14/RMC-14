@@ -56,6 +56,9 @@ public sealed class RMCCameraBui : RMCPopOutBui<RMCCameraWindow>
             if (i >= names.Length)
                 continue;
 
+            var id = ids[i];
+            var name = names[i];
+
             RMCCameraButton button;
             if (i < Window.CamerasContainer.ChildCount)
             {
@@ -67,21 +70,21 @@ public sealed class RMCCameraBui : RMCPopOutBui<RMCCameraWindow>
             else
             {
                 button = new RMCCameraButton();
+
+                button.OnPressed += _ =>
+                {
+                    if (_currentCameraButton != null)
+                        _currentCameraButton.Pressed = false;
+
+                    _currentCameraButton = button;
+                    SendPredictedMessage(new RMCCameraWatchBuiMsg(id));
+                };
+
                 Window.CamerasContainer.AddChild(button);
             }
 
-            var id = ids[i];
-            var name = names[i];
             button.Label.SetMarkupPermissive($"[font size=11][color=white]{name}[/color][/font]");
             button.Pressed = id == currentNetCamera;
-            button.OnPressed += _ =>
-            {
-                if (_currentCameraButton != null)
-                    _currentCameraButton.Pressed = false;
-
-                _currentCameraButton = button;
-                SendPredictedMessage(new RMCCameraWatchBuiMsg(id));
-            };
         }
 
         for (var i = Window.CamerasContainer.ChildCount - 1; i >= ids.Length; i--)

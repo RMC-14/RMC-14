@@ -85,8 +85,8 @@
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCSmartGunRoyal
     id: RMCIDRoyalMarinesSGO
-    belt: RMCMK80BeltRoyalFilled
-    back: RMCSatchelLightpackFilledRoyal # TODO RMC14 lightweight rmc backpack
+    belt: RMCBeltHolsterPistolRCML189
+    back: RMCBackpackRCMSmallPVPSmartgun
     pocket1: RMCPouchGeneralLargeFilledSmartGunDrums
     pocket2: RMCPouchMedkitFillRoyal
 

@@ -10,11 +10,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivorFireProtectionSpecialist
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetFireProtectionSpecialist
     - type: RMCSurvivor
@@ -64,7 +60,7 @@
   name: fire protection specialist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCFireAxe ]
     - [ CMFireExtinguisherPortable ]

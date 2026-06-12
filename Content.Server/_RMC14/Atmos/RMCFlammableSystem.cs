@@ -85,7 +85,7 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
 
     public override void DoStopDropRollAnimation(EntityUid uid)
     {
-        if (!_actionBlocker.CanInteract(uid, null))
+        if (!_actionBlocker.CanMove(uid))
             return;
 
         RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(uid)), Filter.Pvs(uid)); // RMC14

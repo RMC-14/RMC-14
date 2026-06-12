@@ -130,6 +130,14 @@
   - type: Construction
     graph: RMCTable
     node: Reinforced
+  - type: RMCWeldEffectSource
+    startingOffset: -0.35, -0.35
+    pathOffsets:
+    - -0.35, -0.35
+    - 0.35, -0.35
+    - 0.35, 0.35
+    - -0.35, 0.35
+    - -0.35, -0.35
   - type: XenoLeapDestroyOnPass
     spawnPrototype: CMRodMetal1 # TODO 50% to spawn 2, 50% to spawn 0
 

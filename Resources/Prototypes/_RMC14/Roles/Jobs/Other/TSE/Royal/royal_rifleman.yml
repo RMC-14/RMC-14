@@ -77,15 +77,15 @@
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
-    jumpsuit: RMCJumpsuitMarineRoyalMK80
+    jumpsuit: RMCJumpsuitMarineRoyalL189
     outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL83A3
     id: RMCIDRoyalMarinesCommando
-    belt: RMCL83A3BeltFilled
-    back: RMCSatchelLightpackFilledRoyalCommando # TODO RMC14 lightweight rmc backpack
-    pocket1: RMCPouchGeneralLargeFilledRoyalCommando
+    belt: RMCBeltRCML83A3
+    back: RMCBackpackRCMSmallPVPRifleman
+    pocket1: RMCPouchGeneralLargeFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker

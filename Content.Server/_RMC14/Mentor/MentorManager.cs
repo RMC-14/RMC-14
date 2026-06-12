@@ -30,6 +30,7 @@ public sealed class MentorManager : IPostInjectInit
     [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserDbDataManager _userDb = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
 
     private const string RateLimitKey = "MentorHelp";
     private static readonly ProtoId<JobPrototype> MentorJob = "CMSeniorEnlistedAdvisor";
@@ -257,6 +258,26 @@ public sealed class MentorManager : IPostInjectInit
         }
     }
 
+    private void OnMentorTeleport(MentorClientTeleportMsg message)
+    {
+        var author = message.MsgChannel;
+        if (!_player.TryGetSessionById(author.UserId, out var authorSession) ||
+            !_activeMentors.Contains(authorSession))
+        {
+            return;
+        }
+
+        if (authorSession.AttachedEntity is not { } mentorEntity)
+            return;
+
+        var destination = new NetUserId(message.Destination);
+        if (!_player.TryGetSessionById(destination, out var targetSession) || targetSession.AttachedEntity is not { } targetEntity)
+            return;
+
+        var ev = new MentorFollowEvent(_entMan.GetNetEntity(mentorEntity), _entMan.GetNetEntity(targetEntity));
+        _entMan.EventBus.RaiseLocalEvent(mentorEntity, ref ev);
+    }
+
     private void Unclaim(INetChannel author, NetUserId destination, bool disconnect)
     {
         if (!_destinationClaims.TryGetValue(destination, out var claims))
@@ -453,6 +474,7 @@ public sealed class MentorManager : IPostInjectInit
         _net.RegisterNetMessage<MentorClientUnclaimMsg>(OnClientUnclaim);
         _net.RegisterNetMessage<MentorClaimMsg>();
         _net.RegisterNetMessage<MentorUnclaimMsg>();
+        _net.RegisterNetMessage<MentorClientTeleportMsg>(OnMentorTeleport);
 
         _net.Connected += OnConnected;
         _net.Disconnect += OnDisconnected;

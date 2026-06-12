@@ -33,7 +33,7 @@
   name: hybrisa vehicle operator colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomStartingGear:
       shoes:
       - RMCShoesJackboots
@@ -48,7 +48,7 @@
     - [ RMCJumpsuitLiaisonGreenWorkwear, RMCHandsVeteranInsulated, RMCVestBrown, RMCHeadCapTruckerRed ]
     - [ RMCJumpsuitCivilian, RMCCoatBomberGrey, RMCHeadCapTruckerBlue, RMCGlassesAviatorsSilver ]
     - [ RMCJumpsuitCivilianFrontier, RMCHandsVeteranInsulated, RMCCoatBomberKhaki, RMCSunglassesBig, RMCCassettePlayer ]
-    - [ RMCJumpsuitNormCivilianBlackWebbing, RMCGlassesAviators, RMCCoatBomberGrey, RMCHeadCapFerret, RMCHandsCombat ]
+    - [ RMCJumpsuitNormCivilianBlackWebbing, RMCGlassesAviators, RMCCoatBomberGrey, RMCHeadCapTruckerRed, RMCHandsCombat ]
     randomGearOther:
     -
       - [ CMSheetMetal20, CMBeltUtilityFilled ]

@@ -13,8 +13,8 @@
     powerLoad: 250
     needsPower: true
   - type: RMCPowerReceiver
-    idleLoad: 5
-    activeLoad: 10
+    idleLoad: 1000
+    activeLoad: 0
     channel: Equipment
   - type: Sprite
     sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
@@ -55,6 +55,9 @@
     - state: broadcast_receiver_off
     - state: broadcast_receiver
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: RMCPowerReceiver
+    idleLoad: 600
+    activeLoad: 0
 
 - type: entity
   id: RMCTelecomBroadcaster #gets put ontop of stuff
@@ -68,6 +71,9 @@
     - state: broadcaster_off
     - state: broadcaster
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: RMCPowerReceiver
+    idleLoad: 25
+    activeLoad: 0
 
 - type: entity
   id: RMCTelecomBroadcasterDD
@@ -89,6 +95,9 @@
     - state: relay_off
     - state: relay
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: RMCPowerReceiver
+    idleLoad: 25
+    activeLoad: 0
 
 - type: entity
   id: RMCTelecomRelayDD
@@ -110,6 +119,9 @@
     - state: processor_off
     - state: processor
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: RMCPowerReceiver
+    idleLoad: 25
+    activeLoad: 0
 
 - type: entity
   id: RMCTelecomProcessorUnitDD #gets put ontop of stuff
@@ -131,6 +143,9 @@
     - state: hub_off
     - state: hub
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: RMCPowerReceiver
+    idleLoad: 1600
+    activeLoad: 0
 
 - type: entity
   id: RMCTelecomOSServerBox
@@ -144,6 +159,12 @@
     - state: WY_server_off
     - state: WY_server_on
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: ApcPowerReceiver
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
+    channel: Equipment
 
 - type: entity
   id: RMCTelecomBlackBox
@@ -155,6 +176,9 @@
     sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
     layers:
     - state: blackbox
+  - type: RMCPowerReceiver
+    idleLoad: 10
+    activeLoad: 100
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -202,6 +226,12 @@
         acts: [ "Destruction" ]
   - type: Corrodible
     isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
 
 - type: entity
   id: RMCTelecomSensorComputer2
@@ -228,6 +258,12 @@
         acts: [ "Destruction" ]
   - type: Corrodible
     isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
 
 - type: entity
   id: RMCTelecomSensorComputer3
@@ -254,6 +290,12 @@
         acts: [ "Destruction" ]
   - type: Corrodible
     isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
 
 - type: entity
   id: RMCTelecomMappingComputer
@@ -278,6 +320,12 @@
         acts: [ "Destruction" ]
   - type: Corrodible
     isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
 
 - type: entity
   id: RMCTelecomMissionPlanningSystem
@@ -304,6 +352,12 @@
         acts: [ "Destruction" ]
   - type: Corrodible
     isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
 
 - type: entity
   id: RMCTelecomServerRack
@@ -328,6 +382,15 @@
         acts: [ "Destruction" ]
   - type: Corrodible
     isCorrodible: true
+  - type: RemoveComponents
+    components:
+    - type: ApcPowerReceiver
+      powerLoad: 250
+      needsPower: true
+    - type: RMCPowerReceiver
+      idleLoad: 1000
+      activeLoad: 0
+      channel: Equipment
 
 # Hybrisa
 

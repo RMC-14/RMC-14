@@ -8,3 +8,41 @@
     containers:
       key_slots:
       - CMEncryptionKeyICB
+
+- type: entity
+  parent: RMCHeadsetMarine
+  id: CMHeadsetCBRN
+  name: CBRN headset
+  description: A headset given to CBRN marines.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyERT
+  - type: GrantSquadLeaderTracker
+    defaultMode: SquadLeader
+    trackerModes:
+    - SquadLeader
+    - FireteamLeader
+    - SeniorEnlistedAdvisor
+    - PrimaryLandingZone
+  - type: GrantTacMapAlert
+  - type: HeadsetAutoSquad
+
+- type: entity
+  parent: CMHeadsetCBRN
+  id: CMHeadsetCBRNLeader
+  name: CBRN Leader headset
+  description: A headset given to CBRN Team Leaders.
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
+

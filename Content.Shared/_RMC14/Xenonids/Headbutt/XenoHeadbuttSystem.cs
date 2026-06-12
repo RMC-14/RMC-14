@@ -86,7 +86,15 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno);
-        _throwing.TryThrow(xeno, diff);
+
+        if (TryComp<PhysicsComponent>(xeno, out var physics))
+        {
+            // Prevent headbutt from having longer/shorter range or skewed direction
+            // based on the xeno's movement when using it.
+            _physics.ResetDynamics(xeno, physics);
+        }
+
+        _throwing.TryThrow(xeno, diff, doSpin: false);
     }
 
     private void OnXenoHeadbuttHit(Entity<XenoHeadbuttComponent> xeno, ref ThrowDoHitEvent args)

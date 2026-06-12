@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Maths;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -24,7 +25,7 @@ public sealed partial class RMCTeslaCoilComponent : Component
     /// Maximum range the coil can target entities.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float Range = 3f;
+    public float Range = RMCMathExtensions.CircleAreaFromSquareAbilityRange(3);
 
     /// <summary>
     /// Maximum number of targets the coil can hit simultaneously per firing sequence.

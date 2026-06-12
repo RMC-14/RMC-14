@@ -75,6 +75,7 @@
       params:
         volume: -4
   - type: RMCHealthExaminable
+    speciesType: Xeno
   - type: AcidBloodSplash
     closeSplashRadius: 0.5
     standardSplashRadius: 1.5
@@ -195,6 +196,10 @@
         type: XenoFruitChooseBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.HiveTeamUIKey.Key:
+        type: HiveTeamBui
+      enum.HiveLeaderSquadUIKey.Key:
+        type: HiveLeaderSquadBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:
@@ -224,15 +229,6 @@
   - type: ParalyzeOnPullAttemptImmune
   - type: InfectOnPullAttemptImmune
   - type: GhostTakeoverAvailable
-  - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
-    name: cm-xeno-name
-    description: cm-xeno-description
-    raffle:
-      settings: short
-    rules: cm-xeno-rules
   - type: StatusEffects
     allowed:
     - Stun
@@ -368,6 +364,7 @@
   - type: EmoteCooldown
   - type: RMCMesonsNonviewable
     xenoVisible: true
+  - type: CanBeLarvaQueued
 
 - type: entity
   abstract: true

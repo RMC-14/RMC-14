@@ -318,6 +318,15 @@ public sealed class SquadSystem : EntitySystem
 
     private void OnAssignSquadPlayerSpawnComplete(Entity<AssignSquadComponent> ent, ref PlayerSpawnCompleteEvent args)
     {
+        if (ent.Comp.Squad is { } squadId)
+        {
+            if (TryEnsureSquad(squadId, out var squad))
+            {
+                AssignSquad(ent, (squad.Owner, squad.Comp), args.JobId);
+                return;
+            }
+        }
+
         var query = EntityQueryEnumerator<SquadTeamComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -379,10 +388,8 @@ public sealed class SquadSystem : EntitySystem
 
             if (TryComp<ClothingComponent>(newItem, out var clothing))
             {
-                if (!_cmInventory.TryEquipClothing(user, (newItem, clothing)))
-                {
+                if (!_cmInventory.TryEquipClothing(user, (newItem, clothing), false))
                     _hands.TryPickupAnyHand(user, newItem);
-                }
             }
         }
 
@@ -716,8 +723,18 @@ public sealed class SquadSystem : EntitySystem
                 }
 
                 RemComp<SquadLeaderComponent>(uid);
-                RemComp<RMCTrackableComponent>(uid);
-                RemCompDeferred<RMCPointingComponent>(uid);
+
+                if (TryComp<RMCTrackableComponent>(uid, out var otherTrackable) &&
+                    !otherTrackable.Intrinsic)
+                {
+                    RemComp<RMCTrackableComponent>(uid);
+                }
+
+                if (TryComp<RMCPointingComponent>(uid, out var otherPointing) &&
+                    !otherPointing.Intrinsic)
+                {
+                    RemCompDeferred<RMCPointingComponent>(uid);
+                }
             }
         }
 
@@ -734,8 +751,17 @@ public sealed class SquadSystem : EntitySystem
             _marineOrders.StartActionUseDelay((toPromote, orders));
         }
 
-        EnsureComp<RMCTrackableComponent>(toPromote);
-        EnsureComp<RMCPointingComponent>(toPromote);
+        if (!EnsureComp(toPromote, out RMCTrackableComponent trackable))
+        {
+            trackable.Intrinsic = false;
+            Dirty(toPromote, trackable);
+        }
+
+        if (!EnsureComp(toPromote, out RMCPointingComponent pointing))
+        {
+            pointing.Intrinsic = false;
+            Dirty(toPromote, pointing);
+        }
 
         var slots = _inventory.GetSlotEnumerator(toPromote.Owner, SlotFlags.EARS);
         while (slots.MoveNext(out var slot))

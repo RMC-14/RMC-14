@@ -1,11 +1,12 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaEMT
   startingGear: RMCGearSyntheticColonistHybrisaEMT
   spawnMenuRoleName: EMT Synthetic (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -56,7 +57,7 @@
       preset: RMCSurvivorPresetHybrisaSynthEMT
     - type: Synth
       generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
@@ -70,7 +71,7 @@
   name: survivor synth hybrisa EMT preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
     - [ RMCCoatParamedicGreen, RMCJumpsuitEMTGreen, CMHandsLatex ]

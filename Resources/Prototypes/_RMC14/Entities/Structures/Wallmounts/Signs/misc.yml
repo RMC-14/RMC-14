@@ -1,0 +1,8 @@
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerSteveBirthday
+  name: Happy Birthday Steve banner
+  description: A depressing looking paper banner wishing someone named Steve a happy birth ay.
+  components:
+  - type: Sprite
+    state: steve_birthday

@@ -1,23 +1,35 @@
 - type: entity
   abstract: true
-  parent: BaseStorageItem
+  parent: BaseItem
   id: CMPacketPills
   name: pill packet
   description: Contains pills. Once you take them out, they don't go back in.
   components:
+  - type: CMItemSlots
+    count: 4
+    slot:
+      name: Pill
+      whitelist:
+        tags: []
+  - type: RemoveOnlyStorage
   - type: Sprite
     sprite: _RMC14/Objects/Medical/pill_packets.rsi
+    layers:
+    - state: pill_packet
+    - state: pill_packet_4
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: pill_packet_4, visible: false }
+          Low: { state: pill_packet_1, visible: true }
+          Medium: { state: pill_packet_2, visible: true }
+          High: { state: pill_packet_3, visible: true }
+          Full: { state: pill_packet_4, visible: true }
   - type: Item
     size: Small
-  - type: Storage # TODO RMC14 quick-eject
-    maxItemSize: Small
-    grid:
-    - 0,0,7,1 # 4 slots
-    whitelist:
-      components:
-      - Pill
-  - type: RemoveOnlyStorage
-  - type: FixedItemSizeStorage
   - type: Tag
     tags:
     - PillPacket
@@ -43,11 +55,13 @@
   description: This packet contains tricordazine pills. Heals all types of damage slightly. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
   components:
   - type: Sprite
-    state: tricordrazine_packet
-  - type: StorageFill
-    contents:
-    - id: CMPillTricordrazine
-      amount: 4
+    layers:
+    - state: pill_packet
+    - state: pill_packet_4
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#d87f2b"
+  - type: CMItemSlots
+    startingItem: CMPillTricordrazine
   - type: IconLabel
     labelTextLocId: rmc-tricordazine-container-label-text
 
@@ -58,11 +72,13 @@
   description: This packet contains bicaridine pills. Heals brute damage effectively. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
   components:
   - type: Sprite
-    state: bicaridine_packet
-  - type: StorageFill
-    contents:
-    - id: CMPillBicaridine
-      amount: 4
+    layers:
+    - state: pill_packet
+    - state: pill_packet_4
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ed4847"
+  - type: CMItemSlots
+    startingItem: CMPillBicaridine
   - type: IconLabel
     labelTextLocId: rmc-bicaridine-container-label-text
 
@@ -73,11 +89,13 @@
   description: This packet contains kelotane pills. Heals burn damage effectively. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
   components:
   - type: Sprite
-    state: kelotane_packet
-  - type: StorageFill
-    contents:
-    - id: CMPillKelotane
-      amount: 4
+    layers:
+    - state: pill_packet
+    - state: pill_packet_4
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#f5e123"
+  - type: CMItemSlots
+    startingItem: CMPillKelotane
   - type: IconLabel
     labelTextLocId: rmc-kelotane-container-label-text
 

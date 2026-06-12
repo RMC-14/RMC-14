@@ -48,7 +48,7 @@
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Plasma and flamethrower sentries" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
-                    <controls:RoadmapItem ItemState="Complete" HeaderText="Orbital bombardment" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="{Loc rmc-ui-roadmap-orbital-bombardment}" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Fireteam Leader" Text="More equipment in the fireteam leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Specialist's Scout Kit" />

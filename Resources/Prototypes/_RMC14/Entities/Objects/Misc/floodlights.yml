@@ -94,7 +94,7 @@
     layers:
       - state: bigflood
       - state: bigfloodon
-        visible: false
+        visible: true
         map: [ "light" ]
     offset: "0.0,0.5"
     drawdepth: Mobs
@@ -360,7 +360,7 @@
     layers:
       - state: street_off
       - state: street_on
-        visible: false
+        visible: true
         map: [ "light" ]
     drawdepth: Mobs
   - type: Construction

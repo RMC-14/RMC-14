@@ -783,7 +783,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void RelayAttachableActions(Entity<AttachableToggleableComponent> attachable, EntityUid user)
     {
-        if (attachable.Comp.ActionsToRelayWhitelist == null || !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent))
+        if (attachable.Comp.ActionsToRelayWhitelist == null ||
+            !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent) ||
+            actionsContainerComponent.Container is not { } container) // Your IDE lies, this CAN be null.
             return;
 
         foreach (var actionUid in actionsContainerComponent.Container.ContainedEntities)
@@ -820,7 +822,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void RemoveRelayedActions(Entity<AttachableToggleableComponent> attachable, EntityUid user)
     {
-        if (attachable.Comp.ActionsToRelayWhitelist == null || !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent))
+        if (attachable.Comp.ActionsToRelayWhitelist == null ||
+            !TryComp(attachable.Owner, out ActionsContainerComponent? actionsContainerComponent) ||
+            actionsContainerComponent.Container is not { } container) // Your IDE lies, this CAN be null.
             return;
 
         foreach (var actionUid in actionsContainerComponent.Container.ContainedEntities)

@@ -24,9 +24,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-pve-team-leader
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadPMC
+      squad: SquadPMC
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable

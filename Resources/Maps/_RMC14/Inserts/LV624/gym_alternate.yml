@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 03/29/2025 17:58:12
-  entityCount: 116
+  entityCount: 114
 maps: []
 grids:
 - 1
@@ -301,18 +301,6 @@ entities:
     components:
     - type: Transform
       pos: 5.5,9.5
-      parent: 1
-- proto: CMSpawnPointSurvivor
-  entities:
-  - uid: 35
-    components:
-    - type: Transform
-      pos: 12.5,4.5
-      parent: 1
-  - uid: 36
-    components:
-    - type: Transform
-      pos: 4.5,11.5
       parent: 1
 - proto: CMTableAlmayer
   entities:

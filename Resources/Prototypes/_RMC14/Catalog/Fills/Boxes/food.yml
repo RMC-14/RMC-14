@@ -13,3 +13,20 @@
       - id: FoodEgg
         amount: 1
   - type: Sprite
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxDonkpockets
+  name: box of donk-pockets
+  description: "Instructions: Heat in microwave. Product will cool if not eaten within seven minutes."
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - DonkPocket
+  - type: StorageFill
+    contents:
+    - id: RMCFoodDonkpocket
+      amount: 6
+  - type: Sprite
+    state: donk_kit

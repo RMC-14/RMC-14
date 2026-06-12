@@ -124,8 +124,6 @@
 - type: entity
   parent: RMCContainerBase
   id: RMCContainerFujinLeft
-  name: Fujin Cargo Container
-  description: "A huge industrial shipping container.\nThis one is from Fujin, a manufacturer of a variety of electronical and mechanical products.\nAt least, that is what is says on the container. You have literally never heard of this company before."
   suffix: Fujin, Left
   components:
   - type: Sprite
@@ -142,8 +140,6 @@
 - type: entity
   parent: RMCContainerBase
   id: RMCContainerApocraphyLeft
-  name: Apocraphy Cargo Container
-  description: "A huge industrial shipping container.\nThis one is from The Apocrahpy Corporation, a manufacturer of medical and biotechnological parts.\nYou remember hearing about one of their latest drugs, and how dangerous it was... though they claimed to be close to finding a solution."
   suffix: Apocraphy, Left
   components:
   - type: Sprite
@@ -160,8 +156,6 @@
 - type: entity
   parent: RMCContainerBase
   id: RMCContainerPathosLeft
-  name: Pathos Cargo Container
-  description: "A huge industrial shipping container.\nThis one is from Pathos, a computer parts and motion detector manufacturer.\nYou still wonder why we have a container of old Motion Detectors, and if they even still work."
   suffix: Pathos, Left
   components:
   - type: Sprite
@@ -228,8 +222,8 @@
 - type: entity
   parent: RMCContainerBase
   id: RMCContainerTrijentLeft
-  name: Trijent Corporation Cargo Container
-  description: "A huge industrial shipping container.\nThis one is from The Trijent Corporation's mining operations.\nIf this breaks open, you figure you probably shouldn't breathe in what's inside."
+  name: Trijent Cargo Container
+  description: "A huge industrial shipping container.\nThis one is from The Trijent's mining operations.\nIf this breaks open, you figure you probably shouldn't breathe in what's inside."
   suffix: Trijent, Left
   components:
   - type: Sprite
@@ -278,8 +272,6 @@
 - type: entity
   parent: RMCContainerBase
   id: RMCContainerFerretLeft
-  name: Ferret Heavy Industries Cargo Container
-  description: "A huge industrial shipping container.\nThis one is from Ferret Heavy Industries, a manufacturer of terrestrial crawlers and powerloaders.\nUnfortunately, the company went bankrupt. Fortunately, these containers are really cheap now."
   suffix: Ferret, Left
   components:
   - type: Sprite
@@ -330,8 +322,6 @@
 - type: entity
   parent: RMCContainerBase
   id: RMCContainerAICMiddle
-  name: AIC Cargo Container
-  description: "A huge industrial shipping container.\nThis one is from the Asian Industrial Collective, which was absorded into the SPP. Their massive industrial output has ensured that cargo containers bearing their symbols and name won't be disappearing any time soon."
   suffix: AIC, Middle
   components:
   - type: Sprite
@@ -391,8 +381,6 @@
   parent: RMCContainerBase
   id: RMCContainerMSPLeft
   suffix: MSP, Left
-  name: Ministry of Space Protection Cargo Container
-  description: "A huge industrial shipping container.\nThis one belongs to the SPP's Ministry of Space Protection."
   components:
   - type: Sprite
     state: mspcontainerleft
@@ -418,7 +406,7 @@
   id: RMCContainerUNMCLeft
   suffix: UNMC, Left
   name: United Nations Marine Corps Cargo Container
-  description: "A huge industrial shipping container.\nThis one belongs to the UN's United Nations Marine Corps."
+  description: "A huge industrial shipping container.\nThis one belongs to the United Nations Marine Corps."
   components:
   - type: Sprite
     state: unmccontainerleft
@@ -464,6 +452,32 @@
   components:
   - type: Sprite
     state: aegiscontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerAvantLeft
+  name: Avant Biomedical Cargo Container
+  description: "A huge industrial shipping container. This one is from Avant Biomedical, a producer of biotechnology and medical goods. Despite being renowned for making high-quality products, rumors of shady projects seem to follow them."
+  suffix: Avant, Left
+  components:
+  - type: Sprite
+    state: avantcontainerleft
+
+- type: entity
+  parent: RMCContainerAvantLeft
+  id: RMCContainerAvantMiddle
+  suffix: Avant, Middle
+  components:
+  - type: Sprite
+    state: avantcontainermiddle
+
+- type: entity
+  parent: RMCContainerAvantLeft
+  id: RMCContainerAvantRight
+  suffix: Avant, Right
+  components:
+  - type: Sprite
+    state: avantcontainerright
 
 # Small
 
@@ -947,7 +961,6 @@
 - type: entity
   parent: RMCContainerTartarusLeft
   id: RMCContainerAMSLeft
-  description: A huge industrial shipping container. This one belongs to the Asian Multinational Shipping Line, a bulk-freight Weston-Yamada subsidiary.
   suffix: AMS, Left
   components:
   - type: Sprite

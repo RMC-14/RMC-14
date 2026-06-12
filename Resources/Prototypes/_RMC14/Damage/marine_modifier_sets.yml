@@ -9,6 +9,15 @@
     Cold: 1.15
     Caustic: 1.15
 
+# Used in MB-6 Folding Barricade
+- type: damageModifierSet
+  id: CMFoldingBarricade
+  coefficients:
+    Heat: 0.85
+    Shock: 0.85
+    Cold: 0.85
+    Caustic: 0.85
+
 # Used in anti-Biohazard Barricade
 - type: damageModifierSet
   id: CMBurnBarricade

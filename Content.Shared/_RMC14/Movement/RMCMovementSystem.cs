@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -7,25 +8,33 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Movement;
 
 public sealed class RMCMovementSystem : EntitySystem
 {
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private const CollisionGroup ClimbCheckGroup = CollisionGroup.Impassable | CollisionGroup.HighImpassable |
                                               CollisionGroup.MidImpassable | CollisionGroup.LowImpassable;
 
+    private readonly HashSet<EntityUid> _intersecting = [];
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCMobCollisionComponent, MapInitEvent>(OnMobCollisionMapInit);
         SubscribeLocalEvent<RMCMobCollisionComponent, MobStateChangedEvent>(OnMobCollisionMobStateChanged);
+
+        SubscribeLocalEvent<RMCOutsideChamberComponent, PreventCollideEvent>(OnPreventCollide);
     }
 
     private void OnMobCollisionMapInit(Entity<RMCMobCollisionComponent> ent, ref MapInitEvent args)
@@ -84,6 +93,10 @@ public sealed class RMCMovementSystem : EntitySystem
         var userPosition = _transform.GetMoverCoordinates(user.Value).Position;
         var targetPosition = _transform.GetMoverCoordinates(target).Position;
         var direction = targetPosition - userPosition;
+
+        if (direction == Vector2.Zero)
+            return true;
+
         var ray = new CollisionRay(userPosition, direction.Normalized(), (int)ClimbCheckGroup);
         var intersect = _physics.IntersectRayWithPredicate(Transform(user.Value).MapID, ray, direction.Length(), e => !Transform(e).Anchored);
         var results = intersect.Select(r => r.HitEntity).ToHashSet();
@@ -107,5 +120,40 @@ public sealed class RMCMovementSystem : EntitySystem
             return false;
         }
         return true;
+    }
+
+    public void SuppressCollisionOnExit(EntityUid ent, EntityUid chamber)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        var outside = EnsureComp<RMCOutsideChamberComponent>(ent);
+        outside.Chamber = chamber;
+        Dirty(ent, outside);
+    }
+
+    private void OnPreventCollide(Entity<RMCOutsideChamberComponent> ent, ref PreventCollideEvent args)
+    {
+        if (ent.Comp.Chamber == args.OtherEntity)
+            args.Cancelled = true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<RMCOutsideChamberComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Chamber is not { } chamber)
+            {
+                RemCompDeferred<RMCOutsideChamberComponent>(uid);
+                continue;
+            }
+
+            _intersecting.Clear();
+            _entityLookup.GetEntitiesIntersecting(uid, _intersecting);
+
+            if (!_intersecting.Contains(chamber))
+                RemCompDeferred<RMCOutsideChamberComponent>(uid);
+        }
     }
 }

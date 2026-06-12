@@ -83,6 +83,9 @@
     id: CMIDCardPMC
     pocket1: RMCPouchToolsSocFilledSynthetic
     pocket2: RMCPouchConstructionFillLowGrade
+  storage:
+    back:
+    - RMCUniversalRecorder
 
 - type: playTimeTracker
   id: RMCJobPMCSynthetic

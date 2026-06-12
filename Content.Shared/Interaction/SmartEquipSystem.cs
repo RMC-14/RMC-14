@@ -176,6 +176,13 @@ public sealed class SmartEquipSystem : EntitySystem
         // case 2 (storage item):
         if (TryComp<StorageComponent>(slotItem, out var storage))
         {
+            // RMC14
+            if (!_actionBlocker.CanInteract(uid, slotItem) ||
+                !_storage.CanInteract(uid, (slotItem, storage), silent: false))
+            {
+                return;
+            }
+
             switch (handItem)
             {
                 case null when storage.Container.ContainedEntities.Count == 0:

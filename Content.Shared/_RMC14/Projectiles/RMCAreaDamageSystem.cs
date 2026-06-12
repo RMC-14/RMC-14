@@ -73,9 +73,8 @@ public sealed class RMCAreaDamageSystem : EntitySystem
             if (TryComp(uid, out CMArmorPiercingComponent? piercing))
                 armorPiercing = piercing.Amount;
 
-            // Xenos take double area damage in CM13 compared to humans, I tried finding out why without success so here's a 2x multiplier.
             if (size >= RMCSizes.SmallXeno)
-                newDamage *= 2;
+                newDamage *= areaDamage.XenoDamageMultiplier;
 
             var damageDealt = _damage.TryChangeDamage(entity, newDamage, armorPiercing: armorPiercing);
 

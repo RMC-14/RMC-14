@@ -1,11 +1,12 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaCivilian
   startingGear: RMCGearSyntheticColonistHybrisaCivilian
   spawnMenuRoleName: Civilian Synth (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -56,7 +57,7 @@
       preset: RMCSurvivorPresetHybrisaSynthCivilian
     - type: Synth
       generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
@@ -69,7 +70,7 @@
   name: survivor synth hybrisa civilian colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     # WeYa mart employee
     - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, CMSatchel, RMCShoesLaceup ]
@@ -83,5 +84,7 @@
     - [ RMCDailyGrindApron, RMCJumpsuitDailyGrind, RMCShoesLaceup, CMSatchel ]
     # Landing Pad Attendant Synth
     - [ RMCJumpsuitCivilianYellow, RMCHeadCapFlippable, RMCSatchelNorm, CMBootsBlackFilled, CMPackFlare, RMCHazardVest, RMCBinoculars, RMCBeltUtilityGeneral, RMCHandsVeteran, RMCScabbardMacheteFilled, RMCEarmuffs ]
+    # Teacher
+    - [ RMCHipsterGlasses, RMCJumpsuitCivilianBrown, RMCSatchelNorm, CMSparePDTLBattleBuddyKit, RMCCoatBomber, CMHealthAnalyzer, RMCSprayBottleSpaceCleaner, RMCCrayonBox, RMCFoodSnackChipsPepper, CMBootsBlackFilled ]
     # Bartender
     - [ RMCSatchelBlackBartenderSynthFill, CMHandsBlackMarine, RMCCigarette, CMBootsBlackFilled, RMCCoatWaistcoat, ClothingUniformJumpsuitDetectiveGrey, ClothingHeadHatBowlerHat ]

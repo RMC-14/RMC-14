@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/16/2026 02:09:59
-  entityCount: 483
+  time: 03/10/2026 21:49:28
+  entityCount: 485
 maps: []
 grids:
 - 2
@@ -2321,6 +2321,22 @@ entities:
     components:
     - type: Transform
       pos: 14.5,3.5
+      parent: 2
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 484
+    components:
+    - type: MetaData
+      name: Crisis Center
+    - type: Transform
+      pos: 12.5,14.5
+      parent: 2
+  - uid: 485
+    components:
+    - type: MetaData
+      name: Panic Room
+    - type: Transform
+      pos: 10.5,4.5
       parent: 2
 - proto: RMCPhotocopier
   entities:

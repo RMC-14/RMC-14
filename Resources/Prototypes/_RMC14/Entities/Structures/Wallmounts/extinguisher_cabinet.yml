@@ -16,6 +16,11 @@
         visible: true
       - state: closed
         map: ["enum.OpenableVisuals.Layer"]
+    - type: InteractedBlacklist
+      blacklist:
+        components:
+        - Xeno
+    - type: Corrodible
 
 - type: entity
   parent: RMCExtinguisherCabinet

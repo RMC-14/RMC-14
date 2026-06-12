@@ -169,6 +169,24 @@
   - type: RMCEarProtection
 
 - type: entity
+  parent: CMArmorHelmetM10Tech
+  id: CMArmorHelmetM50
+  name: M50 tanker helmet
+  description: The lightweight M50 tanker helmet is designed for use by armored crewmen in the UNMC. It offers low weight protection, and allows agile movement inside the confines of an armored vehicle. Features a toggleable welding screen for eye protection.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m50/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m50/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m50/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m50/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m50/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m50/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m50/urban.rsi
+
+- type: entity
   parent: ArmorHelmetM10
   id: RMCArmorHelmetM10Welding
   name: M10 welding helmet
@@ -345,6 +363,25 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/urban.rsi
+  - type: RotaryPhone
+    category: Marine
+    canDnd: true
+    phoneId: RMCTelephoneScout
+    phoneCanBeTransferred: false
+  - type: RotaryPhoneDnd
+  - type: RotaryPhoneBackpack
+    slot: HEAD
+    actionId: RMCActionTelephoneScout
+  - type: UserInterface
+    interfaces:
+      enum.RMCTelephoneUiKey.Key:
+        type: RMCTelephoneBui
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 # M3-G4 Grenadier Spec
 - type: entity
@@ -399,10 +436,21 @@
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m35/urban.rsi
   - type: TemperatureProtection
     heatingCoefficient: 0.001
+  - type: FoldableClothing
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+    unfoldedHideLayers:
+    - Snout
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 # M45 Sniper Spec
 - type: entity
-  parent: RMCMarineHelmetBase
+  parent: ArmorHelmetM10
   id: CMArmorHelmetM45
   name: M45 ghillie helmet
   description: A lightweight M45 helmet with ghillie coif used by Marine snipers on recon missions.
@@ -411,9 +459,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
-  - type: HideLayerClothing
-    slots:
-    - Snout
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
@@ -435,13 +480,15 @@
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: snpr-helmet
   - type: FoldableClothing
-    foldedEquippedPrefix: closed
-    foldedHeldPrefix: closed
     foldedHideLayers:
     - Hair
     - HeadTop
     - HeadSide
+    - Snout
     unfoldedHideLayers:
+    - Snout
+  - type: HideLayerClothing
+    slots:
     - Snout
 
 # M3-T Demo Spec

@@ -1,0 +1,308 @@
+- type: entity
+  id: RMCSimpleMob
+  parent: # SimpleMobBase is the parent for air breathers please refrain from using it
+  - BaseSimpleMob
+  - MobAtmosExposed
+  - MobCombat
+  - MobBloodstream
+  - MobFlammable
+  abstract: true
+  suffix: CM
+  components:
+  - type: NameIdentifier
+    group: GenericNumber
+  - type: ShortExamine
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcBite
+  - type: Body
+    prototype: Animal
+  - type: Climbing
+  - type: RMCRevivable
+  - type: RMCMedicalExamine
+    simple: true
+    deadText: rmc-medical-examine-dead-simple-mob
+  - type: RMCHealthIcons
+  - type: CrashLandable
+  - type: Woundable
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: null
+    healthBarThreshold: 2 # some of these mobs literally only have 10 hit points
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 5
+  - type: Bloodstream
+    bloodMaxVolume: 150
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
+    - Stutter
+    - Electrocution
+    - ForcedSleep
+    - TemporaryBlindness
+    - Drunk
+    - SlurredSpeech
+    - RatvarianLanguage
+    - PressureImmunity
+    - Muted
+    - Pacified
+    - StaminaModifier
+    - Flashed
+    - Dazed
+    - Blinded
+    - Deaf
+    - Unconscious
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      60: 0.7
+      80: 0.5
+  - type: Hunger
+    thresholds:
+      Overfed: 100
+      Okay: 50
+      Peckish: 25
+      Starving: 10
+      Dead: 0
+    baseDecayRate: 0.05
+  - type: Thirst
+    thresholds:
+      OverHydrated: 200
+      Okay: 150
+      Thirsty: 100
+      Parched: 10
+      Dead: 0
+    baseDecayRate: 0.04
+  - type: FixedIdentity
+    name: rmc-host
+    whitelist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCSimpleMob
+  id: RMCRodent # required for all our code to not blow up, yes, it is pretty much just a 1-1 copy paste of upstream mouse code
+  name: Abstract rodent
+  abstract: true
+  suffix: CM
+  components:
+  - type: Body
+    prototype: Mouse
+  - type: Speech
+    speechSounds: Squeak
+    speechVerb: SmallMob
+    allowedEmotes: ['Squeak']
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      8: Critical
+      10: Dead
+  - type: NpcFactionMember
+    factions:
+      - Mouse
+  - type: HTN
+    rootTask:
+      task: MouseCompound
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+  - type: Deathgasp
+  - type: Food
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: Thirst
+    startingThirst: 25  # spawn with Okay thirst state
+    thresholds:
+      OverHydrated: 35
+      Okay: 25
+      Thirsty: 15
+      Parched: 10
+      Dead: 0
+    baseDecayRate: 0.04
+  - type: Hunger
+    thresholds:
+      Overfed: 35
+      Okay: 25
+      Peckish: 15
+      Starving: 10
+      Dead: 0
+    baseDecayRate: 0.5 # I'm very hungry! Give me. The cheese.
+  - type: Extractable
+    grindableSolutionName: food
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 3
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatRat
+      amount: 1
+  - type: ReplacementAccent
+    accent: mouse
+  - type: Tag
+    tags:
+    - Trash
+    - Mouse
+    - Meat
+  - type: Vocal
+    sounds:
+      Male: Mouse
+      Female: Mouse
+      Unsexed: Mouse
+  - type: CombatMode # I dont think this is needed
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 0
+  - type: Bloodstream
+    bloodMaxVolume: 50
+  - type: BadFood
+  - type: ZombieImmune
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Mouse_burning
+  - type: FoodSequenceElement
+    entries:
+      Taco: RatTaco
+      Burger: RatBurger
+      Skewer: RatSkewer
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rat
+
+#TODO: Emotes: "chimper","scratch","jump","roll","tail","rocks about", "creaks", "chimpers". chance 80 to use, equip or throw nearby objects. chance 50 volcalise/emote. What tf do those chance values mean? beats me check 13
+- type: entity
+  id: RMCSmallHost
+  parent: [RMCSimpleMob, StripableInventoryBase] #TODO: Just parent this to BaseOranic at some point down the line if it doesn't prove to be catastrophic
+  name: abstract small host
+  abstract: true
+  components:
+  - type: CombatMode
+  - type: Inventory #placeholder until the monkey equipped sprites are ported
+    templateId: monkey
+    speciesId: monkey
+  - type: Deathgasp
+    prototype: MonkeyDeathgasp
+  - type: Cuffable
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Stripping
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: _RMC14/Mobs/Animals/monkeys/monkey.rsi
+      state: monkey
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "id" ]
+    - map: [ "outerClothing" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+    - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
+  - type: Hands
+  - type: ComplexInteraction
+  - type: GenericVisualizer
+    visuals:
+      enum.CreamPiedVisuals.Creamed:
+        clownedon:
+          True: {visible: true}
+          False: {visible: false}
+      enum.UserAcidedVisuals.Acided:
+        acided:
+          None:
+            visible: false
+          Normal:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: human_acid
+            visible: true
+          Enhanced:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: human_acid_enhanced
+            visible: true
+  - type: Body
+    prototype: Primate
+    requiredLegs: 1
+  - type: CreamPied
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Monkey_burning
+  - type: MobThresholds # CM13 uses damage multipliers instead of setting a unique health for em. All small hosts use a 1.5 brute and burn mult so just doing this instead
+    thresholds:
+      0: Alive
+      120: Critical # They get a crit state, not parity, just for anti code reasonance cascadey reasons
+      130: Dead
+  - type: MeleeWeapon # TODO: give them a secondary attack method which is bite. Parity
+    soundHit:
+      collection: Punch
+    angle: 0
+    animation: WeaponArcFist
+    damage:
+      types:
+        Blunt: 5
+  - type: Infectable
+  - type: Tackleable
+  - type: Devourable
+  - type: XenoNestable
+  - type: CanBeFirePatted
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-monkey
+#  - type: NPCRetaliation
+#    attackMemoryLength: 10
+#  - type: FactionException
+  - type: NpcFactionMember
+    factions:
+      - Passive
+#  - type: HTN
+#    rootTask:
+#      task: SimpleHostileCompound
+# objectively speaking getting killed by an ape is funny but it is not parity. commented out incase this non-parity feature is deemed vital for some reason

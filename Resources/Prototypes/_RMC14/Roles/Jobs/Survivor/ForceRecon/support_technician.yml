@@ -3,7 +3,7 @@
   id: RMCSurvivorForeconSupportTech
   name: rmc-job-name-forecon-support-tech
   startingGear: RMCGearForeconSupportTech
-  icon: "CMJobIconCombatTech"
+  icon: "RMCJobIconSupportTech"
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobCombatTech
@@ -18,24 +18,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
-      skills:
-        RMCSkillEngineer: 1
-        RMCSkillConstruction: 2
-        RMCSkillMeleeWeapons: 1
-        RMCSkillCqc: 1
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillJtac: 1
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
-        RMCSkillEndurance: 2
-        RMCSkillLeadership: 0
-        RMCSkillVehicles: 0
+      preset: RMCSkillPresetReconSupportTechnician
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: engi
+        state: spt
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
       whitelist:
@@ -73,6 +62,6 @@
   name: forecon support technician survivor preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomGear:
     - [ CMAdvFirstAidKitFilled ]

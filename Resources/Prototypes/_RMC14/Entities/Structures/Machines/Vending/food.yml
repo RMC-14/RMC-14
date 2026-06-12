@@ -201,11 +201,23 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/boozeomat.rsi
     layers:
     - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
     - state: "normal-unshaded"
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      shader: unshaded
+  - type: ApcPowerReceiver
+    needsPower: true
+  - type: RMCPowerReceiver # Still requires power to vend though
+    idleLoad: 0
+    activeLoad: 0
+    channel: Equipment
   - type: AccessReader
     access:
     - [ "CMAccessKitchen" ]
     - [ "CMAccessColonyPublic" ]
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     access:
     - "CMAccessKitchen"
@@ -278,6 +290,8 @@
         name: metal flask (empty)
         amount: 5
       - id: DrinkGlass
+        amount: 10
+      - id: RMCDrinkGlass
         amount: 30
       - id: CMMarineFlask
         amount: 5
@@ -293,6 +307,9 @@
     layers:
     - state: "off"
     - state: "normal-unshaded"
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     hackable: true
     sections:

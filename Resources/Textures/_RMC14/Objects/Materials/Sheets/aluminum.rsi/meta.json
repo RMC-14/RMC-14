@@ -1,14 +1,22 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1719ee43f983ae46841fcdd636bf9bc4c80706d0/icons/obj/items/stacks.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1719ee43f983ae46841fcdd636bf9bc4c80706d0/icons/obj/items/stacks.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/items/material_stacks_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/items/material_stacks_lefthand.dmi, inhand sprites modified by @IceNoobXD on Github",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "aluminum"
+      "name": "icon"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
     }
   ]
 }

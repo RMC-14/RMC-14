@@ -5,6 +5,8 @@
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorTrucker
   playTimeTracker: CMJobSurvivorEngineer
+  accessGroups:
+  - ColonistEngi
   special:
   - !type:AddComponentSpecial
     components:

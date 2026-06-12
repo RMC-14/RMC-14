@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorSecurity
   id: RMCSurvivorHybrisaTSEPAConstable
   name: rmc-job-name-tsepa-constable
@@ -55,7 +55,7 @@
   name: constable colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     primaryWeapons: [ ]
     randomOutfits:
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPA, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]

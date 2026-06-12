@@ -95,6 +95,9 @@
   id: RMCGlass
 
 - type: Tag
+  id: RMCFoldingBarricade
+
+- type: Tag
   id: RMCHelmet
 
 - type: Tag
@@ -110,10 +113,16 @@
   id: RMCMacheteScabbard
 
 - type: Tag
+  id: RMCMacheteHolder
+
+- type: Tag
   id: RMCScalpel
 
 - type: Tag
   id: RMCScrewdriver
+
+- type: Tag
+  id: LightReplacer
 
 - type: Tag
   id: ThrowingKnife
@@ -137,6 +146,11 @@
   id: Bacon
 
 - type: Tag
+
+  id: Watch
+
+- type: Tag
+
   id: RMCPinpointer
 
 - type: Tag
@@ -177,3 +191,6 @@
 
 - type: Tag
   id: RMCSentryLaptop
+
+- type: Tag
+  id: RMCDataDisk

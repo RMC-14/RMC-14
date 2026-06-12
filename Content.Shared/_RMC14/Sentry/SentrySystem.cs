@@ -73,6 +73,7 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, SentryDisassembleDoAfterEvent>(OnSentryDisassembleDoAfter);
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
         SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
+        SubscribeLocalEvent<SentryComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
         SubscribeLocalEvent<SentrySpikesComponent, AttackedEvent>(OnSentrySpikesAttacked);
 
         Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
@@ -358,6 +359,15 @@ public sealed class SentrySystem : EntitySystem
         var newSentry = Spawn(upgrade, coordinates, rotation: rotation);
         var ev = new SentryUpgradedEvent(oldSentry, newSentry, user);
         RaiseLocalEvent(newSentry, ref ev);
+    }
+
+    private void OnBeforeDamageChanged(Entity<SentryComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        if (args.Damage.GetTotal() < 0)
+            return;
+
+        if (ent.Comp.Mode == SentryMode.Item)
+            args.Cancelled = true;
     }
 
     private void UpdateState(Entity<SentryComponent> sentry)

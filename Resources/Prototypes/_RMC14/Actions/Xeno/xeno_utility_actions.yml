@@ -185,6 +185,21 @@
 
 - type: entity
   parent: ActionXenoBase
+  id: ActionXenoHiveLeaderSquad
+  name: View Hive Team
+  description: Opens your hive squad panel, showing your team members and allowing you to send announcements to them.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_lead
+    useDelay: 1
+  - type: InstantAction
+    event: !type:HiveLeaderSquadActionEvent
+
+- type: entity
+  parent: ActionXenoBase
   id: ActionXenoLeader
   name: Choose/Follow Xenonid Leaders
   description: Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.

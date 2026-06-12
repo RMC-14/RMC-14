@@ -115,6 +115,23 @@
     - RMCWeaponRifleSSG45
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-ssg-45
+  - type: ItemMapper
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_icon.rsi
+    mapLayers:
+      mag-0:
+        whitelist:
+          tags:
+          - RMCMagazineRifleSSG45
+          - RMCMagazineRifleSSG45HEAP
+          - RMCMagazineRifleSSG45Incend
+      mag-1:
+        whitelist:
+          tags:
+          - RMCMagazineRifleSSG45AP
+      mag-2:
+        whitelist:
+          tags:
+          - RMCMagazineRifleSSG45Ext
 
 - type: entity
   parent: RMCWeaponRifleSSG45NoLock

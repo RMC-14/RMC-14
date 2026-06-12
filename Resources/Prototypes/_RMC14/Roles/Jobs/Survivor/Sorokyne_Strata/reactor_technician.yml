@@ -61,7 +61,7 @@
   name: reactor technician preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, RMCShoesWhite ]
     - [ RMCLabcoatShort, RMCShoesLaceupBrown ]

@@ -21,6 +21,13 @@
 
 - type: entity
   parent: CMJumpsuitSPPOfficer
+  id: RMCJumpsuitSPPOfficerAmmoFilled
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSPPCommandFilled
+
+- type: entity
+  parent: CMJumpsuitSPPOfficer
   id: CMJumpsuitSPPMP
   name: SPP military police fatigues
   description: A set of SPP military police fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
@@ -106,12 +113,27 @@
 
 - type: entity
   parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPPatchAirborne
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchSPPVDV
+
+- type: entity
+  parent: CMJumpsuitSPP
   id: CMJumpsuitSPPMedic
   name: SPP medic fatigues
   description: A set of SPP medic fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/medic.rsi
+
+- type: entity
+  parent: CMJumpsuitSPPMedic
+  id: RMCJumpsuitSPPMedicSurgicalWebbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSurgicalGreen
 
 - type: entity
   parent: CMJumpsuitSPP
@@ -134,8 +156,10 @@
     tags:
     - RMCUniformSPP
 
+#Jacket only
+
 - type: entity
-  parent: CMJumpsuitSPP
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitSPPMariner
   name: SPP Mariner Fatigues
   description: A set of SPP fatigues specifcially designed for Marines and Mariners.
@@ -145,22 +169,23 @@
   - type: Foldable
     unfoldVerbText: rmc-jacket-verb-unfold
     foldVerbText: rmc-jacket-verb-fold
+  - type: Tag
+    tags:
+    - RMCUniformSPP
+
+#Not Foldable
 
 - type: entity
-  parent: CMJumpsuitSPP
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitSPPOfficerShirt
   name: SPP Officer's Shirt
   description: A well-tailored off-white shirt and pants, designed for officers who don't use fatigues.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officershirtspp.rsi
-    
-- type: entity
-  parent: CMJumpsuitSPPOfficer
-  id: RMCJumpsuitSPPOfficerAmmoFilled
-  components:
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingSPPCommandFilled
+  - type: Tag
+    tags:
+    - RMCUniformSPP
 
 # Civilians
 - type: entity

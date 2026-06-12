@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.CombatMode;
+using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Synth;
@@ -106,6 +107,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<XenoDevourComponent, RMCCombatModeInteractOverrideUserEvent>(OnXenoCombatModeInteract);
         SubscribeLocalEvent<XenoDevourComponent, InteractUsingEvent>(OnXenoDevouredInteractWith);
         SubscribeLocalEvent<XenoDevourComponent, VentEnterAttemptEvent>(OnXenoDevouredVentAttempt);
+        SubscribeLocalEvent<XenoDevourComponent, RMCPullToggleEvent>(OnXenoDevourPullToggle);
 
         SubscribeLocalEvent<UsableWhileDevouredComponent, CMGetArmorPiercingEvent>(OnUsableWhileDevouredGetArmorPiercing);
     }
@@ -358,6 +360,12 @@ public sealed class XenoDevourSystem : EntitySystem
             return;
 
         if (StartDevourPulled(args.User))
+            args.Handled = true;
+    }
+
+    private void OnXenoDevourPullToggle(Entity<XenoDevourComponent> xeno, ref RMCPullToggleEvent args)
+    {
+        if (StartDevourPulled(xeno))
             args.Handled = true;
     }
 

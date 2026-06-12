@@ -1,13 +1,33 @@
 rmc-xeno-strain-specialized-into = It has specialized into {INDEFINITE($strain)} {$strain}.
 
+rmc-xeno-trapper-name = Sapper
+rmc-xeno-trapper-description = You trade your bombard, neurotoxin, acid shroud, acid spray, some speed and a little health to gain the ability to create acid explosions and restrain enemies within them.
+   You gain the ability to:
+   - Fire a close ranged shotgun of acid that deals high damage, further increased against trapped targets.
+   - - Gain stacks of Insight when you strike enemies with your shotgun. At 10 stacks, you empower your next trap deployment.
+   - - - Hitting a trapped enemy will instantly give you max stacks of Insight.
+   - Place a line of restraining traps at a distance to set up ambushes or disrupt enemies.
+   - - When empowered, the traps restrain for longer and empower your next Acid Mine explosion.
+   - Remotely detonate hidden Acid Mines, causing a delayed explosion of acid that burns enemies and corrodes through structures.
+   - - When empowered, deals greatly increased damage to structures and slightly increased damage to enemies. It also applies a lingering acid to enemies.
+   - Gain a temporary speed boost when hurt, allowing a swifter escape.
+rmc-xeno-trapper-popup = The battlefield is my canvas, this one, my painter. Melt them where they stand.
+
 rmc-xeno-dancer-name = Dancer
 rmc-xeno-dancer-description = You trade your spit, acid ball, acid spray, corrosive acid, dash, and a small bit of armor for high single-target damage.
+   You lose:
+   - Your dash and acid abilities
+   - The ability to fully benefit from recovery pheromones better than 'strong'
    You gain the ability to:
+   - Better health regen overtime.
+   - The ability to dodge every 6th projectile that would hit you (note: you can still be hit by snipers and rockets).
    - Break walls and other simple structures with your slash attack.
    - Cause enemies to be marked on slash and tail stab hits which effects your other abilities.
+   - Tail Lance, which can be used as a normal tail stab or one that has 1/3rd the cooldown, much less damage, but ignores armor.
    - Impale an enemy for your base slash damage and pierce some armor, hitting twice on marked.
    - Trip an enemy to disarm them, or stun them if marked.
-   - Gain a temporary speed boost thats doubled around your enemies.
+   - Cause critical marks on nearby enemies if you crit or kill an enemy. These act like normal marks, but impale and tail trip will have no cooldown if used on a critical marked enemy. Additionally, hitting an critical marked enemy with your slash or tail lash will end the cooldowns of both impale and tail trip.
+   - Gain a temporary speed boost that allows you to move through enemies and allies, as well as dodge every 3rd projectile instead of every 6th.
 rmc-xeno-dancer-popup = A performance fit for a Queen, this one will become my instrument of death.
 
 rmc-xeno-oppressor-name = Oppressor
@@ -115,7 +135,7 @@ rmc-xeno-berserker-name = Berserker
 rmc-xeno-berserker-description = You lose:
   - Your empower, charge, and scissor cut.
   - Some health.
-  - A bit of your influence under frenzy pheromones.
+  - The ability to fully benefit from 'strong' or better frenzy pheromones 
   You gain:
   - Movement speed, a slight increase in armor, and gain a new set of abilities that make you a terrifying melee monster.
   - The ability to heal when you slash and gain a stack of rage that increases your armor, movement speed, and your heals per slash, to a maximum of six rage.
@@ -158,7 +178,7 @@ rmc-xeno-hedgehog-popup = This one's hide bristles with deadly spines. Let them 
 
 rmc-xeno-watcher-name = Watcher
 rmc-xeno-watcher-description = You lose your ability to hide, but gain enhanced vision. You can toggle between normal enhanced vision and greatly enhanced vision.
-rmc-xeno-watcher-popup = You are now a Watcher. You have enhanced vision but cannot hide.
+rmc-xeno-watcher-popup = My witness in the dark; watch, wait, and strike.
 
 rmc-xeno-designer-name = Designer
 rmc-xeno-designer-description = You lose:

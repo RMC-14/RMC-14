@@ -23,6 +23,18 @@
       map: [ "enum.DisposalUnitVisualLayers.OverlayFull" ]
     - state: dispover-handle
       map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 55
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable # Required for throwing items into it.
   - type: Destructible
     thresholds:
     - trigger:
@@ -46,8 +58,13 @@
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
   - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 100
+    activeLoad: 3500
+    channel: Equipment
+  - type: ActivatableUIRequiresPower
 #  - type: Construction | TODO RMC14: Construction graph for steps to unanchor
   - type: DisposalUnit
   - type: ThrowInsertContainer

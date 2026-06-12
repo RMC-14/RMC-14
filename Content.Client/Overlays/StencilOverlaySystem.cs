@@ -14,10 +14,13 @@ public sealed class StencilOverlaySystem : EntitySystem
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly WeatherSystem _weather = default!;
 
+    //RMC14
+    [Dependency] private readonly EntityLookupSystem _entLookup = default!;
+
     public override void Initialize()
     {
         base.Initialize();
-        _overlay.AddOverlay(new StencilOverlay(_parallax, _transform, _map, _sprite, _weather));
+        _overlay.AddOverlay(new StencilOverlay(_parallax, _transform, _map, _sprite, _weather, _entLookup));
     }
 
     public override void Shutdown()

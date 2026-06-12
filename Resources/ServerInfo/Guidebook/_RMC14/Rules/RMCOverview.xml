@@ -1,53 +1,63 @@
 ﻿<Document>
-  # RMC-14 Rules
+  # RMC Rules Overview
 
-  [color=#ff0000][bold]If you are unable to click any links, use the in-game guidebook version, in the escape menu.[/bold][/color]
+  [color=#ff0000][bold]If you are unable to click any links, use the in-game guidebook version, in the escape menu.\n\nThese rules are unique to RMC, and should be read in their entirety.[/bold][/color]
 
-  [italic]RMC is a roleplaying game with team deathmatch elements. This means players are expected, to an extent, to pretend their character is part of this world in their actions and words. This is the intended experience, and the experience the players of RMC enjoy, and is not always about winning.[/italic]
+  Looking for guides? [textlink="Click here." link="RMC14"]
+
+  ## Forewarning
+  RMC is both a [bold]roleplaying setting[/bold], and a [bold]game[/bold] with [bold]team deathmatch elements[/bold]. This means players are expected, to an extent, to both pretend their character is part of this world in their actions and words, similar to DnD, and play the role they select to the best of their ability using whatever equipment they like. It is not about winners, but telling a story that has an ending.
+
+  ### It's okay to die, and you will die.
+
+  This game is not designed to have perfect symmetrical 1v1 balance, and isn't fair in most cases. You will face situations where you're outgunned, overwhelmed, or caught in unfair circumstances that can remove you from the round. This is a natural part of the experience, and should be expected.\nPlease keep complaints about your death in OOC channels (Dead, LOOC, OOC, Discord) to a minimum to avoid being disruptive to others, and remember, maintaining a positive mindset will make the game far more enjoyable. If you enter with a negative mindset, it will only amplify frustration.
 
   ## Recent Changes
 
-  Read the relevant sections for the entire text.
+  These are summaries. Read the relevant sections for the entire text changed.
 
-  - [textlink="(Marine Law, NJPs)" link="RMCMarineLawNJP"] NJPs have an explicit time limit of five minutes or the time for the crime charged.
-  - [textlink="(Non-mod SOP, Third-Party)" link="RMCMarineSOPNONModThirdparty"] Changes to searches, IFF, and equipment regarding survivors.
-  - (Zero Tolerance) External programs that enable speech to text are permitted.
-  - [textlink="(CO Provisions, Execution)" link="RMCMarineLawCOProvisions"] Commanding Officers are required to announce their executions.
+  [bold]Newer Changes (2026 May)[/bold]
 
-  - (General Change) Officer Ordered Arrests and all their related mentions and provisions have been removed - excluding those given to Commanding Officers.
-  - [textlink="(Non-Mod; Deployment)" link="RMCMarineSOPNONModDeployment"] A minimum skeleton crew is required to remain shipside during nuclear deployment, unless overwritten by the Commander.
-  - [textlink="(Marine Law)" link="RMCMarineLaw"] Added text explaining the goals of the MP and an example of problem-solving.
-  - [textlink="(Law, Arresting)" link="RMCMarineLawArresting"] More leeway is granted for accidental bodily harm while deployed.
-  - [textlink="(Law, Arresting)" link="RMCMarineLaw"] MP may warn people for minor crimes.
-  - [textlink="(Law, Arresting)" link="RMCMarineLawArresting"] Added Investigative detainment, and time restrictions for processing and completing arrests.
-  - [textlink="(Law, Variable Crimes)" link="RMCMarineLawCrimesVariable"] Insubordination cannot be applied to orders that are made with the intent to arrest - this should be resisting arrest.
-  - [textlink="(Law, Variable Crimes)" link="RMCMarineLawCrimesVariable"] Public Mischief has been added as a variable crime. It relates to false statement that accuses someone of having committed an offence, and similar behavior of wasting time.
-  - [textlink="(Law, Variable Crimes)" link="RMCMarineLawCrimesVariable"] Insubordination now only applies to following orders.
-  - [textlink="(Law, Minor Crimes)" link="RMCMarineLawCrimesMinor"] Remade DASO into Disrespecting a Superior, which is an NJP charge that applies to any higher ranking person.
-  - [textlink="(SOP, Equipment)" link="RMCMarineSOPEquipment"] Added regulations for the command tablet.
-  - [textlink="(Character Names)" link="RMCCharacterNames"] Added guidelines for Skrell and Feroxi.
-  - [textlink="(Rules, Core 5)" link="RMCKindness"] Added a notice that if behavior in the Military Police role does not meet community standards, rolebans may be applied less leniently. This may not be an indication of a bad player, but it is an indication that a player doesn't have the understanding required to play MP.
-  - [textlink="(SOP, Prisoners of War)" link="RMCMarineSOPNONModThirdparty"] POWs now get one warning if they attempt to escape. Any further attempts may now strip their rights as a POW at the discretion of MPs.
-  - [textlink="(SOP, Prisoners of War)" link="RMCMarineSOPNONModThirdparty"] POWs must now be read their rights for them to be eligible to lose them.
+  ### Rules
+  - (General) Many pages have been condensed, and moved. It's recommended to go over the rules again, as many pages have received clarifications.
+  - (General Roleplay) Added restrictions for objective defenses.
+  - (Combat Escalation) In some extreme circumstances, escalation does not apply.
+  - (Zero Tolerance) Added a clarification for voice chat and ooc channel usage while playing.
+  - (Command/MP) Added a disclaimer, that the MP role is not guaranteed to be laid-back at all times. Do not select this role if expecting this.
+  - (Roleplay, Xenonid/Survivor) Early round interaction rules have been replaced with mechanical prevention. This means there are no longer rules preventing survivors from attacking xenonids, but xenonids have been granted safe areas that cannot be breached. Please report any experienced issues with the implementation such as gaps in defenses or exploits.
+  - (Mutinies) Mutiny rules and process has been redone. Make sure to read the changes. Do not goad other players into a mutiny before receiving permission to start one.
+
+  ### Law
+  - (CO BE Provisions) Commanding Officers may battlefield execute for any capital crime committed in their presence, except desertion.
+  - (Intoxication and Alcohol) Clarified intoxication only applies to UNMC personnel and only during operations. Also clarified where alcohol must be stored at all times, regardless of usage.
+  - (Sedition / Mutinies) The commander may deny treatment/revival to mutineers that have not surrendered, with sedition as the reason.
+  - (General Change) [color=#90EE90][bold]Duty Officer[/bold][/color] definitions have been changed and clarified. Almost all law restrictions regarding Duty Officers have been removed, and replaced with a clause in definitions that grants the [color=#90EE90][bold]Duty Officer[/bold][/color] a [color=#008000][bold]Commander[/bold][/color]'s Authority.
+  - (Crimes and Threats) Assault with a deadly weapon has been removed, threats to murder are now only considered assault. Many other changes.
+
+  ### SOP
+  - (Command SOP, LZ) The primary LZ is considered secure while LZ turrets are still active.
+  - (Ship Mods) Defensive shipside modifications (like welding doors shut) do not require approval during code red and delta while a threat is active.
+  - (Equipment) [bold]High Ranking Officers[/bold] can be granted a Command headset if requested. Many other changes. Read page for full information.
+  - (Command) It is the Commander's responsibility to inform personnel the operation ended. (Mostly relates to use of alcohol.)
+  - (Third party enlistment) This section of handling survivors and related has been redone, making the process simpler and straightforward- all third party personnel are offered to join, and all non-UN factions are offered to defect, then join.
+  - (Medical Dept. SOP) Surgery tools are allowed to be left outside their container, as long as they're still visible. (These tools will be needed in the future, keep them around.)
 
   ## Admin Decisions Are Final.
-  - Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule's intention.
+  - Rules are enforced as intended.
+  - Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule's intention.
   - Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules, and rule breaks may not be requested to be handled this way.
-  - Do not argue with the staff. You may file an appeal if you feel the decision to be incorrect, not ignore it.
+  - Do not argue with the staff.
+  \nYou may file an appeal if you feel the decision to be incorrect, not ignore it.
 
-  ## Important notes
+  ## VPNs
 
-  ### VPNs
+  - Heavily avoid using a VPN or any similar program to connect or while connected to RMC.
+  \nYou are putting your account at risk, which may result in your account being permanently banned.
+  - If you have a legitimate reason to use a VPN, you must attempt at least once to connect to the server without a VPN before requesting an exemption for it, to ensure security from bad actors.
 
-  Heavily avoid using a VPN or any similar program to connect or while connected to RMC. You are putting your account at risk, which may result in your account being permanently banned.
-  If you have a legitimate reason to use a VPN, you must attempt at least once to connect to the server without a VPN before requesting an exemption for it.
-
-  ## General Information
-  Disconnecting from or ignoring/evading admin-helps will result in action being taken.
-  This is to prevent bad actors from avoiding issues. If you need to leave urgently, let us know and it will be considered in your appeal.
-
-  - [bold]These rules are not the same as other servers, should be read in their entirety.[/bold]
-  - [textlink="Ban Types and Durations" link="RMCBanTypes"]
+  ## General Important Notes
+  - Disconnecting from or ignoring/evading admin messages will result in action being taken.
+  This is to prevent bad actors from avoiding issues. If you need to leave urgently, let us know.
   - This game has friendly fire mechanics. Avoid shooting your team.
 
   ## Zero Tolerance Rules
@@ -56,35 +66,35 @@
 
   ## Core Game Rules
   These are the general rules of RMC14. Click them for more information.
-  - [textlink="1. This is a English server, please only use English." link="RMCLanguage"]
-  - [textlink="2. Do not use multiple accounts, or alt accounts." link="RMCMultikey"]
-  - [textlink="3. Follow the rules of escalation against non-hostiles." link="RMCRulesEscalation"]
-  - [textlink="4. Don't use information gained from outside your character's knowledge." link="RMCMetaknowledge"]
-  - [textlink="5. Don't antagonize or harass players." link="RMCKindness"]
-  - [textlink="6. Don't quit a command level role without notice." link="RMCRulesCommand"]
-  - [textlink="7. Mutinies, riots and similar activity require admin permission." link="RMCMutinies"]
-  - 8. Don't quit if you do not get the role/kit/squad you want, be considerate.
-  - 9. Follow the roleplay rules and standards of the server. (Outlined at the bottom of this page)
-
-  8. (Additional notes) By opting for certain roles, you are opting into the possibility of supporting any given squad, regardless of personal preference. You are directly affecting the gameplay of others by quitting. Please do not opt into roles you do not feel comfortable playing, so they remain open and obtainable by other players at the start of the round.
+  - [textlink="1. This is an English server, please only use English in all channels." link="RMCLanguage"]
+  - [textlink="2. Follow the rules of escalation against non-hostiles." link="RMCRulesEscalation"]
+  - [textlink="3. Don't antagonize or harass players." link="RMCKindness"]
+  - [textlink="4. Mutinies, riots and similar activity require admin permission." link="RMCMutinies"]
+  - 5. Don't quit if you do not get the role/kit/squad you want, be considerate. By selecting certain roles, you are opting into the possibility of supporting any given squad, regardless of personal preference.\nPlease do not opt into roles you do not feel comfortable playing, so they remain open and obtainable by all players at the start of the round.
+  - [textlink="6. Follow the roleplay rules and standards of the server." link="RMCMutinies"]
 
   ## Community Rules (All OOC channels)
 
+  - Abuse of OOC channels (Dead, LOOC, OOC, Discord) may result in restrictions from all these channels without warning. This will not usually restrict you from accessing the game.
+
   - Per the hub rules of SS14, do not speak negatively of other SS14 servers, their community, or staff.
 
-  - Be civil. No harassment/bullying or offensive/abusive/hate speech content that would make the game a hostile space. Avoid political topics.
+  - Do not bring drama and/or controversial topics into the community. Be civil. There is a zero tolerance on harassment, bullying, hate speech, discrimination and/or anything that would make the place a hostile space for the community.
+  \nThis includes topics that fall under "it's so offensive its clearly satire"
 
-  - Please do not start heated discussions, including balance issues or roleplay issues, as it is rarely productive with lack of context and information. Missing and new features/fixes and rules can be suggested in the features forum.
+  - Do not start heated discussions in our channels, as it is rarely productive from the lack of context, information and progression.
+  \n\nWhat constitutes a heated discussion is at the discretion of the Staff Team but may include balance/roleplay topics. Constructive discussions, suggestions or bug reports can be forwarded to the features and bugs forums.
 
-  - Do not discuss, complain, or comment about anyone's admin/moderator bans/notes/actions including your own. If you've been banned or disagree with an action, the person involved must make an appeal in our appeals forum where a ruling can be made. It is otherwise assumed that the action is valid and there is no issue.
+  - Do not discuss, comment, complain or post about any Administrative and/or Moderation actioning. Lodge a ticket in the appeals forum; otherwise it is assumed that the action is valid.
 
   ## Command and Military Police
 
   These rules also apply to any individual who is a MP/Command role (unless they are a member of a hostile force).
+  \n\nCommand level roles are defined as all department heads, CIC staff, MP, and squad leaders.
 
-  - Command level roles are defined as all department heads, cic staff, MP, and squad leaders.
+  - You may be rolebanned without warning. This will not usually restrict you from accessing the game.
   - [textlink="1. Command and MP are held to higher standards." link="RMCRulesCommand"]
-  - [textlink="2. Command and MP must follow Marine Law." link="RMCMarineLaw"]
+  - 2. Command and MP must follow [textlink="Marine Law." link="RMCMarineLaw"]
   - 3. The goal of MP is to make the server a more immersive and enjoyable place for everyone. Do your best to uphold that goal, by mediating conflicts and assisting the crew and marines with their needs with the minimal force required.
 
   ## Roleplay Rules and Standards

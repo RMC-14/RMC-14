@@ -123,3 +123,8 @@
   - type: RMCActionOrder
     id: CMXenoLesserDrone
   - type: ExcludedFromKingVote
+  - type: MindTakeoverBehavior
+    ejectFromLarvaQueues: false
+  - type: RemoveComponents
+    components:
+    - type: CanBeLarvaQueued
