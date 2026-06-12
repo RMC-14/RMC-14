@@ -20,6 +20,7 @@ ui-options-function-rmc-camera-adjust-south = Adjust south
 ui-options-function-rmc-camera-adjust-east = Adjust east
 ui-options-function-rmc-camera-reset = Reset camera
 ui-options-function-rmc-rest = Rest
+ui-options-function-rmc-resist = Resist
 
 ui-options-header-rmc-xeno = Xenonid
 
