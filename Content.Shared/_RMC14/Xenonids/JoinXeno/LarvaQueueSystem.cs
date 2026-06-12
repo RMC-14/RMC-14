@@ -152,6 +152,23 @@ public sealed class LarvaQueueSystem : EntitySystem
 
         if (isQueueEligible)
         {
+            if (_pendingOffers.TryGetValue(ev.Player.UserId, out var pending))
+            {
+                var tier = InfectorSet.TryGetValue(pending.Hive.Owner, out var iqSet2) && iqSet2.Contains(ev.Player.UserId)
+                    ? "Infector"
+                    : "Normal";
+                RaiseNetworkEvent(new LarvaQueueOfferEvent
+                {
+                    TargetEntity = pending.TargetLarva.HasValue ? GetNetEntity(pending.TargetLarva.Value) : null,
+                    TargetEntityName = pending.TargetLarva.HasValue ? Name(pending.TargetLarva.Value) : "Burrowed Larva",
+                    ExpiresAt = pending.ExpiresAt,
+                    HiveName = Name(pending.Hive),
+                    OfferType = tier,
+                    QueuePosition = GetQueuePosition(ev.Player.UserId, pending.Hive.Owner),
+                }, ev.Player);
+                return;
+            }
+
             var hives = EntityQueryEnumerator<HiveComponent>();
             while (hives.MoveNext(out var hiveId, out _))
             {
@@ -243,7 +260,7 @@ public sealed class LarvaQueueSystem : EntitySystem
 
             if (!EntityManager.EntityExists(larvaEnt) || _mobState.IsDead(larvaEnt))
             {
-                SendOfferExpired(args.SenderSession);
+                SendOfferExpired(args.SenderSession, larvaDied: true);
                 TryOfferToQueue(offer.Hive.Owner);
                 return;
             }
@@ -384,6 +401,7 @@ public sealed class LarvaQueueSystem : EntitySystem
         RaiseNetworkEvent(new LarvaQueueOfferEvent
         {
             TargetEntity = targetLarva.HasValue ? GetNetEntity(targetLarva.Value) : null,
+            TargetEntityName = targetLarva.HasValue ? Name(targetLarva.Value) : "Burrowed Larva",
             ExpiresAt = expiresAt,
             HiveName = Name(hive),
             OfferType = tier,
@@ -391,9 +409,9 @@ public sealed class LarvaQueueSystem : EntitySystem
         }, session);
     }
 
-    private void SendOfferExpired(ICommonSession session)
+    private void SendOfferExpired(ICommonSession session, bool larvaDied = false)
     {
-        RaiseNetworkEvent(new LarvaQueueOfferExpiredEvent(), session);
+        RaiseNetworkEvent(new LarvaQueueOfferExpiredEvent { LarvaDied = larvaDied }, session);
     }
 
     private void ExpireOffer(NetUserId userId, bool notifyPlayer, bool removeFromQueue = true)
@@ -412,16 +430,9 @@ public sealed class LarvaQueueSystem : EntitySystem
 
         if (removeFromQueue)
             TryRemoveFromQueue(userId, offer.Hive);
-        else if (session?.AttachedEntity != null)
-        {
-            _popup.PopupEntity(
-                "The larva you were offered has died. You remain in the queue.",
-                session.AttachedEntity.Value,
-                session.AttachedEntity.Value);
-        }
 
         if (notifyPlayer && session != null)
-            SendOfferExpired(session);
+            SendOfferExpired(session, larvaDied: !removeFromQueue);
 
         TryOfferToQueue(offer.Hive.Owner);
     }
@@ -722,7 +733,7 @@ public sealed class LarvaQueueSystem : EntitySystem
             PreQueue.Remove(hive);
 
         var expiredOffers = new List<NetUserId>();
-        var entityDiedOffers = new List<NetUserId>();
+        var entityDiedOffers = new List<(NetUserId UserId, EntityUid DeadLarva)>();
         foreach (var (userId, offer) in _pendingOffers)
         {
             if (time.TotalSeconds >= offer.ExpiresAt)
@@ -732,16 +743,33 @@ public sealed class LarvaQueueSystem : EntitySystem
             }
 
             if (offer.TargetLarva is { } larvaEnt
-                && (!EntityManager.EntityExists(larvaEnt) || _mobState.IsDead(larvaEnt)))
+                && (!EntityManager.EntityExists(larvaEnt) || _mobState.IsDead(larvaEnt) || !HasComp<LarvaQueuedComponent>(larvaEnt)))
             {
-                entityDiedOffers.Add(userId);
+                entityDiedOffers.Add((userId, larvaEnt));
             }
         }
 
         foreach (var userId in expiredOffers)
-            ExpireOffer(userId, notifyPlayer: true, removeFromQueue: true);
+        {
+            _player.TryGetSessionById(userId, out var expiredSession);
+            if (expiredSession?.AttachedEntity == null)
+            {
+                ExpireOffer(userId, notifyPlayer: false, removeFromQueue: false);
+                if (!_disconnectExpiresAt.ContainsKey(userId))
+                    _disconnectExpiresAt[userId] = _gameTiming.CurTime + _disconnectGracePeriod;
+            }
+            else
+            {
+                ExpireOffer(userId, notifyPlayer: true, removeFromQueue: true);
+            }
+        }
 
-        foreach (var userId in entityDiedOffers)
+        foreach (var (userId, deadLarva) in entityDiedOffers)
+        {
+            if (_pendingOffers.TryGetValue(userId, out var current) && current.TargetLarva != deadLarva)
+                continue;
+
             ExpireOffer(userId, notifyPlayer: true, removeFromQueue: false);
+        }
     }
 }
