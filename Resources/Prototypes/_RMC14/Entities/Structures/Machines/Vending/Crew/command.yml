@@ -1353,7 +1353,7 @@
     - name: Snow gear (Snow use only)
       jobs:
       - CMCMO
-      takeall: CMSnowgear
+      takeAll: CMSnowgear
       entries:
       - id: RMCCoatSnow
       - id: RMCMaskBalaclava
