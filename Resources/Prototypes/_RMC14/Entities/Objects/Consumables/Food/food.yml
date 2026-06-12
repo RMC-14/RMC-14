@@ -562,7 +562,7 @@
   - type: Construction
     graph: Sausage
     node: start
-    defaultTarget: sausage cooked
+    defaultTarget: cooked sausage
   - type: SolutionContainerManager
     solutions:
       food:
@@ -585,7 +585,7 @@
     - meaty
   - type: Construction
     graph: Sausage
-    node: sausage cooked
+    node: cooked sausage
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
