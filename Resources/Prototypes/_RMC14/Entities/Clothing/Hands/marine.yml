@@ -91,9 +91,3 @@
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/grey.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/grey.rsi
-
-- type: entity
-  parent: CMHandsBlackMarine
-  id: RMCHandsFingerlessMarine
-  name: marine fingerless combat gloves
-  description: "Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'. These ones have been modified by having the fingertips removed."
