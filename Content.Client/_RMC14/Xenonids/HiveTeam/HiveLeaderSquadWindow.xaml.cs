@@ -110,20 +110,8 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
             }
         }
 
-        var addMemberBtn = new Button
-        {
-            Text = "+ Add Member",
-            HorizontalExpand = true,
-            Margin = new Thickness(0, 4, 0, 0),
-            StyleClasses = { "ButtonSquare" },
-        };
-        addMemberBtn.OnPressed += _ =>
-        {
-            var picker = new XenoPickerWindow();
-            picker.Populate(pickerXenos, getTexture, xeno => _onAddMember?.Invoke(xeno));
-            picker.OpenCentered();
-        };
-        membersVbox.AddChild(addMemberBtn);
+        AddMemberButton.OnPressed -= OnAddMemberPressed;
+        AddMemberButton.OnPressed += OnAddMemberPressed;
 
         void OnAddMemberPressed(BaseButton.ButtonEventArgs _)
         {
