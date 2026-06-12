@@ -66,7 +66,7 @@
 
 - type: tile
   parent: CMFloorSteelShivaYellowBase
-  id: CMFloorSteelShivaYellowFull´0
+  id: CMFloorSteelShivaYellowFull0
   sprite: /Textures/_RMC14/Tiles/shiva/yellowfull_0.png
 
 - type: tile
