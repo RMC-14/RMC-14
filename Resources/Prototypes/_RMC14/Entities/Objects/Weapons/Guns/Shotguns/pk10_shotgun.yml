@@ -11,7 +11,7 @@
   - type: Gun
     shotsPerBurst: 1
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_es4.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_es7.ogg
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-pk10
   - type: ShootUseDelay
@@ -22,9 +22,10 @@
     recoilUnwielded: 4
     scatterWielded: 5
     scatterUnwielded: 10
-    baseFireRate: 0.75
+    baseFireRate: 1.65
     burstScatterMult: 5
   - type: BallisticAmmoProvider
+    proto: RMCShellShotgunMX24Electrostatic
     cycleable: false
     whitelist:
       tags:
@@ -96,6 +97,7 @@
   components:
   - type: CartridgeAmmo
     proto: RMCPelletShotgunMX24Electrostatic
+    muzzleFlash: RMCMuzzleFlashEffectEnergy
   - type: Stack
     count: 5
     stackType: RMCShellShotgunMX24ElectrostaticStack
@@ -119,7 +121,7 @@
   id: RMCShellShotgunMX24ElectrostaticStack
   name: handful of MX24 electrostatic slugs
   icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: shock_slug_1 }
-  spawn: RMCPelletShotgunMX24Electrostatic
+  spawn: RMCShellShotgunMX24Electrostatic
   maxCount: 5
 
 - type: entity
@@ -179,6 +181,7 @@
       map: [ "base" ]
   - type: CartridgeAmmo
     proto: RMCPelletShotgunMX24Lethal
+    muzzleFlash: RMCMuzzleFlashEffectEnergy
   - type: Stack
     count: 5
     stackType: RMCShellShotgunMX24LethalStack
