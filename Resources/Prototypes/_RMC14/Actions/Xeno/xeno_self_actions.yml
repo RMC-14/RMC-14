@@ -208,9 +208,64 @@
   - type: RMCDazeableAction
 
 - type: entity
+  id: ActionXenoPsychicWhisper
+  parent: ActionXenoBase
+  name: Psychic Whisper
+  description: Whisper a psychic message to a nearby mind.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: psychic_whisper
+    useDelay: 10
+  - type: TargetAction
+    range: 7
+  - type: EntityTargetAction
+    event: !type:XenoPsychicWhisperActionEvent
+    canTargetSelf: false
+    toggleOutline: false
+    whitelist:
+      components:
+      - MobState
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoPsychicRadiance
+  parent: ActionXenoBase
+  name: Psychic Radiance (100)
+  description: Radiate a psychic message to nearby minds.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: psychic_radiance
+    useDelay: 10
+  - type: InstantAction
+    event: !type:XenoPsychicRadianceActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoGiveOrder
+  parent: ActionXenoBase
+  name: Give Order (100)
+  description: Send a psychic order to the xenonid you are watching.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: queen_order
+    useDelay: 10
+  - type: InstantAction
+    event: !type:XenoGiveOrderActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
-  name: Grow Ovipositor (700) # TODO RMC14 proper plasma costs
+  name: Grow Ovipositor (500)
   description: Become immobile and start laying eggs which will produce children. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
   components:
   - type: Action
@@ -372,15 +427,15 @@
 - type: entity
   id: ActionXenoDodge
   parent: ActionXenoBase
-  name: Dodge (200)
-  description: Gain a speed boost for 7 seconds and move through allies and enemies unimpeded. Your speed is doubled near standing enemies.
+  name: Dodge
+  description: Gain a speed boost for 7 seconds and move through allies and enemies unimpeded. You dodge every 3rd projectile that could hit you [color=red]excluding sniper bullets and rockets[/color]. Can be toggled off early to stop dodging, cooldown is equal to twice the duration used.
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_dodge
-    useDelay: 19
+    useDelay: 13
   - type: InstantAction
     event: !type:XenoDodgeActionEvent
 
