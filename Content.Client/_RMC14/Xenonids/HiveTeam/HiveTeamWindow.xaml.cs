@@ -22,6 +22,7 @@ public sealed partial class HiveTeamWindow : DefaultWindow
     public void UpdateState(
         HiveTeamsComponent teams,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
+        List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> pickerXenos,
         Func<EntProtoId?, Texture?> getTexture,
         Action<int, NetEntity> onSetLeader,
         Action<int> onRemoveLeader,
@@ -34,7 +35,7 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         for (var i = 0; i < HiveTeamsComponent.TeamCount; i++)
         {
             HiveTeamEntry? entry = i < teams.Teams.Count ? teams.Teams[i] : null;
-            var panel = BuildTeamPanel(i, entry, allXenos, getTexture, onSetLeader, onRemoveLeader, onAddMember, onRemoveMember, onSetRole);
+            var panel = BuildTeamPanel(i, entry, allXenos, pickerXenos, getTexture, onSetLeader, onRemoveLeader, onAddMember, onRemoveMember, onSetRole);
             TeamsGrid.AddChild(panel);
         }
     }
@@ -50,6 +51,7 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         int index,
         HiveTeamEntry? entry,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
+        List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> pickerXenos,
         Func<EntProtoId?, Texture?> getTexture,
         Action<int, NetEntity> onSetLeader,
         Action<int> onRemoveLeader,
@@ -148,7 +150,7 @@ public sealed partial class HiveTeamWindow : DefaultWindow
             addLeaderBtn.OnPressed += _ =>
             {
                 var picker = new XenoPickerWindow();
-                picker.Populate(allXenos, getTexture, xeno => onSetLeader(capturedIndex, xeno));
+                picker.Populate(pickerXenos, getTexture, xeno => onSetLeader(capturedIndex, xeno));
                 picker.OpenCentered();
             };
             leaderVbox.AddChild(addLeaderBtn);
@@ -219,7 +221,7 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         addMemberBtn.OnPressed += _ =>
         {
             var picker = new XenoPickerWindow();
-            picker.Populate(allXenos, getTexture, xeno => onAddMember(capturedIndex, xeno));
+            picker.Populate(pickerXenos, getTexture, xeno => onAddMember(capturedIndex, xeno));
             picker.OpenCentered();
         };
         membersVbox.AddChild(addMemberBtn);

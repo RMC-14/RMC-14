@@ -37,6 +37,7 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
         int teamIndex,
         string roleName,
         List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> allXenos,
+        List<(NetEntity Entity, string Name, EntProtoId? ProtoId)> pickerXenos,
         Func<EntProtoId?, Texture?> getTexture,
         Action<string> onAnnounce,
         Action<NetEntity> onAddMember,
@@ -167,7 +168,7 @@ public sealed partial class HiveLeaderSquadWindow : DefaultWindow
         addMemberBtn.OnPressed += _ =>
         {
             var picker = new XenoPickerWindow();
-            picker.Populate(allXenos, getTexture, xeno => _onAddMember?.Invoke(xeno));
+            picker.Populate(pickerXenos, getTexture, xeno => _onAddMember?.Invoke(xeno));
             picker.OpenCentered();
         };
         membersVbox.AddChild(addMemberBtn);
