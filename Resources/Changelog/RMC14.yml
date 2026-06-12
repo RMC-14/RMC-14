@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: LeoKarz
-  changes:
-  - message: The designer hivelord strain is here! A cooperative support/anti-push
-      T2 strain.
-    type: Add
-  - message: Added an entry to guidebook for designer hivelord.
-    type: Add
-  - message: Added weedbound resin walls & doors. Structures that get destroyed when
-      weeds beneath them are broken leaving sticky resin in its place.
-    type: Add
-  - message: Designer can place 3 different node types (construction, optimized, and
-      flexible), remote upgrade resin, and remotely remove nodes.
-    type: Add
-  - message: Greater Resin Surge converts all nearby nodes into unstable thick resin.
-      It's resistant to bullets but weak to melee.
-    type: Add
-  id: 2890
-  time: '2026-02-09T05:35:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9110
 - author: Thereisabear
   changes:
   - message: The campfires can now be lit, Bravo calls for Aid. They can be lit, extinguished
@@ -4541,5 +4522,13 @@
   id: 3389
   time: '2026-06-12T23:26:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10138
+- author: Simon
+  changes:
+  - message: Add Member UI was erroneously showing dead xenos in the window, it is
+      fixed now.
+    type: Fix
+  id: 3390
+  time: '2026-06-12T23:27:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10139
 Name: RMC14
 Order: -1
