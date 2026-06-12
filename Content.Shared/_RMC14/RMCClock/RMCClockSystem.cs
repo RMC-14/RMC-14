@@ -1,8 +1,8 @@
+using System.Linq;
 using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared.Clock;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
-using System.Linq;
 
 namespace Content.Shared._RMC14.RMCClock;
 
