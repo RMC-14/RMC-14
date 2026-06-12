@@ -93,8 +93,6 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
         }
 
-        var toolUseAttempt = new ToolUseAttemptEvent(user, (float) repairable.Comp.FuelUsed);
-        RaiseLocalEvent(used, toolUseAttempt);
 
         var hasReplace = TryComp(repairable, out RMCRepairableReplaceComponent? replace);
 
@@ -137,6 +135,9 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         if (!UseFuel(args.Used, args.User, repairable.Comp.FuelUsed, true))
             return;
+
+        var toolUseAttempt = new ToolUseAttemptEvent(user, (float) repairable.Comp.FuelUsed);
+        RaiseLocalEvent(used, toolUseAttempt);
 
         var delay = hasReplace
             ? (float) repairable.Comp.Delay.TotalSeconds
