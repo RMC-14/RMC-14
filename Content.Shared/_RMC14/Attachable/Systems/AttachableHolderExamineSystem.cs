@@ -20,7 +20,7 @@ public sealed class AttachableHolderExamineSystem : EntitySystem
 
         var metaQuery = GetEntityQuery<MetaDataComponent>();
 
-        using (args.PushGroup(nameof(AttachableHolderExamineSystem)))
+        using (args.PushGroup(nameof(AttachableHolderExamineSystem), -10))
         {
             args.PushMarkup(Loc.GetString("rmc-attachable-examine-header"));
 
