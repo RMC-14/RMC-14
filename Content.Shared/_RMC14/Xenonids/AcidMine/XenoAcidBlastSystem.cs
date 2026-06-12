@@ -149,9 +149,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
         return !HasComp<MobStateComponent>(target) &&
                !_hive.FromSameHive(ent.Owner, target) &&
                HasComp<DamageableComponent>(target) &&
-               (HasComp<WeaponMountComponent>(target) ||
-                HasComp<SentryComponent>(target) ||
-                HasComp<BarricadeComponent>(target));
+               HasComp<BarricadeComponent>(target);
     }
 
     private void ApplyStructureDamage(Entity<XenoAcidBlastComponent> ent, EntityUid target)

@@ -819,7 +819,7 @@
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolWeYa
   name: WY-TM892 pattern general pistol holster rig
-  description: The WY-TM892 is the standard load-bearing equipment of the WeYa security forces. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  description: The WY-TM892 is the standard load-bearing equipment of the WEYA security forces. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_weya.rsi

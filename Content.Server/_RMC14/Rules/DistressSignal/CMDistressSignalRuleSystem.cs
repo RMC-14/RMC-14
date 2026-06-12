@@ -165,7 +165,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     private float _minimumSurvivors;
     private int _mapVoteExcludeLast;
     private bool _useCarryoverVoting;
-    private readonly TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
+    private TimeSpan _hijackStunTime;
     private bool _landingZoneMiasmaEnabled;
     private TimeSpan _sunsetDuration;
     private TimeSpan _sunriseDuration;
@@ -283,6 +283,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         Subs.CVar(_config, RMCCVars.RMCSunsetDuration, v => _sunsetDuration = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCSunriseDuration, v => _sunriseDuration = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCForceEndHijackTimeMinutes, v => _forceEndHijackTime = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCHijackCrashStunTimeSeconds, v => _hijackStunTime = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCHijackShipWeight, v => _hijackShipWeight = v, true);
         Subs.CVar(_config, RMCCVars.RMCMinimumHijackBurrowed, v => _hijackMinBurrowed = v, true);
         Subs.CVar(_config, RMCCVars.RMCDistressXenosMinimum, v => _xenosMinimum = v, true);
