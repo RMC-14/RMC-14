@@ -197,6 +197,8 @@
   - type: Eye
     zoom: 0.5, 0.5
     drawFov: false
+  - type: DestroyedByExplosion
+    isExplodable: true
 
 - type: entity
   parent: CMFlare
@@ -207,6 +209,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Misc/flares.rsi
     layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+      state: starshell_ash
     - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
       sprite: _RMC14/Objects/Misc/flares.rsi
       state: starshell_ash-on
@@ -214,7 +218,7 @@
       visible: false
     - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
       sprite: _RMC14/Objects/Misc/flares.rsi
-      state: starshell_ash
+      state: overlay
   - type: Icon
     sprite: _RMC14/Objects/Misc/flares.rsi
     state: starshell_ash

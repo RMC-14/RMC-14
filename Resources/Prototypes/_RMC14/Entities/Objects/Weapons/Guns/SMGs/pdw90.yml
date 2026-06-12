@@ -94,6 +94,16 @@
   - type: Tag
     tags:
     - RMCWeaponSMGPDW90
+  - type: ItemMapper
+    mapLayers:
+      mag-0:
+        whitelist:
+          tags:
+          - RMCMagazineSMGPDW90
+      mag-1:
+        whitelist:
+          tags:
+          - RMCMagazineSMGPDW90AP
 
 - type: entity
   parent: RMCWeaponSMGPDW90
@@ -123,6 +133,16 @@
             tags:
               - RMCMagazineSMGPDW90
               - RMCMagazineSMGPDW90AP
+    - type: ItemMapper
+      mapLayers:
+        mag-0:
+          whitelist:
+            tags:
+            - RMCMagazineSMGPDW90AP
+        mag-1:
+          whitelist:
+            tags:
+            - RMCMagazineSMGPDW90
 
 - type: entity
   parent: CMMagazineRifleBase
