@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Fixed dropships landing one tile too high on Shiva Snowball's North LZ.
-    type: Fix
-  id: 2886
-  time: '2026-02-08T08:23:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9164
 - author: Miyugi and Pgriha
   changes:
   - message: New xenonids structure, Plasma Tree! It replenishes plasma to nearby
@@ -4542,5 +4535,12 @@
   id: 3385
   time: '2026-06-12T05:41:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10136
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Charger Crusher colliding with weeds on the floor.
+    type: Fix
+  id: 3386
+  time: '2026-06-12T05:44:26.046587+00:00'
+  url: null
 Name: RMC14
 Order: -1
