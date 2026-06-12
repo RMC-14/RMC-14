@@ -986,9 +986,15 @@ public sealed class XenoEggSystem : EntitySystem
 
                 if (egg.InfectTarget != null)
                 {
-                    if (!_interaction.InRangeUnobstructed(uid, egg.InfectTarget.Value, EggOpeningInfectRange))
+                    // Check distance only, walls do NOT let you escape the hugger if you're still in range
+                    var eggPos = _transform.GetMapCoordinates(uid);
+                    var targetPos = _transform.GetMapCoordinates(egg.InfectTarget.Value);
+                    var inRange = eggPos.MapId == targetPos.MapId &&
+                                  (targetPos.Position - eggPos.Position).Length() <= EggOpeningInfectRange;
+
+                    if (!inRange)
                     {
-                        // Original target left, try to find another valid target nearby
+                        // Original target left the radius, search for a new host
                         EntityUid? newTarget = null;
 
                         var infectableQuery = EntityQueryEnumerator<InfectableComponent>();
@@ -1026,7 +1032,6 @@ public sealed class XenoEggSystem : EntitySystem
                     }
 
                     if (egg.InfectTarget != null &&
-                        _interaction.InRangeUnobstructed(uid, egg.InfectTarget.Value, EggOpeningInfectRange) &&
                         TryComp<XenoParasiteComponent>(egg.SpawnedCreature, out var para))
                     {
                         _parasite.Infect((egg.SpawnedCreature.Value, para), egg.InfectTarget.Value, force: true);
