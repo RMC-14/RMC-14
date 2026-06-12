@@ -252,8 +252,8 @@
         amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 2
-      - id: RMCScabbardKatanaFilled
-        name: Katana Sheath (Full)
+      - id: RMCScabbardMacheteFilled
+        name: Machete Scabbard (Full) # TODO: replace with something more CLF-esque
         amount: 5
       - id: RMCAttachmentRailFlashlight
         amount: 5
