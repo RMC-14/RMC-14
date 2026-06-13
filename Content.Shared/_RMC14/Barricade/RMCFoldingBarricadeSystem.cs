@@ -478,7 +478,7 @@ public sealed class RMCFoldingBarricadeSystem : EntitySystem
             BreakOnDamage = true,
             BreakOnHandChange = used != null,
             BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameTarget
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
@@ -560,7 +560,13 @@ public sealed class RMCFoldingBarricadeSystem : EntitySystem
 
         for (var i = 0; i < transfer; i++)
         {
-            var damage = PopStoredDamage(donor, donorStack, changeCount: false);
+            var damage = 0f;
+            if (donor.Comp.StoredDamage.Count > 0)
+            {
+                damage = donor.Comp.StoredDamage[^1];
+                donor.Comp.StoredDamage.RemoveAt(donor.Comp.StoredDamage.Count - 1);
+            }
+
             recipient.Comp.StoredDamage.Add(damage);
         }
 

@@ -87,7 +87,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, XenoPlaceResinTunnelDestroyWeedSourceDoAfterEvent>(OnCompleteRemoveWeedSource);
         SubscribeLocalEvent<XenoComponent, XenoDigTunnelDoAfter>(OnFinishCreateTunnel);
 
-        SubscribeLocalEvent<XenoTunnelComponent, InteractHandEvent>(OnInteract);
+        SubscribeLocalEvent<XenoTunnelComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<XenoTunnelComponent, GetVerbsEvent<InteractionVerb>>(OnGetInteractVerbs);
         SubscribeLocalEvent<XenoTunnelComponent, ContainerRelayMovementEntityEvent>(OnAttemptMoveInTunnel);
         SubscribeLocalEvent<XenoTunnelComponent, TraverseXenoTunnelMessage>(OnMoveThroughTunnel);
@@ -417,7 +417,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         args.Verbs.Add(interactVerb);
     }
 
-    private void OnInteract(Entity<XenoTunnelComponent> xenoTunnel, ref InteractHandEvent args)
+    private void OnActivateInWorld(Entity<XenoTunnelComponent> xenoTunnel, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
             return;

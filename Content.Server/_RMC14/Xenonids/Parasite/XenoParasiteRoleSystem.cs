@@ -6,7 +6,9 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Ghost;
+using Content.Shared.Mind;
 using Content.Shared.Popups;
+using Robust.Server.Containers;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -29,6 +31,8 @@ public sealed class XenoEggRoleSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -47,7 +51,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
             subs.Event<XenoParasiteGhostBuiMsg>(OnEggMorpherGhostBuiChosen);
         });
 
-        Subs.BuiEvents<ParasiteAIComponent>(XenoParasiteGhostUI.Key, subs =>
+        Subs.BuiEvents<XenoParasiteComponent>(XenoParasiteGhostUI.Key, subs =>
         {
             subs.Event<XenoParasiteGhostBuiMsg>(OnParasiteGhostBuiChosen);
         });
@@ -107,16 +111,22 @@ public sealed class XenoEggRoleSystem : EntitySystem
         }
     }
 
-    private void OnParasiteGhostBuiChosen(Entity<ParasiteAIComponent> ent, ref XenoParasiteGhostBuiMsg args)
+    private void OnParasiteGhostBuiChosen(Entity<XenoParasiteComponent> ent, ref XenoParasiteGhostBuiMsg args)
     {
         var user = args.Actor;
 
         if (!SharedChecks(ent, user))
             return;
 
+        if (!(HasComp<ParasiteAIComponent>(ent) || HasComp<ParasiteAIDelayAddComponent>(ent)) ||
+            _container.IsEntityInContainer(ent))
+            return;
+
         if (_actor.TryGetSession(user, out var session) && session != null)
         {
-            _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, ent.Owner, ent.Owner);
+            //Uses seperate system due to parasites not having an inherent ghost role
+            var newMind = _mind.CreateMind(session.UserId, Name(ent));
+            _mind.TransferTo(newMind, ent);
         }
     }
 

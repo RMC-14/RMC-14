@@ -125,6 +125,7 @@
         damage:
           types:
             Heat: 4
+  - type: XenoChargeDontHit
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -465,7 +466,7 @@
   - type: Tag
     tags:
     - XenoWeedNode
-    
+
 
 - type: entity
   parent: XenoHardyWeeds

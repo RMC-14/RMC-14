@@ -1092,38 +1092,6 @@
     state: webbing
 
 - type: entity
-  parent: RMCWebbingDropPouch
-  id: RMCToolDropPouchFilled
-  name: tool drop pouch
-  description: A drop pouch loaded with essential field repair tools.
-  components:
-  - type: Storage
-    grid:
-    - 0,0,13,1
-    whitelist:
-      tags:
-      - Crowbar
-      - Screwdriver
-      - Wirecutter
-      - Wrench
-      - CableCoil
-      - Multitool
-      - PowerCell
-      components:
-      - Welder
-      - PowerCell
-      - EntrenchingTool
-  - type: StorageFill
-    contents:
-    - id: CMScrewdriver
-    - id: CMWrench
-    - id: CMWelder
-    - id: CMCrowbar
-    - id: CMWirecutter
-    - id: RMCCableCoil30
-    - id: CMMultitool
-
-- type: entity
   parent: CMWebbingBase
   id: RMCWebbingSurgicalRCM
   name: MOLS medical carry harness
