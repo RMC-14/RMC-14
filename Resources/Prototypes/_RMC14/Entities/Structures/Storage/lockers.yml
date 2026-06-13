@@ -226,9 +226,23 @@
   name: medical doctor's locker
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/medical.rsi
+    sprite: _RMC14/Structures/Storage/Lockers/medical_white.rsi
   - type: AccessReader
     access: [["CMAccessMedical"]]
+  - type: StorageFill
+    contents:
+     #- id: RMCJumpsuitDoctor RMC14 TODO nly when cold map
+      - id: RMCLabcoat
+      - id: RMCLabcoatShort
+      - id: RMCLabcoatLong
+      - id: RMCShoesWhite
+      - id: RMCMaskBreath
+      - id: CMMaskSterile
+      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCPouchMedical
+      - id: RMCPouchSyringe
+      - id: RMCPouchMedkit
+      - id: RMCPouchChem
 
 - type: entity
   parent: CMLockerBase
