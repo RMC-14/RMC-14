@@ -29,7 +29,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
 
     private SpriteSystem _sprite = default!;
     private const int MaxTotalColumns = 15;
-    private const int MinColumnNever = 3;
+    private const int MinColumnNever = 5;
     private const int MinColumnLow = 2;
     private const int MinColumnMedium = 3;
     private const float RegularPriorityIconWidth = 48f;

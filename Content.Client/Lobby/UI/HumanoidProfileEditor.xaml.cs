@@ -1531,6 +1531,8 @@ namespace Content.Client.Lobby.UI
 
         private static string GetSurvivorVariantMapLabel(SurvivorVariantJobPreferences.MapVariantJobs mapGroup)
         {
+            if (mapGroup.RegularJobs.Count == 0)
+                return mapGroup.MapName;
             return $"{mapGroup.MapName} ({FormatVariantChance(mapGroup.RegularChance)})";
         }
 
