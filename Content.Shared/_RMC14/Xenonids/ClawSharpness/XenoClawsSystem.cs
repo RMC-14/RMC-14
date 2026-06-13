@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Doors.Components;
@@ -14,12 +15,14 @@ public sealed class XenoClawsSystem : EntitySystem
     private EntityQuery<XenoClawsComponent> _xenoClawsQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
     private readonly ProtoId<DamageGroupPrototype> _clawsDamageGroup = "Brute";
+    private EntityQuery<XenoChargingComponent> _xenoChargingQuery;
 
     public override void Initialize()
     {
         _meleeWeaponQuery = GetEntityQuery<MeleeWeaponComponent>();
         _xenoClawsQuery = GetEntityQuery<XenoClawsComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
+        _xenoChargingQuery = GetEntityQuery<XenoChargingComponent>();
 
         SubscribeLocalEvent<ReceiverXenoClawsComponent, DamageModifyEvent>(OnReceiverDamageModify);
         SubscribeLocalEvent<AirlockReceiverXenoClawsComponent, DamageModifyEvent>(OnAirlockReceiverDamageModify);
@@ -49,6 +52,10 @@ public sealed class XenoClawsSystem : EntitySystem
     {
         var xeno = args.Tool;
         var receiver = ent.Comp;
+
+        if (args.ShouldIgnoreClawLogic)
+            return;
+
         if (!_meleeWeaponQuery.HasComp(xeno) || !_xenoClawsQuery.TryComp(xeno, out var claws))
             return;
 
@@ -82,6 +89,9 @@ public sealed class XenoClawsSystem : EntitySystem
     {
         var xeno = args.Tool;
         var receiver = ent.Comp;
+
+        if (args.ShouldIgnoreClawLogic)
+            return;
 
         if (!_meleeWeaponQuery.HasComp(xeno))
             return;

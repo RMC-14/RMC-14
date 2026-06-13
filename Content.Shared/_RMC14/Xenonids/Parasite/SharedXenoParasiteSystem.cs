@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared._RMC14.Xenonids.Hide;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Actions;
@@ -160,7 +161,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         var range = TryComp<ParasiteAIComponent>(parasite, out var ai) ? ai.MaxInfectRange : parasite.Comp.InfectRange;
 
         if (_transform.InRange(coordinates, args.Leaping.Origin, range))
-            Infect(parasite, args.Hit, false);
+            Infect(parasite, args.Hit, false, true);
     }
 
     private void OnParasiteAfterInteract(Entity<XenoParasiteComponent> ent, ref AfterInteractEvent args)
@@ -391,10 +392,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (TryComp(ent, out FixturesComponent? fixtures))
         {
             var fixture = fixtures.Fixtures.First();
-            if ((fixture.Value.CollisionMask & (int) CollisionGroup.AirlockLayer & (int) CollisionGroup.BarricadeImpassable) != 0)
-                return;
-
-            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ (int) ThrownCollisionGroup);
+            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask & ~(int) ThrownCollisionGroup);
         }
     }
 
@@ -479,6 +477,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (!CanInfectPopup(parasite, victim, user))
             return false;
 
+        if (_net.IsServer && TryComp<ActorComponent>(user, out var actor))
+            parasite.Comp.PendingInfectorUserId = actor.PlayerSession.UserId;
+
         var ev = new AttachParasiteDoAfterEvent();
         var delay = parasite.Comp.ManualAttachDelay;
 
@@ -492,6 +493,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = true,
+            CancelDuplicate = false,
             DuplicateCondition = DuplicateConditions.SameEvent,
             AttemptFrequency = AttemptFrequency.EveryTick
         };
@@ -555,6 +557,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         if (!TryComp(victim, out InfectableComponent? infectable))
             return false;
+
+        if (_net.IsServer && TryComp<ActorComponent>(parasite, out var infector))
+            parasite.Comp.PendingInfectorUserId = infector.PlayerSession.UserId;
 
         if (_net.IsServer)
         {
@@ -691,8 +696,14 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 var victimComp = EnsureComp<VictimInfectedComponent>(infectedVictim);
                 SetHive((infectedVictim, victimComp), _hive.GetHive(uid)?.Owner);
 
+                victimComp.InfectorUserId = para.PendingInfectorUserId;
+
+                if (TryComp<ActorComponent>(infectedVictim, out var victimActor))
+                    victimComp.VictimUserId = victimActor.PlayerSession.UserId;
+
                 // TODO RMC14 also do damage to the parasite
-                EnsureComp<ParasiteSpentComponent>(uid);
+                var spent = EnsureComp<ParasiteSpentComponent>(uid);
+                spent.InfectedHost = infectedVictim;
 
                 infectable.BeingInfected = false;
                 Dirty(infectedVictim, infectable);
@@ -705,7 +716,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             if (_net.IsClient)
                 continue;
 
-            if (infected.BurstAt + infected.AutoBurstTime <= time && infected.SpawnedLarva != null)
+            if (infected.BurstAt + infected.AutoBurstTime <= time && infected.SpawnedLarva != null && !infected.IsBursting)
             {
                 TryBurst((uid, infected));
                 continue;
@@ -732,7 +743,15 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
             // spawn the larva
             if (infected.BurstAt <= time && infected.SpawnedLarva == null)
-                SpawnLarva((uid, infected), out _);
+            {
+                SpawnLarva((uid, infected), out var spawnedLarva);
+                var priorityEv = new XenoBurstPriorityEvent(
+                    infected.VictimUserId,
+                    infected.InfectorUserId,
+                    GetNetEntity(infected.Hive),
+                    GetNetEntity(spawnedLarva));
+                RaiseLocalEvent(ref priorityEv);
+            }
 
             // Stages
             // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
@@ -1035,6 +1054,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
         spawned = SpawnInContainerOrDrop(victim.Comp.BurstSpawn, victim.Owner, larvaContainer.ID);
+        EnsureComp<LarvaQueuedComponent>(spawned);
         LinkLarvaToVictim(victim, spawned);
     }
 
@@ -1042,6 +1062,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
         _container.InsertOrDrop(spawned, larvaContainer);
+        EnsureComp<LarvaQueuedComponent>(spawned);
         LinkLarvaToVictim(victim, spawned);
     }
 
