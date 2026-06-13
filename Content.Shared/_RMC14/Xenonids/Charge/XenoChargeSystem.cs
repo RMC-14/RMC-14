@@ -62,17 +62,20 @@ public sealed class XenoChargeSystem : EntitySystem
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
+    private EntityQuery<XenoChargeDontHitComponent> _xenoChargeDontHitQuery;
 
     public override void Initialize()
     {
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();
+        _xenoChargeDontHitQuery = GetEntityQuery<XenoChargeDontHitComponent>();
 
         SubscribeLocalEvent<XenoChargeComponent, XenoChargeActionEvent>(OnXenoChargeAction);
         SubscribeLocalEvent<XenoChargeComponent, ThrowDoHitEvent>(OnXenoChargeHit);
         SubscribeLocalEvent<XenoChargeComponent, XenoChargeDoAfterEvent>(OnXenoChargeDoAfterEvent);
         SubscribeLocalEvent<XenoChargeComponent, StopThrowEvent>(OnXenoChargeStop);
         SubscribeLocalEvent<XenoChargeComponent, PreventCollideEvent>(OnXenoChargePreventCollide);
+        SubscribeLocalEvent<XenoChargingComponent, PreventCollideEvent>(OnXenoChargingPreventCollide);
     }
 
     private void OnXenoChargeAction(Entity<XenoChargeComponent> xeno, ref XenoChargeActionEvent args)
@@ -293,5 +296,11 @@ public sealed class XenoChargeSystem : EntitySystem
             _transform.DetachEntity(args.OtherEntity, Transform(args.OtherEntity));
 
         args.Cancelled = true;
+    }
+
+    private void OnXenoChargingPreventCollide(Entity<XenoChargingComponent> ent, ref PreventCollideEvent args)
+    {
+        if (_xenoChargeDontHitQuery.HasComp(args.OtherEntity))
+            args.Cancelled = true;
     }
 }

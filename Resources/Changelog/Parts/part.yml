@@ -1,0 +1,4 @@
+author: DrSmugleaf
+changes:
+  - type: Fix
+    message: Fixed Crusher and Charger Crusher charge colliding with hive ordered structures, eggs, fast and sticky resin, resin spikes, Gardener Drone fruits, resin traps.
