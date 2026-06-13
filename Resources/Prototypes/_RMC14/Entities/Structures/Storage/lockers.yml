@@ -231,7 +231,7 @@
     access: [["CMAccessMedical"]]
   - type: StorageFill
     contents:
-     #- id: RMCJumpsuitDoctor RMC14 TODO nly when cold map
+     #- id: RMCJumpsuitDoctor RMC14 TODO only when cold map & a scarf
       - id: RMCLabcoat
       - id: RMCLabcoatShort
       - id: RMCLabcoatLong
@@ -243,6 +243,7 @@
       - id: RMCPouchSyringe
       - id: RMCPouchMedkit
       - id: RMCPouchChem
+      - id: CMSatchelMarine
 
 - type: entity
   parent: CMLockerBase
