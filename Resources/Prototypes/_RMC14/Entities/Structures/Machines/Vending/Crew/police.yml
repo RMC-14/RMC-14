@@ -20,9 +20,11 @@
       entries:
       - id: CMHandsBlackMarine
       - id: CMHeadsetMPO
+      - id: CMJumpsuitMP
       - id: CMBootsBlackFilled
-      - id: CMGlassesSecurity
       - id: CMBeltSecurityMPFilled
+      - id: CMGlassesSecurity
+      - id: RMCVisorMedical
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
@@ -58,10 +60,13 @@
       - id: RMCPouchGeneralMedium
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
+        recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 add 'splints,'
+        recommended: true
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
+        recommended: true
       - id: RMCPouchMagazinePistol
       - id: RMCPouchPistol
     - name: Mask
@@ -74,7 +79,9 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
+        recommended: true
       - id: CMWebbingBlack
+        recommended: true
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
@@ -121,7 +128,9 @@
       entries:
       - id: CMHandsBlackMarine
       - id: RMCHeadsetMW
+      - id: CMJumpsuitWarden
       - id: CMBootsBlackFilled
+      - id: RMCVisorMedical
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
@@ -157,10 +166,13 @@
       - id: RMCPouchGeneralMedium
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
+        recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 add 'splints,'
+        recommended: true
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
+        recommended: true
       - id: RMCPouchMagazinePistol
       - id: RMCPouchPistol
     - name: Mask
@@ -173,7 +185,9 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
+        recommended: true
       - id: CMWebbingBlack
+        recommended: true
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch

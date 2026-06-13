@@ -25,9 +25,11 @@
       - CMPilotGunship
       takeAll: CMEquipment
       entries:
+      - id: CMJumpsuitPilot
       - id: RMCJumpsuitPilotAlt
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
+      - id: CMSatchel
       - id: CMMRE
     # Dropship Crew Chief Section Start
     - name: Standard Equipment
@@ -37,6 +39,7 @@
       entries:
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
+      - id: CMSatchel
       - id: CMMRE
     # Dropship Crew Chief Section End
     - name: Gloves
@@ -147,31 +150,19 @@
       - id: RMCMaskRebreather
     - name: Attachments
       entries:
-      - id: RMCAttachmentAngledGrip
+      - id: RMCAttachmentSuppressor
+        points: 10
+      - id: RMCAttachmentSuppressorCompact
         points: 10
       - id: RMCAttachmentExtendedBarrel
+        points: 10
+      - id: RMCAttachmentShotgunChoke
+        points: 10
+      - id: RMCAttachmentRecoilCompensator
         points: 10
       - id: RMCAttachmentExtendedCompensator
         points: 10
       - id: RMCAttachmentRecoilCompensatorM13
-        points: 10
-      - id: RMCAttachmentGyroscopicStabilizer
-        points: 10
-      - id: RMCAttachmentLaserSight
-        points: 10
-      - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
-        points: 10
-      - id: RMCAttachmentM13StockSolid
-        points: 10
-      - id: RMCAttachmentM13StockCollapsible
-        points: 10
-      - id: RMCAttachmentM42A2CollapsibleStock
-        points: 10
-      - id: RMCAttachmentM63Stock
-        points: 10
-      - id: RMCAttachmentM54CStockSolid
-        points: 10
-      - id: RMCAttachmentRecoilCompensator
         points: 10
       - id: RMCAttachmentS5RedDotSight
         points: 10
@@ -179,14 +170,31 @@
         points: 10
       - id: RMCAttachmentS6ReflexSight
         points: 10
-      - id: RMCAttachmentSuppressor
-        points: 10
-      - id: RMCAttachmentSuppressorCompact
+      - id: RMCAttachmentAngledGrip
         points: 10
       - id: RMCAttachmentVerticalGrip
         points: 10
+      - id: RMCAttachmentLaserSight
+        points: 10
+      - id: RMCAttachmentGyroscopicStabilizer
+        points: 10
+      - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
+        name: masterkey shotgun
+        points: 10
+      - id: RMCAttachmentM54CStockSolid
+        points: 10
+      - id: RMCAttachmentM42A2CollapsibleStock
+        points: 10
+      - id: RMCAttachmentM13StockSolid
+        points: 10
+      - id: RMCAttachmentM13StockCollapsible
+        points: 10
+      - id: RMCAttachmentM63Stock
+        points: 10
     - name: Ammunition
       entries:
+      - id: RMCMagazinePistolM13
+        points: 10
       - id: CMMagazineRifleM4SPRAP
         points: 10
       - id: CMMagazineRifleM4SPRExt
@@ -205,9 +213,6 @@
       entries:
       # - id: CMPOFlightsuit # TODO: Port Flightsuit (not the uniform they normally wear)
       #   points: 10
-      - id: CMFireExtinguisherPortable
-        name: Fire Extinguisher (Portable)
-        points: 5
       - id: RMCPouchGeneralLarge
         points: 15
       - id: RMCPouchMagazineLarge
@@ -218,6 +223,13 @@
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         points: 15
+      - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
+        points: 5
+      - id: RMCWhistle
+        points: 5
+      - id: RMCBinoculars
+        points: 5
       - id: RMCMotionDetector
         points: 15
         recommended: true
@@ -271,18 +283,22 @@
         amount: 24
     - name: Sidearms
       entries:
+      - id: RMCWeaponPistolM13Empty
+        amount: 4
       - id: RMCWeaponPistolM77Empty
         amount: 4
       - id: RMCWeaponRevolverM44Empty
         amount: 4
       - id: CMWeaponPistolM1984Empty
         amount: 4
-      - id: RMCWeaponPistolM13Empty
-        amount: 4
       - id: RMCWeaponPistolM82FEmpty
         amount: 4
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13
+        amount: 10
+      - id: RMCMagazinePistolM13Ext
+        amount: 10
       - id: CMMagazinePistolM77AP
         amount: 20
       - id: RMCSpeedLoaderM44
@@ -290,15 +306,11 @@
       - id: CMMagazinePistolM1984
         amount: 20
       - id: RMCMagazinePistolM1984AP
-        amount: 14
-      #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
-      # amount: 14
+        amount: 12
+      - id: RMCMagazinePistolM1984HP
+        amount: 12
       - id: CMMagazinePistolMK80
         amount: 16
-      - id: RMCMagazinePistolM13
-        amount: 10
-      - id: RMCMagazinePistolM13Ext
-        amount: 10
     - name: Attachments
       entries:
       - id: RMCAttachmentRailFlashlight
