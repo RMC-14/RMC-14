@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The specialization of weapons specialists now gets freed up correctly
-      upon entering cryosleep.
-    type: Fix
-  id: 2895
-  time: '2026-02-09T05:53:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9160
 - author: TheLuggage05
   changes:
   - message: Fixed a typo in the movie ticket helmet garb description.
@@ -4525,5 +4517,14 @@
   id: 3394
   time: '2026-06-12T23:32:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10144
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Crusher and Charger Crusher charge colliding with hive ordered
+      structures, eggs, fast and sticky resin, resin spikes, Gardener Drone fruits,
+      resin traps.
+    type: Fix
+  id: 3395
+  time: '2026-06-13T00:40:38.866409+00:00'
+  url: null
 Name: RMC14
 Order: -1
