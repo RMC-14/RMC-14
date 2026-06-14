@@ -155,10 +155,10 @@
         name: Magazine Box (M1984 x 16)
         box: CMMagazinePistolM1984
 #      - id: RMCBoxMagazineML66D
-#        name: Magazine Box (ML66D x 8)
+#        name: Drum Box (ML66D x 8)
 #        box: RMCMagazineML66D
 #      - id: RMCBoxMagazineM2C
-#        name: Magazine Box (M2C x 8)
+#        name: Ammo Box (M2C x 8)
 #        box: RMCMagazineM2C
       - id: RMCBoxPackFlareCAS
         name: box of M89-S flare packs (x10)
