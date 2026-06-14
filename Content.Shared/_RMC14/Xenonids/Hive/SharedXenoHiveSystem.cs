@@ -356,6 +356,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     public void RecordGib(Entity<HiveComponent> hive, GibbedXenoInfo info)
     {
         hive.Comp.GibbedXenos.Add(info);
+        Dirty(hive);
     }
 
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)
