@@ -179,14 +179,14 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var transform = Transform(ent.Owner);
         _entries.Clear();
         _boxEntries.Clear();
-        ent.Comp.Entries.Clear();
+        ent.Comp.RestockEntries.Clear();
         ent.Comp.StackEntries.Clear();
         foreach (var section in ent.Comp.Sections)
         {
             foreach (var entry in section.Entries)
             {
                 _entries.TryAdd(entry.Id, entry);
-                ent.Comp.Entries.TryAdd(entry.Id, entry);
+                ent.Comp.RestockEntries.TryAdd(entry.Id, entry);
 
                 if (_prototypes.TryIndex(entry.Id, out var entryProto) &&
                     entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
@@ -1112,7 +1112,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return false;
 
         // Try direct prototype match first
-        vendor.Comp.Entries.TryGetValue(itemProto, out var matchingEntry);
+        vendor.Comp.RestockEntries.TryGetValue(itemProto, out var matchingEntry);
 
         // Try stack type match for split/merged stacks (e.g., CMTraumaKit1 matching CMTraumaKit10)
         if (matchingEntry == null && TryComp<StackComponent>(item, out var itemStackComp))
@@ -1151,7 +1151,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (matchingEntry.Box is not { } boxId)
             return false;
 
-        if (!vendor.Comp.Entries.TryGetValue(boxId, out var boxEntry))
+        if (!vendor.Comp.RestockEntries.TryGetValue(boxId, out var boxEntry))
             return false;
 
         var amountToAdd = GetBoxRemoveAmount(matchingEntry);

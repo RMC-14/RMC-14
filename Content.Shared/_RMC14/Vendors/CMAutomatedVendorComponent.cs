@@ -104,7 +104,7 @@ public sealed partial class CMAutomatedVendorComponent : Component
     public Dictionary<string, int> PartialProductStacks = new();
 
     [DataField, AutoNetworkedField]
-    public Dictionary<EntProtoId, CMVendorEntry> Entries = new();
+    public Dictionary<EntProtoId, CMVendorEntry> RestockEntries = new();
 
     [DataField, AutoNetworkedField]
     public Dictionary<string, CMVendorEntry> StackEntries = new();
