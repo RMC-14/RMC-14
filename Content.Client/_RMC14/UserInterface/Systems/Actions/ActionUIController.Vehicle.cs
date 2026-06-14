@@ -16,6 +16,7 @@ public sealed partial class ActionUIController
 
     private readonly List<EntityUid?> _vehicleActions = new();
     private bool _vehicleHotbarOverride;
+    private bool _vehicleOutsideView;
 
     private IReadOnlyList<EntityUid?> GetActiveHotbarActions()
     {
@@ -32,7 +33,6 @@ public sealed partial class ActionUIController
         if (_actionsSystem == null)
             return;
 
-        var hasVehicleContext = HasVehicleHotbarContext();
         var shouldOverride = ShouldUseVehicleHotbarOverride();
         var changed = false;
 
@@ -53,11 +53,10 @@ public sealed partial class ActionUIController
         else if (_vehicleHotbarOverride)
         {
             _vehicleHotbarOverride = false;
-            if (!hasVehicleContext)
-                _vehicleActions.Clear();
+            _vehicleActions.Clear();
             changed = true;
         }
-        else if (!hasVehicleContext && _vehicleActions.Count > 0)
+        else if (_vehicleActions.Count > 0)
         {
             _vehicleActions.Clear();
         }
@@ -67,14 +66,6 @@ public sealed partial class ActionUIController
     }
 
     private bool ShouldUseVehicleHotbarOverride()
-    {
-        if (_playerManager.LocalEntity is not { } user)
-            return false;
-
-        return EntityManager.HasComponent<VehicleWeaponsOperatorComponent>(user);
-    }
-
-    private bool HasVehicleHotbarContext()
     {
         if (_playerManager.LocalEntity is not { } user)
             return false;
@@ -97,8 +88,36 @@ public sealed partial class ActionUIController
             includeHardpointActions = viewToggle.IsOutside;
         }
 
+        if (includeHardpointActions != _vehicleOutsideView)
+        {
+            _vehicleOutsideView = includeHardpointActions;
+            _vehicleActions.Clear();
+        }
+
+        var viewToggleAction = FindVehicleUtilityAction(
+            ActionVehicleToggleViewId,
+            user => EntityManager.TryGetComponent<VehicleViewToggleComponent>(user, out var toggleState)
+                    && toggleState.Action is { } viewAction
+                    && !EntityManager.HasComponent<VehicleHardpointActionComponent>(viewAction)
+                ? viewAction
+                : null);
+
+        var vehicleLockAction = FindVehicleUtilityAction(
+            ActionVehicleLockId,
+            user => EntityManager.TryGetComponent<VehicleLockActionComponent>(user, out var lockState)
+                    && lockState.Action is { } lockAction
+                    && !EntityManager.HasComponent<VehicleHardpointActionComponent>(lockAction)
+                ? lockAction
+                : null);
+
         if (!includeHardpointActions)
         {
+            if (viewToggleAction is { } ensuredViewAction)
+                desiredOrdered.Add(ensuredViewAction);
+
+            if (vehicleLockAction is { } ensuredLockAction)
+                desiredOrdered.Add(ensuredLockAction);
+
             foreach (var action in _actions)
             {
                 if (action is not { } actionUid ||
@@ -110,52 +129,33 @@ public sealed partial class ActionUIController
                 desiredOrdered.Add(actionUid);
             }
         }
-        else if (_playerManager.LocalEntity is { } user &&
-                 EntityManager.TryGetComponent<CombatModeComponent>(user, out var combat) &&
-                 combat.CombatToggleActionEntity is { } combatAction &&
-                 !EntityManager.HasComponent<VehicleHardpointActionComponent>(combatAction))
+        else
         {
-            desiredOrdered.Add(combatAction);
-        }
+            if (_playerManager.LocalEntity is { } user &&
+                EntityManager.TryGetComponent<CombatModeComponent>(user, out var combat) &&
+                combat.CombatToggleActionEntity is { } combatAction &&
+                !EntityManager.HasComponent<VehicleHardpointActionComponent>(combatAction))
+            {
+                desiredOrdered.Add(combatAction);
+            }
 
-        if (includeHardpointActions)
-        {
             var hardpointActions = _actionsSystem
                 .GetClientActions()
-                .Where(action => EntityManager.TryGetComponent<VehicleHardpointActionComponent>(action, out _))
-                .OrderBy(action =>
-                {
-                    EntityManager.TryGetComponent<VehicleHardpointActionComponent>(action, out var hardpointAction);
-                    return hardpointAction?.SortOrder ?? 0;
-                });
+                .Select(action => (uid: action.Owner, hardpoint: EntityManager.TryGetComponent<VehicleHardpointActionComponent>(action.Owner, out var h) ? h : null))
+                .Where(x => x.hardpoint != null)
+                .OrderBy(x => x.hardpoint!.SortOrder);
 
             foreach (var (uid, _) in hardpointActions)
             {
                 desiredOrdered.Add(uid);
             }
+
+            if (viewToggleAction is { } ensuredViewAction)
+                desiredOrdered.Add(ensuredViewAction);
+
+            if (vehicleLockAction is { } ensuredLockAction)
+                desiredOrdered.Add(ensuredLockAction);
         }
-
-        var viewToggleAction = FindVehicleUtilityAction(
-            ActionVehicleToggleViewId,
-            user => EntityManager.TryGetComponent<VehicleViewToggleComponent>(user, out var toggleState)
-                    && toggleState.Action is { } viewAction
-                    && !EntityManager.HasComponent<VehicleHardpointActionComponent>(viewAction)
-                ? viewAction
-                : null);
-
-        if (viewToggleAction is { } ensuredViewAction)
-            desiredOrdered.Add(ensuredViewAction);
-
-        var vehicleLockAction = FindVehicleUtilityAction(
-            ActionVehicleLockId,
-            user => EntityManager.TryGetComponent<VehicleLockActionComponent>(user, out var lockState)
-                    && lockState.Action is { } lockAction
-                    && !EntityManager.HasComponent<VehicleHardpointActionComponent>(lockAction)
-                ? lockAction
-                : null);
-
-        if (vehicleLockAction is { } ensuredVehicleLockAction)
-            desiredOrdered.Add(ensuredVehicleLockAction);
 
         // Preserve manual ordering while all current actions still exist.
         var remaining = new HashSet<EntityUid>();

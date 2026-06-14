@@ -288,13 +288,14 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
             StopTargeting();
 
         // RMC14
-        if (EntityManager.HasComponent<VehicleHardpointActionComponent>(actionId) ||
-            _vehicleActions.Contains(actionId))
+        if (EntityManager.HasComponent<VehicleHardpointActionComponent>(actionId))
         {
             _vehicleActions.RemoveAll(x => x == actionId);
-            RefreshVehicleHotbarOverride();
+            RefreshVehicleHotbarOverride(forceUpdate: true);
             return;
         }
+
+        _vehicleActions.RemoveAll(x => x == actionId);
         // RMC14
 
         _actions.RemoveAll(x => x == actionId);
@@ -750,6 +751,7 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         // RMC14
         _vehicleActions.Clear();
         _vehicleHotbarOverride = false;
+        _vehicleOutsideView = false;
         // RMC14
         _container?.ClearActionData();
     }
@@ -822,6 +824,7 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
     {
         // RMC14
         _vehicleHotbarOverride = false;
+        _vehicleOutsideView = false;
         _vehicleActions.Clear();
         // RMC14
         _container?.ClearActionData();

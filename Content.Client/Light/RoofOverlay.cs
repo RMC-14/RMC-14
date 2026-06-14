@@ -145,15 +145,12 @@ public sealed class RoofOverlay : Overlay
             !_entManager.TryGetComponent(player, out VehicleViewportUserComponent? viewport) ||
             !_entManager.TryGetComponent(player, out EyeComponent? eye) ||
             !_entManager.TryGetComponent(player, out TransformComponent? playerXform) ||
-            eye.Target is not { } target ||
-            target == player ||
-            !_entManager.TryGetComponent(target, out TransformComponent? targetXform))
+            viewport.PeekTarget is not { } peekTarget ||
+            eye.Target != peekTarget ||
+            !_entManager.TryGetComponent(peekTarget, out TransformComponent? targetXform))
         {
             return false;
         }
-
-        if (viewport.PreviousTarget == eye.Target)
-            return false;
 
         return targetXform.MapID != MapId.Nullspace &&
                targetXform.MapID != playerXform.MapID &&

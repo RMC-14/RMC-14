@@ -236,6 +236,8 @@
     sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
     state: car_seat
     drawdepth: BelowMobs
+  - type: Strap
+    modifyBuckleDrawDepth: false
   - type: RMCStrapNoDrawDepthChange
   - type: RemoveComponents
     components:

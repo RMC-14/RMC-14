@@ -1,5 +1,4 @@
 using Content.Client.Rotation;
-using Content.Shared._RMC14.Buckle;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Movement.Systems;
@@ -37,10 +36,6 @@ internal sealed class BuckleSystem : SharedBuckleSystem
 
     private void OnStrapMoveEvent(EntityUid uid, StrapComponent component, ref MoveEvent args)
     {
-        // RMC14
-        if (HasComp<RMCStrapNoDrawDepthChangeComponent>(uid))
-            return;
-
         // I'm moving this to the client-side system, but for the sake of posterity let's keep this comment:
         // > This is mega cursed. Please somebody save me from Mr Buckle's wild ride
 
