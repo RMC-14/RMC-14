@@ -103,10 +103,10 @@ public sealed partial class CMAutomatedVendorComponent : Component
     [DataField, AutoNetworkedField]
     public Dictionary<string, int> PartialProductStacks = new();
 
-    [ViewVariables, AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, CMVendorEntry> Entries = new();
 
-    [ViewVariables, AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public Dictionary<string, CMVendorEntry> StackEntries = new();
 }
 
