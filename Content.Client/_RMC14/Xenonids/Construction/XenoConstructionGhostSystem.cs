@@ -43,17 +43,17 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly QueenEyeSystem _queenEye = default!;
+    [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruction = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
-    [Dependency] private readonly QueenEyeSystem _queenEye = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     private EntityUid? _currentGhost;
     private string? _currentGhostStructure;
@@ -144,7 +144,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
         var (buildChoice, isConstructionActive) = GetConstructionState(player.Value);
         var isBuilding = IsBuilding(player.Value);
-        var hasQueenBuildingBoost = EntityManager.HasComponent<QueenBuildingBoostComponent>(player.Value);
+        var hasQueenBuildingBoost = HasComp<QueenBuildingBoostComponent>(player.Value);
 
         var isMouseDown = _inputManager.IsKeyDown(Keyboard.Key.MouseLeft);
         var upgradeTargetUnderMouse = hasQueenBuildingBoost && HasUpgradeableStructureUnderMouse();
@@ -218,7 +218,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             }
         }
 
-        var hasBoost = EntityManager.HasComponent<QueenBuildingBoostComponent>(player);
+        var hasBoost = HasComp<QueenBuildingBoostComponent>(player);
 
         if (upgradeableEntity != null && upgradeableComp != null && upgradeableComp.To != null)
         {
@@ -241,7 +241,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             if (construction.BuildChoice == null)
                 return;
 
-            if (!CanSecreteOnTile((player, construction), construction.BuildChoice, coords, true, true))
+            if (!_xenoConstruction.CanSecreteOnTilePopup((player, construction), construction.BuildChoice, coords, true, true, false))
                 return;
         }
 
@@ -283,7 +283,6 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
         return false;
     }
-
 
     private (string? buildChoice, bool isActive) GetConstructionState(EntityUid player)
     {
@@ -380,7 +379,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             sprite.Color = new Color(48, 255, 48, 128);
             sprite.DrawDepth = 9;
 
-            for (int i = 0; i < sprite.AllLayers.Count(); i++)
+            for (var i = 0; i < sprite.AllLayers.Count(); i++)
             {
                 sprite.LayerSetShader(i, "unshaded");
                 sprite.LayerSetVisible(i, true);
