@@ -337,8 +337,9 @@ rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge 
 rmc-xeno-sacrifice-heal-announce = ;OUR SISTER WILL NOT DIE!!!
 
 # Dodge
-rmc-xeno-dodge-self = We can now weave through our enemies!
-rmc-xeno-dodge-end = We can no longer weave through our enemies!
+rmc-xeno-dodge-self = We can now weave through our enemies and allies!
+rmc-xeno-dodge-end = We can no longer weave through our enemies and allies!
+rmc-xeno-dodge-end-manual = We end our dance early!
 
 # Vanguard Shield
 rmc-xeno-shield-vanguard-hit = Our shield took the hit!
@@ -459,7 +460,17 @@ rmc-doomed-fail = It's not working...
 rmc-destroy-cant-reach = We don't have a clear path to that location!
 rmc-destroy-cant-area = We can't leap to that area!
 
+# Queen Eye
 rmc-xeno-weeds-no-nearby-node = We require weeds to be closer!
 rmc-xeno-queen-eye-no-weeds = We can't move our eye there, there are no weeds!
 rmc-xeno-queen-eye-expand-weeds-name = Expand Weeds (50)
 rmc-xeno-queen-eye-expand-weeds-desc = Expand existing weeds or turn a weed tile into a node.
+
+# Swift Steps
+rmc-xeno-swift-steps-self = We narrowly dodge {THE($bullet)}!
+rmc-xeno-swift-steps-others = {CAPITALIZE(THE($user))} darts aside, evading {THE($bullet)}!
+
+# Finesse
+rmc-xeno-marked-critical-apply = You feel fear washing down your spine... you could be next!
+rmc-xeno-marked-critical-disappear = You calm down and get back to your senses.
+rmc-xeno-marked-critical-consumed = You've been knocked back to your senses!

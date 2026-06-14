@@ -1601,17 +1601,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronCaineRuffRuffalo
-  name: Caine 'Ruff' Ruffalo figurine
-  description: "Ruff as a Ruffalo. Always Ruffs. Is always Rough as a Ruff."
-  components:
-  - type: Sprite
-    state: caine_ruff_ruffalo
-  - type: PatronFigurine
-    id: d4b8cf96-c8cd-4f23-9a52-744497ca6eb7
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAnneTaylor
   name: Anne Taylor figurine
   description: "If you see her piloting the Alamo and it still looks normal, something is horribly wrong."
@@ -3006,3 +2995,14 @@
     state: wyatt_hoss_cross
   - type: PatronFigurine
     id: b9428c37-5698-4eab-8b7a-d59094b8cf81
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMixes-the-Fuel
+  name: Mixes-the-Fuel figurine
+  description: "Mixes is a small kobold with a positive attitude that always speaks in third person, but always tries to follow their duties to the letter. They always like be as friendly as they can be, and they are a bit silly and goofy at times, although they tend to be quite happy about completing their assigned tasks.\n\nWarning: Do not give them a flamer under any circumstance. It will only end up in a disaster."
+  components:
+  - type: Sprite
+    state: mixes-the-fuel
+  - type: PatronFigurine
+    id: d4b8cf96-c8cd-4f23-9a52-744497ca6eb7

@@ -146,7 +146,7 @@
   - type: Projectile
     deleteOnCollide: false
     impactEffect: BulletImpactEffect
-    maxFixedRange: 7
+    maxFixedRange: 8.463 #The result of CircleAreaFromSquareAbilityRange(7)
     damage:
       types:
         Piercing: 100

@@ -244,6 +244,9 @@
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
+    - type: XenoCrusherChargable
+      instantDestroy: true
+      passOnDestroy: true
 
 - type: entity
   parent: RMCBarricadeHandrail

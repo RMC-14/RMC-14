@@ -103,8 +103,8 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.875, 0.095
@@ -173,8 +173,8 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
 
 - type: entity
   parent: RMCWeaponRifleSSG45NoLockStripped

@@ -160,6 +160,7 @@
     - range: 7
       falloff: 10
   - type: DeleteOnTrigger
+  - type: IgnoreSwiftSteps
 
 - type: entity
   parent: RMCBaseProjectileRocket84mm
