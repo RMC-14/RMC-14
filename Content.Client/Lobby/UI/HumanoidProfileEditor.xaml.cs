@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Client._RMC14.NamedItems;
 using Content.Client.Humanoid;
 using Content.Client.Lobby.UI.Loadouts;
+using Content.Client.Lobby.UI.ProfileEditorControls;
 using Content.Client.Lobby.UI.Roles;
 using Content.Client.Message;
 using Content.Client.Players.PlayTimeTracking;
@@ -44,6 +45,7 @@ using Robust.Shared.IoC;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
+using Robust.Client.UserInterface.CustomControls;
 
 namespace Content.Client.Lobby.UI
 {
@@ -111,6 +113,8 @@ namespace Content.Client.Lobby.UI
         private List<(ProtoId<JobPrototype> JobId, RequirementsSelector PrioritySelector, bool IsToggle)> _jobPriorities = new();
 
         private List<(string JobId, OptionButton Button, List<ProtoId<RankPrototype>?> RankIds)> _rankPriorities = new();
+
+        private List<(ProtoId<JobPrototype> JobId, Action UpdateStyle)> _survivorVariantPriorityButtons = new();
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
 
@@ -987,6 +991,7 @@ namespace Content.Client.Lobby.UI
             _jobCategories.Clear();
             _jobPriorities.Clear();
             _rankPriorities.Clear();
+            _survivorVariantPriorityButtons.Clear();
             var firstCategory = true;
 
             // Get all displayed departments
@@ -1008,12 +1013,6 @@ namespace Content.Client.Lobby.UI
                 ("humanoid-profile-editor-job-priority-medium-button", (int) JobPriority.Medium),
                 ("humanoid-profile-editor-job-priority-high-button", (int) JobPriority.High),
             };
-            var toggleItems = new[]
-            {
-                ("humanoid-profile-editor-job-toggle-off-button", (int) JobPriority.Never),
-                ("humanoid-profile-editor-job-toggle-on-button", (int) JobPriority.Low),
-            };
-
             var survivorVariantJobs = new Dictionary<ProtoId<JobPrototype>, List<SurvivorVariantJobPreferences.MapVariantJobs>>();
             var compFactory = IoCManager.Resolve<IComponentFactory>();
             if (_prototypeManager.HasIndex(SurvivorVariantJobPreferences.SurvivorDepartment))
@@ -1088,7 +1087,7 @@ namespace Content.Client.Lobby.UI
                     if (department.ID == SurvivorVariantJobPreferences.SurvivorDepartment &&
                         survivorVariantJobs.TryGetValue(job.ID, out var variants))
                     {
-                        AddSurvivorVariantJobSelectors(category, jobRow, variants, toggleItems);
+                        AddSurvivorVariantJobSelectors(category, jobRow, variants);
                     }
 
                     // RMC14
@@ -1150,8 +1149,7 @@ namespace Content.Client.Lobby.UI
         private void AddSurvivorVariantJobSelectors(
             BoxContainer category,
             BoxContainer baseJobRow,
-            List<SurvivorVariantJobPreferences.MapVariantJobs> mapGroups,
-            (string, int)[] items)
+            List<SurvivorVariantJobPreferences.MapVariantJobs> mapGroups)
         {
             if (mapGroups.Count == 0)
                 return;
@@ -1215,12 +1213,11 @@ namespace Content.Client.Lobby.UI
                 var regularRows = AddSurvivorVariantJobRows(
                     mapGroup.RegularJobs,
                     variantsContainer,
-                    items,
                     null,
                     titleSize);
                 var insertRows = new List<SurvivorVariantInsertRows>();
                 foreach (var insert in mapGroup.Inserts)
-                    insertRows.Add(AddSurvivorVariantInsertRows(insert, variantsContainer, items, titleSize));
+                    insertRows.Add(AddSurvivorVariantInsertRows(insert, variantsContainer, titleSize));
 
                 mapRows.Add(new SurvivorVariantMapRows(
                     mapGroup.MapName,
@@ -1284,7 +1281,6 @@ namespace Content.Client.Lobby.UI
         private SurvivorVariantInsertRows AddSurvivorVariantInsertRows(
             SurvivorVariantJobPreferences.InsertVariantJobs insert,
             BoxContainer variantsContainer,
-            (string, int)[] items,
             int titleSize)
         {
             var insertHeaderText = GetSurvivorVariantInsertLabel(insert);
@@ -1309,7 +1305,6 @@ namespace Content.Client.Lobby.UI
             var rows = AddSurvivorVariantJobRows(
                 insert.Jobs,
                 variantsContainer,
-                items,
                 new Thickness(16f, 0f, 0f, 0f),
                 titleSize);
 
@@ -1322,7 +1317,6 @@ namespace Content.Client.Lobby.UI
         private List<SurvivorVariantJobRow> AddSurvivorVariantJobRows(
             IEnumerable<JobPrototype> jobs,
             BoxContainer variantsContainer,
-            (string, int)[] items,
             Thickness? margin,
             int titleSize)
         {
@@ -1330,21 +1324,138 @@ namespace Content.Client.Lobby.UI
             foreach (var job in jobs)
             {
                 var displayName = GetJobSelectorName(job, true);
-                var row = AddJobSelector(
-                    job,
-                    variantsContainer,
-                    items,
-                    margin,
-                    titleSize: titleSize,
-                    isToggle: true,
-                    showLoadout: false,
-                    titleOverride: displayName);
+                var row = AddSurvivorVariantJobSelector(job, variantsContainer, margin, titleSize, displayName);
                 rows.Add(new SurvivorVariantJobRow(
                     $"{displayName} {job.LocalizedName} {job.ID}",
                     row));
             }
 
             return rows;
+        }
+
+        private BoxContainer AddSurvivorVariantJobSelector(
+            JobPrototype job,
+            BoxContainer category,
+            Thickness? margin,
+            int titleSize,
+            string? titleOverride = null)
+        {
+            var jobContainer = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                Margin = margin ?? new Thickness(3f, 3f, 3f, 0f),
+            };
+
+            var icon = new TextureRect
+            {
+                TextureScale = new Vector2(2, 2),
+                VerticalAlignment = VAlignment.Center,
+            };
+            var jobIcon = _prototypeManager.Index(job.Icon);
+            icon.Texture = _sprite.Frame0(jobIcon.Icon);
+            jobContainer.AddChild(icon);
+
+            var titleLabel = new Label
+            {
+                Text = titleOverride ?? job.LocalizedName,
+                ToolTip = job.LocalizedDescription,
+                MinWidth = titleSize,
+                ClipText = true,
+                Margin = new Thickness(5f, 0f, 3f, 0f),
+                VerticalAlignment = VAlignment.Center,
+                MouseFilter = MouseFilterMode.Stop,
+            };
+            jobContainer.AddChild(titleLabel);
+
+            var spriteContainer = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                VerticalAlignment = VAlignment.Center,
+                Margin = new Thickness(3f, 0f, 0f, 0f),
+            };
+            jobContainer.AddChild(spriteContainer);
+
+            var prioritizeBtn = new Button
+            {
+                Text = Loc.GetString("humanoid-profile-editor-job-priority-button"),
+                VerticalAlignment = VAlignment.Center,
+                Margin = new Thickness(3f, 3f, 3f, 0f),
+                MinWidth = 90,
+            };
+            jobContainer.AddChild(prioritizeBtn);
+
+            void RefreshSprites()
+            {
+                spriteContainer.DisposeAllChildren();
+
+                var prefs = _preferencesManager.Preferences;
+                if (prefs == null)
+                    return;
+
+                var profilesToShow = new Dictionary<int, HumanoidCharacterProfile>(prefs.GetAllProfilesForJob(job));
+
+                if (CharacterSlot.HasValue)
+                {
+                    if (Profile is HumanoidCharacterProfile editedHumanoid &&
+                        editedHumanoid.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) > JobPriority.Never)
+                        profilesToShow[CharacterSlot.Value] = editedHumanoid;
+                    else
+                        profilesToShow.Remove(CharacterSlot.Value);
+                }
+
+                foreach (var profile in profilesToShow.Values)
+                {
+                    var sprite = new ProfilePreviewSpriteView
+                    {
+                        SetSize = new Vector2(48f),
+                        Scale = new Vector2(1.5f),
+                        OverrideDirection = Direction.South,
+                        VerticalAlignment = VAlignment.Center,
+                        ToolTip = profile.Name,
+                    };
+                    sprite.Initialize(_preferencesManager, _prototypeManager, _playerManager);
+                    sprite.LoadPreview(profile, job);
+                    spriteContainer.AddChild(sprite);
+                }
+            }
+
+            void UpdateStyle()
+            {
+                var active = (Profile?.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) ?? JobPriority.Never) > JobPriority.Never;
+                if (active)
+                    prioritizeBtn.StyleClasses.Add(StyleNano.StyleClassButtonColorGreen);
+                else
+                    prioritizeBtn.StyleClasses.Remove(StyleNano.StyleClassButtonColorGreen);
+            }
+
+            if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter, out var reason))
+            {
+                prioritizeBtn.Disabled = true;
+                var tooltip = new Tooltip();
+                tooltip.SetMessage(reason);
+                prioritizeBtn.TooltipSupplier = _ => tooltip;
+            }
+            else
+            {
+                prioritizeBtn.OnPressed += _ =>
+                {
+                    var current = Profile?.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) ?? JobPriority.Never;
+                    var next = current > JobPriority.Never ? JobPriority.Never : JobPriority.Low;
+                    Profile = Profile?.WithJobPriority(job.ID, next);
+                    UpdateStyle();
+                    RefreshSprites();
+                    ReloadPreview();
+                    UpdateJobPriorities();
+                    SetDirty();
+                };
+            }
+
+            UpdateStyle();
+            RefreshSprites();
+            _survivorVariantPriorityButtons.Add((job.ID, UpdateStyle));
+
+            category.AddChild(jobContainer);
+            return jobContainer;
         }
 
         private static bool SetSurvivorVariantRowsVisible(
@@ -1888,6 +1999,9 @@ namespace Content.Client.Lobby.UI
 
                 prioritySelector.Select((int) priority);
             }
+
+            foreach (var (_, updateStyle) in _survivorVariantPriorityButtons)
+                updateStyle();
         }
 
         private void UpdateSexControls()

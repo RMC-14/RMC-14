@@ -62,6 +62,7 @@ humanoid-profile-editor-job-priority-low-button = Low
 humanoid-profile-editor-job-priority-never-button = Never
 humanoid-profile-editor-job-toggle-on-button = Use
 humanoid-profile-editor-job-toggle-off-button = Off
+humanoid-profile-editor-job-priority-button = Prioritize
 humanoid-profile-editor-naming-rules-warning = Warning: Offensive or LRP IC names and descriptions will lead to admin intervention on this server. Read our \[Rules\] for more.
 humanoid-profile-editor-markings-tab = Markings
 humanoid-profile-editor-flavortext-tab = Description
