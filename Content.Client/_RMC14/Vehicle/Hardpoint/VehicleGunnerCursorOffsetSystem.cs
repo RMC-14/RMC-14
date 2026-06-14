@@ -15,14 +15,14 @@ namespace Content.Client._RMC14.Vehicle.Hardpoint;
 
 public sealed class VehicleGunnerCursorOffsetSystem : EntitySystem
 {
+    [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly ContentEyeSystem _contentEye = default!;
     [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
     private readonly Dictionary<EntityUid, Vector2> _currentPositions = new();
-    private static readonly float EdgeOffset = 0.9f;
+    private const float EdgeOffset = 0.9f;
 
     public override void Initialize()
     {

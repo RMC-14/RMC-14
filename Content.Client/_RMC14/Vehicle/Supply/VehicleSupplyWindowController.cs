@@ -25,6 +25,7 @@ public sealed class VehicleSupplyWindowController : IDisposable
     private const float PixelsPerMeter = 32f;
 
     private readonly IEntityManager _entManager = IoCManager.Resolve<IEntityManager>();
+    private readonly SpriteSystem _spriteSystem;
     private readonly VehicleSupplyWindow _window;
     private readonly List<VehicleHardpointLayerState> _previewLayers = new();
     private readonly List<VehicleSupplyPreviewOverlay> _previewOverlays = new();
@@ -48,6 +49,7 @@ public sealed class VehicleSupplyWindowController : IDisposable
 
     public VehicleSupplyWindowController(VehicleSupplyWindow window)
     {
+        _spriteSystem = _entManager.System<SpriteSystem>();
         _window = window;
         _window.FrameUpdated += OnFrameUpdated;
         _window.OnClose += Dispose;
@@ -148,20 +150,19 @@ public sealed class VehicleSupplyWindowController : IDisposable
             return;
 
         var sprite = entity.Comp1;
-        var spriteSystem = _entManager.System<SpriteSystem>();
         foreach (var entry in _previewLayers)
         {
-            if (!spriteSystem.LayerMapTryGet((entity.Owner, sprite), entry.Layer, out var layer, false))
+            if (!_spriteSystem.LayerMapTryGet((entity.Owner, sprite), entry.Layer, out var layer, false))
                 continue;
 
             if (string.IsNullOrWhiteSpace(entry.State))
             {
-                spriteSystem.LayerSetVisible((entity.Owner, sprite), layer, false);
+                _spriteSystem.LayerSetVisible((entity.Owner, sprite), layer, false);
                 continue;
             }
 
-            spriteSystem.LayerSetRsiState((entity.Owner, sprite), layer, entry.State);
-            spriteSystem.LayerSetVisible((entity.Owner, sprite), layer, true);
+            _spriteSystem.LayerSetRsiState((entity.Owner, sprite), layer, entry.State);
+            _spriteSystem.LayerSetVisible((entity.Owner, sprite), layer, true);
         }
 
         _previewDirty = false;
@@ -178,7 +179,6 @@ public sealed class VehicleSupplyWindowController : IDisposable
             return;
 
         var direction = _window.VehiclePreview.OverrideDirection ?? Direction.South;
-        var spriteSystem = _entManager.System<SpriteSystem>();
         var ordered = _previewOverlays
             .OrderBy(overlay => overlay.Order)
             .ToList();
@@ -191,10 +191,10 @@ public sealed class VehicleSupplyWindowController : IDisposable
             var overlayEntity = _entManager.Spawn(null);
             var sprite = _entManager.AddComponent<SpriteComponent>(overlayEntity);
             var spec = new SpriteSpecifier.Rsi(new ResPath(overlay.Rsi), overlay.State);
-            var layer = spriteSystem.AddLayer((overlayEntity, sprite), spec);
+            var layer = _spriteSystem.AddLayer((overlayEntity, sprite), spec);
 
             if (layer >= 0)
-                spriteSystem.LayerSetVisible((overlayEntity, sprite), layer, true);
+                _spriteSystem.LayerSetVisible((overlayEntity, sprite), layer, true);
 
             var view = new SpriteView
             {
@@ -215,7 +215,7 @@ public sealed class VehicleSupplyWindowController : IDisposable
                 Sprite = sprite,
                 View = view,
                 Data = overlay,
-                DirectionCount = spriteSystem.LayerGetDirectionCount((overlayEntity, sprite), 0)
+                DirectionCount = _spriteSystem.LayerGetDirectionCount((overlayEntity, sprite), 0)
             });
         }
 
@@ -228,14 +228,13 @@ public sealed class VehicleSupplyWindowController : IDisposable
         if (_previewOverlayViews.Count == 0)
             return;
 
-        var spriteSystem = _entManager.System<SpriteSystem>();
         foreach (var overlay in _previewOverlayViews)
         {
             var effectiveDirection = GetEffectiveDirection(direction, overlay.DirectionCount);
             overlay.View.OverrideDirection = effectiveDirection;
             var offsetPixels = GetOffsetPixels(overlay.Data, effectiveDirection);
             var offsetMeters = offsetPixels / PixelsPerMeter;
-            spriteSystem.SetOffset((overlay.Entity, overlay.Sprite), offsetMeters);
+            _spriteSystem.SetOffset((overlay.Entity, overlay.Sprite), offsetMeters);
         }
     }
 

@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Whitelist;
-using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Content.Shared.Tools;
 using Content.Shared.Tools.Systems;

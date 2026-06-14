@@ -1,7 +1,6 @@
 using System;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Tools.Components;
-using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Interaction;

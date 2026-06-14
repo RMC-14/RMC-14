@@ -2,7 +2,7 @@ using System;
 using System.Numerics;
 using Robust.Shared.Maths;
 
-namespace Content.Shared.Vehicle;
+namespace Content.Shared._RMC14.Vehicle;
 
 public static class GridVehicleMotionSimulator
 {

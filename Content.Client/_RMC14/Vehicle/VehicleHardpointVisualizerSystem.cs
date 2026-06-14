@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using Content.Shared._RMC14.Vehicle;
 using Robust.Client.GameObjects;
 using Robust.Shared.GameObjects;
-using Robust.Shared.GameStates;
 
 namespace Content.Client._RMC14.Vehicle;
 
@@ -11,7 +9,7 @@ public sealed class VehicleHardpointVisualizerSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<VehicleHardpointVisualsComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<VehicleHardpointVisualsComponent, ComponentHandleState>(OnHandleState);
+        SubscribeLocalEvent<VehicleHardpointVisualsComponent, AfterAutoHandleStateEvent>(OnHandleState);
     }
 
     private void OnStartup(Entity<VehicleHardpointVisualsComponent> ent, ref ComponentStartup args)
@@ -19,12 +17,8 @@ public sealed class VehicleHardpointVisualizerSystem : EntitySystem
         ApplyLayers(ent, ent.Comp);
     }
 
-    private void OnHandleState(Entity<VehicleHardpointVisualsComponent> ent, ref ComponentHandleState args)
+    private void OnHandleState(Entity<VehicleHardpointVisualsComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (args.Current is not VehicleHardpointVisualsComponentState state)
-            return;
-
-        ent.Comp.Layers = new List<VehicleHardpointLayerState>(state.Layers);
         ApplyLayers(ent, ent.Comp);
     }
 

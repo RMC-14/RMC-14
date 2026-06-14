@@ -11,6 +11,7 @@ using Content.Shared.Physics;
 using Content.Shared.Projectiles;
 using Content.Shared.Tag;
 // RMC14
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Vehicle.Components;
 // RMC14
 using Robust.Shared.Map;

@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Vehicle.Components;
 using ClientPhysicsSystem = Robust.Client.Physics.PhysicsSystem;
+using SharedMover = Content.Shared._RMC14.Vehicle.GridVehicleMoverSystem;
 using Robust.Client.Player;
 using Robust.Client.Graphics;
 using Robust.Shared.Configuration;
@@ -10,14 +12,14 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Client.Physics;
 
-namespace Content.Client.Vehicle;
+namespace Content.Client._RMC14.Vehicle;
 
 public sealed class GridVehicleMoverSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly ClientPhysicsSystem _physics = default!;
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
+    [Dependency] private readonly ClientPhysicsSystem _physics = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     public static readonly List<Vector2> DebugCollisionPositions = new();
 
@@ -86,9 +88,9 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
     private void RefreshSharedDebugFlags()
     {
-        Content.Shared.Vehicle.GridVehicleMoverSystem.CollisionDebugEnabled =
+        SharedMover.CollisionDebugEnabled =
             _overlay is { DebugEnabled: true } or { CollisionsEnabled: true };
-        Content.Shared.Vehicle.GridVehicleMoverSystem.MovementDebugEnabled =
+        SharedMover.MovementDebugEnabled =
             _overlay is { MovementEnabled: true };
     }
 

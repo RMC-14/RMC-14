@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-using Content.Client._RMC14.Vehicle;
 using Content.Client.Resources;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged;
@@ -16,10 +15,10 @@ using Robust.Shared.IoC;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 
-namespace Content.Client.Vehicle
+namespace Content.Client._RMC14.Vehicle;
+
+public sealed class VehicleHardpointDebugOverlay : Overlay
 {
-    public sealed class VehicleHardpointDebugOverlay : Overlay
-    {
         public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV | OverlaySpace.ScreenSpace;
 
         private const float PixelsPerMeter = 32f;
@@ -914,6 +913,5 @@ namespace Content.Client.Vehicle
 
             return false;
         }
-    }
 }
 

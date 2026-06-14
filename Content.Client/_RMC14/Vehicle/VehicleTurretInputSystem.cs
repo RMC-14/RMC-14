@@ -20,9 +20,9 @@ public sealed class VehicleTurretInputSystem : EntitySystem
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly VehicleTurretSystem _turrets = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly VehicleTurretSystem _turrets = default!;
 
     private readonly Dictionary<EntityUid, (Angle Angle, TimeSpan Time)> _lastAims = new();
     private readonly Dictionary<EntityUid, MapCoordinates> _lastAimCoordinates = new();
@@ -32,10 +32,10 @@ public sealed class VehicleTurretInputSystem : EntitySystem
         SubscribeLocalEvent<VehicleTurretComponent, EntityTerminatingEvent>(OnTurretTerminating);
     }
 
-    private void OnTurretTerminating(EntityUid uid, VehicleTurretComponent comp, ref EntityTerminatingEvent args)
+    private void OnTurretTerminating(Entity<VehicleTurretComponent> ent, ref EntityTerminatingEvent args)
     {
-        _lastAims.Remove(uid);
-        _lastAimCoordinates.Remove(uid);
+        _lastAims.Remove(ent);
+        _lastAimCoordinates.Remove(ent);
     }
 
     public override void Update(float frameTime)

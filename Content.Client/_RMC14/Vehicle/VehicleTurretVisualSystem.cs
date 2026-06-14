@@ -15,7 +15,7 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
 
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VehicleTurretSystem _turretSystem = default!;
+    [Dependency] private readonly VehicleTurretSystem _turret = default!;
 
     public override void Initialize()
     {
@@ -143,16 +143,16 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
         localOffset = Vector2.Zero;
         localRotation = Angle.Zero;
 
-        if (!_turretSystem.TryGetVehicle(turretUid, out vehicle))
+        if (!_turret.TryGetVehicle(turretUid, out vehicle))
             return false;
 
-        _turretSystem.TryGetAnchorTurret(turretUid, turret, out var anchorUid, out var anchorTurret);
+        _turret.TryGetAnchorTurret(turretUid, turret, out var anchorUid, out var anchorTurret);
 
         vehicleRot = _transform.GetWorldRotation(vehicle);
         var eyeRot = _eye.CurrentEye.Rotation;
-        var baseFacingAngle = _turretSystem.GetVehicleFacingAngle(vehicle, vehicleRot);
+        var baseFacingAngle = _turret.GetVehicleFacingAngle(vehicle, vehicleRot);
         var anchorFacingAngle = GetRenderFacing(anchorTurret, anchorTurret, vehicleRot, baseFacingAngle, eyeRot);
-        var anchorPixelOffset = _turretSystem.GetPixelOffset(anchorTurret, anchorFacingAngle) / PixelsPerMeter;
+        var anchorPixelOffset = _turret.GetPixelOffset(anchorTurret, anchorFacingAngle) / PixelsPerMeter;
         var anchorLocalOffset = GetVehicleLocalOffset(anchorTurret, anchorPixelOffset, vehicleRot, eyeRot);
 
         var targetLocalRotation = anchorTurret.RotateToCursor ? anchorTurret.WorldRotation : Angle.Zero;
@@ -163,7 +163,7 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
             return true;
 
         var turretFacingAngle = GetRenderFacing(turret, anchorTurret, vehicleRot, baseFacingAngle, eyeRot);
-        var worldOffset = _turretSystem.GetPixelOffset(turret, turretFacingAngle) / PixelsPerMeter;
+        var worldOffset = _turret.GetPixelOffset(turret, turretFacingAngle) / PixelsPerMeter;
         Vector2 turretLocalOffset;
 
         if (turret.OffsetRotatesWithTurret)
@@ -195,7 +195,7 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
         Angle baseFacingAngle,
         Angle eyeRot)
     {
-        return (_turretSystem.GetOffsetFacing(turret, anchorTurret, vehicleRot, baseFacingAngle) + eyeRot).Reduced();
+        return (_turret.GetOffsetFacing(turret, anchorTurret, vehicleRot, baseFacingAngle) + eyeRot).Reduced();
     }
 
     private static Vector2 GetVehicleLocalOffset(

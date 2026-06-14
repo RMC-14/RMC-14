@@ -16,7 +16,7 @@ public sealed partial class ProjectileFixedDistanceComponent : Component
     public TimeSpan FlyEndTime;
 
     /// <summary>
-    /// Optional exact stop position for fixed-distance shots.
+    /// Optional exact stop position for fixed distance shots.
     /// When set, the projectile will snap here when it reaches its stop time to avoid drift.
     /// </summary>
     [DataField, AutoNetworkedField]

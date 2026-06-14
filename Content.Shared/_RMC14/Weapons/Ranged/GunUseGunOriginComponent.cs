@@ -1,8 +1,6 @@
-// ReSharper disable CheckNamespace
-
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.Weapons.Ranged.Components;
+namespace Content.Shared._RMC14.Weapons.Ranged;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class GunUseGunOriginComponent : Component

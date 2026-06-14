@@ -1,4 +1,3 @@
-using Content.Server._RMC14.Vehicle;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Vehicle.Viewport;
 using Content.Shared.Interaction;
@@ -8,13 +7,16 @@ using Robust.Server.GameObjects;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Vehicle.Viewport;
 
 public sealed class VehicleViewportSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    private static readonly EntProtoId VehiclePeekAnchor = "VehiclePeekAnchor";
+
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly VehicleSystem _vehicles = default!;
     [Dependency] private readonly VehicleViewToggleSystem _viewToggle = default!;
 
@@ -129,7 +131,7 @@ public sealed class VehicleViewportSystem : EntitySystem
         if (TryComp(user, out EyeComponent? eye))
             userState.PreviousTarget = eye.Target;
         userState.Source = vehicle;
-        userState.PeekTarget = Spawn("VehiclePeekAnchor", peekCoords);
+        userState.PeekTarget = Spawn(VehiclePeekAnchor, peekCoords);
 
         _eye.SetTarget(user, userState.PeekTarget);
         Dirty(user, userState);

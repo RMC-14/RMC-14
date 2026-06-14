@@ -1,6 +1,5 @@
 using System;
 using Content.Shared._RMC14.Vehicle;
-using Content.Shared.Vehicle.Components;
 using Robust.Client.GameObjects;
 using Robust.Shared.Maths;
 using Robust.Shared.Timing;

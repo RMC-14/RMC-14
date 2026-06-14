@@ -17,7 +17,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
-using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.EntitySerialization;
@@ -37,6 +36,8 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleSystem : EntitySystem
 {
+    private static readonly EntProtoId VehicleKey = "RMCVehicleKey";
+
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
@@ -791,7 +792,7 @@ public sealed class VehicleSystem : EntitySystem
             if (seatXform.MapID != mapId)
                 continue;
 
-            var key = Spawn("RMCVehicleKey", seatXform.Coordinates);
+            var key = Spawn(VehicleKey, seatXform.Coordinates);
             if (TryComp(key, out VehicleKeyComponent? keyComp))
                 _vehicleLock.BindKey((key, keyComp), keyId, vehicle);
 

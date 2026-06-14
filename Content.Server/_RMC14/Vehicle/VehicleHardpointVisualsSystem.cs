@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Containers.ItemSlots;
-using Robust.Shared.GameStates;
 using Robust.Shared.GameObjects;
 
 namespace Content.Server._RMC14.Vehicle;
@@ -14,7 +13,6 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
     {
         SubscribeLocalEvent<VehicleHardpointVisualsComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<VehicleHardpointVisualsComponent, MapInitEvent>(OnInit);
-        SubscribeLocalEvent<VehicleHardpointVisualsComponent, ComponentGetState>(OnGetState);
         SubscribeLocalEvent<HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
     }
 
@@ -34,12 +32,6 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
             return;
 
         UpdateAppearance(args.Vehicle);
-    }
-
-    private void OnGetState(Entity<VehicleHardpointVisualsComponent> ent, ref ComponentGetState args)
-    {
-        var layers = new List<VehicleHardpointLayerState>(ent.Comp.Layers);
-        args.State = new VehicleHardpointVisualsComponentState(layers);
     }
 
     private void UpdateAppearance(

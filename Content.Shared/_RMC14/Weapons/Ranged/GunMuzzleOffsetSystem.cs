@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Emplacements;
 using Content.Shared._RMC14.Vehicle;
-using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Containers;

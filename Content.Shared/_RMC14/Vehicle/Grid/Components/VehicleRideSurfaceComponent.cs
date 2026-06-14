@@ -6,10 +6,10 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Maths;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Vehicle.Components;
+namespace Content.Shared._RMC14.Vehicle;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(Content.Shared.Vehicle.VehicleRideSurfaceSystem), Other = AccessPermissions.ReadWrite)]
+[Access(typeof(VehicleRideSurfaceSystem), Other = AccessPermissions.ReadWrite)]
 public sealed partial class VehicleRideSurfaceComponent : Component
 {
     /// <summary>
@@ -89,7 +89,7 @@ public sealed partial class VehicleRideSurfaceComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(Content.Shared.Vehicle.VehicleRideSurfaceSystem), Other = AccessPermissions.ReadWrite)]
+[Access(typeof(VehicleRideSurfaceSystem), Other = AccessPermissions.ReadWrite)]
 public sealed partial class VehicleRideSurfaceRiderComponent : Component
 {
     [AutoNetworkedField]

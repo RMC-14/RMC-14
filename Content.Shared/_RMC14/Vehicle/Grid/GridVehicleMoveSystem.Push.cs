@@ -7,7 +7,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Maths;
 using Content.Shared.Movement.Systems;
 
-namespace Content.Shared.Vehicle;
+namespace Content.Shared._RMC14.Vehicle;
 
 public sealed partial class GridVehicleMoverSystem : EntitySystem
 {
