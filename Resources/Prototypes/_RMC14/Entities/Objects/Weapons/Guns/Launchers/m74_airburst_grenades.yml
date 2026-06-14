@@ -138,7 +138,7 @@
   - type: Projectile
     deleteOnCollide: false
     impactEffect: BulletImpactEffect
-    maxFixedRange: 7
+    maxFixedRange: 8.463 #The result of CircleAreaFromSquareAbilityRange(7)
     damage:
       types:
         Piercing: 100
@@ -276,7 +276,6 @@
       path: /Audio/Effects/gen_hit.ogg
   - type: SpawnOnTerminate
     spawn: RMCSmoke
-    projectileAdjust: false
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger

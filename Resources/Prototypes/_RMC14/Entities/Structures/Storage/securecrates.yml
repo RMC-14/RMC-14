@@ -300,6 +300,7 @@
   parent: RMCSecureCaseDouble #Evilass hidden GUN GAMBA CRATEEEEEEEE For CHANCESSSS CLAIMEEEEEEEEEEEEEE
   id: RMCCrateBlackmarketFireArmsHidden
   name: supply crate
+  suffix: Hidden Firearms
   description: A hefty wooden crate.
   components:
   - type: SpawnOnTerminate
