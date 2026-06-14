@@ -63,8 +63,8 @@
 - type: entity
   parent: RMCBaseLandingSign
   id: RMCFiorinaSign
-  name: Firoina Science Annex sign
-  description: A large sign that reads 'Firoina Science Annex', A graphic of the station and some text threatening fines or jail time also adorn the sign. The underside of the sign is covered in some odd imitation plants, made of a rough, layered, fabric. When approached, you sense some of the sharp needle like fibers of the foliage break loose.
+  name: Fiorina Science Annex sign
+  description: A large sign that reads 'Fiorina Science Annex', A graphic of the station and some text threatening fines or jail time adorn the sign. The underside of the sign is covered in some odd imitation plants, made of a rough, layered, fabric. When approached, you sense some of the sharp needle like fibers of the foliage break loose.
   components:
   - type: Sprite
     state: fiorina_sign
