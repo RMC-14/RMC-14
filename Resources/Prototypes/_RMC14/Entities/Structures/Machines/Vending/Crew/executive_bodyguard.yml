@@ -301,12 +301,12 @@
         ranks:
         - RMCRankWeYaBodyguardPPS
         - RMCRankWeYaBodyguardPPC
-        choices: { CMPrimary: 1 }
+        choices: { CMVendorBundleRiflemanApparel: 1 }
         entries:
         # RMC14 TODO: Shock Shotgun 15p
-        - id: RMCWeaponRifleM54CWhite
-        - id: RMCWeaponSMGM63WhiteNoLock
-        - id: RMCWeaponRifleSSG45Stripped
+        - id: RMCVendorBundleM54CWhiteNoLock
+        - id: RMCVendorBundleSMGM63WhiteNoLock
+        - id: RMCVendorBundleSMGSSG45NoLockStripped
       - name: Sidearm
         ranks:
         - RMCRankWeYaBodyguardPPS

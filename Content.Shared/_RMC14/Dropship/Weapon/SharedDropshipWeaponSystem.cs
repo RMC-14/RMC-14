@@ -363,7 +363,39 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (terminal.Target == ent)
             {
                 RemovePvsActors((uid, terminal));
-                SetTarget((uid, terminal), null);
+
+                if (!HasComp<DropshipLingeringTargetComponent>(ent) &&
+                    _net.IsServer &&
+                    ent.Comp.Eyes.TryGetValue(uid, out var oldEye))
+                {
+                    var proxy = Spawn(null, Transform(ent).Coordinates);
+
+                    var proxyTarget = EnsureComp<DropshipTargetComponent>(proxy);
+                    proxyTarget.Abbreviation = ent.Comp.Abbreviation;
+                    proxyTarget.IsTargetableByWeapons = false;
+                    proxyTarget.Eyes[uid] = oldEye;
+
+                    EnsureComp<DropshipLingeringTargetComponent>(proxy);
+
+                    var proxyDespawn = EnsureComp<TimedDespawnComponent>(proxy);
+                    proxyDespawn.Lifetime = (float) terminal.LingeringCameraDuration.TotalSeconds;
+
+                    if (TryComp(oldEye, out DropshipTargetEyeComponent? eyeTarget))
+                    {
+                        eyeTarget.Target = proxy;
+                        Dirty(oldEye, eyeTarget);
+                    }
+
+                    ent.Comp.Eyes.Remove(uid);
+
+                    Dirty(proxy, proxyTarget);
+                    SetTarget((uid, terminal), proxy);
+                    AddPvsActors((uid, terminal));
+                }
+                else
+                {
+                    SetTarget((uid, terminal), null);
+                }
             }
 
             var targets = terminal.Targets;
@@ -627,9 +659,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         if (!IsValidTarget(target))
         {
+            if (HasComp<DropshipLingeringTargetComponent>(target))
+                return;
+
             RemovePvsActors(ent);
             SetTarget(ent, null);
             Dirty(ent);
+
             return;
         }
 

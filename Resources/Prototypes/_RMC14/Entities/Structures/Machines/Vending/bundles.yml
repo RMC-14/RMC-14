@@ -285,3 +285,51 @@
     - RMCMortarKit # RMC14 TODO: RCM Custom Light Mortar
     - RMCBeltRoyalMortarFilledMortarShells # RMC14 TODO: Check Parity Fill
     - RMCLaserDesignatorPVE
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleM54CWhiteNoLock
+  name: M54C assault rifle MK2
+  description: Contains the M54C assault rifle MK2 and 3 M54C magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCWeaponRifleM54CWhiteNoLock
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleSMGM63WhiteNoLock
+  name: M63 submachine gun
+  description: Contains the M63 submachine gun and 3 M63 magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCWeaponSMGM63WhiteNoLock
+    - CMMagazineSMGM63
+    - CMMagazineSMGM63
+    - CMMagazineSMGM63
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleSMGSSG45NoLockStripped
+  name: SSG-45 Assault Rifle
+  description: Contains the SSG-45 Assault Rifle and 3 SSG-45 magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_icon.rsi
+    state: base
+  - type: CMVendorBundle
+    bundle:
+    - RMCWeaponRifleSSG45NoLockStripped
+    - RMCMagazineRifleSSG45
+    - RMCMagazineRifleSSG45
+    - RMCMagazineRifleSSG45

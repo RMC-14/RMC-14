@@ -183,6 +183,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
+  - type: XenoCappedPheromones
+    cappedPheromones:
+      Frenzy: 2.9
   - type: Xeno
     actionIds:
     - ActionXenoRest

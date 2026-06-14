@@ -57,9 +57,11 @@ public sealed class ExpendableLightVisualizerSystem : VisualizerSystem<Expendabl
             case ExpendableLightState.PhaseFour:
             case ExpendableLightState.PhaseFive:
             case ExpendableLightState.Fading:
-                _audioSystem.Stop(comp.PlayingStream);
-                comp.PlayingStream = _audioSystem.PlayPvs(
-                    comp.LoopedSound, uid)?.Entity;
+                if (state != ExpendableLightState.PhaseOne)
+                    _audioSystem.Stop(comp.PlayingStream);
+
+                if (state == ExpendableLightState.Lit)
+                    comp.PlayingStream = _audioSystem.PlayPvs(comp.LoopedSound, uid)?.Entity;
 
                 if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), ExpendableLightVisualLayers.Overlay, out var layerIdx, true))
                 {
