@@ -108,7 +108,7 @@
     - id: RMCBoxShotgunFlechette
     - id: RMCM276ShotgunShellLoadingRig
 
-# MOU53 Field Test
+# HPR support
 - type: entity
   parent: RMCKitBase
   id: RMCSupplyKitHeavySupport
