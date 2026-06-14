@@ -47,7 +47,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
   - type: CMArmor
-    melee: 15
+    melee: 15 # CLOTHING_ARMOR_MEDIUMLOW
     bullet: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
@@ -204,7 +204,7 @@
   parent: CMArmorM4PMC
   id: CMArmorM4PMCCommandoSurvivor
   name: damaged MY7 pattern Commando armor
-  description: A modification of the WeYa PMC armor patterns. Designed for elite corporate mercenaries in mind. This one has a lot of scratches and acid damage.
+  description: A modification of the WEYA PMC armor patterns. Designed for elite corporate mercenaries in mind. This one has a lot of scratches and acid damage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
@@ -283,6 +283,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/ppo_armor.rsi
+  - type: CMArmor
+    melee: 20 # CLOTHING_ARMOR_MEDIUM
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bio: 10 # CLOTHING_ARMOR_LOW
+    explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
   - type: RemoveComponents
     components:
     - type: ClothingRequireEquipped
@@ -300,13 +305,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/ppo_light.rsi
-  - type: CMArmor
-    melee: 15
-    bullet: 20 # CLOTHING_ARMOR_MEDIUM
-    explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
     walkModifier: 0.949
     sprintModifier: 0.949
+  - type: Storage
+    grid:
+    - 0,0,1,1 # 1 slot
   - type: RemoveComponents
     components:
     - type: ClothingRequireEquipped

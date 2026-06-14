@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.NightVision;
@@ -313,6 +314,18 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     public bool HasHiveCore(Entity<HiveComponent> hive)
     {
         return GetHiveCore(hive) is not null;
+    }
+
+    public bool TryGetHiveCore(EntityUid xeno, [NotNullWhen(true)] out EntityUid? core)
+    {
+        if (GetHive(xeno) is not { } hive || GetHiveCore(hive) is not { } coreEnt)
+        {
+            core = null;
+            return false;
+        }
+
+        core = coreEnt;
+        return true;
     }
 
     public EntityUid? GetHiveCore(Entity<HiveComponent> hive)

@@ -52,6 +52,7 @@
           - RMCMagazineRifleType77AP
           - RMCMagazineRifleType77Incendiary
           - RMCMagazineRifleType77HEAP
+          - RMCMagazineRifleType77Rubber
   - type: GunDamageModifier
     multiplier: 1.1
   - type: AttachableHolder
@@ -89,8 +90,8 @@
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.84, 0
@@ -118,6 +119,10 @@
         whitelist:
           tags:
           - RMCMagazineRifleType77HEAP
+      mag-4:
+        whitelist:
+          tags:
+          - RMCMagazineRifleType77Rubber
 
 - type: entity
   parent: RMCWeaponRifleType77
@@ -161,13 +166,13 @@
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
 
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleType77
-  name: "Type77 magazine (10x24mm)"
+  name: "Type 77 magazine (10x24mm)"
   components:
   - type: Tag
     tags:
@@ -202,7 +207,7 @@
 - type: entity
   parent: RMCMagazineRifleType77
   id: RMCMagazineRifleType77AP
-  name: "Type77 AP magazine (10x24mm)"
+  name: "Type 77 AP magazine (10x24mm)"
   suffix: AP
   components:
   - type: Tag
@@ -229,7 +234,7 @@
 - type: entity
   parent: RMCMagazineRifleType77
   id: RMCMagazineRifleType77Incendiary
-  name: "Type77 Incendiary magazine (10x24mm)"
+  name: "Type 77 Incendiary magazine (10x24mm)"
   suffix: Incendiary
   components:
   - type: Tag
@@ -256,7 +261,7 @@
 - type: entity
   parent: RMCMagazineRifleType77
   id: RMCMagazineRifleType77HEAP
-  name: "Type77 HEAP magazine (10x24mm)"
+  name: "Type 77 HEAP magazine (10x24mm)"
   suffix: HEAP
   components:
   - type: Tag
@@ -280,6 +285,31 @@
 #  - type: RefillableByBulletBox
 #    bulletType: RMCBoxBulletsRifleAP
 
+- type: entity
+  parent: RMCMagazineRifleType77
+  id: RMCMagazineRifleType77Rubber
+  name: "Type 77 rubber magazine (10x24mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleType77Rubber
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmRubber
+    proto: RMCCartridgeRifle10x24mmRubber
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/Type77.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#0A00C8"
+
 - type: Tag
   id: RMCWeaponRifleType77
 
@@ -294,3 +324,6 @@
 
 - type: Tag
   id: RMCMagazineRifleType77HEAP
+
+- type: Tag
+  id: RMCMagazineRifleType77Rubber
