@@ -18,6 +18,9 @@
     timeToApply: 4
     structure: true
   - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Structural: 750
 
 - type: entity
   parent: BaseStructure
@@ -137,10 +140,35 @@
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
+  - type: ExaminableDamage
+    messages: RMCWallMessages
+  - type: RMCIntegrityExamine
+  - type: RMCRepairable
+    heal: 1000
+    delay: 1
+  - type: RMCWeldEffectSource
+    startingOffset: -0.35, -0.35
+    pathOffsets:
+    - -0.35, -0.35
+    - 0.35, -0.35
+    - 0.35, 0.35
+    - -0.35, 0.35
+    - -0.35, -0.35
+  - type: NailgunRepairable
+    wallRepairFractions:
+      RMCWood: 0.075
+      CMSteel: 0.15
+      CMPlasteel: 0.3
+  - type: RMCGenericExamine
+    message: rmc-structure-wall-repair-examine-tip
+    whitelist:
+      components:
+      - Marine
   - type: Corrodible
     isCorrodible: true
     structure: true
     meltTimeMult: 3
+  - type: XenoAcidHoleWall
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType

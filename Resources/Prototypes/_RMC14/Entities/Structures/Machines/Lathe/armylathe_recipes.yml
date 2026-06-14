@@ -1,87 +1,87 @@
-# Divide original costs by 37.5 each - except plastic which is 20
-# For all non-stackable/sheet items, multiply original costs by 1.25 rounded down
-# Example: M40 is 4250 x 1.25 = 5312 / 37.5 = 142 CMSteel
+# Items are more expensive to produce than they are to recycle.
+# For all non-sheet items, multiply original costs by 1.25 rounded down. Sheets are all under /obj/item/stack/sheet
+# Example: M40 is 4250 x 1.25 = 5312
 - type: latheRecipe
   id: RMCM40GrenadeCasing
   result: RMCM40GrenadeCasing
   completetime: 4
   materials:
-    CMSteel: 142 # 5312
+    CMSteel: 5312 # 4250
 
 - type: latheRecipe
   id: RMCM15GrenadeCasing
   result: RMCM15GrenadeCasing
   completetime: 4
   materials:
-    CMSteel: 233 # 8750
+    CMSteel: 8750 # 7000
 
 - type: latheRecipe
   id: RMCM20MineCasing
   result: RMCM20MineCasing
   completetime: 4
   materials:
-    CMSteel: 125 # 4687
+    CMSteel: 4687 # 3750
 
 - type: latheRecipe
   id: RMCC4PlasticCasing
   result: RMCC4PlasticCasing
   completetime: 4
   materials:
-    CMSteel: 250 # 9375
-    RMCPlastic: 125 # 2500
+    CMSteel: 9375 # 7500
+    RMCPlastic: 2500 # 2000
 
 - type: latheRecipe
   id: RMC84mmRocketTube
   result: RMC84mmRocketTube
   completetime: 4
   materials:
-    CMSteel: 250 # 9375
+    CMSteel: 9375 # 7500
 
 - type: latheRecipe
   id: RMC84mmRocketWarhead
   result: RMC84mmRocketWarhead
   completetime: 4
   materials:
-    CMSteel: 375 # 14062
+    CMSteel: 14062 # 11250
 
 - type: latheRecipe
   id: RMC80mmMortarShell
   result: RMC80mmMortarShell
   completetime: 4
   materials:
-    CMSteel: 625 # 23437
+    CMSteel: 23437 # 18750
 
 - type: latheRecipe
   id: RMC80mmMortarWarhead
   result: RMC80mmMortarWarhead
   completetime: 4
   materials:
-    CMSteel: 375 # 14062
+    CMSteel: 14062 # 11250
 
 - type: latheRecipe
   id: RMC80mmMortarCameraWarhead
   result: RMC80mmMortarCameraWarhead
   completetime: 4
   materials:
-    CMSteel: 500 # 18750
+    CMSteel: 18750 # 15000
 
 - type: latheRecipe
   id: RMCTankFlamerCustom
   result: RMCTankFlamerCustom
   completetime: 4
   materials:
-    CMSteel: 125 # 4687
+    CMSteel: 4687 # 3750
 
 - type: latheRecipe
   id: RMCTankFlamerLargeCustom
   result: RMCTankFlamerLargeCustom
   completetime: 4
   materials:
-    CMSteel: 125 # 4687
+    CMSteel: 4687 # 3750
 
 - type: latheRecipe
   id: RMCCustomM34A1SmokeTankCase
   result: RMCCustomM34A1SmokeTankCase
   completetime: 4
   materials:
-    CMSteel: 125 # 4687
+    CMSteel: 4687 # 3750

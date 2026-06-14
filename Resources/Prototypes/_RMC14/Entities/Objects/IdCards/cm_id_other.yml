@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMIDCardSilver
   id: CMIDCardSeniorEnlistedAdvisor
   name: senior enlisted advisor ID card
@@ -22,7 +22,8 @@
   - type: PresetIdCard
     job: CMSurvivor
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -32,7 +33,8 @@
   - type: PresetIdCard
     job: CMSurvivorDoctor
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardLanyard
@@ -42,17 +44,19 @@
   - type: PresetIdCard
     job: CMSurvivorEngineer
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
-  parent: CMIDCardLanyard
+  parent: CMIDCardSilver
   id: RMCIDCardColonistScientist
   name: researcher colonist ID card
   components:
   - type: PresetIdCard
     job: CMSurvivorScientist
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardLanyard
@@ -67,7 +71,8 @@
   - type: PresetIdCard
     job: CMSurvivorSecurity
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -79,7 +84,9 @@
   - type: Sprite
     state: corporate_liaison
   - type: ItemIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
+    - FactionMarine
   - type: PresetIdCard
     job: CMLiaison
 
@@ -93,7 +100,17 @@
   - type: Sprite
     state: pmc
   - type: ItemIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
+
+- type: entity
+  parent: CMIDCardPMC
+  id: CMIDCardCommando
+  name: commando holo-badge
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: commando
 
 - type: entity
   parent: CMIDCardLiaison
@@ -105,7 +122,8 @@
   - type: Sprite
     state: pmc
   - type: ItemIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
   - type: PresetIdCard
     job: CMLiaison
 
@@ -114,6 +132,10 @@
   id: CMIDCardLiaisonColony
   name: liaison ID card
   components:
+  - type: ItemIFF
+    factions:
+    - FactionWeYa
+    - FactionSurvivor
   - type: PresetIdCard
     job: CMSurvivorCorporate
 
@@ -139,7 +161,7 @@
   name: executive corporate supervisor ID card
   components:
   - type: PresetIdCard
-    job: CMCorporateExecutiveSpecialistLegal
+    job: CMCorporateExecutiveSupervisor
 
 - type: entity
   parent: CMIDCardLiaison
@@ -180,7 +202,8 @@
   - type: PresetIdCard
     job: CMBureauMarshal
   - type: ItemIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -191,7 +214,8 @@
   - type: PresetIdCard
     job: CMBureauDeputy
   - type: ItemIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -200,21 +224,21 @@
   description: A corporate holo-badge. It has a unique uncapped bottom.
   components:
   - type: ItemIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
   - type: Access
     groups:
     - Colony
     - RMCWeYa
 
 - type: entity
-  id: FactionWeYa
-  categories: [ HideSpawnMenu ]
+  parent: RMCIDCardPMC
+  id: RMCIDCardExecutiveBodyguard
   components:
-  - type: IFFFaction
-  - type: FactionFrequencies
-    channels:
-    - Colony
-    - WEYA
+  - type: ItemIFF
+    factions:
+    - FactionMarine
+    - FactionWeYa
 
 - type: entity
   parent: CMIDCardLanyard
@@ -315,17 +339,10 @@
   suffix: Survivor
   components:
   - type: PresetIdCard
-    job: RMCJobSyntheticColony
+    job: RMCSyntheticColony
   - type: ItemIFF
-    faction: FactionSurvivor
-
-- type: entity
-  parent: CMIDCardStandardDogtag
-  id: RMCIDCardFORECONSpotter
-  name: FORECON Spotter's dogtags
-  components:
-  - type: IdCard
-    jobTitle: rmc-job-name-forecon-spotter
+    factions:
+    - FactionSurvivor
 
 - type: entity
   id: RMCIDCardAegis
@@ -363,3 +380,56 @@
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/aegis.rsi
     state: bloody
+
+
+# CBRN
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNRifleman
+  name: CBRN Rifleman's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNRifleman
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNCombatTech
+  name: CBRN Combat Technician's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNCombatTech
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNFTL
+  name: CBRN Fireteam Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNFireteamLeader
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNSL
+  name: CBRN Squad Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNSquadLeader
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNWS
+  name: CBRN Weapons Specialist's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNWS
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNMedic
+  name: CBRN Hospital Corpsman's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNMedic
+
+

@@ -25,6 +25,7 @@
   - CMAccessMaint # maints
   - CMAccessMarinePrep # access to the basic areas of marine prep, where marines exit cryo and get food.
   - CMAccessMedical # the medical department locked doors, like surgery rooms and the supply closet
+  - RMCAccessMorgue # morgue access
   - CMAccessMedPrep # hospital corpsman
   - CMAccessOT # ordnance tech
   - CMAccessPilot # dropship pilot door access
@@ -41,7 +42,9 @@
   - RMCAccessTSEPABrig # tsepa brig / senior constables
   - RMCAccessTSEPA # tsepa
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
+  - RMCAccessLogs
 
 - type: accessGroup
   id: CO
@@ -70,6 +73,7 @@
   - CMAccessMaint # maints
   - CMAccessMarinePrep # access to the basic areas of marine prep, where marines exit cryo and get food.
   - CMAccessMedical # the medical department locked doors, like surgery rooms and the supply closet
+  - RMCAccessMorgue # morgue access
   - CMAccessMedPrep # hospital corpsman
   - CMAccessOT # ordnance tech
   - CMAccessPilot # dropship pilot door access
@@ -86,7 +90,9 @@
   - RMCAccessTSEPABrig # tsepa brig / senior constables
   - RMCAccessTSEPA # tsepa
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
+  - RMCAccessLogs
 
 # all ship-side access that is not CO
 # SEA uses this.
@@ -117,6 +123,7 @@
   - CMAccessMaint
   - CMAccessMarinePrep
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessMedPrep
   - CMAccessOT
   - CMAccessPilot
@@ -130,7 +137,9 @@
   - CMAccessSquadLeaderPrep
   - CMAccessMarineRifleman
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
+  - RMCAccessLogs
 
 - type: accessGroup
   id: SEA
@@ -158,6 +167,7 @@
   - CMAccessMaint
   - CMAccessMarinePrep
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessMedPrep
   - CMAccessOT
   - CMAccessPilot
@@ -171,7 +181,9 @@
   - CMAccessSquadLeaderPrep
   - CMAccessMarineRifleman
   - RMCAccessDatabase
+  - RMCAccessFieldDoctor
   - RMCAccessSeniorCommand
+  - RMCAccessLogs
 
 - type: accessGroup
   id: SO

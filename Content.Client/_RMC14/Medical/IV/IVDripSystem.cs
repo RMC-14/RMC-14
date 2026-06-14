@@ -2,12 +2,15 @@
 using Content.Shared.Rounding;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Medical.IV;
 
 public sealed class IVDripSystem : SharedIVDripSystem
 {
     [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -31,7 +34,7 @@ public sealed class IVDripSystem : SharedIVDripSystem
         var hookedState = iv.Comp.AttachedTo == default
             ? iv.Comp.UnattachedState
             : iv.Comp.AttachedState;
-        sprite.LayerSetState(IVDripVisualLayers.Base, hookedState);
+        _spriteSystem.LayerSetRsiState((iv.Owner, sprite), IVDripVisualLayers.Base, hookedState);
 
         string? reagentState = null;
         for (var i = iv.Comp.ReagentStates.Count - 1; i >= 0; i--)
@@ -46,13 +49,13 @@ public sealed class IVDripSystem : SharedIVDripSystem
 
         if (reagentState == null)
         {
-            sprite.LayerSetVisible(IVDripVisualLayers.Reagent, false);
+            _spriteSystem.LayerSetVisible((iv.Owner, sprite), IVDripVisualLayers.Reagent, false);
             return;
         }
 
-        sprite.LayerSetVisible(IVDripVisualLayers.Reagent, true);
-        sprite.LayerSetState(IVDripVisualLayers.Reagent, reagentState);
-        sprite.LayerSetColor(IVDripVisualLayers.Reagent, iv.Comp.FillColor);
+        _spriteSystem.LayerSetVisible((iv.Owner, sprite), IVDripVisualLayers.Reagent, true);
+        _spriteSystem.LayerSetRsiState((iv.Owner, sprite), IVDripVisualLayers.Reagent, reagentState);
+        _spriteSystem.LayerSetColor((iv.Owner, sprite), IVDripVisualLayers.Reagent, iv.Comp.FillColor);
     }
 
     protected override void UpdatePackAppearance(Entity<BloodPackComponent> pack)
@@ -62,16 +65,49 @@ public sealed class IVDripSystem : SharedIVDripSystem
             return;
 
         // TODO RMC14 blood types
-        sprite.LayerSetVisible(BloodPackVisuals.Label, false);
+        _spriteSystem.LayerSetVisible((pack.Owner, sprite), BloodPackVisuals.Label, false);
 
-        if (sprite.LayerMapTryGet(BloodPackVisuals.Fill, out var fillLayer))
+        if (_spriteSystem.LayerMapTryGet((pack.Owner, sprite), BloodPackVisuals.Fill, out var fillLayer, false))
         {
             var fill = pack.Comp.FillPercentage.Float();
             var level = ContentHelpers.RoundToLevels(fill, 1, pack.Comp.MaxFillLevels + 1);
             var state = level > 0 ? $"{pack.Comp.FillBaseName}{level}" : pack.Comp.FillBaseName;
-            sprite.LayerSetState(fillLayer, state);
-            sprite.LayerSetColor(fillLayer, pack.Comp.FillColor);
-            sprite.LayerSetVisible(fillLayer, true);
+            _spriteSystem.LayerSetRsiState((pack.Owner, sprite), fillLayer, state);
+            _spriteSystem.LayerSetColor((pack.Owner, sprite), fillLayer, pack.Comp.FillColor);
+            _spriteSystem.LayerSetVisible((pack.Owner, sprite), fillLayer, true);
+        }
+    }
+
+    protected override void UpdateDialysisAppearance(Entity<PortableDialysisComponent> dialysis)
+    {
+        base.UpdateDialysisAppearance(dialysis);
+        if (!TryComp(dialysis, out SpriteComponent? sprite))
+            return;
+
+        var attachmentState = dialysis.Comp.AttachedTo != null ? "hooked" : "unhooked";
+        if (_spriteSystem.LayerMapTryGet((dialysis.Owner, sprite), DialysisVisualLayers.Attachment, out var attachmentLayer, false))
+            _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), attachmentLayer, attachmentState);
+
+        var isDetaching = dialysis.Comp.DetachingEnd > _timing.CurTime;
+        if (_spriteSystem.LayerMapTryGet((dialysis.Owner, sprite), DialysisVisualLayers.Effect, out var effectLayer, false))
+        {
+            string? effectState = null;
+            if (isDetaching)
+                effectState = "draining";
+            else if (dialysis.Comp.IsAttaching)
+                effectState = "filling";
+            else if (dialysis.Comp.AttachedTo != null)
+                effectState = "running";
+
+            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), effectLayer, effectState != null);
+            if (effectState != null)
+                _spriteSystem.LayerSetRsiState((dialysis.Owner, sprite), effectLayer, effectState);
+        }
+
+        if (_spriteSystem.LayerMapTryGet((dialysis.Owner, sprite), DialysisVisualLayers.Filtering, out var filteringLayer, false))
+        {
+            var showFiltering = dialysis.Comp is { AttachedTo: not null, IsAttaching: false } && !isDetaching;
+            _spriteSystem.LayerSetVisible((dialysis.Owner, sprite), filteringLayer, showFiltering);
         }
     }
 }

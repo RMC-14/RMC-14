@@ -41,6 +41,8 @@
       - cost: 3000
         crate: RMCCrateBoxMagazinePistolM1984AP
       - cost: 3000
+        crate: RMCCrateBoxMagazinePistolM1984HP
+      - cost: 3000
         crate: RMCCrateBoxShellsShotgunSlugs
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunBuckshot
@@ -82,6 +84,12 @@
         crate: RMCCrateBoxMagazineSentryFireBlue
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFireSmoke
+      - cost: 2500
+        crate: RMCCrateMagazineML66DDrum
+      - cost: 2500
+        crate: RMCCrateMagazineM2C
+      - cost: 6000
+        crate: RMCCrateMagazineAmmoSurplus
     - name: Attachments
       entries:
       - cost: 3000
@@ -164,8 +172,8 @@
         crate: RMCCrateGlassSheets
       - cost: 2000
         crate: RMCCrateWoodenPlanks
-#      - cost: 2000
-#        crate: RMCCrateFoldingBarricades
+      - cost: 2000
+        crate: RMCCrateFoldingBarricades
 #      - cost: 3000
 #        crate: RMCCrateSuperconductingMagneticCoil
       - cost: 2000
@@ -195,6 +203,10 @@
       # leaving this commented, as it is not parity, but we might want it in the future
       #- cost: 2000
       #  crate: RMCCrateGrenadesSmoke
+      - cost: 3200
+        crate: RMCCrateExplosiveWhitePhosphorusCompound
+      - cost: 10800
+        crate: RMCCrateExplosiveWhitePhosphorusCompoundBox
       - cost: 4000
         crate: RMCCrateGrenadesFragOld
       - cost: 3000
@@ -221,6 +233,10 @@
         crate: RMCCrateGrenadesAirburstStarShell
       - cost: 1000
         crate: RMCCrateGrenadesBatonSlug
+      - cost: 3000
+        crate: RMCCrateExplosiveClaymoreMine
+      - cost: 4000
+        crate: RMCCrateExplosivesSurplus
     - name: Food
       entries:
       - cost: 1000
@@ -247,17 +263,21 @@
         crate: RMCCrateGearParachute
     - name: Medical
       entries:
-      - cost: 3200
+      - cost: 2500
         crate: RMCCrateMedicalSurgery
-      - cost: 2000
+      - cost: 3500
+        crate: RMCCrateFieldDoctor
+        entities:
+        - CMIV # TODO RMC14 Make IV fit in crate.
+      - cost: 700
         crate: RMCCrateMedicalBodyBag
-      - cost: 1200
+      - cost: 1500
         crate: RMCCrateMedicalStasisBag
-      - cost: 1600
+      - cost: 1100
         crate: RMCCrateMedicalFirstAid
-      - cost: 2100
+      - cost: 1500
         crate: RMCCrateMedicalFilled
-      - cost: 2100
+      - cost: 1500
         crate: RMCCrateMedicalPill
     - name: Mortar
       entries:
@@ -323,6 +343,10 @@
         crate: RMCCrateXM51
       - cost: 4000
         crate: RMCCrateM85A1
+      - cost: 6000
+        crate: RMCCrateML66D
+      - cost: 6000
+        crate: RMCCrateM2C
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000
@@ -341,8 +365,8 @@
         crate: RMCCrateM5DemoSpecHighExplosive
       - cost: 3000
         crate: RMCCrateM5DemoSpecAntiArmor
-#      - cost: 3000
-#        crate: RMCCrateM5DemoSpecWhitePhosphorous
+      - cost: 3000
+        crate: RMCCrateM5DemoSpecWhitePhosphorus
       - cost: 4000
         crate: RMCCrateMagazineM4SPRCustomMixed
       - cost: 3000

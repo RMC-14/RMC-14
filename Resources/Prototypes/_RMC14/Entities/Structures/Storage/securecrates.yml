@@ -100,7 +100,7 @@
     - RMCWeaponPistolHoldout: RMCMagazinePistolHoldout
     - RMCWeaponRevolverSpearhead: RMCSpeedLoader357
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
-    - CMWeaponPistolM1984: CMMagazinePistolM1984
+    - CMWeaponPistolM1911: CMMagazinePistolM1911
     - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
     - WeaponShotgunCustomBuilt: CMShellShotgunBuckshot
@@ -118,6 +118,36 @@
     - WeaponRifleAR10: RMCMagazineRifleAR10
     - RMCWeaponRifleType71: RMCMagazineRifleType71
     - RMCWeaponSMGFP9000: RMCMagazineSMGFP9000
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomConfiscatedEquipment
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RMCConfiscatedEquipmentTable
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomConfiscatedWeaponry
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RMCConfiscatedWeaponryTable
 
 - type: entity
   parent: MarkerBase
@@ -256,6 +286,7 @@
     spawn: RMCSpawnerRandomHalyconGuns
 #Todo RMC14: Make it so it does it 3 times
 
+# Black market
 - type: entity
   parent: RMCCrateLarge
   id: RMCCrateBlackmarketFireArms
@@ -269,10 +300,29 @@
   parent: RMCSecureCaseDouble #Evilass hidden GUN GAMBA CRATEEEEEEEE For CHANCESSSS CLAIMEEEEEEEEEEEEEE
   id: RMCCrateBlackmarketFireArmsHidden
   name: supply crate
+  suffix: Hidden Firearms
   description: A hefty wooden crate.
   components:
   - type: SpawnOnTerminate
     spawn: RMCSpawnerRandomMERCGuns
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateBlackmarketConfiscatedEquipment # TODO crate heat 10 and dollar cost 70
+  name: seized foreign equipment crate
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomConfiscatedEquipment
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateBlackmarketConfiscatedWeaponry # TODO crate heat 15 and dollar cost 45
+  name: seized foreign weaponry crate
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomConfiscatedWeaponry
+
+# Black market end
 
 - type: entity
   parent: RMCCrateLarge # TDLR (randomized spawn does not work with crateopenable spawn a object that uses Spawnonterminate for it) Part of UNMC Guns Crate
@@ -402,9 +452,9 @@
     spawn: CMPamphletPowerloader
 
 - type: entity
-  parent: RMCSecureCaseStrapped #Powerloader Fujin
+  parent: RMCSecureCaseStrapped #Powerloader LU-43
   id: RMCCratePowerLoaderGreen
-  name: Fujin Powerloader crate
+  name: Powerloader crate
   description: A crate containing one folded, but fully assembled, LU-43 Power Loader and included pamphlet for quick training.
   components:
   - type: CrateOpenable
@@ -415,10 +465,10 @@
     spawn: CMPamphletPowerloader
 
 - type: entity
-  parent: RMCSecureCaseStrapped #Powerloader Ferret
+  parent: RMCSecureCaseStrapped #Powerloader LU-52
   id: RMCCratePowerLoaderBlue
-  name: Ferret Powerloader crate
-  description: A crate containing one folded, but fully assembled, LU-52 Power Loader and included pamphlet for quick training.
+  name: powerloader crate
+  description: A crate containing one blue, folded, but fully assembled, LU-52 Power Loader and included pamphlet for quick training.
   components:
   - type: CrateOpenable
     spawn:

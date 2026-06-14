@@ -34,6 +34,13 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-deputy
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
   hidden: true
 
 - type: entity
@@ -83,6 +90,9 @@
     pocket1: RMCPouchFirstAidERTFill
     pocket2: RMCPouchShotgunLargeBuckshot
     suitstorage: RMCWeaponShotgunM3717
+  storage:
+    back:
+    - RMCUniversalRecorder
 
 - type: playTimeTracker
   id: RMCJobBureauDeputy

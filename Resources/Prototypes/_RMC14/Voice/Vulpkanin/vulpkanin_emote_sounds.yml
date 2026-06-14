@@ -9,6 +9,8 @@
       collection: VulpkaninBarks
     Whine:
       collection: VulpkaninWhines
+    Yip:
+      path: /Audio/Animals/fox_squeak.ogg
 
 - type: emoteSounds
   parent: [RMCUnisexVulpkanin, RMCMaleHuman]

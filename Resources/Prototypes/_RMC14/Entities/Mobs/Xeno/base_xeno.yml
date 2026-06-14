@@ -33,6 +33,7 @@
   abstract: true
   save: false
   components: # TODO RMC14 camera recoil from large explosions? check 13
+  - type: ZombieImmune
   - type: BlockEntityStorage
     whitelist:
       components:
@@ -74,6 +75,7 @@
       params:
         volume: -4
   - type: RMCHealthExaminable
+    speciesType: Xeno
   - type: AcidBloodSplash
     closeSplashRadius: 0.5
     standardSplashRadius: 1.5
@@ -139,48 +141,6 @@
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
-      visible: false
-  - type: GenericVisualizer
-    visuals:
-      enum.TargetedVisuals.Targeted:
-        targeted:
-          None:
-            visible: false
-          Spotted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: spotter_lockon
-            visible: true
-          Targeted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon
-            visible: true
-          TargetedIntense:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon_intense
-            visible: true
-      enum.TargetedVisuals.TargetedDirection:
-        targetedDirection:
-          True: { visible: true}
-          False: { visible: false}
-      enum.TargetedVisuals.TargetedDirectionIntense:
-        targetedDirectionIntense:
-          True: { visible: true }
-          False: { visible: false }
-      enum.FocusedVisuals.Focused:
-        focused:
-          True: { visible: true}
-          False: { visible: false}
   - type: Spottable
   - type: Physics
     bodyType: KinematicController
@@ -236,6 +196,10 @@
         type: XenoFruitChooseBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.HiveTeamUIKey.Key:
+        type: HiveTeamBui
+      enum.HiveLeaderSquadUIKey.Key:
+        type: HiveLeaderSquadBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:
@@ -265,15 +229,6 @@
   - type: ParalyzeOnPullAttemptImmune
   - type: InfectOnPullAttemptImmune
   - type: GhostTakeoverAvailable
-  - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
-    name: cm-xeno-name
-    description: cm-xeno-description
-    raffle:
-      settings: short
-    rules: cm-xeno-rules
   - type: StatusEffects
     allowed:
     - Stun
@@ -409,6 +364,7 @@
   - type: EmoteCooldown
   - type: RMCMesonsNonviewable
     xenoVisible: true
+  - type: CanBeLarvaQueued
 
 - type: entity
   abstract: true

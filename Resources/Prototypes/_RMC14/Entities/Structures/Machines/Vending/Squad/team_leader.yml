@@ -21,8 +21,8 @@
         points: 18
       - id: RMCPacketGrenadeIncendiaryFilled
         points: 18
-    #- id: CMM40HPDPWhitePhosphorusPacketx3
-    #  points: 18
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
@@ -33,8 +33,8 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 13
-    #- id: CMM20MineBoxx4
-    #  points: 20
+      - id: RMCBoxClaymoreMineFilled
+        points: 20
     #- id: CMM40MFHSMetalFoamGrenade
     #  points: 5
     # -id: RMCElectroshockGrenadex3
@@ -45,10 +45,6 @@
         points: 10
       - id: CMMagazineRifleM4SPRExt
         points: 10
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -229,7 +225,7 @@
         name: Flare pouch (Full)
       - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
-      #- id: CMSlingPouch
+      - id: RMCPouchSling
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazine
       - id: RMCPouchShotgun

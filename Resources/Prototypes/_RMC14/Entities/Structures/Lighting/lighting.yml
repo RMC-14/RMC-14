@@ -382,6 +382,24 @@
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
 
+- type: entity
+  parent: RMCLightFixture
+  id: RMCLightFixtureRed
+  suffix: Red, DO NOT MAP
+  components:
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightTubeRed
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
+
+- type: entity
+  parent: [RMCLightFixtureRed, RMCLightFixtureOffset]
+  id: RMCLightFixtureRedOffset
+  suffix: Red
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/LightingOffset/light_tube.rsi
+
 # Light Bulbs
 
 # Light Bulb, Always powered
