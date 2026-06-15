@@ -1,4 +1,4 @@
-<controls:RMCAlmayerAntiAirWindow
+<controls:RMCShipAntiAirWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.AntiAir"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
@@ -10,4 +10,4 @@
         <Button Name="ClearButton" Access="Public" StyleClasses="OpenBoth" Margin="0 0 0 6" />
         <BoxContainer Name="Zones" Access="Public" Orientation="Vertical" />
     </BoxContainer>
-</controls:RMCAlmayerAntiAirWindow>
+</controls:RMCShipAntiAirWindow>

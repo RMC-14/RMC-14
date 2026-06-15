@@ -20,7 +20,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.AntiAir;
 
-public sealed class RMCAlmayerAntiAirSystem : EntitySystem
+public sealed class RMCShipAntiAirSystem : EntitySystem
 {
     [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
@@ -39,24 +39,24 @@ public sealed class RMCAlmayerAntiAirSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCAlmayerAntiAirComponent, BoundUIOpenedEvent>(OnBuiOpened);
+        SubscribeLocalEvent<RMCShipAntiAirComponent, BoundUIOpenedEvent>(OnBuiOpened);
 
         SubscribeLocalEvent<RMCGetHijackDestinationEvent>(OnGetHijackDestination);
         SubscribeLocalEvent<RMCDropshipHijackAntiAirResolvedEvent>(OnDropshipHijackAntiAirResolved);
 
-        Subs.BuiEvents<RMCAlmayerAntiAirComponent>(RMCAlmayerAntiAirUiKey.Key, subs =>
+        Subs.BuiEvents<RMCShipAntiAirComponent>(RMCShipAntiAirUiKey.Key, subs =>
         {
-            subs.Event<RMCAlmayerAntiAirSetZoneBuiMsg>(OnSetZoneBui);
-            subs.Event<RMCAlmayerAntiAirClearZoneBuiMsg>(OnClearZoneBui);
+            subs.Event<RMCShipAntiAirSetZoneBuiMsg>(OnSetZoneBui);
+            subs.Event<RMCShipAntiAirClearZoneBuiMsg>(OnClearZoneBui);
         });
     }
 
-    private void OnBuiOpened(Entity<RMCAlmayerAntiAirComponent> ent, ref BoundUIOpenedEvent args)
+    private void OnBuiOpened(Entity<RMCShipAntiAirComponent> ent, ref BoundUIOpenedEvent args)
     {
         RefreshConsoleUi(ent);
     }
 
-    private void OnSetZoneBui(Entity<RMCAlmayerAntiAirComponent> ent, ref RMCAlmayerAntiAirSetZoneBuiMsg args)
+    private void OnSetZoneBui(Entity<RMCShipAntiAirComponent> ent, ref RMCShipAntiAirSetZoneBuiMsg args)
     {
         if (_net.IsClient)
             return;
@@ -85,7 +85,7 @@ public sealed class RMCAlmayerAntiAirSystem : EntitySystem
         _popup.PopupClient(message, ent.Owner, args.Actor);
     }
 
-    private void OnClearZoneBui(Entity<RMCAlmayerAntiAirComponent> ent, ref RMCAlmayerAntiAirClearZoneBuiMsg args)
+    private void OnClearZoneBui(Entity<RMCShipAntiAirComponent> ent, ref RMCShipAntiAirClearZoneBuiMsg args)
     {
         if (_net.IsClient)
             return;
@@ -152,7 +152,7 @@ public sealed class RMCAlmayerAntiAirSystem : EntitySystem
             return;
 
         if (ev.AntiAirConsole is { } console &&
-            TryComp(console, out RMCAlmayerAntiAirComponent? antiAir) &&
+            TryComp(console, out RMCShipAntiAirComponent? antiAir) &&
             antiAir.DisableOnHijack)
         {
             antiAir.Disabled = true;
@@ -168,7 +168,7 @@ public sealed class RMCAlmayerAntiAirSystem : EntitySystem
             return;
         }
 
-        var comp = EnsureComp<RMCAlmayerAntiAirDropshipComponent>(ev.Dropship);
+        var comp = EnsureComp<RMCShipAntiAirDropshipComponent>(ev.Dropship);
         comp.OriginalZone = ev.OriginalZone;
         comp.DivertedZone = ev.DivertedZone;
         comp.Sound = ev.DeterrenceSound ?? comp.Sound;
@@ -190,7 +190,7 @@ public sealed class RMCAlmayerAntiAirSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
-        var query = EntityQueryEnumerator<RMCAlmayerAntiAirDropshipComponent, DropshipComponent>();
+        var query = EntityQueryEnumerator<RMCShipAntiAirDropshipComponent, DropshipComponent>();
         while (query.MoveNext(out var uid, out var antiAir, out var dropship))
         {
             if (antiAir.Announced || time < antiAir.AnnounceAt)
@@ -205,7 +205,7 @@ public sealed class RMCAlmayerAntiAirSystem : EntitySystem
         }
     }
 
-    private void PlayDeterrenceEffects(EntityUid dropship, RMCAlmayerAntiAirDropshipComponent antiAir)
+    private void PlayDeterrenceEffects(EntityUid dropship, RMCShipAntiAirDropshipComponent antiAir)
     {
         if (!TryComp(dropship, out TransformComponent? xform) ||
             xform.MapID == MapId.Nullspace)
@@ -247,24 +247,24 @@ public sealed class RMCAlmayerAntiAirSystem : EntitySystem
             .ToList();
     }
 
-    public RMCAlmayerAntiAirStatus GetStatus(EntityUid context)
+    public RMCShipAntiAirStatus GetStatus(EntityUid context)
     {
         var key = GetDefenseKey(context);
-        var query = EntityQueryEnumerator<RMCAlmayerAntiAirComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<RMCShipAntiAirComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var antiAir, out var xform))
         {
             if (GetDefenseKey(xform) != key)
                 continue;
 
-            return new RMCAlmayerAntiAirStatus(true, antiAir.Disabled, antiAir.ProtectedZone);
+            return new RMCShipAntiAirStatus(true, antiAir.Disabled, antiAir.ProtectedZone);
         }
 
-        return new RMCAlmayerAntiAirStatus(false, false, null);
+        return new RMCShipAntiAirStatus(false, false, null);
     }
 
-    public void RefreshConsoleUi(Entity<RMCAlmayerAntiAirComponent> ent)
+    public void RefreshConsoleUi(Entity<RMCShipAntiAirComponent> ent)
     {
-        if (_net.IsClient || !_ui.IsUiOpen(ent.Owner, RMCAlmayerAntiAirUiKey.Key))
+        if (_net.IsClient || !_ui.IsUiOpen(ent.Owner, RMCShipAntiAirUiKey.Key))
             return;
 
         var key = GetDefenseKey(ent.Owner);
@@ -352,9 +352,9 @@ public sealed class RMCAlmayerAntiAirSystem : EntitySystem
         return true;
     }
 
-    private bool TryGetOperationalAntiAir(RMCShipDefenseGridKey key, out Entity<RMCAlmayerAntiAirComponent>? antiAir)
+    private bool TryGetOperationalAntiAir(RMCShipDefenseGridKey key, out Entity<RMCShipAntiAirComponent>? antiAir)
     {
-        var query = EntityQueryEnumerator<RMCAlmayerAntiAirComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<RMCShipAntiAirComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var comp, out var xform))
         {
             if (GetDefenseKey(xform) != key || comp.Disabled)
@@ -431,7 +431,7 @@ public sealed class RMCAlmayerAntiAirSystem : EntitySystem
 
     private void RefreshOverwatch()
     {
-        var ev = new RMCAlmayerAntiAirChangedEvent();
+        var ev = new RMCShipAntiAirChangedEvent();
         RaiseLocalEvent(ref ev);
     }
 
@@ -447,6 +447,6 @@ public sealed class RMCAlmayerAntiAirSystem : EntitySystem
 }
 
 [ByRefEvent]
-public readonly record struct RMCAlmayerAntiAirChangedEvent;
+public readonly record struct RMCShipAntiAirChangedEvent;
 
 internal readonly record struct RMCShipDefenseGridKey(MapId MapId, EntityUid? Grid);

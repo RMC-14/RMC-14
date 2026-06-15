@@ -29,11 +29,11 @@ public enum OverwatchConsoleUI
 public sealed class OverwatchConsoleBuiState(
     List<OverwatchSquad> squads,
     Dictionary<NetEntity, List<OverwatchMarine>> marines,
-    RMCAlmayerAntiAirStatus antiAir) : BoundUserInterfaceState
+    RMCShipAntiAirStatus antiAir) : BoundUserInterfaceState
 {
     public readonly List<OverwatchSquad> Squads = squads;
     public readonly Dictionary<NetEntity, List<OverwatchMarine>> Marines = marines;
-    public readonly RMCAlmayerAntiAirStatus AntiAir = antiAir;
+    public readonly RMCShipAntiAirStatus AntiAir = antiAir;
 }
 
 [Serializable, NetSerializable]

@@ -3,8 +3,8 @@ using Robust.Shared.Audio;
 namespace Content.Shared._RMC14.AntiAir;
 
 [RegisterComponent]
-[Access(typeof(RMCAlmayerAntiAirSystem))]
-public sealed partial class RMCAlmayerAntiAirDropshipComponent : Component
+[Access(typeof(RMCShipAntiAirSystem))]
+public sealed partial class RMCShipAntiAirDropshipComponent : Component
 {
     public string OriginalZone = string.Empty;
 

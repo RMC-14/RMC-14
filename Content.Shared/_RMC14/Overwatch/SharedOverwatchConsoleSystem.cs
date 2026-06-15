@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.AntiAir;
 using Content.Shared._RMC14.Areas;
@@ -48,7 +48,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly RMCAlmayerAntiAirSystem _antiAir = default!;
+    [Dependency] private readonly RMCShipAntiAirSystem _antiAir = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ARESCoreSystem _core = default!;
@@ -100,7 +100,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         SubscribeLocalEvent<OrbitalCannonChangedEvent>(OnOrbitalCannonChanged);
         SubscribeLocalEvent<OrbitalCannonLaunchEvent>(OnOrbitalCannonLaunch);
-        SubscribeLocalEvent<RMCAlmayerAntiAirChangedEvent>(OnAntiAirChanged);
+        SubscribeLocalEvent<RMCShipAntiAirChangedEvent>(OnAntiAirChanged);
 
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
@@ -162,7 +162,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         }
     }
 
-    private void OnAntiAirChanged(ref RMCAlmayerAntiAirChangedEvent ev)
+    private void OnAntiAirChanged(ref RMCShipAntiAirChangedEvent ev)
     {
         if (_net.IsClient)
             return;

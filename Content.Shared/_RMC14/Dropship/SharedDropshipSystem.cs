@@ -45,7 +45,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
     [Dependency] private readonly AreaSystem _areas = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly RMCAlmayerAntiAirSystem _antiAir = default!;
+    [Dependency] private readonly RMCShipAntiAirSystem _antiAir = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ARESCoreSystem _core = default!;

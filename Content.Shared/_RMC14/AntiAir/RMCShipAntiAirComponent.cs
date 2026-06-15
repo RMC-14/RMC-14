@@ -4,8 +4,8 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.AntiAir;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(RMCAlmayerAntiAirSystem))]
-public sealed partial class RMCAlmayerAntiAirComponent : Component
+[Access(typeof(RMCShipAntiAirSystem))]
+public sealed partial class RMCShipAntiAirComponent : Component
 {
     [DataField, AutoNetworkedField]
     public string? ProtectedZone;

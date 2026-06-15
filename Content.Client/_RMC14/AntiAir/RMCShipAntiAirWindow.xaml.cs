@@ -5,9 +5,9 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.AntiAir;
 
 [GenerateTypedNameReferences]
-public sealed partial class RMCAlmayerAntiAirWindow : DefaultWindow
+public sealed partial class RMCShipAntiAirWindow : DefaultWindow
 {
-    public RMCAlmayerAntiAirWindow()
+    public RMCShipAntiAirWindow()
     {
         RobustXamlLoader.Load(this);
     }
