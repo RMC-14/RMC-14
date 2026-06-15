@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/11/2026 07:37:24
-  entityCount: 17896
+  time: 06/15/2026 14:25:13
+  entityCount: 17886
 maps:
 - 1
 grids:
@@ -53387,38 +53387,6 @@ entities:
     - type: Transform
       pos: 190.5,157.5
       parent: 1
-- proto: DoorXenoResin
-  entities:
-  - uid: 3167
-    components:
-    - type: Transform
-      pos: 176.5,150.5
-      parent: 1
-  - uid: 3168
-    components:
-    - type: Transform
-      pos: 176.5,148.5
-      parent: 1
-  - uid: 3169
-    components:
-    - type: Transform
-      pos: 180.5,150.5
-      parent: 1
-  - uid: 3170
-    components:
-    - type: Transform
-      pos: 180.5,148.5
-      parent: 1
-  - uid: 3171
-    components:
-    - type: Transform
-      pos: 194.5,120.5
-      parent: 1
-  - uid: 3172
-    components:
-    - type: Transform
-      pos: 195.5,120.5
-      parent: 1
 - proto: DoorXenoResinImpenetrable
   entities:
   - uid: 1564
@@ -53800,16 +53768,6 @@ entities:
     components:
     - type: Transform
       pos: 199.5,119.5
-      parent: 1
-  - uid: 17582
-    components:
-    - type: Transform
-      pos: 194.5,120.5
-      parent: 1
-  - uid: 17583
-    components:
-    - type: Transform
-      pos: 195.5,120.5
       parent: 1
   - uid: 17603
     components:
@@ -132393,28 +132351,6 @@ entities:
     - type: Transform
       pos: 168.5,141.5
       parent: 1
-- proto: WallXenoResin
-  entities:
-  - uid: 17129
-    components:
-    - type: Transform
-      pos: 180.5,149.5
-      parent: 1
-  - uid: 17130
-    components:
-    - type: Transform
-      pos: 176.5,149.5
-      parent: 1
-  - uid: 17134
-    components:
-    - type: Transform
-      pos: 176.5,53.5
-      parent: 1
-  - uid: 17139
-    components:
-    - type: Transform
-      pos: 152.5,12.5
-      parent: 1
 - proto: WallXenoResinImpenetrable
   entities:
   - uid: 3021
@@ -132451,6 +132387,16 @@ entities:
     components:
     - type: Transform
       pos: 166.5,124.5
+      parent: 1
+  - uid: 3167
+    components:
+    - type: Transform
+      pos: 176.5,53.5
+      parent: 1
+  - uid: 3168
+    components:
+    - type: Transform
+      pos: 152.5,12.5
       parent: 1
   - uid: 3181
     components:
