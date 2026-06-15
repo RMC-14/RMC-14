@@ -199,7 +199,7 @@ public sealed class RMCShipAntiAirSystem : EntitySystem
             antiAir.Announced = true;
 
             var message = Loc.GetString("rmc-anti-air-hijack-deterred", ("zone", antiAir.OriginalZone));
-            _marineAnnounce.AnnounceARESStaging(uid, message, null, new LocId("rmc-announcement-dropship-message"));
+            _marineAnnounce.AnnounceARESStaging(uid, message, null, new LocId("rmc-announcement-anti-air"));
 
             PlayDeterrenceEffects(uid, antiAir);
         }
@@ -217,6 +217,8 @@ public sealed class RMCShipAntiAirSystem : EntitySystem
         var filter = Filter.BroadcastMap(xform.MapID)
             .RemoveWhereAttachedEntity(entity => _transform.GetGrid(entity) != grid);
 
+        _popup.PopupEntity(Loc.GetString("rmc-anti-air-dropship-jostles"), dropship, filter, true, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("rmc-anti-air-dropship-turns"), dropship, filter, true, PopupType.LargeCaution);
         _audio.PlayGlobal(antiAir.Sound, filter, true);
         _cameraShake.ShakeCamera(filter, antiAir.ShakeIntensity, antiAir.ShakeDuration);
     }
