@@ -64,12 +64,6 @@
   prefix: Director
   paygrade: WYC11
 
-- type: rank
-  id: RMCRankWeYaColonyAdmin
-  name: Colony Administrator
-  prefix: Administrator
-  paygrade: WYC7
-
 # Lawyers
 - type: rank
   id: RMCRankWeYaLegalSpecialist
