@@ -124,6 +124,28 @@
   - MiscellaneousRMC
   - MeleeWeaponsRMC
 
+- type: roleLoadout
+  id: JobCMVehicleCrewman
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+
 # Command
 - type: roleLoadout
   id: JobCMCommandingOfficer
@@ -695,6 +717,7 @@
   - WatchesLiaisonRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -707,10 +730,35 @@
   - CivilianOnlyRMC
 
 - type: roleLoadout
+  id: JobCMCombatCorrespondent
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
+  - WatchesBasicRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - MeleeWeaponsRMC
+
+- type: roleLoadout
   id: JobCMLiaison
   points: 7
   groups:
-  - MarineLeatherBackpack
+  - LiaisonBackpackRMC
   - LiaisonRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
@@ -720,6 +768,32 @@
   - WatchesLiaisonRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - MiscellaneousRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
+  id: JobRMCWeYaExecutiveBodyguard
+  points: 7
+  groups:
+  - ExecutiveSecurityGuardBackpack
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - AccessoriesRMC
+  - WatchesLiaisonRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC

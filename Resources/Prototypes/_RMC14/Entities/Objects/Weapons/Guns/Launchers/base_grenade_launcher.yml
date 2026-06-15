@@ -21,7 +21,7 @@
     recoilWielded: 2
   - type: ShootAtFixedPoint
     shootArcProj: true
-    maxFixedRange: 7
+    maxFixedRange: 8.463 # The result of CircleAreaFromSquareAbilityRange(7)
   - type: OnShootTriggerAmmoTimer
     delay: 1
     beepInterval: 2

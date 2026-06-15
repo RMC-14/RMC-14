@@ -106,8 +106,8 @@
     randomOutfits:
     - [ RMCJumpsuitLiaisonExpensiveSuitDropPouch, RMCSatchelBlack, RMCBootsCorporate ]
     - [ RMCJumpsuitLiaisonExpensiveSuitBrownDropPouch, RMCSatchelBlack, CMBootsBrownFilled ]
-    - [ RMCJumpsuitLiaisonExpensiveSuitJacketDropPouch, CMSatchel, RMCBootsPMCFilled ] # todo lockable satchel
-    - [ RMCJumpsuitLiaisonExpensiveSuitBrownJacketDropPouch, CMSatchel, RMCBootsCorporate ] # Todo lockable satchel
+    - [ RMCJumpsuitLiaisonExpensiveSuitJacketDropPouch, CMSatchelSecureStandard, RMCBootsPMCFilled ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitBrownJacketDropPouch, CMSatchelSecureStandard, RMCBootsCorporate ]
     - [ RMCJumpsuitLiaisonExpensiveSuitJacketOnlyDropPouch, RMCSatchelNorm, RMCBootsCorporate ]
     randomStartingGear:
       eyes:

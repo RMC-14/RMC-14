@@ -260,6 +260,9 @@
       jobProto: CMRifleman
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMPVERifleman
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMortar
 
 - type: entity
   parent: CMPamphlet

@@ -142,6 +142,8 @@ public sealed partial class ChatUIController : UIController
     private readonly Dictionary<EntityUid, SpeechBubbleQueueData> _queuedSpeechBubbles
         = new();
 
+    private bool _speechBubblesSuppressed;
+
     private readonly HashSet<ChatBox> _chats = new();
     public IReadOnlySet<ChatBox> Chats => _chats;
 
@@ -448,7 +450,20 @@ public sealed partial class ChatUIController : UIController
         _speechBubbleRoot.Orphan();
         root.AddChild(_speechBubbleRoot);
         LayoutContainer.SetAnchorPreset(_speechBubbleRoot, LayoutContainer.LayoutPreset.Wide);
+        _speechBubbleRoot.Visible = !_speechBubblesSuppressed;
         _speechBubbleRoot.SetPositionLast();
+    }
+
+    public void SetSpeechBubblesSuppressed(bool suppressed)
+    {
+        if (_speechBubblesSuppressed == suppressed)
+            return;
+
+        _speechBubblesSuppressed = suppressed;
+        _speechBubbleRoot.Visible = !suppressed;
+
+        if (suppressed)
+            ClearSpeechBubbles();
     }
 
     private void OnAttachedChanged(EntityUid uid)
@@ -460,6 +475,9 @@ public sealed partial class ChatUIController : UIController
 
     private void AddSpeechBubble(ChatMessage msg, SpeechBubble.SpeechType speechType)
     {
+        if (_speechBubblesSuppressed)
+            return;
+
         var ent = EntityManager.GetEntity(msg.SenderEntity);
 
         if (!EntityManager.EntityExists(ent))
@@ -535,6 +553,22 @@ public sealed partial class ChatUIController : UIController
         {
             _activeSpeechBubbles.Remove(entityUid);
         }
+    }
+
+    private void ClearSpeechBubbles()
+    {
+        _queuedSpeechBubbles.Clear();
+
+        foreach (var bubbles in _activeSpeechBubbles.Values)
+        {
+            foreach (var bubble in bubbles)
+            {
+                bubble.OnDied -= SpeechBubbleDied;
+                bubble.Orphan();
+            }
+        }
+
+        _activeSpeechBubbles.Clear();
     }
 
     private void UpdateChannelPermissions()
@@ -663,6 +697,9 @@ public sealed partial class ChatUIController : UIController
 
     private void UpdateQueuedSpeechBubbles(FrameEventArgs delta)
     {
+        if (_speechBubblesSuppressed)
+            return;
+
         // Update queued speech bubbles.
         if (_queuedSpeechBubbles.Count == 0 || _examine == null)
         {

@@ -20,6 +20,7 @@ using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
+using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.ActionBlocker;
@@ -209,7 +210,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool ignoreXenos = false
         )
     {
-        if (HasComp<GhostComponent>(source))
+        if (HasComp<GhostComponent>(source) && !HasComp<ImaginaryFriendComponent>(source)) //RMC14
         {
             // Ghosts can only send dead chat messages, so we'll forward it to InGame OOC.
             TrySendInGameOOCMessage(source, message, InGameOOCChatType.Dead, range == ChatTransmitRange.HideChat, shell, player);
@@ -366,7 +367,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         // If dead player LOOC is disabled, unless you are an admin with Moderator perms, send dead messages to dead chat
         if ((_adminManager.IsAdmin(player) && _adminManager.HasAdminFlag(player, AdminFlags.Moderator)) // Override if admin
             || _deadLoocEnabled
-            || (!HasComp<GhostComponent>(source) && !_mobStateSystem.IsDead(source))) // Check that player is not dead
+            || (!HasComp<GhostComponent>(source) && !_mobStateSystem.IsDead(source)) // Check that player is not dead
+            || HasComp<ImaginaryFriendComponent>(player.AttachedEntity)) // RMC14
         {
         }
         else
@@ -808,6 +810,11 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             var observer = ghostHearing.HasComponent(playerEntity);
 
+            /*if (playerEntity == source && HasComp<ImaginaryFriendComponent>(source))
+            {
+                recipients[player] = new ICChatRecipientData(0, false, false);
+                continue;
+            }*/
             // even if they are a ghost hearer, in some situations we still need the range
             if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceGetRange)
             {

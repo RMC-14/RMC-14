@@ -42,6 +42,7 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
     - type: SquadArmorWearer
+    - type: QYJWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-specialist
   hidden: true
