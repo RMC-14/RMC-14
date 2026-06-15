@@ -34,6 +34,8 @@
         Blunt: 12
         Piercing: 8
     maxFixedRange: 0
+  - type: VehicleDamageMultiplier
+    multiplier: 10
   - type: TriggerOnFixedDistanceStop
     delay: 0
   - type: DeleteOnTrigger

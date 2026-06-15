@@ -845,6 +845,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (_net.IsClient || _mobState.IsDead(target, mobState))
             return;
 
+        if (TryComp(vehicle, out GridVehicleMoverComponent? vehicleMover) &&
+            MathF.Abs(vehicleMover.CurrentSpeed) < MobCollisionMinKnockdownSpeed)
+        {
+            return;
+        }
+
         var now = _timing.CurTime;
         if (_lastMobCollision.TryGetValue(target, out var last) && now < last + MobCollisionCooldown)
             return;
@@ -953,6 +959,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         if (_mobState.IsDead(mob, mobState) || _standing.IsDown(mob))
             return;
+
+        if (TryComp(vehicle, out GridVehicleMoverComponent? vehicleMover) &&
+            MathF.Abs(vehicleMover.CurrentSpeed) < MobCollisionMinKnockdownSpeed)
+        {
+            return;
+        }
 
         _stun.TryKnockdown(mob, MobCollisionKnockdown, true);
 
