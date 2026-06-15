@@ -194,6 +194,14 @@ public sealed partial class ActionComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier? Sound;
+
+    /// RMC14
+    /// <summary>
+    ///     If true, the client will not predict the action out-of-simulation.
+    ///     The predicted action will be delayed until the next update loop.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool InSimulationOnly;
 }
 
 [DataRecord, Serializable, NetSerializable]

@@ -258,10 +258,16 @@ namespace Content.Client.Actions
             {
                 PerformAction(user, action);
             }
+            // RMC14 start
+            else if (!GameTiming.InSimulation && action.Comp.InSimulationOnly)
+            {
+                _requested.Enqueue(new(GetNetEntity(action), null, null));
+            }
+            // RMC14 end
             else
             {
-                // RMC14
-                _requested.Enqueue(new(GetNetEntity(action), null, null));
+                var request = new RequestPerformActionEvent(GetNetEntity(action), _rmcLagCompensation.GetLastRealTick(null));
+                RaisePredictiveEvent(request);
             }
         }
 
@@ -376,11 +382,14 @@ namespace Content.Client.Actions
 
                 PerformAction((user, user.Comp), (uid, action));
             }
-            else
+            // RMC14 start
+            else if (!GameTiming.InSimulation && action.InSimulationOnly)
             {
-                // RMC14
                 _requested.Enqueue(new(GetNetEntity(uid), GetNetEntity(targetEnt), GetNetCoordinates(coords)));
             }
+            // RMC14 end
+            else
+                RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(targetEnt), GetNetCoordinates(coords), _rmcLagCompensation.GetLastRealTick(null)));
 
             args.FoundTarget = true;
         }
@@ -418,10 +427,15 @@ namespace Content.Client.Actions
 
                 PerformAction((user, user.Comp), (uid, action));
             }
+            // RMC14 start
+            else if (!GameTiming.InSimulation && action.InSimulationOnly)
+            {
+                _requested.Enqueue(new(GetNetEntity(uid), GetNetEntity(entity), null));
+            }
+            // RMC14 end
             else
             {
-                // RMC14
-                _requested.Enqueue(new(GetNetEntity(uid), GetNetEntity(entity), null));
+                RaisePredictiveEvent(new RequestPerformActionEvent(GetNetEntity(uid), GetNetEntity(entity), _rmcLagCompensation.GetLastRealTick(null)));
             }
 
             args.FoundTarget = true;
