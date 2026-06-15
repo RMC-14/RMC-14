@@ -9,6 +9,7 @@ public sealed class RMCEmptyMagSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<RMCEmptyMagComponent, MapInitEvent>(OnMapInit,
             after: new[] { typeof(SharedGunSystem) });
     }
