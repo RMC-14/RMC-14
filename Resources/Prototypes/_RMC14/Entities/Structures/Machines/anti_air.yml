@@ -1,0 +1,48 @@
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCAlmayerAntiAirConsole
+  name: IX-50 MGAD system console
+  description: A console used to configure the warship's mapped ground-to-air defense zones.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    layers:
+    - map: ["base"]
+      state: "ob_console0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "ob_console"
+    overrideDir: West
+    enableOverrideDir: true
+  - type: ActivatableUI
+    key: enum.RMCAlmayerAntiAirUiKey.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessEngineering" ], [ "RMCAccessCommand" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.RMCAlmayerAntiAirUiKey.Key:
+        type: RMCAlmayerAntiAirBui
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 1
+  - type: RMCAlmayerAntiAir
+
+- type: entity
+  parent: RMCAntiAirProp
+  id: RMCAlmayerAntiAirCannon
+  name: IX-50 MGAD Cannon
+  description: The IX-50 is a state-of-the-art Micro-Gravity and Air Defense system capable of independently tracking and neutralizing threats with rockets strapped onto them.
+  suffix: ""
+  components:
+  - type: InteractionOutline
+  - type: Corrodible
+    isCorrodible: false
+  - type: RMCAlmayerAntiAirCannon
+
+- type: entity
+  parent: RMCAlmayerAntiAirCannon
+  id: RMCAlmayerAntiAirCannonFlipped
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: anti_air_cannon_f

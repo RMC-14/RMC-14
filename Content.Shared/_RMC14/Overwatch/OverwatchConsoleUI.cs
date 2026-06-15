@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Shared._RMC14.AntiAir;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Mobs;
@@ -27,10 +28,12 @@ public enum OverwatchConsoleUI
 [Serializable, NetSerializable]
 public sealed class OverwatchConsoleBuiState(
     List<OverwatchSquad> squads,
-    Dictionary<NetEntity, List<OverwatchMarine>> marines) : BoundUserInterfaceState
+    Dictionary<NetEntity, List<OverwatchMarine>> marines,
+    RMCAlmayerAntiAirStatus antiAir) : BoundUserInterfaceState
 {
     public readonly List<OverwatchSquad> Squads = squads;
     public readonly Dictionary<NetEntity, List<OverwatchMarine>> Marines = marines;
+    public readonly RMCAlmayerAntiAirStatus AntiAir = antiAir;
 }
 
 [Serializable, NetSerializable]

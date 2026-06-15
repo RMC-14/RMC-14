@@ -1,0 +1,13 @@
+<controls:RMCAlmayerAntiAirWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.AntiAir"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    Title="{Loc rmc-anti-air-window-title}"
+    MinSize="360 420">
+    <BoxContainer Orientation="Vertical" Margin="6">
+        <RichTextLabel Name="Status" Access="Public" />
+        <cc:HSeparator Color="#4972A1" Margin="0 4 0 6" />
+        <Button Name="ClearButton" Access="Public" StyleClasses="OpenBoth" Margin="0 0 0 6" />
+        <BoxContainer Name="Zones" Access="Public" Orientation="Vertical" />
+    </BoxContainer>
+</controls:RMCAlmayerAntiAirWindow>

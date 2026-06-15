@@ -40,6 +40,22 @@
   id: RMCRailgunProp
   name: "'BURST' MAC Planetary Battery"
   description: "The 'BURST' MAC Planetary Battery is an advanced magnetic mass accelerator cannon which utilises a long linear system of magnetic coils to propel metal payloads at incredible speeds."
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,0.49,5.49,2.49"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/railgun.rsi
+    offset: 2.5, 0.5
+    state: railgun
 
 - type: entity
   parent: RMCRailgunProp
@@ -47,7 +63,7 @@
   suffix: Prop, Flipped
   components:
   - type: Sprite
-    state: anti_air_cannon_f
+    state: railgun_f
 
 - type: entity
   id: RMCMissileTubeProp
