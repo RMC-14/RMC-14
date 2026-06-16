@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Sensor;
 using Content.Shared._RMC14.Vents;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared.Damage;
+using Content.Shared.Mobs.Components;
 using Robust.Shared.Map;
 
 namespace Content.Server._RMC14.Nuke;
@@ -18,7 +19,7 @@ public sealed class RMCNukeSystem : EntitySystem
     [Dependency] private readonly SensorTowerSystem _sensorTower = default!;
     [Dependency] private readonly RMCPowerSystem _power = default!;
 
-    private readonly DamageSpecifier _damage = new() { DamageDict = { { "Blunt", 1e10 } } };
+    private readonly DamageSpecifier _damage = new() { DamageDict = { ["Blunt"] = 1e5, ["Heat"] = 1e5 } };
     private EntityQuery<RMCRepairableComponent> _repairable;
 
     public override void Initialize()
@@ -29,6 +30,7 @@ public sealed class RMCNukeSystem : EntitySystem
 
     private void KillEverythingOnMap(MapId mapId)
     {
+        var toDamage = new HashSet<EntityUid>();
         var toDelete = new HashSet<EntityUid>();
 
         var living = EntityQueryEnumerator<DamageableComponent, TransformComponent>();
@@ -39,34 +41,35 @@ public sealed class RMCNukeSystem : EntitySystem
             if (transform.MapID != mapId)
                 continue;
 
-            toDelete.Add(uid);
+            AddNukeTarget(uid, toDamage, toDelete);
         }
         while (tunnels.MoveNext(out var uid, out var _, out var transform))
         {
             if (transform.MapID != mapId)
                 continue;
 
-            toDelete.Add(uid);
+            AddNukeTarget(uid, toDamage, toDelete);
         }
         while (vents.MoveNext(out var uid, out var _, out var transform))
         {
             if (transform.MapID != mapId)
                 continue;
 
-            toDelete.Add(uid);
+            AddNukeTarget(uid, toDamage, toDelete);
+        }
+
+        toDelete.ExceptWith(toDamage);
+
+        // Mobs and repairables go through damage so death/destruction events can run before the map cleanup.
+        foreach (var uid in toDamage)
+        {
+            _damageable.TryChangeDamage(uid, _damage, true);
         }
 
         foreach (var uid in toDelete)
         {
-            if (_repairable.HasComp(uid))
-            {
-                _damageable.TryChangeDamage(uid, _damage, true);
-            }
-            else
-            {
-                _rmcGib.ScatterInventoryItems(uid);
-                _entity.TryQueueDeleteEntity(uid);
-            }
+            _rmcGib.ScatterInventoryItems(uid);
+            _entity.TryQueueDeleteEntity(uid);
         }
 
         var sensors = EntityQueryEnumerator<SensorTowerComponent, TransformComponent>();
@@ -85,6 +88,14 @@ public sealed class RMCNukeSystem : EntitySystem
 
             _power.FullyDestroy(new(uid, generator));
         }
+    }
+
+    private void AddNukeTarget(EntityUid uid, HashSet<EntityUid> toDamage, HashSet<EntityUid> toDelete)
+    {
+        if (HasComp<MobStateComponent>(uid) || _repairable.HasComp(uid))
+            toDamage.Add(uid);
+        else
+            toDelete.Add(uid);
     }
 
     public void NukeMap(MapId mapId)
