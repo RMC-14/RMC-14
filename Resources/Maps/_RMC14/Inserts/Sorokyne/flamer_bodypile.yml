@@ -329,8 +329,6 @@ entities:
     - type: Transform
       pos: 1.5,4.5
       parent: 1
-    - type: VentCrawlable
-      originalTravelDirection: Fourway
 - proto: DisposalJunction
   entities:
   - uid: 105
