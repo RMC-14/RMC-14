@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/08/2026 06:46:59
-  entityCount: 486
+  time: 06/16/2026 10:14:39
+  entityCount: 487
 maps: []
 grids:
 - 2
@@ -2029,6 +2029,13 @@ entities:
     components:
     - type: Transform
       pos: 18.5,14.8
+      parent: 2
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 487
+    components:
+    - type: Transform
+      pos: 18.5,5.5
       parent: 2
 - proto: RMCItemPoolBuckshot
   entities:
