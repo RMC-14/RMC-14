@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed Tail Seize looking like it shot twice in a row with a single use.
-    type: Fix
-  - message: The Oppressor's Abduct ability now pulls it's targets slightly closer
-      to the Oppressor's location.
-    type: Fix
-  id: 2921
-  time: '2026-02-11T08:20:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9214
 - author: Arykh
   changes:
   - message: Stopped the MedVend refill sound from being queued/desynced/delayed when
@@ -4566,5 +4556,17 @@
   id: 3420
   time: '2026-06-16T20:13:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10170
+- author: AlexisMoonlight
+  changes:
+  - message: (Law) Added definitions for recorders and listening devices.
+    type: Add
+  - message: (SOP/MLaw) Added SOP on the use of recorders by MPs. MPs can use recorders
+      freely as long as they remain in MP's possession.
+    type: Add
+  - message: (SOP) CMP approves use of listening devices instead of Commander.
+    type: Tweak
+  id: 3421
+  time: '2026-06-16T20:39:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10081
 Name: RMC14
 Order: -1
