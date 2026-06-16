@@ -209,6 +209,10 @@
     {
       "name": "centerroadbarrier2",
       "directions": 4
+    },
+    {
+      "name": "handrail_stone_b",
+      "directions": 4
     }
   ]
 }

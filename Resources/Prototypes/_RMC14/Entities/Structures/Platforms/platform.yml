@@ -669,6 +669,26 @@
 
 - type: entity
   parent: CMPlatform
+  id: RMCPlatformHybrisaDecoEdging
+  name: decorative concrete edging
+  description: Decorative edging for bordering stuff, very fancy.
+  components:
+  - type: Sprite
+    state: hybrisadecoedging
+    color: "#bbbaae"
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformCornerHybrisaDecoEdging
+  name: raised metal corner
+  description: Decorative edging for bordering stuff, very fancy.
+  components:
+  - type: Sprite
+    state: hybrisadecoedging_corner
+    color: "#bbbaae"
+
+- type: entity
+  parent: CMPlatform
   id: RMCPlatformAlmayer
   name: raised metal edge
   description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.

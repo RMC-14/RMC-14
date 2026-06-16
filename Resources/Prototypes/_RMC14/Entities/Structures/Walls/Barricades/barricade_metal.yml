@@ -261,6 +261,19 @@
       node: nodeHandrail
 
 - type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHandrailStoneAlt
+  components:
+  - type: Sprite
+    color: "#bbbaae"
+    layers:
+    - state: handrail_stone_b
+    - map: [ "acided" ]
+  - type: Construction
+    graph: BarricadeHandrailGraph
+    node: nodeHandrail
+
+- type: entity
   parent: RMCBarricadeHandrailAlt
   id: RMCBarricadeHandrailAltDrawdepth
   suffix: Layers over Platforms
