@@ -185,7 +185,6 @@
     damageModifierSet: StructuralMarine
   - type: HardpointIntegrity
     maxIntegrity: 1000
-    repairFuelCost: 12
     bypassEntryOnZero: true
 
 - type: entity
@@ -199,7 +198,6 @@
     damageModifierSet: StructuralMarine
   - type: HardpointIntegrity
     maxIntegrity: 1000
-    repairFuelCost: 12
     bypassEntryOnZero: true
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_medical.rsi
@@ -267,7 +265,6 @@
     damageModifierSet: StructuralMarine
   - type: HardpointIntegrity
     maxIntegrity: 1000
-    repairFuelCost: 12
     bypassEntryOnZero: true
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_transport.rsi
@@ -342,12 +339,11 @@
     damageModifierSet: VehicleFrameARC
   - type: HardpointIntegrity
     maxIntegrity: 800
-    repairFuelCost: 12
     bypassEntryOnZero: true
   - type: VehicleDeployable
     deployTime: 5
     undeployTime: 5
-    autoTargetRange: 20
+    autoTargetRange: 10
     autoTargetCooldown: 0.2
     autoTurretEnabled: true
   - type: VehicleSensor
