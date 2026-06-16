@@ -282,7 +282,7 @@
     selectRandomSurvivorInsert: false
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
-    - RMCSurvivorForeconBase: 7
+    - RMCSurvivorForeconBase: -1
     survivorJobInserts:
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorForeconCommander: 1
