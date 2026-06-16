@@ -18,10 +18,11 @@
     OB: false
     supplyDrop: false
     weatherEnabled: false
-    avoidBioscan: true
+    avoidBioscan: false
     noTunnel: true
     unweedable: true
     resinAllowed: false
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaVehicleInterior

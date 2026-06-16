@@ -221,3 +221,5 @@ public sealed partial class HardpointRepairDoAfterEvent : DoAfterEvent
 }
 
 public readonly record struct HardpointSlotsChangedEvent(EntityUid Vehicle);
+
+public readonly record struct VehicleFrameIntegrityChangedEvent(EntityUid Vehicle, bool Intact);

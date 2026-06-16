@@ -897,9 +897,9 @@
         amount: 24
       - id: FoodMeatSausage
         amount: 18
-      - id: DrinkMilkCarton
+      - id: RMCDrinkMilkCarton
         amount: 24
-      - id: DrinkSoyMilkCarton
+      - id: RMCDrinkSoyMilkCarton
         amount: 12
       - id: RMCCondimentEnzyme
         amount: 12
