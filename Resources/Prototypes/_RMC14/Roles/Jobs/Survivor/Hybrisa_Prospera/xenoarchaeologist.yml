@@ -4,6 +4,7 @@
   name: rmc-job-name-survivor-xenoarchaeologist
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaXenoarchaeologist
+  greeting: rmc-job-greeting-survivor-hybrisa
   spawnMenuRoleName: Xenoarchaeologist (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial

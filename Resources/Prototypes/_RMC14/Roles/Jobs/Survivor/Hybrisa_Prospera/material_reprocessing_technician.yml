@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaMaterialReprocessingTechnician
   spawnMenuRoleName: Civilian - Material Reprocessing Technician (Hybrisa Survivor)
+  greeting: rmc-job-greeting-survivor-hybrisa
   special:
   - !type:AddComponentSpecial
     components:

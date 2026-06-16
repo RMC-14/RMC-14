@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaPizzaGalaxy
   spawnMenuRoleName: Civilian - Pizza Galaxy Delivery Driver (Hybrisa Survivor)
+  greeting: rmc-job-greeting-survivor-hybrisa
   special:
   - !type:AddComponentSpecial
     components:

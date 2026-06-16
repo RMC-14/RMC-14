@@ -4,6 +4,7 @@
   name: cm-job-name-survivor-fiorina-engineer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
+  greeting: rmc-job-greeting-survivor-fop
   startingGear: RMCGearSurvivorFiorinaEngineer
   accessGroups:
   - ColonistEngi

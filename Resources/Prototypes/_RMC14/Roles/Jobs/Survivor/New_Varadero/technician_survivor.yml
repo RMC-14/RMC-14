@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorTechnician
+  greeting: rmc-job-greeting-survivor-nv
   spawnMenuRoleName: Engineering Technician (NV Survivor)
   special:
   - !type:AddComponentSpecial

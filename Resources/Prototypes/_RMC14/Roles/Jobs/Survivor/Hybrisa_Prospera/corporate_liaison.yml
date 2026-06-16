@@ -4,6 +4,7 @@
   name: cm-job-name-liaison
   description: cm-job-description-survivor
   spawnMenuRoleName: Corporate Liaison (Hybrisa Survivor)
+  greeting: rmc-job-greeting-survivor-hybrisa
   startingGear: RMCGearSurvivorHybrisaCorporateLiaison
   special:
   - !type:AddComponentSpecial

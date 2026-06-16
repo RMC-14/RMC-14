@@ -3,6 +3,7 @@
   id: RMCSurvivorCommanderNewVaradero
   name: rmc-job-name-survivor-commander-new-varadero
   description: cm-job-description-commanding-officer
+  greeting: rmc-job-greeting-survivor-nv
   playTimeTracker: RMCJobSurvivorCO
   ranks:
     RMCRankLieutenantColonel: []

@@ -4,6 +4,7 @@
   name: rmc-job-name-pmc-corporate-goon-secguard
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
+  greeting: rmc-job-greeting-survivor-fop
   startingGear: RMCGearSurvivorFiorinaPrisonGuard
   accessGroups:
   - ColonistSec

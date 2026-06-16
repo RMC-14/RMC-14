@@ -3,6 +3,7 @@
   id: RMCSurvivorShivasCMBDeputy
   name: rmc-job-name-survivor-cmb-deputy
   startingGear: RMCGearSurvivorShivasCMBDeputy
+  greeting: rmc-job-greeting-survivor-shivas
   spawnMenuRoleName: CMB Deputy (Shivas Survivor)
   camouflageStartingGear: null
 

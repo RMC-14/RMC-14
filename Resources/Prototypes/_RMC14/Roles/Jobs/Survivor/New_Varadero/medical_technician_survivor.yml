@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorMedicalTechnician
   spawnMenuRoleName: Medical Technician (NV Survivor)
+  greeting: rmc-job-greeting-survivor-nv
   special:
   - !type:AddComponentSpecial
     components:

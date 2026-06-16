@@ -4,6 +4,7 @@
   name: cm-job-name-survivor-fiorina-doctor
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorDoctor
+  greeting: rmc-job-greeting-survivor-fop
   startingGear: RMCGearSurvivorFiorinaDoctor
   accessGroups:
   - ColonistMedical

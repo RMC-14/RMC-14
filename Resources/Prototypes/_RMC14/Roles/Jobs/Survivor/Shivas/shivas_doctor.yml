@@ -3,6 +3,7 @@
   id: RMCSurvivorShivasDoctor
   name: rmc-job-name-survivor-shivas-doctor
   playTimeTracker: CMJobSurvivorDoctor
+  greeting: rmc-job-greeting-survivor-shivas
   startingGear: RMCGearSurvivorShivasDoctor
   spawnMenuRoleName: Doctor (Shivas Survivor)
   camouflageStartingGear: null

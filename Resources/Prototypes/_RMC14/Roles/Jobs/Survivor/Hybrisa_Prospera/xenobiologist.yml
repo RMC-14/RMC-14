@@ -3,6 +3,7 @@
   id: RMCSurvivorHybrisaXenobiologist
   name: rmc-job-name-survivor-xenobiologist
   description: cm-job-description-survivor
+  greeting: rmc-job-greeting-survivor-hybrisa
   startingGear: RMCGearSurvivorHybrisaXenobiologist
   spawnMenuRoleName: Xenobiologist (Hybrisa Survivor)
   special:

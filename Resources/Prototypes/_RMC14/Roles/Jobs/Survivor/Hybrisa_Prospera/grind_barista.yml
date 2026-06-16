@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaGrindBarista
   spawnMenuRoleName: Daily Grind Barista (Hybrisa Survivor)
+  greeting: rmc-job-greeting-survivor-hybrisa
   special:
   - !type:AddComponentSpecial
     components:

@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorHybrisaFireProtectionSpecialist
   spawnMenuRoleName: Fire Protection Specialist (Hybrisa Survivor)
+  greeting: rmc-job-greeting-survivor-hybrisa
   special:
   - !type:AddComponentSpecial
     components:

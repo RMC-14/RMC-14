@@ -4,6 +4,7 @@
   name: cm-job-name-survivor-riot-officer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
+  greeting: rmc-job-greeting-survivor-fop
   startingGear: RMCGearSurvivorFiorinaRiotOfficer
   accessGroups:
   - ColonistSec

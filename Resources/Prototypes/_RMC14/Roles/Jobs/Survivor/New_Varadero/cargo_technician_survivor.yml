@@ -4,6 +4,7 @@
   name: cm-job-name-survivor-cargo-technician
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorEngineer
+  greeting: rmc-job-greeting-survivor-nv
   startingGear: RMCGearSurvivorCargoTechnician
   spawnMenuRoleName: Cargo Technician (NV Survivor)
   special:

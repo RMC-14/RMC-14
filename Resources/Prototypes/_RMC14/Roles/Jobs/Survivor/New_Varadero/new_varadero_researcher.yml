@@ -4,6 +4,7 @@
   name: cm-job-name-survivor-new-varadero-researcher
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
+  greeting: rmc-job-greeting-survivor-nv
   startingGear: RMCGearSurvivorNewVaraderoResearcher
   spawnMenuRoleName: New Varadero Researcher (NV Survivor)
   accessGroups:

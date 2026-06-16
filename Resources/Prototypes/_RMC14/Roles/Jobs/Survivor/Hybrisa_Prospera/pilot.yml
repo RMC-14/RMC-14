@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Commercial Pilot (Hybrisa Survivor)
   startingGear: RMCGearSurvivorHybrisaCommercialPilot
+  greeting: rmc-job-greeting-survivor-hybrisa
   hasIcon: false
   accessGroups:
   - ColonistCorporate

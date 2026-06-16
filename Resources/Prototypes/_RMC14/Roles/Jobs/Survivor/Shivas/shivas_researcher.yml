@@ -4,6 +4,7 @@
   name: rmc-job-name-survivor-shivas-researcher
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
+  greeting: rmc-job-greeting-survivor-shivas
   startingGear: RMCGearSurvivorShivasResearcher
   spawnMenuRoleName: Researcher (Shivas Survivor)
   camouflageStartingGear: null

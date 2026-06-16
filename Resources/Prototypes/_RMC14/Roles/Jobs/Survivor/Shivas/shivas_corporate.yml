@@ -3,6 +3,7 @@
   id: RMCSurvivorShivasCorporateLiaison
   name: rmc-job-name-survivor-shivas-liaison
   playTimeTracker: CMJobSurvivorCorporate
+  greeting: rmc-job-greeting-survivor-shivas
   startingGear: RMCGearSurvivorShivasCorporateLiaison
   spawnMenuRoleName: Corporate Liaison (Shivas Survivor)
   camouflageStartingGear: null
