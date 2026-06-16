@@ -13,6 +13,9 @@ public sealed partial class VehicleSupplyLiftComponent : Component
     [DataField]
     public float Radius = 2f;
 
+    [DataField]
+    public float RailingRange = 7f;
+
     [DataField, AutoNetworkedField]
     public VehicleSupplyLiftMode Mode;
 

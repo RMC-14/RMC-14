@@ -993,9 +993,20 @@ public sealed partial class HardpointSystem : EntitySystem
             _wheels.OnWheelDamaged(vehicle);
 
         if (previous > 0f && integrity.Integrity <= 0f)
+        {
             RefreshCanRun(vehicle);
 
+            if (hardpoint == vehicle)
+                RaiseFrameIntegrityChanged(vehicle, false);
+        }
+
         return true;
+    }
+
+    private void RaiseFrameIntegrityChanged(EntityUid vehicle, bool intact)
+    {
+        var ev = new VehicleFrameIntegrityChangedEvent(vehicle, intact);
+        RaiseLocalEvent(vehicle, ev, broadcast: true);
     }
 
     private void OnHardpointRepair(Entity<HardpointIntegrityComponent> ent, ref InteractUsingEvent args)
@@ -1100,10 +1111,14 @@ public sealed partial class HardpointSystem : EntitySystem
         if (repairAmount <= 0f)
             return;
 
+        var previousIntegrity = ent.Comp.Integrity;
         ent.Comp.Integrity = MathF.Min(ent.Comp.MaxIntegrity, ent.Comp.Integrity + repairAmount);
 
         Dirty(ent.Owner, ent.Comp);
         UpdateFrameDamageAppearance(ent.Owner, ent.Comp);
+
+        if (isFrame && previousIntegrity <= 0f && ent.Comp.Integrity > 0f)
+            RaiseFrameIntegrityChanged(ent.Owner, true);
 
         if (ent.Comp.RepairSound != null)
             _audio.PlayPredicted(ent.Comp.RepairSound, ent.Owner, args.User);

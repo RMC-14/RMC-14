@@ -350,6 +350,9 @@
     autoTargetRange: 20
     autoTargetCooldown: 0.2
     autoTurretEnabled: true
+  - type: VehicleSensor
+    range: 40
+    requiresDeployed: true
   - type: VehicleDeployGatedHardpoints
     blockedHardpoints:
     - HardpointTypeCannon

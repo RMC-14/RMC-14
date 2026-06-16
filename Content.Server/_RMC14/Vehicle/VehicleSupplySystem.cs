@@ -4,6 +4,8 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Intel.Tech;
+using Content.Shared._RMC14.Requisitions;
+using Content.Shared._RMC14.Requisitions.Components;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Vehicle.Supply;
 using Content.Shared._RMC14.Vendors;
@@ -12,6 +14,7 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
+using Content.Shared.Vehicle.Components;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -34,8 +37,10 @@ public sealed class VehicleSupplySystem : EntitySystem
     [Dependency] private readonly VehicleHardpointVisualsSystem _hardpointVisuals = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
     [Dependency] private readonly VehicleSystem _rmcVehicles = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -498,6 +503,9 @@ public sealed class VehicleSupplySystem : EntitySystem
             if (comp.Mode == VehicleSupplyLiftMode.Lowered)
                 return;
 
+            if (comp.ActiveVehicle == null)
+                TryAdoptVehicleOnLift(lift);
+
             if (IsLoweringBlocked(lift))
                 return;
         }
@@ -505,6 +513,24 @@ public sealed class VehicleSupplySystem : EntitySystem
         comp.ToggledAt = _timing.CurTime;
         comp.Busy = true;
         SetMode(lift, VehicleSupplyLiftMode.Preparing, raise ? VehicleSupplyLiftMode.Raising : VehicleSupplyLiftMode.Lowering);
+    }
+
+    private void TryAdoptVehicleOnLift(Entity<VehicleSupplyLiftComponent> lift)
+    {
+        var comp = lift.Comp;
+        var coords = _transform.GetMapCoordinates(lift);
+        foreach (var candidate in _lookup.GetEntitiesInRange<VehicleComponent>(coords, comp.Radius))
+        {
+            if (Deleted(candidate.Owner) || candidate.Owner == comp.ActiveVehicle)
+                continue;
+
+            if (!TryComp(candidate.Owner, out MetaDataComponent? meta) || meta.EntityPrototype is not { } prototype)
+                continue;
+
+            comp.ActiveVehicle = candidate.Owner;
+            comp.ActiveVehicleId = prototype.ID;
+            return;
+        }
     }
 
     private bool IsLoweringBlocked(Entity<VehicleSupplyLiftComponent> lift)
@@ -536,6 +562,21 @@ public sealed class VehicleSupplySystem : EntitySystem
         lift.Comp.Mode = mode;
         lift.Comp.NextMode = nextMode;
         Dirty(lift);
+
+        RequisitionsRailingMode? railingMode = (mode, nextMode) switch
+        {
+            (VehicleSupplyLiftMode.Lowered, _) => RequisitionsRailingMode.Raised,
+            (VehicleSupplyLiftMode.Raised, _) => RequisitionsRailingMode.Lowering,
+            (_, VehicleSupplyLiftMode.Lowering) => RequisitionsRailingMode.Raising,
+            _ => null
+        };
+
+        if (railingMode != null)
+        {
+            var coordinates = _transform.GetMapCoordinates(lift);
+            _requisitions.UpdateRailingsInRange(coordinates, lift.Comp.RailingRange, railingMode.Value);
+        }
+
         SendConsoleStateAll();
     }
 

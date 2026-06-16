@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/16/2026 16:19:24
-  entityCount: 707
+  time: 06/16/2026 11:05:09
+  entityCount: 689
 maps: []
 grids:
 - 1
@@ -2629,36 +2629,27 @@ entities:
   - uid: 685
     components:
     - type: Transform
-      pos: 3.5,1.5
+      pos: 4.5,1.5
       parent: 1
   - uid: 686
     components:
     - type: Transform
-      pos: 2.5,1.5
+      pos: 3.5,1.5
       parent: 1
   - uid: 687
     components:
     - type: Transform
-      pos: 1.5,1.5
+      pos: 2.5,1.5
       parent: 1
   - uid: 688
     components:
     - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 689
+    components:
+    - type: Transform
       pos: 0.5,1.5
-      parent: 1
-- proto: RMCBodyScanner
-  entities:
-  - uid: 693
-    components:
-    - type: Transform
-      pos: 17.5,7.5
-      parent: 1
-- proto: RMCBoxPaperCups
-  entities:
-  - uid: 692
-    components:
-    - type: Transform
-      pos: 2.7867126,7.8550177
       parent: 1
 - proto: RMCBoxShotgunBuckshot
   entities:
@@ -2801,14 +2792,14 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 201
-          - 207
-          - 206
-          - 205
-          - 204
-          - 203
-          - 202
           - 200
+          - 201
+          - 202
+          - 203
+          - 204
+          - 205
+          - 206
+          - 207
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
