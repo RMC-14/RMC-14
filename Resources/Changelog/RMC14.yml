@@ -1,50 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Xenos can now set their default vision mode in settings, default half
-      light.
-    type: Add
-  - message: SGO / WS sights now default to half light, can be switched to full bright
-      using verb.
-    type: Add
-  id: 2905
-  time: '2026-02-09T06:36:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9123
-- author: DrSmugleaf
-  changes:
-  - message: Added the acid pillar, buildable by base not strained Hivelords, and
-      Queen. It sprays acid at nearby marines and at nearby ignited xenos to put them
-      out. One can be built per xeno that is able to build them, through the Choose
-      Resin Structure action, NOT the order construction action!
-    type: Add
-  - message: Fixed not getting all 8 FTLs round-start, and getting 4 less Comtech
-      and 4 less Corpsmen late-join slots than intended at high pop if not all of
-      them are filled round-start.
-    type: Fix
-  - message: Fixed hedgehog spike shed giving more speed than intended (50% > 20%),
-      and its description mentioning the wrong amount of required minimum spikes.
-    type: Fix
-  - message: Fixed a rare bug with fire never going out.
-    type: Fix
-  - message: Fixed Warrior and other targeted abilities such as Valk Prae's tail fountain
-      targeting the wrong target, potentially across the map.
-    type: Fix
-  - message: Fixed a rare bug with dropships getting stuck travelling forever.
-    type: Fix
-  - message: The toggle ammo type action for smart gun operators now mentions the
-      hotkey by default to activate it, Spacebar by default!
-    type: Tweak
-  id: 2906
-  time: '2026-02-09T08:15:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9170
-- author: noctyrnal
-  changes:
-  - message: Added the LPO80 Incinerator Unit to Sorokyne Strata's Flamer Bodypile
-      insert.
-    type: Add
-  id: 2907
-  time: '2026-02-09T08:57:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9158
 - author: Dygon
   changes:
   - message: The ML66D heavy machine gun can now be acquired through requisitions,
@@ -4530,5 +4484,28 @@
   id: 3404
   time: '2026-06-16T01:47:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10156
+- author: Thereisabear
+  changes:
+  - message: Fixed mapped empty magazines from firing non-existent bullets if reloaded
+      from a spam can.
+    type: Fix
+  id: 3405
+  time: '2026-06-16T01:51:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10164
+- author: Tuna224
+  changes:
+  - message: Fixed a small grammar mistake in the stethoscopes inspect on wounded
+      patients.
+    type: Fix
+  id: 3406
+  time: '2026-06-16T01:52:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10162
+- author: x5tink
+  changes:
+  - message: Plushie Duplication in loadouts screen
+    type: Fix
+  id: 3407
+  time: '2026-06-16T01:51:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10149
 Name: RMC14
 Order: -1
