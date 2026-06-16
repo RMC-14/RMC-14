@@ -24,6 +24,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Silicons.Borgs;
+using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
@@ -455,11 +456,11 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         if (damage.Comp.BarricadeDamage != null && _barricadeQuery.HasComp(target))
             return true;
 
-        if (!Resolve(target, ref target.Comp, false))
-            return false;
-
         if (!_entityWhitelist.IsWhitelistPassOrNull(damage.Comp.Whitelist, target))
             return false;
+
+        if (!Resolve(target, ref target.Comp, false))
+            return HasComp<VehicleComponent>(target);
 
         if (!damage.Comp.AffectsDead && _mobState.IsDead(target))
             return false;

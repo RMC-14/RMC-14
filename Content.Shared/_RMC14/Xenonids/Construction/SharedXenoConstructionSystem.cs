@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.CCVar;
@@ -14,6 +15,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Designer;
@@ -40,6 +42,7 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
 using Content.Shared.Tag;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -75,6 +78,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly QueenEyeSystem _queenEye = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly VehicleSystem _vehicle = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tags = default!;
@@ -106,6 +110,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private const string XenoStructuresAnimation = "RMCEffect";
     private const string XenoHiveCoreNodeId = "HiveCoreXenoConstructionNode";
+    private const float VehicleConstructionBlockRange = 3f;
 
     private float _densityThreshold;
     private TimeSpan _newResinPreventCollideTime;
@@ -1343,6 +1348,22 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     public bool CanSecreteOnTilePopup(Entity<XenoConstructionComponent> xeno, EntProtoId? buildChoice, EntityCoordinates target, bool checkStructureSelected, bool checkWeeds, bool popup = true)
     {
+        if (HasComp<VehicleInteriorOccupantComponent>(xeno.Owner))
+        {
+            if (popup)
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+
+            return false;
+        }
+
+        if (_vehicle.TryGetVehicleFromInterior(target.EntityId, out _))
+        {
+            if (popup)
+                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+
+            return false;
+        }
+
         if (checkStructureSelected && buildChoice == null)
         {
             if (popup)
@@ -1363,6 +1384,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         target = target.SnapToGrid(EntityManager, _map);
         var hasBoost = _queenBoostQuery.HasComp(xeno.Owner);
 
+        if (IsNearVehiclePopup(xeno, target))
+            return false;
         if (checkStructureSelected &&
             buildChoice is { } nodeChoice &&
             _prototype.TryIndex(nodeChoice, out var nodeChoiceProto) &&
@@ -1743,6 +1766,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
+        if (IsNearVehicle(_transform.ToMapCoordinates(coords)))
+        {
+            popupType = "rmc-xeno-construction-blocked";
+            return false;
+        }
+
         var tile = _mapSystem.TileIndicesFor(gridId, grid, coords);
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
         var hasWeeds = false;
@@ -1789,6 +1818,25 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private bool IsNearVehiclePopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target)
+    {
+        if (!IsNearVehicle(_transform.ToMapCoordinates(target)))
+            return false;
+
+        _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+        return true;
+    }
+
+    private bool IsNearVehicle(MapCoordinates mapCoords)
+    {
+        if (mapCoords.MapId == MapId.Nullspace)
+            return false;
+
+        var size = new Vector2(VehicleConstructionBlockRange * 2f, VehicleConstructionBlockRange * 2f);
+        var aabb = Box2.CenteredAround(mapCoords.Position, size);
+        return _entityLookup.AnyComponentsIntersecting(typeof(GridVehicleMoverComponent), mapCoords.MapId, aabb);
     }
 
     public void GiveQueenBoost(EntityUid queen, float speedMultiplier, float remoteRange)

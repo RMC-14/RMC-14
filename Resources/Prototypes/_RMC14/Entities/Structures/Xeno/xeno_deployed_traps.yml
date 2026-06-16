@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: XenoTrapperTrap
   name: xeno trap
   description: A resin trap laid by a Sapper.
@@ -66,6 +66,7 @@
   - type: Clickable
   - type: TimedDespawn
     lifetime: 10
+  - type: XenoChargeDontHit
 
 - type: entity
   id: XenoTrapperEmpoweredTrap

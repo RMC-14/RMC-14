@@ -11,6 +11,7 @@
     - state: "off"
     - state: "normal-unshaded"
   - type: CMAutomatedVendor
+    canManualRestock: true
     hackable: true
     sections:
     - name: Cassettes
