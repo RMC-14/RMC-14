@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed being able to scope with the ML66D on your back.
-    type: Fix
-  id: 2914
-  time: '2026-02-10T00:40:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9180
 - author: DrSmugleaf
   changes:
   - message: Fixed Designer Hivelord weedbound walls and doors getting deleted if
@@ -4555,5 +4548,14 @@
   id: 3413
   time: '2026-06-16T13:52:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10130
+- author: Vixting
+  changes:
+  - message: XO now has vehicles 2
+    type: Tweak
+  - message: New locker sprites from Noctyrnal
+    type: Add
+  id: 3414
+  time: '2026-06-16T19:53:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10175
 Name: RMC14
 Order: -1
