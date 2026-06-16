@@ -3,19 +3,19 @@
   parent: RMCArmorVest
   id: RMCArmorCLFPVECaptain
   suffix: PVE, CLF
-  name: CLF Armored Duster
-  description: An armored duster coat, padded and reinforced with boiled leather, workshopped metal and some modern armored plates, this one has had the CLF flag etched onto the back.
+  name: Colony Liberation Front armored duster
+  description: An armored duster coat, padded and reinforced with boiled leather, workshopped metal and some modern armored plates, this one has had the CLF flag etched onto the back. # CLF B12 stat wise, dont question it
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/CLF/militacelllead.rsi
   - type: RMCArmorSpeedTier
-    speedTier: light
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.897
-    sprintModifier: 0.897
+    speedTier: medium
+  - type: ClothingSpeedModifier
+    walkModifier: 0.666
+    sprintModifier: 0.666
   - type: CMArmor
-    melee: 20
-    bullet: 35 #protag aura
+    melee: 25
+    bullet: 25
     bio: 25
     explosionArmor: 20
   - type: CMHardArmor
@@ -23,6 +23,9 @@
     item: Armor
   - type: Corrodible
     isCorrodible: false
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
   - type: Storage
     grid:
     - 0,0,3,1
@@ -35,7 +38,7 @@
   parent: [RMCBaseArmorPVE, RMCBaseUniformAccessoryItemArmorPVE]
   id: RMCArmorCLFPVE
   suffix: PVE, CLF
-  name: colonial militia hauberk
+  name: colonist militia hauberk
   description: The hauberk of a colonist militia member, created from boiled leather, workshopped metal and some modern armored plates. This one apperas to have had a TNR shoulder lamp welded onto it.
   components:
   - type: Sprite
@@ -46,10 +49,10 @@
     bio: 20
     explosionArmor: 20
   - type: RMCArmorSpeedTier
-    speedTier: medium
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.897
-    sprintModifier: 0.897
+    speedTier: light
+  - type: ClothingSpeedModifier # slower then PVP counterpart
+    walkModifier: .725
+    sprintModifier: .725
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
@@ -62,7 +65,7 @@
 - type: entity
   parent: RMCArmorCLFPVE
   id: RMCArmorCLFPVEVest
-  name: colonial militia vest
+  name: colonist militia vest
   description: The armored vest of a colonist militia member, created from boiled leather, workshopped metal and some modern armored plates. This one apperas to have had a TNR shoulder lamp welded onto it.
   suffix: PVE, CLF, Vest
   components:

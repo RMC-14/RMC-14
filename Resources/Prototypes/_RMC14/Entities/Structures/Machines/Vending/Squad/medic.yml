@@ -524,7 +524,7 @@
   parent: RMCColMarTechMedicalEquipmentPVE
   id: RMCCLFMedicalEquipmentPVE
   name: CLF cell doctor equipment rack
-  description: A sturdy metal rack made by local friends of the front, filled to the brim with all the medical gear that a rebel medic may need, at least; all the front could sorce.
+  description: A sturdy metal rack made by local friends of the front, filled to the brim with all the medical gear that a rebel medic may need; Or at the least, all the front could source.
   suffix: PVE, CLF
   components:
   - type: CMAutomatedVendor
