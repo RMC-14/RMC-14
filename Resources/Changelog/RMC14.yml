@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed M2C and ML66D magazines disappearing when transferring between
-      them.
-    type: Fix
-  - message: Fixed the sticky resin left behind by destroyed weedbound resin slowing
-      down xenos of the same hive.
-    type: Fix
-  id: 2920
-  time: '2026-02-10T02:57:13.062736+00:00'
-  url: null
 - author: Dygon
   changes:
   - message: Fixed Tail Seize looking like it shot twice in a row with a single use.
@@ -4570,5 +4559,12 @@
   id: 3419
   time: '2026-06-16T19:59:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9985
+- author: Thereisabear
+  changes:
+  - message: Fixed Xenos being able to collapse the MB-6 folding barricade.
+    type: Fix
+  id: 3420
+  time: '2026-06-16T20:13:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10170
 Name: RMC14
 Order: -1
