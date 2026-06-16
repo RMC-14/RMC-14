@@ -83,6 +83,8 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
     protected override void OnReceiverMapInit(Entity<RMCPowerReceiverComponent> ent, ref MapInitEvent args)
     {
+        base.OnReceiverMapInit(ent, ref args);
+
         if (!TryComp(ent, out ApcPowerReceiverComponent? receiver))
             return;
 

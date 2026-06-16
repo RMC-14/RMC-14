@@ -35,9 +35,6 @@
   id: CMOintment
 
 - type: Tag
-  id: CMSplint
-
-- type: Tag
   id: CMFirstAidKit
 
 - type: Tag
@@ -114,6 +111,9 @@
 
 - type: Tag
   id: RMCMacheteScabbard
+
+- type: Tag
+  id: RMCMacheteHolder
 
 - type: Tag
   id: RMCScalpel
