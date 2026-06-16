@@ -8,6 +8,10 @@
   },
   "states": [
     {
+      "name": "terminal0",
+      "directions": 4
+    },
+    {
       "name": "laptop0",
       "directions": 4
     },
