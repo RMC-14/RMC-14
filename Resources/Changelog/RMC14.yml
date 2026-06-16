@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Designer Hivelord weedbound walls and doors getting deleted if
-      their weeds are replaced by hardy or hive weeds.
-    type: Fix
-  id: 2915
-  time: '2026-02-10T00:43:51.599298+00:00'
-  url: null
 - author: Dygon
   changes:
   - message: Fixed the dropship arrival sound not playing right before a dropship
@@ -4557,5 +4549,12 @@
   id: 3414
   time: '2026-06-16T19:53:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10175
+- author: CatAndHats
+  changes:
+  - message: Fixed LV624 central cave inserts not having invincible resin
+    type: Fix
+  id: 3415
+  time: '2026-06-16T19:55:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10172
 Name: RMC14
 Order: -1
