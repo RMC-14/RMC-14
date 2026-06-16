@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/15/2026 14:25:13
-  entityCount: 17886
+  time: 06/16/2026 09:26:43
+  entityCount: 17890
 maps:
 - 1
 grids:
@@ -36546,13 +36546,6 @@ entities:
     - type: Transform
       pos: 135.5,148.5
       parent: 1
-- proto: BlockGameArcade
-  entities:
-  - uid: 22
-    components:
-    - type: Transform
-      pos: 159.5,122.5
-      parent: 1
 - proto: BonsaiTree01
   entities:
   - uid: 23
@@ -47802,12 +47795,16 @@ entities:
       rot: 3.141592653589793 rad
       pos: 45.5,50.5
       parent: 1
+    missingComponents:
+    - Damageable
   - uid: 2087
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 68.5,50.5
       parent: 1
+    missingComponents:
+    - Damageable
 - proto: CMShardGlass
   entities:
   - uid: 2088
@@ -50258,6 +50255,11 @@ entities:
     components:
     - type: Transform
       pos: 209.5,44.5
+      parent: 1
+  - uid: 3170
+    components:
+    - type: Transform
+      pos: 122.5,13.5
       parent: 1
   - uid: 14125
     components:
@@ -106078,6 +106080,13 @@ entities:
     - type: Transform
       pos: 12.5,60.5
       parent: 1
+- proto: RMCArcadeBlockGame
+  entities:
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 159.5,122.5
+      parent: 1
 - proto: RMCArmorSecurity
   entities:
   - uid: 13118
@@ -114087,6 +114096,24 @@ entities:
     components:
     - type: Transform
       pos: 209.5,44.5
+      parent: 1
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 3169
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 155.5,142.5
+      parent: 1
+  - uid: 3171
+    components:
+    - type: Transform
+      pos: 122.5,13.5
+      parent: 1
+  - uid: 3172
+    components:
+    - type: Transform
+      pos: 113.5,70.5
       parent: 1
 - proto: RMCItemPoolBuckshot
   entities:
@@ -126362,7 +126389,7 @@ entities:
   - uid: 16050
     components:
     - type: Transform
-      pos: 155.5,142.5
+      pos: 155.5,144.5
       parent: 1
   - uid: 16051
     components:
