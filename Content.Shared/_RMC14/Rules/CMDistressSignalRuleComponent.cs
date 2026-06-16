@@ -302,6 +302,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public bool AresGreetingDone;
 
     [DataField]
+    public bool AresPreflightDone;
+
+    [DataField]
     public TimeSpan AresMapDelay = TimeSpan.FromSeconds(20);
 
     [DataField]
@@ -363,7 +366,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public bool DoJobSlotScaling = true;
 
     [DataField]
-    public bool AutoEnd = true;
+    public bool AutoEnd = false;
 
     [DataField]
     public bool StartARESAnnouncements = true;

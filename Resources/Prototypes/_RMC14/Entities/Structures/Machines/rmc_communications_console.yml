@@ -16,6 +16,12 @@
     - map: ["enum.PowerDeviceVisualLayers.Powered"]
       state: "on"
   - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
   - type: Clickable
   - type: InteractionOutline
   - type: Corrodible
@@ -292,8 +298,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/escape_pod_panel.rsi
-    state: airlock_control_standby
-    layers: []
+    layers:
+    - map: ["base"]
+      state: "airlock_control_off"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "airlock_control_standby"
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.EvacuationComputerUi.Key
@@ -308,21 +317,23 @@
       components:
       - Xeno
   - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
 
 - type: entity
   parent: RMCEscapePodController
   id: RMCEscapePodControllerLiaison
+  suffix: Liaison, Fueled
   components:
   - type: EvacuationComputer
     earlyCrashChance: 0
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "RMCAccessWeYa" ] ]
-  - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
 
 - type: entity
   parent: RMCCommunicationsConsoleBase

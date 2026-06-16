@@ -1,0 +1,434 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: VehicleAmmoBoxBase
+  name: vehicle ammunition crate
+  description: A bulky ammunition container for vehicle weapons.
+  components:
+  - type: Item
+    size: Huge
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/ammo/vehicles.rsi
+    layers:
+    - state: frontal_0
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: frontal_1, visible: true }
+          Low: { state: frontal_1, visible: true }
+          Medium: { state: frontal_0, visible: true }
+          High: { state: frontal_0, visible: true }
+          Full: { state: frontal_0, visible: true }
+  - type: Appearance
+  - type: BulletBox
+    amount: 500
+    max: 500
+    bulletType: VehicleAmmoBoxFrontal
+    usedIn: APC frontal cannon
+  - type: Tag
+    tags:
+    - RMCAmmoBox
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxFrontal
+  name: frontal cannon ammo crate
+  description: Ammunition for frontal vehicle cannons.
+  components:
+  - type: Sprite
+    layers:
+    - state: frontal_0
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: frontal_0, visible: true }
+          Low: { state: frontal_0, visible: true }
+          Medium: { state: frontal_1, visible: true }
+          High: { state: frontal_1, visible: true }
+          Full: { state: frontal_1, visible: true }
+  - type: BulletBox
+    amount: 500
+    max: 500
+    bulletType: VehicleAmmoBoxFrontal
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxCupola
+  name: cupola cannon ammo crate
+  description: Ammunition for cupola-mounted vehicle cannons.
+  components:
+  - type: Sprite
+    layers:
+    - state: cupola_0
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: cupola_0, visible: true }
+          Low: { state: cupola_0, visible: true }
+          Medium: { state: cupola_1, visible: true }
+          High: { state: cupola_1, visible: true }
+          Full: { state: cupola_1, visible: true }
+  - type: BulletBox
+    amount: 500
+    max: 500
+    bulletType: VehicleAmmoBoxCupola
+    usedIn: Tank cupola
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxGrenadeLauncher
+  name: grenade launcher ammo crate
+  description: Ammunition for vehicle grenade launchers.
+  components:
+  - type: Sprite
+    layers:
+    - state: glauncher_0
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: glauncher_2, visible: true }
+          Low: { state: glauncher_2, visible: true }
+          Medium: { state: glauncher_1, visible: true }
+          High: { state: glauncher_0, visible: true }
+          Full: { state: glauncher_0, visible: true }
+  - type: BulletBox
+    amount: 10
+    max: 10
+    bulletType: VehicleAmmoBoxGrenadeLauncher
+    usedIn: Tank grenade launcher, Humvee launcher
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxSmokeLauncher
+  name: smoke launcher ammo crate
+  description: Ammunition for vehicle smoke launchers.
+  components:
+  - type: Sprite
+    layers:
+    - state: slauncher_0
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: slauncher_0, visible: true }
+          Low: { state: slauncher_0, visible: true }
+          Medium: { state: slauncher_0, visible: true }
+          High: { state: slauncher_0, visible: true }
+          Full: { state: slauncher_0, visible: true }
+  - type: BulletBox
+    amount: 6
+    max: 6
+    bulletType: VehicleAmmoBoxSmokeLauncher
+    usedIn: Tank smoke launcher
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxFlareLauncher
+  name: flare launcher ammo crate
+  description: Ammunition for vehicle flare launchers.
+  components:
+  - type: Sprite
+    layers:
+    - state: slauncher_1
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: slauncher_0, visible: true }
+          Low: { state: slauncher_0, visible: true }
+          Medium: { state: slauncher_1, visible: true }
+          High: { state: slauncher_1, visible: true }
+          Full: { state: slauncher_1, visible: true }
+  - type: BulletBox
+    amount: 10
+    max: 10
+    bulletType: VehicleAmmoBoxFlareLauncher
+    usedIn: Tank flare launcher, APC flare launcher
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxLTBCannon
+  name: LTB cannon ammo crate
+  description: Ammunition for light tank cannons.
+  components:
+  - type: Sprite
+    layers:
+    - state: ltbcannon_0
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: ltbcannon_0, visible: true }
+          Low: { state: ltbcannon_1, visible: true }
+          Medium: { state: ltbcannon_2, visible: true }
+          High: { state: ltbcannon_3, visible: true }
+          Full: { state: ltbcannon_4, visible: true }
+  - type: BulletBox
+    amount: 4
+    max: 4
+    bulletType: VehicleAmmoBoxLTBCannon
+    usedIn: Tank LTB cannon
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxRocketLauncher
+  name: rocket launcher ammo crate
+  description: Ammunition for vehicle rocket launchers.
+  components:
+  - type: Sprite
+    layers:
+    - state: quad_rocket
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: quad_rocket_e, visible: true }
+          Low: { state: quad_rocket_e, visible: true }
+          Medium: { state: quad_rocket, visible: true }
+          High: { state: quad_rocket, visible: true }
+          Full: { state: quad_rocket, visible: true }
+  - type: BulletBox
+    amount: 5
+    max: 5
+    bulletType: VehicleAmmoBoxRocketLauncher
+    usedIn: Tank TOW launcher
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxAceAutocannon
+  name: ACE autocannon ammo crate
+  description: Ammunition for ACE autocannons.
+  components:
+  - type: Sprite
+    layers:
+    - state: ace_autocannon
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: ace_autocannon_empty, visible: true }
+          Low: { state: ace_autocannon_empty, visible: true }
+          Medium: { state: ace_autocannon, visible: true }
+          High: { state: ace_autocannon, visible: true }
+          Full: { state: ace_autocannon, visible: true }
+  - type: BulletBox
+    amount: 40
+    max: 40
+    bulletType: VehicleAmmoBoxAceAutocannon
+    usedIn: Tank ACE autocannon, APC Boyars dualcannon
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxRERotaryCannon
+  name: RE700 rotary cannon ammo crate
+  description: Ammunition for RE700 rotary cannons.
+  components:
+  - type: Sprite
+    layers:
+    - state: ace_autocannon
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: ace_autocannon_empty, visible: true }
+          Low: { state: ace_autocannon_empty, visible: true }
+          Medium: { state: ace_autocannon, visible: true }
+          High: { state: ace_autocannon, visible: true }
+          Full: { state: ace_autocannon, visible: true }
+  - type: BulletBox
+    amount: 500
+    max: 500
+    bulletType: VehicleAmmoBoxRERotaryCannon
+    usedIn: Humvee RE700 rotary cannon
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxDragonFlameTank
+  name: DRGN flame tank
+  description: Fuel for DRGN flamethrower systems.
+  components:
+  - type: Sprite
+    layers:
+    - state: drgn_flametank
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: drgn_flametank_empty, visible: true }
+          Low: { state: drgn_flametank_empty, visible: true }
+          Medium: { state: drgn_flametank, visible: true }
+          High: { state: drgn_flametank, visible: true }
+          Full: { state: drgn_flametank, visible: true }
+  - type: BulletBox
+    amount: 60
+    max: 60
+    bulletType: VehicleAmmoBoxDragonFlameTank
+    usedIn: Tank DRG-N offensive flamer
+
+- type: entity
+  parent: VehicleAmmoBoxBase
+  id: VehicleAmmoBoxLTAA
+  name: LTAA ammo crate
+  description: Ammunition for LTAA systems.
+  components:
+  - type: Sprite
+    layers:
+    - state: ltaa
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: ltaa_e, visible: true }
+          Low: { state: ltaa_e, visible: true }
+          Medium: { state: ltaa, visible: true }
+          High: { state: ltaa, visible: true }
+          Full: { state: ltaa, visible: true }
+  - type: BulletBox
+    amount: 500
+    max: 500
+    bulletType: VehicleAmmoBoxLTAA
+    usedIn: Tank LTAA-AP minigun
+
+- type: entity
+  parent: CMCartridgeSentry10x50mm
+  id: VehicleCartridgeAPCFrontalCannon10x50mm
+  name: cartridge (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleBulletAPCFrontalCannon10x50mm
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+
+- type: entity
+  parent: CMCartridgeSentry10x50mm
+  id: VehicleCartridgeSentry10x50mm
+  name: cartridge (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: CMBulletSentry10x50mm
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+
+- type: entity
+  parent: CMCartridgeSentry10x50mm
+  id: VehicleCartridgeBoyarsDualCannon10x50mm
+  name: cartridge (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleBulletBoyarsDualCannon10x50mm
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+
+- type: entity
+  parent: CMCartridgeSentry10x50mm
+  id: VehicleCartridgeRERotaryCannon10x50mm
+  name: cartridge (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleBulletRERotaryCannon10x50mm
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+
+- type: entity
+  parent: CMBulletSentry10x50mm
+  id: VehicleBulletAPCFrontalCannon10x50mm
+  name: bullet (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 36
+
+- type: entity
+  parent: CMBulletSentry10x50mm
+  id: VehicleBulletAPCFrontCannon10x50mm
+  name: bullet (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 15
+
+- type: entity
+  parent: CMBulletSentry10x50mm
+  id: VehicleBulletBoyarsDualCannon10x50mm
+  name: bullet (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+  - type: CMArmorPiercing
+    amount: 15
+
+- type: entity
+  parent: CMBulletSentry10x50mm
+  id: VehicleBulletRERotaryCannon10x50mm
+  name: bullet (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 15
+
+- type: entity
+  parent: RMCRocket84mmAntiArmor
+  id: VehicleRocket84mmAntiArmor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleProjectileRocket84mmAntiArmor
+    deleteOnSpawn: false
+
+- type: entity
+  parent: RMCProjectileRocket84mm
+  id: VehicleProjectileRocket84mmAntiArmor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Blunt: 160
+        Heat: 150
+    maxFixedRange: 32
+  - type: CMArmorPiercing
+    amount: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
+    layers:
+    - state: m5_84mm_ap
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 10
+    intensitySlope: 5
+    totalIntensity: 35
+    maxTileBreak: 0
+  - type: RMCKnockOutOnCollide
+    paralyzeTime: 6
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
