@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f2b3774f6ca9173e76e7783d88e3c2f765cd385f/icons/obj/items/clothing/glasses.dmi, https://github.com/cmss13-devs/cmss13/blob/0c23c26bc85b7ab45fdb212c84807f0215c0a53e/icons/mob/humans/onmob/eyes.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f2b3774f6ca9173e76e7783d88e3c2f765cd385f/icons/obj/items/clothing/glasses.dmi, https://github.com/cmss13-devs/cmss13/blob/0c23c26bc85b7ab45fdb212c84807f0215c0a53e/icons/mob/humans/onmob/eyes.dmi and https://github.com/cmss13-devs/cmss13/blob/5c043a54dd29c82036ee6c6b2eec8f6a5f456d13/icons/mob/humans/onmob/clothing/helmet_garb/glasses.dmi and https://github.com/cmss13-devs/cmss13/blob/5c043a54dd29c82036ee6c6b2eec8f6a5f456d13/icons/mob/humans/onmob/clothing/helmet_garb/glasses.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -16,6 +16,10 @@
     },
     {
       "name": "equipped-MASK",
+      "directions": 4
+    },
+    {
+      "name": "helmet",
       "directions": 4
     }
   ]

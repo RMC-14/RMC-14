@@ -1,0 +1,160 @@
+- type: entity
+  parent: RMCAreaBase
+  abstract: true
+  id: RMCAreaVehicleInterior
+  suffix: Vehicle Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_interiors.rsi
+    state: interior
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    weatherEnabled: false
+    avoidBioscan: true
+    noTunnel: true
+    unweedable: true
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleHumvee
+  name: Humvee
+  components:
+  - type: Sprite
+    state: interior
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleHumveeARC
+  name: ARC
+  components:
+  - type: Sprite
+    state: arc
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleVan
+  name: Van
+  components:
+  - type: Sprite
+    state: van
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleAPC
+  name: APC
+  components:
+  - type: Sprite
+    state: apc
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleAPCMed
+  name: APC (Medical)
+  components:
+  - type: Sprite
+    state: apc_med
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleAPCCommand
+  name: APC (Command)
+  components:
+  - type: Sprite
+    state: apc_cmd
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleAPCAA
+  name: APC (AA)
+  components:
+  - type: Sprite
+    state: apc_aa
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleAPCMedical
+  name: APC (Medical Variant)
+  components:
+  - type: Sprite
+    state: apc_medical
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleAPCMovie
+  name: APC (Movie)
+  components:
+  - type: Sprite
+    state: apc_movie
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleTank
+  name: Tank
+  components:
+  - type: Sprite
+    state: tank
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleSPPAPC
+  name: SPP APC
+  components:
+  - type: Sprite
+    state: spp_apc
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleSPPTank
+  name: SPP Tank
+  components:
+  - type: Sprite
+    state: spp_tank
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleSPPVan
+  name: SPP Van
+  components:
+  - type: Sprite
+    state: spp_van
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleSPPVanT
+  name: SPP Van (Transport)
+  components:
+  - type: Sprite
+    state: spp_vant
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleSPPVanMedical
+  name: SPP Van (Medical)
+  components:
+  - type: Sprite
+    state: spp_van_medical
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleSPPVanLogistics
+  name: SPP Van (Logistics)
+  components:
+  - type: Sprite
+    state: spp_van_logistics
+
+- type: entity
+  parent: RMCAreaVehicleInterior
+  id: RMCAreaVehicleSPPVanPrisoner
+  name: SPP Van (Prisoner)
+  components:
+  - type: Sprite
+    state: spp_van_prisoner
