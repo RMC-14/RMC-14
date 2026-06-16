@@ -55,6 +55,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.OnClose += OnClose;
         SetFlightHeader("Flight Controls");
         SetDoorHeader("Door Controls");
+        SetRemoteControlHeader("Remote Control:");
+        SetLaunchAlarmHeader("Launch Announcement Alarm");
 
         if (_entities.TryGetComponent(Owner, out TransformComponent? transform) &&
             _entities.TryGetComponent(transform.ParentUid, out MetaDataComponent? metaData))
@@ -85,6 +87,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.LockdownButtonAft.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Aft));
         _window.LockdownButtonPort.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Port));
         _window.LockdownButtonStarboard.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Starboard));
+        _window.RemoteControlButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipRemoteControlToggleMsg());
+        _window.LaunchAlarmButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipLaunchAlarmToggleMsg());
         _entities.System<DropshipSystem>().Uis.Add(this);
     }
 
@@ -116,23 +120,28 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             button.Disabled = disabled;
             button.BorderColor = Color.Transparent;
             button.BorderThickness = new Thickness(0);
-            button.Button.ToggleMode = true;
+            button.Button.ToggleMode = false;
             button.Button.OnPressed += _ =>
             {
+                ResetDestinationButtons();
                 button.Text = $"> {name}";
                 SetLaunchDisabled(false);
                 SetCancelDisabled(false);
                 onPressed();
-                ResetDestinationButtons();
             };
 
             return button;
         }
 
-        if (destinations.FlyBy is { } flyBy)
-            _window.DestinationsContainer.AddChild(DestinationButton("Flyby", false, () => _selected = flyBy));
-
         _destinations.Clear();
+        if (destinations.FlyBy is { } flyBy)
+        {
+            var flyByName = "Flyby";
+            var flyByButton = DestinationButton(flyByName, false, () => _selected = flyBy);
+            _destinations[flyByButton] = flyByName;
+            _window.DestinationsContainer.AddChild(flyByButton);
+        }
+
         foreach (var destination in destinations.Destinations)
         {
             var name = destination.Name;
@@ -146,6 +155,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         }
 
         RefreshDoorLockStatus(destinations.DoorLockStatus);
+        SetRemoteControl(destinations.RemoteControlStatus);
+        RefreshLaunchAlarmStatus(destinations.LaunchAlarmStatus);
     }
 
     private void Set(DropshipNavigationTravellingBuiState travelling)
@@ -200,6 +211,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         }
 
         RefreshDoorLockStatus(travelling.DoorLockStatus);
+        SetRemoteControl(travelling.RemoteControlStatus);
+        RefreshLaunchAlarmStatus(travelling.LaunchAlarmStatus);
 
         var startEndTime = travelling.Time;
         _window.ProgressBar.MinValue = 0;
@@ -215,6 +228,16 @@ public sealed class DropshipNavigationBui : BoundUserInterface
     private void SetDoorHeader(string label)
     {
         _window?.DoorHeader.SetMarkup($"[color=#0BDC49][font size=16][bold]{label}[/bold][/font][/color]");
+    }
+
+    private void SetRemoteControlHeader(string label)
+    {
+        _window?.RemoteControlHeader.SetMarkup($"[color=#0BDC49][font size=16][bold]{label}[/bold][/font][/color]");
+    }
+
+    private void SetLaunchAlarmHeader(string label)
+    {
+        _window?.LaunchAlarmHeader.SetMarkup($"[color=#0BDC49][font size=16][bold]{label}[/bold][/font][/color]");
     }
 
     private void SetLaunchDisabled(bool disabled)
@@ -242,6 +265,14 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.LockdownButtonAft.Button.Disabled = disabled;
         _window.LockdownButtonPort.Button.Disabled = disabled;
         _window.LockdownButtonStarboard.Button.Disabled = disabled;
+    }
+
+    private void SetRemoteControl(bool status)
+    {
+        if (_window == null)
+            return;
+
+        _window.RemoteControlButton.Text = status ? "Enabled" : "Disabled";
     }
 
     private void ResetDestinationButtons()
@@ -283,6 +314,14 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.LockdownButtonAft.Text = aftStatus ? "Unlock Aft" : "Lock Aft";
         _window.LockdownButtonPort.Text = portStatus ? "Unlock Port" : "Lock Port";
         _window.LockdownButtonStarboard.Text = starboardStatus ? "Unlock Starboard" : "Lock Starboard";
+    }
+
+    private void RefreshLaunchAlarmStatus(bool launchAlarmStatus)
+    {
+        if (_window == null)
+            return;
+
+        _window.LaunchAlarmButton.Text = launchAlarmStatus ? "Stop Alarm" : "Start Alarm";
     }
 
     public void Update()

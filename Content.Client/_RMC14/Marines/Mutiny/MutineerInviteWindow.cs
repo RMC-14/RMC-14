@@ -28,12 +28,20 @@ public sealed class MutineerInviteWindow : DefaultWindow
 
         var layout = new BoxContainer
         {
-            Orientation = LayoutOrientation.Vertical
+            Orientation = LayoutOrientation.Vertical,
         };
 
-        layout.AddChild(new Label
+        layout.AddChild(new RichTextLabel()
         {
-            Text = Loc.GetString("mutineer-invite-text")
+            Text = "You are being asked to join a mutiny.",
+            VerticalExpand =  true,
+            VerticalAlignment = VAlignment.Center,
+        });
+        layout.AddChild(new RichTextLabel()
+        {
+            Text = "Read the Mutinies and Riots guidelines (Core Rules -> \"Mutinies, Riots\").",
+            VerticalExpand =  true,
+            VerticalAlignment = VAlignment.Center,
         });
 
         var buttonRow = new BoxContainer

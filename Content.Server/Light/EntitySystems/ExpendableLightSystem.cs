@@ -21,6 +21,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Utility;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -79,11 +80,54 @@ namespace Content.Server.Light.EntitySystems
                 switch (component.CurrentState)
                 {
                     case ExpendableLightState.Lit:
+                        component.CurrentState = ExpendableLightState.PhaseOne; //RMC14
+                        component.StateExpiryTime = (float)component.PhaseOneDuration.TotalSeconds; // RMC14
+
+                        if (component.PhaseOneDuration.TotalSeconds != 0f)
+                            UpdateVisualizer(ent);
+
+                        break;
+
+                    //RMC14
+                    case ExpendableLightState.PhaseOne:
+                        component.CurrentState = ExpendableLightState.PhaseTwo;
+                        component.StateExpiryTime = (float)component.PhaseTwoDuration.TotalSeconds;
+
+                        if (component.PhaseTwoDuration.TotalSeconds != 0f)
+                            UpdateVisualizer(ent);
+
+                        break;
+                    //RMC14
+                    case ExpendableLightState.PhaseTwo:
+                        component.CurrentState = ExpendableLightState.PhaseThree;
+                        component.StateExpiryTime = (float)component.PhaseThreeDuration.TotalSeconds;
+
+                        if (component.PhaseThreeDuration.TotalSeconds != 0f)
+                            UpdateVisualizer(ent);
+                        break;
+                    //RMC14
+                    case ExpendableLightState.PhaseThree:
+                        component.CurrentState = ExpendableLightState.PhaseFour;
+                        component.StateExpiryTime = (float)component.PhaseFourDuration.TotalSeconds;
+
+                        if (component.PhaseFourDuration.TotalSeconds != 0f)
+                            UpdateVisualizer(ent);
+                        break;
+                    //RMC14
+                    case ExpendableLightState.PhaseFour:
+                        component.CurrentState = ExpendableLightState.PhaseFive;
+                        component.StateExpiryTime = (float)component.PhaseFiveDuration.TotalSeconds;
+
+                        if (component.PhaseFiveDuration.TotalSeconds != 0f)
+                            UpdateVisualizer(ent);
+                        break;
+
+                    //RMC14
+                    case ExpendableLightState.PhaseFive:
                         component.CurrentState = ExpendableLightState.Fading;
                         component.StateExpiryTime = (float)component.FadeOutDuration.TotalSeconds;
 
                         UpdateVisualizer(ent);
-
                         break;
 
                     default:
@@ -102,7 +146,8 @@ namespace Content.Server.Light.EntitySystems
                         }
 
                         // RMC14
-                        _physics.SetBodyType(ent, BodyType.Dynamic);
+                        if (HasComp<PhysicsComponent>(ent))
+                            _physics.SetBodyType(ent, BodyType.Dynamic);
 
                         break;
                 }
@@ -193,6 +238,27 @@ namespace Content.Server.Light.EntitySystems
                     _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.TurnOnBehaviourID, appearance);
                     break;
 
+                //RMC14
+                case ExpendableLightState.PhaseOne:
+                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.PhaseOneBehaviourID, appearance);
+                    break;
+                //RMC14
+                case ExpendableLightState.PhaseTwo:
+                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.PhaseTwoBehaviourID, appearance);
+                    break;
+                //RMC14
+                case ExpendableLightState.PhaseThree:
+                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.PhaseThreeBehaviourID, appearance);
+                    break;
+                //RMC14
+                case ExpendableLightState.PhaseFour:
+                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.PhaseFourBehaviourID, appearance);
+                    break;
+                //rMC14
+                case ExpendableLightState.PhaseFive:
+                    _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.PhaseFiveBehaviourID, appearance);
+                    break;
+
                 case ExpendableLightState.Fading:
                     _appearance.SetData(ent, ExpendableLightVisuals.Behavior, component.FadeOutBehaviourID, appearance);
                     break;
@@ -237,6 +303,11 @@ namespace Content.Server.Light.EntitySystems
 
             component.CurrentState = ExpendableLightState.BrandNew;
             component.StateExpiryTime = (float)component.GlowDuration.TotalSeconds;
+
+			// RMC14
+            if (component.StartsActivated)
+                TryActivate((uid, component));
+
             // RMC14
             Dirty(uid, component);
 

@@ -5,22 +5,14 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorChancesGoon
   startingGear: RMCGearSurvivorChancesGoon
-  spawnMenuRoleName: Chance's Claim Corporate Security (Chance's Colonist)
+  spawnMenuRoleName: Chance's Claim Corporate Security (Chances Colonist)
   greeting: rmc-job-greeting-chances-colonist
   hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillMedical: 1
-        RMCSkillEndurance: 2
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 0 # RMC14
-        RMCSkillFireman: 2
-        RMCSkillVehicles: 1
+      preset: RMCSkillPresetSurvivorGoon
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember

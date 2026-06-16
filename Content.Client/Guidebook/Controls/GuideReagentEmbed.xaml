@@ -58,6 +58,19 @@
                     </CollapsibleBody>
                 </Collapsible>
             </BoxContainer>
+            <!-- <RMC14> -->
+            <BoxContainer Name="FlammabilityContainer" HorizontalExpand="True">
+                <Collapsible>
+                    <CollapsibleHeading Title="{Loc 'rmc-flamer-guidebook-header'}"/>
+                    <CollapsibleBody>
+                        <BoxContainer Name="FlammabilityDescriptionContainer"
+                                      Orientation="Vertical"
+                                      Margin="10 0 10 0"
+                                      HorizontalExpand="True"/>
+                    </CollapsibleBody>
+                </Collapsible>
+            </BoxContainer>
+            <!-- </RMC14> -->
             <BoxContainer Margin="10 5 10 10" HorizontalExpand="True">
                 <!-- The troublemaker !-->
                 <RichTextLabel Name="ReagentDescription" HorizontalAlignment="Left"/>

@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
@@ -25,6 +26,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Inventory;
@@ -172,7 +174,16 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (ent.Comp.Slot is not { } slot || ent.Comp.Count is not { } count)
             return;
 
-        var itemId = ent.Comp.StartingItem;
+        List<EntProtoId> items = [];
+        if (ent.Comp.StartingItem is { } id)
+        {
+            items = Enumerable.Repeat(id, count).ToList();
+        }
+        else if (ent.Comp.StartingItems is { } idList)
+        {
+            items = idList;
+        }
+
         var slots = EnsureComp<ItemSlotsComponent>(ent);
         var coordinates = Transform(ent).Coordinates;
         for (var i = 0; i < count; i++)
@@ -183,8 +194,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
             _itemSlots.AddItemSlot(ent, $"{slot.Name}{n}", copy);
 
-            if (itemId != null)
+            if (items.Count > i)
             {
+                var itemId = items[i];
                 if (copy.ContainerSlot is { } containerSlot)
                 {
                     var item = Spawn(itemId, coordinates);
@@ -346,7 +358,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void TryPickupDroppedItems(EntityUid user)
     {
-        if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
+        if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems) || HasComp<DevouredComponent>(user))
             return;
 
         // Sort items by importance
@@ -445,7 +457,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return true;
     }
 
-    private bool PickupSlot(EntityUid user, EntityUid holster)
+    private bool PickupSlot(EntityUid user, EntityUid holster, EntityWhitelist? whitelist = null)
     {
         if (!SlotCanInteract(user, holster, out var itemSlots))
             return false;
@@ -453,6 +465,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
         foreach (var slot in itemSlots.Slots.Values.OrderBy(s => s.Priority))
         {
             var item = slot.ContainerSlot?.ContainedEntity;
+            if (item.HasValue && _whitelist.IsWhitelistFail(whitelist, item.Value))
+                continue;
+
             if (_itemSlots.TryEjectToHands(holster, slot, user, true))
             {
                 if (item != null)
@@ -754,7 +769,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 return true;
             }
 
-            if (PickupSlot(user, item))
+            if (PickupSlot(user, item, holster.Whitelist))
             {
                 _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} unholstered {ToPrettyString(item)}");
                 return true;

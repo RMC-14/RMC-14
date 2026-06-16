@@ -1,11 +1,12 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaCivilian
   startingGear: RMCGearSyntheticColonistHybrisaCivilian
   spawnMenuRoleName: Civilian Synth (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -56,41 +57,7 @@
       preset: RMCSurvivorPresetHybrisaSynthCivilian
     - type: Synth
       generation: rmc-species-synth-generation-second
-      welderDamageToRepair:
-        types:
-          Blunt: -15
-          Piercing: -15
-          Slash: -15
-      cableCoilDamageToRepair:
-        types:
-          Caustic: -15
-          Heat: -15
-          Shock: -15
-          Cold: -15
-      addComponents:
-      # TODO darksight instead of night vision
-      - type: NightVision
-        innate: true
-      - type: EyeProtection
-      - type: WoundableUntreatable
-      - type: Insulated
-      - type: RMCLeapProtection
-        inherentStunDuration: 3
-      removeComponents:
-      - type: CMSurgeryTarget
-      - type: Infectable
-      - type: Hunger
-      - type: Thirst
-      - type: Perishable
-      - type: ThermalRegulator
-      - type: Stamina
-      - type: DamageForceSay
-      - type: Dna
-      - type: InjectableSolution
-      - type: IVDripTarget
-      - type: RMCSuicide
-        damage: { }
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
@@ -103,7 +70,7 @@
   name: survivor synth hybrisa civilian colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     # WeYa mart employee
     - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, CMSatchel, RMCShoesLaceup ]
@@ -117,5 +84,7 @@
     - [ RMCDailyGrindApron, RMCJumpsuitDailyGrind, RMCShoesLaceup, CMSatchel ]
     # Landing Pad Attendant Synth
     - [ RMCJumpsuitCivilianYellow, RMCHeadCapFlippable, RMCSatchelNorm, CMBootsBlackFilled, CMPackFlare, RMCHazardVest, RMCBinoculars, RMCBeltUtilityGeneral, RMCHandsVeteran, RMCScabbardMacheteFilled, RMCEarmuffs ]
+    # Teacher
+    - [ RMCHipsterGlasses, RMCJumpsuitCivilianBrown, RMCSatchelNorm, CMSparePDTLBattleBuddyKit, RMCCoatBomber, CMHealthAnalyzer, RMCSprayBottleSpaceCleaner, RMCCrayonBox, RMCFoodSnackChipsPepper, CMBootsBlackFilled ]
     # Bartender
     - [ RMCSatchelBlackBartenderSynthFill, CMHandsBlackMarine, RMCCigarette, CMBootsBlackFilled, RMCCoatWaistcoat, ClothingUniformJumpsuitDetectiveGrey, ClothingHeadHatBowlerHat ]

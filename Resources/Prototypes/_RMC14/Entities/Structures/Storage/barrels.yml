@@ -40,6 +40,7 @@
   categories: [ HideSpawnMenu ]
   description: A storage barrel.
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/barrels.rsi
     noRot: true
@@ -71,6 +72,8 @@
           collection: MetalBreak
   - type: CrateOpenable
   - type: RMCMesonsNonviewable
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomCrateLoot
 
 - type: entity
   parent: RMCBarrelBase

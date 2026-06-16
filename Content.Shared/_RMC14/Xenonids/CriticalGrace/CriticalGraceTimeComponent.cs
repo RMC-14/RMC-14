@@ -8,5 +8,5 @@ namespace Content.Shared._RMC14.Xenonids.CriticalGrace;
 public sealed partial class CriticalGraceTimeComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan GraceDuration = TimeSpan.Zero; //TODO RMC14 1 second
+    public TimeSpan GraceDuration = TimeSpan.FromSeconds(1);
 }

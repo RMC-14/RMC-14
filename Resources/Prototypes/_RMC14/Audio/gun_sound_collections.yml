@@ -59,9 +59,9 @@
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ssg45_2.ogg
 
 - type: soundCollection
-  id: RMCAK4047Shoot
+  id: RMCType77Shoot
   files:
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ak4047.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_type77.ogg
 
 - type: soundCollection
   id: RMCFlamerFL3Shoot
@@ -82,3 +82,27 @@
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m10_auto_pistol.ogg
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m10_auto_pistol2.ogg
+
+- type: soundCollection
+  id: RMCType71Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_type71.ogg
+
+- type: soundCollection
+  id: RMCFlamerColonyShoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Flamer/surv_flamer_fire1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Flamer/surv_flamer_fire2.ogg
+  - /Audio/_RMC14/Weapons/Guns/Flamer/surv_flamer_fire3.ogg
+  - /Audio/_RMC14/Weapons/Guns/Flamer/surv_flamer_fire4.ogg
+
+- type: soundCollection
+  id: RMCL112Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_silenced_l112.ogg
+
+- type: soundCollection
+  id: RMCCannonDistant
+  files:
+  - /Audio/_RMC14/Vehicle/weapons/cannon_distant1.ogg
+  - /Audio/_RMC14/Vehicle/weapons/cannon_distant2.ogg

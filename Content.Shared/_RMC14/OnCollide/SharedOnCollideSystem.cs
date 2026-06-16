@@ -41,11 +41,30 @@ public abstract class SharedOnCollideSystem : EntitySystem
         _damageOnCollideQuery = GetEntityQuery<DamageOnCollideComponent>();
 
         SubscribeLocalEvent<DamageOnCollideComponent, StartCollideEvent>(OnStartCollide);
+        SubscribeLocalEvent<DamageOnCollideComponent, EndCollideEvent>(OnEndCollide);
+        SubscribeLocalEvent<DamageOnCollideComponent, ComponentShutdown>(OnShutdown);
     }
 
     private void OnStartCollide(Entity<DamageOnCollideComponent> ent, ref StartCollideEvent args)
     {
         OnCollide(ent, args.OtherEntity);
+    }
+
+    private void OnEndCollide(Entity<DamageOnCollideComponent> ent, ref EndCollideEvent args)
+    {
+        if (!ent.Comp.CanRehit)
+            return;
+
+        if (ent.Comp.Damaged.Remove(args.OtherEntity))
+            Dirty(ent);
+    }
+
+    private void OnShutdown(Entity<DamageOnCollideComponent> ent, ref ComponentShutdown args)
+    {
+        if (ent.Comp.Chain is not { } chain || TerminatingOrDeleted(chain))
+            return;
+
+        CleanupChain(chain, ent.Owner);
     }
 
     private void OnCollide(Entity<DamageOnCollideComponent> ent, EntityUid other)
@@ -77,7 +96,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
             var damage = ent.Comp.Damage;
             if (ent.Comp.Acidic)
                 damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
-            _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
+            _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances, armorPiercing: ent.Comp.ArmorPenetration);
             DoEmote(ent, other);
             didEmote = true;
         }
@@ -133,8 +152,41 @@ public abstract class SharedOnCollideSystem : EntitySystem
         if (!_damageOnCollideQuery.Resolve(ent, ref ent.Comp, false))
             return;
 
+        if (ent.Comp.Chain is { } oldChain &&
+            oldChain != chain &&
+            !TerminatingOrDeleted(oldChain))
+        {
+            CleanupChain(oldChain, ent.Owner);
+        }
+
         ent.Comp.Chain = chain;
         Dirty(ent);
+    }
+
+    public void CleanupChain(EntityUid? chain, EntityUid? skip = null)
+    {
+        if (chain == null || TerminatingOrDeleted(chain.Value))
+            return;
+
+        var refs = GetRemainingChainRefs(chain.Value, skip);
+        if (refs.Count == 0)
+            Del(chain.Value);
+    }
+
+    private List<string> GetRemainingChainRefs(EntityUid chain, EntityUid? skip = null)
+    {
+        var refs = new List<string>();
+        var query = EntityQueryEnumerator<DamageOnCollideComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if ((skip != null && uid == skip) || TerminatingOrDeleted(uid))
+                continue;
+
+            if (comp.Chain == chain)
+                refs.Add(ToPrettyString(uid));
+        }
+
+        return refs;
     }
 
     public override void Update(float frameTime)

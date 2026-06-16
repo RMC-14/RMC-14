@@ -16,9 +16,10 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMSatchel
+      - id: CMSatchelSecureStandard
       - id: CMBootsBlackFilled
       - id: CMMRE
+      - id: RMCStampSEA
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:

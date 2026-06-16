@@ -1,4 +1,6 @@
-﻿using Robust.Shared.Prototypes;
+﻿using Content.Shared.Maps;
+
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Spawners;
 
@@ -24,4 +26,10 @@ public sealed partial class GunSpawnerComponent : Component
 
     [DataField]
     public bool DeleteAfterSpawn = true;
+
+    [DataField]
+    public List<ProtoId<ContentTileDefinition>> BlockedTiles { get; set; } = new()
+    {
+        "Lattice"
+    };
 }

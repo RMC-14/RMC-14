@@ -1,23 +1,76 @@
 {
-    "version": 1,
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Sprites by Github MozarteanChaos / Discord mozarteanchaos (213813868282118144); Edits to 'Wing Gravity' by DasIrrlicht",
-    "size": {
-        "x": 32,
-        "y": 32
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by Github MozarteanChaos / Discord mozarteanchaos (213813868282118144); Edits to \u0027Wing Gravity\u0027 by DasIrrlicht, Avali_tail_wag.png made by Vinny Shick based on tail_avalibase.png",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ears_avalibase_primary",
+      "directions": 4
     },
-    "states": [
-        {
-            "name": "ears_avalibase_primary",
-            "directions": 4
-        },
-        {
-            "name": "ears_avalibase_secondary",
-            "directions": 4
-        },
-        {
-            "name": "tail_avalibase",
-            "directions": 4
-        }
-    ]
+    {
+      "name": "ears_avalibase_secondary",
+      "directions": 4
+    },
+    {
+      "name": "tail_avalibase",
+      "directions": 4
+    },
+    {
+      "name": "avali_tail_wag",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "tail-wag-icon"
+    }
+  ]
 }

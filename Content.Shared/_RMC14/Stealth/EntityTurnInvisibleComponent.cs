@@ -5,6 +5,7 @@ namespace Content.Shared._RMC14.Stealth;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class EntityTurnInvisibleComponent : Component
 {
+    [DataField, AutoNetworkedField]
     public bool Enabled;
 
     [DataField, AutoNetworkedField]

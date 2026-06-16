@@ -1,6 +1,8 @@
 - type: entity
   parent: RMCHeadsetShip
   id: RMCHeadsetMarine
+  name: marine squad radio headset
+  description: A standard military radio headset.
   components:
   - type: GrantSquadLeaderTracker
     defaultMode: SquadLeader
@@ -11,6 +13,7 @@
     - PrimaryLandingZone
   - type: GrantTacMapAlert
   - type: HeadsetAutoSquad
+  - type: RMCStaticDefaultChannel
 
 # Alpha
 - type: entity
@@ -21,6 +24,12 @@
   components:
   - type: Sprite
     state: alpha_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineAlpha
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetAlpha
@@ -31,6 +40,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
@@ -52,6 +62,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
@@ -66,6 +77,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyEngineer
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetAlpha
@@ -77,6 +89,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyMedical
+      - CMEncryptionKeyCommon
 
 
 # Bravo
@@ -88,6 +101,12 @@
   components:
   - type: Sprite
     state: bravo_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineBravo
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetBravo
@@ -98,6 +117,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
@@ -119,6 +139,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
@@ -133,6 +154,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyEngineer
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetBravo
@@ -144,6 +166,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyMedical
+      - CMEncryptionKeyCommon
 
 
 # Charlie
@@ -155,6 +178,12 @@
   components:
   - type: Sprite
     state: charlie_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineCharlie
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetCharlie
@@ -165,6 +194,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
@@ -186,6 +216,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
@@ -200,6 +231,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyEngineer
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetCharlie
@@ -211,6 +243,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyMedical
+      - CMEncryptionKeyCommon
 
 
 # Delta
@@ -222,6 +255,12 @@
   components:
   - type: Sprite
     state: delta_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineDelta
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetDelta
@@ -232,6 +271,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
@@ -253,6 +293,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
@@ -267,6 +308,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyEngineer
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetDelta
@@ -278,6 +320,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyMedical
+      - CMEncryptionKeyCommon
 
 
 # Echo
@@ -289,6 +332,12 @@
   components:
   - type: Sprite
     state: echo_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineEcho
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetEcho
@@ -299,9 +348,18 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetEcho
@@ -312,17 +370,10 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
     radioTextIncrease: 2
-  - type: GrantSquadLeaderTracker
-    defaultMode: CommandingOfficer
-    trackerModes:
-    - CommandingOfficer
-    - ExecutiveOfficer
-    - SquadLeader
-    - FireteamLeader
-    - PrimaryLandingZone
 
 - type: entity
   parent: CMHeadsetEcho
@@ -334,6 +385,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyEngineer
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetEcho
@@ -345,6 +397,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyMedical
+      - CMEncryptionKeyCommon
 
 
 # Foxtrot
@@ -356,6 +409,12 @@
   components:
   - type: Sprite
     state: cryo_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineFoxtrot
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetFoxtrot
@@ -366,22 +425,10 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
     radioTextIncrease: 3
-
-- type: entity
-  parent: CMHeadsetFoxtrot
-  id: CMHeadsetFoxtrotTeamLeader
-  name: marine foxtrot team leader radio headset
-  description: This is used by the marine Foxtrot team leader.
-  components:
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - CMEncryptionKeyJTAC
-  - type: RMCHeadset
-    radioTextIncrease: 2
   - type: GrantSquadLeaderTracker
     defaultMode: CommandingOfficer
     trackerModes:
@@ -393,6 +440,20 @@
 
 - type: entity
   parent: CMHeadsetFoxtrot
+  id: CMHeadsetFoxtrotTeamLeader
+  name: marine foxtrot team leader radio headset
+  description: This is used by the marine Foxtrot team leader.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - CMEncryptionKeyJTAC
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: CMHeadsetFoxtrot
   id: CMHeadsetFoxtrotEngineer
   name: marine foxtrot engineer radio headset
   description: This is used by the marine Foxtrot combat engineers.
@@ -401,6 +462,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyEngineer
+      - CMEncryptionKeyCommon
 
 - type: entity
   parent: CMHeadsetFoxtrot
@@ -412,6 +474,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyMedical
+      - CMEncryptionKeyCommon
 
 # PVE
 

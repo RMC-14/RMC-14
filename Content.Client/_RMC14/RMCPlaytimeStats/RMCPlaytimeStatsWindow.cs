@@ -26,7 +26,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     [Dependency] private readonly JobRequirementsManager _jobRequirementsManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    
+
     private readonly Color _altColor = Color.FromHex("#292B38");
     private readonly Color _defaultColor = Color.FromHex("#2F2F3B");
     private readonly Color _buttonSelectedColor = Color.FromHex("#3E6E4B");
@@ -83,7 +83,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             return RMCPlaytimeMedalType.Silver;
         else if (playtime >= _bronzeTime)
             return RMCPlaytimeMedalType.Bronze;
-        
+
         return null;
     }
 
@@ -111,7 +111,8 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                 RMCPlaytimeMedalType.Bronze => "hudxenoupgrade2-ui",
                 RMCPlaytimeMedalType.Silver => "hudxenoupgrade3-ui",
                 RMCPlaytimeMedalType.Gold => "hudxenoupgrade4-ui",
-                _ => "hudxenoupgrade5-ui"
+                RMCPlaytimeMedalType.Platinum => "hudxenoupgrade5-ui",
+                _ => "hudxenoupgrade6-ui"
             };
 
             return new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), iconName);
@@ -202,7 +203,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                     ToolTip = Loc.GetString(dept.Name),
                     Name = dept.ID
                 };
-                
+
                 button.OnPressed += _ => ShowDepartmentTab(dept, roles);
                 DepartmentButtons.AddChild(button);
             }
@@ -276,7 +277,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                 playtime,
                 new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor),
                 GetMedalIcon(dept.ID, playtime, job.ID));
-                
+
             rolesList.AddChild(entry);
             _useAltColor ^= true;
         }
@@ -360,7 +361,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                 kvp.Value,
                 new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor),
                 GetMedalIcon(dept?.ID, kvp.Value, kvp.Key));
-                
+
             rolesList.AddChild(entry);
             _useAltColor ^= true;
         }
@@ -371,7 +372,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         DepartmentContent.Visible = true;
     }
 
-    private void HeaderClicked(RMCPlaytimeStatsHeader.Header header, 
+    private void HeaderClicked(RMCPlaytimeStatsHeader.Header header,
         RMCPlaytimeStatsHeader.SortDirection direction,
         BoxContainer targetContainer)
     {
@@ -394,7 +395,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 
         container.RemoveAllChildren();
 
-        if (header != null) 
+        if (header != null)
             container.AddChild(header);
 
         container.AddChild(new HSeparator());

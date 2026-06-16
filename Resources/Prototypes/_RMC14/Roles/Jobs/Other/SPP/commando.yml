@@ -35,6 +35,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: QYJWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-commando
   hidden: true
@@ -89,7 +90,7 @@
     pocket2: RMCPouchFirstAidERTFill
   storage:
     back:
-    - CMMRE # TODO RMC14 - SPP MRE
+    - RMCMRESPP
     - CMPacketGrenadeHighExplosiveFilled # TODO RMC14 - SPP White Phosphorus Grenade
     - CMCrowbar
     - RMCHandcuffs

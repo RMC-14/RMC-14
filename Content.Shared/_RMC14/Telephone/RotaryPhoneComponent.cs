@@ -35,6 +35,9 @@ public sealed partial class RotaryPhoneComponent : Component
     public EntProtoId<RMCTelephoneComponent> PhoneId = "RMCTelephone";
 
     [DataField, AutoNetworkedField]
+    public bool PhoneCanBeTransferred = true;
+
+    [DataField, AutoNetworkedField]
     public string ContainerId = "rmc_rotary_phone_telephone";
 
     [DataField, AutoNetworkedField]
@@ -66,6 +69,13 @@ public sealed partial class RotaryPhoneComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool TryGetHolderName = true;
+
+    /// <summary>
+    /// Should admins be notified when being called.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
+    public bool NotifyAdmins { get; set; } = false;
 }
 
 [Serializable, NetSerializable]

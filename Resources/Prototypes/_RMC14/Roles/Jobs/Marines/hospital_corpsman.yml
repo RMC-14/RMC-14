@@ -47,6 +47,8 @@
     - type: CMVendorUser
       id: CMHospitalCorpsman
       points: 45
+      extraPoints:
+        Chemicals: 120
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-hospital-corpsman

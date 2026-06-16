@@ -3,10 +3,11 @@
   id: CMRifleman
   name: cm-job-name-rifleman
   description: cm-job-description-rifleman
+  newToJobInfo: rmc-new-to-job-rifleman
   playTimeTracker: CMJobRifleman
   startingGear: CMGearRifleman
   dummyStartingGear: CMGearRiflemanEquipped
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconRifleman"
   joinNotifyCrew: false
   marineAuthorityLevel: 1
   supervisors: cm-job-supervisors-sl

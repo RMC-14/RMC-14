@@ -1,0 +1,286 @@
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerLarge
+  name: large computer
+  components:
+  - type: Sprite
+    state: largecomp
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerLarge0
+  name: large computer
+  suffix: Prop, 0
+  components:
+  - type: Sprite
+    state: largecomp0
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerLargeDark
+  name: dark large computer
+  components:
+  - type: Sprite
+    state: largecomp_dark
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerLargeDark0
+  name: dark large computer
+  suffix: Prop, 0
+  components:
+  - type: Sprite
+    state: largecomp_dark0
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerMap
+  name: map computer
+  components:
+  - type: Sprite
+    state: map
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerMap0
+  name: map computer
+  suffix: Prop, 0
+  components:
+  - type: Sprite
+    state: map0
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerEmbedded
+  name: embedded computer bank
+  components:
+  - type: Sprite
+    state: embedded computers
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropAIWallMonitor
+  name: AI wall monitor
+  components:
+  - type: Sprite
+    state: ai_wallmonitor
+
+- type: entity
+  parent: RMCPropAIWallMonitor
+  id: RMCPropAIWallMonitorEast
+  suffix: Prop, East
+  components:
+  - type: Sprite
+    state: ai_wallmonitor_e
+
+- type: entity
+  parent: RMCPropAIWallMonitor
+  id: RMCPropAIWallMonitorWest
+  suffix: Prop, West
+  components:
+  - type: Sprite
+    state: ai_wallmonitor_w
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropRemoteFlightComputer
+  name: remote flight computer
+  components:
+  - type: Sprite
+    state: remoteflightcomp
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropRemoteFlightComputer0
+  name: remote flight computer
+  suffix: Prop, 0
+  components:
+  - type: Sprite
+    state: remoteflightcomp0
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropRemoteFlightComputerClosed
+  name: remote flight computer
+  suffix: Prop, Closed
+  components:
+  - type: Sprite
+    state: remoteflightcomp_cl
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropElevatorHandrail
+  name: elevator handrail console
+  components:
+  - type: Sprite
+    state: elevator_handrail
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropElevatorHandrail0
+  name: elevator handrail console
+  suffix: Prop, 0
+  components:
+  - type: Sprite
+    state: elevator_handrail0
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropElevatorHandrailB
+  name: elevator handrail console
+  suffix: Prop, B
+  components:
+  - type: Sprite
+    state: elevator_handrailb
+
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleTOCShuttle
+  name: shuttle tactical operations console
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: toc_shuttle
+    overrideDir: West
+    enableOverrideDir: true
+
+- type: entity
+  parent: RMCOverwatchConsoleTOCShuttle
+  id: RMCOverwatchConsoleTOCShuttleRotating
+  suffix: Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerTOCShuttle0
+  name: shuttle tactical operations console
+  suffix: Prop, 0
+  components:
+  - type: Sprite
+    state: toc_shuttle0
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerTOCShuttleB
+  name: shuttle tactical operations console
+  suffix: Prop, B
+  components:
+  - type: Sprite
+    state: toc_shuttleb
+
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleTOCMap
+  name: tactical map operations console
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: toc_map
+    overrideDir: West
+    enableOverrideDir: true
+
+- type: entity
+  parent: RMCOverwatchConsoleTOCMap
+  id: RMCOverwatchConsoleTOCMapRotating
+  suffix: Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerTOCMap0
+  name: tactical map operations console
+  suffix: Prop, 0
+  components:
+  - type: Sprite
+    state: toc_map0
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerTOCMapB
+  name: tactical map operations console
+  suffix: Prop, B
+  components:
+  - type: Sprite
+    state: toc_mapb
+
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleTOCRailgun
+  name: railgun tactical operations console
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: toc_railgun
+    overrideDir: West
+    enableOverrideDir: true
+
+- type: entity
+  parent: RMCOverwatchConsoleTOCRailgun
+  id: RMCOverwatchConsoleTOCRailgunRotating
+  suffix: Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerTOCRailgun0
+  name: railgun tactical operations console
+  suffix: Prop, 0
+  components:
+  - type: Sprite
+    state: toc_railgun0
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerTOCRailgunB
+  name: railgun tactical operations console
+  suffix: Prop, B
+  components:
+  - type: Sprite
+    state: toc_railgunb
+
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleTOCRailcannon
+  name: railcannon tactical operations console
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: toc_railcannon
+    overrideDir: West
+    enableOverrideDir: true
+
+- type: entity
+  parent: RMCOverwatchConsoleTOCRailcannon
+  id: RMCOverwatchConsoleTOCRailcannonRotating
+  suffix: Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerTOCRailcannon0
+  name: railcannon tactical operations console
+  suffix: Prop, 0
+  components:
+  - type: Sprite
+    state: toc_railcannon0
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropComputerTOCRailcannonB
+  name: railcannon tactical operations console
+  suffix: Prop, B
+  components:
+  - type: Sprite
+    state: toc_railcannonb

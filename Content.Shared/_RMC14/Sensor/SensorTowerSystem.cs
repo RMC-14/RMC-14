@@ -1,5 +1,7 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Communications;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -66,6 +68,21 @@ public sealed class SensorTowerSystem : EntitySystem
 
         var used = args.Used;
 
+        if (TryComp<RMCDeviceBreakerComponent>(args.Used, out var breaker) && ent.Comp.State != SensorTowerState.Weld)
+        {
+            var doafter = new DoAfterArgs(EntityManager, args.User, breaker.DoAfterTime, new RMCDeviceBreakerDoAfterEvent(), args.Used, args.Target, args.Used)
+            {
+                BreakOnMove = true,
+                RequireCanInteract = true,
+                BreakOnHandChange = true,
+                DuplicateCondition = DuplicateConditions.SameTool
+            };
+
+            args.Handled = true;
+            _doAfter.TryStartDoAfter(doafter);
+            return;
+        }
+
         var correctQuality = ent.Comp.State switch
         {
             SensorTowerState.Weld => ent.Comp.WeldingQuality,
@@ -114,9 +131,14 @@ public sealed class SensorTowerSystem : EntitySystem
             return;
 
         if (state == SensorTowerState.Off)
+        {
             state = SensorTowerState.On;
+            ent.Comp.NextBreakAt = _timing.CurTime + ent.Comp.BreakEvery;
+        }
         else if (state == SensorTowerState.On)
+        {
             state = SensorTowerState.Off;
+        }
 
         Dirty(ent);
         UpdateAppearance(ent);
@@ -184,8 +206,27 @@ public sealed class SensorTowerSystem : EntitySystem
             return;
 
         args.Handled = true;
+        FullyDestroy(ent);
+    }
 
+    public void FullyDestroy(Entity<SensorTowerComponent> ent)
+    {
         ent.Comp.State = SensorTowerState.Weld;
+        Dirty(ent);
+        UpdateAppearance(ent);
+    }
+
+    public void SensorTowerIncrementalDestroy(Entity<SensorTowerComponent> ent)
+    {
+        ent.Comp.State = ent.Comp.State switch
+        {
+            SensorTowerState.On => SensorTowerState.Wrench,
+            SensorTowerState.Off => SensorTowerState.Wrench,
+            SensorTowerState.Wrench => SensorTowerState.Wire,
+            SensorTowerState.Wire => SensorTowerState.Weld,
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+
         Dirty(ent);
         UpdateAppearance(ent);
     }
@@ -259,26 +300,26 @@ public sealed class SensorTowerSystem : EntitySystem
             if (time < tower.NextBreakAt)
                 continue;
 
+            tower.NextBreakAt = time + tower.BreakEvery;
+
             if (!_random.Prob(tower.BreakChance))
             {
-                tower.NextBreakAt = time + tower.BreakEvery;
                 Dirty(uid, tower);
                 continue;
             }
 
             if (_random.Prob(0.75f))
             {
-                _popup.PopupEntity($"The {Name(uid)} beeps wildly and sprays random pieces everywhere! Use a wrench to repair it.", uid, uid, PopupType.LargeCaution);
+                _popup.PopupEntity($"The {Name(uid)} beeps wildly and sprays random pieces everywhere! Use a wrench to repair it.", uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wrench;
-                Dirty(uid, tower);
             }
             else
             {
-                _popup.PopupEntity($"The {Name(uid)} beeps wildly and a fuse blows! Use wirecutters, then a wrench to repair it.", uid, uid, PopupType.LargeCaution);
+                _popup.PopupEntity($"The {Name(uid)} beeps wildly and a fuse blows! Use wirecutters, then a wrench to repair it.", uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wire;
-                Dirty(uid, tower);
             }
 
+            Dirty(uid, tower);
             UpdateAppearance((uid, tower));
         }
     }

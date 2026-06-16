@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/clothing/helmet_visors.dmi, modified by Vermidia",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a0922d708fa6ef0e4d09d08e742c188ae9bb5d4e/icons/obj/items/clothing/helmet_visors.dmi, modified by Vermidia",
   "size": {
     "x": 32,
     "y": 32
@@ -57,6 +57,45 @@
     },
     {
       "name": "med_adv_sight_down"
+    },
+    {
+      "name": "po_visor_up"
+    },
+    {
+      "name": "po_visor"
+    },
+    {
+      "name": "po_visor_down"
+    },
+    {
+      "name": "po_visor_purple"
+    },
+    {
+      "name": "po_visor_purple_down"
+    },
+    {
+      "name": "po_visor_lightblue"
+    },
+    {
+      "name": "po_visor_lightblue_down"
+    },
+    {
+      "name": "po_visor_red"
+    },
+    {
+      "name": "po_visor_red_down"
+    },
+    {
+      "name": "po_visor_darkblue"
+    },
+    {
+      "name": "po_visor_darkblue_down"
+    },
+    {
+      "name": "po_visor_yellow"
+    },
+    {
+      "name": "po_visor_yellow_down"
     }
   ]
 }

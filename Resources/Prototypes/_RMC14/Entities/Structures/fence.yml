@@ -12,6 +12,9 @@
     state: fence0
   - type: InteractionOutline
   - type: Clickable
+  - type: VehicleSmashable
+    deleteOnHit: false
+    damageOnHit: 50
   - type: IconSmooth
     key: fences
     base: fence
@@ -148,4 +151,30 @@
     state: brokenfence0
   - type: Construction
     graph: RMCFenceHybrisaElectric
+    node: rmcFenceBroken
+
+- type: entity
+  parent: CMFence
+  id: RMCFenceOvergrown
+  name: overgrown fence
+  description: A large metal mesh strewn between two poles, tangled with vines and creeping growth. Still separates areas, but nature is reclaiming it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fences_overgrown.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceOvergrown
+    node: fenceMetal
+
+- type: entity
+  parent: RMCFenceBroken
+  id: RMCFenceOvergrownBroken
+  name: broken overgrown fence
+  description: A mess of broken wire and creeping weeds strung between two posts, swallowed by years of unchecked growth.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fences_overgrown.rsi
+    state: brokenfence0
+  - type: Construction
+    graph: RMCFenceOvergrown
     node: rmcFenceBroken

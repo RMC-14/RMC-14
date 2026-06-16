@@ -99,12 +99,71 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-
+  - type: RMCBlockWeather
 
 # Standard Tents
 - type: entity
   parent: RMCTentBase
   id: RMCTentUNMCStandard
+
+- type: entity
+  parent: RMCTentBase
+  id: RMCTentUNMCBig
+  name: UNMC Big Tent
+  description: A standard UNMC Field Tent. This one is just a general purpose, large version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tents/deployed_tents.rsi
+    layers:
+    - state: big_frame
+    - state: big_canvas
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: big_roof
+      map: [ "enum.ItemCamouflageLayers.Layer2", "standard_roof" ]
+  - type: Fixtures
+    fixtures:
+      fix1: # Left Wall
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.5,-2.5,-1.4,1"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+      fix-2: # Right Wall
+        shape:
+          !type:PhysShapeAabb
+          bounds: "1.4,-2.5,1.5,1"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+      fix-3: # Back Wall
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.5,0.4,1.5,1.5"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
 
 - type: entity
   parent: RMCTentBase
@@ -327,3 +386,39 @@
     - "standard_roof"
     - "extension_roof"
     - "mp_extension_roof"
+
+- type: entity
+  parent: RMCTentUNMCExtended
+  id: RMCTentUNMCExtendedCorrespondent
+  name: Correspondent Field Tent
+  description: A standard civilian tent. This one is equipped for news on the go. Unfold in a suitable location for interviews. ENTRANCE TO THE SOUTH.
+  components:
+  - type: Sprite
+    layers:
+    - state: standard_frame
+    - state: standard_canvas
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: extension_frame
+    - state: extension_canvas
+      map: [ "enum.ItemCamouflageLayers.Layer2" ]
+    - state: standard_roof
+      map: [ "enum.ItemCamouflageLayers.Layer3", "standard_roof" ]
+    - state: extension_roof
+      map: [ "enum.ItemCamouflageLayers.Layer4", "extension_roof" ]
+    - state: correspondent_extension_roof
+      map: [ "correspondent_extension_roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.0
+    changeRate: 6.0
+    reactToMouse: false
+    fadeLayers:
+    - "standard_roof"
+    - "extension_roof"
+    - "correspondent_extension_roof"
+  - type: ItemCamouflage
+    colors:
+      Jungle: "#699393"
+      Desert: "#699393"
+      Snow: "#699393"
+      Classic: "#699393"
+      Urban: "#699393"

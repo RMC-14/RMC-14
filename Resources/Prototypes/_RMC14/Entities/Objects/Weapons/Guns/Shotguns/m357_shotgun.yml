@@ -67,3 +67,10 @@
       rmc-aslot-rail: -0.025, 0.09
       rmc-aslot-stock: -0.55, -0.05
       rmc-aslot-underbarrel: 0.25, -0.31
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunM357
+    - RMCWeaponShotgun
+
+- type: Tag
+  id: RMCWeaponShotgunM357
