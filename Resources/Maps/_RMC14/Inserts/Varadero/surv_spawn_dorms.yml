@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 03/05/2026 03:12:53
-  entityCount: 260
+  time: 06/16/2026 16:05:45
+  entityCount: 261
 maps: []
 grids:
 - 1
@@ -329,7 +329,7 @@ entities:
   - uid: 111
     components:
     - type: Transform
-      pos: 4.336488,1.9388456
+      pos: 3.4039059,3.3627386
       parent: 1
   - uid: 162
     components:
@@ -352,6 +352,11 @@ entities:
     components:
     - type: Transform
       pos: 6.7086115,5.8773365
+      parent: 1
+  - uid: 261
+    components:
+    - type: Transform
+      pos: 6.6432576,2.4570115
       parent: 1
 - proto: CMOverheadPipe
   entities:
@@ -1591,17 +1596,17 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: RMCWeaponRifleM54C
+- proto: RMCWeaponRifleM54CFilled
   entities:
   - uid: 114
     components:
     - type: Transform
-      pos: 1.9146128,2.9075956
+      pos: 2.1285965,2.8877492
       parent: 1
   - uid: 161
     components:
     - type: Transform
-      pos: 7.0992365,6.6273365
+      pos: 7.4340463,6.7435813
       parent: 1
 - proto: RMCWindowFrameColony
   entities:

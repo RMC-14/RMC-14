@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 03/04/2026 22:54:30
-  entityCount: 249
+  time: 06/16/2026 15:56:13
+  entityCount: 250
 maps: []
 grids:
 - 1
@@ -1009,9 +1009,9 @@ entities:
       parent: 1
     missingComponents:
     - ApcPowerReceiver
+    - ActivatableUIRequiresPower
     - FaxMachine
     - ActivatableUI
-    - ActivatableUIRequiresPower
     - UserInterface
     - ItemSlots
     - ContainerContainer
@@ -1369,6 +1369,13 @@ entities:
     components:
     - type: Transform
       pos: 11.5,7.5
+      parent: 1
+- proto: RMCSpawnerRandomSupplyKit
+  entities:
+  - uid: 250
+    components:
+    - type: Transform
+      pos: 10.5,10.5
       parent: 1
 - proto: RMCStationAlertComputer
   entities:

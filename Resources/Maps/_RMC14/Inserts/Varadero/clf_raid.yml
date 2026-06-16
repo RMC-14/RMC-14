@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/08/2026 21:53:22
-  entityCount: 684
+  time: 06/16/2026 16:19:24
+  entityCount: 707
 maps: []
 grids:
 - 1
@@ -950,7 +950,7 @@ entities:
       pos: 16.5,20.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5269.2847
+      secondsUntilStateChange: -5881.38
       state: Opening
   - uid: 474
     components:
@@ -959,7 +959,7 @@ entities:
       pos: 20.5,17.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5234.485
+      secondsUntilStateChange: -5846.58
       state: Opening
 - proto: CMBarricadeSandbag
   entities:
@@ -1256,6 +1256,13 @@ entities:
     - type: Transform
       pos: 17.5,23.5
       parent: 1
+- proto: CMIV
+  entities:
+  - uid: 695
+    components:
+    - type: Transform
+      pos: 20.5,8.5
+      parent: 1
 - proto: CMLockerFridge
   entities:
   - uid: 316
@@ -1472,6 +1479,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: 8.5,20.5
       parent: 1
+    missingComponents:
+    - Damageable
 - proto: CMSemioticCoffee
   entities:
   - uid: 343
@@ -2615,6 +2624,42 @@ entities:
     - type: Transform
       pos: 17.512293,12.464621
       parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 685
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 686
+    components:
+    - type: Transform
+      pos: 2.5,1.5
+      parent: 1
+  - uid: 687
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 688
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+- proto: RMCBodyScanner
+  entities:
+  - uid: 693
+    components:
+    - type: Transform
+      pos: 17.5,7.5
+      parent: 1
+- proto: RMCBoxPaperCups
+  entities:
+  - uid: 692
+    components:
+    - type: Transform
+      pos: 2.7867126,7.8550177
+      parent: 1
 - proto: RMCBoxShotgunBuckshot
   entities:
   - uid: 535
@@ -2756,25 +2801,18 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 200
           - 201
-          - 202
-          - 203
-          - 204
-          - 205
-          - 206
           - 207
+          - 206
+          - 205
+          - 204
+          - 203
+          - 202
+          - 200
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-- proto: RMCCrateBlackmarketFireArmsHidden
-  entities:
-  - uid: 315
-    components:
-    - type: Transform
-      pos: 5.5,3.5
-      parent: 1
 - proto: RMCCrateFlares200
   entities:
   - uid: 226
@@ -3796,6 +3834,78 @@ entities:
     - type: Transform
       pos: 8.487238,17.447626
       parent: 1
+- proto: RMCMagazineML66D
+  entities:
+  - uid: 315
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 694
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 696
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 697
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 698
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 699
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 700
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 701
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 702
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 703
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 704
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 705
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 706
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 707
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
 - proto: RMCMagazinePistolHandcannon
   entities:
   - uid: 680
@@ -3990,6 +4100,32 @@ entities:
       parent: 1
     - type: WarpPoint
       location: Research
+- proto: RMCML66DMountWeaponAssembledLoaded
+  entities:
+  - uid: 689
+    components:
+    - type: Transform
+      anchored: True
+      rot: 4.71238898038469 rad
+      pos: 3.5,5.5
+      parent: 1
+    - type: Foldable
+      folded: False
+    - type: Physics
+      canCollide: False
+      bodyType: Static
+  - uid: 690
+    components:
+    - type: Transform
+      anchored: True
+      rot: 9.42477796076938 rad
+      pos: 3.5,3.5
+      parent: 1
+    - type: Foldable
+      folded: False
+    - type: Physics
+      canCollide: False
+      bodyType: Static
 - proto: RMCMRECLF
   entities:
   - uid: 229
@@ -4132,6 +4268,13 @@ entities:
     components:
     - type: Transform
       pos: 10.5,20.5
+      parent: 1
+- proto: RMCPaperCup
+  entities:
+  - uid: 691
+    components:
+    - type: Transform
+      pos: 2.7085876,7.3859415
       parent: 1
 - proto: RMCParasiteProp
   entities:
