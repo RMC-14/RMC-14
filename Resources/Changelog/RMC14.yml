@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: PursuitinAshes
-  changes:
-  - message: Removed the All Hostile gauss turret in the Chance's Claim admin building.
-    type: Remove
-  id: 2911
-  time: '2026-02-09T21:33:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9154
-- author: Ian321
-  changes:
-  - message: Squad assignment via the ID computer now correctly updates the job title.
-    type: Fix
-  id: 2912
-  time: '2026-02-09T23:16:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9177
 - author: DrSmugleaf
   changes:
   - message: Fix xenos not being able to open doors by bumping into them instead of
@@ -4559,16 +4545,25 @@
   url: null
 - author: GrigoriyGalintano
   changes:
-  - message: Added data disks, SIGINT disk upload, data terminals, safe cracking, and experimental device retrieve objectives for Intelligence Officers.
+  - message: Added data disks, SIGINT disk upload, data terminals, safe cracking,
+      and experimental device retrieve objectives for Intelligence Officers.
     type: Add
   - message: Added personal intel clues and expanded the intel objectives UI.
     type: Add
   - message: Added computer disk, experimental device, and floor safe sprites.
     type: Add
-  - message: Reworked intel clue progression to guide IOs from documents into disks, safes, terminals, and retrieve objectives.
+  - message: Reworked intel clue progression to guide IOs from documents into disks,
+      safes, terminals, and retrieve objectives.
     type: Tweak
   id: 3411
   time: '2026-06-16T04:58:59.953817+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9950
+- author: kukurua
+  changes:
+  - message: The M276 medical belt will be able to store syringe and surgical cases.
+    type: Add
+  id: 3412
+  time: '2026-06-16T08:08:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9954
 Name: RMC14
 Order: -1
