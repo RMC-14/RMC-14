@@ -465,8 +465,8 @@
 - type: entity
   parent: RMCBoxMagazineSupplySmallBase
   id: RMCBoxPackFlareColonistEmpty
-  name: box of CK25 emergency flare pack (x10)
-  description: A box of CK25 emergency flare pack, commonly kept in bulk for well, emergencies.
+  name: box of CK25 emergency flare packs (x10)
+  description: A box of CK25 emergency flare packs, commonly kept in bulk for well, emergencies.
   components:
   - type: Construction
     graph: RMCBoxMagazine

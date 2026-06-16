@@ -4,7 +4,7 @@
   id: RMCArmorCLFPVECaptain
   suffix: PVE, CLF
   name: Colony Liberation Front armored duster
-  description: An armored duster coat, padded and reinforced with boiled leather, workshopped metal and some modern armored plates, this one has had the CLF flag etched onto the back. # CLF B12 stat wise, dont question it
+  description: An armored duster coat, padded and reinforced with boiled leather, workshopped metal and some modern armored plates. This one has had the CLF flag etched onto the back. # CLF B12 stat wise, dont question it
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/CLF/militacelllead.rsi
@@ -39,7 +39,7 @@
   id: RMCArmorCLFPVE
   suffix: PVE, CLF
   name: colonist militia hauberk
-  description: The hauberk of a colonist militia member, created from boiled leather, workshopped metal and some modern armored plates. This one apperas to have had a TNR shoulder lamp welded onto it.
+  description: The hauberk of a colonist militia member, created from boiled leather, workshopped metal and some modern armored plates. This one appears to have had a TNR shoulder lamp welded onto it.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/CLF/militaarmor.rsi
@@ -66,7 +66,7 @@
   parent: RMCArmorCLFPVE
   id: RMCArmorCLFPVEVest
   name: colonist militia vest
-  description: The armored vest of a colonist militia member, created from boiled leather, workshopped metal and some modern armored plates. This one apperas to have had a TNR shoulder lamp welded onto it.
+  description: The armored vest of a colonist militia member, created from boiled leather, workshopped metal and some modern armored plates. This one appears to have had a TNR shoulder lamp welded onto it.
   suffix: PVE, CLF, Vest
   components:
   - type: Sprite

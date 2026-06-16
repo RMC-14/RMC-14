@@ -116,7 +116,7 @@
   parent: CMHeadBeret
   id: RMCHeadCapCellCap
   name: armored captain's cap
-  description: A reinforced captains peaked cap. More protective than it seems.
+  description: A reinforced captain's peaked cap. More protective than it seems.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_clf.rsi

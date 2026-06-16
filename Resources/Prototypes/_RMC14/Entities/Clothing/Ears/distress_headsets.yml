@@ -37,8 +37,8 @@
 - type: entity
   parent: RMCHeadsetDistressCLF
   id: RMCHeadsetDistressCLFPVE
-  name: Cell headset
-  description: A commercial ship crew headset, its been modified to allow for use with colony long range subspace communications relays.
+  name: cell headset
+  description: A commercial ship crew headset. Its been modified to allow for use with colony long range subspace communication relays.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -53,8 +53,8 @@
 - type: entity
   parent: RMCHeadsetDistressCLFPVE
   id: RMCHeadsetDistressCLFPVELead
-  name: Cell Leader headset
-  description: A commercial deck officer headset, its been modified to allow for use with colony long range subspace communications relays.
+  name: cell leader headset
+  description: A commercial deck officer headset. Its been modified to allow for use with colony long range subspace communication relays.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -65,8 +65,8 @@
 - type: entity
   parent: RMCHeadsetDistressCLFPVELead
   id: RMCHeadsetDistressCLFPVECapt
-  name: Cell Captain headset
-  description: A commercial ship captain headset, its been modified to allow for use with colony long range subspace communications relays.
+  name: cell captain headset
+  description: A commercial ship captain headset. Its been modified to allow for use with colony long range subspace communication relays.
   components:
   - type: RMCHeadset
     radioTextIncrease: 3

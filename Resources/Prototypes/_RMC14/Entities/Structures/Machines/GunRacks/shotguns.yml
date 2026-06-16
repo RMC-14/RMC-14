@@ -103,7 +103,7 @@
   id: RMCGunRackHG3712Empty
   name: HG 37-12 gun rack
   suffix: HG 37-12, Empty
-  description: A modification of an, outdated 21st century weapons rack, custom built to store the HG 37-12. It's still painted in that classical, multi-century, old military jungle green. Some historian out there would cry if they saw this frankensteinian level of desecration of such a 21st century artifact like this.
+  description:  A modification of an outdated, 21st century weapons rack, custom built to store the HG 37-12. It's still painted in that classical, multi-century old military jungle green. Some historian out there would cry if they saw the frankensteinian level of desecration of a 21st century artifact such as this.
   components:
   - type: ContainerContainer
     containers:

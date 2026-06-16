@@ -3,7 +3,7 @@
   parent: RMCPVEArmorPadsBase
   id: RMCPVEArmorPadsCLF
   name: Milita Pauldrons
-  description: Attachable supplementary armor with leather straps intented to paired with a milita hauberk or vest. Protects from glancing hits and covers the arm opening in the cuirass against shrapnel.
+  description: Attachable supplementary armor with leather straps intended to be paired with a milita hauberk or vest. Protects from glancing hits and covers the arm opening in the cuirass against shrapnel.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/CLF/pads.rsi
@@ -13,7 +13,7 @@
   parent: RMCPVEArmorBracersBase
   id: RMCPVEArmorBracersCLF
   name: Milita Vambraces
-  description: Attachable supplementary armor with leather straps intented to paired with a milita hauberk or vest. A pair of workshoped composite vambraces to shield the forearms, boiled leather straps wrap around the underside to ensure it doesn't ride up or down.
+  description: Attachable supplementary armor with leather straps intended to be paired with a milita hauberk or vest. A pair of workshopped composite vambraces to shield the forearms, boiled leather straps wrap around the underside to ensure it doesn't ride up or down.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/CLF/bracer.rsi
@@ -23,7 +23,7 @@
   parent: RMCPVEArmorNeckGuardBase
   id: RMCPVEArmorNeckGuardCLF
   name: Milita Gorget
-  description: Attachable supplementary armor with leather straps intented to paired with a milita hauberk or vest. A neck guard of sorts made out of some workshopped metal plates, it has straps on the front and back to allow it to be attached to the neck of milita armor.
+  description: Attachable supplementary armor with leather straps intended to be paired with a milita hauberk or vest. A neck guard of sorts made out of some workshopped metal plates, it has straps on the front and back to allow it to be attached to the neck of milita armor.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/CLF/neckguard.rsi
@@ -33,7 +33,7 @@
   parent: RMCPVEArmorGroinPlateBase
   id: RMCPVEArmorGroinPlateCLF
   name: Milita Lap Panel
-  description: Attachable supplementary armor with leather straps intented to paired with a milita hauberk or vest. Made of boiled leather and workshopped metal rods, its not the most comfortable thing out there but at least it keeps the lower torso somewhat safe.
+  description: Attachable supplementary armor with leather straps intended to be paired with a milita hauberk or vest. Made of boiled leather and workshopped metal rods, it's not the most comfortable thing out there but at least it keeps the lower torso somewhat safe.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/CLF/groinplate.rsi
@@ -43,7 +43,7 @@
   parent: RMCPVEArmorShinGuardBase
   id: RMCPVEArmorShinGuardCLF
   name: Milita Greaves
-  description: Attachable supplementary armor with leather straps intented to paired with a milita hauberk or vest. Workshopped metal plating, salvaged plasteel rods, and some boiled leather strap for good messure, it rides a fine line between modern armor and the plate metal of old.
+  description: Attachable supplementary armor with leather straps intended to be paired with a milita hauberk or vest. Workshopped metal plating, salvaged plasteel rods, and some boiled leather strap for good measure, it rides a fine line between modern armor and the plate metal of old.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/CLF/shinguards.rsi
@@ -53,7 +53,7 @@
   parent: RMCPVEArmorKneeGuardBase
   id: RMCPVEArmorKneeGuardCLF
   name: Milita Kneepads
-  description: Attachable supplementary armor with leather straps intented to paired with a milita hauberk or vest. Plasteel-metal polymer sheets designed to be wrapped around the upper leg, boiled leather straps on the inside allow it to clamp around the thigh.
+  description: Attachable supplementary armor with leather straps intended to be paired with a milita hauberk or vest. Plasteel-metal polymer kneepads designed to be wrapped around the upper leg and clamped around the thigh, boiled leather straps on the inside allow it to clamp around the thigh.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/CLF/thighguards.rsi
@@ -76,7 +76,7 @@
   parent: RMCPVEArmorPaintBase
   id: RMCPVEArmorPaintAltCLF
   name: CLF stars armor paint
-  description: A set of paint tones the stars of the liberation into a rebel's armor.
+  description: A set of paint tones to etch the stars of the liberation front.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/CLF/paint/altCLF.rsi

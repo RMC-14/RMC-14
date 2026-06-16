@@ -45,7 +45,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyCLF
-  name: Milita encryption key
+  name: militia encryption key
   components:
   - type: EncryptionKey
     channels:

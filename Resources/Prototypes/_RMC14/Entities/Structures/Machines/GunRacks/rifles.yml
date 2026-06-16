@@ -798,7 +798,7 @@
   id: RMCGunRackMAR30Empty
   name: MAR-30 gun rack
   suffix: MAR-30, Empty
-  description: A large, outdated 21st century weapons rack, designed to store MAR-30s. It's still painted in that multi-century old, military jungle green. The rifles' heavily faded '30' designation is still painted on the top of the rack - These rack, the rifles, and even the rifle's magazines were all designed for, and used in, quite a few of Earth's Broken Backed conflicts during the latter end of the 21st century.
+  description: A large, outdated 21st century weapons rack, designed to store MAR-30s. It's still painted in that multi-century old, military jungle green. The rifles' heavily faded '30' designation is still painted on the top of the rack - These racks, the rifles, and even the rifle's magazines were all designed for, and used in, quite a few of Earth's Broken Backed conflicts during the latter end of the 21st century.
   components:
   - type: ContainerContainer
     containers:
@@ -936,7 +936,7 @@
   id: RMCGunRackMAR40Empty
   name: MAR-40 gun rack
   suffix: MAR-40, Empty
-  description: A large, outdated, 21st century weapons rack, designed to store MAR-40s. It's still painted in that multi-century old, military jungle green. The rifles' faded '40' designation is still painted on the top of the rack - These rack, the rifles, and even the rifle's magazines were all designed for, and used in, quite a few of Earth's Broken Backed conflicts during the latter end of the 21st century.
+  description: A large, outdated, 21st century weapons rack, designed to store MAR-40s. It's still painted in that multi-century old, military jungle green. The rifles' faded '40' designation is still painted on the top of the rack - These racks, the rifles, and even the rifle's magazines were all designed for, and used in, quite a few of Earth's Broken Backed conflicts during the latter end of the 21st century.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/mar40_rack.rsi
@@ -1044,7 +1044,7 @@
   id: RMCGunRackM16Empty
   name: M16 gun rack
   suffix: M16, Empty
-  description: A large, outdated, 20th century weapons rack, designed to store M16s. It's still painted in that multi-century old, military jungle green. The rifles' faded 'M16' designation is still painted on the top of the rack. - The guns stored on this rack are locked and loaded, ready for combat. Even despite the original Department of Defence standards for rifle storage! To be fair; it may have something to do with the fact that said goverment body hasn't existed for multiple decades now....
+  description: A large, outdated, 20th century weapons rack, designed to store M16s. It's still painted in that multi-century old, military jungle green. The rifle's faded 'M16' designation is still painted on the top of the rack. - The guns stored on this rack are locked and loaded, ready for combat. Even despite the original Department of Defence standards for rifle storage! To be fair; it may have something to do with the fact that said goverment body hasn't existed for multiple decades now....
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/M16_rack.rsi
@@ -1126,7 +1126,7 @@
   id: RMCGunRackM16A5Empty
   name: M16A5 gun rack
   suffix: M16A5, Empty
-  description: A large, outdated, 20th century weapons rack, designed to store M16A5s. It's still painted in that multi-century old, military jungle green. The rifles' faded 'M16' designation is still painted on the top of the rack. - The guns stored on this rack are locked and loaded, ready for combat. Even despite the original Department of Defence standards for rifle storage! To be fair it may have something to do with the fact that said goverment body hasn't existed for multiple decades now....
+  description: A large, outdated, 20th century weapons rack, designed to store M16A5s. It's still painted in that multi-century old, military jungle green. The rifles faded 'M16' designation is still painted on the top of the rack. - The guns stored on this rack are locked and loaded, ready for combat. Even despite the original Department of Defence standards for rifle storage! To be fair it may have something to do with the fact that said goverment body hasn't existed for multiple decades now....
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/M16_rack.rsi

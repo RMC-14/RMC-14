@@ -205,7 +205,7 @@
   id: RMCGunRackPDW90Empty
   name: PDW90 submachine gun rack
   suffix: PDW90, Empty
-  description: An outdated, mid 21st century weapon rack designed to store the PDW90. It's still painted in that multi-century old, military jungle green. The SMGs' faded '90' designation is still painted on the top of the rack. - Locked and loaded ready for combat, just how any good mercenary or enterprising criminal likes it.
+  description: An outdated, mid-21st century weapon rack designed to store the PDW90. It's still painted in that multi-century old, military jungle green. The SMGs' faded '90' designation is still painted on the top of the rack. - Locked and loaded ready for combat, just how any good mercenary or enterprising criminal likes it.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/p90_rack.rsi
