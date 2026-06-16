@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fix xenos not being able to open doors by bumping into them instead of
-      left clicking them.
-    type: Fix
-  - message: Fixed not being able to build hive structures far away from the hive
-      core.
-    type: Fix
-  - message: Fixed xenos not being able to destroy their hive structures.
-    type: Fix
-  - message: Fixed popup spam as designer hivelord when mousing over nodes.
-    type: Fix
-  - message: Updated the roadmap.
-    type: Tweak
-  id: 2913
-  time: '2026-02-09T23:21:41.467674+00:00'
-  url: null
 - author: Dygon
   changes:
   - message: Fixed being able to scope with the ML66D on your back.
@@ -4565,5 +4548,12 @@
   id: 3412
   time: '2026-06-16T08:08:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9954
+- author: carccborg
+  changes:
+  - message: The SU-6 Smart Pistol can no longer be used with hold-to-fire.
+    type: Tweak
+  id: 3413
+  time: '2026-06-16T13:52:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10130
 Name: RMC14
 Order: -1
