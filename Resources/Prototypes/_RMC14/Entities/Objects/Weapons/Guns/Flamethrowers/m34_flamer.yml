@@ -70,7 +70,7 @@
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.032, 0.092
@@ -256,7 +256,7 @@
       - RMCFlamerAmmoProvider
       - RMCFlamerTank
       tags:
-      - RMCAttachmentExtinguisher
+      - RMCAttachmentUnderbarrelExtinguisher
   - type: StorageFill
     contents:
     - id: RMCWeaponFlamer
@@ -280,4 +280,4 @@
         startingAttachable: RMCAttachmentUnderbarrelExtinguisher
         whitelist:
           tags:
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher

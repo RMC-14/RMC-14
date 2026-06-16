@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Construction.Prototypes;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Emplacements;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Ladder;
@@ -38,6 +39,7 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly VehicleSystem _vehicle = default!;
     [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -84,15 +86,20 @@ public sealed class RMCConstructionSystem : EntitySystem
         var query = EntityQueryEnumerator<RMCReplaceOnHijackLandComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            if (!TryComp(uid, out TransformComponent? xform) || xform.MapUid != ev.Map)
+                continue;
+
             if (comp.Id is not { } id)
             {
                 Del(uid);
                 continue;
             }
 
-            var coordinates = _transform.GetMoverCoordinates(uid);
+            var coordinates = _transform.GetMoverCoordinates(uid, xform);
+            var rotation = xform.LocalRotation;
             Del(uid);
-            Spawn(id, coordinates);
+            var spawned = Spawn(id, coordinates);
+            _transform.SetLocalRotation(spawned, rotation);
         }
     }
 
@@ -402,7 +409,16 @@ public sealed class RMCConstructionSystem : EntitySystem
 
     public bool CanConstruct(EntityUid? user)
     {
-        return !HasComp<DisableConstructionComponent>(user);
+        if (HasComp<DisableConstructionComponent>(user))
+            return false;
+
+        if (user is { } uid && HasComp<VehicleInteriorOccupantComponent>(uid))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-construction-vehicle"), uid, uid);
+            return false;
+        }
+
+        return true;
     }
 
     public bool CanBuildAt(EntityCoordinates coordinates, EntProtoId prototype, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision = null, EntityUid? user = null)
@@ -432,6 +448,13 @@ public sealed class RMCConstructionSystem : EntitySystem
     public bool CanBuildAt(EntityCoordinates coordinates, string? prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision = null)
     {
         popup = default;
+
+        if (_vehicle.TryGetVehicleFromInterior(coordinates.EntityId, out _))
+        {
+            popup = Loc.GetString("construction-system-inside-container");
+            return false;
+        }
+
         if (_transform.GetGrid(coordinates) is not { } gridId)
             return true;
 

@@ -95,6 +95,9 @@
   id: RMCGlass
 
 - type: Tag
+  id: RMCFoldingBarricade
+
+- type: Tag
   id: RMCHelmet
 
 - type: Tag
@@ -108,6 +111,9 @@
 
 - type: Tag
   id: RMCMacheteScabbard
+
+- type: Tag
+  id: RMCMacheteHolder
 
 - type: Tag
   id: RMCScalpel
@@ -185,3 +191,6 @@
 
 - type: Tag
   id: RMCSentryLaptop
+
+- type: Tag
+  id: RMCDataDisk

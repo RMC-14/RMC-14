@@ -33,14 +33,15 @@ public sealed class RMCRepairableSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly RMCWeldEffectSystem _weldEffect = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
     private static readonly ProtoId<StackPrototype> SteelStack = "CMSteel";
@@ -48,8 +49,8 @@ public sealed class RMCRepairableSystem : EntitySystem
     private static readonly ProtoId<StackPrototype> WoodStack = "RMCWood";
     private static readonly EntProtoId<SkillDefinitionComponent> ConstructionSkill = "RMCSkillConstruction";
 
-    const string SOLUTION_WELDER = "Welder";
-    const string REAGENT_WELDER = "WeldingFuel";
+    private const string SolutionWelder = "Welder";
+    private const string ReagentWelder = "WeldingFuel";
 
     private EntityUid? _forceRepairUser;
     private EntityUid? _forceRepairTarget;
@@ -137,7 +138,7 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         var delay = hasReplace
             ? (float) repairable.Comp.Delay.TotalSeconds
-            : GetWeldRepairDelaySeconds(repairable.Comp, user, damageable.TotalDamage);
+            : GetWeldRepairDelaySeconds(repairable, user, damageable.TotalDamage);
         var ev = new RMCRepairableDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(delay), ev, repairable, repairable, used: args.Used)
         {
@@ -152,6 +153,7 @@ public sealed class RMCRepairableSystem : EntitySystem
             var selfMsg = Loc.GetString("rmc-repairable-start-self", ("target", repairable));
             var othersMsg = Loc.GetString("rmc-repairable-start-others", ("user", user), ("target", repairable));
             _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+            _weldEffect.SpawnWeldEffect(repairable, TimeSpan.FromSeconds(delay));
         }
     }
 
@@ -212,7 +214,13 @@ public sealed class RMCRepairableSystem : EntitySystem
 
     private void OnRepairableDoAfter(Entity<RMCRepairableComponent> repairable, ref RMCRepairableDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled)
+        {
+            _weldEffect.ClearActiveEffect(repairable.Owner);
+            return;
+        }
+
+        if (args.Handled)
             return;
 
         args.Handled = true;
@@ -266,7 +274,7 @@ public sealed class RMCRepairableSystem : EntitySystem
             if (args.Used is not { } used)
                 return;
 
-            var delay = TimeSpan.FromSeconds(GetWeldRepairDelaySeconds(repairable.Comp, args.User, damageable.TotalDamage));
+            var delay = TimeSpan.FromSeconds(GetWeldRepairDelaySeconds(repairable, args.User, damageable.TotalDamage));
             var ev = new RMCRepairableDoAfterEvent();
             var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, repairable, used: used)
             {
@@ -291,10 +299,10 @@ public sealed class RMCRepairableSystem : EntitySystem
             return false;
         }
 
-        if (!_solution.TryGetSolution((tool, welderCon), SOLUTION_WELDER, out var solutionComp, out var solution))
+        if (!_solution.TryGetSolution((tool, welderCon), SolutionWelder, out var solutionComp, out var solution))
             return false;
 
-        if (solution.GetTotalPrototypeQuantity(REAGENT_WELDER) == 0 || solution.GetTotalPrototypeQuantity(REAGENT_WELDER) < fuelUsed)
+        if (solution.GetTotalPrototypeQuantity(ReagentWelder) == 0 || solution.GetTotalPrototypeQuantity(ReagentWelder) < fuelUsed)
         {
             _popup.PopupClient(Loc.GetString("welder-component-no-fuel-message"), user, PopupType.SmallCaution);
             return false;
@@ -302,7 +310,7 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         if (!attempt && _net.IsServer)
         {
-            _solution.RemoveReagent(solutionComp.Value, REAGENT_WELDER, fuelUsed);
+            _solution.RemoveReagent(solutionComp.Value, ReagentWelder, fuelUsed);
             Dirty(solutionComp.Value);
         }
 
@@ -478,13 +486,18 @@ public sealed class RMCRepairableSystem : EntitySystem
             : 0;
     }
 
-    private float GetWeldRepairDelaySeconds(RMCRepairableComponent repairable, EntityUid user, FixedPoint2 totalDamage)
+    private float GetWeldRepairDelaySeconds(Entity<RMCRepairableComponent> repairable, EntityUid user, FixedPoint2 totalDamage)
     {
         var multiplier = _skills.GetSkillDelayMultiplier(user, ConstructionSkill);
+        var baseDelaySeconds = (float) repairable.Comp.Delay.TotalSeconds;
+
+        if (!_tags.HasTag(repairable.Owner, WallTag))
+            return baseDelaySeconds * multiplier;
+
         var damage = totalDamage.Float();
-        var step = MathF.Max(0.0001f, repairable.WeldDelayDamageStep);
-        var scaled = MathF.Floor(damage / step) * multiplier;
-        return MathF.Max(repairable.WeldDelayMinimumSeconds, scaled);
+        var step = MathF.Max(0.0001f, repairable.Comp.WeldDelayDamageStep);
+        var scaledDelay = baseDelaySeconds * (damage / step) * multiplier;
+        return MathF.Max(repairable.Comp.WeldDelayMinimumSeconds, scaledDelay);
     }
 
     private float GetWallNailgunRepairValue(Entity<NailgunRepairableComponent> repairable, ProtoId<StackPrototype> stackType)
