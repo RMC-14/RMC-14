@@ -4,8 +4,8 @@
   id: CMSurvivorPrisoner
   name: cm-job-name-survivor-prisoner
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorSecurity
   greeting: rmc-job-greeting-survivor-fop
+  playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorPrisoner
   spawnMenuRoleName: Prisoner (Survivor)
   special:
@@ -22,7 +22,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack

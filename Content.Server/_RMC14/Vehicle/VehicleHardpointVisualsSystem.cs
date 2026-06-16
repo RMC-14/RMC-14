@@ -7,6 +7,7 @@ namespace Content.Server._RMC14.Vehicle;
 
 public sealed class VehicleHardpointVisualsSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
 
     public override void Initialize()
@@ -98,7 +99,8 @@ public sealed class VehicleHardpointVisualsSystem : EntitySystem
         }
 
         visuals.Layers = newLayers;
-        Dirty(vehicle, visuals);
+        var appearance = EnsureComp<AppearanceComponent>(vehicle);
+        _appearance.SetData(vehicle, VehicleHardpointVisualsVisuals.Layers, newLayers, appearance);
     }
 
     internal string ResolveVisualState(EntityUid item, out bool usesOverlay, int depth = 0)

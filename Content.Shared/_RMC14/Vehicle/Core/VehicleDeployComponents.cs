@@ -9,7 +9,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Vehicle;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(VehicleDeploySystem), typeof(VehicleWeaponsSystem))]
+[Access(typeof(VehicleDeploySystem), typeof(VehicleWeaponsSystem), typeof(VehicleSensorSystem))]
 public sealed partial class VehicleDeployableComponent : Component
 {
     [DataField, AutoNetworkedField]
