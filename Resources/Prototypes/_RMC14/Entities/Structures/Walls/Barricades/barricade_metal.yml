@@ -212,6 +212,7 @@
   name: handrail
   description: A railing, for your hands. Woooow.
   components:
+    - type: VehicleSmashable
     - type: Anchorable
     - type: Sprite
       drawdepth: WallTops

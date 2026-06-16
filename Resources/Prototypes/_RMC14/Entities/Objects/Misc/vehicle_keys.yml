@@ -1,0 +1,41 @@
+- type: entity
+  parent: BaseItem
+  id: RMCVehicleKey
+  name: vehicle key
+  description: A vehicle key cut for a specific lock.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    state: idjanitor
+  - type: Item
+    size: Tiny
+  - type: VehicleKey
+    mode: Normal
+
+- type: entity
+  parent: BaseItem
+  id: RMCVehicleKeyBlank
+  name: blank vehicle key
+  description: An unprogrammed vehicle key that can be imprinted to a vehicle.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    state: idjanitor
+  - type: Item
+    size: Tiny
+  - type: VehicleKey
+    mode: Blank
+
+- type: entity
+  parent: BaseItem
+  id: RMCVehicleKeyDuplicator
+  name: duplicate vehicle key blank
+  description: A blank vehicle key designed to copy an existing vehicle key.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    state: idjanitor
+  - type: Item
+    size: Tiny
+  - type: VehicleKey
+    mode: Duplicator

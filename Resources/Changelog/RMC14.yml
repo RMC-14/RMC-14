@@ -1,184 +1,4 @@
 ﻿Entries:
-- author: TheLuggage05
-  changes:
-  - message: Fixed a typo in the movie ticket helmet garb description.
-    type: Fix
-  id: 2896
-  time: '2026-02-09T05:53:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9127
-- author: Vixting
-  changes:
-  - message: Change Default transfer on pcan to 100u
-    type: Tweak
-  id: 2897
-  time: '2026-02-09T05:54:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9126
-- author: Whisper
-  changes:
-  - message: New Horizon Day now appears in game.
-    type: Add
-  id: 2898
-  time: '2026-02-09T05:58:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9138
-- author: Vixting
-  changes:
-  - message: CMO now spawns with their headset
-    type: Tweak
-  id: 2899
-  time: '2026-02-09T05:57:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9152
-- author: CatAndHats
-  changes:
-  - message: the King's tactical map icon is no longer broken
-    type: Fix
-  id: 2900
-  time: '2026-02-09T05:57:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9156
-- author: Thereisabear
-  changes:
-  - message: Benos can now one hit more items, sod those chairs in particular.
-    type: Add
-  id: 2901
-  time: '2026-02-09T05:55:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9118
-- author: PursuitInAshes
-  changes:
-  - message: The gauss turrets in the fio scavenger ship now have the correct name
-    type: Fix
-  id: 2902
-  time: '2026-02-09T05:56:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9155
-- author: Scyarah
-  changes:
-  - message: Make turrets no longer target burrowed xenos
-    type: Fix
-  id: 2903
-  time: '2026-02-09T06:01:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8910
-- author: Vexerot
-  changes:
-  - message: Queen gib no longer exposes marine identities to xenonids and vice-versa.
-    type: Fix
-  id: 2904
-  time: '2026-02-09T06:04:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8931
-- author: Vixting
-  changes:
-  - message: Xenos can now set their default vision mode in settings, default half
-      light.
-    type: Add
-  - message: SGO / WS sights now default to half light, can be switched to full bright
-      using verb.
-    type: Add
-  id: 2905
-  time: '2026-02-09T06:36:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9123
-- author: DrSmugleaf
-  changes:
-  - message: Added the acid pillar, buildable by base not strained Hivelords, and
-      Queen. It sprays acid at nearby marines and at nearby ignited xenos to put them
-      out. One can be built per xeno that is able to build them, through the Choose
-      Resin Structure action, NOT the order construction action!
-    type: Add
-  - message: Fixed not getting all 8 FTLs round-start, and getting 4 less Comtech
-      and 4 less Corpsmen late-join slots than intended at high pop if not all of
-      them are filled round-start.
-    type: Fix
-  - message: Fixed hedgehog spike shed giving more speed than intended (50% > 20%),
-      and its description mentioning the wrong amount of required minimum spikes.
-    type: Fix
-  - message: Fixed a rare bug with fire never going out.
-    type: Fix
-  - message: Fixed Warrior and other targeted abilities such as Valk Prae's tail fountain
-      targeting the wrong target, potentially across the map.
-    type: Fix
-  - message: Fixed a rare bug with dropships getting stuck travelling forever.
-    type: Fix
-  - message: The toggle ammo type action for smart gun operators now mentions the
-      hotkey by default to activate it, Spacebar by default!
-    type: Tweak
-  id: 2906
-  time: '2026-02-09T08:15:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9170
-- author: noctyrnal
-  changes:
-  - message: Added the LPO80 Incinerator Unit to Sorokyne Strata's Flamer Bodypile
-      insert.
-    type: Add
-  id: 2907
-  time: '2026-02-09T08:57:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9158
-- author: Dygon
-  changes:
-  - message: The ML66D heavy machine gun can now be acquired through requisitions,
-      the combat engineer vendor, and the squad leader vendor. The ML66D is a machine-gun
-      emplacement with IFF capability that requires tools to assemble or disassemble.
-    type: Add
-  - message: The M2C heavy machine gun is now available through requisitions. The
-      M2C is a rapidly deployable machine-gun emplacement that can be rotated, set
-      up, and packed up without tools. Firing it for too long without allowing it
-      to cool will cause it to overheat and take damage. It can be repaired with a
-      welder.
-    type: Add
-  - message: "The dropship part fabricator can now print the A/A-32-P Sentry Defense\
-      \ System (200 points) and the MTU-4B Door Gunner Hardpoint System (50 points).\
-      \ These can be installed in a dropship\u2019s weapon or utility slots and deploy\
-      \ either an omnidirectional sentry gun or a scoped heavy machine-gun nest."
-    type: Add
-  - message: Fuel pump sentries can now be deployed on red alert or higher, and can
-      be undeployed.
-    type: Tweak
-  id: 2908
-  time: '2026-02-06T00:06:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8496
-- author: DrSmugleaf
-  changes:
-  - message: Try to fix buggy behaviour with storages, specially when quickly switching
-      hands and using belt quick-insert keybinds, specially with the medical storage
-      rig.
-    type: Fix
-  id: 2909
-  time: '2026-02-09T12:04:27.512916+00:00'
-  url: null
-- author: CatAndHats
-  changes:
-  - message: Claymores will now fit into explosive pouches and the heavygunner storage
-      rigs
-    type: Fix
-  id: 2910
-  time: '2026-02-09T21:34:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9172
-- author: PursuitinAshes
-  changes:
-  - message: Removed the All Hostile gauss turret in the Chance's Claim admin building.
-    type: Remove
-  id: 2911
-  time: '2026-02-09T21:33:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9154
-- author: Ian321
-  changes:
-  - message: Squad assignment via the ID computer now correctly updates the job title.
-    type: Fix
-  id: 2912
-  time: '2026-02-09T23:16:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9177
-- author: DrSmugleaf
-  changes:
-  - message: Fix xenos not being able to open doors by bumping into them instead of
-      left clicking them.
-    type: Fix
-  - message: Fixed not being able to build hive structures far away from the hive
-      core.
-    type: Fix
-  - message: Fixed xenos not being able to destroy their hive structures.
-    type: Fix
-  - message: Fixed popup spam as designer hivelord when mousing over nodes.
-    type: Fix
-  - message: Updated the roadmap.
-    type: Tweak
-  id: 2913
-  time: '2026-02-09T23:21:41.467674+00:00'
-  url: null
 - author: Dygon
   changes:
   - message: Fixed being able to scope with the ML66D on your back.
@@ -4526,5 +4346,214 @@
   id: 3395
   time: '2026-06-13T00:40:38.866409+00:00'
   url: null
+- author: IceNoobXD
+  changes:
+  - message: The edges of the coagulation pits on trijent dam are now unbreakable!
+    type: Fix
+  id: 3396
+  time: '2026-06-16T01:45:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10166
+- author: Vixting
+  changes:
+  - message: Fix weld effect not being cleared on doafter cancel for rmcrepairable
+    type: Fix
+  id: 3397
+  time: '2026-06-16T01:49:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10161
+- author: Vixting
+  changes:
+  - message: Xenonids can hold down left click to continually build / upgrade.
+    type: Add
+  id: 3398
+  time: '2026-06-16T01:49:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8519
+- author: Arykh
+  changes:
+  - message: Added M56D and M2C ammo entries to the FOB Supplies Vendor(Requisitions
+      tent vendor).
+    type: Add
+  - message: Tries to fix items being deleted when you restock them into a vendor.
+    type: Fix
+  id: 3399
+  time: '2026-06-16T01:48:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10157
+- author: Dygon
+  changes:
+  - message: You no longer hear in-game sounds while in the lobby(for real this time).
+    type: Fix
+  id: 3400
+  time: '2026-06-16T01:46:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10154
+- author: Thereisabear
+  changes:
+  - message: Fixed burrowers being able to create a tunnel on water tiles.
+    type: Fix
+  id: 3401
+  time: '2026-06-16T01:47:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10163
+- author: x5tink
+  changes:
+  - message: Returned light blue outfit to CMO/Doc vendor
+    type: Fix
+  id: 3402
+  time: '2026-06-16T01:50:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10160
+- author: kleinerstation13
+  changes:
+  - message: Added random supply kits - They spawn in the colony and contain assorted
+      items for survivors. Currently unobtainable
+    type: Add
+  id: 3403
+  time: '2026-06-16T01:48:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10159
+- author: Vermidia
+  changes:
+  - message: Fixed gibbed xenos not being selectable when giving royal jellies.
+    type: Fix
+  id: 3404
+  time: '2026-06-16T01:47:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10156
+- author: Thereisabear
+  changes:
+  - message: Fixed mapped empty magazines from firing non-existent bullets if reloaded
+      from a spam can.
+    type: Fix
+  id: 3405
+  time: '2026-06-16T01:51:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10164
+- author: Tuna224
+  changes:
+  - message: Fixed a small grammar mistake in the stethoscopes inspect on wounded
+      patients.
+    type: Fix
+  id: 3406
+  time: '2026-06-16T01:52:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10162
+- author: x5tink
+  changes:
+  - message: Plushie Duplication in loadouts screen
+    type: Fix
+  id: 3407
+  time: '2026-06-16T01:51:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10149
+- author: Vixting
+  changes:
+  - message: Added missing items to the Doctor's medical locker.
+    type: Add
+  id: 3408
+  time: '2026-06-16T01:59:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10152
+- author: Vixting
+  changes:
+  - message: Vehicle system, vehicles can be entered though set points (doors), only
+      one mob can enter through a door at once, vehicles have a set amount of occupants.
+      Once a vehicles frame is destroyed, xenos can enter the vehicle from any angle
+      Vehicles can be operated from the driving seat provided you have the necessary
+      driving skill to operate it. Drivers will have access to a action that allows
+      them to lock / unlock the vehicle, remember to do this.
+    type: Add
+  - message: Vehicle hardpoint system, vehicles have set hardpoints that can be equipped
+      to the vehicle. Hardpoints have their own damage modifiers. A vehicles frame
+      will only take 0.10 of the incoming damage whilst there are unbroken hardpoints
+      present. The rest of the 0.9 damage will be divided amongst the equipped hardpoints,
+      with their own damage modifiers being applied. Hardpoints can be viewed / removed
+      with the use of a crowbar. They can be repaired using a welder.
+    type: Add
+  - message: Colony vans - van, pizza van, box van. These are found present on the
+      colony. Requires driving 1 & van wheels to operate.
+    type: Add
+  - message: Viewports, allow you to view outside of the vehicle.
+    type: Add
+  - message: Vehicle lift, purchased vehicles can be raised from storage here using
+      the vehicle supply console. Vehicles can also be lowered back into storage if
+      wanted, they will keep there accompanying hardpoints when sent into storage.
+      No you cannot lower it when people are inside the  vehicles.
+    type: Add
+  - message: Vehicle hardpoint vendor, purchased vehicles hardpoints can be dispensed
+      here.
+    type: Add
+  - message: ARC tier 1 tech tree unlock. Only SOs, COs & XOs can operate the ARC.
+      Synths & SEAs can drive it. Contains data terminal, Overwatch console & ground
+      operations console. Can be put in deployed mode from the drivers seat, whilst
+      deployed the turret can be operated & by default will enter auto mode. The turret
+      can be overrided from the gunners seat, auto mode can be disabled & stabilization
+      can be enabled. The launcher can be operated from the gunners seat as well.
+      Whilst deployed the arc cannot be driven & the arc will act as a sensors array
+      revealing the location of xenonids around it in a radius. The turret will fire
+      in 3 round bursts.
+    type: Add
+  - message: humvee variants, medical, transport & normal base version. Base versions
+      turret can be used on the move & does not need to be deployed to be activated,
+      fully automatic.
+    type: Add
+  - message: APC varients - base, medical, command. Base version comes with port side
+      SGO guns that can be operated inside the vehicle. Dual & frontal cannons can
+      be added to the APC which make use of IFF rounds. Flare launcher can be attached
+      to launch signal or normal flares.
+    type: Add
+  - message: Tank, spawns with 200 roundstart population alongside 2 vehicle crewman
+      who operate the tank.
+    type: Add
+  - message: DRGN flamer, fires a projectile similiar to the flamer turret that creates
+      a star pattern of high combustion flames along with smoke at point of contact,
+      magazine capacity of 60.
+    type: Add
+  - message: LTAAP minigun, fires AP bullets but requires time to spin up the gun
+      to its full fire rate, 500 round magazine.
+    type: Add
+  - message: ACE autocannon fires projectile that has AOE & fires shrapnel behind
+      the collision, heavy damage, magazine of 40.
+    type: Add
+  - message: '[PVE] LTB cannon, fires shell that has large AOE, destroys structures
+      in large area, will one shot anything, reload of 16 seconds.'
+    type: Add
+  - message: '[PVE] (secondary) Tow launcher, fires AP rockets, magazine of 5, 15
+      second reload.'
+    type: Add
+  - message: Tank flamer, fires napalm fuel, 7 tile range
+    type: Add
+  - message: Grenade launcher, fires HEDP grenades, 10 round magazine.
+    type: Add
+  - message: RE-7000 cupola, fires IFF rounds, smart gun
+    type: Add
+  id: 3409
+  time: '2026-06-16T01:58:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8791
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Charger Crusher colliding with Sapper Boiler traps and wall weeds.
+    type: Fix
+  id: 3410
+  time: '2026-06-16T04:58:59.943817+00:00'
+  url: null
+- author: GrigoriyGalintano
+  changes:
+  - message: Added data disks, SIGINT disk upload, data terminals, safe cracking,
+      and experimental device retrieve objectives for Intelligence Officers.
+    type: Add
+  - message: Added personal intel clues and expanded the intel objectives UI.
+    type: Add
+  - message: Added computer disk, experimental device, and floor safe sprites.
+    type: Add
+  - message: Reworked intel clue progression to guide IOs from documents into disks,
+      safes, terminals, and retrieve objectives.
+    type: Tweak
+  id: 3411
+  time: '2026-06-16T04:58:59.953817+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9950
+- author: kukurua
+  changes:
+  - message: The M276 medical belt will be able to store syringe and surgical cases.
+    type: Add
+  id: 3412
+  time: '2026-06-16T08:08:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9954
+- author: carccborg
+  changes:
+  - message: The SU-6 Smart Pistol can no longer be used with hold-to-fire.
+    type: Tweak
+  id: 3413
+  time: '2026-06-16T13:52:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10130
 Name: RMC14
 Order: -1

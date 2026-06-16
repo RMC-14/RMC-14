@@ -87,6 +87,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         SubscribeLocalEvent<RMCFlamerNozzleComponent, TakeAmmoEvent>(OnNozzleTakeAmmo);
         SubscribeLocalEvent<RMCFlamerNozzleComponent, UniqueActionEvent>(OnNozzleUniqueAction);
+
+        SubscribeLocalEvent<RMCFlamerChainComponent, ComponentShutdown>(OnFlamerChainShutdown);
     }
 
     private void OnMapInit(Entity<RMCFlamerAmmoProviderComponent> ent, ref MapInitEvent args)
@@ -674,6 +676,11 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         }
 
         OnIgniterUniqueAction((transform.ParentUid, igniter), ref args);
+    }
+
+    private void OnFlamerChainShutdown(Entity<RMCFlamerChainComponent> ent, ref ComponentShutdown args)
+    {
+        _onCollide.CleanupChain(ent.Comp.Chain);
     }
 
     public override void Update(float frameTime)

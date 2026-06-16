@@ -127,6 +127,18 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCAtmosTileEqualize =
         CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> VehicleDebugOverlay =
+        CVarDef.Create("rmc.vehicle.debug_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> VehicleHardpointOverlay =
+        CVarDef.Create("rmc.vehicle.hardpoint_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> VehicleCollisionOverlay =
+        CVarDef.Create("rmc.vehicle.collision_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> VehicleMovementOverlay =
+        CVarDef.Create("rmc.vehicle.movement_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
     public static readonly CVarDef<bool> RMCGasTileOverlayUpdate =
         CVarDef.Create("rmc.gas_tile_overlay_update", false, CVar.REPLICATED | CVar.SERVER);
 
@@ -231,6 +243,9 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCSurvivorsMaximum =
         CVarDef.Create("rmc.survivors_maximum", 7, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCVehicleRoundstartThresholdPlayers =
+        CVarDef.Create("rmc.vehicle_roundstart_threshold_players", 200, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSpawnerMaxCorpses =
         CVarDef.Create("rmc.spawner_max_corpses", 100, CVar.REPLICATED | CVar.SERVER);
@@ -389,6 +404,12 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCIntelDisks =
         CVarDef.Create("rmc.intel_disks", 30, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelDataTerminals =
+        CVarDef.Create("rmc.intel_data_terminals", 6, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelSafes =
+        CVarDef.Create("rmc.intel_safes", 3, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCIntelExperimentalDevices =
         CVarDef.Create("rmc.intel_experimental_devices", 15, CVar.REPLICATED | CVar.SERVER);

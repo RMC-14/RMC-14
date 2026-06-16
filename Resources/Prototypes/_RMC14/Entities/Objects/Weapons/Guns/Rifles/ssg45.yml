@@ -295,8 +295,7 @@
   id: RMCMagazineRifleSSG45HEAPEmpty
   suffix: HEAP, Empty
   components:
-  - type: BallisticAmmoProvider
-    proto: null
+  - type: RMCEmptyMag
 
 - type: entity
   parent: RMCMagazineRifleSSG45
