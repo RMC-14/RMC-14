@@ -78,6 +78,7 @@
       - id: RMCScrubsBrown
       - id: RMCScrubsWhite
       - id: RMCScrubsBlack
+      - id: RMCScrubsLightBlue
     - name: Suit
       jobs:
       - CMNurse
