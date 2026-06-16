@@ -137,6 +137,8 @@
     maxIntegrity: 100
   - type: HardpointVisual
     vehicleState: comms_relay_0
+  - type: VehicleSensor
+    range: 40
 
 - type: entity
   parent: RMCAPCHardpointBase

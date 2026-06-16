@@ -1,61 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Fixed being able to scope with the ML66D on your back.
-    type: Fix
-  id: 2914
-  time: '2026-02-10T00:40:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9180
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Designer Hivelord weedbound walls and doors getting deleted if
-      their weeds are replaced by hardy or hive weeds.
-    type: Fix
-  id: 2915
-  time: '2026-02-10T00:43:51.599298+00:00'
-  url: null
-- author: Dygon
-  changes:
-  - message: Fixed the dropship arrival sound not playing right before a dropship
-      lands.
-    type: Fix
-  id: 2916
-  time: '2026-02-10T02:39:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9186
-- author: Dygon
-  changes:
-  - message: Fixed being able to place multiple machine guns on the same tile.
-    type: Fix
-  id: 2917
-  time: '2026-02-10T02:39:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9188
-- author: Ian321
-  changes:
-  - message: The smart refill tank can now be filled and emptied like a beaker.
-    type: Tweak
-  id: 2918
-  time: '2026-02-10T02:41:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9185
-- author: CatAndHats
-  changes:
-  - message: Accentless trait now correctly removes Vulpkanin default accent
-    type: Fix
-  id: 2919
-  time: '2026-02-10T02:41:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9183
-- author: DrSmugleaf
-  changes:
-  - message: Fixed M2C and ML66D magazines disappearing when transferring between
-      them.
-    type: Fix
-  - message: Fixed the sticky resin left behind by destroyed weedbound resin slowing
-      down xenos of the same hive.
-    type: Fix
-  id: 2920
-  time: '2026-02-10T02:57:13.062736+00:00'
-  url: null
-- author: Dygon
-  changes:
   - message: Fixed Tail Seize looking like it shot twice in a row with a single use.
     type: Fix
   - message: The Oppressor's Abduct ability now pulls it's targets slightly closer
@@ -4555,5 +4500,71 @@
   id: 3413
   time: '2026-06-16T13:52:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10130
+- author: Vixting
+  changes:
+  - message: XO now has vehicles 2
+    type: Tweak
+  - message: New locker sprites from Noctyrnal
+    type: Add
+  id: 3414
+  time: '2026-06-16T19:53:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10175
+- author: CatAndHats
+  changes:
+  - message: Fixed LV624 central cave inserts not having invincible resin
+    type: Fix
+  id: 3415
+  time: '2026-06-16T19:55:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10172
+- author: CatAndHats
+  changes:
+  - message: Added some items to Shiva's like wheelchairs, sleeper pods, scanner pods,
+      MB-6 folding cade, some couches.
+    type: Add
+  - message: Fixed a spot on Shiva's where invincible resin fog was placed instead
+      of invincible resin doors, and two spots where invincible resin doors were doubled/tripled
+      on the same tile.
+    type: Fix
+  id: 3416
+  time: '2026-06-16T19:58:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10075
+- author: CatAndHats
+  changes:
+  - message: Added MB-6 folding composite barricades, ponchos, M1911s (replacing M1984s),
+      and decks of cards to Chance's Claim
+    type: Add
+  - message: Fixed an area filled with metal foam on Chance's Claim that was set as
+      Out Of Bounds area instead of the correct mining area
+    type: Fix
+  - message: Fixed two rooms on Chance's Claim not being connected to the pipe net
+    type: Fix
+  id: 3417
+  time: '2026-06-16T19:57:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10080
+- author: kleinerstation13
+  changes:
+  - message: Security Colonists can no longer become Prisoners, you must now roll
+      Civilian Colonist to become one
+    type: Tweak
+  id: 3418
+  time: '2026-06-16T20:00:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10177
+- author: CatAndHats
+  changes:
+  - message: Added the proper Surplus Boxes of Ingredients crate to Requisitions for
+      purchase, and it will be randomly given by ASRS on the goods lift
+    type: Add
+  - message: Added RMC-specific Milk and Soy Milk cartons
+    type: Add
+  id: 3419
+  time: '2026-06-16T19:59:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9985
+- author: Thereisabear
+  changes:
+  - message: Fixed Xenos being able to collapse the MB-6 folding barricade.
+    type: Fix
+  id: 3420
+  time: '2026-06-16T20:13:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10170
 Name: RMC14
 Order: -1
