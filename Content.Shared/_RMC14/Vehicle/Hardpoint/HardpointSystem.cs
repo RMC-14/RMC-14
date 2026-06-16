@@ -1040,12 +1040,6 @@ public sealed partial class HardpointSystem : EntitySystem
             return;
         }
 
-        if (usedWelder && !_repairable.UseFuel(used, args.User, ent.Comp.RepairFuelCost, true))
-        {
-            args.Handled = true;
-            return;
-        }
-
         var repairAmount = GetRepairAmountForCurrentStep(ent.Owner, ent.Comp, usedWelder, usedWrench, isFrame);
         if (repairAmount <= 0f)
         {
@@ -1054,6 +1048,12 @@ public sealed partial class HardpointSystem : EntitySystem
         }
 
         var repairTime = GetRepairTimeForCurrentStep(ent.Owner, args.User, ent.Comp, repairAmount, isFrame);
+
+        if (usedWelder && !_repairable.UseFuel(used, args.User, GetFuelCostForChunk(ent.Owner, ent.Comp, repairAmount, isFrame), true))
+        {
+            args.Handled = true;
+            return;
+        }
 
         ent.Comp.Repairing = true;
 
@@ -1092,7 +1092,7 @@ public sealed partial class HardpointSystem : EntitySystem
 
         if (usedWelder)
         {
-            if (used == null || !_repairable.UseFuel(used.Value, args.User, ent.Comp.RepairFuelCost))
+            if (used == null || !_repairable.UseFuel(used.Value, args.User, GetFuelCostForChunk(ent.Owner, ent.Comp, GetRepairAmountForCurrentStep(ent.Owner, ent.Comp, usedWelder, usedWrench, isFrame), isFrame)))
                 return;
         }
 
@@ -1168,19 +1168,53 @@ public sealed partial class HardpointSystem : EntitySystem
         var repairFraction = repairAmount / integrity.MaxIntegrity;
         var skillMultiplier = _skills.GetSkillDelayMultiplier(user, EngineerSkill);
 
+        float time;
         if (isFrame)
-            return integrity.FrameRepairChunkSeconds * (repairFraction / integrity.RepairChunkFraction) * skillMultiplier;
+            time = integrity.FrameRepairChunkSeconds * (repairFraction / integrity.RepairChunkFraction) * skillMultiplier;
+        else
+        {
+            var repairRate = GetHardpointRepairRate(uid);
+            time = (repairFraction / repairRate) * skillMultiplier;
+        }
 
-        var repairRate = GetHardpointRepairRate(uid);
-        return (repairFraction / repairRate) * skillMultiplier;
+        return MathF.Max(1f, time);
     }
 
     private float GetHardpointRepairRate(EntityUid uid)
     {
-        if (TryComp(uid, out HardpointItemComponent? hardpoint))
-            return hardpoint.RepairRate > 0f ? hardpoint.RepairRate : 0.01f;
+        if (!TryComp(uid, out HardpointItemComponent? hardpoint))
+            return 0.05f;
 
-        return 0.01f;
+        if (hardpoint.SlotType is { } slotTypeId &&
+            _prototypeManager.TryIndex<Robust.Shared.Prototypes.EntityPrototype>(slotTypeId, out var proto) &&
+            proto.Components.TryGetValue("HardpointSlotType", out var entry) &&
+            entry.Component is HardpointSlotTypeComponent slotTypeComp &&
+            slotTypeComp.RepairRate > 0f)
+        {
+            return slotTypeComp.RepairRate;
+        }
+
+        return hardpoint.RepairRate > 0f ? hardpoint.RepairRate : 0.05f;
+    }
+
+    private FixedPoint2 GetFuelCostForChunk(EntityUid uid, HardpointIntegrityComponent integrity, float repairAmount, bool isFrame)
+    {
+        if (integrity.MaxIntegrity <= 0f || repairAmount <= 0f)
+            return FixedPoint2.New(1);
+
+        var repairFraction = repairAmount / integrity.MaxIntegrity;
+
+        float baseSeconds;
+        if (isFrame)
+            baseSeconds = integrity.FrameRepairChunkSeconds * (repairFraction / integrity.RepairChunkFraction);
+        else
+        {
+            var repairRate = GetHardpointRepairRate(uid);
+            baseSeconds = repairFraction / repairRate;
+        }
+
+        var fuelAmount = (int)Math.Max(1, Math.Round(baseSeconds * (float)integrity.FuelPerSecond));
+        return FixedPoint2.New(fuelAmount);
     }
 
     private bool ShouldRepeatRepair(

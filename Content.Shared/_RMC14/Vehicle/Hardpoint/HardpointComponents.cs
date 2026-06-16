@@ -117,7 +117,7 @@ public sealed partial class HardpointIntegrityComponent : Component
     public float Integrity;
 
     [DataField]
-    public FixedPoint2 RepairFuelCost = FixedPoint2.New(5);
+    public FixedPoint2 FuelPerSecond = FixedPoint2.New(1);
 
     [DataField]
     public SoundSpecifier? RepairSound;
@@ -141,7 +141,7 @@ public sealed partial class HardpointIntegrityComponent : Component
     public float RepairChunkMinimum = 0.01f;
 
     [DataField]
-    public float FrameRepairChunkSeconds = 2f;
+    public float FrameRepairChunkSeconds = 1f;
 
     [DataField, AutoNetworkedField]
     public bool BypassEntryOnZero;

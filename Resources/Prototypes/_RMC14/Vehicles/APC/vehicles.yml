@@ -163,7 +163,6 @@
     slotCount: 1
   - type: HardpointIntegrity
     maxIntegrity: 1000
-    repairFuelCost: 15
     bypassEntryOnZero: true
   - type: Appearance
   - type: VehicleEnter
