@@ -45,7 +45,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyCLF
-  name: militia encryption key
+  name: militia encryption key # CLF Radio Encryption Key but changed to just be RMC in line name
   components:
   - type: EncryptionKey
     channels:
