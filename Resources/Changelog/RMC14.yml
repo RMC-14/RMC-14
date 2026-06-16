@@ -1,62 +1,6 @@
 ﻿Entries:
 - author: Vixting
   changes:
-  - message: Change Default transfer on pcan to 100u
-    type: Tweak
-  id: 2897
-  time: '2026-02-09T05:54:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9126
-- author: Whisper
-  changes:
-  - message: New Horizon Day now appears in game.
-    type: Add
-  id: 2898
-  time: '2026-02-09T05:58:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9138
-- author: Vixting
-  changes:
-  - message: CMO now spawns with their headset
-    type: Tweak
-  id: 2899
-  time: '2026-02-09T05:57:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9152
-- author: CatAndHats
-  changes:
-  - message: the King's tactical map icon is no longer broken
-    type: Fix
-  id: 2900
-  time: '2026-02-09T05:57:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9156
-- author: Thereisabear
-  changes:
-  - message: Benos can now one hit more items, sod those chairs in particular.
-    type: Add
-  id: 2901
-  time: '2026-02-09T05:55:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9118
-- author: PursuitInAshes
-  changes:
-  - message: The gauss turrets in the fio scavenger ship now have the correct name
-    type: Fix
-  id: 2902
-  time: '2026-02-09T05:56:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9155
-- author: Scyarah
-  changes:
-  - message: Make turrets no longer target burrowed xenos
-    type: Fix
-  id: 2903
-  time: '2026-02-09T06:01:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8910
-- author: Vexerot
-  changes:
-  - message: Queen gib no longer exposes marine identities to xenonids and vice-versa.
-    type: Fix
-  id: 2904
-  time: '2026-02-09T06:04:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8931
-- author: Vixting
-  changes:
   - message: Xenos can now set their default vision mode in settings, default half
       light.
     type: Add
@@ -4526,5 +4470,65 @@
   id: 3396
   time: '2026-06-16T01:45:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10166
+- author: Vixting
+  changes:
+  - message: Fix weld effect not being cleared on doafter cancel for rmcrepairable
+    type: Fix
+  id: 3397
+  time: '2026-06-16T01:49:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10161
+- author: Vixting
+  changes:
+  - message: Xenonids can hold down left click to continually build / upgrade.
+    type: Add
+  id: 3398
+  time: '2026-06-16T01:49:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8519
+- author: Arykh
+  changes:
+  - message: Added M56D and M2C ammo entries to the FOB Supplies Vendor(Requisitions
+      tent vendor).
+    type: Add
+  - message: Tries to fix items being deleted when you restock them into a vendor.
+    type: Fix
+  id: 3399
+  time: '2026-06-16T01:48:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10157
+- author: Dygon
+  changes:
+  - message: You no longer hear in-game sounds while in the lobby(for real this time).
+    type: Fix
+  id: 3400
+  time: '2026-06-16T01:46:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10154
+- author: Thereisabear
+  changes:
+  - message: Fixed burrowers being able to create a tunnel on water tiles.
+    type: Fix
+  id: 3401
+  time: '2026-06-16T01:47:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10163
+- author: x5tink
+  changes:
+  - message: Returned light blue outfit to CMO/Doc vendor
+    type: Fix
+  id: 3402
+  time: '2026-06-16T01:50:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10160
+- author: kleinerstation13
+  changes:
+  - message: Added random supply kits - They spawn in the colony and contain assorted
+      items for survivors. Currently unobtainable
+    type: Add
+  id: 3403
+  time: '2026-06-16T01:48:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10159
+- author: Vermidia
+  changes:
+  - message: Fixed gibbed xenos not being selectable when giving royal jellies.
+    type: Fix
+  id: 3404
+  time: '2026-06-16T01:47:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10156
 Name: RMC14
 Order: -1
