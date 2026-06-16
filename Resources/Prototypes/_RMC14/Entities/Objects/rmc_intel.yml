@@ -284,15 +284,15 @@
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
-        - name: Humvee ARC
-          description: Unlocks the ARC-configured humvee for vehicle supply.
+        - name: rmc-intel-tech-requisition-arc-name
+          description: rmc-intel-tech-requisition-arc-description
           cost: 5
           events:
           - !type:TechUnlockVehicleEvent
             unlock: VehicleHumveeARC
           - !type:TechAnnounceEvent
-            author: ALMAYER SPECIAL ASSETS AUTHORIZED
-            message: ARC deployment has been authorised for this operation.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-arc
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: humvee

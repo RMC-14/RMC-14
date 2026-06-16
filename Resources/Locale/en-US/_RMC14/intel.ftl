@@ -125,6 +125,8 @@ rmc-intel-tech-unlock-tier-2-name = Unlock Tier 2
 rmc-intel-tech-unlock-tier-3-name = Unlock Tier 3
 rmc-intel-tech-unlock-tier-4-name = Unlock Tier 4
 rmc-intel-tech-unlock-tier-description = Transitions the tree to another tier.
+rmc-intel-tech-requisition-arc-name = Humvee ARC
+rmc-intel-tech-requisition-arc-description = Unlocks the ARC-configured humvee for vehicle supply.
 rmc-intel-tech-requisition-budget-name = Requisition Budget Increase
 rmc-intel-tech-requisition-budget-description = Distributes resources to requisitions for spending.
 rmc-intel-tech-dropship-budget-name = Dropship Budget Increase
@@ -145,6 +147,7 @@ rmc-intel-tech-nuclear-device-description = Purchase a nuclear device. Only purc
 ## Tech Tree Announcements
 rmc-intel-tech-announcement-special-assets-author = ALMAYER SPECIAL ASSETS AUTHORIZED
 rmc-intel-tech-announcement-defcon-author = ALMAYER DEFCON LEVEL INCREASED
+rmc-intel-tech-announcement-arc = ARC deployment has been authorised for this operation.
 rmc-intel-tech-announcement-requisition-budget = Additional supply budget has been authorised for this operation.
 rmc-intel-tech-announcement-dropship-budget = Additional dropship part fabricator points have been authorised for this operation.
 rmc-intel-tech-announcement-tier-2 = THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 2. LEVEL 2 assets have been authorised to handle the situation.
