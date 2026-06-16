@@ -127,6 +127,18 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCAtmosTileEqualize =
         CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> VehicleDebugOverlay =
+        CVarDef.Create("rmc.vehicle.debug_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> VehicleHardpointOverlay =
+        CVarDef.Create("rmc.vehicle.hardpoint_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> VehicleCollisionOverlay =
+        CVarDef.Create("rmc.vehicle.collision_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> VehicleMovementOverlay =
+        CVarDef.Create("rmc.vehicle.movement_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
     public static readonly CVarDef<bool> RMCGasTileOverlayUpdate =
         CVarDef.Create("rmc.gas_tile_overlay_update", false, CVar.REPLICATED | CVar.SERVER);
 
@@ -231,6 +243,9 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCSurvivorsMaximum =
         CVarDef.Create("rmc.survivors_maximum", 7, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCVehicleRoundstartThresholdPlayers =
+        CVarDef.Create("rmc.vehicle_roundstart_threshold_players", 200, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSpawnerMaxCorpses =
         CVarDef.Create("rmc.spawner_max_corpses", 100, CVar.REPLICATED | CVar.SERVER);

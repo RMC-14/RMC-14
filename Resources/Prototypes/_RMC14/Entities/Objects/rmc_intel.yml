@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: RMCIntelBase
@@ -192,6 +192,18 @@
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
+        - name: Humvee ARC
+          description: Unlocks the ARC-configured humvee for vehicle supply.
+          cost: 5
+          events:
+          - !type:TechUnlockVehicleEvent
+            unlock: VehicleHumveeARC
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: ARC deployment has been authorised for this operation.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: humvee
         - name: Requisition Budget Increase
           description: Distributes resources to requisitions for spending.
           cost: 7
@@ -347,6 +359,7 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: nuke
+  - type: VehicleSupplyTech
 - type: Tag
   id: RMCIntelItem
 
