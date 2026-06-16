@@ -94,6 +94,7 @@ rmc-vehicle-enter-use-doorway = You need to use a doorway to enter.
 rmc-vehicle-enter-busy = Someone is already entering there.
 rmc-vehicle-enter-xeno-full = There's no room for more xenos inside.
 rmc-vehicle-enter-passenger-full = There's no room for more passengers inside.
+rmc-vehicle-enter-pulled-full = There's no room for who you're dragging inside.
 rmc-vehicle-hull-destroyed = The vehicle's hull is destroyed.
 rmc-vehicle-exit-busy = Someone is already using this exit.
 rmc-vehicle-exit-blocked = The exit is blocked.

@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle;
@@ -14,6 +16,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
@@ -38,6 +41,7 @@ public sealed class VehicleSystem : EntitySystem
 {
     private static readonly EntProtoId VehicleKey = "RMCVehicleKey";
 
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
@@ -49,6 +53,7 @@ public sealed class VehicleSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -78,6 +83,7 @@ public sealed class VehicleSystem : EntitySystem
         SubscribeLocalEvent<VehicleInteriorOccupantComponent, MapUidChangedEvent>(OnOccupantMapChanged);
         SubscribeLocalEvent<VehicleInteriorOccupantComponent, MetaFlagRemoveAttemptEvent>(OnOccupantMetaFlagRemoveAttempt);
         SubscribeLocalEvent<HardpointIntegrityComponent, VehicleCanRunEvent>(OnFrameVehicleCanRun);
+        SubscribeLocalEvent<VehicleInteriorComponent, VehicleFrameIntegrityChangedEvent>(OnVehicleFrameIntegrityChanged);
         SubscribeLocalEvent<RMCConstructionAttemptEvent>(OnConstructionAttempt);
     }
 
@@ -173,10 +179,40 @@ public sealed class VehicleSystem : EntitySystem
         if (!TryGetInteriorEntryCoordinates(ent, entryIndex, out var coords))
             return false;
 
-        var targetMapCoords = _transform.ToMapCoordinates(coords);
-        _rmcTeleporter.HandlePulling(user, targetMapCoords);
+        EntityUid? pulled = null;
+        if (!isGhost &&
+            TryComp(user, out PullerComponent? puller) &&
+            puller.Pulling is { } pulling &&
+            pulling != ent.Owner &&
+            !HasComp<GhostComponent>(pulling))
+        {
+            pulled = pulling;
+        }
+
         if (!isGhost)
             TrackOccupant(user, ent.Owner, isXeno);
+
+        if (pulled is { } pulledUid)
+        {
+            var pulledIsXeno = HasComp<XenoComponent>(pulledUid);
+            var pulledAllowed = pulledIsXeno
+                ? ent.Comp.MaxXenos <= 0 || interior.Xenos.Contains(pulledUid) || CountLivingOccupants(interior.Xenos) < ent.Comp.MaxXenos
+                : ent.Comp.MaxPassengers <= 0 || interior.Passengers.Contains(pulledUid) || CanEnterAsPassenger(ent, interior, pulledUid);
+
+            if (!pulledAllowed)
+            {
+                if (!isGhost)
+                    UntrackOccupant(user, ent.Owner);
+
+                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-pulled-full"), user, user);
+                return false;
+            }
+
+            TrackOccupant(pulledUid, ent.Owner, pulledIsXeno);
+        }
+
+        var targetMapCoords = _transform.ToMapCoordinates(coords);
+        _rmcTeleporter.HandlePulling(user, targetMapCoords);
         return true;
     }
 
@@ -900,6 +936,22 @@ public sealed class VehicleSystem : EntitySystem
             return;
 
         args.CanRun = false;
+    }
+
+    private void OnVehicleFrameIntegrityChanged(Entity<VehicleInteriorComponent> ent, ref VehicleFrameIntegrityChangedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var interior = ent.Comp;
+        if (!interior.Grid.IsValid() || !EntityManager.EntityExists(interior.Grid))
+            return;
+
+        if (!_area.TryGetArea(interior.Grid, out var area, out _))
+            return;
+
+        if (_area.SetAlwaysPowered(area.Value, args.Intact))
+            _rmcPower.RecalculatePower();
     }
 
     private void OnConstructionAttempt(ref RMCConstructionAttemptEvent ev)
