@@ -963,6 +963,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatOveralls
+  name: blue coveralls
+  description: A pair of denim overalls. With a large pocket in the front these overalls are popular with workers of all kinds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/overalls.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/overalls.rsi
+
 # Chance's Claim
 
 - type: entity

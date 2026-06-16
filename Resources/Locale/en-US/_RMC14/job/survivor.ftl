@@ -286,6 +286,8 @@ rmc-job-prefix-soro-sof-soldier = 121/RECON SOL
 
 # Trijent survs
 
+rmc-job-name-survivor-trijent-roughneck = Roughneck
+
 rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain
 
 rmc-job-name-survivor-trijent-goon = Trijent Dam Security
