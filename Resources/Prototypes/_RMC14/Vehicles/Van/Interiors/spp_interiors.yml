@@ -1,0 +1,254 @@
+- type: entity
+  abstract: true
+  id: VehicleSPPVanRoofBase
+  name: SPP van interior roof
+  description: Side door
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppvan.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: interior_door
+      map: [ "roof" ]
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
+  id: VehicleSPPVanInteriorBase
+  name: SPP van interior piece
+  description: A decorative interior piece for an SPP van.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppvan.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  id: VehicleSPPVanChassisBase
+  name: SPP van interior chassis
+  description: A chassis segment for an SPP van interior.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppvan_chassis.rsi
+    drawdepth: FloorTiles
+  - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleSPPVanChassisBase
+  id: VehicleSPPVanChassis
+  components:
+  - type: Sprite
+    state: sppvan_chassis
+
+- type: entity
+  parent: VehicleSPPVanChassisBase
+  id: VehicleSPPVanChassisArmed
+  components:
+  - type: Sprite
+    state: sppvant_chassis
+
+- type: entity
+  parent: VehicleSPPVanChassisBase
+  id: VehicleSPPVanChassisLogistics
+  components:
+  - type: Sprite
+    state: sppvan_logistics_chassis
+
+- type: entity
+  abstract: true
+  parent: VehicleSPPVanInteriorBase
+  id: VehicleSPPVanWallBase
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Occluder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+
+- type: entity
+  abstract: true
+  parent: VehicleSPPVanWallBase
+  id: VehicleSPPVanDoorBase
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleSPPVanWallBase
+  id: VehicleSPPVanBack1
+  components:
+  - type: Sprite
+    state: back_1
+
+- type: entity
+  parent: VehicleSPPVanWallBase
+  id: VehicleSPPVanBack2
+  components:
+  - type: Sprite
+    state: back_2
+
+- type: entity
+  parent: VehicleSPPVanInteriorBase
+  id: VehicleSPPVanViewportBase
+  placement:
+    mode: PlaceFree
+  components:
+  - type: WallMount
+    arc: 360
+  - type: Clickable
+  - type: InteractionOutline
+  - type: VehicleViewport
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleSPPVanViewportBase
+  id: VehicleSPPVanViewportSimple
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    state: viewport_simple
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: VehicleSPPVanViewportBase
+  id: VehicleSPPVanViewportSimpleFront
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    state: viewport_simple_front
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: VehicleSPPVanRoofBase
+  id: VehicleSPPVanInteriorDoor
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    layers:
+    - state: interior_door
+      map: [ "roof" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleSPPVanInteriorDoor
+  id: VehicleSPPVanInteriorDoorRoof
+  name: SPP van interior roof door
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+
+- type: entity
+  parent: VehicleSPPVanInteriorBase
+  id: VehicleSPPVanExteriorDoorUnique
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    state: exterior_door_unique
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  parent: CMClosetBase
+  id: VehicleSPPVanStorageBase
+  name: SPP van storage
+  description: A small storage locker for an SPP van interior.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppvan.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: small_storage
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: small_storage
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: EntityStorageVisuals
+    stateBaseClosed: small_storage
+    stateBaseOpen: small_storage_open
+    stateDoorClosed:
+    stateDoorOpen:
+
+- type: entity
+  parent: VehicleSPPVanStorageBase
+  id: VehicleSPPVanSmallStorage
+  name: SPP van small storage
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleSPPVanAmmoLoader
+  name: SPP van ammo loader
+  description: A loader for SPP vehicle hardpoint ammunition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppvan.rsi
+    state: weapons_loader
+  - type: VehicleAmmoLoader
+  - type: UserInterface
+    interfaces:
+      enum.VehicleAmmoLoaderUiKey.Key:
+        type: VehicleAmmoLoaderBoundUserInterface

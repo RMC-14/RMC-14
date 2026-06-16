@@ -1,0 +1,139 @@
+- type: entity
+  id: HardpointVehicleFamilyVan
+  components:
+  - type: HardpointVehicleFamily
+
+- type: entity
+  id: HardpointVehicleFamilyAPC
+  components:
+  - type: HardpointVehicleFamily
+
+- type: entity
+  id: HardpointVehicleFamilyHumvee
+  components:
+  - type: HardpointVehicleFamily
+
+- type: entity
+  id: HardpointVehicleFamilyTank
+  components:
+  - type: HardpointVehicleFamily
+
+- type: entity
+  id: HardpointTypeWheel
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeTurret
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeCannon
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeLauncher
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeArmor
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeSupport
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeSupportAttachment
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeRoofAttachment
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeFrontAttachment
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointTypeSecondary
+  components:
+  - type: HardpointType
+
+- type: entity
+  id: HardpointCompatibilitySPPVan
+  components:
+  - type: HardpointCompatibility
+
+- type: entity
+  id: HardpointCompatibilitySPPAPC
+  components:
+  - type: HardpointCompatibility
+
+- type: entity
+  id: HardpointCompatibilitySPPAPCTurret
+  components:
+  - type: HardpointCompatibility
+
+- type: entity
+  id: HardpointCompatibilitySPPTank
+  components:
+  - type: HardpointCompatibility
+
+- type: entity
+  id: HardpointSlotTypeWheel
+  components:
+  - type: HardpointSlotType
+
+- type: entity
+  id: HardpointSlotTypeTurret
+  components:
+  - type: HardpointSlotType
+
+- type: entity
+  id: HardpointSlotTypeCannon
+  components:
+  - type: HardpointSlotType
+
+- type: entity
+  id: HardpointSlotTypeLauncher
+  components:
+  - type: HardpointSlotType
+
+- type: entity
+  id: HardpointSlotTypeRoofAttachment
+  components:
+  - type: HardpointSlotType
+
+- type: entity
+  id: HardpointSlotTypeFrontAttachment
+  components:
+  - type: HardpointSlotType
+
+- type: entity
+  id: HardpointSlotTypeSupportAttachment
+  components:
+  - type: HardpointSlotType
+
+- type: entity
+  id: HardpointSlotTypeArmor
+  components:
+  - type: HardpointSlotType
+
+- type: entity
+  id: HardpointSlotTypeTreads
+  components:
+  - type: HardpointSlotType
+
+- type: entity
+  id: HardpointSlotTypeTires
+  components:
+  - type: HardpointSlotType

@@ -84,6 +84,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         SubscribeLocalEvent<RMCFlamerIntenseModeComponent, UniqueActionEvent>(OnFlamerIntenseModeUniqueAction);
         SubscribeLocalEvent<RMCFlamerIntenseModeComponent, RMCFlamerIntenseModeActionEvent>(OnFlamerIntenseModeAction);
         SubscribeLocalEvent<RMCFlamerIntenseModeComponent, ExaminedEvent>(OnFlamerIntenseModeUniqueActionExamine, before: [typeof(SharedGunSystem)]);
+
+        SubscribeLocalEvent<RMCFlamerChainComponent, ComponentShutdown>(OnFlamerChainShutdown);
     }
 
     private void OnMapInit(Entity<RMCFlamerAmmoProviderComponent> ent, ref MapInitEvent args)
@@ -699,6 +701,10 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     public void OnFlamerIntenseModeUniqueActionExamine(Entity<RMCFlamerIntenseModeComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
+
+    private void OnFlamerChainShutdown(Entity<RMCFlamerChainComponent> ent, ref ComponentShutdown args)
+    {
+        _onCollide.CleanupChain(ent.Comp.Chain);
     }
 
     public override void Update(float frameTime)
