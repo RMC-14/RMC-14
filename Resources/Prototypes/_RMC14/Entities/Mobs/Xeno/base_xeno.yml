@@ -51,6 +51,13 @@
     - Alive
     - Critical
     - Dead
+  - type: Language
+    spokenLanguages:
+    - Xeno
+    understoodLanguages:
+    - Xeno
+    currentLanguage: Xeno
+    defaultLanguage: Xeno
   - type: MobThresholds
     thresholds:
       0: Alive
