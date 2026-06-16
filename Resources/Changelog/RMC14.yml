@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Claymores will now fit into explosive pouches and the heavygunner storage
-      rigs
-    type: Fix
-  id: 2910
-  time: '2026-02-09T21:34:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9172
 - author: PursuitinAshes
   changes:
   - message: Removed the All Hostile gauss turret in the Chance's Claim admin building.
@@ -4558,5 +4550,12 @@
   id: 3409
   time: '2026-06-16T01:58:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8791
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Charger Crusher colliding with Sapper Boiler traps and wall weeds.
+    type: Fix
+  id: 3410
+  time: '2026-06-16T04:58:59.943817+00:00'
+  url: null
 Name: RMC14
 Order: -1
