@@ -58,6 +58,7 @@
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: RMCAllowStrapMovement
   - type: Strap
+    modifyBuckleDrawDepth: false
     buckleSound:
       path: /Audio/_RMC14/Mecha/powerloader_buckle.ogg
       params:
@@ -164,7 +165,7 @@
   parent: RMCMechBase
   id: RMCMechPowerLoader
   name: LU-50 Power loader
-  description: An old Fujin design refurbished by Weston-Yamada used in warehouses, constructions and military ships everywhere. # TODO RMC14 BETTER DESCRIPTION
+  description: An old design refurbished by Weston-Yamada used in warehouses, constructions and military ships everywhere. # TODO RMC14 BETTER DESCRIPTION
   components:
   - type: PowerLoader
     skills:
@@ -189,7 +190,7 @@
   parent: RMCMechPowerLoader
   id: RMCMechPowerLoaderGreen
   name: LU-43 Power loader
-  description: An really old but trusted design used in warehouses, constructions and military ships everywhere. This one has a signature green and yellow livery of Fujin. The label claims they make electronics and machinery, though you’ve never heard of them before. # TODO RMC14 BETTER DESCRIPTION
+  description: A really old but trusted design used in warehouses, constructions and military ships everywhere.
   components:
   - type: Sprite
     layers:
@@ -208,7 +209,7 @@
   parent: RMCMechPowerLoader
   id: RMCMechPowerLoaderBlue
   name: LU-52 Power loader
-  description: A modernized design made to outdo the older models once used in fancy ports and facilities. It was built by Ferret Heavy Industries before they went bankrupt, making these units surprisingly affordable. # TODO RMC14 BETTER DESCRIPTION
+  description: A modernized design made to outdo the older models, once used in fancy ports and facilities.
   components:
   - type: Sprite
     layers:

@@ -1,0 +1,573 @@
+- type: entity
+  abstract: true
+  id: VehicleInteriorGeneralBase
+  name: vehicle interior piece
+  description: A decorative vehicle interior fixture.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+    drawdepth: Overdoors
+  - type: InteractionOutline
+  - type: Clickable
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInteriorWallMountedBase
+  name: vehicle interior wall mount
+  description: A wall-mounted vehicle interior fixture.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: WallMount
+    arc: 360
+
+- type: entity
+  abstract: true
+  parent: CMClosetBase
+  id: VehicleInteriorLockerBase
+  name: vehicle interior locker
+  description: A storage locker for vehicle interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: locker
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: locker
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: EntityStorageVisuals
+    stateBaseClosed: locker
+    stateBaseOpen: locker_open
+    stateDoorClosed:
+    stateDoorOpen:
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleAmmoLoader
+  name: vehicle ammo loader
+  description: A loader for vehicle hardpoint ammunition.
+  components:
+  - type: Sprite
+    state: weapons_loader
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+  - type: VehicleAmmoLoader
+  - type: UserInterface
+    interfaces:
+      enum.VehicleAmmoLoaderUiKey.Key:
+        type: VehicleAmmoLoaderBoundUserInterface
+
+- type: entity
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInteriorArmorChairOld
+  name: armor chair (old)
+  components:
+  - type: Sprite
+    state: armor_chair_old
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,-0.05"
+
+- type: entity
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInteriorArmorChairUnfold
+  name: armor chair (unfolded)
+  components:
+  - type: Sprite
+    state: armor_chair_unfold
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,-0.05"
+
+- type: entity
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInteriorArmorChair
+  name: armor chair
+  components:
+  - type: Sprite
+    state: armor_chair
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,-0.05"
+
+- type: entity
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInteriorArmorChairBuckled
+  name: armor chair (buckled)
+  components:
+  - type: Sprite
+    state: armor_chair_buckled
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,-0.05"
+
+- type: entity
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInteriorVehicleSeat
+  name: vehicle seat
+  components:
+  - type: Sprite
+    state: vehicle_seat
+
+- type: entity
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInteriorVehicleSeatBuckled
+  name: vehicle seat (buckled)
+  components:
+  - type: Sprite
+    state: vehicle_seat_buckled
+
+- type: entity
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInteriorVehicleBars
+  name: vehicle bars
+  components:
+  - type: Sprite
+    state: vehicle_bars
+
+- type: entity
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInteriorVehicleSeatDestroyed
+  name: vehicle seat (destroyed)
+  components:
+  - type: Sprite
+    state: vehicle_seat_destroyed
+
+- type: entity
+  parent: VehicleInteriorLockerBase
+  id: VehicleInteriorLockerOpen
+  name: interior locker (open)
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: locker_open
+    stateBaseOpen: locker_open
+
+- type: entity
+  parent: VehicleInteriorLockerBase
+  id: VehicleInteriorLocker
+  name: interior locker
+
+- type: entity
+  parent: VehicleInteriorLockerBase
+  id: VehicleInteriorLockerMedical
+  name: interior locker (medical)
+  components:
+  - type: Sprite
+    layers:
+    - state: locker_med
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: locker_med
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: EntityStorageVisuals
+    stateBaseClosed: locker_med
+    stateBaseOpen: locker_open
+
+- type: entity
+  abstract: true
+  parent: RMCExtinguisherCabinet
+  id: VehicleInteriorExtinguisherCabinetBase
+  name: interior extinguisher cabinet
+  description: A wall-mounted fire extinguisher cabinet for vehicle interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: extinguisher
+    - state: extinguisher_full
+      map: ["enum.ItemCabinetVisuals.Layer"]
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.ItemCabinetVisuals.ContainsItem:
+        enum.ItemCabinetVisuals.Layer:
+          True: { state: extinguisher_full }
+          False: { state: extinguisher_empty }
+      enum.OpenableVisuals.Opened:
+        enum.ItemCabinetVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+
+- type: entity
+  parent: VehicleInteriorExtinguisherCabinetBase
+  id: VehicleInteriorExtinguisher
+  name: interior extinguisher
+  components:
+  - type: ContainerFill
+    containers:
+      ItemCabinet:
+      - CMFireExtinguisher
+
+- type: entity
+  parent: VehicleInteriorExtinguisherCabinetBase
+  id: VehicleInteriorExtinguisherClosed
+  name: interior extinguisher (closed)
+  components:
+  - type: ContainerFill
+    containers:
+      ItemCabinet:
+      - CMFireExtinguisher
+
+- type: entity
+  parent: VehicleInteriorExtinguisherCabinetBase
+  id: VehicleInteriorExtinguisherFull
+  name: interior extinguisher (full)
+  components:
+  - type: Openable
+    opened: true
+  - type: ContainerFill
+    containers:
+      ItemCabinet:
+      - CMFireExtinguisher
+
+- type: entity
+  parent: VehicleInteriorExtinguisherCabinetBase
+  id: VehicleInteriorExtinguisherMini
+  name: interior extinguisher (mini)
+  components:
+  - type: Openable
+    opened: true
+  - type: ContainerFill
+    containers:
+      ItemCabinet:
+      - CMFireExtinguisherPortable
+  - type: Sprite
+    layers:
+    - state: extinguisher
+    - state: extinguisher_mini
+      map: ["enum.ItemCabinetVisuals.Layer"]
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.ItemCabinetVisuals.ContainsItem:
+        enum.ItemCabinetVisuals.Layer:
+          True: { state: extinguisher_mini }
+          False: { state: extinguisher_empty }
+      enum.OpenableVisuals.Opened:
+        enum.ItemCabinetVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+
+- type: entity
+  parent: VehicleInteriorExtinguisherCabinetBase
+  id: VehicleInteriorExtinguisherEmpty
+  name: interior extinguisher (empty)
+  components:
+  - type: Openable
+    opened: true
+
+- type: entity
+  parent: RMCNanoMed
+  id: VehicleInteriorNanomed
+  name: nanomed
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: nanomed
+  - type: CMAutomatedVendor
+    baseSprite:
+      sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+      state: nanomed
+    animationSprite:
+      sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+      state: nanomed_vend
+
+- type: entity
+  parent: VehicleInteriorNanomed
+  id: VehicleInteriorNanomedVend
+  name: nanomed (vend)
+
+- type: entity
+  parent: VehicleInteriorNanomed
+  id: VehicleInteriorNanomedDeny
+  name: nanomed (deny)
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorMedVendor
+  name: medical vendor
+  components:
+  - type: Sprite
+    state: med
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorMedVendorVend
+  name: medical vendor (vend)
+  components:
+  - type: Sprite
+    state: med_vend
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorMedVendorDeny
+  name: medical vendor (deny)
+  components:
+  - type: Sprite
+    state: med_deny
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorMedVendorOff
+  name: medical vendor (off)
+  components:
+  - type: Sprite
+    state: med_off
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorMedVendorBroken
+  name: medical vendor (broken)
+  components:
+  - type: Sprite
+    state: med_broken
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorMedVendorPanel
+  name: medical vendor (panel)
+  components:
+  - type: Sprite
+    state: med_panel
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorBloodVendor
+  name: blood vendor
+  components:
+  - type: Sprite
+    state: blood
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorBloodVendorVend
+  name: blood vendor (vend)
+  components:
+  - type: Sprite
+    state: blood_vend
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorBloodVendorDeny
+  name: blood vendor (deny)
+  components:
+  - type: Sprite
+    state: blood_deny
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorBloodVendorOff
+  name: blood vendor (off)
+  components:
+  - type: Sprite
+    state: blood_off
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorBloodVendorBroken
+  name: blood vendor (broken)
+  components:
+  - type: Sprite
+    state: blood_broken
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorBloodVendorPanel
+  name: blood vendor (panel)
+  components:
+  - type: Sprite
+    state: blood_panel
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorSupplyVendor
+  name: supply vendor
+  components:
+  - type: Sprite
+    state: supply
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorSupplyVendorOff
+  name: supply vendor (off)
+  components:
+  - type: Sprite
+    state: supply_off
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorSupplyVendorBroken
+  name: supply vendor (broken)
+  components:
+  - type: Sprite
+    state: supply_broken
+
+- type: entity
+  parent: VehicleInteriorWallMountedBase
+  id: VehicleInteriorSupplyVendorPanel
+  name: supply vendor (panel)
+  components:
+  - type: Sprite
+    state: supply_panel
+
+- type: entity
+  parent: RMCRotaryPhoneWallmount
+  id: VehicleInteriorWallPhone
+  name: wall phone
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: wall_phone
+      map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: wall_phone }
+          Ring: { state: wall_phone_ring }
+          Ear: { state: wall_phone_ear }
+
+- type: entity
+  parent: VehicleInteriorWallPhone
+  id: VehicleInteriorWallPhoneRing
+  name: wall phone (ringing)
+
+- type: entity
+  parent: VehicleInteriorWallPhone
+  id: VehicleInteriorWallPhoneEar
+  name: wall phone (off hook)
+
+- type: entity
+  parent: RMCSurveillanceCameraAlmayer
+  id: VehicleInteriorCamera
+  name: vehicle camera
+  placement:
+    mode: PlaceFree
+  components:
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/camera.rsi
+    drawdepth: Overdoors
+    layers:
+    - map: [ "enum.SurveillanceCameraVisualsKey.Layer" ]
+      state: camera
+      cycle: true
+  - type: SurveillanceCameraVisuals
+    sprites:
+      Active: camera
+      InUse: camera
+      Disabled: camera
+      Emp: cameraemp
+
+- type: entity
+  parent: VehicleInteriorCamera
+  id: VehicleInteriorCameraEMP
+  name: vehicle camera (EMP)
+  components:
+  - type: SurveillanceCameraVisuals
+    sprites:
+      Active: cameraemp
+      InUse: cameraemp
+      Disabled: cameraemp
+      Emp: cameraemp
+
+- type: entity
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInvisibleWall
+  name: invisible wall (blocks vision)
+  description: An invisible blocking wall for vehicle interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Marker
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Occluder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+    drawdepth: Overdoors
+
+- type: entity
+  parent: VehicleInteriorGeneralBase
+  id: VehicleInvisibleWallNoVision
+  name: invisible wall (no vision block)
+  description: An invisible blocking wall for vehicle interiors that does not block vision or light.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Marker
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+    drawdepth: Overdoors
+
+
