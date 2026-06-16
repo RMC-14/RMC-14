@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/16/2026 11:34:52
-  entityCount: 450
+  time: 06/16/2026 13:07:39
+  entityCount: 454
 maps: []
 grids:
 - 1
@@ -2327,36 +2327,6 @@ entities:
       parent: 1
 - proto: DoorXenoResin
   entities:
-  - uid: 380
-    components:
-    - type: Transform
-      pos: 2.5,11.5
-      parent: 1
-  - uid: 381
-    components:
-    - type: Transform
-      pos: 1.5,11.5
-      parent: 1
-  - uid: 382
-    components:
-    - type: Transform
-      pos: 0.5,11.5
-      parent: 1
-  - uid: 390
-    components:
-    - type: Transform
-      pos: 2.5,19.5
-      parent: 1
-  - uid: 391
-    components:
-    - type: Transform
-      pos: 1.5,19.5
-      parent: 1
-  - uid: 392
-    components:
-    - type: Transform
-      pos: 0.5,19.5
-      parent: 1
   - uid: 417
     components:
     - type: Transform
@@ -2377,6 +2347,36 @@ entities:
       parent: 1
 - proto: DoorXenoResinImpenetrable
   entities:
+  - uid: 380
+    components:
+    - type: Transform
+      pos: 2.5,11.5
+      parent: 1
+  - uid: 381
+    components:
+    - type: Transform
+      pos: 0.5,11.5
+      parent: 1
+  - uid: 382
+    components:
+    - type: Transform
+      pos: 1.5,11.5
+      parent: 1
+  - uid: 390
+    components:
+    - type: Transform
+      pos: 2.5,19.5
+      parent: 1
+  - uid: 391
+    components:
+    - type: Transform
+      pos: 1.5,19.5
+      parent: 1
+  - uid: 392
+    components:
+    - type: Transform
+      pos: 0.5,19.5
+      parent: 1
   - uid: 420
     components:
     - type: Transform
@@ -2416,6 +2416,11 @@ entities:
     components:
     - type: Transform
       pos: 4.5,1.5
+      parent: 1
+  - uid: 454
+    components:
+    - type: Transform
+      pos: 28.5,18.5
       parent: 1
 - proto: RMCBlockerVehicle
   entities:
@@ -2576,11 +2581,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,3.5
       parent: 1
-  - uid: 393
-    components:
-    - type: Transform
-      pos: 3.5,19.5
-      parent: 1
   - uid: 401
     components:
     - type: Transform
@@ -2676,6 +2676,28 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 25.5,8.5
+      parent: 1
+- proto: WallXenoResinImpenetrable
+  entities:
+  - uid: 393
+    components:
+    - type: Transform
+      pos: 3.5,19.5
+      parent: 1
+  - uid: 451
+    components:
+    - type: Transform
+      pos: 28.5,19.5
+      parent: 1
+  - uid: 452
+    components:
+    - type: Transform
+      pos: 28.5,20.5
+      parent: 1
+  - uid: 453
+    components:
+    - type: Transform
+      pos: 28.5,17.5
       parent: 1
 - proto: XenoWeedsSource
   entities:
