@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TheLuggage05
-  changes:
-  - message: Fixed a typo in the movie ticket helmet garb description.
-    type: Fix
-  id: 2896
-  time: '2026-02-09T05:53:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9127
 - author: Vixting
   changes:
   - message: Change Default transfer on pcan to 100u
@@ -4526,5 +4519,12 @@
   id: 3395
   time: '2026-06-13T00:40:38.866409+00:00'
   url: null
+- author: IceNoobXD
+  changes:
+  - message: The edges of the coagulation pits on trijent dam are now unbreakable!
+    type: Fix
+  id: 3396
+  time: '2026-06-16T01:45:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10166
 Name: RMC14
 Order: -1
