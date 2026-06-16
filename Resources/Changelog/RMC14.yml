@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Fixed an undeployed M2C not being able to be acided while not broken.
-    type: Fix
-  - message: Night vision visors no longer turn off when you mount an HMG.
-    type: Fix
-  id: 2924
-  time: '2026-02-11T08:22:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9199
-- author: Dygon
-  changes:
   - message: Fixed invisible scouts and snipers being hit by friendly fire while invisible.
     type: Fix
   id: 2925
@@ -4567,5 +4558,24 @@
   id: 3423
   time: '2026-06-16T21:47:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10179
+- author: Vixting
+  changes:
+  - message: Adds languages. Languages can be selected from the traits section. If
+      you don't understand the language, the words spoken will be garbled for you.
+      Normal languages use a round seed, meaning you can learn what a word means in
+      a round even if you don't know the language. Xenonid language is completely
+      random however.
+    type: Add
+  - message: Adds language learning system, currently only for synths to learn xenonid,
+      through exposure to the language you will learn it. Survivor synths have a boosted
+      initial learning rate.
+    type: Add
+  - message: Radios now support different prefixes.
+    type: Add
+  - message: . now supports multi broadcast
+    type: Tweak
+  id: 3424
+  time: '2026-06-16T21:51:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9831
 Name: RMC14
 Order: -1
