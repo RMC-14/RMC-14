@@ -128,7 +128,6 @@
   - type: HardpointIntegrity
     maxIntegrity: 1000
     integrity: 1000
-    repairFuelCost: 10
     bypassEntryOnZero: true
   - type: HardpointState
   - type: Appearance
@@ -318,7 +317,6 @@
   - type: HardpointIntegrity
     maxIntegrity: 1000
     integrity: 1000
-    repairFuelCost: 10
     bypassEntryOnZero: true
   - type: HardpointState
   - type: Appearance

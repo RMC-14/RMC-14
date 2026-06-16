@@ -1001,6 +1001,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                     }
                 }
 
+                IncludeRangedXenoBlips(mapId, map, map.LastUpdateMarineBlips);
+
                 _marineAnnounce.AnnounceARESStaging(user, "The UNMC tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {ToPrettyString(mapId)}");
             }
@@ -1020,22 +1022,51 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
     }
 
+    private void IncludeRangedXenoBlips(EntityUid gridId, TacticalMapComponent map, Dictionary<int, TacticalMapBlip> target)
+    {
+        var rangeEv = new TacticalMapXenoRevealRangeEvent();
+        RaiseLocalEvent(ref rangeEv);
+        if (rangeEv.Sources.Count == 0)
+            return;
+
+        foreach (var (key, blip) in map.XenoBlips)
+        {
+            if (target.ContainsKey(key))
+                continue;
+
+            foreach (var source in rangeEv.Sources)
+            {
+                if (source.Grid != gridId)
+                    continue;
+
+                var delta = blip.Indices - source.Indices;
+                var distanceSquared = delta.X * delta.X + delta.Y * delta.Y;
+                if (distanceSquared > source.Range * source.Range)
+                    continue;
+
+                target[key] = blip;
+                break;
+            }
+        }
+    }
+
     protected void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
     {
         var ev = new TacticalMapIncludeXenosEvent();
         RaiseLocalEvent(ref ev);
+
+        computer.Comp.Blips = new Dictionary<int, TacticalMapBlip>(map.MarineBlips);
         if (ev.Include)
         {
-            computer.Comp.Blips = new Dictionary<int, TacticalMapBlip>(map.MarineBlips);
             foreach (var blip in map.XenoBlips)
             {
                 computer.Comp.Blips.TryAdd(blip.Key, blip.Value);
             }
         }
-        else
-        {
-            computer.Comp.Blips = map.MarineBlips;
-        }
+
+        if (TryComp(computer.Owner, out TransformComponent? computerXform) && computerXform.GridUid is { } gridId)
+            IncludeRangedXenoBlips(gridId, map, computer.Comp.Blips);
+
         Dirty(computer);
 
         var lines = EnsureComp<TacticalMapLinesComponent>(computer);

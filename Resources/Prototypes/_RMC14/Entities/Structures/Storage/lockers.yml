@@ -77,6 +77,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: IntelSafeCandidate
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
 
 - type: entity
   parent: RMCLockerSecureSafe
@@ -98,6 +103,32 @@
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
   - type: AccessReader
     access: [["RMCAccessWeYa"]]
+
+- type: entity
+  parent: CMBaseStructure
+  id: RMCFloorSafe
+  name: floor safe
+  description: A concealed floor safe for storing valuables and confidential material.
+  suffix: Intel
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/floor_safe.rsi
+    layers:
+    - state: closed
+      map: ["enum.LockVisualLayers.Lock"]
+  - type: Appearance
+  - type: LockVisuals
+    stateLocked: closed
+    stateUnlocked: open
+  - type: InteractionOutline
+  - type: Physics
+    canCollide: false
+  - type: Lock
+  - type: IntelSafeCandidate
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
 
 - type: entity
   parent: CMLockerBase
