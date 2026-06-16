@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Stopped the MedVend refill sound from being queued/desynced/delayed when
-      spamming refills. Also lowered the volume a little.
-    type: Fix
-  id: 2922
-  time: '2026-02-11T08:21:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9213
-- author: Dygon
-  changes:
-  - message: Fixed barricade upgrades taking too much fire damage over time
-    type: Fix
-  id: 2923
-  time: '2026-02-11T08:22:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9197
 - author: Dygon
   changes:
   - message: Fixed an undeployed M2C not being able to be acided while not broken.
@@ -4568,5 +4553,19 @@
   id: 3421
   time: '2026-06-16T20:39:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10081
+- author: JustMyselfUwU
+  changes:
+  - message: Fixed barricades and mounted weapons not blinding you when welding them
+    type: Fix
+  id: 3422
+  time: '2026-06-16T21:48:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9930
+- author: Whisper
+  changes:
+  - message: '[SOP] SOs may deploy anywhere while remaining in the ARC'
+    type: Add
+  id: 3423
+  time: '2026-06-16T21:47:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10179
 Name: RMC14
 Order: -1
