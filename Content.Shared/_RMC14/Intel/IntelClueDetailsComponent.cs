@@ -1,14 +1,14 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Intel;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(IntelSystem))]
-public sealed partial class IntelKnowledgeComponent : Component
+public sealed partial class IntelClueDetailsComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public HashSet<EntityUid> Read = new();
+    public string Label = string.Empty;
 
     [DataField, AutoNetworkedField]
-    public Dictionary<NetEntity, string> PersonalClues = new();
+    public LocId? ColorName;
 }

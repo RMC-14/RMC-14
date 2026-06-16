@@ -93,7 +93,7 @@ public sealed class TechControlConsoleBui : BoundUserInterface
                 {
                     OpenOptionWindow(option, tier, optionIndex, console.Tree.Points, console.Tree.Tier);
                 };
-                optionButton.ToolTip = option.Name;
+                optionButton.ToolTip = Localize(option.Name);
                 optionButton.TooltipDelay = 0.1f;
 
                 optionContainer.AddChild(new Control { HorizontalExpand = true });
@@ -124,10 +124,11 @@ public sealed class TechControlConsoleBui : BoundUserInterface
         _optionWindow = new TechControlConsoleOptionWindow();
         _optionWindow.OpenCentered();
         _optionWindow.OnClose += () => _optionWindow = null;
-        _optionWindow.Title = option.Name;
+        var name = Localize(option.Name);
+        _optionWindow.Title = name;
         _optionWindow.CurrentPointsLabel.Text = Loc.GetString("rmc-ui-tech-points-value", ("value", points.Double().ToString("F1")));
-        _optionWindow.NameLabel.Text = option.Name;
-        _optionWindow.DescriptionLabel.Text = option.Description;
+        _optionWindow.NameLabel.Text = name;
+        _optionWindow.DescriptionLabel.Text = Localize(option.Description);
         _optionWindow.CostLabel.Text = $"{option.CurrentCost}";
 
         _optionWindow.Statistics.DisposeAllChildren();
@@ -167,5 +168,10 @@ public sealed class TechControlConsoleBui : BoundUserInterface
             SendPredictedMessage(new TechPurchaseOptionBuiMsg(tier, optionIndex));
             _optionWindow.Close();
         };
+    }
+
+    private static string Localize(string text)
+    {
+        return Loc.TryGetString(text, out var localized) ? localized : text;
     }
 }
