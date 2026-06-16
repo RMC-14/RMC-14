@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Weather;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Eye.Blinding.Components;
@@ -26,6 +27,10 @@ namespace Content.Shared.Examine
 
         // RMC14
         [Dependency] private readonly QueenEyeSystem _queenEye = default!;
+
+        // RMC14 start - weather examine range.
+        [Dependency] private readonly RMCWeatherSystem _rmcWeather = default!;
+        // RMC14 end
 
         public const float MaxRaycastRange = 100;
 
@@ -175,6 +180,8 @@ namespace Content.Shared.Examine
         /// </summary>
         public float GetExaminerRange(EntityUid examiner, MobStateComponent? mobState = null)
         {
+            var range = ExamineRange;
+
             if (Resolve(examiner, ref mobState, logMissing: false))
             {
                 if (MobStateSystem.IsDead(examiner, mobState))
@@ -184,10 +191,30 @@ namespace Content.Shared.Examine
                     return CritExamineRange;
 
                 if (TryComp<BlurryVisionComponent>(examiner, out var blurry))
-                    return Math.Clamp(ExamineRange - blurry.Magnitude * ExamineBlurrinessMult, 2, ExamineRange);
+                    range = Math.Clamp(ExamineRange - blurry.Magnitude * ExamineBlurrinessMult, 2, ExamineRange);
             }
-            return ExamineRange;
+
+            // RMC14: Bad weather clamps exposed examine range, scaling with the current eye zoom.
+            return GetWeatherExaminerRange(examiner, range);
         }
+
+        // RMC14 start - weather examine range.
+        private float GetWeatherExaminerRange(EntityUid examiner, float baseRange)
+        {
+            if (!TryComp(examiner, out TransformComponent? xform) ||
+                !_rmcWeather.TryGetCurrentExamineRange(xform.MapID, out var weatherRange) ||
+                !_rmcWeather.IsWeatherExposed(examiner))
+            {
+                return baseRange;
+            }
+
+            var zoomScale = 1f;
+            if (TryComp<EyeComponent>(examiner, out var eye))
+                zoomScale = Math.Max(eye.Zoom.X, eye.Zoom.Y);
+
+            return Math.Min(baseRange, Math.Clamp(weatherRange * zoomScale, 0, baseRange));
+        }
+        // RMC14 end
 
         /// <summary>
         /// True if occluders are drawn for this entity, otherwise false.

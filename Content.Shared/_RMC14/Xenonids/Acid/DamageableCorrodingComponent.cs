@@ -4,8 +4,11 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
+/// <summary>
+///     Active acid on damageable entities; weather can dilute exposed acid timers and damage once per storm.
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoAcidSystem))]
+[Access(typeof(SharedXenoAcidSystem), typeof(Content.Shared._RMC14.Weather.RMCWeatherSystem))]
 public sealed partial class DamageableCorrodingComponent : Component
 {
     [DataField, AutoNetworkedField]
