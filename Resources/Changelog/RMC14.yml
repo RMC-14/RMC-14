@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The ML66D heavy machine gun can now be acquired through requisitions,
-      the combat engineer vendor, and the squad leader vendor. The ML66D is a machine-gun
-      emplacement with IFF capability that requires tools to assemble or disassemble.
-    type: Add
-  - message: The M2C heavy machine gun is now available through requisitions. The
-      M2C is a rapidly deployable machine-gun emplacement that can be rotated, set
-      up, and packed up without tools. Firing it for too long without allowing it
-      to cool will cause it to overheat and take damage. It can be repaired with a
-      welder.
-    type: Add
-  - message: "The dropship part fabricator can now print the A/A-32-P Sentry Defense\
-      \ System (200 points) and the MTU-4B Door Gunner Hardpoint System (50 points).\
-      \ These can be installed in a dropship\u2019s weapon or utility slots and deploy\
-      \ either an omnidirectional sentry gun or a scoped heavy machine-gun nest."
-    type: Add
-  - message: Fuel pump sentries can now be deployed on red alert or higher, and can
-      be undeployed.
-    type: Tweak
-  id: 2908
-  time: '2026-02-06T00:06:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8496
-- author: DrSmugleaf
-  changes:
-  - message: Try to fix buggy behaviour with storages, specially when quickly switching
-      hands and using belt quick-insert keybinds, specially with the medical storage
-      rig.
-    type: Fix
-  id: 2909
-  time: '2026-02-09T12:04:27.512916+00:00'
-  url: null
 - author: CatAndHats
   changes:
   - message: Claymores will now fit into explosive pouches and the heavygunner storage
@@ -4507,5 +4475,88 @@
   id: 3407
   time: '2026-06-16T01:51:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10149
+- author: Vixting
+  changes:
+  - message: Added missing items to the Doctor's medical locker.
+    type: Add
+  id: 3408
+  time: '2026-06-16T01:59:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10152
+- author: Vixting
+  changes:
+  - message: Vehicle system, vehicles can be entered though set points (doors), only
+      one mob can enter through a door at once, vehicles have a set amount of occupants.
+      Once a vehicles frame is destroyed, xenos can enter the vehicle from any angle
+      Vehicles can be operated from the driving seat provided you have the necessary
+      driving skill to operate it. Drivers will have access to a action that allows
+      them to lock / unlock the vehicle, remember to do this.
+    type: Add
+  - message: Vehicle hardpoint system, vehicles have set hardpoints that can be equipped
+      to the vehicle. Hardpoints have their own damage modifiers. A vehicles frame
+      will only take 0.10 of the incoming damage whilst there are unbroken hardpoints
+      present. The rest of the 0.9 damage will be divided amongst the equipped hardpoints,
+      with their own damage modifiers being applied. Hardpoints can be viewed / removed
+      with the use of a crowbar. They can be repaired using a welder.
+    type: Add
+  - message: Colony vans - van, pizza van, box van. These are found present on the
+      colony. Requires driving 1 & van wheels to operate.
+    type: Add
+  - message: Viewports, allow you to view outside of the vehicle.
+    type: Add
+  - message: Vehicle lift, purchased vehicles can be raised from storage here using
+      the vehicle supply console. Vehicles can also be lowered back into storage if
+      wanted, they will keep there accompanying hardpoints when sent into storage.
+      No you cannot lower it when people are inside the  vehicles.
+    type: Add
+  - message: Vehicle hardpoint vendor, purchased vehicles hardpoints can be dispensed
+      here.
+    type: Add
+  - message: ARC tier 1 tech tree unlock. Only SOs, COs & XOs can operate the ARC.
+      Synths & SEAs can drive it. Contains data terminal, Overwatch console & ground
+      operations console. Can be put in deployed mode from the drivers seat, whilst
+      deployed the turret can be operated & by default will enter auto mode. The turret
+      can be overrided from the gunners seat, auto mode can be disabled & stabilization
+      can be enabled. The launcher can be operated from the gunners seat as well.
+      Whilst deployed the arc cannot be driven & the arc will act as a sensors array
+      revealing the location of xenonids around it in a radius. The turret will fire
+      in 3 round bursts.
+    type: Add
+  - message: humvee variants, medical, transport & normal base version. Base versions
+      turret can be used on the move & does not need to be deployed to be activated,
+      fully automatic.
+    type: Add
+  - message: APC varients - base, medical, command. Base version comes with port side
+      SGO guns that can be operated inside the vehicle. Dual & frontal cannons can
+      be added to the APC which make use of IFF rounds. Flare launcher can be attached
+      to launch signal or normal flares.
+    type: Add
+  - message: Tank, spawns with 200 roundstart population alongside 2 vehicle crewman
+      who operate the tank.
+    type: Add
+  - message: DRGN flamer, fires a projectile similiar to the flamer turret that creates
+      a star pattern of high combustion flames along with smoke at point of contact,
+      magazine capacity of 60.
+    type: Add
+  - message: LTAAP minigun, fires AP bullets but requires time to spin up the gun
+      to its full fire rate, 500 round magazine.
+    type: Add
+  - message: ACE autocannon fires projectile that has AOE & fires shrapnel behind
+      the collision, heavy damage, magazine of 40.
+    type: Add
+  - message: '[PVE] LTB cannon, fires shell that has large AOE, destroys structures
+      in large area, will one shot anything, reload of 16 seconds.'
+    type: Add
+  - message: '[PVE] (secondary) Tow launcher, fires AP rockets, magazine of 5, 15
+      second reload.'
+    type: Add
+  - message: Tank flamer, fires napalm fuel, 7 tile range
+    type: Add
+  - message: Grenade launcher, fires HEDP grenades, 10 round magazine.
+    type: Add
+  - message: RE-7000 cupola, fires IFF rounds, smart gun
+    type: Add
+  id: 3409
+  time: '2026-06-16T01:58:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8791
 Name: RMC14
 Order: -1
