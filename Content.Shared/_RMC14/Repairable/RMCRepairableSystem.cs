@@ -214,7 +214,13 @@ public sealed class RMCRepairableSystem : EntitySystem
 
     private void OnRepairableDoAfter(Entity<RMCRepairableComponent> repairable, ref RMCRepairableDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled)
+        {
+            _weldEffect.ClearActiveEffect(repairable.Owner);
+            return;
+        }
+
+        if (args.Handled)
             return;
 
         args.Handled = true;

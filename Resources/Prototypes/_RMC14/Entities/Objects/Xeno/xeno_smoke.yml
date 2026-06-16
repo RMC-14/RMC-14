@@ -51,6 +51,7 @@
       components:
       - Marine
       - Xeno
+      - Vehicle
   - type: DeleteOnExplosion # so this is supposed to be random depending on the explosion severity but uhhh hahAHAHA help
 
 - type: entity
