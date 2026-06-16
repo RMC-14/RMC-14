@@ -33,12 +33,15 @@
 
 - type: entity
   id: VehicleExitArea
-  parent: MarkerBase
   name: vehicle exit marker
   description: A clickable marker used for vehicle exits.
   placement:
     mode: PlaceFree
   components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
   - type: Icon
     sprite: _RMC14/Markers/landmarks.rsi
     state: invisible_wall
