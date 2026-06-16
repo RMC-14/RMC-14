@@ -18,6 +18,9 @@ public sealed partial class LanguageLearningComponent : Component
     public HashSet<ProtoId<LanguagePrototype>> FirstContactLanguages = new();
 
     [DataField]
+    public EntProtoId<LanguageLearningPresetComponent>? Preset;
+
+    [DataField]
     [Access(typeof(SharedLanguageLearningSystem), typeof(SharedLanguageSystem), Other = AccessPermissions.ReadExecute)]
     public Dictionary<ProtoId<LanguagePrototype>, LanguageLearningData> Languages = new();
 

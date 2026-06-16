@@ -12,6 +12,7 @@ namespace Content.Server._RMC14.Language.Systems;
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
     [Dependency] private readonly LanguageLearningSystem _learning = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
 
     public override void Initialize()
     {
@@ -24,6 +25,14 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     private void OnInitLanguageSpeaker(Entity<LanguageComponent> ent, ref MapInitEvent args)
     {
+        if (ent.Comp.Preset is { } presetId && presetId.TryGet(out var preset, _prototypeManager, _compFactory))
+        {
+            ent.Comp.SpokenLanguages = new(preset.SpokenLanguages);
+            ent.Comp.UnderstoodLanguages = new(preset.UnderstoodLanguages);
+            ent.Comp.CurrentLanguage ??= preset.CurrentLanguage;
+            ent.Comp.DefaultLanguage ??= preset.DefaultLanguage;
+        }
+
         if (ent.Comp.CurrentLanguage == null)
             ent.Comp.CurrentLanguage = ent.Comp.DefaultLanguage ?? ent.Comp.SpokenLanguages.FirstOrDefault();
 

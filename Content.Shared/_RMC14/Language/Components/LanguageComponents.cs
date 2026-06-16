@@ -20,4 +20,7 @@ public sealed partial class LanguageComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<LanguagePrototype>? DefaultLanguage;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId<LanguagePresetComponent>? Preset;
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Language;
 using Content.Shared._RMC14.Language.Components;
@@ -12,6 +13,7 @@ namespace Content.Server._RMC14.Language.Systems;
 
 public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 {
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly LanguageSystem _languages = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
@@ -30,6 +32,16 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
     private void OnLearningMapInit(Entity<LanguageLearningComponent> ent, ref MapInitEvent args)
     {
+        if (ent.Comp.Preset is { } presetId && presetId.TryGet(out var preset, _prototypeManager, _compFactory))
+        {
+            ent.Comp.LearnableLanguages = new(preset.LearnableLanguages);
+            ent.Comp.FirstContactLanguages = new(preset.FirstContactLanguages);
+            ent.Comp.Languages = preset.Languages.ToDictionary(kvp => kvp.Key, kvp => CloneLanguageData(kvp.Value));
+            ent.Comp.LearningRange = preset.LearningRange;
+            ent.Comp.BaseWordLearningRate = preset.BaseWordLearningRate;
+            ent.Comp.ComprehensionThreshold = preset.ComprehensionThreshold;
+        }
+
         foreach (var language in ent.Comp.LearnableLanguages)
         {
             var languageData = EnsureLanguageTracking(ent.Comp, language);
@@ -42,6 +54,22 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
         }
 
         SyncLanguageStates(ent.Comp);
+    }
+
+    private static LanguageLearningData CloneLanguageData(LanguageLearningData data)
+    {
+        return new LanguageLearningData
+        {
+            RequiresFirstContact = data.RequiresFirstContact,
+            Encountered = data.Encountered,
+            FluentAnnounced = data.FluentAnnounced,
+            Progress = data.Progress,
+            InitialBoostedWordCount = data.InitialBoostedWordCount,
+            BoostedWordsRemaining = data.BoostedWordsRemaining,
+            InitialBoostedWordComprehension = data.InitialBoostedWordComprehension,
+            LearnedWords = new(data.LearnedWords),
+            WordFrequency = new(data.WordFrequency),
+        };
     }
 
     private void OnDetermineEntityLanguages(Entity<LanguageLearningComponent> learner, ref DetermineEntityLanguagesEvent args)
