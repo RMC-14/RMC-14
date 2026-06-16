@@ -127,6 +127,8 @@
 - type: entity
   parent: RMCIntelRetrieveDeviceBase
   id: RMCIntelRetrieveMassSpectrometer
+  name: advanced mass-spectrometer
+  description: A hand-held mass spectrometer which identifies trace chemicals in a blood sample.
   suffix: Intel, Experimental Device
   components:
   - type: Sprite
@@ -138,6 +140,8 @@
 - type: entity
   parent: RMCIntelRetrieveDeviceBase
   id: RMCIntelRetrieveReagentScanner
+  name: advanced reagent scanner
+  description: A hand-held reagent scanner which identifies chemical agents.
   suffix: Intel, Experimental Device
   components:
   - type: Sprite
@@ -149,6 +153,8 @@
 - type: entity
   parent: [CMHealthAnalyzer, RMCIntelRetrieveDeviceBase]
   id: RMCIntelRetrieveHealthAnalyzer
+  name: HF2 health analyzer
+  description: A hand-held body scanner able to distinguish vital signs of the subject. The front panel is able to provide the basic readout of the subject's status.
   suffix: Intel, Experimental Device
   components:
   - type: IntelClues
@@ -157,6 +163,8 @@
 - type: entity
   parent: RMCIntelRetrieveDeviceBase
   id: RMCIntelRetrieveAutopsyScanner
+  name: autopsy scanner
+  description: Extracts information on wounds.
   suffix: Intel, Experimental Device
   components:
   - type: Sprite

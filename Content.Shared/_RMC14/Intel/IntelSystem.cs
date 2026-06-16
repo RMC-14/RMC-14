@@ -1,4 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
@@ -821,11 +821,8 @@ public sealed class IntelSystem : EntitySystem
 
     private string GetClueName(EntityUid target)
     {
-        if (MetaData(target).EntityPrototype is { } proto &&
-            Loc.TryGetString($"ent-{proto.ID}", out var localized))
-        {
-            return localized;
-        }
+        if (MetaData(target).EntityPrototype is { } proto)
+            return proto.Name;
 
         return Name(target);
     }
