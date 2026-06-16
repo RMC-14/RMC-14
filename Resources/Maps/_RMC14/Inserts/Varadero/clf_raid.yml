@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/16/2026 11:05:09
-  entityCount: 689
+  time: 06/16/2026 23:17:27
+  entityCount: 707
 maps: []
 grids:
 - 1
@@ -950,7 +950,7 @@ entities:
       pos: 16.5,20.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5881.38
+      secondsUntilStateChange: -5910.4565
       state: Opening
   - uid: 474
     components:
@@ -959,7 +959,7 @@ entities:
       pos: 20.5,17.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5846.58
+      secondsUntilStateChange: -5875.6567
       state: Opening
 - proto: CMBarricadeSandbag
   entities:
@@ -2651,6 +2651,13 @@ entities:
     - type: Transform
       pos: 0.5,1.5
       parent: 1
+- proto: RMCBoxPaperCups
+  entities:
+  - uid: 690
+    components:
+    - type: Transform
+      pos: 2.7632961,7.833871
+      parent: 1
 - proto: RMCBoxShotgunBuckshot
   entities:
   - uid: 535
@@ -4093,7 +4100,7 @@ entities:
       location: Research
 - proto: RMCML66DMountWeaponAssembledLoaded
   entities:
-  - uid: 689
+  - uid: 900
     components:
     - type: Transform
       anchored: True
@@ -4105,7 +4112,7 @@ entities:
     - type: Physics
       canCollide: False
       bodyType: Static
-  - uid: 690
+  - uid: 901
     components:
     - type: Transform
       anchored: True
