@@ -3,7 +3,7 @@
   id: RMCCLFLeaderPVE
   name: rmc-job-name-clf-pve-leader
   description: rmc-ghost-role-information-clf-pve-description
-  playTimeTracker: RMCJobCLFLeaderPVE
+  playTimeTracker: CMJobCLFLeaderPVE
   ranks:
     RMCRankPVECLFLeader: []
   startingGear: RMCJobCLFLeaderPVE
