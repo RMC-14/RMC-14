@@ -165,7 +165,7 @@ public sealed class VehicleSystem : EntitySystem
                 return false;
             }
         }
-        else
+        else if (!isGhost)
         {
             if (ent.Comp.MaxPassengers > 0 &&
                 !interior.Passengers.Contains(user) &&

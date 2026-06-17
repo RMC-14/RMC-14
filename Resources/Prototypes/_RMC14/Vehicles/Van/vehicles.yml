@@ -8,6 +8,8 @@
     movementKind: Grid
   - type: LagCompensation
   - type: Clickable
+  - type: WarpPoint
+    follow: true
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
@@ -199,6 +201,8 @@
   - type: Vehicle
     movementKind: Grid
   - type: Clickable
+  - type: WarpPoint
+    follow: true
   - type: GridVehicleMover
     maxSpeed: 6
     acceleration: 5

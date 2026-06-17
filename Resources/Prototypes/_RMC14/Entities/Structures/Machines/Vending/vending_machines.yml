@@ -155,6 +155,9 @@
         density: 200
   - type: ActivatableUI
     key: enum.CMAutomatedVendorUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "RMCAccessVehicleCrew" ] ]
   - type: UserInterface
     interfaces:
       enum.CMAutomatedVendorUI.Key:

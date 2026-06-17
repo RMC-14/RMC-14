@@ -8,6 +8,8 @@
     movementKind: Grid
   - type: LagCompensation
   - type: Clickable
+  - type: WarpPoint
+    follow: true
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
