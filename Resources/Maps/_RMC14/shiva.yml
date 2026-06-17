@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/12/2026 20:36:32
-  entityCount: 18720
+  time: 06/17/2026 17:05:09
+  entityCount: 18724
 maps:
 - 1
 grids:
@@ -48747,12 +48747,16 @@ entities:
       rot: 3.141592653589793 rad
       pos: 45.5,50.5
       parent: 1
+    missingComponents:
+    - Damageable
   - uid: 2053
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 68.5,50.5
       parent: 1
+    missingComponents:
+    - Damageable
 - proto: CMShardGlass
   entities:
   - uid: 2054
@@ -51502,6 +51506,11 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 92.5,89.5
+      parent: 1
+  - uid: 18721
+    components:
+    - type: Transform
+      pos: 122.5,13.5
       parent: 1
 - proto: CMTableReinforced
   entities:
@@ -54813,7 +54822,7 @@ entities:
       pos: 198.5,44.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5231.1445
+      secondsUntilStateChange: -5327.868
       state: Opening
   - uid: 3195
     components:
@@ -55127,7 +55136,7 @@ entities:
     - type: Occluder
       enabled: False
     - type: Door
-      secondsUntilStateChange: -14731.251
+      secondsUntilStateChange: -14827.975
       state: Denying
   - uid: 3256
     components:
@@ -118665,6 +118674,24 @@ entities:
     - type: Transform
       pos: 209.5,44.5
       parent: 1
+- proto: RMCIntelDataTerminal
+  entities:
+  - uid: 18722
+    components:
+    - type: Transform
+      pos: 122.5,13.5
+      parent: 1
+  - uid: 18723
+    components:
+    - type: Transform
+      pos: 113.5,70.5
+      parent: 1
+  - uid: 18724
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 155.5,142.5
+      parent: 1
 - proto: RMCItemPoolBuckshot
   entities:
   - uid: 14976
@@ -131428,16 +131455,6 @@ entities:
     - type: Transform
       pos: 118.5,151.5
       parent: 1
-  - uid: 17133
-    components:
-    - type: Transform
-      pos: 53.5,22.5
-      parent: 1
-  - uid: 17134
-    components:
-    - type: Transform
-      pos: 63.5,20.5
-      parent: 1
 - proto: RMCSpawnerCorpseColonistBust
   entities:
   - uid: 17135
@@ -131544,6 +131561,16 @@ entities:
       parent: 1
 - proto: RMCSpawnerCorpseWeYaGoon
   entities:
+  - uid: 17133
+    components:
+    - type: Transform
+      pos: 63.5,20.5
+      parent: 1
+  - uid: 17134
+    components:
+    - type: Transform
+      pos: 53.5,22.5
+      parent: 1
   - uid: 17153
     components:
     - type: Transform
