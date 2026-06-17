@@ -1129,7 +1129,7 @@
   description: A large, outdated, 20th century weapons rack, designed to store M16A5s. It's still painted in that multi-century old, military jungle green. The rifles faded 'M16' designation is still painted on the top of the rack. - The guns stored on this rack are locked and loaded, ready for combat. Even despite the original Department of Defence standards for rifle storage! To be fair it may have something to do with the fact that said goverment body hasn't existed for multiple decades now....
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/M16_rack.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m16_rack.rsi
   - type: ItemSlots
     slots:
       item_1:
