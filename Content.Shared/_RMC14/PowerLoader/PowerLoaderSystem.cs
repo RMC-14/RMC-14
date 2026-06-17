@@ -88,7 +88,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, DidEquipHandEvent>(OnHandsChanged);
         SubscribeLocalEvent<PowerLoaderComponent, DidUnequipHandEvent>(OnHandsChanged);
 
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, GettingPickedUpAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, CombatModeShouldHandInteractEvent>(OnGrababbleShouldInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
@@ -382,7 +382,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         TryStartPointDetach(ent, ent.Comp.ContainerId, ref args);
     }
 
-    private void OnGrabbablePickupAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref PickupAttemptEvent args)
+    private void OnGrabbablePickupAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref GettingPickedUpAttemptEvent args)
     {
         if (args.Cancelled)
             return;

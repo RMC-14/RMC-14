@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Content.Shared._RMC14.PowerLoader;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
@@ -13,6 +15,7 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed class HardpointSlotSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly HardpointSystem _hardpoints = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -33,6 +36,7 @@ public sealed class HardpointSlotSystem : EntitySystem
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointRemoveMessage>(OnHardpointRemoveMessage);
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointRemoveDoAfterEvent>(OnHardpointRemoveDoAfter);
         SubscribeLocalEvent<HardpointSlotsComponent, ItemSlotEjectAttemptEvent>(OnHardpointEjectAttempt);
+        SubscribeLocalEvent<HardpointItemComponent, PowerLoaderInteractEvent>(OnHardpointPowerLoaderInteract);
     }
 
     private void OnInsertAttempt(Entity<HardpointSlotsComponent> ent, ref ItemSlotInsertAttemptEvent args)
@@ -172,6 +176,52 @@ public sealed class HardpointSlotSystem : EntitySystem
         return true;
     }
 
+    private void OnHardpointPowerLoaderInteract(Entity<HardpointItemComponent> ent, ref PowerLoaderInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp(args.Target, out HardpointSlotsComponent? targetSlots))
+            return;
+
+        if (!_hardpoints.TryFindEmptyInstallLocation(args.Target, targetSlots, ent.Owner, out var targetLocation))
+            return;
+
+        args.Handled = true;
+
+        if (EntityManager.IsClientSide(args.Target))
+            return;
+
+        if (targetLocation.Definition.InsertDelay <= 0f)
+        {
+            targetLocation.State.CompletingInserts.Add(targetLocation.Definition.Id);
+            _itemSlots.TryInsert(targetLocation.Owner, targetLocation.Slot, ent.Owner, args.PowerLoader);
+            targetLocation.State.CompletingInserts.Remove(targetLocation.Definition.Id);
+            return;
+        }
+
+        if (targetLocation.State.PendingInserts.ContainsValue(args.PowerLoader))
+            return;
+
+        if (!targetLocation.State.PendingInserts.TryAdd(targetLocation.Definition.Id, args.PowerLoader))
+            return;
+
+        var slotId = targetLocation.Path.ToCompositeId();
+        var doAfter = new DoAfterArgs(EntityManager, args.PowerLoader, targetLocation.Definition.InsertDelay, new HardpointInsertDoAfterEvent(slotId), args.Target, args.Target, ent.Owner)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            BreakOnWeightlessMove = true,
+            NeedHand = false,
+            RequireCanInteract = true,
+            AttemptFrequency = AttemptFrequency.StartAndEnd,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
+        if (!_doAfter.TryStartDoAfter(doAfter))
+            targetLocation.State.PendingInserts.Remove(targetLocation.Definition.Id);
+    }
+
     private void OnHardpointUiOpened(Entity<HardpointSlotsComponent> ent, ref BoundUIOpenedEvent args)
     {
         if (!Equals(args.UiKey, HardpointUiKey.Key))
@@ -261,14 +311,16 @@ public sealed class HardpointSlotSystem : EntitySystem
 
         var key = (finalLocation.Owner, finalLocation.Definition.Id);
         _completingRemovals.Add(key);
-        var ejected = _itemSlots.TryEjectToHands(finalLocation.Owner, finalLocation.Slot, args.User, true);
+        var ejected = _itemSlots.TryEject(finalLocation.Owner, finalLocation.Slot, null, out var ejectedItem, true);
         _completingRemovals.Remove(key);
 
-        if (!ejected)
+        if (!ejected || ejectedItem == null)
         {
             SetErrorAndRefresh("Couldn't remove the hardpoint. Free a hand and try again.");
             return;
         }
+
+        _hands.PickupOrDrop(args.User, ejectedItem.Value, dropNear: true);
 
         SetErrorAndRefresh(null);
         _hardpoints.RefreshCanRun(ent.Owner);
