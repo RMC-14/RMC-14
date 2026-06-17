@@ -1328,6 +1328,7 @@
         recommended: true
       - id: RMCJumpsuitDoctor
       - id: CMScrubsBlue
+      - id: RMCScrubsLightBlue
       - id: CMScrubsGreen
       - id: RMCScrubsPharm
       - id: CMScrubsPurple
