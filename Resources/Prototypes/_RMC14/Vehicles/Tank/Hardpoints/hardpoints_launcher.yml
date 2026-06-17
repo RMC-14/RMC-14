@@ -39,14 +39,9 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Tank
-        startingItem: VehicleFlamerTankLZRN
-        whitelist:
-          tags:
-          - RMCTankFlamer
+  - type: VehicleFlamerTankSlots
+    maxTanks: 2
+    startingItem: VehicleFlamerTankLZRN
   - type: RMCFlamerAmmoProvider
   - type: GunFireArc
     arc: 120

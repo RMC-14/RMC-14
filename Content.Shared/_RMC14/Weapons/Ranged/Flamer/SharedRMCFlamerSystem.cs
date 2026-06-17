@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Fluids;
@@ -438,6 +439,23 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                  TryComp(tankId, out tankComp))
         {
             tankEnt = (tankId.Value, tankComp);
+
+            if (TryComp(flamer, out VehicleFlamerTankSlotsComponent? tankSlots) &&
+                _solution.TryGetSolution(tankEnt.Value.Owner, tankEnt.Value.Comp.SolutionId, out var primarySol, out _) &&
+                primarySol.Value.Comp.Solution.Volume < flamer.Comp.CostPer)
+            {
+                for (var i = 1; i < tankSlots.MaxTanks; i++)
+                {
+                    var extraSlotId = $"{flamer.Comp.ContainerId}_{i + 1}";
+                    if (!_container.TryGetContainer(flamer, extraSlotId, out var extraContainer) ||
+                        !extraContainer.ContainedEntities.TryFirstOrNull(out var extraTankId) ||
+                        !TryComp(extraTankId, out RMCFlamerTankComponent? extraTankComp))
+                        continue;
+
+                    tankEnt = (extraTankId.Value, extraTankComp);
+                    break;
+                }
+            }
         }
         else if (!display && HasComp<RMCCanUseBroilerComponent>(flamer))
         {

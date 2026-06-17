@@ -247,10 +247,10 @@
   - type: SolutionContainerManager
     solutions:
       rmc_flamer_tank:
-        maxVol: 60
+        maxVol: 150
         reagents:
         - ReagentId: RMCNapalmUTTank
-          Quantity: 60
+          Quantity: 150
 
 - type: Tag
   id: RMCTankFlamer

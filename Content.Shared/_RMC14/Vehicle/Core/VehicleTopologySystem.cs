@@ -75,7 +75,8 @@ public readonly record struct VehicleMountedAmmoProvider(
 public readonly record struct VehicleMountedFlamerProvider(
     VehicleMountedSlot Slot,
     EntityUid FlamerUid,
-    RMCFlamerAmmoProviderComponent FlamerAmmo);
+    RMCFlamerAmmoProviderComponent FlamerAmmo,
+    int ExtraSlots);
 
 public sealed class VehicleTopologySystem : EntitySystem
 {
@@ -404,7 +405,11 @@ public sealed class VehicleTopologySystem : EntitySystem
         if (HasComp<RMCFlamerTankComponent>(item))
             return false;
 
-        provider = new VehicleMountedFlamerProvider(slot, item, flamerAmmo);
+        var extraSlots = TryComp(item, out VehicleFlamerTankSlotsComponent? tankSlots)
+            ? Math.Max(0, tankSlots.MaxTanks - 1)
+            : 0;
+
+        provider = new VehicleMountedFlamerProvider(slot, item, flamerAmmo, extraSlots);
         return true;
     }
 

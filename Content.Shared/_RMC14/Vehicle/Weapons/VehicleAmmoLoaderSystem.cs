@@ -148,7 +148,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         {
             if (TryGetLoadableFlamerProvider(ent, args.User, args.SlotPath, out var flamerProvForUnload))
             {
-                DoUnloadFlamerSlot(ent, args.User, flamerProvForUnload);
+                DoUnloadFlamerSlot(ent, args.User, flamerProvForUnload, args.AmmoSlot);
                 UpdateUi(ent.Owner, args.User);
                 args.Handled = true;
                 return;
@@ -188,7 +188,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
                 return;
 
             if (args.Action == VehicleAmmoLoaderSlotAction.Load)
-                DoLoadFlamerSlot(ent, args.User, used, flamerProvider);
+                DoLoadFlamerSlot(ent, args.User, used, flamerProvider, args.AmmoSlot);
 
             UpdateUi(ent.Owner, args.User);
             args.Handled = true;
@@ -263,7 +263,8 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         {
             if (TryGetLoadableFlamerProvider(ent, args.Actor, args.SlotPath, out var flamerProvForUnload))
             {
-                if (_itemSlots.GetItemOrNull(flamerProvForUnload.FlamerUid, flamerProvForUnload.FlamerAmmo.ContainerId) == null)
+                var unloadSlotId = GetFlamerSlotId(flamerProvForUnload, args.AmmoSlot);
+                if (_itemSlots.GetItemOrNull(flamerProvForUnload.FlamerUid, unloadSlotId) == null)
                 {
                     _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-empty", ("box", flamerProvForUnload.FlamerUid)), ent, args.Actor);
                     return;
@@ -360,7 +361,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             if (!TryGetLoadableFlamerProvider(ent, args.Actor, args.SlotPath, out var flamerProvider))
                 return;
 
-            if (!CanLoadFlamer(activeBox, flamerProvider))
+            if (!CanLoadFlamer(activeBox, flamerProvider, args.AmmoSlot))
             {
                 _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-full", ("target", flamerProvider.FlamerUid)), ent, args.Actor);
                 return;
@@ -807,32 +808,46 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             if (!CanUseFlamerProvider(loaderComp, provider))
                 continue;
 
-            var insertedTank = _itemSlots.GetItemOrNull(provider.FlamerUid, provider.FlamerAmmo.ContainerId);
-            var current = 0;
-            var max = 0;
+            var totalSlots = 1 + provider.ExtraSlots;
+            var flamerAmmoSlots = new List<VehicleAmmoLoaderUiAmmoSlot>(totalSlots);
+            var canLoadAny = false;
+            var canUnloadAny = false;
+            var overallMax = 0;
 
-            if (insertedTank is { } tankUid &&
-                TryComp(tankUid, out RMCFlamerTankComponent? tankComp) &&
-                _solution.TryGetSolution(tankUid, tankComp.SolutionId, out _, out var tankSol))
+            for (var i = 0; i < totalSlots; i++)
             {
-                current = (int)(float)tankSol.Volume;
-                max = (int)(float)tankSol.MaxVolume;
+                var insertedTank = _itemSlots.GetItemOrNull(provider.FlamerUid, GetFlamerSlotId(provider, i));
+                var current = 0;
+                var max = 0;
+
+                if (insertedTank is { } tankUid &&
+                    TryComp(tankUid, out RMCFlamerTankComponent? tankComp) &&
+                    _solution.TryGetSolution(tankUid, tankComp.SolutionId, out _, out var tankSol))
+                {
+                    current = (int)(float)tankSol.Volume;
+                    max = (int)(float)tankSol.MaxVolume;
+                    if (max > overallMax)
+                        overallMax = max;
+                }
+
+                var canLoad = holdingFlamerTank && insertedTank == null;
+                var canUnload = insertedTank != null;
+                canLoadAny |= canLoad;
+                canUnloadAny |= canUnload;
+
+                flamerAmmoSlots.Add(new VehicleAmmoLoaderUiAmmoSlot(
+                    i,
+                    i == 0
+                        ? Loc.GetString("rmc-vehicle-ammo-loader-ui-ready-slot")
+                        : (i + 1).ToString(),
+                    current,
+                    max,
+                    canLoad,
+                    canUnload,
+                    i == 0));
             }
 
-            var canLoad = holdingFlamerTank && insertedTank == null;
-            var canUnload = insertedTank != null;
-            var ammoSlot = new VehicleAmmoLoaderUiAmmoSlot(
-                0,
-                Loc.GetString("rmc-vehicle-ammo-loader-ui-ready-slot"),
-                current,
-                max,
-                canLoad,
-                canUnload,
-                true);
-
-            var flamerInstalledEntity = insertedTank.HasValue
-                ? GetNetEntity(insertedTank.Value)
-                : GetNetEntity(provider.FlamerUid);
+            var flamerInstalledEntity = GetNetEntity(provider.FlamerUid);
 
             entries.Add(new VehicleAmmoLoaderUiEntry(
                 provider.Slot.Path,
@@ -840,10 +855,10 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
                 Name(provider.FlamerUid),
                 flamerInstalledEntity,
                 null,
-                max,
-                new List<VehicleAmmoLoaderUiAmmoSlot> { ammoSlot },
-                canLoad,
-                canUnload));
+                overallMax,
+                flamerAmmoSlots,
+                canLoadAny,
+                canUnloadAny));
         }
 
         loaderComp.Ui = new VehicleAmmoLoaderUiState(
@@ -956,6 +971,13 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-unloaded", ("amount", unloadedAmount), ("target", ammoUid)), loader, user);
     }
 
+    private static string GetFlamerSlotId(VehicleMountedFlamerProvider provider, int ammoSlot)
+    {
+        return ammoSlot == 0
+            ? provider.FlamerAmmo.ContainerId
+            : $"{provider.FlamerAmmo.ContainerId}_{ammoSlot + 1}";
+    }
+
     private static bool CanUseFlamerProvider(VehicleAmmoLoaderComponent loader, VehicleMountedFlamerProvider provider)
     {
         return loader.HardpointType == null ||
@@ -1007,18 +1029,20 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         return false;
     }
 
-    private bool CanLoadFlamer(EntityUid tankUid, VehicleMountedFlamerProvider provider)
+    private bool CanLoadFlamer(EntityUid tankUid, VehicleMountedFlamerProvider provider, int ammoSlot)
     {
-        return _itemSlots.GetItemOrNull(provider.FlamerUid, provider.FlamerAmmo.ContainerId) == null;
+        return _itemSlots.GetItemOrNull(provider.FlamerUid, GetFlamerSlotId(provider, ammoSlot)) == null;
     }
 
     private void DoLoadFlamerSlot(
         Entity<VehicleAmmoLoaderComponent> loader,
         EntityUid user,
         EntityUid tankUid,
-        VehicleMountedFlamerProvider provider)
+        VehicleMountedFlamerProvider provider,
+        int ammoSlot)
     {
-        if (!_itemSlots.TryInsert(provider.FlamerUid, provider.FlamerAmmo.ContainerId, tankUid, null))
+        var slotId = GetFlamerSlotId(provider, ammoSlot);
+        if (!_itemSlots.TryInsert(provider.FlamerUid, slotId, tankUid, null))
             return;
 
         _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-loaded", ("amount", 1), ("target", provider.FlamerUid)), loader, user);
@@ -1027,9 +1051,11 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
     private void DoUnloadFlamerSlot(
         Entity<VehicleAmmoLoaderComponent> loader,
         EntityUid user,
-        VehicleMountedFlamerProvider provider)
+        VehicleMountedFlamerProvider provider,
+        int ammoSlot)
     {
-        if (!_itemSlots.TryEject(provider.FlamerUid, provider.FlamerAmmo.ContainerId, null, out var ejectedItem))
+        var slotId = GetFlamerSlotId(provider, ammoSlot);
+        if (!_itemSlots.TryEject(provider.FlamerUid, slotId, null, out var ejectedItem))
             return;
 
         _hands.PickupOrDrop(user, ejectedItem.Value);
