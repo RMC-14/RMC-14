@@ -999,7 +999,7 @@ public sealed partial class HardpointSystem : EntitySystem
             return;
 
         var used = args.Used;
-        var isFrame = HasComp<HardpointSlotsComponent>(ent.Owner);
+        var isFrame = HasComp<HardpointSlotsComponent>(ent.Owner) && !HasComp<HardpointItemComponent>(ent.Owner);
         var usedWelder = _tool.HasQuality(used, ent.Comp.RepairToolQuality) && HasComp<BlowtorchComponent>(used);
         var usedWrench = isFrame && _tool.HasQuality(used, ent.Comp.FrameFinishToolQuality);
 
@@ -1085,7 +1085,7 @@ public sealed partial class HardpointSystem : EntitySystem
         args.Handled = true;
 
         var used = args.Used;
-        var isFrame = HasComp<HardpointSlotsComponent>(ent.Owner);
+        var isFrame = HasComp<HardpointSlotsComponent>(ent.Owner) && !HasComp<HardpointItemComponent>(ent.Owner);
         var usedWelder = used != null && _tool.HasQuality(used.Value, ent.Comp.RepairToolQuality) && HasComp<BlowtorchComponent>(used);
         var usedWrench = isFrame && used != null && _tool.HasQuality(used.Value, ent.Comp.FrameFinishToolQuality);
 
