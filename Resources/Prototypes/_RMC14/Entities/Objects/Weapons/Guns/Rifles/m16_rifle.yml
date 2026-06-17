@@ -108,8 +108,8 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer # TODO RMC14 advanced flamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower # TODO RMC14 advanced flamer
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
@@ -200,8 +200,8 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer # TODO RMC14 advanced flamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower # TODO RMC14 advanced flamer
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
