@@ -204,7 +204,7 @@
   parent: CMArmorM4PMC
   id: CMArmorM4PMCCommandoSurvivor
   name: damaged MY7 pattern Commando armor
-  description: A modification of the WEYA PMC armor patterns. Designed for elite corporate mercenaries in mind. This one has a lot of scratches and acid damage.
+  description: A modification of the WeYa PMC armor patterns. Designed for elite corporate mercenaries in mind. This one has a lot of scratches and acid damage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi

@@ -275,7 +275,6 @@ public abstract class SharedNightVisionSystem : EntitySystem
         }
 
         item.Comp.User = user;
-        Dirty(item);
 
         _appearance.SetData(item, NightVisionItemVisuals.Active, true);
 
@@ -285,22 +284,45 @@ public abstract class SharedNightVisionSystem : EntitySystem
             if (TryComp(user, out NightVisionComponent? nightVision))
             {
                 nightVision = EnsureComp<NightVisionComponent>(user);
-                if (nightVision.OnlyHalf && defaultState == NightVisionState.Full)
+
+                if (item.Comp.ExperimentalMesonFov)
+                {
+                    // Experimental mesons temporarily override innate synth vision and must restore it on disable.
+                    item.Comp.HadNightVision = true;
+                    item.Comp.PreviousState = nightVision.State;
+                    item.Comp.PreviousGreen = nightVision.Green;
+                    item.Comp.PreviousMesons = nightVision.Mesons;
+                    item.Comp.PreviousExperimentalMesonFov = nightVision.ExperimentalMesonFov;
+                    item.Comp.PreviousBlockScopes = nightVision.BlockScopes;
+                }
+                else
+                {
+                    item.Comp.HadNightVision = false;
+                }
+
+                if (!item.Comp.IgnoreUserOnlyHalf &&
+                    nightVision.OnlyHalf &&
+                    defaultState == NightVisionState.Full)
+                {
                     defaultState = NightVisionState.Half;
+                }
 
                 nightVision.State = defaultState;
                 nightVision.Green = item.Comp.Green;
                 nightVision.Mesons = item.Comp.Mesons;
+                nightVision.ExperimentalMesonFov = item.Comp.ExperimentalMesonFov;
                 nightVision.BlockScopes = item.Comp.BlockScopes;
                 Dirty(user, nightVision);
             }
             else
             {
+                item.Comp.HadNightVision = false;
                 nightVision = new NightVisionComponent()
                 {
                     State = defaultState,
                     Green = item.Comp.Green,
                     Mesons = item.Comp.Mesons,
+                    ExperimentalMesonFov = item.Comp.ExperimentalMesonFov,
                     BlockScopes = item.Comp.BlockScopes,
                 };
 
@@ -309,6 +331,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
             }
         }
 
+        Dirty(item);
         _actions.SetToggled(item.Comp.Action, true);
     }
 
@@ -325,15 +348,35 @@ public abstract class SharedNightVisionSystem : EntitySystem
         _actions.SetToggled(item.Comp.Action, false);
 
         item.Comp.User = null;
-        Dirty(item);
 
         _appearance.SetData(item, NightVisionItemVisuals.Active, false);
 
-        if (TryComp(user, out NightVisionComponent? nightVision) &&
-            !nightVision.Innate)
+        if (TryComp(user, out NightVisionComponent? nightVision))
         {
-            RemCompDeferred<NightVisionComponent>(user.Value);
+            if (item.Comp.ExperimentalMesonFov && item.Comp.HadNightVision)
+            {
+                // Restore the previous component state so innate synth night vision survives item toggles.
+                nightVision.State = item.Comp.PreviousState;
+                nightVision.Green = item.Comp.PreviousGreen;
+                nightVision.Mesons = item.Comp.PreviousMesons;
+                nightVision.ExperimentalMesonFov = item.Comp.PreviousExperimentalMesonFov;
+                nightVision.BlockScopes = item.Comp.PreviousBlockScopes;
+                Dirty(user.Value, nightVision);
+                UpdateAlert((user.Value, nightVision));
+            }
+            else if (!nightVision.Innate)
+            {
+                RemCompDeferred<NightVisionComponent>(user.Value);
+            }
         }
+
+        item.Comp.HadNightVision = false;
+        item.Comp.PreviousState = NightVisionState.Off;
+        item.Comp.PreviousGreen = false;
+        item.Comp.PreviousMesons = false;
+        item.Comp.PreviousExperimentalMesonFov = false;
+        item.Comp.PreviousBlockScopes = false;
+        Dirty(item);
     }
 
     private void ToggleNightVisionItemMode(Entity<NightVisionItemComponent> item, EntityUid user)
