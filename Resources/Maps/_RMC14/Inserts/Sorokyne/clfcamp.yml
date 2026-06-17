@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Grid
+  category: Map
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/30/2026 10:51:44
-  entityCount: 1153
-maps: []
+  time: 06/17/2026 12:23:02
+  entityCount: 1155
+maps:
+- 1154
 grids:
 - 1
-orphans:
-- 1
+orphans: []
 nullspace: []
 tilemap:
   0: Space
@@ -43,7 +43,7 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      parent: invalid
+      parent: 1154
     - type: MapGrid
       chunks:
         0,0:
@@ -1398,6 +1398,16 @@ entities:
         32,0: RMCAreaStrataInteriorWoodenRuins
         33,0: RMCAreaStrataInteriorWoodenRuins
         34,0: RMCAreaStrataInteriorWoodenRuins
+  - uid: 1154
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: GridTree
+    - type: Broadphase
+    - type: OccluderTree
 - proto: CigaretteSpent
   entities:
   - uid: 870
@@ -2270,18 +2280,6 @@ entities:
     - type: Transform
       pos: 20.5,2.5
       parent: 1
-- proto: DrinkGlass
-  entities:
-  - uid: 727
-    components:
-    - type: Transform
-      pos: 28.417538,13.236281
-      parent: 1
-  - uid: 728
-    components:
-    - type: Transform
-      pos: 28.723091,13.541837
-      parent: 1
 - proto: DrinkShotGlass
   entities:
   - uid: 726
@@ -3050,6 +3048,13 @@ entities:
     - type: Transform
       pos: 25.5,18.5
       parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 1155
+    components:
+    - type: Transform
+      pos: 30.5,0.5
+      parent: 1
 - proto: RMCBoxShotgunBuckshot
   entities:
   - uid: 959
@@ -3644,6 +3649,18 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: RMCDrinkGlass
+  entities:
+  - uid: 727
+    components:
+    - type: Transform
+      pos: 28.417538,13.236281
+      parent: 1
+  - uid: 728
+    components:
+    - type: Transform
+      pos: 28.723091,13.541837
+      parent: 1
 - proto: RMCFenceDoorSPP
   entities:
   - uid: 15
