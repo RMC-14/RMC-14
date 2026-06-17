@@ -1022,6 +1022,13 @@ public sealed partial class HardpointSystem : EntitySystem
         if (!usedWelder && !usedWrench)
             return;
 
+        if (IsDestroyedHardpointIrreparable(ent.Comp, isFrame))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-repairable-too-damaged", ("target", ent.Owner)), ent.Owner, args.User, PopupType.SmallCaution);
+            args.Handled = true;
+            return;
+        }
+
         if (ent.Comp.Integrity >= ent.Comp.MaxIntegrity)
         {
             _popup.PopupClient(Loc.GetString("rmc-hardpoint-intact"), ent.Owner, args.User, PopupType.SmallCaution);
@@ -1101,6 +1108,9 @@ public sealed partial class HardpointSystem : EntitySystem
         if (!usedWelder && !usedWrench)
             return;
 
+        if (IsDestroyedHardpointIrreparable(ent.Comp, isFrame))
+            return;
+
         if (usedWelder)
         {
             if (used == null || !_repairable.UseFuel(used.Value, args.User, GetFuelCostForChunk(ent.Owner, ent.Comp, GetRepairAmountForCurrentStep(ent.Owner, ent.Comp, usedWelder, usedWrench, isFrame), isFrame)))
@@ -1143,6 +1153,11 @@ public sealed partial class HardpointSystem : EntitySystem
 
         if (ShouldRepeatRepair(ent.Owner, ent.Comp, usedWelder, usedWrench, isFrame))
             args.Repeat = true;
+    }
+
+    private static bool IsDestroyedHardpointIrreparable(HardpointIntegrityComponent integrity, bool isFrame)
+    {
+        return !isFrame && integrity.Integrity <= 0f;
     }
 
     private float GetRepairAmountForCurrentStep(
