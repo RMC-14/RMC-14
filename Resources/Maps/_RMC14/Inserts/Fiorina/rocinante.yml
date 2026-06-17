@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/04/2026 17:48:55
-  entityCount: 709
+  time: 06/17/2026 06:59:07
+  entityCount: 710
 maps: []
 grids:
 - 1
@@ -171,6 +171,12 @@ entities:
             5: 1,15
         - node:
             cleanable: True
+            angle: 4.71238898038469 rad
+            id: burnt1
+          decals:
+            34: 16,16
+        - node:
+            cleanable: True
             id: burnt2
           decals:
             28: 16,16
@@ -192,6 +198,13 @@ entities:
             id: burnt3
           decals:
             31: 16,16
+            33: 1,15
+        - node:
+            cleanable: True
+            angle: 4.71238898038469 rad
+            id: burnt3
+          decals:
+            35: 3,34
         - node:
             cleanable: True
             angle: 3.141592653589793 rad
@@ -4366,13 +4379,6 @@ entities:
     - type: Transform
       pos: 8.5,24.5
       parent: 1
-- proto: RMCPropVehicleLoaderTruckTealF
-  entities:
-  - uid: 541
-    components:
-    - type: Transform
-      pos: 4.1043844,27.840637
-      parent: 1
 - proto: RMCRadioHandheldColonyOff
   entities:
   - uid: 510
@@ -4805,6 +4811,15 @@ entities:
       rot: 3.141592653589793 rad
       pos: 10.5,29.5
       parent: 1
+- proto: RMCVanWheel
+  entities:
+  - uid: 710
+    components:
+    - type: Transform
+      pos: 14.5,26.5
+      parent: 1
+    - type: HardpointIntegrity
+      integrity: 250
 - proto: RMCWallBoneResin
   entities:
   - uid: 151
@@ -5050,6 +5065,14 @@ entities:
     components:
     - type: Transform
       pos: 2.5,38.5
+      parent: 1
+- proto: VehicleCLFVan
+  entities:
+  - uid: 541
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5,28.5
       parent: 1
 - proto: WeaponRifleM16
   entities:

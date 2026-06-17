@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.0
+  engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/07/2025 16:51:44
-  entityCount: 356
+  time: 06/17/2026 06:55:58
+  entityCount: 357
 maps: []
 grids:
 - 1
@@ -205,6 +205,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: 14.5,15.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
 - proto: CMBarricadeMetal
   entities:
   - uid: 15
@@ -393,139 +395,6 @@ entities:
     components:
     - type: Transform
       pos: 21.4966,13.535567
-      parent: 1
-- proto: RMCLightFixture
-  entities:
-  - uid: 41
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 8.5,17.5
-      parent: 1
-  - uid: 42
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 8.5,14.5
-      parent: 1
-  - uid: 43
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 11.5,14.5
-      parent: 1
-  - uid: 44
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 11.5,17.5
-      parent: 1
-  - uid: 45
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 11.5,12.5
-      parent: 1
-  - uid: 46
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 11.5,8.5
-      parent: 1
-  - uid: 47
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 8.5,12.5
-      parent: 1
-  - uid: 48
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 8.5,8.5
-      parent: 1
-  - uid: 49
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 11.5,5.5
-      parent: 1
-  - uid: 50
-    components:
-    - type: Transform
-      pos: 14.5,5.5
-      parent: 1
-  - uid: 51
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 13.5,8.5
-      parent: 1
-  - uid: 52
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 15.5,8.5
-      parent: 1
-  - uid: 53
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 17.5,8.5
-      parent: 1
-  - uid: 54
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 15.5,16.5
-      parent: 1
-  - uid: 55
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 19.5,16.5
-      parent: 1
-- proto: RMCLightFixtureEmpty
-  entities:
-  - uid: 56
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 20.5,7.5
-      parent: 1
-- proto: RMCLightFixtureSmall
-  entities:
-  - uid: 57
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 6.5,12.5
-      parent: 1
-  - uid: 58
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 6.5,15.5
-      parent: 1
-  - uid: 59
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,12.5
-      parent: 1
-  - uid: 60
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,9.5
-      parent: 1
-- proto: RMCLightFixtureSmallEmpty
-  entities:
-  - uid: 61
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 4.5,6.5
       parent: 1
 - proto: CMMagazineSMGMP5
   entities:
@@ -1776,6 +1645,139 @@ entities:
     - type: Transform
       pos: 16.302855,16.926456
       parent: 1
+- proto: RMCLightFixture
+  entities:
+  - uid: 41
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,17.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,14.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,14.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,17.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,12.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,8.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,12.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,8.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,5.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 14.5,5.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 13.5,8.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 15.5,8.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 17.5,8.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,16.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 19.5,16.5
+      parent: 1
+- proto: RMCLightFixtureEmpty
+  entities:
+  - uid: 56
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 20.5,7.5
+      parent: 1
+- proto: RMCLightFixtureSmall
+  entities:
+  - uid: 57
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,12.5
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,15.5
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,12.5
+      parent: 1
+  - uid: 60
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,9.5
+      parent: 1
+- proto: RMCLightFixtureSmallEmpty
+  entities:
+  - uid: 61
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,6.5
+      parent: 1
 - proto: RMCLockerSecureSafe
   entities:
   - uid: 276
@@ -2290,6 +2292,14 @@ entities:
     components:
     - type: Transform
       pos: 13.5,14.5
+      parent: 1
+- proto: VehicleVan
+  entities:
+  - uid: 357
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4,11.5
       parent: 1
 - proto: WeaponSMGMP5
   entities:

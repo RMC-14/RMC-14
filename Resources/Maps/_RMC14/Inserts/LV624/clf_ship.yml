@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/16/2026 11:26:21
-  entityCount: 1378
+  time: 06/17/2026 06:57:15
+  entityCount: 1380
 maps: []
 grids:
 - 1
@@ -9212,6 +9212,16 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 25.5,34.5
       parent: 1
+- proto: RMCVanWheel
+  entities:
+  - uid: 1380
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,17.5
+      parent: 1
+    - type: HardpointIntegrity
+      integrity: 250
 - proto: RMCWeaponMar50LMG
   entities:
   - uid: 825
@@ -9261,6 +9271,14 @@ entities:
     components:
     - type: Transform
       pos: 12.5,17.5
+      parent: 1
+- proto: VehicleCLFVan
+  entities:
+  - uid: 1379
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 10,20.5
       parent: 1
 - proto: WallXenoResinImpenetrable
   entities:
