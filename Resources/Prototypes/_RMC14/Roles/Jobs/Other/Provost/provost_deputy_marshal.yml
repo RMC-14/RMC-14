@@ -11,6 +11,13 @@
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
+  - Colony
+  - Corp
+  - RMCWeYa
+  access:
+  - CMAccessHighCommand
+  - CMAccessXenoQueen
+  - CMAccessXeno
   special:
   - !type:AddComponentSpecial
     components:
