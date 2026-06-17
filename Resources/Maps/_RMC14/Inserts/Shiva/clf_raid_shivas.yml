@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 06:48:57
+  time: 06/17/2026 18:14:48
   entityCount: 740
 maps: []
 grids:
@@ -5590,8 +5590,9 @@ entities:
   - uid: 740
     components:
     - type: Transform
-      pos: 17.5,12.5
-      parent: 1
+      parent: 553
+    - type: Physics
+      canCollide: False
     - type: HardpointIntegrity
       integrity: 250
 - proto: RMCVendorCigsElectro
@@ -5738,6 +5739,13 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 20.5,14
       parent: 1
+    - type: ContainerContainer
+      containers:
+        wheel-1: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 740
+    - type: VehicleLock
 - proto: WeaponRifleM16
   entities:
   - uid: 420

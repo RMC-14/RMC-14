@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 06:57:15
+  time: 06/17/2026 18:13:28
   entityCount: 1380
 maps: []
 grids:
@@ -9217,9 +9217,9 @@ entities:
   - uid: 1380
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 8.5,17.5
-      parent: 1
+      parent: 1379
+    - type: Physics
+      canCollide: False
     - type: HardpointIntegrity
       integrity: 250
 - proto: RMCWeaponMar50LMG
@@ -9280,6 +9280,13 @@ entities:
       rot: 3.141592653589793 rad
       pos: 10,20.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        wheel-1: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 1380
+    - type: VehicleLock
 - proto: WallXenoResinImpenetrable
   entities:
   - uid: 1331

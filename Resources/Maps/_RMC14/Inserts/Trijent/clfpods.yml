@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 06:50:48
+  time: 06/17/2026 18:15:54
   entityCount: 365
 maps: []
 grids:
@@ -305,12 +305,14 @@ entities:
             id: burnt3
           decals:
             124: 6,-16
+            127: 5,-1
         - node:
             cleanable: True
             angle: 3.141592653589793 rad
             id: burnt4
           decals:
             125: 5,-1
+            126: 6,-16
     - type: GridAtmosphere
       version: 2
       data:
@@ -2065,8 +2067,9 @@ entities:
   - uid: 364
     components:
     - type: Transform
-      pos: 22.5,-25.5
-      parent: 1
+      parent: 365
+    - type: Physics
+      canCollide: False
     - type: HardpointIntegrity
       integrity: 250
 - proto: RMCWallEscapePod1
@@ -2391,6 +2394,13 @@ entities:
     - type: Transform
       pos: 19,-21
       parent: 1
+    - type: ContainerContainer
+      containers:
+        wheel-1: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: 364
+    - type: VehicleLock
 - proto: WeaponRifleM16
   entities:
   - uid: 190
