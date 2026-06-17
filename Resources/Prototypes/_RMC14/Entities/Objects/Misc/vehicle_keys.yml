@@ -4,8 +4,8 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
-    state: idjanitor
+    sprite: _RMC14/Objects/Misc/vehicle_key.rsi
+    state: key
   - type: Item
     size: Tiny
   - type: VehicleKey
@@ -16,11 +16,6 @@
   name: vehicle key
   description: A vehicle key cut for a specific lock.
   components:
-  - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
-    state: idjanitor
-  - type: Item
-    size: Tiny
   - type: VehicleKey
     mode: Normal
 
