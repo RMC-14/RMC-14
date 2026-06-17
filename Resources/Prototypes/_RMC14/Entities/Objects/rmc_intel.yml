@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: RMCIntelBase
@@ -20,6 +20,9 @@
   - type: Tag
     tags:
     - RMCIntelItem
+  - type: GuideHelp
+    guides:
+    - RMCIntel
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -115,13 +118,58 @@
     value: 0.7
   - type: IntelClues
     clues: 8
+    category: rmc-intel-retrieve
   - type: IntelSerial
+  - type: GuideHelp
+    guides:
+    - RMCIntel
+
+- type: entity
+  parent: RMCIntelRetrieveDeviceBase
+  id: RMCIntelRetrieveMassSpectrometer
+  name: advanced mass-spectrometer
+  description: A hand-held mass spectrometer which identifies trace chemicals in a blood sample.
+  suffix: Intel, Experimental Device
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/experimental_devices.rsi
+    state: adv_spectrometer
+  - type: IntelClues
+    clue: rmc-intel-clue-experimental-device
+
+- type: entity
+  parent: RMCIntelRetrieveDeviceBase
+  id: RMCIntelRetrieveReagentScanner
+  name: advanced reagent scanner
+  description: A hand-held reagent scanner which identifies chemical agents.
+  suffix: Intel, Experimental Device
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/experimental_devices.rsi
+    state: adv_spectrometer
+  - type: IntelClues
+    clue: rmc-intel-clue-experimental-device
 
 - type: entity
   parent: [CMHealthAnalyzer, RMCIntelRetrieveDeviceBase]
   id: RMCIntelRetrieveHealthAnalyzer
+  name: HF2 health analyzer
+  description: A hand-held body scanner able to distinguish vital signs of the subject. The front panel is able to provide the basic readout of the subject's status.
   suffix: Intel, Experimental Device
   components:
+  - type: IntelClues
+    clue: rmc-intel-clue-experimental-device
+
+- type: entity
+  parent: RMCIntelRetrieveDeviceBase
+  id: RMCIntelRetrieveAutopsyScanner
+  name: autopsy scanner
+  description: Extracts information on wounds.
+  suffix: Intel, Experimental Device
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/experimental_devices.rsi
+    state: autopsy_scanner
   - type: IntelClues
     clue: rmc-intel-clue-experimental-device
 
@@ -133,7 +181,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: techweb
+    layers:
+    - map: ["base"]
+      state: "techweb0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "techweb"
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.TechControlConsoleUI.Key
@@ -151,13 +203,67 @@
   parent: RMCCommunicationsConsoleBase
   id: RMCComputerIntel
   name: intel computer
-  description: An UNMC Intel Computer for data cataloguing and distribution.
+  description: An intel computer for data cataloguing and distribution.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: terminal1_old
+    layers: []
   - type: InteractionOutline
   - type: IntelConsole
+  - type: GuideHelp
+    guides:
+    - RMCIntel
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCSigintTerminal
+  name: SIGINT terminal
+  description: A computer capable of uploading data to the intelligence database. It has a disk reader slot built into the bottom, as well.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: medlaptop
+    layers: []
+  - type: InteractionOutline
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
+  - type: IntelConsole
+  - type: IntelDiskReader
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCIntelDataTerminal
+  name: data terminal
+  description: A computer data terminal with an incomprehensible label.
+  suffix: Intel
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: medlaptop
+    layers: []
+  - type: InteractionOutline
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
+  - type: IntelDataTerminalCandidate
 
 - type: entity
   id: RMCIntelTechTree
@@ -168,8 +274,8 @@
     tree:
       options:
       -
-        - name: Unlock Tier 1
-          description: Transitions the tree to another tier.
+        - name: rmc-intel-tech-unlock-tier-1-name
+          description: rmc-intel-tech-unlock-tier-description
           cost: 0
           events:
           - !type:TechUnlockTierEvent
@@ -178,8 +284,20 @@
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
-        - name: Requisition Budget Increase
-          description: Distributes resources to requisitions for spending.
+        - name: rmc-intel-tech-requisition-arc-name
+          description: rmc-intel-tech-requisition-arc-description
+          cost: 5
+          events:
+          - !type:TechUnlockVehicleEvent
+            unlock: VehicleHumveeARC
+          - !type:TechAnnounceEvent
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-arc
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: humvee
+        - name: rmc-intel-tech-requisition-budget-name
+          description: rmc-intel-tech-requisition-budget-description
           cost: 7
           increase: 1
           repurchasable: true
@@ -187,13 +305,13 @@
           - !type:TechRequisitionsBudgetEvent
             amount: 5000
           - !type:TechAnnounceEvent
-            author: ALMAYER SPECIAL ASSETS AUTHORIZED
-            message: Additional supply budget has been authorised for this operation.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-requisition-budget
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: budget_req
-        - name: Dropship Budget Increase
-          description: Distributes resources to the dropship fabricator.
+        - name: rmc-intel-tech-dropship-budget-name
+          description: rmc-intel-tech-dropship-budget-description
           cost: 6
           increase: 1
           repurchasable: true
@@ -201,29 +319,27 @@
           - !type:TechDropshipBudgetEvent
             amount: 2000
           - !type:TechAnnounceEvent
-            author: ALMAYER SPECIAL ASSETS AUTHORIZED
-            message: Additional dropship part fabricator points have been authorised for this operation.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-dropship-budget
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: budget_ds
-        - name: Unlock Tier 2
-          description: Transitions the tree to another tier.
+        - name: rmc-intel-tech-unlock-tier-2-name
+          description: rmc-intel-tech-unlock-tier-description
           cost: 5
           events:
           - !type:TechUnlockTierEvent
             tier: 2
           - !type:TechAnnounceEvent
-            author: ALMAYER DEFCON LEVEL INCREASED
-            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 2.
-
-              LEVEL 2 assets have been authorised to handle the situation."
+            author: rmc-intel-tech-announcement-defcon-author
+            message: rmc-intel-tech-announcement-tier-2
             sound: /Audio/_RMC14/AI/commandreport.ogg
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
-        - name: Additional OB projectiles - HE
-          description: Highly explosive bombardment ammo, to be loaded into the orbital cannon.
+        - name: rmc-intel-tech-ob-he-name
+          description: rmc-intel-tech-ob-he-description
           cost: 5
           increase: 2
           repurchasable: true
@@ -231,13 +347,13 @@
           - !type:TechLogisticsDeliveryEvent
             object: RMCOrbitalCannonWarheadExplosive
           - !type:TechAnnounceEvent
-            author: ALMAYER SPECIAL ASSETS AUTHORIZED
-            message: Additional Orbital Bombardment warheads (HE) have been delivered to Requisitions' ASRS.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-ob-he
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: ob_he
-        - name: Additional OB projectiles - Incendiary
-          description: Highly flammable bombardment ammo, to be loaded into the orbital cannon.
+        - name: rmc-intel-tech-ob-incendiary-name
+          description: rmc-intel-tech-ob-incendiary-description
           cost: 5
           increase: 2
           repurchasable: true
@@ -245,13 +361,13 @@
           - !type:TechLogisticsDeliveryEvent
             object: RMCOrbitalCannonWarheadIncendiary
           - !type:TechAnnounceEvent
-            author: ALMAYER SPECIAL ASSETS AUTHORIZED
-            message: Additional Orbital Bombardment warheads (Incendiary) have been delivered to Requisitions' ASRS.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-ob-incendiary
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: ob_incend
-        - name: Additional OB projectiles - Cluster
-          description: Highly explosive bombardment ammo that fragments, to be loaded into the orbital cannon.
+        - name: rmc-intel-tech-ob-cluster-name
+          description: rmc-intel-tech-ob-cluster-description
           cost: 5
           increase: 2
           repurchasable: true
@@ -259,80 +375,77 @@
           - !type:TechLogisticsDeliveryEvent
             object: RMCOrbitalCannonWarheadCluster
           - !type:TechAnnounceEvent
-            author: ALMAYER SPECIAL ASSETS AUTHORIZED
-            message: Additional Orbital Bombardment warheads (Cluster) have been delivered to Requisitions' ASRS.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-ob-cluster
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: ob_cluster
-        - name: Unlock Tier 3
-          description: Transitions the tree to another tier.
+        - name: rmc-intel-tech-unlock-tier-3-name
+          description: rmc-intel-tech-unlock-tier-description
           cost: 5
           events:
           - !type:TechUnlockTierEvent
             tier: 3
           - !type:TechAnnounceEvent
-            author: ALMAYER DEFCON LEVEL INCREASED
-            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 3.
-
-              LEVEL 3 assets have been authorised to handle the situation."
+            author: rmc-intel-tech-announcement-defcon-author
+            message: rmc-intel-tech-announcement-tier-3
             sound: /Audio/_RMC14/AI/commandreport.ogg
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
-        - name: Wake Up Additional Troops
-          description: Wakes up additional troops to fight against any threats.
+        - name: rmc-intel-tech-wake-troops-name
+          description: rmc-intel-tech-wake-troops-description
           cost: 6
           increase: 6
           repurchasable: true
           events:
           - !type:TechCryoMarinesEvent
           - !type:TechAnnounceEvent
-            author: ALMAYER SPECIAL ASSETS AUTHORIZED
-            message: Additional troops are being taken out of cryo.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-wake-troops
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: cryotroops
-        - name: Wake Up Additional Specialist
-          description: Wakes up an additional specialist to fight against any threats.
+        - name: rmc-intel-tech-wake-specialist-name
+          description: rmc-intel-tech-wake-specialist-description
           cost: 8
           events:
           - !type:TechCryoSpecEvent
           - !type:TechAnnounceEvent
-            author: ALMAYER SPECIAL ASSETS AUTHORIZED
-            message: An additional specialist is being taken out of cryo.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-wake-specialist
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: overshield
-        - name: Unlock Tier 4
-          description: Transitions the tree to another tier.
+        - name: rmc-intel-tech-unlock-tier-4-name
+          description: rmc-intel-tech-unlock-tier-description
           cost: 5
           events:
           - !type:TechUnlockTierEvent
             tier: 4
           - !type:TechAnnounceEvent
-            author: ALMAYER DEFCON LEVEL INCREASED
-            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 4.
-
-              LEVEL 4 assets have been authorised to handle the situation."
+            author: rmc-intel-tech-announcement-defcon-author
+            message: rmc-intel-tech-announcement-tier-4
             sound: /Audio/_RMC14/AI/commandreport.ogg
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
-        - name: Nuclear Device
-          description: 	Purchase a nuclear device. Only purchasable 116 minutes into the operation. It's the only way to be sure.
+        - name: rmc-intel-tech-nuclear-device-name
+          description: rmc-intel-tech-nuclear-device-description
           cost: 5
           timeLock: 115m
           events:
           - !type:TechLogisticsDeliveryEvent
             object: RMCNuke
           - !type:TechAnnounceEvent
-            author: ALMAYER SPECIAL ASSETS AUTHORIZED
-            message: The deployment of Nuclear Ordnance have been authorized and will be delivered to the Requisitions Department, via ASRS.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-nuclear-device
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: nuke
+  - type: VehicleSupplyTech
 - type: Tag
   id: RMCIntelItem
 

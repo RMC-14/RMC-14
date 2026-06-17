@@ -87,6 +87,9 @@
   - type: UseDelay
   - type: DisarmMalus
     malus: 0.225
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
 
 - type: entity
   parent: BaseItem
