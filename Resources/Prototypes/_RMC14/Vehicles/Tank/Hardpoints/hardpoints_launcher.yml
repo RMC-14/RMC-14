@@ -39,24 +39,15 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
-  - type: SolutionContainerManager
-    solutions:
-      rmc_flamer_tank:
-        maxVol: 60
-        reagents:
-        - ReagentId: RMCNapalmUTTank
-          Quantity: 60
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: VehicleFlamerTankLZRN
+        whitelist:
+          tags:
+          - RMCTankFlamer
   - type: RMCFlamerAmmoProvider
-  - type: RMCFlamerTank
-    maxIntensity: 30
-    maxDuration: 20
-    maxRange: 7
-    reagentWhitelist:
-    - RMCNapalmUTTank
-  - type: RMCFlushableSolution
-    solution: rmc_flamer_tank
-    flushTime: 1.5
-  - type: NoMixingReagents
   - type: GunFireArc
     arc: 120
   - type: GunMuzzleOffset

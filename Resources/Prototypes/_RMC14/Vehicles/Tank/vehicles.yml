@@ -91,6 +91,7 @@
       visible: false
     - map: [ primary ]
       state: tank_turret_0
+      visible: false
     - map: [ secondary ]
       state: SECONDARY
       visible: false
@@ -246,6 +247,7 @@
       visible: false
     - map: [ primary ]
       state: tank_turret_0
+      visible: false
     - map: [ secondary ]
       state: SECONDARY
       visible: false

@@ -476,7 +476,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         return _solution.TryGetSolution(tankValue.Owner, tankValue.Comp.SolutionId, out solutionEnt, out _);
     }
 
-    private void Transfer(EntityUid source,
+    public void Transfer(EntityUid source,
         Entity<SolutionComponent> sourceSolutionEnt,
         Entity<RMCFlamerTankComponent> target,
         Entity<SolutionComponent> targetSolutionEnt,

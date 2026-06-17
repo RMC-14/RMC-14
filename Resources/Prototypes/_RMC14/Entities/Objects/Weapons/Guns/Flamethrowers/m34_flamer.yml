@@ -243,6 +243,14 @@
   id: VehicleFlamerTankLZRN
   name: LZR-N flame tank
   description: A fuel tank for the LZR-N flame unit. Handle with care.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 60
+        reagents:
+        - ReagentId: RMCNapalmUTTank
+          Quantity: 60
 
 - type: Tag
   id: RMCTankFlamer

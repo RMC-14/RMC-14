@@ -8,4 +8,7 @@ public sealed partial class VehicleTurretVisualComponent : Component
 {
     [AutoNetworkedField]
     public NetEntity Turret;
+
+    [NonSerialized]
+    public bool SpriteInitialized;
 }

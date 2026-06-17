@@ -29,6 +29,9 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
         var query = EntityQueryEnumerator<VehicleTurretVisualComponent>();
         while (query.MoveNext(out var uid, out var visual))
         {
+            if (!visual.SpriteInitialized)
+                UpdateVisual((uid, visual));
+
             if (!TryGetEntity(visual.Turret, out var turretUid))
                 continue;
 
@@ -104,6 +107,7 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
                 sprite.LayerSetState(0, overlayState);
 
             sprite.LayerSetVisible(0, true);
+            ent.Comp.SpriteInitialized = true;
             return;
         }
 
@@ -118,6 +122,7 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
         sprite.LayerSetRSI(0, turretSprite.BaseRSI);
         sprite.LayerSetState(0, state);
         sprite.LayerSetVisible(0, true);
+        ent.Comp.SpriteInitialized = true;
     }
 
     private void SetOverlayDepth(EntityUid turretUid, SpriteComponent sprite)
