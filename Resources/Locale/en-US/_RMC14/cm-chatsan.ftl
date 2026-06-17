@@ -412,8 +412,8 @@ cm-chatsan-replacement-ammo = spits
 
 # TODO RMC14 rouny > runner but only if no rouny was spawned in the round
 
-# cm-chatsan-word-#tank = #tank
-# cm-chatsan-replacement-#tank = turtle
+cm-chatsan-word-tank = tank
+cm-chatsan-replacement-tank = turtle
 
 cm-chatsan-word-laser = laser
 cm-chatsan-replacement-laser = dot
