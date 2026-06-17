@@ -39,7 +39,6 @@ public sealed class RangefinderSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
-
     public override void Initialize()
     {
         SubscribeLocalEvent<RangefinderComponent, MapInitEvent>(OnRangefinderMapInit);
