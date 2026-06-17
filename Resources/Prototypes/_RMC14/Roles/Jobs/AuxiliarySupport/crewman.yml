@@ -40,6 +40,10 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-vc
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadIntel
     - type: SquadArmorWearer
     - type: SquadNameOverride
       name: cm-job-name-vc
@@ -47,10 +51,6 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: vc
-      background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_intel
-  hidden: true #TODO RMC14 - Remove when vehicles are fully added.
 
 - type: startingGear
   id: CMGearVehicleCrewman
