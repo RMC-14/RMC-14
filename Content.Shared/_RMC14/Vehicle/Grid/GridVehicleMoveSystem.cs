@@ -58,7 +58,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private const double MobCollisionDamage = 8;
     private static readonly TimeSpan MobCollisionKnockdown = TimeSpan.FromSeconds(1.5);
     private static readonly TimeSpan MobCollisionCooldown = TimeSpan.FromSeconds(0.75);
-    private const float MobCollisionMinKnockdownSpeed = 1f;
+    private const float MobCollisionMinKnockdownSpeed = 4f;
     private static readonly ProtoId<DamageTypePrototype> CollisionDamageType = "Blunt";
     private const int GridVehicleStaticBlockerMask =
         (int) (CollisionGroup.Impassable |
