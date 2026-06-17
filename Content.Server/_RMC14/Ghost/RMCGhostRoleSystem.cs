@@ -33,6 +33,9 @@ public sealed partial class RMCGhostRoleSystem : EntitySystem
 
     private void OnTakeover(Entity<RMCGhostRoleComponent> ent, ref TakeGhostRoleEvent args)
     {
+        if (args.TookRole)
+            return;
+
         if (!_transformSystem.TryGetMapOrGridCoordinates(ent, out var coords) ||
             !TryComp<GhostRoleComponent>(ent, out var ghost) ||
             !_mind.TryGetMind(args.Player, out var mindId, out var mindComp))
@@ -48,6 +51,8 @@ public sealed partial class RMCGhostRoleSystem : EntitySystem
         EntityManager.AddComponents(mobUid, ent.Comp.AddComponents);
         EnsureComp<RMCAdminSpawnedComponent>(mobUid);
         EnsureComp<RMCGhostRoleCompleteComponent>(mobUid);
+
+        args.TookRole = true;
 
         if (ent.Comp.Remaining is { } remaining)
         {
