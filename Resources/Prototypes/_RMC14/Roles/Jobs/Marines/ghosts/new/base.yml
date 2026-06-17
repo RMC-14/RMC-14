@@ -6,7 +6,6 @@
     name: cm-job-name-combat-tech
     description: cm-job-description-combat-tech
     rules: ghost-role-information-nonantagonist-rules
-    reregister: false
     raffle:
       settings: default
     job: CMCombatTech
@@ -23,7 +22,6 @@
     name: cm-job-name-fireteam-leader
     description: cm-job-description-fireteam-leader
     rules: ghost-role-information-nonantagonist-rules
-    reregister: false
     raffle:
       settings: default
     job: CMFireteamLeader
@@ -40,7 +38,6 @@
     name: cm-job-name-hospital-corpsman
     description: cm-job-description-hospital-corpsman
     rules: ghost-role-information-nonantagonist-rules
-    reregister: false
     raffle:
       settings: default
     job: CMHospitalCorpsman
@@ -57,7 +54,6 @@
     name: cm-job-name-rifleman
     description: cm-job-description-rifleman
     rules: ghost-role-information-nonantagonist-rules
-    reregister: false
     raffle:
       settings: default
     job: CMRifleman
@@ -74,7 +70,6 @@
     name: cm-job-name-smart-gun-operator
     description: cm-job-description-smart-gun-operator
     rules: ghost-role-information-nonantagonist-rules
-    reregister: false
     raffle:
       settings: default
     job: CMSmartGunOperator
@@ -91,7 +86,6 @@
     name: cm-job-name-squad-leader
     description: cm-job-description-squad-leader
     rules: ghost-role-information-nonantagonist-rules
-    reregister: false
     raffle:
       settings: default
     job: CMSquadLeader
@@ -108,7 +102,6 @@
     name: cm-job-name-weapons-specialist
     description: cm-job-description-weapons-specialist
     rules: ghost-role-information-nonantagonist-rules
-    reregister: false
     raffle:
       settings: default
     job: CMWeaponsSpecialist
