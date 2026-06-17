@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
+  category: Grid
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 12:23:02
-  entityCount: 1155
-maps:
-- 1154
+  time: 06/17/2026 16:33:09
+  entityCount: 1154
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   0: Space
@@ -43,7 +43,7 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      parent: 1154
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -1398,16 +1398,6 @@ entities:
         32,0: RMCAreaStrataInteriorWoodenRuins
         33,0: RMCAreaStrataInteriorWoodenRuins
         34,0: RMCAreaStrataInteriorWoodenRuins
-  - uid: 1154
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
 - proto: CigaretteSpent
   entities:
   - uid: 870
