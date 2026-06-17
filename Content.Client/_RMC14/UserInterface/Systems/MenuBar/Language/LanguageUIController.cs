@@ -7,6 +7,7 @@ using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
+using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared.Input;
 using Robust.Client.GameObjects;
@@ -43,8 +44,8 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
         _languageSystem.OnLanguageLearningChanged += OnLanguageLearningChanged;
 
         CommandBinds.Builder
-            .Bind(ContentKeyFunctions.OpenLanguageMenu, InputCmdHandler.FromDelegate(_ => ToggleWindow()))
-            .Bind(ContentKeyFunctions.CycleLanguage, InputCmdHandler.FromDelegate(_ => CycleLanguage()))
+            .Bind(CMKeyFunctions.RMCOpenLanguageMenu, InputCmdHandler.FromDelegate(_ => ToggleWindow()))
+            .Bind(CMKeyFunctions.RMCCycleLanguage, InputCmdHandler.FromDelegate(_ => CycleLanguage()))
             .Register<LanguageUIController>();
     }
 
@@ -83,7 +84,7 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
         {
             Icon = GetLanguageIcon(FallbackLanguageIcon),
             ToolTip = Loc.GetString("game-hud-open-language-menu-button-tooltip"),
-            BoundKey = ContentKeyFunctions.OpenLanguageMenu,
+            BoundKey = CMKeyFunctions.RMCOpenLanguageMenu,
             MinSize = new Vector2(42f, 64f),
             HorizontalExpand = true,
         };

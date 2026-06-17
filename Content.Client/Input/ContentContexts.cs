@@ -63,8 +63,6 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.AltUseItemInHand);
             human.AddFunction(ContentKeyFunctions.OpenCharacterMenu);
             human.AddFunction(ContentKeyFunctions.OpenEmotesMenu);
-            human.AddFunction(ContentKeyFunctions.OpenLanguageMenu);
-            human.AddFunction(ContentKeyFunctions.CycleLanguage);
             human.AddFunction(ContentKeyFunctions.ActivateItemInWorld);
             human.AddFunction(ContentKeyFunctions.ThrowItemInHand);
             human.AddFunction(ContentKeyFunctions.AltActivateItemInWorld);
@@ -151,6 +149,8 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCInteractWithOtherHand);
             human.AddFunction(CMKeyFunctions.RMCRest);
             human.AddFunction(CMKeyFunctions.RMCResist);
+            human.AddFunction(CMKeyFunctions.RMCOpenLanguageMenu);
+            human.AddFunction(CMKeyFunctions.RMCCycleLanguage);
 
             //Xenonid
             var xenonid = contexts.New("xenonid", "human");
