@@ -88,7 +88,7 @@
       collection: GenericHit
   - type: Tag
     tags:
-    - RMCWeaponLauncherDisposableFolded
+    - RMCWeaponRocketDisposableFolded
 
 - type: entity
   parent: RMCWeaponLauncherDisposable
@@ -136,4 +136,4 @@
     onActivate: true
 
 - type: Tag
-  id: RMCWeaponLauncherDisposableFolded
+  id: RMCWeaponRocketDisposableFolded

@@ -379,4 +379,13 @@
   id: RMCMagazineRifleM16
 
 - type: Tag
+  id: RMCMagazineRifleM16Ext
+
+- type: Tag
+  id: RMCMagazineRifleM16AP
+
+- type: Tag
   id: RMCCartridgeRifleM16
+
+- type: Tag
+  id: RMCCartridgeRifleM16AP

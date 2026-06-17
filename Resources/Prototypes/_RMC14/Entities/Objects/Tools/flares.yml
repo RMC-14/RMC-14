@@ -453,6 +453,9 @@
     proto: RMCFlareColonistBullet
   - type: RMCAirProjectile
     prototype: RMCAirFlareColonist
+  - type: Tag
+    tags:
+    - CMFlarePackColonist
 
 - type: entity
   parent: CMPackFlareBase
@@ -479,7 +482,7 @@
       name: Flare Pack
       whitelist:
         tags:
-        - CMFlarePackColonist
+        - RMCPackFlareColonist
   - type: Sprite
     layers:
     - state: supply_box_small

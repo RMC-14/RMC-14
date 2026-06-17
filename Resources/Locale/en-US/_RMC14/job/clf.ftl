@@ -36,7 +36,7 @@ rmc-job-prefix-clf-pve-commander = Capt.
 
 rmc-ghost-role-clf-pve-leader = CLF Cell Leader (PVE)
 rmc-job-name-clf-pve-leader = Cell Deck Officer
-rmc-job-prefix-clf-clf-pve-leader = CDO
+rmc-job-prefix-clf-pve-leader = CDO
 
 rmc-ghost-role-clf-pve-doctor = CLF Doctor (PVE)
 rmc-job-name-clf-pve-doctor = Doctor

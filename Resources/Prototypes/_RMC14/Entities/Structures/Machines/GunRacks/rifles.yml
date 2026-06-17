@@ -1054,54 +1054,54 @@
         name: M16
         whitelist:
           tags:
-          - WeaponRifleM16
+          - RMCWeaponRifleM16
       item_2:
         name: M16
         whitelist:
           tags:
-          - WeaponRifleM16
+          - RMCWeaponRifleM16
       item_3:
         name: M16
         whitelist:
           tags:
-          - WeaponRifleM16
+          - RMCWeaponRifleM16
       item_4:
         name: M16
         whitelist:
           tags:
-          - WeaponRifleM16
+          - RMCWeaponRifleM16
       item_5:
         name: M16
         whitelist:
           tags:
-          - WeaponRifleM16
+          - RMCWeaponRifleM16
   - type: ItemMapper
     mapLayers:
       fill_1:
         minCount: 1
         whitelist:
           tags:
-          - WeaponRifleM16
+          - RMCWeaponRifleM16
       fill_2:
         minCount: 2
         whitelist:
           tags:
-          - WeaponRifleM16
+          - RMCWeaponRifleM16
       fill_3:
         minCount: 3
         whitelist:
           tags:
-          - WeaponRifleM16
+          - RMCWeaponRifleM16
       fill_4:
         minCount: 4
         whitelist:
           tags:
-          - WeaponRifleM16
+          - RMCWeaponRifleM16
       fill_5:
         minCount: 5
         whitelist:
           tags:
-          - WeaponRifleM16
+          - RMCWeaponRifleM16
 
 - type: entity
   parent: RMCGunRackM16Empty
