@@ -95,7 +95,7 @@ public sealed partial class VehicleTurretComponent : Component
     public float MaxShotCurvatureDegrees = 0f;
 
     [DataField, AutoNetworkedField]
-    public bool StabilizedRotation = false;
+    public bool StabilizedRotation = true;
 
     [DataField, AutoNetworkedField]
     public float RotationSpeed = 0f;

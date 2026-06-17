@@ -22,6 +22,9 @@
         enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
           False: { visible: false }
+        base:
+          True: { visible: false }
+          False: { visible: true }
   - type: Clickable
   - type: InteractionOutline
   - type: Corrodible
@@ -97,8 +100,9 @@
   - type: MarineControlComputer
 
 - type: entity
+  abstract: true
   parent: RMCCommunicationsConsoleBase
-  id: RMCOverwatchConsole
+  id: RMCOverwatchConsoleBase
   name: overwatch console
   description: State of the art machinery for giving orders to a squad.
   components:
@@ -106,15 +110,6 @@
     anchored: false
   - type: Physics
     bodyType: Static
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/computer.rsi
-    layers:
-    - map: ["base"]
-      state: "overwatch0"
-    - map: ["enum.PowerDeviceVisualLayers.Powered"]
-      state: "overwatch"
-    overrideDir: West
-    enableOverrideDir: true
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.OverwatchConsoleUI.Key
@@ -142,6 +137,20 @@
     - RMCGuideCommunicationsTowers
     - RMCGuideRoleCombatTechnician
     - RMCGuideRoleMaintenanceTechnician
+
+- type: entity
+  parent: RMCOverwatchConsoleBase
+  id: RMCOverwatchConsole
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    layers:
+    - map: ["base"]
+      state: "overwatch0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "overwatch"
+    overrideDir: West
+    enableOverrideDir: true
 
 - type: entity
   parent: RMCOverwatchConsole

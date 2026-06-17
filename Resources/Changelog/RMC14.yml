@@ -1,107 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed being able to scope with the ML66D on your back.
-    type: Fix
-  id: 2914
-  time: '2026-02-10T00:40:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9180
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Designer Hivelord weedbound walls and doors getting deleted if
-      their weeds are replaced by hardy or hive weeds.
-    type: Fix
-  id: 2915
-  time: '2026-02-10T00:43:51.599298+00:00'
-  url: null
-- author: Dygon
-  changes:
-  - message: Fixed the dropship arrival sound not playing right before a dropship
-      lands.
-    type: Fix
-  id: 2916
-  time: '2026-02-10T02:39:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9186
-- author: Dygon
-  changes:
-  - message: Fixed being able to place multiple machine guns on the same tile.
-    type: Fix
-  id: 2917
-  time: '2026-02-10T02:39:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9188
-- author: Ian321
-  changes:
-  - message: The smart refill tank can now be filled and emptied like a beaker.
-    type: Tweak
-  id: 2918
-  time: '2026-02-10T02:41:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9185
-- author: CatAndHats
-  changes:
-  - message: Accentless trait now correctly removes Vulpkanin default accent
-    type: Fix
-  id: 2919
-  time: '2026-02-10T02:41:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9183
-- author: DrSmugleaf
-  changes:
-  - message: Fixed M2C and ML66D magazines disappearing when transferring between
-      them.
-    type: Fix
-  - message: Fixed the sticky resin left behind by destroyed weedbound resin slowing
-      down xenos of the same hive.
-    type: Fix
-  id: 2920
-  time: '2026-02-10T02:57:13.062736+00:00'
-  url: null
-- author: Dygon
-  changes:
-  - message: Fixed Tail Seize looking like it shot twice in a row with a single use.
-    type: Fix
-  - message: The Oppressor's Abduct ability now pulls it's targets slightly closer
-      to the Oppressor's location.
-    type: Fix
-  id: 2921
-  time: '2026-02-11T08:20:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9214
-- author: Arykh
-  changes:
-  - message: Stopped the MedVend refill sound from being queued/desynced/delayed when
-      spamming refills. Also lowered the volume a little.
-    type: Fix
-  id: 2922
-  time: '2026-02-11T08:21:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9213
-- author: Dygon
-  changes:
-  - message: Fixed barricade upgrades taking too much fire damage over time
-    type: Fix
-  id: 2923
-  time: '2026-02-11T08:22:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9197
-- author: Dygon
-  changes:
-  - message: Fixed an undeployed M2C not being able to be acided while not broken.
-    type: Fix
-  - message: Night vision visors no longer turn off when you mount an HMG.
-    type: Fix
-  id: 2924
-  time: '2026-02-11T08:22:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9199
-- author: Dygon
-  changes:
-  - message: Fixed invisible scouts and snipers being hit by friendly fire while invisible.
-    type: Fix
-  id: 2925
-  time: '2026-02-11T08:23:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9191
-- author: Vixting
-  changes:
-  - message: Fix UBF not having overlay
-    type: Add
-  id: 2926
-  time: '2026-02-11T08:23:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9193
 - author: LeoKarz
   changes:
   - message: Added a cursor overlay for selected design and node type for designer
@@ -4555,5 +4452,132 @@
   id: 3413
   time: '2026-06-16T13:52:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10130
+- author: Vixting
+  changes:
+  - message: XO now has vehicles 2
+    type: Tweak
+  - message: New locker sprites from Noctyrnal
+    type: Add
+  id: 3414
+  time: '2026-06-16T19:53:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10175
+- author: CatAndHats
+  changes:
+  - message: Fixed LV624 central cave inserts not having invincible resin
+    type: Fix
+  id: 3415
+  time: '2026-06-16T19:55:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10172
+- author: CatAndHats
+  changes:
+  - message: Added some items to Shiva's like wheelchairs, sleeper pods, scanner pods,
+      MB-6 folding cade, some couches.
+    type: Add
+  - message: Fixed a spot on Shiva's where invincible resin fog was placed instead
+      of invincible resin doors, and two spots where invincible resin doors were doubled/tripled
+      on the same tile.
+    type: Fix
+  id: 3416
+  time: '2026-06-16T19:58:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10075
+- author: CatAndHats
+  changes:
+  - message: Added MB-6 folding composite barricades, ponchos, M1911s (replacing M1984s),
+      and decks of cards to Chance's Claim
+    type: Add
+  - message: Fixed an area filled with metal foam on Chance's Claim that was set as
+      Out Of Bounds area instead of the correct mining area
+    type: Fix
+  - message: Fixed two rooms on Chance's Claim not being connected to the pipe net
+    type: Fix
+  id: 3417
+  time: '2026-06-16T19:57:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10080
+- author: kleinerstation13
+  changes:
+  - message: Security Colonists can no longer become Prisoners, you must now roll
+      Civilian Colonist to become one
+    type: Tweak
+  id: 3418
+  time: '2026-06-16T20:00:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10177
+- author: CatAndHats
+  changes:
+  - message: Added the proper Surplus Boxes of Ingredients crate to Requisitions for
+      purchase, and it will be randomly given by ASRS on the goods lift
+    type: Add
+  - message: Added RMC-specific Milk and Soy Milk cartons
+    type: Add
+  id: 3419
+  time: '2026-06-16T19:59:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9985
+- author: Thereisabear
+  changes:
+  - message: Fixed Xenos being able to collapse the MB-6 folding barricade.
+    type: Fix
+  id: 3420
+  time: '2026-06-16T20:13:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10170
+- author: AlexisMoonlight
+  changes:
+  - message: (Law) Added definitions for recorders and listening devices.
+    type: Add
+  - message: (SOP/MLaw) Added SOP on the use of recorders by MPs. MPs can use recorders
+      freely as long as they remain in MP's possession.
+    type: Add
+  - message: (SOP) CMP approves use of listening devices instead of Commander.
+    type: Tweak
+  id: 3421
+  time: '2026-06-16T20:39:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10081
+- author: JustMyselfUwU
+  changes:
+  - message: Fixed barricades and mounted weapons not blinding you when welding them
+    type: Fix
+  id: 3422
+  time: '2026-06-16T21:48:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9930
+- author: Whisper
+  changes:
+  - message: '[SOP] SOs may deploy anywhere while remaining in the ARC'
+    type: Add
+  id: 3423
+  time: '2026-06-16T21:47:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10179
+- author: Vixting
+  changes:
+  - message: Adds languages. Languages can be selected from the traits section. If
+      you don't understand the language, the words spoken will be garbled for you.
+      Normal languages use a round seed, meaning you can learn what a word means in
+      a round even if you don't know the language. Xenonid language is completely
+      random however.
+    type: Add
+  - message: Adds language learning system, currently only for synths to learn xenonid,
+      through exposure to the language you will learn it. Survivor synths have a boosted
+      initial learning rate.
+    type: Add
+  - message: Radios now support different prefixes.
+    type: Add
+  - message: . now supports multi broadcast
+    type: Tweak
+  id: 3424
+  time: '2026-06-16T21:51:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9831
+- author: kleinerstation13
+  changes:
+  - message: Fixed Type 19 using incorrect firing sound, not having inhand sprites,
+      not displaying the correct magazine sprite, and not being able to take correct
+      attachments.
+    type: Fix
+  id: 3425
+  time: '2026-06-16T22:54:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9901
+- author: Vixting
+  changes:
+  - message: Heavy vehicle operator survivors now spawn with wheels inhand
+    type: Add
+  id: 3426
+  time: '2026-06-16T22:57:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10183
 Name: RMC14
 Order: -1
