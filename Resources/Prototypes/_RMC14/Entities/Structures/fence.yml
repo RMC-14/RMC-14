@@ -12,6 +12,9 @@
     state: fence0
   - type: InteractionOutline
   - type: Clickable
+  - type: VehicleSmashable
+    deleteOnHit: false
+    damageOnHit: 50
   - type: IconSmooth
     key: fences
     base: fence

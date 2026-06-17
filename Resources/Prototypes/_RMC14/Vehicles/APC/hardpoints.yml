@@ -1,0 +1,282 @@
+- type: entity
+  parent: BaseItem
+  id: RMCAPCHardpointBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/apc.rsi
+  - type: Item
+    size: Large
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCWheel
+  name: APC wheel
+  description: A reinforced APC wheel.
+  components:
+  - type: Sprite
+    state: tires
+  - type: HardpointItem
+    hardpointType: HardpointTypeWheel
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeWheel
+    damageMultiplier: 0.15
+    repairRate: 0.0165
+  - type: HardpointIntegrity
+    maxIntegrity: 500
+  - type: VehicleWheelItem
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCFrontCannon
+  name: APC frontal cannon
+  description: A fixed forward cannon for an APC hardpoint.
+  components:
+  - type: Sprite
+    state: front_cannon
+  - type: HardpointItem
+    hardpointType: HardpointTypeCannon
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeCannon
+    damageMultiplier: 0.11
+    repairRate: 0.01
+  - type: HardpointIntegrity
+    maxIntegrity: 350
+  - type: VehicleTurret
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 3.3333333
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
+    cameraRecoilScalar: 0
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: VehicleCartridgeAPCFrontalCannon10x50mm
+    capacity: 500
+  - type: VehicleHardpointAmmo
+    magazineSize: 500
+    maxStoredMagazines: 1
+  - type: GunFireArc
+    arc: 180
+  - type: RefillableByBulletBox
+    bulletType: VehicleAmmoBoxFrontal
+  - type: GunMuzzleOffset
+    offset: "0.5,-1.7"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+  - type: HardpointVisual
+    vehicleState: frontalcannon_0
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCDualCannon
+  name: APC dual cannon
+  description: A dual cannon turret for an APC hardpoint.
+  components:
+  - type: Sprite
+    state: dual_cannon
+  - type: HardpointItem
+    hardpointType: HardpointTypeTurret
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeTurret
+    damageMultiplier: 0.2
+    repairRate: 0.008
+  - type: HardpointIntegrity
+    maxIntegrity: 500
+  - type: VehicleTurret
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 2
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/_RMC14/Vehicle/weapons/dual_autocannon_fire.ogg #TODO RMC14 change to mono
+    cameraRecoilScalar: 0
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: VehicleCartridgeBoyarsDualCannon10x50mm
+    capacity: 40
+  - type: VehicleHardpointAmmo
+    magazineSize: 40
+    maxStoredMagazines: 2
+  - type: GunFireArc
+    arc: 90
+  - type: RefillableByBulletBox
+    bulletType: VehicleAmmoBoxAceAutocannon
+  - type: GunMuzzleOffset
+    useDirectionalOffsets: true
+    offsetNorth: "0,0" #TODO RMC14 verify the north-facing muzzle offset
+    offsetEast: "0,0"
+    offsetSouth: "-0.3,0.9"
+    offsetWest: "0,0"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+
+  - type: HardpointVisual
+    vehicleState: dualcannon_0
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCCommsRelay
+  name: APC comms relay
+  description: A communications relay array for APC support slots.
+  components:
+  - type: Sprite
+    state: comms_relay
+  - type: HardpointItem
+    hardpointType: HardpointTypeSupportAttachment
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeSupportAttachment
+    damageMultiplier: 0.075
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 100
+  - type: HardpointVisual
+    vehicleState: comms_relay_0
+  - type: VehicleSensor
+    range: 40
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCFlareLauncher
+  name: APC flare launcher
+  description: A flare launcher hardpoint for APC support slots.
+  components:
+  - type: Sprite
+    state: flare_launcher
+  - type: HardpointItem
+    hardpointType: HardpointTypeSupportAttachment
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeSupportAttachment
+    damageMultiplier: 0.1
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 500
+  - type: VehicleTurret
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: GunIgnorePrediction
+  - type: Gun
+    fireRate: 0.5
+    projectileSpeed: 20
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
+    cameraRecoilScalar: 0
+  - type: ShootAtFixedPoint
+  - type: BallisticAmmoProvider
+    cycleable: false
+    capacity: 10
+    whitelist:
+      tags:
+      - Flare
+      - RMCFlare
+      - RMCFlareCAS
+    proto: CMFlare
+  - type: VehicleHardpointAmmo
+    magazineSize: 10
+    maxStoredMagazines: 3
+  - type: GunFireArc
+    arc: 360
+  - type: RefillableByBulletBox
+    bulletType: VehicleAmmoBoxFlareLauncher
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+  - type: HardpointVisual
+    vehicleState: flare_launcher_0
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCFreightStorage
+  name: APC freight storage
+  description: A cargo pod for APC support slots.
+  components:
+  - type: Sprite
+    state: freighter_storage
+  - type: HardpointItem
+    hardpointType: HardpointTypeSupportAttachment
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeSupportAttachment
+    damageMultiplier: 0.075
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 100
+  - type: HardpointVisual
+    vehicleState: freight_0
+
+- type: entity
+  parent: BaseItem
+  id: VehicleAPCM56FPWPortGunBase
+  abstract: true
+  name: APC port gun
+  description: A mounted M56 FPW port gun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/apc.rsi
+    state: m56_FPW
+  - type: Item
+    size: Huge
+  - type: HardpointIntegrity
+    maxIntegrity: 100
+  - type: VehiclePortGun
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 5
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
+    cameraRecoilScalar: 0
+  - type: MagazineAmmoProvider
+    autoEject: true
+  - type: RMCGunChamber
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSmartGun
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
+        whitelist:
+          tags:
+          - RMCMagazineSmartGun
+
+- type: entity
+  parent: VehicleAPCM56FPWPortGunBase
+  id: VehicleAPCM56FPWPortGunRight
+  name: APC port gun (starboard)
+  components:
+  - type: GunFireArc
+    arc: 90
+    angleOffset: 90
+  - type: GunMuzzleOffset
+    offset: "0.62,-1"
+    muzzleOffset: "0,0"
+    angleOffset: 90
+    useAimDirection: true
+
+- type: entity
+  parent: VehicleAPCM56FPWPortGunBase
+  id: VehicleAPCM56FPWPortGunLeft
+  name: APC port gun (port)
+  components:
+  - type: GunFireArc
+    arc: 90
+    angleOffset: -90
+  - type: GunMuzzleOffset
+    offset: "-0.62,-1"
+    muzzleOffset: "0,0"
+    angleOffset: -90
+    useAimDirection: true

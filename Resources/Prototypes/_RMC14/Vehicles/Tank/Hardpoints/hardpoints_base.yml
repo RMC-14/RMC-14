@@ -1,0 +1,106 @@
+- type: entity
+  parent: BaseItem
+  id: VehicleTankHardpointBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/tank.rsi
+  - type: Item
+    size: Large
+
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankTurret
+  name: tank turret
+  description: A tank turret hardpoint.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/tank.rsi
+    state: tank_turret_0
+  - type: HardpointItem
+    hardpointType: HardpointTypeTurret
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeTurret
+    damageMultiplier: 0.05
+    repairRate: 0.008
+  - type: HardpointIntegrity
+    maxIntegrity: 450
+  - type: VehicleTurret
+    rotateToCursor: true
+    stabilizedRotation: false
+    rotationSpeed: 60
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: tank_turret_0
+    useDirectionalOffsets: false
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      turret-launcher:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyTank
+    slots:
+    - id: turret-cannon
+      hardpointType: HardpointTypeCannon
+      slotType: HardpointSlotTypeCannon
+      required: false
+      insertDelay: 2.0
+    - id: turret-launcher
+      hardpointType: HardpointTypeLauncher
+      slotType: HardpointSlotTypeLauncher
+      required: false
+      insertDelay: 2.0
+
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankTreads
+  name: tank treads
+  description: Heavy duty tank treads.
+  components:
+  - type: Sprite
+    state: treads
+  - type: HardpointItem
+    hardpointType: HardpointTypeWheel
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeTreads
+    damageMultiplier: 0.15
+    repairRate: 0.0165
+  - type: HardpointIntegrity
+    maxIntegrity: 300
+  - type: VehicleWheelItem
+
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankReinforcedTreads
+  name: reinforced tank treads
+  description: Heavier tank treads with better durability and acid resistance at the cost of acceleration.
+  components:
+  - type: Sprite
+    state: treads
+  - type: HardpointItem
+    hardpointType: HardpointTypeWheel
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeTreads
+    damageMultiplier: 0.15
+    repairRate: 0.0165
+  - type: VehicleWheelItem
+  - type: HardpointIntegrity
+    maxIntegrity: 500
+  - type: HardpointDamageModifier
+    modifierSets:
+    - VehicleArmorCaustic
+  - type: VehicleAccelerationModifierAttachment
+    accelerationMultiplier: 0.6
+
