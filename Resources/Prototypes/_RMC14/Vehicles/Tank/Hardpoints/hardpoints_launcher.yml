@@ -127,7 +127,7 @@
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
-    bulletType: VehicleAmmoBoxSmokeLauncher
+    bulletType: VehicleAmmoBoxGrenadeLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
