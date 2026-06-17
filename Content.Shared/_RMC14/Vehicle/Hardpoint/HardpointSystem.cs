@@ -791,6 +791,13 @@ public sealed partial class HardpointSystem : EntitySystem
             ("max", (int)MathF.Ceiling(max)),
             ("percent", (int)MathF.Round(percent * 100f))));
 
+        if (TryComp(ent.Owner, out BallisticAmmoProviderComponent? ammoProvider) &&
+            ammoProvider.Proto is { } ammoProto &&
+            _prototypeManager.TryIndex<EntityPrototype>(ammoProto, out var ammoPrototype))
+        {
+            args.PushMarkup(Loc.GetString("rmc-hardpoint-ammo-type-examine", ("type", ammoPrototype.Name)));
+        }
+
         if (TryGetArmorExamineModifiers(ent.Owner, out var acid, out var slash, out var bullet, out var explosive, out var blunt))
         {
             args.PushMarkup(Loc.GetString("rmc-hardpoint-armor-modifiers-examine",

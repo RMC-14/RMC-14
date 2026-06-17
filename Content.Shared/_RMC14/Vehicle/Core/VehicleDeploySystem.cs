@@ -410,6 +410,12 @@ public sealed class VehicleDeploySystem : EntitySystem
                 continue;
             }
 
+            if (TryComp(vehicle, out HardpointIntegrityComponent? frameIntegrity) && frameIntegrity.Integrity <= 0f)
+            {
+                deployable.AutoSpinInitialized = false;
+                continue;
+            }
+
             EntityUid? operatorUid = null;
             if (TryComp(vehicle, out VehicleWeaponsComponent? weapons))
                 operatorUid = weapons.Operator;
@@ -515,6 +521,9 @@ public sealed class VehicleDeploySystem : EntitySystem
         gunComp = default!;
 
         if (!TryComp(uid, out GunComponent? gun) || !HasComp<VehicleTurretComponent>(uid))
+            return false;
+
+        if (TryComp(uid, out HardpointIntegrityComponent? integrity) && integrity.Integrity <= 0f)
             return false;
 
         gunComp = gun;
