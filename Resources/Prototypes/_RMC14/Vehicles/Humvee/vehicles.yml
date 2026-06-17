@@ -345,7 +345,7 @@
   - type: VehicleDeployable
     deployTime: 5
     undeployTime: 5
-    autoTargetRange: 10
+    autoTargetRange: 7
     autoTargetCooldown: 0.2
     autoTurretEnabled: true
   - type: VehicleSensor
