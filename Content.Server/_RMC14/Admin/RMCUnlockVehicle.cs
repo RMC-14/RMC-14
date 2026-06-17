@@ -28,7 +28,10 @@ public sealed class RMCUnlockVehicle : LocalizedEntityCommands
         if (!_prototype.TryIndex<EntityPrototype>(args[0], out var proto) ||
             !proto.HasComponent<VehicleComponent>() ||
             proto.Abstract)
+        {
+            shell.WriteError("Invalid entity.");
             return;
+        }
 
         EntityManager.EventBus.RaiseEvent(EventSource.Local, new TechUnlockVehicleEvent(proto.ID));
     }
