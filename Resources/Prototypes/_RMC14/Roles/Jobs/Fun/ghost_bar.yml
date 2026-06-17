@@ -1,0 +1,25 @@
+- type: ghostRoleRaffleSettings
+  id: instant
+  settings:
+    initialDuration: 0
+    joinExtendsDurationBy: 0
+    maxDuration: 0
+    roundTimeRequirement: 0
+
+- type: entity
+  parent: [MarkerBase, RMCNewGhostRifleman]
+  id: RMCGhostBarSpawnerRifleman
+  name: ghost bar spawn point
+  suffix: rifleman
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+  - type: GhostRole
+    name: rmc-ghost-bar-name-rifleman
+    description: rmc-ghost-bar-description
+    rules: rmc-ghost-bar-rules
+    raffle:
+      settings: instant
+  - type: RMCGhostRole
+    remaining: null
