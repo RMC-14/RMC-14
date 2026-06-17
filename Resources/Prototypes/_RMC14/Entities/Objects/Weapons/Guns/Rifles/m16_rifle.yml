@@ -129,6 +129,9 @@
       rmc-aslot-rail: -0.15, 0.12
       rmc-aslot-stock: -0.5, 0
       rmc-aslot-underbarrel: 0.28, -0.33
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM16
 
 - type: entity
   parent: WeaponRifleM16
@@ -137,9 +140,6 @@
   components:
   - type: AttachableHolder
     randomAttachmentChance: 0
-  - type: Tag
-    tags:
-    - WeaponRifleM16
 
 - type: entity
   parent: WeaponRifleM16
@@ -221,6 +221,9 @@
       rmc-aslot-rail: -0.15, 0.12
       rmc-aslot-stock: -0.5, 0
       rmc-aslot-underbarrel: 0.28, -0.30
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM16A5
 
 - type: entity
   parent: RMCWeaponRifleM16A5
@@ -229,9 +232,6 @@
   components:
   - type: AttachableHolder
     randomAttachmentChance: 0
-  - type: Tag
-    tags:
-    - RMCWeaponRifleM16A5
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -368,6 +368,12 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 40
+
+- type: Tag
+  id: RMCWeaponRifleM16
+
+- type: Tag
+  id: RMCWeaponRifleM16A5
 
 - type: Tag
   id: RMCMagazineRifleM16

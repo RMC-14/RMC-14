@@ -112,6 +112,9 @@
       rmc-aslot-barrel: 0.75, 0.00
       rmc-aslot-rail: -0.23, 0.091
       rmc-aslot-underbarrel: 0.35, -0.3
+  - type: Tag
+    tags:
+    - RMCWeaponRifleMAR40
 
 - type: entity
   parent: WeaponRifleMAR40
@@ -120,9 +123,6 @@
   components:
   - type: AttachableHolder
     randomAttachmentChance: 0
-  - type: Tag
-    tags:
-    - WeaponRifleMAR40
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -230,6 +230,9 @@
     damage:
       types:
         Piercing: 55
+
+- type: Tag
+  id: RMCWeaponRifleMAR40
 
 - type: Tag
   id: RMCMagazineRifleMAR40
