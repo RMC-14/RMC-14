@@ -425,7 +425,7 @@
     startingItem: CMFlareColonist
   - type: Tag
     tags:
-    - CMFlarePackColonist
+    - RMCPackFlareColonist
 
 - type: entity
   parent: CMFlare
@@ -455,7 +455,7 @@
     prototype: RMCAirFlareColonist
   - type: Tag
     tags:
-    - CMFlarePackColonist
+    - RMCPackFlareColonist
 
 - type: entity
   parent: CMPackFlareBase
