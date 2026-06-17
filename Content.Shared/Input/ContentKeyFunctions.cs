@@ -62,6 +62,7 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction ResetZoom = "ResetZoom";
         // RMC14
         public static readonly BoundKeyFunction OpenLanguageMenu = "OpenLanguageMenu";
+        public static readonly BoundKeyFunction CycleLanguage = "CycleLanguage";
         // RMC14
 
         public static readonly BoundKeyFunction ArcadeUp = "ArcadeUp";

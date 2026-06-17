@@ -44,6 +44,7 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.OpenLanguageMenu, InputCmdHandler.FromDelegate(_ => ToggleWindow()))
+            .Bind(ContentKeyFunctions.CycleLanguage, InputCmdHandler.FromDelegate(_ => CycleLanguage()))
             .Register<LanguageUIController>();
     }
 
@@ -191,5 +192,27 @@ public sealed class LanguageUIController : UIController, IOnStateEntered<Gamepla
     private void OnLanguageSelected(ProtoId<LanguagePrototype> language)
     {
         _languageSystem.RequestSetLanguage(language);
+    }
+
+    private void CycleLanguage()
+    {
+        if (_player.LocalSession?.AttachedEntity is not { } entity)
+            return;
+
+        var currentLanguage = _languageSystem.GetCurrentLanguage(entity);
+        var spokenLanguages = _languageSystem.GetSpokenLanguages(entity);
+
+        var sortedLanguages = spokenLanguages
+            .Where(lang => _prototypeManager.TryIndex<LanguagePrototype>(lang, out var proto) && proto.IsVisibleLanguage)
+            .OrderBy(lang => _prototypeManager.Index<LanguagePrototype>(lang).LocalizedName)
+            .ToList();
+
+        if (sortedLanguages.Count == 0)
+            return;
+
+        var currentIndex = sortedLanguages.IndexOf(currentLanguage);
+        var nextIndex = (currentIndex + 1) % sortedLanguages.Count;
+
+        _languageSystem.RequestSetLanguage(sortedLanguages[nextIndex]);
     }
 }
