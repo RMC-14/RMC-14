@@ -784,12 +784,6 @@ public sealed partial class HardpointSystem : EntitySystem
 
         var percent = max > 0f ? current / max : 0f;
 
-        if (HasComp<XenoComponent>(args.Examiner))
-        {
-            args.PushMarkup(Loc.GetString(GetHardpointConditionString(percent)));
-            return;
-        }
-
         var color = GetHardpointIntegrityColor(percent);
         args.PushMarkup(Loc.GetString("rmc-hardpoint-integrity-examine",
             ("color", color),
@@ -947,23 +941,6 @@ public sealed partial class HardpointSystem : EntitySystem
             return "red";
 
         return "crimson";
-    }
-
-    private string GetHardpointConditionString(float percent)
-    {
-        if (percent >= IntegrityThresholdGreen)
-            return "rmc-hardpoint-condition-pristine";
-
-        if (percent >= IntegrityThresholdYellow)
-            return "rmc-hardpoint-condition-good";
-
-        if (percent >= IntegrityThresholdOrange)
-            return "rmc-hardpoint-condition-worn";
-
-        if (percent >= IntegrityThresholdRed)
-            return "rmc-hardpoint-condition-bad";
-
-        return "rmc-hardpoint-condition-critical";
     }
 
     public bool DamageHardpoint(EntityUid vehicle, EntityUid hardpoint, float amount, HardpointIntegrityComponent? integrity = null, bool skipWheelUpdate = false)
