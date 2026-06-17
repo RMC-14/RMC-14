@@ -1,0 +1,439 @@
+- type: entity
+  abstract: true
+  id: VehicleBoxVanRoofBase
+  name: box van interior roof
+  description: A removable roof section for the box van interior.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/box_van_interior.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: roof_1
+      map: [ "roof" ]
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanRoof1
+  components:
+  - type: Sprite
+    layers:
+    - state: roof_1
+      map: [ "roof" ]
+
+- type: entity
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanRoof2
+  components:
+  - type: Sprite
+    layers:
+    - state: roof_2
+      map: [ "roof" ]
+
+- type: entity
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanRoof3
+  components:
+  - type: Sprite
+    layers:
+    - state: roof_3
+      map: [ "roof" ]
+
+- type: entity
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanRoof4
+  components:
+  - type: Sprite
+    layers:
+    - state: roof_4
+      map: [ "roof" ]
+
+- type: entity
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanRoof5
+  components:
+  - type: Sprite
+    layers:
+    - state: roof_5
+      map: [ "roof" ]
+
+- type: entity
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanFrontRoof1
+  components:
+  - type: Sprite
+    layers:
+    - state: front_roof_1
+      map: [ "roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanFrontRoof2
+  components:
+  - type: Sprite
+    layers:
+    - state: front_roof_2
+      map: [ "roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
+  id: VehicleBoxVanInteriorBase
+  name: box van interior piece
+  description: A decorative interior piece for the box van.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/box_van_interior.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanWallBase
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Occluder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFront1
+  components:
+  - type: Sprite
+    state: front_1
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFront2
+  components:
+  - type: Sprite
+    state: front_2
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFront3
+  components:
+  - type: Sprite
+    state: front_3
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanBack1
+  components:
+  - type: Sprite
+    state: back_1
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanBack2
+  components:
+  - type: Sprite
+    state: back_2
+  - type: Clickable
+  - type: InteractionOutline
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanBack3
+  components:
+  - type: Sprite
+    state: back_3
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanLeft1
+  components:
+  - type: Sprite
+    state: back_1
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanLeft2
+  components:
+  - type: Sprite
+    state: back_2
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanLeft3
+  components:
+  - type: Sprite
+    state: back_3
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanRight1
+  components:
+  - type: Sprite
+    state: back_1
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanRight2
+  components:
+  - type: Sprite
+    state: back_2
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanRight3
+  components:
+  - type: Sprite
+    state: back_3
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFrontLeft1
+  components:
+  - type: Sprite
+    state: front_1
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFrontLeft2
+  components:
+  - type: Sprite
+    state: front_2
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFrontRight1
+  components:
+  - type: Sprite
+    state: back_1
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanFrontRight2
+  components:
+  - type: Sprite
+    state: back_2
+  - type: Clickable
+  - type: InteractionOutline
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanExterior1
+  components:
+  - type: Sprite
+    state: exterior_2
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+
+- type: entity
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExterior2
+  components:
+  - type: Sprite
+    state: exterior_2
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanExterior3
+  components:
+  - type: Sprite
+    state: exterior_3
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+
+- type: entity
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExterior1Old
+  components:
+  - type: Sprite
+    state: exterior_2
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+
+- type: entity
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExterior2Old
+  components:
+  - type: Sprite
+    state: exterior_2
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+
+- type: entity
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExterior3Old
+  components:
+  - type: Sprite
+    state: exterior_3
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanBackground1
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    state: background_2
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+  - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanBackground2
+  components:
+  - type: Sprite
+    state: background_2
+  - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleBoxVanRoofBase
+  id: VehicleBoxVanBackground3
+  components:
+  - type: Sprite
+    state: background_3
+  - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleBoxVanWallBase
+  id: VehicleBoxVanInteriorDoor
+  components:
+  - type: Sprite
+    state: interior_door
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExteriorDoor
+  components:
+  - type: Sprite
+    state: exterior_door
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanExteriorDoorUnique
+  components:
+  - type: Sprite
+    state: exterior_door_unique
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanWindshieldTop
+  components:
+  - type: Sprite
+    state: windshield_viewport_top
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+
+- type: entity
+  parent: VehicleBoxVanInteriorBase
+  id: VehicleBoxVanWindshieldBottom
+  components:
+  - type: Sprite
+    state: windshield_viewport_bottom
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false

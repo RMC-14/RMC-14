@@ -6,6 +6,10 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
     - type: RMCAllowSuitStorage
     - type: Skills
       skills:
