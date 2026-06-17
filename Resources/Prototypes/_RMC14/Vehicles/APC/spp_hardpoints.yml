@@ -1,0 +1,174 @@
+- type: entity
+  parent: BaseItem
+  id: VehicleSPPAPCHardpointBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/sppapc.rsi
+  - type: Item
+    size: Large
+
+- type: entity
+  parent: VehicleSPPAPCHardpointBase
+  id: VehicleSPPAPCWheel
+  name: SPP APC wheel
+  description: A reinforced APC wheel produced for SPP vehicles.
+  components:
+  - type: Sprite
+    state: spp_tires
+  - type: HardpointItem
+    hardpointType: HardpointTypeWheel
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeWheel
+    compatibilityId: HardpointCompatibilitySPPAPC
+    damageMultiplier: 0.15
+    repairRate: 0.0165
+  - type: HardpointIntegrity
+    maxIntegrity: 500
+  - type: VehicleWheelItem
+
+- type: entity
+  parent: VehicleSPPAPCHardpointBase
+  id: VehicleSPPAPCTurret
+  name: SPP APC turret
+  description: A rotating turret mount for an SPP APC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppapc.rsi
+    state: apc_turret_0
+  - type: HardpointItem
+    hardpointType: HardpointTypeTurret
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeTurret
+    compatibilityId: HardpointCompatibilitySPPAPC
+    damageMultiplier: 0.2
+    repairRate: 0.008
+  - type: HardpointIntegrity
+    maxIntegrity: 500
+  - type: VehicleTurret
+    rotateToCursor: true
+    stabilizedRotation: false
+    rotationSpeed: 80
+    showOverlay: true
+    useDirectionalOffsets: true
+    overlayRsi: _RMC14/Structures/Vehicles/sppapc.rsi
+    overlayState: apc_turret_0
+    pixelOffsetNorth: "0,4"
+    pixelOffsetEast: "-1,28"
+    pixelOffsetSouth: "0,6"
+    pixelOffsetWest: "-1,28"
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: VehicleSPPAPCMinigun
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slots:
+    - id: turret-cannon
+      hardpointType: HardpointTypeCannon
+      slotType: HardpointSlotTypeCannon
+      compatibilityId: HardpointCompatibilitySPPAPCTurret
+      required: false
+      insertDelay: 2.0
+  - type: HardpointVisual
+    vehicleState: apc_turret_0
+
+- type: entity
+  parent: RMCAPCDualCannon
+  id: VehicleSPPAPCMinigun
+  name: SPP APC minigun
+  description: A minigun fitted to an SPP APC turret.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/sppapc.rsi
+    state: apc_minigun
+  - type: HardpointItem
+    hardpointType: HardpointTypeCannon
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeCannon
+    compatibilityId: HardpointCompatibilitySPPAPCTurret
+    damageMultiplier: 0.2
+    repairRate: 0.01
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    showOverlay: true
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    overlayRsi: _RMC14/Structures/Vehicles/sppapc.rsi
+    overlayState: apc_minigun_0
+    fireWhileRotatingGraceDegrees: 20
+    useBarrelDirectionForShots: true
+    maxShotCurvatureDegrees: 10
+  - type: GunMuzzleOffset
+    useDirectionalOffsets: true
+    rotateDirectionalOffsets: true
+    offsetNorth: "0,-1.2"
+    offsetEast: "0,-1.2"
+    offsetSouth: "0,-1.2"
+    offsetWest: "0,-1.2"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+  - type: HardpointVisual
+    vehicleState: apc_minigun_0
+
+- type: entity
+  parent: RMCAPCFrontCannon
+  id: VehicleSPPAPCAutocannon
+  name: SPP APC autocannon
+  description: A frontal autocannon hardpoint for an SPP APC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/sppapc.rsi
+    state: apc_autocannon
+  - type: HardpointItem
+    compatibilityId: HardpointCompatibilitySPPAPC
+  - type: GunMuzzleOffset
+    useDirectionalOffsets: true
+    rotateDirectionalOffsets: true
+    offsetNorth: "0.5,-1.7"
+    offsetEast: "0.5,-1.7"
+    offsetSouth: "0.5,-1.7"
+    offsetWest: "0.5,-1.7"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+  - type: HardpointVisual
+    vehicleState: apc_autocannon_0
+
+- type: entity
+  parent: VehicleTankTowLauncher
+  id: VehicleSPPAPCHJ35Launcher
+  name: HJ35 APC launcher
+  description: A missile launcher fitted to the secondary mount of an SPP APC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/sppapc.rsi
+    state: hj35launcher
+  - type: HardpointItem
+    hardpointType: HardpointTypeCannon
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeCannon
+    compatibilityId: HardpointCompatibilitySPPAPC
+    damageMultiplier: 0.11
+  - type: HardpointIntegrity
+    maxIntegrity: 350
+  - type: HardpointVisual
+    vehicleState: apc_hj35_0
+
+- type: entity
+  parent: RMCAPCFlareLauncher
+  id: VehicleSPPAPCFlareLauncher
+  name: SPP APC flare launcher
+  description: A flare launcher hardpoint for SPP APC support slots.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/sppapc.rsi
+    state: spp_flare_launcher
+  - type: HardpointItem
+    compatibilityId: HardpointCompatibilitySPPAPC
+  - type: HardpointVisual
+    vehicleState: spp_flare_launcher_0
+

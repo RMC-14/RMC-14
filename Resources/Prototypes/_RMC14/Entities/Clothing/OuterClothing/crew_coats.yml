@@ -251,6 +251,17 @@
 
 - type: entity
   parent: RMCLabcoat
+  id: RMCLabcoatPharm
+  name: pharmaceutical physician's lab coat
+  description: A suit that protects against minor chemical spills. Has an orange stripe on each shoulder.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/labcoat_pharm.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/labcoat_pharm.rsi
+
+- type: entity
+  parent: RMCLabcoat
   id: RMCLabcoatBrown
   suffix: Brown
   components:

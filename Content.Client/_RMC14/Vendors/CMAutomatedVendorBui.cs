@@ -49,99 +49,124 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ColMarTech Vendor";
         _window.ReagentsBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.FromHex("#AF7F38"));
 
-        var user = EntMan.GetComponentOrNull<CMVendorUserComponent>(_player.LocalEntity);
         if (EntMan.TryGetComponent(Owner, out CMAutomatedVendorComponent? vendor))
-        {
-            for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
-            {
-                var section = vendor.Sections[sectionIndex];
-                var uiSection = new CMAutomatedVendorSection { Section = section };
-                uiSection.Label.SetMessage(GetSectionName(user, section));
-
-                if (!IsSectionValid(section))
-                    uiSection.Visible = false; // hide the section
-
-                for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
-                {
-                    var entry = section.Entries[entryIndex];
-                    var uiEntry = new CMAutomatedVendorEntry();
-
-                    if (_prototype.TryIndex(entry.Id, out var entity))
-                    {
-                        uiEntry.Texture.Textures = SpriteComponent.GetPrototypeTextures(entity, _resource)
-                            .Select(o => o.Default)
-                            .ToList();
-                        if (entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
-                            uiEntry.Texture.Modulate = entitySprites.AllLayers.First().Color;
-
-                        uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
-
-                        var name = entity.Name;
-                        var color = CMAutomatedVendorPanel.DefaultColor;
-                        var borderColor = CMAutomatedVendorPanel.DefaultBorderColor;
-                        var hoverColor = CMAutomatedVendorPanel.DefaultBorderColor;
-                        if (section.TakeAll != null || section.TakeOne != null)
-                        {
-                            name = $"Mandatory: {name}";
-                            color = Color.FromHex("#251A0C");
-                            borderColor = Color.FromHex("#805300");
-                            hoverColor = Color.FromHex("#805300");
-                        }
-                        else if (entry.Recommended)
-                        {
-                            uiEntry.Panel.Button.Label.Text = $"★ {uiEntry.Panel.Button.Label.Text}";
-                            name = $"Recommended: {name}";
-                            color = Color.FromHex("#102919");
-                            borderColor = Color.FromHex("#3A9B52");
-                            hoverColor = Color.FromHex("#3A9B52");
-                        }
-
-                        uiEntry.Panel.Color = color;
-                        uiEntry.Panel.BorderColor = borderColor;
-                        uiEntry.Panel.HoveredColor = hoverColor;
-
-                        var msg = new FormattedMessage();
-                        msg.AddText(name);
-                        msg.PushNewline();
-
-                        if (!string.IsNullOrWhiteSpace(entity.Description))
-                            msg.AddText(entity.Description);
-
-                        var tooltip = new Tooltip();
-                        tooltip.SetMessage(msg);
-
-                        uiEntry.TooltipLabel.ToolTip = entity.Description;
-                        uiEntry.TooltipLabel.TooltipDelay = 0;
-                        uiEntry.TooltipLabel.TooltipSupplier = _ => tooltip;
-
-                        var sectionI = sectionIndex;
-                        var entryI = entryIndex;
-                        var linkedEntryIndexes = new List<int>();
-
-                        foreach (var linkedEntry in entry.LinkedEntries)
-                        {
-                            var linkedEntryIndex = 0;
-                            foreach (var vendorEntry in section.Entries)
-                            {
-                                if(vendorEntry.Id == linkedEntry)
-                                    linkedEntryIndexes.Add(linkedEntryIndex);
-
-                                linkedEntryIndex++;
-                            }
-                        }
-
-                        uiEntry.Panel.Button.OnPressed += _ => OnButtonPressed(sectionI, entryI, linkedEntryIndexes);
-                    }
-
-                    uiSection.Entries.AddChild(uiEntry);
-                }
-
-                _window.Sections.AddChild(uiSection);
-            }
-        }
+            RebuildSections(vendor, EntMan.GetComponentOrNull<CMVendorUserComponent>(_player.LocalEntity));
 
         _window.Search.OnTextChanged += OnSearchChanged;
         Refresh();
+    }
+
+    private bool NeedsSectionRebuild(CMAutomatedVendorComponent vendor)
+    {
+        if (_window == null)
+            return false;
+
+        if (_window.Sections.ChildCount != vendor.Sections.Count)
+            return true;
+
+        for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
+        {
+            if (_window.Sections.GetChild(sectionIndex) is not CMAutomatedVendorSection uiSection ||
+                uiSection.Entries.ChildCount != vendor.Sections[sectionIndex].Entries.Count)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void RebuildSections(CMAutomatedVendorComponent vendor, CMVendorUserComponent? user)
+    {
+        if (_window == null)
+            return;
+
+        _window.Sections.DisposeAllChildren();
+
+        for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
+        {
+            var section = vendor.Sections[sectionIndex];
+            var uiSection = new CMAutomatedVendorSection { Section = section };
+            uiSection.Label.SetMessage(GetSectionName(user, section));
+            uiSection.Visible = IsSectionValid(section);
+
+            for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
+            {
+                var entry = section.Entries[entryIndex];
+                var uiEntry = new CMAutomatedVendorEntry();
+
+                if (_prototype.TryIndex(entry.Id, out var entity))
+                {
+                    uiEntry.Texture.Textures = SpriteComponent.GetPrototypeTextures(entity, _resource)
+                        .Select(o => o.Default)
+                        .ToList();
+                    if (entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
+                        uiEntry.Texture.Modulate = entitySprites.AllLayers.First().Color;
+
+                    uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
+
+                    var name = entity.Name;
+                    var color = CMAutomatedVendorPanel.DefaultColor;
+                    var borderColor = CMAutomatedVendorPanel.DefaultBorderColor;
+                    var hoverColor = CMAutomatedVendorPanel.DefaultBorderColor;
+                    if (section.TakeAll != null || section.TakeOne != null)
+                    {
+                        name = $"Mandatory: {name}";
+                        color = Color.FromHex("#251A0C");
+                        borderColor = Color.FromHex("#805300");
+                        hoverColor = Color.FromHex("#805300");
+                    }
+                    else if (entry.Recommended)
+                    {
+                        uiEntry.Panel.Button.Label.Text = $"★ {uiEntry.Panel.Button.Label.Text}";
+                        name = $"Recommended: {name}";
+                        color = Color.FromHex("#102919");
+                        borderColor = Color.FromHex("#3A9B52");
+                        hoverColor = Color.FromHex("#3A9B52");
+                    }
+
+                    uiEntry.Panel.Color = color;
+                    uiEntry.Panel.BorderColor = borderColor;
+                    uiEntry.Panel.HoveredColor = hoverColor;
+
+                    var msg = new FormattedMessage();
+                    msg.AddText(name);
+                    msg.PushNewline();
+
+                    if (!string.IsNullOrWhiteSpace(entity.Description))
+                        msg.AddText(entity.Description);
+
+                    var tooltip = new Tooltip();
+                    tooltip.SetMessage(msg);
+
+                    uiEntry.TooltipLabel.ToolTip = entity.Description;
+                    uiEntry.TooltipLabel.TooltipDelay = 0;
+                    uiEntry.TooltipLabel.TooltipSupplier = _ => tooltip;
+
+                    var sectionI = sectionIndex;
+                    var entryI = entryIndex;
+                    var linkedEntryIndexes = new List<int>();
+
+                    foreach (var linkedEntry in entry.LinkedEntries)
+                    {
+                        var linkedEntryIndex = 0;
+                        foreach (var vendorEntry in section.Entries)
+                        {
+                            if (vendorEntry.Id == linkedEntry)
+                                linkedEntryIndexes.Add(linkedEntryIndex);
+
+                            linkedEntryIndex++;
+                        }
+                    }
+
+                    uiEntry.Panel.Button.OnPressed += _ => OnButtonPressed(sectionI, entryI, linkedEntryIndexes);
+                }
+
+                uiSection.Entries.AddChild(uiEntry);
+            }
+
+            _window.Sections.AddChild(uiSection);
+        }
     }
 
     private bool IsSectionValid(CMVendorSection section)
@@ -195,6 +220,11 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
     private void OnSearchChanged(LineEditEventArgs args)
     {
+        ApplySearchFilter(args.Text);
+    }
+
+    private void ApplySearchFilter(string? text)
+    {
         if (_window == null)
             return;
 
@@ -209,10 +239,10 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 if (entriesControl is not CMAutomatedVendorEntry entry)
                     continue;
 
-                if (string.IsNullOrWhiteSpace(args.Text))
+                if (string.IsNullOrWhiteSpace(text))
                     entry.Visible = true;
                 else
-                    entry.Visible = entry.Panel.Button.Label.Text?.Contains(args.Text, OrdinalIgnoreCase) ?? false;
+                    entry.Visible = entry.Panel.Button.Label.Text?.Contains(text, OrdinalIgnoreCase) ?? false;
 
                 if (entry.Visible)
                     any = true;
@@ -235,6 +265,10 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         var userPoints = vendor.PointsType == null
             ? user?.Points ?? 0
             : user?.ExtraPoints?.GetValueOrDefault(vendor.PointsType) ?? 0;
+
+        if (NeedsSectionRebuild(vendor))
+            RebuildSections(vendor, user);
+
         for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
         {
             var section = vendor.Sections[sectionIndex];
@@ -276,9 +310,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     uiEntry.Amount.Text = $"{entry.Points}P";
 
                     if (user == null || userPoints < entry.Points)
-                    {
                         disabled = true;
-                    }
                 }
                 else
                 {
@@ -302,6 +334,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             }
         }
 
+        ApplySearchFilter(_window.Search.Text);
         _window.PointsLabel.Text = anyEntryWithPoints ? $"Points Remaining: {userPoints}" : string.Empty;
 
         if (!EntMan.TryGetComponent(Owner, out CMSolutionRefillerComponent? refiller))
@@ -352,9 +385,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         {
             var takeOne = user?.TakeOne;
             if (takeOne == null || !takeOne.Contains(section.TakeOne))
-            {
                 name.AddText(" (TAKE ONE)");
-            }
         }
         else if (section.Choices is { } choices)
         {

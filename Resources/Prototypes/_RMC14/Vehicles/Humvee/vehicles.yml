@@ -1,0 +1,378 @@
+- type: entity
+  id: VehicleHumveeBase
+  abstract: true
+  name: humvee
+  description: A fast armored utility vehicle outfitted for patrols and support.
+  components:
+  - type: Vehicle
+    movementKind: Grid
+  - type: LagCompensation
+  - type: Clickable
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RequireProjectileTarget
+  - type: GridVehicleMover
+    maxSpeed: 6
+    acceleration: 5
+    deceleration: 12
+    turnDelay: 0.25
+    pushCooldown: 2
+    xenoBlockMinimumSize: Immobile
+    xenoPushMinimumSize: Immobile
+  - type: VehicleOvercharge
+    speedMultiplier: 1.5
+    duration: 3
+    cooldown: 15
+    overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
+  - type: VehicleSound
+    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
+    runningSoundCooldown: 2
+    hornSound: /Audio/_RMC14/Vehicle/sound_vehicles_humvee_horn.ogg
+    hornCooldown: 1
+#    collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
+#    collisionSoundCooldown: 0.4
+    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
+  - type: VehicleSpotlight
+    radius: 6
+    energy: 2.5
+    softness: 2
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.65,-1.2,0.65,1.2
+        density: 1000
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        - Vehicle
+        layer:
+        - LargeMobLayer
+        - Vehicle
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.65,-1.2,0.65,1.2
+        density: 1000
+        mask:
+        - MidImpassable
+        - BarricadeImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/Vehicles/humvee.rsi
+    layers:
+    - map: [ base ]
+      state: humvee_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: ATTACH
+      visible: false
+    - map: [ support-2 ]
+      state: ATTACH
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: wheels_0
+    noMovementLayers:
+      rmc-wheels:
+        state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 12
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: Corrodible
+    isCorrodible: false
+  - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.HardpointUiKey.Key:
+        type: HardpointBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+  - type: VehicleWeapons
+  - type: VehicleHardpointVisuals
+  - type: InputMover
+  - type: ItemSlots
+    slots:
+      wheel-1:
+        startingItem: VehicleHumveeWheel
+        whitelist:
+          components:
+          - VehicleWheelItem
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slots:
+    - id: turret
+      hardpointType: HardpointTypeTurret
+      slotType: HardpointSlotTypeTurret
+      visualLayer: primary
+      insertDelay: 2.0
+      required: false
+    - id: roof
+      hardpointType: HardpointTypeRoofAttachment
+      slotType: HardpointSlotTypeRoofAttachment
+      visualLayer: support
+      insertDelay: 1.5
+      required: false
+    - id: front
+      hardpointType: HardpointTypeFrontAttachment
+      slotType: HardpointSlotTypeFrontAttachment
+      visualLayer: support-2
+      insertDelay: 1.5
+      required: false
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      insertDelay: 1.5
+  - type: VehicleWheelSlots
+    slotCount: 1
+  - type: Appearance
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/humvee_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 4
+    maxXenos: 2
+    entryPoints:
+    - offset: -1,0.8
+      radius: 0.45
+      interiorCoords: 1.61, -2.15
+    - offset: -1,-0.1
+      radius: 0.45
+      interiorCoords: 2.47, -2.15
+    - offset: 1,0.8
+      radius: 0.45
+      interiorCoords: 1.6, -1.35
+    - offset: 1,-0.1
+      radius: 0.45
+      interiorCoords: 2.41,-1.35
+
+- type: entity
+  parent: VehicleHumveeBase
+  id: VehicleHumvee
+  components:
+  - type: ItemSlots
+    slots:
+      turret:
+        startingItem: VehicleHumveeTurretArmed
+        whitelist:
+          components:
+          - HardpointItem
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: HardpointIntegrity
+    maxIntegrity: 1000
+    bypassEntryOnZero: true
+
+- type: entity
+  parent: VehicleHumveeBase
+  id: VehicleHumveeMedical
+  name: humvee (medical)
+  description: A medical-configured humvee outfitted for field triage.
+  components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: HardpointIntegrity
+    maxIntegrity: 1000
+    bypassEntryOnZero: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/humvee_medical.rsi
+    layers:
+    - map: [ base ]
+      state: humvee_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ support ]
+      state: ATTACH
+      visible: false
+    - map: [ support-2 ]
+      state: ATTACH
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slots:
+    - id: roof
+      hardpointType: HardpointTypeRoofAttachment
+      slotType: HardpointSlotTypeRoofAttachment
+      visualLayer: support
+      insertDelay: 1.5
+      required: false
+    - id: front
+      hardpointType: HardpointTypeFrontAttachment
+      slotType: HardpointSlotTypeFrontAttachment
+      visualLayer: support-2
+      insertDelay: 1.5
+      required: false
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      insertDelay: 1.5
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/humvee_medical_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 4
+    maxXenos: 2
+    entryPoints:
+    - offset: 0.45,1.6
+      radius: 0.5
+      interiorCoords: 0.89, -0.57
+    - offset: -0.45,1.6
+      radius: 0.5
+      interiorCoords: 0.89,-1.35
+    - offset: -1,-0.2
+      radius: 0.5
+      interiorCoords: 3.01, -1.23
+    - offset: 1,-0.2
+      radius: 0.5
+      interiorCoords: 2.94, -0.44
+
+- type: entity
+  parent: VehicleHumveeBase
+  id: VehicleHumveeTransport
+  name: humvee (transport)
+  description: A transport humvee configured for passenger movement.
+  components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: HardpointIntegrity
+    maxIntegrity: 1000
+    bypassEntryOnZero: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/humvee_transport.rsi
+    layers:
+    - map: [ base ]
+      state: humvee_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ support ]
+      state: ATTACH
+      visible: false
+    - map: [ support-2 ]
+      state: ATTACH
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slots:
+    - id: roof
+      hardpointType: HardpointTypeRoofAttachment
+      slotType: HardpointSlotTypeRoofAttachment
+      visualLayer: support
+      insertDelay: 1.5
+      required: false
+    - id: front
+      hardpointType: HardpointTypeFrontAttachment
+      slotType: HardpointSlotTypeFrontAttachment
+      visualLayer: support-2
+      insertDelay: 1.5
+      required: false
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      insertDelay: 1.5
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/humvee_transport_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 6
+    maxXenos: 2
+    entryPoints:
+    - offset: 0.45,1.6
+      radius: 0.5
+      interiorCoords: 1.48, -0.35
+    - offset: -0.45,1.6
+      radius: 0.5
+      interiorCoords: 1.48,-1.17
+    - offset: -1,-0.1
+      radius: 0.45
+      interiorCoords: 3.55, -1.36
+    - offset: 1,-0.1
+      radius: 0.45
+      interiorCoords: 3.56,-0.36
+
+- type: entity
+  parent: VehicleHumveeBase
+  id: VehicleHumveeARC
+  name: humvee (arc)
+  description: A humvee configured for ARC interior layout.
+  components:
+  - type: ItemSlots
+    slots:
+      turret:
+        startingItem: VehicleHumveeARCTurret
+        whitelist:
+          components:
+          - HardpointItem
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: VehicleFrameARC
+  - type: HardpointIntegrity
+    maxIntegrity: 800
+    bypassEntryOnZero: true
+  - type: VehicleDeployable
+    deployTime: 5
+    undeployTime: 5
+    autoTargetRange: 10
+    autoTargetCooldown: 0.2
+    autoTurretEnabled: true
+  - type: VehicleSensor
+    range: 40
+    requiresDeployed: true
+  - type: VehicleDeployGatedHardpoints
+    blockedHardpoints:
+    - HardpointTypeCannon
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/humvee_arc_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 5
+    maxXenos: 2
+    reservedPassengerPools:
+    - slots: 2
+      eligibleJobs:
+      - CMStaffOfficer
+      - CMSeniorEnlistedAdvisor
+      - CMExecutiveOfficer
+      - CMCommandingOfficer
+      - CMUNMCBrigadierGeneral
+    - slots: 1
+      eligibleJobs:
+      - CMIntelOfficer
+    entryPoints:
+    - offset: -1,-0.1
+      radius: 0.5
+      interiorCoords: 3.56,-1.42
+    - offset: 1,-0.1
+      radius: 0.5
+      interiorCoords: 3.56, -0.42
