@@ -34,7 +34,7 @@ rmc-trait-german-language-name = German language
 rmc-trait-german-language-desc = You can speak and understand German.
 
 rmc-trait-scandinavian-language-name = Scandinavian language
-rmc-trait-scandinavia-language-desc = You can speak and understand Scandinavian.
+rmc-trait-scandinavian-language-desc = You can speak and understand Scandinavian.
 
 rmc-trait-group-languages = Languages
 rmc-trait-group-other-speech = Other speech traits
