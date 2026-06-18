@@ -59,7 +59,6 @@
     id: CMDogtagCrewman
     ears: RMCHeadsetCrewman
     outerClothing: RMCCoatTanker
-    back: CMSatchelMarine
 
 - type: entity
   parent: CMSpawnPointJobBase
