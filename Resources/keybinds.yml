@@ -476,6 +476,7 @@ binds:
 - function: OpenSandboxWindow
   type: State
   key: B
+  mod1: Control
 - function: TakeScreenshot
   type: State
   key: F2
@@ -682,3 +683,6 @@ binds:
   type: State
   key: R
   mod1: Shift
+- function: RMCResist
+  type: State
+  key: B

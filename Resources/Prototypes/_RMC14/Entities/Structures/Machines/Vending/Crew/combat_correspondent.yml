@@ -103,8 +103,14 @@
         name: Green Coat
       - id: RMCCoatCorrespondent
         name: Brown Coat
+      - id: RMCCoatCorrespondentGreenJacket
+        name: Green Jacket
+      - id: RMCCoatCorrespondentBlueJacket
+        name: Blue Jacket
       - id: RMCCoatCorrespondentTan
-        name: Tan Coat
+        name: Tan Jacket
+      - id: RMCCoatCorrespondentBrownJacket
+        name: Brown Jacket
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
