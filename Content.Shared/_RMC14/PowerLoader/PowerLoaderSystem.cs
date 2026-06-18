@@ -88,7 +88,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, DidEquipHandEvent>(OnHandsChanged);
         SubscribeLocalEvent<PowerLoaderComponent, DidUnequipHandEvent>(OnHandsChanged);
 
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, GettingPickedUpAttemptEvent>(OnGrabbablePickupAttempt);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, GettingPickedUpAttemptEvent>(OnGrabbableGettingPickedUpAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, CombatModeShouldHandInteractEvent>(OnGrababbleShouldInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
@@ -382,12 +383,21 @@ public sealed class PowerLoaderSystem : EntitySystem
         TryStartPointDetach(ent, ent.Comp.ContainerId, ref args);
     }
 
-    private void OnGrabbablePickupAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref GettingPickedUpAttemptEvent args)
+    private void OnGrabbablePickupAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref PickupAttemptEvent args)
     {
         if (args.Cancelled)
             return;
 
         // TODO RMC14 popup
+        if (!HasComp<PowerLoaderComponent>(args.User))
+            args.Cancel();
+    }
+
+    private void OnGrabbableGettingPickedUpAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref GettingPickedUpAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
         if (!HasComp<PowerLoaderComponent>(args.User))
             args.Cancel();
     }
