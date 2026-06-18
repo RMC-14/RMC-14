@@ -81,7 +81,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private const float MovementFixedStep = 1f / 60f;
     private const int MaxFixedStepsPerFrame = 6;
     private const float ClientSmoothingSnapDistance = 1.25f;
-    private const float ClientSmoothingRate = 22f;
+    private const float ClientSmoothingRate = 60f;
 
 
     public static readonly List<(EntityUid grid, Vector2i tile)> DebugTestedTiles = new();

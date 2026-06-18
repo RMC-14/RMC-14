@@ -16,6 +16,8 @@
     maxIntegrity: 500
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,30"
@@ -161,6 +163,8 @@
     maxIntegrity: 500
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     showOverlay: true
     useDirectionalOffsets: true
@@ -225,6 +229,8 @@
     maxIntegrity: 400
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: drgn_flamer_0

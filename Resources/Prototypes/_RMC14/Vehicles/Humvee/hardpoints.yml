@@ -141,7 +141,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveecannon_0
-    fireWhileRotatingGraceDegrees: 20
+    fireWhileRotatingGraceDegrees: 180
     useBarrelDirectionForShots: true
     maxShotCurvatureDegrees: 10
   - type: GunUseGunOrigin
@@ -213,6 +213,8 @@
     maxIntegrity: 100
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveelauncher_0

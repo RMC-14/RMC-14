@@ -1,6 +1,7 @@
 using System;
 using System.Numerics;
 using Content.Shared.Vehicle.Components;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
@@ -648,6 +649,9 @@ public sealed class VehicleTurretSystem : EntitySystem
         }
 
         ApplyShotDirectionConstraint(ent.Comp, targetTurret, targetUid, vehicle, ref args);
+
+        if (args.ToCoordinates is { } finalTarget && TryComp(ent.Owner, out GunComponent? gun))
+            gun.ShootCoordinates = finalTarget;
     }
 
     private void ApplyShotDirectionConstraint(

@@ -70,7 +70,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/sppvan.rsi
     overlayState: t60p3m_0
-    fireWhileRotatingGraceDegrees: 20
+    fireWhileRotatingGraceDegrees: 180
     useBarrelDirectionForShots: true
     maxShotCurvatureDegrees: 10
   - type: Gun

@@ -110,6 +110,8 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
     state: railgun
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,20"
@@ -144,6 +146,8 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
     state: hj35tlauncher
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,-10"
@@ -184,6 +188,8 @@
   - type: HardpointItem
     compatibilityId: HardpointCompatibilitySPPTank
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,-10"
