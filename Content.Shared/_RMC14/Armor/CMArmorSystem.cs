@@ -23,6 +23,7 @@ using Content.Shared.Rounding;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
@@ -357,9 +358,10 @@ public sealed class CMArmorSystem : EntitySystem
             }
         }
 
-        if (args.Origin is { } origin)
+        if (args.Origin is { } origin &&
+            TryComp(origin, out TransformComponent? originXform))
         {
-            var originCoords = _transform.GetMapCoordinates(origin);
+            var originCoords = _transform.GetMapCoordinates(origin, originXform);
             var armorCoords = _transform.GetMapCoordinates(ent);
 
             if (originCoords.MapId == armorCoords.MapId)

@@ -59,6 +59,7 @@
     offsetSouth: "0,-1"
     offsetWest: "-0.4,-1.9"
     useAimDirection: true
+    useContainerOwner: false
   - type: HardpointVisual
     vehicleState: ltb_cannon_0
 

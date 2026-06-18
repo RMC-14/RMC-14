@@ -10,6 +10,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -25,6 +26,7 @@ public sealed class VehicleTurretSystem : EntitySystem
 
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -288,10 +290,64 @@ public sealed class VehicleTurretSystem : EntitySystem
     {
         origin = default;
 
-        if (!TryGetVehicle(turretUid, out _))
-            return false;
+        return TryGetTurretPose(turretUid, out origin, out _);
+    }
 
-        origin = _transform.GetMoverCoordinates(turretUid);
+    public bool TryGetTurretPose(
+        EntityUid turretUid,
+        out EntityCoordinates origin,
+        out Angle worldRotation,
+        VehicleTurretComponent? turret = null)
+    {
+        origin = default;
+        worldRotation = Angle.Zero;
+
+        if (!Resolve(turretUid, ref turret, false) ||
+            !TryGetVehicle(turretUid, out var vehicle))
+        {
+            return false;
+        }
+
+        TryGetAnchorTurret(turretUid, turret, out var anchorUid, out var anchorTurret);
+
+        var vehicleRot = _transform.GetWorldRotation(vehicle);
+        var baseFacingAngle = GetVehicleFacingAngle(vehicle, vehicleRot);
+        var anchorFacingAngle = GetOffsetFacing(anchorTurret, anchorTurret, vehicleRot, baseFacingAngle);
+        var localOffset = (-vehicleRot).RotateVec(GetPixelOffset(anchorTurret, anchorFacingAngle) / PixelsPerMeter);
+        var localRot = anchorTurret.RotateToCursor
+            ? anchorTurret.WorldRotation
+            : Angle.Zero;
+
+        if (anchorUid != turretUid)
+        {
+            var turretFacingAngle = GetOffsetFacing(turret, anchorTurret, vehicleRot, baseFacingAngle);
+            var worldOffset = GetPixelOffset(turret, turretFacingAngle) / PixelsPerMeter;
+            Vector2 turretLocalOffset;
+
+            if (turret.OffsetRotatesWithTurret)
+            {
+                if (turret.UseDirectionalOffsets)
+                {
+                    var dir = GetDirectionalDir(turretFacingAngle);
+                    var directionalOffset = (turret.PixelOffset + GetDirectionalOffset(turret, dir)) / PixelsPerMeter;
+                    var snappedAngle = GetDirectionalAngle(dir);
+                    turretLocalOffset = (localRot - snappedAngle).RotateVec(directionalOffset);
+                }
+                else
+                {
+                    turretLocalOffset = localRot.RotateVec(worldOffset);
+                }
+            }
+            else
+            {
+                turretLocalOffset = (-vehicleRot).RotateVec(worldOffset);
+            }
+
+            localOffset += turretLocalOffset;
+        }
+
+        origin = new EntityCoordinates(vehicle, localOffset);
+        worldRotation = (vehicleRot + localRot).Reduced();
         return true;
     }
 
@@ -569,6 +625,9 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (!turret.RotateToCursor)
             return;
 
+        if (_net.IsClient && !IsLocallyOperatedTurret(turretUid))
+            return;
+
         ApplyPendingTargetRotation(turretUid, turret, vehicle);
 
         var vehicleRot = _transform.GetWorldRotation(vehicle);
@@ -823,6 +882,21 @@ public sealed class VehicleTurretSystem : EntitySystem
 
         if (changed)
             Dirty(turretUid, turret);
+    }
+
+    private bool IsLocallyOperatedTurret(EntityUid turretUid)
+    {
+        if (_player.LocalEntity is not { } local)
+            return false;
+
+        if (!TryComp(local, out VehicleWeaponsOperatorComponent? operatorComp) ||
+            operatorComp.SelectedWeapon is not { } selectedWeapon)
+        {
+            return false;
+        }
+
+        return TryResolveRotationTarget(selectedWeapon, out var targetUid, out _) &&
+               targetUid == turretUid;
     }
 
     private bool CanOperatorUseTurret(EntityUid turretUid, EntityUid user)

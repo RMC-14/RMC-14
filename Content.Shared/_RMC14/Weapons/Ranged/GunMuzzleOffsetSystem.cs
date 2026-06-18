@@ -78,12 +78,18 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
             baseUid = container.Owner;
         }
 
-        var baseCoords = _transform.GetMoverCoordinates(baseUid);
+        var hasTurretPose = _vehicleTurret.TryGetTurretPose(uid, out var turretCoords, out var turretRotation);
+        var baseCoords = hasTurretPose
+            ? turretCoords
+            : _transform.GetMoverCoordinates(baseUid);
         var useVehicleTurretShotRotation = _vehicleTurret.TryGetShotBarrelWorldRotation(uid, out var shotRotation);
         var baseRotation = useVehicleTurretShotRotation
             ? shotRotation + component.AngleOffset
+            : hasTurretPose
+                ? turretRotation + component.AngleOffset
             : GetBaseRotation(baseUid, component.AngleOffset);
-        var (offset, rotateOffset) = GetOffset(component, baseUid, baseRotation);
+        var useBarrelDirectionOffsets = hasTurretPose || useVehicleTurretShotRotation;
+        var (offset, rotateOffset) = GetOffset(component, baseUid, baseRotation, useBarrelDirectionOffsets);
         muzzleCoords = rotateOffset
             ? baseCoords.Offset(baseRotation.RotateVec(offset))
             : baseCoords.Offset(offset);
@@ -122,12 +128,13 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
     private (Vector2 Offset, bool Rotate) GetOffset(
         GunMuzzleOffsetComponent muzzle,
         EntityUid baseUid,
-        Angle baseRotation)
+        Angle baseRotation,
+        bool useBaseRotationDirection = false)
     {
         if (!muzzle.UseDirectionalOffsets)
             return (muzzle.Offset, true);
 
-        var dir = GetBaseDirection(baseUid, baseRotation);
+        var dir = GetBaseDirection(baseUid, baseRotation, useBaseRotationDirection);
         var offset = dir switch
         {
             Direction.North => muzzle.OffsetNorth,
@@ -140,10 +147,14 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
         return (offset, muzzle.RotateDirectionalOffsets);
     }
 
-    private Direction GetBaseDirection(EntityUid baseUid, Angle baseRotation)
+    private Direction GetBaseDirection(EntityUid baseUid, Angle baseRotation, bool useBaseRotationDirection = false)
     {
-        if (TryComp(baseUid, out GridVehicleMoverComponent? mover) && mover.CurrentDirection != Vector2i.Zero)
+        if (!useBaseRotationDirection &&
+            TryComp(baseUid, out GridVehicleMoverComponent? mover) &&
+            mover.CurrentDirection != Vector2i.Zero)
+        {
             return mover.CurrentDirection.AsDirection();
+        }
 
         return VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(baseRotation);
     }
