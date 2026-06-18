@@ -651,7 +651,11 @@ public sealed class VehicleTurretSystem : EntitySystem
         ApplyShotDirectionConstraint(ent.Comp, targetTurret, targetUid, vehicle, ref args);
 
         if (args.ToCoordinates is { } finalTarget && TryComp(ent.Owner, out GunComponent? gun))
+        {
+#pragma warning disable RA0002
             gun.ShootCoordinates = finalTarget;
+#pragma warning restore RA0002
+        }
     }
 
     private void ApplyShotDirectionConstraint(
