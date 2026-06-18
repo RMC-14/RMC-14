@@ -65,7 +65,6 @@
     pixelOffsetWest: "10,0"
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.6
     projectileSpeed: 18
@@ -122,7 +121,6 @@
     pixelOffsetWest: "10,0"
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.5
     projectileSpeed: 20

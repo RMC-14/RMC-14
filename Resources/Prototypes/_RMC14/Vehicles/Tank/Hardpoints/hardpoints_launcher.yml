@@ -29,7 +29,6 @@
     overlayState: flamer_0
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 1.0
     projectileSpeed: 20
@@ -88,7 +87,6 @@
     overlayState: glauncher_0
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.3333
     projectileSpeed: 18
@@ -159,7 +157,6 @@
     overlayState: towlauncher_0
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.0667 # 15 seconds between shots
     projectileSpeed: 18

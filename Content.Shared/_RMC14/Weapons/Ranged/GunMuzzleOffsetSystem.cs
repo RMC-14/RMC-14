@@ -13,6 +13,7 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly VehicleTurretSystem _vehicleTurret = default!;
 
     public override void Initialize()
     {
@@ -78,7 +79,10 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
         }
 
         var baseCoords = _transform.GetMoverCoordinates(baseUid);
-        var baseRotation = GetBaseRotation(baseUid, component.AngleOffset);
+        var useVehicleTurretShotRotation = _vehicleTurret.TryGetShotBarrelWorldRotation(uid, out var shotRotation);
+        var baseRotation = useVehicleTurretShotRotation
+            ? shotRotation + component.AngleOffset
+            : GetBaseRotation(baseUid, component.AngleOffset);
         var (offset, rotateOffset) = GetOffset(component, baseUid, baseRotation);
         muzzleCoords = rotateOffset
             ? baseCoords.Offset(baseRotation.RotateVec(offset))
@@ -88,7 +92,9 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
         if (component.MuzzleOffset == Vector2.Zero)
             return true;
 
-        if (component.UseAimDirection && toCoordinates != null)
+        if (!useVehicleTurretShotRotation &&
+            component.UseAimDirection &&
+            toCoordinates != null)
         {
             var pivotMap = _transform.ToMapCoordinates(muzzleCoords);
             var targetMap = _transform.ToMapCoordinates(toCoordinates.Value);

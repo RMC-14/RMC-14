@@ -242,7 +242,6 @@
     pixelOffsetWest: "-30,0"
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.5
     projectileSpeed: 20

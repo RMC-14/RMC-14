@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -33,7 +34,7 @@ public sealed class VehicleTurretSystem : EntitySystem
         SubscribeLocalEvent<VehicleTurretComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<VehicleTurretComponent, EntRemovedFromContainerMessage>(OnRemoved);
         SubscribeLocalEvent<VehicleTurretComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<VehicleTurretComponent, AttemptShootEvent>(OnAttemptShoot);
+        SubscribeLocalEvent<VehicleTurretComponent, AttemptShootEvent>(OnAttemptShoot, after: new[] { typeof(GunMuzzleOffsetSystem), typeof(VehicleTurretMuzzleSystem) });
         SubscribeNetworkEvent<VehicleTurretRotateEvent>(OnRotateEvent);
     }
 
@@ -389,6 +390,42 @@ public sealed class VehicleTurretSystem : EntitySystem
         return TryResolveRotationTarget(turretUid, turret, out targetUid, out targetTurret);
     }
 
+    public bool TryGetBarrelWorldRotation(
+        EntityUid turretUid,
+        out Angle worldRotation,
+        VehicleTurretComponent? turret = null)
+    {
+        worldRotation = Angle.Zero;
+
+        if (!Resolve(turretUid, ref turret, false))
+            return false;
+
+        if (!TryResolveRotationTarget(turretUid, turret, out var targetUid, out var targetTurret))
+            return false;
+
+        if (!TryGetVehicle(targetUid, out var vehicle))
+            return false;
+
+        worldRotation = (targetTurret.WorldRotation + _transform.GetWorldRotation(vehicle)).Reduced();
+        return true;
+    }
+
+    public bool TryGetShotBarrelWorldRotation(
+        EntityUid turretUid,
+        out Angle worldRotation,
+        VehicleTurretComponent? turret = null)
+    {
+        worldRotation = Angle.Zero;
+
+        if (!Resolve(turretUid, ref turret, false) ||
+            !turret.UseBarrelDirectionForShots)
+        {
+            return false;
+        }
+
+        return TryGetBarrelWorldRotation(turretUid, out worldRotation, turret);
+    }
+
     private bool TryResolveRotationTarget(
         EntityUid turretUid,
         VehicleTurretComponent turret,
@@ -648,7 +685,7 @@ public sealed class VehicleTurretSystem : EntitySystem
             }
         }
 
-        ApplyShotDirectionConstraint(ent.Comp, targetTurret, targetUid, vehicle, ref args);
+        ApplyShotDirectionConstraint(ent.Comp, targetTurret, vehicle, ref args);
 
         if (args.ToCoordinates is { } finalTarget && TryComp(ent.Owner, out GunComponent? gun))
         {
@@ -661,7 +698,6 @@ public sealed class VehicleTurretSystem : EntitySystem
     private void ApplyShotDirectionConstraint(
         VehicleTurretComponent sourceTurret,
         VehicleTurretComponent rotationTurret,
-        EntityUid rotationTurretUid,
         EntityUid vehicle,
         ref AttemptShootEvent args)
     {
@@ -697,7 +733,7 @@ public sealed class VehicleTurretSystem : EntitySystem
         var adjustedMap = new MapCoordinates(
             originMap.Position + shotWorldRotation.ToWorldVec() * distance,
             originMap.MapId);
-        var adjustedTarget = _transform.ToCoordinates(rotationTurretUid, adjustedMap);
+        var adjustedTarget = _transform.ToCoordinates(adjustedMap);
         args = args with { ToCoordinates = adjustedTarget };
     }
 

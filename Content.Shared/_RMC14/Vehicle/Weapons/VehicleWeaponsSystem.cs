@@ -217,8 +217,6 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
             VehicleWeaponsUiKey.Key,
             new VehicleWeaponsCooldownFeedbackMessage((float) remaining.TotalSeconds),
             ent.Owner);
-
-        _audio.PlayPredicted(args.Used.Comp.SoundEmpty, args.Used.Owner, ent.Owner);
     }
 
     private bool TrySelectHardpoint(EntityUid seat, EntityUid actor, EntityUid? mountedWeapon, bool fromUi)

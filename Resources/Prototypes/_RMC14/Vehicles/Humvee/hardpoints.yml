@@ -222,7 +222,6 @@
     vehicleState: humveelauncher_0
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
-  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.7
     projectileSpeed: 18
