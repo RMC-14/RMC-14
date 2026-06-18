@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobSquadBase
+  parent: CMJobBase
   id: CMVehicleCrewman
   name: cm-job-name-vc
   description: cm-job-description-vc
@@ -50,7 +50,6 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_intel
-  hidden: true #TODO RMC14 - Remove when vehicles are fully added.
 
 - type: startingGear
   id: CMGearVehicleCrewman
