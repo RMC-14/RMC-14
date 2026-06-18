@@ -1,3 +1,4 @@
+# base
 - type: ghostRoleRaffleSettings
   id: instant
   settings:
@@ -6,21 +7,37 @@
     maxDuration: 0
     roundTimeRequirement: 0
 
+- type: playTimeTracker
+  id: RMCGhostBarTracker
+
+# recruit
+- type: startingGear
+  parent: RMCGearRecruit
+  id: RMCGearRecruitGhostBar
+  equipment:
+    ears: RMCHeadsetMarineEmpty
+
+- type: job
+  parent: RMCRecruit
+  id: RMCRecruitGhostBar
+  playTimeTracker: RMCGhostBarTracker
+  startingGear: RMCGearRecruitGhostBar
+
 - type: entity
   parent: MarkerBase
-  id: RMCGhostBarSpawnerRifleman
+  id: RMCGhostBarSpawnerRecruit
   name: ghost bar spawn point
-  suffix: rifleman
+  suffix: recruit
   components:
   - type: Sprite
     layers:
     - state: green
   - type: GhostRole
-    name: rmc-ghost-bar-name-rifleman
+    name: rmc-ghost-bar-name-recruit
     description: rmc-ghost-bar-description
     rules: rmc-ghost-bar-rules
     raffle:
       settings: instant
-    job: CMRifleman
+    job: RMCRecruitGhostBar
   - type: RMCGhostRole
     remaining: null

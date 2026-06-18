@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._RMC14.Ghost;
 
 [RegisterComponent]
-[Access([typeof(RMCGhostRoleSystem)])]
+[Access(typeof(RMCGhostRoleSystem))]
 public sealed partial class RMCGhostRoleComponent : Component
 {
     /// <summary>

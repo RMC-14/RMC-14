@@ -13,14 +13,14 @@ namespace Content.Server._RMC14.Ghost;
 
 public sealed partial class RMCGhostRoleSystem : EntitySystem
 {
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly StationSystem _stations = default!;
-    [Dependency] private readonly StationSpawningSystem _spawning = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly JobSystem _job = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly RoleSystem _role = default!;
+    [Dependency] private readonly StationSpawningSystem _spawning = default!;
+    [Dependency] private readonly StationSystem _stations = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
 
     public override void Initialize()
@@ -36,7 +36,7 @@ public sealed partial class RMCGhostRoleSystem : EntitySystem
         if (args.TookRole)
             return;
 
-        if (!_transformSystem.TryGetMapOrGridCoordinates(ent, out var coords) ||
+        if (!_transform.TryGetMapOrGridCoordinates(ent, out var coords) ||
             !TryComp<GhostRoleComponent>(ent, out var ghost) ||
             !_mind.TryGetMind(args.Player, out var mindId, out var mindComp))
             return;

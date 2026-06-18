@@ -15,6 +15,15 @@
   - type: HeadsetAutoSquad
   - type: RMCStaticDefaultChannel
 
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetMarineEmpty
+  suffix: empty
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots: []
+
 # Alpha
 - type: entity
   parent: RMCHeadsetMarine
