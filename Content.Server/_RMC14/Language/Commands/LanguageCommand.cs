@@ -14,8 +14,6 @@ public sealed class LanguageCommand : ToolshedCommand
 {
     private LanguageSystem? _language;
 
-    private readonly ProtoId<LanguagePrototype> BACKUP_LANGUAGE = "English";
-
     [CommandImplementation("add")]
     public EntityUid Add(
         [CommandInvocationContext] IInvocationContext ctx,
@@ -61,7 +59,8 @@ public sealed class LanguageCommand : ToolshedCommand
     [CommandImplementation("reset")]
     public EntityUid Reset(
         [CommandInvocationContext] IInvocationContext ctx,
-        [PipedArgument] EntityUid ent)
+        [PipedArgument] EntityUid ent,
+        [CommandArgument] ProtoId<LanguagePrototype> language)
     {
         if (!TryComp<LanguageComponent>(ent, out var languages))
         {
@@ -76,9 +75,9 @@ public sealed class LanguageCommand : ToolshedCommand
         langs.UnionWith(languages.UnderstoodLanguages);
         langs.UnionWith(languages.SpokenLanguages);
 
-        langs.Remove(BACKUP_LANGUAGE);
+        langs.Remove(language);
 
-        _language.AddLanguage(ent, BACKUP_LANGUAGE);
+        _language.AddLanguage(ent, language);
 
         foreach (var known in langs)
         {
@@ -112,8 +111,9 @@ public sealed class LanguageCommand : ToolshedCommand
 
     public IEnumerable<EntityUid> Reset(
     [CommandInvocationContext] IInvocationContext ctx,
-    [PipedArgument] IEnumerable<EntityUid> ents)
+    [PipedArgument] IEnumerable<EntityUid> ents,
+    [CommandArgument] ProtoId<LanguagePrototype> language)
     {
-        return ents.Select(ent => Reset(ctx, ent));
+        return ents.Select(ent => Reset(ctx, ent, language));
     }
 }
