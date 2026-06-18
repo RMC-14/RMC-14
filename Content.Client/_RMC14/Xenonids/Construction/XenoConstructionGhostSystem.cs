@@ -100,7 +100,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             if (!coords.IsValid(EntityManager))
                 return false;
 
-            if (!IsValidConstructionLocation(player.Value, coords))
+            if (!CanAttemptConstruction(player.Value, coords))
                 return false;
 
             var netCoords = GetNetCoordinates(coords);
@@ -223,7 +223,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             if (construction.BuildChoice == null)
                 return;
 
-            if (!_xenoConstruction.CanSecreteOnTilePopup((player, construction), construction.BuildChoice, coords, true, true, false))
+            if (!_xenoConstruction.CanSecreteOnTilePopup((player, construction), construction.BuildChoice, coords, true, true))
                 return;
         }
 
@@ -461,6 +461,31 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             if (construction.BuildChoice != null)
             {
                 return _xenoConstruction.CanSecreteOnTilePopup((player, construction), construction.BuildChoice, coords, true, true, false);
+            }
+
+            return false;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private bool CanAttemptConstruction(EntityUid player, EntityCoordinates coords)
+    {
+        if (!TryComp(player, out XenoConstructionComponent? construction))
+            return false;
+
+        try
+        {
+            if (construction.OrderConstructionTargeting && construction.OrderConstructionChoice != null)
+            {
+                return _xenoConstruction.CanOrderConstructionPopup((player, construction), coords, construction.OrderConstructionChoice);
+            }
+
+            if (construction.BuildChoice != null)
+            {
+                return _xenoConstruction.CanSecreteOnTilePopup((player, construction), construction.BuildChoice, coords, true, true);
             }
 
             return false;
