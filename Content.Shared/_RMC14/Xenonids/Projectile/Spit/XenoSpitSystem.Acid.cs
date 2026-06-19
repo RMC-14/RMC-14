@@ -211,7 +211,7 @@ public sealed partial class XenoSpitSystem : EntitySystem
 
         var time = _timing.CurTime;
 
-        if (_timing.CurTime > ent.Comp.NextMultThreshold)
+        if (time > ent.Comp.NextMultThreshold)
             IncrementMultiplier(ent, time);
     }
 
