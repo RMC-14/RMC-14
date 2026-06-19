@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Xenonids.ForTheHive;
 using Robust.Client.GameObjects;
-using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.ForTheHive;
 
