@@ -564,17 +564,16 @@ public sealed partial class HardpointSystem : EntitySystem
             return;
 
         _topLevelHardpoints.Clear();
-        CollectIntactTopLevelHardpoints(ent.Owner, ent.Comp, itemSlots, _topLevelHardpoints);
+        CollectTopLevelHardpoints(ent.Owner, ent.Comp, itemSlots, _topLevelHardpoints);
 
-        var anyTopLevelIntact = _topLevelHardpoints.Count > 0;
-
-        if (anyTopLevelIntact)
+        var anyTopLevelIntact = false;
+        _visitedHardpoints.Clear();
+        foreach (var (item, integrity) in _topLevelHardpoints)
         {
-            _visitedHardpoints.Clear();
-            foreach (var (item, integrity) in _topLevelHardpoints)
-            {
-                ApplyDamageToHardpointTree(ent.Owner, item, integrity, args.Damage, _visitedHardpoints);
-            }
+            if (integrity.Integrity > 0f)
+                anyTopLevelIntact = true;
+
+            ApplyDamageToHardpointTree(ent.Owner, item, integrity, args.Damage, _visitedHardpoints);
         }
 
         var hullFraction = anyTopLevelIntact ? ent.Comp.FrameDamageFractionWhileIntact : 1f;
@@ -614,11 +613,11 @@ public sealed partial class HardpointSystem : EntitySystem
         return multiplier > 0f;
     }
 
-    private void CollectIntactTopLevelHardpoints(
+    private void CollectTopLevelHardpoints(
         EntityUid owner,
         HardpointSlotsComponent slots,
         ItemSlotsComponent itemSlots,
-        List<(EntityUid Item, HardpointIntegrityComponent Integrity)> intactHardpoints)
+        List<(EntityUid Item, HardpointIntegrityComponent Integrity)> hardpoints)
     {
         foreach (var slot in slots.Slots)
         {
@@ -631,8 +630,8 @@ public sealed partial class HardpointSystem : EntitySystem
             if (itemSlot.Item is not { } item)
                 continue;
 
-            if (TryComp(item, out HardpointIntegrityComponent? integrity) && integrity.Integrity > 0f)
-                intactHardpoints.Add((item, integrity));
+            if (TryComp(item, out HardpointIntegrityComponent? integrity))
+                hardpoints.Add((item, integrity));
         }
     }
 
