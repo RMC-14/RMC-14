@@ -51,7 +51,13 @@ public sealed partial class DamageOnCollideComponent : Component
     public CollisionGroup Collision = CollisionGroup.HighImpassable | CollisionGroup.MidImpassable | CollisionGroup.LowImpassable | CollisionGroup.BulletImpassable | CollisionGroup.InteractImpassable;
 
     [DataField]
-    public int? AcidComboMaxTier;
+    public int AcidComboMaxTier = 2;
+
+    [DataField]
+    public DamageSpecifier? AcidComboDamage;
+
+    [DataField]
+    public DamageSpecifier? AcidComboDamageChain;
 
     [DataField]
     public TimeSpan AcidComboParalyze;

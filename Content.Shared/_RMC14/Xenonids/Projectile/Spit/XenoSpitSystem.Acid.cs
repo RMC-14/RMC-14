@@ -150,30 +150,32 @@ public sealed partial class XenoSpitSystem : EntitySystem
         Dirty(acided);
     }
 
-    public void EnhanceAcid(Entity<UserAcidedComponent?> acided, int maxTier, TimeSpan paralyze)
+    /// <summary>
+    /// Returns true if the acid was enhanced or prolonged
+    /// </summary>
+    /// <param name="acided"></param>
+    /// <param name="maxTier"></param>
+    /// <returns></returns>
+    public bool EnhanceAcid(Entity<UserAcidedComponent?> acided, int maxTier)
     {
         if (!Resolve(acided, ref acided.Comp, false))
-            return;
+            return false;
 
         if (acided.Comp.Tier >= maxTier || acided.Comp.Upgrade == null)
         {
             ProlongAcid((acided, acided.Comp), TimeSpan.FromSeconds(10));
-            return;
+            return true;
         }
 
         if (!_prototypeManager.TryIndex(acided.Comp.Upgrade, out var acidProto))
-            return;
+            return false;
 
         //Acid stuff
         UpdateAcid((acided, acided.Comp), acidProto);
 
-        if (paralyze != default)
-        {
-            _stun.TryParalyze(acided.Owner, paralyze, true);
-        }
-
         Dirty(acided);
         UpdateAppearance((acided, acided.Comp));
+        return true;
     }
 
     public void DoAcidTicks(TimeSpan time)

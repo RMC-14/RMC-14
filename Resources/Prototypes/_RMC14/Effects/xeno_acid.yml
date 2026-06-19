@@ -56,7 +56,6 @@
     lifetime: 0.6
   - type: DamageOnCollide
     acidic: true
-    acidComboMaxTier: 2
     acidComboParalyze: 2
     damage:
       types:
@@ -64,6 +63,12 @@
     chainDamage:
       types:
         Heat: 10
+    acidComboDamage:
+      types:
+        Heat: 25
+    acidComboChainDamage:
+      types:
+        Heat: 8.333
     whitelist:
       components:
       - Marine

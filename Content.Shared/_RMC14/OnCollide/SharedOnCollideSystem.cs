@@ -90,10 +90,21 @@ public abstract class SharedOnCollideSystem : EntitySystem
         ent.Comp.Damaged.Add(other);
         Dirty(ent);
 
+        var bonusDamage = false;
+
+        if (ent.Comp.AcidComboDamage != null && _xenoSpit.EnhanceAcid(other, ent.Comp.AcidComboMaxTier))
+        {
+            _stun.TryParalyze(other, ent.Comp.AcidComboParalyze, true);
+            bonusDamage = true;
+        }
+
         var didEmote = false;
         if (ent.Comp.Chain == null || AddToChain(ent.Comp.Chain.Value, other))
         {
             var damage = ent.Comp.Damage;
+            if (bonusDamage && ent.Comp.AcidComboDamage != null)
+                damage += ent.Comp.AcidComboDamage;
+
             if (ent.Comp.Acidic)
                 damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
             _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances, armorPiercing: ent.Comp.ArmorPenetration);
@@ -103,13 +114,14 @@ public abstract class SharedOnCollideSystem : EntitySystem
         else
         {
             var damage = ent.Comp.ChainDamage;
+
+            if (bonusDamage && ent.Comp.AcidComboDamageChain != null)
+                damage += ent.Comp.AcidComboDamageChain;
+
             if (ent.Comp.Acidic)
                 damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
             _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
         }
-
-        if (ent.Comp.AcidComboMaxTier != null)
-            _xenoSpit.EnhanceAcid(other, ent.Comp.AcidComboMaxTier.Value, ent.Comp.AcidComboParalyze);
 
         if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.IsDown(other) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
         {
