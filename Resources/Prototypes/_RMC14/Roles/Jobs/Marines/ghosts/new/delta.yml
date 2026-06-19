@@ -1,0 +1,88 @@
+- type: entity
+  parent: [RMCNewDeltaBase, RMCNewGhostCombatTech]
+  id: RMCNewGhostDeltaCombatTech
+  name: delta ghost role combat technician
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostDeltaCombatTech
+
+- type: entity
+  parent: [RMCNewDeltaBase, RMCNewGhostFireteamLeader]
+  id: RMCNewGhostDeltaFireteamLeader
+  name: delta ghost role fireteam leader
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostDeltaFireteamLeader
+
+- type: entity
+  parent: [RMCNewDeltaBase, RMCNewGhostHospitalCorpsman]
+  id: RMCNewGhostDeltaHospitalCorpsman
+  name: delta ghost role hospital corpsman
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostDeltaHospitalCorpsman
+
+- type: entity
+  parent: [RMCNewDeltaBase, RMCNewGhostRecruit]
+  id: RMCNewGhostDeltaRecruit
+  name: delta ghost role recruit
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostDeltaRecruit
+
+- type: entity
+  parent: [RMCNewDeltaBase, RMCNewGhostRifleman]
+  id: RMCNewGhostDeltaRifleman
+  name: delta ghost role rifleman
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostDeltaRifleman
+
+- type: entity
+  parent: [RMCNewDeltaBase, RMCNewGhostSmartGunOperator]
+  id: RMCNewGhostDeltaSmartGunOperator
+  name: delta ghost role smart gun operator
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostDeltaSmartGunOperator
+
+- type: entity
+  parent: [RMCNewDeltaBase, RMCNewGhostSquadLeader]
+  id: RMCNewGhostDeltaSquadLeader
+  name: delta ghost role squad leader
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostDeltaSquadLeader
+
+- type: entity
+  parent: [RMCNewDeltaBase, RMCNewGhostWeaponsSpecialist]
+  id: RMCNewGhostDeltaWeaponsSpecialist
+  name: delta ghost role weapons specialist
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: IgnoreSpecLimits
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostDeltaWeaponsSpecialist

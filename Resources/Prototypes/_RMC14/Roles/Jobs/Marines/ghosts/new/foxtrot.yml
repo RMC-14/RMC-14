@@ -1,19 +1,4 @@
 - type: entity
-  parent: MarkerBase
-  id: RMCNewFoxtrotBase
-  abstract: true
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: RMCGhostRole
-    addComponents:
-    - type: RandomizeName
-    - type: AssignSquad
-      squad: SquadFoxtrot
-    remaining: 1
-
-- type: entity
   parent: [RMCNewFoxtrotBase, RMCNewGhostCombatTech]
   id: RMCNewGhostFoxtrotCombatTech
   name: foxtrot ghost role combat technician
@@ -45,6 +30,17 @@
     addComponents:
     - type: RespawnOnCryo
       spawner: RMCNewGhostFoxtrotHospitalCorpsman
+
+- type: entity
+  parent: [RMCNewFoxtrotBase, RMCNewGhostRecruit]
+  id: RMCNewGhostFoxtrotRecruit
+  name: foxtrot ghost role recruit
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostFoxtrotRecruit
 
 - type: entity
   parent: [RMCNewFoxtrotBase, RMCNewGhostRifleman]

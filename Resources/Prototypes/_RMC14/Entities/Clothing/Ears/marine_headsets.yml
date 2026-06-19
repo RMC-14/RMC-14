@@ -485,6 +485,160 @@
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
 
+
+# Intel
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetIntel
+  name: marine intel radio headset
+  description: This is used by Intel squad members.
+  components:
+  - type: Sprite
+    state: cryo_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineIntel
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+
+- type: entity
+  parent: RMCHeadsetIntel
+  id: RMCHeadsetIntelLeader
+  name: marine intel leader radio headset
+  description: This is used by the marine Intel squad leader.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - CMEncryptionKeySquadLeader
+  - type: RMCHeadset
+    radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
+
+- type: entity
+  parent: RMCHeadsetIntel
+  id: RMCHeadsetIntelTeamLeader
+  name: marine intel team leader radio headset
+  description: This is used by the marine Intel team leader.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - CMEncryptionKeyJTAC
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetIntel
+  id: RMCHeadsetIntelEngineer
+  name: marine intel engineer radio headset
+  description: This is used by the marine Intel combat engineers.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyEngineer
+      - CMEncryptionKeyCommon
+
+- type: entity
+  parent: RMCHeadsetIntel
+  id: RMCHeadsetIntelMedic
+  name: marine intel corpsman radio headset
+  description: This is used by the marine Intel combat medics.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyMedical
+      - CMEncryptionKeyCommon
+
+
+# Unassigned
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetUnassigned
+  name: marine radio headset
+  description: This is used by marine squad members.
+  components:
+  - type: Sprite
+    state: cryo_headset
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineCommon
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+
+- type: entity
+  parent: RMCHeadsetUnassigned
+  id: RMCHeadsetUnassignedLeader
+  name: marine leader radio headset
+  description: This is used by marine squad leaders.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - CMEncryptionKeySquadLeader
+  - type: RMCHeadset
+    radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
+
+- type: entity
+  parent: RMCHeadsetUnassigned
+  id: RMCHeadsetUnassignedTeamLeader
+  name: marine team leader radio headset
+  description: This is used by marine team leaders.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - CMEncryptionKeyJTAC
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetUnassigned
+  id: RMCHeadsetUnassignedEngineer
+  name: marine engineer radio headset
+  description: This is used by marine combat engineers.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyEngineer
+      - CMEncryptionKeyCommon
+
+- type: entity
+  parent: RMCHeadsetUnassigned
+  id: RMCHeadsetUnassignedMedic
+  name: marine corpsman radio headset
+  description: This is used by marine combat medics.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyMedical
+      - CMEncryptionKeyCommon
+
 # PVE
 
 - type: entity

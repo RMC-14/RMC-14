@@ -1,0 +1,88 @@
+- type: entity
+  parent: [RMCNewBravoBase, RMCNewGhostCombatTech]
+  id: RMCNewGhostBravoCombatTech
+  name: bravo ghost role combat technician
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostBravoCombatTech
+
+- type: entity
+  parent: [RMCNewBravoBase, RMCNewGhostFireteamLeader]
+  id: RMCNewGhostBravoFireteamLeader
+  name: bravo ghost role fireteam leader
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostBravoFireteamLeader
+
+- type: entity
+  parent: [RMCNewBravoBase, RMCNewGhostHospitalCorpsman]
+  id: RMCNewGhostBravoHospitalCorpsman
+  name: bravo ghost role hospital corpsman
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostBravoHospitalCorpsman
+
+- type: entity
+  parent: [RMCNewBravoBase, RMCNewGhostRecruit]
+  id: RMCNewGhostBravoRecruit
+  name: bravo ghost role recruit
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostBravoRecruit
+
+- type: entity
+  parent: [RMCNewBravoBase, RMCNewGhostRifleman]
+  id: RMCNewGhostBravoRifleman
+  name: bravo ghost role rifleman
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostBravoRifleman
+
+- type: entity
+  parent: [RMCNewBravoBase, RMCNewGhostSmartGunOperator]
+  id: RMCNewGhostBravoSmartGunOperator
+  name: bravo ghost role smart gun operator
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostBravoSmartGunOperator
+
+- type: entity
+  parent: [RMCNewBravoBase, RMCNewGhostSquadLeader]
+  id: RMCNewGhostBravoSquadLeader
+  name: bravo ghost role squad leader
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostBravoSquadLeader
+
+- type: entity
+  parent: [RMCNewBravoBase, RMCNewGhostWeaponsSpecialist]
+  id: RMCNewGhostBravoWeaponsSpecialist
+  name: bravo ghost role weapons specialist
+  suffix: Spawner, Player
+  components:
+  - type: RMCGhostRole
+    addComponents:
+    - type: IgnoreSpecLimits
+    - type: RespawnOnCryo
+      spawner: RMCNewGhostBravoWeaponsSpecialist
