@@ -3,86 +3,45 @@
   id: RMCNewGhostUnassignedCombatTech
   name: unassigned ghost role combat technician
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostUnassignedCombatTech
 
 - type: entity
   parent: [RMCNewUnassignedBase, RMCNewGhostFireteamLeader]
   id: RMCNewGhostUnassignedFireteamLeader
   name: unassigned ghost role fireteam leader
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostUnassignedFireteamLeader
 
 - type: entity
   parent: [RMCNewUnassignedBase, RMCNewGhostHospitalCorpsman]
   id: RMCNewGhostUnassignedHospitalCorpsman
   name: unassigned ghost role hospital corpsman
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostUnassignedHospitalCorpsman
 
 - type: entity
   parent: [RMCNewUnassignedBase, RMCNewGhostRecruit]
   id: RMCNewGhostUnassignedRecruit
   name: unassigned ghost role recruit
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostUnassignedRecruit
 
 - type: entity
   parent: [RMCNewUnassignedBase, RMCNewGhostRifleman]
   id: RMCNewGhostUnassignedRifleman
   name: unassigned ghost role rifleman
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostUnassignedRifleman
 
 - type: entity
   parent: [RMCNewUnassignedBase, RMCNewGhostSmartGunOperator]
   id: RMCNewGhostUnassignedSmartGunOperator
   name: unassigned ghost role smart gun operator
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostUnassignedSmartGunOperator
 
 - type: entity
   parent: [RMCNewUnassignedBase, RMCNewGhostSquadLeader]
   id: RMCNewGhostUnassignedSquadLeader
   name: unassigned ghost role squad leader
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostUnassignedSquadLeader
 
 - type: entity
   parent: [RMCNewUnassignedBase, RMCNewGhostWeaponsSpecialist]
   id: RMCNewGhostUnassignedWeaponsSpecialist
   name: unassigned ghost role weapons specialist
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: IgnoreSpecLimits
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostUnassignedWeaponsSpecialist

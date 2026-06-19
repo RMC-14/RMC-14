@@ -3,86 +3,45 @@
   id: RMCNewGhostIntelCombatTech
   name: intel ghost role combat technician
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostIntelCombatTech
 
 - type: entity
   parent: [RMCNewIntelBase, RMCNewGhostFireteamLeader]
   id: RMCNewGhostIntelFireteamLeader
   name: intel ghost role fireteam leader
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostIntelFireteamLeader
 
 - type: entity
   parent: [RMCNewIntelBase, RMCNewGhostHospitalCorpsman]
   id: RMCNewGhostIntelHospitalCorpsman
   name: intel ghost role hospital corpsman
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostIntelHospitalCorpsman
 
 - type: entity
   parent: [RMCNewIntelBase, RMCNewGhostRecruit]
   id: RMCNewGhostIntelRecruit
   name: intel ghost role recruit
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostIntelRecruit
 
 - type: entity
   parent: [RMCNewIntelBase, RMCNewGhostRifleman]
   id: RMCNewGhostIntelRifleman
   name: intel ghost role rifleman
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostIntelRifleman
 
 - type: entity
   parent: [RMCNewIntelBase, RMCNewGhostSmartGunOperator]
   id: RMCNewGhostIntelSmartGunOperator
   name: intel ghost role smart gun operator
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostIntelSmartGunOperator
 
 - type: entity
   parent: [RMCNewIntelBase, RMCNewGhostSquadLeader]
   id: RMCNewGhostIntelSquadLeader
   name: intel ghost role squad leader
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostIntelSquadLeader
 
 - type: entity
   parent: [RMCNewIntelBase, RMCNewGhostWeaponsSpecialist]
   id: RMCNewGhostIntelWeaponsSpecialist
   name: intel ghost role weapons specialist
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: IgnoreSpecLimits
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostIntelWeaponsSpecialist

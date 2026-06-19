@@ -3,86 +3,45 @@
   id: RMCNewGhostEchoCombatTech
   name: echo ghost role combat technician
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostEchoCombatTech
 
 - type: entity
   parent: [RMCNewEchoBase, RMCNewGhostFireteamLeader]
   id: RMCNewGhostEchoFireteamLeader
   name: echo ghost role fireteam leader
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostEchoFireteamLeader
 
 - type: entity
   parent: [RMCNewEchoBase, RMCNewGhostHospitalCorpsman]
   id: RMCNewGhostEchoHospitalCorpsman
   name: echo ghost role hospital corpsman
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostEchoHospitalCorpsman
 
 - type: entity
   parent: [RMCNewEchoBase, RMCNewGhostRecruit]
   id: RMCNewGhostEchoRecruit
   name: echo ghost role recruit
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostEchoRecruit
 
 - type: entity
   parent: [RMCNewEchoBase, RMCNewGhostRifleman]
   id: RMCNewGhostEchoRifleman
   name: echo ghost role rifleman
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostEchoRifleman
 
 - type: entity
   parent: [RMCNewEchoBase, RMCNewGhostSmartGunOperator]
   id: RMCNewGhostEchoSmartGunOperator
   name: echo ghost role smart gun operator
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostEchoSmartGunOperator
 
 - type: entity
   parent: [RMCNewEchoBase, RMCNewGhostSquadLeader]
   id: RMCNewGhostEchoSquadLeader
   name: echo ghost role squad leader
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostEchoSquadLeader
 
 - type: entity
   parent: [RMCNewEchoBase, RMCNewGhostWeaponsSpecialist]
   id: RMCNewGhostEchoWeaponsSpecialist
   name: echo ghost role weapons specialist
   suffix: Spawner, Player
-  components:
-  - type: RMCGhostRole
-    addComponents:
-    - type: IgnoreSpecLimits
-    - type: RespawnOnCryo
-      spawner: RMCNewGhostEchoWeaponsSpecialist
