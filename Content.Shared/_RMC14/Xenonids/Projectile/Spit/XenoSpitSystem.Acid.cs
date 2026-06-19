@@ -225,7 +225,7 @@ public sealed partial class XenoSpitSystem : EntitySystem
         if (!HasComp<UserAcidedComponent>(ent))
             ApplyOrExtendAcid(args.Target, ent.Comp.Acid, ent.Comp.ProlongDuration);
         else if (ent.Comp.Enhance)
-            EnhanceAcid(args.Target, ent.Comp.MaxTier, TimeSpan.Zero);
+            EnhanceAcid(args.Target, ent.Comp.MaxTier);
     }
 
     private void OnUserAcidedGetArmor(Entity<UserAcidedComponent> ent, ref CMGetArmorEvent args)
