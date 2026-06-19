@@ -7,6 +7,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Mobs;
 using Content.Shared.Projectiles;
 using Robust.Shared.Prototypes;
+using Content.Shared.Rejuvenate;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Spit;
 
@@ -21,6 +22,7 @@ public sealed partial class XenoSpitSystem : EntitySystem
         SubscribeLocalEvent<UserAcidedComponent, VaporHitEvent>(OnUserAcidedVaporHit);
         SubscribeLocalEvent<UserAcidedComponent, MobStateChangedEvent>(OnUserAcidedMobStateChanged);
         SubscribeLocalEvent<UserAcidedComponent, CMGetArmorEvent>(OnUserAcidedGetArmor, after: [typeof(CMArmorSystem)]);
+        SubscribeLocalEvent<UserAcidedComponent, RejuvenateEvent>(OnUserAcidedRejuvenate);
 
         SubscribeLocalEvent<XenoAcidOnHitComponent, ProjectileHitEvent>(OnAcidHitEvent, after: [typeof(CMClusterGrenadeSystem)]);
     }
@@ -52,6 +54,11 @@ public sealed partial class XenoSpitSystem : EntitySystem
     private void OnUserAcidedRemove(Entity<UserAcidedComponent> ent, ref ComponentRemove args)
     {
         _appearance.SetData(ent, UserAcidedVisuals.Acided, UserAcidedEffects.None);
+    }
+
+    private void OnUserAcidedRejuvenate(Entity<UserAcidedComponent> ent, ref RejuvenateEvent args)
+    {
+        RemCompDeferred<UserAcidedComponent>(ent);
     }
 
     private void OnUserAcidedShowFireAlert(Entity<UserAcidedComponent> ent, ref ShowFireAlertEvent args)
