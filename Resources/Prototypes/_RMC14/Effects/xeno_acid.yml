@@ -66,7 +66,7 @@
     acidComboDamage:
       types:
         Heat: 25
-    acidComboChainDamage:
+    acidComboDamageChain:
       types:
         Heat: 8.333
     whitelist:
@@ -93,7 +93,7 @@
       types:
         Heat: 36
     acidComboDamage: null
-    acidComboChainDamage: null
+    acidComboDamageChain: null
   - type: TimedDespawn
     lifetime: 1.0
   - type: SprayExtinguishTileFire
@@ -118,7 +118,7 @@
       types:
         Heat: 24
     acidComboDamage: null
-    acidComboChainDamage: null
+    acidComboDamageChain: null
   - type: TimedDespawn
     lifetime: 1.0
   - type: SprayExtinguishTileFire
@@ -142,7 +142,7 @@
       types:
         Heat: 14.2
     acidComboDamage: null
-    acidComboChainDamage: null
+    acidComboDamageChain: null
   - type: TimedDespawn
     lifetime: 1.0
 
