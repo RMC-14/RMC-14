@@ -208,6 +208,11 @@ public sealed partial class XenoSpitSystem : EntitySystem
             return;
 
         ent.Comp.NextMultThreshold -= timeToReduceBy;
+
+        var time = _timing.CurTime;
+
+        if (_timing.CurTime > ent.Comp.NextMultThreshold)
+            IncrementMultiplier(ent, time);
     }
 
     private void IncrementMultiplier(Entity<UserAcidedComponent> ent, TimeSpan time)
