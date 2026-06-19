@@ -26,6 +26,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/sppvan.rsi
     overlayState: van_turret_0
+    overlayDamagedState: van_turret_1
     pixelOffsetNorth: "0,4"
     pixelOffsetEast: "-6,16"
     pixelOffsetSouth: "0,15"
@@ -70,6 +71,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/sppvan.rsi
     overlayState: t60p3m_0
+    overlayDamagedState: t60p3m_1
     fireWhileRotatingGraceDegrees: 180
     useBarrelDirectionForShots: true
     maxShotCurvatureDegrees: 10
@@ -99,6 +101,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: t60p3m_0
+    damagedVehicleState: t60p3m_1
 
 - type: entity
   parent: RMCVanWheel

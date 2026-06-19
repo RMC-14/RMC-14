@@ -27,6 +27,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: tank_turret_0
+    overlayDamagedState: tank_turret_1
     useDirectionalOffsets: false
     pixelOffsetNorth: "0,6"
     pixelOffsetEast: "-5,0"
@@ -84,10 +85,12 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: p17702_0
+    overlayDamagedState: p17702_1
   - type: HardpointItem
     compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: p17702_0
+    damagedVehicleState: p17702_1
   - type: GunMuzzleOffset
     offset: "0,0"
     applyToMuzzleFlash: true
@@ -121,10 +124,12 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: railgun_0
+    overlayDamagedState: railgun_1
   - type: HardpointItem
     compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: railgun_0
+    damagedVehicleState: railgun_1
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -157,10 +162,12 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: hj35t_0
+    overlayDamagedState: hj35t_1
   - type: HardpointItem
     compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: hj35t_0
+    damagedVehicleState: hj35t_1
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -199,8 +206,10 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: t60p3m_0
+    overlayDamagedState: t60p3m_1
   - type: HardpointVisual
     vehicleState: t60p3m_0
+    damagedVehicleState: t60p3m_1
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -226,6 +235,7 @@
     compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: reactive_armor_0
+    damagedVehicleState: reactive_armor_1
 
 - type: entity
   parent: VehicleTankRocketLauncher
@@ -240,6 +250,7 @@
     compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: slauncher_0
+    damagedVehicleState: slauncher_1
 
 - type: entity
   parent: VehicleTankFlareModule
@@ -254,6 +265,7 @@
     compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: slauncher_1
+    damagedVehicleState: slauncher_2
 
 - type: entity
   parent: VehicleTankWarningArray
@@ -268,6 +280,7 @@
     compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: warray_0
+    damagedVehicleState: warray_1
 
 - type: entity
   parent: VehicleTankOverdriveEnhancer
@@ -282,6 +295,7 @@
     compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: odrive_enhancer_0
+    damagedVehicleState: odrive_enhancer_1
 
 - type: entity
   parent: VehicleTankArtilleryModule
@@ -296,4 +310,5 @@
     compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: artillerymod_0
+    damagedVehicleState: artillerymod_1
 

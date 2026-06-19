@@ -19,6 +19,7 @@
     fireRateMultiplier: 1.15
   - type: HardpointVisual
     vehicleState: warray_0
+    damagedVehicleState: warray_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -40,6 +41,7 @@
     speedMultiplier: 1.2
   - type: HardpointVisual
     vehicleState: odrive_enhancer_0
+    damagedVehicleState: odrive_enhancer_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -178,4 +180,5 @@
     cursorPvsIncrease: 0.5
   - type: HardpointVisual
     vehicleState: artillerymod_0
+    damagedVehicleState: artillerymod_1
 

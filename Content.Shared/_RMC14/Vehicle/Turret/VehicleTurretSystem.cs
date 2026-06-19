@@ -685,6 +685,13 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        if (!IsTurretFunctional(ent.Owner))
+        {
+            args.Cancelled = true;
+            args.ResetCooldown = true;
+            return;
+        }
+
         if (!CanOperatorUseTurret(ent.Owner, args.User))
         {
             args.Cancelled = true;
@@ -752,6 +759,23 @@ public sealed class VehicleTurretSystem : EntitySystem
             gun.ShootCoordinates = finalTarget;
 #pragma warning restore RA0002
         }
+    }
+
+    private bool IsTurretFunctional(EntityUid turretUid)
+    {
+        if (TryComp(turretUid, out HardpointIntegrityComponent? integrity) &&
+            integrity.Integrity <= 0f)
+        {
+            return false;
+        }
+
+        if (!HasComp<VehicleTurretAttachmentComponent>(turretUid))
+            return true;
+
+        if (!TryGetParentTurret(turretUid, out var parentUid, out _))
+            return true;
+
+        return !TryComp(parentUid, out HardpointIntegrityComponent? parentIntegrity) || parentIntegrity.Integrity > 0f;
     }
 
     private void ApplyShotDirectionConstraint(

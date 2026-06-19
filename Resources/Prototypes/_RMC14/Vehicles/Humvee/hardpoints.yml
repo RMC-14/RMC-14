@@ -50,6 +50,7 @@
     useDirectionalOffsets: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveeturret_0
+    overlayDamagedState: humveeturret_1
     pixelOffsetNorth: "0,4"
     pixelOffsetEast: "-6,16"
     pixelOffsetSouth: "0,15"
@@ -141,6 +142,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveecannon_0
+    overlayDamagedState: humveecannon_1
     fireWhileRotatingGraceDegrees: 180
     useBarrelDirectionForShots: true
     maxShotCurvatureDegrees: 10
@@ -180,6 +182,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: humveecannon_0
+    damagedVehicleState: humveecannon_1
 
 - type: entity
   parent: VehicleHumveeCannon
@@ -218,8 +221,10 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveelauncher_0
+    overlayDamagedState: humveelauncher_1
   - type: HardpointVisual
     vehicleState: humveelauncher_0
+    damagedVehicleState: humveelauncher_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
@@ -266,6 +271,7 @@
     maxIntegrity: 100
   - type: HardpointVisual
     vehicleState: snowplow_0
+    damagedVehicleState: snowplow_1
 
 - type: entity
   parent: VehicleHumveeHardpointBase
@@ -287,6 +293,7 @@
     radiusMultiplier: 2.0
   - type: HardpointVisual
     vehicleState: overlight_0
+    damagedVehicleState: overlight_1
 
 - type: entity
   parent: VehicleHumveeHardpointBase

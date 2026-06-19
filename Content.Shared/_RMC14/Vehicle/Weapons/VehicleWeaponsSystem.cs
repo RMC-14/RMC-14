@@ -62,7 +62,7 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         SubscribeLocalEvent<VehicleWeaponsOperatorComponent, VehicleHardpointSelectActionEvent>(OnHardpointActionSelect);
         SubscribeLocalEvent<VehicleWeaponsOperatorComponent, VehicleViewToggledEvent>(OnViewToggled);
 
-        SubscribeLocalEvent<HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
+        SubscribeLocalEvent<VehicleWeaponsComponent, HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
 
         SubscribeLocalEvent<VehicleTurretComponent, GunShotEvent>(OnTurretGunShot);
         SubscribeLocalEvent<VehicleTurretComponent, GetIFFGunUserEvent>(OnTurretGetIFFGunUser);
@@ -334,36 +334,36 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
         return true;
     }
 
-    private void OnHardpointSlotsChanged(HardpointSlotsChangedEvent args)
+    private void OnHardpointSlotsChanged(Entity<VehicleWeaponsComponent> ent, ref HardpointSlotsChangedEvent args)
     {
         if (_net.IsClient)
             return;
 
-        if (!TryComp(args.Vehicle, out VehicleWeaponsComponent? weapons))
-            return;
+        var vehicle = ent.Owner;
+        var weapons = ent.Comp;
 
         HardpointSlotsComponent? hardpoints = null;
         ItemSlotsComponent? itemSlots = null;
 
         if (weapons.SelectedWeapon is { } selected &&
-            Resolve(args.Vehicle, ref hardpoints, logMissing: false) &&
-            Resolve(args.Vehicle, ref itemSlots, logMissing: false) &&
-            !IsSelectedWeaponInstalled(args.Vehicle, selected, hardpoints, itemSlots))
+            Resolve(vehicle, ref hardpoints, logMissing: false) &&
+            Resolve(vehicle, ref itemSlots, logMissing: false) &&
+            !IsSelectedWeaponInstalled(vehicle, selected, hardpoints, itemSlots))
         {
             weapons.SelectedWeapon = null;
-            Dirty(args.Vehicle, weapons);
+            Dirty(vehicle, weapons);
         }
 
-        PruneHardpointOperators(args.Vehicle, weapons, hardpoints, itemSlots);
-        RecalculateSelectedWeapon(args.Vehicle, weapons, itemSlots);
-        RefreshOperatorSelectedWeapons(args.Vehicle, weapons, itemSlots);
-        RefreshSeatGunnerViews(args.Vehicle);
-        Dirty(args.Vehicle, weapons);
+        PruneHardpointOperators(vehicle, weapons, hardpoints, itemSlots);
+        RecalculateSelectedWeapon(vehicle, weapons, itemSlots);
+        RefreshOperatorSelectedWeapons(vehicle, weapons, itemSlots);
+        RefreshSeatGunnerViews(vehicle);
+        Dirty(vehicle, weapons);
 
-        UpdateWeaponsUiForAllOperators(args.Vehicle, weapons, hardpoints, itemSlots, refreshActions: true);
+        UpdateWeaponsUiForAllOperators(vehicle, weapons, hardpoints, itemSlots, refreshActions: true);
     }
 
-    private void RefreshSeatGunnerViews(EntityUid vehicle)
+    internal void RefreshSeatGunnerViews(EntityUid vehicle)
     {
         var query = EntityQueryEnumerator<VehicleWeaponsOperatorComponent>();
         while (query.MoveNext(out var user, out var op))

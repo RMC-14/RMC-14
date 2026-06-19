@@ -27,6 +27,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ltb_cannon_0
+    overlayDamagedState: ltb_cannon_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: ShootAtFixedPoint
@@ -62,6 +63,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: ltb_cannon_0
+    damagedVehicleState: ltb_cannon_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -93,6 +95,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ltaaap_minigun_0
+    overlayDamagedState: ltaaap_minigun_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
@@ -145,6 +148,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: ltaaap_minigun_0
+    damagedVehicleState: ltaaap_minigun_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -175,6 +179,7 @@
     pixelOffsetWest: "-30,0"
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ace_autocannon_0
+    overlayDamagedState: ace_autocannon_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
@@ -211,6 +216,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: ace_autocannon_0
+    damagedVehicleState: ace_autocannon_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -235,6 +241,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: drgn_flamer_0
+    overlayDamagedState: drgn_flamer_1
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,25"
@@ -278,4 +285,5 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: drgn_flamer_0
+    damagedVehicleState: drgn_flamer_1
 

@@ -52,7 +52,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         SubscribeLocalEvent<BulletBoxComponent, HandSelectedEvent>(OnBulletBoxHandSelected);
         SubscribeLocalEvent<BulletBoxComponent, HandDeselectedEvent>(OnBulletBoxHandDeselected);
         SubscribeLocalEvent<VehicleHardpointAmmoComponent, VehicleAmmoChangedEvent>(OnVehicleAmmoChanged);
-        SubscribeLocalEvent<HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
+        SubscribeLocalEvent<HardpointSlotsComponent, HardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
     }
 
     private void OnInteractUsing(Entity<VehicleAmmoLoaderComponent> ent, ref InteractUsingEvent args)
@@ -243,12 +243,12 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         UpdateOpenLoaderUisForVehicle(vehicle);
     }
 
-    private void OnHardpointSlotsChanged(HardpointSlotsChangedEvent args)
+    private void OnHardpointSlotsChanged(Entity<HardpointSlotsComponent> ent, ref HardpointSlotsChangedEvent args)
     {
         if (_net.IsClient)
             return;
 
-        UpdateOpenLoaderUisForVehicle(args.Vehicle);
+        UpdateOpenLoaderUisForVehicle(ent.Owner);
     }
 
     private void OnUiSelect(Entity<VehicleAmmoLoaderComponent> ent, ref VehicleAmmoLoaderSelectMessage args)

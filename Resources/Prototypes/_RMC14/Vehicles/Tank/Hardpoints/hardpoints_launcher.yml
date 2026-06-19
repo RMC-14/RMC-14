@@ -27,6 +27,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: flamer_0
+    overlayDamagedState: flamer_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
@@ -55,6 +56,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: flamer_0
+    damagedVehicleState: flamer_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -85,6 +87,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: glauncher_0
+    overlayDamagedState: glauncher_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
@@ -125,6 +128,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: glauncher_0
+    damagedVehicleState: glauncher_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -155,6 +159,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: towlauncher_0
+    overlayDamagedState: towlauncher_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
@@ -191,6 +196,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: towlauncher_0
+    damagedVehicleState: towlauncher_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -221,6 +227,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: m56cupola_0
+    overlayDamagedState: m56cupola_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
@@ -261,6 +268,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: m56cupola_0
+    damagedVehicleState: m56cupola_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -291,6 +299,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: m56cupola_0
+    overlayDamagedState: m56cupola_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
@@ -329,4 +338,5 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: m56cupola_0
+    damagedVehicleState: m56cupola_1
 

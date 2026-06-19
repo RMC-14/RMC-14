@@ -36,6 +36,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: tank_turret_0
+    overlayDamagedState: tank_turret_1
     useDirectionalOffsets: false
     pixelOffsetNorth: "0,-10"
     pixelOffsetEast: "-10,0"

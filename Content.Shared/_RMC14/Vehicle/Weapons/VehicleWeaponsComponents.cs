@@ -122,6 +122,9 @@ public sealed partial class VehicleTurretComponent : Component
     public string OverlayState = string.Empty;
 
     [DataField, AutoNetworkedField]
+    public string OverlayDamagedState = string.Empty;
+
+    [DataField, AutoNetworkedField]
     public bool UseDirectionalOffsets = false;
 
     [DataField, AutoNetworkedField]
