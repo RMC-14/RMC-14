@@ -56,6 +56,7 @@
   solids:
     FoodBreadBun: 1
     OrganHumanAppendix: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeBaconBurger
@@ -110,6 +111,7 @@
   solids:
     FoodBreadBun: 1
     OrganHumanBrain: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeCatBurger
@@ -254,6 +256,7 @@
   solids:
     FoodBreadBun: 1
     FoodMeatHuman: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe #Changed for RMC
   id: RecipeJellyBurger
@@ -955,6 +958,7 @@
     OrganHumanEyes: 1
     FoodCarrot: 1
     FoodPotato: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeAmanitaJelly
@@ -1700,6 +1704,7 @@
   solids:
     FoodCakePlain: 1
     OrganHumanBrain: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeSlimeCake

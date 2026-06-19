@@ -12,6 +12,7 @@ using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.LinkAccount;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Prototypes;
@@ -101,6 +102,8 @@ namespace Content.Client.Lobby.UI
 
         private List<(string, RequirementsSelector)> _jobPriorities = new();
 
+        private List<(string JobId, OptionButton Button, List<ProtoId<RankPrototype>?> RankIds)> _rankPriorities = new();
+
         private readonly Dictionary<string, BoxContainer> _jobCategories;
 
         private Direction _previewRotation = Direction.North;
@@ -110,6 +113,9 @@ namespace Content.Client.Lobby.UI
         private bool _isDirty;
 
         private static readonly ProtoId<GuideEntryPrototype> DefaultSpeciesGuidebook = "Species";
+        // RMC14
+        private static readonly ProtoId<TraitCategoryPrototype> SpeechTraitsCategory = "SpeechTraits";
+        // RMC14
 
         public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
 
@@ -648,7 +654,9 @@ namespace Content.Client.Lobby.UI
                     });
                 }
 
-                List<TraitPreferenceSelector?> selectors = new();
+                // RMC14
+                var selectors = new List<(TraitPreferenceSelector Selector, bool IsLanguageTrait)>();
+                // RMC14
                 var selectionCount = 0;
 
                 foreach (var traitProto in categoryTraits)
@@ -674,7 +682,9 @@ namespace Content.Client.Lobby.UI
                         SetDirty();
                         RefreshTraits(); // If too many traits are selected, they will be reset to the real value.
                     };
-                    selectors.Add(selector);
+                    // RMC14
+                    selectors.Add((selector, trait.Language != null));
+                    // RMC14
                 }
 
                 // Selection counter
@@ -687,13 +697,52 @@ namespace Content.Client.Lobby.UI
                     });
                 }
 
-                foreach (var selector in selectors)
+                // RMC14
+                if (categoryId == SpeechTraitsCategory)
                 {
-                    if (selector == null)
-                        continue;
+                    var languageSelectors = selectors
+                        .Where(selector => selector.IsLanguageTrait)
+                        .Select(selector => selector.Selector)
+                        .ToList();
+                    var otherSelectors = selectors
+                        .Where(selector => !selector.IsLanguageTrait)
+                        .Select(selector => selector.Selector)
+                        .ToList();
 
-                    if (category is { MaxTraitPoints: >= 0 } &&
-                        selector.Cost + selectionCount > category.MaxTraitPoints)
+                    AddTraitSelectors(languageSelectors, selectionCount, category, "rmc-trait-group-languages");
+                    AddTraitSelectors(otherSelectors, selectionCount, category, "rmc-trait-group-other-speech");
+                }
+                else
+                {
+                    AddTraitSelectors(selectors.Select(selector => selector.Selector).ToList(), selectionCount, category);
+                }
+                // RMC14
+            }
+
+            // RMC14
+            void AddTraitSelectors(
+                List<TraitPreferenceSelector> selectorsToAdd,
+                int currentSelectionCount,
+                TraitCategoryPrototype? currentCategory,
+                string? groupLabel = null)
+            {
+                if (selectorsToAdd.Count == 0)
+                    return;
+
+                if (groupLabel != null)
+                {
+                    TraitsList.AddChild(new Label
+                    {
+                        Text = Loc.GetString(groupLabel),
+                        Margin = new Thickness(8, 6, 0, 0),
+                        FontColorOverride = Color.LightGray
+                    });
+                }
+
+                foreach (var selector in selectorsToAdd)
+                {
+                    if (currentCategory is { MaxTraitPoints: >= 0 } &&
+                        selector.Cost + currentSelectionCount > currentCategory.MaxTraitPoints)
                     {
                         selector.Checkbox.Label.FontColorOverride = Color.Red;
                     }
@@ -701,6 +750,7 @@ namespace Content.Client.Lobby.UI
                     TraitsList.AddChild(selector);
                 }
             }
+            // RMC14
         }
 
         /// <summary>
@@ -872,6 +922,7 @@ namespace Content.Client.Lobby.UI
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
             UpdateArmorPreferenceControls();
+            UpdatePlaytimeRankPreferenceControls();
             UpdateSquadPreferenceControls();
             UpdateAgeEdit();
             UpdateEyePickers();
@@ -943,6 +994,7 @@ namespace Content.Client.Lobby.UI
             JobList.DisposeAllChildren();
             _jobCategories.Clear();
             _jobPriorities.Clear();
+            _rankPriorities.Clear();
             var firstCategory = true;
 
             // Get all displayed departments
@@ -1114,14 +1166,64 @@ namespace Content.Client.Lobby.UI
                         };
                     }
 
+                    // RMC14
+                    var rankOptions = new OptionButton()
+                    {
+                        Name = "RankOptionsButton",
+                        HorizontalAlignment = HAlignment.Right,
+                        VerticalAlignment = VAlignment.Center,
+                        Margin = new Thickness(3f, 3f, 0f, 0f)
+                    };
+
+                    // index 0 = Auto (null), subsequent entries map 1:1 to job.Ranks in definition order.
+                    var rankProtoIds = new List<ProtoId<RankPrototype>?> { null };
+
+                    // If the job has ranks we will add the options as buttons.
+                    if (job.Ranks != null && job.SetRankPreference)
+                    {
+                        rankOptions.AddItem("Auto");
+
+                        foreach (var rank in job.Ranks)
+                        {
+                            if (_prototypeManager.TryIndex(rank.Key, out var rankPrototype))
+                            {
+                                rankOptions.AddItem(rankPrototype.Name);
+                                rankProtoIds.Add(rank.Key);
+
+                                if (rank.Value != null && !_requirements.CheckRoleRequirements(rank.Value, Profile, out _))
+                                    rankOptions.SetItemDisabled(rankOptions.ItemCount - 1, true);
+                            }
+                        }
+
+                        rankOptions.SetItemDisabled(rankOptions.ItemCount - 1, true);
+                        // If the job only has 1 rank there is nothing to choose.
+                        if (rankProtoIds.Count <= 2)
+                            rankOptions.Disabled = true;
+
+                        rankOptions.OnItemSelected += args =>
+                        {
+                            rankOptions.SelectId(args.Id);
+                            SetRankPreference(job.ID, rankProtoIds[args.Id]);
+                        };
+                    }
+                    // Else if the job does not contain ranks we do not show it (Xenos as an example).
+                    else
+                    {
+                        rankOptions.Visible = false;
+                    }
+                    // RMC14
+
                     _jobPriorities.Add((job.ID, selector));
+                    _rankPriorities.Add((job.ID, rankOptions, rankProtoIds));
                     jobContainer.AddChild(selector);
                     jobContainer.AddChild(loadoutWindowBtn);
+                    jobContainer.AddChild(rankOptions);
                     category.AddChild(jobContainer);
                 }
             }
 
             UpdateJobPriorities();
+            UpdatePlaytimeRankPreferenceControls();
         }
 
         private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
@@ -1362,6 +1464,12 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetRankPreference(string jobId, ProtoId<RankPrototype>? rankId)
+        {
+            Profile = Profile?.WithRankPreference(jobId, rankId);
+            SetDirty();
+        }
+
         private void SetSquadPreference(EntProtoId<SquadTeamComponent>? newSquadPreference)
         {
             Profile = Profile?.WithSquadPreference(newSquadPreference);
@@ -1586,6 +1694,36 @@ namespace Content.Client.Lobby.UI
             }
 
             ArmorPreferenceButton.SelectId((int) Profile.ArmorPreference);
+        }
+
+        private void UpdatePlaytimeRankPreferenceControls()
+        {
+            var preferenceAdjusted = false;
+            foreach (var (jobID, optionsButton, rankIds) in _rankPriorities)
+            {
+                if (!_prototypeManager.TryIndex(jobID, out JobPrototype? job) || job == null)
+                    continue;
+
+                if (job.Ranks == null || !job.SetRankPreference)
+                    continue;
+
+                ProtoId<RankPrototype>? preferredRank = null;
+                Profile?.RankPreferences.TryGetValue(jobID, out preferredRank);
+                var selectedIndex = rankIds.IndexOf(preferredRank);
+                if (selectedIndex < 0)
+                    selectedIndex = 0;
+
+                if (preferredRank is { } rank && rank == rankIds.Last())
+                {
+                    Profile = Profile?.WithRankPreference(jobID, null);
+                    preferenceAdjusted = true;
+                }
+
+                optionsButton.Select(selectedIndex);
+            }
+
+            if (preferenceAdjusted)
+                Save?.Invoke();
         }
 
         private void UpdateSquadPreferenceControls()
