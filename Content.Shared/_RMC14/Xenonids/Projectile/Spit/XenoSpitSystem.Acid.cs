@@ -202,9 +202,18 @@ public sealed partial class XenoSpitSystem : EntitySystem
         }
     }
 
+    private void ReduceNextMultiplierTime(Entity<UserAcidedComponent> ent, TimeSpan timeToReduceBy)
+    {
+        if (ent.Comp.NextMultThreshold == null)
+            return;
+
+        ent.Comp.NextMultThreshold -= timeToReduceBy;
+    }
+
     private void IncrementMultiplier(Entity<UserAcidedComponent> ent, TimeSpan time)
     {
-        var nextMult = ent.Comp.DamageMultiplier++; //If at 1, we look at index 1 in our mult thresholds
+        //If our mult is set to 2, look at index 1 etc
+        var nextMult = ent.Comp.DamageMultiplier++;
         if (ent.Comp.MultiplierThresholds.Length <= nextMult)
         {
             ent.Comp.NextMultThreshold = null;
@@ -212,7 +221,7 @@ public sealed partial class XenoSpitSystem : EntitySystem
             return;
         }
 
-        ent.Comp.NextMultThreshold = time + ent.Comp.MultiplierThresholds[nextMult];
+        ent.Comp.NextMultThreshold = ent.Comp.NextMultThreshold + ent.Comp.MultiplierThresholds[nextMult];
 
         Dirty(ent);
     }
