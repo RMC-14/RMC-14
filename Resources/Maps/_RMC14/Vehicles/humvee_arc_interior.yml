@@ -278,7 +278,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.515501,-0.4370923
       parent: 2
-- proto: RMCSeatHumveePassenger
+- proto: RMCSeatHumveeWeaponsOperator
   entities:
   - uid: 22
     components:
@@ -286,6 +286,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.53517,-1.2188032
       parent: 2
+- proto: RMCSeatHumveePassenger
+  entities:
   - uid: 58
     components:
     - type: Transform
