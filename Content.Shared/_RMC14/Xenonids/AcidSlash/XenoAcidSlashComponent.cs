@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.AcidSlash;
@@ -8,5 +9,5 @@ namespace Content.Shared._RMC14.Xenonids.AcidSlash;
 public sealed partial class XenoAcidSlashComponent : Component
 {
     [DataField]
-    public ComponentRegistry? Acid;
+    public ProtoId<XenoAcidPrototype> Acid = "WeakAcid";
 }

@@ -1,10 +1,11 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 
 namespace Content.Shared._RMC14.Xenonids.ForTheHive;
 
@@ -78,7 +79,7 @@ public sealed partial class ActiveForTheHiveComponent : Component
     public FixedPoint2 SlowDown = FixedPoint2.New(0.45);
 
     [DataField]
-    public ComponentRegistry? MobAcid;
+    public ProtoId<XenoAcidPrototype>? MobAcid = "WeakAcid";
 }
 
 
