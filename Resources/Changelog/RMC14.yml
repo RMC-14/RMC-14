@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added guidebook links to designer hivelord entities.
-    type: Add
-  id: 2928
-  time: '2026-02-11T08:25:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9179
 - author: Ian321
   changes:
   - message: Hivelord strains now give intel and have a heart.
@@ -4567,5 +4560,12 @@
   id: 3427
   time: '2026-06-19T00:47:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10111
+- author: MoonlightHollow
+  changes:
+  - message: Update and clean up RCM skills
+    type: Tweak
+  id: 3428
+  time: '2026-06-19T17:21:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9895
 Name: RMC14
 Order: -1
