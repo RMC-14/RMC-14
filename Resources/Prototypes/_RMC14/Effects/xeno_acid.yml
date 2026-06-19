@@ -92,6 +92,8 @@
     damage:
       types:
         Heat: 36
+    acidComboDamage: null
+    acidComboChainDamage: null
   - type: TimedDespawn
     lifetime: 1.0
   - type: SprayExtinguishTileFire
@@ -115,6 +117,8 @@
     damage:
       types:
         Heat: 24
+    acidComboDamage: null
+    acidComboChainDamage: null
   - type: TimedDespawn
     lifetime: 1.0
   - type: SprayExtinguishTileFire
@@ -137,6 +141,8 @@
     chainDamage:
       types:
         Heat: 14.2
+    acidComboDamage: null
+    acidComboChainDamage: null
   - type: TimedDespawn
     lifetime: 1.0
 

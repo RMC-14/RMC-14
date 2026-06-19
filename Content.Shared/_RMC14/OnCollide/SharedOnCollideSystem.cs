@@ -92,7 +92,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
 
         var bonusDamage = false;
 
-        if (ent.Comp.AcidComboDamage != null && _xenoSpit.EnhanceAcid(other, ent.Comp.AcidComboMaxTier))
+        if (ent.Comp.AcidComboDamage != null && ent.Comp.AcidComboDamageChain != null && _xenoSpit.EnhanceAcid(other, ent.Comp.AcidComboMaxTier))
         {
             _stun.TryParalyze(other, ent.Comp.AcidComboParalyze, true);
             bonusDamage = true;
