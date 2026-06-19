@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: LeoKarz
-  changes:
-  - message: Added a cursor overlay for selected design and node type for designer
-      hivelord
-    type: Add
-  - message: Changed wall sprite from greater resin surge from thick resin to bone
-      resin for clarity.
-    type: Tweak
-  - message: Fixed construction node infusal message to be for the client only, not
-      everyone.
-    type: Fix
-  - message: You can now stack remote thicken resin actions, allowing you to upgrade
-      your entire screen at once.
-    type: Fix
-  - message: Breaking construction nodes will cancel the wall animation
-    type: Fix
-  id: 2927
-  time: '2026-02-11T08:24:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9189
 - author: Whisper
   changes:
   - message: Added guidebook links to designer hivelord entities.
@@ -4579,5 +4560,12 @@
   id: 3426
   time: '2026-06-16T22:57:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10183
+- author: kleinerstation13
+  changes:
+  - message: Fixed the Bobda vending machine bag being meltable and strippable
+    type: Fix
+  id: 3427
+  time: '2026-06-19T00:47:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10111
 Name: RMC14
 Order: -1
