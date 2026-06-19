@@ -22,6 +22,8 @@
   id: RMCRecruitGhostBar
   playTimeTracker: RMCGhostBarTracker
   startingGear: RMCGearRecruitGhostBar
+  spawnMenuRoleName: rmc-ghost-bar-name-recruit
+  hidden: true
 
 - type: entity
   parent: MarkerBase
