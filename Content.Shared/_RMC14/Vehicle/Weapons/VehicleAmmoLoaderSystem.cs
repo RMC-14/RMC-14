@@ -245,7 +245,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        UpdateOpenLoaderUisForVehicle(ent.Owner);
+        UpdateOpenLoaderUisForVehicle(args.Vehicle);
     }
 
     private void OnUiSelect(Entity<VehicleAmmoLoaderComponent> ent, ref VehicleAmmoLoaderSelectMessage args)

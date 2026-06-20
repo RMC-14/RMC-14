@@ -90,9 +90,18 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
             : GetBaseRotation(baseUid, component.AngleOffset);
         var useBarrelDirectionOffsets = hasTurretPose || useVehicleTurretShotRotation;
         var (offset, rotateOffset) = GetOffset(component, baseUid, baseRotation, useBarrelDirectionOffsets);
-        muzzleCoords = rotateOffset
-            ? baseCoords.Offset(baseRotation.RotateVec(offset))
-            : baseCoords.Offset(offset);
+        if (hasTurretPose && rotateOffset)
+        {
+            var baseMap = _transform.ToMapCoordinates(baseCoords);
+            muzzleCoords = _transform.ToCoordinates(new MapCoordinates(baseMap.Position + baseRotation.RotateVec(offset), baseMap.MapId));
+        }
+        else
+        {
+            muzzleCoords = rotateOffset
+                ? baseCoords.Offset(baseRotation.RotateVec(offset))
+                : baseCoords.Offset(offset);
+        }
+
         muzzleRotation = baseRotation;
 
         if (component.MuzzleOffset == Vector2.Zero)
@@ -112,7 +121,16 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
             }
         }
 
-        muzzleCoords = muzzleCoords.Offset(muzzleRotation.RotateVec(component.MuzzleOffset));
+        if (hasTurretPose)
+        {
+            var pivotMap = _transform.ToMapCoordinates(muzzleCoords);
+            muzzleCoords = _transform.ToCoordinates(new MapCoordinates(pivotMap.Position + muzzleRotation.RotateVec(component.MuzzleOffset), pivotMap.MapId));
+        }
+        else
+        {
+            muzzleCoords = muzzleCoords.Offset(muzzleRotation.RotateVec(component.MuzzleOffset));
+        }
+
         return true;
     }
 

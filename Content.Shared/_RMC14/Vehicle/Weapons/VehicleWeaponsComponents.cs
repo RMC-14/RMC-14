@@ -159,4 +159,10 @@ public sealed partial class VehicleTurretComponent : Component
 
     [NonSerialized]
     public int LastAppliedDirectionSign = 0;
+
+    [AutoNetworkedField]
+    public Angle LastVehicleRotation;
+
+    [AutoNetworkedField]
+    public bool LastVehicleRotationValid;
 }

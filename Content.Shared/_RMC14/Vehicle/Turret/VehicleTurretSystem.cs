@@ -617,6 +617,8 @@ public sealed class VehicleTurretSystem : EntitySystem
         var baseWorld = _transform.GetWorldRotation(vehicle);
         turret.WorldRotation = Angle.Zero;
         turret.TargetRotation = turret.StabilizedRotation ? baseWorld : Angle.Zero;
+        turret.LastVehicleRotation = baseWorld;
+        turret.LastVehicleRotationValid = true;
         Dirty(turretUid, turret);
     }
 
@@ -631,6 +633,27 @@ public sealed class VehicleTurretSystem : EntitySystem
         ApplyPendingTargetRotation(turretUid, turret, vehicle);
 
         var vehicleRot = _transform.GetWorldRotation(vehicle);
+
+        if (turret.StabilizedRotation && turret.RotationSpeed > 0f)
+        {
+            if (turret.LastVehicleRotationValid)
+            {
+                var rotDelta = Angle.ShortestDistance(turret.LastVehicleRotation, vehicleRot);
+                if (rotDelta.Theta != 0.0)
+                {
+                    turret.WorldRotation = (turret.WorldRotation - rotDelta).Reduced();
+                    Dirty(turretUid, turret);
+                }
+            }
+
+            if (turret.LastVehicleRotation != vehicleRot || !turret.LastVehicleRotationValid)
+            {
+                turret.LastVehicleRotation = vehicleRot;
+                turret.LastVehicleRotationValid = true;
+                Dirty(turretUid, turret);
+            }
+        }
+
         if (turret.TargetRotation == Angle.Zero && turret.WorldRotation != Angle.Zero)
         {
             turret.TargetRotation = turret.StabilizedRotation
@@ -644,7 +667,7 @@ public sealed class VehicleTurretSystem : EntitySystem
             ? (turret.TargetRotation - vehicleRot).Reduced()
             : turret.TargetRotation;
 
-        if (turret.StabilizedRotation || turret.RotationSpeed <= 0f)
+        if (turret.RotationSpeed <= 0f)
         {
             if (turret.WorldRotation != target)
             {
@@ -751,7 +774,7 @@ public sealed class VehicleTurretSystem : EntitySystem
             }
         }
 
-        ApplyShotDirectionConstraint(ent.Comp, targetTurret, vehicle, ref args);
+        ApplyShotDirectionConstraint(ent.Comp, targetUid, targetTurret, vehicle, ref args);
 
         if (args.ToCoordinates is { } finalTarget && TryComp(ent.Owner, out GunComponent? gun))
         {
@@ -780,6 +803,7 @@ public sealed class VehicleTurretSystem : EntitySystem
 
     private void ApplyShotDirectionConstraint(
         VehicleTurretComponent sourceTurret,
+        EntityUid rotationTurretUid,
         VehicleTurretComponent rotationTurret,
         EntityUid vehicle,
         ref AttemptShootEvent args)
@@ -788,16 +812,12 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (!sourceTurret.UseBarrelDirectionForShots && maxCurveDegrees <= 0f)
             return;
 
-        var originMap = _transform.ToMapCoordinates(args.FromCoordinates);
+        var muzzleMap = _transform.ToMapCoordinates(args.FromCoordinates);
         if (args.ToCoordinates is not { } currentTarget)
             return;
 
         var targetMap = _transform.ToMapCoordinates(currentTarget);
-        if (targetMap.MapId != originMap.MapId)
-            return;
-
-        var distance = (targetMap.Position - originMap.Position).Length();
-        if (distance <= 0.0001f)
+        if (targetMap.MapId != muzzleMap.MapId)
             return;
 
         var vehicleRot = _transform.GetWorldRotation(vehicle);
@@ -806,16 +826,31 @@ public sealed class VehicleTurretSystem : EntitySystem
 
         if (!sourceTurret.UseBarrelDirectionForShots && maxCurveDegrees > 0f)
         {
-            var desiredWorldRotation = (targetMap.Position - originMap.Position).ToWorldAngle();
+            var desiredWorldRotation = (targetMap.Position - muzzleMap.Position).ToWorldAngle();
             var maxCurveRadians = MathHelper.DegreesToRadians(maxCurveDegrees);
             var delta = Angle.ShortestDistance(barrelWorldRotation, desiredWorldRotation);
             var clamped = MathHelper.Clamp((float) delta.Theta, -maxCurveRadians, maxCurveRadians);
             shotWorldRotation = (barrelWorldRotation + clamped).Reduced();
         }
 
+        MapCoordinates shotOriginMap;
+        if (sourceTurret.UseBarrelDirectionForShots &&
+            TryGetTurretOrigin(rotationTurretUid, out var turretOriginCoords))
+        {
+            shotOriginMap = _transform.ToMapCoordinates(turretOriginCoords);
+        }
+        else
+        {
+            shotOriginMap = muzzleMap;
+        }
+
+        var distance = (targetMap.Position - shotOriginMap.Position).Length();
+        if (distance <= 0.0001f)
+            return;
+
         var adjustedMap = new MapCoordinates(
-            originMap.Position + shotWorldRotation.ToWorldVec() * distance,
-            originMap.MapId);
+            shotOriginMap.Position + shotWorldRotation.ToWorldVec() * distance,
+            muzzleMap.MapId);
         var adjustedTarget = _transform.ToCoordinates(adjustedMap);
         args = args with { ToCoordinates = adjustedTarget };
     }
