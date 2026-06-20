@@ -538,6 +538,7 @@
   id: RMCJumpsuitPrisonGuard
   name: corrections guard uniform
   description: A UN Fiorina Orbital Prison Guard's uniform, worn by the station's correctional peace officers and correctional deputies. It's made of a slightly sturdier material than standard jumpsuits, allowing for robust protection from shivs and other such bladed objects.
+  suffix: PVE
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/CMB/cmb_prison_guard.rsi

@@ -180,10 +180,9 @@
   suffix: Prop, Off
   components:
   - type: Sprite
-    drawdepth: SmallObjects
-    sprite: _RMC14/Structures/Machines/laptop.rsi
-    state: laptop0
-    layers: [ ]
+    layers:
+    - sprite: _RMC14/Structures/Machines/laptop.rsi
+    - state: "terminal0"
 
 - type: entity
   parent: RMCPropComputerBase
@@ -199,15 +198,15 @@
 - type: entity
   parent: RMCPropLaptopBase
   id: RMCPropLaptopGeneric
-  suffix: Prop, Green
+  suffix: PVE, Prop, Green
   components:
   - type: Sprite
-    state: laptop_generic
+    state: terminal
 
 - type: entity
   parent: RMCPropLaptopBase
   id: RMCPropLaptopGenericB
-  suffix: Prop, Blue
+  suffix: PVE, Prop, Blue
   components:
   - type: Sprite
     state: laptop_genericb
@@ -215,7 +214,7 @@
 - type: entity
   parent: RMCPropLaptopBase
   id: RMCPropLaptopGenericC
-  suffix: Prop, Orange
+  suffix: PVE, Prop, Orange
   components:
   - type: Sprite
     state: laptop_genericc
