@@ -200,24 +200,4 @@
     layers: [ ]
   - type: ApcPowerReceiver
     powerLoad: 0
-    needsPower: false # Intentional
-
-- type: entity
-  parent: RMCCommunicationsConsoleBase
-  id: RMCSynthRepairStation
-  name: Synthetic Repair Station
-  description: A console built to facilitate Average Joes and their operation, allowing for simple allocation of resources.
-  components:
-  - type: Sprite
-    drawdepth: SmallObjects
-    sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
-    state: console
-    layers: [ ]
-  - type: SynthRepairStation
-  - type: RMCPowerReceiver
-    Channel: Equipment
-    ActiveLoad: 20
-    IdleLoad: 1
-  - type: ContainerContainer
-    containers:
-      RepairStation-SynthContainer: !type:ContainerSlot
+    needsPower: false # Intentional`
