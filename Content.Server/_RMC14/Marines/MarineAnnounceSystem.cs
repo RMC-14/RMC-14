@@ -205,16 +205,18 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         string wrappedMessage,
         string author,
         string name,
-        SoundSpecifier? sound,
-        Filter? filter,
-        bool excludeSurvivors)
+        SignedAnnouncementOptions options)
     {
-        var dispatchFilter = filter == null
+        var dispatchFilter = options.Filter == null
             ? Filter.Empty().AddWhereAttachedEntity(e => HasComp<MarineComponent>(e) || HasComp<GhostComponent>(e))
-            : Filter.Empty().AddPlayers(filter.Recipients);
+            : Filter.Empty().AddPlayers(options.Filter.Recipients);
 
-        if (excludeSurvivors)
+        if (options.ExcludeSurvivors)
             dispatchFilter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
+
+        var channels = AnnouncementChannels.Chat | AnnouncementChannels.Sound;
+        if (options.SendOverlay)
+            channels |= AnnouncementChannels.Overlay;
 
         _announcementRouter.Announce(new AnnouncementRequest
         {
@@ -225,7 +227,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 Target = AnnouncementTarget.Marines,
                 Speaker = sender,
                 Source = sender,
-                Channels = AnnouncementChannels.Chat | AnnouncementChannels.Overlay | AnnouncementChannels.Sound,
+                Channels = channels,
             },
             Chat = new AnnouncementChatOptions
             {
@@ -233,7 +235,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 WrappedMessage = wrappedMessage,
                 Channel = ChatChannel.Radio,
             },
-            Sound = CreateSoundOptions(sound),
+            Sound = CreateSoundOptions(options.Sound),
         }, dispatchFilter);
     }
 

@@ -19,6 +19,9 @@ public sealed class AnnouncementControllerSystem : EntitySystem
     private Dictionary<string, AnnouncementDisplayPreference> _overrides = new();
     private AnnouncementLayoutOverride? _globalLayoutOverride;
     private Dictionary<string, AnnouncementLayoutOverride> _layoutOverrides = new();
+    private Dictionary<string, PresetCacheEntry> _presetCache = new();
+
+    private readonly record struct PresetCacheEntry(AnnouncementDisplayPreference? DefaultPreference, string? GroupId);
 
     public override void Initialize()
     {
@@ -29,6 +32,24 @@ public sealed class AnnouncementControllerSystem : EntitySystem
         _cfg.OnValueChanged(RMCCVars.RMCAnnouncementLayout, OnGlobalLayoutChanged, true);
         _cfg.OnValueChanged(RMCCVars.RMCAnnouncementLayoutOverrides, OnLayoutOverridesChanged, true);
         SubscribeNetworkEvent<AnnouncementNetMessage>(OnAnnouncementMessage);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+
+        RebuildPresetCache();
+    }
+
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<AnnouncementPresetPrototype>())
+            RebuildPresetCache();
+    }
+
+    private void RebuildPresetCache()
+    {
+        _presetCache = new Dictionary<string, PresetCacheEntry>();
+        foreach (var preset in _prototypeManager.EnumeratePrototypes<AnnouncementPresetPrototype>())
+        {
+            _presetCache[preset.ID] = new PresetCacheEntry(preset.DefaultPreference, preset.GroupId?.ToString());
+        }
     }
 
     private void OnAnnouncementMessage(AnnouncementNetMessage msg, EntitySessionEventArgs args)
@@ -67,8 +88,20 @@ public sealed class AnnouncementControllerSystem : EntitySystem
 
     public AnnouncementDisplayPreference ResolveDisplayPreference(ProtoId<AnnouncementPresetPrototype> announcementId)
     {
-        if (_overrides.TryGetValue(announcementId.ToString(), out var preference))
+        var id = announcementId.ToString();
+
+        if (_overrides.TryGetValue(id, out var preference))
             return preference;
+
+        if (_presetCache.TryGetValue(id, out var entry))
+        {
+            if (entry.GroupId is { } groupId &&
+                _overrides.TryGetValue(groupId, out var groupPreference))
+                return groupPreference;
+
+            if (entry.DefaultPreference is { } defaultPreference)
+                return defaultPreference;
+        }
 
         return _preference;
     }

@@ -233,6 +233,7 @@
   name: "Marine Overwatch"
   description: "Overwatch squad announcements"
   target: Marines
+  defaultPreference: Disabled
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8
@@ -403,6 +404,7 @@
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
+  groupId: MarineOverwatch
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8
@@ -465,6 +467,7 @@
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
+  groupId: MarineOverwatch
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8
@@ -527,6 +530,7 @@
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
+  groupId: MarineOverwatch
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8
@@ -589,6 +593,7 @@
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
+  groupId: MarineOverwatch
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8
@@ -651,6 +656,7 @@
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
+  groupId: MarineOverwatch
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8
@@ -713,6 +719,7 @@
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
+  groupId: MarineOverwatch
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8
@@ -775,6 +782,7 @@
   description: "Overwatch squad announcements"
   target: Marines
   visibleInSettings: false
+  groupId: MarineOverwatch
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8

@@ -133,7 +133,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         if (text.Length > CharacterLimit)
             text = text[..CharacterLimit].Trim();
 
-        AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName);
+        AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName, options: new SignedAnnouncementOptions { SendOverlay = ent.Comp.SendAnnouncementOverlay });
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);
@@ -261,18 +261,17 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         string message,
         string? author = null,
         string? name = null,
-        SoundSpecifier? sound = null,
-        Filter? filter = null,
-        bool excludeSurvivors = true)
+        SignedAnnouncementOptions? options = null)
     {
         if (_net.IsClient)
             return;
 
+        options ??= new SignedAnnouncementOptions();
         author ??= Loc.GetString("rmc-announcement-author");
         name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
         var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
-        DispatchSignedAnnouncement(sender, message, wrappedMessage, author, name, sound, filter, excludeSurvivors);
+        DispatchSignedAnnouncement(sender, message, wrappedMessage, author, name, options);
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
 
         if (_idCard.TryFindIdCard(sender, out var idCard) &&
@@ -291,9 +290,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         string wrappedMessage,
         string author,
         string name,
-        SoundSpecifier? sound,
-        Filter? filter,
-        bool excludeSurvivors)
+        SignedAnnouncementOptions options)
     {
     }
 

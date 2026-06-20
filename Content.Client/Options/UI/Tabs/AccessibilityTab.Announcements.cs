@@ -136,6 +136,7 @@ public sealed partial class AccessibilityTab
         private readonly HashSet<AnnouncementDisplayPreference> _availablePreferences;
         private readonly Dictionary<AnnouncementDisplayPreference, int> _entryIds = new();
         private readonly int _inheritId;
+        private Dictionary<string, AnnouncementDisplayPreference> _cachedOverrides = new();
 
         private AnnouncementDisplayPreference? SelectedPreference
         {
@@ -201,6 +202,14 @@ public sealed partial class AccessibilityTab
                 _dropDown.Button.SelectId(args.Id);
                 ValueChanged();
             };
+
+            _cachedOverrides = AnnouncementPreferenceOverrides.Parse(_cfg.GetCVar(RMCCVars.RMCAnnouncementStyleOverrides));
+            _cfg.OnValueChanged(RMCCVars.RMCAnnouncementStyleOverrides, OnOverridesChanged);
+        }
+
+        private void OnOverridesChanged(string serialized)
+        {
+            _cachedOverrides = AnnouncementPreferenceOverrides.Parse(serialized);
         }
 
         public override void LoadValue()
@@ -210,7 +219,7 @@ public sealed partial class AccessibilityTab
 
         public override void SaveValue()
         {
-            var overrides = GetStoredOverrides();
+            var overrides = new Dictionary<string, AnnouncementDisplayPreference>(_cachedOverrides);
             if (SelectedPreference is { } preference)
                 overrides[_presetId] = preference;
             else
@@ -234,16 +243,9 @@ public sealed partial class AccessibilityTab
             return SelectedPreference != null;
         }
 
-        private Dictionary<string, AnnouncementDisplayPreference> GetStoredOverrides()
-        {
-            var serialized = _cfg.GetCVar(RMCCVars.RMCAnnouncementStyleOverrides);
-            return AnnouncementPreferenceOverrides.Parse(serialized);
-        }
-
         private AnnouncementDisplayPreference? GetStoredPreference()
         {
-            var overrides = GetStoredOverrides();
-            if (!overrides.TryGetValue(_presetId, out var preference))
+            if (!_cachedOverrides.TryGetValue(_presetId, out var preference))
                 return null;
 
             return _availablePreferences.Contains(preference) ? preference : null;

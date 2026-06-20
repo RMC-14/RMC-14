@@ -1,0 +1,49 @@
+using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared._RMC14.Announce;
+
+[Prototype]
+[DataDefinition, NetSerializable, Serializable]
+public sealed partial class AnnouncementPresetPrototype : IPrototype
+{
+    [IdDataField]
+    public string ID { get; private set; } = default!;
+
+    [DataField]
+    public string Name { get; private set; } = string.Empty;
+
+    [DataField]
+    public string Description { get; private set; } = string.Empty;
+
+    [DataField]
+    public AnnouncementTarget Target { get; private set; } = AnnouncementTarget.All;
+
+    [DataField]
+    public SoundSpecifier? Sound { get; private set; }
+
+    [DataField]
+    public AnnouncementPresentationSet Presentations { get; private set; } = new();
+
+    [DataField]
+    public float Priority { get; private set; } = 5.0f;
+
+    [DataField]
+    public bool CanInterrupt { get; private set; } = false;
+
+    [DataField]
+    public bool CanBeInterrupted { get; private set; } = true;
+
+    [DataField]
+    public List<string> Aliases { get; private set; } = new();
+
+    [DataField]
+    public bool VisibleInSettings { get; private set; } = true;
+
+    [DataField]
+    public AnnouncementDisplayPreference? DefaultPreference { get; private set; }
+
+    [DataField]
+    public ProtoId<AnnouncementPresetPrototype>? GroupId { get; private set; }
+}
