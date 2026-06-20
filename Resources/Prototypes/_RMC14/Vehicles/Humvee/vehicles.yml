@@ -172,7 +172,7 @@
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
       state: humvee
 
 - type: entity
@@ -382,9 +382,4 @@
     - offset: 1,-0.1
       radius: 0.5
       interiorCoords: 3.56, -0.42
-  - type: MarineMapTracked
-  - type: TacticalMapTracked
-  - type: TacticalMapIcon
-    icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: arc
+
