@@ -117,17 +117,10 @@
     - range: 32
       falloff: 9999
       ignoreModifiers: true
-  - type: ProjectileGrenade
-    evenSpread: true
-    minVelocity: 0.4
-    maxVelocity: 1.8
-    fillPrototype: RMCShrapnelJagged
-    rebounds: true
-    capacity: 10
-    spreadAngle: 28
   - type: RMCAreaDamage
-    damageArea: 2.5
-    falloffDistance: 1.5
+    damageArea: 2
+    falloffDistance: 0.67
+    xenoDamageMultiplier: 2
   - type: CMArmorPiercing
     amount: 30
   - type: IgnorePredictionHide
