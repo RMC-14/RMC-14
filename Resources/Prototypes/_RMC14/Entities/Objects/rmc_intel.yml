@@ -445,7 +445,6 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: nuke
-  - type: VehicleSupplyTech
 - type: Tag
   id: RMCIntelItem
 

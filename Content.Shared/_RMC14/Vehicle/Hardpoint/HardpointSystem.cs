@@ -30,6 +30,7 @@ using Robust.Shared.Utility;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Prototypes;
 using Content.Shared.FixedPoint;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Marines.Skills;
@@ -81,6 +82,7 @@ public sealed partial class HardpointSystem : EntitySystem
         SubscribeLocalEvent<HardpointSlotsComponent, EntRemovedFromContainerMessage>(OnRemoved);
         SubscribeLocalEvent<HardpointSlotsComponent, VehicleCanRunEvent>(OnVehicleCanRun);
         SubscribeLocalEvent<HardpointSlotsComponent, DamageModifyEvent>(OnVehicleDamageModify);
+        SubscribeLocalEvent<HardpointSlotsComponent, ExplosionReceivedEvent>(OnVehicleExplosionReceived);
         SubscribeLocalEvent<HardpointIntegrityComponent, ComponentInit>(OnHardpointIntegrityInit);
         SubscribeLocalEvent<HardpointIntegrityComponent, InteractUsingEvent>(
             OnHardpointRepair,
@@ -600,6 +602,42 @@ public sealed partial class HardpointSystem : EntitySystem
         }
 
         args.Damage = ScaleDamage(args.Damage, hullFraction);
+    }
+
+    private void OnVehicleExplosionReceived(Entity<HardpointSlotsComponent> ent, ref ExplosionReceivedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var totalDamage = args.Damage.GetTotal().Float();
+        if (totalDamage <= 0f)
+            return;
+
+        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
+            return;
+
+        _topLevelHardpoints.Clear();
+        CollectTopLevelHardpoints(ent.Owner, ent.Comp, itemSlots, _topLevelHardpoints);
+
+        var anyTopLevelIntact = false;
+        _visitedHardpoints.Clear();
+        foreach (var (item, integrity) in _topLevelHardpoints)
+        {
+            if (integrity.Integrity > 0f)
+                anyTopLevelIntact = true;
+
+            ApplyDamageToHardpointTree(ent.Owner, item, integrity, args.Damage, _visitedHardpoints);
+        }
+
+        var hullFraction = anyTopLevelIntact ? ent.Comp.FrameDamageFractionWhileIntact : 1f;
+        if (TryComp(ent.Owner, out HardpointIntegrityComponent? frameIntegrity))
+        {
+            var frameDamage = ScaleDamage(args.Damage, hullFraction);
+            var frameAmount = GetVehicleFrameDamageAmount(ent.Owner, frameDamage);
+
+            if (frameAmount > 0f)
+                DamageHardpoint(ent.Owner, ent.Owner, frameAmount, frameIntegrity);
+        }
     }
 
     private float GetVehicleIncomingDamageMultiplier(EntityUid? origin, EntityUid? tool)
