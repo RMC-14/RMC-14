@@ -251,7 +251,7 @@
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
-    bulletType: VehicleAmmoBoxGrenadeLauncher
+    bulletType: VehicleAmmoBoxSmokeLauncher
 
 - type: entity
   parent: VehicleHumveeHardpointBase

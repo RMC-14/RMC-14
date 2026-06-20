@@ -19,6 +19,7 @@ public sealed class HardpointSlotSystem : EntitySystem
     [Dependency] private readonly HardpointSystem _hardpoints = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
@@ -31,6 +32,10 @@ public sealed class HardpointSlotSystem : EntitySystem
         SubscribeLocalEvent<HardpointSlotsComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointInsertDoAfterEvent>(OnInsertDoAfter);
         SubscribeLocalEvent<HardpointSlotsComponent, InteractUsingEvent>(OnSlotsInteractUsing, before: new[] { typeof(ItemSlotsSystem) });
+        SubscribeLocalEvent<HardpointSlotsComponent, InteractHandEvent>(OnSlotsInteractHand);
+        SubscribeLocalEvent<HardpointSlotsComponent, ActivateInWorldEvent>(
+            OnSlotsActivateInWorld,
+            before: new[] { typeof(VehicleSystem) });
         SubscribeLocalEvent<HardpointSlotsComponent, BoundUIOpenedEvent>(OnHardpointUiOpened);
         SubscribeLocalEvent<HardpointSlotsComponent, BoundUIClosedEvent>(OnHardpointUiClosed);
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointRemoveMessage>(OnHardpointRemoveMessage);
@@ -104,6 +109,9 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (!_powerLoader.TryGetInteractionUser(args.User, out var actor))
+            return;
+
         if (TryStartHardpointInsert(ent, args.User, args.Used))
         {
             args.Handled = true;
@@ -113,15 +121,54 @@ public sealed class HardpointSlotSystem : EntitySystem
         if (HasComp<HardpointItemComponent>(args.Used) &&
             HasComp<VehicleTurretAttachmentComponent>(args.Used))
         {
-            _popup.PopupClient(Loc.GetString("rmc-vehicle-turret-no-base"), ent.Owner, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-vehicle-turret-no-base"), ent.Owner, actor);
             args.Handled = true;
             return;
         }
 
-        if (!_tool.HasQuality(args.Used, ent.Comp.RemoveToolQuality))
+        if (!_powerLoader.TryGetActivePowerLoader(args.User, out _) &&
+            !_tool.HasQuality(args.Used, ent.Comp.RemoveToolQuality))
+        {
+            return;
+        }
+
+        if (_ui.TryOpenUi(ent.Owner, HardpointUiKey.Key, actor))
+        {
+            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp);
+            args.Handled = true;
+        }
+    }
+
+    private void OnSlotsInteractHand(Entity<HardpointSlotsComponent> ent, ref InteractHandEvent args)
+    {
+        if (args.Handled)
             return;
 
-        if (_ui.TryOpenUi(ent.Owner, HardpointUiKey.Key, args.User))
+        if (!_powerLoader.TryGetInteractionUser(args.User, out var actor) ||
+            !_powerLoader.TryGetActivePowerLoader(args.User, out _))
+        {
+            return;
+        }
+
+        if (_ui.TryOpenUi(ent.Owner, HardpointUiKey.Key, actor))
+        {
+            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp);
+            args.Handled = true;
+        }
+    }
+
+    private void OnSlotsActivateInWorld(Entity<HardpointSlotsComponent> ent, ref ActivateInWorldEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!_powerLoader.TryGetInteractionUser(args.User, out var actor) ||
+            !_powerLoader.TryGetActivePowerLoader(args.User, out _))
+        {
+            return;
+        }
+
+        if (_ui.TryOpenUi(ent.Owner, HardpointUiKey.Key, actor))
         {
             _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp);
             args.Handled = true;
@@ -309,6 +356,14 @@ public sealed class HardpointSlotSystem : EntitySystem
             return;
         }
 
+        var needsPowerLoader = finalLocation.Slot.Item is { } slotItem && HasComp<PowerLoaderGrabbableComponent>(slotItem);
+
+        if (needsPowerLoader && !_powerLoader.CanPickupWithActiveHand(args.User))
+        {
+            SetErrorAndRefresh("Free your power loader's active arm before removing that hardpoint.");
+            return;
+        }
+
         var key = (finalLocation.Owner, finalLocation.Definition.Id);
         _completingRemovals.Add(key);
         var ejected = _itemSlots.TryEject(finalLocation.Owner, finalLocation.Slot, null, out var ejectedItem, true);
@@ -320,7 +375,21 @@ public sealed class HardpointSlotSystem : EntitySystem
             return;
         }
 
-        _hands.PickupOrDrop(args.User, ejectedItem.Value, dropNear: true);
+        if (needsPowerLoader)
+        {
+            if (!_powerLoader.TryPickupWithActiveHand(args.User, ejectedItem.Value))
+            {
+                finalLocation.State.CompletingInserts.Add(finalLocation.Definition.Id);
+                _itemSlots.TryInsert(finalLocation.Owner, finalLocation.Slot, ejectedItem.Value, null);
+                finalLocation.State.CompletingInserts.Remove(finalLocation.Definition.Id);
+                SetErrorAndRefresh("Couldn't move the hardpoint into the power loader. Free the active arm and try again.");
+                return;
+            }
+        }
+        else
+        {
+            _hands.PickupOrDrop(args.User, ejectedItem.Value, dropNear: true);
+        }
 
         SetErrorAndRefresh(null);
         _hardpoints.RefreshCanRun(ent.Owner);
@@ -399,35 +468,78 @@ public sealed class HardpointSlotSystem : EntitySystem
             return;
         }
 
-        if (!_hardpoints.TryGetPryingTool(user, location.Slots.RemoveToolQuality, out var tool))
-        {
-            const string error = "You need a prying tool to remove this hardpoint.";
-            _popup.PopupEntity(error, user, user);
-            SetError(error);
-            RefreshUi();
-            return;
-        }
-
-        if (!location.State.PendingRemovals.Add(location.Definition.Id))
-        {
-            SetError("That hardpoint is already being removed.");
-            RefreshUi();
-            return;
-        }
-
         var delay = location.Definition.RemoveDelay > 0f ? location.Definition.RemoveDelay : location.Definition.InsertDelay;
         var slotPath = location.Path.ToCompositeId();
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, new HardpointRemoveDoAfterEvent(slotPath), uiOwnerUid.Value, uiOwnerUid.Value, tool)
+        DoAfterArgs doAfter;
+
+        if (HasComp<PowerLoaderGrabbableComponent>(installed))
         {
-            BreakOnMove = true,
-            BreakOnDamage = true,
-            BreakOnHandChange = true,
-            BreakOnDropItem = true,
-            BreakOnWeightlessMove = true,
-            NeedHand = true,
-            RequireCanInteract = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
-        };
+            if (!_powerLoader.TryGetActivePowerLoader(user, out _))
+            {
+                const string error = "You need to be operating a power loader to remove this hardpoint.";
+                _popup.PopupEntity(error, user, user);
+                SetError(error);
+                RefreshUi();
+                return;
+            }
+
+            if (!_powerLoader.CanPickupWithActiveHand(user))
+            {
+                const string error = "Free your power loader's active arm before removing that hardpoint.";
+                _popup.PopupEntity(error, user, user);
+                SetError(error);
+                RefreshUi();
+                return;
+            }
+
+            if (!location.State.PendingRemovals.Add(location.Definition.Id))
+            {
+                SetError("That hardpoint is already being removed.");
+                RefreshUi();
+                return;
+            }
+
+            doAfter = new DoAfterArgs(EntityManager, user, delay, new HardpointRemoveDoAfterEvent(slotPath), uiOwnerUid.Value, uiOwnerUid.Value)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                BreakOnHandChange = true,
+                BreakOnWeightlessMove = true,
+                NeedHand = true,
+                RequireCanInteract = true,
+                DuplicateCondition = DuplicateConditions.SameEvent,
+            };
+        }
+        else
+        {
+            if (!_hardpoints.TryGetPryingTool(user, location.Slots.RemoveToolQuality, out var tool))
+            {
+                const string error = "You need a prying tool to remove this hardpoint.";
+                _popup.PopupEntity(error, user, user);
+                SetError(error);
+                RefreshUi();
+                return;
+            }
+
+            if (!location.State.PendingRemovals.Add(location.Definition.Id))
+            {
+                SetError("That hardpoint is already being removed.");
+                RefreshUi();
+                return;
+            }
+
+            doAfter = new DoAfterArgs(EntityManager, user, delay, new HardpointRemoveDoAfterEvent(slotPath), uiOwnerUid.Value, uiOwnerUid.Value, tool)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                BreakOnHandChange = true,
+                BreakOnDropItem = true,
+                BreakOnWeightlessMove = true,
+                NeedHand = true,
+                RequireCanInteract = true,
+                DuplicateCondition = DuplicateConditions.SameEvent,
+            };
+        }
 
         if (!_doAfter.TryStartDoAfter(doAfter))
         {

@@ -110,9 +110,6 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             return false;
         }
 
-        if (!CanOpenUi(ent.Owner, user))
-            return false;
-
         TrySetActiveAmmoBoxFromHeld(ent, user);
 
         _ui.OpenUi(ent.Owner, VehicleAmmoLoaderUiKey.Key, user);
@@ -388,20 +385,6 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         }
 
         _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-hold-ammo"), ent, args.Actor);
-    }
-
-    private bool CanOpenUi(EntityUid loader, EntityUid user)
-    {
-        foreach (var actor in _ui.GetActors(loader, VehicleAmmoLoaderUiKey.Key))
-        {
-            if (actor == user)
-                return true;
-
-            _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-in-use"), loader, user);
-            return false;
-        }
-
-        return true;
     }
 
     private void TrySetActiveAmmoBox(EntityUid loader, EntityUid user, EntityUid boxUid)
@@ -942,7 +925,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             return;
 
         if (box.Comp.Amount <= 0)
-            Del(box.Owner);
+            _hands.TryDrop(user, box.Owner, Transform(loader.Owner).Coordinates, checkActionBlocker: false, doDropInteraction: false);
 
         _hardpointAmmo.TryLoadIntoSlot((ammoUid, hardpointAmmo), ammo, ammoSlot, transferAmount);
 

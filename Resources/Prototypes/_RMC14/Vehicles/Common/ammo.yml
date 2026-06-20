@@ -113,7 +113,7 @@
   components:
   - type: Sprite
     layers:
-    - state: slauncher_0
+    - state: slauncher_1
       map: [ "enum.BulletBoxLayers.Fill" ]
   - type: GenericVisualizer
     visuals:
@@ -121,14 +121,15 @@
         enum.BulletBoxLayers.Fill:
           Empty: { state: slauncher_0, visible: true }
           Low: { state: slauncher_0, visible: true }
-          Medium: { state: slauncher_0, visible: true }
-          High: { state: slauncher_0, visible: true }
-          Full: { state: slauncher_0, visible: true }
+          Medium: { state: slauncher_1, visible: true }
+          High: { state: slauncher_1, visible: true }
+          Full: { state: slauncher_1, visible: true }
   - type: BulletBox
     amount: 6
     max: 6
     bulletType: VehicleAmmoBoxSmokeLauncher
-    usedIn: Tank smoke launcher
+    cartridgeType: RMC40MMGrenadeM74AGMS
+    usedIn: Tank smoke launcher, Humvee smoke launcher
 
 - type: entity
   parent: VehicleAmmoBoxBase
