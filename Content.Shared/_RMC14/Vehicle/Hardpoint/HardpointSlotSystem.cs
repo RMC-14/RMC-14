@@ -141,38 +141,29 @@ public sealed class HardpointSlotSystem : EntitySystem
 
     private void OnSlotsInteractHand(Entity<HardpointSlotsComponent> ent, ref InteractHandEvent args)
     {
-        if (args.Handled)
-            return;
-
-        if (!_powerLoader.TryGetInteractionUser(args.User, out var actor) ||
-            !_powerLoader.TryGetActivePowerLoader(args.User, out _))
-        {
-            return;
-        }
-
-        if (_ui.TryOpenUi(ent.Owner, HardpointUiKey.Key, actor))
-        {
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp);
-            args.Handled = true;
-        }
+        if (!args.Handled)
+            args.Handled = TryOpenHardpointUiForPowerLoader(ent, args.User);
     }
 
     private void OnSlotsActivateInWorld(Entity<HardpointSlotsComponent> ent, ref ActivateInWorldEvent args)
     {
-        if (args.Handled)
-            return;
+        if (!args.Handled)
+            args.Handled = TryOpenHardpointUiForPowerLoader(ent, args.User);
+    }
 
-        if (!_powerLoader.TryGetInteractionUser(args.User, out var actor) ||
-            !_powerLoader.TryGetActivePowerLoader(args.User, out _))
+    private bool TryOpenHardpointUiForPowerLoader(Entity<HardpointSlotsComponent> ent, EntityUid user)
+    {
+        if (!_powerLoader.TryGetInteractionUser(user, out var actor) ||
+            !_powerLoader.TryGetActivePowerLoader(user, out _))
         {
-            return;
+            return false;
         }
 
-        if (_ui.TryOpenUi(ent.Owner, HardpointUiKey.Key, actor))
-        {
-            _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp);
-            args.Handled = true;
-        }
+        if (!_ui.TryOpenUi(ent.Owner, HardpointUiKey.Key, actor))
+            return false;
+
+        _hardpoints.UpdateHardpointUi(ent.Owner, ent.Comp);
+        return true;
     }
 
     private bool TryStartHardpointInsert(Entity<HardpointSlotsComponent> ent, EntityUid user, EntityUid used)

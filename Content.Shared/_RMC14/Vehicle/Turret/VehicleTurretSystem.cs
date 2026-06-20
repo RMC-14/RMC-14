@@ -624,25 +624,19 @@ public sealed class VehicleTurretSystem : EntitySystem
 
     private void UpdateTurretRotation(EntityUid turretUid, VehicleTurretComponent turret, EntityUid vehicle, float frameTime)
     {
-        if (!turret.RotateToCursor)
-            return;
-
-        if (_net.IsClient && !IsLocallyOperatedTurret(turretUid))
-            return;
-
-        ApplyPendingTargetRotation(turretUid, turret, vehicle);
-
         var vehicleRot = _transform.GetWorldRotation(vehicle);
 
-        if (turret.StabilizedRotation && turret.RotationSpeed > 0f)
+        if (turret.StabilizedRotation && turret.RotationSpeed > 0f && (!_net.IsClient || IsLocallyOperatedTurret(turretUid)))
         {
+            var dirty = false;
+
             if (turret.LastVehicleRotationValid)
             {
                 var rotDelta = Angle.ShortestDistance(turret.LastVehicleRotation, vehicleRot);
                 if (rotDelta.Theta != 0.0)
                 {
                     turret.WorldRotation = (turret.WorldRotation - rotDelta).Reduced();
-                    Dirty(turretUid, turret);
+                    dirty = true;
                 }
             }
 
@@ -650,9 +644,20 @@ public sealed class VehicleTurretSystem : EntitySystem
             {
                 turret.LastVehicleRotation = vehicleRot;
                 turret.LastVehicleRotationValid = true;
-                Dirty(turretUid, turret);
+                dirty = true;
             }
+
+            if (dirty)
+                Dirty(turretUid, turret);
         }
+
+        if (!turret.RotateToCursor)
+            return;
+
+        if (_net.IsClient && !IsLocallyOperatedTurret(turretUid))
+            return;
+
+        ApplyPendingTargetRotation(turretUid, turret, vehicle);
 
         if (turret.TargetRotation == Angle.Zero && turret.WorldRotation != Angle.Zero)
         {

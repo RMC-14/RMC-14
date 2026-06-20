@@ -61,9 +61,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             return;
 
         var isBox = TryComp(args.Used, out BulletBoxComponent? _);
-        var isFlamerTank = !isBox &&
-                           TryComp(args.Used, out RMCFlamerTankComponent? _) &&
-                           !HasComp<RMCFlamerAmmoProviderComponent>(args.Used);
+        var isFlamerTank = !isBox && IsHandheldFlamerTank(args.Used);
         if (!isBox && !isFlamerTank)
             return;
 
@@ -179,7 +177,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             return;
         }
 
-        if (TryComp(used, out RMCFlamerTankComponent? _) && !HasComp<RMCFlamerAmmoProviderComponent>(used))
+        if (IsHandheldFlamerTank(used))
         {
             if (!TryGetLoadableFlamerProvider(ent, args.User, args.SlotPath, out var flamerProvider))
                 return;
@@ -353,7 +351,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
             return;
         }
 
-        if (TryComp(activeBox, out RMCFlamerTankComponent? _) && !HasComp<RMCFlamerAmmoProviderComponent>(activeBox))
+        if (IsHandheldFlamerTank(activeBox))
         {
             if (!TryGetLoadableFlamerProvider(ent, args.Actor, args.SlotPath, out var flamerProvider))
                 return;
@@ -403,10 +401,7 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         if (_hands.TryGetActiveItem(user, out var activeItem) && activeItem is { } active)
         {
             var isBox = TryComp(active, out BulletBoxComponent? _);
-            var isFlamerTank = !isBox &&
-                               TryComp(active, out RMCFlamerTankComponent? _) &&
-                               !HasComp<RMCFlamerAmmoProviderComponent>(active);
-            if (isBox || isFlamerTank)
+            if (isBox || IsHandheldFlamerTank(active))
             {
                 TrySetActiveAmmoBox(loader.Owner, user, active);
                 return;
@@ -952,6 +947,11 @@ public sealed class VehicleAmmoLoaderSystem : EntitySystem
         _hardpointAmmo.TryUnloadFromSlot((ammoUid, hardpointAmmo), ammo, ammoSlot, unloadedAmount);
 
         _popup.PopupClient(Loc.GetString("rmc-vehicle-ammo-loader-unloaded", ("amount", unloadedAmount), ("target", ammoUid)), loader, user);
+    }
+
+    private bool IsHandheldFlamerTank(EntityUid uid)
+    {
+        return TryComp(uid, out RMCFlamerTankComponent? _) && !HasComp<RMCFlamerAmmoProviderComponent>(uid);
     }
 
     private static string GetFlamerSlotId(VehicleMountedFlamerProvider provider, int ammoSlot)

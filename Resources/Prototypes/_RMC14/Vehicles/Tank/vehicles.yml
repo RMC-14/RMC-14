@@ -10,6 +10,7 @@
   - type: Clickable
   - type: WarpPoint
     follow: true
+    location: Tank
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
