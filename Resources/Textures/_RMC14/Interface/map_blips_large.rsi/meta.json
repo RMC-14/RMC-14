@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "vehicle tacmap icons taken from https://github.com/cmss13-devs/cmss13/blob/01c8e07e75f33b7553dd7605fc5bc64869ed11db/icons/ui_icons/map_blips_large.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/01c8e07e75f33b7553dd7605fc5bc64869ed11db/icons/ui_icons/map_blips_large.dmi",
   "size": {
     "x": 11,
     "y": 11
