@@ -233,10 +233,6 @@
       "directions": 4
     },
     {
-      "name": "loaded_mg",
-      "directions": 4
-    },
-    {
       "name": "warray",
       "directions": 4
     }
