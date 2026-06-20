@@ -98,6 +98,8 @@
     overlayDamagedState: ltaaap_minigun_1
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
+  - type: GunIFF
+    enabled: true
   - type: Gun
     fireRate: 1.5
     selectedMode: FullAuto
@@ -106,9 +108,9 @@
     cameraRecoilScalar: 0
   - type: GunSpinup
     baseShotDelay: 0.7
-    baseScatter: 10
-    initialWindupDelay: 0.7
-    spinUpTime: 6
+    baseScatter: 18
+    initialWindupDelay: 0
+    spinUpTime: 10
     graceAfterStop: 2
     spinDownTime: 3
     minSpinLevel: 1
@@ -250,6 +252,8 @@
     pixelOffsetWest: "-30,0"
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
+  - type: GunIFF
+    enabled: true
   - type: Gun
     fireRate: 0.5
     projectileSpeed: 20
