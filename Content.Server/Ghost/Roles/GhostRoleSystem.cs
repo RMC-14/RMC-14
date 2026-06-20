@@ -251,9 +251,9 @@ public sealed class GhostRoleSystem : EntitySystem
                 raffle.CurrentMembers.AsEnumerable(),
                 session =>
                 {
-                    var success = TryTakeover(session, raffle.Identifier, out var moreAvailable);
+                    var success = TryTakeover(session, raffle.Identifier, out var moreAvailable); // RMC14
                     foundWinner |= success;
-                    return success && !moreAvailable;
+                    return success && !moreAvailable; // RMC14
                 }
             );
 
@@ -268,7 +268,7 @@ public sealed class GhostRoleSystem : EntitySystem
         }
     }
 
-    private bool TryTakeover(ICommonSession player, uint identifier, out bool moreAvailable)
+    private bool TryTakeover(ICommonSession player, uint identifier, out bool moreAvailable) // RMC14
     {
         // <RMC14>
         moreAvailable = false;
@@ -478,7 +478,7 @@ public sealed class GhostRoleSystem : EntitySystem
         }
         else
         {
-            Takeover(player, identifier, out _);
+            Takeover(player, identifier, out _); // RMC14
         }
     }
 
@@ -486,7 +486,7 @@ public sealed class GhostRoleSystem : EntitySystem
     /// Attempts having the player take over the ghost role with the corresponding ID. Does not start a raffle.
     /// </summary>
     /// <returns>True if takeover was successful, otherwise false.</returns>
-    public bool Takeover(ICommonSession player, uint identifier, out bool moreAvailable)
+    public bool Takeover(ICommonSession player, uint identifier, out bool moreAvailable) // RMC14
     {
         // <RMC14>
         moreAvailable = false;
