@@ -100,6 +100,10 @@
   - type: GunIgnoreContainerOwnerCollision
   - type: GunIFF
     enabled: true
+    intrinsic: true
+  - type: UserIFF
+    factions:
+    - FactionMarine
   - type: Gun
     fireRate: 1.5
     selectedMode: FullAuto
@@ -254,6 +258,10 @@
   - type: GunIgnoreContainerOwnerCollision
   - type: GunIFF
     enabled: true
+    intrinsic: true
+  - type: UserIFF
+    factions:
+    - FactionMarine
   - type: Gun
     fireRate: 0.5
     projectileSpeed: 20
