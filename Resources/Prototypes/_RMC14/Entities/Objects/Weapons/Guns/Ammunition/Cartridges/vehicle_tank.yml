@@ -108,10 +108,10 @@
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: RMCProjectileAccuracy
-    accuracy: 130
+    accuracy: 125
     thresholds:
     - range: 32
-      falloff: 5
+      falloff: 10
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 32
@@ -187,6 +187,11 @@
         Piercing: 40
   - type: CMArmorPiercing
     amount: 30
+  - type: RMCProjectileAccuracy
+    accuracy: 80
+    thresholds:
+    - range: 12
+      falloff: 10
 
 - type: entity
   id: VehicleDragonFlameImpact
