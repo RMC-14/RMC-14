@@ -41,6 +41,7 @@
           CMMilitaryPolice: [ -1, -1 ]
           CMMilitaryWarden: [ -1, -1 ]
           CMCorrespondent: [ -1, -1 ]
+          CMCombatCorrespondent: [ -1, -1 ]
           CMLiaison: [ -1, -1 ]
           RMCWeYaExecutiveBodyguard: [ -1, -1 ]
           CMMessTech: [ -1, -1 ]

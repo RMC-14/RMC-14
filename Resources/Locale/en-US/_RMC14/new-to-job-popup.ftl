@@ -121,6 +121,7 @@ rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of t
 
                                              If you have any other questions, consult the guidebook's Corporate Liaison page.
 rmc-new-to-job-cc = As a Correspondent, your job is to keep the masses informed on the efforts of the United Nations Marine Corps! Be that through film and broadcast, pen and paper journalism, or any other means.
+rmc-new-to-job-combat-correspondent = As a Combat Correspondent, you are embedded with the United Nations Marine Corps. Report from the field, follow the operation, and bring the story home.
 
                                              Head on over to the Correspondents' room, from there, you can get your Correspondent essentials and your TV camera to film the action. This camera broadcasts a live view to any televisions on the ship (audio not included), so make sure to get good shots for the folks back home! The fax machine in the room is also your tool for sending articles around the ship or contacting The Free Press.
 
@@ -136,4 +137,4 @@ rmc-new-to-job-executive-bodyguard = Your job as an Executive Bodyguard is to en
 
                                              Whenever possible, attempt to verbally discourage the Liaison from taking antagonistic action against the ship, causing trouble for other players, or being excessively rude without IC reason. You are also encouraged to report any illegal action the CL commits to the MPs, and detain them and transfer them to the MPs if they are an active threat to other players.
 
-                                             Do not deploy to fight the Xenonids, and remember that your greatest strength is in the roleplay you can provide the CL and the ship. You are permitted to carry a sidearm on Code Green and a longarm on Code Blue, although this right can be revoked by the Commanding Officer or CMP. Remember to strictly adhere to both escalation rules and MLaw.
+                                             Do not deploy to fight the Xenonids, and remember that your greatest strength is in the roleplay you can provide the CL and the ship. You are permitted to carry a sidearm on Code Green and a longarm on Code Blue, although this right can be revoked by the Commander or CMP. Remember to strictly adhere to both escalation rules and MLaw.

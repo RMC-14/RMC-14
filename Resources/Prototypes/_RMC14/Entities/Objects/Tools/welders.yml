@@ -245,28 +245,3 @@
         - ReagentId: WeldingFuel
           Quantity: 100
         maxVol: 100 # TODO RMC14 40 when welders are fixed
-
-- type: entity
-  parent: RMCWelderIndustrial
-  id: RMCWelderExperimental
-  name: experimental welder
-  description: A synthetic-grade experimental blowtorch with a compact fuel recycler.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tools/welder_industrial.rsi
-  - type: Item
-    sprite: _RMC14/Objects/Tools/welder_industrial.rsi
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 200
-        maxVol: 200
-  - type: RMCSelfRechargingSolution
-    solutionId: Welder
-    reagent: WeldingFuel
-    rechargeAmount: 1
-    rechargeEvery: 1
-  - type: RMCSynthItemRestriction
-    checkPickup: false

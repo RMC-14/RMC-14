@@ -32,6 +32,7 @@
       - RMCCrateFoodMRE
       - RMCCrateFlashlights
       - RMCCrateHighCapacityPowerCell
+      - RMCCrateFoodIngredients
 
 - type: entity
   parent: [ CMBaseStructureCorrodible, CMCargoCatalog ]
@@ -100,7 +101,7 @@
     - OrderSender
   - type: GuideHelp
     guides:
-    - Cargo
+    - RMCRequisitions
   - type: CargoSellBlacklist
   - type: LitOnPowered
   - type: EmitSoundOnUIOpen

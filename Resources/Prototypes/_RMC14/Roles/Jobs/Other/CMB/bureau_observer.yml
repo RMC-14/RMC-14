@@ -18,6 +18,17 @@
     - type: NpcFactionMember
       factions:
       - Bureau
+    - type: Language
+      spokenLanguages:
+      - English
+      - Spanish
+      - Russian
+      understoodLanguages:
+      - English
+      - Spanish
+      - Russian
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillEndurance: 2

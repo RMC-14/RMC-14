@@ -179,6 +179,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCPickUpDroppedItems);
             AddButton(CMKeyFunctions.RMCInteractWithOtherHand);
             AddButton(CMKeyFunctions.RMCRest);
+            AddButton(CMKeyFunctions.RMCResist);
 
             AddHeader("ui-options-header-rmc-xeno");
             AddButton(CMKeyFunctions.CMXenoWideSwing);

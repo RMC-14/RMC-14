@@ -13,6 +13,24 @@ rmc-xeno-internal-health-increase-user = We feel our internal health reserves in
 rmc-xeno-not-enough-fury = We're not angry enough for this!
 rmc-xeno-fury-increase-user = We are overcome with rage!
 
+# Queen psychic communication
+rmc-xeno-psychic-whisper-message = Whisper to {$target}.
+rmc-xeno-psychic-whisper-sent = We whisper to {$target}.
+rmc-xeno-psychic-target-unknown = that mind
+rmc-xeno-psychic-radiance-message = Radiate a psychic message.
+rmc-xeno-psychic-radiance-no-targets = There are no nearby minds to radiate to.
+rmc-xeno-psychic-radiance-sent = We radiate our thoughts to {$count} nearby minds.
+rmc-xeno-psychic-give-order-message = Give an order to {$target}.
+rmc-xeno-psychic-give-order-must-watch = We must be watching a sister to give an order.
+rmc-xeno-psychic-give-order-sent = We give an order to {$target}.
+rmc-xeno-psychic-target-invalid = That mind is no longer within our reach.
+rmc-xeno-psychic-message-xeno = [color=#921992][font size=14][bold]The voice of {$queen} resonates in your head:[/bold] "{$message}"[/font][/color]
+rmc-xeno-psychic-message-alien = [color=#921992][font size=14][bold]You hear a strange, alien voice in your head:[/bold] "{$message}"[/font][/color]
+rmc-xeno-psychic-message-order = [color=#921992][font size=14][bold]{$queen} commands you:[/bold] "{$message}"[/font][/color]
+rmc-xeno-psychic-ghost-whisper = [color=#921992][font size=14][bold]Psychic Whisper ({$queen} -> {$target}):[/bold] "{$message}"[/font][/color]
+rmc-xeno-psychic-ghost-radiance = [color=#921992][font size=14][bold]Psychic Radiance ({$queen}, {$count} recipients):[/bold] "{$message}"[/font][/color]
+rmc-xeno-psychic-ghost-order = [color=#921992][font size=14][bold]Psychic Order ({$queen} -> {$target}):[/bold] "{$message}"[/font][/color]
+
 # Acid reserves
 rmc-xeno-not-enough-acid = We don't have enough acid built up!
 rmc-xeno-acid-increase-user = We feel your acid reserves increase!
@@ -186,6 +204,7 @@ rmc-xeno-invisibility-expire-bump = We bumped into someone and lost our invisibi
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
+cm-xeno-ovipositor-vehicle = We cannot enter the ovipositor inside a vehicle!
 
 # Retrieve Egg
 cm-xeno-retrieve-egg-no-eggs = We don't have any eggs stored!
@@ -318,8 +337,9 @@ rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge 
 rmc-xeno-sacrifice-heal-announce = ;OUR SISTER WILL NOT DIE!!!
 
 # Dodge
-rmc-xeno-dodge-self = We can now weave through our enemies!
-rmc-xeno-dodge-end = We can no longer weave through our enemies!
+rmc-xeno-dodge-self = We can now weave through our enemies and allies!
+rmc-xeno-dodge-end = We can no longer weave through our enemies and allies!
+rmc-xeno-dodge-end-manual = We end our dance early!
 
 # Vanguard Shield
 rmc-xeno-shield-vanguard-hit = Our shield took the hit!
@@ -440,7 +460,17 @@ rmc-doomed-fail = It's not working...
 rmc-destroy-cant-reach = We don't have a clear path to that location!
 rmc-destroy-cant-area = We can't leap to that area!
 
+# Queen Eye
 rmc-xeno-weeds-no-nearby-node = We require weeds to be closer!
 rmc-xeno-queen-eye-no-weeds = We can't move our eye there, there are no weeds!
 rmc-xeno-queen-eye-expand-weeds-name = Expand Weeds (50)
 rmc-xeno-queen-eye-expand-weeds-desc = Expand existing weeds or turn a weed tile into a node.
+
+# Swift Steps
+rmc-xeno-swift-steps-self = We narrowly dodge {THE($bullet)}!
+rmc-xeno-swift-steps-others = {CAPITALIZE(THE($user))} darts aside, evading {THE($bullet)}!
+
+# Finesse
+rmc-xeno-marked-critical-apply = You feel fear washing down your spine... you could be next!
+rmc-xeno-marked-critical-disappear = You calm down and get back to your senses.
+rmc-xeno-marked-critical-consumed = You've been knocked back to your senses!

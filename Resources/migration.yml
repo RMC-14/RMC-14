@@ -1509,6 +1509,10 @@ RMCGlassesMedicalHUDGlasses: RMCGlassesMedicalHUDGlassesAdvanced
 # 2026-05-19
 RMCFogWallWeed30: RMCFogWallWeed
 
+# 2026-05-09
+SpaceVillainArcade: RMCArcadeSpaceVillain
+BlockGameArcade: RMCArcadeBlockGame
+
 #2026-05-20
 RMCHeadCapFerret: RMCHeadCapGrey
 CMPosterRememberIo: CMRandomPosterAny
@@ -1517,6 +1521,10 @@ CMPosterRememberIo: CMRandomPosterAny
 DrinkGlass: RMCDrinkGlass
 FoodDonkpocket: RMCFoodDonkpocket
 FoodBoxDonkpocket: RMCBoxDonkpockets
+
+#2026-06-01
+DrinkSoyMilkCarton: RMCDrinkSoyMilkCarton
+DrinkMilkCarton: RMCDrinkMilkCarton
 
 #2026-06-06
 RMCBeakerHighCapacity: RMCReagentJug
