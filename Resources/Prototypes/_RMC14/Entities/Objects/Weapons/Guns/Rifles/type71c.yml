@@ -54,7 +54,8 @@
           - RMCMagazineRifleType71
           - RMCMagazineRifleType71AP
           - RMCMagazineRifleType71HEAP
-        startingItem: RMCMagazineRifleType71
+          - RMCMagazineRifleType71Rubber
+        startingItem: RMCMagazineRifleType71AP
   - type: GunDamageModifier
     multiplier: 0.8
   - type: AttachableHolder
@@ -83,8 +84,8 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentBurstFireAssembly
   - type: AttachableHolderVisuals
     offsets:

@@ -67,13 +67,17 @@
                             <RichTextLabel Text="{Loc rmc-ui-intel-documents}" MinWidth="220" />
                             <Label Name="DocumentsLabel" Access="Public" />
                         </BoxContainer>
-                        <BoxContainer Orientation="Horizontal" Visible="False">
+                        <BoxContainer Orientation="Horizontal">
                             <RichTextLabel Text="{Loc rmc-ui-intel-upload-data}" MinWidth="220" />
                             <Label Name="UploadDataLabel" Access="Public" />
                         </BoxContainer>
                         <BoxContainer Orientation="Horizontal">
                             <RichTextLabel Text="{Loc rmc-ui-intel-retrieve-items}" MinWidth="220" />
                             <Label Name="RetrieveItemsLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-miscellaneous}" MinWidth="220" />
+                            <Label Name="MiscellaneousLabel" Access="Public" />
                         </BoxContainer>
                         <BoxContainer Orientation="Horizontal">
                             <RichTextLabel Text="{Loc rmc-ui-intel-rescue-survivors}" MinWidth="220" />

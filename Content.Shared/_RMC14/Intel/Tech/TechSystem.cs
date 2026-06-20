@@ -1,13 +1,15 @@
-using System.Numerics;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.Dropship.Fabricator;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Requisitions;
-using Content.Shared._RMC14.Requisitions.Components;
 using Content.Shared._RMC14.Scaling;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.Access.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.UserInterface;
-using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -15,14 +17,17 @@ namespace Content.Shared._RMC14.Intel.Tech;
 
 public sealed class TechSystem : EntitySystem
 {
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly DropshipFabricatorSystem _dropshipFabricator = default!;
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
+    [Dependency] private readonly SharedGameTicker _ticker = default!;
+
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabIntelLogs";
 
     public override void Initialize()
     {
@@ -43,7 +48,9 @@ public sealed class TechSystem : EntitySystem
 
     private void OnTechAnnounce(TechAnnounceEvent ev)
     {
-        var msg = Loc.GetString("rmc-announcement-message-raw", ("author", ev.Author), ("message", ev.Message));
+        var author = Localize(ev.Author);
+        var message = Localize(ev.Message);
+        var msg = Loc.GetString("rmc-announcement-message-raw", ("author", author), ("message", message));
         _marineAnnounce.AnnounceToMarines(msg, ev.Sound);
     }
 
@@ -100,10 +107,13 @@ public sealed class TechSystem : EntitySystem
             return;
         }
 
-        if (option.TimeLock  > _ticker.RoundDuration())
+        if (option.TimeLock > _ticker.RoundDuration())
             return;
 
         if (option.Purchased && !option.Repurchasable)
+            return;
+
+        if (option.Disabled)
             return;
 
         if (!_intel.TryUsePoints(option.CurrentCost))
@@ -122,5 +132,60 @@ public sealed class TechSystem : EntitySystem
         }
 
         _intel.UpdateTree(tree);
+
+        if (_idCard.TryFindIdCard(args.Actor, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF))
+            foreach (var faction in idCardIFF.Factions)
+            {
+                _core.CreateARESLog(faction, LogCat, (string)$"{Name(args.Actor)} purchased intel node: {option.Name}");
+            }
+        else
+        {
+            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} purchased intel node: {option.Name}");
+        }
+    }
+
+    private string Localize(string text)
+    {
+        return Loc.TryGetString(text, out var localized) ? localized : text;
+    }
+
+    public bool SetVehicleUnlockOptionDisabled(EntProtoId unlockId, bool disabled)
+    {
+        var tree = _intel.EnsureTechTree();
+        var changed = false;
+
+        foreach (var tier in tree.Comp.Tree.Options)
+        {
+            for (var i = 0; i < tier.Count; i++)
+            {
+                var option = tier[i];
+                if (!OptionUnlocksVehicle(option, unlockId) || option.Disabled == disabled)
+                    continue;
+
+                tier[i] = option with { Disabled = disabled };
+                changed = true;
+            }
+        }
+
+        if (!changed)
+            return false;
+
+        Dirty(tree);
+        _intel.UpdateTree(tree);
+        return true;
+    }
+
+    private static bool OptionUnlocksVehicle(TechOption option, EntProtoId unlockId)
+    {
+        foreach (var ev in option.Events)
+        {
+            if (ev is TechUnlockVehicleEvent unlock &&
+                unlock.Unlock == unlockId)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

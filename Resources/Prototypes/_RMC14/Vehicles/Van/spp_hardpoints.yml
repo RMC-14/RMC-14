@@ -1,0 +1,114 @@
+- type: entity
+  parent: BaseItem
+  id: VehicleSPPVanTurret
+  name: SPP van turret
+  description: A roof-mounted turret fitted to an SPP van.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppvan.rsi
+    state: van_turret_0
+  - type: Item
+    size: Large
+  - type: HardpointItem
+    hardpointType: HardpointTypeSecondary
+    vehicleFamily: HardpointVehicleFamilyVan
+    slotType: HardpointSlotTypeLauncher
+    compatibilityId: HardpointCompatibilitySPPVan
+    damageMultiplier: 0.15
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 100
+  - type: VehicleTurret
+    rotateToCursor: true
+    stabilizedRotation: false
+    rotationSpeed: 180
+    useDirectionalOffsets: true
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/sppvan.rsi
+    overlayState: van_turret_0
+    pixelOffsetNorth: "0,4"
+    pixelOffsetEast: "-6,16"
+    pixelOffsetSouth: "0,15"
+    pixelOffsetWest: "6,16"
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: VehicleSPPVanCannon
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyVan
+    slots:
+    - id: turret-cannon
+      hardpointType: HardpointTypeCannon
+      slotType: HardpointSlotTypeCannon
+      compatibilityId: HardpointCompatibilitySPPVan
+      required: false
+      insertDelay: 2.0
+
+- type: entity
+  parent: VehicleHumveeCannon
+  id: VehicleSPPVanCannon
+  name: SPP van cannon
+  description: A turret-mounted cannon for an SPP van.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppvan.rsi
+    state: t60p3m_0
+  - type: HardpointItem
+    hardpointType: HardpointTypeCannon
+    vehicleFamily: HardpointVehicleFamilyVan
+    slotType: HardpointSlotTypeCannon
+    compatibilityId: HardpointCompatibilitySPPVan
+    damageMultiplier: 0.0
+    repairRate: 0.01
+  - type: HardpointIntegrity
+    maxIntegrity: 350
+  - type: VehicleTurret
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/sppvan.rsi
+    overlayState: t60p3m_0
+    fireWhileRotatingGraceDegrees: 20
+    useBarrelDirectionForShots: true
+    maxShotCurvatureDegrees: 10
+  - type: Gun
+    fireRate: 6
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
+    cameraRecoilScalar: 0
+  - type: UserIFF
+    factions:
+    - FactionSPP
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: VehicleCartridgeSentry10x50mm
+    capacity: 500
+  - type: VehicleHardpointAmmo
+    magazineSize: 500
+    maxStoredMagazines: 1
+  - type: RefillableByBulletBox
+    bulletType: VehicleAmmoBoxCupola
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    muzzleOffset: "0,-0.5"
+    useAimDirection: true
+    useContainerOwner: false
+  - type: HardpointVisual
+    vehicleState: t60p3m_0
+
+- type: entity
+  parent: RMCVanWheel
+  id: VehicleSPPVanWheel
+  name: SPP van wheel
+  description: A reinforced wheel for SPP vans.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/sppvan.rsi
+    state: spp_tires
+  - type: HardpointItem
+    compatibilityId: HardpointCompatibilitySPPVan
+
