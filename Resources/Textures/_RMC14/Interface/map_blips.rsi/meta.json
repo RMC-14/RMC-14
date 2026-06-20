@@ -958,6 +958,26 @@
     },
     {
       "name": "background_wy_com"
+    },
+    {
+      "name": "apc"
+    },
+    {
+      "name": "humvee"
+    },
+    {
+      "name": "arc",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "tank"
     }
   ]
 }
