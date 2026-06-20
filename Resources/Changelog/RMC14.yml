@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Hivelord strains now give intel and have a heart.
-    type: Fix
-  id: 2929
-  time: '2026-02-11T10:46:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9215
 - author: Dygon
   changes:
   - message: Oppressors can now pull a marine through a weapon mount.
@@ -4567,5 +4560,12 @@
   id: 3428
   time: '2026-06-19T17:21:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9895
+- author: ffxivsidehoes
+  changes:
+  - message: Fixed typo in white M54C's description.
+    type: Fix
+  id: 3429
+  time: '2026-06-20T23:39:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10230
 Name: RMC14
 Order: -1
