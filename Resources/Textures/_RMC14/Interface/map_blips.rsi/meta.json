@@ -960,13 +960,13 @@
       "name": "background_wy_com"
     },
     {
-      "name": "APC"
+      "name": "apc"
     },
     {
       "name": "humvee"
     },
     {
-      "name": "ARC",
+      "name": "arc",
       "delays": [
         [
           0.4,
