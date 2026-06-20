@@ -1,12 +1,4 @@
 # base
-- type: ghostRoleRaffleSettings
-  id: instant
-  settings:
-    initialDuration: 0
-    joinExtendsDurationBy: 0
-    maxDuration: 0
-    roundTimeRequirement: 0
-
 - type: playTimeTracker
   id: RMCGhostBarTracker
 
@@ -38,8 +30,5 @@
     name: rmc-ghost-bar-name-recruit
     description: rmc-ghost-bar-description
     rules: rmc-ghost-bar-rules
-    raffle:
-      settings: instant
     job: RMCRecruitGhostBar
   - type: RMCGhostRole
-    remaining: null

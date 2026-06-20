@@ -462,7 +462,7 @@ public sealed partial class MindTests
         await server.WaitAssertion(() =>
         {
             var id = entMan.GetComponent<GhostRoleComponent>(ghostRole).Identifier;
-            entMan.EntitySysManager.GetEntitySystem<GhostRoleSystem>().Takeover(player, id);
+            entMan.EntitySysManager.GetEntitySystem<GhostRoleSystem>().Takeover(player, id, out _);
         });
 
         await pair.RunTicksSync(20);

@@ -62,8 +62,8 @@ public sealed partial class RMCGhostRoleSystem : EntitySystem
             }
             else
             {
+                args.MoreAvailable = true;
                 ent.Comp.Remaining = remaining - 1;
-                Dirty(ent);
             }
         }
     }
