@@ -45,10 +45,11 @@ public sealed partial class RMCGhostRoleSystem : EntitySystem
         var profile = _gameTicker.GetPlayerProfile(args.Player);
         var mobUid = _spawning.SpawnPlayerMob(coords.Value, ghost.JobProto, profile, stationUid);
 
+        EntityManager.AddComponents(mobUid, ent.Comp.AddComponents);
+
         _mind.TransferTo(mindId, mobUid, true, mind: mindComp);
         _role.MindAddJobRole(mindId, jobPrototype: ghost.JobProto);
 
-        EntityManager.AddComponents(mobUid, ent.Comp.AddComponents);
         EnsureComp<RMCAdminSpawnedComponent>(mobUid);
         EnsureComp<RMCGhostRoleCompleteComponent>(mobUid);
 

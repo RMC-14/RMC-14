@@ -2,6 +2,23 @@
 - type: playTimeTracker
   id: RMCGhostBarTracker
 
+- type: entity
+  parent: MarkerBase
+  id: RMCGhostBarBase
+  abstract: true
+  name: ghost bar spawn point
+  components:
+  - type: Sprite
+    layers:
+    - state: blue
+    - sprite: Mobs/Ghosts/ghost_human.rsi
+      state: icon
+  - type: GhostRole
+    name: rmc-ghost-bar-name
+    description: rmc-ghost-bar-description
+    rules: rmc-ghost-bar-rules
+  - type: RMCGhostRole
+
 # recruit
 - type: startingGear
   parent: RMCGearRecruit
@@ -18,17 +35,10 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
+  parent: RMCGhostBarBase
   id: RMCGhostBarSpawnerRecruit
-  name: ghost bar spawn point
   suffix: recruit
   components:
-  - type: Sprite
-    layers:
-    - state: green
   - type: GhostRole
     name: rmc-ghost-bar-name-recruit
-    description: rmc-ghost-bar-description
-    rules: rmc-ghost-bar-rules
     job: RMCRecruitGhostBar
-  - type: RMCGhostRole
