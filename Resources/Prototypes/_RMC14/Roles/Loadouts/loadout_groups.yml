@@ -18,6 +18,14 @@
   - MarineLeatherSatchel
 
 - type: loadoutGroup
+  id: LiaisonBackpackRMC
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - LiaisonSecureSatchel
+
+- type: loadoutGroup
   id: MarineTechnicianBackpack
   name: rmc-loadout-group-backpack
   minLimit: 1
@@ -48,6 +56,14 @@
   hidden: true
   loadouts:
   - ProvostSecuritySatchel
+
+- type: loadoutGroup
+  id: ExecutiveSecurityGuardBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - ExecutiveSecurityGuardSatchel
 
 - type: loadoutGroup
   id: RoyalBackpack
@@ -399,6 +415,7 @@
   - PonchoUrbanRMC
   - PonchoSnowRMC
   - PatchPeaceRMC
+  - PDTLKitRMC
 
 - type: loadoutGroup
   id: AccessoriesRMCPVE
@@ -722,10 +739,11 @@
   id: LiaisonRoleSpecificRMC
   name: rmc-loadout-group-role-specific
   minLimit: 0
-  maxLimit: 3
+  maxLimit: 4
   loadouts:
   - RMCWeYaClipboard
   - RMCWeYaThermos
+  - WEYABagPhoneSatchel
   - RMCJacketWindbreakerWEYA
 
 # Chief MP
@@ -919,7 +937,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -942,7 +960,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -954,7 +972,7 @@
   name: rmc-loadout-group-watches
   minLimit: 0
   maxLimit: 1
-  loadouts: 
+  loadouts:
   - WatchCheapRMC
   - WatchBasicRMC
   - WatchSurvRMC
@@ -990,17 +1008,6 @@
   - ShoesYellowRMC
   - ShoesRedRMC
   - ShoesPurpleRMC
-  - PlushieFarwaRMC
-  - PlushieBarricadeRMC
-  - PlushieBeeRMC
-  - PlushieSharkGreyRMC
-  - PlushieSharkBlueRMC
-  - PlushieSharkPinkRMC
-  - PlushieMothRMC
-  - PlushieRockRMC
-  - PlushieTherapyRMC
-  - PlushieGnarpGnarpRMC
-  - PlushieGnarpGnarpAltRMC
 
 # Provost Inspector
 - type: loadoutGroup

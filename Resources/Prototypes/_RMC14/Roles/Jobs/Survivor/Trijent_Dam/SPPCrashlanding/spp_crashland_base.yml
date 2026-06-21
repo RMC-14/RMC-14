@@ -26,7 +26,7 @@
     id: RMCIDSPP
     ears: RMCHeadsetSPPCrashland
     pocket1: RMCPouchFirstAidSplintsGauzeOintment
-    pocket2: RMCPouchFlareFilled
+    pocket2: RMCPouchFlareR44Filled
 
 - type: entity
   id: RMCSurvivorPresetSPPCrashlandWeaponOnly
@@ -63,7 +63,7 @@
       - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ] # 3/5ths chance for webbing
       - [ RMCArmorSPPSupportSurvivorFill ]
     - # Headwear // TODO RMC14 implement random chance here in a less ugly way
-      - [ ArmorHelmetSPP ] # 2/9 chance 
+      - [ ArmorHelmetSPP ] # 2/9 chance
       - [ CMHeadCapSPP ] # 3/9 chance
       - [ CMHeadCapSPPBeret ] # 2/9 chance
       - [ CMHeadCapSPPUshanka ] # 2/9 chance
@@ -89,7 +89,7 @@
       - [ RMCOuterClothingExternalWebbingSPPSurvivor, RMCFlashlight ] # 3/5ths chance for webbing
       - [ RMCArmorSPPSupportSurvivorFill ]
     - # Headwear // TODO RMC14 implement random chance here in a less ugly way
-      - [ ArmorHelmetSPP ] # 2/9 chance 
+      - [ ArmorHelmetSPP ] # 2/9 chance
       - [ CMHeadCapSPP ] # 3/9 chance
       - [ CMHeadCapSPPBeret ] # 2/9 chance
       - [ CMHeadCapSPPUshanka ] # 2/9 chance

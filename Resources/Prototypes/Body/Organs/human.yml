@@ -16,10 +16,12 @@
         - ReagentId: Nutriment
           Quantity: 10
       food:
-        maxVol: 5
+        maxVol: 80 # RMC14 - Increase Max Vol for GreyMatter
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
+        - ReagentId: GreyMatter # RMC14 - Add Grey Matter to all organs to mechanically discourage eating organs.
+          Quantity: 75 # This is enough to deal 150 clone damage, along vomiting/tox this will either place them just barely into crit or just below it.
   - type: FlavorProfile
     flavors:
       - people
@@ -60,10 +62,10 @@
         - ReagentId: Nutriment
           Quantity: 10
       food:
-        maxVol: 5
+        maxVol: 75 # RMC14 Increase to match parent and prevent overwrite.
         reagents:
         - ReagentId: GreyMatter
-          Quantity: 5
+          Quantity: 75 # RMC14 Increase to match parent and prevent overwrite.
   - type: FlavorProfile
     flavors:
       - people
@@ -151,10 +153,12 @@
         maxVol: 100.0
         canReact: false
       food:
-        maxVol: 5
+        maxVol: 80 # RMC14 Increase to match parent and prevent overwrite.
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
+        - ReagentId: GreyMatter
+          Quantity: 75 # RMC14 Increase to match parent and prevent overwrite.
 
 - type: entity
   id: OrganHumanHeart
@@ -194,10 +198,12 @@
       stomach:
         maxVol: 80
       food:
-        maxVol: 5
+        maxVol: 80 # RMC14 Increase to match parent and prevent overwrite.
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
+        - ReagentId: GreyMatter
+          Quantity: 75 # RMC14 Increase to match parent and prevent overwrite.
   - type: Stomach
   # The stomach metabolizes stuff like foods and drinks.
   # TODO: Have it work off of the ent's solution container, and move this

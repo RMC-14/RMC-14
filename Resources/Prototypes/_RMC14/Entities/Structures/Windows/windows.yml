@@ -52,6 +52,7 @@
     snap:
     - Wall
   components:
+  - type: VehicleSmashable
   - type: MeleeSound
     soundGroups:
       Brute:
@@ -130,9 +131,6 @@
   parent: CMWindowReinforcedAlmayerHull
   id: RMCWindowReinforcedAlmayerHullHijackBustable
   suffix: Hijack Bustable
-  components:
-  - type: RMCReplaceOnHijackLand # TODO RMC14 also spawn glass
-    id: RMCWindowFrameAlmayer
 
 - type: entity
   parent: CMBaseWindow
@@ -191,6 +189,14 @@
     sound:
       collection: WindowShatter
   - type: ImmuneToUnarmed
+  - type: RMCHijackRandomDamageTarget
+    category: Window
+    damage:
+      types:
+        Structural: 60
+    breakDamage:
+      types:
+        Structural: 100
 
 - type: entity
   parent: CMBaseWindowIndestructible
@@ -269,6 +275,14 @@
     spawnPrototype: RMCWindowFrameWhite
     sound:
       collection: WindowShatter
+  - type: RMCHijackRandomDamageTarget
+    category: Window
+    damage:
+      types:
+        Structural: 60
+    breakDamage:
+      types:
+        Structural: 100
 
 - type: entity
   parent: CMBaseWindow
@@ -627,3 +641,11 @@
     spawnPrototype: RMCWindowFrameAI
     sound:
       collection: WindowShatter
+  - type: RMCHijackRandomDamageTarget
+    category: Window
+    damage:
+      types:
+        Structural: 60
+    breakDamage:
+      types:
+        Structural: 100

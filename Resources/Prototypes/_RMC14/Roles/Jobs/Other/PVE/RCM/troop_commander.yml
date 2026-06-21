@@ -24,6 +24,15 @@
       factions:
       - RoyalMarines
       - TSE
+    - type: Language
+      spokenLanguages:
+      - English
+      - Japanese
+      understoodLanguages:
+      - English
+      - Japanese
+      currentLanguage: English
+      defaultLanguage: English
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -62,7 +71,7 @@
   equipment:
     head: RMCHeadRoyalCapPeaked
     ears: RMCHeadsetRoyalMarineLeaderPVE
-    jumpsuit: RMCJumpsuitMarineRoyalService
+    jumpsuit: RMCJumpsuitMarineRoyalServicePVE
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     id: RMCIDRoyalMarinesTroopCommanderPVE

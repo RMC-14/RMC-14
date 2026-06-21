@@ -1,10 +1,10 @@
-using Robust.Shared.Maths;
 using Robust.Shared.GameStates;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoAcidHoleSystem))]
 public sealed partial class XenoAcidHoleWallComponent : Component
 {
@@ -14,6 +14,8 @@ public sealed partial class XenoAcidHoleWallComponent : Component
     [DataField]
     public float DamageNearCapRatio = 0.9f;
 
+    [AutoNetworkedField]
     public EntityUid? Hole;
+
     public Direction? PendingDirection;
 }
