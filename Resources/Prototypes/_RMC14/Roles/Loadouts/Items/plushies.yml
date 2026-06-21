@@ -112,13 +112,6 @@
       - PlushiePenguin
 
 - type: loadout
-  id: PlushieRounyRMC
-  cost: 4
-  storage:
-    back:
-    - PlushieRouny
-
-- type: loadout
   id: PlushieExperimentRMC
   cost: 4
   storage:
