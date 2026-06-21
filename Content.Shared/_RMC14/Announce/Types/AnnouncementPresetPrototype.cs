@@ -42,6 +42,9 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
     public bool VisibleInSettings { get; private set; } = true;
 
     [DataField]
+    public bool VisibleInLayoutEditor { get; private set; } = true;
+
+    [DataField]
     public AnnouncementDisplayPreference? DefaultPreference { get; private set; }
 
     [DataField]

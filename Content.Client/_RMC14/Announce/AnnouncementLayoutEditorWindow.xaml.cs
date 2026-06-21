@@ -251,16 +251,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 
     private static bool ShouldIncludeInLayoutEditor(AnnouncementPresetPrototype preset)
     {
-        if (preset.VisibleInSettings)
-            return true;
-
-        if (preset.ID.StartsWith("MarineOverwatch"))
-            return true;
-
-        if (preset.ID.StartsWith("MarineAlert"))
-            return true;
-
-        return preset.ID == "RedAlertAnimated";
+        return preset.VisibleInLayoutEditor;
     }
 
     private static List<string> BuildPresetLabels(IReadOnlyList<AnnouncementPresetPrototype> presets)
@@ -317,11 +308,12 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 
     private AnnouncementLayoutOverride CreateEditedLayout(Vector2 position, float scale)
     {
+        var effective = GetEffectiveEditedLayout();
         return CreateEditedLayout(
             position,
             scale,
-            ParseScaleInput(BodyScaleInput.Text),
-            ParseScaleInput(TitleScaleInput.Text));
+            ParseScaleInput(BodyScaleInput.Text, effective?.BodyTextScale ?? 1f),
+            ParseScaleInput(TitleScaleInput.Text, effective?.TitleTextScale ?? 1f));
     }
 
     private AnnouncementLayoutOverride CreateEditedLayout(
@@ -341,11 +333,11 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
             titleTextScale).Clamp();
     }
 
-    private static float ParseScaleInput(string? value)
+    private static float ParseScaleInput(string? value, float fallback = 1f)
     {
         return float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var scale)
             ? scale
-            : 1f;
+            : fallback;
     }
 
     private static string? ParseOptionalColorInput(string? value)
@@ -502,16 +494,15 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 
     private void SaveEditedLayout(AnnouncementLayoutOverride layout)
     {
-        var clamped = layout.Clamp();
         if (!EditingGlobalOverride)
         {
             var overrides = AnnouncementLayoutOverrides.Parse(_cfg.GetCVar(RMCCVars.RMCAnnouncementLayoutOverrides));
-            overrides[_selectedPreset.ToString()] = clamped;
+            overrides[_selectedPreset.ToString()] = layout;
             _cfg.SetCVar(RMCCVars.RMCAnnouncementLayoutOverrides, AnnouncementLayoutOverrides.Serialize(overrides));
         }
         else
         {
-            _cfg.SetCVar(RMCCVars.RMCAnnouncementLayout, AnnouncementLayoutOverrides.SerializeSingle(clamped));
+            _cfg.SetCVar(RMCCVars.RMCAnnouncementLayout, AnnouncementLayoutOverrides.SerializeSingle(layout));
         }
     }
 

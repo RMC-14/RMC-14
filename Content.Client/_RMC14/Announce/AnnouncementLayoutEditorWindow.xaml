@@ -41,6 +41,8 @@
             </BoxContainer>
         </BoxContainer>
 
+        <Slider Name="ScaleSlider" HorizontalExpand="True" MinValue="0.1" MaxValue="2.5" Value="1.0" />
+
         <BoxContainer Orientation="Horizontal" SeparationOverride="8">
             <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
                 <Label Text="{Loc 'rmc-ui-options-announcements-layout-body-scale'}" StyleClasses="LabelKeyText" />
@@ -73,8 +75,6 @@
                 <ColorSelectorSliders Name="TitleColorPicker" />
             </BoxContainer>
         </BoxContainer>
-
-        <Slider Name="ScaleSlider" HorizontalExpand="True" MinValue="0.1" MaxValue="2.5" Value="1.0" />
 
         <BoxContainer Orientation="Horizontal" SeparationOverride="8">
             <Button Name="ResetTargetButton" Text="{Loc 'rmc-ui-options-announcements-layout-reset-target'}" />

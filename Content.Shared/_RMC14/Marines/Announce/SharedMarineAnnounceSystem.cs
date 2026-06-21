@@ -249,6 +249,12 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     {
     }
 
+    /// <summary>
+    /// Dispatches an unsigned announcement to Marines.
+    /// </summary>
+    /// <param name="message">The content of the announcement.</param>
+    /// <param name="author">The author of the message, UNMC High Command by default.</param>
+    /// <param name="sound">GlobalSound for announcement.</param>
     public virtual void AnnounceHighCommand(
         string message,
         string? author = null,
@@ -256,6 +262,15 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     {
     }
 
+    /// <summary>
+    /// Dispatches a signed announcement to Marines.
+    /// </summary>
+    /// <param name="sender">EntityUid of sender, for job and name params.</param>
+    /// <param name="message">The content of the announcement.</param>
+    /// <param name="author">The author of the message, Command by default.</param>
+    /// <param name="name">The name to sign the message with, defaults to the name of <see cref="author"/>.</param>
+    /// <param name="sound">GlobalSound for announcement.</param>
+    /// <param name="filter">Who should be able to see and hear the announcement.</param>
     public void AnnounceSigned(
         EntityUid sender,
         string message,

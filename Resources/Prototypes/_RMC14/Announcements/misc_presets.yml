@@ -3,6 +3,7 @@
   name: "Misc Announcement"
   target: All
   visibleInSettings: false
+  visibleInLayoutEditor: false
   priority: 8
   canInterrupt: true
   canBeInterrupted: true

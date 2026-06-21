@@ -52,9 +52,7 @@ public sealed class AnnouncementLayoutEditorOverlayWidget : LayoutContainer
         _dragging = false;
         Visible = false;
         _previewWidget.ForcedScreenSize = null;
-        _previewWidget.PreviewMode = false;
         _previewWidget.Visible = false;
-        _previewWidget.PreviewMode = true;
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

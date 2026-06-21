@@ -4,6 +4,7 @@
   description: "Unknown encrypted transmission"
   target: All
   visibleInSettings: false
+  visibleInLayoutEditor: false
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8
