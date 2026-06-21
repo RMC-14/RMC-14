@@ -459,7 +459,7 @@
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - RMCSurvivorForeconSupportTech: 1
-    - RMCSurvivorForeconBase: -1
+    - RMCSurvivorForeconBase: 7
     survivorJobVariants:
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorForeconCommander: 1
