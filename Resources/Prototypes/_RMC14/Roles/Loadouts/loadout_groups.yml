@@ -1006,17 +1006,6 @@
   - ShoesYellowRMC
   - ShoesRedRMC
   - ShoesPurpleRMC
-  - PlushieFarwaRMC
-  - PlushieBarricadeRMC
-  - PlushieBeeRMC
-  - PlushieSharkGreyRMC
-  - PlushieSharkBlueRMC
-  - PlushieSharkPinkRMC
-  - PlushieMothRMC
-  - PlushieRockRMC
-  - PlushieTherapyRMC
-  - PlushieGnarpGnarpRMC
-  - PlushieGnarpGnarpAltRMC
 
 # Provost Inspector
 - type: loadoutGroup

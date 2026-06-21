@@ -232,6 +232,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCSurvivorsMaximum =
         CVarDef.Create("rmc.survivors_maximum", 7, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCVehicleRoundstartThresholdPlayers =
+        CVarDef.Create("rmc.vehicle_roundstart_threshold_players", 200, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCSpawnerMaxCorpses =
         CVarDef.Create("rmc.spawner_max_corpses", 100, CVar.REPLICATED | CVar.SERVER);
 
@@ -389,6 +392,12 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCIntelDisks =
         CVarDef.Create("rmc.intel_disks", 30, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelDataTerminals =
+        CVarDef.Create("rmc.intel_data_terminals", 6, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelSafes =
+        CVarDef.Create("rmc.intel_safes", 3, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCIntelExperimentalDevices =
         CVarDef.Create("rmc.intel_experimental_devices", 15, CVar.REPLICATED | CVar.SERVER);
