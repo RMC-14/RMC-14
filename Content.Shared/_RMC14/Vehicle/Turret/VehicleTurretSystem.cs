@@ -813,10 +813,6 @@ public sealed class VehicleTurretSystem : EntitySystem
         EntityUid vehicle,
         ref AttemptShootEvent args)
     {
-        var maxCurveDegrees = MathF.Max(0f, sourceTurret.MaxShotCurvatureDegrees);
-        if (!sourceTurret.UseBarrelDirectionForShots && maxCurveDegrees <= 0f)
-            return;
-
         var muzzleMap = _transform.ToMapCoordinates(args.FromCoordinates);
         if (args.ToCoordinates is not { } currentTarget)
             return;
@@ -827,6 +823,20 @@ public sealed class VehicleTurretSystem : EntitySystem
 
         var vehicleRot = _transform.GetWorldRotation(vehicle);
         var barrelWorldRotation = (rotationTurret.WorldRotation + vehicleRot).Reduced();
+
+        const float MinBarrelForwardDist = 0.5f;
+        var barrelDir = barrelWorldRotation.ToWorldVec();
+        var forwardDist = Vector2.Dot(targetMap.Position - muzzleMap.Position, barrelDir);
+        if (forwardDist < MinBarrelForwardDist)
+        {
+            targetMap = new MapCoordinates(muzzleMap.Position + barrelDir * MinBarrelForwardDist, targetMap.MapId);
+            args = args with { ToCoordinates = _transform.ToCoordinates(targetMap) };
+        }
+
+        var maxCurveDegrees = MathF.Max(0f, sourceTurret.MaxShotCurvatureDegrees);
+        if (!sourceTurret.UseBarrelDirectionForShots && maxCurveDegrees <= 0f)
+            return;
+
         var shotWorldRotation = barrelWorldRotation;
 
         if (!sourceTurret.UseBarrelDirectionForShots && maxCurveDegrees > 0f)
