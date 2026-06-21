@@ -30,7 +30,7 @@
         time: 90000 # 25 hrs
   storage:
     back:
-    - RMCWatchCaseBasic
+    - RMCWatchBasic
 
 - type: loadout
   id: WatchSurvRMC
@@ -42,7 +42,7 @@
         time: 36000 # 10 hrs
   storage:
     back:
-    - RMCWatchCaseSurv
+    - RMCWatchSurv
 
 - type: loadout
   id: WatchPilotRMC
@@ -54,7 +54,7 @@
         time: 43200 # 12 hrs
   storage:
     back:
-    - RMCWatchCasePilot
+    - RMCWatchPilot
 
 - type: loadout
   id: WatchLiaisonRMC
@@ -66,7 +66,7 @@
         time: 126000 # 35 hrs
   storage:
     back:
-    - RMCWatchCaseLiaison
+    - RMCWatchLiaison
 
 - type: loadout
   id: WatchSynthRMC
@@ -78,7 +78,7 @@
         time: 126000 # 35 hrs
   storage:
     back:
-    - RMCWatchCaseSynth
+    - RMCWatchSynth
 
 - type: loadout
   id: PatchPeaceRMC
