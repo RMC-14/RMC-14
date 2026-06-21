@@ -320,29 +320,11 @@ public sealed partial class AnnouncementWidget
             container.AddChild(textContainer);
             outerContainer.AddChild(container);
 
-            CRTOverlay? crtOverlayRef = null;
-            if (style.AnimationConfig.AnimationEnhancements?.EnableCRT == true)
-            {
-                var crtSettings = _owner.GetCRTSettingsFromStyle(style);
-                var crtOverlay = new CRTOverlay
-                {
-                    Settings = crtSettings,
-                    HorizontalAlignment = HAlignment.Stretch,
-                    VerticalAlignment = VAlignment.Stretch,
-                    HorizontalExpand = true,
-                    MinWidth = effectiveTextWidth,
-                    SetWidth = effectiveTextWidth
-                };
-                outerContainer.AddChild(crtOverlay);
-                crtOverlayRef = crtOverlay;
-            }
-
             outerContainer.Measure(screenSize);
             container.Measure(screenSize);
             textContainer.Measure(screenSize);
             titleLabelRef?.Measure(screenSize);
             titleUnderlineRef?.Measure(screenSize);
-            crtOverlayRef?.Measure(screenSize);
 
             if (titleTrackRef is LayoutContainer titleViewportControl && titleLabels.Length > 0)
             {

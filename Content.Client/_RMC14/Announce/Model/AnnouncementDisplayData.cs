@@ -22,6 +22,10 @@ public sealed class AnnouncementDisplayData
     public bool? ShowSpriteOverride { get; set; }
     public Color? TextColorOverride { get; set; }
     public Color? TitleColorOverride { get; set; }
+    public Color? SpriteBoxColorOverride { get; set; }
+    public Color? SpriteBoxBorderColorOverride { get; set; }
+    public Color? CRTGlowColorOverride { get; set; }
+    public Color? BackgroundColorOverride { get; set; }
     public float? BodyTextScaleOverride { get; set; }
     public float? TitleTextScaleOverride { get; set; }
     public float VisualScale => LayoutScale;

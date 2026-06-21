@@ -66,6 +66,25 @@ public static class AnnouncementStyling
 
         if (display.TitleColorOverride is { } titleColor)
             style.TitleConfig.TitleColor = titleColor;
+
+        if (display.SpriteBoxColorOverride is { } spriteBoxColor)
+            style.SpriteConfig.SpriteBoxColor = spriteBoxColor;
+
+        if (display.SpriteBoxBorderColorOverride is { } spriteBoxBorderColor)
+            style.SpriteConfig.SpriteBoxBorderColor = spriteBoxBorderColor;
+
+        if (display.BackgroundColorOverride is { } bgColor)
+            style.BackgroundConfig.BackgroundColor = bgColor;
+
+        if (display.CRTGlowColorOverride is { } crtGlowColor)
+        {
+            var enhancements = style.AnimationConfig.AnimationEnhancements;
+            if (enhancements != null && enhancements.EnableCRT)
+            {
+                enhancements.CRTSettings ??= new CRTSettings();
+                enhancements.CRTSettings.GlowColor = crtGlowColor;
+            }
+        }
     }
 
     public static AnnouncementStyle CreateResponsiveStyle(AnnouncementStyle baseStyle, float responsiveFontSize, Vector2 screenSize)

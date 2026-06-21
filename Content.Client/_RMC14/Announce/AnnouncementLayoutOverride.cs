@@ -12,7 +12,11 @@ public readonly record struct AnnouncementLayoutOverride(
     string? TextColor = null,
     string? TitleColor = null,
     float? BodyTextScale = null,
-    float? TitleTextScale = null)
+    float? TitleTextScale = null,
+    string? SpriteBoxColor = null,
+    string? SpriteBoxBorderColor = null,
+    string? CRTGlowColor = null,
+    string? BackgroundColor = null)
 {
     public AnnouncementLayoutOverride Clamp()
     {
@@ -26,7 +30,11 @@ public readonly record struct AnnouncementLayoutOverride(
             NormalizeColor(TextColor),
             NormalizeColor(TitleColor),
             NormalizeScale(BodyTextScale),
-            NormalizeScale(TitleTextScale));
+            NormalizeScale(TitleTextScale),
+            NormalizeColor(SpriteBoxColor),
+            NormalizeColor(SpriteBoxBorderColor),
+            NormalizeColor(CRTGlowColor),
+            NormalizeColor(BackgroundColor));
     }
 
     private static string? NormalizeColor(string? value)
@@ -134,7 +142,7 @@ public static class AnnouncementLayoutOverrides
         layout = default;
 
         var parts = serialized.Split(',', StringSplitOptions.TrimEntries);
-        if (parts.Length != 3 && parts.Length != 7 && parts.Length != 9)
+        if (parts.Length != 3 && parts.Length != 7 && parts.Length != 9 && parts.Length != 13)
             return false;
 
         if (!float.TryParse(parts[0], NumberStyles.Float, Culture, out var x) ||
@@ -150,6 +158,10 @@ public static class AnnouncementLayoutOverrides
         string? titleColor = null;
         float? bodyTextScale = null;
         float? titleTextScale = null;
+        string? spriteBoxColor = null;
+        string? spriteBoxBorderColor = null;
+        string? crtGlowColor = null;
+        string? backgroundColor = null;
         if (parts.Length >= 7)
         {
             showTitle = ParseOptionalBool(parts[3]);
@@ -164,6 +176,14 @@ public static class AnnouncementLayoutOverrides
             titleTextScale = ParseOptionalScale(parts[8]);
         }
 
+        if (parts.Length >= 13)
+        {
+            spriteBoxColor = ParseOptionalColor(parts[9]);
+            spriteBoxBorderColor = ParseOptionalColor(parts[10]);
+            crtGlowColor = ParseOptionalColor(parts[11]);
+            backgroundColor = ParseOptionalColor(parts[12]);
+        }
+
         layout = new AnnouncementLayoutOverride(
             new Vector2(x, y),
             scale,
@@ -172,7 +192,11 @@ public static class AnnouncementLayoutOverrides
             textColor,
             titleColor,
             bodyTextScale,
-            titleTextScale).Clamp();
+            titleTextScale,
+            spriteBoxColor,
+            spriteBoxBorderColor,
+            crtGlowColor,
+            backgroundColor).Clamp();
         return true;
     }
 
@@ -196,7 +220,15 @@ public static class AnnouncementLayoutOverrides
             ",",
             SerializeOptionalScale(clamped.BodyTextScale),
             ",",
-            SerializeOptionalScale(clamped.TitleTextScale));
+            SerializeOptionalScale(clamped.TitleTextScale),
+            ",",
+            clamped.SpriteBoxColor ?? string.Empty,
+            ",",
+            clamped.SpriteBoxBorderColor ?? string.Empty,
+            ",",
+            clamped.CRTGlowColor ?? string.Empty,
+            ",",
+            clamped.BackgroundColor ?? string.Empty);
     }
 
     private static bool? ParseOptionalBool(string value)

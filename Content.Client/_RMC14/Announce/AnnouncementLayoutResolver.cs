@@ -16,6 +16,10 @@ public static class AnnouncementLayoutResolver
         display.ShowSpriteOverride = display.SupportsSpriteCardOverride ? clamped.ShowSprite : null;
         display.TextColorOverride = ParseColor(clamped.TextColor);
         display.TitleColorOverride = ParseColor(clamped.TitleColor);
+        display.SpriteBoxColorOverride = ParseColor(clamped.SpriteBoxColor);
+        display.SpriteBoxBorderColorOverride = ParseColor(clamped.SpriteBoxBorderColor);
+        display.CRTGlowColorOverride = ParseColor(clamped.CRTGlowColor);
+        display.BackgroundColorOverride = ParseColor(clamped.BackgroundColor);
         display.BodyTextScaleOverride = clamped.BodyTextScale;
         display.TitleTextScaleOverride = clamped.TitleTextScale;
     }

@@ -35,8 +35,6 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
     private bool _suppressSliderChange;
     private bool _suppressTextChange;
 
-    private bool EditingGlobalOverride => GlobalOverrideCheckBox.Pressed;
-
     public AnnouncementLayoutEditorWindow()
     {
         SetSize = new Vector2i(760, 460);
@@ -51,7 +49,6 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 
         ConfigurePresetButton();
         ConfigureVariantButton();
-        ConfigureGlobalOverrideToggle();
         ConfigureNumericInputs();
         ConfigureAppearanceInputs();
 
@@ -87,15 +84,6 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
         _layoutController.PreviewPositionChanged += OnControllerPreviewPositionChanged;
         _layoutController.PreviewScaleChanged += OnControllerPreviewScaleChanged;
         RefreshPreview();
-    }
-
-    private void ConfigureGlobalOverrideToggle()
-    {
-        GlobalOverrideCheckBox.Pressed = false;
-        GlobalOverrideCheckBox.OnPressed += _ =>
-        {
-            RefreshPreview();
-        };
     }
 
     private void ConfigurePresetButton()
@@ -158,10 +146,24 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 
         BodyColorPicker.OnColorChanged += color => OnColorPickerChanged(BodyColorInput, color);
         TitleColorPicker.OnColorChanged += color => OnColorPickerChanged(TitleColorInput, color);
+        SpriteBoxColorPicker.OnColorChanged += color => OnColorPickerChanged(SpriteBoxColorInput, color);
+        SpriteBoxBorderColorPicker.OnColorChanged += color => OnColorPickerChanged(SpriteBoxBorderColorInput, color);
+        CRTGlowColorPicker.OnColorChanged += color => OnColorPickerChanged(CRTGlowColorInput, color);
+        BackgroundColorPicker.OnColorChanged += color => OnColorPickerChanged(BackgroundColorInput, color);
+
         BodyColorInput.OnTextEntered += args => CommitAppearanceInputs();
         TitleColorInput.OnTextEntered += args => CommitAppearanceInputs();
+        SpriteBoxColorInput.OnTextEntered += args => CommitAppearanceInputs();
+        SpriteBoxBorderColorInput.OnTextEntered += args => CommitAppearanceInputs();
+        CRTGlowColorInput.OnTextEntered += args => CommitAppearanceInputs();
+        BackgroundColorInput.OnTextEntered += args => CommitAppearanceInputs();
+
         BodyColorInput.OnFocusExit += args => CommitAppearanceInputs();
         TitleColorInput.OnFocusExit += args => CommitAppearanceInputs();
+        SpriteBoxColorInput.OnFocusExit += args => CommitAppearanceInputs();
+        SpriteBoxBorderColorInput.OnFocusExit += args => CommitAppearanceInputs();
+        CRTGlowColorInput.OnFocusExit += args => CommitAppearanceInputs();
+        BackgroundColorInput.OnFocusExit += args => CommitAppearanceInputs();
     }
 
     private void RefreshVariantButton()
@@ -330,7 +332,11 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
             ParseOptionalColorInput(BodyColorInput.Text),
             ParseOptionalColorInput(TitleColorInput.Text),
             bodyTextScale,
-            titleTextScale).Clamp();
+            titleTextScale,
+            ParseOptionalColorInput(SpriteBoxColorInput.Text),
+            ParseOptionalColorInput(SpriteBoxBorderColorInput.Text),
+            ParseOptionalColorInput(CRTGlowColorInput.Text),
+            ParseOptionalColorInput(BackgroundColorInput.Text)).Clamp();
     }
 
     private static float ParseScaleInput(string? value, float fallback = 1f)
@@ -431,6 +437,10 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
         ShowPortraitCheckBox.Pressed = ShowPortraitCheckBox.Disabled ? false : layout?.ShowSprite ?? true;
         BodyColorInput.Text = layout?.TextColor ?? string.Empty;
         TitleColorInput.Text = layout?.TitleColor ?? string.Empty;
+        SpriteBoxColorInput.Text = layout?.SpriteBoxColor ?? string.Empty;
+        SpriteBoxBorderColorInput.Text = layout?.SpriteBoxBorderColor ?? string.Empty;
+        CRTGlowColorInput.Text = layout?.CRTGlowColor ?? string.Empty;
+        BackgroundColorInput.Text = layout?.BackgroundColor ?? string.Empty;
         _suppressTextChange = false;
 
         PositionValueLabel.Text = hasCustomLayout && position is { } value
@@ -452,33 +462,48 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
     private void UpdateAppearanceControlState(AnnouncementDisplayData display)
     {
         ShowPortraitCheckBox.Disabled = !display.SupportsSpriteCardOverride;
+
+        var showSpriteBox = display.SupportsSpriteCardOverride && display.ShowSprite;
+        var showCRT = display.Style.AnimationConfig.AnimationEnhancements?.EnableCRT == true;
+        var showBg = display.Style.BackgroundConfig.ShowBackground;
+
+        SpriteBoxColorRow.Visible = showSpriteBox;
+        CRTGlowColorSection.Visible = showCRT;
+        BackgroundColorSection.Visible = showBg;
+        ExtraColorRow.Visible = showCRT || showBg;
     }
 
     private void RefreshColorPickers(AnnouncementDisplayData display)
     {
         var bodyColor = display.TextColorOverride ?? display.Style.TextConfig.PrimaryColor;
         var titleColor = display.TitleColorOverride ?? display.Style.TitleConfig.TitleColor;
+        var spriteBoxColor = display.SpriteBoxColorOverride ?? display.Style.SpriteConfig.SpriteBoxColor;
+        var spriteBoxBorderColor = display.SpriteBoxBorderColorOverride ?? display.Style.SpriteConfig.SpriteBoxBorderColor;
+        var bgColor = display.BackgroundColorOverride ?? display.Style.BackgroundConfig.BackgroundColor;
+
+        var crtSettings = display.Style.AnimationConfig.AnimationEnhancements;
+        var crtGlowColor = display.CRTGlowColorOverride
+            ?? (crtSettings?.CRTSettings?.GlowColor)
+            ?? Color.FromHex("#00ff41");
 
         _suppressTextChange = true;
         BodyColorPicker.Color = bodyColor;
         TitleColorPicker.Color = titleColor;
+        SpriteBoxColorPicker.Color = spriteBoxColor;
+        SpriteBoxBorderColorPicker.Color = spriteBoxBorderColor;
+        CRTGlowColorPicker.Color = crtGlowColor;
+        BackgroundColorPicker.Color = bgColor;
         _suppressTextChange = false;
     }
 
     private AnnouncementLayoutOverride? GetEffectiveEditedLayout()
     {
-        if (!EditingGlobalOverride)
-            return GetStoredEditedLayout() ?? _announcementController.GetGlobalLayoutOverride();
-
-        return _announcementController.GetGlobalLayoutOverride();
+        return GetStoredEditedLayout() ?? _announcementController.GetGlobalLayoutOverride();
     }
 
     private AnnouncementLayoutOverride? GetStoredEditedLayout()
     {
-        if (!EditingGlobalOverride)
-            return _announcementController.GetPresetLayoutOverride(_selectedPreset);
-
-        return _announcementController.GetGlobalLayoutOverride();
+        return _announcementController.GetPresetLayoutOverride(_selectedPreset);
     }
 
     private Vector2 GetPreviewPositionOrDefault()
@@ -494,29 +519,16 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 
     private void SaveEditedLayout(AnnouncementLayoutOverride layout)
     {
-        if (!EditingGlobalOverride)
-        {
-            var overrides = AnnouncementLayoutOverrides.Parse(_cfg.GetCVar(RMCCVars.RMCAnnouncementLayoutOverrides));
-            overrides[_selectedPreset.ToString()] = layout;
-            _cfg.SetCVar(RMCCVars.RMCAnnouncementLayoutOverrides, AnnouncementLayoutOverrides.Serialize(overrides));
-        }
-        else
-        {
-            _cfg.SetCVar(RMCCVars.RMCAnnouncementLayout, AnnouncementLayoutOverrides.SerializeSingle(layout));
-        }
+        var overrides = AnnouncementLayoutOverrides.Parse(_cfg.GetCVar(RMCCVars.RMCAnnouncementLayoutOverrides));
+        overrides[_selectedPreset.ToString()] = layout;
+        _cfg.SetCVar(RMCCVars.RMCAnnouncementLayoutOverrides, AnnouncementLayoutOverrides.Serialize(overrides));
     }
 
     private void ResetEditedLayout()
     {
-        if (!EditingGlobalOverride)
-        {
-            var overrides = AnnouncementLayoutOverrides.Parse(_cfg.GetCVar(RMCCVars.RMCAnnouncementLayoutOverrides));
-            overrides.Remove(_selectedPreset.ToString());
-            _cfg.SetCVar(RMCCVars.RMCAnnouncementLayoutOverrides, AnnouncementLayoutOverrides.Serialize(overrides));
-            return;
-        }
-
-        _cfg.SetCVar(RMCCVars.RMCAnnouncementLayout, string.Empty);
+        var overrides = AnnouncementLayoutOverrides.Parse(_cfg.GetCVar(RMCCVars.RMCAnnouncementLayoutOverrides));
+        overrides.Remove(_selectedPreset.ToString());
+        _cfg.SetCVar(RMCCVars.RMCAnnouncementLayoutOverrides, AnnouncementLayoutOverrides.Serialize(overrides));
     }
 
     private static string[] GetPreviewBody(AnnouncementPresetPrototype preset)

@@ -456,7 +456,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.use_alternate_sprites", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
     public static readonly CVarDef<AnnouncementDisplayPreference> RMCAnnouncementStyle =
-        CVarDef.Create("rmc.announcement_style", AnnouncementDisplayPreference.Default, CVar.ARCHIVE | CVar.CLIENTONLY);
+        CVarDef.Create("rmc.announcement_style", AnnouncementDisplayPreference.Stylized, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     public static readonly CVarDef<string> RMCAnnouncementStyleOverrides =
         CVarDef.Create("rmc.announcement_style_overrides", string.Empty, CVar.ARCHIVE | CVar.CLIENTONLY);

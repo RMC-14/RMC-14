@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Content.Client._RMC14.Announce;
@@ -17,15 +16,6 @@ public sealed partial class AccessibilityTab
 
     private void RegisterAnnouncementOptions()
     {
-        var announcementEntries = new List<OptionDropDownCVar<AnnouncementDisplayPreference>.ValueOption>
-        {
-            new(AnnouncementDisplayPreference.Stylized, Loc.GetString("rmc-ui-options-announcements-style-stylized")),
-            new(AnnouncementDisplayPreference.Default, Loc.GetString("rmc-ui-options-announcements-style-default")),
-            new(AnnouncementDisplayPreference.Simplified, Loc.GetString("rmc-ui-options-announcements-style-simplified")),
-            new(AnnouncementDisplayPreference.Disabled, Loc.GetString("rmc-ui-options-announcements-style-disabled"))
-        };
-
-        Control.AddOptionDropDown(RMCCVars.RMCAnnouncementStyle, AnnouncementStyleDropDown, announcementEntries);
         AddPerAnnouncementOverrides();
         RegisterAnnouncementLayoutEditor();
     }
