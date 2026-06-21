@@ -2,7 +2,7 @@
   parent: BaseItem
   id: RMCStaplerRed
   name: red stapler
-  description: "A stapler for stapling using staples. Popular in offices, schools, and homes across the galaxy"
+  description: A stapler for stapling using staples. Popular in offices, schools, and homes across the galaxy.
   components:
   - type: Sprite
     state: stapler-red
