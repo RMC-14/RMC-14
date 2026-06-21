@@ -72,3 +72,10 @@ rmc-attachable-examine-speed-walk = [color={$colour}]{$sign}{TOSTRING($speed, "F
 rmc-attachable-examine-speed-sprint = [color={$colour}]{$sign}{TOSTRING($speed, "F2")}[/color] running speed multiplier.
 
 rmc-attachable-examine-wield-delay = [color={$colour}]{$sign}{$delay}[/color] seconds of wield delay.
+
+rmc-attachable-examine-verb-text = View Compatible Attachments
+rmc-attachable-examine-window-title = Compatible Attachments
+rmc-attachable-examine-no-slots = This weapon has no attachment slots.
+rmc-attachable-examine-header = [bold]Attachment slots:[/bold]
+rmc-attachable-examine-slot-filled = • [bold]{$slot}:[/bold] {$attachment}
+rmc-attachable-examine-slot-empty = • [bold]{$slot}:[/bold] [color=gray]empty[/color]

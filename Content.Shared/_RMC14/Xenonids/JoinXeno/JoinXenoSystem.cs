@@ -86,10 +86,27 @@ public sealed class JoinXenoSystem : EntitySystem
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var hiveId, out var hive))
         {
-            var inQueue = actor != null && _larvaQueue.IsQueuedFor(actor.PlayerSession.UserId, hiveId);
-            var optionText = inQueue ?
-                $"Leave Larva Queue for ({Name(hiveId)})" :
-                $"Join Larva Queue for ({Name(hiveId)})";
+            var inQueue = actor != null && _larvaQueue.IsAlreadyQueued(actor.PlayerSession.UserId, hiveId);
+            string optionText;
+            if (inQueue && actor != null)
+            {
+                var pos = _larvaQueue.GetQueuePosition(actor.PlayerSession.UserId, hiveId);
+                if (pos > 0)
+                {
+                    optionText = $"Leave Larva Queue for ({Name(hiveId)})\n[Position: {pos}]";
+                }
+                else
+                {
+                    var remaining = _larvaQueue.GetPreQueueTimeRemaining(actor.PlayerSession.UserId, hiveId);
+                    optionText = remaining.HasValue
+                        ? $"Leave Larva Queue for ({Name(hiveId)})\n[Waiting: {remaining.Value.TotalSeconds:F0}s remaining]"
+                        : $"Leave Larva Queue for ({Name(hiveId)})";
+                }
+            }
+            else
+            {
+                optionText = $"Join Larva Queue for ({Name(hiveId)})";
+            }
 
             options.Add(new DialogOption(optionText, new JoinLarvaQueueEvent(GetNetEntity(hiveId))));
         }
