@@ -193,7 +193,8 @@
 - type: entity
   parent: RMCAreaPVE
   id: RMCAreaOCPOOB
-  name: OCP Out Of Bounds
+  name: OCP-583 - Out Of Bounds
+  suffix: OCP Area
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_fiorina.rsi
