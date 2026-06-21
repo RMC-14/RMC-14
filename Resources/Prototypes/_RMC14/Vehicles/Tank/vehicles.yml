@@ -151,7 +151,6 @@
           components:
           - HardpointItem
       wheel-1:
-        startingItem: VehicleTankTreads
         disableEject: true
         whitelist:
           components:
