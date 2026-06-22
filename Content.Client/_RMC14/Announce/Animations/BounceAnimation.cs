@@ -28,7 +28,7 @@ public sealed class BounceAnimation : IAnnouncementAnimation
 
         context.State.BounceTimer += deltaTime * 4f;
         var bounceProgress = context.State.BounceTimer % 1f;
-        var bounceY = MathF.Sin(bounceProgress * MathF.PI) * bounceHeight * (1f - context.State.BouncePhase * 0.3f);
+        var bounceY = MathF.Sin(bounceProgress * MathF.PI) * bounceHeight * MathF.Max(0f, 1f - context.State.BouncePhase * 0.3f);
         context.State.CurrentBounceOffset = new Vector2(0, -bounceY);
 
         if (context.State.BounceTimer >= 1f)

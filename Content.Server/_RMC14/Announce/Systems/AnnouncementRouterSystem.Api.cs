@@ -74,6 +74,7 @@ public sealed partial class AnnouncementRouterSystem
                 Target = AnnouncementTarget.All,
                 Source = source,
                 SpeakerNameOverride = "A.R.E.S.",
+                Channels = AnnouncementChannels.Overlay | AnnouncementChannels.Sound,
             },
             Sound = new AnnouncementSoundOptions
             {
@@ -109,6 +110,7 @@ public sealed partial class AnnouncementRouterSystem
             {
                 Target = AnnouncementTarget.All,
                 Source = source,
+                Channels = AnnouncementChannels.Overlay | AnnouncementChannels.Sound,
             },
             Sound = new AnnouncementSoundOptions
             {

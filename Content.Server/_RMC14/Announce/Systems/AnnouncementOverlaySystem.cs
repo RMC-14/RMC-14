@@ -36,8 +36,8 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
         var speakerName = ResolveSpeakerName(request);
         var clientData = BuildClientData(request, preset, lines, speakerName);
 
-        if (TryGetLongestPresentation(preset, out var longestPresentation))
-            EnsureSpeakerPvs(request, filter, longestPresentation);
+        if (TryGetLongestPresentation(preset, lines, out var longestPresentation))
+            EnsureSpeakerPvs(request, filter, longestPresentation, lines);
 
         RaiseNetworkEvent(new AnnouncementNetMessage(clientData), filter);
         LogAnnouncement(preset.ID, lines, request.Route.Target, request.Route.Source, filter.Count);
@@ -61,7 +61,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
         };
     }
 
-    private void EnsureSpeakerPvs(AnnouncementRequest request, Filter filter, AnnouncementPresentation presentation)
+    private void EnsureSpeakerPvs(AnnouncementRequest request, Filter filter, AnnouncementPresentation presentation, string[] lines)
     {
         if (!presentation.ShowSprite || !request.Route.Speaker.HasValue)
             return;
@@ -73,7 +73,7 @@ public sealed partial class AnnouncementOverlaySystem : EntitySystem
         _pvsOverride.AddSessionOverrides(speaker, filter);
 
         var style = presentation.Style;
-        var totalDuration = AnnouncementDurationCalculator.Calculate(style) + style.AnimationConfig.HoldDuration + PvsCleanupBufferSeconds;
+        var totalDuration = AnnouncementDurationCalculator.Calculate(style, lines) + style.AnimationConfig.HoldDuration + PvsCleanupBufferSeconds;
         Timer.Spawn(TimeSpan.FromSeconds(totalDuration), () => RemoveSpeakerOverrides(speaker, filter));
     }
 

@@ -39,6 +39,7 @@ public sealed partial class AnnouncementOverlaySystem
 
     private bool TryGetLongestPresentation(
         AnnouncementPresetPrototype preset,
+        string[] lines,
         out AnnouncementPresentation longestPresentation)
     {
         longestPresentation = default!;
@@ -46,7 +47,7 @@ public sealed partial class AnnouncementOverlaySystem
 
         foreach (var presentation in preset.Presentations.EnumerateAvailable())
         {
-            var duration = AnnouncementDurationCalculator.Calculate(presentation.Style) + presentation.Style.AnimationConfig.HoldDuration;
+            var duration = AnnouncementDurationCalculator.Calculate(presentation.Style, lines) + presentation.Style.AnimationConfig.HoldDuration;
             if (duration >= longestDuration)
             {
                 longestDuration = duration;
