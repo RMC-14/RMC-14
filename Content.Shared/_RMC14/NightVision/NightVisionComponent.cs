@@ -63,12 +63,12 @@ public static class NightVisionColorExtensions
     {
         return color switch
         {
-            NightVisionColor.Orange => new Color(1.0f, 0.8f, 0.4f),
-            NightVisionColor.White => new Color(0.83f, 0.83f, 0.83f),
-            NightVisionColor.Yellow => new Color(1.0f, 1.0f, 0.4f),
-            NightVisionColor.Red => new Color(1.0f, 0.2f, 0.2f),
-            NightVisionColor.Blue => new Color(0.4f, 0.8f, 1.0f),
-            _ => new Color(0.22f, 1.0f, 0.08f),
+            NightVisionColor.Orange => new Color(0.6f, 0.42f, 0.05f), // #9d6c0994
+            NightVisionColor.White => new Color(0.35f, 0.35f, 0.35f),  // #595959
+            NightVisionColor.Yellow => new Color(1.0f, 1.0f, 0.08f),    // #FFFF14
+            NightVisionColor.Red => new Color(1.0f, 0.08f, 0.08f),     // #FF1414
+            NightVisionColor.Blue => new Color(0.08f, 0.45f, 0.42f),    // #14736B
+            _ => new Color(0.22f, 1.0f, 0.08f),                        // #39FF14 (Green/Default)
         };
     }
 }
