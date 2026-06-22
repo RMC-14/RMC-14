@@ -127,6 +127,7 @@ public static class AnnouncementStyling
             AnnouncementPosition.BottomLeft => new Vector2(50f, screenSize.Y - contentSize.Y - 50f),
             AnnouncementPosition.BottomCenter => new Vector2((screenSize.X - contentSize.X) * 0.5f, screenSize.Y - contentSize.Y - 50f),
             AnnouncementPosition.BottomRight => new Vector2(screenSize.X - contentSize.X - 50f, screenSize.Y - contentSize.Y - 50f),
+            AnnouncementPosition.FullScreen => Vector2.Zero,
             _ => new Vector2((screenSize.X - contentSize.X) * 0.5f, (screenSize.Y - contentSize.Y) * 0.5f)
         };
     }

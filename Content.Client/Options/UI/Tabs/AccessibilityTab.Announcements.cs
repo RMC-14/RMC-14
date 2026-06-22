@@ -49,7 +49,8 @@ public sealed partial class AccessibilityTab
                 _cfg,
                 dropDown,
                 preset.ID,
-                availablePreferences));
+                availablePreferences,
+                preset.DefaultPreference ?? AnnouncementDisplayPreference.Stylized));
         }
     }
 
@@ -124,8 +125,8 @@ public sealed partial class AccessibilityTab
         private readonly OptionDropDown _dropDown;
         private readonly string _presetId;
         private readonly HashSet<AnnouncementDisplayPreference> _availablePreferences;
+        private readonly AnnouncementDisplayPreference _defaultPreference;
         private readonly Dictionary<AnnouncementDisplayPreference, int> _entryIds = new();
-        private readonly int _inheritId;
         private Dictionary<string, AnnouncementDisplayPreference> _cachedOverrides = new();
 
         private AnnouncementDisplayPreference? SelectedPreference
@@ -140,13 +141,9 @@ public sealed partial class AccessibilityTab
             }
             set
             {
-                if (value is { } preference && _entryIds.TryGetValue(preference, out var id))
-                {
+                var target = value ?? _defaultPreference;
+                if (_entryIds.TryGetValue(target, out var id))
                     _dropDown.Button.SelectId(id);
-                    return;
-                }
-
-                _dropDown.Button.SelectId(_inheritId);
             }
         }
 
@@ -155,18 +152,16 @@ public sealed partial class AccessibilityTab
             IConfigurationManager cfg,
             OptionDropDown dropDown,
             string presetId,
-            IReadOnlyCollection<AnnouncementDisplayPreference> availablePreferences) : base(controller)
+            IReadOnlyCollection<AnnouncementDisplayPreference> availablePreferences,
+            AnnouncementDisplayPreference defaultPreference) : base(controller)
         {
             _cfg = cfg;
             _dropDown = dropDown;
             _presetId = presetId;
+            _defaultPreference = defaultPreference;
             _availablePreferences = new HashSet<AnnouncementDisplayPreference>(availablePreferences);
 
-            _dropDown.Button.AddItem(Loc.GetString("rmc-ui-options-announcements-style-inherit"), 0);
-            _dropDown.Button.SetItemMetadata(_dropDown.Button.GetIdx(0), -1);
-            _inheritId = 0;
-
-            var nextId = 1;
+            var nextId = 0;
             foreach (var preference in availablePreferences)
             {
                 var key = preference switch
@@ -210,10 +205,11 @@ public sealed partial class AccessibilityTab
         public override void SaveValue()
         {
             var overrides = new Dictionary<string, AnnouncementDisplayPreference>(_cachedOverrides);
-            if (SelectedPreference is { } preference)
-                overrides[_presetId] = preference;
-            else
+            var preference = SelectedPreference ?? _defaultPreference;
+            if (preference == _defaultPreference)
                 overrides.Remove(_presetId);
+            else
+                overrides[_presetId] = preference;
 
             _cfg.SetCVar(RMCCVars.RMCAnnouncementStyleOverrides, AnnouncementPreferenceOverrides.Serialize(overrides));
         }
@@ -225,12 +221,14 @@ public sealed partial class AccessibilityTab
 
         public override bool IsModified()
         {
-            return SelectedPreference != GetStoredPreference();
+            var selected = SelectedPreference ?? _defaultPreference;
+            var stored = GetStoredPreference() ?? _defaultPreference;
+            return selected != stored;
         }
 
         public override bool IsModifiedFromDefault()
         {
-            return SelectedPreference != null;
+            return (SelectedPreference ?? _defaultPreference) != _defaultPreference;
         }
 
         private AnnouncementDisplayPreference? GetStoredPreference()

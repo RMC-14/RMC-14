@@ -120,7 +120,6 @@ rmc-ui-options-announcements-style-default = Default
 rmc-ui-options-announcements-style-simplified = Simple
 rmc-ui-options-announcements-style-disabled = Disabled
 rmc-ui-options-announcements-style-per-announcement = Announcement visuals by source
-rmc-ui-options-announcements-style-inherit = Use global setting
 rmc-ui-options-announcements-layout = Announcement layout
 rmc-ui-options-announcements-layout-open-editor = Open layout editor
 rmc-ui-options-announcements-layout-reset-all = Reset all layout overrides
