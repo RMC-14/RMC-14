@@ -1923,6 +1923,7 @@ public sealed class IntelSystem : EntitySystem
             terminal.Completed = true;
             Dirty(uid, terminal);
             CompleteUpload(uid, terminal.Value);
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/_RMC14/Machines/screen_output1.ogg"), uid);
             _popup.PopupEntity(Loc.GetString("rmc-intel-data-terminal-finished"), uid, terminalUser);
         }
 

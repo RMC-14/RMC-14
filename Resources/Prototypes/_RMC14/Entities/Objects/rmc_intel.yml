@@ -249,8 +249,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
-    state: medlaptop
-    layers: []
+    layers:
+    - map: ["base"]
+      state: "medlaptop0"
+    - map: ["enum.PowerDeviceVisualLayers.Powered"]
+      state: "medlaptop"
   - type: InteractionOutline
   - type: ApcPowerReceiver
     powerLoad: 250
