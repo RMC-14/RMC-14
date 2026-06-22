@@ -4,7 +4,7 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="{Loc rmc-ui-intel-title}"
-    MinSize="620 570">
+    MinSize="700 650">
     <PanelContainer>
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat 

@@ -66,16 +66,57 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
 
         foreach (var clue in clues)
         {
-            container.AddChild(new Label
-            {
-                Text = clue,
-                Margin = new Thickness(2, 1, 2, 1),
-                StyleClasses = { "Label" }
-            });
+            container.AddChild(BuildClueRow(clue));
         }
 
         scroll.AddChild(container);
         _window.CluesContainer.AddChild(scroll);
         TabContainer.SetTabTitle(scroll, Loc.GetString(category));
+    }
+
+    private static Control BuildClueRow(string clue)
+    {
+        var row = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            Margin = new Thickness(2, 1, 2, 1),
+            HorizontalExpand = true,
+        };
+
+        const string separator = " in ";
+        var splitIndex = clue.LastIndexOf(separator, StringComparison.OrdinalIgnoreCase);
+
+        if (splitIndex < 0)
+        {
+            row.AddChild(new RichTextLabel
+            {
+                Text = clue,
+                StyleClasses = { "Label" },
+            });
+
+            return row;
+        }
+
+        var itemPart = clue[..splitIndex].TrimEnd('.');
+        var areaPart = clue[(splitIndex + separator.Length)..].TrimEnd('.');
+
+        row.AddChild(new RichTextLabel
+        {
+            Text = itemPart,
+            StyleClasses = { "Label" },
+        });
+
+        row.AddChild(new Control
+        {
+            HorizontalExpand = true,
+        });
+
+        row.AddChild(new RichTextLabel
+        {
+            Text = areaPart,
+            StyleClasses = { "Label" },
+        });
+
+        return row;
     }
 }
