@@ -204,6 +204,15 @@
 
 - type: entity
   parent: VehicleTankBase
+  id: VehicleTankTest
+  name: test tank (autodrive)
+  description: A test tank that automatically drives east on spawn.
+  components:
+  - type: RMCVehicleAutopilot
+    direction: 1,0
+
+- type: entity
+  parent: VehicleTankBase
   id: VehicleTank
   components:
   - type: VehicleEnter
