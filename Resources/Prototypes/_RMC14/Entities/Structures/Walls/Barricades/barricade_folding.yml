@@ -14,7 +14,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
     layers:
-    - state: folding
+    - state: DamageOverlay_0
+      map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
+      sprite: _RMC14/Structures/Walls/Barricades/folding_cracks.rsi
     - map: [ "acided" ]
     drawdepth: WallTops
   - type: DirectionalAttackBlocker
@@ -46,6 +48,8 @@
     thresholds: [4, 8, 12]
     damageDivisor: 25
     trackAllDamage: true
-    damageOverlay:
-      sprite: _RMC14/Structures/Walls/Barricades/folding_cracks.rsi
+    overlay: false
+    targetLayers:
+    - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+    damageGroup: "Brute"
   - type: RMCFoldingBarricade
