@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/06/2026 19:18:34
-  entityCount: 681
+  time: 06/17/2026 06:54:55
+  entityCount: 682
 maps: []
 grids:
 - 1
@@ -169,6 +169,8 @@ entities:
     - type: Transform
       pos: 35.5,24.5
       parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: CMAdvFirstAidKitFilled
   entities:
   - uid: 389
@@ -3829,6 +3831,15 @@ entities:
     - type: Transform
       pos: 10.5,13.5
       parent: 1
+- proto: RMCVanWheel
+  entities:
+  - uid: 682
+    components:
+    - type: Transform
+      pos: 2.5,12.5
+      parent: 1
+    - type: HardpointIntegrity
+      integrity: 250
 - proto: RMCVendorCigsElectro
   entities:
   - uid: 679
