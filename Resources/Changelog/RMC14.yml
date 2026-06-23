@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Changed the M2C's firing sound
-    type: Tweak
-  id: 2933
-  time: '2026-02-11T22:32:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9223
 - author: DrSmugleaf
   changes:
   - message: Added remote transfer plasma for Queen while in ovi. It restores 75%
@@ -4569,5 +4562,12 @@
   id: 3432
   time: '2026-06-23T16:14:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9248
+- author: Ian321
+  changes:
+  - message: Requisitions was incorrectly provided with too many CCDP grenades.
+    type: Fix
+  id: 3433
+  time: '2026-06-23T16:17:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10237
 Name: RMC14
 Order: -1
