@@ -1,86 +1,4 @@
 ﻿Entries:
-- author: LeoKarz
-  changes:
-  - message: Added a cursor overlay for selected design and node type for designer
-      hivelord
-    type: Add
-  - message: Changed wall sprite from greater resin surge from thick resin to bone
-      resin for clarity.
-    type: Tweak
-  - message: Fixed construction node infusal message to be for the client only, not
-      everyone.
-    type: Fix
-  - message: You can now stack remote thicken resin actions, allowing you to upgrade
-      your entire screen at once.
-    type: Fix
-  - message: Breaking construction nodes will cancel the wall animation
-    type: Fix
-  id: 2927
-  time: '2026-02-11T08:24:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9189
-- author: Whisper
-  changes:
-  - message: Added guidebook links to designer hivelord entities.
-    type: Add
-  id: 2928
-  time: '2026-02-11T08:25:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9179
-- author: Ian321
-  changes:
-  - message: Hivelord strains now give intel and have a heart.
-    type: Fix
-  id: 2929
-  time: '2026-02-11T10:46:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9215
-- author: Dygon
-  changes:
-  - message: Oppressors can now pull a marine through a weapon mount.
-    type: Fix
-  id: 2930
-  time: '2026-02-11T22:29:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9220
-- author: Dygon
-  changes:
-  - message: The queen no longer has a chance to gib when killed.
-    type: Fix
-  id: 2931
-  time: '2026-02-11T22:30:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9219
-- author: Dygon
-  changes:
-  - message: Fire now only damages resin holes and claymores on a direct hit.
-    type: Fix
-  id: 2932
-  time: '2026-02-11T22:30:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9217
-- author: kleinerstation13
-  changes:
-  - message: Changed the M2C's firing sound
-    type: Tweak
-  id: 2933
-  time: '2026-02-11T22:32:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9223
-- author: DrSmugleaf
-  changes:
-  - message: Added remote transfer plasma for Queen while in ovi. It restores 75%
-      of the target's plasma and costs 400 plasma to use.
-    type: Add
-  - message: Added remote expand weeds for Queen while in ovi. It creates new weeds
-      next to other weeds for 50 plasma, and can turn weeds into weed nodes for 260
-      plasma.
-    type: Add
-  - message: Fixed projectiles including Praetorian tail seize being blocked by HMGs
-      when not directly clicking them.
-    type: Fix
-  - message: Fixed some projectiles having higher accuracy than intended on some targets,
-      such as the M2C bullets.
-    type: Fix
-  - message: Fixed being able to mount onto an HMG without your hands being free.
-      You can still pick up items after mounting.
-    type: Fix
-  id: 2934
-  time: '2026-02-12T01:33:57.417424+00:00'
-  url: null
 - author: kleinerstation13
   changes:
   - message: Added missing locale for sentry and sentry laptop multitool ports
@@ -4579,5 +4497,64 @@
   id: 3426
   time: '2026-06-16T22:57:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10183
+- author: kleinerstation13
+  changes:
+  - message: Fixed the Bobda vending machine bag being meltable and strippable
+    type: Fix
+  id: 3427
+  time: '2026-06-19T00:47:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10111
+- author: MoonlightHollow
+  changes:
+  - message: Update and clean up RCM skills
+    type: Tweak
+  id: 3428
+  time: '2026-06-19T17:21:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9895
+- author: ffxivsidehoes
+  changes:
+  - message: Fixed typo in white M54C's description.
+    type: Fix
+  id: 3429
+  time: '2026-06-20T23:39:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10230
+- author: BarteG44
+  changes:
+  - message: Added tacmap icons for UNMC vehicles
+    type: Add
+  id: 3430
+  time: '2026-06-22T19:23:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10229
+- author: Ian321
+  changes:
+  - message: Vehicle crewman now wake up without being in a squad.
+    type: Tweak
+  id: 3431
+  time: '2026-06-22T19:40:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10212
+- author: Dygon
+  changes:
+  - message: Fixed drones having slightly too much evasion, reducing it by 5(20>15).
+    type: Fix
+  - message: Healer drones can no longer use their "Apply Salve" ability while resting.
+    type: Fix
+  id: 3432
+  time: '2026-06-23T16:14:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9248
+- author: Ian321
+  changes:
+  - message: Requisitions was incorrectly provided with too many CCDP grenades.
+    type: Fix
+  id: 3433
+  time: '2026-06-23T16:17:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10237
+- author: CatAndHats
+  changes:
+  - message: Fixed the damaged deployed MB-6 collapsible cade sprites not aligning
+      correctly
+    type: Fix
+  id: 3434
+  time: '2026-06-23T16:20:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10232
 Name: RMC14
 Order: -1

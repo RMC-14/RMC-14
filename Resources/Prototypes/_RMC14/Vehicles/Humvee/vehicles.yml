@@ -168,6 +168,12 @@
     - offset: 1,-0.1
       radius: 0.45
       interiorCoords: 2.41,-1.35
+  - type: MarineMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
+      state: humvee
 
 - type: entity
   parent: VehicleHumveeBase
@@ -376,3 +382,4 @@
     - offset: 1,-0.1
       radius: 0.5
       interiorCoords: 3.56, -0.42
+
