@@ -23,7 +23,7 @@
           position: TopLeft
           spritePosition: Left
           spriteDisplayMode: FullSprite
-          uIScale: 3
+          uIScale: 1.5
           titlePosition: Above
         background:
           showBackground: false
@@ -33,7 +33,7 @@
           primaryColor: "#a8d6ff"
           font: "Cozette"
           fontSize: 20
-          lineHeight: 48
+          lineHeight: 28
           showSpeakerName: false
         sprite:
           showSpriteBox: false
@@ -42,7 +42,7 @@
           showTitle: true
           title: "ALERT LEVEL"
           titleColor: "#4a9eff"
-          titleFontSize: 40
+          titleFontSize: 28
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -74,7 +74,7 @@
           position: TopLeft
           spritePosition: Left
           spriteDisplayMode: FullSprite
-          uIScale: 3
+          uIScale: 1.5
           titlePosition: Above
         background:
           showBackground: false
@@ -84,7 +84,7 @@
           primaryColor: "#7CFC00"
           font: "Cozette"
           fontSize: 20
-          lineHeight: 48
+          lineHeight: 28
           showSpeakerName: false
         sprite:
           showSpriteBox: false
@@ -93,7 +93,7 @@
           showTitle: true
           title: "ALERT LEVEL: GREEN"
           titleColor: "#7CFC00"
-          titleFontSize: 40
+          titleFontSize: 28
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -129,7 +129,7 @@
           position: TopLeft
           spritePosition: Left
           spriteDisplayMode: FullSprite
-          uIScale: 3
+          uIScale: 1.5
           titlePosition: Above
         background:
           showBackground: false
@@ -139,7 +139,7 @@
           primaryColor: "#1E90FF"
           font: "Cozette"
           fontSize: 20
-          lineHeight: 48
+          lineHeight: 28
           showSpeakerName: false
         sprite:
           showSpriteBox: false
@@ -148,7 +148,7 @@
           showTitle: true
           title: "ALERT LEVEL: BLUE"
           titleColor: "#1E90FF"
-          titleFontSize: 40
+          titleFontSize: 28
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -184,7 +184,7 @@
           position: TopLeft
           spritePosition: Left
           spriteDisplayMode: FullSprite
-          uIScale: 3
+          uIScale: 1.5
           titlePosition: Above
         background:
           showBackground: false
@@ -194,7 +194,7 @@
           primaryColor: "#FF0000"
           font: "Cozette"
           fontSize: 20
-          lineHeight: 48
+          lineHeight: 28
           showSpeakerName: false
         sprite:
           showSpriteBox: false
@@ -203,7 +203,7 @@
           showTitle: true
           title: "ALERT LEVEL: RED"
           titleColor: "#FF0000"
-          titleFontSize: 40
+          titleFontSize: 28
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -239,7 +239,7 @@
           position: TopLeft
           spritePosition: Left
           spriteDisplayMode: FullSprite
-          uIScale: 3
+          uIScale: 1.5
           titlePosition: Above
         background:
           showBackground: false
@@ -249,7 +249,7 @@
           primaryColor: "#8B0000"
           font: "Cozette"
           fontSize: 20
-          lineHeight: 48
+          lineHeight: 28
           showSpeakerName: false
         sprite:
           showSpriteBox: false
@@ -258,7 +258,7 @@
           showTitle: true
           title: "ALERT LEVEL: DELTA"
           titleColor: "#8B0000"
-          titleFontSize: 40
+          titleFontSize: 28
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2

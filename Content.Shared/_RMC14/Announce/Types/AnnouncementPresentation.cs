@@ -12,28 +12,28 @@ public sealed partial class AnnouncementPresentation
     private AnnouncementStyle style = new();
 
     [DataField]
-    public bool ShowSprite { get; set; } = true;
+    public bool ShowSprite { get; private set; } = true;
 
     [DataField]
-    public string? DecalRsi { get; set; }
+    public string? DecalRsi { get; private set; }
 
     [DataField]
-    public string? DecalState { get; set; }
+    public string? DecalState { get; private set; }
 
     [DataField]
-    public AnnouncementDecalPlacement? DecalPlacement { get; set; }
+    public AnnouncementDecalPlacement? DecalPlacement { get; private set; }
 
     [DataField]
-    public float DecalScale { get; set; } = 4f;
+    public float DecalScale { get; private set; } = 4f;
 
     [DataField]
-    public float DecalAlpha { get; set; } = 1f;
+    public float DecalAlpha { get; private set; } = 1f;
 
     [DataField]
-    public Vector2 DecalOffset { get; set; } = Vector2.Zero;
+    public Vector2 DecalOffset { get; private set; } = Vector2.Zero;
 
     [DataField]
-    public Vector2 TextOffset { get; set; } = Vector2.Zero;
+    public Vector2 TextOffset { get; private set; } = Vector2.Zero;
 
     public AnnouncementStyle Style => style ??= new AnnouncementStyle();
 }

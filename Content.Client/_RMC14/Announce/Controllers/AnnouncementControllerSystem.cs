@@ -11,9 +11,9 @@ namespace Content.Client._RMC14.Announce;
 
 public sealed class AnnouncementControllerSystem : EntitySystem
 {
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
     private AnnouncementDisplayPreference _preference;
     private Dictionary<string, AnnouncementDisplayPreference> _overrides = new();

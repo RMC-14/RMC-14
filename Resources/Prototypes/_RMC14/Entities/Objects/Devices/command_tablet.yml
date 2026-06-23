@@ -28,7 +28,6 @@
     canCreateEcho: false
     canGiveMedals: true
     canInitiateEvac: true
-    sendAnnouncementOverlay: false
   - type: TacticalMapComputer
   - type: MarineControlComputer
     canPrintCommendations: false

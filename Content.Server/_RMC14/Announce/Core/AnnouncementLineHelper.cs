@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Content.Server._RMC14.Announce.Core;
 
 internal static class AnnouncementLineHelper
@@ -11,6 +13,8 @@ internal static class AnnouncementLineHelper
         if (!normalized.Contains('\n') && normalized.Contains("\\n"))
             normalized = normalized.Replace("\\n", "\n");
 
-        return normalized.Split('\n');
+        return normalized.Split('\n')
+            .Where(line => !string.IsNullOrWhiteSpace(line))
+            .ToArray();
     }
 }
