@@ -46,7 +46,7 @@
         acts: [ "Destruction" ]
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 25
+    damageDivisor: 21.875
     trackAllDamage: true
     overlay: false
     targetLayers:
