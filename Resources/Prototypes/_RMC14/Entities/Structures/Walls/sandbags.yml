@@ -54,6 +54,7 @@
     overlay: false
     targetLayers:
     - "enum.RMCDamageOverlayVisuals.DamageOverlay"
+    hideIfZero: false
     damageGroup: "Brute"
   - type: Barbed
     thornsDamage:

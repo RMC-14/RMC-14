@@ -115,6 +115,11 @@ public sealed partial class DamageVisualsComponent : Component
     /// </summary>
     [DataField("damageOverlay")] public  DamageVisualizerSprite? DamageOverlay;
 
+    /// <summary>
+    /// Only applies if overlay is off
+    /// </summary>
+    [DataField] public bool HideIfZero = true; //RMC14
+
     public readonly List<Enum> TargetLayerMapKeys = new();
     public bool Disabled = false;
     public bool Valid = true;

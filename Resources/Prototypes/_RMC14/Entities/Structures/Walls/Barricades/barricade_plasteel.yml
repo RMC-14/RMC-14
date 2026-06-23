@@ -73,6 +73,7 @@
     targetLayers:
     - "enum.RMCDamageOverlayVisuals.DamageOverlay"
     damageGroup: "Brute"
+    hideIfZero: false
   - type: Barbed
     thornsDamage:
       types:
@@ -212,6 +213,7 @@
     targetLayers:
     - "enum.RMCDamageOverlayVisuals.DamageOverlay"
     damageGroup: "Brute"
+    hideIfZero: false
   - type: RMCFoldingBarricadeLinking
     linkable: true
     connectionStates:

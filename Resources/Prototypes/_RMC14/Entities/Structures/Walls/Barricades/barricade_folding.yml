@@ -52,4 +52,5 @@
     targetLayers:
     - "enum.RMCDamageOverlayVisuals.DamageOverlay"
     damageGroup: "Brute"
+    hideIfZero: false
   - type: RMCFoldingBarricade

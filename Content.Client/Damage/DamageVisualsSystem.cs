@@ -614,7 +614,8 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
                 UpdateDamageLayerState(spriteEnt,
                     spriteLayer,
                     $"{layerState}",
-                    threshold);
+                    threshold,
+                    true);
             }
         }
         else if (!damageVisComp.Overlay)
@@ -625,7 +626,8 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
             UpdateDamageLayerState(spriteEnt,
                 spriteLayer,
                 $"{layerState}",
-                threshold);
+                threshold,
+                damageVisComp.HideIfZero);
         }
     }
 
@@ -648,7 +650,8 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
                     (entity, spriteComponent),
                     spriteLayer,
                     $"{layerState}_{damageGroup}",
-                    threshold);
+                    threshold,
+                    true);
             }
         }
         else if (!damageVisComp.Overlay)
@@ -660,7 +663,8 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
                 (entity, spriteComponent),
                 spriteLayer,
                 $"{layerState}_{damageGroup}",
-                threshold);
+                threshold,
+                damageVisComp.HideIfZero);
         }
     }
 
@@ -674,7 +678,8 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
         UpdateDamageLayerState(spriteEnt,
             spriteLayer,
             $"DamageOverlay",
-            threshold);
+            threshold,
+            true);
     }
 
     /// <summary>
@@ -695,7 +700,8 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
                     (entity, spriteComponent),
                     spriteLayer,
                     $"DamageOverlay_{damageGroup}",
-                    threshold);
+                    threshold,
+                    true);
             }
         }
     }
@@ -706,9 +712,9 @@ public sealed class DamageVisualsSystem : VisualizerSystem<DamageVisualsComponen
     ///     function calls it), and what threshold
     ///     was passed into it.
     /// </summary>
-    private void UpdateDamageLayerState(Entity<SpriteComponent> spriteEnt, int spriteLayer, string statePrefix, FixedPoint2 threshold)
+    private void UpdateDamageLayerState(Entity<SpriteComponent> spriteEnt, int spriteLayer, string statePrefix, FixedPoint2 threshold, bool hideIfZero)
     {
-        if (threshold == 0)
+        if (threshold == 0 && hideIfZero)
         {
             SpriteSystem.LayerSetVisible(spriteEnt.AsNullable(), spriteLayer, false);
         }
