@@ -31,6 +31,13 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: rmc-job-prefix-army-reservist
+#    - type: TacticalMapIcon # TODO RMC14: tacmap of diff factions mechanic
+#      icon:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: spp_pvt
+#      background:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: background_spp
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear

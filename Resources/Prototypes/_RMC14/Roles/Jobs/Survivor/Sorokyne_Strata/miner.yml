@@ -21,6 +21,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+#    - type: TacticalMapIcon # TODO RMC14: tacmap of diff factions mechanic
+#      icon:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: spp_civ
+#      background:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: background_spp_civilian
 
 - type: startingGear
   parent: RMCGearSurvivorBase

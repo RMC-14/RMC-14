@@ -1,4 +1,4 @@
-- type: job # Basically same as NV version, should that one just be moved to multi-map?
+- type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorSolarisILRCPeacekeeper
   name: cm-job-name-survivor-un-peacekeeper
@@ -20,6 +20,13 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetILRCPeacekeeper
+#    - type: TacticalMapIcon # TODO RMC14: tacmap of diff factions mechanic
+#      icon:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: peacekeeper
+#      background:
+#        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+#        state: background_ua
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
