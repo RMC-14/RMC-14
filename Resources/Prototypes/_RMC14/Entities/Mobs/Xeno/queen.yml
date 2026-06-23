@@ -319,6 +319,10 @@
       state: alive
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
       sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
   - type: XenoStrain
@@ -341,6 +345,10 @@
       state: alive
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
       sprite: _RMC14/Mobs/Xenonids/Extras/magicalgirl_queen/magical_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
   - type: XenoStrain
