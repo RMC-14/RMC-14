@@ -296,9 +296,10 @@
   components:
   - type: RMCActionOrder
     id: CMXenoQueen
-  # - type: XenoEvolution #can be enabled for events like april fools.
-  #   strains:
-  #   - RMCXenoQueenMaid
+    #  - type: XenoEvolution #can be enabled for events like april fools.
+    #    strains:
+    #    - RMCXenoQueenMaid
+    #    - RMCXenoQueenMagical
 
 - type: entity
   id: XenoLeaderPheromoneRelay
@@ -327,6 +328,25 @@
   - type: OwOAccent
   - type: Speech
     speechSounds: Cat
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenMagical
+  suffix: Magical Girl Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/magicalgirl_queen/magical_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/magicalgirl_queen/magical_ovipositor.rsi
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoStrain
+    name: rmc-xeno-magicalgirl-name
+    description: rmc-xeno-magicalgirl-description
+    popup: rmc-xeno-magicalgirl-popup
 
 - type: entity
   parent: StationAiHolo
