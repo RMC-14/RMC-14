@@ -82,9 +82,6 @@
     addSkills:
       RMCSkillEngineer: 1
       RMCSkillConstruction: 1
-    skillCap:
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
-      RMCSkillConstruction: 1
     bypassLimit: true
 
 # gives jtac skill
@@ -114,12 +111,11 @@
     state: pamphlet_spotter
   - type: SkillPamphlet
     bypassSkill: true
+    bypassLimit: true
     addComps:
     - type: SpotterWhitelist
     addSkills:
       RMCSkillJtac: 1
-    skillCap:
-      RMCSkillJtac: 2 # RMC14: In case they read another one first.
     giveJobTitle: rmc-job-name-spotter
     givePrefix: rmc-job-prefix-spotter
     isAppendPrefix: false
@@ -162,8 +158,6 @@
     state: pamphlet_jtac
   - type: SkillPamphlet
     addSkills:
-      RMCSkillPolice: 1
-    skillCap:
       RMCSkillPolice: 1
     bypassLimit: true
 
@@ -211,10 +205,9 @@
     state: pamphlet_loader
   - type: SkillPamphlet
     bypassSkill: true
+    bypassLimit: true
     addSkills:
       RMCSkillEngineer: 1
-    skillCap:
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
     giveJobTitle: rmc-job-name-loader
     givePrefix: rmc-job-prefix-loader
     isAppendPrefix: false
@@ -240,11 +233,9 @@
     state: pamphlet_mortar
   - type: SkillPamphlet
     bypassSkill: true
+    bypassLimit: true
     addSkills:
       RMCSkillEngineer: 1
-      RMCSkillJtac: 2
-    skillCap:
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
       RMCSkillJtac: 2
     giveJobTitle: rmc-job-name-mortar-operator
     givePrefix: rmc-job-prefix-mortar-operator
@@ -275,8 +266,7 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillEngineer: 1
-    skillCap:
-      RMCSkillEngineer: 2
+    bypassSkill: true
     bypassLimit: true
 
 - type: entity
@@ -290,8 +280,6 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillVehicles: 1
-    skillCap:
-      RMCSkillVehicles: 1
     bypassLimit: true
 
 - type: entity
@@ -302,8 +290,6 @@
   components:
   - type: SkillPamphlet
     addSkills:
-      RMCSkillOverwatch: 1
-    skillCap:
       RMCSkillOverwatch: 1
     bypassLimit: true
 
@@ -316,13 +302,10 @@
   - type: Sprite
     state: pamphlet_k9_handler
   - type: SkillPamphlet
-    bypassSkill: true
+    bypassLimit: true
     addSkills:
       RMCSkillJtac: 1
       RMCSkillEngineer: 1
-    skillCap:
-      RMCSkillJtac: 2     # RMC14: In case they read another one first.
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
     # TODO: custom icon and title dependent on if they are a medic or MP
     jobWhitelists:
     - popup: rmc-pamphlets-k9-warning
@@ -341,9 +324,6 @@
   - type: SkillPamphlet
     # TODO: should probably give and icon and title
     addSkills:
-      RMCSkillVehicles: 3
-      RMCSkillEngineer: 2
-    skillCap:
       RMCSkillVehicles: 3
       RMCSkillEngineer: 2
     bypassLimit: true
@@ -376,6 +356,7 @@
     state: pamphlet_honorguard
   - type: SkillPamphlet
     bypassSkill: true
+    bypassLimit: true
     giveJobTitle: rmc-job-name-honor-guard
     givePrefix: rmc-job-prefix-honor-guard
     isAppendPrefix: false
