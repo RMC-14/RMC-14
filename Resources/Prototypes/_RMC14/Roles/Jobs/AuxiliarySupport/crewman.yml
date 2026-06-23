@@ -49,8 +49,8 @@
         state: vc
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_intel
-  hidden: true #TODO RMC14 - Remove when vehicles are fully added.
+        state: background_shipside
+  hidden: true
 
 - type: startingGear
   id: CMGearVehicleCrewman
