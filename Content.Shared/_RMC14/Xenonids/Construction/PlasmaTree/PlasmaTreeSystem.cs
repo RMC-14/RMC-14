@@ -86,7 +86,7 @@ public sealed class PlasmaTreeSystem : EntitySystem
             BreakOnMove = true,
             MovementThreshold = 0.5f,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            TargetEffect = "RMCEffectHealBusy",
+            TargetEffect = "RMCEffectHealPlasma",
         };
 
         if (_doafter.TryStartDoAfter(recover, out var id))
