@@ -440,15 +440,6 @@ public sealed class HardpointSlotSystem : EntitySystem
             return;
         }
 
-        if (HasComp<HardpointNoRemoveComponent>(installed))
-        {
-            var error = Loc.GetString("rmc-hardpoint-remove-blocked");
-            _popup.PopupEntity(error, location.Owner, user);
-            SetError(error);
-            RefreshUi();
-            return;
-        }
-
         if (location.State.PendingInserts.ContainsKey(location.Definition.Id) ||
             location.State.CompletingInserts.Contains(location.Definition.Id))
         {
