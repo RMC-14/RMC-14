@@ -83,7 +83,7 @@
       RMCSkillEngineer: 1
       RMCSkillConstruction: 1
     skillCap:
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
+      RMCSkillEngineer: 1
       RMCSkillConstruction: 1
     bypassLimit: true
 
@@ -214,7 +214,7 @@
     addSkills:
       RMCSkillEngineer: 1
     skillCap:
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
+      RMCSkillEngineer: 1
     giveJobTitle: rmc-job-name-loader
     givePrefix: rmc-job-prefix-loader
     isAppendPrefix: false
@@ -244,7 +244,7 @@
       RMCSkillEngineer: 1
       RMCSkillJtac: 2
     skillCap:
-      RMCSkillEngineer: 2 # RMC14: In case they read another one first.
+      RMCSkillEngineer: 1
       RMCSkillJtac: 2
     giveJobTitle: rmc-job-name-mortar-operator
     givePrefix: rmc-job-prefix-mortar-operator
@@ -276,7 +276,7 @@
     addSkills:
       RMCSkillEngineer: 1
     skillCap:
-      RMCSkillEngineer: 2
+      RMCSkillEngineer: 1
     bypassLimit: true
 
 - type: entity
