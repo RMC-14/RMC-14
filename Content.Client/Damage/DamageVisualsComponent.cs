@@ -116,7 +116,7 @@ public sealed partial class DamageVisualsComponent : Component
     [DataField("damageOverlay")] public  DamageVisualizerSprite? DamageOverlay;
 
     /// <summary>
-    /// Only applies if overlay is off
+    /// Only applies if overlay is off - requires a zeroth sprite to be defined to work properly
     /// </summary>
     [DataField] public bool HideIfZero = true; //RMC14
 
