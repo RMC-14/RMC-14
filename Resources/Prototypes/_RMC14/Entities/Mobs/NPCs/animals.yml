@@ -452,6 +452,23 @@
     speciesId: fox 
   - type: DropHatOnDeadOrCrit
 
+- type: entity
+  parent: [RMCSimpleMob, MobMothroach]
+  id: RMCMobMothroach
+  name: Mothroach
+  suffix: RMC
+  components:
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: GhostRole
+    prob: 0
+  - type: Inventory
+    templateId: RMCMothRoach    
+    speciesId: hamster
+  - type: DropHatOnDeadOrCrit
+
 # Spawners
 - type: entity
   parent: SpawnMobMouse

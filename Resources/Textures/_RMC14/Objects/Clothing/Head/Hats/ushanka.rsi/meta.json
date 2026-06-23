@@ -43,6 +43,14 @@
     },
     {
       "name": "flipped-equipped-HELMET-cat",
+      "directions": 4    
+    },
+    {
+      "name": "equipped-HELMET-hamster",
+      "directions": 4    
+    },
+    {
+      "name": "flipped-equipped-HELMET-hamster",
       "directions": 4
     }
   ]

@@ -206,3 +206,6 @@
 
 - type: Tag
   id: RMCCatWearable
+
+- type: Tag
+  id: RMCMothRoachWearable

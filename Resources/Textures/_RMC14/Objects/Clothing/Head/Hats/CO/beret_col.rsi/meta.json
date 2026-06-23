@@ -25,6 +25,10 @@
     {
       "name": "equipped-HELMET-cat",
       "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-hamster",
+      "directions": 4
     }
   ]
 }
