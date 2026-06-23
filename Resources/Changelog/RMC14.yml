@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added remote transfer plasma for Queen while in ovi. It restores 75%
-      of the target's plasma and costs 400 plasma to use.
-    type: Add
-  - message: Added remote expand weeds for Queen while in ovi. It creates new weeds
-      next to other weeds for 50 plasma, and can turn weeds into weed nodes for 260
-      plasma.
-    type: Add
-  - message: Fixed projectiles including Praetorian tail seize being blocked by HMGs
-      when not directly clicking them.
-    type: Fix
-  - message: Fixed some projectiles having higher accuracy than intended on some targets,
-      such as the M2C bullets.
-    type: Fix
-  - message: Fixed being able to mount onto an HMG without your hands being free.
-      You can still pick up items after mounting.
-    type: Fix
-  id: 2934
-  time: '2026-02-12T01:33:57.417424+00:00'
-  url: null
 - author: kleinerstation13
   changes:
   - message: Added missing locale for sentry and sentry laptop multitool ports
@@ -4569,5 +4548,13 @@
   id: 3433
   time: '2026-06-23T16:17:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10237
+- author: CatAndHats
+  changes:
+  - message: Fixed the damaged deployed MB-6 collapsible cade sprites not aligning
+      correctly
+    type: Fix
+  id: 3434
+  time: '2026-06-23T16:20:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10232
 Name: RMC14
 Order: -1
