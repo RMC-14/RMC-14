@@ -428,6 +428,7 @@
     layers:
     - state: folding_metal
       map: ["enum.DoorVisualLayers.Base"]
+      visible: false
     - state: DamageOverlay_0
       map: [ "enum.RMCDamageOverlayVisuals.DamageOverlay" ]
       sprite: _RMC14/Structures/Walls/Barricades/folding_metal_cracks.rsi
