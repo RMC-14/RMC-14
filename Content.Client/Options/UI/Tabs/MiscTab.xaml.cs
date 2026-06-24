@@ -64,9 +64,8 @@ public sealed partial class MiscTab : Control
         Control.AddOptionCheckBox(CCVars.ChatFancyNameBackground, FancyNameBackgroundsCheckBox);
         Control.AddOptionCheckBox(CCVars.StaticStorageUI, StaticStorageUI);
 
-        // RMC14 - center screen chat preview
-        Control.AddOptionCheckBox(RMCCVars.RMCChatPreview, RMCChatPreview);
         // RMC14
+        Control.AddOptionCheckBox(RMCCVars.RMCChatPreview, RMCChatPreview);
         Control.AddOptionCheckBox(RMCCVars.RMCAutoPunctuate, RMCAutoPunctuate);
         Control.AddOptionCheckBox(RMCCVars.RMCAutoEjectMagazines, RMCAutoEjectMagazines);
         Control.AddOptionCheckBox(RMCCVars.RMCDamageYourself, RMCDamageYourself);
