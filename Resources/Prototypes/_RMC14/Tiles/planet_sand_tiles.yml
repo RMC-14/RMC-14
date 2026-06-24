@@ -5,6 +5,7 @@
   parent: CMPlanetBase
   id: RMCPlanetSandBase
   name: tiles-rmc-planet-auto-sand
+  rmcDigType: Sand
 
 # Sand_0
 
@@ -18,6 +19,8 @@
   - 1.0
   - 1.0
   - 1.0
+  rmcTerrainLayerSet: Sand
+  rmcTerrainLayer: 0
 
 # Sand_1
 
@@ -45,6 +48,8 @@
     East: /Textures/_RMC14/Tiles/planet/auto_sand/sand_double_edge.png
     North: /Textures/_RMC14/Tiles/planet/auto_sand/sand_double_edge.png
     West: /Textures/_RMC14/Tiles/planet/auto_sand/sand_double_edge.png
+  rmcTerrainLayerSet: Sand
+  rmcTerrainLayer: 1
 
 - type: tile
   parent: RMCPlanetSand1
@@ -65,3 +70,5 @@
   - 1.0
   - 1.0
   - 1.0
+  rmcTerrainLayerSet: VaraderoSand
+  rmcTerrainLayer: 0

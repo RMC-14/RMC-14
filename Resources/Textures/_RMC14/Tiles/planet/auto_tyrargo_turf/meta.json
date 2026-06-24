@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/icons/turf/floors/auto_tyrargo_turf.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "grass_0"
+    },
+    {
+      "name": "grass_1"
+    },
+    {
+      "name": "grass_0_mud"
+    },
+    {
+      "name": "grass_0_mud_alt"
+    },
+    {
+      "name": "grass_single_edge_se"
+    },
+    {
+      "name": "grass_single_edge_sw"
+    },
+    {
+      "name": "grass_single_edge_ne"
+    },
+    {
+      "name": "grass_single_edge_nw"
+    },
+    {
+      "name": "grass_double_edge_s"
+    },
+    {
+      "name": "grass_double_edge_n"
+    },
+    {
+      "name": "grass_double_edge_e"
+    },
+    {
+      "name": "grass_double_edge_w"
+    }
+  ]
+}

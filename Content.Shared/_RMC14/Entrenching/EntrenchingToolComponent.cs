@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.Audio;
+using Content.Shared._RMC14.Terrain;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
@@ -13,13 +14,19 @@ public sealed partial class EntrenchingToolComponent : Component
     public TimeSpan DigDelay = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan FillDelay = TimeSpan.FromSeconds(3);
+    public float[] DigDelaySkillMultipliers = [1f, 1f, 1f, 0.25f];
 
     [DataField, AutoNetworkedField]
-    public int LayersPerDig = 5;
+    public TimeSpan FillDelay = TimeSpan.FromSeconds(2.5);
+
+    [DataField, AutoNetworkedField]
+    public int DigBatchSize = 5;
 
     [DataField, AutoNetworkedField]
     public int TotalLayers;
+
+    [DataField, AutoNetworkedField]
+    public RMCTerrainMaterial DigMaterial = RMCTerrainMaterial.None;
 
     [AutoNetworkedField]
     public EntityCoordinates LastDigLocation;

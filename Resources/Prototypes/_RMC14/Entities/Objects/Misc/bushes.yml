@@ -4,6 +4,7 @@
   abstract: true
   name: bush
   components:
+  - type: RMCTerrainClearable
   - type: SpriteFade
   - type: Clickable
   - type: Sprite

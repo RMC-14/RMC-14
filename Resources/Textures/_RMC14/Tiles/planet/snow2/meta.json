@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b26246cf7710ac6f2c2e4eddf94a49eb47f40800/icons/turf/floors/snow2.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "snow_0"
+    },
+    {
+      "name": "snow_1"
+    },
+    {
+      "name": "snow_2"
+    },
+    {
+      "name": "snow_3"
+    },
+    {
+      "name": "snow_4"
+    },
+    {
+      "name": "snow_b_0"
+    },
+    {
+      "name": "snow_b_1"
+    },
+    {
+      "name": "snow_b_2"
+    },
+    {
+      "name": "snow_b_3"
+    },
+    {
+      "name": "snow_b_4"
+    },
+    {
+      "name": "snow_single_edge_se"
+    },
+    {
+      "name": "snow_single_edge_sw"
+    },
+    {
+      "name": "snow_single_edge_ne"
+    },
+    {
+      "name": "snow_single_edge_nw"
+    },
+    {
+      "name": "snow_double_edge_s"
+    },
+    {
+      "name": "snow_double_edge_n"
+    },
+    {
+      "name": "snow_double_edge_e"
+    },
+    {
+      "name": "snow_double_edge_w"
+    },
+    {
+      "name": "snow_b_single_edge_se"
+    },
+    {
+      "name": "snow_b_single_edge_sw"
+    },
+    {
+      "name": "snow_b_single_edge_ne"
+    },
+    {
+      "name": "snow_b_single_edge_nw"
+    },
+    {
+      "name": "snow_b_double_edge_s"
+    },
+    {
+      "name": "snow_b_double_edge_n"
+    },
+    {
+      "name": "snow_b_double_edge_e"
+    },
+    {
+      "name": "snow_b_double_edge_w"
+    }
+  ]
+}
