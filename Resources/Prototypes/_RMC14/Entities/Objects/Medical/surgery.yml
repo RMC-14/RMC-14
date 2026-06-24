@@ -220,6 +220,8 @@
   name: prototype laser scalpel
   description: A scalpel augmented with a directed laser, for controlling bleeding as the incision is made. Also functions as a cautery. This one looks like an unreliable early model.
   components:
+  - type: RMCLaserScalpel
+  - type: CMCautery
   - type: Sprite
     layers:
     - state: scalpel_laser
@@ -289,19 +291,18 @@
   components:
   - type: Sprite
     state: pict_system
+    # as a note for future developers, the pict system doesnt actually do any cauterisation, despite the description. according to the cm13 code, its just a shit scalpel.
 
 # - Manager
 - type: entity
   parent: CMScalpel
   id: CMScalpelManager
   name: incision management system
-  description: A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps.
+  description: A true extension of the surgeon's body, this marvel completely prepares an incision allowing for the efficient commencement of therapeutic steps.
   components:
   - type: RMCScalpelManager
   - type: Sprite
     state: scalpel_manager
-
-
 
 # Circular saw
 - type: entity

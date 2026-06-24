@@ -233,6 +233,21 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
     state: scalpel_manager
-  - type: CMSurgeryStepBleedEffect
-    damage: 10
+  - type: CMSurgeryStepEmoteEffect
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryStepOpenIncisionWithLaserScalpel
+  name: Open incision with a Laser Scalpel
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - type: RMCLaserScalpel
+    add:
+    - type: CMIncisionOpen
+    - type: CMBleedersClamped
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: scalpel_laser
   - type: CMSurgeryStepEmoteEffect

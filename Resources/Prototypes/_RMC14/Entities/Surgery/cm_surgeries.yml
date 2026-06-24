@@ -78,6 +78,15 @@
   name: Open Incision with IMS
   components:
   - type: CMSurgery
-    priority: -1
     steps:
     - RMCSurgeryStepOpenIncisionWithIMS
+
+- type: entity
+  parent: CMSurgeryBase
+  id: RMCSurgeryOpenIncisionWithLaserScapel
+  name: Open Incision with Laser Scalpel
+  components:
+  - type: CMSurgery
+    steps:
+    - RMCSurgeryStepOpenIncisionWithLaserScalpel
+    - CMSurgeryStepRetractSkin

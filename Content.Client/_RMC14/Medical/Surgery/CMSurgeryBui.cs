@@ -316,26 +316,20 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
     private EntProtoId? GetVisibleSurgeryId(EntProtoId surgeryId)
     {
-        if (surgeryId == "RMCSurgeryOpenIncisionWithIMS")
+        var hasIMS = HasOpenIncisionToolInHand(OpenIncisionToolType.IMS);
+        var hasLaserScalpel = HasOpenIncisionToolInHand(OpenIncisionToolType.LaserScalpel);
+
+        return surgeryId switch
         {
-            if (HasIMSScalpelInHand())
-                return surgeryId;
-
-            return null;
-        }
-
-        if (surgeryId != "CMSurgeryOpenIncision")
-            return surgeryId;
-
-        if (HasIMSScalpelInHand())
-        {
-            return "RMCSurgeryOpenIncisionWithIMS";
-        }
-
-        return surgeryId;
+            var id when id == "RMCSurgeryOpenIncisionWithIMS" => hasIMS ? surgeryId : (EntProtoId?) null,
+            var id when id == "RMCSurgeryOpenIncisionWithLaserScapel" => !hasIMS && hasLaserScalpel ? surgeryId : (EntProtoId?) null,
+            var id when id == "CMSurgeryOpenIncision" && hasIMS => "RMCSurgeryOpenIncisionWithIMS",
+            var id when id == "CMSurgeryOpenIncision" && hasLaserScalpel => "RMCSurgeryOpenIncisionWithLaserScapel",
+            _ => surgeryId,
+        };
     }
 
-    private bool HasIMSScalpelInHand()
+    private bool HasOpenIncisionToolInHand(OpenIncisionToolType toolType)
     {
         if (_player.LocalEntity is not { } player ||
             !_entities.TryGetComponent(player, out HandsComponent? hands))
@@ -343,13 +337,13 @@ public sealed class CMSurgeryBui : BoundUserInterface
             return false;
         }
 
-        foreach (var held in _hands.EnumerateHeld((player, hands)))
+        var held = _hands.EnumerateHeld((player, hands));
+        return toolType switch
         {
-            if (_entities.HasComponent<RMCScalpelManagerComponent>(held))
-                return true;
-        }
-
-        return false;
+            OpenIncisionToolType.IMS => held.Any(uid => _entities.HasComponent<RMCScalpelManagerComponent>(uid)),
+            OpenIncisionToolType.LaserScalpel => held.Any(uid => _entities.HasComponent<RMCLaserScalpelComponent>(uid)),
+            _ => false,
+        };
     }
 
     private void RefreshSurgeryChoicesIfToolStateChanged()
@@ -541,5 +535,11 @@ public sealed class CMSurgeryBui : BoundUserInterface
         Next,
         Complete,
         Incomplete,
+    }
+
+    private enum OpenIncisionToolType
+    {
+        IMS,
+        LaserScalpel,
     }
 }
