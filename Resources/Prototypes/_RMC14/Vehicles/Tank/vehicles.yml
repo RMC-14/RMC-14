@@ -186,7 +186,6 @@
     slotCount: 1
   - type: HardpointIntegrity
     maxIntegrity: 1000
-    repairFuelCost: 20
     bypassEntryOnZero: true
   - type: Appearance
   - type: VehicleEnter
@@ -218,6 +217,12 @@
     - offset: 0,2
       radius: 1
       interiorCoords: 0.5,-1
+  - type: MarineMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
+      state: tank
 
 - type: entity
   parent: VehicleTankBase

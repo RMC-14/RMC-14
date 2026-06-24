@@ -546,7 +546,8 @@ public sealed class VehicleTurretSystem : EntitySystem
         var target = turret.StabilizedRotation
             ? (turret.TargetRotation - vehicleRot).Reduced()
             : turret.TargetRotation;
-        if (turret.RotationSpeed <= 0f)
+
+        if (turret.StabilizedRotation || turret.RotationSpeed <= 0f)
         {
             if (turret.WorldRotation != target)
             {
