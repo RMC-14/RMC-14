@@ -14,7 +14,7 @@
   parent: RMCPropHanddrill
   id: RMCPropJackhammer
   name: sonic jackhammer
-  description: Cracks rocks with sonic blasts, perfect for killing cave lizards
+  description: Cracks rocks with sonic blasts, perfect for killing cave lizards.
   components:
   - type: Sprite
     state: jackhammer
