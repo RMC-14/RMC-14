@@ -110,6 +110,11 @@
     color: orange
     netsync: false
   - type: ItemTogglePointLight
+  - type: RMCSurgeryTool
+    requiresHotCautery: true
+    toolTypes:
+    - kind: Cautery
+      quality: BadSubstitute
   - type: Appearance
   - type: IgnitionSource
     temperature: 700

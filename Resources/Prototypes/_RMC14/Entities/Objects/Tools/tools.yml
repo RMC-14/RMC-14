@@ -40,6 +40,10 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 75
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: BoneGel
+      quality: Substitute
 
 - type: entity
   parent: Wirecutter
@@ -80,7 +84,11 @@
     - Suitstorage
   - type: PhysicalComposition
     materialComposition:
-      CMSteel: 80
+      CMSteel: 80  
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Hemostat
+      quality: Substitute
 
 - type: entity
   parent: Wrench
@@ -118,6 +126,10 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 150
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Retractor
+      quality: Substitute
 
 - type: entity
   parent: Multitool
@@ -251,6 +263,10 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 50
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: Retractor
+      quality: Substitute
 
 - type: entity
   parent: CMCrowbar
