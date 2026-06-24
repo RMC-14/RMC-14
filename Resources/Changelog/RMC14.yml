@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: LeoKarz
-  changes:
-  - message: Designer hivelord can now build plasma trees!
-    type: Fix
-  - message: Design nodes are visibile through walls to xenos
-    type: Tweak
-  id: 2936
-  time: '2026-02-12T01:34:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9226
 - author: Ian321
   changes:
   - message: You can now always extinguish yourself with the under-barrel extinguisher.
@@ -4557,5 +4548,13 @@
   id: 3435
   time: '2026-06-24T03:39:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10225
+- author: Vermidia
+  changes:
+  - message: Changed Vehicle Crewman icon to better fit the rest of the auxiliary
+      support department.
+    type: Tweak
+  id: 3436
+  time: '2026-06-24T12:48:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10272
 Name: RMC14
 Order: -1
