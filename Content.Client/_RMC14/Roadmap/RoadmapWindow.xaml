@@ -100,7 +100,7 @@
                 </BoxContainer>
                 <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Upcoming" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="UNS Athena" Text="An expanded and improved ship map for the ." />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="UNS Athena" Text="An expanded and improved ship map for the marines." />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Synthetics" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="ARES" Text="Shipside AI with its own room that you need an access ticket to get into." />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Emergency response teams" Text="Factions that randomly spawn, are called to the Almayer through a distress signal sent by CIC, or spawned by admins. Each has their own objectives" />
