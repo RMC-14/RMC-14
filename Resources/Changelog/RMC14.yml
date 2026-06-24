@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added missing locale for sentry and sentry laptop multitool ports
-    type: Fix
-  id: 2935
-  time: '2026-02-12T01:35:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9224
 - author: LeoKarz
   changes:
   - message: Designer hivelord can now build plasma trees!
@@ -4556,5 +4549,13 @@
   id: 3434
   time: '2026-06-23T16:20:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10232
+- author: IceNoobXD
+  changes:
+  - message: Fixed fiorina having no APCs in a lot of areas and added a few new areas
+      to replace existing once!
+    type: Fix
+  id: 3435
+  time: '2026-06-24T03:39:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10225
 Name: RMC14
 Order: -1
