@@ -622,7 +622,7 @@ public sealed class SquadSystem : EntitySystem
         RaiseLocalEvent(marine, ref ev);
 
         var title = $"{ev.SquadName} {ev.RoleName}".Trim();
-        if (title !=string.Empty)
+        if (title != string.Empty)
             MarineSetTitle(marine, title);
     }
 
