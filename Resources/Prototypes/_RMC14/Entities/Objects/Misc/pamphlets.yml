@@ -246,13 +246,13 @@
   name: powerloader instructional pamphlet
   description: "Used to quickly impart vital knowledge.\nThis one has a powerloader insignia.\nThe title reads 'Moving freight and squishing heads - a practical guide to a Work Loader'."
   components:
-    - type: Sprite
-      state: pamphlet_powerloader
-    - type: SkillPamphlet
-      addSkills:
-        RMCSkillPowerLoader: 1
-      skillCap:
-        RMCSkillPowerLoader: 2
+  - type: Sprite
+    state: pamphlet_powerloader
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillPowerLoader: 1
+    skillCap:
+      RMCSkillPowerLoader: 2
 
 # gives police skill
 - type: entity
@@ -282,7 +282,7 @@
     skillCap:
       RMCSkillIntel: 2
     addComps:
-      - type: ViewIntelObjectives
+    - type: ViewIntelObjectives
 
 # M2C Kit
 - type: entity

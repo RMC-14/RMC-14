@@ -3,12 +3,13 @@
 - type: entity
   parent: CMPamphlet
   id: RMCPamphletAdmin
+  suffix: ADMIN
+  abstract: true
   description: An easy to understand training manual.
   components:
   - type: Sprite
     state: pamphlet_engineering
-  suffix: ADMIN
-  abstract: true
+
 
 # Antagonist
 - type: entity
@@ -167,7 +168,6 @@
       RMCSkillLeadership: 3
     addComps:
     - type: MarineOrders
-
 
 # Medical
 - type: entity
