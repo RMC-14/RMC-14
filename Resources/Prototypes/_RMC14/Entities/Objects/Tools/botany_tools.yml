@@ -44,3 +44,7 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 15000
+  - type: RMCSurgeryTool
+    toolTypes:
+    - kind: BoneSaw
+      quality: BadSubstitute

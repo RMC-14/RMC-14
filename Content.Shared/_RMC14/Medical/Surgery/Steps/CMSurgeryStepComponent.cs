@@ -1,4 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Medical.Surgery.Tools;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -16,7 +18,7 @@ public sealed partial class CMSurgeryStepComponent : Component
     public int Skill = 1;
 
     [DataField]
-    public ComponentRegistry? Tool;
+    public List<RMCSurgeryToolKind>? Tool;
 
     [DataField]
     public ComponentRegistry? Add;
@@ -26,4 +28,10 @@ public sealed partial class CMSurgeryStepComponent : Component
 
     [DataField]
     public ComponentRegistry? BodyRemove;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? StartSound;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? EndSound;
 }
