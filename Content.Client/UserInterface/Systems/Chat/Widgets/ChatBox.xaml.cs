@@ -214,6 +214,9 @@ public partial class ChatBox : UIWidget
         {
             CycleChatChannel(true);
             args.Handle();
+            // RMC14
+            _controller.NotifyChatTextChange();
+            // RMC14
             return;
         }
 
@@ -221,6 +224,10 @@ public partial class ChatBox : UIWidget
         {
             CycleChatChannel(false);
             args.Handle();
+            // RMC14
+            _controller.NotifyChatTextChange();
+            // RMC14
+            return;
         }
     }
 
