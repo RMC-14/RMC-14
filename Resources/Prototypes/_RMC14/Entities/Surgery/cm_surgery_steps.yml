@@ -216,3 +216,23 @@
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
   - type: RMCSurgeryStepXenoHeartEffect
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: RMCSurgeryStepOpenIncisionWithIMS
+  name: Open incision with an Incision Management System
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - type: RMCScalpelManager
+    add:
+    - type: CMIncisionOpen
+    - type: CMBleedersClamped
+    - type: CMSkinRetracted
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: scalpel_manager
+  - type: CMSurgeryStepBleedEffect
+    damage: 10
+  - type: CMSurgeryStepEmoteEffect

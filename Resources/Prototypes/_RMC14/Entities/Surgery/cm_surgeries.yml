@@ -71,3 +71,13 @@
   - type: RMCSurgeryXenoHeartCondition
   - type: CMSurgeryPartCondition
     part: Head
+
+- type: entity
+  parent: CMSurgeryBase
+  id: RMCSurgeryOpenIncisionWithIMS
+  name: Open Incision with IMS
+  components:
+  - type: CMSurgery
+    priority: -1
+    steps:
+    - RMCSurgeryStepOpenIncisionWithIMS

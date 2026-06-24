@@ -297,6 +297,7 @@
   name: incision management system
   description: A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps.
   components:
+  - type: RMCScalpelManager
   - type: Sprite
     state: scalpel_manager
 
