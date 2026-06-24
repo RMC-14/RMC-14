@@ -36,6 +36,7 @@
     tags:
     - CMRollerItem
     - CMRollerBed
+    - RMCSurgerySurfaceUnsuited
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/rollerbeds.rsi
     noRot: true
@@ -117,6 +118,11 @@
   - type: Appearance
   - type: ReceiverXenoClaws
     minimumClawStrength: ImpossiblySharp
+  - type: Tag
+    tags:
+    - CMRollerItem
+    - CMRollerBed
+    - RMCSurgerySurfaceUnsuited
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 6000
@@ -208,6 +214,7 @@
   - type: Tag
     tags:
     - CMRollerItem
+    - RMCSurgerySurfaceAwful
   - type: ReceiverXenoClaws
     minimumClawStrength: ImpossiblySharp
   - type: PhysicalComposition
