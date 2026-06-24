@@ -15,10 +15,8 @@
       components:
         - type: Language
           spokenLanguages:
-          - Japanese
           - English
           understoodLanguages:
-          - Japanese
           - English
           currentLanguage: English
           defaultLanguage: English
