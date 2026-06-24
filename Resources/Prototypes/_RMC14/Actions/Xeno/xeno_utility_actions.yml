@@ -186,7 +186,7 @@
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoHiveLeaderSquad
-  name: View Hive Squad
+  name: View Hive Team
   description: Opens your hive squad panel, showing your team members and allowing you to send announcements to them.
   components:
   - type: Action
@@ -281,6 +281,7 @@
   - type: EntityTargetAction
     event: !type:XenoApplySalveActionEvent
   - type: RMCDazeableAction
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase

@@ -98,6 +98,9 @@
   id: RMCPodDoor
   description: That looks like it doesn't open easily. Maybe look for a button or use a breaching charge?
   components:
+  - type: VehicleSmashable
+    smashSound:
+      path: /Audio/_RMC14/Effects/metal_crash.ogg
   - type: Door
     canPry: true
   - type: XenoCrusherChargable
