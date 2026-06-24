@@ -32,6 +32,9 @@
     position: Down
     rotation: -90
     modifyBuckleDrawDepth: false
+  - type: Tag
+    tags:
+    - RMCSurgerySurfaceIdeal
   - type: CMOperatingTable
   - type: BuckleClimbable
   - type: Corrodible
