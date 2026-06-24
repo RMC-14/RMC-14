@@ -220,6 +220,11 @@
   name: prototype laser scalpel
   description: A scalpel augmented with a directed laser, for controlling bleeding as the incision is made. Also functions as a cautery. This one looks like an unreliable early model.
   components:
+  - type: CMSurgeryTool
+    startSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery1.ogg
+    endSound:
+      path: /Audio/_RMC14/Medical/Surgery/cautery2.ogg
   - type: RMCLaserScalpel
   - type: CMCautery
   - type: Sprite
