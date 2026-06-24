@@ -209,8 +209,6 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillResearch: 1
-    skillCap:
-      RMCSkillResearch: 1
 
 # gives engi/construction skills
 - type: entity
