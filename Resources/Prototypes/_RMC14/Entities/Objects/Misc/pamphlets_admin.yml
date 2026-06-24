@@ -92,7 +92,7 @@
 # Execution
 - type: entity
   parent: RMCPamphletAdmin
-  id: RMCPamphletAdminExecution1
+  id: RMCPamphletAdminExecution
   name: execution training manual
   description: "An easy to understand training manual.\nReading this should be enough to master the skill."
   components:
@@ -198,7 +198,7 @@
 # Navigations
 - type: entity
   parent: RMCPamphletAdmin
-  id: RMCPamphletAdminNavigations1
+  id: RMCPamphletAdminNavigations
   name: navigations training manual
   description: "An easy to understand training manual.\nReading this should be enough to master the skill."
   components:
@@ -246,7 +246,7 @@
 # Research
 #- type: entity
 #  parent: RMCPamphletAdmin
-#  id: RMCPamphletAdminResearch1
+#  id: RMCPamphletAdminResearch
 #  name: research training manual
 #  description: "An easy to understand training manual.\nReading this should be enough to master the skill."
 #  components:
@@ -257,7 +257,7 @@
 # Smart Gun
 - type: entity
   parent: RMCPamphletAdmin
-  id: RMCPamphletAdminSmartGun1
+  id: RMCPamphletAdminSmartGun
   name: smart gun training manual
   description: "An easy to understand training manual.\nReading this should be enough to master the skill."
   components:
@@ -367,7 +367,7 @@
 # Vulture
 - type: entity
   parent: RMCPamphletAdmin
-  id: RMCPamphletAdminVulture1
+  id: RMCPamphletAdminVulture
   name: vulture training manual
   description: "An easy to understand training manual.\nReading this should be enough to master the skill."
   components:
