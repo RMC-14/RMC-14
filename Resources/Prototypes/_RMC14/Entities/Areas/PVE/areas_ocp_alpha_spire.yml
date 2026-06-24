@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: RMCAreaProtectionFour
   id: RMCAreaOCPMaintsLevel
-  name: OCP-583 Alpha Spire Floor 171 (Maintenance)
+  name: OCP-583 Alpha Spire - Floor 171 - Maintenance
   suffix: OCP Area
   components:
   - type: Sprite
@@ -13,7 +13,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPCargo
-  name: OCP-583 Alpha Spire Maintenance Landing Zone & Cargo Hold
+  name: OCP-583 Alpha Spire - Maintenance Landing Zone & Cargo Hold
   suffix: OCP Area
   components:
   - type: Sprite
@@ -25,7 +25,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPEngi
-  name: OCP-583 Alpha Spire Engineering Bay
+  name: OCP-583 Alpha Spire - Engineering Bay
   suffix: OCP Area
   components:
   - type: Sprite
@@ -37,7 +37,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPMainLevel
-  name: OCP-583 Alpha Spire Floor 172 (Main Floor)
+  name: OCP-583 Alpha Spire - Floor 172 - Main Floor
   suffix: OCP Area
   components:
   - type: Sprite
@@ -49,7 +49,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPSpaceport
-  name: OCP-583 Alpha Spire Thorpe International Spaceport
+  name: OCP-583 Alpha Spire - Thorpe International Spaceport
   suffix: OCP Area
   components:
   - type: Sprite
@@ -61,7 +61,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPMedbay
-  name: OCP-583 Alpha Spire Anandamayi Medical Centre
+  name: OCP-583 Alpha Spire - Anandamayi Medical Centre
   suffix: OCP Area
   components:
   - type: Sprite
@@ -73,7 +73,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPOffice
-  name: OCP-583 Alpha Spire Weston-Yamada Offices
+  name: OCP-583 Alpha Spire - Weston-Yamada Offices
   suffix: OCP Area
   components:
   - type: Sprite
@@ -85,7 +85,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPDorms
-  name: OCP-583 Alpha Spire Dormitories
+  name: OCP-583 Alpha Spire - Dormitories
   suffix: OCP Area
   components:
   - type: Sprite
@@ -97,7 +97,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPResearch
-  name: OCP-583 Alpha Spire Applied Sciences Research Facility
+  name: OCP-583 Alpha Spire - Applied Sciences Research Facility
   suffix: OCP Area
   components:
   - type: Sprite
@@ -109,7 +109,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPCMB
-  name: OCP-583 Alpha Spire Colonial Marshals Kōban
+  name: OCP-583 Alpha Spire - Colonial Marshals Kōban
   suffix: OCP Area
   components:
   - type: Sprite
@@ -121,7 +121,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPApartments
-  name: OCP-583 Alpha Spire Seacourt Apartments
+  name: OCP-583 Alpha Spire - Seacourt Apartments
   suffix: OCP Area
   components:
   - type: Sprite
@@ -133,7 +133,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPUpperLevel
-  name: OCP-583 Alpha Spire Floor 173 (Upper Floor)
+  name: OCP-583 Alpha Spire - Floor 173 - Upper Floor
   suffix: OCP Area
   components:
   - type: Sprite
@@ -145,7 +145,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPUpperMed
-  name: OCP-583 Alpha Spire Upper Anandamayi Medical Centre
+  name: OCP-583 Alpha Spire - Upper Anandamayi Medical Centre
   suffix: OCP Area
   components:
   - type: Sprite
@@ -157,7 +157,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPUpperOffice
-  name: OCP-583 Alpha Spire Upper Weston-Yamada Offices
+  name: OCP-583 Alpha Spire - Upper Weston-Yamada Offices
   suffix: OCP Area
   components:
   - type: Sprite
@@ -169,7 +169,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPUpperResearch
-  name: OCP-583 Alpha Spire Upper Research Facility
+  name: OCP-583 Alpha Spire - Upper Research Facility
   suffix: OCP Area
   components:
   - type: Sprite
@@ -181,7 +181,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPComms
-  name: OCP-583 Alpha Spire Communications Grid
+  name: OCP-583 Alpha Spire - Communications Grid
   suffix: OCP Area
   components:
   - type: Sprite
@@ -193,7 +193,7 @@
 - type: entity
   parent: RMCAreaPVE
   id: RMCAreaOCPOOB
-  name: OCP Out Of Bounds
+  name: OCP-583 Alpha Spire - Out Of Bounds
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_fiorina.rsi
