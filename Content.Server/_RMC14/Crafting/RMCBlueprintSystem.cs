@@ -34,10 +34,10 @@ public sealed class STBlueprintSystem : EntitySystem
             entity.TryGetComponent<TagComponent>(out var tag, _componentFactory) && _tagSystem.HasTag(tag, WORKBENCH_TAG)
         ).ToDictionary(entity => entity.ID, entity => entity.Name);
 
-        if (_workbenchNamesById.Count == 0)
-        {
-            _sawmill.Error($"There is no valid workbenches. Check that {WORKBENCH_TAG} exist");
-        }
+        //if (_workbenchNamesById.Count == 0)
+        //{
+        //    _sawmill.Error($"There is no valid workbenches. Check that {WORKBENCH_TAG} exist");
+        //}
         AddDescriptions();
         SubscribeLocalEvent<CraftingBlueprintComponent, ExaminedEvent>(OnBlueprintExamine);
     }
