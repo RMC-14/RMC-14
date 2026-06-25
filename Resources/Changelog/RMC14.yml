@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: You can now always extinguish yourself with the under-barrel extinguisher.
-    type: Fix
-  id: 2937
-  time: '2026-02-12T01:34:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9225
 - author: Dygon
   changes:
   - message: Fixed parasites sometimes being unable to leap while under a resin door.
@@ -4556,5 +4549,13 @@
   id: 3436
   time: '2026-06-24T12:48:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10272
+- author: IceNoobXD
+  changes:
+  - message: Sorokyne strata has recived a map parity passover which adds a lot of
+      new props to the map and removed/replaced some hull/Indestructible walls!
+    type: Tweak
+  id: 3437
+  time: '2026-06-25T19:45:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9974
 Name: RMC14
 Order: -1
