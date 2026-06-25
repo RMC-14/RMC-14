@@ -1,5 +1,12 @@
 - type: entity
   parent: CMBaseStructure
+  id: RMCCampfireBase
+  abstract: true
+  components:
+  - type: Craftable
+
+- type: entity
+  parent: RMCCampfireBase
   id: RMCBrazier
   name: brazier
   description: A burning pile of wood in a metal plate.
@@ -40,7 +47,7 @@
     tags: []
 
 - type: entity
-  parent: CMBaseStructure
+  parent: RMCCampfireBase
   id: RMCCampfire
   name: campfire
   description: A useful tool to turn fellow marines into lifelong friends. Pull up a chair!

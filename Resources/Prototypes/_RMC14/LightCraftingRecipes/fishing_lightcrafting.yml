@@ -1,0 +1,11 @@
+﻿- type: lightCraftingRecipe
+  id: FishCookCraft
+  results:
+    - RMCFoodMeatFishGrilled
+  steps:
+    firstIngredient: RMCFoodMeatFish
+    secondIngredient: RMCCampfireBase
+    keepSecond: true
+    exactFirst: false
+    exactSecond: false
+    time: 5

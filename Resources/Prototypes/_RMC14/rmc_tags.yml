@@ -29,6 +29,9 @@
   id: RMCCartridgePistol45ACP
 
 - type: Tag
+  id: RMCWorkbench
+
+- type: Tag
   id: CMBloodPack
 
 - type: Tag
