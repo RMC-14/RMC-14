@@ -1,78 +1,6 @@
 ﻿Entries:
 - author: Ian321
   changes:
-  - message: Hivelord strains now give intel and have a heart.
-    type: Fix
-  id: 2929
-  time: '2026-02-11T10:46:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9215
-- author: Dygon
-  changes:
-  - message: Oppressors can now pull a marine through a weapon mount.
-    type: Fix
-  id: 2930
-  time: '2026-02-11T22:29:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9220
-- author: Dygon
-  changes:
-  - message: The queen no longer has a chance to gib when killed.
-    type: Fix
-  id: 2931
-  time: '2026-02-11T22:30:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9219
-- author: Dygon
-  changes:
-  - message: Fire now only damages resin holes and claymores on a direct hit.
-    type: Fix
-  id: 2932
-  time: '2026-02-11T22:30:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9217
-- author: kleinerstation13
-  changes:
-  - message: Changed the M2C's firing sound
-    type: Tweak
-  id: 2933
-  time: '2026-02-11T22:32:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9223
-- author: DrSmugleaf
-  changes:
-  - message: Added remote transfer plasma for Queen while in ovi. It restores 75%
-      of the target's plasma and costs 400 plasma to use.
-    type: Add
-  - message: Added remote expand weeds for Queen while in ovi. It creates new weeds
-      next to other weeds for 50 plasma, and can turn weeds into weed nodes for 260
-      plasma.
-    type: Add
-  - message: Fixed projectiles including Praetorian tail seize being blocked by HMGs
-      when not directly clicking them.
-    type: Fix
-  - message: Fixed some projectiles having higher accuracy than intended on some targets,
-      such as the M2C bullets.
-    type: Fix
-  - message: Fixed being able to mount onto an HMG without your hands being free.
-      You can still pick up items after mounting.
-    type: Fix
-  id: 2934
-  time: '2026-02-12T01:33:57.417424+00:00'
-  url: null
-- author: kleinerstation13
-  changes:
-  - message: Added missing locale for sentry and sentry laptop multitool ports
-    type: Fix
-  id: 2935
-  time: '2026-02-12T01:35:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9224
-- author: LeoKarz
-  changes:
-  - message: Designer hivelord can now build plasma trees!
-    type: Fix
-  - message: Design nodes are visibile through walls to xenos
-    type: Tweak
-  id: 2936
-  time: '2026-02-12T01:34:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9226
-- author: Ian321
-  changes:
   - message: You can now always extinguish yourself with the under-barrel extinguisher.
     type: Fix
   id: 2937
@@ -4567,5 +4495,66 @@
   id: 3428
   time: '2026-06-19T17:21:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9895
+- author: ffxivsidehoes
+  changes:
+  - message: Fixed typo in white M54C's description.
+    type: Fix
+  id: 3429
+  time: '2026-06-20T23:39:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10230
+- author: BarteG44
+  changes:
+  - message: Added tacmap icons for UNMC vehicles
+    type: Add
+  id: 3430
+  time: '2026-06-22T19:23:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10229
+- author: Ian321
+  changes:
+  - message: Vehicle crewman now wake up without being in a squad.
+    type: Tweak
+  id: 3431
+  time: '2026-06-22T19:40:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10212
+- author: Dygon
+  changes:
+  - message: Fixed drones having slightly too much evasion, reducing it by 5(20>15).
+    type: Fix
+  - message: Healer drones can no longer use their "Apply Salve" ability while resting.
+    type: Fix
+  id: 3432
+  time: '2026-06-23T16:14:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9248
+- author: Ian321
+  changes:
+  - message: Requisitions was incorrectly provided with too many CCDP grenades.
+    type: Fix
+  id: 3433
+  time: '2026-06-23T16:17:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10237
+- author: CatAndHats
+  changes:
+  - message: Fixed the damaged deployed MB-6 collapsible cade sprites not aligning
+      correctly
+    type: Fix
+  id: 3434
+  time: '2026-06-23T16:20:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10232
+- author: IceNoobXD
+  changes:
+  - message: Fixed fiorina having no APCs in a lot of areas and added a few new areas
+      to replace existing once!
+    type: Fix
+  id: 3435
+  time: '2026-06-24T03:39:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10225
+- author: Vermidia
+  changes:
+  - message: Changed Vehicle Crewman icon to better fit the rest of the auxiliary
+      support department.
+    type: Tweak
+  id: 3436
+  time: '2026-06-24T12:48:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10272
 Name: RMC14
 Order: -1
