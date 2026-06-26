@@ -42,7 +42,7 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     public string WrapHive(string message, Color? color = null)
     {
         color ??= Color.FromHex("#921992");
-        return $"[color={color.Value.ToHex()}][font size=16][bold]{message}[/bold][/font][/color]";
+        return $"[color={color.Value.ToHex()}][font size=16][bold]{message}[/bold][/font][/color]\n";
     }
 
     /// <summary>
