@@ -20,7 +20,6 @@
     context: "aghost"
   - type: Ghost
     canInteract: true
-  - type: GhostHearing
   - type: Hands
     hands:
       hand_right:
@@ -128,7 +127,7 @@
     marines: true
     xenos: true
     liveUpdate: true
-  
+
 
 - type: entity
   abstract: true

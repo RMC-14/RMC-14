@@ -7,6 +7,7 @@ using Content.Shared.Actions;
 using Content.Shared.Ghost;
 using Content.Shared.Overlays;
 using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Mobs
 {
@@ -15,6 +16,7 @@ namespace Content.Server._RMC14.Mobs
         [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly IConfigurationManager _configuration = default!;
         [Dependency] private readonly SharedMarineSystem _marine = default!;
+        [Dependency] private readonly INetConfigurationManager _netConfig = default!;
 
         private bool _ghostsCanBoo;
 
@@ -23,19 +25,14 @@ namespace Content.Server._RMC14.Mobs
             base.Initialize();
 
             //This shit is so scuffed but honest to god not sure what else I can use that isn't a duplicate
-            SubscribeLocalEvent<GhostHearingComponent, ComponentStartup>(OnGhostStartup);
             SubscribeLocalEvent<CMGhostComponent, ComponentStartup>(OnCMGhostStartup);
             SubscribeLocalEvent<CMGhostComponent, MapInitEvent>(OnCMGhostInit, after: [typeof(GhostSystem)]);
+            SubscribeLocalEvent<CMGhostComponent, PlayerAttachedEvent>(OnPlayerAttached);
 
             SubscribeLocalEvent<CMGhostComponent, ToggleMarineHudActionEvent>(OnMarineHudAction);
             SubscribeLocalEvent<CMGhostComponent, ToggleXenoHudActionEvent>(OnXenoHudAction);
 
             Subs.CVar(_configuration, RMCCVars.RMCGhostCanBoo, OnGhostBooChange, true);
-        }
-
-        private void OnGhostStartup(EntityUid uid, GhostHearingComponent comp, ComponentStartup args)
-        {
-            EnsureComp<CMGhostComponent>(uid);
         }
 
         private void OnCMGhostStartup(EntityUid uid, CMGhostComponent comp, ComponentStartup args)
@@ -50,6 +47,29 @@ namespace Content.Server._RMC14.Mobs
             EnsureComp<ShowHealthIconsComponent>(uid);
             EnsureComp<CMGhostXenoHudComponent>(uid);
             EnsureComp<PropCallingComponent>(uid);
+        }
+
+        private void OnPlayerAttached(Entity<CMGhostComponent> ent, ref PlayerAttachedEvent args)
+        {
+            if (!TryComp<GhostComponent>(ent, out var ghost))
+            {
+                // this should never actually happen
+                Log.Error($"{ToPrettyString(ent)} has CMGhostComponent, but not GhostComponent. (Should have both!)");
+                return;
+            }
+
+            if (_netConfig.GetClientCVar(args.Player.Channel, RMCCVars.RMCGhostHearing))
+            {
+                EnsureComp<GhostHearingComponent>(ent);
+                _actions.SetToggled(ghost.ToggleGhostHearingActionEntity, false);
+            }
+            else
+            {
+                RemComp<GhostHearingComponent>(ent);
+                _actions.SetToggled(ghost.ToggleGhostHearingActionEntity, true);
+            }
+
+            Dirty(ent, ghost);
         }
 
         private void OnMarineHudAction(EntityUid uid, CMGhostComponent comp, ToggleMarineHudActionEvent args)
