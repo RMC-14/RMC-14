@@ -476,24 +476,13 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         if (!TryComp(player, out XenoConstructionComponent? construction))
             return false;
 
-        try
-        {
-            if (construction.OrderConstructionTargeting && construction.OrderConstructionChoice != null)
-            {
-                return _xenoConstruction.CanOrderConstructionPopup((player, construction), coords, construction.OrderConstructionChoice);
-            }
+        if (construction.OrderConstructionTargeting && construction.OrderConstructionChoice != null)
+            return _xenoConstruction.CanOrderConstructionPopup((player, construction), coords, construction.OrderConstructionChoice);
 
-            if (construction.BuildChoice != null)
-            {
-                return _xenoConstruction.CanSecreteOnTilePopup((player, construction), construction.BuildChoice, coords, true, true);
-            }
+        if (construction.BuildChoice != null)
+            return _xenoConstruction.CanSecreteOnTilePopup((player, construction), construction.BuildChoice, coords, true, true);
 
-            return false;
-        }
-        catch
-        {
-            return false;
-        }
+        return false;
     }
 
     private void ClearCurrentGhost()
