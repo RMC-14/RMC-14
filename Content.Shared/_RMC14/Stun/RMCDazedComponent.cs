@@ -26,5 +26,4 @@ public sealed partial class RMCDazedComponent : Component
 
     [DataField, AutoNetworkedField]
     public Color Color = Color.Black;
-
 }
