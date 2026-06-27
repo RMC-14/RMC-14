@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed parasites sometimes being unable to leap while under a resin door.
-    type: Fix
-  - message: Fixed parasites sometimes being able to leap through closed doors.
-    type: Fix
-  id: 2938
-  time: '2026-02-14T18:50:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9245
 - author: Ian321
   changes:
   - message: Motion detectors inside of bags now ignore survivors that have been given
@@ -4557,5 +4548,12 @@
   id: 3437
   time: '2026-06-25T19:45:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9974
+- author: Vermidia
+  changes:
+  - message: Fixed Healer Drone's Salve and Sacrifice not being highlighted when selected.
+    type: Fix
+  id: 3438
+  time: '2026-06-27T01:51:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10289
 Name: RMC14
 Order: -1
