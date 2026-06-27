@@ -927,6 +927,7 @@
 - type: loadoutGroup
   id: SynthGenRMC
   name: Synth Generations
+  maxLimit: 1
   minLimit: 1
   loadouts:
   - RMCSynthGenOne
