@@ -1,0 +1,41 @@
+<DefaultWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:gm="clr-namespace:Content.Client._RMC14.GMRequest"
+    MinSize="600 300"
+    Title="{Loc 'rmc-gm-request-window-title'}">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Button Name="ToggleGMRequestCVarButton" Text="{Loc 'rmc-gm-request-window-button-toggle'}" Access="Public" ToggleMode="True"/>
+            <controls:VSpacer MinWidth="5"/>
+            <RichTextLabel Name="CVarLabel"/>
+            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right" HorizontalExpand="True">
+                <Button Name="ClaimLogButton" Text="{Loc 'rmc-gm-request-window-button-claim'}" Access="Public" StyleClasses="OpenRight"/>
+                <Button Name="TeleportToPlayerButton" Text="{Loc 'rmc-gm-request-window-button-teleport'}" Access="Public" StyleClasses="OpenBoth"/>
+                <Button Name="SubtleMessagePlayerButton" Text="{Loc 'rmc-gm-request-window-button-subtle'}" Access="Public" StyleClasses="OpenBoth"/>
+                <Button Name="AhelpPlayerButton" Text="{Loc 'rmc-gm-request-window-button-ahelp'}" Access="Public" StyleClasses="OpenLeft"/>
+            </BoxContainer>
+        </BoxContainer>
+        <controls:HSpacer MinHeight="5"/>
+        <!-- This tab is "fake" (doesn't actually contain separate lists) due to the difficulties of separate ListContainers -->
+        <TabContainer Name="ListsTab" MinSize="0 0">
+            <gm:GMRequestWindowHeader Name="{Loc 'rmc-gm-request-window-tab-shown'}"/>
+            <gm:GMRequestWindowHeader Name="{Loc 'rmc-gm-request-window-tab-hidden'}"/>
+        </TabContainer>
+        <PanelContainer Name="LogsPanel" MinHeight="120" VerticalExpand="True" HorizontalExpand="True">
+            <controls:ListContainer Name="LogsList" Toggle="True" Group="True" SeparationOverride="0"/>
+        </PanelContainer>
+        <controls:VSpacer MinHeight="3"/>
+        <BoxContainer HorizontalExpand="True">
+            <Button Name="MuteButton" Text="{Loc 'rmc-gm-request-window-button-mute'}" ToggleMode="True" Access="Public"/>
+            <BoxContainer HorizontalAlignment="Right" HorizontalExpand="True">
+                <Button Name="HideShowButton" Text="{Loc 'rmc-gm-request-window-button-hide'}" Access="Public" StyleClasses="OpenRight"/>
+                <Button Name="RefreshButton" Text="{Loc 'rmc-gm-request-window-button-refresh'}" Access="Public" StyleClasses="OpenBoth"/>
+                <controls:ConfirmButton Name="DeleteGMRequestLogsButton"
+                                        HorizontalAlignment="Right" Text="{Loc 'rmc-gm-request-window-button-delete'}"
+                                        StyleClasses="OpenLeft" ConfirmationText="{Loc 'rmc-gm-request-window-button-confirm'}"
+                                        Access="Public"/>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

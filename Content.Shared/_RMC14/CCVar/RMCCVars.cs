@@ -589,4 +589,13 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCLightningMaxAmountLightNearbyEnabled =
         CVarDef.Create("rmc.lighting_max_amount_light_nearby_enabled", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCGMRequestEnabled =
+        CVarDef.Create("rmc.gm_request_enabled", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<string> RMCGMRequestSound =
+        CVarDef.Create("rmc.gm_request_sound", "/Audio/_RMC14/Effects/Admin/gmrequest.ogg", CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<bool> RMCGMRequestSoundMuted =
+        CVarDef.Create("rmc.gm_request_sound_muted", false,  CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 }
