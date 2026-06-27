@@ -94,7 +94,7 @@
     access: [["CMAccessColonyCommand"]]
 
 - type: entity
-  parent: RMCLockerSecureSafe
+  parent: CMLockerBase
   id: RMCLockerSecureSafeLiaison
   description: A huge chunk of metal with a dial embedded in it. Fine print on the dial reads "Scarborough Arms - 2 tumbler safe, guaranteed thermite resistant, and explosion resistant."
   suffix: Corporate Liaison
