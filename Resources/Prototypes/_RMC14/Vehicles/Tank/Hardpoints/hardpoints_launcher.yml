@@ -188,10 +188,12 @@
   - type: RefillableByBulletBox
     bulletType: VehicleAmmoBoxRocketLauncher
   - type: GunMuzzleOffset
-    offset: "0,0"
     useDirectionalOffsets: true
-    offsetEast: "0,0.2"
-    muzzleOffset: "0,-1"
+    rotateDirectionalOffsets: true
+    offsetNorth: "-0.25,0.1"
+    offsetEast: "0.1, 0"
+    offsetSouth: "-0.25,0.1"
+    offsetWest: "-0.8,0"
     useAimDirection: true
     useContainerOwner: false
   - type: HardpointVisual
@@ -260,10 +262,12 @@
   - type: RefillableByBulletBox
     bulletType: VehicleAmmoBoxCupola
   - type: GunMuzzleOffset
-    offset: "0,0"
     useDirectionalOffsets: true
-    offsetEast: "0,0.2"
-    muzzleOffset: "0,-1"
+    rotateDirectionalOffsets: true
+    offsetNorth: "-0.25,0.1"
+    offsetEast: "0.1, 0"
+    offsetSouth: "-0.25,0.1"
+    offsetWest: "-0.8,0"
     useAimDirection: true
     useContainerOwner: false
   - type: HardpointVisual

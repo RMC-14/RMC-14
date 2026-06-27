@@ -848,16 +848,7 @@ public sealed class VehicleTurretSystem : EntitySystem
             shotWorldRotation = (barrelWorldRotation + clamped).Reduced();
         }
 
-        MapCoordinates shotOriginMap;
-        if (sourceTurret.UseBarrelDirectionForShots &&
-            TryGetTurretOrigin(rotationTurretUid, out var turretOriginCoords))
-        {
-            shotOriginMap = _transform.ToMapCoordinates(turretOriginCoords);
-        }
-        else
-        {
-            shotOriginMap = muzzleMap;
-        }
+        var shotOriginMap = muzzleMap;
 
         var distance = (targetMap.Position - shotOriginMap.Position).Length();
         if (distance <= 0.0001f)
