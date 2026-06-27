@@ -2,7 +2,7 @@
   id: MarineAlertLevel
   name: "Evacuation Alert"
   description: "Alert level announcement styling"
-  target: All
+  target: Marines
   visibleInSettings: false
   priority: 8
   canInterrupt: true
@@ -53,7 +53,7 @@
   id: MarineAlertGreen
   name: "Green Alert"
   description: "Green alert announcement styling"
-  target: All
+  target: Marines
   visibleInSettings: false
   priority: 8
   canInterrupt: true
@@ -104,7 +104,7 @@
   id: MarineAlertBlue
   name: "Blue Alert"
   description: "Blue alert announcement styling"
-  target: All
+  target: Marines
   visibleInSettings: false
   priority: 8
   canInterrupt: true
@@ -115,7 +115,8 @@
       decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
       decalState: "bluealert"
       decalPlacement: ReplaceSprite
-      decalScale: 3.0
+      decalScale: 4.0
+      decalOffset: "0,-30"
       style:
         animation:
           animation: Typewriter
@@ -159,7 +160,7 @@
   id: MarineAlertRed
   name: "Red Alert"
   description: "Red alert announcement styling"
-  target: All
+  target: Marines
   visibleInSettings: false
   priority: 8
   canInterrupt: true
@@ -170,7 +171,8 @@
       decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
       decalState: "redalert"
       decalPlacement: ReplaceSprite
-      decalScale: 3.0
+      decalScale: 4.0
+      decalOffset: "0,-30"
       style:
         animation:
           animation: Typewriter
@@ -214,7 +216,7 @@
   id: MarineAlertDelta
   name: "Delta Alert"
   description: "Delta alert announcement styling"
-  target: All
+  target: Marines
   visibleInSettings: false
   priority: 8
   canInterrupt: true
@@ -225,7 +227,8 @@
       decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
       decalState: "evac"
       decalPlacement: ReplaceSprite
-      decalScale: 3.0
+      decalScale: 4.0
+      decalOffset: "0,-30"
       style:
         animation:
           animation: Typewriter
@@ -246,9 +249,9 @@
           backgroundAlpha: 0.7
           backgroundColor: "#0a1a2d"
         text:
-          primaryColor: "#8B0000"
+          primaryColor: "#c43232"
           font: "Cozette"
-          fontSize: 20
+          fontSize: 26
           lineHeight: 28
           showSpeakerName: false
         sprite:
@@ -269,7 +272,7 @@
   id: RedAlertAnimated
   name: "Red Alert"
   description: "Animated red alert display"
-  target: All
+  target: Marines
   visibleInSettings: false
   sound:
     path: "/Audio/Misc/redalert.ogg"

@@ -63,7 +63,7 @@
           showTitle: true
           title: ">> COMMAND <<"
           titleColor: "#4a9eff"
-          titleFontSize: 10
+          titleFontSize: 15
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
