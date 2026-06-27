@@ -32,8 +32,8 @@
     bio: 15
     explosionArmor: 15
   - type: MovementSpeedModifier
-    SprintSpeedModifier: 0.725
-    WalkSpeedModifier: 0.725
+    baseSprintSpeed: 3.625
+    baseWalkSpeed: 1.9575
 
 - type: entity
   id: RMCSynthGenTwo
