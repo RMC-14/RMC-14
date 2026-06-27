@@ -33,7 +33,7 @@
                 <Button Name="RefreshButton" Text="{Loc 'rmc-gm-request-window-button-refresh'}" Access="Public" StyleClasses="OpenBoth"/>
                 <controls:ConfirmButton Name="DeleteGMRequestLogsButton"
                                         HorizontalAlignment="Right" Text="{Loc 'rmc-gm-request-window-button-delete'}"
-                                        StyleClasses="OpenLeft" ConfirmationText="{Loc 'rmc-gm-request-window-button-confirm'}"
+                                        StyleClasses="OpenLeft" ConfirmationText="{Loc 'rmc-gm-request-window-button-delete-confirm'}"
                                         Access="Public"/>
             </BoxContainer>
         </BoxContainer>

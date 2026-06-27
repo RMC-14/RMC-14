@@ -25,7 +25,8 @@ public sealed class GMRequestManager
     private int _currentLogId;
     private int NextLogId => Interlocked.Increment(ref _currentLogId);
 
-    public event Action<int>? NewLogReceived;
+    //Events are used to ensure all client EUIs receive the update, regardless of who or what caused it
+    public event Action<int, bool>? LogUpdate;
     public event Action? LogsCleared;
 
     public void Add(ICommonSession sender, string message)
@@ -58,7 +59,7 @@ public sealed class GMRequestManager
         );
 
         Logs.Add(NextLogId, log);
-        NewLogReceived?.Invoke(_currentLogId);
+        LogUpdate?.Invoke(_currentLogId, true);
         _chatManager.SendAdminAnnouncement($"REQUEST <{sender.Name}> has sent a request!");
     }
 
@@ -68,6 +69,7 @@ public sealed class GMRequestManager
         var log = Logs[id];
         log.ClaimName = claimant;
         Logs[id] = log;
+        LogUpdate?.Invoke(id, false);
     }
 
     public void Hide(int id)
@@ -75,12 +77,13 @@ public sealed class GMRequestManager
         var log = Logs[id];
         log.Hidden = !log.Hidden;
         Logs[id] = log;
+        LogUpdate?.Invoke(id, false);
     }
 
     public void ClearGMRequests()
     {
         Logs.Clear();
         _currentLogId = 0;
-        LogsCleared?.Invoke(); //Used because the method is sometimes called by the system, independent of EUI
+        LogsCleared?.Invoke();
     }
 }

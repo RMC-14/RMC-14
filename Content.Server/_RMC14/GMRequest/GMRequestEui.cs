@@ -18,8 +18,8 @@ public sealed class GMRequestEui : BaseEui
     {
         IoCManager.InjectDependencies(this);
 
-        _manager.NewLogReceived += id => SendLog(id, true);
-        _manager.LogsCleared += SendLogs; //A necessary concession for the UI to update on round restart
+        _manager.LogUpdate += SendLog;
+        _manager.LogsCleared += SendLogs;
     }
 
     public override void HandleMessage(EuiMessageBase msg)
