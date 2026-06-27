@@ -43,6 +43,7 @@ rmc-playing-card-stack-name = stack of cards
 rmc-playing-card-hand-examine = A hand of {$count} cards.
 rmc-playing-card-hand-examine-hidden = A hand of {$count} cards, face down.
 rmc-playing-card-hand-card = - {$rank} of {$suit}
+rmc-playing-card-hand-suit-group = - {$ranks} of {$suit}
 
 # Hand examination
 rmc-playing-card-hand-examine-verb = Controls

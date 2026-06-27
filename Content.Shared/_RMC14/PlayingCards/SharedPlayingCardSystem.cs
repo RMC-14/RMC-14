@@ -421,12 +421,26 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         args.PushMarkup(Loc.GetString("rmc-playing-card-hand-examine", ("count", count)));
+
+        var suitOrder = new List<CardSuit>();
+        var bySuit = new Dictionary<CardSuit, List<string>>();
         foreach (var encoded in ent.Comp.Cards)
         {
             var (suit, rank) = DecodeCard(encoded);
+            if (!bySuit.TryGetValue(suit, out var ranks))
+            {
+                ranks = new List<string>();
+                bySuit[suit] = ranks;
+                suitOrder.Add(suit);
+            }
+            ranks.Add(GetRankDisplayName(rank));
+        }
+
+        foreach (var suit in suitOrder)
+        {
             var suitName = GetSuitDisplayName(suit);
-            var rankName = GetRankDisplayName(rank);
-            args.PushMarkup(Loc.GetString("rmc-playing-card-hand-card", ("rank", rankName), ("suit", suitName)));
+            var rankList = string.Join(", ", bySuit[suit]);
+            args.PushMarkup(Loc.GetString("rmc-playing-card-hand-suit-group", ("ranks", rankList), ("suit", suitName)));
         }
     }
 
