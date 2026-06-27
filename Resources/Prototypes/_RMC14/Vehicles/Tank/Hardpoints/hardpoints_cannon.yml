@@ -10,7 +10,7 @@
     hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
-    damageMultiplier: 0.125
+    damageMultiplier: 0.15
     repairRate: 0.01
   - type: HardpointIntegrity
     maxIntegrity: 500
@@ -32,7 +32,7 @@
   - type: GunIgnoreContainerOwnerCollision
   - type: ShootAtFixedPoint
   - type: Gun
-    fireRate: 0.0625
+    fireRate: 0.05
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -77,7 +77,7 @@
     hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
-    damageMultiplier: 0.125
+    damageMultiplier: 0.15
     repairRate: 0.01
   - type: HardpointIntegrity
     maxIntegrity: 350
@@ -168,7 +168,7 @@
     hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
-    damageMultiplier: 0.125
+    damageMultiplier: 0.15
     repairRate: 0.01
   - type: HardpointIntegrity
     maxIntegrity: 500
@@ -189,7 +189,7 @@
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 1
+    fireRate: 1.4286
     projectileSpeed: 50
     selectedMode: FullAuto
     availableModes:
@@ -236,7 +236,7 @@
     hardpointType: HardpointTypeCannon
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeCannon
-    damageMultiplier: 0.125
+    damageMultiplier: 0.15
     repairRate: 0.01
   - type: HardpointIntegrity
     maxIntegrity: 400

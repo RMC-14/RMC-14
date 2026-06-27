@@ -10,7 +10,7 @@
     hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
-    damageMultiplier: 0.0
+    damageMultiplier: 0.125
     repairRate: 0.0125
   - type: HardpointIntegrity
     maxIntegrity: 300
@@ -31,7 +31,7 @@
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 1.0
+    fireRate: 0.3333
     projectileSpeed: 20
     selectedMode: SemiAuto
     availableModes:
@@ -70,7 +70,7 @@
     hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
-    damageMultiplier: 0.0
+    damageMultiplier: 0.125
     repairRate: 0.0125
   - type: HardpointIntegrity
     maxIntegrity: 500
@@ -142,7 +142,7 @@
     hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
-    damageMultiplier: 0.0
+    damageMultiplier: 0.125
     repairRate: 0.0125
   - type: HardpointIntegrity
     maxIntegrity: 500
@@ -210,7 +210,7 @@
     hardpointType: HardpointTypeLauncher
     vehicleFamily: HardpointVehicleFamilyTank
     slotType: HardpointSlotTypeLauncher
-    damageMultiplier: 0.0
+    damageMultiplier: 0.125
     repairRate: 0.0125
   - type: HardpointIntegrity
     maxIntegrity: 350
@@ -231,7 +231,7 @@
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 6
+    fireRate: 3.3333
     minAngle: 3
     maxAngle: 3
     selectedMode: FullAuto
