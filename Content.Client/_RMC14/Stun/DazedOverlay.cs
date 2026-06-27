@@ -8,7 +8,7 @@ namespace Content.Client._RMC14.Stun;
 
 public sealed class DazedOverlay : Overlay
 {
-    private static readonly ProtoId<ShaderPrototype> DazedCircleMaskShader = "GradientCircleMask";
+    private static readonly ProtoId<ShaderPrototype> CircleMaskShader = "GradientCircleMask";
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -25,7 +25,7 @@ public sealed class DazedOverlay : Overlay
         _entManager = entManager;
         _playerManager = playerManager;
 
-        _vignetteShader = prototypeManager.Index(DazedCircleMaskShader).InstanceUnique();
+        _vignetteShader = prototypeManager.Index(CircleMaskShader).InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)

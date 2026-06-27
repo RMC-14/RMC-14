@@ -4,19 +4,14 @@ using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
-using Robust.Shared.Network;
-using Robust.Shared.Player;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Stun;
 
 public sealed class RMCDazedSystem : EntitySystem
 {
     [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedStutteringSystem _stutter = default!;
 
     public override void Initialize()
