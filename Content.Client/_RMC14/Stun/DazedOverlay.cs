@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Stun;
+using Content.Shared.StatusEffectNew;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
@@ -14,6 +15,7 @@ public sealed class DazedOverlay : Overlay
 
     private readonly IEntityManager _entManager;
     private readonly IPlayerManager _playerManager;
+    private readonly SharedStatusEffectsSystem _statusEffect;
 
     private readonly ShaderInstance _vignetteShader;
 
@@ -24,6 +26,7 @@ public sealed class DazedOverlay : Overlay
     {
         _entManager = entManager;
         _playerManager = playerManager;
+        _statusEffect = entManager.System<SharedStatusEffectsSystem>();
 
         _vignetteShader = prototypeManager.Index(CircleMaskShader).InstanceUnique();
     }
@@ -32,7 +35,13 @@ public sealed class DazedOverlay : Overlay
     {
         var localEntity = _playerManager.LocalEntity;
 
-        if (localEntity == null || !_entManager.TryGetComponent(localEntity, out RMCDazedComponent? dazed))
+        if (localEntity == null)
+            return;
+
+        if (!_statusEffect.TryGetStatusEffect(localEntity.Value, RMCDazedSystem.StatusEffectDazed, out var statusEffect))
+            return;
+
+        if (!_entManager.TryGetComponent(statusEffect, out RMCDazedComponent? dazed))
             return;
 
         var handle = args.WorldHandle;
