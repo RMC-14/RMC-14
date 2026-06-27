@@ -776,9 +776,9 @@
       - id: DrinkShaker
         amount: 5
       - id: RMCDrinkGlass
-        amount: 8
+        amount: 5
       - id: DrinkGlass
-        amount: 4
+        amount: 10
       - id: ClothingOuterApronChef
         amount: 2
       - id: RMCCondimentSmallSalt
@@ -790,7 +790,7 @@
       - id: RMCCondiment
         amount: 8
       - id: FoodPlateTin
-        amount: 5
+        amount: 10
       - id: FoodBowlBig
         amount: 10
       - id: RMCKitchenKnifeButcher
@@ -806,35 +806,37 @@
       - id: FoodPlateSmall
         amount: 10
       - id: FoodPlateMuffinTin
-        amount: 5
+        amount: 10
       - id: FoodKebabSkewer
-        amount: 5
+        amount: 10
       - id: CMBeaker
         amount: 5
       - id: CMBeakerLarge
         amount: 5
       - id: Pitcher
-        amount: 2
+        amount: 4
       - id: DrinkMug
         amount: 5
       - id: DrinkMugBlack
-        amount: 2
+        amount: 5
       - id: DrinkMugBlue
-        amount: 2
+        amount: 5
       - id: DrinkMugGreen
-        amount: 2
+        amount: 5
       - id: DrinkMugHeart
-        amount: 1
+        amount: 5
       - id: DrinkMugMetal
-        amount: 2
+        amount: 5
       - id: DrinkMugMoebius
-        amount: 1
+        amount: 5
       - id: DrinkMugOne
         amount: 1
       - id: DrinkMugRainbow
-        amount: 2
+        amount: 5
       - id: DrinkMugRed
-        amount: 2
+        amount: 5
+      - id: RMCReagentJug
+        amount: 1
 
 - type: entity
   parent: CMVendorDinnerware
@@ -960,6 +962,8 @@
         amount: 12
       - id: ReagentContainerMayo
         amount: 12
+      - id: RMCCondimentProteinPropagator
+        amount: 3
 
 - type: entity
   parent: CMVendorIngredients

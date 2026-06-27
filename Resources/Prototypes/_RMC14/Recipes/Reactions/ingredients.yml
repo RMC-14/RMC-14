@@ -6,7 +6,7 @@
   reactants:
     JuiceCherry:
       amount: 1
-    Sugar:
+    RMCSugar:
       amount: 1
   products:
     RMCCherryJelly: 2
@@ -94,7 +94,7 @@
       amount: 0.5
     Coffee:
       amount: 1
-    Sugar:
+    RMCSugar:
       amount: 1
   products:
     CoffeeLiqueur: 2
@@ -142,7 +142,7 @@
   reactants:
     Water:
       amount: 2
-    Sugar:
+    RMCSugar:
       amount: 1
     RMCJuiceMango:
       amount: 2

@@ -67,7 +67,7 @@
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentEnzyme
-  name: universal enzyme
+  name: universal enzyme bottle
   description: Used in cooking various dishes.
   components:
   - type: Sprite
@@ -83,7 +83,7 @@
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentSugar
-  name: sugar
+  name: sugar bottle
   description: Tasty space sugar!
   components:
   - type: SolutionContainerManager
@@ -115,7 +115,7 @@
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentKetchup
-  name: ketchup
+  name: ketchup bottle
   description: You feel more American already.
   components:
   - type: Sprite
@@ -149,7 +149,7 @@
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentSoysauce
-  name: soy sauce
+  name: soy sauce bottle
   description: A salty soy-based flavoring.
   components:
   - type: Sprite
@@ -183,7 +183,7 @@
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentCornOil
-  name: corn oil
+  name: corn oil bottle
   description: A delicious oil used in cooking. Made from corn.
   components:
   - type: Sprite
@@ -209,7 +209,7 @@
       food:
         reagents:
         - ReagentId: TableSalt
-          Quantity: 20
+          Quantity: 50
 
 # Pepper
 - type: entity
@@ -268,3 +268,17 @@
     sprite: _RMC14/Objects/Consumable/Food/Sauces/tabasco.rsi
 
 # TODO RMC14 Franks Macho sauce and Coldsauce from Shivas
+
+# Protein Propagator
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentProteinPropagator
+  name: triple P bottle
+  description: A bottle of Protein Propagation Paste, used to turn meat into more meat! Just mix equal parts Triple P with uncooked animal proteins, in batches of three.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: RMCProteinPropagator
+          Quantity: 50

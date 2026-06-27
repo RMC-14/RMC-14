@@ -113,6 +113,8 @@
 #       amount: 2
       - id: RMCCircuitboardTelevision
         amount: 4
+      - id: RMCCircuitboardMicrowave
+        amount: 1
 #     - id: RMCStationAlertsConsoleCircuitboard
 #       amount: 2
 #     - id: RMCArcadeCircuitboard

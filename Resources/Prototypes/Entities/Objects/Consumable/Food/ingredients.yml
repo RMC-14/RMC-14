@@ -212,7 +212,7 @@
 - type: entity
   parent: ReagentPacketBase
   id: ReagentContainerOliveoil
-  name: olive oil
+  name: olive oil bottle #RMC change
   description: Olive oil. From space olives presumably.
   components:
   - type: Sprite

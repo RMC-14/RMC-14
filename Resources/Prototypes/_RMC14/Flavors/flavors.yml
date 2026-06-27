@@ -27,3 +27,8 @@
   id: rmcsoymilk
   flavorType: Complex
   description: like soy-milk.
+
+- type: flavor
+  id: rmcgross
+  flavorType: Complex
+  description: rmc-flavor-gross

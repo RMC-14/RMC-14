@@ -33,12 +33,12 @@
       shader: unshaded
       map: ["bloodyunshaded"]
       visible: false
-  - type: Machine
-    board: CMCircuitboardMicrowave
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
+  - type: Machine
+    board: RMCCircuitboardMicrowave
 
 - type: entity
   parent: CMMicrowave
@@ -52,3 +52,12 @@
   - type: ApcPowerReceiver
     needsPower: false # intentionally!
     powerLoad: 0
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: RMCCircuitboardMicrowave
+  name: circuit board (microwave)
+  description: A machine printed circuit board for a michaelwave.
+  components:
+  - type: MachineBoard
+    prototype: CMMicrowave

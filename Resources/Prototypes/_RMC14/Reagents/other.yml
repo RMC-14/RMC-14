@@ -13,3 +13,20 @@
         potency: 2
         nutFactor: 2
         nutMetabolism: 0.1
+
+- type: reagent
+  parent: CMReagent
+  id: RMCProteinPropagator
+  name: reagent-name-rmcproteinpropagator
+  desc: reagent-desc-rmcproteinpropagator
+  physicalDesc: reagent-physical-desc-sludgey
+  color: "#6C6841"
+  flavor: rmcgross
+  metabolisms:
+    Food:
+      metabolismRate: 0.5
+      effects:
+      - !type:Nutritious
+        potency: 2
+        nutFactor: 2
+        nutMetabolism: 0.1
