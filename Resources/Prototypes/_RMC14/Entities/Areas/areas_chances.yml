@@ -496,7 +496,7 @@
     linkedLz: dropship_lz2, dropship_lz1
 
 - type: entity
-  parent: RMCAreaLv522IndoorsLoneBuildings
+  parent: RMCAreaLv522IndoorsLoneBuildingsStorageBlocks
   id: RMCAreaLv522IndoorsLoneBuildingsStorageBlocksNW
   name: Northwestern Outdoor Storage
   components:
@@ -504,7 +504,7 @@
     state: blue
 
 - type: entity
-  parent: RMCAreaLv522IndoorsLoneBuildings
+  parent: RMCAreaLv522IndoorsLoneBuildingsStorageBlocks
   id: RMCAreaLv522IndoorsLoneBuildingsStorageBlocksE
   name: Eastern Outdoor Storage
   components:
