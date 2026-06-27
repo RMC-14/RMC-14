@@ -56,12 +56,6 @@ public sealed class RMCDazedSystem : EntitySystem
                 _charges.ResetCharges(actionId);
             }
         }
-
-        if (_net.IsServer && _playerManager.TryGetSessionByEntity(ent.Owner, out var session))
-        {
-            var ev = new DazedComponentShutdownEvent();
-            RaiseNetworkEvent(ev, session.Channel);
-        }
     }
 
     public bool TryDaze(EntityUid uid, TimeSpan time, bool refresh = false, StatusEffectsComponent? status = null, bool stutter = false)
@@ -91,6 +85,3 @@ public sealed class RMCDazedSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct DazedEvent(TimeSpan Duration);
-
-[NetSerializable, Serializable]
-public sealed class DazedComponentShutdownEvent: EntityEventArgs;
