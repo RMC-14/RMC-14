@@ -3006,3 +3006,14 @@
     state: mixes-the-fuel
   - type: PatronFigurine
     id: d4b8cf96-c8cd-4f23-9a52-744497ca6eb7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronShanaSnowMcTavish
+  name: Shana 'Snow' McTavish figurine
+  description: "Hates walls. Likes marines being nearby. Smells like vanilla."
+  components:
+  - type: Sprite
+    state: shana_snow_mctavish
+  - type: PatronFigurine
+    id: 2748a7ed-7c12-40bf-a0bd-b43f33828782
