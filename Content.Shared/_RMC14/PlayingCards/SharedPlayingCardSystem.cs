@@ -571,7 +571,8 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         hand.Comp.Cards.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
         Dirty(hand);
-        QueueDel(card);
+        if (_net.IsServer)
+            QueueDel(card);
         UpdateHandName(hand);
         TryPopup(hand, Loc.GetString("rmc-playing-card-add-to-hand", ("count", hand.Comp.Cards.Count)), user);
     }
@@ -580,7 +581,8 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         hand1.Comp.Cards.AddRange(hand2.Comp.Cards);
         Dirty(hand1);
-        QueueDel(hand2);
+        if (_net.IsServer)
+            QueueDel(hand2);
         UpdateHandName(hand1);
         TryPopup(hand1, Loc.GetString("rmc-playing-card-merge-hands", ("count", hand1.Comp.Cards.Count)), user);
     }
