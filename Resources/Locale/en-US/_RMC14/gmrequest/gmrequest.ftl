@@ -11,8 +11,8 @@ rmc-gm-request-subtle-default = You hear the voice of the gamemaster...
 rmc-gm-request-command-toggle-description = Toggles the ability to send GM Requests.
 rmc-gm-request-command-toggle-too-many-arguments-error = Too many arguments.
 rmc-gm-request-command-toggle-invalid-argument-error = Invalid argument.
-rmc-gm-request-command-toggle-enabled = GM Request has been enabled.
-rmc-gm-request-command-toggle-disabled = GM Request has been disabled.
+rmc-gm-request-command-toggle-enabled = GM Requests have been enabled.
+rmc-gm-request-command-toggle-disabled = GM Requests have been disabled.
 
 rmc-gm-request-command-ui-description = Opens the GM Request UI.
 rmc-gm-request-command-ui-too-many-arguments-error = Too many arguments.
