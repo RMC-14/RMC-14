@@ -118,16 +118,16 @@
     prototype: RMCChemMasterIndustrial
     # TODO RMC14 material requirements
 
-- type: entity
-  parent: CMBaseMachineCircuitboard
-  id: CMCircuitboardMicrowave
-  name: microwave machine board
-  description: A machine printed circuit board for a microwave.
-  components:
-  - type: Sprite
-    state: blank_mod
-  - type: MachineBoard
-    prototype: CMMicrowave
+#- type: entity
+  #parent: CMBaseMachineCircuitboard
+ # id: CMCircuitboardMicrowave
+  #name: microwave machine board
+  #description: A machine printed circuit board for a microwave.
+  #components:
+  #- type: Sprite
+  #  state: blank_mod
+  #- type: MachineBoard
+  #  prototype: CMMicrowave
 #    # TODO RMC14 material requirements
 
 - type: entity
