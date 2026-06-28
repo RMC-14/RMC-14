@@ -3039,3 +3039,14 @@
     state: jatayu_nerd_corvuson
   - type: PatronFigurine
     id: e75feb1b-2b5c-4f56-bccb-b0c45bff5d54
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCadeStripesSagan
+  name: Cade 'Stripes' Sagan figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: cade_stripes_sagan
+  - type: PatronFigurine
+    id: 26f7eb05-ab44-460a-bd6b-036929ef9951
