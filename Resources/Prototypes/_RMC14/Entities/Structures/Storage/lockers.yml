@@ -77,11 +77,21 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerIntelSafe
+  name: secure safe
+  description: May contain valuable information
+  suffix: Intel
+  components:
   - type: IntelSafeCandidate
   - type: UserInterface
     interfaces:
       enum.DialogUiKey.Key:
         type: DialogBui
+  - type: AccessReader
+    access: [ [ "CMAccessColonyCommand" ] ]
 
 - type: entity
   parent: RMCLockerSecureSafe
@@ -94,7 +104,7 @@
     access: [["CMAccessColonyCommand"]]
 
 - type: entity
-  parent: CMLockerBase
+  parent: RMCLockerSecureSafe
   id: RMCLockerSecureSafeLiaison
   description: A huge chunk of metal with a dial embedded in it. Fine print on the dial reads "Scarborough Arms - 2 tumbler safe, guaranteed thermite resistant, and explosion resistant."
   suffix: Corporate Liaison
