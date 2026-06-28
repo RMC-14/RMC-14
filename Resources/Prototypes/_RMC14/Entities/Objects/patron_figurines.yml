@@ -2989,7 +2989,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronWyattHossCross
   name: Wyatt 'Hoss' Cross figurine
-  #description: ""
+  description: "It's a bird, it’s a plane, it's a little Hoss! With a big old smile, he's equipped with a mini cornbread MRE and a miniature smartgun!"
   components:
   - type: Sprite
     state: wyatt_hoss_cross
