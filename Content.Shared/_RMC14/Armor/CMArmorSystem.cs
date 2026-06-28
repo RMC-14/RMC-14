@@ -359,10 +359,12 @@ public sealed class CMArmorSystem : EntitySystem
         }
 
         if (args.Origin is { } origin &&
-            TryComp(origin, out TransformComponent? originXform))
+            origin.IsValid() &&
+            TryComp(origin, out TransformComponent? originXform) &&
+            TryComp(ent, out TransformComponent? entXform))
         {
             var originCoords = _transform.GetMapCoordinates(origin, originXform);
-            var armorCoords = _transform.GetMapCoordinates(ent);
+            var armorCoords = _transform.GetMapCoordinates(ent, entXform);
 
             if (originCoords.MapId == armorCoords.MapId)
             {
