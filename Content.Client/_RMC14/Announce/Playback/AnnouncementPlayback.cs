@@ -49,9 +49,9 @@ public sealed class AnnouncementPlayback
         var titleText = !string.IsNullOrEmpty(state.Data.Title) ? state.Data.Title : style.TitleConfig.Title;
         var hasTitle = style.TitleConfig.ShowTitle && !string.IsNullOrEmpty(titleText);
 
-        ResetBaseLabelColor(style, state, labels, hasTitle);
-
         var status = _animation.Update(animationContext, deltaTime);
+
+        ResetBaseLabelColor(style, state, labels, hasTitle);
         if (status == AnnouncementAnimationStatus.Hold || status == AnnouncementAnimationStatus.Finished)
         {
             BeginHold(state, animationContext, currentTime);
@@ -86,16 +86,19 @@ public sealed class AnnouncementPlayback
 
     private static void ResetBaseLabelColor(AnnouncementStyle style, ActiveAnnouncement state, IReadOnlyList<RichTextLabel> labels, bool hasTitle)
     {
+        var alpha = state.FadeAlpha * state.PulseAlpha;
         for (var i = 0; i < labels.Count; i++)
         {
-            labels[i].Modulate = hasTitle && i == 0
+            var baseColor = hasTitle && i == 0
                 ? style.TitleConfig.TitleColor
                 : style.TextConfig.PrimaryColor;
+            labels[i].Modulate = new Color(baseColor.R, baseColor.G, baseColor.B, baseColor.A * alpha);
         }
 
         foreach (var titleLabel in state.TitleLabels)
         {
-            titleLabel.Modulate = style.TitleConfig.TitleColor;
+            var baseColor = style.TitleConfig.TitleColor;
+            titleLabel.Modulate = new Color(baseColor.R, baseColor.G, baseColor.B, baseColor.A * alpha);
         }
     }
 

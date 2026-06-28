@@ -15,20 +15,11 @@
     stylized:
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: true
-            cRTSettings:
+          enableCRT: true
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -72,19 +63,10 @@
     default:
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: false
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -130,13 +112,9 @@
       showSprite: false
       style:
         animation:
-          animation: None
-          printSpeed: 0.02
+          animation: !type:NoneAnimationConfig
           holdDuration: 8
           flickerChance: 0
-          glitchChance: 0
-          animationEnhancements:
-            enableCRT: false
         layout:
           position: TopLeft
           spritePosition: Left
@@ -184,20 +162,11 @@
       showSprite: false
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: true
-            cRTSettings:
+          enableCRT: true
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -248,20 +217,11 @@
     stylized:
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: true
-            cRTSettings:
+          enableCRT: true
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -305,19 +265,10 @@
     default:
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: false
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -363,13 +314,9 @@
       showSprite: false
       style:
         animation:
-          animation: None
-          printSpeed: 0.02
+          animation: !type:NoneAnimationConfig
           holdDuration: 8
           flickerChance: 0
-          glitchChance: 0
-          animationEnhancements:
-            enableCRT: false
         layout:
           position: TopLeft
           spritePosition: Left
@@ -417,20 +364,11 @@
       showSprite: false
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: true
-            cRTSettings:
+          enableCRT: true
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -480,20 +418,11 @@
       showSprite: false
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: true
-            cRTSettings:
+          enableCRT: true
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -543,20 +472,11 @@
       showSprite: false
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: true
-            cRTSettings:
+          enableCRT: true
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -606,20 +526,11 @@
       showSprite: false
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: true
-            cRTSettings:
+          enableCRT: true
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -669,20 +580,11 @@
       showSprite: false
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: true
-            cRTSettings:
+          enableCRT: true
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -732,20 +634,11 @@
       showSprite: false
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: true
-            cRTSettings:
+          enableCRT: true
         layout:
           position: TopLeft
           speakerNamePosition: Below
@@ -795,20 +688,11 @@
       showSprite: false
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.025
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.01
-          animationEnhancements:
-            slideDuration: 1.0
-            slideFrom: Top
-            zoomStartScale: 0.1
-            zoomDuration: 1.0
-            bounceCount: 3
-            bounceHeight: 15
-            enableCRT: true
-            cRTSettings:
+          enableCRT: true
         layout:
           position: TopLeft
           speakerNamePosition: Below

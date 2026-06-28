@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
-using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.Announce.Animations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Maths;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
@@ -15,10 +13,13 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
     private const float MinTickInterval = 0.005f;
     private const int MaxAdvancePerUpdate = 5;
 
+    private readonly GlitchAnimationConfig _config;
     private int _currentLine;
     private int _currentChar;
     private float _glitchTimer;
     private float _burstTimer;
+
+    public GlitchAnimation(GlitchAnimationConfig config) => _config = config;
 
     public void Reset(AnnouncementAnimationContext context)
     {
@@ -36,8 +37,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
-        var style = context.Style;
-        var intensity = GetIntensity(style.AnimationConfig.GlitchChance);
+        var intensity = GetIntensity(_config.GlitchChance);
 
         if (_burstTimer > 0f)
         {
@@ -51,7 +51,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
         var burstActive = _burstTimer > 0f;
         var printInterval = MathF.Max(
             MinTickInterval,
-            style.AnimationConfig.PrintSpeed * (burstActive ? 0.22f : 0.60f));
+            _config.PrintSpeed * (burstActive ? 0.22f : 0.60f));
 
         _glitchTimer += deltaTime;
         var advanced = 0;

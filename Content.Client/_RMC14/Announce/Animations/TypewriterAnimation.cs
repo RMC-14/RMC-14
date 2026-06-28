@@ -1,14 +1,16 @@
-using System;
-using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.Announce.Animations;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class TypewriterAnimation : IAnnouncementAnimation
 {
+    private readonly TypewriterAnimationConfig _config;
     private int _currentLine;
     private int _currentChar;
     private float _timer;
+
+    public TypewriterAnimation(TypewriterAnimationConfig config) => _config = config;
 
     public void Reset(AnnouncementAnimationContext context)
     {
@@ -24,10 +26,8 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
-        var style = context.Style;
-
         _timer += deltaTime;
-        if (_timer < style.AnimationConfig.PrintSpeed)
+        if (_timer < _config.PrintSpeed)
             return AnnouncementAnimationStatus.Running;
 
         _timer = 0f;

@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.Announce.Animations;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -35,8 +36,8 @@ public static class AnnouncementStyling
         style.TitleConfig.TitleFontSize *= scale;
         style.TitleConfig.TitleUnderlineThickness *= scale;
 
-        style.AnimationConfig.AnimationEnhancements = serialization.CreateCopy(baseStyle.AnimationConfig.AnimationEnhancements, notNullableOverride: true)!;
-        style.AnimationConfig.AnimationEnhancements.BounceHeight *= scale;
+        if (style.AnimationConfig.Animation is BounceAnimationConfig bounce)
+            bounce.BounceHeight *= scale;
 
         return style;
     }
@@ -78,11 +79,10 @@ public static class AnnouncementStyling
 
         if (display.CRTGlowColorOverride is { } crtGlowColor)
         {
-            var enhancements = style.AnimationConfig.AnimationEnhancements;
-            if (enhancements.EnableCRT)
+            if (style.AnimationConfig.EnableCRT)
             {
-                enhancements.CRTSettings ??= new CRTSettings();
-                enhancements.CRTSettings.GlowColor = crtGlowColor;
+                style.AnimationConfig.CRTSettings ??= new CRTSettings();
+                style.AnimationConfig.CRTSettings.GlowColor = crtGlowColor;
             }
         }
     }
@@ -99,8 +99,6 @@ public static class AnnouncementStyling
         style.SpriteConfig.SpriteBoxBorderThickness = baseStyle.SpriteConfig.SpriteBoxBorderThickness * scaleFactor;
         style.SpriteConfig.SpriteBoxPadding = baseStyle.SpriteConfig.SpriteBoxPadding * scaleFactor;
         style.TextConfig.SpeakerNameFontSize = baseStyle.TextConfig.SpeakerNameFontSize * scaleFactor;
-        style.AnimationConfig.AnimationEnhancements = serialization.CreateCopy(baseStyle.AnimationConfig.AnimationEnhancements, notNullableOverride: true)!;
-
         return style;
     }
 
@@ -155,7 +153,6 @@ public static class AnnouncementStyling
 
         var wordCountScaleFactor = CalculateWordCountScaleFactor(totalWordCount, totalCharCount);
 
-        // Width is the primary constraint; word-count pressure is intentionally softened.
         var softenedWordCountScale = 1f - ((1f - wordCountScaleFactor) * 0.10f);
         var combinedScaleFactor = widthScaleFactor * softenedWordCountScale;
 

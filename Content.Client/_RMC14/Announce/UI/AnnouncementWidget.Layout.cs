@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Client._RMC14.Announce.Styling;
 using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.Announce.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
@@ -385,10 +386,10 @@ public sealed partial class AnnouncementWidget
 
     private CRTSettings GetCRTSettingsFromStyle(AnnouncementStyle style)
     {
-        if (style.AnimationConfig.AnimationEnhancements?.EnableCRT == true &&
-            style.AnimationConfig.AnimationEnhancements.CRTSettings != null)
+        if (style.AnimationConfig.EnableCRT &&
+            style.AnimationConfig.CRTSettings != null)
         {
-            return style.AnimationConfig.AnimationEnhancements.CRTSettings;
+            return style.AnimationConfig.CRTSettings;
         }
 
         return new CRTSettings
@@ -445,7 +446,7 @@ public sealed partial class AnnouncementWidget
 
         var animation = ActiveAnnouncement.ResolvedStyle.AnimationConfig.Animation;
 
-        if (animation == AnnouncementAnimation.Typewriter || animation == AnnouncementAnimation.Glitch)
+        if (animation is TypewriterAnimationConfig or GlitchAnimationConfig)
         {
             for (var i = _titleOffset; i < _richTextLabels.Length; i++)
             {
@@ -515,7 +516,7 @@ public sealed partial class AnnouncementWidget
 
         UpdateLayoutRect(position, widgetSize);
 
-        if (style.AnimationConfig.Animation == AnnouncementAnimation.Zoom)
+        if (style.AnimationConfig.Animation is ZoomAnimationConfig)
         {
             SetWidth = widgetSize.X * ActiveAnnouncement.ZoomCurrentScale;
             SetHeight = widgetSize.Y * ActiveAnnouncement.ZoomCurrentScale;

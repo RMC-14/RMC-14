@@ -1,12 +1,14 @@
-using System;
 using System.Numerics;
-using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.Announce.Animations;
 
 namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class SlideAnimation : IAnnouncementAnimation
 {
+    private readonly SlideAnimationConfig _config;
     private float _timer;
+
+    public SlideAnimation(SlideAnimationConfig config) => _config = config;
 
     public void Reset(AnnouncementAnimationContext context)
     {
@@ -16,9 +18,8 @@ public sealed class SlideAnimation : IAnnouncementAnimation
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
-        var enhancements = context.Style.AnimationConfig.AnimationEnhancements;
         _timer += deltaTime;
-        var duration = enhancements?.SlideDuration ?? 1.0f;
+        var duration = _config.Duration;
         if (duration <= 0f)
         {
             context.Output.CurrentSlideOffset = Vector2.Zero;
@@ -27,9 +28,7 @@ public sealed class SlideAnimation : IAnnouncementAnimation
         }
 
         var progress = Math.Min(_timer / duration, 1.0f);
-
-        var currentOffset = Vector2.Lerp(context.Output.SlideStartPosition, Vector2.Zero, progress);
-        context.Output.CurrentSlideOffset = currentOffset;
+        context.Output.CurrentSlideOffset = Vector2.Lerp(context.Output.SlideStartPosition, Vector2.Zero, progress);
 
         if (progress >= 1.0f)
         {

@@ -109,11 +109,27 @@ public sealed class AnnouncementControllerSystem : EntitySystem
     private void OnGlobalLayoutChanged(string serializedLayout)
     {
         _globalLayoutOverride = AnnouncementLayoutOverrides.ParseSingle(serializedLayout);
+        UpdateCurrentAnnouncementPosition();
     }
 
     private void OnLayoutOverridesChanged(string serializedOverrides)
     {
         _layoutOverrides = AnnouncementLayoutOverrides.Parse(serializedOverrides);
+        UpdateCurrentAnnouncementPosition();
+    }
+
+    private void UpdateCurrentAnnouncementPosition()
+    {
+        var screen = _uiManager.ActiveScreen;
+        if (screen == null)
+            return;
+
+        var widget = screen.GetWidget<AnnouncementWidget>();
+        if (widget?.ActiveAnnouncement is not { } active)
+            return;
+
+        var layout = ResolveLayoutOverride(active.Data.AnnouncementId);
+        active.Data.ScreenPositionOverride = layout?.Clamp().ScreenPosition;
     }
 
     public AnnouncementDisplayPreference ResolveDisplayPreference(ProtoId<AnnouncementPresetPrototype> announcementId)

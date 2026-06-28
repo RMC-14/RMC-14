@@ -1,6 +1,7 @@
 using System.Numerics;
-using Content.Shared._RMC14.Announce;
 using Content.Client._RMC14.Announce.Styling;
+using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.Announce.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -71,10 +72,10 @@ public sealed partial class AnnouncementWidget : UIWidget
             State = AnnouncementState.Animating,
             CleanText = PreprocessText(announcement.Text),
             SlideStartPosition = GetSlideStartPosition(resolvedStyle),
-            ZoomCurrentScale = resolvedStyle.AnimationConfig.Animation == AnnouncementAnimation.Zoom
-                ? resolvedStyle.AnimationConfig.AnimationEnhancements.ZoomStartScale
+            ZoomCurrentScale = resolvedStyle.AnimationConfig.Animation is ZoomAnimationConfig zoomConfig
+                ? zoomConfig.StartScale
                 : 1.0f,
-            FadeAlpha = resolvedStyle.AnimationConfig.Animation == AnnouncementAnimation.Fade ? 0.0f : 1.0f,
+            FadeAlpha = 1.0f,
             PulseAlpha = 1.0f
         };
 

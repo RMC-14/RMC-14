@@ -11,13 +11,10 @@
       showSprite: false
       style:
         animation:
-          animation: Typewriter
-          printSpeed: 0.018
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.018
           holdDuration: 10
           flickerChance: 0
-          glitchChance: 0.012
-          animationEnhancements:
-            enableCRT: false
         layout:
           position: TopCenter
           speakerNamePosition: Below

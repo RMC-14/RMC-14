@@ -1,10 +1,13 @@
-using System;
+using Content.Shared._RMC14.Announce.Animations;
 
 namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class ZoomAnimation : IAnnouncementAnimation
 {
+    private readonly ZoomAnimationConfig _config;
     private float _timer;
+
+    public ZoomAnimation(ZoomAnimationConfig config) => _config = config;
 
     public void Reset(AnnouncementAnimationContext context)
     {
@@ -13,9 +16,8 @@ public sealed class ZoomAnimation : IAnnouncementAnimation
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
-        var enhancements = context.Style.AnimationConfig.AnimationEnhancements;
         _timer += deltaTime;
-        var duration = enhancements.ZoomDuration;
+        var duration = _config.Duration;
         if (duration <= 0f)
         {
             context.Output.ZoomCurrentScale = 1f;
@@ -24,10 +26,7 @@ public sealed class ZoomAnimation : IAnnouncementAnimation
         }
 
         var progress = Math.Min(_timer / duration, 1.0f);
-
-        var startScale = enhancements.ZoomStartScale;
-        var currentScale = startScale + (1.0f - startScale) * progress;
-        context.Output.ZoomCurrentScale = currentScale;
+        context.Output.ZoomCurrentScale = _config.StartScale + (1.0f - _config.StartScale) * progress;
 
         if (progress >= 1.0f)
         {

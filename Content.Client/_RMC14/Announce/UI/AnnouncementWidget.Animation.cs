@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Client._RMC14.Announce.Animations;
 using Content.Client._RMC14.Announce.Effects;
 using Content.Shared._RMC14.Announce;
+using Content.Shared._RMC14.Announce.Animations;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -59,12 +60,12 @@ public sealed partial class AnnouncementWidget
 
     private Vector2 GetSlideStartPosition(AnnouncementStyle style)
     {
-        if (style.AnimationConfig.Animation != AnnouncementAnimation.Slide)
+        if (style.AnimationConfig.Animation is not SlideAnimationConfig slideConfig)
             return Vector2.Zero;
 
         var screenSize = ResolveScreenSize();
 
-        return style.AnimationConfig.AnimationEnhancements.SlideFrom switch
+        return slideConfig.From switch
         {
             SlideDirection.Left => new Vector2(-screenSize.X, 0),
             SlideDirection.Right => new Vector2(screenSize.X, 0),
