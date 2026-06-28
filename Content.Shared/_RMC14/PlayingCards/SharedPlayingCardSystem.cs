@@ -670,7 +670,8 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
         deck.Comp.CardOrder.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
         Dirty(deck);
-        QueueDel(card);
+        if (_net.IsServer)
+            QueueDel(card);
 
         Popup.PopupPredicted(Loc.GetString("rmc-playing-card-added-to-deck"), null, deck, user);
         Audio.PlayPredicted(deck.Comp.DrawSound, deck, user);
@@ -697,7 +698,10 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         Dirty(deck);
 
         if (hand.Comp.Cards.Count == 0)
-            QueueDel(hand);
+        {
+            if (_net.IsServer)
+                QueueDel(hand);
+        }
         else
             Dirty(hand);
 
