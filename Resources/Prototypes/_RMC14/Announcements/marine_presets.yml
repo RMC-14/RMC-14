@@ -173,6 +173,7 @@
   description: "Official announcements from Marine Command"
   target: Marines
   visibleInSettings: false
+  visibleInLayoutEditor: false
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8
@@ -295,7 +296,7 @@
           showTitle: true
           title: ">> OVERWATCH <<"
           titleColor: "#4a9eff"
-          titleFontSize: 40
+          titleFontSize: 20
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -352,7 +353,7 @@
           showTitle: true
           title: ">> OVERWATCH <<"
           titleColor: "#4a9eff"
-          titleFontSize: 40
+          titleFontSize: 20
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -392,7 +393,7 @@
           showTitle: true
           title: ">> OVERWATCH <<"
           titleColor: "#4a9eff"
-          titleFontSize: 40
+          titleFontSize: 20
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -455,7 +456,7 @@
           showTitle: true
           title: ">> ALPHA OVERWATCH <<"
           titleColor: "#E61919"
-          titleFontSize: 40
+          titleFontSize: 20
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -518,7 +519,7 @@
           showTitle: true
           title: ">> BRAVO OVERWATCH <<"
           titleColor: "#FFC32D"
-          titleFontSize: 40
+          titleFontSize: 20
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -581,7 +582,7 @@
           showTitle: true
           title: ">> CHARLIE OVERWATCH <<"
           titleColor: "#C864C8"
-          titleFontSize: 40
+          titleFontSize: 20
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -644,7 +645,7 @@
           showTitle: true
           title: ">> DELTA OVERWATCH <<"
           titleColor: "#4148C8"
-          titleFontSize: 40
+          titleFontSize: 20
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -707,7 +708,7 @@
           showTitle: true
           title: ">> ECHO OVERWATCH <<"
           titleColor: "#67D692"
-          titleFontSize: 40
+          titleFontSize: 20
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -770,7 +771,7 @@
           showTitle: true
           title: ">> FOXTROT OVERWATCH <<"
           titleColor: "#C47A50"
-          titleFontSize: 40
+          titleFontSize: 20
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2
@@ -833,7 +834,7 @@
           showTitle: true
           title: ">> INTEL OVERWATCH <<"
           titleColor: "#09662B"
-          titleFontSize: 40
+          titleFontSize: 20
           titleFont: "CozetteBold"
           titleUnderline: true
           titleUnderlineThickness: 2

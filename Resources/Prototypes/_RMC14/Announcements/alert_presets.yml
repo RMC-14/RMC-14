@@ -10,6 +10,11 @@
   presentations:
     stylized:
       showSprite: false
+      decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
+      decalState: "evac"
+      decalPlacement: ReplaceSprite
+      decalScale: 4.0
+      decalOffset: "0,-30"
       style:
         animation:
           animation: Typewriter
@@ -30,9 +35,9 @@
           backgroundAlpha: 0.7
           backgroundColor: "#0a1a2d"
         text:
-          primaryColor: "#a8d6ff"
+          primaryColor: "#c43232"
           font: "Cozette"
-          fontSize: 20
+          fontSize: 26
           lineHeight: 28
           showSpeakerName: false
         sprite:
@@ -41,7 +46,7 @@
         title:
           showTitle: true
           title: "ALERT LEVEL"
-          titleColor: "#4a9eff"
+          titleColor: "#8B0000"
           titleFontSize: 28
           titleFont: "CozetteBold"
           titleUnderline: true
@@ -274,6 +279,7 @@
   description: "Animated red alert display"
   target: Marines
   visibleInSettings: false
+  visibleInLayoutEditor: false
   sound:
     path: "/Audio/Misc/redalert.ogg"
     params:

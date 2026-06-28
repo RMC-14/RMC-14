@@ -39,8 +39,7 @@ rmc-announcement-dropship-message = [color=#CECECE][font size=16][bold]Dropship 
 
     {$message}[/bold][/font][/color]
 
-rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=#CECECE]EMERGENCY[/color][/bold][/font][font size=16][color=red]
-  DROPSHIP ON COLLISION COURSE. CRASH IMMINENT.[/color][/font]
+rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=#CECECE]EMERGENCY[/color][/bold][/font][color=red][font size=16] DROPSHIP ON COLLISION COURSE. CRASH IMMINENT.[/font][/color]
 
 rmc-announcement-delta = [color=#CECECE][font size=16][bold]EMERGENCY SCUTTLE AUTHORIZATION[/bold][/font][/color]
      DANGER, ARES has authorized emergency scuttle by Engineering reactor overload.

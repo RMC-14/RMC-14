@@ -246,7 +246,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
     {
         return _prototypeManager.EnumeratePrototypes<AnnouncementPresetPrototype>()
             .Where(ShouldIncludeInLayoutEditor)
-            .OrderBy(preset => preset.Name)
+            .OrderBy(preset => (string?)preset.GroupId ?? (string)preset.ID)
             .ThenBy(preset => preset.ID)
             .ToList();
     }
