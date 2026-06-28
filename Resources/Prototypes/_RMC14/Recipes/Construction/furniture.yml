@@ -167,6 +167,21 @@
   conditions:
     - !type:TileNotBlocked
 
+- type: construction
+  parent: RMC
+  id: RMCTableMess
+  name: mess serving table
+  description: A square metal surface resting on four legs. Useful to put food on. Has a special edge on it that makes climbing it impossible.
+  graph: RMCTable
+  startNode: start
+  targetNode: Mess
+  category: construction-category-cm-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
 #misc
 
 - type: construction

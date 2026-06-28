@@ -199,3 +199,24 @@
 
 - type: Tag
   id: RMCTablePartWoodCarpet
+
+- type: entity
+  parent: RMCTablePartBase
+  id: RMCTablePartMess
+  name: mess serving table parts
+  components:
+  - type: Sprite
+    state: almayer
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: almayer-inhand-left
+      right:
+      - state: almayer-inhand-right
+  - type: Tag
+    tags:
+    - RMCTablePartMess
+    - RMCTablePartMetal
+
+- type: Tag
+  id: RMCTablePartMess

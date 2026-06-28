@@ -478,3 +478,21 @@
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/toc.rsi
     state: tocWtable
+
+# Mess Serving Table
+- type: entity
+  parent: CMTable
+  id: CMTableMess
+  name: mess serving table
+  description: A square metal surface resting on four legs. Useful to put food on. Has a special edge on it that makes climbing it impossible. It is securely bolted to the floor, making deconstruction a chore.
+  suffix: Almayer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/almayer.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/almayer.rsi
+  - type: Construction
+    graph: RMCTable
+    node: Mess
+  - type: Climbable
+    vaultable: false

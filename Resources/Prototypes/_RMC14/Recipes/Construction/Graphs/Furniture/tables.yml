@@ -62,6 +62,14 @@
               sprite: _RMC14/Objects/Materials/table_parts.rsi
               state: almayer
             doAfter: 1
+        - to: Mess
+          steps:
+          - tag: RMCTablePartMess
+            name: mess serving table parts
+            icon:
+              sprite: _RMC14/Objects/Materials/table_parts.rsi
+              state: almayer
+            doAfter: 1
 
     - node: Tan
       entity: CMTable
@@ -156,3 +164,16 @@
             - tool: Anchoring
               doAfter: 5
               duplicateConditions: All
+
+    - node: Mess
+      entity: CMTableMess
+      edges:
+      - to: start
+        completed:
+        - !type:SpawnPrototype
+          prototype: RMCTablePartMess
+          amount: 1
+        steps:
+        - tool: Anchoring
+          doAfter: 20
+          duplicateConditions: All

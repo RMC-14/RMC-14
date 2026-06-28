@@ -835,6 +835,8 @@
         amount: 2
       - id: DrinkMugRed
         amount: 2
+      - id: RMCTablePartMess
+        amount: 3
 
 - type: entity
   parent: CMVendorDinnerware
