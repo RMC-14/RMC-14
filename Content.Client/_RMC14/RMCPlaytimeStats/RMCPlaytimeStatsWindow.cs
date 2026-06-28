@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Content.Client._RMC14.Xenonids;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Roles;
@@ -26,6 +27,10 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     [Dependency] private readonly JobRequirementsManager _jobRequirementsManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly XenoInfectionsManager _infectionsManager = default!;
+
+    // The parasite role is ranked by total successful infections instead of playtime.
+    private const string ParasiteJob = "CMXenoParasite";
 
     private readonly Color _altColor = Color.FromHex("#292B38");
     private readonly Color _defaultColor = Color.FromHex("#2F2F3B");
@@ -42,6 +47,11 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     private TimeSpan _emeraldTime;
     private TimeSpan _amethystTime;
     private TimeSpan _prismaticTime;
+
+    private int _infectMatureThreshold;
+    private int _infectElderThreshold;
+    private int _infectAncientThreshold;
+    private int _infectPrimeThreshold;
 
     public RMCPlaytimeStatsWindow()
     {
@@ -63,6 +73,33 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         _emeraldTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimeEmeraldMedalTimeHours));
         _amethystTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimeAmethystMedalTimeHours));
         _prismaticTime = TimeSpan.FromHours(_config.GetCVar(RMCCVars.RMCPlaytimePrismaticMedalTimeHours));
+
+        _infectMatureThreshold = _config.GetCVar(RMCCVars.RMCXenoInfectRankMatureThreshold);
+        _infectElderThreshold = _config.GetCVar(RMCCVars.RMCXenoInfectRankElderThreshold);
+        _infectAncientThreshold = _config.GetCVar(RMCCVars.RMCXenoInfectRankAncientThreshold);
+        _infectPrimeThreshold = _config.GetCVar(RMCCVars.RMCXenoInfectRankPrimeThreshold);
+    }
+
+    /// <summary>
+    ///     The parasite's stats-menu rank icon is derived from total infections (matching the in-game rank),
+    ///     rather than playtime. Parasites currently top out at rank 5 (Prime); rank 6 is reserved for the future.
+    /// </summary>
+    private SpriteSpecifier.Rsi? GetParasiteInfectIcon(int infections)
+    {
+        string? iconName = null;
+        if (infections >= _infectPrimeThreshold)
+            iconName = "hudxenoupgrade5-ui";
+        else if (infections >= _infectAncientThreshold)
+            iconName = "hudxenoupgrade4-ui";
+        else if (infections >= _infectElderThreshold)
+            iconName = "hudxenoupgrade3-ui";
+        else if (infections >= _infectMatureThreshold)
+            iconName = "hudxenoupgrade2-ui";
+
+        if (iconName == null)
+            return null;
+
+        return new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), iconName);
     }
 
     private RMCPlaytimeMedalType? GetMedalType(TimeSpan playtime)
@@ -272,11 +309,13 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         _useAltColor = false;
         foreach (var (job, playtime) in roles.OrderBy(r => Loc.GetString(r.Job.Name)))
         {
+            var isParasite = job.ID == ParasiteJob;
             var entry = new RMCPlaytimeStatsEntry(
                 Loc.GetString(job.Name),
                 playtime,
                 new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor),
-                GetMedalIcon(dept.ID, playtime, job.ID));
+                isParasite ? GetParasiteInfectIcon(_infectionsManager.Infections) : GetMedalIcon(dept.ID, playtime, job.ID),
+                isParasite ? _infectionsManager.Infections : null);
 
             rolesList.AddChild(entry);
             _useAltColor ^= true;
@@ -356,11 +395,13 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                 .Where(d => d.Roles.Contains(job.ID))
                 .FirstOrDefault();
 
+            var isParasite = kvp.Key == ParasiteJob;
             var entry = new RMCPlaytimeStatsEntry(
                 job.LocalizedName,
                 kvp.Value,
                 new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor),
-                GetMedalIcon(dept?.ID, kvp.Value, kvp.Key));
+                isParasite ? GetParasiteInfectIcon(_infectionsManager.Infections) : GetMedalIcon(dept?.ID, kvp.Value, kvp.Key),
+                isParasite ? _infectionsManager.Infections : null);
 
             rolesList.AddChild(entry);
             _useAltColor ^= true;

@@ -15,11 +15,13 @@ public sealed partial class RMCPlaytimeStatsEntry : ContainerButton
 {
     public TimeSpan Playtime { get; private set; }
 
-    public RMCPlaytimeStatsEntry(string role, TimeSpan playtime, StyleBox styleBox, SpriteSpecifier.Rsi? sprite)
+    public RMCPlaytimeStatsEntry(string role, TimeSpan playtime, StyleBox styleBox, SpriteSpecifier.Rsi? sprite, int? infections = null)
     {
         RobustXamlLoader.Load(this);
 
-        RoleLabel.Text = role;
+        RoleLabel.Text = infections is { } infectCount
+            ? Loc.GetString("rmc-playtime-stats-parasite-infections", ("role", role), ("count", infectCount))
+            : role;
         Playtime = playtime;
         PlaytimeLabel.Text = ContentLocalizationManager.FormatPlaytime(playtime);
         BackgroundColorPanel.PanelOverride = styleBox;
