@@ -1,4 +1,4 @@
-﻿using Content.Server._RMC14.Dropship;
+using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Nuke;
@@ -34,6 +34,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Intel;
+using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Map;
@@ -136,6 +137,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly RMCGameRuleExtrasSystem _gameRulesExtras = default!;
     [Dependency] private readonly IServerPreferencesManager _prefsManager = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
+    [Dependency] private readonly TechSystem _tech = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
@@ -165,7 +167,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     private float _minimumSurvivors;
     private int _mapVoteExcludeLast;
     private bool _useCarryoverVoting;
-    private readonly TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
+    private TimeSpan _hijackStunTime;
     private bool _landingZoneMiasmaEnabled;
     private TimeSpan _sunsetDuration;
     private TimeSpan _sunriseDuration;
@@ -180,6 +182,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     private float _queenBoostRemoteRange;
 
     private bool _spawnedDropships;
+    private TimeSpan _dropshipPreflight;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -278,9 +281,11 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
         Subs.CVar(_config, RMCCVars.RMCLandingZoneMiasmaEnabled, v => _landingZoneMiasmaEnabled = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipInitialDelayMinutes, v => _dropshipPreflight = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCSunsetDuration, v => _sunsetDuration = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCSunriseDuration, v => _sunriseDuration = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCForceEndHijackTimeMinutes, v => _forceEndHijackTime = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCHijackCrashStunTimeSeconds, v => _hijackStunTime = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCHijackShipWeight, v => _hijackShipWeight = v, true);
         Subs.CVar(_config, RMCCVars.RMCMinimumHijackBurrowed, v => _hijackMinBurrowed = v, true);
         Subs.CVar(_config, RMCCVars.RMCDistressXenosMinimum, v => _xenosMinimum = v, true);
@@ -353,6 +358,18 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
                 SelectedPlanetMap.Value.Comp.Announcement is { } announcement)
             {
                 _marineAnnounce.AnnounceARESStaging(default, announcement, announcement: "rmc-announcement-ares-map");
+            }
+        }
+
+        if (!component.AresPreflightDone && announcementTime >= _dropshipPreflight)
+        {
+            component.AresPreflightDone = true;
+
+            if (_aresCore.TryGetARES(component.MarineFaction, out var ares))
+            {
+                _marineAnnounce.AnnounceRadio(ares.Value,
+                    Loc.GetString("rmc-distress-signal-preflight-complete"),
+                    component.AllClearChannel);
             }
         }
 
