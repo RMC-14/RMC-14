@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The Praetorian can now hit over barricades using their Pierce ability.
-    type: Fix
-  id: 2940
-  time: '2026-02-14T18:49:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9249
 - author: t0wnshark
   changes:
   - message: '[PVE] Added the L989A2 multiple grenade launcher, a PVE weapon for the
@@ -4555,5 +4548,13 @@
   id: 3439
   time: '2026-06-28T01:40:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10285
+- author: CatAndHats
+  changes:
+  - message: Removed the incorrectly mapped Type-71 HEAP magazines from the Trijent
+      SPP survivor insert and replaced them with empty versions
+    type: Remove
+  id: 3440
+  time: '2026-06-28T19:35:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10305
 Name: RMC14
 Order: -1
