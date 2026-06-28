@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Hands;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -37,7 +38,10 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     private readonly HashSet<Entity<PlayingCardHandComponent>> _handLookup = new();
 
     protected EntityQuery<PlayingCardComponent> CardQuery;
+    protected EntityQuery<PlayingCardDeckComponent> DeckQuery;
     protected EntityQuery<PlayingCardHandComponent> HandQuery;
+
+    private static readonly VerbCategory DrawCategory = new("rmc-playing-card-verb-category-draw", null);
 
     private const float AreaPickupRadius = 1f;
     private const float AreaPickupDelayPerCard = 0.1f;
@@ -48,6 +52,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         base.Initialize();
 
         CardQuery = GetEntityQuery<PlayingCardComponent>();
+        DeckQuery = GetEntityQuery<PlayingCardDeckComponent>();
         HandQuery = GetEntityQuery<PlayingCardHandComponent>();
 
         // Card events
@@ -66,6 +71,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         SubscribeLocalEvent<PlayingCardDeckComponent, MapInitEvent>(OnDeckMapInit);
         SubscribeLocalEvent<PlayingCardDeckComponent, InteractUsingEvent>(OnDeckInteractUsing);
         SubscribeLocalEvent<PlayingCardDeckComponent, PlayingCardDeckPickupDoAfterEvent>(OnDeckPickupDoAfter);
+        SubscribeLocalEvent<PlayingCardDeckComponent, RMCStorageEjectHandItemEvent>(OnDeckEjectHand);
 
         // Hand of cards events
         SubscribeLocalEvent<PlayingCardHandComponent, UseInHandEvent>(OnHandUseInHand);
@@ -74,6 +80,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         SubscribeLocalEvent<PlayingCardHandComponent, GetVerbsEvent<ExamineVerb>>(OnHandGetExamineVerbs);
         SubscribeLocalEvent<PlayingCardHandComponent, GetVerbsEvent<AlternativeVerb>>(OnHandGetAltVerbs);
         SubscribeLocalEvent<PlayingCardHandComponent, InteractUsingEvent>(OnHandInteractUsing);
+        SubscribeLocalEvent<PlayingCardHandComponent, RMCStorageEjectHandItemEvent>(OnHandEjectHand);
 
         // BUI events
         Subs.BuiEvents<PlayingCardHandComponent>(PlayingCardHandUi.Key,
@@ -149,6 +156,14 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         if (HandQuery.TryComp(args.Used, out var hand))
         {
             AddCardToHand((args.Used, hand), ent, args.User);
+            args.Handled = true;
+            return;
+        }
+
+        // Add card to deck (deck in active hand clicked on this card)
+        if (DeckQuery.TryComp(args.Used, out var deck))
+        {
+            AddCardToDeck((args.Used, deck), ent, args.User);
             args.Handled = true;
         }
     }
@@ -226,15 +241,42 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             Priority = 2
         });
 
+        var deckCount = ent.Comp.CardOrder.Count;
+
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = Loc.GetString("rmc-playing-card-verb-draw"),
+            Text = Loc.GetString("rmc-playing-card-verb-draw-5"),
+            Category = DrawCategory,
             Act = () =>
             {
                 if (_net.IsServer)
-                    DrawCard(ent, user);
+                    DrawMultiple(ent, user, 5);
+            },
+            Priority = 2
+        });
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-playing-card-verb-draw-half"),
+            Category = DrawCategory,
+            Act = () =>
+            {
+                if (_net.IsServer)
+                    DrawMultiple(ent, user, Math.Max(1, deckCount / 2));
             },
             Priority = 1
+        });
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-playing-card-verb-draw-all"),
+            Category = DrawCategory,
+            Act = () =>
+            {
+                if (_net.IsServer)
+                    DrawMultiple(ent, user, deckCount);
+            },
+            Priority = 0
         });
     }
 
@@ -423,23 +465,29 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         args.PushMarkup(Loc.GetString("rmc-playing-card-hand-examine", ("count", count)));
 
         var suitOrder = new List<CardSuit>();
-        var bySuit = new Dictionary<CardSuit, List<string>>();
+        var bySuit = new Dictionary<CardSuit, List<CardRank>>();
         foreach (var encoded in ent.Comp.Cards)
         {
             var (suit, rank) = DecodeCard(encoded);
             if (!bySuit.TryGetValue(suit, out var ranks))
             {
-                ranks = new List<string>();
+                ranks = new List<CardRank>();
                 bySuit[suit] = ranks;
                 suitOrder.Add(suit);
             }
-            ranks.Add(GetRankDisplayName(rank));
+            ranks.Add(rank);
         }
 
         foreach (var suit in suitOrder)
         {
+            bySuit[suit].Sort((a, b) =>
+            {
+                var va = a == CardRank.Ace ? 14 : (int)a;
+                var vb = b == CardRank.Ace ? 14 : (int)b;
+                return va.CompareTo(vb);
+            });
             var suitName = GetSuitDisplayName(suit);
-            var rankList = string.Join(", ", bySuit[suit]);
+            var rankList = string.Join(", ", bySuit[suit].ConvertAll(GetRankShortName));
             args.PushMarkup(Loc.GetString("rmc-playing-card-hand-suit-group", ("ranks", rankList), ("suit", suitName)));
         }
     }
@@ -538,7 +586,31 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         {
             MergeHands(ent, (args.Used, otherHand), args.User);
             args.Handled = true;
+            return;
         }
+
+        // Add hand to deck (deck in active hand clicked on this hand)
+        if (DeckQuery.TryComp(args.Used, out var deck))
+        {
+            AddHandToDeck((args.Used, deck), ent, args.User);
+            args.Handled = true;
+        }
+    }
+
+    private void OnDeckEjectHand(Entity<PlayingCardDeckComponent> ent, ref RMCStorageEjectHandItemEvent args)
+    {
+        if (_net.IsServer)
+            DrawCard(ent, args.User);
+        args.Handled = true;
+    }
+
+    private void OnHandEjectHand(Entity<PlayingCardHandComponent> ent, ref RMCStorageEjectHandItemEvent args)
+    {
+        if (ent.Comp.FaceUp)
+            return;
+        if (_net.IsServer)
+            DrawFromHand(ent, args.User);
+        args.Handled = true;
     }
 
     #endregion
@@ -660,6 +732,10 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
     }
 
+    protected virtual void DrawMultiple(Entity<PlayingCardDeckComponent> deck, EntityUid user, int count)
+    {
+    }
+
     protected virtual void AddCardToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardComponent> card, EntityUid user)
     {
         if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
@@ -749,6 +825,19 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             CardRank.Jack => Loc.GetString("rmc-playing-card-rank-jack"),
             CardRank.Queen => Loc.GetString("rmc-playing-card-rank-queen"),
             CardRank.King => Loc.GetString("rmc-playing-card-rank-king"),
+            _ => ((int)rank).ToString()
+        };
+    }
+
+    public string GetRankShortName(CardRank rank)
+    {
+        return rank switch
+        {
+            CardRank.Ace => Loc.GetString("rmc-playing-card-rank-ace-short"),
+            >= CardRank.Two and <= CardRank.Ten => ((int)rank).ToString(),
+            CardRank.Jack => Loc.GetString("rmc-playing-card-rank-jack-short"),
+            CardRank.Queen => Loc.GetString("rmc-playing-card-rank-queen-short"),
+            CardRank.King => Loc.GetString("rmc-playing-card-rank-king-short"),
             _ => ((int)rank).ToString()
         };
     }
