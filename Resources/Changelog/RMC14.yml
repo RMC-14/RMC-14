@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Motion detectors inside of bags now ignore survivors that have been given
-      IFF.
-    type: Fix
-  id: 2939
-  time: '2026-02-14T18:51:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9243
 - author: Dygon
   changes:
   - message: The Praetorian can now hit over barricades using their Pierce ability.
@@ -4555,5 +4547,13 @@
   id: 3438
   time: '2026-06-27T01:51:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10289
+- author: SabreML
+  changes:
+  - message: Reduced the size of the empty gap in chat after xeno announcements. (Deaths,
+      traps, etc.)
+    type: Tweak
+  id: 3439
+  time: '2026-06-28T01:40:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10285
 Name: RMC14
 Order: -1
