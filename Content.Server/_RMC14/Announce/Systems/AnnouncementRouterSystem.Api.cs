@@ -7,7 +7,7 @@ namespace Content.Server._RMC14.Announce;
 
 public sealed partial class AnnouncementRouterSystem
 {
-    private static readonly ProtoId<AnnouncementPresetPrototype> PresetMarineCommand = "MarineCommand";
+    public static readonly ProtoId<AnnouncementPresetPrototype> PresetMarineCommand = "MarineCommand";
     private static readonly ProtoId<AnnouncementPresetPrototype> PresetAres = "Ares";
     private static readonly ProtoId<AnnouncementPresetPrototype> PresetCritical = "Critical";
     private static readonly ProtoId<AnnouncementPresetPrototype> PresetCLF = "CLF";
@@ -54,10 +54,7 @@ public sealed partial class AnnouncementRouterSystem
                 Message = wrappedMessage,
                 WrappedMessage = wrappedMessage,
             },
-            Sound = new AnnouncementSoundOptions
-            {
-                Sound = sound,
-            }
+            Sound = sound != null ? new AnnouncementSoundOptions { Sound = sound } : null
         };
 
         Announce(request);

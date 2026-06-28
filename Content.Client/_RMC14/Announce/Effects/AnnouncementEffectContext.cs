@@ -5,6 +5,6 @@ namespace Content.Client._RMC14.Announce.Effects;
 
 public readonly record struct AnnouncementEffectContext(
     AnnouncementStyle Style,
-    ActiveAnnouncement State,
+    ActiveAnnouncement Output,
     IReadOnlyList<RichTextLabel> Labels,
     bool HasTitle);

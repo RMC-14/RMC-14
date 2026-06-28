@@ -24,7 +24,7 @@ public sealed partial class AnnouncementWidget : UIWidget
     [Dependency] private readonly IResourceCache _resCache = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-    public event Action? OnAnnouncementFinished;
+    public event Action<NetEntity?>? OnAnnouncementFinished;
 
     public ActiveAnnouncement? ActiveAnnouncement { get; private set; }
     public bool PreviewMode { get; set; }
@@ -68,16 +68,13 @@ public sealed partial class AnnouncementWidget : UIWidget
             Data = announcement,
             ResolvedStyle = resolvedStyle,
             StartTime = _timing.CurTime,
-            CurrentLine = 0,
-            CurrentChar = 0,
             State = AnnouncementState.Animating,
             CleanText = PreprocessText(announcement.Text),
             SlideStartPosition = GetSlideStartPosition(resolvedStyle),
             ZoomCurrentScale = resolvedStyle.AnimationConfig.Animation == AnnouncementAnimation.Zoom
-                ? resolvedStyle.AnimationConfig.AnimationEnhancements?.ZoomStartScale ?? 0.1f
+                ? resolvedStyle.AnimationConfig.AnimationEnhancements.ZoomStartScale
                 : 1.0f,
             FadeAlpha = resolvedStyle.AnimationConfig.Animation == AnnouncementAnimation.Fade ? 0.0f : 1.0f,
-            PulseScale = 1.0f,
             PulseAlpha = 1.0f
         };
 
@@ -115,9 +112,10 @@ public sealed partial class AnnouncementWidget : UIWidget
 
     private void FinishAnnouncement()
     {
+        var speaker = ActiveAnnouncement?.Data.SpeakerEntity;
         CleanupCurrentAnnouncement();
         Visible = false;
-        OnAnnouncementFinished?.Invoke();
+        OnAnnouncementFinished?.Invoke(speaker);
     }
 
     private void CleanupCurrentAnnouncement()

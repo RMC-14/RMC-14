@@ -34,7 +34,6 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly SquadSystem _squad = default!;
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
-    private static readonly ProtoId<AnnouncementPresetPrototype> PresetMarineCommand = "MarineCommand";
     private static readonly ProtoId<AnnouncementPresetPrototype> PresetMarineOverwatch = "MarineOverwatch";
 
     public override void Initialize()
@@ -214,6 +213,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         if (options.ExcludeSurvivors)
             dispatchFilter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
 
+        dispatchFilter.RemoveWhereAttachedEntity(HasComp<IntelRescueSurvivorObjectiveComponent>);
+
         var channels = AnnouncementChannels.Chat | AnnouncementChannels.Sound;
         if (options.SendOverlay)
             channels |= AnnouncementChannels.Overlay;
@@ -221,7 +222,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _announcementRouter.Announce(new AnnouncementRequest
         {
             Message = message,
-            Preset = PresetMarineCommand,
+            Preset = AnnouncementRouterSystem.PresetMarineCommand,
             Route = new AnnouncementRoute
             {
                 Target = AnnouncementTarget.Marines,

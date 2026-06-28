@@ -5,9 +5,11 @@ namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class WarpAnimation : IAnnouncementAnimation
 {
+    private float _timer;
+
     public void Reset(AnnouncementAnimationContext context)
     {
-        context.State.PulseTimer = 0f;
+        _timer = 0f;
         ResetLabelMargins(context);
     }
 
@@ -17,8 +19,8 @@ public sealed class WarpAnimation : IAnnouncementAnimation
         const float amplitude = 3.5f;
         const float linePhase = 0.6f;
 
-        context.State.PulseTimer += deltaTime * waveSpeed;
-        var t = context.State.PulseTimer;
+        _timer += deltaTime * waveSpeed;
+        var t = _timer;
 
         for (var i = context.TitleOffset; i < context.Labels.Length; i++)
         {

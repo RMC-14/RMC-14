@@ -10,8 +10,6 @@ public sealed class ActiveAnnouncement
     public AnnouncementDisplayData Data { get; set; } = default!;
     public AnnouncementStyle ResolvedStyle { get; set; } = new();
     public TimeSpan StartTime { get; set; }
-    public int CurrentLine { get; set; }
-    public int CurrentChar { get; set; }
     public AnnouncementState State { get; set; }
 
     public string[] CleanText { get; set; } = Array.Empty<string>();
@@ -21,19 +19,7 @@ public sealed class ActiveAnnouncement
     public Vector2 CurrentBounceOffset { get; set; }
     public float ZoomCurrentScale { get; set; } = 1.0f;
     public float FadeAlpha { get; set; } = 1.0f;
-    public float PulseScale { get; set; } = 1.0f;
     public float PulseAlpha { get; set; } = 1.0f;
-
-    public float TypewriterTimer { get; set; }
-    public float GlitchTimer { get; set; }
-    public float SlideTimer { get; set; }
-    public float ZoomTimer { get; set; }
-    public float BounceTimer { get; set; }
-    public int BouncePhase { get; set; }
-    public float FadeTimer { get; set; }
-    public float PulseTimer { get; set; }
-
-    public string[]? GlitchText { get; set; }
 
     public RichTextLabel[] TitleLabels { get; set; } = Array.Empty<RichTextLabel>();
     public Control? TitleTrack { get; set; }

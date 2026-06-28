@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Content.Server._RMC14.Announce.Core;
 
 internal static class AnnouncementLineHelper
@@ -13,8 +11,12 @@ internal static class AnnouncementLineHelper
         if (!normalized.Contains('\n') && normalized.Contains("\\n"))
             normalized = normalized.Replace("\\n", "\n");
 
-        return normalized.Split('\n')
-            .Where(line => !string.IsNullOrWhiteSpace(line))
-            .ToArray();
+        var lines = normalized.Split('\n');
+        var firstNonBlank = Array.FindIndex(lines, l => !string.IsNullOrWhiteSpace(l));
+        if (firstNonBlank < 0)
+            return Array.Empty<string>();
+
+        var lastNonBlank = Array.FindLastIndex(lines, l => !string.IsNullOrWhiteSpace(l));
+        return lines[firstNonBlank..(lastNonBlank + 1)];
     }
 }

@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed record AnnouncementAnimationContext(
-    ActiveAnnouncement State,
+    ActiveAnnouncement Output,
     AnnouncementStyle Style,
     string[] OriginalText,
     string[] CleanText,

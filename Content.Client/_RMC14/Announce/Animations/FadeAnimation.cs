@@ -4,19 +4,21 @@ namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class FadeAnimation : IAnnouncementAnimation
 {
+    private float _timer;
+
     public void Reset(AnnouncementAnimationContext context)
     {
-        context.State.FadeTimer = 0f;
-        context.State.FadeAlpha = 0f;
+        _timer = 0f;
+        context.Output.FadeAlpha = 0f;
     }
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         const float duration = 2.0f;
-        context.State.FadeTimer += deltaTime;
+        _timer += deltaTime;
 
-        var progress = Math.Min(context.State.FadeTimer / duration, 1.0f);
-        context.State.FadeAlpha = progress;
+        var progress = Math.Min(_timer / duration, 1.0f);
+        context.Output.FadeAlpha = progress;
 
         if (progress >= 1.0f)
         {

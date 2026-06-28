@@ -14,6 +14,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -22,6 +23,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -398,7 +400,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
         if (_player.LocalEntity is { } localEntity)
             previewData.SpeakerEntity = _entityManager.GetNetEntity(localEntity);
 
-        if (!AnnouncementDisplayResolver.TryResolve(_prototypeManager, previewData, _selectedPreviewPreference, out var display))
+        if (!AnnouncementDisplayResolver.TryResolve(_prototypeManager, _serialization, previewData, _selectedPreviewPreference, out var display))
             return;
 
         UpdateAppearanceControlState(display);
@@ -464,7 +466,7 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
         ShowPortraitCheckBox.Disabled = !display.SupportsSpriteCardOverride;
 
         var showSpriteBox = display.SupportsSpriteCardOverride && display.ShowSprite;
-        var showCRT = display.Style.AnimationConfig.AnimationEnhancements?.EnableCRT == true;
+        var showCRT = display.Style.AnimationConfig.AnimationEnhancements.EnableCRT;
         var showBg = display.Style.BackgroundConfig.ShowBackground;
 
         SpriteBoxColorRow.Visible = showSpriteBox;

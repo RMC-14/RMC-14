@@ -28,3 +28,14 @@ public sealed class AnnouncementNetMessage : EntityEventArgs
     }
 }
 
+[Serializable, NetSerializable]
+public sealed class AnnouncementPlaybackDoneMsg : EntityEventArgs
+{
+    public NetEntity Speaker { get; }
+
+    public AnnouncementPlaybackDoneMsg(NetEntity speaker)
+    {
+        Speaker = speaker;
+    }
+}
+

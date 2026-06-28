@@ -1,11 +1,10 @@
 using Content.Shared._RMC14.Announce;
-using Robust.Shared.Random;
 
 namespace Content.Client._RMC14.Announce.Animations;
 
 public static class AnnouncementAnimationFactory
 {
-    public static IAnnouncementAnimation Create(AnnouncementStyle style, IRobustRandom random)
+    public static IAnnouncementAnimation Create(AnnouncementStyle style)
     {
         return style.AnimationConfig.Animation switch
         {

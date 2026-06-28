@@ -9,7 +9,7 @@ public sealed class PulseEffect : IAnnouncementVisualEffect
         foreach (var label in context.Labels)
         {
             var baseColor = label.Modulate;
-            var alpha = baseColor.A * context.State.PulseAlpha;
+            var alpha = baseColor.A * context.Output.PulseAlpha;
             label.Modulate = new Color(baseColor.R, baseColor.G, baseColor.B, alpha);
         }
     }

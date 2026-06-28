@@ -79,7 +79,7 @@ public static class AnnouncementStyling
         if (display.CRTGlowColorOverride is { } crtGlowColor)
         {
             var enhancements = style.AnimationConfig.AnimationEnhancements;
-            if (enhancements != null && enhancements.EnableCRT)
+            if (enhancements.EnableCRT)
             {
                 enhancements.CRTSettings ??= new CRTSettings();
                 enhancements.CRTSettings.GlowColor = crtGlowColor;
@@ -112,24 +112,6 @@ public static class AnnouncementStyling
         var avgScale = (scaleX + scaleY) * 0.5f;
 
         return MathHelper.Clamp(avgScale, 0.5f, 2.0f);
-    }
-
-    public static Vector2 GetPositionFromStyle(AnnouncementPosition position, Vector2 screenSize, Vector2 contentSize)
-    {
-        return position switch
-        {
-            AnnouncementPosition.TopLeft => new Vector2(50f, 100f),
-            AnnouncementPosition.TopCenter => new Vector2((screenSize.X - contentSize.X) * 0.5f, 50f),
-            AnnouncementPosition.TopRight => new Vector2(screenSize.X - contentSize.X - 50f, 100f),
-            AnnouncementPosition.MiddleLeft => new Vector2(50f, (screenSize.Y - contentSize.Y) * 0.5f),
-            AnnouncementPosition.MiddleCenter => new Vector2((screenSize.X - contentSize.X) * 0.5f, (screenSize.Y - contentSize.Y) * 0.5f),
-            AnnouncementPosition.MiddleRight => new Vector2(screenSize.X - contentSize.X - 50f, (screenSize.Y - contentSize.Y) * 0.5f),
-            AnnouncementPosition.BottomLeft => new Vector2(50f, screenSize.Y - contentSize.Y - 50f),
-            AnnouncementPosition.BottomCenter => new Vector2((screenSize.X - contentSize.X) * 0.5f, screenSize.Y - contentSize.Y - 50f),
-            AnnouncementPosition.BottomRight => new Vector2(screenSize.X - contentSize.X - 50f, screenSize.Y - contentSize.Y - 50f),
-            AnnouncementPosition.FullScreen => Vector2.Zero,
-            _ => new Vector2((screenSize.X - contentSize.X) * 0.5f, (screenSize.Y - contentSize.Y) * 0.5f)
-        };
     }
 
     public static float CalculateMaxTextWidth(Vector2 screenSize, AnnouncementPosition position)

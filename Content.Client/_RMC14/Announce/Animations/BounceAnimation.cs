@@ -5,11 +5,14 @@ namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class BounceAnimation : IAnnouncementAnimation
 {
+    private float _timer;
+    private int _phase;
+
     public void Reset(AnnouncementAnimationContext context)
     {
-        context.State.BounceTimer = 0f;
-        context.State.BouncePhase = 0;
-        context.State.CurrentBounceOffset = Vector2.Zero;
+        _timer = 0f;
+        _phase = 0;
+        context.Output.CurrentBounceOffset = Vector2.Zero;
     }
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
@@ -19,25 +22,24 @@ public sealed class BounceAnimation : IAnnouncementAnimation
         var bounceHeight = enhancements?.BounceHeight ?? 15f;
         var totalPhases = bounceCount * 2;
 
-        if (context.State.BouncePhase >= totalPhases)
+        if (_phase >= totalPhases)
         {
-            context.State.CurrentBounceOffset = Vector2.Zero;
+            context.Output.CurrentBounceOffset = Vector2.Zero;
             context.SetAllLabels();
             return AnnouncementAnimationStatus.Finished;
         }
 
-        context.State.BounceTimer += deltaTime * 4f;
-        var bounceProgress = context.State.BounceTimer % 1f;
-        var bounceY = MathF.Sin(bounceProgress * MathF.PI) * bounceHeight * MathF.Max(0f, 1f - context.State.BouncePhase * 0.3f);
-        context.State.CurrentBounceOffset = new Vector2(0, -bounceY);
+        _timer += deltaTime * 4f;
+        var bounceProgress = _timer % 1f;
+        var bounceY = MathF.Sin(bounceProgress * MathF.PI) * bounceHeight * MathF.Max(0f, 1f - _phase * 0.3f);
+        context.Output.CurrentBounceOffset = new Vector2(0, -bounceY);
 
-        if (context.State.BounceTimer >= 1f)
+        if (_timer >= 1f)
         {
-            context.State.BounceTimer = 0f;
-            context.State.BouncePhase++;
+            _timer = 0f;
+            _phase++;
         }
 
         return AnnouncementAnimationStatus.Running;
     }
 }
-

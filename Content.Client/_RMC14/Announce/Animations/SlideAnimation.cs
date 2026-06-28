@@ -6,28 +6,30 @@ namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class SlideAnimation : IAnnouncementAnimation
 {
+    private float _timer;
+
     public void Reset(AnnouncementAnimationContext context)
     {
-        context.State.SlideTimer = 0f;
-        context.State.CurrentSlideOffset = context.State.SlideStartPosition;
+        _timer = 0f;
+        context.Output.CurrentSlideOffset = context.Output.SlideStartPosition;
     }
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         var enhancements = context.Style.AnimationConfig.AnimationEnhancements;
-        context.State.SlideTimer += deltaTime;
+        _timer += deltaTime;
         var duration = enhancements?.SlideDuration ?? 1.0f;
         if (duration <= 0f)
         {
-            context.State.CurrentSlideOffset = Vector2.Zero;
+            context.Output.CurrentSlideOffset = Vector2.Zero;
             context.SetAllLabels();
             return AnnouncementAnimationStatus.Finished;
         }
 
-        var progress = Math.Min(context.State.SlideTimer / duration, 1.0f);
+        var progress = Math.Min(_timer / duration, 1.0f);
 
-        var currentOffset = Vector2.Lerp(context.State.SlideStartPosition, Vector2.Zero, progress);
-        context.State.CurrentSlideOffset = currentOffset;
+        var currentOffset = Vector2.Lerp(context.Output.SlideStartPosition, Vector2.Zero, progress);
+        context.Output.CurrentSlideOffset = currentOffset;
 
         if (progress >= 1.0f)
         {
@@ -38,4 +40,3 @@ public sealed class SlideAnimation : IAnnouncementAnimation
         return AnnouncementAnimationStatus.Running;
     }
 }
-

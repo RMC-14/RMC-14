@@ -2,6 +2,7 @@ using Content.Client.Gameplay;
 using Content.Shared._RMC14.Announce;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
+using Robust.Shared.GameObjects;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -56,8 +57,11 @@ public sealed class AnnouncementOverlayUIController : UIController, IOnStateEnte
         widget.ShowAnnouncement(announcement);
     }
 
-    private void OnAnnouncementFinished()
+    public event Action<NetEntity?>? AnnouncementDone;
+
+    private void OnAnnouncementFinished(NetEntity? speaker)
     {
+        AnnouncementDone?.Invoke(speaker);
         TryShowNextQueuedAnnouncement();
     }
 

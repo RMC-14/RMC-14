@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Announce;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -7,6 +8,7 @@ public static class AnnouncementDisplayResolver
 {
     public static bool TryResolve(
         IPrototypeManager prototypeManager,
+        ISerializationManager serialization,
         AnnouncementNetData data,
         AnnouncementDisplayPreference preference,
         out AnnouncementDisplayData resolved)
@@ -19,7 +21,7 @@ public static class AnnouncementDisplayResolver
         if (preference == AnnouncementDisplayPreference.Disabled)
             return false;
 
-        var presentation = AnnouncementPresentationResolver.Resolve(preset, preference);
+        var presentation = AnnouncementPresentationResolver.Resolve(serialization, preset, preference);
         resolved = new AnnouncementDisplayData
         {
             AnnouncementId = data.AnnouncementId,

@@ -8,6 +8,7 @@ public sealed class GlowEffect : IAnnouncementVisualEffect
     {
         var time = (float) currentTime.TotalSeconds;
         var intensity = context.Style.SpriteConfig.SpriteGlowIntensity;
+        var glowColor = context.Style.SpriteConfig.SpriteGlowColor;
 
         foreach (var label in context.Labels)
         {
@@ -16,9 +17,9 @@ public sealed class GlowEffect : IAnnouncementVisualEffect
             var glowFactor = 1.0f + (glow * intensity);
 
             label.Modulate = new Color(
-                Math.Min(baseColor.R * glowFactor, 1.0f),
-                Math.Min(baseColor.G * glowFactor, 1.0f),
-                Math.Min(baseColor.B * glowFactor, 1.0f),
+                Math.Min(baseColor.R * glowFactor * glowColor.R, 1.0f),
+                Math.Min(baseColor.G * glowFactor * glowColor.G, 1.0f),
+                Math.Min(baseColor.B * glowFactor * glowColor.B, 1.0f),
                 baseColor.A);
         }
     }

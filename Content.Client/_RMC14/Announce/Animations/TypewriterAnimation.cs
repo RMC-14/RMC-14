@@ -6,11 +6,15 @@ namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class TypewriterAnimation : IAnnouncementAnimation
 {
+    private int _currentLine;
+    private int _currentChar;
+    private float _timer;
+
     public void Reset(AnnouncementAnimationContext context)
     {
-        context.State.CurrentLine = 0;
-        context.State.CurrentChar = 0;
-        context.State.TypewriterTimer = 0f;
+        _currentLine = 0;
+        _currentChar = 0;
+        _timer = 0f;
 
         for (var i = context.TitleOffset; i < context.Labels.Length; i++)
         {
@@ -22,35 +26,33 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
     {
         var style = context.Style;
 
-        context.State.TypewriterTimer += deltaTime;
-        if (context.State.TypewriterTimer < style.AnimationConfig.PrintSpeed)
+        _timer += deltaTime;
+        if (_timer < style.AnimationConfig.PrintSpeed)
             return AnnouncementAnimationStatus.Running;
 
-        context.State.TypewriterTimer = 0f;
+        _timer = 0f;
 
         var cleanText = context.CleanText;
-        var currentLine = context.State.CurrentLine;
-        var currentChar = context.State.CurrentChar;
 
-        if (currentLine >= cleanText.Length)
+        if (_currentLine >= cleanText.Length)
             return AnnouncementAnimationStatus.Finished;
 
-        var lineText = cleanText[currentLine];
-        if (currentChar >= lineText.Length)
+        var lineText = cleanText[_currentLine];
+        if (_currentChar >= lineText.Length)
         {
-            context.State.CurrentLine++;
-            context.State.CurrentChar = 0;
-            return context.State.CurrentLine >= cleanText.Length
+            _currentLine++;
+            _currentChar = 0;
+            return _currentLine >= cleanText.Length
                 ? AnnouncementAnimationStatus.Finished
                 : AnnouncementAnimationStatus.Running;
         }
 
-        context.State.CurrentChar++;
+        _currentChar++;
         UpdateDisplay(context);
         return AnnouncementAnimationStatus.Running;
     }
 
-    private static void UpdateDisplay(AnnouncementAnimationContext context)
+    private void UpdateDisplay(AnnouncementAnimationContext context)
     {
         var cleanText = context.CleanText;
         var originalText = context.OriginalText;
@@ -59,15 +61,15 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
         for (var i = context.TitleOffset; i < context.Labels.Length; i++)
         {
             var textIndex = i - context.TitleOffset;
-            if (textIndex < context.State.CurrentLine)
+            if (textIndex < _currentLine)
             {
                 var message = context.FormatMessage(originalText[textIndex], style);
                 context.Labels[i].SetMessage(message);
             }
-            else if (textIndex == context.State.CurrentLine)
+            else if (textIndex == _currentLine)
             {
                 var currentLineText = cleanText[textIndex];
-                var maxLength = Math.Min(context.State.CurrentChar, currentLineText.Length);
+                var maxLength = Math.Min(_currentChar, currentLineText.Length);
                 var partialText = currentLineText[..maxLength];
                 var message = context.FormatMessage(partialText, style);
                 context.Labels[i].SetMessage(message);
@@ -79,4 +81,3 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
         }
     }
 }
-

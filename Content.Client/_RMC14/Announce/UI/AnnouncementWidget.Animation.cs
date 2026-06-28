@@ -15,7 +15,7 @@ public sealed partial class AnnouncementWidget
         if (ActiveAnnouncement == null)
             return;
 
-        var animation = AnnouncementAnimationFactory.Create(ActiveAnnouncement.ResolvedStyle, _random);
+        var animation = AnnouncementAnimationFactory.Create(ActiveAnnouncement.ResolvedStyle);
         var effects = AnnouncementEffectsRegistry.BuildEffects(ActiveAnnouncement.ResolvedStyle);
         _animationContext = CreateAnimationContext();
         _playback.Configure(animation, effects, _animationContext);
@@ -64,7 +64,7 @@ public sealed partial class AnnouncementWidget
 
         var screenSize = ResolveScreenSize();
 
-        return style.AnimationConfig.AnimationEnhancements?.SlideFrom switch
+        return style.AnimationConfig.AnimationEnhancements.SlideFrom switch
         {
             SlideDirection.Left => new Vector2(-screenSize.X, 0),
             SlideDirection.Right => new Vector2(screenSize.X, 0),

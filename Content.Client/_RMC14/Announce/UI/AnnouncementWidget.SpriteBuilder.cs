@@ -283,7 +283,7 @@ public sealed partial class AnnouncementWidget
 
         private Control WrapWithCrtIfEnabled(Control container, AnnouncementStyle style, Vector2 screenSize)
         {
-            if (style.AnimationConfig.AnimationEnhancements?.EnableCRT != true)
+            if (style.AnimationConfig.AnimationEnhancements.EnableCRT != true)
                 return container;
 
             container.Measure(screenSize);

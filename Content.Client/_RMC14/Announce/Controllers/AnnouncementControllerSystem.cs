@@ -4,15 +4,18 @@ using Content.Shared._RMC14.CCVar;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
-using Robust.Shared.IoC;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
 
 namespace Content.Client._RMC14.Announce;
 
 public sealed class AnnouncementControllerSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
     private AnnouncementDisplayPreference _preference;
@@ -20,6 +23,7 @@ public sealed class AnnouncementControllerSystem : EntitySystem
     private AnnouncementLayoutOverride? _globalLayoutOverride;
     private Dictionary<string, AnnouncementLayoutOverride> _layoutOverrides = new();
     private Dictionary<string, PresetCacheEntry> _presetCache = new();
+    private AnnouncementOverlayUIController? _overlayController;
 
     private readonly record struct PresetCacheEntry(AnnouncementDisplayPreference? DefaultPreference, string? GroupId);
 
@@ -58,12 +62,38 @@ public sealed class AnnouncementControllerSystem : EntitySystem
         if (preference == AnnouncementDisplayPreference.Disabled)
             return;
 
-        if (_uiManager.GetUIController<AnnouncementOverlayUIController>() is { } controller &&
-            AnnouncementDisplayResolver.TryResolve(_prototypeManager, msg.Data, preference, out var resolved))
+        if (_uiManager.GetUIController<AnnouncementOverlayUIController>() is not { } controller)
+            return;
+
+        if (_overlayController != controller)
+        {
+            if (_overlayController != null)
+                _overlayController.AnnouncementDone -= OnAnnouncementDone;
+            _overlayController = controller;
+            _overlayController.AnnouncementDone += OnAnnouncementDone;
+        }
+
+        if (AnnouncementDisplayResolver.TryResolve(_prototypeManager, _serialization, msg.Data, preference, out var resolved))
         {
             AnnouncementLayoutResolver.Apply(resolved, ResolveLayoutOverride(msg.Data.AnnouncementId));
             controller.ShowAnnouncement(resolved);
         }
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        if (_overlayController != null)
+        {
+            _overlayController.AnnouncementDone -= OnAnnouncementDone;
+            _overlayController = null;
+        }
+    }
+
+    private void OnAnnouncementDone(NetEntity? speaker)
+    {
+        if (speaker.HasValue && _net.IsConnected)
+            RaiseNetworkEvent(new AnnouncementPlaybackDoneMsg(speaker.Value));
     }
 
     private void OnPreferenceChanged(AnnouncementDisplayPreference preference)

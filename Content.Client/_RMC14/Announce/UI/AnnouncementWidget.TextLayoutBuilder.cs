@@ -110,13 +110,14 @@ public sealed partial class AnnouncementWidget
 
             if (hasTitle && !string.IsNullOrEmpty(titleText))
             {
-                var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, effectiveTextWidth);
                 var enableAssaultScroll = style.TitleConfig.Effect.Type == AnnouncementTitleEffectType.AssaultScroll;
-                var titleLabel = CreateTitleLabel(titleAlign, enableAssaultScroll ? effectiveTextWidth : float.PositiveInfinity);
-                titleLabel.SetMessage(titleMessage);
 
                 if (enableAssaultScroll)
                 {
+                    var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, effectiveTextWidth);
+                    var titleLabel = CreateTitleLabel(titleAlign, effectiveTextWidth);
+                    titleLabel.SetMessage(titleMessage);
+
                     var marqueeMeasureSize = new Vector2(MathF.Max(screenSize.X * 2f, effectiveTextWidth * 2f), float.PositiveInfinity);
                     titleLabel.Measure(marqueeMeasureSize);
                     titleContentWidth = MathF.Max(titleLabel.DesiredSize.X, effectiveTextWidth);
@@ -210,11 +211,14 @@ public sealed partial class AnnouncementWidget
                     {
                         textContainer.AddChild(titleViewport);
                     }
+
+                    labels[labelIndex] = titleLabel;
+                    titleLabelRef = titleLabel;
+                    labelIndex++;
                 }
                 else
                 {
                     var titleMeasureSize = new Vector2(MathF.Max(screenSize.X * 2f, effectiveTextWidth * 2f), float.PositiveInfinity);
-                    titleLabel.Measure(titleMeasureSize);
                     titleViewportWidth = effectiveTextWidth;
                     titleScrollGap = Math.Max(style.TitleConfig.Effect.Gap * scaleFactor, 24f * scaleFactor);
                     var titleFontSize = CalculateTitleFontSize(style, screenSize, effectiveTextWidth, titleText);
@@ -294,11 +298,12 @@ public sealed partial class AnnouncementWidget
                     {
                         textContainer.AddChild(titleViewport);
                     }
-                }
 
-                labels[labelIndex] = titleLabel;
-                titleLabelRef = titleLabel;
-                labelIndex++;
+                    var titlePlaceholder = new RichTextLabel();
+                    labels[labelIndex] = titlePlaceholder;
+                    titleLabelRef = titlePlaceholder;
+                    labelIndex++;
+                }
             }
 
             for (var i = 0; i < text.Length; i++)
@@ -597,16 +602,6 @@ public sealed partial class AnnouncementWidget
             LayoutContainer.SetMarginTop(control, position.Y);
             LayoutContainer.SetMarginRight(control, position.X + size.X);
             LayoutContainer.SetMarginBottom(control, position.Y + size.Y);
-        }
-
-        private static float ResolveTitleOffset(HAlignment alignment, float viewportWidth, float contentWidth)
-        {
-            return alignment switch
-            {
-                HAlignment.Left => 0f,
-                HAlignment.Right => MathF.Max(0f, viewportWidth - contentWidth),
-                _ => MathF.Max(0f, (viewportWidth - contentWidth) * 0.5f)
-            };
         }
 
         private static float CalculateTitleVerticalPadding(AnnouncementStyle style, float scaleFactor)

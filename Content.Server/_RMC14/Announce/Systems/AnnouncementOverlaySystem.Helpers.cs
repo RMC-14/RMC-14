@@ -1,4 +1,3 @@
-using Content.Server._RMC14.Announce.Core;
 using Content.Shared._RMC14.Announce;
 using Content.Shared.Database;
 using Robust.Shared.GameObjects;
@@ -37,24 +36,14 @@ public sealed partial class AnnouncementOverlaySystem
         return null;
     }
 
-    private bool TryGetLongestPresentation(
-        AnnouncementPresetPrototype preset,
-        string[] lines,
-        out AnnouncementPresentation longestPresentation)
+    private static bool AnyPresentationShowsSprite(AnnouncementPresetPrototype preset)
     {
-        longestPresentation = default!;
-        var longestDuration = float.MinValue;
-
         foreach (var presentation in preset.Presentations.EnumerateAvailable())
         {
-            var duration = AnnouncementDurationCalculator.Calculate(presentation.Style, lines) + presentation.Style.AnimationConfig.HoldDuration;
-            if (duration >= longestDuration)
-            {
-                longestDuration = duration;
-                longestPresentation = presentation;
-            }
+            if (presentation.ShowSprite)
+                return true;
         }
 
-        return longestDuration > float.MinValue;
+        return false;
     }
 }

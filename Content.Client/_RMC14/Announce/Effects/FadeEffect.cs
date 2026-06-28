@@ -9,7 +9,7 @@ public sealed class FadeEffect : IAnnouncementVisualEffect
         foreach (var label in context.Labels)
         {
             var baseColor = label.Modulate;
-            var alpha = baseColor.A * context.State.FadeAlpha;
+            var alpha = baseColor.A * context.Output.FadeAlpha;
             label.Modulate = new Color(baseColor.R, baseColor.G, baseColor.B, alpha);
         }
     }

@@ -15,12 +15,17 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
     private const float MinTickInterval = 0.005f;
     private const int MaxAdvancePerUpdate = 5;
 
+    private int _currentLine;
+    private int _currentChar;
+    private float _glitchTimer;
+    private float _burstTimer;
+
     public void Reset(AnnouncementAnimationContext context)
     {
-        context.State.CurrentLine = 0;
-        context.State.CurrentChar = 0;
-        context.State.GlitchTimer = 0f;
-        context.State.TypewriterTimer = 0f;
+        _currentLine = 0;
+        _currentChar = 0;
+        _glitchTimer = 0f;
+        _burstTimer = 0f;
         ResetVisualState(context);
 
         for (var i = context.TitleOffset; i < context.Labels.Length; i++)
@@ -34,26 +39,26 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
         var style = context.Style;
         var intensity = GetIntensity(style.AnimationConfig.GlitchChance);
 
-        if (context.State.TypewriterTimer > 0f)
+        if (_burstTimer > 0f)
         {
-            context.State.TypewriterTimer = MathF.Max(0f, context.State.TypewriterTimer - deltaTime);
+            _burstTimer = MathF.Max(0f, _burstTimer - deltaTime);
         }
-        else if (RandomChance(context.Random, GetBurstStartChancePerFrame(intensity, deltaTime)))
+        else if (context.Random.Prob(GetBurstStartChancePerFrame(intensity, deltaTime)))
         {
-            context.State.TypewriterTimer = context.Random.NextFloat(0.05f, 0.14f);
+            _burstTimer = context.Random.NextFloat(0.05f, 0.14f);
         }
 
-        var burstActive = context.State.TypewriterTimer > 0f;
+        var burstActive = _burstTimer > 0f;
         var printInterval = MathF.Max(
             MinTickInterval,
             style.AnimationConfig.PrintSpeed * (burstActive ? 0.22f : 0.60f));
 
-        context.State.GlitchTimer += deltaTime;
+        _glitchTimer += deltaTime;
         var advanced = 0;
 
-        while (context.State.GlitchTimer >= printInterval && advanced < MaxAdvancePerUpdate)
+        while (_glitchTimer >= printInterval && advanced < MaxAdvancePerUpdate)
         {
-            context.State.GlitchTimer -= printInterval;
+            _glitchTimer -= printInterval;
             advanced++;
 
             var finished = Advance(context, burstActive, intensity);
@@ -65,7 +70,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
             }
         }
 
-        if (advanced > 0 || burstActive || RandomChance(context.Random, 0.08f + intensity * 0.25f))
+        if (advanced > 0 || burstActive || context.Random.Prob(0.08f + intensity * 0.25f))
             UpdateDisplay(context, intensity, burstActive);
 
         UpdateVisual(context, intensity, burstActive, deltaTime);
@@ -73,35 +78,33 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
         return AnnouncementAnimationStatus.Running;
     }
 
-    private static bool Advance(AnnouncementAnimationContext context, bool burstActive, float intensity)
+    private bool Advance(AnnouncementAnimationContext context, bool burstActive, float intensity)
     {
         var cleanText = context.CleanText;
-        var currentLine = context.State.CurrentLine;
-        var currentChar = context.State.CurrentChar;
 
-        if (currentLine >= cleanText.Length)
+        if (_currentLine >= cleanText.Length)
             return true;
 
-        var lineText = cleanText[currentLine];
-        if (currentChar >= lineText.Length)
+        var lineText = cleanText[_currentLine];
+        if (_currentChar >= lineText.Length)
         {
-            context.State.CurrentLine++;
-            context.State.CurrentChar = 0;
-            return context.State.CurrentLine >= cleanText.Length;
+            _currentLine++;
+            _currentChar = 0;
+            return _currentLine >= cleanText.Length;
         }
 
-        if (burstActive && currentChar > 0 && RandomChance(context.Random, 0.04f + intensity * 0.10f))
-            context.State.CurrentChar--;
+        if (burstActive && _currentChar > 0 && context.Random.Prob(0.04f + intensity * 0.10f))
+            _currentChar--;
 
         var advanceBy = 1;
-        if (burstActive && RandomChance(context.Random, 0.18f + intensity * 0.35f))
+        if (burstActive && context.Random.Prob(0.18f + intensity * 0.35f))
             advanceBy += context.Random.Next(1, 3);
 
-        context.State.CurrentChar = Math.Min(context.State.CurrentChar + advanceBy, lineText.Length);
+        _currentChar = Math.Min(_currentChar + advanceBy, lineText.Length);
         return false;
     }
 
-    private static void UpdateDisplay(AnnouncementAnimationContext context, float intensity, bool burstActive)
+    private void UpdateDisplay(AnnouncementAnimationContext context, float intensity, bool burstActive)
     {
         var originalText = context.OriginalText;
         var cleanText = context.CleanText;
@@ -116,10 +119,10 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
         for (var i = context.TitleOffset; i < context.Labels.Length; i++)
         {
             var textIndex = i - context.TitleOffset;
-            if (textIndex < context.State.CurrentLine)
+            if (textIndex < _currentLine)
             {
                 var visible = originalText[textIndex];
-                if (RandomChance(context.Random, lineGlitchChance))
+                if (context.Random.Prob(lineGlitchChance))
                 {
                     var glitched = CreateGlitchedText(cleanText[textIndex], context.Random, charGlitchChance);
                     visible = glitched.Length > 0 ? glitched : visible;
@@ -128,12 +131,12 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
                 var message = context.FormatMessage(visible, style);
                 context.Labels[i].SetMessage(message);
             }
-            else if (textIndex == context.State.CurrentLine)
+            else if (textIndex == _currentLine)
             {
                 var currentLineText = cleanText[textIndex];
-                var maxLength = Math.Min(context.State.CurrentChar, currentLineText.Length);
+                var maxLength = Math.Min(_currentChar, currentLineText.Length);
                 var partialText = currentLineText[..maxLength];
-                if (maxLength > 0 && RandomChance(context.Random, lineGlitchChance + 0.10f))
+                if (maxLength > 0 && context.Random.Prob(lineGlitchChance + 0.10f))
                     partialText = CreateGlitchedText(partialText, context.Random, charGlitchChance);
 
                 var message = context.FormatMessage(partialText, style);
@@ -156,7 +159,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
 
         for (var i = 0; i < chars.Length; i++)
         {
-            if (char.IsWhiteSpace(chars[i]) || !RandomChance(random, charGlitchChance))
+            if (char.IsWhiteSpace(chars[i]) || !random.Prob(charGlitchChance))
                 continue;
 
             chars[i] = GlitchChars[random.Next(GlitchChars.Length)];
@@ -180,11 +183,6 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
         return Math.Clamp(startsPerSecond * deltaTime, 0f, 1f);
     }
 
-    private static bool RandomChance(IRobustRandom random, float probability)
-    {
-        return random.NextFloat() < probability;
-    }
-
     private static void ResetVisualState(AnnouncementAnimationContext context)
     {
         if (context.VisualContainer == null)
@@ -204,7 +202,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
         var jitterAmount = 2f + intensity * (burstActive ? 14f : 8f);
         var jitterChance = Math.Clamp((0.20f + intensity * 0.60f) * burstFactor * deltaTime * 60f, 0f, 1f);
 
-        if (RandomChance(context.Random, jitterChance))
+        if (context.Random.Prob(jitterChance))
         {
             var jitterX = context.Random.NextFloat(-jitterAmount, jitterAmount);
             var jitterY = context.Random.NextFloat(-jitterAmount * 0.35f, jitterAmount * 0.35f);
@@ -216,7 +214,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
         }
 
         var flickerChance = Math.Clamp((0.03f + intensity * 0.20f) * burstFactor * deltaTime * 60f, 0f, 1f);
-        if (RandomChance(context.Random, flickerChance))
+        if (context.Random.Prob(flickerChance))
         {
             var tint = context.Random.NextFloat(0.70f, 1.0f);
             var tintColor = new Color(tint, MathF.Min(1f, tint * 1.08f), tint, 1f);

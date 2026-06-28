@@ -44,8 +44,13 @@ public sealed partial class AnnouncementRouterSystem : EntitySystem
 
         var preset = _presetResolver.Resolve(request.Preset);
 
-        if (request.Route.Channels.HasFlag(AnnouncementChannels.Overlay) && preset != null)
-            _overlay.Dispatch(request, preset, filter);
+        if (request.Route.Channels.HasFlag(AnnouncementChannels.Overlay))
+        {
+            if (preset != null)
+                _overlay.Dispatch(request, preset, filter);
+            else
+                Log.Warning($"Announcement overlay requested but preset '{request.Preset}' could not be resolved.");
+        }
 
         if (request.Route.Channels.HasFlag(AnnouncementChannels.Chat))
             DispatchChat(request, filter);
