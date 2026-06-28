@@ -202,6 +202,7 @@
   parent: BaseStructureDynamic
   id: RMCCrateOpenableBase
   components:
+  - type: VehicleSmashable
   - type: CrateOpenable
     spawn:
     - id: RMCPlankWood2
@@ -256,6 +257,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
@@ -300,6 +304,7 @@
   parent: RMCSecureCaseDouble #Evilass hidden GUN GAMBA CRATEEEEEEEE For CHANCESSSS CLAIMEEEEEEEEEEEEEE
   id: RMCCrateBlackmarketFireArmsHidden
   name: supply crate
+  suffix: Hidden Firearms
   description: A hefty wooden crate.
   components:
   - type: SpawnOnTerminate
@@ -542,6 +547,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
@@ -594,6 +602,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -670,6 +681,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -746,6 +760,9 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
 
@@ -880,5 +897,8 @@
         !type:DamageTrigger
         damage: 50
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Structures/metalhit.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]

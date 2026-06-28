@@ -25,7 +25,7 @@
   - type: Openable
     opened: true
     closeable: true
-    examineText: rmc-bottle-closed
+    examineText: rmc-bottle-open
     openVerbText: rmc-bottle-remove-lid
     closeVerbText: rmc-bottle-put-lid
     sound: null

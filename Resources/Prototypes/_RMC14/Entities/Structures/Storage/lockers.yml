@@ -5,6 +5,7 @@
   name: secure locker
   description: It's an immobile card-locked storage unit.
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/standard.rsi
     layers:
@@ -76,6 +77,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: IntelSafeCandidate
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
 
 - type: entity
   parent: RMCLockerSecureSafe
@@ -97,6 +103,32 @@
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
   - type: AccessReader
     access: [["RMCAccessWeYa"]]
+
+- type: entity
+  parent: CMBaseStructure
+  id: RMCFloorSafe
+  name: floor safe
+  description: A concealed floor safe for storing valuables and confidential material.
+  suffix: Intel
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/floor_safe.rsi
+    layers:
+    - state: closed
+      map: ["enum.LockVisualLayers.Lock"]
+  - type: Appearance
+  - type: LockVisuals
+    stateLocked: closed
+    stateUnlocked: open
+  - type: InteractionOutline
+  - type: Physics
+    canCollide: false
+  - type: Lock
+  - type: IntelSafeCandidate
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
 
 - type: entity
   parent: CMLockerBase
@@ -226,9 +258,24 @@
   name: medical doctor's locker
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/medical.rsi
+    sprite: _RMC14/Structures/Storage/Lockers/medical_white.rsi
   - type: AccessReader
     access: [["CMAccessMedical"]]
+  - type: StorageFill
+    contents:
+     #- id: RMCJumpsuitDoctor RMC14 TODO only when cold map & a scarf
+      - id: RMCLabcoat
+      - id: RMCLabcoatShort
+      - id: RMCLabcoatLong
+      - id: RMCShoesWhite
+      - id: RMCMaskBreath
+      - id: CMMaskSterile
+      - id: RMCGlassesMedicalHUDGlasses
+      - id: RMCPouchMedical
+      - id: RMCPouchSyringe
+      - id: RMCPouchMedkit
+      - id: RMCPouchChem
+      - id: CMSatchelMarine
 
 - type: entity
   parent: CMLockerBase

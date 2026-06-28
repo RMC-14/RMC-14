@@ -717,6 +717,7 @@
   - WatchesLiaisonRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -741,6 +742,7 @@
   - WatchesBasicRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -766,6 +768,7 @@
   - WatchesLiaisonRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -781,14 +784,16 @@
   id: JobRMCWeYaExecutiveBodyguard
   points: 7
   groups:
-  - MarineLeatherBackpack
+  - ExecutiveSecurityGuardBackpack
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
   - HelmetGarbsRMC
   - AccessoriesRMC
+  - WatchesLiaisonRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -933,6 +938,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -951,6 +957,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -969,6 +976,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -987,6 +995,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -1005,6 +1014,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -1023,6 +1033,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -1041,6 +1052,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
@@ -1059,6 +1071,7 @@
   - MasksRMC
   - PaperworkRMC
   - RecreationalRMC
+  - PlushiesRMC
   - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC

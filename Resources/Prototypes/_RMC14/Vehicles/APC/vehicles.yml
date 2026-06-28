@@ -1,0 +1,427 @@
+- type: entity
+  id: VehicleAPCBase
+  abstract: true
+  name: armored personnel carrier
+  description: A rugged armored personnel carrier outfitted for battlefield support.
+  components:
+  - type: Vehicle
+    movementKind: Grid
+  - type: LagCompensation
+  - type: Clickable
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RequireProjectileTarget
+  - type: GridVehicleMover
+    maxSpeed: 5
+    acceleration: 4
+    deceleration: 10
+    turnDelay: 0.4
+    xenoBlockMinimumSize: Immobile
+    xenoPushMinimumSize: Immobile
+  - type: VehicleOvercharge
+    speedMultiplier: 1.4
+    duration: 3
+    cooldown: 15
+    overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
+  - type: VehicleSound
+    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
+    runningSoundCooldown: 2
+    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
+    hornCooldown: 1
+    collisionSoundCooldown: 0.5
+    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
+  - type: VehicleSpotlight
+    radius: 7
+    energy: 3
+    softness: 2
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -1,-1.7,1,1.7
+        density: 1200
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        - Vehicle
+        layer:
+        - LargeMobLayer
+        - Vehicle
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -1,-1.7,1,1.7
+        density: 1200
+        mask:
+        - MidImpassable
+        - BarricadeImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: VehicleFrameAPC
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/Vehicles/apc.rsi
+    layers:
+    - map: [ base ]
+      state: apc_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: wheels_0
+    noMovementLayers:
+      rmc-wheels:
+        state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 12
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: Corrodible
+    isCorrodible: false
+  - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.HardpointUiKey.Key:
+        type: HardpointBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+  - type: VehicleWeapons
+  - type: VehicleHardpointVisuals
+  - type: InputMover
+  - type: ItemSlots
+    slots:
+      port-gun-north:
+        startingItem: VehicleAPCM56FPWPortGunRight
+        insertOnInteract: false
+        ejectOnInteract: false
+        ejectOnUse: false
+        locked: true
+        disableEject: true
+        whitelist:
+          components:
+          - VehiclePortGun
+      port-gun-south:
+        startingItem: VehicleAPCM56FPWPortGunLeft
+        insertOnInteract: false
+        ejectOnInteract: false
+        ejectOnUse: false
+        locked: true
+        disableEject: true
+        whitelist:
+          components:
+          - VehiclePortGun
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slots:
+    - id: primary
+      hardpointType: HardpointTypeTurret
+      slotType: HardpointSlotTypeTurret
+      visualLayer: primary
+      insertDelay: 2.5
+      required: false
+    - id: secondary
+      hardpointType: HardpointTypeCannon
+      slotType: HardpointSlotTypeCannon
+      visualLayer: secondary
+      insertDelay: 2.5
+      required: false
+    - id: support
+      hardpointType: HardpointTypeSupportAttachment
+      slotType: HardpointSlotTypeSupportAttachment
+      visualLayer: support
+      insertDelay: 2.0
+      required: false
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      insertDelay: 1.5
+  - type: VehicleWheelSlots
+    slotCount: 1
+  - type: HardpointIntegrity
+    maxIntegrity: 1000
+    bypassEntryOnZero: true
+  - type: Appearance
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 10
+    maxXenos: 3
+    entryPoints:
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.55,2.65
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.55,-1.2
+
+- type: entity
+  parent: VehicleAPCBase
+  id: VehicleAPC
+  components:
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 18
+    maxXenos: 3
+    reservedPassengerPools:
+    - slots: 2
+      eligibleJobs:
+      - CMVehicleCrewman
+    - slots: 1
+      eligibleJobs:
+      - RMCJobSynthetic
+      - RMCCorporateSynthetic
+    entryPoints:
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.55,2.65
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.55,-1.2
+  - type: MarineMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
+      state: apc
+
+- type: entity
+  parent: VehicleAPCBase
+  id: VehicleAPCMed
+  name: armored personnel carrier (medical)
+  description: A medical-configured APC outfitted with triage markings.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: apc_base_med
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_medical_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 11
+    maxXenos: 3
+    reservedPassengerPools:
+    - slots: 2
+      eligibleJobs:
+      - CMVehicleCrewman
+    - slots: 1
+      eligibleJobs:
+      - CMHospitalCorpsman
+      - CMDoctor
+      - CMResearcher
+      - CMCMO
+      - CMNurse
+      - RMCFieldDoctor
+      - RMCJobSynthetic
+      - RMCCorporateSynthetic
+    entryPoints:
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,2.6
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,-1.5
+    - offset: 0,2
+      radius: 0.85
+      interiorCoords: 0.25,-1
+  - type: MarineMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
+      state: apc
+
+- type: entity
+  parent: VehicleAPCBase
+  id: VehicleAPCCommand
+  name: armored personnel carrier (command)
+  description: A command-configured APC bristling with sensors and comms gear.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: apc_base_com
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_command_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 12
+    maxXenos: 3
+    reservedPassengerPools:
+    - slots: 2
+      eligibleJobs:
+      - CMVehicleCrewman
+    - slots: 1
+      eligibleJobs:
+      - CMStaffOfficer
+      - CMSeniorEnlistedAdvisor
+      - CMExecutiveOfficer
+      - CMCommandingOfficer
+      - CMUNMCBrigadierGeneral
+    - slots: 1
+      eligibleJobs:
+      - RMCJobSynthetic
+      - RMCCorporateSynthetic
+    entryPoints:
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,2.6
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,-1.5
+    - offset: 0,2
+      radius: 0.85
+      interiorCoords: 0.25,-1
+  - type: MarineMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips_large.rsi
+      state: apc
+
+- type: entity
+  parent: VehicleAPCBase
+  id: VehicleSPPAPC
+  name: SPP armored personnel carrier
+  description: An armored personnel carrier configured for SPP forces.
+  components:
+  - type: GridVehicleMover
+    maxSpeed: 5
+    acceleration: 2.0
+    deceleration: 7.5
+    maxReverseSpeed: 2.5
+    reverseAcceleration: 2.0
+    turnDelay: 0.25
+    turnInPlace: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppapc.rsi
+    layers:
+    - map: [ base ]
+      state: sppapc_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARIES
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: ItemSlots
+    slots:
+      port-gun-north:
+        startingItem: null
+      port-gun-south:
+        startingItem: null
+      primary:
+        startingItem: VehicleSPPAPCTurret
+        whitelist:
+          components:
+          - HardpointItem
+      wheel-1:
+        startingItem: VehicleSPPAPCWheel
+        whitelist:
+          components:
+          - VehicleWheelItem
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slots:
+    - id: primary
+      hardpointType: HardpointTypeTurret
+      slotType: HardpointSlotTypeTurret
+      compatibilityId: HardpointCompatibilitySPPAPC
+      visualLayer: primary
+      insertDelay: 2.5
+      required: false
+    - id: secondary
+      hardpointType: HardpointTypeCannon
+      slotType: HardpointSlotTypeCannon
+      compatibilityId: HardpointCompatibilitySPPAPC
+      visualLayer: secondary
+      insertDelay: 2.5
+      required: false
+    - id: support
+      hardpointType: HardpointTypeSupportAttachment
+      slotType: HardpointSlotTypeSupportAttachment
+      compatibilityId: HardpointCompatibilitySPPAPC
+      visualLayer: support
+      insertDelay: 2.0
+      required: false
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      compatibilityId: HardpointCompatibilitySPPAPC
+      insertDelay: 1.5
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/spp_apc_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 14
+    maxXenos: 4
+    entryPoints:
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 4.45,-1.2
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 4.45,1.7

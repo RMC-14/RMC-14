@@ -1,9 +1,10 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: CMPlatformBase
   name: platform
   description: A square metal surface resting on four legs.
   components:
+  - type: VehicleSmashable
   - type: Transform
     anchored: true
   - type: Sprite

@@ -1,0 +1,282 @@
+- type: entity
+  abstract: true
+  id: VehicleHumveeInteriorBase
+  name: humvee interior piece
+  description: A decorative interior piece for the humvee.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  id: VehicleHumveeChassisBase
+  name: humvee interior chassis
+  description: A chassis segment for the humvee interior.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/humvee_chassis.rsi
+    drawdepth: FloorTiles
+  - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleHumveeChassisBase
+  id: VehicleHumveeChassis
+  components:
+  - type: Sprite
+    state: humvee_chassis
+
+- type: entity
+  parent: VehicleHumveeChassisBase
+  id: VehicleHumveeChassisMedical
+  components:
+  - type: Sprite
+    state: humvee_chassis_medical
+
+- type: entity
+  parent: VehicleHumveeChassisBase
+  id: VehicleHumveeChassisTransport
+  components:
+  - type: Sprite
+    state: humvee_chassis_transport
+
+- type: entity
+  abstract: true
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeWallBase
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Occluder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+
+- type: entity
+  abstract: true
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeRoofBase
+  name: humvee interior roof
+  description: A removable roof section for the humvee interior.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeDoorBase
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    drawdepth: Items
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCIgnoreGhostInteractionLimits
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeSeatDestroyed
+  name: humvee seat (destroyed)
+  components:
+  - type: Sprite
+    state: car_seat_destroyed
+
+- type: entity
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeAmmoLoader
+  name: humvee ammo loader
+  description: A loader for humvee hardpoint ammunition.
+  components:
+  - type: Sprite
+    state: weapons_loader
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+  - type: VehicleAmmoLoader
+  - type: UserInterface
+    interfaces:
+      enum.VehicleAmmoLoaderUiKey.Key:
+        type: VehicleAmmoLoaderBoundUserInterface
+
+- type: entity
+  parent: VehicleHumveeRoofBase
+  id: VehicleHumveeExitDoor
+  components:
+  - type: Sprite
+    layers:
+    - state: exit_door
+      map: [ "roof" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+  - type: VehicleExit
+  - type: RMCIgnoreGhostInteractionLimits
+
+- type: entity
+  parent: VehicleHumveeDoorBase
+  id: VehicleHumveeExitDoorDirectional
+  components:
+  - type: Sprite
+    state: exit_door1
+  - type: VehicleExit
+  - type: RMCIgnoreGhostInteractionLimits
+
+- type: entity
+  parent: VehicleHumveeDoorBase
+  id: VehicleHumveeMedicalBackDoor1
+  components:
+  - type: Sprite
+    state: medical_backdoor1
+
+- type: entity
+  parent: VehicleHumveeDoorBase
+  id: VehicleHumveeMedicalBackDoor2
+  components:
+  - type: Sprite
+    state: medical_backdoor2
+
+- type: entity
+  parent: VehicleHumveeDoorBase
+  id: VehicleHumveeCarrierBackDoor1
+  components:
+  - type: Sprite
+    state: carrier_backdoor1
+
+- type: entity
+  parent: VehicleHumveeDoorBase
+  id: VehicleHumveeCarrierBackDoor2
+  components:
+  - type: Sprite
+    state: carrier_backdoor2
+
+- type: entity
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeMedicalPanel
+  components:
+  - type: Sprite
+    state: MEDICAL
+
+- type: entity
+  abstract: true
+  parent: CMClosetBase
+  id: VehicleHumveeLockerBase
+  name: humvee interior locker
+  description: A storage locker for humvee interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: locker_med
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: locker_med
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: EntityStorageVisuals
+    stateBaseClosed: locker_med
+    stateBaseOpen: locker_open
+    stateDoorClosed:
+    stateDoorOpen:
+
+- type: entity
+  parent: VehicleHumveeLockerBase
+  id: VehicleHumveeLockerMedical
+  name: humvee locker (medical)
+
+- type: entity
+  abstract: true
+  parent: VehicleHumveeInteriorBase
+  id: VehicleHumveeWallMountedBase
+  placement:
+    mode: PlaceFree
+  components:
+  - type: WallMount
+    arc: 360
+
+- type: entity
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeBloodVendor
+  components:
+  - type: Sprite
+    state: blood
+
+- type: entity
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeBloodVendorVend
+  components:
+  - type: Sprite
+    state: blood_vend
+
+- type: entity
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeBloodVendorDeny
+  components:
+  - type: Sprite
+    state: mini_blood_denied
+
+- type: entity
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeBloodVendorOff
+  components:
+  - type: Sprite
+    state: mini_blood_off
+
+- type: entity
+  parent: VehicleHumveeWallMountedBase
+  id: VehicleHumveeBloodVendorPanel
+  components:
+  - type: Sprite
+    state: mini_blood_panel
+
+
