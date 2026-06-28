@@ -34,6 +34,11 @@
   - type: MovementSpeedModifier
     baseSprintSpeed: 3.625
     baseWalkSpeed: 1.9575
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
+  - type: RemoveComponents
+    components:
+    - type: HiddenAppearance
 
 - type: entity
   id: RMCSynthGenTwo
@@ -60,6 +65,11 @@
       RMCSkillJtac: 1
       RMCSkillIntel: 1
       RMCSkillDomestics: 2
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
+  - type: RemoveComponents
+    components:
+    - type: HiddenAppearance
 
 - type: entity
   id: RMCSynthGenThree
@@ -93,6 +103,11 @@
     bullet: -15
     bio: -15
     explosionArmor: -15
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
+  - type: RemoveComponents
+    components:
+    - type: HiddenAppearance
 
 #- type: entity
 #  id: RMCARESWorker
