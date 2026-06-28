@@ -6,6 +6,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Language
+      preset: RMCLanguagePresetSynthColonist
+    - type: LanguageLearning
+      preset: RMCLanguageLearningPresetSynthColonist
+    - type: RMCAllowSuitStorage
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -75,7 +80,7 @@
   name: survivor synth hybrisa engineer colonist preset
   categories: [ HideSpawnMenu ]
   components:
-  - type: SurvivorPreset
+  - type: EntityPreset
     randomOutfits:
     - [ RMCHardhatOrange, RMCJumpsuitCivilianEngineerWorker, RMCHazardVest ]
     - [ RMCOuterEngineeringUtilityOversuit, RMCJumpsuitCivilianEngineerWorker, CMSheetPlasteel10 ]

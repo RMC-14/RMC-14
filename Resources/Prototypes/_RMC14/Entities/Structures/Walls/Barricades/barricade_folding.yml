@@ -1,0 +1,51 @@
+- type: entity
+  parent: CMBarricadeBase
+  id: CMBarricadeFolding
+  name: portable composite barricade
+  description: A deployed MB-6 folding barricade. It is light enough to be packed back down, but strong enough to hold a defensive line.
+  components:
+  - type: Transform
+    anchored: true
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/_RMC14/Structures/metalhit.ogg"
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: folding
+    - map: [ "acided" ]
+    drawdepth: WallTops
+  - type: DirectionalAttackBlocker
+    maxHealth: 350
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: CMFoldingBarricade
+  - type: RMCRepairable
+    heal: 200
+    skill: RMCSkillConstruction
+    delay: 10
+    fuelUsed: 2
+  - type: NailgunRepairable
+    repairValues:
+      CMSteel: 105
+      CMPlasteel: 157.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 350
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 25
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _RMC14/Structures/Walls/Barricades/folding_cracks.rsi
+  - type: RMCFoldingBarricade

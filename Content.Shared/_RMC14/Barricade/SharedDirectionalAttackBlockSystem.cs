@@ -1,16 +1,23 @@
+using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Physics;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Map;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Barricade;
 
 public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
 {
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -123,5 +130,21 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         // Only block if the leap originates from a location that is at most one ordinal direction away from the direction the blocker is facing (135 degree cone).
         // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the South-West, South, or South-East of the blocker.
         return relativeDiff is 3 or 4 or 5; // Opposite directions
+    }
+
+    public bool IsDirectionBlocked(EntityUid origin, AtmosDirection cardinal, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
+    {
+        return IsDirectionBlocked(origin, (Vector2)cardinal.CardinalToIntVec(), checkRange, collisionGroup);
+    }
+
+    public bool IsDirectionBlocked(EntityUid origin, Vector2 direction, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
+    {
+        if (direction == Vector2.Zero)
+            return false;
+
+        var originPosition = _transform.GetMoverCoordinates(origin).Position;
+        var ray = new CollisionRay(originPosition, direction, (int)collisionGroup);
+        var intersect = _physics.IntersectRayWithPredicate(Transform(origin).MapID, ray, checkRange, e => !Transform(e).Anchored);
+        return intersect.Any();
     }
 }

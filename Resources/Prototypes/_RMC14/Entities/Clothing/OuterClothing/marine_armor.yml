@@ -314,6 +314,22 @@
       tags:
       - RMCUniformCMP
 
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumTanker
+  name: M3 pattern tanker armor
+  description: A modified and refashioned suit of M3 Pattern armor designed to be worn by the loader of a UNMC vehicle crew. While the suit is a bit more encumbering to wear with the crewman uniform, it offers the loader a degree of protection that would otherwise not be enjoyed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/urban.rsi
+
 #Officer armors
 - type: entity
   parent: CMArmorM2MP
@@ -787,8 +803,10 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.001
     coolingCoefficient: 0.3
-  - type: RMCImmuneToIgnition
-    immuneToDirectHits: false
+  - type: ClothingGrantComponents
+    components:
+    - type: RMCImmuneToIgnition
+      immuneToDirectHits: false
   - type: FirewalkArmor
     whitelist:
       components:
@@ -880,6 +898,9 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/urban.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 # M2
 - type: entity

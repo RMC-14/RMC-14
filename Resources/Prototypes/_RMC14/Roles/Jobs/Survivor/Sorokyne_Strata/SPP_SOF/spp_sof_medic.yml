@@ -10,6 +10,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCAllowSuitStorage
     - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
@@ -29,6 +30,7 @@
   equipment:
     eyes: RMCGlassesMedicalHUDGlasses
     belt: RMCBeltMedicBagSPP
+    back: RMCSatchelMedicpack
   storage:
     back:
     - CMDefibrillator

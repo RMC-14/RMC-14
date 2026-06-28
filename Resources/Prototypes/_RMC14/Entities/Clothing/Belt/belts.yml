@@ -397,6 +397,8 @@
       - RMCPenlight
       - Flare
       - RMCMiniTank
+      - RMCSyringeCase
+      - CMSurgicalCase
       #      - # TODO RMC14 reagent analyzer
       #      - # TODO RMC14 plant analyzer
       components:
@@ -463,6 +465,9 @@
       Desert: _RMC14/Objects/Clothing/Belt/mortar/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMortar
 
 - type: entity
   parent: CMBeltMarine
@@ -500,6 +505,9 @@
       Desert: _RMC14/Objects/Clothing/Belt/smart_gun_operator/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/smart_gun_operator/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: CMBeltMarine
@@ -562,6 +570,9 @@
     - RMCSmartGunSidearmHolster
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: CMBeltMarine
@@ -678,9 +689,6 @@
       state: b92fs
       map: [ "b92fs_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m13
-      map: [ "m13_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: highpower
       map: [ "mk45_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -719,6 +727,7 @@
       - CMMagazinePistol
     blacklist:
       tags:
+      - RMCWeaponPistolM13
       - RMCSmartPistol
       - RMCMagazinePistolSU6
       - RMCRevolver
@@ -750,7 +759,6 @@
     - b92fs_fill
     - mk45_fill
     - t73_fill
-    - m13_fill
     - l54_fill
     - handcannon_fill
     - g_handcannon_fill
@@ -781,10 +789,6 @@
         whitelist:
           tags:
           - RMCMK45
-      m13_fill:
-        whitelist:
-          tags:
-          - RMCWeaponPistolM13
       t73_fill:
         whitelist:
           tags:
@@ -817,7 +821,7 @@
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolWeYa
   name: WY-TM892 pattern general pistol holster rig
-  description: The WY-TM892 is the standard load-bearing equipment of the W-Y security forces. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  description: The WY-TM892 is the standard load-bearing equipment of the WEYA security forces. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_weya.rsi
@@ -1218,7 +1222,7 @@
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
+  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and three spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
@@ -1242,7 +1246,7 @@
     size: Large
   - type: Storage
     grid:
-    - 0,0,15,1 # 7 slots
+    - 0,0,7,1 # 4 slots
     whitelist:
       tags:
       - RMCMagazinePistolM13
@@ -1259,7 +1263,7 @@
         tags:
         - RMCWeaponPistolM13
     - popup: rmc-storage-limit-max-mags
-      count: 7
+      count: 3
       whitelist:
         tags:
         - RMCMagazinePistolM13
@@ -1477,21 +1481,16 @@
       - CMFireExtinguisherPortable
       - RMCMagazineML66D
       - RMCMagazineM2C
-      - CableCoil
-      - Multitool
       - RMCExplosiveBreachingCharge
-      - RMCNailgunCompact
-      - RMCNailgunTactical
       - RMCExplosiveClaymoreMine
+      - RMCSmartGunMounted # Not parity
       components:
       - Welder
-      - EntrenchingTool
-      - BarbedWire
-      - EmptySandbag
+      - WeaponMount # Not parity
   - type: IgnoreContentsSize
     items:
       components:
-      - EntrenchingTool
+      - MountableWeapon # Not parity
   - type: Tag
     tags:
     - RMCMachineGunnerRig
@@ -1698,6 +1697,156 @@
           - CMFirstAidKit
           - RMCEngineerKit
 
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCMkXBelt
+  name: L21 pattern revolver holster
+  suffix: PVE, CO
+  description: An expensive tan leather belt designed to fit the MkX top-break revolver. Available to senior officers of the RCM by back order only.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_rcm.rsi
+    layers:
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: mkx
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: icon-front
+      map: [ "holstered" ]
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_rcm.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - RMCSpeedLoaderMateba
+      - RMCSpeedLoaderMatebaHE
+      - RMCSpeedLoaderMatebaHIAP
+      - RMCSpeedLoaderMatebaHighImpact
+      - RMCWeaponRevolverMkX
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+  - type: ItemMapper
+    spriteLayers:
+    - holstered
+    mapLayers:
+      holstered:
+        whitelist:
+          tags:
+          - Sidearm
+  - type: Tag
+    tags:
+    - RMCMkXBelt
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltL49
+  name: L28-pattern shotgun shell rig
+  suffix: PVE, RCM
+  description: "An L28-pattern shotgun holster rig, equipped with loops to hold loose 12ga shells and featuring a holster on the back capable of holding an L49 assault shotgun.\nShotguns equipped with magnetic harnesses or slings can be strapped directly to the belt, preventing them from being dropped."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/l49.rsi
+    layers:
+    - state: icon
+    - state: l49
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      offset: 0, 0
+      visible: false
+    - state: icon-front
+    - state: full
+      visible: false
+    - state: high
+      visible: false
+    - state: medium
+      visible: false
+    - state: low
+      visible: false
+  - type: Clothing
+    slots:
+    - belt
+    - suitStorage
+    sprite: _RMC14/Objects/Clothing/Belt/l49.rsi
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,19,1 # 10 slots
+    whitelist:
+      tags:
+      - RMCShellShotgun
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+  - type: ItemSlots
+    slots:
+      item:
+        name: L49 assault shotgun
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCWeaponShotgunL49
+  - type: RMCMagneticItemReceiver
+  - type: ItemMapper
+    mapLayers:
+      low:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+      medium:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCShellShotgun
+      high:
+        minCount: 7
+        whitelist:
+          tags:
+          - RMCShellShotgun
+      full:
+        minCount: 10
+        whitelist:
+          tags:
+          - RMCShellShotgun
+  - type: CMItemSlots
+  - type: Tag
+    tags:
+    - RMCXM51Holster
+    - RMCL49Holster
+
+- type: Tag
+  id: RMCL49Holster
+
 - type: Tag
   id: RMCSmartGunSidearmHolster
 
@@ -1742,3 +1891,6 @@
 
 - type: Tag
   id: RMCMachineGunnerRig
+
+- type: Tag
+  id: RMCMkXBelt

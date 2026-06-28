@@ -21,13 +21,22 @@ public sealed class CMChatSystem : SharedCMChatSystem
         Subs.CVar(_config, RMCCVars.RMCChatRepeatHistory, v => _repeatHistory = v, true);
     }
 
-    public bool TryRepetition(ChatBox chat, OutputPanel contents, FormattedMessage message, NetEntity sender, string unwrapped, ChatChannel channel, bool repeatCheckSender)
+    public bool TryRepetition(
+        ChatBox chat,
+        OutputPanel contents,
+        FormattedMessage message,
+        NetEntity sender,
+        string unwrapped,
+        ChatChannel channel,
+        bool repeatCheckSender,
+        string? languageIcon)
     {
         var repeated = false;
         foreach (var old in chat.RepeatQueue)
         {
             if (!old.Message.Equals(unwrapped) ||
-                old.Channel != channel)
+                old.Channel != channel ||
+                old.LanguageIcon != languageIcon)
             {
                 continue;
             }
@@ -48,7 +57,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
 
         if (!repeated)
         {
-            chat.RepeatQueue.Enqueue(new RepeatedMessage(contents.EntryCount, message, sender, unwrapped, channel));
+            chat.RepeatQueue.Enqueue(new RepeatedMessage(contents.EntryCount, message, sender, unwrapped, channel, languageIcon));
             if (_repeatHistory > 0)
             {
                 while (chat.RepeatQueue.Count > _repeatHistory)
