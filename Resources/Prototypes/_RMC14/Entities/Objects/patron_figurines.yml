@@ -3017,3 +3017,14 @@
     state: shana_snow_mctavish
   - type: PatronFigurine
     id: 2748a7ed-7c12-40bf-a0bd-b43f33828782
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRhonaDeerHanes
+  name: Rhona 'Deer' Hanes figurine
+  description: "Looks like someone who hates rain, and snow, and sun, and heat, and cold."
+  components:
+  - type: Sprite
+    state: rhona_deer_hanes
+  - type: PatronFigurine
+    id: b7b2b907-1a35-4eef-a5d3-6a373dc131d2
