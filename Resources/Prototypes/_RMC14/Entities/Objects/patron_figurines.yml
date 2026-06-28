@@ -3028,3 +3028,14 @@
     state: rhona_deer_hanes
   - type: PatronFigurine
     id: b7b2b907-1a35-4eef-a5d3-6a373dc131d2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJatayuNerdCorvuson
+  name: Jatayu 'Nerd' Corvuson figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: jatayu_nerd_corvuson
+  - type: PatronFigurine
+    id: e75feb1b-2b5c-4f56-bccb-b0c45bff5d54
