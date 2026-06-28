@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Shared._RMC14.Xenonids;
+using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -15,6 +16,7 @@ public sealed class XenoInfectionsManager : IPostInjectInit
 {
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly UserDbDataManager _userDb = default!;
 
     private readonly Dictionary<NetUserId, int> _infects = new();
@@ -48,6 +50,17 @@ public sealed class XenoInfectionsManager : IPostInjectInit
     public int GetInfects(NetUserId player)
     {
         return _infects.GetValueOrDefault(player, 0);
+    }
+
+    /// <summary>
+    /// Records a successful infection in the session cache and pushes the new total to the client, so the
+    /// displayed count (and any subsequently spawned parasite's rank) reflects infections made this round.
+    /// </summary>
+    public void IncreaseInfects(NetUserId player)
+    {
+        _infects[player] = GetInfects(player) + 1;
+        if (_player.TryGetSessionById(player, out var session))
+            SendInfects(session);
     }
 
     void IPostInjectInit.PostInject()

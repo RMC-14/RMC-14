@@ -53,6 +53,10 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     private int _infectAncientThreshold;
     private int _infectPrimeThreshold;
 
+    // Current view, so we can re-render in place when the infection count arrives/changes.
+    private DepartmentPrototype? _currentDept;
+    private List<(JobPrototype Job, TimeSpan Time)>? _currentRoles;
+
     public RMCPlaytimeStatsWindow()
     {
         IoCManager.InjectDependencies(this);
@@ -61,6 +65,25 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         LoadMedalTimes();
         PopulateDepartmentButtons();
         ShowGeneralTab();
+
+        _infectionsManager.Updated += OnInfectionsUpdated;
+    }
+
+    private void OnInfectionsUpdated()
+    {
+        // The infection count (and thus the parasite row) changed; re-render whichever tab is open.
+        if (_currentDept is { } dept && _currentRoles is { } roles)
+            ShowDepartmentTab(dept, roles);
+        else
+            ShowGeneralTab();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (disposing)
+            _infectionsManager.Updated -= OnInfectionsUpdated;
     }
 
     private void LoadMedalTimes()
@@ -86,6 +109,12 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     /// </summary>
     private SpriteSpecifier.Rsi? GetParasiteInfectIcon(int infections)
     {
+        if (infections <= 0)
+            return null;
+
+        // TODO RMC14: parasites top out at rank 5 here; for consistency with other xenos (whose playtime
+        // path can reach hudxenoupgrade6-ui) a rank-6 tier may be added when a 6th infection threshold and
+        // the matching server branch exist. Leaving it out does not break anything — it just caps the icon.
         string? iconName = null;
         if (infections >= _infectPrimeThreshold)
             iconName = "hudxenoupgrade5-ui";
@@ -249,6 +278,9 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 
     private void ShowDepartmentTab(DepartmentPrototype dept, List<(JobPrototype Job, TimeSpan Time)> roles)
     {
+        _currentDept = dept;
+        _currentRoles = roles;
+
         if (_selectedButton != null)
         {
             _selectedButton.Pressed = false;
@@ -329,6 +361,9 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 
     private void ShowGeneralTab()
     {
+        _currentDept = null;
+        _currentRoles = null;
+
         if (_selectedButton != null)
         {
             _selectedButton.Pressed = false;
