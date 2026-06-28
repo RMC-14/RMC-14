@@ -47,10 +47,13 @@ public sealed partial class AnnouncementWidget
                 maxAllowedWidth = Math.Min(maxAllowedWidth, horizontalTextBudget);
             }
 
+            var titleScrolls = hasTitle && !string.IsNullOrEmpty(titleText) &&
+                style.TitleConfig.Effect.Type == AnnouncementTitleEffectType.AssaultScroll;
+
             var effectiveTextWidth = CalculateContentDrivenTextWidth(
                 text,
-                titleText,
-                hasTitle,
+                titleScrolls ? null : titleText,
+                titleScrolls ? false : hasTitle,
                 style,
                 screenSize,
                 screenScaleFactor,
@@ -110,9 +113,7 @@ public sealed partial class AnnouncementWidget
 
             if (hasTitle && !string.IsNullOrEmpty(titleText))
             {
-                var enableAssaultScroll = style.TitleConfig.Effect.Type == AnnouncementTitleEffectType.AssaultScroll;
-
-                if (enableAssaultScroll)
+                if (titleScrolls)
                 {
                     var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, effectiveTextWidth);
                     var titleLabel = CreateTitleLabel(titleAlign, effectiveTextWidth);
@@ -139,7 +140,11 @@ public sealed partial class AnnouncementWidget
                     duplicateTitleLabel.SetMessage(titleMessage);
                     duplicateTitleLabel.Measure(marqueeMeasureSize);
 
-                    var titleHeight = MathF.Max(titleLabel.DesiredSize.Y, duplicateTitleLabel.DesiredSize.Y);
+                    var titleFontSize = CalculateTitleFontSize(style, screenSize, effectiveTextWidth, titleText);
+                    // RichTextLabel.DesiredSize.Y is 0 when measured before scene attachment; fall back to font size
+                    var titleHeight = MathF.Max(
+                        MathF.Max(titleLabel.DesiredSize.Y, duplicateTitleLabel.DesiredSize.Y),
+                        MathF.Ceiling(titleFontSize * 1.3f));
                     var titlePadding = CalculateTitleVerticalPadding(style, scaleFactor);
                     var titleViewportHeight = titleHeight + titlePadding;
                     var titleOffsetY = titlePadding * 0.5f;
@@ -387,7 +392,10 @@ public sealed partial class AnnouncementWidget
                 duplicateTitleLabel.SetMessage(titleMessage);
                 duplicateTitleLabel.Measure(marqueeMeasureSize);
 
-                var titleHeight = MathF.Max(titleLabel.DesiredSize.Y, duplicateTitleLabel.DesiredSize.Y);
+                var titleFontSizeForHeight = CalculateTitleFontSize(style, screenSize, titleWidth, titleText);
+                var titleHeight = MathF.Max(
+                    MathF.Max(titleLabel.DesiredSize.Y, duplicateTitleLabel.DesiredSize.Y),
+                    MathF.Ceiling(titleFontSizeForHeight * 1.3f));
                 var titlePadding = CalculateTitleVerticalPadding(style, scaleFactor);
                 var titleViewportHeight = titleHeight + titlePadding;
                 var titleOffsetY = titlePadding * 0.5f;

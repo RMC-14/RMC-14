@@ -1,0 +1,148 @@
+- type: announcementPreset
+  id: Ares
+  name: "A.R.E.S."
+  description: "Ship AI system announcements"
+  target: Marines
+  sound:
+    path: "/Audio/_RMC14/Announcements/ARES/attention_jingle.ogg"
+  priority: 9
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.02
+          holdDuration: 10
+          flickerChance: 0
+          enableCRT: true
+        layout:
+          position: TopCenter
+          spritePosition: Left
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#001a0d"
+        text:
+          primaryColor: "#00e5b3"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> A.R.E.S. <<"
+          titleColor: "#00e5b3"
+          titleFontSize: 15
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: Critical
+  name: "Critical"
+  description: "Critical priority announcements"
+  target: All
+  priority: 10
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:TypewriterAnimationConfig
+            printSpeed: 0.025
+          holdDuration: 10
+          flickerChance: 0
+        layout:
+          position: MiddleCenter
+          spritePosition: Left
+          spriteDisplayMode: FullSprite
+          uIScale: 1
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#1a0000"
+        text:
+          primaryColor: "#ff6666"
+          font: "Cozette"
+          fontSize: 30
+          lineHeight: 48
+          showSpeakerName: false
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: "!! CRITICAL !!"
+          titleColor: "#ff3333"
+          titleFontSize: 20
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+          effect:
+            type: AssaultScroll
+        scaling:
+          responsiveScaleFactor: 1.15
+
+- type: announcementPreset
+  id: CLF
+  name: "C.L.F."
+  description: "Colonial Liberation Front announcements"
+  target: All
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  presentations:
+    stylized:
+      showSprite: false
+      style:
+        animation:
+          animation: !type:GlitchAnimationConfig
+            printSpeed: 0.025
+            glitchChance: 0.008
+          holdDuration: 10
+          flickerChance: 0.02
+        layout:
+          position: TopLeft
+          spritePosition: Left
+          spriteDisplayMode: TopHalf
+          uIScale: 3
+          titlePosition: Above
+        background:
+          showBackground: false
+          backgroundAlpha: 0.7
+          backgroundColor: "#001400"
+        text:
+          primaryColor: "#00ff41"
+          font: "Cozette"
+          fontSize: 20
+          lineHeight: 48
+          showSpeakerName: true
+          speakerNameColor: "#00cc33"
+          speakerNameFontSize: 14
+        sprite:
+          showSpriteBox: false
+          spriteScale: 1
+        title:
+          showTitle: true
+          title: ">> C.L.F. <<"
+          titleColor: "#00ff41"
+          titleFontSize: 15
+          titleFont: "CozetteBold"
+          titleUnderline: true
+          titleUnderlineThickness: 2
+        scaling:
+          responsiveScaleFactor: 1.15
