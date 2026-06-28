@@ -85,7 +85,7 @@ public sealed class PlayingCardHandBui : BoundUserInterface
             var cardIndex = i;
             button.OnButtonDown += _ =>
             {
-                SendPredictedMessage(new PlayingCardHandBuiMsg(cardIndex));
+                SendMessage(new PlayingCardHandBuiMsg(cardIndex));
                 Close();
             };
 
