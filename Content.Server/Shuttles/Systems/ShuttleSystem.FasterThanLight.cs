@@ -402,8 +402,14 @@ public sealed partial class ShuttleSystem
         // Just so we don't clip
         if (fromMapUid != null && TryComp(comp.StartupStream, out AudioComponent? startupAudio))
         {
-            var clippedAudio = _audio.PlayStatic(_startupSound, Filter.Broadcast(),
+            //RMC14
+            var soundclip = _startupSound;
+            if (TryComp<RMCOverrideShuttleSoundsComponent>(entity, out var replacementclip))
+                soundclip = replacementclip.StartupSound;
+
+            var clippedAudio = _audio.PlayStatic(soundclip, Filter.Broadcast(),
                 new EntityCoordinates(fromMapUid.Value, _mapSystem.GetGridPosition(entity.Owner)), true, startupAudio.Params);
+            //RMC14
 
             _audio.SetPlaybackPosition(clippedAudio, entity.Comp1.StartupTime);
             if (clippedAudio != null)
