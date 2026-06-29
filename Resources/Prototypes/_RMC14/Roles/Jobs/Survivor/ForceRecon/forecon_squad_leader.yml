@@ -14,6 +14,7 @@
     group: RMCJobsSurvivor
     time: 3600 # 1 hour
   spawnMenuRoleName: FORECON Squad Leader (Survivor)
+  startingGear: RMCGearForeconSL
   special:
   - !type:AddComponentSpecial
     components:
@@ -40,6 +41,12 @@
     - type: RMCTrackable
     - type: RMCAwardRecommendation
   hidden: true
+
+- type: startingGear
+  parent: RMCGearForeconBase
+  id: RMCGearForeconSL
+  equipment:
+    ears: RMCHeadsetForeconSL
 
 - type: entity
   parent: CMSpawnPointJobBase
