@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: t0wnshark
-  changes:
-  - message: '[PVE] Added the L989A2 multiple grenade launcher, a PVE weapon for the
-      Royal Crown Marines bombardier, and two types of 20mm impact grenade ammo for
-      it (HE and incendiary)'
-    type: Add
-  - message: '[PVE] Added 20mm HE and incendiary impact grenades for the L989A2'
-    type: Add
-  - message: '[PVE] Added the HMS Pratchett, a PVE shipmap for the Royal Crown Marines
-      faction'
-    type: Add
-  - message: '[PVE] Added the Section Scout-Sniper equipment vendor for RCM PVE'
-    type: Add
-  - message: '[PVE] Added RCM backpacks for PVE, including heavy, standard, lightweight,
-      technician, and medical variants'
-    type: Add
-  - message: Added AI walls without the LED blinkenlights, for mapping purposes
-    type: Add
-  id: 2941
-  time: '2026-02-14T18:48:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8981
 - author: Dygon
   changes:
   - message: Damage popups now always correctly apply a gun's damage modifier.
@@ -4556,5 +4535,13 @@
   id: 3440
   time: '2026-06-28T19:35:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10305
+- author: IceNoobXD
+  changes:
+  - message: Fixed chances having no or double APCs in a lot of areas and added a
+      few new areas to replace existing once!
+    type: Fix
+  id: 3441
+  time: '2026-06-29T05:35:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10278
 Name: RMC14
 Order: -1
