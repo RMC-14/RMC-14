@@ -7,7 +7,6 @@ namespace Content.Server._RMC14.Spawners;
 /// </summary>
 
 [RegisterComponent]
-[Access(typeof(RMCSpawnerSystem))]
 public sealed partial class MapProportionalSpawnsComponent : Component
 {
     [DataField]
