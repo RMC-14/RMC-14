@@ -48,7 +48,7 @@ rmc-playing-card-draw-multiple = You draw {$count} cards.
 # Hand of cards
 rmc-playing-card-hand-name = Hand of cards
 rmc-playing-card-stack-name = Stack of cards
-rmc-playing-card-hand-examine = [color=Tan][italic]There is [color=OliveDrab]{$count} cards[/color] total.[/italic][/color]
+rmc-playing-card-hand-examine = [color=Tan][italic]There are [color=OliveDrab]{$count} cards[/color] total.[/italic][/color]
 rmc-playing-card-hand-examine-hidden = [color=Tan][italic]Looks like [color=OliveDrab]{$count} cards[/color], face down.[/italic][/color]
 rmc-playing-card-hand-suit-group = - [bold][italic][color=SandyBrown]{$ranks}[/color] of {$suit}[/italic][/bold]
 
