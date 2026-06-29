@@ -75,6 +75,7 @@
   - type: SentryUpgradeItem
 
 - type: entity
+  abstract: true
   parent: RMCBaseSentry
   id: RMCSentryConstruct
   name: UN 571-C sentry gun
@@ -114,6 +115,12 @@
   components:
   - type: Item
     size: Normal
+  - type: RMCDeployableEquipment
+    placeableBlacklist:
+      components:
+      - WeaponMount
+      - RMCDeployableEquipment
+    placeableCheckRange: 1
 
 - type: Tag
   id: RMCSentry
@@ -180,9 +187,10 @@
         - BulletImpassable
         hard: false
   - type: Sentry
+    upgrades: null
+  - type: RMCDeployableEquipment
     deployDelay: 0.75
     undeployDelay: 0.75
-    upgrades: null
 
 - type: entity
   parent: RMCSentryMini
@@ -275,11 +283,12 @@
       AggroVisionRadius: !type:Single
         11.0
   - type: Sentry
-    deployDelay: 2
     upgrades: null
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
+  - type: RMCDeployableEquipment
+    deployDelay: 2
 
 - type: entity
   parent: RMCSentry
@@ -383,13 +392,14 @@
       AggroVisionRadius: !type:Single
         4.0
   - type: Sentry
-    undeployDelay: 1.5
     upgrades: null
     startingMagazine: RMCMagazineSentryShotgun
     magazineTag: RMCMagazineSentryShotgun
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 2
     accuracyMultiplierUnwielded: 2
+  - type: RMCDeployableEquipment
+    undeployDelay: 1.5
 
 - type: entity
   parent: RMCBaseTurret
@@ -484,11 +494,12 @@
         - BulletImpassable
         hard: false
   - type: Sentry
-    deployDelay: 0.75
-    undeployDelay: 0.75
     upgrades: null
     startingMagazine: RMCMagazineSentryFire
     magazineTag: RMCMagazineSentryFire
+  - type: RMCDeployableEquipment
+    deployDelay: 0.75
+    undeployDelay: 0.75
 
 - type: entity
   parent: RMCSentry
@@ -577,13 +588,14 @@
       AggroVisionRadius: !type:Single
         11.0
   - type: Sentry
-    deployDelay: 2
     upgrades: null
     startingMagazine: RMCMagazineSentryFireSmoke
     magazineTag: RMCMagazineSentryFireSmoke
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
+  - type: RMCDeployableEquipment
+    deployDelay: 2
 
 - type: entity
   parent: RMCTurretGaussDumb

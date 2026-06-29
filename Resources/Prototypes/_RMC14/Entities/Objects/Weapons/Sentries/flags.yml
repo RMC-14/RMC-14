@@ -1,0 +1,396 @@
+- type: entity
+  abstract: true
+  id: RMCPlantedFlagBase
+  name: JIMA planted flag
+  description: A planted flag with the iconic UNMC flag plastered all over it, you feel a burst of energy by its mere sight
+  components:
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Actions
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      deploy:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 20
+        layer:
+        - MidImpassable
+        - BulletImpassable
+        mask:
+        - MidImpassable
+        - BulletImpassable
+        hard: false
+  - type: CollisionWake
+    enabled: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "flag" ]
+      state: normal_planted_flag_off
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    state: normal_planted_flag_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.FlagLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        flag:
+          Item: { state: normal_planted_flag_handheld }
+          Off: { state: normal_planted_flag_off }
+          On: { state: normal_planted_flag }
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: UserInterface
+    interfaces:
+      enum.SentryUiKey.Key:
+        type: SentryUpgradeBui
+  - type: HealthExaminable
+    locPrefix: sentry
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+  - type: ShortExamine
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCRepairable
+  - type: RMCNameItemOnVend
+    item: Sentry
+  - type: RequireProjectileTarget
+  - type: Eye
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
+  - type: PointLight
+  - type: PlantedFlag
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 40
+
+- type: entity
+  parent: [RMCPlantedFlagBase, BaseItem]
+  id: RMCPlantedFlag
+  components:
+  - type: PlantedFlag
+  - type: Item
+    size: Normal
+  - type: RMCDeployableEquipment
+    placeableBlacklist:
+      components:
+      - WeaponMount
+      - RMCDeployableEquipment
+    deployDelay: 1
+    undeployDelay: 1
+  - type: UserIFF
+    factions:
+    - FactionMarine
+  - type: Tag
+    tags:
+    - RMCSentry
+
+- type: entity
+  parent: RMCPlantedFlag
+  id: RMCPlantedFlagExtendedRange
+  name: extended JIMA planted flag
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "flag" ]
+      state: range_planted_flag_off
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    state: range_planted_flag_handheld
+  - type: GenericVisualizer
+    visuals:
+      enum.FlagLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        flag:
+          Item: { state: range_planted_flag_handheld }
+          Off: { state: range_planted_flag_off }
+          On: { state: range_planted_flag }
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PlantedFlag
+    range: 8.466
+    upgrades: null
+  - type: RMCDeployableEquipment
+    deployDelay: 1.5
+    undeployDelay: 1.5
+  - type: PointLight
+    radius: 7
+
+- type: entity
+  parent: RMCPlantedFlag
+  id: RMCPlantedFlagWarbanner
+  name: JIMA planted warbanner
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "flag" ]
+      state: warbanner_planted_flag_off
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    state: warbanner_planted_flag_handheld
+  - type: GenericVisualizer
+    visuals:
+      enum.FlagLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        flag:
+          Item: { state: warbanner_planted_flag_handheld }
+          Off: { state: warbanner_planted_flag_off }
+          On: { state: warbanner_planted_flag }
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 250
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      deploy:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 20
+        layer:
+        - BulletImpassable
+        hard: false
+  - type: PlantedFlag
+    applyMove: true
+    duration: 5
+    upgrades: null
+  - type: RMCDeployableEquipment
+    deployDelay: 0.5
+    undeployDelay: 0.5
+
+- type: entity
+  parent: RMCPlantedFlag
+  id: RMCPlantedFlagWeYa
+  name: WeYa planted flag
+  description: A planted flag with the iconic WeYa flag plastered all over it, you feel a burst of energy by its mere sight.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off_weya
+    - map: [ "flag" ]
+      state: wy_planted_flag_off
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    state: wy_planted_flag_handheld
+  - type: GenericVisualizer
+    visuals:
+      enum.FlagLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off_weya, visible: true }
+          On: { state: defense_base_weya, visible: true }
+        flag:
+          Item: { state: wy_planted_flag_handheld }
+          Off: { state: wy_planted_flag_off }
+          On: { state: wy_planted_flag }
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PlantedFlag
+    applyMove: true
+    range: 6.77
+    duration: 2
+    upgrades: null
+  - type: RMCDeployableEquipment
+    deployDelay: 6
+    undeployDelay: 6
+  - type: UserIFF
+    factions:
+    - FactionMarine
+    - FactionWeYa
+
+- type: entity
+  parent: RMCPlantedFlag
+  id: RMCPlantedFlagSPP
+  name: SPP planted flag
+  description: A planted flag with the iconic SPP flag plastered all over it, you feel a burst of energy by its mere sight.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off_spp
+    - map: [ "flag" ]
+      state: upp_planted_flag_off
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    state: upp_planted_flag_handheld
+  - type: GenericVisualizer
+    visuals:
+      enum.FlagLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off_spp, visible: true }
+          On: { state: defense_base_spp, visible: true }
+        flag:
+          Item: { state: upp_planted_flag_handheld }
+          Off: { state: upp_planted_flag_off }
+          On: { state: upp_planted_flag }
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PlantedFlag
+    range: 6.77
+    upgrades: null
+  - type: RMCDeployableEquipment
+    deployDelay: 5
+    undeployDelay: 5
+  - type: UserIFF
+    factions:
+    - FactionSPP
+
+- type: entity
+  parent: RMCPlantedFlag
+  id: RMCPlantedFlagCLF
+  name: CLF planted flag
+  description: A planted flag with the iconic CLF flag plastered all over it, you feel a burst of energy by its mere sight.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off_clf
+    - map: [ "flag" ]
+      state: clf_planted_flag_off
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/flag.rsi
+    state: clf_planted_flag_handheld
+  - type: GenericVisualizer
+    visuals:
+      enum.FlagLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off_clf, visible: true }
+          On: { state: defense_base_clf, visible: true }
+        flag:
+          Item: { state: clf_planted_flag_handheld }
+          Off: { state: clf_planted_flag_off }
+          On: { state: clf_planted_flag }
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PlantedFlag
+    range: 6.77
+    upgrades: null
+  - type: RMCDeployableEquipment
+    deployDelay: 5
+    undeployDelay: 5
+  - type: UserIFF
+    factions:
+    - FactionCLF

@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Explosion.Implosion;
+using Content.Shared._RMC14.Item.Deploy;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
@@ -131,6 +132,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<DropshipTargetComponent, ComponentRemove>(OnDropshipTargetRemove);
         SubscribeLocalEvent<DropshipTargetComponent, EntityTerminatingEvent>(OnDropshipTargetRemove);
         SubscribeLocalEvent<DropshipTargetComponent, ExaminedEvent>(OnActiveFlareExamined);
+        SubscribeLocalEvent<DropshipTargetComponent, EquipmentUnDeployedEvent>(OnDropshipTargetRemove);
 
         SubscribeLocalEvent<ActiveFlareSignalComponent, RefreshNameModifiersEvent>(OnRefreshNameModifier);
 
@@ -356,11 +358,19 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnDropshipTargetRemove<T>(Entity<DropshipTargetComponent> ent, ref T args)
     {
-        var netUid = GetNetEntity(ent);
+        TryRemoveTarget(ent.Owner, ent.Comp);
+    }
+
+    public bool TryRemoveTarget(EntityUid dropshipTarget, DropshipTargetComponent? targetComponent = null)
+    {
+        if (!Resolve(dropshipTarget, ref targetComponent, false))
+            return false;
+
+        var netUid = GetNetEntity(dropshipTarget);
         var terminals = EntityQueryEnumerator<DropshipTerminalWeaponsComponent>();
         while (terminals.MoveNext(out var uid, out var terminal))
         {
-            if (terminal.Target == ent)
+            if (terminal.Target == dropshipTarget)
             {
                 RemovePvsActors((uid, terminal));
 
@@ -399,9 +409,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
 
             var targets = terminal.Targets;
-            if (HasComp<MedevacStretcherComponent>(ent))
+            if (HasComp<MedevacStretcherComponent>(dropshipTarget))
                 targets = terminal.Medevacs;
-            else if (HasComp<RMCActiveFultonComponent>(ent))
+            else if (HasComp<RMCActiveFultonComponent>(dropshipTarget))
                 targets = terminal.Fultons;
 
             var span = CollectionsMarshal.AsSpan(targets);
@@ -426,12 +436,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         if (_net.IsClient)
-            return;
+            return true;
 
-        foreach (var (_, eye) in ent.Comp.Eyes)
+        foreach (var (_, eye) in targetComponent.Eyes)
         {
             QueueDel(eye);
         }
+
+        return true;
     }
 
     private void OnDropshipTargetEyeRemove<T>(Entity<DropshipTargetEyeComponent> ent, ref T args)

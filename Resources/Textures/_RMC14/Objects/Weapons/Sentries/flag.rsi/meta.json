@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/af8507f7b0e0f4af6375f29c57f8f74091d0eb4a/icons/obj/structures/machinery/defenses/planted_flag.dmi, https://github.com/cmss13-devs/cmss13/blob/3bca209034693038740c87dfdd41458444932e60/icons/obj/structures/machinery/defenses/upp_defenses.dmi, https://github.com/cmss13-devs/cmss13/blob/3bca209034693038740c87dfdd41458444932e60/icons/obj/structures/machinery/defenses/wy_defenses.dmi, https://github.com/cmss13-devs/cmss13/blob/8cffc62ccc171c749ce0f59b299a04faaad8a9cf/icons/obj/structures/machinery/defenses/clf_defenses.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "defense_base"
+    },
+    {
+      "name": "defense_base_off"
+    },
+    {
+      "name": "normal_planted_flag_off"
+    },
+    {
+      "name": "normal_planted_flag",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "normal_planted_flag_destroyed"
+    },
+    {
+      "name": "normal_planted_flag_handheld"
+    },
+    {
+      "name": "range_planted_flag_off"
+    },
+    {
+      "name": "range_planted_flag",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "range_planted_flag_destroyed"
+    },
+    {
+      "name": "range_planted_flag_handheld"
+    },
+    {
+      "name": "warbanner_planted_flag_off"
+    },
+    {
+      "name": "warbanner_planted_flag",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "warbanner_planted_flag_destroyed"
+    },
+    {
+      "name": "warbanner_planted_flag_handheld"
+    },
+    {
+      "name": "defense_base_spp"
+    },
+    {
+      "name": "defense_base_off_spp"
+    },
+    {
+      "name": "upp_planted_flag_off"
+    },
+    {
+      "name": "upp_planted_flag",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "upp_planted_flag_destroyed"
+    },
+    {
+      "name": "upp_planted_flag_handheld"
+    },
+    {
+      "name": "defense_base_weya"
+    },
+    {
+      "name": "defense_base_off_weya"
+    },
+    {
+      "name": "wy_planted_flag_off"
+    },
+    {
+      "name": "wy_planted_flag",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "wy_planted_flag_destroyed"
+    },
+    {
+      "name": "wy_planted_flag_handheld"
+    },
+    {
+      "name": "defense_base_clf"
+    },
+    {
+      "name": "defense_base_off_clf"
+    },
+    {
+      "name": "clf_planted_flag_off"
+    },
+    {
+      "name": "clf_planted_flag",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "clf_planted_flag_destroyed"
+    },
+    {
+      "name": "clf_planted_flag_handheld"
+    }
+  ]
+}
