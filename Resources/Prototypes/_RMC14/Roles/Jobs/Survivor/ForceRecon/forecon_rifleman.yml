@@ -1,4 +1,4 @@
-rrrrrrr- type: job
+- type: job
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconRifleman
   name: cm-job-name-rifleman
