@@ -250,14 +250,16 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCBrandNewPlayerTimeJobHours =
         CVarDef.Create("rmc.brand_new_player_time_job_hours", 1, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarlyThresholdMinutes =
-        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early_threshold_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedAdjustmentThresholdMinutes =
+        CVarDef.Create("rmc.late_joins_per_burrowed_adjustment_threshold_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarly =
-        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early", 7.5f, CVar.SERVER | CVar.SERVERONLY);
-
-    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarva =
-        CVarDef.Create("rmc.late_joins_per_burrowed_larva", 7f, CVar.SERVER | CVar.SERVERONLY);
+    /// <summary>
+    /// How many more (or less if negative) marine late joins are needed
+    /// per burrowed larva after the threshold time has passed.<br/>
+    /// Set to 0 to disable adjustment.
+    /// </summary>
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedAdjustment =
+        CVarDef.Create("rmc.late_joins_per_burrowed_adjustment", 0f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCLateJoinsBurrowedLarvaDeathTime =
         CVarDef.Create("rmc.late_joins_burrowed_larva_death_time", 2.5f, CVar.REPLICATED | CVar.SERVER);
