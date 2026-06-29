@@ -997,8 +997,8 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterTyrargoQuarantineNotice
-  name: "ICC quarantine notice"
-  description: "A quarantine poster, bearing the ICC's logo, it reads: This area is designated a secure transit zone by the ICC and UN Marine Corps. Non-compliance with military directives is punishable under the Interplanetary Biohazard Preparedness Act."
+  name: "ICB quarantine notice"
+  description: "A quarantine poster, bearing the ICB's logo, it reads: This area is designated a secure transit zone by the ICB and UN Marine Corps. Non-compliance with military directives is punishable under the Interplanetary Biohazard Preparedness Act."
   components:
   - type: Sprite
     state: icc
