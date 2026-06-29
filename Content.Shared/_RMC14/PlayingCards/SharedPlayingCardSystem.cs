@@ -233,7 +233,8 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             Text = Loc.GetString("rmc-playing-card-verb-shuffle"),
             Act = () =>
             {
-                ShuffleDeck(ent);
+                if (_net.IsServer)
+                    ShuffleDeck(ent);
                 Popup.PopupPredicted(Loc.GetString("rmc-playing-card-deck-shuffle", ("deck", ent.Owner)), null, ent, user);
                 Audio.PlayPredicted(ent.Comp.ShuffleSound, ent, user);
             },
@@ -528,7 +529,8 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             Text = Loc.GetString("rmc-playing-card-verb-shuffle"),
             Act = () =>
             {
-                ShuffleHand(ent);
+                if (_net.IsServer)
+                    ShuffleHand(ent);
                 Popup.PopupPredicted(Loc.GetString("rmc-playing-card-hand-shuffle", ("hand", ent.Owner)), null, ent, user);
                 Audio.PlayPredicted(ent.Comp.ShuffleSound, ent, user);
             },
@@ -639,8 +641,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         hand.Comp.Cards.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
         Dirty(hand);
-        if (_net.IsServer)
-            QueueDel(card);
+        PredictedQueueDel(card.Owner);
         UpdateHandName(hand);
         TryPopup(hand, Loc.GetString("rmc-playing-card-add-to-hand", ("count", hand.Comp.Cards.Count)), user);
     }
@@ -649,8 +650,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         hand1.Comp.Cards.AddRange(hand2.Comp.Cards);
         Dirty(hand1);
-        if (_net.IsServer)
-            QueueDel(hand2);
+        PredictedQueueDel(hand2.Owner);
         UpdateHandName(hand1);
         TryPopup(hand1, Loc.GetString("rmc-playing-card-merge-hands", ("count", hand1.Comp.Cards.Count)), user);
     }
