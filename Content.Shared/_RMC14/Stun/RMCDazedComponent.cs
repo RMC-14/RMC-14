@@ -7,4 +7,11 @@ namespace Content.Shared._RMC14.Stun;
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(RMCDazedSystem))]
-public sealed partial class RMCDazedComponent : Component;
+public sealed partial class RMCDazedComponent : Component
+{
+    /// <summary>
+    ///    How much extra wield delay to add when the mob is dazed.
+    /// </summary>
+    [DataField]
+    public TimeSpan WieldDelayAdditional = TimeSpan.FromSeconds(0.5);
+}
