@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/29/2026 07:02:55
+  time: 06/29/2026 19:28:01
   entityCount: 20
 maps: []
 grids:
@@ -91,6 +91,20 @@ entities:
         4,-2: RMCAreaShuttleEscapePod
         4,-3: RMCAreaShuttleEscapePod
         4,-4: RMCAreaShuttleEscapePod
+    - type: RMCElevator
+    - type: RMCPreventShuttleStun
+    - type: RMCOverrideShuttleSounds
+      arrivalSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/Cargo/ping.ogg
+      travelSound: !type:SoundPathSpecifier
+        params:
+          loop: True
+          volume: -4
+        path: /Audio/_RMC14/Vehicle/tank_driving.ogg
+      startupSound: !type:SoundPathSpecifier
+        params:
+          volume: -4
+        path: /Audio/_RMC14/Mecha/powerup.ogg
 - proto: RMCElevatorDoor
   entities:
   - uid: 10
@@ -108,26 +122,26 @@ entities:
     - type: Transform
       pos: 3.5,-3.5
       parent: 1
-- proto: RMCElevatorPanel
+- proto: RMCElevatorPanelPower
   entities:
   - uid: 14
     components:
     - type: Transform
       pos: 2.5,0.5
       parent: 1
-- proto: RMCLightFixtureSmallAlwaysPoweredOffset
+- proto: RMCLightFixtureSmallOffset
   entities:
   - uid: 19
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 1.5,-1.5
+      rot: 1.5707963267948966 rad
+      pos: 3.5,-1.5
       parent: 1
   - uid: 20
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 3.5,-1.5
+      rot: -1.5707963267948966 rad
+      pos: 1.5,-1.5
       parent: 1
 - proto: RMCWallElevator
   entities:
