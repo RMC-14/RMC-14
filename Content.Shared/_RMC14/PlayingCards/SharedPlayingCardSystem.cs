@@ -34,9 +34,9 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     private readonly HashSet<Entity<PlayingCardComponent>> _cardLookup = new();
     private readonly HashSet<Entity<PlayingCardHandComponent>> _handLookup = new();
 
-    protected EntityQuery<PlayingCardComponent> CardQuery;
-    protected EntityQuery<PlayingCardDeckComponent> DeckQuery;
-    protected EntityQuery<PlayingCardHandComponent> HandQuery;
+    private EntityQuery<PlayingCardComponent> _cardQuery;
+    private EntityQuery<PlayingCardDeckComponent> _deckQuery;
+    private EntityQuery<PlayingCardHandComponent> _handQuery;
 
     private static readonly VerbCategory DrawCategory = new("rmc-playing-card-verb-category-draw", null);
 
@@ -50,9 +50,9 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         base.Initialize();
 
-        CardQuery = GetEntityQuery<PlayingCardComponent>();
-        DeckQuery = GetEntityQuery<PlayingCardDeckComponent>();
-        HandQuery = GetEntityQuery<PlayingCardHandComponent>();
+        _cardQuery = GetEntityQuery<PlayingCardComponent>();
+        _deckQuery = GetEntityQuery<PlayingCardDeckComponent>();
+        _handQuery = GetEntityQuery<PlayingCardHandComponent>();
 
         // Card events
         SubscribeLocalEvent<PlayingCardComponent, UseInHandEvent>(OnCardUseInHand);
@@ -140,7 +140,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             return;
 
         // Combine cards into a hand
-        if (CardQuery.TryComp(args.Used, out var otherCard))
+        if (_cardQuery.TryComp(args.Used, out var otherCard))
         {
             if (_net.IsServer)
                 CombineCards(ent, (args.Used, otherCard), args.User);
@@ -149,7 +149,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         // Add card to existing hand
-        if (HandQuery.TryComp(args.Used, out var hand))
+        if (_handQuery.TryComp(args.Used, out var hand))
         {
             AddCardToHand((args.Used, hand), ent, args.User);
             args.Handled = true;
@@ -157,7 +157,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         // Add card to deck (deck in active hand clicked on this card)
-        if (DeckQuery.TryComp(args.Used, out var deck))
+        if (_deckQuery.TryComp(args.Used, out var deck))
         {
             AddCardToDeck((args.Used, deck), ent, args.User);
             args.Handled = true;
@@ -283,7 +283,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             return;
 
         // Add single card to deck
-        if (CardQuery.TryComp(args.Used, out var card))
+        if (_cardQuery.TryComp(args.Used, out var card))
         {
             AddCardToDeck(ent, (args.Used, card), args.User);
             args.Handled = true;
@@ -291,7 +291,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         // Add hand of cards to deck
-        if (HandQuery.TryComp(args.Used, out var hand))
+        if (_handQuery.TryComp(args.Used, out var hand))
         {
             AddHandToDeck(ent, (args.Used, hand), args.User);
             args.Handled = true;
@@ -376,21 +376,21 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             if (ent.Comp.CardOrder.Count >= ent.Comp.MaxCards)
                 break;
 
-            if (CardQuery.TryComp(entity, out var card))
+            if (_cardQuery.TryComp(entity, out var card))
             {
                 ent.Comp.CardOrder.Add(EncodeCard(card.Suit, card.Rank));
                 QueueDel(entity);
                 added++;
             }
-            else if (HandQuery.TryComp(entity, out var hand))
+            else if (_handQuery.TryComp(entity, out var hand))
             {
                 var handAdded = 0;
-                for (var i = 0; i < hand.Cards.Count; i++)
+                foreach (var encodedCard in hand.Cards)
                 {
                     if (ent.Comp.CardOrder.Count >= ent.Comp.MaxCards)
                         break;
 
-                    ent.Comp.CardOrder.Add(hand.Cards[i]);
+                    ent.Comp.CardOrder.Add(encodedCard);
                     handAdded++;
                     added++;
                 }
@@ -569,7 +569,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             return;
 
         // Add card to hand
-        if (CardQuery.TryComp(args.Used, out var card))
+        if (_cardQuery.TryComp(args.Used, out var card))
         {
             AddCardToHand(ent, (args.Used, card), args.User);
             args.Handled = true;
@@ -577,7 +577,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         // Merge hands
-        if (HandQuery.TryComp(args.Used, out var otherHand))
+        if (_handQuery.TryComp(args.Used, out var otherHand))
         {
             MergeHands(ent, (args.Used, otherHand), args.User);
             args.Handled = true;
@@ -585,7 +585,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         // Add hand to deck
-        if (DeckQuery.TryComp(args.Used, out var deck))
+        if (_deckQuery.TryComp(args.Used, out var deck))
         {
             AddHandToDeck((args.Used, deck), ent, args.User);
             args.Handled = true;
@@ -612,7 +612,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     #region Card Logic
 
-    public virtual void FlipCard(Entity<PlayingCardComponent> card, EntityUid user)
+    protected virtual void FlipCard(Entity<PlayingCardComponent> card, EntityUid user)
     {
         card.Comp.FaceUp = !card.Comp.FaceUp;
         Dirty(card);
@@ -621,7 +621,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         Popup.PopupPredicted(Loc.GetString("rmc-playing-card-flip", ("direction", direction)), null, card, user);
     }
 
-    public virtual void FlipHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
+    protected virtual void FlipHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
     {
         hand.Comp.FaceUp = !hand.Comp.FaceUp;
         Dirty(hand);
@@ -682,7 +682,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     #region Deck Logic
 
-    public void InitializeDeck(Entity<PlayingCardDeckComponent> deck)
+    private void InitializeDeck(Entity<PlayingCardDeckComponent> deck)
     {
         deck.Comp.CardOrder.Clear();
 
@@ -698,7 +698,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         Dirty(deck);
     }
 
-    public void ShuffleDeck(Entity<PlayingCardDeckComponent> deck)
+    private void ShuffleDeck(Entity<PlayingCardDeckComponent> deck)
     {
         // Fisher-Yates shuffle of remaining cards only
         for (var i = deck.Comp.CardOrder.Count - 1; i > 0; i--)
@@ -710,7 +710,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         Dirty(deck);
     }
 
-    public void ShuffleHand(Entity<PlayingCardHandComponent> hand)
+    private void ShuffleHand(Entity<PlayingCardHandComponent> hand)
     {
         for (var i = hand.Comp.Cards.Count - 1; i > 0; i--)
         {
@@ -754,11 +754,11 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         var added = 0;
-        for (var i = 0; i < hand.Comp.Cards.Count; i++)
+        foreach (var card in hand.Comp.Cards)
         {
             if (deck.Comp.CardOrder.Count >= deck.Comp.MaxCards)
                 break;
-            deck.Comp.CardOrder.Add(hand.Comp.Cards[i]);
+            deck.Comp.CardOrder.Add(card);
             added++;
         }
 

@@ -228,13 +228,13 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         }
     }
 
-    public override void FlipCard(Entity<PlayingCardComponent> card, EntityUid user)
+    protected override void FlipCard(Entity<PlayingCardComponent> card, EntityUid user)
     {
         base.FlipCard(card, user);
         UpdateCardSprite(card);
     }
 
-    public override void FlipHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
+    protected override void FlipHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
     {
         base.FlipHand(hand, user);
         UpdateHandSprite(hand);
