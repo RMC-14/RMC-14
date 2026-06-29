@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/29/2026 06:56:24
+  time: 06/29/2026 07:02:55
   entityCount: 20
 maps: []
 grids:
@@ -61,6 +61,36 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        0,0: RMCAreaShuttleEscapePod
+        0,-1: RMCAreaShuttleEscapePod
+        0,-2: RMCAreaShuttleEscapePod
+        0,-3: RMCAreaShuttleEscapePod
+        0,-4: RMCAreaShuttleEscapePod
+        1,-4: RMCAreaShuttleEscapePod
+        1,-3: RMCAreaShuttleEscapePod
+        1,-2: RMCAreaShuttleEscapePod
+        1,-1: RMCAreaShuttleEscapePod
+        1,0: RMCAreaShuttleEscapePod
+        2,0: RMCAreaShuttleEscapePod
+        2,-1: RMCAreaShuttleEscapePod
+        2,-2: RMCAreaShuttleEscapePod
+        2,-3: RMCAreaShuttleEscapePod
+        2,-4: RMCAreaShuttleEscapePod
+        3,-4: RMCAreaShuttleEscapePod
+        3,-3: RMCAreaShuttleEscapePod
+        3,-2: RMCAreaShuttleEscapePod
+        3,-1: RMCAreaShuttleEscapePod
+        3,0: RMCAreaShuttleEscapePod
+        4,0: RMCAreaShuttleEscapePod
+        4,-1: RMCAreaShuttleEscapePod
+        4,-2: RMCAreaShuttleEscapePod
+        4,-3: RMCAreaShuttleEscapePod
+        4,-4: RMCAreaShuttleEscapePod
 - proto: RMCElevatorDoor
   entities:
   - uid: 10
