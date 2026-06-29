@@ -5,7 +5,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
-using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -32,7 +31,6 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] protected readonly SharedUserInterfaceSystem Ui = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private readonly HashSet<Entity<PlayingCardComponent>> _cardLookup = new();
     private readonly HashSet<Entity<PlayingCardHandComponent>> _handLookup = new();
@@ -46,6 +44,8 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     private const float AreaPickupRadius = 1f;
     private const float AreaPickupDelayPerCard = 0.1f;
     private const int StackThreshold = 5;
+    private const int DrawFiveCount = 5;
+    private const int AceSortValue = 14;
 
     public override void Initialize()
     {
@@ -250,7 +250,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             Act = () =>
             {
                 if (_net.IsServer)
-                    DrawMultiple(ent, user, 5);
+                    DrawMultiple(ent, user, DrawFiveCount);
             },
             Priority = 2
         });
@@ -304,9 +304,6 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     private void OnDeckAfterInteract(Entity<PlayingCardDeckComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Handled || !args.CanReach)
-            return;
-
-        if (!_useDelay.TryResetDelay(ent, checkDelayed: true))
             return;
 
         if (args.Target != null && (HasComp<PlayingCardComponent>(args.Target) || HasComp<PlayingCardHandComponent>(args.Target)))
@@ -482,8 +479,8 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         {
             bySuit[suit].Sort((a, b) =>
             {
-                var va = a == CardRank.Ace ? 14 : (int)a;
-                var vb = b == CardRank.Ace ? 14 : (int)b;
+                var va = a == CardRank.Ace ? AceSortValue : (int)a;
+                var vb = b == CardRank.Ace ? AceSortValue : (int)b;
                 return va.CompareTo(vb);
             });
             var suitName = GetSuitDisplayName(suit);
@@ -746,8 +743,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
         deck.Comp.CardOrder.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
         Dirty(deck);
-        if (_net.IsServer)
-            QueueDel(card);
+        PredictedQueueDel(card.Owner);
 
         Popup.PopupPredicted(Loc.GetString("rmc-playing-card-added-to-deck"), null, deck, user);
         Audio.PlayPredicted(deck.Comp.DrawSound, deck, user);
@@ -774,10 +770,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         Dirty(deck);
 
         if (hand.Comp.Cards.Count == 0)
-        {
-            if (_net.IsServer)
-                QueueDel(hand);
-        }
+            PredictedQueueDel(hand.Owner);
         else
             Dirty(hand);
 

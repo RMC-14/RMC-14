@@ -53,5 +53,3 @@
     state: deck
   - type: Item
     size: Tiny
-  - type: UseDelay
-    delay: 0
