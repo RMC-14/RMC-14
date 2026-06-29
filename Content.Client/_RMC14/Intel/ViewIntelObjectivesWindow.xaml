@@ -108,6 +108,14 @@
                 <BoxContainer Orientation="Vertical" Margin="8">
                     <RichTextLabel Text="{Loc rmc-ui-intel-clues}" />
                     <ui:BlueHorizontalSeparator />
+                    <BoxContainer Orientation="Horizontal" Margin="0 2 0 4" SeparationOverride="4">
+                        <LineEdit Name="CluesSearchBar" Access="Public"
+                                  PlaceHolder="Search clues..."
+                                  HorizontalExpand="True" />
+                        <Button Name="HideAreasButton" Access="Public"
+                                Text="Hide Areas"
+                                MinWidth="90" />
+                    </BoxContainer>
                     <TabContainer Name="CluesContainer" Access="Public" VerticalExpand="True" />
                 </BoxContainer>
             </PanelContainer>
