@@ -91,10 +91,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     private void OnHandBuiMsg(Entity<PlayingCardHandComponent> ent, ref PlayingCardHandBuiMsg args)
     {
-        if (args.Actor is not { Valid: true } user)
-            return;
-
-        DrawSpecificCard(ent, user, args.CardIndex);
+        DrawSpecificCard(ent, args.Actor, args.CardIndex);
     }
 
     #region Card Events
