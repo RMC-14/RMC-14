@@ -987,7 +987,7 @@
 - type: entity
   parent: CMPosterBase
   id: CMPosterTyrargoCheckpointNotice
-  name: "US military checkpoint notice"
+  name: "UN military checkpoint notice"
   description: "A military notice poster, it reads: Halt. UN Marine Corps checkpoint ahead. Comply or be shot."
   components:
   - type: Sprite
