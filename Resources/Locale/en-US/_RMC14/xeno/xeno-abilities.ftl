@@ -179,6 +179,8 @@ rmc-xeno-rest-cant-secrete = You can't secrete while resting!
 rmc-xeno-rest-cant = You can't do that while resting!
 
 # Toggle Crest Defense
+cm-xeno-toggle-crest-lower = You lower your crest.
+cm-xeno-toggle-crest-raise = You raise your crest.
 cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowered!
 cm-xeno-toggle-crest-cant-rest = You can't rest while your crest is lowered!
 cm-xeno-toggle-crest-cant-tail-sweep = You can't tail sweep while your crest is lowered!

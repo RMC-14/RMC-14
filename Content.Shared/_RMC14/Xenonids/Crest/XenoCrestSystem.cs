@@ -67,6 +67,7 @@ public sealed class XenoCrestSystem : EntitySystem
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
         _appearance.SetData(xeno, XenoVisualLayers.Crest, xeno.Comp.Lowered);
+        _popup.PopupClient(Loc.GetString("cm-xeno-toggle-crest-" + (xeno.Comp.Lowered ? "lower" : "raise")), xeno, xeno);
 
         foreach (var action in _rmcActions.GetActionsWithEvent<XenoToggleCrestActionEvent>(xeno))
         {
