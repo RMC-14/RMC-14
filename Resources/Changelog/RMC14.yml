@@ -1,72 +1,4 @@
 ﻿Entries:
-- author: kleinerstation13
-  changes:
-  - message: Added missing locale for sentry and sentry laptop multitool ports
-    type: Fix
-  id: 2935
-  time: '2026-02-12T01:35:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9224
-- author: LeoKarz
-  changes:
-  - message: Designer hivelord can now build plasma trees!
-    type: Fix
-  - message: Design nodes are visibile through walls to xenos
-    type: Tweak
-  id: 2936
-  time: '2026-02-12T01:34:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9226
-- author: Ian321
-  changes:
-  - message: You can now always extinguish yourself with the under-barrel extinguisher.
-    type: Fix
-  id: 2937
-  time: '2026-02-12T01:34:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9225
-- author: Dygon
-  changes:
-  - message: Fixed parasites sometimes being unable to leap while under a resin door.
-    type: Fix
-  - message: Fixed parasites sometimes being able to leap through closed doors.
-    type: Fix
-  id: 2938
-  time: '2026-02-14T18:50:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9245
-- author: Ian321
-  changes:
-  - message: Motion detectors inside of bags now ignore survivors that have been given
-      IFF.
-    type: Fix
-  id: 2939
-  time: '2026-02-14T18:51:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9243
-- author: Dygon
-  changes:
-  - message: The Praetorian can now hit over barricades using their Pierce ability.
-    type: Fix
-  id: 2940
-  time: '2026-02-14T18:49:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9249
-- author: t0wnshark
-  changes:
-  - message: '[PVE] Added the L989A2 multiple grenade launcher, a PVE weapon for the
-      Royal Crown Marines bombardier, and two types of 20mm impact grenade ammo for
-      it (HE and incendiary)'
-    type: Add
-  - message: '[PVE] Added 20mm HE and incendiary impact grenades for the L989A2'
-    type: Add
-  - message: '[PVE] Added the HMS Pratchett, a PVE shipmap for the Royal Crown Marines
-      faction'
-    type: Add
-  - message: '[PVE] Added the Section Scout-Sniper equipment vendor for RCM PVE'
-    type: Add
-  - message: '[PVE] Added RCM backpacks for PVE, including heavy, standard, lightweight,
-      technician, and medical variants'
-    type: Add
-  - message: Added AI walls without the LED blinkenlights, for mapping purposes
-    type: Add
-  id: 2941
-  time: '2026-02-14T18:48:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8981
 - author: Dygon
   changes:
   - message: Damage popups now always correctly apply a gun's damage modifier.
@@ -4556,5 +4488,60 @@
   id: 3434
   time: '2026-06-23T16:20:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10232
+- author: IceNoobXD
+  changes:
+  - message: Fixed fiorina having no APCs in a lot of areas and added a few new areas
+      to replace existing once!
+    type: Fix
+  id: 3435
+  time: '2026-06-24T03:39:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10225
+- author: Vermidia
+  changes:
+  - message: Changed Vehicle Crewman icon to better fit the rest of the auxiliary
+      support department.
+    type: Tweak
+  id: 3436
+  time: '2026-06-24T12:48:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10272
+- author: IceNoobXD
+  changes:
+  - message: Sorokyne strata has recived a map parity passover which adds a lot of
+      new props to the map and removed/replaced some hull/Indestructible walls!
+    type: Tweak
+  id: 3437
+  time: '2026-06-25T19:45:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9974
+- author: Vermidia
+  changes:
+  - message: Fixed Healer Drone's Salve and Sacrifice not being highlighted when selected.
+    type: Fix
+  id: 3438
+  time: '2026-06-27T01:51:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10289
+- author: SabreML
+  changes:
+  - message: Reduced the size of the empty gap in chat after xeno announcements. (Deaths,
+      traps, etc.)
+    type: Tweak
+  id: 3439
+  time: '2026-06-28T01:40:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10285
+- author: CatAndHats
+  changes:
+  - message: Removed the incorrectly mapped Type-71 HEAP magazines from the Trijent
+      SPP survivor insert and replaced them with empty versions
+    type: Remove
+  id: 3440
+  time: '2026-06-28T19:35:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10305
+- author: IceNoobXD
+  changes:
+  - message: Fixed chances having no or double APCs in a lot of areas and added a
+      few new areas to replace existing once!
+    type: Fix
+  id: 3441
+  time: '2026-06-29T05:35:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10278
 Name: RMC14
 Order: -1
