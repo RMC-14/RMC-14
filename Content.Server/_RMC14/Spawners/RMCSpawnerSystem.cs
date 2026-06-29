@@ -277,9 +277,17 @@ public sealed class RMCSpawnerSystem : EntitySystem
                     if (max <= spawned)
                         continue;
 
-                    foreach (var spawn in spawner.Comp.Prototypes)
+                    List<EntProtoId> spawns = spawner.Comp.Prototypes;
+
+                    if (_mapSystem.TryGetMap(Transform(spawner).MapID, out var map) && TryComp<MapProportionalSpawnsComponent>(map, out var mapSpawns))
+                        spawns = mapSpawns.Prototypes;
+
+                    if (spawns.Count == 0)
+                        continue;
+
+                    for (int i = 0; i < spawner.Comp.Amount; i++)
                     {
-                        Spawn(spawn, coordinates);
+                        Spawn(_random.Pick(spawns), coordinates);
                     }
 
                     spawned++;

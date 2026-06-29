@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Prototypes;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Spawners;
 
@@ -15,4 +15,7 @@ public sealed partial class ProportionalSpawnerComponent : Component
 
     [DataField]
     public List<EntProtoId> Prototypes { get; set; } = new();
+
+    [DataField]
+    public int Amount = 1;
 }

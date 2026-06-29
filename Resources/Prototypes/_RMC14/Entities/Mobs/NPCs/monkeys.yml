@@ -261,7 +261,7 @@
   parent: MarkerBase
   id: CMSpawnMobMonkey
   name: Small host spawner
-  suffix: RMC
+  suffix: RMC Base
   components:
   - type: Sprite
     layers:
@@ -275,6 +275,7 @@
 - type: entity
   parent: CMSpawnMobMonkey
   id: CMSpawnMobKobold
+  suffix: RMC Kobold
   components:
   - type: Sprite
     layers:
@@ -288,6 +289,7 @@
 - type: entity
   parent: CMSpawnMobMonkey
   id: RMCSpawnMobFarwa
+  suffix: RMC Farwa
   components:
   - type: Sprite
     layers:
@@ -301,6 +303,7 @@
 - type: entity
   parent: CMSpawnMobMonkey
   id: RMCSpawnMobNeaera
+  suffix: RMC Neaera
   components:
   - type: Sprite
     layers:
@@ -314,6 +317,7 @@
 - type: entity
   parent: CMSpawnMobMonkey
   id: RMCSpawnMobStok
+  suffix: RMC Stok
   components:
   - type: Sprite
     layers:
@@ -328,6 +332,7 @@
 - type: entity
   parent: CMSpawnMobMonkey
   id: RMCSpawnMobYiren
+  suffix: RMC Yiren
   components:
   - type: Sprite
     layers:
