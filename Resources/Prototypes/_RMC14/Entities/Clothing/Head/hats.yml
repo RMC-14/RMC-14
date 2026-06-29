@@ -424,6 +424,17 @@
 
 - type: entity
   parent: CMHeadCap
+  id: CMHeadCapPeakedCO
+  name: marine commanding officer peaked cap
+  description: A peaked cap with the commanding officer's insignia emblazoned on it. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap_peaked_co.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap_peaked_co.rsi
+
+- type: entity
+  parent: CMHeadCap
   id: CMHeadCapPeakedFormal
   name: marine peaked cap
   description: A peaked cap. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.

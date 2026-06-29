@@ -36,6 +36,22 @@
     - id: RMCCoatTSEPAHighVisVest
 
 - type: entity
+  id: CMLockerCommanderFilled
+  suffix: Filled
+  parent: CMLockerCommander
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMHeadCapPeakedCO
+      - id: CMCoatCO
+      - id: RMCSunglasses
+      - id: CMBackpackCommand
+      - id: RMCShoesLaceup
+      - id: RMCWhistle
+      - id: RMCMegaphone
+      - id: CMArmorM3VLBallistics
+
+- type: entity
   id: RMCClosetBombFilledOT
   parent: CMClosetBomb
   suffix: Filled, OT

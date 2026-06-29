@@ -1,0 +1,116 @@
+- type: entity
+  parent: BaseItem
+  id: RMCCoin
+  abstract: true
+  name: coin
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/coins.rsi
+
+- type: entity
+  parent: RMCCoin
+  id: RMCCoinGold
+  suffix: RMC
+  name: gold coin
+  description: A coin of the purest gold.
+  components:
+  - type: Sprite
+    state: coin_gold
+
+- type: entity
+  parent: RMCCoin
+  id: RMCCoinSilver
+  suffix: RMC
+  name: silver coin
+  description: A coin of the purest silver.
+  components:
+  - type: Sprite
+    state: coin_silver
+
+- type: entity
+  parent: RMCCoinSilver
+  id: RMCCoinChallenge
+  suffix: RMC
+  name: falling falcons challenge coin
+  description: A small coin, bearing the falling falcons insignia.
+
+- type: entity
+  parent: RMCCoin
+  id: RMCCoinCopper
+  suffix: RMC
+  name: copper coin
+  description: A familiar, but cheap form of currency.
+  components:
+  - type: Sprite
+    state: coin_copper
+
+- type: entity
+  parent: RMCCoin
+  id: RMCCoinDiamond
+  suffix: RMC
+  name: diamond coin
+  description: A coin of the most flawless diamond.
+  components:
+  - type: Sprite
+    state: coin_diamond
+
+- type: entity
+  parent: RMCCoin
+  id: RMCCoinIron
+  suffix: RMC
+  name: iron coin
+  description: A coin made of sturdy iron. You fear this might become rusty.
+  components:
+  - type: Sprite
+    state: coin_iron
+
+- type: entity
+  parent: RMCCoin
+  id: RMCCoinPhoron
+  suffix: RMC
+  name: solid phoron coin
+  description: There are better uses for phoron.
+  components:
+  - type: Sprite
+    state: coin_phoron
+
+- type: entity
+  parent: RMCCoin
+  id: RMCCoinUranium
+  suffix: RMC
+  name: uranium coin
+  description: A radioactive coin. Don't touch it!
+  components:
+  - type: Sprite
+    state: coin_uranium
+
+- type: entity
+  parent: RMCCoin
+  id: RMCCoinPlatinum
+  suffix: RMC
+  name: platinum coin
+  description: A coin made of shiny platinum. It is quite valuable.
+  components:
+  - type: Sprite
+    state: coin_platinum
+
+- type: entity
+  parent: RMCCoin
+  id: RMCCoinChitin
+  suffix: RMC
+  name: chitin coin
+  description: Durable alien chitin pressed into a coin. There are much better uses for chitin...
+  components:
+  - type: Sprite
+    state: coin_chitin
+
+- type: entity
+  parent: RMCCoin
+  id: RMCMoneybag
+  name: money bag
+  components:
+  - type: Sprite
+    state: moneybag
+  - type: Item
+    size: Large
