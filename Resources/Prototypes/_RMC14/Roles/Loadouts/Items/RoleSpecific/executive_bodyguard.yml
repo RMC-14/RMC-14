@@ -1,0 +1,38 @@
+﻿# Corporate Liaison
+- type: loadout
+  id: RMCPatchWeYaSecurityDivision
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: RMCJobWeYaExecutiveBodyguard
+      time: 36000 # 10 hours
+  storage:
+    back:
+      - RMCPatchWeYaSecurityDivision
+
+- type: loadout
+  id: RMCWeYaCanteen
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: RMCJobWeYaExecutiveBodyguard
+      time: 252000 # 70 hours
+  storage:
+    back:
+    - RMCWeYaCanteen
+
+- type: loadout
+  id: RMCBoonieWeYa
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: RMCJobWeYaExecutiveBodyguard
+      time: 630000 # 175 hours
+  equipment:
+    head: RMCBoonieWeYa

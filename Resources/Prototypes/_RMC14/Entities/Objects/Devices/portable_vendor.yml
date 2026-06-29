@@ -51,6 +51,8 @@
         points: 5
       - id: CMEncryptionKeyWEYA
         points: 5
+      - id: RMCMREWeYa
+        points: 10
     - name: Smokables
       entries:
       - id: RMCCigarCase

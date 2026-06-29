@@ -732,12 +732,24 @@
   id: LiaisonRoleSpecificRMC
   name: rmc-loadout-group-role-specific
   minLimit: 0
-  maxLimit: 4
+  maxLimit: 5
   loadouts:
   - RMCWeYaClipboard
+  - RMCPatchWeYaCommsDivision
   - RMCWeYaThermos
   - WEYABagPhoneSatchel
   - RMCJacketWindbreakerWEYA
+
+# Executive Bodyguard
+- type: loadoutGroup
+  id: BodyguardRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 3
+  loadouts:
+  - RMCPatchWeYaSecurityDivision
+  - RMCWeYaCanteen
+  - RMCBoonieWeYa
 
 # Chief MP
 - type: loadoutGroup
