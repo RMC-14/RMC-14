@@ -1,0 +1,90 @@
+- type: entity
+  parent: [MobObserver, InventoryBase]
+  id: RMCImaginaryFriend
+  name: Imaginary Friend
+  description: A wonderful yet fake friend.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Mobs/Ghosts/ghost_human.rsi
+    color: "#fff8"
+  - type: ImaginaryFriend
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 6
+    baseWalkSpeed: 2.7
+  - type: Inventory
+    templateId: human
+  - type: Appearance
+  - type: Speech
+    speechSounds: Alto
+  - type: SeeNewPlayers
+
+- type: entity
+  parent: RMCImaginaryFriend
+  id: RMCImaginaryFriendHumanoid
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+    - map: ["jumpsuit"]
+    - map: ["enum.HumanoidVisualLayers.LFoot"]
+    - map: ["enum.HumanoidVisualLayers.RFoot"]
+    - map: ["enum.HumanoidVisualLayers.LHand"]
+    - map: ["enum.HumanoidVisualLayers.RHand"]
+    - map: [ "gloves" ]
+    - map: [ "enum.SquadArmorLayers.Gloves" ]
+    - map: [ "shoes" ]
+    - map: [ "id" ]
+    - map: [ "ears" ]
+    - map: [ "eyes" ]
+    - map: [ "outerClothing" ]
+    - map: [ "belt" ]
+    - map: [ "enum.SquadArmorLayers.Armor" ]
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base1" ]
+    - map: [ "back" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "neck" ]
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.HumanoidVisualLayers.Tail" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "enum.SquadArmorLayers.Helmet" ]
+    - map: [ "enum.VisorVisualLayers.Base" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+  - type: HumanoidAppearance
+    species: Human
+
+- type: entity
+  parent: RMCImaginaryFriend
+  id: RMCImaginaryFriendXeno
+  categories: [ HideSpawnMenu ]
+  name: Xippy
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/LesserDrone/lesser_drone.rsi
+    color: "#FFFFFF"
+    layers:
+    - state: alive
+      shader: ""
+  - type: Speech
+    speechSounds: Xenonid
+
+- type: startingGear
+  id: RMCMobXippyGear
+  equipment:
+    head: RMCHeadCapDrillXippy

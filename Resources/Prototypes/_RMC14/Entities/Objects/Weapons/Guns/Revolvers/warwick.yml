@@ -14,6 +14,10 @@
     - Sidearm
     - RMCRevolver
     - RMCWeaponRevolverWarwickMkVII
+  - type: GunDamageModifier
+    multiplier: 1.1
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
 
 - type: entity
   parent: RMCWeaponRevolverWarwickMkVII

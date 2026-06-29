@@ -91,7 +91,7 @@
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
@@ -327,8 +327,7 @@
   id: RMCMagazineSMGM63HEAPEmpty
   suffix: HEAP, Empty
   components:
-  - type: BallisticAmmoProvider
-    proto: null
+  - type: RMCEmptyMag
 
 - type: entity
   parent: CMMagazineSMGM63
