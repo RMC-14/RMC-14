@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Damage popups now always correctly apply a gun's damage modifier.
-    type: Fix
-  id: 2942
-  time: '2026-02-14T18:49:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9250
-- author: Dygon
-  changes:
   - message: Fixed claymores being able to pass through walls while undeployed.
     type: Fix
   - message: You no longer instantly pick up a claymore when you cancel the disarm
@@ -4543,5 +4536,15 @@
   id: 3441
   time: '2026-06-29T05:35:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10278
+- author: noctynral
+  changes:
+  - message: Adjusted the position of the tanks primary weapons, secondary weapons
+      and modules to align better with the actual tank.
+    type: Tweak
+  - message: Added a proper sprite for the vehicle keys.
+    type: Add
+  id: 3442
+  time: '2026-06-29T18:57:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10231
 Name: RMC14
 Order: -1
