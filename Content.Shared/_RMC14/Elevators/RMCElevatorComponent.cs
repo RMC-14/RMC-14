@@ -29,7 +29,7 @@ public sealed partial class RMCElevatorComponent : Component
     public Vector2? DestinationOffset;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? ArrivalSound;
+    public SoundSpecifier? ArrivalSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
 
     [DataField, AutoNetworkedField]
     public EntityUid? ArrivalSoundEnt;
