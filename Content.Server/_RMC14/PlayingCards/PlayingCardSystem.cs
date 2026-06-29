@@ -107,7 +107,9 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
     }
 
     protected override void DrawFromHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
-        => DrawSpecificCard(hand, user, hand.Comp.Cards.Count - 1);
+    {
+        DrawSpecificCard(hand, user, hand.Comp.Cards.Count - 1);
+    }
 
     protected override void DrawSpecificCard(Entity<PlayingCardHandComponent> hand, EntityUid user, int index)
     {

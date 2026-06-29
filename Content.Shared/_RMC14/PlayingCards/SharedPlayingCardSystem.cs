@@ -9,7 +9,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -586,7 +585,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             return;
         }
 
-        // Add hand to deck (deck in active hand clicked on this hand)
+        // Add hand to deck
         if (DeckQuery.TryComp(args.Used, out var deck))
         {
             AddHandToDeck((args.Used, deck), ent, args.User);
@@ -691,9 +690,9 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         deck.Comp.CardOrder.Clear();
 
         // Create all 52 cards
-        foreach (CardSuit suit in Enum.GetValues<CardSuit>())
+        foreach (var suit in Enum.GetValues<CardSuit>())
         {
-            foreach (CardRank rank in Enum.GetValues<CardRank>())
+            foreach (var rank in Enum.GetValues<CardRank>())
             {
                 deck.Comp.CardOrder.Add(EncodeCard(suit, rank));
             }
@@ -785,7 +784,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     #region Helpers
 
-    public static int EncodeCard(CardSuit suit, CardRank rank)
+    protected static int EncodeCard(CardSuit suit, CardRank rank)
     {
         return ((int)suit << 8) | (int)rank;
     }
@@ -822,7 +821,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         };
     }
 
-    public string GetRankShortName(CardRank rank)
+    private string GetRankShortName(CardRank rank)
     {
         return rank switch
         {
