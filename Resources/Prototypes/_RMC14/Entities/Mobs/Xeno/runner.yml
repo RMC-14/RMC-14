@@ -211,7 +211,6 @@
     gain: 1
     gainAttack: 14
     gainAttackDowned: 8
-    ignoreLateInfected: true
     popupGain: rmc-xeno-acid-increase-user
     popupNotEnough: rmc-xeno-not-enough-acid
     alert: XenoEnergyAcider
