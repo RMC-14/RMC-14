@@ -205,7 +205,7 @@
   - type: DestroyedByExplosion
     isExplodable: true
   - type: FixedIdentity
-    name: cm-chatsan-replacement-cas-flare
+    name: cm-chatsan-replacement-flare-cas
     whitelist:
       components:
       - Xeno

@@ -128,6 +128,11 @@
     suffix: false
   - type: IgnorePredictionHide
   - type: AssistedReloadAmmo
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rocket
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   id: RMCBaseProjectileRocket84mm
@@ -276,6 +281,11 @@
     state: m5_84mm_wp
     suffix: false
   - type: IgnorePredictionHide
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rocket-wp
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseProjectileRocket84mm

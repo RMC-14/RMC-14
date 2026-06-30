@@ -430,6 +430,11 @@ cm-chatsan-replacement-laser = dot
 cm-chatsan-word-lazer = lazer
 cm-chatsan-replacement-lazer = dot
 
+cm-chatsan-replacement-binoculars = far seer
+cm-chatsan-replacement-rangefinder = green dot summoner
+cm-chatsan-replacement-laser-designator = red dot summoner
+cm-chatsan-replacement-laser-designator-special = special red dot summoner
+
 cm-chatsan-word-flamer = flamer
 cm-chatsan-replacement-flamer = fire spitter
 
@@ -443,6 +448,8 @@ cm-chatsan-replacement-sadar = tuber
 
 cm-chatsan-word-rocket = rocket
 cm-chatsan-replacement-rocket = boom spit
+
+cm-chatsan-replacement-rocket-wp = burning boom spit
 
 cm-chatsan-word-grenadier = grenadier
 cm-chatsan-replacement-grenadier = boomstick spitter
