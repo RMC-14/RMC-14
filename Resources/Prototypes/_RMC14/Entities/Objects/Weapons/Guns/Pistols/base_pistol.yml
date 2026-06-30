@@ -85,7 +85,7 @@
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
   - type: FixedIdentity
-    name: cm-chatsan-replacement-revolver
+    name: cm-chatsan-replacement-pistol
     whitelist:
       components:
       - Xeno

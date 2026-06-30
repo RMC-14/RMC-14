@@ -57,7 +57,7 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 0.85
   - type: FixedIdentity
-    name: cm-chatsan-replacement-pistol
+    name: cm-chatsan-replacement-revolver
     whitelist:
       components:
       - Xeno

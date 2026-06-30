@@ -105,6 +105,11 @@
       ballistic-ammo: !type:Container
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-xm-88-heavy-rifle # Mention Favela Wars lore analogue here
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-xm88
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: BulletRifle10x24mm

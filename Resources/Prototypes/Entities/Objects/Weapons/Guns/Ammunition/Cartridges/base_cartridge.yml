@@ -40,3 +40,8 @@
         volume: -1
   - type: StaticPrice
     price: 1
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-ammo
+    whitelist:
+      components:
+      - Xeno
