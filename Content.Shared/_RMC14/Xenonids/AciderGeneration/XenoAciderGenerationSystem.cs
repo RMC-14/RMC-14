@@ -33,6 +33,9 @@ public sealed class XenoAciderGenerationSystem : EntitySystem
             if (HasComp<RMCTrainingDummyComponent>(hit))
                 return;
 
+            if (HasComp<VictimInfectedComponent>(hit))
+                return;
+
             startGenerating = true;
             break;
         }
