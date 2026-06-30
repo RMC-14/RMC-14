@@ -239,6 +239,11 @@
     enabled: true
     radius: 3
   - type: RMCNightVisionVisibleInView
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-laser-range
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCRangefinderTarget
@@ -256,6 +261,11 @@
   - type: Eye
     zoom: 0.5, 0.5
     drawFov: false
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-laser-cas
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCRangefinderTarget

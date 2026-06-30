@@ -435,10 +435,13 @@ cm-chatsan-replacement-laser = dot
 cm-chatsan-word-lazer = lazer
 cm-chatsan-replacement-lazer = dot
 
+cm-chatsan-replacement-laser-cas = red dot
+cm-chatsan-replacement-laser-range = green dot
+
 cm-chatsan-replacement-binoculars = far seer
-cm-chatsan-replacement-rangefinder = green dot summoner
-cm-chatsan-replacement-laser-designator = red dot summoner
-cm-chatsan-replacement-laser-designator-special = special red dot summoner
+cm-chatsan-replacement-rangefinder = green dot caller
+cm-chatsan-replacement-laser-designator = red dot caller
+cm-chatsan-replacement-laser-designator-special = special red dot caller
 
 cm-chatsan-word-flamer = flamer
 cm-chatsan-replacement-flamer = fire spitter
