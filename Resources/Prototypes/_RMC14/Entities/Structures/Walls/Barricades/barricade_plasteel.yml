@@ -82,7 +82,7 @@
     tags:
     - RMCPlasteelBarricade
   - type: FixedIdentity
-    name: cm-chatsan-replacement-barricades
+    name: cm-chatsan-replacement-plasteel-barricade
     whitelist:
       components:
       - Xeno
@@ -296,7 +296,7 @@
     graph: BarricadePlasteelDoorGraph
     node: nodeBarricadePlasteelDoor
   - type: FixedIdentity
-    name: cm-chatsan-replacement-folding-barricade
+    name: cm-chatsan-replacement-folding-plasteel-barricade
     whitelist:
       components:
       - Xeno

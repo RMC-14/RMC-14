@@ -93,6 +93,11 @@
       components:
       - Xeno
   - type: RMCMesonsNonviewable
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-comms
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCCommunicationsTower

@@ -132,6 +132,11 @@
     - RMCGrenadeM40
     - RMCGrenadeRiot
   - type: Ammo
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-smoke-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: Smoke
@@ -336,6 +341,11 @@
     - RMCGrenadeTraining
     - RMCGrenadeM40
   - type: Ammo
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-training-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent:
@@ -354,6 +364,11 @@
     spawn: RMCTileFireGreen
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-incendiary-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent:
@@ -377,6 +392,11 @@
     proto: RMCSmokePhosphorusWeak
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-wp-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCGrenadeWhitePhosphorus

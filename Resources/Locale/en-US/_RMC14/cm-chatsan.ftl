@@ -404,6 +404,11 @@ cm-chatsan-replacement-grenade = boomstick
 cm-chatsan-word-grenades = grenades
 cm-chatsan-replacement-grenades = boomsticks
 
+cm-chatsan-replacement-training-grenade = fake boomstick
+cm-chatsan-replacement-incendiary-grenade = fire boomstick
+cm-chatsan-replacement-smoke-grenade = smoke boomstick
+cm-chatsan-replacement-wp-grenade = fire smoke boomstick
+
 cm-chatsan-word-gl = gl
 cm-chatsan-replacement-gl = boomstick launcher
 
@@ -530,6 +535,11 @@ cm-chatsan-replacement-sentry = auto spitter
 cm-chatsan-word-sentries = sentries
 cm-chatsan-word-turrets = turrets
 cm-chatsan-replacement-sentries = auto spitters
+
+cm-chatsan-replacement-sniper-sentry = far auto spitter
+cm-chatsan-replacement-shotgun-sentry = scatter auto spitter
+cm-chatsan-replacement-fire-sentry = fire auto spitter
+cm-chatsan-replacement-tesla-sentry = zapping pillar
 
 cm-chatsan-word-squad = squad
 cm-chatsan-replacement-squad = caste
@@ -667,6 +677,9 @@ cm-chatsan-replacement-barricades = metal resin
 
 cm-chatsan-replacement-folding-barricade = metal resin door
 
+cm-chatsan-replacement-plasteel-barricade = hard metal resin
+cm-chatsan-replacement-folding-plasteel-barricade = hard metal resin door
+
 cm-chatsan-word-barbed = barbed
 cm-chatsan-replacement-barbed = spiked
 
@@ -763,6 +776,8 @@ cm-chatsan-replacement-generators = light cores
 
 cm-chatsan-word-gens = gens
 cm-chatsan-word-replacement-gens = light cores
+
+cm-chatsan-replacement-wall-apc = light box
 
 cm-chatsan-word-disk = disk
 cm-chatsan-word-disc = disc
