@@ -539,7 +539,7 @@ cm-chatsan-word-sentries = sentries
 cm-chatsan-word-turrets = turrets
 cm-chatsan-replacement-sentries = auto spitters
 
-cm-chatsan-replacement-sniper-sentry = far auto spitter
+cm-chatsan-replacement-sniper-sentry = long auto spitter
 cm-chatsan-replacement-shotgun-sentry = scatter auto spitter
 cm-chatsan-replacement-fire-sentry = fire auto spitter
 cm-chatsan-replacement-tesla-sentry = zapping pillar
