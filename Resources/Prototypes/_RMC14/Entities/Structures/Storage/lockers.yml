@@ -105,11 +105,11 @@
     access: [["RMCAccessWeYa"]]
 
 - type: entity
-  parent: RMCLockerSecureSafe
-  id: RMCFloorSafe
+  parent: CMLockerBase
+  id: RMCFloorSafeNormal
   name: floor safe
   description: A concealed floor safe for storing valuables and confidential material.
-  suffix: Intel
+  suffix: Normal
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/floor_safe.rsi
@@ -117,16 +117,22 @@
   - type: InteractionOutline
   - type: Physics
     canCollide: false
+  - type: EntityStorage
+    whitelist:
+      components:
+      - Item
+
+- type: entity
+  parent: RMCFloorSafeNormal
+  id: RMCFloorSafe
+  suffix: Intel
+  components:
   - type: Lock
   - type: IntelSafeCandidate
   - type: UserInterface
     interfaces:
       enum.DialogUiKey.Key:
         type: DialogBui
-  - type: EntityStorage
-    whitelist:
-      components:
-      - Item
 
 - type: entity
   parent: CMLockerBase
