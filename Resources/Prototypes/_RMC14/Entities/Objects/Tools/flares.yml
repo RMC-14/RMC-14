@@ -105,6 +105,11 @@
     proto: RMCFlareBullet
   - type: RMCAirProjectile
     prototype: RMCAirFlare
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-flare
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMFlare
@@ -199,6 +204,11 @@
     drawFov: false
   - type: DestroyedByExplosion
     isExplodable: true
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-cas-flare
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMFlare

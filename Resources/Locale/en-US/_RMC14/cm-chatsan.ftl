@@ -58,7 +58,7 @@ cm-chatsan-replacement-eorg-xeno = sister harm
 cm-chatsan-word-sniper = sniper
 cm-chatsan-replacement-sniper = long spitter
 
-cm-chatsan-replacement-xm43e1 = special wall-eating long spitter
+cm-chatsan-replacement-xm43e1 = special long spitter
 cm-chatsan-replacement-m96s = special long spitter
 
 cm-chatsan-word-flare = flare
@@ -66,6 +66,8 @@ cm-chatsan-replacement-flare = glow stick
 
 cm-chatsan-word-flares = flares
 cm-chatsan-replacement-flares = glow sticks
+
+cm-chatsan-replacement-flare-cas = green stick
 
 cm-chatsan-word-synth = synth
 cm-chatsan-replacement-synth = fake host
@@ -655,6 +657,8 @@ cm-chatsan-word-cade = cade
 cm-chatsan-word-barricades = barricades
 cm-chatsan-word-cades = cades
 cm-chatsan-replacement-barricades = metal resin
+
+cm-chatsan-replacement-folding-barricade = metal resin door
 
 cm-chatsan-word-barbed = barbed
 cm-chatsan-replacement-barbed = spiked

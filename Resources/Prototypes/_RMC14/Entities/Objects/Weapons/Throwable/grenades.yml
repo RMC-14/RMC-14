@@ -26,6 +26,11 @@
     thresholds: []
   - type: ChangeItemSizeOnTimerTrigger
   - type: CancelUseWithCloak
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-grenade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true
