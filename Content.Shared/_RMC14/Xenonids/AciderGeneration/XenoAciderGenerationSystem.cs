@@ -35,7 +35,7 @@ public sealed class XenoAciderGenerationSystem : EntitySystem
                 return;
 
             if (HasComp<VictimInfectedComponent>(hit))
-                return;
+                continue;
 
             startGenerating = true;
             break;
