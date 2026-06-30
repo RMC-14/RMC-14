@@ -52,6 +52,14 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCAutoBalanceMax =
         CVarDef.Create("rmc.auto_balance_max", 6.5f, CVar.SERVER | CVar.SERVERONLY);
 
+    /// <summary>
+    /// An automatically adjusted CVar that tracks the last adjustment to CMMarinesPerXeno. To make the autobalance
+    /// only adjust when there is a streak, CMMarinesPerXeno will only be adjusted if the desired adjustment matches
+    /// the previous adjustment. In other words, only adjust CMMarinesPerXeno if there is a win streak.
+    /// </summary>
+    public static readonly CVarDef<int> RMCAutoBalanceLastAdjustment =
+        CVarDef.Create("rmc.auto_balance_last_adjustment", 0, CVar.SERVER | CVar.SERVERONLY);
+
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
 

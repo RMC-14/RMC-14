@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared._RMC14.Armor.Ghillie;
@@ -278,8 +278,15 @@ public sealed partial class CMDistressSignalRuleSystem
                 _ => throw new ArgumentOutOfRangeException(),
             };
 
+            // Only make an adjustment if we are trying to make the SAME adjustment two rounds in a row.
+            if (adjust != _autoBalanceLastAdjustment)
+            {
+                _config.SetCVar(RMCCVars.RMCAutoBalanceLastAdjustment, adjust);
+                break;
+            }
+
             if (adjust == 0)
-                continue;
+                break;
 
             var value = _marinesPerXeno;
             value += adjust * _autoBalanceStep;

@@ -162,6 +162,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     private float _autoBalanceStep;
     private float _autoBalanceMax;
     private float _autoBalanceMin;
+    private int _autoBalanceLastAdjustment;
     private float _marinesPerSurvivor;
     private float _maximumSurvivors;
     private float _minimumSurvivors;
@@ -275,6 +276,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceLastAdjustment, v => _autoBalanceLastAdjustment = v, true);
         Subs.CVar(_config, RMCCVars.RMCMarinesPerSurvivor, v => _marinesPerSurvivor = v, true);
         Subs.CVar(_config, RMCCVars.RMCSurvivorsMaximum, v => _maximumSurvivors = v, true);
         Subs.CVar(_config, RMCCVars.RMCSurvivorsMinimum, v => _minimumSurvivors = v, true);
