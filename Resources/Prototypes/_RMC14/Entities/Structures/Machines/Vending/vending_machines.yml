@@ -126,6 +126,56 @@
 - type: vendingMachineInventory
   id: CMVendomat
 
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: VehicleHardpointVendor
+  name: vehicle hardpoint printer
+  description: A machine for printing vehicle hardpoints.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+    layers:
+    - state: "vehicle_gear_off"
+    - state: "vehicle_gear"
+      map: [ "rmc_flick_animation" ]
+      shader: unshaded
+    - state: vehicle_gear_panel
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.25,0.45"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: CMAutomatedVendor
+    sound:
+      path: /Audio/_RMC14/Machines/vending_drop.ogg
+      params:
+        maxDistance: 2
+        volume: -4
+    baseSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+      state: vehicle_gear
+    animationSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+      state: vehicle_gear_vend
+    sections: []
+  - type: VehicleHardpointVendor
+  - type: InteractionOutline
+  - type: RequireProjectileTarget
+
 
 # Coffee
 - type: entity
@@ -134,6 +184,7 @@
   name: Hot Drinks machine
   description: A vending machine which dispenses hot drinks.
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/coffee.rsi
   - type: VendingMachine
@@ -184,6 +235,7 @@
   name: Hot Foods Machine
   description: A vending machine full of ready to cook meals, mhmmmm taste the nutritional goodness!
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/snack.rsi
   - type: VendingMachine
@@ -236,6 +288,7 @@
   name: Bobda Softdrinks
   description: A softdrink vendor provided by Bobda Soda Company, Havana.
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/cola.rsi
   - type: VendingMachine
@@ -679,6 +732,7 @@
   name: Dinnerware
   description: A kitchen and restaurant equipment vendor.
   components:
+  - type: VehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/dinnerware.rsi
     snapCardinals: true
@@ -843,9 +897,9 @@
         amount: 24
       - id: FoodMeatSausage
         amount: 18
-      - id: DrinkMilkCarton
+      - id: RMCDrinkMilkCarton
         amount: 24
-      - id: DrinkSoyMilkCarton
+      - id: RMCDrinkSoyMilkCarton
         amount: 12
       - id: RMCCondimentEnzyme
         amount: 12

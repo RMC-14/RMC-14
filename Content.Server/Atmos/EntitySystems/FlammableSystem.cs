@@ -456,7 +456,8 @@ namespace Content.Server.Atmos.EntitySystems
             if (!Resolve(uid, ref flammable))
                 return;
 
-            if (!flammable.OnFire || !_actionBlockerSystem.CanInteract(uid, null) || flammable.Resisting)
+            // RMC14 use CanMove instead of CanInteract
+            if (!flammable.OnFire || flammable.Resisting || !_actionBlockerSystem.CanMove(uid))
                 return;
 
             flammable.Resisting = true;

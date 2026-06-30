@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi, SPP PMC spawn sound and ambient by github noctynral, recruit_spawn is a modification of marine_spawn by github Ian321, random_bombsupply by CatAndHats (github) based on Multitool icon taken from https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/obj/items/devices.dmi. UNMC spawn by RosySaturniidae (github). m63, m54 and m54cext by kleinerstation13 (Github)",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi, SPP PMC spawn sound and ambient by github noctynral, recruit_spawn is a modification of marine_spawn by github Ian321, random_bombsupply by CatAndHats (github) based on Multitool icon taken from https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/obj/items/devices.dmi. UNMC spawn by RosySaturniidae (github), vehicle_blocker by CatAndHats (github) based on invisible_wall, m63, m54 and m54cext by kleinerstation13 (Github)",
   "size": {
     "x": 32,
     "y": 32
@@ -574,6 +574,9 @@
     },
     {
       "name": "loot_m4spr_20"
+    },
+    {
+      "name": "vehicle_blocker"
     }
   ]
 }

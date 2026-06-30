@@ -1,0 +1,222 @@
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: VehicleSupplyConsole
+  name: vehicle supply console
+  description: A console for ordering vehicles and their hardpoints.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/asrs_console.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: off
+    - map: ["computerLayerScreen"]
+      state: on
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.35,0.25,0.35"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ActivatableUI
+    key: enum.VehicleSupplyUIKey.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "RMCAccessVehicleCrew" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.VehicleSupplyUIKey.Key:
+        type: VehicleSupplyBui
+  - type: VehicleSupplyConsole
+    vehicles:
+    - name: humvee
+      vehicle: VehicleHumvee
+      unlock: VehicleHumvee
+      hardpoints:
+      - VehicleHumveeTurret
+      - VehicleHumveeCannon
+      - VehicleHumveeLauncher
+      - VehicleHumveeSnowplow
+      - VehicleHumveeOverlight
+      - VehicleHumveeHatch
+      - VehicleHumveeWheel
+    - name: humvee (medical)
+      vehicle: VehicleHumveeMedical
+      unlock: VehicleHumveeMedical
+      hardpoints:
+      - VehicleHumveeSnowplow
+      - VehicleHumveeOverlight
+      - VehicleHumveeHatch
+      - VehicleHumveeWheel
+    - name: humvee (transport)
+      vehicle: VehicleHumveeTransport
+      unlock: VehicleHumveeTransport
+      hardpoints:
+      - VehicleHumveeSnowplow
+      - VehicleHumveeOverlight
+      - VehicleHumveeHatch
+      - VehicleHumveeWheel
+    - name: apc
+      vehicle: VehicleAPC
+      unlock: VehicleAPC
+      hardpoints:
+      - RMCAPCDualCannon
+      - RMCAPCFrontCannon
+      - RMCAPCCommsRelay
+      - RMCAPCFlareLauncher
+      - RMCAPCFreightStorage
+      - RMCAPCWheel
+    - name: apc (medical)
+      vehicle: VehicleAPCMed
+      unlock: VehicleAPCMed
+      hardpoints:
+      - RMCAPCDualCannon
+      - RMCAPCFrontCannon
+      - RMCAPCCommsRelay
+      - RMCAPCFlareLauncher
+      - RMCAPCFreightStorage
+      - RMCAPCWheel
+    - name: apc (command)
+      vehicle: VehicleAPCCommand
+      unlock: VehicleAPCCommand
+      hardpoints:
+      - RMCAPCDualCannon
+      - RMCAPCFrontCannon
+      - RMCAPCCommsRelay
+      - RMCAPCFlareLauncher
+      - RMCAPCFreightStorage
+      - RMCAPCWheel
+    - name: tank
+      vehicle: VehicleTank
+      unlock: VehicleTank
+      hardpoints:
+      - VehicleTankArmorBallistic
+      - VehicleTankArmorConcussive
+      - VehicleTankArmorCaustic
+      - VehicleTankArmorPaladin
+      - VehicleTankSnowplow
+      - VehicleTankLTAAAPMinigun
+      # - VehicleTankLTBCannon parity :c
+      - VehicleTankAceAutocannon
+      - VehicleTankDragonFlamer
+      - VehicleTankFlamer
+      - VehicleTankGrenadeLauncher
+      - VehicleTankRERE700
+      - VehicleTankWarningArray
+      - VehicleTankOverdriveEnhancer
+      - VehicleTankRocketLauncher
+      # - VehicleTankTowLauncher
+      - VehicleTankFlareModule
+      - VehicleTankArtilleryModule
+      - VehicleTankReinforcedTreads
+      - VehicleTankTreads
+      hardpointCategories:
+      - key: tank-primary
+        label: Primary
+        sortOrder: 0
+        hardpointTypes:
+        - HardpointTypeCannon
+      - key: tank-secondary
+        label: Secondary
+        sortOrder: 1
+        hardpointTypes:
+        - HardpointTypeLauncher
+      - key: tank-armor
+        label: Armor
+        sortOrder: 2
+        hardpointTypes:
+        - HardpointTypeArmor
+      - key: tank-support
+        label: Support
+        sortOrder: 3
+        hardpointTypes:
+        - HardpointTypeSupport
+      - key: tank-treads
+        label: Treads
+        sortOrder: 4
+        hardpointTypes:
+        - HardpointTypeWheel
+      - key: tank-general
+        label: General
+        sortOrder: 5
+        hardpointItems:
+        - VehicleTankSnowplow
+    - name: humvee (arc)
+      vehicle: VehicleHumveeARC
+      unlock: VehicleHumveeARC
+      hardpoints:
+      - VehicleHumveeTurret
+      - VehicleHumveeARCCannon
+      - VehicleHumveeLauncher
+      - VehicleHumveeSnowplow
+      - VehicleHumveeOverlight
+      - VehicleHumveeHatch
+      - VehicleHumveeWheel
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Appearance
+  - type: LitOnPowered
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: RMCKeyboardTyping
+      params:
+        volume: -1
+  - type: InteractionOutline
+  - type: RequireProjectileTarget
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  id: VehicleLift
+  name: vehicle lift
+  suffix: Lowered, Vehicle Supply
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/elevator.rsi
+    drawdepth: LowFloors
+    layers:
+    - state: supply_elevator_lowered
+      map: [ "rmc-vehicle-supply-lift-base" ]
+  - type: Physics
+    bodyType: static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-2.3,-2.3,2.3,2.3"
+        layer:
+        - MidImpassable
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 1
+    blacklist:
+      tags:
+      - Catwalk
+  - type: VehicleSupplyLift
