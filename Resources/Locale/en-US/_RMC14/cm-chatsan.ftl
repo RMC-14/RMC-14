@@ -58,7 +58,7 @@ cm-chatsan-replacement-eorg-xeno = sister harm
 cm-chatsan-word-sniper = sniper
 cm-chatsan-replacement-sniper = long spitter
 
-cm-chatsan-replacement-xm43e1 = special long spitter
+cm-chatsan-replacement-xm43e1 = special heavy long spitter
 cm-chatsan-replacement-m96s = special long spitter
 
 cm-chatsan-word-flare = flare
