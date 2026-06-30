@@ -53,6 +53,8 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
     private const float PipeExplosionMax = 20f;
     private const int PipeFireRange = 2;
 
+    private const int MaxPipeBurstsPerTick = 1;
+
     private TimeSpan _hijackCrashStunTime;
 
     private readonly List<(EntityUid Uid, RMCHijackRandomDamageTargetComponent Comp)> _wallTargets = new();
@@ -137,7 +139,10 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
             return;
 
         if (TryComp(ent.Comp.Map, out RMCHijackActiveMapComponent? map))
+        {
             map.Pipes.Remove(ent);
+            map.Explode.Remove(ent);
+        }
     }
 
     private void OnPipeAnchorChanged(Entity<RMCHijackActivePipeComponent> ent, ref AnchorStateChangedEvent args)
@@ -225,7 +230,9 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         var count = GetRandomCount(map.Comp.Pipes.Count, minPercent, maxPercent);
         if (count == 0)
         {
-            RemCompDeferred<RMCHijackActiveMapComponent>(map);
+            if (map.Comp.Explode.Count == 0 && map.Comp.ExplodeAt == null)
+                RemCompDeferred<RMCHijackActiveMapComponent>(map);
+
             return;
         }
 
@@ -312,19 +319,18 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         {
             if (active.ExplodeAt != null && time >= active.ExplodeAt.Value)
             {
-                active.ExplodeAt = null;
+                var burst = 0;
+                while (active.Explode.Count > 0 && burst < MaxPipeBurstsPerTick)
+                {
+                    var index = active.Explode.Count - 1;
+                    var pipe = active.Explode[index];
+                    active.Explode.RemoveAt(index);
+                    BurstPipe(pipe);
+                    burst++;
+                }
 
-                try
-                {
-                    foreach (var explode in active.Explode)
-                    {
-                        BurstPipe(explode);
-                    }
-                }
-                finally
-                {
-                    active.Explode.Clear();
-                }
+                if (active.Explode.Count == 0)
+                    active.ExplodeAt = null;
             }
 
             if (time < active.Next)
