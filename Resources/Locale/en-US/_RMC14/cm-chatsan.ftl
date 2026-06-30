@@ -415,6 +415,9 @@ cm-chatsan-replacement-ammo = spits
 cm-chatsan-word-tank = tank
 cm-chatsan-replacement-tank = turtle
 
+cm-chatsan-word-arc = arc
+cm-chatsan-replacement-arc = beetle
+
 cm-chatsan-word-laser = laser
 cm-chatsan-replacement-laser = dot
 
