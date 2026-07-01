@@ -36,6 +36,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DragDrop;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Lathe;
@@ -44,6 +45,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
@@ -87,6 +89,7 @@ public sealed partial class XenoSystem : EntitySystem
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
 
@@ -143,6 +146,7 @@ public sealed partial class XenoSystem : EntitySystem
             after: [typeof(TackleSystem)]);
         SubscribeLocalEvent<XenoComponent, DisarmedEvent>(OnDisarmed, before: new[] { typeof(SharedHandsSystem) });
         SubscribeLocalEvent<XenoComponent, BeingGibbedEvent>(OnBeingGibbed);
+        SubscribeLocalEvent<XenoComponent, DropAttemptEvent>(OnXenoDropAttempt);
 
         SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoRegenComponent, DamageStateCritBeforeDamageEvent>(OnXenoRegenBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
@@ -433,6 +437,20 @@ public sealed partial class XenoSystem : EntitySystem
         };
 
         _hive.RecordGib(hive.Value, gibbed);
+    }
+
+    private void OnXenoDropAttempt(Entity<XenoComponent> xeno, ref DropAttemptEvent args)
+    {
+        if (!_hands.TryGetActiveItem(xeno.Owner, out var held))
+            return;
+
+        if (!HasComp<XenoParasiteComponent>(held) ||
+            !TryComp<ParasiteDropCooldownComponent>(xeno, out var cooldown) ||
+            cooldown.NextDropTime < _timing.CurTime)
+            return;
+
+        _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-drop-cooldown"), xeno, PopupType.SmallCaution);
+        args.Cancel();
     }
 
     private FixedPoint2 GetWeedsHealAmount(Entity<XenoRegenComponent> xeno)

@@ -24,10 +24,12 @@ using Content.Shared.Doors.Components;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared.Hands;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Jittering;
@@ -113,6 +115,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteComponent, XenoLeapStoppedEvent>(OnParasiteLeapStopped);
         SubscribeLocalEvent<XenoParasiteComponent, ThrownEvent>(OnParasiteThrown);
         SubscribeLocalEvent<XenoParasiteComponent, LandEvent>(OnParasiteLand);
+        SubscribeLocalEvent<XenoParasiteComponent, DroppedEvent>(OnParasiteDrop);
 
         SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnParasiteSpentMapInit);
         SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnParasiteSpentUpdateMobState,
@@ -1078,6 +1081,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         EnsureComp<BursterComponent>(spawned, out var burster);
         burster.BurstFrom = victim.Owner;
         Dirty(spawned, burster);
+    }
+
+    private void OnParasiteDrop(Entity<XenoParasiteComponent> ent, ref DroppedEvent args)
+    {
+        var cooldown = EnsureComp<ParasiteDropCooldownComponent>(args.User);
+        cooldown.NextDropTime = _timing.CurTime + ent.Comp.DropCooldown;
+        Dirty(args.User, cooldown);
     }
 }
 
