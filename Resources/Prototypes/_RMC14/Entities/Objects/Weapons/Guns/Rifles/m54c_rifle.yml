@@ -575,7 +575,7 @@
   parent: CMCartridgeRifle10x24mm
   id: RMCCartridgeRifle10x24mmIncendiary
   name: Incendiary cartridge (10x24mm)
-  description: An armor piercing 10x24mm cartridge. Fits in 10x24mm Incendiary magazines.
+  description: An incendiary 10x24mm cartridge. Fits in 10x24mm Incendiary magazines.
   components:
   - type: Tag
     tags:
