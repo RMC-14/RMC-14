@@ -145,7 +145,7 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentExtinguisher
+          - RMCAttachmentUnderbarrelExtinguisher
 
 - type: entity
   parent: WeaponRifleM4SPR

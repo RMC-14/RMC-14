@@ -293,7 +293,7 @@
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentVerticalGrip
           - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentMiniFlamethrower
 
 - type: entity
   parent: RMCWeaponRifleM54CSemiStripped
