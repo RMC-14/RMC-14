@@ -20,6 +20,7 @@ public sealed class HardpointSlotSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
@@ -379,7 +380,8 @@ public sealed class HardpointSlotSystem : EntitySystem
         }
         else
         {
-            _hands.PickupOrDrop(args.User, ejectedItem.Value, dropNear: true);
+            if (!_hands.TryPickupAnyHand(args.User, ejectedItem.Value))
+                _transform.SetCoordinates(ejectedItem.Value, Transform(args.User).Coordinates);
         }
 
         SetErrorAndRefresh(null);

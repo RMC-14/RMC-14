@@ -166,7 +166,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 continue;
             }
 
-            if (applyEffects && candidate.Door is { } door && !_net.IsClient)
+            if (applyEffects && candidate.Door is { } door && !_net.IsClient && candidate.CollisionClass == VehicleCollisionClass.Breakable)
             {
                 if (!candidate.IsUnpoweredDoor)
                 {
