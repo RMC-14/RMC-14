@@ -1085,6 +1085,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnParasiteDrop(Entity<XenoParasiteComponent> ent, ref DroppedEvent args)
     {
+        if (!HasComp<XenoComponent>(args.User))
+            return;
+
         var cooldown = EnsureComp<ParasiteDropCooldownComponent>(args.User);
         cooldown.NextDropTime = _timing.CurTime + ent.Comp.DropCooldown;
         Dirty(args.User, cooldown);
