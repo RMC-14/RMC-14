@@ -23,8 +23,7 @@
       - Donut
       - RMCGrenadeFlashBang
       - Radio
-      - UniversalRecorder
-      - UniversalRecorderTape
+      - Recorder
       components:
       - Handcuff
       - Flash
