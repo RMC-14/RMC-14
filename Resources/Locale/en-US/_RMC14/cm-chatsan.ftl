@@ -186,7 +186,7 @@ cm-chatsan-replacement-orbital-bomb = skyfire
 cm-chatsan-word-orbital-bombardment = orbital bombardment
 cm-chatsan-replacement-orbital-bombardment = skyfire
 
-cm-chatsan-replacement-orbital-cannon = skyfirer
+cm-chatsan-replacement-orbital-cannon = skyfire spitter
 cm-chatsan-replacement-orbital-cannon-shell = skyfire stick
 cm-chatsan-replacement-orbital-cannon-fuel = skyfire plasma
 
@@ -477,7 +477,7 @@ cm-chatsan-replacement-scout-m4spr = special spitter
 cm-chatsan-word-mortar = mortar
 cm-chatsan-replacement-mortar = skyboom
 
-cm-chatsan-replacement-mortar-kit = skyboomer
+cm-chatsan-replacement-mortar-kit = skyboom spitter
 cm-chatsan-replacement-mortar-shell = skyboom stick
 
 cm-chatsan-word-demo = demo
@@ -905,7 +905,7 @@ cm-chatsan-word-replacement-m54c = spitter
 cm-chatsan-word-m42a2 = m42a2
 cm-chatsan-word-replacement-m42a2 = scatter spitter
 
-cm-chatsan-word-replacement-xm51 = wall-eating spitter
+cm-chatsan-word-replacement-xm51 = wall-melting spitter
 
 cm-chatsan-word-replacement-xm88 = clicking spitter
 
