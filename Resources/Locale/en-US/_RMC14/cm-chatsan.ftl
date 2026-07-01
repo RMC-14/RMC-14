@@ -429,6 +429,8 @@ cm-chatsan-replacement-ammo = spits
 # cm-chatsan-word-#tank = #tank
 cm-chatsan-replacement-tank = metal beast
 
+cm-chatsan-replacement-arc = metal beetle
+
 cm-chatsan-word-laser = laser
 cm-chatsan-replacement-laser = dot
 
