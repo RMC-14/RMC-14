@@ -33,7 +33,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno strains" Text="Variations of a xeno caste with different stats and abilities" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Close air support" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Smart Gun Operator" Text="Stay behind marines and fire past friendlies and into the enemy!" />
-                    <controls:RoadmapItem ItemState="Complete" HeaderText="Trijent Dam" Text="Planet map" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Trijent Dam" Text="Planet map" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Shivas Snowball" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Almayer" Text="Ship map for the marines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Requisitions" Text="Department that buys supplies for the rest of the marines" />
