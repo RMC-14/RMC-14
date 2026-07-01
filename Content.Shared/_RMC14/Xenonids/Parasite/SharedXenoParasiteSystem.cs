@@ -119,6 +119,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<ParasiteSpentComponent, ExaminedEvent>(OnExamined);
 
+        SubscribeLocalEvent<ParasiteResistanceComponent, ExaminedEvent>(OnParasiteResistanceExamined);
+
         SubscribeLocalEvent<VictimInfectedComponent, MapInitEvent>(OnVictimInfectedMapInit);
         SubscribeLocalEvent<VictimInfectedComponent, ComponentRemove>(OnVictimInfectedRemoved);
         SubscribeLocalEvent<VictimInfectedComponent, ExaminedEvent>(OnVictimInfectedExamined);
@@ -414,6 +416,16 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     private void OnExamined(Entity<ParasiteSpentComponent> spent, ref ExaminedEvent args)
     {
         args.PushMarkup($"[italic]{Loc.GetString("rmc-xeno-parasite-dead", ("parasite", spent))}[/italic]");
+    }
+
+    private void OnParasiteResistanceExamined(Entity<ParasiteResistanceComponent> ent, ref ExaminedEvent args)
+    {
+        if (ent.Comp.MaxCount <= 0)
+            return;
+
+        var remaining = (int)(ent.Comp.MaxCount - ent.Comp.Count);
+        var color = remaining > 0 ? "green" : "red";
+        args.PushMarkup($"It can take [color={color}]{remaining}[/color] more hit{(remaining == 1 ? "" : "s")}.");
     }
 
     private void OnVictimInfectedMapInit(Entity<VictimInfectedComponent> victim, ref MapInitEvent args)
