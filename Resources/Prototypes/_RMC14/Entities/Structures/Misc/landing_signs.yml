@@ -178,7 +178,7 @@
 - type: entity
   parent: RMCBaseLandingSign
   id: RMCTyrargoSign2
-  name: Tyrargo Rift - UNMC Airbase Anderson Landing Zone Two sign"
+  name: Tyrargo Rift - UNMC Airbase Anderson Landing Zone Two sign
   description: A large sign that designates this area as being a UNMC airbase.
   components:
   - type: Sprite
