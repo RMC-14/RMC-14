@@ -1,7 +1,7 @@
 using System.Numerics;
 using Content.Client._RMC14.Announce.Styling;
+using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Announce;
-using Content.Shared._RMC14.Announce.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -24,6 +24,7 @@ public sealed partial class AnnouncementWidget : UIWidget
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IResourceCache _resCache = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
     public event Action<NetEntity?>? OnAnnouncementFinished;
 
@@ -31,7 +32,7 @@ public sealed partial class AnnouncementWidget : UIWidget
     public bool PreviewMode { get; set; }
     public Vector2? ForcedScreenSize { get; set; }
 
-    private RichTextLabel[] _richTextLabels = Array.Empty<RichTextLabel>();
+    private Control[] _richTextLabels = Array.Empty<Control>();
     private Control? _spriteContainer;
     private readonly List<Control> _textContainers = new();
     private readonly TextLayoutBuilder _textLayoutBuilder;
@@ -71,12 +72,7 @@ public sealed partial class AnnouncementWidget : UIWidget
             StartTime = _timing.CurTime,
             State = AnnouncementState.Animating,
             CleanText = PreprocessText(announcement.Text),
-            SlideStartPosition = GetSlideStartPosition(resolvedStyle),
-            ZoomCurrentScale = resolvedStyle.AnimationConfig.Animation is ZoomAnimationConfig zoomConfig
-                ? zoomConfig.StartScale
-                : 1.0f,
-            FadeAlpha = 1.0f,
-            PulseAlpha = 1.0f
+            FadeAlpha = 1.0f
         };
 
         SetupUI();
@@ -121,12 +117,13 @@ public sealed partial class AnnouncementWidget : UIWidget
 
     private void CleanupCurrentAnnouncement()
     {
+        Visible = false;
         _playback.Clear();
         _animationContext = null;
         ActiveAnnouncement = null;
         RemoveAllChildren();
         _textContainers.Clear();
-        _richTextLabels = Array.Empty<RichTextLabel>();
+        _richTextLabels = Array.Empty<Control>();
         _spriteContainer = null;
         Modulate = Color.White;
         _hasTitle = false;

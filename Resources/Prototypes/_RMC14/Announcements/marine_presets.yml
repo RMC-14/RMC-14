@@ -59,7 +59,7 @@
           titleUnderline: true
           titleUnderlineThickness: 2
         scaling:
-          responsiveScaleFactor: 1.15
+          responsiveScaleFactor: 2
     default:
       style:
         animation:
@@ -204,7 +204,7 @@
   name: "Marine Overwatch"
   description: "Overwatch squad announcements"
   target: Marines
-  defaultPreference: Simplified
+  defaultPreference: Default
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   priority: 8
@@ -214,54 +214,6 @@
   - "overwatch"
   - "marine_overwatch"
   presentations:
-    stylized:
-      style:
-        animation:
-          animation: !type:TypewriterAnimationConfig
-            printSpeed: 0.025
-          holdDuration: 10
-          flickerChance: 0
-          enableCRT: true
-        layout:
-          position: TopLeft
-          speakerNamePosition: Below
-          spritePosition: Left
-          spriteSpacing: 0
-          spriteDisplayMode: TopHalf
-          uIScale: 3
-          titlePosition: Above
-        background:
-          showBackground: false
-          backgroundAlpha: 0.7
-          backgroundColor: "#0a1a2d"
-        text:
-          primaryColor: "#a8d6ff"
-          font: "Cozette"
-          fontSize: 20
-          lineHeight: 48
-          showSpeakerName: true
-          speakerNameColor: "#ffffff"
-          speakerNameFontSize: 14
-        sprite:
-          showSpriteBox: true
-          spriteBoxColor: "#0a1a2d"
-          spriteBoxBorderColor: "#4a9eff"
-          spriteBoxBorderThickness: 2
-          spriteBoxPadding: 18
-          spriteGlow: true
-          spriteGlowColor: "#4a9eff"
-          spriteGlowIntensity: 0.6
-          spriteScale: 1
-        title:
-          showTitle: true
-          title: ">> OVERWATCH <<"
-          titleColor: "#4a9eff"
-          titleFontSize: 20
-          titleFont: "CozetteBold"
-          titleUnderline: true
-          titleUnderlineThickness: 2
-        scaling:
-          responsiveScaleFactor: 1.15
     default:
       style:
         animation:
@@ -310,42 +262,6 @@
           titleUnderlineThickness: 2
         scaling:
           responsiveScaleFactor: 1.15
-    simplified:
-      showSprite: false
-      style:
-        animation:
-          animation: !type:NoneAnimationConfig
-          holdDuration: 8
-          flickerChance: 0
-        layout:
-          position: TopLeft
-          spritePosition: Left
-          spriteDisplayMode: FullSprite
-          uIScale: 2
-          titlePosition: Above
-        background:
-          showBackground: false
-          backgroundAlpha: 0.35
-          backgroundColor: "#0d1320"
-        text:
-          primaryColor: "#a8d6ff"
-          font: "Cozette"
-          fontSize: 20
-          lineHeight: 48
-          showSpeakerName: false
-        sprite:
-          showSpriteBox: false
-          spriteScale: 0.85
-        title:
-          showTitle: true
-          title: ">> OVERWATCH <<"
-          titleColor: "#4a9eff"
-          titleFontSize: 20
-          titleFont: "CozetteBold"
-          titleUnderline: true
-          titleUnderlineThickness: 2
-        scaling:
-          responsiveScaleFactor: 1.15
 
 - type: announcementPreset
   id: MarineOverwatchAlpha
@@ -360,7 +276,7 @@
   canInterrupt: true
   canBeInterrupted: false
   presentations:
-    stylized:
+    default:
       showSprite: false
       style:
         animation:
@@ -414,7 +330,7 @@
   canInterrupt: true
   canBeInterrupted: false
   presentations:
-    stylized:
+    default:
       showSprite: false
       style:
         animation:
@@ -468,7 +384,7 @@
   canInterrupt: true
   canBeInterrupted: false
   presentations:
-    stylized:
+    default:
       showSprite: false
       style:
         animation:
@@ -522,7 +438,7 @@
   canInterrupt: true
   canBeInterrupted: false
   presentations:
-    stylized:
+    default:
       showSprite: false
       style:
         animation:
@@ -576,7 +492,7 @@
   canInterrupt: true
   canBeInterrupted: false
   presentations:
-    stylized:
+    default:
       showSprite: false
       style:
         animation:
@@ -630,7 +546,7 @@
   canInterrupt: true
   canBeInterrupted: false
   presentations:
-    stylized:
+    default:
       showSprite: false
       style:
         animation:
@@ -684,7 +600,7 @@
   canInterrupt: true
   canBeInterrupted: false
   presentations:
-    stylized:
+    default:
       showSprite: false
       style:
         animation:

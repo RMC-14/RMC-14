@@ -2,7 +2,7 @@ using System.Numerics;
 using Content.Client._RMC14.Announce.Animations;
 using Content.Client._RMC14.Announce.Effects;
 using Content.Shared._RMC14.Announce;
-using Content.Shared._RMC14.Announce.Animations;
+using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -58,23 +58,6 @@ public sealed partial class AnnouncementWidget
             _random);
     }
 
-    private Vector2 GetSlideStartPosition(AnnouncementStyle style)
-    {
-        if (style.AnimationConfig.Animation is not SlideAnimationConfig slideConfig)
-            return Vector2.Zero;
-
-        var screenSize = ResolveScreenSize();
-
-        return slideConfig.From switch
-        {
-            SlideDirection.Left => new Vector2(-screenSize.X, 0),
-            SlideDirection.Right => new Vector2(screenSize.X, 0),
-            SlideDirection.Top => new Vector2(0, -screenSize.Y),
-            SlideDirection.Bottom => new Vector2(0, screenSize.Y),
-            _ => Vector2.Zero
-        };
-    }
-
     private void SetAllLabelsText()
     {
         if (ActiveAnnouncement == null)
@@ -89,7 +72,7 @@ public sealed partial class AnnouncementWidget
             if (textIndex < originalText.Length)
             {
                 var message = CreateFormattedMessage(originalText[textIndex], style);
-                _richTextLabels[i].SetMessage(message);
+                (_richTextLabels[i] as RichTextLabel)?.SetMessage(message);
             }
         }
     }

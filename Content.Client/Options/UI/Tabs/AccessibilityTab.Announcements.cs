@@ -63,10 +63,10 @@ public sealed partial class AccessibilityTab
 
     private List<AnnouncementDisplayPreference> GetAvailablePreferences(AnnouncementPresetPrototype preset)
     {
-        var list = new List<AnnouncementDisplayPreference>
-        {
-            AnnouncementDisplayPreference.Stylized
-        };
+        var list = new List<AnnouncementDisplayPreference>();
+
+        if (preset.Presentations.Stylized != null)
+            list.Add(AnnouncementDisplayPreference.Stylized);
 
         if (preset.Presentations.Default != null)
             list.Add(AnnouncementDisplayPreference.Default);

@@ -41,8 +41,8 @@ public sealed partial class AnnouncementPresentation
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class AnnouncementPresentationSet
 {
-    [DataField(required: true)]
-    public AnnouncementPresentation Stylized { get; set; } = new();
+    [DataField]
+    public AnnouncementPresentation? Stylized { get; set; }
 
     [DataField]
     public AnnouncementPresentation? Default { get; set; }
@@ -54,15 +54,17 @@ public sealed partial class AnnouncementPresentationSet
     {
         return preference switch
         {
-            AnnouncementDisplayPreference.Default => Default ?? Stylized,
-            AnnouncementDisplayPreference.Simplified => Simplified ?? Default ?? Stylized,
-            _ => Stylized
+            AnnouncementDisplayPreference.Stylized => Stylized ?? Default ?? new(),
+            AnnouncementDisplayPreference.Default => Default ?? Stylized ?? new(),
+            AnnouncementDisplayPreference.Simplified => Simplified ?? Default ?? Stylized ?? new(),
+            _ => Stylized ?? Default ?? new()
         };
     }
 
     public IEnumerable<AnnouncementPresentation> EnumerateAvailable()
     {
-        yield return Stylized;
+        if (Stylized != null)
+            yield return Stylized;
 
         if (Default != null)
             yield return Default;

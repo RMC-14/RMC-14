@@ -31,7 +31,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
 
         for (var i = context.TitleOffset; i < context.Labels.Length; i++)
         {
-            context.Labels[i].SetMessage(FormattedMessage.FromMarkupPermissive(string.Empty));
+            (context.Labels[i] as RichTextLabel)?.SetMessage(FormattedMessage.FromMarkupPermissive(string.Empty));
         }
     }
 
@@ -129,7 +129,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
                 }
 
                 var message = context.FormatMessage(visible, style);
-                context.Labels[i].SetMessage(message);
+                (context.Labels[i] as RichTextLabel)?.SetMessage(message);
             }
             else if (textIndex == _currentLine)
             {
@@ -140,11 +140,11 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
                     partialText = CreateGlitchedText(partialText, context.Random, charGlitchChance);
 
                 var message = context.FormatMessage(partialText, style);
-                context.Labels[i].SetMessage(message);
+                (context.Labels[i] as RichTextLabel)?.SetMessage(message);
             }
             else
             {
-                context.Labels[i].SetMessage(FormattedMessage.FromMarkupPermissive(string.Empty));
+                (context.Labels[i] as RichTextLabel)?.SetMessage(FormattedMessage.FromMarkupPermissive(string.Empty));
             }
         }
     }

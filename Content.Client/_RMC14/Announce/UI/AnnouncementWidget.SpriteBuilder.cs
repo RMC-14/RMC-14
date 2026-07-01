@@ -143,11 +143,8 @@ public sealed partial class AnnouncementWidget
                     VerticalAlignment = VAlignment.Center,
                     Align = Label.AlignMode.Center,
                     VAlign = Label.VAlignMode.Center,
-                    ClipText = true,
                     Text = announcement.SpeakerName,
                     MinWidth = speakerWidth,
-                    SetWidth = speakerWidth,
-                    MaxWidth = speakerWidth,
                     FontColorOverride = style.TextConfig.SpeakerNameColor
                 };
 

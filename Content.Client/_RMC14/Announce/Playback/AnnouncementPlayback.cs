@@ -1,6 +1,7 @@
 using Content.Client._RMC14.Announce.Animations;
 using Content.Client._RMC14.Announce.Effects;
 using Content.Shared._RMC14.Announce;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.Announce;
@@ -39,7 +40,7 @@ public sealed class AnnouncementPlayback
         AnnouncementAnimationContext animationContext,
         AnnouncementStyle style,
         ActiveAnnouncement state,
-        IReadOnlyList<RichTextLabel> labels,
+        IReadOnlyList<Control> labels,
         TimeSpan currentTime,
         float deltaTime)
     {
@@ -84,28 +85,29 @@ public sealed class AnnouncementPlayback
         context.SetAllLabels();
     }
 
-    private static void ResetBaseLabelColor(AnnouncementStyle style, ActiveAnnouncement state, IReadOnlyList<RichTextLabel> labels, bool hasTitle)
+    private static void ResetBaseLabelColor(AnnouncementStyle style, ActiveAnnouncement state, IReadOnlyList<Control> labels, bool hasTitle)
     {
-        var alpha = state.FadeAlpha * state.PulseAlpha;
+        var alpha = state.FadeAlpha;
         for (var i = 0; i < labels.Count; i++)
         {
             var baseColor = hasTitle && i == 0
                 ? style.TitleConfig.TitleColor
                 : style.TextConfig.PrimaryColor;
-            labels[i].Modulate = new Color(baseColor.R, baseColor.G, baseColor.B, baseColor.A * alpha);
+            // Color is already embedded in the markup or FontColorOverride; Modulate carries only alpha for fades.
+            labels[i].Modulate = new Color(1f, 1f, 1f, baseColor.A * alpha);
         }
 
         foreach (var titleLabel in state.TitleLabels)
         {
             var baseColor = style.TitleConfig.TitleColor;
-            titleLabel.Modulate = new Color(baseColor.R, baseColor.G, baseColor.B, baseColor.A * alpha);
+            titleLabel.Modulate = new Color(1f, 1f, 1f, baseColor.A * alpha);
         }
     }
 
     private void ApplyVisualEffects(
         AnnouncementStyle style,
         ActiveAnnouncement state,
-        IReadOnlyList<RichTextLabel> labels,
+        IReadOnlyList<Control> labels,
         TimeSpan currentTime,
         bool hasTitle)
     {

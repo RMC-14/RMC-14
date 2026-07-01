@@ -262,7 +262,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
         _announcementRouter.Announce(new AnnouncementRequest
         {
-            Message = $"Overwatch transmits: {message}",
+            Message = message,
             Preset = preset,
             Route = new AnnouncementRoute
             {

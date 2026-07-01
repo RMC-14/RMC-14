@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Announce;
-using Content.Shared._RMC14.Announce.Animations;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -35,9 +34,6 @@ public static class AnnouncementStyling
 
         style.TitleConfig.TitleFontSize *= scale;
         style.TitleConfig.TitleUnderlineThickness *= scale;
-
-        if (style.AnimationConfig.Animation is BounceAnimationConfig bounce)
-            bounce.BounceHeight *= scale;
 
         return style;
     }

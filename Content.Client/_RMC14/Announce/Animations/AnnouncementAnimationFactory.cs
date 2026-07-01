@@ -11,13 +11,7 @@ public static class AnnouncementAnimationFactory
         {
             TypewriterAnimationConfig c => new TypewriterAnimation(c),
             GlitchAnimationConfig c => new GlitchAnimation(c),
-            SlideAnimationConfig c => new SlideAnimation(c),
-            ZoomAnimationConfig c => new ZoomAnimation(c),
-            BounceAnimationConfig c => new BounceAnimation(c),
             FadeAnimationConfig c => new FadeAnimation(c),
-            PulseAnimationConfig => new PulseAnimation(),
-            HeartbeatAnimationConfig => new HeartbeatAnimation(),
-            WarpAnimationConfig => new WarpAnimation(),
             _ => new NoneAnimation()
         };
     }

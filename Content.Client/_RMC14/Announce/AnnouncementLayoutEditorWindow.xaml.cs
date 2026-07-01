@@ -210,16 +210,19 @@ public sealed partial class AnnouncementLayoutEditorWindow : DefaultWindow
 
     private static List<AnnouncementDisplayPreference> GetAvailablePreviewPreferences(AnnouncementPresetPrototype preset)
     {
-        var preferences = new List<AnnouncementDisplayPreference>
-        {
-            AnnouncementDisplayPreference.Stylized
-        };
+        var preferences = new List<AnnouncementDisplayPreference>();
+
+        if (preset.Presentations.Stylized != null)
+            preferences.Add(AnnouncementDisplayPreference.Stylized);
 
         if (preset.Presentations.Default != null)
             preferences.Add(AnnouncementDisplayPreference.Default);
 
         if (preset.Presentations.Simplified != null)
             preferences.Add(AnnouncementDisplayPreference.Simplified);
+
+        if (preferences.Count == 0)
+            preferences.Add(AnnouncementDisplayPreference.Stylized);
 
         return preferences;
     }

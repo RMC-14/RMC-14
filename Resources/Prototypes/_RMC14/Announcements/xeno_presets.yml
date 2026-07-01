@@ -3,11 +3,12 @@
   name: "Xeno Queen"
   description: "Queen psychic directive announcements"
   target: Xenos
+  defaultPreference: Default
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
   presentations:
-    stylized:
+    default:
       showSprite: false
       style:
         animation:

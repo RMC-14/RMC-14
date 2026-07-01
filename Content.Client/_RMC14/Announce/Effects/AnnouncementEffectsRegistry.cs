@@ -13,9 +13,6 @@ public static class AnnouncementEffectsRegistry
         if (style.AnimationConfig.FlickerChance > 0)
             yield return new FlickerEffect();
 
-        if (style.TitleConfig.Effect.Type == AnnouncementTitleEffectType.AssaultPulse)
-            yield return new TitleAssaultPulseEffect();
-
         if (style.TitleConfig.Effect.Type == AnnouncementTitleEffectType.AssaultScroll)
             yield return new TitleAssaultScrollEffect();
     }

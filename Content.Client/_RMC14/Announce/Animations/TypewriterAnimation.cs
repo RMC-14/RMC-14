@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Announce.Animations;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Announce.Animations;
@@ -20,7 +21,7 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
 
         for (var i = context.TitleOffset; i < context.Labels.Length; i++)
         {
-            context.Labels[i].SetMessage(FormattedMessage.FromMarkupPermissive(string.Empty));
+            (context.Labels[i] as RichTextLabel)?.SetMessage(FormattedMessage.FromMarkupPermissive(string.Empty));
         }
     }
 
@@ -64,7 +65,7 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
             if (textIndex < _currentLine)
             {
                 var message = context.FormatMessage(originalText[textIndex], style);
-                context.Labels[i].SetMessage(message);
+                (context.Labels[i] as RichTextLabel)?.SetMessage(message);
             }
             else if (textIndex == _currentLine)
             {
@@ -72,11 +73,11 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
                 var maxLength = Math.Min(_currentChar, currentLineText.Length);
                 var partialText = currentLineText[..maxLength];
                 var message = context.FormatMessage(partialText, style);
-                context.Labels[i].SetMessage(message);
+                (context.Labels[i] as RichTextLabel)?.SetMessage(message);
             }
             else
             {
-                context.Labels[i].SetMessage(FormattedMessage.FromMarkupPermissive(string.Empty));
+                (context.Labels[i] as RichTextLabel)?.SetMessage(FormattedMessage.FromMarkupPermissive(string.Empty));
             }
         }
     }

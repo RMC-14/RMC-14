@@ -4,6 +4,7 @@ using Content.Client.Resources;
 using Content.Client._RMC14.Announce.Styling;
 using Content.Shared._RMC14.Announce;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Shared.Prototypes;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -67,13 +68,13 @@ public sealed partial class AnnouncementWidget
                 style);
 
             var totalLabels = text.Length + titleOffset;
-            var labels = new RichTextLabel[totalLabels];
+            var labels = new Control[totalLabels];
 
             var scaleFactor = screenScaleFactor;
             var bodyLineHeight = MathF.Max(1f, style.TextConfig.LineHeight);
             var labelIndex = 0;
-            RichTextLabel? titleLabelRef = null;
-            RichTextLabel[] titleLabels = Array.Empty<RichTextLabel>();
+            Control? titleLabelRef = null;
+            Control[] titleLabels = Array.Empty<Control>();
             Control? titleTrackRef = null;
             var titleViewportWidth = 0f;
             var titleContentWidth = 0f;
@@ -116,14 +117,20 @@ public sealed partial class AnnouncementWidget
             {
                 if (titleScrolls)
                 {
-                    var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, effectiveTextWidth);
-                    var titleLabel = CreateTitleLabel(titleAlign, float.PositiveInfinity);
-                    titleLabel.SetMessage(titleMessage);
+                    var titleFontSize = CalculateTitleFontSize(style, screenSize, effectiveTextWidth, titleText);
+                    var titleFont = ResolveFont(style.TitleConfig.TitleFont, (int)titleFontSize);
+                    var measureLabel = CreateMarqueeTitleLabel(titleAlign, titleText, titleFont, style.TitleConfig.TitleColor);
 
                     var marqueeMeasureSize = new Vector2(MathF.Max(screenSize.X * 2f, effectiveTextWidth * 2f), float.PositiveInfinity);
-                    titleLabel.Measure(marqueeMeasureSize);
+                    measureLabel.Measure(marqueeMeasureSize);
                     titleViewportWidth = effectiveTextWidth;
                     titleScrollGap = Math.Max(style.TitleConfig.Effect.Gap * scaleFactor, 24f * scaleFactor);
+
+                    // Use natural text width so copies tile continuously with only the gap between them
+                    var naturalTextWidth = MathF.Max(measureLabel.DesiredSize.X, 1f);
+                    titleContentWidth = naturalTextWidth;
+                    var slotWidth = titleContentWidth + titleScrollGap;
+                    var copiesNeeded = Math.Max((int)MathF.Ceiling(effectiveTextWidth / slotWidth) + 1, 2);
 
                     var titleViewport = new LayoutContainer
                     {
@@ -136,48 +143,32 @@ public sealed partial class AnnouncementWidget
                         SetWidth = effectiveTextWidth
                     };
 
-                    var duplicateTitleLabel = CreateTitleLabel(HAlignment.Left, float.PositiveInfinity);
-                    duplicateTitleLabel.SetMessage(titleMessage);
-                    duplicateTitleLabel.Measure(marqueeMeasureSize);
-
-                    var naturalTextWidth = MathF.Max(titleLabel.DesiredSize.X, duplicateTitleLabel.DesiredSize.X);
-                    titleContentWidth = MathF.Max(naturalTextWidth > 0f ? naturalTextWidth : effectiveTextWidth, effectiveTextWidth);
-
-                    var titleFontSize = CalculateTitleFontSize(style, screenSize, effectiveTextWidth, titleText);
-                    // RichTextLabel.DesiredSize.Y is 0 pre-scene; fall back to ceil(fontSize). The 1.3x
-                    // multiplier was removed because it created empty space below the text (the vector font's
-                    // line height is approximately equal to the point size, not 1.3x).
-                    var titleHeight = MathF.Max(
-                        MathF.Max(titleLabel.DesiredSize.Y, duplicateTitleLabel.DesiredSize.Y),
-                        MathF.Ceiling(titleFontSize));
+                    var titleHeight = MathF.Max(measureLabel.DesiredSize.Y, MathF.Ceiling(titleFontSize));
                     var titlePadding = CalculateTitleVerticalPadding(style, scaleFactor);
                     var titleViewportHeight = titleHeight + titlePadding;
                     var titleOffsetY = titlePadding * 0.5f;
                     titleViewport.MinHeight = titleViewportHeight;
                     titleViewport.SetHeight = titleViewportHeight;
-                    titleLabel.MinWidth = titleContentWidth;
-                    titleLabel.SetWidth = titleContentWidth;
-                    titleLabel.MinHeight = titleHeight;
-                    titleLabel.SetHeight = titleHeight;
-                    duplicateTitleLabel.MinWidth = titleContentWidth;
-                    duplicateTitleLabel.SetWidth = titleContentWidth;
-                    duplicateTitleLabel.MinHeight = titleHeight;
-                    duplicateTitleLabel.SetHeight = titleHeight;
 
-                    LayoutContainer.SetAnchorPreset(titleLabel, LayoutContainer.LayoutPreset.TopLeft);
-                    LayoutContainer.SetGrowHorizontal(titleLabel, LayoutContainer.GrowDirection.Constrain);
-                    LayoutContainer.SetGrowVertical(titleLabel, LayoutContainer.GrowDirection.Constrain);
-                    LayoutContainer.SetAnchorPreset(duplicateTitleLabel, LayoutContainer.LayoutPreset.TopLeft);
-                    LayoutContainer.SetGrowHorizontal(duplicateTitleLabel, LayoutContainer.GrowDirection.Constrain);
-                    LayoutContainer.SetGrowVertical(duplicateTitleLabel, LayoutContainer.GrowDirection.Constrain);
+                    var scrollLabels = new Control[copiesNeeded];
+                    for (var ci = 0; ci < copiesNeeded; ci++)
+                    {
+                        var lbl = ci == 0
+                            ? measureLabel
+                            : CreateMarqueeTitleLabel(titleAlign, titleText, titleFont, style.TitleConfig.TitleColor);
+                        lbl.MinWidth = titleContentWidth;
+                        lbl.SetWidth = titleContentWidth;
+                        lbl.MinHeight = titleHeight;
+                        lbl.SetHeight = titleHeight;
+                        LayoutContainer.SetAnchorPreset(lbl, LayoutContainer.LayoutPreset.TopLeft);
+                        LayoutContainer.SetGrowHorizontal(lbl, LayoutContainer.GrowDirection.Constrain);
+                        LayoutContainer.SetGrowVertical(lbl, LayoutContainer.GrowDirection.Constrain);
+                        SetLayoutRect(lbl, new Vector2(ci * slotWidth, titleOffsetY), new Vector2(titleContentWidth, titleHeight));
+                        titleViewport.AddChild(lbl);
+                        scrollLabels[ci] = lbl;
+                    }
 
-                    SetLayoutRect(titleLabel, new Vector2(0f, titleOffsetY), new Vector2(titleContentWidth, titleHeight));
-                    SetLayoutRect(duplicateTitleLabel, new Vector2(titleContentWidth + titleScrollGap, titleOffsetY), new Vector2(titleContentWidth, titleHeight));
-
-                    titleViewport.AddChild(titleLabel);
-                    titleViewport.AddChild(duplicateTitleLabel);
-
-                    titleLabels = new[] { titleLabel, duplicateTitleLabel };
+                    titleLabels = scrollLabels;
                     titleTrackRef = titleViewport;
 
                     if (style.TitleConfig.TitleUnderline)
@@ -222,8 +213,8 @@ public sealed partial class AnnouncementWidget
                         textContainer.AddChild(titleViewport);
                     }
 
-                    labels[labelIndex] = titleLabel;
-                    titleLabelRef = titleLabel;
+                    labels[labelIndex] = scrollLabels[0];
+                    titleLabelRef = scrollLabels[0];
                     labelIndex++;
                 }
                 else
@@ -235,7 +226,7 @@ public sealed partial class AnnouncementWidget
                     var renderLabel = CreateStandaloneTitleLabel(titleText, style, titleFontSize, titleAlign);
                     renderLabel.Measure(titleMeasureSize);
                     titleContentWidth = renderLabel.DesiredSize.X;
-                    titleLabels = Array.Empty<RichTextLabel>();
+                    titleLabels = Array.Empty<Control>();
 
                     var titleHeight = MathF.Max(renderLabel.DesiredSize.Y, 1f);
                     var titlePadding = CalculateTitleVerticalPadding(style, scaleFactor);
@@ -376,51 +367,33 @@ public sealed partial class AnnouncementWidget
             HAlignment alignment)
         {
             var scaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
-            var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, titleWidth);
             var enableAssaultScroll = style.TitleConfig.Effect.Type == AnnouncementTitleEffectType.AssaultScroll;
-            var titleLabel = CreateTitleLabel(alignment, float.PositiveInfinity);
-            titleLabel.SetMessage(titleMessage);
 
-            RichTextLabel[] titleLabels;
+            Control[] titleLabels;
             Control titleTrack;
+            Control primaryLabel;
             var titleViewportWidth = titleWidth;
             float titleContentWidth;
             var titleScrollGap = Math.Max(style.TitleConfig.Effect.Gap * scaleFactor, 24f * scaleFactor);
 
             if (enableAssaultScroll)
             {
+                var titleFontSize = CalculateTitleFontSize(style, screenSize, titleWidth, titleText);
+                var titleFont = ResolveFont(style.TitleConfig.TitleFont, (int)titleFontSize);
+                var measureLabel = CreateMarqueeTitleLabel(alignment, titleText, titleFont, style.TitleConfig.TitleColor);
                 var marqueeMeasureSize = new Vector2(MathF.Max(screenSize.X * 2f, titleWidth * 2f), float.PositiveInfinity);
-                titleLabel.Measure(marqueeMeasureSize);
+                measureLabel.Measure(marqueeMeasureSize);
 
-                var duplicateTitleLabel = CreateTitleLabel(HAlignment.Left, float.PositiveInfinity);
-                duplicateTitleLabel.SetMessage(titleMessage);
-                duplicateTitleLabel.Measure(marqueeMeasureSize);
+                // Use natural text width so copies tile continuously with only the gap between them
+                var naturalTextWidth = MathF.Max(measureLabel.DesiredSize.X, 1f);
+                titleContentWidth = naturalTextWidth;
+                var slotWidth = titleContentWidth + titleScrollGap;
+                var copiesNeeded = Math.Max((int)MathF.Ceiling(titleWidth / slotWidth) + 1, 2);
 
-                var naturalTextWidth = MathF.Max(titleLabel.DesiredSize.X, duplicateTitleLabel.DesiredSize.X);
-                titleContentWidth = MathF.Max(naturalTextWidth > 0f ? naturalTextWidth : titleWidth, titleWidth);
-
-                Logger.Debug(
-                    $"[TitleLayout/Standalone/AssaultScroll] titleWidth={titleWidth:F1}" +
-                    $" label0.MaxWidth={titleLabel.MaxWidth:F1}" +
-                    $" label0.DesiredSize={titleLabel.DesiredSize}" +
-                    $" label1.DesiredSize={duplicateTitleLabel.DesiredSize}" +
-                    $" titleContentWidth={titleContentWidth:F1}" +
-                    $" textExceedsViewport={titleContentWidth > titleWidth}" +
-                    $" scaleFactor={scaleFactor:F2}");
-
-                var titleFontSizeForHeight = CalculateTitleFontSize(style, screenSize, titleWidth, titleText);
-                var titleHeight = MathF.Max(
-                    MathF.Max(titleLabel.DesiredSize.Y, duplicateTitleLabel.DesiredSize.Y),
-                    MathF.Ceiling(titleFontSizeForHeight));
+                var titleHeight = MathF.Max(measureLabel.DesiredSize.Y, MathF.Ceiling(titleFontSize));
                 var titlePadding = CalculateTitleVerticalPadding(style, scaleFactor);
                 var titleViewportHeight = titleHeight + titlePadding;
                 var titleOffsetY = titlePadding * 0.5f;
-
-                Logger.Debug(
-                    $"[TitleLayout/Standalone/AssaultScroll] titleFontSizeForHeight={titleFontSizeForHeight:F1}" +
-                    $" titleHeight={titleHeight:F1} titlePadding={titlePadding:F1}" +
-                    $" titleViewportHeight={titleViewportHeight:F1} titleOffsetY={titleOffsetY:F1}" +
-                    $" labelBottomEdge={titleOffsetY + titleHeight:F1} (should be <= viewportH={titleViewportHeight:F1})");
 
                 var titleViewport = new LayoutContainer
                 {
@@ -435,32 +408,35 @@ public sealed partial class AnnouncementWidget
                     SetHeight = titleViewportHeight
                 };
 
-                titleLabel.MinWidth = titleContentWidth;
-                titleLabel.SetWidth = titleContentWidth;
-                titleLabel.MinHeight = titleHeight;
-                titleLabel.SetHeight = titleHeight;
-                duplicateTitleLabel.MinWidth = titleContentWidth;
-                duplicateTitleLabel.SetWidth = titleContentWidth;
-                duplicateTitleLabel.MinHeight = titleHeight;
-                duplicateTitleLabel.SetHeight = titleHeight;
+                var scrollLabels = new Control[copiesNeeded];
+                for (var ci = 0; ci < copiesNeeded; ci++)
+                {
+                    var lbl = ci == 0
+                        ? measureLabel
+                        : CreateMarqueeTitleLabel(alignment, titleText, titleFont, style.TitleConfig.TitleColor);
+                    lbl.MinWidth = titleContentWidth;
+                    lbl.SetWidth = titleContentWidth;
+                    lbl.MinHeight = titleHeight;
+                    lbl.SetHeight = titleHeight;
+                    LayoutContainer.SetAnchorPreset(lbl, LayoutContainer.LayoutPreset.TopLeft);
+                    LayoutContainer.SetGrowHorizontal(lbl, LayoutContainer.GrowDirection.Constrain);
+                    LayoutContainer.SetGrowVertical(lbl, LayoutContainer.GrowDirection.Constrain);
+                    SetLayoutRect(lbl, new Vector2(ci * slotWidth, titleOffsetY), new Vector2(titleContentWidth, titleHeight));
+                    titleViewport.AddChild(lbl);
+                    scrollLabels[ci] = lbl;
+                }
 
-                LayoutContainer.SetAnchorPreset(titleLabel, LayoutContainer.LayoutPreset.TopLeft);
-                LayoutContainer.SetGrowHorizontal(titleLabel, LayoutContainer.GrowDirection.Constrain);
-                LayoutContainer.SetGrowVertical(titleLabel, LayoutContainer.GrowDirection.Constrain);
-                LayoutContainer.SetAnchorPreset(duplicateTitleLabel, LayoutContainer.LayoutPreset.TopLeft);
-                LayoutContainer.SetGrowHorizontal(duplicateTitleLabel, LayoutContainer.GrowDirection.Constrain);
-                LayoutContainer.SetGrowVertical(duplicateTitleLabel, LayoutContainer.GrowDirection.Constrain);
-
-                SetLayoutRect(titleLabel, new Vector2(0f, titleOffsetY), new Vector2(titleContentWidth, titleHeight));
-                SetLayoutRect(duplicateTitleLabel, new Vector2(titleContentWidth + titleScrollGap, titleOffsetY), new Vector2(titleContentWidth, titleHeight));
-
-                titleViewport.AddChild(titleLabel);
-                titleViewport.AddChild(duplicateTitleLabel);
-                titleLabels = new[] { titleLabel, duplicateTitleLabel };
+                titleLabels = scrollLabels;
+                primaryLabel = scrollLabels[0];
                 titleTrack = titleViewport;
             }
             else
             {
+                var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, titleWidth);
+                var titleLabel = CreateTitleLabel(alignment, float.PositiveInfinity);
+                titleLabel.SetMessage(titleMessage);
+                primaryLabel = titleLabel;
+
                 var titleMeasureSize = new Vector2(MathF.Max(screenSize.X * 2f, titleWidth * 2f), float.PositiveInfinity);
                 titleLabel.Measure(titleMeasureSize);
                 var titleFontSize = CalculateTitleFontSize(style, screenSize, titleWidth, titleText);
@@ -495,7 +471,7 @@ public sealed partial class AnnouncementWidget
                 renderLabel.SetHeight = titleHeight;
                 SetLayoutRect(renderLabel, new Vector2(0f, titleOffsetY), new Vector2(titleWidth, titleHeight));
                 titleViewport.AddChild(renderLabel);
-                titleLabels = Array.Empty<RichTextLabel>();
+                titleLabels = Array.Empty<Control>();
                 titleTrack = titleViewport;
             }
 
@@ -539,30 +515,17 @@ public sealed partial class AnnouncementWidget
                     measuredTitleHeight = MathF.Max(measuredTitleHeight, MathF.Max(title.DesiredSize.Y, title.Size.Y));
                 }
 
-                Logger.Debug(
-                    $"[TitleLayout/Standalone] postMeasure titleViewport.DesiredSize={titleViewportControl.DesiredSize}" +
-                    $" container.DesiredSize={container.DesiredSize}" +
-                    $" measuredTitleHeight={measuredTitleHeight:F1}" +
-                    $" willOverridePaddedHeight={measuredTitleHeight > 0f}");
-
                 if (measuredTitleHeight > 0f)
                 {
                     var paddedHeight = measuredTitleHeight + CalculateTitleVerticalPadding(style, scaleFactor);
-                    Logger.Debug($"[TitleLayout/Standalone] overriding viewport height: {titleViewportControl.MinHeight:F1} -> paddedHeight={paddedHeight:F1}");
                     titleViewportControl.MinHeight = paddedHeight;
                     titleViewportControl.SetHeight = paddedHeight;
                 }
             }
 
-            Logger.Debug(
-                $"[TitleLayout/Standalone] final container.DesiredSize={container.DesiredSize}" +
-                $" titleViewportWidth={titleViewportWidth:F1}" +
-                $" titleContentWidth={titleContentWidth:F1}" +
-                $" titleScrollGap={titleScrollGap:F1}");
-
             return new TitleLayoutBuildResult(
                 container,
-                titleLabel,
+                primaryLabel,
                 titleLabels,
                 titleTrack,
                 titleViewportWidth,
@@ -633,10 +596,38 @@ public sealed partial class AnnouncementWidget
             return new RichTextLabel
             {
                 HorizontalAlignment = alignment,
-                VerticalAlignment = VAlignment.Center,
+                VerticalAlignment = VAlignment.Top,
                 MaxWidth = maxWidth,
                 HorizontalExpand = false
             };
+        }
+
+        private static Label CreateMarqueeTitleLabel(HAlignment hAlignment, string text, Font font, Color color)
+        {
+            var alignMode = hAlignment switch
+            {
+                HAlignment.Center => Label.AlignMode.Center,
+                HAlignment.Right => Label.AlignMode.Right,
+                _ => Label.AlignMode.Left
+            };
+            return new Label
+            {
+                Text = text,
+                FontOverride = font,
+                FontColorOverride = color,
+                Align = alignMode,
+                VAlign = Label.VAlignMode.Top,
+                HorizontalExpand = false
+            };
+        }
+
+        private Font ResolveFont(string? fontId, int size)
+        {
+            var id = string.IsNullOrEmpty(fontId) ? FontTag.DefaultFont : fontId;
+            if (!_owner._prototypeManager.TryIndex<FontPrototype>(id, out var prototype))
+                prototype = _owner._prototypeManager.Index<FontPrototype>(FontTag.DefaultFont);
+            var fontResource = _owner._resCache.GetResource<FontResource>(prototype.Path);
+            return new VectorFont(fontResource, size);
         }
 
         private static void SetLayoutRect(Control control, Vector2 position, Vector2 size)
@@ -796,10 +787,10 @@ public sealed partial class AnnouncementWidget
     }
 
     private readonly record struct TextLayoutBuildResult(
-        RichTextLabel[] Labels,
+        Control[] Labels,
         Control Container,
         float MaxAllowedWidth,
-        RichTextLabel[] TitleLabels,
+        Control[] TitleLabels,
         Control? TitleTrack,
         float TitleViewportWidth,
         float TitleContentWidth,
@@ -808,8 +799,8 @@ public sealed partial class AnnouncementWidget
 
     private readonly record struct TitleLayoutBuildResult(
         Control Container,
-        RichTextLabel PrimaryLabel,
-        RichTextLabel[] TitleLabels,
+        Control PrimaryLabel,
+        Control[] TitleLabels,
         Control TitleTrack,
         float TitleViewportWidth,
         float TitleContentWidth,

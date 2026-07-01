@@ -3,6 +3,8 @@
   name: "A.R.E.S."
   description: "Ship AI system announcements"
   target: Marines
+  visibleInSettings: false
+  visibleInLayoutEditor: false
   sound:
     path: "/Audio/_RMC14/Announcements/ARES/attention_jingle.ogg"
   priority: 9
@@ -53,6 +55,8 @@
   name: "Critical"
   description: "Critical priority announcements"
   target: All
+  visibleInSettings: false
+  visibleInLayoutEditor: false
   priority: 10
   canInterrupt: true
   canBeInterrupted: false
@@ -90,7 +94,7 @@
           titleColor: "#ff3333"
           titleFontSize: 20
           titleFont: "CozetteBold"
-          titleUnderline: true
+          titleUnderline: false
           titleUnderlineThickness: 2
           effect:
             type: AssaultScroll
@@ -102,6 +106,8 @@
   name: "C.L.F."
   description: "Colonial Liberation Front announcements"
   target: All
+  visibleInSettings: false
+  visibleInLayoutEditor: false
   priority: 8
   canInterrupt: true
   canBeInterrupted: false

@@ -11,7 +11,7 @@ public sealed record AnnouncementAnimationContext(
     AnnouncementStyle Style,
     string[] OriginalText,
     string[] CleanText,
-    RichTextLabel[] Labels,
+    Control[] Labels,
     int TitleOffset,
     Func<string, AnnouncementStyle, FormattedMessage> FormatMessage,
     Action SetAllLabels,

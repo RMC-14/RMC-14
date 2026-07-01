@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client._RMC14.Announce.Styling;
+using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Announce.Animations;
 using Robust.Client.GameObjects;
@@ -149,13 +150,6 @@ public sealed partial class AnnouncementWidget
                 contentContainer.DesiredSize.X,
                 maxAnnouncementWidth);
 
-            Logger.Debug(
-                $"[SetupUI/TitleSpans] spriteContainer={_spriteContainer != null}" +
-                $" contentDesiredSize={contentContainer.DesiredSize}" +
-                $" maxAnnouncementWidth={maxAnnouncementWidth:F1}" +
-                $" preferredAnnouncementWidth={preferredAnnouncementWidth:F1}" +
-                $" needsExpansion={preferredAnnouncementWidth > contentContainer.DesiredSize.X}");
-
             if (preferredAnnouncementWidth > contentContainer.DesiredSize.X)
             {
                 resolvedTextWidth += preferredAnnouncementWidth - contentContainer.DesiredSize.X;
@@ -172,7 +166,7 @@ public sealed partial class AnnouncementWidget
                 MathF.Max(contentContainer.DesiredSize.X, textLayout.MaxAllowedWidth),
                 titleAlignment);
 
-            _richTextLabels = new[] { titleBuild.PrimaryLabel }.Concat(textLayout.Labels).ToArray();
+            _richTextLabels = new Control[] { titleBuild.PrimaryLabel }.Concat(textLayout.Labels).ToArray();
             ActiveAnnouncement.TitleLabels = titleBuild.TitleLabels;
             ActiveAnnouncement.TitleTrack = titleBuild.TitleTrack;
             ActiveAnnouncement.TitleViewportWidth = titleBuild.TitleViewportWidth;
@@ -182,13 +176,6 @@ public sealed partial class AnnouncementWidget
             ActiveAnnouncement.TitleRenderedFontSize = titleBuild.TitleRenderedFontSize;
 
             var rootSeparation = Math.Max(2, (int) MathF.Ceiling(style.TextConfig.LineHeight * 0.15f));
-            Logger.Debug(
-                $"[SetupUI/TitleSpans] titleBuild.Container.DesiredSize={titleBuild.Container.DesiredSize}" +
-                $" contentContainer.DesiredSize={contentContainer.DesiredSize}" +
-                $" resolvedTextWidth={resolvedTextWidth:F1}" +
-                $" rootSeparation={rootSeparation} lineHeight={style.TextConfig.LineHeight:F1}" +
-                $" titleContainerWiderThanContent={titleBuild.Container.DesiredSize.X > contentContainer.DesiredSize.X}");
-
             var root = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
@@ -465,7 +452,7 @@ public sealed partial class AnnouncementWidget
         {
             for (var i = _titleOffset; i < _richTextLabels.Length; i++)
             {
-                _richTextLabels[i].SetMessage(FormattedMessage.FromMarkupPermissive(""));
+                (_richTextLabels[i] as RichTextLabel)?.SetMessage(FormattedMessage.FromMarkupPermissive(""));
             }
         }
         else
@@ -519,23 +506,30 @@ public sealed partial class AnnouncementWidget
         var screenSize = parent.Size.X > 0f && parent.Size.Y > 0f
             ? parent.Size
             : ResolveScreenSize();
-        Measure(screenSize);
+
+        // Position within the gameplay viewport so announcements don't
+        // land on top of UI panels (e.g. the chat box in separated-UI layouts).
+        var viewportOffset = Vector2.Zero;
+        var positioningSize = screenSize;
+        if (ForcedScreenSize == null)
+        {
+            var viewport = _uiManager.ActiveScreen?.GetWidget<MainViewport>();
+            if (viewport is { Size.X: > 0f, Size.Y: > 0f })
+            {
+                positioningSize = viewport.Size;
+                viewportOffset = viewport.GlobalPosition - parent.GlobalPosition;
+            }
+        }
+
+        Measure(positioningSize);
         var widgetSize = DesiredSize;
-        if (Width > 0f && Height > 0f)
-            widgetSize = new Vector2(Width, Height);
         var announcement = ActiveAnnouncement.Data;
         var style = ActiveAnnouncement.ResolvedStyle;
 
-        var position = CalculatePosition(screenSize, widgetSize, announcement, style);
-        position += ActiveAnnouncement.CurrentSlideOffset + ActiveAnnouncement.CurrentBounceOffset;
+        var position = CalculatePosition(positioningSize, widgetSize, announcement, style);
+        position += viewportOffset;
 
         UpdateLayoutRect(position, widgetSize);
-
-        if (style.AnimationConfig.Animation is ZoomAnimationConfig)
-        {
-            SetWidth = widgetSize.X * ActiveAnnouncement.ZoomCurrentScale;
-            SetHeight = widgetSize.Y * ActiveAnnouncement.ZoomCurrentScale;
-        }
     }
 
     private static Vector2 CalculatePosition(Vector2 screenSize, Vector2 widgetSize, AnnouncementDisplayData announcement, AnnouncementStyle style)

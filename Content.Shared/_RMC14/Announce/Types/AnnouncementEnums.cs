@@ -89,7 +89,6 @@ public enum AnnouncementTitlePosition : byte
 public enum AnnouncementTitleEffectType : byte
 {
     None,
-    AssaultPulse,
     AssaultScroll
 }
 
@@ -104,14 +103,6 @@ public enum AnnouncementDecalPlacement : byte
     Below
 }
 
-[Serializable, NetSerializable]
-public enum SlideDirection : byte
-{
-    Top,
-    Bottom,
-    Left,
-    Right
-}
 
 [Serializable, NetSerializable]
 public enum FrameStyle : byte
