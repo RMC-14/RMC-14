@@ -326,21 +326,8 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
         var query = EntityQueryEnumerator<RMCHijackActiveMapComponent>();
         while (query.MoveNext(out var uid, out var active))
         {
-            if (active.ExplodeAt != null && time >= active.ExplodeAt.Value)
-            {
-                var burst = 0;
-                while (active.Explode.Count > 0 && burst < MaxPipeBurstsPerTick)
-                {
-                    var index = active.Explode.Count - 1;
-                    var entry = active.Explode[index];
-                    active.Explode.RemoveAt(index);
-                    BurstPipe(entry.Pipe, entry.Warning);
-                    burst++;
-                }
-
-                if (active.Explode.Count == 0)
-                    active.ExplodeAt = null;
-            }
+            if (active.ExplodeAt is { } explodeAt && time >= explodeAt)
+                BurstQueuedPipes(active);
 
             if (time < active.Next)
                 continue;
@@ -354,5 +341,21 @@ public sealed class RMCHijackRandomDamageSystem : EntitySystem
 
             DoPipeBarrage((uid, active));
         }
+    }
+
+    private void BurstQueuedPipes(RMCHijackActiveMapComponent active)
+    {
+        var burst = 0;
+        while (burst < MaxPipeBurstsPerTick && active.Explode.Count > 0)
+        {
+            var last = active.Explode.Count - 1;
+            var (pipe, warning) = active.Explode[last];
+            active.Explode.RemoveAt(last);
+            BurstPipe(pipe, warning);
+            burst++;
+        }
+
+        if (active.Explode.Count == 0)
+            active.ExplodeAt = null;
     }
 }
