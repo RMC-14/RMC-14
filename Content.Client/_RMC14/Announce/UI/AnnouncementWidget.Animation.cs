@@ -37,7 +37,7 @@ public sealed partial class AnnouncementWidget
             _richTextLabels,
             currentTime,
             deltaTime);
-        if (_playback.IsFinished)
+        if (_playback.IsFinished && !PreviewMode)
         {
             FinishAnnouncement();
         }
@@ -63,15 +63,15 @@ public sealed partial class AnnouncementWidget
         if (ActiveAnnouncement == null)
             return;
 
-        var originalText = ActiveAnnouncement.Data.Text;
+        var text = ActiveAnnouncement.Data.Text;
         var style = ActiveAnnouncement.ResolvedStyle;
 
         for (var i = _titleOffset; i < _richTextLabels.Length; i++)
         {
             var textIndex = i - _titleOffset;
-            if (textIndex < originalText.Length)
+            if (textIndex < text.Length)
             {
-                var message = CreateFormattedMessage(originalText[textIndex], style);
+                var message = CreateFormattedMessage(text[textIndex], style);
                 (_richTextLabels[i] as RichTextLabel)?.SetMessage(message);
             }
         }

@@ -507,8 +507,7 @@ public sealed partial class AnnouncementWidget
             ? parent.Size
             : ResolveScreenSize();
 
-        // Position within the gameplay viewport so announcements don't
-        // land on top of UI panels (e.g. the chat box in separated-UI layouts).
+        // Position within the gameplay viewport
         var viewportOffset = Vector2.Zero;
         var positioningSize = screenSize;
         if (ForcedScreenSize == null)

@@ -76,13 +76,6 @@ public sealed partial class AnnouncementWidget : UIWidget
         };
 
         SetupUI();
-        if (PreviewMode)
-        {
-            SetAllLabelsText();
-            Visible = true;
-            return;
-        }
-
         ConfigureAnimationAndEffects();
         Visible = true;
     }
@@ -94,14 +87,21 @@ public sealed partial class AnnouncementWidget : UIWidget
         if (ActiveAnnouncement == null)
             return;
 
+        var deltaTime = (float) args.DeltaSeconds;
+        var currentTime = _timing.CurTime;
+
         if (PreviewMode)
         {
+            if (_playback.IsFinished)
+            {
+                ActiveAnnouncement.StartTime = currentTime;
+                ConfigureAnimationAndEffects();
+            }
+
+            UpdateAnnouncement(deltaTime, currentTime);
             UpdatePosition();
             return;
         }
-
-        var deltaTime = (float) args.DeltaSeconds;
-        var currentTime = _timing.CurTime;
 
         UpdateAnnouncement(deltaTime, currentTime);
         UpdatePosition();
