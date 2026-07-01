@@ -75,4 +75,7 @@ public sealed partial class DamageOnCollideComponent : Component
 
     [DataField]
     public bool CanRehit;
+
+    [DataField]
+    public bool Disabled = false;
 }
