@@ -178,7 +178,7 @@
   parent: RMCPropTyrargoVehicleBase
   id: RMCPropTyrargoVehicleIFV
   name: M34 Marshal IFV
-  description: Developed by Weston-Yamada, the RAT (Rover Armed Transport) was originally designed for the TSE military as an armed version of their RT series of expeditionary vehicles, being instead adopted by the UN Marine Corps. It's heavier and and more durable then the M570 series the Marines use, as the army don't have a need for APCs capable of being transported via a dropship.
+  description: Developed by Weston-Yamada, the RAT (Rover Armed Transport) was originally designed for the TSE military as an armed version of their RT series of expeditionary vehicles, being instead adopted by the UN Marine Corps. It's heavier and and more durable then the M570 series the Marines use, as they don't have a need for APCs capable of being transported via a dropship.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_ifv.rsi
@@ -223,8 +223,8 @@
 - type: entity
   parent: RMCPropTyrargoVehicleBase
   id: RMCPropTyrargoVehicleHumvee
-  name: AEG-HVWC # this just uses the ARC name and description in parity but that's lame, should change the lore once vehicles PR is merged though
-  description: The AEGIS High Versatility Wheeled Carrier, colloquially known as the 'Huwick' by your average marine. A vehicle used everywhere in the UNMC for various purposes, ranging from troop transport and medevac to variants refitted to serve as a SAM launcher or anti-armor missile carrier. This one has been rendered inoperable.
+  name: M540-B Armored Recon Carrier
+  description: An M540-B Armored Recon Carrier. A lightly armored reconnaissance and intelligence vehicle. This one has been rendered inoperable.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_humvee.rsi
@@ -289,8 +289,8 @@
     state: humvee_gun_broken
 
 # Longstreet tank
-# Only variants pertinent to Tyrargo ported for now because there is a lot to port 
-# TODO RMC14: Rest of the sprites
+# Only variants pertinent to Tyrargo ported for now because there is a lot to port
+# TODO RMC14: Rest of the tank sprites
 - type: entity
   parent: RMCPropTyrargoVehicleBase
   id: RMCPropTyrargoVehicleTankDestroyed
