@@ -8,6 +8,7 @@ using Robust.Shared.Prototypes;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
+using Robust.Shared.Log;
 using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Announce;
@@ -116,12 +117,11 @@ public sealed partial class AnnouncementWidget
                 if (titleScrolls)
                 {
                     var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, effectiveTextWidth);
-                    var titleLabel = CreateTitleLabel(titleAlign, effectiveTextWidth);
+                    var titleLabel = CreateTitleLabel(titleAlign, float.PositiveInfinity);
                     titleLabel.SetMessage(titleMessage);
 
                     var marqueeMeasureSize = new Vector2(MathF.Max(screenSize.X * 2f, effectiveTextWidth * 2f), float.PositiveInfinity);
                     titleLabel.Measure(marqueeMeasureSize);
-                    titleContentWidth = MathF.Max(titleLabel.DesiredSize.X, effectiveTextWidth);
                     titleViewportWidth = effectiveTextWidth;
                     titleScrollGap = Math.Max(style.TitleConfig.Effect.Gap * scaleFactor, 24f * scaleFactor);
 
@@ -140,11 +140,16 @@ public sealed partial class AnnouncementWidget
                     duplicateTitleLabel.SetMessage(titleMessage);
                     duplicateTitleLabel.Measure(marqueeMeasureSize);
 
+                    var naturalTextWidth = MathF.Max(titleLabel.DesiredSize.X, duplicateTitleLabel.DesiredSize.X);
+                    titleContentWidth = MathF.Max(naturalTextWidth > 0f ? naturalTextWidth : effectiveTextWidth, effectiveTextWidth);
+
                     var titleFontSize = CalculateTitleFontSize(style, screenSize, effectiveTextWidth, titleText);
-                    // RichTextLabel.DesiredSize.Y is 0 when measured before scene attachment; fall back to font size
+                    // RichTextLabel.DesiredSize.Y is 0 pre-scene; fall back to ceil(fontSize). The 1.3x
+                    // multiplier was removed because it created empty space below the text (the vector font's
+                    // line height is approximately equal to the point size, not 1.3x).
                     var titleHeight = MathF.Max(
                         MathF.Max(titleLabel.DesiredSize.Y, duplicateTitleLabel.DesiredSize.Y),
-                        MathF.Ceiling(titleFontSize * 1.3f));
+                        MathF.Ceiling(titleFontSize));
                     var titlePadding = CalculateTitleVerticalPadding(style, scaleFactor);
                     var titleViewportHeight = titleHeight + titlePadding;
                     var titleOffsetY = titlePadding * 0.5f;
@@ -373,7 +378,7 @@ public sealed partial class AnnouncementWidget
             var scaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
             var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, titleWidth);
             var enableAssaultScroll = style.TitleConfig.Effect.Type == AnnouncementTitleEffectType.AssaultScroll;
-            var titleLabel = CreateTitleLabel(alignment, enableAssaultScroll ? titleWidth : float.PositiveInfinity);
+            var titleLabel = CreateTitleLabel(alignment, float.PositiveInfinity);
             titleLabel.SetMessage(titleMessage);
 
             RichTextLabel[] titleLabels;
@@ -386,19 +391,36 @@ public sealed partial class AnnouncementWidget
             {
                 var marqueeMeasureSize = new Vector2(MathF.Max(screenSize.X * 2f, titleWidth * 2f), float.PositiveInfinity);
                 titleLabel.Measure(marqueeMeasureSize);
-                titleContentWidth = MathF.Max(titleLabel.DesiredSize.X, titleWidth);
 
                 var duplicateTitleLabel = CreateTitleLabel(HAlignment.Left, float.PositiveInfinity);
                 duplicateTitleLabel.SetMessage(titleMessage);
                 duplicateTitleLabel.Measure(marqueeMeasureSize);
 
+                var naturalTextWidth = MathF.Max(titleLabel.DesiredSize.X, duplicateTitleLabel.DesiredSize.X);
+                titleContentWidth = MathF.Max(naturalTextWidth > 0f ? naturalTextWidth : titleWidth, titleWidth);
+
+                Logger.Debug(
+                    $"[TitleLayout/Standalone/AssaultScroll] titleWidth={titleWidth:F1}" +
+                    $" label0.MaxWidth={titleLabel.MaxWidth:F1}" +
+                    $" label0.DesiredSize={titleLabel.DesiredSize}" +
+                    $" label1.DesiredSize={duplicateTitleLabel.DesiredSize}" +
+                    $" titleContentWidth={titleContentWidth:F1}" +
+                    $" textExceedsViewport={titleContentWidth > titleWidth}" +
+                    $" scaleFactor={scaleFactor:F2}");
+
                 var titleFontSizeForHeight = CalculateTitleFontSize(style, screenSize, titleWidth, titleText);
                 var titleHeight = MathF.Max(
                     MathF.Max(titleLabel.DesiredSize.Y, duplicateTitleLabel.DesiredSize.Y),
-                    MathF.Ceiling(titleFontSizeForHeight * 1.3f));
+                    MathF.Ceiling(titleFontSizeForHeight));
                 var titlePadding = CalculateTitleVerticalPadding(style, scaleFactor);
                 var titleViewportHeight = titleHeight + titlePadding;
                 var titleOffsetY = titlePadding * 0.5f;
+
+                Logger.Debug(
+                    $"[TitleLayout/Standalone/AssaultScroll] titleFontSizeForHeight={titleFontSizeForHeight:F1}" +
+                    $" titleHeight={titleHeight:F1} titlePadding={titlePadding:F1}" +
+                    $" titleViewportHeight={titleViewportHeight:F1} titleOffsetY={titleOffsetY:F1}" +
+                    $" labelBottomEdge={titleOffsetY + titleHeight:F1} (should be <= viewportH={titleViewportHeight:F1})");
 
                 var titleViewport = new LayoutContainer
                 {
@@ -517,13 +539,26 @@ public sealed partial class AnnouncementWidget
                     measuredTitleHeight = MathF.Max(measuredTitleHeight, MathF.Max(title.DesiredSize.Y, title.Size.Y));
                 }
 
+                Logger.Debug(
+                    $"[TitleLayout/Standalone] postMeasure titleViewport.DesiredSize={titleViewportControl.DesiredSize}" +
+                    $" container.DesiredSize={container.DesiredSize}" +
+                    $" measuredTitleHeight={measuredTitleHeight:F1}" +
+                    $" willOverridePaddedHeight={measuredTitleHeight > 0f}");
+
                 if (measuredTitleHeight > 0f)
                 {
                     var paddedHeight = measuredTitleHeight + CalculateTitleVerticalPadding(style, scaleFactor);
+                    Logger.Debug($"[TitleLayout/Standalone] overriding viewport height: {titleViewportControl.MinHeight:F1} -> paddedHeight={paddedHeight:F1}");
                     titleViewportControl.MinHeight = paddedHeight;
                     titleViewportControl.SetHeight = paddedHeight;
                 }
             }
+
+            Logger.Debug(
+                $"[TitleLayout/Standalone] final container.DesiredSize={container.DesiredSize}" +
+                $" titleViewportWidth={titleViewportWidth:F1}" +
+                $" titleContentWidth={titleContentWidth:F1}" +
+                $" titleScrollGap={titleScrollGap:F1}");
 
             return new TitleLayoutBuildResult(
                 container,
@@ -614,7 +649,7 @@ public sealed partial class AnnouncementWidget
 
         private static float CalculateTitleVerticalPadding(AnnouncementStyle style, float scaleFactor)
         {
-            return Math.Max(2f * scaleFactor, style.TitleConfig.TitleFontSize * 0.12f);
+            return Math.Max(5f * scaleFactor, style.TitleConfig.TitleFontSize * 0.25f);
         }
 
         private Label CreateStandaloneTitleLabel(

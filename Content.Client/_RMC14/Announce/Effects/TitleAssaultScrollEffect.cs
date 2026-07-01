@@ -33,6 +33,12 @@ public sealed class TitleAssaultScrollEffect : IAnnouncementVisualEffect
         _debugFrameCount++;
         if (_debugFrameCount <= 5 || _debugFrameCount % 60 == 0)
         {
+            var expectedSingleLineHeight = context.Output.TitleRenderedFontSize * 1.4f;
+            var label0Height = titleLabels[0].Size.Y > 0f ? titleLabels[0].Size.Y : titleLabels[0].DesiredSize.Y;
+            var isWrapping = label0Height > expectedSingleLineHeight;
+            var trackSize = context.Output.TitleTrack?.Size ?? default;
+            var label0MaxWidth = titleLabels[0].MaxWidth;
+
             Logger.Debug(
                 $"[AssaultScroll] frame={_debugFrameCount}" +
                 $" contentWidth={contentWidth:F1}" +
@@ -42,10 +48,16 @@ public sealed class TitleAssaultScrollEffect : IAnnouncementVisualEffect
                 $" x1={x1:F1} x2={x2:F1}" +
                 $" label0.Size={titleLabels[0].Size}" +
                 $" label0.DesiredSize={titleLabels[0].DesiredSize}" +
+                $" label0.MaxWidth={label0MaxWidth:F1}" +
                 $" label1.Size={titleLabels[1].Size}" +
+                $" label1.MaxWidth={titleLabels[1].MaxWidth:F1}" +
                 $" TitleTrack.Size={context.Output.TitleTrack?.Size}" +
                 $" TitleRenderedFontSize={context.Output.TitleRenderedFontSize:F1}" +
-                $" TitleViewportWidth={context.Output.TitleViewportWidth:F1}");
+                $" TitleViewportWidth={context.Output.TitleViewportWidth:F1}" +
+                $" expectedSingleLineH={expectedSingleLineHeight:F1}" +
+                $" WRAPPING={isWrapping}" +
+                $" label0RightEdge={x1 + contentWidth:F1} viewportW={trackSize.X:F1}" +
+                $" labelExceedsViewport={x1 + contentWidth > trackSize.X && x1 >= 0f}");
         }
     }
 }

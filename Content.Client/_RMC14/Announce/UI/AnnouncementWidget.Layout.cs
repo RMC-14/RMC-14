@@ -149,6 +149,13 @@ public sealed partial class AnnouncementWidget
                 contentContainer.DesiredSize.X,
                 maxAnnouncementWidth);
 
+            Logger.Debug(
+                $"[SetupUI/TitleSpans] spriteContainer={_spriteContainer != null}" +
+                $" contentDesiredSize={contentContainer.DesiredSize}" +
+                $" maxAnnouncementWidth={maxAnnouncementWidth:F1}" +
+                $" preferredAnnouncementWidth={preferredAnnouncementWidth:F1}" +
+                $" needsExpansion={preferredAnnouncementWidth > contentContainer.DesiredSize.X}");
+
             if (preferredAnnouncementWidth > contentContainer.DesiredSize.X)
             {
                 resolvedTextWidth += preferredAnnouncementWidth - contentContainer.DesiredSize.X;
@@ -174,12 +181,20 @@ public sealed partial class AnnouncementWidget
             ActiveAnnouncement.TitleText = titleText;
             ActiveAnnouncement.TitleRenderedFontSize = titleBuild.TitleRenderedFontSize;
 
+            var rootSeparation = Math.Max(2, (int) MathF.Ceiling(style.TextConfig.LineHeight * 0.15f));
+            Logger.Debug(
+                $"[SetupUI/TitleSpans] titleBuild.Container.DesiredSize={titleBuild.Container.DesiredSize}" +
+                $" contentContainer.DesiredSize={contentContainer.DesiredSize}" +
+                $" resolvedTextWidth={resolvedTextWidth:F1}" +
+                $" rootSeparation={rootSeparation} lineHeight={style.TextConfig.LineHeight:F1}" +
+                $" titleContainerWiderThanContent={titleBuild.Container.DesiredSize.X > contentContainer.DesiredSize.X}");
+
             var root = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
                 HorizontalAlignment = contentAlignment,
                 VerticalAlignment = VAlignment.Top,
-                SeparationOverride = Math.Max(2, (int) MathF.Ceiling(style.TextConfig.LineHeight * 0.15f))
+                SeparationOverride = rootSeparation
             };
 
             if (style.LayoutConfig.TitlePosition == AnnouncementTitlePosition.Above)
