@@ -39,13 +39,13 @@
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_vtol.rsi
     state: vtol_damaged
 
-# EVAC-3
+# F-44
 - type: entity
   parent: RMCPropTyrargoVehicleBase
   id: RMCPropTyrargoVehicleEvacBlack
   suffix: Black
-  name: EVAC-3 Aerospace fighter
-  description: A high tech, silver coated EVAC-3 aerospace fighter used by the UNMC in deep recon missions. The thermal-absorbent paint alone probably costs more than your squad's collective paycheck. Unfortunately however, this jet was in the middle of a repair cycle when the northern defences were breached, necessitating an evacuation.
+  name: F-44 Aerospace fighter
+  description: A high tech, silver coated F-44 aerospace fighter used by the UNMC in deep recon missions. The thermal-absorbent paint alone probably costs more than your squad's collective paycheck. Unfortunately however, this jet was in the middle of a repair cycle when the northern defences were breached, necessitating an evacuation.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_evac.rsi
@@ -56,9 +56,9 @@
 - type: entity
   parent: RMCPropTyrargoVehicleBase
   id: RMCPropTyrargoVehicleEvacGreen
-  name: EVAC-3 Aerospace fighter
+  name: F-44 Aerospace fighter
   suffix: Green
-  description: A state of the art EVAC-3F aerospace fighter used by the UNMC. This fighter has seen better days with extensive internal wiring damage and unfinished repairs to the bomb-bays.
+  description: A state of the art F-44 aerospace fighter used by the UNMC. This fighter has seen better days with extensive internal wiring damage and unfinished repairs to the bomb-bays.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Tyrargo_Vehicles/tyrargo_evac.rsi
