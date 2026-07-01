@@ -46,7 +46,7 @@
           spriteBoxBorderColor: "#4a9eff"
           spriteBoxBorderThickness: 2
           spriteBoxPadding: 18
-          spriteGlow: true
+          spriteGlow: false
           spriteGlowColor: "#4a9eff"
           spriteGlowIntensity: 0.6
           spriteScale: 1
