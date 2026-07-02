@@ -252,23 +252,44 @@ public abstract partial class ClothingSystem : EntitySystem
         Func<string, bool> hasState,
         [NotNullWhen(true)] out List<PrototypeLayerData>? layers)
     {
+        return ResolveEquippedVisuals(
+            clothing.ClothingVisuals,
+            clothing.EquippedPrefix,
+            clothing.EquippedState,
+            slot,
+            speciesId,
+            fallbackRsiPath,
+            hasState,
+            out layers);
+    }
+
+    public static ClothingVisualResolution ResolveEquippedVisuals(
+        Dictionary<string, List<PrototypeLayerData>> clothingVisuals,
+        string? equippedPrefix,
+        string? equippedState,
+        string slot,
+        string? speciesId,
+        string? fallbackRsiPath,
+        Func<string, bool> hasState,
+        [NotNullWhen(true)] out List<PrototypeLayerData>? layers)
+    {
         layers = null;
 
         if (speciesId != null &&
-            clothing.ClothingVisuals.TryGetValue($"{slot}-{speciesId}", out var speciesLayers))
+            clothingVisuals.TryGetValue($"{slot}-{speciesId}", out var speciesLayers))
         {
             layers = speciesLayers;
             return ClothingVisualResolution.Species;
         }
 
-        if (clothing.ClothingVisuals.TryGetValue(slot, out var slotLayers))
+        if (clothingVisuals.TryGetValue(slot, out var slotLayers))
         {
             layers = slotLayers;
             return ClothingVisualResolution.Explicit;
         }
 
         if (string.IsNullOrWhiteSpace(fallbackRsiPath) ||
-            !TryCreateDefaultEquippedVisual(clothing, slot, speciesId, fallbackRsiPath, hasState, out layers))
+            !TryCreateDefaultEquippedVisual(equippedPrefix, equippedState, slot, speciesId, fallbackRsiPath, hasState, out layers))
         {
             return ClothingVisualResolution.None;
         }
@@ -278,19 +299,25 @@ public abstract partial class ClothingSystem : EntitySystem
 
     public static string GetEquippedState(ClothingComponent clothing, string slot)
     {
+        return GetEquippedState(clothing.EquippedPrefix, clothing.EquippedState, slot);
+    }
+
+    public static string GetEquippedState(string? equippedPrefix, string? equippedState, string slot)
+    {
         var correctedSlot = EquippedStateSlotMap.GetValueOrDefault(slot, slot);
 
-        if (clothing.EquippedState != null)
-            return clothing.EquippedState;
+        if (equippedState != null)
+            return equippedState;
 
-        if (!string.IsNullOrEmpty(clothing.EquippedPrefix))
-            return $"{clothing.EquippedPrefix}-equipped-{correctedSlot}";
+        if (!string.IsNullOrEmpty(equippedPrefix))
+            return $"{equippedPrefix}-equipped-{correctedSlot}";
 
         return $"equipped-{correctedSlot}";
     }
 
     private static bool TryCreateDefaultEquippedVisual(
-        ClothingComponent clothing,
+        string? equippedPrefix,
+        string? equippedState,
         string slot,
         string? speciesId,
         string fallbackRsiPath,
@@ -299,7 +326,7 @@ public abstract partial class ClothingSystem : EntitySystem
     {
         layers = null;
 
-        var state = GetEquippedState(clothing, slot);
+        var state = GetEquippedState(equippedPrefix, equippedState, slot);
 
         if (speciesId != null && hasState($"{state}-{speciesId}"))
             state = $"{state}-{speciesId}";

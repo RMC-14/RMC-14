@@ -9,7 +9,7 @@ namespace Content.Client._RMC14.GhostColor;
 public sealed class GhostColorSystem : EntitySystem
 {
     private const float BodyAlpha = 0x88 / 255f;
-    private const float ClothingAlphaBoost = 0.2f;
+    private const float ClothingAlphaBoost = 0.4f;
 
     public override void Update(float frameTime)
     {
