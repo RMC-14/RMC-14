@@ -53289,14 +53289,6 @@ entities:
     - type: Transform
       pos: 3.605637,32.509274
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: invalid
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - invalid
   - uid: 5294
     components:
     - type: Transform
