@@ -152,12 +152,13 @@
   - type: StorageFill
     contents:
     - id: CMGrenadeHighExplosive
-      amount: 5
-    - id: CMGrenadeFrag
-      amount: 1
+      amount: 3
+    - id: RMC40MMGrenadeM74AGMF
+      amount: 2
     - id: RMCGrenadeIncendiary
       amount: 2
-    # TODO Original is 3 HEDP, 2 HIDP incen, 2 airburst frag, 1 airburst incen
+    - id: RMC40MMGrenadeM74AGMI
+      amount: 1
 
 - type: entity
   parent: RMCBeltGrenadeLarge
@@ -167,12 +168,13 @@
   - type: StorageFill
     contents:
     - id: CMGrenadeHighExplosive
-      amount: 12
-    - id: CMGrenadeFrag
-      amount: 3
+      amount: 6
+    - id: RMC40MMGrenadeM74AGMF
+      amount: 6
     - id: RMCGrenadeIncendiary
       amount: 3
-    # TODO Original is 6 HEDP, 3 HIDP incen, 6 airburst frag, 3 airburst incen
+    - id: RMC40MMGrenadeM74AGMI
+      amount: 3
 
 - type: entity
   parent: RMCBeltGrenadeLarge
@@ -445,6 +447,28 @@
     - id: RMCMK80
 
 - type: entity
+  parent: RMCBeltHolsterPistolWeYa
+  id: RMCBeltHolsterPistolWeYaM77Fill
+  suffix: Filled, M77
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: RMCWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterPistolWeYa
+  id: RMCBeltHolsterPistolWeYaPK7Fill
+  suffix: Filled, PK7
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolPK7
+      amount: 6
+    - id: RMCWeaponPistolPK7
+
+- type: entity
   parent: RMCM276ShotgunShellLoadingRig
   id: RMCM276ShotgunShellLoadingRigFill
   suffix: Filled
@@ -483,9 +507,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazinePistolM1984
+    - id: CMMagazinePistolM1911
       amount: 2
-    - id: CMWeaponPistolM1984
+    - id: CMWeaponPistolM1911
 
 - type: entity
   parent: RMCBeltHolsterSMGPouch
@@ -606,6 +630,17 @@
     - id: CMMagazinePistolM1984
       amount: 6
     - id: CMWeaponPistolM1984
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCM1911BeltFilledNVCommander
+  suffix: Filled, NV Commander
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1911
+      amount: 6
+    - id: CMWeaponPistolM1911
 
 - type: entity
   parent: RMCBeltHolsterPistol
@@ -833,7 +868,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleType77
       amount: 2
 
 - type: entity
@@ -1094,3 +1129,16 @@
       amount: 1
     - id: RMCMagazinePistolL14
       amount: 6
+
+- type: entity
+  parent: RMCMkXBelt
+  id: RMCMkXBeltFilled
+  suffix: PVE, CO, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 3
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMkX

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/19/2025 12:07:16
-  entityCount: 1006
+  time: 06/16/2026 22:10:25
+  entityCount: 1007
 maps: []
 grids:
 - 1
@@ -1416,24 +1416,32 @@ entities:
       rot: 3.141592653589793 rad
       pos: 18.5,6.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 680
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 9.5,24.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
   - uid: 736
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 23.5,13.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
   - uid: 903
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 27.5,27.5
       parent: 1
+    - type: SpriteSetRenderOrder
+      offset: -0.5,-1.5
 - proto: CMBarricadePlasteelDoor
   entities:
   - uid: 547
@@ -1684,96 +1692,6 @@ entities:
       parent: 1
     - type: ExpendableLight
       stateExpiryTime: 600
-- proto: RMCLightFixture
-  entities:
-  - uid: 638
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 23.5,17.5
-      parent: 1
-  - uid: 732
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 29.5,17.5
-      parent: 1
-  - uid: 734
-    components:
-    - type: Transform
-      pos: 24.5,12.5
-      parent: 1
-  - uid: 735
-    components:
-    - type: Transform
-      pos: 28.5,12.5
-      parent: 1
-  - uid: 737
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 13.5,21.5
-      parent: 1
-  - uid: 738
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 13.5,23.5
-      parent: 1
-  - uid: 739
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 9.5,23.5
-      parent: 1
-  - uid: 740
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 9.5,21.5
-      parent: 1
-- proto: RMCLightFixtureSmall
-  entities:
-  - uid: 637
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 17.5,6.5
-      parent: 1
-  - uid: 867
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 5.5,12.5
-      parent: 1
-  - uid: 868
-    components:
-    - type: Transform
-      pos: 5.5,9.5
-      parent: 1
-  - uid: 869
-    components:
-    - type: Transform
-      pos: 5.5,14.5
-      parent: 1
-  - uid: 889
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 5.5,17.5
-      parent: 1
-  - uid: 932
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 21.5,25.5
-      parent: 1
-  - uid: 933
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 25.5,25.5
-      parent: 1
 - proto: CMPaper
   entities:
   - uid: 764
@@ -2228,18 +2146,6 @@ entities:
     components:
     - type: Transform
       pos: 20.5,2.5
-      parent: 1
-- proto: DrinkGlass
-  entities:
-  - uid: 727
-    components:
-    - type: Transform
-      pos: 28.417538,13.236281
-      parent: 1
-  - uid: 728
-    components:
-    - type: Transform
-      pos: 28.723091,13.541837
       parent: 1
 - proto: DrinkShotGlass
   entities:
@@ -2801,6 +2707,13 @@ entities:
     - type: Transform
       pos: 27.5,18.5
       parent: 1
+- proto: RMCBlockerVehicle
+  entities:
+  - uid: 1007
+    components:
+    - type: Transform
+      pos: 30.5,0.5
+      parent: 1
 - proto: RMCBoxShotgunBuckshot
   entities:
   - uid: 959
@@ -3239,6 +3152,18 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: RMCDrinkGlass
+  entities:
+  - uid: 727
+    components:
+    - type: Transform
+      pos: 28.417538,13.236281
+      parent: 1
+  - uid: 728
+    components:
+    - type: Transform
+      pos: 28.723091,13.541837
+      parent: 1
 - proto: RMCFenceHybrisa
   entities:
   - uid: 777
@@ -3538,6 +3463,96 @@ entities:
     components:
     - type: Transform
       pos: 10.579441,22.044903
+      parent: 1
+- proto: RMCLightFixture
+  entities:
+  - uid: 638
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 23.5,17.5
+      parent: 1
+  - uid: 732
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,17.5
+      parent: 1
+  - uid: 734
+    components:
+    - type: Transform
+      pos: 24.5,12.5
+      parent: 1
+  - uid: 735
+    components:
+    - type: Transform
+      pos: 28.5,12.5
+      parent: 1
+  - uid: 737
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 13.5,21.5
+      parent: 1
+  - uid: 738
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 13.5,23.5
+      parent: 1
+  - uid: 739
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,23.5
+      parent: 1
+  - uid: 740
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,21.5
+      parent: 1
+- proto: RMCLightFixtureSmall
+  entities:
+  - uid: 637
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 17.5,6.5
+      parent: 1
+  - uid: 867
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,12.5
+      parent: 1
+  - uid: 868
+    components:
+    - type: Transform
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 869
+    components:
+    - type: Transform
+      pos: 5.5,14.5
+      parent: 1
+  - uid: 889
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,17.5
+      parent: 1
+  - uid: 932
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 21.5,25.5
+      parent: 1
+  - uid: 933
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 25.5,25.5
       parent: 1
 - proto: RMCLightStickBlueSmall
   entities:
@@ -5048,7 +5063,7 @@ entities:
     - type: Transform
       pos: 7.5,15.5
       parent: 1
-- proto: RMCTentBodyStandard
+- proto: RMCTentUNMCStandard
   entities:
   - uid: 934
     components:

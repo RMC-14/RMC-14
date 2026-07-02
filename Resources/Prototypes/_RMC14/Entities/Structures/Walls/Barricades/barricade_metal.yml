@@ -103,6 +103,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCBiohazardUpgrade
     - type: Flammable
       damage:
         types:
@@ -130,6 +131,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCBruteUpgrade
 
 - type: entity
   parent: CMBarricadeMetal
@@ -152,6 +154,7 @@
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
     - type: RMCConstructionUpgradeTarget
       upgrades: null
+      downgrade: RMCExplosiveUpgrade
     - type: Flammable
       damage:
         types:
@@ -209,6 +212,7 @@
   name: handrail
   description: A railing, for your hands. Woooow.
   components:
+    - type: VehicleSmashable
     - type: Anchorable
     - type: Sprite
       drawdepth: WallTops
@@ -240,6 +244,9 @@
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
+    - type: XenoCrusherChargable
+      instantDestroy: true
+      passOnDestroy: true
 
 - type: entity
   parent: RMCBarricadeHandrail
@@ -493,3 +500,5 @@
     delay: 0.3
   - type: Climbable
   - type: RMCOpenOnlyWhenUnanchored
+  - type: RMCFoldingBarricadeLinking
+    linkable: false
