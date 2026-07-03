@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -154,6 +155,12 @@ public sealed partial class DeployableEquipmentSystem : EntitySystem
         {
             var msg = Loc.GetString("emplacement-mount-too-close", ("mount", blockingEntity));
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution );
+            return false;
+        }
+
+        if (HasComp<VehicleInteriorOccupantComponent>(user))
+        {
+            _popup.PopupClient(Loc.GetString("emplacement-mount-deploy-vehicle"), user, user, PopupType.SmallCaution);
             return false;
         }
 
