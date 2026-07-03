@@ -1,23 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: Fixed claymores being able to pass through walls while undeployed.
-    type: Fix
-  - message: You no longer instantly pick up a claymore when you cancel the disarm
-      doafter.
-    type: Fix
-  id: 2943
-  time: '2026-02-14T18:51:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9246
-- author: Vixting
-  changes:
-  - message: Fix flamer overlays not being visible under some circumstances
-    type: Fix
-  id: 2944
-  time: '2026-02-14T18:50:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9238
-- author: Dygon
-  changes:
   - message: Structure damage modifiers now apply to airlocks.
     type: Fix
   id: 2945
@@ -4546,5 +4529,22 @@
   id: 3442
   time: '2026-06-29T18:57:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10231
+- author: Vermidia
+  changes:
+  - message: Fixed direct hit of the incinerator's stream dealing damage multiple
+      times, for real this time. This may have also fixed some instances of other
+      fires dealing damage multiple times on spawn.
+    type: Fix
+  id: 3443
+  time: '2026-07-03T01:00:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10333
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed defender headbutt, warrior fling, oppressor dislocate, oppressor
+      tail lash, and vanguard fling cleave not killing crit marines.
+    type: Fix
+  id: 3444
+  time: '2026-07-03T01:01:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8859
 Name: RMC14
 Order: -1
