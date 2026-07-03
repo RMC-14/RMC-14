@@ -1,10 +1,12 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Server.Chat.Managers;
+using Content.Server.Chat.Systems;
 using Content.Server.Radio.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared._RMC14.Xenonids;
@@ -47,41 +49,17 @@ public sealed class CMChatSystem : SharedCMChatSystem
 
     private void OnMarineAfterGetRecipients(Entity<MarineComponent> ent, ref ChatMessageAfterGetRecipients args)
     {
-        _toRemove.Clear();
-
         foreach (var (session, data) in args.Recipients)
         {
-            if (data.Observer)
-                continue;
-
-            if (HasComp<XenoComponent>(session.AttachedEntity))
-                _toRemove.Add(session);
-        }
-
-        foreach (var session in _toRemove)
-        {
-            args.Recipients.Remove(session);
+            HideObfuscatedMessagesInChat(session, args.Recipients, false);
         }
     }
 
     private void OnXenoAfterGetRecipients(Entity<XenoComponent> ent, ref ChatMessageAfterGetRecipients args)
     {
-        _toRemove.Clear();
-
         foreach (var (session, data) in args.Recipients)
         {
-            if (data.Observer)
-                continue;
-
-            // `data.Observer` only indicates whether the recipient has `GhostHearingComponent`.
-            // Disabling ghost hearing removes this component, so the `GhostComponent` check is needed to keep ghosts included.
-            if (!HasComp<XenoComponent>(session.AttachedEntity) && !HasComp<GhostComponent>(session.AttachedEntity))
-                _toRemove.Add(session);
-        }
-
-        foreach (var session in _toRemove)
-        {
-            args.Recipients.Remove(session);
+            HideObfuscatedMessagesInChat(session, args.Recipients, true);
         }
     }
 
@@ -101,6 +79,23 @@ public sealed class CMChatSystem : SharedCMChatSystem
         foreach (var session in _toRemove)
         {
             args.Recipients.Remove(session);
+        }
+    }
+
+    private void HideObfuscatedMessagesInChat(ICommonSession recipient, Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> recipientDict, bool isXenoMsg)
+    {
+        var entryData = recipientDict[recipient];
+
+        // Observers and nerds who know how to learn languages get the messages in chat as normal.
+        if (entryData.Observer || HasComp<GhostComponent>(recipient.AttachedEntity) || HasComp<LanguageLearningComponent>(recipient.AttachedEntity))
+            return;
+
+        // Marines hearing xenos talk & vice versa will see random nonsense words in speech popups, but there's no need to clog up the chat box with that.
+        var recipientIsXeno = HasComp<XenoComponent>(recipient.AttachedEntity);
+        if (isXenoMsg != recipientIsXeno)
+        {
+            // Replace the data entry as-is, but with `HideChatOverride` set to true.
+            recipientDict[recipient] = new ChatSystem.ICChatRecipientData(entryData.Range, entryData.Observer, true, entryData.HasLOS);
         }
     }
 
