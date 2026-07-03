@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Fixed xenonid tags not being hidden
-    type: Fix
-  - message: Fixed not being able to change sentry name after assigning it
-    type: Fix
-  - message: Fixed the sentry laptop being deleted on removing the table its on
-    type: Fix
-  - message: Fixed sentry IFF settings resetting (hopefully)
-    type: Fix
-  id: 2976
-  time: '2026-03-03T00:48:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9294
 - author: wheelwrightt
   changes:
   - message: Fixed UBE action icon appearing inactive after dropping and picking up
@@ -4652,5 +4639,13 @@
   id: 3475
   time: '2026-07-03T01:39:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10303
+- author: IceNoobXD
+  changes:
+  - message: Fixed floor safe not having a storage and there by not being able to
+      hold any intel/items!
+    type: Fix
+  id: 3476
+  time: '2026-07-03T01:41:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/10316
 Name: RMC14
 Order: -1
