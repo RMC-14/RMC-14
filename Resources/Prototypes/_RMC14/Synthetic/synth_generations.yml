@@ -102,11 +102,6 @@
       RMCSkillIntel: 2
       RMCSkillDomestics: 2
       RMCSkillNavigations: 1
-  - type: CMArmor
-    melee: -15
-    bullet: -15
-    bio: -15
-    explosionArmor: -15
   - type: ShowHealthIcons
   - type: ShowHealthBars
   - type: RMCAllowSuitStorage
