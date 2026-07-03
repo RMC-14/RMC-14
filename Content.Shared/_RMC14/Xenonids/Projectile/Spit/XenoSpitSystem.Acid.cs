@@ -3,11 +3,12 @@ using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
+using Content.Shared.Alert;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Mobs;
 using Content.Shared.Projectiles;
-using Robust.Shared.Prototypes;
 using Content.Shared.Rejuvenate;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Spit;
 
@@ -15,7 +16,9 @@ public sealed partial class XenoSpitSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
 
+    private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
+
     public void InitializeAcid()
     {
         SubscribeLocalEvent<UserAcidedComponent, ComponentRemove>(OnUserAcidedRemove);

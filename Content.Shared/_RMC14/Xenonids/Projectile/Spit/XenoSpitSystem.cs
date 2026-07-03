@@ -18,6 +18,8 @@ using Content.Shared._RMC14.Xenonids.Projectile.Spit.Stacks;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Standard;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
+using Content.Shared.Alert;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -41,6 +43,7 @@ public sealed partial class XenoSpitSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -65,6 +68,12 @@ public sealed partial class XenoSpitSystem : EntitySystem
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
+<<<<<<< HEAD
+=======
+    private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
+    private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
+
+>>>>>>> 9c5fdf9e7999c48c7bdec776e4b36f2a37436292
     private EntityQuery<ProjectileComponent> _projectileQuery;
 
     public override void Initialize()
@@ -409,6 +418,121 @@ public sealed partial class XenoSpitSystem : EntitySystem
         }
     }
 
+<<<<<<< HEAD
+=======
+    private void OnUserAcidedMapInit(Entity<UserAcidedComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.ExpiresAt = _timing.CurTime + ent.Comp.Duration;
+        Dirty(ent);
+        UpdateAppearance(ent);
+
+        _alerts.ShowAlert(ent, FireAlert);
+    }
+
+    private void OnUserAcidedRemove(Entity<UserAcidedComponent> ent, ref ComponentRemove args)
+    {
+        _appearance.SetData(ent, UserAcidedVisuals.Acided, UserAcidedEffects.None);
+
+        if (TryComp(ent, out FlammableComponent? flammable) &&
+            flammable.FireStacks > 0)
+        {
+            return;
+        }
+
+        _alerts.ClearAlert(ent, FireAlert);
+    }
+
+    private void OnUserAcidedShowFireAlert(Entity<UserAcidedComponent> ent, ref ShowFireAlertEvent args)
+    {
+        args.Show = true;
+    }
+
+    private void OnUserAcidedVaporHit(Entity<UserAcidedComponent> ent, ref VaporHitEvent args)
+    {
+        if (ent.Comp.AllowVaporHitAfter > _timing.CurTime)
+            return;
+
+        var solEnt = args.Solution;
+        foreach (var (_, solution) in _solution.EnumerateSolutions((solEnt, solEnt)))
+        {
+            if (!solution.Comp.Solution.ContainsReagent(AcidRemovedBy, null))
+                continue;
+
+            if (--ent.Comp.ResistsNeeded <= 0)
+            {
+                RemCompDeferred<UserAcidedComponent>(ent);
+            }
+            else
+            {
+                ent.Comp.AllowVaporHitAfter = _timing.CurTime + ent.Comp.ExtinguishGracePeriod;
+                Dirty(ent);
+            }
+
+            break;
+        }
+    }
+
+    private void OnUserAcidedMobStateChanged(Entity<UserAcidedComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Dead)
+            RemCompDeferred<UserAcidedComponent>(ent);
+    }
+
+    public void SetAcidCombo(Entity<UserAcidedComponent?> acided, TimeSpan duration, DamageSpecifier? damage, TimeSpan paralyze, int resists)
+    {
+        if (!Resolve(acided, ref acided.Comp, false))
+            return;
+
+        if (acided.Comp.Combo)
+            return;
+
+        acided.Comp.Combo = true;
+
+        if (damage != null)
+            acided.Comp.Damage = damage;
+
+        if (duration != default)
+        {
+            var oldDuration = acided.Comp.Duration;
+            acided.Comp.Duration = duration;
+            acided.Comp.ExpiresAt = acided.Comp.ExpiresAt - oldDuration + duration;
+        }
+
+        if (paralyze != default)
+        {
+            _stun.TryParalyze(acided.Owner, paralyze, true);
+            acided.Comp.ResistsNeeded = resists;
+        }
+
+        Dirty(acided);
+        UpdateAppearance((acided, acided.Comp));
+    }
+
+    private void UpdateAppearance(Entity<UserAcidedComponent> acided)
+    {
+        var effect = acided.Comp.Combo ? UserAcidedEffects.Enhanced : UserAcidedEffects.Normal;
+        _appearance.SetData(acided, UserAcidedVisuals.Acided, effect);
+    }
+
+    public void Resist(Entity<UserAcidedComponent?> player)
+    {
+        if (!Resolve(player, ref player.Comp, false))
+            return;
+
+        if (!_actionBlocker.CanInteract(player, null))
+            return;
+
+        _stun.TryParalyze(player.Owner, player.Comp.ResistDuration, true);
+        if (--player.Comp.ResistsNeeded <= 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-acid-resist"), player, player);
+            RemCompDeferred<UserAcidedComponent>(player);
+        }
+        else
+            _popup.PopupEntity(Loc.GetString("rmc-acid-resist-partial"), player, player);
+    }
+
+>>>>>>> 9c5fdf9e7999c48c7bdec776e4b36f2a37436292
     private void ApplyAcidStacks(EntityUid target, int amount, int max, DamageSpecifier? damage, EntityWhitelist? whitelist)
     {
         if (!_entityWhitelist.IsWhitelistPassOrNull(whitelist, target))
