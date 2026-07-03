@@ -2,7 +2,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Server._RMC14.Language.Systems;
 using Content.Server.Chat.Managers;
-using Content.Server.Chat.Systems;
 using Content.Server.Radio.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
@@ -86,7 +85,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
         }
 
         // Marines hearing xenos talk & vice versa will see random nonsense words in speech popups, and there's no need to clog up the chat box with that.
-        // Obviously this should be skipped if the source and recipient are both on the same side.
+        // Of course this should be skipped if the source and recipient are both on the same side.
         if (_xenoQuery.HasComp(recipient) && _xenoQuery.HasComp(args.Source) ||
             _marineQuery.HasComp(recipient) && _marineQuery.HasComp(args.Source))
             return;
