@@ -5,7 +5,6 @@ namespace Content.Shared._RMC14.Loadout;
 public sealed class LoadoutComponentAddSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    private readonly ISawmill _sawmill = default!;
 
     public override void Initialize()
     {
