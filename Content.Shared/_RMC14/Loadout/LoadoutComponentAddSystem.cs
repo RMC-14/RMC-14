@@ -22,7 +22,7 @@ public sealed class LoadoutComponentAddSystem : EntitySystem
         {
             if (!_prototype.TryIndex(entProtoId, out var proto))
             {
-                _sawmill.Log(LogLevel.Warning, "attempting to index Entity prototype failed");
+                Log.Warning("attempting to index Entity prototype failed");
                 return;
             }
 
