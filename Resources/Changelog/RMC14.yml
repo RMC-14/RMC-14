@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Block synths from priming grenades
-    type: Fix
-  - message: Block synths from ejecting parasites form morphers
-    type: Fix
-  - message: Welding a synth will now blind you if you don't have protection
-    type: Fix
-  - message: Getting blinded for a second when welding yourself as a synth
-    type: Fix
-  - message: Prevent spam popup when attempting to shoot a gun
-    type: Fix
-  - message: Prevent changing a synths holocard
-    type: Fix
-  id: 2985
-  time: '2026-03-03T02:07:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/9308
 - author: TadJohnson00
   changes:
   - message: '[PVE] Drum armor webbing now correctly fits most large or smaller items.'
@@ -4643,5 +4626,12 @@
   id: 3484
   time: '2026-07-03T01:43:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/10326
+- author: Arendian
+  changes:
+  - message: Fixed a crash for Mac users.
+    type: Fix
+  id: 3485
+  time: '2026-07-03T01:48:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9845
 Name: RMC14
 Order: -1
